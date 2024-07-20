@@ -1,4 +1,4 @@
-name="Kalterkrieg Archive 0.1"
+name="Kalterkrieg Archive 0.1.1"
 path = "mod/Kalterkrieg-Archive"
 
 replace_path = "common/ai_equipment"
