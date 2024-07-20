@@ -1,0 +1,123 @@
+JAP_VIN_before_revolt_have_units_in_VIN = {
+	allowed = {
+		OR = {
+			tag = JAP
+			tag = VIN
+		}
+	}
+
+	enable = {
+		NOT = {
+			VIN = {
+				has_war_with = VIE
+			}
+		}
+	}
+
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = garrison
+		id = "VIN"
+		value = 100
+	}
+}
+
+geacps_during_revolt_ignore_siam = {
+	allowed = {
+		OR = {
+			tag = JAP
+			tag = MLY
+			tag = VIN
+			tag = NBR
+		}
+	}
+
+	enable = {
+		SIA = {
+			has_idea = SIA_national_disorder
+		}
+		VIN = {
+			has_war_with = VIE
+		}
+	}
+
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = dont_defend_ally_borders
+		id = "SIA"
+		value = 5000
+	}
+}
+
+rebels_during_revolt_ignore_siam = {
+	allowed = {
+		OR = {
+			tag = VIE
+			tag = CAM
+			tag = LAO
+		}
+	}
+
+	enable = {
+		SIA = {
+			has_idea = SIA_national_disorder
+		}
+		VIN = {
+			has_war_with = VIE
+		}
+	}
+
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = ignore
+		id = "SIA"
+		value = 5000
+	}
+}
+
+
+rebels_prep_attack_siam = {
+	allowed = {
+		OR = {
+			tag = VIE
+			tag = CAM
+			tag = LAO
+		}
+	}
+
+	enable = {
+		OR = {
+			AND = {
+				VIN = {
+					has_capitulated = yes
+				}
+				has_war_with = JAP
+			}
+			AND = {
+				has_war = no
+				SIA = {
+					exists = yes
+					OR = {
+						controls_state = 967
+						controls_state = 964
+						controls_state = 962
+						controls_state = 741
+						controls_state = 968
+						controls_state = 963
+					}
+				}
+			}
+		}
+	}
+
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = antagonize
+		id = "SIA"
+		value = 500
+	}
+}

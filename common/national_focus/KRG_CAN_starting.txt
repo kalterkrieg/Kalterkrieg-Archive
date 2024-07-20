@@ -1,0 +1,533 @@
+shared_focus = {
+	id = CAN_the_war_is_over
+	icon = GFX_generic_wk2
+	x = 3
+	y = 0
+	cost = 4
+
+	ai_will_do = {
+		base = 1000
+	}
+	completion_reward = {
+		country_event = {
+			id = krg_can.11
+		}
+		add_political_power = 25
+		add_stability = 0.05
+		add_war_support = 0.05
+	}
+}
+shared_focus = {
+	id = CAN_canadian_citizenship_act
+	icon = GFX_generic_law
+	x = -2
+	y = 1
+	relative_position_id = CAN_the_war_is_over
+	cost = 4
+
+	prerequisite = { focus = CAN_the_war_is_over }
+	ai_will_do = {
+		base = 250
+	}
+	completion_reward = {
+		country_event = {
+			id = krg_can.18
+		}
+		add_stability = 0.05
+	}
+}
+shared_focus = {
+	id = CAN_send_home_lords
+	icon = GFX_generic_authoritarian
+	x = 0
+	y = 1
+	relative_position_id = CAN_the_war_is_over
+	cost = 4
+	prerequisite = { focus = CAN_the_war_is_over }
+	ai_will_do = {
+		base = 500 #Don't annoy the ENG player
+	}
+	completion_reward = {
+		CAN_popularity_conservatives_decrease_small = yes
+		custom_effect_tooltip = CAN_decrease_conservatives_small_tt
+		add_stability = 0.05
+		country_event = {
+			id = krg_can.53
+			days = 1
+		}
+	}
+}
+shared_focus = {
+	id = CAN_expand_the_foreign_office
+	icon = GFX_generic_foreign_diplomacy
+	x = 2
+	y = 1
+	relative_position_id = CAN_the_war_is_over
+	cost = 4
+	prerequisite = { focus = CAN_the_war_is_over }
+	ai_will_do = {
+		base = 250
+	}
+	completion_reward = {
+		CAN_move_up_unsettled_foreign_policy = yes
+		country_event = { id = krg_can.52 }
+		country_event = {
+			id = krg_can.92
+			days = 4
+		}
+		hidden_effect = {
+			for_each_scope_loop = {
+				array = CAN.allies
+				
+				country_event = {
+					id = krg_can.92
+					days = 4
+				}
+			}
+		}
+		add_political_power = 50
+	}
+}
+shared_focus = {
+	id = CAN_global_immigration
+	icon = GFX_generic_world
+	x = -5
+	y = 2
+	relative_position_id = CAN_the_war_is_over
+	mutually_exclusive = { focus = CAN_anglo_immigration }
+	cost = 4
+
+	prerequisite = { focus = CAN_canadian_citizenship_act }
+	available = { has_country_flag = CAN_citizenship_liberal }
+	ai_will_do = {
+		base = 250
+	}
+	completion_reward = {
+		add_stability = -0.05
+		custom_effect_tooltip = CAN_increase_socdem_small_tt
+		custom_effect_tooltip = CAN_increase_liberals_small_tt
+		CAN = {
+			CAN_popularity_socdem_increase_small = yes
+			CAN_popularity_liberals_increase_small = yes
+		}
+	}
+}
+shared_focus = {
+	id = CAN_anglo_immigration
+	icon = {
+		trigger = {
+			ENG = {
+				NOT = {
+					has_cosmetic_tag = ENG_no_ulster
+				}
+			}
+		}
+		value = GFX_generic_flag_large_ENG
+	}
+	icon = {
+		trigger = {
+			ENG = {
+				has_cosmetic_tag = ENG_no_ulster
+			}
+		}
+		value = GFX_generic_flag_large_ENG_2
+	}
+
+	dynamic = yes
+	
+	x = -3
+	y = 2
+	relative_position_id = CAN_the_war_is_over
+	mutually_exclusive = { focus = CAN_global_immigration }
+	cost = 4
+
+	prerequisite = { focus = CAN_canadian_citizenship_act }
+	available = { has_country_flag = CAN_citizenship_conservative }
+	ai_will_do = {
+		base = 250
+	}
+	completion_reward = {
+		custom_effect_tooltip = CAN_increase_conservatives_small_tt
+		custom_effect_tooltip = CAN_increase_unionists_small_tt
+		CAN = {
+			CAN_popularity_conservatives_increase_small = yes
+			CAN_popularity_unionists_increase_small = yes
+		}
+	}
+}
+shared_focus = {
+	id = CAN_remake_the_senate
+	icon = GFX_CAN_parliament
+	x = -1
+	y = 2
+	relative_position_id = CAN_the_war_is_over
+	cost = 4
+	prerequisite = { focus = CAN_canadian_citizenship_act }
+	prerequisite = { focus = CAN_send_home_lords }
+	ai_will_do = {
+		base = 250
+	}
+	completion_reward = {
+		add_political_power = 100
+		remove_ideas = CAN_idea_government_transition
+	}
+}
+shared_focus = {
+	id = CAN_address_american_occupation
+	icon = GFX_generic_doctrine_tank_warfare
+	x = -4
+	y = 3
+	relative_position_id = CAN_the_war_is_over
+	cost = 4
+	prerequisite = { focus = CAN_remake_the_senate }
+	ai_will_do = {
+		base = 250
+	}
+	completion_reward = {
+		CAN_move_up_american_integration = yes
+		country_event = {
+			id = krg_can.75
+			days = 1
+		}
+	}
+}
+shared_focus = {
+	id = CAN_end_great_flag_debate
+	icon = GFX_CAN_flag_debate
+	x = -2
+	y = 3
+	relative_position_id = CAN_the_war_is_over
+	cost = 4
+	prerequisite = { focus = CAN_remake_the_senate }
+	ai_will_do = { 
+		base = 250 
+	}
+	completion_reward = {
+		country_event = {
+			id = krg_can.12
+		}
+		custom_effect_tooltip = CAN_flag_debate_focus
+	}
+}
+shared_focus = {
+	id = CAN_start_crown_negotiations
+	icon = GFX_CAN_return_king
+	x = -2
+	y = 4
+	relative_position_id = CAN_the_war_is_over
+	cost = 4
+	prerequisite = { focus = CAN_address_american_occupation }
+	prerequisite = { focus = CAN_end_great_flag_debate }
+	prerequisite = { focus = CAN_ventures_in_britain }
+	ai_will_do = { 
+		base = 250
+	}
+	completion_reward = {
+		country_event = { 
+			id = krg_can_patriation.1 
+			days = 7
+		}
+	}
+}
+shared_focus = {
+	id = CAN_montgomery_plan
+	icon = GFX_generic_stable_economy
+	x = 1
+	y = 2
+	relative_position_id = CAN_the_war_is_over
+	cost = 4
+
+	prerequisite = { focus = CAN_expand_the_foreign_office }
+	ai_will_do = {
+		base = 250
+	}
+	completion_reward = {
+		country_event = {
+			id = krg_can.42
+			days = 0
+		}
+	}
+}
+shared_focus = {
+	id = CAN_ventures_in_britain
+	icon = GFX_ENG_coin
+	x = 0
+	y = 3
+	relative_position_id = CAN_the_war_is_over
+	cost = 4
+
+	prerequisite = { focus = CAN_send_home_lords }
+	prerequisite = { focus = CAN_montgomery_plan }
+	ai_will_do = {
+		base = 250
+	}
+	completion_reward = {
+		add_offsite_building = {
+			type = industrial_complex
+			level = 2
+		}
+		ENG = {
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+}
+shared_focus = {
+	id = CAN_great_diplomatic_shift
+	icon = GFX_GER_renewed_militarism
+	x = 2
+	y = 3
+	relative_position_id = CAN_the_war_is_over
+	cost = 4
+
+	prerequisite = { focus = CAN_expand_the_foreign_office }
+	ai_will_do = {
+		base = 250
+	}
+	completion_reward = {
+		CAN_move_up_unsettled_foreign_policy = yes
+		add_opinion_modifier = {
+            target = GER
+            modifier = condemn_aggression
+        }
+		hidden_effect = {
+			country_event = {
+				id = krg_can.93
+				days = 3
+			}
+			for_each_scope_loop = {
+				array = CAN.allies
+				
+				country_event = {
+					id = krg_can.93
+					days = 3
+				}
+			}
+		}
+		every_country = {
+			limit = {
+				is_in_faction_with = GER
+			}
+			add_opinion_modifier = {
+                target = ROOT
+			    modifier = condemn_aggression
+            }
+		}
+		every_country = {
+			limit = {
+				NOT = {
+					is_in_faction = yes
+					has_government = national_populist
+					has_government = authoritarian_socialist
+					has_government = authoritarian_democrat
+					has_government = paternal_autocrat
+				}
+			}
+			add_opinion_modifier = {
+                target = ROOT
+				modifier = krg_can_relations 
+            }
+		}
+		every_country = {
+			limit = {
+				has_government = radical_socialist
+			}
+			add_opinion_modifier = {
+                target = ROOT
+				modifier = krg_can_relations2
+            }
+		}
+	}
+}
+shared_focus = {
+	id = CAN_rebuilding_the_free
+	icon = GFX_generic_liberty
+	x = 1
+	y = 4
+	available = {
+		OR = {
+			has_country_flag = CAN_C-22_Passed
+			has_country_flag = CAN_C-22_Failed
+		}
+	}
+	relative_position_id = CAN_the_war_is_over
+	cost = 4
+	prerequisite = { focus = CAN_montgomery_plan }
+	prerequisite = { focus = CAN_great_diplomatic_shift }
+	ai_will_do = {
+		base = 250
+	}
+	completion_reward = {
+		country_event = { id = krg_can.94 }
+		if = {
+			limit = {
+				has_country_flag = CAN_C-22_Failed
+			}
+			add_political_power = 100
+			SPR = {
+				add_opinion_modifier = {
+					target = CAN
+					modifier = CAN_rebuilding_the_free_opinion
+				}
+			}
+			NOR = {
+				add_opinion_modifier = {
+					target = CAN
+					modifier = CAN_rebuilding_the_free_opinion
+				}
+			}
+			IRE = {
+				add_opinion_modifier = {
+					target = CAN
+					modifier = CAN_rebuilding_the_free_opinion
+				}
+			}
+		} 
+		else = {
+			custom_effect_tooltip = CAN_montgomery_plan_expand
+			add_political_power = 50
+		}
+		set_country_flag = CAN_rebuilding_the_free
+		hidden_effect = {
+			for_each_scope_loop = {
+				array = CAN.allies
+				
+				country_event = { id = krg_can.94 }
+			}
+		}
+	}
+}
+shared_focus = {
+	id = CAN_diplomatic_mission_to_psa
+	icon = GFX_CAN_psaalliance
+	x = 3
+	y = 2
+	relative_position_id = CAN_the_war_is_over
+	cost = 2
+
+	prerequisite = { focus = CAN_expand_the_foreign_office }
+	ai_will_do = {
+		base = 250
+	}
+	completion_reward = {
+        add_opinion_modifier = {
+            target = CAL
+            modifier = offered_support
+        }
+		add_opinion_modifier = {
+            target = CAL
+            modifier = cal_trade 
+        }
+		add_opinion_modifier = {
+            target = NEE
+            modifier = cal_trade 
+        }
+	}  
+}
+shared_focus = {
+	id = CAN_NATO_plan
+	icon = GFX_generic_positive_trade_relations_gold
+	x = 4
+	y = 3
+	relative_position_id = CAN_the_war_is_over
+	cost = 4
+
+	prerequisite = { focus = CAN_expand_the_foreign_office }
+	ai_will_do = {
+		base = 250
+	}
+	completion_reward = {
+		add_political_power = 50
+		country_event = {
+			id = krg_nato.1
+		}
+	}
+}
+shared_focus = {
+	id = CAN_NATO_conference
+	icon = GFX_SYR_Stop_Jewish_Settlers
+	x = 3
+	y = 4
+	relative_position_id = CAN_the_war_is_over
+	cost = 4
+	prerequisite = { focus = CAN_NATO_plan }
+	prerequisite = { focus = CAN_diplomatic_mission_to_psa }
+	ai_will_do = {
+		base = 250
+	}
+	select_effect = {
+		set_country_flag = krg_in_NATO
+		country_event = {
+			id = krg_nato.2
+			days = 1
+		}
+	}
+	completion_reward = {
+		custom_effect_tooltip = NATO_formed
+	}
+}
+shared_focus = {
+	id = CAN_form_the_accord
+	icon = GFX_generic_ratify_the_accord
+	x = 2
+	y = 5
+	relative_position_id = CAN_the_war_is_over
+	cost = 4
+	prerequisite = { focus = CAN_NATO_conference }
+	prerequisite = { focus = CAN_rebuilding_the_free }
+	ai_will_do = {
+		base = 250
+	}
+	select_effect = {
+		hidden_effect = {
+			country_event = { id = krg_can.95 days = 4 }
+			country_event = { id = krg_can.96 days = 9 }
+			country_event = { id = krg_can.97 days = 14 }
+			country_event = { id = krg_can.98 days = 19 }
+			country_event = { id = krg_can.99 days = 23 }
+
+			for_each_scope_loop = {
+				array = CAN.allies
+				
+				country_event = { id = krg_can.95 days = 4 }
+				country_event = { id = krg_can.96 days = 9 }
+				country_event = { id = krg_can.97 days = 14 }
+				country_event = { id = krg_can.98 days = 19 }
+				country_event = { id = krg_can.99 days = 23 }
+			}
+		}
+	}
+	completion_reward = {
+		set_faction_name = "Accord"
+		set_global_flag = accord_formed
+		accord_initial = yes
+		unlock_decision_category_tooltip = accord_voting_decisions
+		CAN_move_up_unsettled_foreign_policy = yes
+		#country_event = {
+		#	id = krg_can.61
+		#}
+		country_event = { id = krg_can.100 }
+		hidden_effect = {
+			country_event = { 
+    			id = krg_can.82
+    			days = 14
+			}
+			for_each_scope_loop = {
+				array = CAN.allies
+	
+				country_event = { id = krg_can.100 }
+			}
+			news_event = worldnews.87
+			add_to_array = { global.influence_log = 31 }
+			add_to_array = { global.influence_log_val = 10 }
+			influence_recalc = yes
+		}
+		
+	}
+}

@@ -1,0 +1,499 @@
+foreign_politics = {
+	WK3_intervention_join_RP = {
+		allowed = {
+			OR = {
+				tag = DNF
+				tag = TUR
+				tag = ARG
+				tag = BUL
+				tag = ROM
+				tag = SWE
+				tag = MOR
+				tag = ARA
+			}
+		}
+		visible = {
+			has_country_flag = WK3_direct_intervention
+			NOT = { is_in_faction_with = GER has_global_flag = WK3_ended }
+		}
+
+		cancel_trigger = { is_in_faction_with = ENT }
+				
+
+		days_remove = 14
+		fire_only_once = yes
+
+		ai_will_do = {
+			base = 200
+			modifier = { tag = ROM 
+						TUR = { is_in_faction_with = GER }
+						DNF = { is_in_faction_with = GER }
+						BUL = { is_in_faction_with = GER } 
+						factor = 400 } #surrounded by potential enemies, no move but to join
+			modifier = { tag = ROM
+				factor = -1000
+				is_in_faction_with = ENT
+			}
+		}
+
+
+		war_with_on_remove = ENT
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove WK3_intervention_join_RP target: [From.GetName]"
+			FROM = {
+				set_temp_variable = {
+					temp_level = 4
+				}
+				set_reichspakt_alignment = yes
+			}
+			add_to_war = { targeted_alliance = GER enemy = ENT hostility_reason = asked_to_join }
+		}
+	}
+
+	WK3_intervention_join_ACCORD = {
+		allowed = {
+			OR = {
+				tag = BRA
+				tag = NOR
+				tag = SBL
+				tag = ROM
+			}
+		}
+		visible = {
+			has_country_flag = WK3_direct_intervention
+			NOT = { is_in_faction_with = ENT has_global_flag = WK3_ended }
+		}
+
+
+		cancel_trigger = { is_in_faction_with = GER }
+
+		war_with_on_remove = GER
+		days_remove = 14
+		fire_only_once = yes
+
+		ai_will_do = {
+			base = 200
+			modifier = { tag = ROM 
+			NOT = { 	TUR = {  is_in_faction_with = GER } 
+						DNF = { is_in_faction_with = GER }
+						BUL = { is_in_faction_with = GER } }
+						factor = 400 } #if these idiots aren't all in, perhaps there is a chance 
+			modifier = { tag = ROM
+				factor = -1000
+				is_in_faction_with = GER
+			}
+		}
+		
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove WK3_intervention_join_ACCORD target: [From.GetName]"
+			FROM = {
+				set_temp_variable = {
+					temp_level = 4
+				}
+				set_accord_alignment = yes
+			}
+			add_to_war = { targeted_alliance = ENT enemy = GER hostility_reason = asked_to_join }
+		}
+	}
+
+	WK3_intervention_independent_ACCORD = {
+		allowed = {
+			OR = {
+				tag = RUS
+				tag = IND
+			}
+		}
+		visible = {
+			has_country_flag = WK3_direct_intervention
+			NOT = { has_global_flag = WK3_ended }
+		}
+
+		days_remove = 14
+		fire_only_once = yes
+
+		ai_will_do = {
+			base = 200
+		}
+
+		cancel_trigger = {
+			ENT = {
+				NOT = {
+					has_war_with = GER
+				}
+			}
+		}
+
+		war_with_on_remove = ENT
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove WK3_intervention_independent_ACCORD target: [From.GetName]"
+			declare_war_on = { target = GER type = take_claimed_state }
+			if = {
+				limit = { tag = RUS } 
+				LIT = {
+					add_to_war = {
+						targeted_alliance = GER
+						enemy = RUS
+						hostility_reason = asked_to_join
+					}
+				}
+				KRL = {
+					add_to_war = {
+						targeted_alliance = GER
+						enemy = RUS
+						hostility_reason = asked_to_join
+					}
+				}
+				UKR = {
+					add_to_war = {
+						targeted_alliance = GER
+						enemy = RUS
+						hostility_reason = asked_to_join
+					}				
+				}
+				if = {
+					limit = {
+						EST = { is_puppet_of = GER }
+					}
+					add_to_war = {
+						targeted_alliance = GER
+						enemy = RUS
+						hostility_reason = asked_to_join
+					}				
+				}
+			}
+		}
+	}
+
+	WK3_intervention_independent_RP = {
+		allowed = {
+			OR = {
+				tag = LBL
+				# tag = JAP
+			}
+		}
+		visible = {
+			has_country_flag = WK3_direct_intervention
+			NOT = { has_global_flag = WK3_ended }
+		}
+
+		days_remove = 14
+		fire_only_once = yes
+
+		war_with_on_remove = GER
+
+		ai_will_do = {
+			base = 200
+		}
+
+		cancel_trigger = {
+			GER = {
+				NOT = {
+					has_war_with = ENT
+				}
+			}
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove WK3_intervention_independent_RP target: [From.GetName]"
+			declare_war_on = { target = ENT type = take_claimed_state }
+		}
+	}
+	
+
+	WK3_jap_rus_intervention_chain = {
+		allowed = {
+			tag = JAP
+		}
+		visible = {
+			has_country_flag = WK3_direct_intervention
+			RUS = { has_war_with = GER }
+			NOT = { 
+				JAP = { 
+					has_war_with = ENT 
+					has_war_with = IND 
+				}
+			}
+		}
+		days_remove = 14
+		fire_only_once = yes
+
+		war_with_on_remove = RUS
+
+		#ai_will_do = {
+		#	base = 200
+		#}
+
+		cancel_trigger = {
+			RUS = {
+			   NOT = {
+				   has_war_with = GER
+			   }
+		   }
+	   }
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove WK3_jap_rus_intervention_chain target: [From.GetName]"
+				408 = {
+					add_claim_by = JAP
+				}
+				409 = {
+					add_claim_by = JAP
+				}
+				560 = {
+					add_claim_by = JAP
+				}
+				657 = {
+					add_claim_by = JAP
+				}
+				562 = {
+					add_claim_by = JAP
+				}
+				637 = {
+					add_claim_by = JAP
+				}
+			declare_war_on = { target = RUS type = take_claimed_state }
+		}
+	}
+
+	WK3_jap_ind_intervention_chain = {
+		allowed = {
+			always = no	#tag = JAP
+		}
+		visible = {
+			has_country_flag = WK3_direct_intervention
+			IND = { has_war_with = GER }
+			NOT = { JAP = { has_war_with = ENT 
+			has_war_with = RUS } }
+		}
+
+		days_remove = 14
+		fire_only_once = yes
+
+		war_with_on_remove = IND
+
+		#ai_will_do = {
+		#	base = 200
+		#}
+
+		cancel_trigger = {
+			IND = {
+			   NOT = {
+				   has_war_with = GER
+			   }
+		   }
+	   }
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove WK3_jap_ind_intervention_chain target: [From.GetName]"
+			declare_war_on = { target = IND type = take_claimed_state }
+		}
+	}
+	
+	WK3_rus_ind_per_intervention_chain = {
+		allowed = {
+				tag = RUS
+				tag = IND
+		}
+		visible = {
+			has_country_flag = WK3_direct_intervention
+			NOT = { has_country_flag = WK3_persia_invasion }
+			IND = { has_war_with = GER
+					NOT = { has_war_with = PER } }
+			RUS = { has_war_with = GER 
+					NOT = { has_war_with = PER } }
+			NOT = { has_global_flag = WK3_ended }
+		}
+
+		days_remove = 14
+		fire_only_once = yes
+
+		war_with_on_remove = PER
+
+		ai_will_do = {
+			base = 200
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove WK3_rus_ind_per_intervention_chain target: [From.GetName]"
+			country_event = WK3.2
+		}
+	}
+
+	WK3_IND_peace_RP = {
+		allowed = {
+			original_tag = IND
+		}
+
+		visible = {
+			has_country_flag = WK3_direct_intervention
+			has_war_with = GER
+		}
+
+		days_re_enable = 180
+
+		ai_will_do = {
+			base = 1000
+		}
+
+		available = {
+			IND = {
+				961 = {
+					is_controlled_by_ROOT_or_ally = yes
+				}
+	
+				if = {
+					limit = { 
+						423 = {
+							is_controlled_by_ROOT_or_ally = yes
+						}
+						864 = {
+							is_controlled_by_ROOT_or_ally = yes
+						}
+					}
+					959 = {
+						is_controlled_by_ROOT_or_ally = yes
+					}
+					958 = {
+						is_controlled_by_ROOT_or_ally = yes
+					}
+				}
+	
+				if = {
+					limit = { 
+						952 = {
+							is_controlled_by_ROOT_or_ally = yes
+						}
+					}
+					960 = {
+						is_controlled_by_ROOT_or_ally = yes
+					}
+				}
+			}
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete WK3_IND_peace_RP target: [From.GetName]"
+			GER = {
+				country_event = {
+					id = WK3_peace.8
+				}
+			}
+		}
+	}
+	ENT_TEX_ACW_Peace_deal = {
+		icon = GFX_decision_peace_dove
+		allowed = {
+			is_possible_ENT_tag = yes
+		}
+		visible = {
+			tag = ENT
+			OR = {
+				AND = {
+					has_global_flag = ACW_ongoing
+					NOT = {
+						has_global_flag = ACW_WK3_escalation
+					}
+					ENT = {
+						has_war_with = TEX
+					}
+				}
+				always = yes
+			}
+		}
+		available = {
+			GLG = {
+				has_capitulated = yes
+			}
+			CAL = {
+				has_capitulated = yes
+			}
+			NEE = {
+				has_capitulated = yes
+			}
+			NOT = {
+				CAN = {
+					surrender_progress > 0.25
+				}
+			}
+		}
+		targets = {
+			TEX
+		}
+		target_root_trigger = {
+			ROOT = {
+				has_war_with = FROM
+			}
+		}
+
+		ai_will_do = {
+			base = 1000
+		}
+
+		fire_only_once = yes
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete ENT_TEX_ACW_Peace_deal target: [From.GetName]"
+			FROM = {
+				country_event = {
+					id = krg_acw.42
+					hours = 4
+				}
+			}
+		}
+	}
+	TEX_ENT_ACW_Peace_deal = {
+		icon = GFX_decision_peace_dove
+		allowed = {
+			tag = TEX
+		}
+		visible = {
+			has_global_flag = ACW_ongoing
+			NOT = {
+				has_global_flag = ACW_WK3_escalation
+			}
+			TEX = {
+				has_war_with = ENT
+			}
+		}
+		available = {
+			GLG = {
+				has_capitulated = yes
+			}
+			CAL = {
+				has_capitulated = yes
+			}
+			NEE = {
+				has_capitulated = yes
+			}
+			NOT = {
+				TEX = {
+					surrender_progress > 0.25
+				}
+			}
+		}
+		targets = {
+			ENT
+		}
+		target_root_trigger = {
+			ROOT = {
+				has_war_with = FROM
+			}
+		}
+
+		ai_will_do = {
+			base = 1000
+		}
+
+		fire_only_once = yes
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete TEX_ENT_ACW_Peace_deal target: [From.GetName]"
+			FROM = {
+				country_event = {
+					id = krg_acw.45
+					hours = 4
+				}
+			}
+		}
+	}
+}

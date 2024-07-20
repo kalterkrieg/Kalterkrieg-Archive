@@ -1,0 +1,654 @@
+add_namespace = krg_nwwar
+
+country_event = { # Death of Liu Wenlong -  SIK
+    id = krg_nwwar.1
+    title = krg_nwwar.1.t
+    desc = krg_nwwar.1.d
+    picture = GFX_ce_SIK_Wenlong_Death
+    immediate = { log = "[GetDateText]: [Root.GetName]: event krg_nwwar.1 FROM = [From.GetName]" }
+    is_triggered_only = yes
+    fire_only_once = yes
+     
+    option = {
+        name = krg_nwwar.1.a
+        CHI = {
+            country_event = { 
+                id = krg_nwwar.2
+                days = 7
+            }
+        }
+        retire_character = SIK_liu_wenlong
+        if = {
+            limit = {
+                NOT = {
+                    SIK_fan_yaonan={
+                        has_ideology = authoritarian_democrat_interim_government
+                    }
+                }
+            }
+            add_country_leader_role = {
+                Character = SIK_fan_yaonan
+                promote_leader = yes
+                Country_leader = {
+                    ideology = authoritarian_democrat_interim_government
+                }
+            }
+        }
+        else = {
+            promote_character = SIK_fan_yaonan
+        }
+        if = {
+            limit = {
+                NOT = {
+                    SIK_ma_hushan={
+                        has_ideology = paternal_autocrat_military_junta
+                    }
+                }
+            }
+            add_country_leader_role = {
+                Character = SIK_ma_hushan
+                promote_leader = yes
+                Country_leader = {
+                    ideology = paternal_autocrat_military_junta
+                }
+            }
+        }
+    }
+}
+
+country_event = { # Death of Liu Wenlong - CHI Explain Abbas
+    id = krg_nwwar.2
+    title = krg_nwwar.2.t
+    desc = krg_nwwar.2.d
+    immediate = { log = "[GetDateText]: [Root.GetName]: event krg_nwwar.2 FROM = [From.GetName]" }
+    is_triggered_only = yes
+    
+    option = { ## We will support abbas
+        name = krg_nwwar.2.a
+        send_equipment = {
+            equipment = infantry_equipment
+            amount = 200
+            target = SIK
+        }
+        SIK =  {
+            add_war_support = 0.1
+            add_popularity = {
+				ideology = radical_socialist
+				popularity = 0.1
+			}
+			add_manpower = 10000
+		}
+		set_temp_variable = { China_temp_CCW_tension_change = 1 }
+		China_change_CCW_tension = yes
+
+		hidden_effect = {
+			FNG = {
+				country_event = { 
+					id = krg_nwwar.3
+					days = 5
+				}
+			}
+		}
+    }
+}
+
+country_event = { # Death of Liu Wenlong - FNG Fan send Du
+    id = krg_nwwar.3
+    title = krg_nwwar.3.t
+    desc = krg_nwwar.3.d
+    immediate = { log = "[GetDateText]: [Root.GetName]: event krg_nwwar.3 FROM = [From.GetName]" }
+    picture = GFX_ce_SIK_Wenlong_Death
+    is_triggered_only = yes    
+    option = { # Du will be their voice
+        name = krg_nwwar.3.a
+        ai_chance = {
+            base = 40
+        }
+        add_political_power = -10
+        SIK = {
+            add_manpower = -1
+            add_stability = 0.05
+        }
+        add_manpower = 1
+        FNG_yang_power_up = yes
+        add_opinion_modifier = {
+            target = SIK
+            modifier = FNG_submission
+        }
+        set_nationality = {
+            target_country = FNG
+            character = SIK_Du_Chongyuan
+        }
+        hidden_effect = {
+            FNG = {
+                country_event = { 
+                    id = krg_nwwar.4
+                    days = 5
+                }
+            }
+        }
+    }
+    option = { # He is more useful in Xinjiang
+        name = krg_nwwar.3.b
+        ai_chance = {
+            base = 60
+        }
+        add_political_power = 10
+        FNG_zhang_power_up = yes
+        hidden_effect = {
+            FNG = {
+                country_event = { 
+                    id = krg_nwwar.5
+                    days = 5
+                }
+            }
+            add_political_power = 10
+        }
+    }
+}
+
+
+country_event = { # FNG-Coup and Du Proposed Talking
+    id = krg_nwwar.4
+    title = krg_nwwar.4.t
+    desc = krg_nwwar.4.d
+    immediate = { log = "[GetDateText]: [Root.GetName]: event krg_nwwar.4 FROM = [From.GetName]" }
+    picture = GFX_ce_SIK_Hushan_Coup
+    is_triggered_only = yes
+    fire_only_once = yes
+    option = {
+        name = krg_nwwar.4.a
+        retire_character = SIK_fan_yaonan
+        FNG_yang_power_up = yes
+        CHI = {
+            country_event = krg_nwwar.6 
+        }
+        add_opinion_modifier = {
+            target = XSM
+            modifier = FNG_disobedience
+        }
+        SIK = {
+            add_political_power = -30
+            set_politics = {
+                ruling_party = paternal_autocrat
+            }
+        }
+    }
+}
+
+
+country_event = { # FNG - Coup - Du KIA
+    id = krg_nwwar.5
+    title = krg_nwwar.5.t
+    desc = krg_nwwar.5.d
+    immediate = { log = "[GetDateText]: [Root.GetName]: event krg_nwwar.5 FROM = [From.GetName]" }
+    picture = GFX_ce_SIK_Hushan_Coup
+    
+    is_triggered_only = yes
+    fire_only_once = yes
+    option = {
+        name = krg_nwwar.5.a
+
+        SIK = {
+            retire_character = SIK_du_chongyuan
+        }
+        CHI = {
+            country_event = krg_nwwar.10
+            add_political_power = -30
+        }
+        add_opinion_modifier = {
+            target = XSM
+            modifier = FNG_disobedience
+        }
+        617 = {
+        damage_building = {
+            type = infrastructure
+            damage = 2
+        }
+        add_manpower = -1000
+        }
+        SIK = {
+            retire_character = SIK_fan_yaonan
+            add_stability = -0.10
+            add_political_power = -30
+            set_politics = {
+                ruling_party = paternal_autocrat
+            }
+        }
+    }
+}
+
+
+
+country_event = { # CHI - Responses to Du's proposal
+    id = krg_nwwar.6
+    title = krg_nwwar.6.t
+    desc = krg_nwwar.6.d
+    immediate = { log = "[GetDateText]: [Root.GetName]: event krg_nwwar.6 FROM = [From.GetName]" }
+    is_triggered_only = yes
+    option = {
+        name = krg_nwwar.6.a ### Yes
+        ai_chance = {
+            base = 40
+        }
+        add_political_power = 10
+        FNG = {
+			country_event = {
+				id = krg_nwwar.8 ##### Talking Successful
+				days = 5
+			}
+        }
+        custom_effect_tooltip = CHI_nwwar_support_negotiation_tooltip
+    }
+    option = {
+        name = krg_nwwar.6.b ### No
+        ai_chance = {
+            base = 60
+        }
+        add_political_power = 10
+        SIK = {
+            delete_unit_template_and_units = {
+                division_template = "Xinjiang Qibing Shi"
+                disband = no
+            }
+            load_oob = "SIK_revolutionaries"
+            set_politics = {
+                ruling_party = radical_socialist
+            }
+            add_popularity = {
+                ideology = radical_socialist
+                popularity = 0.3
+            }
+            swap_ideas = {
+                remove_idea = SIK_old_scars
+                add_idea = SIK_united_for_now
+            }
+            swap_ideas = {
+                remove_idea = SIK_provincial_army
+                add_idea = SIK_national_army
+            }
+            remove_all_ministers = yes
+			add_ideas = SIK_Burhan_Shahidi_hog_sde
+			add_ideas = SIK_Lutpulla_Mutellip_fm_rre
+			add_ideas = SIK_Mexsut_Muhiti_em_sde
+			add_ideas = SIK_Ahmed_Ziayi_jm_sde
+			add_ideas = SIK_Abduxaliq_Uyghur_im_rre
+			add_ideas = SIK_Abdulkerim_Abbas_int_rre
+        }
+
+        set_temp_variable = { China_temp_CCW_tension_change = 2 }
+		China_change_CCW_tension = yes
+        hidden_effect = {
+            FNG = {
+                country_event = {
+                    id = krg_nwwar.7 ##### To war!
+                    days = 5
+                }
+            }
+        }
+    }
+}
+
+
+
+country_event = { # FNG - Northwestern War - Ma Bufang vs Abbas
+    id = krg_nwwar.7
+    title = krg_nwwar.7.t
+    desc = krg_nwwar.7.d
+    immediate = { log = "[GetDateText]: [Root.GetName]: event krg_nwwar.7 FROM = [From.GetName]" }
+    is_triggered_only = yes
+    option = {
+        name = krg_nwwar.7.a
+        SIK= { 
+            SIK_Ma_Hushan = {
+                set_nationality = XSM
+            }
+            SIK_hoja_niyaz_haji = {
+                set_nationality = XSM
+            }
+            SIK_Yulbars_Khan = {
+                set_nationality = XSM
+            }
+        }
+        XSM = {
+            load_oob = "XSM_SIK"
+            declare_war_on = {
+                target = SIK
+                type = annex_everything
+            }
+            add_manpower = 50000
+        }
+    }
+}
+
+
+country_event = { # FNG - Northwestern War - Negotiation Successful
+    id = krg_nwwar.8
+    title = krg_nwwar.8.t
+    desc = krg_nwwar.8.d
+    immediate = { log = "[GetDateText]: [Root.GetName]: event krg_nwwar.8 FROM = [From.GetName]" }
+    is_triggered_only = yes
+    option = {
+        name = krg_nwwar.8.a
+        give_guarantee = XSM
+        hidden_effect = {
+            CHI = {
+                country_event = {
+                    id = krg_nwwar.9 ##### Talking Successful
+                    days = 5
+                }
+            }
+        }
+		SIK = {
+			SIK_Ma_Hushan = {
+				set_nationality = XSM
+			}
+			SIK_hoja_niyaz_haji = {
+				set_nationality = XSM
+			}
+			SIK_Yulbars_Khan = {
+				set_nationality = XSM
+			}
+		}
+        XSM = {
+            load_oob = "XSM_SIK"
+			add_popularity = {
+				ideology = national_populist
+				popularity = -0.3
+        	}
+			add_stability = -0.1
+			swap_ideas = {
+                remove_idea = XSM_bufangs_ambitions
+                add_idea = XSM_desperate_gamble
+        	}
+			add_opinion_modifier = {
+				target = SIK
+				modifier = FNG_disobedience
+        	}	
+			
+    	}
+
+		add_political_power = 10
+		add_stability = 0.05
+		set_temp_variable = { China_temp_CCW_tension_change = -3 }
+		China_change_CCW_tension = yes
+    }
+}
+
+country_event = { # CHI - Northwestern War - Negotiation Successful
+    id = krg_nwwar.9
+    title = krg_nwwar.9.t
+    desc = krg_nwwar.9.d
+    immediate = { log = "[GetDateText]: [Root.GetName]: event krg_nwwar.9 FROM = [From.GetName]" }
+    is_triggered_only = yes
+    option = {
+        name = krg_nwwar.9.a
+        give_guarantee = SIK
+        SIK = {
+            set_politics = {
+                ruling_party = social_liberal
+            }
+            add_ideas = SIK_Burhan_Shahidi_hog_sde
+            add_ideas = SIK_Kadisha_Mamyrbek_fm_adm
+            add_ideas = SIK_Mexsut_Muhiti_em_sde
+            add_ideas = SIK_Qasim_Haji_jm_adm
+            add_ideas = SIK_Abduxaliq_Uyghur_im_rre
+            add_ideas = SIK_Abdulkerim_Abbas_int_rre
+        }
+        set_temp_variable = { China_temp_CCW_tension_change = -2 }
+		China_change_CCW_tension = yes
+        add_political_power = 10
+        add_stability = 0.05
+    }
+}
+
+
+country_event = { # CHI - Dihua Massacre, Ready Abbas
+    id = krg_nwwar.10
+    title = krg_nwwar.10.t
+    desc = krg_nwwar.10.d
+    immediate = { log = "[GetDateText]: [Root.GetName]: event krg_nwwar.11 FROM = [From.GetName]" }
+    is_triggered_only = yes
+        option = {
+        name = krg_nwwar.10.a
+        send_equipment = {
+            equipment = infantry_equipment
+            amount = 500
+            target = SIK
+        }
+        FNG = {
+            country_event = {
+                id = krg_nwwar.11
+                days = 5
+            }
+        }
+        SIK = {
+            load_oob = "SIK_revolutionaries"
+            swap_ideas = {
+                remove_idea = SIK_old_scars
+                add_idea = SIK_united_for_now
+            }
+            swap_ideas = {
+                remove_idea = SIK_provincial_army
+                add_idea = SIK_national_army
+            }
+            add_equipment_to_stockpile = {
+                type = infantry_equipment_0
+                amount = 500
+            }
+            add_manpower = 50000
+        }
+    }
+}
+
+country_event = { # Dihua Massacre, how to Respond?
+    id = krg_nwwar.11
+    title = krg_nwwar.11.t
+    desc = krg_nwwar.11.d
+    immediate = { log = "[GetDateText]: [Root.GetName]: event krg_nwwar.11 FROM = [From.GetName]" }
+    is_triggered_only = yes
+        option = {
+        name = krg_nwwar.11.a # Special Military Operation
+        ai_chance = {
+            base = 20
+        }
+        annex_country = {
+            target = XSM
+            transfer_troops = no 
+        }
+		add_stability = -0.15
+        set_temp_variable = { China_temp_CCW_tension_change = 2 }
+		China_change_CCW_tension = yes
+    }
+    option = {
+        name = krg_nwwar.11.b # Compromise with the South
+        ai_chance = {
+            base = 80
+        }
+        add_manpower = -10000
+        XSM = {
+            add_manpower = 10000
+            drop_cosmetic_tag = yes
+            set_cosmetic_tag = XSM_FNG
+        }
+        CHI = {
+            country_event = {
+                id = krg_nwwar.12 ##### Talking Successful
+                days = 5
+            }
+        }
+    }
+}
+
+country_event = { # CHI - Deal's Done
+    id = krg_nwwar.12
+    title = krg_nwwar.12.t
+    desc = krg_nwwar.12.d
+    immediate = { log = "[GetDateText]: [Root.GetName]: event krg_nwwar.12 FROM = [From.GetName]" }
+    is_triggered_only = yes
+
+    option = {
+        name = krg_nwwar.12.a
+        ai_chance = {
+            base = 1
+        }
+        add_manpower = -10000
+		SIK = {
+			get_current_government_type = yes
+		}
+		if = {
+			limit = {
+				has_subject_autonomy_feature = yes
+			}
+			set_autonomy = {
+				target = SIK
+				autonomous_state = krg_protectorate
+			}
+		}
+		else = {
+			puppet = SIK
+		}
+		save_event_target_as = on_puppet_master_tag
+		SIK = {
+			standard_on_puppet_effect = yes
+			restore_previous_government_type = yes
+		}
+        SIK = {
+            add_manpower = 10000
+            set_politics = {
+                ruling_party = radical_socialist
+            }
+            add_popularity = {
+                ideology = radical_socialist
+                popularity = 0.3
+            }
+            drop_cosmetic_tag = yes
+            set_cosmetic_tag = SIK_CHI
+            remove_all_ministers = yes
+            add_ideas = SIK_Burhan_Shahidi_hog_sde
+            add_ideas = SIK_Lutpulla_Mutellip_fm_rre
+            add_ideas = SIK_Mexsut_Muhiti_em_sde
+            add_ideas = SIK_Ahmed_Ziayi_jm_sde
+            add_ideas = SIK_Abduxaliq_Uyghur_im_rre
+            add_ideas = SIK_Abdulkerim_Abbas_int_rre
+            SIK_Ma_Hushan = {
+                set_nationality = XSM
+            }
+            SIK_hoja_niyaz_haji = {
+                set_nationality = XSM
+            }
+            SIK_Yulbars_Khan = {
+                set_nationality = XSM
+            }
+        }
+        set_temp_variable = { China_temp_CCW_tension_change = -2 }
+		China_change_CCW_tension = yes
+        hidden_effect = {
+            FNG = {
+                country_event = {
+                    id = krg_nwwar.13 ##### Talking Successful
+                    days = 5
+                }
+            }
+        }
+    }
+}
+
+country_event = { # FNG - Deal's Done, Hongkui removes Bufang
+    id = krg_nwwar.13
+    title = krg_nwwar.13.t
+    desc = krg_nwwar.13.d
+    immediate = { log = "[GetDateText]: [Root.GetName]: event krg_nwwar.13 FROM = [From.GetName]" }
+    is_triggered_only = yes
+    
+	option = {
+        name = krg_nwwar.13.a
+		XSM = {
+			get_current_government_type = yes
+		}
+		if = {
+			limit = {
+				has_subject_autonomy_feature = yes
+			}
+			set_autonomy = {
+				target = XSM
+				autonomous_state = krg_protectorate
+			}
+		}
+		else = {
+			puppet = XSM
+		}
+		save_event_target_as = on_puppet_master_tag
+		XSM = {
+			standard_on_puppet_effect = yes
+			restore_previous_government_type = yes
+		}
+        XSM = {
+            set_politics = {
+                ruling_party = paternal_autocrat
+            }
+            retire_character = SIK_Ma_Hushan
+            retire_character = SIK_hoja_niyaz_haji
+            retire_character = SIK_Yulbars_Khan
+            swap_ideas = {
+                remove_idea = XSM_end_of_autonomy
+                add_idea = XSM_beijing_in_control
+            }
+            drop_cosmetic_tag = yes
+            set_cosmetic_tag = XSM_FNG
+            add_popularity = {
+                ideology = paternal_autocrat
+                popularity = 0.3
+            }
+        }
+        set_temp_variable = { China_temp_CCW_tension_change = -2 }
+		China_change_CCW_tension = yes
+    }
+}
+
+
+
+country_event = { # Supporting Ma Bufang
+    id = krg_nwwar.15
+    title = krg_nwwar.15.t
+    desc = krg_nwwar.15.d
+    immediate = { log = "[GetDateText]: [Root.GetName]: event krg_nwwar.15 FROM = [From.GetName]" }
+    is_triggered_only = yes
+        option = {
+        name = krg_nwwar.15.a
+        send_equipment = {
+            equipment = infantry_equipment
+            amount = 2000
+            target = XSM
+        }
+        add_manpower = -10000
+        XSM = {
+            add_manpower = 10000
+        }
+    }
+}
+
+
+country_event = { # Supporting Abbas
+    id = krg_nwwar.16
+    title = krg_nwwar.16.t
+    desc = krg_nwwar.16.d
+    immediate = { log = "[GetDateText]: [Root.GetName]: event krg_nwwar.16 FROM = [From.GetName]" }
+    is_triggered_only = yes
+    
+	option = {
+        name = krg_nwwar.16.a
+        add_political_power = -20
+        send_equipment = {
+            equipment = infantry_equipment
+            amount = 2000
+            target = SIK
+        }
+        add_manpower = -10000
+        SIK = {
+            add_manpower = 10000
+        }
+        set_temp_variable = { China_temp_CCW_tension_change = 1 }
+		China_change_CCW_tension = yes
+    }
+}

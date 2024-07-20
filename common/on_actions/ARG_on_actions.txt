@@ -1,0 +1,76 @@
+on_actions = {
+	on_weekly_ARG = {
+		effect = {
+
+
+			# Coup time
+			if = {
+				limit = {
+					has_variable = ARG_liberal_anger
+					has_variable = ARG_liberal_organization
+				}
+				set_temp_variable = { percentagenum = 1 }
+				subtract_from_temp_variable = { percentagenum = ARG_liberal_anger }
+				random_list = {
+					var:ARG_liberal_anger = {
+						
+						set_temp_variable = { percentagenum = 1 }
+						subtract_from_temp_variable = { percentagenum = ARG_liberal_organization }
+						random_list = {
+							var:ARG_liberal_organization = {
+								#insert coup here
+								clear_variable = ARG_liberal_anger
+								clear_variable = ARG_liberal_organization
+								clear_variable = ARG_nationalist_anger
+								clear_variable = ARG_nationalist_organization
+							}
+			
+							var:percentagenum = {
+								#nothing
+							}
+						}
+					}
+	
+					var:percentagenum = {
+						#nothing
+					}
+				}
+			}
+
+			if = {
+				limit = {
+					has_variable = ARG_nationalist_anger
+					has_variable = ARG_nationalist_organization
+				}
+				set_temp_variable = { percentagenum = 1 }
+				subtract_from_temp_variable = { percentagenum = ARG_nationalist_anger }
+				random_list = {
+					var:ARG_nationalist_anger = {
+						
+						set_temp_variable = { percentagenum = 1 }
+						subtract_from_temp_variable = { percentagenum = ARG_nationalist_organization }
+						random_list = {
+							var:ARG_nationalist_organization = {
+								#insert coup here
+								clear_variable = ARG_liberal_anger
+								clear_variable = ARG_liberal_organization
+								clear_variable = ARG_nationalist_anger
+								clear_variable = ARG_nationalist_organization
+							}
+			
+							var:percentagenum = {
+								#nothing
+							}
+						}
+					}
+	
+					var:percentagenum = {
+						#nothing
+					}
+				}
+
+			}
+		}
+	}
+
+}

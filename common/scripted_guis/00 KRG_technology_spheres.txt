@@ -1,0 +1,64 @@
+# scripted_gui = {
+	
+# 	technology_sphere_button = {
+
+# 		window_name = "technology_sphere_icon_window"
+# 		context_type = player_context
+# 		parent_window_token = technology_tab
+
+# 		visible = {
+# 			has_variable = tech_sphere_owner
+# 		}
+
+# 		effects = {
+# 			technology_sphere_icon_flag_click = {
+# 				if = {
+# 					limit = { has_variable = show_technology_sphere }
+# 					clear_variable = show_technology_sphere
+# 				}
+# 				else = {
+# 					set_variable = { show_technology_sphere = 1 }
+# 				}
+# 			}
+# 		}
+
+# 		properties = {
+# 			technology_sphere_icon_flag = {
+# 				image = "[GetSphereIcon]"
+# 			}
+# 		}
+# 	}
+
+# 	technology_sphere_member_list = {
+# 		context_type = player_context
+# 		window_name = "technology_sphere_show_underlings"
+
+	
+# 		visible = {
+			
+# 			check_variable = { show_technology_sphere > 0 }
+
+# 		}
+		
+# 		dynamic_lists = {
+#             technology_sphere_underlings_grid = {
+#                 array = tech_sphere_owner:tech_sphere
+#                 change_scope = yes
+#                 entry_container = technology_sphere_underlings_entry
+#             }
+#         }
+# 		effects = {
+# 			technology_sphere_close_click = {
+# 				clear_variable = show_technology_sphere
+# 			}
+# 		}
+# 		properties = {
+# 			technology_spheres_icon = {
+# 				image = "[THIS.GetFlag]"
+# 			}
+# 			nato_member_icon_frame = {
+# 				image = "[GetTechLeaderGFX]"
+# 			}
+# 		}
+# 	}
+# }

@@ -1,0 +1,8565 @@
+add_namespace = MAF
+add_namespace = MAF_news
+add_namespace = MAF_rebels
+add_namespace = MAF_conference
+add_namespace = MAF_Hippel
+add_namespace = MAF_Krupp
+add_namespace = MAF_Ribbentrop
+add_namespace = MAF_insurgency
+add_namespace = MAF_collapse
+add_namespace = MAF_post_content
+
+# Long live the AAPM :^) 
+
+country_event = { # AAPM forms
+	id = MAF.1
+	title = MAF.1.t
+	desc = MAF.1.d
+
+	immediate = { log = "[getdatetext]: [root.getname]: event MAF.1 from = [from.getname]" }
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = MAF.1.a
+		#hidden_effect = { ##Colonial policy chain unfinished
+		#	every_country = {
+		#		limit = {
+		#			is_in_or_aligned_with_accord = yes
+		#		}
+		#		country_event = {
+		#			id = ent.1
+		#			days = 14
+		#		}
+		#	}	
+		#}
+		set_country_flag = MAF_AAPM_formed
+		set_variable = { MAF_AAPM_unity = 4 }
+		set_variable = { MAF_AAPM_fervor = 2 }
+
+		#Gold Coast
+		set_temp_variable = { temp_region = 10 }
+		set_temp_variable = { temp_value = 2 }
+		MAF_modify_insurgency_aapm_level = yes
+
+		#Togo
+		set_temp_variable = { temp_region = 4 }
+		set_temp_variable = { temp_value = 1 }
+		MAF_modify_insurgency_aapm_level = yes
+
+		#Nigeria
+		set_temp_variable = { temp_region = 9 }
+		set_temp_variable = { temp_value = 2 }
+		MAF_modify_insurgency_aapm_level = yes
+		MAF_form_AAPM = yes
+	}
+}
+
+country_event = { # Thyssen Returns
+	id = MAF.2
+	title = MAF.2.t
+	desc = MAF.2.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = MAF.2.a
+		set_country_flag = thyssen_returns
+		complete_national_focus = MAF_wars_end
+		hidden_effect = {
+			country_event = {
+				id = MAF.30
+				days = 3
+			}
+		}
+	}
+
+}
+
+country_event = { # Winding Down the War Machine
+	id = MAF.3
+	title = MAF.3.t 
+	desc = MAF.3.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = MAF.3.a
+		activate_mission = MAF_full_demob
+		set_country_flag = MAF_demob_begun
+		set_country_flag = MAF_demobilisation_begins
+		set_variable = { MAF_demob_var = 0 }
+		custom_effect_tooltip = MAF_demobilisation_begins_tt
+		hidden_effect = {
+			country_event = {
+				id = MAF.13
+				days = 90
+			}
+		}
+	}
+
+} 
+
+country_event = { # Welcome To Mittelafrika!
+	id = MAF.4
+	title = MAF.4.t
+	desc = MAF.4.d
+	picture = GFX_ce_maf_generic_map
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = MAF.4.a
+		country_event = {
+			id = MAF.5
+			days = 0
+		}
+	}
+	option = {
+		name = MAF.4.b
+	}
+}
+
+country_event = { # The Administration
+	id = MAF.5
+	title = MAF.5.t
+	desc = MAF.5.d
+	picture = GFX_ce_maf_generic_map
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = MAF.5.a
+		country_event = {
+			id = MAF.6
+			days = 0
+		}
+	}
+}
+
+country_event = { # AdEA Introduction
+	id = MAF.6
+	title = MAF.6.t
+	desc = MAF.6.d
+	picture = GFX_ce_maf_generic_map
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = MAF.6.a
+		country_event = {
+			id = MAF.7
+			days = 0
+		}
+	}
+}
+
+country_event = { # LG introduction
+	id = MAF.7
+	title = MAF.7.t
+	desc = MAF.7.d
+	picture = GFX_ce_maf_generic_map
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = MAF.7.a
+		country_event = {
+			id = MAF.9
+			days = 0
+		}
+	}
+}
+
+country_event = { # The Protectorates
+	id = MAF.9
+	title = MAF.9.t
+	desc = MAF.9.d
+	picture = GFX_ce_maf_generic_map
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = MAF.9.a
+		country_event = {
+			id = MAF.8
+			days = 0
+		}
+	}
+}
+
+
+country_event = { # The Resistance
+	id = MAF.8
+	title = MAF.8.t
+	desc = MAF.8.d
+	picture = GFX_ce_maf_generic_map
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = MAF.8.a
+	}
+}
+
+country_event = {
+	id = MAF.10
+	title = MAF.10.t
+	desc = MAF.10.d
+	picture = GFX_ce_maf_generic_map
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = MAF.10.a
+	}
+}
+
+country_event = {
+	id = MAF.11
+	title = MAF.11.t
+	desc = MAF.11.d
+	picture = GFX_ce_maf_generic_map
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = MAF.11.a
+		add_stability = -0.03
+		custom_effect_tooltip = MAF_demob_strikes
+		set_country_flag = MAF_strikes_allowed
+	}
+}
+
+country_event = {
+	id = MAF.12
+	title = MAF.12.t
+	desc = MAF.12.d
+	picture = GFX_ce_maf_generic_map
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = MAF.12.a
+		add_stability = -0.05
+		add_to_variable = {
+			MAF_economy_change_var = 0.30
+			tooltip = MAF_economy_change_var_tt
+		}
+	}
+}
+
+
+country_event = { # The Strikes of 1948! 
+	id = MAF.13
+	title = MAF.13.t
+	desc = MAF.13.d
+	picture = GFX_ce_maf_generic_map
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	immediate = {
+		hidden_effect = {
+			add_ideas = MAF_1948_strikes 
+			set_country_flag = MAF_strikes_east
+			set_country_flag = MAF_strikes_central
+			set_country_flag = MAF_strikes_west
+			set_country_flag = MAF_strikes_south
+		}
+	}
+	
+	option = {
+		name = MAF.13.a
+		effect_tooltip = {
+			activate_mission = MAF_strikes_48
+		}
+		add_war_support = -0.05
+		add_to_variable = {
+			MAF_economy_change_var = -0.50
+			tooltip = MAF_economy_change_var_tt
+		}
+		country_event = {
+			id = MAF.11 
+			days = 70
+		}
+	}
+}
+
+country_event = {
+	id = MAF.14
+	title = MAF.14.t
+	desc = MAF.14.d
+	picture = GFX_ce_maf_generic_map
+	
+	is_triggered_only = yes 
+	
+	option = {
+		name = MAF.14.a
+	}
+}
+
+country_event = { # End of the Silent Agreement
+	id = MAF.15
+	title = MAF.15.t
+	desc = MAF.15.d
+	picture = GFX_ce_maf_generic_map
+	
+	is_triggered_only = yes 
+	fire_only_once = yes 
+	
+	option = {
+		name = MAF.15.a
+		custom_effect_tooltip = end_of_silent_agreement_tt
+	}
+}
+
+country_event = { # The East African Strikes
+	id = MAF.16
+	title = MAF.16.t
+	desc = MAF.16.d
+	picture = GFX_ce_maf_ost_map
+	
+	is_triggered_only = yes 
+	fire_only_once = yes 
+	
+	option = { # Appease the Pragmatists, Send Food
+		name = MAF.16.a
+		custom_effect_tooltip = MAF_end_strikes_east_fast
+		MAF_anger_bureau_small = yes 
+		MAF_appease_prag_small = yes
+		hidden_effect = {
+			country_event = {
+				id = MAF.23
+				days = 7
+			}
+		}
+	}
+	option = { # Appease the Conservative Bureaucrats, Discipline the Men
+		name = MAF.16.b
+		custom_effect_tooltip = MAF_end_strikes_east_slow
+		MAF_appease_bureau_small = yes 
+		MAF_anger_prag_small = yes
+		hidden_effect = {
+			country_event = {
+				id = MAF.24
+				days = 20
+			}
+		}
+	}
+}
+country_event = { # The Central African Strikes
+	id = MAF.17
+	title = MAF.17.t
+	desc = MAF.17.d
+	picture = GFX_ce_maf_congo_map
+	
+	is_triggered_only = yes 
+	fire_only_once = yes 
+	
+	option = { # Reprimand the Men Responsible
+		name = MAF.17.a
+		custom_effect_tooltip = MAF_end_strikes_central_slow
+		MAF_appease_prag_small = yes 
+		MAF_anger_bureau_small = yes 
+		hidden_effect = {
+			country_event = {
+				id = MAF.21
+				days = 20
+			}
+		}
+	}
+	option = { # No Reprimands
+		name = MAF.17.b
+		custom_effect_tooltip = MAF_end_strikes_central_fast
+		MAF_appease_bureau_small = yes
+		MAF_anger_prag_small = yes
+		hidden_effect = {
+			country_event = {
+				id = MAF.22
+				days = 7
+			}
+		}
+	}
+}
+country_event = { # The South African Strikes
+	id = MAF.18
+	title = MAF.18.t
+	desc = MAF.18.d
+	picture = GFX_ce_maf_sudwest_map
+	
+	is_triggered_only = yes 
+	fire_only_once = yes 
+	
+	option = { # Make promises of change
+		name = MAF.18.a
+		custom_effect_tooltip = MAF_end_strikes_south_slow
+		MAF_appease_bureau_small = yes
+		MAF_anger_prag_small = yes
+		hidden_effect = {
+			country_event = {
+				id = MAF.25
+				days = 20
+			}
+		}
+	}
+	option = { # Offer danger pay
+		name = MAF.18.b
+		custom_effect_tooltip = MAF_end_strikes_south_fast
+		MAF_appease_prag_small = yes 
+		MAF_anger_bureau_small = yes 
+		hidden_effect = {
+			country_event = {
+				id = MAF.26
+				days = 10
+			}
+		}
+	}
+}
+country_event = { # The West African Strikes
+	id = MAF.19
+	title = MAF.19.t
+	desc = MAF.19.d
+	picture = GFX_ce_maf_west_region_map
+	
+	is_triggered_only = yes 
+	fire_only_once = yes 
+	
+	option = { # 
+		name = MAF.19.a
+		custom_effect_tooltip = MAF_end_strikes_west_fast
+		MAF_appease_bureau_small = yes
+		MAF_anger_prag_small = yes
+		hidden_effect = {
+			country_event = {
+				id = MAF.27
+				days = 7
+			}
+		}
+	}
+	option = {
+		name = MAF.19.b
+		custom_effect_tooltip = MAF_end_strikes_west_slow
+		MAF_appease_prag_small = yes 
+		MAF_anger_bureau_small = yes 
+		hidden_effect = {
+			country_event = {
+				id = MAF.28
+				days = 20
+			}
+		}
+	}
+}
+
+country_event = { # New Budget
+	id = MAF.20
+	title = MAF.20.t
+	desc = MAF.20.d
+	picture = GFX_ce_maf_generic_map
+	
+	is_triggered_only = yes 
+	fire_only_once = yes 
+	
+	option = { # Austerity is our best way forward
+		name = MAF.20.a
+		complete_national_focus = MAF_austerity_path
+		#MAF_bureau_appease_big = yes 
+		
+	}
+	option = { # The Pragmatists win today
+		name = MAF.20.b
+		complete_national_focus = MAF_investment_path
+		#MAF_prag_appease_big = yes
+	}
+}
+
+country_event = { # Central Strikes End, Reprimands
+	id = MAF.21
+	title = MAF.21.t
+	desc = MAF.21.d
+	
+	is_triggered_only = yes 
+	fire_only_once = yes 
+	
+	option = { 
+		name = MAF.21.a
+		clr_country_flag = MAF_strikes_central
+		MAF_anger_interven_small = yes
+		MAF_anger_berliner_small = yes
+		add_to_variable = {
+			MAF_settler_var = -5
+			tooltip = MAF_settler_var_tt
+		}
+		add_to_variable = {
+			MAF_askari_var = 5
+			tooltip = MAF_askari_var_tt
+		}
+		#Kongo
+		set_temp_variable = { temp_region = 5 }
+		set_temp_variable = { temp_value = -1 }
+		MAF_modify_insurgency_level = yes 
+	}
+}
+
+country_event = { # Central Strikes End, No Reprimands
+	id = MAF.22
+	title = MAF.22.t
+	desc = MAF.22.d
+	
+	is_triggered_only = yes 
+	fire_only_once = yes 
+	
+	option = { 
+		name = MAF.22.a
+		clr_country_flag = MAF_strikes_central
+		MAF_appease_interven_small = yes
+		add_to_variable = {
+			MAF_askari_var = -10
+			tooltip = MAF_askari_var_tt
+		}
+	}
+}
+
+country_event = { # East Strikes End, Food Sent
+	id = MAF.23
+	title = MAF.23.t
+	desc = MAF.23.d
+	
+	is_triggered_only = yes 
+	fire_only_once = yes 
+	
+	option = { 
+		name = MAF.23.a
+		clr_country_flag = MAF_strikes_east
+		MAF_appease_interven_small = yes
+		add_to_variable = {
+			MAF_rural_var = -5
+			tooltip = MAF_rural_var_tt
+		}
+	}
+}
+
+country_event = { # East Strikes End, Discipline Instilled
+	id = MAF.24
+	title = MAF.24.t
+	desc = MAF.24.d
+	
+	is_triggered_only = yes 
+	fire_only_once = yes 
+	
+	option = { 
+		name = MAF.24.a
+		clr_country_flag = MAF_strikes_east
+		MAF_anger_interven_small = yes
+		add_to_variable = {
+			MAF_urban_var = -5
+			tooltip = MAF_urban_var_tt
+		}
+	}
+}
+
+country_event = { # South Strikes End, Option 1 
+	id = MAF.25
+	title = MAF.25.t
+	desc = MAF.25.d
+	
+	is_triggered_only = yes 
+	fire_only_once = yes 
+	
+	option = { 
+		name = MAF.25.a
+		clr_country_flag = MAF_strikes_south
+		MAF_appease_adea_small = yes
+		add_to_variable = {
+			MAF_corruption_var = 5
+			tooltip = MAF_corruption_var_tt
+		}
+	}
+}
+
+country_event = { # South Strikes End, Option 2 
+	id = MAF.26
+	title = MAF.26.t
+	desc = MAF.26.d
+	
+	is_triggered_only = yes 
+	fire_only_once = yes 
+	
+	option = { 
+		name = MAF.26.a
+		clr_country_flag = MAF_strikes_south
+		MAF_anger_adea_small = yes
+		add_to_variable = {
+			MAF_profit_var = -5
+			tooltip = MAF_profit_var_tt
+		}
+	}
+}
+
+country_event = { # West Strikes End, Option 1 
+	id = MAF.27
+	title = MAF.27.t
+	desc = MAF.27.d
+	
+	is_triggered_only = yes 
+	fire_only_once = yes 
+	
+	option = { 
+		name = MAF.27.a
+		clr_country_flag = MAF_strikes_west
+		MAF_anger_berliner_small = yes
+		add_to_variable = {
+			MAF_foreign_var = 5
+			tooltip = MAF_foreign_var_tt
+		}
+		add_to_variable = {
+			MAF_askari_var = -5
+			tooltip = MAF_askari_var_tt
+		}
+	}
+}
+
+country_event = { # West Strikes End, Option 2 
+	id = MAF.28
+	title = MAF.28.t
+	desc = MAF.28.d
+	
+	is_triggered_only = yes 
+	fire_only_once = yes 
+	
+	option = { 
+		name = MAF.28.a
+		clr_country_flag = MAF_strikes_west
+		MAF_appease_berliner_small = yes
+		add_to_variable = {
+			MAF_urban_var = 5
+			tooltip = MAF_profit_var_tt
+		}
+		add_to_variable = {
+			MAF_rural_var = -5
+			tooltip = MAF_rural_var_tt
+		}
+	}
+}
+
+country_event = { # Demobilisation Ends
+	id = MAF.29
+	title = MAF.29.t
+	desc = MAF.29.d
+	
+	is_triggered_only = yes 
+	fire_only_once = yes 
+	
+	option = { 
+		name = MAF.29.a
+		clr_country_flag = MAF_demobilisation_begins
+		remove_ideas_with_trait = KRG_economy_mobilization
+		add_ideas = KRG_civilian_economy
+	}
+}
+
+country_event = { # Krupp Introduction
+	id = MAF.30
+	title = MAF.30.t
+	desc = MAF.30.d
+	
+	is_triggered_only = yes 
+	fire_only_once = yes 
+	
+	option = { 
+		name = MAF.30.a
+		hidden_effect = {
+			country_event = {
+				id = MAF.31
+				days = 3
+			}
+		}
+	}
+}
+
+country_event = { # Von Hippel Introduction
+	id = MAF.31
+	title = MAF.31.t
+	desc = MAF.31.d
+	
+	is_triggered_only = yes 
+	fire_only_once = yes 
+	
+	option = { 
+		name = MAF.31.a
+		hidden_effect = {
+			country_event = {
+				id = MAF.32
+				days = 3
+			}
+		}
+	}
+}
+
+
+country_event = { # Ribbentrop Introduction
+	id = MAF.32
+	title = MAF.32.t
+	desc = MAF.32.d
+	
+	is_triggered_only = yes 
+	fire_only_once = yes 
+	
+	option = { 
+		name = MAF.32.a
+	}
+}
+
+country_event = { # Thyssen Prag/Bureau
+	id = MAF.33
+	title = MAF.33.t
+	desc = MAF.33.d
+	
+	is_triggered_only = yes 
+	fire_only_once = yes 
+	
+	option = { 
+		name = MAF.33.a
+		custom_effect_tooltip = MAF_thyssen_bureau_tt
+		MAF_appease_bureau_big = yes
+	}
+	option = {
+		name = MAF.33.b
+		trigger = {
+			check_variable = { MAF_prag_approve > MAF_bureau_approve }
+		}
+		set_country_flag = Thyssen_prag
+		custom_effect_tooltip = MAF_thyssen_prag_tt
+		MAF_appease_prag_big = yes
+	}
+}
+
+country_event = { # Krupp Battle Begins
+	id = MAF.34
+	title = MAF.34.t
+	desc = MAF.34.d
+	
+	is_triggered_only = yes 
+	fire_only_once = yes 
+	
+	option = { 
+		name = MAF.34.a
+		#custom_effect_tooltip = MAF_thyssen_krupp_battle_begin
+	}
+}
+
+country_event = { # Attack on Dar-es-Salaam
+	id = MAF.35
+	title = MAF.35.t
+	desc = MAF.35.d
+	picture = GFX_ce_maf_ost_map
+	
+	is_triggered_only = yes 
+	fire_only_once = yes 
+	
+	option = { 
+		name = MAF.35.a
+	}
+}
+
+country_event = { # Thyssen Addresses The Troops
+	id = MAF.36
+	title = MAF.36.t
+	desc = MAF.36.d
+	
+	is_triggered_only = yes 
+	fire_only_once = yes 
+	
+	option = { 
+		name = MAF.36.a
+		add_stability = 0.05
+		decrease_conscription = yes
+		
+	}
+}
+
+country_event = { #Corruption Increases!
+	id = MAF.37
+	title = MAF.37.t
+	desc = MAF.37.d
+	
+	is_triggered_only = yes 
+	fire_only_once = yes 
+	
+	option = { 
+		name = MAF.37.a
+		add_to_variable = {
+			MAF_corruption_var = -20
+			tooltip = MAF_corruption_var_tt
+		}
+		
+	}
+}
+
+country_event = { #Desertions Rampant in the Military!
+	id = MAF.38
+	title = MAF.38.t
+	desc = MAF.38.d
+	
+	is_triggered_only = yes 
+	fire_only_once = yes 
+	
+	option = { 
+		name = MAF.38.a
+		add_to_variable = {
+			MAF_military_var = -15
+			tooltip = MAF_military_var_tt
+		}
+		
+	}
+}
+
+country_event = { #Askari Officers refuse to follow orders!
+	id = MAF.39
+	title = MAF.39.t
+	desc = MAF.39.d
+	
+	is_triggered_only = yes 
+	fire_only_once = yes 
+	
+	option = { 
+		name = MAF.39.a
+		add_to_variable = {
+			MAF_askari_var = -15
+			tooltip = MAF_askari_var_tt
+		}
+		
+	}
+}
+
+
+
+country_event = { # Madagascar Revolt
+	id = MAF.50
+	title = MAF.50.t
+	desc = MAF.50.d
+	
+	is_triggered_only = yes 
+	fire_only_once = yes 
+	
+	immediate = {
+		hidden_effect = {
+			MAF_Madagascar_war = yes
+			#Madagaskar
+			set_temp_variable = { temp_region = 6 }
+			set_temp_variable = { temp_value = 5 }
+			MAF_modify_insurgency_aapm_level = yes
+
+			#Madagaskar
+			set_temp_variable = { temp_region = 6 }
+			set_temp_variable = { temp_value = 5 }
+			MAF_modify_insurgency_level = yes
+
+			GER ={
+				country_event = {
+					id = krg_gerdip.13
+				}
+			}
+		}
+		
+	}
+	
+	option = { 
+		name = MAF.50.a
+		effect_tooltip = {
+			MAF_Madagascar_war = yes
+			#Madagaskar
+			set_temp_variable = { temp_region = 6 }
+			set_temp_variable = { temp_value = 4 }
+			MAF_modify_insurgency_aapm_level = yes
+
+			#Madagaskar
+			set_temp_variable = { temp_region = 6 }
+			set_temp_variable = { temp_value = 4 }
+			MAF_modify_insurgency_level = yes
+		}
+	}
+}
+
+country_event = {  # The Rossing Dossier
+	id = MAF.99
+	title = MAF.99.t
+	desc = MAF.99.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = MAF.99.a
+		country_event = {
+			id = MAF.100 
+			days = 7
+		}
+
+		hidden_effect = {
+			country_event = {
+				id = MAF.806 
+				days = 14
+			}	
+		}
+		ENT = {
+			set_country_flag = ENT_aapm_available
+		}
+	}
+
+}
+
+country_event = {  # The Rossing Dossier
+	id = MAF.100
+	title = MAF.100.t
+	desc = MAF.100.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = MAF.100.a
+		add_stability = -0.15
+		add_to_variable = {
+			MAF_corruption_var = 20
+			tooltip = MAF_corruption_var_tt
+		}
+		add_to_variable = {
+			MAF_askari_var = -20
+			tooltip = MAF_askari_var_tt 
+		}
+		add_to_variable = {
+			MAF_foreign_var = 20
+			tooltip = MAF_foreign_var_tt
+		}
+		#Madagaskar
+		set_temp_variable = { temp_region = 6 }
+		set_temp_variable = { temp_value = 1 }
+		MAF_modify_insurgency_level = yes
+		#Südwestafrika
+		set_temp_variable = { temp_region = 2 }
+		set_temp_variable = { temp_value = 2 }
+		MAF_modify_insurgency_level = yes
+		#Northern Rhodesia
+		set_temp_variable = { temp_region = 11 }
+		set_temp_variable = { temp_value = 2 }
+		MAF_modify_insurgency_level = yes
+		#Northern Rhodesia
+		set_temp_variable = { temp_region = 11 }
+		set_temp_variable = { temp_value = 1 }
+		MAF_modify_insurgency_level = yes
+		#Ostafrika
+		set_temp_variable = { temp_region = 1 }
+		set_temp_variable = { temp_value = 1 }
+		MAF_modify_insurgency_level = yes
+		#Kenya
+		set_temp_variable = { temp_region = 8 }
+		set_temp_variable = { temp_value = 1 }
+		MAF_modify_insurgency_level = yes
+		#Gabun
+		set_temp_variable = { temp_region = 7 }
+		set_temp_variable = { temp_value = 1 }
+		MAF_modify_insurgency_level = yes
+		#Uganda
+		set_temp_variable = { temp_region = 13 }
+		set_temp_variable = { temp_value = 1 }
+		MAF_modify_insurgency_level = yes
+		#Kamerun
+		set_temp_variable = { temp_region = 3 }
+		set_temp_variable = { temp_value = 1 }
+		MAF_modify_insurgency_level = yes
+		#Kongo
+		set_temp_variable = { temp_region = 5 }
+		set_temp_variable = { temp_value = 1 }
+		MAF_modify_insurgency_level = yes
+		#Nigeria
+		set_temp_variable = { temp_region = 9 }
+		set_temp_variable = { temp_value = 2 }
+		MAF_modify_insurgency_level = yes
+		#Nyasaland
+		set_temp_variable = { temp_region = 12 }
+		set_temp_variable = { temp_value = 2 }
+		MAF_modify_insurgency_level = yes
+		#Togo
+		set_temp_variable = { temp_region = 4 }
+		set_temp_variable = { temp_value = 2 }
+		MAF_modify_insurgency_level = yes
+		#Gold Coast
+		set_temp_variable = { temp_region = 10 }
+		set_temp_variable = { temp_value = 2 }
+		MAF_modify_insurgency_level = yes
+		MAF_anger_prag_big = yes 
+		MAF_anger_bureau_big = yes
+		MAF_anger_hardliner_big = yes 
+		hidden_effect = {
+			news_event = {
+				id = MAF_news.4
+				days = 0
+			}
+			country_event = {
+				id = MAF.101
+				days = 24
+			}
+			GER = {
+				country_event = {
+					id = krg_gerdip.0
+				}
+			}
+		}
+	}
+
+}
+country_event = { # The Rossing Dossier PART TWO
+	id = MAF.101
+	title = MAF.101.t
+	desc = MAF.101.d
+	immediate = {
+		hidden_effect = {
+			country_event = {
+				id = MAF.102
+				days = 30
+			}
+		}
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = MAF.101.a
+		add_to_variable = {
+			MAF_settler_var = -25
+			tooltip = MAF_settler_var_tt
+		}
+
+		add_to_variable = {
+			MAF_military_var = -15
+			tooltip = MAF_military_var_tt
+		}
+
+		#Madagaskar
+		set_temp_variable = { temp_region = 6 }
+		set_temp_variable = { temp_value = 1 }
+		MAF_modify_insurgency_level = yes
+		MAF_modify_insurgency_aapm_level = yes
+		#Südwestafrika
+		set_temp_variable = { temp_region = 2 }
+		set_temp_variable = { temp_value = 2 }
+		MAF_modify_insurgency_level = yes
+		MAF_modify_insurgency_aapm_level = yes
+		#Northern Rhodesia
+		set_temp_variable = { temp_region = 11 }
+		set_temp_variable = { temp_value = 2 }
+		MAF_modify_insurgency_level = yes
+		MAF_modify_insurgency_aapm_level = yes
+		#Northern Rhodesia
+		set_temp_variable = { temp_region = 11 }
+		set_temp_variable = { temp_value = 1 }
+		MAF_modify_insurgency_level = yes
+		MAF_modify_insurgency_aapm_level = yes
+		#Ostafrika
+		set_temp_variable = { temp_region = 1 }
+		set_temp_variable = { temp_value = 1 }
+		MAF_modify_insurgency_level = yes
+		MAF_modify_insurgency_aapm_level = yes
+		#Kenya
+		set_temp_variable = { temp_region = 8 }
+		set_temp_variable = { temp_value = 1 }
+		MAF_modify_insurgency_level = yes
+		MAF_modify_insurgency_aapm_level = yes
+		#Gabun
+		set_temp_variable = { temp_region = 7 }
+		set_temp_variable = { temp_value = 1 }
+		MAF_modify_insurgency_level = yes
+		MAF_modify_insurgency_aapm_level = yes
+		#Uganda
+		set_temp_variable = { temp_region = 13 }
+		set_temp_variable = { temp_value = 1 }
+		MAF_modify_insurgency_level = yes
+		MAF_modify_insurgency_aapm_level = yes
+		#Kamerun
+		set_temp_variable = { temp_region = 3 }
+		set_temp_variable = { temp_value = 1 }
+		MAF_modify_insurgency_level = yes
+		MAF_modify_insurgency_aapm_level = yes
+		#Kongo
+		set_temp_variable = { temp_region = 5 }
+		set_temp_variable = { temp_value = 1 }
+		MAF_modify_insurgency_level = yes
+		MAF_modify_insurgency_aapm_level = yes
+		#Nigeria
+		set_temp_variable = { temp_region = 9 }
+		set_temp_variable = { temp_value = 2 }
+		MAF_modify_insurgency_level = yes
+		MAF_modify_insurgency_aapm_level = yes
+		#Nyasaland
+		set_temp_variable = { temp_region = 12 }
+		set_temp_variable = { temp_value = 2 }
+		MAF_modify_insurgency_level = yes
+		MAF_modify_insurgency_aapm_level = yes
+		#Togo
+		set_temp_variable = { temp_region = 4 }
+		set_temp_variable = { temp_value = 2 }
+		MAF_modify_insurgency_level = yes
+		MAF_modify_insurgency_aapm_level = yes
+		#Gold Coast
+		set_temp_variable = { temp_region = 10 }
+		set_temp_variable = { temp_value = 2 }
+		MAF_modify_insurgency_level = yes
+		MAF_modify_insurgency_aapm_level = yes
+	}
+	
+}
+
+country_event = { # The Successors
+	id = MAF.102
+	title = MAF.102.t
+	desc = MAF.102.d
+
+	trigger = {
+		NOT = { has_global_flag = MAF_collapsed }
+	}
+	immediate = {
+		hidden_effect = {
+			country_event = {
+				id = MAF.103
+				days = 2
+			}
+			GER = {
+				country_event = {
+					id = MAF.105
+					days = 2
+				}
+			}
+			random_list = {
+				50 = {
+					country_event = {
+						id = MAF.109
+						days = 45
+					}
+				}
+				50 = {
+					country_event = {
+						id = MAF.110
+						days = 45
+					}
+				}
+			}
+			random_list = {
+				50 = {
+					country_event = {
+						id = MAF.111
+						days = 90
+					}
+				}
+				50 = {
+					country_event = {
+						id = MAF.112
+						days = 90
+					}
+				}
+			}
+			random_list = {
+				50 = {
+					country_event = {
+						id = MAF.113
+						days = 120
+					}
+				}
+				50 = {
+					country_event = {
+						id = MAF.114
+						days = 120
+					}
+				}
+			}
+			country_event = {
+				id = MAF.116
+				days = 100
+				random_days = 100
+			}
+			GER = {
+				country_event = {
+					id = MAF.118
+					days = 180
+				}
+			}
+		}
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = MAF.102.a
+		set_country_flag = MAF_succession_enabled
+		unlock_decision_category_tooltip = MAF_succession_decisions
+		activate_mission = MAF_succession_mission
+		activate_mission = MAF_other_factions_make_moves
+		add_to_variable = {
+			MAF_bureaucracy_change_var = -0.5
+			tooltip = MAF_bureaucracy_change_var_tt
+		}
+	}
+}
+
+country_event = { #Thyssen's Choice
+	id = MAF.103
+	title = MAF.103.t 
+	desc = MAF.103.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #Hippel 
+		name = MAF.103.a
+		set_country_flag = MAF_Thyssen_chooses_Hippel
+		hidden_effect = {
+			country_event = {
+				id = MAF.120
+				days = 210
+			}
+		}
+
+		ai_chance = {
+			base = 55
+			modifier = {
+				has_game_rule = {
+					rule = MAF_NEW_GOVERNOR
+					option = MAF_NEW_GOVERNOR_HIPPEL
+				}
+				factor = 1000
+			}
+		}
+	}
+	option = { #Krupp 
+		name = MAF.103.b
+
+		set_country_flag = MAF_Thyssen_chooses_Krupp
+		hidden_effect = {
+			country_event = {
+				id = MAF.120
+				days = 210
+			}
+		}
+
+		ai_chance = {
+			base = 20
+			modifier = {
+				has_game_rule = {
+					rule = MAF_NEW_GOVERNOR
+					option = MAF_NEW_GOVERNOR_KRUPP
+				}
+				factor = 1000
+			}
+		}
+	}
+	option = { #Ribbentrop 
+		name = MAF.103.c
+		set_country_flag = MAF_Thyssen_chooses_Ribbentrop
+		hidden_effect = {
+			country_event = {
+				id = MAF.120
+				days = 210
+			}
+		}
+		ai_chance = {
+			base = 25
+			modifier = {
+				has_game_rule = {
+					rule = MAF_NEW_GOVERNOR
+					option = MAF_NEW_GOVERNOR_RIBBENTROP
+				}
+				factor = 1000
+			}
+		}
+	}
+}
+
+country_event = { #Question of Mercenaries
+	id = MAF.104
+	title = MAF.104.t
+	desc = MAF.104.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #integrate them
+		name = MAF.104.a
+		add_stability = -0.1
+		hidden_effect = {
+			load_oob = "MAF_mercenaries"	
+		}
+		custom_effect_tooltip = MAF_load_mercs
+	}
+	option = { #leave them on their own
+		name = MAF.104.b
+	}
+}
+
+country_event = { #GER: The MAF successors
+	id = MAF.105
+	title = MAF.105.t
+	desc = MAF.105.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #A race in the shadows
+		name = MAF.105.a
+	}
+}
+
+country_event = { #How much to support Hippel?
+	id = MAF.106
+	title = MAF.106.t
+	desc = MAF.106.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #Nominate them
+		name = MAF.106.a
+		set_variable = {
+			MAF_successor_thyssen_v = 3
+		}
+	}
+	option = { #Openly support them
+		name = MAF.106.b
+		set_variable = {
+			MAF_successor_thyssen_v = 2
+		}
+	}
+	option = { #Support them in private
+		name = MAF.106.c
+		set_variable = {
+			MAF_successor_thyssen_v = 1
+		}
+	}
+}
+
+country_event = { #How much to support Krupp?
+	id = MAF.107
+	title = MAF.107.t
+	desc = MAF.107.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #Nominate them
+		name = MAF.107.a
+		set_variable = {
+			MAF_successor_thyssen_v = 3
+		}
+	}
+	option = { #Openly support them
+		name = MAF.107.b
+		set_variable = {
+			MAF_successor_thyssen_v = 2
+		}
+	}
+	option = { #Support them in private
+		name = MAF.107.c
+		set_variable = {
+			MAF_successor_thyssen_v = 1
+		}
+	}
+}
+
+country_event = { #How much to support Ribbentrop?
+	id = MAF.108
+	title = MAF.108.t
+	desc = MAF.108.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #Nominate them
+		name = MAF.108.a
+		set_variable = {
+			MAF_successor_thyssen_v = 9
+		}
+	}
+	option = { #Openly support them
+		name = MAF.108.b
+		set_variable = {
+			MAF_successor_thyssen_v = 8
+		}
+	}
+	option = { #Support them in private
+		name = MAF.108.c
+		set_variable = {
+			MAF_successor_thyssen_v = 7
+		}
+	}
+}
+
+country_event = { #Realists support Ribbentrop
+	id = MAF.109
+	title = MAF.109.t
+	desc = MAF.109.d
+	immediate = {
+		set_country_flag = MAF_realists_have_chosen
+		set_variable = {
+			MAF_successor_realist_v = 2
+		}
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { 
+		name = MAF.109.a
+	}
+}
+
+country_event = { #Realists support Krupp
+	id = MAF.110
+	title = MAF.110.t
+	desc = MAF.110.d
+	immediate = {
+		set_country_flag = MAF_realists_have_chosen
+		set_variable = {
+			MAF_successor_realist_v = 6
+		}
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { 
+		name = MAF.110.a
+	}
+}
+
+country_event = { #adea support Ribbentrop
+	id = MAF.111
+	title = MAF.111.t
+	desc = MAF.111.d
+	immediate = {
+		set_country_flag = MAF_adea_have_chosen
+		set_variable = {
+			MAF_successor_adea_v = 2
+		}
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { 
+		name = MAF.111.a
+	}
+}
+
+country_event = { #adea support Krupp
+	id = MAF.112
+	title = MAF.112.t
+	desc = MAF.112.d
+	immediate = {
+		set_country_flag = MAF_adea_have_chosen
+		set_variable = {
+			MAF_successor_adea_v = 5
+		}
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { 
+		name = MAF.112.a
+	}
+}
+
+country_event = { #Hardliners support Krupp
+	id = MAF.113
+	title = MAF.113.t
+	desc = MAF.113.d
+	immediate = {
+		set_country_flag = MAF_hardliner_have_chosen
+		set_variable = {
+			MAF_successor_hardliner_v = 5
+		}
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { 
+		name = MAF.113.a
+	}
+}
+
+country_event = { #Hardliners support Hippel
+	id = MAF.114
+	title = MAF.114.t
+	desc = MAF.114.d
+	immediate = {
+		set_country_flag = MAF_hardliner_have_chosen
+		set_variable = {
+			MAF_successor_hardliner_v = 3
+		}
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { 
+		name = MAF.114.a
+	}
+}
+country_event = { #Hardliners support Ribbentrop
+	id = MAF.115
+	title = MAF.115.t
+	desc = MAF.115.d
+	immediate = {
+		set_country_flag = MAF_hardliner_have_chosen
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { 
+		name = MAF.115.a
+	}
+}
+
+country_event = { #Protectorates support Hippel
+	id = MAF.116
+	title = MAF.116.t
+	desc = MAF.116.d
+	immediate = {
+		set_country_flag = MAF_protectorates_have_chosen
+		set_variable = {
+			MAF_successor_protect_v = 3
+		}
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { 
+		name = MAF.115.a
+	}
+}
+
+country_event = {  # Mittelafrika administration Nomination
+	id = MAF.117
+	title = {
+		trigger = {
+			has_global_flag = MAF_chose_no_one
+		}
+		text = MAF.117.t4
+	}
+	title = {
+		trigger = {
+			has_global_flag = MAF_chose_Krupp
+		}
+		text = MAF.117.t1
+	}
+	title = {
+		trigger = {
+			has_global_flag = MAF_chose_Hippel
+		}
+		text = MAF.117.t2
+	}
+	title = {
+		trigger = {
+			has_global_flag = MAF_chose_Ribbentrop
+		}
+		text = MAF.117.t3
+	}
+	
+	desc = {
+		trigger = {
+			has_global_flag = MAF_chose_Krupp
+		}
+		text = MAF.117.d1
+	}
+	desc = {
+		trigger = {
+			has_global_flag = MAF_chose_Hippel
+		}
+		text = MAF.117.d2
+	}
+	desc = {
+		trigger = {
+			has_global_flag = MAF_chose_Ribbentrop
+		}
+		text = MAF.117.d3
+	}
+	desc = {
+		trigger = {
+			has_global_flag = MAF_chose_no_one
+		}
+		text = MAF.117.d4
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #Krupp is our man
+		name = MAF.117.a
+		trigger = {
+			OR = {
+				has_global_flag = MAF_chose_Krupp
+				has_global_flag = MAF_chose_no_one
+			}
+		}
+		ai_chance = {
+			base = 20
+			modifier = {
+				has_global_flag = MAF_chose_Krupp
+				add = 100
+			}
+			modifier = {
+				has_game_rule = {
+					rule = MAF_NEW_GOVERNOR
+					option = MAF_NEW_GOVERNOR_KRUPP
+				}
+				factor = 1000
+			}
+		}
+		MAF = {
+			country_event = {
+				id = MAF.400
+				days = 1
+			}
+		}
+	}
+	option = { #We need a strong hand, choose Hippel
+		name = MAF.117.b
+		trigger = {
+			OR = {
+				has_global_flag = MAF_chose_Hippel
+				has_global_flag = MAF_chose_no_one
+			}
+		}
+		ai_chance = {
+			base = 55
+			modifier = {
+				has_global_flag = MAF_chose_Hippel
+				add = 100
+			}
+			modifier = {
+				has_game_rule = {
+					rule = MAF_NEW_GOVERNOR
+					option = MAF_NEW_GOVERNOR_HIPPEL
+				}
+				factor = 1000
+			}
+		}
+		MAF = {
+			country_event = {
+				id = MAF.200
+				days = 1
+			}
+		}
+	}
+	option = { #We need a Berliner, send Ribbentrop instead
+		name = MAF.117.c
+		trigger = {
+			OR = {
+				has_global_flag = MAF_chose_Ribbentrop
+				has_global_flag = MAF_chose_no_one
+			}
+		}
+		ai_chance = {
+			base = 25
+			modifier = {
+				has_global_flag = MAF_chose_Ribbentrop
+				add = 100
+			}
+			modifier = {
+				has_game_rule = {
+					rule = MAF_NEW_GOVERNOR
+					option = MAF_NEW_GOVERNOR_RIBBENTROP
+				}
+				factor = 1000
+			}
+		}
+		MAF = {
+			country_event = {
+				id = MAF.600
+				days = 1
+			}
+		}
+	}
+}
+
+country_event = {  #GER: who to support in MAF?
+	id = MAF.118
+	title = MAF.118.t
+	desc = MAF.118.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	immediate = {
+	hidden_effect = {
+		MAF = {
+				country_event = {
+					id = MAF.119
+					days = 3
+				}
+			}
+		}
+	}
+	
+	option = { #Ribbentrop
+		name = MAF.118.a
+		ai_chance = {
+			base = 3
+		}
+		MAF = {
+			set_country_flag = MAF_Berlin_supports_Ribbentrop
+		}
+		custom_effect_tooltip = MAF_Berlin_supports_Ribbentrop_tt
+	}
+	option = { #Hippel
+		name = MAF.118.b
+		ai_chance = {
+			base = 1
+		}
+		MAF = {
+			set_country_flag = MAF_Berlin_supports_Hippel
+		}
+		custom_effect_tooltip = MAF_Berlin_supports_Hippel_tt
+	}
+	option = { #Krupp
+		name = MAF.118.c
+		ai_chance = {
+			base = 1
+		}
+		MAF = {
+			set_country_flag = MAF_Berlin_supports_Krupp
+		}
+		custom_effect_tooltip = MAF_Berlin_supports_Krupp_tt
+	}
+}
+
+country_event = {  # Berlin Makes their Choice
+	id = MAF.119
+	title = {
+		trigger = {
+			has_country_flag = MAF_Berlin_supports_Ribbentrop
+		}
+		text = MAF.119.t1
+	}
+	title = {
+		trigger = {
+			has_country_flag = MAF_Berlin_supports_Hippel
+		}
+		text = MAF.119.t2
+	}
+	title = {
+		trigger = {
+			has_country_flag = MAF_Berlin_supports_Krupp
+		}
+		text = MAF.119.t3
+	}
+	desc = {
+		trigger = {
+			has_country_flag = MAF_Berlin_supports_Ribbentrop
+		}
+		text = MAF.119.d1
+	}
+	desc = {
+		trigger = {
+			has_country_flag = MAF_Berlin_supports_Hippel
+		}
+		text = MAF.119.d2
+	}
+	desc = {
+		trigger = {
+			has_country_flag = MAF_Berlin_supports_Krupp
+		}
+		text = MAF.119.d3
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = MAF.119.a
+		if = {
+			limit = {
+				has_country_flag = MAF_Berlin_supports_Hippel
+			}
+			set_variable = {
+				MAF_successor_berliner_v = 4
+			}
+		}
+		else_if = {
+			limit = {
+				has_country_flag = MAF_Berlin_supports_Krupp
+			}
+			set_variable = {
+				MAF_successor_berliner_v = 1
+			}
+		}
+		else = {
+			set_variable = {
+				MAF_successor_berliner_v = 7
+			}
+		}
+	}
+}
+
+country_event = { #Pragmatists support Hippel
+	id = MAF.120
+	title = MAF.120.t
+	desc = MAF.120.d
+	immediate = {
+		set_country_flag = MAF_pragmatists_have_chosen
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { 
+		name = MAF.120.a
+		if = {
+			limit = {
+				has_country_flag = MAF_pragmatists_hippel_3
+			}
+			set_variable = {
+				MAF_successor_prag_v = 6
+			}
+		}
+		else_if = {
+			limit = {
+				has_country_flag = MAF_pragmatists_hippel_2
+			}
+			set_variable = {
+				MAF_successor_prag_v = 5
+			}
+		}
+		else = {
+			set_variable = {
+				MAF_successor_prag_v = 4
+			}
+		}
+	}
+}
+
+country_event = { #Pragmatists support ribbentrop
+	id = MAF.121
+	title = MAF.121.t
+	desc = MAF.121.d
+	immediate = {
+		set_country_flag = MAF_pragmatists_have_chosen
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { 
+		name = MAF.121.a
+		if = {
+			limit = {
+				has_country_flag = MAF_pragmatists_ribbentrop_3
+			}
+			set_variable = {
+				MAF_successor_prag_v = 9
+			}
+		}
+		else_if = {
+			limit = {
+				has_country_flag = MAF_pragmatists_ribbentrop_2
+			}
+			set_variable = {
+				MAF_successor_prag_v = 8
+			}
+		}
+		else = {
+			set_variable = {
+				MAF_successor_prag_v = 7
+			}
+		}
+	}
+}
+
+###AAPM Spreading Events
+
+country_event = {  #AAPM Meetings in Ghana
+	id = MAF.122
+	title = MAF.122.t
+	desc = MAF.122.d
+
+	is_triggered_only = yes
+	trigger = {
+		NOT = { has_global_flag = MAF_collapsed }
+	}
+
+	option = { #Try and break them up
+		name = MAF.122.a
+		trigger = {
+			has_equipment = {
+				infantry_equipment > 250
+			}
+		}
+		#Gold Coast
+		set_temp_variable = { temp_region = 10 }
+		set_temp_variable = { temp_value = 1 }
+		MAF_modify_insurgency_level = yes
+		add_equipment_to_stockpile = {
+			type = infantry_equipment
+			amount = -500
+		}
+	}
+
+	option = { #Try and break them up and arrest the leaders
+		name = MAF.122.b
+		trigger = {
+			command_power > 7
+		}
+		add_equipment_to_stockpile = {
+			type = infantry_equipment
+			amount = -750
+		}
+		add_command_power = -10
+	}
+
+	option = { #This was inevitable
+		name = MAF.122.c
+		#Gold Coast
+		set_temp_variable = { temp_region = 10 }
+		set_temp_variable = { temp_value = 1 }
+		MAF_modify_insurgency_aapm_level = yes
+	}
+}
+
+country_event = {  #AAPM Meetings in Nyasaland
+	id = MAF.123
+	title = MAF.123.t
+	desc = MAF.123.d
+
+	is_triggered_only = yes
+	trigger = {
+		NOT = { has_global_flag = MAF_collapsed }
+	}
+	
+	option = { #break them up
+		name = MAF.123.a
+		trigger = {
+			has_equipment = {
+				infantry_equipment > 250
+			}
+		}
+		#Nyasaland
+		set_temp_variable = { temp_region = 12 }
+		set_temp_variable = { temp_value = 1 }
+		MAF_modify_insurgency_level = yes
+		add_equipment_to_stockpile = {
+			type = infantry_equipment
+			amount = -500
+		}
+	}
+
+	option = { #break them up and arrest the leaders
+		name = MAF.123.b
+		trigger = {
+			command_power > 7
+		}
+		add_equipment_to_stockpile = {
+			type = infantry_equipment
+			amount = -750
+		}
+		add_command_power = -10
+	}
+
+	option = { #This was inevitable
+		name = MAF.123.c
+		#Nyasaland
+		set_temp_variable = { temp_region = 12 }
+		set_temp_variable = { temp_value = 1 }
+		MAF_modify_insurgency_aapm_level = yes
+	}
+}
+
+country_event = {  #AAPM Meetings in Congo
+	id = MAF.124
+	title = MAF.124.t
+	desc = MAF.124.d
+
+	is_triggered_only = yes
+	trigger = {
+		NOT = { has_global_flag = MAF_collapsed }
+	}
+	
+	option = { #break them up
+		name = MAF.124.a
+		trigger = {
+			has_equipment = {
+				infantry_equipment > 500
+			}
+		}
+		#Kongo
+		set_temp_variable = { temp_region = 5 }
+		set_temp_variable = { temp_value = 1 }
+		MAF_modify_insurgency_level = yes
+		add_equipment_to_stockpile = {
+			type = infantry_equipment
+			amount = -1000
+		}
+	}
+
+	option = { #break them up and arrest the leaders
+		name = MAF.124.b
+		trigger = {
+			command_power > 9
+		}
+		add_equipment_to_stockpile = {
+			type = infantry_equipment
+			amount = -1000
+		}
+		add_command_power = -15
+	}
+
+	option = { #This was inevitable
+		name = MAF.124.c
+		#Kongo
+		set_temp_variable = { temp_region = 5 }
+		set_temp_variable = { temp_value = 1 }
+		MAF_modify_insurgency_aapm_level = yes
+	}
+}
+
+country_event = {  #AAPM Meetings in Nigeria
+	id = MAF.125
+	title = MAF.125.t
+	desc = MAF.125.d
+
+	is_triggered_only = yes
+	trigger = {
+		NOT = { has_global_flag = MAF_collapsed }
+	}
+	
+	option = { #break them up
+		name = MAF.125.a
+		trigger = {
+			has_equipment = {
+				infantry_equipment > 500
+			}
+		}
+		#Nigeria
+		set_temp_variable = { temp_region = 9 }
+		set_temp_variable = { temp_value = 1 }
+		MAF_modify_insurgency_level = yes
+		add_equipment_to_stockpile = {
+			type = infantry_equipment
+			amount = -1000
+		}
+	}
+
+	option = { #break them up and arrest the leaders
+		name = MAF.125.b
+		trigger = {
+			command_power > 9
+		}
+		add_equipment_to_stockpile = {
+			type = infantry_equipment
+			amount = -1000
+		}
+		add_command_power = -15
+	}
+
+	option = { #This was inevitable
+		name = MAF.125.c
+		#Nigeria
+		set_temp_variable = { temp_region = 9 }
+		set_temp_variable = { temp_value = 1 }
+		MAF_modify_insurgency_aapm_level = yes
+	}
+}
+
+country_event = {  #AAPM Meetings in Cameroon
+	id = MAF.126
+	title = MAF.126.t
+	desc = MAF.126.d
+
+	is_triggered_only = yes
+	trigger = {
+		NOT = { has_global_flag = MAF_collapsed }
+	}
+	
+	option = { #break them up
+		name = MAF.126.a
+		trigger = {
+			has_equipment = {
+				infantry_equipment > 250
+			}
+		}
+		#Kamerun
+		set_temp_variable = { temp_region = 3 }
+		set_temp_variable = { temp_value = 1 }
+		MAF_modify_insurgency_level = yes
+		add_equipment_to_stockpile = {
+			type = infantry_equipment
+			amount = -500
+		}
+	}
+
+	option = { #break them up and arrest the leaders
+		name = MAF.126.b
+		trigger = {
+			command_power > 7
+		}
+		add_equipment_to_stockpile = {
+			type = infantry_equipment
+			amount = -500
+		}
+		add_command_power = -12
+	}
+
+	option = { #This was inevitable
+		name = MAF.126.c
+		#Kamerun
+		set_temp_variable = { temp_region = 3 }
+		set_temp_variable = { temp_value = 1 }
+		MAF_modify_insurgency_aapm_level = yes
+	}
+}
+
+country_event = {  #AAPM Meetings in Kenya
+	id = MAF.127
+	title = MAF.127.t
+	desc = MAF.127.d
+
+	is_triggered_only = yes
+	trigger = {
+		NOT = { has_global_flag = MAF_collapsed }
+	}
+	
+	option = { #break them up
+		name = MAF.127.a
+		trigger = {
+			has_equipment = {
+				infantry_equipment > 250
+			}
+		}
+		#Kenya
+		set_temp_variable = { temp_region = 8 }
+		set_temp_variable = { temp_value = 1 }
+		MAF_modify_insurgency_level = yes
+		add_equipment_to_stockpile = {
+			type = infantry_equipment
+			amount = -500
+		}
+	}
+
+	option = { #break them up and arrest the leaders
+		name = MAF.127.b
+		trigger = {
+			command_power > 7
+		}
+		add_equipment_to_stockpile = {
+			type = infantry_equipment
+			amount = -500
+		}
+		add_command_power = -12
+	}
+
+	option = { #This was inevitable
+		name = MAF.127.c
+		#Kenya
+		set_temp_variable = { temp_region = 8 }
+		set_temp_variable = { temp_value = 1 }
+		MAF_modify_insurgency_aapm_level = yes
+	}
+}
+
+country_event = {  #AAPM Meetings in Zambia
+	id = MAF.128
+	title = MAF.128.t
+	desc = MAF.128.d
+
+	is_triggered_only = yes
+	trigger = {
+		NOT = { has_global_flag = MAF_collapsed }
+	}
+	
+	option = { #break them up
+		name = MAF.128.a
+		trigger = {
+			has_equipment = {
+				infantry_equipment > 250
+			}
+		}
+		#Northern Rhodesia
+		set_temp_variable = { temp_region = 11 }
+		set_temp_variable = { temp_value = 1 }
+		MAF_modify_insurgency_level = yes
+		add_equipment_to_stockpile = {
+			type = infantry_equipment
+			amount = -500
+		}
+	}
+
+	option = { #break them up and arrest the leaders
+		name = MAF.128.b
+		trigger = {
+			command_power > 7
+		}
+		add_equipment_to_stockpile = {
+			type = infantry_equipment
+			amount = -500
+		}
+		add_command_power = -12
+	}
+
+	option = { #This was inevitable
+		name = MAF.128.c
+		#Northern Rhodesia
+		set_temp_variable = { temp_region = 11 }
+		set_temp_variable = { temp_value = 1 }
+		MAF_modify_insurgency_aapm_level = yes
+	}
+}
+
+country_event = {  #AAPM Meetings in Rwanda
+	id = MAF.129
+	title = MAF.129.t
+	desc = MAF.129.d
+
+	is_triggered_only = yes
+	trigger = {
+		NOT = { has_global_flag = MAF_collapsed }
+	}
+	
+	option = { #break them up
+		name = MAF.129.a
+		trigger = {
+			has_equipment = {
+				infantry_equipment > 250
+			}
+		}
+		#Northern Rhodesia
+		set_temp_variable = { temp_region = 11 }
+		set_temp_variable = { temp_value = 1 }
+		MAF_modify_insurgency_level = yes
+		add_equipment_to_stockpile = {
+			type = infantry_equipment
+			amount = -500
+		}
+	}
+
+	option = { #break them up and arrest the leaders
+		name = MAF.129.b
+		trigger = {
+			command_power > 7
+		}
+		add_equipment_to_stockpile = {
+			type = infantry_equipment
+			amount = -500
+		}
+		add_command_power = -12
+	}
+
+	option = { #This was inevitable
+		name = MAF.129.c
+		#Northern Rhodesia
+		set_temp_variable = { temp_region = 11 }
+		set_temp_variable = { temp_value = 1 }
+		MAF_modify_insurgency_aapm_level = yes
+	}
+}
+
+country_event = {  #Insurgency hidden event
+	id = MAF.130
+	immediate = {
+		hidden_effect = {
+			country_event = {
+				id = MAF.130
+				days = 120
+				random_days = 60
+			}	
+			country_event = {
+				id = MAF.131
+				days = 1
+			}
+		}
+	}
+	hidden = yes
+	is_triggered_only = yes
+	
+	option = { #
+		random_list = {
+			1 = {
+				1 = {
+					save_event_target_as = MAF_targetted_region
+				}
+			}
+			1 = {
+				2 = {
+					save_event_target_as = MAF_targetted_region
+				}
+			}
+			1 = {
+				3 = {
+					save_event_target_as = MAF_targetted_region
+				}
+			}
+			1 = {
+				4 = {
+					save_event_target_as = MAF_targetted_region
+				}
+			}
+			1 = {
+				5 = {
+					save_event_target_as = MAF_targetted_region
+				}
+			}
+			1 = {
+				6 = {
+					save_event_target_as = MAF_targetted_region
+				}
+			}
+			1 = {
+				7 = {
+					save_event_target_as = MAF_targetted_region
+				}
+			}
+			1 = {
+				8 = {
+					save_event_target_as = MAF_targetted_region
+				}
+			}
+			1 = {
+				9 = {
+					save_event_target_as = MAF_targetted_region
+				}
+			}
+			1 = {
+				10 = {
+					save_event_target_as = MAF_targetted_region
+				}
+			}
+			1 = {
+				11 = {
+					save_event_target_as = MAF_targetted_region
+				}
+			}
+			1 = {
+				12 = {
+					save_event_target_as = MAF_targetted_region
+				}
+			}
+			1 = {
+				13 = {
+					save_event_target_as = MAF_targetted_region
+				}
+			}
+			1 = {
+				14 = {
+					save_event_target_as = MAF_targetted_region
+				}
+			}
+		}
+	}
+}
+
+country_event = { 
+	id = MAF.131
+	title = {
+		trigger = {
+			OR = {
+				check_variable = { temp_region = 1 }
+				check_variable = { less_temp_region = 1 }
+			}
+		}
+		text = MAF.131.t1
+	}
+	title = {
+		trigger = {
+			OR = {
+				check_variable = { temp_region = 2 }
+				check_variable = { less_temp_region = 2 }
+			}
+		}
+		text = MAF.131.t2
+	}
+	title = {
+		trigger = {
+			OR = {
+				check_variable = { temp_region = 3 }
+				check_variable = { less_temp_region = 3 }
+			}
+		}
+		text = MAF.131.t3
+	}
+	title = {
+		trigger = {
+			OR = {
+				check_variable = { temp_region = 4 }
+				check_variable = { less_temp_region = 4 }
+			}
+		}
+		text = MAF.131.t4
+	}
+	title = {
+		trigger = {
+			OR = {
+				check_variable = { temp_region = 5 }
+				check_variable = { less_temp_region = 5 }
+			}
+		}
+		text = MAF.131.t5
+	}
+	title = {
+		trigger = {
+			OR = {
+				check_variable = { temp_region = 6 }
+				check_variable = { less_temp_region = 6 }
+			}
+		}
+		text = MAF.131.t6
+	}
+	title = {
+		trigger = {
+			OR = {
+				check_variable = { temp_region = 7 }
+				check_variable = { less_temp_region = 7 }
+			}
+		}
+		text = MAF.131.t7
+	}
+	title = {
+		trigger = {
+			OR = {
+				check_variable = { temp_region = 8 }
+				check_variable = { less_temp_region = 8 }
+			}
+		}
+		text = MAF.131.t8
+	}
+	title = {
+		trigger = {
+			OR = {
+				check_variable = { temp_region = 9 }
+				check_variable = { less_temp_region = 9 }
+			}
+		}
+		text = MAF.131.t9
+	}
+	title = {
+		trigger = {
+			OR = {
+				check_variable = { temp_region = 10 }
+				check_variable = { less_temp_region = 10 }
+			}
+		}
+		text = MAF.131.t10
+	}
+	title = {
+		trigger = {
+			OR = {
+				check_variable = { temp_region = 11 }
+				check_variable = { less_temp_region = 11 }
+			}
+		}
+		text = MAF.131.t11
+	}
+	title = {
+		trigger = {
+			OR = {
+				check_variable = { temp_region = 12 }
+				check_variable = { less_temp_region = 12 }
+			}
+		}
+		text = MAF.131.t12
+	}
+	title = {
+		trigger = {
+			OR = {
+				check_variable = { temp_region = 13 }
+				check_variable = { less_temp_region = 13 }
+			}
+		}
+		text = MAF.131.t13
+	}
+
+	desc = {
+		trigger = {
+			OR = {
+				check_variable = { temp_region = 1 }
+				check_variable = { less_temp_region = 1 }
+			}
+		}
+		text = MAF.131.d1
+	}
+	desc = {
+		trigger = {
+			OR = {
+				check_variable = { temp_region = 2 }
+				check_variable = { less_temp_region = 2 }
+			}
+		}
+		text = MAF.131.d2
+	}
+	desc = {
+		trigger = {
+			OR = {
+				check_variable = { temp_region = 3 }
+				check_variable = { less_temp_region = 3 }
+			}
+		}
+		text = MAF.131.d3
+	}
+	desc = {
+		trigger = {
+			OR = {
+				check_variable = { temp_region = 4 }
+				check_variable = { less_temp_region = 4 }
+			}
+		}
+		text = MAF.131.d4
+	}
+	desc = {
+		trigger = {
+			OR = {
+				check_variable = { temp_region = 5 }
+				check_variable = { less_temp_region = 5 }
+			}
+		}
+		text = MAF.131.d5
+	}
+	desc = {
+		trigger = {
+			OR = {
+				check_variable = { temp_region = 6 }
+				check_variable = { less_temp_region = 6 }
+			}
+		}
+		text = MAF.131.d6
+	}
+	desc = {
+		trigger = {
+			OR = {
+				check_variable = { temp_region = 7 }
+				check_variable = { less_temp_region = 7 }
+			}
+		}
+		text = MAF.131.d7
+	}
+	desc = {
+		trigger = {
+			OR = {
+				check_variable = { temp_region = 8 }
+				check_variable = { less_temp_region = 8 }
+			}
+		}
+		text = MAF.131.d8
+	}
+	desc = {
+		trigger = {
+			OR = {
+				check_variable = { temp_region = 9 }
+				check_variable = { less_temp_region = 9 }
+			}
+		}
+		text = MAF.131.d9
+	}
+	desc = {
+		trigger = {
+			OR = {
+				check_variable = { temp_region = 10 }
+				check_variable = { less_temp_region = 10 }
+			}
+		}
+		text = MAF.131.d10
+	}
+	desc = {
+		trigger = {
+			OR = {
+				check_variable = { temp_region = 11 }
+				check_variable = { less_temp_region = 11 }
+			}
+		}
+		text = MAF.131.d11
+	}
+	desc = {
+		trigger = {
+			OR = {
+				check_variable = { temp_region = 12 }
+				check_variable = { less_temp_region = 12 }
+			}
+		}
+		text = MAF.131.d12
+	}
+	desc = {
+		trigger = {
+			OR = {
+				check_variable = { temp_region = 13 }
+				check_variable = { less_temp_region = 13 }
+			}
+		}
+		text = MAF.131.d13
+	}
+
+	trigger = {
+		NOT = {
+			check_variable = {
+				temp_region:MAF_insurgency_map_y = -1000
+			}
+		}
+	}
+
+	immediate = {
+		log = "[getdatetext]: [root.getname]: event MAF.131 from = [from.getname]"
+	}
+
+	is_triggered_only = yes
+	
+	option = { #break them up
+		name = MAF.131.a
+		trigger = {
+			has_equipment = {
+				infantry_equipment > 250
+			}
+		}
+		set_temp_variable = { temp_region = less_temp_region }
+		set_temp_variable = { temp_value = 1 }
+		MAF_modify_insurgency_level = yes
+		add_equipment_to_stockpile = {
+			type = infantry_equipment
+			amount = -500
+		}
+		clear_variable = less_temp_region
+	}
+
+	option = { #break them up and arrest the leaders
+		name = MAF.131.b
+		trigger = {
+			command_power > 7
+		}
+		clear_variable = less_temp_region
+		add_equipment_to_stockpile = {
+			type = infantry_equipment
+			amount = -500
+		}
+		add_command_power = -12
+	}
+
+	option = { #This was inevitable
+		name = MAF.131.c
+		set_temp_variable = { temp_region = less_temp_region }
+		set_temp_variable = { temp_value = 1 }
+		MAF_modify_insurgency_aapm_level = yes
+		
+		set_temp_variable = { temp_region = less_temp_region }
+		set_temp_variable = { temp_value = 1 }
+		MAF_modify_insurgency_level = yes
+
+		set_temp_variable = { temp_value = 1 }
+		MAF_change_AAPM_fervor = yes
+
+		clear_variable = less_temp_region
+	}
+}
+
+
+
+
+
+
+
+#### GOVERNOR HIPPEL EVENTS ####
+
+country_event = {  # Von Hippel Joins the Battle
+	id = MAF.200
+	title = MAF.200.t
+	desc = MAF.200.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = MAF.200.a
+		
+		set_party_name = {
+			ideology = paternal_autocrat
+			long_name = MAF_pataut_interventionist_party_long
+			name = MAF_pataut_interventionist_party
+		}
+		MAF_theodor_von_hippel = {
+			promote_character = yes
+		}
+		set_politics = {
+			ruling_party = paternal_autocrat
+		}
+		coal_add_auth_dem = yes
+		add_ideas = {
+			MAF_Hans_Albert_von_Lettow_Vorbeck_hog_pau
+		}
+
+		if = {
+			limit = {
+				check_variable = {
+					MAF_successor_conbureau_v < 4
+				}
+			}
+			MAF_appease_bureau_big = yes
+		}
+		else = {
+			MAF_anger_bureau_small = yes
+		}
+
+		if = {
+			limit = { 
+				check_variable = {
+					MAF_successor_prag_v > 4
+				}
+			}
+			MAF_appease_prag_big = yes
+		}
+		else = {
+			MAF_anger_prag_small = yes
+		}
+
+		MAF_appease_interven_big = yes
+		MAF_anger_berliner_small = yes
+		MAF_anger_realist_small = yes
+		MAF_anger_adea_small = yes
+		if = {
+			limit = { 
+				check_variable = {
+					MAF_successor_hardliner_v < 4
+				}
+			}
+			MAF_appease_hardliner_big = yes
+		}
+		else = {
+			MAF_anger_hardliner_small = yes
+		}
+
+		hidden_effect = {
+			load_focus_tree = {
+				tree = 	MAF_Hippel_tree
+				keep_completed = yes
+			}
+			country_event = {
+				id = MAF.1112
+				days = 90
+			}
+			news_event = {
+				id = MAF_news.1
+				days = 0
+			}
+		}
+	}
+}
+country_event = { # The First Speech
+	id = MAF.201
+	title = MAF.201.t
+	desc = MAF.201.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = MAF.201.a
+		add_command_power = 25
+		MAF_appease_interven_big = yes
+	}
+	
+}
+
+country_event = { # The First Wave
+	id = MAF_Hippel.0
+	title = MAF_Hippel.0.t
+	desc = MAF_Hippel.0.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { # Hail to the Marshal!
+		name = MAF_Hippel.0.a
+	}
+	
+}
+
+country_event = { # Ending the leaks
+	id = MAF_Hippel.1
+	title = MAF_Hippel.1.t
+	desc = MAF_Hippel.1.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = MAF_Hippel.1.a
+	}
+	
+}
+
+country_event = { # Infiltrating the AAPM
+	id = MAF_Hippel.2
+	title = MAF_Hippel.2.t
+	desc = MAF_Hippel.2.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = MAF_Hippel.2.a
+	}
+	
+}
+
+#### GOVERNOR KRUPP EVENTS ####
+
+country_event = {  # Krupp is ready for a fight
+	id = MAF.400
+	title = MAF.400.t
+	desc = MAF.400.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = MAF.400.a
+		set_politics = {
+			ruling_party = paternal_autocrat
+		}
+		coal_add_auth_dem = yes
+		coal_add_mar_lib = yes
+		MAF_Alfried_Krupp = {
+			promote_character = yes
+		}
+		add_ideas = {
+			MAF_Wolf_Heinrich_Graf_von_Helldorff_hog_sco
+		}
+		GER = {
+			complete_national_focus = GER_establish_the_ae
+		}
+
+		if = {
+			limit = { 
+				check_variable = {
+					MAF_successor_conbureau_v > 4
+				}
+			}
+			MAF_appease_bureau_big = yes
+		}
+		else = {
+			MAF_anger_bureau_small = yes
+		}
+		MAF_anger_prag_small = yes
+		MAF_anger_interven_small = yes
+		MAF_anger_berliner_small = yes
+		
+		if = {
+			limit = { 
+				check_variable = {
+					MAF_successor_realist_v > 4
+				}
+			}
+			MAF_appease_realist_big = yes
+		}
+		else = {
+			MAF_anger_realist_small = yes
+		}
+		if = {
+			limit = { 
+				check_variable = {
+					MAF_successor_adea_v > 4
+				}
+			}
+			MAF_appease_adea_big = yes
+		}
+		else = {
+			MAF_anger_adea_small = yes
+		}
+
+		if = {
+			limit = { 
+				check_variable = {
+					MAF_successor_hardliner_v > 4
+				}
+			}
+			MAF_appease_hardliner_big = yes
+		}
+		else = {
+			MAF_anger_hardliner_small = yes
+		}
+
+		hidden_effect = {
+			load_focus_tree = {
+				tree = 	MAF_Krupp_tree
+				keep_completed = yes
+			}
+			country_event = {
+				id = MAF.1112
+				days = 90
+			}
+			news_event = {
+				id = MAF_news.2
+				days = 0
+			}
+		}
+	}
+}
+
+country_event = { #The Three Pillars
+	id = MAF_Krupp.0
+	title = MAF_Krupp.0.t
+	desc = MAF_Krupp.0.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = MAF_Krupp.0.a
+	}
+	
+}
+
+country_event = { # The Next Generation
+	id = MAF_Krupp.1
+	title = MAF_Krupp.1.t
+	desc = MAF_Krupp.1.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = MAF_Krupp.1.a
+	}
+	
+}
+
+country_event = { # The Economic Assault
+	id = MAF_Krupp.2
+	title = MAF_Krupp.2.t
+	desc = MAF_Krupp.2.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = MAF_Krupp.2.a
+		country_event = {
+			id = MAF_Krupp.3
+			days = 30
+		}
+	}
+	
+}
+
+country_event = { # Megacorps defect
+	id = MAF_Krupp.3
+	title = MAF_Krupp.3.t
+	desc = MAF_Krupp.3.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = MAF_Krupp.3.a
+		country_event = {
+			id = MAF_Krupp.4
+			days = 30
+		}
+	}
+	
+}
+
+country_event = { # The Askari Defect
+	id = MAF_Krupp.4
+	title = MAF_Krupp.4.t
+	desc = MAF_Krupp.4.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = MAF_Krupp.4.a
+		country_event = {
+			id = MAF_Krupp.5
+			days = 30
+		}
+	}
+	
+}
+
+country_event = { # The Bottom Line
+	id = MAF_Krupp.5
+	title = MAF_Krupp.5.t
+	desc = MAF_Krupp.5.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = MAF_Krupp.5.a
+		country_event = {
+			id = MAF_Krupp.6
+			days = 30
+		}
+	}
+	
+}
+
+country_event = { # Wiping out Hands Clean
+	id = MAF_Krupp.6
+	title = MAF_Krupp.6.t
+	desc = MAF_Krupp.6.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = MAF_Krupp.6.a
+		country_event = {
+			id = MAF_Krupp.7
+			days = 30
+		}
+	}
+	
+}
+
+country_event = { # Our Grand Escape
+	id = MAF_Krupp.7
+	title = MAF_Krupp.7.t
+	desc = MAF_Krupp.7.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = MAF_Krupp.7.a
+		country_event = {
+			id = MAF_Krupp.8
+			days = 30
+		}
+	}
+}
+
+country_event = { # The Rushed Confrence
+	id = MAF_Krupp.8
+	title = MAF_Krupp.8.t
+	desc = MAF_Krupp.8.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = MAF_Krupp.8.a
+		MAF_chaos_ending_1 = yes
+	}
+	
+	option = {
+		name = MAF_Krupp.8.b
+		ai_chance = {
+			base = 0
+		}
+		MAF_german_victory_ending = yes
+	}
+}
+
+#### GOVERNOR RIBBENTROP EVENTS #### 
+
+country_event = {  
+	id = MAF.600
+	title = MAF.600.t
+	desc = MAF.600.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = MAF.600.a
+		set_politics = {
+			ruling_party = social_conservative
+		}
+		coal_add_nat_pop = yes
+		add_ideas = {
+			MAF_Ernst_Junger_hog_npo
+		}
+
+		MAF_Alfried_Krupp = {		
+			promote_character = yes
+		}
+		GER = {
+			complete_national_focus = GER_new_admin
+		}
+
+		MAF_anger_bureau_small = yes
+		if = {
+			limit = { 
+				check_variable = {
+					MAF_successor_prag_v < 4
+				}
+			}
+			MAF_appease_prag_big = yes
+		}
+		else = {
+			MAF_anger_prag_small = yes
+		}
+
+		MAF_anger_interven_small = yes
+		MAF_appease_berliner_big = yes
+		if = {
+			limit = { 
+				check_variable = {
+					MAF_successor_realist_v < 4
+				}
+			}
+			MAF_appease_realist_big = yes
+		}
+		else = {
+			MAF_anger_realist_small = yes
+		}
+
+		if = {
+			limit = { 
+				check_variable = {
+					MAF_successor_adea_v < 4
+				}
+			}
+			MAF_appease_adea_big = yes
+		}
+		else = {
+			MAF_anger_adea_small = yes
+		}
+
+		MAF_anger_adea_small = yes
+
+
+		hidden_effect = {
+			load_focus_tree = {
+				tree = 	MAF_Ribbentrop_tree
+				keep_completed = yes
+			}
+			country_event = {
+				id = MAF.1112
+				days = 90
+			}
+			news_event = {
+				id = MAF_news.3
+				days = 0
+			}
+		}
+	}
+}
+
+country_event = { # The Diplomat Enters
+	id = MAF_Ribbentrop.0
+	title = MAF_Ribbentrop.0.t
+	desc = MAF_Ribbentrop.0.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = MAF_Ribbentrop.0.a
+	}
+	
+}
+
+country_event = { # Diplomatic Considerations
+	id = MAF_Ribbentrop.1
+	title = MAF_Ribbentrop.1.t
+	desc = MAF_Ribbentrop.1.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = MAF_Ribbentrop.1.a
+	}
+	
+}
+
+country_event = { # Appease the Protectorates
+	id = MAF_Ribbentrop.2
+	title = MAF_Ribbentrop.2.t
+	desc = MAF_Ribbentrop.2.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = MAF_Ribbentrop.2.a
+	}
+	
+}
+
+country_event = { # Escalate German Presence
+	id = MAF_Ribbentrop.3
+	title = MAF_Ribbentrop.3.t
+	desc = MAF_Ribbentrop.3.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = MAF_Ribbentrop.3.a
+	}
+	
+}
+
+country_event = { # Promise Berlin
+	id = MAF_Ribbentrop.4
+	title = MAF_Ribbentrop.4.t
+	desc = MAF_Ribbentrop.4.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = MAF_Ribbentrop.4.a
+	}
+	
+}
+
+country_event = { # Our Better Mittelafrika
+	id = MAF_Ribbentrop.5
+	title = MAF_Ribbentrop.5.t
+	desc = MAF_Ribbentrop.5.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = MAF_Ribbentrop.5.a
+		country_event = {
+			id = MAF_Ribbentrop.6
+			days = 30
+		}
+	}
+	
+}
+
+country_event = { # The Bureaucratic Opposition
+	id = MAF_Ribbentrop.6
+	title = MAF_Ribbentrop.6.t
+	desc = MAF_Ribbentrop.6.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = MAF_Ribbentrop.6.a
+		hidden_effect = {
+			country_event = {
+				id = MAF_Ribbentrop.8
+				days = 30
+			}	
+		}
+	}
+	
+	option = {
+		name = MAF_Ribbentrop.6.b
+		hidden_effect = {
+				country_event = {
+				id = MAF_Ribbentrop.7
+				days = 30
+			}
+		}
+	}
+}
+
+country_event = { # The Marshal's Return
+	id = MAF_Ribbentrop.7
+	title = MAF_Ribbentrop.7.t
+	desc = MAF_Ribbentrop.7.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = MAF_Ribbentrop.7.a
+		set_party_name = {
+			ideology = paternal_autocrat
+			long_name = MAF_pataut_interventionist_party_long
+			name = MAF_pataut_interventionist_party
+		}
+		set_politics = {
+			ruling_party = paternal_autocrat
+		}
+		MAF_theodor_von_hippel = {
+			promote_character = yes
+		}
+	}
+	
+}
+
+country_event = { # The Berliner Opposition
+	id = MAF_Ribbentrop.8
+	title = MAF_Ribbentrop.8.t
+	desc = MAF_Ribbentrop.8.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = MAF_Ribbentrop.8.a
+		hidden_effect = {
+			country_event = {
+				id = MAF_Ribbentrop.12
+				days = 30
+			}
+		}
+	}
+
+	option = {
+		name = MAF_Ribbentrop.8.b
+		hidden_effect = {
+			country_event = {
+				id = MAF_Ribbentrop.9
+				days = 30
+			}
+		}
+	}
+}
+
+country_event = { # Berlin's New Favorite
+	id = MAF_Ribbentrop.9
+	title = MAF_Ribbentrop.9.t
+	desc = MAF_Ribbentrop.9.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = MAF_Ribbentrop.9.a
+		MAF_joachim_von_ribbentrop = {
+			kill_character = yes
+		}
+		retire_character = MAF_richard_walther_darré
+		promote_character = MAF_otto_abetz
+		coal_rev_soc_lib = yes
+		remove_head_of_government = yes
+		add_ideas = MAF_Ernst_Junger_hog_npo
+		set_politics = {
+			ruling_party = national_populist
+			elections_allowed = no
+		}
+		coal_add_soc_con = yes
+		country_event = {
+			id = MAF_Ribbentrop.10
+			days = 30
+		}
+	}
+	
+}
+
+country_event = { # Salvage what we can
+	id = MAF_Ribbentrop.10
+	title = MAF_Ribbentrop.10.t
+	desc = MAF_Ribbentrop.10.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = MAF_Ribbentrop.10.a
+	}
+	
+}
+
+country_event = { # We did what we could
+	id = MAF_Ribbentrop.11
+	title = MAF_Ribbentrop.11.t
+	desc = MAF_Ribbentrop.11.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = MAF_Ribbentrop.11.a
+		MAF_chaos_ending_2 = yes
+	}
+	
+}
+
+country_event = { # The Last Resort
+	id = MAF_Ribbentrop.12
+	title = MAF_Ribbentrop.12.t
+	desc = MAF_Ribbentrop.12.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = MAF_Ribbentrop.12.a
+		coal_rev_nat_pop = yes
+		coal_rev_pat_aut = yes
+		coal_rev_auth_dem = yes
+		coal_add_soc_lib = yes
+		add_popularity = {
+			ideology = social_liberal
+			popularity = 0.15
+		}
+		country_event = {
+			id = MAF_Ribbentrop.13
+			days = 30
+		}
+	}
+	
+}
+
+country_event = { # Prepare for the Conference
+	id = MAF_Ribbentrop.13
+	title = MAF_Ribbentrop.13.t
+	desc = MAF_Ribbentrop.13.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = MAF_Ribbentrop.13.a
+		country_event = {
+			id = MAF_Ribbentrop.14
+			days = 30
+		}
+	}
+	
+}
+
+country_event = { # The Conference is Held
+	id = MAF_Ribbentrop.14
+	title = MAF_Ribbentrop.14.t
+	desc = MAF_Ribbentrop.14.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = MAF_Ribbentrop.14.a
+		trigger = {
+			NOT = {
+				any_state = {
+					check_variable = {
+						MAF_insurgency_level > 4
+					}
+				}
+			}
+		}
+		hidden_effect = {
+			country_event = {
+				id = MAF_Ribbentrop.15
+				days = 30
+			}
+		}
+	}
+	
+	option = {
+		name = MAF_Ribbentrop.14.b
+		hidden_effect = {
+			country_event = {
+				id = MAF_Ribbentrop.16
+				days = 30
+			}
+		}
+	}
+}
+
+country_event = { # The Conference Succeeds
+	id = MAF_Ribbentrop.15
+	title = MAF_Ribbentrop.15.t
+	desc = MAF_Ribbentrop.15.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = MAF_Ribbentrop.15.a
+		MAF_reformentrop_ending = yes
+	}
+	
+}
+
+country_event = { # The Conference Fails
+	id = MAF_Ribbentrop.16
+	title = MAF_Ribbentrop.16.t
+	desc = MAF_Ribbentrop.16.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = MAF_Ribbentrop.16.a
+		retire_character = MAF_joachim_von_ribbentrop
+		promote_character = MAF_otto_abetz
+		coal_rev_soc_lib = yes
+		remove_head_of_government = yes
+		country_event = {
+			id = MAF_Ribbentrop.17
+			days = 30
+		}
+
+		hidden_effect = {
+			fill_empty_positions_with_vacant_positions = yes
+		}
+	}
+	
+}
+
+country_event = { # The Siege of Dar-es-Salaam
+	id = MAF_Ribbentrop.17
+	title = MAF_Ribbentrop.17.t
+	desc = MAF_Ribbentrop.17.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = MAF_Ribbentrop.17.a
+		country_event = {
+			id = MAF.1000
+			days = 7
+		}
+	}
+	
+}
+
+##### Mau Mau Revolt Events
+
+country_event = {  # The Formation of the Kenya Land and Freedom Army
+	id = MAF.700
+	title = MAF.700.t
+	desc = MAF.700.d
+	trigger = {
+		NOT = {
+			has_global_flag = MAF_collapsed #Mau-mau would not revolt against Kenya? Eh. If you survive to 1952 have fun tho.
+		}
+	}
+
+	immediate = {
+		log = "[getdatetext]: [root.getname]: event MAF.700 from = [from.getname]"
+		hidden_effect = {
+			country_event = {
+				id = MAF.701
+				days = 180
+				random_days = 60
+			}
+		}
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #This is not ideal
+		name = MAF.700.a 
+		#Kenya
+		set_temp_variable = { temp_region = 8 }
+		set_temp_variable = { temp_value = 2 }
+		MAF_modify_insurgency_level = yes
+		set_variable = {
+			MAF_mau_mau_trigger_var = 360
+		}
+		divide_variable = { MAF_mau_mau_trigger_var = 9.MAF_insurgency_level }
+	}
+}
+
+country_event = {  # Increasing Hostilities in Kenya by the KLFA
+	id = MAF.701
+	title = MAF.701.t
+	desc = MAF.701.d
+	immediate = { log = "[getdatetext]: [root.getname]: event MAF.701 from = [from.getname]" }
+	is_triggered_only = yes
+	
+	option = { #This is not ideal
+		name = MAF.701.a 
+		#Kenya
+		set_temp_variable = { temp_region = 8 }
+		set_temp_variable = { temp_value = 1 }
+		MAF_modify_insurgency_level = yes
+		if = {
+			limit = {
+				check_variable = {
+					9.MAF_insurgency_level < 4
+				}
+			}
+			set_variable = {
+				MAF_mau_mau_trigger_var = 540
+			}
+			divide_variable = { MAF_mau_mau_trigger_var = 9.MAF_insurgency_level }
+			hidden_effect = {
+				country_event = {
+					id = MAF.701
+					days = MAF_mau_mau_trigger_var
+				}
+			}
+		}
+		else = {
+			hidden_effect = {
+				country_event = {
+					id = MAF.702
+					days = 30
+					random_days = 10
+				}
+			}
+		}
+	}
+}
+
+country_event = {  #German woman stabbed to death in Thika
+	id = MAF.702
+	title = MAF.702.t
+	desc = MAF.702.d
+	immediate = {
+		log = "[getdatetext]: [root.getname]: event MAF.702 from = [from.getname]"
+		hidden_effect = {
+			country_event = {
+				id = MAF.703
+				days = 18
+				random_days = 8
+			}
+		}
+	}
+	is_triggered_only = yes
+	
+	option = { #Oh no, anyway
+		name = MAF.702.a 
+		#Kenya
+		set_temp_variable = { temp_region = 8 }
+		set_temp_variable = { temp_value = 1 }
+		MAF_modify_insurgency_level = yes
+	}
+}
+
+country_event = {  #Senior Chief Waruhiu shot!
+	id = MAF.703
+	title = MAF.703.t
+	desc = MAF.703.d
+	immediate = {
+		log = "[getdatetext]: [root.getname]: event MAF.703 from = [from.getname]"
+		hidden_effect = {
+			country_event = {
+				id = MAF.704
+				days = 18
+				random_days = 8
+			}
+		}
+	}
+	is_triggered_only = yes
+	
+	option = { #Declare a state of emergency!
+		name = MAF.703.a 
+		#TODO Africa set level to 7 here
+	}
+}
+
+country_event = {  #Try and assassinate Dedan Kimathi
+	id = MAF.704
+	title = MAF.704.t
+	desc = MAF.704.d
+	immediate = { log = "[getdatetext]: [root.getname]: event MAF.704 from = [from.getname]" }
+
+	is_triggered_only = yes
+	
+	option = { #We must go through with it
+		name = MAF.704.a 
+		hidden_effect = {
+			country_event = {
+				id = MAF.705
+				days = 14
+				random_days = 5
+			}
+		}
+	}
+	option = { #Suppress them without cowardly tactics
+		name = MAF.704.b 
+		hidden_effect = {
+			country_event = {
+				id = MAF.708
+				days = 30
+				random_days = 8
+			}
+		}
+	}
+}
+
+country_event = {  #Assassination Plan Presented to the Governor of Kenya
+	id = MAF.705
+	title = MAF.705.t
+	desc = MAF.705.d
+	immediate = { log = "[getdatetext]: [root.getname]: event MAF.705 from = [from.getname]" }
+
+	is_triggered_only = yes
+	
+	option = { #We must go through with it
+		name = MAF.705.a 
+		hidden_effect = {
+			country_event = {
+				id = MAF.706
+				days = 10
+				random_days = 5
+			}
+		}
+	}
+}
+
+country_event = {  #The Assassination Succeeds!
+	id = MAF.706
+	title = MAF.706.t
+	desc = MAF.706.d
+	immediate = {
+		log = "[getdatetext]: [root.getname]: event MAF.706 from = [from.getname]"
+		hidden_effect = {
+			country_event = {
+				id = MAF.707
+				days = 20
+				random_days = 5
+			}
+			news_event = {
+				id = MAF_news.11
+				hours = 6
+			}
+		}
+	}
+	is_triggered_only = yes
+	
+	option = { #Excellent!
+		name = MAF.706.a 
+		
+	}
+}
+
+country_event = {  #Outrage from across the continent!
+	id = MAF.707
+	title = MAF.707.t
+	desc = MAF.707.d
+	immediate = { log = "[getdatetext]: [root.getname]: event MAF.707 from = [from.getname]" }
+
+	is_triggered_only = yes
+	
+	option = { 
+		name = MAF.707.a
+		#Ostafrika
+		set_temp_variable = { temp_region = 1 }
+		set_temp_variable = { temp_value = 1 }
+		MAF_modify_insurgency_level = yes
+
+		#Südwestafrika
+		set_temp_variable = { temp_region = 2 }
+		set_temp_variable = { temp_value = 1 }
+		MAF_modify_insurgency_level = yes
+
+		#Kamerun
+		set_temp_variable = { temp_region = 3 }
+		set_temp_variable = { temp_value = 1 }
+		MAF_modify_insurgency_level = yes
+
+		#Togo
+		set_temp_variable = { temp_region = 4 }
+		set_temp_variable = { temp_value = 1 }
+		MAF_modify_insurgency_level = yes
+
+		#Kongo
+		set_temp_variable = { temp_region = 5 }
+		set_temp_variable = { temp_value = 1 }
+		MAF_modify_insurgency_level = yes
+
+		#Madagaskar
+		set_temp_variable = { temp_region = 6 }
+		set_temp_variable = { temp_value = 1 }
+		MAF_modify_insurgency_level = yes
+
+		#Gabun
+		set_temp_variable = { temp_region = 7 }
+		set_temp_variable = { temp_value = 1 }
+		MAF_modify_insurgency_level = yes
+
+		#Kenya
+		set_temp_variable = { temp_region = 8 }
+		set_temp_variable = { temp_value = 1 }
+		MAF_modify_insurgency_level = yes
+
+		#Nigeria
+		set_temp_variable = { temp_region = 9 }
+		set_temp_variable = { temp_value = 1 }
+		MAF_modify_insurgency_level = yes
+
+		#Gold Coast
+		set_temp_variable = { temp_region = 10 }
+		set_temp_variable = { temp_value = 1 }
+		MAF_modify_insurgency_level = yes
+
+		#Northern Rhodesia
+		set_temp_variable = { temp_region = 11 }
+		set_temp_variable = { temp_value = 1 }
+		MAF_modify_insurgency_level = yes
+		
+		#Nyasaland
+		set_temp_variable = { temp_region = 12 }
+		set_temp_variable = { temp_value = 1 }
+		MAF_modify_insurgency_level = yes
+
+		#Uganda
+		set_temp_variable = { temp_region = 13 }
+		set_temp_variable = { temp_value = 1 }
+		MAF_modify_insurgency_level = yes
+	}
+}
+
+country_event = {  #the Nairobi Garrison spreads out
+	id = MAF.708
+	title = MAF.708.t
+	desc = MAF.708.d
+	immediate = { log = "[getdatetext]: [root.getname]: event MAF.708 from = [from.getname]" }
+
+	immediate = {
+		hidden_effect = {
+			country_event = {
+				id = MAF.709
+				days = 20
+				random_days = 5
+			}
+		}
+	}
+	is_triggered_only = yes
+	
+	option = { #this will bring them to their knees
+		name = MAF.708.a 
+		
+	}
+}
+
+country_event = {  #The Lari Massacre
+	id = MAF.709
+	title = MAF.709.t
+	desc = MAF.709.d
+	immediate = { log = "[getdatetext]: [root.getname]: event MAF.709 from = [from.getname]" }
+
+	
+	is_triggered_only = yes
+	
+	option = { #This is an outrage!
+		name = MAF.709.a 
+		add_manpower = -500
+		hidden_effect = {
+			every_owned_state = {
+				limit = { is_core_of = KEN }
+				transfer_state_to = KEN
+			}
+			every_owned_state = {
+				limit = {
+					is_core_of = KEN
+				}
+				teleport_armies = {
+					limit = { tag = MAF }
+					to_state_array = owned_controlled_states
+				} 
+			}
+			KEN = {
+				load_oob = "KEN_mau_mau"
+				set_cosmetic_tag = KEN_revolt
+				set_politics = {
+					ruling_party = authoritarian_socialist
+					elections_allowed = no
+				}
+				add_ideas = {
+					KEN_Makhan_Singh_hog_aso
+				}
+			}	
+			news_event = {
+				id = MAF_news.11
+				hours = 6
+			}
+			transfer_state = 547
+		}
+		effect_tooltip = {
+			every_owned_state = {
+				limit = { is_core_of = KEN }
+				transfer_state_to = KEN
+			}
+		}
+		declare_war_on = {
+			target = KEN
+			type = annex_everything
+		}
+	}
+}
+
+##Namibia Events
+
+country_event = {  #Meeting with Governor Kirchheim
+	id = MAF.800
+	title = MAF.800.t
+	desc = MAF.800.d
+	immediate = { log = "[getdatetext]: [root.getname]: event MAF.800 from = [from.getname]" }
+
+	immediate = {
+		hidden_effect = {
+			country_event = {
+				id = MAF.801
+				days = 180
+			}
+		}
+	}
+	is_triggered_only = yes
+	
+	option = { 
+		name = MAF.800.a 
+		
+	}
+}
+
+country_event = {  #Elections to the Sudwestafrikan Landesrat
+	id = MAF.801
+	title = MAF.801.t
+	desc = MAF.801.d
+	immediate = { log = "[getdatetext]: [root.getname]: event MAF.801 from = [from.getname]" }
+
+	immediate = {
+		hidden_effect = {
+			country_event = {
+				id = MAF.802
+				days = 30
+			}
+		}
+	}
+	is_triggered_only = yes
+	
+	option = { 
+		name = MAF.801.a 
+		
+	}
+}
+
+country_event = {  #Strikes in Windhuk
+	id = MAF.802
+	title = MAF.802.t
+	desc = MAF.802.d
+	immediate = { log = "[getdatetext]: [root.getname]: event MAF.802 from = [from.getname]" }
+
+	immediate = {
+		hidden_effect = {
+			country_event = {
+				id = MAF.803
+				days = 90
+			}
+		}
+	}
+	is_triggered_only = yes
+	
+	option = { 
+		name = MAF.802.a 
+		#Südwestafrika
+		set_temp_variable = { temp_region = 2 }
+		set_temp_variable = { temp_value = 1 }
+		MAF_modify_insurgency_level = yes
+	}
+}
+
+country_event = {  #The Rossing Mine Nears Completion
+	id = MAF.803
+	title = MAF.803.t
+	desc = MAF.803.d
+	immediate = { log = "[getdatetext]: [root.getname]: event MAF.803 from = [from.getname]" }
+
+	immediate = {
+		hidden_effect = {
+			country_event = {
+				id = MAF.804
+				days = 30
+			}
+		}
+	}
+	is_triggered_only = yes
+	
+	option = { 
+		name = MAF.803.a 
+		
+	}
+}
+
+country_event = {  #Rossing is Open for Business
+	id = MAF.804
+	title = MAF.804.t
+	desc = MAF.804.d
+	immediate = { log = "[getdatetext]: [root.getname]: event MAF.804 from = [from.getname]" }
+
+	immediate = {
+		hidden_effect = {
+			GER = {
+				country_event = {
+					id = MAF.805
+					days = 1
+				}
+			}
+		}
+	}
+	is_triggered_only = yes
+	
+	option = { 
+		name = MAF.804.a 
+		set_country_flag = MAF_rossing_complete 
+		541 = {
+			add_resource = {
+				type = chromium
+				amount = 10
+			}
+			add_resource = {
+				type = tungsten
+				amount = 10
+			}
+		}
+	}
+}
+
+country_event = {  #Rossing is Open for Business
+	id = MAF.805
+	title = MAF.805.t
+	desc = MAF.805.d
+	immediate = { log = "[getdatetext]: [root.getname]: event MAF.805 from = [from.getname]" }
+
+	is_triggered_only = yes
+	
+	option = { 
+		name = MAF.805.a 
+
+	}
+}
+
+country_event = {  #Fallout from Rossing
+	id = MAF.806
+	title = MAF.806.t
+	desc = MAF.806.d
+	immediate = { log = "[getdatetext]: [root.getname]: event MAF.806 from = [from.getname]" }
+
+	is_triggered_only = yes
+	
+	option = { #Take Action
+		name = MAF.806.a 
+		#Südwestafrika
+		set_temp_variable = { temp_region = 2 }
+		set_temp_variable = { temp_value = 1 }
+		MAF_modify_insurgency_level = yes
+		country_event = {
+			id = MAF.807
+			days = 4
+		}
+	}
+	option = { #Keep Calm
+		name = MAF.806.b 
+		#Südwestafrika
+		set_temp_variable = { temp_region = 2 }
+		set_temp_variable = { temp_value = 1 }
+		MAF_modify_insurgency_level = yes
+		hidden_effect = {
+			country_event = {
+				id = MAF.808
+				days = 7
+			}
+		}
+	}
+}
+
+country_event = {  #Kirchheim Sacked!
+	id = MAF.807
+	title = MAF.807.t
+	desc = MAF.807.d
+	immediate = { 
+		log = "[getdatetext]: [root.getname]: event MAF.807 from = [from.getname]" 
+		hidden_effect = {
+			country_event = {
+				id = MAF.811
+				days = 30
+			}
+		}
+	}
+	
+
+	is_triggered_only = yes
+	
+	option = { #Unfortunate that it has come to this
+		name = MAF.807.a
+		remove_justice_minister = yes
+		hidden_effect = {
+			fill_empty_positions_with_vacant_positions = yes
+		}
+		#Südwestafrika
+		set_temp_variable = { temp_region = 2 }
+		set_temp_variable = { temp_value = -1 }
+		MAF_modify_insurgency_level = yes
+	}
+}
+
+country_event = {  #Protests in Windhuk
+	id = MAF.808
+	title = MAF.808.t
+	desc = MAF.808.d
+	immediate = { log = "[getdatetext]: [root.getname]: event MAF.808 from = [from.getname]" }
+	immediate = {
+		hidden_effect = {
+			country_event = {
+				id = MAF.809
+				days = 7
+			}
+		}
+	}
+	is_triggered_only = yes
+	
+	option = { #Unfortunate that it has come to this
+		name = MAF.808.a 
+		add_manpower = -250
+		add_political_power = -25
+	}
+}
+
+country_event = {  #Insurgent Activity on the Rise
+	id = MAF.809
+	title = MAF.809.t
+	desc = MAF.809.d
+	immediate = { log = "[getdatetext]: [root.getname]: event MAF.809 from = [from.getname]" }
+	immediate = {
+		hidden_effect = {
+			country_event = {
+				id = MAF.810
+				days = 14
+			}
+		}
+	}
+	is_triggered_only = yes
+	
+	option = { 
+		name = MAF.809.a 
+		#Südwestafrika
+		set_temp_variable = { temp_region = 2 }
+		set_temp_variable = { temp_value = 1 }
+		MAF_modify_insurgency_level = yes
+	}
+}
+
+country_event = {  #Kirchheim Resigns
+	id = MAF.810
+	title = MAF.810.t
+	desc = MAF.810.d
+	immediate = { 
+		log = "[getdatetext]: [root.getname]: event MAF.810 from = [from.getname]" 
+		hidden_effect = {
+			country_event = {
+				id = MAF.811
+				days = 30
+			}
+		}
+	}
+	is_triggered_only = yes
+	
+	option = { 
+		name = MAF.810.a 
+		remove_justice_minister = yes
+		hidden_effect = {
+			fill_empty_positions_with_vacant_positions = yes
+		}
+	}
+}
+
+country_event = {  #Cleaning House
+	id = MAF.811
+	title = MAF.811.t
+	desc = MAF.811.d
+	immediate = {
+		log = "[getdatetext]: [root.getname]: event MAF.811 from = [from.getname]"
+		hidden_effect = {
+			country_event = {
+				id = MAF.812
+				days = 30
+			}
+		}
+	}
+	is_triggered_only = yes
+	
+	option = { 
+		name = MAF.811.a 
+	}
+}
+
+country_event = {  #A New Sudwestafrika Governor
+	id = MAF.812
+	title = MAF.812.t
+	desc = MAF.812.d
+	immediate = {
+		log = "[getdatetext]: [root.getname]: event MAF.812 from = [from.getname]"
+		hidden_effect = {
+			country_event = {
+				id = MAF.832
+				days = 180
+			}
+			country_event = {
+				id = MAF.836
+				days = 360
+			}
+			country_event = {
+				id = MAF.829
+				days = 30
+			}
+
+			GER = {
+				country_event = {
+					id = MAF.814
+					days = 1
+				}
+			}
+			
+			country_event = {
+				id = MAF.815
+				days = 120
+				random_days = 12
+			}
+		}
+	}
+	is_triggered_only = yes
+	
+	option = { #Von Schwerin
+		name = MAF.812.a 
+		hidden_effect = {
+			remove_justice_minister = yes
+		}
+		add_ideas = MAF_hansbogislav_graf_von_schwerinlowitz_jm_s_pau
+
+		hidden_effect = {
+			country_event = {
+				id = MAF.815
+				days = 7
+			}
+		}
+	}
+}
+
+country_event = {  #The New Windhuk Administration
+	id = MAF.813
+	title = MAF.813.t
+	desc = MAF.813.d
+	immediate = {
+		log = "[getdatetext]: [root.getname]: event MAF.813 from = [from.getname]" 
+		hidden_effect = {
+			
+		}
+	}
+	is_triggered_only = yes
+	
+	option = { 
+		name = MAF.813.a 
+	}
+}
+
+country_event = {  #Hans von Schwerin Appointed in Windhuk
+	id = MAF.814
+	title = MAF.814.t
+	desc = MAF.814.d
+	immediate = { log = "[getdatetext]: [root.getname]: event MAF.814 from = [from.getname]" }
+	is_triggered_only = yes
+	
+	option = {
+		name = MAF.814.a 
+	}
+}
+
+country_event = {  #Political Reforms in Sudwestafrika (More Landesrat Involvement)
+	id = MAF.815
+	title = MAF.815.t
+	desc = MAF.815.d
+	immediate = { log = "[getdatetext]: [root.getname]: event MAF.815 from = [from.getname]" }
+	immediate = {
+		hidden_effect = {
+			country_event = {
+				id = MAF.816
+				days = 100
+				random_days = 10
+			}
+		}
+	}
+	is_triggered_only = yes
+	
+	option = { #
+		name = MAF.815.a 
+		#Südwestafrika
+		set_temp_variable = { temp_region = 2 }
+		set_temp_variable = { temp_value = -1 }
+		MAF_modify_insurgency_level = yes
+	}
+}
+
+country_event = {  #Use of Afrikaans Suppressed in Windhuk
+	id = MAF.816
+	title = MAF.816.t
+	desc = MAF.816.d
+	immediate = { log = "[getdatetext]: [root.getname]: event MAF.816 from = [from.getname]" }
+	immediate = {
+		hidden_effect = {
+			country_event = {
+				id = MAF.817
+				days = 180
+				random_days = 20
+			}
+		}
+	}
+	is_triggered_only = yes
+	
+	option = { #
+		name = MAF.816.a 
+		#Südwestafrika
+		set_temp_variable = { temp_region = 2 }
+		set_temp_variable = { temp_value = 1 }
+		MAF_modify_insurgency_level = yes
+	}
+}
+
+country_event = {  #All Quiet on the South Western Front
+	id = MAF.817
+	title = MAF.817.t
+	desc = MAF.817.d
+	immediate = { log = "[getdatetext]: [root.getname]: event MAF.817 from = [from.getname]" }
+	
+	is_triggered_only = yes
+	
+	option = { #
+		name = MAF.817.a 
+		#Südwestafrika
+		set_temp_variable = { temp_region = 2 }
+		set_temp_variable = { temp_value = -1 }
+		MAF_modify_insurgency_level = yes
+	}
+}
+
+country_event = {  #Fixing the Rossing Debacle
+	id = MAF.829
+	title = MAF.829.t
+	desc = MAF.829.d
+	immediate = { log = "[getdatetext]: [root.getname]: event MAF.829 from = [from.getname]" }
+
+
+	is_triggered_only = yes
+	
+	option = { #Cover it up
+		name = MAF.829.a 
+		hidden_effect = {
+			country_event = {
+				id = MAF.830
+				days = 45
+			}
+		}
+	}
+
+	option = { #Do something
+		name = MAF.829.b
+		hidden_effect = {
+			country_event = {
+				id = MAF.831
+				days = 30
+			}
+		}
+	}
+}
+
+country_event = {  #AAPM Furious at the Rossing Mines
+	id = MAF.830
+	title = MAF.830.t
+	desc = MAF.830.d
+	immediate = { log = "[getdatetext]: [root.getname]: event MAF.830 from = [from.getname]" }
+
+
+	is_triggered_only = yes
+	
+	option = { #
+		name = MAF.830.a 
+		#Südwestafrika
+		set_temp_variable = { temp_region = 2 }
+		set_temp_variable = { temp_value = 1 }
+		MAF_modify_insurgency_aapm_level = yes
+	}
+}
+
+country_event = {  #Uranium Production at Rossing Drops
+	id = MAF.831
+	title = MAF.831.t
+	desc = MAF.831.d
+	immediate = { log = "[getdatetext]: [root.getname]: event MAF.831 from = [from.getname]" }
+
+
+	is_triggered_only = yes
+	
+	option = { #
+		name = MAF.831.a 
+		add_to_variable = {
+			MAF_profit_var = -10
+			tooltip = MAF_profit_var_tt
+		}
+	}
+}
+
+country_event = {  #Dredging Operations in Port Luderitz
+	id = MAF.832
+	title = MAF.832.t
+	desc = MAF.832.d
+	immediate = { log = "[getdatetext]: [root.getname]: event MAF.832 from = [from.getname]" }
+	immediate = {
+		hidden_effect = {
+			country_event = {
+				id = MAF.833
+				days = 90
+			}
+		}
+	}
+
+	is_triggered_only = yes
+	
+	option = { #
+		name = MAF.832.a 
+		1004 = {
+			add_building_construction = {
+				type = naval_base
+				level = 2
+				province = 5154
+			}
+		}
+	}
+}
+
+country_event = {  #OMEG Expands the Sudwestafrikan Railway
+	id = MAF.833
+	title = MAF.833.t
+	desc = MAF.833.d
+	immediate = { log = "[getdatetext]: [root.getname]: event MAF.833 from = [from.getname]" }
+	immediate = {
+		hidden_effect = {
+			country_event = {
+				id = MAF.834
+				days = 180
+			}
+		}
+	}
+
+	is_triggered_only = yes
+	
+	option = { #
+		name = MAF.833.a 
+		build_railway = {
+			level = 1
+			start_province = 4879
+			target_province = 13307
+		}
+	}
+}
+
+country_event = {  #Forest Fires in Sudwestafrika
+	id = MAF.834
+	title = MAF.834.t
+	desc = MAF.834.d
+	immediate = { log = "[getdatetext]: [root.getname]: event MAF.834 from = [from.getname]" }
+	immediate = {
+		hidden_effect = {
+			country_event = {
+				id = MAF.835
+				days = 270
+			}
+		}
+	}
+
+	is_triggered_only = yes
+	
+	option = { #
+		name = MAF.834.a 
+		1003 = {
+			damage_building = {
+				type = infrastructure
+				damage = 0.5
+			}
+		}
+	}
+}
+
+country_event = {  #Caprivi Strip Infrastructure Expanded
+	id = MAF.835
+	title = MAF.835.t
+	desc = MAF.835.d
+	immediate = { log = "[getdatetext]: [root.getname]: event MAF.835 from = [from.getname]" }
+	
+	is_triggered_only = yes
+	
+	option = { #
+		name = MAF.835.a 
+		build_railway = {
+			level = 1
+			path = { 13307 12519 13306 13305 13217 }
+		}
+	}
+}
+
+country_event = {  #AAPM Meetings Broken Up
+	id = MAF.836
+	title = MAF.836.t
+	desc = MAF.836.d
+	immediate = { log = "[getdatetext]: [root.getname]: event MAF.836 from = [from.getname]" }
+	immediate = {
+		hidden_effect = {
+			country_event = {
+				id = MAF.837
+				days = 270
+			}
+		}
+	}
+
+	is_triggered_only = yes
+	
+	option = { 
+		name = MAF.836.a 
+		#Südwestafrika
+		set_temp_variable = { temp_region = 2 }
+		set_temp_variable = { temp_value = 1 }
+		MAF_modify_insurgency_level = yes
+	}
+}
+
+country_event = {  #Chief Hosea Kutako Arrested
+	id = MAF.837
+	title = MAF.837.t
+	desc = MAF.837.d
+	immediate = { log = "[getdatetext]: [root.getname]: event MAF.837 from = [from.getname]" }
+	immediate = {
+		hidden_effect = {
+			country_event = {
+				id = MAF.840
+				days = 270
+			}
+			GER = {
+				country_event = {
+					id = MAF.838
+					days = 14
+				}
+			}
+		}
+	}
+
+	is_triggered_only = yes
+	
+	option = { 
+		name = MAF.837.a 
+		#Südwestafrika
+		set_temp_variable = { temp_region = 2 }
+		set_temp_variable = { temp_value = 1 }
+		MAF_modify_insurgency_level = yes
+	}
+}
+
+country_event = {  #The Kutako Petition
+	id = MAF.838
+	title = MAF.838.t
+	desc = MAF.838.d
+	immediate = { log = "[getdatetext]: [root.getname]: event MAF.838 from = [from.getname]" }
+	immediate = {
+		hidden_effect = {
+			every_country = {
+				limit = {
+					is_in_or_aligned_with_accord = yes
+				}
+				country_event = {
+					id = MAF.839
+					days = 7
+				}
+			}
+		}
+	}
+
+	is_triggered_only = yes
+	
+	option = { 
+		name = MAF.838.a 
+		
+	}
+}
+
+country_event = {  #The Kutako Petition
+	id = MAF.839
+	title = MAF.839.t
+	desc = MAF.839.d
+	immediate = { log = "[getdatetext]: [root.getname]: event MAF.839 from = [from.getname]" }
+
+	is_triggered_only = yes
+	
+	option = { 
+		name = MAF.839.a 
+		
+	}
+}
+
+country_event = {  #Formation of the OVK
+	id = MAF.840
+	title = MAF.840.t
+	desc = MAF.840.d
+	immediate = { log = "[getdatetext]: [root.getname]: event MAF.840 from = [from.getname]" }
+	immediate = {
+		hidden_effect = {
+			country_event = {
+				id = MAF.841
+				days = 360
+			}
+		}
+	}
+
+	is_triggered_only = yes
+	
+	option = { 
+		name = MAF.840.a 
+		
+	}
+}
+
+country_event = {  #The OVK Reforms
+	id = MAF.841
+	title = MAF.841.t
+	desc = MAF.841.d
+	immediate = { log = "[getdatetext]: [root.getname]: event MAF.841 from = [from.getname]" }
+	immediate = {
+		hidden_effect = {
+			country_event = {
+				id = MAF.842
+				days = 90
+			}
+		}
+	}
+
+	is_triggered_only = yes
+	
+	option = { 
+		name = MAF.841.a 
+		
+	}
+}
+
+country_event = {  #Herero Students Form the SWASB
+	id = MAF.842
+	title = MAF.842.t
+	desc = MAF.842.d
+	immediate = { log = "[getdatetext]: [root.getname]: event MAF.842 from = [from.getname]" }
+	immediate = {
+		hidden_effect = {
+			ENT = {
+				country_event = {
+					id = MAF.843
+					days = 7
+				}
+			}
+		}
+	}
+
+	is_triggered_only = yes
+	
+	option = { 
+		name = MAF.842.a 
+		
+	}
+}
+
+country_event = {  #Herero Students Form the SWASB
+	id = MAF.843
+	title = MAF.843.t
+	desc = MAF.843.d
+	immediate = { log = "[getdatetext]: [root.getname]: event MAF.843 from = [from.getname]" }
+	
+
+	is_triggered_only = yes
+	
+	option = { #Fund the Herero Academics
+		name = MAF.843.a 
+		hidden_effect = {
+			MAF = {
+				country_event = {
+					id = MAF.845
+					days = 30
+				}
+			}
+		}
+	}
+	option = { #These Youthful Idiots will doom the Anti-German Cause
+		name = MAF.843.b 
+		hidden_effect = {
+			MAF = {
+				country_event = {
+					id = MAF.844
+					days = 30
+				}
+			}
+		}
+	}
+}
+
+country_event = {  #he SWASB Struggles to Make Headway
+	id = MAF.844
+	title = MAF.844.t
+	desc = MAF.844.d
+	immediate = { log = "[getdatetext]: [root.getname]: event MAF.844 from = [from.getname]" }
+	immediate = {
+		hidden_effect = {
+			country_event = {
+				id = MAF.846
+				days = 90
+			}
+		}
+	}
+
+	is_triggered_only = yes
+	
+	option = { #
+		name = MAF.844.a 
+		
+	}
+}
+
+country_event = {  #The Herero Radicalise Further
+	id = MAF.845
+	title = MAF.845.t
+	desc = MAF.845.d
+	immediate = { log = "[getdatetext]: [root.getname]: event MAF.845 from = [from.getname]" }
+	immediate = {
+		hidden_effect = {
+			country_event = {
+				id = MAF.846
+				days = 90
+			}
+		}
+	}
+
+	is_triggered_only = yes
+	
+	option = { #
+		name = MAF.845.a 
+		set_country_flag = MAF_radicalized_SWASB
+	}
+}
+
+country_event = {  #Formation of the SWANU
+	id = MAF.846
+	title = MAF.846.t
+	desc = MAF.846.d
+	immediate = { log = "[getdatetext]: [root.getname]: event MAF.846 from = [from.getname]" }
+	
+
+	is_triggered_only = yes
+	
+	option = { #
+		name = MAF.846.a 
+		if = {
+			limit = {
+				has_country_flag = MAF_radicalized_SWASB
+			}
+			#Südwestafrika
+			set_temp_variable = { temp_region = 2 }
+			set_temp_variable = { temp_value = 1 }
+			MAF_modify_insurgency_level = yes
+		}
+	}
+}
+
+
+#### MAF COLLAPSE EVENTS #### 
+
+country_event = {  # Fall of Dar-es-Salaam
+	id = MAF.1000
+	title = MAF.1000.t
+	desc = MAF.1000.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { # Africa has no masters
+		name = MAF.1000.a
+		MAF_aapm_total_ending = yes
+	}
+	option = { # Sudwestafrika
+		name = MAF.1000.b
+		hidden_effect = {
+			MAF_aapm_total_ending = yes
+		}
+		NAM = {
+			change_tag_from = ROOT
+		}
+	}
+	
+}
+
+country_event = {  # Free At Last
+	id = MAF.1001
+	title = MAF.1001.t
+	desc = MAF.1001.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = MAF.1001.a
+	}
+	
+}
+
+
+country_event = {  # End of Colonialism
+	id = MAF.1002
+	title = MAF.1002.t
+	desc = MAF.1002.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = MAF.1002.a
+	}
+	
+}
+
+
+country_event = {  # Seizing The Apparatus
+	id = MAF.1003
+	title = MAF.1003.t
+	desc = MAF.1003.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = MAF.1003.a
+	}
+	
+}
+
+country_event = {  # Bind the Continent
+	id = MAF.1004
+	title = MAF.1004.t
+	desc = MAF.1004.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = MAF.1004.a
+	}
+	
+}
+
+country_event = {  # continental Congress
+	id = MAF.1005
+	title = MAF.1005.t
+	desc = MAF.1005.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = MAF.1005.a
+	}
+	
+}
+
+country_event = {	#Thyssen Goes on Tour!
+	id = MAF.1006
+	title = MAF.1006.t
+	desc = MAF.1006.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {	#ConBureau Supports
+		name = MAF.1006.a
+		MAF_appease_bureau_small = yes
+		hidden_effect = {
+			set_country_flag = thyssen_on_tour
+		}
+	}
+	option = {	#Pragmatist Supports
+		name = MAF.1006.b
+		MAF_appease_prag_small = yes
+		hidden_effect = {
+			set_country_flag = thyssen_on_tour
+		}
+	}
+}
+
+country_event = {	#Tour: Sudwestafrika: A Model Colony?
+	id = MAF.1007
+	title = MAF.1007.t
+	desc = MAF.1007.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {	#Yes... absolutely.
+		name = MAF.1007.a
+		add_stability = -0.05
+		add_to_variable = {
+			MAF_resistance_var = 5
+			tooltip = MAF_resistance_var_tt
+		}
+	}
+	option = {	#No, this needs repairing!
+		name = MAF.1007.b
+		add_political_power = -50
+		
+	}
+}
+
+country_event = {	#Tour: An Example Set?
+	id = MAF.1008
+	title = MAF.1008.t
+	desc = MAF.1008.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {	#Berliner Support
+		name = MAF.1008.a
+		MAF_appease_berliner_small = yes
+	}
+	option = {	#Interventionist Support
+		name = MAF.1008.b
+		MAF_appease_interven_small = yes
+	}
+	option = {	#Let us lower corruption
+		name = MAF.1008.c
+		add_to_variable = {
+			MAF_corruption_var = 5
+			tooltip = MAF_corruption_var_tt
+		}
+	}
+}
+
+country_event = {	#Tour: Power Projection?
+	id = MAF.1009
+	title = MAF.1009.t
+	desc = MAF.1009.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {	#Increase the garrisons here.
+		name = MAF.1009.a
+		add_to_variable = {
+			MAF_garrison_var = 5
+			tooltip = MAF_garrison_var_tt
+		}
+	}
+	option = {	#Sir; if we lower garrisons resistance will be lowered.
+		name = MAF.1009.b
+		add_to_variable = {
+			MAF_garrison_var = -5
+			tooltip = MAF_garrison_var_tt
+		}
+		add_to_variable = {
+			MAF_resistance_var = -5
+			tooltip = MAF_resistance_var_tt
+		}
+	}
+}
+
+country_event = {	#Tour: Together for Africa?
+	id = MAF.1010
+	title = MAF.1010.t
+	desc = MAF.1010.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {	#Focus on settler loyalty.
+		name = MAF.1010.a
+		add_to_variable = {
+			MAF_settler_var = 5
+			tooltip = MAF_settler_var_tt
+		}
+	}
+	option = {	#The Hardliners's approval is key.
+		name = MAF.1010.b
+		MAF_appease_hardliner_small = yes
+	}
+}
+
+country_event = {	#Tour: Copper in Katanga
+	id = MAF.1011
+	title = MAF.1011.t
+	desc = MAF.1011.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {	#Let us mend native support.
+		name = MAF.1011.a
+		#Kongo
+		set_temp_variable = { temp_region = 5 }
+		set_temp_variable = { temp_value = -1 }
+		MAF_modify_insurgency_level = yes
+	}
+	option = {	#Give it to AdEA.
+		name = MAF.1011.b
+		MAF_appease_adea_small = yes
+	}
+}
+
+country_event = {	#Different Continent, Same Job
+	id = MAF.1012
+	title = MAF.1012.t
+	desc = MAF.1012.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = MAF.1012.a
+		add_to_variable = {
+			MAF_profit_var = 10
+			tooltip = MAF_profit_var_tt
+		}
+		#MAF_decrease_all_insurgency_by_1 = yes #this does not exist
+		MAF_appease_berliner_small = yes
+	}
+}
+
+country_event = {	#A New Crop
+	id = MAF.1013
+	title = MAF.1013.t
+	desc = MAF.1013.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = MAF.1013.a
+		add_to_variable = {
+			MAF_urban_var = 5
+			tooltip = MAF_urban_var_tt
+		}
+		MAF_appease_bureau_small = yes
+		MAF_appease_prag_small = yes
+	}
+}
+
+country_event = {	#Krupp at the Reigns
+	id = MAF.1014
+	title = MAF.1014.t
+	desc = MAF.1014.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = MAF.1014.a
+		MAF_appease_bureau_small = yes
+		MAF_appease_berliner_small = yes
+		MAF_appease_hardliner_small = yes
+		add_to_variable = {
+			MAF_urban_var = 5
+			tooltip = MAF_urban_var_tt
+		}
+		add_to_variable = {
+			MAF_rural_var = 5
+			tooltip = MAF_rural_var_tt
+		}
+		#MAF_increase_all_insurgency_by_1 = yes #this does not exist
+		#TODO decrease protectorate loyalty
+		add_to_variable = {
+			MAF_resistance_var = 5
+			tooltip = MAF_resistance_var_tt
+		}
+	}
+}
+
+country_event = {	#Another Damn Debate
+	id = MAF.1015
+	title = MAF.1015.t
+	desc = MAF.1015.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #We ain't giving into Krupp
+		name = MAF.1015.a
+		effect_tooltip = {
+			unlock_national_focus = MAF_new_native_roles
+		}
+		hidden_effect = {
+			set_country_flag = MAF_new_native_roles_unlocked
+		} 
+	}
+	
+	option = {#What could go wrong?
+		name = MAF.1015.b
+		effect_tooltip = {
+			unlock_national_focus = MAF_bureaucratic_consolidation
+		}
+		hidden_effect = {
+			set_country_flag = MAF_bureaucratic_consolidation_unlocked
+		}
+	}
+}
+
+country_event = {	#Protests Over New Rules
+	id = MAF.1016
+	title = MAF.1016.t
+	desc = MAF.1016.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #Continue implementing the rules.
+		name = MAF.1016.a
+		MAF_anger_bureau_small = yes
+		MAF_anger_berliner_small = yes
+		MAF_anger_interven_small = yes
+		MAF_anger_adea_small = yes
+		MAF_anger_hardliner_small = yes
+		add_timed_idea = {
+			idea = MAF_administration_outraged
+			days = 180
+		}
+	}
+	
+	option = {#Stop the rules!
+		name = MAF.1016.b
+		hidden_effect = {
+			set_country_flag = MAF_we_stop_native_rules
+		}
+	}
+}
+
+country_event = {	#Hippel's Long, Long List
+	id = MAF.1017
+	title = MAF.1017.t
+	desc = MAF.1017.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #Giving into Hippel's demands
+		name = MAF.1017.a
+		add_to_variable = {
+			MAF_profit_var = -10
+			tooltip = MAF_profit_var_tt
+		}
+		add_to_variable = {
+			MAF_garrison_var = 5
+			tooltip = MAF_garrison_var_tt
+		}
+	}
+	
+	option = {#Let's just ignore them both.
+		name = MAF.1017.b
+		MAF_anger_interven_small = yes
+		MAF_anger_bureau_small = yes
+	}
+	
+	option = {#Giving into Krupp's demand
+		name = MAF.1017.c
+		add_to_variable = {
+			MAF_garrison_var = -10
+			tooltip = MAF_garrison_var_tt
+		}
+		add_to_variable = {
+			MAF_profit_var = 5
+			tooltip = MAF_profit_var_tt
+		}
+	}
+}
+
+country_event = {	#The Census
+	id = MAF.1018
+	title = MAF.1018.t
+	desc = MAF.1018.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = MAF.1018.a
+		add_political_power = 50
+		add_stability = 0.05
+		add_to_variable = {
+			MAF_bureaucracy_var = -15
+			tooltip = MAF_bureaucracy_var_tt
+		}
+
+		add_to_variable = {
+			MAF_economy_var = -20
+			tooltip = MAF_economy_var_tt
+		}
+	}
+}
+
+country_event = {	#Rewarding Loyalty
+	id = MAF.1019
+	title = MAF.1019.t
+	desc = MAF.1019.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #Trinket pensions
+		name = MAF.1019.a
+		add_to_variable = {
+			MAF_profit_var = -10
+			tooltip = MAF_profit_var_tt
+		}
+		add_to_variable = {
+			MAF_askari_var = 5
+			tooltip = MAF_askari_var_tt
+		}
+		add_to_variable = {
+			MAF_urban_var = 2
+			tooltip = MAF_urban_var_tt
+		}
+	}
+	
+	option = { #Decent pensions
+		name = MAF.1019.b
+		add_to_variable = {
+			MAF_profit_var = -15
+			tooltip = MAF_profit_var_tt
+		}
+		add_to_variable = {
+			MAF_askari_var = 10
+			tooltip = MAF_askari_var_tt
+		}
+		add_to_variable = {
+			MAF_urban_var = 5
+			tooltip = MAF_urban_var_tt
+		}
+		MAF_anger_berliner_small = yes
+	}
+}
+
+country_event = {	#A Healthy Colony
+	id = MAF.1020
+	title = MAF.1020.t
+	desc = MAF.1020.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #Focusing on Rural Areas
+		name = MAF.1020.a
+		#TODO add protectorate loyalty
+		add_to_variable = {
+			MAF_rural_var = 5
+			tooltip = MAF_rural_var_tt
+		}
+	}
+	
+	option = { #Focusing on Urban Areas
+		name = MAF.1020.b
+		add_to_variable = {
+			MAF_urban_var = 5
+			tooltip = MAF_urban_var_tt
+		}
+	}
+}
+
+country_event = {	#Expanding the Protections Act
+	id = MAF.1021
+	title = MAF.1021.t
+	desc = MAF.1021.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = MAF.1021.a
+		#Kenya
+		set_temp_variable = { temp_region = 8 }
+		set_temp_variable = { temp_value = -1 }
+		MAF_modify_insurgency_aapm_level = yes
+		#Northern Rhodesia
+		set_temp_variable = { temp_region = 11 }
+		set_temp_variable = { temp_value = -1 }
+		MAF_modify_insurgency_aapm_level = yes
+		add_to_variable = {
+			MAF_askari_var = 20
+			tooltip = MAF_askari_var_tt
+		}
+		add_to_variable = {
+			MAF_corruption_var = 5
+			tooltip = MAF_corruption_var_tt
+		}
+		add_to_variable = {
+			MAF_settler_var = -10
+			tooltip = MAF_settler_var_tt
+		}
+		hidden_effect = {
+			country_event = {
+				id = MAF.1022
+				days = 5
+			}
+		}
+	}
+}
+
+country_event = {	#Backlash from Protections Act
+	id = MAF.1022
+	title = MAF.1022.t
+	desc = MAF.1022.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = MAF.1022.a
+		MAF_anger_interven_big = yes
+		MAF_anger_hardliner_big = yes
+		MAF_anger_adea_big = yes
+	}
+}
+
+country_event = {	#European Comforts
+	id = MAF.1023
+	title = MAF.1023.t
+	desc = MAF.1023.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = MAF.1023.a
+		add_to_variable = {
+			MAF_profit_var = -5
+			tooltip = MAF_profit_var_tt
+		}
+		add_to_variable = {
+			MAF_settler_var = 10
+			tooltip = MAF_settler_var_tt
+		}
+	}
+}
+
+country_event = {  # Appease the Accord
+	id = MAF.1024
+	title = MAF.1024.t
+	desc = MAF.1024.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = MAF.1024.a
+	}
+	
+}
+
+country_event = {  # Dagger in the other
+	id = MAF.1025
+	title = MAF.1025.t
+	desc = MAF.1025.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = MAF.1025.a
+	}
+	
+}
+
+country_event = { # Collapse of the French Colonial Empire
+	id = MAF.1100
+	title = MAF.1100.t
+	desc = MAF.1100.d
+	picture = GFX_ce_maf_troops
+
+	immediate = {
+		log = "[getdatetext]: [root.getname]: event MAF.1100 from = [from.getname]"
+	}
+
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	option = {
+		name = MAF.1100.a
+		#Gold Coast
+		set_temp_variable = { temp_region = 10 }
+		set_temp_variable = { temp_value = 2 }
+		MAF_modify_insurgency_level = yes 
+
+		set_temp_variable = { temp_region = 10 }
+		set_temp_variable = { temp_value = 1 }
+		MAF_modify_insurgency_aapm_level = yes
+
+		#Togo
+		set_temp_variable = { temp_region = 4 }
+		set_temp_variable = { temp_value = 3 }
+		MAF_modify_insurgency_level = yes
+
+		set_temp_variable = { temp_region = 4 }
+		set_temp_variable = { temp_value = 2 }
+		MAF_modify_insurgency_aapm_level = yes
+
+		#Nigeria
+		set_temp_variable = { temp_region = 9 }
+		set_temp_variable = { temp_value = 2 }
+		MAF_modify_insurgency_level = yes
+
+		set_temp_variable = { temp_region = 9 }
+		set_temp_variable = { temp_value = 1 }
+		MAF_modify_insurgency_aapm_level = yes
+
+		#Kamerun
+		set_temp_variable = { temp_region = 3 }
+		set_temp_variable = { temp_value = 1 }
+		MAF_modify_insurgency_level = yes
+
+		set_temp_variable = { temp_region = 3 }
+		set_temp_variable = { temp_value = 1 }
+		MAF_modify_insurgency_aapm_level = yes
+
+		add_to_variable = {
+			MAF_bureaucracy_change_var = -0.5
+			tooltip = MAF_bureaucracy_change_var_tt
+		}
+	}
+}
+
+country_event = { #SAF, MAF asks if they want to help suppress africans in Nothern Rhodesia and Nyasaland
+	id = MAF.1101
+	title = MAF.1101.t
+	desc = MAF.1101.d
+	picture = GFX_ce_maf_generic_map
+
+	immediate = {
+		log = "[getdatetext]: [root.getname]: event MAF.1100 from = [from.getname]"
+	}
+
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	option = {
+		name = MAF.1101.a
+		ai_chance = {
+			base = 90
+		}
+		hidden_effect = {
+			MAF = {
+				country_event = {
+					id = MAF.1102
+					days = 10
+				}
+			}
+			GER = {
+				country_event = {
+					id = MAF.1104
+					days = 25
+				}
+			}
+			news_event = {
+				id = MAF_news.18
+				days = 20
+			}
+		}
+	}
+
+	option = {
+		name = MAF.1101.b
+		ai_chance = {
+			base = 10
+		}
+		MAF = {
+			country_event = {
+				id = MAF.1103
+				days = 10
+			}
+		}
+	}
+}
+
+country_event = { #MAF, SAF has accepted and will move into 
+	id = MAF.1102
+	title = MAF.1102.t
+	desc = MAF.1102.d
+	picture = GFX_ce_maf_generic_map
+
+	immediate = {
+		log = "[getdatetext]: [root.getname]: event MAF.1102 from = [from.getname]"
+	}
+
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	option = {
+		name = MAF.1102.a
+		set_country_flag = MAF_SAF_help_north_rhodesia_and_nyasaland
+		set_temp_variable = { temp_region = 11 }
+		MAF_disable_region = yes
+		set_temp_variable = { temp_region = 12 }
+		MAF_disable_region = yes 
+		custom_effect_tooltip = MAF_SAF_help_north_rhodesia_and_nyasaland_effect_tt
+		MAF_appease_realist_small = yes
+		MAF_anger_berliner_big = yes
+		770 = {
+			set_demilitarized_zone = yes
+		}
+		771 = {
+			set_demilitarized_zone = yes
+		}
+		1006 = {
+			set_demilitarized_zone = yes
+		}
+		1007 = {
+			set_demilitarized_zone = yes
+		}
+		1008 = {
+			set_demilitarized_zone = yes
+		}
+	}
+}
+
+country_event = { #MAF, SAF has rejected
+	id = MAF.1103
+	title = MAF.1103.t
+	desc = MAF.1103.d
+	picture = GFX_ce_maf_generic_map
+
+	immediate = {
+		log = "[getdatetext]: [root.getname]: event MAF.1103 from = [from.getname]"
+	}
+
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	option = {
+		name = MAF.1103.a
+	}
+}
+
+country_event = { #GER, MAF is letting the Accord occupy Northern Rhodesia and Nyasaland
+	id = MAF.1104
+	title = MAF.1104.t
+	desc = MAF.1104.d
+	picture = GFX_ce_maf_generic_map
+
+	immediate = {
+		log = "[getdatetext]: [root.getname]: event MAF.1104 from = [from.getname]"
+	}
+
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	option = {
+		name = MAF.1104.a
+		MAF = {
+			country_event = {
+				id = MAF.1105
+				days = 5
+			}
+		}
+	}
+}
+
+country_event = { #MAF, Berlin isnt happy about this
+	id = MAF.1105
+	title = MAF.1105.t
+	desc = MAF.1105.d
+	picture = GFX_ce_maf_generic_map
+
+	immediate = {
+		log = "[getdatetext]: [root.getname]: event MAF.1105 from = [from.getname]"
+	}
+
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	option = {
+		name = MAF.1105.a
+		add_political_power = -150
+		MAF_anger_berliner_big = yes
+
+		add_to_variable = {
+			MAF_bureaucracy_var = -5
+			tooltip = MAF_bureaucracy_var_tt
+		}
+
+		country_event = {
+			id = MAF.1106
+			days = 15
+		}
+	}
+}
+
+country_event = { #MAF, Native Reactions
+	id = MAF.1106
+	title = MAF.1106.t
+	desc = MAF.1106.d
+	picture = GFX_ce_maf_generic_map
+
+	immediate = {
+		log = "[getdatetext]: [root.getname]: event MAF.1106 from = [from.getname]"
+	}
+
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	option = {
+		name = MAF.1106.a
+		set_temp_variable = {
+			temp_value = 2
+		}
+		MAF_change_AAPM_fervor = yes
+		hidden_effect = {
+			country_event = {
+				id = MAF.1107
+				days = 25
+			}
+		}
+	}
+}
+
+country_event = { #MAF, A freer hand
+	id = MAF.1107
+	title = MAF.1107.t
+	desc = MAF.1107.d
+	picture = GFX_ce_maf_generic_map
+
+	immediate = {
+		log = "[getdatetext]: [root.getname]: event MAF.1107 from = [from.getname]"
+	}
+
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	option = {
+		name = MAF.1107.a
+		add_equipment_to_stockpile = {
+			type = infantry_equipment
+			amount = 7500
+		}
+		add_to_variable = {
+			MAF_bureaucracy_var = 15
+			tooltip = MAF_bureaucracy_var_tt
+		}
+	}
+}
+
+country_event = { #Besieged on all fronts
+	id = MAF.1110
+	title = MAF.1110.t
+	desc = MAF.1110.d
+	picture = GFX_ce_maf_generic_map
+
+	immediate = {
+		log = "[getdatetext]: [root.getname]: event MAF.1110 from = [from.getname]"
+	}
+
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	option = {
+		name = MAF.1110.a
+		add_to_variable = {
+			MAF_bureaucracy_change_var = -0.5
+			tooltip = MAF_bureaucracy_change_var_tt
+		}
+		add_to_variable = {
+			MAF_economy_change_var = -0.75
+			tooltip = MAF_economy_change_var_tt
+		}
+	}
+}
+
+#Unity/Fervor Events
+country_event = { # AAPM stronghold in State
+	id = MAF.1111
+	title = MAF.1111.t
+	desc = MAF.1111.d
+	picture = GFX_ce_maf_west_region_map
+
+	immediate = {
+		log = "[getdatetext]: [root.getname]: event MAF.1111 from = [from.getname]"
+	}
+
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	option = {
+		name = MAF.1111.a #So close to the Accord
+		set_temp_variable = { temp_region = 10 }
+		set_temp_variable = { temp_value = 3 }
+		MAF_modify_insurgency_aapm_level = yes
+		
+		set_temp_variable = { temp_region = 10 }
+		set_temp_variable = { temp_value = 4 }
+		MAF_modify_insurgency_level = yes
+
+		set_temp_variable = { temp_value = 1 }
+		MAF_change_AAPM_unity = yes
+	}
+}
+
+country_event = { #Bribe insurgent milita
+	id = MAF.1112
+	title = MAF.1112.t
+	desc = MAF.1112.d
+	picture = GFX_ce_maf_ost_map
+
+	immediate = {
+		log = "[getdatetext]: [root.getname]: event MAF.1112 from = [from.getname]"
+	}
+
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	option = { #This should keep them at bay
+		name = MAF.1112.a
+		set_temp_variable = { temp_value = -1 }
+		MAF_change_AAPM_fervor = yes
+		add_manpower = 1000
+		add_political_power = -100
+		MAF_appease_prag_small = yes
+
+		hidden_effect = {
+			country_event = {
+				id = MAF.113
+				days = 90
+			}
+		}
+	}
+
+	option = { #Use the money elsewhere
+		name = MAF.1112.b
+		add_equipment_to_stockpile = {
+			type = infantry_equipment
+			amount = 500
+		}
+		add_political_power = 50
+		MAF_appease_bureau_small = yes
+
+		hidden_effect = {
+			country_event = {
+				id = MAF.113
+				days = 90
+			}
+		}
+	}
+}
+
+country_event = { #Protectorate Concern
+	id = MAF.1113
+	title = MAF.1113.t
+	desc = MAF.1113.d
+	picture = GFX_ce_fire
+
+	immediate = {
+		log = "[getdatetext]: [root.getname]: event MAF.1113 from = [from.getname]"
+	}
+
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	option = { # Divide and Conquer
+		name = MAF.1113.a
+
+		set_temp_variable = { temp_value = -1 }
+		MAF_change_AAPM_unity = yes
+		add_political_power = -75
+		add_popularity = {
+			ideology = revolutionary_republican
+			popularity = 0.05
+		}
+		MAF_appease_prag_small = yes
+		MAF_appease_bureau_small = yes
+		MAF_appease_realist_big = yes
+
+		hidden_effect = {
+			country_event = {
+				id = MAF.114
+				days = 90
+			}
+		}
+	}
+
+	option = { #They will only betray us in the end
+		name = MAF.1113.b
+		add_political_power = 100
+		add_popularity = {
+			ideology = social_democrat
+			popularity = 0.05
+		}
+		MAF_appease_interven_small = yes
+		MAF_appease_berliner_small = yes
+		MAF_anger_realist_big = yes
+
+		hidden_effect = {
+			country_event = {
+				id = MAF.114
+				days = 90
+			}
+		}
+	}
+}
+
+country_event = { #Vanguardist Milita
+	id = MAF.1114
+	title = MAF.1114.t
+	desc = MAF.1114.d
+	picture = GFX_ce_militas
+
+	immediate = {
+		log = "[getdatetext]: [root.getname]: event MAF.1114 from = [from.getname]"
+	}
+
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	option = { #Hunt Them down
+		name = MAF.1114.a
+		add_popularity = {
+			ideology = authoritarian_socialist
+			popularity = -0.05
+		}
+		set_temp_variable = { temp_value = -1 }
+		MAF_change_AAPM_fervor = yes
+		set_temp_variable = { temp_value = 1 }
+		MAF_change_AAPM_unity = yes
+		add_command_power = -10
+		add_manpower = -500
+		MAF_appease_interven_big = yes
+		MAF_appease_adea_big = yes
+
+		hidden_effect = {
+			country_event = {
+				id = MAF.115
+				days = 90
+			}
+		}
+	}
+
+	option = { #Totalists in the 20th Century?
+		name = MAF.1114.b
+		add_popularity = {
+			ideology = authoritarian_socialist
+			popularity = 0.05
+		}
+		set_temp_variable = { temp_value = -1 }
+		MAF_change_AAPM_unity = yes
+		set_temp_variable = { temp_value = 1 }
+		MAF_change_AAPM_fervor = yes
+		add_political_power = -50
+		add_stability = -0.10
+		MAF_anger_interven_big = yes
+
+		hidden_effect = {
+			country_event = {
+				id = MAF.115
+				days = 90
+			}
+		}
+	}
+}
+
+country_event = { # Factionalism in the AAPM
+	id = MAF.1115
+	title = MAF.1115.t
+	desc = MAF.1115.d
+	picture = GFX_ce_isle_of_mann
+
+	immediate = {
+		log = "[getdatetext]: [root.getname]: event MAF.1115 from = [from.getname]"
+	}
+
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	option = {
+		name = MAF.1115.a
+		add_popularity = {
+			ideology = authoritarian_socialist
+			popularity = 0.05
+		}
+		add_popularity = {
+			ideology = radical_socialist
+			popularity = 0.05
+		}
+		add_popularity = {
+			ideology = social_democrat
+			popularity = 0.05
+		}
+		set_temp_variable = { temp_value = -1 }
+		MAF_change_AAPM_unity = yes
+		add_political_power = -75
+		add_command_power = -20
+		MAF_appease_realist_big = yes
+
+		hidden_effect = {
+			country_event = {
+				id = MAF.116
+				days = 90
+			}
+		}
+	}
+
+	option = { #There are better uses of our reasources
+		name = MAF.1115.b
+		add_stability = 0.10
+		add_command_power = 15
+		MAF_appease_bureau_big = yes
+		MAF_appease_prag_big = yes
+		MAF_appease_interven_big = yes
+		MAF_appease_berliner_big = yes
+		MAF_appease_hardliner_big = yes
+
+		hidden_effect = {
+			country_event = {
+				id = MAF.117
+				days = 90
+			}
+		}
+	}
+}
+
+# Minister events
+
+#Rothhaupt resigns Hutting comes in
+country_event = {
+	id = MAF.2000
+	title = MAF.2000.t
+	desc = MAF.2000.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = MAF.2000.a
+		hidden_effect = {
+			remove_ideas_with_trait = foreign_minister_ostafrika
+		} 
+		add_ideas = MAF_Hans_Huttig_fm_o_ade
+	}
+}
+
+### INSURGENCY EVENTS ###
+# Ghana Attack Event
+country_event = {
+	id = MAF_rebels.1
+	immediate = { log = "[GetDateText]: [Root.GetName]: event MAF_rebels.1 FROM = [From.GetName]" }
+	title = MAF_rebels.1.t
+	desc = MAF_rebels.1.d
+
+	is_triggered_only = yes
+
+	trigger = {
+		check_variable = { 1.MAF_insurgency_damage = 1 }
+    }
+
+	immediate = {
+		hidden_effect = {
+			if = {
+				limit = {
+					check_variable = { 1.MAF_insurgency_level = 7 }
+				}
+				country_event = { id = MAF_rebels.1 days = 30 random_days = 10 }
+			}
+			else = {
+				country_event = { id = MAF_rebels.1 days = 15 random_days = 5 }
+			}
+		}
+	}
+
+	option = {
+		name = MAF_rebels.1.a
+		random_owned_state = {
+			limit = {
+				OR = {
+					state = 1078
+					state = 1079
+					state = 1080
+					state = 1081
+					state = 274
+				}
+			}
+			if = {
+				limit = {
+					arms_factory > 0
+				}
+				damage_building = {
+					type = arms_factory
+					damage = 1
+				}
+			}
+			else_if = {
+				limit = {
+					industrial_complex > 0
+				}
+				damage_building = {
+					type = industrial_complex
+					damage = 1
+				}
+			}
+			else = {
+				damage_building = {
+					type = infrastructure
+					damage = 1
+				}
+			}
+		}
+	}
+}
+
+country_event = {	#Togo level 3 event
+	id = MAF_rebels.2
+	immediate = { log = "[GetDateText]: [Root.GetName]: event MAF_rebels.2 FROM = [From.GetName]" }
+	title = MAF_rebels.2.t
+	desc = MAF_rebels.2.d
+
+	is_triggered_only = yes
+
+	trigger = {
+		check_variable = { 2.MAF_insurgency_damage = 1 }
+    }
+
+	immediate = {
+		hidden_effect = {
+			if = {
+				limit = {
+					check_variable = { 2.MAF_insurgency_level = 7 }
+				}
+				country_event = { id = MAF_rebels.2 days = 30 random_days = 10 }
+			}
+			else = {
+				country_event = { id = MAF_rebels.2 days = 15 random_days = 5 }
+			}
+		}
+	}
+	option = {
+		name = MAF_rebels.2.a
+		random_owned_state = {
+			limit = {
+				OR = {
+					state = 1077
+					state = 777
+				}
+			}
+			if = {
+				limit = {
+					arms_factory > 0
+				}
+				damage_building = {
+					type = arms_factory
+					damage = 1
+				}
+			}
+			else_if = {
+				limit = {
+					industrial_complex > 0
+				}
+				damage_building = {
+					type = industrial_complex
+					damage = 1
+				}
+			}
+			else = {
+				damage_building = {
+					type = infrastructure
+					damage = 1
+				}
+			}
+		}
+	}
+}
+
+country_event = {	#Dahomey level 3 event
+	id = MAF_rebels.3
+	immediate = { log = "[GetDateText]: [Root.GetName]: event MAF_rebels.3 FROM = [From.GetName]" }
+	title = MAF_rebels.3.t
+	desc = MAF_rebels.3.d
+
+	is_triggered_only = yes
+
+	trigger = {
+		check_variable = { 3.MAF_insurgency_damage = 1 }
+    }
+
+	immediate = {
+		hidden_effect = {
+			if = {
+				limit = {
+					check_variable = { 3.MAF_insurgency_level = 7 }
+				}
+				country_event = { id = MAF_rebels.3 days = 30 random_days = 10 }
+			}
+			else = {
+				country_event = { id = MAF_rebels.3 days = 15 random_days = 5 }
+			}
+		}
+	}
+	option = {
+		name = MAF_rebels.3.a
+		random_owned_state = {
+			limit = {
+				OR = {
+					state = 1076
+					state = 776
+				}
+			}
+			if = {
+				limit = {
+					arms_factory > 0
+				}
+				damage_building = {
+					type = arms_factory
+					damage = 1
+				}
+			}
+			else_if = {
+				limit = {
+					industrial_complex > 0
+				}
+				damage_building = {
+					type = industrial_complex
+					damage = 1
+				}
+			}
+			else = {
+				damage_building = {
+					type = infrastructure
+					damage = 1
+				}
+			}
+		}
+	}
+}
+
+country_event = {	#Nigeria level 3 event
+	id = MAF_rebels.4
+	immediate = { log = "[GetDateText]: [Root.GetName]: event MAF_rebels.4 FROM = [From.GetName]" }
+	title = MAF_rebels.4.t
+	desc = MAF_rebels.4.d
+
+	is_triggered_only = yes
+
+	trigger = {
+		check_variable = { 4.MAF_insurgency_damage = 1 }
+    }
+
+	immediate = {
+		hidden_effect = {
+			if = {
+				limit = {
+					check_variable = { 4.MAF_insurgency_level = 7 }
+				}
+				country_event = { id = MAF_rebels.4 days = 30 random_days = 10 }
+			}
+			else = {
+				country_event = { id = MAF_rebels.4 days = 15 random_days = 5 }
+			}
+		}
+	}
+	option = {
+		name = MAF_rebels.4.a
+		random_owned_state = {
+			limit = {
+				OR = {
+					state = 1075
+					state = 1074
+					state = 1073
+					state = 1072
+					state = 1071
+					state = 1070
+					state = 1069
+					state = 1068
+					state = 1067
+					state = 558
+				}
+			}
+			if = {
+				limit = {
+					arms_factory > 0
+				}
+				damage_building = {
+					type = arms_factory
+					damage = 1
+				}
+			}
+			else_if = {
+				limit = {
+					industrial_complex > 0
+				}
+				damage_building = {
+					type = industrial_complex
+					damage = 1
+				}
+			}
+			else = {
+				damage_building = {
+					type = infrastructure
+					damage = 1
+				}
+			}
+		}
+	}
+}
+
+country_event = {	#Congo level 3 event
+	id = MAF_rebels.5
+	immediate = { log = "[GetDateText]: [Root.GetName]: event MAF_rebels.5 FROM = [From.GetName]" }
+	title = MAF_rebels.5.t
+	desc = MAF_rebels.5.d
+
+	is_triggered_only = yes
+
+	trigger = {
+		check_variable = { 5.MAF_insurgency_damage = 1 }
+    }
+
+	immediate = {
+		hidden_effect = {
+			if = {
+				limit = {
+					check_variable = { 5.MAF_insurgency_level = 7 }
+				}
+				country_event = { id = MAF_rebels.5 days = 30 random_days = 10 }
+			}
+			else = {
+				country_event = { id = MAF_rebels.5 days = 15 random_days = 5 }
+			}
+		}
+	}
+	option = {
+		name = MAF_rebels.5.a
+		random_owned_state = {
+			limit = {
+				OR = {
+					state = 1028
+					state = 1029
+					state = 1030
+					state = 1031
+					state = 1032
+					state = 1033
+					state = 1034
+					state = 1035
+					state = 1036
+					state = 1037
+					state = 1038
+					state = 1039
+					state = 1040
+					state = 538
+					state = 718
+					state = 295
+				}
+			}
+			if = {
+				limit = {
+					arms_factory > 0
+				}
+				damage_building = {
+					type = arms_factory
+					damage = 1
+				}
+			}
+			else_if = {
+				limit = {
+					industrial_complex > 0
+				}
+				damage_building = {
+					type = industrial_complex
+					damage = 1
+				}
+			}
+			else = {
+				damage_building = {
+					type = infrastructure
+					damage = 1
+				}
+			}
+		}
+	}
+}
+
+country_event = {	#Cameroon level 3 event
+	id = MAF_rebels.6
+	immediate = { log = "[GetDateText]: [Root.GetName]: event MAF_rebels.6 FROM = [From.GetName]" }
+	title = MAF_rebels.6.t
+	desc = MAF_rebels.6.d
+
+	is_triggered_only = yes
+
+	trigger = {
+		check_variable = { 6.MAF_insurgency_damage = 1 }
+    }
+
+	immediate = {
+		hidden_effect = {
+			if = {
+				limit = {
+					check_variable = { 6.MAF_insurgency_level = 7 }
+				}
+				country_event = { id = MAF_rebels.6 days = 30 random_days = 10 }
+			}
+			else = {
+				country_event = { id = MAF_rebels.6 days = 15 random_days = 5 }
+			}
+		}
+	}
+	option = {
+		name = MAF_rebels.6.a
+		random_owned_state = {
+			limit = {
+				OR = {
+					state = 1056
+					state = 1057
+					state = 1058
+					state = 1059
+					state = 1060
+					state = 1061
+					state = 773
+
+				}
+			}
+			if = {
+				limit = {
+					arms_factory > 0
+				}
+				damage_building = {
+					type = arms_factory
+					damage = 1
+				}
+			}
+			else_if = {
+				limit = {
+					industrial_complex > 0
+				}
+				damage_building = {
+					type = industrial_complex
+					damage = 1
+				}
+			}
+			else = {
+				damage_building = {
+					type = infrastructure
+					damage = 1
+				}
+			}
+		}
+	}
+}
+
+country_event = {	#Chad level 3 event
+	id = MAF_rebels.7
+	immediate = { log = "[GetDateText]: [Root.GetName]: event MAF_rebels.7 FROM = [From.GetName]" }
+	title = MAF_rebels.7.t
+	desc = MAF_rebels.7.d
+
+	is_triggered_only = yes
+
+	trigger = {
+		check_variable = { 7.MAF_insurgency_damage = 1 }
+    }
+
+	immediate = {
+		hidden_effect = {
+			if = {
+				limit = {
+					check_variable = { 7.MAF_insurgency_level = 7 }
+				}
+				country_event = { id = MAF_rebels.7 days = 30 random_days = 10 }
+			}
+			else = {
+				country_event = { id = MAF_rebels.7 days = 15 random_days = 5 }
+			}
+		}
+	}
+	option = {
+		name = MAF_rebels.7.a
+		random_owned_state = {
+			limit = {
+				OR = {
+					state = 1062
+					state = 1063
+					state = 1064
+					state = 1065
+					state = 1066
+					state = 660
+					state = 774
+
+				}
+			}
+			if = {
+				limit = {
+					arms_factory > 0
+				}
+				damage_building = {
+					type = arms_factory
+					damage = 1
+				}
+			}
+			else_if = {
+				limit = {
+					industrial_complex > 0
+				}
+				damage_building = {
+					type = industrial_complex
+					damage = 1
+				}
+			}
+			else = {
+				damage_building = {
+					type = infrastructure
+					damage = 1
+				}
+			}
+		}
+	}
+}
+
+country_event = {	#Chad level 3 event
+	id = MAF_rebels.8
+	immediate = { log = "[GetDateText]: [Root.GetName]: event MAF_rebels.8 FROM = [From.GetName]" }
+	title = MAF_rebels.8.t
+	desc = MAF_rebels.8.d
+
+	is_triggered_only = yes
+
+	trigger = {
+		check_variable = { 8.MAF_insurgency_damage = 1 }
+    }
+
+	immediate = {
+		hidden_effect = {
+			if = {
+				limit = {
+					check_variable = { 8.MAF_insurgency_level = 7 }
+				}
+				country_event = { id = MAF_rebels.8 days = 30 random_days = 10 }
+			}
+			else = {
+				country_event = { id = MAF_rebels.8 days = 15 random_days = 5 }
+			}
+		}
+	}
+	option = {
+		name = MAF_rebels.8.a
+		random_owned_state = {
+			limit = {
+				OR = {
+					state = 1100
+					state = 1101
+					state = 772
+					state = 539
+
+				}
+			}
+			if = {
+				limit = {
+					arms_factory > 0
+				}
+				damage_building = {
+					type = arms_factory
+					damage = 1
+				}
+			}
+			else_if = {
+				limit = {
+					industrial_complex > 0
+				}
+				damage_building = {
+					type = industrial_complex
+					damage = 1
+				}
+			}
+			else = {
+				damage_building = {
+					type = infrastructure
+					damage = 1
+				}
+			}
+		}
+	}
+}
+
+country_event = {	#Kenya level 3 event
+	id = MAF_rebels.9
+	immediate = { log = "[GetDateText]: [Root.GetName]: event MAF_rebels.9 FROM = [From.GetName]" }
+	title = MAF_rebels.9.t
+	desc = MAF_rebels.9.d
+
+	is_triggered_only = yes
+
+	trigger = {
+		check_variable = { 9.MAF_insurgency_damage = 1 }
+    }
+
+	immediate = {
+		hidden_effect = {
+			if = {
+				limit = {
+					check_variable = { 9.MAF_insurgency_level = 7 }
+				}
+				country_event = { id = MAF_rebels.9 days = 30 random_days = 10 }
+			}
+			else = {
+				country_event = { id = MAF_rebels.9 days = 15 random_days = 5 }
+			}
+		}
+	}
+	option = {
+		name = MAF_rebels.9.a
+		random_owned_state = {
+			limit = {
+				OR = {
+					state = 547
+					state = 378
+					state = 1120
+					state = 1122
+					state = 1018
+					state = 1125
+					state = 1126
+					state = 1128
+
+				}
+			}
+			if = {
+				limit = {
+					arms_factory > 0
+				}
+				damage_building = {
+					type = arms_factory
+					damage = 1
+				}
+			}
+			else_if = {
+				limit = {
+					industrial_complex > 0
+				}
+				damage_building = {
+					type = industrial_complex
+					damage = 1
+				}
+			}
+			else = {
+				damage_building = {
+					type = infrastructure
+					damage = 1
+				}
+			}
+		}
+	}
+}
+country_event = {	#Tanganyika level 3 event
+	id = MAF_rebels.10
+	immediate = { log = "[GetDateText]: [Root.GetName]: event MAF_rebels.10 FROM = [From.GetName]" }
+	title = MAF_rebels.10.t
+	desc = MAF_rebels.10.d
+
+	is_triggered_only = yes
+
+	trigger = {
+		check_variable = { 11.MAF_insurgency_damage = 1 }
+    }
+
+	immediate = {
+		hidden_effect = {
+			if = {
+				limit = {
+					check_variable = { 10.MAF_insurgency_level = 7 }
+				}
+				country_event = { id = MAF_rebels.10 days = 30 random_days = 10 }
+			}
+			else = {
+				country_event = { id = MAF_rebels.10 days = 15 random_days = 5 }
+			}
+		}
+	}
+	option = {
+		name = MAF_rebels.10.a
+		random_owned_state = {
+			limit = {
+				OR = {
+					state = 1041
+					state = 1042
+					state = 1043
+					state = 1044
+					state = 1045
+					state = 1046
+					state = 1047
+					state = 1048
+					state = 546
+					
+
+				}
+			}
+			if = {
+				limit = {
+					arms_factory > 0
+				}
+				damage_building = {
+					type = arms_factory
+					damage = 1
+				}
+			}
+			else_if = {
+				limit = {
+					industrial_complex > 0
+				}
+				damage_building = {
+					type = industrial_complex
+					damage = 1
+				}
+			}
+			else = {
+				damage_building = {
+					type = infrastructure
+					damage = 1
+				}
+			}
+		}
+	}
+}
+
+country_event = {	#Rwanda level 3 event
+	id = MAF_rebels.11
+	immediate = { log = "[GetDateText]: [Root.GetName]: event MAF_rebels.11 FROM = [From.GetName]" }
+	title = MAF_rebels.11.t
+	desc = MAF_rebels.11.d
+
+	is_triggered_only = yes
+	trigger = {
+		check_variable = { 11.MAF_insurgency_damage = 1 }
+    }
+
+	immediate = {
+		hidden_effect = {
+			if = {
+				limit = {
+					check_variable = { 11.MAF_insurgency_level = 7 }
+				}
+				country_event = { id = MAF_rebels.11 days = 30 random_days = 10 }
+			}
+			else = {
+				country_event = { id = MAF_rebels.11 days = 15 random_days = 5 }
+			}
+		}
+	}
+	option = {
+		name = MAF_rebels.11.a
+		random_owned_state = {
+			limit = {
+				OR = {
+					state = 768
+					state = 769
+				}
+			}
+			if = {
+				limit = {
+					arms_factory > 0
+				}
+				damage_building = {
+					type = arms_factory
+					damage = 1
+				}
+			}
+			else_if = {
+				limit = {
+					industrial_complex > 0
+				}
+				damage_building = {
+					type = industrial_complex
+					damage = 1
+				}
+			}
+			else = {
+				damage_building = {
+					type = infrastructure
+					damage = 1
+				}
+			}
+		}
+	}
+}
+country_event = {	#Zambia level 3 event
+	id = MAF_rebels.12
+	immediate = { log = "[GetDateText]: [Root.GetName]: event MAF_rebels.12 FROM = [From.GetName]" }
+	title = MAF_rebels.12.t
+	desc = MAF_rebels.12.d
+
+	is_triggered_only = yes
+	trigger = {
+		check_variable = { 12.MAF_insurgency_damage = 1 }
+    }
+
+	immediate = {
+		hidden_effect = {
+			if = {
+				limit = {
+					check_variable = { 12.MAF_insurgency_level = 7 }
+				}
+				country_event = { id = MAF_rebels.12 days = 30 random_days = 10 }
+			}
+			else = {
+				country_event = { id = MAF_rebels.12 days = 15 random_days = 5 }
+			}
+		}
+	}
+	option = {
+		name = MAF_rebels.12.a
+		random_owned_state = {
+			limit = {
+				OR = {
+					state = 1006
+					state = 1007
+					state = 1008
+					state = 1009
+					state = 1010
+					state = 1011
+					state = 1012
+					state = 771
+					state = 770
+				}
+			}
+			if = {
+				limit = {
+					arms_factory > 0
+				}
+				damage_building = {
+					type = arms_factory
+					damage = 1
+				}
+			}
+			else_if = {
+				limit = {
+					industrial_complex > 0
+				}
+				damage_building = {
+					type = industrial_complex
+					damage = 1
+				}
+			}
+			else = {
+				damage_building = {
+					type = infrastructure
+					damage = 1
+				}
+			}
+		}
+	}
+}
+country_event = {	#Sudwest Afrika level 3 event
+	id = MAF_rebels.13
+	immediate = { log = "[GetDateText]: [Root.GetName]: event MAF_rebels.13 FROM = [From.GetName]" }
+	title = MAF_rebels.13.t
+	desc = MAF_rebels.13.d
+
+	is_triggered_only = yes
+	trigger = {
+		check_variable = { 13.MAF_insurgency_damage = 1 }
+    }
+
+	immediate = {
+		hidden_effect = {
+			if = {
+				limit = {
+					check_variable = { 13.MAF_insurgency_level = 7 }
+				}
+				country_event = { id = MAF_rebels.13 days = 30 random_days = 10 }
+			}
+			else = {
+				country_event = { id = MAF_rebels.13 days = 15 random_days = 5 }
+			}
+		}
+	}
+	option = {
+		name = MAF_rebels.13.a
+		random_owned_state = {
+			limit = {
+				OR = {
+					state = 1002
+					state = 1003
+					state = 1004
+					state = 541
+				}
+			}
+			if = {
+				limit = {
+					arms_factory > 0
+				}
+				damage_building = {
+					type = arms_factory
+					damage = 1
+				}
+			}
+			else_if = {
+				limit = {
+					industrial_complex > 0
+				}
+				damage_building = {
+					type = industrial_complex
+					damage = 1
+				}
+			}
+			else = {
+				damage_building = {
+					type = infrastructure
+					damage = 1
+				}
+			}
+		}
+	}
+}
+country_event = {	#Madagaskar level 3 event
+	id = MAF_rebels.14
+	immediate = { log = "[GetDateText]: [Root.GetName]: event MAF_rebels.14 FROM = [From.GetName]" }
+	title = MAF_rebels.14.t
+	desc = MAF_rebels.14.d
+
+	is_triggered_only = yes
+	trigger = {
+		check_variable = { 14.MAF_insurgency_damage = 1 }
+		MAF = {
+			owns_state = 543
+		}
+    }
+
+	immediate = {
+		hidden_effect = {
+			if = {
+				limit = {
+					check_variable = { 14.MAF_insurgency_level = 7 }
+				}
+				country_event = { id = MAF_rebels.14 days = 30 random_days = 10 }
+			}
+			else = {
+				country_event = { id = MAF_rebels.14 days = 15 random_days = 5 }
+			}
+		}
+	}
+	option = {
+		name = MAF_rebels.14.a
+		random_owned_state = {
+			limit = {
+				OR = {
+					state = 1091
+					state = 1092
+					state = 1093
+					state = 543
+				}
+			}
+			if = {
+				limit = {
+					arms_factory > 0
+				}
+				damage_building = {
+					type = arms_factory
+					damage = 1
+				}
+			}
+			else_if = {
+				limit = {
+					industrial_complex > 0
+				}
+				damage_building = {
+					type = industrial_complex
+					damage = 1
+				}
+			}
+			else = {
+				damage_building = {
+					type = infrastructure
+					damage = 1
+				}
+			}
+		}
+	}
+}
+
+#### MAF Conference Events ###
+
+country_event = { # Beginning of the End 
+	id = MAF_conference.1
+	title = MAF_conference.1.t
+	desc = MAF_conference.1.d 
+	#picture
+
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	option = {
+		name = MAF_conference.1.a
+		if = {
+			limit = {
+				check_variable = {
+					MAF_AAPM_unity > 7
+				}
+				check_variable = {
+					MAF_AAPM_fervor > 7
+				}
+			}
+			country_event = {
+				id = MAF_conference.2
+				days = 3
+			}
+		}
+		else = {
+			country_event = {
+				id = MAF_conference.3
+				days = 3
+			}
+		}
+	} 
+}
+
+country_event = { # The Reality of the Situation 
+	id = MAF_conference.2
+	title = MAF_conference.2.t
+	desc = MAF_conference.2.d 
+	#picture
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { # We must make peace with the AAPM
+		name = MAF_conference.2.a
+		if = {
+			limit = {
+				NOT = { 
+					MAF_joachim_von_ribbentrop = {
+						is_country_leader = yes
+					}
+				}
+			}
+		}
+		set_country_flag = MAF_conference_germany_weak
+		country_event = {
+			id = MAF_conference.3
+			days = 2
+		}
+	}
+	option = { # Germany must never surrender! 
+		name = MAF_conference.2.b
+		add_political_power = -200
+		hidden_effect = {
+			country_event = {
+				id = MAF.1000
+				days = 7
+			}
+		}
+	}
+}
+
+country_event = { # Peace Summit Proposed
+	id = MAF_conference.3
+	title = MAF_conference.3.t
+	desc = MAF_conference.3.d 
+	
+	is_triggered_only = yes
+	fire_only_once = yes 
+	
+	option = {
+		name = MAF_conference.3.a
+		if = {
+			limit = {
+				NOT = { 
+					MAF_joachim_von_ribbentrop = {
+						is_country_leader = yes
+					}
+				}
+				#has_country_flag = MAF_reformentrop
+			}
+			hidden_effect = {
+				country_event = {
+					id = MAF_conference.23
+					days = 30
+				}
+			}
+		}
+		else = {
+			hidden_effect = {
+				country_event = {
+					id = MAF_conference.4
+					days = 30
+				}
+			}
+		}
+	}
+}
+
+country_event = { # Peace Summit Begins
+	id = MAF_conference.4
+	title = MAF_conference.4.t
+	desc = MAF_conference.4.d 
+	
+	is_triggered_only = yes
+	fire_only_once = yes 
+	
+	option = {
+		name = MAF_conference.4.a
+		if = {
+			limit = {
+				check_variable = {
+					MAF_AAPM_fervor > 6
+				}
+				NOT = { 
+					MAF_theodor_von_hippel = {
+						is_country_leader = yes
+					}
+				}
+			}
+			hidden_effect = {
+				country_event = {
+					id = MAF_conference.5
+					days = 30
+				}
+			}
+		}
+		else_if  = {
+			limit = {
+				check_variable = {
+					MAF_AAPM_fervor < 6
+				}
+				NOT = { 
+					MAF_Alfried_Krupp = {
+						is_country_leader = yes
+					}
+				}
+			}
+			country_event = {
+				id = MAF_conference.17
+				days = 30
+			}
+		}
+		else = {
+			country_event = {
+				id = MAF_conference.29
+				days = 30
+			}
+		}
+	}
+}
+
+country_event = { # Rough Start to the Conference
+	id = MAF_conference.5
+	title = MAF_conference.5.t
+	desc = MAF_conference.5.d 
+	
+	is_triggered_only = yes
+	fire_only_once = yes 
+	
+	option = {
+		name = MAF_conference.5
+		if = {
+			limit = {
+				check_variable = {
+					MAF_AAPM_unity < 3
+				}
+			}
+			hidden_effect = {
+				country_event = {
+					id = MAF_conference.6
+					days = 5
+				}
+			}
+		}
+		else = {
+			hidden_effect = {
+				country_event = {
+					id = MAF_conference.11
+					days = 5
+				}
+			}
+		}
+	}
+}
+
+country_event = { # The AAPM has gaffes
+	id = MAF_conference.6
+	title = MAF_conference.6.t
+	desc = MAF_conference.6.d 
+	
+	is_triggered_only = yes
+	fire_only_once = yes 
+	
+	option = {
+		name = MAF_conference.6
+		hidden_effect = {
+			country_event = {
+				id = MAF_conference.7
+				days = 5
+			}
+		}
+	}
+}
+
+country_event = { # AAPM clearly disunited
+	id = MAF_conference.7
+	title = MAF_conference.7.t
+	desc = MAF_conference.7.d 
+	
+	is_triggered_only = yes
+	fire_only_once = yes 
+	
+	option = {
+		name = MAF_conference.7
+		hidden_effect = {
+			country_event = {
+				id = MAF_conference.8
+				days = 5
+			}
+		}
+	}
+}
+
+country_event = { #Radical AAPM factions walk out
+	id = MAF_conference.8
+	title = MAF_conference.8.t
+	desc = MAF_conference.8.d 
+	
+	is_triggered_only = yes
+	fire_only_once = yes 
+	
+	option = {
+		name = MAF_conference.8
+		hidden_effect = {
+			country_event = {
+				id = MAF_conference.9
+				days = 5
+			}
+		}
+	}
+}
+
+country_event = { #AAPM splinters!
+	id = MAF_conference.9
+	title = MAF_conference.9.t
+	desc = MAF_conference.9.d 
+	
+	is_triggered_only = yes
+	fire_only_once = yes 
+	
+	option = {
+		name = MAF_conference.9
+		hidden_effect = {
+			country_event = {
+				id = MAF_conference.10
+				days = 5
+			}
+		}
+	}
+}
+
+country_event = { #Chaos ending!
+	id = MAF_conference.10
+	title = MAF_conference.10.t
+	desc = MAF_conference.10.d 
+	
+	is_triggered_only = yes
+	fire_only_once = yes 
+	
+	option = {
+		name = MAF_conference.10
+		MAF_dynamic_ending = yes
+	}
+}
+
+country_event = { #German Delegation humiliated
+	id = MAF_conference.11
+	title = MAF_conference.11.t
+	desc = MAF_conference.11.d 
+	
+	is_triggered_only = yes
+	fire_only_once = yes 
+	
+	option = {
+		name = MAF_conference.11
+		hidden_effect = {
+			country_event = {
+				id = MAF_conference.12
+				days = 5
+			}
+		}
+	}
+}
+
+country_event = { #AAPM demands concessions in the core colonies
+	id = MAF_conference.12
+	title = MAF_conference.12.t
+	desc = MAF_conference.12.d 
+	
+	is_triggered_only = yes
+	fire_only_once = yes 
+	
+	option = {
+		name = MAF_conference.12
+		hidden_effect = {
+			if = {
+				limit = {
+					check_variable = {
+						MAF_AAPM_unity > 6
+					}
+				}
+				country_event = {
+					id = MAF_conference.13
+					days = 5
+				}
+			}
+			else = {
+				country_event = {
+					id = MAF_conference.15
+					days = 5
+				}
+			}
+		}
+	}
+}
+
+country_event = { #Germany loses some core colonies
+	id = MAF_conference.13
+	title = MAF_conference.13.t
+	desc = MAF_conference.13.d 
+	
+	is_triggered_only = yes
+	fire_only_once = yes 
+	
+	option = {
+		name = MAF_conference.13
+		hidden_effect = {
+			country_event = {
+				id = MAF_conference.14
+				days = 5
+			}
+		}
+	}
+}
+
+country_event = { #Potential Conflict
+	id = MAF_conference.14
+	title = MAF_conference.14.t
+	desc = MAF_conference.14.d 
+	
+	is_triggered_only = yes
+	fire_only_once = yes 
+	
+	option = {
+		name = MAF_conference.14
+		MAF_dynamic_ending = yes
+	}
+}
+
+country_event = { #Germany doesnt budge
+	id = MAF_conference.15
+	title = MAF_conference.15.t
+	desc = MAF_conference.15.d 
+	
+	is_triggered_only = yes
+	fire_only_once = yes 
+	
+	option = {
+		name = MAF_conference.15
+		hidden_effect = {
+			country_event = {
+				id = MAF_conference.16
+				days = 5
+			}
+		}
+	}
+}
+
+country_event = { #AAPM Hardliners dont budge on core colonies
+	id = MAF_conference.16
+	title = MAF_conference.16.t
+	desc = MAF_conference.16.d 
+	
+	is_triggered_only = yes
+	fire_only_once = yes 
+	
+	option = {
+		name = MAF_conference.16
+		MAF_aapm_ending_2 = yes
+	}
+}
+
+country_event = { #Difficult Start to the Conference
+	id = MAF_conference.17
+	title = MAF_conference.17.t
+	desc = MAF_conference.17.d 
+	
+	is_triggered_only = yes
+	fire_only_once = yes 
+	
+	option = {
+		name = MAF_conference.17
+		hidden_effect = {
+			if = {
+				limit = {
+					check_variable = {
+						MAF_AAPM_unity > 6
+					}
+				}
+				country_event = {
+					id = MAF_conference.18
+					days = 7
+				}
+			}	
+			else = {
+				country_event = {
+					id = MAF_conference.22
+					days = 5
+				}
+			}
+		}
+	}
+}
+
+country_event = { #AAPM Agrees to a tentative agreement on the core colonies
+	id = MAF_conference.18
+	title = MAF_conference.18.t
+	desc = MAF_conference.18.d 
+	
+	is_triggered_only = yes
+	fire_only_once = yes 
+	
+	option = {
+		name = MAF_conference.18
+		hidden_effect = {
+			if = {
+				limit = {
+					check_variable = {
+						MAF_AAPM_fervor < 4
+					}
+				}
+				country_event = {
+					id = MAF_conference.19
+					days = 7
+				}
+			}	
+			else = {
+				country_event = {
+					id = MAF_conference.20
+					days = 7
+				}
+			}
+		}
+	}
+}
+
+country_event = { #AAPM transitions into african union
+	id = MAF_conference.19
+	title = MAF_conference.19.t
+	desc = MAF_conference.19.d 
+	
+	is_triggered_only = yes
+	fire_only_once = yes 
+	
+	option = {
+		name = MAF_conference.19
+		MAF_aapm_ending_1 = yes
+	}
+}
+
+country_event = { #AAPM demands further concessions
+	id = MAF_conference.20
+	title = MAF_conference.20.t
+	desc = MAF_conference.20.d 
+	
+	is_triggered_only = yes
+	fire_only_once = yes 
+	
+	option = {
+		name = MAF_conference.20
+		hidden_effect = {
+			country_event = {
+				id = MAF_conference.21
+				days = 7
+			}
+		}
+	}
+}
+
+country_event = { #AAPM alliance remains in tact
+	id = MAF_conference.21
+	title = MAF_conference.21.t
+	desc = MAF_conference.21.d 
+	
+	is_triggered_only = yes
+	fire_only_once = yes 
+	
+	option = {
+		name = MAF_conference.21
+		MAF_aapm_ending_1 = yes
+	}
+}
+
+country_event = { #The Conference Agrees on Independence
+	id = MAF_conference.22
+	title = MAF_conference.22.t
+	desc = MAF_conference.22.d 
+	
+	is_triggered_only = yes
+	fire_only_once = yes 
+	
+	option = {
+		name = MAF_conference.22
+		hidden_effect = {
+			news_event = {
+				id = MAF_news.11
+				days = 1
+			}
+		}
+		MAF_german_victory_ending = yes
+	}
+}
+
+country_event = { #Rigged start to confrence
+	id = MAF_conference.23
+	title = MAF_conference.23.t
+	desc = MAF_conference.23.d 
+	
+	is_triggered_only = yes
+	fire_only_once = yes 
+	
+	option = {
+		name = MAF_conference.23
+		hidden_effect = {
+			country_event = {
+				id = MAF_conference.24
+				days = 7
+			}
+		}
+	}
+}
+
+country_event = { #Realist support check
+	id = MAF_conference.24
+	title = MAF_conference.24.t
+	desc = MAF_conference.24.d 
+	
+	is_triggered_only = yes
+	fire_only_once = yes 
+	
+	option = {
+		name = MAF_conference.24
+		if = {
+			limit = {
+				check_variable = {
+					maf_realist_approve > 75
+				}
+			}
+			hidden_effect = {
+				country_event = {
+					id = MAF_conference.25
+					days = 7
+				}
+			}
+		}
+		else = {
+			hidden_effect = {
+				country_event = {
+					id = MAF_conference.26
+					days = 7
+				}
+			}
+		}
+	}
+}
+
+country_event = { #Abetz Influence check
+	id = MAF_conference.25
+	title = MAF_conference.25.t
+	desc = MAF_conference.25.d 
+	
+	is_triggered_only = yes
+	fire_only_once = yes 
+	
+	option = {
+		name = MAF_conference.25
+		if= {
+			limit = {
+				check_variable = {
+					#maf_abetz_influence < 33
+				}
+			}
+			hidden_effect = {
+				country_event = {
+					id = MAF_conference.27
+					days = 7
+				}
+			}
+		}
+		else = {
+			hidden_effect = {
+				country_event = {
+					id = MAF_conference.26
+					days = 7
+				}
+			}
+		}
+	}
+}
+
+country_event = { #Confence fails
+	id = MAF_conference.26
+	title = MAF_conference.26.t
+	desc = MAF_conference.26.d 
+	
+	is_triggered_only = yes
+	fire_only_once = yes 
+	
+	option = {
+		name = MAF_conference.26
+		hidden_effect = {
+			country_event = {
+				id = MAF_conference.28
+				days = 7
+			}
+		}
+	}
+}
+
+country_event = { #Confence succsesful
+	id = MAF_conference.27
+	title = MAF_conference.27.t
+	desc = MAF_conference.27.d 
+	
+	is_triggered_only = yes
+	fire_only_once = yes 
+	
+	option = {
+		name = MAF_conference.27
+		hidden_effect = {
+			
+		}
+		MAF_dynamic_ending = yes
+	}
+}
+
+country_event = { #Abetz Coup's Ribbentrop
+	id = MAF_conference.28
+	title = MAF_conference.28.t
+	desc = MAF_conference.28.d 
+	#picture
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #The Dar-es-Salaam Massacre
+		name = MAF_conference.28.b
+		add_stability = -0.50
+		hidden_effect = {
+			country_event = {
+				id = MAF_conference.30
+				days = 7
+			}
+		}
+	}
+}
+
+country_event = { #Over Before it began
+	id = MAF_conference.29
+	title = MAF_conference.29.t
+	desc = MAF_conference.29.d 
+	#picture
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #The Dar-es-Salaam Massacre
+		name = MAF_conference.29.b
+		add_stability = -0.50
+		hidden_effect = {
+			country_event = {
+				id = MAF_conference.30
+				days = 7
+			}
+		}
+	}
+}
+
+country_event = { #The Governor Assasinated
+	id = MAF_conference.30
+	title = MAF_conference.30.t
+	desc = MAF_conference.30.d 
+	#picture
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #The Dar-es-Salaam Massacre
+		name = MAF_conference.30.b
+		add_political_power = -200
+		hidden_effect = {
+			country_event = {
+				id = MAF.1000
+				days = 7
+			}
+		}
+	}
+}
+
+
+
+
+#### MAF NEWS EVENTS ####
+
+news_event = { # VON HIPPEL GOVERNOR
+	id = MAF_news.1
+	title = MAF_news.1.t
+	desc = MAF_news.1.d
+	picture = GFX_MAF_Von_Hippel_Statthalter
+	
+	is_triggered_only = yes
+	major = yes
+
+	option = {
+		name = MAF_news.1.a
+	}
+}
+
+
+news_event = { # KRUPP GOVERNOR
+	id = MAF_news.2
+	title = MAF_news.2.t
+	desc = MAF_news.2.d
+	picture = GFX_MAF_Krupp_Statthalter
+	
+	is_triggered_only = yes
+	major = yes
+
+	option = {
+		name = MAF_news.2.a
+	}
+}
+
+news_event = { # RIBBENTROP GOVERNOR
+	id = MAF_news.3
+	title = MAF_news.3.t
+	desc = MAF_news.3.d
+	picture = GFX_MAF_Ribbentrop_Statthalter
+	
+	is_triggered_only = yes
+	major = yes
+
+	option = {
+		name = MAF_news.3.a
+	}
+}
+
+news_event = { # THE ROSSING DOSSIER
+	id = MAF_news.4
+	title = MAF_news.4.t
+	desc = MAF_news.4.d
+	picture = GFX_MAF_Rossing_Dossier
+	
+	is_triggered_only = yes
+	major = yes
+
+	option = {
+		name = MAF_news.4.a
+	}
+}
+
+news_event = { # AAPM FORMED
+	id = MAF_news.5
+	title = MAF_news.5.t
+	desc = MAF_news.5.d
+	picture = GFX_MAF_AAPM_Formed
+	
+	is_triggered_only = yes
+	major = yes
+
+	option = {
+		name = MAF_news.5.a
+		trigger = {
+			NOT = {
+				tag = GER 
+			}
+		}
+	}
+	option = {
+		name = MAF_news.5.b
+		trigger = {
+			tag = GER
+		}
+	}
+}
+
+news_event = { # AAPM TOTAL VICTORY
+	id = MAF_news.6
+	title = MAF_news.6.t
+	desc = MAF_news.6.d
+	picture = GFX_MAF_AAPM_Victory
+	
+	is_triggered_only = yes
+	major = yes
+
+	option = {
+		name = MAF_news.6.a
+	}
+}
+
+news_event = { # End of Mittelafrika - AAPM
+	id = MAF_news.7
+	title = MAF_news.7.t
+	desc = MAF_news.7.d
+	picture = GFX_MAF_AAPM_Victory
+	
+	is_triggered_only = yes
+	major = yes
+
+	option = {
+		name = MAF_news.7.a
+	}
+}
+
+news_event = { # End of Mittelafrika - Chaos
+	id = MAF_news.8
+	title = MAF_news.8.t
+	desc = MAF_news.8.d
+	picture = GFX_MAF_AAPM_Victory
+	
+	is_triggered_only = yes
+	major = yes
+
+	option = {
+		name = MAF_news.8.a
+	}
+}
+
+news_event = { # End of Mittelafrika - Reformentrop
+	id = MAF_news.9
+	title = MAF_news.9.t
+	desc = MAF_news.9.d
+	picture = GFX_MAF_AAPM_Victory
+	
+	is_triggered_only = yes
+	major = yes
+
+	option = {
+		name = MAF_news.9.a
+	}
+}
+
+news_event = { # End of Mittelafrika - German Leaning
+	id = MAF_news.10
+	title = MAF_news.10.t
+	desc = MAF_news.10.d
+	picture = GFX_MAF_AAPM_Victory
+	
+	is_triggered_only = yes
+	major = yes
+
+	option = {
+		name = MAF_news.10.a
+	}
+}
+
+news_event = { # The assassination of Dedan Kimathi
+	id = MAF_news.11
+	title = MAF_news.11.t
+	desc = MAF_news.11.d
+	picture = u
+	
+	is_triggered_only = yes
+	major = yes
+
+	option = {
+		name = MAF_news.11.a
+	}
+}
+
+news_event = { # The Mau Mau Revolt
+	id = MAF_news.12
+	title = MAF_news.12.t
+	desc = MAF_news.12.d
+	picture = u
+	
+	is_triggered_only = yes
+	major = yes
+
+	option = {
+		name = MAF_news.12.a
+	}
+}
+
+
+news_event = { # The Madagaskar Uprising
+	id = MAF_news.13
+	title = MAF_news.13.t
+	desc = MAF_news.13.d
+	picture = GFX_ne_MAF_Malagasy_Rebellion
+	
+	is_triggered_only = yes
+	major = yes
+
+	option = {
+		name = MAF_news.13.a
+	}
+}
+
+news_event = { # Failure in Madagaskar
+	id = MAF_news.14
+	title = MAF_news.14.t
+	desc = MAF_news.14.d
+	picture = GFX_ne_MAF_Generic_Rebellion
+	
+	is_triggered_only = yes
+	major = yes
+
+	option = {
+		name = MAF_news.14.a
+	}
+}
+
+news_event = { # Victory in Madagaskar
+	id = MAF_news.15
+	title = MAF_news.15.t
+	desc = MAF_news.15.d
+	picture = GFX_ne_MAF_Malagasy_Crushed
+	
+	is_triggered_only = yes
+	major = yes
+
+	option = {
+		name = MAF_news.15.a
+	}
+}
+
+country_event = { #Insurgents take state
+	id = MAF_insurgency.1
+	title = MAF_insurgency.1.t
+	desc = MAF_insurgency.1.d
+
+	immediate = {
+		hidden_effect = {
+			log = "[getdatetext]: [root.getname]: event MAF_insurgency.1 from = [from.getname]"
+			MAF_loose_state_variable_effect = yes
+		}
+	}
+
+	is_triggered_only = yes
+
+	option = {
+		name = MAF_insurgency.1.a
+		effect_tooltip = {
+			MAF_loose_state_variable_effect = yes
+		}
+		event_target:MAF_insugent_state = {
+			set_temp_variable = { temp_region = MAF_state_id  }
+		}
+		set_temp_variable = { temp_value = -1 }
+		MAF_modify_insurgency_aapm_level = yes
+	}
+}
+
+country_event = { #Insurgents fail to take state
+	id = MAF_insurgency.2
+	title = MAF_insurgency.2.t
+	desc = MAF_insurgency.2.d
+
+	immediate = {
+		log = "[getdatetext]: [root.getname]: event MAF_insurgency.2 from = [from.getname]"
+	}
+
+	is_triggered_only = yes
+
+	option = {
+		name = MAF_insurgency.2.a
+	}
+}
+
+country_event = { #Failed Counterattack 
+	id = MAF_insurgency.3
+	title = MAF_insurgency.3.t
+	desc = MAF_insurgency.3.d
+
+	immediate = {
+		log = "[getdatetext]: [root.getname]: event MAF_insurgency.3 from = [from.getname]"
+	}
+
+	is_triggered_only = yes
+
+	option = {
+		name = MAF_insurgency.3.a
+		event_target:MAF_insugent_state = {
+			set_temp_variable = { temp_region = MAF_state_id  }
+		}
+		set_temp_variable = { temp_value = -1 }
+		MAF_modify_insurgency_aapm_level = yes
+	}
+}
+
+country_event = { #Succsessfull Counterattack
+	id = MAF_insurgency.4
+	title = MAF_insurgency.4.t
+	desc = MAF_insurgency.4.d
+
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+			log = "[getdatetext]: [root.getname]: event MAF_insurgency.4 from = [from.getname]"
+			MAF_retake_state_variable_effect = yes
+		}
+	}
+
+	option = {
+		name = MAF_insurgency.4.a
+		add_days_mission_timeout = {
+			mission = MAF_insurgency_insurgents_making_a_move
+			days = 30
+		}
+		effect_tooltip = {
+			MAF_retake_state_variable_effect = yes
+		}
+		event_target:MAF_insugent_state = {
+			set_temp_variable = { temp_region = MAF_state_id  }
+		}
+		set_temp_variable = { temp_value = -1 }
+		MAF_modify_insurgency_aapm_level = yes
+		event_target:MAF_insugent_state = {
+			set_temp_variable = { temp_region = MAF_state_id  }
+		}
+		set_temp_variable = { temp_value = -1 }
+		MAF_modify_insurgency_level = yes
+	}
+}
+
+country_event = { #Insurgents rise up in state
+	id = MAF_insurgency.5
+	title = MAF_insurgency.5.t
+	desc = MAF_insurgency.5.d
+
+	is_triggered_only = yes
+
+	immediate = {
+		log = "[getdatetext]: [root.getname]: event MAF_insurgency.5 from = [from.getname]"
+		hidden_effect = {
+			event_target:MAF_insugent_state = {
+				MAF_insurgency_take_root_state = yes
+			}
+			MAF_loose_state_variable_effect = yes
+
+			add_to_variable = {
+				MAF_bureaucracy_change_var = -0.05
+				tooltip = MAF_bureaucracy_change_var_tt
+			}
+			set_temp_variable = { temp_value = 1 }
+			MAF_change_AAPM_unity = yes
+		}
+	}
+
+	option = {
+		name = MAF_insurgency.5.a
+		effect_tooltip = {
+			event_target:MAF_insugent_state = {
+				MAF_insurgency_take_root_state = yes
+			}
+			MAF_loose_state_variable_effect = yes
+
+			add_to_variable = {
+				MAF_bureaucracy_change_var = -0.05
+				tooltip = MAF_bureaucracy_change_var_tt
+			}
+			set_temp_variable = { temp_value = 1 }
+			MAF_change_AAPM_unity = yes
+		}
+	}
+}
+
+country_event = { # The end is nigh
+	id = MAF_collapse.1
+	title = MAF_collapse.1.t
+	desc = {
+		trigger = {
+			NOT = { has_country_flag = MAF_decolonisation_plan }
+		}
+		text = MAF_collapse.1.d1
+	}
+	desc = {
+		trigger = {
+			has_country_flag = MAF_decolonisation_plan
+		}
+		text = MAF_collapse.1.d2
+	}
+	picture = GFX_ce_maf_generic_map
+
+	immediate = {
+		log = "[getdatetext]: [root.getname]: event MAF_collapse.1 from = [from.getname]"
+	}
+
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	option = {
+		name = MAF_collapse.1.a
+		trigger = {
+			has_country_flag = MAF_decolonisation_plan
+		}
+
+		country_event = {
+			id = MAF_collapse.2
+			days = 110
+		}
+
+		GER = {
+			country_event = {
+				id = MAF_collapse.3
+			}
+		}
+
+		ai_chance = {
+			base = 100
+		}
+	}
+
+	option = {
+		name = MAF_collapse.1.b
+		trigger = {
+			NOT = { has_country_flag = MAF_decolonisation_plan }
+		}
+		hidden_effect = {
+			country_event = {
+				id = MAF_conference.1
+				days = 25
+			}
+			if = {
+				limit = { 
+					OR = {
+						1038 = {
+							MAF_state_is_controlled_by_insurgents = yes
+						}
+						AND = {
+							check_variable = {
+								MAF_AAPM_unity > 7
+							}
+							check_variable = {
+								MAF_AAPM_fervor > 7
+							}
+						}
+					}
+				}
+				country_event = {
+					id = MAF.1000
+					days = 15
+				}
+			}
+
+			else = {
+				country_event = {
+					id = MAF_collapse.4
+					days = 15
+				}
+			}
+		}
+	}
+}
+
+country_event = { # A classy withdrawl
+	id = MAF_collapse.2
+	title = MAF_collapse.2.t
+	desc = MAF_collapse.2.d
+	picture = GFX_ce_ger_air_transport
+
+	immediate = {
+		log = "[getdatetext]: [root.getname]: event MAF_collapse.2 from = [from.getname]"
+	}
+
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	option = {
+		name = MAF_collapse.2.a
+		MAF_dynamic_ending = yes
+		NAM = { change_tag_from = MAF }
+	}
+
+	option = {
+		name = MAF_collapse.2.b
+		MAF_dynamic_ending = yes
+		TNZ = { change_tag_from = MAF }
+	}
+}
+
+country_event = { # Germany is informed
+	id = MAF_collapse.3
+	title = MAF_collapse.3.t
+	desc = MAF_collapse.3.d
+	picture = GFX_ce_maf_generic_map
+
+	immediate = {
+		log = "[getdatetext]: [root.getname]: event MAF_collapse.3 from = [from.getname]"
+	}
+
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	option = {
+		name = MAF_collapse.3.a
+	}
+}
+
+country_event = { # Chaotic Withdrawal
+	id = MAF_collapse.4
+	title = MAF_collapse.4.t
+	desc = MAF_collapse.4.d
+	picture = GFX_ce_ger_air_transport
+
+	immediate = {
+		log = "[getdatetext]: [root.getname]: event MAF_collapse.4 from = [from.getname]"
+	}
+
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	option = {
+		name = MAF_collapse.4.a
+		MAF_dynamic_ending = yes
+	}
+}
+
+country_event = { #Pro German Congo CNR cessession 
+	id = MAF_post_content.1
+	title = MAF_post_content.1.t
+	desc = MAF_post_content.1.d
+
+	is_triggered_only = yes
+
+	immediate = {
+		log = "[getdatetext]: [root.getname]: event MAF_post_content.1 from = [from.getname]"
+	}
+
+	option = {
+		name = MAF_post_content.1.a
+		MAF_release_CNR_socdem = yes
+
+		declare_war_on = {
+			target = CNR
+			type = take_core_state
+		}
+
+		hidden_effect = {
+			country_event = {
+				id = MAF_post_content.2
+				days = 35
+			}
+		}
+	}
+}
+
+country_event = { #Congo Anti CNR war Movment
+	id = MAF_post_content.2
+	title = MAF_post_content.2.t
+	desc = MAF_post_content.2.d
+
+	is_triggered_only = yes
+
+	immediate = {
+		log = "[getdatetext]: [root.getname]: event MAF_post_content.2 from = [from.getname]"
+	}
+
+	option = {
+		name = MAF_post_content.2.a
+		add_popularity = {
+			ideology = revolutionary_republican
+			popularity = 0.05
+		}
+
+		add_popularity = {
+			ideology = social_democrat
+			popularity = 0.025
+		}
+
+		hidden_effect = {
+			country_event = {
+				id = MAF_post_content.3
+				days = 15
+			}
+		}
+	}
+}
+
+country_event = { #Pro German military Coup
+	id = MAF_post_content.3
+	title = MAF_post_content.3.t
+	desc = MAF_post_content.3.d
+
+	is_triggered_only = yes
+
+	immediate = {
+		log = "[getdatetext]: [root.getname]: event MAF_post_content.3 from = [from.getname]"
+	}
+
+	option = {
+		name = MAF_post_content.3.a
+		set_politics = {
+			ruling_party = authoritarian_democrat
+			elections_allowed = no
+		}
+		coal_add_soc_con = yes
+
+		increase_reichspakt_alignment = yes
+
+		hidden_effect = {
+			country_event = {
+				id = MAF_post_content.4
+				days = 50
+			}
+		}
+	}
+}
+
+country_event = { #AAPM government attacks
+	id = MAF_post_content.4
+	title = MAF_post_content.4.t
+	desc = MAF_post_content.4.d
+
+	is_triggered_only = yes
+
+	immediate = {
+		log = "[getdatetext]: [root.getname]: event MAF_post_content.4 from = [from.getname]"
+	}
+
+	option = {
+		name = MAF_post_content.4.a
+		create_dynamic_country = {
+			original_tag = COG
+			transfer_state = 1030
+			save_global_event_target_as = KRG_AAPM_congo
+		}
+	
+		COG = {
+			COG_Joseph_Ileo = {
+				set_nationality = COA
+			}
+		}
+		
+		COA = {
+			set_cosmetic_tag = COG_aapm
+	
+			set_popularities = {
+				authoritarian_socialist = 0
+				radical_socialist = 0
+				social_democrat = 0
+				revolutionary_republican = 42
+				social_liberal = 0
+				market_liberal = 29
+				social_conservative = 29
+				authoritarian_democrat = 0
+				paternal_autocrat = 0
+				national_populist = 0
+			}
+			set_politics = {
+				ruling_party = revolutionary_republican
+			}
+			set_temp_variable = { MAF_temp_spawn_unit_amount = 3 }
+			MAF_setup_aapm_aligned = yes
+		
+			transfer_state = 1032
+			transfer_state = 718
+			transfer_state = 1033
+			transfer_state = 1031
+			transfer_state = 1036
+			declare_war_on = {
+				target = COG
+				type = annex_everything
+			}
+	
+			COG_Joseph_Ileo = {
+				promote_character = yes
+			}
+		}
+
+		COG = {
+			transfer_units_fraction = {
+				target = COA
+				size = 0.6
+				stockpile_ratio = 0.6
+			}
+		}
+
+		news_event = {
+			id = MAF_news.16
+		}
+	}
+}
+
+country_event = { #Katanga Party 
+	id = MAF_post_content.5
+	title = MAF_post_content.5.t
+	desc = MAF_post_content.5.d
+
+	is_triggered_only = yes
+
+	immediate = {
+		log = "[getdatetext]: [root.getname]: event MAF_post_content.5 from = [from.getname]"
+	}
+
+	option = {
+		name = MAF_post_content.5.a
+		KTG = {
+			set_party_name = {
+				ideology = social_conservative
+				name = KTG_social_conservative_party_broke_free
+				long_name = KTG_social_conservative_party_broke_free_long
+			}
+
+			set_party_name = {
+				ideology = authoritarian_democrat
+				name = KTG_authoritarian_democrat_party_broke_free
+				long_name = KTG_authoritarian_democrat_party_broke_free_long
+			}
+		}
+
+		hidden_effect = {
+			country_event = {
+				id = MAF_post_content.6
+				days = 95
+			}
+		}
+	}
+}
+
+country_event = { #Katanga secedes 
+	id = MAF_post_content.6
+	title = MAF_post_content.6.t
+	desc = MAF_post_content.6.d
+
+	is_triggered_only = yes
+
+	immediate = {
+		log = "[getdatetext]: [root.getname]: event MAF_post_content.6 from = [from.getname]"
+	}
+
+	option = {
+		name = MAF_post_content.6.a
+		MAF_release_KTG_rp = yes
+		every_core_state = {
+			limit = {
+				is_core_of = KTG
+			}
+			remove_core_of = COG
+		}
+		add_stability = -0.1
+
+		hidden_effect = {
+			country_event = {
+				id = MAF_post_content.7
+				days = 95
+			}
+		}
+	}
+}
+
+country_event = { #Invading Katanga
+	id = MAF_post_content.7
+	title = MAF_post_content.7.t
+	desc = MAF_post_content.7.d
+
+	is_triggered_only = yes
+
+	immediate = {
+		log = "[getdatetext]: [root.getname]: event MAF_post_content.7 from = [from.getname]"
+	}
+
+	option = {
+		name = MAF_post_content.7.a
+		declare_war_on = {
+			target = KTG
+			type = take_core_state
+		}
+
+		KTG = {
+			country_event = {
+				id = MAF_post_content.8
+				days = 10
+			}
+		}
+		
+		CAN = {
+			country_event = {
+				id = MAF_post_content.9
+				days = 30
+				random_days = 20
+			}
+		}
+
+		NEE = {
+			country_event = {
+				id = MAF_post_content.9
+				days = 30
+				random_days = 20
+			}
+		}
+
+		NFA = {
+			country_event = {
+				id = MAF_post_content.9
+				days = 30
+				random_days = 20
+			}
+		}
+
+		news_event = {
+			id = MAF_news.17
+		}
+	}
+}
+
+country_event = { #Katanga ask for help
+	id = MAF_post_content.8
+	title = MAF_post_content.8.t
+	desc = MAF_post_content.8.d
+
+	is_triggered_only = yes
+
+	immediate = {
+		log = "[getdatetext]: [root.getname]: event MAF_post_content.8 from = [from.getname]"
+	}
+
+	option = {
+		name = MAF_post_content.8.a
+		GER = {
+			country_event = {
+				id = MAF_post_content.9
+				days = 30
+				random_days = 20
+			}
+		}
+
+		NAM = {
+			country_event = {
+				id = MAF_post_content.9
+				days = 30
+				random_days = 20
+			}
+		}
+
+		TNZ = {
+			if = {
+				limit = { 
+					has_country_flag = MAF_rp_path
+				}
+				country_event = {
+					id = MAF_post_content.9
+					days = 30
+					random_days = 20
+				}
+			}
+		}
+
+		KAM = {
+			if = {
+				limit = { 
+					has_country_flag = MAF_rp_path
+				}
+				country_event = {
+					id = MAF_post_content.9
+					days = 30
+					random_days = 20
+				}
+			}
+		}
+
+		TOG = {
+			if = {
+				limit = { 
+					has_country_flag = MAF_rp_path
+				}
+				country_event = {
+					id = MAF_post_content.9
+					days = 30
+					random_days = 20
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	id = MAF_post_content.9
+	title = MAF_post_content.9.t
+	desc = MAF_post_content.9.d
+
+	is_triggered_only = yes
+
+	immediate = {
+		log = "[getdatetext]: [root.getname]: event MAF_post_content.9 from = [from.getname]"
+		hidden_effect = {
+			FROM = { save_event_target_as = volunteer_target }
+			send_volunteers_to_TARGET = yes
+		}
+	}
+
+	option = {
+		name = MAF_post_content.9.a
+		send_equipment = {
+			amount = 1000
+			equipment = infantry_equipment
+			target = FROM
+		}
+	}
+
+	option = {
+		name = MAF_post_content.9.a
+		add_command_power = -5
+		FROM = {
+			army_experience = 15
+		}
+	}
+}
+
+
+news_event = { # Crisis in the Congo
+	id = MAF_news.16
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event MAF_news.16"
+	}
+	title = MAF_news.16.t
+	desc = MAF_news.16.d
+	picture = GFX_ne_MAF_Armoured_Car
+	
+	is_triggered_only = yes
+	major = yes
+
+	option = {
+		name = MAF_news.16.a
+	}
+}
+
+news_event = { # Kongo invades Katanga
+	id = MAF_news.17
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event MAF_news.17"
+	}
+	title = MAF_news.17.t
+	desc = {
+		trigger = {
+			MAF = {
+				has_country_flag = MAF_split_of_Katanga
+			}
+		}
+		text = MAF_news.17.d_split
+	}
+	desc = {
+		trigger = {
+			MAF = {
+				NOT = { has_country_flag = MAF_split_of_Katanga }
+			}
+		}
+		text = MAF_news.17.d_secede
+	}
+	picture = GFX_ne_MAF_native_german_soldiers
+	
+	is_triggered_only = yes
+	major = yes
+
+	option = {
+		name = MAF_news.17.a
+	}
+}
+
+news_event = { # 
+	id = MAF_news.18
+	immediate = { log = "[GetDateText]: [Root.GetName]: event MAF_news.18" }
+	title = MAF_news.18.t
+	desc = MAF_news.18.d
+
+	picture = GFX_news_event_SAF_Operation_Silver_Freedom
+	
+	is_triggered_only = yes
+	major = yes
+
+	option = {
+		name = MAF_news.18.a
+	}
+}

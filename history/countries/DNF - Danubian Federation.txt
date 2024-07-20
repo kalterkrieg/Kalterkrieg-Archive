@@ -1,0 +1,398 @@
+capital = 4
+
+set_oob = "DNF" #Land OOBs
+starting_train_buffer = 1.4
+
+set_fuel_ratio = 0.8
+
+set_research_slots = 4
+coal_add_soc_dem = yes
+coal_add_rad_soc = yes
+coal_add_auth_dem = yes
+set_country_flag = reichspakt_military_major_ai
+
+set_politics = {
+	ruling_party = social_conservative
+	last_election = "1947.3.15"
+	election_frequency = 48
+	elections_allowed = yes
+}
+
+set_popularities = {
+    authoritarian_socialist = 0
+    radical_socialist = 7
+    social_democrat = 21
+    revolutionary_republican = 3
+    social_liberal = 13
+    market_liberal = 9
+    social_conservative = 31
+    authoritarian_democrat = 11
+    paternal_autocrat = 0
+    national_populist = 5
+}
+
+# initialize_new_tech_sphere = yes
+# every_country = {
+# 	limit = {
+# 		NOT = { tag = DNF }
+# 		is_in_faction_with = DNF
+# 	}
+# 	set_temp_variable = {
+# 		temp_tech_sphere_owner = DNF
+# 	}
+# 	join_tech_sphere = yes
+# }
+become_tech_leader = yes 
+
+set_variable = { reichspakt_alignment_level = 3 } # reichspakt defensive ties
+
+set_country_flag = DNF_austria_disagrees
+set_country_flag = DNF_slovakia_agrees
+set_country_flag = DNF_transylvania_agrees
+set_country_flag = DNF_hungary_disagrees
+set_country_flag = DNF_bohemia_agrees
+set_country_flag = DNF_illyria_agrees
+set_country_flag = DNF_galicia_disagrees
+set_country_flag = DNF_Wilhelm_Miklas
+set_country_flag = country_show_pm
+
+set_country_flag = DNF_AUSTRIAN_MP_KORNER
+set_country_flag = DNF_bohemian_MP_stransky
+set_country_flag = DNF_hungarian_MP_rassay
+set_country_flag = DNF_SLOVAKIAN_MP_TISO
+set_country_flag = DNF_transylvanian_MP_vaida-voevod
+set_country_flag = DNF_transylvanian_PNR_Original
+set_country_flag = DNF_illyrian_MP_macek
+set_country_flag = DNF_galician_MP_polakiewicz
+set_country_flag = DNF_bohemian_marlib_grand_alliance
+set_country_flag = DNF_illyrian_coalition
+
+DNF_chamber_of_deputies_initial = yes
+
+set_country_flag = DNF_guard_RUS_border_flag
+set_country_flag = reichspakt_prioritise_europe_flag
+set_country_flag = KRG_mobilization_laws_locked
+
+
+give_guarantee = GER
+give_military_access = GER
+
+country_event = { #lore dump
+	id = krg_dnf.0
+	hours = 2
+}
+
+news_event = { #icehockey flavour chain
+	id = krg_dnf_news.1
+	days = 147
+}
+country_event = { #national anthem fun
+	id = krg_dnf.65
+	days = 353
+}
+country_event = { #Nuclear ambition trigger
+	id = krg_dnf.420
+	days = 31
+}
+
+##Regional Elections Triggers Setup##
+
+#Austria 48
+country_event = {
+	id = krg_dnf_regional_elections_austria.1
+	days = 7
+}
+
+#Bohemia 48
+country_event = {
+	id = krg_dnf_regional_elections_bohemia.1
+	days = 121
+}
+
+#Illyria 48
+country_event = {
+	id = krg_dnf_regional_elections_illyria.2
+	days = 248
+}
+
+#Galicia 49
+country_event = {
+	id = krg_dnf_regional_elections_galicia.1
+	days = 445
+}
+
+#Slovakia 49
+country_event = {
+	id = krg_dnf_regional_elections_slovakia.1
+	days = 602
+}
+
+set_political_power = 49	
+set_convoys = 200
+
+set_stability = 0.75
+
+set_variable = { var = representatives_support value = 532 }
+
+add_ideas = {
+	#spiritis
+	DNF_grand_coalition_1
+	DNF_nations_within_a_state
+	DNF_foreign_policy_divided
+	DNF_nationalist_tensions_1
+
+	#laws
+	KRG_extensive_conscription
+	KRG_export_focus
+	KRG_early_mob
+	KRG_professional_military
+	KRG_immigration_heavy
+	KRG_parliamentary_democracy
+
+	#econ
+	econ_moderate_taxation
+	econ_small_business_spending
+	econ_medium_inf_spending
+	econ_medium_edu_spending
+	econ_small_hc_spending
+	econ_small_service_spending
+
+	#manuf
+	skoda_Zbrojovka_infantry
+	skoda_zbrojovka_tank
+	mavag_ganz_werke_tank
+	avia
+	skodawerft_istrien
+	kapsch
+}
+
+add_timed_idea = {
+	idea = DNF_unfettered_economy
+	days = 731
+}
+
+set_variable = { DNF_peace_budget_pp = 0 }
+set_variable = { DNF_peace_budget_stab = 0 }
+set_variable = { DNF_peace_budget_war_support = 0 }
+set_variable = { DNF_peace_budget_resources = 0.05 }
+set_variable = { DNF_peace_budget_factory = 0.05 }
+set_variable = { DNF_peace_budget_dockyard = 0.05 }
+set_variable = { DNF_peace_budget_efficency_gain = 0.05 }
+set_variable = { DNF_peace_budget_conversion = 0 }
+
+#rulers 
+recruit_character = DNF_matyas_rakosi
+recruit_character = DNF_julius_klimko
+recruit_character = DNF_otto_i
+recruit_character = DNF_Ernst_Kaltenbrunner
+
+if = {
+	limit = {
+		has_dlc = "La Resistance"
+	}
+	create_intelligence_agency = {
+		icon = GFX_intelligence_agency_logo_kr_aus
+		name = "Evidenzbureau"
+	}
+	upgrade_intelligence_agency = upgrade_army_department
+	upgrade_intelligence_agency = upgrade_passive_defense
+	upgrade_intelligence_agency = upgrade_passive_defense
+	upgrade_intelligence_agency = upgrade_form_department
+	upgrade_intelligence_agency = upgrade_plastic_explosives
+	upgrade_intelligence_agency = upgrade_portable_radios
+	upgrade_intelligence_agency = upgrade_decryption_boost
+	upgrade_intelligence_agency = upgrade_decryption_boost
+	upgrade_intelligence_agency = upgrade_decryption_boost_2
+	upgrade_intelligence_agency = upgrade_decryption_boost_2
+}
+
+set_country_flag = technology_overlord
+
+universal_starting_techs = yes
+reichspakt_starting_techs = yes
+danubia_starting_techs = yes
+if = {
+    limit = { has_dlc = "Man the Guns" }
+	DNF_start_naval_variant = yes
+	set_naval_oob = "DNF_naval_mtg"
+}
+if ={ 
+	limit ={ 
+		not ={ 
+			has_dlc = "Man the Guns"
+		}
+	}
+	set_naval_oob = "DNF_naval_legacy"
+}
+
+set_air_oob = "DNF_air_wings"
+ 
+
+### generals and fms ###
+recruit_character = DNF_joseph_august_von_habsburg
+recruit_character = DNF_alfred_jansa
+recruit_character = DNF_alfred_hubicki
+recruit_character = DNF_johann_kubena
+recruit_character = DNF_bela_miklos
+recruit_character = DNF_franz_bohme
+recruit_character = DNF_janos_voros
+recruit_character = DNF_friedrich_franek
+recruit_character = DNF_ludvik_svoboda
+recruit_character = DNF_jan_golian
+recruit_character = DNF_vaclav_kratochvil
+recruit_character = DNF_otakar_richter
+recruit_character = DNF_vaclav_moravek
+recruit_character = DNF_rudolf_viest
+recruit_character = DNF_sergej_ingr
+recruit_character = DNF_bohumil_bocek
+recruit_character = DNF_josef_masin
+recruit_character = DNF_josef_balaban
+recruit_character = DNF_karel_klapalek
+recruit_character = DNF_lothar_rendulic
+recruit_character = DNF_erwin_fussenegger
+recruit_character = DNF_maximilian_de_angelis
+recruit_character = DNF_valentin_feurstein
+recruit_character = DNF_anton_kienbauer
+recruit_character = DNF_wilhelm_zehner
+recruit_character = DNF_eduard_barger
+recruit_character = DNF_augustin_malar
+recruit_character = DNF_nandor_csatlos
+recruit_character = DNF_stefan_jurech
+recruit_character = DNF_geza_lakatos
+recruit_character = DNF_Lajos_Veress_de_Dalnok
+
+##boat people
+recruit_character = DNF_Ivan_Kern
+recruit_character = DNF_Miroslav_Stumberger
+recruit_character = DNF_Janez_Tomsic
+recruit_character = DNF_Aleksandar_Beric
+recruit_character = DNF_Josip_Cerni
+recruit_character = DNF_Baldomir_Saje
+recruit_character = DNF_Josip_Saksida
+recruit_character = DNF_Karol_Korytowski
+recruit_character = DNF_Karol_Trzasko_Durski
+
+if = {
+	limit = {
+		has_dlc = "La Resistance"
+	}
+	### The man, the myth, the legend ###
+	create_operative_leader  = {
+		name = "Otto Skorzeny"
+		GFX = "gfx/leaders/DNF/Portrait_DNF_Otto_Skorzeny.png"
+		skill = 2
+		traits = {
+			operative_commando
+			operative_demolition_expert
+			operative_infiltrator
+			operative_tough
+			operative_well_groomed
+			}
+		bypass_recruitment = yes
+		available_to_spy_master = no
+		nationalities = { DNF AUS }
+	}
+	
+	### Soc Dems can spy too lol###
+	create_operative_leader  = {
+		name = "Edith Suschitzky"
+		GFX = "gfx/leaders/DNF/Portrait_DNF_Edith_Suschitzky.png"
+		traits = {
+			operative_seducer
+			operative_infiltrator
+			operative_linguist
+			}
+		bypass_recruitment = yes
+		female = yes
+		skill = 2
+		available_to_spy_master = no
+		nationalities = { DNF AUS }
+	}
+
+	#the sneakiest czech#
+	create_operative_leader  = {
+		name = "Zdeněk Toman"
+		GFX = "gfx/leaders/DNF/Portrait_DNF_Zdenek_Toman.png"
+		skill = 2
+		traits = {
+			operative_infiltrator
+			operative_well_groomed
+			operative_escape_artist
+			}
+		bypass_recruitment = yes
+		available_to_spy_master = no
+		nationalities = { DNF BOM }
+	}
+	
+	#Robert Maxwell, is that you?!#
+	create_operative_leader  = {
+		name = "Ján Hoch"
+		GFX = "gfx/leaders/DNF/Portrait_DNF_Jan_Hoch.png"
+		skill = 1
+		traits = {
+			operative_infiltrator
+			operative_well_groomed
+			}
+		bypass_recruitment = yes
+		available_to_spy_master = no
+		nationalities = { DNF SLO }
+	}
+}
+
+### Ministers ###
+recruit_character = DNF_Adolf_Schaerf
+recruit_character = DNF_Karl_Renner
+recruit_character = DNF_Anna_Kethly
+recruit_character = DNF_Bruno_Pitterman
+recruit_character = DNF_Josip_Broz
+recruit_character = DNF_Peter_Veres
+recruit_character = DNF_Alcide_de_Gasperi
+recruit_character = DNF_Julius_Raab
+recruit_character = DNF_Wilhelm_Miklas
+recruit_character = DNF_Zoltan_Tildy 
+recruit_character = DNF_Engelbert_Dollfuss
+recruit_character = DNF_Leopold_Figl
+recruit_character = DNF_Adolf_Schaerf_foreign
+recruit_character = DNF_Bruno_Kreisky
+recruit_character = DNF_Dzafer_Kulenovic
+recruit_character = DNF_Karl_Gruber
+recruit_character = DNF_Lujo_Toncic_Sorinj
+recruit_character = DNF_Leopold_Figl_foreign
+recruit_character = DNF_Avdo_Humo
+recruit_character = DNF_Istvan_Kossa
+recruit_character = DNF_Imre_Kovacs
+recruit_character = DNF_Eduard_Heinl
+recruit_character = DNF_Erwin_Altenburger
+recruit_character = DNF_Fritz_Bock
+recruit_character = DNF_Julius_Raab_econ
+recruit_character = DNF_Lois_Weinberger
+recruit_character = DNF_Udo_Illig
+recruit_character = DNF_Alexej_Cepicka
+recruit_character = DNF_Josef_Geroe
+recruit_character = DNF_Max_Scheffenegger
+recruit_character = DNF_Otto_Tschadek
+recruit_character = DNF_Bela_Kovacs
+recruit_character = DNF_Giacomo_Vuxani
+recruit_character = DNF_Jaroslav_Stransky
+recruit_character = DNF_Istvan_Antal
+recruit_character = DNF_Ferenc_Erdei
+recruit_character = DNF_Oskar_Helmer
+recruit_character = DNF_Savka_Dabcevic
+recruit_character = DNF_Alcide_de_Gasperi_interior
+recruit_character = DNF_Alfons_Gorbach
+recruit_character = DNF_Anton_Reinthaller
+recruit_character = DNF_Gabor_Vajna
+recruit_character = DNF_Theodor_Koerner
+recruit_character = DNF_Luise_Kanitz
+recruit_character = DNF_Erwin_von_Lahousen
+recruit_character = DNF_Maximilian_Ronge
+recruit_character = DNF_Alexander_Lohr
+
+add_ideas = {
+	DNF_Wilhelm_Miklas_hog_sco
+	DNF_Leopold_Figl_fm_ade
+	DNF_Julius_Raab_em_sco
+	DNF_Josef_Geroe_jm_sde
+	DNF_Ferenc_Erdei_im_sde
+	DNF_Maximilian_Ronge_hoi_sco
+}

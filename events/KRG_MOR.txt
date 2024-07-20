@@ -1,0 +1,977 @@
+add_namespace = krg_mcw
+add_namespace = krg_hmw
+### Moroccan Civil War ###
+country_event = {
+	#Mohammed V declares Martial law
+	id = krg_mcw.0
+	title = krg_mcw.0.t
+	desc = krg_mcw.0.d
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_mcw.0"
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		#It might just work
+		name = krg_mcw.0.a
+		set_politics = {
+			ruling_party = paternal_autocrat
+		}
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = -0.25
+		}
+		add_stability = -0.1
+		hidden_effect = {
+			country_event = {
+				id = krg_mcw.1
+				days = 14
+			}
+		}
+	}
+}
+
+country_event = { #SPR event
+	#Revolutionaries seek help
+	id = krg_mcw.1
+	title = krg_mcw.1.t
+	desc = krg_mcw.1.d
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_mcw.1"
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		#It might just work
+		name = krg_mcw.1.a
+		hidden_effect = {
+			GER = {
+				remove_from_faction = MOR
+			}
+			AMR = {
+				transfer_state = 462
+				transfer_state = 290
+				transfer_state = 699
+				set_state_controller = 462
+				set_state_controller = 290
+				set_state_controller = 699
+				set_province_controller = 989
+				set_province_controller = 1111
+				set_province_controller = 7116
+				load_oob = AMR_revolt
+			}
+			MOR = {
+				add_war_support = -0.15
+				add_stability = -0.1
+				declare_war_on = {
+					target = AMR
+					type = annex_everything
+				}
+				add_ideas = MOR_moroccan_crisis
+				AMR = {
+					add_ideas = AMR_moroccan_crisis
+				}
+			}
+			add_to_array = {
+				global.influence_targets = 27
+			}
+			hidden_effect = {
+				news_event = {
+					id = worldnews.405
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	#Spanish intervention
+	id = krg_mcw.2
+	title = krg_mcw.2.t
+	desc = krg_mcw.2.d
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_mcw.2"
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		#It might just work
+		name = krg_mcw.2.a
+		CAN = {
+			remove_from_faction = SPR
+		}
+		add_war_support = -0.2
+		add_stability = -0.15
+		add_ideas = SPR_invading_morocco
+		add_to_war = {
+			targeted_alliance = AMR
+			enemy = MOR
+		}
+	}
+	option = {
+		#It's too risky
+		name = krg_mcw.2.b
+	}
+}
+
+country_event = {
+	#Revolutionary Victory
+	id = krg_mcw.3
+	title = krg_mcw.3.t
+	desc = krg_mcw.3.d
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_mcw.3"
+	}
+	trigger = {
+		tag = AMR
+		has_war_with = MOR
+		is_valid_peace_target = yes
+		MOR = {
+			surrender_progress > 0.6
+		}
+		NOT = {
+			has_global_flag = moroccan_revolution_ended
+		}
+	}
+	fire_only_once = yes
+	option = {
+		#Annexes MOR
+		name = krg_mcw.3.a
+		hidden_effect = {
+			country_event = {
+				id = krg_mcw.6
+				days = 365
+			}
+			MOR = {
+				every_core_state = {
+					add_core_of = AMR
+				}
+			}
+		}
+		annex_country = {
+			target = MOR
+			transfer_troops = no
+		}
+		CAN = {
+			add_to_faction = AMR
+			add_to_faction = SPR
+		}
+		AMR = {
+			set_temp_variable = {
+				temp_level = 4
+			}
+			set_accord_alignment = yes
+		}
+		remove_from_array = {
+			global.influence_targets = 27
+		}
+		add_to_array = {
+			global.influence_log = 30
+		}
+		add_to_array = {
+			global.influence_log_val = 15
+		}
+		news_event = {
+			id = worldnews.406
+		}
+		set_global_flag = moroccan_revolution_ended
+	}
+}
+
+country_event = {
+	#Royalist victory (no spain)
+	id = krg_mcw.4
+	title = krg_mcw.4.t
+	desc = krg_mcw.4.d
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_mcw.4"
+	}
+	trigger = {
+		tag = MOR
+		has_war_with = AMR
+		is_valid_peace_target = yes
+		AMR = {
+			surrender_progress > 0.6
+		}
+		NOT = {
+			has_global_flag = moroccan_revolution_ended
+		}
+	}
+	fire_only_once = yes
+	option = {
+		#Annexes AMR
+		name = krg_mcw.4.a
+		annex_country = {
+			target = AMR
+			transfer_troops = no
+		}
+		hidden_effect = {
+			country_event = {
+				id = krg_mcw.8
+				days = 126
+			}
+			country_event = {
+				id = krg_mcw.9
+				days = 63
+			}
+			GER = {
+				add_to_faction = MOR
+			}
+		}
+		remove_from_array = {
+			global.influence_targets = 27
+		}
+		add_to_array = {
+			global.influence_log = 28
+		}
+		add_to_array = {
+			global.influence_log_val = -15
+		}
+		news_event = {
+			id = worldnews.407
+		}
+		set_global_flag = moroccan_revolution_ended
+	}
+}
+
+country_event = {
+	#Royalist victory (with spain)
+	id = krg_mcw.5
+	title = krg_mcw.5.t
+	desc = krg_mcw.5.d
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_mcw.5"
+	}
+	trigger = {
+		tag = MOR
+		has_war_with = AMR
+		has_war_with = SPR
+		controls_state = 1154
+		is_valid_peace_target = yes
+		AMR = {
+			surrender_progress > 0.6
+		}
+		NOT = {
+			has_global_flag = moroccan_revolution_ended
+		}
+	}
+	fire_only_once = yes
+	option = {
+		#Annexes AMR, and the Autonomous Cities
+		name = krg_mcw.5.a
+		annex_country = {
+			target = AMR
+			transfer_troops = no
+		}
+		transfer_state = 1154
+		set_state_controller = 1154
+		hidden_effect = {
+			country_event = {
+				id = krg_mcw.8
+				days = 126
+			}
+			country_event = {
+				id = krg_mcw.9
+				days = 63
+			}
+			CAN = {
+				add_to_faction = SPR
+			}
+			GER = {
+				add_to_faction = MOR
+			}
+		}
+		remove_from_array = {
+			global.influence_targets = 27
+		}
+		add_to_array = {
+			global.influence_log = 29
+		}
+		add_to_array = {
+			global.influence_log_val = -30
+		}
+		influence_recalc = yes
+		news_event = {
+			id = worldnews.408
+		}
+		set_global_flag = moroccan_revolution_ended
+	}
+}
+
+#post-war
+country_event = {
+	#AMR Election
+	id = krg_mcw.6
+	title = krg_mcw.6.t
+	desc = krg_mcw.6.d
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_mcw.6"
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		#Democratic Independence Party
+		name = krg_mcw.6.a
+		add_popularity = {
+			ideology = social_democrat
+			popularity = 0.2
+		}
+		coal_add_soc_dem = yes
+		news_event = {
+			id = worldnews.409
+		}
+		ai_chance = {
+			base = 50
+			modifier = {
+				has_game_rule = {
+					rule = AMR_REVOLUTION_VICTORY_POST_WAR
+					option = AMR_REVOLUTION_VICTORY_POST_WAR_HSA
+				}
+				factor = 1000
+			}
+		}
+	}
+	option = {
+		#National Union of Popular Forces
+		name = krg_mcw.6.b
+		set_politics = {
+			ruling_party = radical_socialist
+		}
+		add_popularity = {
+			ideology = revolutionary_republican
+			popularity = -0.1
+		}
+		add_popularity = {
+			ideology = radical_socialist
+			popularity = 0.05
+		}
+		news_event = {
+			id = worldnews.410
+		}
+		ai_chance = {
+			base = 17
+			modifier = {
+				has_game_rule = {
+					rule = AMR_REVOLUTION_VICTORY_POST_WAR
+					option = AMR_REVOLUTION_VICTORY_POST_WAR_IWLS
+				}
+				factor = 1000
+			}
+		}
+	}
+	option = {
+		#Moroccan Communist Party
+		name = krg_mcw.6.c
+		set_politics = {
+			ruling_party = authoritarian_socialist
+		}
+		add_popularity = {
+			ideology = authoritarian_socialist
+			popularity = 0.25
+		}
+		CAN = {
+			remove_from_faction = AMR
+		}
+		clear_accord_alignment = yes		# leaves accord
+		hidden_effect = {
+			country_event = {
+				id = krg_mcw.7
+				days = 63
+			}
+		}
+		news_event = {
+			id = worldnews.411
+		}
+		ai_chance = {
+			base = 33
+			modifier = {
+				has_game_rule = {
+					rule = AMR_REVOLUTION_VICTORY_POST_WAR
+					option = AMR_REVOLUTION_VICTORY_POST_WAR_FRENCH_COUP
+				}
+				factor = 1000
+			}
+		}
+	}
+}
+
+country_event = {
+	#Coup
+	id = krg_mcw.7
+	title = krg_mcw.7.t
+	desc = krg_mcw.7.d
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_mcw.7"
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		#Mohammed Ben Aarafa
+		name = krg_mcw.7.a
+		MOR = {
+			transfer_state = 290
+			transfer_state = 461
+			transfer_state = 783
+			set_state_controller = 290
+			set_state_controller = 461
+			set_state_controller = 783
+		}
+		NFA = {
+			AMR = {
+				get_current_government_type = yes
+			}
+			if = {
+				limit = {
+					has_subject_autonomy_feature = yes
+				}
+				set_autonomy = {
+					target = AMR
+					autonomous_state = krg_joint_accord_mandate
+				}
+			}
+			else = {
+				puppet = AMR
+			}
+			save_event_target_as = on_puppet_master_tag
+			AMR = {
+				standard_on_puppet_effect = yes
+				restore_previous_government_type = yes
+			}
+		}
+		AMR = {
+			set_politics = {
+				ruling_party = paternal_autocrat
+			}
+			set_cosmetic_tag = AMR_mandate
+			set_popularities = {
+				authoritarian_socialist = 33
+				radical_socialist = 20
+				social_democrat = 5
+				revolutionary_republican = 12
+				social_liberal = 0
+				market_liberal = 0
+				social_conservative = 0
+				authoritarian_democrat = 0
+				paternal_autocrat = 5
+				national_populist = 25
+			}
+			set_temp_variable = {
+				temp_level = 4
+			}
+			set_accord_alignment = yes
+		}
+		SPR = {
+			MOR = {
+				get_current_government_type = yes
+			}
+			if = {
+				limit = {
+					has_subject_autonomy_feature = yes
+				}
+				set_autonomy = {
+					target = MOR
+					autonomous_state = krg_joint_accord_mandate
+				}
+			}
+			else = {
+				puppet = MOR
+			}
+			save_event_target_as = on_puppet_master_tag
+			MOR = {
+				standard_on_puppet_effect = yes
+				restore_previous_government_type = yes
+			}
+		}
+		MOR = {
+			set_cosmetic_tag = MOR_mandate
+			set_party_name = {
+				ideology = paternal_autocrat
+				long_name = MOR_paternal_autocrat_mandate_party_long
+				name = MOR_paternal_autocrat_mandate_party
+			}
+			set_politics = {
+				ruling_party = social_liberal
+			}
+			coal_add_pat_aut = yes
+			set_popularities = {
+				authoritarian_socialist = 5
+				radical_socialist = 2
+				social_democrat = 0
+				revolutionary_republican = 0
+				social_liberal = 17
+				market_liberal = 0
+				social_conservative = 11
+				authoritarian_democrat = 17
+				paternal_autocrat = 3
+				national_populist = 45
+			}
+			set_temp_variable = {
+				temp_level = 4
+			}
+			set_accord_alignment = yes
+		}
+		CAN = {
+			add_to_faction = MOR
+			add_to_faction = AMR
+			add_to_faction = SPR
+		}
+		news_event = {
+			id = worldnews.412
+		}
+	}
+}
+
+country_event = {
+	#Restore democracy
+	id = krg_mcw.8
+	title = krg_mcw.8.t
+	desc = krg_mcw.8.d
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_mcw.8"
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		#Front for the Defense of Constitutional Institutions
+		name = krg_mcw.8.a
+		set_politics = {
+			ruling_party = authoritarian_democrat
+		}
+		add_popularity = {
+			ideology = market_liberal
+			popularity = 0.25
+		}
+		coal_add_mar_lib = yes
+		news_event = {
+			id = worldnews.413
+		}
+		ai_chance = {
+			base = 20
+			modifier = {
+				has_game_rule = {
+					rule = MOR_ROYALIST_VICTORY_POST_WAR
+					option = MOR_ROYALIST_VICTORY_POST_WAR_JLMD
+				}
+				factor = 1000
+			}
+		}
+	}
+	option = {
+		#National party for Independence
+		name = krg_mcw.8.b
+		set_politics = {
+			ruling_party = social_conservative
+		}
+		add_popularity = {
+			ideology = social_conservative
+			popularity = 0.25
+		}
+		coal_add_nat_pop = yes
+		news_event = {
+			id = worldnews.413
+		}
+		ai_chance = {
+			base = 13
+			modifier = {
+				has_game_rule = {
+					rule = MOR_ROYALIST_VICTORY_POST_WAR
+					option = MOR_ROYALIST_VICTORY_POST_WAR_HI
+				}
+				factor = 1000
+			}
+		}
+	}
+	option = {
+		#Maintain absolute rule
+		name = krg_mcw.8.c
+		add_popularity = {
+			ideology = national_populist
+			popularity = 0.1
+		}
+		news_event = {
+			id = worldnews.414
+		}
+		ai_chance = {
+			base = 67
+			modifier = {
+				has_game_rule = {
+					rule = MOR_ROYALIST_VICTORY_POST_WAR
+					option = MOR_ROYALIST_VICTORY_POST_WAR_COUP
+				}
+				factor = 1000
+			}
+		}
+	}
+}
+
+country_event = {
+	#Join Mitteleuropa
+	id = krg_mcw.9
+	title = krg_mcw.9.t
+	desc = krg_mcw.9.d
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_mcw.8"
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		#yes
+		name = krg_hmw.6.a
+		MIT_remove_from_mitteleuropa_partnership = yes
+		MIT_add_to_mitteleuropa = yes
+		news_event = {
+			id = worldnews.419
+		}
+	}
+}
+
+# ### 2nd Hispano-Moroccan War ###
+# country_event = {
+# 	#Spain's ultimatum
+# 	id = krg_hmw.0
+# 	title = krg_hmw.0.t
+# 	desc = krg_hmw.0.d
+# 	immediate = {
+# 		log = "[GetDateText]: [Root.GetName]: krg_hmw.0"
+# 	}
+# 	is_triggered_only = yes
+# 	fire_only_once = yes
+# 	option = {
+# 		#This is outragous
+# 		name = krg_hmw.0.a
+# 		hidden_effect = {
+# 			SPR = {
+# 				country_event = {
+# 					id = krg_hmw.1
+# 					days = 3
+# 				}
+# 			}
+# 		}
+# 	}
+# }
+
+# country_event = {
+# 	#Morocco's response
+# 	id = krg_hmw.1
+# 	title = krg_hmw.1.t
+# 	desc = krg_hmw.1.d
+# 	immediate = {
+# 		log = "[GetDateText]: [Root.GetName]: krg_hmw.1"
+# 	}
+# 	is_triggered_only = yes
+# 	fire_only_once = yes
+# 	option = {
+# 		#Prepare the Invasion
+# 		name = krg_hmw.1.a
+# 		CAN = {
+# 			remove_from_faction = SPR
+# 		}
+# 		coal_rev_rev_rep = yes
+# 		coal_rev_soc_lib = yes
+# 		add_ideas = SPR_invading_morocco
+# 		MOR = {
+# 			add_war_support = 0.05
+# 			add_stability = -0.1
+# 			add_ideas = MOR_moroccan_crisis
+# 		}
+# 		declare_war_on = {
+# 			target = MOR
+# 			type = annex_everything
+# 		}
+# 		news_event = {
+# 			id = worldnews.405
+# 		}
+# 	}
+# }
+
+# country_event = {
+# 	#French Intervetion
+# 	id = krg_hmw.2
+# 	title = krg_hmw.2.t
+# 	desc = krg_hmw.2.d
+# 	immediate = {
+# 		log = "[GetDateText]: [Root.GetName]: krg_hmw.2"
+# 	}
+# 	is_triggered_only = yes
+# 	fire_only_once = yes
+# 	option = {
+# 		#Prepare the Invasion
+# 		name = krg_hmw.2.a
+# 		add_war_support = -0.2
+# 		add_stability = -0.15
+# 		add_to_war = {
+# 			targeted_alliance = SPR
+# 			enemy = MOR
+# 		}
+# 	}
+# 	option = {
+# 		#It's too risky
+# 		name = krg_mcw.2.b
+# 	}
+# }
+
+# country_event = {
+# 	#Accordist victory
+# 	id = krg_hmw.3
+# 	title = krg_hmw.3.t
+# 	desc = krg_hmw.3.d
+# 	immediate = {
+# 		log = "[GetDateText]: [Root.GetName]: krg_hmw.3"
+# 	}
+# 	trigger = {
+# 		tag = SPR
+# 		has_war_with = MOR
+# 		is_valid_peace_target = yes
+# 		MOR = {
+# 			surrender_progress > 0.75
+# 		}
+# 		NOT = {
+# 			has_global_flag = hispano_moroccan_war_ended
+# 		}
+# 	}
+# 	fire_only_once = yes
+# 	option = {
+# 		#split mandate
+# 		name = krg_hmw.3.a
+# 		if = {
+# 			limit = {
+# 				has_subject_autonomy_feature = yes
+# 			}
+# 			set_autonomy = {
+# 				target = MOR
+# 				autonomous_state = krg_joint_accord_mandate
+# 			}
+# 		}
+# 		else = {
+# 			puppet = MOR
+# 		}
+# 		save_event_target_as = on_puppet_master_tag
+# 		MOR = {
+# 			standard_on_puppet_effect = yes
+# 		}
+
+# 		MOR = {
+# 			set_cosmetic_tag = MOR_mandate
+# 			set_party_name = {
+# 				ideology = paternal_autocrat
+# 				long_name = MOR_paternal_autocrat_mandate_party_long
+# 				name = MOR_paternal_autocrat_mandate_party
+# 			}
+# 			set_politics = {
+# 				ruling_party = revolutionary_republican
+# 			}
+# 			coal_add_pat_aut = yes
+# 			set_popularities = {
+# 				authoritarian_socialist = 5
+# 				radical_socialist = 2
+# 				social_democrat = 0
+# 				revolutionary_republican = 17
+# 				social_liberal = 0
+# 				market_liberal = 0
+# 				social_conservative = 11
+# 				authoritarian_democrat = 17
+# 				paternal_autocrat = 3
+# 				national_populist = 45
+# 			}
+# 			set_temp_variable = {
+# 				temp_level = 4
+# 			}
+# 			set_accord_alignment = yes
+# 		}
+# 		NFA = {
+# 			if = {
+# 				limit = {
+# 					has_subject_autonomy_feature = yes
+# 				}
+# 				set_autonomy = {
+# 					target = AMR
+# 					autonomous_state = krg_joint_accord_mandate
+# 				}
+# 			}
+# 			else = {
+# 				puppet = AMR
+# 			}
+# 			save_event_target_as = on_puppet_master_tag
+# 			AMR = {
+# 				standard_on_puppet_effect = yes
+# 			}
+# 		}
+# 		AMR = {
+# 			transfer_state = 462
+# 			set_state_controller = 462
+# 			set_politics = {
+# 				ruling_party = paternal_autocrat
+# 			}
+# 			set_cosmetic_tag = AMR_mandate
+# 			set_popularities = {
+# 				authoritarian_socialist = 15
+# 				radical_socialist = 12
+# 				social_democrat = 0
+# 				revolutionary_republican = 33
+# 				social_liberal = 0
+# 				market_liberal = 0
+# 				social_conservative = 21
+# 				authoritarian_democrat = 9
+# 				paternal_autocrat = 3
+# 				national_populist = 7
+# 			}
+# 			set_temp_variable = {
+# 				temp_level = 4
+# 			}
+# 			set_accord_alignment = yes
+# 		}
+# 		CAN = {
+# 			add_to_faction = MOR
+# 			add_to_faction = AMR
+# 			add_to_faction = SPR
+# 		}
+# 		news_event = {
+# 			id = worldnews.415
+# 		}
+# 		set_global_flag = hispano_moroccan_war_ended
+# 	}
+# }
+
+# country_event = {
+# 	#Moroccan victory
+# 	id = krg_hmw.4
+# 	title = krg_hmw.4.t
+# 	desc = krg_hmw.4.d
+# 	immediate = {
+# 		log = "[GetDateText]: [Root.GetName]: krg_hmw.4"
+# 	}
+# 	trigger = {
+# 		tag = MOR
+# 		has_war_with = SPR
+# 		is_valid_peace_target = yes
+# 		controls_state = 290
+# 		controls_state = 699
+# 		controls_state = 783
+# 		controls_state = 1154
+# 		NOT = {
+# 			has_global_flag = hispano_moroccan_war_ended
+# 		}
+# 	}
+# 	fire_only_once = yes
+# 	option = {
+# 		#annexes Infi, the Rif, and the Spanish Sahara
+# 		name = krg_hmw.4.a
+# 		transfer_state = 290
+# 		transfer_state = 699
+# 		transfer_state = 783
+# 		transfer_state = 1154
+# 		set_state_controller = 290
+# 		set_state_controller = 699
+# 		set_state_controller = 783
+# 		set_state_controller = 1154
+# 		country_event = {
+# 			id = krg_hmw.5
+# 			days = 126
+# 		}
+# 		news_event = {
+# 			id = worldnews.416
+# 		}
+# 		set_global_flag = hispano_moroccan_war_ended
+# 		CAN = {
+# 			add_to_faction = SPR
+# 		}
+# 	}
+# }
+
+# #post-war
+# country_event = {
+# 	#New elections
+# 	id = krg_hmw.5
+# 	title = krg_hmw.5.t
+# 	desc = krg_hmw.5.d
+# 	immediate = {
+# 		log = "[GetDateText]: [Root.GetName]: krg_hmw.5"
+# 	}
+# 	is_triggered_only = yes
+# 	fire_only_once = yes
+# 	option = {
+# 		#Istiqlal
+# 		name = krg_hmw.5.a
+# 		set_politics = {
+# 			ruling_party = social_conservative
+# 		}
+# 		add_popularity = {
+# 			ideology = authoritarian_democrat
+# 			popularity = -0.3
+# 		}
+# 		add_popularity = {
+# 			ideology = paternal_autocrat
+# 			popularity = -0.1
+# 		}
+# 		add_popularity = {
+# 			ideology = social_conservative
+# 			popularity = 0.25
+# 		}
+# 		coal_add_auth_dem = yes
+# 		coal_add_nat_pop = yes
+# 		news_event = {
+# 			id = worldnews.417
+# 		}
+# 		ai_chance = {
+# 			base = 60
+# 		}
+# 	}
+# 	option = {
+# 		#FDCI & PM
+# 		name = krg_hmw.5.b
+# 		set_politics = {
+# 			ruling_party = market_liberal
+# 		}
+# 		add_popularity = {
+# 			ideology = authoritarian_democrat
+# 			popularity = -0.3
+# 		}
+# 		add_popularity = {
+# 			ideology = social_liberal
+# 			popularity = 0.1
+# 		}
+# 		add_popularity = {
+# 			ideology = market_liberal
+# 			popularity = 0.25
+# 		}
+# 		coal_add_soc_lib = yes
+# 		country_event = {
+# 			id = krg_hmw.6
+# 			days = 63
+# 		}
+# 		news_event = {
+# 			id = worldnews.418
+# 		}
+# 		ai_chance = {
+# 			base = 40
+# 		}
+# 	}
+# }
+
+# country_event = {
+# 	#Morocco Joins reichspackt
+# 	id = krg_hmw.6
+# 	title = krg_hmw.6.t
+# 	desc = krg_hmw.6.d
+# 	immediate = {
+# 		log = "[GetDateText]: [Root.GetName]: krg_hmw.6"
+# 	}
+# 	is_triggered_only = yes
+# 	fire_only_once = yes
+# 	option = {
+# 		#yes
+# 		name = krg_hmw.6.a
+# 		# GER = { #superfluous - alignment will do it
+# 		# 	add_to_faction = MOR
+# 		# }
+# 		MOR = {
+# 			set_temp_variable = {
+# 				temp_level = 4
+# 			}
+# 			set_reichspakt_alignment = yes
+# 		}
+# 		news_event = {
+# 			id = worldnews.419
+# 		}
+# 	}
+# }

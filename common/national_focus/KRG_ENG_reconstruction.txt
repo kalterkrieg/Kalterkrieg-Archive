@@ -1,0 +1,1656 @@
+#!gfx:interface/Kalterkrieg/KRG_goals.gfx
+shared_focus = {
+	id = ENG_the_kings_speech
+	icon = GFX_focus_eng_god_save_the_king
+
+	x = 7
+	y = 0
+
+	cost = 5
+
+	available = {
+	}
+
+	cancelable = no
+
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_POLITICAL
+	}
+
+	completion_reward = {
+		country_event = {
+			id = krg_eng.4
+		}
+	}
+}
+
+shared_focus = {
+	id = ENG_organise_the_national_government
+	icon = GFX_ENG_restoration
+
+	prerequisite = {
+		focus = ENG_the_kings_speech
+	}
+
+	x = 6
+	y = 1
+
+	cost = 4
+
+	ai_will_do = {
+		base = 65
+	}
+
+	available = {
+
+	}
+
+	search_filters = {
+		FOCUS_FILTER_POLITICAL
+	}
+
+	available_if_capitulated = yes
+
+	completion_reward = {
+		country_event = {
+			id = krg_eng.5
+		}
+	}
+}
+
+shared_focus = {
+	id = ENG_lingering_resistance
+	icon = GFX_generic_ideology_radical_socialist
+
+	prerequisite = {
+		focus = ENG_the_kings_speech
+	}
+
+	x = 8
+	y = 1
+
+	cost = 4
+
+	ai_will_do = {
+		base = 35
+	}
+
+	available = {
+
+	}
+
+	search_filters = {
+		FOCUS_FILTER_DESYNDICALISATION
+	}
+
+	available_if_capitulated = yes
+
+	completion_reward = {
+		country_event = {
+			id = krg_eng.8
+		}
+	}
+}
+
+shared_focus = {
+	id = ENG_begin_reconstruction
+	icon = GFX_generic_economic_control
+
+	prerequisite = {
+		focus = ENG_organise_the_national_government
+	}
+
+	prerequisite = {
+		focus = ENG_lingering_resistance
+	}
+
+	x = 7
+	y = 2
+
+	cost = 5
+
+	ai_will_do = {
+		base = 50
+	}
+	
+	available = {
+
+	}
+
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_RECONSTRUCTION
+	}
+
+	completion_reward = {
+		custom_effect_tooltip = ENG_begin_reconstruction_tooltip
+		hidden_effect = {
+			random_owned_controlled_state = {
+				limit = {
+					free_building_slots = {
+						building = arms_factory
+						size > 1
+						include_locked = yes
+					}
+					is_core_of = ROOT
+				}
+				remove_building = {
+					type = arms_factory
+					level = 1
+				}
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_controlled_state = {
+				limit = {
+					free_building_slots = {
+						building = arms_factory
+						size > 1
+						include_locked = yes
+					}
+					is_core_of = ROOT
+				}
+				remove_building = {
+					type = arms_factory
+					level = 1
+				}
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_controlled_state = {
+				limit = {
+					free_building_slots = {
+						building = arms_factory
+						size > 1
+						include_locked = yes
+					}
+					is_core_of = ROOT
+				}
+				remove_building = {
+					type = arms_factory
+					level = 1
+				}
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_controlled_state = {
+				limit = {
+					free_building_slots = {
+						building = arms_factory
+						size > 1
+						include_locked = yes
+					}
+					is_core_of = ROOT
+				}
+				remove_building = {
+					type = arms_factory
+					level = 1
+				}
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = ENG_reopen_parliament
+	icon = GFX_ENG_parliament
+
+	prerequisite = {
+		focus = ENG_begin_reconstruction
+	}
+
+	relative_position_id = ENG_begin_reconstruction
+
+	x = -5
+	y = 1
+
+	cost = 5
+
+	ai_will_do = {
+		base = 75
+	}
+
+	available = {
+		has_country_flag = return_of_the_lords
+	}
+
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_POLITICAL
+	}
+
+	completion_reward = {
+		country_event = {
+			id = krg_eng.42
+		}
+		
+	}
+}
+
+shared_focus = {
+	id = ENG_firearms_and_paramilitaries_debate
+	icon = GFX_generic_demobilise_guns
+
+	prerequisite = {
+		focus = ENG_reopen_parliament
+	}
+
+	relative_position_id = ENG_reopen_parliament
+
+	x = 1
+	y = 2
+
+	cost = 4
+
+	ai_will_do = {
+		base = 75
+	}
+
+	available = {
+		has_country_flag = nationalist_syndicalist_fights
+	}
+
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_POLITICAL
+		FOCUS_FILTER_DESYNDICALISATION
+	}
+
+	completion_reward = {
+		country_event = {
+			id = krg_eng.45
+		}
+	}
+}
+
+shared_focus = {
+	id = ENG_fate_of_the_unions
+	icon = GFX_ENG_fate_of_unions
+
+	prerequisite = {
+		focus = ENG_reopen_parliament
+	}
+
+	relative_position_id = ENG_reopen_parliament
+
+	x = -1
+	y = 3
+
+	cost = 4
+
+	ai_will_do = {
+		base = 45
+	}
+
+	available = {
+
+	}
+
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_DESYNDICALISATION
+		FOCUS_FILTER_POLITICAL
+	}
+
+	completion_reward = {
+		country_event = {
+			id = krg_eng.56
+		}
+	}
+}
+
+shared_focus = {
+	id = ENG_filling_legal_gap
+
+	icon = GFX_generic_electoral_law
+
+	prerequisite = {
+		focus = ENG_reopen_parliament
+	}
+
+	relative_position_id = ENG_reopen_parliament
+
+	x = 0
+	y = 1
+
+	cost = 4
+
+	ai_will_do = {
+		base = 65
+	}
+
+	available = {
+
+	}
+
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_DESYNDICALISATION
+		FOCUS_FILTER_POLITICAL
+	}
+
+	completion_reward = {
+		country_event = {
+			id = krg_eng.303
+		}
+	}
+}
+
+shared_focus = {
+	id = ENG_the_constitutional_debates
+	icon = GFX_generic_constitution_2
+
+	prerequisite = {
+		focus = ENG_fate_of_the_unions
+	}
+
+	prerequisite = {
+		focus = ENG_firearms_and_paramilitaries_debate
+	}
+
+	prerequisite = {
+		focus = ENG_filling_legal_gap
+	}
+
+	relative_position_id = ENG_firearms_and_paramilitaries_debate
+
+	x = -1
+	y = 2
+
+	cost = 5
+
+	ai_will_do = {
+		base = 60
+	}
+
+	available = {
+
+	}
+
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_POLITICAL
+	}
+
+	completion_reward = {
+		country_event = {
+			id = krg_eng.61
+		}
+	}
+}
+
+shared_focus = {
+	id = ENG_end_the_syndicalist_menace
+	icon = GFX_ENG_ban_unions
+
+	prerequisite = {
+		focus = ENG_begin_reconstruction
+	}
+
+	x = 7
+	y = 3
+
+	cost = 5
+
+	available = {
+
+	}
+
+	ai_will_do = {
+		base = 150
+	}
+
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_DESYNDICALISATION
+	}
+
+	completion_reward = {
+		set_country_flag = ENG_has_completed_syndicalist_menace_focus
+		custom_effect_tooltip = ENG_unlock_decisions_to_secure_various_parts_of_our_country
+	}
+}
+
+shared_focus = {
+	id = ENG_establish_the_birmingham_trials
+	icon = GFX_DOM_The_Trial
+
+	prerequisite = {
+		focus = ENG_end_the_syndicalist_menace
+	}
+
+	relative_position_id = ENG_end_the_syndicalist_menace
+
+	x = 1
+	y = 1
+
+	cost = 5
+
+	ai_will_do = {
+		base = 250
+	}
+
+	available = {
+		date > 1948.7.1
+		has_country_flag = ENG_emergency_powers_act_passed
+	}
+
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_DESYNDICALISATION
+	}
+
+	completion_reward = {
+		country_event = {
+			id = krg_eng.10
+		}
+	}
+}
+
+shared_focus = {
+	id = ENG_totalism_on_trial
+	icon = GFX_ENG_plot_of_november
+
+	prerequisite = {
+		focus = ENG_form_the_BLUE
+	}
+
+	prerequisite = {
+		focus = ENG_establish_the_birmingham_trials
+	}
+
+	mutually_exclusive = {
+		focus = ENG_punish_all_syndicalists
+	}
+
+	relative_position_id = ENG_establish_the_birmingham_trials
+
+	x = -1
+	y = 1
+
+	cost = 5
+
+	ai_will_do = {
+		base = 55
+	}
+
+	available = {
+		has_country_flag = totalism_on_trial
+	}
+
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_DESYNDICALISATION
+	}
+
+	completion_reward = {
+		unlock_decision_tooltip = ENG_amnesty_for_low_ranking_syndicalists
+		add_popularity = {
+			ideology = authoritarian_socialist
+			popularity = -0.03
+		}
+	}
+}
+
+shared_focus = {
+	id = ENG_punish_all_syndicalists
+	icon = GFX_ENG_last_mann_standing
+
+	prerequisite = {
+		focus = ENG_form_the_BLUE
+	}
+
+	prerequisite = {
+		focus = ENG_establish_the_birmingham_trials
+	}
+
+	mutually_exclusive = {
+		focus = ENG_totalism_on_trial
+	}
+
+	relative_position_id = ENG_establish_the_birmingham_trials
+
+	x = -3
+	y = 1
+	
+	cost = 5
+
+	ai_will_do = {
+		base = 55
+	}
+
+	available = {
+		has_country_flag = syndicalism_on_trial
+	}
+
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_DESYNDICALISATION
+	}
+
+	completion_reward = {
+		unlock_decision_tooltip = ENG_remove_syndicalist_sympathisers_from_government
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = -0.05
+		}
+		add_popularity = {
+			ideology = radical_socialist
+			popularity = 0.025
+		}
+	}
+}
+
+
+
+
+shared_focus = {
+	id = ENG_form_the_BLUE
+	icon = GFX_generic_secret_agents
+
+	prerequisite = {
+		focus = ENG_end_the_syndicalist_menace
+	}
+
+	x = 6
+	y = 4
+
+	cost = 5
+
+	available = {
+
+	}
+
+	ai_will_do = {
+		base = 150
+	}
+
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_DESYNDICALISATION
+	}
+
+	completion_reward = {
+		set_country_flag = ENG_form_the_BLUE_completed
+		add_ideas = ENG_the_B_L_U_E
+		set_country_flag = ENG_formed_the_blue
+		custom_effect_tooltip = ENG_unlock_decisions_to_estabilish_blue_strongholds
+	}
+}
+
+shared_focus = {
+	id = ENG_hunt_down_the_BPLA
+	icon = GFX_HOL_ban_paramilitary_left
+
+	prerequisite = {
+		focus = ENG_totalism_on_trial
+		focus = ENG_punish_all_syndicalists
+	}
+
+	prerequisite = {
+		focus = ENG_firearms_and_paramilitaries_debate
+	}
+
+	relative_position_id = ENG_totalism_on_trial
+
+	x = -3
+	y = 1
+
+	cost = 5
+
+	available = {
+
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_DESYNDICALISATION
+	}
+
+	completion_reward = {
+		set_country_flag = ENG_hunt_down_the_BPLA_completed
+		set_country_flag = ENG_can_fight_bpla
+		custom_effect_tooltip = KRG_ENG_unlock_decisions_to_figh_bpla
+	}
+}
+
+shared_focus = {
+	id = ENG_the_red_book
+	icon = GFX_OTT_constitution
+	
+	prerequisite = {
+		focus = ENG_form_the_BLUE
+	}
+
+	relative_position_id = ENG_form_the_BLUE
+
+	x = 3
+	y = 1
+
+	cost = 5
+
+	ai_will_do = {
+		base = 45
+		modifier = {
+			has_completed_focus = ENG_firearms_and_paramilitaries_debate
+			add = 100
+		}
+	}
+
+	available = {
+
+	}
+
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_DESYNDICALISATION
+	}
+
+	completion_reward = {
+		country_event = {
+			id = krg_eng.195
+		}
+		unlock_decision_tooltip = ENG_target_known_syndicalists
+	}
+}
+
+shared_focus = {
+	id = ENG_the_forever_eyes_programme
+	icon = GFX_ENG_five_eyes
+
+	prerequisite = {
+		focus = ENG_the_red_book
+	}
+	
+	mutually_exclusive = {
+		focus = ENG_loyalist_propaganda
+	}
+
+	relative_position_id = ENG_the_red_book
+
+	x = -1
+	y = 1
+
+	cost = 4
+
+	ai_will_do = {
+		base = 45
+	}
+
+	available = {
+
+	}
+
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_DESYNDICALISATION
+	}
+
+	completion_reward = {
+		add_stability = -0.03
+	}
+}
+
+shared_focus = {
+	id = ENG_loyalist_propaganda
+	icon = GFX_generic_propaganda_film
+
+	prerequisite = {
+		focus = ENG_the_red_book
+	}
+
+	mutually_exclusive = {
+		focus = ENG_the_forever_eyes_programme
+	}
+
+	relative_position_id = ENG_the_red_book
+
+	x = 1
+	y = 1
+
+	cost = 4
+
+	ai_will_do = {
+		base = 55
+	}
+
+	available = {
+
+	}
+
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_DESYNDICALISATION
+	}
+
+	completion_reward = {
+		unlock_decision_tooltip = ENG_spread_pro_monarchist_propaganda
+		add_popularity = {
+			ideology = social_conservative
+			popularity = 0.02
+		}
+		add_popularity = {
+			ideology = social_liberal
+			popularity = 0.01
+		}
+		add_popularity = {
+			ideology = national_populist
+			popularity = 0.005
+		}
+	}
+}
+
+shared_focus = {
+	id = ENG_museums_to_totalist_terror
+	icon = GFX_generic_ideology_totalist
+
+	prerequisite = {
+		focus = ENG_hunt_down_the_BPLA
+	}
+
+	prerequisite = {
+		focus = ENG_the_forever_eyes_programme
+		focus = ENG_loyalist_propaganda
+	}
+
+	
+
+	relative_position_id = ENG_hunt_down_the_BPLA
+
+	x = 3
+	y = 1
+
+	cost = 5
+
+	ai_will_do = {
+		base = 55
+	}
+
+	available = {
+
+	}
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_DESYNDICALISATION
+	}
+
+	completion_reward = {
+		unlock_decision_tooltip = ENG_bring_light_to_maximist_horrors
+		swap_ideas = {
+			remove_idea = ENG_legacy_of_the_maximists
+			add_idea = ENG_legacy_of_the_maximists_2
+		}
+		add_popularity = {
+			ideology = authoritarian_socialist
+			popularity = -0.01
+		}
+		add_popularity = {
+			ideology = radical_socialist
+			popularity = -0.02
+		}
+		add_war_support = -0.1
+	}
+}
+
+shared_focus = {
+	id = ENG_officialise_rationing
+	icon = GFX_ENG_rationing
+
+	prerequisite = {
+		focus = ENG_begin_reconstruction
+	}
+
+	available = {
+		has_country_flag = ENG_war_damage_act_passed
+	}
+	
+	relative_position_id = ENG_begin_reconstruction
+
+	x = 7
+	y = 1
+
+	cost = 6
+
+	ai_will_do = {
+		base = 50
+	}
+
+	available = {
+
+	}
+
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_RECONSTRUCTION
+	}
+
+	completion_reward = {
+		add_ideas = ENG_rationing
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = -0.02
+		}
+
+		if = {
+			limit = {
+				check_variable = { ENG_commons_expected_seats_SocCon_ON > 53 }
+			}
+			set_temp_variable = { ENG_change_expected_seats_party = -54 }
+			ENG_change_expected_seats_SocCon_ON = yes
+			set_temp_variable = { ENG_change_expected_seats_party = 29 }
+			ENG_change_expected_seats_Ind = yes
+			set_temp_variable = { ENG_change_expected_seats_party = 25 }
+			ENG_change_expected_seats_IndLib = yes
+		}
+		else_if = {
+			limit = {
+				check_variable = { ENG_commons_expected_seats_IndCon > 53 }
+			}
+			set_temp_variable = { ENG_change_expected_seats_party = -54 }
+			ENG_change_expected_seats_IndCon = yes
+			set_temp_variable = { ENG_change_expected_seats_party = 29 }
+			ENG_change_expected_seats_Ind = yes
+			set_temp_variable = { ENG_change_expected_seats_party = 25 }
+			ENG_change_expected_seats_IndLib = yes
+		}
+	}
+}
+
+shared_focus = {
+	id = ENG_department_of_reconstruction
+	icon = GFX_ENG_new_british_union
+
+	prerequisite = {
+		focus = ENG_officialise_rationing
+	}
+
+	relative_position_id = ENG_officialise_rationing
+
+	x = 0
+	y = 1
+
+	cost = 6
+
+	available = {
+
+	}
+
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_RECONSTRUCTION
+	}
+
+	completion_reward = {
+		add_ideas = ENG_department_of_national_reconstruction
+		country_event = {
+			id = krg_eng.101
+		}
+	}
+}
+
+shared_focus = {
+	id = ENG_prioritise_vital_industry
+	icon = GFX_generic_improve_industry
+
+	prerequisite = {
+		focus = ENG_nationalise_our_assets
+		focus = ENG_free_the_markets
+	}
+
+	prerequisite = {
+		focus = ENG_department_of_reconstruction
+	}
+
+	mutually_exclusive = {
+		focus = ENG_prioritise_vital_infrastructure
+	}
+
+	relative_position_id = ENG_department_of_reconstruction
+
+	x = 1
+	y = 1
+	
+	cost = 4
+
+	ai_will_do = {
+		base = 35
+	}
+
+	available = {
+
+	}
+
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_RECONSTRUCTION
+	}
+
+	completion_reward = {
+		move_up_business_spending = yes
+		swap_ideas = {
+			remove_idea = ENG_department_of_national_reconstruction
+			add_idea = ENG_department_of_national_reconstruction_industry
+		}
+	}
+}
+
+shared_focus = {
+	id = ENG_repair_london_dockyards
+	icon = GFX_generic_advanced_construction_techniques
+
+	prerequisite = {
+		focus = ENG_the_relocation_authority
+	}
+
+	prerequisite = {
+		focus = ENG_prioritise_vital_industry
+	}
+
+	relative_position_id = ENG_prioritise_vital_industry
+
+	x = 1
+	y = 1
+
+	cost = 5
+
+	ai_will_do = {
+		base = 35
+	}
+
+	available = {
+
+	}
+
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_RECONSTRUCTION
+		FOCUS_FILTER_INDUSTRY
+	}
+
+	completion_reward = {
+		126 = {
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = dockyard
+				level = 2
+				instant_build = yes
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = ENG_prioritise_vital_infrastructure
+	icon = GFX_generic_infrastructure
+
+	prerequisite = {
+		focus = ENG_use_old_plans
+		focus = ENG_the_new_city_programme
+	}
+
+	prerequisite = {
+		focus = ENG_department_of_reconstruction
+	}
+
+	mutually_exclusive = {
+		focus = ENG_prioritise_vital_industry
+	}
+
+	relative_position_id = ENG_department_of_reconstruction
+
+	x = -1
+	y = 1
+
+	cost = 4
+
+	ai_will_do = {
+		base = 35
+	}
+
+	available = {
+
+	}
+
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_RECONSTRUCTION
+	}
+
+	completion_reward = {
+		move_up_inf_spending = yes
+		swap_ideas = {
+			remove_idea = ENG_department_of_national_reconstruction
+			add_idea = ENG_department_of_national_reconstruction_infrastructure
+		}
+	}
+}
+
+shared_focus = {
+	id = ENG_the_royal_road_service
+	icon = GFX_KRG_generic_highway
+
+	prerequisite = {
+		focus = ENG_the_relocation_authority
+	}
+	
+	prerequisite = {
+		focus = ENG_prioritise_vital_infrastructure
+	}
+
+	prerequisite = {
+		focus = ENG_the_new_city_programme
+	}
+
+	relative_position_id = ENG_prioritise_vital_infrastructure
+
+	mutually_exclusive = {
+		focus = ENG_british_rail
+	}
+
+	x = -1
+	y = 1
+
+	cost = 5
+
+	ai_will_do = {
+		base = 35
+	}
+
+	available = {
+
+	}
+
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_RECONSTRUCTION
+	}
+
+	completion_reward = {
+		swap_ideas = {
+			remove_idea = ENG_department_of_national_reconstruction_infrastructure
+			add_idea = ENG_department_of_national_reconstruction_infrastructure_highway
+		}
+		126 = {
+			add_building_construction = {
+				type = infrastructure
+				level = 1
+				instant_build = yes
+			}
+		}
+
+		128 = {
+			add_building_construction = {
+				type = infrastructure
+				level = 1
+				instant_build = yes
+			}
+		}
+
+		125 = {
+			add_building_construction = {
+				type = infrastructure
+				level = 1
+				instant_build = yes
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = ENG_british_rail
+	icon = GFX_SER_Finish_Infrastructure_Reforms
+
+	prerequisite = {
+		focus = ENG_the_relocation_authority
+	}
+
+	prerequisite = {
+		focus = ENG_prioritise_vital_infrastructure
+	}
+
+	mutually_exclusive = {
+		focus = ENG_the_royal_road_service
+	}
+
+	relative_position_id = ENG_prioritise_vital_infrastructure
+
+	x = 1
+	y = 1
+
+	cost = 5
+
+	ai_will_do = {
+		base = 35
+	}
+
+	available = {
+
+	}
+
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_RECONSTRUCTION
+	}
+
+	completion_reward = {
+		swap_ideas = {
+			remove_idea = ENG_department_of_national_reconstruction_infrastructure
+			add_idea = ENG_department_of_national_reconstruction_infrastructure_railroad
+		}
+		build_railway = {
+			level = 2
+			path = { 6103 13252 9268 6270 9297 11345 9315 6318 6384 }
+			fallback = yes
+			start_province = 6103
+    		target_province = 6384
+		}
+	}
+}
+
+
+shared_focus = {
+	id = ENG_the_new_city_programme
+	icon = GFX_CAN_car_cities_industry
+
+	prerequisite = {
+		focus = ENG_officialise_rationing
+	}
+
+	mutually_exclusive = {
+		focus = ENG_use_old_plans
+	}
+
+	relative_position_id = ENG_officialise_rationing
+
+	x = -2
+	y = 1
+
+	cost = 5
+
+	ai_will_do = {
+		base = 35
+	}
+
+	available = {
+
+	}
+	
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_RECONSTRUCTION
+	}
+
+	completion_reward = {
+		add_timed_idea = {
+			idea = ENG_new_plan_rebuild
+			days = 700
+		}
+		hidden_effect = {
+			country_event = {
+				id = krg_eng.98
+				days = 700
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = ENG_use_old_plans
+	icon = GFX_ENG_big_ben
+
+	prerequisite = {
+		focus = ENG_officialise_rationing
+	}
+
+	mutually_exclusive = {
+		focus = ENG_the_new_city_programme
+	}
+
+	relative_position_id = ENG_officialise_rationing
+
+	x = -4
+	y = 1
+
+	cost = 5
+
+	ai_will_do = {
+		base = 35
+	}
+
+	available = {
+
+	}
+
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_RECONSTRUCTION
+	}
+
+	completion_reward = {
+		add_timed_idea = {
+			idea = ENG_old_plan_rebuild
+			days = 700
+		}
+	}
+}
+
+shared_focus = {
+	id = ENG_restore_buckingham_palace
+	icon = GFX_ENG_buckingham_palace
+
+	prerequisite = {
+		focus = ENG_use_old_plans
+		focus = ENG_the_new_city_programme
+	}
+
+	relative_position_id = ENG_use_old_plans
+
+	x = 1
+	y = 1
+
+	cost = 3
+
+	ai_will_do = {
+		base = 25
+	}
+
+	available = {
+
+	}
+	
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_RECONSTRUCTION
+	}
+
+	completion_reward = {
+		add_political_power = 50
+
+		add_stability = 0.025
+
+		add_popularity = {
+			ideology = social_conservative
+			popularity = 0.025
+		}
+	}
+}
+
+shared_focus = {
+	id = ENG_fate_of_bletchley_park
+	icon = GFX_GER_Zuse_Computer
+
+	prerequisite = {
+		focus = ENG_totalism_on_trial
+		focus = ENG_punish_all_syndicalists
+	}
+
+	relative_position_id = ENG_punish_all_syndicalists
+
+	x = 1
+	y = 1
+
+	cost = 3
+
+	ai_will_do = {
+		base = 40
+	}
+
+	available = {
+
+	}
+
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_DESYNDICALISATION
+		FOCUS_FILTER_RESEARCH
+	}
+
+	completion_reward = {
+		country_event = {
+			id = krg_eng.96
+		}
+	}
+}
+
+shared_focus = {
+	id = ENG_the_nuclear_memorial
+	icon = GFX_generic_nuclear_science
+
+	prerequisite = {
+		focus = ENG_restore_buckingham_palace
+	}
+	
+	prerequisite = {
+		focus = ENG_repair_london_dockyards
+		focus = ENG_the_royal_road_service
+		focus = ENG_british_rail
+	}
+	
+	relative_position_id = ENG_restore_buckingham_palace
+
+	x = 0
+	y = 2
+
+	cost = 3
+
+	ai_will_do = {
+		base = 25
+	}
+
+	available = {
+
+	}
+
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_RECONSTRUCTION
+	}
+
+	completion_reward = {
+		country_event = {
+			id = krg_eng.97
+		}
+	}
+}
+
+shared_focus = {
+	id = ENG_nationalise_our_assets
+	icon = GFX_generic_state_economy
+
+	prerequisite = {
+		focus = ENG_officialise_rationing
+	}
+
+	mutually_exclusive = {
+		focus = ENG_free_the_markets
+	}
+
+	relative_position_id = ENG_officialise_rationing
+
+	x = 2
+	y = 1
+
+	cost = 5
+
+	ai_will_do = {
+		base = 40
+	}
+
+	available = {
+
+	}
+
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_RECONSTRUCTION
+		FOCUS_FILTER_INDUSTRY
+	}
+
+	completion_reward = {
+		unlock_decision_tooltip = ENG_free_industries_act
+		set_temp_variable = { ENG_temp_change_syndie_tension = 0.05 }
+		KRG_ENG_change_syndie_tension = yes
+		country_event = {
+			id = krg_eng.99
+		}
+	}
+}
+
+shared_focus = {
+	id = ENG_free_the_markets
+	icon = GFX_generic_privatization
+
+	prerequisite = {
+		focus = ENG_officialise_rationing
+	}
+
+	mutually_exclusive = {
+		focus = ENG_nationalise_our_assets
+	}
+
+	relative_position_id = ENG_officialise_rationing
+
+	x = 4
+	y = 1
+
+	cost = 5
+
+	ai_will_do = {
+		base = 30
+	}
+
+	available = {
+
+	}
+
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_RECONSTRUCTION
+		FOCUS_FILTER_INDUSTRY
+	}
+
+	completion_reward = {
+		unlock_decision_tooltip = ENG_free_industries_act
+		set_temp_variable = { ENG_temp_change_syndie_tension = -0.05 }
+		KRG_ENG_change_syndie_tension = yes
+		country_event = {
+			id = krg_eng.100
+		}
+	}
+}
+
+shared_focus = {
+	id = ENG_the_relocation_authority
+	icon = GFX_CAN_home_isles
+
+	prerequisite = {
+		focus = ENG_nationalise_our_assets
+		focus = ENG_free_the_markets
+	}
+
+	relative_position_id = ENG_nationalise_our_assets
+
+	x = 1
+	y = 1
+
+	cost = 4
+
+	ai_will_do = {
+		base = 35
+	}
+
+	available = {
+
+	}
+
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_RECONSTRUCTION
+	}
+
+	completion_reward = {
+		add_timed_idea = {
+			idea = ENG_relocation_authority
+			days = 1000
+		}
+		country_event = {
+			id = krg_eng.102
+		}
+	}
+}
+
+shared_focus = {
+	id = ENG_leave_no_brick_unturned
+	icon = GFX_generic_bricks
+
+	prerequisite = {
+		focus = ENG_the_royal_road_service
+		focus = ENG_british_rail
+		focus = ENG_repair_london_dockyards
+	}
+
+	relative_position_id = ENG_the_royal_road_service
+
+	x = 2
+	y = 1
+
+	cost = 6
+
+	ai_will_do = {
+		base = 55
+	}
+
+	available = {
+
+	}
+
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_RECONSTRUCTION
+	}
+
+	completion_reward = {
+		custom_effect_tooltip = ENG_no_brick_effect_tooltip
+		set_variable = {
+			ENG_BlitzConsumerGoods = 0.3
+		}
+		set_variable = {
+			ENG_BlitzIndustrialFactory = -0.25
+		}
+		set_variable = {
+			ENG_BlitzIndustrialDockyard = -0.25
+		}
+		set_variable = {
+			ENG_BlitzMaxEfficiency = -0.15
+		}
+		set_variable = {
+			ENG_BlitzEfficiencyGain = -0.15
+		}
+		set_variable = {
+			ENG_BlitzConstructionSpeed = -0.2
+		}
+		set_variable = {
+			ENG_BlitzRepairSpeed = 0
+		}
+		set_variable = {
+			ENG_BlitzMinExport = -0.3
+		}
+		set_variable = {
+			ENG_BlitzMonthlyPop = -0.2
+		}
+		set_variable = {
+			ENG_BlitzFreeRepair = -0.5
+		}
+	}
+}
+
+shared_focus = {
+	id = ENG_prepare_the_general_election
+	icon = GFX_generic_elections
+
+	prerequisite = {
+		focus = ENG_museums_to_totalist_terror
+	}
+
+	prerequisite = {
+		focus = ENG_leave_no_brick_unturned
+	}
+
+	prerequisite = {
+		focus = ENG_the_nuclear_memorial
+	}
+
+	prerequisite = {
+		focus = ENG_the_constitutional_debates
+	}
+	
+	relative_position_id = ENG_the_constitutional_debates
+
+	x = 6
+	y = 2
+
+	cost = 5
+
+	ai_will_do = {
+		base = 100
+	}
+
+	cancelable = no
+	
+	available = {
+		
+	}
+
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_POLITICAL
+	}
+
+	completion_reward = {
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = -0.2
+		}
+		country_event = {
+			id = krg_eng.140
+		}
+		set_country_flag = first_tree_done
+		add_days_mission_timeout = {
+			mission = ENG_national_government_meet_expectations
+			days = -50
+		}
+	}
+}

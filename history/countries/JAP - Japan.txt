@@ -1,0 +1,200 @@
+﻿capital = 282
+set_stability = 0.4
+set_research_slots = 4
+set_convoys = 300
+set_oob = "JAP"
+
+set_variable = {
+	geacps_alignment_level = 4
+}
+
+universal_starting_techs = yes
+greater_east_asian_starting_techs = yes
+japan_starting_techs = yes
+
+create_faction = "Greater East-Asia Co-Prosperity Sphere"
+add_to_faction = PHI
+add_to_faction = INS
+add_to_faction = SIA
+add_to_faction = VIN
+add_to_faction = MLY
+add_to_faction = LAO
+add_to_faction = NBR
+
+# initialize_new_tech_sphere = yes
+# every_country = {
+# 	limit = {
+# 		NOT = { tag = JAP }
+# 		is_in_faction_with = JAP
+# 	}
+# 	set_temp_variable = {
+# 		temp_tech_sphere_owner = JAP
+# 	}
+# 	join_tech_sphere = yes
+# }
+
+every_country = {
+	limit = {
+		is_in_faction_with = JAP
+	}
+	add_to_tech_sharing_group = geacps_research
+}
+become_tech_leader = yes 
+
+
+### Starting National Leaders ###
+recruit_character = JAP_hirohito
+
+### Starting Field Marshals ###
+recruit_character = JAP_hisaichi_terauchi
+recruit_character = JAP_shunroku_hata
+
+### Starting Corps Commanders ###
+recruit_character = JAP_tomoyuki_yamashita
+recruit_character = JAP_akira_muto
+recruit_character = JAP_kanji_ishiwara
+recruit_character = JAP_shizuichi_tanaka
+recruit_character = JAP_yasuji_okamura
+recruit_character = JAP_toshizo_nishio
+recruit_character = JAP_rikichi_ando
+recruit_character = JAP_naruhiko_higashikuni
+recruit_character = JAP_seishiro_itagaki
+recruit_character = JAP_takashi_sakai
+recruit_character = JAP_kenji_doihara
+recruit_character = JAP_kenkichi_ueda
+recruit_character = JAP_shigeru_honjo
+recruit_character = JAP_yoshijiro_umezu
+recruit_character = JAP_otozo_yamada
+recruit_character = JAP_hatazo_adachi
+recruit_character = JAP_iwane_matsui
+recruit_character = JAP_sadao_araki
+recruit_character = JAP_keisuke_fujie
+recruit_character = JAP_kiichiro_higuchi
+recruit_character = JAP_masaharu_homma
+recruit_character = JAP_harukichi_hyakutake
+recruit_character = JAP_jo_iimura
+recruit_character = JAP_masatane_kanda
+recruit_character = JAP_kuniaki_koiso
+
+### Starting Naval Admirals ###
+recruit_character = JAP_isoroku_yamamoto
+recruit_character = JAP_mineichi_koga
+recruit_character = JAP_kiyoshi_hasegawa
+recruit_character = JAP_shigeyoshi_inoue
+recruit_character = JAP_nobutake_kondo
+recruit_character = JAP_takeo_takagi
+recruit_character = JAP_soemu_toyoda
+recruit_character = JAP_jisaburo_ozawa
+recruit_character = JAP_zengo_yoshida
+recruit_character = JAP_hiroaki_abe
+recruit_character = JAP_tadashige_daigo
+recruit_character = JAP_gengo_hyakutake
+
+### Ministers ###
+recruit_character = JAP_Yoriyasu_Arima
+recruit_character = JAP_Shigeru_Yoshida
+recruit_character = JAP_Ichiro_Hatoyama
+recruit_character = JAP_Hideki_Tojo
+recruit_character = JAP_Shigeru_Yoshida_foreign
+recruit_character = JAP_Seihin_Ikeda
+recruit_character = JAP_Okinori_Kaya
+recruit_character = JAP_Ichiro_Hatoyama_interior
+recruit_character = JAP_Hideki_Tojo_intel
+recruit_character = JAP_Yoshio_Fukui
+
+add_ideas = {
+	JAP_our_bitter_peace
+	JAP_the_peoples_government_association_2
+	JAP_powder_keg_of_revolution
+	JAP_the_zaibatsu_empire
+
+	KRG_all_adults_serve
+	KRG_limited_exports
+	KRG_partial_mob
+	KRG_illiberal_democracy
+	KRG_professional_military
+	KRG_immigration_merit_based
+
+	econ_medium_business_spending
+	econ_medium_edu_spending
+	econ_medium_hc_spending
+	econ_medium_inf_spending
+
+	JAP_Yoriyasu_Arima_hog_pau
+	JAP_Shigeru_Yoshida_fm_sli
+	JAP_Seihin_Ikeda_em_mli
+	JAP_Okinori_Kaya_jm_ade
+	JAP_Ichiro_Hatoyama_im_sco
+	JAP_Hideki_Tojo_hoi_npo
+}
+
+set_politics = {
+	ruling_party = authoritarian_democrat
+	elections_allowed = no
+}
+
+set_country_flag = country_show_pm
+set_country_flag = JAP_Yoriyasu_Arima
+set_country_flag = JAP_kazoku_supportive
+set_country_flag = JAP_bureaucrats_neutral
+set_country_flag = JAP_corporations_opposed
+
+country_event = {
+	id = KRG_JAP_Domestic.0
+	days = 1
+}
+
+set_popularities = {
+    authoritarian_socialist = 0
+	radical_socialist = 8
+	social_democrat = 5
+	revolutionary_republican = 8
+    social_liberal = 1
+    market_liberal = 1
+    social_conservative = 4
+    authoritarian_democrat = 65
+    paternal_autocrat = 8
+    national_populist = 0
+}
+
+coal_add_pat_aut = yes
+
+### Variants ###
+
+if = {
+	limit = {
+		has_dlc_mtg = yes
+	}
+	JAP_start_naval_variant = yes # check _add_naval_variants in scripted effects.
+	set_naval_oob = "JAP_naval"
+}
+
+if = {
+	limit = {
+		has_dlc_mtg = no
+	}
+	set_naval_oob = "JAP_naval_legacy"
+}
+
+
+if = {
+	limit = {
+		has_dlc_lar = yes
+	}
+	create_intelligence_agency = {
+		icon = GFX_intelligence_agency_logo_jap
+		name = "Kempeitai"  
+	}
+	upgrade_intelligence_agency = upgrade_army_department #same as DNF
+	upgrade_intelligence_agency = upgrade_passive_defense
+	upgrade_intelligence_agency = upgrade_passive_defense
+	upgrade_intelligence_agency = upgrade_form_department
+	upgrade_intelligence_agency = upgrade_plastic_explosives
+	upgrade_intelligence_agency = upgrade_portable_radios
+	upgrade_intelligence_agency = upgrade_decryption_boost
+	upgrade_intelligence_agency = upgrade_decryption_boost
+	upgrade_intelligence_agency = upgrade_decryption_boost_2
+	upgrade_intelligence_agency = upgrade_decryption_boost_2
+
+    set_faction_spymaster = yes
+}

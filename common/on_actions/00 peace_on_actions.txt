@@ -1,0 +1,264 @@
+# ROOT = loser
+# FROM = winner
+on_actions = {
+	on_capitulation = {
+		effect = {
+			if = {
+				limit = {
+					tag = MOR
+					FROM = {
+						tag = SPR
+					}
+					NOT = { MOR = { AND = { has_war_with = NFA has_war_with = SPR } } }
+				}
+				KRG_peace_SPR_MOR = yes
+			}
+			if = {
+				limit = {
+					tag = MOR
+					FROM = {
+						tag = AMR
+					}
+				}
+				AMR = { 
+					country_event = krg_mcw.3
+				}
+			}
+			if = {
+				limit = {
+					tag = AMR
+					FROM = {
+						tag = MOR
+					}
+					NOT = { MOR = { has_war_with = SPR } }
+				}
+				MOR = { 
+					country_event = krg_mcw.4
+				}
+			}
+			if = {
+				limit = {
+					tag = AMR
+					FROM = {
+						tag = MOR
+					}
+					MOR = { has_war_with = SPR }
+				}
+				MOR = { 
+					country_event = krg_mcw.5
+				}
+			}
+			if = {
+				limit = {
+					tag = MOR
+					FROM = {
+						OR = {
+							tag = SPR
+							tag = NFA
+						}
+					}
+					MOR = { AND = { has_war_with = NFA has_war_with = SPR } }
+				}
+				KRG_peace_SPR_NFA_MOR = yes
+			}
+			if = {
+				limit = {
+					tag = ICE
+					FROM = {
+						tag = DEN
+					}
+				}
+				KRG_peace_DEN_ICE = yes
+			}
+			if = {
+				limit = {
+					tag = ENG
+					FROM = {
+						tag = UOB
+					}
+				}
+				KRG_peace_UOB_ENG = yes
+			}
+			if = {
+				limit = {
+					tag = ENG
+					FROM = {
+						tag = MXF
+					}
+				}
+				KRG_peace_MXF_ENG = yes
+			}
+			if = {
+				limit = {
+					tag = MXF
+					FROM = {
+						tag = UOB
+					}
+				}
+				KRG_peace_UOB_MXF = yes
+			}
+			if = {
+				limit = {
+					tag = UOB
+					FROM = {
+						tag = MXF
+					}
+				}
+				KRG_peace_MXF_UOB = yes
+			}
+			if = {
+				limit = {
+					tag = MXF
+					FROM = {
+						OR = {
+							is_in_faction_with = ENG
+							tag = ENG
+						}
+					}
+				}
+				KRG_peace_ENG_MXF = yes
+			}
+			if = {
+				limit = {
+					tag = UOB
+					FROM = {
+						OR = {
+							is_in_faction_with = ENG
+							tag = ENG
+						}
+					}
+				}
+				KRG_peace_ENG_UOB = yes
+			}
+			if = {
+				limit = {
+					tag = UOB
+					FROM = {
+						tag = GER
+					}
+				}
+				KRG_peace_GER_UOB = yes
+			}
+			
+			if = {
+				limit = {
+					tag = ALG
+					FROM = {
+						tag = NFA
+					}
+				}
+				KRG_peace_NFA_ALG = yes
+			}
+			if = {
+				limit = {
+					tag = TEX
+					FROM = {
+						OR = {
+							is_in_faction_with = NEE
+							is_in_faction_with = ENT
+						}
+					}
+				}
+				ara_victory = yes
+			}
+			if = {
+				limit = {
+					OR = {
+						tag = GLG
+						tag = CAL
+						tag = NEE
+					}
+					
+					count_triggers = {
+						amount = 2
+						GLG = { has_capitulated = yes }
+						CAL = { has_capitulated = yes }
+						NEE = { has_capitulated = yes }
+					}
+					
+					FROM = {
+						OR = {
+							tag = TEX
+							is_in_faction_with = TEX
+						}
+					}
+				}
+				TEX_ARA_victory = yes
+			}
+			if = {
+				limit = {
+					tag = CHI
+					FROM = {
+						tag = FNG
+					}
+				}
+				FNG = { country_event = { id = krg_fng_ccw.100 } }
+			}
+			if = {
+				limit = {
+					tag = FNG
+					FROM = {
+						tag = CHI
+					}
+				}
+				CHI = { country_event = { id = krg_chi_ccw.100 } }
+			}
+			if = {
+				limit = {
+					tag = SER
+					NOT = { SER = { is_in_faction_with = ENT } }
+					FROM = {
+						tag = DNF
+					}
+				}
+				DNF = { DNF_Serbian_Intervention_Victory = yes }
+			}
+
+			if = {
+				limit = {
+					tag = BSY
+					FROM = {
+						tag = SYR
+					}
+				}
+				KRG_peace_SYR_BSY = yes
+			}
+
+			if = {
+				limit = {
+					tag = SYR
+					FROM = {
+						tag = BSY
+					}
+				}
+				KRG_peace_BSY_SYR = yes
+			}
+
+			if = {
+				limit = {
+					tag = LAT
+					FROM = {
+						OR = {
+							tag = KRL
+							is_in_faction_with = KRL
+						}
+					}
+				}
+				KRG_peace_KRL_LAT = yes
+			}
+
+			if = {
+				limit = {
+					tag = VIE
+					FROM = {
+						OR = {
+							tag = VIN
+							is_in_faction_with = VIN
+						}
+					}
+				}
+				KRG_peace_VIN_VIE = yes
+			}
+		}
+	}
+}

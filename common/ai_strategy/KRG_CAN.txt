@@ -1,0 +1,140 @@
+CAN_contain_TEX = { #Containment should probably only happen once
+	allowed = { original_tag = CAN }
+	enable = {
+		has_war = no
+		TEX = {	
+			OR = {
+				has_war_with = CAL
+				has_war_with = GLG
+				has_war_with = NEE
+			}
+		}
+	}
+	abort = {
+		OR = {
+			OR = {
+				has_war_with = CAL
+				has_war_with = GLG
+				has_war_with = NEE
+			}
+			is_in_faction_with = TEX
+			TEX = {
+				NOT = { 
+					OR = {
+						has_war_with = CAL
+						has_war_with = GLG
+						has_war_with = NEE
+					}
+				}
+			}
+		}
+	}
+
+	ai_strategy = {
+		type = contain
+		id = "TEX"
+		value = 200
+	}
+}
+CAN_save_GLG = { #Modified vanilla "USA_save_the_aussies"
+	allowed = { original_tag = CAN }
+	enable = {
+		has_war = no
+
+		TEX = {	has_war_with = GLG }
+		GLG = {
+			surrender_progress > 0.15
+		}
+		has_opinion = {
+			target = GLG
+			value > 0 # not if we hate GLG
+		}
+	}
+	abort = {
+		OR = {
+			has_war_with = GLG
+			is_in_faction_with = TEX
+			TEX = {
+				NOT = { has_war_with = GLG }
+			}
+		}
+	}
+	ai_strategy = {
+		type = protect
+		id = "GLG"
+		value = 200
+	}
+	ai_strategy = {
+		type = support
+		id = "GLG"
+		value = 100
+	}
+}
+CAN_save_NEE = { #Modified vanilla "USA_save_the_aussies"
+	allowed = { original_tag = CAN }
+	enable = {
+		has_war = no
+
+		TEX = {	has_war_with = NEE }
+		NEE = {
+			surrender_progress > 0.15
+		}
+		has_opinion = {
+			target = NEE
+			value > 0 # not if we hate NEE
+		}
+	}
+	abort = {
+		OR = {
+			has_war_with = NEE
+			is_in_faction_with = TEX
+			TEX = {
+				NOT = { has_war_with = NEE }
+			}
+		}
+	}
+	ai_strategy = {
+		type = protect
+		id = "NEE"
+		value = 200
+	}
+	ai_strategy = {
+		type = support
+		id = "NEE"
+		value = 100
+	}
+}
+CAN_save_CAL = { #Modified vanilla "USA_save_the_aussies"
+	allowed = { original_tag = CAN }
+	enable = {
+		has_war = no
+
+		TEX = {	has_war_with = CAL }
+		CAL = {
+			surrender_progress > 0.15
+		}
+		has_opinion = {
+			target = CAL
+			value > 0 # not if we hate CAL
+		}
+	}
+	abort = {
+		OR = {
+			has_war_with = CAL
+			is_in_faction_with = TEX
+			TEX = {
+				NOT = { has_war_with = CAL }
+			}
+		}
+	}
+	ai_strategy = {
+		type = protect
+		id = "CAL"
+		value = 200
+	}
+	ai_strategy = {
+		type = support
+		id = "CAL"
+		value = 100
+	}
+}

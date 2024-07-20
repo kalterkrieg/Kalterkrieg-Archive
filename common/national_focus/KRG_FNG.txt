@@ -1,0 +1,1630 @@
+################################################################
+###   Designed by WeissIriss and Burhan and Axolotl >{O.O}<  ###
+###            Coded by Burhan and Axolotl >{O.O}<           ###
+################################################################  
+#!gfx:interface\KRG_goals.gfx
+
+focus_tree = {
+    id = krg_fng
+    country = {
+        factor = 0
+        modifier = {
+            add = 10
+            tag = FNG
+        }
+    }
+	default = no
+    continuous_focus_position = { x = 2400 y = 1000 }
+
+	shared_focus = FNG_peace
+	shared_focus = FNG_suppress_rebellion
+}
+
+shared_focus = {
+	id = FNG_peace
+	icon = GFX_CHI_year_of_the_rat
+	x = 0
+	y = 0
+	cost = 4
+	ai_will_do = {
+        base = 1
+    }
+	cancel_if_invalid = yes
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus FNG_peace"
+		add_political_power = 100
+        add_popularity = {
+            ideology = paternal_autocrat
+            popularity = 0.05
+        }
+	}
+}
+
+shared_focus = {
+	id = FNG_game_starts
+	icon = GFX_generic_purge_opposition ### TBD - New Icon
+	x = 0
+	y = 1
+	cost = 4
+	relative_position_id = FNG_peace
+	prerequisite = {
+		focus = FNG_peace
+	}
+	ai_will_do = {
+        base = 1
+    }
+	cancel_if_invalid = yes
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus FNG_game_starts"
+		### Internal Struggle System
+		FNG = { country_event = { id = krg_fng.1 days = 5 } }
+	}
+}
+
+shared_focus = {
+	id = FNG_shimonoseki_again
+	icon = GFX_generic_skull_treaty
+	x = -1
+	y = 1
+	cost = 4
+	relative_position_id = FNG_game_starts
+	prerequisite = {
+		focus = FNG_game_starts
+	}
+	ai_will_do = {
+        base = 25
+    }
+	cancel_if_invalid = yes
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus FNG_shimonoseki_again"
+		swap_ideas = {
+			remove_idea = FNG_idea_victory_over_japan
+			add_idea = CHI_idea_shimonoseki_total_compliance
+		}
+		country_event = {
+			id = krg_fng.12
+			days = 1
+		}
+
+	}
+}
+
+shared_focus = {
+	id = FNG_urban_takeovers
+	icon = GFX_ITA_urban
+	x = 1
+	y = 1
+	cost = 4
+	relative_position_id = FNG_game_starts
+	prerequisite = {
+		focus = FNG_game_starts
+	}
+	ai_will_do = {
+        base = 35
+    }
+	cancel_if_invalid = yes
+	completion_reward = {
+		# From Extensive Conscription to Volunteer Only
+		log = "[GetDateText]: [Root.GetName]: Focus FNG_urban_takeovers"
+		add_stability = 0.05
+		effect_tooltip = {
+			swap_ideas = {
+				remove_idea = FNG_development_modifier_tt_0
+				add_idea = FNG_development_modifier_tt_2
+			}
+		}
+		add_to_variable = {
+			var = FNG_DevConstructionSpeed
+			value = 0.1
+		}
+		country_event = {
+			id = krg_fng.20
+			days = 1
+		}
+	}
+}
+
+
+shared_focus = {
+	id = FNG_confiscating_enemy_assets
+	icon = GFX_generic_the_ministry_of_agriculture_trade_and_industry
+	x = -1
+	y = 1
+	cost = 6
+	relative_position_id = FNG_shimonoseki_again
+	prerequisite = {
+		focus = FNG_shimonoseki_again
+	}
+	ai_will_do = {
+        base = 35
+    }
+	cancel_if_invalid = yes
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus FNG_confiscating_enemy_assets"
+		effect_tooltip = {
+			swap_ideas = {
+				remove_idea = FNG_development_modifier_tt_0
+				add_idea = FNG_development_modifier_tt_1
+			}
+		}
+		add_to_variable = {
+			var = FNG_DevConsumerGoods
+			value = -0.1
+		}
+		country_event = {
+			id = krg_fng.13
+			days = 1
+		}
+
+		761 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				instant_build = yes
+				level = 1
+				type = arms_factory
+			}
+		}
+
+		716 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				instant_build = yes
+				level = 1
+				type = arms_factory
+			}
+		}
+
+		873 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				instant_build = yes
+				level = 1
+				type = arms_factory
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = FNG_society_of_practice
+	icon = GFX_generic_japanese_officer
+	x = -1
+	y = 1
+	cost = 4
+	relative_position_id = FNG_confiscating_enemy_assets
+	prerequisite = {
+		focus = FNG_confiscating_enemy_assets
+	}
+	ai_will_do = {
+        base = 15
+    }
+	cancel_if_invalid = yes
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus FNG_society_of_practice"
+
+		716 = {
+			add_manpower = -25000
+		}
+		761 = {
+			add_manpower = -25000
+		}
+		873 = {
+			add_manpower = -25000
+		}
+		525 = {
+			add_manpower = 25000
+		}
+		531 = {
+			add_manpower = 25000
+		}
+		282 = {
+			add_manpower = 25000
+		}
+		country_event = {
+			id = krg_fng.14
+			days = 1
+		}
+
+	}
+}
+
+shared_focus = {
+	id = FNG_new_diplomatic_relations
+	icon = GFX_generic_restart_diplomatic_initiatives
+	x = 1
+	y = 1
+	cost = 4
+	relative_position_id = FNG_society_of_practice
+	prerequisite = {
+		focus = FNG_society_of_practice
+	}
+	ai_will_do = {
+        base = 15
+    }
+	cancel_if_invalid = yes
+	completion_reward = {
+		move_down_trade_laws = yes
+
+		add_to_variable = {
+			var = CHI_DevConsumerGoods
+			value = -0.1
+			tooltip = chi_dev_consumer_up_tooltip
+		}
+		country_event = {
+			id = krg_fng.15
+			days = 1
+		}
+
+		log = "[GetDateText]: [Root.GetName]: Focus FNG_society_of_practice"
+	}
+}
+
+shared_focus = {
+	id = FNG_combined_logistics_headquarters
+	icon = GFX_generic_support_equipment
+	x = 3
+	y = 1
+	cost = 5
+	relative_position_id = FNG_urban_takeovers
+	prerequisite = {
+		focus = FNG_urban_takeovers
+	}
+	ai_will_do = {
+        base = 50
+    }
+	cancel_if_invalid = yes
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus FNG_combined_logistics_headquarters"
+		move_up_inf_spending = yes
+
+
+		add_equipment_to_stockpile = {
+			type = motorized_equipment
+			amount = 120
+		}
+
+		country_event = {
+			id = krg_fng.16
+			days = 1
+		}
+
+	}
+}
+
+shared_focus = {
+	id = FNG_expand_military_railways
+	icon = GFX_generic_seize_railway
+	x = 1
+	y = 1
+	cost = 6
+	relative_position_id = FNG_combined_logistics_headquarters
+	prerequisite = {
+		focus = FNG_combined_logistics_headquarters
+	}
+	ai_will_do = {
+        base = 50
+    }
+	cancel_if_invalid = yes
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus FNG_expand_military_railways"
+		build_railway = {
+			level = 1
+			build_only_on_allied = yes
+			fallback = yes
+			path = { 9843 4140 12026 7109 4190 1188 1169 4144 1139 9958 10364 12012 7568 7580 }
+			start_province = 9843
+			target_province = 7580
+		}
+
+		build_railway = {
+			level = 1
+			build_only_on_allied = yes
+			fallback = yes
+			path = { 1976 4256 7418 }
+			start_province = 1976
+			target_province = 7418
+		}
+
+	}
+}
+
+shared_focus = {
+	id = FNG_curtail_localism
+	icon = GFX_generic_examine_local_units
+	x = 1
+	y = 1
+	cost = 4
+	relative_position_id = FNG_shimonoseki_again
+	prerequisite = {
+		focus = FNG_urban_takeovers
+	}
+	prerequisite = {
+		focus = FNG_shimonoseki_again
+	}
+	ai_will_do = {
+        base = 35
+    }
+	cancel_if_invalid = yes
+	completion_reward = {
+		# Unlocks local warlord templates, I'll adjust the OOBs
+		log = "[GetDateText]: [Root.GetName]: Focus FNG_curtail_localism"
+		effect_tooltip = {
+			swap_ideas = {
+				remove_idea = FNG_military_tt_0
+				add_idea = FNG_military_tt_1
+			}
+		}
+		
+		hidden_effect = {
+			add_to_variable = { FNG_experience_gain_arm_factor_var = 0.15 }
+			subtract_from_variable = { FNG_terrain_penalty_reduction_var = 0.05 }
+			
+		}
+
+		country_event = {
+			id = krg_fng.17
+			days = 1
+		}
+		set_division_template_lock = {
+			division_template = "Northeastern Forward Division"
+			is_locked = no
+		}
+		set_division_template_lock = {
+			division_template = "Southeastern Forward Division"
+			is_locked = no
+		}
+
+		delete_unit_template_and_units = {
+			division_template = "Shanxi Clique Division"
+		}
+		delete_unit_template_and_units = {
+			division_template = "Youth Army Division"
+		}
+
+		add_equipment_to_stockpile = {
+			type = infantry_equipment_0
+			amount = 4500
+		}
+
+		add_equipment_to_stockpile = {
+			type = infantry_antitank_equipment_1
+			amount = 1500
+		}
+	}
+}
+
+shared_focus = {
+	id = FNG_recalculate_land_rents
+	icon = GFX_generic_landowner_tax_cuts
+	x = 1
+	y = 1
+	cost = 4
+	relative_position_id = FNG_urban_takeovers
+	prerequisite = {
+		focus = FNG_urban_takeovers
+	}
+	ai_will_do = {
+        base = 35
+    }
+	cancel_if_invalid = yes
+	completion_reward = {
+		# From High Taxation to Moderate Taxation
+		log = "[GetDateText]: [Root.GetName]: Focus FNG_recalculate_land_rents"
+		effect_tooltip = {
+			swap_ideas = {
+				remove_idea = FNG_development_modifier_tt_0
+				add_idea = FNG_development_modifier_tt_2
+			}
+		}
+		add_to_variable = {
+			var = FNG_DevConstructionSpeed
+			value = 0.1
+		}
+		country_event = {
+			id = krg_fng.22
+			days = 1
+		}
+
+	}
+}
+
+shared_focus = {
+	id = FNG_partisan_question
+	icon = GFX_CHI_reorganize_warlord_divisions
+	
+	x = 1
+	y = 1
+	cost = 4
+	prerequisite = {
+		focus = FNG_curtail_localism
+	}
+
+	prerequisite = {
+		focus = FNG_recalculate_land_rents
+	}
+
+	relative_position_id = FNG_curtail_localism
+	ai_will_do = {
+        base = 35
+    }
+	cancel_if_invalid = yes
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus FNG_partisan_question"
+		add_power_balance_value = {
+			id = FNG_rivalry_bop
+			value = -0.1
+		}
+		country_event = {
+			id = krg_fng.18
+			days = 1
+		}
+	}
+}
+
+shared_focus = {
+	id = FNG_final_nanjing_push
+	icon = GFX_LEP_officer_initiative
+	x = -1
+	y = 1
+	cost = 4
+	prerequisite = {
+		focus = FNG_curtail_localism
+	}
+	relative_position_id = FNG_curtail_localism
+	ai_will_do = {
+        base = 15
+    }
+	cancel_if_invalid = yes
+	completion_reward = {
+		# Unlocks local warlord templates, I'll adjust the OOBs
+		log = "[GetDateText]: [Root.GetName]: Focus FNG_curtail_localism"
+		every_owned_state = {
+			limit = {
+				is_owned_and_controlled_by = FNG
+				is_core_of = LEP
+			}
+			add_resistance = -5
+		}
+
+	}
+}
+
+
+shared_focus = {
+	id = FNG_financial_deficit_monetization
+	icon = GFX_generic_knife_money
+	x = 1
+	y = 1
+	cost = 4
+	relative_position_id = FNG_recalculate_land_rents
+	prerequisite = {
+		focus = FNG_recalculate_land_rents
+	}
+	ai_will_do = {
+        base = 15
+    }
+	cancel_if_invalid = yes
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus FNG_financial_deficit_monetization"
+		move_down_econ_mobilization = yes
+		effect_tooltip = {
+			swap_ideas = {
+				remove_idea = FNG_development_modifier_tt_0
+				add_idea = FNG_development_modifier_tt_3
+			}
+		}
+		add_to_variable = {
+			var = FNG_DevIndustrialFactory
+			value = 0.1
+		}
+		country_event = {
+			id = krg_fng.21
+			days = 1
+		}
+
+
+	}
+}
+
+shared_focus = {
+	id = FNG_military_reorganization
+	icon = GFX_generic_modern_armour_german
+	x = 1
+	y = 1
+	cost = 5
+	relative_position_id = FNG_financial_deficit_monetization
+
+	prerequisite = {
+		focus = FNG_partisan_question
+	}
+
+	prerequisite = {
+		focus = FNG_financial_deficit_monetization
+	}
+
+	prerequisite = {
+		focus = FNG_expand_military_railways
+	}
+	ai_will_do = {
+        base = 50
+    }
+	cancel_if_invalid = yes
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus FNG_military_reorganization"
+		move_up_military = yes
+		effect_tooltip = {
+			swap_ideas = {
+				remove_idea = FNG_military_tt_0
+				add_idea = FNG_military_tt_2
+			}
+		}
+		hidden_effect = {
+			#add_to_variable = { FNG_initiative_factor_var = 0.1 }
+			subtract_from_variable = { FNG_military_political_power_gain_var = 0.05 }
+			add_to_variable = { FNG_attrition_var = 0.15 }
+			add_to_variable = { FNG_army_morale_factor_var = 0.1 }
+			add_to_variable = { FNG_planning_speed_var = 0.1 }
+		}
+
+		add_war_support = 0.05
+
+		add_doctrine_cost_reduction = {
+			category = cat_combined_operations
+			cost_reduction = 0.5
+			uses = 2
+		}
+
+		country_event = {
+			id = krg_fng.19
+			days = 1
+		}
+	}
+}
+
+
+
+shared_focus = {
+	id = FNG_chinese_welfare
+	icon = GFX_DNF_chinese_welfare
+	x = 1
+	y = 1
+	cost = 5
+	relative_position_id = FNG_final_nanjing_push
+	prerequisite = {
+		focus = FNG_final_nanjing_push
+	}
+	prerequisite = {
+		focus = FNG_partisan_question
+	}
+	prerequisite = {
+		focus = FNG_financial_deficit_monetization
+	}
+
+	ai_will_do = {
+        base = 15
+    }
+	cancel_if_invalid = yes
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus FNG_open_for_business"
+		move_up_business_spending = yes
+		move_up_service_spending = yes
+
+		country_event = {
+			id = krg_fng.23
+			days = 1
+		}
+
+	}
+}
+
+shared_focus = {
+	id = FNG_uniting_the_long_divided
+	icon = GFX_CHI_zhili_unite_china
+	x = 1
+	y = 1
+	cost = 5
+	relative_position_id = FNG_new_diplomatic_relations
+	prerequisite = {
+		focus = FNG_partisan_question
+	}
+	prerequisite = {
+		focus = FNG_new_diplomatic_relations
+	}
+	prerequisite = {
+		focus = FNG_chinese_welfare
+	}
+	prerequisite = {
+		focus = FNG_military_reorganization
+	}
+	ai_will_do = {
+        base = 50
+    }
+	cancel_if_invalid = yes
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus FNG_uniting_the_long_divided"
+
+		country_event = {
+			id = krg_fng.24
+			days = 1
+		}
+
+	}
+}
+
+#!gfx:interface\KRG_goals.gfx
+shared_focus = {
+    id = FNG_suppress_rebellion
+    icon = GFX_FNG_southern_expedition
+    ai_will_do = {
+        base = 500
+    }
+	available = {
+		has_war_with = CHI
+	}
+	x = 13
+    y = 0
+
+	cost = 5
+
+    completion_reward = {
+		custom_effect_tooltip = FNG_suppress_rebellion_tooltip
+        log = "[GetDateText]: [Root.GetName]: Focus FNG_suppress_rebellion"
+		swap_ideas = {
+			remove_idea = CHI_idea_shimonoseki_total_compliance
+			add_idea = CHI_idea_shimonoseki_token_compliance
+		}
+    }
+}
+
+shared_focus = {
+    id = FNG_bandit_suppression_hq
+    icon = GFX_FNG_bandit_suppression
+    x = -5
+    y = 1
+    cost = 5
+
+    relative_position_id = FNG_suppress_rebellion
+    prerequisite = {
+        focus = FNG_suppress_rebellion
+    }
+    ai_will_do = {
+        base = 100
+    }
+    completion_reward = {
+        log = "[GetDateText]: [Root.GetName]: Focus FNG_bandit_suppression_hq"
+		add_political_power = 50
+		army_experience = 15
+		add_ideas = FNG_bandit_suppression_hq_idea
+		add_power_balance_value = {
+			id = FNG_rivalry_bop
+			value = -0.05
+		}
+    }
+}
+
+shared_focus = {
+    id = FNG_interim_measures
+    icon = GFX_NEE_blanket_ban
+    x = -1
+    y = 1
+    cost = 4
+
+    relative_position_id = FNG_bandit_suppression_hq
+    prerequisite = {
+        focus = FNG_bandit_suppression_hq
+    }
+    ai_will_do = {
+        base = 35
+    }
+    completion_reward = {
+		#add_ideas = FNG_order_reigns
+		add_political_power = 50
+		add_stability = 0.05
+		FNG_downgrade_red_ghost = yes
+        log = "[GetDateText]: [Root.GetName]: Focus FNG_interim_measures"
+    }
+}
+
+shared_focus = {
+    id = FNG_footstep_of_the_marshal
+    icon = GFX_generic_grand_marshal
+    x = 7
+    y = 1
+    cost = 7
+
+	available = {
+		power_balance_value = { value > 0.001 id = FNG_rivalry_bop }
+	}
+
+    relative_position_id = FNG_bandit_suppression_hq
+	mutually_exclusive = {
+		focus = FNG_wartime_censorship
+	}
+    prerequisite = {
+        focus = FNG_bandit_suppression_hq
+    }
+	prerequisite = {
+        focus = FNG_southern_pacification_army
+    }
+    ai_will_do = {
+        base = 100
+    }
+    completion_reward = {
+        log = "[GetDateText]: [Root.GetName]: Focus CHI_outline_land_law"
+		unlock_decision_tooltip = FNG_promote_loyal_officers
+		add_power_balance_value = {
+			id = FNG_rivalry_bop
+			value = 0.1
+		}
+		FNG_upgrade_legitimacy_Zhang = yes
+	}
+}
+
+shared_focus = {
+    id = FNG_wartime_censorship
+    icon = GFX_generic_censored_press2
+    x = 3
+    y = 1
+    cost = 7
+
+	available = {
+		power_balance_value = { value < -0.001 id = FNG_rivalry_bop }
+	}
+
+    relative_position_id = FNG_bandit_suppression_hq
+
+	mutually_exclusive = {
+		focus = FNG_footstep_of_the_marshal
+	}
+    prerequisite = {
+        focus = FNG_bandit_suppression_hq
+    }
+	prerequisite = {
+        focus = FNG_southern_pacification_army
+    }
+    ai_will_do = {
+        base = 100
+    }
+    completion_reward = {
+        log = "[GetDateText]: [Root.GetName]: Focus CHI_outline_land_law"
+		unlock_decision_tooltip = FNG_promote_loyal_officers
+		add_power_balance_value = {
+			id = FNG_rivalry_bop
+			value = -0.1
+		}
+		FNG_upgrade_legitimacy_Yang = yes
+    }
+}
+
+shared_focus = {
+    id = FNG_PMPEO_MP
+    icon = GFX_SAF_Military_Police
+    x = 1
+    y = 1
+    cost = 4
+
+    relative_position_id = FNG_bandit_suppression_hq
+    prerequisite = {
+        focus = FNG_bandit_suppression_hq
+    }
+    ai_will_do = {
+        base = 25
+    }
+    completion_reward = {
+        log = "[GetDateText]: [Root.GetName]: Focus FNG_PMPEO_MP"
+		add_tech_bonus = {
+			name = FNG_police_bonus
+			bonus = 0.5
+			uses = 2
+			category = military_police_tech
+		}
+		FNG_downgrade_red_ghost = yes
+    }
+}
+
+shared_focus = {
+    id = FNG_promises_of_democracy
+    icon = GFX_generic_fake_democracy
+    x = -1
+    y = 1
+    cost = 5
+
+    relative_position_id = FNG_footstep_of_the_marshal
+    prerequisite = {
+        focus = FNG_footstep_of_the_marshal
+    }
+
+    ai_will_do = {
+        base = 35
+    }
+    completion_reward = {
+		# swap_ideas = {
+		# 	remove_idea = FNG_order_reigns
+		# 	add_idea = FNG_order_reigns_4
+		# }
+        log = "[GetDateText]: [Root.GetName]: Focus FNG_comfort_landowners"
+		add_power_balance_value = {
+			id = FNG_rivalry_bop
+			value = 0.05
+		}
+		unlock_decision_tooltip = FNG_promises_of_democratisation
+    }
+}
+
+shared_focus = {
+    id = FNG_comfort_landowners
+    icon = GFX_generic_collaborate_local_elites2
+    x = -1
+    y = 1
+    cost = 5
+
+	available = {
+		OR = {
+			NOT = {
+				has_war_with = CHI
+			}
+			custom_trigger_tooltip = {
+				tooltip = FNG_momentum_tooltip_30
+				check_variable = {
+					FNG_CCW_momentum_var > 30
+				}
+			}
+		}
+	}
+
+    relative_position_id = FNG_wartime_censorship
+    prerequisite = {
+        focus = FNG_wartime_censorship
+    }
+
+    ai_will_do = {
+        base = 35
+    }
+    completion_reward = {
+        log = "[GetDateText]: [Root.GetName]: Focus FNG_comfort_landowners"
+		effect_tooltip = {
+			swap_ideas = {
+				remove_idea = FNG_development_modifier_tt_0
+				add_idea = FNG_development_modifier_tt_4
+			}
+		}
+		add_to_variable = {
+			var = FNG_DevConsumerGoods
+			value = -0.1
+		}
+
+		add_to_variable = { FNG_DevIndustrialFactory = 0.05 }
+
+		add_power_balance_value = {
+			id = FNG_rivalry_bop
+			value = -0.075
+		}
+    }
+}
+
+shared_focus = {
+    id = FNG_ensure_local_loyalty
+    icon = GFX_generic_secret_documents
+    x = 0
+    y = 1
+    cost = 5
+
+    relative_position_id = FNG_comfort_landowners
+    prerequisite = {
+        focus = FNG_comfort_landowners
+    }
+
+    ai_will_do = {
+        base = 35
+    }
+    completion_reward = {
+        log = "[GetDateText]: [Root.GetName]: Focus FNG_comfort_landowners"
+		add_power_balance_value = {
+			id = FNG_rivalry_bop
+			value = -0.05
+		}
+		add_popularity = {
+			ideology = paternal_autocrat
+			popularity = 0.075
+		}
+		every_controlled_state = {
+			limit = {
+				NOT = { is_core_of = FNG }
+			}
+			add_resistance = -15
+		}
+    }
+}
+
+shared_focus = {
+    id = FNG_warlord_alliance
+    icon = GFX_generic_shadow_government
+    x = 1
+    y = 1
+    cost = 5
+
+    relative_position_id = FNG_wartime_censorship
+    prerequisite = {
+        focus = FNG_wartime_censorship
+    }
+
+    ai_will_do = {
+        base = 35
+    }
+    completion_reward = {
+        log = "[GetDateText]: [Root.GetName]: Focus FNG_comfort_landowners"
+
+		unlock_decision_tooltip = FNG_gather_warlord_support
+    }
+}
+
+shared_focus = {
+    id = FNG_proof_by_military
+    icon = GFX_CHI_civilwar_big
+    x = 1
+    y = 1
+    cost = 5
+
+	available = {
+		controls_state = 743
+		controls_state = 605
+		controls_state = 620
+	}
+
+    relative_position_id = FNG_ensure_local_loyalty
+    prerequisite = {
+        focus = FNG_ensure_local_loyalty
+    }
+	prerequisite = {
+		focus = FNG_warlord_alliance
+	}
+    ai_will_do = {
+        base = 35
+    }
+    completion_reward = {
+        log = "[GetDateText]: [Root.GetName]: Focus FNG_proof_by_military"
+		add_power_balance_value = {
+			id = FNG_rivalry_bop
+			value = -0.1
+		}
+		swap_ideas = {
+			remove_idea = FNG_idea_high_skies_faraway_emperors_1_Yang
+			add_idea = FNG_idea_high_skies_faraway_emperors_2_Yang
+		}
+		set_temp_variable = { China_temp_national_legitimacy_change = 10 }
+		FNG_change_national_legitimacy = yes
+    }
+}
+
+shared_focus = {
+    id = FNG_new_governing_principles
+    icon = GFX_generic_authoritarian_government
+    x = -1
+    y = 1
+    cost = 6
+
+	available = {
+		OR = {
+			NOT = {
+				has_war_with = CHI
+			}
+			custom_trigger_tooltip = {
+				tooltip = FNG_momentum_tooltip_60
+				check_variable = {
+					FNG_CCW_momentum_var > 60
+				}
+			}
+		}
+	}
+
+    relative_position_id = FNG_promises_of_democracy
+    prerequisite = {
+        focus = FNG_promises_of_democracy
+		focus = FNG_warlord_alliance
+    }
+
+    ai_will_do = {
+        base = 1
+    }
+    completion_reward = {
+        log = "[GetDateText]: [Root.GetName]: Focus FNG_new_governing_principles"
+		add_stability = 0.05
+		unlock_decision_tooltip = FNG_recruit_peasent_battalions
+		unlock_decision_tooltip = FNG_crackdown_army_corruption
+		unlock_decision_tooltip = FNG_commend_local_commanders
+    }
+}
+
+shared_focus = {
+    id = FNG_arrest_subversives
+    icon = GFX_generic_imprison_people
+    x = -1
+    y = 1
+    cost = 5
+
+    relative_position_id = FNG_PMPEO_MP
+    prerequisite = {
+        focus = FNG_PMPEO_MP
+    }
+	prerequisite = {
+        focus = FNG_interim_measures
+    }
+
+    ai_will_do = {
+        base = 25
+    }
+    completion_reward = {
+        log = "[GetDateText]: [Root.GetName]: Focus FNG_arrest_subversives"
+		FNG_upgrade_bandit_suppression_hq = yes
+		move_up_service_spending = yes
+    }
+}
+
+
+shared_focus = {
+    id = FNG_deal_with_lep
+    icon = GFX_LEP_personality_cult
+    x = -3
+    y = 1
+    cost = 4
+
+    relative_position_id = FNG_PMPEO_MP
+    prerequisite = {
+        focus = FNG_interim_measures
+    }
+
+	prerequisite = {
+        focus = FNG_PMPEO_MP
+    }
+
+    ai_will_do = {
+        base = 35
+    }
+    completion_reward = {
+        log = "[GetDateText]: [Root.GetName]: Focus FNG_deal_with_lep"
+		every_owned_state = {
+			limit = {
+				has_resistance = yes
+				is_core_of = LEP
+				is_owned_and_controlled_by = FNG
+			}
+			add_compliance = 15
+		}
+		add_power_balance_value = {
+			id = FNG_rivalry_bop
+			value = -0.075
+		}
+		add_political_power = 25
+    }
+}
+
+shared_focus = {
+    id = FNG_infiltrate_the_south
+    icon = GFX_BUL_generic_Macedonian_infiltration
+    x = 1
+    y = 1
+    cost = 5
+
+    relative_position_id = FNG_promises_of_democracy
+    prerequisite = {
+        focus = FNG_promises_of_democracy
+    }
+	prerequisite = {
+		focus = FNG_baojia_system
+	}
+    ai_will_do = {
+        base = 35
+    }
+    completion_reward = {
+        log = "[GetDateText]: [Root.GetName]: Focus FNG_infiltrate_the_south"
+		add_timed_idea = {
+			idea = FNG_infiltrate_the_south_idea
+			days = 730
+		}
+    }
+}
+
+shared_focus = {
+    id = FNG_reaffirm_legitimacy
+    icon = GFX_generic_beiyang_star
+    x = 0
+    y = 1
+    cost = 5
+
+	available = {
+		OR = {
+			NOT = {
+				has_war_with = CHI
+			}
+			custom_trigger_tooltip = {
+				tooltip = FNG_momentum_tooltip_60
+				check_variable = {
+					FNG_CCW_momentum_var > 60
+				}
+			}
+		}
+	}
+
+    relative_position_id = FNG_infiltrate_the_south
+    prerequisite = {
+        focus = FNG_infiltrate_the_south
+    }
+    ai_will_do = {
+        base = 100
+    }
+    completion_reward = {
+        log = "[GetDateText]: [Root.GetName]: Focus FNG_reaffirm_legitimacy"
+		add_power_balance_value = {
+			id = FNG_rivalry_bop
+			value = 0.1
+		}
+		swap_ideas = {
+			remove_idea = FNG_idea_high_skies_faraway_emperors_1_Zhang
+			add_idea = FNG_idea_high_skies_faraway_emperors_2_Zhang
+		}
+
+		set_temp_variable = { China_temp_national_legitimacy_change = 15 }
+		FNG_change_national_legitimacy = yes
+    }
+}
+
+shared_focus = {
+    id = FNG_stop_gunrunning
+    icon = GFX_CHI_zhang_rifle
+    x = 0
+    y = 1
+    cost = 5
+
+    relative_position_id = FNG_arrest_subversives
+    prerequisite = {
+        focus = FNG_arrest_subversives
+    }
+	#prerequisite = {
+	#	focus = FNG_arrest_subversives
+	#}
+    ai_will_do = {
+        base = 25
+    }
+    completion_reward = {
+        log = "[GetDateText]: [Root.GetName]: Focus FNG_stop_gunrunning"
+		FNG_upgrade_bandit_suppression_hq = yes
+
+		add_equipment_to_stockpile = {
+			type = infantry_equipment_0
+			amount = 7500
+		}
+
+		add_equipment_to_stockpile = {
+			type = infantry_antitank_equipment_1
+			amount = 1500
+		}
+
+		set_temp_variable = { China_temp_national_legitimacy_change = 15 }
+		FNG_change_national_legitimacy = yes
+    }
+}
+
+shared_focus = {
+    id = FNG_controll_secured
+    icon = GFX_generic_beijing_begonia
+    x = -6
+    y = 1
+    cost = 5
+
+	available = {
+		OR = {
+			NOT = {
+				has_war_with = CHI
+			}
+			custom_trigger_tooltip = {
+				tooltip = FNG_momentum_tooltip_85
+				check_variable = {
+					FNG_CCW_momentum_var > 85
+				}
+			}
+		}
+	}
+
+    relative_position_id = FNG_reaffirm_legitimacy
+    prerequisite = {
+        focus = FNG_reaffirm_legitimacy
+		focus = FNG_proof_by_military
+    }
+	prerequisite = {
+		focus = FNG_stop_gunrunning
+	}
+    ai_will_do = {
+        base = 35
+    }
+    completion_reward = {
+        log = "[GetDateText]: [Root.GetName]: Focus FNG_controll_secured"
+		FNG_downgrade_red_ghost = yes
+		add_ideas = {
+			KRG_absolute_rulership
+		}
+		set_temp_variable = { China_temp_national_legitimacy_change = 15 }
+		FNG_change_national_legitimacy = yes
+    }
+}
+
+
+
+shared_focus = {
+    id = FNG_southern_pacification_army
+    icon = GFX_FNG_traitors_disposal
+    x = 6
+    y = 1
+    cost = 5
+
+    relative_position_id = FNG_suppress_rebellion
+    prerequisite = {
+        focus = FNG_suppress_rebellion
+    }
+    ai_will_do = {
+        base = 200
+    }
+    completion_reward = {
+        log = "[GetDateText]: [Root.GetName]: Focus FNG_bandit_suppression_hq"
+		effect_tooltip = {
+			swap_ideas = {
+				remove_idea = FNG_military_tt_0
+				add_idea = FNG_military_tt_4
+			}
+		}
+
+		hidden_effect = {
+			add_to_variable = { FNG_army_attack_factor_var = 0.05 }
+			add_to_variable = { FNG_army_defence_factor_var = 0.05 }
+			add_to_variable = { FNG_training_time_factor_var = 0.2 }
+			
+			add_to_variable = { FNG_dig_in_speed_factor_var = 0.1 }
+			add_to_variable = { FNG_army_speed_factor_var = 0.025 }
+			#subtract_from_variable = { FNG_military_political_power_gain_var = 0.1 }
+		}
+    }
+}
+
+shared_focus = {
+    id = FNG_seek_support_from_reichspakt
+    icon = GFX_FNG_German_Friend
+    x = -1
+    y = 1
+    cost = 5
+
+    relative_position_id = FNG_southern_pacification_army
+    prerequisite = {
+        focus = FNG_southern_pacification_army
+    }
+    ai_will_do = {
+        base = 200
+    }
+    completion_reward = {
+        log = "[GetDateText]: [Root.GetName]: Focus FNG_seek_support_from_reichspakt"
+		unlock_decision_tooltip = FNG_request_guns_dummy
+		unlock_decision_tooltip = FNG_request_artillery_dummy
+		unlock_decision_tooltip = FNG_request_support_dummy
+		unlock_decision_tooltip = FNG_request_truck_dummy
+    }
+}
+
+shared_focus = {
+    id = FNG_german_military_advisors
+    icon = GFX_GER_Deutsches_Heer
+    x = 0
+    y = 1
+    cost = 5
+
+    relative_position_id = FNG_seek_support_from_reichspakt
+    prerequisite = {
+        focus = FNG_seek_support_from_reichspakt
+    }
+    ai_will_do = {
+        base = 35
+    }
+    completion_reward = {
+        log = "[GetDateText]: [Root.GetName]: Focus FNG_german_military_advisors"
+		add_ideas = FNG_GER_advisors
+    }
+}
+
+
+
+shared_focus = {
+    id = FNG_encirclement_campaign
+    icon = GFX_FNG_Encirclement_Campaign
+    x = 1
+    y = 1
+    cost = 4
+
+    relative_position_id = FNG_southern_pacification_army
+    prerequisite = {
+        focus = FNG_southern_pacification_army
+    }
+    ai_will_do = {
+        base = 35
+    }
+    completion_reward = {
+        log = "[GetDateText]: [Root.GetName]: Focus FNG_encirclement_campaign"
+		add_command_power = 20
+		FNG_downgrade_red_ghost = yes
+		FNG_upgrade_bandit_suppression_hq = yes
+		hidden_effect = {
+			random_list = {
+				20 = {
+					add_manpower = -500
+					army_experience = 20
+					add_command_power =20
+				}
+				80 = {
+					add_manpower = -1500
+					army_experience = 15
+				}
+			}
+		}
+		unlock_decision_tooltip = FNG_crush_18_GA_decision
+    }
+}
+
+shared_focus = {
+    id = FNG_appeasement_administration
+    icon = GFX_generic_beiyang_flags
+    x = 3
+    y = 1
+    cost = 5
+
+    relative_position_id = FNG_southern_pacification_army
+    prerequisite = {
+        focus = FNG_southern_pacification_army
+    }
+    ai_will_do = {
+        base = 35
+    }
+    completion_reward = {
+        log = "[GetDateText]: [Root.GetName]: Focus FNG_appeasement_administration"
+		unlock_decision_category_tooltip = China_integration_decisions
+		every_controlled_state = {
+			limit = {
+				NOT = { is_core_of = FNG }
+			}
+			add_compliance = 10
+		}
+    }
+}
+
+
+shared_focus = {
+    id = FNG_reform_of_baoding
+    icon = GFX_CHI_baoding
+    x = 1
+    y = 1
+    cost = 6
+
+    relative_position_id = FNG_encirclement_campaign
+    prerequisite = {
+        focus = FNG_encirclement_campaign
+    }
+	prerequisite = {
+		focus = FNG_appeasement_administration
+	}
+    ai_will_do = {
+        base = 35
+    }
+    completion_reward = {
+        log = "[GetDateText]: [Root.GetName]: Focus FNG_reform_of_baoding"
+		effect_tooltip = {
+			swap_ideas = {
+				remove_idea = FNG_military_tt_0
+				add_idea = FNG_military_tt_3
+			}
+		}
+
+		hidden_effect = {
+			#add_to_variable = { FNG_initiative_factor_var = 0.1 }
+			add_to_variable = { FNG_experience_gain_arm_factor_var = 0.2 }
+			add_to_variable = { FNG_experience_gain_arm_factor_var_daily = 0.05 }
+			add_to_variable = { FNG_initiative_factor_var = 0.1 }
+			add_to_variable = { FNG_planning_speed_var = 0.15 }
+			subtract_from_variable = { FNG_military_political_power_gain_var = 0.1 }
+		}
+    }
+}
+
+shared_focus = {
+    id = FNG_baojia_system
+    icon = GFX_generic_conscription
+    x = 1
+    y = 1
+    cost = 5
+
+	available = {
+		OR = {
+			NOT = {
+				has_war_with = CHI
+			}
+			custom_trigger_tooltip = {
+				tooltip = FNG_momentum_tooltip_45
+				check_variable = {
+					FNG_CCW_momentum_var > 45
+				}
+			}
+		}
+	}
+
+    relative_position_id = FNG_footstep_of_the_marshal
+    prerequisite = {
+        focus = FNG_footstep_of_the_marshal
+    }
+
+    ai_will_do = {
+        base = 35
+    }
+    completion_reward = {
+        log = "[GetDateText]: [Root.GetName]: Focus FNG_baojia_system"
+		unlock_decision_tooltip = FNG_organise_social_groups
+		add_power_balance_value = {
+			id = FNG_rivalry_bop
+			value = 0.075
+		}
+    }
+}
+
+shared_focus = {
+    id = FNG_panzer_vor
+    icon = GFX_GER_heavy_tanks
+    x = 1
+    y = 1
+    cost = 6
+
+    relative_position_id = FNG_german_military_advisors
+    prerequisite = {
+        focus = FNG_german_military_advisors
+    }
+	prerequisite = {
+		focus = FNG_encirclement_campaign
+	}
+    ai_will_do = {
+        base = 45
+    }
+    completion_reward = {
+        log = "[GetDateText]: [Root.GetName]: Focus FNG_panzer_vor"
+		custom_effect_tooltip = FNG_panzer_vor_tt
+		hidden_effect = {
+			load_oob = "FNG_panzer"
+		}
+    }
+}
+
+shared_focus = {
+    id = FNG_hedgehog_tactics
+    icon = GFX_FNG_Hedgehog_Tactics
+    x = 0
+    y = 1
+    cost = 6
+
+    relative_position_id = FNG_reform_of_baoding
+    prerequisite = {
+        focus = FNG_reform_of_baoding
+    }
+	prerequisite = {
+		focus = FNG_german_military_advisors
+	}
+	available = {
+		OR = {
+			CHI = { has_completed_focus = CHI_bait_pockets }
+			NOT = { country_exists = CHI }
+		}
+	}
+	
+    ai_will_do = {
+        base = 25
+    }
+    completion_reward = {
+        log = "[GetDateText]: [Root.GetName]: Focus FNG_hedgehog_tactics"
+		add_doctrine_cost_reduction = {
+			cost_reduction = 0.5
+			uses = 3
+			category = land_doctrine
+		}
+    }
+}
+
+shared_focus = {
+    id = FNG_china_defence_forces
+    icon = GFX_generic_army_training
+    x = 2
+    y = 2
+    cost = 5
+
+    relative_position_id = FNG_german_military_advisors
+    
+    prerequisite = {
+        focus = FNG_panzer_vor
+    }
+	prerequisite = {
+		focus = FNG_hedgehog_tactics
+	}
+    ai_will_do = {
+        base = 35
+    }
+    completion_reward = {
+        log = "[GetDateText]: [Root.GetName]: Focus FNG_china_defence_forces"
+
+		effect_tooltip = {
+			swap_ideas = {
+				remove_idea = FNG_military_tt_0
+				add_idea = FNG_military_tt_5
+			}
+		}
+
+		hidden_effect = {
+			#add_to_variable = { FNG_initiative_factor_var = 0.1 }
+			add_to_variable = { FNG_army_attack_factor_var = 0.1 }
+			add_to_variable = { FNG_army_defence_factor_var = 0.1 }
+			add_to_variable = { FNG_supply_consumption_factor_var = -0.05 }
+			subtract_from_variable = { FNG_supply_consumption_factor_var = 0.15 }
+			add_to_variable = { FNG_breakthrough_factor_var = 0.05 }
+		}
+    }
+}
+
+shared_focus = {
+    id = FNG_you_shi_zai_wo
+    icon = GFX_FNG_victory
+    x = -3
+    y = 1
+    cost = 7
+
+    relative_position_id = FNG_china_defence_forces
+    prerequisite = {
+        focus = FNG_reaffirm_legitimacy
+		focus = FNG_proof_by_military
+    }
+	prerequisite = {
+		focus = FNG_china_defence_forces
+	}
+    ai_will_do = {
+        base = 50
+    }
+
+	available = {
+		controls_state = 595
+		controls_state = 325
+		controls_state = 728
+		controls_state = 752
+		controls_state = 605
+		controls_state = 613
+	}
+	continue_if_invalid = yes
+    completion_reward = {
+        log = "[GetDateText]: [Root.GetName]: Focus FNG_you_shi_zai_wo"
+		if = {
+			limit = { 
+				has_completed_focus = FNG_footstep_of_the_marshal
+			}
+			swap_ideas = {
+				remove_idea = FNG_idea_high_skies_faraway_emperors_2_Zhang
+				add_idea = FNG_idea_high_skies_faraway_emperors_3_Zhang
+			}
+		}
+		else_if = {
+			limit = { 
+				has_completed_focus = FNG_wartime_censorship
+			}
+			swap_ideas = {
+				remove_idea = FNG_idea_high_skies_faraway_emperors_2_Yang
+				add_idea = FNG_idea_high_skies_faraway_emperors_3_Yang
+			}
+		}
+		else = {
+			swap_ideas = {
+				remove_idea = FNG_idea_high_skies_faraway_emperors_2_Zhang
+				add_idea = FNG_idea_high_skies_faraway_emperors_3_Zhang
+			}
+		}
+
+		add_timed_idea = {
+			idea = CHI_final_stretch_idea
+			days = 365
+		}
+    }
+}

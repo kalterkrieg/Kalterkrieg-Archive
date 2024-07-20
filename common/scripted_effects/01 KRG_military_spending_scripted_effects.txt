@@ -1,0 +1,559 @@
+recalc_military_spending = {
+	##MODIFIERS##
+	set_temp_variable = { mod_military = modifier@military_spending_factor }
+	add_to_temp_variable = { mod_military = 1 }
+	clamp_temp_variable = { 
+		var = mod_military
+		min = 0
+	}
+	set_temp_variable = { mod_army = modifier@army_spending_factor }
+	add_to_temp_variable = { mod_army = 1 }
+	clamp_temp_variable = { 
+		var = mod_army
+		min = 0
+	}
+	set_temp_variable = { mod_navy = modifier@navy_spending_factor }
+	add_to_temp_variable = { mod_navy = 1 }
+	clamp_temp_variable = { 
+		var = mod_navy
+		min = 0
+	}
+	set_temp_variable = { mod_air  = modifier@air_spending_factor }
+	add_to_temp_variable = { mod_air = 1 }
+	clamp_temp_variable = { 
+		var = mod_air
+		min = 0
+	}
+	
+	##AIRFORCE SPENDING###
+	set_temp_variable = { fighters = num_deployed_planes_with_type@fighter_equipment }
+	divide_temp_variable = { fighters = 1000 } #Fighter Cost
+	set_temp_variable = { heavy_fighters = num_deployed_planes_with_type@heavy_fighter_equipment }
+	divide_temp_variable = { heavy_fighters = 750 } #Heavy Fighter Cost
+	set_temp_variable = { cas = num_deployed_planes_with_type@CAS_equipment }
+	divide_temp_variable = { cas = 750 } #Cas Cost
+	set_temp_variable = { tac_bombers = num_deployed_planes_with_type@tac_bomber_equipment }
+	divide_temp_variable = { tac_bombers = 500 } #Tac Bomber Cost
+	set_temp_variable = { strat_bombers = num_deployed_planes_with_type@strat_bomber_equipment }
+	divide_temp_variable = { strat_bombers = 250 } #Strat Bomber Cost
+	set_temp_variable = { transports = num_deployed_planes_with_type@transport_plane_equipment }
+	divide_temp_variable = { transports = 500 } #Transport Cost
+	set_temp_variable = { mpa = num_deployed_planes_with_type@maritime_patrol_equipment }
+	divide_temp_variable = { mpa = 500 } #Transport Cost
+	set_temp_variable = { scout_plane = num_deployed_planes_with_type@scout_plane_equipment }
+	divide_temp_variable = { scout_plane = 500 } #Scout Cost
+
+	set_temp_variable = { jet_fighter = num_deployed_planes_with_type@jet_fighter_equipment }
+	divide_temp_variable = { jet_fighter = 250 } #Jet Fighter Cost
+	set_temp_variable = { interceptor = num_deployed_planes_with_type@jet_interceptor_equipment }
+	divide_temp_variable = { interceptor = 200 } #interceptor Cost
+	set_temp_variable = { strike = num_deployed_planes_with_type@jet_strike_equipment }
+	divide_temp_variable = { strike = 200 } #strike Cost
+	set_temp_variable = { jet_strat_bomber = num_deployed_planes_with_type@jet_strat_bomber_equipment }
+	divide_temp_variable = { jet_strat_bomber = 100 } #Jet strat bomber Cost
+	set_temp_variable = { heli = num_deployed_planes_with_type@utility_helicopter_equipment }
+	divide_temp_variable = { heli = 400 } #heli Cost
+
+	set_variable = { air_force_spending = fighters }
+	add_to_variable = { air_force_spending = heavy_fighters }
+	add_to_variable = { air_force_spending = cas }
+	add_to_variable = { air_force_spending = tac_bombers }
+	add_to_variable = { air_force_spending = strat_bombers }
+	add_to_variable = { air_force_spending = transports }
+	add_to_variable = { air_force_spending = mpa }
+	add_to_variable = { air_force_spending = scout_plane }
+	add_to_variable = { air_force_spending = jet_fighter }
+	add_to_variable = { air_force_spending = interceptor }
+	add_to_variable = { air_force_spending = strike }
+	add_to_variable = { air_force_spending = jet_strat_bomber }
+	add_to_variable = { air_force_spending = heli }
+	multiply_variable = { air_force_spending = mod_air }
+
+	###NAVAL SPENDING###
+	set_temp_variable = { carriers = num_ships_with_type@Carrier }
+	divide_temp_variable = { carriers = 2 } #Carrier Cost
+	set_temp_variable = { battleships = num_ships_with_type@battleship }
+	divide_temp_variable = { battleships = 5 } #Battleship Cost
+	set_temp_variable = { subs = num_ships_with_type@submarine }
+	divide_temp_variable = { subs = 20 } #Submarine Cost
+	set_temp_variable = { cruisers = num_ships_with_type@cruiser }
+	divide_temp_variable = { cruisers = 15 } #Cruiser Cost
+	set_temp_variable = { frigates = num_ships_with_type@frigate }
+	divide_temp_variable = { frigates = 40 } #Frigate Cost
+	#set_temp_variable = { nuc_subs = num_ships_with_type@nuclear_sub } #This does not exist.
+	#divide_temp_variable = { nuc_subs = 5 } #Nuclear Sub Cost
+	#set_temp_variable = { missile_subs = num_ships_with_type@missle_sub } #This does not exist.
+	#divide_temp_variable = { missile_subs = 5 } #Missle Sub Cost
+	set_temp_variable = { destroyers = num_ships_with_type@destroyer }
+	divide_temp_variable = { destroyers = 20 } #destroyer Cost
+	set_variable = { naval_spending = carriers }
+	add_to_variable = {
+		var = naval_spending
+		value = battleships
+	}
+	add_to_variable = {
+		var = naval_spending
+		value = subs
+	}
+	add_to_variable = {
+		var = naval_spending
+		value = cruisers
+	}
+	add_to_variable = {
+		var = naval_spending
+		value = frigates
+	}
+	#add_to_variable = { #This does not exist.
+	#	var = naval_spending
+	#	value = nuc_subs
+	#}
+	#add_to_variable = { #This does not exist.
+	#	var = naval_spending
+	#	value = missile_subs
+	#}
+	add_to_variable = {
+		var = naval_spending
+		value = destroyers
+	}
+	multiply_variable = { naval_spending = mod_navy }
+
+	##ARMY SPENDING
+	# Normal Batallions
+	set_variable = { num_battalions_actual = num_battalions_with_type@amphibious_armor }
+	add_to_variable = { num_battalions_actual = num_battalions_with_type@amphibious_mechanized }
+	add_to_variable = { num_battalions_actual = num_battalions_with_type@anti_tank_brigade }
+	add_to_variable = { num_battalions_actual = num_battalions_with_type@mot_anti_tank_brigade }
+	add_to_variable = { num_battalions_actual = num_battalions_with_type@anti_air_brigade }
+	add_to_variable = { num_battalions_actual = num_battalions_with_type@mot_anti_air_brigade }
+	add_to_variable = { num_battalions_actual = num_battalions_with_type@artillery_brigade }
+	add_to_variable = { num_battalions_actual = num_battalions_with_type@mot_artillery_brigade }
+	add_to_variable = { num_battalions_actual = num_battalions_with_type@cavalry }
+	add_to_variable = { num_battalions_actual = num_battalions_with_type@camelry }
+	add_to_variable = { num_battalions_actual = num_battalions_with_type@infantry }
+	add_to_variable = { num_battalions_actual = num_battalions_with_type@marine }
+	add_to_variable = { num_battalions_actual = num_battalions_with_type@mountaineers }
+	add_to_variable = { num_battalions_actual = num_battalions_with_type@paratrooper }
+	add_to_variable = { num_battalions_actual = num_battalions_with_type@motorized }
+	add_to_variable = { num_battalions_actual = num_battalions_with_type@mechanized }
+	add_to_variable = { num_battalions_actual = num_battalions_with_type@light_armor }
+	add_to_variable = { num_battalions_actual = num_battalions_with_type@militia }
+	add_to_variable = { num_battalions_actual = num_battalions_with_type@modern_armor }
+	add_to_variable = { num_battalions_actual = num_battalions_with_type@modern_sp_anti_air_brigade }
+	add_to_variable = { num_battalions_actual = num_battalions_with_type@modern_sp_artillery_brigade }
+	add_to_variable = { num_battalions_actual = num_battalions_with_type@SAM_brigade }
+	add_to_variable = { num_battalions_actual = num_battalions_with_type@mot_SAM_brigade }
+
+	log = "[?num_battalions_actual] normal battalions"
+
+	set_temp_variable = { temp1 = num_battalions_actual }
+	divide_temp_variable = { temp1 = 40 } #Army Cost
+	multiply_temp_variable = { temp1 = mod_army }
+
+	# Support Batallions
+	set_variable = { num_support_battalions_actual = num_battalions_with_type@anti_tank }
+	add_to_variable = { num_support_battalions_actual = num_battalions_with_type@anti_air }
+	add_to_variable = { num_support_battalions_actual = num_battalions_with_type@artillery }
+	add_to_variable = { num_support_battalions_actual = num_battalions_with_type@divhq_company }
+	add_to_variable = { num_support_battalions_actual = num_battalions_with_type@engineer }
+	add_to_variable = { num_support_battalions_actual = num_battalions_with_type@field_hospital }
+	add_to_variable = { num_support_battalions_actual = num_battalions_with_type@maintenance_company }
+	add_to_variable = { num_support_battalions_actual = num_battalions_with_type@logistics_company }
+	add_to_variable = { num_support_battalions_actual = num_battalions_with_type@helicopter_logistics_company }
+	add_to_variable = { num_support_battalions_actual = num_battalions_with_type@military_police }
+	add_to_variable = { num_support_battalions_actual = num_battalions_with_type@rocket_artillery }
+	add_to_variable = { num_support_battalions_actual = num_battalions_with_type@recon }
+	add_to_variable = { num_support_battalions_actual = num_battalions_with_type@mot_recon }
+	add_to_variable = { num_support_battalions_actual = num_battalions_with_type@light_tank_recon }
+	add_to_variable = { num_support_battalions_actual = num_battalions_with_type@helicopter_recon }
+	add_to_variable = { num_support_battalions_actual = num_battalions_with_type@signal_company }
+	add_to_variable = { num_support_battalions_actual = num_battalions_with_type@SOF_company }
+	add_to_variable = { num_support_battalions_actual = num_battalions_with_type@utility_helicopter_company }
+	add_to_variable = { num_support_battalions_actual = num_battalions_with_type@SAM }
+
+	log = "[?num_support_battalions_actual] line battalions"
+
+	set_temp_variable = { temp_2 = num_support_battalions_actual }
+	divide_temp_variable = { temp_2 = 80 } #Army Cost
+	multiply_temp_variable = { temp_2 = mod_army }
+
+	add_to_temp_variable = { temp1 = temp_2 }
+
+	log = "Army cost [?temp1]"
+	log = "Navy Cost: [?naval_spending]"
+	log = "Air Cost: [?air_force_spending]"
+
+	###FINAL CALCULATIONS###
+	set_variable = { military_spending = temp1 }
+	add_to_variable = {
+		var = military_spending
+		value = naval_spending
+	}
+	add_to_variable = {
+		var = military_spending
+		value = air_force_spending
+	}
+	multiply_variable = { military_spending = mod_military }
+	round_variable = military_spending
+
+	if = {
+		limit = {
+			NOT = {
+				has_dynamic_modifier =  { modifier = military_spending_modifier }
+			}
+		}
+		add_dynamic_modifier = { modifier = military_spending_modifier }
+	}
+}
+
+distribute_civs = {
+	set_temp_variable = { civs = num_of_civilian_factories } # civs var is set to num of civilian factories
+	divide_temp_variable = { civs = 200 } # civs var is divided by 100 to simulate 1% growth per quarter
+
+	set_temp_variable = { construction_speed = THIS.modifier@production_speed_buildings_factor } #Another var is generated from their construction speed, in 0.1 form
+	add_to_temp_variable = { construction_speed = 1 } #Add 1 to construction speed var, so it is in 1.1 form
+
+	if = {
+		limit = {
+			check_variable = { construction_speed < 0 } #sanity check to prevent negatives
+		}
+		set_temp_variable = { construction_speed = 0 }
+	}
+
+	hidden_effect = {
+		random_owned_controlled_state = {
+			limit = { is_core_of = PREV }
+			set_temp_variable = { PREV.infrastructure_factor = infrastructure_level } #infrastructure factor is set to a random states infrastructure level
+		}
+	}
+
+	divide_temp_variable = { infrastructure_factor = 10 } #infrastructure var is divided by 10, 5 becoming .5
+	add_to_temp_variable = { infrastructure_factor = 0.5 } #0.5 is added to infrastructure var .5 becoming 1
+
+	custom_effect_tooltip = distribute_civs_tt
+
+	multiply_temp_variable = { civs = construction_speed } #multiply civs var by construction speed var so it would be increased by 10% in the previous case
+	multiply_temp_variable = { civs = infrastructure_factor } #infrastructure var is multiplied by civs var, 5 is standard
+	add_to_temp_variable = { civs = civs_permanent } #If previous quarter's growth was below 1 factory, it is added to this quarter
+
+	log = "[THIS.GetName] has [?civs], [?civs_permanent] is carried over"
+
+	if = {
+		limit = {
+			check_variable = { civs < 0.9 } # which will be added to next quarter's growth
+		}
+		set_variable = { civs_permanent = civs }
+	}
+	else = {
+		clear_variable = civs_permanent #the previous quarter's growth is reset
+	}
+
+	log = "[THIS.GetName] [?civs_permanent] will be carried over"
+
+	if = {
+		limit = {
+			check_variable = { civs > 0.9 } # only add if civs is above 0.9
+		}
+		round_temp_variable = civs #the civs variable is rounded
+
+		hidden_effect = {
+			for_loop_effect = {
+				start = 1
+				end = civs
+				compare = less_than_or_equals
+				
+				random_owned_state = {
+					limit = {
+						is_core_of = PREV
+						free_building_slots = {
+							building = industrial_complex
+							size > 0
+							include_locked = no
+						}
+						NOT = { has_state_flag = distribute_civs_state_flag }
+					}
+					set_state_flag = {
+						flag = distribute_civs_state_flag
+						value = 1
+						days = 20 # clears itself ater 20 days, long enough for event timeout, short enough so it doesnt carry over to another month
+					}
+				}
+			}
+		}
+
+		every_owned_state = {
+			limit = { has_state_flag = distribute_civs_state_flag }
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
+	}
+	else = {
+		custom_effect_tooltip = distribute_no_civs_tt
+	}
+}
+
+recalculate_resource_fuel_effects = {
+	#fuel
+	set_variable = { civ_factory_fuel_use_cost = num_of_civilian_factories }
+	divide_variable = { civ_factory_fuel_use_cost = 2 }
+
+	set_temp_variable = { civ_factory_fuel_use_factor_var = modifier@civilian_fuel_use_modifier }
+	add_to_temp_variable = { civ_factory_fuel_use_factor_var = 1 }
+	multiply_variable = { civ_factory_fuel_use_cost = civ_factory_fuel_use_factor_var }
+
+	set_temp_variable = { temp_civ_factory_fuel_use_cost_daily_k = civ_factory_fuel_use_cost }
+	multiply_temp_variable = { temp_civ_factory_fuel_use_cost_daily_k = 24 } # daily use cost
+	set_variable = { civ_factory_fuel_use_display = temp_civ_factory_fuel_use_cost_daily_k }
+
+	if = {
+		limit = {
+			check_variable = { temp_civs_fuel_use_cost_daily_k > fuel_k } 
+		}
+		add_ideas = severe_fuel_shortage 
+	}
+	else_if = {
+		limit = { 
+			has_idea = severe_fuel_shortage
+		}
+		remove_ideas = severe_fuel_shortage
+	}
+}
+
+calculate_fuel_needs = {
+
+	#INDUSTRY
+
+	set_variable = { fuel_needed_by_factories = modifier@daily_factory_fuel_need } #balancing value
+
+	for_each_scope_loop = {
+		array = owned_states
+
+		add_to_temp_variable = { total_owned_factories = industrial_complex_level }
+		add_to_temp_variable = { temp_total_population = state_population_k } #do this here for perf reasons
+	}
+
+	set_variable = { base_fuel_needed_by_factories = fuel_needed_by_factories }
+	multiply_variable = { base_fuel_needed_by_factories = total_owned_factories }
+	set_variable = { base_fuel_needed_by_factories_k = base_fuel_needed_by_factories }
+	divide_variable = { base_fuel_needed_by_factories_k = 1000 } 
+	
+	set_variable = { fuel_needed_by_factories_factor_modifier = 1 }
+	add_to_variable = { fuel_needed_by_factories_factor_modifier = modifier@fuel_needed_by_factories_factor }
+	multiply_variable = { fuel_needed_by_factories = fuel_needed_by_factories_factor_modifier }
+
+	multiply_variable = { fuel_needed_by_factories = total_owned_factories }
+
+	set_variable = { fuel_needed_by_factories_display = fuel_needed_by_factories }
+	set_variable = { fuel_needed_by_factories_display_k = fuel_needed_by_factories_display }
+	divide_variable = { fuel_needed_by_factories_display_k = 1000 }
+
+	#POPULATION
+
+	set_variable = { population_in_m = temp_total_population }
+	clear_variable = temp_total_population
+
+	divide_variable = { population_in_m = 1000 }
+
+	set_variable = { fuel_needed_by_pop = modifier@daily_pop_m_fuel_need } #balancing value
+
+	set_variable = { base_fuel_needed_by_pop = fuel_needed_by_pop }
+	multiply_variable = { base_fuel_needed_by_pop = population_in_m }
+	set_variable = { base_fuel_needed_by_pop_k = base_fuel_needed_by_pop }
+	divide_variable = { base_fuel_needed_by_pop_k = 1000 } 
+
+	set_variable = { fuel_needed_by_pop_factor_modifier = 1 }
+	add_to_variable = { fuel_needed_by_pop_factor_modifier = modifier@fuel_needed_by_pop_factor }
+	multiply_variable = { fuel_needed_by_pop = fuel_needed_by_pop_factor_modifier }
+
+
+	multiply_variable = { fuel_needed_by_pop = population_in_m } #total population
+
+	set_variable = { fuel_needed_by_pop_display = fuel_needed_by_pop }
+	set_variable = { fuel_needed_by_pop_display_k = fuel_needed_by_pop_display }
+	divide_variable = { fuel_needed_by_pop_display_k = 1000 }
+
+	set_variable = { fuel_needed_total = fuel_needed_by_factories }
+	add_to_variable = { fuel_needed_total = fuel_needed_by_pop }
+
+	set_variable = { fuel_needed_total_display = fuel_needed_total }
+	set_variable = { fuel_needed_total_display_k = fuel_needed_total_display }
+	divide_variable = { fuel_needed_total_display_k = 1000 }
+
+	divide_variable = { fuel_needed_total = 24 } #fuel_cost is hourly
+
+	#fuel shortage effects, kind of messy to enable optimization...
+
+	if = {
+		limit = {
+			has_fuel < 1 
+		}
+
+		add_to_array = {
+			array = fuel_counting_array
+			value = 1
+		}
+	}
+	else = {
+		add_to_array = {
+			array = fuel_counting_array
+			value = 0
+		}
+	}
+
+	if = {
+		limit = { 
+			check_variable = { fuel_counting_array^num > 7 }
+		}
+
+		remove_from_array = { 
+			array = fuel_counting_array
+			index = 0 #removes oldest value
+		}
+	}
+
+	clear_variable = shortage_days
+
+	for_each_loop = {
+		array = fuel_counting_array
+
+		add_to_temp_variable = { shortage_days = v } #now we know how many days over the last 7 we have had a shortage 
+	}
+
+	set_variable = { fuel_shortage_days = shortage_days }
+
+	#convert shortage days to "multiplier value - small fuel shortages are less noticeable, but major ones are very painful. at "minor" (2/7 days)
+	# your bonuses are gone, anything beyond that is the big oof.....kinda...still testing balancing values 
+
+	set_temp_variable = { shortage_days_multiplier = shortage_days }
+	divide_temp_variable = { shortage_days_multiplier = 7 }
+	multiply_temp_variable = { shortage_days_multiplier = 3.508 } #there is a better way to do this but I really just don't care, ( 2 / 7 ) * value = 1 
+
+	set_variable = { fuel_shortage_pain_factor_modifier = modifier@fuel_shortage_pain_factor }
+	add_to_variable = { fuel_shortage_pain_factor_modifier = 1 }
+	clamp_variable = { var = fuel_shortage_pain_factor_modifier min = 0 } #NO BONUSES FROM NEGATIVE VALUE!!!!
+
+	multiply_variable = { fuel_shortage_pain_factor_modifier = shortage_days_multiplier }
+
+	# "base" values are tuned so that fuel shortage pain of 1 (0% modifier) nullifies all bonuses from mixed economy...this is multiplicative so be careful with it!
+
+	set_variable = { fuel_shortage_global_building_slots_factor = -0.05 }
+	set_variable = { fuel_shortage_industrial_capacity_dockyard = -0.05 }
+	set_variable = { fuel_shortage_industrial_capacity_factory = -0.05 }
+	set_variable = { fuel_shortage_production_speed_buildings_factor = -0.05 }
+	set_variable = { fuel_shortage_supply_node_range = -0.05 }
+	set_variable = { fuel_shortage_production_factory_efficiency_gain_factor = -0.1 }
+	set_variable = { fuel_shortage_production_factory_max_efficiency_factor = -0.05 }
+
+
+	multiply_variable = { fuel_shortage_global_building_slots_factor = fuel_shortage_pain_factor_modifier }
+	multiply_variable = { fuel_shortage_industrial_capacity_dockyard = fuel_shortage_pain_factor_modifier }
+	multiply_variable = { fuel_shortage_industrial_capacity_factory = fuel_shortage_pain_factor_modifier }
+	multiply_variable = { fuel_shortage_production_speed_buildings_factor = fuel_shortage_pain_factor_modifier }
+	multiply_variable = { fuel_shortage_supply_node_range = fuel_shortage_pain_factor_modifier }
+	multiply_variable = { fuel_shortage_production_factory_efficiency_gain_factor = fuel_shortage_pain_factor_modifier }
+	multiply_variable = { fuel_shortage_production_factory_max_efficiency_factor = fuel_shortage_pain_factor_modifier }
+
+}
+
+calculate_fuel_production = {
+	#calculate oil resource production (fuel from oil = (oil resource*48*fuel_gain_factor) + (oil_resource*24*fuel_gain*fuel_gain_factor) )
+
+	set_temp_variable = { fuel_gain_factor_modifier = modifier@fuel_gain_factor }
+	add_to_temp_variable = { fuel_gain_factor_modifier = 1 }
+
+
+	set_temp_variable = { fuel_from_oil = resource@oil }
+	multiply_temp_variable = { fuel_from_oil = 48 } #base value is 48 fuel from each oil
+	multiply_temp_variable = { fuel_from_oil = fuel_gain_factor_modifier }
+
+	set_temp_variable = { bonus_fuel_from_oil = resource@oil }
+	multiply_temp_variable = { bonus_fuel_from_oil = 24 } #calculated hourly, no I don't know why
+	multiply_temp_variable = { bonus_fuel_from_oil = modifier@fuel_gain }
+	multiply_temp_variable = { bonus_fuel_from_oil = fuel_gain_factor_modifier }
+
+	set_temp_variable = { total_fuel_from_oil = fuel_from_oil }
+	add_to_temp_variable = { total_fuel_from_oil = bonus_fuel_from_oil }
+
+	log = "[?total_fuel_from_oil] is total fuel from oil resources"
+
+	#calculate base fuel ( base fuel gain = (48*base_fuel_gain_factor) + (24*base_fuel_gain*base_fuel_gain_factor)
+
+	set_temp_variable = { base_fuel_gain_factor_modifier = modifier@base_fuel_gain_factor }
+	add_to_temp_variable = { base_fuel_gain_factor_modifier = 1 }
+
+	set_temp_variable = { base_fuel = 48 }
+	multiply_temp_variable = { base_fuel = base_fuel_gain_factor_modifier }
+
+	set_temp_variable = { bonus_base_fuel = 24 }
+	multiply_temp_variable = { bonus_base_fuel = modifier@base_fuel_gain }
+	multiply_temp_variable = { bonus_base_fuel = base_fuel_gain_factor_modifier }
+
+	set_temp_variable = { total_base_fuel = base_fuel }
+	add_to_temp_variable = { total_base_fuel = bonus_base_fuel }
+
+	log = "[?total_base_fuel] is total fuel from base oil gain"
+
+	#calculate fuel from states (& refineries) = (number of synthetic refineries * 2 (constant defined by building) * 12 * fuel_gain_factor_from_states) + ( number of controlled(?) states * fuel_gain_from_states * 12 * fuel_gain_factor_from_states )
+
+	set_temp_variable = { fuel_gain_factor_from_states_modifier = modifier@fuel_gain_factor_from_states }
+	add_to_temp_variable = { fuel_gain_factor_from_states_modifier = 1 }
+
+	every_controlled_state = {
+		add_to_temp_variable = { number_of_refineries = non_damaged_building_level@synthetic_refinery }
+	}
+
+	set_temp_variable = { fuel_from_refineries = number_of_refineries }
+	multiply_temp_variable = { fuel_from_refineries = 2 }
+	multiply_temp_variable = { fuel_from_refineries = 12 }
+	multiply_temp_variable = { fuel_from_refineries = fuel_gain_factor_from_states_modifier }
+
+	set_temp_variable = { fuel_from_states = controlled_states^num }
+	multiply_temp_variable = { fuel_from_states = modifier@fuel_gain_from_states }
+	multiply_temp_variable = { fuel_from_states = 12 }
+	multiply_temp_variable = { fuel_from_states = fuel_gain_factor_from_states_modifier }
+
+	set_temp_variable = { total_fuel_from_states = fuel_from_refineries }
+	add_to_temp_variable = { total_fuel_from_states = fuel_from_states }
+
+	log = "[?total_fuel_from_states] is total fuel from states"
+
+
+}
+
+test_fuel_modifiers = {
+	add_ideas = TEST_fuel_modifiers
+}
+
+add_oil_type = {
+	remove_ideas = {
+		KRG_coal_economy
+		KRG_mixed_economy
+	}
+	add_ideas = KRG_oil_economy
+}
+add_mixed_oil_type = {
+	remove_ideas = {
+		KRG_coal_economy
+		KRG_oil_economy
+	}
+	add_ideas = KRG_mixed_economy
+}
+add_coal_type = {
+	remove_ideas = {
+		KRG_mixed_economy
+		KRG_oil_economy
+	}
+	add_ideas = KRG_coal_economy
+}
+
+log_fuel_modifiers = {
+	log = "[?modifier@base_fuel_gain] base_fuel_gain"
+	log = "[?modifier@base_fuel_gain_factor] base_fuel_gain_factor"
+	log = "[?modifier@fuel_cost] fuel_cost"
+	log = "[?modifier@fuel_gain] fuel_gain"
+	log = "[?modifier@fuel_gain_factor] fuel_gain_factor"
+	log = "[?modifier@fuel_gain_from_states] fuel_gain_from_states"
+	log = "[?modifier@fuel_gain_factor_from_states] fuel_gain_factor_from_states"
+}

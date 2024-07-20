@@ -1,0 +1,4146 @@
+add_namespace = krg_dnf_regional_elections_austria
+add_namespace = krg_dnf_regional_elections_bohemia
+add_namespace = krg_dnf_regional_elections_galicia
+add_namespace = krg_dnf_regional_elections_hungary
+add_namespace = krg_dnf_regional_elections_illyria
+add_namespace = krg_dnf_regional_elections_slovakia
+add_namespace = krg_dnf_regional_elections_transylvania
+
+
+######### REGIONAL ELECTION AUSTRIA ##########
+
+country_event = { #Austrian Election incoming
+	id = krg_dnf_regional_elections_austria.1
+	title = krg_dnf_regional_elections_austria.1.t
+	desc = krg_dnf_regional_elections_austria.1.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_dnf_regional_elections_austria.1.a
+		set_variable = { DNF_austria_socialist_pop = 45 }
+		set_variable = { DNF_austria_conservative_pop = 40 }
+		set_variable = { DNF_austria_other_pop = 15 }
+		set_variable = { DNF_austrian_election_involved = 1 }
+		set_variable = { DNF_austrian_election_1948_involved = 1 }
+		activate_mission = DNF_austrian_election_1948
+		activate_mission = DNF_austrian_SDAPD_campaigning
+		ai_chance = {
+			factor = 100
+		}
+	}
+	option = {
+		name = krg_dnf_regional_elections_austria.1.b
+		add_political_power = 50
+		custom_effect_tooltip = DNF_austria_1948_nosupport_tt
+		ai_chance = {
+			factor = 0
+		}
+	}
+}
+
+country_event = { #Austrian Election: SDAPD Victory
+	id = krg_dnf_regional_elections_austria.2
+	title = krg_dnf_regional_elections_austria.2.t
+	desc = krg_dnf_regional_elections_austria.2.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_dnf_regional_elections_austria.2.a
+		add_popularity = {
+			ideology = social_democrat
+			popularity = 0.02
+		}
+		clear_variable = DNF_austrian_election_1948_involved
+		clear_variable = DNF_austrian_election_involved
+		clr_country_flag = DNF_austrian_election_picked_focus
+	}
+}
+
+country_event = { #Austrian Election: Conservative Victory
+	id = krg_dnf_regional_elections_austria.3
+	title = krg_dnf_regional_elections_austria.3.t
+	desc = krg_dnf_regional_elections_austria.3.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_dnf_regional_elections_austria.3.a
+		add_popularity = {
+			ideology = social_conservative
+			popularity = 0.01
+		}
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = 0.01
+		}
+		
+		clear_variable = DNF_austrian_election_1948_involved
+		clear_variable = DNF_austrian_election_involved
+
+		clr_country_flag = DNF_austrian_election_picked_focus
+		clr_country_flag = DNF_AUSTRIAN_MP_KORNER
+		set_country_flag = DNF_AUSTRIAN_MP_REITHER
+		clr_country_flag = DNF_AUSTRIAN_PARTY_SOCDEMS
+		set_country_flag = DNF_AUSTRIAN_PARTY_SOCCONS
+		clr_country_flag = DNF_austria_disagrees
+		set_country_flag = DNF_austria_agrees
+	}
+}
+
+country_event = { #Austrian Election: Karl Renner Speaks in Vienna
+	id = krg_dnf_regional_elections_austria.4
+	title = krg_dnf_regional_elections_austria.4.t
+	desc = krg_dnf_regional_elections_austria.4.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_dnf_regional_elections_austria.4.a
+		custom_effect_tooltip = DNF_austria_election_renner_speech_tt
+		add_to_variable = { 
+			var = DNF_austria_socialist_pop
+			value = 4
+		}
+		add_to_variable = { 
+			var = DNF_austria_conservative_pop
+			value = -2
+		}
+		add_to_variable = { 
+			var = DNF_austria_other_pop
+			value = -2
+		}
+	}
+}
+
+country_event = { #Austrian Election: De Gasperi Campaigns in Tyrol
+	id = krg_dnf_regional_elections_austria.5
+	title = krg_dnf_regional_elections_austria.5.t
+	desc = krg_dnf_regional_elections_austria.5.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_dnf_regional_elections_austria.5.a
+		custom_effect_tooltip = DNF_austria_election_con_tyrol_tt
+		add_to_variable = { 
+			var = DNF_austria_socialist_pop
+			value = -1
+		}
+		add_to_variable = { 
+			var = DNF_austria_conservative_pop
+			value = 2
+		}
+		add_to_variable = { 
+			var = DNF_austria_other_pop
+			value = -1
+		}
+	}
+}
+
+country_event = { #Austrian Election: Smear Campaigns Go Further
+	id = krg_dnf_regional_elections_austria.6
+	title = krg_dnf_regional_elections_austria.6.t
+	desc = krg_dnf_regional_elections_austria.6.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_dnf_regional_elections_austria.6.a
+		custom_effect_tooltip = DNF_austria_election_smear_consequences_tt
+		add_stability = -0.02
+		add_political_power = -25
+		add_to_variable = { 
+			var = DNF_austria_socialist_pop
+			value = -1
+		}
+		add_to_variable = { 
+			var = DNF_austria_conservative_pop
+			value = 1
+		}
+	}
+}
+
+country_event = { #Austrian Election: Socialist Campaigns Succeed
+	id = krg_dnf_regional_elections_austria.7
+	title = krg_dnf_regional_elections_austria.7.t
+	desc = krg_dnf_regional_elections_austria.7.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_dnf_regional_elections_austria.7.a
+		custom_effect_tooltip = DNF_austria_election_socialist_campaigning_tt
+		add_to_variable = { 
+			var = DNF_austria_socialist_pop
+			value = 3
+		}
+		add_to_variable = { 
+			var = DNF_austria_conservative_pop
+			value = 3
+		}
+	}
+}
+
+country_event = { #Austrian Election: Archduke ??? Weighs In
+	id = krg_dnf_regional_elections_austria.8
+	title = krg_dnf_regional_elections_austria.8.t
+	desc = krg_dnf_regional_elections_austria.8.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_dnf_regional_elections_austria.8.a
+		custom_effect_tooltip = DNF_austria_election_royal_consequence_tt
+		add_to_variable = { 
+			var = DNF_austria_conservative_pop
+			value = -2
+		}
+		add_to_variable = { 
+			var = DNF_austria_other_pop
+			value = 2
+		}
+	}
+}
+
+##50##
+
+country_event = { #Austrian Election: Josef Reither dies
+	id = krg_dnf_regional_elections_austria.9
+	title = krg_dnf_regional_elections_austria.9.t
+	desc = krg_dnf_regional_elections_austria.9.d
+
+	immediate = {
+		if = { limit = { has_country_flag = DNF_AUSTRIAN_MP_REITHER }
+			clr_country_flag = DNF_AUSTRIAN_MP_REITHER
+			set_country_flag = DNF_AUSTRIAN_MP_GLEISSNER 
+		}
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = [DNF_AUSTRIAN_MP_Reither_Death]
+	}
+}
+
+##52##
+
+country_event = { # Austria '52 Incoming
+	id = krg_dnf_regional_elections_austria.10
+	title = krg_dnf_regional_elections_austria.10.t
+	desc = krg_dnf_regional_elections_austria.10.d
+	
+	trigger = {
+		DNF = { NOT = {has_idea = DNF_The_Personal_Prinzip }} 
+	}
+			
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = { 
+		log = "[GetDateText]: [Root.GetName]: Start Austria 52 Election"
+	}
+	option = {
+		name = krg_dnf_regional_elections_austria.10.a
+		
+		if = { limit = { has_country_flag = DNF_AUSTRIAN_MP_KORNER } 
+			set_variable = { DNF_austria_conservative_pop = 45 }
+			set_variable = { DNF_austria_socialist_pop = 50 }
+			set_variable = { DNF_austria_other_pop = 5 }
+		} else = {
+			set_variable = { DNF_austria_conservative_pop = 40 }
+			set_variable = { DNF_austria_socialist_pop = 40 }
+			set_variable = { DNF_austria_other_pop = 20 }
+		}  
+		set_variable = { DNF_austrian_election_1952_involved = 1 }
+		set_variable = { DNF_austrian_election_involved = 1 }
+		activate_mission = DNF_austrian_election_1952
+		activate_mission = DNF_austrian_1952_opposition_campaigning
+		ai_chance = {
+			factor = 100
+		}
+	}
+	option = {
+		name = krg_dnf_regional_elections_austria.10.b
+		add_political_power = 50
+		if = { limit = { NOT = { has_country_flag = DNF_Adolf_Scharf } } 
+			custom_effect_tooltip = DNF_austria_1952_nosupport_tt
+			set_variable = { DNF_austria_socialist_pop = 57 } 
+		}
+		else = {
+			custom_effect_tooltip = DNF_austria_1952_nosupport_tt
+			set_variable = { DNF_austria_conservative_pop = 57 } 
+		}
+		ai_chance = {
+			factor = 0
+		}
+	}	
+}
+
+country_event = { # Austria '52 Socialist Victory
+	id = krg_dnf_regional_elections_austria.11
+	title = krg_dnf_regional_elections_austria.11.t
+	desc = krg_dnf_regional_elections_austria.11.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = { 
+		log = "[GetDateText]: [Root.GetName]: SDAPD win Austria 52 Election"
+	}
+
+	option = {
+		name = krg_dnf_regional_elections_austria.11.a
+		custom_effect_tooltip = DNF_austria_52_election_opposition_campaigning_tt
+		add_popularity = { ideology = social_democrat popularity = 0.02 }
+		clear_variable = DNF_austrian_election_1952_involved
+		clear_variable = DNF_austrian_election_involved
+		clr_country_flag = DNF_austrian_election_picked_focus
+		if = { limit = {	has_country_flag = DNF_AUSTRIAN_MP_GLEISSNER
+							NOT = { has_country_flag = DNF_Adolf_Scharf }	}		
+				clr_country_flag = DNF_austria_agrees
+				set_country_flag = DNF_austria_disagrees 
+			}
+			clr_country_flag = DNF_AUSTRIAN_MP_GLEISSNER
+			set_country_flag = DNF_AUSTRIAN_MP_KORNER
+			clr_country_flag = DNF_AUSTRIAN_PARTY_SOCCONS
+			set_country_flag = DNF_AUSTRIAN_PARTY_SOCDEMS 
+		
+	}
+}
+
+country_event = { # Austria '52 CSP Victory
+	id = krg_dnf_regional_elections_austria.12
+	title = krg_dnf_regional_elections_austria.12.t
+	desc = krg_dnf_regional_elections_austria.12.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	immediate = { 
+		log = "[GetDateText]: [Root.GetName]: CSP/CDPD win Austria 52 Election"
+	}
+	option = {
+		name = krg_dnf_regional_elections_austria.12.a
+		add_popularity = { ideology = social_conservative popularity = 0.01 }
+		add_popularity = { ideology = authoritarian_democrat popularity = 0.01 }
+
+		clear_variable = DNF_austrian_election_1952_involved
+		clear_variable = DNF_austrian_election_involved
+		clr_country_flag = DNF_austrian_election_picked_focus
+		if = { limit = {	has_country_flag = DNF_AUSTRIAN_MP_KORNER
+							has_country_flag = DNF_Adolf_Scharf	}		#I'm gonna count Veres's coalition as still being strong rn
+			clr_country_flag = DNF_austria_agrees
+			set_country_flag = DNF_austria_disagrees
+		}
+		clr_country_flag = DNF_AUSTRIAN_MP_KORNER
+		set_country_flag = DNF_AUSTRIAN_MP_GLEISSNER
+		clr_country_flag = DNF_AUSTRIAN_PARTY_SOCDEMS
+		set_country_flag = DNF_AUSTRIAN_PARTY_SOCCONS
+	}
+}
+
+country_event = { # Austria '52 Opposition Campaigning
+	id = krg_dnf_regional_elections_austria.13
+	title = krg_dnf_regional_elections_austria.13.t
+	desc = krg_dnf_regional_elections_austria.13.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_dnf_regional_elections_austria.13.a
+	}
+}
+
+country_event = { # Austria '52 Tirol Campaign, good for CSP
+	id = krg_dnf_regional_elections_austria.14
+	title = krg_dnf_regional_elections_austria.14.t
+	desc = krg_dnf_regional_elections_austria.14.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		# Roaring Success!
+		name = krg_dnf_regional_elections_austria.14.a
+		custom_effect_tooltip = DNF_austria_52_tirol_tt_success
+		add_to_variable = { var = DNF_austria_conservative_pop value = 5 }
+		add_to_variable = { var = DNF_austria_socialist_pop value = -3 }
+		add_to_variable = { var = DNF_austria_other_pop value = -2 }
+	}
+}
+
+country_event = { # Austria '52 Tirol Campaign, bad for CSP'
+	id = krg_dnf_regional_elections_austria.15
+	title = krg_dnf_regional_elections_austria.15.t
+	desc = krg_dnf_regional_elections_austria.15.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		# Tirol Campaign Backfires	
+		name = krg_dnf_regional_elections_austria.15.a
+
+		custom_effect_tooltip = DNF_austria_52_tirol_tt_backfire
+		add_to_variable = { var = DNF_austria_conservative_pop value = -5 }
+		add_to_variable = { var = DNF_austria_socialist_pop value = 3 }
+		add_to_variable = { var = DNF_austria_other_pop value = 2 }
+	}
+}
+
+country_event = { #TV ads
+	id = krg_dnf_regional_elections_austria.16
+	title = krg_dnf_regional_elections_austria.16.t
+	desc = krg_dnf_regional_elections_austria.16.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		# Unexpected consequences of tv ads
+		name = krg_dnf_regional_elections_austria.16.a
+		custom_effect_tooltip = DNF_austria_52_television_tt
+		add_to_variable = { var = DNF_austria_conservative_pop value = 1 }
+		add_to_variable = { var = DNF_austria_socialist_pop value = 1 }
+		add_to_variable = { var = DNF_austria_other_pop value = 3 }
+	}
+}
+
+##BOHEMIA##
+
+country_event = { #Bohemian Election incoming
+	id = krg_dnf_regional_elections_bohemia.1
+	title = krg_dnf_regional_elections_bohemia.1.t
+	desc = krg_dnf_regional_elections_bohemia.1.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_dnf_regional_elections_bohemia.1.a
+		set_variable = { DNF_bohemia_socialist_pop = 40 }
+		set_variable = { DNF_bohemia_conservative_pop = 10 }
+		set_variable = { DNF_bohemia_liberal_pop = 30 }
+		set_variable = { DNF_bohemia_agrarian_pop = 20 }
+		set_variable = { DNF_bohemia_coalition_pop = 0 }
+		set_variable = { DNF_bohemian_election_1948_involved = 1 }
+		set_variable = { DNF_bohemian_election_involved = 1 }
+		activate_mission = DNF_bohemian_election_1948
+		activate_mission = DNF_bohemian_SDAPD_campaigning
+		ai_chance = {
+			factor = 100
+		}
+	}
+	option = {
+		name = krg_dnf_regional_elections_bohemia.1.b
+		add_political_power = 50
+		custom_effect_tooltip = DNF_bohemia_1948_nosupport_tt
+		hidden_effect = {
+				set_variable = { DNF_bohemia_socialist_pop = 56 }
+			country_event = {
+				id = krg_dnf_regional_elections_bohemia.2			
+				days = 80
+			}
+		}
+		ai_chance = {
+			factor = 0
+		}
+	}
+}
+
+country_event = { #Bohemian Election: SDAPD Victory
+	id = krg_dnf_regional_elections_bohemia.2
+	title = krg_dnf_regional_elections_bohemia.2.t
+	desc = krg_dnf_regional_elections_bohemia.2.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_dnf_regional_elections_bohemia.2.a
+		add_popularity = {
+			ideology = social_democrat
+			popularity = 0.03
+		}
+		clear_variable = DNF_bohemian_election_1948_involved
+		clear_variable = DNF_bohemian_election_involved
+		clear_variable = DNF_bohemia_coalition_pop
+		clr_country_flag = DNF_bohemian_election_picked_focus
+		clr_country_flag = DNF_BOHEMIAN_MP_STRANSKY
+		set_country_flag = DNF_BOHEMIAN_MP_FIERLINGER
+		clr_country_flag = DNF_bohemian_soclib_grand_alliance
+		set_country_flag = DNF_bohemian_socdem_government
+		clr_country_flag = DNF_bohemia_agrees
+		set_country_flag = DNF_bohemia_disagrees
+	}
+}
+
+country_event = { #Bohemian Election: Coalition Victory - Liberal lead
+	id = krg_dnf_regional_elections_bohemia.3
+	title = krg_dnf_regional_elections_bohemia.3.t
+	desc = krg_dnf_regional_elections_bohemia.3.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_dnf_regional_elections_bohemia.3.a
+		add_popularity = {
+			ideology = social_conservative
+			popularity = 0.01
+		}
+		add_popularity = {
+			ideology = market_liberal
+			popularity = 0.01
+		}
+		add_popularity = {
+			ideology = social_liberal
+			popularity = 0.01
+		}
+		clear_variable = DNF_bohemian_election_1948_involved
+		clear_variable = DNF_bohemian_election_involved
+		clear_variable = DNF_bohemia_coalition_pop
+		clr_country_flag = DNF_bohemian_election_picked_focus
+		clr_country_flag = DNF_BOHEMIAN_MP_STRANSKY
+		set_country_flag = DNF_BOHEMIAN_MP_BERAN
+		clr_country_flag = DNF_bohemian_marlib_grand_alliance
+		set_country_flag = DNF_bohemian_soclib_grand_alliance
+		
+	}
+}
+
+
+country_event = { #Bohemian Election: Coalition Victory - Agrarian lead
+	id = krg_dnf_regional_elections_bohemia.4
+	title = krg_dnf_regional_elections_bohemia.4.t
+	desc = krg_dnf_regional_elections_bohemia.4.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_dnf_regional_elections_bohemia.4.a
+		add_popularity = {
+			ideology = social_conservative
+			popularity = 0.01
+		}
+		add_popularity = {
+			ideology = market_liberal
+			popularity = 0.01
+		}
+				add_popularity = {
+			ideology = social_liberal
+			popularity = 0.01
+		}
+		
+		clear_variable = DNF_bohemian_election_1948_involved
+		clear_variable = DNF_bohemian_election_involved
+		clear_variable = DNF_bohemia_coalition_pop
+		clr_country_flag = DNF_bohemian_election_picked_focus
+	}
+}
+
+country_event = { #Conflict with Sokol group after CSP rally
+	id = krg_dnf_regional_elections_bohemia.5
+	title = krg_dnf_regional_elections_bohemia.5.t
+	desc = krg_dnf_regional_elections_bohemia.5.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_dnf_regional_elections_bohemia.5.a
+		add_stability = -0.02
+	}
+}
+
+country_event = { #Sokol group mobilises to increase voter turnout
+	id = krg_dnf_regional_elections_bohemia.6
+	title = krg_dnf_regional_elections_bohemia.6.t
+	desc = krg_dnf_regional_elections_bohemia.6.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_dnf_regional_elections_bohemia.6.a
+		add_stability = 0.01
+	}
+}
+
+##52##
+
+country_event = { # Bohemia 52 Incoming
+	id = krg_dnf_regional_elections_bohemia.7
+	title = krg_dnf_regional_elections_bohemia.7.t
+	desc = krg_dnf_regional_elections_bohemia.7.d
+
+	trigger = {
+		DNF = { NOT = {has_idea = DNF_The_Personal_Prinzip }} 
+	}
+
+	
+	immediate = { 
+		log = "[GetDateText]: [Root.GetName]: Start Bohemia 52 Election"
+	}
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_dnf_regional_elections_bohemia.7.a
+		ai_chance = {
+			factor = 100
+		}
+		if = { limit = { has_country_flag = DNF_bohemian_marlib_grand_alliance} 
+			set_variable = { DNF_bohemia_socialist_pop = 40 }
+			set_variable = { DNF_bohemia_conservative_pop = 10 }
+			set_variable = { DNF_bohemia_liberal_pop = 20 }
+			set_variable = { DNF_bohemia_agrarian_pop = 30 }
+		} else_if = { limit = { has_country_flag = DNF_bohemian_soclib_grand_alliance}
+			set_variable = { DNF_bohemia_socialist_pop = 40 }
+			set_variable = { DNF_bohemia_conservative_pop = 10 }
+			set_variable = { DNF_bohemia_liberal_pop = 30 }
+			set_variable = { DNF_bohemia_agrarian_pop = 20 }
+		} else_if = { limit = { has_country_flag = DNF_bohemian_socdem_government}
+			set_variable = { DNF_bohemia_socialist_pop = 50 }
+			set_variable = { DNF_bohemia_conservative_pop = 10 }
+			set_variable = { DNF_bohemia_liberal_pop = 20 }
+			set_variable = { DNF_bohemia_agrarian_pop = 20}
+		}
+		
+		set_variable = { DNF_bohemia_coalition_pop = 0 }
+		set_variable = { DNF_bohemian_election_1952_involved = 1 }
+		set_variable = { DNF_bohemian_election_involved = 1 }
+		activate_mission = DNF_bohemian_election_1952
+		activate_mission = DNF_bohemian_1952_opposition_campaigning
+		hidden_effect = {
+			country_event = {
+				id = krg_dnf_regional_elections_bohemia.11
+				days = 12
+			}	
+		}
+	}
+	option = {
+		name = krg_dnf_regional_elections_bohemia.7.b
+		add_political_power = 50
+		ai_chance = {
+			factor = 0
+		}
+		if = { limit = { OR = { 	has_country_flag = DNF_Adolf_Scharf
+									has_country_flag = DNF_Josip_Broz
+									has_country_flag = DNF_Anna_Kethly
+									has_country_flag = DNF_Bruno_Pitterman
+		} }
+		custom_effect_tooltip = DNF_bohemia_1952_nosupport_SDAPD_tt
+		hidden_effect = {
+				country_event = {
+					id = krg_dnf_regional_elections_bohemia.8
+					days = 80
+				}
+			}
+		}
+		else = { custom_effect_tooltip = DNF_bohemia_1952_nosupport_tt 
+		hidden_effect = {
+				country_event = {
+					id = krg_dnf_regional_elections_bohemia.10
+					days = 80
+				}
+			}
+		} 
+	}
+}
+
+country_event = { # Bohemia '52, Coalition - MarLib Win
+	id = krg_dnf_regional_elections_bohemia.8
+	title = krg_dnf_regional_elections_bohemia.8.t
+	desc = krg_dnf_regional_elections_bohemia.8.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	immediate = { 
+		log = "[GetDateText]: [Root.GetName]: marlibs win Bohemia 52 Election"
+	}
+	
+
+	option = {
+		name = krg_dnf_regional_elections_bohemia.8.a
+		add_popularity = { ideology = social_conservative popularity = 0.01 }
+		add_popularity = { ideology = market_liberal popularity = 0.01 }
+		add_popularity = { ideology = social_liberal popularity = 0.01 }
+
+		clear_variable = DNF_bohemian_election_1952_involved
+		clear_variable = DNF_bohemian_election_involved
+		clear_variable = DNF_bohemia_coalition_pop
+		clr_country_flag = DNF_bohemian_election_picked_focus
+
+		# check governments
+		clr_country_flag = DNF_bohemian_socdem_government
+		clr_country_flag = DNF_bohemian_soclib_grand_alliance
+		set_country_flag = DNF_bohemian_marlib_grand_alliance
+
+		# check ministers
+		clr_country_flag = DNF_BOHEMIAN_MP_STRANSKY
+		set_country_flag = DNF_BOHEMIAN_MP_BERAN
+		clr_country_flag = DNF_BOHEMIAN_MP_FIERLINGER
+
+		# set Viennese orientation
+		clr_country_flag = DNF_bohemia_agrees
+		clr_country_flag = DNF_bohemia_disagrees
+		if = { limit = { OR = { 	has_country_flag = DNF_Adolf_Scharf
+									has_country_flag = DNF_Josip_Broz
+									has_country_flag = DNF_Anna_Kethly
+									has_country_flag = DNF_Bruno_Pitterman
+		} }
+		set_country_flag = DNF_bohemia_disagrees
+		}
+		else = { set_country_flag = DNF_bohemia_agrees }
+		clr_country_flag = DNF_CSM_strike
+	}
+}
+
+country_event = { # Bohemia '52, Coalition - SocLib Win
+	id = krg_dnf_regional_elections_bohemia.9
+	title = krg_dnf_regional_elections_bohemia.9.t
+	desc = krg_dnf_regional_elections_bohemia.9.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	
+	immediate = { 
+		log = "[GetDateText]: [Root.GetName]: Soclibs win Bohemia 52 Election"
+	}
+	
+	option = {
+		name = krg_dnf_regional_elections_bohemia.9.a
+		add_popularity = { ideology = social_conservative popularity = 0.01 }
+		add_popularity = { ideology = market_liberal popularity = 0.01 }
+		add_popularity = { ideology = social_liberal popularity = 0.01 }
+
+		clear_variable = DNF_bohemian_election_1952_involved
+		clear_variable = DNF_bohemian_election_involved
+		clear_variable = DNF_bohemia_coalition_pop
+		clr_country_flag = DNF_bohemian_election_picked_focus
+		
+		# check governments
+		clr_country_flag = DNF_bohemian_socdem_government
+		set_country_flag = DNF_bohemian_soclib_grand_alliance
+		clr_country_flag = DNF_bohemian_marlib_grand_alliance
+
+		# check ministers
+		set_country_flag = DNF_BOHEMIAN_MP_STRANSKY
+		clr_country_flag = DNF_BOHEMIAN_MP_BERAN
+		clr_country_flag = DNF_BOHEMIAN_MP_FIERLINGER
+
+		# set Viennese orientation
+		clr_country_flag = DNF_bohemia_agrees
+		clr_country_flag = DNF_bohemia_disagrees
+		if = { limit = { OR = { 	has_country_flag = DNF_Adolf_Scharf
+									has_country_flag = DNF_Josip_Broz
+									has_country_flag = DNF_Anna_Kethly
+									has_country_flag = DNF_Bruno_Pitterman
+		} }
+		set_country_flag = DNF_bohemia_disagrees
+		}
+		else = { set_country_flag = DNF_bohemia_agrees }
+		clr_country_flag = DNF_CSM_strike
+	}
+}
+
+
+country_event = { # Bohemia '52, Socialist Win
+	id = krg_dnf_regional_elections_bohemia.10
+	title = krg_dnf_regional_elections_bohemia.10.t
+	desc = krg_dnf_regional_elections_bohemia.10.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	
+	immediate = { 
+		log = "[GetDateText]: [Root.GetName]: SDAPD win Bohemia 52 Election"
+	}
+	
+	option = {
+		name = krg_dnf_regional_elections_bohemia.10.a
+		add_popularity = { ideology = social_democrat popularity = 0.03 }
+
+		clear_variable = DNF_bohemian_election_1952_involved
+		clear_variable = DNF_bohemian_election_involved
+		clear_variable = DNF_bohemia_coalition_pop
+		clr_country_flag = DNF_bohemian_election_picked_focus
+		
+		# check governments
+		set_country_flag = DNF_bohemian_socdem_government
+		clr_country_flag = DNF_bohemian_soclib_grand_alliance
+		clr_country_flag = DNF_bohemian_marlib_grand_alliance
+
+		# check ministers
+		clr_country_flag = DNF_BOHEMIAN_MP_STRANSKY
+		clr_country_flag = DNF_BOHEMIAN_MP_BERAN
+		set_country_flag = DNF_BOHEMIAN_MP_FIERLINGER
+
+		# set Viennese orientation
+		clr_country_flag = DNF_bohemia_agrees
+		clr_country_flag = DNF_bohemia_disagrees
+		if = { limit = { OR = { 	has_country_flag = DNF_Adolf_Scharf
+									has_country_flag = DNF_Josip_Broz
+									has_country_flag = DNF_Anna_Kethly
+									has_country_flag = DNF_Bruno_Pitterman
+		} }
+		set_country_flag = DNF_bohemia_agrees
+		}
+		else = { set_country_flag = DNF_bohemia_disagrees }
+
+		clr_country_flag = DNF_CSM_strike
+	}
+}
+
+country_event = { # Bloody students
+	id = krg_dnf_regional_elections_bohemia.11
+	title = krg_dnf_regional_elections_bohemia.11.t
+	desc = krg_dnf_regional_elections_bohemia.11.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_dnf_regional_elections_bohemia.11.a
+		add_to_variable = { DNF_bohemia_socialist_pop = -2 }
+		set_country_flag = DNF_CSM_strike
+	}
+}
+
+##ILLYRIA
+
+##48##
+
+country_event = { # Illyria '48 result
+		id = krg_dnf_regional_elections_illyria.1
+		title = krg_dnf_regional_elections_illyria.1.t
+		desc = krg_dnf_regional_elections_illyria.1.d
+		is_triggered_only = yes
+		fire_only_once = yes
+		option = {
+			name = krg_dnf_regional_elections_illyria.1.a
+			hidden_effect = {
+				clr_country_flag = DNF_ILLYRIAN_MP_MACEK
+				set_country_flag = DNF_ILLYRIAN_MP_BROZ
+				clr_country_flag = DNF_ILLYRIAN_PARTY_SOCLIBS
+				set_country_flag = DNF_ILLYRIAN_PARTY_SOCDEMS
+				clr_country_flag = DNF_illyria_agrees
+				set_country_flag = DNF_illyria_disagrees
+				set_country_flag = DNF_illyrian_election_complete
+				clear_variable = DNF_illyrian_election_1948_involved
+			}
+		}
+}
+
+country_event = {  # Illyria '48 incoming
+		id = krg_dnf_regional_elections_illyria.2
+		title = krg_dnf_regional_elections_illyria.2.t
+		desc = krg_dnf_regional_elections_illyria.2.d
+	
+		is_triggered_only = yes
+		fire_only_once = yes
+	
+		option = {
+			name = krg_dnf_regional_elections_illyria.2.a
+			set_variable = { DNF_illyria_socialist_pop = 45 }
+			set_variable = { DNF_illyria_conservative_pop = 25 }
+			set_variable = { DNF_illyria_agrarian_pop = 30 }
+			set_variable = { DNF_illyrian_election_1948_involved = 1 }
+			activate_mission = DNF_illyrian_election_1948
+			activate_mission = DNF_illyrian_SDAPD_campaigning
+			ai_chance = { #result is set, spare some pp for dumb ai.
+				factor = 0 
+			}
+		}
+		option = {
+			name = krg_dnf_regional_elections_illyria.2.b
+			add_political_power = 50
+			custom_effect_tooltip = DNF_illyria_1948_nosupport_tt
+			hidden_effect = {
+					country_event = {
+					id = krg_dnf_regional_elections_illyria.1		
+					days = 80
+				}
+			}
+			ai_chance = {
+				factor = 100
+			}
+		}
+}
+
+country_event = {  # SocDem youth set upon by cons
+		id = krg_dnf_regional_elections_illyria.3
+		title = krg_dnf_regional_elections_illyria.3.t
+		desc = krg_dnf_regional_elections_illyria.3.d
+	
+		is_triggered_only = yes
+		fire_only_once = yes
+	
+		option = {
+			name = krg_dnf_regional_elections_illyria.3.a
+			add_to_variable = { var = DNF_illyria_socialist_pop value = 2 }
+			add_to_variable = { var = DNF_illyria_conservative_pop value = -2 }
+		}
+}
+
+country_event = {  # SDAPD/I campaign
+		id = krg_dnf_regional_elections_illyria.4
+		title = krg_dnf_regional_elections_illyria.4.t
+		desc = krg_dnf_regional_elections_illyria.4.d
+	
+		is_triggered_only = yes
+		fire_only_once = yes
+	
+		option = {
+			name = krg_dnf_regional_elections_illyria.4.a
+		}
+}
+
+
+country_event = { # Illyria 52 Incoming
+	id = krg_dnf_regional_elections_illyria.5
+	title = krg_dnf_regional_elections_illyria.5.t
+	desc = krg_dnf_regional_elections_illyria.5.d
+
+	trigger = {
+		DNF = { NOT = {has_idea = DNF_The_Personal_Prinzip }} 
+	}
+
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: Start Illyria 52 Election"		
+	}
+
+	option = {
+		name = krg_dnf_regional_elections_illyria.5.a
+		set_variable = { DNF_illyria_socialist_pop = 77 }
+		set_variable = { DNF_illyria_conservative_pop = 9 }
+		set_variable = { DNF_illyria_agrarian_pop = 14 }
+		set_variable = { DNF_illyria_coalition_pop = 0 }
+		set_variable = { DNF_illyrian_election_involved = 1 }
+		set_variable = { DNF_illyrian_election_1952_involved = 1 }
+		activate_mission = DNF_illyrian_election_1952
+		activate_mission = DNF_illyrian_1952_opposition_campaigning
+		if = { limit = { OR = { 	has_country_flag = DNF_Karl_Renner 
+									has_country_flag = DNF_Adolf_Scharf
+		 							has_country_flag = DNF_Anna_Kethly
+									has_country_flag = DNF_Bruno_Pitterman }}
+
+			hidden_effect = {
+				country_event = { 
+					id = krg_dnf_regional_elections_illyria.8
+					days = 14 
+				}	
+			}
+		}
+		else_if = {
+			limit = { has_country_flag = DNF_Josip_Broz }
+			#do nothing since this is only for opposition in the socialists to Broz
+			#Broz SHOULDN'T be in charge at this point btw, this is just an anti debug fuckery thing.
+		}
+		else = {
+			hidden_effect = {
+				country_event = { 
+					id = krg_dnf_regional_elections_illyria.9
+					days = 14 
+				}	
+			}
+		}
+		ai_chance = {
+			factor = 100
+		}
+	}
+
+	option = {
+		name = krg_dnf_regional_elections_illyria.5.b
+		add_political_power = 50
+		custom_effect_tooltip = DNF_illyria_1952_nosupport_tt
+		hidden_effect = {
+			country_event = {
+				id = krg_dnf_regional_elections_illyria.7
+				days = 80
+			}	
+		}
+		ai_chance = {
+			factor = 0
+		}
+	}
+}
+
+country_event = { # Illyria's (Highly Improbable) Coalition Win
+	id = krg_dnf_regional_elections_illyria.6
+	title = krg_dnf_regional_elections_illyria.6.t
+	desc = krg_dnf_regional_elections_illyria.6.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_dnf_regional_elections_illyria.6.a
+		add_popularity = { 	
+							ideology = social_liberal 
+							popularity = 0.01 
+						}
+		add_popularity = { 	
+							ideology = social_conservative
+							popularity = 0.02 
+						}
+
+		clear_variable = DNF_illyrian_election_involved
+		clear_variable = DNF_illyrian_1952_involved
+		clear_variable = DNF_illyrian_election_picked_focus
+		
+		clr_country_flag = DNF_ILLYRIAN_MP_BROZ
+		set_country_flag = DNF_ILLYRIAN_MP_PEROVIC
+		if = { limit = { OR = { 	has_country_flag = DNF_Karl_Renner 
+									has_country_flag = DNF_Adolf_Scharf
+		 							has_country_flag = DNF_Anna_Kethly
+									has_country_flag = DNF_Bruno_Pitterman }}
+		clr_country_flag = DNF_illyria_agrees
+		set_country_flag = DNF_illyria_disagrees
+		}
+	}
+}
+
+country_event = { # Illyria Socialist Win
+	id = krg_dnf_regional_elections_illyria.7
+	title = krg_dnf_regional_elections_illyria.7.t
+	desc = krg_dnf_regional_elections_illyria.7.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_dnf_regional_elections_illyria.7.a
+		add_popularity = { ideology = social_democrat popularity = 0.03 }
+		clear_variable = DNF_illyrian_election_involved
+		clear_variable = DNF_illyrian_1952_involved
+		clear_variable = DNF_illyrian_election_picked_focus
+	}
+}
+
+country_event = { #Operation Rugpull
+	id = krg_dnf_regional_elections_illyria.8
+	title = krg_dnf_regional_elections_illyria.8.t
+	desc = krg_dnf_regional_elections_illyria.8.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_dnf_regional_elections_illyria.8.a
+		set_country_flag = DNF_Illyria_1952_Rugpull
+		add_political_power = -30
+	}
+	option = {
+		name = krg_dnf_regional_elections_illyria.8.b
+		add_political_power = 20
+		add_stability = 0.01
+		#what are you talking about, we're one party!
+	}
+}
+
+country_event = { #Outside the Box?
+	id = krg_dnf_regional_elections_illyria.9
+	title = krg_dnf_regional_elections_illyria.9.t
+	desc = krg_dnf_regional_elections_illyria.9.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_dnf_regional_elections_illyria.9.a
+		hidden_effect = {
+			country_event = {
+				id = krg_dnf_regional_elections_illyria.10
+				days = 5
+			}
+			set_variable = { var = dnf_illyria_social_orgs value = 0 }
+		}
+	}
+
+	option = {
+		name = krg_dnf_regional_elections_illyria.9.b
+	}
+}
+
+country_event = { #Agricultural Social Organisations (exporting Landbunds)
+	id = krg_dnf_regional_elections_illyria.10
+	title = krg_dnf_regional_elections_illyria.10.t
+	desc = krg_dnf_regional_elections_illyria.10.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	immediate = {
+		hidden_effect = {
+				country_event = {
+					id = krg_dnf_regional_elections_illyria.11
+					days = 6
+				}
+		}
+	}
+
+	option = {
+		name = krg_dnf_regional_elections_illyria.10.a
+		add_political_power = -20
+		hidden_effect = {
+			add_to_variable = { var = dnf_illyria_social_orgs value = 1 } 			
+			}
+		}
+
+	option = {
+		name = krg_dnf_regional_elections_illyria.10.b
+		add_political_power = 10
+	}
+}
+
+country_event = { #Italo-Illyrian Longshoreman and Port Association
+	id = krg_dnf_regional_elections_illyria.11
+	title = krg_dnf_regional_elections_illyria.11.t
+	desc = krg_dnf_regional_elections_illyria.11.d
+
+	immediate = {
+		hidden_effect = {
+			country_event = {
+				id = krg_dnf_regional_elections_illyria.12
+				days = 4
+			}	
+		}
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_dnf_regional_elections_illyria.11.a
+		add_political_power = -20
+		add_to_variable = { var = dnf_illyria_social_orgs value = 1 } 
+	}
+
+	option = {
+		name = krg_dnf_regional_elections_illyria.11.b
+		add_political_power = 10
+	}
+}
+
+country_event = { #Federal Union Railworkers
+	id = krg_dnf_regional_elections_illyria.12
+	title = krg_dnf_regional_elections_illyria.12.t
+	desc = krg_dnf_regional_elections_illyria.12.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	immediate = {
+		hidden_effect = {
+			country_event = {
+				id = krg_dnf_regional_elections_illyria.13
+				days = 15
+			}	
+		}
+	}
+
+	option = {
+		name = krg_dnf_regional_elections_illyria.12.a
+		add_political_power = -40
+		add_to_variable = { var = dnf_illyria_social_orgs value = 1 } 
+	}
+
+	option = {
+		name = krg_dnf_regional_elections_illyria.12.b
+		add_political_power = 20
+	}
+}
+
+country_event = { # Culmination of the Social Campaign
+	id = krg_dnf_regional_elections_illyria.13
+	title = krg_dnf_regional_elections_illyria.13.t
+	desc = krg_dnf_regional_elections_illyria.13.d
+
+	immediate = {
+		hidden_effect = { 
+			if = { limit = { check_variable = {
+				var = dnf_illyria_social_orgs
+				value = 2 
+				compare = greater_than_or_equals }
+			}
+				country_event = { 
+					id = krg_dnf_regional_elections_illyria.14
+					 days = 3 }
+			} else_if = { limit = {  check_variable = { dnf_illyria_social_orgs = 1 } }		
+				country_event = { 
+					id = krg_dnf_regional_elections_illyria.15 
+					days = 4 }			
+			} else = {
+				country_event = { 
+					id = krg_dnf_regional_elections_illyria.16 
+					days = 2 }	
+			}
+		}
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_dnf_regional_elections_illyria.13.a
+	}
+}
+
+country_event = { # The Balaton Bloc flanking campaign succeeds
+	id = krg_dnf_regional_elections_illyria.14
+	title = krg_dnf_regional_elections_illyria.14.t
+	desc = krg_dnf_regional_elections_illyria.14.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_dnf_regional_elections_illyria.14.a
+		custom_effect_tooltip = DNF_Illyria_52_flank_success_tt
+		hidden_effect = {
+			add_to_variable = { DNF_illyria_socialist_pop = -20 }
+			add_to_variable = { DNF_illyria_conservative_pop = 20 }
+		}
+	}
+}
+
+country_event = { #  The Balaton Bloc flanking campaign fizzles
+	id = krg_dnf_regional_elections_illyria.15
+	title = krg_dnf_regional_elections_illyria.15.t
+	desc = krg_dnf_regional_elections_illyria.15.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_dnf_regional_elections_illyria.15.a
+		custom_effect_tooltip = DNF_Illyria_52_flank_fizzle_tt
+		hidden_effect = {
+			add_to_variable = { DNF_illyria_socialist_pop = 2}
+			add_to_variable = { DNF_illyria_agrarian_pop = 3}
+			add_to_variable = { DNF_illyria_conservative_pop = -5}
+		}
+	}
+}
+
+country_event = { # The Balaton Bloc flanking campaign is DOA
+	id = krg_dnf_regional_elections_illyria.16
+	title = krg_dnf_regional_elections_illyria.16.t
+	desc = krg_dnf_regional_elections_illyria.16.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_dnf_regional_elections_illyria.16.a
+		custom_effect_tooltip = DNF_Illyria_52_flank_doa_tt
+		hidden_effect = { # gotta be willing to at least engage with some social orgs to prevent it from blowing up in your face
+			add_to_variable = { DNF_illyria_socialist_pop = 7}
+			add_to_variable = { DNF_illyria_conservative_pop = -10}
+			add_to_variable = { DNF_illyria_agragian_pop = 3}
+		}
+	}
+}
+
+country_event = { # The Federal Observers Find No Meddling 
+	id = krg_dnf_regional_elections_illyria.17
+	title = krg_dnf_regional_elections_illyria.17.t
+	desc = krg_dnf_regional_elections_illyria.17.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_dnf_regional_elections_illyria.17.a
+		add_political_power = -30
+		custom_effect_tooltip = DNF_Illyria_52_rugpull_tt
+		#Broz is pissed tho
+		clr_country_flag = DNF_illyria_agrees
+		set_country_flag = DNF_illyria_disagrees
+	}
+}
+
+## GALICIA ##
+
+country_event = {  # Galicia '49 incoming
+		id = krg_dnf_regional_elections_galicia.1
+		title =  krg_dnf_regional_elections_galicia.1.t
+		desc =  krg_dnf_regional_elections_galicia.1.d
+	
+		is_triggered_only = yes
+		fire_only_once = yes
+	
+		option = {
+			name =  krg_dnf_regional_elections_galicia.1.a
+			if = { limit = { has_completed_focus = DNF_galician_development_project }
+			set_variable = { DNF_galicia_soclib_pop = 30 }
+			set_variable = { DNF_galicia_marlib_pop = 30 }
+			set_variable = { DNF_galicia_soccon_pop = 40 }
+			}
+			else = {
+				set_variable = { DNF_galicia_soclib_pop = 30 }
+				set_variable = { DNF_galicia_marlib_pop = 40 }
+				set_variable = { DNF_galicia_soccon_pop = 30 }	
+			}
+			set_variable = { DNF_galician_election_1949_involved = 1 }
+			set_variable = { DNF_galician_election_involved = 1 }
+			activate_mission = DNF_galician_election_1949
+			activate_mission = DNF_galician_opposition_campaigning
+			ai_chance = {
+				factor = 100
+			}
+		}
+		option = {
+			name =  krg_dnf_regional_elections_galicia.1.b
+			add_political_power = 50
+			custom_effect_tooltip = DNF_galician_1949_nosupport_tt
+			hidden_effect = {
+				if = { 
+					limit = { has_completed_focus = DNF_galician_development_project }
+					country_event = {
+						id = krg_dnf_regional_elections_galicia.4
+						days = 80
+						}
+					}
+				else = {	
+					country_event = {
+					id = krg_dnf_regional_elections_galicia.2		
+					days = 80
+					}
+				}
+			}
+			ai_chance = {
+				factor = 0
+			}
+		}
+}
+
+country_event = { # Galicia '49 result - Mar Lib Caucus Victory
+		id = krg_dnf_regional_elections_galicia.2
+		title = krg_dnf_regional_elections_galicia.2.t
+		desc = krg_dnf_regional_elections_galicia.2.d
+		is_triggered_only = yes
+		fire_only_once = yes
+		option = {
+			name = krg_dnf_regional_elections_galicia.2.a
+			hidden_effect = {
+				clear_variable = DNF_galician_election_1949_involved
+			}
+		}
+}
+
+country_event = { # Galicia '49 result - Soc Liberal BDP Caucus Victory
+		id = krg_dnf_regional_elections_galicia.3
+		title = krg_dnf_regional_elections_galicia.3.t
+		desc = krg_dnf_regional_elections_galicia.3.d
+		is_triggered_only = yes
+		fire_only_once = yes
+		option = {
+			name = krg_dnf_regional_elections_galicia.3.a
+			hidden_effect = {
+				clr_country_flag = DNF_GALICIAN_MP_POLAKIEWICZ
+				set_country_flag = DNF_GALICIAN_MP_CHADZYNSKI
+				clr_country_flag = DNF_GALICIAN_PARTY_MARLIBS
+				set_country_flag = DNF_GALICIAN_PARTY_SOCLIBS
+				clear_variable = DNF_galician_election_1949_involved
+			}
+		}
+}
+country_event = { # Galicia '49 result - Soc Con Caucus Victory
+		id = krg_dnf_regional_elections_galicia.4
+		title = krg_dnf_regional_elections_galicia.4.t
+		desc = krg_dnf_regional_elections_galicia.4.d
+		is_triggered_only = yes
+		fire_only_once = yes
+		option = {
+			name = krg_dnf_regional_elections_galicia.4.a
+			hidden_effect = {
+				clr_country_flag = DNF_GALICIAN_MP_POLAKIEWICZ
+				set_country_flag = DNF_GALICIAN_MP_ROMER
+				clr_country_flag = DNF_GALICIAN_PARTY_MARLIBS
+				set_country_flag = DNF_GALICIAN_PARTY_SOCCONS
+				set_country_flag = DNF_galicia_agrees
+				clr_country_flag = DNF_galicia_disagrees
+				clear_variable = DNF_galician_election_1949_involved
+			}
+		}
+}
+
+country_event = { # Galicia '49 Mobilise the Countryside
+		id = krg_dnf_regional_elections_galicia.5
+		title = krg_dnf_regional_elections_galicia.5.t
+		desc = krg_dnf_regional_elections_galicia.5.d
+		is_triggered_only = yes
+		fire_only_once = yes
+		option = {
+			name = krg_dnf_regional_elections_galicia.5.a
+			add_to_variable = { DNF_galicia_soccon_pop = 5 }
+			add_to_variable = { DNF_galicia_soclib_pop = -1 }
+			add_to_variable = { DNF_galicia_marlib_pop = -4 }
+			custom_effect_tooltip = DNF_galicia_mobilise_vs_Lib_tt
+		}
+		option = {
+			name = krg_dnf_regional_elections_galicia.5.b
+			add_to_variable = { DNF_galicia_soccon_pop = 5 }
+			add_to_variable = { DNF_galicia_soclib_pop = -4 }
+			add_to_variable = { DNF_galicia_marlib_pop = -1 }
+			custom_effect_tooltip = DNF_galicia_mobilise_vs_BCP_tt
+		}
+}
+
+country_event = { # Galicia '49 Influence the Polish West
+		id = krg_dnf_regional_elections_galicia.6
+		title = krg_dnf_regional_elections_galicia.6.t
+		desc = krg_dnf_regional_elections_galicia.6.d
+		is_triggered_only = yes
+		fire_only_once = yes
+		option = {
+			name = krg_dnf_regional_elections_galicia.6.a
+			hidden_effect = { 
+				random_list = {
+					50 = {
+						country_event = { id = krg_dnf_regional_elections_galicia.6 days = 3 }
+					}
+					50 = {
+						#nothing happens
+					}
+				} 
+			}
+		}
+}
+
+country_event = { # Galicia '49 Influence the Ukrainian East
+		id = krg_dnf_regional_elections_galicia.7
+		title = krg_dnf_regional_elections_galicia.7.t
+		desc = krg_dnf_regional_elections_galicia.7.d
+		is_triggered_only = yes
+		fire_only_once = yes
+		option = {
+			name = krg_dnf_regional_elections_galicia.7.a
+			add_to_variable = { DNF_galicia_soccon_pop = 3 }
+			add_to_variable = { DNF_galicia_marlib_pop = -3 }
+			hidden_effect = { 
+				random_list = {
+					50 = {
+						country_event = { id = krg_dnf_regional_elections_galicia.7 days = 3 }
+					}
+					50 = {
+						#nothing happens
+					}
+				} 
+			}
+		}
+}
+
+country_event = { # Galicia '49 Disruption by Polish Nationalists in Krakow
+		id = krg_dnf_regional_elections_galicia.8
+		title = krg_dnf_regional_elections_galicia.8.t
+		desc = krg_dnf_regional_elections_galicia.8.d
+		is_triggered_only = yes
+		fire_only_once = yes
+		option = {
+			name = krg_dnf_regional_elections_galicia.8.a
+			add_to_variable = { DNF_galicia_soccon_pop = -1 }
+			add_to_variable = { DNF_galicia_soclib_pop = -1 }
+			add_to_variable = { DNF_galicia_marlib_pop = 2 }
+			custom_effect_tooltip = DNF_galician_western_polish_disruption_tt
+		}
+}
+
+country_event = { # Galicia '49 Disruption by Corporate Thugs in Lwow
+		id = krg_dnf_regional_elections_galicia.9
+		title = krg_dnf_regional_elections_galicia.9.t
+		desc = krg_dnf_regional_elections_galicia.9.d
+		is_triggered_only = yes
+		fire_only_once = yes
+		option = {
+			name = krg_dnf_regional_elections_galicia.9.a
+			add_to_variable = { DNF_galicia_soccon_pop = -1 }
+			add_to_variable = { DNF_galicia_soclib_pop = 2 }
+			add_to_variable = { DNF_galicia_marlib_pop = -1 }
+			custom_effect_tooltip = DNF_galician_eastern_ukrainian_disruption_tt
+		}
+}
+
+## 53 ##
+
+
+country_event = { # Galicia 53 Incoming
+	id = krg_dnf_regional_elections_galicia.10
+	title = krg_dnf_regional_elections_galicia.10.t
+	desc = krg_dnf_regional_elections_galicia.10.d
+	
+
+	trigger = {
+		DNF = { NOT = {has_idea = DNF_The_Personal_Prinzip }} 
+	}
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: Start Galicia 53 Election"
+		hidden_effect = {
+			country_event = {
+				id =  krg_dnf_regional_elections_galicia.15
+				days = 21
+			}
+		}
+		
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = krg_dnf_regional_elections_galicia.10.a 
+			set_variable = { DNF_galicia_soclib_pop = 30 }
+			set_variable = { DNF_galicia_marlib_pop = 35 }
+			set_variable = { DNF_galicia_soccon_pop = 25 }	
+			set_variable = { DNF_galicia_socdem_pop = 10 }
+			set_variable = { DNF_galician_election_1953_involved = 1 }
+			set_variable = { DNF_galician_election_involved = 1 }
+			activate_mission = DNF_galician_election_1953
+			activate_mission = DNF_galician_election_1953_opposition_campaigning		
+			ai_chance = {
+				factor = 100
+			}
+		}
+		option = {
+			name = krg_dnf_regional_elections_galicia.10.b
+			add_political_power = 50
+			custom_effect_tooltip = DNF_galician_1953_nosupport_tt
+			hidden_effect = {
+				country_event = {
+					id = krg_dnf_regional_elections_galicia.13
+					days = 80
+				}	
+			}
+			ai_chance = {
+				factor = 0
+			}
+	}
+}
+
+country_event = { # Galicia, CSP Victory
+	id = krg_dnf_regional_elections_galicia.11
+	title = krg_dnf_regional_elections_galicia.11.t
+	desc = krg_dnf_regional_elections_galicia.11.d
+
+	immediate = {
+		hidden_effect = {
+			# set government
+			clr_country_flag = DNF_GALICIAN_PARTY_MARLIBS
+			clr_country_flag = DNF_GALICIAN_PARTY_SOCLIBS
+			clr_country_flag = DNF_GALICIAN_PARTY_SOCCONS
+
+			# set minister
+			clr_country_flag = DNF_GALICIAN_MP_ROMER
+			clr_country_flag = DNF_GALICIAN_MP_CHADZYNSKI
+			clr_country_flag = DNF_GALICIAN_MP_POLAKIEWICZ
+
+			# set viennese alignment
+			clr_country_flag = DNF_galicia_agrees
+			clr_country_flag = DNF_galicia_disagrees
+
+			set_country_flag = DNF_GALICIAN_PARTY_SOCCONS
+			set_country_flag = DNF_GALICIAN_MP_ROMER
+			if = { limit = { OR = { has_country_flag = DNF_Julius_Raab 
+									has_country_flag = DNF_Zoltan_Tildy
+									has_country_flag = DNF_Alcide_De_Gasperi
+									has_country_flag = DNF_Leopold_Figl
+								}}			
+				set_country_flag = DNF_galicia_agrees
+			}
+			else = {
+				set_country_flag = DNF_galicia_disagrees
+			}
+
+			clear_variable = DNF_galician_election_involved
+			clear_variable = DNF_galician_election_1953_involved
+		}
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_dnf_regional_elections_galicia.11.a
+	}
+}
+
+country_event = { # Galicia, marlibs
+	id = krg_dnf_regional_elections_galicia.12
+	title = krg_dnf_regional_elections_galicia.12.t
+	desc = krg_dnf_regional_elections_galicia.12.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	immediate = {
+		hidden_effect = {
+			# set government
+			clr_country_flag = DNF_GALICIAN_PARTY_MARLIBS
+			clr_country_flag = DNF_GALICIAN_PARTY_SOCLIBS
+			clr_country_flag = DNF_GALICIAN_PARTY_SOCCONS
+
+			# set minister
+			clr_country_flag = DNF_GALICIAN_MP_ROMER
+			clr_country_flag = DNF_GALICIAN_MP_CHADZYNSKI
+			clr_country_flag = DNF_GALICIAN_MP_POLAKIEWICZ
+
+			# set viennese alignment
+			clr_country_flag = DNF_galicia_agrees
+			clr_country_flag = DNF_galicia_disagrees
+
+			set_country_flag = DNF_GALICIAN_PARTY_MARLIBS
+			set_country_flag = DNF_GALICIAN_MP_POLAKIEWICZ
+			if = { limit = { has_country_flag = DNF_Peter_Veres }			
+				set_country_flag = DNF_galicia_agrees
+			}
+			else = {
+				set_country_flag = DNF_galicia_disagrees
+			}
+
+			clear_variable = DNF_galician_election_involved
+			clear_variable = DNF_galician_election_1953_involved
+		}
+	}
+
+	option = {
+		name = krg_dnf_regional_elections_galicia.12.a
+	}
+}
+
+country_event = { # soc libs win
+	id = krg_dnf_regional_elections_galicia.13
+	title = krg_dnf_regional_elections_galicia.13.t
+	desc = krg_dnf_regional_elections_galicia.13.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	immediate = {
+		hidden_effect = {
+			# set government
+			clr_country_flag = DNF_GALICIAN_PARTY_MARLIBS
+			clr_country_flag = DNF_GALICIAN_PARTY_SOCLIBS
+			clr_country_flag = DNF_GALICIAN_PARTY_SOCCONS
+
+			# set minister
+			clr_country_flag = DNF_GALICIAN_MP_ROMER
+			clr_country_flag = DNF_GALICIAN_MP_CHADZYNSKI
+			clr_country_flag = DNF_GALICIAN_MP_POLAKIEWICZ
+
+			# set viennese alignment
+			clr_country_flag = DNF_galicia_agrees
+			clr_country_flag = DNF_galicia_disagrees
+
+			set_country_flag = DNF_GALICIAN_PARTY_SOCLIBS
+			set_country_flag = DNF_GALICIAN_MP_CHADZYNSKI
+			if = { limit = { has_country_flag = DNF_Peter_Veres }						
+				set_country_flag = DNF_galicia_agrees
+			}
+			else = {
+				set_country_flag = DNF_galicia_disagrees
+			}
+
+			clear_variable = DNF_galician_election_involved
+			clear_variable = DNF_galician_election_1953_involved
+		}
+	}
+	option = {
+		name = krg_dnf_regional_elections_galicia.13.a
+	}
+}
+
+country_event = { # socdem win
+	id = krg_dnf_regional_elections_galicia.14
+	title = krg_dnf_regional_elections_galicia.14.t
+	desc = krg_dnf_regional_elections_galicia.14.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	immediate = {
+		hidden_effect = {
+			# set government
+			clr_country_flag = DNF_GALICIAN_PARTY_MARLIBS
+			clr_country_flag = DNF_GALICIAN_PARTY_SOCLIBS
+			clr_country_flag = DNF_GALICIAN_PARTY_SOCCONS
+
+			# set minister
+			clr_country_flag = DNF_GALICIAN_MP_ROMER
+			clr_country_flag = DNF_GALICIAN_MP_CHADZYNSKI
+			clr_country_flag = DNF_GALICIAN_MP_POLAKIEWICZ
+
+			# set viennese alignment
+			clr_country_flag = DNF_galicia_agrees
+			clr_country_flag = DNF_galicia_disagrees
+
+			set_country_flag = DNF_GALICIAN_PARTY_SOCDEMS
+			set_country_flag = DNF_GALICIAN_MP_CIOLKOSZ
+			if = { limit = { OR = { has_country_flag = DNF_Adolf_Scharf
+									has_country_flag = DNF_Bruno_Pitterman
+									has_country_flag = DNF_Josip_Broz
+									has_country_flag = DNF_Anna_Kethly }}			
+				set_country_flag = DNF_galicia_agrees
+			}
+			else = {
+				set_country_flag = DNF_galicia_disagrees
+			}
+
+			clear_variable = DNF_galician_election_involved
+			clear_variable = DNF_galician_election_1953_involved
+		}
+	}
+
+	option = {
+		name = krg_dnf_regional_elections_galicia.14.a
+	}
+}
+
+country_event = { # Galicia Krakow Riots
+	id = krg_dnf_regional_elections_galicia.15
+	title = krg_dnf_regional_elections_galicia.15.t
+	desc = krg_dnf_regional_elections_galicia.15.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_dnf_regional_elections_galicia.15.a
+		DNF_nationalist_tensions_worsening = yes
+		hidden_effect = {
+			set_country_flag = DNF_Krakow_Riots
+		}
+		if = { limit = { check_variable = { DNF_galician_election_1953_involved = 0 }}
+			country_event = {
+				id = krg_dnf_regional_elections_galicia.16
+				days = 7
+				}
+			}
+		}
+}
+
+country_event = { # Response to the Riots
+	id = krg_dnf_regional_elections_galicia.16
+	title = krg_dnf_regional_elections_galicia.16.t
+	desc = krg_dnf_regional_elections_galicia.16.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #
+		name = krg_dnf_regional_elections_galicia.16.a
+		add_stability = 0.03
+		news_event = { id = krg_dnf_regional_elections_galicia.17 }
+	}
+}
+
+news_event = { # Danubia Mourns
+	id = krg_dnf_regional_elections_galicia.17
+	title = krg_dnf_regional_elections_galicia.17.t
+	desc = krg_dnf_regional_elections_galicia.17.d
+	picture = GFX_ne_dnf_galicia_mourns
+	is_triggered_only = yes
+	major = yes
+
+	option = {
+		name = krg_dnf_regional_elections_galicia.17.a
+	}
+}
+
+## Slovakia ##
+
+## 49 ##
+
+country_event = {  # Slovakia '49 incoming
+		id = krg_dnf_regional_elections_slovakia.1
+		title = krg_dnf_regional_elections_slovakia.1.t
+		desc = krg_dnf_regional_elections_slovakia.1.d
+	
+		is_triggered_only = yes
+		fire_only_once = yes
+	
+#trigger downstream elections reliably
+immediate = {
+	hidden_effect = {
+	#Transylvania 50 (VV's death)
+	country_event = {
+		id = krg_dnf_regional_elections_transylvania.1
+		days = 202
+	}
+	#Hungary 50
+		country_event = {
+			id = krg_dnf_regional_elections_hungary.1
+			days = 342
+		}	
+	#Kill Reither 30 Apr 1950
+	country_event = {
+			id = krg_dnf_regional_elections_austria.9
+			days = 248
+			}	
+		}
+	}
+
+		option = {
+			name = krg_dnf_regional_elections_slovakia.1.a
+			set_variable = { DNF_slovakia_soccon_pop = 35 }
+			set_variable = { DNF_slovakia_soclib_pop = 35 }
+			set_variable = { DNF_slovakia_socdem_pop = 30 }
+			set_variable = { DNF_slovakian_election_1949_involved = 1 }
+			set_variable = { DNF_slovakian_election_involved = 1 }
+			log = "[GetDateText]: [Root.GetName]: [?DNF_slovakian_election_1949_involved]"
+			activate_mission = DNF_slovakian_election_1949
+			activate_mission = DNF_slovakian_opposition_campaigning
+			hidden_effect = { 
+					country_event = {
+						id = krg_dnf_regional_elections_slovakia.6
+						days = 6
+					}
+				}
+				ai_chance = {
+					factor = 100
+				}
+			}
+		option = {
+			name = krg_dnf_regional_elections_slovakia.1.b
+			add_political_power = 50
+			custom_effect_tooltip = DNF_slovakian_1949_nosupport_tt
+			hidden_effect = {
+				country_event = {
+					id = krg_dnf_regional_elections_slovakia.2		
+					days = 80
+					}
+					set_variable = { DNF_slovakia_soccon_pop = 41 }
+			}
+			ai_chance = {
+				factor = 0
+			}
+		}
+}
+
+country_event = { # Slovakia '49 result - SKS win
+		id = krg_dnf_regional_elections_slovakia.2
+		title = krg_dnf_regional_elections_slovakia.2.t
+		desc = krg_dnf_regional_elections_slovakia.2.d
+		is_triggered_only = yes
+		fire_only_once = yes
+		option = {
+			name = krg_dnf_regional_elections_slovakia.2.a
+			hidden_effect = {
+				clear_variable = DNF_slovakian_election_1949_involved
+				clear_variable = DNF_slovakian_election_involved
+			}
+		}
+}
+
+country_event = { # Slovakia '49 result - SNRS win
+		id = krg_dnf_regional_elections_slovakia.3
+		title = krg_dnf_regional_elections_slovakia.3.t
+		desc = krg_dnf_regional_elections_slovakia.3.d
+		is_triggered_only = yes
+		fire_only_once = yes
+		option = {
+			name = krg_dnf_regional_elections_slovakia.3.a
+			hidden_effect = {
+				clr_country_flag = DNF_SLOVAKIAN_MP_TISO
+				set_country_flag = DNF_SLOVAKIAN_MP_LETTRICH
+				clr_country_flag = DNF_SLOVAKIAN_PARTY_SOCCONS
+				set_country_flag = DNF_SLOVAKIAN_PARTY_SOCLIBS
+				clear_variable = DNF_slovakian_election_1949_involved
+				clear_variable = DNF_slovakian_election_involved
+			}
+		}
+}
+country_event = { # Slovakia '49 result - SDAPD/S win
+		id = krg_dnf_regional_elections_slovakia.4
+		title = krg_dnf_regional_elections_slovakia.4.t
+		desc = krg_dnf_regional_elections_slovakia.4.d
+		is_triggered_only = yes
+		fire_only_once = yes
+		option = {
+			name = krg_dnf_regional_elections_slovakia.4.a
+			hidden_effect = {
+				clr_country_flag = DNF_SLOVAKIAN_MP_TISO
+				set_country_flag = DNF_SLOVAKIAN_MP_DERER
+				clr_country_flag = DNF_SLOVAKIAN_PARTY_SOCCONS
+				set_country_flag = DNF_SLOVAKIAN_PARTY_SOCDEMS
+				set_country_flag = DNF_slovakia_disagrees
+				clr_country_flag = DNF_slovakia_agrees
+				clear_variable = DNF_slovakian_election_1949_involved
+				clear_variable = DNF_slovakian_election_involved
+			}
+		}
+}
+
+country_event = { # Slovakia '49 - Smear Campaign
+		id = krg_dnf_regional_elections_slovakia.5
+		title = krg_dnf_regional_elections_slovakia.5.t
+		desc = krg_dnf_regional_elections_slovakia.5.d
+		is_triggered_only = yes
+		fire_only_once = yes
+		option = {
+			name = krg_dnf_regional_elections_slovakia.5.a
+			custom_effect_tooltip = DNF_slovakia_49_smear2_tt
+			add_to_variable = { DNF_slovakia_soccon_pop = 1 }
+			add_to_variable = { DNF_slovakia_soclib_pop = 1 }
+			add_to_variable = { DNF_slovakia_socdem_pop = -2 }
+		}
+		
+}
+
+country_event = { # Slovakia '49 - The Miner's Strike 
+		id = krg_dnf_regional_elections_slovakia.6
+		title = krg_dnf_regional_elections_slovakia.6.t
+		desc = krg_dnf_regional_elections_slovakia.6.d
+		is_triggered_only = yes
+		fire_only_once = yes
+		option = {
+			name = krg_dnf_regional_elections_slovakia.6.a
+			custom_effect_tooltip = DNF_support_the_49_strike_tt
+			add_political_power = -20
+			hidden_effect = { 
+				country_event = {
+				id = krg_dnf_regional_elections_slovakia.7
+				days = 5
+				}
+			}
+			add_to_variable = { DNF_slovakia_soccon_pop = 2 }
+			add_to_variable = { DNF_slovakia_soclib_pop = -3 }
+			add_to_variable = { DNF_slovakia_socdem_pop = 1 }
+		}
+		option = {
+			name = krg_dnf_regional_elections_slovakia.6.b
+			custom_effect_tooltip = DNF_oppose_the_49_strike_tt
+			add_political_power = -20
+			hidden_effect = { 
+				country_event = {
+				id = krg_dnf_regional_elections_slovakia.8
+				days = 5
+				}
+			}
+			add_to_variable = { DNF_slovakia_soccon_pop = -3 }
+			add_to_variable = { DNF_slovakia_soclib_pop = 1 }
+			add_to_variable = { DNF_slovakia_socdem_pop = 2 }
+		}
+}
+
+
+country_event = { # Slovakia '49 - The Strike Grows And Negotiations Begin
+		id = krg_dnf_regional_elections_slovakia.7
+		title = krg_dnf_regional_elections_slovakia.7.t
+		desc = krg_dnf_regional_elections_slovakia.7.d
+		is_triggered_only = yes
+		fire_only_once = yes
+		option = {
+			name = krg_dnf_regional_elections_slovakia.7.a
+			custom_effect_tooltip = DNF_negotiations_49_strike_tt
+			add_political_power = -20
+			hidden_effect = { 
+				country_event = {
+				id = krg_dnf_regional_elections_slovakia.9
+				days = 5
+				}
+			}
+			add_to_variable = { DNF_slovakia_soccon_pop = 1 }
+			add_to_variable = { DNF_slovakia_soclib_pop = -3 }
+			add_to_variable = { DNF_slovakia_socdem_pop = 2 }
+		}
+}
+
+country_event = { # Slovakia '49 - The Strike Is Crushed!
+		id = krg_dnf_regional_elections_slovakia.8
+		title = krg_dnf_regional_elections_slovakia.8.t
+		desc = krg_dnf_regional_elections_slovakia.8.d
+		is_triggered_only = yes
+		fire_only_once = yes
+		option = {
+			name = krg_dnf_regional_elections_slovakia.8.a
+			custom_effect_tooltip = DNF_bloody_conclusion_49_strike_tt
+			hidden_effect = { 
+				country_event = {
+				id = krg_dnf_regional_elections_slovakia.10
+				days = 5
+				}
+			}
+			add_to_variable = { DNF_slovakia_soccon_pop = 1 }
+			add_to_variable = { DNF_slovakia_soclib_pop = 1 }
+			add_to_variable = { DNF_slovakia_socdem_pop = -2 }
+		}
+}
+
+country_event = { # Slovakia '49 - The Strike Concludes Peacefully
+		id = krg_dnf_regional_elections_slovakia.9
+		title = krg_dnf_regional_elections_slovakia.9.t
+		desc = krg_dnf_regional_elections_slovakia.9.d
+		is_triggered_only = yes
+		fire_only_once = yes
+		option = {
+			add_political_power = -10
+			name = krg_dnf_regional_elections_slovakia.9.a
+			custom_effect_tooltip = DNF_peaceful_conclusion_49_strike_tt
+			add_to_variable = { DNF_slovakia_soccon_pop = 3 }
+			add_to_variable = { DNF_slovakia_soclib_pop = -4 }
+			add_to_variable = { DNF_slovakia_socdem_pop = 1 }
+		}
+}
+
+country_event = { # Slovakia '49 - SDAPD rally in support of the miners
+		id = krg_dnf_regional_elections_slovakia.10
+		title = krg_dnf_regional_elections_slovakia.10.t
+		desc = krg_dnf_regional_elections_slovakia.10.d
+		is_triggered_only = yes
+		fire_only_once = yes
+		option = {
+			name = krg_dnf_regional_elections_slovakia.10.a
+			custom_effect_tooltip = DNF_SDAPD_Slovakia_49_tt
+			add_to_variable = { DNF_slovakia_soccon_pop = -2 }
+			add_to_variable = { DNF_slovakia_soclib_pop = -1 }
+			add_to_variable = { DNF_slovakia_socdem_pop = 3 }
+		}
+}
+
+## 53 ##
+
+
+country_event = { # Incoming, Slovakia 53
+	id = krg_dnf_regional_elections_slovakia.11
+	title = krg_dnf_regional_elections_slovakia.11.t
+	desc = krg_dnf_regional_elections_slovakia.11.d
+	
+
+	trigger = {
+		DNF = { NOT = {has_idea = DNF_The_Personal_Prinzip }} 
+	}
+
+	
+	immediate = {
+		hidden_effect = {
+		# Slovakian Veterans Movement Chain
+			country_event = { id = krg_dnf_regional_elections_slovakia.15 days = 5 }	
+			log = "[GetDateText]: [Root.GetName]: Start Slovakia 53 Election"
+		}
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		# Narratively, since Slovak discontent is growing, anyone who is "in" faces a disadvantage
+		name = krg_dnf_regional_elections_slovakia.11.a
+		if = { limit = { has_country_flag = DNF_SLOVAKIA_PARTY_SOCCON } 
+			set_variable = { DNF_slovakia_soccon_pop = 30 }
+			set_variable = { DNF_slovakia_soclib_pop = 35 }
+			set_variable = { DNF_slovakia_socdem_pop = 35 }
+			
+		} else_if = {limit = { has_country_flag = DNF_SLOVAKIA_PARTY_SOCLIB }
+			set_variable = { DNF_slovakia_soccon_pop = 30 }
+			set_variable = { DNF_slovakia_soclib_pop = 35 }
+			set_variable = { DNF_slovakia_socdem_pop = 35 } 
+
+		} else_if = {limit = { has_country_flag = DNF_SLOVAKIA_PARTY_SOCDEM } 
+			set_variable = { DNF_slovakia_soccon_pop = 35 }
+			set_variable = { DNF_slovakia_soclib_pop = 35 }
+			set_variable = { DNF_slovakia_socdem_pop = 30 }		
+		}
+		set_variable = { DNF_slovakian_election_involved = 1 } 
+		set_variable = { DNF_slovakian_election_1953_involved = 1 }
+		activate_mission = DNF_slovakian_election_1953
+		activate_mission = DNF_slovakian_election_1953_opposition_campaign
+		ai_chance = {
+			factor = 100
+		}
+	}
+	
+	option = {
+		name = krg_dnf_regional_elections_slovakia.11.b
+		add_political_power = 50
+		custom_effect_tooltip = DNF_slovakia_1953_nosupport_tt
+		hidden_effect = {
+			if = { limit = { has_country_flag = DNF_SLOVAKIA_PARTY_SOCCON } 
+			random_list = {
+				66 = {
+					country_event = {
+						id = krg_dnf_regional_elections_slovakia.13
+						days = 80
+					}
+				}
+				33 = {
+					country_event = {
+						id = krg_dnf_regional_elections_slovakia.14
+						days = 80
+					}
+				}
+				1 = {
+					country_event = {
+						id = krg_dnf_regional_elections_slovakia.12
+						days = 80
+					}
+				}
+			}
+			}
+			 else_if = {limit = { has_country_flag = DNF_SLOVAKIA_PARTY_SOCLIB } 
+				random_list = {
+					66 = {
+						country_event = {
+							id = krg_dnf_regional_elections_slovakia.14
+							days = 80
+						}
+					}
+					33 = {
+						country_event = {
+							id = krg_dnf_regional_elections_slovakia.12
+							days = 80
+						}
+					}
+					1 = {
+						country_event = {
+							id = krg_dnf_regional_elections_slovakia.13
+							days = 80
+							}
+						}
+					} }
+			else = { random_list = {
+					66 = {
+						country_event = {
+						id = krg_dnf_regional_elections_slovakia.12
+						days = 80
+						}
+					}
+					33 = {
+						country_event = {
+							id = krg_dnf_regional_elections_slovakia.13
+							days = 80
+						}
+					}
+				1 = {
+					country_event = {
+						id = krg_dnf_regional_elections_slovakia.14
+						days = 80
+						}
+					}
+				} 
+			}
+		}
+		ai_chance = {
+			factor = 0
+		}
+	}
+}
+
+country_event = { # Slovakia 53 - SOCCON Victory
+	id = krg_dnf_regional_elections_slovakia.12
+	title = krg_dnf_regional_elections_slovakia.12.t
+	desc = krg_dnf_regional_elections_slovakia.12.d
+
+	immediate = {
+		hidden_effect = {
+			# set government
+			clr_country_flag = DNF_SLOVAKIAN_PARTY_SOCCONS
+			clr_country_flag = DNF_SLOVAKIAN_PARTY_SOCLIBS
+			clr_country_flag = DNF_SLOVAKIAN_PARTY_SOCDEMS
+			
+			set_country_flag = DNF_SLOVAKIAN_PARTY_SOCCONS
+			
+			# set ministers
+			clr_country_flag = DNF_SLOVAKIAN_MP_TISO
+			clr_country_flag = DNF_SLOVAKIAN_MP_DERER
+			clr_country_flag = DNF_SLOVAKIAN_MP_LETTRICH
+
+			set_country_flag = DNF_SLOVAKIAN_MP_TISO
+
+			# set vienese orientation
+			clr_country_flag = DNF_slovakia_agrees
+			clr_country_flag = DNF_slovakia_disagrees
+			if = { limit = { OR = { has_country_flag = DNF_Zoltan_Tildy
+									has_country_flag = DNF_Alcide_De_Gasperi
+									has_country_flag = DNF_Wilhelm_Miklas
+									has_country_flag = DNF_Engelbert_Dollfuss
+									has_country_flag = DNF_Julius_Raab
+									has_country_flag = DNF_Leopold_Figl
+									}}
+				set_country_flag = DNF_slovakia_agrees
+			}
+			else = {
+				set_country_flag = DNF_slovakia_disagrees
+			}
+			set_country_flag = DNF_Slovakia_Elections_Complete_52
+
+			# clear election flags
+			clear_variable = DNF_slovakian_election_involved
+			clear_variable = DNF_slovakian_election_1953_involved
+		}
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_dnf_regional_elections_slovakia.12.a
+	}
+}
+
+country_event = { # Slovakia 53 - SOCLIB Victory
+	id = krg_dnf_regional_elections_slovakia.13
+	title = krg_dnf_regional_elections_slovakia.13.a
+	desc = krg_dnf_regional_elections_slovakia.13.d
+
+	immediate = {
+		hidden_effect = {
+			# set government
+			clr_country_flag = DNF_SLOVAKIAN_PARTY_SOCCONS
+			clr_country_flag = DNF_SLOVAKIAN_PARTY_SOCLIBS
+			clr_country_flag = DNF_SLOVAKIAN_PARTY_SOCDEMS
+
+			set_country_flag = DNF_SLOVAKIAN_PARTY_SOCLIBS
+			
+			# set ministers
+			clr_country_flag = DNF_SLOVAKIAN_MP_TISO
+			clr_country_flag = DNF_SLOVAKIAN_MP_DERER
+			clr_country_flag = DNF_SLOVAKIAN_MP_LETTRICH
+
+			set_country_flag = DNF_SLOVAKIAN_MP_LETTRICH
+
+			# set vienese orientation
+			clr_country_flag = DNF_slovakia_agrees
+			clr_country_flag = DNF_slovakia_disagrees
+			if = { limit = { has_country_flag = DNF_Peter_Veres }
+				set_country_flag = DNF_slovakia_agrees
+			}
+			else = {
+				set_country_flag = DNF_slovakia_disagrees
+			}
+			set_country_flag = DNF_Slovakia_Elections_Complete_52
+
+			# clear election flags
+			clear_variable = DNF_slovakian_election_involved
+			clear_variable = DNF_slovakian_election_1953_involved
+		}
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_dnf_regional_elections_slovakia.13.a
+	}
+}
+
+country_event = { # Slovakia 53 - SOCDEM Victory
+	id = krg_dnf_regional_elections_slovakia.14
+	title = krg_dnf_regional_elections_slovakia.14.t
+	desc = krg_dnf_regional_elections_slovakia.14.d
+
+	immediate = {
+		hidden_effect = {
+			# set government
+			clr_country_flag = DNF_SLOVAKIAN_PARTY_SOCCONS
+			clr_country_flag = DNF_SLOVAKIAN_PARTY_SOCLIBS
+			clr_country_flag = DNF_SLOVAKIAN_PARTY_SOCDEMS
+			
+			set_country_flag = DNF_SLOVAKIAN_PARTY_SOCDEMS
+			
+			# set ministers
+			clr_country_flag = DNF_SLOVAKIAN_MP_TISO
+			clr_country_flag = DNF_SLOVAKIAN_MP_DERER
+			clr_country_flag = DNF_SLOVAKIAN_MP_LETTRICH
+
+			set_country_flag = DNF_SLOVAKIAN_MP_DERER
+
+			# set vienese orientation
+			clr_country_flag = DNF_slovakia_agrees
+			clr_country_flag = DNF_slovakia_disagrees
+			if = { limit = { OR = { has_country_flag = DNF_Karl_Renner
+									has_country_flag = DNF_Adolf_Schaerf
+									has_country_flag = DNF_Josip_Broz
+									has_country_flag = DNF_Bruno_Pitterman
+									has_country_flag = DNF_Anna_Kethly
+									}}
+				set_country_flag = DNF_slovakia_agrees
+			}
+			else = {
+				set_country_flag = DNF_slovakia_disagrees
+			}
+			
+			set_country_flag = DNF_Slovakia_Elections_Complete_52
+			# clear election flags
+			clear_variable = DNF_slovakian_election_involved
+			clear_variable = DNF_slovakian_election_1953_involved
+		}
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_dnf_regional_elections_slovakia.14.a
+	}
+}
+
+
+country_event = { # Veterans in Slovakia Stage Demonstration
+	id = krg_dnf_regional_elections_slovakia.15
+	title = krg_dnf_regional_elections_slovakia.15.t
+	desc = krg_dnf_regional_elections_slovakia.15.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+		
+	immediate = {
+		log = "Slovak veterans demo"
+	}
+
+	option = {
+		name = krg_dnf_regional_elections_slovakia.15.a
+		hidden_effect = { 
+			country_event = { id = krg_dnf_regional_elections_slovakia.16 days = 3 }
+		}
+	}
+}
+
+country_event = { # Handle the Veterans
+	id = krg_dnf_regional_elections_slovakia.16
+	title = krg_dnf_regional_elections_slovakia.16.t
+	desc = krg_dnf_regional_elections_slovakia.16.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { # Invite the Leaders to Vienna
+		name = krg_dnf_regional_elections_slovakia.16.a
+		add_political_power = -20
+		hidden_effect = {
+			country_event = { id = krg_dnf_regional_elections_slovakia.17 days = 7 }
+		} 
+		if = { limit = { check_variable = { DNF_slovakian_election_1953_involved = 1}}
+			if = { limit = { OR = { 
+						has_country_flag = DNF_Zoltan_Tildy
+						has_country_flag = DNF_Alcide_De_Gasperi
+						has_country_flag = DNF_Wilhelm_Miklas
+						has_country_flag = DNF_Engelbert_Dollfuss
+						has_country_flag = DNF_Julius_Raab
+						has_country_flag = DNF_Leopold_Figl
+					}}
+					custom_effect_tooltip = DNF_slovakia_53_leaders_tt
+					add_to_variable = { DNF_slovakia_soccon_pop =  3 }
+					add_to_variable = { DNF_slovakia_soclib_pop = -2 }
+					add_to_variable = { DNF_slovakia_socdem_pop = -1 }
+				}		
+			else_if = { limit = { has_country_flag = DNF_Peter_Veres }
+					custom_effect_tooltip = DNF_slovakia_53_leaders_veres_tt
+					add_to_variable = { DNF_slovakia_soccon_pop = -2 }
+					add_to_variable = { DNF_slovakia_soclib_pop = 3 }
+					add_to_variable = { DNF_slovakia_socdem_pop = -1 }
+				}
+			else = {	
+					custom_effect_tooltip = DNF_slovakia_53_leaders_SDAPD_tt
+					add_to_variable = { DNF_slovakia_soccon_pop = -2 }
+					add_to_variable = { DNF_slovakia_soclib_pop = -1 }
+					add_to_variable = { DNF_slovakia_socdem_pop = 3 }
+				}
+			}
+		}
+ 
+	option = { # Ignore them for now, we have more pressing concerns
+		name = krg_dnf_regional_elections_slovakia.16.b
+		add_political_power = 50
+		hidden_effect = {
+			country_event = { id = krg_dnf_regional_elections_slovakia.18 days = 7 }
+		}
+
+	if = { limit = { check_variable = { DNF_slovakian_election_1953_involved = 1}}
+		if = { limit = { OR = { has_country_flag = DNF_Zoltan_Tildy
+		has_country_flag = DNF_Alcide_De_Gasperi
+		has_country_flag = DNF_Wilhelm_Miklas
+		has_country_flag = DNF_Engelbert_Dollfuss
+		has_country_flag = DNF_Julius_Raab
+		has_country_flag = DNF_Leopold_Figl
+		}}
+		custom_effect_tooltip = DNF_slovakia_53_suppress_tt
+		add_to_variable = { DNF_slovakia_soccon_pop = -3 }
+		add_to_variable = { DNF_slovakia_soclib_pop = 1 }
+		add_to_variable = { DNF_slovakia_socdem_pop = -1 }
+		}		
+		else_if = { limit = { has_country_flag = DNF_Peter_Veres
+		}
+		custom_effect_tooltip = DNF_slovakia_53_suppress_veres_tt
+		add_to_variable = { DNF_slovakia_soccon_pop = -1 }
+		add_to_variable = { DNF_slovakia_soclib_pop = -3 }
+		add_to_variable = { DNF_slovakia_socdem_pop = 1 }
+		}
+		else = {	
+		custom_effect_tooltip = DNF_slovakia_53_suppress_SDAPD_tt
+		add_to_variable = { DNF_slovakia_soccon_pop = -1 }
+		add_to_variable = { DNF_slovakia_soclib_pop = 1 }
+		add_to_variable = { DNF_slovakia_socdem_pop = -3 }
+		}
+	}
+	}
+}
+
+country_event = { # Veterans in Vienna
+	id = krg_dnf_regional_elections_slovakia.17
+	title = krg_dnf_regional_elections_slovakia.17.t
+	desc = krg_dnf_regional_elections_slovakia.17.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { # Limited Settlement
+		name = krg_dnf_regional_elections_slovakia.17.a
+		add_political_power = 25
+if = { limit = { check_variable = { DNF_slovakian_election_1953_involved = 1}}
+		if = { limit = { OR = { has_country_flag = DNF_Zoltan_Tildy
+		has_country_flag = DNF_Alcide_De_Gasperi
+		has_country_flag = DNF_Wilhelm_Miklas
+		has_country_flag = DNF_Engelbert_Dollfuss
+		has_country_flag = DNF_Julius_Raab
+		has_country_flag = DNF_Leopold_Figl
+		}}
+		custom_effect_tooltip = DNF_slovakia_53_viv_tt
+		add_to_variable = { DNF_slovakia_soccon_pop = 4 }
+		add_to_variable = { DNF_slovakia_soclib_pop = -2 }
+		add_to_variable = { DNF_slovakia_socdem_pop = -2 }
+		}		
+		else_if = { limit = { has_country_flag = DNF_Peter_Veres
+		}
+		custom_effect_tooltip = DNF_slovakia_53_viv_veres_tt
+		add_to_variable = { DNF_slovakia_soccon_pop = 2 }
+		add_to_variable = { DNF_slovakia_soclib_pop = 2 }
+		add_to_variable = { DNF_slovakia_socdem_pop = -4 }
+		}
+		else = {	
+		custom_effect_tooltip = DNF_slovakia_53_viv_SDAPD_tt
+		add_to_variable = { DNF_slovakia_soccon_pop = -1 }
+		add_to_variable = { DNF_slovakia_soclib_pop = -1 }
+		add_to_variable = { DNF_slovakia_socdem_pop = 2 } #kind of counterintuitive of SDAPD stated aims
+		}
+	}}
+
+	option = { # Even the Legionnaires
+		name = krg_dnf_regional_elections_slovakia.17.b
+		add_political_power = -15 #some people don't find it popular
+		if = { limit = { check_variable = { DNF_slovakian_election_1953_involved = 1}}
+		if = { limit = { OR = { has_country_flag = DNF_Zoltan_Tildy
+		has_country_flag = DNF_Alcide_De_Gasperi
+		has_country_flag = DNF_Wilhelm_Miklas
+		has_country_flag = DNF_Engelbert_Dollfuss
+		has_country_flag = DNF_Julius_Raab
+		has_country_flag = DNF_Leopold_Figl
+		}}
+		custom_effect_tooltip = DNF_slovakia_53_legions_tt
+		add_to_variable = { DNF_slovakia_soccon_pop = 3 }
+		add_to_variable = { DNF_slovakia_soclib_pop = -1 }
+		add_to_variable = { DNF_slovakia_socdem_pop = 1 }
+		}		
+		else_if = { limit = { has_country_flag = DNF_Peter_Veres
+		}
+		custom_effect_tooltip = DNF_slovakia_53_legions_veres_tt
+		add_to_variable = { DNF_slovakia_soccon_pop = 1 }
+		add_to_variable = { DNF_slovakia_soclib_pop = 3 }
+		add_to_variable = { DNF_slovakia_socdem_pop = -1 }
+		}
+		else = {	
+		custom_effect_tooltip = DNF_slovakia_53_legions_SDAPD_tt
+		add_to_variable = { DNF_slovakia_soccon_pop = 1 }
+		add_to_variable = { DNF_slovakia_soclib_pop = -1 }
+		add_to_variable = { DNF_slovakia_socdem_pop = 3 }
+		}
+	}}
+}
+
+country_event = { # The Movement for Slovakian Independence Grows
+	id = krg_dnf_regional_elections_slovakia.18
+	title = krg_dnf_regional_elections_slovakia.18.t
+	desc = krg_dnf_regional_elections_slovakia.18.d
+
+	is_triggered_only = yes
+	fire_only_once = yes 
+
+	immediate = {
+		set_country_flag = DNF_Slovaks_Suppressed
+	}
+
+	option = {
+		name = krg_dnf_regional_elections_slovakia.18.a
+		add_popularity = { ideology = national_populist popularity = 0.01 }
+		add_popularity = { ideology = revolutionary_republican popularity = 0.01 }
+	}
+}
+
+## Transylvania ##
+## 50 ##
+
+country_event = {  # Death of Alexandre VV
+		id = krg_dnf_regional_elections_transylvania.1
+		title = krg_dnf_regional_elections_transylvania.1.t
+		desc = krg_dnf_regional_elections_transylvania.1.d
+	
+		is_triggered_only = yes
+		fire_only_once = yes
+	
+		option = {
+			name = krg_dnf_regional_elections_transylvania.1.a
+			if = { limit = { has_completed_focus = DNF_transylvanian_infrastructure }
+			set_variable = { DNF_PNR_hossu_pop = 30 }
+			set_variable = { DNF_PNR_nistor_pop = 20 }
+			set_variable = { DNF_PNR_penescu_pop = 50 }
+			}
+			else = {
+				set_variable = { DNF_PNR_nistor_pop = 30 }
+				set_variable = { DNF_PNR_hossu_pop = 40 }
+				set_variable = { DNF_PNR_penescu_pop = 30 }	
+			}
+			set_variable = { DNF_transylvanian_PNR_election_1950_involved = 1 }
+			set_variable = { DNF_transylvanian_election_involved = 1 }
+			activate_mission = DNF_transylvania_PNR_election_1950
+			clr_country_flag = DNF_transylvanian_MP_vaida-voevod
+			set_country_flag = DNF_transylvanian_MP_nistor
+		}
+		option = {
+			name = krg_dnf_regional_elections_transylvania.1.b
+			add_political_power = 50
+			clr_country_flag = DNF_transylvanian_MP_vaida-voevod
+			set_country_flag = DNF_transylvanian_MP_nistor
+				if = { 
+					limit = { has_completed_focus = DNF_transylvanian_infrastructure }
+					custom_effect_tooltip = DNF_transylvanian_PNR_50_nosupport_focus_tt #penescu wins, we're all good
+					hidden_effect = {
+					country_event = {
+						id = krg_dnf_regional_elections_transylvania.2
+						days = 80
+						}
+					}
+				}
+				else = {	
+					custom_effect_tooltip = DNF_transylvanian_PNR_50_nosupport_tt #hossu wins, run for the hills
+					hidden_effect = {
+						country_event = {
+					id = krg_dnf_regional_elections_transylvania.3		
+					days = 80
+						}
+					}
+				}
+			}
+}
+
+country_event = { # Transylvania '50 result - Penescu win
+		id = krg_dnf_regional_elections_transylvania.2
+		title = krg_dnf_regional_elections_transylvania.2.t
+		desc = krg_dnf_regional_elections_transylvania.2.d
+		is_triggered_only = yes
+		fire_only_once = yes
+		option = {
+			name = krg_dnf_regional_elections_transylvania.2.a
+			hidden_effect = {
+				clear_variable = DNF_transylvanian_PNR_election_1950_involved
+				clear_variable = DNF_transylvanian_election_involved
+				clr_country_flag = DNF_transylvanian_MP_nistor
+				set_country_flag = DNF_transylvanian_MP_penescu
+				country_event = {
+					id = krg_dnf_regional_elections_transylvania.5
+						days = 85
+					}
+				}
+			}
+		}
+
+
+country_event = {  # Transylvania '50 result - Hossu win
+		id = krg_dnf_regional_elections_transylvania.3
+		title = krg_dnf_regional_elections_transylvania.3.t
+		desc = krg_dnf_regional_elections_transylvania.3.d
+		is_triggered_only = yes
+		fire_only_once = yes
+		option = {
+			name = krg_dnf_regional_elections_transylvania.3.a
+			hidden_effect = {
+				clear_variable = DNF_transylvanian_PNR_election_1950_involved
+				clear_variable = DNF_transylvanian_election_involved
+				clr_country_flag = DNF_transylvanian_MP_nistor
+				set_country_flag = DNF_transylvanian_MP_hossu
+				clr_country_flag = DNF_transylvania_agrees
+				set_country_flag = DNF_transylvania_disagrees
+				country_event = {
+					id = krg_dnf_regional_elections_transylvania.6
+						days = 85
+					}
+				}
+			}
+		}
+
+
+country_event = { # Transylvania '50 result - Nistor win
+		id = krg_dnf_regional_elections_transylvania.4
+		title = krg_dnf_regional_elections_transylvania.4.t
+		desc = krg_dnf_regional_elections_transylvania.4.d
+		is_triggered_only = yes
+		fire_only_once = yes
+		option = {
+			name = krg_dnf_regional_elections_transylvania.4.a
+			hidden_effect = {
+				clear_variable = DNF_transylvanian_PNR_election_1950_involved
+				clear_variable = DNF_transylvanian_election_involved
+			}
+		}
+}
+
+country_event = { # Transylvania '50 result - Penescu Aftermath win (Hossu splits out)
+	id = krg_dnf_regional_elections_transylvania.5
+	title = krg_dnf_regional_elections_transylvania.5.t
+	desc = krg_dnf_regional_elections_transylvania.5.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_dnf_regional_elections_transylvania.5.a
+		hidden_effect = {
+			set_country_flag = DNF_transylvanian_PNR-H	
+		}
+	}
+}
+
+country_event = { # Transylvania '50 result - Hossu Aftermath win (Penescu splits out)
+	id = krg_dnf_regional_elections_transylvania.6
+	title = krg_dnf_regional_elections_transylvania.6.t
+	desc = krg_dnf_regional_elections_transylvania.6.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_dnf_regional_elections_transylvania.6.a
+		hidden_effect = {
+			clr_country_flag = DNF_transylvanian_PNR_Original
+		}
+	}
+}
+
+
+country_event = { # the funeral
+	id = krg_dnf_regional_elections_transylvania.7
+	title = krg_dnf_regional_elections_transylvania.7.t
+	desc = krg_dnf_regional_elections_transylvania.7.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_dnf_regional_elections_transylvania.7.a
+		if = {
+			limit = { has_completed_focus = DNF_transylvanian_infrastructure }
+			custom_effect_tooltip =	DNF_1950_pnr_pen_strength_loss_tt
+			custom_effect_tooltip =	DNF_1950_pnr_hos_strength_loss_tt
+			custom_effect_tooltip =	DNF_1950_pnr_nis_strength
+		}
+		else = {
+			custom_effect_tooltip =	DNF_1950_pnr_pen_strength_loss_tt
+			custom_effect_tooltip =	DNF_1950_pnr_hos_strength_gain_tt
+			custom_effect_tooltip =	DNF_1950_pnr_nis_strength_gain_tt
+		}
+	}
+}
+
+country_event = { # the endorsement (focus)
+	id = krg_dnf_regional_elections_transylvania.8
+	title = krg_dnf_regional_elections_transylvania.8.t
+	desc = krg_dnf_regional_elections_transylvania.8.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_dnf_regional_elections_transylvania.8.a
+		custom_effect_tooltip =	DNF_1950_pnr_pen_strength_gain_tt
+		custom_effect_tooltip =	DNF_1950_pnr_hos_strength_loss_tt
+		custom_effect_tooltip = DNF_1950_pnr_nis_strength_gain_tt
+	}
+}
+
+country_event = { # the endorsement 
+	id = krg_dnf_regional_elections_transylvania.9
+	title = krg_dnf_regional_elections_transylvania.9.t
+	desc = krg_dnf_regional_elections_transylvania.9.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_dnf_regional_elections_transylvania.9.a
+		custom_effect_tooltip =	DNF_1950_pnr_pen_strength_loss_tt
+		custom_effect_tooltip =	DNF_1950_pnr_hos_strength_gain_tt
+		custom_effect_tooltip = DNF_1950_pnr_nis_strength_loss_tt
+	}
+}
+
+## 54 ## 
+# the PNR voting bloc stands shattered. We now see proper democracy in action
+
+country_event = { # Incoming Transylvania 54
+	id = krg_dnf_regional_elections_transylvania.10
+	title = krg_dnf_regional_elections_transylvania.10.t
+	desc = krg_dnf_regional_elections_transylvania.10.d
+
+
+	trigger = {
+		DNF = { NOT = {has_idea = DNF_The_Personal_Prinzip }} 
+	}
+
+	immediate = {
+		if = { limit = { has_country_flag = DNF_transylvanian_MP_nistor }
+			hidden_effect = {
+				country_event = {
+					id = krg_dnf_regional_elections_transylvania.11
+					days = 4 }
+			}
+		}
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		hidden_effect = {
+			log = "[GetDateText]: [Root.GetName]: Start Transylvania 54 Election"
+			set_variable = { var = DNF_TR54_crooked_election value = 0 }
+			set_variable = { var = DNF_transylvanian_election_involved value = 1 }
+			country_event = { id = krg_dnf_regional_elections_transylvania.17 days = 14 }
+			set_variable = { var = DNF_Transylvania_SDAPD value = 27 }
+			set_variable = { var = DNF_Transylvania_PAT value = 16 }
+			if = { limit = { has_country_flag = DNF_transylvanian_PNR-H }
+				set_variable = { var = DNF_Transylvania_PNR value = 37 }
+				set_variable = { var = DNF_Transylvania_PNRH value = 20 } #Hossu's splitters
+			}
+			else_if = {
+				limit = { NOT = { has_country_flag = DNF_transylvanian_PNR_Original } }
+				set_variable = { var = DNF_Transylvania_PNR value = 27 }
+				set_variable = { var = DNF_Transylvania_PCT value = 30 } # Penescu's splitters
+			}
+			else = {
+				set_variable = { var = DNF_Transylvania_PNR value = 57 }
+			}
+			set_variable = { var = DNF_Transylvania_1954_involved value = 1 }
+		}
+		ai_chance = {
+			factor = 100
+		}
+		name = krg_dnf_regional_elections_transylvania.10.a 
+		activate_mission = DNF_transylvania_election_1954
+	}
+	option = {
+		
+		ai_chance = {
+			factor = 0
+		}
+		name = krg_dnf_regional_elections_transylvania.10.b
+		add_political_power = 50
+		custom_effect_tooltip = DNF_transylvania_1954_nosupport_tt
+		if = { limit = { has_country_flag = DNF_transylvanian_MP_penescu }
+			hidden_effect = {
+				country_event = {
+					id = krg_dnf_regional_elections_transylvania.12
+					days = 80 }
+			}
+		}
+
+		if = { limit = { has_country_flag = DNF_transylvanian_MP_hossu }
+			hidden_effect = {
+				random_list = {
+					45 = {
+						country_event = {
+						id = krg_dnf_regional_elections_transylvania.16
+						days = 80 }
+					}
+					25 = {
+						country_event = {
+						id = krg_dnf_regional_elections_transylvania.14
+						days = 80 }
+					}
+					15 = {
+						country_event = {
+						id = krg_dnf_regional_elections_transylvania.15
+						days = 80 }
+					}
+					15 = {
+						country_event = { #Hossu special
+						id = krg_dnf_regional_elections_transylvania.13
+						days = 80 }
+					}
+				}
+			}
+		}
+	}	
+}
+
+country_event = { # If nistor in charge, split Hossu out
+	id = krg_dnf_regional_elections_transylvania.11
+	title = krg_dnf_regional_elections_transylvania.11.t
+	desc = krg_dnf_regional_elections_transylvania.11.d
+
+	immediate = {
+		set_country_flag = DNF_transylvanian_PNR-H
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = [DNF_Hossu_54_Split]
+		if = { limit = { check_variable = { var = DNF_Transylvania_1954_involved value = 1 }}
+						subtract_from_variable = { var = DNF_Transylvania_PNR value = 22 }
+						set_variable = { var = DNF_Transylvania_PNRH value = 18 }
+						add_to_variable = {	var = DNF_Transylvania_SDAPD value = 2	}
+						add_to_variable = {	var = DNF_Transylvania_PAT value = 2 }
+						custom_effect_tooltip = DNF_Hossus_election_split_tt		
+		}
+		else = {
+			# basically gives the player a second chance to get involved. 
+			log = "[GetDateText]: [Root.GetName]: Start Transylvania 54 Election"
+			set_variable = { var = DNF_transylvanian_election_involved value = 1 }
+			set_variable = { var = DNF_TR54_crooked_election value = 0 }
+			set_variable = { var = DNF_Transylvania_SDAPD value = 29 }
+			set_variable = { var = DNF_Transylvania_PAT value = 18 }
+			set_variable = { var = DNF_Transylvania_PNR value = 35 }
+			set_variable = { var = DNF_Transylvania_PNRH value = 18 }
+			activate_mission = DNF_transylvania_election_1954	
+			add_days_mission_timeout = { mission = DNF_transylvania_election_1954 days = -4 }
+			hidden_effect = { country_event = { id = krg_dnf_regional_elections_transylvania.17 days = 10 } }
+		}
+	}
+	option = {
+		name = krg_dnf_regional_elections_transylvania.11.b
+		add_political_power = 25
+		custom_effect_tooltip = DNF_transylvania_1954_nosupport_hossu_tt
+		hidden_effect = {
+			random_list = {
+				25 = {
+					country_event = {
+					id = krg_dnf_regional_elections_transylvania.12
+					days = 80 }
+				}
+				25 = {
+					country_event = {
+					id = krg_dnf_regional_elections_transylvania.14
+					days = 80 }
+				}
+				25 = {
+					country_event = {
+					id = krg_dnf_regional_elections_transylvania.15
+					days = 80 }
+				}
+				25 = {
+					country_event = { #
+					id = krg_dnf_regional_elections_transylvania.13
+					days = 80 }
+				}
+			}
+		}
+	}
+}
+
+country_event = { # PNR/DVP (soccon_1) victory (kind of wildcard depending on who won last time)
+	id = krg_dnf_regional_elections_transylvania.12
+	title =  krg_dnf_regional_elections_transylvania.12.t
+	desc = krg_dnf_regional_elections_transylvania.12.d
+
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+		#we don't clear the mp flag because the mp is the sitting mp
+		#Hossu will always get the 13 event even if he ran as the PNR - the scripted loc will handle rebranding or not
+		# now who are his friends? 
+			clr_country_flag = DNF_transylvania_agrees
+			clr_country_flag = DNF_transylvania_disagrees
+			if = { limit = {  has_country_flag = DNF_TRANSYLVANIAN_MP_PENESCU #NICOLAE PENESCU
+				NOT = { OR = { has_country_flag = DNF_Adolf_Scharf 
+								has_country_flag = DNF_Josip_Broz
+								has_country_flag = DNF_Bruno_Pitterman
+								has_country_flag = DNF_Anna_Kethly
+								has_country_flag = DNF_Karl_Renner
+			} } }
+				set_country_flag = DNF_transylvania_agrees
+			}
+			else_if = { limit = {  has_country_flag = DNF_TRANSYLVANIAN_MP_NISTOR #ION NISTOR
+			NOT = { OR = { has_country_flag = DNF_Adolf_Scharf 
+							has_country_flag = DNF_Josip_Broz
+							has_country_flag = DNF_Bruno_Pitterman
+							has_country_flag = DNF_Anna_Kethly
+							has_country_flag = DNF_Karl_Renner
+							has_country_flag = DNF_Peter_Veres # doesn't trust Hungarians
+							has_country_flag = DNF_Zoltan_Tildy # doesn't trust Hungarians
+			} } }
+				set_country_flag = DNF_transylvania_agrees
+			}
+			else = {
+				set_country_flag = DNF_transylvania_disagrees
+			}
+		}
+	}
+	option = {
+		name = krg_dnf_regional_elections_transylvania.12.a
+	}
+}
+
+country_event = { # PNR-H (pataut) victory
+	id = krg_dnf_regional_elections_transylvania.13
+	title =  krg_dnf_regional_elections_transylvania.13.t
+	desc = krg_dnf_regional_elections_transylvania.13.d
+
+	is_triggered_only = yes
+
+	immediate = {
+		#all the government shit hangs off the leader loc lol. Big man theory active in transylvania D:
+		clr_country_flag = DNF_TRANSYLVANIAN_MP_PENESCU
+		clr_country_flag = DNF_TRANSYLVANIAN_MP_NISTOR
+		clr_country_flag = DNF_TRANSYLVANIAN_MP_HOSSU
+		
+		# Hossu's PNR-H win!
+		set_country_flag = DNF_TRANSYLVANIAN_MP_HOSSU
+
+		# now who are his friends? Nobody
+		clr_country_flag = DNF_transylvania_agrees
+		clr_country_flag = DNF_transylvania_disagrees
+		set_country_flag = DNF_transylvania_disagrees
+	}
+	option = {
+		name = krg_dnf_regional_elections_transylvania.13.a
+	}
+}
+
+country_event = { # SDAPD victory
+	id = krg_dnf_regional_elections_transylvania.14
+	title =  krg_dnf_regional_elections_transylvania.14.t
+	desc = krg_dnf_regional_elections_transylvania.14.d
+
+	is_triggered_only = yes
+
+	immediate = {
+		clr_country_flag = DNF_TRANSYLVANIAN_MP_PENESCU
+		clr_country_flag = DNF_TRANSYLVANIAN_MP_NISTOR
+		clr_country_flag = DNF_TRANSYLVANIAN_MP_HOSSU
+
+		set_country_flag = DNF_TRANSYLVANIAN_MP_JUMANCA
+
+		# now who are his friends? 
+		
+		clr_country_flag = DNF_transylvania_agrees
+		clr_country_flag = DNF_transylvania_disagrees
+
+		if = { limit = { OR = { has_country_flag = DNF_Adolf_Scharf 
+								has_country_flag = DNF_Josip_Broz
+								has_country_flag = DNF_Bruno_Pitterman
+								has_country_flag = DNF_Anna_Kethly
+								has_country_flag = DNF_Karl_Renner
+			} }
+			set_country_flag = DNF_transylvania_agrees
+		}
+		else = {
+			set_country_flag = DNF_transylvania_disagrees
+		}
+	}
+	
+	option = {
+		name = krg_dnf_regional_elections_transylvania.14.a
+	}
+}
+
+country_event = { # PAT victory
+	id = krg_dnf_regional_elections_transylvania.15
+	title =  krg_dnf_regional_elections_transylvania.15.t
+	desc = krg_dnf_regional_elections_transylvania.15.d
+
+	is_triggered_only = yes
+
+	immediate = {
+		clr_country_flag = DNF_TRANSYLVANIAN_MP_PENESCU
+		clr_country_flag = DNF_TRANSYLVANIAN_MP_NISTOR
+		clr_country_flag = DNF_TRANSYLVANIAN_MP_HOSSU
+
+		set_country_flag = DNF_TRANSYLVANIAN_MP_COPOSU
+		# now who are his friends? 
+		
+		clr_country_flag = DNF_transylvania_agrees	
+		clr_country_flag = DNF_transylvania_disagrees
+
+		if = { limit = { has_country_flag = DNF_Peter_Veres }
+			set_country_flag = DNF_transylvania_agrees
+		}
+		else = {
+			set_country_flag = DNF_transylvania_disagrees
+		}
+	}
+	
+	option = {
+		name = krg_dnf_regional_elections_transylvania.15.a
+	}
+}
+
+country_event = { # PCT victory (soccon 2)
+	id = krg_dnf_regional_elections_transylvania.16
+	title =  krg_dnf_regional_elections_transylvania.16.t
+	desc = krg_dnf_regional_elections_transylvania.16.d
+
+	is_triggered_only = yes
+
+	immediate = {
+		#all the government shit hangs off the leader loc lol. Big man theory active in transylvania D:
+		clr_country_flag = DNF_TRANSYLVANIAN_MP_PENESCU
+		clr_country_flag = DNF_TRANSYLVANIAN_MP_NISTOR
+		clr_country_flag = DNF_TRANSYLVANIAN_MP_HOSSU
+		
+		# penescu's PCT win!
+		set_country_flag = DNF_TRANSYLVANIAN_MP_PENESCU
+
+		# now who are his friends? anyone but the SDAPD
+		if = { limit = { NOT = { OR = { has_country_flag = DNF_Adolf_Scharf 
+								has_country_flag = DNF_Josip_Broz
+								has_country_flag = DNF_Bruno_Pitterman
+								has_country_flag = DNF_Anna_Kethly
+								has_country_flag = DNF_Karl_Renner
+			} } }
+			set_country_flag = DNF_transylvania_disagrees
+		}
+		else = {
+			set_country_flag = DNF_transylvania_agrees
+		}
+	}
+	option = {
+		name = krg_dnf_regional_elections_transylvania.16.a
+	}
+}
+
+
+country_event = { # Election Planning
+	id = krg_dnf_regional_elections_transylvania.17
+	title = krg_dnf_regional_elections_transylvania.17.t
+	desc = krg_dnf_regional_elections_transylvania.17.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	immediate = {
+		hidden_effect = {
+			country_event = {
+				id = krg_dnf_regional_elections_transylvania.18
+				days = 12
+			}
+		}	
+	}
+
+	option = { # Honest Elections
+		name = krg_dnf_regional_elections_transylvania.17.a
+	}
+
+	option = { # Rig the Voter Roles
+		name = krg_dnf_regional_elections_transylvania.17.b
+		add_political_power = -30
+		# add federal leader based support to preferred party
+		hidden_effect = {
+			add_to_variable = { var = DNF_TR54_crooked_election  value = 1 }
+		}
+	}
+}
+
+country_event = { # Election Observers?
+	id = krg_dnf_regional_elections_transylvania.18
+	title = krg_dnf_regional_elections_transylvania.18.t
+	desc = krg_dnf_regional_elections_transylvania.18.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_dnf_regional_elections_transylvania.18.a
+	}
+
+	option = {
+		name = krg_dnf_regional_elections_transylvania.18.b
+		add_political_power = -30
+		# reduce HOSSU party score
+		hidden_effect = {
+			add_to_variable = { var = DNF_TR54_crooked_election  value = 1 }
+		}
+	}
+}
+
+country_event = { # Election Counting
+	id = krg_dnf_regional_elections_transylvania.19
+	title = krg_dnf_regional_elections_transylvania.19.t
+	desc = krg_dnf_regional_elections_transylvania.19.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = {
+		hidden_effect = {country_event = { id = krg_dnf_regional_elections_transylvania.20 days = 2 }}
+	}
+
+	option = { # The votes have been cast, its time for us to trust the Transylvanians
+		name = krg_dnf_regional_elections_transylvania.19.a
+	}
+	option = { # Oh look, we found some favorable extra ballots conveniently
+		name = krg_dnf_regional_elections_transylvania.19.b
+		add_political_power = -30
+		# add federal leader based support to preferred party
+		hidden_effect = {
+			add_to_variable = { var = DNF_TR54_crooked_election  value = 1 }
+		}
+	}
+}
+
+country_event = { # Transylvania Results:
+	id = krg_dnf_regional_elections_transylvania.20
+	title = krg_dnf_regional_elections_transylvania.20.t
+	desc = krg_dnf_regional_elections_transylvania.20.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	immediate = {
+		if = { limit = {check_variable = {
+			var = DNF_TR54_crooked_election 
+			value = 1 
+			compare = greater_than_or_equals }}
+			84 = {
+				damage_building = {
+					type = industrial_complex
+					damage = 1
+				}
+			}
+			664 = {
+				damage_building = {
+					type = industrial_complex
+					damage = 1
+				}
+			}
+			76 = {
+				damage_building = {
+					type = industrial_complex
+					damage = 1
+				}
+			}
+			add_stability = -0.02
+		}
+		if = { limit = {check_variable = {
+			var = DNF_TR54_crooked_election 
+			value = 2 
+			compare = greater_than_or_equals }}
+			DNF_nationalist_tensions_worsening = yes	
+		}
+		if = { limit = {check_variable = {
+			var = DNF_TR54_crooked_election 
+			value = 3 
+			compare = greater_than_or_equals }}
+			hidden_effect = {
+				country_event = { id = krg_dnf_regional_elections_transylvania.21 days = 7 }
+			}
+		}
+	}
+
+	option = { # 
+		name = krg_dnf_regional_elections_transylvania.20.a
+		hidden_effect = {
+			if = { limit = {
+				check_variable = { DNF_Transylvania_PNR > DNF_Transylvania_SDAPD }
+				check_variable = { DNF_Transylvania_PNR > DNF_Transylvania_PAT }
+				check_variable = { DNF_Transylvania_PNR > DNF_Transylvania_PCT }
+				check_variable = { DNF_Transylvania_PNR > DNF_Transylvania_PNRH }
+				}
+				country_event = { 
+					id = krg_dnf_regional_elections_transylvania.12
+				}
+			}
+			if = { limit = {
+				check_variable = { DNF_Transylvania_PNRH > DNF_Transylvania_SDAPD }
+				check_variable = { DNF_Transylvania_PNRH > DNF_Transylvania_PAT }
+				check_variable = { DNF_Transylvania_PNRH > DNF_Transylvania_PCT }
+				check_variable = { DNF_Transylvania_PNRH > DNF_Transylvania_PNR }
+				}
+				country_event = { 
+					id = krg_dnf_regional_elections_transylvania.13
+				}
+			}
+			if = { limit = {
+				check_variable = { DNF_Transylvania_SDAPD > DNF_Transylvania_PAT }
+				check_variable = { DNF_Transylvania_SDAPD > DNF_Transylvania_PCT }
+				check_variable = { DNF_Transylvania_SDAPD > DNF_Transylvania_PNR }
+				check_variable = { DNF_Transylvania_SDAPD > DNF_Transylvania_PNRH }
+				}
+				country_event = { 
+					id = krg_dnf_regional_elections_transylvania.14
+				}
+			}
+			if = { limit = {
+				check_variable = { DNF_Transylvania_PAT > DNF_Transylvania_SDAPD }
+				check_variable = { DNF_Transylvania_PAT > DNF_Transylvania_PCT }
+				check_variable = { DNF_Transylvania_PAT > DNF_Transylvania_PNR }
+				check_variable = { DNF_Transylvania_PAT > DNF_Transylvania_PNRH }
+				}
+				country_event = { 
+					id = krg_dnf_regional_elections_transylvania.15
+				}
+			}
+			if = { limit = {
+				check_variable = { DNF_Transylvania_PCT > DNF_Transylvania_SDAPD }
+				check_variable = { DNF_Transylvania_PCT > DNF_Transylvania_PAT }
+				check_variable = { DNF_Transylvania_PCT > DNF_Transylvania_PNR }
+				check_variable = { DNF_Transylvania_PCT > DNF_Transylvania_PNRH }
+				}
+				country_event = { 
+					id = krg_dnf_regional_elections_transylvania.16
+				}
+			}
+		}
+	}
+}
+
+country_event = { # Nationalist Uprising!
+	id = krg_dnf_regional_elections_transylvania.21
+	title = krg_dnf_regional_elections_transylvania.21.t
+	desc = krg_dnf_regional_elections_transylvania.21.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_dnf_regional_elections_transylvania.21.a
+				remove_state_core = 84
+				add_state_claim = 84
+				84 = {
+					set_resistance = 30 
+					set_compliance = 40
+					set_garrison_strength = 0.2
+				}
+				remove_state_core = 76
+				add_state_claim = 76
+				76 = {
+					set_resistance = 30 
+					set_compliance = 40 
+					set_garrison_strength = 0.2 
+				}
+			set_country_flag = DNF_TRANSYLVANIAN_NATIONALISTS #do more with this
+	}
+}
+
+## Hungary ##
+## 50 ##
+country_event = {  # Hungary '50 incoming
+		id = krg_dnf_regional_elections_hungary.1
+		title = krg_dnf_regional_elections_hungary.1.t
+		desc = [DNF_HungarianElection1950TriggerDesc]
+		
+		immediate = {
+			hidden_effect = {
+		# Kill Karl Renner
+				country_event = { 
+					id = krg_dnf.64
+					days = 150
+				}
+		#Federal 51
+				# clear cheaty dollfuss
+				if = { limit = { has_idea = DNF_Engelbert_Dollfuss_hog_ade }
+				 	country_event = {
+						id = krg_dnf_federal_elections.0
+						days = 200
+					}
+				}
+				# trigger election
+				country_event = {
+					id = krg_dnf_federal_elections.1
+					days = 212
+				}
+		#Austria 52
+				country_event = {
+					id = krg_dnf_regional_elections_austria.10
+					days = 524				
+				}	
+			}
+		}
+
+		is_triggered_only = yes
+		fire_only_once = yes
+	
+		option = {
+			name = krg_dnf_regional_elections_hungary.1.a
+			set_variable = { DNF_hungary_soccon_pop = 31 }
+			set_variable = { DNF_hungary_soclib_pop = 40 }
+			set_variable = { DNF_hungary_socdem_pop = 29 }
+			set_variable = { DNF_hungarian_election_1950_involved = 1 }
+			set_variable = { DNF_hungarian_election_involved = 1 }
+			log = "[GetDateText]: [Root.GetName]: [?DNF_hungarian_election_1950_involved]"
+			activate_mission = DNF_hungarian_election_1950
+			activate_mission = DNF_hungarian_opposition_campaigning
+			hidden_effect = { 
+				country_event = {
+				id = krg_dnf_regional_elections_hungary.5 # hot hot summer
+				days = 4
+				}
+			}
+			
+		ai_chance = {
+			factor = 100
+		}
+		}
+		option = {
+			name = krg_dnf_regional_elections_hungary.1.b
+			add_political_power = 50
+			custom_effect_tooltip = DNF_hungarian_1950_nosupport_tt
+			hidden_effect = {
+				country_event = {
+					id = krg_dnf_regional_elections_hungary.2 		
+					days = 80
+					}
+					set_variable = { DNF_hungary_soclib_pop = 46 }
+			}
+			
+		ai_chance = {
+			factor = 0
+		}
+		}
+}
+
+country_event = { # Rassay wins (NMP)
+	id = krg_dnf_regional_elections_hungary.2 
+	title = krg_dnf_regional_elections_hungary.2.t
+	desc = krg_dnf_regional_elections_hungary.2.d
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_dnf_regional_elections_hungary.2.a
+		clear_variable = DNF_hungarian_election_1950_involved
+		clear_variable = DNF_hungarian_election_involved
+		clear_variable = Hungary_Pick_One
+	}
+}
+
+country_event = { #Kallay Wins (CSP/DVP)
+	id = krg_dnf_regional_elections_hungary.3 
+	title = krg_dnf_regional_elections_hungary.3.t
+	desc = krg_dnf_regional_elections_hungary.3.d
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_dnf_regional_elections_hungary.3.a
+		clr_country_flag = DNF_hungarian_MP_rassay
+		set_country_flag = DNF_hungarian_MP_kallay
+		if = { limit = { OR = { has_country_flag = DNF_Zoltan_Tildy
+							  has_country_flag = DNF_Alcide_De_Gasperi
+							  has_country_flag = DNF_Engelbert_Dollfuss
+							  has_country_flag = DNF_Wilhelm_Miklas
+							  has_country_flag = DNF_Julius_Raab
+							  has_country_flag = DNF_Leopold_Figl }}
+		clr_country_flag = DNF_hungary_disagrees
+		set_country_flag = DNF_hungary_agrees }
+		clear_variable = DNF_hungarian_election_1950_involved
+		clear_variable = DNF_hungarian_election_involved
+		clear_variable = Hungary_Pick_One
+	}
+}
+
+country_event = { # Szakasits wins
+	id = krg_dnf_regional_elections_hungary.4 
+	title = krg_dnf_regional_elections_hungary.4.t
+	desc = krg_dnf_regional_elections_hungary.4.d
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_dnf_regional_elections_hungary.4.a
+		clr_country_flag = DNF_hungarian_MP_rassay
+		set_country_flag = DNF_hungarian_MP_szakasits
+		
+		if = { limit = { OR = { has_country_flag = DNF_Adolf_Scharf
+							  has_country_flag = DNF_Karl_Renner
+							  has_country_flag = DNF_Josip_Broz
+							  has_country_flag = DNF_Anna_Kethly
+							  has_country_flag = DNF_Bruno_Pitterman }}
+		clr_country_flag = DNF_hungary_disagrees
+		set_country_flag = DNF_hungary_agrees }
+		clear_variable = DNF_hungarian_election_1950_involved
+		clear_variable = DNF_hungarian_election_involved
+		clear_variable = Hungary_Pick_One
+	}
+}
+
+country_event = { # Hot summer 0
+	id = krg_dnf_regional_elections_hungary.5 
+	title = krg_dnf_regional_elections_hungary.5.t
+	desc = krg_dnf_regional_elections_hungary.5.d
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	immediate = {
+		hidden_effect = {
+			if = { limit = { OR = { has_country_flag = DNF_Karl_Renner
+									has_country_flag = DNF_Adolf_Scharf }}
+									add_to_variable = { 
+										var = DNF_hungary_soccon_pop
+										value = -1
+									}
+			}
+			else = {
+				add_to_variable = { 
+					var = DNF_hungary_socdem_pop
+					value = -1
+				}
+			}
+			add_to_variable = { 
+				var = DNF_hungary_soclib_pop
+				value = 1
+			}	
+		}	
+	}
+
+	option = {
+		name = krg_dnf_regional_elections_hungary.5.a
+		hidden_effect = { country_event = { id = krg_dnf_regional_elections_hungary.6 days = 3 } }
+	}
+
+	option = {
+		name = krg_dnf_regional_elections_hungary.5.b
+		hidden_effect = { country_event = { id = krg_dnf_regional_elections_hungary.7 days = 5 } }
+	}
+}
+
+country_event = { # Hot summer 1
+	id = krg_dnf_regional_elections_hungary.6 
+	title = krg_dnf_regional_elections_hungary.6.t
+	desc = krg_dnf_regional_elections_hungary.6.d
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_dnf_regional_elections_hungary.6.a
+		hidden_effect = { country_event = { id = krg_dnf_regional_elections_hungary.8 days = 4 } }
+		if = { limit = { OR = { has_country_flag = DNF_Karl_Renner
+								has_country_flag = DNF_Adolf_Scharf }}
+									add_to_variable = { 
+										var = DNF_hungary_socdem_pop
+										value = -2
+									}							
+									add_to_variable = { 
+										var = DNF_hungary_soccon_pop
+										value = 1
+									}
+			}
+			else = {
+				add_to_variable = { 
+					var = DNF_hungary_socdem_pop
+					value = 1
+				}
+				add_to_variable = { 
+					var = DNF_hungary_soccon_pop
+					value = -2
+				}
+			}
+		add_to_variable = { 
+			var = DNF_hungary_soclib_pop
+			value = 1
+		}
+	}
+
+	option = {
+		name = krg_dnf_regional_elections_hungary.6.b
+		hidden_effect = { country_event = { id = krg_dnf_regional_elections_hungary.9 days = 6 } }
+		if = { limit = { OR = { has_country_flag = DNF_Karl_Renner
+		has_country_flag = DNF_Adolf_Scharf }}
+			add_to_variable = { 
+				var = DNF_hungary_socdem_pop
+				value = 2
+			}							
+			add_to_variable = { 
+				var = DNF_hungary_soccon_pop
+				value = -1
+			}
+		}
+		else = {
+			add_to_variable = { 
+				var = DNF_hungary_socdem_pop
+				value = -1
+			}
+			add_to_variable = { 
+				var = DNF_hungary_soccon_pop
+				value = 2
+			}
+		}
+		add_to_variable = { 
+			var = DNF_hungary_soclib_pop
+			value = -1
+		}
+	}
+}
+
+country_event = { # Hot summer 2
+	id = krg_dnf_regional_elections_hungary.7 
+	title = krg_dnf_regional_elections_hungary.7.t
+	desc = krg_dnf_regional_elections_hungary.7.d
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_dnf_regional_elections_hungary.7.a
+		hidden_effect = { country_event = { id = krg_dnf_regional_elections_hungary.10 days = 4 } }
+		if = { limit = { OR = { has_country_flag = DNF_Karl_Renner
+		has_country_flag = DNF_Adolf_Scharf }}
+			add_to_variable = { 
+				var = DNF_hungary_socdem_pop
+				value = 4
+			}							
+			add_to_variable = { 
+				var = DNF_hungary_soccon_pop
+				value = -2
+			}
+		}
+		else = {
+			add_to_variable = { 
+				var = DNF_hungary_socdem_pop
+				value = -2
+			}
+			add_to_variable = { 
+				var = DNF_hungary_soccon_pop
+				value = 4
+			}
+		}
+		add_to_variable = { 
+			var = DNF_hungary_soclib_pop
+			value = -2
+		}
+	}
+
+	option = {
+		name = krg_dnf_regional_elections_hungary.7.b
+		hidden_effect = { country_event = { id = krg_dnf_regional_elections_hungary.11 days = 6 } }
+		if = { limit = { OR = { has_country_flag = DNF_Karl_Renner
+		has_country_flag = DNF_Adolf_Scharf }}
+			add_to_variable = { 
+				var = DNF_hungary_socdem_pop
+				value = 2
+			}							
+			add_to_variable = { 
+				var = DNF_hungary_soccon_pop
+				value = -1
+			}
+		}
+		else = {
+			add_to_variable = { 
+				var = DNF_hungary_socdem_pop
+				value = -1
+			}
+			add_to_variable = { 
+				var = DNF_hungary_soccon_pop
+				value = 2
+			}
+		}
+		add_to_variable = { 
+			var = DNF_hungary_soclib_pop
+			value = -1
+		}
+	}
+}
+
+country_event = { # Hot summer end 1
+	id = krg_dnf_regional_elections_hungary.8 
+	title = krg_dnf_regional_elections_hungary.8.t
+	desc = krg_dnf_regional_elections_hungary.8.d
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	immediate = {
+		if = { limit = { OR = { has_country_flag = DNF_Karl_Renner
+		has_country_flag = DNF_Adolf_Scharf }}
+			add_to_variable = { 
+				var = DNF_hungary_socdem_pop
+				value = -5
+			}							
+			add_to_variable = { 
+				var = DNF_hungary_soccon_pop
+				value = 5
+			}
+		}
+		else = {
+		add_to_variable = { 
+			var = DNF_hungary_socdem_pop
+			value = 5
+		}
+		add_to_variable = { 
+			var = DNF_hungary_soccon_pop
+			value = -5
+		}	}
+	}
+
+	option = {
+		name = krg_dnf_regional_elections_hungary.8.a
+	}
+}
+
+country_event = { # Hot summer end 2
+	id = krg_dnf_regional_elections_hungary.9 
+	title = krg_dnf_regional_elections_hungary.9.t
+	desc = krg_dnf_regional_elections_hungary.9.d
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_dnf_regional_elections_hungary.9.a
+		add_to_variable = { 
+			var = DNF_hungary_socdem_pop
+			value = 2
+		}
+		add_to_variable = { 
+			var = DNF_hungary_soclib_pop
+			value = -4
+		}
+		add_to_variable = { 
+			var = DNF_hungary_soccon_pop
+			value = 2
+		}
+	}
+}
+
+country_event = { # Hot summer end 3
+	id = krg_dnf_regional_elections_hungary.10 
+	title = krg_dnf_regional_elections_hungary.10.t
+	desc = krg_dnf_regional_elections_hungary.10.d
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_dnf_regional_elections_hungary.10.a
+		if = { limit = { OR = { has_country_flag = DNF_Karl_Renner
+								has_country_flag = DNF_Adolf_Scharf }}
+			add_to_variable = { 
+				var = DNF_hungary_soccon_pop
+				value = -2
+			}
+			add_to_variable = { 
+				var = DNF_hungary_socdem_pop
+				value = 4
+			}
+		}
+		else = {
+			add_to_variable = { 
+				var = DNF_hungary_socdem_pop
+				value = -2
+			}
+			add_to_variable = { 
+				var = DNF_hungary_soccon_pop
+				value = 4
+			}
+		}
+		add_to_variable = { 
+			var = DNF_hungary_soclib_pop
+			value = -2
+		}
+	}
+}
+
+country_event = { # Hot summer end 4
+	id = krg_dnf_regional_elections_hungary.11 
+	title = krg_dnf_regional_elections_hungary.11.t
+	desc = krg_dnf_regional_elections_hungary.11.d
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_dnf_regional_elections_hungary.11.a
+		if = { limit = { OR = { has_country_flag = DNF_Karl_Renner
+								has_country_flag = DNF_Adolf_Scharf }}
+			add_to_variable = { 
+				var = DNF_hungary_soccon_pop
+				value = 2
+			}
+			add_to_variable = { 
+				var = DNF_hungary_socdem_pop
+				value = -4
+			}
+		}
+		else = {
+			add_to_variable = { 
+				var = DNF_hungary_socdem_pop
+				value = 2
+			}
+			add_to_variable = { 
+				var = DNF_hungary_soccon_pop
+				value = -4
+			}
+		}
+
+		add_to_variable = { 
+			var = DNF_hungary_soclib_pop
+			value = 2
+		}
+	}
+}
+
+country_event = {  # Radio Campaign Concludes
+	id = krg_dnf_regional_elections_hungary.12
+	title = krg_dnf_regional_elections_hungary.12.t
+	desc = krg_dnf_regional_elections_hungary.12.d
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_dnf_regional_elections_hungary.12.a
+	}
+}
+
+country_event = { # The Kaiser's Visit to Budapest
+	id = krg_dnf_regional_elections_hungary.13 
+	title = krg_dnf_regional_elections_hungary.13.t
+	desc = krg_dnf_regional_elections_hungary.13.d
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_dnf_regional_elections_hungary.13.a
+	}
+}
+
+country_event = { # Mobilise the Donauschwaben 
+	id = krg_dnf_regional_elections_hungary.14 
+	title = krg_dnf_regional_elections_hungary.14.t
+	desc = krg_dnf_regional_elections_hungary.14.d
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_dnf_regional_elections_hungary.14.a
+	}
+}
+
+country_event = { # Hungary 54 Incoming
+	id = krg_dnf_regional_elections_hungary.15
+	title = krg_dnf_regional_elections_hungary.15.t
+	desc = krg_dnf_regional_elections_hungary.15.d
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: Start Hungary 54 Election"
+	}
+	trigger = {
+		DNF = { NOT = {has_idea = DNF_The_Personal_Prinzip }} 
+	}
+
+	is_triggered_only = yes
+	#fire_only_once = yes
+
+	option = {
+		name = krg_dnf_regional_elections_hungary.15.a
+
+		if = { limit = { OR = { has_country_flag = DNF_Zoltan_Tildy
+							  has_country_flag = DNF_Alcide_De_Gasperi
+							  has_country_flag = DNF_Engelbert_Dollfuss
+							  has_country_flag = DNF_Wilhelm_Miklas
+							  has_country_flag = DNF_Julius_Raab
+							  has_country_flag = DNF_Leopold_Figl }}
+			set_variable = { DNF_hungary_soccon_pop = 20 }
+			set_variable = { DNF_hungary_soclib_pop = 35 }
+			set_variable = { DNF_hungary_socdem_pop = 45 }
+		} else_if = { limit = { OR = { 	has_country_flag = DNF_Adolf_Scharf
+										has_country_flag = DNF_Josip_Broz
+										has_country_flag = DNF_Anna_Kethly
+										has_country_flag = DNF_Bruno_Pitterman } }
+			set_variable = { DNF_hungary_soccon_pop = 15 }
+			set_variable = { DNF_hungary_soclib_pop = 45 }
+			set_variable = { DNF_hungary_socdem_pop = 40 }
+		} else = {
+			set_variable = { DNF_hungary_soccon_pop = 45 }
+			set_variable = { DNF_hungary_soclib_pop = 30 }
+			set_variable = { DNF_hungary_socdem_pop = 25 }
+		}
+		set_variable = { DNF_hungarian_election_involved = 1 }
+		set_variable = { DNF_hungarian_election_1954_involved = 1 }
+		activate_mission = DNF_hungarian_election_1954
+		activate_mission = DNF_hungarian_opposition_campaigning
+		hidden_effect = {
+			country_event = {
+				id = krg_dnf_regional_elections_hungary.19
+				days = 19
+			}	
+		}
+		
+		ai_chance = {
+			factor = 100
+		}
+	}
+
+	option = {
+		name = krg_dnf_regional_elections_hungary.15.b
+		add_political_power = 50
+		hidden_effect = { if = { limit = { OR = { has_country_flag = DNF_Zoltan_Tildy
+							  has_country_flag = DNF_Alcide_De_Gasperi
+							  has_country_flag = DNF_Engelbert_Dollfuss
+							  has_country_flag = DNF_Wilhelm_Miklas
+							  has_country_flag = DNF_Julius_Raab
+							  has_country_flag = DNF_Leopold_Figl
+							  has_country_flag = DNF_Peter_Veres }}
+			random_list = {
+				20 = {
+					country_event = {
+						id = krg_dnf_regional_elections_hungary.16 
+						days = 80
+					}
+				}
+				25 = {
+					country_event = {
+						id = krg_dnf_regional_elections_hungary.17
+						days = 80
+					}
+					set_country_flag = DNF_APPONYIS_NMP
+				}
+				45 = {
+					country_event = {
+						id = krg_dnf_regional_elections_hungary.18
+						days = 80
+					}
+				}
+			}
+		}
+		else = {
+			random_list = {
+				20 = {
+					country_event = {
+						id = krg_dnf_regional_elections_hungary.18 
+						days = 80
+					}
+				}
+				25 = {
+					country_event = {
+						id = krg_dnf_regional_elections_hungary.17
+						days = 80
+					}
+					set_country_flag = DNF_APPONYIS_NMP
+				}
+				45 = {
+					country_event = {
+						id = krg_dnf_regional_elections_hungary.16
+						days = 80
+						}
+					}
+				}
+			}
+		}	
+		
+		ai_chance = {
+			factor = 0
+		}
+	}
+}
+
+country_event = { # SOCCON Win
+	id = krg_dnf_regional_elections_hungary.16
+	title = krg_dnf_regional_elections_hungary.16.t
+	desc = krg_dnf_regional_elections_hungary.16.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = {
+		hidden_effect = {
+			# MP
+			clr_country_flag = DNF_HUNGARIAN_MP_KALLAY
+			clr_country_flag = DNF_HUNGARIAN_MP_RASSAY
+			clr_country_flag = DNF_HUNGARIAN_MP_SZAKASITS
+			clr_country_flag = DNF_HUNGARIAN_MP_TELEKI
+			clr_country_flag = DNF_HUNGARIAN_MP_CZERMANIK
+
+			# Government
+			clr_country_flag = DNF_HUNGARIAN_PARTY_SOCCON
+			clr_country_flag = DNF_HUNGARIAN_PARTY_SOCLIB
+			clr_country_flag = DNF_HUNGARIAN_PARTY_SOCDEM
+
+			# Vienna 
+			clr_country_flag = DNF_HUNGARY_AGREES
+			clr_country_flag = DNF_HUNGARY_DISAGREES
+
+			# Outcome Settings
+			set_country_flag = DNF_HUNGARIAN_MP_TELEKI
+			set_country_flag = DNF_HUNGARIAN_PARTY_SOCCON
+			if = { limit = { OR = { has_country_flag = DNF_Zoltan_Tildy
+									has_country_flag = DNF_Alcide_De_Gasperi
+									has_country_flag = DNF_Engelbert_Dollfuss
+									has_country_flag = DNF_Wilhelm_Miklas
+									has_country_flag = DNF_Julius_Raab
+									has_country_flag = DNF_Leopold_Figl }}
+				set_country_flag = DNF_HUNGARY_AGREES
+			} else = {
+				set_country_flag = DNF_HUNGARY_DISAGREES
+			}	
+			clear_variable = DNF_hungarian_election_involved
+			clear_variable = DNF_hungarian_election_1954_involved
+			clear_variable = Hungary_Pick_One
+		}
+	}
+	option = {
+		name = krg_dnf_regional_elections_hungary.16.a
+	}
+}
+
+country_event = { # SOCLIB Win
+	id = krg_dnf_regional_elections_hungary.17
+	title = krg_dnf_regional_elections_hungary.17.t
+	desc = krg_dnf_regional_elections_hungary.17.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = {
+		hidden_effect = {
+			# MP
+			clr_country_flag = DNF_HUNGARIAN_MP_KALLAY
+			clr_country_flag = DNF_HUNGARIAN_MP_RASSAY
+			clr_country_flag = DNF_HUNGARIAN_MP_SZAKASITS
+			clr_country_flag = DNF_HUNGARIAN_MP_TELEKI
+			clr_country_flag = DNF_HUNGARIAN_MP_CZERMANIK
+
+			# Government
+			clr_country_flag = DNF_HUNGARIAN_PARTY_SOCCON
+			clr_country_flag = DNF_HUNGARIAN_PARTY_SOCLIB
+			clr_country_flag = DNF_HUNGARIAN_PARTY_SOCDEM
+
+			# Vienna 
+			clr_country_flag = DNF_HUNGARY_AGREES
+			clr_country_flag = DNF_HUNGARY_DISAGREES
+
+			# Outcome Settings
+			set_country_flag = DNF_HUNGARIAN_MP_RASSAY
+			set_country_flag = DNF_HUNGARIAN_PARTY_SOCLIB
+			if = { limit = { has_country_flag = DNF_Peter_Veres }
+				set_country_flag = DNF_HUNGARY_AGREES
+			} else = {
+				set_country_flag = DNF_HUNGARY_DISAGREES
+			}	
+			clear_variable = DNF_hungarian_election_involved
+			clear_variable = DNF_hungarian_election_1954_involved
+			clear_variable = Hungary_Pick_One
+		}
+	}
+	option = {
+		name = krg_dnf_regional_elections_hungary.17.a
+	}
+}
+
+country_event = { # SOCDEM WIN
+	id = krg_dnf_regional_elections_hungary.18
+	title = krg_dnf_regional_elections_hungary.18.t
+	desc = krg_dnf_regional_elections_hungary.18.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = {
+		hidden_effect = {
+			# MP
+			clr_country_flag = DNF_HUNGARIAN_MP_KALLAY
+			clr_country_flag = DNF_HUNGARIAN_MP_RASSAY
+			clr_country_flag = DNF_HUNGARIAN_MP_SZAKASITS
+			clr_country_flag = DNF_HUNGARIAN_MP_TELEKI
+			clr_country_flag = DNF_HUNGARIAN_MP_CZERMANIK
+
+			# Government
+			clr_country_flag = DNF_HUNGARIAN_PARTY_SOCCON
+			clr_country_flag = DNF_HUNGARIAN_PARTY_SOCLIB
+			clr_country_flag = DNF_HUNGARIAN_PARTY_SOCDEM
+
+			# Vienna 
+			clr_country_flag = DNF_HUNGARY_AGREES
+			clr_country_flag = DNF_HUNGARY_DISAGREES
+
+			# Outcome Settings
+			set_country_flag = DNF_HUNGARIAN_MP_CZERMANIK
+			set_country_flag = DNF_HUNGARIAN_PARTY_SOCDEM
+			if = { limit = { OR = { 	has_country_flag = DNF_Adolf_Scharf
+									has_country_flag = DNF_Josip_Broz
+									has_country_flag = DNF_Anna_Kethly
+									has_country_flag = DNF_Bruno_Pitterman } }
+				set_country_flag = DNF_HUNGARY_AGREES
+			} else = {
+				set_country_flag = DNF_HUNGARY_DISAGREES
+			}	
+			clear_variable = DNF_hungarian_election_involved
+			clear_variable = DNF_hungarian_election_1954_involved
+			clear_variable = Hungary_Pick_One
+		}
+	}
+	option = {
+		name = krg_dnf_regional_elections_hungary.18.a
+	}
+}
+
+country_event = { # Enough is Enough!
+	id = krg_dnf_regional_elections_hungary.19
+	title = krg_dnf_regional_elections_hungary.19.t
+	desc = krg_dnf_regional_elections_hungary.19.d
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: Start Hungary Reactionaries Quest 54"
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+
+
+	option = {
+		name = krg_dnf_regional_elections_hungary.19.a
+		country_event = { id = krg_dnf_regional_elections_hungary.20 days = 2}
+	}
+	option = {
+	 	name = krg_dnf_regional_elections_hungary.19.b
+		 country_event = { id = krg_dnf_regional_elections_hungary.21 days = 14}
+	}
+}
+
+country_event = { # Arrest Her Immediately
+	id = krg_dnf_regional_elections_hungary.20
+	title = krg_dnf_regional_elections_hungary.20.t
+	desc = krg_dnf_regional_elections_hungary.20.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_dnf_regional_elections_hungary.20.a
+		add_to_variable = { DNF_hungary_socdem_pop = 15 }
+		custom_effect_tooltip = DNF_hungary_socdem_support_tt
+	}
+}
+
+country_event = { # Observe Results
+	id = krg_dnf_regional_elections_hungary.21
+	title = krg_dnf_regional_elections_hungary.21.t
+	desc = krg_dnf_regional_elections_hungary.21.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { 
+		name = krg_dnf_regional_elections_hungary.21.a
+		country_event = { id = krg_dnf_regional_elections_hungary.22 days = 2}
+	}
+	option = { 
+		name = krg_dnf_regional_elections_hungary.21.b
+		country_event = { id = krg_dnf_regional_elections_hungary.23 days = 7}
+	}
+}
+
+country_event = { # Break up Meeting
+	id = krg_dnf_regional_elections_hungary.22
+	title = krg_dnf_regional_elections_hungary.22.t
+	desc = krg_dnf_regional_elections_hungary.22.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { 
+		name = krg_dnf_regional_elections_hungary.22.a
+		add_to_variable = { DNF_hungary_soccon_pop = 15 }
+		custom_effect_tooltip = DNF_hungary_soccon_support_tt
+	}
+}
+
+country_event = { # Apponyi goes legit
+	id = krg_dnf_regional_elections_hungary.23
+	title = krg_dnf_regional_elections_hungary.23.t
+	desc = krg_dnf_regional_elections_hungary.23.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { 
+		name = krg_dnf_regional_elections_hungary.23.a
+		add_to_variable = { DNF_hungary_soclib_pop = 15 }
+		custom_effect_tooltip = DNF_hungary_soclib_support_tt
+		set_country_flag = DNF_APPONYIS_NMP
+	}
+}
+
+country_event = { # Rassay Retires
+	id = krg_dnf_regional_elections_hungary.24
+	title = krg_dnf_regional_elections_hungary.24.t
+	desc = krg_dnf_regional_elections_hungary.24.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { 
+		name = krg_dnf_regional_elections_hungary.24.a
+		if = { limit = { has_country_flag = DNF_APPONYIS_NMP
+						 has_country_flag = DNF_HUNGARIAN_MP_RASSAY }
+			clr_country_flag = DNF_HUNGARIAN_MP_RASSAY
+			set_country_flag = DNF_HUNGARIAN_MP_APPONYI
+		}
+		else_if = {
+			limit = {
+				has_country_flag = DNF_HUNGARIAN_MP_RASSAY 
+			}
+			clr_country_flag = DNF_HUNGARIAN_MP_RASSAY
+			set_country_flag = DNF_HUNGARIAN_MP_KOVAGO
+		}
+		set_country_flag = DNF_rassay_retired
+	}
+}
+
+country_event = { # Kallay Retires
+	id = krg_dnf_regional_elections_hungary.25
+	title = krg_dnf_regional_elections_hungary.25.t
+	desc = krg_dnf_regional_elections_hungary.25.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { 
+		name = krg_dnf_regional_elections_hungary.25.a
+		if = {
+			limit = {
+				has_country_flag = DNF_HUNGARIAN_MP_KALLAY
+			}
+			clr_country_flag = DNF_HUNGARIAN_MP_KALLAY
+			set_country_flag = DNF_HUNGARIAN_MP_TELEKI
+		}
+		set_country_flag = DNF_kallay_retired
+	}
+}
+
+country_event = { # Szakasits retires
+	id = krg_dnf_regional_elections_hungary.26
+	title = krg_dnf_regional_elections_hungary.26.t
+	desc = krg_dnf_regional_elections_hungary.26.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { 
+		name = krg_dnf_regional_elections_hungary.26.a
+		if = {
+			limit = {
+				has_country_flag = DNF_HUNGARIAN_MP_SZAKASITS
+			}
+			clr_country_flag = DNF_HUNGARIAN_MP_SZAKASITS
+			set_country_flag = DNF_HUNGARIAN_MP_CZERMANIK
+		}
+		set_country_flag = DNF_szakasits_retired
+	}
+}

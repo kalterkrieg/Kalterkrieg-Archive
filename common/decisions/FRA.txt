@@ -1,0 +1,432 @@
+FRA_council_of_state_decision_category = {
+	FRA_council_of_state_show_hide_faction_power_decisions = {
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete FRA_council_of_state_show_hide_faction_power_decisions target: [From.GetName]"
+			if = {
+				limit = { has_country_flag = FRA_council_of_state_show_faction_power_decisions }
+				clr_country_flag = FRA_council_of_state_show_faction_power_decisions
+				custom_effect_tooltip = FRA_council_of_state_hide_faction_power_decisions_tt
+			}
+			else = {
+				set_country_flag = FRA_council_of_state_show_faction_power_decisions
+				custom_effect_tooltip = FRA_council_of_state_show_faction_power_decisions_tt
+			}
+		}
+
+		ai_will_do = {
+			base = 1000
+			modifier = {
+				factor = 0
+				has_country_flag = FRA_council_of_state_show_faction_power_decisions
+			}
+		}
+	}
+
+	FRA_council_of_state_increase_faction_power = {
+		icon = generic_political_discourse
+
+		visible = {
+			has_country_flag = FRA_council_of_state_show_faction_power_decisions
+		}
+
+		target_root_trigger = {
+			has_country_flag = FRA_council_of_state_show_faction_power_decisions
+		}
+
+		target_trigger = {
+			FROM = {
+				check_variable = { FRA_council_of_state_enabled = 1 }
+			}
+		}
+
+		available = {
+			set_temp_variable = { temp_faction = FROM.FRA_council_of_state_id }
+			set_temp_variable = { temp_value = 100 }
+			FRA_council_of_state_faction_power_less_than = yes
+	
+			NOT = { has_country_flag = FRA_council_of_state_increase_faction_power_flag }
+		}
+
+		on_map_mode = decision_view_only
+		target_array = FRA_council_of_state_faction_array
+		state_target = yes
+
+		cost = 25
+		days_re_enable = 30
+		days_remove = 30
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete FRA_council_of_state_increase_faction_power target: [From.GetName]"
+			set_country_flag =  FRA_council_of_state_increase_faction_power_flag
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove FRA_council_of_state_increase_faction_power target: [From.GetName]"
+			set_temp_variable = { temp_faction = FROM.FRA_council_of_state_id }
+			set_temp_variable = { temp_value = 2.5 }
+			FRA_council_of_state_modify_power = yes
+
+			clr_country_flag =  FRA_council_of_state_increase_faction_power_flag
+		}
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 5
+				check_variable = { FROM.FRA_council_of_state_id = 2 }
+				has_country_flag = FRA_ai_left_wing_bias
+			}
+			modifier = {
+				add = 5
+				check_variable = { FROM.FRA_council_of_state_id = 3 }
+				has_country_flag = FRA_ai_agriculturist_bias
+			}
+			modifier = {
+				add = 5
+				check_variable = { FROM.FRA_council_of_state_id = 5 }
+				has_country_flag = FRA_ai_technocratic_bias
+			}
+		}
+	}
+}
+
+FRA_german_economic_interests_decision_category = {
+	FRA_german_economic_interests_investments_in_infrastructure = {
+		icon = generic_construction
+
+		visible = {
+			NOT = { has_variable = FRA_german_economic_interests_infrastructure_target }
+		}
+
+		available = {
+			set_temp_variable = { temp_value = 10 }
+			FRA_german_economic_interests_economic_control_at_least = yes
+		}
+
+		cost = 50
+		fixed_random_seed = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete FRA_german_economic_interests_investments_in_infrastructure target: [From.GetName]"
+			random_owned_controlled_state = {
+				limit = {
+					free_building_slots = { building = infrastructure size > 0 }
+				}
+				custom_effect_tooltip = FRA_german_economic_interests_investments_in_infrastructure_tt
+				set_variable = { PREV.FRA_german_economic_interests_infrastructure_target = THIS }
+				set_variable = { PREV.FRA_german_economic_interests_infrastructure_target_level = infrastructure_level }
+				add_to_variable = { PREV.FRA_german_economic_interests_infrastructure_target_level = 1 }
+			}
+
+			set_temp_variable = { temp_value = 2.5 }
+			FRA_german_economic_interests_modify_economic_control = yes
+
+			hidden_effect = {
+				if = {
+					limit = { has_variable = FRA_german_economic_interests_infrastructure_target }
+					activate_mission = FRA_german_economic_interests_investments_in_infrastructure_mission
+				}
+			}
+		}
+
+		ai_will_do = {
+			base = 0
+		}
+	}
+	FRA_german_economic_interests_investments_in_infrastructure_mission = {
+		icon = generic_construction
+
+		allowed = { always = no }
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = FRA_german_economic_interests_investments_in_infrastructure_mission_trigger_tt
+				NOT = {
+					check_variable = { FRA_german_economic_interests_infrastructure_target:infrastructure_level < FRA_german_economic_interests_infrastructure_target_level }
+				}
+			}
+		}
+
+		cancel_trigger = {
+			check_variable = { FRA_german_economic_interests_economic_control < 20 }
+		}
+
+		days_mission_timeout = 180
+		days_remove = 60
+		selectable_mission = yes
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete FRA_german_economic_interests_investments_in_infrastructure_mission target: [From.GetName]"
+			custom_effect_tooltip = FRA_german_economic_interests_investments_in_infrastructure_modifier_tt
+			add_to_variable = { FRA_german_economic_control_consumer_goods_factor = -0.075 }
+			add_to_variable = { FRA_german_economic_control_production_speed_infrastructure_factor = 0.05 }
+			set_country_flag = FRA_german_economic_interests_build_infrastructure_success
+		}
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout FRA_german_economic_interests_investments_in_infrastructure_mission target: [From.GetName]"
+			add_political_power = -50
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove FRA_german_economic_interests_investments_in_infrastructure_mission target: [From.GetName]"
+			if = {
+				limit = { has_country_flag = FRA_german_economic_interests_build_infrastructure_success }
+				custom_effect_tooltip = FRA_german_economic_interests_investments_in_infrastructure_modifier_remove_tt
+				add_to_variable = { FRA_german_economic_control_consumer_goods_factor = 0.075 }
+				add_to_variable = { FRA_german_economic_control_production_speed_infrastructure_factor = -0.05 }
+				clr_country_flag = FRA_german_economic_interests_build_infrastructure_success
+			}
+			clear_variable = FRA_german_economic_interests_infrastructure_target
+			clear_variable = FRA_german_economic_interests_infrastructure_target_level
+		}
+
+		ai_will_do = {
+			base = 100
+		}
+	}
+	FRA_german_economic_interests_investments_in_civilian_factory = {
+		icon = factories
+
+		visible = {
+			NOT = { has_variable = FRA_german_economic_interests_civilian_factory_target }
+		}
+
+		available = {
+			set_temp_variable = { temp_value = 10 }
+			FRA_german_economic_interests_economic_control_at_least = yes
+		}
+
+		cost = 50
+		fixed_random_seed = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete FRA_german_economic_interests_investments_in_civilian_factory target: [From.GetName]"
+			random_owned_controlled_state = {
+				limit = {
+					free_building_slots = { building = infrastructure size > 0 }
+				}
+				custom_effect_tooltip = FRA_german_economic_interests_investments_in_civilian_factory_tt
+				set_variable = { PREV.FRA_german_economic_interests_civilian_factory_target = THIS }
+				set_variable = { PREV.FRA_german_economic_interests_civilian_factory_target_level = industrial_complex_level }
+				add_to_variable = { PREV.FRA_german_economic_interests_civilian_factory_target_level = 1 }
+			}
+
+			set_temp_variable = { temp_value = 2.5 }
+			FRA_german_economic_interests_modify_economic_control = yes
+
+			hidden_effect = {
+				if = {
+					limit = { has_variable = FRA_german_economic_interests_civilian_factory_target }
+					activate_mission = FRA_german_economic_interests_investments_in_civilian_factory_mission
+				}
+			}
+		}
+
+		ai_will_do = {
+			base = 0
+		}
+	}
+	FRA_german_economic_interests_investments_in_civilian_factory_mission = {
+		icon = factories
+
+		allowed = { always = no }
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = FRA_german_economic_interests_investments_in_civilian_factory_mission_trigger_tt
+				NOT = {
+					check_variable = { FRA_german_economic_interests_civilian_factory_target:industrial_complex_level < FRA_german_economic_interests_civilian_factory_target_level }
+				}
+			}
+		}
+
+		cancel_trigger = {
+			check_variable = { FRA_german_economic_interests_economic_control < 20 }
+		}
+
+		days_mission_timeout = 540
+		days_remove = 60
+		selectable_mission = yes
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete FRA_german_economic_interests_investments_in_civilian_factory_mission target: [From.GetName]"
+			set_temp_variable = { temp_value = -0.075 }
+			custom_effect_tooltip = FRA_german_economic_interests_investments_in_civilian_factory_modifier_tt
+			add_to_variable = { FRA_german_economic_control_consumer_goods_factor = -0.225 }
+			add_to_variable = { FRA_german_economic_control_production_speed_industrial_complex_factor = 0.05 }
+			set_country_flag = FRA_german_economic_interests_build_civilian_factory_success
+		}
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout FRA_german_economic_interests_investments_in_civilian_factory_mission target: [From.GetName]"
+			add_political_power = -50
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove FRA_german_economic_interests_investments_in_civilian_factory_mission target: [From.GetName]"
+			if = {
+				limit = { has_country_flag = FRA_german_economic_interests_build_civilian_factory_success }
+				set_temp_variable = { temp_value = 0.075 }
+				custom_effect_tooltip = FRA_german_economic_interests_investments_in_civilian_factory_modifier_remove_tt
+				add_to_variable = { FRA_german_economic_control_consumer_goods_factor = 0.225 }
+				add_to_variable = { FRA_german_economic_control_production_speed_industrial_complex_factor = -0.05 }
+				clr_country_flag = FRA_german_economic_interests_build_civilian_factory_success
+			}
+			clear_variable = FRA_german_economic_interests_civilian_factory_target
+			clear_variable = FRA_german_economic_interests_civilian_factory_target_level
+		}
+
+		ai_will_do = {
+			base = 100
+		}
+	}
+	FRA_german_economic_interests_investments_in_military_factory = {
+		icon = generic_industry
+
+		visible = {
+			NOT = { has_idea = KRG_disarmed_nation }
+			NOT = { has_variable = FRA_german_economic_interests_military_factory_target }
+		}
+
+		available = {
+			set_temp_variable = { temp_value = 10 }
+			FRA_german_economic_interests_economic_control_at_least = yes
+		}
+
+		cost = 50
+		fixed_random_seed = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete FRA_german_economic_interests_investments_in_military_factory target: [From.GetName]"
+			random_owned_controlled_state = {
+				limit = {
+					free_building_slots = { building = infrastructure size > 0 }
+				}
+				custom_effect_tooltip = FRA_german_economic_interests_investments_in_military_factory_tt
+				set_variable = { PREV.FRA_german_economic_interests_military_factory_target = THIS }
+				set_variable = { PREV.FRA_german_economic_interests_military_factory_target_level = arms_factory_level }
+				add_to_variable = { PREV.FRA_german_economic_interests_military_factory_target_level = 1 }
+			}
+
+			set_temp_variable = { temp_value = 2.5 }
+			FRA_german_economic_interests_modify_economic_control = yes
+
+			hidden_effect = {
+				if = {
+					limit = { has_variable = FRA_german_economic_interests_military_factory_target }
+					activate_mission = FRA_german_economic_interests_investments_in_civilian_factory_mission
+				}
+			}
+		}
+
+		ai_will_do = {
+			base = 0
+		}
+	}
+	FRA_german_economic_interests_investments_in_military_factory_mission = {
+		icon = generic_industry
+
+		allowed = { always = no }
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = FRA_german_economic_interests_investments_in_military_factory_mission_trigger_tt
+				NOT = {
+					check_variable = { FRA_german_economic_interests_military_factory_target:arms_factory_level < FRA_german_economic_interests_military_factory_target_level }
+				}
+			}
+		}
+
+		cancel_trigger = {
+			check_variable = { FRA_german_economic_interests_economic_control < 20 }
+		}
+
+		days_mission_timeout = 360
+		days_remove = 60
+		selectable_mission = yes
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete FRA_german_economic_interests_investments_in_military_factory_mission target: [From.GetName]"
+			set_temp_variable = { temp_value = -0.05 }
+			custom_effect_tooltip = FRA_german_economic_interests_investments_in_military_factory_modifier_tt
+			add_to_variable = { FRA_german_economic_control_consumer_goods_factor = -0.15 }
+			add_to_variable = { FRA_german_economic_control_production_speed_arms_factory_factor = 0.05 }
+			set_country_flag = FRA_german_economic_interests_build_military_factory_success
+		}
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout FRA_german_economic_interests_investments_in_military_factory_mission target: [From.GetName]"
+			add_political_power = -50
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove FRA_german_economic_interests_investments_in_military_factory_mission target: [From.GetName]"
+			if = {
+				limit = { has_country_flag = FRA_german_economic_interests_build_military_factory_success }
+				set_temp_variable = { temp_value = 0.05 }
+				custom_effect_tooltip = FRA_german_economic_interests_investments_in_military_factory_modifier_remove_tt
+				add_to_variable = { FRA_german_economic_control_consumer_goods_factor = 0.1 }
+				add_to_variable = { FRA_german_economic_control_production_speed_arms_factory_factor = -0.05 }
+				clr_country_flag = FRA_german_economic_interests_build_military_factory_success
+			}
+			clear_variable = FRA_german_economic_interests_military_factory_target
+			clear_variable = FRA_german_economic_interests_military_factory_target_level
+		}
+
+		ai_will_do = {
+			base = 100
+		}
+	}
+	FRA_german_economic_interests_hire_german_construction_companies = {
+		icon = hol_attract_foreign_investors
+
+		visible = {
+			check_variable = { FRA_german_economic_interests_economic_control > 0 }
+		}
+
+		cost = 75
+		days_remove = 120
+		days_re_enable = 180
+
+		modifier = {
+			production_speed_buildings_factor = 0.15
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete FRA_german_economic_interests_hire_german_construction_companies target: [From.GetName]"
+			set_temp_variable = { temp_value = 5 }
+			FRA_german_economic_interests_modify_economic_control = yes
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove FRA_german_economic_interests_hire_german_construction_companies target: [From.GetName]"
+		}
+
+		ai_will_do = {
+			base = 1
+		}
+	}
+	FRA_german_economic_interests_buyout_german_interests = {
+		icon = give_cash
+
+		visible = {
+			check_variable = { FRA_german_economic_interests_economic_control > 0 }
+		}
+
+		cost = 100
+		days_remove = 60
+		days_re_enable = 120
+
+		modifier = {
+			consumer_goods_factor = 0.20
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete FRA_german_economic_interests_buyout_german_interests target: [From.GetName]"
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove FRA_german_economic_interests_buyout_german_interests target: [From.GetName]"
+			set_temp_variable = { temp_value = -5 }
+			FRA_german_economic_interests_modify_economic_control = yes
+		}
+
+		ai_will_do = {
+			base = 5
+		}
+	}
+}

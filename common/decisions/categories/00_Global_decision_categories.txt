@@ -1,0 +1,127 @@
+accord_voting_decisions = {
+	visible = {
+		is_in_array = { global.accord_voting_country_array = THIS }
+	}
+
+	icon = GFX_decision_category_generic_accord
+	picture = GFX_decision_cat_ENT_accord
+
+	visible_when_empty = yes
+	scripted_gui = KRG_accord_voting
+	priority = {
+		base = 1
+		modifier = {
+			add = 900
+			NOT = {
+				check_variable = { global.accord_issue = 0 }
+			}
+		}
+	}
+}
+
+congress_of_nation = {
+	icon = generic_democracy
+	#picture = 
+	available = {
+		OR = {
+			has_idea = con_member
+			has_idea = con_senate
+		}
+	}
+
+	allowed = { always = no } # bye
+
+	#scripted_gui = congress_of_nation_ui
+	
+
+	priority = 0
+}
+
+NATO_decisions = {
+	visible = {
+		has_global_flag = NATO_exists
+		is_in_array = {
+			array = global.nato_member_array
+			value = ROOT
+		}
+	}
+
+	scripted_gui = NATO_ui
+
+	visible_when_empty = yes
+	priority = 100
+}
+
+ship_ordering = {
+	icon = navy
+
+	allowed = { always = no }
+	
+}
+italy_generic_the_reclaimed_lands = {
+	allowed = {
+		original_tag = ITA
+	}
+	visible = {
+		original_tag = ITA
+	}
+	icon = GFX_decision_category_border_war
+	picture = GFX_cat_picture_italy_generic_irredentismo
+	priority = 100
+}
+
+FAMED_category_decisions ={ 
+	visible ={ 
+		is_an_accord_country_in_mediterranean = yes
+		is_in_FAMED = yes
+	}
+	priority = 50
+}
+
+China_integration_decisions = {
+	priority = 80
+	icon = GFX_decision_CHI_focus
+	allowed = {
+		OR = {
+			original_tag = CHI
+			original_tag = FNG
+		}
+	}
+}
+
+ITA_coup_decisions ={ 
+	allowed ={ 
+		tag = DNF
+	}
+	visible = {
+		has_country_flag = ITA_coup_allowed_flag
+	}
+	visible_when_empty = yes
+	priority = 100001
+}
+ACW_decisions = {
+	icon = GFX_decision_category_americacivilwar
+
+	visible = {
+		OR = {
+			original_tag = CAL
+			original_tag = NEE
+			original_tag = TEX
+			original_tag = GLG
+			original_tag = CAN
+			original_tag = GER
+			is_in_or_aligned_with_accord = yes
+			is_in_or_aligned_with_reichspakt = yes
+		}
+		has_global_flag = ACW_ongoing 
+	}
+
+	icon = GFX_decision_category_america
+	picture = GFX_decision_cat_generic_ACW
+
+	priority = 500
+
+	visible_when_empty = yes
+
+	scripted_gui = ACW_decision_cat_gui
+}

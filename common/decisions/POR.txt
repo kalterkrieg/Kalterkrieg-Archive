@@ -1,0 +1,603 @@
+POR_crisis_angola = {
+	POR_face_winds_of_change = {
+		icon = GFX_decision_revolt
+		is_good = no
+		selectable_mission = no
+		days_mission_timeout = 921
+		activation = {
+			has_country_flag = POR_crisis_angola
+		}
+		available = {
+			always = no
+		}
+		cancel_trigger = {
+			has_country_flag = POR_crisis_angola_settled
+		}
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout POR_face_winds_of_change target: [From.GetName]"
+			custom_effect_tooltip = POR_crisis_angola_settled_tt
+			hidden_effect = {
+				if = {
+					limit = {
+						OR = {
+							AND = {
+								has_country_flag = POR_LNA_HIGHLY_COOPERATIVE_GOVERNMENT
+								has_country_flag = POR_OVIMBUNDU_HIGHLY_COOPERATIVE_GOVERNMENT
+							}
+							AND = {
+								has_country_flag = POR_LNA_COOPERATIVE_GOVERNMENT
+								has_country_flag = POR_OVIMBUNDU_HIGHLY_COOPERATIVE_GOVERNMENT
+							}
+							AND = {
+								has_country_flag = POR_LNA_HIGHLY_COOPERATIVE_GOVERNMENT
+								has_country_flag = POR_OVIMBUNDU_COOPERATIVE_GOVERNMENT
+							}
+						}
+					}
+					country_event = { id = krg_por_angola.4 }
+				}
+				else = {
+					country_event = { id = krg_por_angola.3 }
+					if = {
+						limit = {
+							has_country_flag = POR_DOMESTIC_DEEPLY_OPPOSES_GOVERNMENT
+						}
+						country_event = {
+							id = krg_por_angola.5
+							days = 45
+						}
+					}
+					if = {
+						limit = {
+							has_country_flag = POR_ARMY_DEEPLY_OPPOSES_GOVERNMENT
+						}
+						country_event = {
+							id = krg_por_angola.6
+							days = 25
+						}
+					}
+				}
+
+				if = {
+					limit = { has_country_flag = POR_ANGCOL_DEEPLY_OPPOSES_GOVERNMENT } 
+					country_event = {
+						id = krg_por_angola.7
+						days = 67
+					}
+				}
+			}
+			set_country_flag = POR_crisis_angola_settled
+			clr_country_flag = POR_crisis_angola	
+			remove_ideas = { POR_crisis_angola_idea }
+		}
+	}
+
+	POR_LNA_taking_action = {
+		icon = GFX_decision_binoculars
+		is_good = no
+		selectable_mission = no
+		days_mission_timeout = 90
+		activation = {
+			has_country_flag = POR_crisis_angola
+			OR = {	has_country_flag = POR_LNA_NEUTRAL_GOVERNMENT
+					has_country_flag = POR_LNA_OPPOSES_GOVERNMENT 
+				   	has_country_flag = POR_LNA_DEEPLY_OPPOSES_GOVERNMENT }
+		}
+		available = {
+			always = no
+		}
+		cancel_trigger = {
+			OR = { 	has_country_flag = POR_LNA_COOPERATIVE_GOVERNMENT
+					has_country_flag = POR_LNA_HIGHLY_COOPERATIVE_GOVERNMENT 
+					has_country_flag = POR_crisis_angola_settled
+				}
+		}
+
+		fixed_random_seed = no
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout POR_LNA_taking_action target: [From.GetName]"
+			if = {
+				limit = {
+					NOT = {
+						has_country_flag = POR_crisis_angola_settled
+					}
+				}
+				
+			}
+			hidden_effect = {
+				random_list = {
+					20 = {
+						POR_move_down_Army_support = yes
+					}
+					20 = {
+						POR_move_down_Domestic_support = yes
+					}
+					20 = {
+						POR_move_down_AngColonist_support = yes
+					}
+					20 = {
+						POR_move_down_Bakongo_support = yes
+					}
+					20 = {
+					
+					}
+					
+				}
+				activate_mission = POR_LNA_taking_action
+			}
+		}
+	}
+
+	POR_Bakongo_taking_action = {
+		icon = GFX_decision_binoculars
+		is_good = no
+		selectable_mission = no
+		days_mission_timeout = 90
+		activation = {
+			has_country_flag = POR_crisis_angola
+			OR = { 	has_country_flag = POR_OVIMBUNDU_NEUTRAL_GOVERNMENT
+					has_country_flag = POR_OVIMBUNDU_OPPOSES_GOVERNMENT 
+				   	has_country_flag = POR_OVIMBUNDU_DEEPLY_OPPOSES_GOVERNMENT }
+		}
+		available = {
+			always = no
+		}
+		cancel_trigger = {
+			OR = { 	has_country_flag = POR_OVIMBUNDU_COOPERATIVE_GOVERNMENT
+					has_country_flag = POR_OVIMBUNDU_HIGHLY_COOPERATIVE_GOVERNMENT 
+					has_country_flag = POR_crisis_angola_settled
+				}
+		}
+
+		fixed_random_seed = no
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout POR_Bakongo_taking_action target: [From.GetName]"
+			if = {
+				limit = {
+					NOT = {
+						has_country_flag = POR_crisis_angola_settled
+					}
+				}
+				
+			}
+			hidden_effect = {
+				random_list = {
+					20 = {
+						POR_move_down_Army_support = yes
+					}
+					20 = {
+						POR_move_down_Domestic_support = yes
+					}
+					20 = {
+						POR_move_down_AngColonist_support = yes
+					}
+					20 = {
+						POR_move_down_LNA_support = yes
+					}
+					20 = {
+					
+					}
+					
+				}
+				activate_mission = POR_Bakongo_taking_action
+			}
+		}
+	}
+
+	POR_negotiate_with_the_LNA = {
+		icon = GFX_decision_peace_dove
+		cost = 50
+		days_remove = 100
+	
+		available = {
+			NOT = {
+				check_variable = {
+					days_mission_timeout@POR_face_winds_of_change < 100
+				}	
+			}
+			OR = { 	has_country_flag = POR_LNA_cooperative
+					has_country_flag = POR_LNA_highly_cooperative }
+		} 
+		visible = {
+			OR = { 	has_country_flag = POR_LNA_cooperative
+					has_country_flag = POR_LNA_highly_cooperative }
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove POR_negotiate_with_the_LNA target: [From.GetName]"
+			add_political_power = -50
+			POR_move_down_Army_support = yes
+			POR_move_up_Domestic_support = yes
+			POR_move_up_LNA_support = yes
+			POR_move_down_AngColonist_support = yes
+			POR_move_down_Bakongo_support = yes
+			#country event
+			add_days_mission_timeout = {
+				mission = POR_face_winds_of_change
+				days = 80
+			}
+			set_country_flag = POR_LNA_negotiations
+		}
+	}	
+	
+	POR_negotiate_with_the_Bakongo = {
+		icon = GFX_decision_peace_dove
+		cost = 50
+		days_remove = 100
+	
+		available = {
+			NOT = {
+				check_variable = {
+					days_mission_timeout@POR_face_winds_of_change < 100
+				}	
+			}
+			OR = { 	has_country_flag = POR_Bakongo_cooperative
+					has_country_flag = POR_Bakongo_highly_cooperative }
+		} 
+
+		visible = {
+			OR = { 	has_country_flag = POR_Bakongo_cooperative
+					has_country_flag = POR_Bakongo_highly_cooperative }
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove POR_negotiate_with_the_Bakongo target: [From.GetName]"
+			add_political_power = -50
+			POR_move_down_Army_support = yes
+			POR_move_up_Domestic_support = yes
+			POR_move_up_LNA_support = yes
+			POR_move_down_AngColonist_support = yes
+			POR_move_down_Bakongo_support = yes
+			#country event
+			add_days_mission_timeout = {
+				mission = POR_face_winds_of_change
+				days = 80
+			}
+			set_country_flag = POR_Bakongo_negotiations
+		}
+	}
+
+
+	POR_invest_in_luanda = {
+		cost = 50
+		icon = GFX_decision_electrify
+		days_remove = 365
+		
+		modifier = {
+			civilian_factory_use = 2
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove POR_invest_in_luanda target: [From.GetName]"
+		540 = {
+			add_building_construction = { 
+				type = industrial_complex 
+				level = 1 
+				instant_build = yes 
+			}
+			add_extra_state_shared_building_slots = 1
+		}
+		POR_move_up_AngColonist_support = yes
+		custom_effect_tooltip = POR_AngCol_positive_tt
+		POR_move_down_LNA_support = yes
+		custom_effect_tooltip = POR_LNA_negative_tt
+		POR_move_up_Army_support = yes
+		custom_effect_tooltip = POR_Army_positive_tt
+		POR_move_down_Domestic_support = yes
+		custom_effect_tooltip = POR_Domestic_negative_tt
+		POR_move_up_Bakongo_support = yes
+		custom_effect_tooltip = POR_Bakongo_positive_tt
+		}
+	}
+
+
+	POR_invest_in_nova_lisboa = {
+		cost = 50
+		icon = GFX_decision_electrify
+		days_remove = 365
+		
+		modifier = {
+			civilian_factory_use = 2
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove POR_invest_in_nova_lisboa target: [From.GetName]"
+		1144 = {
+			add_building_construction = { 
+				type = industrial_complex 
+				level = 1 
+				instant_build = yes 
+			}	
+			add_extra_state_shared_building_slots = 1
+		}
+		#country event (only first time)
+		POR_move_up_AngColonist_support = yes
+		custom_effect_tooltip = POR_AngCol_positive_tt
+		POR_move_up_LNA_support = yes
+		custom_effect_tooltip = POR_LNA_positive_tt
+		POR_move_up_Army_support = yes
+		custom_effect_tooltip = POR_Army_positive_tt
+		POR_move_down_Domestic_support = yes
+		custom_effect_tooltip = POR_Domestic_negative_tt
+		POR_move_down_Bakongo_support = yes
+		custom_effect_tooltip = POR_Bakongo_negative_tt
+		}
+	}
+
+	POR_abolish_indigene_law = {
+		cost = 100
+		icon = GFX_decision_generic_break_treaty
+		days_remove = 150
+
+		visible = {
+			NOT = { has_country_flag = POR_Ang_Abolished_Indigene_Law}
+		}
+		fire_only_once = yes
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove POR_abolish_indigene_law target: [From.GetName]"
+			POR_move_up_Domestic_support = yes
+			custom_effect_tooltip = POR_Domestic_positive_tt
+			POR_move_down_Army_support = yes
+			custom_effect_tooltip = POR_Army_negative_tt
+			POR_move_up_LNA_support = yes
+			custom_effect_tooltip = POR_LNA_positive_tt
+			POR_move_down_AngColonist_support = yes
+			custom_effect_tooltip = POR_AngCol_negative_tt
+			POR_move_up_Bakongo_support = yes
+			custom_effect_tooltip = POR_Bakongo_positive_tt
+			set_country_flag = POR_Ang_Abolished_Indigene_Law
+			country_event = { id = krg_por_angola.0 }
+		}
+	}
+
+	POR_end_labour_conscription = {
+		cost = 100
+		icon = GFX_decision_freedom
+		days_remove = 300
+
+		fire_only_once = yes
+
+		visible = {
+			has_country_flag = POR_Ang_Abolished_Indigene_Law
+			NOT = { has_country_flag = POR_ended_labour_conscription }
+		}
+
+		available = {
+			has_country_flag = POR_Ang_Abolished_Indigene_Law
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove POR_end_labour_conscription target: [From.GetName]"
+			POR_move_up_LNA_support = yes
+			custom_effect_tooltip = POR_LNA_positive_tt
+			POR_move_up_Bakongo_support = yes
+			custom_effect_tooltip = POR_Bakongo_positive_tt
+			POR_move_down_AngColonist_support = yes
+			custom_effect_tooltip = POR_AngCol_negative_tt
+			POR_move_down_Army_support = yes
+			custom_effect_tooltip = POR_Army_negative_tt
+			set_country_flag = POR_ended_labour_conscription
+			country_event = { id = krg_por_angola.1 }
+		}
+	}
+
+	POR_limit_CUF_operations = {
+		cost = 100
+		icon =  ban_iron_front
+		days_remove = 210
+
+		visible = {
+			has_country_flag = POR_Ang_Abolished_Indigene_Law
+			NOT = { has_country_flag = POR_limited_CUF }
+		}
+
+		available = {
+			has_country_flag = POR_Ang_Abolished_Indigene_Law
+		}
+
+		fire_only_once = yes
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove POR_limit_CUF_operations target: [From.GetName]"
+			POR_move_up_LNA_support = yes
+			custom_effect_tooltip = POR_LNA_positive_tt
+			POR_move_down_AngColonist_support = yes
+			custom_effect_tooltip = POR_AngCol_negative_tt
+			POR_move_down_Domestic_support = yes
+			custom_effect_tooltip = POR_Domestic_negative_tt
+			move_down_business_spending = yes
+			set_country_flag = POR_limited_CUF
+			country_event = { id = krg_por_angola.2 }
+		}
+	}
+
+	POR_recruit_more_colonial_soldiers = {
+		cost = 40
+		icon = GFX_decision_eng_blackshirt_march
+		days_remove = 100
+
+		fixed_random_seed = no
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove POR_recruit_more_colonial_soldiers target: [From.GetName]"
+			add_manpower = 10000
+			custom_effect_tooltip = POR_Army_maybe_positive_tt
+			custom_effect_tooltip = POR_AngCol_maybe_negative_tt
+			custom_effect_tooltip = POR_Domestic_maybe_positive_tt
+			hidden_effect = {
+				random_list = {
+					33 = {
+						POR_move_up_Army_support = yes
+					}
+					67 = { }
+				}
+				random_list = {
+					33 = { }
+					67 = {
+						POR_move_down_AngColonist_support = yes
+					}
+				}
+				random_list = {
+					33 = {
+						POR_move_up_Domestic_support = yes
+					}
+					67 = { }
+				}
+			}
+		}
+	}
+
+	POR_institute_conscription = {
+		cost = 200
+		icon = GFX_decision_eng_blackshirt_march
+		days_remove = 10
+
+		visible = {
+			NOT = { has_idea = KRG_limited_conscription }
+		}
+
+		available = {
+			OR = {
+			has_manpower < 10000
+			custom_trigger_tooltip = {
+				tooltip = POR_Cacadores_tt
+				check_variable = {
+					var = "POR_Cacadores_In_Angola"
+					value = 2
+					compare = greater_than_or_equals
+					}
+				}
+			}			
+			NOT = { has_idea = KRG_limited_conscription }
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove POR_institute_conscription target: [From.GetName]"
+			move_up_mobilization = yes
+			custom_effect_tooltip = POR_Army_positive_tt
+			custom_effect_tooltip = POR_Domestic_negative_tt
+			POR_move_up_Army_support = yes
+			POR_move_up_Domestic_support = yes
+		}
+	}
+
+	POR_equip_more_cacadores = {
+		cost = 20
+		icon = soldierly_discipline
+		days_remove = 50
+		
+		available = {
+			has_equipment = {
+				infantry_equipment > 9999
+				support_equipment > 999
+				motorized_equipment > 99
+			}
+			has_manpower > 9999
+		}
+		fixed_random_seed = no
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove POR_equip_more_cacadores target: [From.GetName]"
+			
+			add_manpower = -10000
+			add_equipment_to_stockpile = {
+				type = infantry_equipment				
+				amount = -10000
+			}
+			add_equipment_to_stockpile = {
+				type = motorized_equipment
+				amount = -100
+			}
+			add_equipment_to_stockpile = {
+				type = motorized_equipment
+				amount = -1000
+			}		
+
+			custom_effect_tooltip = POR_LNA_maybe_negative_tt
+			custom_effect_tooltip = POR_Bakongo_maybe_negative_tt
+			custom_effect_tooltip = POR_Army_maybe_positive_tt
+			custom_effect_tooltip = POR_AngCol_maybe_positive_tt
+			custom_effect_tooltip = POR_Domestic_maybe_negative_tt
+			hidden_effect = {
+				random_list = {
+					33 = {
+						POR_move_down_LNA_support = yes
+					}
+					67 = {}
+				}
+				random_list = {
+					33 = {
+						POR_move_down_Bakongo_support = yes
+					}
+					67 = {}
+				}
+				random_list = {
+					33 = {}
+					67 = {
+						POR_move_up_Army_support = yes
+					}
+				}
+				random_list = {
+					33 = {}
+					67 = {
+						POR_move_up_AngColonist_support = yes
+					}
+				}
+				random_list = {
+					33 = {
+						POR_move_down_Domestic_support = yes
+					}
+					67 = {}
+				}
+
+				add_to_variable = {
+					var = "POR_Cacadores_In_Angola"
+					value = 1
+				}
+			}	
+		}
+	}
+
+	POR_send_planes = {
+		cost = 50
+		icon = GFX_decision_generic_merge_plant_aircraft
+		days_remove = 65
+
+		available = {
+			has_equipment = {
+				CAS_equipment > 99
+			}
+		}
+		
+		fixed_random_seed = no
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove POR_send_planes target: [From.GetName]"
+			add_equipment_to_stockpile = {
+				type = CAS_equipment
+				amount = -100
+			}	
+			custom_effect_tooltip = POR_Army_maybe_positive_tt
+			custom_effect_tooltip = POR_AngCol_maybe_positive_tt		
+			custom_effect_tooltip = POR_LNA_maybe_negative_tt
+			custom_effect_tooltip = POR_Bakongo_maybe_negative_tt		
+			hidden_effect = {
+				random_list = {
+					67 = {
+						POR_move_down_LNA_support= yes
+					}
+					33 = {
+						POR_move_up_Army_support = yes
+					}
+				}
+				random_list = {
+					90 = {
+						POR_move_up_AngColonist_support = yes
+					}
+					10 = {
+						POR_move_down_Bakongo_support = yes
+					}
+				}				
+			}
+		}
+	}
+}

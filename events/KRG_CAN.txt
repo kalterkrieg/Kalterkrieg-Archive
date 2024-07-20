@@ -1,0 +1,8039 @@
+add_namespace = krg_can
+add_namespace = krg_can_elect
+add_namespace = krg_can_crisis
+add_namespace = krg_montgomery_plan
+add_namespace = krg_can_patriation
+add_namespace = krg_can_cal_alaska
+
+country_event = { #opposition campaign AI helper
+	id = krg_can_elect.1
+	title = krg_can_elect.1.t
+	desc = krg_can_elect.1.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_elect.1" }
+
+	is_triggered_only = yes
+	hidden = yes
+
+	immediate = {#recursion :simp:
+		if = {
+			limit = {
+				OR = {
+					has_country_flag = CAN_1949_election_start
+					has_country_flag = CAN_1953_election_start
+					has_country_flag = CAN_crisis_election_start
+				}
+			}
+			country_event = {
+				id = krg_can_elect.1
+				days = 10
+			}
+			random_list = {
+				30 = {
+					add_to_variable = { opponent_party_psuedo_pp_arr^0 = 10 }
+				}
+				40 = {
+					add_to_variable = { opponent_party_psuedo_pp_arr^0 = 15 }
+				}
+				30 = {
+					add_to_variable = { opponent_party_psuedo_pp_arr^0 = 20 }
+				}
+			}
+			random_list = {
+				30 = {
+					add_to_variable = { opponent_party_psuedo_pp_arr^1 = 10 }
+				}
+				40 = {
+					add_to_variable = { opponent_party_psuedo_pp_arr^1 = 15 }
+				}
+				30 = {
+					add_to_variable = { opponent_party_psuedo_pp_arr^1 = 20 }
+				}
+			}
+			random_list = {
+				30 = {
+					add_to_variable = { opponent_party_psuedo_pp_arr^2 = 10 }
+				}
+				40 = {
+					add_to_variable = { opponent_party_psuedo_pp_arr^2 = 15 }
+				}
+				30 = {
+					add_to_variable = { opponent_party_psuedo_pp_arr^2 = 20 }
+				}
+			}
+			random_list = {
+				30 = {
+					add_to_variable = { opponent_party_psuedo_pp_arr^3 = 10 }
+				}
+				40 = {
+					add_to_variable = { opponent_party_psuedo_pp_arr^3 = 15 }
+				}
+				30 = {
+					add_to_variable = { opponent_party_psuedo_pp_arr^3 = 20 }
+				}
+			}
+			if = {
+				limit = { NOT = { check_variable = { CAN_election_party_support = 0 } } }
+				set_variable = { party_decide_index = 0 }
+				CAN_election_decide_campaign = yes
+			}
+			if = {
+				limit = { NOT = { check_variable = { CAN_election_party_support = 1 } } }
+				set_variable = { party_decide_index = 1 }
+				CAN_election_decide_campaign = yes
+			}
+			if = {
+				limit = { NOT = { check_variable = { CAN_election_party_support = 2 } } }
+				set_variable = { party_decide_index = 2 }
+				CAN_election_decide_campaign = yes
+			}
+			if = {
+				limit = { 
+					NOT = { 
+						check_variable = { CAN_election_party_support = 3 } 
+						has_country_flag = CAN_1949_election_start
+					} 
+				}
+				set_variable = { party_decide_index = 3 }
+				CAN_election_decide_campaign = yes
+			}
+		}
+	}
+
+	option = {
+		name = krg_can_elect.1.a
+	}
+}
+
+country_event = { #CCF scandal event
+	id = krg_can_elect.2
+	title = krg_can_elect.2.t
+	desc = krg_can_elect.2.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_elect.2" }
+	picture = GFX_CAN_ce_ccf
+
+	is_triggered_only = yes
+
+	option = {
+		name = krg_can_elect.2.a
+		trigger = {
+			CAN_has_socdem_government = yes
+		}
+		var:CAN_political_scandal_state = {
+			custom_effect_tooltip = CAN_scoped_decrease_socdem_tiny_tt 
+			CAN_popularity_socdem_decrease_tiny = yes
+		}
+	}
+	option = {
+		name = krg_can_elect.2.b
+		trigger = {
+			NOT = {
+				CAN_has_socdem_government = yes
+			}
+		}
+		var:CAN_political_scandal_state = {
+			custom_effect_tooltip = CAN_scoped_decrease_socdem_tiny_tt 
+			CAN_popularity_socdem_decrease_tiny = yes
+		}
+	}
+}
+
+country_event = { #liberal scandal event
+	id = krg_can_elect.3
+	title = krg_can_elect.3.t
+	desc = krg_can_elect.3.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_elect.3" }
+	picture = GFX_CAN_ce_lpc
+
+	is_triggered_only = yes
+
+	option = {
+		name = krg_can_elect.3.a
+		trigger = {
+			CAN_has_liberal_government = yes
+		}
+		var:CAN_political_scandal_state = {
+			custom_effect_tooltip = CAN_scoped_decrease_liberals_tiny_tt 
+			CAN_popularity_liberals_decrease_tiny = yes
+		}
+	}
+	option = {
+		name = krg_can_elect.3.b
+		trigger = {
+			NOT = {
+				CAN_has_liberal_government = yes
+			}
+		}
+		var:CAN_political_scandal_state = {
+			custom_effect_tooltip = CAN_scoped_decrease_liberals_tiny_tt 
+			CAN_popularity_liberals_decrease_tiny = yes
+		}
+	}
+}
+
+country_event = { #con scandal event
+	id = krg_can_elect.4
+	title = krg_can_elect.4.t
+	desc = krg_can_elect.4.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_elect.4" }
+	picture = GFX_CAN_ce_cpc
+
+	is_triggered_only = yes
+
+	option = {
+		name = krg_can_elect.4.a
+		trigger = {
+			CAN_has_conservative_government = yes
+		}
+		var:CAN_political_scandal_state = {
+			custom_effect_tooltip = CAN_scoped_decrease_conservatives_tiny_tt 
+			CAN_popularity_conservatives_decrease_tiny = yes
+		}
+	}
+	option = {
+		name = krg_can_elect.4.b
+		trigger = {
+			NOT = {
+				CAN_has_conservative_government = yes
+			}
+		}
+		var:CAN_political_scandal_state = {
+			custom_effect_tooltip = CAN_scoped_decrease_conservatives_tiny_tt 
+			CAN_popularity_conservatives_decrease_tiny = yes
+		}
+	}
+}
+
+country_event = { #unionist scandal event
+	id = krg_can_elect.5
+	title = krg_can_elect.5.t
+	desc = krg_can_elect.5.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_elect.5" }
+	picture = GFX_CAN_ce_upc
+
+	is_triggered_only = yes
+
+	option = {
+		name = krg_can_elect.5.a
+		trigger = {
+			CAN_has_unionist_government = yes
+		}
+		var:CAN_political_scandal_state = {
+			custom_effect_tooltip = CAN_scoped_decrease_unionists_tiny_tt 
+			CAN_popularity_unionists_decrease_tiny = yes
+		}
+	}
+	option = {
+		name = krg_can_elect.5.b
+		trigger = {
+			NOT = {
+				CAN_has_unionist_government = yes
+			}
+		}
+		var:CAN_political_scandal_state = {
+			custom_effect_tooltip = CAN_scoped_decrease_unionists_tiny_tt 
+			CAN_popularity_unionists_decrease_tiny = yes
+		}
+	}
+}
+
+country_event = { #CCF speech event
+	id = krg_can_elect.6
+	title = krg_can_elect.6.t
+	desc = krg_can_elect.6.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_elect.6" }
+	picture = GFX_CAN_ce_ccf
+
+	is_triggered_only = yes
+
+	option = {
+		name = krg_can_elect.6.a
+		trigger = {
+			CAN_has_socdem_government = yes
+		}
+		var:CAN_political_speech_state = {
+			custom_effect_tooltip = CAN_scoped_increase_socdem_tiny_tt 
+			CAN_popularity_socdem_increase_tiny = yes
+		}
+	}
+	option = {
+		name = krg_can_elect.6.b
+		trigger = {
+			NOT = {
+				CAN_has_socdem_government = yes
+			}
+		}
+		var:CAN_political_speech_state = {
+			custom_effect_tooltip = CAN_scoped_increase_socdem_tiny_tt 
+			CAN_popularity_socdem_increase_tiny = yes
+		}
+	}
+}
+
+country_event = { #liberal speech event
+	id = krg_can_elect.7
+	title = krg_can_elect.7.t
+	desc = krg_can_elect.7.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_elect.7" }
+	picture = GFX_CAN_ce_lpc
+
+	is_triggered_only = yes
+
+	option = {
+		name = krg_can_elect.7.a
+		trigger = {
+			CAN_has_liberal_government = yes
+		}
+		var:CAN_political_speech_state = {
+			custom_effect_tooltip = CAN_scoped_increase_liberals_tiny_tt 
+			CAN_popularity_liberals_increase_tiny = yes
+		}
+	}
+	option = {
+		name = krg_can_elect.7.b
+		trigger = {
+			NOT = {
+				CAN_has_liberal_government = yes
+			}
+		}
+		var:CAN_political_speech_state = {
+			custom_effect_tooltip = CAN_scoped_increase_liberals_tiny_tt 
+			CAN_popularity_liberals_increase_tiny = yes
+		}
+	}
+}
+
+country_event = { #con speech event
+	id = krg_can_elect.8
+	title = krg_can_elect.8.t
+	desc = krg_can_elect.8.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_elect.8" }
+	picture = GFX_CAN_ce_cpc
+
+	is_triggered_only = yes
+
+	option = {
+		name = krg_can_elect.8.a
+		trigger = {
+			CAN_has_conservative_government = yes
+		}
+		var:CAN_political_speech_state = {
+			custom_effect_tooltip = CAN_scoped_increase_conservatives_tiny_tt 
+			CAN_popularity_conservatives_increase_tiny = yes
+		}
+	}
+	option = {
+		name = krg_can_elect.8.b
+		trigger = {
+			NOT = {
+				CAN_has_conservative_government = yes
+			}
+		}
+		var:CAN_political_speech_state = {
+			custom_effect_tooltip = CAN_scoped_increase_conservatives_tiny_tt 
+			CAN_popularity_conservatives_increase_tiny = yes
+		}
+	}
+}
+
+country_event = { #unionist speech event
+	id = krg_can_elect.9
+	title = krg_can_elect.9.t
+	desc = krg_can_elect.9.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_elect.9" }
+	picture = GFX_CAN_ce_upc
+
+	is_triggered_only = yes
+
+	option = {
+		name = krg_can_elect.9.a
+		trigger = {
+			CAN_has_unionist_government = yes
+		}
+		var:CAN_political_speech_state = {
+			custom_effect_tooltip = CAN_scoped_increase_unionists_tiny_tt 
+			CAN_popularity_unionists_increase_tiny = yes
+		}
+	}
+	option = {
+		name = krg_can_elect.9.b
+		trigger = {
+			NOT = {
+				CAN_has_unionist_government = yes
+			}
+		}
+		var:CAN_political_speech_state = {
+			custom_effect_tooltip = CAN_scoped_increase_unionists_tiny_tt 
+			CAN_popularity_unionists_increase_tiny = yes
+		}
+	}
+}
+
+country_event = { #NDP scandal event
+	id = krg_can_elect.10
+	title = krg_can_elect.10.t
+	desc = krg_can_elect.10.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_elect.10" }
+	picture = GFX_CAN_ce_ndp
+
+	is_triggered_only = yes
+
+	option = {
+		name = krg_can_elect.10.a
+		trigger = {
+			CAN_has_socdem_government = yes
+		}
+		var:CAN_political_scandal_state = {
+			custom_effect_tooltip = CAN_scoped_decrease_socdem_tiny_tt 
+			CAN_popularity_socdem_decrease_tiny = yes
+		}
+	}
+	option = {
+		name = krg_can_elect.10.b
+		trigger = {
+			NOT = {
+				CAN_has_socdem_government = yes
+			}
+		}
+		var:CAN_political_scandal_state = {
+			custom_effect_tooltip = CAN_scoped_decrease_socdem_tiny_tt 
+			CAN_popularity_socdem_decrease_tiny = yes
+		}
+	}
+}
+
+country_event = { #progcon scandal event
+	id = krg_can_elect.11
+	title = krg_can_elect.11.t
+	desc = krg_can_elect.11.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_elect.11" }
+	picture = GFX_CAN_ce_pc
+
+	is_triggered_only = yes
+
+	option = {
+		name = krg_can_elect.11.a
+		trigger = {
+			CAN_has_conservative_government = yes
+		}
+		var:CAN_political_scandal_state = {
+			custom_effect_tooltip = CAN_scoped_decrease_conservatives_tiny_tt 
+			CAN_popularity_conservatives_decrease_tiny = yes
+		}
+	}
+	option = {
+		name = krg_can_elect.11.b
+		trigger = {
+			NOT = {
+				CAN_has_conservative_government = yes
+			}
+		}
+		var:CAN_political_scandal_state = {
+			custom_effect_tooltip = CAN_scoped_decrease_conservatives_tiny_tt 
+			CAN_popularity_conservatives_decrease_tiny = yes
+		}
+	}
+}
+
+country_event = { #NDP speech event
+	id = krg_can_elect.12
+	title = krg_can_elect.12.t
+	desc = krg_can_elect.12.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_elect.12" }
+	picture = GFX_CAN_ce_ndp
+
+	is_triggered_only = yes
+
+	option = {
+		name = krg_can_elect.12.a
+		trigger = {
+			CAN_has_socdem_government = yes
+		}
+		var:CAN_political_speech_state = {
+			custom_effect_tooltip = CAN_scoped_increase_socdem_tiny_tt 
+			CAN_popularity_socdem_increase_tiny = yes
+		}
+	}
+	option = {
+		name = krg_can_elect.12.b
+		trigger = {
+			NOT = {
+				CAN_has_socdem_government = yes
+			}
+		}
+		var:CAN_political_speech_state = {
+			custom_effect_tooltip = CAN_scoped_increase_socdem_tiny_tt 
+			CAN_popularity_socdem_increase_tiny = yes
+		}
+	}
+}
+
+country_event = { #progcon speech event
+	id = krg_can_elect.13
+	title = krg_can_elect.13.t
+	desc = krg_can_elect.13.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_elect.13" }
+	picture = GFX_CAN_ce_pc
+
+	is_triggered_only = yes
+
+	option = {
+		name = krg_can_elect.13.a
+		trigger = {
+			CAN_has_conservative_government = yes
+		}
+		var:CAN_political_speech_state = {
+			custom_effect_tooltip = CAN_scoped_increase_conservatives_tiny_tt 
+			CAN_popularity_conservatives_increase_tiny = yes
+		}
+	}
+	option = {
+		name = krg_can_elect.13.b
+		trigger = {
+			NOT = {
+				CAN_has_conservative_government = yes
+			}
+		}
+		var:CAN_political_speech_state = {
+			custom_effect_tooltip = CAN_scoped_increase_conservatives_tiny_tt 
+			CAN_popularity_conservatives_increase_tiny = yes
+		}
+	}
+}
+
+
+country_event = { #liberal convention opens, introduction to dief and laurent
+	id = krg_can_elect.1000
+	title = krg_can_elect.1000.t
+	desc = krg_can_elect.1000.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_elect.1000" }
+	picture = GFX_ce_can_citizens
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	immediate = {
+		hidden_effect = {
+			country_event = {
+				id = krg_can_elect.1001
+				days = 5
+			}
+		}
+	}
+
+	option = {
+		name = krg_can_elect.1000.a
+	}
+}
+
+country_event = { #speach by diefenbaker
+	id = krg_can_elect.1001
+	title = krg_can_elect.1001.t
+	desc = krg_can_elect.1001.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_elect.1001" }
+	picture = GFX_CAN_ce_diefenbaker
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	immediate = {
+		hidden_effect = {
+			country_event = {
+				id = krg_can_elect.1002
+				days = 5
+			}
+		}
+	}
+
+	option = {
+		name = krg_can_elect.1001.a
+	}
+}
+
+country_event = { #speach by laurent
+	id = krg_can_elect.1002
+	title = krg_can_elect.1002.t
+	desc = krg_can_elect.1002.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_elect.1002" }
+	picture = GFX_CAN_ce_laurent
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	immediate = {
+		hidden_effect = {
+			country_event = {
+				id = krg_can_elect.1003
+				days = 5
+			}
+		}
+	}
+
+	option = {
+		name = krg_can_elect.1002.a
+	}
+}
+
+country_event = { #decision
+	id = krg_can_elect.1003
+	title = krg_can_elect.1003.t
+	desc = krg_can_elect.1003.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_elect.1003" }
+	picture = GFX_CAN_ce_lpc
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	immediate = {
+		hidden_effect = {
+			country_event = {
+				id = krg_can_elect.1004
+				days = 5
+			}
+		}
+	}
+
+	option = {
+		name = krg_can_elect.1003.a
+		custom_effect_tooltip = CAN_increase_liberals_medium_quebec_tt 
+		466 = {
+			CAN_popularity_liberals_increase_medium = yes
+		}
+		set_country_flag = CAN_1949_election_libs_laurent
+		add_to_variable = { CAN_popularity_lib_soclib = 0.1 }
+		subtract_from_variable = { CAN_popularity_lib_marlib = 0.1 }
+	}
+}
+
+country_event = { #tories select drew
+	id = krg_can_elect.1004
+	title = krg_can_elect.1004.t
+	desc = krg_can_elect.1004.d
+	picture = GFX_CAN_ce_drew
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_elect.1004" }
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	immediate = {
+		hidden_effect = {
+			country_event = {
+				id = krg_can_elect.1005
+				days = 5
+			}
+		}
+	}
+
+	option = {
+		name = krg_can_elect.1004.a
+		custom_effect_tooltip = CAN_increase_conservatives_medium_tt
+		CAN_popularity_conservatives_increase_medium = yes
+	}
+}
+
+country_event = { #ccf campaign begins with coldwell staying as leader
+	id = krg_can_elect.1005
+	title = krg_can_elect.1005.t
+	desc = krg_can_elect.1005.d
+	picture = GFX_CAN_ce_coldwell
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_elect.1005" }
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	immediate = {
+		hidden_effect = {
+			country_event = {
+				id = krg_can_elect.1006
+				days = 5
+			}
+		}
+	}
+
+	option = {
+		name = krg_can_elect.1005.a
+		custom_effect_tooltip = CAN_increase_socdem_medium_tt
+		CAN_popularity_socdem_increase_medium = yes
+	}
+}
+
+country_event = { #dominionist rally
+	id = krg_can_elect.1006
+	title = krg_can_elect.1006.t
+	desc = krg_can_elect.1006.d
+	picture = GFX_CAN_ce_upc
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_elect.1006" }
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	immediate = {
+		hidden_effect = {
+				country_event = {
+				id = krg_can_elect.1007
+				days = 5
+			}
+			##else = { #don't bother teaching this to the AI
+				##set_country_flag = CAN_1949_election_start
+				##unlock_national_focus = CAN_1949_election
+				#random_list = {
+				#	30 = {
+				#		log = "CAN Election 1949: AI selected CCF"
+				#		set_country_flag = CAN_1949_election_support_ccf
+				#		country_event = {
+				#			id = krg_can_elect.1008
+				#			days = 67
+				#		}
+				#	}
+				#	25 = {
+				#		log = "CAN Election 1949: AI selected Tories"
+				#		set_country_flag = CAN_1949_election_support_tories
+				#		country_event = {
+				#			id = krg_can_elect.1010
+				#			days = 67
+				#		}
+				#	}
+				#	45 = {
+				#		log = "CAN Election 1949: AI selected Libs"
+				#		set_country_flag = CAN_1949_election_support_libs
+				#		set_country_flag = CAN_1949_election_libs_laurent
+				#		country_event = {
+				#			id = krg_can_elect.1009
+				#			days = 67
+				#		}
+				#	}
+				#}
+			##}
+		}
+	}
+
+	option = {
+		name = krg_can_elect.1006.a
+	}
+}
+
+country_event = { #the campaign begins
+	id = krg_can_elect.1007
+	title = krg_can_elect.1007.t
+	desc = krg_can_elect.1007.d
+	picture = GFX_CAN_ce_laurent_campaigns
+	immediate = { 
+		log = "[GetDateText]: [Root.GetName]: krg_can_elect.1007"
+		clear_array = opponent_party_psuedo_pp_arr
+		add_to_array = { opponent_party_psuedo_pp_arr = 75 }
+		add_to_array = { opponent_party_psuedo_pp_arr = 75 }
+		add_to_array = { opponent_party_psuedo_pp_arr = 75 }
+		add_to_array = { opponent_party_psuedo_pp_arr = 75 }
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		ai_chance = { 
+			base = 31
+			modifier = {
+				has_game_rule = {
+					rule = CAN_1949_ELECTION
+					option = CAN_1949_CCF
+				}
+				factor = 1000
+			}
+		}
+		name = krg_can_elect.1007.a
+		custom_effect_tooltip = CAN_campaign_ccf_1949
+		unlock_decision_category_tooltip = CAN_elections
+		CAN_election_update_viewing_array = yes
+		set_variable = { CAN_election_party_support = 0 }
+		hidden_effect = {
+			activate_mission = CAN_elections_1949
+			set_country_flag = CAN_1949_election_start
+			set_country_flag = CAN_1949_election_support_ccf
+			unlock_national_focus = CAN_1949_election
+			if = {
+				limit = { is_ai = yes }
+				set_variable = { CAN_election_party_support = -1 }
+				CAN_popularity_socdem_increase_large = yes
+			}
+			country_event = { id = krg_can_elect.1 }
+		}
+	}
+	
+	option = {
+		name = krg_can_elect.1007.b
+		ai_chance = { 
+			base = 42
+			modifier = {
+				has_game_rule = {
+					rule = CAN_1949_ELECTION
+					option = CAN_1949_LIB
+				}
+				factor = 1000
+			}
+	 	}
+		custom_effect_tooltip = CAN_campaign_lib_1949
+		unlock_decision_category_tooltip = CAN_elections
+		CAN_election_update_viewing_array = yes
+		set_variable = { CAN_election_party_support = 1 }
+		hidden_effect = {
+			activate_mission = CAN_elections_1949
+			set_country_flag = CAN_1949_election_start
+			set_country_flag = CAN_1949_election_support_libs
+			set_country_flag = CAN_1949_election_libs_laurent
+			unlock_national_focus = CAN_1949_election
+			if = {
+				limit = { is_ai = yes }
+				set_variable = { CAN_election_party_support = -2 }
+				CAN_popularity_liberals_increase_large = yes
+			}
+			country_event = { id = krg_can_elect.1 }
+		}
+	}
+	
+	option = {
+		name = krg_can_elect.1007.c
+		custom_effect_tooltip = CAN_campaign_con_1949
+		unlock_decision_category_tooltip = CAN_elections
+		ai_chance = { 
+			base = 27
+			modifier = {
+				has_game_rule = {
+					rule = CAN_1949_ELECTION
+					option = CAN_1949_CON
+				}
+				factor = 1000
+			}
+		}
+		CAN_election_update_viewing_array = yes
+		set_variable = { CAN_election_party_support = 2 }
+		hidden_effect = {
+			activate_mission = CAN_elections_1949
+			set_country_flag = CAN_1949_election_start
+			set_country_flag = CAN_1949_election_support_tories
+			unlock_national_focus = CAN_1949_election
+			if = {
+				limit = { is_ai = yes }
+				set_variable = { CAN_election_party_support = -3 }
+				CAN_popularity_conservatives_increase_large = yes
+			}
+			country_event = { id = krg_can_elect.1 }
+		}
+	}
+}
+
+country_event = { #CCF victory
+	id = krg_can_elect.1008
+	title = krg_can_elect.1008.t
+	desc = krg_can_elect.1008.d
+	picture = GFX_CAN_ce_coldwell
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_elect.1008" }
+	immediate = {
+		log = "KRG_Event_Logging;1949 CAN Elections - CCF;[GetDateText];[ROOT.GetName];[FROM.GetName]"
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	immediate = {
+		hidden_effect = {
+			clr_country_flag = CAN_1949_election_start
+			set_country_flag = CAN_1949_election_done
+			country_event = { #pc formation (needs to happen before const. crisis can potentially happen)
+				id = krg_can.86
+				days = 365 
+				random_days = 40
+			}
+		}
+	}
+
+	option = {
+		name = krg_can_elect.1008.a
+		retire_country_leader = yes
+		set_politics = {
+			ruling_party = social_democrat
+			elections_allowed = yes
+		}
+		coal_add_rad_soc = yes
+		custom_effect_tooltip = CAN_increase_socdem_large_tt
+		CAN_popularity_socdem_increase_large = yes
+		CAN_popularity_socdem_increase_small = yes
+		hidden_effect = { complete_national_focus = CAN_ccf_rises }
+		set_variable = { global.CAN_parl_support_array^0 = 4 }
+		set_variable = { global.CAN_parl_support_array^1 = 4 }
+		set_variable = { global.CAN_parl_support_array^3 = 1 }
+		set_variable = { global.CAN_parl_support_array^4 = 1 }
+		#if = {
+		#	limit = {
+		#		is_ai = yes
+		#	}
+		#	set_variable = { global.CAN_parl_seat_array^0 = 58 }
+		#	set_variable = { global.CAN_parl_seat_array^1 = 129 }
+		#	set_variable = { global.CAN_parl_seat_array^3 = 53 }
+		#	set_variable = { global.CAN_parl_seat_array^4 = 29 }
+		#	set_variable = { global.CAN_parl_seat_array^5 = 61 }
+		#	set_variable = { global.CAN_parl_seat_array^6 = 8 }
+		#}
+		CAN_parl_adjust = yes
+		hidden_effect = {
+			news_event = {
+				id = worldnews.45
+				hours = 8
+			}
+		}
+		###Cabinet Setup
+		hidden_effect = {
+			remove_all_ministers = yes
+			add_ideas = CAN_M_J_ColdWell_hog_sde
+			add_ideas = CAN_F_R_Scott_fm_sde
+			add_ideas = CAN_Ross_Thatcher_em_sde
+			add_ideas = CAN_Angus_MacInnis_jm_sde
+			add_ideas = CAN_William_Bryce_im_sde
+			add_ideas = CAN_JB_Salsberg_hoi_rso
+		}
+	}
+}
+
+country_event = { #liberal victory 1949
+	id = krg_can_elect.1009
+	title = krg_can_elect.1009.t
+	desc = krg_can_elect.1009.d
+	picture = GFX_CAN_ce_lpc
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_elect.1009" }
+	immediate = {
+		log = "KRG_Event_Logging;1949 CAN Elections - Liberal;[GetDateText];[ROOT.GetName];[FROM.GetName]"
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	immediate = {
+		hidden_effect = {
+			clr_country_flag = CAN_1949_election_start
+			set_country_flag = CAN_1949_election_done
+			country_event = { #pc formation (will happen late to explain away why there isnt snap elections)
+				id = krg_can.86
+				days = 1249 
+				random_days = 40
+			}
+		}
+	}
+	
+	option = {
+		name = krg_can_elect.1009.a
+		##trigger = {
+		##	has_country_flag = CAN_1949_election_libs_laurent
+		##}
+		retire_country_leader = yes
+		set_politics = {
+			ruling_party = social_liberal
+			elections_allowed = yes
+		}
+		coal_add_mar_lib = yes
+		custom_effect_tooltip = CAN_increase_liberals_large_tt
+		hidden_effect = { complete_national_focus = CAN_stlaurants_liberals }
+		#if = {
+		#	limit = {
+		#		is_ai = yes
+		#	}
+		#	set_variable = { global.CAN_parl_seat_array^0 = 7 }
+		#	set_variable = { global.CAN_parl_seat_array^1 = 24 }
+		#	set_variable = { global.CAN_parl_seat_array^3 = 158 }
+		#	set_variable = { global.CAN_parl_seat_array^4 = 42 }
+		#	set_variable = { global.CAN_parl_seat_array^5 = 99 }
+		#	set_variable = { global.CAN_parl_seat_array^6 = 8 }
+		#}
+		CAN_parl_adjust = yes
+		hidden_effect = {
+			news_event = {
+				id = worldnews.46
+				hours = 8
+			}
+		}
+		###Cabinet Setup
+		hidden_effect = {
+			remove_all_ministers = yes
+			add_ideas = CAN_Louis_St_Laurent_hog_sli
+			add_ideas = CAN_Lester_B_Pearson_fm_sli
+			add_ideas = CAN_Douglas_Abbott_em_sli
+			add_ideas = CAN_Stuart_Garson_jm_sli
+			add_ideas = CAN_Jean_Lesage_im_sli
+		}
+	}
+	
+	##option = {
+	##	name = krg_can_elect.1009.b
+	##	trigger = {
+	##		has_country_flag = CAN_1949_election_libs_dief
+	##	}
+	##	retire_country_leader = yes
+	##	set_politics = {
+	##		ruling_party = market_liberal
+	##		elections_allowed = yes
+	##	}
+	##	coal_add_soc_lib = yes
+	##	add_popularity = {
+	##		ideology = market_liberal
+	##		popularity = 0.03
+	##	}
+	##	add_popularity = {
+	##		ideology = social_liberal
+	##		popularity = 0.01
+	##	}
+	##	hidden_effect = { complete_national_focus = CAN_diefenbakers_liberals }
+	##	#set_variable = { global.CAN_parl_seat_array^0 = 14 }
+	##	#set_variable = { global.CAN_parl_seat_array^1 = 34 }
+	##	#set_variable = { global.CAN_parl_seat_array^3 = 41 }
+	##	#set_variable = { global.CAN_parl_seat_array^4 = 158 }
+	##	#set_variable = { global.CAN_parl_seat_array^5 = 83 }
+	##	#set_variable = { global.CAN_parl_seat_array^6 = 8 }
+	##	CAN_parl_adjust = yes
+	##	hidden_effect = {
+	##		news_event = {
+	##			id = worldnews.47
+	##			hours = 8
+	##		}
+	##	}
+	##}
+}
+
+country_event = { #conservative
+	id = krg_can_elect.1010
+	title = krg_can_elect.1010.t
+	desc = krg_can_elect.1010.d
+	picture = GFX_CAN_ce_drew
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_elect.1010" }
+	immediate = {
+		log = "KRG_Event_Logging;1949 CAN Elections - Conservative;[GetDateText];[ROOT.GetName];[FROM.GetName]"
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	immediate = {
+		hidden_effect = {
+			clr_country_flag = CAN_1949_election_start
+			set_country_flag = CAN_1949_election_done
+			country_event = { #pc formation (will happen late to explain away why there isnt snap elections)
+				id = krg_can.86
+				days = 1249 
+				random_days = 40
+			}
+		}
+	}
+
+	option = {
+		name = krg_can_elect.1010.a
+		retire_country_leader = yes
+		set_politics = {
+			ruling_party = social_conservative
+			elections_allowed = yes
+		}
+		custom_effect_tooltip = CAN_increase_conservatives_large_tt
+		CAN_popularity_conservatives_increase_large = yes
+		CAN_popularity_conservatives_increase_small = yes
+		hidden_effect = { complete_national_focus = CAN_return_of_tories }
+		set_variable = { global.CAN_parl_support_array^3 = 1 }
+		set_variable = { global.CAN_parl_support_array^4 = 1 }
+		set_variable = { global.CAN_parl_support_array^5 = 4 }
+		set_variable = { global.CAN_parl_support_array^6 = 4 }
+		
+		#	set_variable = { global.CAN_parl_seat_array^0 = 9 }
+		#	set_variable = { global.CAN_parl_seat_array^1 = 22 }
+		#	set_variable = { global.CAN_parl_seat_array^3 = 98 }
+		#	set_variable = { global.CAN_parl_seat_array^4 = 32 }
+		#	set_variable = { global.CAN_parl_seat_array^5 = 174 }
+		#	set_variable = { global.CAN_parl_seat_array^6 = 3 }
+		#if = {
+		#	limit = {
+		#		has_country_flag = CAN_1949_election_libs_laurent
+		#	}
+		#	set_variable = { global.CAN_parl_seat_array^0 = 9 }
+		#	set_variable = { global.CAN_parl_seat_array^1 = 22 }
+		#	set_variable = { global.CAN_parl_seat_array^3 = 98 }
+		#	set_variable = { global.CAN_parl_seat_array^4 = 32 }
+		#	set_variable = { global.CAN_parl_seat_array^5 = 174 }
+		#	set_variable = { global.CAN_parl_seat_array^6 = 3 }
+		#}
+		#else = {
+		#	set_variable = { global.CAN_parl_seat_array^0 = 14 }
+		#	set_variable = { global.CAN_parl_seat_array^1 = 34 }
+		#	set_variable = { global.CAN_parl_seat_array^3 = 29 }
+		#	set_variable = { global.CAN_parl_seat_array^4 = 87 }
+		#	set_variable = { global.CAN_parl_seat_array^5 = 171 }
+		#	set_variable = { global.CAN_parl_seat_array^6 = 3 }
+		#}
+		CAN_parl_adjust = yes
+		hidden_effect = {
+			news_event = {
+				id = worldnews.48
+				hours = 8
+			}
+		}
+		###Cabinet Setup
+		coal_add_auth_dem = yes
+		hidden_effect = {
+			remove_all_ministers = yes
+			add_ideas = CAN_George_A_Drew_hog_sco
+			add_ideas = CAN_Howard_Charles_Green_fm_mli
+			add_ideas = CAN_George_Nowlan_em_sco
+			add_ideas = CAN_William_Joseph_Browne_jm_sco
+			add_ideas = CAN_Walter_Dinsdale_im_sco
+		}
+	}
+}
+
+country_event = { #st laurent 1953 intro
+	id = krg_can_elect.1011
+	title = krg_can_elect.1011.t
+	desc = {
+		trigger = {
+			has_government = social_liberal
+		}
+		text = krg_can_elect.1011.d1
+	}
+	desc = {
+		trigger = {
+			NOT = { has_government = social_liberal }
+		}
+		text = krg_can_elect.1011.d2
+	}
+	picture = GFX_CAN_ce_laurent
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_elect.1011" }
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	immediate = {
+		hidden_effect = {
+			country_event = {
+				id = krg_can_elect.1012
+				days = 5
+			}
+		}
+	}
+
+	option = {
+		name = krg_can_elect.1011.a
+	}
+}
+
+country_event = { #diefenbaker 1953 intro
+	id = krg_can_elect.1012
+	title = krg_can_elect.1012.t
+	desc = krg_can_elect.1012.d
+	picture = GFX_CAN_ce_diefenbaker
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_elect.1012" }
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	immediate = {
+		hidden_effect = {
+			country_event = {
+				id = krg_can_elect.1013
+				days = 7
+			}
+		}
+	}
+
+	option = {
+		name = krg_can_elect.1012.a
+	}
+}
+
+country_event = { #douglas 1953 intro
+	id = krg_can_elect.1013
+	title = krg_can_elect.1013.t
+	desc = krg_can_elect.1013.d
+	picture = GFX_CAN_ce_ndp
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_elect.1013" }
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	immediate = {
+		hidden_effect = {
+			country_event = {
+				id = krg_can_elect.1014
+				days = 4
+			}
+		}
+	}
+
+	option = {
+		name = krg_can_elect.1013.a
+	}
+}
+
+country_event = { #bennett 1953 intro
+	id = krg_can_elect.1014
+	title = krg_can_elect.1014.t
+	desc = krg_can_elect.1014.d
+	picture = GFX_CAN_ce_upc
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_elect.1014" }
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	immediate = {
+		hidden_effect = {
+			country_event = {
+				id = krg_can_elect.1015
+				days = 9
+			}
+		}
+	}
+
+	option = {
+		name = krg_can_elect.1014.a
+	}
+}
+
+country_event = { #campaign begins event
+	id = krg_can_elect.1015
+	title = krg_can_elect.1015.t
+	desc = krg_can_elect.1015.d
+	picture = GFX_CAN_ce_laurent_campaigns
+	immediate = { 
+		log = "[GetDateText]: [Root.GetName]: krg_can_elect.1015"
+		clear_array = opponent_party_psuedo_pp_arr
+		add_to_array = { opponent_party_psuedo_pp_arr = 85 }
+		add_to_array = { opponent_party_psuedo_pp_arr = 85 }
+		add_to_array = { opponent_party_psuedo_pp_arr = 85 }
+		add_to_array = { opponent_party_psuedo_pp_arr = 85 }
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		ai_chance = { 
+			base = 30
+			modifier = {
+				has_game_rule = {
+					rule = CAN_1953_ELECTION
+					option = CAN_1953_NDP
+				}
+				factor = 1000
+			}
+		}
+		name = krg_can_elect.1015.a
+		custom_effect_tooltip = CAN_campaign_ccf_1953
+		unlock_decision_category_tooltip = CAN_elections
+		CAN_election_update_viewing_array = yes
+		set_variable = { CAN_election_party_support = 0 }
+		hidden_effect = {
+			activate_mission = CAN_elections_1953
+			set_country_flag = CAN_1953_election_start
+			set_country_flag = CAN_1953_election_support_ndp
+			if = {
+				limit = { is_ai = yes }
+				set_variable = { CAN_election_party_support = -1 }
+			}
+			country_event = { id = krg_can_elect.1 }
+		}
+	}
+	
+	option = {
+		ai_chance = { 
+			base = 30
+			modifier = {
+				has_game_rule = {
+					rule = CAN_1953_ELECTION
+					option = CAN_1953_LIB
+				}
+				factor = 1000
+			}
+		}
+		name = krg_can_elect.1015.b
+		custom_effect_tooltip = CAN_campaign_lib_1953
+		unlock_decision_category_tooltip = CAN_elections
+		CAN_election_update_viewing_array = yes
+		set_variable = { CAN_election_party_support = 1 }
+		hidden_effect = {
+			activate_mission = CAN_elections_1953
+			set_country_flag = CAN_1953_election_start
+			set_country_flag = CAN_1953_election_support_libs
+			if = {
+				limit = { is_ai = yes }
+				set_variable = { CAN_election_party_support = -1 }
+			}
+			country_event = { id = krg_can_elect.1 }
+		}
+	}
+	
+	option = {
+		ai_chance = { 
+			base = 30
+			modifier = {
+				has_game_rule = {
+					rule = CAN_1953_ELECTION
+					option = CAN_1953_PC
+				}
+				factor = 1000
+			}
+		}
+		name = krg_can_elect.1015.c
+		custom_effect_tooltip = CAN_campaign_con_1953
+		unlock_decision_category_tooltip = CAN_elections
+		CAN_election_update_viewing_array = yes
+		set_variable = { CAN_election_party_support = 2 }
+		hidden_effect = {
+			activate_mission = CAN_elections_1953
+			set_country_flag = CAN_1953_election_start
+			set_country_flag = CAN_1953_election_support_pc
+			if = {
+				limit = { is_ai = yes }
+				set_variable = { CAN_election_party_support = -1 }
+			}
+			country_event = { id = krg_can_elect.1 }
+		}
+	}
+
+	option = {
+		ai_chance = { 
+			base = 10
+			modifier = {
+				has_game_rule = {
+					rule = CAN_1953_ELECTION
+					option = CAN_1953_UNI
+				}
+				factor = 1000
+			}
+		}
+		name = krg_can_elect.1015.e
+		custom_effect_tooltip = CAN_campaign_uni_1953
+		unlock_decision_category_tooltip = CAN_elections
+		CAN_election_update_viewing_array = yes
+		set_variable = { CAN_election_party_support = 3 }
+		hidden_effect = {
+			activate_mission = CAN_elections_1953
+			set_country_flag = CAN_1953_election_start
+			set_country_flag = CAN_1953_election_support_dominionist
+			if = {
+				limit = { is_ai = yes }
+				set_variable = { CAN_election_party_support = -1 }
+			}
+			country_event = { id = krg_can_elect.1 }
+		}
+	}
+}
+
+country_event = { #NDP victory
+	id = krg_can_elect.1016
+	title = krg_can_elect.1016.t
+	desc = {
+		trigger = {
+			has_government = social_democrat
+		}
+		text = krg_can_elect.1016.d1
+	}
+	desc = {
+		trigger = {
+			NOT = { has_government = social_democrat }
+		}
+		text = krg_can_elect.1016.d2
+	}
+	picture = GFX_CAN_ce_ndp
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_elect.1016" }
+	immediate = {
+		log = "KRG_Event_Logging;1953 CAN Elections - NDP;[GetDateText];[ROOT.GetName];[FROM.GetName]"
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	immediate = {
+		hidden_effect = {
+			clr_country_flag = CAN_1953_election_start
+			set_country_flag = CAN_1953_election_done
+		}
+	}
+
+	option = {
+		name = krg_can_elect.1016.a
+		retire_country_leader = yes
+		set_politics = {
+			ruling_party = social_democrat
+			elections_allowed = yes
+		}
+		coal_add_rad_soc = yes
+		custom_effect_tooltip = CAN_increase_socdem_large_tt
+		CAN_popularity_socdem_increase_large = yes
+		CAN_popularity_socdem_increase_small = yes
+		hidden_effect = { complete_national_focus = CAN_Tommy_douglas_victory }
+		set_variable = { global.CAN_parl_support_array^0 = 4 }
+		set_variable = { global.CAN_parl_support_array^1 = 4 }
+		set_variable = { global.CAN_parl_support_array^2 = 1 }
+		set_variable = { global.CAN_parl_support_array^3 = 1 }
+		set_variable = { global.CAN_parl_support_array^4 = 1 }
+		set_variable = { global.CAN_parl_support_array^5 = 1 }
+		set_variable = { global.CAN_parl_support_array^6 = 1 }
+		if = {
+			limit = {
+				is_ai = yes
+			}
+			set_variable = { global.CAN_parl_seat_array^0 = 58 }
+			set_variable = { global.CAN_parl_seat_array^1 = 129 }
+			set_variable = { global.CAN_parl_seat_array^2 = 29 }
+			set_variable = { global.CAN_parl_seat_array^3 = 53 }
+			set_variable = { global.CAN_parl_seat_array^4 = 56 }
+			set_variable = { global.CAN_parl_seat_array^5 = 11 }
+			set_variable = { global.CAN_parl_seat_array^6 = 2 }
+		}
+		CAN_parl_adjust = yes
+		#hidden_effect = { ##TODO world events 1953
+		#	news_event = {
+		#		id = worldnews.45
+		#		hours = 8
+		#	}
+		#}
+		hidden_effect = {
+			remove_all_ministers = yes
+			add_ideas = CAN_Tommy_Douglas_hog_sde
+			add_ideas = CAN_William_Horace_Temple_fm_sde
+			add_ideas = CAN_Hazen_Argue_em_sde
+			add_ideas = CAN_Agnes_MacPhail_jm_sde
+			add_ideas = CAN_David_Lewis_im_sde
+			add_country_leader_role = {
+				Character = CAN_Tommy_Douglas
+				promote_leader = yes
+				Country_leader = {
+					ideology = social_democrat_subtype
+					expire="1982.1.1.1"
+				}
+			}
+		}
+	}
+}
+
+country_event = { #liberal victory 1953
+	id = krg_can_elect.1017
+	title = krg_can_elect.1017.t
+	desc = {
+		trigger = {
+			has_government = social_liberal
+		}
+		text = krg_can_elect.1017.d1
+	}
+	desc = {
+		trigger = {
+			NOT = { has_government = social_liberal }
+		}
+		text = krg_can_elect.1017.d2
+	}
+	picture = GFX_CAN_ce_lpc
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_elect.1017" }
+	immediate = {
+		log = "KRG_Event_Logging;1953 CAN Elections - Liberal;[GetDateText];[ROOT.GetName];[FROM.GetName]"
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	immediate = {
+		hidden_effect = {
+			clr_country_flag = CAN_1953_election_start
+			set_country_flag = CAN_1953_election_done
+		}
+	}
+	
+	option = {
+		name = krg_can_elect.1017.a
+		set_politics = {
+			ruling_party = social_liberal
+			elections_allowed = yes
+		}
+		coal_add_rev_rep = yes
+		custom_effect_tooltip = CAN_increase_liberals_large_tt
+		CAN_popularity_liberals_increase_large = yes
+		hidden_effect = { complete_national_focus = CAN_St_Laurent_victory_1953 }
+		set_variable = { global.CAN_parl_support_array^0 = 1 }
+		set_variable = { global.CAN_parl_support_array^1 = 1 }
+		set_variable = { global.CAN_parl_support_array^2 = 4 }
+		set_variable = { global.CAN_parl_support_array^3 = 4 }
+		set_variable = { global.CAN_parl_support_array^4 = 1 }
+		set_variable = { global.CAN_parl_support_array^5 = 1 }
+		set_variable = { global.CAN_parl_support_array^6 = 1 }
+		if = {
+			limit = {
+				is_ai = yes
+			}
+			set_variable = { global.CAN_parl_seat_array^0 = 12 }
+			set_variable = { global.CAN_parl_seat_array^1 = 24 }
+			set_variable = { global.CAN_parl_seat_array^2 = 44 }
+			set_variable = { global.CAN_parl_seat_array^3 = 128 }
+			set_variable = { global.CAN_parl_seat_array^4 = 104 }
+			set_variable = { global.CAN_parl_seat_array^5 = 18 }
+			set_variable = { global.CAN_parl_seat_array^6 = 8 }
+		}
+		CAN_parl_adjust = yes
+		#hidden_effect = { ##TODO world events 1953
+		#	news_event = {
+		#		id = worldnews.45
+		#		hours = 8
+		#	}
+		#}
+		hidden_effect = { #st laurent ministry doesn't need to change
+			remove_all_ministers = yes
+			add_ideas = CAN_Louis_St_Laurent_hog_sli
+			add_ideas = CAN_Lester_B_Pearson_fm_sli
+			add_ideas = CAN_Douglas_Abbott_em_sli
+			add_ideas = CAN_Stuart_Garson_jm_sli
+			add_ideas = CAN_Jean_Lesage_im_sli
+		}
+	}
+}
+
+country_event = { #conservative
+	id = krg_can_elect.1018
+	title = krg_can_elect.1018.t
+	desc = krg_can_elect.1018.d
+	picture = GFX_CAN_ce_pc
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_elect.1018" }
+	immediate = {
+		log = "KRG_Event_Logging;1953 CAN Elections - Conservative;[GetDateText];[ROOT.GetName];[FROM.GetName]"
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	immediate = {
+		hidden_effect = {
+			clr_country_flag = CAN_1953_election_start
+			set_country_flag = CAN_1953_election_done
+		}
+	}
+
+	option = {
+		name = krg_can_elect.1018.a
+		retire_country_leader = yes
+		set_politics = {
+			ruling_party = market_liberal
+			elections_allowed = yes
+		}
+		custom_effect_tooltip = CAN_increase_conservatives_large_tt
+		CAN_popularity_conservatives_increase_large = yes
+		hidden_effect = { complete_national_focus = CAN_Diefenbaker_victory_1953 }
+		set_variable = { global.CAN_parl_support_array^0 = 1 }
+		set_variable = { global.CAN_parl_support_array^1 = 1 }
+		set_variable = { global.CAN_parl_support_array^2 = 1 }
+		set_variable = { global.CAN_parl_support_array^3 = 1 }
+		set_variable = { global.CAN_parl_support_array^4 = 4 }
+		set_variable = { global.CAN_parl_support_array^5 = 1 }
+		set_variable = { global.CAN_parl_support_array^6 = 1 }
+		if = {
+			limit = {
+				is_ai = yes
+			}
+			set_variable = { global.CAN_parl_seat_array^0 = 13 }
+			set_variable = { global.CAN_parl_seat_array^1 = 22 }
+			set_variable = { global.CAN_parl_seat_array^2 = 26 }
+			set_variable = { global.CAN_parl_seat_array^3 = 76 }
+			set_variable = { global.CAN_parl_seat_array^4 = 174 }
+			set_variable = { global.CAN_parl_seat_array^5 = 21 }
+			set_variable = { global.CAN_parl_seat_array^6 = 6 }
+		}
+		CAN_parl_adjust = yes
+		#hidden_effect = { ##TODO world events 1953
+		#	news_event = {
+		#		id = worldnews.45
+		#		hours = 8
+		#	}
+		#}
+		hidden_effect = {
+			country_event = {
+				id = krg_can.91
+				days = 762
+			}
+			remove_all_ministers = yes
+			add_ideas = CAN_John_Diefenbaker_hog_mli
+			add_ideas = CAN_Sidney_Earle_Smith_fm_mli
+			add_ideas = CAN_Donald_Flemming_em_mli
+			add_ideas = CAN_Davie_Fulton_jm_mli
+			add_ideas = CAN_Ellen_Fairclough_im_mli
+		}
+	}
+}
+
+country_event = { #unionist
+	id = krg_can_elect.1019
+	title = krg_can_elect.1019.t
+	desc = krg_can_elect.1019.d
+	picture = GFX_CAN_ce_upc
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_elect.1019" }
+	immediate = {
+		log = "KRG_Event_Logging;1953 CAN Elections - Unionist;[GetDateText];[ROOT.GetName];[FROM.GetName]"
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	immediate = {
+		hidden_effect = {
+			clr_country_flag = CAN_1953_election_start
+			set_country_flag = CAN_1953_election_done
+		}
+	}
+
+	option = {
+		name = krg_can_elect.1019.a
+		retire_country_leader = yes
+		if = {
+			limit = { has_country_flag = CAN_change_drew_bennett }
+			add_country_leader_role = {
+				Character = CAN_wac_bennet
+				promote_leader = yes
+				Country_leader = {
+					ideology = social_conservative_subtype
+					expire="1982.1.1.1"
+				}
+			}
+		}
+		set_politics = {
+			ruling_party = social_conservative
+			elections_allowed = yes
+		}
+    	coal_add_auth_dem = yes
+		custom_effect_tooltip = CAN_increase_unionists_large_tt
+		CAN_popularity_unionists_increase_large = yes
+		CAN_popularity_unionists_increase_small = yes
+		hidden_effect = { complete_national_focus = CAN_bennett_victory_1953 }
+		set_variable = { global.CAN_parl_support_array^0 = 1 }
+		set_variable = { global.CAN_parl_support_array^1 = 1 }
+		set_variable = { global.CAN_parl_support_array^2 = 1 }
+		set_variable = { global.CAN_parl_support_array^3 = 1 }
+		set_variable = { global.CAN_parl_support_array^4 = 1 }
+		set_variable = { global.CAN_parl_support_array^5 = 4 }
+		set_variable = { global.CAN_parl_support_array^6 = 4 }
+		if = {
+			limit = {
+				is_ai = yes
+			}
+			set_variable = { global.CAN_parl_seat_array^0 = 9 }
+			set_variable = { global.CAN_parl_seat_array^1 = 22 }
+			set_variable = { global.CAN_parl_seat_array^3 = 98 }
+			set_variable = { global.CAN_parl_seat_array^4 = 32 }
+			set_variable = { global.CAN_parl_seat_array^5 = 174 }
+			set_variable = { global.CAN_parl_seat_array^6 = 3 }
+		}
+		CAN_parl_adjust = yes
+		#hidden_effect = { ##TODO world events 1953
+		#	news_event = {
+		#		id = worldnews.45
+		#		hours = 8
+		#	}
+		#}
+		hidden_effect = {
+			remove_all_ministers = yes
+			add_ideas = CAN_W_A_C_Bennett_hog_ade
+			add_ideas = CAN_Robert_N_Thompson_fm_ade
+			add_ideas = CAN_C_H_Douglas_em_ade
+			add_ideas = CAN_Real_Caouette_jm_ade
+			add_ideas = CAN_Solon_Earl_Low_im_ade
+			add_dynamic_modifier = { 
+				modifier = CAN_new_unionist_order
+			}
+		}
+	}
+}
+
+country_event = { #CAN year 2 (49)
+	id = krg_can.1
+	title = krg_can.1.t
+	desc = krg_can.1.d
+	picture = GFX_placeholder
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can.1" }
+	immediate = {
+		country_event = { #1949 federal election intro chain
+			id = krg_can_elect.1000
+			days = 78
+		}
+		country_event = { #canadian caribbean chain
+			id = krg_can.54
+			days = 207
+		}
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	hidden = yes
+
+	option = {
+		name = krg_can.1.a
+	}
+}
+
+country_event = { #CAN year 3 (50)
+	id = krg_can.2
+	title = krg_can.2.t
+	desc = krg_can.2.d
+	picture = GFX_placeholder
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can.2" }
+	immediate = {
+		country_event = {
+			id = krg_can_cal_alaska.1
+			days = 164
+			random_days = 50
+		}
+		country_event = { #pursuing the atom bomb
+			id = krg_can.26
+			days = 266
+			random_days = 30
+		}
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	hidden = yes
+
+	option = {
+		name = krg_can.2.a
+	}
+}
+
+country_event = { #CAN year 4 (51)
+	id = krg_can.3
+	title = krg_can.3.t
+	desc = krg_can.3.d
+	picture = GFX_placeholder
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can.3" }
+	immediate = {
+		ENT = {
+			country_event = { ##North Atlantic event chain
+				id = ent_dip.1
+				days = 55
+				random_days = 20
+			}
+		}
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	hidden = yes
+
+	option = {
+		name = krg_can.3.a
+	}
+}
+
+country_event = { #CAN year 5 (52)
+	id = krg_can.4
+	title = krg_can.4.t
+	desc = krg_can.4.d
+	picture = GFX_placeholder
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can.4" }
+	immediate = {
+		country_event = { #ccf > ndp
+			id = krg_can.85
+			days = 187 
+			random_days = 25
+		}
+		country_event = { ##Shakespearean Festival Opening Tremendous Success in Stratford
+			id = krg_can.39
+			days = 195
+		}
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	hidden = yes
+
+	option = {
+		name = krg_can.4.a
+	}
+}
+
+country_event = { #CAN year 6 (53)
+	id = krg_can.5
+	title = krg_can.5.t
+	desc = krg_can.5.d
+	picture = GFX_placeholder
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can.5" }
+	immediate = {
+		country_event = { #1953 election intro chain
+			id = krg_can_elect.1011
+			days = 136
+		}
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	hidden = yes
+
+	option = {
+		name = krg_can.5.a
+	}
+}
+
+country_event = { #CAN year 7 (54)
+	id = krg_can.6
+	title = krg_can.6.t
+	desc = krg_can.6.d
+	picture = GFX_placeholder
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can.6" }
+	immediate = {
+		country_event = { ##Hurricane Hazel
+			id = krg_can.90
+			days = 279
+		}
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	hidden = yes
+
+	option = {
+		name = krg_can.6.a
+	}
+}
+
+
+
+
+country_event = { ###The War is Over
+	id = krg_can.11
+	title = krg_can.11.t
+	desc = krg_can.11.d
+	picture = GFX_ce_can_war_over
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can.11" }
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_can.11.a
+	}
+}
+
+country_event = { ###Parliament Creates Special Flag Committee For New Flag
+	id = krg_can.12
+	title = krg_can.12.t
+	desc = krg_can.12.d
+	picture = GFX_ce_can_flag_debate_1
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can.12" }
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_can.12.a
+		hidden_effect = {
+			country_event = {
+			  id = krg_can.13
+			  days = 14
+			}
+		}
+	}
+}
+
+country_event = { ###Special Flag Committee Still Divided 
+	id = krg_can.13
+	title = krg_can.13.t
+	desc = krg_can.13.d
+	picture = GFX_ce_can_flag_debate_1
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can.13" }
+
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_can.13.a
+		hidden_effect = {
+			country_event = {
+			  id = krg_can.14
+			  days = 7
+			}
+		}
+	}
+}
+
+country_event = { ###Fist Fights on Parliament Hill Over Flag Debate!
+	id = krg_can.14
+	title = krg_can.14.t
+	desc = krg_can.14.d
+	picture = GFX_ce_can_flag_debate_2
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can.14" }
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_can.14.a
+		hidden_effect = {
+			country_event = {
+			  id = krg_can.15
+			  days = 14
+			}
+		}
+	}
+}
+
+country_event = { ###Special Flag Committee Decides!
+	id = krg_can.15
+	title = krg_can.15.t
+	desc = krg_can.15.d
+	picture = GFX_ce_can_flag_debate_1
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can.15" }
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_can.15.a
+		hidden_effect = {
+			country_event = {
+			  id = krg_can.16
+			  days = 14
+			}
+		}
+	}
+}
+
+country_event = { ###New Flag Passes in the Commons!
+	id = krg_can.16
+	title = krg_can.16.t
+	desc = krg_can.16.d
+	picture = GFX_ce_can_flag_debate_3
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can.16" }
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_can.16.a
+		hidden_effect = {
+			country_event = {
+			  id = krg_can.17
+			  days = 120
+			}
+		}
+	}
+}
+
+country_event = { ###The Inauguration of the National Flag
+	id = krg_can.17
+	title = krg_can.17.t
+	desc = krg_can.17.d
+	picture = GFX_ce_can_flag_debate_3
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can.17" }
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_can.17.a
+		add_political_power = 10
+		hidden_effect = {
+			CAN_set_flag_to_redesign_flag = yes
+		}
+		CAN_popularity_ruling_increase_small = yes
+	}
+}
+
+country_event = { ###CANADIAN CITIZENSHIP FIRST EVENT
+	id = krg_can.18
+	title = krg_can.18.t
+	desc = krg_can.18.d
+	picture = GFX_ce_can_citizens
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can.18" }
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_can.18.a
+		country_event = {
+			id = krg_can.19
+			days = 10
+		}
+	}
+}
+
+country_event = { ###The Prime Minister Approves the Citizenship Act
+	id = krg_can.19
+	title = krg_can.19.t
+	desc = krg_can.19.d
+	picture = GFX_ce_can_citizens
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can.19" }
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_can.19.a
+		country_event = {
+			id = krg_can.20
+			days = 5
+		}
+	}
+}
+
+country_event = { ###CCF proposes Citizenship Act Amendment
+	id = krg_can.20
+	title = krg_can.20.t
+	desc = krg_can.20.d
+	picture = GFX_ce_can_citizens
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can.20" }
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #Agree to the CCF's Proposal
+		name = krg_can.20.a
+		country_event = {
+			id = krg_can.21
+			days = 5
+		}
+	}
+	option = { # Stick with a more Conservative Approach
+		name = krg_can.20.b
+		country_event = {
+			id = krg_can.22
+			days = 5
+		}
+		custom_effect_tooltip = CAN_citizenship_conservative_tooltip
+	}
+}
+
+country_event = { ###Tories challenge the CCF's Amendment
+	id = krg_can.21
+	title = krg_can.21.t
+	desc = krg_can.21.d
+	picture = GFX_ce_can_citizens
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can.21" }
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_can.21.a
+		country_event = {
+			id = krg_can.24
+			days = 5
+		}
+		custom_effect_tooltip = CAN_citizenship_liberal_tooltip
+	}
+	option = {
+		name = krg_can.21.b
+		country_event = {
+			id = krg_can.22
+			days = 5
+		}
+		custom_effect_tooltip = CAN_citizenship_conservative_tooltip
+	}
+}
+
+country_event = { ###Conservative Citizenship Act Passes
+	id = krg_can.22
+	title = krg_can.22.t
+	desc = krg_can.22.d
+	picture = GFX_ce_can_citizens
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can.22" }
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_can.22.a
+		country_event = {
+			id = krg_can.23
+			days = 14
+		}
+	}
+}
+
+country_event = { ###Conservative Citizenship Act is Law
+	id = krg_can.23
+	title = krg_can.23.t
+	desc = krg_can.23.d
+	picture = GFX_ce_can_citizens
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can.23" }
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_can.23.a
+		set_country_flag = CAN_citizenship_conservative
+		custom_effect_tooltip = CAN_increase_conservatives_small_tt
+		CAN_popularity_conservatives_increase_small = yes
+	}
+}
+
+country_event = { ###Progressive Citizenship Act is Law
+	id = krg_can.24
+	title = krg_can.24.t
+	desc = krg_can.24.d
+	picture = GFX_ce_can_citizens
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can.24" }
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_can.24.a
+		country_event = {
+			id = krg_can.25
+			days = 14
+		}
+	}
+}
+
+country_event = { ###Progressive Citizenship Act is Law
+	id = krg_can.25
+	title = krg_can.25.t
+	desc = krg_can.25.d
+	picture = GFX_ce_can_citizens
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can.25" }
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_can.25.a
+		set_country_flag = CAN_citizenship_liberal
+		custom_effect_tooltip = CAN_increase_socdem_small_tt
+		CAN_popularity_socdem_increase_small = yes
+	}
+}
+
+country_event = { ###Pursuing the Atomb Bomb
+	id = krg_can.26
+	title = krg_can.26.t
+	desc = krg_can.26.d
+	picture = GFX_ce_nuclear_bomb
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can.26" }
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_can.26.a
+		hidden_effect = {
+			country_event = {
+				id = krg_can.27
+				days = 42
+			}
+		}
+	}
+} 
+
+country_event = { ###Uranium from Port Radium
+	id = krg_can.27
+	title = krg_can.27.t
+	desc = krg_can.27.d
+	picture = GFX_ce_nuclear_bomb
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can.27" }
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_can.27.a
+		hidden_effect = {
+			country_event = {
+				id = krg_can.28
+				days = 42
+			}
+		}
+	}
+}
+
+country_event = { ###Stealing from the Germans
+	id = krg_can.28
+	title = krg_can.28.t
+	desc = krg_can.28.d
+	picture = GFX_ce_nuclear_scientists
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can.28" }
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_can.28.a
+			hidden_effect = {
+				country_event = {
+					id = krg_can.33
+					days = 70
+				}
+				random_list = {
+					50 = {
+						country_event = {
+							id = krg_can.29
+							days = 35
+							}
+						}
+					50 = {
+						country_event = {
+							id = krg_can.30
+							days = 35
+						}
+					}
+				}
+			}	
+		}
+	option = {
+		name = krg_can.28.b
+		hidden_effect = {
+			country_event = {
+				id = krg_can.33
+				days = 70
+			}
+		}
+	}
+}
+
+country_event = { ###Succeed Stealing Knowledge
+	id = krg_can.29
+	title = krg_can.29.t
+	desc = krg_can.29.d
+	picture = GFX_ce_nuclear_scientists
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can.29" }
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_can.29.a
+		add_tech_bonus = {
+			name = "Stolen Nuclear Secrets"
+			uses = 1
+			bonus = 1
+			category = nuclear
+		}
+	}
+}
+
+country_event = { ###Failure Stealing Knowledge
+	id = krg_can.30
+	title = krg_can.30.t
+	desc = krg_can.30.d
+	picture = GFX_ce_nuclear_scientists
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can.30" }
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_can.30.a
+		add_tech_bonus = {
+			name = nuclear_bonus
+			uses = 1
+			bonus = 0.1
+			category = nuclear
+		}
+		
+		#other bad stuff Im not gonna code rn
+	}
+}
+
+country_event = { ###Finding New Source
+	id = krg_can.31
+	title = krg_can.31.t
+	desc = krg_can.31.d
+	picture = GFX_ce_nuclear_bomb
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can.31" }
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_can.31.a
+		add_stability = 0.05
+		#some other stuff from unimplemented mechanics
+	}
+}
+
+country_event = { ###Training our own scientists
+	id = krg_can.32
+	title = krg_can.32.t
+	desc = krg_can.32.d
+	picture = GFX_ce_nuclear_scientists
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can.32" }
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_can.32.a
+		#tbd
+	}
+}
+
+country_event = { ###Allied Sources
+	id = krg_can.33
+	title = krg_can.33.t
+	desc = krg_can.33.d
+	picture = GFX_ce_nuclear_scientists
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can.33" }
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_can.33.a
+		hidden_effect = {
+			country_event = {
+				id = krg_can.34
+				days = 28
+			}
+		}
+	}
+}
+
+country_event = { ###Where to test
+	id = krg_can.34
+	title = krg_can.34.t
+	desc = krg_can.34.d
+	picture = GFX_ce_nuclear_test_site
+	immediate = { 
+		log = "[GetDateText]: [Root.GetName]: krg_can.34" 
+		hidden_effect = {
+			set_country_flag = nuclear_power
+		}
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_can.34.a
+		hidden_effect = {
+			country_event = {
+				id = krg_can.35
+				days = 35
+			}
+			set_global_flag = CAN_nuclear_buffin
+		}
+	}
+	option = {
+		name = krg_can.34.b
+		hidden_effect = {
+			country_event = {
+				id = krg_can.35
+				days = 35
+			}
+			set_global_flag = CAN_nuclear_sahara
+		}
+	}
+	option = {
+		name = krg_can.34.c
+		hidden_effect = {
+			country_event = {
+				id = krg_can.35
+				days = 35
+			}
+			set_global_flag = CAN_nuclear_pacific
+		}
+	}
+}
+
+country_event = { ###We have the bomb!
+	id = krg_can.35
+	title = krg_can.35.t
+	desc = krg_can.35.d
+	picture = GFX_ce_nuclear_bomb
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can.35" }
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_can.35.a
+		
+		add_stability = -0.05
+		news_event = {
+			id = worldnews.92
+			hours = 6
+		}
+		set_technology = {
+			bomb_research = 1
+			nukes = 1
+		}
+		if = {
+			limit = {
+				has_global_flag = CAN_nuclear_sahara
+			}
+			NFA = {
+				add_tech_bonus = {
+					name = nuclear_bonus
+					uses = 1
+					bonus = 0.25
+					category = nuclear
+				}
+			}
+		} 
+		else_if = {
+			limit = {
+				has_global_flag = CAN_nuclear_pacific
+			}
+			AST = {
+				add_tech_bonus = {
+					name = nuclear_bonus
+					uses = 1
+					bonus = 0.25
+					category = nuclear
+				}
+			}
+		}
+	}
+}
+
+country_event = { ###Sahara Desert
+	id = krg_can.36
+	title = krg_can.36.t
+	desc = krg_can.36.d
+	picture = GFX_ce_nuclear_bomb
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can.35" }
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_can.36.a
+		
+		add_stability = -0.05
+		news_event = {
+			id = worldnews.92
+			hours = 6		
+		}
+	}
+}
+
+country_event = { ###Pacific Ocean
+	id = krg_can.37
+	title = krg_can.37.t
+	desc = krg_can.37.d
+	picture = GFX_ce_nuclear_bomb
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can.37" }
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_can.37.a
+		
+		add_stability = -0.05
+		news_event = {
+			id = worldnews.92
+			hours = 6
+		}
+	}
+}
+
+country_event = { ###Australian Outback
+	id = krg_can.38
+	title = krg_can.38.t
+	desc = krg_can.38.d
+	picture = GFX_ce_nuclear_bomb
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can.38" }
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_can.38.a
+		
+		add_stability = -0.05
+		news_event = {
+			id = worldnews.92
+			hours = 6
+		}
+	}
+}
+
+country_event = { ###Shakespearean Festival Opening Tremendous Success in Stratford
+	id = krg_can.39
+	title = krg_can.39.t
+	desc = krg_can.39.d
+	picture = GFX_CAN_shakespeare
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can.39" }
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_can.39.a
+		CAN_popularity_conservatives_increase_small = yes
+		custom_effect_tooltip = CAN_increase_conservatives_small_tt
+	}
+}
+country_event = { ###Shakespearean Festival Opening Tremendous Success in Stratford
+	id = krg_can.40
+	title = krg_can.40.t
+	desc = krg_can.40.d
+	picture = GFX_CAN_hockey_riots
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can.40" }
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_can.40.a
+		
+	}
+}
+ 
+country_event = { ###Brit immigration event
+	id = krg_can.41
+	title = krg_can.41.t
+	desc = krg_can.41.d
+	#picture =
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can.41" }
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	trigger = {
+		AND = {
+			date > 1954.07.01
+			tag = CAN
+		}
+	}
+	
+	option = {
+		name = krg_can.41.a
+		add_manpower = 1000
+	}
+}
+
+country_event = { ###Montgomery Address Parliament
+	id = krg_can.42
+	title = krg_can.42.t
+	desc = krg_can.42.d
+	picture = GFX_ce_can_monty_addresses_parliament
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can.42" }
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = krg_can.42.a
+		hidden_effect = {
+			news_event = {
+				id = krg_can.43
+				days = 20
+			}
+		}
+	}
+}
+
+news_event = { ###Debate on Bill C-22 Begins
+	id = krg_can.43
+	title = krg_can.43.t
+	desc = krg_can.43.d
+	picture = GFX_ne_pearson_speech
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can.43" }
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = krg_can.43.a
+		hidden_effect = {
+			CAN = {
+				country_event = {
+					id = krg_can.44
+					days = 0
+				}
+			}
+		}
+	}
+}
+
+country_event = { ###Bill C-22 - Funding
+	id = krg_can.44
+	title = krg_can.44.t
+	desc = krg_can.44.d
+	picture = GFX_CAN_ce_parliament
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can.44" }
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = krg_can.44.a
+		hidden_effect = {
+			country_event = {
+				id = krg_can.45
+				days = 5
+			}
+		}
+	}
+	
+	option = {
+		name = krg_can.44.b
+		hidden_effect = {
+			country_event = {
+				id = krg_can.45
+				days = 5
+			}
+		}
+	}
+	
+	option = {
+		name = krg_can.44.c
+		hidden_effect = {
+			country_event = {
+				id = krg_can.45
+				days = 5
+			}
+		}
+	}
+}
+
+country_event = { ###Bill C-22 - Repayment
+	id = krg_can.45
+	title = krg_can.45.t
+	desc = krg_can.45.d
+	picture = GFX_CAN_ce_parliament
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can.45" }
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = krg_can.45.a
+		hidden_effect = {
+			country_event = {
+				id = krg_can.46
+				days = 5
+			}
+		}
+	}
+	
+	option = {
+		name = krg_can.45.b
+		hidden_effect = {
+			country_event = {
+				id = krg_can.46
+				days = 5
+			}
+		}
+	}
+}
+
+country_event = { ###Bill C-22 - Recipients
+	id = krg_can.46
+	title = krg_can.46.t
+	desc = krg_can.46.d
+	picture = GFX_CAN_ce_parliament
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can.46" }
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = krg_can.46.a
+		hidden_effect = {
+			news_event = {
+				id = krg_can.47
+				days = 5
+			}
+		}
+	}
+	
+	option = {
+		name = krg_can.46.b
+		hidden_effect = {
+			news_event = {
+				id = krg_can.47
+				days = 5
+			}
+		}
+	}
+}
+
+news_event = { ###Bill C-22 Passes!
+	id = krg_can.47
+	title = krg_can.47.t
+	desc = krg_can.47.d
+	picture = GFX_ne_can_parliament
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can.47" }
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = krg_can.47.a
+		
+		unlock_decision_category_tooltip = CAN_montgomery_plan_tab
+		hidden_effect = {
+			set_country_flag = CAN_C-22_Passed
+			NFA = { set_country_flag = montgomery_plan_accepted }
+			ENG = { set_country_flag = montgomery_plan_accepted }
+			SIC = { set_country_flag = montgomery_plan_accepted }
+			POR = { set_country_flag = montgomery_plan_accepted }
+			GRE = { set_country_flag = montgomery_plan_accepted }
+			ICE = { set_country_flag = montgomery_plan_accepted }
+			SPR = { set_country_flag = montgomery_plan_accepted }
+			NOR = { set_country_flag = montgomery_plan_accepted }
+			IRE = { set_country_flag = montgomery_plan_accepted }
+			news_event = {
+				id = worldnews.286
+				days = 2
+			}
+		}
+	}
+}
+
+news_event = { ###Bill C-22 Fails!
+	id = krg_can.48
+	title = krg_can.48.t
+	desc = krg_can.48.d
+	picture = GFX_ne_can_parliament
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can.48" }
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = krg_can.48.a
+		set_country_flag = CAN_C-22_Failed
+	}
+}
+
+#country_event = { ###Send Military Aid to [country]?
+#	id = krg_can.49
+#	title = krg_can.49.t
+#	desc = krg_can.49.d
+#	#picture =
+#	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can.49" }
+#	
+#	is_triggered_only = yes
+#	fire_only_once = yes
+#	
+#	option = {
+#		name = krg_can.49.a
+#		ENG = {
+#			country_event = {
+#				id = krg_can.51
+#				days = 0
+#			}
+#		}
+#	}
+#	option = {
+#		name = krg_can.49.b
+#		ENG = {
+#			country_event = {
+#				id = krg_can.51
+#				days = 0
+#			}
+#		}
+#	}
+#	option = {
+#		name = krg_can.49.c
+#		ENG = {
+#			country_event = {
+#				id = krg_can.51
+#				days = 0
+#			}
+#		}
+#	}
+#	option = {
+#		name = krg_can.49.d
+#		ENG = {
+#			country_event = {
+#				id = krg_can.51
+#				days = 0
+#			}
+#		}
+#	}
+#	option = {
+#		name = krg_can.49.e
+#		ENG = {
+#			country_event = {
+#				id = krg_can.51
+#				days = 0
+#			}
+#		}
+#	}
+#}
+#
+#country_event = { ###Send Economic Aid to [country]?
+#	id = krg_can.50
+#	title = krg_can.50.t
+#	desc = krg_can.50.d
+#	#picture =
+#	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can.50" }
+#	
+#	is_triggered_only = yes
+#	fire_only_once = yes
+#	
+#	option = {
+#		name = krg_can.50.a
+#		ENG = {
+#			country_event = {
+#				id = krg_can.51
+#				days = 0
+#			}
+#		}
+#	}
+#	option = {
+#		name = krg_can.50.b
+#		ENG = {
+#			country_event = {
+#				id = krg_can.51
+#				days = 0
+#			}
+#		}
+#	}
+#	option = {
+#		name = krg_can.50.c
+#		ENG = {
+#			country_event = {
+#				id = krg_can.51
+#				days = 0
+#			}
+#		}
+#	}
+#}
+#
+#country_event = { ###Canadian Aid Arrives
+#	id = krg_can.51
+#	title = krg_can.51.t
+#	desc = krg_can.51.d
+#	#picture =
+#	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can.51" }
+#	
+#	is_triggered_only = yes
+#	fire_only_once = yes
+#	
+#	option = {
+#		name = krg_can.51.a
+#	}
+#}
+
+country_event = { ###Expanding the Foreign Office
+	id = krg_can.52
+	title = krg_can.52.t
+	desc = krg_can.52.d
+	picture = GFX_CAN_ce_accord_signed
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can.52" }
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = krg_can.52.a
+	}
+	option = {
+		name = krg_can.52.b
+	}
+}
+
+country_event = { ###Remaking the senate
+	id = krg_can.53
+	title = krg_can.53.t
+	desc = krg_can.53.d
+	picture = GFX_ce_house_of_parliament_1
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can.53" }
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	
+	option = {
+		name = krg_can.53.a
+		ENG = {
+			country_event = {
+				id = krg_eng.301
+				days = 2
+			}
+		}
+	}
+}
+
+country_event = {###Status of the Canadian Carribean Territories
+	id = krg_can.54
+	title = krg_can.54.t
+	desc = krg_can.54.d
+	picture = GFX_CAN_ce_caribbean
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can.54" }
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	
+	
+	option = {
+		name = krg_can.54.a
+		hidden_effect = {
+			country_event = {
+				id = krg_can.55
+				days = 56
+			}
+		}
+	}
+}
+
+country_event = {###West Indian Unionists Push to Join Confederation
+	id = krg_can.55
+	title = krg_can.55.t
+	desc = krg_can.55.d
+	picture = GFX_CAN_ce_caribbean
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can.55" }
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	
+	
+	option = { 
+		name = krg_can.55.a
+		hidden_effect = {
+			country_event = {
+				id = krg_can.56
+				days = 28
+			}
+		}
+	}
+}
+
+country_event = {###The Canadian Caribbean Act
+	id = krg_can.56
+	title = krg_can.56.t
+	desc = krg_can.56.d
+	picture = GFX_CAN_ce_parliament
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can.56" }
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	
+	
+	option = { 
+		name = krg_can.56.a
+		country_event = {
+			id = krg_can.57
+			days = 3
+		}
+	}
+	
+	option = { 
+		name = krg_can.56.b
+		country_event = {
+			id = krg_can.58
+			days = 3
+		} 
+	}
+	
+	option = { 
+		name = krg_can.56.c
+		country_event = {
+			id = krg_can.59
+			days = 3
+		} 
+	} 
+} 
+
+country_event = {###The Canadian Caribbean Act Passes!
+	id = krg_can.57 
+	title = krg_can.57.t
+	desc = krg_can.57.d 
+	picture = GFX_CAN_ce_parliament
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can.57" }
+	
+	is_triggered_only = yes
+	fire_only_once = yes 
+	
+	 
+	
+	option = { 
+		name = krg_can.57.a
+		add_political_power = 20
+		add_stability = 0.02
+		CAN_popularity_socdem_increase_small = yes
+		custom_effect_tooltip = CAN_increase_socdem_small_tt
+		CAN_popularity_liberals_increase_small = yes
+		custom_effect_tooltip = CAN_increase_liberals_small_tt
+		add_state_core = 308
+		add_state_core = 692
+		add_state_core = 690
+		add_state_core = 696
+		add_state_core = 847
+		CAN_parl_add_caribbean = yes
+		#country_event = {
+		#	id = krg_can.72
+		#	days = 3
+		#}
+	} 
+} 
+
+country_event = {###The Canadian Caribbean Act Passes With Some Compromises
+	id = krg_can.58
+	title = krg_can.58.t
+	desc = krg_can.58.d
+	picture = GFX_CAN_ce_parliament
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can.58" }
+	
+	is_triggered_only = yes
+	fire_only_once = yes 
+	
+	trigger = { 
+		tag = CAN
+	} 
+	
+	option = {
+		name = krg_can.58.a
+		country_event = {
+			id = krg_can.60
+			days = 3650
+		}
+		add_stability = 0.01 
+		CAN_popularity_liberals_increase_small = yes
+		custom_effect_tooltip = CAN_increase_liberals_small_tt
+		CAN_popularity_conservatives_increase_small = yes
+		custom_effect_tooltip = CAN_increase_conservatives_small_tt
+		add_state_core = 345
+		add_state_core = 692
+		add_state_core = 690
+		add_state_core = 696
+		#country_event = {
+		#	id = krg_can.72
+		#	days = 3
+		#}
+	} 
+} 
+
+country_event = {###The Canadian Caribbean Act Fails 
+	id = krg_can.59
+	title = krg_can.59.t 
+	desc = krg_can.59.d 
+	picture = GFX_CAN_ce_parliament
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can.59" }
+	
+	is_triggered_only = yes 
+	fire_only_once = yes 
+	
+	trigger = { 
+		tag = CAN 
+	} 
+	
+	option = { 
+		name = krg_can.59.a 
+		add_stability = -0.02 
+		CAN_popularity_socdem_increase_small = yes
+		custom_effect_tooltip = CAN_increase_socdem_small_tt
+		CAN_popularity_liberals_increase_small = yes
+		custom_effect_tooltip = CAN_increase_liberals_small_tt
+		country_event = {
+			id = krg_can.62
+			days = 289
+		}
+	} 
+} 
+
+country_event = {###Carribean Territories Press for Greater Autonomy
+	id = krg_can.60
+	title = krg_can.60.t
+	desc = krg_can.60.d
+	picture = GFX_CAN_ce_caribbean
+	immediate = { log = "[GetDateText]: [Root.GetName]:krg_can.60" }
+	
+	is_triggered_only = yes
+	fire_only_once = yes 
+	
+	 
+	
+	option = {
+		name = krg_can.60.a
+		country_event = {
+			id = krg_can.65
+			days = 270
+		}
+	} 
+}
+
+country_event = {###"A New Entente for the New Age"
+	id = krg_can.61
+	title = krg_can.61.t
+	desc = krg_can.61.d
+	picture = GFX_CAN_ce_accord_signed
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can.61" }
+	
+	is_triggered_only = yes
+	fire_only_once = yes 
+	
+	 
+	
+	option = {
+		name = krg_can.61.a
+	} 
+} 
+
+country_event = {###"Sovereignty protests breakout In the Caribbean"
+	id = krg_can.62
+	title = krg_can.62.t
+	desc = krg_can.d 
+	picture = GFX_ce_Anti_War_Protests
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can.61" }
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	
+
+	option = { 
+		name = krg_can.62.a
+		add_stability = -0.02
+		CAN_popularity_socdem_increase_small = yes
+		custom_effect_tooltip = CAN_increase_socdem_small_tt
+		country_event = {
+			id = krg_can.63
+			days = 150
+		}
+	}
+}
+
+country_event = {###"The Canadian Caribbean act enters Parliament hill once more"
+	id = krg_can.63
+	title = krg_can.63.t
+	desc = krg_can.63.d
+	picture = GFX_CAN_ce_parliament
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can.63" }
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	trigger = {
+		tag = CAN	
+	}
+
+	option = {
+		name = krg_can.63.a
+		add_stability = 0.02
+		CAN_popularity_socdem_increase_small = yes
+		custom_effect_tooltip = CAN_increase_socdem_small_tt
+
+		country_event = {
+			id = krg_can.64
+			days = 3
+		}
+	}
+
+	option = {
+		name = krg_can.63.b
+		add_stability = 0.01
+		CAN_popularity_socdem_increase_medium = yes
+		custom_effect_tooltip = CAN_increase_socdem_medium_tt
+
+		country_event = {
+			id = krg_can.68
+			days = 3
+		}
+	}
+
+	option = {
+		name = krg_can.63.c
+		add_stability = -0.02
+		CAN_popularity_socdem_increase_large = yes
+		custom_effect_tooltip = CAN_increase_socdem_large_tt
+		country_event = {
+			id = krg_can.69
+			days = 3
+		}
+	}
+}
+
+country_event = {###The Canadian Caribbean Act passes before further destabalization
+	id = krg_can.64
+	title = krg_can.64.t
+	desc = krg_can.64.d
+	picture = GFX_CAN_ce_parliament
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can.64" }
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	
+
+	option = {
+		name = krg_can.64.a
+		add_stability = 0.02
+		CAN_popularity_socdem_increase_tiny = yes
+		custom_effect_tooltip = CAN_increase_socdem_tiny_tt
+		CAN_popularity_liberals_increase_tiny = yes
+		custom_effect_tooltip = CAN_increase_liberals_tiny_tt
+		add_state_core = 345
+		add_state_core = 692
+		add_state_core = 690
+		add_state_core = 696
+		CAN_parl_add_caribbean = yes
+		#country_event = {
+		#	id = krg_can.72
+		#	days = 3
+		#}
+	}
+}
+
+country_event = {###"The Caribbean Provincehood Act enters Parliament hill"
+	id = krg_can.65
+	title = krg_can.65.t
+	desc = krg_can.65.d
+	picture = GFX_CAN_ce_parliament
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can.65" }
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	
+
+	option = {
+		name = krg_can.65.a
+		add_stability = 0.01
+		CAN_popularity_liberals_increase_small = yes
+		custom_effect_tooltip = CAN_increase_liberals_small_tt
+	}
+
+	option = { 
+		name = krg_can.65.b
+		add_stability = -0.01
+		CAN_popularity_socdem_increase_small = yes
+		custom_effect_tooltip = CAN_increase_socdem_small_tt
+	}
+}
+
+country_event = {###"Sovereignty riots breakout In The Canadian Carribean"
+	id = krg_can.66
+	title = krg_can.66.t
+	desc = krg_can.66.d
+	picture = GFX_ce_Anti_War_Protests
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can.66" }
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	
+
+	option = {
+		name = krg_can.66.a
+		add_stability = -0.03
+		CAN_popularity_socdem_increase_small = yes
+		custom_effect_tooltip = CAN_increase_socdem_small_tt
+		country_event = {
+			id = krg_can.67
+			days = 120
+		}
+	}
+}
+
+country_event = {###Amid riots in the Caribbean, the Canadian Caribbean Act enters Parliament once more
+	id = krg_can.67
+	title = krg_can.67.t
+	desc = krg_can.67.d
+	picture = GFX_CAN_ce_parliament
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can.67" }
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	trigger = { 
+		tag = CAN
+	}
+
+	option = {
+		name = krg_can.67.a
+		add_stability = 0.03
+		CAN_popularity_socdem_increase_small = yes
+		custom_effect_tooltip = CAN_increase_socdem_small_tt
+		country_event = {
+			id = krg_can.71 
+			days = 3
+		}
+	}
+
+	option = {
+		name = krg_can.67.b
+		add_stability = 0.01
+		CAN_popularity_conservatives_decrease_small = yes
+		custom_effect_tooltip = CAN_decrease_conservatives_small_tt
+		country_event = {
+			id = krg_can.70
+			days = 3
+		}
+	}
+}
+
+country_event = {###A compromised Canadian Caribbean Act passes Parliament amid unrest
+	id = krg_can.68
+	title = krg_can.68.t
+	desc = krg_can.68.d
+	picture = GFX_CAN_ce_parliament
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can.68" }
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	
+
+	option = {
+		name = krg_can.68.a
+		add_stability = 0.02
+		CAN_popularity_ruling_increase_small = yes
+		country_event = {
+			id = krg_can.60
+			days = 3650
+		}
+		add_state_core = 345
+		add_state_core = 692
+		add_state_core = 690
+		add_state_core = 696
+		CAN_parl_add_caribbean = yes
+		#country_event = {
+		#	id = krg_can.72
+		#	days = 3
+		#}
+	}
+}
+
+country_event = {###The Canadian Caribbean Act is defeated once more!
+	id = krg_can.69
+	title = krg_can.69.t
+	desc = krg_can.69.d
+	picture = GFX_CAN_ce_parliament
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can.69" }
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	
+
+	option = {
+		name = krg_can.69.a
+		add_stability = -0.02
+		CAN_popularity_ruling_decrease_small = yes
+		country_event = {
+			id = krg_can.66
+			days = 90
+		}
+	}
+}
+
+country_event = {###Despite chaos in the Caribbean, only compromised Caribbean act passes
+	id = krg_can.70
+	title = krg_can.70.t
+	desc = krg_can.70.d
+	picture = GFX_CAN_ce_parliament
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can.70" }
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	
+
+	option = {
+		name = krg_can.70.a
+		add_stability = 0.01
+		CAN_popularity_socdem_decrease_tiny = yes
+		custom_effect_tooltip = CAN_decrease_socdem_tiny_tt
+		add_state_core = 345
+		add_state_core = 692
+		add_state_core = 690
+		add_state_core = 696
+		CAN_parl_add_caribbean = yes
+		#country_event = {
+		#	id = krg_can.72
+		#	days = 3
+		#}
+	}
+}
+
+country_event = {###The Canadian Caribbean is finally granted provincehood!
+	id = krg_can.71
+	title = krg_can.71.t
+	desc = krg_can.71.d
+	picture = GFX_CAN_ce_caribbean
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can.71" }
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	
+
+	option = {
+		name = krg_can.71.a
+		add_stability = 0.02
+		CAN_popularity_socdem_decrease_medium = yes
+		custom_effect_tooltip = CAN_decrease_scodem_medium_tt
+		CAN_popularity_liberals_increase_medium = yes
+		custom_effect_tooltip = CAN_increase_liberals_medium_tt
+		add_state_core = 345
+		add_state_core = 692
+		add_state_core = 690
+		add_state_core = 696
+		CAN_parl_add_caribbean = yes
+		#country_event = {
+		#	id = krg_can.72
+		#	days = 3
+		#}
+	}
+}
+
+#country_event = {###What to do with the economies of Canada's Caribbean"
+#	id = krg_can.72
+#	title = krg_can.72.t
+#	desc = krg_can.72.d
+#	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can.72" }
+#
+#	is_triggered_only = yes
+#	fire_only_once = yes
+#
+#	
+#
+#	option = {
+#		name = krg_can.72.a
+#		country_event = {
+#			id = krg_can.73
+#			days = 720
+#		}
+#		set_country_flag = caribbean_tourism_focus
+#	}
+#	option = {
+#		name = krg_can.72.b
+#		country_event = {
+#			id = krg_can.74
+#			days = 720
+#		}
+#		set_country_flag = caribbean_domestic_industry_focus
+#	}
+#}
+#
+#country_event = {###Local Industrialists approach Prime Minister once more
+#	id = krg_can.73
+#	title = krg_can.73.t
+#	desc = krg_can.73.d
+#	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can.73" }
+#
+#	is_triggered_only = yes
+#	fire_only_once = yes
+#
+#	
+#
+#	option = { #Bermuda
+#		name = krg_can.73.a
+#		696 = {
+#			set_state_flag = CAN_industry_focused_state
+#		}
+#		country_event = {
+#			id = krg_can.79
+#			days = 1
+#		}
+#	}
+#	option = { #Bahamas
+#		name = krg_can.73.b
+#		690 = {
+#			set_state_flag = CAN_industry_focused_state
+#		}
+#		country_event = {
+#			id = krg_can.79
+#			days = 1
+#		}
+#	}
+#	option = { #Lesser Antilles
+#		name = krg_can.73.c
+#		692 = {
+#			set_state_flag = CAN_industry_focused_state
+#		}
+#		country_event = {
+#			id = krg_can.79
+#			days = 1 
+#		}
+#	}
+#	option = { #Barbados
+#		name = krg_can.73.d
+#		308 = {
+#			set_state_flag = CAN_industry_focused_state
+#		}
+#		
+#	}
+#}
+#
+#country_event = {###Business men once more return to the Prime Minister's offer to pitch tourism, in arms with local industrialists
+#	id = krg_can.74
+#	title = krg_can.74.t
+#	desc = krg_can.74.d
+#	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can.74" }
+#
+#	is_triggered_only = yes
+#	fire_only_once = yes 
+#
+#	option = { #Bermuda
+#		name = krg_can.74.a
+#		696 = {
+#			set_state_flag = CAN_tourism_focused_state
+#		}
+#		country_event = {
+#			id = krg_can.80
+#			days = 1
+#		}
+#	}
+#
+#	option = { #Bahamas
+#		name = krg_can.74.b
+#		690 = {
+#			set_state_flag = CAN_tourism_focused_state
+#		}
+#		country_event = {
+#			id = krg_can.80
+#			days = 1
+#		}
+#	}
+#	option = { #Lesser Antilles
+#		name = krg_can.74.c
+#		692 = {
+#			set_state_flag = CAN_tourism_focused_state
+#		}
+#		country_event = {
+#			id = krg_can.80
+#			days = 1 
+#		}
+#	}
+#	option = { #Barbados
+#		name = krg_can.74.d
+#		308 = {
+#			set_state_flag = CAN_tourism_focused_state
+#		}
+#		country_event = {
+#			id = krg_can.80
+#			days = 1 
+#		}
+#	} 
+#}
+
+country_event = {
+	id = krg_can.75
+	title = krg_can.75.t
+	desc = krg_can.75.d
+	picture = GFX_ce_GLG_detroit
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_can.75" }
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_can.75.a
+	}
+}
+
+country_event = {###"Voluntary Exile?"
+	id = krg_can.76
+	title = krg_can.76.t
+	desc = krg_can.76.d
+	picture = GFX_event_NEE_ticonderoga
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can.76" }
+	
+	is_triggered_only = yes
+	fire_only_once = yes 
+	
+	 
+	
+	option = {
+		name = krg_can.76.a
+	} 
+} 
+
+
+
+
+country_event = {
+	id = krg_can.77
+	title = krg_can.77.t
+	desc = krg_can.77.d
+	picture = GFX_CAN_ce_ccf
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can.77"}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+
+
+	option = {
+		name = krg_can.77.a
+	}
+}
+
+country_event = {###An Old Dominion and a New Republic
+	id = krg_can.78
+	title = krg_can.78.t
+	desc = krg_can.78.d
+	picture = GFX_CAN_ce_laurent
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can.78" }
+	
+	is_triggered_only = yes
+	fire_only_once = yes 
+	
+	 
+	
+	option = {
+		name = krg_can.78.a
+		add_opinion_modifier = {
+			target = IND
+			modifier = large_increase
+		}
+	} 
+} 
+
+#country_event = {###Local Industrialists approach Prime Minister once again for the last time
+#	id = krg_can.79
+#	title = krg_can.79.t
+#	desc = krg_can.79.d
+#	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can.79" }
+#
+#	is_triggered_only = yes
+#	fire_only_once = yes
+#
+#	
+#
+#	option = { #Bermuda
+#		name = krg_can.79.a
+#		trigger = {
+#			NOT = {
+#				696 = {
+#					has_state_flag = CAN_industry_focused_state
+#				}
+#			}
+#		}
+#		696 = {
+#			set_state_flag = CAN_industry_focused_state
+#		}
+#	}
+#	option = { #Bahamas
+#		name = krg_can.79.b
+#		trigger = {
+#			NOT = {
+#				690 = {
+#					has_state_flag = CAN_industry_focused_state
+#				}
+#			}	
+#		}
+#		690 = {
+#			set_state_flag = CAN_industry_focused_state
+#		}
+#	}
+#	option = { #Lesser Antilles
+#		name = krg_can.79.c
+#		trigger = {
+#			NOT = {
+#				692 = {
+#					has_state_flag = CAN_industry_focused_state
+#				}
+#			}
+#		}
+#		692 = {
+#			set_state_flag = CAN_industry_focused_state
+#		}
+#	}
+#	option = { #Barbados
+#		name = krg_can.79.e
+#		trigger = {
+#			NOT = {
+#				308 = {
+#					has_state_flag = CAN_industry_focused_state
+#				}
+#			}
+#		}
+#		308 = {
+#			set_state_flag = CAN_industry_focused_state
+#		}
+#	}
+#}
+#
+#country_event = {###Business moguls approach Prime Minister once more once again for the last time
+#	id = krg_can.80
+#	title = krg_can.80.t
+#	desc = krg_can.80.d
+#	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can.80" }
+#
+#	is_triggered_only = yes
+#	fire_only_once = yes
+#
+#	
+#
+#	option = { #Bermuda
+#		name = krg_can.80.a
+#		trigger = {
+#			NOT = {
+#				696 = {
+#					has_state_flag = CAN_tourism_focused_state
+#				}
+#			}
+#		}
+#		696 = {
+#			set_state_flag = CAN_tourism_focused_state
+#		}
+#	}
+#	option = { #Bahamas
+#		name = krg_can.80.b
+#		trigger = {
+#			NOT = {
+#				690 = {
+#					has_state_flag = CAN_tourism_focused_state
+#				}
+#			}	
+#		}
+#		690 = {
+#			set_state_flag = CAN_tourism_focused_state
+#		}
+#	}
+#	option = { #Lesser Antilles
+#		name = krg_can.80.c
+#		trigger = {
+#			NOT = {
+#				692 = {
+#					has_state_flag = CAN_tourism_focused_state
+#				}
+#			}
+#		}
+#		692 = {
+#			set_state_flag = CAN_tourism_focused_state
+#		}
+#	}
+#	option = { #Barbados
+#		name = krg_can.80.e
+#		trigger = {
+#			NOT = {
+#				308 = {
+#					has_state_flag = CAN_tourism_focused_state
+#				}
+#			}
+#		}
+#		308 = {
+#			set_state_flag = CAN_tourism_focused_state
+#		}
+#	}
+#}
+
+country_event = {###The Canadian Century
+	id = krg_can.81
+	title = krg_can.81.t
+	desc = krg_can.81.d
+	picture = GFX_CAN_ce_vancouver
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can.81" }
+	
+	is_triggered_only = yes
+	fire_only_once = yes 
+	
+	 
+	
+	option = {
+		name = krg_can.81.a
+		custom_effect_tooltip = CAN_increase_liberals_medium_tt
+		CAN = {
+			CAN_popularity_liberals_increase_medium = yes
+		}
+	} 
+} 
+
+country_event = { ##accord supreme commander
+    id = krg_can.82
+    title = krg_can.82.t
+    desc = krg_can.82.d
+	picture = GFX_ce_militias
+    immediate = { log = "[GetDateText]: [Root.GetName]: krg_can.82" }
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+        name = krg_can.82.a
+        
+    }
+	option = {
+        name = krg_can.82.b
+        
+    }
+	option = {
+        name = krg_can.82.c
+        
+    }
+}
+
+country_event = { ##jet research flavor
+    id = krg_can.83
+    title = krg_can.83.t
+    desc = krg_can.83.d
+    immediate = { log = "[GetDateText]: [Root.GetName]: krg_can.83" }
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+        name = krg_can.83.a
+        
+    }
+}
+
+country_event = { ##space flavor
+    id = krg_can.84
+    title = krg_can.84.t
+    desc = krg_can.84.d
+    immediate = { log = "[GetDateText]: [Root.GetName]: krg_can.84" }
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+        name = krg_can.84.a
+        
+    }
+}
+
+country_event = { ##NDP switch
+    id = krg_can.85
+    title = krg_can.85.t
+    desc = krg_can.85.d
+	picture = GFX_CAN_ce_ndp
+    immediate = { log = "[GetDateText]: [Root.GetName]: krg_can.85" }
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	trigger = {
+		NOT = {
+			OR = {
+				has_country_flag = CAN_constitutional_crisis_triggered
+				has_country_flag = CAN_parl_ndp_formed
+			}
+		}
+	}
+
+	option = {
+        name = krg_can.85.a
+        set_global_flag = CAN_parl_ndp_formed
+		set_party_name = {
+			ideology = radical_socialist
+			name = CAN_radical_socialist_party_2
+			long_name = CAN_radical_socialist_party_2_long
+		}
+		set_party_name = {
+			ideology = social_democrat
+			name = CAN_social_democrat_party_2
+			long_name = CAN_social_democrat_party_2_long
+		}
+    }
+}
+
+country_event = { ##con switch
+    id = krg_can.86
+    title = krg_can.86.t
+    desc = krg_can.86.d
+	picture = GFX_CAN_ce_diefenbaker
+    immediate = { log = "[GetDateText]: [Root.GetName]: krg_can.86" }
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+        name = krg_can.86.a
+        set_global_flag = CAN_parl_pc_formed
+		CAN_form_PC = yes
+    }
+}
+
+country_event = { ##The Problems of the Subnormal Family
+    id = krg_can.87
+    title = krg_can.87.t
+    desc = krg_can.87.d
+	picture = GFX_CAN_ce_ndp
+    immediate = { log = "[GetDateText]: [Root.GetName]: krg_can.87" }
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+        name = krg_can.87.a
+        custom_effect_tooltip = CAN_decrease_socdem_medium_tt
+		CAN_popularity_socdem_decrease_medium = yes
+    }
+}
+
+country_event = { ##Handling the Aristocracy
+    id = krg_can.88
+    title = krg_can.88.t
+    desc = krg_can.88.d
+	picture = GFX_ce_can_citizens
+    immediate = { log = "[GetDateText]: [Root.GetName]: krg_can.88" }
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+        name = krg_can.88.a #Bring them in
+		subtract_from_variable = { CAN_bennett_dynam_stab = 0.03 }
+        add_to_variable = { CAN_bennett_dynam_pp = 0.05 }
+		custom_effect_tooltip = CAN_modify_bennett
+		subtract_from_variable = { 
+			CAN_bennett_dynam_stab = 0.03
+			tooltip = CAN_modifier_stab_tt_sub
+		}
+		add_to_variable = { 
+			CAN_bennett_dynam_stab = 0.05
+			tooltip = CAN_modifier_pp_tt
+		}
+    }
+	option = { #They are corrupt puppets!
+        name = krg_can.88.b #Bring them in
+		add_to_variable = { CAN_bennett_dynam_stab = 0.03 }
+        subtract_from_variable = { CAN_bennett_dynam_pp = 0.05 }
+		custom_effect_tooltip = CAN_modify_bennett
+		add_to_variable = { 
+			CAN_bennett_dynam_stab = 0.03
+			tooltip = CAN_modifier_stab_tt
+		}
+		subtract_from_variable = { 
+			CAN_bennett_dynam_stab = 0.05
+			tooltip = CAN_modifier_pp_tt_sub
+		}
+    }
+}
+
+country_event = { ##A State of Insurrection
+    id = krg_can.89
+    title = krg_can.89.t
+    desc = krg_can.89.d
+	picture = GFX_CAN_ce_upc
+    immediate = { log = "[GetDateText]: [Root.GetName]: krg_can.89" }
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #They are corrupt puppets!
+        name = krg_can.89.a #Bring them in
+		custom_effect_tooltip = CAN_modify_bennett
+		add_to_variable = { 
+			CAN_bennett_dynam_stab = 0.02 
+			tooltip = CAN_modifier_stab_tt
+		}
+		CAN_popularity_unionists_increase_medium = yes
+		custom_effect_tooltip = CAN_increase_unionists_medium_tt
+		CAN_popularity_socdem_decrease_large = yes
+		custom_effect_tooltip = CAN_decrease_socdem_large_tt
+    }
+}
+
+country_event = { ###Hurricane Hazel
+	id = krg_can.90
+	title = krg_can.90.t
+	desc = krg_can.90.d
+	picture = GFX_CAN_ce_hurricane_hazel
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can.90" }
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_can.90.a
+	}
+}
+
+country_event = { ###Diefenbunker
+	id = krg_can.91
+	title = krg_can.91.t
+	desc = krg_can.91.d
+	picture = GFX_CAN_ce_diefenbaker
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can.91" }
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_can.91.a
+	}
+}
+
+##krg_can.92 - krg_can.100 Accord formation events
+
+country_event = { ###A New Alliance for a New World
+	id = krg_can.92
+	title = krg_can.92.t
+	desc = krg_can.92.d
+	picture = GFX_CAN_ce_accord_signed
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can.92" }
+
+	is_triggered_only = yes
+
+	option = {
+		name = krg_can.92.a
+	}
+}
+
+country_event = { ###Diplomatic Re-alignment
+	id = krg_can.93
+	title = krg_can.93.t
+	desc = krg_can.93.d
+	picture = GFX_CAN_ce_accord_signed
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can.93" }
+
+	is_triggered_only = yes
+
+	option = {
+		name = krg_can.93.a
+	}
+}
+
+country_event = { ###A Rebuilt Europe
+	id = krg_can.94
+	title = krg_can.94.t
+	desc = krg_can.94.d
+	picture = GFX_CAN_ce_accord_signed
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can.94" }
+
+	is_triggered_only = yes
+
+	option = {
+		name = krg_can.94.a
+	}
+}
+
+country_event = { ###Send our Delegates to Ottawa
+	id = krg_can.95
+	title = krg_can.95.t
+	desc = krg_can.95.d
+	picture = GFX_CAN_ce_accord_signed
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can.95" }
+
+	is_triggered_only = yes
+
+	option = {
+		name = krg_can.95.a
+	}
+}
+
+country_event = { ###The America Situation
+	id = krg_can.96
+	title = krg_can.96.t
+	desc = krg_can.96.d
+	picture = GFX_ce_generic_party_america_first_party
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can.96" }
+
+	is_triggered_only = yes
+
+	option = {
+		name = krg_can.96.a
+	}
+}
+
+country_event = { ###Military Cooperation
+	id = krg_can.97
+	title = krg_can.97.t
+	desc = krg_can.97.d
+	picture = GFX_ce_RUS_soldiers
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can.97" }
+
+	is_triggered_only = yes
+
+	option = {
+		name = krg_can.97.a
+	}
+}
+
+country_event = { ###The Status of the Colonies
+	id = krg_can.98
+	title = krg_can.98.t
+	desc = krg_can.98.d
+	picture = GFX_report_event_SAF_Australian_Support
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can.98" }
+
+	is_triggered_only = yes
+
+	option = {
+		name = krg_can.98.a
+	}
+}
+
+country_event = { ###Smaller Countries want Representation
+	id = krg_can.99
+	title = krg_can.99.t
+	desc = krg_can.99.d
+	picture = GFX_ce_voting
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can.99" }
+
+	is_triggered_only = yes
+
+	option = {
+		name = krg_can.99.a
+	}
+}
+
+country_event = { ###Signing the Documents
+	id = krg_can.100
+	title = krg_can.100.t
+	desc = krg_can.100.d
+	picture = GFX_CAN_ce_accord_signed
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can.100" }
+
+	is_triggered_only = yes
+
+	option = {
+		name = krg_can.100.a
+	}
+}
+
+
+###constitutional crisis events
+country_event = { ##the governor dismissed coldwell
+	id = krg_can_crisis.1
+	title = krg_can_crisis.1.t
+	desc = krg_can_crisis.1.d
+	picture = GFX_CAN_ce_albert_windsor
+	immediate = { 
+		log = "[GetDateText]: [Root.GetName]: krg_can_crisis.1" 
+		set_country_flag = CAN_constitutional_crisis
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_can_crisis.1.a
+		news_event = worldnews.49
+		add_country_leader_role = {
+			Character = CAN_albert_windsor
+			promote_leader = yes
+			Country_leader = {
+				ideology = social_democrat_subtype
+				expire="1982.1.1.1"
+				traits = {
+					cabinet_crisis
+				}
+			}
+		}
+		set_country_flag = CAN_constitutional_crisis_ongoing
+		remove_ideas_with_trait = head_of_government
+		add_ideas = CAN_Tommy_Douglas_hog_sde
+		set_variable = { CAN_current_law = 0 }
+		country_event = {
+			id = krg_can_crisis.2
+			days = 2
+		}
+	}
+}
+
+
+country_event = { ##who should be the new PM
+	id = krg_can_crisis.2
+	title = krg_can_crisis.2.t
+	desc = krg_can_crisis.2.d
+	picture = GFX_CAN_ce_parliament
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_crisis.2"}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { ##the liberal (louis) 
+		name = krg_can_crisis.2.a
+		hidden_effect = {
+			random_list = {
+				50 = {
+					country_event = {
+						id = krg_can_crisis.3
+						days = 3
+					}
+				}
+				50 = {
+					country_event = {
+						id = krg_can_crisis.7
+						days = 1
+					}
+				}
+			}
+		}
+
+		ai_chance = {
+			base = 25
+		}
+	}
+	option = { ##the conservative (dief)
+		name = krg_can_crisis.2.b
+		hidden_effect = {
+			if = {
+				limit = { 
+					has_game_rule = {
+						rule = CAN_CONSTITUTIONAL_CRISIS
+						option = CAN_MONARCHY_COALITION_STATUS_QUO
+					}
+				}
+				country_event = {
+					id = krg_can_crisis.4
+					days = 3
+				}
+			}
+			else = {
+				random_list = {
+					50 = {
+						country_event = {
+							id = krg_can_crisis.4
+							days = 3
+						}
+					}
+					50 = {
+						country_event = {
+							id = krg_can_crisis.5
+							days = 1
+						}
+					}
+				}
+			}
+		}
+
+		ai_chance = {
+			base = 45
+			modifier = { 
+				has_game_rule = {
+					rule = CAN_CONSTITUTIONAL_CRISIS
+					option = CAN_MONARCHY_COALITION_STATUS_QUO
+				}
+				factor = 1000
+			}
+		}
+	}
+	option = { ##the unionist
+		name = krg_can_crisis.2.c
+		hidden_effect = {
+			country_event = {
+				id = krg_can_crisis.6
+				days = 3
+			}
+		}
+		ai_chance = {
+			base = 30
+			modifier = { 
+				OR = {
+					has_game_rule = {
+						rule = CAN_CONSTITUTIONAL_CRISIS
+						option = CAN_MONARCHY_SNAP_ELECTION_CCF_ABOLISH_MONARCHY
+					}
+					has_game_rule = {
+						rule = CAN_CONSTITUTIONAL_CRISIS
+						option = CAN_MONARCHY_SNAP_ELECTION_CCF_KEEP_MONARCHY
+					}
+					has_game_rule = {
+						rule = CAN_CONSTITUTIONAL_CRISIS
+						option = CAN_MONARCHY_SNAP_ELECTION_LIB_ABOLISH_MONARCHY
+					}
+					has_game_rule = {
+						rule = CAN_CONSTITUTIONAL_CRISIS
+						option = CAN_MONARCHY_SNAP_ELECTION_LIB_KEEP_MONARCHY
+					}
+					has_game_rule = {
+						rule = CAN_CONSTITUTIONAL_CRISIS
+						option = CAN_MONARCHY_UNIONISTS
+					}
+				}
+				factor = 1000
+			}
+		}
+	}
+}
+
+country_event = { ##liberal (louis) accepts and demands elections
+	id = krg_can_crisis.3
+	title = krg_can_crisis.3.t
+	desc = krg_can_crisis.3.d
+	picture = GFX_CAN_ce_laurent
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_crisis.3"}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_can_crisis.3.a
+		set_politics = {
+			ruling_party = social_liberal
+			elections_allowed = yes
+		}
+		set_variable = { global.CAN_parl_support_array^0 = 1 }
+		set_variable = { global.CAN_parl_support_array^1 = 1 }
+		set_variable = { global.CAN_parl_support_array^2 = 4 }
+		set_variable = { global.CAN_parl_support_array^3 = 4 }
+		set_variable = { global.CAN_parl_support_array^4 = 4 }
+		set_variable = { global.CAN_parl_support_array^5 = 1 }
+		set_variable = { global.CAN_parl_support_array^6 = 1 }
+		CAN_parl_adjust = yes
+		hidden_effect = { #st laurent ministry doesn't need to change
+			remove_all_ministers = yes
+			add_ideas = CAN_Louis_St_Laurent_hog_sli
+			add_ideas = CAN_Lester_B_Pearson_fm_sli
+			add_ideas = CAN_Douglas_Abbott_em_sli
+			add_ideas = CAN_Stuart_Garson_jm_sli
+			add_ideas = CAN_Jean_Lesage_im_sli
+			country_event = {
+				id = krg_can_crisis.22
+				days = 3
+			}
+		}
+	}
+	option = {
+		name = krg_can_crisis.3.b
+		set_politics = {
+			ruling_party = social_liberal
+			elections_allowed = yes
+		}
+		set_variable = { global.CAN_parl_support_array^0 = 1 }
+		set_variable = { global.CAN_parl_support_array^1 = 1 }
+		set_variable = { global.CAN_parl_support_array^2 = 4 }
+		set_variable = { global.CAN_parl_support_array^3 = 4 }
+		set_variable = { global.CAN_parl_support_array^4 = 4 }
+		set_variable = { global.CAN_parl_support_array^5 = 1 }
+		set_variable = { global.CAN_parl_support_array^6 = 1 }
+		CAN_parl_adjust = yes
+		hidden_effect = { #st laurent ministry doesn't need to change
+			remove_all_ministers = yes
+			add_ideas = CAN_Louis_St_Laurent_hog_sli
+			add_ideas = CAN_Lester_B_Pearson_fm_sli
+			add_ideas = CAN_Douglas_Abbott_em_sli
+			add_ideas = CAN_Stuart_Garson_jm_sli
+			add_ideas = CAN_Jean_Lesage_im_sli
+			country_event = {
+				id = krg_can_crisis.20
+				days = 3
+			}
+		}
+		##random list if the goven refuses or not, event about liberals demanding a replacement if refuses, snap elections if not refused
+	}
+}
+
+country_event = { ##conservative (diefenbaker) accepts
+	id = krg_can_crisis.4
+	title = krg_can_crisis.4.t
+	desc = krg_can_crisis.4.d
+	picture = GFX_CAN_ce_diefenbaker
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_crisis.4"}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_can_crisis.4.a
+		set_politics = {
+			ruling_party = market_liberal
+			elections_allowed = yes
+		}
+		country_event = {
+			id = krg_can_crisis.8
+			days = 1
+		}
+		hidden_effect = {
+			country_event = {
+				id = krg_can_crisis.11
+				days = 2
+			}
+		}
+		set_variable = { global.CAN_parl_support_array^0 = 1 }
+		set_variable = { global.CAN_parl_support_array^1 = 1 }
+		set_variable = { global.CAN_parl_support_array^2 = 1 }
+		set_variable = { global.CAN_parl_support_array^3 = 1 }
+		set_variable = { global.CAN_parl_support_array^4 = 4 }
+		set_variable = { global.CAN_parl_support_array^5 = 1 }
+		set_variable = { global.CAN_parl_support_array^6 = 1 }
+		hidden_effect = {
+			remove_all_ministers = yes
+			add_ideas = CAN_John_Diefenbaker_hog_mli
+			add_ideas = CAN_Sidney_Earle_Smith_fm_mli
+			add_ideas = CAN_Donald_Flemming_em_mli
+			add_ideas = CAN_Davie_Fulton_jm_mli
+			add_ideas = CAN_Ellen_Fairclough_im_mli
+		}
+		set_country_flag = CAN_crisis_conservative_pm
+	}
+}
+
+country_event = { ##conservative (diefenbaker) refuses
+	id = krg_can_crisis.5
+	title = krg_can_crisis.5.t
+	desc = krg_can_crisis.5.d
+	picture = GFX_CAN_ce_diefenbaker
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_crisis.5"}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_can_crisis.5.a
+		hidden_effect = {
+			country_event = { ##ask the unionists
+				id = krg_can_crisis.6
+				days = 2
+			}
+		}
+	}
+}
+
+country_event = { ##unionists accept
+	id = krg_can_crisis.6
+	title = krg_can_crisis.6.t
+	desc = krg_can_crisis.6.d
+	picture = GFX_CAN_ce_upc
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_crisis.6"}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_can_crisis.6.a
+		set_country_flag = CAN_crisis_unionist_pm
+		set_politics = {
+			ruling_party = authoritarian_democrat
+			elections_allowed = yes
+		}
+		coal_add_soc_con = yes
+		country_event = {
+			id = krg_can_crisis.11
+			days = 2
+		}
+		custom_effect_tooltip = CAN_increase_unionists_medium_tt
+		CAN_popularity_unionists_increase_medium = yes
+		set_variable = { global.CAN_parl_support_array^0 = 1 }
+		set_variable = { global.CAN_parl_support_array^1 = 1 }
+		set_variable = { global.CAN_parl_support_array^2 = 1 }
+		set_variable = { global.CAN_parl_support_array^3 = 1 }
+		set_variable = { global.CAN_parl_support_array^4 = 1 }
+		set_variable = { global.CAN_parl_support_array^5 = 4 }
+		set_variable = { global.CAN_parl_support_array^6 = 4 }
+		hidden_effect = {
+			remove_all_ministers = yes
+			add_ideas = CAN_W_A_C_Bennett_hog_ade
+			add_ideas = CAN_Robert_N_Thompson_fm_ade
+			add_ideas = CAN_C_H_Douglas_em_ade
+			add_ideas = CAN_Real_Caouette_jm_ade
+			add_ideas = CAN_Solon_Earl_Low_im_ade
+		}
+	}
+}
+
+country_event = { ##liberal (louis) refuses
+	id = krg_can_crisis.7
+	title = krg_can_crisis.7.t
+	desc = krg_can_crisis.7.d
+	picture = GFX_CAN_ce_laurent
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_crisis.7"}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_can_crisis.7.a
+		hidden_effect = {
+			country_event = { ##ask the unionists
+				id = krg_can_crisis.6
+				days = 2
+			}
+		}
+	}
+}
+
+country_event = { ##form an agreement with the liberals?
+	id = krg_can_crisis.8
+	title = krg_can_crisis.8.t
+	desc = krg_can_crisis.8.d
+	picture = GFX_CAN_ce_lpc
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_crisis.8"}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_can_crisis.8.a #yeah lets ask
+		hidden_effect = {
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = CAN_CONSTITUTIONAL_CRISIS
+						option = CAN_MONARCHY_COALITION_STATUS_QUO
+					}
+				}
+				country_event = {
+					id = krg_can_crisis.9
+					days = 2
+				}
+			} else = {
+				random_list = {
+					50 = {
+						country_event = {
+							id = krg_can_crisis.9
+							days = 2
+						}
+					}
+					50 = {
+						country_event = {
+							id = krg_can_crisis.10
+							days = 2
+						}
+					}
+				}
+			}
+		}
+		ai_chance = {
+			base = 1
+			modifier = { 
+				has_game_rule = {
+					rule = CAN_CONSTITUTIONAL_CRISIS
+					option = CAN_MONARCHY_COALITION_STATUS_QUO
+				}
+				factor = 1000
+			}
+		}
+	}
+	option = {
+		name = krg_can_crisis.8.b #nah lets not
+		ai_chance = {
+			base = 1
+		}
+	}
+}
+
+country_event = { ##the liberals say yes with tough conditions
+	id = krg_can_crisis.9
+	title = krg_can_crisis.9.t
+	desc = krg_can_crisis.9.d
+	picture = GFX_CAN_ce_lpc
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_crisis.9"}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_can_crisis.9.a #better than nothing i guess
+		hidden_effect = {
+			remove_ideas_with_trait = justice_minister
+			remove_ideas_with_trait = interior_minister
+		}
+		#holy extremely powerful government
+		set_variable = { global.CAN_parl_support_array^0 = 1 }
+		set_variable = { global.CAN_parl_support_array^1 = 1 }
+		set_variable = { global.CAN_parl_support_array^2 = 4 }
+		set_variable = { global.CAN_parl_support_array^3 = 4 }
+		set_variable = { global.CAN_parl_support_array^4 = 4 }
+		set_variable = { global.CAN_parl_support_array^5 = 1 }
+		set_variable = { global.CAN_parl_support_array^6 = 1 }
+		coal_add_rev_rep = yes
+		coal_add_soc_lib = yes
+		add_ideas = CAN_Stuart_Garson_jm_sli
+		add_ideas = CAN_Jean_Lesage_im_sli
+		set_country_flag = CAN_crisis_agreement_with_the_liberals
+	}
+}
+
+country_event = { ##the liberals say nope
+	id = krg_can_crisis.10
+	title = krg_can_crisis.10.t
+	desc = krg_can_crisis.10.d
+	picture = GFX_CAN_ce_lpc
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_crisis.10"}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_can_crisis.10.a #shucks
+		add_political_power = -20
+	}
+}
+
+country_event = { ##does coldwell ask the king to replace the govgen??
+	id = krg_can_crisis.11
+	title = krg_can_crisis.11.t
+	desc = krg_can_crisis.11.d
+	picture = GFX_CAN_ce_coldwell
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_crisis.11"}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_can_crisis.11.a #sure!
+		hidden_effect = {
+			ENG = {
+				country_event = { id = krg_can_crisis.12 }
+			}
+		}
+		ai_chance = {
+			base = 75
+			modifier = { 
+				OR = {
+					has_game_rule = {
+						rule = CAN_CONSTITUTIONAL_CRISIS
+						option = CAN_MONARCHY_SNAP_ELECTION_CCF_ABOLISH_MONARCHY
+					}
+					has_game_rule = {
+						rule = CAN_CONSTITUTIONAL_CRISIS
+						option = CAN_MONARCHY_SNAP_ELECTION_CCF_KEEP_MONARCHY
+					}
+					has_game_rule = {
+						rule = CAN_CONSTITUTIONAL_CRISIS
+						option = CAN_MONARCHY_SNAP_ELECTION_LIB_ABOLISH_MONARCHY
+					}
+					has_game_rule = {
+						rule = CAN_CONSTITUTIONAL_CRISIS
+						option = CAN_MONARCHY_SNAP_ELECTION_LIB_KEEP_MONARCHY
+					}
+				}
+				factor = 1000
+			}
+		}
+	}
+	option = {
+		name = krg_can_crisis.11.b #naw!
+		if = {
+			limit = {
+				OR = {
+					has_country_flag = CAN_crisis_unionist_pm
+					has_country_flag = CAN_crisis_conservative_pm
+				}
+			}
+			hidden_effect = {
+				country_event = {
+					id = krg_can_crisis.28
+					days = 4
+				}
+			}
+		}
+		else = {
+			hidden_effect = {
+				country_event = {
+					id = krg_can_crisis.18
+					days = 2
+				}
+			}
+		}
+
+		ai_chance = {
+			base = 25
+			modifier = { 
+				OR = {
+					has_game_rule = {
+						rule = CAN_CONSTITUTIONAL_CRISIS
+						option = CAN_MONARCHY_COALITION_STATUS_QUO
+					}
+					has_game_rule = {
+						rule = CAN_CONSTITUTIONAL_CRISIS
+						option = CAN_MONARCHY_UNIONISTS
+					}
+				}
+				factor = 1000
+			}
+		}
+	}
+}
+
+country_event = { ##uk what do we do
+	id = krg_can_crisis.12
+	title = krg_can_crisis.12.t
+	desc = krg_can_crisis.12.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_crisis.12"}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	picture = GFX_CAN_ce_albert_windsor
+
+	option = {
+		name = krg_can_crisis.12.a #screw the govgen
+		ai_chance = { 
+			base = 20
+			modifier = { 
+				OR = {
+					has_game_rule = {
+						rule = CAN_CONSTITUTIONAL_CRISIS
+						option = CAN_MONARCHY_SNAP_ELECTION_CCF_ABOLISH_MONARCHY
+					}
+					has_game_rule = {
+						rule = CAN_CONSTITUTIONAL_CRISIS
+						option = CAN_MONARCHY_SNAP_ELECTION_CCF_KEEP_MONARCHY
+					}
+				}
+				factor = 1000
+			}
+		}
+		hidden_effect = {
+			ENG = {
+				country_event = { 
+					id = krg_can_crisis.13
+					days = 1
+				}
+			}
+			CAN = {
+				country_event = { 
+					id = krg_can_crisis.13
+					days = 1
+				}
+				country_event = { 
+					id = krg_can_crisis.14
+					days = 3
+				}
+				news_event = {
+					id = worldnews.50
+					days = 3
+				}
+				set_country_flag = CAN_crisis_king_big_speech
+			}	
+		}
+	}
+	option = { 
+		name = krg_can_crisis.12.b #ignore it
+		ai_chance = { 
+			base = 80
+			modifier = { 
+				OR = {
+					has_game_rule = {
+						rule = CAN_CONSTITUTIONAL_CRISIS
+						option = CAN_MONARCHY_SNAP_ELECTION_LIB_ABOLISH_MONARCHY
+					}
+					has_game_rule = {
+						rule = CAN_CONSTITUTIONAL_CRISIS
+						option = CAN_MONARCHY_SNAP_ELECTION_LIB_KEEP_MONARCHY
+					}
+				}
+				factor = 1000
+			}
+		}
+		hidden_effect = {
+			CAN = {
+				country_event = {
+					id = krg_can_crisis.18
+					days = 2
+				}
+			}
+		}
+	}
+}
+
+country_event = { ##speech about how the govgen sucks
+	id = krg_can_crisis.13
+	title = krg_can_crisis.13.t
+	desc = krg_can_crisis.13.d
+	picture = GFX_report_king_parliament
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_crisis.13"}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_can_crisis.13.a
+		CAN = { set_country_flag = mcnaughton_gg }
+	}
+}
+
+country_event = { ##coldwell is back woah the bill has gone through
+	id = krg_can_crisis.14
+	title = krg_can_crisis.14.t
+	desc = krg_can_crisis.14.d
+	picture = GFX_CAN_ce_coldwell
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_crisis.14"}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_can_crisis.14.a
+		set_politics = {
+			ruling_party = social_democrat
+		}
+		retire_character = CAN_albert_windsor
+		CAN_mj_coldwell = {
+			promote_character = yes
+			promote_character = social_democrat_subtype
+		}
+		set_variable = { global.CAN_parl_support_array^0 = 4 }
+		set_variable = { global.CAN_parl_support_array^1 = 4 }
+		set_variable = { global.CAN_parl_support_array^2 = 1 }
+		set_variable = { global.CAN_parl_support_array^3 = 1 }
+		set_variable = { global.CAN_parl_support_array^4 = 1 }
+		set_variable = { global.CAN_parl_support_array^5 = 1 }
+		set_variable = { global.CAN_parl_support_array^6 = 1 }
+		hidden_effect = {
+			remove_all_ministers = yes
+			add_ideas = CAN_M_J_ColdWell_hog_sde
+			add_ideas = CAN_F_R_Scott_fm_sde
+			add_ideas = CAN_Ross_Thatcher_em_sde
+			add_ideas = CAN_Angus_MacInnis_jm_sde
+			add_ideas = CAN_William_Bryce_im_sde
+			add_ideas = CAN_JB_Salsberg_hoi_rso
+		}
+		CAN_law_4_effect = yes
+		hidden_effect = {
+			country_event = {
+				id = krg_can_crisis.15
+				days = 2
+			}
+		}
+	}
+}
+
+country_event = { ##coldwell calls for a referendum on the monarchy
+	id = krg_can_crisis.15
+	title = krg_can_crisis.15.t
+	desc = krg_can_crisis.15.d
+	picture = GFX_CAN_ce_coldwell
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_crisis.15"}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_can_crisis.15.a
+		if = {
+			limit = {
+				has_country_flag = CAN_crisis_king_big_speech
+				is_ai = no
+			}
+			country_event = {
+				id = krg_can_crisis.16
+				days = 21
+			}
+		}
+		else = {
+			country_event = {
+				id = krg_can_crisis.17
+				days = 21
+			}
+		}
+	}
+}
+
+country_event = { ##the referendum but the monarchy saved itself ###TODO for 0.2: extend the referendum with a campaign mechanic
+	id = krg_can_crisis.16
+	title = krg_can_crisis.16.t
+	desc = krg_can_crisis.16.d
+	picture = GFX_ce_voting
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_crisis.16"}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_can_crisis.16.a
+		news_event = { id = worldnews.51 }
+	}
+}
+
+country_event = { ##the referendum but for real
+	id = krg_can_crisis.17
+	title = krg_can_crisis.17.t
+	desc = krg_can_crisis.17.d
+	picture = GFX_ce_voting
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_crisis.17"}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #republic time
+		name = krg_can_crisis.17.a
+		news_event = { id = worldnews.52 }
+		set_country_flag = CAN_republic
+		clr_country_flag = country_show_pm
+		ai_chance = {
+			base = 60
+		}
+		ai_chance = {
+			base = 30
+			modifier = { 
+				OR = {
+					has_game_rule = {
+						rule = CAN_CONSTITUTIONAL_CRISIS
+						option = CAN_MONARCHY_SNAP_ELECTION_CCF_ABOLISH_MONARCHY
+					}
+					has_game_rule = {
+						rule = CAN_CONSTITUTIONAL_CRISIS
+						option = CAN_MONARCHY_SNAP_ELECTION_LIB_ABOLISH_MONARCHY
+					}
+				}
+				factor = 1000
+			}
+		}
+	}
+	option = { #god save the king
+		name = krg_can_crisis.17.b
+		news_event = { id = worldnews.51 }
+		ai_chance = {
+			base = 40
+			modifier = { 
+				OR = {
+					has_game_rule = {
+						rule = CAN_CONSTITUTIONAL_CRISIS
+						option = CAN_MONARCHY_SNAP_ELECTION_CCF_KEEP_MONARCHY
+					}
+					has_game_rule = {
+						rule = CAN_CONSTITUTIONAL_CRISIS
+						option = CAN_MONARCHY_SNAP_ELECTION_LIB_KEEP_MONARCHY
+					}
+				}
+				factor = 1000
+			}
+		}
+	}
+}
+
+country_event = { ##everyone demands the king replaces the govgen
+	id = krg_can_crisis.18
+	title = krg_can_crisis.18.t
+	desc = {
+		trigger = {
+			has_country_flag = CAN_crisis_conservative_pm
+		}
+		text = krg_can_crisis.18.d
+	}
+	desc = {
+		trigger = {
+			NOT = { has_country_flag = CAN_crisis_conservative_pm }
+		}
+		text = krg_can_crisis.18.d2
+	}
+	picture = GFX_CAN_ce_albert_windsor
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_crisis.18"}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_can_crisis.18.a
+		hidden_effect = {
+			country_event = {
+				id = krg_can_crisis.19
+				days = 2
+			}
+		}
+	}
+}
+
+country_event = { ##kings speech about how he is protecting democracy	
+	id = krg_can_crisis.19
+	title = krg_can_crisis.19.t
+	desc = krg_can_crisis.19.d
+	picture = GFX_report_king_parliament
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_crisis.19"}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_can_crisis.19.a
+		hidden_effect = {
+			country_event = {
+				id = krg_can_crisis.21
+				days = 2
+			}
+		}
+		CAN = { set_country_flag = mcnaughton_gg }
+	}
+}
+
+country_event = { ##liberals reveal govgen said no, call for his replacement
+	id = krg_can_crisis.20
+	title = krg_can_crisis.20.t
+	desc = krg_can_crisis.20.d
+	picture = GFX_CAN_ce_albert_windsor
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_crisis.20"}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_can_crisis.20.a
+		hidden_effect = {
+			country_event = {
+				id = krg_can_crisis.19
+				days = 1
+			}
+		}
+	}
+}
+
+country_event = { ##new govgen installs a caretaker govt
+	id = krg_can_crisis.21
+	title = krg_can_crisis.21.t
+	desc = krg_can_crisis.21.d
+	picture = GFX_CAN_ce_parliament
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_crisis.21"}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_can_crisis.21.a
+		##caretaker gov installation
+		set_politics = {
+			ruling_party = social_liberal
+		}
+		CAN_Lester_B_Pearson = {
+			promote_character = social_liberal
+		}
+		set_variable = { global.CAN_parl_support_array^0 = 1 }
+		set_variable = { global.CAN_parl_support_array^1 = 1 }
+		set_variable = { global.CAN_parl_support_array^2 = 4 }
+		set_variable = { global.CAN_parl_support_array^3 = 4 }
+		set_variable = { global.CAN_parl_support_array^4 = 4 }
+		set_variable = { global.CAN_parl_support_array^5 = 1 }
+		set_variable = { global.CAN_parl_support_array^6 = 1 }
+		hidden_effect = {
+			remove_all_ministers = yes
+			add_ideas = CAN_Lester_B_Pearson_hog_sli
+			add_ideas = CAN_Paul_Martin_Sr_fm_sli
+			add_ideas = CAN_Donald_Flemming_em_mli
+			add_ideas = CAN_James_Lorimer_Ilsley_jm_mli
+			add_ideas = CAN_Jean_Lesage_im_sli
+		}
+		hidden_effect = {
+			country_event = {
+				id = krg_can_crisis.22
+				days = 2
+			}
+		}
+		custom_effect_tooltip = CAN_crisis_snap_elections_48_tt
+	}
+}
+
+country_event = { ##snap elections scheduled
+	id = krg_can_crisis.22
+	title = krg_can_crisis.22.t
+	desc = krg_can_crisis.22.d
+	picture = GFX_ce_voting
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_crisis.22"}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_can_crisis.22.a
+		activate_mission = CAN_snap_elections_crisis
+		set_variable = { CAN_election_party_support = 1 }
+		CAN_election_update_viewing_array = yes
+		set_country_flag = CAN_crisis_election_start
+		set_country_flag = CAN_crisis_election_support_lib
+		set_country_flag = CAN_crisis_election_rigged_lib
+		if = {
+			limit = { is_ai = yes }
+			set_variable = { CAN_election_party_support = -1 }
+		}
+		hidden_effect = {
+			country_event = { id = krg_can_elect.1 }
+		}
+		hidden_effect = {
+			country_event = {
+				id = krg_can_crisis.23
+				days = 16
+			}
+			country_event = {
+				id = krg_can_crisis.24
+				days = 32
+			}
+			country_event = {
+				id = krg_can_crisis.25
+				days = 48
+			}
+		}
+	}
+}
+
+country_event = { ##event about liberals campaign against the ccf
+	id = krg_can_crisis.23
+	title = krg_can_crisis.23.t
+	desc = krg_can_crisis.23.d
+	picture = GFX_CAN_ce_laurent_campaigns
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_crisis.23"}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_can_crisis.23.a
+		custom_effect_tooltip = CAN_increase_liberals_medium_tt
+		CAN_popularity_liberals_increase_medium = yes
+	}
+}
+
+country_event = { ##ccf becomes ndp
+	id = krg_can_crisis.24
+	title = krg_can_crisis.24.t
+	desc = krg_can_crisis.24.d
+	picture = GFX_CAN_ce_ndp
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_crisis.24"}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_can_crisis.24.a
+		set_global_flag = CAN_parl_ndp_formed
+		set_party_name = {
+			ideology = radical_socialist
+			name = CAN_radical_socialist_party_2
+			long_name = CAN_radical_socialist_party_2_long
+		}
+		set_party_name = {
+			ideology = social_democrat
+			name = CAN_social_democrat_party_2
+			long_name = CAN_social_democrat_party_2_long
+		}
+	}
+}
+
+country_event = { ##liberals win and create a coalition with the tories and pass the act
+	id = krg_can_crisis.25
+	title = krg_can_crisis.25.t
+	desc = krg_can_crisis.25.d
+	picture = GFX_CAN_ce_lpc
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_crisis.25"}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_can_crisis.25.a
+		hidden_effect = {
+			country_event = {
+				id = krg_can_crisis.26
+				days = 4
+			}
+		}
+		set_politics = {
+			ruling_party = social_liberal
+		}
+		coal_add_mar_lib = yes
+		retire_character = CAN_Lester_B_Pearson
+		CAN_Louis_St_Laurent = {
+			promote_character = yes
+			promote_character = social_liberal_subtype
+		}
+		CAN_Tommy_Douglas = {
+			promote_character = radical_socialist_subtype
+			promote_character = social_democrat_subtype
+		}
+		custom_effect_tooltip = CAN_increase_liberals_large_tt
+		custom_effect_tooltip = CAN_increase_conservatives_large_tt
+		CAN_popularity_conservatives_increase_large = yes
+		CAN_popularity_liberals_increase_large = yes
+		set_variable = { global.CAN_parl_support_array^0 = 1 }
+		set_variable = { global.CAN_parl_support_array^1 = 1 }
+		set_variable = { global.CAN_parl_support_array^2 = 4 }
+		set_variable = { global.CAN_parl_support_array^3 = 4 }
+		set_variable = { global.CAN_parl_support_array^4 = 4 }
+		set_variable = { global.CAN_parl_support_array^5 = 1 }
+		set_variable = { global.CAN_parl_support_array^6 = 1 }
+		CAN_parl_adjust = yes
+		hidden_effect = {
+			remove_all_ministers = yes
+			add_ideas = CAN_Louis_St_Laurent_hog_sli
+			add_ideas = CAN_Paul_Martin_Sr_fm_sli
+			add_ideas = CAN_Donald_Flemming_em_mli
+			add_ideas = CAN_James_Lorimer_Ilsley_jm_mli
+			add_ideas = CAN_Jean_Lesage_im_sli
+		}
+		CAN_law_4_effect = yes
+		clr_country_flag = CAN_crisis_election_start
+		clr_country_flag = CAN_crisis_election_support_lib
+	}
+}
+
+country_event = { ##does the public want a referendum?
+	id = krg_can_crisis.26
+	title = krg_can_crisis.26.t
+	desc = krg_can_crisis.26.d
+	picture = GFX_ce_voting
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_crisis.26"}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_can_crisis.26.a #ya
+		country_event = {
+			id = krg_can_crisis.17
+			days = 56
+		}
+		ai_chance = {
+			base = 65
+			modifier = { 
+				OR = {
+					has_game_rule = {
+						rule = CAN_CONSTITUTIONAL_CRISIS
+						option = CAN_MONARCHY_SNAP_ELECTION_LIB_ABOLISH_MONARCHY
+					}
+					has_game_rule = {
+						rule = CAN_CONSTITUTIONAL_CRISIS
+						option = CAN_MONARCHY_SNAP_ELECTION_LIB_KEEP_MONARCHY
+					}
+				}
+				factor = 1000
+			}
+		}
+	}
+	option = {
+		name = krg_can_crisis.26.b #no
+		hidden_effect = {
+			country_event = {
+				id = krg_can_crisis.27
+				days = 14
+			}
+		}
+		ai_chance = {
+			base = 35
+		}
+	}
+}
+
+country_event = { ##NDP goes openly republican
+	id = krg_can_crisis.27
+	title = krg_can_crisis.27.t
+	desc = krg_can_crisis.27.d
+	picture = GFX_CAN_ce_ndp
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_crisis.27"}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_can_crisis.27.a
+		set_country_flag = CAN_NDP_republican
+	}
+}
+
+country_event = { ##publicly accuse coldwell of being a syndicalist and back the govgen
+	id = krg_can_crisis.28
+	title = krg_can_crisis.28.t
+	desc = {
+		trigger = {
+			has_country_flag = CAN_crisis_unionist_pm
+		}
+		text = krg_can_crisis.28.d
+	}
+	desc = {
+		trigger = {
+			has_country_flag = CAN_crisis_conservative_pm
+		}
+		text = krg_can_crisis.28.d2
+	}
+	picture = GFX_CAN_ce_coldwell
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_crisis.28"}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_can_crisis.28.a
+		hidden_effect = {
+			if = {
+				limit = {
+					has_country_flag = CAN_crisis_conservative_pm
+				}
+				if = {
+					limit = {
+						has_country_flag = CAN_crisis_agreement_with_the_liberals
+					}
+					country_event = {
+						id = krg_can_crisis.46
+						days = 3
+					}
+				} 
+				else = {
+					country_event = {
+						id = krg_can_crisis.47
+						days = 3
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					has_country_flag = CAN_crisis_unionist_pm
+				}
+				country_event = {
+					id = krg_can_crisis.29
+					days = 2
+				}
+			}
+		}
+	}
+}
+
+country_event = { ##unionists try to sway the liberals but the liberals demand snap elections
+	id = krg_can_crisis.29
+	title = krg_can_crisis.29.t
+	desc = krg_can_crisis.29.d
+	picture = GFX_CAN_ce_lpc
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_crisis.29"}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_can_crisis.29.a #it would be irresponsible to hold elections
+		hidden_effect = {
+			country_event = {
+				id = krg_can_crisis.30
+				days = 2
+			}
+		}
+		ai_chance = {
+			base = 1
+		}
+	}
+	option = {
+		name = krg_can_crisis.29.b #go for it
+		hidden_effect = {
+			country_event = {
+				id = krg_can_crisis.36
+				days = 28
+			}
+		}
+		activate_mission = CAN_snap_elections_crisis
+		CAN_election_update_viewing_array = yes
+		set_country_flag = CAN_crisis_election_start
+		set_country_flag = CAN_1953_election_support_dominionist
+		set_variable = { CAN_election_party_support = 3 }
+		if = {
+			limit = { is_ai = yes }
+			set_variable = { CAN_election_party_support = -1 }
+		}
+		hidden_effect = {
+			country_event = { id = krg_can_elect.1 }
+		}
+		ai_chance = {
+			base = 1
+			modifier = { 
+				has_game_rule = {
+					rule = CAN_CONSTITUTIONAL_CRISIS
+					option = CAN_MONARCHY_UNIONISTS
+				}
+				factor = 1000
+			}
+		}
+	}
+}
+
+country_event = { ##ccf calls for protests with the liberals
+	id = krg_can_crisis.30
+	title = krg_can_crisis.30.t
+	desc = krg_can_crisis.30.d
+	picture = GFX_CAN_ce_ccf
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_crisis.30"}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_can_crisis.30.a
+		CAN_popularity_socdem_increase_small = yes
+		hidden_effect = {
+			country_event = {
+				id = krg_can_crisis.31
+				days = 2
+			}
+		}
+	}
+}
+
+country_event = { ##unionists invoke syndicalist propaganda, final decision about elections
+	id = krg_can_crisis.31
+	title = krg_can_crisis.31.t
+	desc = krg_can_crisis.31.d
+	picture = GFX_ce_voting
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_crisis.31"}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_can_crisis.31.a #hold snap elections
+		hidden_effect = {
+			country_event = {
+				id = krg_can_crisis.32
+				days = 48
+			}
+		}
+		activate_mission = CAN_snap_elections_crisis
+		set_variable = { CAN_election_party_support = 3 }
+		CAN_election_update_viewing_array = yes
+		set_country_flag = CAN_crisis_election_start
+		set_country_flag = CAN_1953_election_support_dominionist
+		set_country_flag = CAN_crisis_election_rigged_ccf
+		if = {
+			limit = { is_ai = yes }
+			set_variable = { CAN_election_party_support = -1 }
+		}
+		hidden_effect = {
+			country_event = { id = krg_can_elect.1 }
+		}
+	}
+	option = {
+		name = krg_can_crisis.31.b
+		hidden_effect = {
+			country_event = {
+				id = krg_can_crisis.33
+				days = 2
+			}
+		}
+	}
+}
+
+country_event = { ##snap elections, CCF wins, going to hold republican referendum
+	id = krg_can_crisis.32
+	title = krg_can_crisis.32.t
+	desc = krg_can_crisis.32.d
+	picture = GFX_CAN_ce_coldwell
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_crisis.32"}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_can_crisis.32.a
+		country_event = {
+			id = krg_can_crisis.17
+			days = 21
+		}
+		set_politics = {
+			ruling_party = social_democrat
+		}
+		coal_add_rad_soc = yes
+		retire_character = CAN_albert_windsor
+		CAN_mj_coldwell = {
+			promote_character = yes
+			promote_character = social_democrat_subtype
+		}
+		custom_effect_tooltip = CAN_increase_socdem_large_tt
+		CAN_popularity_socdem_increase_large = yes
+		set_variable = { global.CAN_parl_support_array^0 = 4 }
+		set_variable = { global.CAN_parl_support_array^1 = 4 }
+		set_variable = { global.CAN_parl_support_array^2 = 1 }
+		set_variable = { global.CAN_parl_support_array^3 = 1 }
+		set_variable = { global.CAN_parl_support_array^4 = 1 }
+		set_variable = { global.CAN_parl_support_array^5 = 1 }
+		set_variable = { global.CAN_parl_support_array^6 = 1 }
+		CAN_parl_adjust = yes
+		hidden_effect = {
+			remove_all_ministers = yes
+			add_ideas = CAN_M_J_ColdWell_hog_sde
+			add_ideas = CAN_F_R_Scott_fm_sde
+			add_ideas = CAN_Ross_Thatcher_em_sde
+			add_ideas = CAN_Angus_MacInnis_jm_sde
+			add_ideas = CAN_William_Bryce_im_sde
+			add_ideas = CAN_JB_Salsberg_hoi_rso
+		}
+		CAN_law_4_effect = yes
+		clr_country_flag = CAN_crisis_election_start
+	}
+}
+
+country_event = { ##govgen dismisses unionist, appoints liberal
+	id = krg_can_crisis.33
+	title = krg_can_crisis.33.t
+	desc = krg_can_crisis.33.d
+	picture = GFX_CAN_ce_lpc
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_crisis.33"}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_can_crisis.33.a
+		hidden_effect = {
+			country_event = {
+				id = krg_can_crisis.34
+				days = 48
+			}
+		}
+		##caretaker gov installation
+		set_politics = {
+			ruling_party = social_liberal
+		}
+		CAN_Lester_B_Pearson = {
+			promote_character = social_liberal
+		}
+		set_variable = { global.CAN_parl_support_array^0 = 1 }
+		set_variable = { global.CAN_parl_support_array^1 = 1 }
+		set_variable = { global.CAN_parl_support_array^2 = 4 }
+		set_variable = { global.CAN_parl_support_array^3 = 4 }
+		set_variable = { global.CAN_parl_support_array^4 = 4 }
+		set_variable = { global.CAN_parl_support_array^5 = 1 }
+		set_variable = { global.CAN_parl_support_array^6 = 1 }
+		hidden_effect = {
+			remove_all_ministers = yes
+			add_ideas = CAN_Lester_B_Pearson_hog_sli
+			add_ideas = CAN_Paul_Martin_Sr_fm_sli
+			add_ideas = CAN_Donald_Flemming_em_mli
+			add_ideas = CAN_James_Lorimer_Ilsley_jm_mli
+			add_ideas = CAN_Jean_Lesage_im_sli
+		}
+		activate_mission = CAN_snap_elections_crisis
+		set_variable = { CAN_election_party_support = 1 }
+		CAN_election_update_viewing_array = yes
+		set_country_flag = CAN_crisis_election_start
+		set_country_flag = CAN_crisis_election_support_lib
+		set_country_flag = CAN_crisis_election_rigged_ccf
+		if = {
+			limit = { is_ai = yes }
+			set_variable = { CAN_election_party_support = -1 }
+		}
+		hidden_effect = {
+			country_event = { id = krg_can_elect.1 }
+		}
+		custom_effect_tooltip = CAN_crisis_snap_elections_48_tt
+	}
+}
+
+country_event = { ##ccf wins big
+	id = krg_can_crisis.34
+	title = krg_can_crisis.34.t
+	desc = krg_can_crisis.34.d
+	picture = GFX_CAN_ce_coldwell
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_crisis.34"}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_can_crisis.34.a
+		set_politics = {
+			ruling_party = social_democrat
+		}
+		coal_add_rad_soc = yes
+		add_country_leader_role = {
+			Character = CAN_mj_coldwell
+			promote_leader = yes
+			Country_leader = {
+				ideology = social_democrat_subtype
+				expire="1982.1.1.1"
+			}
+		}
+		clr_country_flag = CAN_crisis_election_start
+		clr_country_flag = CAN_crisis_election_support_lib
+		clr_country_flag = CAN_crisis_election_rigged_ccf
+		set_variable = { global.CAN_parl_support_array^0 = 4 }
+		set_variable = { global.CAN_parl_support_array^1 = 4 }
+		set_variable = { global.CAN_parl_support_array^2 = 1 }
+		set_variable = { global.CAN_parl_support_array^3 = 1 }
+		set_variable = { global.CAN_parl_support_array^4 = 1 }
+		set_variable = { global.CAN_parl_support_array^5 = 1 }
+		set_variable = { global.CAN_parl_support_array^6 = 1 }
+		CAN_parl_adjust = yes
+		hidden_effect = {
+			remove_all_ministers = yes
+			add_ideas = CAN_M_J_ColdWell_hog_sde
+			add_ideas = CAN_F_R_Scott_fm_sde
+			add_ideas = CAN_Ross_Thatcher_em_sde
+			add_ideas = CAN_Angus_MacInnis_jm_sde
+			add_ideas = CAN_William_Bryce_im_sde
+			add_ideas = CAN_JB_Salsberg_hoi_rso
+		}
+		country_event = {
+			id = krg_can_crisis.35
+			days = 21
+		}
+		CAN_law_4_effect = yes
+	}
+}
+
+country_event = { ##the referendum but the monarchy is dead
+	id = krg_can_crisis.35
+	title = krg_can_crisis.35.t
+	desc = krg_can_crisis.35.d
+	picture = GFX_ce_voting
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_crisis.35"}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_can_crisis.35.a
+		news_event = { id = worldnews.52 }
+		clr_country_flag = country_show_pm
+		set_country_flag = CAN_republic
+	}
+}
+
+country_event = { ##ccf protests are huge, how do we handle them?
+	id = krg_can_crisis.36
+	title = krg_can_crisis.36.t
+	desc = krg_can_crisis.36.d
+	picture = GFX_ce_Anti_War_Protests
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_crisis.36"}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_can_crisis.36.a
+		country_event = {
+			id = krg_can_crisis.37
+			days = 2
+		}
+	}
+}
+
+country_event = { ##who do we send in to stop them
+	id = krg_can_crisis.37
+	title = krg_can_crisis.37.t
+	desc = krg_can_crisis.37.d
+	picture = GFX_ce_Anti_War_Protests
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_crisis.37"}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_can_crisis.37.a #send in the army
+		hidden_effect = {
+			country_event = {
+				id = krg_can_crisis.38
+				days = 2
+			}
+		}
+		ai_chance = {
+			base = 1
+		}
+	}
+	option = {
+		name = krg_can_crisis.37.b #send in the police but mobilize the army
+		hidden_effect = {
+			country_event = {
+				id = krg_can_crisis.41
+				days = 4
+			}
+			country_event = {
+				id = krg_can_crisis.42
+				days = 12
+			}
+		}
+		ai_chance = {
+			base = 1
+			modifier = { 
+				has_game_rule = {
+					rule = CAN_CONSTITUTIONAL_CRISIS
+					option = CAN_MONARCHY_UNIONISTS
+				}
+				factor = 1000
+			}
+		}
+	}
+}
+
+country_event = { ##army fires on protestors
+	id = krg_can_crisis.38
+	title = krg_can_crisis.38.t
+	desc = krg_can_crisis.38.d
+	picture = GFX_ce_Anti_War_Protests
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_crisis.38"}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_can_crisis.38.a
+		hidden_effect = {
+			country_event = {
+				id = krg_can_crisis.39
+				days = 6
+			}
+		}
+		set_country_flag = CAN_crisis_election_rigged_ccf
+	}
+}
+
+country_event = { ##huge protests up until the election
+	id = krg_can_crisis.39
+	title = krg_can_crisis.39.t
+	desc = krg_can_crisis.39.d
+	picture = GFX_ce_Anti_War_Protests
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_crisis.39"}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_can_crisis.39.a
+		hidden_effect = {
+			country_event = {
+				id = krg_can_crisis.40
+				days = 4
+			}
+		}
+	}
+}
+
+country_event = { ##landslide CCF victory
+	id = krg_can_crisis.40
+	title = krg_can_crisis.40.t
+	desc = krg_can_crisis.40.d
+	picture = GFX_CAN_ce_coldwell
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_crisis.40"}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_can_crisis.40.a
+		set_politics = {
+			ruling_party = social_democrat
+		}
+		coal_add_rad_soc = yes
+		custom_effect_tooltip = CAN_increase_socdem_large_tt
+		CAN_popularity_socdem_increase_large = yes
+		set_variable = { global.CAN_parl_support_array^0 = 4 }
+		set_variable = { global.CAN_parl_support_array^1 = 4 }
+		set_variable = { global.CAN_parl_support_array^2 = 1 }
+		set_variable = { global.CAN_parl_support_array^3 = 1 }
+		set_variable = { global.CAN_parl_support_array^4 = 1 }
+		set_variable = { global.CAN_parl_support_array^5 = 1 }
+		set_variable = { global.CAN_parl_support_array^6 = 1 }
+		hidden_effect = {
+			remove_all_ministers = yes
+			add_ideas = CAN_M_J_ColdWell_hog_sde
+			add_ideas = CAN_F_R_Scott_fm_sde
+			add_ideas = CAN_Ross_Thatcher_em_sde
+			add_ideas = CAN_Angus_MacInnis_jm_sde
+			add_ideas = CAN_William_Bryce_im_sde
+			add_ideas = CAN_JB_Salsberg_hoi_rso
+		}
+		clr_country_flag = CAN_crisis_election_start
+		CAN_parl_adjust = yes
+		country_event = {
+			id = krg_can_crisis.17
+			days = 21
+		}
+		retire_character = CAN_albert_windsor
+		CAN_mj_coldwell = {
+			promote_character = yes
+			promote_character = social_democrat_subtype
+		}
+	}
+}
+
+country_event = { ##police keep protests stable
+	id = krg_can_crisis.41
+	title = krg_can_crisis.41.t
+	desc = krg_can_crisis.41.d
+	picture = GFX_ce_Anti_War_Protests
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_crisis.41"}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_can_crisis.41.a
+	}
+}
+
+country_event = { ##ccf fails to gain a majority, tory led coalition
+	id = krg_can_crisis.42
+	title = krg_can_crisis.42.t
+	desc = {
+		trigger = {
+			has_country_flag = CAN_crisis_conservative_pm
+		}
+		text = krg_can_crisis.42.d2
+	}
+	desc = {
+		trigger = {
+			NOT = { has_country_flag = CAN_crisis_conservative_pm }
+		}
+		text = krg_can_crisis.42.d1
+	}
+	picture = GFX_CAN_ce_diefenbaker
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_crisis.42"}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_can_crisis.42.a
+		set_politics = {
+			ruling_party = market_liberal
+		}
+		coal_add_soc_lib = yes
+		coal_add_rev_rep = yes
+		coal_add_soc_con = yes
+		custom_effect_tooltip = CAN_increase_conservatives_large_tt
+		custom_effect_tooltip = CAN_increase_liberals_large_tt
+		CAN_popularity_conservatives_increase_large = yes
+		CAN_popularity_liberals_increase_large = yes
+		set_variable = { global.CAN_parl_support_array^0 = 1 }
+		set_variable = { global.CAN_parl_support_array^1 = 1 }
+		set_variable = { global.CAN_parl_support_array^2 = 4 }
+		set_variable = { global.CAN_parl_support_array^3 = 4 }
+		set_variable = { global.CAN_parl_support_array^4 = 4 }
+		set_variable = { global.CAN_parl_support_array^5 = 4 }
+		set_variable = { global.CAN_parl_support_array^6 = 1 }
+		CAN_parl_adjust = yes
+		hidden_effect = {
+			remove_all_ministers = yes
+			add_ideas = CAN_John_Diefenbaker_hog_mli
+			add_ideas = CAN_Paul_Martin_Sr_fm_sli
+			add_ideas = CAN_Donald_Flemming_em_mli
+			add_ideas = CAN_James_Lorimer_Ilsley_jm_mli
+			add_ideas = CAN_Jean_Lesage_im_sli
+		}
+		retire_character = CAN_albert_windsor
+		CAN_mj_coldwell = {
+			promote_character = yes
+			promote_character = social_democrat_subtype
+		}
+		clr_country_flag = CAN_crisis_election_start
+		clr_country_flag = CAN_crisis_election_support_con
+		hidden_effect = {
+			if = {
+				limit = {
+					has_country_flag = CAN_crisis_conservative_pm
+				}
+				country_event = {
+					id = krg_can_crisis.43
+					days = 12
+				}
+			} 
+			else_if = {
+				limit = {
+					has_country_flag = CAN_crisis_unionist_pm
+				}
+				country_event = {
+					id = krg_can_crisis.45
+					days = 6
+				}
+			}
+		}
+	}
+}
+
+country_event = { ##watered down version of the act is passed
+	id = krg_can_crisis.43
+	title = krg_can_crisis.43.t
+	desc = krg_can_crisis.43.d
+	picture = GFX_CAN_ce_parliament
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_crisis.43"}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_can_crisis.43.a
+		hidden_effect = {
+			country_event = {
+				id = KRG_can_crisis.44
+				days = 28
+			}
+		}
+		set_variable = { CAN_ggact_radicalism = 0 }
+		set_variable = { CAN_ggpact_pp = 0.05 }
+		set_variable = { CAN_ggpact_stab = 0.05 }
+		CAN_law_4_effect = yes
+	}
+}
+
+country_event = { ##ndp is formed
+	id = krg_can_crisis.44
+	title = krg_can_crisis.44.t
+	desc = krg_can_crisis.44.d
+	picture = GFX_CAN_ce_ndp
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_crisis.44"}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_can_crisis.44.a
+		set_global_flag = CAN_parl_ndp_formed
+		set_country_flag = CAN_NDP_republican
+		set_party_name = {
+			ideology = radical_socialist
+			name = CAN_radical_socialist_party_2
+			long_name = CAN_radical_socialist_party_2_long
+		}
+		set_party_name = {
+			ideology = social_democrat
+			name = CAN_social_democrat_party_2
+			long_name = CAN_social_democrat_party_2_long
+		}
+	}
+}
+
+country_event = { ##revoke the act, temp coalition is revoked?
+	id = krg_can_crisis.45
+	title = krg_can_crisis.45.t
+	desc = krg_can_crisis.45.d
+	picture = GFX_CAN_ce_parliament
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_crisis.45"}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_can_crisis.45.a
+		#news_event = { id = worldnews.58 } #unionists hold on
+		set_variable = { CAN_ggact_radicalism = 0 }
+		set_variable = { CAN_ggpact_pp = 0.05 }
+		set_variable = { CAN_ggpact_stab = 0.05 }
+		custom_effect_tooltip = CAN_increase_unionists_large_tt
+		CAN_popularity_unionists_increase_large = yes
+		CAN_popularity_unionists_increase_large = yes
+		CAN_popularity_unionists_increase_large = yes
+		CAN_popularity_unionists_increase_large = yes
+		CAN_popularity_unionists_increase_large = yes
+	}
+}
+
+country_event = { ##big speech from the tories and liberals about uniting for democracy, calling for elections
+	id = krg_can_crisis.46
+	title = krg_can_crisis.46.t
+	desc = krg_can_crisis.46.d
+	picture = GFX_CAN_ce_laurent
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_crisis.46"}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_can_crisis.46.a
+		activate_mission = CAN_snap_elections_crisis
+		set_variable = { CAN_election_party_support = 2 }
+		CAN_election_update_viewing_array = yes
+		set_country_flag = CAN_crisis_election_start
+		set_country_flag = CAN_crisis_election_support_pc
+		set_country_flag = CAN_crisis_election_rigged_pc
+		if = {
+			limit = { is_ai = yes }
+			set_variable = { CAN_election_party_support = -1 }
+		}
+		hidden_effect = {
+			country_event = { id = krg_can_elect.1 }
+		}
+		hidden_effect = {
+			country_event = {
+				id = krg_can_crisis.42
+				days = 48
+			}
+		}
+		custom_effect_tooltip = CAN_crisis_snap_elections_48_tt
+	}
+}
+
+country_event = { ##liberals call out tories for not involving them
+	id = krg_can_crisis.47
+	title = krg_can_crisis.47.t
+	desc = krg_can_crisis.47.d
+	picture = GFX_CAN_ce_laurent
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_crisis.47"}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_can_crisis.47.a
+		hidden_effect = {
+			country_event = {
+				id = krg_can_crisis.48
+				days = 3
+			}
+		}
+		custom_effect_tooltip = CAN_decrease_conservatives_medium_tt
+		CAN_popularity_conservatives_decrease_medium = yes
+	}
+}
+
+country_event = { ##tories fire back "is the only thing you care about being in power"
+	id = krg_can_crisis.48
+	title = krg_can_crisis.48.t
+	desc = krg_can_crisis.48.d
+	picture = GFX_CAN_ce_diefenbaker
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_crisis.48"}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_can_crisis.48.a
+		hidden_effect = {
+			country_event = {
+				id = krg_can_crisis.49
+				days = 5
+			}
+		}
+		custom_effect_tooltip = CAN_decrease_liberals_medium_tt
+		CAN_popularity_liberals_decrease_medium = yes
+	}
+}
+
+country_event = { ##tories call elections
+	id = krg_can_crisis.49
+	title = krg_can_crisis.49.t
+	desc = krg_can_crisis.49.d
+	picture = GFX_ce_voting
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_crisis.49"}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_can_crisis.49.a #hold them relatively soon
+		hidden_effect = {
+			country_event = {
+				id = krg_can_crisis.51
+				days = 34
+			}
+		}
+		custom_effect_tooltip = CAN_crisis_snap_elections_56_tt
+	}
+	option = {
+		name = krg_can_crisis.49.a #hold them very soon
+		hidden_effect = {
+			country_event = {
+				id = krg_can_crisis.42
+				days = 30
+			}
+			country_event = {
+				id = krg_can_crisis.50
+				days = 16
+			}
+		}
+		custom_effect_tooltip = CAN_crisis_snap_elections_30_tt
+	}
+}
+
+country_event = { ##ccf called out for ramping up right before elections
+	id = krg_can_crisis.50
+	title = krg_can_crisis.50.t
+	desc = krg_can_crisis.50.d
+	picture = GFX_CAN_ce_ccf
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_crisis.50"}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_can_crisis.50.a
+		custom_effect_tooltip = CAN_decrease_socdem_medium_tt
+		CAN_popularity_socdem_decrease_medium = yes
+	}
+}
+
+country_event = { ##ccf biggest protest yet, what do we do!
+	id = krg_can_crisis.51
+	title = krg_can_crisis.51.t
+	desc = krg_can_crisis.51.d
+	picture = GFX_ce_Anti_War_Protests
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_crisis.51"}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_can_crisis.51.a #there will never be a canadian 1925
+		hidden_effect = {
+			country_event = {
+				id = krg_can_crisis.37
+				days = 2
+			}
+		}
+	}
+	option = {
+		name = krg_can_crisis.51.b #let them happen
+		hidden_effect = {
+			country_event = {
+				id = krg_can_crisis.42
+				days = 40
+			}
+		}
+	}
+}
+
+##Montgomery Plan
+
+country_event = { ##canada invests in our civilian development!
+	id = krg_montgomery_plan.1
+	title = krg_montgomery_plan.1.t
+	desc = krg_montgomery_plan.1.d
+	picture = GFX_ce_factory
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_montgomery_plan.1"}
+
+	is_triggered_only = yes
+
+	option = {
+		name = krg_montgomery_plan.1.a
+		add_timed_idea = {
+			idea = CAN_montgomery_plan_civilian_aid
+			days = 365
+		}
+		add_opinion_modifier = {
+			target = CAN
+			modifier = CAN_montgomery_plan_opinion
+		}
+		if = {
+			limit = {
+				tag = ITA
+			}
+			158 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+			}
+			907 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		} else_if = {
+			limit = {
+				tag = ICE
+			}
+			100 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+			}
+		} else_if = {
+			limit = {
+				tag = NFA
+			}
+			26 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			33 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			25 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+		} else_if = {
+			limit = {
+				tag = SIC
+			}
+			115 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			117 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		} else_if = {
+			limit = {
+				OR = {
+					tag = SPR
+					tag = ENG
+				}
+			}
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+		}	
+		else = {
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+}
+
+country_event = { ##canada invests in our military development!
+	id = krg_montgomery_plan.2
+	title = krg_montgomery_plan.2.t
+	desc = krg_montgomery_plan.2.d
+	picture = GFX_ce_factory
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_montgomery_plan.2"}
+
+	is_triggered_only = yes
+
+	option = {
+		name = krg_montgomery_plan.2.a
+		add_timed_idea = {
+			idea = CAN_montgomery_plan_military_aid
+			days = 365
+		}
+		add_opinion_modifier = {
+			target = CAN
+			modifier = CAN_montgomery_plan_opinion
+		}
+		if = {
+			limit = {
+				tag = ITA
+			}
+			907 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = dockyard
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				tag = ICE
+			}
+			100 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = naval_base
+					level = 3
+					instant_build = yes
+					province = 12674
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				tag = ENG
+			}
+			338 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = anti_air_building
+					level = 2
+					instant_build = yes
+				}
+			}
+			132 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = anti_air_building
+					level = 2
+					instant_build = yes
+				}
+			}
+			128 = {
+				add_building_construction = {
+					type = anti_air_building
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				OR = {
+					tag = NFA
+					tag = SPR
+				}
+			}
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		} else = {
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+}
+
+country_event = { ##the elettrotreno rapido rides again!
+	id = krg_montgomery_plan.3
+	title = krg_montgomery_plan.3.t
+	desc = krg_montgomery_plan.3.d
+
+	is_triggered_only = yes
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_montgomery_plan.3"
+		subtract_from_variable = { CAN_montgomery_plan_consumer_goods = 0.05 }
+	}
+
+	hidden = yes
+
+	option = {
+		name = krg_montgomery_plan.4.a
+	}
+}
+
+##flavor events from here on
+
+country_event = { ##the elettrotreno rapido rides again!
+	id = krg_montgomery_plan.4
+	title = krg_montgomery_plan.4.t
+	desc = krg_montgomery_plan.4.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_montgomery_plan.4"}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_montgomery_plan.4.a
+	}
+}
+
+country_event = { ##icelandic fisherman
+	id = krg_montgomery_plan.5
+	title = krg_montgomery_plan.5.t
+	desc = krg_montgomery_plan.5.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_montgomery_plan.5"}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_montgomery_plan.5.a
+	}
+}
+
+country_event = { ##french farmer
+	id = krg_montgomery_plan.6
+	title = krg_montgomery_plan.6.t
+	desc = krg_montgomery_plan.6.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_montgomery_plan.6"}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_montgomery_plan.6.a
+	}
+}
+
+country_event = { ##tourist in sicily
+	id = krg_montgomery_plan.7
+	title = krg_montgomery_plan.7.t
+	desc = krg_montgomery_plan.7.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_montgomery_plan.7"}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_montgomery_plan.7.a
+	}
+}
+
+
+country_event = { ##Edward and Eden Arrive in Canada (CAN)
+	id = krg_can_patriation.1
+	title = krg_can_patriation.1.t
+	desc = krg_can_patriation.1.d
+	picture = GFX_ce_anthony_eden_4
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_patriation.1" }
+	immediate = {
+		hidden_effect = {
+			ENG = { country_event = { id = krg_can_patriation.2 } }
+			country_event = { id = krg_can_patriation.3 days = 5 }
+		}
+	}
+	is_triggered_only = yes
+
+	option = {
+		name = krg_can_patriation.1.a
+	
+	}
+}
+
+country_event = { ##Edward and Eden Fly to Canada (ENG)
+	id = krg_can_patriation.2
+	title = krg_can_patriation.2.t
+	desc = krg_can_patriation.2.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_patriation.2" }
+	is_triggered_only = yes
+
+	picture = GFX_ce_anthony_eden_4
+
+	option = {
+		name = krg_can_patriation.2.a
+	
+	}
+}
+
+country_event = { ##King Meets with the British (CAN)
+	id = krg_can_patriation.3
+	title = krg_can_patriation.3.t
+	desc = krg_can_patriation.3.d
+	picture = GFX_ce_can_flag_debate_3
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_patriation.3" }
+	immediate = {
+		hidden_effect = {
+			country_event = { id = krg_can_patriation.5 days = 10 }
+			ENG = { country_event = { id = krg_can_patriation.4 days = 10 } }
+		}
+	}
+	is_triggered_only = yes
+
+	option = {
+		name = krg_can_patriation.3.a
+	
+	}
+}
+
+country_event = { ##Canada begins Constitutional Negotiations (ENG)
+	id = krg_can_patriation.4
+	title = krg_can_patriation.4.t
+	desc = krg_can_patriation.4.d
+	picture = GFX_ce_can_flag_debate_3
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_patriation.4" }
+	is_triggered_only = yes
+
+	option = {
+		name = krg_can_patriation.4.a
+	
+	}
+}
+
+country_event = { ##King Announces Constitutional Negotiations (CAN)
+	id = krg_can_patriation.5
+	title = krg_can_patriation.5.t
+	desc = krg_can_patriation.5.d
+	picture = GFX_ce_can_citizens
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_patriation.5" }
+	immediate = {
+		hidden_effect = {
+			country_event = { id = krg_can_patriation.6 days = 120 }
+		}
+	}
+	is_triggered_only = yes
+
+	option = {
+		name = krg_can_patriation.5.a
+	
+	}
+}
+
+country_event = { ##Forming a Negotiatory Committee (CAN)
+	id = krg_can_patriation.6
+	title = krg_can_patriation.6.t
+	desc = krg_can_patriation.6.d
+	picture = GFX_CAN_ce_parliament
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_patriation.6" }
+	immediate = {
+		hidden_effect = {
+			country_event = { id = krg_can_patriation.8 days = 7 }
+		}
+	}
+	is_triggered_only = yes
+
+	option = { #Ensure a Liberal Majority
+		name = krg_can_patriation.6.a
+		#if = {
+		#	limit = {
+		#		has_country_flag = CAN_1949_election_done
+		#		NOT = {
+		#			has_government = social_liberal
+		#		}
+		#	}
+		#	country_event = { id = krg_can_patriation.7 days = 1 }
+		#}
+	}
+	option = { #Make it a Cross-Bench Committee
+		name = krg_can_patriation.6.b
+	}
+}
+
+country_event = { ##Reoganising the Negotiatory Committee (CAN)
+	id = krg_can_patriation.7
+	title = krg_can_patriation.7.t
+	desc = krg_can_patriation.7.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_patriation.7" }
+	is_triggered_only = yes
+
+	option = { #Dont Bother, they know not to politicise matters
+		name = krg_can_patriation.7.a
+	
+	}
+	option = { #Make it Cross-Bench
+		name = krg_can_patriation.7.b
+	
+	}
+}
+
+country_event = { ##Fury Among the Exiles (CAN)
+	id = krg_can_patriation.8
+	title = krg_can_patriation.8.t
+	desc = krg_can_patriation.8.d
+	picture = GFX_CAN_ce_parliament
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_patriation.8" }
+	immediate = {
+		hidden_effect = {
+			country_event = { id = krg_can_patriation.9 days = 50 }
+			country_event = { id = krg_can_patriation.12 days = 7 }
+		}
+	}
+	is_triggered_only = yes
+
+	option = { #Ignore Them (Tory Popularity Up?)
+		name = krg_can_patriation.8.a
+		CAN_popularity_conservatives_increase_tiny = yes
+		custom_effect_tooltip = CAN_increase_conservatives_tiny_tt
+	}
+	option = { #Cut a Deal to Silence Them (Lib Popularity Up?)
+		name = krg_can_patriation.8.b
+		add_political_power = -25
+		CAN_popularity_liberals_increase_tiny = yes
+		custom_effect_tooltip = CAN_increase_liberals_tiny_tt
+	}
+}
+
+country_event = { ##Provincial Leaders Petition the PM (CAN)
+	id = krg_can_patriation.9
+	title = krg_can_patriation.9.t
+	desc = krg_can_patriation.9.d
+	picture = GFX_CAN_ce_duplessis
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_patriation.9" }
+	immediate = {
+		hidden_effect = {
+			country_event = { id = krg_can_patriation.10 days = 50 }
+		}
+	}
+	is_triggered_only = yes
+
+	option = {
+		name = krg_can_patriation.9.a
+	
+	}
+}
+
+country_event = { ##[Insert Provincial Leader] comes to Ottawa (CAN)
+	id = krg_can_patriation.10
+	title = krg_can_patriation.10.t
+	desc = krg_can_patriation.10.d
+	picture = GFX_CAN_ce_duplessis
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_patriation.10" }
+	immediate = {
+		hidden_effect = {
+			country_event = { id = krg_can_patriation.11 days = 5 }
+		}
+	}
+	is_triggered_only = yes
+
+	option = {
+		name = krg_can_patriation.10.a
+	}
+}
+
+country_event = { ##Fury Among Provincial Leaders (CAN)
+	id = krg_can_patriation.11
+	title = krg_can_patriation.11.t
+	desc = krg_can_patriation.11.d
+	picture = GFX_CAN_ce_duplessis
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_patriation.11" }
+	is_triggered_only = yes
+
+	option = {
+		name = krg_can_patriation.11.a
+		add_political_power = -10
+		CAN_popularity_ruling_decrease_tiny = yes
+	}
+}
+
+country_event = { ##The Foriegn Offices Meet (CAN)
+	id = krg_can_patriation.12
+	title = krg_can_patriation.12.t
+	desc = krg_can_patriation.12.d
+	picture = GFX_ce_can_citizens
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_patriation.12" }
+	immediate = {
+		hidden_effect = {
+			country_event = { id = krg_can_patriation.13 days = 60 }
+			ENG = { country_event = { id = krg_can_patriation.14 } }
+		}
+	}
+	is_triggered_only = yes
+
+	option = {
+		name = krg_can_patriation.12.a
+	
+	}
+}
+
+country_event = { ##Establishing the Areas of Jurisdiction (CAN)
+	id = krg_can_patriation.13
+	title = krg_can_patriation.13.t
+	desc = krg_can_patriation.13.d
+	picture = GFX_ce_can_citizens
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_patriation.13" }
+	immediate = {
+		hidden_effect = {
+			ENG = { country_event = { id = krg_can_patriation.15 } }
+		}
+	}
+	is_triggered_only = yes
+
+	option = {
+		name = krg_can_patriation.13.a
+	
+	}
+}
+
+country_event = { ##Canadian Negotiations Begin (ENG)
+	id = krg_can_patriation.14
+	title = krg_can_patriation.14.t
+	desc = krg_can_patriation.14.d
+	picture = GFX_ce_can_citizens
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_patriation.14" }
+	is_triggered_only = yes
+
+	option = {
+		name = krg_can_patriation.14.a
+	
+	}
+}
+
+country_event = { ##The Canadian Negotiations Wear On (ENG)
+	id = krg_can_patriation.15
+	title = krg_can_patriation.15.t
+	desc = krg_can_patriation.15.d
+	picture = GFX_ce_can_citizens
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_patriation.15" }
+	is_triggered_only = yes
+
+	option = {
+		name = krg_can_patriation.15.a #This is Fine
+		hidden_effect = {
+			CAN = { country_event = { id = krg_can_patriation.21 days = 50 } }
+		}
+	}
+	option = {
+		name = krg_can_patriation.15.b #This is too far for this series of negotiations
+		hidden_effect = {
+			CAN = { country_event = { id = krg_can_patriation.16 days = 3 } }
+		}
+	}
+}
+
+country_event = { ##British Pushback (CAN)
+	id = krg_can_patriation.16
+	title = krg_can_patriation.16.t
+	desc = krg_can_patriation.16.d
+	picture = GFX_ce_can_citizens
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_patriation.16" }
+	is_triggered_only = yes
+
+	option = {
+		name = krg_can_patriation.16.a #Take the Revised Areas of Jurisdiction
+		add_political_power = -25
+		hidden_effect = {
+			ENG = { country_event = { id = krg_can_patriation.17 days = 3 } }
+		}
+	}
+	option = {
+		name = krg_can_patriation.16.b #Stand Firm
+		hidden_effect = {
+			ENG = { country_event = { id = krg_can_patriation.18 days = 3 } }
+		}
+	}
+}
+
+country_event = { ##Canada Accepts Area of Jurisdiction Revisions (ENG)
+	id = krg_can_patriation.17
+	title = krg_can_patriation.17.t
+	desc = krg_can_patriation.17.d
+	picture = GFX_ce_can_citizens
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_patriation.17" }
+	immediate = {
+		hidden_effect = {
+			CAN = { country_event = { id = krg_can_patriation.21 days = 50 } }
+		}
+	}
+	is_triggered_only = yes
+
+	option = {
+		name = krg_can_patriation.17.a
+		add_political_power = 10
+	}
+}
+
+country_event = { ##Canada Refuses Area of Jurisdiction Revisions (ENG)
+	id = krg_can_patriation.18
+	title = krg_can_patriation.18.t
+	desc = krg_can_patriation.18.d
+	picture = GFX_ce_can_citizens
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_patriation.18" }
+	immediate = {
+		hidden_effect = {
+			country_event = { id = krg_can_patriation.19 days = 3 }
+		}
+	}
+	is_triggered_only = yes
+
+	option = { #Declare the AoJ a "red line"
+		name = krg_can_patriation.18.a
+		add_political_power = -10
+	}
+}
+
+country_event = { ##Anthony Eden Intervenes (ENG)
+	id = krg_can_patriation.19
+	title = krg_can_patriation.19.t
+	desc = krg_can_patriation.19.d
+	picture = GFX_ce_anthony_eden_4
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_patriation.19" }
+	immediate = {
+		hidden_effect = {
+			CAN = { country_event = { id = krg_can_patriation.20 days = 3 } }
+		}
+	}
+	is_triggered_only = yes
+
+	option = {
+		name = krg_can_patriation.19.a
+		add_political_power = -25
+	}
+}
+
+country_event = { ##The British Accept Original Areas of Jurisdiction (CAN)
+	id = krg_can_patriation.20
+	title = krg_can_patriation.20.t
+	desc = krg_can_patriation.20.d
+	picture = GFX_ce_house_of_parliament_1
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_patriation.20" }
+	immediate = {
+		hidden_effect = {
+			country_event = { id = krg_can_patriation.21 days = 50 }
+		}
+	}
+	is_triggered_only = yes
+
+	option = {
+		name = krg_can_patriation.20.a
+		add_political_power = 10
+	}
+}
+
+country_event = { ##Progress Made with Negotiations (CAN)
+	id = krg_can_patriation.21
+	title = krg_can_patriation.21.t
+	desc = krg_can_patriation.21.d
+	picture = GFX_ce_can_citizens
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_patriation.21" }
+	immediate = {
+		hidden_effect = {
+			country_event = { id = krg_can_patriation.22 days = 21 }
+		}
+	}
+	trigger = {
+		NOT = { CAN = { has_country_flag = CAN_republic } }
+	}
+	is_triggered_only = yes
+
+	option = {
+		name = krg_can_patriation.21.a
+		add_political_power = 25
+	}
+}
+
+country_event = { ##Questions about Immigration (CAN)
+	id = krg_can_patriation.22
+	title = krg_can_patriation.22.t
+	desc = krg_can_patriation.22.d
+	picture = GFX_CAN_ce_parliament
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_patriation.22" }
+	trigger = {
+		NOT = { CAN = { has_country_flag = CAN_republic } }
+	}
+	is_triggered_only = yes
+
+	option = {
+		name = krg_can_patriation.22.a #This is not a Federal Issue
+		hidden_effect = {
+			country_event = { id = krg_can_patriation.24 days = 21 }
+		}
+	}
+	option = {
+		name = krg_can_patriation.22.b #Immigration must be Federally Protected
+		add_political_power = -10
+		hidden_effect = {
+			country_event = { id = krg_can_patriation.23 days = 7 }
+		}
+	}
+}
+
+country_event = { ##Outrage from Quebec (CAN)
+	id = krg_can_patriation.23
+	title = krg_can_patriation.23.t
+	desc = krg_can_patriation.23.d
+	picture = GFX_CAN_ce_duplessis
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_patriation.23" }
+	trigger = {
+		NOT = { CAN = { has_country_flag = CAN_republic } }
+	}
+	is_triggered_only = yes
+
+	option = {
+		name = krg_can_patriation.23.a #Shit Backtrack ASAP
+		hidden_effect = {
+			country_event = { id = krg_can_patriation.24 days = 21 }
+		}
+	}
+	option = {
+		name = krg_can_patriation.23.b #Immigration is a FEDERAL ISSUE (big pp hit, pop hit)
+		hidden_effect = {
+			country_event = { id = krg_can_patriation.24 days = 21 }
+			set_country_flag = CAN_patriation_immigration_federal
+			add_political_power = -100
+			CAN_popularity_ruling_decrease_medium = yes
+		}
+	}
+}
+
+country_event = { ##Negotiations Nearing Completion (CAN)
+	id = krg_can_patriation.24
+	title = krg_can_patriation.24.t
+	desc = krg_can_patriation.24.d
+	picture = GFX_ce_can_citizens
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_patriation.24" }
+	immediate = {
+		hidden_effect = {
+			country_event = { id = krg_can_patriation.25 days = 28 }
+		}
+	}
+	trigger = {
+		NOT = { CAN = { has_country_flag = CAN_republic } }
+	}
+	is_triggered_only = yes
+
+	option = {
+		name = krg_can_patriation.24.a
+	}
+}
+
+country_event = { ##The Negotiatory Committee's Recommendations (CAN)
+	id = krg_can_patriation.25
+	title = krg_can_patriation.25.t
+	desc = krg_can_patriation.25.d
+	picture = GFX_CAN_ce_parliament
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_patriation.25" }
+	immediate = {
+		hidden_effect = {
+			ENG = {
+				country_event = { id = krg_can_patriation.31 }
+			}
+			if = { #If Liberal
+				limit = { has_government = social_liberal }
+				country_event = { id = krg_can_patriation.28 days = 14 }
+			} else_if = { #If CCF
+				limit = { has_government = social_democrat }
+				country_event = { id = krg_can_patriation.26 days = 3 }
+			} else = { #If Tory
+				country_event = { id = krg_can_patriation.27 days = 3 }
+			}
+			}
+	}
+	trigger = {
+		NOT = { CAN = { has_country_flag = CAN_republic } }
+	}
+	is_triggered_only = yes
+
+	option = {
+		name = krg_can_patriation.25.a
+	}
+}
+
+country_event = { ##Revising the Negotiatory Committee's Paper (SocDem) (CAN)
+	id = krg_can_patriation.26
+	title = krg_can_patriation.26.t
+	desc = krg_can_patriation.26.d
+	picture = GFX_CAN_ce_parliament
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_patriation.26" }
+	trigger = {
+		NOT = { CAN = { has_country_flag = CAN_republic } }
+	}
+	is_triggered_only = yes
+
+	option = {
+		name = krg_can_patriation.26.a #Include Clause on ??? (Costs PP)
+		hidden_effect = {
+			country_event = { id = krg_can_patriation.29 days = 14 }
+			add_political_power = -50
+			CAN_popularity_ruling_increase_small = yes
+		}
+	}
+	option = {
+		name = krg_can_patriation.26.b #No
+		hidden_effect = {
+			country_event = { id = krg_can_patriation.28 days = 14 }
+		}
+	}
+}
+
+country_event = { ##Revising the Negotiatory Committee's Paper (Tory) (CAN)
+	id = krg_can_patriation.27
+	title = krg_can_patriation.27.t
+	desc = krg_can_patriation.27.d
+	picture = GFX_CAN_ce_parliament
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_patriation.27" }
+	trigger = {
+		NOT = { CAN = { has_country_flag = CAN_republic } }
+	}
+	is_triggered_only = yes
+
+	option = {
+		name = krg_can_patriation.27.a #Include Clause on ??? (Costs PP)
+		hidden_effect = {
+			country_event = { id = krg_can_patriation.30 days = 14 }
+			add_political_power = -50
+			CAN_popularity_ruling_increase_small = yes
+		}
+	}
+	option = {
+		name = krg_can_patriation.27.b #No
+		hidden_effect = {
+			country_event = { id = krg_can_patriation.28 days = 14 }
+		}
+	}
+}
+
+country_event = { ##The British North American Act [GetYear] (Country Flag Set) (Vanilla) (CAN)
+	id = krg_can_patriation.28
+	title = krg_can_patriation.28.t
+	desc = krg_can_patriation.28.d
+	picture = GFX_CAN_ce_parliament
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_patriation.28" }
+	trigger = {
+		NOT = { CAN = { has_country_flag = CAN_republic } }
+	}
+	is_triggered_only = yes
+
+	option = {
+		name = krg_can_patriation.28.a
+		hidden_effect = {
+			country_event = {
+				id = krg_can_patriation.32
+				days = 7
+			}
+		}
+	}
+}
+
+country_event = { ##The British North American Act [GetYear] (Country Flag Set) (SocDem Clause Included) (CAN)
+	id = krg_can_patriation.29
+	title = krg_can_patriation.29.t
+	desc = krg_can_patriation.29.d
+	picture = GFX_CAN_ce_parliament
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_patriation.29" }
+	trigger = {
+		NOT = { CAN = { has_country_flag = CAN_republic } }
+	}
+	is_triggered_only = yes
+
+	option = {
+		name = krg_can_patriation.29.a
+		hidden_effect = {
+			country_event = {
+				id = krg_can_patriation.32
+				days = 7
+			}
+		}
+	}
+}
+
+country_event = { ##The British North American Act [GetYear] (Country Flag Set) (Tory Clause Included) (CAN)
+	id = krg_can_patriation.30
+	title = krg_can_patriation.30.t
+	desc = krg_can_patriation.30.d
+	picture = GFX_CAN_ce_parliament
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_patriation.30" }
+	trigger = {
+		NOT = { CAN = { has_country_flag = CAN_republic } }
+	}
+	is_triggered_only = yes
+
+	option = {
+		name = krg_can_patriation.30.a
+		hidden_effect = {
+			country_event = {
+				id = krg_can_patriation.32
+				days = 7
+			}
+		}
+	}
+}
+
+country_event = { ##Canadian Negotiations Done (ENG)
+	id = krg_can_patriation.31
+	title = krg_can_patriation.31.t
+	desc = krg_can_patriation.31.d
+	picture = GFX_ce_can_citizens
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_patriation.31" }
+	trigger = {
+		NOT = { CAN = { has_country_flag = CAN_republic } }
+	}
+	is_triggered_only = yes
+
+	option = {
+		name = krg_can_patriation.31.a
+	}
+}
+
+country_event = { ##GovGen Albert "Approves" the Act (CAN)
+	id = krg_can_patriation.32
+	title = krg_can_patriation.32.t
+	desc = krg_can_patriation.32.d
+	picture = GFX_CAN_ce_albert_windsor
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_patriation.32" }
+	trigger = {
+		NOT = { CAN = { has_country_flag = CAN_republic } }
+	}
+	is_triggered_only = yes
+
+	option = {
+		name = krg_can_patriation.32.a
+		add_political_power = 25
+		hidden_effect = {
+			ENG = {
+				country_event = { id = krg_can_patriation.33 }
+			}
+		}
+	}
+}
+
+country_event = { ##Canada "Passes" the British North America Act [GetYear] (ENG)
+	id = krg_can_patriation.33
+	title = krg_can_patriation.33.t
+	desc = krg_can_patriation.33.d
+	picture = GFX_CAN_ce_parliament
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_patriation.33" }
+	trigger = {
+		NOT = { CAN = { has_country_flag = CAN_republic } }
+	}
+	is_triggered_only = yes
+
+	option = {
+		name = krg_can_patriation.33.a
+		hidden_effect = {
+			country_event = {
+				id = krg_can_patriation.34
+				days = 60
+			}
+		}
+	}
+}
+
+country_event = { ##The British North America Act [GetYear] (ENG)
+	id = krg_can_patriation.34
+	title = krg_can_patriation.34.t
+	desc = krg_can_patriation.34.d
+	picture = GFX_ce_house_of_commons_3
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_patriation.34" }
+	trigger = {
+		NOT = { CAN = { has_country_flag = CAN_republic } }
+	}
+	is_triggered_only = yes
+
+	option = {
+		name = krg_can_patriation.34.a
+		hidden_effect = {
+			country_event = {
+				id = krg_can_patriation.36 #The Commons Passes the British North America Act
+				days = 3
+			}
+			CAN = {
+				country_event = { id = krg_can_patriation.35} #Westminster Tables the British North America Act [GetYear]
+			}
+		}
+	}
+}
+
+country_event = { ##Westminster Tables the British North America Act [GetYear] (CAN)
+	id = krg_can_patriation.35
+	title = krg_can_patriation.35.t
+	desc = krg_can_patriation.35.d
+	picture = GFX_ce_house_of_parliament_4
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_patriation.35" }
+	trigger = {
+		NOT = { CAN = { has_country_flag = CAN_republic } }
+	}
+	is_triggered_only = yes
+
+	option = {
+		name = krg_can_patriation.35.a
+	}
+}
+
+country_event = { ##The Commons Passes the British North America Act (ENG)
+	id = krg_can_patriation.36
+	title = krg_can_patriation.36.t
+	desc = krg_can_patriation.36.d
+	picture = GFX_ce_house_of_commons_6
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_patriation.36" }
+	trigger = {
+		NOT = { CAN = { has_country_flag = CAN_republic } }
+	}
+	is_triggered_only = yes
+
+	option = {
+		name = krg_can_patriation.36.a
+		hidden_effect = {
+			country_event = {
+				id = krg_can_patriation.37 #The Stumbling Block
+				days = 21
+			}
+		}
+	}
+}
+
+country_event = { ##The Stumbling Block (ENG)
+	id = krg_can_patriation.37
+	title = krg_can_patriation.37.t
+	desc = krg_can_patriation.37.d
+	picture = GFX_ce_house_of_parliament_4
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_patriation.37" }
+	trigger = {
+		NOT = { CAN = { has_country_flag = CAN_republic } }
+	}
+	is_triggered_only = yes
+
+	option = {
+		name = krg_can_patriation.37.a #Force the Issue
+		hidden_effect = {
+			if = {
+				limit = {
+					has_government = social_democrat
+				}
+				country_event = {
+					id = krg_can_patriation.38 #The Mail in Uproar
+					days = 7
+				}
+			} else = {
+				country_event = {
+					id = krg_can_patriation.39 #The Cost of Getting Things Done
+					days = 7
+				}
+			}
+		}
+	}
+	option = {
+		name = krg_can_patriation.37.b #Wait the Lords Out
+		hidden_effect = {
+			country_event = {
+				id = krg_can_patriation.40 #The Procrastination Continues
+				days = 180
+			}
+		}
+	}
+}
+
+country_event = { ##The Mail in Uproar (ENG)
+	id = krg_can_patriation.38
+	title = krg_can_patriation.38.t
+	desc = krg_can_patriation.38.d
+	picture = GFX_report_greek_news
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_patriation.38" }
+	trigger = {
+		NOT = { CAN = { has_country_flag = CAN_republic } }
+	}
+	is_triggered_only = yes
+
+	option = {
+		name = krg_can_patriation.38.a
+		add_political_power = -10
+		hidden_effect = {
+			country_event = {
+				id = krg_can_patriation.41 #The Lords Approve the British North America Act
+				days = 30
+			}
+		}
+	}
+}
+
+country_event = { ##The Cost of Getting Things Done (ENG)
+	id = krg_can_patriation.39
+	title = krg_can_patriation.39.t
+	desc = krg_can_patriation.39.d
+	picture = GFX_ce_house_of_parliament_4
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_patriation.39" }
+	trigger = {
+		NOT = { CAN = { has_country_flag = CAN_republic } }
+	}
+	is_triggered_only = yes
+
+	option = {
+		name = krg_can_patriation.39.a
+		add_political_power = -5
+		hidden_effect = {
+			country_event = {
+				id = krg_can_patriation.41 #The Lords Approve the British North America Act
+				days = 30
+			}
+		}	
+	}
+}
+
+country_event = { ##The Procrastination Continues (ENG)
+	id = krg_can_patriation.40
+	title = krg_can_patriation.40.t
+	desc = krg_can_patriation.40.d
+	picture = GFX_ce_house_of_parliament_4
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_patriation.40" }
+	trigger = {
+		NOT = { CAN = { has_country_flag = CAN_republic } }
+	}
+	is_triggered_only = yes
+
+	option = {
+		name = krg_can_patriation.40.a #Force the Issue
+		add_political_power = -25
+		hidden_effect = {
+			if = {
+				limit = {
+					has_government = social_democrat
+				}
+				country_event = {
+					id = krg_can_patriation.38 #The Mail in Uproar
+					days = 7
+				}
+			} else = {
+				country_event = {
+					id = krg_can_patriation.39 #The Cost of Getting Things Done
+					days = 7
+				}
+			}
+			CAN = {
+				country_event = { id = krg_can_patriation.43 } #The House of Lords Stonewalls the BNA Act
+			}
+		}
+	}
+	option = {
+		name = krg_can_patriation.40.b #They can't stonewall forever
+		hidden_effect = {
+			country_event = {
+				id = krg_can_patriation.42 #The Lords Approve the British North America Act (Without Pressure)
+				days = 180
+			}
+			CAN = {
+				country_event = { id = krg_can_patriation.43 } #The House of Lords Stonewalls the BNA Act
+			}
+		}
+	}
+}
+
+country_event = { ##The Lords Approve the British North America Act (ENG)
+	id = krg_can_patriation.41
+	title = krg_can_patriation.41.t
+	desc = krg_can_patriation.41.d
+	picture = GFX_ce_house_of_parliament_4
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_patriation.41" }
+	trigger = {
+		NOT = { CAN = { has_country_flag = CAN_republic } }
+	}
+	is_triggered_only = yes
+
+	option = {
+		name = krg_can_patriation.41.a
+		hidden_effect = {
+			CAN = {
+				country_event = { id = krg_can_patriation.44 } #The House of Lords Forced to Pass the BNA Act
+			}
+			country_event = {
+				id = krg_can_patriation.45 #A Matter of Royalty
+				days = 14
+			}
+		}
+	}
+}
+
+country_event = { ##The Lords Approve the British North America Act (Without Pressure) (ENG)
+	id = krg_can_patriation.42
+	title = krg_can_patriation.42.t
+	desc = krg_can_patriation.42.d
+	picture = GFX_ce_house_of_parliament_4
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_patriation.42" }
+	trigger = {
+		NOT = { CAN = { has_country_flag = CAN_republic } }
+	}
+	is_triggered_only = yes
+
+	option = {
+		name = krg_can_patriation.42.a
+		hidden_effect = {
+			country_event = {
+				id = krg_can_patriation.45 #A Matter of Royalty
+				days = 14
+			}
+		}
+	}
+}
+
+country_event = { ##The House of Lords Stonewalls the BNA Act (CAN)
+	id = krg_can_patriation.43
+	title = krg_can_patriation.43.t
+	desc = krg_can_patriation.43.d
+	picture = GFX_ce_house_of_parliament_4
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_patriation.43" }
+	trigger = {
+		NOT = { CAN = { has_country_flag = CAN_republic } }
+	}
+	is_triggered_only = yes
+
+	option = {
+		name = krg_can_patriation.43.a
+		add_political_power = -10
+		CAN_popularity_ruling_decrease_small = yes
+	}
+}
+
+country_event = { ##The House of Lords Forced to Pass the BNA Act (CAN)
+	id = krg_can_patriation.44
+	title = krg_can_patriation.44.t
+	desc = krg_can_patriation.44.d
+	picture = GFX_ce_house_of_parliament_4
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_patriation.44" }
+	trigger = {
+		NOT = { CAN = { has_country_flag = CAN_republic } }
+	}
+	is_triggered_only = yes
+
+	option = {
+		name = krg_can_patriation.44.a
+		add_political_power = 10
+	}
+}
+
+country_event = { ##A Matter of Royalty (ENG)
+	id = krg_can_patriation.45
+	title = krg_can_patriation.45.t
+	desc = krg_can_patriation.45.d
+	picture = GFX_ce_NFA_send_aid_to_britain
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_patriation.45" }
+	trigger = {
+		NOT = { CAN = { has_country_flag = CAN_republic } }
+	}
+	is_triggered_only = yes
+
+	option = {
+		name = krg_can_patriation.45.a
+		news_event = worldnews.106
+		hidden_effect = {
+			#country_event = {
+			#	id = krg_can_patriation.46 #"The End of Empire"
+			#	days = 90
+			#}
+			CAN = {
+				country_event = { id = krg_can_patriation.47 } #The Final Hurdle Cleared
+			}
+		}
+	}
+}
+
+country_event = { ##"The End of Empire" (ENG)
+	id = krg_can_patriation.46
+	title = krg_can_patriation.46.t
+	desc = krg_can_patriation.46.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_patriation.46" }
+	trigger = {
+		NOT = { CAN = { has_country_flag = CAN_republic } }
+	}
+	is_triggered_only = yes
+
+	option = {
+		name = krg_can_patriation.46.a
+	}
+}
+
+country_event = { ##The Final Hurdle Cleared (CAN)
+	id = krg_can_patriation.47
+	title = krg_can_patriation.47.t
+	desc = krg_can_patriation.47.d
+	picture = GFX_ce_NFA_send_aid_to_britain
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_patriation.47" }
+	trigger = {
+		NOT = { CAN = { has_country_flag = CAN_republic } }
+	}
+	is_triggered_only = yes
+
+	option = {
+		name = krg_can_patriation.47.a
+		hidden_effect = {
+			country_event = {
+				id = krg_can_patriation.48
+				days = 5
+			}
+		}
+	}
+}
+
+country_event = { ##Positivity from The People (CAN)
+	id = krg_can_patriation.48
+	title = krg_can_patriation.48.t
+	desc = krg_can_patriation.48.d
+	picture = GFX_ce_can_flag_debate_3
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_patriation.48" }
+	trigger = {
+		NOT = { CAN = { has_country_flag = CAN_republic } }
+	}
+	is_triggered_only = yes
+
+	option = {
+		name = krg_can_patriation.48.a
+		add_political_power = 50
+		CAN_popularity_ruling_increase_large = yes
+		#hidden_effect = {
+		#	country_event = {
+		#		id = krg_can_patriation.49
+		#		days = 210
+		#	}
+		#}
+	}
+}
+
+country_event = { ##The Future of Canada (CAN)
+	id = krg_can_patriation.49
+	title = krg_can_patriation.49.t
+	desc = krg_can_patriation.49.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_patriation.49" }
+	is_triggered_only = yes
+
+	option = {
+		name = krg_can_patriation.49.a
+		country_event = {
+			id = krg_can_patriation.50
+			days = 90
+		}
+	}
+}
+
+country_event = { ##The [GetYear] Canadian Future Conference (CAN)
+	id = krg_can_patriation.50
+	title = krg_can_patriation.50.t
+	desc = krg_can_patriation.50.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_patriation.50" }
+	is_triggered_only = yes
+
+	option = {
+		name = krg_can_patriation.50.a
+		hidden_effect = {
+			country_event = {
+				id = krg_can_patriation.51
+				days = 7
+			}
+		}
+	}
+}
+
+country_event = { ##The Conference Begins (CAN)
+	id = krg_can_patriation.51
+	title = krg_can_patriation.51.t
+	desc = krg_can_patriation.51.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_patriation.51" }
+	is_triggered_only = yes
+
+	option = {
+		name = krg_can_patriation.51.a #The Time for "Patriation" is Now!
+		hidden_effect = {
+			country_event = {
+				id = krg_can_patriation.52
+				days = 3
+			}
+		}
+	}
+	option = {
+		name = krg_can_patriation.51.b #We will move for Patriation in the next decade
+		hidden_effect = {
+			country_event = {
+				id = krg_can_patriation.56 
+				days = 3
+			}
+		}
+	}
+}
+
+country_event = { ##The Expected Backlash (Immediate Patriation) (CAN)
+	id = krg_can_patriation.52
+	title = krg_can_patriation.52.t
+	desc = krg_can_patriation.52.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_patriation.52" }
+	is_triggered_only = yes
+
+	option = {
+		name = krg_can_patriation.52.a
+		add_political_power = -10
+		hidden_effect = {
+			country_event = {
+				id = krg_can_patriation.53
+				days = 3
+			}
+		}
+	}
+}
+
+country_event = { ##The Revolt of the Premiers (CAN)
+	id = krg_can_patriation.53
+	title = krg_can_patriation.53.t
+	desc = krg_can_patriation.53.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_patriation.53" }
+	is_triggered_only = yes
+
+	option = {
+		name = krg_can_patriation.53.a
+		add_political_power = -25
+		hidden_effect = {
+			country_event = {
+				id = krg_can_patriation.54
+				days = 3
+			}
+		}
+	}
+}
+
+country_event = { ##A Forced Climbdown (CAN)
+	id = krg_can_patriation.54
+	title = krg_can_patriation.54.t
+	desc = krg_can_patriation.54.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_patriation.54" }
+	is_triggered_only = yes
+
+	option = {
+		name = krg_can_patriation.54.a
+		news_event = worldnews.93
+		add_political_power = -50
+		hidden_effect = {
+			country_event = {
+				id = krg_can_patriation.55
+				days = 14
+			}
+		}
+	}
+}
+
+country_event = { ##Feeling the Bite at the Polls (CAN)
+	id = krg_can_patriation.55
+	title = krg_can_patriation.55.t
+	desc = krg_can_patriation.55.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_patriation.55" }
+	is_triggered_only = yes
+
+	option = {
+		name = krg_can_patriation.55.a
+		CAN_popularity_ruling_decrease_medium = yes
+	}
+}
+
+country_event = { ##The Expected Backlash (Delayed Patriation) (CAN)
+	id = krg_can_patriation.56
+	title = krg_can_patriation.56.t
+	desc = krg_can_patriation.56.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_patriation.56" }
+	is_triggered_only = yes
+
+	option = {
+		name = krg_can_patriation.56.a
+		add_political_power = -10
+		hidden_effect = {
+			country_event = {
+				id = krg_can_patriation.57
+				days = 3
+			}
+		}
+	}
+}
+
+country_event = { ##"The Concern of Federal Authorities" (CAN)
+	id = krg_can_patriation.57
+	title = krg_can_patriation.57.t
+	desc = krg_can_patriation.57.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_patriation.57" }
+	is_triggered_only = yes
+
+	option = {
+		name = krg_can_patriation.57.a #...and Patriation is a Federal Concern
+		hidden_effect = {
+			country_event = {
+				id = krg_can_patriation.53
+				days = 3
+			}
+		}
+	}
+	option = {
+		name = krg_can_patriation.57.b #Table lengthy negotiations with the Premiers
+		hidden_effect = {
+			if = {
+				limit = {
+					has_country_flag = CAN_patriation_immigration_federal
+				}
+				country_event = {
+					id = krg_can_patriation.59 #The Path to Patriation
+					days = 3
+				}
+			} else = {
+				country_event = {
+					id = krg_can_patriation.58 #Duplessis' Protest
+					days = 3
+				}
+			}
+		}
+	}
+}
+
+country_event = { ##Duplessis' Protest (CAN)
+	id = krg_can_patriation.58
+	title = krg_can_patriation.58.t
+	desc = krg_can_patriation.58.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_patriation.58" }
+	is_triggered_only = yes
+
+	option = {
+		name = krg_can_patriation.58.a #Strongarm the Quebec Delegation
+		add_political_power = -10
+		hidden_effect = {
+			country_event = {
+				id = krg_can_patriation.53
+				days = 3
+			}
+		}
+	}
+	option = {
+		name = krg_can_patriation.58.b #Work with Duplessis and hammer out an Agreement
+		hidden_effect = {
+			country_event = {
+				id = krg_can_patriation.59 #The Path to Patriation
+				days = 3
+			}
+		}
+	}
+}
+
+country_event = { ##The Path to Patriation (CAN)
+	id = krg_can_patriation.59
+	title = krg_can_patriation.59.t
+	desc = krg_can_patriation.59.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_patriation.59" }
+	is_triggered_only = yes
+
+	option = {
+		name = krg_can_patriation.59.a
+		add_ideas = CAN_idea_vision_for_the_future
+		add_political_power = 100
+		news_event = worldnews.94
+	}
+}
+
+
+### ALASKAN REFERENDUM ###
+
+country_event = { ##The Alaskan Referendum (CAN)
+	id = krg_can_cal_alaska.1
+	title = krg_can_cal_alaska.1.t
+	desc = krg_can_cal_alaska.1.d
+	picture = GFX_CAN_ce_alaska
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_cal_alaska.1" }
+	is_triggered_only = yes
+
+	option = {
+		name = krg_can_cal_alaska.1.a #The referendum will go forward!
+		ai_chance = { 
+			base = 70
+			modifier = {
+				NOT = {
+					has_game_rule = {
+						rule = CAN_ALASKAN_REFERENDUM
+						option = DEFAULT
+					}
+				}
+				factor = 1000
+			}
+		}
+		news_event = { id = worldnews.80 }
+		hidden_effect = { CAL = { country_event = { id = krg_can_cal_alaska.9 days = 3 } } }
+	}
+	option = {
+		name = krg_can_cal_alaska.1.b #Alaska is Canadian, don't bother with a referendum
+		ai_chance = { 
+			base = 30
+		}
+		hidden_effect = { country_event = { id = krg_can_cal_alaska.4 days = 9 } }
+	}
+	option = {
+		name = krg_can_cal_alaska.1.c #American goodwill is more important, hand it over
+		ai_chance = { 
+			base = 0
+		}
+		ai_chance = { 
+			base = 0
+		}
+		hidden_effect = { 
+			country_event = { 
+				id = krg_can_cal_alaska.3 
+				days = 2 
+			}
+			463 = {
+				remove_core_of = CAN
+			}
+		}
+		effect_tooltip = {
+			463 = { transfer_state_to = CAL }
+			CAL = {
+				add_opinion_modifier = {
+					target = CAN
+					modifier = KRG_CAN_CAL_alaska_returned
+				}
+			}
+		}
+		CAL = { country_event = krg_can_cal_alaska.2 }
+	}
+}
+
+country_event = { ##The Canadian Gift (CAL)
+	id = krg_can_cal_alaska.2
+	title = krg_can_cal_alaska.2.t
+	desc = krg_can_cal_alaska.2.d
+	picture = GFX_CAN_ce_alaska_america
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_cal_alaska.2" }
+	is_triggered_only = yes
+
+	option = {
+		name = krg_can_cal_alaska.2.a #The referendum will go forward!
+		463 = { transfer_state_to = CAL }
+		add_opinion_modifier = {
+			target = CAN
+			modifier = KRG_CAN_CAL_alaska_returned
+		}
+	}
+}
+
+country_event = { ##Protests in Parliament (CAN)
+	id = krg_can_cal_alaska.3
+	title = krg_can_cal_alaska.3.t
+	desc = krg_can_cal_alaska.3.d
+	picture = GFX_CAN_ce_parliament
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_cal_alaska.3" }
+	is_triggered_only = yes
+
+	option = {
+		name = krg_can_cal_alaska.3.a #This will benefit us more in the long term... probably.
+		add_political_power = -50
+		CAN_popularity_ruling_decrease_large = yes
+	}
+}
+
+country_event = { ##American Riots in Anchorage (CAN)
+	id = krg_can_cal_alaska.4
+	title = krg_can_cal_alaska.4.t
+	desc = krg_can_cal_alaska.4.d
+	picture = GFX_ce_fire
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_cal_alaska.4" }
+	is_triggered_only = yes
+
+	option = {
+		name = krg_can_cal_alaska.4.a #Damn Yanks!
+		hidden_effect = { CAL = { country_event = { id = krg_can_cal_alaska.5 days = 1 } } }
+	}
+}
+
+country_event = { ##Crisis in Anchorage (CAL)
+	id = krg_can_cal_alaska.5
+	title = krg_can_cal_alaska.5.t
+	desc = krg_can_cal_alaska.5.d
+	picture = GFX_ce_fire
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_cal_alaska.5" }
+	is_triggered_only = yes
+
+	option = {
+		name = krg_can_cal_alaska.5.a #Lodge a formal protest, this won't stand!
+		ai_chance = {
+			base = 70
+		}
+		CAN = { 
+			country_event = { id = krg_can_cal_alaska.7 days = 2 }
+		}
+	}
+	option = {
+		name = krg_can_cal_alaska.5.a #Only issue a mild condemnation, we can't risk the alliance.
+		ai_chance = {
+			base = 30
+		}
+		custom_effect_tooltip = CAN_alaska_remain_canadian_CAL
+		CAN = { 
+			country_event = { id = krg_can_cal_alaska.6 days = 2 }
+		}
+	}
+}
+
+country_event = { ##The Americans Back Down (CAN)
+	id = krg_can_cal_alaska.6
+	title = krg_can_cal_alaska.6.t
+	desc = krg_can_cal_alaska.6.d
+	picture = GFX_CAN_ce_alaska
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_cal_alaska.6" }
+	is_triggered_only = yes
+
+	option = {
+		name = krg_can_cal_alaska.6.a #That could have gone worse.
+		add_political_power = 25
+		custom_effect_tooltip = CAN_alaska_remain_canadian_CAN
+	}
+}
+
+country_event = { ##A Telegram from San Francisco (CAN)
+	id = krg_can_cal_alaska.7
+	title = krg_can_cal_alaska.7.t
+	desc = krg_can_cal_alaska.7.d
+	picture = GFX_CAN_ce_alaska_america
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_cal_alaska.7" }
+	is_triggered_only = yes
+
+	option = {
+		name = krg_can_cal_alaska.7.a #Approve a referendum, maybe that will placate them.
+		news_event = { id = worldnews.80 }
+		CAL = {
+			country_event = { id = krg_can_cal_alaska.9 days = 2 }
+		}
+		custom_effect_tooltip = CAN_alaska_referendum
+		unlock_decision_category_tooltip = CAN_CAL_alaska_referendum
+	}
+	option = {
+		name = krg_can_cal_alaska.7.b #They need to remain in their lane.
+		CAL = {
+			country_event = { id = krg_can_cal_alaska.8 days = 2 }
+		}
+		custom_effect_tooltip = CAN_alaska_remain_canadian_CAN
+		effect_tooltip = {
+			CAL = {
+				add_opinion_modifier = {
+					target = CAN
+					modifier = KRG_CAN_CAL_alaska_kept
+				}
+			}
+		}
+	}
+}
+
+country_event = { ##The Cold Shoulder (CAL)
+	id = krg_can_cal_alaska.8
+	title = krg_can_cal_alaska.8.t
+	desc = krg_can_cal_alaska.8.d
+	picture = GFX_CAN_ce_alaska
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_cal_alaska.8" }
+	is_triggered_only = yes
+
+	option = {
+		name = krg_can_cal_alaska.8.a #We'll remember this...
+		custom_effect_tooltip = CAN_alaska_remain_canadian_CAL
+		add_opinion_modifier = {
+			target = CAN
+			modifier = KRG_CAN_CAL_alaska_kept
+		}
+	}
+}
+
+country_event = { ##Canada Announces a Referendum for Alaska (CAL)
+	id = krg_can_cal_alaska.9
+	title = krg_can_cal_alaska.9.t
+	desc = krg_can_cal_alaska.9.d
+	picture = GFX_CAN_ce_alaska
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_cal_alaska.9" }
+	is_triggered_only = yes
+
+	option = {
+		name = krg_can_cal_alaska.9.a #An opportunity we can't let slip.
+		custom_effect_tooltip = CAN_alaska_referendum
+		unlock_decision_category_tooltip = CAN_CAL_alaska_referendum
+		set_country_flag = alaska_referendum_ongoing
+		hidden_effect = {
+			CAN = {
+				country_event = { id = krg_can_cal_alaska.10 }
+				set_variable = { CAN_CAL_alaska_CAN_score = 40 }
+				set_variable = { CAN_CAL_alaska_CAL_score = 60 }
+				activate_mission = CAN_CAL_alaskan_referendum
+			}
+		}
+	}
+}
+
+country_event = { ##The American Campaign Begins (CAN)
+	id = krg_can_cal_alaska.10
+	title = krg_can_cal_alaska.10.t
+	desc = krg_can_cal_alaska.10.d
+	picture = GFX_CAN_ce_alaska_america
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_cal_alaska.10" }
+	is_triggered_only = yes
+
+	option = {
+		name = krg_can_cal_alaska.10.a #Unsuprising, but we should act as well.
+		custom_effect_tooltip = CAN_alaska_referendum
+		unlock_decision_category_tooltip = CAN_CAL_alaska_referendum
+		set_country_flag = alaska_referendum_ongoing
+	}
+}
+
+country_event = { ##Alaska Remains (CAN)
+	id = krg_can_cal_alaska.11
+	title = krg_can_cal_alaska.11.t
+	desc = krg_can_cal_alaska.11.d
+	picture = GFX_CAN_ce_alaska
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_cal_alaska.11" }
+	is_triggered_only = yes
+
+	option = {
+		name = krg_can_cal_alaska.11.a
+		463 = { 
+			add_core_of = CAN
+			set_state_flag = alaska_province
+		}
+		custom_effect_tooltip = CAN_region_alaska_add_tt
+		add_political_power = 50
+		add_to_variable = { global.CAN_parl_seat_array^5 = 1 } #con
+		add_to_variable = { parl_maxseats = 1 }
+		CAN_parl_adjust = yes
+		CAN_popularity_ruling_increase_medium = yes
+		news_event = worldnews.88
+		473 = {
+			add_to_variable = { region_seats = 1 }
+		}
+	}
+}
+
+country_event = { ##Alaska Remains (CAL)
+	id = krg_can_cal_alaska.12
+	title = krg_can_cal_alaska.12.t
+	desc = krg_can_cal_alaska.12.d
+	picture = GFX_CAN_ce_alaska
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_cal_alaska.12" }
+	is_triggered_only = yes
+
+	option = {
+		name = krg_can_cal_alaska.12.a
+		add_political_power = -50
+	}
+}
+
+country_event = { ##Alaska Returns (CAN)
+	id = krg_can_cal_alaska.13
+	title = krg_can_cal_alaska.13.t
+	desc = krg_can_cal_alaska.13.d
+	picture = GFX_CAN_ce_alaska_america
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_cal_alaska.13" }
+	is_triggered_only = yes
+
+	option = {
+		name = krg_can_cal_alaska.13.a
+		effect_tooltip = {
+			463 = { transfer_state_to = CAL }
+		}
+		add_political_power = -50
+		CAN_popularity_ruling_decrease_large = yes
+		news_event = worldnews.89
+	}
+}
+
+country_event = { ##Alaska Returns (CAL)
+	id = krg_can_cal_alaska.14
+	title = krg_can_cal_alaska.14.t
+	desc = krg_can_cal_alaska.14.d
+	picture = GFX_CAN_ce_alaska_america
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_can_cal_alaska.14" }
+	is_triggered_only = yes
+
+	option = {
+		name = krg_can_cal_alaska.14.a
+		add_political_power = 50
+		463 = { transfer_state_to = CAL }
+	}
+}

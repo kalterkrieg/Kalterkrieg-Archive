@@ -1,0 +1,1343 @@
+#!gfx:interface/Kalterkrieg/KRG_goals.gfx
+
+shared_focus = {
+	id = MAF_wars_end
+	icon = GFX_MAF_thyssens_return
+	cost = 1
+	x = 4
+	y = 0
+	available = {
+		always = no
+	}
+	completion_reward = {
+	}
+
+	ai_will_do = {
+		base = 150
+	}
+}
+shared_focus = {
+	id = MAF_fresh_mandate
+	icon = GFX_generic_pass_legislation
+	relative_position_id = MAF_wars_end
+	cost = 4
+	prerequisite = {
+		focus = MAF_wars_end
+	}
+	cancelable = no
+	select_effect = {
+		country_event = {
+			id = MAF.10
+			days = 4
+		}
+	}
+	completion_reward = {
+		add_timed_idea = {
+			idea = MAF_post_war_momentum
+			days = 545
+		}
+	}
+	x = -3
+	y = 1
+
+
+	ai_will_do = {
+		base = 100
+		modifier = {
+			OR = {
+				has_country_flag = MAF_demob_failed
+				has_country_flag = MAF_demob_complete
+			}
+			factor = 3
+		}
+	}
+}
+shared_focus = {
+	id = MAF_clean_cabinet
+	icon = GFX_generic_political_purge
+	relative_position_id = MAF_wars_end
+	cost = 4
+	prerequisite = {
+		focus = MAF_fresh_mandate
+	}
+	mutually_exclusive = {
+		focus = MAF_administration_allies
+	}
+	completion_reward = {
+		add_popularity = {
+			ideology = paternal_autocrat
+			popularity = 0.035
+		}
+		add_popularity = {
+			ideology = social_conservative
+			popularity = 0.035
+		}
+	}
+	x = -4
+	y = 2
+
+	ai_will_do = {
+		base = 100
+		modifier = {
+			OR = {
+				has_country_flag = MAF_demob_failed
+				has_country_flag = MAF_demob_complete
+			}
+			factor = 3
+		}
+	}
+}
+shared_focus = {
+	id = MAF_administration_allies
+	icon = GFX_generic_government_deals
+	relative_position_id = MAF_wars_end
+	cost = 4
+	prerequisite = {
+		focus = MAF_fresh_mandate
+	}
+	mutually_exclusive = {
+		focus = MAF_clean_cabinet
+	}
+	completion_reward = {
+		add_popularity = {
+			ideology = paternal_autocrat
+			popularity = 0.025
+		}
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = 0.025
+		}
+		add_popularity = {
+			ideology = national_populist
+			popularity = 0.025
+		}
+	}
+	x = -2
+	y = 2
+
+	ai_will_do = {
+		base = 100
+		modifier = {
+			OR = {
+				has_country_flag = MAF_demob_failed
+				has_country_flag = MAF_demob_complete
+			}
+			factor = 3
+		}
+	}
+
+}
+shared_focus = {
+	id = MAF_draw_budget
+	icon = GFX_generic_loans
+	relative_position_id = MAF_wars_end
+	cost = 4
+	prerequisite = {
+		focus = MAF_clean_cabinet
+		focus = MAF_administration_allies
+	}
+	completion_reward = {
+		country_event = {
+			id = MAF.20
+			days = 1
+		}
+	}
+	x = -3
+	y = 3
+
+	ai_will_do = {
+		base = 100
+		modifier = {
+			OR = {
+				has_country_flag = MAF_demob_failed
+				has_country_flag = MAF_demob_complete
+			}
+			factor = 3
+		}
+	}
+
+}
+
+shared_focus = {
+	id = MAF_trouble_begins
+	icon = GFX_MAF_Task_Ahead
+	relative_position_id = MAF_wars_end
+	cost = 2
+	x = 3
+	y = 1
+	prerequisite = {
+		focus = MAF_wars_end
+	}
+	available = {
+		has_country_flag = thyssen_returns
+	}
+	completion_reward = {
+		add_political_power = 50
+		country_event = {
+			id = MAF.3
+			days = 0
+		}
+	}
+
+	ai_will_do = {
+		base = 150
+	}
+
+}
+shared_focus = {
+	id = MAF_demobilise_economy
+	icon = GFX_generic_demobilise_econ
+	relative_position_id = MAF_wars_end
+	cost = 5
+	prerequisite = {
+		focus = MAF_trouble_begins
+	}
+	completion_reward = {
+		custom_effect_tooltip = MAF_demob_new_decisions_tt
+		custom_effect_tooltip = MAF_demob_first_economy
+		hidden_effect = {
+			if = {
+				limit = {
+					NOT = {
+						has_country_flag = MAF_demob_picked
+					}
+				}
+				add_to_variable = {
+					var = MAF_economy_var
+					value = 5
+				}
+				set_country_flag = MAF_demob_picked
+			}
+		}
+	}
+	x = 1
+	y = 2
+
+	ai_will_do = {
+		base = 150
+		modifier = {
+			factor = 2
+			has_active_mission = MAF_full_demob
+		}
+	}
+}
+shared_focus = {
+	id = MAF_demobilise_men
+	icon = GFX_generic_demobilisation
+	relative_position_id = MAF_wars_end
+	cost = 5
+	prerequisite = {
+		focus = MAF_trouble_begins
+	}
+	completion_reward = {
+		custom_effect_tooltip = MAF_demob_new_decisions_tt
+		custom_effect_tooltip = MAF_demob_first_stab
+		hidden_effect = {
+			if = {
+				limit = {
+					NOT = {
+						has_country_flag = MAF_demob_picked
+					}
+				}
+				add_stability = 0.05
+				set_country_flag = MAF_demob_picked
+			}
+		}
+	}
+	x = 3
+	y = 2
+
+	ai_will_do = {
+		base = 150
+		modifier = {
+			factor = 2
+			has_active_mission = MAF_full_demob
+		}
+	}
+}
+shared_focus = {
+	id = MAF_demobilise_guns
+	icon = GFX_generic_demobilise_guns
+	relative_position_id = MAF_wars_end
+	cost = 5
+	prerequisite = {
+		focus = MAF_trouble_begins
+	}
+	completion_reward = {
+		custom_effect_tooltip = MAF_demob_new_decisions_tt
+		custom_effect_tooltip = MAF_demob_first_support
+		if = {
+				limit = {
+					NOT = {
+						has_country_flag = MAF_demob_picked
+					}
+				}
+				add_to_variable = {
+					var = MAF_askari_var
+					value = 5
+				}
+				set_country_flag = MAF_demob_picked
+			}
+	}
+	x = 5
+	y = 2
+
+	ai_will_do = {
+		base = 150
+		modifier = {
+			factor = 2
+			has_active_mission = MAF_full_demob
+		}
+	}
+}
+shared_focus = {
+	id = MAF_honour_men
+	icon = GFX_MAF_honour_the_men_of_afrika
+	relative_position_id = MAF_wars_end
+	cost = 5
+	available = {
+		OR = {
+			has_country_flag = MAF_demob_failed
+			has_country_flag = MAF_demob_complete
+		}
+	}
+	prerequisite = {
+		focus = MAF_demobilise_economy
+	}
+	prerequisite = {
+		focus = MAF_demobilise_men
+	}
+	prerequisite = {
+		focus = MAF_demobilise_guns
+	}
+	completion_reward = {
+		country_event = {
+			id = MAF.36
+			days = 0
+		}
+	}
+	x = 3
+	y = 3
+
+	ai_will_do = {
+		base = 150
+		modifier = {
+			factor = 2
+			has_active_mission = MAF_full_demob
+		}
+	}
+}
+shared_focus = {
+	id = MAF_whirlwind_tour
+	icon = GFX_MAF_tour_continent
+	relative_position_id = MAF_wars_end
+	cost = 5
+	prerequisite = {
+		focus = MAF_draw_budget
+	}
+	prerequisite = {
+		focus = MAF_honour_men
+	}
+	completion_reward = {
+		country_event = {
+			id = MAF.1006
+			days = 5
+		}
+	}
+	x = 0
+	y = 4
+
+	ai_will_do = {
+		base = 150
+	}
+
+}
+
+shared_focus = {
+	id = MAF_corporations_chosen
+	icon = GFX_generic_co_owned_businesses
+	relative_position_id = MAF_wars_end
+	cost = 4
+	prerequisite = {
+		focus = MAF_whirlwind_tour
+	}
+	mutually_exclusive = {
+		focus = MAF_protectorates_chosen
+	}
+	completion_reward = {
+		MAF_appease_adea_small = yes
+		add_to_variable = {
+			MAF_urban_var = 5
+			tooltip = MAF_urban_var_tt
+		}
+	}
+	x = 1
+	y = 5
+
+	ai_will_do = {
+		base = 150
+	}
+
+}
+shared_focus = {
+	id = MAF_protectorates_chosen
+	icon = GFX_generic_collaborate_local_elites
+	relative_position_id = MAF_wars_end
+	cost = 4
+	prerequisite = {
+		focus = MAF_whirlwind_tour
+	}
+	mutually_exclusive = {
+		focus = MAF_corporations_chosen
+	}
+	completion_reward = {
+		add_to_variable = {
+			MAF_settler_var = 5
+			tooltip = MAF_settler_var_tt
+		}
+		#TODO add protectorate loyalty
+	}
+	x = -1
+	y = 5
+
+	ai_will_do = {
+		base = 150
+	}
+}
+
+# Thyssen Administration Economy Trees
+### Austerity ###
+shared_focus = {
+	id = MAF_austerity_path
+	icon = GFX_generic_banking_legislation
+	cost = 5
+	x = 13
+	y = 0
+	mutually_exclusive = {
+		focus = MAF_investment_path
+	}
+	bypass = {
+		has_country_flag = MAF_austerity_path_chosen
+	}
+	available = {
+		always = no
+	}
+	completion_reward = {
+		custom_effect_tooltip = MAF_austerity_path_tt
+	}
+
+	ai_will_do = {
+		base = 150
+	}
+}
+
+shared_focus = {
+	id = MAF_conscript_jobs
+	icon = GFX_generic_agrarian_soldiers
+	relative_position_id = MAF_austerity_path
+	cost = 4
+	x = -1
+	y = 1 
+	prerequisite = {
+		focus = MAF_austerity_path
+	}
+	completion_reward = {
+		country_event = {
+			id = MAF.1012
+			days = 5
+		}
+	}
+	ai_will_do = {
+		base = 100
+	}
+}
+shared_focus = {
+	id = MAF_export_infrastructure
+	icon = GFX_generic_railroad_treaty
+	relative_position_id = MAF_austerity_path
+	cost = 4
+	x = 1
+	y = 1
+	prerequisite = {
+		focus = MAF_austerity_path
+	}
+	completion_reward = {
+		1028 = {
+			add_building_construction = {
+				type = infrastructure
+				level = 1
+				instant_build = yes
+			}
+		}
+		777 = {
+			add_building_construction = {
+				type = infrastructure
+				level = 1
+				instant_build = yes
+			}
+		}
+		1042 = {
+			add_building_construction = {
+				type = infrastructure
+				level = 1
+				instant_build = yes
+			}
+		}
+    }
+	ai_will_do = {
+		base = 100
+	}
+}
+
+shared_focus = {
+	id = MAF_encourage_zivilisiert
+	icon = GFX_KTG_Educate_natives
+	relative_position_id = MAF_austerity_path
+	cost = 4
+	x = 0
+	y = 2 
+	prerequisite = {
+		focus = MAF_export_infrastructure
+	}
+	prerequisite = {
+		focus = MAF_conscript_jobs
+	}
+	completion_reward = {
+		country_event = {
+			id = MAF.1013
+			days = 5
+		}
+	}
+	ai_will_do = {
+		base = 100
+	}
+}
+shared_focus = {
+	id = MAF_focus_traditional_profits
+	icon = GFX_generic_price_controls
+	relative_position_id = MAF_austerity_path
+	cost = 4
+	x = -2
+	y = 2 
+	prerequisite = {
+		focus = MAF_conscript_jobs
+	}
+	prerequisite = {
+		focus = MAF_export_infrastructure
+	}
+	completion_reward = {
+		add_to_variable = {
+			MAF_settler_var = 5
+			tooltip = MAF_settler_var_tt
+		}
+		add_to_variable = {
+			MAF_rural_var = 5
+			tooltip = MAF_rural_var_tt
+		}
+		add_to_variable = {
+			MAF_profit_var = 5
+			tooltip = MAF_profit_var_tt
+		}
+		add_to_variable = {
+			MAF_profit_change_var = 0.25
+			tooltip = MAF_profit_change_var_tt
+		}
+	}
+	ai_will_do = {
+		base = 100
+	}
+}
+shared_focus = {
+	id = MAF_empower_three_pillars
+	icon = GFX_generic_pass_legislation
+	relative_position_id = MAF_austerity_path
+	cost = 4
+	x = 2
+	y = 2 
+	prerequisite = {
+		focus = MAF_conscript_jobs
+	}
+	prerequisite = {
+		focus = MAF_export_infrastructure
+	}
+	completion_reward = {
+		MAF_appease_bureau_small = yes
+		MAF_appease_adea_small = yes
+		add_to_variable = {
+			MAF_rural_var = 5
+			tooltip = MAF_rural_var_tt
+		}
+	}
+	ai_will_do = {
+		base = 100
+	}
+}
+shared_focus = {
+	id = MAF_impose_european_economy
+	icon = GFX_GENERIC_european_trade
+	relative_position_id = MAF_austerity_path
+	cost = 10
+	x = 0
+	y = 3 
+	prerequisite = {
+		focus = MAF_focus_traditional_profits
+	}
+	prerequisite = {
+		focus = MAF_encourage_zivilisiert
+	}
+	prerequisite = {
+		focus = MAF_empower_three_pillars
+	}
+	completion_reward = {
+		country_event = {
+			id = MAF.1014
+			days = 5
+		}
+	}
+	ai_will_do = {
+		base = 100
+	}
+}
+
+shared_focus = {
+	id = MAF_manpower_question
+	icon = GFX_generic_national_mobilization
+	relative_position_id = MAF_austerity_path
+	cost = 4
+	x = 5
+	y = 1
+	prerequisite = {
+		focus = MAF_austerity_path
+	}
+	completion_reward = {
+		country_event = {
+			id = MAF.1015
+			days = 5
+		}
+	}
+	ai_will_do = {
+		base = 125
+	}
+}
+shared_focus = {
+	id = MAF_bureaucratic_consolidation
+	icon = GFX_MAF_bureaucratic_consolidation
+	relative_position_id = MAF_austerity_path
+	cost = 4
+	x = 4
+	y = 2 
+	available = {
+		OR = {
+			has_country_flag = MAF_bureaucratic_consolidation_unlocked
+			has_country_flag = MAF_we_stop_native_rules
+		}
+	}
+	mutually_exclusive = {
+		focus = MAF_new_native_roles
+	}
+	prerequisite = {
+		focus = MAF_manpower_question
+	}
+	completion_reward = {
+		add_to_variable = {
+			MAF_bureaucracy_var = 10
+			tooltip = MAF_bureaucracy_var_tt
+		}
+		add_to_variable = {
+			MAF_admin_status_var = 5
+			tooltip = MAF_admin_status_var_tt
+		}
+		add_to_variable = {
+			MAF_garrison_var = -5
+		}
+		add_to_variable = {
+			MAF_foreign_change_var = 5
+		}
+	}
+	ai_will_do = {
+		base = 125
+	}
+}
+shared_focus = {
+	id = MAF_new_native_roles
+	icon = GFX_POR_burden_empire
+	relative_position_id = MAF_austerity_path
+	cost = 4
+	x = 6
+	y = 2 
+	available = {
+		has_country_flag = MAF_new_native_roles_unlocked
+	}
+	mutually_exclusive = {
+		focus = MAF_bureaucratic_consolidation
+	}
+	prerequisite = {
+		focus = MAF_manpower_question
+	}
+	cancel = {
+		has_country_flag = MAF_we_stop_native_rules
+	}
+	completion_reward = {
+		country_event = {
+			id = MAF.1016
+			days = 5
+		}
+	}
+	ai_will_do = {
+		base = 125
+	}
+}
+shared_focus = {
+	id = MAF_garrison_assessment
+	icon = GFX_TEX_integrate_military
+	relative_position_id = MAF_austerity_path
+	cost = 4
+	x = 5
+	y = 3
+	prerequisite = {
+		focus = MAF_new_native_roles
+		focus = MAF_bureaucratic_consolidation
+	}
+	completion_reward = {
+		country_event = {
+			id = MAF.1017
+			days = 5
+		}
+	}
+	ai_will_do = {
+		base = 125
+	}
+}
+
+
+### BOTH ###
+
+shared_focus = {
+	id = MAF_conduct_census
+	icon = GFX_MAF_Census1948
+	relative_position_id = MAF_austerity_path
+	cost = 4
+	x = 8
+	y = 1 
+	prerequisite = {
+		focus = MAF_austerity_path
+		focus = MAF_investment_path
+	}
+	completion_reward = {
+		country_event = {
+			id = MAF.1018
+			days = 5
+		}
+	}
+	ai_will_do = {
+		base = 150
+	}
+}
+
+shared_focus = {
+	id = MAF_settler_propaganda
+	icon = GFX_GER_victory_column
+	relative_position_id = MAF_austerity_path
+	cost = 4
+	x = 8
+	y = 2 
+	
+	prerequisite = {
+		focus = MAF_conduct_census
+	}
+
+	completion_reward = {
+		#Togo
+		set_temp_variable = { temp_region = 4 }
+		set_temp_variable = { temp_value = -1 }
+		MAF_modify_insurgency_aapm_level = yes
+		#Kamerun
+		set_temp_variable = { temp_region = 3 }
+		set_temp_variable = { temp_value = -1 }
+		MAF_modify_insurgency_aapm_level = yes
+		#Ostafrika
+		set_temp_variable = { temp_region = 1 }
+		set_temp_variable = { temp_value = -1 }
+		MAF_modify_insurgency_aapm_level = yes
+		#Südwestafrika
+		set_temp_variable = { temp_region = 2 }
+		set_temp_variable = { temp_value = -1 }
+		MAF_modify_insurgency_aapm_level = yes
+		add_to_variable = {
+			MAF_settler_var = 10
+			tooltip = MAF_settler_var_tt
+		}
+		add_to_variable = {
+			MAF_settler_change_var = 0.5
+			tooltip = MAF_settler_change_var_tt
+		}
+		1038 = {
+			add_manpower = 2500
+		}
+		541 = {
+			add_manpower = 2500
+		}
+		1048 = {
+			add_manpower = 2500
+		}
+		777 = {
+			add_manpower = 2500
+		}
+	}
+	ai_will_do = {
+		base = 150
+	}
+}
+
+shared_focus = {
+	id = MAF_new_german_man
+	icon = GFX_GER_honour_the_vets
+	relative_position_id = MAF_austerity_path
+	cost = 4
+	x = 7
+	y = 3 
+	
+	prerequisite = {
+		focus = MAF_settler_propaganda
+	}
+	completion_reward = {
+		add_to_variable = {
+			MAF_military_var = 10
+			tooltip = MAF_military_var_tt
+		}
+		add_to_variable = {
+			MAF_military_change_var = 0.25
+			tooltip = MAF_military_change_var_tt
+		}
+	}
+	ai_will_do = {
+		base = 150
+	}
+}
+
+shared_focus = {
+	id = MAF_made_in_mittelafrika
+	icon = GFX_generic_factory_complex
+	relative_position_id = MAF_austerity_path
+	cost = 4
+	x = 9
+	y = 3 
+	
+	prerequisite = {
+		focus = MAF_settler_propaganda
+	}
+	
+	completion_reward = {
+		add_to_variable = {
+			MAF_economy_var = 5
+			tooltip = MAF_economy_var_tt
+		}
+		add_to_variable = {
+			MAF_economy_change_var = 0.25
+			tooltip = MAF_economy_change_var_tt
+		}
+		add_to_variable = {
+			MAF_profit_var = 5
+			tooltip = MAF_profit_var_tt
+		}
+		add_to_variable = {
+			MAF_profit_change_var = 0.2
+			tooltip = MAF_profit_change_var_tt
+		}
+	}
+	ai_will_do = {
+		base = 150
+	}
+}
+shared_focus = {
+	id = MAF_finish_rossing_mine
+	icon = GFX_generic_nuclear_science_reichspakt
+	relative_position_id = MAF_austerity_path
+	cost = 4
+	x = 8
+	y = 4 
+
+	available = {
+		has_country_flag = MAF_rossing_complete
+	}
+	
+	prerequisite = {
+		focus = MAF_new_german_man
+	}
+	prerequisite = {
+		focus = MAF_made_in_mittelafrika
+	}
+	completion_reward = {
+		add_to_variable = {
+			MAF_rural_var = 10
+			tooltip = MAF_rural_var_tt
+		}
+		add_to_variable = {
+			MAF_rural_change_var = -0.2
+			tooltip = MAF_rural_change_var_tt
+		}
+		#TODO AFRICA add some sort of resources here
+	}
+	ai_will_do = {
+		base = 150
+	}
+}
+
+
+### Investment ### 
+shared_focus = {
+	id = MAF_investment_path
+	icon = GFX_generic_foreign_investments
+	cost = 5
+	x = 29
+	y = 0
+	mutually_exclusive = {
+		focus = MAF_austerity_path
+	}
+	bypass = {
+		has_country_flag = MAF_invest_path_chosen
+	}
+	available = {
+		always = no
+	}
+	completion_reward = {
+		custom_effect_tooltip = MAF_invest_path_tt
+	}
+
+	ai_will_do = {
+		base = 150
+	}
+}
+
+shared_focus = {
+	id = MAF_veterans_pay
+	icon = GFX_generic_veterans_benefits
+	relative_position_id = MAF_investment_path
+	cost = 4
+	x = 0
+	y = 1 
+	prerequisite = {
+		focus = MAF_investment_path
+	}
+	completion_reward = {
+		country_event = {
+			id = MAF.1019
+			days = 5
+		}
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+shared_focus = {
+	id = MAF_expand_health_infrastructure
+	icon = GFX_generic_healthcare
+	relative_position_id = MAF_investment_path
+	cost = 4
+	x = -2
+	y = 2 
+	prerequisite = {
+		focus = MAF_veterans_pay
+	}
+	completion_reward = {
+		country_event = {
+			id = MAF.1020
+			days = 5
+		}
+		move_up_hc_spending = yes
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+}
+shared_focus = {
+	id = MAF_native_protections
+	icon = GFX_NFA_expand_legal_protections
+	relative_position_id = MAF_investment_path
+	cost = 4
+	x = -2
+	y = 3 
+	prerequisite = {
+		focus = MAF_expand_health_infrastructure
+	}
+	completion_reward = {
+		country_event = {
+			id = MAF.1021
+			days = 5
+		}
+	}
+	ai_will_do = {
+		base = 100
+	}
+}
+shared_focus = {
+	id = MAF_focus_cities
+	icon = GFX_NEE_housing_program
+	relative_position_id = MAF_investment_path
+	cost = 4
+	x = 0
+	y = 2 
+	prerequisite = {
+		focus = MAF_veterans_pay
+	}
+	completion_reward = {
+		add_to_variable = {
+			MAF_urban_var = 10
+			tooltip = MAF_urban_var_tt
+		}
+	}
+	ai_will_do = {
+		base = 100
+	}
+}
+shared_focus = {
+	id = MAF_power_cities
+	icon = GFX_generic_electricity
+	relative_position_id = MAF_investment_path
+	cost = 4
+	x = 0
+	y = 3 
+	prerequisite = {
+		focus = MAF_focus_cities
+	}
+	completion_reward = {
+		add_to_variable = {
+			MAF_rural_var = -5
+			tooltip = MAF_rural_var_tt
+		}
+		add_to_variable = {
+			MAF_profit_var = -5
+			tooltip = MAF_profit_var_tt
+		}
+		country_event = {
+			id = MAF.1023
+			days = 30
+		}
+	}
+	ai_will_do = {
+		base = 100
+	}
+}
+shared_focus = {
+	id = MAF_public_works
+	icon = GFX_generic_construct_public_housing
+	relative_position_id = MAF_investment_path
+	cost = 4
+	x = 2
+	y = 2 
+	
+	prerequisite = {
+		focus = MAF_veterans_pay
+	}
+
+	completion_reward = {
+		add_to_variable = {
+			MAF_urban_change_var = 0.2
+			tooltip = MAF_urban_change_var_tt
+		}
+		1038 = {
+			add_building_construction = {
+				type = infrastructure
+				level = 1
+				instant_build = yes
+			}
+		}
+		541 = {
+			add_building_construction = {
+				type = infrastructure
+				level = 1
+				instant_build = yes
+			}
+		}
+		188 = {
+			add_building_construction = {
+				type = infrastructure
+				level = 1
+				instant_build = yes
+			}
+		}
+		1039 = {
+			add_building_construction = {
+				type = infrastructure
+				level = 1
+				instant_build = yes
+			}
+		}
+		546 = {
+			add_building_construction = {
+				type = infrastructure
+				level = 1
+				instant_build = yes
+			}
+		}
+	}
+	ai_will_do = {
+		base = 100
+	}
+}
+shared_focus = {
+	id = MAF_opening_interior
+	icon = GFX_generic_tour_africa
+	relative_position_id = MAF_investment_path
+	cost = 4
+	x = 2
+	y = 3 
+	
+	prerequisite = {
+		focus = MAF_public_works
+	}
+
+	completion_reward = {
+		771 = {
+			add_building_construction = {
+				type = infrastructure
+				level = 1
+				instant_build = yes
+			}
+		}
+		1007 = {
+			add_building_construction = {
+				type = infrastructure
+				level = 1
+				instant_build = yes
+			}
+		}
+		1008 = {
+			add_building_construction = {
+				type = infrastructure
+				level = 1
+				instant_build = yes
+			}
+		}
+		1042 = {
+			add_building_construction = {
+				type = infrastructure
+				level = 1
+				instant_build = yes
+			}
+		}
+		1043 = {
+			add_building_construction = {
+				type = infrastructure
+				level = 1
+				instant_build = yes
+			}
+		}
+		1027 = {
+			add_building_construction = {
+				type = infrastructure
+				level = 1
+				instant_build = yes
+			}
+		}
+		build_railway = {
+			level = 1
+			start_province = 2196
+			target_province = 2206
+		}
+	}
+	ai_will_do = {
+		base = 100
+	}
+}
+shared_focus = {
+	id = MAF_favour_the_core_colonies
+	icon = GFX_MAF_Recruiting_Local_Germans
+	relative_position_id = MAF_investment_path
+	cost = 4
+	x = -1
+	y = 4 
+	
+	prerequisite = {
+		focus = MAF_native_protections
+	}		
+	prerequisite = {
+		focus = MAF_power_cities
+	}
+	prerequisite = {
+		focus = MAF_opening_interior
+	}
+	mutually_exclusive = {
+		focus = MAF_raise_the_continent
+	}
+	completion_reward = {
+		1042 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
+		1060 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
+		777 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
+		541 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
+	}
+	ai_will_do = {
+		base = 100
+	}
+}
+shared_focus = {
+	id = MAF_raise_the_continent
+	icon = GFX_generic_flag_large_MAF
+	relative_position_id = MAF_investment_path
+	cost = 4
+	x = 1
+	y = 4
+	prerequisite = {
+		focus = MAF_native_protections
+	}		
+	prerequisite = {
+		focus = MAF_power_cities
+	}
+	prerequisite = {
+		focus = MAF_opening_interior
+	}
+	mutually_exclusive = {
+		focus = MAF_favour_the_core_colonies
+	}
+	completion_reward = {
+		add_timed_idea = { idea = MAF_raise_the_continent days = 750 }
+	}
+	ai_will_do = {
+		base = 100
+	}
+}
+
+shared_focus = {
+	id = MAF_opening_bureaucracy
+	icon = GFX_generic_collaborate_local_elites
+	relative_position_id = MAF_investment_path
+	cost = 4
+	x = -5
+	y = 1 
+	
+	prerequisite = {
+		focus = MAF_investment_path
+	}
+	completion_reward = {
+		add_to_variable = {
+			MAF_admin_status_var = 10
+			tooltip = MAF_admin_status_var_tt
+		}
+		add_to_variable = {
+			MAF_admin_status_change_var = 0.5
+			tooltip = MAF_admin_status_change_var_tt
+		}
+	}
+	ai_will_do = {
+		base = 125
+	}
+}
+
+shared_focus = {
+	id = MAF_import_reichspakt_experts
+	icon = GFX_LEC_german_arrow
+	relative_position_id = MAF_investment_path
+	cost = 4
+	x = -4
+	y = 2 
+	
+	prerequisite = {
+		focus = MAF_opening_bureaucracy
+	}
+	completion_reward = {	
+		add_to_variable = {
+			MAF_foreign_var = 10
+			tooltip = MAF_foreign_var_tt
+		}
+		add_to_variable = {
+			MAF_foreign_change_var = 0.25
+			tooltip = MAF_foreign_change_var_tt
+		}
+		add_to_variable = {
+			MAF_urban_change_var = 0.5
+			tooltip = MAF_urban_change_var_tt
+		}
+	}
+	ai_will_do = {
+		base = 125
+	}
+}
+
+shared_focus = {
+	id = MAF_involving_the_protectorates
+	icon = GFX_GER_PlaceintheSun
+	relative_position_id = MAF_investment_path
+	cost = 4
+	x = -6
+	y = 2 
+	
+	prerequisite = {
+		focus = MAF_opening_bureaucracy
+	}
+
+	completion_reward = {
+		add_to_variable = {
+			MAF_settler_var = 10
+			tooltip = MAF_settler_var_tt
+		}
+	}
+	ai_will_do = {
+		base = 125
+	}
+}
+
+shared_focus = {
+	id = MAF_top_to_bottom_reform
+	icon = GFX_TEX_race_politics
+	relative_position_id = MAF_investment_path
+	cost = 4
+	x = -5
+	y = 3 
+	
+	prerequisite = {
+		focus = MAF_involving_the_protectorates
+		focus = MAF_import_reichspakt_experts
+	}
+
+	completion_reward = {
+		add_to_variable = {
+			MAF_bureaucracy_var = 5
+			tooltip = MAF_bureaucracy_var_tt
+		}
+		add_to_variable = {
+			MAF_bureaucracy_change_var = 0.25
+			tooltip = MAF_bureaucracy_change_var_tt
+		}
+		add_to_variable = {
+			MAF_economy_var = 5
+			tooltip = MAF_economy_var_tt
+		}
+		add_to_variable = {
+			MAF_economy_change_var = 0.25
+			tooltip = MAF_economy_change_var_tt
+		}
+	}
+	ai_will_do = {
+		base = 125
+	}
+}

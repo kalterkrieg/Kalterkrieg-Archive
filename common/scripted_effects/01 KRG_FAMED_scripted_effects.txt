@@ -1,0 +1,1003 @@
+get_FAMED_influence ={ 
+	calculate_industrial_influence = yes
+	calculate_military_influence = yes
+	FAMED_check_if_it_is_wrong = yes
+}
+calculate_industrial_influence ={  #calculating how many factories FAMED has in total
+	if ={
+		limit ={   
+		    ITA ={ 
+				is_in_FAMED = yes
+			}
+		}
+	add_to_variable ={total_FAMED_factories = ITA.num_of_military_factories}
+	set_variable  ={ ITA_FAMED_influence_variable = ITA.num_of_military_factories }
+	}
+	if ={
+		limit ={   
+		    NFA ={ 
+				is_in_FAMED = yes
+			}
+		}
+	add_to_variable ={total_FAMED_factories = NFA.num_of_military_factories}
+	set_variable  ={ NFA_FAMED_influence_variable = NFA.num_of_military_factories }
+	}
+	if ={  
+		limit ={ 
+			GRE ={ 
+				is_in_FAMED = yes
+			}
+		}
+	add_to_variable ={total_FAMED_factories = GRE.num_of_military_factories}
+	set_variable  ={ GRE_FAMED_influence_variable = GRE.num_of_military_factories }
+	}
+	if ={  
+		limit ={ 
+			POR ={ 
+				is_in_FAMED = yes
+			}
+		}
+	add_to_variable ={total_FAMED_factories = POR.num_of_military_factories}
+	set_variable  ={ POR_FAMED_influence_variable = POR.num_of_military_factories }
+	}
+	if ={
+		limit ={   
+		    SPR ={ 
+				is_in_FAMED = yes
+			}
+		}
+	add_to_variable ={total_FAMED_factories = SPR.num_of_military_factories }
+	set_variable  ={ SPR_FAMED_influence_variable = SPR.num_of_military_factories }
+	}
+ #calculating the fraction it is of total factories
+	
+    divide_variable  ={ITA_FAMED_influence_variable = total_FAMED_factories }
+	divide_variable  ={NFA_FAMED_influence_variable = total_FAMED_factories }
+	divide_variable  ={GRE_FAMED_influence_variable = total_FAMED_factories }
+	divide_variable  ={POR_FAMED_influence_variable = total_FAMED_factories }
+	divide_variable  ={SPR_FAMED_influence_variable = total_FAMED_factories }
+}
+calculate_military_influence ={ #calculate how big the military of X nation is compared to FAMED
+	if ={
+		limit ={   
+		    ITA ={ 
+				is_in_FAMED = yes
+			}
+		}
+	add_to_variable ={total_FAMED_military_might = ITA.military_spending}
+	set_variable  ={ ITA_FAMED_military_influence_variable = ITA.military_spending }
+	}
+	if ={
+		limit ={   
+		    NFA ={ 
+				is_in_FAMED = yes
+			}
+		}
+	add_to_variable ={total_FAMED_military_might = NFA.military_spending}
+	set_variable  ={ NFA_FAMED_military_influence_variable = NFA.military_spending }
+	}
+	if ={  
+		limit ={ 
+			GRE ={ 
+				is_in_FAMED = yes
+			}
+		}
+	add_to_variable ={total_FAMED_military_might = GRE.military_spending}
+	set_variable  ={ GRE_FAMED_military_influence_variable = GRE.military_spending }
+	}
+	if ={  
+		limit ={ 
+			POR ={ 
+				is_in_FAMED = yes
+			}
+		}
+	add_to_variable ={total_FAMED_military_might = POR.military_spending}
+	set_variable  ={ POR_FAMED_military_influence_variable = POR.military_spending }
+	}
+	if ={
+		limit ={   
+		    SPR ={ 
+				is_in_FAMED = yes
+			}
+		}
+	add_to_variable ={total_FAMED_factories = SPR.military_spending}
+	set_variable  ={ SPR_FAMED_military_influence_variable = SPR.military_spending }
+	}
+ #calculating the fraction it is of the total spending
+	
+    divide_variable  ={ITA_FAMED_military_influence_variable = total_FAMED_military_might }
+	divide_variable  ={NFA_FAMED_military_influence_variable = total_FAMED_military_might }
+	divide_variable  ={GRE_FAMED_military_influence_variable = total_FAMED_military_might }
+	divide_variable  ={POR_FAMED_military_influence_variable = total_FAMED_military_might }
+	divide_variable  ={SPR_FAMED_military_influence_variable = total_FAMED_military_might }
+
+	add_to_variable = {ITA_FAMED_influence_variable = ITA_FAMED_military_influence_variable}
+	add_to_variable = {NFA_FAMED_influence_variable = NFA_FAMED_military_influence_variable}
+	add_to_variable = {GRE_FAMED_influence_variable = GRE_FAMED_military_influence_variable}
+	add_to_variable = {POR_FAMED_influence_variable = POR_FAMED_military_influence_variable}
+	add_to_variable = {SPR_FAMED_influence_variable = SPR_FAMED_military_influence_variable}
+
+	divide_variable  ={ITA_FAMED_influence_variable = 2 }
+	divide_variable  ={NFA_FAMED_influence_variable = 2 }
+	divide_variable  ={GRE_FAMED_influence_variable = 2 }
+	divide_variable  ={POR_FAMED_influence_variable = 2 }
+	divide_variable  ={SPR_FAMED_influence_variable = 2 }
+}
+calculate_influence_for_all ={ #calculates the influence of all nations that are in FAMED
+	if ={
+		limit ={   
+		    ITA ={ 
+				is_in_FAMED = yes
+			}
+		}
+	ITA ={get_FAMED_influence =yes }
+	}
+	if ={
+		limit ={   
+		    NFA ={ 
+				is_in_FAMED = yes
+			}
+		}
+	NFA ={get_FAMED_influence =yes }
+	}
+	if ={
+		limit ={   
+		    GRE ={ 
+				is_in_FAMED = yes
+			}
+		}
+	GRE ={get_FAMED_influence =yes }
+	}
+	if ={
+		limit ={   
+		    POR ={ 
+				is_in_FAMED = yes
+			}
+		}
+	POR ={get_FAMED_influence =yes }
+	}
+	if ={
+		limit ={   
+		    SPR ={ 
+				is_in_FAMED = yes
+			}
+		}
+	SPR ={get_FAMED_influence =yes }
+    }
+}
+FAMED_check_if_it_is_wrong ={ #checks if the variable is off from what it ought to be and if it is too much/too little it adds/removes
+	set_variable = {FAMED_influence_variable = ITA_FAMED_influence_variable}
+	add_to_variable = {FAMED_influence_variable = NFA_FAMED_influence_variable}
+	add_to_variable = {FAMED_influence_variable = GRE_FAMED_influence_variable}
+	add_to_variable = {FAMED_influence_variable = POR_FAMED_influence_variable}
+	add_to_variable = {FAMED_influence_variable = SPR_FAMED_influence_variable}
+
+	if ={ 
+		limit ={
+		    check_variable ={ 
+			    FAMED_influence_variable < 1
+			}
+		}
+		FAMED_remove_the_error_too_few = yes
+	}
+	else_if ={ 
+		limit ={
+		    check_variable ={ 
+			    FAMED_influence_variable > 1
+			}
+		}
+		FAMED_remove_the_error_too_much = yes
+	}
+}
+FAMED_check_if_it_is_still_wrong ={ #checks if it is still wrong after it got changed the first times
+	set_variable = {FAMED_influence_variable = ITA_FAMED_influence_variable}
+	add_to_variable = {FAMED_influence_variable = NFA_FAMED_influence_variable}
+	add_to_variable = {FAMED_influence_variable = GRE_FAMED_influence_variable}
+	add_to_variable = {FAMED_influence_variable = POR_FAMED_influence_variable}
+	add_to_variable = {FAMED_influence_variable = SPR_FAMED_influence_variable}
+}
+FAMED_remove_the_error_too_few ={ 
+	add_to_variable = {
+		NFA_FAMED_influence_variable = 0.001
+	}
+	FAMED_check_if_it_is_still_wrong = yes
+	if ={ 
+		limit ={
+			check_variable = {
+				FAMED_influence_variable < 1
+			} 
+		}
+		add_to_variable = {
+			ITA_FAMED_influence_variable = 0.001
+		}
+		FAMED_check_if_it_is_still_wrong = yes
+	}
+	if ={ 
+		limit ={
+			check_variable = {
+				FAMED_influence_variable < 1
+			} 
+		}
+		add_to_variable = {
+			GRE_FAMED_influence_variable = 0.001
+		}
+		FAMED_check_if_it_is_still_wrong = yes
+	}
+	if ={ 
+		limit ={
+			check_variable = {
+				FAMED_influence_variable < 1
+			} 
+		}
+		add_to_variable = {
+			POR_FAMED_influence_variable = 0.001
+		}
+		FAMED_check_if_it_is_still_wrong = yes
+	}
+	if ={ 
+		limit ={
+			check_variable = {
+				FAMED_influence_variable < 1
+			} 
+		}
+		add_to_variable = {
+			SPR_FAMED_influence_variable = 0.001
+		}
+	}
+}
+FAMED_remove_the_error_too_much ={ 
+	subtract_from_variable = {
+		NFA_FAMED_influence_variable = 0.001
+	}
+	FAMED_check_if_it_is_still_wrong = yes
+	if ={ 
+		limit ={
+			check_variable = {
+				FAMED_influence_variable < 1
+			} 
+		}
+		subtract_from_variable = {
+			ITA_FAMED_influence_variable = 0.01
+		}
+		FAMED_check_if_it_is_still_wrong = yes
+	}
+	if ={ 
+		limit ={
+			check_variable = {
+				FAMED_influence_variable < 1
+			} 
+		}
+		subtract_from_variable = {
+			GRE_FAMED_influence_variable = 0.01
+		}
+		FAMED_check_if_it_is_still_wrong = yes
+	}
+	if ={ 
+		limit ={
+			check_variable = {
+				FAMED_influence_variable < 1
+			} 
+		}
+		subtract_from_variable = {
+			POR_FAMED_influence_variable = 0.01
+		}
+		FAMED_check_if_it_is_still_wrong = yes
+	}
+	if ={ 
+		limit ={
+			check_variable = {
+				FAMED_influence_variable < 1
+			} 
+		}
+		subtract_from_variable = {
+			SPR_FAMED_influence_variable = 0.01
+		}
+		FAMED_check_if_it_is_wrong = yes
+	}
+}
+reset_values_FAMED ={ #sets all FAMED values to 0, debug only
+	set_variable = {ITA_FAMED_influence_variable = 0}
+	set_variable = {NFA_FAMED_influence_variable = 0}
+	set_variable = {GRE_FAMED_influence_variable = 0}
+	set_variable = {POR_FAMED_influence_variable = 0}
+	set_variable = {SPR_FAMED_influence_variable = 0}
+	set_variable = {total_FAMED_factories = 0}
+	set_variable = {ITA_FAMED_military_influence_variable = 0}
+	set_variable = {NFA_FAMED_military_influence_variable = 0}
+	set_variable = {GRE_FAMED_military_influence_variable = 0}
+	set_variable = {POR_FAMED_military_influence_variable = 0}
+	set_variable = {SPR_FAMED_military_influence_variable = 0}
+	set_variable = {total_FAMED_military_might = 0}
+}
+reset_values_FAMED_for_all ={ #resets all FAMED values for all FAMED countries
+	if ={
+		limit ={   
+		    ITA ={ 
+				is_in_FAMED = yes
+			}
+		}
+	ITA ={reset_values_FAMED =yes }
+	}
+	if ={
+		limit ={   
+		    NFA ={ 
+				is_in_FAMED = yes
+			}
+		}
+	NFA ={reset_values_FAMED =yes }
+	}
+	if ={
+		limit ={   
+		    GRE ={ 
+				is_in_FAMED = yes
+			}
+		}
+	GRE ={reset_values_FAMED =yes }
+	}
+	if ={
+		limit ={   
+		    POR ={ 
+				is_in_FAMED = yes
+			}
+		}
+	POR ={reset_values_FAMED =yes }
+	}
+	if ={
+		limit ={   
+		    SPR ={ 
+				is_in_FAMED = yes
+			}
+		}
+	SPR ={reset_values_FAMED =yes }
+    }
+}
+clear_all_FAMED_voting_flags ={ #clears all voting flags
+	clr_global_flag = FAMED_is_voting
+	set_variable = {
+		FAMED_influence_in_favor = 0
+	}
+	clear_array = FAMED_total_support
+	ITA ={ 
+		clr_country_flag = FAMED_opposes
+	    clr_country_flag = FAMED_supports
+	}
+	NFA ={ 
+		clr_country_flag = FAMED_opposes
+	    clr_country_flag = FAMED_supports
+	}
+	POR ={ 
+		clr_country_flag = FAMED_opposes
+	    clr_country_flag = FAMED_supports
+	}
+	SPR ={ 
+		clr_country_flag = FAMED_opposes
+	    clr_country_flag = FAMED_supports
+	}
+	GRE ={ 
+		clr_country_flag = FAMED_opposes
+	    clr_country_flag = FAMED_supports
+	}
+}
+add_support_influence ={ #adds supporting influence of a certain country to the total support
+	if ={ 
+		limit ={ 
+			is_in_array = {
+				array = FAMED_total_support
+				value = ITA
+			}
+		}
+		ITA_add_support_to_all = yes
+	}
+	if ={ 
+		limit ={ 
+			is_in_array = {
+				array = FAMED_total_support
+				value = NFA
+			}
+		}
+		NFA_add_support_to_all = yes
+	}
+	if ={ 
+		limit ={ 
+			is_in_array = {
+				array = FAMED_total_support
+				value = GRE
+			}
+		}
+		GRE_add_support_to_all = yes
+	}
+	if ={ 
+		limit ={ 
+			is_in_array = {
+				array = FAMED_total_support
+				value = POR
+			}
+		}
+		POR_add_support_to_all = yes
+	}
+	if ={ 
+		limit ={ 
+			is_in_array = {
+				array = FAMED_total_support
+				value = SPR
+			}
+		}
+		SPR_add_support_to_all = yes
+	}
+}
+ITA_add_support_to_all ={ #Adds ITA influence value to all FAMED nations
+	if ={ 
+		limit ={ 
+			ITA ={ 
+				has_country_flag = is_in_FAMED
+			}
+		}
+		ITA ={ 
+			add_to_variable = {
+				FAMED_influence_in_favor = ITA_FAMED_influence_variable
+			}
+		}
+	}
+	if ={ 
+		limit ={ 
+			NFA ={ 
+				has_country_flag = is_in_FAMED
+			}
+		}
+		NFA ={ 
+			add_to_variable = {
+				FAMED_influence_in_favor = ITA_FAMED_influence_variable
+			}
+		}
+	}
+	if ={ 
+		limit ={ 
+			POR ={ 
+				has_country_flag = is_in_FAMED
+			}
+		}
+		POR ={ 
+			add_to_variable = {
+				FAMED_influence_in_favor = ITA_FAMED_influence_variable
+			}
+		}
+	}
+	if ={ 
+		limit ={ 
+			SPR ={ 
+				has_country_flag = is_in_FAMED
+			}
+		}
+		SPR ={ 
+			add_to_variable = {
+				FAMED_influence_in_favor = ITA_FAMED_influence_variable
+			}
+		}
+	}
+	if ={ 
+		limit ={ 
+			GRE ={ 
+				has_country_flag = is_in_FAMED
+			}
+		}
+		GRE ={ 
+			add_to_variable = {
+				FAMED_influence_in_favor = ITA_FAMED_influence_variable
+			}
+		}
+	}
+}
+NFA_add_support_to_all ={ #Adds NFA influence value to all FAMED nations
+	if ={ 
+		limit ={ 
+			ITA ={ 
+				has_country_flag = is_in_FAMED
+			}
+		}
+		ITA ={ 
+			add_to_variable = {
+				FAMED_influence_in_favor = NFA_FAMED_influence_variable
+			}
+		}
+	}
+	if ={ 
+		limit ={ 
+			NFA ={ 
+				has_country_flag = is_in_FAMED
+			}
+		}
+		NFA ={ 
+			add_to_variable = {
+				FAMED_influence_in_favor = NFA_FAMED_influence_variable
+			}
+		}
+	}
+	if ={ 
+		limit ={ 
+			POR ={ 
+				has_country_flag = is_in_FAMED
+			}
+		}
+		POR ={ 
+			add_to_variable = {
+				FAMED_influence_in_favor = NFA_FAMED_influence_variable
+			}
+		}
+	}
+	if ={ 
+		limit ={ 
+			SPR ={ 
+				has_country_flag = is_in_FAMED
+			}
+		}
+		SPR ={ 
+			add_to_variable = {
+				FAMED_influence_in_favor = NFA_FAMED_influence_variable
+			}
+		}
+	}
+	if ={ 
+		limit ={ 
+			GRE ={ 
+				has_country_flag = is_in_FAMED
+			}
+		}
+		GRE ={ 
+			add_to_variable = {
+				FAMED_influence_in_favor = NFA_FAMED_influence_variable
+			}
+		}
+	}
+}
+GRE_add_support_to_all ={ #Adds GRE influence value to all FAMED nations
+	if ={ 
+		limit ={ 
+			ITA ={ 
+				has_country_flag = is_in_FAMED
+			}
+		}
+		ITA ={ 
+			add_to_variable = {
+				FAMED_influence_in_favor = GRE_FAMED_influence_variable
+			}
+		}
+	}
+	if ={ 
+		limit ={ 
+			NFA ={ 
+				has_country_flag = is_in_FAMED
+			}
+		}
+		NFA ={ 
+			add_to_variable = {
+				FAMED_influence_in_favor = GRE_FAMED_influence_variable
+			}
+		}
+	}
+	if ={ 
+		limit ={ 
+			POR ={ 
+				has_country_flag = is_in_FAMED
+			}
+		}
+		POR ={ 
+			add_to_variable = {
+				FAMED_influence_in_favor = GRE_FAMED_influence_variable
+			}
+		}
+	}
+	if ={ 
+		limit ={ 
+			SPR ={ 
+				has_country_flag = is_in_FAMED
+			}
+		}
+		SPR ={ 
+			add_to_variable = {
+				FAMED_influence_in_favor = GRE_FAMED_influence_variable
+			}
+		}
+	}
+	if ={ 
+		limit ={ 
+			GRE ={ 
+				has_country_flag = is_in_FAMED
+			}
+		}
+		GRE ={ 
+			add_to_variable = {
+				FAMED_influence_in_favor = GRE_FAMED_influence_variable
+			}
+		}
+	}
+}
+POR_add_support_to_all ={ #Adds POR influence value to all FAMED nations
+	if ={ 
+		limit ={ 
+			ITA ={ 
+				has_country_flag = is_in_FAMED
+			}
+		}
+		ITA ={ 
+			add_to_variable = {
+				FAMED_influence_in_favor = POR_FAMED_influence_variable
+			}
+		}
+	}
+	if ={ 
+		limit ={ 
+			NFA ={ 
+				has_country_flag = is_in_FAMED
+			}
+		}
+		NFA ={ 
+			add_to_variable = {
+				FAMED_influence_in_favor = POR_FAMED_influence_variable
+			}
+		}
+	}
+	if ={ 
+		limit ={ 
+			POR ={ 
+				has_country_flag = is_in_FAMED
+			}
+		}
+		POR ={ 
+			add_to_variable = {
+				FAMED_influence_in_favor = POR_FAMED_influence_variable
+			}
+		}
+	}
+	if ={ 
+		limit ={ 
+			SPR ={ 
+				has_country_flag = is_in_FAMED
+			}
+		}
+		SPR ={ 
+			add_to_variable = {
+				FAMED_influence_in_favor = POR_FAMED_influence_variable
+			}
+		}
+	}
+	if ={ 
+		limit ={ 
+			GRE ={ 
+				has_country_flag = is_in_FAMED
+			}
+		}
+		GRE ={ 
+			add_to_variable = {
+				FAMED_influence_in_favor = POR_FAMED_influence_variable
+			}
+		}
+	}
+}
+SPR_add_support_to_all ={ #Adds SPR influence value to all FAMED nations
+	if ={ 
+		limit ={ 
+			ITA ={ 
+				has_country_flag = is_in_FAMED
+			}
+		}
+		ITA ={ 
+			add_to_variable = {
+				FAMED_influence_in_favor = SPR_FAMED_influence_variable
+			}
+		}
+	}
+	if ={ 
+		limit ={ 
+			NFA ={ 
+				has_country_flag = is_in_FAMED
+			}
+		}
+		NFA ={ 
+			add_to_variable = {
+				FAMED_influence_in_favor = SPR_FAMED_influence_variable
+			}
+		}
+	}
+	if ={ 
+		limit ={ 
+			POR ={ 
+				has_country_flag = is_in_FAMED
+			}
+		}
+		POR ={ 
+			add_to_variable = {
+				FAMED_influence_in_favor = SPR_FAMED_influence_variable
+			}
+		}
+	}
+	if ={ 
+		limit ={ 
+			SPR ={ 
+				has_country_flag = is_in_FAMED
+			}
+		}
+		SPR ={ 
+			add_to_variable = {
+				FAMED_influence_in_favor = SPR_FAMED_influence_variable
+			}
+		}
+	}
+	if ={ 
+		limit ={ 
+			GRE ={ 
+				has_country_flag = is_in_FAMED
+			}
+		}
+		GRE ={ 
+			add_to_variable = {
+				FAMED_influence_in_favor = SPR_FAMED_influence_variable
+			}
+		}
+	}
+}
+is_FAMED_supporter ={ #supports the current legislation
+	set_country_flag = FAMED_supports
+	add_to_array ={ 
+		array = FAMED_total_support
+		value = ROOT
+    }
+    add_support_influence = yes
+}
+is_FAMED_opposer ={ #opposes the current legislation
+	set_country_flag = FAMED_opposes
+}
+show_army_training_decisions_FAMED ={ #I am not entirely sure what this is supposed to do either, but I am sure its ok
+	POR ={
+		if ={ 
+			limit ={ 
+				is_in_FAMED = yes
+			}
+			set_country_flag = FAMED_hide_army_training_flag
+		}
+	}
+	NFA ={
+		if ={ 
+			limit ={ 
+				is_in_FAMED = yes
+			}
+			set_country_flag = FAMED_hide_army_training_flag
+		}
+	}
+	ITA ={
+		if ={ 
+			limit ={ 
+				is_in_FAMED = yes
+			}
+			set_country_flag = FAMED_hide_army_training_flag
+		}
+	}
+	SPR ={
+		if ={ 
+			limit ={ 
+				is_in_FAMED = yes
+			}
+			set_country_flag = FAMED_hide_army_training_flag
+		}
+	}
+	GRE ={
+		if ={ 
+			limit ={ 
+				is_in_FAMED = yes
+			}
+			set_country_flag = FAMED_hide_army_training_flag
+		}
+	}
+}
+show_investment_decisions_FAMED ={ #I am not entirely sure what this is supposed to do either, but I am sure its ok
+	POR ={
+		if ={ 
+			limit ={ 
+				is_in_FAMED = yes
+			}
+			set_country_flag = FAMED_hide_invest_in_FAMED_flag
+		}
+	}
+	NFA ={
+		if ={ 
+			limit ={ 
+				is_in_FAMED = yes
+			}
+			set_country_flag = FAMED_hide_invest_in_FAMED_flag
+		}
+	}
+	ITA ={
+		if ={ 
+			limit ={ 
+				is_in_FAMED = yes
+			}
+			set_country_flag = FAMED_hide_invest_in_FAMED_flag
+		}
+	}
+	SPR ={
+		if ={ 
+			limit ={ 
+				is_in_FAMED = yes
+			}
+			set_country_flag = FAMED_hide_invest_in_FAMED_flag
+		}
+	}
+	GRE ={
+		if ={ 
+			limit ={ 
+				is_in_FAMED = yes
+			}
+			set_country_flag = FAMED_hide_invest_in_FAMED_flag
+		}
+	}
+}
+add_1_factory_from_everybody ={ #adds a factory amount to the FAMED budget equal to the amount of nations in FAMED
+	if ={ 
+		limit ={ 
+			POR ={
+				is_in_FAMED = yes
+			}
+		}
+		PREV ={
+			add_to_variable = {
+			    FAMED_industry = 1
+		    }
+		}
+		add_to_variable = {
+			FAMED_total_industry = 1
+		}
+	}
+	if ={ 
+		limit ={ 
+			NFA ={
+				is_in_FAMED = yes
+			}
+		}
+		PREV ={
+			add_to_variable = {
+			    FAMED_industry = 1
+		    }
+		}
+		add_to_variable = {
+			FAMED_total_industry = 1
+		}
+	}
+	if ={ 
+		limit ={ 
+			ITA ={
+				is_in_FAMED = yes
+			}
+		}
+		PREV ={
+			add_to_variable = {
+			    FAMED_industry = 1
+		    }
+		}
+		add_to_variable = {
+			FAMED_total_industry = 1
+		}
+	}
+	if ={ 
+		limit ={ 
+			SPR ={
+				is_in_FAMED = yes
+			}
+		}
+		PREV ={
+			add_to_variable = {
+			    FAMED_industry = 1
+		    }
+		}
+		add_to_variable = {
+			FAMED_total_industry = 1
+		}
+	}
+	if ={ 
+		limit ={ 
+			GRE ={
+				is_in_FAMED = yes
+			}
+		}
+		PREV ={
+			add_to_variable = {
+			    FAMED_industry = 1
+		    }
+		}
+		add_to_variable = {
+			FAMED_total_industry = 1
+		}
+	}
+}
+remove_1_factory_from_everybody ={ #removes a factory amount from the FAMED budget equal to the amount of nations in FAMED
+	if ={ 
+		limit ={ 
+			POR ={
+				is_in_FAMED = yes
+			}
+		}
+		PREV ={
+			subtract_from_variable = {
+			    FAMED_industry = 1
+		    }
+		}
+		subtract_from_variable = {
+			FAMED_total_industry = 1
+		}
+	}
+	if ={ 
+		limit ={ 
+			NFA ={
+				is_in_FAMED = yes
+			}
+		}
+		PREV ={
+			subtract_from_variable = {
+			    FAMED_industry = 1
+		    }
+		}
+		subtract_from_variable = {
+			FAMED_total_industry = 1
+		}
+	}
+	if ={ 
+		limit ={ 
+			ITA ={
+				is_in_FAMED = yes
+			}
+		}
+		PREV ={
+			subtract_from_variable = {
+			    FAMED_industry = 1
+		    }
+		}
+		subtract_from_variable = {
+			FAMED_total_industry = 1
+		}
+	}
+	if ={ 
+		limit ={ 
+			SPR ={
+				is_in_FAMED = yes
+			}
+		}
+		PREV ={
+			subtract_from_variable = {
+			    FAMED_industry = 1
+		    }
+		}
+		subtract_from_variable = {
+			FAMED_total_industry = 1
+		}
+	}
+	if ={ 
+		limit ={ 
+			GRE ={
+				is_in_FAMED = yes
+			}
+		}
+		PREV ={
+			subtract_from_variable = {
+			    FAMED_industry = 1
+		    }
+		}
+		subtract_from_variable = {
+			FAMED_total_industry = 1
+		}
+	}
+}
+remove_1_factory_from_the_total ={ #removes a factory from the FAMED budget
+	subtract_from_variable = {
+		FAMED_total_industry = 1
+	}
+}
+add_1_factory_from_the_total ={ #adds a factory to the FAMED budget
+	add_to_variable = {
+		FAMED_total_industry = 1
+	}
+}
+FAMED_yearly_decay ={ #yearly decay for the FAMED bonuses
+	subtract_from_variable ={ FAMED_army_training_var = 0.05}
+	subtract_from_variable ={ FAMED_air_training_var = 0.05}
+	subtract_from_variable ={ FAMED_navy_training_var = 0.05}
+	subtract_from_variable ={ FAMED_intelligence_help_var = 0.025}
+	subtract_from_variable ={ FAMED_research_var = 0.005}
+}

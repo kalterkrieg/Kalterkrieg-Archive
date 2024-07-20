@@ -1,0 +1,76 @@
+add_namespace = krg_political
+add_namespace = krg_gdp
+
+country_event = { 
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_gdp.1 FROM = [From.GetName]" }
+	id = krg_gdp.1
+	title = krg_gdp.1.t
+	desc = krg_gdp.1.d
+	#picture = 
+
+	is_triggered_only = yes
+
+	trigger = {
+
+	}
+
+	immediate = {
+		hidden_effect = { distribute_civs = yes }
+	}
+
+	option = {
+		name = krg_gdp.1.a
+		effect_tooltip = {
+			distribute_civs = yes
+		}
+	}
+	
+}
+
+country_event = {
+	id = krg_political.1
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_political.1 FROM = [From.GetName]" }
+
+	hidden = yes
+	is_triggered_only = yes
+
+	trigger = {
+		has_war_with = event_target:white_peace_receiver
+	}
+
+	immediate = {
+		white_peace = event_target:white_peace_receiver
+	}
+}
+
+country_event = {
+	id = krg_political.2
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_political.2 FROM = [From.GetName]" }
+
+	hidden = yes
+	is_triggered_only = yes
+
+	trigger = {
+		has_war_with = event_target:peace_country
+	}
+
+	immediate = {
+		white_peace = event_target:peace_country
+	}
+}
+
+country_event = {
+	id = krg_political.3
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_political.3 FROM = [From.GetName]" }
+
+	hidden = yes
+	is_triggered_only = yes
+
+	trigger = {
+		has_war_with = FROM
+	}
+
+	immediate = {
+		white_peace = FROM
+	}
+}

@@ -1,0 +1,6468 @@
+####################################################
+###             Kingdom of Italy        		 ###
+###  designed by your local italian nationalist  ###
+####################################################
+focus_tree = {
+	id = KRG_ITA_tree
+	country = {
+		factor = 0
+		modifier = {
+			add = 10
+			tag = ITA
+		}
+	}
+	default = no
+	continuous_focus_position = { x = 2400 y = 2400 }
+	focus = {
+		id = ITA_matters_of_constitutional_importance
+		icon = GFX_GENERIC_parliament
+		cost = 0.00
+		x = 8
+		y = 0
+		bypass = {
+			hidden_trigger = {
+				always = yes
+			}
+		}
+		allow_branch = {
+			NOT = {
+				has_country_flag = KRG_ITA_1949_elections_held
+			}
+		}
+		completion_reward = {
+			custom_effect_tooltip = ITA_matters_of_constitutional_importance_tt
+		}
+	}
+	focus = {
+		id = ITA_royal_tours_pre_election
+		icon = GFX_SRD_kingdom_of_italy
+		cost = 3.00
+		x = -7
+		y = 1
+		relative_position_id = ITA_matters_of_constitutional_importance
+		prerequisite = {
+			focus = ITA_matters_of_constitutional_importance
+		}
+		available = {
+			NOT = {
+				has_country_flag = ITA_pella_2_gov_fallen
+			}
+		}
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = ITA_the_restoration
+					add_idea = ITA_the_restoration_temp_bonus
+				}
+			}
+			custom_effect_tooltip = ITA_bonus_will_last_180_days_tt
+			hidden_effect = {
+				add_timed_idea = {
+					idea = ITA_the_restoration_temp_bonus
+					days = 180
+				}
+			}
+			add_popularity = {
+				ideology = authoritarian_democrat
+				popularity = 0.01
+			}
+		}
+	}
+	focus = {
+		id = ITA_end_sicily_state_of_siege
+		icon = GFX_generic_liberty
+		cost = 3.00
+		x = -2
+		y = 1
+		relative_position_id = ITA_matters_of_constitutional_importance
+		prerequisite = {
+			focus = ITA_matters_of_constitutional_importance
+		}
+		available = {
+			NOT = {
+				has_country_flag = ITA_pella_2_gov_fallen
+			}
+		}
+		completion_reward = {
+			add_timed_idea = {
+				idea = ITA_grateful_sicily_idea
+				days = 180
+			}
+		}
+	}
+	focus = {
+		id = ITA_meet_the_pope
+		icon = GFX_ITA_goal_Pius
+		cost = 4.00
+		x = -8
+		y = 2
+		relative_position_id = ITA_matters_of_constitutional_importance
+		prerequisite = {
+			focus = ITA_royal_tours_pre_election
+		}
+		available = {
+			NOT = {
+				has_country_flag = ITA_pella_2_gov_fallen
+			}
+		}
+		completion_reward = {
+			add_political_power = 70
+			add_popularity = {
+				ideology = social_conservative
+				popularity = 0.03
+			}
+		}
+	}
+	focus = {
+		id = ITA_continue_reconstruction_efforts
+		icon = GFX_generic_destruction_civil_war
+		cost = 4.00
+		x = -6
+		y = 2
+		relative_position_id = ITA_matters_of_constitutional_importance
+		prerequisite = {
+			focus = ITA_royal_tours_pre_election
+		}
+		available = {
+			NOT = {
+				has_country_flag = ITA_pella_2_gov_fallen
+			}
+		}
+		completion_reward = {
+			if = {
+				limit = {
+					has_idea = ITA_continued_reconstruction_bonus_idea
+				}
+				modify_timed_idea = {
+					idea = ITA_continued_reconstruction_bonus_idea
+					days = 180
+				}
+			}
+			else ={
+				add_timed_idea = {
+					idea = ITA_continued_reconstruction_bonus_idea
+					days = 180
+				}
+			}
+		}
+	}
+	focus = {
+		id = ITA_speak_in_custoza
+		icon = GFX_SRD_irredentism
+		cost = 3.00
+		x = -4
+		y = 2
+		relative_position_id = ITA_matters_of_constitutional_importance
+		prerequisite = {
+			focus = ITA_royal_tours_pre_election
+			focus = ITA_end_sicily_state_of_siege
+		}
+		available = {
+			NOT = {
+				has_country_flag = ITA_pella_2_gov_fallen
+			}
+		}
+		completion_reward = {
+			effect_tooltip = {
+				swap_ideas = {
+					remove_idea = ITA_montreal_agreement
+					add_idea = ITA_montreal_agreement_temp_bonus
+				}
+			}
+			custom_effect_tooltip = ITA_bonus_will_last_180_days_tt
+			reverse_add_opinion_modifier = {
+				target = DNF
+				modifier = ITA_DNF_custoza_speech
+			}
+			hidden_effect = {
+				add_timed_idea = {
+					idea = ITA_montreal_agreement_temp_bonus
+					days = 180
+				}
+			}
+			add_popularity = {
+				ideology = national_populist
+				popularity = 0.01
+			}
+		}
+	}
+	focus = {
+		id = ITA_provide_rural_relief
+		icon = GFX_SZC_improvised_farming_machinery
+		cost = 3.00
+		x = -2
+		y = 2
+		relative_position_id = ITA_matters_of_constitutional_importance
+		prerequisite = {
+			focus = ITA_end_sicily_state_of_siege
+		}
+		available = {
+			NOT = {
+				has_country_flag = ITA_pella_2_gov_fallen
+			}
+		}
+		completion_reward = {
+			if = {
+				limit = {
+					has_idea = ITA_continued_reconstruction_bonus_idea
+				}
+				modify_timed_idea = {
+					idea = ITA_continued_reconstruction_bonus_idea
+					days = 180
+				}
+			}
+			else ={
+				add_timed_idea = {
+					idea = ITA_continued_reconstruction_bonus_idea
+					days = 180
+				}
+			}
+		}
+	}
+	focus = {
+		id = ITA_allow_catholic_action_expansion
+		icon = GFX_SHX_Christian_Influence
+		cost = 4.00
+		x = -7
+		y = 3
+		relative_position_id = ITA_matters_of_constitutional_importance
+		prerequisite = {
+			focus = ITA_meet_the_pope
+		}
+		prerequisite = {
+			focus = ITA_continue_reconstruction_efforts
+		}
+		available = {
+			NOT = {
+				has_country_flag = ITA_pella_2_gov_fallen
+			}
+		}
+		completion_reward = {
+			add_popularity = {
+				ideology = social_conservative
+				popularity = 0.03
+			}
+			add_popularity = {
+				ideology = social_liberal
+				popularity = 0.02
+			}
+			custom_effect_tooltip = ITA_allow_catholic_action_expansion_tt
+		}
+	}
+	focus = {
+		id = ITA_appoint_corbellini
+		icon = GFX_focus_generic_railroad
+		cost = 3.00
+		x = -5
+		y = 3
+		relative_position_id = ITA_matters_of_constitutional_importance
+		prerequisite = {
+			focus = ITA_continue_reconstruction_efforts
+		}
+		available = {
+			NOT = {
+				has_country_flag = ITA_pella_2_gov_fallen
+			}
+		}
+		completion_reward = {
+			add_timed_idea = {
+				idea = ITA_guido_corbellini_idea
+				days = 180
+			}
+		}
+	}
+	focus = {
+		id = ITA_moratorium_on_police_actions
+		icon = GFX_focus_ITA_workers_unions
+		cost = 4.00
+		x = -3
+		y = 3
+		relative_position_id = ITA_matters_of_constitutional_importance
+		prerequisite = {
+			focus = ITA_provide_rural_relief
+		}
+		available = {
+			NOT = {
+				has_country_flag = ITA_pella_2_gov_fallen
+			}
+		}
+		completion_reward = {
+			add_stability = -0.01
+			add_popularity = {
+				ideology = social_liberal
+				popularity = 0.02
+			}
+			add_popularity = {
+				ideology = social_democrat
+				popularity = 0.02
+			}
+			custom_effect_tooltip = ITA_moratorium_on_police_actions_tt
+			set_country_flag = {
+				flag = ITA_no_police_action
+				days = 180
+				value = 1
+			}
+		}
+	}
+	focus = {
+		id = ITA_enact_sicilian_autonomy
+		icon = GFX_generic_culture2
+		cost = 4.00
+		x = -1
+		y = 3
+		relative_position_id = ITA_matters_of_constitutional_importance
+		prerequisite = {
+			focus = ITA_end_sicily_state_of_siege
+		}
+		available = {
+			NOT = {
+				has_country_flag = ITA_pella_2_gov_fallen
+			}
+		}
+		completion_reward = {
+			add_popularity = {
+				ideology = market_liberal
+				popularity = 0.02
+			}
+			add_political_power = 30
+			unlock_decision_tooltip = KRG_ITA_pre_1949_sicily_autonomy_decision
+			set_country_flag = KRG_ITA_pre_1949_sicily_autonomy_flag
+			custom_effect_tooltip = ITA_should_this_bill_pass_we_get
+			effect_tooltip = {
+				if = {
+					limit = {
+						has_idea = ITA_grateful_sicily_idea
+					}
+					modify_timed_idea = {
+						idea = ITA_grateful_sicily_idea
+						days = 180
+					}
+				}
+				else ={
+					add_timed_idea = {
+						idea = ITA_grateful_sicily_idea
+						days = 180
+					}
+				}
+				115 = {
+					add_dynamic_modifier = {
+						modifier = ITA_autonomous_region
+					}
+					set_state_flag = ITA_region_has_autonomy
+				}
+				# activate_mission = KRG_ITA_pre_1949_sicily_election_timer
+			}
+		}
+	}
+	focus = {
+		id = ITA_absorb_federalist_organisations
+		icon = GFX_SRD_farmers_party
+		cost = 4.00
+		x = -2
+		y = 4
+		relative_position_id = ITA_matters_of_constitutional_importance
+		prerequisite = {
+			focus = ITA_moratorium_on_police_actions
+		}
+		prerequisite = {
+			focus = ITA_enact_sicilian_autonomy
+		}
+		available = {
+			NOT = {
+				has_country_flag = ITA_pella_2_gov_fallen
+			}
+		}
+		completion_reward = {
+			add_popularity = {
+				ideology = market_liberal
+				popularity = 0.05
+			}
+			custom_effect_tooltip = ITA_absorb_federalist_organisations_tt
+		}
+	}
+	# Early Nitti tree
+	focus = {
+		id = ITA_a_radical_touch
+		icon = GFX_generic_KRG_social_liberal
+		cost = 4.00
+		x = 2
+		y = 1
+		relative_position_id = ITA_matters_of_constitutional_importance
+		prerequisite = {
+			focus = ITA_matters_of_constitutional_importance
+		}
+		mutually_exclusive = {
+			focus = ITA_extraordinary_ppi_congress
+		}
+		available = {
+			has_country_flag = ITA_nitti_2_gov_formed
+			NOT = {
+				has_country_flag = ITA_new_constitution_approved
+			}
+		}
+		completion_reward = {
+			add_timed_idea = {
+				idea = ITA_ds_popularity_boon_idea
+				days = 60
+			}
+		}
+	}
+	focus = {
+		id = ITA_promise_federalism
+		icon = GFX_OTT_Land_Reform
+		cost = 5.00
+		x = -2
+		y = 1
+		relative_position_id = ITA_a_radical_touch
+		prerequisite = {
+			focus = ITA_a_radical_touch
+		}
+		available = {
+			has_country_flag = ITA_nitti_2_gov_formed
+			NOT = {
+				has_country_flag = ITA_new_constitution_approved
+			}
+		}
+		completion_reward = {
+			custom_effect_tooltip = ITA_promise_federalism_tt
+			if = {
+				limit = {
+					has_idea = ITA_ds_popularity_boon_idea
+				}
+				modify_timed_idea = {
+					idea = ITA_ds_popularity_boon_idea
+					days = 60
+				}
+			}
+			else ={
+				add_timed_idea = {
+					idea = ITA_ds_popularity_boon_idea
+					days = 60
+				}
+			}
+			if = {
+				limit = {
+					has_completed_focus = ITA_enact_sicilian_autonomy
+				}
+				add_popularity = {
+					ideology = market_liberal
+					popularity = 0.03
+				}
+			}
+		}
+	}
+	focus = {
+		id = ITA_ds_party_congress
+		icon = GFX_generic_castle
+		cost = 5.00
+		x = 0
+		y = 1
+		relative_position_id = ITA_a_radical_touch
+		prerequisite = {
+			focus = ITA_a_radical_touch
+		}
+		select_effect = {
+			set_country_flag = dont_fire_ds_congress_event
+			country_event = {
+				id = krg_ita.7
+				days = 15
+			}
+		}
+		available = {
+			has_country_flag = ITA_nitti_2_gov_formed
+			NOT = {
+				has_country_flag = ITA_new_constitution_approved
+			}
+		}
+		continue_if_invalid = yes
+		cancelable = no
+		completion_reward = {
+			custom_effect_tooltip = ITA_ds_party_congress_tt
+		}
+	}
+	focus = {
+		id = ITA_foster_trade_unionist_support
+		icon = GFX_socialist_constitution
+		cost = 5.00
+		x = -1
+		y = 2
+		relative_position_id = ITA_a_radical_touch
+		prerequisite = {
+			focus = ITA_promise_federalism
+		}
+		available = {
+			has_country_flag = ITA_nitti_2_gov_formed
+			NOT = {
+				has_country_flag = ITA_new_constitution_approved
+			}
+		}
+		completion_reward = {
+			custom_effect_tooltip = ITA_foster_trade_unionist_support_tt
+			if = {
+				limit = {
+					has_idea = ITA_ds_popularity_boon_idea
+				}
+				modify_timed_idea = {
+					idea = ITA_ds_popularity_boon_idea
+					days = 60
+				}
+			}
+			else ={
+				add_timed_idea = {
+					idea = ITA_ds_popularity_boon_idea
+					days = 60
+				}
+			}
+			if = {
+				limit = {
+					has_completed_focus = ITA_moratorium_on_police_actions
+				}
+				add_popularity = {
+					ideology = market_liberal
+					popularity = 0.03
+				}
+				add_popularity = {
+					ideology = social_democrat
+					popularity = 0.01
+				}
+			}
+		}
+	}
+	focus = {
+		id = ITA_build_the_laicist_front
+		icon = GFX_ITA_Danubian
+		cost = 5.00
+		x = 0
+		y = 3
+		relative_position_id = ITA_a_radical_touch
+		prerequisite = {
+			focus = ITA_ds_party_congress
+		}
+		available = {
+			has_country_flag = ITA_nitti_2_gov_formed
+			NOT = {
+				has_country_flag = ITA_new_constitution_approved
+			}
+		}
+		completion_reward = {
+			if = {
+				limit = {
+					has_idea = ITA_ds_popularity_boon_idea
+				}
+				modify_timed_idea = {
+					idea = ITA_ds_popularity_boon_idea
+					days = 60
+				}
+			}
+			else ={
+				add_timed_idea = {
+					idea = ITA_ds_popularity_boon_idea
+					days = 60
+				}
+			}
+			add_popularity = {
+				ideology = market_liberal
+				popularity = 0.02
+			}
+			custom_effect_tooltip = ITA_if_scotti_is_ds_sec
+			effect_tooltip = {
+				add_popularity = {
+					ideology = social_democrat
+					popularity = 0.03
+				}
+				add_popularity = {
+					ideology = authoritarian_democrat
+					popularity = 0.01
+				}
+			}
+			custom_effect_tooltip = ITA_if_benedetti_is_ds_sec
+			effect_tooltip = {
+				add_popularity = {
+					ideology = authoritarian_democrat
+					popularity = 0.03
+				}
+				add_popularity = {
+					ideology = social_democrat
+					popularity = 0.01
+				}
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						has_country_flag = ITA_scotti_ds_sec
+					}
+					add_popularity = {
+						ideology = social_democrat
+						popularity = 0.03
+					}
+					add_popularity = {
+						ideology = authoritarian_democrat
+						popularity = 0.01
+					}
+				}
+				if = {
+					limit = {
+						has_country_flag = ITA_benedetti_ds_sec
+					}
+					add_popularity = {
+						ideology = authoritarian_democrat
+						popularity = 0.03
+					}
+					add_popularity = {
+						ideology = social_democrat
+						popularity = 0.01
+					}
+				}
+			}
+		}
+	}
+	focus = {
+		id = ITA_sweep_the_farmlands
+		icon = GFX_generic_agriculture4
+		cost = 5.00
+		x = -1
+		y = 4
+		relative_position_id = ITA_a_radical_touch
+		prerequisite = {
+			focus = ITA_foster_trade_unionist_support
+		}
+		prerequisite = {
+			focus = ITA_build_the_laicist_front
+		}
+		available = {
+			has_country_flag = ITA_nitti_2_gov_formed
+			NOT = {
+				has_country_flag = ITA_new_constitution_approved
+			}
+		}
+		completion_reward = {
+			custom_effect_tooltip = ITA_sweep_the_farmlands_tt
+			if = {
+				limit = {
+					has_idea = ITA_ds_popularity_boon_idea
+				}
+				modify_timed_idea = {
+					idea = ITA_ds_popularity_boon_idea
+					days = 60
+				}
+			}
+			else ={
+				add_timed_idea = {
+					idea = ITA_ds_popularity_boon_idea
+					days = 60
+				}
+			}
+			if = {
+				limit = {
+					has_completed_focus = ITA_absorb_federalist_organisations
+				}
+				add_popularity = {
+					ideology = social_liberal
+					popularity = -0.03
+				}
+				add_popularity = {
+					ideology = social_conservative
+					popularity = -0.03
+				}
+			}
+		}
+	}
+	# Early Pella/Segni tree
+	focus = {
+		id = ITA_extraordinary_ppi_congress
+		icon = GFX_SRD_christian_democratic_party
+		cost = 4.00
+		x = 4
+		y = 1
+		relative_position_id = ITA_matters_of_constitutional_importance
+		prerequisite = {
+			focus = ITA_matters_of_constitutional_importance
+		}
+		mutually_exclusive = {
+			focus = ITA_a_radical_touch
+		}
+		available = {
+			OR = {
+				has_country_flag = ITA_pella_3_gov_formed
+				has_country_flag = ITA_segni_4_gov_formed
+			}
+			NOT = {
+				has_country_flag = ITA_new_constitution_approved
+			}
+		}
+		completion_reward = {
+			ITA_divided_whale_healing = yes
+		}
+	}
+	focus = {
+		id = ITA_align_right_ppi
+		icon = GFX_SRD_the_iron_patient_returns
+		cost = 5.00
+		x = 1
+		y = 1
+		relative_position_id = ITA_extraordinary_ppi_congress
+		prerequisite = {
+			focus = ITA_extraordinary_ppi_congress
+		}
+		select_effect = {
+			ITA_Antonio_Segni = {
+				unit_leader_event = {
+					id = krg_ita.8
+					days = 15
+				}
+			}
+		}
+		cancelable = no
+		available = {
+			OR = {
+				has_country_flag = ITA_pella_3_gov_formed
+				has_country_flag = ITA_segni_4_gov_formed
+			}
+			NOT = {
+				has_country_flag = ITA_new_constitution_approved
+			}
+		}
+		completion_reward = {
+			ITA_divided_whale_healing = yes
+		}
+	}
+	focus = {
+		id = ITA_align_left_ppi
+		icon = GFX_ITA_Gronchi
+		cost = 5.00
+		x = 3
+		y = 1
+		relative_position_id = ITA_extraordinary_ppi_congress
+		prerequisite = {
+			focus = ITA_extraordinary_ppi_congress
+		}
+		available = {
+			OR = {
+				has_country_flag = ITA_pella_3_gov_formed
+				has_country_flag = ITA_segni_4_gov_formed
+			}
+			NOT = {
+				has_country_flag = ITA_new_constitution_approved
+			}
+		}
+		completion_reward = {
+			ITA_divided_whale_healing = yes
+		}
+	}
+	focus = {
+		id = ITA_attract_nationalist_vote
+		icon = GFX_ITA_united
+		cost = 5.00
+		x = 0
+		y = 2
+		relative_position_id = ITA_extraordinary_ppi_congress
+		prerequisite = {
+			focus = ITA_extraordinary_ppi_congress
+		}
+		available = {
+			OR = {
+				has_country_flag = ITA_pella_3_gov_formed
+				has_country_flag = ITA_segni_4_gov_formed
+			}
+			NOT = {
+				has_country_flag = ITA_new_constitution_approved
+			}
+		}
+		completion_reward = {
+			custom_effect_tooltip = ITA_attract_nationalist_vote_tt
+			if = {
+				limit = {
+					has_idea = ITA_ppi_popularity_boon_idea
+				}
+				modify_timed_idea = {
+					idea = ITA_ppi_popularity_boon_idea
+					days = 60
+				}
+			}
+			else ={
+				add_timed_idea = {
+					idea = ITA_ppi_popularity_boon_idea
+					days = 60
+				}
+			}
+			if = {
+				limit = {
+					has_completed_focus = ITA_speak_in_custoza
+				}
+				add_popularity = {
+					ideology = social_liberal
+					popularity = 0.01
+				}
+				add_popularity = {
+					ideology = social_conservative
+					popularity = 0.03
+				}
+			}
+		}
+	}
+	focus = {
+		id = ITA_episcopal_endorsement
+		icon = GFX_focus_generic_pope
+		cost = 5.00
+		x = 2
+		y = 2
+		relative_position_id = ITA_extraordinary_ppi_congress
+		prerequisite = {
+			focus = ITA_align_right_ppi
+		}
+		prerequisite = {
+			focus = ITA_align_left_ppi
+		}
+		available = {
+			OR = {
+				has_country_flag = ITA_pella_3_gov_formed
+				has_country_flag = ITA_segni_4_gov_formed
+			}
+			NOT = {
+				has_country_flag = ITA_new_constitution_approved
+			}
+		}
+		completion_reward = {
+			custom_effect_tooltip = ITA_episcopal_endorsement_tt
+			if = {
+				limit = {
+					has_idea = ITA_ppi_popularity_boon_idea
+				}
+				modify_timed_idea = {
+					idea = ITA_ppi_popularity_boon_idea
+					days = 60
+				}
+			}
+			else ={
+				add_timed_idea = {
+					idea = ITA_ppi_popularity_boon_idea
+					days = 60
+				}
+			}
+			if = {
+				limit = {
+					has_completed_focus = ITA_meet_the_pope
+				}
+				add_popularity = {
+					ideology = social_liberal
+					popularity = 0.01
+				}
+				add_popularity = {
+					ideology = social_conservative
+					popularity = 0.04
+				}
+			}
+		}
+	}
+	focus = {
+		id = ITA_activate_ac_networks
+		icon = GFX_ITA_Popolarismo
+		cost = 5.00
+		x = 1
+		y = 3
+		relative_position_id = ITA_extraordinary_ppi_congress
+		prerequisite = {
+			focus = ITA_attract_nationalist_vote
+		}
+		prerequisite = {
+			focus = ITA_episcopal_endorsement
+		}
+		available = {
+			OR = {
+				has_country_flag = ITA_pella_3_gov_formed
+				has_country_flag = ITA_segni_4_gov_formed
+			}
+			NOT = {
+				has_country_flag = ITA_new_constitution_approved
+			}
+		}
+		completion_reward = {
+			custom_effect_tooltip = ITA_activate_ac_networks_tt
+			if = {
+				limit = {
+					has_idea = ITA_ppi_popularity_boon_idea
+				}
+				modify_timed_idea = {
+					idea = ITA_ppi_popularity_boon_idea
+					days = 60
+				}
+			}
+			else ={
+				add_timed_idea = {
+					idea = ITA_ppi_popularity_boon_idea
+					days = 60
+				}
+			}
+			if = {
+				limit = {
+					has_completed_focus = ITA_allow_catholic_action_expansion
+				}
+				add_popularity = {
+					ideology = social_liberal
+					popularity = 0.04
+				}
+				add_popularity = {
+					ideology = social_conservative
+					popularity = 0.03
+				}
+			}
+		}
+	}
+	## 1949 electoral campaign
+	focus = {
+		id = ITA_the_new_constitution
+		icon = GFX_generic_constitution
+		cost = 0.00
+		x = 4
+		y = 5
+		available = {
+			has_country_flag = ITA_new_constitution_approved
+			NOT = {
+				has_country_flag = KRG_ITA_1949_elections_held
+			}
+			hidden_trigger = {
+				always = no
+			}
+		}
+		allow_branch = {
+			NOT = {
+				has_country_flag = KRG_ITA_1949_elections_held
+			}
+		}
+		completion_reward = {
+			custom_effect_tooltip = ITA_bypass_focus_tt
+		}
+	}
+	focus = {
+		id = ITA_win_the_islands
+		icon = GFX_FRA_drink
+		cost = 5.00
+		x = -3
+		y = 1
+		prerequisite = {
+			focus = ITA_the_new_constitution
+		}
+		relative_position_id = ITA_the_new_constitution
+		available = {
+			has_country_flag = ITA_new_constitution_approved
+			NOT = {
+				has_country_flag = KRG_ITA_1949_elections_held
+			}
+		}
+		completion_reward = {
+			if = {
+				limit = {
+					NOT = {
+						has_country_flag = ITA_win_the_islands_done_by_ds
+						has_country_flag = ITA_win_the_islands_done_by_ppi
+					}
+				}
+				effect_tooltip = {
+					custom_effect_tooltip = ITA_if_ppi_completes_this_focus
+					ITA_1949_ppi_effect = yes
+					custom_effect_tooltip = ITA_if_ds_completes_this_focus
+					ITA_1949_ds_effect = yes
+				}
+				if = {
+					limit = {
+						has_government = social_conservative
+					}
+					set_country_flag = ITA_win_the_islands_done_by_ppi
+				}
+				if = {
+					limit = {
+						has_government = market_liberal
+					}
+					set_country_flag = ITA_win_the_islands_done_by_ds
+				}
+			}
+			if = {
+				limit = {
+					has_country_flag = ITA_win_the_islands_done_by_ppi
+				}
+				custom_effect_tooltip = ITA_ppi_completed_this_focus
+				ITA_1949_ppi_effect = yes
+			}
+			if = {
+				limit = {
+					has_country_flag = ITA_win_the_islands_done_by_ds
+				}
+				custom_effect_tooltip = ITA_ds_completed_this_focus
+				ITA_1949_ds_effect = yes
+			}
+		}
+	}
+	focus = {
+		id = ITA_advocate_agrarian_reform
+		icon = GFX_generic_agricultural_aid
+		cost = 5.00
+		x = -1
+		y = 1
+		prerequisite = {
+			focus = ITA_the_new_constitution
+		}
+		relative_position_id = ITA_the_new_constitution
+		available = {
+			has_country_flag = ITA_new_constitution_approved
+			NOT = {
+				has_country_flag = KRG_ITA_1949_elections_held
+			}
+		}
+		completion_reward = {
+			if = {
+				limit = {
+					NOT = {
+						has_country_flag = ITA_advocate_agrarian_reform_done_by_ds
+						has_country_flag = ITA_advocate_agrarian_reform_done_by_ppi
+					}
+				}
+				effect_tooltip = {
+					custom_effect_tooltip = ITA_if_ppi_completes_this_focus
+					ITA_1949_ppi_effect = yes
+					custom_effect_tooltip = ITA_if_ds_completes_this_focus
+					ITA_1949_ds_effect = yes
+				}
+				if = {
+					limit = {
+						has_government = social_conservative
+					}
+					set_country_flag = ITA_advocate_agrarian_reform_done_by_ppi
+				}
+				if = {
+					limit = {
+						has_government = market_liberal
+					}
+					set_country_flag = ITA_advocate_agrarian_reform_done_by_ds
+				}
+			}
+			if = {
+				limit = {
+					has_country_flag = ITA_advocate_agrarian_reform_done_by_ppi
+				}
+				custom_effect_tooltip = ITA_ppi_completed_this_focus
+				ITA_1949_ppi_effect = yes
+			}
+			if = {
+				limit = {
+					has_country_flag = ITA_advocate_agrarian_reform_done_by_ds
+				}
+				custom_effect_tooltip = ITA_ds_completed_this_focus
+				ITA_1949_ds_effect = yes
+			}
+		}
+	}
+	focus = {
+		id = ITA_build_press_support
+		icon = GFX_generic_press
+		cost = 5.00
+		x = 1
+		y = 1
+		prerequisite = {
+			focus = ITA_the_new_constitution
+		}
+		relative_position_id = ITA_the_new_constitution
+		available = {
+			has_country_flag = ITA_new_constitution_approved
+			NOT = {
+				has_country_flag = KRG_ITA_1949_elections_held
+			}
+		}
+		completion_reward = {
+			if = {
+				limit = {
+					NOT = {
+						has_country_flag = ITA_build_press_support_done_by_ds
+						has_country_flag = ITA_build_press_support_done_by_ppi
+					}
+				}
+				effect_tooltip = {
+					custom_effect_tooltip = ITA_if_ppi_completes_this_focus
+					ITA_1949_ppi_effect = yes
+					custom_effect_tooltip = ITA_if_ds_completes_this_focus
+					ITA_1949_ds_effect = yes
+				}
+				if = {
+					limit = {
+						has_government = social_conservative
+					}
+					set_country_flag = ITA_build_press_support_done_by_ppi
+				}
+				if = {
+					limit = {
+						has_government = market_liberal
+					}
+					set_country_flag = ITA_build_press_support_done_by_ds
+				}
+			}
+			if = {
+				limit = {
+					has_country_flag = ITA_build_press_support_done_by_ppi
+				}
+				custom_effect_tooltip = ITA_ppi_completed_this_focus
+				ITA_1949_ppi_effect = yes
+			}
+			if = {
+				limit = {
+					has_country_flag = ITA_build_press_support_done_by_ds
+				}
+				custom_effect_tooltip = ITA_ds_completed_this_focus
+				ITA_1949_ds_effect = yes
+			}
+		}
+	}
+	focus = {
+		id = ITA_win_the_veterans
+		icon = GFX_generic_veterans_benefits
+		cost = 5.00
+		x = -2
+		y = 2
+		prerequisite = {
+			focus = ITA_advocate_agrarian_reform
+		}
+		relative_position_id = ITA_the_new_constitution
+		available = {
+			has_country_flag = ITA_new_constitution_approved
+			NOT = {
+				has_country_flag = KRG_ITA_1949_elections_held
+			}
+		}
+		completion_reward = {
+			if = {
+				limit = {
+					NOT = {
+						has_country_flag = ITA_win_the_veterans_done_by_ds
+						has_country_flag = ITA_win_the_veterans_done_by_ppi
+					}
+				}
+				effect_tooltip = {
+					custom_effect_tooltip = ITA_if_ppi_completes_this_focus
+					ITA_1949_ppi_effect = yes
+					custom_effect_tooltip = ITA_if_ds_completes_this_focus
+					ITA_1949_ds_effect = yes
+				}
+				if = {
+					limit = {
+						has_government = social_conservative
+					}
+					set_country_flag = ITA_win_the_veterans_done_by_ppi
+				}
+				if = {
+					limit = {
+						has_government = market_liberal
+					}
+					set_country_flag = ITA_win_the_veterans_done_by_ds
+				}
+			}
+			if = {
+				limit = {
+					has_country_flag = ITA_win_the_veterans_done_by_ppi
+				}
+				custom_effect_tooltip = ITA_ppi_completed_this_focus
+				ITA_1949_ppi_effect = yes
+			}
+			if = {
+				limit = {
+					has_country_flag = ITA_win_the_veterans_done_by_ds
+				}
+				custom_effect_tooltip = ITA_ds_completed_this_focus
+				ITA_1949_ds_effect = yes
+			}
+		}
+	}
+	focus = {
+		id = ITA_shore_up_union_support
+		icon = GFX_generic_social_reforms
+		cost = 5.00
+		x = 0
+		y = 2
+		prerequisite = {
+			focus = ITA_advocate_agrarian_reform
+		}
+		prerequisite = {
+			focus = ITA_build_press_support
+		}
+		relative_position_id = ITA_the_new_constitution
+		available = {
+			has_country_flag = ITA_new_constitution_approved
+			NOT = {
+				has_country_flag = KRG_ITA_1949_elections_held
+			}
+		}
+		completion_reward = {
+			if = {
+				limit = {
+					NOT = {
+						has_country_flag = ITA_shore_up_union_support_done_by_ds
+						has_country_flag = ITA_shore_up_union_support_done_by_ppi
+					}
+				}
+				effect_tooltip = {
+					custom_effect_tooltip = ITA_if_ppi_completes_this_focus
+					ITA_1949_ppi_effect = yes
+					custom_effect_tooltip = ITA_if_ds_completes_this_focus
+					ITA_1949_ds_effect = yes
+				}
+				if = {
+					limit = {
+						has_government = social_conservative
+					}
+					set_country_flag = ITA_shore_up_union_support_done_by_ppi
+				}
+				if = {
+					limit = {
+						has_government = market_liberal
+					}
+					set_country_flag = ITA_shore_up_union_support_done_by_ds
+				}
+			}
+			if = {
+				limit = {
+					has_country_flag = ITA_shore_up_union_support_done_by_ppi
+				}
+				custom_effect_tooltip = ITA_ppi_completed_this_focus
+				ITA_1949_ppi_effect = yes
+			}
+			if = {
+				limit = {
+					has_country_flag = ITA_shore_up_union_support_done_by_ds
+				}
+				custom_effect_tooltip = ITA_ds_completed_this_focus
+				ITA_1949_ds_effect = yes
+			}
+		}
+	}
+	focus = {
+		id = ITA_battle_for_the_countryside
+		icon = GFX_generic_agrarian_soldiers
+		cost = 5.00
+		x = -1
+		y = 3
+		prerequisite = {
+			focus = ITA_shore_up_union_support
+		}
+		relative_position_id = ITA_the_new_constitution
+		available = {
+			has_country_flag = ITA_new_constitution_approved
+			NOT = {
+				has_country_flag = KRG_ITA_1949_elections_held
+			}
+		}
+		completion_reward = {
+			if = {
+				limit = {
+					NOT = {
+						has_country_flag = ITA_battle_for_the_countryside_done_by_ds
+						has_country_flag = ITA_battle_for_the_countryside_done_by_ppi
+					}
+				}
+				effect_tooltip = {
+					custom_effect_tooltip = ITA_if_ppi_completes_this_focus
+					ITA_1949_ppi_effect = yes
+					custom_effect_tooltip = ITA_if_ds_completes_this_focus
+					ITA_1949_ds_effect = yes
+				}
+				if = {
+					limit = {
+						has_government = social_conservative
+					}
+					set_country_flag = ITA_battle_for_the_countryside_done_by_ppi
+				}
+				if = {
+					limit = {
+						has_government = market_liberal
+					}
+					set_country_flag = ITA_battle_for_the_countryside_done_by_ds
+				}
+			}
+			if = {
+				limit = {
+					has_country_flag = ITA_battle_for_the_countryside_done_by_ppi
+				}
+				custom_effect_tooltip = ITA_ppi_completed_this_focus
+				ITA_1949_ppi_effect = yes
+			}
+			if = {
+				limit = {
+					has_country_flag = ITA_battle_for_the_countryside_done_by_ds
+				}
+				custom_effect_tooltip = ITA_ds_completed_this_focus
+				ITA_1949_ds_effect = yes
+			}
+		}
+	}
+	focus = {
+		id = ITA_battle_for_the_cities
+		icon = GFX_ITA_urban
+		cost = 5.00
+		x = 1
+		y = 3
+		prerequisite = {
+			focus = ITA_shore_up_union_support
+		}
+		relative_position_id = ITA_the_new_constitution
+		available = {
+			has_country_flag = ITA_new_constitution_approved
+			NOT = {
+				has_country_flag = KRG_ITA_1949_elections_held
+			}
+		}
+		completion_reward = {
+			if = {
+				limit = {
+					NOT = {
+						has_country_flag = ITA_battle_for_the_cities_done_by_ds
+						has_country_flag = ITA_battle_for_the_cities_done_by_ppi
+					}
+				}
+				effect_tooltip = {
+					custom_effect_tooltip = ITA_if_ppi_completes_this_focus
+					ITA_1949_ppi_effect = yes
+					custom_effect_tooltip = ITA_if_ds_completes_this_focus
+					ITA_1949_ds_effect = yes
+				}
+				if = {
+					limit = {
+						has_government = social_conservative
+					}
+					set_country_flag = ITA_battle_for_the_cities_done_by_ppi
+				}
+				if = {
+					limit = {
+						has_government = market_liberal
+					}
+					set_country_flag = ITA_battle_for_the_cities_done_by_ds
+				}
+			}
+			if = {
+				limit = {
+					has_country_flag = ITA_battle_for_the_cities_done_by_ppi
+				}
+				custom_effect_tooltip = ITA_ppi_completed_this_focus
+				ITA_1949_ppi_effect = yes
+			}
+			if = {
+				limit = {
+					has_country_flag = ITA_battle_for_the_cities_done_by_ds
+				}
+				custom_effect_tooltip = ITA_ds_completed_this_focus
+				ITA_1949_ds_effect = yes
+			}
+		}
+	}
+	focus = {
+		id = ITA_on_the_radio
+		icon = GFX_generic_radio
+		cost = 5.00
+		x = 0
+		y = 4
+		prerequisite = {
+			focus = ITA_battle_for_the_countryside
+		}
+		prerequisite = {
+			focus = ITA_battle_for_the_cities
+		}
+		relative_position_id = ITA_the_new_constitution
+		available = {
+			has_country_flag = ITA_new_constitution_approved
+			NOT = {
+				has_country_flag = KRG_ITA_1949_elections_held
+			}
+		}
+		completion_reward = {
+			if = {
+				limit = {
+					NOT = {
+						has_country_flag = ITA_on_the_radio_done_by_ds
+						has_country_flag = ITA_on_the_radio_done_by_ppi
+					}
+				}
+				effect_tooltip = {
+					custom_effect_tooltip = ITA_if_ppi_completes_this_focus
+					ITA_1949_ppi_effect = yes
+					custom_effect_tooltip = ITA_if_ds_completes_this_focus
+					ITA_1949_ds_effect = yes
+				}
+				if = {
+					limit = {
+						has_government = social_conservative
+					}
+					set_country_flag = ITA_on_the_radio_done_by_ppi
+				}
+				if = {
+					limit = {
+						has_government = market_liberal
+					}
+					set_country_flag = ITA_on_the_radio_done_by_ds
+				}
+			}
+			if = {
+				limit = {
+					has_country_flag = ITA_on_the_radio_done_by_ppi
+				}
+				custom_effect_tooltip = ITA_ppi_completed_this_focus
+				ITA_1949_ppi_effect = yes
+			}
+			if = {
+				limit = {
+					has_country_flag = ITA_on_the_radio_done_by_ds
+				}
+				custom_effect_tooltip = ITA_ds_completed_this_focus
+				ITA_1949_ds_effect = yes
+			}
+		}
+	}
+	### test
+	focus = {
+		id = KRG_ITA_new_elections
+		icon = GFX_generic_elections
+		cost = 0.00
+		x = 6
+		y = 0
+		available = {
+			hidden_trigger = {
+				has_country_flag = KRG_ITA_1949_elections_held
+			}
+		}
+		bypass = {
+			hidden_trigger = {
+				has_country_flag = KRG_ITA_1949_elections_held
+			}
+		}
+		allow_branch = {
+			has_country_flag = KRG_ITA_1949_elections_held
+		}
+		completion_reward = {
+			custom_effect_tooltip = ITA_bypass_focus_tt
+		}
+	}
+	focus = {
+		id = KRG_ITA_democratic_social_upset
+		icon = GFX_generic_KRG_social_liberal
+		cost = 5.00
+		x = -3
+		y = 1
+		relative_position_id = KRG_ITA_new_elections
+		prerequisite = {
+			focus = KRG_ITA_new_elections
+		}
+		available = {
+			has_country_flag = ITA_laicist_coalition_electoral_success
+			has_country_flag = KRG_ITA_CDR_falls_apart
+			has_country_flag = KRG_ITA_veterans_economic_ticket_falls_apart
+		}
+		allow_branch = {
+			always = no #temp
+		}
+		completion_reward = {
+			country_event = krg_ita.63
+		}
+	}
+	focus = {
+		id = KRG_ITA_start_administrative_reform
+		icon = GFX_generic_old_administration
+		cost = 5.00
+		x = 0
+		y = 1
+		relative_position_id = KRG_ITA_new_elections
+		prerequisite = {
+			focus = KRG_ITA_new_elections
+		}
+		completion_reward = {
+			KRG_ITA_gov_king_good = yes
+			KRG_ITA_gov_senate_good = yes
+			KRG_ITA_archaic_administration_improve = yes
+		}
+	}
+	focus = {
+		id = KRG_ITA_strengthen_regional_autonomies
+		icon = GFX_generic_constitutional_guarantees
+		cost = 5.00
+		x = -2
+		y = 2
+		relative_position_id = KRG_ITA_new_elections
+		prerequisite = {
+			focus = KRG_ITA_start_administrative_reform
+		}
+		completion_reward = {
+			if = {
+				limit = {
+					OR = {
+						has_completed_focus = KRG_ITA_strengthen_regional_autonomies
+						115 = {
+							NOT = {
+								has_state_flag = ITA_region_has_autonomy
+							}
+						}
+					}
+				}
+				unlock_decision_tooltip = KRG_ITA_pre_1949_sicily_autonomy_decision
+				set_country_flag = KRG_ITA_pre_1949_sicily_autonomy_flag
+				custom_effect_tooltip = ITA_should_this_bill_pass_we_get
+				effect_tooltip = {
+					115 = {
+						add_dynamic_modifier = {
+							modifier = ITA_autonomous_region
+						}
+						set_state_flag = ITA_region_has_autonomy
+					}
+				}
+				unlock_decision_tooltip = KRG_ITA_sardinian_autonomy_decision
+				set_country_flag = KRG_ITA_sardinia_autonomy_flag
+				custom_effect_tooltip = ITA_should_this_bill_pass_we_get
+				effect_tooltip = {
+					114 = {
+						add_dynamic_modifier = {
+							modifier = ITA_autonomous_region
+						}
+						set_state_flag = ITA_region_has_autonomy
+					}
+				}
+				unlock_decision_tooltip = KRG_ITA_aosta_autonomy_decision
+				set_country_flag = KRG_ITA_aosta_autonomy_flag
+				custom_effect_tooltip = ITA_should_this_bill_pass_we_get
+				effect_tooltip = {
+					877 = {
+						add_dynamic_modifier = {
+							modifier = ITA_autonomous_region
+						}
+						set_state_flag = ITA_region_has_autonomy
+					}
+				}
+			}
+		}
+	}
+	focus = {
+		id = KRG_ITA_protect_minority_languages
+		icon = GFX_generic_pass_legislation
+		cost = 5.00
+		x = -3
+		y = 3
+		relative_position_id = KRG_ITA_new_elections
+		prerequisite = {
+			focus = KRG_ITA_strengthen_regional_autonomies
+		}
+		completion_reward = {
+			ITA_1954_protect_minority_languages = yes
+		}
+	}
+	focus = {
+		id = KRG_ITA_school_development_plan
+		icon = GFX_generic_double_research
+		cost = 5.00
+		x = -3
+		y = 5
+		relative_position_id = KRG_ITA_new_elections
+		prerequisite = {
+			focus = KRG_ITA_protect_minority_languages
+		}
+		completion_reward = {
+			ITA_1954_school_develompent_plan_effect = yes
+		}
+	}
+	focus = {
+		id = KRG_ITA_state_properties_commission
+		icon = GFX_OTT_Land_Reform
+		cost = 7.00
+		x = -1
+		y = 3
+		relative_position_id = KRG_ITA_new_elections
+		prerequisite = {
+			focus = KRG_ITA_strengthen_regional_autonomies
+		}
+		completion_reward = {
+			country_event = {
+				id = krg_ita.64
+			}
+			custom_effect_tooltip = KRG_ITA_state_properties_commission_tt
+			KRG_ITA_archaic_administration_improve = yes
+		}
+	}
+	focus = {
+		id = KRG_ITA_reform_iacp
+		icon = GFX_generic_build_housing
+		cost = 5.00
+		x = -2
+		y = 4
+		relative_position_id = KRG_ITA_new_elections
+		prerequisite = {
+			focus = KRG_ITA_strengthen_regional_autonomies
+		}
+		completion_reward = {
+			country_event = {
+				id = krg_ita.61
+			}
+			set_country_flag = KRG_ITA_iacp_scheme_started
+			unlock_decision_tooltip = ITA_IACP_expansion_rationalisation_law
+			custom_effect_tooltip = ITA_should_this_bill_pass_we_get
+			effect_tooltip = {
+				add_war_support = 0.05
+				set_temp_variable = { ideology_change_var = 0.05 }
+				change_ruling_party_popularity = yes
+				158 = {
+					add_extra_state_shared_building_slots = 1
+					add_manpower = 13428
+				}
+				907 = {
+					add_manpower = 5761
+				}
+			}
+		}
+	}
+	focus = {
+		id = KRG_ITA_legge_stralcio
+		icon = GFX_generic_agriculture3
+		cost = 5.00
+		x = -1
+		y = 5
+		relative_position_id = KRG_ITA_new_elections
+		prerequisite = {
+			focus = KRG_ITA_state_properties_commission
+		}
+		prerequisite = {
+			focus = KRG_ITA_reform_iacp
+		}
+		completion_reward = {
+			ITA_1954_legge_stralcio_effect = yes
+		}
+	}
+	focus = {
+		id = KRG_ITA_establish_term_limit
+		icon = GFX_NFA_expand_legal_protections
+		cost = 5.00
+		x = 1
+		y = 2
+		relative_position_id = KRG_ITA_new_elections
+		prerequisite = {
+			focus = KRG_ITA_start_administrative_reform
+		}
+		completion_reward = {
+			custom_effect_tooltip = KRG_ITA_1949_estabilish_term_limit_tt
+			KRG_ITA_archaic_administration_improve = yes
+			hidden_effect = {
+				set_country_flag = keep_coalition
+				set_politics = {
+					ruling_party = var:current_party_ideology_group
+					last_election = 1949.6.2
+					election_frequency = 60
+					elections_allowed = yes
+				}
+			}
+		}
+	}
+	focus = {
+		id = KRG_ITA_reform_senate
+		icon = GFX_generic_liberty
+		cost = 5.00
+		x = 1
+		y = 3
+		relative_position_id = KRG_ITA_new_elections
+		prerequisite = {
+			focus = KRG_ITA_establish_term_limit
+		}
+		mutually_exclusive = {
+			focus = KRG_ITA_sideline_senate
+		}
+		completion_reward = {
+			KRG_ITA_gov_senate_bad = yes
+			unlock_decision_tooltip = KRG_ITA_1949_reform_the_senate_decision
+			set_country_flag = KRG_ITA_1949_reform_the_senate_flag
+			effect_tooltip = {
+				custom_effect_tooltip = ITA_should_this_bill_pass_we_get
+				custom_effect_tooltip = KRG_ITA_1949_reform_the_senate_tt
+				KRG_ITA_archaic_administration_improve = yes
+			}
+		}
+	}
+	focus = {
+		id = KRG_ITA_sideline_senate
+		icon = GFX_GRE_royal_law
+		cost = 5.00
+		x = 3
+		y = 3
+		relative_position_id = KRG_ITA_new_elections
+		prerequisite = {
+			focus = KRG_ITA_establish_term_limit
+		}
+		mutually_exclusive = {
+			focus = KRG_ITA_reform_senate
+		}
+		completion_reward = {
+			KRG_ITA_gov_senate_bad = yes
+			unlock_decision_tooltip = KRG_ITA_1949_sideline_the_senate_decision
+			set_country_flag = KRG_ITA_1949_sideline_the_senate_flag
+			effect_tooltip = {
+				custom_effect_tooltip = ITA_should_this_bill_pass_we_get
+				custom_effect_tooltip = KRG_ITA_1949_sideline_the_senate_tt
+				KRG_ITA_archaic_administration_improve = yes
+			}
+		}
+	}
+	focus = {
+		id = KRG_ITA_the_second_amnesty
+		icon = GFX_generic_red_star_treaty
+		cost = 5.00
+		x = 0
+		y = 4
+		relative_position_id = KRG_ITA_new_elections
+		prerequisite = {
+			focus = KRG_ITA_establish_term_limit
+		}
+		completion_reward = {
+			KRG_ITA_gov_king_bad = yes
+			KRG_ITA_gov_senate_bad = yes
+			add_stability = 0.05
+			add_war_support = 0.05
+			add_popularity = {
+				ideology = radical_socialist
+				popularity = 0.05
+			}
+			country_event = {
+				id = krg_ita.66
+			}
+		}
+	}
+	focus = {
+		id = KRG_ITA_control_diplomatic_initiatives
+		icon = GFX_generic_foreign_diplomacy
+		cost = 5.00
+		x = 2
+		y = 4
+		relative_position_id = KRG_ITA_new_elections
+		prerequisite = {
+			focus = KRG_ITA_reform_senate
+			focus = KRG_ITA_sideline_senate
+		}
+		completion_reward = {
+			KRG_ITA_gov_king_bad = yes
+			set_country_flag = KRG_ITA_1949_control_diplomacy_flag
+			unlock_decision_tooltip = KRG_ITA_1949_control_diplomacy_decision
+			effect_tooltip = {
+				custom_effect_tooltip = ITA_should_this_bill_pass_we_get
+				custom_effect_tooltip = KRG_ITA_1949_control_diplomacy_tt
+				if = {
+					limit = {
+						has_idea = ITA_the_restoration_temp_bonus
+					}
+					remove_ideas = ITA_the_restoration_temp_bonus
+				}
+				else = {
+					remove_ideas = ITA_the_restoration
+				}
+				KRG_ITA_archaic_administration_improve = yes
+			}
+		}
+	}
+	focus = {
+		id = KRG_ITA_constitutional_court
+		icon = GFX_generic_CourtOfCassation
+		cost = 5.00
+		x = 1
+		y = 5
+		relative_position_id = KRG_ITA_new_elections
+		prerequisite = {
+			focus = KRG_ITA_the_second_amnesty
+		}
+		prerequisite = {
+			focus = KRG_ITA_control_diplomatic_initiatives
+		}
+		completion_reward = {
+			unlock_decision_tooltip = KRG_ITA_1949_constitutional_committee_decision
+			set_country_flag = KRG_ITA_1949_constitutional_committee_flag
+			set_country_flag = ITA_second_tree_done
+			mark_focus_tree_layout_dirty = yes
+			effect_tooltip = {
+				custom_effect_tooltip = ITA_should_this_bill_pass_we_get
+				custom_effect_tooltip = KRG_ITA_1949_constitutional_committee_tt
+				KRG_ITA_archaic_administration_improve = yes
+			}
+		}
+	}
+	focus = {
+		id = KRG_ITA_expand_agricultural_cooperatives
+		icon = GFX_generic_agrarian_reform
+		cost = 5.00
+		x = -1
+		y = 6
+		relative_position_id = KRG_ITA_new_elections
+		available = {
+			has_idea = ITA_agrarian_unions_in_the_field
+		}
+		prerequisite = {
+			focus = KRG_ITA_legge_stralcio
+		}
+		prerequisite = {
+			focus = KRG_ITA_constitutional_court
+		}
+		mutually_exclusive = {
+			focus = KRG_ITA_crush_agricultural_unions
+		}
+		completion_reward = {
+			ITA_1954_agrarian_action_friendly = yes
+		}
+	}
+	focus = {
+		id = KRG_ITA_crush_agricultural_unions
+		icon = GFX_generic_crush_unions
+		cost = 5.00
+		x = 1
+		y = 6
+		relative_position_id = KRG_ITA_new_elections
+		available = {
+			has_idea = ITA_agrarian_unions_in_the_field
+		}
+		prerequisite = {
+			focus = KRG_ITA_legge_stralcio
+		}
+		prerequisite = {
+			focus = KRG_ITA_constitutional_court
+		}
+		mutually_exclusive = {
+			focus = KRG_ITA_expand_agricultural_cooperatives
+		}
+		completion_reward = {
+			ITA_agrarian_action_fuck_off = yes
+		}
+	}
+	focus = {
+		id = KRG_ITA_test_4
+		icon = GFX_generic_elections
+		cost = 0.00
+		x = 3
+		y = 1
+		relative_position_id = KRG_ITA_new_elections
+		prerequisite = {
+			focus = KRG_ITA_new_elections
+		}
+		allow_branch = {
+			always = no # temp
+		}
+		completion_reward = {
+		}
+	}
+	focus = {
+		id = KRG_ITA_test_5
+		icon = GFX_generic_elections
+		cost = 0.00
+		x = 5
+		y = 3
+		relative_position_id = KRG_ITA_new_elections
+		prerequisite = {
+			focus = KRG_ITA_test_4
+		}
+		completion_reward = {
+		}
+	}
+	focus = {
+		id = KRG_ITA_test_6
+		icon = GFX_generic_elections
+		cost = 0.00
+		x = 4
+		y = 2
+		relative_position_id = KRG_ITA_new_elections
+		prerequisite = {
+			focus = KRG_ITA_test_4
+		}
+		completion_reward = {
+		}
+	}
+	focus = {
+		id = KRG_ITA_test_7
+		icon = GFX_generic_elections
+		cost = 0.00
+		x = 6
+		y = 2
+		relative_position_id = KRG_ITA_new_elections
+		prerequisite = {
+			focus = KRG_ITA_test_4
+		}
+		completion_reward = {
+		}
+	}
+	focus = {
+		id = KRG_ITA_test_8
+		icon = GFX_generic_elections
+		cost = 0.00
+		x = 8
+		y = 2
+		relative_position_id = KRG_ITA_new_elections
+		prerequisite = {
+			focus = KRG_ITA_test_4
+		}
+		completion_reward = {
+		}
+	}
+	focus = {
+		id = KRG_ITA_1949_elections
+		icon = GFX_generic_elections
+		cost = 0.00
+		x = 6
+		y = 0
+		available = {
+			hidden_trigger = {
+				has_country_flag = KRG_ITA_1949_elections_held
+			}
+		}
+		allow_branch = {
+			has_country_flag = KRG_ITA_1949_elections_held
+			always = no
+		}
+		completion_reward = {
+			custom_effect_tooltip = ITA_bypass_focus_tt
+		}
+	}
+	focus = {
+		id = KRG_ITA_1949_DC_victory
+		icon = GFX_SRD_christian_democratic_party
+		cost = 0.00
+		x = 3
+		y = 1
+		relative_position_id = KRG_ITA_1949_elections
+		available = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+		prerequisite = {
+			focus = KRG_ITA_1949_elections
+		}
+		completion_reward = {
+			custom_effect_tooltip = ITA_bypass_focus_tt
+		}
+	}
+	focus = {
+		id = KRG_ITA_1949_ally_the_liberals
+		icon = GFX_generic_new_ideology_marklib
+		cost = 5.00
+		x = 3
+		y = 2
+		relative_position_id = KRG_ITA_1949_elections
+		prerequisite = {
+			focus = KRG_ITA_1949_DC_victory
+		}
+		available = {
+			hidden_trigger = {
+				has_government = social_conservative
+			}
+		}
+		completion_reward = {
+			custom_effect_tooltip = KRG_ITA_1949_ally_the_liberals_tt
+			coal_add_mar_lib = yes
+			ITA_parliament_reload = yes
+			add_political_power = 25
+		}
+	}
+	focus = {
+		id = KRG_ITA_1949_celebrate_cavour
+		icon = GFX_SRD_Celebrate_Cavour
+		cost = 5.00
+		x = 5
+		y = 2
+		relative_position_id = KRG_ITA_1949_elections
+		prerequisite = {
+			focus = KRG_ITA_1949_DC_victory
+		}
+		available = {
+			hidden_trigger = {
+				has_government = social_conservative
+			}
+		}
+		completion_reward = {
+			KRG_ITA_gov_king_good = yes
+			add_stability = 0.05
+			add_war_support = 0.05
+			add_popularity = {
+				ideology = social_conservative
+				popularity = 0.05
+			}
+		}
+	}
+	focus = {
+		id = KRG_ITA_1949_the_iacp_scheme
+		icon = GFX_generic_build_housing
+		cost = 5.00
+		x = 4
+		y = 3
+		relative_position_id = KRG_ITA_1949_elections
+		prerequisite = {
+			focus = KRG_ITA_1949_ally_the_liberals
+		}
+		available = {
+			NOT = {
+				has_idea = ITA_Antonio_Segni_hog_sco
+			}
+			hidden_trigger = {
+				has_government = social_conservative
+			}
+		}
+		prerequisite = {
+			focus = KRG_ITA_1949_celebrate_cavour
+		}
+		completion_reward = {
+			country_event = {
+				id = krg_ita.61
+			}
+			set_country_flag = KRG_ITA_iacp_scheme_started
+			unlock_decision_tooltip = ITA_IACP_expansion_rationalisation_law
+			custom_effect_tooltip = ITA_should_this_bill_pass_we_get
+			effect_tooltip = {
+				add_war_support = 0.05
+				add_popularity = {
+					ideology = social_conservative
+					popularity = 0.05
+				}
+				158 = {
+					add_extra_state_shared_building_slots = 1
+					add_manpower = 13428
+				}
+				907 = {
+					add_manpower = 5761
+				}
+			}
+		}
+	}
+	focus = {
+		id = KRG_ITA_1949_create_the_IPV
+		icon = GFX_generic_agency
+		cost = 5.00
+		x = 6
+		y = 3
+		relative_position_id = KRG_ITA_1949_elections
+		prerequisite = {
+			focus = KRG_ITA_1949_ally_the_liberals
+		}
+		available = {
+			has_country_flag = KRG_ITA_veterans_economic_ticket_falls_apart
+			hidden_trigger = {
+				has_government = social_conservative
+			}
+		}
+		prerequisite = {
+			focus = KRG_ITA_1949_celebrate_cavour
+		}
+		completion_reward = {
+			custom_effect_tooltip = KRG_ITA_1949_create_the_IPV_tt
+			coal_add_auth_dem = yes
+			ITA_parliament_reload = yes
+			add_timed_idea = {
+				idea = ITA_veterans_social_security_campaign
+				days = 360
+			}
+		}
+	}
+	focus = {
+		id = KRG_ITA_1949_papacy_concordat
+		icon = GFX_SHX_Christian_Influence
+		cost = 5.00
+		x = 3
+		y = 4
+		relative_position_id = KRG_ITA_1949_elections
+		prerequisite = {
+			focus = KRG_ITA_1949_the_iacp_scheme
+		}
+		available = {
+			hidden_trigger = {
+				has_government = social_conservative
+			}
+		}
+		completion_reward = {
+			country_event = krg_ita.77
+		}
+	}
+	focus = {
+		id = KRG_ITA_1949_expand_reclaimed_lands_ministry
+		icon = GFX_generic_eagle
+		cost = 5.00
+		x = 5
+		y = 4
+		relative_position_id = KRG_ITA_1949_elections
+		prerequisite = {
+			focus = KRG_ITA_1949_the_iacp_scheme
+		}
+		prerequisite = {
+			focus = KRG_ITA_1949_create_the_IPV
+		}
+		available = {
+			hidden_trigger = {
+				has_government = social_conservative
+			}
+		}
+		completion_reward = {
+			add_ideas = ITA_reclaimed_lands_ministry_idea
+			add_popularity = {
+				ideology = social_conservative
+				popularity = 0.03
+			}
+		}
+	}
+	focus = {
+		id = KRG_ITA_1949_create_sardinia_region
+		icon = GFX_goal_generic_improve_relations
+		cost = 5.00
+		x = 4
+		y = 5
+		relative_position_id = KRG_ITA_1949_elections
+		prerequisite = {
+			focus = KRG_ITA_1949_expand_reclaimed_lands_ministry
+		}
+		prerequisite = {
+			focus = KRG_ITA_1949_papacy_concordat
+		}
+		available = {
+			hidden_trigger = {
+				has_government = social_conservative
+			}
+		}
+		bypass = {
+			hidden_trigger = {
+				has_completed_focus = KRG_ITA_1949_the_federal_model
+			}
+		}
+		completion_reward = {
+			country_event = {
+				id = krg_ita.69
+				days = 20
+			}
+			hidden_effect = {
+				country_event = {
+					id = krg_ita.70
+					days = 25
+				}
+			}
+			add_popularity = {
+				ideology = social_conservative
+				popularity = 0.05
+			}
+		}
+	}
+	focus = {
+		id = KRG_ITA_1949_PDC_victory
+		icon = GFX_SRD_farmers_party
+		cost = 0.00
+		x = -3
+		y = 1
+		relative_position_id = KRG_ITA_1949_elections
+		available = {
+			always = no
+		}
+		prerequisite = {
+			focus = KRG_ITA_1949_elections
+		}
+		completion_reward = {
+			custom_effect_tooltip = ITA_bypass_focus_tt
+		}
+	}
+	focus = {
+		id = KRG_ITA_1949_rehabilitate_garibaldi
+		icon = GFX_SRD_Celebrate_Garibaldi
+		cost = 5.00
+		x = -5
+		y = 2
+		relative_position_id = KRG_ITA_1949_elections
+		prerequisite = {
+			focus = KRG_ITA_1949_PDC_victory
+		}
+		completion_reward = {
+			KRG_ITA_gov_king_good = yes
+			add_war_support = 0.1
+			add_stability = -0.05
+			add_popularity = {
+				ideology = social_liberal
+				popularity = 0.03
+			}
+			add_popularity = {
+				ideology = social_democrat
+				popularity = 0.03
+			}
+		}
+	}
+	focus = {
+		id = KRG_ITA_1949_an_alliance_of_progressives
+		icon = GFX_generic_KRG_social_liberal
+		cost = 5.00
+		x = -3
+		y = 2
+		relative_position_id = KRG_ITA_1949_elections
+		prerequisite = {
+			focus = KRG_ITA_1949_PDC_victory
+		}
+		available = {
+			has_country_flag = KRG_ITA_CDR_falls_apart
+			has_country_flag = KRG_ITA_veterans_economic_ticket_falls_apart
+		}
+		completion_reward = {
+			country_event = krg_ita.63
+		}
+	}
+	focus = {
+		id = KRG_ITA_1949_close_down_asinara_prison
+		icon = GFX_generic_Fight_for_Freedom
+		cost = 5.00
+		x = -4
+		y = 3
+		relative_position_id = KRG_ITA_1949_elections
+		prerequisite = {
+			focus = KRG_ITA_1949_rehabilitate_garibaldi
+		}
+		prerequisite = {
+			focus = KRG_ITA_1949_an_alliance_of_progressives
+		}
+		completion_reward = {
+			add_popularity = {
+				ideology = social_liberal
+				popularity = 0.03
+			}
+			add_popularity = {
+				ideology = social_democrat
+				popularity = 0.05
+			}
+			add_war_support = 0.1
+			KRG_ITA_gov_senate_bad = yes
+			country_event = {
+				id = krg_ita.66
+			}
+		}
+	}
+	focus = {
+		id = KRG_ITA_1949_the_red_veterans
+		icon = GFX_generic_agrarian_socialism
+		cost = 5.00
+		x = -6
+		y = 3
+		relative_position_id = KRG_ITA_1949_elections
+		prerequisite = {
+			focus = KRG_ITA_1949_rehabilitate_garibaldi
+		}
+		available = {
+			has_country_flag = KRG_ITA_veterans_economic_ticket_falls_apart
+		}
+		completion_reward = {
+			KRG_ITA_gov_king_bad = yes
+			add_popularity = {
+				ideology = social_democrat
+				popularity = 0.05
+			}
+			add_popularity = {
+				ideology = social_conservative
+				popularity = 0.03
+			}
+			add_timed_idea = {
+				idea = ITA_veterans_social_security_campaign
+				days = 720
+			}
+		}
+	}
+	focus = {
+		id = KRG_ITA_1949_caradini_amnesty
+		icon = GFX_generic_constitutional_guarantees
+		cost = 5.00
+		x = -5
+		y = 4
+		relative_position_id = KRG_ITA_1949_elections
+		prerequisite = {
+			focus = KRG_ITA_1949_the_red_veterans
+		}
+		prerequisite = {
+			focus = KRG_ITA_1949_close_down_asinara_prison
+		}
+		completion_reward = {
+			KRG_ITA_gov_king_bad = yes
+			KRG_ITA_gov_senate_bad = yes
+			add_popularity = {
+				ideology = social_democrat
+				popularity = 0.05
+			}
+			add_popularity = {
+				ideology = social_liberal
+				popularity = -0.05
+			}
+			country_event = {
+				id = krg_ita.67
+			}
+		}
+	}
+	focus = {
+		id = KRG_ITA_1949_end_commissariates
+		icon = GFX_generic_expel_people
+		cost = 5.00
+		x = -3
+		y = 4
+		relative_position_id = KRG_ITA_1949_elections
+		prerequisite = {
+			focus = KRG_ITA_1949_close_down_asinara_prison
+		}
+		completion_reward = {
+			KRG_ITA_gov_senate_bad = yes
+			add_popularity = {
+				ideology = social_democrat
+				popularity = 0.05
+			}
+			add_popularity = {
+				ideology = social_liberal
+				popularity = 0.03
+			}
+			country_event = {
+				id = krg_ita.68
+			}
+		}
+	}
+	focus = {
+		id = KRG_ITA_1949_the_federal_model
+		icon = GFX_goal_generic_national_unity
+		cost = 5.00
+		x = -4
+		y = 5
+		relative_position_id = KRG_ITA_1949_elections
+		prerequisite = {
+			focus = KRG_ITA_1949_end_commissariates
+		}
+		prerequisite = {
+			focus = KRG_ITA_1949_caradini_amnesty
+		}
+		bypass = {
+			hidden_trigger = {
+				has_completed_focus = KRG_ITA_1949_create_sardinia_region
+			}
+		}
+		completion_reward = {
+			country_event = {
+				id = krg_ita.69
+				days = 20
+			}
+			country_event = {
+				id = krg_ita.78
+				days = 40
+			}
+			country_event = {
+				id = krg_ita.79
+				days = 60
+			}
+			country_event = {
+				id = krg_ita.80
+				days = 80
+			}
+			hidden_effect = {
+				country_event = {
+					id = krg_ita.70
+					days = 25
+				}
+			}
+			add_popularity = {
+				ideology = social_democrat
+				popularity = 0.05
+			}
+			add_popularity = {
+				ideology = social_liberal
+				popularity = 0.05
+			}
+		}
+	}
+	focus = {
+		id = KRG_ITA_1949_start_administrative_reform
+		icon = GFX_generic_old_administration
+		cost = 5.00
+		x = 0
+		y = 2
+		relative_position_id = KRG_ITA_1949_elections
+		prerequisite = {
+			focus = KRG_ITA_1949_DC_victory
+			focus = KRG_ITA_1949_PDC_victory
+		}
+		completion_reward = {
+			KRG_ITA_gov_king_good = yes
+			KRG_ITA_gov_senate_good = yes
+			KRG_ITA_archaic_administration_improve = yes
+		}
+	}
+	focus = {
+		id = KRG_ITA_1949_institute_the_state_properties_commission
+		icon = GFX_OTT_Land_Reform
+		cost = 7.00
+		x = 0
+		y = 3
+		relative_position_id = KRG_ITA_1949_elections
+		prerequisite = {
+			focus = KRG_ITA_1949_start_administrative_reform
+		}
+		completion_reward = {
+			country_event = {
+				id = krg_ita.64
+			}
+			KRG_ITA_archaic_administration_improve = yes
+		}
+	}
+	focus = {
+		id = KRG_ITA_1949_assess_the_king_powers
+		icon = GFX_SRD_Assess_the_Kings_Powers
+		cost = 5.00
+		x = -2
+		y = 3
+		relative_position_id = KRG_ITA_1949_elections
+		prerequisite = {
+			focus = KRG_ITA_1949_start_administrative_reform
+		}
+		prerequisite = {
+			focus = KRG_ITA_1949_an_alliance_of_progressives
+		}
+		bypass = {
+			hidden_trigger = {
+				has_completed_focus = KRG_ITA_1949_control_diplomacy
+			}
+		}
+		completion_reward = {
+			KRG_ITA_gov_king_bad = yes
+			set_country_flag = KRG_ITA_1949_assess_the_king_powers_flag
+			unlock_decision_tooltip = KRG_ITA_1949_assess_the_king_powers_decision
+			effect_tooltip = {
+				custom_effect_tooltip = ITA_should_this_bill_pass_we_get
+				custom_effect_tooltip = KRG_ITA_1949_assess_the_king_powers_tt
+				KRG_ITA_archaic_administration_improve = yes
+			}
+		}
+	}
+	focus = {
+		id = KRG_ITA_1949_control_diplomacy
+		icon = GFX_generic_foreign_diplomacy
+		cost = 5.00
+		x = 2
+		y = 3
+		relative_position_id = KRG_ITA_1949_elections
+		prerequisite = {
+			focus = KRG_ITA_1949_start_administrative_reform
+		}
+		prerequisite = {
+			focus = KRG_ITA_1949_ally_the_liberals
+		}
+		bypass = {
+			hidden_trigger = {
+				has_completed_focus = KRG_ITA_1949_assess_the_king_powers
+			}
+		}
+		available = {
+			hidden_trigger = {
+				has_government = social_conservative
+			}
+		}
+		completion_reward = {
+			KRG_ITA_gov_king_bad = yes
+			set_country_flag = KRG_ITA_1949_control_diplomacy_flag
+			unlock_decision_tooltip = KRG_ITA_1949_control_diplomacy_decision
+			effect_tooltip = {
+				custom_effect_tooltip = ITA_should_this_bill_pass_we_get
+				custom_effect_tooltip = KRG_ITA_1949_control_diplomacy_tt
+				KRG_ITA_archaic_administration_improve = yes
+			}
+		}
+	}
+	focus = {
+		id = KRG_ITA_1949_reform_the_senate
+		icon = GFX_generic_liberty
+		cost = 5.00
+		x = -1
+		y = 4
+		relative_position_id = KRG_ITA_1949_elections
+		prerequisite = {
+			focus = KRG_ITA_1949_assess_the_king_powers
+			focus = KRG_ITA_1949_control_diplomacy
+		}
+		prerequisite = {
+			focus = KRG_ITA_1949_institute_the_state_properties_commission
+		}
+		mutually_exclusive = {
+			focus = KRG_ITA_1949_sideline_the_senate
+		}
+		completion_reward = {
+			KRG_ITA_gov_senate_bad = yes
+			unlock_decision_tooltip = KRG_ITA_1949_reform_the_senate_decision
+			set_country_flag = KRG_ITA_1949_reform_the_senate_flag
+			effect_tooltip = {
+				custom_effect_tooltip = ITA_should_this_bill_pass_we_get
+				custom_effect_tooltip = KRG_ITA_1949_reform_the_senate_tt
+				KRG_ITA_archaic_administration_improve = yes
+			}
+		}
+	}
+	focus = {
+		id = KRG_ITA_1949_sideline_the_senate
+		icon = GFX_GRE_royal_law
+		cost = 5.00
+		x = 1
+		y = 4
+		relative_position_id = KRG_ITA_1949_elections
+		prerequisite = {
+			focus = KRG_ITA_1949_assess_the_king_powers
+			focus = KRG_ITA_1949_control_diplomacy
+		}
+		prerequisite = {
+			focus = KRG_ITA_1949_institute_the_state_properties_commission
+		}
+		mutually_exclusive = {
+			focus = KRG_ITA_1949_reform_the_senate
+		}
+		completion_reward = {
+			KRG_ITA_gov_senate_bad = yes
+			unlock_decision_tooltip = KRG_ITA_1949_sideline_the_senate_decision
+			set_country_flag = KRG_ITA_1949_sideline_the_senate_flag
+			effect_tooltip = {
+				custom_effect_tooltip = ITA_should_this_bill_pass_we_get
+				custom_effect_tooltip = KRG_ITA_1949_sideline_the_senate_tt
+				KRG_ITA_archaic_administration_improve = yes
+			}
+		}
+	}
+	focus = {
+		id = KRG_ITA_1949_electoral_reform
+		icon = GFX_generic_treaty
+		cost = 5.00
+		x = -2
+		y = 5
+		relative_position_id = KRG_ITA_1949_elections
+		prerequisite = {
+			focus = KRG_ITA_1949_reform_the_senate
+			focus = KRG_ITA_1949_sideline_the_senate
+		}
+		prerequisite = {
+			focus = KRG_ITA_1949_end_commissariates
+		}
+		bypass = {
+			hidden_trigger = {
+				has_completed_focus = KRG_ITA_1949_victory_bonus
+			}
+		}
+		completion_reward = {
+			unlock_decision_tooltip = KRG_ITA_1949_electoral_reform_decision
+			set_country_flag = KRG_ITA_1949_electoral_reform_flag
+			effect_tooltip = {
+				custom_effect_tooltip = ITA_should_this_bill_pass_we_get
+				custom_effect_tooltip = KRG_ITA_1949_electoral_reform_tt
+				KRG_ITA_archaic_administration_improve = yes
+			}
+		}
+	}
+	focus = {
+		id = KRG_ITA_1949_estabilish_term_limit
+		icon = GFX_NFA_expand_legal_protections
+		cost = 5.00
+		x = 0
+		y = 5
+		relative_position_id = KRG_ITA_1949_elections
+		prerequisite = {
+			focus = KRG_ITA_1949_reform_the_senate
+			focus = KRG_ITA_1949_sideline_the_senate
+		}
+		completion_reward = {
+			custom_effect_tooltip = KRG_ITA_1949_estabilish_term_limit_tt
+			KRG_ITA_archaic_administration_improve = yes
+			hidden_effect = {
+				if = {
+					limit = {
+						has_government = social_conservative
+					}
+					set_politics = {
+						ruling_party = social_conservative
+						last_election = "1949.6.2"
+						election_frequency = 60
+						elections_allowed = yes
+					}
+				}
+				else_if = {
+					limit = {
+						has_government = social_liberal
+					}
+					set_politics = {
+						ruling_party = social_liberal
+						last_election = "1949.6.2"
+						election_frequency = 60
+						elections_allowed = yes
+					}
+				}
+				else_if = {
+					limit = {
+						has_government = social_democrat
+					}
+					set_politics = {
+						ruling_party = social_democrat
+						last_election = "1949.6.2"
+						election_frequency = 60
+						elections_allowed = yes
+					}
+				}
+			}
+		}
+	}
+	focus = {
+		id = KRG_ITA_1949_victory_bonus
+		icon = GFX_generic_collaborate_local_elites
+		cost = 5.00
+		x = 2
+		y = 5
+		relative_position_id = KRG_ITA_1949_elections
+		prerequisite = {
+			focus = KRG_ITA_1949_reform_the_senate
+			focus = KRG_ITA_1949_sideline_the_senate
+		}
+		prerequisite = {
+			focus = KRG_ITA_1949_papacy_concordat
+		}
+		available = {
+			hidden_trigger = {
+				has_government = social_conservative
+			}
+		}
+		bypass = {
+			hidden_trigger = {
+				has_completed_focus = KRG_ITA_1949_electoral_reform
+			}
+		}
+		completion_reward = {
+			unlock_decision_tooltip = KRG_ITA_1949_victory_bonus_decision
+			set_country_flag = KRG_ITA_1949_victory_bonus_flag
+			effect_tooltip = {
+				custom_effect_tooltip = ITA_should_this_bill_pass_we_get
+				custom_effect_tooltip = KRG_ITA_1949_victory_bonus_tt
+				KRG_ITA_archaic_administration_improve = yes
+				add_popularity = {
+					ideology = social_conservative
+					popularity = -0.12
+				}
+				add_popularity = {
+					ideology = social_democrat
+					popularity = 0.05
+				}
+			}
+		}
+	}
+	focus = {
+		id = KRG_ITA_1949_constitutional_committee
+		icon = GFX_generic_constitution
+		cost = 5.00
+		x = 0
+		y = 6
+		relative_position_id = KRG_ITA_1949_elections
+		prerequisite = {
+			focus = KRG_ITA_1949_victory_bonus
+			focus = KRG_ITA_1949_electoral_reform
+		}
+		prerequisite = {
+			focus = KRG_ITA_1949_the_federal_model
+			focus = KRG_ITA_1949_create_sardinia_region
+		}
+		prerequisite = {
+			focus = KRG_ITA_1949_estabilish_term_limit
+		}
+		completion_reward = {
+			unlock_decision_tooltip = KRG_ITA_1949_constitutional_committee_decision
+			set_country_flag = KRG_ITA_1949_constitutional_committee_flag
+			set_country_flag = ITA_second_tree_done
+			mark_focus_tree_layout_dirty = yes
+			effect_tooltip = {
+				custom_effect_tooltip = ITA_should_this_bill_pass_we_get
+				custom_effect_tooltip = KRG_ITA_1949_constitutional_committee_tt
+				KRG_ITA_archaic_administration_improve = yes
+			}
+		}
+	}
+	focus = {
+		id = KRG_ITA_1954_alliance_for_progress
+		icon = GFX_generic_KRG_social_liberal
+		cost = 0.00
+		x = 10
+		y = 30
+		available = {
+			has_country_flag = KRG_ITA_1954_PCdI_PdA_government
+		}
+		bypass = {
+			hidden_trigger = {
+				has_country_flag = KRG_ITA_1954_PCdI_PdA_government
+			}
+		}
+		allow_branch = {
+			always = no
+		}
+		completion_reward = {
+			custom_effect_tooltip = ITA_bypass_focus_tt
+		}
+	}
+	focus = {
+		id = KRG_ITA_1954_progress_legge_stralcio
+		icon = GFX_generic_agriculture3
+		cost = 5.00
+		x = -1
+		y = 1
+		relative_position_id = KRG_ITA_1954_alliance_for_progress
+		available = {
+			has_country_flag = KRG_ITA_1954_PCdI_PdA_government
+		}
+		prerequisite = {
+			focus = KRG_ITA_1954_alliance_for_progress
+		}
+		bypass = {
+			hidden_trigger = {
+				OR = {
+					has_completed_focus = KRG_ITA_1954_cordon_the_legge_stralcio
+					has_completed_focus = KRG_ITA_1954_sardinians_the_legge_stralcio
+				}
+			}
+		}
+		completion_reward = {
+			ITA_1954_legge_stralcio_effect = yes
+		}
+	}
+	focus = {
+		id = KRG_ITA_1954_progress_strengthen_regional_autonomies
+		icon = GFX_generic_constitutional_guarantees
+		cost = 5.00
+		x = 1
+		y = 1
+		relative_position_id = KRG_ITA_1954_alliance_for_progress
+		available = {
+			has_country_flag = KRG_ITA_1954_PCdI_PdA_government
+		}
+		prerequisite = {
+			focus = KRG_ITA_1954_alliance_for_progress
+		}
+		completion_reward = {
+		}
+	}
+	focus = {
+		id = KRG_ITA_1954_progress_school_development_plan
+		icon = GFX_generic_double_research
+		cost = 5.00
+		x = 0
+		y = 2
+		relative_position_id = KRG_ITA_1954_alliance_for_progress
+		available = {
+			has_country_flag = KRG_ITA_1954_PCdI_PdA_government
+		}
+		prerequisite = {
+			focus = KRG_ITA_1954_alliance_for_progress
+		}
+		bypass = {
+			hidden_trigger = {
+				OR = {
+					has_completed_focus = KRG_ITA_1954_sardinians_the_school_development_plan
+					has_completed_focus = KRG_ITA_1954_cordon_the_school_development_plan
+				}
+			}
+		}
+		completion_reward = {
+			ITA_1954_school_develompent_plan_effect = yes
+		}
+	}
+	focus = {
+		id = KRG_ITA_1954_progress_expand_agricultural_cooperatives
+		icon = GFX_generic_agrarian_reform
+		cost = 5.00
+		x = -2
+		y = 2
+		relative_position_id = KRG_ITA_1954_alliance_for_progress
+		available = {
+			has_country_flag = KRG_ITA_1954_PCdI_PdA_government
+			has_idea = ITA_agrarian_unions_in_the_field
+		}
+		bypass = {
+			hidden_trigger = {
+				has_completed_focus = KRG_ITA_1954_sardinians_expand_agricultural_cooperatives
+			}
+		}
+		prerequisite = {
+			focus = KRG_ITA_1954_progress_legge_stralcio
+		}
+		completion_reward = {
+			ITA_1954_agrarian_action_friendly = yes
+		}
+	}
+	focus = {
+		id = KRG_ITA_1954_progress_protect_minority_languages
+		icon = GFX_generic_pass_legislation
+		cost = 5.00
+		x = 1
+		y = 3
+		relative_position_id = KRG_ITA_1954_alliance_for_progress
+		available = {
+			has_country_flag = KRG_ITA_1954_PCdI_PdA_government
+		}
+		prerequisite = {
+			focus = KRG_ITA_1954_progress_strengthen_regional_autonomies
+		}
+		prerequisite = {
+			focus = KRG_ITA_1954_progress_school_development_plan
+		}
+		completion_reward = {
+			ITA_1954_protect_minority_languages = yes
+		}
+	}
+	focus = {
+		id = KRG_ITA_1954_progress_a_new_amnesty
+		icon = GFX_generic_red_star_treaty
+		cost = 5.00
+		x = -1
+		y = 3
+		relative_position_id = KRG_ITA_1954_alliance_for_progress
+		available = {
+			has_country_flag = KRG_ITA_1954_PCdI_PdA_government
+		}
+		prerequisite = {
+			focus = KRG_ITA_1954_progress_expand_agricultural_cooperatives
+		}
+		prerequisite = {
+			focus = KRG_ITA_1954_progress_school_development_plan
+		}
+		completion_reward = {
+			add_stability = 0.05
+			add_war_support = 0.05
+			add_popularity = {
+				ideology = radical_socialist
+				popularity = 0.05
+			}
+		}
+	}
+	focus = {
+		id = KRG_ITA_1954_the_sardinian_compromise
+		icon = GFX_generic_soccon
+		cost = 0.00
+		x = 20
+		y = 30
+		available = {
+			has_country_flag = KRG_ITA_1954_DC_PdA_government
+		}
+		bypass = {
+			hidden_trigger = {
+				has_country_flag = KRG_ITA_1954_DC_PdA_government
+			}
+		}
+		allow_branch = {
+			always = no
+		}
+		completion_reward = {
+			custom_effect_tooltip = ITA_bypass_focus_tt
+		}
+	}
+	focus = {
+		id = KRG_ITA_1954_sardinians_the_legge_stralcio
+		icon = GFX_generic_agriculture3
+		cost = 5.00
+		x = -1
+		y = 1
+		relative_position_id = KRG_ITA_1954_the_sardinian_compromise
+		prerequisite = {
+			focus = KRG_ITA_1954_the_sardinian_compromise
+		}
+		available = {
+			has_country_flag = KRG_ITA_1954_DC_PdA_government
+		}
+		bypass = {
+			hidden_trigger = {
+				OR = {
+					has_completed_focus = KRG_ITA_1954_progress_legge_stralcio
+					has_completed_focus = KRG_ITA_1954_cordon_the_legge_stralcio
+				}
+			}
+		}
+		completion_reward = {
+			ITA_1954_legge_stralcio_effect = yes
+		}
+	}
+	focus = {
+		id = KRG_ITA_1954_sardinians_call_to_italian_unity
+		icon = GFX_SRD_united
+		cost = 5.00
+		x = 1
+		y = 1
+		relative_position_id = KRG_ITA_1954_the_sardinian_compromise
+		prerequisite = {
+			focus = KRG_ITA_1954_the_sardinian_compromise
+		}
+		available = {
+			has_country_flag = KRG_ITA_1954_DC_PdA_government
+		}
+		completion_reward = {
+		}
+	}
+	focus = {
+		id = KRG_ITA_1954_sardinians_the_school_development_plan
+		icon = GFX_generic_double_research
+		cost = 5.00
+		x = 0
+		y = 2
+		relative_position_id = KRG_ITA_1954_the_sardinian_compromise
+		prerequisite = {
+			focus = KRG_ITA_1954_sardinians_the_legge_stralcio
+		}
+		prerequisite = {
+			focus = KRG_ITA_1954_sardinians_call_to_italian_unity
+		}
+		available = {
+			has_country_flag = KRG_ITA_1954_DC_PdA_government
+		}
+		bypass = {
+			hidden_trigger = {
+				OR = {
+					has_completed_focus = KRG_ITA_1954_progress_school_development_plan
+					has_completed_focus = KRG_ITA_1954_cordon_the_school_development_plan
+				}
+			}
+		}
+		completion_reward = {
+			ITA_1954_school_develompent_plan_effect = yes
+		}
+	}
+	focus = {
+		id = KRG_ITA_1954_sardinians_a_new_amnesty
+		icon = GFX_generic_red_star_treaty
+		cost = 5.00
+		x = -2
+		y = 2
+		relative_position_id = KRG_ITA_1954_the_sardinian_compromise
+		prerequisite = {
+			focus = KRG_ITA_1954_sardinians_the_legge_stralcio
+		}
+		available = {
+			has_country_flag = KRG_ITA_1954_DC_PdA_government
+		}
+		completion_reward = {
+			add_stability = 0.05
+			add_war_support = 0.05
+			add_popularity = {
+				ideology = radical_socialist
+				popularity = 0.05
+			}
+		}
+	}
+	focus = {
+		id = KRG_ITA_1954_sardinians_expand_agricultural_cooperatives
+		icon = GFX_generic_agrarian_reform
+		cost = 5.00
+		x = -1
+		y = 3
+		relative_position_id = KRG_ITA_1954_the_sardinian_compromise
+		cancelable = no
+		select_effect = {
+			if = {
+				limit = {
+					OR = {
+						has_completed_focus = KRG_ITA_1954_sardinians_a_new_amnesty
+						NOT = {
+							has_completed_focus = KRG_ITA_1954_sardinians_blind_eye_to_blueshirts
+						}
+					}
+				}
+				country_event = {
+					id = krg_ita.139
+					days = 5
+				}
+			}
+		}
+		prerequisite = {
+			focus = KRG_ITA_1954_sardinians_the_legge_stralcio
+		}
+		mutually_exclusive = {
+			focus = KRG_ITA_1954_sardinians_crush_agricultural_cooperatives
+		}
+		bypass = {
+			hidden_trigger = {
+				has_completed_focus = KRG_ITA_1954_progress_expand_agricultural_cooperatives
+			}
+		}
+		available = {
+			has_country_flag = KRG_ITA_1954_DC_PdA_government
+			has_government = social_democrat
+			has_idea = ITA_agrarian_unions_in_the_field
+			NOT = {
+				has_country_flag = ITA_conservative_allies_killed_progressive_bill
+			}
+		}
+		completion_reward = {
+			custom_effect_tooltip = KRG_ITA_1954_sardinians_expand_agricultural_cooperatives_tt
+			ITA_1954_agrarian_action_friendly = yes
+		}
+	}
+	focus = {
+		id = KRG_ITA_1954_sardinians_blind_eye_to_blueshirts
+		icon = GFX_generic_paramilitary
+		cost = 5.00
+		x = 2
+		y = 2
+		relative_position_id = KRG_ITA_1954_the_sardinian_compromise
+		prerequisite = {
+			focus = KRG_ITA_1954_sardinians_call_to_italian_unity
+		}
+		available = {
+			has_country_flag = KRG_ITA_1954_DC_PdA_government
+		}
+		completion_reward = {
+		}
+	}
+	focus = {
+		id = KRG_ITA_1954_sardinians_crush_agricultural_cooperatives
+		icon = GFX_generic_crush_unions
+		cost = 5.00
+		x = 1
+		y = 3
+		relative_position_id = KRG_ITA_1954_the_sardinian_compromise
+		prerequisite = {
+			focus = KRG_ITA_1954_sardinians_call_to_italian_unity
+		}
+		mutually_exclusive = {
+			focus = KRG_ITA_1954_sardinians_expand_agricultural_cooperatives
+		}
+		available = {
+			has_country_flag = KRG_ITA_1954_DC_PdA_government
+			has_government = social_conservative
+			has_idea = ITA_agrarian_unions_in_the_field
+			NOT = {
+				has_country_flag = ITA_1954_progressive_allies_killed_bill
+			}
+		}
+		cancelable = no
+		select_effect = {
+			if = {
+				limit = {
+					OR = {
+						has_completed_focus = KRG_ITA_1954_sardinians_blind_eye_to_blueshirts
+						NOT = {
+							has_completed_focus = KRG_ITA_1954_sardinians_a_new_amnesty
+						}
+					}
+				}
+				country_event = {
+					id = krg_ita.140
+					days = 5
+				}
+			}
+		}
+		bypass = {
+			hidden_trigger = {
+				has_completed_focus = KRG_ITA_1954_cordon_crush_agrarian_unions
+			}
+		}
+		completion_reward = {
+			custom_effect_tooltip = KRG_ITA_1954_sardinians_crush_agricultural_cooperatives_tt
+			ITA_agrarian_action_fuck_off = yes
+		}
+	}
+	focus = {
+		id = KRG_ITA_1954_the_cordon_sanitaire
+		icon = GFX_ENG_ban_unions
+		cost = 0.00
+		x = 30
+		y = 30
+		available = {
+			has_country_flag = KRG_ITA_1954_DC_PCdI_government
+		}
+		bypass = {
+			hidden_trigger = {
+				has_country_flag = KRG_ITA_1954_DC_PCdI_government
+			}
+		}
+		allow_branch = {
+			always = no
+		}
+		completion_reward = {
+			custom_effect_tooltip = ITA_bypass_focus_tt
+		}
+	}
+	focus = {
+		id = KRG_ITA_1954_the_left_dc
+		icon = GFX_generic_new_ideology_soccon
+		cost = 0.00
+		x = 36
+		y = 31
+		prerequisite = {
+			focus = KRG_ITA_1954_the_sardinian_compromise
+			focus = KRG_ITA_1954_the_cordon_sanitaire
+		}
+		available = {
+			has_government = social_conservative
+			has_idea = ITA_Achille_Marazza_hog_sco
+		}
+		bypass = {
+			hidden_trigger = {
+				has_government = social_conservative
+				has_idea = ITA_Achille_Marazza_hog_sco
+			}
+		}
+		completion_reward = {
+			custom_effect_tooltip = ITA_bypass_focus_tt
+		}
+	}
+	focus = {
+		id = KRG_ITA_1954_remove_artistic_censorship
+		icon = GFX_generic_pass_legislation
+		cost = 5.00
+		x = -1
+		y = 1
+		relative_position_id = KRG_ITA_1954_the_left_dc
+		prerequisite = {
+			focus = KRG_ITA_1954_the_left_dc
+		}
+		available = {
+			has_government = social_conservative
+			has_idea = ITA_Achille_Marazza_hog_sco
+		}
+		completion_reward = {
+		}
+	}
+	focus = {
+		id = KRG_ITA_1954_pivot_to_the_left
+		icon = GFX_generic_workers_democracy
+		cost = 5.00
+		x = -1
+		y = 2
+		relative_position_id = KRG_ITA_1954_the_left_dc
+		prerequisite = {
+			focus = KRG_ITA_1954_remove_artistic_censorship
+		}
+		available = {
+			has_government = social_conservative
+			has_idea = ITA_Achille_Marazza_hog_sco
+		}
+		completion_reward = {
+		}
+	}
+	focus = {
+		id = KRG_ITA_1954_form_the_cisl
+		icon = GFX_generic_workers_for_business
+		cost = 5.00
+		x = 0
+		y = 3
+		relative_position_id = KRG_ITA_1954_the_left_dc
+		prerequisite = {
+			focus = KRG_ITA_1954_pivot_to_the_left
+		}
+		prerequisite = {
+			focus = KRG_ITA_1954_overcome_the_electoral_failure
+		}
+		available = {
+			has_government = social_conservative
+			has_idea = ITA_Achille_Marazza_hog_sco
+		}
+		completion_reward = {
+		}
+	}
+	focus = {
+		id = KRG_ITA_1954_the_right_dc
+		icon = GFX_generic_new_ideology_authdem
+		cost = 0.00
+		x = 2
+		y = 0
+		relative_position_id = KRG_ITA_1954_the_left_dc
+		prerequisite = {
+			focus = KRG_ITA_1954_the_cordon_sanitaire
+		}
+		available = {
+			has_government = social_conservative
+			has_idea = ITA_Giuseppe_Pella_hog_sco
+		}
+		bypass = {
+			hidden_trigger = {
+				has_government = social_conservative
+				has_idea = ITA_Giuseppe_Pella_hog_sco
+			}
+		}
+		completion_reward = {
+			custom_effect_tooltip = ITA_bypass_focus_tt
+		}
+	}
+	focus = {
+		id = KRG_ITA_1954_rally_behind_the_king
+		icon = GFX_SRD_Assess_the_Kings_Powers
+		cost = 5.00
+		x = 2
+		y = 0
+		relative_position_id = KRG_ITA_1954_the_right_dc
+		prerequisite = {
+			focus = KRG_ITA_1954_the_cordon_sanitaire
+		}
+		available = {
+			has_coal_auth_dem = yes
+		}
+		completion_reward = {
+		}
+	}
+	focus = {
+		id = KRG_ITA_1954_empower_confindustria
+		icon = GFX_generic_plotting
+		cost = 5.00
+		x = 2
+		y = 0
+		relative_position_id = KRG_ITA_1954_rally_behind_the_king
+		prerequisite = {
+			focus = KRG_ITA_1954_the_cordon_sanitaire
+			focus = KRG_ITA_1954_alliance_for_progress
+			focus = KRG_ITA_1954_the_sardinian_compromise
+		}
+		available = {
+			has_coal_mark_lib = yes
+		}
+		completion_reward = {
+		}
+	}
+	focus = {
+		id = KRG_ITA_1954_a_moral_obligation
+		icon = GFX_SHX_Christian_Influence
+		cost = 5.00
+		x = 3
+		y = 1
+		relative_position_id = KRG_ITA_1954_the_left_dc
+		prerequisite = {
+			focus = KRG_ITA_1954_the_right_dc
+		}
+		available = {
+			has_government = social_conservative
+			has_idea = ITA_Giuseppe_Pella_hog_sco
+		}
+		completion_reward = {
+		}
+	}
+	focus = {
+		id = KRG_ITA_1954_a_dc_farmer_merger
+		icon = GFX_generic_scales
+		cost = 5.00
+		x = 3
+		y = 2
+		relative_position_id = KRG_ITA_1954_the_left_dc
+		prerequisite = {
+			focus = KRG_ITA_1954_a_moral_obligation
+		}
+		available = {
+			has_government = social_conservative
+			has_idea = ITA_Giuseppe_Pella_hog_sco
+			has_coal_soc_lib = yes
+		}
+		completion_reward = {
+		}
+	}
+	focus = {
+		id = KRG_ITA_1954_the_natural_party_of_governance
+		icon = GFX_SRD_christian_democratic_party
+		cost = 5.00
+		x = 2
+		y = 3
+		relative_position_id = KRG_ITA_1954_the_left_dc
+		prerequisite = {
+			focus = KRG_ITA_1954_a_dc_farmer_merger
+		}
+		prerequisite = {
+			focus = KRG_ITA_1954_overcome_the_electoral_failure
+		}
+		available = {
+			has_government = social_conservative
+			OR = {
+				has_idea = ITA_Giuseppe_Pella_hog_sco
+				has_idea = ITA_Giuseppe_Brusasca_hog_sco
+			}
+		}
+		completion_reward = {
+		}
+	}
+	focus = {
+		id = KRG_ITA_1954_the_iron_patient_returns
+		icon = GFX_SRD_the_iron_patient_returns
+		cost = 5.00
+		x = 4
+		y = 3
+		relative_position_id = KRG_ITA_1954_the_left_dc
+		prerequisite = {
+			focus = KRG_ITA_1954_a_dc_farmer_merger
+		}
+		prerequisite = {
+			focus = KRG_ITA_1954_overcome_the_electoral_failure
+		}
+		available = {
+			has_government = social_conservative
+			has_idea = ITA_Antonio_Segni_hog_sco
+		}
+		completion_reward = {
+		}
+	}
+	focus = {
+		id = KRG_ITA_1954_overcome_the_electoral_failure
+		icon = GFX_GENERIC_parliament
+		cost = 5.00
+		x = 1
+		y = 1
+		relative_position_id = KRG_ITA_1954_the_left_dc
+		prerequisite = {
+			focus = KRG_ITA_1954_the_left_dc
+			focus = KRG_ITA_1954_the_right_dc
+		}
+		available = {
+			has_government = social_conservative
+		}
+		completion_reward = {
+		}
+	}
+	focus = {
+		id = KRG_ITA_1954_television_adresses
+		icon = GFX_generic_tv_sets
+		cost = 5.00
+		x = 1
+		y = 2
+		relative_position_id = KRG_ITA_1954_the_left_dc
+		prerequisite = {
+			focus = KRG_ITA_1954_overcome_the_electoral_failure
+		}
+		available = {
+			has_government = social_conservative
+		}
+		completion_reward = {
+		}
+	}
+	focus = {
+		id = KRG_ITA_1954_the_farmers
+		icon = GFX_generic_new_ideology_soclib
+		cost = 0.00
+		x = 25
+		y = 31
+		prerequisite = {
+			focus = KRG_ITA_1954_the_cordon_sanitaire
+			focus = KRG_ITA_1954_alliance_for_progress
+		}
+		available = {
+			has_government = social_liberal
+		}
+		bypass = {
+			hidden_trigger = {
+				has_government = social_liberal
+			}
+		}
+		completion_reward = {
+			custom_effect_tooltip = ITA_bypass_focus_tt
+		}
+	}
+	focus = {
+		id = KRG_ITA_1954_remove_the_community_movement
+		icon = GFX_generic_political_purge
+		cost = 5.00
+		x = -1
+		y = 1
+		relative_position_id = KRG_ITA_1954_the_farmers
+		prerequisite = {
+			focus = KRG_ITA_1954_the_farmers
+		}
+		bypass_if_unavailable = yes
+		available = {
+			has_government = social_liberal
+			social_liberal > 0.10
+			hidden_trigger = {
+				NOT = {
+					has_country_flag = ITA_1954_soclib_no_split
+				}
+			}
+		}
+		select_effect = {
+			country_event = {
+				id = krg_ita.143
+				days = 5
+			}
+		}
+		completion_reward = {
+			if = {
+				limit = {
+					has_country_flag = ITA_1954_soclib_no_split
+				}
+				custom_effect_tooltip = ITA_bypass_focus_tt
+			}
+			else = {
+				custom_effect_tooltip = ITA_1954_soclib_split
+				set_country_flag = ITA_1954_community_movement_removed
+				add_popularity = {
+					ideology = social_liberal
+					popularity = -0.10
+				}
+				set_temp_variable = { transfer = 4.ITA_chamber_of_deputies_seat } # PCdP
+				divide_temp_variable = { transfer = 10 }
+				round_temp_variable = transfer
+				set_temp_variable = { temp_party_1 = 4 } # PCdP
+				set_temp_variable = { temp_party_2 = 2 } # PdA
+				set_temp_variable = { temp_seat = transfer }
+				ITA_chamber_of_deputies_transfer_seat = yes
+				swap_ideas = {
+					remove_idea = ITA_collapse_of_farmers_party
+					add_idea = ITA_collapse_of_farmers_party_2
+				}
+			}
+		}
+	}
+	focus = {
+		id = KRG_ITA_1954_a_future_for_the_party
+		icon = GFX_SRD_farmers_party
+		cost = 5.00
+		x = 1
+		y = 1
+		relative_position_id = KRG_ITA_1954_the_farmers
+		prerequisite = {
+			focus = KRG_ITA_1954_the_farmers
+		}
+		available = {
+			has_government = social_liberal
+			social_liberal > 0.10
+		}
+		completion_reward = {
+		}
+	}
+	focus = {
+		id = KRG_ITA_1954_our_power_in_the_farmlands
+		icon = GFX_AUS_agriculture
+		cost = 5.00
+		x = 0
+		y = 2
+		relative_position_id = KRG_ITA_1954_the_farmers
+		prerequisite = {
+			focus = KRG_ITA_1954_a_future_for_the_party
+		}
+		available = {
+			has_government = social_liberal
+			social_liberal > 0.10
+		}
+		completion_reward = {
+		}
+	}
+	focus = {
+		id = KRG_ITA_1954_the_voice_of_autonomism
+		icon = GFX_generic_liberty
+		cost = 5.00
+		x = 2
+		y = 2
+		relative_position_id = KRG_ITA_1954_the_farmers
+		prerequisite = {
+			focus = KRG_ITA_1954_a_future_for_the_party
+		}
+		available = {
+			has_government = social_liberal
+			social_liberal > 0.10
+		}
+		completion_reward = {
+		}
+	}
+	focus = {
+		id = KRG_ITA_1954_a_merger_with_the_liberals
+		icon = GFX_generic_liberal_coalition
+		cost = 5.00
+		x = -1
+		y = 3
+		relative_position_id = KRG_ITA_1954_the_farmers
+		prerequisite = {
+			focus = KRG_ITA_1954_remove_the_community_movement
+		}
+		prerequisite = {
+			focus = KRG_ITA_1954_our_power_in_the_farmlands
+		}
+		prerequisite = {
+			focus = KRG_ITA_1954_the_voice_of_autonomism
+		}
+		available = {
+			has_government = social_liberal
+			social_liberal > 0.10
+			has_coal_mark_lib = yes
+		}
+		completion_reward = {
+		}
+	}
+	focus = {
+		id = KRG_ITA_1954_the_actionists
+		icon = GFX_generic_new_ideology_socdem
+		cost = 0.00
+		x = 15
+		y = 31
+		prerequisite = {
+			focus = KRG_ITA_1954_alliance_for_progress
+			focus = KRG_ITA_1954_the_sardinian_compromise
+		}
+		available = {
+			has_government = social_democrat
+		}
+		bypass = {
+			hidden_trigger = {
+				has_government = social_democrat
+			}
+		}
+		completion_reward = {
+			custom_effect_tooltip = ITA_bypass_focus_tt
+		}
+	}
+	focus = {
+		id = KRG_ITA_1954_enforce_party_unity
+		icon = GFX_generic_backstab
+		cost = 5.00
+		x = -1
+		y = 1
+		relative_position_id = KRG_ITA_1954_the_actionists
+		prerequisite = {
+			focus = KRG_ITA_1954_the_actionists
+		}
+		available = {
+			has_government = social_democrat
+		}
+		select_effect = {
+			country_event = {
+				id = krg_ita.122
+				days = 5
+				random_days = 2
+			}
+			country_event = {
+				id = krg_ita.123
+				days = 10
+				random_days = 2
+			}
+			country_event = {
+				id = krg_ita.124
+				days = 15
+				random_days = 2
+			}
+		}
+		completion_reward = {
+			if = {
+				limit = {
+					has_country_flag = ITA_1954_socdem_no_split
+				}
+				custom_effect_tooltip = ITA_1954_socdem_no_split
+			}
+			else_if = {
+				limit = {
+					has_country_flag = ITA_1954_socdem_large_split
+				}
+				custom_effect_tooltip = ITA_1954_socdem_large_split
+				add_popularity = {
+					ideology = revolutionary_republican
+					popularity = 0.15
+				}
+				set_country_flag = ITA_1954_socdem_large_split_happened
+				activate_mission = KRG_ITA_1954_melis_act_or_die_mission
+				set_temp_variable = { transfer = 2.ITA_chamber_of_deputies_seat } # PdA
+				divide_temp_variable = { transfer = 3 }
+				round_temp_variable = transfer
+				set_temp_variable = { temp_party_1 = 2 } # PdA
+				set_temp_variable = { temp_party_2 = 3 } # PRI
+				set_temp_variable = { temp_seat = transfer }
+				ITA_chamber_of_deputies_transfer_seat = yes
+				set_variable = { seats_to_transfer_back = transfer }
+			}
+			else_if = {
+				limit = {
+					has_country_flag = ITA_1954_socdem_medium_split
+				}
+				custom_effect_tooltip = ITA_1954_socdem_medium_split
+				add_popularity = {
+					ideology = revolutionary_republican
+					popularity = 0.1
+				}
+				set_country_flag = ITA_1954_socdem_medium_split_happened
+				set_temp_variable = { transfer = 2.ITA_chamber_of_deputies_seat } # PdA
+				divide_temp_variable = { transfer = 5 }
+				round_temp_variable = transfer
+				set_temp_variable = { temp_party_1 = 2 } # PdA
+				set_temp_variable = { temp_party_2 = 3 } # PRI
+				set_temp_variable = { temp_seat = transfer }
+				ITA_chamber_of_deputies_transfer_seat = yes
+				set_variable = { seats_to_transfer_back = transfer }
+			}
+			else = {
+				custom_effect_tooltip = ITA_1954_socdem_small_split
+				add_popularity = {
+					ideology = revolutionary_republican
+					popularity = 0.05
+				}
+				set_temp_variable = { transfer = 2.ITA_chamber_of_deputies_seat } # PdA
+				divide_temp_variable = { transfer = 10 }
+				round_temp_variable = transfer
+				set_temp_variable = { temp_party_1 = 2 } # PdA
+				set_temp_variable = { temp_party_2 = 3 } # PRI
+				set_temp_variable = { temp_seat = transfer }
+				ITA_chamber_of_deputies_transfer_seat = yes
+				set_variable = { seats_to_transfer_back = transfer }
+			}
+			custom_effect_tooltip = ITA_1954_socdem_party_unity_enforced
+			set_country_flag = ITA_1954_socdem_party_unity_has_been_enforced
+		}
+	}
+	focus = {
+		id = KRG_ITA_1954_referendum_on_the_monarchy
+		icon = GFX_GRE_topple_the_monarchy
+		cost = 5.00
+		x = -2
+		y = 2
+		relative_position_id = KRG_ITA_1954_the_actionists
+		prerequisite = {
+			focus = KRG_ITA_1954_enforce_party_unity
+		}
+		available = {
+			has_government = social_democrat
+			custom_trigger_tooltip = {
+				tooltip = ITA_1954_socdem_split_was_at_least_medium
+				OR = {
+					has_country_flag = ITA_1954_socdem_medium_split_happened
+					has_country_flag = ITA_1954_socdem_large_split_happened
+				}
+			}
+			has_war = no
+			ITA = {
+				exists = yes
+				has_war = no
+				has_democratic_government = yes
+			}
+		}
+		completion_reward = {
+			set_temp_variable = { transfer = seats_to_transfer_back }
+			multiply_temp_variable = { transfer = 0.95 }
+			round_temp_variable = transfer
+			if = {
+				limit = {
+					has_country_flag = ITA_1954_socdem_large_split
+				}
+				add_popularity = {
+					ideology = revolutionary_republican
+					popularity = -0.15
+				}
+			}
+			else = {
+				add_popularity = {
+					ideology = revolutionary_republican
+					popularity = -0.1
+				}
+			}
+			clr_country_flag = ITA_1954_socdem_large_split_happened
+			custom_effect_tooltip = KRG_ITA_1954_referendum_on_the_monarchy_tt
+			if = {
+				limit = {
+					has_country_flag = ITA_1954_socdem_large_split
+				}
+				custom_effect_tooltip = KRG_ITA_1954_ref_split_healed
+			}
+			coal_add_rev_rep = yes
+			set_temp_variable = { temp_party_1 = 3 } # PRI
+			set_temp_variable = { temp_party_2 = 2 } # PdA
+			set_temp_variable = { temp_seat = transfer }
+			ITA_chamber_of_deputies_transfer_seat = yes
+			country_event = krg_ita.125
+			ITA = {
+				if = {
+					limit = {
+						NOT = {
+							has_government = authoritarian_democrat
+						} 
+					}
+					country_event = krg_ita.126
+				}
+			}
+			set_country_flag = ITA_monarchy_referendum_ongoing
+			unlock_decision_category_tooltip = ITA_1954_socdem_monarchy_referendum_cat
+			activate_mission = ITA_1954_socdem_monarchy_referendum_mission
+			set_variable = { ITA.monarchy_support = 75 }
+		}
+	}
+	focus = {
+		id = KRG_ITA_1954_public_housing_reform
+		icon = GFX_generic_social_housing
+		cost = 5.00
+		x = 1
+		y = 1
+		relative_position_id = KRG_ITA_1954_the_actionists
+		prerequisite = {
+			focus = KRG_ITA_1954_the_actionists
+		}
+		available = {
+			has_government = social_democrat
+			has_country_flag = ITA_1954_socdem_party_unity_has_been_enforced
+			NOT = {
+				has_country_flag = ITA_1954_socdem_large_split_happened
+			}
+		}
+		completion_reward = {
+			set_country_flag = KRG_ITA_1954_public_housing_reform_flag
+			unlock_decision_tooltip = KRG_ITA_1954_IACP_reform_decision
+			custom_effect_tooltip = ITA_should_this_bill_pass_we_get
+			effect_tooltip = {
+				add_popularity = {
+					ideology = social_democrat
+					popularity = 0.05
+				}
+				move_up_service_spending = yes
+			}
+		}
+	}
+	focus = {
+		id = KRG_ITA_1954_limit_police_intervention
+		icon = GFX_LEC_police3
+		cost = 5.00
+		x = 1
+		y = 2
+		relative_position_id = KRG_ITA_1954_the_actionists
+		prerequisite = {
+			focus = KRG_ITA_1954_public_housing_reform
+		}
+		available = {
+			has_government = social_democrat
+			has_country_flag = ITA_1954_socdem_party_unity_has_been_enforced
+			NOT = {
+				has_country_flag = ITA_1954_socdem_large_split_happened
+			}
+		}
+		completion_reward = {
+			set_country_flag = KRG_ITA_1954_limit_police_intervention_flag
+			unlock_decision_tooltip = KRG_ITA_1954_strikebreaking_reform_decision
+			custom_effect_tooltip = ITA_should_this_bill_pass_we_get
+			effect_tooltip = {
+				add_popularity = {
+					ideology = social_democrat
+					popularity = 0.03
+				}
+				add_war_support = 0.05
+				add_manpower = -547
+			}
+		}
+	}
+	focus = {
+		id = KRG_ITA_1954_legalize_trade_unions
+		icon = GFX_generic_syndicalism
+		cost = 5.00
+		x = 0
+		y = 3
+		relative_position_id = KRG_ITA_1954_the_actionists
+		prerequisite = {
+			focus = KRG_ITA_1954_enforce_party_unity
+		}
+		prerequisite = {
+			focus = KRG_ITA_1954_limit_police_intervention
+		}
+		available = {
+			has_government = social_democrat
+			has_country_flag = ITA_1954_socdem_party_unity_has_been_enforced
+			NOT = {
+				has_country_flag = ITA_1954_socdem_large_split_happened
+			}
+			OR = {
+				NOT = {
+					has_country_flag = KRG_ITA_1954_DC_PdA_government
+				}
+				has_completed_focus = KRG_ITA_1954_sardinians_expand_agricultural_cooperatives
+			}
+		}
+		select_effect = {
+			country_event = {
+				id = krg_ita.132
+				days = 5
+				random_days = 2
+			}
+		}
+		completion_reward = {
+			add_stability = -0.1
+			set_country_flag = KRG_ITA_1954_legalize_trade_unions_flag
+			unlock_decision_tooltip = KRG_ITA_1954_trade_unions_reform_decision
+			custom_effect_tooltip = ITA_should_this_bill_pass_we_get
+			effect_tooltip = {
+				add_popularity = {
+					ideology = social_democrat
+					popularity = 0.05
+				}
+				add_ideas = ITA_trade_unions_relegalized
+			}
+		}
+	}
+	focus = {
+		id = KRG_ITA_1954_cordon_fight_reds
+		icon = GFX_HOL_ban_paramilitary_left
+		cost = 5
+		x = 0
+		y = 1
+		relative_position_id = KRG_ITA_1954_the_cordon_sanitaire
+		prerequisite = {
+			focus = KRG_ITA_1954_the_cordon_sanitaire
+		}
+		available = {
+			has_country_flag = KRG_ITA_1954_DC_PCdI_government
+		}
+		completion_reward = { }
+	}
+	focus = {
+		id = KRG_ITA_1954_cordon_the_legge_stralcio
+		icon = GFX_generic_agriculture3
+		cost = 5
+		x = -2
+		y = 2
+		relative_position_id = KRG_ITA_1954_the_cordon_sanitaire
+		prerequisite = {
+			focus = KRG_ITA_1954_cordon_fight_reds
+		}
+		available = {
+			has_country_flag = KRG_ITA_1954_DC_PCdI_government
+		}
+		bypass = {
+			hidden_trigger = {
+				OR = {
+					has_completed_focus = KRG_ITA_1954_progress_legge_stralcio
+					has_completed_focus = KRG_ITA_1954_sardinians_the_legge_stralcio
+				}
+			}
+		}
+		completion_reward = {
+			ITA_1954_legge_stralcio_effect = yes
+		}
+	}
+	focus = {
+		id = KRG_ITA_1954_cordon_protect_minorities
+		icon = GFX_generic_pass_legislation
+		cost = 5
+		x = 2
+		y = 2
+		relative_position_id = KRG_ITA_1954_the_cordon_sanitaire
+		prerequisite = {
+			focus = KRG_ITA_1954_cordon_fight_reds
+		}
+		available = {
+			has_country_flag = KRG_ITA_1954_DC_PCdI_government
+		}
+		completion_reward = { 
+			ITA_1954_protect_minority_languages = yes
+		}
+	}
+	focus = {
+		id = KRG_ITA_1954_cordon_crush_agrarian_unions
+		icon = GFX_generic_crush_unions
+		cost = 5
+		x = -1
+		y = 3
+		relative_position_id = KRG_ITA_1954_the_cordon_sanitaire
+		prerequisite = {
+			focus = KRG_ITA_1954_cordon_the_legge_stralcio
+		}
+		available = {
+			has_country_flag = KRG_ITA_1954_DC_PCdI_government
+			has_idea = ITA_agrarian_unions_in_the_field
+		}
+		bypass = {
+			hidden_trigger = {
+				has_completed_focus = KRG_ITA_1954_sardinians_crush_agricultural_cooperatives
+			}
+		}
+		completion_reward = {
+			ITA_agrarian_action_fuck_off = yes
+		}
+	}
+	focus = {
+		id = KRG_ITA_1954_cordon_call_to_italian_unity
+		icon = GFX_SRD_united
+		cost = 5
+		x = 1
+		y = 3
+		relative_position_id = KRG_ITA_1954_the_cordon_sanitaire
+		prerequisite = {
+			focus = KRG_ITA_1954_cordon_protect_minorities
+		}
+		available = {
+			has_country_flag = KRG_ITA_1954_DC_PCdI_government
+		}
+		completion_reward = { }
+	}
+	focus = {
+		id = KRG_ITA_1954_cordon_the_school_development_plan
+		icon = GFX_generic_double_research
+		cost = 5
+		x = 0
+		y = 2
+		relative_position_id = KRG_ITA_1954_the_cordon_sanitaire
+		prerequisite = {
+			focus = KRG_ITA_1954_cordon_fight_reds
+		}
+		available = {
+			has_country_flag = KRG_ITA_1954_DC_PCdI_government
+		}
+		bypass = {
+			hidden_trigger = {
+				OR = {
+					has_completed_focus = KRG_ITA_1954_progress_school_development_plan
+					has_completed_focus = KRG_ITA_1954_sardinians_the_school_development_plan
+				}
+			}
+		}
+		completion_reward = {
+			ITA_1954_school_develompent_plan_effect = yes
+		}
+	}
+	### DIPLO ###
+	focus = {
+		id = ITA_the_robert_affair
+		icon = GFX_DNF_Ottos_Note
+		cost = 10.00
+		available = {
+			has_country_flag = KRG_ITA_diplomacy_unlocked
+			has_montreal_idea_trigger = yes
+			DNF = {
+				exists = yes
+				NOT = {
+					has_war_with = ITA
+				}
+			}
+		}
+		bypass = {
+			has_montreal_idea_trigger = no
+		}
+		x = 35
+		y = 0
+		cancelable = no
+		select_effect = {
+			country_event = {
+				id = krg_ita_dnf.8
+				days = 20
+			}
+		}
+		completion_reward = {
+			add_stability = 0.1
+			country_event = krg_ita_dnf.11
+			clr_country_flag = robert_affair_ongoing
+			set_country_flag = nationalists_sidelined # for specific wk3 event
+		}
+	}
+	focus = {
+		id = ITA_the_villa_giusti_summit
+		icon = GFX_generic_castle
+		cost = 10.00
+		prerequisite = {
+			focus = ITA_the_robert_affair
+		}
+		available = {
+			has_montreal_idea_trigger = yes
+			DNF = {
+				exists = yes
+				NOT = {
+					has_war_with = ITA
+				}
+			}
+		}
+		relative_position_id = 	ITA_the_robert_affair
+		x = 0
+		y = 1
+		cancelable = no
+		select_effect = {
+			set_country_flag = villa_giusti_summit_ongoing
+			country_event = krg_ita_dnf.16
+		}
+		completion_reward = {
+			clr_country_flag = villa_giusti_summit_ongoing
+			effect_tooltip = {
+				if = {
+					limit = {
+						has_idea = ITA_montreal_agreement
+					}
+					remove_ideas = ITA_montreal_agreement
+				}
+				if = {
+					limit = {
+						has_idea = ITA_montreal_agreement_temp_bonus
+					}
+					remove_ideas = ITA_montreal_agreement_temp_bonus
+				}
+				if = {
+					limit = {
+						has_idea = ITA_montreal_agreement_bonus
+					}
+					remove_ideas = ITA_montreal_agreement_bonus
+				}
+			}
+			country_event = krg_ita_dnf.22
+		}
+	}
+	focus = {
+		id = ITA_third_pillar_of_accord
+		icon = GFX_SRD_three_pillars
+		cost = 5.00
+		prerequisite = {
+			focus = ITA_the_robert_affair
+		}
+		available = {
+			has_montreal_idea_trigger = no
+		}
+		relative_position_id = 	ITA_the_robert_affair
+		x = -2
+		y = 1
+		completion_reward = {
+			add_to_array = { global.accord_voting_major_country_array = ITA }
+			set_country_flag = accord_military_major_ai
+			custom_effect_tooltip = ENG_our_seat_at_the_table_tt
+			accord_screen_refresh = yes
+			add_war_support = 0.05
+			unlock_decision_tooltip = ITA_franco_italian_summit
+			unlock_decision_tooltip = ITA_ottawa_meeting
+			unlock_decision_tooltip = ITA_visit_greece
+			unlock_decision_tooltip = ITA_visit_australasia
+		}
+	}
+	focus = {
+		id = ITA_foreign_royal_tours
+		icon = GFX_SRD_house_of_savoy
+		cost = 5.00
+		prerequisite = {
+			focus = ITA_third_pillar_of_accord
+		}
+		available = {
+			has_country_leader = {
+				character = ITA_umberto_ii
+				ruling_only = yes
+			}
+			if = {
+				limit = {
+					has_idea = ITA_the_restoration_temp_bonus
+				}
+				NOT = {
+					has_idea = ITA_the_restoration_temp_bonus
+				}
+			}
+			else = {
+				NOT = {
+					has_idea = ITA_the_restoration
+				}
+			}
+		}
+		relative_position_id = 	ITA_the_robert_affair
+		x = -4
+		y = 2
+		completion_reward = {
+			add_popularity = {
+				ideology = revolutionary_republican
+				popularity = -0.01
+			}
+			add_stability = 0.05
+			unlock_decision_tooltip = ITA_royal_visit_britain
+			unlock_decision_tooltip = ITA_royal_tour_north_america
+			unlock_decision_tooltip = ITA_royal_visit_portugal
+			unlock_decision_tooltip = ITA_royal_visit_south_africa
+		}
+	}
+	focus = {
+		id = ITA_the_friends_of_freedom
+		icon = GFX_generic_Fight_for_Freedom
+		cost = 5.00
+		prerequisite = {
+			focus = ITA_third_pillar_of_accord
+		}
+		relative_position_id = 	ITA_the_robert_affair
+		x = -2
+		y = 2
+		completion_reward = {
+			custom_effect_tooltip = ITA_once_aranha_president
+			unlock_decision_tooltip = ITA_brazil_embassy
+			custom_effect_tooltip = ITA_once_bra_embassy_done
+			unlock_decision_tooltip = ITA_italo_brazilian_friendship_treaty
+			unlock_decision_tooltip = ITA_brazil_trade
+			unlock_decision_tooltip = ITA_brazil_arms
+			unlock_decision_tooltip = ITA_brazil_training
+			custom_effect_tooltip = ITA_once_chi_embassy_done
+			unlock_decision_tooltip = ITA_china_trade
+			unlock_decision_tooltip = ITA_china_arms
+			unlock_decision_tooltip = ITA_china_training
+			custom_effect_tooltip = ITA_once_fengtian_dead
+			unlock_decision_tooltip = ITA_italo_chinese_friendship_treaty
+		}
+	}
+	focus = {
+		id = ITA_anti_german_propaganda
+		icon = GFX_SAF_Denounce_Germany
+		cost = 5.00
+		prerequisite = {
+			focus = ITA_the_friends_of_freedom
+		}
+		relative_position_id = 	ITA_the_robert_affair
+		x = -3
+		y = 3
+		completion_reward = {
+		}
+	}
+	focus = {
+		id = ITA_follow_accordist_diplomacy
+		icon = GFX_generic_ratify_the_accord
+		cost = 5.00
+		prerequisite = {
+			focus = ITA_third_pillar_of_accord
+		}
+		relative_position_id = 	ITA_the_robert_affair
+		x = -1
+		y = 3
+		completion_reward = {
+			unlock_decision_tooltip = ITA_mission_to_psa
+			unlock_decision_tooltip = ITA_mission_to_guangzhou
+			unlock_decision_tooltip = ITA_mission_to_spain
+			unlock_decision_tooltip = ITA_recognise_norway
+		}
+	}
+	focus = {
+		id = ITA_the_new_redshirts
+		icon = GFX_SRD_Celebrate_Garibaldi
+		cost = 5.00
+		prerequisite = {
+			focus = ITA_the_friends_of_freedom
+		}
+		prerequisite = {
+			focus = ITA_follow_accordist_diplomacy
+		}
+		relative_position_id = 	ITA_the_robert_affair
+		x = -2
+		y = 4
+		completion_reward = {
+		}
+	}
+	focus = {
+		id = ITA_italys_grand_return
+		icon = GFX_focus_ITA_imperial_recognition
+		cost = 5.00
+		prerequisite = {
+			focus = ITA_the_robert_affair
+		}
+		available = {
+			has_montreal_idea_trigger = no
+		}
+		relative_position_id = 	ITA_the_robert_affair
+		x = 2
+		y = 1
+		completion_reward = {
+		}
+	}
+	focus = {
+		id = ITA_nee_garibaldi_guard
+		icon = GFX_NEE_army
+		cost = 5.00
+		prerequisite = {
+			focus = ITA_italys_grand_return
+		}
+		relative_position_id = 	ITA_the_robert_affair
+		available = {
+			has_global_flag = ACW_ongoing
+			custom_trigger_tooltip = {
+				tooltip = ACW_has_level_3_involvement
+				check_variable = {
+					global.ACW_involvement_level > 2
+				}
+			}
+		}
+		x = 1
+		y = 2
+		completion_reward = {
+			add_relation_modifier = {
+				target = NEE
+				modifier = volunteer_limit_plus_two
+			}
+		}
+	}
+	focus = {
+		id = ITA_our_role_in_the_east
+		icon = GFX_generic_reaffirm_asian_relations
+		cost = 5.00
+		prerequisite = {
+			focus = ITA_italys_grand_return
+		}
+		relative_position_id = 	ITA_the_robert_affair
+		x = 3
+		y = 2
+		completion_reward = {
+			unlock_decision_tooltip = ITA_india_embassy
+			custom_effect_tooltip = ITA_once_ind_embassy_done
+			unlock_decision_tooltip = ITA_italo_indian_friendship_treaty
+			unlock_decision_tooltip = ITA_india_trade
+			custom_effect_tooltip = ITA_if_guangzhou_falls
+			unlock_decision_tooltip = ITA_japan_embassy
+			custom_effect_tooltip = ITA_once_jap_embassy_done
+			unlock_decision_tooltip = ITA_italo_japanese_friendship_treaty
+			unlock_decision_tooltip = ITA_royal_visit_japan
+			unlock_decision_tooltip = ITA_japan_trade
+		}
+	}
+	focus = {
+		id = ITA_arabian_nights
+		icon = GFX_generic_unite_arabia
+		cost = 5.00
+		prerequisite = {
+			focus = ITA_italys_grand_return
+		}
+		relative_position_id = 	ITA_the_robert_affair
+		x = 2
+		y = 3
+		completion_reward = {
+		}
+	}
+	focus = {
+		id = ITA_form_agip
+		icon = GFX_generic_Further_Oil
+		cost = 5.00
+		prerequisite = {
+			focus = ITA_arabian_nights
+		}
+		relative_position_id = 	ITA_the_robert_affair
+		x = 1
+		y = 4
+		completion_reward = {
+		}
+	}
+	focus = {
+		id = ITA_our_counterweight_in_the_horn
+		icon = GFX_SOM_focus
+		cost = 5.00
+		prerequisite = {
+			focus = ITA_arabian_nights
+		}
+		relative_position_id = 	ITA_the_robert_affair
+		x = 3
+		y = 4
+		completion_reward = {
+		}
+	}
+	### MILITARY ###
+	focus = {
+		id = ITA_return_of_the_csigb
+		icon = GFX_CAN_home_isles
+		cost = 0
+		x = 22
+		y = 0
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = ITA_csigb_returned
+				always = no
+			}
+		}
+		completion_reward = {
+			army_experience = 25
+			air_experience = 25
+			add_doctrine_cost_reduction = {
+				cost_reduction = 0.5
+				category = land_doctrine
+			}
+		}
+	}
+	focus = {
+		id = ITA_CPC_expansion
+		icon = GFX_generic_investigation
+		cost = 5
+		x = 2
+		y = 0
+		available = {
+			has_country_flag = KRG_ITA_1949_elections_held
+		}
+		relative_position_id = ITA_return_of_the_csigb
+		completion_reward = {
+			country_event = krg_ita.83
+			add_war_support = 0.05
+			add_popularity = {
+				ideology = authoritarian_socialist
+				popularity = -0.05
+			}
+			add_popularity = {
+				ideology = paternal_autocrat
+				popularity = 0.01
+			}
+			add_popularity = {
+				ideology = national_populist
+				popularity = 0.02
+			}
+		}
+	}
+	focus = {
+		id = ITA_unify_the_ministries
+		icon = GFX_SRD_ministry_of_defence
+		cost = 8
+		x = -1
+		y = 1
+		relative_position_id = ITA_CPC_expansion
+		prerequisite = {
+			focus = ITA_CPC_expansion
+		}
+		prerequisite = {
+			focus = ITA_return_of_the_csigb
+		}
+		completion_reward = {
+			country_event = krg_ita.81
+		}
+	}
+	focus = {
+		id = ITA_air_force_modernisation_committee
+		icon = GFX_SRD_regia_aeronautica
+		cost = 5
+		x = -4
+		y = 1
+		relative_position_id = ITA_unify_the_ministries
+		prerequisite = {
+			focus = ITA_unify_the_ministries
+		}
+		completion_reward = {
+			add_doctrine_cost_reduction = {
+				cost_reduction = 0.5
+				category = air_doctrine
+				uses = 2
+			}
+			add_ideas = ITA_united_air_command
+		}
+	}
+	focus = {
+		id = ITA_air_force_bases_expansion
+		icon = GFX_generic_airports
+		cost = 5
+		x = -1
+		y = 1
+		relative_position_id = ITA_air_force_modernisation_committee
+		prerequisite = {
+			focus = ITA_air_force_modernisation_committee
+		}
+		completion_reward = {
+			air_experience = 25
+			random_owned_controlled_state = {
+				limit = {
+					is_core_of = ITA
+					is_demilitarized_zone = no
+				}
+				prioritize = {
+					158 159 162 909
+				}
+				add_building_construction = {
+					type = air_base
+					level = 2
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = anti_air_building
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_owned_controlled_state = {
+				limit = {
+					is_core_of = ITA
+					is_demilitarized_zone = no
+				}
+				prioritize = {
+					158 159 162 909
+				}
+				add_building_construction = {
+					type = air_base
+					level = 2
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = anti_air_building
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_owned_controlled_state = {
+				limit = {
+					is_core_of = ITA
+					is_demilitarized_zone = no
+				}
+				prioritize = {
+					158 159 162 909
+				}
+				add_building_construction = {
+					type = air_base
+					level = 2
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = anti_air_building
+					level = 2
+					instant_build = yes
+				}
+			}
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 2
+				category = missile_tech
+			}
+		}
+	}
+	focus = {
+		id = ITA_RADAR_bases
+		icon = GFX_generic_radar_instillation
+		cost = 5
+		x = -4
+		y = 2
+		relative_position_id = ITA_air_force_modernisation_committee
+		prerequisite = {
+			focus = ITA_air_force_bases_expansion
+		}
+		completion_reward = {
+			random_owned_controlled_state = {
+				limit = {
+					is_core_of = ITA
+					is_demilitarized_zone = no
+				}
+				prioritize = {
+					158 159 162 909
+				}
+				add_building_construction = {
+					type = radar_station
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_owned_controlled_state = {
+				limit = {
+					is_core_of = ITA
+					is_demilitarized_zone = no
+				}
+				prioritize = {
+					158 159 162 909
+				}
+				add_building_construction = {
+					type = radar_station
+					level = 2
+					instant_build = yes
+				}
+			}
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 3
+				category = radar_tech
+			}
+		}
+	}
+	focus = {
+		id = ITA_arma_offensiva
+		icon = GFX_generic_air_prioritize_bomber_force
+		cost = 5
+		x = -2
+		y = 2
+		relative_position_id = ITA_air_force_modernisation_committee
+		prerequisite = {
+			focus = ITA_air_force_bases_expansion
+		}
+		available = {
+			has_montreal_idea_trigger = no
+		}
+		completion_reward = {
+			add_ideas = ITA_arma_offensiva_idea
+			add_tech_bonus = {
+				name = ITA_arma_offensiva
+				uses = 1
+				bonus = 1
+				category = strategic_bomber_tech
+			}
+		}
+	}
+	focus = {
+		id = ITA_phase_out_c_205s
+		icon = GFX_generic_air_jet_2
+		cost = 5
+		x = -1
+		y = 3
+		relative_position_id = ITA_air_force_modernisation_committee
+		prerequisite = {
+			focus = ITA_air_force_bases_expansion
+		}
+		prerequisite = {
+			focus = ITA_fiat_ansaldo_contracts
+		}
+		completion_reward = {
+			add_timed_idea = {
+				idea = ITA_phase_out_c_205s_idea
+				days = 730
+			} 
+			add_tech_bonus = {
+				name = ITA_phase_out_c_205s
+				uses = 1
+				bonus = 1
+				category = light_air
+			}
+		}
+	}
+	focus = {
+		id = ITA_project_basilisk
+		icon = GFX_goal_generic_secret_weapon
+		cost = 5
+		x = -5
+		y = 3
+		relative_position_id = ITA_air_force_modernisation_committee
+		prerequisite = {
+			focus = ITA_arma_offensiva
+		}
+		completion_reward = {
+			add_tech_bonus = {
+				name = ITA_project_basilisk
+				uses = 1
+				bonus = 0.75
+				category = flamethrowers_tech
+			}
+			add_tech_bonus = {
+				name = ITA_project_basilisk
+				uses = 1
+				bonus = 0.75
+				category = biochemical_tech
+			}
+		}
+	}
+	focus = {
+		id = ITA_adra
+		icon = GFX_ITA_Arditi
+		cost = 5
+		x = -3
+		y = 3
+		relative_position_id = ITA_air_force_modernisation_committee
+		prerequisite = {
+			focus = ITA_arma_offensiva
+		}
+		completion_reward = {
+			add_tech_bonus = {
+				name = ITA_adra
+				uses = 1
+				bonus = 1
+				category = para_tech
+			}
+			custom_effect_tooltip = tech_better_paratroopers_effect
+			hidden_effect = {
+				set_technology = {
+					tech_better_paratroopers = 1
+				}
+			}
+		}
+	}
+	focus = {
+		id = ITA_command_of_the_air
+		icon = GFX_focus_generic_multi_role_aircraft
+		cost = 5
+		x = -2
+		y = 4
+		relative_position_id = ITA_air_force_modernisation_committee
+		prerequisite = {
+			focus = ITA_phase_out_c_205s
+		}
+		prerequisite = {
+			focus = ITA_arma_offensiva
+		}
+		completion_reward = {
+		}
+	}
+	focus = {
+		id = ITA_strategic_oil_reserve
+		icon = GFX_generic_Further_Oil
+		cost = 5
+		x = -2
+		y = 1
+		relative_position_id = ITA_unify_the_ministries
+		prerequisite = {
+			focus = ITA_unify_the_ministries
+		}
+		available = {
+			has_full_control_of_state = 161
+		}
+		completion_reward = {
+			161 = {
+				add_resource = {
+					type = oil
+					amount = 4
+				}
+				add_extra_state_shared_building_slots = 4
+				add_building_construction = {
+					type = fuel_silo
+					level = 2
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = synthetic_refinery
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+	focus = {
+		id = ITA_reorganise_the_resistance
+		icon = GFX_generic_conspiracy
+		cost = 5
+		x = 2
+		y = 1
+		relative_position_id = ITA_unify_the_ministries
+		prerequisite = {
+			focus = ITA_unify_the_ministries
+		}
+		completion_reward = {
+			delete_unit_template_and_units = {
+				division_template = "Formazione Autonoma Militare"
+				disband = yes
+			}
+			add_ideas = ITA_italian_liberty_army
+		}
+	}
+	focus = {
+		id = ITA_expand_stay_behind_operations
+		icon = GFX_generic_shadow_government
+		cost = 5
+		x = 2
+		y = 3
+		relative_position_id = ITA_unify_the_ministries
+		prerequisite = {
+			focus = ITA_reorganise_the_resistance
+		}
+		prerequisite = {
+			focus = ITA_review_army_leadership
+		}
+		available = {
+			ITA_giovanni_de_lorenzo = {
+				is_hired_as_advisor = yes
+			}
+		}
+		completion_reward = {
+			custom_effect_tooltip = ITA_this_is_a_bad_idea
+			swap_ideas = {
+				remove_idea = ITA_italian_liberty_army
+				add_idea = ITA_gladio
+			}
+		}
+	}
+	focus = {
+		id = ITA_review_army_leadership
+		icon = GFX_SRD_regio_esercito
+		cost = 5
+		x = 0
+		y = 1
+		relative_position_id = ITA_unify_the_ministries
+		prerequisite = {
+			focus = ITA_unify_the_ministries
+		}
+		completion_reward = {
+			ITA_giovanni_messe = {
+				unit_leader_event = {
+					id = krg_ita.106
+				}
+			}
+			effect_tooltip = {
+				remove_unit_leader_role = ITA_giovanni_messe
+			}
+			ITA_raffaele_cadorna = {
+				promote_leader = yes
+			}
+			remove_unit_leader_role = ITA_bruno_malaguti
+			remove_unit_leader_role = ITA_mario_roatta
+			remove_unit_leader_role = ITA_fedele_de_giorgis
+			ITA_amedeo_guillet = {
+				add_corps_commander_role = {
+					traits = { cavalry_officer cavalry_leader inspirational_leader trickster guerilla_fighter }
+					skill = 3
+					attack_skill = 1
+					defense_skill = 3
+					planning_skill = 2
+					logistics_skill = 4
+				}
+			}
+			ITA_antonio_gualano = {
+				add_corps_commander_role = {
+					traits = { infantry_officer organizer }
+					skill = 2
+					attack_skill = 1
+					defense_skill = 1
+					planning_skill = 2
+					logistics_skill = 3
+				}
+			}
+			ITA_giuseppe_izzo = {
+				add_corps_commander_role = {
+					traits = { infantry_officer commando paratrooper }
+					skill = 2
+					attack_skill = 3
+					defense_skill = 2
+					planning_skill = 1
+					logistics_skill = 1
+				}
+			}
+			ITA_antonio_scaramuzza = {
+				add_corps_commander_role = {
+					traits = { trait_mountaineer hill_fighter }
+					skill = 2
+					attack_skill = 1
+					defense_skill = 3
+					planning_skill = 2
+					logistics_skill = 1
+				}
+			}
+			ITA_ettore_musco = {
+				add_corps_commander_role = {
+					traits = { infantry_officer }
+					skill = 1
+					attack_skill = 1
+					defense_skill = 1
+					planning_skill = 1
+					logistics_skill = 1
+				}
+			}
+			ITA_aldo_rossi = {
+				add_corps_commander_role = {
+					traits = { artillery_officer }
+					skill = 1
+					attack_skill = 1
+					defense_skill = 1
+					planning_skill = 1
+					logistics_skill = 1
+				}
+			}
+			ITA_giovanni_de_lorenzo = {
+				add_corps_commander_role = {
+					traits = { trickster guerilla_fighter }
+					skill = 1
+					attack_skill = 1
+					defense_skill = 1
+					planning_skill = 1
+					logistics_skill = 1
+				}
+			}
+			add_doctrine_cost_reduction = {
+				cost_reduction = 0.5
+				category = land_doctrine
+				uses = 2
+			}
+		}
+	}
+	focus = {
+		id = ITA_collaborate_with_the_french
+		icon = GFX_focus_chi_reach_out_to_france
+		cost = 5
+		x = 6
+		y = 1
+		relative_position_id = ITA_unify_the_ministries
+		prerequisite = {
+			focus = ITA_unify_the_ministries
+		}
+		completion_reward = {
+			NFA = {
+				country_event = {
+					id = krg_ita.108
+					days = 2
+				}
+			}
+			custom_effect_tooltip = ITA_collaborate_with_the_french_tt
+			effect_tooltip = {
+				army_experience = 10
+				add_tech_bonus = {
+					bonus = 0.5
+					uses = 2
+					category = infantry_tech
+				}
+				add_tech_bonus = {
+					bonus = 0.5
+					uses = 1
+					category = armor
+				}
+				add_tech_bonus = {
+					bonus = 0.5
+					uses = 1
+					category = light_air
+				}
+				NFA = {
+					army_experience = 10
+					add_tech_bonus = {
+						bonus = 0.5
+						uses = 2
+						category = infantry_tech
+					}
+					add_tech_bonus = {
+						bonus = 0.5
+						uses = 1
+						category = armor
+					}
+					add_tech_bonus = {
+						bonus = 0.5
+						uses = 1
+						category = light_air
+					}
+				}
+			}
+		}
+	}
+	focus = {
+		id = ITA_form_the_sifar
+		icon = GFX_generic_secret_agents
+		cost = 5
+		x = 1
+		y = 2
+		relative_position_id = ITA_unify_the_ministries
+		prerequisite = {
+			focus = ITA_reorganise_the_resistance
+		}
+		prerequisite = {
+			focus = ITA_review_army_leadership
+		}
+		completion_reward = {
+			ITA_Luigi_Chatrian_intel = {
+				if = {
+					limit = {
+						has_advisor_role = head_of_intel
+					}
+					remove_advisor_role = {
+						slot = head_of_intel
+					}
+				}
+			}
+			custom_effect_tooltip = ITA_form_the_sifar_tt
+			hidden_effect = {
+				if = {
+					limit = { has_dlc = "La Resistance" }
+					if = {
+						limit = { has_intelligence_agency = yes }
+						add_political_power = 50
+					}
+					else = {
+						create_intelligence_agency = {
+							icon = GFX_intelligence_agency_logo_ita
+							name = "Servizio Informazioni Forze Armate"
+						}
+					}
+				}
+				else = {
+					add_ideas = ITA_SIFAR_idea
+				}
+			}
+		}
+	}
+	focus = {
+		id = ITA_alpini_darresto
+		icon = GFX_ITA_Alpini
+		cost = 5
+		x = -1
+		y = 2
+		relative_position_id = ITA_unify_the_ministries
+		prerequisite = {
+			focus = ITA_review_army_leadership
+		}
+		completion_reward = {
+			add_ideas = ITA_alpini_darresto_idea
+			159 = {
+				custom_effect_tooltip = ITA_alpini_darresto_tt
+			}
+			add_tech_bonus  = {
+				bonus = 0.5
+				uses = 1
+				category = mountaineers_tech
+			}
+			hidden_effect = {
+				if = {
+					limit = { NOT = { has_template = "Divisione Alpina" } }
+					division_template = {
+						name = "Divisione Alpina"
+						division_names_group = ITA_MNT_01
+						regiments = {
+							mountaineers = { x = 0 y = 0 }
+							mountaineers = { x = 0 y = 1 }
+							mountaineers = { x = 0 y = 2 }
+							mountaineers = { x = 1 y = 0 }
+							mountaineers = { x = 1 y = 1 }
+							mountaineers = { x = 1 y = 2 }
+							mountaineers = { x = 2 y = 0 }
+							mountaineers = { x = 2 y = 1 }
+							mountaineers = { x = 2 y = 2 }
+							artillery_brigade = { x = 3 y = 0 }
+							artillery_brigade = { x = 3 y = 1 }
+							artillery_brigade = { x = 3 y = 2 }
+						}
+						support = {
+							field_hospital = { x = 0 y = 0 }
+							engineer = { x = 0 y = 1 }
+							signal_company = { x = 0 y = 2 }
+							maintenance_company = { x = 0 y = 3 }
+							recon = { x = 0 y = 4 }
+						}
+						priority = 2
+					}
+				}
+				159 = {
+					create_unit = {
+						division = "division_template = \"Divisione Alpina\" start_experience_factor = 0.15 start_equipment_factor = 1.0"
+						owner = ROOT
+					}
+				}
+			}
+		}
+	}
+	focus = {
+		id = ITA_fanteria_darresto
+		icon = GFX_generic_army_guard
+		cost = 5
+		x = 0
+		y = 3
+		relative_position_id = ITA_unify_the_ministries
+		prerequisite = {
+			focus = ITA_review_army_leadership
+		}
+		completion_reward = {
+			add_tech_bonus  = {
+				bonus = 0.5
+				uses = 2
+				category = infantry_tech
+			}
+			if = {
+				limit = {
+					OR = {
+						ITA_luigi_efisio_marras = { is_hired_as_advisor = yes }
+						has_idea = ITA_fanteria_darresto_better_idea
+					}
+				}
+				add_ideas = ITA_fanteria_darresto_better_idea
+			}
+			else = {
+				add_ideas = ITA_fanteria_darresto_idea
+				custom_effect_tooltip = ITA_if_we_have_marras
+				effect_tooltip = {
+					swap_ideas = {
+						remove_idea = ITA_fanteria_darresto_idea
+						add_idea = ITA_fanteria_darresto_better_idea
+					}
+				}
+			}
+		}
+	}
+	focus = {
+		id = ITA_motorisation_drive
+		icon = GFX_focus_generic_truck
+		cost = 5
+		x = -1
+		y = 4
+		relative_position_id = ITA_unify_the_ministries
+		prerequisite = {
+			focus = ITA_fanteria_darresto
+		}
+		prerequisite = {
+			focus = ITA_alpini_darresto
+		}
+		completion_reward = {
+			add_tech_bonus  = {
+				bonus = 0.5
+				uses = 1
+				category = mechanized_equipment
+			}
+			if = {
+				limit = {
+					has_idea = ITA_fanteria_darresto_better_idea
+				}
+				swap_ideas = {
+					remove_idea = ITA_fanteria_darresto_better_idea
+					add_idea = ITA_fanteria_darresto_2_better_idea
+				}
+			}
+			else = {
+				swap_ideas = {
+					remove_idea = ITA_fanteria_darresto_idea
+					add_idea = ITA_fanteria_darresto_2_idea
+				}
+			}
+		}
+	}
+	focus = {
+		id = ITA_expand_val_trompia
+		icon = GFX_focus_generic_reorient_production
+		cost = 5
+		x = -3
+		y = 2
+		relative_position_id = ITA_unify_the_ministries
+		prerequisite = {
+			focus = ITA_review_army_leadership
+		}
+		available = {
+			has_full_control_of_state = 159
+		}
+		completion_reward = {
+			add_tech_bonus  = { 
+				bonus = 1
+				uses = 2
+				category = infantry_weapons
+			}
+			159 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+	focus = {
+		id = ITA_fiat_ansaldo_contracts
+		icon = GFX_focus_ITA_fiat_ansaldo_duopoly
+		cost = 5
+		x = -4
+		y = 3
+		relative_position_id = ITA_unify_the_ministries
+		prerequisite = {
+			focus = ITA_expand_val_trompia
+		}
+		available = {
+			has_full_control_of_state = 158
+			has_full_control_of_state = 907
+		}
+		completion_reward = {
+			158 = {
+				add_extra_state_shared_building_slots = 3
+				add_building_construction = {
+					type = arms_factory
+					level = 3
+					instant_build = yes
+				}
+			}
+			907 = {
+				add_extra_state_shared_building_slots = 3
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = dockyard
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+	focus = {
+		id = ITA_study_combined_arms
+		icon = GFX_focus_generic_combined_arms
+		cost = 5
+		x = -2
+		y = 3
+		relative_position_id = ITA_unify_the_ministries
+		prerequisite = {
+			focus = ITA_review_army_leadership
+		}
+		completion_reward = {
+			add_doctrine_cost_reduction = {
+				cost_reduction = 0.5
+				category = land_doctrine
+				uses = 3
+			}
+			if = {
+				limit = {
+					OR = {
+						ITA_raffaele_cadorna = { is_hired_as_advisor = yes }
+						has_idea = ITA_basics_of_combined_arms_idea
+					}
+				}
+				add_ideas = ITA_basics_of_combined_arms_idea
+			}
+			else = {
+				custom_effect_tooltip = ITA_if_we_have_cadorna_tt
+				effect_tooltip = {
+					add_ideas = ITA_basics_of_combined_arms_idea
+				}
+			}
+		}
+	}
+	focus = {
+		id = ITA_ferrea_mole
+		icon = GFX_focus_ITA_ferrea_mole_ferreo_cuore
+		cost = 5
+		x = -3
+		y = 4
+		relative_position_id = ITA_unify_the_ministries
+		prerequisite = {
+			focus = ITA_study_combined_arms
+		}
+		prerequisite = {
+			focus = ITA_fiat_ansaldo_contracts
+		}
+		completion_reward = {
+			if = {
+				limit = {
+					has_idea = ITA_basics_of_combined_arms_idea
+				}
+				swap_ideas = {
+					remove_idea = ITA_basics_of_combined_arms_idea
+					add_idea = ITA_combined_arms_idea_2
+				}
+			}
+			else = {
+				add_ideas = ITA_combined_arms_idea
+			}
+			162 = {
+				custom_effect_tooltip = ITA_ferrea_mole_tt
+			}
+			add_tech_bonus  = { 
+				bonus = 1
+				uses = 2
+				category = armor
+			}
+			hidden_effect = {
+				if = {
+					limit = { NOT = { has_template = "Divisione Corazzata" } }
+					division_template = {
+						name = "Divisione Corazzata"
+						division_names_group = ITA_ARM_01
+						regiments = {
+							modern_armor = { x = 0 y = 0 }
+							modern_armor = { x = 0 y = 1 }
+							modern_armor = { x = 0 y = 2 }
+							modern_sp_artillery_brigade = { x = 0 y = 3 }
+							mot_artillery_brigade = { x = 1 y = 0 }
+							mot_artillery_brigade = { x = 1 y = 1 }
+							mot_artillery_brigade = { x = 1 y = 2 }
+							motorized = { x = 2 y = 0 }
+							motorized = { x = 2 y = 1 }
+							motorized = { x = 2 y = 2 }
+						}
+						support = {
+							engineer = { x = 0 y = 0 }
+							field_hospital = { x = 0 y = 1 }
+							military_police = { x = 0 y = 2 }
+							mot_recon = { x = 0 y = 3 }
+							logistics_company = { x = 0 y = 4 }
+						}
+					}
+				}
+				162 = {
+					create_unit = {
+						division = "division_template = \"Divisione Corazzata\" start_experience_factor = 0.15 start_equipment_factor = 1.0"
+						owner = ROOT
+					}
+				}
+			}
+		}
+	}
+	focus = {
+		id = ITA_build_the_ridotti
+		icon = GFX_goal_generic_construct_military
+		cost = 5
+		x = 1
+		y = 4
+		relative_position_id = ITA_unify_the_ministries
+		prerequisite = {
+			focus = ITA_fanteria_darresto
+		}
+		available = {
+			has_montreal_idea_trigger = no
+		}
+		completion_reward = {
+			unlock_decision_category_tooltip = ITA_new_defense_lines
+		}
+	}
+	focus = {
+		id = ITA_pulling_our_weight
+		icon = GFX_focus_generic_full_social_mobilization
+		cost = 5
+		x = -1
+		y = 5
+		relative_position_id = ITA_unify_the_ministries
+		prerequisite = {
+			focus = ITA_motorisation_drive
+		}
+		prerequisite = {
+			focus = ITA_ferrea_mole
+		}
+		available = {
+			has_montreal_idea_trigger = no
+		}
+		completion_reward = {
+			add_doctrine_cost_reduction = {
+				cost_reduction = 0.5
+				category = land_doctrine
+				uses = 3
+			}
+			custom_effect_tooltip = ITA_pulling_weight_merge_ideas_tooltip
+			if = {
+				limit = {
+					ITA_giuseppe_mancinelli = { is_hired_as_advisor = yes }
+				}
+				custom_effect_tooltip = ITA_pulling_weight_mancinelli_effect_tooltip
+				hidden_effect = {
+					if = {
+						limit = {
+							has_idea = ITA_combined_arms_idea_2
+							has_idea = ITA_fanteria_darresto_2_better_idea
+						}
+						remove_ideas = {
+							ITA_alpini_darresto_idea
+							ITA_combined_arms_idea_2
+							ITA_fanteria_darresto_2_better_idea
+						}
+						add_ideas = ITA_regio_esercito_marras_cadorna_mancinelli_idea
+					}
+					else_if = {
+						limit = {
+							has_idea = ITA_combined_arms_idea_2
+						}
+						remove_ideas = {
+							ITA_alpini_darresto_idea
+							ITA_combined_arms_idea_2
+							ITA_fanteria_darresto_2_idea
+						}
+						add_ideas = ITA_regio_esercito_cadorna_mancinelli_idea
+					}
+					else_if = {
+						limit = {
+							has_idea = ITA_fanteria_darresto_2_better_idea
+						}
+						remove_ideas = {
+							ITA_alpini_darresto_idea
+							ITA_combined_arms_idea
+							ITA_fanteria_darresto_2_better_idea
+						}
+						add_ideas = ITA_regio_esercito_marras_mancinelli_idea
+					}
+					else = {
+						remove_ideas = {
+							ITA_alpini_darresto_idea
+							ITA_combined_arms_idea
+							ITA_fanteria_darresto_2_idea
+						}
+						add_ideas = ITA_regio_esercito_mancinelli_idea
+					}
+				}
+			}
+			else = {
+				custom_effect_tooltip = ITA_pulling_weight_effect_tooltip
+				custom_effect_tooltip = ITA_if_we_have_mancinelli_tt
+				effect_tooltip = {
+					swap_ideas = {
+						remove_idea = ITA_regio_esercito_base_idea
+						add_idea = ITA_regio_esercito_mancinelli_idea
+					}
+				}
+				hidden_effect = {
+					if = {
+						limit = {
+							has_idea = ITA_combined_arms_idea_2
+							has_idea = ITA_fanteria_darresto_2_better_idea
+						}
+						remove_ideas = {
+							ITA_alpini_darresto_idea
+							ITA_combined_arms_idea_2
+							ITA_fanteria_darresto_2_better_idea
+						}
+						add_ideas = ITA_regio_esercito_marras_cadorna_idea
+					}
+					else_if = {
+						limit = {
+							has_idea = ITA_combined_arms_idea_2
+						}
+						remove_ideas = {
+							ITA_alpini_darresto_idea
+							ITA_combined_arms_idea_2
+							ITA_fanteria_darresto_2_idea
+						}
+						add_ideas = ITA_regio_esercito_cadorna_idea
+					}
+					else_if = {
+						limit = {
+							has_idea = ITA_fanteria_darresto_2_better_idea
+						}
+						remove_ideas = {
+							ITA_alpini_darresto_idea
+							ITA_combined_arms_idea
+							ITA_fanteria_darresto_2_better_idea
+						}
+						add_ideas = ITA_regio_esercito_marras_idea
+					}
+					else = {
+						remove_ideas = {
+							ITA_alpini_darresto_idea
+							ITA_combined_arms_idea
+							ITA_fanteria_darresto_2_idea
+						}
+						add_ideas = ITA_regio_esercito_base_idea
+					}
+				}
+			}
+		}
+	}
+	focus = {
+		id = ITA_famed_initiative
+		icon = GFX_FRA_famed
+		cost = 5
+		x = 5
+		y = 2
+		relative_position_id = ITA_unify_the_ministries
+		prerequisite = {
+			focus = ITA_collaborate_with_the_french
+		}
+		available = {
+			has_montreal_idea_trigger = no
+		}
+		bypass = {	
+			NFA = {
+				has_completed_focus = NFA_form_the_FAMED
+			}
+		}
+		completion_reward = { 
+			custom_effect_tooltip = NO_FAMED
+			hidden_effect = { #Unide this after the Italy Rework releases
+				set_country_flag = ITA_FAMED_formed
+				NFA = {
+					country_event ={ 
+						id = krg_famed.0
+					}
+				}
+			}
+		}
+	}
+	focus = {
+		id = KRG_ITA_the_regia_marina
+		icon = GFX_SRD_regia_marina
+		cost = 5
+		x = 27
+		y = 2
+		prerequisite = {
+			focus = ITA_unify_the_ministries
+		}
+		completion_reward = {
+			add_ideas = ITA_navy_command
+		}
+	}
+	focus = {
+		id = KRG_ITA_modernising_the_caio_duilio_class
+		icon = GFX_generic_naval_battleship2
+		cost = 5
+		x = 0
+		y = 2
+		dynamic = yes
+		relative_position_id = KRG_ITA_the_regia_marina
+		available = {
+		}
+		prerequisite = {
+			focus = KRG_ITA_integrate_former_socialist_vessels
+		}
+		completion_reward = {
+			unlock_decision_category_tooltip = ITA_navy_modernization_program
+			add_timed_idea = {
+				idea = ITA_naval_modernisation_program
+				days = 500
+			}
+		}
+	}
+	focus = {
+		id = KRG_ITA_integrate_former_socialist_vessels
+		icon = GFX_goal_continuous_naval_production
+		cost = 5
+		x = -1
+		y = 1
+		relative_position_id = KRG_ITA_the_regia_marina
+		available = {
+		}
+		prerequisite = {
+			focus = KRG_ITA_the_regia_marina
+		}
+		completion_reward = {
+			navy_experience = 10
+			unlock_decision_category_tooltip = ITA_red_navy_integration_program
+		}
+	}
+	focus = {
+		id = KRG_ITA_work_with_ansaldo
+		icon = GFX_generic_navy_decision
+		cost = 5
+		x = -1
+		y = 3
+		relative_position_id = KRG_ITA_the_regia_marina
+		available = {
+		}
+		prerequisite = {
+			focus = KRG_ITA_modernising_the_caio_duilio_class
+		}
+		completion_reward = {
+			907 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = dockyard
+					level = 2
+				}
+			}
+			162 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = dockyard
+					level = 2
+				}
+			}
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 1
+				category = cv_tech
+			}
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 1
+				category = ca_tech
+			}
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 1
+				category = bb_tech
+			}
+		}
+	}
+	focus = {
+		id = KRG_ITA_control_mediterranean
+		icon = GFX_goal_generic_navy_doctrines_tactics
+		cost = 5
+		x = 1
+		y = 3
+		dynamic = yes
+		relative_position_id = KRG_ITA_the_regia_marina
+		available = {
+		}
+		prerequisite = {
+			focus = KRG_ITA_modernising_the_caio_duilio_class
+		}
+		completion_reward = {
+			add_doctrine_cost_reduction = {
+				cost_reduction = 0.75
+				uses = 2
+				category = cat_blue_water_navy
+			}
+		}
+	}
+	focus = {
+		id = KRG_ITA_first_carrier
+		icon = GFX_generic_naval_light_carrier2
+		cost = 5
+		x = 0
+		y = 4
+		dynamic = yes
+		relative_position_id = KRG_ITA_the_regia_marina
+		available = {
+		}
+		prerequisite = {
+			focus = KRG_ITA_control_mediterranean
+		}
+		prerequisite = {
+			focus = KRG_ITA_work_with_ansaldo
+		}
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = ITA_navy_command
+				add_idea = ITA_navy_command_2
+			}
+		}
+	}
+	focus = {
+		id = KRG_ITA_expand_mariassalto
+		icon = GFX_DNF_frogman
+		cost = 5
+		x = 2
+		y = 2
+		relative_position_id = KRG_ITA_the_regia_marina
+		available = {
+		}
+		prerequisite = {
+			focus = KRG_ITA_integrate_former_socialist_vessels
+		}
+		completion_reward = {
+			custom_effect_tooltip = KRG_ITA_expand_mariassalto_tt
+			hidden_effect = {
+				division_template = {
+					name = "Divisione di Fanteria di Marina"
+					division_names_group = ITA_INF_01
+					priority = 2
+					template_counter = 0
+					regiments = {
+						marine = { x = 0 y = 0 }
+						marine = { x = 0 y = 1 }
+						marine = { x = 0 y = 2 }
+						marine = { x = 0 y = 3 }
+						marine = { x = 1 y = 0 }
+						marine = { x = 1 y = 1 }
+						marine = { x = 1 y = 2 }
+						marine = { x = 1 y = 3 }
+					}
+				}
+				907 = {
+					create_unit = {
+						division = "name = \"1a Divisione di Fanteria di Marina\" division_template = \"Divisione di Fanteria di Marina\" start_experience_factor = 0.5 start_equipment_factor = 1.0"
+						owner = ITA
+					}
+				}
+			}
+		}
+	}
+	focus = {
+		id = KRG_ITA_the_restagno_report
+		icon = GFX_generic_economic_report
+		cost = 0
+		x = 45
+		y = 0
+		available = {
+			hidden_trigger = {
+				always = no
+			}
+			has_country_flag = ITA_commission_report_done
+		}
+		completion_reward = {
+			custom_effect_tooltip = ITA_bypass_focus_tt
+		}
+	}
+	focus = {
+		id = KRG_ITA_save_banca_italianissima
+		icon = GFX_generic_loans
+		cost = 5
+		x = -2
+		y = 1
+		relative_position_id = KRG_ITA_the_restagno_report
+		prerequisite = {
+			focus = KRG_ITA_the_restagno_report
+		}
+		completion_reward = {
+			KRG_ITA_help_banks = yes
+		}
+	}
+	focus = {
+		id = KRG_ITA_consolidate_the_reconstruction_commissariat
+		icon = GFX_generic_bricks
+		cost = 5
+		x = 0
+		y = 1
+		relative_position_id = KRG_ITA_the_restagno_report
+		prerequisite = {
+			focus = KRG_ITA_the_restagno_report
+		}
+		completion_reward = {
+			KRG_ITA_help_reconstruction = yes
+		}
+	}
+	focus = {
+		id = KRG_ITA_take_over_aosta_railway
+		icon = GFX_generic_railroad_treaty
+		cost = 5
+		x = 2
+		y = 1
+		relative_position_id = KRG_ITA_the_restagno_report
+		prerequisite = {
+			focus = KRG_ITA_the_restagno_report
+		}
+		completion_reward = {
+			KRG_ITA_help_railways = yes
+		}
+	}
+	focus = {
+		id = KRG_ITA_restore_the_reconstruction_institute
+		icon = GFX_generic_economic_control
+		cost = 5
+		x = -1
+		y = 2
+		relative_position_id = KRG_ITA_the_restagno_report
+		available = {
+			if = {
+				limit = {
+					NOT = {
+						has_global_flag = WK3
+					}
+				}
+				has_completed_focus = ITA_the_robert_affair
+			}
+		}
+		prerequisite = {
+			focus = KRG_ITA_save_banca_italianissima
+		}
+		prerequisite = {
+			focus = KRG_ITA_consolidate_the_reconstruction_commissariat
+		}
+		prerequisite = {
+			focus = KRG_ITA_take_over_aosta_railway
+		}
+		mutually_exclusive = {
+			focus = KRG_ITA_a_hands_off_approach
+		}
+		completion_reward = {
+			unlock_decision_category_tooltip = ITA_IRI_estabilished
+			custom_effect_tooltip = KRG_ITA_restore_the_reconstruction_institute_tt
+			add_to_variable = { IRI_funds = 20 }
+			set_country_flag = ITA_rbs_to_refund
+			custom_effect_tooltip = KRG_ITA_hands_off_approach_tt
+			mark_focus_tree_layout_dirty = yes
+		}
+	}
+	focus = {
+		id = KRG_ITA_a_hands_off_approach
+		icon = GFX_generic_positive_trade_relations_gold
+		cost = 5
+		x = 1
+		y = 2
+		relative_position_id = KRG_ITA_the_restagno_report
+		available = {
+			if = {
+				limit = {
+					NOT = {
+						has_global_flag = WK3
+					}
+				}
+				NOT = {
+					has_completed_focus = ITA_the_robert_affair
+				}
+			}
+		}
+		prerequisite = {
+			focus = KRG_ITA_save_banca_italianissima
+		}
+		prerequisite = {
+			focus = KRG_ITA_take_over_aosta_railway
+		}
+		prerequisite = {
+			focus = KRG_ITA_consolidate_the_reconstruction_commissariat
+		}
+		mutually_exclusive = {
+			focus = KRG_ITA_restore_the_reconstruction_institute
+		}
+		completion_reward = {
+			unlock_decision_category_tooltip = ITA_agnelli_recovery_plan
+			set_variable = { ita_agnelli_industry_decisions_cost = 50 }
+			set_variable = { ita_agnelli_cost_increase = 50 }
+		}
+	}
+	focus = {
+		id = KRG_ITA_issue_industrial_bonds
+		icon = GFX_generic_bill
+		cost = 5
+		x = -1
+		y = 1
+		relative_position_id = KRG_ITA_restore_the_reconstruction_institute
+		allow_branch = {
+			has_completed_focus = KRG_ITA_restore_the_reconstruction_institute
+		}
+		prerequisite = {
+			focus = KRG_ITA_restore_the_reconstruction_institute
+		}
+		completion_reward = {
+			custom_effect_tooltip = ITA_bonds_campaigns
+		}
+	}
+	focus = {
+		id = KRG_ITA_create_the_BIN
+		icon = GFX_generic_constitutional_guarantees
+		cost = 5
+		x = 1
+		y = 1
+		relative_position_id = KRG_ITA_restore_the_reconstruction_institute
+		allow_branch = {
+			has_completed_focus = KRG_ITA_restore_the_reconstruction_institute
+		}
+		available = {
+		}
+		prerequisite = {
+			focus = KRG_ITA_restore_the_reconstruction_institute
+		}
+		completion_reward = {
+			move_up_business_spending = yes
+			unlock_decision_tooltip = ITA_nationalise_the_banco_italiano_di_sconto
+			unlock_decision_tooltip = ITA_nationalise_the_cassa_di_risparmio_di_torino
+			unlock_decision_tooltip = ITA_nationalise_the_banca_della_valle_d_aosta
+			unlock_decision_tooltip = ITA_nationalise_the_istituto_di_credito_agrario
+		}
+	}
+	focus = {
+		id = KRG_ITA_control_confindustria
+		icon = GFX_generic_controlled_board
+		cost = 5
+		x = 3
+		y = 1
+		relative_position_id = KRG_ITA_restore_the_reconstruction_institute
+		allow_branch = {
+			has_completed_focus = KRG_ITA_restore_the_reconstruction_institute
+		}
+		prerequisite = {
+			focus = KRG_ITA_restore_the_reconstruction_institute
+		}
+		completion_reward = {
+			add_war_support = 0.05
+			custom_effect_tooltip = KRG_ITA_give_10_bn_lire_to_iri_and_15_to_railway
+			add_to_variable = {
+				var = Railway_funds
+				value = 15
+			}
+			add_to_variable = {
+				var = IRI_funds
+				value = 10
+			}
+		}
+	}
+	focus = {
+		id = KRG_ITA_intervene_maritime_sector
+		icon = GFX_goal_generic_construct_naval_dockyard
+		cost = 5
+		x = -4
+		y = 2
+		relative_position_id = KRG_ITA_restore_the_reconstruction_institute
+		prerequisite = {
+			focus = KRG_ITA_issue_industrial_bonds
+		}
+		completion_reward = {
+			KRG_ITA_help_reconstruction = yes
+			unlock_decision_tooltip = ITA_intervene_ansaldo
+			unlock_decision_tooltip = ITA_intervene_odero
+		}
+	}
+	focus = {
+		id = KRG_ITA_intervene_military_sector
+		icon = GFX_generic_demobilise_guns
+		cost = 5
+		x = -2
+		y = 2
+		relative_position_id = KRG_ITA_restore_the_reconstruction_institute
+		prerequisite = {
+			focus = KRG_ITA_issue_industrial_bonds
+		}
+		completion_reward = {
+			KRG_ITA_help_reconstruction = yes
+			unlock_decision_tooltip = ITA_intervene_aermacchi
+			unlock_decision_tooltip = ITA_intervene_fiat
+		 }
+	}
+	focus = {
+		id = KRG_ITA_intervene_civilian_sector
+		icon = GFX_generic_demobilise_econ
+		cost = 5
+		x = 0
+		y = 2
+		relative_position_id = KRG_ITA_restore_the_reconstruction_institute
+		prerequisite = {
+			focus = KRG_ITA_issue_industrial_bonds
+		}
+		prerequisite = {
+			focus = KRG_ITA_create_the_BIN
+		}
+		completion_reward = {
+			KRG_ITA_help_reconstruction = yes
+			unlock_decision_tooltip = ITA_intervene_oto
+			unlock_decision_tooltip = ITA_intervene_ilva
+		 }
+	}
+	focus = {
+		id = KRG_ITA_a_new_bank_of_italy
+		icon = GFX_SRD_piazza_alfari
+		cost = 5
+		x = -1
+		y = 3
+		relative_position_id = KRG_ITA_restore_the_reconstruction_institute
+		available = {
+			has_country_flag = ITA_nationalised_banco_italiano_di_sconto
+			has_country_flag = ITA_nationalised_cassa_di_risparmio_di_torino
+			has_country_flag = ITA_nationalised_banca_della_valle_d_aosta
+			has_country_flag = ITA_nationalised_istituto_di_credito_agrario
+			custom_trigger_tooltip = {
+				tooltip = ITA_refunded_RBS
+				NOT = {
+					has_country_flag = ITA_rbs_to_refund
+				}
+			}
+		}
+		prerequisite = {
+			focus = KRG_ITA_issue_industrial_bonds
+		}
+		completion_reward = {
+			KRG_ITA_help_banks = yes
+		}
+	}
+	focus = {
+		id = KRG_ITA_form_finmare
+		icon = GFX_goal_generic_build_navy
+		cost = 5
+		x = -2
+		y = 5
+		relative_position_id = KRG_ITA_restore_the_reconstruction_institute
+		available = {
+		}
+		prerequisite = {
+			focus = KRG_ITA_a_new_bank_of_italy
+		}
+		completion_reward = { 
+			907 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = dockyard
+					level = 2
+				}
+			}
+			162 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = dockyard
+					level = 2
+				}
+			}
+		}
+	}
+	focus = {
+		id = KRG_ITA_form_finsider
+		icon = GFX_generic_construction_krg
+		cost = 5
+		x = 0
+		y = 5
+		relative_position_id = KRG_ITA_restore_the_reconstruction_institute
+		available = {
+		}
+		prerequisite = {
+			focus = KRG_ITA_a_new_bank_of_italy
+		}
+		completion_reward = { 
+			159 ={
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+				}
+			}
+			158 ={
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+				}
+			}
+		}
+	}
+	focus = {
+		id = KRG_ITA_attract_foreign_investment
+		icon = GFX_generic_foreign_investments
+		cost = 5
+		x = -3
+		y = 4
+		relative_position_id = KRG_ITA_restore_the_reconstruction_institute
+		available = {
+		}
+		prerequisite = {
+			focus = KRG_ITA_a_new_bank_of_italy
+		}
+		completion_reward = { 
+			add_ideas = ITA_foreign_investment
+		}
+	}
+	focus = {
+		id = KRG_ITA_estabilish_fnac
+		icon = GFX_generic_military_academy
+		cost = 5
+		x = -1
+		y = 4
+		relative_position_id = KRG_ITA_restore_the_reconstruction_institute
+		available = {
+		}
+		prerequisite = {
+			focus = KRG_ITA_a_new_bank_of_italy
+		}
+		completion_reward = { 
+			2 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+				}
+			}
+			908 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+				}
+			}
+		}
+	}
+	focus = {
+		id = KRG_ITA_encourage_foreign_investment
+		icon = GFX_generic_foreign_investments
+		cost = 5
+		x = -1
+		y = 1
+		relative_position_id = KRG_ITA_restore_the_reconstruction_institute
+		allow_branch = {
+			NOT = {
+				has_completed_focus = KRG_ITA_restore_the_reconstruction_institute
+			}
+		}
+		prerequisite = {
+			focus = KRG_ITA_a_hands_off_approach
+		}
+		completion_reward = {
+			custom_effect_tooltip = KRG_ITA_encourage_foreign_investment_tt
+		}
+	}
+	focus = {
+		id = KRG_ITA_restore_genova_finance
+		icon = GFX_SRD_piazza_alfari
+		cost = 5
+		x = 1
+		y = 1
+		relative_position_id = KRG_ITA_restore_the_reconstruction_institute
+		allow_branch = {
+			NOT = {
+				has_completed_focus = KRG_ITA_restore_the_reconstruction_institute
+			}
+		}
+		prerequisite = {
+			focus = KRG_ITA_a_hands_off_approach
+		}
+		completion_reward = {
+			add_to_variable = { ita_agnelli_cost_increase = -10 }
+			move_up_business_spending = yes
+			custom_effect_tooltip = KRG_ITA_restore_genova_finance_tt
+		}
+	}
+	focus = {
+		id = KRG_ITA_embrace_fordism
+		icon = GFX_generic_crush_unions
+		cost = 5
+		x = 3
+		y = 1
+		relative_position_id = KRG_ITA_restore_the_reconstruction_institute
+		allow_branch = {
+			NOT = {
+				has_completed_focus = KRG_ITA_restore_the_reconstruction_institute
+			}
+		}
+		prerequisite = {
+			focus = KRG_ITA_a_hands_off_approach
+		}
+		completion_reward = {
+			custom_effect_tooltip = KRG_ITA_embrace_fordism_tt
+			set_variable = { ita_agnelli_cost_decrease = 20 }
+		}
+	}
+	focus = {
+		id = KRG_ITA_agnelli_bases_for_the_accord
+		icon = GFX_generic_ship_destroyer
+		dynamic = yes
+		cost = 5
+		x = -4
+		y = 2
+		relative_position_id = KRG_ITA_restore_the_reconstruction_institute
+		prerequisite = {
+			focus = KRG_ITA_encourage_foreign_investment
+		}
+		available = {
+			has_completed_focus = ITA_famed_initiative
+		}
+		completion_reward = {
+			KRG_ITA_help_reconstruction = yes
+			unlock_decision_tooltip = ITA_agnelli_naval_decision_1
+			unlock_decision_tooltip = ITA_agnelli_naval_decision_2
+		}
+	}
+	focus = {
+		id = KRG_ITA_agnelli_accord_cooperation
+		icon = GFX_generic_advanced_construction_techniques
+		cost = 5
+		x = -2
+		y = 2
+		dynamic = yes
+		relative_position_id = KRG_ITA_restore_the_reconstruction_institute
+		prerequisite = {
+			focus = KRG_ITA_encourage_foreign_investment
+		}
+		available = {
+			has_completed_focus = ITA_third_pillar_of_accord
+		}
+		completion_reward = {
+			KRG_ITA_help_reconstruction = yes
+			unlock_decision_tooltip = ITA_mil_decision_1
+			unlock_decision_tooltip = ITA_mil_decision_2
+		}
+	}
+	focus = {
+		id = KRG_ITA_agnelli_benefits_of_montgomery
+		icon = GFX_generic_pickaxe
+		cost = 5
+		x = 0
+		y = 2
+		relative_position_id = KRG_ITA_restore_the_reconstruction_institute
+		prerequisite = {
+			focus = KRG_ITA_encourage_foreign_investment
+		}
+		prerequisite = {
+			focus = KRG_ITA_restore_genova_finance
+		}
+		completion_reward = {
+			KRG_ITA_help_reconstruction = yes
+			unlock_decision_tooltip = ITA_civ_decision_1
+			unlock_decision_tooltip = ITA_civ_decision_2
+		}
+	}
+	focus = {
+		id = KRG_ITA_agnelli_end_bank_crisis
+		icon = GFX_generic_price_control
+		cost = 5
+		x = -1
+		y = 3
+		relative_position_id = KRG_ITA_restore_the_reconstruction_institute
+		prerequisite = {
+			focus = KRG_ITA_encourage_foreign_investment
+		}
+		available = {
+			has_country_flag = ITA_agnelli_saved_bank_1
+			has_country_flag = ITA_agnelli_saved_bank_2
+			has_country_flag = ITA_agnelli_saved_bank_3
+			has_country_flag = ITA_agnelli_saved_bank_4
+		}
+		completion_reward = {
+			KRG_ITA_help_banks = yes
+		}
+	}
+	focus = {
+		id = KRG_ITA_agnelli_targeted_interventions
+		icon = GFX_generic_state_economy
+		cost = 5
+		x = -3
+		y = 4
+		relative_position_id = KRG_ITA_restore_the_reconstruction_institute
+		prerequisite = {
+			focus = KRG_ITA_agnelli_end_bank_crisis
+		}
+		available = {
+			amount_taken_ideas = {
+				amount > 1
+				slots = {
+					industrial_concern
+				}
+			}
+		}
+		completion_reward = {
+			custom_effect_tooltip = ITA_if_we_have_SMS_tt
+			effect_tooltip = {
+				159 = {
+					add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+						type = industrial_complex
+						level = 1
+					}
+				}
+				158 = {
+					add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+						type = industrial_complex
+						level = 1
+					}
+				}
+			}
+			custom_effect_tooltip = ITA_if_we_have_ansaldo_tt
+			effect_tooltip = {
+				159 = {
+					add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+						type = arms_factory
+						level = 1
+					}
+				}
+				158 = {
+					add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+						type = arms_factory
+						level = 1
+					}
+				}
+			}
+			custom_effect_tooltip = ITA_if_we_have_UdC_tt
+			effect_tooltip = {
+				add_tech_bonus = {
+					name = KRG_ITA_agnelli_targeted_interventions
+					uses = 1
+					bonus = 1
+					category = industry_tech
+				}
+				add_tech_bonus = {
+					name = KRG_ITA_agnelli_targeted_interventions
+					uses = 1
+					bonus = 1
+					category = electronics_tech
+				}
+				add_tech_bonus = {
+					name = KRG_ITA_agnelli_targeted_interventions
+					uses = 1
+					bonus = 1
+					category = radar_tech
+				}
+			}
+			custom_effect_tooltip = ITA_if_we_have_FMS_tt
+			effect_tooltip = {
+				159 = {
+					add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+						type = synthetic_refinery
+						level = 1
+					}
+				}
+				158 = {
+					add_extra_state_shared_building_slots = 2
+					add_building_construction = {
+						type = synthetic_refinery
+						level = 1
+					}
+					add_building_construction = {
+						type = fuel_silo
+						level = 1
+					}
+				}
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						has_idea = ITA_societa_mineraria_sarda
+					}
+					159 = {
+						add_extra_state_shared_building_slots = 1
+						add_building_construction = {
+							type = industrial_complex
+							level = 1
+						}
+					}
+					158 = {
+						add_extra_state_shared_building_slots = 1
+						add_building_construction = {
+							type = industrial_complex
+							level = 1
+						}
+					}
+				}
+				else_if = {
+					limit = {
+						has_idea = ITA_industrie_ansaldo
+					}
+					159 = {
+						add_extra_state_shared_building_slots = 1
+						add_building_construction = {
+							type = arms_factory
+							level = 1
+						}
+					}
+					158 = {
+						add_extra_state_shared_building_slots = 1
+						add_building_construction = {
+							type = arms_factory
+							level = 1
+						}
+					}
+				}
+				else_if = {
+					limit = {
+						has_idea = ITA_universita_di_cagliari
+					}
+					add_tech_bonus = {
+						name = KRG_ITA_agnelli_targeted_interventions
+						uses = 1
+						bonus = 1
+						category = industry_tech
+					}
+					add_tech_bonus = {
+						name = KRG_ITA_agnelli_targeted_interventions
+						uses = 1
+						bonus = 1
+						category = electronics_tech
+					}
+					add_tech_bonus = {
+						name = KRG_ITA_agnelli_targeted_interventions
+						uses = 1
+						bonus = 1
+						category = radar_tech
+					}
+				}
+				else_if = {
+					limit = {
+						has_idea = ITA_ferrovie_meridionali_sarde
+					}
+					159 = {
+						add_extra_state_shared_building_slots = 1
+						add_building_construction = {
+							type = synthetic_refinery
+							level = 1
+						}
+					}
+					158 = {
+						add_extra_state_shared_building_slots = 2
+						add_building_construction = {
+							type = synthetic_refinery
+							level = 1
+						}
+						add_building_construction = {
+							type = fuel_silo
+							level = 1
+						}
+					}
+				}
+			}
+		}
+	}
+	focus = {
+		id = KRG_ITA_agnelli_reinforce_mil
+		icon = GFX_generic_bombs_away
+		cost = 5
+		x = -1
+		y = 4
+		relative_position_id = KRG_ITA_restore_the_reconstruction_institute
+		prerequisite = {
+			focus = KRG_ITA_agnelli_end_bank_crisis
+		}
+		available = {
+		}
+		completion_reward = {
+			if = {
+				limit = {
+					amount_taken_ideas = {
+						amount < 1
+						slots = {
+							industrial_concern
+						}
+					}
+				}
+				add_ideas = industrie_ansaldo
+			}
+			else = {
+				159 = {
+					add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+						type = arms_factory
+						level = 1
+					}
+				}
+			}
+			158 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+				}
+			}
+			907 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+				}
+			}
+			160 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+				}
+			}
+		}
+	}
+	focus = {
+		id = KRG_ITA_agnelli_deal_fiat
+		icon = GFX_generic_car
+		cost = 5
+		x = -2
+		y = 5
+		relative_position_id = KRG_ITA_restore_the_reconstruction_institute
+		prerequisite = {
+			focus = KRG_ITA_agnelli_end_bank_crisis
+		}
+		available = {
+		}
+		completion_reward = {
+			2 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+				}
+			}
+			162 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+				}
+			}
+			custom_effect_tooltip = ITA_if_we_have_fiat_tt
+			effect_tooltip = {
+				add_ideas = ITA_fiat_deal
+			}
+			hidden_effect = {
+				if = {
+					limit = {
+						OR = {
+							has_idea = ITA_company_fiat
+							has_idea = ITA_fiat_aviazione
+						}
+					}
+					add_ideas = ITA_fiat_deal
+				}
+			}
+		}
+	}
+	focus = {
+		id = KRG_ITA_agnelli_defend_commerce
+		icon = GFX_generic_bluewater_navy
+		cost = 5
+		x = 0
+		y = 5
+		relative_position_id = KRG_ITA_restore_the_reconstruction_institute
+		prerequisite = {
+			focus = KRG_ITA_agnelli_end_bank_crisis
+		}
+		available = {
+		}
+		completion_reward = {
+			907 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = dockyard
+					level = 1
+				}
+			}
+			162 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = dockyard
+					level = 1
+				}
+			}
+			160 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = dockyard
+					level = 1
+				}
+			}
+		}
+	}
+	focus = {
+		id = KRG_ITA_restore_the_FS
+		icon = GFX_SRD_electric_railways
+		cost = 5
+		x = 2
+		y = 2
+		relative_position_id = KRG_ITA_restore_the_reconstruction_institute
+		prerequisite = {
+			focus = KRG_ITA_control_confindustria
+			focus = KRG_ITA_embrace_fordism
+		}
+		prerequisite = {
+			focus = KRG_ITA_create_the_BIN
+			focus = KRG_ITA_restore_genova_finance
+		}
+		allow_branch = {
+			always = yes
+		}
+		completion_reward = {
+			move_up_inf_spending = yes
+			unlock_decision_category_tooltip = ITA_railway_program
+		}
+	}
+	focus = {
+		id = KRG_ITA_railway_modernisation_plan
+		icon = GFX_generic_railroad
+		cost = 5
+		x = 1
+		y = 3
+		relative_position_id = KRG_ITA_restore_the_reconstruction_institute
+		prerequisite = {
+			focus = KRG_ITA_restore_the_FS
+		}
+		completion_reward = {
+			unlock_decision_tooltip = ITA_electrify_sardinian_dorsal
+			unlock_decision_tooltip = ITA_start_converting_electric_lines
+			unlock_decision_tooltip = ITA_modernize_train_fleet
+			unlock_decision_tooltip = ITA_restore_control_of_aosta
+		 }
+	}
+	focus = {
+		id = KRG_ITA_estabilish_anas
+		icon = GFX_KRG_generic_highway
+		cost = 5
+		x = 2
+		y = 4
+		relative_position_id = KRG_ITA_restore_the_reconstruction_institute
+		prerequisite = {
+			focus = KRG_ITA_restore_the_FS
+		}
+		completion_reward = {
+			unlock_decision_tooltip = ITA_build_camionabile
+			unlock_decision_tooltip = ITA_build_carlo_felice
+		 }
+	}
+	focus = {
+		id = KRG_ITA_expand_the_ina
+		icon = GFX_NFA_expand_legal_protections
+		cost = 5
+		x = 4
+		y = 2
+		relative_position_id = KRG_ITA_restore_the_reconstruction_institute
+		allow_branch = {
+			always = yes
+		}
+		prerequisite = {
+			focus = KRG_ITA_control_confindustria
+			focus = KRG_ITA_embrace_fordism
+		}
+		completion_reward = {
+			ITA_1954_expand_INA = yes
+		}
+	}
+	focus = {
+		id = KRG_ITA_an_8_hours_workday
+		icon = GFX_generic_industrial_legislature
+		cost = 5
+		x = 3
+		y = 3
+		relative_position_id = KRG_ITA_restore_the_reconstruction_institute
+		available = {
+		}
+		prerequisite = {
+			focus = KRG_ITA_expand_the_ina
+		}
+		completion_reward = {
+			ITA_1954_8_hour_workday = yes
+		}
+	}
+	focus = {
+		id = KRG_ITA_found_the_inail
+		icon = GFX_NFA_the_unemplyoment_scheme
+		cost = 5
+		x = 4
+		y = 4
+		relative_position_id = KRG_ITA_restore_the_reconstruction_institute
+		available = {
+		}
+		prerequisite = {
+			focus = KRG_ITA_expand_the_ina
+		}
+		completion_reward = {
+			set_temp_variable = { ideology_change_var = 0.05 }
+			change_ruling_party_popularity = yes
+			add_stability = 0.05
+		 }
+	}
+	focus = {
+		id = KRG_ITA_found_the_inps
+		icon = GFX_generic_social_reforms
+		cost = 5
+		x = 5
+		y = 3
+		relative_position_id = KRG_ITA_restore_the_reconstruction_institute
+		available = {
+		}
+		prerequisite = {
+			focus = KRG_ITA_expand_the_ina
+		}
+		completion_reward = {
+			ITA_1954_found_INPS = yes
+		}
+	}
+	focus = {
+		id = KRG_ITA_incorporate_the_ipv
+		icon = GFX_generic_agrarian_soldiers
+		cost = 5
+		x = 6
+		y = 4
+		relative_position_id = KRG_ITA_restore_the_reconstruction_institute
+		available = {
+		}
+		prerequisite = {
+			focus = KRG_ITA_found_the_inps
+		}
+		completion_reward = {
+			add_stability = 0.05
+			add_war_support = 0.05
+			158 = {
+				add_extra_state_shared_building_slots = 1
+			}
+			907 = {
+				add_extra_state_shared_building_slots = 1
+			}
+		}
+	}
+	focus = {
+		id = KRG_ITA_the_SSN
+		icon = GFX_generic_FIN_promote_the_red_cross
+		cost = 5
+		x = 5
+		y = 5
+		relative_position_id = KRG_ITA_restore_the_reconstruction_institute
+		available = {
+		}
+		prerequisite = {
+			focus = KRG_ITA_found_the_inail
+		}
+		prerequisite = {
+			focus = KRG_ITA_incorporate_the_ipv
+		}
+		completion_reward = { 
+			ITA_1954_the_SSN = yes
+		}
+	}
+}

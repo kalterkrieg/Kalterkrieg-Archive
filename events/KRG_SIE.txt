@@ -1,0 +1,53 @@
+add_namespace = krg_sie
+
+country_event = { #Canadian Response
+	id = krg_sie.1
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_sie.1 FROM = [From.GetName]" }
+	title = krg_sie.1.t
+	desc = krg_sie.1.d
+	immediate = {
+		hidden_effect = {
+			set_autonomy = {
+				target = SIE
+				autonomy_state = autonomy_free
+			}
+		}
+	}
+
+	is_triggered_only = yes
+	option = {
+		name = krg_sie.1.a
+		add_political_power = 10
+		SIE = { country_event = { id = krg_sie.2 } }
+	}
+}
+country_event = { #Sierra Leonese Independence!
+	id = krg_sie.2
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_sie.2 FROM = [From.GetName]" }
+	title = krg_sie.2.t
+	desc = krg_sie.2.d
+	immediate = {
+		hidden_effect = {
+			SIE = {
+				set_cosmetic_tag = SIE_independence
+			}
+		}
+	}
+	is_triggered_only = yes
+	option = {
+		name = krg_sie.2.a
+		add_political_power = 10
+		set_politics = {
+			ruling_party = social_democrat
+		}
+		coal_add_rev_rep = yes
+		add_popularity = {
+			ideology = social_democrat
+			popularity = 0.15
+		}
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = -0.15
+		}
+	}
+}

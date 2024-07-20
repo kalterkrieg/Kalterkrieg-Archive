@@ -1,0 +1,48 @@
+scripted_gui = {
+	KRG_PM = {
+		parent_window_token = politics_tab
+		context_type = player_context
+		window_name = "KRG_PM_UI"
+
+		visible = {
+			has_country_flag = country_open_pm
+		}
+		properties = {
+		    prime_minister_portrait = {
+                image = "[KRG_PRIME_MINISTER_GFX]"
+		    }
+			prime_minister_bg = {
+                image = "[GetPrimeMinisterBG]"
+		    }
+		}
+
+		effects = {
+            prime_minister_close_click = {
+               	clr_country_flag = country_open_pm
+            }
+        }
+	}
+	KRG_PM_BTN = {
+		parent_window_token = politics_tab
+		context_type = player_context
+		window_name = "KRG_PM_BTN_UI"
+
+		visible = {
+			has_country_flag = country_show_pm
+		}
+
+		effects = {
+            prime_minister_btn_click = {
+                if = {
+                	limit = {
+                		has_country_flag = country_open_pm
+                	}
+                	clr_country_flag = country_open_pm
+	                else = {
+	                	set_country_flag = country_open_pm
+	                }
+                }
+            }
+        }
+	}
+}

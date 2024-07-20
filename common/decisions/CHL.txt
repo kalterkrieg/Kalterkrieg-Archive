@@ -1,0 +1,85 @@
+CHL_power_struggle = {
+	chl_enforce_control_on_the_cities = {
+			available = {
+				has_country_flag = chl_blanchists
+			}
+		    complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete chl_enforce_control_on_the_cities target: [From.GetName]"
+               	add_manpower = -500
+				add_to_variable = {
+					var = leader_chl
+					value = blanche_pop
+				}
+            }
+	}
+
+	chl_arrest_local_ringleaders = {
+		
+	}
+	chl_confiscate_merinist_guns = { 
+				#stability
+	}
+}
+CHL_Starting_Political = {
+	CHL_host_military_parade = {
+
+
+	complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete CHL_host_military_parade target: [From.GetName]"
+		if = {
+			limit = {
+				has_stability < 60
+			}
+			# country_event = {
+			# 	# id = my_event.1
+			# 	days = 10
+			# 	random = 50
+			# 	random_days = 10
+			# }
+			else = {
+			}
+		}	
+	}
+	}
+}
+CHL_Starting_Economical = {
+	CHL_take_loans_from_the_argentinians = {
+		# desc
+		# add_building_construction = {
+        #             type = industrial_complex 
+        #             level = 2
+        #             instant_build = yes
+        #         }
+        # consumer_goods_factor = 10
+
+
+
+	}
+	CHL_Expropiate_All_Argentinian_Property = {
+	available = {
+			FROM = {
+				if = {
+					limit = { tag = ARG }
+					has_war = yes
+				}
+			}
+		}
+
+		visible = {
+			CHL = { #this is temporal since not all the GSAW stuff has been planned
+				has_government = social_democrat
+				has_government = radical_socialist
+			}
+			
+			ARG = {
+				num_of_factories > 8
+			}
+		}
+
+		cost = 20
+		days_remove = 15
+		fire_only_once = yes
+		
+		
+		}
+}

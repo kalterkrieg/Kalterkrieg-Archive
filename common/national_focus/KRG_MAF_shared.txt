@@ -1,0 +1,2121 @@
+#!gfx:interface/Kalterkrieg/KRG_goals.gfx
+
+
+focus_tree = {
+	id = MAF_start
+
+	country = {
+		factor = 0
+
+		modifier = {
+			add = 10
+			tag = MAF
+		}
+	}
+
+	default = no
+
+	continuous_focus_position = { x = 75 y = 2400 }
+
+	initial_show_position = {
+		focus = MAF_wars_end
+	}
+  	shared_focus = MAF_wars_end
+  	shared_focus = MAF_austerity_path
+  	shared_focus = MAF_investment_path
+	shared_focus = MAF_rationalise_the_high_command
+	shared_focus = MAF_continue_motorisation_efforts
+}
+
+focus_tree = {
+	id = MAF_Hippel_tree
+
+	country = {
+		factor = 0
+
+		modifier = {
+			add = 10
+			tag = MAF
+		}
+	}
+
+	default = no
+
+	continuous_focus_position = { x = 75 y = 2400 }
+
+	shared_focus = MAF_Hippel_intro_focus
+  	shared_focus = MAF_austerity_path
+  	shared_focus = MAF_investment_path
+	shared_focus = MAF_rationalise_the_high_command
+	shared_focus = MAF_continue_motorisation_efforts
+	shared_focus = MAF_fading_rule
+}
+
+focus_tree = {
+	id = MAF_Krupp_tree
+
+	country = {
+		factor = 0
+
+		modifier = {
+			add = 10
+			tag = MAF
+		}
+	}
+
+	default = no
+
+	continuous_focus_position = { x = 75 y = 2400 }
+
+	
+	shared_focus = MAF_Krupp_intro_focus
+  	shared_focus = MAF_austerity_path
+  	shared_focus = MAF_investment_path
+	shared_focus = MAF_rationalise_the_high_command
+	shared_focus = MAF_continue_motorisation_efforts
+	shared_focus = MAF_liquidate_africa
+}
+
+focus_tree = {
+	id = MAF_Ribbentrop_tree
+
+	country = {
+		factor = 0
+
+		modifier = {
+			add = 10
+			tag = MAF
+		}
+	}
+
+
+	default = no
+
+	continuous_focus_position = { x = 75 y = 2400 }
+
+	shared_focus = MAF_Ribbentrop_intro_focus
+  	shared_focus = MAF_austerity_path
+  	shared_focus = MAF_investment_path
+	shared_focus = MAF_rationalise_the_high_command
+	shared_focus = MAF_continue_motorisation_efforts
+	shared_focus = MAF_fading_rule
+
+}
+
+focus_tree = {
+	id = MAF_AAPM_tree
+
+	country = {
+		factor = 0
+
+		modifier = {
+			add = 10
+			tag = MAF
+		}
+	}
+
+	default = no
+
+	continuous_focus_position = { x = 75 y = 2400 }
+
+	shared_focus = MAF_AAPM_dawn_africa
+  	shared_focus = MAF_austerity_path
+  	shared_focus = MAF_investment_path
+	shared_focus = MAF_rationalise_the_high_command
+	shared_focus = MAF_continue_motorisation_efforts
+
+}
+
+shared_focus = {
+	id = MAF_Hippel_intro_focus
+	icon = GFX_MAF_Hippel
+	cost = 8
+	x = 2
+	y = 0
+	
+	completion_reward = {
+		country_event = { 
+			id = MAF.201
+		}
+		add_political_power = 50
+	}
+
+	ai_will_do = {
+		base = 150
+	}
+}
+shared_focus = {
+	id = MAF_Hippel_stack_cabinet
+	icon = GFX_generic_authoritarian_government
+	relative_position_id = MAF_Hippel_intro_focus
+	cost = 8
+	x = -1
+	y = 1
+	prerequisite = {
+		focus = MAF_Hippel_intro_focus
+	}
+	mutually_exclusive = {
+		focus = MAF_Hippel_reach_across
+	}
+	completion_reward = {
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = 0.10
+		}
+		add_popularity = {
+			ideology = paternal_autocrat
+			popularity = 0.05
+		}
+		MAF_appease_interven_big = yes
+		MAF_anger_bureau_small = yes
+		MAF_anger_berliner_small = yes
+	}
+
+	ai_will_do = {
+		base = 150
+	}
+}
+shared_focus = {
+	id = MAF_Hippel_reach_across
+	icon = GFX_MAF_Task_Ahead
+	relative_position_id = MAF_Hippel_intro_focus
+	cost = 8
+	x = 1
+	y = 1
+	prerequisite = {
+		focus = MAF_Hippel_intro_focus
+	}
+	mutually_exclusive = {
+		focus = MAF_Hippel_stack_cabinet
+	}
+	completion_reward = {
+		coal_add_soc_con = yes
+		MAF_anger_interven_small = yes
+		MAF_appease_bureau_small = yes
+		MAF_appease_berliner_small = yes
+	}
+
+	ai_will_do = {
+		base = 150
+	}
+}
+shared_focus = {
+	id = MAF_Hippel_empower_statthalter
+	icon = GFX_MAF_focus
+	relative_position_id = MAF_Hippel_intro_focus
+	cost = 8
+	x = -1
+	y = 2
+	prerequisite = {
+		focus = MAF_Hippel_reach_across
+		focus = MAF_Hippel_stack_cabinet
+	}
+	mutually_exclusive = {
+		focus = MAF_Hippel_rule_compromise
+	}
+	completion_reward = {
+		add_ideas = MAF_empowered_statthalter
+		MAF_appease_hardliner_small = yes
+		MAF_anger_prag_small = yes
+	}
+
+	ai_will_do = {
+		base = 150
+	}
+}
+shared_focus = {
+	id = MAF_Hippel_rule_compromise
+	icon = GFX_generic_council
+	relative_position_id = MAF_Hippel_intro_focus
+	cost = 8
+	x = 1
+	y = 2
+	prerequisite = {
+		focus = MAF_Hippel_reach_across
+		focus = MAF_Hippel_stack_cabinet
+	}
+	mutually_exclusive = {
+		focus = MAF_Hippel_empower_statthalter
+	}
+	completion_reward = {
+		add_ideas = MAF_compromised_rule
+		MAF_appease_prag_small = yes
+		MAF_anger_hardliner_small = yes
+	}
+
+	ai_will_do = {
+		base = 150
+	}
+}
+shared_focus = {
+	id = MAF_Hippel_military_oversight
+	icon = GFX_generic_desert_officers_2
+	relative_position_id = MAF_Hippel_intro_focus
+	cost = 8
+	x = -1
+	y = 3
+	prerequisite = {
+		focus = MAF_Hippel_empower_statthalter
+		focus = MAF_Hippel_rule_compromise
+	}
+	mutually_exclusive = {
+		focus = MAF_Hippel_maintain_seperation
+	}
+	completion_reward = {
+		add_ideas = MAF_military_oversight
+		MAF_anger_berliner_big = yes
+		MAF_appease_interven_big = yes
+	}
+
+	ai_will_do = {
+		base = 150
+	}
+}
+shared_focus = {
+	id = MAF_Hippel_maintain_seperation
+	icon = GFX_generic_chain_army
+	relative_position_id = MAF_Hippel_intro_focus
+	cost = 8
+	x = 1
+	y = 3
+	prerequisite = {
+		focus = MAF_Hippel_empower_statthalter
+		focus = MAF_Hippel_rule_compromise
+	}
+	mutually_exclusive = {
+		focus = MAF_Hippel_military_oversight
+	}
+	completion_reward = {
+		add_ideas = MAF_seperated_military
+		MAF_anger_interven_big = yes
+		MAF_appease_berliner_small = yes
+		MAF_appease_bureau_small = yes
+	}
+
+	ai_will_do = {
+		base = 150
+	}
+}
+
+shared_focus = {
+	id = MAF_Hippel_first_wave
+	icon = GFX_MAF_honour_the_men_of_afrika
+	relative_position_id = MAF_Hippel_intro_focus
+	cost = 8
+	x = 0
+	y = 4
+	prerequisite = {
+		focus = MAF_Hippel_military_oversight
+		focus = MAF_Hippel_maintain_seperation
+	}
+	completion_reward = {
+		country_event = {
+			id = MAF_Hippel.0
+		}
+		add_manpower = 10000
+		add_equipment_to_stockpile = {
+			type = infantry_equipment_1
+			amount = 2000
+			producer = GER
+		}
+		move_up_military = yes
+		MAF_appease_interven_big = yes
+	}
+
+	ai_will_do = {
+		base = 150
+	}
+}
+shared_focus = {
+	id = MAF_Hippel_end_leaks
+	icon = GFX_generic_spies
+	relative_position_id = MAF_Hippel_intro_focus
+	cost = 8
+	x = -2
+	y = 4
+	prerequisite = {
+		focus = MAF_Hippel_military_oversight
+		focus = MAF_Hippel_maintain_seperation
+	}
+	completion_reward = {
+		country_event = {
+			id = MAF_Hippel.1
+		}
+		MAF_Georg_hansen = {
+			add_trait = {
+				trait = secret_police_chief
+			}
+		}
+		MAF_anger_bureau_small = yes
+		MAF_appease_adea_small = yes
+		MAF_appease_berliner_small = yes
+		MAF_appease_prag_small = yes
+		MAF_appease_interven_small = yes
+		# random_character = {
+		# 	retire = yes
+		# }
+	}
+
+	ai_will_do = {
+		base = 150
+	}
+}
+shared_focus = {
+	id = MAF_Hippel_understand_AAPM
+	icon = GFX_MAF_A_New_Dawn_For_Africa
+	relative_position_id = MAF_Hippel_intro_focus
+	cost = 8
+	x = 2
+	y = 4
+	prerequisite = {
+		focus = MAF_Hippel_military_oversight
+		focus = MAF_Hippel_maintain_seperation
+	}
+	completion_reward = {
+		country_event = {
+			id = MAF_Hippel.2
+		}
+		custom_effect_tooltip = MAF_infiltrate_AAPM_tt
+		MAF_anger_interven_small = yes
+		MAF_appease_prag_small = yes
+		hidden_effect = {
+			set_temp_variable = { temp_value = -2 }
+			MAF_change_AAPM_unity = yes
+			set_temp_variable = { temp_value = -1 }
+			MAF_change_AAPM_fervor = yes
+		}
+	}
+
+	ai_will_do = {
+		base = 150
+	}
+}
+shared_focus = {
+	id = MAF_Hippel_war_begins
+	icon = GFX_MAF_Graveyard
+	relative_position_id = MAF_Hippel_intro_focus
+	cost = 8
+	x = 0
+	y = 5
+	prerequisite = {
+		focus = MAF_Hippel_end_leaks
+	}
+	prerequisite = {
+		focus = MAF_Hippel_understand_AAPM
+	}
+	prerequisite = {
+		focus = MAF_Hippel_first_wave
+	}
+	completion_reward = {
+		set_country_flag = MAF_bush_war_flag
+		MAF_appease_interven_big = yes
+		MAF_appease_hardliner_small = yes
+		MAF_anger_prag_small = yes
+	}
+
+	ai_will_do = {
+		base = 150
+	}
+}
+
+
+
+shared_focus = {
+	id = MAF_Krupp_intro_focus
+	icon = GFX_MAF_Krupp
+	cost = 8
+	x = 0
+	y = 0
+	
+	completion_reward = {
+		add_political_power = 50
+	}
+
+	ai_will_do = {
+		base = 150
+	}
+}
+
+shared_focus = {
+	id = MAF_Krupp_host_allies
+	icon = GFX_generic_collaborate_local_elites2
+	relative_position_id = MAF_Krupp_intro_focus
+	cost = 8
+	x = 2
+	y = 1
+	prerequisite = {
+		focus = MAF_Krupp_intro_focus
+	}
+
+	completion_reward = {
+		add_ideas = MAF_krupps_cabinet
+	}
+
+	ai_will_do = {
+		base = 150
+	}
+}
+shared_focus = {
+	id = MAF_Krupp_three_pillars
+	icon = GFX_generic_banking_legislation
+	relative_position_id = MAF_Krupp_intro_focus
+	cost = 8
+	x = -1
+	y = 1
+	prerequisite = {
+		focus = MAF_Krupp_intro_focus
+	}
+
+	completion_reward = {
+		country_event = {
+			id = MAF_Krupp.0
+		}
+		MAF_appease_adea_small = yes
+	}
+
+	ai_will_do = {
+		base = 150
+	}
+}
+shared_focus = {
+	id = MAF_Krupp_next_generation
+	icon = GFX_generic_the_new_regime
+	relative_position_id = MAF_Krupp_intro_focus
+	cost = 8
+	x = -2
+	y = 2
+	prerequisite = {
+		focus = MAF_Krupp_three_pillars
+	}
+
+	completion_reward = {
+		country_event = {
+			id = MAF_Krupp.1
+		}
+		MAF_appease_berliner_small = yes
+	}
+
+	ai_will_do = {
+		base = 150
+	}
+}
+shared_focus = {
+	id = MAF_Krupp_thyssen_loyalists
+	icon = GFX_MAF_thyssens_return
+	relative_position_id = MAF_Krupp_intro_focus
+	cost = 8
+	x = 2
+	y = 2
+	prerequisite = {
+		focus = MAF_Krupp_host_allies
+	}
+	mutually_exclusive = {
+		focus = MAF_Krupp_clean_cabinet
+	}
+
+	completion_reward = {
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = -0.20
+		}
+		swap_ideas = {
+			remove_idea = MAF_krupps_cabinet
+			add_idea = MAF_krupps_cabinet_thyssen
+		}
+		MAF_appease_bureau_small = yes
+		MAF_anger_hardliner_small = yes
+	}
+
+	ai_will_do = {
+		base = 150
+	}
+}
+shared_focus = {
+	id = MAF_Krupp_clean_cabinet
+	icon = GFX_generic_file_investigation
+	relative_position_id = MAF_Krupp_intro_focus
+	cost = 8
+	x = 4
+	y = 2
+	prerequisite = {
+		focus = MAF_Krupp_host_allies
+	}
+	mutually_exclusive = {
+		focus = MAF_Krupp_thyssen_loyalists
+	}
+
+	completion_reward = {
+		add_popularity = {
+			ideology = paternal_autocrat
+			popularity = 0.15
+		}
+		swap_ideas = {
+			remove_idea = MAF_krupps_cabinet
+			add_idea = MAF_krupps_cabinet_clean
+		}
+		coal_rev_auth_dem = yes
+		coal_rev_nat_pop = yes
+		MAF_anger_bureau_big = yes
+		MAF_anger_hardliner_small = yes
+	}
+
+	ai_will_do = {
+		base = 150
+	}
+}
+
+shared_focus = {
+	id = MAF_Krupp_german_advisors
+	icon = GFX_WLL_German_Staff
+	relative_position_id = MAF_Krupp_intro_focus
+	cost = 8
+	x = 0
+	y = 2
+	prerequisite = {
+		focus = MAF_Krupp_three_pillars
+	}
+
+	completion_reward = {
+		add_ideas = MAF_german_advisors
+		MAF_appease_interven_small = yes
+	}
+
+	ai_will_do = {
+		base = 150
+	}
+}
+shared_focus = {
+	id = MAF_Krupp_civilising_force
+	icon = GFX_MAF_honour_the_men_of_afrika
+	relative_position_id = MAF_Krupp_intro_focus
+	cost = 8
+	x = 1
+	y = 3
+	prerequisite = {
+		focus = MAF_Krupp_thyssen_loyalists
+		focus = MAF_Krupp_clean_cabinet
+	}
+	prerequisite = {
+		focus = MAF_Krupp_next_generation
+	}
+	prerequisite = {
+		focus = MAF_Krupp_german_advisors
+	}
+
+	completion_reward = {
+		add_ideas = MAF_civilising_force
+	}
+
+	ai_will_do = {
+		base = 150
+	}
+}
+#shared_focus = {
+#	id = MAF_Krupp_economic_assault
+#	icon = GFX_GER_krupp
+#	relative_position_id = MAF_Krupp_intro_focus
+#	cost = 8
+#	x = 0
+#	y = 4
+#	prerequisite = {
+#		focus = MAF_Krupp_civilising_force
+#	}
+#	completion_reward = {
+#		country_event = {
+#			id = MAF_Krupp.2
+#		}
+#	}
+#
+#	ai_will_do = {
+#		base = 150
+#	}
+#}
+
+shared_focus = {
+	id = MAF_Ribbentrop_intro_focus
+	icon = GFX_MAF_Ribbentrop
+	cost = 8
+	x = 1
+	y = 0
+	
+	completion_reward = {
+		add_popularity = {
+			ideology = social_conservative
+			popularity = 0.05
+		}
+		country_event = {
+			id = MAF_Ribbentrop.0
+		}
+	}
+
+	ai_will_do = {
+		base = 150
+	}
+}
+shared_focus = {
+	id = MAF_Ribbentrop_germany_first
+	icon = GFX_COS_German_Bailout
+	relative_position_id = MAF_Ribbentrop_intro_focus
+	cost = 8
+	x = -2
+	y = 1
+	prerequisite = {
+		focus = MAF_Ribbentrop_intro_focus
+	}
+	completion_reward = {
+		MAF_appease_berliner_small = yes
+		add_ideas = MAF_german_interests
+	}
+
+	ai_will_do = {
+		base = 150
+	}
+}
+shared_focus = {
+	id = MAF_Ribbentrop_encourage_hardliner
+	icon = GFX_SAF_Germany
+	relative_position_id = MAF_Ribbentrop_intro_focus
+	cost = 8
+	x = -2
+	y = 2
+	prerequisite = {
+		focus = MAF_Ribbentrop_germany_first
+	}
+	completion_reward = {
+		MAF_appease_hardliner_small = yes
+		add_to_variable = {
+			MAF_settler_var = 10
+			tooltip = MAF_settler_var_tt
+		}
+	}
+
+	ai_will_do = {
+		base = 150
+	}
+}
+shared_focus = {
+	id = MAF_Ribbentrop_reward_loyalists
+	icon = GFX_generic_plotting
+	relative_position_id = MAF_Ribbentrop_intro_focus
+	cost = 8
+	x = 0
+	y = 1
+	prerequisite = {
+		focus = MAF_Ribbentrop_intro_focus
+	}
+	completion_reward = {
+		MAF_appease_berliner_small = yes
+		MAF_appease_adea_small = yes
+	}
+
+	ai_will_do = {
+		base = 150
+	}
+}
+shared_focus = {
+	id = MAF_Ribbentrop_friendly_protectorates
+	icon = GFX_MAF_mandates
+	relative_position_id = MAF_Ribbentrop_intro_focus
+	cost = 8
+	x = 0
+	y = 2
+	prerequisite = {
+		focus = MAF_Ribbentrop_reward_loyalists
+	}
+	completion_reward = {
+		country_event = {
+			id = MAF_Ribbentrop.2
+		}
+	}
+
+	ai_will_do = {
+		base = 150
+	}
+}
+shared_focus = {
+	id = MAF_Ribbentrop_diplomatic_considerations
+	icon = GFX_generic_restart_diplomatic_initiatives
+	relative_position_id = MAF_Ribbentrop_intro_focus
+	cost = 8
+	x = 2
+	y = 1
+	prerequisite = {
+		focus = MAF_Ribbentrop_intro_focus
+	}
+	completion_reward = {
+		country_event = {
+			id = MAF_Ribbentrop.1
+		}
+	}
+
+	ai_will_do = {
+		base = 150
+	}
+}
+shared_focus = {
+	id = MAF_Ribbentrop_secure_ports
+	icon = GFX_SAF_Port
+	relative_position_id = MAF_Ribbentrop_intro_focus
+	cost = 8
+	x = 2
+	y = 2
+	prerequisite = {
+		focus = MAF_Ribbentrop_diplomatic_considerations
+	}
+	completion_reward = {
+		add_ideas = MAF_white_ports
+	}
+
+	ai_will_do = {
+		base = 150
+	}
+}
+shared_focus = {
+	id = MAF_Ribbentrop_escalate_presence
+	icon = GFX_MAF_honour_the_men_of_afrika
+	relative_position_id = MAF_Ribbentrop_intro_focus
+	cost = 8
+	x = -1
+	y = 3
+
+	available = {
+		count_triggers = {
+			amount = 2
+			has_completed_focus = MAF_Ribbentrop_friendly_protectorates
+			has_completed_focus = MAF_Ribbentrop_encourage_hardliner
+			has_completed_focus = MAF_Ribbentrop_secure_ports
+		}
+	}
+
+	prerequisite = {
+		focus = MAF_Ribbentrop_friendly_protectorates
+		focus = MAF_Ribbentrop_encourage_hardliner
+		focus = MAF_Ribbentrop_secure_ports
+	}
+	mutually_exclusive = {
+		focus = MAF_Ribbentrop_promises_berlin
+	}
+	completion_reward = {
+		country_event = {
+			id = MAF_Ribbentrop.3
+		}
+	}
+
+	ai_will_do = {
+		base = 150
+	}
+}
+shared_focus = {
+	id = MAF_Ribbentrop_promises_berlin
+	icon = GFX_generic_align_germany
+	relative_position_id = MAF_Ribbentrop_intro_focus
+	cost = 8
+	x = 1
+	y = 3
+
+	available = {
+		count_triggers = {
+			amount = 2
+			has_completed_focus = MAF_Ribbentrop_friendly_protectorates
+			has_completed_focus = MAF_Ribbentrop_encourage_hardliner
+			has_completed_focus = MAF_Ribbentrop_secure_ports
+		}
+	}
+
+	prerequisite = {
+		focus = MAF_Ribbentrop_friendly_protectorates
+		focus = MAF_Ribbentrop_encourage_hardliner
+		focus = MAF_Ribbentrop_secure_ports
+	}
+	mutually_exclusive = {
+		focus = MAF_Ribbentrop_escalate_presence
+	}
+	completion_reward = {
+		country_event = {
+			id = MAF_Ribbentrop.4
+		}
+	}
+
+	ai_will_do = {
+		base = 150
+	}
+}
+shared_focus = {
+	id = MAF_Ribbentrop_better_mittelafrika
+	icon = GFX_generic_doomed_government
+	relative_position_id = MAF_Ribbentrop_intro_focus
+	cost = 8
+	x = 0
+	y = 4
+	prerequisite = {
+		focus = MAF_Ribbentrop_promises_berlin
+		focus = MAF_Ribbentrop_escalate_presence
+	}
+	completion_reward = {
+		#country_event = {
+		#	id = MAF_Ribbentrop.5
+		#}
+	}
+
+	ai_will_do = {
+		base = 150
+	}
+}
+
+shared_focus = {
+	id = MAF_AAPM_dawn_africa
+	icon = GFX_MAF_A_New_Dawn_For_Africa
+	cost = 3
+	x = 4
+	y = 0
+
+	completion_reward = {
+		country_event = {
+			id = MAF.1001
+		}
+	}
+}
+
+shared_focus = {
+	id = MAF_AAPM_new_armed_forces
+	icon = GFX_generic_agrarian_socialism
+	relative_position_id = MAF_AAPM_dawn_africa
+	cost = 3
+	x = -3
+	y = 1
+	completion_reward = {
+		add_ideas = AAPM_pan_african_army
+	}
+	prerequisite = {
+		focus = MAF_AAPM_dawn_africa
+	}
+
+	ai_will_do = {
+		base = 150
+	}
+}
+
+shared_focus = {
+	id = MAF_AAPM_end_of_colonialism
+	icon = GFX_MAF_The_End_of_Colonialism
+	relative_position_id = MAF_AAPM_dawn_africa
+	cost = 3
+	x = -1
+	y = 1
+	completion_reward = {
+		country_event = {
+			id = MAF.1002
+		}
+	}
+	prerequisite = {
+		focus = MAF_AAPM_dawn_africa
+	}
+
+	ai_will_do = {
+		base = 150
+	}
+}
+
+shared_focus = {
+	id = MAF_AAPM_seizing_the_apparatus
+	icon = GFX_generic_authoritarian_government
+	relative_position_id = MAF_AAPM_dawn_africa
+	cost = 3
+	x = 1
+	y = 1
+	completion_reward = {
+		country_event = {
+			id = MAF.1003
+		}
+	}
+	prerequisite = {
+		focus = MAF_AAPM_dawn_africa
+	}
+
+	ai_will_do = {
+		base = 150
+	}
+}
+
+
+shared_focus = {
+	id = MAF_AAPM_accra_group
+	icon = GFX_generic_council
+	relative_position_id = MAF_AAPM_dawn_africa
+	cost = 3
+	x = 3
+	y = 1
+	completion_reward = {
+		add_political_power = 100
+	}
+	prerequisite = {
+		focus = MAF_AAPM_dawn_africa
+	}
+
+	ai_will_do = {
+		base = 150
+	}
+}
+
+shared_focus = {
+	id = MAF_AAPM_bind_the_continent
+	icon = GFX_MAF_bind_the_continent
+	relative_position_id = MAF_AAPM_dawn_africa
+	cost = 3
+	x = 0
+	y = 2
+	completion_reward = {
+		country_event = {
+			id = MAF.1004
+		}
+	}
+	prerequisite = {
+		focus = MAF_AAPM_end_of_colonialism
+	}
+	prerequisite = {
+		focus = MAF_AAPM_seizing_the_apparatus
+	}
+
+	ai_will_do = {
+		base = 150
+	}
+}
+shared_focus = {
+	id = MAF_AAPM_continental_congress
+	icon = GFX_socialist_constitution
+	relative_position_id = MAF_AAPM_dawn_africa
+	cost = 3
+	x = 0
+	y = 3
+	completion_reward = {
+		country_event = {
+			id = MAF.1005
+		}
+	}
+	prerequisite = {
+		focus = MAF_AAPM_bind_the_continent
+	}
+
+	ai_will_do = {
+		base = 150
+	}
+}
+shared_focus = {
+	id = MAF_AAPM_one_movement_one_people
+	icon = GFX_MAF_one_movement_one_people
+	relative_position_id = MAF_AAPM_dawn_africa
+	cost = 3
+	x = 0
+	y = 4
+	completion_reward = {
+		add_popularity = {
+			ideology = revolutionary_republican
+			popularity = 0.05
+		}
+	}
+	prerequisite = {
+		focus = MAF_AAPM_continental_congress
+	}
+
+	ai_will_do = {
+		base = 150
+	}
+}
+shared_focus = {
+	id = MAF_AAPM_power_devolved
+	icon = GFX_generic_anarcho_communism
+	relative_position_id = MAF_AAPM_dawn_africa
+	cost = 3
+	x = -1
+	y = 5
+	completion_reward = {
+		swap_ideas = {
+			remove_idea = AAPM_fractured_movement
+			add_idea = AAPM_power_devolved
+		}
+		add_popularity = {
+			ideology = radical_socialist
+			popularity = 0.10
+		}
+		add_popularity = {
+			ideology = authoritarian_socialist
+			popularity = -0.05
+		}
+	}
+	prerequisite = {
+		focus = MAF_AAPM_one_movement_one_people
+	}
+	mutually_exclusive = {
+		focus = MAF_AAPM_power_centralised
+	}
+
+	ai_will_do = {
+		base = 150
+	}
+}
+shared_focus = {
+	id = MAF_AAPM_power_centralised
+	icon = GFX_generic_revolutionary_government
+	relative_position_id = MAF_AAPM_dawn_africa
+	cost = 3
+	x = 1
+	y = 5
+	completion_reward = {
+		swap_ideas = {
+			remove_idea = AAPM_fractured_movement
+			add_idea = AAPM_power_centralised
+		}
+		add_popularity = {
+			ideology = authoritarian_socialist
+			popularity = 0.10
+		}
+		add_popularity = {
+			ideology = radical_socialist
+			popularity = -0.05
+		}
+	}
+	prerequisite = {
+		focus = MAF_AAPM_one_movement_one_people
+	}
+	mutually_exclusive = {
+		focus = MAF_AAPM_power_devolved
+	}
+
+	ai_will_do = {
+		base = 150
+	}
+}
+shared_focus = {
+	id = MAF_AAPM_against_the_reichspakt
+	icon = GFX_generic_anti_reichspakt
+	relative_position_id = MAF_AAPM_dawn_africa
+	cost = 3
+	x = 3
+	y = 4
+	completion_reward = {
+		add_ideas = AAPM_against_the_reichspakt_1
+	}
+	prerequisite = {
+		focus = MAF_AAPM_continental_congress
+	}
+
+	ai_will_do = {
+		base = 150
+	}
+}
+shared_focus = {
+	id = MAF_AAPM_crush_the_lapdogs
+	icon = GFX_MAF_Crush_The_Lapdogs
+	relative_position_id = MAF_AAPM_dawn_africa
+	cost = 3
+	x = 3
+	y = 5
+	completion_reward = {
+		swap_ideas = {
+			remove_idea = AAPM_against_the_reichspakt_1
+			add_idea = AAPM_against_the_reichspakt_2
+		}
+	}
+	prerequisite = {
+		focus = MAF_AAPM_against_the_reichspakt
+	}
+
+	ai_will_do = {
+		base = 150
+	}
+}
+shared_focus = {
+	id = MAF_AAPM_appease_the_accord
+	icon = GFX_MAF_A_Handshake_With_One_Hand
+	relative_position_id = MAF_AAPM_dawn_africa
+	cost = 3
+	x = -3
+	y = 4
+	completion_reward = {
+		country_event = {
+			id = MAF.1024
+		}
+		add_popularity = {
+			ideology = social_democrat
+			popularity = 0.10
+		}
+	}
+	prerequisite = {
+		focus = MAF_AAPM_continental_congress
+	}
+
+	ai_will_do = {
+		base = 150
+	}
+}
+shared_focus = {
+	id = MAF_AAPM_dagger_in_other
+	icon = GFX_MAF_And_A_Dagger_in_the_Other
+	relative_position_id = MAF_AAPM_dawn_africa
+	cost = 3
+	x = -3
+	y = 5
+	completion_reward = {
+		country_event = {
+			id = MAF.1025
+		}
+		add_popularity = {
+			ideology = revolutionary_republican
+			popularity = 0.05
+		}
+	}
+	prerequisite = {
+		focus = MAF_AAPM_appease_the_accord
+	}
+
+	ai_will_do = {
+		base = 150
+	}
+}
+shared_focus = {
+	id = MAF_AAPM_red_hour
+	icon = GFX_The_Red_Hour_of_the_Kickoff
+	relative_position_id = MAF_AAPM_dawn_africa
+	cost = 3
+	x = 0
+	y = 6
+	prerequisite = {
+		focus = MAF_AAPM_dagger_in_other
+	}
+	prerequisite = {
+		focus = MAF_AAPM_crush_the_lapdogs
+	}
+	prerequisite = {
+		focus = MAF_AAPM_power_centralised
+		focus = MAF_AAPM_power_devolved
+	}
+	completion_reward = {
+		MAF_aapm_ending_1 = yes
+	}
+
+	ai_will_do = {
+		base = 150
+	}
+}
+
+shared_focus = {
+	id = MAF_fading_rule
+	icon = GFX_SAF_German_Africa
+	cost = 5
+
+	x = 6
+	y = 0
+
+	available = {
+		OR = {
+			custom_trigger_tooltip = {
+				tooltip = MAF_more_than_10_states_controlled_by_insurgents
+				check_variable = {
+					MAF_insurgent_controlled_states^num > 10
+				}
+			}
+			set_temp_variable = {
+				MAF_temp_bureaucracy_check = 35
+			}
+			custom_trigger_tooltip = {
+				tooltip = MAF_bureaucracy_lessthan_check_tt
+				check_variable = {
+					MAF_bureaucracy_var < MAF_temp_bureaucracy_check
+				}
+			}
+		}
+	}
+
+	offset = {
+		trigger = {
+			has_focus_tree = MAF_Ribbentrop_tree
+		}
+		x = 2
+	}
+
+	completion_reward = {
+		if = {
+			limit = { 
+				has_active_mission = MAF_AAPM_making_moves_west
+			}
+			add_days_mission_timeout = {
+				mission = MAF_AAPM_making_moves_west
+				days = 45
+			}
+		}
+		else_if = {
+			limit = { 
+				has_active_mission = MAF_AAPM_making_moves_central
+			}
+			add_days_mission_timeout = {
+				mission = MAF_AAPM_making_moves_central
+				days = 45
+			}
+		}
+		else_if = {
+			limit = { 
+				has_active_mission = MAF_AAPM_making_moves_east
+			}
+			add_days_mission_timeout = {
+				mission = MAF_AAPM_making_moves_east
+				days = 45
+			}
+		}
+		else_if = {
+			limit = { 
+				has_active_mission = MAF_AAPM_making_moves_south
+			}
+			add_days_mission_timeout = {
+				mission = MAF_AAPM_making_moves_south
+				days = 45
+			}
+		}
+
+		unlock_decision_tooltip = MAF_transfer_control_of_asarki_unit_to_FROM
+	}
+
+	ai_will_do = {
+		base = 200
+
+		modifier = {
+			check_variable = {
+				MAF_bureaucracy_var < 25
+			}
+			factor = 3
+		}
+	}
+}
+
+shared_focus = {
+	id = MAF_strengthen_settler_administrations
+	icon = GFX_MAF_Recruiting_Local_Germans
+	cost = 9
+
+	prerequisite = {
+		focus = MAF_fading_rule
+	}
+
+	relative_position_id = MAF_fading_rule
+	x = -1
+	y = 1
+
+	completion_reward = {
+		every_owned_state = {
+			limit = {
+				has_dynamic_modifier = {
+					modifier = MAF_state_core_colony
+				}
+			}
+			add_to_variable = {
+				MAF_state_local_defence_level = 1
+				tooltip = MAF_local_defence_change_tt
+			}
+		}
+		add_to_variable = {
+			MAF_settler_var = 10
+			tooltip = MAF_settler_var_tt
+		}
+		unlock_decision_tooltip = MAF_elevate_the_sudwest_government
+		unlock_decision_tooltip = MAF_elevate_the_ost_government
+		unlock_decision_tooltip = MAF_elevate_the_kamerun_government
+		unlock_decision_tooltip = MAF_elevate_the_togo_government
+	}
+
+	ai_will_do = {
+		base = 200
+
+		modifier = {
+			check_variable = {
+				MAF_bureaucracy_var < 25
+			}
+			factor = 3
+		}
+	}
+}
+
+shared_focus = {
+	id = MAF_reinforce_crucial_points
+	icon = GFX_generic_nested_fortifications
+	cost = 3
+
+	prerequisite = {
+		focus = MAF_fading_rule
+	}
+
+	relative_position_id = MAF_fading_rule
+	x = 1
+	y = 1
+
+	completion_reward = {
+		1024 = {
+			add_to_variable = {
+				MAF_state_local_defence_level = 1
+				tooltip = MAF_local_defence_change_tt
+			}
+		}
+		1025 = {
+			add_to_variable = {
+				MAF_state_local_defence_level = 1
+				tooltip = MAF_local_defence_change_tt
+			}
+		}
+		1060 = {
+			add_to_variable = {
+				MAF_state_local_defence_level = 1
+				tooltip = MAF_local_defence_change_tt
+			}
+		}
+		1007 = {
+			add_to_variable = {
+				MAF_state_local_defence_level = 1
+				tooltip = MAF_local_defence_change_tt
+			}
+		}
+	}
+
+	ai_will_do = {
+		base = 200
+
+		modifier = {
+			check_variable = {
+				MAF_bureaucracy_var < 25
+			}
+			factor = 3
+		}
+	}
+}
+
+shared_focus = {
+	id = MAF_support_local_rulers
+	icon = GFX_MAF_African_Armies
+	cost = 5
+
+	prerequisite = {
+		focus = MAF_strengthen_settler_administrations
+	}
+
+	prerequisite = {
+		focus = MAF_reinforce_crucial_points
+	}
+
+	relative_position_id = MAF_strengthen_settler_administrations
+	x = 1
+	y = 1
+
+	completion_reward = {
+		unlock_decision_tooltip = MAF_promote_self_sufficient_agriculture_in_state
+	}
+
+	ai_will_do = {
+		base = 200
+
+		modifier = {
+			check_variable = {
+				MAF_bureaucracy_var < 25
+			}
+			factor = 3
+		}
+	}
+}
+
+shared_focus = {
+	id = MAF_planned_withdrawl
+	icon = GFX_DAH_No_German
+	cost = 5
+
+	prerequisite = {
+		focus = MAF_support_local_rulers
+	}
+
+
+	relative_position_id = MAF_support_local_rulers
+	x = 0
+	y = 1
+
+	completion_reward = {
+		custom_effect_tooltip = MAF_planned_withdrawl_tt
+		set_country_flag = MAF_decolonisation_plan
+		add_to_variable = {
+			MAF_bureaucracy_change_var = -0.75
+			tooltip = MAF_bureaucracy_change_var_tt
+		}
+
+		unlock_decision_tooltip = MAF_deal_with_the_devil
+		if ={
+			limit = {
+				has_focus_tree = MAF_Ribbentrop_tree
+			}
+			unlock_decision_tooltip = MAF_change_in_leadership
+		}
+	}
+
+	ai_will_do = {
+		base = 200
+
+		modifier = {
+			check_variable = {
+				MAF_bureaucracy_var < 25
+			}
+			factor = 3
+		}
+	}
+}
+
+shared_focus = {
+	id = MAF_target_aapm_leadership
+	icon = GFX_MAF_one_movement_one_people
+	cost = 5
+
+	prerequisite = {
+		focus = MAF_strengthen_settler_administrations
+	}
+
+	allow_branch = {
+		has_focus_tree = MAF_Ribbentrop_tree
+	}
+
+	relative_position_id = MAF_strengthen_settler_administrations
+	x = -1
+	y = 1
+
+	completion_reward = {
+		custom_effect_tooltip = MAF_infiltrate_AAPM_tt
+		unlock_decision_tooltip = MAF_infiltrate_AAPM_deci
+	}
+
+	ai_will_do = {
+		base = 100
+
+		modifier = {
+			check_variable = {
+				MAF_bureaucracy_var < 25
+			}
+			factor = 2
+		}
+	}
+}
+
+shared_focus = {
+	id = MAF_turn_african_leaders
+	icon = GFX_MAF_And_A_Dagger_in_the_Other
+	cost = 5
+
+	prerequisite = {
+		focus = MAF_target_aapm_leadership
+		focus = MAF_support_local_rulers
+
+	}
+
+	allow_branch = {
+		has_focus_tree = MAF_Ribbentrop_tree
+	}
+
+	relative_position_id = MAF_target_aapm_leadership
+	x = 0
+	y = 1
+
+	completion_reward = {
+		unlock_decision_tooltip = MAF_prepare_loyal_governments_in_burundi_rwanda
+		unlock_decision_tooltip = MAF_destroy_Ugandan_republicans
+		unlock_decision_tooltip = MAF_support_KTG_independence
+		if ={
+			limit = {
+				has_idea = MAF_kaiuwe_von_hassel_hog_sli
+			}
+			unlock_decision_tooltip = MAF_negotiate_with_leaders
+		}
+	}
+
+	ai_will_do = {
+		base = 100
+
+		modifier = {
+			check_variable = {
+				MAF_bureaucracy_var < 25
+			}
+			factor = 2
+		}
+	}
+}
+
+shared_focus = {
+	id = MAF_prepare_RP_africa
+	icon = GFX_GER_Deutsches_Weltreich
+	cost = 5
+
+	prerequisite = {
+		focus = MAF_turn_african_leaders
+	}
+
+	prerequisite = {
+		focus = MAF_planned_withdrawl
+	}
+
+	allow_branch = {
+		has_focus_tree = MAF_Ribbentrop_tree
+	}
+
+	relative_position_id = MAF_turn_african_leaders
+	x = 1
+	y = 1
+
+	completion_reward = {
+		unlock_decision_tooltip = MAF_cement_military_prescense_in_kamerun
+		unlock_decision_tooltip = MAF_cement_military_prescense_in_togoland
+		unlock_decision_tooltip = MAF_reinforce_the_colonial_gateway
+		if ={
+			limit = {
+				has_idea = MAF_kaiuwe_von_hassel_hog_sli
+			}
+			unlock_decision_tooltip = MAF_prepare_the_conference_deci
+		}
+	}
+
+	ai_will_do = {
+		base = 75
+
+		modifier = {
+			check_variable = {
+				MAF_bureaucracy_var < 25
+			}
+			factor = 2
+		}
+
+		modifier = {
+			check_variable = {
+				MAF_bureaucracy_var < 20
+			}
+			factor = 3
+		}
+	}
+}
+
+shared_focus = {
+	id = MAF_secure_heer_reinforcements
+	icon = GFX_GER_renewed_militarism
+	cost = 5
+	prerequisite = {
+		focus = MAF_reinforce_crucial_points
+	}
+
+	allow_branch = {
+		has_focus_tree = MAF_Hippel_tree
+	}
+
+	relative_position_id = MAF_reinforce_crucial_points
+	x = 1
+	y = 1
+	#ai_will_do = {
+	#	factor = 12
+	#}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MAF_secure_heer_reinforcements"
+		unlock_decision_tooltip = MAF_request_infantry_divisions
+		unlock_decision_tooltip = MAF_request_armored_units
+	}
+
+	ai_will_do = {
+		base = 75
+
+		modifier = {
+			check_variable = {
+				MAF_bureaucracy_var < 25
+			}
+			factor = 2
+		}
+
+		modifier = {
+			check_variable = {
+				MAF_bureaucracy_var < 20
+			}
+			factor = 3
+		}
+	}
+}
+
+shared_focus = {
+	id = MAF_four_fortresses_focus
+	icon = GFX_GER_Deutsches_Weltreich
+	cost = 5
+
+	prerequisite = {
+		focus = MAF_secure_heer_reinforcements
+	}
+
+	allow_branch = {
+		has_focus_tree = MAF_Hippel_tree
+	}
+
+	relative_position_id = MAF_secure_heer_reinforcements
+	x = 0
+	y = 1
+
+	completion_reward = {
+		add_ideas = MAF_four_fortresses
+		unlock_decision_tooltip = MAF_prepare_loyal_governments_in_burundi_rwanda
+		unlock_decision_tooltip = MAF_cement_military_prescense_in_kamerun
+		unlock_decision_tooltip = MAF_cement_military_prescense_in_togoland
+	}
+
+	ai_will_do = {
+		base = 50
+
+		modifier = {
+			check_variable = {
+				MAF_bureaucracy_var < 25
+			}
+			factor = 2
+		}
+
+		modifier = {
+			check_variable = {
+				MAF_bureaucracy_var < 20
+			}
+			factor = 3
+		}
+	}
+}
+
+shared_focus = {
+	id = MAF_divide_and_rule
+	icon = GFX_generic_crush_MAF
+	cost = 5
+
+	prerequisite = {
+		focus = MAF_four_fortresses_focus
+	}
+
+	prerequisite = {
+		focus = MAF_planned_withdrawl
+	}
+	
+	allow_branch = {
+		has_focus_tree = MAF_Hippel_tree
+	}
+
+	relative_position_id = MAF_four_fortresses_focus
+	x = -1
+	y = 1
+
+	completion_reward = {
+		unlock_decision_tooltip = MAF_reinforce_the_colonial_gateway
+		unlock_decision_tooltip = MAF_support_KTG_independence
+		unlock_decision_tooltip = MAF_destroy_Ugandan_republicans
+	}
+
+	ai_will_do = {
+		base = 50
+
+		modifier = {
+			check_variable = {
+				MAF_bureaucracy_var < 25
+			}
+			factor = 2
+		}
+
+		modifier = {
+			check_variable = {
+				MAF_bureaucracy_var < 20
+			}
+			factor = 3
+		}
+	}
+}
+
+shared_focus = {
+	id = MAF_liquidate_africa
+	icon = GFX_generic_generic_seize_money
+	cost = 5
+	
+	x = 6
+	y = 0
+
+	available = {
+		OR = {
+			custom_trigger_tooltip = {
+				tooltip = MAF_more_than_10_states_controlled_by_insurgents
+				check_variable = {
+					MAF_insurgent_controlled_states^num > 10
+				}
+			}
+			set_temp_variable = {
+				MAF_temp_bureaucracy_check = 35
+			}
+			custom_trigger_tooltip = {
+				tooltip = MAF_bureaucracy_lessthan_check_tt
+				check_variable = {
+					MAF_bureaucracy_var < MAF_temp_bureaucracy_check
+				}
+			}
+		}
+	}
+
+	completion_reward = {
+		if = {
+			limit = { 
+				has_active_mission = MAF_AAPM_making_moves_west
+			}
+			add_days_mission_timeout = {
+				mission = MAF_AAPM_making_moves_west
+				days = 45
+			}
+		}
+		else_if = {
+			limit = { 
+				has_active_mission = MAF_AAPM_making_moves_central
+			}
+			add_days_mission_timeout = {
+				mission = MAF_AAPM_making_moves_central
+				days = 45
+			}
+		}
+		else_if = {
+			limit = { 
+				has_active_mission = MAF_AAPM_making_moves_east
+			}
+			add_days_mission_timeout = {
+				mission = MAF_AAPM_making_moves_east
+				days = 45
+			}
+		}
+		else_if = {
+			limit = { 
+				has_active_mission = MAF_AAPM_making_moves_south
+			}
+			add_days_mission_timeout = {
+				mission = MAF_AAPM_making_moves_south
+				days = 45
+			}
+		}
+		activate_mission = MAF_krupp_AAPM_long_march
+		custom_effect_tooltip = MAF_begin_liquidation
+	}
+
+	ai_will_do = {
+		base = 200
+
+		modifier = {
+			check_variable = {
+				MAF_bureaucracy_var < 25
+			}
+			factor = 3
+		}
+	}
+}
+
+shared_focus = {
+	id = MAF_sell_assets
+	icon = GFX_generic_foreign_investments
+	cost = 5
+
+	prerequisite = {
+		focus = MAF_liquidate_africa
+	}
+
+	allow_branch = {
+		has_focus_tree = MAF_Krupp_tree
+	}
+
+	relative_position_id = MAF_liquidate_africa
+	x = 1
+	y = 1
+
+	completion_reward = {
+		unlock_decision_tooltip = MAF_deal_with_the_devil
+		unlock_decision_tooltip = MAF_sell_military_equipment
+		unlock_decision_tooltip = MAF_sell_national_industry
+	}
+
+	ai_will_do = {
+		base = 50
+
+		modifier = {
+			check_variable = {
+				MAF_bureaucracy_var < 25
+			}
+			factor = 2
+		}
+
+		modifier = {
+			check_variable = {
+				MAF_bureaucracy_var < 20
+			}
+			factor = 3
+		}
+	}
+}
+
+shared_focus = {
+	id = MAF_appeasing_settlers
+	icon = GFX_GER_our_continent
+	cost = 5
+
+	prerequisite = {
+		focus = MAF_liquidate_africa
+	}
+
+	allow_branch = {
+		has_focus_tree = MAF_Krupp_tree
+	}
+
+	relative_position_id = MAF_liquidate_africa
+	x = -1
+	y = 1
+
+	completion_reward = {
+		unlock_decision_tooltip = MAF_elevate_the_sudwest_government
+		unlock_decision_tooltip = MAF_protect_settler_property
+		unlock_decision_tooltip = MAF_sell_settler_property
+	}
+
+	ai_will_do = {
+		base = 50
+
+		modifier = {
+			check_variable = {
+				MAF_bureaucracy_var < 25
+			}
+			factor = 2
+		}
+
+		modifier = {
+			check_variable = {
+				MAF_bureaucracy_var < 20
+			}
+			factor = 3
+		}
+	}
+}
+
+shared_focus = {
+	id = MAF_scam_protectorates
+	icon = GFX_generic_positive_trade_relations_gold
+	cost = 5
+
+	prerequisite = {
+		focus = MAF_sell_assets
+	}
+
+	allow_branch = {
+		has_focus_tree = MAF_Krupp_tree
+	}
+
+	relative_position_id = MAF_liquidate_africa
+	x = 2
+	y = 2
+
+	completion_reward = {
+		unlock_decision_tooltip = MAF_support_KTG_independence
+		unlock_decision_tooltip = MAF_support_pro_business_COG_leaders
+		unlock_decision_tooltip = MAF_unequal_treaties
+		unlock_decision_tooltip = MAF_plunder_protected_land
+	}
+
+	ai_will_do = {
+		base = 50
+
+		modifier = {
+			check_variable = {
+				MAF_bureaucracy_var < 25
+			}
+			factor = 2
+		}
+
+		modifier = {
+			check_variable = {
+				MAF_bureaucracy_var < 20
+			}
+			factor = 3
+		}
+	}
+}
+
+shared_focus = {
+	id = MAF_hire_mercs
+	icon = GFX_generic_purge_opposition
+	cost = 5
+
+	prerequisite = {
+		focus = MAF_appeasing_settlers
+	}
+
+	allow_branch = {
+		has_focus_tree = MAF_Krupp_tree
+	}
+
+	relative_position_id = MAF_liquidate_africa
+	x = 0
+	y = 2
+
+	completion_reward = {
+		unlock_decision_tooltip = MAF_stop_aapm_advance
+		unlock_decision_tooltip = MAF_destroy_Ugandan_republicans
+		set_temp_variable = { temp_value = -0.010 }
+		MAF_change_MAF_Krupp_speed_var = yes
+	}
+
+	ai_will_do = {
+		base = 50
+
+		modifier = {
+			check_variable = {
+				MAF_bureaucracy_var < 25
+			}
+			factor = 2
+		}
+
+		modifier = {
+			check_variable = {
+				MAF_bureaucracy_var < 20
+			}
+			factor = 3
+		}
+	}
+}
+
+shared_focus = {
+	id = MAF_extract_everything
+	icon = GFX_generic_forced_res
+	cost = 5
+
+	prerequisite = {
+		focus = MAF_scam_protectorates
+	}
+
+	allow_branch = {
+		has_focus_tree = MAF_Krupp_tree
+	}
+
+	relative_position_id = MAF_liquidate_africa
+	x = 1
+	y = 3
+
+	completion_reward = {
+		unlock_decision_tooltip = MAF_increase_quotas
+		unlock_decision_tooltip = MAF_sell_mines
+		set_temp_variable = { temp_value = 0.025 }
+		MAF_change_MAF_Krupp_growth_var = yes
+	}
+
+	ai_will_do = {
+		base = 50
+
+		modifier = {
+			check_variable = {
+				MAF_bureaucracy_var < 25
+			}
+			factor = 2
+		}
+
+		modifier = {
+			check_variable = {
+				MAF_bureaucracy_var < 20
+			}
+			factor = 3
+		}
+	}
+}
+
+shared_focus = {
+	id = MAF_placing_blame
+	icon = GFX_MAF_And_A_Dagger_in_the_Other
+	cost = 5
+
+	prerequisite = {
+		focus = MAF_extract_everything
+	}
+	prerequisite = {
+		focus = MAF_hire_mercs
+	}
+
+	allow_branch = {
+		has_focus_tree = MAF_Krupp_tree
+	}
+
+	relative_position_id = MAF_liquidate_africa
+	x = 0
+	y = 4
+
+	completion_reward = {
+		set_politics = {
+			ruling_party = social_conservative
+			elections_allowed = no
+		}
+		promote_character = MAF_otto_abetz
+		coal_add_pat_aut = yes
+		coal_add_mar_lib = yes
+	}
+
+	ai_will_do = {
+		base = 50
+
+		modifier = {
+			check_variable = {
+				MAF_bureaucracy_var < 25
+			}
+			factor = 2
+		}
+
+		modifier = {
+			check_variable = {
+				MAF_bureaucracy_var < 20
+			}
+			factor = 3
+		}
+	}
+}
+
+shared_focus = {
+	id = MAF_reap_rewards
+	icon = GFX_generic_foreign_policy
+	cost = 5
+
+	prerequisite = {
+		focus = MAF_placing_blame
+	}
+
+	allow_branch = {
+		has_focus_tree = MAF_Krupp_tree
+	}
+
+	relative_position_id = MAF_liquidate_africa
+	x = 0
+	y = 5
+
+	completion_reward = {
+		custom_effect_tooltip = MAF_planned_withdrawl_tt
+		GER = {
+			add_dynamic_modifier = {
+				modifier = GER_krupps_rewards
+				scope = MAF
+			}
+		}
+		hidden_effect = {
+			set_country_flag = MAF_krupp_evac
+			set_country_flag = MAF_decolonisation_plan
+			country_event = {
+				id = MAF_collapse.1
+				days = 1
+			}
+		}
+	}
+
+	ai_will_do = {
+		base = 100
+
+		modifier = {
+			check_variable = {
+				MAF_bureaucracy_var < 25
+			}
+			factor = 2
+		}
+
+		modifier = {
+			check_variable = {
+				MAF_bureaucracy_var < 20
+			}
+			factor = 3
+		}
+	}
+}

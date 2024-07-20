@@ -1,0 +1,519 @@
+add_namespace = krg_sic
+
+country_event = {
+	id = krg_sic.1
+    title = krg_sic.1.t
+    desc = krg_sic.1.d
+	picture = GFX_report_event_ITA_parliament
+
+    is_triggered_only = yes
+	trigger = {
+		tag = SIC
+	}
+	immediate = {
+		set_country_flag = KRG_SIC_elections_held
+	}
+
+    option = {
+		name = krg_sic.1.a
+		coal_rev_all = yes
+		add_popularity = {
+			popularity = 0.1
+			ideology = social_conservative
+		}
+		add_war_support = -0.1
+		remove_ideas = SIC_the_national_compromise
+		country_event = {
+			id = krg_sic.2
+			days = 100
+		}
+		ITA = {
+			country_event = {
+				id = krg_sic.14
+				days = 5
+			}
+		}
+		ITA = {
+			country_event = {
+				id = krg_sic.14
+				days = 5
+			}
+		}
+    }
+}
+
+country_event = {
+	id = krg_sic.2
+    title = krg_sic.2.t
+    desc = krg_sic.2.d
+	picture = GFX_report_event_ITA_parliament
+
+    is_triggered_only = yes
+	trigger = {
+		tag = SIC
+	}
+
+    option = {
+		name = krg_sic.2.a
+		set_cosmetic_tag = SIC_southern_administration
+		create_country_leader = {
+			name = "Luigi Sturzo"
+			picture = "Portrait_SIC_Luigi_Sturzo.png"
+			expire = "1982.1.1"
+			ideology = social_conservative_subtype
+		}
+		remove_ideas = SIC_christdems_republican_sympathies
+		if = {
+			limit = {
+				country_exists = ITA
+			}
+			country_event = {
+				id = krg_sic.4
+				days = 10
+			}
+		}
+		else = {
+			country_event = {
+				id = krg_sic.8
+				days = 10
+			}
+			remove_ideas = SIC_military_monarchist_sympathies
+		}
+		ai_chance = {
+			base = 95
+		}
+    }
+    option = {
+		name = krg_sic.2.b
+		add_stability = -0.1
+		if = {
+			limit = {
+				country_exists = ITA
+			}
+			country_event = {
+				id = krg_sic.3
+				days = 40
+			}
+		}
+		else = {
+			country_event = {
+				id = krg_sic.12
+				days = 40
+			}
+			remove_ideas = SIC_military_monarchist_sympathies
+		}
+		ai_chance = {
+			base = 5
+		}
+		add_popularity = {
+			popularity = 0.5
+			ideology = national_populist
+		}
+		remove_ideas = SIC_christdems_republican_sympathies
+		set_politics = {
+			ruling_party = national_populist
+			last_election = "1945.6.2"
+			election_frequency = 48
+			elections_allowed = no
+		}
+		ITA = {
+			country_event = {
+				id = krg_sic.15
+				days = 5
+			}
+		}
+		ITA = {
+			country_event = {
+				id = krg_sic.15
+				days = 5
+			}
+		}
+    }
+}
+
+country_event = {
+	id = krg_sic.3
+    title = krg_sic.3.t
+    desc = krg_sic.3.d
+	picture = GFX_report_event_ITA_parliament
+
+    is_triggered_only = yes
+	trigger = {
+		tag = SIC
+		country_exists = ITA
+	}
+
+    option = {
+		name = krg_sic.3.a
+		ai_chance = {
+			base = 97.5
+		}
+		remove_ideas = SIC_military_monarchist_sympathies
+		add_popularity = {
+			popularity = 0.5
+			ideology = market_liberal
+		}
+		set_politics = {
+			ruling_party = market_liberal
+			last_election = "1945.6.2"
+			election_frequency = 48
+			elections_allowed = no
+		}
+		set_cosmetic_tag = SIC_southern_administration
+		create_country_leader = {
+			name = "Giovanni Messe"
+			picture = "Portrait_SIC_Giovanni_Messe_Civilian.png"
+			expire = "1982.1.1"
+			ideology = market_liberal_subtype
+		}
+		country_event = {
+			id = krg_sic.4
+			days = 20
+		}
+    }
+
+    option = {
+		name = krg_sic.3.b
+		add_stability = -0.1
+		ai_chance = {
+			base = 2.5
+		}
+		remove_ideas = SIC_military_monarchist_sympathies
+		country_event = {
+			id = krg_sic.12
+			days = 20
+		}
+    }
+}
+
+country_event = {
+	id = krg_sic.4
+    title = krg_sic.4.t
+    desc = krg_sic.4.d
+	picture = GFX_report_event_ITA_parliament
+
+    is_triggered_only = yes
+	trigger = {
+		tag = SIC
+	}
+
+    option = {
+		name = krg_sic.4.a
+		remove_ideas = SIC_military_monarchist_sympathies
+		create_country_leader = {
+			name = "Giovanni Messe"
+			picture = "Portrait_SIC_Giovanni_Messe_Civilian.png"
+			expire = "1982.1.1"
+			ideology = market_liberal_subtype
+		}
+		set_politics = {
+			ruling_party = market_liberal
+			last_election = "1945.6.2"
+			election_frequency = 48
+			elections_allowed = no
+		}
+		coal_add_soc_lib = yes
+		coal_add_soc_con = yes
+		hidden_effect = {
+			set_popularities = {
+				authoritarian_socialist = 1
+				radical_socialist = 2
+				social_democrat = 9
+				revolutionary_republican = 5
+				social_liberal = 4
+				market_liberal = 36
+				social_conservative = 31
+				authoritarian_democrat = 5
+				paternal_autocrat = 5
+				national_populist = 2
+			}
+		}
+		ITA = {
+			country_event = {
+				id = krg_sic.5
+				days = 5
+			}
+		}
+    }
+}
+
+country_event = {
+	id = krg_sic.5
+    title = krg_sic.5.t
+    desc = krg_sic.5.d
+	picture = GFX_report_event_ITA_parliament
+
+    is_triggered_only = yes
+	trigger = {
+		tag = ITA
+	}
+
+    option = {
+		name = krg_sic.5.a
+		add_ideas = ITA_woes_of_the_south
+		SIC = {
+			country_event = {
+				id = krg_sic.6
+				days = 5
+			}
+		}
+    }
+}
+
+country_event = {
+	id = krg_sic.6
+    title = krg_sic.6.t
+    desc = krg_sic.6.d
+	picture = GFX_report_event_ITA_parliament
+
+    is_triggered_only = yes
+	trigger = {
+		tag = SIC
+	}
+
+    option = {
+		name = krg_sic.6.a
+		news_event = krg_sic.7
+		set_global_flag = ITA_puppeted_SIC
+		transfer_navy = {
+			target = ITA
+		}
+		ITA = { change_tag_from = ROOT }
+		ITA = {
+			puppet = SIC
+		}
+		hidden_effect = {
+			set_politics = {
+				ruling_party = market_liberal
+				last_election = "1945.6.2"
+				election_frequency = 48
+				elections_allowed = no
+			}
+			set_popularities = {
+				authoritarian_socialist = 1
+				radical_socialist = 2
+				social_democrat = 9
+				revolutionary_republican = 5
+				social_liberal = 4
+				market_liberal = 36
+				social_conservative = 31
+				authoritarian_democrat = 5
+				paternal_autocrat = 5
+				national_populist = 2
+			}
+		}
+    }
+}
+
+news_event = {
+	id = krg_sic.7
+    title = krg_sic.7.t
+    desc = krg_sic.7.d
+	picture = GFX_ne_naples
+
+    is_triggered_only = yes
+	major = yes
+
+    option = {
+		name = krg_sic.7.a
+    }
+}
+
+country_event = {
+	id = krg_sic.8
+    title = krg_sic.8.t
+    desc = krg_sic.8.d
+	picture = GFX_report_event_ITA_parliament
+
+    is_triggered_only = yes
+	trigger = {
+		tag = SIC
+	}
+
+    option = {
+		name = krg_sic.8.a
+		ITA = {
+			country_event = {
+				id = krg_sic.9
+				days = 5
+			}
+		}
+    }
+}
+
+country_event = {
+	id = krg_sic.9
+    title = krg_sic.9.t
+    desc = krg_sic.9.d
+	picture = GFX_report_event_ITA_parliament
+
+    is_triggered_only = yes
+	trigger = {
+		tag = ITA
+	}
+
+    option = {
+		name = krg_sic.9.a
+		SIC = {
+			country_event = {
+				id = krg_sic.10
+				days = 5
+			}
+		}
+    }
+}
+
+country_event = {
+	id = krg_sic.10
+    title = krg_sic.10.t
+    desc = krg_sic.10.d
+	picture = GFX_report_event_ITA_parliament
+
+    is_triggered_only = yes
+	trigger = {
+		tag = SIC
+	}
+
+    option = {
+		name = krg_sic.10.a
+		news_event = krg_sic.11
+		transfer_navy = {
+			target = ITA
+		}
+		ITA = { change_tag_from = ROOT }
+		ITA = {
+			annex_country = {
+				target = SIC
+				transfer_troops = yes
+			}
+		}
+		if ={ 
+			limit ={
+				SIC ={ 
+					is_in_FAMED = yes
+				}
+			}
+			SIC ={
+				clr_country_flag = is_in_FAMED
+		    }
+			calculate_influence_for_all = yes
+        }
+	}
+}
+
+news_event = {
+	id = krg_sic.11
+    title = krg_sic.11.t
+    desc = krg_sic.11.d
+	picture = GFX_ne_naples
+
+    is_triggered_only = yes
+	major = yes
+
+    option = {
+		name = krg_sic.11.a
+    }
+}
+
+country_event = {
+	id = krg_sic.12
+    title = krg_sic.12.t
+    desc = krg_sic.12.d
+	picture = GFX_report_event_ITA_parliament
+
+    is_triggered_only = yes
+	trigger = {
+		tag = SIC
+	}
+
+    option = {
+		name = krg_sic.12.a
+		news_event = krg_sic.13
+		leave_faction = yes
+		if ={ 
+			limit ={
+				SIC ={ 
+					is_in_FAMED = yes
+				}
+			}
+			SIC ={
+				clr_country_flag = is_in_FAMED
+		    }
+			calculate_influence_for_all = yes
+        }
+    }
+}
+
+news_event = {
+	id = krg_sic.13
+    title = krg_sic.13.t
+    desc = krg_sic.13.d
+	picture = GFX_ne_naples
+
+    is_triggered_only = yes
+	major = yes
+
+    option = {
+		name = krg_sic.13.a
+    }
+}
+
+country_event = {
+	id = krg_sic.14
+    title = krg_sic.14.t
+    desc = krg_sic.14.d
+	picture = GFX_report_event_ITA_parliament
+
+    is_triggered_only = yes
+	trigger = {
+		OR = {
+			tag = ITA
+			tag = ITA
+		}
+	}
+
+    option = {
+		name = krg_sic.14.a
+    }
+}
+
+country_event = {
+	id = krg_sic.15
+    title = krg_sic.15.t
+    desc = krg_sic.15.d
+	picture = GFX_report_event_ITA_parliament
+
+    is_triggered_only = yes
+	trigger = {
+		OR = {
+			tag = ITA
+			tag = ITA
+		}
+	}
+
+    option = {
+		name = krg_sic.15.a
+    }
+}
+
+country_event = {
+	id = krg_sic.16
+    title = krg_sic.16.t
+    desc = krg_sic.16.d
+	picture = GFX_report_event_ITA_parliament
+
+    is_triggered_only = yes
+
+    option = {
+		name = krg_sic.16.a
+		set_cosmetic_tag = SIC_ITA
+		annex_country = {
+			target = PAP
+		}
+		every_owned_state = {
+			add_claim_by = SIC
+			remove_claim_by = ITA
+			remove_claim_by = ITA
+		}
+    }
+}

@@ -1,0 +1,140 @@
+UOB_victory = {
+	news_event = { id = krg_uob_news.2 }
+	MXF = {
+		transfer_units_fraction= {
+			target = UOB
+			size = 1
+			stockpile_ratio = 1
+			army_ratio = 1
+			navy_ratio = 1
+			air_ratio = 1
+		}
+		every_core_state = {
+			remove_core_of = MXF
+		}
+	}
+	CAN = {
+		850 = {
+			transfer_state_to = ENG
+			remove_core_of = ENG
+		}
+	}
+	ENG = {
+		transfer_navy = { target = UOB }
+		every_core_state = {
+			transfer_state_to = UOB
+			remove_core_of = ENG
+			add_claim_by = ENG
+		}
+		white_peace = UOB
+		white_peace = MXF
+		850 = {
+			add_core_of = ENG
+		}
+		load_focus_tree = generic_focus
+		remove_ideas = {
+			ENG_return_of_the_king
+			ENG_second_british_revolution_idea
+			ENG_lingering_german_occupation
+		}
+		remove_dynamic_modifier = {
+			modifier = ENG_syndicalist_resistance_modifier
+		}
+		set_cosmetic_tag = ENG_exile
+	}
+	UOB = {
+		change_tag_from	= MXF
+	}
+	UOB = {
+		set_cosmetic_tag = UOB_provisional_government
+		annex_country = { target = MXF }
+		GER = {country_event = { id = krg_uob.6 days = 10 }}
+		dismantle_faction = yes
+		remove_ideas = UOB_second_british_revolution_idea
+		set_capital = {
+			state = 128
+		}
+	}
+	add_to_variable = { ENG.ENG_BlitzConsumerGoods = 0.2 }
+	add_to_variable = { ENG.ENG_BlitzIndustrialFactory = -0.3 }
+	add_to_variable = { ENG.ENG_BlitzIndustrialDockyard = -0.3 }
+	add_to_variable = { ENG.ENG_BlitzMaxEfficiency = -0.15 }
+	add_to_variable = { ENG.ENG_BlitzEfficiencyGain = -0.15 }
+	add_to_variable = { ENG.ENG_BlitzConstructionSpeed = -0.2 }
+	every_country = {
+		limit = {
+			is_in_faction_with = ENG
+		}
+		send_embargo = UOB
+	}
+}
+
+UOB_GER_puppet_effect = {
+	white_peace = GER
+	every_country_division = {
+		destroy_unit = yes
+	}
+	set_politics = {
+		ruling_party = paternal_autocrat
+	}
+	
+	add_to_variable = { ENG.ENG_BlitzConsumerGoods = 0.2 }
+	add_to_variable = { ENG.ENG_BlitzIndustrialFactory = -0.3 }
+	add_to_variable = { ENG.ENG_BlitzIndustrialDockyard = -0.3 }
+	add_to_variable = { ENG.ENG_BlitzMaxEfficiency = -0.15 }
+	add_to_variable = { ENG.ENG_BlitzEfficiencyGain = -0.15 }
+	add_to_variable = { ENG.ENG_BlitzConstructionSpeed = -0.2 }
+	
+	add_ideas = {
+		KRG_military_occupation
+		UOB_GER_german_occupation
+		UOB_GER_lingering_spectre
+	}
+
+	set_cosmetic_tag = UOB_GER
+	GER = {
+		UOB = {
+			get_current_government_type = yes
+		}
+		if = {
+			limit = {
+				has_subject_autonomy_feature = yes
+			}
+			set_autonomy = {
+				target = UOB
+				autonomous_state = krg_military_occupation
+			}
+		}
+		else = {
+			puppet = UOB
+		}
+		save_event_target_as = on_puppet_master_tag
+		UOB = {
+			standard_on_puppet_effect = yes
+			restore_previous_government_type = yes
+		}
+	}
+	GER = {
+		GER_hans_speidel = {
+			set_nationality = UOB
+		}
+	}
+	GER_hans_speidel = {
+		add_country_leader_role = {
+			country_leader = { ideology = paternal_autocrat_military_junta }
+			promote_leader = yes
+		}
+	}
+
+	set_politics = {
+		ruling_party = paternal_autocrat
+		name = UOB_GER_paternal_autocrat_party
+		long_name = UOB_GER_paternal_autocrat_party_long
+	}
+
+	set_capital = {
+		state = 126
+	}
+
+	country_event = { id = krg_uob.10 days = 25 }
+}

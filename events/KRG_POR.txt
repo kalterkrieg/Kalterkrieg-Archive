@@ -1,0 +1,401 @@
+add_namespace = krg_por
+add_namespace = krg_por_angola
+add_namespace = krg_por_angola_news
+add_namespace = krg_por_mozambique
+add_namespace = krg_por_mozambique_news
+
+country_event = {
+	id = krg_por.0	
+	is_triggered_only = yes
+	fire_only_once = yes
+	title = krg_por.0.t
+	desc = krg_por.0.d
+	immediate = {
+	
+	}
+	option = {
+		name = krg_por.0.a
+		POR = { 
+			add_political_power = 100
+		  	add_popularity = {
+				ideology = revolutionary_republican
+				popularity = 0.05
+			}	
+		 remove_ideas = POR_exiled_king 
+		} 
+		news_event = { id = krg_por.1 }
+	}
+}
+
+news_event = {
+	id = krg_por.1
+	title = krg_por.0.t
+	desc = krg_por.0.d
+	picture = GFX_ne_generic_funeral
+	is_triggered_only = yes
+	fire_for_sender = no
+	major = yes
+		
+	option = {
+		name = krg_por.0.a
+	}
+}
+
+country_event = { #Goa
+	id = krg_por.2
+	title = krg_por.2.t
+	desc = krg_por.2.d
+	is_triggered_only = yes
+	fire_only_once = yes
+		
+	option = {
+		name = krg_por.2.a
+		transfer_state = 321
+	}
+}
+
+country_event = { #Macau
+	id = krg_por.3
+	title = krg_por.3.t
+	desc = krg_por.3.d
+	is_triggered_only = yes
+	fire_only_once = yes
+		
+	option = {
+		name = krg_por.3.a
+		transfer_state = 729
+	}
+}
+
+country_event = { #Timor
+	id = krg_por.4
+	title = krg_por.4.t
+	desc = krg_por.4.d
+	is_triggered_only = yes
+	fire_only_once = yes
+		
+	option = {
+		name = krg_por.4.a
+		transfer_state = 721
+		721 = {
+			start_resistance = yes
+		}
+	}
+}
+
+country_event = { #Abolish Indigene Law
+	id = krg_por_angola.0	
+	is_triggered_only = yes
+	fire_only_once = yes
+	title = krg_por_angola.0.t
+	desc = krg_por_angola.0.d
+	immediate = {
+	
+	}
+	option = {
+		name = krg_por_angola.0.a
+	}
+}
+
+country_event = { #Ban Labour Conscription
+	id = krg_por_angola.1 
+	is_triggered_only = yes
+	fire_only_once = yes
+	title = krg_por_angola.1.t
+	desc = krg_por_angola.1.d
+	immediate = {
+	
+	}
+	option = {
+		name = krg_por_angola.1.a
+	}
+}
+
+country_event = { # Limit CUF Operations
+	id = krg_por_angola.2
+	is_triggered_only = yes
+	fire_only_once = yes
+	title = krg_por_angola.2.t
+	desc = krg_por_angola.2.d
+	immediate = {
+	
+	}
+	option = {
+		name = krg_por_angola.2.a
+	}
+}
+
+country_event = { # I consider this an absolute fail
+	id = krg_por_angola.3
+	is_triggered_only = yes
+	fire_only_once = yes
+	title = krg_por_angola.3.t
+	desc = krg_por_angola.3.d
+	immediate = {
+		hidden_effect = {
+			POR = {
+				every_owned_state = {
+					limit = { is_core_of = ANG }
+					transfer_state_to = ANG
+				}
+			}
+			ANG = {
+				set_popularities = {
+					authoritarian_socialist = 1
+					radical_socialist = 5
+					social_democrat = 12
+					revolutionary_republican = 33
+					social_liberal = 8
+					market_liberal = 4
+					social_conservative = 17
+					authoritarian_democrat = 4
+					paternal_autocrat = 15
+					national_populist = 1
+				}
+				set_politics = {
+					ruling_party = revolutionary_republican
+					elections_allowed = no
+				}
+				coal_add_soc_dem = yes
+				coal_add_soc_lib = yes
+				coal_add_pat_aut = yes
+				add_ideas = {
+					KRG_presidential_democracy
+				}
+				move_up_mobilization = yes
+				move_up_econ_mobilization = yes
+				move_down_military = yes
+				move_up_immigration = yes
+				move_down_edu_spending = yes
+				move_down_business_spending = yes
+				move_down_inf_spending = yes
+			}
+			add_to_array = { global.influence_log = 34 }
+			add_to_array = { global.influence_log_val = -5 }
+			influence_recalc = yes
+		}
+	}
+	option = {
+		name = krg_por_angola.3.a
+	}
+}
+
+country_event = { # I consider this an absolute win!
+	id = krg_por_angola.4
+	is_triggered_only = yes
+	fire_only_once = yes
+	title = krg_por_angola.4.t
+	desc = krg_por_angola.4.d
+	immediate = {
+		hidden_effect = {
+			POR = {
+				if = { 
+					limit = {
+						has_subject_autonomy_feature = yes
+					}
+					release_autonomy = {
+						target = ANG
+						autonomy_state = krg_colony
+					}
+				}
+				else = {
+					release_puppet = ANG
+				}
+			}
+			ANG = {
+				inherit_technology = POR
+				set_cosmetic_tag = ANG_interim
+				set_popularities = {
+					authoritarian_socialist = 1
+					radical_socialist = 5
+					social_democrat = 12
+					revolutionary_republican = 33
+					social_liberal = 8
+					market_liberal = 4
+					social_conservative = 17
+					authoritarian_democrat = 4
+					paternal_autocrat = 15
+					national_populist = 1
+				}
+				set_politics = {
+					ruling_party = paternal_autocrat
+					elections_allowed = yes
+					election_frequency = 72
+					last_election = 1950.1.1
+				}
+				set_party_name = {
+					ideology = paternal_autocrat
+					long_name = ANG_paternal_autocrat_party_interim_long
+					name = ANG_paternal_autocrat_party_interim
+				}
+					coal_add_rev_rep = yes
+					coal_add_soc_con = yes
+			}
+		}
+	}
+	option = {
+		name = krg_por_angola.4.a
+	}
+}
+
+
+country_event = { # Popular discontent 
+	id = krg_por_angola.5
+	is_triggered_only = yes
+	fire_only_once = yes
+	title = krg_por_angola.5.t
+	desc = krg_por_angola.5.d
+
+	trigger = {
+		NOT = { has_country_flag = POR_national_unrest }
+	}
+
+	immediate = {
+		set_country_flag = POR_national_unrest	
+	}
+	
+	option = {
+		trigger = {
+			has_idea = KRG_limited_conscription
+		}
+		name = krg_por_angola.5.a
+		move_down_mobilization = yes
+		add_stability = 0.1
+	}
+	
+	option = {
+		name = krg_por_angola.5.b
+		move_up_business_spending = yes
+		add_stability = 0.05
+	}
+}
+
+country_event = { # Army discontent coup
+	id = krg_por_angola.6
+	is_triggered_only = yes
+	fire_only_once = yes
+	title = krg_por_angola.6.t
+	desc = krg_por_angola.6.d
+
+	trigger = {
+		NOT = { has_country_flag = POR_national_unrest }
+	}
+
+	immediate = {
+		set_country_flag = POR_national_unrest	
+	}
+
+	option = {
+		name = krg_por_angola.6.a
+		if = {
+			limit = { has_idea = KRG_limited_conscription } 
+			move_down_mobilization = yes
+		}		
+		add_stability = 0.1
+		set_party_name = {
+			ideology = paternal_autocrat
+			long_name = POR_paternal_autocrat_party_interim_long
+			name = POR_paternal_autocrat_party_interim
+		}
+		set_politics = {
+			ruling_party = paternal_autocrat
+			elections_allowed = yes
+			election_frequency = 48
+			last_election = 1952.1.1
+		}
+		ANG = {
+			ANG_horacio_rebelo = {
+				set_nationality = POR
+			}
+		}
+		ANG_horacio_rebelo = {
+			promote_character = yes
+		}
+		news_event = krg_por_angola_news.2
+		POR = {
+			if = { 
+				limit = {
+					has_subject_autonomy_feature = yes
+				}
+				release_autonomy = {
+					target = MZB
+					autonomy_state = krg_colony
+				}
+			}
+			else = {
+				release_puppet = MZB
+			}
+		}
+		MZB = {
+			inherit_technology = POR
+			set_cosmetic_tag = MZB_junta
+			hidden_effect = {
+				set_politics = {
+					ruling_party = paternal_autocrat
+					election_frequency = 48
+					elections_allowed = no
+				}
+				coal_add_nat_pop = yes
+				add_ideas = {
+					MZB_minority_rule
+				}
+				set_popularities = {
+					authoritarian_socialist = 14
+					radical_socialist = 12
+					social_democrat = 3
+					revolutionary_republican = 10
+					social_liberal = 7
+					market_liberal = 5
+					social_conservative = 17
+					authoritarian_democrat = 12
+					paternal_autocrat = 17
+	   				national_populist = 3
+				}
+			}
+		}
+	}
+}
+
+country_event = { # Retornados
+	id = krg_por_angola.7
+	is_triggered_only = yes
+	fire_only_once = yes
+	title = krg_por_angola.7.t
+	desc = krg_por_angola.7.d
+
+	option = {
+		name = krg_por_angola.7.a
+		add_stability = -0.03
+		move_down_service_spending = yes
+		add_popularity = {
+			ideology = national_populist
+			popularity = 0.07
+		}
+	}
+}
+
+news_event = {
+	id = krg_por_angola_news.1
+	is_triggered_only = yes
+	major = yes
+	picture = GFX_ne_por_angola_flee
+	title = krg_por_angola_news.1.t
+	desc = krg_por_angola_news.1.d
+
+	option = {
+		name = krg_por_angola_news.1.a
+	}
+}
+
+news_event = {
+	id = krg_por_angola_news.2
+	is_triggered_only = yes
+	major = yes
+	title = krg_por_angola_news.2.t
+	desc = krg_por_angola_news.2.d
+	picture = GFX_ne_por_coup
+
+	option = {
+		name = krg_por_angola_news.2.a
+	}
+}

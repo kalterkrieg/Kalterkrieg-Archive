@@ -1,0 +1,30 @@
+Accord_protect_our_borders = {
+	enable = {
+		check_variable = { accord_alignment_level = 4 }
+	}
+
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = front_unit_request
+
+		state_trigger = { 
+			root = {
+				check_variable = { reichspakt_alignment_level > 2 }
+			}
+		}
+		value = 500
+	}
+
+
+	ai_strategy = {
+		type = force_defend_ally_borders
+		id = NFA
+		value = 500
+	}
+	ai_strategy = {
+		type = area_priority
+		id = europe
+		value = 500
+	}
+}

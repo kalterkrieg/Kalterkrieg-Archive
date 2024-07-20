@@ -1,0 +1,4823 @@
+# stats for initial house and senate composition
+CAL_electoral_initial = {
+	#AVERAGE 350k population per district
+	clear_array = CAL_electoral_state_array
+	# put all states in an array
+	add_to_array = {
+		CAL_electoral_state_array = 825
+	}
+	add_to_array = {
+		CAL_electoral_state_array = 385
+	}
+	add_to_array = {
+		CAL_electoral_state_array = 386
+	}
+	add_to_array = {
+		CAL_electoral_state_array = 379
+	}
+	add_to_array = {
+		CAL_electoral_state_array = 377
+	}
+	add_to_array = {
+		CAL_electoral_state_array = 380
+	}
+	add_to_array = {
+		CAL_electoral_state_array = 387
+	}
+	add_to_array = {
+		CAL_electoral_state_array = 788
+	}
+	add_to_array = {
+		CAL_electoral_state_array = 929
+	}
+	add_to_array = {
+		CAL_electoral_state_array = 931
+	}
+	add_to_array = {
+		CAL_electoral_state_array = 793
+	}
+	
+	# State IDs
+	set_variable = {
+		CAL_california_state = 825
+	}
+	set_variable = {
+		CAL_washington_state = 386
+	}
+	set_variable = {
+		CAL_oregon_state = 385
+	}
+	set_variable = {
+		CAL_arizona_state = 377
+	}
+	set_variable = {
+		CAL_nevada_state = 379
+	}
+	set_variable = {
+		CAL_idaho_state = 387
+	}
+	set_variable = {
+		CAL_utah_state = 380
+	}
+	set_variable = {
+		CAL_montana_state = 788
+	}
+	set_variable = {
+		CAL_wyoming_state = 929
+	}
+	set_variable = {
+		CAL_colorado_state = 931
+	}
+	set_variable = {
+		CAL_new_mexico_state = 793
+	}
+	set_variable = {
+		CAL_alaska_state = 463
+	}
+	set_variable = {
+		CAL_hawaii_state = 629
+	}
+	set_variable = {
+		CAL_jefferson_state = 950
+	}
+	set_variable = {
+		CAL_south_california_state = 949
+	}
+	
+	for_each_scope_loop = {
+		array = CAL_electoral_state_array
+		# clear all arrays in all states
+		clear_array = CAL_electoral_party_seat_array
+		clear_array = CAL_electoral_party_popularity_array
+		clear_array = CAL_electoral_party_array
+		# makes an array for the seat ids 1-5 in all states, and initialises predicted seats to 0 (its calculated later)
+		for_loop_effect = {
+			start = 1
+			end = 6
+			compare = less_than_or_equals
+			add_to_array = {
+				CAL_electoral_party_array = v
+			}
+			add_to_array = {
+				CAL_electoral_party_predicted_seat_array = 0
+			}
+		}
+	}
+	set_variable = {
+		CAL_biannual_election_count = 0
+	}
+	# no elections yet
+	set_country_flag = CAL_Hide_Congressional_Elections
+
+	# party ids
+	# 1 = RadSocs
+	# 2 = SocDems
+	# 3 = SocLibs
+	# 4 = MarLibs
+	# 5 = SocCons
+	set_variable = {
+		CAL_radsoc_party = 1
+	}
+	set_variable = {
+		CAL_socdem_party = 2
+	}
+	set_variable = {
+		CAL_soclib_party = 3
+	}
+	set_variable = {
+		CAL_marlib_party = 4
+	}
+	set_variable = {
+		CAL_soccon_party = 5
+	}
+
+	# example:
+	#	<STATE_ID> = {
+	#		set_variable = { CAL_electoral_vote = 7 } # number of electoral votes
+	#		
+	#		#governor
+	#		set_variable = { CAL_governor = 1 } # party id for governor
+	#
+	#		# senate seat parties
+	#		set_variable = { CAL_electoral_senate_seat_1 = 1 } # party id for 1st senator
+	#		set_variable = { CAL_electoral_senate_seat_class_1 = 1 } # seat class: 1 - 1946, 2 - 1942, 3 - 1944
+	#		set_variable = { CAL_electoral_senate_seat_2 = 1 } # party id for 2nd senator
+	#		set_variable = { CAL_electoral_senate_seat_class_2 = 1 } # seat class: 1 - 1946, 2 - 1942, 3 - 1944
+	#
+	#		# make sure they add up to the number of house seats
+	#		add_to_array = { CAL_electoral_party_seat_array = 1 } # number of RadSocs
+	#		add_to_array = { CAL_electoral_party_seat_array = 1 } # number of SocDems
+	#		add_to_array = { CAL_electoral_party_seat_array = 1 } # number of SocLibs
+	#		add_to_array = { CAL_electoral_party_seat_array = 1 } # number of MarLibs
+	#		add_to_array = { CAL_electoral_party_seat_array = 1 } # number of SocCons
+	#
+	#		# party popularity values make sure they add up to 100
+	#		add_to_array = { CAL_electoral_party_popularity_array = 10 } # RadSocs popularity
+	#		add_to_array = { CAL_electoral_party_popularity_array = 50 } # SocDems popularity
+	#		add_to_array = { CAL_electoral_party_popularity_array = 30 } # SocLibs popularity
+	#		add_to_array = { CAL_electoral_party_popularity_array = 5 } # MarLibs popularity
+	#		add_to_array = { CAL_electoral_party_popularity_array = 5 } # SocCons popularity
+	#	}
+	825 = {
+		#California
+		set_variable = {
+			CAL_electoral_vote = 25
+		}
+		set_variable = {
+			CAL_governor = 3
+		}
+		set_variable = {
+			CAL_electoral_senate_seat_1 = 3
+		}
+		set_variable = {
+			CAL_electoral_senate_seat_class_1 = 3
+		}
+		set_variable = {
+			CAL_electoral_senate_seat_2 = 4
+		}
+		set_variable = {
+			CAL_electoral_senate_seat_class_2 = 1
+		}
+		add_to_array = {
+			CAL_electoral_party_seat_array = 0
+		}
+		add_to_array = {
+			CAL_electoral_party_seat_array = 2
+		}
+		add_to_array = {
+			CAL_electoral_party_seat_array = 11
+		}
+		add_to_array = {
+			CAL_electoral_party_seat_array = 8
+		}
+		add_to_array = {
+			CAL_electoral_party_seat_array = 2
+		}
+		add_to_array = {
+			CAL_electoral_party_popularity_array = 4
+		}
+		add_to_array = {
+			CAL_electoral_party_popularity_array = 6
+		}
+		add_to_array = {
+			CAL_electoral_party_popularity_array = 43
+		}
+		add_to_array = {
+			CAL_electoral_party_popularity_array = 38
+		}
+		add_to_array = {
+			CAL_electoral_party_popularity_array = 9
+		}
+	}
+	hidden_effect = {
+		CAL_update_california = yes
+	}
+	385 = {
+		#Oregon
+		set_variable = {
+			CAL_electoral_vote = 6
+		}
+		set_variable = {
+			CAL_governor = 3
+		}
+		set_variable = {
+			CAL_electoral_senate_seat_1 = 3
+		}
+		set_variable = {
+			CAL_electoral_senate_seat_class_1 = 3
+		}
+		set_variable = {
+			CAL_electoral_senate_seat_2 = 4
+		}
+		set_variable = {
+			CAL_electoral_senate_seat_class_2 = 2
+		}
+		add_to_array = {
+			CAL_electoral_party_seat_array = 0
+		}
+		add_to_array = {
+			CAL_electoral_party_seat_array = 0
+		}
+		add_to_array = {
+			CAL_electoral_party_seat_array = 2
+		}
+		add_to_array = {
+			CAL_electoral_party_seat_array = 2
+		}
+		add_to_array = {
+			CAL_electoral_party_seat_array = 0
+		}
+		add_to_array = {
+			CAL_electoral_party_popularity_array = 4
+		}
+		add_to_array = {
+			CAL_electoral_party_popularity_array = 3
+		}
+		add_to_array = {
+			CAL_electoral_party_popularity_array = 47
+		}
+		add_to_array = {
+			CAL_electoral_party_popularity_array = 39
+		}
+		add_to_array = {
+			CAL_electoral_party_popularity_array = 7
+		}
+	}
+	386 = {
+		#Washington
+		set_variable = {
+			CAL_electoral_vote = 8
+		}
+		set_variable = {
+			CAL_governor = 3
+		}
+		set_variable = {
+			CAL_electoral_senate_seat_1 = 3
+		}
+		set_variable = {
+			CAL_electoral_senate_seat_class_1 = 3
+		}
+		set_variable = {
+			CAL_electoral_senate_seat_2 = 4
+		}
+		set_variable = {
+			CAL_electoral_senate_seat_class_2 = 1
+		}
+		add_to_array = {
+			CAL_electoral_party_seat_array = 0
+		}
+		add_to_array = {
+			CAL_electoral_party_seat_array = 1
+		}
+		add_to_array = {
+			CAL_electoral_party_seat_array = 3
+		}
+		add_to_array = {
+			CAL_electoral_party_seat_array = 2
+		}
+		add_to_array = {
+			CAL_electoral_party_seat_array = 0
+		}
+		add_to_array = {
+			CAL_electoral_party_popularity_array = 5
+		}
+		add_to_array = {
+			CAL_electoral_party_popularity_array = 7
+		}
+		add_to_array = {
+			CAL_electoral_party_popularity_array = 43
+		}
+		add_to_array = {
+			CAL_electoral_party_popularity_array = 39
+		}
+		add_to_array = {
+			CAL_electoral_party_popularity_array = 6
+		}
+	}
+	379 = {
+		#Nevada
+		set_variable = {
+			CAL_electoral_vote = 3
+		}
+		set_variable = {
+			CAL_governor = 4
+		}
+		set_variable = {
+			CAL_electoral_senate_seat_1 = 5
+		}
+		set_variable = {
+			CAL_electoral_senate_seat_class_1 = 3
+		}
+		set_variable = {
+			CAL_electoral_senate_seat_2 = 4
+		}
+		set_variable = {
+			CAL_electoral_senate_seat_class_2 = 1
+		}
+		add_to_array = {
+			CAL_electoral_party_seat_array = 0
+		}
+		add_to_array = {
+			CAL_electoral_party_seat_array = 0
+		}
+		add_to_array = {
+			CAL_electoral_party_seat_array = 0
+		}
+		add_to_array = {
+			CAL_electoral_party_seat_array = 1
+		}
+		add_to_array = {
+			CAL_electoral_party_seat_array = 0
+		}
+		add_to_array = {
+			CAL_electoral_party_popularity_array = 2
+		}
+		add_to_array = {
+			CAL_electoral_party_popularity_array = 4
+		}
+		add_to_array = {
+			CAL_electoral_party_popularity_array = 37
+		}
+		add_to_array = {
+			CAL_electoral_party_popularity_array = 40
+		}
+		add_to_array = {
+			CAL_electoral_party_popularity_array = 17
+		}
+	}
+	377 = {
+		#Arizona
+		set_variable = {
+			CAL_electoral_vote = 4
+		}
+		set_variable = {
+			CAL_governor = 3
+		}
+		set_variable = {
+			CAL_electoral_senate_seat_1 = 3
+		}
+		set_variable = {
+			CAL_electoral_senate_seat_class_1 = 3
+		}
+		set_variable = {
+			CAL_electoral_senate_seat_2 = 3
+		}
+		set_variable = {
+			CAL_electoral_senate_seat_class_2 = 1
+		}
+		add_to_array = {
+			CAL_electoral_party_seat_array = 0
+		}
+		add_to_array = {
+			CAL_electoral_party_seat_array = 0
+		}
+		add_to_array = {
+			CAL_electoral_party_seat_array = 2
+		}
+		add_to_array = {
+			CAL_electoral_party_seat_array = 0
+		}
+		add_to_array = {
+			CAL_electoral_party_seat_array = 0
+		}
+		add_to_array = {
+			CAL_electoral_party_popularity_array = 2
+		}
+		add_to_array = {
+			CAL_electoral_party_popularity_array = 6
+		}
+		add_to_array = {
+			CAL_electoral_party_popularity_array = 45
+		}
+		add_to_array = {
+			CAL_electoral_party_popularity_array = 38
+		}
+		add_to_array = {
+			CAL_electoral_party_popularity_array = 9
+		}
+	}
+	380 = {
+		#Utah
+		set_variable = {
+			CAL_electoral_vote = 4
+		}
+		set_variable = {
+			CAL_governor = 3
+		}
+		set_variable = {
+			CAL_electoral_senate_seat_1 = 3
+		}
+		set_variable = {
+			CAL_electoral_senate_seat_class_1 = 3
+		}
+		set_variable = {
+			CAL_electoral_senate_seat_2 = 4
+		}
+		set_variable = {
+			CAL_electoral_senate_seat_class_1 = 1
+		}
+		add_to_array = {
+			CAL_electoral_party_seat_array = 0
+		}
+		add_to_array = {
+			CAL_electoral_party_seat_array = 0
+		}
+		add_to_array = {
+			CAL_electoral_party_seat_array = 2
+		}
+		add_to_array = {
+			CAL_electoral_party_seat_array = 0
+		}
+		add_to_array = {
+			CAL_electoral_party_seat_array = 0
+		}
+		add_to_array = {
+			CAL_electoral_party_popularity_array = 4
+		}
+		add_to_array = {
+			CAL_electoral_party_popularity_array = 6
+		}
+		add_to_array = {
+			CAL_electoral_party_popularity_array = 42
+		}
+		add_to_array = {
+			CAL_electoral_party_popularity_array = 27
+		}
+		add_to_array = {
+			CAL_electoral_party_popularity_array = 21
+		}
+	}
+	387 = {
+		#Idaho
+		set_variable = {
+			CAL_electoral_vote = 4
+		}
+		set_variable = {
+			CAL_governor = 3
+		}
+		set_variable = {
+			CAL_electoral_senate_seat_1 = 3
+		}
+		set_variable = {
+			CAL_electoral_senate_seat_class_1 = 3
+		}
+		set_variable = {
+			CAL_electoral_senate_seat_2 = 4
+		}
+		set_variable = {
+			CAL_electoral_senate_seat_class_2 = 2
+		}
+		add_to_array = {
+			CAL_electoral_party_seat_array = 0
+		}
+		add_to_array = {
+			CAL_electoral_party_seat_array = 0
+		}
+		add_to_array = {
+			CAL_electoral_party_seat_array = 1
+		}
+		add_to_array = {
+			CAL_electoral_party_seat_array = 1
+		}
+		add_to_array = {
+			CAL_electoral_party_seat_array = 0
+		}
+		add_to_array = {
+			CAL_electoral_party_popularity_array = 0
+		}
+		add_to_array = {
+			CAL_electoral_party_popularity_array = 4
+		}
+		add_to_array = {
+			CAL_electoral_party_popularity_array = 43
+		}
+		add_to_array = {
+			CAL_electoral_party_popularity_array = 41
+		}
+		add_to_array = {
+			CAL_electoral_party_popularity_array = 12
+		}
+	}
+	788 = {
+		#Montana
+		set_variable = {
+			CAL_electoral_vote = 3
+		}
+		set_variable = {
+			CAL_governor = 3
+		}
+		set_variable = {
+			CAL_electoral_senate_seat_1 = 3
+		}
+		set_variable = {
+			CAL_electoral_senate_seat_class_1 = 2
+		}
+		set_variable = {
+			CAL_electoral_senate_seat_2 = 3
+		}
+		set_variable = {
+			CAL_electoral_senate_seat_class_2 = 1
+		}
+		add_to_array = {
+			CAL_electoral_party_seat_array = 0
+		}
+		add_to_array = {
+			CAL_electoral_party_seat_array = 0
+		}
+		add_to_array = {
+			CAL_electoral_party_seat_array = 1
+		}
+		add_to_array = {
+			CAL_electoral_party_seat_array = 0
+		}
+		add_to_array = {
+			CAL_electoral_party_seat_array = 0
+		}
+		add_to_array = {
+			CAL_electoral_party_popularity_array = 3
+		}
+		add_to_array = {
+			CAL_electoral_party_popularity_array = 11
+		}
+		add_to_array = {
+			CAL_electoral_party_popularity_array = 44
+		}
+		add_to_array = {
+			CAL_electoral_party_popularity_array = 33
+		}
+		add_to_array = {
+			CAL_electoral_party_popularity_array = 9
+		}
+	}
+	929 = {
+		#Wyoming
+		set_variable = {
+			CAL_electoral_vote = 3
+		}
+		set_variable = {
+			CAL_governor = 3
+		}
+		set_variable = {
+			CAL_electoral_senate_seat_1 = 3
+		}
+		set_variable = {
+			CAL_electoral_senate_seat_class_1 = 2
+		}
+		set_variable = {
+			CAL_electoral_senate_seat_2 = 3
+		}
+		set_variable = {
+			CAL_electoral_senate_seat_class_2 = 1
+		}
+		add_to_array = {
+			CAL_electoral_party_seat_array = 0
+		}
+		add_to_array = {
+			CAL_electoral_party_seat_array = 0
+		}
+		add_to_array = {
+			CAL_electoral_party_seat_array = 1
+		}
+		add_to_array = {
+			CAL_electoral_party_seat_array = 0
+		}
+		add_to_array = {
+			CAL_electoral_party_seat_array = 0
+		}
+		add_to_array = {
+			CAL_electoral_party_popularity_array = 1
+		}
+		add_to_array = {
+			CAL_electoral_party_popularity_array = 9
+		}
+		add_to_array = {
+			CAL_electoral_party_popularity_array = 53
+		}
+		add_to_array = {
+			CAL_electoral_party_popularity_array = 30
+		}
+		add_to_array = {
+			CAL_electoral_party_popularity_array = 10
+		}
+	}
+	931 = {
+		#Colorado
+		set_variable = {
+			CAL_electoral_vote = 3
+		}
+		set_variable = {
+			CAL_governor = 4
+		}
+		set_variable = {
+			CAL_electoral_senate_seat_1 = 5
+		}
+		set_variable = {
+			CAL_electoral_senate_seat_class_1 = 2
+		}
+		set_variable = {
+			CAL_electoral_senate_seat_2 = 4
+		}
+		set_variable = {
+			CAL_electoral_senate_seat_class_2 = 3
+		}
+		add_to_array = {
+			CAL_electoral_party_seat_array = 0
+		}
+		add_to_array = {
+			CAL_electoral_party_seat_array = 0
+		}
+		add_to_array = {
+			CAL_electoral_party_seat_array = 0
+		}
+		add_to_array = {
+			CAL_electoral_party_seat_array = 1
+		}
+		add_to_array = {
+			CAL_electoral_party_seat_array = 0
+		}
+		add_to_array = {
+			CAL_electoral_party_popularity_array = 1
+		}
+		add_to_array = {
+			CAL_electoral_party_popularity_array = 3
+		}
+		add_to_array = {
+			CAL_electoral_party_popularity_array = 32
+		}
+		add_to_array = {
+			CAL_electoral_party_popularity_array = 38
+		}
+		add_to_array = {
+			CAL_electoral_party_popularity_array = 23
+		}
+	}
+	793 = {
+		#New Mexico
+		set_variable = {
+			CAL_electoral_vote = 3
+		}
+		set_variable = {
+			CAL_governor = 3
+		}
+		set_variable = {
+			CAL_electoral_senate_seat_1 = 3
+		}
+		set_variable = {
+			CAL_electoral_senate_seat_class_1 = 1
+		}
+		set_variable = {
+			CAL_electoral_senate_seat_2 = 3
+		}
+		set_variable = {
+			CAL_electoral_senate_seat_class_2 = 2
+		}
+		add_to_array = {
+			CAL_electoral_party_seat_array = 0
+		}
+		add_to_array = {
+			CAL_electoral_party_seat_array = 0
+		}
+		add_to_array = {
+			CAL_electoral_party_seat_array = 1
+		}
+		add_to_array = {
+			CAL_electoral_party_seat_array = 0
+		}
+		add_to_array = {
+			CAL_electoral_party_seat_array = 0
+		}
+		add_to_array = {
+			CAL_electoral_party_popularity_array = 2
+		}
+		add_to_array = {
+			CAL_electoral_party_popularity_array = 12
+		}
+		add_to_array = {
+			CAL_electoral_party_popularity_array = 48
+		}
+		add_to_array = {
+			CAL_electoral_party_popularity_array = 31
+		}
+		add_to_array = {
+			CAL_electoral_party_popularity_array = 7
+		}
+	}
+	463 = {
+		#Alaska IF RE-INTEGRATED
+		set_variable = {
+			CAL_electoral_vote = 3
+		}
+	}
+	629 = {
+		#Hawaii IF RE-INTEGRATED
+		set_variable = {
+			CAL_electoral_vote = 3
+		}
+	}
+	for_each_scope_loop = {
+		array = CAL_electoral_state_array
+		# set house seats as electoral vote - 2
+		set_variable = {
+			CAL_house_seat = CAL_electoral_vote
+		}
+		subtract_from_variable = {
+			CAL_house_seat = 2
+		}
+		# does the magic
+		CAL_electoral_reload = yes
+		# most popular party
+		find_highest_in_array = {
+			array = CAL_electoral_party_popularity_array
+			index = highest_index
+		}
+		set_variable = {
+			CAL_electoral_lean = CAL_electoral_party_array^highest_index
+		}
+		# update predicted seats
+		CAL_update_predictions = yes
+		CAL_get_senate_class = yes		#just sets this up
+	}
+	hidden_effect = {
+		CAL_update_california = yes
+	}
+	CAL_congress_reload = yes
+}
+
+# Usage:
+# set_temp_variable = { temp_popularity = <insert_popularity_value> }
+# set_temp_variable = { temp_party = <insert_party_id> }
+# set_temp_variable = { temp_state = <insert_state_id> }
+# CAL_electoral_modify_popularity = yes
+CAL_electoral_modify_popularity = {
+	set_temp_variable = {
+		v = temp_party
+	}
+	custom_effect_tooltip = CAL_electoral_modify_popularity_tt
+	set_temp_variable = {
+		temp_state:temp_popularity = temp_popularity
+	}
+	set_temp_variable = {
+		temp_state:temp_party = temp_party
+	}
+	var:temp_state = {
+		subtract_from_temp_variable = {
+			temp_party = 1
+		}
+		# check to see if result overflows
+		set_temp_variable = {
+			temp_total = CAL_electoral_party_popularity_array^temp_party
+		}
+		add_to_temp_variable = {
+			temp_total = temp_popularity
+		}
+		if = {
+			limit = {
+				check_variable = {
+					temp_total > 100
+				}
+				# popularity of party goes over 100
+			}
+			subtract_from_temp_variable = {
+				temp_total = 100
+			}
+			subtract_from_temp_variable = {
+				temp_popularity = temp_total
+			}
+		}
+		else_if = {
+			limit = {
+				check_variable = {
+					temp_total < 0
+				}
+				# popularity of party goes below 0
+			}
+			multiply_temp_variable = {
+				temp_total = -1
+			}
+			add_to_temp_variable = {
+				temp_popularity = temp_total
+			}
+		}
+		#log = "Adjusted popularity to [?temp_popularity]"
+		# add all indexes to temp_array
+		clear_array = temp_array
+		for_loop_effect = {
+			start = 0
+			end = CAL_electoral_party_popularity_array^num
+			add_to_array = {
+				temp_array = v
+			}
+		}
+		# remove from list of indexes the index of the party to be added/subtracted
+		remove_from_array = {
+			array = temp_array
+			value = temp_party
+		}
+		# give party new seat value
+		add_to_variable = {
+			CAL_electoral_party_popularity_array^temp_party = temp_popularity
+		}
+		CAL_electoral_sort = yes
+		# if its add
+		if = {
+			limit = {
+				check_variable = {
+					temp_popularity > 0
+				}
+			}
+			# loop until seats to be added is 0
+			while_loop_effect = {
+				limit = {
+					check_variable = {
+						temp_popularity > 0
+					}
+				}
+				# loops through remaining parties, subtracting 1 seat each time
+				for_loop_effect = {
+					start = 0
+					end = temp_array^num
+					if = {
+						limit = {
+							check_variable = {
+								CAL_electoral_party_popularity_array^temp_array^v > 0
+							}
+							# party must have more than 0 seats to be subtracted
+							check_variable = {
+								temp_popularity > 0
+							}
+							# seats to be added is bigger than 0 currently
+						}
+						subtract_from_variable = {
+							CAL_electoral_party_popularity_array^temp_array^v = 1
+						}
+						# subtract from party 1 seat
+						subtract_from_temp_variable = {
+							temp_popularity = 1
+						}
+						# subtract from seats to be added
+					}
+				}
+			}
+		}
+		# if its subtract
+		else_if = {
+			limit = {
+				check_variable = {
+					temp_popularity < 0
+				}
+			}
+			# loop until seats to be subtracted is 0
+			while_loop_effect = {
+				limit = {
+					check_variable = {
+						temp_popularity < 0
+					}
+				}
+				# loops through remaining parties, adding 1 seat each time
+				for_loop_effect = {
+					start = 0
+					end = temp_array^num
+					if = {
+						limit = {
+							check_variable = {
+								CAL_electoral_party_popularity_array^temp_array^v < 100
+							}
+							# party must have less than max seats to be added
+							check_variable = {
+								temp_popularity < 0
+							}
+							# seats to be subtracted is less than 0 currently
+						}
+						add_to_variable = {
+							CAL_electoral_party_popularity_array^temp_array^v = 1
+						}
+						# add to party 1 seat
+						add_to_temp_variable = {
+							temp_popularity = 1
+						}
+						# add to seats to be subtracted
+					}
+				}
+			}
+		}
+		CAL_electoral_reload = yes
+		CAL_update_predictions = yes
+	}
+	hidden_effect = {
+		CAL_update_california = yes
+	}
+}
+
+CAL_electoral_modify_popularity_all = {
+	set_temp_variable = {
+		v = temp_all_party
+	}
+	custom_effect_tooltip = CAL_electoral_modify_popularity_all_tt
+	
+	for_each_loop = {
+		array = CAL_electoral_state_array
+		value = i
+		set_temp_variable = {
+			temp_popularity = temp_all_popularity
+		}
+		set_temp_variable = {
+			temp_party = temp_all_party
+		}
+		set_temp_variable = {
+			temp_state = CAL_electoral_state_array^i
+		}
+		CAL_electoral_modify_popularity = yes
+	}
+	hidden_effect = {
+		CAL_update_california = yes
+	}
+}
+
+CAL_electoral_sort = {
+	clear_array = temp_sort_array
+	for_loop_effect = {
+		start = 0
+		end = temp_array^num
+		set_temp_variable = {
+			temp_value = CAL_electoral_party_popularity_array^temp_array^v
+		}
+		multiply_temp_variable = {
+			temp_value = 100
+		}
+		add_to_temp_variable = {
+			temp_value = v
+		}
+		add_to_array = {
+			temp_sort_array = temp_value
+		}
+	}
+	set_temp_variable = {
+		temp_quicksort_array_var = 7
+	}
+	naive_sorting = yes
+	clear_array = temp_array
+	for_each_loop = {
+		array = temp_sort_array
+		set_temp_variable = {
+			temp_value = temp_sort_array^i
+		}
+		modulo_temp_variable = {
+			temp_value = 100
+		}
+		add_to_array = {
+			temp_array = temp_value
+		}
+	}
+}
+
+# fire every 4 years for presidential elections
+CAL_calculate_president = {
+	hidden_effect = {
+		clear_variable = CAL_radsoc_electoral_vote
+		clear_variable = CAL_socdem_electoral_vote
+		clear_variable = CAL_soclib_electoral_vote
+		clear_variable = CAL_marlib_electoral_vote
+		clear_variable = CAL_soccon_electoral_vote
+		for_each_scope_loop = {
+			array = CAL_electoral_state_array
+			# no coalition
+			if = {
+				limit = {
+					always = no
+				}
+				find_highest_in_array = {
+					array = CAL_electoral_party_popularity_array
+					index = highest_index
+				}
+				if = {
+					limit = {
+						check_variable = {
+							highest_index = 0
+						}
+					}
+					add_to_variable = {
+						CAL.CAL_radsoc_electoral_vote = CAL_electoral_vote
+					}
+				}
+				else_if = {
+					limit = {
+						check_variable = {
+							highest_index = 1
+						}
+					}
+					add_to_variable = {
+						CAL.CAL_socdem_electoral_vote = CAL_electoral_vote
+					}
+				}
+				else_if = {
+					limit = {
+						check_variable = {
+							highest_index = 2
+						}
+					}
+					add_to_variable = {
+						CAL.CAL_soclib_electoral_vote = CAL_electoral_vote
+					}
+				}
+				else_if = {
+					limit = {
+						check_variable = {
+							highest_index = 3
+						}
+					}
+					add_to_variable = {
+						CAL.CAL_marlib_electoral_vote = CAL_electoral_vote
+					}
+				}
+				else_if = {
+					limit = {
+						check_variable = {
+							highest_index = 4
+						}
+					}
+					add_to_variable = {
+						CAL.CAL_soccon_electoral_vote = CAL_electoral_vote
+					}
+				}
+			}
+			# Progressive Coalition and R-D Coalition
+			else = {
+				if = {
+					limit = {
+						check_variable = {
+							CAL_electoral_leading = 1
+						}
+						# you cheating
+					}
+					log = "Socialists won [THIS.GetName] ([?CAL_electoral_vote] Votes) in Election"
+					add_to_variable = {
+						CAL.CAL_radsoc_electoral_vote = CAL_electoral_vote
+					}
+				}
+				if = {
+					limit = {
+						check_variable = {
+							CAL_electoral_leading = 2
+						}
+					}
+					log = "Progressives won [THIS.GetName] ([?CAL_electoral_vote] Votes) in Election"
+					add_to_variable = {
+						CAL.CAL_soclib_electoral_vote = CAL_electoral_vote
+					}
+				}
+				else_if = {
+					limit = {
+						check_variable = {
+							CAL_electoral_leading = 3
+						}
+					}
+					log = "Republicans won [THIS.GetName] ([?CAL_electoral_vote] Votes) in Election"
+					add_to_variable = {
+						CAL.CAL_marlib_electoral_vote = CAL_electoral_vote
+					}
+				}
+			}
+		}
+
+		activate_mission = CAL_inauguration_mission
+	}
+	# victory stuff goes here
+	#if = {
+	#	limit = {
+	#		check_variable = {
+	#			CAL_radsoc_electoral_vote > 44
+	#		}
+	#		# how
+	#	}
+	#	set_country_flag = CAL_radsoc_selected
+	#	custom_effect_tooltip = CAL_radsoc_victory
+	#}
+	#else_if = {
+	#	limit = {
+	#		check_variable = {
+	#			CAL_socdem_electoral_vote > 44
+	#		}
+	#	}
+	#	set_country_flag = CAL_socdem_selected
+	#	custom_effect_tooltip = CAL_socdem_victory
+	#}
+	#else_if = {
+	#	limit = {
+	#		check_variable = {
+	#			CAL_soclib_electoral_vote > 44
+	#		}
+	#	}
+	#	set_country_flag = CAL_soclib_selected
+	#	custom_effect_tooltip = CAL_soclib_victory
+	#	if = {
+	#		limit = {
+	#			date < 1949.2.1
+	#		}
+	#		log = "KRG_Event_Logging;1948 CAL Elections - Progressives;[GetDateText];[ROOT.GetName];[FROM.GetName]"
+	#		news_event = {
+	#			id = krg_cal_electoral_results.1
+	#			days = 73
+	#		}
+	#	}
+	#	else_if = {
+	#		limit = {
+	#			date < 1953.2.1
+	#		}
+	#		log = "Progressive Victory in 1952 Elections"
+	#		news_event = {
+	#			id = krg_cal_electoral_results.3
+	#			days = 73
+	#		}
+	#	}
+	#}
+	#else_if = {
+	#	limit = {
+	#		check_variable = {
+	#			CAL_marlib_electoral_vote > 44
+	#		}
+	#	}
+	#	set_country_flag = CAL_marlib_selected
+	#	custom_effect_tooltip = CAL_marlib_victory
+	#	if = {
+	#		limit = {
+	#			date < 1949.2.1
+	#		}
+	#		log = "KRG_Event_Logging;1948 CAL Elections - Republicans;[GetDateText];[ROOT.GetName];[FROM.GetName]"
+	#		news_event = {
+	#			id = krg_cal_electoral_results.2
+	#			days = 73
+	#		}
+	#	}
+	#	else_if = {
+	#		limit = {
+	#			date < 1953.2.1
+	#		}
+	#		log = "Republican Victory in 1952 Elections"
+	#		news_event = {
+	#			id = krg_cal_electoral_results.4
+	#			days = 73
+	#		}
+	#	}
+	#}
+	#else_if = {
+	#	limit = {
+	#		check_variable = {
+	#			CAL_soccon_electoral_vote > 44
+	#		}
+	#	}
+	#	set_country_flag = CAL_soccon_selected
+	#	custom_effect_tooltip = CAL_soccon_victory
+	#}
+
+	
+}
+
+# ignore all code below (they work based on code above it so it doesnt need to be modified *usually*)
+# Maho's Parliament Builder v5
+CAL_electoral_reload = {
+	clear_array = CAL_electoral_main_array
+	# add to main array each party's seats
+	for_each_loop = {
+		array = CAL_electoral_party_array
+		set_temp_variable = {
+			global.seat_id = v
+		}
+		if = {
+			limit = {
+				check_variable = {
+					CAL_electoral_party_seat_array^i > 0
+				}
+			}
+			for_loop_effect = {
+				start = 1
+				end = CAL_electoral_party_seat_array^i
+				compare = less_than_or_equals
+				add_to_array = {
+					CAL_electoral_main_array = global.seat_id
+				}
+			}
+		}
+	}
+	CAL_electoral_pie_create_chart = yes
+}
+
+# pie chart maker - maho edition
+CAL_electoral_pie_create_chart = {
+	clear_array = CAL_electoral_pie_chart
+	# add to pie chart array each party's popularity
+	for_each_loop = {
+		array = CAL_electoral_party_array
+		if = {
+			limit = {
+				check_variable = {
+					CAL_electoral_party_popularity_array^i > 0
+				}
+			}
+			for_loop_effect = {
+				start = 1
+				end = CAL_electoral_party_popularity_array^i
+				compare = less_than_or_equals
+				add_to_array = {
+					CAL_electoral_pie_chart = v
+				}
+			}
+		}
+	}
+}
+
+# fire every 2 years for midterms or presidential elections
+CAL_calculate_electoral_seat = {
+	hidden_effect = {
+		for_each_scope_loop = {
+			array = CAL_electoral_state_array
+			# senate
+			find_highest_in_array = {
+				array = CAL_electoral_party_popularity_array
+				index = highest_index
+			}
+			if = {
+				# class 1 (1952 onwards)
+				limit = {
+					check_variable = {
+						CAL.CAL_biannual_election_count = 2
+					}
+				}
+				# RD Coalition Ticket Edge Case
+				if = {
+					limit = {
+						OR = {
+							check_variable = {
+								CAL_electoral_senate_leading = 1
+							}
+							check_variable = {
+								CAL_electoral_senate_leading = 2
+							}
+							check_variable = {
+								CAL_electoral_senate_leading = 3
+							}
+						}
+						check_variable = {
+							CAL_electoral_senate_seat_class_1 = 1
+						}
+						check_variable = {
+							CAL_electoral_leading = 3
+						}
+					}
+					set_variable = {
+						CAL_electoral_senate_seat_outgoing = CAL_electoral_senate_seat_1
+					}
+					set_variable = {
+						CAL_electoral_senate_seat_winner = CAL_electoral_senate_seat_1
+					}
+				}
+				else_if = {
+					limit = {
+						OR = {
+							check_variable = {
+								CAL_electoral_senate_leading = 1
+							}
+							check_variable = {
+								CAL_electoral_senate_leading = 2
+							}
+							check_variable = {
+								CAL_electoral_senate_leading = 3
+							}
+						}
+						check_variable = {
+							CAL_electoral_senate_seat_class_2 = 1
+						}
+						check_variable = {
+							CAL_electoral_leading = 3
+						}
+					}
+					set_variable = {
+						CAL_electoral_senate_seat_outgoing = CAL_electoral_senate_seat_2
+					}
+					set_variable = {
+						CAL_electoral_senate_seat_winner = CAL_electoral_senate_seat_2
+					}
+				}
+				else_if = {
+					limit = {
+						check_variable = {
+							CAL_electoral_senate_seat_class_1 = 1
+						}
+					}
+					set_variable = {
+						CAL_electoral_senate_seat_outgoing = CAL_electoral_senate_seat_1
+					}
+					set_variable = {
+						CAL_electoral_senate_seat_1 = CAL_electoral_party_array^highest_index
+					}
+					set_variable = {
+						CAL_electoral_senate_seat_winner = CAL_electoral_senate_seat_1
+					}
+				}
+				else_if = {
+					limit = {
+						check_variable = {
+							CAL_electoral_senate_seat_class_2 = 1
+						}
+					}
+					set_variable = {
+						CAL_electoral_senate_seat_outgoing = CAL_electoral_senate_seat_2
+					}
+					set_variable = {
+						CAL_electoral_senate_seat_2 = CAL_electoral_party_array^highest_index
+					}
+					set_variable = {
+						CAL_electoral_senate_seat_winner = CAL_electoral_senate_seat_2
+					}
+				}
+			}
+			else_if = {
+				# class 3 (1950 onwards)
+				limit = {
+					check_variable = {
+						CAL.CAL_biannual_election_count = 1
+					}
+				}
+				# RD Coalition Ticket Edge Case
+				if = {
+					limit = {
+						OR = {
+							check_variable = {
+								CAL_electoral_senate_leading = 1
+							}
+							check_variable = {
+								CAL_electoral_senate_leading = 2
+							}
+							check_variable = {
+								CAL_electoral_senate_leading = 3
+							}
+						}
+						check_variable = {
+							CAL_electoral_senate_seat_class_1 = 3
+						}
+						check_variable = {
+							CAL_electoral_leading = 3
+						}
+					}
+					set_variable = {
+						CAL_electoral_senate_seat_outgoing = CAL_electoral_senate_seat_1
+					}
+					set_variable = {
+						CAL_electoral_senate_seat_winner = CAL_electoral_senate_seat_1
+					}
+				}
+				else_if = {
+					limit = {
+						OR = {
+							check_variable = {
+								CAL_electoral_senate_leading = 1
+							}
+							check_variable = {
+								CAL_electoral_senate_leading = 2
+							}
+							check_variable = {
+								CAL_electoral_senate_leading = 3
+							}
+						}
+						check_variable = {
+							CAL_electoral_senate_seat_class_2 = 3
+						}
+						check_variable = {
+							CAL_electoral_leading = 3
+						}
+					}
+					set_variable = {
+						CAL_electoral_senate_seat_outgoing = CAL_electoral_senate_seat_2
+					}
+					set_variable = {
+						CAL_electoral_senate_seat_winner = CAL_electoral_senate_seat_2
+					}
+				}
+				else_if = {
+					limit = {
+						check_variable = {
+							CAL_electoral_senate_seat_class_1 = 3
+						}
+					}
+					set_variable = {
+						CAL_electoral_senate_seat_outgoing = CAL_electoral_senate_seat_1
+					}
+					set_variable = {
+						CAL_electoral_senate_seat_1 = CAL_electoral_party_array^highest_index
+					}
+					set_variable = {
+						CAL_electoral_senate_seat_winner = CAL_electoral_senate_seat_1
+					}
+				}
+				else_if = {
+					limit = {
+						check_variable = {
+							CAL_electoral_senate_seat_class_2 = 3
+						}
+					}
+					set_variable = {
+						CAL_electoral_senate_seat_outgoing = CAL_electoral_senate_seat_2
+					}
+					set_variable = {
+						CAL_electoral_senate_seat_2 = CAL_electoral_party_array^highest_index
+					}
+					set_variable = {
+						CAL_electoral_senate_seat_winner = CAL_electoral_senate_seat_2
+					}
+				}
+			}
+			else = {
+				# class 2 (1948 onwards)
+				# RD Coalition Ticket Edge Case
+				if = {
+					limit = {
+						OR = {
+							check_variable = {
+								CAL_electoral_senate_leading = 1
+							}
+							check_variable = {
+								CAL_electoral_senate_leading = 2
+							}
+							check_variable = {
+								CAL_electoral_senate_leading = 3
+							}
+						}
+						check_variable = {
+							CAL_electoral_senate_seat_class_1 = 2
+						}
+						check_variable = {
+							CAL_electoral_leading = 3
+						}
+					}
+					set_variable = {
+						CAL_electoral_senate_seat_winner = CAL_electoral_senate_seat_1
+					}
+				}
+				else_if = {
+					limit = {
+						OR = {
+							check_variable = {
+								CAL_electoral_senate_leading = 1
+							}
+							check_variable = {
+								CAL_electoral_senate_leading = 2
+							}
+							check_variable = {
+								CAL_electoral_senate_leading = 3
+							}
+						}
+						check_variable = {
+							CAL_electoral_senate_seat_class_2 = 2
+						}
+						check_variable = {
+							CAL_electoral_leading = 3
+						}
+					}
+					set_variable = {
+						CAL_electoral_senate_seat_outgoing = CAL_electoral_senate_seat_2
+					}
+					set_variable = {
+						CAL_electoral_senate_seat_winner = CAL_electoral_senate_seat_2
+					}
+				}
+				else_if = {
+					limit = {
+						check_variable = {
+							CAL_electoral_senate_seat_class_1 = 2
+						}
+					}
+					log = "[?CAL_electoral_senate_seat_1]"
+					set_variable = {
+						CAL_electoral_senate_seat_outgoing = CAL_electoral_senate_seat_1
+					}
+					set_variable = {
+						CAL_electoral_senate_seat_1 = CAL_electoral_party_array^highest_index
+					}
+					set_variable = {
+						CAL_electoral_senate_seat_winner = CAL_electoral_senate_seat_1
+					}
+				}
+				else_if = {
+					limit = {
+						check_variable = {
+							CAL_electoral_senate_seat_class_2 = 2
+						}
+					}
+					set_variable = {
+						CAL_electoral_senate_seat_outgoing = CAL_electoral_senate_seat_2
+					}
+					set_variable = {
+						CAL_electoral_senate_seat_2 = CAL_electoral_party_array^highest_index
+					}
+					set_variable = {
+						CAL_electoral_senate_seat_winner = CAL_electoral_senate_seat_2
+					}
+				}
+			}
+			# house calculations
+			clear_array = CAL_electoral_party_outgoing_seat_array
+			for_each_loop = {
+				array = CAL_electoral_party_seat_array
+				add_to_array = {
+					CAL_electoral_party_outgoing_seat_array = v
+				}
+			}
+			for_each_loop = {
+				array = CAL_electoral_party_predicted_seat_array
+				set_variable = {
+					CAL_electoral_party_seat_array^i = v
+				}
+			}
+			CAL_electoral_reload = yes
+			# governors
+			set_variable = {
+				CAL_governor_outgoing = CAL_governor
+			}
+			# no coalitions
+			if = {
+				limit = {
+					always = no
+				}
+			}
+			# Progressive Coalition and R-D Coalition
+			else = {
+				if = {
+					limit = {
+						check_variable = {
+							CAL_electoral_leading = 1
+						}
+					}
+					set_variable = {
+						CAL_governor = 1
+					}
+				}
+				else_if = {
+					limit = {
+						check_variable = {
+							CAL_electoral_leading = 2
+						}
+					}
+					set_variable = {
+						CAL_governor = 3
+					}
+				}
+				else_if = {
+					limit = {
+						check_variable = {
+							CAL_electoral_leading = 3
+						}
+					}
+					set_variable = {
+						CAL_governor = 4
+					}
+				}
+			}
+		}
+		add_to_variable = {
+			CAL_biannual_election_count = 1
+		}
+		if = {
+			# reset back to 0 once election count hits 3
+			limit = {
+				check_variable = {
+					CAL_biannual_election_count = 3
+				}
+			}
+			clear_variable = CAL_biannual_election_count
+		}
+		CAL_congress_reload = yes
+		CAL_update_california = yes
+	}
+}
+
+CAL_update_all_predictions = {
+	for_each_scope_loop = {
+		array = CAL_electoral_state_array
+		CAL_update_predictions = yes
+	}
+}
+
+CAL_update_predictions = {
+	# Presidential and Gubernatorial Predictions
+	# No coalitions
+	if = {
+		limit = {
+			always = no
+		}
+		# dont be lazy maho
+	}
+	# With Progressive Coalition and R-D Coalition
+	else = {
+		clear_array = CAL_electoral_party_coalition_popularity_array
+		# Socialists
+		add_to_array = {
+			CAL_electoral_party_coalition_popularity_array = CAL_electoral_party_popularity_array^0
+		}
+		# Progressive Coalition
+		add_to_array = {
+			CAL_electoral_party_coalition_popularity_array = CAL_electoral_party_popularity_array^1
+		}
+		add_to_variable = {
+			CAL_electoral_party_coalition_popularity_array^1 = CAL_electoral_party_popularity_array^2
+		}
+		# R-D Coalition
+		add_to_array = {
+			CAL_electoral_party_coalition_popularity_array = CAL_electoral_party_popularity_array^3
+		}
+		add_to_variable = {
+			CAL_electoral_party_coalition_popularity_array^2 = CAL_electoral_party_popularity_array^4
+		}
+		# get highest
+		find_highest_in_array = {
+			array = CAL_electoral_party_coalition_popularity_array
+			index = highest_index
+		}
+		# get second highest
+		set_temp_variable = {
+			second_highest_value = 0
+		}
+		for_each_loop = {
+			array = CAL_electoral_party_coalition_popularity_array
+			if = {
+				limit = {
+					NOT = {
+						check_variable = {
+							i = highest_index
+						}
+					}
+					check_variable = {
+						v > second_highest_value
+					}
+				}
+				set_temp_variable = {
+					second_highest_value = v
+				}
+				set_temp_variable = {
+					second_highest_index = i
+				}
+			}
+		}
+		# mfw tie
+		if = {
+			limit = {
+				check_variable = {
+					CAL_electoral_party_coalition_popularity_array^highest_senate_index = CAL_electoral_party_coalition_popularity_array^second_highest_senate_index
+				}
+			}
+			set_temp_variable = {
+				temp_swap_index = highest_senate_index
+			}
+			hidden_effect = {
+				random_list = {
+					50 = {
+						set_temp_variable = {
+							highest_senate_index = second_highest_senate_index
+						}
+						set_temp_variable = {
+							second_highest_senate_index = temp_swap_index
+						}
+					}
+					50 = {
+						# dont swap
+					}
+				}
+			}
+		}
+		# Socialists leading
+		if = {
+			limit = {
+				check_variable = {
+					highest_index = 0
+				}
+			}
+			set_variable = {
+				CAL_electoral_leading = 1
+			}
+			set_variable = {
+				CAL_electoral_leading_gap = CAL_electoral_party_coalition_popularity_array^0
+			}
+			subtract_from_variable = {
+				CAL_electoral_leading_gap = CAL_electoral_party_coalition_popularity_array^second_highest_index
+			}
+		}
+		# Progressive leading
+		else_if = {
+			limit = {
+				check_variable = {
+					highest_index = 1
+				}
+			}
+			set_variable = {
+				CAL_electoral_leading = 2
+			}
+			set_variable = {
+				CAL_electoral_leading_gap = CAL_electoral_party_coalition_popularity_array^1
+			}
+			subtract_from_variable = {
+				CAL_electoral_leading_gap = CAL_electoral_party_coalition_popularity_array^second_highest_index
+			}
+		}
+		# R-D leading
+		else_if = {
+			limit = {
+				check_variable = {
+					highest_index = 2
+				}
+			}
+			set_variable = {
+				CAL_electoral_leading = 3
+			}
+			set_variable = {
+				CAL_electoral_leading_gap = CAL_electoral_party_coalition_popularity_array^2
+			}
+			subtract_from_variable = {
+				CAL_electoral_leading_gap = CAL_electoral_party_coalition_popularity_array^second_highest_index
+			}
+		}
+	}
+	# Senate Seat Predictions
+	# get highest
+	find_highest_in_array = {
+		array = CAL_electoral_party_popularity_array
+		index = highest_senate_index
+	}
+	# get second highest
+	set_temp_variable = {
+		second_highest_senate_value = 0
+	}
+	for_each_loop = {
+		array = CAL_electoral_party_popularity_array
+		if = {
+			limit = {
+				NOT = {
+					check_variable = {
+						i = highest_senate_index
+					}
+				}
+				check_variable = {
+					v > second_highest_senate_value
+				}
+			}
+			set_temp_variable = {
+				second_highest_senate_value = v
+			}
+			set_temp_variable = {
+				second_highest_senate_index = i
+			}
+		}
+	}
+	# mfw tie
+	if = {
+		limit = {
+			check_variable = {
+				CAL_electoral_party_array^highest_senate_index = CAL_electoral_party_popularity_array^second_highest_senate_index
+			}
+		}
+		set_temp_variable = {
+			temp_swap_index = highest_senate_index
+		}
+		hidden_effect = {
+			random_list = {
+				50 = {
+					set_temp_variable = {
+						highest_senate_index = second_highest_senate_index
+					}
+					set_temp_variable = {
+						second_highest_senate_index = temp_swap_index
+					}
+				}
+				50 = {
+					# dont swap
+				}
+			}
+		}
+	}
+	set_variable = {
+		CAL_electoral_senate_leading = CAL_electoral_party_array^highest_senate_index
+	}
+	set_variable = {
+		CAL_electoral_senate_leading_gap = CAL_electoral_party_popularity_array^highest_senate_index
+	}
+	subtract_from_variable = {
+		CAL_electoral_senate_leading_gap = CAL_electoral_party_popularity_array^second_highest_senate_index
+	}
+	# House Seat Predictions
+	if = {
+		limit = {
+			check_variable = {
+				CAL_house_seat = 1
+			}
+			# edge case for at-large seats
+		}
+		for_each_loop = {
+			array = CAL_electoral_party_predicted_seat_array
+			# remove seat
+			find_highest_in_array = {
+				array = CAL_electoral_party_predicted_seat_array
+				index = highest_index
+			}
+			set_variable = {
+				CAL_electoral_party_predicted_seat_array^highest_index = 0
+			}
+			# add seat
+			find_highest_in_array = {
+				array = CAL_electoral_party_popularity_array
+				index = highest_index
+			}
+			set_variable = {
+				CAL_electoral_party_predicted_seat_array^highest_index = 1
+			}
+		}
+	}
+	else = {
+		clear_variable = temp_popularity_total
+		for_each_loop = {
+			array = CAL_electoral_party_popularity_array
+			set_temp_variable = {
+				temp_seats = CAL_electoral_party_popularity_array^i
+			}
+			# put a party popularity to a temp var
+			divide_temp_variable = {
+				temp_seats = 100
+			}
+			# divide party popularity so you get 0.65 from 65% for example
+			multiply_temp_variable = {
+				temp_seats = CAL_house_seat
+			}
+			# multiply that by number of seats to get seat share
+			round_temp_variable = temp_seats			# round it up
+			set_variable = {
+				CAL_electoral_party_predicted_seat_array^i = temp_seats
+			}
+			# set electoral seat to new value
+			add_to_variable = {
+				temp_popularity_total = temp_seats
+			}
+		}
+		# extra to make sure it adds up to electoral seats in state
+		if = {
+			limit = {
+				check_variable = {
+					temp_popularity_total < CAL_house_seat
+				}
+				# if total is less than number of seats
+			}
+			set_temp_variable = {
+				temp = CAL_house_seat
+			}
+			# put number of seats to a temp var
+			subtract_from_temp_variable = {
+				temp = temp_popularity_total
+			}
+			# get seat difference
+			find_highest_in_array = {
+				array = CAL_electoral_party_predicted_seat_array
+				index = highest_index
+			}
+			add_to_variable = {
+				CAL_electoral_party_predicted_seat_array^highest_index = temp
+			}
+			# add seat difference to most popular party
+		}
+		else_if = {
+			limit = {
+				check_variable = {
+					temp_popularity_total > CAL_house_seat
+				}
+				# if total is more than number of seats
+			}
+			subtract_from_variable = {
+				temp_popularity_total = CAL_house_seat
+			}
+			# get seat difference
+			find_highest_in_array = {
+				array = CAL_electoral_party_predicted_seat_array
+				index = highest_index
+			}
+			subtract_from_variable = {
+				CAL_electoral_party_predicted_seat_array^highest_index = temp_popularity_total
+			}
+			# subtract seat difference from most popular party
+		}
+	}
+}
+
+CAL_congress_reload = {
+	clear_array = CAL_senate_party_array
+	clear_array = CAL_house_party_array
+	clear_variable = CAL_house_seat_total
+	clear_variable = CAL_senate_seat_total
+	for_loop_effect = {
+		start = 1
+		end = 5
+		compare = less_than_or_equals
+		add_to_array = {
+			CAL_senate_party_array = v
+		}
+		add_to_array = {
+			CAL_house_party_array = v
+		}
+		clear_variable = v:CAL_senate_seat
+		clear_variable = v:CAL_house_seat
+	}
+	for_each_scope_loop = {
+		array = CAL_electoral_state_array
+		add_to_variable = {
+			CAL_electoral_senate_seat_1:CAL_senate_seat = 1
+		}
+		add_to_variable = {
+			CAL_electoral_senate_seat_2:CAL_senate_seat = 1
+		}
+		for_each_loop = {
+			array = CAL.CAL_house_party_array
+			add_to_variable = {
+				v:CAL_house_seat = CAL_electoral_party_seat_array^i
+			}
+		}
+		add_to_variable = {
+			CAL.CAL_house_seat_total = CAL_house_seat
+		}
+		add_to_variable = {
+			CAL.CAL_senate_seat_total = 2
+		}
+	}
+	for_each_scope_loop = {
+		array = CAL_electoral_state_array
+		# set house seats as electoral vote - 2
+		set_variable = {
+			CAL_house_seat = CAL_electoral_vote
+		}
+		subtract_from_variable = {
+			CAL_house_seat = 2
+		}
+		# does the magic
+		CAL_electoral_reload = yes
+		# most popular party
+		find_highest_in_array = {
+			array = CAL_electoral_party_popularity_array
+			index = highest_index
+		}
+		set_variable = {
+			CAL_electoral_lean = CAL_electoral_party_array^highest_index
+		}
+		# update predicted seats
+		CAL_update_predictions = yes
+		CAL_get_senate_class = yes		#just sets this up
+	}
+	CAL_house_reload = yes
+}
+
+CAL_house_reload = {
+	clear_array = CAL_house_main_array
+	for_each_loop = {
+		array = CAL_house_party_array
+		set_temp_variable = {
+			global.seat_id = v
+		}
+		var:v = {
+			if = {
+				limit = {
+					check_variable = {
+						CAL_house_seat > 0
+					}
+				}
+				for_loop_effect = {
+					start = 1
+					end = CAL_house_seat
+					compare = less_than_or_equals
+					add_to_array = {
+						CAL.CAL_house_main_array = global.seat_id
+					}
+				}
+			}
+		}
+	}
+	CAL_congress_refresh = yes
+}
+
+CAL_house_semicircle = {
+	clear_array = CAL_house_x_array
+	clear_array = CAL_house_y_array
+	add_to_array = {
+		CAL_house_x_array = 0
+	}
+	add_to_array = {
+		CAL_house_y_array = 114
+	}
+	add_to_array = {
+		CAL_house_x_array = 24
+	}
+	add_to_array = {
+		CAL_house_y_array = 114
+	}
+	add_to_array = {
+		CAL_house_x_array = 49
+	}
+	add_to_array = {
+		CAL_house_y_array = 114
+	}
+	add_to_array = {
+		CAL_house_x_array = 73
+	}
+	add_to_array = {
+		CAL_house_y_array = 114
+	}
+	add_to_array = {
+		CAL_house_x_array = 5
+	}
+	add_to_array = {
+		CAL_house_y_array = 89
+	}
+	add_to_array = {
+		CAL_house_x_array = 30
+	}
+	add_to_array = {
+		CAL_house_y_array = 89
+	}
+	add_to_array = {
+		CAL_house_x_array = 55
+	}
+	add_to_array = {
+		CAL_house_y_array = 93
+	}
+	add_to_array = {
+		CAL_house_x_array = 15
+	}
+	add_to_array = {
+		CAL_house_y_array = 66
+	}
+	add_to_array = {
+		CAL_house_x_array = 42
+	}
+	add_to_array = {
+		CAL_house_y_array = 67
+	}
+	add_to_array = {
+		CAL_house_x_array = 82
+	}
+	add_to_array = {
+		CAL_house_y_array = 95
+	}
+	add_to_array = {
+		CAL_house_x_array = 29
+	}
+	add_to_array = {
+		CAL_house_y_array = 45
+	}
+	add_to_array = {
+		CAL_house_x_array = 68
+	}
+	add_to_array = {
+		CAL_house_y_array = 74
+	}
+	add_to_array = {
+		CAL_house_x_array = 60
+	}
+	add_to_array = {
+		CAL_house_y_array = 49
+	}
+	add_to_array = {
+		CAL_house_x_array = 48
+	}
+	add_to_array = {
+		CAL_house_y_array = 28
+	}
+	add_to_array = {
+		CAL_house_x_array = 86
+	}
+	add_to_array = {
+		CAL_house_y_array = 61
+	}
+	add_to_array = {
+		CAL_house_x_array = 98
+	}
+	add_to_array = {
+		CAL_house_y_array = 82
+	}
+	add_to_array = {
+		CAL_house_x_array = 70
+	}
+	add_to_array = {
+		CAL_house_y_array = 15
+	}
+	add_to_array = {
+		CAL_house_x_array = 82
+	}
+	add_to_array = {
+		CAL_house_y_array = 36
+	}
+	add_to_array = {
+		CAL_house_x_array = 94
+	}
+	add_to_array = {
+		CAL_house_y_array = 7
+	}
+	add_to_array = {
+		CAL_house_x_array = 108
+	}
+	add_to_array = {
+		CAL_house_y_array = 54
+	}
+	add_to_array = {
+		CAL_house_x_array = 106
+	}
+	add_to_array = {
+		CAL_house_y_array = 30
+	}
+	add_to_array = {
+		CAL_house_x_array = 119
+	}
+	add_to_array = {
+		CAL_house_y_array = 5
+	}
+	add_to_array = {
+		CAL_house_x_array = 119
+	}
+	add_to_array = {
+		CAL_house_y_array = 77
+	}
+	add_to_array = {
+		CAL_house_x_array = 132
+	}
+	add_to_array = {
+		CAL_house_y_array = 30
+	}
+	add_to_array = {
+		CAL_house_x_array = 130
+	}
+	add_to_array = {
+		CAL_house_y_array = 54
+	}
+	add_to_array = {
+		CAL_house_x_array = 144
+	}
+	add_to_array = {
+		CAL_house_y_array = 7
+	}
+	add_to_array = {
+		CAL_house_x_array = 156
+	}
+	add_to_array = {
+		CAL_house_y_array = 36
+	}
+	add_to_array = {
+		CAL_house_x_array = 168
+	}
+	add_to_array = {
+		CAL_house_y_array = 15
+	}
+	add_to_array = {
+		CAL_house_x_array = 139
+	}
+	add_to_array = {
+		CAL_house_y_array = 82
+	}
+	add_to_array = {
+		CAL_house_x_array = 151
+	}
+	add_to_array = {
+		CAL_house_y_array = 61
+	}
+	add_to_array = {
+		CAL_house_x_array = 190
+	}
+	add_to_array = {
+		CAL_house_y_array = 28
+	}
+	add_to_array = {
+		CAL_house_x_array = 178
+	}
+	add_to_array = {
+		CAL_house_y_array = 49
+	}
+	add_to_array = {
+		CAL_house_x_array = 170
+	}
+	add_to_array = {
+		CAL_house_y_array = 74
+	}
+	add_to_array = {
+		CAL_house_x_array = 209
+	}
+	add_to_array = {
+		CAL_house_y_array = 45
+	}
+	add_to_array = {
+		CAL_house_x_array = 156
+	}
+	add_to_array = {
+		CAL_house_y_array = 95
+	}
+	add_to_array = {
+		CAL_house_x_array = 195
+	}
+	add_to_array = {
+		CAL_house_y_array = 67
+	}
+	add_to_array = {
+		CAL_house_x_array = 223
+	}
+	add_to_array = {
+		CAL_house_y_array = 66
+	}
+	add_to_array = {
+		CAL_house_x_array = 183
+	}
+	add_to_array = {
+		CAL_house_y_array = 93
+	}
+	add_to_array = {
+		CAL_house_x_array = 208
+	}
+	add_to_array = {
+		CAL_house_y_array = 89
+	}
+	add_to_array = {
+		CAL_house_x_array = 233
+	}
+	add_to_array = {
+		CAL_house_y_array = 89
+	}
+	add_to_array = {
+		CAL_house_x_array = 165
+	}
+	add_to_array = {
+		CAL_house_y_array = 114
+	}
+	add_to_array = {
+		CAL_house_x_array = 189
+	}
+	add_to_array = {
+		CAL_house_y_array = 114
+	}
+	add_to_array = {
+		CAL_house_x_array = 213
+	}
+	add_to_array = {
+		CAL_house_y_array = 114
+	}
+	add_to_array = {
+		CAL_house_x_array = 238
+	}
+	add_to_array = {
+		CAL_house_y_array = 114
+	}
+	
+	add_to_array = {
+		CAL_house_x_array = 97
+	}
+	add_to_array = {
+		CAL_house_y_array = 114
+	}
+	add_to_array = {
+		CAL_house_x_array = 119
+	}
+	add_to_array = {
+		CAL_house_y_array = 94
+	}
+	add_to_array = {
+		CAL_house_x_array = 141
+	}
+	add_to_array = {
+		CAL_house_y_array = 114
+	}
+}
+
+# refresh gui
+CAL_electoral_refresh = {
+	for_each_loop = {
+		array = CAL_electoral_state_array
+		add_to_variable = {
+			v:show_CAL_electoral = 1
+		}
+	}
+}
+
+CAL_congress_refresh = {
+	if = {
+		limit = {
+			has_variable = show_CAL_congress
+		}
+		add_to_variable = {
+			show_CAL_congress = 1
+		}
+	}
+}
+
+CAL_get_senate_class = {
+	if = {
+		limit = {
+			OR = {
+				AND = {
+					date > 1949.11.8
+					date < 1951.1.3
+				}
+				AND = {
+					date > 1955.11.8
+					date < 1957.1.3
+				}
+				AND = {
+					date > 1961.11.8
+					date < 1963.1.3
+				}
+			}
+		}
+		set_variable = {
+			senate_class_var = 2
+		}
+		#Class 2
+	}
+	else_if = {
+		limit = {
+			OR = {
+				AND = {
+					date > 1949.11.8
+					date < 1951.1.3
+				}
+				AND = {
+					date > 1955.11.8
+					date < 1957.1.3
+				}
+				AND = {
+					date > 1961.11.8
+					date < 1963.1.3
+				}
+			}
+		}
+		set_variable = {
+			senate_class_var = 3
+		}
+		#Class 3
+	}
+	else_if = {
+		limit = {
+			OR = {
+				AND = {
+					date > 1951.11.8
+					date < 1953.1.3
+				}
+				AND = {
+					date > 1957.11.8
+					date < 1959.1.3
+				}
+				AND = {
+					date > 1963.11.8
+					date < 1965.1.3
+				}
+			}
+		}
+		set_variable = {
+			senate_class_var = 1
+		}
+		#Class 1
+	}
+}
+
+CAL_increase_recovery = {
+	if = {
+		limit = {
+			has_idea = CAL_recovering_from_the_ACW
+		}
+		swap_ideas = {
+			remove_idea = CAL_recovering_from_the_ACW
+			add_idea = CAL_recovering_from_the_ACW_2
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = CAL_recovering_from_the_ACW_2
+		}
+		swap_ideas = {
+			remove_idea = CAL_recovering_from_the_ACW_2
+			add_idea = CAL_recovering_from_the_ACW_3
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = CAL_recovering_from_the_ACW_3
+		}
+		swap_ideas = {
+			remove_idea = CAL_recovering_from_the_ACW_3
+			add_idea = CAL_cautious_western_optimism
+		}
+	}
+}
+
+CAL_Set_Congress_Support = {
+	custom_effect_tooltip = CAL_Congress_Support_tt
+	CAL_Set_House_Support = yes
+	CAL_Set_Senate_Support = yes
+}
+
+CAL_Set_House_Support = {
+	#SOC#
+	if = {
+		limit = {
+			check_variable = {
+				CAL_Soc_Support_Var = 0
+			}
+		}
+		set_variable = {
+			CAL_House_Socialist_support = 0
+		}
+	}
+	else_if = {
+		limit = {
+			check_variable = {
+				CAL_Soc_Support_Var = 1
+			}
+		}
+		set_temp_variable = {
+			CAL_House_Socialist_support_temp = CAL_radsoc_party:CAL_house_seat
+		}
+		divide_temp_variable = {
+			CAL_House_Socialist_support_temp = 3
+		}
+		round_temp_variable = CAL_House_Socialist_support_temp		# round it up
+		set_variable = {
+			CAL_House_Socialist_support = CAL_House_Socialist_support_temp
+		}
+	}
+	else_if = {
+		limit = {
+			check_variable = {
+				CAL_Soc_Support_Var = 2
+			}
+		}
+		set_temp_variable = {
+			CAL_House_Socialist_support_temp = CAL_radsoc_party:CAL_house_seat
+		}
+		divide_temp_variable = {
+			CAL_House_Socialist_support_temp = 2
+		}
+		round_temp_variable = CAL_House_Socialist_support_temp		# round it up
+		set_variable = {
+			CAL_House_Socialist_support = CAL_House_Socialist_support_temp
+		}
+	}
+	else_if = {
+		limit = {
+			check_variable = {
+				CAL_Soc_Support_Var = 3
+			}
+		}
+		set_temp_variable = {
+			CAL_House_Socialist_support_temp = CAL_radsoc_party:CAL_house_seat
+		}
+		divide_temp_variable = {
+			CAL_House_Socialist_support_temp = 1.5
+		}
+		round_temp_variable = CAL_House_Socialist_support_temp		# round it up
+		set_variable = {
+			CAL_House_Socialist_support = CAL_House_Socialist_support_temp
+		}
+	}
+	else_if = {
+		limit = {
+			check_variable = {
+				CAL_Soc_Support_Var = 4
+			}
+		}
+		set_variable = {
+			CAL_House_Socialist_support = CAL_radsoc_party:CAL_house_seat
+		}
+	}
+	#L-PROG#
+	if = {
+		limit = {
+			check_variable = {
+				CAL_L_Prog_Support_Var = 0
+			}
+		}
+		set_variable = {
+			CAL_House_L_Prog_support = 0
+		}
+	}
+	else_if = {
+		limit = {
+			check_variable = {
+				CAL_L_Prog_Support_Var = 1
+			}
+		}
+		set_temp_variable = {
+			CAL_House_L_Prog_support_temp = CAL_socdem_party:CAL_house_seat
+		}
+		divide_temp_variable = {
+			CAL_House_L_Prog_support_temp = 3
+		}
+		round_temp_variable = CAL_House_L_Prog_support_temp		# round it up
+		set_variable = {
+			CAL_House_L_Prog_support = CAL_House_L_Prog_support_temp
+		}
+	}
+	else_if = {
+		limit = {
+			check_variable = {
+				CAL_L_Prog_Support_Var = 2
+			}
+		}
+		set_temp_variable = {
+			CAL_House_L_Prog_support_temp = CAL_socdem_party:CAL_house_seat
+		}
+		divide_temp_variable = {
+			CAL_House_L_Prog_support_temp = 2
+		}
+		round_temp_variable = CAL_House_L_Prog_support_temp		# round it up
+		set_variable = {
+			CAL_House_L_Prog_support = CAL_House_L_Prog_support_temp
+		}
+	}
+	else_if = {
+		limit = {
+			check_variable = {
+				CAL_L_Prog_Support_Var = 3
+			}
+		}
+		set_temp_variable = {
+			CAL_House_L_Prog_support_temp = CAL_socdem_party:CAL_house_seat
+		}
+		divide_temp_variable = {
+			CAL_House_L_Prog_support_temp = 1.5
+		}
+		round_temp_variable = CAL_House_L_Prog_support_temp		# round it up
+		set_variable = {
+			CAL_House_L_Prog_support = CAL_House_L_Prog_support_temp
+		}
+	}
+	else_if = {
+		limit = {
+			check_variable = {
+				CAL_L_Prog_Support_Var = 4
+			}
+		}
+		set_variable = {
+			CAL_House_L_Prog_support = CAL_socdem_party:CAL_house_seat
+		}
+	}
+	#Prog#
+	if = {
+		limit = {
+			check_variable = {
+				CAL_Prog_Support_Var = 0
+			}
+		}
+		set_variable = {
+			CAL_House_Prog_support = 0
+		}
+	}
+	else_if = {
+		limit = {
+			check_variable = {
+				CAL_Prog_Support_Var = 1
+			}
+		}
+		set_temp_variable = {
+			CAL_House_Prog_support_temp = CAL_soclib_party:CAL_house_seat
+		}
+		divide_temp_variable = {
+			CAL_House_Prog_support_temp = 3
+		}
+		round_temp_variable = CAL_House_Prog_support_temp		# round it up
+		set_variable = {
+			CAL_House_Prog_support = CAL_House_Prog_support_temp
+		}
+	}
+	else_if = {
+		limit = {
+			check_variable = {
+				CAL_Prog_Support_Var = 2
+			}
+		}
+		set_temp_variable = {
+			CAL_House_Prog_support_temp = CAL_soclib_party:CAL_house_seat
+		}
+		divide_temp_variable = {
+			CAL_House_Prog_support_temp = 2
+		}
+		round_temp_variable = CAL_House_Prog_support_temp		# round it up
+		set_variable = {
+			CAL_House_Prog_support = CAL_House_Prog_support_temp
+		}
+	}
+	else_if = {
+		limit = {
+			check_variable = {
+				CAL_Prog_Support_Var = 3
+			}
+		}
+		set_temp_variable = {
+			CAL_House_Prog_support_temp = CAL_soclib_party:CAL_house_seat
+		}
+		divide_temp_variable = {
+			CAL_House_Prog_support_temp = 1.5
+		}
+		round_temp_variable = CAL_House_Prog_support_temp		# round it up
+		set_variable = {
+			CAL_House_Prog_support = CAL_House_Prog_support_temp
+		}
+	}
+	else_if = {
+		limit = {
+			check_variable = {
+				CAL_Prog_Support_Var = 4
+			}
+		}
+		set_variable = {
+			CAL_House_Prog_support = CAL_soclib_party:CAL_house_seat
+		}
+	}
+	#Rep#
+	if = {
+		limit = {
+			check_variable = {
+				CAL_Rep_Support_Var = 0
+			}
+		}
+		set_variable = {
+			CAL_House_Rep_support = 0
+		}
+	}
+	else_if = {
+		limit = {
+			check_variable = {
+				CAL_Rep_Support_Var = 1
+			}
+		}
+		set_temp_variable = {
+			CAL_House_Rep_support_temp = CAL_marlib_party:CAL_house_seat
+		}
+		divide_temp_variable = {
+			CAL_House_Rep_support_temp = 3
+		}
+		round_temp_variable = CAL_House_Rep_support_temp		# round it up
+		set_variable = {
+			CAL_House_Rep_support = CAL_House_Rep_support_temp
+		}
+	}
+	else_if = {
+		limit = {
+			check_variable = {
+				CAL_Rep_Support_Var = 2
+			}
+		}
+		set_temp_variable = {
+			CAL_House_Rep_support_temp = CAL_marlib_party:CAL_house_seat
+		}
+		divide_temp_variable = {
+			CAL_House_Rep_support_temp = 2
+		}
+		round_temp_variable = CAL_House_Rep_support_temp		# round it up
+		set_variable = {
+			CAL_House_Rep_support = CAL_House_Rep_support_temp
+		}
+	}
+	else_if = {
+		limit = {
+			check_variable = {
+				CAL_Rep_Support_Var = 3
+			}
+		}
+		set_temp_variable = {
+			CAL_House_Rep_support_temp = CAL_marlib_party:CAL_house_seat
+		}
+		divide_temp_variable = {
+			CAL_House_Rep_support_temp = 1.5
+		}
+		round_temp_variable = CAL_House_Rep_support_temp		# round it up
+		set_variable = {
+			CAL_House_Rep_support = CAL_House_Rep_support_temp
+		}
+	}
+	else_if = {
+		limit = {
+			check_variable = {
+				CAL_Rep_Support_Var = 4
+			}
+		}
+		set_variable = {
+			CAL_House_Rep_support = CAL_marlib_party:CAL_house_seat
+		}
+	}
+	#Dem#
+	if = {
+		limit = {
+			check_variable = {
+				CAL_Dem_Support_Var = 0
+			}
+		}
+		set_variable = {
+			CAL_House_Dem_support = 0
+		}
+	}
+	else_if = {
+		limit = {
+			check_variable = {
+				CAL_Dem_Support_Var = 1
+			}
+		}
+		set_temp_variable = {
+			CAL_House_Dem_support_temp = CAL_soccon_party:CAL_house_seat
+		}
+		divide_temp_variable = {
+			CAL_House_Dem_support_temp = 3
+		}
+		round_temp_variable = CAL_House_Dem_support_temp		# round it up
+		set_variable = {
+			CAL_House_Dem_support = CAL_House_Dem_support_temp
+		}
+	}
+	else_if = {
+		limit = {
+			check_variable = {
+				CAL_Dem_Support_Var = 2
+			}
+		}
+		set_temp_variable = {
+			CAL_House_Dem_support_temp = CAL_soccon_party:CAL_house_seat
+		}
+		divide_temp_variable = {
+			CAL_House_Dem_support_temp = 2
+		}
+		round_temp_variable = CAL_House_Dem_support_temp		# round it up
+		set_variable = {
+			CAL_House_Dem_support = CAL_House_Dem_support_temp
+		}
+	}
+	else_if = {
+		limit = {
+			check_variable = {
+				CAL_Dem_Support_Var = 3
+			}
+		}
+		set_temp_variable = {
+			CAL_House_Dem_support_temp = CAL_soccon_party:CAL_house_seat
+		}
+		divide_temp_variable = {
+			CAL_House_Dem_support_temp = 1.5
+		}
+		round_temp_variable = CAL_House_Dem_support_temp		# round it up
+		set_variable = {
+			CAL_House_Dem_support = CAL_House_Dem_support_temp
+		}
+	}
+	else_if = {
+		limit = {
+			check_variable = {
+				CAL_Dem_Support_Var = 4
+			}
+		}
+		set_variable = {
+			CAL_House_Dem_support = CAL_soccon_party:CAL_house_seat
+		}
+	}
+	CAL_Calc_Total = yes
+}
+
+CAL_Set_Senate_Support = {
+	#SOC#
+	if = {
+		limit = {
+			check_variable = {
+				CAL_Soc_Support_Var = 0
+			}
+		}
+		set_variable = {
+			CAL_Senate_Socialist_support = 0
+		}
+	}
+	else_if = {
+		limit = {
+			check_variable = {
+				CAL_Soc_Support_Var = 1
+			}
+		}
+		set_temp_variable = {
+			CAL_Senate_Socialist_support_temp = CAL_radsoc_party:CAL_senate_seat
+		}
+		divide_temp_variable = {
+			CAL_Senate_Socialist_support_temp = 3
+		}
+		round_temp_variable = CAL_Senate_Socialist_support_temp		# round it up
+		set_variable = {
+			CAL_Senate_Socialist_support = CAL_Senate_Socialist_support_temp
+		}
+	}
+	else_if = {
+		limit = {
+			check_variable = {
+				CAL_Soc_Support_Var = 2
+			}
+		}
+		set_temp_variable = {
+			CAL_Senate_Socialist_support_temp = CAL_radsoc_party:CAL_senate_seat
+		}
+		divide_temp_variable = {
+			CAL_Senate_Socialist_support_temp = 2
+		}
+		round_temp_variable = CAL_Senate_Socialist_support_temp		# round it up
+		set_variable = {
+			CAL_Senate_Socialist_support = CAL_Senate_Socialist_support_temp
+		}
+	}
+	else_if = {
+		limit = {
+			check_variable = {
+				CAL_Soc_Support_Var = 3
+			}
+		}
+		set_temp_variable = {
+			CAL_Senate_Socialist_support_temp = CAL_radsoc_party:CAL_senate_seat
+		}
+		divide_temp_variable = {
+			CAL_Senate_Socialist_support_temp = 1.5
+		}
+		round_temp_variable = CAL_Senate_Socialist_support_temp		# round it up
+		set_variable = {
+			CAL_Senate_Socialist_support = CAL_Senate_Socialist_support_temp
+		}
+	}
+	else_if = {
+		limit = {
+			check_variable = {
+				CAL_Soc_Support_Var = 4
+			}
+		}
+		set_variable = {
+			CAL_Senate_Socialist_support = CAL_radsoc_party:CAL_senate_seat
+		}
+	}
+	#L-PROG#
+	if = {
+		limit = {
+			check_variable = {
+				CAL_L_Prog_Support_Var = 0
+			}
+		}
+		set_variable = {
+			CAL_Senate_L_Prog_support = 0
+		}
+	}
+	else_if = {
+		limit = {
+			check_variable = {
+				CAL_L_Prog_Support_Var = 1
+			}
+		}
+		set_temp_variable = {
+			CAL_Senate_L_Prog_support_temp = CAL_socdem_party:CAL_senate_seat
+		}
+		divide_temp_variable = {
+			CAL_Senate_L_Prog_support_temp = 3
+		}
+		round_temp_variable = CAL_Senate_L_Prog_support_temp		# round it up
+		set_variable = {
+			CAL_Senate_L_Prog_support = CAL_Senate_L_Prog_support_temp
+		}
+	}
+	else_if = {
+		limit = {
+			check_variable = {
+				CAL_L_Prog_Support_Var = 2
+			}
+		}
+		set_temp_variable = {
+			CAL_Senate_L_Prog_support_temp = CAL_socdem_party:CAL_senate_seat
+		}
+		divide_temp_variable = {
+			CAL_Senate_L_Prog_support_temp = 2
+		}
+		round_temp_variable = CAL_Senate_L_Prog_support_temp		# round it up
+		set_variable = {
+			CAL_Senate_L_Prog_support = CAL_Senate_L_Prog_support_temp
+		}
+	}
+	else_if = {
+		limit = {
+			check_variable = {
+				CAL_L_Prog_Support_Var = 3
+			}
+		}
+		set_temp_variable = {
+			CAL_Senate_L_Prog_support_temp = CAL_socdem_party:CAL_senate_seat
+		}
+		divide_temp_variable = {
+			CAL_Senate_L_Prog_support_temp = 1.5
+		}
+		round_temp_variable = CAL_Senate_L_Prog_support_temp		# round it up
+		set_variable = {
+			CAL_Senate_L_Prog_support = CAL_Senate_L_Prog_support_temp
+		}
+	}
+	else_if = {
+		limit = {
+			check_variable = {
+				CAL_L_Prog_Support_Var = 4
+			}
+		}
+		set_variable = {
+			CAL_Senate_L_Prog_support = CAL_socdem_party:CAL_senate_seat
+		}
+	}
+	#Prog#
+	if = {
+		limit = {
+			check_variable = {
+				CAL_Prog_Support_Var = 0
+			}
+		}
+		set_variable = {
+			CAL_Senate_Prog_support = 0
+		}
+	}
+	else_if = {
+		limit = {
+			check_variable = {
+				CAL_Prog_Support_Var = 1
+			}
+		}
+		set_temp_variable = {
+			CAL_Senate_Prog_support_temp = CAL_soclib_party:CAL_senate_seat
+		}
+		divide_temp_variable = {
+			CAL_Senate_Prog_support_temp = 3
+		}
+		round_temp_variable = CAL_Senate_Prog_support_temp		# round it up
+		set_variable = {
+			CAL_Senate_Prog_support = CAL_Senate_Prog_support_temp
+		}
+	}
+	else_if = {
+		limit = {
+			check_variable = {
+				CAL_Prog_Support_Var = 2
+			}
+		}
+		set_temp_variable = {
+			CAL_Senate_Prog_support_temp = CAL_soclib_party:CAL_senate_seat
+		}
+		divide_temp_variable = {
+			CAL_Senate_Prog_support_temp = 2
+		}
+		round_temp_variable = CAL_Senate_Prog_support_temp		# round it up
+		set_variable = {
+			CAL_Senate_Prog_support = CAL_Senate_Prog_support_temp
+		}
+	}
+	else_if = {
+		limit = {
+			check_variable = {
+				CAL_Prog_Support_Var = 3
+			}
+		}
+		set_temp_variable = {
+			CAL_Senate_Prog_support_temp = CAL_soclib_party:CAL_senate_seat
+		}
+		divide_temp_variable = {
+			CAL_Senate_Prog_support_temp = 1.5
+		}
+		round_temp_variable = CAL_Senate_Prog_support_temp		# round it up
+		set_variable = {
+			CAL_Senate_Prog_support = CAL_Senate_Prog_support_temp
+		}
+	}
+	else_if = {
+		limit = {
+			check_variable = {
+				CAL_Prog_Support_Var = 4
+			}
+		}
+		set_variable = {
+			CAL_Senate_Prog_support = CAL_soclib_party:CAL_senate_seat
+		}
+	}
+	#Rep#
+	if = {
+		limit = {
+			check_variable = {
+				CAL_Rep_Support_Var = 0
+			}
+		}
+		set_variable = {
+			CAL_Senate_Rep_support = 0
+		}
+	}
+	else_if = {
+		limit = {
+			check_variable = {
+				CAL_Rep_Support_Var = 1
+			}
+		}
+		set_temp_variable = {
+			CAL_Senate_Rep_support_temp = CAL_marlib_party:CAL_senate_seat
+		}
+		divide_temp_variable = {
+			CAL_Senate_Rep_support_temp = 3
+		}
+		round_temp_variable = CAL_Senate_Rep_support_temp		# round it up
+		set_variable = {
+			CAL_Senate_Rep_support = CAL_Senate_Rep_support_temp
+		}
+	}
+	else_if = {
+		limit = {
+			check_variable = {
+				CAL_Rep_Support_Var = 2
+			}
+		}
+		set_temp_variable = {
+			CAL_Senate_Rep_support_temp = CAL_marlib_party:CAL_senate_seat
+		}
+		divide_temp_variable = {
+			CAL_Senate_Rep_support_temp = 2
+		}
+		round_temp_variable = CAL_Senate_Rep_support_temp		# round it up
+		set_variable = {
+			CAL_Senate_Rep_support = CAL_Senate_Rep_support_temp
+		}
+	}
+	else_if = {
+		limit = {
+			check_variable = {
+				CAL_Rep_Support_Var = 3
+			}
+		}
+		set_temp_variable = {
+			CAL_Senate_Rep_support_temp = CAL_marlib_party:CAL_senate_seat
+		}
+		divide_temp_variable = {
+			CAL_Senate_Rep_support_temp = 1.5
+		}
+		round_temp_variable = CAL_Senate_Rep_support_temp		# round it up
+		set_variable = {
+			CAL_Senate_Rep_support = CAL_Senate_Rep_support_temp
+		}
+	}
+	else_if = {
+		limit = {
+			check_variable = {
+				CAL_Rep_Support_Var = 4
+			}
+		}
+		set_variable = {
+			CAL_Senate_Rep_support = CAL_marlib_party:CAL_senate_seat
+		}
+	}
+	#Dem#
+	if = {
+		limit = {
+			check_variable = {
+				CAL_Dem_Support_Var = 0
+			}
+		}
+		set_variable = {
+			CAL_Senate_Dem_support = 0
+		}
+	}
+	else_if = {
+		limit = {
+			check_variable = {
+				CAL_Dem_Support_Var = 1
+			}
+		}
+		set_temp_variable = {
+			CAL_Senate_Dem_support_temp = CAL_soccon_party:CAL_senate_seat
+		}
+		divide_temp_variable = {
+			CAL_Senate_Dem_support_temp = 3
+		}
+		round_temp_variable = CAL_Senate_Dem_support_temp		# round it up
+		set_variable = {
+			CAL_Senate_Dem_support = CAL_Senate_Dem_support_temp
+		}
+	}
+	else_if = {
+		limit = {
+			check_variable = {
+				CAL_Dem_Support_Var = 2
+			}
+		}
+		set_temp_variable = {
+			CAL_Senate_Dem_support_temp = CAL_soccon_party:CAL_senate_seat
+		}
+		divide_temp_variable = {
+			CAL_Senate_Dem_support_temp = 2
+		}
+		round_temp_variable = CAL_Senate_Dem_support_temp		# round it up
+		set_variable = {
+			CAL_Senate_Dem_support = CAL_Senate_Dem_support_temp
+		}
+	}
+	else_if = {
+		limit = {
+			check_variable = {
+				CAL_Dem_Support_Var = 3
+			}
+		}
+		set_temp_variable = {
+			CAL_Senate_Dem_support_temp = CAL_soccon_party:CAL_senate_seat
+		}
+		divide_temp_variable = {
+			CAL_Senate_Dem_support_temp = 1.5
+		}
+		round_temp_variable = CAL_Senate_Dem_support_temp		# round it up
+		set_variable = {
+			CAL_Senate_Dem_support = CAL_Senate_Dem_support_temp
+		}
+	}
+	else_if = {
+		limit = {
+			check_variable = {
+				CAL_Dem_Support_Var = 4
+			}
+		}
+		set_variable = {
+			CAL_Senate_Dem_support = CAL_soccon_party:CAL_senate_seat
+		}
+	}
+	CAL_Calc_Total = yes
+}
+
+CAL_Calc_Total = {
+	set_variable = {
+		CAL_House_Total_support = CAL_House_Socialist_support
+	}
+	add_to_variable = {
+		CAL_House_Total_support = CAL_House_L_Prog_support
+	}
+	add_to_variable = {
+		CAL_House_Total_support = CAL_House_Prog_support
+	}
+	add_to_variable = {
+		CAL_House_Total_support = CAL_House_Rep_support
+	}
+	add_to_variable = {
+		CAL_House_Total_support = CAL_House_Dem_support
+	}
+	set_variable = {
+		CAL_Senate_Total_support = CAL_Senate_Socialist_support
+	}
+	add_to_variable = {
+		CAL_Senate_Total_support = CAL_Senate_L_Prog_support
+	}
+	add_to_variable = {
+		CAL_Senate_Total_support = CAL_Senate_Prog_support
+	}
+	add_to_variable = {
+		CAL_Senate_Total_support = CAL_Senate_Rep_support
+	}
+	add_to_variable = {
+		CAL_Senate_Total_support = CAL_Senate_Dem_support
+	}
+
+	
+}
+
+CAL_Add_Soc_Reps = {
+	custom_effect_tooltip = CAL_Add_Soc_Reps_tt
+	randomize_temp_variable = {
+		var = CAL_Soc_House_Additional_seats_temp
+		distribution = binomial
+		min = 0		# optional
+		max = 1		# required if min is specified
+	}
+	multiply_temp_variable = {
+		CAL_Soc_House_Additional_seats_temp = CAL_House_Socialist_support
+	}
+	add_to_variable = {
+		CAL_House_Socialist_support = CAL_Soc_House_Additional_seats_temp
+	}
+	clamp_variable = {
+		#makes the variable not go over total amounts
+		var = CAL_House_Socialist_support
+		min = 0
+		max = CAL_radsoc_party:CAL_house_seat
+	}
+	round_variable = CAL_House_Socialist_support	# round it up
+	CAL_Calc_Total = yes
+}
+
+CAL_Add_L_Prog_Reps = {
+	custom_effect_tooltip = CAL_Add_L_Prog_Reps_tt
+	randomize_temp_variable = {
+		var = CAL_L_Prog_House_Additional_seats_temp
+		distribution = binomial
+		min = 0		# optional
+		max = 1		# required if min is specified
+	}
+	multiply_temp_variable = {
+		CAL_L_Prog_House_Additional_seats_temp = CAL_House_L_Prog_support
+	}
+	add_to_variable = {
+		CAL_House_L_Prog_support = CAL_L_Prog_House_Additional_seats_temp
+	}
+	clamp_variable = {
+		#makes the variable not go over total amounts
+		var = CAL_House_L_Prog_support
+		min = 0
+		max = CAL_socdem_party:CAL_house_seat
+	}
+	round_variable = CAL_House_L_Prog_support	# round it up
+	CAL_Calc_Total = yes
+}
+
+CAL_Add_Prog_Reps = {
+	custom_effect_tooltip = CAL_Add_Prog_Reps_tt
+	randomize_temp_variable = {
+		var = CAL_Prog_House_Additional_seats_temp
+		distribution = binomial
+		min = 0		# optional
+		max = 1		# required if min is specified
+	}
+	multiply_temp_variable = {
+		CAL_Prog_House_Additional_seats_temp = CAL_House_Prog_support
+	}
+	add_to_variable = {
+		CAL_House_Prog_support = CAL_Prog_House_Additional_seats_temp
+	}
+	clamp_variable = {
+		#makes the variable not go over total amounts
+		var = CAL_House_Prog_support
+		min = 0
+		max = CAL_soclib_party:CAL_house_seat
+	}
+	round_variable = CAL_House_Prog_support	# round it up
+	CAL_Calc_Total = yes
+}
+
+CAL_Add_Rep_Reps = {
+	custom_effect_tooltip = CAL_Add_Rep_Reps_tt
+	randomize_temp_variable = {
+		var = CAL_Rep_House_Additional_seats_temp
+		distribution = binomial
+		min = 0		# optional
+		max = 1		# required if min is specified
+	}
+	multiply_temp_variable = {
+		CAL_Rep_House_Additional_seats_temp = CAL_House_Rep_support
+	}
+	add_to_variable = {
+		CAL_House_Rep_support = CAL_Rep_House_Additional_seats_temp
+	}
+	clamp_variable = {
+		#makes the variable not go over total amounts
+		var = CAL_House_Rep_support
+		min = 0
+		max = CAL_marlib_party:CAL_house_seat
+	}
+	round_variable = CAL_House_Rep_support	# round it up
+	CAL_Calc_Total = yes
+}
+
+CAL_Add_Dem_Reps = {
+	custom_effect_tooltip = CAL_Add_Dem_Reps_tt
+	randomize_temp_variable = {
+		var = CAL_Dem_House_Additional_seats_temp
+		distribution = binomial
+		min = 0		# optional
+		max = 1		# required if min is specified
+	}
+	multiply_temp_variable = {
+		CAL_Dem_House_Additional_seats_temp = CAL_House_Dem_support
+	}
+	add_to_variable = {
+		CAL_House_Dem_support = CAL_Dem_House_Additional_seats_temp
+	}
+	clamp_variable = {
+		#makes the variable not go over total amounts
+		var = CAL_House_Dem_support
+		min = 0
+		max = CAL_soccon_party:CAL_house_seat
+	}
+	round_variable = CAL_House_Dem_support	# round it up
+	CAL_Calc_Total = yes
+}
+
+CAL_Add_Soc_Senators = {
+	custom_effect_tooltip = CAL_Add_Soc_Senators_tt
+	randomize_temp_variable = {
+		var = CAL_Soc_Senate_Additional_seats_temp
+		distribution = binomial
+		min = 0		# optional
+		max = 1		# required if min is specified
+	}
+	multiply_temp_variable = {
+		CAL_Soc_Senate_Additional_seats_temp = CAL_Senate_Socialist_support
+	}
+	add_to_variable = {
+		CAL_Senate_Socialist_support = CAL_Soc_Senate_Additional_seats_temp
+	}
+	clamp_variable = {
+		#makes the variable not go over total amounts
+		var = CAL_Senate_Socialist_support
+		min = 0
+		max = CAL_radsoc_party:CAL_senate_seat
+	}
+	round_variable = CAL_Senate_Socialist_support	# round it up
+	CAL_Calc_Total = yes
+}
+
+CAL_Add_L_Prog_Senators = {
+	custom_effect_tooltip = CAL_Add_L_Prog_Senators_tt
+	randomize_temp_variable = {
+		var = CAL_L_Prog_Senate_Additional_seats_temp
+		distribution = binomial
+		min = 0		# optional
+		max = 1		# required if min is specified
+	}
+	multiply_temp_variable = {
+		CAL_L_Prog_Senate_Additional_seats_temp = CAL_Senate_L_Prog_support
+	}
+	add_to_variable = {
+		CAL_Senate_L_Prog_support = CAL_L_Prog_Senate_Additional_seats_temp
+	}
+	clamp_variable = {
+		#makes the variable not go over total amounts
+		var = CAL_Senate_L_Prog_support
+		min = 0
+		max = CAL_socdem_party:CAL_senate_seat
+	}
+	round_variable = CAL_Senate_L_Prog_support	# round it up
+	CAL_Calc_Total = yes
+}
+
+CAL_Add_Prog_Senators = {
+	custom_effect_tooltip = CAL_Add_Prog_Senators_tt
+	randomize_temp_variable = {
+		var = CAL_Prog_Senate_Additional_seats_temp
+		distribution = binomial
+		min = 0		# optional
+		max = 1		# required if min is specified
+	}
+	multiply_temp_variable = {
+		CAL_Prog_Senate_Additional_seats_temp = CAL_Senate_Prog_support
+	}
+	add_to_variable = {
+		CAL_Senate_Prog_support = CAL_Prog_Senate_Additional_seats_temp
+	}
+	clamp_variable = {
+		#makes the variable not go over total amounts
+		var = CAL_Senate_Prog_support
+		min = 0
+		max = CAL_soclib_party:CAL_senate_seat
+	}
+	round_variable = CAL_Senate_Prog_support	# round it up
+	CAL_Calc_Total = yes
+}
+
+CAL_Add_Rep_Senators = {
+	custom_effect_tooltip = CAL_Add_Rep_Senators_tt
+	randomize_temp_variable = {
+		var = CAL_Rep_Senate_Additional_seats_temp
+		distribution = binomial
+		min = 0		# optional
+		max = 1		# required if min is specified
+	}
+	multiply_temp_variable = {
+		CAL_Rep_Senate_Additional_seats_temp = CAL_Senate_Rep_support
+	}
+	add_to_variable = {
+		CAL_Senate_Rep_support = CAL_Rep_Senate_Additional_seats_temp
+	}
+	clamp_variable = {
+		#makes the variable not go over total amounts
+		var = CAL_Senate_Rep_support
+		min = 0
+		max = CAL_marlib_party:CAL_senate_seat
+	}
+	round_variable = CAL_Senate_Rep_support	# round it up
+	CAL_Calc_Total = yes
+}
+
+CAL_Add_Dem_Senators = {
+	custom_effect_tooltip = CAL_Add_Dem_Senators_tt
+	randomize_temp_variable = {
+		var = CAL_Dem_Senate_Additional_seats_temp
+		distribution = binomial
+		min = 0		# optional
+		max = 1		# required if min is specified
+	}
+	multiply_temp_variable = {
+		CAL_Dem_Senate_Additional_seats_temp = CAL_Senate_Dem_support
+	}
+	add_to_variable = {
+		CAL_Senate_Dem_support = CAL_Dem_Senate_Additional_seats_temp
+	}
+	clamp_variable = {
+		#makes the variable not go over total amounts
+		var = CAL_Senate_Dem_support
+		min = 0
+		max = CAL_soccon_party:CAL_senate_seat
+	}
+	round_variable = CAL_Senate_Dem_support	# round it up
+	CAL_Calc_Total = yes
+}
+
+CAL_Remove_Soc_Reps = {
+	custom_effect_tooltip = CAL_Remove_Soc_Reps_tt
+	randomize_temp_variable = {
+		var = CAL_Soc_House_Removed_seats_temp
+		distribution = binomial
+		min = 0		# optional
+		max = 1		# required if min is specified
+	}
+	multiply_temp_variable = {
+		CAL_Soc_House_Removed_seats_temp = CAL_House_Socialist_support
+	}
+	subtract_from_variable = {
+		CAL_House_Socialist_support = CAL_Soc_House_Removed_seats_temp
+	}
+	clamp_variable = {
+		# makes the variable not go below 0
+		var = CAL_House_Socialist_support
+		min = 0
+	}
+	round_variable = CAL_House_Socialist_support	# round it up
+	CAL_Calc_Total = yes
+}
+
+CAL_Remove_L_Prog_Reps = {
+	custom_effect_tooltip = CAL_Remove_L_Prog_Reps_tt
+	randomize_temp_variable = {
+		var = CAL_L_Prog_House_Removed_seats_temp
+		distribution = binomial
+		min = 0		# optional
+		max = 1		# required if min is specified
+	}
+	multiply_temp_variable = {
+		CAL_L_Prog_House_Removed_seats_temp = CAL_House_L_Prog_support
+	}
+	subtract_from_variable = {
+		CAL_House_L_Prog_support = CAL_L_Prog_House_Removed_seats_temp
+	}
+	clamp_variable = {
+		# makes the variable not go below 0
+		var = CAL_House_L_Prog_support
+		min = 0
+	}
+	round_variable = CAL_House_L_Prog_support	# round it up
+	CAL_Calc_Total = yes
+}
+
+CAL_Remove_Prog_Reps = {
+	custom_effect_tooltip = CAL_Remove_Prog_Reps_tt
+	randomize_temp_variable = {
+		var = CAL_Prog_House_Removed_seats_temp
+		distribution = binomial
+		min = 0		# optional
+		max = 1		# required if min is specified
+	}
+	multiply_temp_variable = {
+		CAL_Prog_House_Removed_seats_temp = CAL_House_Prog_support
+	}
+	subtract_from_variable = {
+		CAL_House_Prog_support = CAL_Prog_House_Removed_seats_temp
+	}
+	clamp_variable = {
+		# makes the variable not go below 0
+		var = CAL_House_Prog_support
+		min = 0
+	}
+	round_variable = CAL_House_Prog_support	# round it up
+	CAL_Calc_Total = yes
+}
+
+CAL_Remove_Rep_Reps = {
+	custom_effect_tooltip = CAL_Remove_Rep_Reps_tt
+	randomize_temp_variable = {
+		var = CAL_Rep_House_Removed_seats_temp
+		distribution = binomial
+		min = 0		# optional
+		max = 1		# required if min is specified
+	}
+	multiply_temp_variable = {
+		CAL_Rep_House_Removed_seats_temp = CAL_House_Rep_support
+	}
+	subtract_from_variable = {
+		CAL_House_Rep_support = CAL_Rep_House_Removed_seats_temp
+	}
+	clamp_variable = {
+		# makes the variable not go below 0
+		var = CAL_House_Rep_support
+		min = 0
+	}
+	round_variable = CAL_House_Rep_support	# round it up
+	CAL_Calc_Total = yes
+}
+
+CAL_Remove_Dem_Reps = {
+	custom_effect_tooltip = CAL_Remove_Dem_Reps_tt
+	randomize_temp_variable = {
+		var = CAL_Dem_House_Removed_seats_temp
+		distribution = binomial
+		min = 0		# optional
+		max = 1		# required if min is specified
+	}
+	multiply_temp_variable = {
+		CAL_Dem_House_Removed_seats_temp = CAL_House_Dem_support
+	}
+	subtract_from_variable = {
+		CAL_House_Dem_support = CAL_Dem_House_Removed_seats_temp
+	}
+	clamp_variable = {
+		# makes the variable not go below 0
+		var = CAL_House_Dem_support
+		min = 0
+	}
+	round_variable = CAL_House_Dem_support	# round it up
+	CAL_Calc_Total = yes
+}
+
+CAL_Remove_Soc_Senators = {
+    custom_effect_tooltip = CAL_Remove_Soc_Senators_tt
+    randomize_temp_variable = {
+        var = CAL_Soc_Senate_Removed_seats_temp
+        distribution = binomial
+        min = 0     # optional
+        max = 1     # required if min is specified
+    }
+    multiply_temp_variable = {
+        CAL_Soc_Senate_Removed_seats_temp = CAL_Senate_Socialist_support
+    }
+    subtract_from_variable = {
+        CAL_Senate_Socialist_support = CAL_Soc_Senate_Removed_seats_temp
+    }
+    clamp_variable = {
+        # makes the variable not go below 0
+        var = CAL_Senate_Socialist_support
+        min = 0
+    }
+    round_variable = CAL_Senate_Socialist_support    # round it up
+    CAL_Calc_Total = yes
+}
+
+CAL_Remove_L_Prog_Senators = {
+    custom_effect_tooltip = CAL_Remove_L_Prog_Senators_tt
+    randomize_temp_variable = {
+        var = CAL_L_Prog_Senate_Removed_seats_temp
+        distribution = binomial
+        min = 0     # optional
+        max = 1     # required if min is specified
+    }
+    multiply_temp_variable = {
+        CAL_L_Prog_Senate_Removed_seats_temp = CAL_Senate_L_Prog_support
+    }
+    subtract_from_variable = {
+        CAL_Senate_L_Prog_support = CAL_L_Prog_Senate_Removed_seats_temp
+    }
+    clamp_variable = {
+        # makes the variable not go below 0
+        var = CAL_Senate_L_Prog_support
+        min = 0
+    }
+    round_variable = CAL_Senate_L_Prog_support    # round it up
+    CAL_Calc_Total = yes
+}
+
+CAL_Remove_Prog_Senators = {
+    custom_effect_tooltip = CAL_Remove_Prog_Senators_tt
+    randomize_temp_variable = {
+        var = CAL_Prog_Senate_Removed_seats_temp
+        distribution = binomial
+        min = 0     # optional
+        max = 1     # required if min is specified
+    }
+    multiply_temp_variable = {
+        CAL_Prog_Senate_Removed_seats_temp = CAL_Senate_Prog_support
+    }
+    subtract_from_variable = {
+        CAL_Senate_Prog_support = CAL_Prog_Senate_Removed_seats_temp
+    }
+    clamp_variable = {
+        # makes the variable not go below 0
+        var = CAL_Senate_Prog_support
+        min = 0
+    }
+    round_variable = CAL_Senate_Prog_support    # round it up
+    CAL_Calc_Total = yes
+}
+
+CAL_Remove_Rep_Senators = {
+    custom_effect_tooltip = CAL_Remove_Rep_Senators_tt
+    randomize_temp_variable = {
+        var = CAL_Rep_Senate_Removed_seats_temp
+        distribution = binomial
+        min = 0     # optional
+        max = 1     # required if min is specified
+    }
+    multiply_temp_variable = {
+        CAL_Rep_Senate_Removed_seats_temp = CAL_Senate_Rep_support
+    }
+    subtract_from_variable = {
+        CAL_Senate_Rep_support = CAL_Rep_Senate_Removed_seats_temp
+    }
+    clamp_variable = {
+        # makes the variable not go below 0
+        var = CAL_Senate_Rep_support
+        min = 0
+    }
+    round_variable = CAL_Senate_Rep_support    # round it up
+    CAL_Calc_Total = yes
+}
+
+CAL_Remove_Dem_Senators = {
+    custom_effect_tooltip = CAL_Remove_Dem_Senators_tt
+    randomize_temp_variable = {
+        var = CAL_Dem_Senate_Removed_seats_temp
+        distribution = binomial
+        min = 0     # optional
+        max = 1     # required if min is specified
+    }
+    multiply_temp_variable = {
+        CAL_Dem_Senate_Removed_seats_temp = CAL_Senate_Dem_support
+    }
+    subtract_from_variable = {
+        CAL_Senate_Dem_support = CAL_Dem_Senate_Removed_seats_temp
+    }
+    clamp_variable = {
+        # makes the variable not go below 0
+        var = CAL_Senate_Dem_support
+        min = 0
+    }
+    round_variable = CAL_Senate_Dem_support    # round it up
+    CAL_Calc_Total = yes
+}
+
+CAL_add_state_idea = {
+	#California#
+	825 = {
+		clear_array = state_idea_array
+		add_to_array = {
+			array = state_idea_array
+			value = 108
+			index = 0
+		}
+		set_variable = {
+			state_idea = 1
+		}
+	}
+	#SoCal#
+	949 = {
+		clear_array = state_idea_array
+		clear_array = state_idea_array
+		add_to_array = {
+			array = state_idea_array
+			value = 108
+			index = 0
+		}
+		set_variable = {
+			state_idea = 1
+		}
+	}
+	#NorCal#
+	950 = {
+		clear_array = state_idea_array
+		clear_array = state_idea_array
+		add_to_array = {
+			array = state_idea_array
+			value = 108
+			index = 0
+		}
+		set_variable = {
+			state_idea = 1
+		}
+	}
+	#Bay Area#
+	378 = {
+		clear_array = state_idea_array
+		clear_array = state_idea_array
+		add_to_array = {
+			array = state_idea_array
+			value = 108
+			index = 0
+		}
+		set_variable = {
+			state_idea = 1
+		}
+	}
+	#Oregon#
+	385 = {
+		clear_array = state_idea_array
+	
+	}
+	#Washington#
+	386 = {
+		clear_array = state_idea_array
+		
+	}
+	#Nevada#
+	379 = {
+		clear_array = state_idea_array
+		
+	}
+	#Arizona#
+	377 = {
+		clear_array = state_idea_array
+		
+	}
+	#New Mexico#
+	793 = {
+		clear_array = state_idea_array
+		add_to_array = {
+			array = state_idea_array
+			value = 0
+			index = 0
+		}
+		set_variable = {
+			state_idea = 1
+		}
+	}
+	#Utah#
+	380 = {
+		clear_array = state_idea_array
+		add_to_array = {
+			array = state_idea_array
+			value = 107
+			index = 0
+		}
+		set_variable = {
+			state_idea = 1
+		}
+	}
+	#Western Colorado#
+	931 = {
+		clear_array = state_idea_array
+		add_to_array = {
+			array = state_idea_array
+			value = 0
+			index = 0
+		}
+		set_variable = {
+			state_idea = 1
+		}
+	}
+	#Western Wyoming#
+	929 = {
+		clear_array = state_idea_array
+		add_to_array = {
+			array = state_idea_array
+			value = 0
+			index = 0
+		}
+		set_variable = {
+			state_idea = 1
+		}
+	}
+	#Idaho#
+	387 = {
+		clear_array = state_idea_array
+		
+	}
+	#Montana#
+	788 = {
+		clear_array = state_idea_array
+		add_to_array = {
+			array = state_idea_array
+			value = 0
+			index = 0
+		}
+		set_variable = {
+			state_idea = 1
+		}
+	}
+	#Alaska#
+	463 = {
+		clear_array = state_idea_array
+		
+	}
+	#Hawaii#
+	629 = {
+		clear_array = state_idea_array
+		
+	}
+}
+
+CAL_update_california = {
+	825 = {
+		378 = {
+			CAL_update_state = yes
+		}
+	}
+	if = {
+		limit = { 
+			NOT = {
+				949 = {
+					has_state_flag = south_california
+				}
+			}
+		}
+		825 = {
+			949 = {
+				CAL_update_state = yes
+			}
+		}
+	}
+	if = {
+		limit = { 
+			NOT = {
+				950 = {
+					has_state_flag = north_california
+				}
+			}
+		}
+		825 = {
+			950 = {
+				CAL_update_state = yes
+			}
+		}
+	}
+	CAL_electoral_reload = yes
+	CAL_update_predictions = yes
+	CAL_get_senate_class = yes
+}
+
+
+move_up_CAL_Foreign_Businesses = {
+	if = {
+		limit = { 
+			has_idea = CAL_Foreign_Businesses
+		}
+		swap_ideas = {
+			remove_idea = CAL_Foreign_Businesses
+			add_idea = CAL_Foreign_Businesses_2
+		}
+	}
+	else_if = {
+		limit = { 
+			has_idea = CAL_Foreign_Businesses_2
+		}
+		swap_ideas = {
+			remove_idea = CAL_Foreign_Businesses_2
+			add_idea = CAL_Foreign_Businesses_3
+		}
+	}
+	else_if = {
+		limit = { 
+			has_idea = CAL_Foreign_Businesses_3
+		}
+		swap_ideas = {
+			remove_idea = CAL_Foreign_Businesses_3
+			add_idea = CAL_Foreign_Businesses_4
+		}
+	}
+	else_if = {
+		limit = { 
+			has_idea = CAL_Foreign_Businesses_4
+		}
+		swap_ideas = {
+			remove_idea = CAL_Foreign_Businesses_4
+			add_idea = CAL_Foreign_Businesses_5
+		}
+	}
+	else = {
+		effect_tooltip = {
+			swap_ideas = {
+				remove_idea = CAL_Foreign_Businesses
+				add_idea = CAL_Foreign_Businesses_2
+			}
+		}
+	}
+}
+
+move_up_CAL_Foreign_Businesses_Accord = {
+	if = {
+		limit = { 
+			has_idea = CAL_Foreign_Businesses
+		}
+		swap_ideas = {
+			remove_idea = CAL_Foreign_Businesses
+			add_idea = CAL_Foreign_Businesses_2
+		}
+	}
+	else_if = {
+		limit = { 
+			has_idea = CAL_Foreign_Businesses_2
+		}
+		swap_ideas = {
+			remove_idea = CAL_Foreign_Businesses_2
+			add_idea = CAL_Foreign_Businesses_3
+		}
+	}
+	else_if = {
+		limit = { 
+			has_idea = CAL_Foreign_Businesses_3
+		}
+		swap_ideas = {
+			remove_idea = CAL_Foreign_Businesses_3
+			add_idea = CAL_Foreign_Businesses_4_Accord
+		}
+	}
+	else_if = {
+		limit = { 
+			has_idea = CAL_Foreign_Businesses_4_Accord
+		}
+		swap_ideas = {
+			remove_idea = CAL_Foreign_Businesses_4_Accord
+			add_idea = CAL_Foreign_Businesses_5_Accord
+		}
+	}
+	else = {
+		effect_tooltip = {
+			swap_ideas = {
+				remove_idea = CAL_Foreign_Businesses
+				add_idea = CAL_Foreign_Businesses_2
+			}
+		}
+	}
+}
+
+CAL_admit_Alaska = {
+	463 = {
+		clear_array = CAL_electoral_party_seat_array
+		clear_array = CAL_electoral_party_popularity_array
+		clear_array = CAL_electoral_party_array
+		#Alaska IF RE-INTEGRATED
+		add_core_of = CAL
+		set_state_flag = alaska_state
+		#Alaska
+		set_variable = {
+			CAL_electoral_vote = 3
+		}
+		set_variable = {
+			CAL_governor = 3
+		}
+		set_variable = {
+			CAL_electoral_senate_seat_1 = 3
+		}
+		set_variable = {
+			CAL_electoral_senate_seat_class_1 = 1
+		}
+		set_variable = {
+			CAL_electoral_senate_seat_2 = 4
+		}
+		set_variable = {
+			CAL_electoral_senate_seat_class_2 = 2
+		}
+		add_to_array = {
+			CAL_electoral_party_seat_array = 0
+		}
+		add_to_array = {
+			CAL_electoral_party_seat_array = 0
+		}
+		add_to_array = {
+			CAL_electoral_party_seat_array = 0
+		}
+		add_to_array = {
+			CAL_electoral_party_seat_array = 1
+		}
+		add_to_array = {
+			CAL_electoral_party_seat_array = 0
+		}
+		add_to_array = {
+			CAL_electoral_party_popularity_array = 2
+		}
+		add_to_array = {
+			CAL_electoral_party_popularity_array = 12
+		}
+		add_to_array = {
+			CAL_electoral_party_popularity_array = 36
+		}
+		add_to_array = {
+			CAL_electoral_party_popularity_array = 31
+		}
+		add_to_array = {
+			CAL_electoral_party_popularity_array = 19
+		}
+	}
+	add_to_array = {
+		CAL_electoral_state_array = 463
+	}
+
+	for_each_scope_loop = {
+		array = CAL_electoral_state_array
+		# clear all arrays in all states
+		clear_array = CAL_electoral_party_array
+		# makes an array for the seat ids 1-5 in all states, and initialises predicted seats to 0 (its calculated later)
+		for_loop_effect = {
+			start = 1
+			end = 6
+			compare = less_than_or_equals
+			add_to_array = {
+				CAL_electoral_party_array = v
+			}
+			add_to_array = {
+				CAL_electoral_party_predicted_seat_array = 0
+			}
+		}
+	}
+
+	for_each_scope_loop = {
+		array = CAL_electoral_state_array
+		# set house seats as electoral vote - 2
+		set_variable = {
+			CAL_house_seat = CAL_electoral_vote
+		}
+		subtract_from_variable = {
+			CAL_house_seat = 2
+		}
+		# does the magic
+		CAL_electoral_reload = yes
+		# most popular party
+		find_highest_in_array = {
+			array = CAL_electoral_party_popularity_array
+			index = highest_index
+		}
+		set_variable = {
+			CAL_electoral_lean = CAL_electoral_party_array^highest_index
+		}
+		# update predicted seats
+		CAL_update_predictions = yes
+		CAL_get_senate_class = yes		#just sets this up
+	}
+	CAL_congress_reload = yes
+}
+
+CAL_admit_Hawaii = {
+	629 = {
+		clear_array = CAL_electoral_party_seat_array
+		clear_array = CAL_electoral_party_popularity_array
+		clear_array = CAL_electoral_party_array
+		#Hawaii IF RE-INTEGRATED
+		add_core_of = CAL
+		set_state_flag = hawaii_state
+		#Hawaii
+		set_variable = {
+			CAL_electoral_vote = 4
+		}
+		set_variable = {
+			CAL_governor = 3
+		}
+		set_variable = {
+			CAL_electoral_senate_seat_1 = 3
+		}
+		set_variable = {
+			CAL_electoral_senate_seat_class_1 = 1
+		}
+		set_variable = {
+			CAL_electoral_senate_seat_2 = 4
+		}
+		set_variable = {
+			CAL_electoral_senate_seat_class_2 = 2
+		}
+		add_to_array = {
+			CAL_electoral_party_seat_array = 0
+		}
+		add_to_array = {
+			CAL_electoral_party_seat_array = 0
+		}
+		add_to_array = {
+			CAL_electoral_party_seat_array = 1
+		}
+		add_to_array = {
+			CAL_electoral_party_seat_array = 1
+		}
+		add_to_array = {
+			CAL_electoral_party_seat_array = 0
+		}
+		add_to_array = {
+			CAL_electoral_party_popularity_array = 2
+		}
+		add_to_array = {
+			CAL_electoral_party_popularity_array = 12
+		}
+		add_to_array = {
+			CAL_electoral_party_popularity_array = 38
+		}
+		add_to_array = {
+			CAL_electoral_party_popularity_array = 29
+		}
+		add_to_array = {
+			CAL_electoral_party_popularity_array = 19
+		}
+	}
+	add_to_array = {
+		CAL_electoral_state_array = 629
+	}
+
+	for_each_scope_loop = {
+		array = CAL_electoral_state_array
+		# clear all arrays in all states
+		clear_array = CAL_electoral_party_array
+		# makes an array for the seat ids 1-5 in all states, and initialises predicted seats to 0 (its calculated later)
+		for_loop_effect = {
+			start = 1
+			end = 6
+			compare = less_than_or_equals
+			add_to_array = {
+				CAL_electoral_party_array = v
+			}
+			add_to_array = {
+				CAL_electoral_party_predicted_seat_array = 0
+			}
+		}
+	}
+
+	for_each_scope_loop = {
+		array = CAL_electoral_state_array
+		# set house seats as electoral vote - 2
+		set_variable = {
+			CAL_house_seat = CAL_electoral_vote
+		}
+		subtract_from_variable = {
+			CAL_house_seat = 2
+		}
+		# does the magic
+		CAL_electoral_reload = yes
+		# most popular party
+		find_highest_in_array = {
+			array = CAL_electoral_party_popularity_array
+			index = highest_index
+		}
+		set_variable = {
+			CAL_electoral_lean = CAL_electoral_party_array^highest_index
+		}
+		# update predicted seats
+		CAL_update_predictions = yes
+		CAL_get_senate_class = yes		#just sets this up
+	}
+	CAL_congress_reload = yes
+}
+
+CAL_admit_South_California = {
+	949 = {
+		clr_state_flag = state_ideology_split_state
+		clear_array = CAL_electoral_party_seat_array
+		clear_array = CAL_electoral_party_popularity_array
+		clear_array = CAL_electoral_party_array
+		#South California IF RE-INTEGRATED
+		set_state_flag = south_california
+		#South California
+		set_variable = {
+			CAL_electoral_vote = 10
+		}
+		set_variable = {
+			CAL_governor = 4
+		}
+		set_variable = {
+			CAL_electoral_senate_seat_1 = 3
+		}
+		set_variable = {
+			CAL_electoral_senate_seat_class_1 = 1
+		}
+		set_variable = {
+			CAL_electoral_senate_seat_2 = 4
+		}
+		set_variable = {
+			CAL_electoral_senate_seat_class_2 = 2
+		}
+		add_to_array = {
+			CAL_electoral_party_seat_array = 0
+		}
+		add_to_array = {
+			CAL_electoral_party_seat_array = 1
+		}
+		add_to_array = {
+			CAL_electoral_party_seat_array = 3
+		}
+		add_to_array = {
+			CAL_electoral_party_seat_array = 3
+		}
+		add_to_array = {
+			CAL_electoral_party_seat_array = 1
+		}
+		add_to_array = {
+			CAL_electoral_party_popularity_array = 2
+		}
+		add_to_array = {
+			CAL_electoral_party_popularity_array = 12
+		}
+		add_to_array = {
+			CAL_electoral_party_popularity_array = 41
+		}
+		add_to_array = {
+			CAL_electoral_party_popularity_array = 38
+		}
+		add_to_array = {
+			CAL_electoral_party_popularity_array = 7
+		}
+	}
+	add_to_array = {
+		CAL_electoral_state_array = 949
+	}
+}
+
+CAL_admit_Jefferson = {
+	950 = {
+		clr_state_flag = state_ideology_split_state
+		clear_array = CAL_electoral_party_seat_array
+		clear_array = CAL_electoral_party_popularity_array
+		clear_array = CAL_electoral_party_array
+		set_state_flag = north_california
+		#Jefferson
+		set_variable = {
+			CAL_electoral_vote = 7
+		}
+		set_variable = {
+			CAL_governor = 4
+		}
+		set_variable = {
+			CAL_electoral_senate_seat_1 = 4
+		}
+		set_variable = {
+			CAL_electoral_senate_seat_class_1 = 1
+		}
+		set_variable = {
+			CAL_electoral_senate_seat_2 = 4
+		}
+		set_variable = {
+			CAL_electoral_senate_seat_class_2 = 2
+		}
+		add_to_array = {
+			CAL_electoral_party_seat_array = 0
+		}
+		add_to_array = {
+			CAL_electoral_party_seat_array = 0
+		}
+		add_to_array = {
+			CAL_electoral_party_seat_array = 1
+		}
+		add_to_array = {
+			CAL_electoral_party_seat_array = 3
+		}
+		add_to_array = {
+			CAL_electoral_party_seat_array = 1
+		}
+		add_to_array = {
+			CAL_electoral_party_popularity_array = 1
+		}
+		add_to_array = {
+			CAL_electoral_party_popularity_array = 5
+		}
+		add_to_array = {
+			CAL_electoral_party_popularity_array = 33
+		}
+		add_to_array = {
+			CAL_electoral_party_popularity_array = 47
+		}
+		add_to_array = {
+			CAL_electoral_party_popularity_array = 13
+		}
+	}
+	add_to_array = {
+		CAL_electoral_state_array = 950
+	}
+	remove_from_array = {
+		array = state_idea_array
+		value = 108
+	}
+	subtract_from_variable = {
+		state_idea = 1
+	}
+}
+
+CAL_update_central_California = {
+	825 = {
+		clear_array = CAL_electoral_party_seat_array
+		clear_array = CAL_electoral_party_popularity_array
+		clear_array = CAL_electoral_party_array
+		#Central California
+		set_variable = {
+			CAL_electoral_vote = 12
+		}
+		set_variable = {
+			CAL_governor = 3
+		}
+		set_variable = {
+			CAL_electoral_senate_seat_1 = 3
+		}
+		set_variable = {
+			CAL_electoral_senate_seat_class_1 = 1
+		}
+		set_variable = {
+			CAL_electoral_senate_seat_2 = 3
+		}
+		set_variable = {
+			CAL_electoral_senate_seat_class_2 = 2
+		}
+		add_to_array = {
+			CAL_electoral_party_seat_array = 0
+		}
+		add_to_array = {
+			CAL_electoral_party_seat_array = 1
+		}
+		add_to_array = {
+			CAL_electoral_party_seat_array = 6
+		}
+		add_to_array = {
+			CAL_electoral_party_seat_array = 3
+		}
+		add_to_array = {
+			CAL_electoral_party_seat_array = 0
+		}
+		add_to_array = {
+			CAL_electoral_party_popularity_array = 3
+		}
+		add_to_array = {
+			CAL_electoral_party_popularity_array = 15
+		}
+		add_to_array = {
+			CAL_electoral_party_popularity_array = 45
+		}
+		add_to_array = {
+			CAL_electoral_party_popularity_array = 32
+		}
+		add_to_array = {
+			CAL_electoral_party_popularity_array = 5
+		}
+		remove_from_array = {
+			array = state_idea_array
+			value = 108
+		}
+		subtract_from_variable = {
+			state_idea = 1
+		}
+	}
+
+	378 = {
+		clear_array = CAL_electoral_party_seat_array
+		clear_array = CAL_electoral_party_popularity_array
+		clear_array = CAL_electoral_party_array
+		825 = {
+			set_variable = {
+				PREV.CAL_electoral_vote = CAL_electoral_vote
+			}
+			set_variable = {
+				PREV.CAL_governor = CAL_governor
+			}
+			set_variable = {
+				PREV.CAL_electoral_senate_seat_1 = CAL_electoral_senate_seat_1
+			}
+			set_variable = {
+				PREV.CAL_electoral_senate_seat_class_1 = CAL_electoral_senate_seat_class_1
+			}
+			set_variable = {
+				PREV.CAL_electoral_senate_seat_2 = CAL_electoral_senate_seat_2
+			}
+			set_variable = {
+				PREV.CAL_electoral_senate_seat_class_2 = CAL_electoral_senate_seat_class_2
+			}
+			for_each_loop = {
+				array = CAL_electoral_party_seat_array
+				add_to_array = {
+					PREV.CAL_electoral_party_seat_array = v
+				}
+			}
+			for_each_loop = {
+				array = CAL_electoral_party_popularity_array
+				add_to_array = {
+					PREV.CAL_electoral_party_popularity_array = v
+				}
+			}
+			for_each_loop = {
+				array = CAL_electoral_party_array
+				add_to_array = {
+					PREV.CAL_electoral_party_array = v
+				}
+			}
+			set_variable = {
+				PREV.CAL_electoral_lean = CAL_electoral_lean
+			}
+			set_variable = {
+				PREV.CAL_house_seat = CAL_house_seat
+			}
+		}
+		# clear all arrays in all states
+		clear_array = CAL_electoral_party_array
+		# makes an array for the seat ids 1-5 in all states, and initialises predicted seats to 0 (its calculated later)
+		for_loop_effect = {
+			start = 1
+			end = 6
+			compare = less_than_or_equals
+			add_to_array = {
+				CAL_electoral_party_array = v
+			}
+			add_to_array = {
+				CAL_electoral_party_predicted_seat_array = 0
+			}
+		}
+
+		# set house seats as electoral vote - 2
+		set_variable = {
+			CAL_house_seat = CAL_electoral_vote
+		}
+		subtract_from_variable = {
+			CAL_house_seat = 2
+		}
+		# does the magic
+		CAL_electoral_reload = yes
+		# most popular party
+		find_highest_in_array = {
+			array = CAL_electoral_party_popularity_array
+			index = highest_index
+		}
+		set_variable = {
+			CAL_electoral_lean = CAL_electoral_party_array^highest_index
+		}
+		# update predicted seats
+		CAL_update_predictions = yes
+		CAL_get_senate_class = yes		#just sets this up
+		remove_from_array = {
+			array = state_idea_array
+			value = 108
+		}
+		subtract_from_variable = {
+			state_idea = 1
+		}
+	}
+}
+
+CAL_split_California = {
+	CAL_admit_South_California = yes
+	CAL_admit_Jefferson = yes
+	CAL_update_central_California = yes
+
+	for_each_scope_loop = {
+		array = CAL_electoral_state_array
+		# clear all arrays in all states
+		clear_array = CAL_electoral_party_array
+		# makes an array for the seat ids 1-5 in all states, and initialises predicted seats to 0 (its calculated later)
+		for_loop_effect = {
+			start = 1
+			end = 6
+			compare = less_than_or_equals
+			add_to_array = {
+				CAL_electoral_party_array = v
+			}
+			add_to_array = {
+				CAL_electoral_party_predicted_seat_array = 0
+			}
+		}
+	}
+
+	for_each_scope_loop = {
+		array = CAL_electoral_state_array
+		# set house seats as electoral vote - 2
+		set_variable = {
+			CAL_house_seat = CAL_electoral_vote
+		}
+		subtract_from_variable = {
+			CAL_house_seat = 2
+		}
+		# does the magic
+		CAL_electoral_reload = yes
+		# most popular party
+		find_highest_in_array = {
+			array = CAL_electoral_party_popularity_array
+			index = highest_index
+		}
+		set_variable = {
+			CAL_electoral_lean = CAL_electoral_party_array^highest_index
+		}
+		# update predicted seats
+		CAL_update_predictions = yes
+		CAL_get_senate_class = yes		#just sets this up
+	}
+	CAL_congress_reload = yes
+}
+
+CAL_remove_campaigning_effects = {
+	clr_country_flag = currently_campaigning
+	if = {
+		limit = { has_country_flag = CAL_Prog_Campaign }
+		random_list = {
+			15 = {
+				set_temp_variable = { temp_popularity = 4 }
+				set_temp_variable = { temp_party = 3 }
+				CAL_electoral_modify_popularity = yes
+				set_temp_variable = { temp_popularity = 1 }
+				set_temp_variable = { temp_party = 2 }
+				CAL_electoral_modify_popularity = yes
+			}
+			45 = {
+				set_temp_variable = { temp_popularity = 3 }
+				set_temp_variable = { temp_party = 3 }
+				CAL_electoral_modify_popularity = yes
+			}
+			25 = {
+				set_temp_variable = { temp_popularity = 1 }
+				set_temp_variable = { temp_party = 3 }
+				CAL_electoral_modify_popularity = yes
+			}
+			15 = {
+				set_temp_variable = { temp_popularity = 1 }
+				set_temp_variable = { temp_party = 4 }
+				CAL_electoral_modify_popularity = yes
+			}
+		}
+	}
+	else_if = {
+		limit = { has_country_flag = CAL_Rep_Campaign }
+		random_list = {
+			15 = {
+				set_temp_variable = { temp_popularity = 4 }
+				set_temp_variable = { temp_party = 4 }
+				CAL_electoral_modify_popularity = yes
+				set_temp_variable = { temp_popularity = 1 }
+				set_temp_variable = { temp_party = 5 }
+				CAL_electoral_modify_popularity = yes
+			}
+			45 = {
+				set_temp_variable = { temp_popularity = 3 }
+				set_temp_variable = { temp_party = 4 }
+				CAL_electoral_modify_popularity = yes
+			}
+			25 = {
+				set_temp_variable = { temp_popularity = 1 }
+				set_temp_variable = { temp_party = 4 }
+				CAL_electoral_modify_popularity = yes
+			}
+			15 = {
+				set_temp_variable = { temp_popularity = 1 }
+				set_temp_variable = { temp_party = 3 }
+				CAL_electoral_modify_popularity = yes
+			}
+		}
+	}
+}
+
+CAL_opponent_campaign = {
+	if = {
+		limit = { has_country_flag = CAL_Prog_Campaign }
+		random_list = {
+			15 = {
+				set_temp_variable = { temp_popularity = 2 }
+				set_temp_variable = { temp_party = 4 }
+				set_temp_variable = { temp_state = temp_state_1 }
+				CAL_electoral_modify_popularity = yes
+				set_temp_variable = { temp_popularity = 1 }
+				set_temp_variable = { temp_party = 5 }
+				set_temp_variable = { temp_state = temp_state_1 }
+				CAL_electoral_modify_popularity = yes
+			}
+			45 = {
+				set_temp_variable = { temp_popularity = 2 }
+				set_temp_variable = { temp_party = 4 }
+				set_temp_variable = { temp_state = temp_state_1 }
+				CAL_electoral_modify_popularity = yes
+			}
+			25 = {
+				set_temp_variable = { temp_popularity = 1 }
+				set_temp_variable = { temp_party = 4 }
+				set_temp_variable = { temp_state = temp_state_1 }
+				CAL_electoral_modify_popularity = yes
+			}
+			15 = {
+				set_temp_variable = { temp_popularity = 1 }
+				set_temp_variable = { temp_party = 3 }
+				set_temp_variable = { temp_state = temp_state_1 }
+				CAL_electoral_modify_popularity = yes
+			}
+		}
+		hidden_effect = {
+			if = {
+				limit = { 
+					950 = {
+						has_state_flag = north_california
+					}
+				}
+				set_temp_variable = { CAL_jefferson_chance = 18 }
+			}
+			else = {
+				set_temp_variable = { CAL_jefferson_chance = 0 }
+			}
+
+			if = {
+				limit = { 
+					949 = {
+						has_state_flag = south_california
+					}
+				}
+				set_temp_variable = { CAL_south_cali_chance = 9 }
+			}
+			else = {
+				set_temp_variable = { CAL_south_cali_chance = 0 }
+			}
+
+			if = {
+				limit = { 
+					629 = {
+						has_state_flag = hawaii_state
+					}
+				}
+				set_temp_variable = { CAL_hawaii_chance = 3 }
+			}
+			else = {
+				set_temp_variable = { CAL_hawaii_chance = 0 }
+			}
+
+			if = {
+				limit = { 
+					463 = {
+						has_state_flag = alaska_state
+					}
+				}
+				set_temp_variable = { CAL_alaska_chance = 6 }
+			}
+			else = {
+				set_temp_variable = { CAL_alaska_chance = 0 }
+			}
+
+			random_list = {
+				CAL_jefferson_chance = {
+					set_variable = { temp_state_1 = 950 }
+				}
+				CAL_south_cali_chance = {
+					set_variable = { temp_state_1 = 949 }
+				}
+				CAL_hawaii_chance = {
+					set_variable = { temp_state_1 = 629 }
+				}
+				CAL_alaska_chance = {
+					set_variable = { temp_state_1 = 463 }
+				}
+				3 = {
+					set_variable = { temp_state_1 = 929 }
+				}
+				9 = {
+					set_variable = { temp_state_1 = 386 }
+				}
+				12 = {
+					set_variable = { temp_state_1 = 825 }
+				}
+				6 = {
+					set_variable = { temp_state_1 = 385 }
+				}
+				4 = {
+					set_variable = { temp_state_1 = 387 }
+				}
+				4 = {
+					set_variable = { temp_state_1 = 377 }
+				}
+				4 = {
+					set_variable = { temp_state_1 = 380 }
+				}
+				6 = {
+					set_variable = { temp_state_1 = 379 }
+				}
+				3 = {
+					set_variable = { temp_state_1 = 788 }
+				}
+				3 = {
+					set_variable = { temp_state_1 = 931 }
+				}
+				3 = {
+					set_variable = { temp_state_1 = 793 }
+				}
+			}
+		}
+		hidden_effect = {
+			activate_mission = CAL_Republican_Campaign
+		}
+	}
+	else_if = {
+		limit = { has_country_flag = CAL_Rep_Campaign }
+		random_list = {
+			15 = {
+				set_temp_variable = { temp_popularity = 2 }
+				set_temp_variable = { temp_party = 3 }
+				set_temp_variable = { temp_state = temp_state_1 }
+				CAL_electoral_modify_popularity = yes
+				set_temp_variable = { temp_popularity = 1 }
+				set_temp_variable = { temp_party = 2 }
+				set_temp_variable = { temp_state = temp_state_1 }
+				CAL_electoral_modify_popularity = yes
+			}
+			45 = {
+				set_temp_variable = { temp_popularity = 2 }
+				set_temp_variable = { temp_party = 3 }
+				set_temp_variable = { temp_state = temp_state_1 }
+				CAL_electoral_modify_popularity = yes
+			}
+			25 = {
+				set_temp_variable = { temp_popularity = 1 }
+				set_temp_variable = { temp_party = 3 }
+				set_temp_variable = { temp_state = temp_state_1 }
+				CAL_electoral_modify_popularity = yes
+			}
+			15 = {
+				set_temp_variable = { temp_popularity = 1 }
+				set_temp_variable = { temp_party = 4 }
+				set_temp_variable = { temp_state = temp_state_1 }
+				CAL_electoral_modify_popularity = yes
+			}
+		}
+		hidden_effect = {
+			if = {
+				limit = { 
+					950 = {
+						has_state_flag = north_california
+					}
+				}
+				set_temp_variable = { CAL_jefferson_chance = 9 }
+			}
+			else = {
+				set_temp_variable = { CAL_jefferson_chance = 0 }
+			}
+
+			if = {
+				limit = { 
+					949 = {
+						has_state_flag = south_california
+					}
+				}
+				set_temp_variable = { CAL_south_cali_chance = 18 }
+			}
+			else = {
+				set_temp_variable = { CAL_south_cali_chance = 0 }
+			}
+
+			if = {
+				limit = { 
+					629 = {
+						has_state_flag = hawaii_state
+					}
+				}
+				set_temp_variable = { CAL_hawaii_chance = 4 }
+			}
+			else = {
+				set_temp_variable = { CAL_hawaii_chance = 0 }
+			}
+
+			if = {
+				limit = { 
+					463 = {
+						has_state_flag = alaska_state
+					}
+				}
+				set_temp_variable = { CAL_alaska_chance = 3 }
+			}
+			else = {
+				set_temp_variable = { CAL_alaska_chance = 0 }
+			}
+
+			random_list = {
+				CAL_jefferson_chance = {
+					set_variable = { temp_state_1 = 950 }
+				}
+				CAL_south_cali_chance = {
+					set_variable = { temp_state_1 = 949 }
+				}
+				CAL_hawaii_chance = {
+					set_variable = { temp_state_1 = 629 }
+				}
+				CAL_alaska_chance = {
+					set_variable = { temp_state_1 = 463 }
+				}
+				3 = {
+					set_variable = { temp_state_1 = 929 }
+				}
+				3 = {
+					set_variable = { temp_state_1 = 386 }
+				}
+				13 = {
+					set_variable = { temp_state_1 = 825 }
+				}
+				7 = {
+					set_variable = { temp_state_1 = 385 }
+				}
+				5 = {
+					set_variable = { temp_state_1 = 387 }
+				}
+				5 = {
+					set_variable = { temp_state_1 = 377 }
+				}
+				5 = {
+					set_variable = { temp_state_1 = 380 }
+				}
+				4 = {
+					set_variable = { temp_state_1 = 379 }
+				}
+				4 = {
+					set_variable = { temp_state_1 = 788 }
+				}
+				3 = {
+					set_variable = { temp_state_1 = 931 }
+				}
+				3 = {
+					set_variable = { temp_state_1 = 793 }
+				}
+			}
+		}
+		hidden_effect = {
+			activate_mission = CAL_Progressive_Campaign
+		}
+	}
+}

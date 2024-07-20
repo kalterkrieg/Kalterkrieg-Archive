@@ -1,0 +1,51 @@
+sort_state_silos = {
+    land_based_nuking_possible = yes
+
+    set_temp_variable = { lowest_range = 10000 }
+
+    all_of_scopes = {
+        array = states_in_range
+
+        if = {
+            limit = {
+                check_variable = { distance_to@var:target_silo_state < lowest_range }
+            }
+
+            set_temp_variable = { lowest_range = distance_to@var:target_silo_state }
+
+            set_temp_variable = { silo_to_be_used = THIS }
+        }
+    }
+}
+
+land_based_nuking_possible = { 
+
+    custom_trigger_tooltip = {
+        tooltip = land_based_nuking_possible_tt
+
+        set_temp_variable = { target_silo_state = THIS }
+        set_temp_variable = { nuking_country = ROOT }
+        var:nuking_country = {
+            all_of_scopes = {
+                array = states_with_silos
+
+                if = {
+                    limit = {
+                        check_variable = { missile_range_@var:nuking_country > distance_to@var:target_silo_state }
+                        check_variable = { num_missiles_based_here_@var:nuking_country > 0.999 }
+                    }
+
+                    add_to_temp_array = { states_in_range = THIS }
+                }
+
+                if = {
+                    limit = { 
+                        check_variable = { states_in_range^num = 0 }
+                    }
+        
+                    always = no
+                }
+            }
+        }   
+    } 
+}

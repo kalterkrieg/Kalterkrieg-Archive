@@ -1,0 +1,4750 @@
+CAN_parliament_cat = {
+	
+	
+}
+CAN_elections = {
+	CAN_elections_1949 = {
+		icon = generic_propaganda
+
+		allowed = {
+			original_tag = CAN
+		}
+		
+		available = {
+			always = no
+		}
+		
+		activation = {
+			always = no #triggered by event
+		}
+		
+		is_good = yes
+		days_mission_timeout = 62
+		fire_only_once = yes
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete CAN_elections_1949 target: [From.GetName]"
+			
+		}
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout CAN_elections_1949 target: [From.GetName]"
+			hidden_effect = {
+				CAN_elections_1949 = yes
+			}
+			custom_effect_tooltip = CAN_election_tooltip
+		}
+	}
+	CAN_elections_1953 = {
+		icon = generic_propaganda
+
+		allowed = {
+			original_tag = CAN
+		}
+		
+		available = {
+			always = no
+		}
+		
+		activation = {
+			always = no #triggered by event
+		}
+		
+		is_good = yes
+		days_mission_timeout = 62
+		fire_only_once = yes
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete CAN_elections_1953 target: [From.GetName]"
+			
+		}
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout CAN_elections_1953 target: [From.GetName]"
+			hidden_effect = {
+				CAN_elections_1953 = yes
+			}
+			custom_effect_tooltip = CAN_election_tooltip
+		}
+	}
+	CAN_snap_elections_crisis = {
+		icon = generic_propaganda
+
+		allowed = {
+			original_tag = CAN
+		}
+		
+		available = {
+			always = no
+		}
+		
+		activation = {
+			always = no #triggered by event
+		}
+		
+		is_good = yes
+		days_mission_timeout = 48
+		fire_only_once = yes
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete CAN_snap_elections_crisis target: [From.GetName]"
+			
+		}
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout CAN_snap_elections_crisis target: [From.GetName]"
+			hidden_effect = {
+				if = {
+					limit = {
+						has_country_flag = CAN_crisis_election_rigged_ccf
+					}
+					CAN_snap_elections_crisis_effect_2 = yes
+				} else_if = {
+					limit = {
+						has_country_flag = CAN_crisis_election_rigged_lib
+					}
+					CAN_snap_elections_crisis_effect_1 = yes
+				} else_if = {
+					limit = {
+						has_country_flag = CAN_crisis_election_rigged_pc
+					}
+					CAN_snap_elections_crisis_effect_3 = yes
+				}
+			}
+			custom_effect_tooltip = CAN_election_tooltip
+		}
+	}
+	CAN_election_ontario_campaign = {
+		icon = eng_propaganda_campaigns
+
+		allowed = {
+			original_tag = CAN
+		}
+
+		visible = {
+			original_tag = CAN
+			OR = {
+				has_country_flag = CAN_1949_election_start
+				has_country_flag = CAN_1953_election_start
+				has_country_flag = CAN_crisis_election_start
+			}
+		}
+
+		available = {
+			NOT = { has_country_flag = CAN_campaign_underway }
+		}
+
+		cost = 25
+		days_remove = 5
+		fire_only_once = no
+		fixed_random_seed = no
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete CAN_election_ontario_campaign target: [From.GetName]"
+			set_country_flag = CAN_campaign_underway
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove CAN_election_ontario_campaign target: [From.GetName]"
+			clr_country_flag = CAN_campaign_underway
+			276 = {
+				CAN_election_campaign_in_state = yes
+			}
+			CAN_election_update_viewing_array = yes
+		}
+	}
+	CAN_election_quebec_campaign = {
+		icon = eng_propaganda_campaigns
+
+		allowed = {
+			original_tag = CAN
+		}
+
+		visible = {
+			original_tag = CAN
+			OR = {
+				has_country_flag = CAN_1949_election_start
+				has_country_flag = CAN_1953_election_start
+				has_country_flag = CAN_crisis_election_start
+			}
+		}
+
+		available = {
+			NOT = { has_country_flag = CAN_campaign_underway }
+		}
+
+		cost = 15
+		days_remove = 5
+		fire_only_once = no
+		fixed_random_seed = no
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete CAN_election_quebec_campaign target: [From.GetName]"
+			set_country_flag = CAN_campaign_underway
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove CAN_election_quebec_campaign target: [From.GetName]"
+			clr_country_flag = CAN_campaign_underway
+			466 = {
+				CAN_election_campaign_in_state = yes
+			}
+			CAN_election_update_viewing_array = yes
+		}
+	}
+	CAN_election_prairie_campaign = {
+		icon = eng_propaganda_campaigns
+
+		allowed = {
+			original_tag = CAN
+		}
+
+		visible = {
+			original_tag = CAN
+			OR = {
+				has_country_flag = CAN_1949_election_start
+				has_country_flag = CAN_1953_election_start
+				has_country_flag = CAN_crisis_election_start
+			}
+		}
+
+		available = {
+			NOT = { has_country_flag = CAN_campaign_underway }
+		}
+
+		cost = 5
+		days_remove = 5
+		fire_only_once = no
+		fixed_random_seed = no
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete CAN_election_prairie_campaign target: [From.GetName]"
+			set_country_flag = CAN_campaign_underway
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove CAN_election_prairie_campaign target: [From.GetName]"
+			clr_country_flag = CAN_campaign_underway
+			467 = {
+				CAN_election_campaign_in_state = yes
+			}
+			CAN_election_update_viewing_array = yes
+		}
+	}
+	CAN_election_atlantic_campaign = {
+		icon = eng_propaganda_campaigns
+
+		allowed = {
+			original_tag = CAN
+		}
+
+		visible = {
+			original_tag = CAN
+			OR = {
+				has_country_flag = CAN_1949_election_start
+				has_country_flag = CAN_1953_election_start
+				has_country_flag = CAN_crisis_election_start
+			}
+		}
+
+		available = {
+			NOT = { has_country_flag = CAN_campaign_underway }
+		}
+
+		cost = 5
+		days_remove = 5
+		fire_only_once = no
+		fixed_random_seed = no
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete CAN_election_atlantic_campaign target: [From.GetName]"
+			set_country_flag = CAN_campaign_underway
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove CAN_election_atlantic_campaign target: [From.GetName]"
+			clr_country_flag = CAN_campaign_underway
+			464 = {
+				CAN_election_campaign_in_state = yes
+			}
+			CAN_election_update_viewing_array = yes
+		}
+	}
+	CAN_election_west_campaign = {
+		icon = eng_propaganda_campaigns
+
+		allowed = {
+			original_tag = CAN
+		}
+
+		visible = {
+			original_tag = CAN
+			OR = {
+				has_country_flag = CAN_1949_election_start
+				has_country_flag = CAN_1953_election_start
+				has_country_flag = CAN_crisis_election_start
+			}
+		}
+
+		available = {
+			NOT = { has_country_flag = CAN_campaign_underway }
+		}
+
+		cost = 15
+		days_remove = 5
+		fire_only_once = no
+		fixed_random_seed = no
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete CAN_election_west_campaign target: [From.GetName]"
+			set_country_flag = CAN_campaign_underway
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove CAN_election_west_campaign target: [From.GetName]"
+			clr_country_flag = CAN_campaign_underway
+			473 = {
+				CAN_election_campaign_in_state = yes
+			}
+			CAN_election_update_viewing_array = yes
+		}
+	}
+	CAN_election_caribbean_campaign = {
+		icon = eng_propaganda_campaigns
+
+		allowed = {
+			original_tag = CAN
+		} 
+
+		visible = {
+			original_tag = CAN
+			has_country_flag = CAN_canadian_caribbean_provinces
+			OR = {
+				has_country_flag = CAN_1949_election_start
+				has_country_flag = CAN_1953_election_start
+				has_country_flag = CAN_crisis_election_start
+			}
+		}
+
+		available = {
+			NOT = { has_country_flag = CAN_campaign_underway }
+		}
+
+		cost = 5
+		days_remove = 5
+		fire_only_once = no
+		fixed_random_seed = no
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete CAN_election_caribbean_campaign target: [From.GetName]"
+			set_country_flag = CAN_campaign_underway
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove CAN_election_caribbean_campaign target: [From.GetName]"
+			clr_country_flag = CAN_campaign_underway
+			690 = {
+				CAN_election_campaign_in_state = yes
+			}
+			CAN_election_update_viewing_array = yes
+		}
+	}
+	CAN_election_socdem_campaign = {
+		icon = generic_political_rally
+
+		allowed = {
+			original_tag = CAN
+		}
+
+		available = {
+			always = no
+		}
+
+		activation = {
+			always = no
+		}
+
+		visible = {
+			always = no
+		}
+
+		days_mission_timeout = 5
+		fire_only_once = no
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout CAN_election_socdem_campaign target: [From.GetName]"
+			var:party_target_arr^0 = {
+				set_variable = { CAN_current_ai_campaign = 0 }
+				hidden_effect = {
+					CAN_election_ai_campaign_in_state = yes	
+				}
+				random_list = {
+					15 = {
+						custom_effect_tooltip = CAN_ai_increase_socdem_large_tt
+					}
+					45 = { 
+						custom_effect_tooltip = CAN_ai_increase_socdem_medium_tt
+					}
+					25 = {
+						custom_effect_tooltip = CAN_ai_increase_socdem_small_tt
+					}
+					10 = {
+						custom_effect_tooltip = CAN_ai_increase_socdem_tiny_tt
+					}
+					5 = {
+						custom_effect_tooltip = CAN_election_increase_none_tt
+					}
+				}
+			}
+			CAN_election_update_viewing_array = yes
+		}
+	}
+	CAN_election_liberal_campaign = {
+		icon = generic_political_rally
+
+		allowed = {
+			original_tag = CAN
+		}
+
+		available = {
+			always = no
+		}
+
+		activation = {
+			always = no
+		}
+
+		visible = {
+			always = no
+		}
+
+		days_mission_timeout = 5
+		fire_only_once = no
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout CAN_election_liberal_campaign target: [From.GetName]"
+			var:party_target_arr^1 = {
+				set_variable = { CAN_current_ai_campaign = 1 }
+				hidden_effect = {
+					CAN_election_ai_campaign_in_state = yes	
+				}
+				random_list = {
+					15 = {
+						custom_effect_tooltip = CAN_ai_increase_liberals_large_tt
+					}
+					45 = { 
+						custom_effect_tooltip = CAN_ai_increase_liberals_medium_tt
+					}
+					25 = {
+						custom_effect_tooltip = CAN_ai_increase_liberals_small_tt
+					}
+					10 = {
+						custom_effect_tooltip = CAN_ai_increase_liberals_tiny_tt
+					}
+					5 = {
+						custom_effect_tooltip = CAN_election_increase_none_tt
+					}
+				}
+			}
+			CAN_election_update_viewing_array = yes
+		}
+	}
+	CAN_election_conservative_campaign = {
+		icon = generic_political_rally
+
+		allowed = {
+			original_tag = CAN
+		}
+
+		available = {
+			always = no
+		}
+
+		activation = {
+			always = no
+		}
+
+		visible = {
+			always = no
+		}
+
+		days_mission_timeout = 5
+		fire_only_once = no
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout CAN_election_conservative_campaign target: [From.GetName]"
+			var:party_target_arr^2 = {
+				set_variable = { CAN_current_ai_campaign = 2 }
+				hidden_effect = {
+					CAN_election_ai_campaign_in_state = yes	
+				}
+				random_list = {
+					15 = {
+						custom_effect_tooltip = CAN_ai_increase_conservatives_large_tt
+					}
+					45 = { 
+						custom_effect_tooltip = CAN_ai_increase_conservatives_medium_tt
+					}
+					25 = {
+						custom_effect_tooltip = CAN_ai_increase_conservatives_small_tt
+					}
+					10 = {
+						custom_effect_tooltip = CAN_ai_increase_conservatives_tiny_tt
+					}
+					5 = {
+						custom_effect_tooltip = CAN_election_increase_none_tt
+					}
+				}
+			}
+			CAN_election_update_viewing_array = yes
+		}
+	}
+	CAN_election_unionist_campaign = {
+		icon = generic_political_rally
+
+		allowed = {
+			original_tag = CAN
+		}
+
+		available = {
+			always = no
+		}
+
+		activation = {
+			always = no
+		}
+
+		visible = {
+			always = no
+		}
+
+		days_mission_timeout = 5
+		fire_only_once = no
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout CAN_election_unionist_campaign target: [From.GetName]"
+			var:party_target_arr^3 = {
+				set_variable = { CAN_current_ai_campaign = 3 }
+				hidden_effect = {
+					CAN_election_ai_campaign_in_state = yes	
+				}
+				random_list = {
+					15 = {
+						custom_effect_tooltip = CAN_ai_increase_unionists_large_tt
+					}
+					45 = { 
+						custom_effect_tooltip = CAN_ai_increase_unionists_medium_tt
+					}
+					25 = {
+						custom_effect_tooltip = CAN_ai_increase_unionists_small_tt
+					}
+					10 = {
+						custom_effect_tooltip = CAN_ai_increase_unionists_tiny_tt
+					}
+					5 = {
+						custom_effect_tooltip = CAN_election_increase_none_tt
+					}
+				}
+			}
+			CAN_election_update_viewing_array = yes
+		}
+	}
+}
+
+CAN_laws_category = {
+	#CAN_law_debug_1 = { #A more Progressive Tax Code
+	#	icon = generic_propaganda
+
+	#	allowed = {
+	#		original_tag = CAN
+	#	}
+	#	
+	#	available = {
+	#		always = yes
+	#	}
+	#	
+	#	fire_only_once = yes
+
+	#	complete_effect = {
+	#		log = "[GetDateText]: [Root.GetName]: Decision complete #CAN_law_debug_1 #A more Progressive Tax Code target: [From.GetName]"
+	#		set_variable = { CAN_current_law = 1 }
+	#		set_variable = { CAN_current_law_max_clause = 3 }
+	#		CAN_laws_new_law = yes
+	#		add_to_array = { CAN_laws_clauses_available = 1 }
+	#		add_to_array = { CAN_laws_clauses_available = 2 }
+	#		add_to_array = { CAN_laws_clauses_available = 3 }
+	#		add_to_array = { CAN_laws_clauses_available = 4 }
+	#	}
+	#}
+	#CAN_law_debug_2 = { #A more Progressive Tax Code
+	#	icon = generic_propaganda
+
+	#	allowed = {
+	#		original_tag = CAN
+	#	}
+	#	
+	#	available = {
+	#		always = yes
+	#	}
+	#	
+	#	fire_only_once = yes
+
+	#	complete_effect = {
+	#		log = "[GetDateText]: [Root.GetName]: Decision complete #CAN_law_debug_2 #A more Progressive Tax Code target: [From.GetName]"
+	#		set_variable = { CAN_current_law = 2 }
+	#		set_variable = { CAN_current_law_max_clause = 3 }
+	#		CAN_laws_new_law = yes
+	#		add_to_array = { CAN_laws_clauses_available = 5 }
+	#		add_to_array = { CAN_laws_clauses_available = 6 }
+	#		add_to_array = { CAN_laws_clauses_available = 7 }
+	#		add_to_array = { CAN_laws_clauses_available = 8 }
+	#		add_to_array = { CAN_laws_clauses_available = 9 }
+	#		set_variable = { CAN_laws_support_change = 1 }
+	#		CAN_laws_support = yes
+	#	}
+	#}
+	CAN_law_1 = { #A more Progressive Tax Code
+		icon = generic_propaganda
+		allowed = {
+			original_tag = CAN
+		}
+
+		priority = 2
+		
+		available = {
+			always = no
+		}
+		
+		activation = {
+			always = no #triggered by event
+		}
+		
+		is_good = yes
+		days_mission_timeout = 5
+		fire_only_once = yes
+
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout CAN_law_1 #A more Progressive Tax Code target: [From.GetName]"
+			set_variable = { CAN_current_law = 0 }
+			if = {
+				limit = { check_variable = { CAN_laws_support_percent > 0.499 } }
+				custom_effect_tooltip = CAN_law_1_vote_pos_tt
+				hidden_effect = {
+					CAN_law_1_effect = yes	
+				}
+			} else = {
+				CAN_law_1_fail = yes
+				custom_effect_tooltip = CAN_law_1_vote_neg_tt
+			}	
+		}
+	}
+	CAN_law_2 = { #Hospital Insurance and Diagnostic Services Act
+		icon = generic_healthcare
+		allowed = {
+			original_tag = CAN
+		}
+
+		priority = 2
+		
+		available = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+		
+		activation = {
+			always = no #triggered by effect
+		}
+		
+		is_good = yes
+		days_mission_timeout = 56
+		fire_only_once = yes
+
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout CAN_law_2 #Hospital Insurance and Diagnostic Services Act target: [From.GetName]"
+			set_variable = { CAN_current_law = 0 }
+			custom_effect_tooltip = CAN_laws_if_bill_pass
+			effect_tooltip = {
+				CAN_law_2_effect = yes
+			}
+			custom_effect_tooltip = CAN_laws_if_bill_fail
+			effect_tooltip = {
+				CAN_law_2_fail = yes
+			}
+			if = {
+				limit = { check_variable = { CAN_laws_support_percent > 49.999 } }
+				custom_effect_tooltip = CAN_laws_vote_pos
+				hidden_effect = {
+					CAN_law_2_effect = yes	
+				}
+			} else = {
+				hidden_effect = {
+					CAN_law_2_fail = yes	
+				}
+				custom_effect_tooltip = CAN_laws_vote_neg
+			}	
+		}
+	}
+	CAN_law_3 = { #Immigration Reform Act
+		icon = generic_propaganda
+		allowed = {
+			original_tag = CAN
+		}
+
+		priority = 2
+		
+		available = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+		
+		activation = {
+			always = no #triggered by effect
+		}
+		
+		is_good = yes
+		days_mission_timeout = 56
+		fire_only_once = yes
+
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout CAN_law_3 #Immigration Reform Act target: [From.GetName]"
+			set_variable = { CAN_current_law = 0 }
+			custom_effect_tooltip = CAN_laws_if_bill_pass
+			effect_tooltip = {
+				CAN_law_3_effect = yes
+			}
+			custom_effect_tooltip = CAN_laws_if_bill_fail
+			effect_tooltip = {
+				CAN_law_3_fail = yes
+			}
+			if = {
+				limit = { check_variable = { CAN_laws_support_percent > 49.999 } }
+				custom_effect_tooltip = CAN_laws_vote_pos
+				hidden_effect = {
+					CAN_law_3_effect = yes	
+				}
+			} else = {
+				hidden_effect = {
+					CAN_law_3_fail = yes	
+				}
+				custom_effect_tooltip = CAN_laws_vote_neg
+			}	
+		}
+	}
+	CAN_law_4 = { #Governor-General Powers Act
+		icon = generic_propaganda
+		allowed = {
+			original_tag = CAN
+		}
+
+		cancel_trigger = {
+			has_country_flag = CAN_constitutional_crisis_ongoing
+		}
+
+		priority = 2
+		
+		available = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+		
+		activation = {
+			always = no #triggered by effect
+		}
+		
+		is_good = yes
+		days_mission_timeout = 56
+		fire_only_once = yes
+
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout CAN_law_4 #Governor-General Powers Act target: [From.GetName]"
+			set_variable = { CAN_current_law = 0 }
+			custom_effect_tooltip = CAN_laws_if_bill_pass
+			effect_tooltip = {
+				CAN_law_4_effect = yes
+			}
+			custom_effect_tooltip = CAN_laws_if_bill_fail
+			effect_tooltip = {
+				CAN_law_4_fail = yes
+			}
+			if = {
+				limit = { ##nothing will happen if const crisis triggers and bill passes before first event
+					NOT = { has_country_flag = CAN_constitutional_crisis_triggered }
+				}
+				if = {
+					limit = { check_variable = { CAN_laws_support_percent > 49.999 } }
+					custom_effect_tooltip = CAN_laws_vote_pos
+					hidden_effect = {
+						CAN_law_4_effect = yes	
+					}
+				} else = {
+					hidden_effect = {
+						CAN_law_4_fail = yes	
+					}
+					custom_effect_tooltip = CAN_laws_vote_neg
+				}	
+			}	
+		}
+	}
+	CAN_law_5 = { #National Housing Act
+		icon = generic_propaganda
+		allowed = {
+			original_tag = CAN
+		}
+
+		priority = 2
+		
+		available = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+		
+		activation = {
+			always = no #triggered by effect
+		}
+		
+		is_good = yes
+		days_mission_timeout = 56
+		fire_only_once = yes
+
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout CAN_law_5 #National Housing Act target: [From.GetName]"
+			set_variable = { CAN_current_law = 0 }
+			custom_effect_tooltip = CAN_laws_if_bill_pass
+			effect_tooltip = {
+				CAN_law_5_effect = yes
+			}
+			custom_effect_tooltip = CAN_laws_if_bill_fail
+			effect_tooltip = {
+				CAN_law_5_fail = yes
+			}
+			if = {
+				limit = { check_variable = { CAN_laws_support_percent > 49.999 } }
+				custom_effect_tooltip = CAN_laws_vote_pos
+				hidden_effect = {
+					CAN_law_5_effect = yes	
+				}
+			} else = {
+				hidden_effect = {
+					CAN_law_5_fail = yes	
+				}
+				custom_effect_tooltip = CAN_laws_vote_neg
+			}	
+		}
+	}
+	CAN_law_6 = { #Wealth Tax Repeal Act
+		icon = GFX_decision_give_cash
+		allowed = {
+			original_tag = CAN
+		}
+
+		priority = 2
+		
+		available = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+		
+		activation = {
+			always = no #triggered by effect
+		}
+		
+		is_good = yes
+		days_mission_timeout = 56
+		fire_only_once = yes
+
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout CAN_law_6 #Wealth Tax Repeal Act target: [From.GetName]"
+			set_variable = { CAN_current_law = 0 }
+			custom_effect_tooltip = CAN_laws_if_bill_pass
+			effect_tooltip = {
+				CAN_law_6_effect = yes
+			}
+			custom_effect_tooltip = CAN_laws_if_bill_fail
+			effect_tooltip = {
+				CAN_law_6_fail = yes
+			}
+			if = {
+				limit = { check_variable = { CAN_laws_support_percent > 49.999 } }
+				custom_effect_tooltip = CAN_laws_vote_pos
+				hidden_effect = {
+					CAN_law_6_effect = yes	
+				}
+			} else = {
+				hidden_effect = {
+					CAN_law_6_fail = yes	
+				}
+				custom_effect_tooltip = CAN_laws_vote_neg
+			}	
+		}
+	}
+	CAN_law_7 = { #Deregulation and Tax Relief Act
+		icon = generic_propaganda
+		allowed = {
+			original_tag = CAN
+		}
+
+		priority = 2
+		
+		available = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+		
+		activation = {
+			always = no #triggered by effect
+		}
+		
+		is_good = yes
+		days_mission_timeout = 56
+		fire_only_once = yes
+
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout CAN_law_7 #Deregulation and Tax Relief Act target: [From.GetName]"
+			set_variable = { CAN_current_law = 0 }
+			custom_effect_tooltip = CAN_laws_if_bill_pass
+			effect_tooltip = {
+				CAN_law_7_effect = yes
+			}
+			custom_effect_tooltip = CAN_laws_if_bill_fail
+			effect_tooltip = {
+				CAN_law_7_fail = yes
+			}
+			if = {
+				limit = { check_variable = { CAN_laws_support_percent > 49.999 } }
+				custom_effect_tooltip = CAN_laws_vote_pos
+				hidden_effect = {
+					CAN_law_7_effect = yes	
+				}
+			} else = {
+				hidden_effect = {
+					CAN_law_7_fail = yes	
+				}
+				custom_effect_tooltip = CAN_laws_vote_neg
+			}	
+		}
+	}
+	CAN_law_8 = { #Old Age Security Act
+		icon = GFX_decision_give_cash
+		allowed = {
+			original_tag = CAN
+		}
+
+		priority = 2
+		
+		available = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+		
+		activation = {
+			always = no #triggered by effect
+		}
+		
+		is_good = yes
+		days_mission_timeout = 70
+		fire_only_once = yes
+
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout CAN_law_8 #Old Age Security Act target: [From.GetName]"
+			set_variable = { CAN_current_law = 0 }
+			custom_effect_tooltip = CAN_laws_if_bill_pass
+			effect_tooltip = {
+				CAN_law_8_effect = yes
+			}
+			custom_effect_tooltip = CAN_laws_if_bill_fail
+			effect_tooltip = {
+				CAN_law_8_fail = yes
+			}
+			if = {
+				limit = { check_variable = { CAN_laws_support_percent > 49.999 } }
+				custom_effect_tooltip = CAN_laws_vote_pos
+				hidden_effect = {
+					CAN_law_8_effect = yes	
+				}
+			} else = {
+				hidden_effect = {
+					CAN_law_8_fail = yes	
+				}
+				custom_effect_tooltip = CAN_laws_vote_neg
+			}	
+		}
+	}
+	CAN_law_9 = { #Canadian Values Act
+		icon = generic_propaganda
+		allowed = {
+			original_tag = CAN
+		}
+
+		priority = 2
+		
+		available = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+		
+		activation = {
+			always = no #triggered by effect
+		}
+		
+		is_good = yes
+		days_mission_timeout = 56
+		fire_only_once = yes
+
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout CAN_law_9 #Canadian Values Act target: [From.GetName]"
+			set_variable = { CAN_current_law = 0 }
+			custom_effect_tooltip = CAN_laws_if_bill_pass
+			effect_tooltip = {
+				CAN_law_9_effect = yes
+			}
+			custom_effect_tooltip = CAN_laws_if_bill_fail
+			effect_tooltip = {
+				CAN_law_9_fail = yes
+			}
+			if = {
+				limit = { check_variable = { CAN_laws_support_percent > 49.999 } }
+				custom_effect_tooltip = CAN_laws_vote_pos
+				hidden_effect = {
+					CAN_law_9_effect = yes	
+				}
+			} else = {
+				hidden_effect = {
+					CAN_law_9_fail = yes	
+				}
+				custom_effect_tooltip = CAN_laws_vote_neg
+			}	
+		}
+	}
+	CAN_law_10 = { #Save The Tax Act
+		icon = generic_propaganda
+		allowed = {
+			original_tag = CAN
+		}
+		
+		available = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+		
+		activation = {
+			always = no #triggered by effect
+		}
+		
+		is_good = yes
+		days_mission_timeout = 56
+		fire_only_once = yes
+
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout CAN_law_10 #Save The Tax Act target: [From.GetName]"
+			set_variable = { CAN_current_law = 0 }
+			custom_effect_tooltip = CAN_laws_if_bill_pass
+			effect_tooltip = {
+				CAN_law_10_effect = yes
+			}
+			custom_effect_tooltip = CAN_laws_if_bill_fail
+			effect_tooltip = {
+				CAN_law_10_fail = yes
+			}
+			if = {
+				limit = { check_variable = { CAN_laws_support_percent > 49.999 } }
+				custom_effect_tooltip = CAN_laws_vote_pos
+				hidden_effect = {
+					CAN_law_10_effect = yes	
+				}
+			} else = {
+				hidden_effect = {
+					CAN_law_10_fail = yes	
+				}
+				custom_effect_tooltip = CAN_laws_vote_neg
+			}	
+		}
+	}
+	CAN_law_11 = { #Equitable Tax Act
+		icon = generic_propaganda
+		allowed = {
+			original_tag = CAN
+		}
+
+		priority = 2
+		
+		available = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+		
+		activation = {
+			always = no #triggered by effect
+		}
+		
+		is_good = yes
+		days_mission_timeout = 56
+		fire_only_once = yes
+
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout CAN_law_11 #Equitable Tax Act target: [From.GetName]"
+			set_variable = { CAN_current_law = 0 }
+			custom_effect_tooltip = CAN_laws_if_bill_pass
+			effect_tooltip = {
+				CAN_law_11_effect = yes
+			}
+			custom_effect_tooltip = CAN_laws_if_bill_fail
+			effect_tooltip = {
+				CAN_law_11_fail = yes
+			}
+			if = {
+				limit = { check_variable = { CAN_laws_support_percent > 49.999 } }
+				custom_effect_tooltip = CAN_laws_vote_pos
+				hidden_effect = {
+					CAN_law_11_effect = yes	
+				}
+			} else = {
+				hidden_effect = {
+					CAN_law_11_fail = yes	
+				}
+				custom_effect_tooltip = CAN_laws_vote_neg
+			}	
+		}
+	}
+	CAN_law_12 = { #Contributory Health Insurance Act
+		icon = generic_healthcare
+		allowed = {
+			original_tag = CAN
+		}
+
+		priority = 2
+		
+		available = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+		
+		activation = {
+			always = no #triggered by effect
+		}
+		
+		is_good = yes
+		days_mission_timeout = 56
+		fire_only_once = yes
+
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout CAN_law_12 #Contributory Health Insurance Act target: [From.GetName]"
+			set_variable = { CAN_current_law = 0 }
+			custom_effect_tooltip = CAN_laws_if_bill_pass
+			effect_tooltip = {
+				CAN_law_12_effect = yes
+			}
+			custom_effect_tooltip = CAN_laws_if_bill_fail
+			effect_tooltip = {
+				CAN_law_12_fail = yes
+			}
+			if = {
+				limit = { check_variable = { CAN_laws_support_percent > 49.999 } }
+				custom_effect_tooltip = CAN_laws_vote_pos
+				hidden_effect = {
+					CAN_law_12_effect = yes	
+				}
+			} else = {
+				hidden_effect = {
+					CAN_law_12_fail = yes	
+				}
+				custom_effect_tooltip = CAN_laws_vote_neg
+			}	
+		}
+	}
+	CAN_law_13 = { #Social Welfare Act
+		icon = GFX_decision_give_cash
+		allowed = {
+			original_tag = CAN
+		}
+
+		priority = 2
+		
+		available = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+		
+		activation = {
+			always = no #triggered by effect
+		}
+		
+		is_good = yes
+		days_mission_timeout = 56
+		fire_only_once = yes
+
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout CAN_law_13 #Social Welfare Act target: [From.GetName]"
+			set_variable = { CAN_current_law = 0 }
+			custom_effect_tooltip = CAN_laws_if_bill_pass
+			effect_tooltip = {
+				CAN_law_13_effect = yes
+			}
+			custom_effect_tooltip = CAN_laws_if_bill_fail
+			effect_tooltip = {
+				CAN_law_13_fail = yes
+			}
+			if = {
+				limit = { check_variable = { CAN_laws_support_percent > 49.999 } }
+				custom_effect_tooltip = CAN_laws_vote_pos
+				hidden_effect = {
+					CAN_law_13_effect = yes	
+				}
+			} else = {
+				hidden_effect = {
+					CAN_law_13_fail = yes	
+				}
+				custom_effect_tooltip = CAN_laws_vote_neg
+			}	
+		}
+	}
+	CAN_law_14 = { #Social Foundations Act
+		icon = GFX_decision_give_cash
+		allowed = {
+			original_tag = CAN
+		}
+
+		priority = 2
+		
+		available = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+		
+		activation = {
+			always = no #triggered by effect
+		}
+		
+		is_good = yes
+		days_mission_timeout = 56
+		fire_only_once = yes
+
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout CAN_law_14 #Social Foundations Act target: [From.GetName]"
+			set_variable = { CAN_current_law = 0 }
+			custom_effect_tooltip = CAN_laws_if_bill_pass
+			effect_tooltip = {
+				CAN_law_14_effect = yes
+			}
+			custom_effect_tooltip = CAN_laws_if_bill_fail
+			effect_tooltip = {
+				CAN_law_14_fail = yes
+			}
+			if = {
+				limit = { check_variable = { CAN_laws_support_percent > 49.999 } }
+				custom_effect_tooltip = CAN_laws_vote_pos
+				hidden_effect = {
+					CAN_law_14_effect = yes	
+				}
+			} else = {
+				hidden_effect = {
+					CAN_law_14_fail = yes	
+				}
+				custom_effect_tooltip = CAN_laws_vote_neg
+			}	
+		}
+	}
+	CAN_law_15 = { #Healthy Canada Act
+		icon = generic_healthcare
+		allowed = {
+			original_tag = CAN
+		}
+
+		priority = 2
+		
+		available = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+		
+		activation = {
+			always = no #triggered by effect
+		}
+		
+		is_good = yes
+		days_mission_timeout = 56
+		fire_only_once = yes
+
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout CAN_law_15 #Healthy Canada Act target: [From.GetName]"
+			set_variable = { CAN_current_law = 0 }
+			custom_effect_tooltip = CAN_laws_if_bill_pass
+			effect_tooltip = {
+				CAN_law_15_effect = yes
+			}
+			custom_effect_tooltip = CAN_laws_if_bill_fail
+			effect_tooltip = {
+				CAN_law_15_fail = yes
+			}
+			if = {
+				limit = { check_variable = { CAN_laws_support_percent > 49.999 } }
+				custom_effect_tooltip = CAN_laws_vote_pos
+				hidden_effect = {
+					CAN_law_15_effect = yes	
+				}
+			} else = {
+				hidden_effect = {
+					CAN_law_15_fail = yes	
+				}
+				custom_effect_tooltip = CAN_laws_vote_neg
+			}	
+		}
+	}
+	CAN_law_16 = { #Canadian Families Act
+		icon = generic_propaganda
+		allowed = {
+			original_tag = CAN
+		}
+
+		priority = 2
+		
+		available = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+		
+		activation = {
+			always = no #triggered by effect
+		}
+		
+		is_good = yes
+		days_mission_timeout = 56
+		fire_only_once = yes
+
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout CAN_law_16 #Canadian Families Act target: [From.GetName]"
+			set_variable = { CAN_current_law = 0 }
+			custom_effect_tooltip = CAN_laws_if_bill_pass
+			effect_tooltip = {
+				CAN_law_16_effect = yes
+			}
+			custom_effect_tooltip = CAN_laws_if_bill_fail
+			effect_tooltip = {
+				CAN_law_16_fail = yes
+			}
+			if = {
+				limit = { check_variable = { CAN_laws_support_percent > 49.999 } }
+				custom_effect_tooltip = CAN_laws_vote_pos
+				hidden_effect = {
+					CAN_law_16_effect = yes	
+				}
+			} else = {
+				hidden_effect = {
+					CAN_law_16_fail = yes	
+				}
+				custom_effect_tooltip = CAN_laws_vote_neg
+			}	
+		}
+	}
+	CAN_law_help = {
+		icon = GFX_decision_generic_decision	
+		allowed = {
+			original_tag = CAN
+		}
+
+		priority = 1
+
+		visible = {
+			original_tag = CAN
+			NOT = {
+				check_variable = { CAN_current_law = 0 }
+			}
+		}
+		
+		available = {
+			always = no
+		}
+	}
+}
+
+#CAN_ship_orders = {
+#	CAN_finish_carrier_order = {
+#		visible = {
+#			tag = CAN
+#			NEE = {
+#				is_ai = yes
+#			}
+#		}
+#		available = {
+#			NEE = {	
+#				custom_trigger_tooltip = {
+#					tooltip = NEE_has_completed_carriers
+#					check_variable = {
+#						var = num_ships_with_type@carrier
+#						value = 3 #this will need to be changed
+#						compare = equals
+#					}
+#				}
+#				
+#			}
+#		}
+#		cost = 0
+#
+#		days_remove = 90
+#
+#		modifier = {
+#			civilian_factory_use = 5
+#		}
+#		fire_only_once = yes
+#		complete_effect = {
+#			log = "[GetDateText]: [Root.GetName]: Decision complete #	CAN_finish_carrier_order target: [From.GetName]"
+#			set_temp_variable = {
+#				CAN_num_carriers_before = num_ships_with_type@carrier
+#			}
+#			NEE = {
+#				custom_effect_tooltip = CAN_transfer_carriers
+#				transfer_ship = {
+#					prefer_name = "HMCS Edward VIII"
+#					type = carrier
+#					target = CAN
+#				}
+#				transfer_ship = {
+#					prefer_name = "HMCS Warrior"
+#					type = carrier
+#					target = CAN
+#				}
+#				transfer_ship = {
+#					prefer_name = "HMCS Valiant"
+#					type = carrier
+#					target = CAN
+#				}
+#			}
+#			set_temp_variable = { CAN_target_carriers = CAN_num_carriers_before }
+#			add_to_temp_variable = {
+#				CAN_target_carriers = 3
+#			}
+#			if = {
+#				limit = {
+#					NOT = {
+#						check_variable = {
+#							CAN_target_carriers = num_ships_with_type@carrier
+#						}
+#					}		
+#				}
+#				#DIDNT WORK ADD SOMETHING HERE
+#			}
+#		}
+#	}
+#	NEE_finish_carrier_order = {
+#		visible = {
+#			tag = NEE
+#		}
+#		available = {
+#			NEE = {	
+#				custom_trigger_tooltip = {
+#					tooltip = NEE_has_completed_carriers
+#					check_variable = {
+#						var = num_ships_with_type@carrier
+#						value = 3 #this will need to be changed
+#						compare = equals
+#					}
+#				}
+#				
+#			}
+#		}
+#		cost = 0
+#
+#		days_remove = 90
+#
+#		modifier = {
+#			# this doesnt work give CAN a timed idea instead - maho
+#			#CAN = {
+#			#	civilian_factory_use = 5
+#			#}
+#		}
+#		fire_only_once = yes
+#		complete_effect = {
+#			log = "[GetDateText]: [Root.GetName]: Decision complete #	NEE_finish_carrier_order target: [From.GetName]"
+#			set_temp_variable = {
+#				CAN_num_carriers_before = CAN.num_ships_with_type@carrier
+#			}
+#			NEE = {
+#				custom_effect_tooltip = CAN_transfer_carriers
+#				transfer_ship = {
+#					prefer_name = "HMCS Edward VIII"
+#					type = carrier
+#					target = CAN
+#				}
+#				transfer_ship = {
+#					prefer_name = "HMCS Warrior"
+#					type = carrier
+#					target = CAN
+#				}
+#				transfer_ship = {
+#					prefer_name = "HMCS Valiant"
+#					type = carrier
+#					target = CAN
+#				}
+#			}
+#			set_temp_variable = { CAN_target_carriers = CAN_num_carriers_before }
+#			add_to_temp_variable = {
+#				CAN_target_carriers = 3
+#			}
+#			if = {
+#				limit = {
+#					NOT = {
+#						check_variable = {
+#							CAN_target_carriers = CAN.num_ships_with_type@carrier
+#						}
+#					}		
+#				}
+#				#DIDNT WORK ADD SOMETHING HERE
+#			}
+#		}
+#	}
+#
+#	CAN_order_advanced_carriers = {
+#		available = {
+#			# NEE = { 
+#			# 	has_completed_focus = NEE_laying_down_the_next_generation
+#			# 	has_navy_experience > 9.99
+#			# 	OR = {
+#			# 		has_tech = improved_carrier
+#			# 		has_tech = mtg_1950_ship_hull_carrier 
+#			# 	}
+#			# }
+#			# NOT = {
+#			# 	has_country_flag = ships_on_order 
+#			# }
+#			always = yes 
+#		}
+#
+#		cost = 25 
+#		fire_only_once = yes 
+#		complete_effect = {
+#			log = "[GetDateText]: [Root.GetName]: Decision complete #	CAN_order_advanced_carriers target: [From.GetName]"
+#			set_temp_variable = { arg_ship_builder = NEE }
+#			set_temp_variable = { arg_ship_type = token:ship_hull_carrier }
+#			set_temp_variable = { arg_number_ships = 3 }
+#
+#			activate_ship_purchase_mechanic = yes 
+#		}
+#	}
+#}
+#
+#
+CAN_montgomery_plan_tab = {
+	CAN_send_civ_aid = {
+		icon = GFX_decision_give_cash
+
+		cost = 50
+
+		target_trigger = {
+			if = {
+				limit = {
+					has_country_flag = CAN_rebuilding_the_free
+				}
+				FROM = {
+					OR = {
+						has_country_flag = is_valid_montgomery_plan_recipient 
+                		is_in_or_aligned_with_accord = yes
+					}
+				}
+			}
+			else = {
+				FROM = {
+					is_in_faction_with = CAN
+				}
+			}
+        }
+
+        targets = { ENG ICE NFA GRE ITA SPR POR NOR IRE SER ALB MOR}
+		targets_dynamic = yes
+		allowed = {
+			original_tag = CAN
+		}
+
+		visible = {
+			always = yes
+		}
+		
+		available = {
+			FROM = {
+				has_country_flag = montgomery_plan_accepted
+			}
+			num_of_civilian_factories_available_for_projects > 0
+		}
+		
+		days_remove = 180
+
+		modifier = {
+			consumer_goods_factor = 0.1
+	   	}
+
+		fire_only_once = yes
+
+		ai_will_do = {
+			base = 4
+			modifier = {
+				add = 3
+				num_of_civilian_factories_available_for_projects > 5
+			} 
+			modifier = {
+				add = 3
+				num_of_civilian_factories_available_for_projects > 10
+			} 
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete CAN_send_civ_aid target: [From.GetName]"
+			hidden_effect = {
+				FROM = { country_event = { id = krg_montgomery_plan.1 } }
+			}
+			effect_tooltip = {
+				FROM = {
+					add_timed_idea = {
+						idea = CAN_montgomery_plan_civilian_aid
+						days = 365
+					}
+				}
+			}
+			if = {
+				limit = {
+					FROM = { tag = ITA }
+				}
+				#hidden_effect = {
+				#	country_event = {
+				#		id = krg_montgomery_plan.4
+				#		days = 210
+				#	}
+				#}
+				effect_tooltip = {
+					158 = {
+						add_extra_state_shared_building_slots = 2
+						add_building_construction = {
+							type = industrial_complex
+							level = 2
+							instant_build = yes
+						}
+						add_building_construction = {
+							type = infrastructure
+							level = 2
+							instant_build = yes
+						}
+					}
+					907 = {
+						add_building_construction = {
+							type = infrastructure
+							level = 1
+							instant_build = yes
+						}
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					FROM = { tag = ICE }
+				}
+				hidden_effect = {
+					country_event = {
+						id = krg_montgomery_plan.5
+						days = 210
+					}
+				}
+				effect_tooltip = {
+					100 = {
+						add_extra_state_shared_building_slots = 2
+						add_building_construction = {
+							type = industrial_complex
+							level = 2
+							instant_build = yes
+						}
+						add_building_construction = {
+							type = infrastructure
+							level = 2
+							instant_build = yes
+						}
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					FROM = { tag = NFA }
+				}
+				hidden_effect = {
+					country_event = {
+						id = krg_montgomery_plan.6
+						days = 210
+					}
+				}
+				effect_tooltip = {
+					26 = {
+						add_extra_state_shared_building_slots = 1
+						add_building_construction = {
+							type = industrial_complex
+							level = 1
+							instant_build = yes
+						}
+					}
+					33 = {
+						add_extra_state_shared_building_slots = 1
+						add_building_construction = {
+							type = industrial_complex
+							level = 1
+							instant_build = yes
+						}
+					}
+					25 = {
+						add_extra_state_shared_building_slots = 2
+						add_building_construction = {
+							type = industrial_complex
+							level = 2
+							instant_build = yes
+						}
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					OR = {
+						FROM = { tag = ENG }
+						FROM = { tag = SPR }
+					}
+				}
+				effect_tooltip = {
+					FROM = {
+						random_state = {
+							add_extra_state_shared_building_slots = 2
+							add_building_construction = {
+								type = industrial_complex
+								level = 2
+								instant_build = yes
+							}
+						}
+						random_state = {
+							add_extra_state_shared_building_slots = 2
+							add_building_construction = {
+								type = industrial_complex
+								level = 2
+								instant_build = yes
+							}
+						}
+					}
+				}
+			}
+			else = {
+				effect_tooltip = {
+					FROM = {
+						random_state = {
+							add_extra_state_shared_building_slots = 1
+							add_building_construction = {
+								type = industrial_complex
+								level = 1
+								instant_build = yes
+							}
+						}
+						random_state = {
+							add_extra_state_shared_building_slots = 1
+							add_building_construction = {
+								type = industrial_complex
+								level = 1
+								instant_build = yes
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	CAN_send_mil_aid = {
+		icon = GFX_decision_factories
+
+		cost = 50
+
+		target_trigger = {
+			if = {
+				limit = {
+					has_country_flag = CAN_rebuilding_the_free
+				}
+				FROM = {
+					is_in_or_aligned_with_accord = yes
+				}
+			}
+			else = {
+				FROM = {
+					is_in_faction_with = CAN
+				}
+			}
+        }
+		targets_dynamic = yes
+        targets = { ENG ICE NFA GRE ITA SPR POR NOR IRE SER ALB MOR}
+
+		allowed = {
+			original_tag = CAN
+		}
+
+		visible = {
+			always = yes
+		}
+		
+		available = {
+			FROM = {
+				has_country_flag = montgomery_plan_accepted
+			}
+			num_of_civilian_factories_available_for_projects > 0
+		}
+
+		days_remove = 180
+
+		modifier = {
+			consumer_goods_factor = 0.1
+	   	}
+		
+		fire_only_once = yes
+
+		ai_will_do = {
+			base = 10
+			modifier = {
+				add = 3
+				num_of_civilian_factories_available_for_projects > 5
+			} 
+			modifier = {
+				add = 3
+				num_of_civilian_factories_available_for_projects > 10
+			} 
+			modifier = {
+				add = 3
+				num_of_civilian_factories_available_for_projects > 15
+			} 
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete CAN_send_mil_aid target: [From.GetName]"
+			hidden_effect = {
+				FROM = { country_event = { id = krg_montgomery_plan.2 } }
+			}
+			effect_tooltip = {
+				FROM = {
+					add_timed_idea = {
+						idea = CAN_montgomery_plan_military_aid
+						days = 365
+					}
+				}
+			}
+			if = {
+				limit = {
+					FROM = { tag = ITA }
+				}
+				effect_tooltip = {
+					907 = {
+						add_extra_state_shared_building_slots = 2
+						add_building_construction = {
+							type = dockyard
+							level = 1
+							instant_build = yes
+						}
+						add_building_construction = {
+							type = industrial_complex
+							level = 1
+							instant_build = yes
+						}
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					FROM = { tag = ICE }
+				}
+				effect_tooltip = {
+					100 = {
+						add_extra_state_shared_building_slots = 1
+						add_building_construction = {
+							type = industrial_complex
+							level = 1
+							instant_build = yes
+						}
+						add_building_construction = {
+							type = naval_base
+							level = 3
+							instant_build = yes
+							province = 12674
+						}
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					FROM = { tag = ENG }
+				}
+				effect_tooltip = {
+					338 = {
+						add_extra_state_shared_building_slots = 1
+						add_building_construction = {
+							type = industrial_complex
+							level = 1
+							instant_build = yes
+						}
+						add_building_construction = {
+							type = anti_air_building
+							level = 2
+							instant_build = yes
+						}
+					}
+					132 = {
+						add_extra_state_shared_building_slots = 1
+						add_building_construction = {
+							type = arms_factory
+							level = 1
+							instant_build = yes
+						}
+						add_building_construction = {
+							type = anti_air_building
+							level = 2
+							instant_build = yes
+						}
+					}
+					128 = {
+						add_building_construction = {
+							type = anti_air_building
+							level = 2
+							instant_build = yes
+						}
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					OR = {
+						FROM = { tag = NFA }
+						FROM = { tag = SPR }
+					}
+				}
+				effect_tooltip = {
+					FROM = {
+						random_state = {
+							add_extra_state_shared_building_slots = 2
+							add_building_construction = {
+								type = industrial_complex
+								level = 1
+								instant_build = yes
+							}
+							add_building_construction = {
+								type = arms_factory
+								level = 1
+								instant_build = yes
+							}
+						}
+						random_state = {
+							add_extra_state_shared_building_slots = 1
+							add_building_construction = {
+								type = arms_factory
+								level = 1
+								instant_build = yes
+							}
+						}
+					}
+				}
+			}
+			else = {
+				effect_tooltip = {
+					FROM = {
+						random_state = {
+							add_extra_state_shared_building_slots = 1
+							add_building_construction = {
+								type = industrial_complex
+								level = 1
+								instant_build = yes
+							}
+						}
+						random_state = {
+							add_extra_state_shared_building_slots = 1
+							add_building_construction = {
+								type = arms_factory
+								level = 1
+								instant_build = yes
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+CAN_city_car_category = {
+	CAN_renewed_transit_projects = {
+        available = {
+            NOT = {
+                has_country_flag = doing_project
+            }
+        }
+        visible = {
+            has_completed_focus = CAN_car_cities
+        }
+
+		cost = 50
+
+		ai_will_do = {
+			base = 3
+		}
+
+        icon = GFX_decision_generic_operation
+
+        days_remove = 120
+       
+        complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete CAN_renewed_transit_projects target: [From.GetName]"
+            set_country_flag = doing_project
+        }
+        remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove CAN_renewed_transit_projects target: [From.GetName]"
+            clr_country_flag = doing_project
+			CAN_popularity_socdem_increase_small = yes
+			custom_effect_tooltip = CAN_increase_socdem_small_tt
+			add_political_power = 25
+        }
+    }
+	
+	CAN_expand_toronto_subway = {
+        available = {
+            NOT = {
+                has_country_flag = doing_project
+            }
+        }
+        visible = {
+            has_completed_focus = CAN_car_cities
+        }
+
+        icon = GFX_decision_generic_operation
+
+		cost = 50
+
+		ai_will_do = {
+			base = 3
+		}
+
+        days_remove = 120
+       
+        complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete CAN_expand_toronto_subway target: [From.GetName]"
+            set_country_flag = doing_project
+        }
+        remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove CAN_expand_toronto_subway target: [From.GetName]"
+            clr_country_flag = doing_project
+			276 = {
+			    add_building_construction = {
+                    type = infrastructure
+                    level = 1
+                    instant_build = yes
+                }
+				add_extra_state_shared_building_slots = 1
+			}
+        }
+    }
+	
+	CAN_begin_the_montreal_metro = {
+        available = {
+            NOT = {
+                has_country_flag = doing_project
+            }
+        }
+        visible = {
+            has_completed_focus = CAN_car_cities
+        }
+
+        icon = GFX_decision_generic_operation
+
+		cost = 50
+
+		ai_will_do = {
+			base = 3
+		}
+
+        days_remove = 120
+       
+        complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete CAN_begin_the_montreal_metro target: [From.GetName]"
+            set_country_flag = doing_project
+        }
+        remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove CAN_begin_the_montreal_metro target: [From.GetName]"
+            clr_country_flag = doing_project
+			466 = {
+			    add_building_construction = {
+                    type = infrastructure
+                    level = 1
+                    instant_build = yes
+                }
+				add_extra_state_shared_building_slots = 1
+			}
+        }
+    }
+	
+	CAN_vancouver_for_monorail = {
+        available = {
+            NOT = {
+                has_country_flag = doing_project
+            }
+        }
+        visible = {
+            has_completed_focus = CAN_car_cities
+        }
+
+        icon = GFX_decision_generic_operation
+
+        days_remove = 120
+
+		cost = 50
+
+		ai_will_do = {
+			base = 3
+		}
+       
+        complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete CAN_vancouver_for_monorail target: [From.GetName]"
+            set_country_flag = doing_project
+        }
+        remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove CAN_vancouver_for_monorail target: [From.GetName]"
+            clr_country_flag = doing_project
+			635 = {
+			    add_building_construction = {
+                    type = infrastructure
+                    level = 1
+                    instant_build = yes
+                }
+				add_extra_state_shared_building_slots = 1
+			}
+        }
+    }
+	
+	CAN_greber_plan_shortcomings = {
+        available = {
+            NOT = {
+                has_country_flag = doing_project
+            }
+        }
+        visible = {
+            has_completed_focus = CAN_car_cities
+        }
+
+        icon = GFX_decision_generic_operation
+
+        days_remove = 120
+
+		cost = 50
+
+		ai_will_do = {
+			base = 3
+		}
+       
+        complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete CAN_greber_plan_shortcomings target: [From.GetName]"
+            set_country_flag = doing_project
+        }
+        remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove CAN_greber_plan_shortcomings target: [From.GetName]"
+            clr_country_flag = doing_project
+			276 = {
+			    add_building_construction = {
+                    type = infrastructure
+                    level = 1
+                    instant_build = yes
+                }
+				add_extra_state_shared_building_slots = 1
+			}
+        }
+    }
+    CAN_calgary_boom_thinking = {
+        available = {
+            NOT = {
+                has_country_flag = doing_project
+            }
+        }
+        visible = {
+            has_completed_focus = CAN_car_cities
+        }
+
+        icon = GFX_decision_generic_operation
+
+        days_remove = 120
+
+		cost = 50
+
+		ai_will_do = {
+			base = 3
+		}
+       
+        complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete CAN_calgary_boom_thinking target: [From.GetName]"
+            set_country_flag = doing_project
+        }
+        remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove CAN_calgary_boom_thinking target: [From.GetName]"
+            clr_country_flag = doing_project
+			1082 = {
+			    add_building_construction = {
+                    type = infrastructure
+                    level = 1
+                    instant_build = yes
+                }
+				add_extra_state_shared_building_slots = 1
+			}
+        }
+    }
+	CAN_readjusting_canadian_railway = {
+        available = {
+            NOT = {
+                has_country_flag = doing_project
+            }
+        }
+        visible = {
+            has_completed_focus = CAN_car_cities
+        }
+
+        icon = GFX_decision_generic_operation
+
+		cost = 25
+
+        days_remove = 120
+
+		modifier = {
+            trade_opinion_factor = 0.10
+            army_speed_factor = 0.10
+        }
+       
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete CAN_readjusting_canadian_railway target: [From.GetName]"
+            set_country_flag = doing_project
+        }
+        remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove CAN_readjusting_canadian_railway target: [From.GetName]"
+            clr_country_flag = doing_project
+        }
+    }
+}
+
+CAN_country_to_build_decisions = {
+	CAN_ctb_show_extraction_decisions = {
+        visible = {
+            has_completed_focus = CAN_bountiful_rock
+			has_country_flag = CAN_ctb_extraction_decisions_hidden
+        }
+       
+        complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete CAN_ctb_show_extraction_decisions target: [From.GetName]"
+            clr_country_flag = CAN_ctb_extraction_decisions_hidden
+        }
+	}
+	CAN_ctb_hide_extraction_decisions = {
+        visible = {
+            has_completed_focus = CAN_bountiful_rock
+			NOT = {
+				has_country_flag = CAN_ctb_extraction_decisions_hidden
+			}
+        }
+       
+        complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete CAN_ctb_hide_extraction_decisions target: [From.GetName]"
+            set_country_flag = CAN_ctb_extraction_decisions_hidden
+        }
+	}
+	CAN_ctb_expand_mining_east_ontario = {
+        visible = {
+            has_completed_focus = CAN_bountiful_rock
+			NOT = {
+				has_country_flag = CAN_ctb_extraction_decisions_hidden
+			}
+        }
+
+		icon = steel
+		cost = 75
+		days_remove = var:CAN_ctb_resource_time
+		fire_only_once = yes
+		highlight_states = {
+            state = 276
+        }
+
+		ai_will_do = {
+			base = 3
+		}
+       
+        remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove CAN_ctb_expand_mining_east_ontario target: [From.GetName]"
+			add_resource = {
+            	type = steel
+            	amount = 6
+            	state = 276
+        	}
+			add_resource = {
+            	type = chromium
+            	amount = 6
+            	state = 276
+        	}
+		}
+	}
+	CAN_ctb_expand_mining_niagara = {
+        visible = {
+            has_completed_focus = CAN_bountiful_rock
+			NOT = {
+				has_country_flag = CAN_ctb_extraction_decisions_hidden
+			}
+        }
+		highlight_states = {
+            state = 1075
+        }
+
+		ai_will_do = {
+			base = 3
+		}
+
+		icon = steel
+		cost = 75
+		days_remove = var:CAN_ctb_resource_time
+		fire_only_once = yes
+       
+        remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove CAN_ctb_expand_mining_niagara target: [From.GetName]"
+			add_resource = {
+            	type = steel
+            	amount = 8
+            	state = 1075
+        	}
+		}
+	}
+
+	CAN_ctb_expand_mining_quebec = {
+        visible = {
+            has_completed_focus = CAN_bountiful_rock
+			NOT = {
+				has_country_flag = CAN_ctb_extraction_decisions_hidden
+			}
+        }
+		highlight_states = {
+            state = 1079
+        }
+
+		ai_will_do = {
+			base = 3
+		}
+
+		icon = tungsten
+		cost = 75
+		days_remove = var:CAN_ctb_resource_time
+		fire_only_once = yes
+       
+        remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove CAN_ctb_expand_mining_quebec target: [From.GetName]"
+			add_resource = {
+            	type = steel
+            	amount = 6
+            	state = 1079
+        	}
+			add_resource = {
+            	type = tungsten
+            	amount = 6
+            	state = 1079
+        	}
+		}
+	}
+
+	CAN_ctb_expand_mining_interior = {
+        visible = {
+            has_completed_focus = CAN_bountiful_rock
+			NOT = {
+				has_country_flag = CAN_ctb_extraction_decisions_hidden
+			}
+        }
+		highlight_states = {
+            state = 469
+        }
+
+		ai_will_do = {
+			base = 3
+		}
+
+		icon = chromium
+		cost = 75
+		days_remove = var:CAN_ctb_resource_time
+		fire_only_once = yes
+       
+        remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove CAN_ctb_expand_mining_interior target: [From.GetName]"
+			add_resource = {
+            	type = chromium
+            	amount = 6
+            	state = 469
+        	}
+			add_resource = {
+            	type = steel
+            	amount = 6
+            	state = 469
+        	}
+		}
+	}
+
+	CAN_ctb_expand_mining_new_brunswick = {
+        visible = {
+            has_completed_focus = CAN_bountiful_rock
+			NOT = {
+				has_country_flag = CAN_ctb_extraction_decisions_hidden
+			}
+        }
+		highlight_states = {
+            state = 465
+        }
+
+		ai_will_do = {
+			base = 3
+		}
+
+		icon = tungsten
+		cost = 75
+		days_remove = var:CAN_ctb_resource_time
+		fire_only_once = yes
+       
+        remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove CAN_ctb_expand_mining_new_brunswick target: [From.GetName]"
+			add_resource = {
+            	type = tungsten
+            	amount = 8
+            	state = 465
+        	}
+		}
+	}
+
+	CAN_ctb_expand_mining_alaska = {
+        visible = {
+            has_completed_focus = CAN_bountiful_rock
+			NOT = {
+				has_country_flag = CAN_ctb_extraction_decisions_hidden
+			}
+			owns_state = 463
+        }
+		highlight_states = {
+            state = 463
+        }
+
+		ai_will_do = {
+			base = 3
+		}
+
+		icon = chromium
+		cost = 75
+		days_remove = var:CAN_ctb_resource_time
+		fire_only_once = yes
+       
+        remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove CAN_ctb_expand_mining_alaska target: [From.GetName]"
+			add_resource = {
+            	type = chromium
+            	amount = 8
+            	state = 463
+        	}
+			add_resource = {
+            	type = tungsten
+            	amount = 8
+            	state = 463
+        	}
+		}
+	}
+
+	CAN_ctb_expand_mining_yukon = {
+        visible = {
+            has_completed_focus = CAN_expand_mining
+			NOT = {
+				has_country_flag = CAN_ctb_extraction_decisions_hidden
+			}
+        }
+		highlight_states = {
+            state = 471
+        }
+
+		ai_will_do = {
+			base = 3
+		}
+
+		icon = tungsten
+		cost = 50
+		days_remove = var:CAN_ctb_resource_time
+		fire_only_once = yes
+       
+        remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove CAN_ctb_expand_mining_yukon target: [From.GetName]"
+			add_resource = {
+            	type = tungsten
+            	amount = 6
+            	state = 471
+        	}
+		}
+	}
+	CAN_ctb_expand_mining_nova_scotia = {
+        visible = {
+            has_completed_focus = CAN_expand_mining
+			NOT = {
+				has_country_flag = CAN_ctb_extraction_decisions_hidden
+			}
+        }
+		highlight_states = {
+            state = 464
+        }
+
+		ai_will_do = {
+			base = 3
+		}
+
+		icon = steel
+		cost = 50
+		days_remove = var:CAN_ctb_resource_time
+		fire_only_once = yes
+       
+        remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove CAN_ctb_expand_mining_nova_scotia target: [From.GetName]"
+			add_resource = {
+            	type = steel
+            	amount = 6
+            	state = 464
+        	}
+		}
+	}
+	CAN_ctb_expand_mining_southern_ontario = {
+        visible = {
+            has_completed_focus = CAN_expand_mining
+			NOT = {
+				has_country_flag = CAN_ctb_extraction_decisions_hidden
+			}
+        }
+		highlight_states = {
+            state = 1077
+        }
+
+		ai_will_do = {
+			base = 3
+		}
+
+		icon = steel
+		cost = 50
+		days_remove = var:CAN_ctb_resource_time
+		fire_only_once = yes
+       
+        remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove CAN_ctb_expand_mining_southern_ontario target: [From.GetName]"
+			add_resource = {
+            	type = steel
+            	amount = 6
+            	state = 1077
+        	}
+		}
+	}
+	CAN_ctb_expand_mining_saint_laurent = {
+        visible = {
+            has_completed_focus = CAN_expand_mining
+			NOT = {
+				has_country_flag = CAN_ctb_extraction_decisions_hidden
+			}
+        }
+		highlight_states = {
+            state = 1078
+        }
+
+		ai_will_do = {
+			base = 3
+		}
+
+		icon = aluminium
+		cost = 50
+		days_remove = var:CAN_ctb_resource_time
+		fire_only_once = yes
+       
+        remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove CAN_ctb_expand_mining_saint_laurent target: [From.GetName]"
+			add_resource = {
+            	type = aluminium
+            	amount = 6
+            	state = 1078
+        	}
+		}
+	}
+	CAN_ctb_expand_mining_southern_interior = {
+        visible = {
+            has_completed_focus = CAN_expand_mining
+			NOT = {
+				has_country_flag = CAN_ctb_extraction_decisions_hidden
+			}
+        }
+		highlight_states = {
+            state = 693
+        }
+
+		ai_will_do = {
+			base = 3
+		}
+
+		icon = aluminium
+		cost = 50
+		days_remove = var:CAN_ctb_resource_time
+		fire_only_once = yes
+       
+        remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove CAN_ctb_expand_mining_southern_interior target: [From.GetName]"
+			add_resource = {
+            	type = aluminium
+            	amount = 6
+            	state = 693
+        	}
+		}
+	}
+	CAN_ctb_expand_mining_northern_ontario = {
+        visible = {
+            has_completed_focus = CAN_explore_shield
+			NOT = {
+				has_country_flag = CAN_ctb_extraction_decisions_hidden
+			}
+        }
+		highlight_states = {
+            state = 682
+        }
+
+		ai_will_do = {
+			base = 3
+		}
+
+		icon = steel
+		cost = 100
+		days_remove = var:CAN_ctb_resource_time
+		fire_only_once = yes
+       
+        remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove CAN_ctb_expand_mining_northern_ontario target: [From.GetName]"
+			add_resource = {
+            	type = steel
+            	amount = 12
+            	state = 682
+        	}
+			add_resource = {
+            	type = chromium
+            	amount = 8
+            	state = 682
+        	}
+			add_resource = {
+            	type = aluminium
+            	amount = 6
+            	state = 682
+        	}
+		}
+	}
+	CAN_ctb_expand_mining_northern_quebec = {
+        visible = {
+            has_completed_focus = CAN_explore_shield
+			NOT = {
+				has_country_flag = CAN_ctb_extraction_decisions_hidden
+			}
+        }
+		highlight_states = {
+            state = 466
+        }
+
+		ai_will_do = {
+			base = 3
+		}
+
+		icon = chromium
+		cost = 100
+		days_remove = var:CAN_ctb_resource_time
+		fire_only_once = yes
+       
+        remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove CAN_ctb_expand_mining_northern_quebec target: [From.GetName]"
+			add_resource = {
+            	type = chromium
+            	amount = 12
+            	state = 466
+        	}
+			add_resource = {
+            	type = steel
+            	amount = 8
+            	state = 466
+        	}
+			add_resource = {
+            	type = aluminium
+            	amount = 8
+            	state = 466
+        	}
+			add_resource = {
+            	type = tungsten
+            	amount = 6
+            	state = 466
+        	}
+		}
+	}
+	CAN_ctb_expand_mining_manitoba = {
+        visible = {
+            has_completed_focus = CAN_explore_shield
+			NOT = {
+				has_country_flag = CAN_ctb_extraction_decisions_hidden
+			}
+        }
+		highlight_states = {
+            state = 467
+        }
+
+		ai_will_do = {
+			base = 3
+		}
+
+		icon = aluminium
+		cost = 100
+		days_remove = var:CAN_ctb_resource_time
+		fire_only_once = yes
+       
+        remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove CAN_ctb_expand_mining_manitoba target: [From.GetName]"
+			add_resource = {
+            	type = chromium
+            	amount = 12
+            	state = 467
+        	}
+			add_resource = {
+            	type = aluminium
+            	amount = 12
+            	state = 467
+        	}
+			add_resource = {
+            	type = tungsten
+            	amount = 4
+            	state = 467
+        	}
+		}
+	}
+	CAN_ctb_expand_mining_nwt = {
+        visible = {
+            has_completed_focus = CAN_explore_shield
+			NOT = {
+				has_country_flag = CAN_ctb_extraction_decisions_hidden
+			}
+        }
+		highlight_states = {
+            state = 472
+        }
+
+		ai_will_do = {
+			base = 3
+		}
+
+		icon = tungsten
+		cost = 100
+		days_remove = var:CAN_ctb_resource_time
+		fire_only_once = yes
+       
+        remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove CAN_ctb_expand_mining_nwt target: [From.GetName]"
+			add_resource = {
+            	type = tungsten
+            	amount = 20
+            	state = 472
+        	}
+			add_resource = {
+            	type = steel
+            	amount = 6
+            	state = 472
+        	}
+		}
+	}
+	CAN_ctb_expand_mining_nunavut = {
+        visible = {
+            has_completed_focus = CAN_explore_shield
+			NOT = {
+				has_country_flag = CAN_ctb_extraction_decisions_hidden
+			}
+        }
+		highlight_states = {
+            state = 683
+        }
+
+		ai_will_do = {
+			base = 3
+		}
+
+		icon = tungsten
+		cost = 100
+		days_remove = var:CAN_ctb_resource_time
+		fire_only_once = yes
+       
+        remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove CAN_ctb_expand_mining_nunavut target: [From.GetName]"
+			add_resource = {
+            	type = tungsten
+            	amount = 12
+            	state = 683
+        	}
+			add_resource = {
+            	type = chromium
+            	amount = 8
+            	state = 683
+        	}
+		}
+	}
+	CAN_ctb_show_highway_decisions = {
+        visible = {
+            has_completed_focus = CAN_transcanada_highway
+			has_country_flag = CAN_ctb_highway_decisions_hidden
+			check_variable = { CAN_ctb_highway_states^num > 0 }
+			check_variable = { CAN_ctb_highway_states_car_cities^num > 0 }
+        }
+       
+        complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete CAN_ctb_show_highway_decisions target: [From.GetName]"
+            clr_country_flag = CAN_ctb_highway_decisions_hidden
+        }
+	}
+	CAN_ctb_hide_highway_decisions = {
+        visible = {
+            has_completed_focus = CAN_transcanada_highway
+			NOT = {
+				has_country_flag = CAN_ctb_highway_decisions_hidden
+			}
+			check_variable = { CAN_ctb_highway_states^num > 0 }
+			check_variable = { CAN_ctb_highway_states_car_cities^num > 0 }
+        }
+       
+        complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete CAN_ctb_hide_highway_decisions target: [From.GetName]"
+            set_country_flag = CAN_ctb_highway_decisions_hidden
+        }
+	}
+	CAN_ctb_secure_more_funding = {
+		icon = GFX_decision_give_cash
+
+		allowed = {
+			original_tag = CAN
+		}
+
+		cost = 50
+
+		days_remove = 90
+
+		modifier = {
+			civilian_factory_use = 7
+		}
+
+		days_re_enable = 90
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 3
+				check_variable = { CAN_ctb_highway_funding < 250 }
+			}
+			modifier = {
+				add = 5
+				check_variable = { CAN_ctb_highway_funding < 150 }
+			}
+			modifier = {
+				add = 10
+				check_variable = { CAN_ctb_highway_funding < 50 }
+			}
+		}
+
+		visible = {
+			original_tag = CAN
+			has_completed_focus = CAN_transcanada_highway
+			NOT = { has_country_flag = CAN_ctb_highway_decisions_hidden }
+			check_variable = { CAN_ctb_highway_states^num > 0 }
+			check_variable = { CAN_ctb_highway_states_car_cities^num > 0 }
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete CAN_ctb_secure_more_funding target: [From.GetName]"
+			custom_effect_tooltip = CAN_ctb_secure_more_funding_tt
+			add_to_variable = {
+				var = CAN_ctb_highway_funding
+				value = 150
+			}
+		}
+	}
+	CAN_ctb_highway_start_construction_100 = {
+		icon = road
+
+		allowed = {
+			original_tag = CAN
+		}
+
+		visible = {
+			original_tag = CAN
+			has_completed_focus = CAN_transcanada_highway
+			NOT = { has_country_flag = CAN_ctb_highway_decisions_hidden }
+		}
+
+		state_target = yes
+		target_array = CAN_ctb_highway_states_100
+
+		days_remove = var:CAN_ctb_highway_time
+		custom_cost_trigger = {
+			check_variable = { CAN_ctb_highway_funding > 99 }
+	   	}
+	   	custom_cost_text = CAN_ctb_funding_more_than_100
+		fire_only_once = yes
+		fixed_random_seed = no
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove CAN_ctb_highway_start_construction_100 target: [From.GetName]"
+			FROM = {
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+				CAN = {
+					remove_from_array = { CAN_ctb_highway_states = PREV }
+					remove_from_array = { CAN_ctb_highway_states_100 = PREV }
+				}
+			}
+		}
+
+		ai_will_do = {
+			base = 4
+			modifier = {
+				add = 3
+				check_variable = { CAN_ctb_highway_funding > 250 }
+			}
+			modifier = {
+				add = 5
+				check_variable = { CAN_ctb_highway_funding > 400 }
+			}
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete CAN_ctb_highway_start_construction_100 target: [From.GetName]"
+			subtract_from_variable = { CAN_ctb_highway_funding = 100 }
+		}
+	}
+	CAN_ctb_highway_start_construction_75 = {
+		icon = road
+
+		allowed = {
+			original_tag = CAN
+		}
+
+		visible = {
+			original_tag = CAN
+			has_completed_focus = CAN_transcanada_highway
+			NOT = { has_country_flag = CAN_ctb_highway_decisions_hidden }
+		}
+
+		state_target = yes
+		target_array = CAN_ctb_highway_states_75
+
+		days_remove = var:CAN_ctb_highway_time
+		custom_cost_trigger = {
+			check_variable = { CAN_ctb_highway_funding > 74.99 }
+	   	}
+	   	custom_cost_text = CAN_ctb_funding_more_than_75
+		fire_only_once = yes
+		fixed_random_seed = no
+
+		ai_will_do = {
+			base = 2
+			modifier = {
+				add = 4
+				check_variable = { CAN_ctb_highway_funding < 400 }
+			}
+			modifier = {
+				add = 8
+				check_variable = { CAN_ctb_highway_funding < 250 }
+			}
+		}
+
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove CAN_ctb_highway_start_construction_75 target: [From.GetName]"
+			FROM = {
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+				CAN = {
+					remove_from_array = { CAN_ctb_highway_states = PREV }
+					remove_from_array = { CAN_ctb_highway_states_75 = PREV }
+				}
+			}
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete CAN_ctb_highway_start_construction_75 target: [From.GetName]"
+			subtract_from_variable = { CAN_ctb_highway_funding = 75 }
+		}
+	}
+	CAN_ctb_highway_start_construction_50 = {
+		icon = road
+
+		allowed = {
+			original_tag = CAN
+		}
+
+		visible = {
+			original_tag = CAN
+			has_completed_focus = CAN_transcanada_highway
+			NOT = { has_country_flag = CAN_ctb_highway_decisions_hidden }
+		}
+
+		state_target = yes
+		target_array = CAN_ctb_highway_states_50
+
+		days_remove = var:CAN_ctb_highway_time
+		custom_cost_trigger = {
+			check_variable = { CAN_ctb_highway_funding > 49.99 }
+	   	}
+
+		ai_will_do = {
+			base = 2
+			modifier = {
+				add = 4
+				check_variable = { CAN_ctb_highway_funding < 400 }
+			}
+			modifier = {
+				add = 100
+				check_variable = { CAN_ctb_highway_funding < 100 }
+			}
+		}
+
+	   	custom_cost_text = CAN_ctb_funding_more_than_50
+		fire_only_once = yes
+		fixed_random_seed = no
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove CAN_ctb_highway_start_construction_50 target: [From.GetName]"
+			FROM = {
+				IF = {
+					LIMIT = {
+						OR = {
+							state = 1077
+							state = 1075
+							state = 1076
+						}
+					}
+					add_building_construction = {
+						type = infrastructure
+						level = 3
+						instant_build = yes
+					}
+				}
+				else = {
+					add_building_construction = {
+						type = infrastructure
+						level = 2
+						instant_build = yes
+					}
+				}
+				CAN = {
+					remove_from_array = { CAN_ctb_highway_states = PREV }
+					remove_from_array = { CAN_ctb_highway_states_50 = PREV }
+				}
+			}
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete CAN_ctb_highway_start_construction_50 target: [From.GetName]"
+			subtract_from_variable = { CAN_ctb_highway_funding = 50 }
+		}
+	}
+	#CAN_ctb_car_cities_decision = {
+	#	icon = railroad
+	#	visible = {
+	#		has_completed_focus = CAN_car_cities
+	#	}
+#
+	#	days_remove = 120
+	#	fire_only_once = yes
+#
+	#	state_target = yes
+	#	target_array = CAN_ctb_highway_states_car_cities
+#
+	#	custom_cost_trigger = {
+	#		check_variable = { CAN_ctb_highway_funding > 49.99 }
+	#   	}
+	#   	custom_cost_text = CAN_ctb_funding_more_than_50
+#
+	#	remove_effect = {
+	#		log = "[GetDateText]: [Root.GetName]: Decision remove CAN_ctb_car_cities_decision target: [From.GetName]"
+	#		FROM = {
+	#			add_building_construction = {
+	#				type = infrastructure
+	#				level = 1
+	#				instant_build = yes
+	#			}
+	#		}
+    #    }
+	#}
+	CAN_ctb_show_crown_corporations_decisions = {
+        visible = {
+            has_completed_focus = CAN_new_crown_corporations
+			has_country_flag = CAN_ctb_crown_corporations_hidden
+        }
+       
+        complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete CAN_ctb_show_crown_corporations_decisions target: [From.GetName]"
+            clr_country_flag = CAN_ctb_crown_corporations_hidden
+        }
+	}
+	CAN_ctb_hide_crown_corporations_decisions = {
+        visible = {
+            has_completed_focus = CAN_new_crown_corporations
+			NOT = {
+				has_country_flag = CAN_ctb_crown_corporations_hidden
+			}
+        }
+       
+        complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete CAN_ctb_hide_crown_corporations_decisions target: [From.GetName]"
+            set_country_flag = CAN_ctb_crown_corporations_hidden
+        }
+	}
+	CAN_ctb_canadian_railway_north_expansion = {
+		icon = railroad
+		visible = {
+            has_completed_focus = CAN_new_crown_corporations
+			NOT = {
+				has_country_flag = CAN_ctb_crown_corporations_hidden
+			}
+        }
+		highlight_states = {
+            state = 683
+        }
+
+		cost = 50
+		days_remove = 90
+		fire_only_once = yes
+
+		ai_will_do = {
+			base = 3
+		}
+       
+        remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove CAN_ctb_canadian_railway_north_expansion target: [From.GetName]"
+			build_railway = {
+				build_only_on_allied = yes
+				level = 1
+				start_province = 1356
+				target_province = 12503
+				path = { 1356 4769 7807 10715 7683 4787 12503 }
+			}
+		}
+	}
+	CAN_ctb_northern_ports_expansion = {
+		icon = generic_naval_base
+		visible = {
+            has_completed_focus = CAN_new_crown_corporations
+			NOT = {
+				has_country_flag = CAN_ctb_crown_corporations_hidden
+			}
+        }
+
+		cost = 25
+		days_remove = 60
+		fire_only_once = yes
+
+		ai_will_do = {
+			base = 3
+		}
+       
+        remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove CAN_ctb_northern_ports_expansion target: [From.GetName]"
+			1084 = {
+				add_building_construction = {
+					type = naval_base
+					level = 2
+					instant_build = yes
+					province = 1084
+				}
+			}
+			332 = {
+				add_building_construction = {
+					type = naval_base
+					level = 2
+					instant_build = yes
+					province = 12503
+				}
+			}
+		}
+	}
+	CAN_ctb_expand_synthetic_rubber = {
+		icon = rubber
+		visible = {
+            has_completed_focus = CAN_new_crown_corporations
+			NOT = {
+				has_country_flag = CAN_ctb_crown_corporations_hidden
+			}
+        }
+
+		cost = 25
+		days_remove = 60
+		fire_only_once = yes
+
+		ai_will_do = {
+			base = 3
+		}
+       
+        remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove CAN_ctb_expand_synthetic_rubber target: [From.GetName]"
+			add_resource = {
+				type = rubber
+				amount = 8
+				state = 1076
+			}
+			add_resource = {
+				type = rubber
+				amount = 4
+				state = 1078
+			}
+		}
+	}
+	CAN_ctb_bc_railway_expansion = {
+		icon = railroad
+		visible = {
+            has_completed_focus = CAN_new_crown_corporations
+			NOT = {
+				has_country_flag = CAN_ctb_crown_corporations_hidden
+			}
+        }
+
+		cost = 50
+		days_remove = 90
+		fire_only_once = yes
+
+		ai_will_do = {
+			base = 3
+		}
+       
+        remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove CAN_ctb_bc_railway_expansion target: [From.GetName]"
+			build_railway = {
+				build_only_on_allied = yes
+				level = 1
+				start_province = 1408
+				target_province = 10548
+				path = { 1408 1393 4385 10258 10228 10548 }
+			}
+		}
+	}
+	CAN_ctb_develop_oil_in_saskatchewan = {
+		icon = oil
+		visible = {
+            has_completed_focus = CAN_new_crown_corporations
+			NOT = {
+				has_country_flag = CAN_ctb_crown_corporations_hidden
+			}
+        }
+
+		cost = 25
+		days_remove = 60
+		fire_only_once = yes
+
+		ai_will_do = {
+			base = 3
+		}
+       
+        remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove CAN_ctb_develop_oil_in_saskatchewan target: [From.GetName]"
+			add_resource = {
+				type = oil
+				amount = 6
+				state = 469
+			}
+			add_resource = {
+				type = oil
+				amount = 4
+				state = 693
+			}
+		}
+	}
+	CAN_ctb_show_crown_corporations_decisions_unionists = {
+        visible = {
+            has_completed_focus = CAN_dont_tread_on_others
+			has_country_flag = CAN_ctb_crown_corporations_unionists_hidden
+        }
+       
+        complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete CAN_ctb_show_crown_corporations_decisions_unionists target: [From.GetName]"
+            clr_country_flag = CAN_ctb_crown_corporations_unionists_hidden
+        }
+	}
+	CAN_ctb_hide_crown_corporations_decisions_unionists = {
+        visible = {
+            has_completed_focus = CAN_dont_tread_on_others
+			NOT = {
+				has_country_flag = CAN_ctb_crown_corporations_unionists_hidden
+			}
+        }
+       
+        complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete CAN_ctb_hide_crown_corporations_decisions_unionists target: [From.GetName]"
+            set_country_flag = CAN_ctb_crown_corporations_unionists_hidden
+        }
+	}
+	CAN_ctb_privatize_air_canada = {
+		icon = plane
+		visible = {
+            has_completed_focus = CAN_dont_tread_on_others
+			NOT = {
+				has_country_flag = CAN_ctb_crown_corporations_unionists_hidden
+			}
+        }
+
+		cost = 50
+		fire_only_once = yes
+
+		ai_will_do = {
+			base = 3
+		}
+       
+        complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete CAN_ctb_privatize_air_canada target: [From.GetName]"
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			473 = {
+				add_building_construction = {
+					type = air_base
+					level = 2
+					instant_build = yes
+				}
+			}
+			1098 = {
+				add_building_construction = {
+					type = air_base
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+	CAN_ctb_privatize_bc_rail = {
+		icon = plane
+		visible = {
+            has_completed_focus = CAN_dont_tread_on_others
+			NOT = {
+				has_country_flag = CAN_ctb_crown_corporations_unionists_hidden
+			}
+        }
+
+		cost = 25
+		fire_only_once = yes
+
+		ai_will_do = {
+			base = 3
+		}
+       
+        complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete CAN_ctb_privatize_bc_rail target: [From.GetName]"
+			473 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			build_railway = {
+				build_only_on_allied = yes
+				level = 1
+				start_province = 1408
+				target_province = 10548
+				path = { 1408 1393 4385 10258 10228 10548 }
+			}
+		}
+	}
+	CAN_ctb_privatize_saskatchewan_minerals = {
+		icon = chromium
+		visible = {
+            has_completed_focus = CAN_dont_tread_on_others
+			NOT = {
+				has_country_flag = CAN_ctb_crown_corporations_unionists_hidden
+			}
+        }
+
+		cost = 25
+		fire_only_once = yes
+
+		ai_will_do = {
+			base = 3
+		}
+       
+        complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete CAN_ctb_privatize_saskatchewan_minerals target: [From.GetName]"
+			469 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			add_resource = {
+				type = chromium
+				amount = 6
+				state = 469
+			}
+		}
+	}
+	CAN_ctb_privatize_petro_canada = {
+		icon = plane
+		visible = {
+            has_completed_focus = CAN_dont_tread_on_others
+			NOT = {
+				has_country_flag = CAN_ctb_crown_corporations_unionists_hidden
+			}
+        }
+
+		cost = 50
+		fire_only_once = yes
+
+		ai_will_do = {
+			base = 3
+		}
+       
+        complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete CAN_ctb_privatize_petro_canada target: [From.GetName]"
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			add_resource = {
+				type = oil
+				amount = 6
+				state = 469
+			}
+			add_resource = {
+				type = oil
+				amount = 4
+				state = 693
+			}
+		}
+	}
+}
+
+#CAN_caribbean_decisions = {
+#	CAN_naval_tourism = {
+#		icon = GFX_decision_generic_naval_base
+#		visible = {
+#			OR = {
+#				has_country_flag = caribbean_tourism_focus
+#				FROM = {
+#					has_state_flag = CAN_tourism_focused_state
+#				}
+#			}
+#		}
+#
+#		targets = {
+#			692 690 696 308
+#		}
+#		
+#		target_trigger = {
+#			FROM = {
+#				is_owned_by = CAN
+#			}
+#			OR = {
+#				has_country_flag = caribbean_tourism_focus
+#				FROM = {
+#					has_state_flag = CAN_tourism_focused_state
+#				}
+#			}
+#		}
+#
+#		state_target = yes
+#
+#		days_remove = 180
+#
+#		fire_only_once = yes
+#
+#		cost = 25
+#
+#		remove_effect = {
+#			log = "[GetDateText]: [Root.GetName]: Decision remove #	CAN_naval_tourism target: [From.GetName]"
+#			FROM = {
+#				add_building_construction = {
+#					type = naval_base
+#					level = 1
+#					instant_build = yes
+#				}
+#				add_state_modifier = {
+#					modifier = {
+#						state_production_speed_buildings_factor = 0.05
+#					}
+#				}
+#			}
+#		}
+#	}
+#
+#	CAN_air_tourism = {
+#		icon = GFX_decision_bomber
+#		visible = {
+#			OR = {
+#				has_country_flag = caribbean_tourism_focus
+#				FROM = {
+#					has_state_flag = CAN_tourism_focused_state
+#				}
+#			}
+#		}
+#
+#		targets = {
+#			692 690 696 308
+#		}
+#		
+#		target_trigger = {
+#			FROM = {
+#				is_owned_by = CAN
+#			}
+#			OR = {
+#				FROM = {
+#					has_state_flag = CAN_tourism_focused_state
+#				}
+#				CAN = {
+#					has_country_flag = caribbean_tourism_focus
+#				}
+#			}
+#		}
+#
+#		state_target = yes
+#
+#		days_remove = 180
+#
+#		fire_only_once = yes
+#
+#		cost = 25
+#
+#		remove_effect = {
+#			log = "[GetDateText]: [Root.GetName]: Decision remove #	CAN_air_tourism target: [From.GetName]"
+#			FROM = {
+#				add_building_construction = {
+#					type = air_base
+#					level = 1
+#					instant_build = yes
+#				}
+#				add_state_modifier = {
+#					modifier = {
+#						state_production_speed_buildings_factor = 0.05
+#					}
+#				}
+#			}
+#		}
+#	}
+#
+#	CAN_domestic_economic_efforts = {
+#		icon = GFX_decision_cement_mixer
+#		visible = {
+#			OR = {
+#				has_country_flag = caribbean_domestic_industry_focus
+#				FROM = {
+#					has_state_flag = CAN_industry_focused_state
+#				}
+#			}
+#		}
+#
+#		targets = {
+#			692 690 696 308
+#		}
+#		
+#		target_trigger = {
+#			FROM = {
+#				is_owned_by = CAN
+#			}
+#			OR = {
+#				FROM = {
+#					has_state_flag = CAN_industry_focused_state
+#				}
+#				CAN = {
+#					has_country_flag = caribbean_domestic_industry_focus
+#				}
+#			}
+#		}
+#
+#		state_target = yes
+#
+#		days_remove = 180
+#
+#		fire_only_once = yes
+#
+#		cost = 25
+#
+#		ai_will_do = {
+#			base = 4
+#			modifier = {
+#				add = 2
+#				check_variable = { has_political_power > 150 }
+#			}
+#			modifier = {
+#				add = 5
+#				check_variable = { has_political_power > 250 }
+#			}
+#		}
+#
+#		remove_effect = {
+#			log = "[GetDateText]: [Root.GetName]: Decision remove #	CAN_domestic_economic_efforts target: [From.GetName]"
+#			FROM = {
+#				add_extra_state_shared_building_slots = 1
+#				add_building_construction = {
+#					type = industrial_complex
+#					level = 1
+#					instant_build = yes
+#				}
+#				add_state_modifier = {
+#					modifier = {
+#						state_production_speed_buildings_factor = 0.02
+#					}
+#				}
+#			}
+#		}
+#	}
+#	CAN_domestic_infrastructure_efforts = {
+#		icon = GFX_decision_road
+#		visible = {
+#			OR = {
+#				has_country_flag = caribbean_domestic_industry_focus
+#				FROM = {
+#					has_state_flag = CAN_industry_focused_state
+#				}
+#			}
+#		
+#		}
+#
+#		targets = {
+#			692 690 696 308
+#		}
+#
+#		ai_will_do = {
+#			base = 0
+#			modifier = {
+#				add = 1
+#				check_variable = { has_political_power > 150 }
+#			}
+#			modifier = {
+#				add = 2
+#				check_variable = { has_political_power > 250 }
+#			}
+#		}
+#		
+#		target_trigger = {
+#			FROM = {
+#				is_owned_by = CAN
+#			}
+#			OR = {
+#				FROM = {
+#					has_state_flag = CAN_industry_focused_state
+#				}
+#				CAN = {
+#					has_country_flag = caribbean_domestic_industry_focus
+#				}
+#			}	
+#		}
+#
+#
+#		state_target = yes
+#
+#		days_remove = 180
+#
+#		fire_only_once = yes
+#
+#		cost = 25
+#
+#		remove_effect = {
+#			log = "[GetDateText]: [Root.GetName]: Decision remove #	CAN_domestic_infrastructure_efforts target: [From.GetName]"
+#			FROM = {
+#				add_extra_state_shared_building_slots = 1
+#				add_building_construction = {
+#					type = infrastructure
+#					level = 1
+#					instant_build = yes
+#				}
+#			}
+#		}
+#	}	
+#}
+
+
+CAN_CAL_alaska_referendum = {
+	CAN_CAL_alaskan_referendum = { #A more Progressive Tax Code
+		icon = generic_propaganda
+		allowed = {
+			original_tag = CAN
+			original_tag = CAL
+		}
+		
+		available = {
+			always = no
+		}
+		
+		activation = {
+			always = no #triggered by event
+		}
+		
+		is_good = yes
+		days_mission_timeout = 60
+		fire_only_once = yes
+
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout CAN_CAL_alaskan_referendum #A more Progressive Tax Code target: [From.GetName]"
+			custom_effect_tooltip = CAN_CAL_fate_of_alaska_tt
+			CAN = {
+				clr_country_flag = alaska_referendum_ongoing
+				hidden_effect = {
+					if = { #alaska remains
+						limit = {
+							check_variable = { CAN.CAN_CAL_alaska_CAN_score > CAN.CAN_CAL_alaska_CAL_score }
+						}
+						CAN = { country_event = { id = krg_can_cal_alaska.11 } }
+						CAL = { country_event = { id = krg_can_cal_alaska.12 } }
+					} else_if = { #alaska returns
+						limit = {
+							check_variable = { CAN.CAN_CAL_alaska_CAN_score < CAN.CAN_CAL_alaska_CAL_score }
+						}
+						CAN = { country_event = { id = krg_can_cal_alaska.13 } }
+						CAL = { country_event = { id = krg_can_cal_alaska.14 } }
+					} else = { #tie
+						random_list = { #ALASKA IS A TOSSUP
+							50 = {
+								CAN = { country_event = { id = krg_can_cal_alaska.11 } }
+								CAL = { country_event = { id = krg_can_cal_alaska.12 } }
+							}
+							50 = {
+								CAN = { country_event = { id = krg_can_cal_alaska.13 } }
+								CAL = { country_event = { id = krg_can_cal_alaska.14 } }
+							}
+						}
+					}
+				}
+			}
+			CAL = {
+				clr_country_flag = alaska_referendum_ongoing
+			}
+		}
+	}
+
+	CAN_increase_procanadian_support = {
+		icon = eng_propaganda_campaigns
+
+		allowed = {
+			original_tag = CAN
+		}
+		
+		visible = {
+			original_tag = CAN
+		}
+
+		cost = 15
+
+		days_re_enable = 30
+
+		ai_will_do = {
+			base = 5
+			modifier = {
+				add = 5
+				check_variable = { CAN.CAN_CAL_alaska_CAN_score < 55 }
+			}
+			modifier = {
+				add = 10
+				check_variable = { CAN.CAN_CAL_alaska_CAN_score < 50 }
+			}
+			modifier = {
+				has_game_rule = {
+					rule = CAN_ALASKAN_REFERENDUM
+					option = CAN_ALASKAN_REFERENDUM_PSA
+				}
+				factor = 0
+			}
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete CAN_increase_procanadian_support target: [From.GetName]"
+			add_to_variable = { 
+				CAN.CAN_CAL_alaska_CAN_score = 2.5 
+				tooltip = CAN_CAL_alaska_increase_CAN_score
+			}
+			subtract_from_variable = { CAN.CAN_CAL_alaska_CAL_score = 2.5 }
+		}
+	}
+
+	CAL_increase_proamerican_support = {
+		icon = eng_propaganda_campaigns
+
+		allowed = {
+			original_tag = CAL
+		}
+		
+		visible = {
+			original_tag = CAL
+		}
+
+		cost = 15
+
+		days_re_enable = 30
+
+		ai_will_do = {
+			base = 5
+			modifier = {
+				add = 5
+				check_variable = { CAN.CAN_CAL_alaska_increase_CAL_score < 55 }
+			}
+			modifier = {
+				add = 10
+				check_variable = { CAN.CAN_CAL_alaska_increase_CAL_score < 50 }
+			}
+
+			modifier = {
+				has_game_rule = {
+					rule = CAN_ALASKAN_REFERENDUM
+					option = CAN_ALASKAN_REFERENDUM_CANADA
+				}
+				factor = 0
+			}
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete CAL_increase_proamerican_support target: [From.GetName]"
+			add_to_variable = { 
+				CAN.CAN_CAL_alaska_CAL_score = 2.5 
+				tooltip = CAN_CAL_alaska_increase_CAL_score
+			}
+			subtract_from_variable = { CAN.CAN_CAL_alaska_CAN_score = 2.5 }
+		}
+	}
+
+	CAN_invest_in_alaskan_business = {
+		icon = hol_attract_foreign_investors
+
+		allowed = {
+			original_tag = CAN
+		}
+		
+		visible = {
+			original_tag = CAN
+		}
+
+		custom_cost_trigger = {
+			always = yes
+		}
+		custom_cost_text = CAN_CAL_alaska_5_consumer_good
+
+		modifier = {
+			consumer_goods_factor = 0.1
+	    }
+	    days_remove = 30
+
+		days_re_enable = 7
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 3
+				check_variable = { CAN.CAN_CAL_alaska_CAN_score < 60 }
+			}
+			modifier = {
+				add = 5
+				check_variable = { CAN.CAN_CAL_alaska_CAN_score < 50 }
+			}
+
+			modifier = {
+				has_game_rule = {
+					rule = CAN_ALASKAN_REFERENDUM
+					option = CAN_ALASKAN_REFERENDUM_PSA
+				}
+				factor = 0
+			}
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete CAN_invest_in_alaskan_business target: [From.GetName]"
+			add_to_variable = { 
+				CAN.CAN_CAL_alaska_CAN_score = 5
+				tooltip = CAN_CAL_alaska_increase_CAN_score
+			}
+			subtract_from_variable = { CAN.CAN_CAL_alaska_CAL_score = 5 }
+		}
+	}
+
+	CAL_finance_american_civic_organizations = {
+		icon = generic_political_rally
+
+		allowed = {
+			original_tag = CAL
+		}
+		
+		visible = {
+			original_tag = CAL
+		}
+
+		custom_cost_trigger = {
+			always = yes
+		}
+		custom_cost_text = CAN_CAL_alaska_5_consumer_good
+
+		modifier = {
+			consumer_goods_factor = 0.1
+	    }
+	    days_remove = 30
+
+		days_re_enable = 7
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 3
+				check_variable = { CAN.CAN_CAL_alaska_increase_CAL_score < 60 }
+			}
+			modifier = {
+				add = 5
+				check_variable = { CAN.CAN_CAL_alaska_increase_CAL_score < 50 }
+			}
+
+			modifier = {
+				has_game_rule = {
+					rule = CAN_ALASKAN_REFERENDUM
+					option = CAN_ALASKAN_REFERENDUM_CANADA
+				}
+				factor = 0
+			}
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete CAL_finance_american_civic_organizations target: [From.GetName]"
+			add_to_variable = { 
+				CAN.CAN_CAL_alaska_CAL_score = 5
+				tooltip = CAN_CAL_alaska_increase_CAL_score
+			}
+			subtract_from_variable = { CAN.CAN_CAL_alaska_CAN_score = 5 }
+		}
+	}
+
+	CAN_encourage_canadian_settlers = {
+
+		allowed = {
+			original_tag = CAN
+		}
+		
+		visible = {
+			original_tag = CAN
+		}
+
+		custom_cost_trigger = {
+			has_political_power > 29.999
+		}
+		custom_cost_text = CAN_CAL_alaska_5_consumer_good_30_pp
+
+		modifier = {
+			consumer_goods_factor = 0.1
+	    }
+	    days_remove = 30
+
+		days_re_enable = 7
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 3
+				check_variable = { CAN.CAN_CAL_alaska_CAN_score < 50 }
+			}
+			modifier = {
+				add = 5
+				check_variable = { CAN.CAN_CAL_alaska_CAN_score < 40 }
+			}
+
+			modifier = {
+				has_game_rule = {
+					rule = CAN_ALASKAN_REFERENDUM
+					option = CAN_ALASKAN_REFERENDUM_PSA
+				}
+				factor = 0
+			}
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete CAN_encourage_canadian_settlers target: [From.GetName]"
+			hidden_effect = {
+				add_political_power = -30
+			}
+			add_to_variable = { 
+				CAN.CAN_CAL_alaska_CAN_score = 10
+				tooltip = CAN_CAL_alaska_increase_CAN_score
+			}
+			subtract_from_variable = { CAN.CAN_CAL_alaska_CAL_score = 10 }
+		}
+	}
+
+	CAL_subsidize_american_communities = {
+		icon = hol_attract_foreign_investors
+
+		allowed = {
+			original_tag = CAL
+		}
+		
+		visible = {
+			original_tag = CAL
+		}
+
+		custom_cost_trigger = {
+			has_political_power > 29.999
+		}
+		custom_cost_text = CAN_CAL_alaska_5_consumer_good_30_pp
+
+		modifier = {
+			consumer_goods_factor = 0.1
+	    }
+	    days_remove = 30
+
+		days_re_enable = 7
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 3
+				check_variable = { CAN.CAN_CAL_alaska_increase_CAL_score < 50 }
+			}
+			modifier = {
+				add = 5
+				check_variable = { CAN.CAN_CAL_alaska_increase_CAL_score < 40 }
+			}
+
+			modifier = {
+				has_game_rule = {
+					rule = CAN_ALASKAN_REFERENDUM
+					option = CAN_ALASKAN_REFERENDUM_CANADA
+				}
+				factor = 0
+			}
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete CAL_subsidize_american_communities target: [From.GetName]"
+			hidden_effect = {
+				add_political_power = -30
+			}
+			add_to_variable = { 
+				CAN.CAN_CAL_alaska_CAL_score = 10
+				tooltip = CAN_CAL_alaska_increase_CAL_score
+			}
+			subtract_from_variable = { CAN.CAN_CAL_alaska_CAN_score = 10 }
+		}
+	}
+
+	CAN_court_native_support = {
+		icon = generic_political_discourse
+
+		allowed = {
+			original_tag = CAN
+		}
+		
+		visible = {
+			original_tag = CAN
+		}
+
+		custom_cost_trigger = {
+			has_political_power > 14.999
+		}
+		custom_cost_text = CAN_CAL_alaska_3_stab_15_pp
+
+		days_re_enable = 42
+
+		ai_will_do = {
+			base = 1
+			modifier = {
+				add = 3
+				check_variable = { CAN.CAN_CAL_alaska_CAN_score < 50 }
+			}
+			modifier = {
+				add = 5
+				check_variable = { CAN.CAN_CAL_alaska_CAN_score < 40 }
+			}
+
+			modifier = {
+				has_game_rule = {
+					rule = CAN_ALASKAN_REFERENDUM
+					option = CAN_ALASKAN_REFERENDUM_PSA
+				}
+				factor = 0
+			}
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete CAN_court_native_support target: [From.GetName]"
+			hidden_effect = {
+				add_political_power = -15
+			}
+			add_stability = -0.03
+			add_to_variable = { 
+				CAN.CAN_CAL_alaska_CAN_score = 10
+				tooltip = CAN_CAL_alaska_increase_CAN_score
+			}
+			subtract_from_variable = { CAN.CAN_CAL_alaska_CAL_score = 10 }
+		}
+	}
+
+	CAL_court_native_support = {
+		icon = generic_political_discourse
+
+		allowed = {
+			original_tag = CAL
+		}
+		
+		visible = {
+			original_tag = CAL
+		}
+
+		custom_cost_trigger = {
+			has_political_power > 14.999
+		}
+		custom_cost_text = CAN_CAL_alaska_3_stab_15_pp
+
+		ai_will_do = {
+			base = 1
+			modifier = {
+				add = 3
+				check_variable = { CAN.CAN_CAL_alaska_increase_CAL_score < 50 }
+			}
+			modifier = {
+				add = 5
+				check_variable = { CAN.CAN_CAL_alaska_increase_CAL_score < 40 }
+			}
+
+			modifier = {
+				has_game_rule = {
+					rule = CAN_ALASKAN_REFERENDUM
+					option = CAN_ALASKAN_REFERENDUM_CANADA
+				}
+				factor = 0
+			}
+		}
+
+		days_re_enable = 42
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete CAL_court_native_support target: [From.GetName]"
+			hidden_effect = {
+				add_political_power = -15
+			}
+			add_stability = -0.03
+			add_to_variable = { 
+				CAN.CAN_CAL_alaska_CAL_score = 10
+				tooltip = CAN_CAL_alaska_increase_CAL_score
+			}
+			subtract_from_variable = { CAN.CAN_CAL_alaska_CAN_score = 10 }
+		}
+	}
+}
+
+CAN_one_canada = {
+	CAN_develop_central_canada = {
+		icon = factories
+		visible = {
+            has_completed_focus = CAN_national_development_policy
+        }
+
+		cost = 80
+		days_remove = 60
+		fire_only_once = yes
+		ai_will_do = {
+			base = 7
+		}
+       
+        remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove CAN_develop_central_canada target: [From.GetName]"
+			468 = {
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+			1075 = {
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	CAN_develop_the_maritimes = {
+		icon = factories
+		visible = {
+            has_completed_focus = CAN_national_development_policy
+        }
+
+		cost = 100
+		days_remove = 60
+		fire_only_once = yes
+		ai_will_do = {
+			base = 7
+		}
+       
+        remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove CAN_develop_the_maritimes target: [From.GetName]"
+			464 = {
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			465 = {
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	CAN_develop_northern_canada = {
+		icon = cement_mixer
+		visible = {
+            has_completed_focus = CAN_national_development_policy
+        }
+
+		cost = 100
+		days_remove = 60
+		fire_only_once = yes
+		ai_will_do = {
+			base = 7
+		}
+       
+        remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove CAN_develop_northern_canada target: [From.GetName]"
+			683 = {
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			472 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			add_resource = {
+				type = chromium
+				amount = 8
+				state = 472
+			}
+		}
+	}
+
+	CAN_develop_western_canada = {
+		icon = generic_agriculture
+		visible = {
+            has_completed_focus = CAN_national_development_policy
+        }
+
+		cost = 100
+		days_remove = 60
+		fire_only_once = yes
+		ai_will_do = {
+			base = 7
+		}
+       
+        remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove CAN_develop_western_canada target: [From.GetName]"
+			470 = {
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+			1083 = {
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	CAN_develop_newfoundland = {
+		icon = wrenches
+		visible = {
+            has_completed_focus = CAN_atlantic_development_board
+        }
+
+		cost = 80
+		days_remove = 60
+		fire_only_once = yes
+		ai_will_do = {
+			base = 7
+		}
+       
+        remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove CAN_develop_newfoundland target: [From.GetName]"
+			331 = {
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = dockyard
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	CAN_develop_nova_scotia = {
+		icon = factories
+		visible = {
+            has_completed_focus = CAN_atlantic_development_board
+        }
+
+		cost = 100
+		days_remove = 60
+		fire_only_once = yes
+		ai_will_do = {
+			base = 7
+		}
+       
+        remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove CAN_develop_nova_scotia target: [From.GetName]"
+			464 = {
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = dockyard
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	CAN_develop_new_brunswick = {
+		icon = factories
+		visible = {
+            has_completed_focus = CAN_atlantic_development_board
+        }
+
+		cost = 80
+		days_remove = 60
+		fire_only_once = yes
+		ai_will_do = {
+			base = 7
+		}
+       
+        remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove CAN_develop_new_brunswick target: [From.GetName]"
+			465 = {
+				add_building_construction = {
+					type = dockyard
+					level = 2
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	CAN_subsidies_for_quebecois_farmers = {
+		icon = generic_agriculture
+		visible = {
+            has_completed_focus = CAN_salutez_votre_chef
+        }
+
+		cost = 60
+		days_remove = 180
+		fire_only_once = yes
+		ai_will_do = {
+			base = 3
+		}
+       
+        modifier = {
+			political_power_gain = 0.20
+			monthly_population = 0.05
+			consumer_goods_factor = 0.04
+		}
+	}
+
+	CAN_denounce_quebecois_seperatism = {
+		icon = generic_political_rally
+		visible = {
+            has_completed_focus = CAN_salutez_votre_chef
+        }
+
+		cost = 25
+		days_remove = 60
+		fire_only_once = yes
+		ai_will_do = {
+			base = 3
+		}
+       
+        modifier = {
+			political_power_gain = -0.05
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete CAN_denounce_quebecois_seperatism target: [From.GetName]"
+			custom_effect_tooltip = CAN_modify_dief
+			add_to_variable = {
+				var = CAN_dief_dynam_stab
+				value = 0.05
+				tooltip = CAN_modifier_stab_tt
+			}
+		}
+	}
+
+	CAN_give_token_concessions_to_quebecois_autonomists = {
+		icon = hand_out
+		visible = {
+            has_completed_focus = CAN_salutez_votre_chef
+        }
+
+		cost = 25
+		days_remove = 30
+		fire_only_once = yes
+       
+        modifier = {
+			political_power_gain = 0.05
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete CAN_give_token_concessions_to_quebecois_autonomists target: [From.GetName]"
+			custom_effect_tooltip = CAN_modify_dief
+			add_to_variable = {
+				var = CAN_dief_dynam_stab
+				value = 0.05
+				tooltip = CAN_modifier_stab_tt
+			}
+			subtract_from_variable = {
+				var = CAN_dief_dynam_pp
+				value = 0.05
+				tooltip = CAN_modifier_pp_tt_sub
+			}
+		}
+	}
+
+	CAN_end_racial_discrimination_in_immigration = {
+		icon = generic_agreement
+		visible = {
+            has_completed_focus = CAN_calls_for_equality_one_canada
+        }
+
+		cost = 75
+		fire_only_once = yes
+
+		ai_will_do = {
+			base = 3
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete CAN_end_racial_discrimination_in_immigration target: [From.GetName]"
+			custom_effect_tooltip = CAN_modify_dief
+			add_to_variable = {
+				var = CAN_dief_dynam_wm
+				value = 800
+				tooltip = CAN_modifier_wm_tt
+			}
+			subtract_from_variable = {
+				var = CAN_dief_dynam_stab
+				value = 0.04
+				tooltip = CAN_modifier_stab_tt_sub
+			}
+		}
+	}
+
+	CAN_promote_equality_all_canadians = {
+		icon = freedom
+		visible = {
+            has_completed_focus = CAN_calls_for_equality_one_canada
+        }
+
+		cost = 50
+		days_remove = 180
+		fire_only_once = yes
+
+		ai_will_do = {
+			base = 3
+		}
+
+		modifier = {
+			political_power_gain = 0.05
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete CAN_promote_equality_all_canadians target: [From.GetName]"
+			custom_effect_tooltip = CAN_modify_dief
+			add_to_variable = {
+				var = CAN_dief_dynam_stab
+				value = 0.03
+				tooltip = CAN_modifier_stab_tt
+			}
+		}
+	}
+
+	CAN_promote_rights_immigrants = {
+		icon = hand_out
+		visible = {
+            has_completed_focus = CAN_calls_for_equality_one_canada
+        }
+
+		cost = 25
+		days_remove = 180
+		fire_only_once = yes
+
+		ai_will_do = {
+			base = 3
+		}
+
+		modifier = {
+			stability_factor = 0.03
+			weekly_manpower = 600
+		}
+	}
+
+	CAN_begin_agricultural_conservation_projects = {
+		icon = generic_agriculture
+		visible = {
+            has_completed_focus = CAN_western_canada_one_canada
+        }
+
+		cost = 50
+		fire_only_once = yes
+
+		ai_will_do = {
+			base = 3
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete CAN_begin_agricultural_conservation_projects target: [From.GetName]"
+			custom_effect_tooltip = CAN_modify_dief
+			subtract_from_variable = {
+				var = CAN_dief_dynam_cg
+				value = 0.02
+				tooltip = CAN_modifier_cg_tt_sub
+			}
+			add_to_variable = {
+				var = CAN_dief_dynam_mp
+				value = 0.03
+				tooltip = CAN_modifier_mp_tt
+			}
+		}
+	}
+
+	CAN_increase_wheat_exports = {
+		icon = global_trade
+		visible = {
+            has_completed_focus = CAN_western_canada_one_canada
+        }
+
+		cost = 25
+		fire_only_once = yes
+
+		ai_will_do = {
+			base = 8
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete CAN_increase_wheat_exports target: [From.GetName]"
+			add_offsite_building = {
+				type = industrial_complex
+				level = 1
+			}
+		}
+	}
+
+	CAN_develop_west_natural_resources = {
+		icon = steel
+		visible = {
+            has_completed_focus = CAN_western_canada_one_canada
+        }
+
+		cost = 40
+		fire_only_once = yes
+
+		ai_will_do = {
+			base = 3
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete CAN_develop_west_natural_resources target: [From.GetName]"
+			1084 = {
+				add_resource = {
+					type = steel
+					amount = 8
+				}
+				add_resource = {
+					type = chromium
+					amount = 6
+				}
+			}
+		}
+	}
+
+	CAN_income_opportunities_for_rural_canadians = {
+		icon = give_cash
+		visible = {
+            has_completed_focus = CAN_social_justice_one_canada
+        }
+
+		cost = 100
+		fire_only_once = yes
+
+		ai_will_do = {
+			base = 3
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete CAN_income_opportunities_for_rural_canadians target: [From.GetName]"
+			custom_effect_tooltip = CAN_modify_dief
+			subtract_from_variable = {
+				var = CAN_dief_dynam_cg
+				value = 0.02
+				tooltip = CAN_modifier_cg_tt_sub
+			}
+			add_to_variable = {
+				var = CAN_dief_dynam_stab
+				value = 0.05
+				tooltip = CAN_modifier_stab_tt
+			}
+		}
+	}
+
+	CAN_improve_access_to_health_services = {
+		icon = generic_healthcare
+		visible = {
+            has_completed_focus = CAN_social_justice_one_canada
+        }
+
+		cost = 80
+		fire_only_once = yes
+
+		days_remove = 120
+		modifier = {
+			consumer_goods_factor = 0.1
+		}
+
+		ai_will_do = {
+			base = 3
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete CAN_improve_access_to_health_services target: [From.GetName]"
+			custom_effect_tooltip = CAN_modify_dief
+			subtract_from_variable = {
+				var = CAN_dief_dynam_mp
+				value = 0.05
+				tooltip = CAN_modifier_mp_tt
+			}
+			add_to_variable = {
+				var = CAN_dief_dynam_stab
+				value = 0.02
+				tooltip = CAN_modifier_stab_tt
+			}
+		}
+	}
+
+	CAN_price_supports_agricultural_products = {
+		icon = generic_agriculture
+		visible = {
+            has_completed_focus = CAN_social_justice_one_canada
+        }
+
+		cost = 50
+		fire_only_once = yes
+
+		ai_will_do = {
+			base = 3
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete CAN_price_supports_agricultural_products target: [From.GetName]"
+			custom_effect_tooltip = CAN_modify_dief
+			add_to_variable = {
+				var = CAN_dief_dynam_cg
+				value = 0.02
+				tooltip = CAN_modifier_cg_tt
+			}
+			add_to_variable = {
+				var = CAN_dief_dynam_mp
+				value = 0.05
+				tooltip = CAN_modifier_mp_tt
+			}
+			add_to_variable = {
+				var = CAN_dief_dynam_pp
+				value = 0.05
+				tooltip = CAN_modifier_pp_tt
+			}
+		}
+	}
+}
+
+CAN_our_place_in_the_world = {
+	CAN_meet_with_CHI_leader = {
+		icon = generic_agreement
+		targets = { CHI }
+
+		cost = 10
+
+		fire_only_once = yes
+
+		available = {
+			has_completed_focus = CAN_expand_the_foreign_office
+		}
+		visible = {
+			has_completed_focus = CAN_expand_the_foreign_office
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete CAN_meet_with_CHI_leader target: [From.GetName]"
+            CHI = {
+				add_political_power = 50
+				add_opinion_modifier = {
+					target = CAN
+					modifier = krg_can_relations
+				}
+			}
+        }
+	}
+	CAN_aid_chinese_rebuilding = {
+		icon = factories
+		targets = { CHI }
+
+		cost = 25
+
+		fire_only_once = yes
+
+		available = {
+			has_global_flag = CCW_CHI_victory
+		}
+		visible = {
+			has_global_flag = CCW_CHI_victory
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete CAN_aid_chinese_rebuilding target: [From.GetName]"
+            CHI = {
+				add_offsite_building = {
+					type = industrial_complex
+					level = 2
+				}
+			}
+        }
+	}
+}
+

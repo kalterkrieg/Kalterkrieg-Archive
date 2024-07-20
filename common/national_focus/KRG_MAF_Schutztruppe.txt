@@ -1,0 +1,533 @@
+#!gfx:interface/Kalterkrieg/KRG_goals.gfx
+
+shared_focus = {
+	id = MAF_rationalise_the_high_command
+	icon = GFX_MAF_Graveyard
+	x = -9
+	y = 0
+	cost = 5
+	
+	prerequisite = {
+	}
+	available = {
+		has_completed_focus = MAF_honour_men
+	}
+	bypass = {
+		has_country_flag = MAF_AAPM_total_victory
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MAF_rationalise_the_high_command"
+		army_experience = 50
+	}
+
+	ai_will_do = {
+		base = 75
+	}
+}
+
+shared_focus = {
+	id = MAF_continue_motorisation_efforts
+	icon = GFX_goal_generic_army_motorized
+	x = -2
+	y = 0
+	cost = 5
+	relative_position_id = MAF_rationalise_the_high_command
+	
+	prerequisite = {
+	}
+	available = {
+		has_completed_focus = MAF_honour_men
+	}
+	bypass = {
+		has_country_flag = MAF_AAPM_total_victory
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MAF_continue_motorisation_efforts"
+		add_equipment_to_stockpile = {
+			type = motorized_equipment_1
+			amount = 1000
+			producer = GER
+		}
+	}
+
+	ai_will_do = {
+		base = 75
+	}
+}
+
+shared_focus = {
+	id = MAF_maintain_contracts_with_mauser
+	icon = GFX_generic_munitions_factories
+	x = -2
+	y = 2
+	cost = 5
+	relative_position_id = MAF_rationalise_the_high_command
+	
+	prerequisite = {
+		focus = MAF_rationalise_the_high_command
+	}
+	available = {
+		has_country_flag = MAF_bush_war_flag
+	}
+	bypass = {
+		has_country_flag = MAF_AAPM_total_victory
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MAF_maintain_contracts_with_mauser"
+		1038 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = arms_factory
+				level = 1
+			}
+		}
+		541 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = arms_factory
+				level = 1
+			}
+		}
+	}
+
+	ai_will_do = {
+		base = 75
+	}
+}
+
+shared_focus = {
+	id = MAF_overhaul_supply_lines
+	icon = GFX_generic_railroad
+	x = -1
+	y = 1
+	cost = 5
+	relative_position_id = MAF_rationalise_the_high_command
+	
+	prerequisite = {
+		focus = MAF_rationalise_the_high_command
+	}
+	prerequisite = {
+		focus = MAF_continue_motorisation_efforts
+	}
+	available = {
+		has_country_flag = MAF_bush_war_flag
+	}
+	bypass = {
+		has_country_flag = MAF_AAPM_total_victory
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus MAF_overhaul_supply_lines"
+		539 = {
+			add_building_construction = {
+				type = supply_node
+				level = 1
+				province = 5139
+				instant_build = yes
+			}
+		}
+		660 = {
+			add_building_construction = {
+				type = supply_node
+				level = 1
+				province = 12830
+				instant_build = yes
+			}
+		}
+	}
+
+	ai_will_do = {
+		base = 75
+	}
+}
+
+shared_focus = {
+	id = MAF_developing_fortress_busting_techniques
+	icon = GFX_RUS_Update_The_Artillery
+	x = 1
+	y = 1
+	cost = 5
+	relative_position_id = MAF_rationalise_the_high_command
+	
+	prerequisite = {
+		focus = MAF_rationalise_the_high_command
+	}
+	prerequisite = {
+		focus = MAF_continue_motorisation_efforts
+	}
+	available = {
+	}
+	bypass = {
+		has_country_flag = MAF_AAPM_total_victory
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: MAF_developing_fortress_busting_techniques"
+		MAF_heinz_harmel = {
+			add_unit_leader_trait = fortress_buster
+		}
+		MAF_ferdinand_schorner = {
+			add_unit_leader_trait = fortress_buster
+		}
+	}
+
+	ai_will_do = {
+		base = 75
+	}
+}
+
+shared_focus = {
+	id = MAF_integrate_paratroopers
+	icon = GFX_MAF_Merc_Pilots
+	x = 3
+	y = 1
+	cost = 5
+	relative_position_id = MAF_rationalise_the_high_command
+	
+	prerequisite = {
+		focus = MAF_rationalise_the_high_command
+	}
+	available = {
+	}
+	bypass = {
+		has_country_flag = MAF_AAPM_total_victory
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: MAF_integrate_paratroopers"
+		hidden_effect = {
+			load_oob = "MAF_fallschirmjager"
+		}
+		custom_effect_tooltip = MAF_load_paras
+		add_to_variable = { MAF_units_divided_out = 3 }
+	}
+
+	ai_will_do = {
+		base = 75
+	}
+}
+
+shared_focus = {
+	id = MAF_perfect_bandit_fighting
+	icon = GFX_MAF_Schutzetruppe
+	x = 1
+	y = 2
+	cost = 5
+	relative_position_id = MAF_rationalise_the_high_command
+	
+	prerequisite = {
+		focus = MAF_developing_fortress_busting_techniques
+	}
+	prerequisite = {
+		focus = MAF_integrate_paratroopers
+	}
+	available = {
+	}
+	bypass = {
+		has_country_flag = MAF_AAPM_total_victory
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: MAF_perfect_bandit_fighting"
+		add_ideas = MAF_Bandenbekampfung
+	}
+
+	ai_will_do = {
+		base = 75
+	}
+}
+
+shared_focus = {
+	id = MAF_doctrine_improvement
+	icon = GFX_generic_investigation
+	x = -1
+	y = 3
+	cost = 5
+	relative_position_id = MAF_rationalise_the_high_command
+	
+	prerequisite = {
+		focus = MAF_perfect_bandit_fighting
+	}
+	available = {
+		has_country_flag = MAF_bush_war_flag
+	}
+	bypass = {
+		has_country_flag = MAF_AAPM_total_victory
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: MAF_doctrine_improvement"
+		# add_tech_bonus = {
+		# 	name = MAF_doctrine
+		# 	uses = 1
+		# 	bonus = 1
+		# 	category = land_doctrine
+		# }
+		army_experience = 100
+	}
+
+	ai_will_do = {
+		base = 75
+	}
+}
+
+shared_focus = {
+	id = MAF_lionise_the_african_divisions
+	icon = GFX_MAF_honour_the_men_of_afrika
+	x = 1
+	y = 3
+	cost = 5
+	relative_position_id = MAF_rationalise_the_high_command
+	
+	prerequisite = {
+		focus = MAF_perfect_bandit_fighting
+	}
+	available = {
+		has_country_flag = MAF_bush_war_flag
+	}
+	bypass = {
+		has_country_flag = MAF_AAPM_total_victory
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: MAF_lionise_the_african_divisions"
+		add_war_support = 0.05
+	}
+
+	ai_will_do = {
+		base = 75
+	}
+}
+
+shared_focus = {
+	id = MAF_a_question_of_mercenaries
+	icon = GFX_MAF_koenigsberg_gunners
+	x = -2
+	y = 4
+	cost = 5
+	relative_position_id = MAF_rationalise_the_high_command
+	
+	prerequisite = {
+		focus = MAF_perfect_bandit_fighting
+	}
+	available = {
+		has_country_flag = MAF_bush_war_flag
+	}
+	bypass = {
+		has_country_flag = MAF_AAPM_total_victory
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: MAF_a_question_of_mercenaries"
+		country_event = {
+			id = MAF.104
+			days = 1
+		}
+	}
+
+	ai_will_do = {
+		base = 75
+	}
+}
+
+shared_focus = {
+	id = MAF_promote_coloured_commanders
+	icon = GFX_TEX_integrate_military
+	x = 0
+	y = 4
+	cost = 5
+	relative_position_id = MAF_rationalise_the_high_command
+	
+	prerequisite = {
+		focus = MAF_doctrine_improvement
+	}
+	prerequisite = {
+		focus = MAF_lionise_the_african_divisions
+	}
+	available = {
+		has_country_flag = MAF_bush_war_flag
+	}
+	bypass = {
+		has_country_flag = MAF_AAPM_total_victory
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: MAF_promote_coloured_commanders"
+		create_corps_commander = {
+			name = "Bayume Mohamed Husen"
+			picture = "Portrait_MAF_Bayume_Mohamed_Husen.png"
+			traits = {  }
+			skill = 1
+			attack_skill = 1
+			defense_skill = 1
+			planning_skill = 1
+			logistics_skill = 1
+		}
+		#TODO add other african generals
+	}
+
+	ai_will_do = {
+		base = 75
+	}
+}
+
+shared_focus = {
+	id = MAF_expand_african_air_army
+	icon = GFX_MAF_African_Pilots
+	x = 3
+	y = 2
+	cost = 5
+	relative_position_id = MAF_rationalise_the_high_command
+	
+	prerequisite = {
+		focus = MAF_developing_fortress_busting_techniques
+	}
+	prerequisite = {
+		focus = MAF_integrate_paratroopers
+	}
+	available = {
+	}
+	bypass = {
+		has_country_flag = MAF_AAPM_total_victory
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: MAF_expand_african_air_army"
+		air_experience = 50
+	}
+
+	ai_will_do = {
+		base = 75
+	}
+}
+
+shared_focus = {
+	id = MAF_pioneer_napalm_munitions
+	icon = GFX_MAF_Napalm
+	x = 3
+	y = 3
+	cost = 5
+	relative_position_id = MAF_rationalise_the_high_command
+	
+	prerequisite = {
+		focus = MAF_expand_african_air_army
+	}
+	available = {
+		has_country_flag = MAF_bush_war_flag
+	}
+	bypass = {
+		has_country_flag = MAF_AAPM_total_victory
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: MAF_pioneer_napalm_munitions"
+		add_tech_bonus = {
+			category = cas_tech
+			bonus = 0.33
+		}
+	}
+
+	ai_will_do = {
+		base = 75
+	}
+}
+
+shared_focus = {
+	id = MAF_train_new_bomber_wings
+	icon = GFX_generic_air_CAS_german
+	x = 5
+	y = 3
+	cost = 5
+	relative_position_id = MAF_rationalise_the_high_command
+	
+	prerequisite = {
+		focus = MAF_expand_african_air_army
+	}
+	available = {
+		has_country_flag = MAF_bush_war_flag
+	}
+	bypass = {
+		has_country_flag = MAF_AAPM_total_victory
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: MAF_train_new_bomber_wings"
+		add_equipment_to_stockpile = {
+			type = tac_bomber_equipment_1
+			amount = 72
+			producer = GER
+		}
+	}
+
+	ai_will_do = {
+		base = 75
+	}
+}
+
+shared_focus = {
+	id = MAF_flatten_the_jungle
+	icon = GFX_goal_generic_air_bomber
+	x = 2
+	y = 4
+	cost = 5
+	relative_position_id = MAF_rationalise_the_high_command
+	
+	prerequisite = {
+		focus = MAF_pioneer_napalm_munitions
+	}
+	prerequisite = {
+		focus = MAF_train_new_bomber_wings
+	}
+	available = {
+		has_country_flag = MAF_bush_war_flag
+	}
+	bypass = {
+		has_country_flag = MAF_AAPM_total_victory
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: MAF_flatten_the_jungle"
+		add_ideas = MAF_flatten_the_jungle
+	}
+
+	ai_will_do = {
+		base = 75
+	}
+}
+shared_focus = {
+	id = MAF_rotorcraft
+	icon = GFX_generic_helicopter
+	x = 4
+	y = 4
+	cost = 5
+	relative_position_id = MAF_rationalise_the_high_command
+	
+	prerequisite = {
+		focus = MAF_pioneer_napalm_munitions
+	}
+	prerequisite = {
+		focus = MAF_train_new_bomber_wings
+	}
+	available = {
+		has_country_flag = MAF_bush_war_flag
+	}
+	bypass = {
+		has_country_flag = MAF_AAPM_total_victory
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: MAF_flatten_the_jungle"
+
+		add_tech_bonus = {
+			category = utility_helicopter_company
+			bonus = 0.33
+		}
+	}
+
+	ai_will_do = {
+		base = 75
+	}
+}

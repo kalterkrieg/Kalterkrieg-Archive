@@ -1,0 +1,33 @@
+CAL_Has_Majority_House = {
+	custom_trigger_tooltip = {
+		set_temp_variable = {
+			CAL_house_needed_majority = CAL_house_seat_total
+		}
+		divide_temp_variable = {
+			CAL_house_needed_majority = 2
+		}
+		tooltip = CAL_Has_Majority_House
+		check_variable = {
+			var = CAL_House_Total_support
+			value = CAL_house_needed_majority
+			compare = greater_than_or_equals
+		}
+	}
+}
+
+CAL_Has_Majority_Senate = {
+	set_temp_variable = {
+		CAL_senate_needed_majority = CAL_senate_seat_total
+	}
+	divide_temp_variable = {
+		CAL_senate_needed_majority = 2
+	}
+	custom_trigger_tooltip = {
+		tooltip = CAL_Has_Majority_Senate
+		check_variable = {
+			var = CAL_Senate_Total_support
+			value = CAL_senate_needed_majority
+			compare = greater_than_or_equals
+		}
+	}
+}

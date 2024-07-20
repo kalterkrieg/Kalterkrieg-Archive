@@ -1,0 +1,98 @@
+congress_of_nation = {
+	con_reset = {
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete con_reset target: [From.GetName]"
+			con_reset_vote = yes
+		}
+	}
+	con_vote_favour = {
+	
+		#cost = 25
+		
+		allowed = { 
+		}
+		visible = {
+			OR = {
+				has_idea = con_member
+				has_idea = con_senate
+			}
+			custom_trigger_tooltip = {
+   				tooltip = con_not_has_vote
+				NOT = {
+					check_variable = { con_voted = 1 }
+				}
+			}
+		}
+		modifier = {
+		}
+		fire_only_once = no
+		days_remove = 0
+		days_re_enable = 1
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete con_vote_favour target: [From.GetName]"
+			con_se_vote_favour = yes
+			set_variable = { con_voted = 1}
+		}
+	}
+	con_vote_against = {
+	
+		#cost = 25
+		
+		allowed = {
+		}
+		visible = {
+			OR = {
+				has_idea = con_member
+				has_idea = con_senate
+			}
+			custom_trigger_tooltip = {
+   				tooltip = con_not_has_vote
+				NOT = {
+					check_variable = { con_voted = 1 }
+				}
+			}
+		}
+		modifier = {
+		}
+		fire_only_once = no
+		days_remove = 0
+		days_re_enable = 1
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete con_vote_against target: [From.GetName]"
+			con_se_vote_against = yes
+			set_variable = { con_voted = 1}
+		}
+	}
+	con_veto = {
+	
+		#cost = 25
+		
+		allowed = { 
+		}
+		visible = {
+			has_idea = con_senate
+		}
+		modifier = {
+		}
+		fire_only_once = no
+		days_remove = 0
+		days_re_enable = 1
+	}
+	con_prorogation  = {
+	
+		#cost = 25
+		
+		allowed = { 
+		}
+		visible = {
+			has_idea = con_senate
+		}
+		modifier = {
+		}
+		fire_only_once = no
+		days_remove = 0
+		days_re_enable = 1
+	}
+}

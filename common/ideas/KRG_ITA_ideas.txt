@@ -1,0 +1,2225 @@
+###########################
+### Kingdom of Sardinia ###
+###########################
+ideas = {
+	country = {
+		ITA_spirit_of_45 = {
+			modifier = {
+				custom_modifier_tooltip = ITA_may_not_declare_war
+				army_core_defence_factor = 0.35
+				defensive_war_stability_factor = 0.3
+				justify_war_goal_time = 2
+
+			}
+		}
+		ITA_the_restoration = {
+			modifier = {
+				political_power_factor = -0.05
+				stability_factor = 0.05
+			}
+			cancel = {
+				NOT = {
+					has_country_leader = {
+						character = ITA_umberto_ii
+						ruling_only = yes
+					}
+				}
+			}
+		}
+		ITA_the_restoration_temp_bonus = {
+			picture = ITA_the_restoration
+			name = ITA_the_restoration
+			on_add = {
+				remove_ideas = ITA_the_restoration
+			}
+			on_remove = {
+				add_ideas = ITA_the_restoration
+			}
+			cancel = {
+				NOT = {
+					has_country_leader = {
+						character = ITA_umberto_ii
+						ruling_only = yes
+					}
+				}
+			}
+			modifier = {
+				stability_factor = 0.05
+			}
+		}
+		ITA_montreal_agreement = {
+			picture = ITA_venetian_humiliation
+			cancel = {
+				has_global_flag = WK3
+			}
+			on_remove = {
+				if = {
+					limit = {
+						has_global_flag = WK3
+					}
+					ITA_montreal_wk3_effect = yes
+				}
+			}
+			modifier = {
+				political_power_factor = -0.05
+				conscription_factor = -0.05
+				industrial_capacity_dockyard = -0.2
+			}
+		}
+		ITA_montreal_agreement_temp_bonus = {
+			picture = ITA_venetian_humiliation
+			name = ITA_montreal_agreement
+			on_add = {
+				remove_ideas = ITA_montreal_agreement
+			}
+			on_remove = {
+				if = {
+					limit = {
+						has_global_flag = WK3
+					}
+					ITA_montreal_wk3_effect = yes
+				}
+				else = {
+					add_ideas = ITA_montreal_agreement
+				}
+			}
+			cancel = {
+				has_global_flag = WK3
+			}
+			modifier = {
+				conscription_factor = -0.05
+				industrial_capacity_dockyard = -0.2
+			}
+			targeted_modifier = {
+				tag = DNF
+				attack_bonus_against = 0.05
+			}
+			
+		}
+		ITA_montreal_agreement_bonus = {
+			picture = ITA_venetian_humiliation
+			name = ITA_montreal_agreement
+			cancel = {
+				has_global_flag = WK3
+			}
+			on_remove = {
+				if = {
+					limit = {
+						has_global_flag = WK3
+					}
+					ITA_montreal_wk3_effect = yes
+				}
+			}
+			modifier = {
+				political_power_factor = -0.1
+				conscription_factor = -0.05
+				industrial_capacity_dockyard = -0.1
+			}
+		}
+		ITA_grateful_sicily_idea = {
+			picture = CAN_beacon_of_liberty
+			modifier = {
+				political_power_gain = 0.1
+				stability_factor = 0.05
+			}
+			
+		}
+		ITA_guido_corbellini_idea = {
+			picture = generic_rail_investment
+			modifier = {
+				production_speed_infrastructure_factor = 0.25
+				production_speed_rail_way_factor = 0.25
+				production_speed_supply_node_factor = 0.25
+			}
+		}
+		ITA_agrarian_strikes_idea = {
+			picture = ITA_il_sol_dell_avvenire_ns
+			modifier = {
+				local_resources_factor = -0.1
+			}
+		}
+		ITA_urban_strikes_idea = {
+			picture = ITA_il_sol_dell_avvenire_ns
+			modifier = {
+				industrial_capacity_factory = -0.1
+				industrial_capacity_dockyard = -0.1
+				production_speed_buildings_factor = -0.1
+			}
+		}
+		ITA_continued_reconstruction_bonus_idea = {
+			picture = generic_production_bonus
+			modifier = {
+				production_factory_max_efficiency_factor = 0.03
+				industrial_capacity_factory = 0.01
+				production_speed_buildings_factor = 0.02
+				consumer_goods_factor = -0.15
+				monthly_population = -0.01
+			}
+		}
+		ITA_ds_popularity_boon_idea = {
+			picture = generic_union_agreement
+			cancel = {
+				has_country_flag = ITA_new_constitution_approved
+			}
+			modifier = {
+				market_liberal_drift = 0.01
+				political_power_factor = 0.05
+			}
+		}
+		ITA_ppi_popularity_boon_idea = {
+			picture = SHX_christian_statism
+			cancel = {
+				has_country_flag = ITA_new_constitution_approved
+			}
+			modifier = {
+				social_liberal_drift = 0.01
+				social_conservative_drift = 0.01
+				political_power_factor = 0.05
+			}
+		}
+		ITA_ppi_internal_divisions_idea = {
+			picture = TEX_american_nightmare
+			cancel = {
+				has_country_flag = ITA_new_constitution_approved
+			}
+			modifier = {
+				stability_factor = -0.15
+				political_power_factor = -0.15
+			}
+		}
+		ITA_ppi_internal_divisions_idea_2 = {
+			name = ITA_ppi_internal_divisions_idea
+			picture = TEX_american_nightmare
+			cancel = {
+				has_country_flag = ITA_new_constitution_approved
+			}
+			modifier = {
+				stability_factor = -0.1
+				political_power_factor = -0.1
+			}
+		}
+		ITA_ppi_internal_divisions_idea_3 = {
+			name = ITA_ppi_internal_divisions_idea
+			picture = TEX_american_nightmare
+			cancel = {
+				has_country_flag = ITA_new_constitution_approved
+			}
+			modifier = {
+				stability_factor = -0.05
+				political_power_factor = -0.05
+			}
+		}
+		ITA_republicans_last_stand = {
+			picture = ITA_republicans_last_stand
+			modifier = {
+				political_power_gain = -0.2
+				stability_factor = -0.1
+			}
+		}
+		ITA_republicans_last_stand_2 = {
+			picture = ITA_republicans_last_stand
+			modifier = {
+				political_power_gain = -0.15
+				stability_factor = -0.07
+			}
+		}
+		ITA_republicans_last_stand_3 = {
+			picture = ITA_republicans_last_stand
+			modifier = {
+				political_power_gain = -0.1
+				stability_factor = -0.05
+			}
+		}
+		ITA_republicans_last_stand_4 = {
+			picture = ITA_republicans_last_stand
+			modifier = {
+				political_power_gain = -0.05
+				stability_factor = -0.03
+			}
+		}
+		ITA_collapsed_industry = {
+			picture = great_depression
+			modifier = {
+				production_factory_max_efficiency_factor = -0.2
+				industrial_capacity_dockyard = -0.30
+				industrial_capacity_factory = -0.15
+				production_speed_buildings_factor = -0.15
+				consumer_goods_factor = 0.5
+				industry_free_repair_factor = -1
+				industry_repair_factor = -1
+				production_speed_infrastructure_factor = -0.9
+				military_spending_factor = -0.25
+			}
+		}
+		ITA_archaic_administration = {
+			picture = generic_old_administration
+			modifier = {
+				political_power_factor = -0.40
+				stability_factor = -0.05
+				war_support_factor = -0.1
+				resistance_target = 0.05
+				compliance_gain = -0.15
+				max_command_power = -75
+			}
+		}
+		ITA_archaic_administration_2 = {
+			picture = generic_old_administration
+			name = ITA_archaic_administration
+			modifier = {
+				political_power_factor = -0.30
+				stability_factor = -0.05
+				war_support_factor = -0.1
+				resistance_target = 0.05
+				compliance_gain = -0.1
+				max_command_power = -65
+			}
+		}
+		ITA_archaic_administration_3 = {
+			picture = generic_old_administration
+			name = ITA_archaic_administration
+			modifier = {
+				political_power_factor = -0.25
+				stability_factor = -0.05
+				war_support_factor = -0.07
+				resistance_target = 0.03
+				compliance_gain = -0.05
+				max_command_power = -55
+			}
+		}
+		ITA_archaic_administration_4 = {
+			picture = generic_old_administration
+			name = ITA_archaic_administration
+			modifier = {
+				political_power_factor = -0.2
+				stability_factor = -0.03
+				war_support_factor = -0.05
+				compliance_gain = -0.02
+				max_command_power = -45
+			}
+		}
+		ITA_archaic_administration_5 = {
+			picture = generic_old_administration
+			name = ITA_archaic_administration
+			modifier = {
+				political_power_factor = -0.15
+				war_support_factor = -0.05
+				compliance_gain = -0.02
+				max_command_power = -35
+			}
+		}
+		ITA_archaic_administration_6 = {
+			picture = generic_old_administration
+			name = ITA_archaic_administration
+			modifier = {
+				political_power_factor = -0.1
+				war_support_factor = -0.025
+				max_command_power = -25
+			}
+		}
+		ITA_archaic_administration_7 = {
+			picture = generic_old_administration
+			name = ITA_archaic_administration
+			modifier = {
+				political_power_factor = -0.05
+				max_command_power = -15
+			}
+		}
+		ITA_the_second_red_scare = {
+			picture = generic_antisyndicalism
+			modifier = {
+				political_power_gain = 0.05
+				radical_socialist_drift = -0.01
+				authoritarian_socialist_drift = -0.01
+			}
+		}
+		ITA_veterans_social_security_campaign = {
+			picture = eng_imperial_conscription
+			modifier = {
+				political_power_gain = 0.05
+				consumer_goods_factor = 0.01
+			}
+		}
+		KRG_ITA_SIFAR = {
+			picture = generic_spy_intel
+			modifier = {
+				political_power_gain = 0.05
+				encryption_factor = 0.10
+				decryption_factor = 0.10
+			}
+		}
+		KRG_ITA_1949_elections_farmers_campaign = {
+			picture = social_liberal_group
+			modifier = {
+				political_power_gain = -0.05
+				social_liberal_drift = 0.15
+				drift_defence_factor = -0.25	
+			}
+		}
+		KRG_ITA_parliament_concessions_to_soclib_1 = {
+			picture = social_liberal_group
+			modifier = {
+				political_power_gain = -0.05
+			}
+		}
+		KRG_ITA_parliament_concessions_to_soclib_2 = {
+			picture = social_liberal_group
+			modifier = {
+				political_power_gain = -0.1
+			}
+		}
+		KRG_ITA_parliament_concessions_to_soclib_3 = {
+			picture = social_liberal_group
+			modifier = {
+				political_power_gain = -0.15
+			}
+		}
+		KRG_ITA_parliament_concessions_to_soclib_4 = {
+			picture = social_liberal_group
+			modifier = {
+				political_power_gain = -0.2
+			}
+		}
+		KRG_ITA_parliament_concessions_to_marklib_1 = {
+			picture = market_liberal_group
+			modifier = {
+				political_power_gain = -0.05
+			}
+		}
+		KRG_ITA_parliament_concessions_to_marklib_2 = {
+			picture = market_liberal_group
+			modifier = {
+				political_power_gain = -0.1
+			}
+		}
+		KRG_ITA_parliament_concessions_to_marklib_3 = {
+			picture = market_liberal_group
+			modifier = {
+				political_power_gain = -0.15
+			}
+		}
+		KRG_ITA_parliament_concessions_to_marklib_4 = {
+			picture = market_liberal_group
+			modifier = {
+				political_power_gain = -0.2
+			}
+		}
+		KRG_ITA_parliament_concessions_to_authdem_1 = {
+			picture = authoritarian_democrat_group
+			modifier = {
+				political_power_gain = -0.05
+			}
+		}
+		KRG_ITA_parliament_concessions_to_authdem_2 = {
+			picture = authoritarian_democrat_group
+			modifier = {
+				political_power_gain = -0.1
+			}
+		}
+		KRG_ITA_parliament_concessions_to_authdem_3 = {
+			picture = authoritarian_democrat_group
+			modifier = {
+				political_power_gain = -0.15
+			}
+		}
+		KRG_ITA_parliament_concessions_to_authdem_4 = {
+			picture = authoritarian_democrat_group
+			modifier = {
+				political_power_gain = -0.2
+			}
+		}
+		KRG_ITA_parliament_concessions_to_pataut_1 = {
+			picture = paternal_autocrat_group
+			modifier = {
+				political_power_gain = -0.05
+			}
+		}
+		KRG_ITA_parliament_concessions_to_pataut_2 = {
+			picture = paternal_autocrat_group
+			modifier = {
+				political_power_gain = -0.1
+			}
+		}
+		KRG_ITA_parliament_concessions_to_pataut_3 = {
+			picture = paternal_autocrat_group
+			modifier = {
+				political_power_gain = -0.15
+			}
+		}
+		KRG_ITA_parliament_concessions_to_pataut_4 = {
+			picture = paternal_autocrat_group
+			modifier = {
+				political_power_gain = -0.2
+			}
+		}
+		KRG_ITA_parliament_concessions_to_natpop_1 = {
+			picture = national_populist_group
+			modifier = {
+				political_power_gain = -0.05
+			}
+		}
+		KRG_ITA_parliament_concessions_to_natpop_2 = {
+			picture = national_populist_group
+			modifier = {
+				political_power_gain = -0.1
+			}
+		}
+		KRG_ITA_parliament_concessions_to_natpop_3 = {
+			picture = national_populist_group
+			modifier = {
+				political_power_gain = -0.15
+			}
+		}
+		KRG_ITA_parliament_concessions_to_natpop_4 = {
+			picture = national_populist_group
+			modifier = {
+				political_power_gain = -0.2
+			}
+		}
+		KRG_ITA_parliament_concessions_to_radsoc_1 = {
+			picture = radical_socialist_group
+			modifier = {
+				political_power_gain = -0.05
+			}
+		}
+		KRG_ITA_parliament_concessions_to_radsoc_2 = {
+			picture = radical_socialist_group
+			modifier = {
+				political_power_gain = -0.1
+			}
+		}
+		KRG_ITA_parliament_concessions_to_radsoc_3 = {
+			picture = radical_socialist_group
+			modifier = {
+				political_power_gain = -0.15
+			}
+		}
+		KRG_ITA_parliament_concessions_to_radsoc_4 = {
+			picture = radical_socialist_group
+			modifier = {
+				political_power_gain = -0.2
+			}
+		}
+		KRG_ITA_parliament_concessions_to_socdem_1 = {
+			picture = social_democrat_group
+			modifier = {
+				political_power_gain = -0.05
+			}
+		}
+		KRG_ITA_parliament_concessions_to_socdem_2 = {
+			picture = social_democrat_group
+			modifier = {
+				political_power_gain = -0.1
+			}
+		}
+		KRG_ITA_parliament_concessions_to_socdem_3 = {
+			picture = social_democrat_group
+			modifier = {
+				political_power_gain = -0.15
+			}
+		}
+		KRG_ITA_parliament_concessions_to_socdem_4 = {
+			picture = social_democrat_group
+			modifier = {
+				political_power_gain = -0.2
+			}
+		}
+		KRG_ITA_parliament_concessions_to_revrep_1 = {
+			picture = revolutionary_republican_group
+			modifier = {
+				political_power_gain = -0.05
+			}
+		}
+		KRG_ITA_parliament_concessions_to_revrep_2 = {
+			picture = revolutionary_republican_group
+			modifier = {
+				political_power_gain = -0.1
+			}
+		}
+		KRG_ITA_parliament_concessions_to_revrep_3 = {
+			picture = revolutionary_republican_group
+			modifier = {
+				political_power_gain = -0.15
+			}
+		}
+		KRG_ITA_parliament_concessions_to_revrep_4 = {
+			picture = revolutionary_republican_group
+			modifier = {
+				political_power_gain = -0.2
+			}
+		}
+		KRG_ITA_parliament_concessions_to_soccon_1 = {
+			picture = social_conservative_group
+			modifier = {
+				political_power_gain = -0.05
+			}
+		}
+		KRG_ITA_parliament_concessions_to_soccon_2 = {
+			picture = social_conservative_group
+			modifier = {
+				political_power_gain = -0.1
+			}
+		}
+		KRG_ITA_parliament_concessions_to_soccon_3 = {
+			picture = social_conservative_group
+			modifier = {
+				political_power_gain = -0.15
+			}
+		}
+		KRG_ITA_parliament_concessions_to_soccon_4 = {
+			picture = social_conservative_group
+			modifier = {
+				political_power_gain = -0.2
+			}
+		}
+		
+		ITA_witch_hunts = {
+			picture = national_populist_group
+			modifier = {
+				political_power_gain = -0.10
+				conscription_factor = -0.05
+				radical_socialist_drift = -0.01
+				authoritarian_socialist_drift = -0.01
+			}
+		}
+		
+		ITA_SIFAR_idea = {
+			picture = idea_army_cooperation
+			modifier = {
+				decryption_factor = 0.2
+				encryption_factor = 0.2
+			}
+		}
+		
+		ITA_woes_of_the_south = {
+			picture = ITA_Back_to_Work
+			modifier = {
+				stability_factor = -0.05
+				political_power_gain = -0.15
+			}
+		}
+		
+		ITA_reclaimed_lands_ministry_idea = {
+			picture = big_entente_idea
+			modifier = {
+				max_command_power = 25
+				command_power_gain = 0.3
+			}
+		}
+		
+		ITA_reconstruction_idea = {
+			picture = great_depression
+			modifier = {
+				production_factory_max_efficiency_factor = -0.15
+				industrial_capacity_dockyard = -0.20
+				industrial_capacity_factory = -0.10
+				production_speed_buildings_factor = -0.05
+				military_spending_factor = -0.25
+				industry_free_repair_factor = -1
+				industry_repair_factor = -1
+			}
+		}
+		
+		ITA_reconstruction_idea_2 = {
+			picture = great_depression
+			name = ITA_reconstruction_idea
+			modifier = {
+				production_factory_max_efficiency_factor = -0.13
+				industrial_capacity_dockyard = -0.18
+				industrial_capacity_factory = -0.10
+				production_speed_buildings_factor = -0.05
+				consumer_goods_factor = 0.06
+				military_spending_factor = -0.2
+				industry_free_repair_factor = -0.95
+				industry_repair_factor = -0.90
+			}
+		}
+		ITA_reconstruction_idea_3 = {
+			picture = great_depression
+			name = ITA_reconstruction_idea
+			modifier = {
+				production_factory_max_efficiency_factor = -0.11
+				industrial_capacity_dockyard = -0.16
+				industrial_capacity_factory = -0.10
+				consumer_goods_factor = 0.06
+				military_spending_factor = -0.2
+				industry_free_repair_factor = -0.9
+				industry_repair_factor = -0.90
+			}
+		}
+		ITA_reconstruction_idea_4 = {
+			picture = great_depression
+			name = ITA_reconstruction_idea
+			modifier = {
+				production_factory_max_efficiency_factor = -0.11
+				industrial_capacity_dockyard = -0.11
+				industrial_capacity_factory = -0.10
+				consumer_goods_factor = 0.02
+				military_spending_factor = -0.15
+				industry_free_repair_factor = -0.9
+				industry_repair_factor = -0.85
+			}
+		}
+		ITA_reconstruction_idea_5 = {
+			picture = great_depression
+			name = ITA_reconstruction_idea
+			modifier = {
+				production_factory_max_efficiency_factor = -0.07
+				industrial_capacity_dockyard = -0.11
+				industrial_capacity_factory = -0.08
+				consumer_goods_factor = 0.02
+				military_spending_factor = -0.15
+				industry_free_repair_factor = -0.75
+				industry_repair_factor = -0.85
+			}
+		}
+		ITA_reconstruction_idea_6 = {
+			picture = great_depression
+			name = ITA_reconstruction_idea
+			modifier = {
+				industrial_capacity_dockyard = -0.11
+				industrial_capacity_factory = -0.08
+				consumer_goods_factor = 0.02
+				military_spending_factor = -0.15
+				industry_free_repair_factor = -0.55
+				industry_repair_factor = -0.65
+			}
+		}
+		ITA_reconstruction_idea_7 = {
+			picture = great_depression
+			name = ITA_reconstruction_idea
+			modifier = {
+				industrial_capacity_dockyard = -0.08
+				industrial_capacity_factory = -0.07
+				industry_free_repair_factor = -0.45
+				industry_repair_factor = -0.6
+				military_spending_factor = -0.1
+			}
+		}
+		ITA_reconstruction_idea_8 = {
+			picture = great_depression
+			name = ITA_reconstruction_idea
+			modifier = {
+				industrial_capacity_dockyard = -0.08
+				industrial_capacity_factory = -0.07
+				industry_free_repair_factor = -0.36
+				industry_repair_factor = -0.5
+				military_spending_factor = -0.1
+			}
+		}
+		ITA_reconstruction_idea_9 = {
+			picture = great_depression
+			name = ITA_reconstruction_idea
+			modifier = {
+				industrial_capacity_dockyard = -0.07
+				industrial_capacity_factory = -0.05
+				industry_free_repair_factor = -0.36
+				industry_repair_factor = -0.5
+				military_spending_factor = -0.05
+			}
+		}
+		ITA_reconstruction_idea_10 = {
+			picture = great_depression
+			name = ITA_reconstruction_idea
+			modifier = {
+				industrial_capacity_dockyard = -0.07
+				industrial_capacity_factory = -0.05
+				industry_free_repair_factor = -0.31
+				industry_repair_factor = -0.40
+				military_spending_factor = -0.05
+			}
+		}
+		ITA_reconstruction_idea_11 = {
+			picture = great_depression
+			name = ITA_reconstruction_idea
+			modifier = {
+				industrial_capacity_dockyard = -0.07
+				industrial_capacity_factory = -0.05
+				industry_free_repair_factor = -0.25
+				industry_repair_factor = -0.35
+			}
+		}
+
+		
+		ITA_collapsed_railways_idea = {
+			picture = great_depression
+			modifier = {
+				production_factory_max_efficiency_factor = -0.05
+				industrial_capacity_dockyard = -0.10
+				industrial_capacity_factory = -0.05
+				production_speed_buildings_factor = -0.05
+				consumer_goods_factor = 0.1
+				production_speed_infrastructure_factor = -0.9
+			}
+		}
+		
+		ITA_collapsed_railways_idea_2 = {
+			picture = great_depression
+			name = ITA_collapsed_railways_idea
+			modifier = {
+				production_factory_max_efficiency_factor = -0.05
+				industrial_capacity_dockyard = -0.09
+				industrial_capacity_factory = -0.05
+				production_speed_buildings_factor = -0.05
+				consumer_goods_factor = 0.1
+				production_speed_infrastructure_factor = -0.85
+			}
+		}
+		ITA_collapsed_railways_idea_3 = {
+			picture = great_depression
+			name = ITA_collapsed_railways_idea
+			modifier = {
+				production_factory_max_efficiency_factor = -0.05
+				industrial_capacity_dockyard = -0.05
+				industrial_capacity_factory = -0.05
+				consumer_goods_factor = 0.1
+				production_speed_infrastructure_factor = -0.75
+			}
+		}
+		ITA_collapsed_railways_idea_4 = {
+			picture = great_depression
+			name = ITA_collapsed_railways_idea
+			modifier = {
+				industrial_capacity_dockyard = -0.05
+				industrial_capacity_factory = -0.05
+				consumer_goods_factor = 0.1
+				production_speed_infrastructure_factor = -0.65
+			}
+		}
+		ITA_collapsed_railways_idea_5 = {
+			picture = great_depression
+			name = ITA_collapsed_railways_idea
+			modifier = {
+				industrial_capacity_dockyard = -0.05
+				industrial_capacity_factory = -0.05
+				consumer_goods_factor = 0.1
+				production_speed_infrastructure_factor = -0.45
+			}
+		}
+		ITA_collapsed_railways_idea_6 = {
+			picture = great_depression
+			name = ITA_collapsed_railways_idea
+			modifier = {
+				industrial_capacity_dockyard = -0.05
+				consumer_goods_factor = 0.1
+				production_speed_infrastructure_factor = -0.35
+			}
+		}
+		ITA_collapsed_railways_idea_7 = {
+			picture = great_depression
+			name = ITA_collapsed_railways_idea
+			modifier = {
+				consumer_goods_factor = 0.1
+				production_speed_infrastructure_factor = -0.25
+			}
+		}
+		ITA_collapsed_railways_idea_8 = {
+			picture = great_depression
+			name = ITA_collapsed_railways_idea
+			modifier = {
+				consumer_goods_factor = 0.1
+				production_speed_infrastructure_factor = -0.10
+			}
+		}
+		
+		ITA_collapsed_banks_idea = {
+			picture = great_depression
+			modifier = {
+				production_speed_buildings_factor = -0.05
+				consumer_goods_factor = 0.3
+			}
+		}
+		
+		ITA_collapsed_banks_idea_2 = {
+			picture = great_depression
+			name = ITA_collapsed_banks_idea
+			modifier = {
+				production_speed_buildings_factor = -0.05
+				consumer_goods_factor = 0.24
+			}
+		}
+		
+		ITA_collapsed_banks_idea_3 = {
+			picture = great_depression
+			name = ITA_collapsed_banks_idea
+			modifier = {
+				production_speed_buildings_factor = -0.03
+				consumer_goods_factor = 0.22
+			}
+		}
+		
+		ITA_collapsed_banks_idea_4 = {
+			picture = great_depression
+			name = ITA_collapsed_banks_idea
+			modifier = {
+				production_speed_buildings_factor = -0.03
+				consumer_goods_factor = 0.16
+			}
+		}
+		
+		ITA_collapsed_banks_idea_5 = {
+			picture = great_depression
+			name = ITA_collapsed_banks_idea
+			modifier = {
+				consumer_goods_factor = 0.16
+			}
+		}
+		
+		ITA_collapsed_banks_idea_6 = {
+			picture = great_depression
+			name = ITA_collapsed_banks_idea
+			modifier = {
+				consumer_goods_factor = 0.08
+			}
+		}
+		ITA_protect_minority_languages = {
+			picture = OTT_compromise_idea
+			name = ITA_protect_minority_languages
+			modifier = {
+				war_support_factor = 0.05
+				stability_factor = 0.025
+			}
+		}
+		ITA_8_hour_workday = {
+			picture = backward_industry
+			modifier = {
+				production_factory_efficiency_gain_factor = 0.05
+				production_factory_max_efficiency_factor = 0.05
+				industrial_capacity_factory = -0.05
+			}
+		}
+		ITA_fiat_deal = {
+			picture = fiat
+			modifier = {
+				
+			}
+			equipment_bonus = {
+				motorized_equipment = {
+					build_cost_ic = -0.05
+				}
+				mechanized_equipment = {
+					build_cost_ic = -0.05
+
+				}
+				armor = {
+					build_cost_ic = -0.05
+				} 
+			}
+		}
+		ITA_foreign_investment = {
+			picture = industrial_regulations
+			modifier = {
+				production_speed_buildings_factor = 0.05
+				production_speed_industrial_complex_factor = 0.05
+				political_power_factor = -0.05
+			}
+		}
+
+		### Army Tree Spirits ###
+
+		ITA_italian_liberty_army = {
+			picture = generic_antisyndicalism
+			modifier = {
+				conscription_factor = 0.05
+				army_core_defence_factor = 0.05
+				resistance_growth_on_our_occupied_states = 0.1
+			}
+		}
+		ITA_gladio = {
+			picture = generic_antisyndicalism
+			modifier = {
+				conscription_factor = 0.1
+				army_core_defence_factor = 0.1
+				resistance_growth_on_our_occupied_states = 0.2
+			}
+		}
+		ITA_alpini_darresto_idea = {
+			picture = generic_mountain_warfare
+			modifier = {
+				modifier_army_sub_unit_mountaineers_defence_factor = 0.15
+				modifier_army_sub_unit_mountaineers_max_org_factor = 0.1
+			}
+		}
+		ITA_basics_of_combined_arms_idea = {
+			name = ITA_combined_arms_warfare
+			picture = generic_acquire_tanks
+			modifier = {
+				breakthrough_factor = 0.05
+				army_org_factor = 0.05
+			}
+		}
+		ITA_combined_arms_idea = {
+			name = ITA_combined_arms_warfare
+			picture = generic_acquire_tanks
+			modifier = {
+				army_armor_attack_factor = 0.1
+				army_armor_speed_factor = 0.1
+				land_reinforce_rate = 0.03
+			}
+		}
+		ITA_combined_arms_idea_2 = {
+			name = ITA_combined_arms_warfare
+			picture = generic_acquire_tanks
+			modifier = {
+				breakthrough_factor = 0.05
+				army_org_factor = 0.05
+				army_armor_attack_factor = 0.1
+				army_armor_speed_factor = 0.1
+				land_reinforce_rate = 0.03
+			}
+		}
+		ITA_fanteria_darresto_idea = {
+			name = ITA_riforma_arma_fanteria
+			picture = ITA_regio_esercito_1
+			modifier = {
+				army_infantry_defence_factor = 0.1
+				max_dig_in_factor = 0.1
+			}
+		}
+		ITA_fanteria_darresto_better_idea = {
+			name = ITA_riforma_arma_fanteria
+			picture = ITA_regio_esercito_1
+			modifier = {
+				army_infantry_defence_factor = 0.1
+				max_dig_in_factor = 0.1
+				army_core_defence_factor = 0.05
+				dig_in_speed_factor = 0.15
+			}
+		}
+		ITA_fanteria_darresto_2_idea = {
+			name = ITA_riforma_arma_fanteria
+			picture = ITA_regio_esercito_2
+			modifier = {
+				army_infantry_defence_factor = 0.1
+				unit_motorized_design_cost_factor = -0.5
+				motorized_defence_factor = 0.1
+				mechanized_defence_factor = 0.1
+				max_dig_in_factor = 0.1
+			}
+			equipment_bonus = {
+				motorized_equipment = {
+					build_cost_ic = -0.1 instant = yes
+				}
+				mechanized_equipment = {
+					build_cost_ic = -0.1 instant = yes
+				}
+			}
+		}
+		ITA_fanteria_darresto_2_better_idea = {
+			name = ITA_riforma_arma_fanteria
+			picture = ITA_regio_esercito_2
+			modifier = {
+				army_infantry_defence_factor = 0.1
+				unit_motorized_design_cost_factor = -0.5
+				motorized_defence_factor = 0.1
+				mechanized_defence_factor = 0.1
+				max_dig_in_factor = 0.1
+				army_core_defence_factor = 0.05
+				dig_in_speed_factor = 0.15
+			}
+			equipment_bonus = {
+				motorized_equipment = {
+					build_cost_ic = -0.1 instant = yes
+				}
+				mechanized_equipment = {
+					build_cost_ic = -0.1 instant = yes
+				}
+			}
+		}
+		ITA_regio_esercito_test_idea = {
+			name = ITA_KRG_regio_esercito_idea
+			picture = ITA_regio_esercito_3
+			modifier = {
+				# Riforma dell'Arma di Fanteria
+				army_infantry_defence_factor = 0.1
+				unit_motorized_design_cost_factor = -0.5
+				motorized_defence_factor = 0.1
+				mechanized_defence_factor = 0.1
+				max_dig_in_factor = 0.1
+				# Combined Arms Warfare
+				army_armor_attack_factor = 0.1
+				army_armor_speed_factor = 0.1
+				land_reinforce_rate = 0.03
+				# Alpini d'Arresto
+				modifier_army_sub_unit_mountaineers_defence_factor = 0.15
+				modifier_army_sub_unit_mountaineers_max_org_factor = 0.1
+			}
+			equipment_bonus = {
+				motorized_equipment = {
+					build_cost_ic = -0.1 instant = yes
+				}
+				mechanized_equipment = {
+					build_cost_ic = -0.1 instant = yes
+				}
+			}
+		}
+		ITA_regio_esercito_base_idea = {
+			name = ITA_KRG_regio_esercito_idea
+			picture = ITA_regio_esercito_3
+			modifier = {
+				# Unique bonus
+				training_time_army_factor = -0.1
+				conscription_factor = 0.1
+				max_planning_factor = 0.15
+				planning_speed = 0.1
+				# Riforma dell'Arma di Fanteria
+				army_infantry_defence_factor = 0.1
+				unit_motorized_design_cost_factor = -0.5
+				motorized_defence_factor = 0.1
+				mechanized_defence_factor = 0.1
+				max_dig_in_factor = 0.1
+				# Combined Arms Warfare
+				army_armor_attack_factor = 0.1
+				army_armor_speed_factor = 0.1
+				land_reinforce_rate = 0.03
+				# Alpini d'Arresto
+				modifier_army_sub_unit_mountaineers_defence_factor = 0.15
+				modifier_army_sub_unit_mountaineers_max_org_factor = 0.1
+			}
+			equipment_bonus = {
+				motorized_equipment = {
+					build_cost_ic = -0.1 instant = yes
+				}
+				mechanized_equipment = {
+					build_cost_ic = -0.1 instant = yes
+				}
+			}
+		}
+		ITA_regio_esercito_mancinelli_idea = {
+			name = ITA_KRG_regio_esercito_idea
+			picture = ITA_regio_esercito_3
+			modifier = {
+				# Unique bonus
+				training_time_army_factor = -0.1
+				conscription_factor = 0.1
+				max_planning_factor = 0.15
+				planning_speed = 0.1
+				# Riforma dell'Arma di Fanteria
+				army_infantry_defence_factor = 0.1
+				unit_motorized_design_cost_factor = -0.5
+				motorized_defence_factor = 0.1
+				mechanized_defence_factor = 0.1
+				max_dig_in_factor = 0.1
+				# Combined Arms Warfare
+				army_armor_attack_factor = 0.1
+				army_armor_speed_factor = 0.1
+				land_reinforce_rate = 0.03
+				# Alpini d'Arresto
+				modifier_army_sub_unit_mountaineers_defence_factor = 0.15
+				modifier_army_sub_unit_mountaineers_max_org_factor = 0.1
+				# Mancinelli bonus
+				experience_gain_army_factor = 0.15
+				conscription = 0.01
+			}
+			equipment_bonus = {
+				motorized_equipment = {
+					build_cost_ic = -0.1 instant = yes
+				}
+				mechanized_equipment = {
+					build_cost_ic = -0.1 instant = yes
+				}
+			}
+		}
+		ITA_regio_esercito_marras_idea = {
+			name = ITA_KRG_regio_esercito_idea
+			picture = ITA_regio_esercito_3
+			modifier = {
+				# Unique bonus
+				training_time_army_factor = -0.1
+				conscription_factor = 0.1
+				max_planning_factor = 0.15
+				planning_speed = 0.1
+				# Riforma dell'Arma di Fanteria
+				army_infantry_defence_factor = 0.1
+				unit_motorized_design_cost_factor = -0.5
+				motorized_defence_factor = 0.1
+				mechanized_defence_factor = 0.1
+				max_dig_in_factor = 0.1
+				# Combined Arms Warfare
+				army_armor_attack_factor = 0.1
+				army_armor_speed_factor = 0.1
+				land_reinforce_rate = 0.03
+				# Alpini d'Arresto
+				modifier_army_sub_unit_mountaineers_defence_factor = 0.15
+				modifier_army_sub_unit_mountaineers_max_org_factor = 0.1
+				# Marras bonus
+				army_core_defence_factor = 0.05
+				dig_in_speed_factor = 0.15
+			}
+			equipment_bonus = {
+				motorized_equipment = {
+					build_cost_ic = -0.1 instant = yes
+				}
+				mechanized_equipment = {
+					build_cost_ic = -0.1 instant = yes
+				}
+			}
+		}
+		ITA_regio_esercito_marras_mancinelli_idea = {
+			name = ITA_KRG_regio_esercito_idea
+			picture = ITA_regio_esercito_3
+			modifier = {
+				# Unique bonus
+				training_time_army_factor = -0.1
+				conscription_factor = 0.1
+				max_planning_factor = 0.15
+				planning_speed = 0.1
+				# Riforma dell'Arma di Fanteria
+				army_infantry_defence_factor = 0.1
+				unit_motorized_design_cost_factor = -0.5
+				motorized_defence_factor = 0.1
+				mechanized_defence_factor = 0.1
+				max_dig_in_factor = 0.1
+				# Combined Arms Warfare
+				army_armor_attack_factor = 0.1
+				army_armor_speed_factor = 0.1
+				land_reinforce_rate = 0.03
+				# Alpini d'Arresto
+				modifier_army_sub_unit_mountaineers_defence_factor = 0.15
+				modifier_army_sub_unit_mountaineers_max_org_factor = 0.1
+				# Marras bonus
+				army_core_defence_factor = 0.05
+				dig_in_speed_factor = 0.15
+				# Mancinelli bonus
+				experience_gain_army_factor = 0.15
+				conscription = 0.01
+			}
+			equipment_bonus = {
+				motorized_equipment = {
+					build_cost_ic = -0.1 instant = yes
+				}
+				mechanized_equipment = {
+					build_cost_ic = -0.1 instant = yes
+				}
+			}
+		}
+		ITA_regio_esercito_cadorna_idea = {
+			name = ITA_KRG_regio_esercito_idea
+			picture = ITA_regio_esercito_3
+			modifier = {
+				# Unique bonus
+				training_time_army_factor = -0.1
+				conscription_factor = 0.1
+				max_planning_factor = 0.15
+				planning_speed = 0.1
+				# Riforma dell'Arma di Fanteria
+				army_infantry_defence_factor = 0.1
+				unit_motorized_design_cost_factor = -0.5
+				motorized_defence_factor = 0.1
+				mechanized_defence_factor = 0.1
+				max_dig_in_factor = 0.1
+				# Combined Arms Warfare
+				army_armor_attack_factor = 0.1
+				army_armor_speed_factor = 0.1
+				land_reinforce_rate = 0.03
+				# Alpini d'Arresto
+				modifier_army_sub_unit_mountaineers_defence_factor = 0.15
+				modifier_army_sub_unit_mountaineers_max_org_factor = 0.1
+				# Cadorna bonus
+				breakthrough_factor = 0.05
+				army_org_factor = 0.05
+			}
+			equipment_bonus = {
+				motorized_equipment = {
+					build_cost_ic = -0.1 instant = yes
+				}
+				mechanized_equipment = {
+					build_cost_ic = -0.1 instant = yes
+				}
+			}
+		}
+		ITA_regio_esercito_cadorna_mancinelli_idea = {
+			name = ITA_KRG_regio_esercito_idea
+			picture = ITA_regio_esercito_3
+			modifier = {
+				# Unique bonus
+				training_time_army_factor = -0.1
+				conscription_factor = 0.1
+				max_planning_factor = 0.15
+				planning_speed = 0.1
+				# Riforma dell'Arma di Fanteria
+				army_infantry_defence_factor = 0.1
+				unit_motorized_design_cost_factor = -0.5
+				motorized_defence_factor = 0.1
+				mechanized_defence_factor = 0.1
+				max_dig_in_factor = 0.1
+				# Combined Arms Warfare
+				army_armor_attack_factor = 0.1
+				army_armor_speed_factor = 0.1
+				land_reinforce_rate = 0.03
+				# Alpini d'Arresto
+				modifier_army_sub_unit_mountaineers_defence_factor = 0.15
+				modifier_army_sub_unit_mountaineers_max_org_factor = 0.1
+				# Cadorna bonus
+				breakthrough_factor = 0.05
+				army_org_factor = 0.05
+				# Mancinelli bonus
+				experience_gain_army_factor = 0.15
+				conscription = 0.01
+			}
+			equipment_bonus = {
+				motorized_equipment = {
+					build_cost_ic = -0.1 instant = yes
+				}
+				mechanized_equipment = {
+					build_cost_ic = -0.1 instant = yes
+				}
+			}
+		}
+		ITA_regio_esercito_marras_cadorna_idea = {
+			name = ITA_KRG_regio_esercito_idea
+			picture = ITA_regio_esercito_3
+			modifier = {
+				# Unique bonus
+				training_time_army_factor = -0.1
+				conscription_factor = 0.1
+				max_planning_factor = 0.15
+				planning_speed = 0.1
+				# Riforma dell'Arma di Fanteria
+				army_infantry_defence_factor = 0.1
+				unit_motorized_design_cost_factor = -0.5
+				motorized_defence_factor = 0.1
+				mechanized_defence_factor = 0.1
+				max_dig_in_factor = 0.1
+				# Combined Arms Warfare
+				army_armor_attack_factor = 0.1
+				army_armor_speed_factor = 0.1
+				land_reinforce_rate = 0.03
+				# Alpini d'Arresto
+				modifier_army_sub_unit_mountaineers_defence_factor = 0.15
+				modifier_army_sub_unit_mountaineers_max_org_factor = 0.1
+				# Marras bonus
+				army_core_defence_factor = 0.05
+				dig_in_speed_factor = 0.15
+				# Cadorna bonus
+				breakthrough_factor = 0.05
+				army_org_factor = 0.05
+			}
+			equipment_bonus = {
+				motorized_equipment = {
+					build_cost_ic = -0.1 instant = yes
+				}
+				mechanized_equipment = {
+					build_cost_ic = -0.1 instant = yes
+				}
+			}
+		}
+		ITA_regio_esercito_marras_cadorna_mancinelli_idea = {
+			name = ITA_KRG_regio_esercito_idea
+			picture = ITA_regio_esercito_3
+			modifier = {
+				# Unique bonus
+				training_time_army_factor = -0.1
+				conscription_factor = 0.1
+				max_planning_factor = 0.15
+				planning_speed = 0.1
+				# Riforma dell'Arma di Fanteria
+				army_infantry_defence_factor = 0.1
+				unit_motorized_design_cost_factor = -0.5
+				motorized_defence_factor = 0.1
+				mechanized_defence_factor = 0.1
+				max_dig_in_factor = 0.1
+				# Combined Arms Warfare
+				army_armor_attack_factor = 0.1
+				army_armor_speed_factor = 0.1
+				land_reinforce_rate = 0.03
+				# Alpini d'Arresto
+				modifier_army_sub_unit_mountaineers_defence_factor = 0.15
+				modifier_army_sub_unit_mountaineers_max_org_factor = 0.1
+				# Marras bonus
+				army_core_defence_factor = 0.05
+				dig_in_speed_factor = 0.15
+				# Cadorna bonus
+				breakthrough_factor = 0.05
+				army_org_factor = 0.05
+				# Mancinelli bonus
+				experience_gain_army_factor = 0.15
+				conscription = 0.01
+			}
+			equipment_bonus = {
+				motorized_equipment = {
+					build_cost_ic = -0.1 instant = yes
+				}
+				mechanized_equipment = {
+					build_cost_ic = -0.1 instant = yes
+				}
+			}
+		}
+		
+		### Navy Tree Spirits ###
+		ITA_navy_command = {
+			picture = ITA_navy_command
+			modifier = {
+				experience_gain_navy = 0.03
+				experience_gain_navy_factor = 0.1
+			}
+		}
+		ITA_navy_command_2 = {
+			name = ITA_navy_command
+			picture = ITA_navy_command
+			modifier = {
+				experience_gain_navy = 0.03
+				experience_gain_navy_factor = 0.1
+				naval_coordination = 0.05
+				naval_damage_factor = 0.05
+				naval_morale_factor = 0.1
+				naval_speed_factor = 0.05
+			}
+		}
+		ITA_naval_modernisation_program = {
+			picture = generic_navy
+			modifier = {
+				refit_ic_cost = -0.10
+				refit_speed = 0.15
+			}
+		}
+		ITA_naval_expansion = { 
+			picture = generic_navy
+			modifier = { 
+				production_speed_dockyard_factor = 0.1
+				industrial_capacity_dockyard = 0.1
+			}
+			cancel ={ 
+				has_navy_size = { size > 49}
+			}
+			on_remove = {
+				country_event = ita.136
+			}
+		}
+
+		### Air Tree Spirits ####
+		ITA_united_air_command = {
+			picture = ITA_regia_aeronautica_1
+			modifier = {
+				air_attack_factor = 0.05
+				air_defence_factor = 0.05
+				air_accidents_factor = -0.1
+				air_superiority_efficiency = 0.1
+			}
+		}
+		ITA_phase_out_c_205s_idea = {
+
+            picture = generic_fighter_production_diverted
+            equipment_bonus = {
+				jet_fighter_equipment = {
+					build_cost_ic = -0.1
+				}
+			}
+        }
+		###POLITICAL STUFF###
+		ITA_trade_unions_relegalized = {
+			on_add = {
+				country_event = {
+					id = krg_ita.135
+					days = 20
+					random_days = 50
+				}
+			}
+			picture = generic_syndicalist_monarchy
+			modifier = {
+				political_power_gain = -0.1
+				production_factory_efficiency_gain_factor = -0.05
+				stability_factor = 0.1
+				war_support_factor = 0.05
+			}
+		}
+		
+		ITA_conservative_resistance_to_trade_unions = {
+			picture = CSA_broken_spirit
+			modifier = {
+				political_power_gain = -0.15
+				stability_factor = -0.15
+			}
+		}
+		
+		ITA_agrarian_unions_in_the_field = {
+			picture = ENG_overwhelming_syndicalist_resistance
+			modifier = {
+				political_power_factor = -0.20
+				stability_factor = -0.10
+				consumer_goods_factor = 0.2
+				global_building_slots_factor = -0.05
+			}
+		}
+		
+		ITA_agrarian_unions_in_the_field_integrated_into_pda = {
+			picture = communard_spirit
+			modifier = {
+				political_power_gain = -0.05
+				consumer_goods_factor = 0.1
+				stability_factor = 0.05
+			}
+		}
+		
+		ITA_agrarian_state_of_siege = {
+			picture = generic_destruction
+			modifier = {
+				stability_factor = -0.2	
+				attrition = 0.15
+				political_power_gain = -0.2
+				radical_socialist_drift = -0.15
+			}
+		}
+		
+		ITA_land_reform = {
+			picture = generic_agrarian_society
+			modifier = {
+				political_power_gain = -0.1
+				consumer_goods_factor = 0.2
+				production_speed_buildings_factor = -0.05
+			}
+		}
+		
+		ITA_collapse_of_farmers_party = {
+			picture = HNN_hopes_dashed
+			cancel = {
+				social_liberal < 0.10
+			}
+			modifier = {
+				social_liberal_drift = -0.1
+			}
+			on_remove = {
+				if = {
+					limit = {
+						social_liberal < 0.10
+					}
+					country_event = krg_ita.142
+				}
+			}
+		}
+		
+		ITA_collapse_of_farmers_party_2 = {
+			name = ITA_collapse_of_farmers_party
+			picture = HNN_hopes_dashed
+			cancel = {
+				social_liberal < 0.10
+			}
+			modifier = {
+				social_liberal_drift = -0.05
+			}
+			on_remove = {
+				if = {
+					limit = {
+						social_liberal < 0.10
+					}
+					country_event = krg_ita.142
+				}
+			}
+		}
+		
+		# diplomacy
+
+		KRG_italian_war_idea = {
+			picture = CAN_darkest_hour
+			modifier = {
+				custom_modifier_tooltip = KRG_italian_war_idea_tt
+			}
+		}
+
+		KRG_italy_international_war_support_idea = {
+			picture = debts
+			modifier = {
+				military_factory_donations = 5
+			}
+		}
+		
+	}
+
+	foreign_minister = {
+		ITA_minister_giuseppe_saragat_for = {
+			allowed  = { original_tag = ITA }
+			available = {
+			}
+
+			cost = 150
+			picture = ITA_minister_giuseppe_saragat_for
+			
+			traits = {
+				foreign_minister
+				social_democrat
+				ideological_crusader
+			}
+			cancel_if_invalid = yes
+		}
+		ITA_minister_adriano_olivetti_for = {
+			allowed  = { original_tag = ITA }
+			available = {
+			}
+
+			cost = 150
+			picture = ITA_minister_adriano_olivetti_for
+			
+			traits = {
+				foreign_minister
+				social_liberal
+				apologetic_clerk
+			}
+			cancel_if_invalid = yes
+		}
+		ITA_minister_giuseppe_brusasca_for = {
+			allowed  = { original_tag = ITA }
+			available = {
+			}
+
+			cost = 150
+			picture = ITA_minister_giuseppe_brusasca_for
+			
+			traits = {
+				foreign_minister
+				social_conservative
+				great_compromiser
+			}
+			cancel_if_invalid = yes
+		}
+		ITA_minister_amedeo_guillet_for = {
+			allowed  = { original_tag = ITA }
+			available = {
+			}
+
+			cost = 150
+			picture = ITA_minister_amedeo_guillet_for
+			
+			traits = {
+				foreign_minister
+				authoritarian_democrat
+				general_staffer
+			}
+			cancel_if_invalid = yes
+		}
+	}
+
+	economy_minister = {
+		ITA_minister_pietro_mastino_eco = {
+			allowed  = { original_tag = ITA }
+			available = {
+			}
+
+			cost = 150
+			picture = ITA_minister_pietro_mastino_eco
+			
+			traits = {
+				economy_minister
+				social_democrat
+				mixed_economy
+			}
+			cancel_if_invalid = yes
+		}
+		ITA_minister_federico_ricci_eco = {
+			allowed  = { original_tag = ITA }
+			available = {
+			}
+
+			cost = 150
+			picture = ITA_minister_federico_ricci_eco
+			
+			traits = {
+				economy_minister
+				revolutionary_republican
+				welfare_proponent
+			}
+			cancel_if_invalid = yes
+		}
+		ITA_minister_umberto_bonino_eco = {
+			allowed  = { original_tag = ITA }
+			available = {
+			}
+
+			cost = 150
+			picture = ITA_minister_umberto_bonino_eco
+			
+			traits = {
+				economy_minister
+				social_liberal
+				reformer
+			}
+			cancel_if_invalid = yes
+		}
+		ITA_minister_edoardo_agnelli_eco = {
+			allowed = { 
+				original_tag = ITA
+			}
+			available = {
+			}
+			allowed_to_remove = {
+				if = {
+					limit = {
+						tag = ITA
+					}
+					custom_trigger_tooltip = {
+						tooltip = KRG_ITA_this_guy_is_too_important_to_remove
+						always = no
+					}
+				}
+			}
+			visible = {
+				if = {
+					limit = {
+						tag = ITA
+					}
+					has_country_flag = ITA_agnelli_scheme_success
+				}
+			}
+
+			cost = 150
+			picture = ITA_minister_edoardo_agnelli_eco
+			
+			traits = {
+				economy_minister
+				market_liberal
+				laissez_faire_capitalist 
+			}
+			cancel_if_invalid = yes
+		}
+		ITA_minister_giuseppe_pella_eco = {
+			allowed  = { original_tag = ITA }
+			available = {
+			}
+
+			cost = 150
+			picture = ITA_minister_giuseppe_pella_eco
+			
+			traits = {
+				economy_minister
+				social_conservative
+				laissez_faire_capitalist
+			}
+			cancel_if_invalid = yes
+		}
+		ITA_minister_paolo_ignazio_maria_thaon_di_revel_eco = {
+			allowed  = { original_tag = ITA }
+			available = {
+			}
+
+			cost = 150
+			picture = ITA_minister_paolo_ignazio_maria_thaon_di_revel_eco
+			
+			traits = {
+				economy_minister
+				authoritarian_democrat
+				construction_magnate
+			}
+			cancel_if_invalid = yes
+		}
+	}
+	
+	justice_minister = {
+		ITA_minister_paolo_rossi_jus = {
+			allowed  = { original_tag = ITA }
+			available = {
+			}
+
+			cost = 150
+			picture = ITA_minister_paolo_rossi_jus
+			
+			traits = {
+				justice_minister
+				social_democrat
+				impartial_judge
+			}
+			cancel_if_invalid = yes
+		}
+		ITA_minister_nicolo_caradini_jus = {
+			allowed  = { original_tag = ITA }
+			available = {
+			}
+
+			cost = 150
+			picture = ITA_minister_nicolo_caradini_jus
+			
+			traits = {
+				justice_minister
+				social_liberal
+				constitutional_magistrate
+			}
+			cancel_if_invalid = yes
+		}
+		ITA_minister_vittorio_baldini_confalonieri_jus = {
+			allowed  = { original_tag = ITA }
+			available = {
+			}
+
+			cost = 150
+			picture = ITA_minister_vittorio_baldini_confalonieri_jus
+			
+			traits = {
+				justice_minister
+				market_liberal
+				strict_judge
+			}
+			cancel_if_invalid = yes
+		}
+		ITA_minister_achille_marazza_jus = {
+			allowed  = { original_tag = ITA }
+			available = {
+			}
+
+			cost = 150
+			picture = ITA_minister_achille_marazza_jus
+			
+			traits = {
+				justice_minister
+				social_conservative
+				constitutional_magistrate
+			}
+			cancel_if_invalid = yes
+		}
+		ITA_minister_adalberto_di_genova_jus = {
+			allowed  = { original_tag = ITA }
+			available = {
+			}
+
+			cost = 150
+			picture = ITA_minister_adalberto_di_genova_jus
+			
+			traits = {
+				justice_minister
+				authoritarian_democrat
+				biased_attorney
+			}
+			cancel_if_invalid = yes
+		}
+	}
+
+	interior_minister = {
+		ITA_minister_giuseppe_romita_int = {
+			allowed  = { original_tag = ITA }
+			available = {
+			}
+
+			cost = 150
+			picture = ITA_minister_giuseppe_romita_int
+			
+			traits = {
+				interior_minister
+				social_democrat
+				silent_lawyer
+			}
+			cancel_if_invalid = yes
+		}
+		ITA_minister_ferruccio_parri_int = {
+			allowed  = { original_tag = ITA }
+			available = {
+			}
+
+			cost = 150
+			picture = ITA_minister_ferruccio_parri_int
+			
+			traits = {
+				interior_minister
+				revolutionary_republican
+				man_of_the_people
+			}
+			cancel_if_invalid = yes
+		}
+		ITA_minister_alessandro_scotti_int = {
+			allowed  = { original_tag = ITA }
+			available = {
+			}
+
+			cost = 150
+			picture = ITA_minister_alessandro_scotti_int
+			
+			traits = {
+				interior_minister
+				social_liberal
+				health_and_safety
+			}
+			cancel_if_invalid = yes
+		}
+		ITA_minister_luciano_jona_int = {
+			allowed  = { original_tag = ITA }
+			available = {
+			}
+
+			cost = 150
+			picture = ITA_minister_luciano_jona_int
+			
+			traits = {
+				interior_minister
+				market_liberal
+				crime_fighter
+			}
+			cancel_if_invalid = yes
+		}
+		ITA_minister_edoardo_agnelli_int = {
+			allowed  = { original_tag = ITA }
+			available = {
+			}
+
+			cost = 150
+			picture = ITA_minister_edoardo_agnelli_int
+			
+			traits = {
+				interior_minister
+				market_liberal
+				media_magnate
+			}
+			cancel_if_invalid = yes
+		}
+		ITA_minister_antonio_segni_int = {
+			allowed  = { original_tag = ITA }
+			available = {
+			}
+
+			cost = 150
+			picture = ITA_minister_antonio_segni_int
+			
+			traits = {
+				interior_minister
+				social_conservative
+				silent_lawyer
+			}
+			cancel_if_invalid = yes
+		}
+		ITA_minister_antonio_toselli_int = {
+			allowed  = { original_tag = ITA }
+			available = {
+			}
+
+			cost = 150
+			picture = ITA_minister_antonio_toselli_int
+			
+			traits = {
+				interior_minister
+				social_conservative
+				compassionate_gentleman
+			}
+			cancel_if_invalid = yes
+		}
+		ITA_minister_mario_roatta_int = {
+			allowed  = { original_tag = ITA }
+			available = {
+			}
+			visible = {
+				NOT = {
+					has_country_flag = ITA_roatta_purged
+				}
+			}
+
+			cost = 150
+			picture = ITA_minister_mario_roatta_int
+			
+			traits = {
+				interior_minister
+				authoritarian_democrat
+				prince_of_terror
+			}
+			cancel_if_invalid = yes
+		}
+	}
+	
+	head_of_intel = {
+		ITA_minister_domenico_chiaramello_intel = {
+			allowed  = { original_tag = ITA }
+			available = {
+			}
+
+			cost = 150
+			picture = ITA_minister_domenico_chiaramello_intel
+			
+			traits = {
+				head_of_intel
+				social_democrat
+				industrial_specialist
+			}
+			cancel_if_invalid = yes
+		}
+		ITA_minister_guido_secreto_intel = {
+			allowed  = { original_tag = ITA }
+			available = {
+			}
+
+			cost = 150
+			picture = ITA_minister_guido_secreto_intel
+			
+			traits = {
+				head_of_intel
+				social_liberal
+				political_specialist
+			}
+			cancel_if_invalid = yes
+		}
+		ITA_minister_manlio_brosio_intel = {
+			allowed  = { original_tag = ITA }
+			available = {
+			}
+
+			cost = 150
+			picture = ITA_minister_manlio_brosio_intel
+			
+			traits = {
+				head_of_intel
+				market_liberal
+				dismal_enigma
+			}
+			cancel_if_invalid = yes
+		}
+		ITA_minister_luigi_chatrian_intel = {
+			allowed  = {
+				original_tag = ITA
+				NOT = {
+					has_country_flag = ITA_chatrian_purged
+				}
+			}
+			available = {
+			}
+			visible = {
+				NOT = {
+					has_country_flag = ITA_chatrian_purged
+				}
+			}
+			
+			allowed_to_remove = {
+				custom_trigger_tooltip = {
+					tooltip = KRG_ITA_this_guy_is_too_important_to_remove
+					always = no
+				}
+			}
+
+			cost = 150
+			picture = ITA_minister_luigi_chatrian_intel
+			
+			traits = {
+				head_of_intel
+				social_conservative
+				political_specialist
+			}
+			cancel_if_invalid = yes
+		}
+		ITA_minister_mario_roatta_intel = {
+			allowed  = { original_tag = ITA }
+			available = {
+			}
+			visible = {
+				NOT = {
+					has_country_flag = ITA_roatta_purged
+				}
+			}
+			
+			allowed_to_remove = {
+				if = {
+					limit = {
+						OR = {
+							has_government = authoritarian_democrat
+							has_government = paternal_autocrat
+							has_government = national_populist
+						}
+					}
+					custom_trigger_tooltip = {
+						tooltip = KRG_ITA_this_guy_is_too_important_to_remove
+						always = no
+					}
+				}
+			}
+
+			cost = 150
+			picture = ITA_minister_mario_roatta_intel
+			
+			traits = {
+				head_of_intel
+				authoritarian_democrat
+				logistics_specialist
+			}
+			cancel_if_invalid = yes
+		}
+	}
+	### Design Companies ###
+	materiel_manufacturer_ideas = {
+		designer = yes
+		Accademia_Militare_di_Sassari = {
+			on_add = { log = "[GetDateText]: [Root.GetName]: add idea Accademia_Militare_di_Sassari" }
+			allowed = { 
+				original_tag = ITA
+			}
+			traits = { infantry_equipment_producer_offense_2 }
+			research_bonus = {
+				infantry_weapons = 0.1
+			}
+		}
+
+		automobili_agnelli = {
+			on_add = { log = "[GetDateText]: [Root.GetName]: add idea automobili_agnelli" }
+			allowed = { 
+				original_tag = ITA
+			}
+			available = { has_completed_focus = KRG_ITA_agnelli_deal_fiat }
+			visible = {
+				NOT = {
+					has_country_flag = ITA_fiat_aa_merged
+				}
+			}
+			traits = { motorised_equipment_producer_mass_1 }
+			research_bonus = {
+				motorized_equipment = 0.1
+			}
+		}
+	}
+	tank_manufacturer_ideas = {
+		ITA_company_fiat = {
+			allowed = {
+				original_tag = ITA
+			}
+			available = {
+			}
+			cost = 150
+			picture = ITA_company_fiat
+			
+			traits = {
+				small_tank_producer_mass_1
+			}
+			cancel_if_invalid = yes
+		}
+		ITA_company_lancia = {
+			allowed = {
+				original_tag = ITA
+			}
+
+			cost = 150
+			picture = ITA_company_lancia
+			
+			traits = {
+				medium_tank_producer_offense_1
+			}
+			cancel_if_invalid = yes
+		}
+		regio_arsenale_di_cagliari = {
+			on_add = { log = "[GetDateText]: [Root.GetName]: add idea regio_arsenale_di_cagliari" }
+			allowed = {
+				original_tag = ITA
+			}
+			traits = { artillery_producer_mass_1 }
+			research_bonus = {
+				artillery = 0.1
+			}
+		}
+	}
+	air_naval_manufacturer_ideas = {
+		ITA_accademia_navale_della_maddalena = {
+			on_add = { log = "[GetDateText]: [Root.GetName]: add idea ITA_accademia_navale_della_maddalena" }
+			allowed = {
+				original_tag = ITA
+			}
+			picture = accademia_navale_della_maddalena
+			traits = { small_ship_producer_mass_1 }
+			research_bonus = {
+				naval_equipment = 0.1
+			}
+		}
+		ITA_company_ansaldo_navale = {
+			allowed = {
+				original_tag = ITA
+			}
+			available = {
+			}
+
+			cost = 150
+			picture = ITA_company_Ansaldo
+			
+			traits = {
+				capital_ship_producer_offense_0
+			}
+			cancel_if_invalid = yes
+		}
+		ITA_company_fiat_aviazione = {
+			allowed = {
+				original_tag = ITA
+			}
+			available = {
+
+			}
+
+			cost = 150
+			picture = ITA_company_fiat
+			
+			traits = {
+				fighter_producer_defense_0
+			}
+			cancel_if_invalid = yes
+		}
+		ITA_company_piaggio = {
+			allowed = {
+				original_tag = ITA
+			}
+			available = {
+				
+			}
+
+			cost = 150
+			picture = fabbrica_aerei_piaggio
+			
+			traits = {
+				fighter_producer_offense_0
+			}
+			cancel_if_invalid = yes
+		}
+		ITA_accademia_aeronautica_di_cagliari = {
+			on_add = { log = "[GetDateText]: [Root.GetName]: add idea ITA_accademia_aeronautica_di_cagliari" }
+			picture = accademia_aeronautica_di_cagliari
+			allowed = {
+				original_tag = ITA
+			}
+			traits = { fighter_producer_mass_1 }
+			research_bonus = {
+				air_equipment = 0.1
+			}
+		}
+	}
+	industrial_concern = {# General Manufacturers
+		ITA_societa_mineraria_sarda = {
+			on_add = { log = "[GetDateText]: [Root.GetName]: add idea ITA_societa_mineraria_sarda" }
+			allowed = {
+				original_tag = ITA
+			}
+			traits = { industrial_manufacturer }
+			picture = societa_mineraria_sarda
+			modifier = {
+				production_speed_industrial_complex_factor = 0.15
+			}
+			research_bonus = {
+				industry_tech = 0.1
+			}
+		}
+		ITA_industrie_ansaldo = {
+			on_add = { log = "[GetDateText]: [Root.GetName]: add idea ITA_industrie_ansaldo" }
+			allowed = {
+				original_tag = ITA
+			}
+			picture = industrie_ansaldo
+			traits = { industrial_manufacturer }
+			modifier = {
+				production_speed_arms_factory_factor = 0.1
+				production_speed_industrial_complex_factor = 0.1
+			}
+			research_bonus = {
+				industry_tech = 0.1
+			}
+		}
+		ITA_universita_di_cagliari = {
+			on_add = { log = "[GetDateText]: [Root.GetName]: add idea ITA_universita_di_cagliari" }
+			allowed = {
+				original_tag = ITA
+			}
+			picture = universita_di_cagliari
+			traits = { electronics_manufacturer }
+			modifier = {
+				production_speed_radar_station_factor = 0.1
+			}
+			research_bonus = {
+				electronics = 0.1
+			}
+		}
+		ITA_ferrovie_meridionali_sarde = {
+			on_add = { log = "[GetDateText]: [Root.GetName]: add idea ITA_ferrovie_meridionali_sarde" }
+			allowed = {
+				original_tag = ITA
+			}
+			picture = ferrovie_meridionali_sarde
+			traits = { chemical_producer }
+			modifier = {
+				production_speed_synthetic_refinery_factor = 0.15
+			}
+			research_bonus = {
+				refining_tech = 0.1
+			}
+		}
+	}
+}

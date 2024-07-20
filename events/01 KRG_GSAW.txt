@@ -1,0 +1,609 @@
+add_namespace = krg_gsaw
+
+country_event = { ### Paraguay Civil War ###
+	id = krg_gsaw.1
+	title = krg_gsaw.1.t
+	desc = krg_gsaw.1.d
+	picture = GFX_event_picture
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_gsaw.1.a
+		hidden_effect = {
+			PRF = {
+				add_state_core = 688
+			}		
+			PAR = {
+				PRF = { inherit_technology = PREV }
+				every_owned_state = {
+					limit = { is_core_of = PRF }
+					PRF = { transfer_state = PREV }
+					teleport_armies = {
+						limit = { tag = PAR }
+						to_state_array = owned_controlled_states
+					}
+				}
+				set_nationality = {
+						target_country = PRF
+						character = PAR_rafael_franco
+				}
+			}
+			PRF = { 
+				set_politics = {
+					ruling_party = revolutionary_republican
+				}
+				promote_character = {
+					character = PAR_rafael_franco
+					ideology = revolutionary_republican_subtype
+				} 				
+			}
+		}
+	
+		PRF = { declare_war_on = { target = PAR type = civil_war } }
+		news_event = {
+			id = worldnews.270
+		}
+		
+		hidden_effect = {
+			PRF = {
+				load_oob = PRF
+				every_state = {
+					limit = {
+						is_core_of = PAR
+					}
+					add_core_of = PRF
+				}
+			}
+			BRA = {
+				country_event = {
+					id = krg_gsaw.2
+				}
+			}
+		}
+	}
+}
+
+country_event = { ### Brazil Arms Bejo Vargas
+	id = krg_gsaw.2
+	title = krg_gsaw.2.t
+	desc = krg_gsaw.2.d
+	#picture = ?
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event krg_gsaw.2"
+	}
+
+	option = {
+		name = krg_gsaw.2.a
+		
+		ARG = {
+			country_event = {
+				id = krg_gsaw.3
+				days = 63
+			}
+		}
+	}
+}
+
+country_event = { ### Bejo Vargas Declares Riograndense Republic
+	id = krg_gsaw.3
+	title = krg_gsaw.3.t
+	desc = krg_gsaw.3.d
+	#picture = ?
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event krg_gsaw.3"
+	}
+
+	option = {
+		name = krg_gsaw.3.a
+		RGS = {
+			add_state_core = 502
+			transfer_state = 502
+			set_state_controller = 502
+			load_oob = RGS_revolt
+			increase_accord_alignment = yes
+		}
+		1087 = {
+			set_demilitarized_zone = yes
+		}
+		ARG = {
+			country_event = {
+				id = krg_gsaw.4
+				days = 22
+			}
+		}
+		BRA = {
+			503 = {
+				set_demilitarized_zone = no
+			}
+			1086 = {
+				set_demilitarized_zone = no
+			}
+			1085 = {
+				set_demilitarized_zone = no
+			}
+			country_event = {
+				id = krg_bra_war.1
+				days = 5
+			}
+		}
+		news_event = {
+			id = worldnews.280
+		}
+	}
+}
+
+country_event = { ### Argentinian invasion
+	id = krg_gsaw.4
+	title = krg_gsaw.4.t
+	desc = krg_gsaw.4.d
+	#picture = ?
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event krg_gsaw.4"
+	}
+
+	option = {
+		name = krg_gsaw.4.a
+		declare_war_on = { 
+			target = RGS 
+			type = annex_everything 
+		}
+		create_faction = ARG_faction
+		ARG = { add_to_faction = PAR }
+		BRA = {
+			country_event = {
+				id = krg_gsaw.5
+				days = 2
+			}
+		}
+		news_event = {
+			id = worldnews.281
+		}
+	}
+}
+
+country_event = {# Argentina invades the Republic
+	id = krg_gsaw.5
+	title = krg_gsaw.5.t
+	desc = krg_gsaw.5.d
+	#picture = ?
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event krg_gsaw.5"
+	}
+
+	option = {
+		name = krg_gsaw.5.a
+		BRA = {
+			declare_war_on = { 
+				target = ARG type = puppet_wargoal_focus 
+			}
+			country_event = {
+				id = krg_bra.21
+				days = 10
+			}
+			create_faction = BRA_faction
+		}
+		set_global_flag = great_south_american_war # This is required for GER focus tree
+		BRA = { add_to_faction = RGS }
+		BRA = { add_to_faction = PRF }
+		BRA = { save_event_target_as = volunteer_target }
+		ENG = { send_volunteers_to_TARGET = yes }
+		NFA = { send_volunteers_to_TARGET = yes }
+		CAN = { send_volunteers_to_TARGET = yes }
+		ITA = { send_volunteers_to_TARGET = yes }
+	}
+}
+
+country_event = { ### Chilean Revolution
+	id = krg_gsaw.6
+	title = krg_gsaw.6.t
+	desc = krg_gsaw.6.d
+	#picture = ?
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event krg_gsaw.6"
+	}
+
+	option = {
+		name = krg_gsaw.6.a
+		CHL = {
+			set_politics ={
+				ruling_party = authoritarian_socialist
+				election_frequency = 48
+				elections_allowed = no
+			}
+			coal_add_rad_soc = yes
+			add_popularity = {
+				ideology = authoritarian_socialist
+				popularity = 0.10
+			}
+			add_popularity = {
+				ideology = radical_socialist
+				popularity = 0.15
+			}
+			add_popularity = {
+				ideology = revolutionary_republican
+				popularity = 0.05
+			}
+			declare_war_on = { target = ARG type = take_state }
+			news_event = {
+				id = worldnews.277
+			}
+		}
+		BRA = { add_to_faction = CHL }
+	}
+}
+
+country_event = { ### Brazil: sue for peace? (BRA lost chain)
+	id = krg_gsaw.7
+	title = krg_gsaw.7.t
+	desc = krg_gsaw.7.d
+	#picture = ?
+
+	fire_only_once = yes
+	
+	trigger = {
+		tag = BRA
+		has_war_with = ARG
+		is_valid_peace_target = yes
+		surrender_progress > 0.4
+		NOT = { has_global_flag = gsaw_ended }
+	}
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event krg_gsaw.7"
+	}
+
+	option = { # Sue for peace
+		name = krg_gsaw.7.a
+		add_stability = -0.25
+		ARG = {
+			country_event = krg_gsaw.8
+		}
+	}
+	
+	option = { # We will never surrender!
+		name = krg_gsaw.7.b
+		ai_chance = { base = 0 }
+		add_stability = -0.10
+		add_war_support = -0.2
+	}
+}
+
+country_event = { ### Argentina: Brazil is suing for peace (BRA lost chain)
+	id = krg_gsaw.8
+	title = krg_gsaw.8.t
+	desc = krg_gsaw.8.d
+	#picture = ?
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event krg_gsaw.8"
+	}
+
+	option = { # We accept their surrender
+		name = krg_gsaw.8.a
+		country_event = { 
+			id = krg_gsaw.10
+			days = 3
+		}
+	}
+	
+	option = { # No, lol
+		name = krg_gsaw.8.b
+		ai_chance = { base = 0 }
+		add_war_support = -0.25
+		BRA = {
+			country_event = krg_gsaw.9
+		}
+	}
+}
+
+country_event = { ### Brazil: Argentina refuses (BRA lost chain)
+	id = krg_gsaw.9
+	title = krg_gsaw.9.t
+	desc = krg_gsaw.9.d
+	#picture = ?
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event krg_gsaw.9"
+	}
+
+	option = {
+		name = krg_gsaw.9.a
+		add_war_support = 0.10
+	}
+}
+
+country_event = { ### Peace treaty: Brazil lost (BRA lost chain)
+	id = krg_gsaw.10
+	title = krg_gsaw.10.t
+	desc = krg_gsaw.10.d
+	#picture = ?
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event krg_gsaw.10"
+	}
+
+	option = {
+		name = krg_gsaw.10.a
+		add_political_power = 100
+		add_ideas = {
+			BRA_receiving_reparations
+		}
+		set_global_flag = gsaw_ended
+		annex_country = {
+			target = RGS
+			transfer_troops = no
+		}
+		RGS = {
+			remove_state_core = 502
+		}
+		BRA = {
+			white_peace_with_ROOT = yes
+			add_ideas = {
+				BRA_paying_reparations
+			}
+			503 = {
+				set_demilitarized_zone = yes
+			}
+			1086 = {
+				set_demilitarized_zone = yes
+			}
+			1085 = {
+				set_demilitarized_zone = yes
+			}
+			country_event = krg_gsaw.11
+			clear_accord_alignment = yes
+			increase_reichspakt_alignment = yes
+		}
+	}
+}
+
+country_event = { ### Brazil: Argentina accepted (BRA lost chain)
+	id = krg_gsaw.11
+	title = krg_gsaw.11.t
+	desc = krg_gsaw.11.d
+	#picture = ?
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event krg_gsaw.11"
+	}
+
+	option = {
+		name = krg_gsaw.11.a
+		add_political_power = -100
+		add_stability = -0.10
+		add_war_support = -0.30
+		add_popularity = {
+			ideology = revolutionary_republican
+			popularity = -0.15
+		}
+		add_popularity = {
+			ideology = national_populist
+			popularity = 0.10
+		}
+		country_event = {
+			id = krg_bra.22
+			days = 7
+		}
+		delete_unit_template_and_units = {
+			division_template = "Brigada Militar"
+		}
+		delete_unit_template_and_units = {
+			division_template = "Força Pública"
+		}
+		delete_unit_template_and_units = {
+			division_template = "Corpos Provisórios"
+		}
+	}
+}
+
+country_event = { ### Argentina: sue for peace? (ARG lost chain)
+	id = krg_gsaw.12
+	title = krg_gsaw.12.t
+	desc = krg_gsaw.12.d
+	#picture = ?
+
+	fire_only_once = yes
+	
+	trigger = {
+		tag = ARG
+		has_war_with = BRA
+		is_valid_peace_target = yes
+		surrender_progress > 0.4
+		NOT = { has_global_flag = gsaw_ended }
+	}
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event krg_gsaw.12"
+	}
+
+	option = { # Sue for peace
+		name = krg_gsaw.12.a
+		add_stability = -0.25
+		BRA = {
+			country_event = krg_gsaw.13
+		}
+	}
+	
+	option = { # We will never surrender!
+		name = krg_gsaw.12.b
+		ai_chance = { base = 0 }
+		add_stability = -0.10
+		add_war_support = -0.2
+	}
+}
+
+country_event = { ### Brazil: Argentina is suing for peace (ARG lost chain)
+	id = krg_gsaw.13
+	title = krg_gsaw.13.t
+	desc = krg_gsaw.13.d
+	#picture = ?
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event krg_gsaw.13"
+	}
+
+	option = { # We accept their surrender
+		name = krg_gsaw.13.a
+		country_event = { 
+			id = krg_gsaw.15
+			days = 3
+		}
+	}
+	
+	option = { # No, lol
+		name = krg_gsaw.13.b
+		ai_chance = { base = 0 }
+		add_war_support = -0.25
+		ARG = {
+			country_event = krg_gsaw.14
+		}
+	}
+}
+
+country_event = { ### Argentina: Brazil refuses (ARG lost chain)
+	id = krg_gsaw.14
+	title = krg_gsaw.14.t
+	desc = krg_gsaw.14.d
+	#picture = ?
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event krg_gsaw.14"
+	}
+
+	option = {
+		name = krg_gsaw.14.a
+		add_war_support = 0.10
+	}
+}
+
+country_event = { ### Peace treaty: Argentina lost (ARG lost chain)
+	id = krg_gsaw.15
+	title = krg_gsaw.15.t
+	desc = krg_gsaw.15.d
+	#picture = ?
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event krg_gsaw.15"
+	}
+
+	option = {
+		name = krg_gsaw.15.a
+		add_political_power = 100
+		add_ideas = {
+			BRA_receiving_reparations
+		}
+		set_global_flag = gsaw_ended
+		increase_accord_alignment = yes
+		dismantle_faction = yes
+		delete_unit_template_and_units = {
+			division_template = "Brigada Militar"
+		}
+		delete_unit_template_and_units = {
+			division_template = "Força Pública"
+		}
+		delete_unit_template_and_units = {
+			division_template = "Corpos Provisórios"
+		}
+		country_event = {
+			id = krg_bra.23
+			days = 10
+		}
+		annex_country = {
+			target = RGS
+			transfer_troops = no
+		}
+		RGS = {
+			remove_state_core = 502
+		}
+		ARG = {
+			white_peace_with_ROOT = yes
+			add_ideas = {
+				BRA_paying_reparations
+			}
+			dismantle_faction = yes
+			remove_state_claim = 502
+			remove_state_claim = 1087
+			remove_state_core = 300
+			add_state_claim = 300
+			ROOT = {
+				transfer_state = 1087
+			}
+			URG = {
+				transfer_state = 300
+			}
+			510 = {
+				set_demilitarized_zone = yes
+			}
+			clear_reichspakt_alignment = yes
+			country_event = krg_gsaw.16	
+		}
+		URG = {
+			increase_accord_alignment = yes
+			increase_accord_alignment = yes
+		}
+		give_guarantee = URG
+	}
+}
+
+country_event = { ### Argentina: Brazil accepted (ARG lost chain)
+	id = krg_gsaw.16
+	title = krg_gsaw.16.t
+	desc = krg_gsaw.16.d
+	#picture = ?
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event krg_gsaw.16"
+	}
+
+	option = {
+		name = krg_gsaw.16.a
+		add_political_power = -100
+		add_stability = -0.20
+		add_war_support = -0.30
+		add_popularity = {
+			ideology = revolutionary_republican
+			popularity = 0.20
+		}
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = -0.10
+		}
+		add_popularity = {
+			ideology = paternal_autocrat
+			popularity = -0.10
+		}
+	}
+}

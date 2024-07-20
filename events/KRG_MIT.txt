@@ -1,0 +1,81 @@
+add_namespace = krg_mit_invitation
+
+country_event = { # Invitation to Mitteleuropa 
+	id = krg_mit_invitation.1
+	title = krg_mit_invitation.1.t
+	desc = krg_mit_invitation.1.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_mit_invitation.1" }
+
+	is_triggered_only = yes
+
+	option = {
+		name = krg_mit_invitation.1.a
+		MIT_add_to_mitteleuropa = yes
+		if = {
+			limit = { 
+				check_variable = {
+					reichspakt_alignment_level < 2
+				}
+			}
+			set_temp_variable = { temp_level = 2 }
+			set_reichspakt_alignment = yes
+		}
+
+		ai_chance = {
+			base = 60
+			modifier = {
+				GER = {
+					is_ai = no
+				}
+				factor = 3
+			}
+		}
+	}
+
+	option = {
+		name = krg_mit_invitation.1.b
+		ai_chance = {
+			base = 40
+		}
+	}
+}
+
+country_event = { # Invitation to Mitteleuropa 
+	id = krg_mit_invitation.2
+	title = krg_mit_invitation.2.t
+	desc = krg_mit_invitation.1.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_mit_invitation.1" }
+
+	is_triggered_only = yes
+
+	option = {
+		name = krg_mit_invitation.1.a
+		MIT_add_to_mitteleuropa_partnership = yes
+		if = {
+			limit = { 
+				check_variable = {
+					reichspakt_alignment_level < 2
+				}
+			}
+			set_temp_variable = { temp_level = 2 }
+			set_reichspakt_alignment = yes
+		}
+
+		ai_chance = {
+			base = 60
+			modifier = {
+				GER = {
+					is_ai = no
+				}
+				factor = 3
+			}
+		}
+	}
+
+	option = {
+		name = krg_mit_invitation.1.b
+		ai_chance = {
+			base = 40
+		}
+	}
+}

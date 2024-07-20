@@ -1,0 +1,1607 @@
+add_namespace = krg_bra
+add_namespace = krg_bra_elections
+add_namespace = krg_bra_war
+add_namespace = krg_bra_ext
+
+### Internal Politics events ###
+
+country_event = {# Aranha returns from exile
+	id = krg_bra.1
+	title = krg_bra.1.t
+	desc = krg_bra.1.d
+	#picture = ?
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event krg_bra.1"
+	}
+
+	option = {
+		name = krg_bra.1.a
+		add_stability = -0.025
+		add_popularity = {
+			ideology = revolutionary_republican
+			popularity = 0.03
+		}
+	}
+}
+
+country_event = {# Paulista Elections
+	id = krg_bra.2
+	title = krg_bra.2.t
+	desc = krg_bra.2.d
+	#picture = ?
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event krg_bra.2"
+	}
+
+	option = {
+		name = krg_bra.2.a
+		add_political_power = -50
+		add_popularity = {
+			ideology = social_conservative
+			popularity = -0.05
+		}
+		add_popularity = {
+			ideology = market_liberal
+			popularity = 0.02
+		}
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = 0.03
+		}
+	}
+}
+
+country_event = {# Balance of Payment Crisis
+	id = krg_bra.3
+	title = krg_bra.3.t
+	desc = krg_bra.3.d
+	#picture = ?
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event krg_bra.3"
+	}
+
+	option = {
+		name = krg_bra.3.a
+		add_stability = -0.05
+		swap_ideas = {
+			remove_idea = BRA_high_foreign_exchange_reserves
+			add_idea = BRA_currency_crisis
+		}
+		country_event = {
+			id = krg_bra.4
+			days = 26
+		}
+	}
+}
+
+country_event = {# Brazil-NATO trade mission
+	id = krg_bra.4
+	title = krg_bra.4.t
+	desc = krg_bra.4.d
+	#picture = ?
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event krg_bra.4"
+	}
+
+	option = {
+		name = krg_bra.4.a
+		add_political_power = -50
+		remove_ideas_with_trait = foreign_minister_foreign_affairs
+		remove_ideas_with_trait = economy_minister_finance_minister
+		add_ideas = {
+			BRA_mario_de_pimentel_brandao_fm_ade
+			BRA_mario_brant_em_sco
+		}
+		NEE = {
+			country_event = {
+				id = krg_bra_ext.1
+				days = 1
+			}
+		}
+		hidden_effect = {
+			country_event = {
+				id = krg_bra.5
+				days = 45
+			}
+		}
+	}
+}
+
+country_event = {# BRA-ARG Agreement corruption scandal
+	id = krg_bra.5
+	title = krg_bra.5.t
+	desc = krg_bra.5.d
+	#picture = ?
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event krg_bra.5"
+	}
+
+	option = {
+		name = krg_bra.5.a
+		add_political_power = -100
+		add_popularity = {
+			ideology = social_conservative
+			popularity = -0.08
+		}
+		remove_ideas_with_trait = economy_minister_finance_minister
+		add_ideas = {
+			BRA_roberto_simonsen_em_ade
+		}
+		hidden_effect = {
+			country_event = {
+				id = krg_bra.6
+				days = 145
+			}
+		}
+	}
+}
+
+country_event = {# Simonsen's Plan
+	id = krg_bra.6
+	title = krg_bra.6.t
+	desc = krg_bra.6.d
+	#picture = ?
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event krg_bra.6"
+	}
+
+	option = {
+		name = krg_bra.6.a
+		if = {
+			limit = {
+				tag = BRA
+			}
+			add_popularity = {
+				ideology = authoritarian_democrat
+				popularity = 0.02
+			}
+			swap_ideas = {
+				remove_idea = BRA_currency_crisis
+				add_idea = BRA_aggressive_isi
+			}
+			hidden_effect = {
+				country_event = {
+					id = krg_bra.7
+					days = 70
+				}
+			}
+		}
+	}
+}
+
+country_event = {# Simonsen dies
+	id = krg_bra.7
+	title = krg_bra.7.t
+	desc = krg_bra.7.d
+	#picture = ?
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event krg_bra.7"
+	}
+
+	option = {
+		name = krg_bra.7.a
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = -0.10
+		}
+		remove_ideas_with_trait = foreign_minister_foreign_affairs
+		remove_ideas_with_trait = economy_minister_finance_minister
+		remove_ideas_with_trait = justice_minister_minister_of_justice
+		remove_ideas_with_trait = interior_minister_minister_of_the_interior
+		add_ideas = {
+			BRA_raul_fernandes_fm_sco
+			BRA_jose_maria_whitaker_em_sco
+			BRA_prado_kelly_jm_sco
+			BRA_je_prado_kelly_im_sco
+		}
+		swap_ideas = {
+			remove_idea = BRA_aggressive_isi
+			add_idea = BRA_currency_crisis
+		}
+		coal_rev_auth_dem = yes
+		set_party_name = {
+			ideology = authoritarian_democrat
+			long_name = BRA_authoritarian_democrat_party_2_long
+			name = BRA_authoritarian_democrat_party_2
+		}
+		set_party_name = {
+			ideology = paternal_autocrat
+			long_name = BRA_paternal_autocrat_party_2_long
+			name = BRA_paternal_autocrat_party_2
+		}
+	}
+}
+
+country_event = {# Aranha's Candidacy
+	id = krg_bra.8
+	title = krg_bra.8.t
+	desc = krg_bra.8.d
+	#picture = ?
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event krg_bra.8"
+	}
+
+	option = {
+		name = krg_bra.8.a
+		add_popularity = {
+			ideology = revolutionary_republican
+			popularity = 0.01
+		}
+		add_popularity = {
+			ideology = social_liberal
+			popularity = 0.05
+		}
+		promote_character = BRA_virgilio_de_melo_franco
+		country_event = {
+			id = krg_bra.10
+			days = 120
+		}
+		hidden_effect = {
+			set_party_name = {
+				ideology = social_liberal
+				long_name = BRA_social_liberal_party_2_long
+				name = BRA_social_liberal_party_2
+			}
+			set_party_name = {
+				ideology = social_conservative
+				long_name = BRA_social_conservative_party_2_long
+				name = BRA_social_conservative_party_2
+			}
+			country_event = {
+				id = krg_bra.9
+				days = 60
+			}
+		}
+	}
+}
+
+country_event = {# The PSR and the labor movement
+	id = krg_bra.9
+	title = krg_bra.9.t
+	desc = krg_bra.9.d
+	#picture = ?
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event krg_bra.9"
+	}
+
+	option = {
+		name = krg_bra.9.a
+		add_popularity = {
+			ideology = social_democrat
+			popularity = 0.05
+		}
+		promote_character = BRA_san_tiago_dantas
+		set_party_name = {
+			ideology = social_democrat
+			long_name = BRA_social_democrat_party_2_long
+			name = BRA_social_democrat_party_2
+		}
+		set_party_name = {
+			ideology = radical_socialist
+			long_name = BRA_radical_socialist_party_2_long
+			name = BRA_radical_socialist_party_2
+		}
+	}
+}
+
+country_event = {# Cirilo Júnior's Candidacy
+	id = krg_bra.10
+	title = krg_bra.10.t
+	desc = krg_bra.10.d
+	#picture = ?
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event krg_bra.10"
+	}
+
+	option = {
+		name = krg_bra.10.a
+		add_popularity = {
+			ideology = social_conservative
+			popularity = 0.03
+		}
+		hidden_effect = {
+			country_event = {
+				id = krg_bra.11
+				days = 30
+			}
+			country_event = {
+				id = krg_bra.12
+				days = 55
+			}
+		}
+	}
+}
+
+country_event = {# The oil campaign
+	id = krg_bra.11
+	title = krg_bra.11.t
+	desc = krg_bra.11.d
+	#picture = ?
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event krg_bra.11"
+	}
+
+	option = {
+		name = krg_bra.11.a
+		add_popularity = {
+			ideology = revolutionary_republican
+			popularity = 0.01
+		}
+		add_popularity = {
+			ideology = market_liberal
+			popularity = 0.01
+		}
+		add_popularity = {
+			ideology = national_populist
+			popularity = 0.01
+		}
+	}
+}
+
+country_event = {# A meeting with the Yankee ambassador
+	id = krg_bra.12
+	title = krg_bra.12.t
+	desc = krg_bra.12.d
+	#picture = ?
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event krg_bra.12"
+	}
+
+	option = {
+		name = krg_bra.12.a
+		add_popularity = {
+			ideology = social_liberal
+			popularity = 0.05
+		}
+		NEE = {
+			country_event = {
+				id = krg_bra_ext.2
+				days = 1
+			}
+		}
+	}
+}
+
+country_event = {# Canrobert's Coup D'État
+	id = krg_bra.13
+	title = krg_bra.13.t
+	desc = krg_bra.13.d
+	#picture = ?
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event krg_bra.13"
+	}
+
+	option = {
+		name = krg_bra.13.a
+		add_popularity = {
+			ideology = paternal_autocrat
+			popularity = -0.05
+		}
+	}
+}
+
+country_event = {# Aranha goes to the Accord
+	id = krg_bra.14
+	title = krg_bra.14.t
+	desc = krg_bra.14.d
+	#picture = ?
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event krg_bra.14"
+	}
+
+	option = {
+		name = krg_bra.14.a
+		CAL = {
+			country_event = {
+				id = krg_bra_ext.3
+				days = 3
+			}
+		}
+		increase_accord_alignment = yes
+		hidden_effect = {
+			news_event = {
+				id = worldnews.278
+			}
+		}
+	}
+}
+
+country_event = {# Aranha returns from the Accord
+	id = krg_bra.15
+	title = krg_bra.15.t
+	desc = krg_bra.15.d
+	#picture = ?
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event krg_bra.15"
+	}
+
+	option = {
+		name = krg_bra.15.a
+		add_popularity = {
+			ideology = revolutionary_republican
+			popularity = 0.01
+		}
+	}
+}
+
+country_event = {# Aranha takes office
+	id = krg_bra.16
+	title = krg_bra.16.t
+	desc = krg_bra.16.d
+	#picture = ?
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event krg_bra.16"
+	}
+
+	option = {
+		name = krg_bra.16.a
+		add_political_power = 100
+		set_politics = {
+			ruling_party = revolutionary_republican
+			election_frequency = 48
+			elections_allowed = yes
+		}
+		coal_rev_all = yes
+		coal_add_soc_dem = yes
+		coal_add_soc_lib = yes
+		coal_add_nat_pop = yes
+		remove_ideas_with_trait = head_of_government_president
+		remove_ideas_with_trait = foreign_minister_foreign_affairs
+		remove_ideas_with_trait = economy_minister_finance_minister
+		remove_ideas_with_trait = justice_minister_minister_of_justice
+		remove_ideas_with_trait = interior_minister_minister_of_the_interior
+		remove_ideas_with_trait = head_of_intel
+		add_ideas = {
+			BRA_osvaldo_euclides_de_sousa_aranha_hog_rre
+			BRA_carlos_martins_fm_rre
+			BRA_valentim_boucas_em_sli
+			BRA_jose_antonio_flores_da_cunha_jm_rre
+			BRA_flores_da_cunha_im_rre
+			BRA_henrique_teixeira_lott_hoi_rre
+		}
+		hidden_effect = {
+			country_event = {
+				id = krg_bra.17
+				days = 100
+			}
+			country_event = {
+				id = krg_bra.20
+				days = 200
+			}
+		}
+	}
+}
+
+country_event = {# BRA-NATO Trade Agreement
+	id = krg_bra.17
+	title = krg_bra.17.t
+	desc = krg_bra.17.d
+	#picture = ?
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event krg_bra.17"
+	}
+
+	option = {
+		name = krg_bra.17.a
+		NEE = {
+			country_event = {
+				id = krg_bra_ext.8
+				days = 10
+			}
+		}
+	}
+}
+
+country_event = {# BRA-NATO Trade Agreement Passes
+	id = krg_bra.18
+	title = krg_bra.18.t
+	desc = krg_bra.18.d
+	#picture = ?
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event krg_bra.18"
+	}
+
+	option = {
+		name = krg_bra.18.a
+		add_political_power = 100
+		remove_ideas = {
+			BRA_currency_crisis
+		}
+		add_timed_idea = {
+			idea = BRA_NATO_funding_loan
+			days = 1825
+		}
+		increase_accord_alignment = yes
+		hidden_effect = {
+			news_event = {
+				id = worldnews.279
+			}
+		}
+	}
+}
+
+country_event = {# BRA-NATO Trade Agreement Fails
+	id = krg_bra.19
+	title = krg_bra.19.t
+	desc = krg_bra.19.d
+	#picture = ?
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event krg_bra.19"
+	}
+
+	option = {
+		name = krg_bra.19.a
+		add_political_power = -50
+	}
+}
+
+country_event = {# The creation of Petrobrás
+	id = krg_bra.20
+	title = krg_bra.20.t
+	desc = krg_bra.20.d
+	#picture = ?
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event krg_bra.20"
+	}
+
+	option = {
+		name = krg_bra.20.a
+		add_political_power = 100
+		add_popularity = {
+			ideology = revolutionary_republican
+			popularity = 0.05
+		}
+		add_ideas = {
+			BRA_petrobras
+		}
+	}
+}
+
+
+
+country_event = {# Reforming the Constitution
+	id = krg_bra.21
+	title = krg_bra.21.t
+	desc = krg_bra.21.d
+	#picture = ?
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event krg_bra.21"
+	}
+
+	option = {
+		name = krg_bra.21.a
+		set_party_name = {
+			ideology = authoritarian_democrat
+			long_name = BRA_authoritarian_democrat_party_3_long
+			name = BRA_authoritarian_democrat_party_3
+		}
+		set_politics = {
+			ruling_party = authoritarian_democrat
+			election_frequency = 48
+			elections_allowed = no
+		}
+		add_country_leader_role = {
+			character = BRA_osvaldo_euclides_de_sousa_aranha
+			country_leader = {
+				ideology = authoritarian_democrat_subtype
+			}
+			promote_leader = yes
+		}
+		coal_rev_all = yes
+		coal_add_soc_dem = yes
+		coal_add_soc_lib = yes
+		coal_add_rev_rep = yes
+		coal_add_nat_pop = yes
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = 0.15
+		}
+		add_popularity = {
+			ideology = social_conservative
+			popularity = 0.05
+		}
+		add_popularity = {
+			ideology = revolutionary_republican
+			popularity = -0.05
+		}
+		add_popularity = {
+			ideology = social_liberal
+			popularity = -0.05
+		}
+		swap_ideas = {
+			remove_idea = KRG_presidential_democracy
+			add_idea = KRG_illiberal_democracy
+		}
+		swap_ideas = {
+			remove_idea = BRA_decrepit_political_system
+			add_idea = BRA_strengthened_executive
+		}
+		NEE = {
+			country_event = {
+				id = krg_bra_ext.9
+				days = 4
+			}
+		}
+	}
+}
+
+country_event = {# Defeat and military coup
+	id = krg_bra.22
+	title = krg_bra.22.t
+	desc = krg_bra.22.d
+	#picture = ?
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event krg_bra.22"
+	}
+
+	option = {
+		name = krg_bra.22.a
+		set_party_name = {
+			ideology = paternal_autocrat
+			long_name = BRA_paternal_autocrat_party_3_long
+			name = BRA_paternal_autocrat_party_3
+		}
+		set_politics = {
+			ruling_party = paternal_autocrat
+			election_frequency = 48
+			elections_allowed = no
+		}
+		add_country_leader_role = {
+			character = BRA_euclides_zenobio_da_costa
+			country_leader = {
+				ideology = paternal_autocrat_corporatism
+			}
+			promote_leader = yes
+		}
+		coal_rev_all = yes
+		add_stability = -0.10
+		add_popularity = {
+			ideology = paternal_autocrat
+			popularity = 0.15
+		}
+		swap_ideas = {
+			remove_idea = KRG_illiberal_democracy
+			add_idea = KRG_authoritarian_system
+		}
+		swap_ideas = {
+			remove_idea = BRA_discredited_army_leadership
+			add_idea = BRA_discredited_army_leadership_worse
+		}
+		swap_ideas = {
+			remove_idea = BRA_strengthened_executive
+			add_idea = BRA_political_turmoil
+		}
+		remove_ideas_with_trait = head_of_government_president
+		remove_ideas_with_trait = foreign_minister_foreign_affairs
+		remove_ideas_with_trait = economy_minister_finance_minister
+		remove_ideas_with_trait = justice_minister_minister_of_justice
+		remove_ideas_with_trait = interior_minister_minister_of_the_interior
+		remove_ideas_with_trait = head_of_intel
+		add_ideas = {
+			BRA_euclides_zenobio_da_costa_hog_ade
+			BRA_mario_de_pimentel_brandao_fm_ade
+			BRA_jose_maria_whitaker_em_sco
+			BRA_chico_ciencia_jm_pau
+			BRA_francisco_campos_im_pau
+			BRA_canrobert_pereira_da_costa_hoi_ade
+		}
+		hidden_effect = {
+			set_party_name = {
+				ideology = authoritarian_democrat
+				long_name = BRA_authoritarian_democrat_party_2_long
+				name = BRA_authoritarian_democrat_party_2
+			}
+			promote_character = BRA_ademar_de_barros
+		}
+	}
+}
+
+country_event = {# We won + Liberal Package
+	id = krg_bra.23
+	title = krg_bra.23.t
+	desc = krg_bra.23.d
+	#picture = ?
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event krg_bra.23"
+	}
+
+	option = {
+		name = krg_bra.23.a
+		set_politics = {
+			ruling_party = social_liberal
+			election_frequency = 48
+			elections_allowed = no
+		}
+		add_country_leader_role = {
+			character = BRA_osvaldo_euclides_de_sousa_aranha
+			country_leader = {
+				ideology = social_liberal_subtype
+			}
+			promote_leader = yes
+		}
+		add_country_leader_role = {
+			character = BRA_san_tiago_dantas
+			country_leader = {
+				ideology = revolutionary_republican_social_nationalism
+			}
+			promote_leader = yes
+		}
+		add_popularity = {
+			ideology = social_liberal
+			popularity = 0.05
+		}
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = -0.10
+		}
+		coal_rev_all = yes
+		coal_add_soc_dem = yes
+		coal_add_rev_rep = yes
+		remove_ideas = {
+			BRA_discredited_army_leadership
+		}
+		swap_ideas = {
+			remove_idea = KRG_illiberal_democracy
+			add_idea = KRG_presidential_democracy
+		}
+		swap_ideas = {
+			remove_idea = BRA_strengthened_executive
+			add_idea = BRA_promises_of_reform
+		}
+		remove_ideas_with_trait = justice_minister_minister_of_justice
+		remove_ideas_with_trait = interior_minister_minister_of_the_interior
+		add_ideas = {
+			BRA_milton_campos_jm_mli
+			BRA_milton_soares_campos_im_mli
+		}
+		country_event = {
+			id = krg_bra.24
+			days = 90
+		}
+		hidden_effect = {
+			set_party_name = {
+				ideology = revolutionary_republican
+				long_name = BRA_revolutionary_republican_party_2_long
+				name = BRA_revolutionary_republican_party_2
+			}
+			set_party_name = {
+				ideology = authoritarian_democrat
+				long_name = BRA_authoritarian_democrat_party_2_long
+				name = BRA_authoritarian_democrat_party_2
+			}
+			promote_character = BRA_ademar_de_barros
+		}
+	}
+}
+
+country_event = {# Elections take place
+	id = krg_bra.24
+	title = krg_bra.24.t
+	desc = krg_bra.24.d
+	#picture = ?
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event krg_bra.24"
+	}
+
+	option = {
+		name = krg_bra.24.a
+		add_stability = 0.05
+		promote_character = BRA_janio_quadros
+		promote_character = BRA_chico_ciencia
+		promote_character = BRA_carlos_lacerda
+		hidden_effect = {
+			country_event = {
+				id = krg_bra.25
+				days = 30
+			}
+			set_party_name = {
+				ideology = social_conservative
+				long_name = BRA_social_conservative_party_3_long
+				name = BRA_social_conservative_party_3
+			}
+			set_party_name = {
+				ideology = paternal_autocrat
+				long_name = BRA_paternal_autocrat_party_4_long
+				name = BRA_paternal_autocrat_party_4
+			}
+		}
+	}
+}
+
+country_event = {# The Constitutional Assembly is opened
+	id = krg_bra.25
+	title = krg_bra.25.t
+	desc = krg_bra.25.d
+	#picture = ?
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event krg_bra.25"
+	}
+
+	option = {
+		name = krg_bra.25.a
+		swap_ideas = {
+			remove_idea = BRA_promises_of_reform
+			add_idea = BRA_writing_constitution
+		}
+		hidden_effect = {
+			set_popularities = {
+				authoritarian_socialist = 1
+				radical_socialist = 4
+				social_democrat = 12
+				revolutionary_republican = 19
+				social_liberal = 24
+				market_liberal = 4
+				social_conservative = 10
+				authoritarian_democrat = 16 
+				paternal_autocrat = 5
+				national_populist = 5
+			}
+			country_event = {
+				id = krg_bra.26
+				days = 100
+			}
+		}
+	}
+}
+
+country_event = {# New factions appear
+	id = krg_bra.26
+	title = krg_bra.26.t
+	desc = krg_bra.26.d
+	#picture = ?
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event krg_bra.26"
+	}
+
+	option = {
+		name = krg_bra.26.a
+		add_popularity = {
+			ideology = social_liberal
+			popularity = -0.04
+		}
+		add_popularity = {
+			ideology = market_liberal
+			popularity = 0.04
+		}
+		coal_add_mar_lib = yes
+		hidden_effect = {
+			set_party_name = {
+				ideology = social_liberal
+				long_name = BRA_social_liberal_party_3_long
+				name = BRA_social_liberal_party_3
+			}
+			set_party_name = {
+				ideology = market_liberal
+				long_name = BRA_market_liberal_party_2_long
+				name = BRA_market_liberal_party_2
+			}
+			country_event = {
+				id = krg_bra.27
+				days = 100
+			}
+		}
+	}
+}
+
+country_event = {# The orientation of the PSR
+	id = krg_bra.27
+	title = krg_bra.27.t
+	desc = krg_bra.27.d
+	#picture = ?
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event krg_bra.27"
+	}
+
+	option = { #Right
+		name = krg_bra.27.a
+		add_popularity = {
+			ideology = social_liberal
+			popularity = 0.01
+		}
+		hidden_effect = {
+			country_event = {
+				id = krg_bra.28
+				days = 40
+			}
+		}
+	}
+	
+	#option = { #Left
+	#	name = krg_bra.27.b
+	#	add_popularity = {
+	#		ideology = social_democrat
+	#		popularity = 0.01
+	#	}
+	#	hidden_effect = {
+	#		country_event = {
+	#			id = krg_bra.28
+	#			days = 40
+	#		}
+	#	}
+	#}
+}
+
+country_event = {# Indirect Elections
+	id = krg_bra.28
+	title = krg_bra.28.t
+	desc = krg_bra.28.d
+	#picture = ?
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event krg_bra.28"
+	}
+
+	option = { #Virgílio de Melo Franco
+		name = krg_bra.28.a
+		set_politics = {
+			ruling_party = social_liberal
+			election_frequency = 48
+			elections_allowed = yes
+		}
+		promote_character = BRA_virgilio_de_melo_franco
+		add_popularity = {
+			ideology = market_liberal
+			popularity = 0.02
+		}
+		swap_ideas = {
+			remove_idea = BRA_writing_constitution
+			add_idea = BRA_liberal_constitution
+		}
+		coal_rev_all = yes
+		coal_add_soc_dem = yes
+		coal_add_rev_rep = yes
+		coal_add_mar_lib = yes
+		remove_ideas_with_trait = head_of_government_president
+		remove_ideas_with_trait = foreign_minister_foreign_affairs
+		remove_ideas_with_trait = economy_minister_finance_minister
+		remove_ideas_with_trait = justice_minister_minister_of_justice
+		remove_ideas_with_trait = interior_minister_minister_of_the_interior
+		add_ideas = {
+			BRA_virgilio_de_melo_franco_hog_mli
+			BRA_vasco_leitao_da_cunha_fm_mli
+			BRA_roberto_campos_em_mli
+			BRA_heráclito_fontoura_sobral_pinto_jm_sli
+			BRA_sobral_pinto_im_sli
+		}
+		hidden_effect = {
+			country_event = {
+				id = krg_bra.29
+				days = 90
+			}
+		}
+	}
+	
+	#option = { #San Tiago Dantas
+	#	name = krg_bra.28.b
+	#	set_politics = {
+	#		ruling_party = revolutionary_republican
+	#		election_frequency = 48
+	#		elections_allowed = yes
+	#	}
+	#	add_popularity = {
+	#		ideology = social_democrat
+	#		popularity = 0.02
+	#	}
+	#	swap_ideas = {
+	#		remove_idea = BRA_writing_constitution
+	#		add_idea = BRA_dirigist_constitution
+	#	}
+	#	coal_rev_all = yes
+	#	coal_add_soc_dem = yes
+	#	coal_add_soc_lib = yes
+	#	coal_add_aut_dem = yes
+	#	remove_ideas_with_trait = head_of_government_president
+	#	remove_ideas_with_trait = foreign_minister_foreign_affairs
+	#	remove_ideas_with_trait = economy_minister_finance_minister
+	#	remove_ideas_with_trait = justice_minister_minister_of_justice
+	#	remove_ideas_with_trait = interior_minister_minister_of_the_interior
+	#	add_ideas = {
+	#		BRA_san_tiago_dantas_hog_sde
+	#		BRA_hermes_lima_fm_sde
+	#		BRA_celso_furtado_em_rre
+	#		BRA_joão_mangabeira_jm_sde
+	#		BRA_mangabeira_joao_im_sde
+	#	}
+	#	decrease_accord_alignment = yes
+	#	hidden_effect = {
+	#		country_event = {
+	#			id = krg_bra.30
+	#			days = 90
+	#		}
+	#	}
+	#}
+}
+
+country_event = {# The PSR left leaves
+	id = krg_bra.29
+	title = krg_bra.29.t
+	desc = krg_bra.29.d
+	#picture = ?
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event krg_bra.29"
+	}
+
+	option = {
+		name = krg_bra.29.a
+		set_politics = {
+			ruling_party = market_liberal
+		}
+		add_country_leader_role = {
+			character = BRA_virgilio_de_melo_franco
+			country_leader = {
+				ideology = market_liberal_liberal_conservatism
+			}
+			promote_leader = yes
+		}
+		add_popularity = {
+			ideology = market_liberal
+			popularity = 0.01
+		}
+		coal_rev_all = yes
+		coal_add_soc_lib = yes
+		hidden_effect = {
+			set_party_name = {
+					ideology = social_democrat
+					long_name = BRA_social_democrat_party_3_long
+					name = BRA_social_democrat_party_3
+				}
+				set_party_name = {
+					ideology = revolutionary_republican
+					long_name = BRA_revolutionary_republican_party_3_long
+					name = BRA_revolutionary_republican_party_3
+				}
+				set_party_name = {
+					ideology = social_liberal
+					long_name = BRA_social_liberal_party_4_long
+					name = BRA_social_liberal_party_4
+				}
+				set_party_name = {
+					ideology = market_liberal
+					long_name = BRA_market_liberal_party_3_long
+					name = BRA_market_liberal_party_3
+				}
+		}
+	}
+}
+
+#country_event = {# The PSR right leaves
+#	id = krg_bra.30
+#	title = krg_bra.30.t
+#	desc = krg_bra.30.d
+#	#picture = ?
+#
+#	is_triggered_only = yes
+#	fire_only_once = yes
+#	immediate = {
+#		log = "[GetDateText]: [Root.GetName]: event krg_bra.30"
+#	}
+#
+#	option = {
+#		name = krg_bra.30.a
+#		set_politics = {
+#			ruling_party = social_democrat
+#		}
+#		add_popularity = {
+#			ideology = social_democrat
+#			popularity = 0.01
+#		}
+#		coal_rev_all = yes
+#		coal_add_rev_rep = yes
+#		coal_add_aut_dem = yes
+#		hidden_effect = {
+#			promote_character = BRA_virgilio_de_melo_franco
+#			set_party_name = {
+#				ideology = social_democrat
+#				long_name = BRA_social_democrat_party_4_long
+#				name = BRA_social_democrat_party_4
+#			}
+#			set_party_name = {
+#				ideology = revolutionary_republican
+#				long_name = BRA_revolutionary_republican_party_4_long
+#				name = BRA_revolutionary_republican_party_4
+#			}
+#			set_party_name = {
+#				ideology = social_liberal
+#				long_name = BRA_social_liberal_party_5_long
+#				name = BRA_social_liberal_party_5
+#			}
+#			set_party_name = {
+#				ideology = market_liberal
+#				long_name = BRA_market_liberal_party_4_long
+#				name = BRA_market_liberal_party_4
+#			}
+#		}
+#	}
+#}
+
+### War events ###
+
+country_event = {# The São Borja Republic
+	id = krg_bra_war.1
+	title = krg_bra_war.1.t
+	desc = krg_bra_war.1.d
+	#picture = ?
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event krg_bra_war.1"
+	}
+
+	option = {
+		name = krg_bra_war.1.a
+		load_oob = BRA_state_militias
+		country_event = {
+			id = krg_bra_war.2
+			days = 4
+		}
+	}
+}
+
+country_event = {# Makeshift Defenses
+	id = krg_bra_war.2
+	title = krg_bra_war.2.t
+	desc = krg_bra_war.2.d
+	#picture = ?
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event krg_bra_war.2"
+	}
+
+	option = {
+		name = krg_bra_war.2.a
+		1085 = {
+			if = {
+				limit = {
+					is_controlled_by = BRA 
+				}
+				add_building_construction = {
+					type = bunker
+					level = 3
+					instant_build = yes
+					province = 10447
+				}
+				add_building_construction = {
+					type = bunker
+					level = 2
+					instant_build = yes
+					province = 1598
+				}
+				add_building_construction = {
+					type = bunker
+					level = 1
+					instant_build = yes
+					province = 7638
+				}
+			}
+		}
+		1086 = {
+			if = {
+				limit = {
+					is_controlled_by = BRA 
+				}
+				add_building_construction = {
+					type = bunker
+					level = 2
+					instant_build = yes
+					province = 10405
+				}
+				add_building_construction = {
+					type = coastal_bunker
+					level = 2
+					instant_build = yes
+					province = 10405
+				}
+			}
+		}
+		503 = {
+			if = {
+				limit = {
+					is_controlled_by = BRA 
+				}
+				add_building_construction = {
+					type = bunker
+					level = 2
+					instant_build = yes
+					province = 8181
+				}
+			}
+		}
+		501 = {
+			if = {
+				limit = {
+					is_controlled_by = BRA 
+				}
+				add_building_construction = {
+					type = bunker
+					level = 2
+					instant_build = yes
+					province = 10513
+				}
+				add_building_construction = {
+					type = bunker
+					level = 1
+					instant_build = yes
+					province = 5112
+				}
+			}
+		}
+		1159 = {
+			if = {
+				limit = {
+					is_controlled_by = BRA 
+				}
+				add_building_construction = {
+					type = bunker
+					level = 3
+					instant_build = yes
+					province = 5095
+				}
+			}
+		}
+		country_event = {
+			id = krg_bra_war.3
+			days = 20
+		}
+	}
+}
+
+country_event = {# Nonviolent resistance
+	id = krg_bra_war.3
+	title = krg_bra_war.3.t
+	desc = krg_bra_war.3.d
+	#picture = ?
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event krg_bra_war.2"
+	}
+
+	option = {
+		name = krg_bra_war.3.a
+		add_ideas = {
+			BRA_passive_defense
+		}
+		503 = {
+			add_dynamic_modifier = {
+				modifier = BRA_passive_defense_state
+			}
+		}
+		1086 = {
+			add_dynamic_modifier = {
+				modifier = BRA_passive_defense_state
+			}
+		}
+		1085 = {
+			add_dynamic_modifier = {
+				modifier = BRA_passive_defense_state
+			}
+		}
+	}
+}
+
+
+
+
+### Foreign Policy Flavor Events ###
+
+country_event = {# NATO trade mission (NEE perspective)
+	id = krg_bra_ext.1
+	title = krg_bra_ext.1.t
+	desc = krg_bra_ext.1.d
+	#picture = ?
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event krg_bra_ext.1"
+	}
+
+	option = {
+		name = krg_bra_ext.1.a
+	}
+}
+
+country_event = {# A meeting with the Yankee ambassador (NEE perspective)
+	id = krg_bra_ext.2
+	title = krg_bra_ext.2.t
+	desc = krg_bra_ext.2.d
+	#picture = ?
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event krg_bra_ext.2"
+	}
+
+	option = {
+		name = krg_bra_ext.2.a
+	}
+}
+
+country_event = {# Aranha visits Sacramento (CAL perspective)
+	id = krg_bra_ext.3
+	title = krg_bra_ext.3.t
+	desc = krg_bra_ext.3.d
+	#picture = ?
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event krg_bra_ext.3"
+	}
+
+	option = {
+		name = krg_bra_ext.3.a
+		CAN = {
+			country_event = {
+				id = krg_bra_ext.4
+				days = 7
+			}
+		}
+	}
+}
+
+country_event = {# Aranha visits Ottawa (CAN perspective)
+	id = krg_bra_ext.4
+	title = krg_bra_ext.4.t
+	desc = krg_bra_ext.4.d
+	#picture = ?
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event krg_bra_ext.4"
+	}
+
+	option = {
+		name = krg_bra_ext.4.a
+		NEE = {
+			country_event = {
+				id = krg_bra_ext.5
+				days = 5
+			}
+		}
+	}
+}
+
+country_event = {# Aranha visits Boston (NEE perspective)
+	id = krg_bra_ext.5
+	title = krg_bra_ext.5.t
+	desc = krg_bra_ext.5.d
+	#picture = ?
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event krg_bra_ext.5"
+	}
+
+	option = {
+		name = krg_bra_ext.5.a
+		NFA = {
+			country_event = {
+				id = krg_bra_ext.6
+				days = 7
+			}
+		}
+	}
+}
+
+country_event = {# Aranha visits Marseille (NFA perspective)
+	id = krg_bra_ext.6
+	title = krg_bra_ext.6.t
+	desc = krg_bra_ext.6.d
+	#picture = ?
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event krg_bra_ext.6"
+	}
+
+	option = {
+		name = krg_bra_ext.6.a
+		ITA = {
+			country_event = {
+				id = krg_bra_ext.7
+				days = 5
+			}
+		}
+	}
+}
+
+country_event = {# Aranha visits Rome (ITA perspective)
+	id = krg_bra_ext.7
+	title = krg_bra_ext.7.t
+	desc = krg_bra_ext.7.d
+	#picture = ?
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event krg_bra_ext.7"
+	}
+
+	option = {
+		name = krg_bra_ext.7.a
+		BRA = {
+			country_event = {
+				id = krg_bra.15
+				days = 7
+			}
+		}
+	}
+}
+
+country_event = {# BRA-NATO trade deal (NEE perspective)
+	id = krg_bra_ext.8
+	title = krg_bra_ext.8.t
+	desc = krg_bra_ext.8.d
+	#picture = ?
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event krg_bra_ext.8"
+	}
+
+	option = {
+		name = krg_bra_ext.8.a
+		BRA = {
+			country_event = krg_bra.18
+		}
+	}
+}
+
+country_event = {# A Brazilian Union State? (NEE perspective)
+	id = krg_bra_ext.9
+	title = krg_bra_ext.9.t
+	desc = krg_bra_ext.9.d
+	#picture = ?
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event krg_bra_ext.9"
+	}
+
+	option = {
+		name = krg_bra_ext.9.a
+	}
+}
+
+### Election Events ###
+
+country_event = {# 1950 elections
+	id = krg_bra_elections.1
+	title = krg_bra_elections.1.t
+	desc = krg_bra_elections.1.d
+	#picture = ?
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event krg_bra_elections.1"
+		hidden_effect = {
+			country_event = {
+				id = krg_bra.13
+				days = 5
+			}
+			country_event = {
+				id = krg_bra.14
+				days = 30
+			}
+			country_event = {
+				id = krg_bra.16
+				days = 92
+			}
+		}
+	}
+
+	option = { #Osvaldo Aranha
+		name = krg_bra_elections.1.a
+		add_popularity = {
+			ideology = revolutionary_republican
+			popularity = 0.03
+		}
+		add_popularity = {
+			ideology = social_democrat
+			popularity = 0.02
+		}
+		hidden_effect = {
+			news_event = {
+				id = worldnews.261
+			}
+		}
+	}
+}

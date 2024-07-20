@@ -1,0 +1,650 @@
+add_namespace = krg_spr
+add_namespace = krg_spr_news
+
+#Into Events
+	country_event = { #Intro 1
+		id = krg_spr.0
+		title = krg_spr.0.t
+		desc = krg_spr.0.d
+		#picture = ?
+
+		is_triggered_only = yes
+		fire_only_once = yes
+
+		option = {
+			name = krg_spr.0.a
+			country_event = {
+				id = krg_spr.1
+			}
+		}
+		option = {
+			name = krg_spr.0.b
+			country_event = {
+				id = krg_spr.2
+			}
+		}
+		option = {
+			name = krg_spr.0.c
+		}
+	}
+	country_event = { #Intro 2
+		id = krg_spr.1
+		title = krg_spr.1.t
+		desc = krg_spr.1.d
+		#picture = ?
+
+		is_triggered_only = yes
+
+		option = {
+			name = krg_spr.1.a
+			country_event = {
+				id = krg_spr.2
+			}
+		}
+		option = {
+			name = krg_spr.1.b
+		}
+	}
+	country_event = { #Intro 3
+		id = krg_spr.2
+		title = krg_spr.2.t
+		desc = krg_spr.2.d
+		#picture = ?
+
+		is_triggered_only = yes
+
+		option = {
+			name = krg_spr.2.a
+			country_event = {
+				id = krg_spr.1
+			}
+		}
+		option = {
+			name = krg_spr.2.b
+		}
+	}
+
+#0.1 Events
+	country_event = { #Communes Banned
+		id = krg_spr.3
+		title = krg_spr.3.t
+		desc = krg_spr.3.d
+		#picture = ?
+
+		is_triggered_only = yes
+		fire_only_once = yes
+
+		option = {
+			name = krg_spr.3.a
+			coal_rev_auth_soc = yes
+			coal_rev_rad_soc = yes
+			remove_ideas = SPR_divided_government
+			swap_ideas = {
+				remove_idea = SPR_unrulely_communes
+				add_idea = SPR_commune_war
+			}
+			165 = {
+				set_demilitarized_zone = yes
+			}
+			166 = {
+				set_demilitarized_zone = yes
+			}
+			167 = {
+				set_demilitarized_zone = yes
+			}
+			168 = {
+				set_demilitarized_zone = yes
+			}
+			173 = {
+				set_demilitarized_zone = yes
+			}
+			118 = {
+				set_demilitarized_zone = yes
+			}
+			remove_ideas_with_trait = radical_socialist
+			add_ideas = SPR_Rodolfo_Llopis_hog_sde
+			add_ideas = SPR_Jose_Giral_fm_sde
+			add_ideas = SPR_Rafael_Sanchez_Guerra_hoi_sde
+			country_event = {
+				id = krg_spr.4
+				days = 250
+			}
+			news_event = {
+				id = worldnews.401
+			}
+			set_country_flag = SPR_communes_banned
+		}
+	}
+	country_event = { #Commune War over
+		id = krg_spr.4
+		title = krg_spr.4.t
+		desc = krg_spr.4.d
+		#picture = ?
+
+		is_triggered_only = yes
+		fire_only_once = yes
+
+		option = {
+			name = krg_spr.4.a
+			remove_ideas = SPR_commune_war
+			swap_ideas = {
+				remove_idea = KRG_union_democracy
+				add_idea = KRG_peoples_democracy
+			}
+			coal_add_rev_rep = yes
+			coal_add_soc_lib = yes
+			set_popularities = {
+				authoritarian_socialist = 0
+				radical_socialist = 3
+				social_democrat = 42
+				revolutionary_republican = 12
+				social_liberal = 7
+				market_liberal = 3
+				social_conservative = 25
+				authoritarian_democrat = 8
+				paternal_autocrat = 0
+				national_populist = 0
+			}
+			165 = {
+				set_demilitarized_zone = no
+			}
+			166 = {
+				set_demilitarized_zone = no
+			}
+			167 = {
+				set_demilitarized_zone = no
+			}
+			168 = {
+				set_demilitarized_zone = no
+			}
+			173 = {
+				set_demilitarized_zone = no
+			}
+			118 = {
+				set_demilitarized_zone = no
+			}
+			hidden_effect = {
+				country_event = {
+					id = krg_spr.5
+					days = 60
+				}
+			}
+		}
+	}
+	country_event = { #Spain Joins the Accord
+		id = krg_spr.5
+		title = krg_spr.5.t
+		desc = krg_spr.5.d
+		#picture = ?
+
+		is_triggered_only = yes
+		fire_only_once = yes
+
+		option = {
+			name = krg_spr.5.a
+			SPR = {
+				set_temp_variable =  { temp_level = 3 }
+			}
+			accord_issue_1_effect = yes
+			hidden_effect = {
+				country_event = {
+					id = krg_spr.6
+					days = 145
+				}
+				set_variable = { global.accord_issue_check = 1 }
+				for_each_scope_loop = {
+					array = global.accord_voting_country_array
+
+					activate_mission = accord_issue_1
+				}
+			}
+		}
+	}
+	country_event = { #The 1950 elections
+		id = krg_spr.6
+		title = krg_spr.6.t
+		desc = krg_spr.6.d
+		#picture = ?
+
+		is_triggered_only = yes
+		fire_only_once = yes
+
+		option = { #PSOE Victory
+			name = krg_spr.6.a
+			coal_rev_rev_rep = yes
+			coal_rev_soc_lib = yes
+			set_popularities = {
+				authoritarian_socialist = 0
+				radical_socialist = 0
+				social_democrat = 52
+				revolutionary_republican = 5
+				social_liberal = 8
+				market_liberal = 4
+				social_conservative = 17
+				authoritarian_democrat = 11
+				paternal_autocrat = 2
+				national_populist = 1
+			}
+			hidden_effect = {
+				country_event = {
+					id = krg_spr.7
+					days = 30
+				}
+				country_event = {
+					id = krg_spr.9
+					days = 1461
+				}
+				news_event = {
+					id = worldnews.402
+				}
+			}
+		}
+		option = { #PEC-PRR-UR Victory
+			name = krg_spr.6.b
+			set_politics = {
+				ruling_party = social_conservative
+				election_frequency = 48
+				elections_allowed = yes
+			}
+			coal_add_rev_rep = yes
+			coal_add_soc_lib = yes
+			coal_add_mar_lib = yes
+			coal_add_soc_con = yes
+			coal_add_auth_dem = yes
+			set_popularities = {
+				authoritarian_socialist = 1
+				radical_socialist = 4
+				social_democrat = 40
+				revolutionary_republican = 7
+				social_liberal = 12
+				market_liberal = 3
+				social_conservative = 25
+				authoritarian_democrat = 8
+				paternal_autocrat = 0
+				national_populist = 0
+			}
+			swap_ideas = {
+				remove_idea = SPR_right_wing_resistance
+				add_idea = SPR_left_wing_resistance
+			}
+			hidden_effect = {
+				country_event = {
+					id = krg_spr.7
+					days = 30
+				}
+				country_event = {
+					id = krg_spr.9
+					days = 1461
+				}
+				news_event = {
+					id = worldnews.403
+				}
+			}
+		}
+	}
+	country_event = { #Moroccan Revolution - Attepmted assasination of Mohammed V
+		id = krg_spr.7
+		title = krg_spr.7.t
+		desc = krg_spr.7.d
+		#picture = ?
+
+		is_triggered_only = yes
+		fire_only_once = yes
+
+		option = {
+			name = krg_spr.7.a
+			add_war_support = 0.05
+			add_stability = -0.1
+			hidden_effect = {
+				MOR = {
+					country_event = {
+						id = krg_mcw.0
+						days = 	7
+					}
+				}
+			}
+		}
+	}
+	country_event = { #2nd Hispano-Moroccan War - Nationalists kill 17 Spaniards
+		id = krg_spr.8
+		title = krg_spr.8.t
+		desc = krg_spr.8.d
+		#picture = ?
+
+		is_triggered_only = yes
+		fire_only_once = yes
+
+		option = {
+			name = krg_spr.8.a
+			add_war_support = -0.15
+			add_stability = -0.1
+			add_manpower = -17
+			hidden_effect = {
+				MOR = {
+					country_event = {
+						id = krg_hmw.0
+						days = 	7
+					}
+				}
+			}
+		}
+	}
+
+	country_event = { #The 1954 elections
+		id = krg_spr.9
+		title = krg_spr.9.t
+		desc = krg_spr.9.d
+		#picture = ?
+
+		is_triggered_only = yes
+		fire_only_once = yes
+
+		option = { #PSOE-UR Victory
+			name = krg_spr.9.a
+			create_country_leader = {
+				name = "Diego Martínez Barrio"
+				desc = ""
+				picture = "gfx/leaders/SPR/Portrait_SPR_Diego_Martinez_Barrio"
+				expire = "1956.1.1"
+				ideology = social_democrat_subtype
+				traits = { }
+			}
+			set_politics = {
+				ruling_party = social_democrat
+				election_frequency = 48
+				elections_allowed = yes
+			}
+			coal_add_soc_dem = yes
+			coal_add_rev_rep = yes
+			add_popularity = {
+				ideology = social_democrat
+				popularity = 0.05
+			}
+			add_popularity = {
+				ideology = revolutionary_republican
+				popularity = 0.05
+			}
+			swap_ideas = {
+				remove_idea = SPR_left_wing_resistance
+				add_idea = SPR_right_wing_resistance
+			}
+			country_event = {
+				id = krg_spr.10
+				days = 1461
+			}
+		}
+		option = { #PEC-PRR Victory
+			name = krg_spr.9.b
+			set_politics = {
+				ruling_party = market_liberal
+				election_frequency = 48
+				elections_allowed = yes
+			}
+			coal_add_soc_lib = yes
+			coal_add_soc_con = yes
+			coal_add_mar_lib = yes
+			coal_add_auth_dem = yes
+			add_popularity = {
+				ideology = social_liberal
+				popularity = 0.05
+			}
+			add_popularity = {
+				ideology = market_liberal
+				popularity = 0.05
+			}
+			add_popularity = {
+				ideology = social_conservative
+				popularity = 0.05
+			}
+			add_popularity = {
+				ideology = authoritarian_democrat
+				popularity = 0.05
+			}
+			swap_ideas = {
+				remove_idea = SPR_right_wing_resistance
+				add_idea = SPR_left_wing_resistance
+			}
+			country_event = {
+				id = krg_spr.10
+				days = 1461
+			}
+		}
+	}
+	country_event = { #The 1958 elections
+		id = krg_spr.10
+		title = krg_spr.10.t
+		desc = krg_spr.10.d
+		#picture = ?
+
+		is_triggered_only = yes
+		fire_only_once = yes
+
+		option = { #UR-PRR-PSOE Victory
+			name = krg_spr.10.a
+			set_politics = {
+				ruling_party = revolutionary_republican
+				election_frequency = 48
+				elections_allowed = yes
+			}
+			coal_add_soc_dem = yes
+			coal_add_rev_rep = yes
+			coal_add_soc_lib = yes
+			add_popularity = {
+				ideology = social_democrat
+				popularity = 0.05
+			}
+			add_popularity = {
+				ideology = revolutionary_republican
+				popularity = 0.05
+			}
+			add_popularity = {
+				ideology = social_liberal
+				popularity = 0.05
+			}
+			swap_ideas = {
+				remove_idea = SPR_left_wing_resistance
+				add_idea = SPR_right_wing_resistance
+			}
+			country_event = {
+				id = krg_spr.12
+				days = 730
+			}
+		}
+		option = { #PEC Victory
+			name = krg_spr.10.b
+			set_politics = {
+				ruling_party = authoritarian_democrat
+				election_frequency = 48
+				elections_allowed = yes
+			}
+			coal_add_soc_con = yes
+			coal_add_mar_lib = yes
+			coal_add_auth_dem = yes
+			add_popularity = {
+				ideology = market_liberal
+				popularity = 0.05
+			}
+			add_popularity = {
+				ideology = social_conservative
+				popularity = 0.05
+			}
+			add_popularity = {
+				ideology = authoritarian_democrat
+				popularity = 0.05
+			}
+			swap_ideas = {
+				remove_idea = SPR_right_wing_resistance
+				add_idea = SPR_left_wing_resistance
+			}
+			country_event = {
+				id = krg_spr.11
+				days = 730
+			}
+		}
+	}
+	country_event = { #Restoration of Monarchy
+		id = krg_spr.11
+		title = krg_spr.11.t
+		desc = krg_spr.11.d
+		#picture = ?
+
+		is_triggered_only = yes
+		fire_only_once = yes
+
+		option = {
+			name = krg_spr.11.a
+			add_war_support = -0.15
+			add_stability = -0.1
+			add_popularity = {
+				ideology = social_liberal
+				popularity = -0.10
+			}
+			add_popularity = {
+				ideology = market_liberal
+				popularity = 0.05
+			}
+			add_popularity = {
+				ideology = revolutionary_republican
+				popularity = 0.05
+			}
+			create_country_leader = {
+				name = "Juan III"
+				picture = "gfx/leaders/SPR/Portrait_SPR_Juan_III.png"
+				expire = "1980.1.1"
+				ideology = social_democrat_subtype
+				traits = { }
+			}
+			create_country_leader = {
+				name = "Juan III"
+				picture = "gfx/leaders/SPR/Portrait_SPR_Juan_III.png"
+				expire = "1980.1.1"
+				ideology = social_conservative_christian_democracy
+				traits = { }
+			}
+			create_country_leader = {
+				name = "Juan III"
+				picture = "gfx/leaders/SPR/Portrait_SPR_Juan_III.png"
+				expire = "1980.1.1"
+				ideology = authoritarian_democrat_subtype
+				traits = { }
+			}
+			set_cosmetic_tag = SPR_kingdom
+			country_event = {
+				id = krg_spr.12
+				days = 30
+			}
+		}
+	}
+	country_event = { #Collapse of the UCE
+		id = krg_spr.12
+		title = krg_spr.12.t
+		desc = krg_spr.12.d
+		#picture = ?
+
+		is_triggered_only = yes
+		fire_only_once = yes
+
+		option = {
+			name = krg_spr.12.a
+			set_party_name = {
+				ideology = authoritarian_democrat
+				long_name = SPR_authoritarian_democrat_split_party_long
+				name = SPR_authoritarian_democrat_split_party
+			}
+			set_party_name = {
+				ideology = social_conservative
+				long_name = SPR_social_conservative_split_party_long
+				name = SPR_social_conservative_split_party
+			}
+			set_party_name = {
+				ideology = market_liberal
+				long_name = SPR_market_liberal_party_split_long
+				name = SPR_market_liberal_split_party
+			}
+			add_popularity = {
+				ideology = market_liberal
+				popularity = 0.05
+			}
+			add_popularity = {
+				ideology = social_conservative
+				popularity = -0.10
+			}
+			add_popularity = {
+				ideology = authoritarian_democrat
+				popularity = 0.05
+			}
+		}
+	}
+#0.2 events
+	country_event = { #Commune War over: Negrin
+		id = krg_spr.13
+		title = krg_spr.13.t
+		desc = krg_spr.13.d
+		#picture = ?
+
+		is_triggered_only = yes
+		fire_only_once = yes
+
+		option = {
+			name = krg_spr.13.a
+			remove_ideas = SPR_commune_war
+			set_party_name = {
+				ideology = authoritarian_socialist
+				long_name = SPR_authoritarian_socialist_JCAH_party_long
+				name = SPR_authoritarian_socialist_JCAH_party
+			}
+			set_party_name = {
+				ideology = radical_socialist
+				long_name = SPR_radical_socialist_PF_party_long
+				name = SPR_radical_socialist_PF_party
+			}
+			set_party_name = {
+				ideology = social_democrat
+				long_name = SPR_social_democrat_Prieto_party_long
+				name = SPR_social_democrat_Prieto_party
+			}
+			set_politics = {
+				ruling_party = radical_socialist
+				elections_allowed = no
+			}
+			coal_add_soc_dem = yes
+			coal_add_auth_soc = yes
+			set_popularities = {
+				authoritarian_socialist = 7
+				radical_socialist = 34
+				social_democrat = 21
+				revolutionary_republican = 5
+				social_liberal = 1
+				market_liberal = 0
+				social_conservative = 3
+				authoritarian_democrat = 13
+				paternal_autocrat = 6
+				national_populist = 10
+			}
+			165 = {
+				set_demilitarized_zone = no
+			}
+			166 = {
+				set_demilitarized_zone = no
+			}
+			167 = {
+				set_demilitarized_zone = no
+			}
+			168 = {
+				set_demilitarized_zone = no
+			}
+			173 = {
+				set_demilitarized_zone = no
+			}
+			118 = {
+				set_demilitarized_zone = no
+			}
+			set_cosmetic_tag = SPR_commune
+			hidden_effect = {
+				country_event = {
+					id = krg_spr.7
+					days = 235
+				}
+			}
+		}
+	}

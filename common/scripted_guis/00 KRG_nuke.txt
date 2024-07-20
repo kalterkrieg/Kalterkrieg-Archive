@@ -1,0 +1,108 @@
+# scripted_gui = {
+
+# 	KRG_nuke_province_target_selector_gui = {
+# 		context_type = selected_state_context
+# 		window_name = "nuke_province_target_selector"
+# 		parent_window_token = selected_state_view
+
+# 		visible = {
+# 			has_state_flag = show_state_target_province_array
+# 			ROOT = { has_country_flag = state_target_selector_activated }
+# 		}
+
+# 		dynamic_lists = {
+# 			target_vessel_display_grid = {
+# 				array = provinces
+# 				entry_container = nuke_province_target_item
+# 				value = selected_province
+# 			}
+# 		}
+
+# 		effects = {
+# 			target_button_click = {
+# 				set_temp_variable = { camera_focus_target = selected_province }
+
+# 				hidden_effect = { ROOT = {
+# 					goto_province = camera_focus_target
+# 				} }
+
+# 				destroy_entity = previous_entity
+
+# 				create_entity = {
+# 					entity = shattered_effect_entity
+# 					id = 123
+# 					var = previous_entity
+# 					x = 0
+# 					y = 0
+# 					z = -1
+# 					province = camera_focus_target
+# 					state = THIS
+# 					rotation = 0
+# 					scale = 1
+# 					min_zoom = 200
+# 					#visible = scripted_trigger_name
+# 				}
+
+# 			}
+# 		}
+
+# 		triggers = {
+# 			target_button_click_enabled = {
+# 				#ROOT = { has_country_flag = thermonuclear_weapons_released }
+# 				#ROOT = { has_war_with = prev.owner }
+# 				land_based_nuking_possible = yes 
+# 			}
+# 			target_button_shift_click_enabled = {
+# 				#ROOT = { has_country_flag = thermonuclear_weapons_released }
+# 				#ROOT = { has_war_with = prev.owner }
+# 				land_based_nuking_possible = yes 
+# 			}
+# 		}
+# 	}
+
+# 	KRG_nuke_province_gui = {
+# 		context_type = selected_state_context
+# 		window_name = "nuke_province_gui_window"
+# 		parent_window_token = selected_state_view
+
+# 		effects = {
+# 			nuke_from_silo_button_click = {
+# 				if = {
+# 					limit = {
+# 						has_state_flag = show_state_target_province_array
+# 					}
+# 					clr_state_flag = show_state_target_province_array
+# 					clr_state_flag = targeted_by_silo
+# 					clear_variable = targeted_by
+# 					ROOT = { 
+# 						clr_country_flag = state_target_selector_activated 
+# 						clear_variable = silo_nuke_targeted_province
+# 					}
+# 				}
+# 				else = { 
+# 					set_state_flag = show_state_target_province_array 
+# 					ROOT = { set_country_flag = state_target_selector_activated }
+# 					set_state_flag = targeted_by_silo
+# 					set_variable = { targeted_by = ROOT }
+
+# 				}
+# 			}
+# 		}
+
+# 		triggers = {
+# 			nuke_from_silo_button_click_enabled = {
+# 				#ROOT = { has_country_flag = thermonuclear_weapons_released }
+# 				#ROOT = { has_war_with = prev.owner }
+# 				land_based_nuking_possible = yes 
+# 			}
+# 			nuke_from_SSBN_button_click_enabled = {
+# 				always = yes 
+# 			}
+
+# 			silo_list_icon_visible = {
+# 				check_variable = { THIS.silo_owners_array^num > 0 }
+# 			}
+# 		}
+# 	}
+# }
+

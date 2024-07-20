@@ -1,0 +1,666 @@
+Accord_voting_decisions = {
+	###Decisions below function as triggers (Section 1 of https://discord.com/channels/465297966685618177/465298810780778515/1054473932964630558)
+	accord_ccw_lend_lease = {
+		fire_only_once = yes
+
+		visible = {
+			check_variable = { global.accord_issue = 0 }
+			has_global_flag = CCW_ongoing
+			NOT = {
+				has_global_flag = accord_issue_3_triggered #fire_only_once works per country
+			}
+		}
+
+		priority = 200
+		ai_will_do = {
+			base = 1000
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete accord_ccw_lend_lease target: [From.GetName]"
+			set_variable = { global.accord_issue_check = 3 }
+			accord_issue_ccw_lend_lease_effect = yes
+			for_each_scope_loop = {
+				array = global.accord_voting_country_array
+
+				activate_mission = accord_ccw_lend_lease_issue
+			}
+			set_global_flag = accord_issue_3_triggered
+			custom_effect_tooltip = accord_ccw_lend_lease_effect_tt
+		}
+	}
+	accord_ccw_limited_mission = {
+		fire_only_once = yes
+		
+		visible = {
+			check_variable = { global.accord_issue = 0 }
+			has_global_flag = CCW_ongoing
+			has_global_flag = accord_ccw_lend_lease_pass
+			NOT = {
+				has_global_flag = accord_issue_4_triggered
+			}
+		}
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 200
+				OR = {
+					FNG = {
+						has_volunteers_amount_from = {
+							tag = GER
+							count = 1
+						}
+					}
+					date > 1949.08.01
+					CHI = {
+						surrender_progress > 0.1
+					}
+				}
+			}
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete accord_ccw_limited_mission target: [From.GetName]"
+			set_variable = { global.accord_issue_check = 4 }
+			accord_issue_ccw_limited_mission_effect = yes
+			for_each_scope_loop = {
+				array = global.accord_voting_country_array
+
+				activate_mission = accord_ccw_limited_mission_issue
+			}
+			set_global_flag = accord_issue_4_triggered
+			custom_effect_tooltip = accord_ccw_limited_mission_effect_tt
+		}
+	}
+	accord_ccw_send_volunteers = {
+		fire_only_once = yes
+
+		visible = {
+			check_variable = { global.accord_issue = 0 }
+			has_global_flag = CCW_ongoing
+			has_global_flag = accord_ccw_lend_lease_pass
+			NOT = {
+				has_global_flag = accord_issue_5_triggered
+			}
+		}
+
+		available = {
+			OR = {
+				CHI = {
+					surrender_progress > 0.25
+				}
+				FNG = {
+					surrender_progress > 0.25
+				}
+			}
+		}
+
+		ai_will_do = {
+			base = 200
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete accord_ccw_send_volunteers target: [From.GetName]"
+			set_variable = { global.accord_issue_check = 5 }
+			accord_issue_ccw_send_volunteers_effect = yes
+			for_each_scope_loop = {
+				array = global.accord_voting_country_array
+
+				activate_mission = accord_ccw_send_volunteers_issue
+			}
+			set_global_flag = accord_issue_5_triggered
+			custom_effect_tooltip = accord_ccw_send_volunteers_effect_tt
+		}
+	}
+	accord_colonial_policy_vote = {
+		fire_only_once = yes
+
+		visible = {
+			check_variable = { global.accord_issue = 0 }
+			has_global_flag = accord_colonial_policy
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete accord_colonial_policy_vote target: [From.GetName]"
+			set_variable = { global.accord_issue_check = 9 }
+			accord_issue_colonial_policy_effect = yes
+			for_each_scope_loop = {
+				array = global.accord_voting_country_array
+
+				activate_mission = accord_colonial_policy_issue
+			}
+
+		}
+	}
+	accord_acw_send_volunteers = {
+		fire_only_once = yes
+
+		visible = {
+			check_variable = { global.accord_issue = 0 }
+			has_global_flag = ACW_start
+			NOT = { has_global_flag = accord_issue_7_triggered }
+			custom_trigger_tooltip = {
+				tooltip = ACW_has_level_4_involvement
+				check_variable = {
+					global.ACW_involvement_level > 3
+				}
+			}
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete accord_acw_send_volunteers target: [From.GetName]"
+			set_variable = { global.accord_issue_check = 7 }
+			accord_issue_acw_send_volunteers_effect = yes
+			for_each_scope_loop = {
+				array = global.accord_voting_country_array
+
+				activate_mission = accord_acw_send_volunteers_issue
+			}
+			custom_effect_tooltip = ENT_accord_acw_send_volunteers_tt
+			set_global_flag = accord_issue_7_triggered
+		}
+	}
+	accord_acw_declare_on_aus = {
+		visible = {
+			check_variable = { global.accord_issue = 0 }
+			has_global_flag = ACW_start
+			NOT = { 
+				has_global_flag = accord_issue_8_triggered
+				has_global_flag = ACW_WK3_escalation
+			}
+			custom_trigger_tooltip = {
+				tooltip = ACW_has_level_5_involvement
+				check_variable = {
+					global.ACW_involvement_level > 4
+				}
+			}
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete accord_acw_declare_on_aus target: [From.GetName]"
+			accord_issue_acw_declare_on_aus_effect = yes
+			set_variable = { global.accord_issue_check = 8 }
+			for_each_scope_loop = {
+				array = global.accord_voting_country_array
+
+				activate_mission = accord_acw_declare_on_aus_issue
+			}
+			custom_effect_tooltip = ENT_accord_acw_declare_on_aus_tt
+			set_global_flag = accord_issue_8_triggered
+		}
+	}
+	accord_issue_10_vote_dec = {
+		visible = {
+			check_variable = { global.accord_issue = 0 }
+			tag = ITA
+			NOT = { has_global_flag = accord_issue_10_triggered }
+			check_variable = {
+				ITA.crisis_escalation_level > 2
+			}
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete accord_issue_10_vote_dec target: [From.GetName]"
+			set_variable = { global.accord_issue_check = 10 }
+			accord_issue_10_effect = yes
+			for_each_scope_loop = {
+				array = global.accord_voting_country_array
+				activate_mission = accord_issue_10
+			}
+			custom_effect_tooltip = accord_issue_10_vote_dec_tt
+			effect_tooltip = {
+				add_ideas = KRG_italy_international_war_support_idea
+			}
+			set_global_flag = accord_issue_10_triggered
+		}
+	}
+	###Decisions below function as missions for the issue (Section 3 of https://discord.com/channels/465297966685618177/465298810780778515/1054473932964630558)
+	accord_issue_1 = {
+		allowed = { always = no }
+
+		visible = {
+			check_variable = { global.accord_issue = 1 }
+		}
+
+		available = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+
+		cancel_trigger = {
+			hidden_trigger = {
+				check_variable = { global.accord_issue = 0 }
+			}
+		}
+
+		is_good = yes
+		selectable_mission = no
+		days_mission_timeout = 20
+		fire_only_once = no
+
+		priority = 200
+
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout accord_issue_1 target: [From.GetName]"
+			if = {
+				limit = {
+					has_variable = global.accord_issue_check
+				}
+				clear_variable = global.accord_issue_check
+				accord_end_voting_effect = yes
+				accord_clear_issue = yes
+			}
+		}
+	}
+	accord_ccw_issue = {
+		allowed = { always = no }
+
+		visible = {
+			check_variable = { global.accord_issue = 2 }
+		}
+
+		available = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+
+		cancel_trigger = {
+			hidden_trigger = {
+				check_variable = { global.accord_issue = 0 }
+			}
+		}
+
+		is_good = yes
+		selectable_mission = no
+		days_mission_timeout = 20
+		fire_only_once = no
+
+		priority = 200
+
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout accord_ccw_issue target: [From.GetName]"
+			if = {
+				limit = {
+					has_variable = global.accord_issue_check
+				}
+				clear_variable = global.accord_issue_check
+				accord_end_voting_effect = yes
+				accord_clear_issue = yes
+			}
+		}
+	}
+	accord_ccw_lend_lease_issue = {
+		allowed = { always = no }
+
+		visible = {
+			check_variable = { global.accord_issue = 3 }
+		}
+
+		available = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+
+		cancel_trigger = {
+			hidden_trigger = {
+				check_variable = { global.accord_issue = 0 }
+			}
+		}
+
+		is_good = yes
+		selectable_mission = no
+		days_mission_timeout = 20
+		fire_only_once = no
+
+		priority = 200
+
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout accord_ccw_lend_lease_issue target: [From.GetName]"
+			if = {
+				limit = {
+					has_variable = global.accord_issue_check
+				}
+				clear_variable = global.accord_issue_check
+				accord_end_voting_effect = yes
+				accord_clear_issue = yes
+				custom_effect_tooltip = accord_ccw_lend_lease_effect_tt
+			}
+		}
+	}
+	accord_ccw_limited_mission_issue = {
+		allowed = { always = no }
+
+		visible = {
+			check_variable = { global.accord_issue = 4 }
+		}
+
+		available = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+
+		cancel_trigger = {
+			hidden_trigger = {
+				check_variable = { global.accord_issue = 0 }
+			}
+		}
+
+		is_good = yes
+		selectable_mission = no
+		days_mission_timeout = 20
+		fire_only_once = no
+
+		priority = 200
+
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout accord_ccw_limited_mission_issue target: [From.GetName]"
+			if = {
+				limit = {
+					has_variable = global.accord_issue_check
+				}
+				clear_variable = global.accord_issue_check
+				accord_end_voting_effect = yes
+				accord_clear_issue = yes
+				custom_effect_tooltip = accord_ccw_limited_mission_effect_tt
+			}
+		}
+	}
+	accord_ccw_send_volunteers_issue = {
+		allowed = { always = no }
+
+		visible = {
+			check_variable = { global.accord_issue = 5 }
+		}
+
+		available = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+
+		cancel_trigger = {
+			hidden_trigger = {
+				check_variable = { global.accord_issue = 0 }
+			}
+		}
+
+		is_good = yes
+		selectable_mission = no
+		days_mission_timeout = 20
+		fire_only_once = no
+
+		priority = 200
+
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout accord_ccw_send_volunteers_issue target: [From.GetName]"
+			if = {
+				limit = {
+					has_variable = global.accord_issue_check
+				}
+				clear_variable = global.accord_issue_check
+				accord_end_voting_effect = yes
+				accord_clear_issue = yes
+				custom_effect_tooltip = accord_ccw_send_volunteers_effect_tt
+			}
+		}
+	}
+	accord_invade_FRA = {
+		allowed = { always = no }
+
+		visible = {
+			check_variable = { global.accord_issue = 6 }
+		}
+
+		available = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+
+		cancel_trigger = {
+			hidden_trigger = {
+				check_variable = { global.accord_issue = 0 }
+			}
+		}
+
+		is_good = yes
+		selectable_mission = no
+		days_mission_timeout = 20
+		fire_only_once = no
+
+		priority = 200
+
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout accord_invade_FRA target: [From.GetName]"
+			if = {
+				limit = {
+					has_variable = global.accord_issue_check
+				}
+				clear_variable = global.accord_issue_check
+				accord_end_voting_effect = yes
+				accord_clear_issue = yes
+			}
+		}
+	}
+	accord_acw_send_volunteers_issue = {
+		allowed = { always = no }
+
+		visible = {
+			check_variable = { global.accord_issue = 7 }
+		}
+
+		available = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+
+		cancel_trigger = {
+			hidden_trigger = {
+				check_variable = { global.accord_issue = 0 }
+			}
+		}
+
+		is_good = yes
+		selectable_mission = no
+		days_mission_timeout = 20
+		fire_only_once = no
+
+		priority = 200
+
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout accord_acw_send_volunteers_issue target: [From.GetName]"
+			if = {
+				limit = {
+					has_variable = global.accord_issue_check
+				}
+				clear_variable = global.accord_issue_check
+				accord_end_voting_effect = yes
+				accord_clear_issue = yes
+			}
+		}
+	}
+	accord_acw_declare_on_aus_issue = {
+		allowed = { always = no }
+
+		visible = {
+			check_variable = { global.accord_issue = 8 }
+		}
+
+		available = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+
+		cancel_trigger = {
+			check_variable = { global.accord_issue = 0 }
+		}
+
+		is_good = yes
+		selectable_mission = no
+		days_mission_timeout = 20
+		fire_only_once = no
+
+		priority = 200
+
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout accord_acw_declare_on_aus_issue target: [From.GetName]"
+			if = {
+				limit = {
+					has_variable = global.accord_issue_check
+				}
+				clear_variable = global.accord_issue_check
+				accord_end_voting_effect = yes
+				accord_clear_issue = yes
+			}
+		}
+	}
+	accord_colonial_policy_issue = {
+		allowed = { always = no }
+
+		visible = {
+			check_variable = { global.accord_issue = 9 }
+		}
+
+		available = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+
+		cancel_trigger = {
+			hidden_trigger = {
+				check_variable = { global.accord_issue = 0 }
+			}
+		}
+
+		is_good = yes
+		selectable_mission = no
+		days_mission_timeout = 20
+		fire_only_once = no
+
+		priority = 200
+
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout accord_colonial_policy_issue target: [From.GetName]"
+			if = {
+				limit = {
+					has_variable = global.accord_issue_check
+				}
+				clear_variable = global.accord_issue_check
+				accord_end_voting_effect = yes
+				accord_clear_issue = yes
+			}
+		}
+	}
+	accord_issue_10 = {
+		allowed = { always = no }
+
+		visible = {
+			check_variable = { global.accord_issue = 10 }
+		}
+
+		available = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+
+		cancel_trigger = {
+			hidden_trigger = {
+				check_variable = { global.accord_issue = 0 }
+			}
+		}
+
+		is_good = yes
+		selectable_mission = no
+		days_mission_timeout = 20
+		fire_only_once = no
+
+		priority = 200
+
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout accord_issue_10 target: [From.GetName]"
+			if = {
+				limit = {
+					has_variable = global.accord_issue_check
+				}
+				clear_variable = global.accord_issue_check
+				accord_end_voting_effect = yes
+				accord_clear_issue = yes
+			}
+		}
+	}
+
+	### Foriegn Policy
+	accord_WK3_collapse_mission = {
+		allowed = { always = no }
+
+		available = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+
+		cancel_trigger = {
+			ENG = {
+				all_core_state = {
+					is_controlled_by_ROOT_or_ally = yes
+				}
+			}
+			NFA = {
+				has_capitulated = no
+			}
+			ITA = {
+				surrender_progress < 0.35
+			}
+		}
+
+		is_good = no
+		selectable_mission = no
+		days_mission_timeout = 200
+		fire_only_once = no
+
+		priority = 200
+
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout accord_WK3_collapse_mission target: [From.GetName]"
+			effect_tooltip = {
+				GER = {
+					country_event = {
+						id = WK3_peace.2
+					}
+				}
+				country_event = {
+					id = ent.1000
+					days = 36
+				}
+			}
+			hidden_effect = {
+				if = {
+					limit = { 
+						tag = ENT 
+					}
+					GER = {
+						country_event = {
+							id = WK3_peace.2
+						}
+					}
+					ENT = {
+						country_event = {
+							id = ent.1000
+							days = 36
+						}
+					}
+				}
+			}
+			
+		}
+	}
+}

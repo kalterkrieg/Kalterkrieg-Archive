@@ -1,0 +1,273 @@
+scripted_gui = {
+	MAF_AAPM_display = {
+		context_type = decision_category
+		window_name = "MAF_AAPM_display_gui"
+		parent_window_token = decision_tab
+
+		visible = {
+			always = yes
+		}
+			
+		triggers = {
+			MAF_AAPM_banner_visible = {
+				always = yes
+			}
+		}	
+			
+		effects = {
+			
+		}
+		
+		properties = {
+			MAF_unity_bar = {
+				frame = MAF_AAPM_unity
+			}
+			MAF_fervor_bar = {
+				frame = MAF_AAPM_fervor
+			}
+		}
+	}
+	MAF_insurgency_open = {
+		context_type = player_context
+		parent_window_token = politics_tab
+		window_name = "MAF_insurgency_open_container"
+
+		visible = {
+			tag = MAF
+		}
+
+		effects = {
+			MAF_insurgency_open_button_click = {
+				if = {
+					limit = { has_variable = show_MAF_insurgency }
+					clear_variable = show_MAF_insurgency
+				}
+				else = {
+					set_variable = { show_MAF_insurgency = 1 }
+				}
+			}
+		}
+	}
+
+	MAF_insurgency_open_decision_category = {
+		context_type = decision_category
+		parent_window_token = decision_tab
+		window_name = "MAF_insurgency_open_container_decision_category"
+
+		visible = {
+			tag = MAF
+		}
+
+		effects = {
+			MAF_insurgency_open_button_click = {
+				if = {
+					limit = { has_variable = show_MAF_insurgency }
+					clear_variable = show_MAF_insurgency
+				}
+				else = {
+					set_variable = { show_MAF_insurgency = 1 }
+				}
+			}
+		}
+	}
+
+	MAF_insurgency = {
+		context_type = player_context
+		window_name = "MAF_insurgency_container"
+		dirty = show_MAF_insurgency
+
+		visible = {
+			check_variable = { show_MAF_insurgency > 0 }
+		}
+
+		dynamic_lists = {
+			MAF_insurgency_map_grid = {
+				array = MAF_insurgency_region_array
+				index = MAF_insurgency_region_index
+				change_scope = yes
+				entry_container = MAF_insurgency_map_entry
+			}
+		}
+		effects = {
+			MAF_insurgency_map_region_button_click = {
+				set_temp_variable = { temp_select = v }
+
+				if = {
+					limit = {
+						check_variable = { temp_select = MAF.MAF_region_selected }
+					}
+					clear_variable = MAF.MAF_region_selected
+				}
+				else = {
+					set_variable = { MAF.MAF_region_selected = temp_select }
+				}
+
+				add_to_variable = { MAF.show_MAF_insurgency_info = 1 }
+			}
+			MAF_insurgency_close_button_click = {
+				clear_variable = show_MAF_insurgency
+				clear_variable = show_MAF_insurgency_info
+			}
+		}
+
+		properties = {
+			MAF_insurgency_map_region = {
+				image = "GFX_KRG_MAF_insurgency_map_region_[?v]"
+				frame = MAF_insurgency_level_frame
+				x = MAF_insurgency_map_x
+				y = MAF_insurgency_map_y
+			}
+			MAF_insurgency_map_region_button = {
+				image = "GFX_KRG_MAF_insurgency_map_region_button_[?v]"
+				x = MAF_insurgency_map_x
+				y = MAF_insurgency_map_y
+			}
+		}
+
+		triggers = {
+			MAF_SAF_area_visible = {
+				has_country_flag = MAF_SAF_help_north_rhodesia_and_nyasaland
+			}
+		}
+	}
+
+	MAF_insurgency_info = {
+		context_type = player_context
+		window_name = "MAF_insurgency_info_container"
+		dirty = show_MAF_insurgency_info
+
+		visible = {
+			check_variable = { MAF_region_selected > 0 }
+			check_variable = { show_MAF_insurgency_info > 0 }
+		}
+
+		triggers = {
+			MAF_insurgency_interaction_1_button_visible = {
+				set_temp_variable = { temp_trigger_cost_1 = 1000 }
+				set_temp_variable = { temp_trigger_factor_1 = 1 }
+				subtract_from_temp_variable = { temp_trigger_factor_1 = modifier@insurgency_reduction_cost_factor }
+				multiply_temp_variable = { temp_trigger_cost_1 = temp_trigger_factor_1 }
+				always = yes
+			}
+			MAF_insurgency_interaction_2_button_visible = {
+				set_temp_variable = { temp_trigger_cost_2 = 25 }
+				set_temp_variable = { temp_trigger_factor_2 = 1 }
+				subtract_from_temp_variable = { temp_trigger_factor_2 = modifier@insurgency_reduction_cost_factor }
+				multiply_temp_variable = { temp_trigger_cost_2 = temp_trigger_factor_2 }
+				always = yes
+			}
+			MAF_insurgency_interaction_1_button_click_enabled = {
+				set_temp_variable = { temp_trigger_cost_1 = 1000 }
+				set_temp_variable = { temp_trigger_factor_1 = 1 }
+				subtract_from_temp_variable = { temp_trigger_factor_1 = modifier@insurgency_reduction_cost_factor }
+				multiply_temp_variable = { temp_trigger_cost_1 = temp_trigger_factor_1 }
+				MAF = {
+					has_equipment = { infantry_equipment > var:temp_trigger_cost_1 }
+				}
+				custom_trigger_tooltip = {
+					tooltip = MAF_insurgency_level_low_tt
+					check_variable = { MAF_region_selected:MAF_insurgency_level > 1 }
+				}
+				custom_trigger_tooltip = {
+					tooltip = MAF_aapm_level_too_high_tt
+					check_variable = { MAF_region_selected:MAF_insurgency_level > MAF_region_selected:MAF_insurgency_aapm_level }
+				}
+			}
+			MAF_insurgency_interaction_2_button_click_enabled = {
+				set_temp_variable = { temp_trigger_cost_2 = 25 }
+				set_temp_variable = { temp_trigger_factor_2 = 1 }
+				subtract_from_temp_variable = { temp_trigger_factor_2 = modifier@insurgency_reduction_cost_factor }
+				multiply_temp_variable = { temp_trigger_cost_2 = temp_trigger_factor_2 }
+				MAF = { command_power > var:temp_trigger_cost_2 }
+				custom_trigger_tooltip = {
+					tooltip = MAF_insurgency_level_low_tt
+					check_variable = { MAF_region_selected:MAF_insurgency_level > 1 }
+				}
+				custom_trigger_tooltip = {
+					tooltip = MAF_aapm_level_too_high_tt
+					check_variable = { MAF_region_selected:MAF_insurgency_level > MAF_region_selected:MAF_insurgency_aapm_level }
+				}
+			}
+		}
+
+		effects = {
+			MAF_insurgency_interaction_1_button_click = {
+				set_temp_variable = { temp_cost_1 = -1000 }
+				set_temp_variable = { temp_factor_1 = 1 }
+				subtract_from_temp_variable = { temp_factor_1 = modifier@insurgency_reduction_cost_factor }
+				multiply_temp_variable = { temp_cost_1 = temp_factor_1 }
+				add_equipment_to_stockpile = { type = infantry_equipment amount = var:temp_cost_1 }
+				set_temp_variable = { temp_region = MAF_region_selected }
+				set_temp_variable = { temp_value = -1 }
+				MAF_modify_insurgency_level = yes
+			}
+			MAF_insurgency_interaction_2_button_click = {
+				set_temp_variable = { temp_cost_2 = -25 }
+				set_temp_variable = { temp_factor_2 = 1 }
+				subtract_from_temp_variable = { temp_factor_2 = modifier@insurgency_reduction_cost_factor }
+				multiply_temp_variable = { temp_cost_2 = temp_factor_2 }
+				add_command_power = var:temp_cost_2
+				set_temp_variable = { temp_region = MAF_region_selected }
+				set_temp_variable = { temp_value = -1 }
+				MAF_modify_insurgency_level = yes
+			}
+			MAF_insurgency_info_close_button_click = {
+				clear_variable = MAF_region_selected
+				clear_variable = show_MAF_insurgency_info
+			}
+		}
+
+		properties = {
+			MAF_insurgency_bar = {
+				frame = MAF_region_selected:MAF_insurgency_level
+			}
+		}
+	}
+
+	KRG_MAF_state_mechanic = {
+		context_type = selected_state_context
+		window_name = "KRG_MAF_state_mechanic_window"
+		parent_window_token = selected_state_view
+
+		visible = { 
+			ROOT = { 
+				original_tag = MAF 
+				is_ai = no 
+			}
+			is_owned_by = MAF
+			has_variable = MAF_state_id
+		}
+
+		dynamic_lists = {
+			MAF_state_idea_grid = {
+				array = state_idea_array
+				index = v
+				change_scope = no
+				entry_container = MAF_state_idea_grid_container
+			}
+		}
+
+		triggers = {
+			MAF_state_idea_img_visible = {
+				
+			}
+		}
+
+		# Scripted GUI Pie Chart example by Yard1
+		# Feel free to use in your mods, but give credits to Yard1 (both in code, with comments; and on your download page)
+		properties = {
+			MAF_state_flag = {
+		        image = "[GFX_MAF_StateGetGFXFlag]"
+			}
+			#MAF_governor = {
+		    #    image = "[GFX_StateGetGovernor]"
+			#}
+			MAF_state_idea_img = {
+		        image = "[MAFGetStateIdeaImage]"
+			}
+			MAF_region = {
+		        image = "[MAFGetStateRegionGFX]"
+			}
+		}
+	}
+}

@@ -1,0 +1,53 @@
+scripted_gui = {
+	KRG_GER_parliament = {
+		window_name = "KRG_GER_parliament_container"
+		context_type = decision_category
+
+		dynamic_lists = {
+			bundesrat_member_grid = {
+				array = bundesrat_member_array
+				index = bundesrat_member_index
+				change_scope = yes
+				entry_container = bundesrat_member_entry
+			}
+			reichstag_main_grid = {
+				array = reichstag_main_array
+				index = reichstag_main_index
+				change_scope = yes
+				entry_container = reichstag_main_entry
+			}
+			reichstag_member_grid = {
+				array = reichstag_member_array
+				index = reichstag_member_index
+				change_scope = yes
+				entry_container = reichstag_member_entry
+			}
+		}
+
+		triggers = {
+			law_effect_loc_button_visible = { always = no }
+		}
+
+		properties = {
+			bundesrat_member_icon = {
+				image = "[v.GetBundesratFlag]"
+			}
+			reichstag_member_icon = {
+				frame = v
+				x = GER.reichstag_member_x_array^reichstag_main_index
+				y = GER.reichstag_member_y_array^reichstag_main_index
+			}
+			reichstag_party_icon = {
+				frame = v
+			}
+		}
+
+		effects = {
+			law_effect_loc_button_click = {
+				GER_succsess_effect_tooltip = yes
+				#custom_effect_tooltip = SEPARATION_LINE
+				#MIT_get_agenda_desc = yes
+			}
+		}
+	}
+}

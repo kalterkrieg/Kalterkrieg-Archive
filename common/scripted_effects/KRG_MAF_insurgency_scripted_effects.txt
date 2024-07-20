@@ -1,0 +1,969 @@
+####										  ####
+#### MITTELAFRIKA INSURGENCY SCRIPTED EFFECTS ####
+####										  ####
+# insurgency gui values set up (trigger the effect in history)
+MAF_insurgency_initial = {
+	clear_array = MAF_insurgency_region_array
+	for_loop_effect = {
+		start = 1
+		end = 13
+		compare = less_than_or_equals
+		add_to_array = {
+			MAF_insurgency_region_array = v
+		}
+	}
+	# Ostafrika
+	1 = {
+		set_variable = {
+			MAF_insurgency_level = 1
+		}
+		set_variable = {
+			MAF_insurgency_map_x = 501
+		}
+		set_variable = {
+			MAF_insurgency_map_y = 237
+		}
+	}
+	# Südwestafrika
+	2 = {
+		set_variable = {
+			MAF_insurgency_level = 1
+		}
+		set_variable = {
+			MAF_insurgency_map_x = 232
+		}
+		set_variable = {
+			MAF_insurgency_map_y = 489
+		}
+	}
+	# Kamerun
+	3 = {
+		set_variable = {
+			MAF_insurgency_level = 2
+		}
+		set_variable = {
+			MAF_insurgency_map_x = 182
+		}
+		set_variable = {
+			MAF_insurgency_map_y = 13
+		}
+	}
+	# Togo
+	4 = {
+		set_variable = {
+			MAF_insurgency_level = 1
+		}
+		set_variable = {
+			MAF_insurgency_map_x = 43
+		}
+		set_variable = {
+			MAF_insurgency_map_y = 26
+		}
+	}
+	# Kongo
+	5 = {
+		set_variable = {
+			MAF_insurgency_level = 1
+		}
+		set_variable = {
+			MAF_insurgency_map_x = 221
+		}
+		set_variable = {
+			MAF_insurgency_map_y = 135
+		}
+	}
+	# Madagaskar
+	6 = {
+		set_variable = {
+			MAF_insurgency_level = 3
+		}
+		set_variable = {
+			MAF_insurgency_map_x = 724
+		}
+		set_variable = {
+			MAF_insurgency_map_y = 413
+		}
+	}
+	# Gabun
+	7 = {
+		set_variable = {
+			MAF_insurgency_level = 1
+		}
+		set_variable = {
+			MAF_insurgency_map_x = 186
+		}
+		set_variable = {
+			MAF_insurgency_map_y = 197
+		}
+	}
+	# Kenya
+	8 = {
+		set_variable = {
+			MAF_insurgency_level = 2
+		}
+		set_variable = {
+			MAF_insurgency_map_x = 578
+		}
+		set_variable = {
+			MAF_insurgency_map_y = 146
+		}
+	}
+	# Nigeria
+	9 = {
+		set_variable = {
+			MAF_insurgency_level = 1
+		}
+		set_variable = {
+			MAF_insurgency_map_x = 91
+		}
+		set_variable = {
+			MAF_insurgency_map_y = 0
+		}
+	}
+	# Gold Coast
+	10 = {
+		set_variable = {
+			MAF_insurgency_level = 2
+		}
+		set_variable = {
+			MAF_insurgency_map_x = 1
+		}
+		set_variable = {
+			MAF_insurgency_map_y = 45
+		}
+	}
+	# Northern Rhodesia
+	11 = {
+		set_variable = {
+			MAF_insurgency_level = 1
+		}
+		set_variable = {
+			MAF_insurgency_map_x = 392
+		}
+		set_variable = {
+			MAF_insurgency_map_y = 355
+		}
+	}
+	# Nyasaland
+	12 = {
+		set_variable = {
+			MAF_insurgency_level = 1
+		}
+		set_variable = {
+			MAF_insurgency_map_x = 559
+		}
+		set_variable = {
+			MAF_insurgency_map_y = 373
+		}
+	}
+	# Uganda
+	13 = {
+		set_variable = {
+			MAF_insurgency_level = 2
+		}
+		set_variable = {
+			MAF_insurgency_map_x = 512
+		}
+		set_variable = {
+			MAF_insurgency_map_y = 153
+		}
+	}
+	# clear modifiers (debug lol)
+	clear_variable = MAF_colonial_insurgency_consumer_goods_factor
+	clear_variable = MAF_colonial_insurgency_production_speed_buildings_factor
+	clear_variable = MAF_colonial_insurgency_stability_factor
+	# set up initial modifiers
+	MAF_insurgency_reload = yes
+}
+
+# main code for adding/subtracting AAPM level
+# usage:
+# set_temp_variable = { temp_region = <VALUE> }
+# set_temp_variable = { temp_value = <VALUE> }
+# MAF_modify_insurgency_aapm_level = yes
+MAF_modify_insurgency_aapm_level = {
+	set_temp_variable = {
+		temp_before = temp_region:MAF_insurgency_aapm_level
+	}
+	set_temp_variable = {
+		temp_after = temp_region:MAF_insurgency_aapm_level
+	}
+	set_temp_variable = {
+		temp_total = temp_region:MAF_insurgency_aapm_level
+	}
+	add_to_temp_variable = {
+		temp_total = temp_value
+	}
+	if = {
+		limit = {
+			check_variable = {
+				temp_total > 8
+			}
+		}
+		subtract_from_temp_variable = {
+			temp_total = 8
+		}
+		subtract_from_temp_variable = {
+			temp_value = temp_total
+		}
+	}
+	else_if = {
+		limit = {
+			check_variable = {
+				temp_total < 0
+			}
+		}
+		subtract_from_temp_variable = {
+			temp_value = temp_total
+		}
+	}
+	add_to_temp_variable = {
+		temp_after = temp_value
+	}
+	if = {
+		limit = {
+			NOT = {
+				check_variable = {
+					temp_value = 0
+				}
+			}
+		}
+		custom_effect_tooltip = MAF_modify_insurgency_aapm_level_tt
+		set_variable = {
+			temp_region:MAF_insurgency_aapm_level = temp_after
+		}
+		clamp_variable = {
+			var = temp_region:MAF_insurgency_level
+			min = temp_region:MAF_insurgency_aapm_level
+		}
+		MAF_insurgency_reload = yes
+	}
+}
+
+# main code for adding/subtracting insurgency level
+# usage:
+# set_temp_variable = { temp_region = <VALUE> }
+# set_temp_variable = { temp_value = <VALUE> }
+# MAF_modify_insurgency_level = yes
+MAF_modify_insurgency_level = {
+	set_temp_variable = {
+		temp_before = temp_region:MAF_insurgency_level
+	}
+	set_temp_variable = {
+		temp_after = temp_region:MAF_insurgency_level
+	}
+	set_temp_variable = {
+		temp_total = temp_region:MAF_insurgency_level
+	}
+	add_to_temp_variable = {
+		temp_total = temp_value
+	}
+	if = {
+		limit = {
+			check_variable = {
+				temp_total > 8
+			}
+		}
+		subtract_from_temp_variable = {
+			temp_total = 8
+		}
+		subtract_from_temp_variable = {
+			temp_value = temp_total
+		}
+	}
+	else_if = {
+		limit = {
+			check_variable = {
+				temp_total < 0
+			}
+		}
+		subtract_from_temp_variable = {
+			temp_value = temp_total
+		}
+	}
+	add_to_temp_variable = {
+		temp_after = temp_value
+	}
+	if = {
+		limit = {
+			NOT = {
+				check_variable = {
+					temp_value = 0
+				}
+			}
+		}
+		custom_effect_tooltip = MAF_modify_insurgency_level_tt
+		set_variable = {
+			temp_region:MAF_insurgency_level = temp_after
+		}
+		MAF_insurgency_set_state_level_effect = yes
+		MAF_insurgency_reload = yes
+	}
+}
+
+# main code for setting insurgency level
+# usage:
+# set_temp_variable = { temp_region = <VALUE> }
+# set_temp_variable = { temp_value = <VALUE> }
+# MAF_set_insurgency_level = yes
+MAF_set_insurgency_level = {
+	custom_effect_tooltip = MAF_set_insurgency_level_tt
+	set_variable = {
+		temp_region:MAF_insurgency_level = temp_value
+	}
+	MAF_insurgency_set_state_level_effect = yes
+	MAF_insurgency_reload = yes
+}
+
+# main code for removing region from GUI
+# usage:
+# set_temp_variable = { temp_region = <VALUE> }
+# MAF_disable_region = yes
+MAF_disable_region = {
+	set_variable = {
+		temp_region:MAF_insurgency_map_saved_x = temp_region:MAF_insurgency_map_x
+	}
+	set_variable = {
+		temp_region:MAF_insurgency_map_saved_y = temp_region:MAF_insurgency_map_y
+	}
+	set_variable = {
+		temp_region:MAF_insurgency_map_x = -1000
+	}
+	set_variable = {
+		temp_region:MAF_insurgency_map_y = -1000
+	}
+	remove_from_array = {
+		MAF_insurgency_region_array = temp_region
+	}
+	MAF_insurgency_reload = yes
+}
+
+MAF_insurgency_set_state_level_effect = {
+	if = {
+		limit = { 
+			check_variable = {
+				temp_region:MAF_insurgency_level = 5
+			}
+		}
+		if = {
+			limit = {
+				check_variable = {
+					temp_region:MAF_insurgency_damage = 0
+				}
+			}
+			meta_effect = {
+				text = {
+					country_event = {
+						id = MAF_rebels.[REGION]
+						days = 30
+						random_days = 10
+					}
+				}
+				REGION = "[?temp_region]"
+			}
+			set_variable = {
+				temp_region:MAF_insurgency_damage = 1
+			}
+		}
+	}
+	else_if = {
+		limit = { 
+			check_variable = {
+				temp_region:MAF_insurgency_level = 6
+			}
+		}
+		if = {
+			limit = {
+				check_variable = {
+					temp_region:MAF_insurgency_damage = 0
+				}
+			}
+			meta_effect = {
+				text = {
+					country_event = {
+						id = MAF_rebels.[REGION]
+						days = 30
+						random_days = 10
+					}
+				}
+				REGION = "[?temp_region]"
+			}
+			set_variable = {
+				temp_region:MAF_insurgency_damage = 1
+			}
+		}
+	}
+	else_if = {
+		limit = { 
+			check_variable = {
+				temp_region:MAF_insurgency_level = 7
+			}
+		}
+		if = {
+			limit = {
+				check_variable = {
+					temp_region:MAF_insurgency_damage = 0
+				}
+			}
+			meta_effect = {
+				text = {
+					country_event = {
+						id = MAF_rebels.[REGION]
+						days = 15
+						random_days = 5
+					}
+				}
+				REGION = "[?temp_region]"
+			}
+			set_variable = {
+				temp_region:MAF_insurgency_damage = 1
+			}
+		}
+	}
+
+	if = {
+		limit = { 
+			check_variable = {
+				temp_region:MAF_insurgency_level > 5
+			}
+		}
+		if = {
+			limit = { 
+				all_owned_state = {
+					if = {
+						limit = { 
+							check_variable = {
+								MAF_state_id = temp_region
+							}
+						}
+						is_demilitarized_zone = no
+					}
+				}
+			}
+			random_state = {
+				limit = { 
+					check_variable = {
+						MAF_state_id = temp_region
+					}
+					check_variable = {
+						MAF_state_local_defence_level < 2
+					}
+				}
+				save_event_target_as = MAF_insugent_state
+				MAF = {
+					country_event = {
+						id = MAF_insurgency.5
+					}
+				}
+			}
+		}
+	}
+}
+
+MAF_insurgency_reload = {
+	clear_variable = MAF_colonial_insurgency_consumer_goods_factor
+	clear_variable = MAF_colonial_insurgency_production_speed_buildings_factor
+	clear_variable = MAF_colonial_insurgency_stability_factor
+	for_each_loop = {
+		array = MAF_insurgency_region_array
+		if = {
+			limit = {
+				check_variable = {
+					v:MAF_insurgency_level = 1
+				}
+			}
+			add_to_variable = {
+				MAF_colonial_insurgency_production_speed_buildings_factor = 0.01
+			}
+			add_to_variable = {
+				MAF_colonial_insurgency_stability_factor = 0.01
+			}
+		}
+		else_if = {
+			limit = {
+				check_variable = {
+					v:MAF_insurgency_level = 2
+				}
+			}
+			add_to_variable = {
+				MAF_colonial_insurgency_production_speed_buildings_factor = 0.005
+			}
+			add_to_variable = {
+				MAF_colonial_insurgency_stability_factor = 0.005
+			}
+		}
+		# do nothing for 3
+		else_if = {
+			limit = {
+				check_variable = {
+					v:MAF_insurgency_level = 4
+				}
+			}
+			add_to_variable = {
+				MAF_colonial_insurgency_consumer_goods_factor = -0.004
+			}
+			add_to_variable = {
+				MAF_colonial_insurgency_production_speed_buildings_factor = -0.01
+			}
+			add_to_variable = {
+				MAF_colonial_insurgency_stability_factor = -0.005
+			}
+			set_variable = {
+				v:MAF_insurgency_damage = 0
+			}
+		}
+		else_if = {
+			limit = {
+				check_variable = {
+					v:MAF_insurgency_level = 5
+				}
+			}
+			add_to_variable = {
+				MAF_colonial_insurgency_consumer_goods_factor = -0.01
+			}
+			add_to_variable = {
+				MAF_colonial_insurgency_production_speed_buildings_factor = -0.02
+			}
+			add_to_variable = {
+				MAF_colonial_insurgency_stability_factor = -0.01
+			}
+			
+		}
+		else_if = {
+			limit = {
+				check_variable = {
+					v:MAF_insurgency_level = 6
+				}
+			}
+			add_to_variable = {
+				MAF_colonial_insurgency_consumer_goods_factor = -0.02
+			}
+			add_to_variable = {
+				MAF_colonial_insurgency_production_speed_buildings_factor = -0.03
+			}
+			add_to_variable = {
+				MAF_colonial_insurgency_stability_factor = -0.02
+			}
+			
+		}
+		else_if = {
+			limit = {
+				check_variable = {
+					v:MAF_insurgency_level = 7
+				}
+			}
+			add_to_variable = {
+				MAF_colonial_insurgency_consumer_goods_factor = -0.04
+			}
+			add_to_variable = {
+				MAF_colonial_insurgency_production_speed_buildings_factor = -0.04
+			}
+			add_to_variable = {
+				MAF_colonial_insurgency_stability_factor = -0.05
+			}
+		}
+		else_if = {
+			limit = {
+				check_variable = {
+					v:MAF_insurgency_level = 8
+				}
+			}
+			add_to_variable = {
+				MAF_colonial_insurgency_consumer_goods_factor = -0.04
+			}
+			add_to_variable = {
+				MAF_colonial_insurgency_production_speed_buildings_factor = -0.04
+			}
+			add_to_variable = {
+				MAF_colonial_insurgency_stability_factor = -0.05
+			}
+		}
+		set_variable = {
+			v:MAF_insurgency_level_frame = 8
+		}
+		subtract_from_variable = {
+			v:MAF_insurgency_level_frame = v:MAF_insurgency_level
+		}
+	}
+	if = {
+		limit = {
+			has_variable = show_MAF_insurgency
+		}
+		add_to_variable = {
+			show_MAF_insurgency = 1
+		}
+		add_to_variable = {
+			show_MAF_insurgency_info = 1
+		}
+	}
+}
+
+MAF_insurgency_add_state_modifier = {
+	if = {
+		limit = {
+			NOT = {
+				has_dynamic_modifier = {
+					modifier = MAF_insurgency_state_modifier
+				}
+			}
+		}
+		add_dynamic_modifier = {
+			modifier = MAF_insurgency_state_modifier
+		}
+	}
+}
+
+MAF_insurgency_remove_state_modifier = {
+	if = {
+		limit = {
+			has_dynamic_modifier = {
+				modifier = MAF_insurgency_state_modifier
+			}
+		}
+		remove_dynamic_modifier = {
+			modifier = MAF_insurgency_state_modifier
+		}
+	}
+}
+
+
+MAF_start_test_insurgency = {
+	set_country_flag = MAF_insurgency_active
+	
+	1071 = {
+		MAF_insurgency_take_root_state = yes
+	}
+
+	
+
+	activate_mission = MAF_madagascar_war_mission
+	hidden_effect = {
+		add_days_mission_timeout = {
+			mission = MAF_insurgency_insurgents_making_a_move
+			days = -45
+		}
+	}
+}
+
+MAF_insurgency_take_root_state = {
+	set_temp_variable = {
+		MAF_temp_target_state = this
+	}
+	MAF = {
+		if = {
+			limit = { 
+				NOT = { is_in_array = { MAF_insurgent_controlled_states = MAF_temp_target_state } }
+			}
+			add_to_array = {
+				MAF_insurgent_controlled_states = MAF_temp_target_state
+			}
+		}
+		damage_units = {
+			state = MAF_temp_target_state
+			org_damage = 0.5
+			str_damage = 0.5
+			ratio = yes
+			army = yes
+		}
+		MAF_generate_insurgency_controlled_neigbour_states = yes
+		if = {
+			limit = {
+				NOT = {
+					has_active_mission = MAF_insurgency_insurgents_making_a_move
+				}
+			}
+			set_country_flag = {
+				flag = MAF_counterattack_cooldown
+				days = 30
+				value = 1
+			}
+			activate_mission = MAF_insurgency_insurgents_making_a_move
+		}
+	}
+
+	set_demilitarized_zone = yes
+}
+
+MAF_insurgency_lose_root_state = {
+	set_temp_variable = {
+		MAF_temp_target_state = this
+	}
+	MAF = {
+		remove_from_array = {
+			MAF_insurgent_controlled_states = MAF_temp_target_state
+		}
+		MAF_generate_insurgency_controlled_neigbour_states = yes
+	}
+
+	set_demilitarized_zone = no
+}
+
+MAF_generate_insurgency_controlled_neigbour_states = {
+	clear_array = MAF_insurgent_controlled_states_neigbours
+	clear_array = MAF_insurgent_frontline_states 
+	for_each_scope_loop = {
+		array = MAF_insurgent_controlled_states
+		every_neighbor_state = {
+			limit = {
+				is_owned_by = MAF
+				NOT = {
+					is_in_array = { MAF.MAF_insurgent_controlled_states = this }
+				}
+			}
+			set_temp_variable = {
+				MAF_temp_target_state = this
+			}
+
+			set_temp_variable = {
+				MAF_temp_target_state_frontline = PREV
+			}
+			MAF = {
+				if = {
+					limit = {
+						NOT = { 
+							is_in_array = { MAF_insurgent_controlled_states_neigbours = MAF_temp_target_state }
+						}
+					}
+					add_to_array = {
+						MAF_insurgent_controlled_states_neigbours = MAF_temp_target_state
+					}
+				}
+				
+				if = {
+					limit = { 
+						NOT = {
+							is_in_array = {
+								MAF_insurgent_frontline_states = MAF_temp_target_state_frontline
+							}
+						}
+					}
+					add_to_array = {
+						MAF_insurgent_frontline_states = MAF_temp_target_state_frontline
+					}
+				}
+			}
+		}
+	}
+}
+
+MAF_insurgents_making_a_move_effect = {
+	random_scope_in_array = {
+		array = MAF_insurgent_controlled_states_neigbours
+
+		set_temp_variable = {
+			MAF_temp_target_state = this
+		}
+		
+		set_temp_variable = {
+			MAF_temp_strength_modifier = 0
+		}
+		
+		subtract_from_temp_variable = {
+			MAF_temp_strength_modifier = MAF_state_local_defence_level
+		}
+
+		save_event_target_as = MAF_insugent_state
+		MAF = {
+			if = {
+				limit = { 
+					set_temp_variable = {
+						MAF_temp_state_id = MAF_temp_target_state:MAF_state_id
+					}
+					add_to_temp_variable = {
+						MAF_temp_strength_modifier = MAF_temp_state_id:MAF_insurgency_level
+					}
+					meta_trigger = {
+						text = {
+							divisions_in_state = {
+								size < [MAF_temp_strength]
+								state = MAF_temp_target_state
+							}
+						}
+						MAF_temp_strength = "[?MAF_temp_strength_modifier]"
+					}
+				}
+				PREV = {
+					MAF_insurgency_take_root_state = yes
+				}
+				country_event = { id = MAF_insurgency.1 }
+			}
+			else = {
+				country_event = { id = MAF_insurgency.2 }
+			}
+		}
+	}
+
+	MAF = {
+		activate_mission = MAF_insurgency_insurgents_making_a_move
+	}
+}
+
+MAF_start_counterattack_on_root = {
+	set_temp_variable = {
+		MAF_temp_target_state = this
+	}
+
+	set_demilitarized_zone = no
+
+	set_state_flag = MAF_active_counterattack_target_flag
+
+	MAF = {
+		set_country_flag = MAF_active_counterattack
+		add_to_array = {
+			MAF_active_counterattack_target = MAF_temp_target_state 
+		}
+
+		activate_mission = MAF_insurgency_counterattack_mission
+	}
+
+}
+
+MAF_insurgency_counterattack_mission_effect = {
+	set_temp_variable = {
+		MAF_temp_strength_modifier = 0
+	}
+	
+	for_each_scope_loop = {
+		array = MAF_active_counterattack_target
+		set_temp_variable = {
+			MAF_temp_target_state = this
+		}
+		clr_state_flag = MAF_active_counterattack_target_flag
+		if = {
+			limit = { 
+				has_state_flag = MAF_napalmed_state
+			}
+			subtract_from_temp_variable = {
+				MAF_temp_strength_modifier = 1
+			}
+		}
+		save_event_target_as = MAF_insugent_state
+	}
+
+	if = {
+		limit = {
+			set_temp_variable = {
+				MAF_temp_state_id = MAF_temp_target_state:MAF_state_id
+			}
+			add_to_temp_variable = {
+				MAF_temp_strength_modifier = MAF_temp_state_id:MAF_insurgency_level
+			}
+			meta_trigger = {
+				text = {
+					divisions_in_state = {
+						size > [MAF_temp_strength]
+						state = MAF_temp_target_state
+					}
+				}
+				MAF_temp_strength = "[?MAF_temp_strength_modifier]"
+			}
+		}
+		for_each_scope_loop = {
+			array = MAF_active_counterattack_target
+			MAF_insurgency_lose_root_state = yes
+		}
+		country_event = { id = MAF_insurgency.4 }
+	}
+	else = {
+		for_each_scope_loop = {
+			array = MAF_active_counterattack_target
+			damage_units = {
+				state = this
+				org_damage = 0.5
+				str_damage = 0.5
+				ratio = yes
+				army = yes
+			}
+			set_demilitarized_zone = yes
+		}
+		country_event = { id = MAF_insurgency.3 }
+	}
+
+	clr_country_flag = MAF_active_counterattack
+	clear_array = MAF_active_counterattack_target
+	set_country_flag = {
+		flag = MAF_counterattack_cooldown
+		days = 80
+		value = 1
+	}
+}
+
+
+MAF_loose_state_variable_effect = {
+	if = {
+		limit = {
+			event_target:MAF_insugent_state = {
+				has_variable = MAF_state_bureaucracy_value
+			}
+		}
+		event_target:MAF_insugent_state = {
+			set_temp_variable = {
+				MAF_temp_state_value = MAF_state_bureaucracy_value
+			}
+			multiply_temp_variable = {
+				MAF_temp_state_value = -1
+			}
+		}
+		add_to_variable = {
+			MAF_bureaucracy_var = MAF_temp_state_value
+			tooltip = MAF_bureaucracy_var_tt
+		}
+	}
+	
+	if = {
+		limit = {
+			event_target:MAF_insugent_state = {
+				has_variable = MAF_state_economy_value
+			}
+		}
+		event_target:MAF_insugent_state = {
+			set_temp_variable = {
+				MAF_temp_state_value = MAF_state_economy_value
+			}
+			multiply_temp_variable = {
+				MAF_temp_state_value = -1
+			}
+		}
+		add_to_variable = {
+			MAF_economy_var = MAF_temp_state_value
+			tooltip = MAF_economy_var_tt
+		}
+	}
+}
+
+MAF_retake_state_variable_effect = {
+	if = {
+		limit = {
+			event_target:MAF_insugent_state = {
+				has_variable = MAF_state_bureaucracy_value
+			}
+		}
+		event_target:MAF_insugent_state = {
+			set_temp_variable = {
+				MAF_temp_state_value = MAF_state_bureaucracy_value
+			}
+		}
+		add_to_variable = {
+			MAF_bureaucracy_var = MAF_temp_state_value
+			tooltip = MAF_bureaucracy_var_tt
+		}
+	}
+	
+	if = {
+		limit = {
+			event_target:MAF_insugent_state = {
+				has_variable = MAF_state_economy_value
+			}
+		}
+		event_target:MAF_insugent_state = {
+			set_temp_variable = {
+				MAF_temp_state_value = MAF_state_economy_value
+			}
+		}
+		add_to_variable = {
+			MAF_economy_var = MAF_temp_state_value
+			tooltip = MAF_economy_var_tt
+		}
+	}
+}
+

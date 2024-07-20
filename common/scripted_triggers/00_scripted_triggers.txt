@@ -1,0 +1,688 @@
+#	Example:
+# 
+#	example_trigger = {
+#		tag = GER
+#		is_ai = no
+#	}
+#
+#
+#	In a script file:
+#
+#	trigger = {
+#		exampel_trigger = yes
+#	}
+#
+
+is_in_or_aligned_with_accord = {
+	has_variable = accord_alignment_level
+}
+
+is_in_accord = {
+	check_variable = {
+		accord_alignment_level = 4
+	}
+}
+
+is_in_or_aligned_with_reichspakt = {
+	has_variable = reichspakt_alignment_level
+}
+
+is_in_or_aligned_with_geacps = {
+	has_variable = geacps_alignment_level
+}
+
+is_in_or_aligned_with_nam = {
+	has_variable = nam_alignment_level
+}
+
+is_in_or_aligned_with_anyone = {
+	OR = {
+		has_variable = accord_alignment_level
+		has_variable = reichspakt_alignment_level
+		has_variable = geacps_alignment_level
+		has_variable = nam_alignment_level
+	}
+}
+
+can_ROOT_get_wargoal_on_THIS = {
+	exists = yes
+	NOT = { is_in_faction_with = ROOT }
+	NOT = { is_subject_of = ROOT }
+}
+
+#Country scope
+is_JAP_or_ally_of_JAP = {
+	OR = {
+		tag = JAP
+		is_in_faction_with = JAP
+		is_subject_of = JAP
+	}
+}
+
+is_border_conflict_defender_vs_FROM = {
+	has_variable = ROOT.defender_state_vs_@FROM
+}
+
+has_not_initiated_border_incident_with_FROM = {
+	custom_trigger_tooltip = {
+		tooltip = not_initiated_border_incident_with_FROM
+		NOT = {		
+			any_state = {
+				check_variable = { FROM.defender_state_vs_@PREV = id }
+			}
+		}
+	}
+}
+
+has_not_initiated_border_incident_with_ROOT = {
+	custom_trigger_tooltip = {
+		tooltip = not_initiated_border_incident_with_ROOT
+		NOT = {
+			any_state = {
+				check_variable = { ROOT.defender_state_vs_@PREV = id }
+			}
+		}
+	}
+}
+
+#State scope
+has_ROOT_at_least_1_div_in_current_state_scope = {
+	custom_trigger_tooltip = {
+		tooltip = at_least_one_division_in_state
+		ROOT = { divisions_in_state = { state = PREV size > 0 } }
+	}
+}
+
+check_has_focus_tree_to_switch_to_national_populist = {
+	NOT = { tag = JAP }
+	NOT = { tag = GER }
+	NOT = { tag = ITA }
+	OR = {
+		NOT = {
+			AND = {
+				tag = SAF
+				has_dlc = "Together for Victory"
+			}
+		}
+	}
+	NOT = {
+		AND = {
+			tag = RAJ
+			has_dlc = "Together for Victory"
+		}
+	}
+	NOT = {
+		AND = {
+			tag = USA
+			has_dlc = "Man the Guns"
+		}
+	}
+	NOT = {
+		AND = {
+			tag = ENG
+			has_dlc = "Man the Guns"
+		}
+	}
+	NOT = {
+		AND = {
+			tag = FRA
+			has_dlc = "La Resistance"
+		}
+	}
+}
+
+check_has_focus_tree_to_switch_to_democratic = {
+	NOT = { tag = FRA }
+	NOT = { tag = USA }
+	NOT = { tag = ENG }
+	NOT = { tag = CAN }
+	NOT = { tag = SAF }
+	NOT = { tag = AUS }
+	NOT = { tag = NZL }
+	NOT = { tag = RAJ }
+	NOT = {
+		AND = {
+			tag = HUN
+			has_dlc = "Death or Dishonor"
+		}
+	}
+	NOT = {
+		AND = {
+			tag = JAP
+			has_dlc = "Waking the Tiger"
+		}
+	}
+	NOT = {
+		AND = {
+			tag = GER
+			has_dlc = "Waking the Tiger"
+		} 
+	}
+}
+
+check_has_focus_tree_to_switch_to_communism = {
+	NOT = { tag = SIK }
+	NOT = { tag = RUS }
+	NOT = {
+		AND = {
+			tag = JAP
+			has_dlc = "Waking the Tiger"
+		}
+	}
+	NOT = {
+		AND = {
+			tag = USA
+			has_dlc = "Man the Guns"
+		}
+	}
+	NOT = {
+		AND = {
+			tag = ENG
+			has_dlc = "Man the Guns"
+		}
+	}
+	NOT = {
+		AND = {
+			tag = FRA
+			has_dlc = "La Resistance"
+		}
+	}
+	NOT = {
+		AND = {
+			original_tag = SPR
+			has_dlc = "La Resistance"
+		}
+	}
+}
+
+#State scope
+is_controlled_by_ROOT_or_subject = {
+	custom_trigger_tooltip = {
+		tooltip = is_controlled_by_ROOT_or_subject
+		CONTROLLER = {
+			OR = {
+				tag = ROOT
+				is_subject_of = ROOT
+			}
+		}
+	}
+}
+
+#Country scope
+is_free_or_subject_of_root = {
+	OR = {
+		is_subject = no
+		is_subject_of = ROOT
+	}
+}
+
+#State scope
+is_controlled_by_ROOT_or_ally = {
+	custom_trigger_tooltip = {
+		tooltip = is_controlled_by_ROOT_or_ally
+		CONTROLLER = {
+			OR = {
+				tag = ROOT
+				is_subject_of = ROOT
+				is_in_faction_with = ROOT
+			}
+		}
+	}
+}
+
+is_csa_state = {
+	OR = {
+		state = 366
+		state = 365
+		state = 367
+		state = 370
+		state = 362
+		state = 363
+		state = 364
+		state = 371
+		state = 375
+		state = 368
+		state = 372
+	}
+}
+
+has_naval_treaty_trigger = {
+	always = no
+}
+
+ai_air_doctrine_tier_1_trigger = {
+	#OR = {
+		#has_tech = naval_strike_tactics
+		#has_tech = direct_ground_support
+		#has_tech = low_echelon_support
+	#}
+	always = no
+}
+
+ai_air_doctrine_tier_2_trigger = {
+	#OR = {
+		#has_tech = multialtitude_flying
+		#has_tech = hunt_and_destroy
+		#has_tech = operational_destruction
+	#}
+	always = no
+}
+ai_air_doctrine_tier_3_trigger = {
+	#OR = {
+	#	has_tech = flying_fortress
+	#	has_tech = naval_strike_torpedo_tactics
+	#	has_tech = infiltration_bombing
+	#}
+	always = no
+}
+
+# ai_land_doctrine_tier_1_trigger = {
+# 	OR = {
+# 		has_tech = elastic_defence
+# 		has_tech = mobile_defence
+# 		has_tech = grand_assault
+# 		has_tech = defence_in_depth
+# 	}
+# }
+
+# ai_land_doctrine_tier_2_trigger = {
+# 	OR = {
+# 		has_tech = kampfgruppe
+# 		has_tech = mechanised_offensive
+# 		has_tech = branch_interoperation
+# 		has_tech = infiltration_assault
+# 		has_tech = vast_offensives
+# 		has_tech = large_front_offensive
+# 	}
+# }
+
+CHI_is_on_historical_plan_trigger = {
+	always = no
+}
+SOV_is_on_historical_plan_trigger = {
+	always = no
+}
+USA_is_on_historical_plan_trigger = {
+	always = no
+}
+ROM_is_on_historical_plan_trigger = {
+	always = no
+}
+HUN_is_on_historical_plan_trigger = {
+	always = no
+}
+ENG_is_on_historical_plan_trigger = {
+	always = no
+}
+
+SOV_save_pp_for_manpower_trouble = {
+	has_manpower < 1000000
+	has_political_power < 200
+	surrender_progress > 0
+}
+
+should_USA_invade_europe_or_africa = {
+	USA = {
+		OR = {
+			is_in_faction_with = ENG
+			has_military_access_to = ENG
+		}
+	}
+	surrender_progress < 0.05
+	FRA = {
+		has_capitulated = yes
+	}
+	OR = {
+		GER = {
+			exists = yes
+			has_war_with = USA
+		}
+		DNF = {
+			exists = yes
+			has_war_with = USA
+		}
+		USA = {
+			OR = {
+				AND = {
+					OR = {
+						has_government = social_democrat
+						has_government = social_liberal
+						has_government = market_liberal
+						has_government = social_conservative
+					}
+					ENG = { 
+						OR = {
+							has_government = social_democrat
+							has_government = social_liberal
+							has_government = market_liberal
+							has_government = social_conservative
+						}
+					} 
+					OR = {
+						GER = { has_war_with = ENG }
+						DNF = { has_war_with = ENG }
+					}
+				}
+				is_in_array = { potential_and_current_enemies = GER }
+				is_in_array = { potential_and_current_enemies = DNF }
+			}
+		}
+	}
+}
+
+enemy_has_equal_or_better_radar_tech_trigger = {
+# 	custom_trigger_tooltip = {
+# 		tooltip = enemy_has_equal_or_better_radar_tech_trigger_tt
+# 		if = {
+# 			limit = {
+# 				ROOT = { 
+# 					has_tech = radio_detection 
+# 					NOT = {
+# 						has_tech = decimetric_radar
+# 					}
+# 				} 
+# 			}
+# 			FROM = { 
+# 				OR = {
+# 					has_tech = radio_detection 
+# 					has_tech = decimetric_radar
+# 				}
+# 			}
+# 		}
+# 		else_if = {
+# 			limit = {
+# 				ROOT = { 
+# 					has_tech = decimetric_radar 
+# 					NOT = {
+# 						has_tech = improved_decimetric_radar
+# 					}
+# 				} 
+# 			}
+# 			FROM = { 
+# 				OR = {
+# 					has_tech = decimetric_radar 
+# 					has_tech = improved_decimetric_radar
+# 				}
+# 			}
+# 		}
+# 		else_if = {
+# 			limit = {
+# 				ROOT = { 
+# 					has_tech = improved_decimetric_radar 
+# 					NOT = {
+# 						has_tech = centimetric_radar
+# 					}
+# 				} 
+# 			}
+# 			FROM = { 
+# 				OR = {
+# 					has_tech = improved_decimetric_radar 
+# 					has_tech = centimetric_radar
+# 				}
+# 			}
+# 		}
+# 		else_if = {
+# 			limit = {
+# 				ROOT = { 
+# 					has_tech = centimetric_radar 
+# 					NOT = {
+# 						has_tech = improved_centimetric_radar
+# 					}
+# 				} 
+# 			}
+# 			FROM = { 
+# 				OR = {
+# 					has_tech = centimetric_radar 
+# 					has_tech = improved_centimetric_radar
+# 				}
+# 			}
+# 		}
+# 		else_if = {
+# 			limit = {
+# 				ROOT = { 
+# 					has_tech = improved_centimetric_radar 
+# 					NOT = {
+# 						has_tech = advanced_centimetric_radar
+# 					}
+# 				} 
+# 			}
+# 			FROM = { 
+# 				OR = {
+# 					has_tech = improved_centimetric_radar 
+# 					has_tech = advanced_centimetric_radar
+# 				}
+# 			}
+# 		}
+# 		#no more steps needed because end of research tree is reached
+# 	}
+always = no
+}
+
+is_available_to_collaboration_government = { # occupied_countries.1 should be updated along with this
+	NOT = {
+		any_country_with_original_tag = {
+			original_tag_to_check = FROM
+			is_puppet_of = PREV # if already created one do not create another
+			has_autonomy_state = autonomy_collaboration_government
+		}
+	}
+}
+
+has_large_ally_not_pick_closed_economy = {
+	any_of_scopes = {
+		array = faction_members
+		
+		NOT = { tag = PREV }
+		num_of_military_factories > 30
+	}
+}
+
+is_in_FAMED = {
+	has_country_flag = is_in_FAMED
+}
+
+
+is_enemy_ideology = {
+	OR = {
+		AND = {
+			OR = {
+				has_government = authoritarian_socialist
+				has_government = radical_socialist
+			}
+			ROOT = {
+				OR = {
+					has_government = social_liberal
+					has_government = market_liberal
+					has_government = social_conservative
+					has_government = authoritarian_democrat
+					has_government = paternal_autocrat
+					has_government = national_populist
+				}
+			}
+		}
+		AND = {
+			OR = {
+				has_government = social_democrat
+				has_government = revolutionary_republican
+				has_government = social_liberal
+			}
+			ROOT = {
+				OR = {
+					has_government = authoritarian_socialist
+					has_government = authoritarian_democrat
+					has_government = paternal_autocrat
+					has_government = national_populist
+				}
+			}
+		}
+		AND = {
+			OR = {
+				has_government = social_conservative
+				has_government = market_liberal
+			}
+			ROOT = {
+				OR = {
+					has_government = authoritarian_socialist
+					has_government = radical_socialist
+					has_government = paternal_autocrat
+					has_government = national_populist
+				}
+			}
+		}
+		AND = {
+			OR = {
+				has_government = authoritarian_democrat
+				has_government = paternal_autocrat
+			}
+			ROOT = {
+				OR = {
+					has_government = social_democrat
+					has_government = social_liberal
+					has_government = market_liberal
+					has_government = social_conservative
+					has_government = authoritarian_socialist
+					has_government = radical_socialist
+					has_government = national_populist
+				}
+			}
+		}
+		AND = {
+			has_government = national_populist
+			ROOT = {
+				OR = {
+					has_government = social_democrat
+					has_government = social_liberal
+					has_government = market_liberal
+					has_government = social_conservative
+					has_government = authoritarian_socialist
+					has_government = radical_socialist
+					has_government = authoritarian_democrat
+					has_government = paternal_autocrat
+				}
+			}
+		}
+	}
+}
+
+owns_or_subject_of = {
+	custom_trigger_tooltip = {
+		tooltip = owns_or_subject_of_tt
+		owner = {
+			OR = {
+				tag = ROOT
+				is_subject_of = ROOT
+			}
+		}
+	}
+}
+controls_or_subject_of = {
+	custom_trigger_tooltip = {
+		tooltip = controls_or_subject_of_tt
+		controller = {
+			OR = {
+				tag = ROOT
+				is_subject_of = ROOT
+			}
+		}
+	}
+}
+
+is_core_or_compliance_60 = {
+	custom_trigger_tooltip = {
+		tooltip = is_core_or_compliance_60_tt
+		OR = {
+			controller = {
+				PREV = { is_core_of = PREV }
+			}
+			compliance > 60
+		}
+	}
+}
+is_available_to_collaboration_government = { # occupied_countries.1 should be updated along with this
+	NOT = {
+		any_country_with_original_tag = {
+			original_tag_to_check = FROM
+			is_puppet_of = PREV # if already created one do not create another
+			has_autonomy_state = autonomy_collaboration_government
+		}
+	}
+}
+
+has_large_ally_not_pick_closed_economy = {
+	any_of_scopes = {
+		array = faction_members
+
+		NOT = { tag = PREV }
+		num_of_military_factories > 30
+	}
+}
+state_has_any_resource = {
+	OR = {
+		has_resources_amount = {
+			resource = oil
+			amount > 0
+		}
+		has_resources_amount = {
+			resource = aluminium
+			amount > 0
+		}
+		has_resources_amount = {
+			resource = rubber
+			amount > 0
+		}
+		has_resources_amount = {
+			resource = tungsten
+			amount > 0
+		}
+		has_resources_amount = {
+			resource = steel
+			amount > 0
+		}
+		has_resources_amount = {
+			resource = chromium
+			amount > 0
+		}
+	}
+}
+#State scope
+state_is_fully_controlled_by_ROOT_or_subject = {
+	custom_trigger_tooltip = {
+		tooltip = state_is_fully_controlled_by_ROOT_or_subject_tt
+		OR = {
+			is_fully_controlled_by = ROOT
+			controller = {
+				is_subject_of = ROOT
+				has_full_control_of_state = PREV
+			}
+		}
+	}
+}
+country_can_be_reasonable_target_of_wargoal = { #Expected scopes: Target country is THIS, country getting wargoal is PREV
+	NOT = {
+		has_war_with = ROOT
+		is_in_faction_with = PREV
+		has_guaranteed = PREV
+		is_guaranteed_by = PREV
+		has_non_aggression_pact_with = PREV
+		is_subject_of = PREV
+	}
+}
+
+is_unlikely_country_tag = {
+	#maybe good to go over
+	exists = no
+	#OR = {
+	#	tag = ???
+	#}
+}
+
+has_war_with_non_exiled_country = {
+	custom_trigger_tooltip = {
+		tooltip = has_war_with_non_exiled_country_tt
+		has_war = yes
+		any_enemy_country = {
+			is_government_in_exile = no
+		}
+	}
+
+}

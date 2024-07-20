@@ -1,0 +1,3121 @@
+#################################
+# KRG Ireland Focus Tree        #
+#################################
+# By Zimbabwe Salt Co. & Damascius :P  & Aardappel :D & Axolotl >{O.O}<#
+#################################
+
+#!gfx:interface/Kalterkrieg/KRG_goals.gfx
+
+focus_tree = {
+	id = KRG_Ireland_Starting_focus
+	country = {
+		factor = 0
+		modifier = {
+			add = 10
+			tag = IRE
+		}
+	}
+	default = no
+	continuous_focus_position = { x = 100 y = 1500 }
+	shared_focus = IRE_ulster_debacle
+	
+	shared_focus = IRE_national_revitalisation_project
+
+	shared_focus = IRE_foreign_support
+
+	shared_focus = IRE_modernise_IRA
+
+	shared_focus = IRE_new_world_stage
+}
+
+
+
+######################
+### Starting Stuff ###
+######################
+
+### Political Stuff ###
+shared_focus = {
+	id = IRE_ulster_debacle
+	icon = GFX_generic_flag_northireland
+
+	available = {
+		has_country_flag = IRE_troubles_active
+	}
+
+	x = 0
+	y = 0
+	cost = 1
+	
+	available_if_capitulated = yes
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus IRE_ulster_debacle"
+	}
+
+	search_filters = {
+		FOCUS_FILTER_RESISTANCE
+	}
+
+
+	ai_will_do = {
+		base = 50
+	}
+}
+
+shared_focus = {
+	id = IRE_ministry_for_ulster_affairs
+	icon = GFX_generic_parliament2
+	
+	prerequisite = { focus = IRE_ulster_debacle }
+	relative_position_id = IRE_ulster_debacle
+
+	x = 2
+	y = 1
+	cost = 8
+	
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_RESISTANCE
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus IRE_ministry_for_ulster_affairs"
+
+		add_political_power = 120
+
+		swap_ideas = {
+			remove_idea = IRE_ulster_troubles
+			add_idea = IRE_ulster_troubles_lesser
+		}
+	}
+
+	ai_will_do = {
+		base = 30
+		modifier = {
+			OR = {
+				set_temp_variable = { IRE_unionist_requirement_status = 3 }
+				IRE_unionist_requirement_trigger = yes
+				custom_trigger_tooltip = { 
+					tooltip = IRE_unionist_requirement_tt
+					IRE_unionist_requirement_trigger = yes
+				}
+	
+				set_temp_variable = { IRE_nationalist_requirement_status = 3 }
+				IRE_nationalist_requirement_trigger = yes
+				custom_trigger_tooltip = { 
+					tooltip = IRE_nationalist_requirement_tt
+					IRE_nationalist_requirement_trigger = yes
+				}
+			}
+			factor = -1
+		}
+	}
+}
+
+shared_focus = {
+	id = IRE_contact_paramilitaries
+	icon = GFX_generic_paramilitary
+	
+	prerequisite = { focus = IRE_ministry_for_ulster_affairs }
+	relative_position_id = IRE_ministry_for_ulster_affairs
+
+	x = -1
+	y = 1
+	cost = 8
+	
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_RESISTANCE
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus IRE_ministry_for_ulster_affairs"
+		add_command_power = 15
+
+		set_temp_variable = { IRE_temp_nationalist_opinion_change = 10 }
+		IRE_change_nationalist_opinion = yes
+
+		unlock_decision_tooltip = IRE_nationalist_favor_for_intel
+	}
+}
+
+shared_focus = {
+	id = IRE_expand_policing
+	icon = GFX_generic_police_state
+	
+	prerequisite = { focus = IRE_ministry_for_ulster_affairs }
+	relative_position_id = IRE_ministry_for_ulster_affairs
+
+	x = 1
+	y = 1
+	cost = 10
+	
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_RESISTANCE
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus IRE_ministry_for_ulster_affairs"
+
+		set_temp_variable = { IRE_temp_nationalist_opinion_change = 5 }
+		IRE_change_nationalist_opinion = yes
+
+		swap_ideas = {
+			remove_idea = IRE_ulster_troubles_lesser
+			add_idea = IRE_ulster_troubles_least
+		}
+
+		unlock_decision_tooltip = IRE_focus_unionist_neighbourhoods
+		unlock_decision_tooltip = IRE_focus_nationalist_neighbourhoods
+	}
+
+	ai_will_do = {
+		base = 50
+	}
+}
+
+
+shared_focus = {
+	id = IRE_military_mission_in_ulster
+	icon = GFX_generic_army_guard
+	
+	prerequisite = { focus = IRE_ulster_debacle }
+	relative_position_id = IRE_ulster_debacle
+
+	available = {
+		OR = {
+			set_temp_variable = { IRE_unionist_requirement_status = 3 }
+			IRE_unionist_requirement_trigger = yes
+			custom_trigger_tooltip = { 
+				tooltip = IRE_unionist_requirement_tt
+				IRE_unionist_requirement_trigger = yes
+			}
+
+			set_temp_variable = { IRE_nationalist_requirement_status = 3 }
+			IRE_nationalist_requirement_trigger = yes
+			custom_trigger_tooltip = { 
+				tooltip = IRE_nationalist_requirement_tt
+				IRE_nationalist_requirement_trigger = yes
+			}
+		}
+		
+	}
+
+	x = -2
+	y = 1
+	cost = 8
+	
+	available_if_capitulated = yes
+	continue_if_invalid = yes
+
+	search_filters = {
+		FOCUS_FILTER_RESISTANCE
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus IRE_military_mission_in_ulster"
+		add_command_power = 15
+		unlock_decision_tooltip = IRE_deploy_the_army_into_NI
+		unlock_decision_tooltip = IRE_organise_unionist_supply_raid
+		unlock_decision_tooltip = IRE_organise_nationalist_supply_raid
+		unlock_decision_tooltip = IRE_organise_unionist_no_go_raid
+		unlock_decision_tooltip = IRE_organise_nationalist_no_go_raid
+	}
+
+	ai_will_do = {
+		base = 50
+	}
+}
+
+shared_focus = {
+	id = IRE_deploy_the_G2
+	icon = GFX_generic_espionage
+	
+	prerequisite = { focus = IRE_military_mission_in_ulster }
+	relative_position_id = IRE_military_mission_in_ulster
+
+	available = {
+		if = {
+			limit = {
+				has_dlc = "La Resistance"
+				is_ai = no
+			}
+			has_intelligence_agency = yes
+		}
+	}
+
+	x = 1
+	y = 1
+	cost = 8
+	
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_RESISTANCE
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus IRE_deploy_the_G2"
+		unlock_decision_tooltip = IRE_train_special_reconnaissance_units
+		unlock_decision_tooltip = IRE_infiltrate_unionist
+		unlock_decision_tooltip = IRE_infiltrate_nationalist
+	}
+
+	ai_will_do = {
+		base = 10
+		modifier = {
+			OR = {
+				check_variable = { IRE_unionist_strength > 50 }
+				check_variable = { IRE_nationalist_strength > 50 }
+			}
+			factor = 4
+		}
+
+		modifier = {
+			OR = {
+				check_variable = { IRE_unionist_entrenchment > 0.2 }
+				check_variable = { IRE_nationalist_entrenchment > 0.2 }
+			}
+			factor = 4
+		}
+	}
+}
+
+shared_focus = {
+	id = IRE_seperate_neighbourhoods
+	icon = GFX_generic_peacelines
+	
+	prerequisite = { focus = IRE_military_mission_in_ulster }
+	relative_position_id = IRE_military_mission_in_ulster
+
+	available = {
+		
+	}
+
+	x = -1
+	y = 1
+	cost = 10
+	
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_RESISTANCE
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus IRE_deploy_the_G2"
+		add_command_power = 15
+		set_temp_variable = { IRE_temp_nationalist_opinion_change = -5 }
+		IRE_change_nationalist_opinion = yes
+		
+		set_temp_variable = { IRE_temp_unionist_opinion_change = -5 }
+		IRE_change_unionist_opinion = yes
+
+		unlock_decision_tooltip = IRE_build_peace_lines
+	}
+
+	ai_will_do = {
+		base = 20
+	}
+}
+
+shared_focus = {
+	id = IRE_investigate_the_UDP
+	icon = GFX_NIR_army
+	
+	prerequisite = { focus = IRE_ministry_for_ulster_affairs  }
+	prerequisite = { focus = IRE_deploy_the_G2  }
+	relative_position_id = IRE_ministry_for_ulster_affairs
+
+	
+
+	x = -2
+	y = 2
+	cost = 8
+	
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_RESISTANCE
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus IRE_investigate_the_UDP"
+		country_event = { id = krg_ire_troubles.10 days = 3 }
+		
+	}
+}
+
+shared_focus = {
+	id = IRE_a_new_path
+	icon = GFX_NIR_agreement
+	
+	prerequisite = { focus = IRE_ministry_for_ulster_affairs  }
+	relative_position_id = IRE_ministry_for_ulster_affairs
+
+	available = {
+		has_country_flag = IRE_1952_election_done
+	}
+
+	x = 0
+	y = 2
+	cost = 1
+	
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_RESISTANCE
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus IRE_a_new_path"
+	}
+}
+
+shared_focus = {
+	id = IRE_a_steady_way
+	icon = GFX_IRE_abolish_ulster_privileges
+	
+	prerequisite = { focus = IRE_a_new_path  }
+	relative_position_id = IRE_a_new_path
+	mutually_exclusive = { focus = IRE_memories_of_1926 focus = IRE_idealism_of_1798 }
+
+	available = {
+		OR = {
+			IRE_has_sinn_fein_government_general = yes
+			IRE_has_saorstat_criostuil_government = yes
+			IRE_has_anh_government = yes
+		}
+	}
+
+	x = 2
+	y = 1
+	cost = 10
+	
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_RESISTANCE
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus IRE_a_steady_way"
+		custom_effect_tooltip = IRE_a_steady_way_tt
+	}
+}
+
+shared_focus = {
+	id = IRE_memories_of_1926
+	icon = GFX_IRE_memories_of_1926
+	
+	prerequisite = { focus = IRE_a_new_path  }
+	relative_position_id = IRE_a_new_path
+	mutually_exclusive = { focus = IRE_a_steady_way focus = IRE_idealism_of_1798 }
+
+
+	available = {
+		OR = {
+			IRE_has_sinn_fein_AutDem_government = yes
+			IRE_has_saorstat_criostuil_government = yes
+			IRE_has_fine_gael_government = yes
+		}
+		
+	}
+
+	x = 0
+	y = 1
+	cost = 10
+	
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_RESISTANCE
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus IRE_memories_of_1926"
+		custom_effect_tooltip = IRE_memories_of_1926_tt
+	}
+}
+
+shared_focus = {
+	id = IRE_idealism_of_1798
+	icon = GFX_IRE_idealism_of_1798
+	
+	prerequisite = { focus = IRE_a_new_path  }
+	relative_position_id = IRE_a_new_path
+	mutually_exclusive = { focus = IRE_a_steady_way focus = IRE_memories_of_1926 }
+
+
+	available = {
+		IRE_has_fine_gael_government = yes
+	}
+
+	x = -2
+	y = 1
+	cost = 10
+	
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_RESISTANCE
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus IRE_idealism_of_1798"
+		custom_effect_tooltip = IRE_idealism_of_1798_tt
+	}
+}
+
+shared_focus = {
+	id = IRE_open_negotiations
+	icon = GFX_ENG_parliament
+	
+	prerequisite = { focus = IRE_idealism_of_1798 focus = IRE_memories_of_1926 focus = IRE_a_steady_way  }
+	relative_position_id = IRE_memories_of_1926
+
+
+	
+
+	x = 0
+	y = 1
+	cost = 10
+	
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_RESISTANCE
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus IRE_open_negotiations"
+		country_event = {
+			id = krg_uls_con.2
+		}
+	}
+}
+
+### Sinn Féin Tree ###
+
+shared_focus = {
+	id = IRE_sinn_fein_fifth_term
+	icon = GFX_IRE_SF
+	x = 30
+	y = 0
+	cost = 2
+
+	available_if_capitulated = yes
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus IRE_sinn_fein_fifth_term"
+	}
+}
+
+shared_focus = {
+	id = IRE_looking_out_from_The_emerald_island
+	icon = GFX_generic_WIP
+	prerequisite = { focus = IRE_sinn_fein_fifth_term }
+	relative_position_id = IRE_sinn_fein_fifth_term
+
+	x = -3
+	y = 1
+	cost = 2
+
+	available_if_capitulated = yes
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus IRE_looking_out_from_the_emerald_island"
+	}
+}
+
+shared_focus = {
+	id = IRE_pursue_non-alignment
+	icon = GFX_generic_WIP
+	prerequisite = {focus = IRE_looking_out_from_The_emerald_island}
+	mutually_exclusive = {focus = IRE_closer_ties_to_the_germans}
+	relative_position_id = IRE_looking_out_from_The_emerald_island
+	
+	x = -2
+	y = 1
+	cost = 2
+
+	available_if_capitulated = yes
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus IRE_pursue_non-alignment"
+	}
+}
+
+shared_focus = {
+	id = IRE_closer_ties_to_the_germans
+	icon = GFX_generic_WIP
+	prerequisite = {focus = IRE_looking_out_from_The_emerald_island}
+	mutually_exclusive = {focus = IRE_pursue_non-alignment}
+	relative_position_id = IRE_looking_out_from_The_emerald_island
+
+	x = 0
+	y = 1
+	cost = 2
+
+	available_if_capitulated = yes
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus IRE_closer_ties_to_the_germans"
+	}
+}
+
+shared_focus = {
+	id = IRE_seek_out_other_non-aligned_nations
+	icon = GFX_generic_WIP
+	prerequisite = { focus = IRE_pursue_non-alignment}
+	relative_position_id = IRE_pursue_non-alignment
+
+	x = 0
+	y = 1
+	cost = 2
+
+	available_if_capitulated = yes
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus IRE_seek_out_other_non-aligned_nations"
+	}
+}
+
+shared_focus = {
+	id = IRE_trading_without_backing_a_side
+	icon = GFX_generic_WIP
+	prerequisite = { focus = IRE_seek_out_other_non-aligned_nations}
+	relative_position_id = IRE_seek_out_other_non-aligned_nations
+
+	x = 0
+	y = 1
+	cost = 2 
+
+	available_if_capitulated = yes
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus IRE_trading_without_backing_a_side"
+	}
+}
+
+shared_focus = {
+	id = IRE_open_to_german_businesses
+	icon = GFX_generic_WIP
+	prerequisite = { focus = IRE_closer_ties_to_the_germans}
+	relative_position_id = IRE_closer_ties_to_the_germans
+
+	x = 0
+	y = 1
+	cost = 2
+
+	available_if_capitulated = yes
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus IRE_open_to_german_businesses"
+	}
+}
+
+shared_focus = {
+	id = IRE_applying_for_the_figil_plan
+	icon = GFX_generic_WIP
+	prerequisite = {focus = IRE_open_to_german_businesses}
+	relative_position_id = IRE_open_to_german_businesses
+
+	x = 0
+	y = 2
+	cost = 2
+
+	available_if_capitulated = yes
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus IRE_applying_for_the_figil_plan"
+	}
+}
+
+### Economic Reconstruction ###
+
+shared_focus = {
+	id = IRE_national_revitalisation_project
+	icon = GFX_generic_workers_for_business
+	x = 9
+	y = 0
+	cost = 5
+	
+	available_if_capitulated = yes
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus IRE_national_revitalisation_project"
+		IRE_increase_reconstruction = yes
+		custom_effect_tooltip = IRE_unlock_IRE_national_revitalisation_cat_BOP
+		set_power_balance = {
+			id = IRE_reconstruction_bop
+			set_default = yes
+		}
+		add_stability = 0.05
+
+		hidden_effect = {
+			country_event = { id = krg_ire_focuses.10 days = 7 }
+		}
+	}
+
+	search_filters = {
+		FOCUS_FILTER_RECONSTRUCTION
+	}
+
+	ai_will_do = {
+		base = 20
+	}
+}
+
+shared_focus = {
+	id = IRE_rebuild_irish_railway
+	icon = GFX_generic_improve_railways
+
+	relative_position_id = IRE_national_revitalisation_project
+
+	prerequisite = { focus = IRE_national_revitalisation_project}
+
+	x = -2
+	y = 1
+
+	cost = 6
+	
+	available_if_capitulated = yes
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus IRE_rebuild_irish_railway"
+		unlock_decision_tooltip = IRE_Repair_The_Railways
+		move_up_inf_spending = yes
+	}
+
+	search_filters = {
+		FOCUS_FILTER_RECONSTRUCTION
+	}
+
+
+	ai_will_do = {
+		base = 20
+	}
+}
+
+shared_focus = {
+	id = IRE_infrastructure_grants 
+	icon = GFX_generic_railroad
+	
+	relative_position_id = IRE_rebuild_irish_railway
+
+	prerequisite = { focus = IRE_rebuild_irish_railway }
+	prerequisite = { focus = IRE_expand_the_public_work_camps }
+
+	x = -1
+	y = 1
+	cost = 6
+	
+	available_if_capitulated = yes
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus IRE_infrastructure_grants"
+		move_up_inf_spending = yes
+		country_event = { id = krg_ire_focuses.4 days = 3}
+	}
+
+	ai_will_do = {
+		base = 20
+	}
+}
+
+shared_focus = {
+	id = IRE_expand_the_public_work_camps
+	icon = GFX_generic_build_housing
+
+	relative_position_id = IRE_national_revitalisation_project
+
+	prerequisite = { focus = IRE_national_revitalisation_project}
+
+	x = 0
+	y = 1
+
+	cost = 6
+	
+	available_if_capitulated = yes
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus IRE_expand_the_public_work_camps"
+		unlock_decision_tooltip = IRE_Draft_Youth_To_The_Work_Gangs
+		move_up_service_spending = yes
+	}
+
+	search_filters = {
+		FOCUS_FILTER_RECONSTRUCTION
+	}
+
+	ai_will_do = {
+		base = 20
+	}
+}
+
+shared_focus = {
+	id = IRE_begin_decollectivization
+	icon = GFX_ENG_ban_unions
+
+	relative_position_id = IRE_national_revitalisation_project
+
+	prerequisite = { focus = IRE_national_revitalisation_project}
+
+	x = 2
+	y = 1
+
+	cost = 8
+	
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_DESYNDICALISATION
+		FOCUS_FILTER_RECONSTRUCTION
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus IRE_begin_decollectivization"
+		IRE_increase_IRE_collectivized_economy = yes
+		unlock_decision_tooltip = IRE_decollectivize_industrial_groups
+		unlock_decision_tooltip = IRE_decollectivize_arms_groups
+	}
+
+	ai_will_do = {
+		base = 20
+	}
+}
+
+shared_focus = {
+	id = IRE_land_redistribution_act
+	icon = GFX_generic_land_reform
+
+	relative_position_id = IRE_begin_decollectivization
+
+	prerequisite = { focus = IRE_begin_decollectivization}
+
+	x = 0
+	y = 1
+	
+	cost = 8
+	
+	available_if_capitulated = yes
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus IRE_complete_land_redistribution_act"
+		country_event = { id = krg_ire_focuses.9 }
+		IRE_increase_IRE_collectivized_economy = yes
+	}
+
+	search_filters = {
+		FOCUS_FILTER_DESYNDICALISATION
+		FOCUS_FILTER_RECONSTRUCTION
+	}
+
+	ai_will_do = {
+		base = 20
+	}
+}
+
+shared_focus = {
+	id = IRE_irish_business
+	icon = GFX_IRE_beer_whiskey_distilleries
+
+	relative_position_id = IRE_begin_decollectivization
+
+	prerequisite = { focus = IRE_begin_decollectivization}
+
+	x = 2
+	y = 1
+	
+	cost = 8
+	
+	available_if_capitulated = yes
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus IRE_irish_business"
+		move_up_business_spending = yes
+		IRE_increase_IRE_collectivized_economy = yes
+		unlock_decision_tooltip = IRE_decollectivize_irish_business
+		hidden_effect = {
+			country_event = { id = krg_ire_focuses.1 days = 15 }
+		}
+	}
+
+	search_filters = {
+		FOCUS_FILTER_DESYNDICALISATION
+		FOCUS_FILTER_RECONSTRUCTION
+	}
+
+	ai_will_do = {
+		base = 20
+	}
+}
+
+shared_focus = {
+	id = IRE_regional_reconstruction_bureau
+	icon = GFX_generic_construction_krg
+	
+	prerequisite = { focus = IRE_expand_the_public_work_camps }
+	prerequisite = { focus = IRE_rebuild_irish_railway }
+
+	relative_position_id = IRE_expand_the_public_work_camps
+
+	x = -1
+	y = 1
+
+	cost = 5
+	
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_RECONSTRUCTION
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus IRE_regional_reconstruction_bureau"
+		IRE_increase_reconstruction = yes
+		#country_event = { id = krg_ire_focuses.3 }
+
+		add_stability = 0.05
+	}
+
+	ai_will_do = {
+		base = 20
+	}
+}
+
+shared_focus = {
+	id = IRE_restart_livestock_farming
+	icon = GFX_IRE_dairy
+	
+	prerequisite = { focus = IRE_regional_reconstruction_bureau }
+	prerequisite = { focus = IRE_land_redistribution_act }
+	relative_position_id = IRE_regional_reconstruction_bureau
+
+	x = 1
+	y = 1
+	cost = 7
+	
+	available_if_capitulated = yes
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus IRE_restart_livestock_farming"
+
+		IRE_increase_reconstruction = yes
+
+		#country_event = { id = krg_ire_focuses.2 }
+		add_timed_idea = {
+			idea = IRE_livestock
+			days = 270
+		}
+		add_power_balance_value = {
+			id = IRE_reconstruction_bop
+			value = 0.1
+		}
+	}
+
+	search_filters = {
+		FOCUS_FILTER_RECONSTRUCTION
+	}
+
+	ai_will_do = {
+		base = 20
+	}
+}
+
+shared_focus = {
+	id = IRE_hydro_electric_projects
+	icon = GFX_generic_dam
+	
+	prerequisite = { focus = IRE_infrastructure_grants }
+	prerequisite = { focus = IRE_regional_reconstruction_bureau}
+	relative_position_id = IRE_infrastructure_grants
+
+	x = 1
+	y = 1
+	cost = 3
+	
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_INDUSTRY
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus IRE_hydro_electric_projects"
+		country_event = { id = krg_ire_focuses.5 days = 21}
+		IRE_increase_reconstruction = yes
+		unlock_decision_tooltip = IRE_build_poulaphouca_hydroelectric
+		unlock_decision_tooltip = IRE_build_cathaleens_fall_hydroelectric
+		unlock_decision_tooltip = IRE_build_inniscarra_hydroelectric
+		set_variable = { IRE_hydro_electric_projects_completed = 0 }
+	}
+
+	ai_will_do = {
+		base = 20
+	}
+}
+
+shared_focus = {
+	id = IRE_agri_focus
+	icon = GFX_generic_agricultural_aid2
+	
+	prerequisite = { focus = IRE_regional_reconstruction_bureau }
+	prerequisite = { focus = IRE_land_redistribution_act }
+	mutually_exclusive = { focus = IRE_import_grain }
+	relative_position_id = IRE_land_redistribution_act
+
+	x = 0
+	y = 1
+	cost = 6
+	
+	available_if_capitulated = yes
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus IRE_agri_focus"
+		unlock_decision_tooltip = IRE_Land_Army
+		add_power_balance_value = {
+			id = IRE_reconstruction_bop
+			value = 0.15
+		}
+		add_ideas = {
+			IRE_domestic_grain_1
+		}
+	}
+
+	ai_will_do = {
+		base = 15
+		modifier = {
+			OR = {
+				has_game_rule = {
+					rule = IRE_1952_ELECTION
+					option = IRE_FINE_GAEL_1952
+				}
+				has_game_rule = {
+					rule = IRE_1952_ELECTION
+					option = IRE_ANH_1952
+				}
+				has_game_rule = {
+					rule = IRE_1952_ELECTION
+					option = IRE_MULCAHY_COUP_1952
+				}
+			}
+			factor = 1000
+		}
+	}
+}
+
+shared_focus = {
+	id = IRE_mechanised_farms
+	icon = GFX_generic_agriculture3
+	
+	prerequisite = { focus = IRE_agri_focus }
+
+	relative_position_id = IRE_agri_focus
+
+
+	x = 1
+	y = 1
+
+	cost = 6
+	
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_INDUSTRY
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus IRE_mechanised_farms"
+		add_power_balance_value = {
+			id = IRE_reconstruction_bop
+			value = 0.05
+		}
+		134 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
+
+		add_ideas = {
+			IRE_mechanised_farms_idea
+		}
+	}
+
+	ai_will_do = {
+		base = 20
+	}
+}
+
+shared_focus = {
+	id = IRE_agricultural_relief_bank
+	icon = GFX_PAL_Food_Import
+	
+	prerequisite = { focus = IRE_agri_focus focus = IRE_restart_livestock_farming }
+	relative_position_id = IRE_agri_focus
+
+	x = -1
+	y = 1
+	cost = 6
+	
+	available_if_capitulated = yes
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus IRE_agricultural_relief_bank"
+		#country_event = { id = krg_ire_focuses.6 }
+		move_up_business_spending = yes
+		add_power_balance_value = {
+			id = IRE_reconstruction_bop
+			value = 0.05
+		}
+		custom_effect_tooltip = IRE_agricultural_relief_bank_decsion_modifiy_tt
+		effect_tooltip = {
+			add_power_balance_value = {
+				id = IRE_reconstruction_bop
+				value = 0.05
+			}
+			add_stability = 0.01
+		}
+	}
+
+	ai_will_do = {
+		base = 20
+	}
+}
+
+shared_focus = {
+	id = IRE_irish_agriculture
+	icon = GFX_generic_agricultural_aid
+	
+	prerequisite = { focus = IRE_agricultural_relief_bank }
+	prerequisite = { focus = IRE_mechanised_farms }
+	relative_position_id = IRE_agricultural_relief_bank
+
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = IRE_has_expanded_land_army
+			has_idea = IRE_domestic_grain_2
+		}
+	}
+	x = 1
+	y = 1
+	cost = 8
+	
+	available_if_capitulated = yes
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus IRE_irish_agriculture"
+		add_power_balance_value = {
+			id = IRE_reconstruction_bop
+			value = 0.1
+		}
+
+		add_tech_bonus = {
+			uses = 2
+			bonus = 1
+			category = industry_tech
+			category = refining_tech
+		}
+		custom_effect_tooltip = IRE_merge_agriculture_ideas
+		hidden_effect = {
+			remove_ideas = {
+				IRE_domestic_grain_2
+				IRE_mechanised_farms_idea
+			}
+			add_ideas = {
+				IRE_irish_agriculture
+			}
+		}
+	}
+
+	ai_will_do = {
+		base = 20
+	}
+}
+
+shared_focus = {
+	id = IRE_finish_electrifcation
+	icon = GFX_generic_lightbulb
+	
+	prerequisite = { focus = IRE_hydro_electric_projects }
+
+	relative_position_id = IRE_hydro_electric_projects
+
+	mutually_exclusive = { focus = IRE_rural_electrifcation }
+
+	x = -1
+	y = 1
+	cost = 5
+	
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_RECONSTRUCTION
+		FOCUS_FILTER_INDUSTRY
+	}
+
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = IRE_has_completed_hydroelectric_projects
+			check_variable = { IRE_hydro_electric_projects_completed > 1 }
+		}
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus IRE_finish_electrifcation"
+		country_event = { id = krg_ire_focuses.7 }
+		IRE_increase_reconstruction = yes
+		add_power_balance_value = {
+			id = IRE_reconstruction_bop
+			value = -0.1
+		}
+		if = {
+			limit = { 
+				113 = {
+					has_state_category = six
+				}
+			}
+			113 = {
+				set_state_category = seven
+			}
+			
+		}
+		else = {
+			113 = {
+				set_state_category = eight
+			}
+			119 = {
+				set_state_category = seven
+			}
+			
+		}
+		
+	}
+
+	ai_will_do = {
+		base = 20
+	}
+}
+
+shared_focus = {
+	id = IRE_rural_electrifcation
+	icon = GFX_generic_electricity
+	
+	prerequisite = { focus = IRE_hydro_electric_projects }
+
+	relative_position_id = IRE_hydro_electric_projects
+
+	mutually_exclusive = { focus = IRE_finish_electrifcation }
+
+	x = 1
+	y = 1
+	cost = 5
+	
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_RECONSTRUCTION
+	}
+
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = IRE_has_completed_hydroelectric_projects
+			check_variable = { IRE_hydro_electric_projects_completed > 1 }
+		}
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus IRE_rural_electrifcation"
+		country_event = { id = krg_ire_focuses.7 }
+		IRE_increase_reconstruction = yes
+		add_power_balance_value = {
+			id = IRE_reconstruction_bop
+			value = 0.1
+		}
+		844 = {
+			set_state_category = five
+		}
+		134 = {
+			set_state_category = five
+		}
+		135 = {
+			set_state_category = five
+		}
+	}
+
+	ai_will_do = {
+		base = 20
+	}
+}
+
+shared_focus = {
+	id = IRE_slow_recovery
+	icon = GFX_generic_bricks
+	
+	prerequisite = { focus = IRE_finish_electrifcation focus = IRE_rural_electrifcation }
+	prerequisite = { focus = IRE_irish_agriculture focus = IRE_irish_industry }
+
+	relative_position_id = IRE_finish_electrifcation
+
+	available = {
+		IRE_reconstruction_done = yes
+	}
+
+	x = 3
+	y = 2
+	cost = 10
+	
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_RECONSTRUCTION
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus IRE_slow_recovery"
+		country_event = { id = krg_ire_focuses.8 }
+		IRE_complete_reconstruction = yes
+		mark_focus_tree_layout_dirty = yes
+		hidden_effect = {
+			remove_trait = {
+				character = IRE_patrick_mcgilligan
+				slot = economy_minister
+				trait = IRE_industrialist
+			}
+		}
+	}
+
+	ai_will_do = {
+		base = 50
+	}
+}
+
+### Foreign Support ###
+
+shared_focus = {
+	id = IRE_foreign_support
+	icon = GFX_generic_bag_of_money
+	x = 5
+	y = 1
+	relative_position_id = IRE_national_revitalisation_project
+	cost = 6
+	
+	prerequisite = { focus = IRE_national_revitalisation_project }
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_RECONSTRUCTION
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus IRE_foreign_support"
+		IRE_increase_reconstruction = yes
+		unlock_decision_tooltip = IRE_receive_german_aid
+		add_political_power = 50
+	}
+
+	ai_will_do = {
+		base = 0
+		modifier = {
+			has_completed_focus = IRE_national_revitalisation_project
+			add = 20
+		}
+	}
+}
+
+
+shared_focus = {
+	id = IRE_mitteleuropa_ties
+	icon = GFX_mitteleuropa_ties
+
+	prerequisite = { focus = IRE_foreign_support }
+
+	relative_position_id = IRE_foreign_support
+
+	x = 1
+	y = 1
+	cost = 3
+	
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_FOREIGN_AFFAIRS
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus IRE_mitteleuropa_ties"
+		every_country = {
+			limit = {
+				is_mitteleuropa_member_plus_partner = yes
+			}
+			add_opinion_modifier = {
+				target = FROM
+				modifier = IRE_mitteleuropa_ties_opinion
+			}
+			add_opinion_modifier = {
+				target = FROM
+				modifier = IRE_mitteleuropa_ties_trade
+			}
+		}
+	}
+
+	ai_will_do = {
+		base = 20
+	}
+}
+
+shared_focus = {
+	id = IRE_import_grain
+	icon = GFX_GENERIC_european_trade
+
+	prerequisite = { focus = IRE_irish_business }
+	prerequisite = { focus = IRE_mitteleuropa_ties }
+
+	relative_position_id = IRE_mitteleuropa_ties
+
+	mutually_exclusive = { focus = IRE_agri_focus }
+
+	x = -1
+	y = 1
+	cost = 6
+	
+	available_if_capitulated = yes
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus IRE_import_grain"
+		add_power_balance_value = {
+			id = IRE_reconstruction_bop
+			value = -0.15
+		}
+		add_ideas = {
+			IRE_import_grain_idea
+		}
+	}
+
+	ai_will_do = {
+		base = 20
+		modifier = {
+			OR = {
+				has_game_rule = {
+					rule = IRE_1952_ELECTION
+					option = IRE_MULCAHY_1952
+				}
+				has_game_rule = {
+					rule = IRE_1952_ELECTION
+					option = IRE_VALERA_1952
+				}
+			}
+			factor = 1000
+		}
+	}
+}
+
+
+shared_focus = {
+	id = IRE_industrial_towns
+	icon = GFX_generic_industrial_towns
+	
+	prerequisite = { focus = IRE_import_grain }
+	prerequisite = { focus = IRE_foreign_partners }
+
+	relative_position_id = IRE_import_grain
+
+
+	x = 0
+	y = 1
+
+	cost = 6
+	
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_INDUSTRY
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus IRE_industrial_towns"
+		add_power_balance_value = {
+			id = IRE_reconstruction_bop
+			value = -0.1
+		}
+		if = {
+			limit = { 
+				113 = {
+					has_state_category = six
+				}
+			}
+			113 = {
+				set_state_category = seven
+				
+			}
+			
+		}
+		else = {
+			113 = {
+				set_state_category = eight
+			}
+			119 = {
+				set_state_category = seven
+			}
+		}
+		113 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
+		119 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
+	}
+
+	ai_will_do = {
+		base = 20
+	}
+}
+
+shared_focus = {
+	id = IRE_irish_industry
+	icon = GFX_generic_the_ministry_of_agriculture_trade_and_industry
+	
+	prerequisite = { focus = IRE_industrial_towns }
+	prerequisite = { focus = IRE_foreign_partners }
+	relative_position_id = IRE_industrial_towns
+
+	x = 1
+	y = 1
+	cost = 8
+	
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_INDUSTRY
+	}
+
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus IRE_agricultural_relief_bank"
+		add_power_balance_value = {
+			id = IRE_reconstruction_bop
+			value = -0.1
+		}
+		113 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = arms_factory
+				level = 1
+				instant_build = yes
+			}
+		}
+		119 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = arms_factory
+				level = 1
+				instant_build = yes
+			}
+		}
+		add_tech_bonus = {
+			uses = 2
+			bonus = 1
+			category = industry_tech
+		}
+	}
+
+	ai_will_do = {
+		base = 20
+	}
+}
+
+shared_focus = {
+	id = IRE_foreign_partners
+	icon = GFX_COS_German_Bailout
+
+	prerequisite = { focus = IRE_mitteleuropa_ties }
+	prerequisite = { focus = IRE_irish_business }
+
+	relative_position_id = IRE_mitteleuropa_ties
+
+	x = 1
+	y = 1
+	cost = 5
+	
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_FOREIGN_AFFAIRS
+		FOCUS_FILTER_INDUSTRY
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus IRE_foreign_support"
+		add_power_balance_value = {
+			id = IRE_reconstruction_bop
+			value = -0.05
+		}
+
+		if = {
+			limit = {
+				always = no
+				has_dlc_aat = yes
+			}
+			custom_effect_tooltip = tooltip_white_line
+			custom_effect_tooltip = invites_mio_tt
+			show_mio_tooltip = GER_mauser_organization
+			custom_effect_tooltip = tooltip_white_line
+			custom_effect_tooltip = invites_mio_tt
+			show_mio_tooltip = GER_daimler_benz_organization
+		}
+		else = {
+			custom_effect_tooltip = tooltip_white_line
+			custom_effect_tooltip = available_industrial_concern
+			show_ideas_tooltip = mauser_ireland
+			custom_effect_tooltip = tooltip_white_line
+			custom_effect_tooltip = available_industrial_concern
+			show_ideas_tooltip = daimler_ireland
+		}
+
+		custom_effect_tooltip = tooltip_white_line
+		custom_effect_tooltip = available_industrial_concern
+		show_ideas_tooltip = IRE_siemens
+		
+	}
+
+	ai_will_do = {
+		base = 20
+	}
+}
+
+### Military trees ###
+
+# Army
+
+shared_focus = {
+	id = IRE_modernise_IRA
+	icon = GFX_IRE_army
+
+	x = 22
+	y = 0
+	cost = 8
+
+	available = {
+		has_completed_focus = IRE_hydro_electric_projects
+		OR = {
+			has_completed_focus = IRE_import_grain
+			has_completed_focus = IRE_agri_focus
+		}
+	}
+
+	search_filters = {
+		FOCUS_FILTER_ARMY_XP
+		FOCUS_FILTER_ARMY_BONUS
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus IRE_mordernise_IRA"
+		army_experience = 50
+		add_ideas = { IRE_modernising_IRA }
+		unlock_decision_category_tooltip = IRE_irish_republican_army_cat
+		IRE_set_up_army_restructuring = yes
+	}
+
+	ai_will_do = {
+		base = 5
+
+		modifier = {
+			has_completed_focus = IRE_slow_recovery
+			add = 20
+		}
+	}
+}
+
+shared_focus = {
+	id = IRE_fortress_ireland_doctrine
+	icon = GFX_nested_fortifications
+
+	mutually_exclusive = { focus = IRE_pre_emptive_doctrine }
+	prerequisite = { focus = IRE_modernise_IRA }
+	relative_position_id = IRE_modernise_IRA
+
+	x = -1
+	y = 1
+	cost = 6 
+
+	search_filters = {
+		FOCUS_FILTER_ARMY_XP
+		FOCUS_FILTER_ARMY_BONUS
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus IRE_fortress_ireland_doctrine"
+		army_experience = 25
+		add_ideas = { IRE_fortress_doctrine_1 }
+		add_doctrine_cost_reduction  = {
+			cost_reduction = 0.5
+			uses = 1
+			category = cat_grand_battle_plan
+		}
+		unlock_decision_tooltip = IRE_strengthen_defences
+	}
+
+	ai_will_do = {
+		base = 20
+	}
+}
+
+shared_focus = {
+	id = IRE_pre_emptive_doctrine
+	icon = GFX_generic_doctrine_fire_superiority
+
+	mutually_exclusive = { focus = IRE_fortress_ireland_doctrine }
+	prerequisite = { focus = IRE_modernise_IRA }
+	relative_position_id = IRE_modernise_IRA
+
+	x = 1
+	y = 1
+	cost = 6
+
+	ai_will_do = {
+		base = 20
+	}
+
+	search_filters = {
+		FOCUS_FILTER_ARMY_XP
+		FOCUS_FILTER_ARMY_BONUS
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus IRE_pre_emptive_doctrine"
+		army_experience = 25
+		add_ideas = { IRE_pre_emptive_doctrine_1 }
+		add_doctrine_cost_reduction  = {
+			cost_reduction = 0.5
+			uses = 1
+			category = cat_combined_operations
+		}
+		unlock_decision_tooltip = IRE_increase_readiness
+	}
+}
+
+shared_focus = {
+	id = IRE_lessons_of_occupation
+	icon = GFX_generic_combined_bomber_offensive
+	
+	prerequisite = { focus = IRE_fortress_ireland_doctrine focus = IRE_pre_emptive_doctrine }
+	relative_position_id = IRE_fortress_ireland_doctrine
+
+	x = 1
+	y = 1
+	cost = 8
+
+	ai_will_do = {
+		base = 20
+	}
+
+	search_filters = {
+		FOCUS_FILTER_ARMY_BONUS
+		FOCUS_FILTER_ARMY_XP
+		FOCUS_FILTER_RESISTANCE
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus IRE_lessons_of_occupation"
+		army_experience = 50
+		IRE_increase_militia_cap = yes
+		add_ideas = { IRE_lessons_of_occupation_idea_1 }
+		unlock_decision_tooltip = IRE_improved_guerilla_tactics
+	}
+}
+
+shared_focus = {
+	id = IRE_new_standard_infantry_kit
+	icon = GFX_Support_equipment_2
+	available  = {
+		set_temp_variable = { IRE_IRA_requirment_temp = 65 }
+		IRE_IRA_requirment_trigger = yes
+		custom_trigger_tooltip = { 
+			tooltip = IRE_IRA_requirement_tt
+			IRE_IRA_requirment_trigger = yes
+	 	}
+	}
+	
+	prerequisite = { focus = IRE_lessons_of_occupation  }
+	relative_position_id = IRE_lessons_of_occupation
+
+	x = 0
+	y = 2
+	cost = 5 
+
+	ai_will_do = {
+		base = 20
+	}
+
+	search_filters = {
+		FOCUS_FILTER_ARMY_BONUS
+		FOCUS_FILTER_RESEARCH
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus IRE_new_standard_infantry_kit"
+		add_tech_bonus = {
+			bonus = 1
+			uses = 2
+			category = infantry_weapons
+		}
+		country_event = {
+			id = krg_ire_mil.1
+		}
+	}
+}
+
+shared_focus = {
+	id = IRE_bolster_home_reserve
+	icon = GFX_IRE_training
+	available  = {
+		set_temp_variable = { IRE_IRA_requirment_temp = 15 }
+		IRE_IRA_requirment_trigger = yes
+		custom_trigger_tooltip = { 
+			tooltip = IRE_IRA_requirement_tt
+			IRE_IRA_requirment_trigger = yes
+	 	}
+	}
+
+	prerequisite = { focus = IRE_fortress_ireland_doctrine }
+	relative_position_id = IRE_fortress_ireland_doctrine
+
+	x = -1
+	y = 1
+	cost = 7 
+
+	ai_will_do = {
+		base = 20
+	}
+
+	search_filters = {
+		FOCUS_FILTER_ARMY_BONUS
+		FOCUS_FILTER_RESISTANCE
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus IRE_bolster_home_reserve"
+		IRE_upgrade_template_and_divisions = yes
+		IRE_increase_militia_cap = yes
+		set_temp_variable = { IRE_IRA_increase_temp = -5 }
+		IRE_increase_IRA_restructuring = yes
+		swap_ideas = {
+			remove_idea = IRE_fortress_doctrine_1
+			add_idea = IRE_fortress_doctrine_2
+		}
+		unlock_decision_tooltip = IRE_expand_militias
+	}
+}
+
+shared_focus = {
+	id = IRE_anti_amphibious_operations
+	icon = GFX_generic_coast_defense
+	available  = {
+		set_temp_variable = { IRE_IRA_requirment_temp = 65 }
+		IRE_IRA_requirment_trigger = yes
+		custom_trigger_tooltip = { 
+			tooltip = IRE_IRA_requirement_tt
+			IRE_IRA_requirment_trigger = yes
+	 	}
+	}
+	
+	prerequisite = { focus = IRE_bolster_home_reserve }
+	relative_position_id = IRE_bolster_home_reserve
+
+	x = -1
+	y = 1
+	cost = 10 
+
+	ai_will_do = {
+		base = 20
+	}
+
+	search_filters = {
+		FOCUS_FILTER_ARMY_BONUS
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus IRE_anti_amphibious_operations"
+		add_timed_idea = {
+			idea = IRE_anti_amphibious
+			days = 720
+		}
+		119 = {
+			add_building_construction = {
+				type = coastal_bunker
+				province = 11257
+				level = 1
+			}
+		}
+		113 = {
+			add_building_construction = {
+				type = coastal_bunker
+				province = 11293
+				level = 2
+			}
+			add_building_construction = {
+				type = coastal_bunker
+				province = 13240
+				level = 1
+			}
+			add_building_construction = {
+				type = coastal_bunker
+				province = 3359
+				level = 1
+			}
+		}
+		135 = {
+			add_building_construction = {
+				type = coastal_bunker
+				province = 7394
+				level = 1
+			}
+		}
+		134 = {
+			add_building_construction = {
+				type = coastal_bunker
+				province = 9303
+				level = 1
+			}
+		}
+		844 = {
+			add_building_construction = {
+				type = coastal_bunker
+				province = 385
+				level = 1
+			}
+		}
+		
+	}
+}
+
+shared_focus = {
+	id = IRE_new_generation_officers
+	icon = GFX_IRE_officers
+	available  = {
+		set_temp_variable = { IRE_IRA_requirment_temp = 15 }
+		IRE_IRA_requirment_trigger = yes
+		custom_trigger_tooltip = { 
+			tooltip = IRE_IRA_requirement_tt
+			IRE_IRA_requirment_trigger = yes
+	 	}
+	}
+	
+	prerequisite = { focus = IRE_bolster_home_reserve }
+	prerequisite = { focus = IRE_lessons_of_occupation }
+	relative_position_id = IRE_bolster_home_reserve
+
+	x = 1
+	y = 1
+	cost = 8 
+
+	ai_will_do = {
+		base = 20
+	}
+
+	search_filters = {
+		FOCUS_FILTER_ARMY_BONUS
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus IRE_new_generation_officers"
+		every_army_leader = {
+			limit = {
+				skill > 2
+			}
+			add_trait = {
+				trait = guerilla_fighter
+			}
+		}
+		add_doctrine_cost_reduction  = {
+			cost_reduction = 0.5
+			uses = 2
+			category = cat_grand_battle_plan
+		}
+		unlock_decision_tooltip = IRE_young_officers
+	}
+}
+
+shared_focus = {
+	id = IRE_guerilla_in_every_household
+	icon = GFX_IRE_peoples_army
+	available  = {
+		set_temp_variable = { IRE_IRA_requirment_temp = 85 }
+		IRE_IRA_requirment_trigger = yes
+		custom_trigger_tooltip = { 
+			tooltip = IRE_IRA_requirement_tt
+			IRE_IRA_requirment_trigger = yes
+	 	}
+	}	
+	
+	prerequisite = { focus = IRE_bolster_home_reserve }
+	relative_position_id = IRE_bolster_home_reserve
+
+	x = 0
+	y = 2
+	cost = 7 
+
+	ai_will_do = {
+		base = 20
+	}
+
+	search_filters = {
+		FOCUS_FILTER_ARMY_BONUS
+		FOCUS_FILTER_RESISTANCE
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus IRE_guerilla_in_every_household"
+		IRE_upgrade_template_and_divisions = yes
+		IRE_increase_militia_cap = yes
+		set_temp_variable = { IRE_IRA_increase_temp = -5 }
+		IRE_increase_IRA_restructuring = yes
+		swap_ideas = {
+			remove_idea = IRE_fortress_doctrine_2
+			add_idea = IRE_fortress_doctrine_3
+		}
+	}
+}
+
+shared_focus = {
+	id = IRE_acquire_advanced_hardware
+	icon = GFX_generic_design_equipment_standards
+	available  = {
+		set_temp_variable = { IRE_IRA_requirment_temp = 15 }
+		IRE_IRA_requirment_trigger = yes
+		custom_trigger_tooltip = { 
+			tooltip = IRE_IRA_requirement_tt
+			IRE_IRA_requirment_trigger = yes
+	 	}
+	}
+	
+	prerequisite = { focus = IRE_pre_emptive_doctrine }
+	relative_position_id = IRE_pre_emptive_doctrine
+
+	x = 1
+	y = 1
+	cost = 7
+
+	ai_will_do = {
+		base = 20
+	}
+
+	search_filters = {
+		FOCUS_FILTER_RESEARCH
+		FOCUS_FILTER_ARMY_BONUS
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus IRE_acquire_advanced_hardware"
+		swap_ideas = {
+			remove_idea = IRE_pre_emptive_doctrine_1
+			add_idea = IRE_pre_emptive_doctrine_2
+		}
+		unlock_decision_tooltip = IRE_study_german_designs
+		unlock_decision_tooltip = IRE_study_canadian_designs
+	}
+}
+
+shared_focus = {
+	id = IRE_new_airbases
+	icon = GFX_IRE_air
+	available  = {
+		set_temp_variable = { IRE_IRA_requirment_temp = 25 }
+		IRE_IRA_requirment_trigger = yes
+		custom_trigger_tooltip = { 
+			tooltip = IRE_IRA_requirement_tt
+			IRE_IRA_requirment_trigger = yes
+	 	}
+	}
+	
+	prerequisite = { focus = IRE_pre_emptive_doctrine }
+	relative_position_id = IRE_pre_emptive_doctrine
+
+	x = 0
+	y = 2
+	cost = 7
+
+	ai_will_do = {
+		base = 20
+	}
+
+	search_filters = {
+		FOCUS_FILTER_AIRFORCE_BONUS
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus IRE_new_airbases"
+		add_ideas = {
+			IRE_new_air_corps
+		}
+		unlock_decision_tooltip = IRE_establish_air_bases
+	}
+}
+
+shared_focus = {
+	id = IRE_eyes_in_atlantic
+	icon = GFX_IRE_air_sea
+	available  = {
+		set_temp_variable = { IRE_IRA_requirment_temp = 60 }
+		IRE_IRA_requirment_trigger = yes
+		custom_trigger_tooltip = { 
+			tooltip = IRE_IRA_requirement_tt
+			IRE_IRA_requirment_trigger = yes
+	 	}
+	}
+	
+	prerequisite = { focus = IRE_acquire_advanced_hardware }
+	relative_position_id = IRE_acquire_advanced_hardware
+
+	x = 1
+	y = 1
+	cost = 7
+
+	ai_will_do = {
+		base = 20
+	}
+
+	search_filters = {
+		FOCUS_FILTER_RESEARCH
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus IRE_eyes_in_atlantic"
+		add_tech_bonus = {
+			bonus = 1
+			uses = 2 
+			category = radar_tech
+		}
+		swap_ideas = {
+			remove_idea = IRE_pre_emptive_doctrine_2
+			add_idea = IRE_pre_emptive_doctrine_3
+		}
+		unlock_decision_tooltip = IRE_build_radar_stations
+	}
+}
+
+shared_focus = {
+	id = IRE_first_strike_capability
+	icon = GFX_RUS_military_manuevers
+	available  = {
+		set_temp_variable = { IRE_IRA_requirment_temp = 85 }
+		IRE_IRA_requirment_trigger = yes
+		custom_trigger_tooltip = { 
+			tooltip = IRE_IRA_requirement_tt
+			IRE_IRA_requirment_trigger = yes
+	 	}
+	}
+	
+	prerequisite = { focus = IRE_new_airbases }
+	prerequisite = { focus = IRE_eyes_in_atlantic }
+	relative_position_id = IRE_new_airbases
+
+	x = 1
+	y = 1
+	cost = 8
+
+	ai_will_do = {
+		base = 20
+	}
+
+	search_filters = {
+		FOCUS_FILTER_ARMY_BONUS
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus IRE_first_strike_capability"
+		move_up_military = yes
+		swap_ideas = {
+			remove_idea = IRE_pre_emptive_doctrine_3
+			add_idea = IRE_pre_emptive_strike
+		}
+	}
+}
+
+shared_focus = {
+	id = IRE_ireland_free_indivisible
+	icon = GFX_IRE_coat_of_arms
+	available  = {
+		set_temp_variable = { IRE_IRA_requirment_temp = 100 }
+		IRE_IRA_requirment_trigger = yes
+		custom_trigger_tooltip = { 
+			tooltip = IRE_IRA_requirement_tt
+			IRE_IRA_requirment_trigger = yes
+	 	}
+	}
+	
+	prerequisite = { focus = IRE_new_standard_infantry_kit }
+	prerequisite = { focus = IRE_guerilla_in_every_household focus = IRE_first_strike_capability }
+	relative_position_id = IRE_new_standard_infantry_kit
+
+	x = 0
+	y = 1
+	cost = 10
+
+	ai_will_do = {
+		base = 100
+	}
+
+	search_filters = {
+		FOCUS_FILTER_ARMY_BONUS
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus IRE_ireland_free_indivisible"
+		hidden_effect = {
+			if = {
+				limit = { 
+					has_completed_focus = IRE_pre_emptive_doctrine
+				}
+				remove_ideas = {
+					IRE_pre_emptive_strike
+				}
+				swap_ideas = {
+					remove_idea = IRE_modernising_IRA
+					add_idea = IRE_modern_IRA_pre_emptive_doctrine
+				}
+			}
+	
+			else_if = {
+				limit = { 
+					has_completed_focus = IRE_fortress_ireland_doctrine
+				}
+				remove_ideas = {
+					IRE_fortress_doctrine_3
+				}
+				swap_ideas = {
+					remove_idea = IRE_modernising_IRA
+					add_idea = IRE_modern_IRA_fortress_doctrine
+				}
+			}
+		}
+		custom_effect_tooltip = IRE_ireland_free_indivisible_Warning
+		effect_tooltip = {
+			custom_effect_tooltip = IRE_modern_IRA_tt
+			swap_ideas = {
+				remove_idea = IRE_modernising_IRA
+				add_idea = IRE_modern_IRA
+			}
+		}
+	}
+}
+
+
+
+
+
+
+########################
+### Old_pataut Stuff ###
+########################
+
+### Political Stuff ###
+
+focus_tree = {
+	id = KRG_Ireland_State_of_emergency_tree
+	country = {
+		factor = 0
+		modifier = {
+			add = 10
+			tag = IRE
+		}
+	}
+	default = no
+	continuous_focus_position = { x = 100 y = 1000 }
+	shared_focus = IRE_state_of_emergency
+	shared_focus = IRE_arrest_anh_leadership
+	shared_focus = IRE_dissolve_anh
+	shared_focus = IRE_modernise_IRA
+}
+
+
+shared_focus = {
+	id = IRE_state_of_emergency
+	icon = GFX_generic_new_ideology_pataut
+
+	x = 10
+	y = 0
+	cost = 1
+	
+	available_if_capitulated = yes
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus IRE_state_of_emergency"
+		
+	}
+}
+
+shared_focus = {
+	id = IRE_restrict_migration
+	icon = GFX_PAL_Closed_Immigration
+	
+	prerequisite = { focus = IRE_state_of_emergency }
+	relative_position_id = IRE_state_of_emergency
+
+	x = -2
+	y = 1
+	cost = 1
+	
+	available_if_capitulated = yes
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus IRE_restrict_migration"
+		
+	}
+}
+
+shared_focus = {
+	id = IRE_disband_oireachtas
+	icon = GFX_DEI_focus_disband_volksraad
+	
+	prerequisite = { focus = IRE_state_of_emergency }
+	relative_position_id = IRE_state_of_emergency
+
+	x = 0
+	y = 1
+	cost = 1
+	
+	available_if_capitulated = yes
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus IRE_disband_oireachtas"
+		
+	}
+}
+
+shared_focus = {
+	id = IRE_curfew
+	icon = GFX_generic_controlled_board
+	
+	prerequisite = { focus = IRE_state_of_emergency }
+	relative_position_id = IRE_state_of_emergency
+
+	x = 2
+	y = 1
+	cost = 1
+	
+	available_if_capitulated = yes
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus IRE_curfew"
+		
+	}
+}
+
+shared_focus = {
+	id = IRE_martial_law_act
+	icon = GFX_generic_martial_law
+	
+	prerequisite = { focus = IRE_restrict_migration }
+	prerequisite = { focus = IRE_disband_oireachtas }
+	prerequisite = { focus = IRE_curfew }
+	relative_position_id = IRE_state_of_emergency
+
+	x = 0
+	y = 2
+	cost = 1
+	
+	available_if_capitulated = yes
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus IRE_martial_law_act"
+		
+	}
+}
+
+shared_focus = {
+	id = IRE_gendarmarie
+	icon = GFX_HOL_ban_paramilitary
+	
+	prerequisite = { focus = IRE_martial_law_act }
+	relative_position_id = IRE_martial_law_act
+
+	x = -1
+	y = 1
+	cost = 1
+	
+	available_if_capitulated = yes
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus IRE_gendarmarie"
+		
+	}
+}
+
+shared_focus = {
+	id = IRE_arrest_anh_leadership
+	icon = GFX_generic_imprison_opposition1
+
+	x = 14
+	y = 0
+	cost = 1
+	
+	available_if_capitulated = yes
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus IRE_arrest_anh_leadership"
+		
+	}
+}
+
+shared_focus = {
+	id = IRE_dissolve_anh
+	icon = GFX_generic_smash_natpop
+
+	x = 16
+	y = 0
+	cost = 1
+	
+	available_if_capitulated = yes
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus IRE_dissolve_anh"
+		
+	}
+}
+
+shared_focus = {
+	id = IRE_meet_with_opposition
+	icon = GFX_generic_conspiracy
+
+	mutually_exclusive = { focus = IRE_grant_amnesties }
+	mutually_exclusive = { focus = IRE_guarantee_organisation_rights }
+
+	x = 8
+	y = 0
+	cost = 1
+	
+	available_if_capitulated = yes
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus IRE_meet_with_opposition"
+		
+	}
+}
+
+shared_focus = {
+	id = IRE_dismiss_anh_civs
+	icon = GFX_generic_expel_people
+	
+	prerequisite = { focus = IRE_arrest_anh_leadership }
+	relative_position_id = IRE_arrest_anh_leadership
+
+	x = 0
+	y = 2
+	cost = 1
+	
+	available_if_capitulated = yes
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus IRE_dismiss_anh_civs"
+		
+	}
+}
+
+shared_focus = {
+	id = IRE_criminalise_splinters
+	icon = GFX_NEE_blanket_ban
+	
+	prerequisite = { focus = IRE_arrest_anh_leadership }
+	prerequisite = { focus = IRE_dissolve_anh }
+	mutually_exclusive = { focus = IRE_grant_amnesties }
+	relative_position_id = IRE_arrest_anh_leadership
+
+	x = 1
+	y = 1
+	cost = 1
+	
+	available_if_capitulated = yes
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus IRE_criminalise_splinters"
+		
+	}
+}
+
+shared_focus = {
+	id = IRE_curtail_far_right_influence
+	icon = GFX_generic_purge_opposition
+	
+	prerequisite = { focus = IRE_criminalise_splinters }
+	relative_position_id = IRE_arrest_anh_leadership
+
+	x = 2
+	y = 2
+	cost = 1
+	
+	available_if_capitulated = yes
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus IRE_curtail_far_right_influence"
+		
+	}
+}
+
+shared_focus = {
+	id = IRE_army_purge
+	icon = GFX_generic_purge_opposition
+	
+	prerequisite = { focus = IRE_dismiss_anh_civs focus = IRE_curtail_far_right_influence }
+	relative_position_id = IRE_arrest_anh_leadership
+
+	x = 1
+	y = 3
+	cost = 1
+	
+	available_if_capitulated = yes
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus IRE_army_purge"
+		
+	}
+}
+
+shared_focus = {
+	id = IRE_internment_and_offences_act
+	icon = GFX_National_Security_Act
+	
+	prerequisite = { focus = IRE_martial_law_act }
+	prerequisite = { focus = IRE_dismiss_anh_civs }
+	relative_position_id = IRE_martial_law_act
+
+	x = 2
+	y = 1
+	cost = 1
+	
+	available_if_capitulated = yes
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus IRE_internment_and_offences_act"
+		
+	}
+}
+
+shared_focus = {
+	id = IRE_grant_amnesties
+	icon = GFX_focus_CZE_german_puppet
+	
+	mutually_exclusive = { focus = IRE_meet_with_opposition }
+	mutually_exclusive = { focus = IRE_criminalise_splinters }
+	relative_position_id = IRE_meet_with_opposition
+
+	x = 0
+	y = 1
+	cost = 1
+	
+	available_if_capitulated = yes
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus IRE_grant_amnesties"
+		
+	}
+}
+
+shared_focus = {
+	id = IRE_guarantee_organisation_rights
+	icon = GFX_focus_generic_treaty
+	
+	mutually_exclusive = { focus = IRE_meet_with_opposition }
+	relative_position_id = IRE_meet_with_opposition
+
+	x = 1
+	y = 2
+	cost = 1
+	
+	available_if_capitulated = yes
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus IRE_guarantee_organisation_rights"
+		
+	}
+}
+
+
+######################
+### Foreign Policy ###
+######################
+
+shared_focus = {
+	id = IRE_new_world_stage
+	icon = GFX_IRE_gateway_to_the_atlantic
+	x = 5
+	y = 6
+	cost = 5
+
+	available = {
+		has_country_flag = IRE_1952_election_done
+	}
+	
+	available_if_capitulated = yes
+
+	completion_reward = {
+		unlock_decision_category_tooltip = foreign_politics
+		log = "[GetDateText]: [Root.GetName]: Focus IRE_new_world_stage"
+	}
+
+	search_filters = {
+		FOCUS_FILTER_FOREIGN_AFFAIRS
+	}
+
+	ai_will_do = {
+		base = 20
+	}
+}
+
+shared_focus = {
+	id = IRE_renegotiate_anglo_irish_treaty
+	icon = GFX_CAN_bill_of_rights
+	x = -5
+	y = 1
+	relative_position_id = IRE_new_world_stage
+
+	cost = 8
+
+	prerequisite = {
+		focus = IRE_new_world_stage
+	}
+
+	available = {
+		NOT = {  
+			119 = {
+				is_claimed_by = ENG
+			}
+		}
+	}
+	
+	available_if_capitulated = yes
+
+	completion_reward = {
+		remove_ideas = IRE_anglo_irish_treaty
+		log = "[GetDateText]: [Root.GetName]: Focus IRE_renegotiate_anglo_irish_treaty"
+	}
+
+	search_filters = {
+		FOCUS_FILTER_FOREIGN_AFFAIRS
+	}
+
+	ai_will_do = {
+		base = 20
+	}
+}
+
+shared_focus = {
+	id = IRE_next_step_to_RP
+	icon = GFX_IRE_german_ally
+	x = 3
+	y = 1
+	relative_position_id = IRE_new_world_stage
+
+	cost = 5
+
+	mutually_exclusive = {
+		focus = IRE_thaw_accord_relations
+		focus = IRE_maintain_the_status_quo
+	}
+
+	prerequisite = {
+		focus = IRE_new_world_stage
+	}
+
+	available = {
+		IRE_has_sinn_fein_government_general = yes
+	}
+	
+	available_if_capitulated = yes
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus IRE_next_step_to_RP"
+		effect_tooltip = {
+			increase_reichspakt_alignment = yes
+		}
+		hidden_effect = {
+			set_temp_variable = { temp_level = 1 }
+			set_reichspakt_alignment = yes
+		}
+	}
+
+	search_filters = {
+		FOCUS_FILTER_FOREIGN_AFFAIRS
+	}
+
+	ai_will_do = {
+		base = 20
+	}
+}
+
+shared_focus = {
+	id = IRE_deepen_MIT_ties
+	icon = GFX_GER_Mitteleuropa_Cash
+	x = -1
+	y = 1
+	relative_position_id = IRE_next_step_to_RP
+
+	cost = 8
+
+	mutually_exclusive = {
+		focus = IRE_decouple_economy
+	}
+
+	prerequisite = {
+		focus = IRE_maintain_the_status_quo
+		focus = IRE_next_step_to_RP
+	}
+
+	available = {
+		NOT = {
+			IRE_has_anh_government = yes
+		}
+	}
+	
+	available_if_capitulated = yes
+
+	completion_reward = {
+		effect_tooltip = {
+			swap_ideas = {
+				remove_idea = MIT_effects_dummy
+				add_idea = MIT_IRE_deepen_MIT_ties_dummy
+			}
+		}
+
+		add_to_variable = { MIT_political_power_gain = 0.025 }
+		add_to_variable = { MIT_consumer_goods_factor = -0.05 }
+
+		add_stability = 0.05
+
+		113 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
+
+		log = "[GetDateText]: [Root.GetName]: Focus IRE_deepen_MIT_ties"
+	}
+
+	search_filters = {
+		FOCUS_FILTER_FOREIGN_AFFAIRS
+	}
+
+	ai_will_do = {
+		base = 25
+	}
+}
+
+shared_focus = {
+	id = IRE_RP_military_alignment
+	icon = GFX_GER_Sturmtruppen
+	x = 1
+	y = 1
+	relative_position_id = IRE_next_step_to_RP
+
+	cost = 6
+
+	prerequisite = {
+		focus = IRE_next_step_to_RP
+	}
+	
+	available_if_capitulated = yes
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus IRE_RP_military_alignment"
+
+		add_doctrine_cost_reduction = {
+			category = cat_combined_operations
+			uses = 1
+			cost_reduction = 0.5
+		}
+		unlock_decision_tooltip = IRE_adopt_RP_military_standards
+	}
+
+	search_filters = {
+		FOCUS_FILTER_FOREIGN_AFFAIRS
+		FOCUS_FILTER_ARMY_BONUS
+	}
+
+	ai_will_do = {
+		base = 20
+	}
+}
+
+shared_focus = {
+	id = IRE_petition_RP_membership
+	icon = GFX_GER_Deutsches_Weltreich
+	x = -1
+	y = 1
+	relative_position_id = IRE_RP_military_alignment
+
+	cost = 10
+
+	prerequisite = {
+		focus = IRE_RP_military_alignment
+	}
+
+	prerequisite = {
+		focus = IRE_deepen_MIT_ties
+	}
+	
+	available_if_capitulated = yes
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus IRE_petition_RP_membership"
+		unlock_decision_tooltip = IRE_join_rp
+	}
+
+	search_filters = {
+		FOCUS_FILTER_FOREIGN_AFFAIRS
+	}
+
+	ai_will_do = {
+		base = 20
+	}
+}
+
+shared_focus = {
+	id = IRE_thaw_accord_relations
+	icon = GFX_generic_ratify_the_accord
+	x = -3
+	y = 1
+	relative_position_id = IRE_new_world_stage
+
+	cost = 5
+
+	mutually_exclusive = {
+		focus = IRE_next_step_to_RP
+		focus = IRE_maintain_the_status_quo
+	}
+
+	prerequisite = {
+		focus = IRE_new_world_stage
+	}
+
+	available = {
+		OR = {
+			IRE_has_saorstat_criostuil_government = yes
+			IRE_has_fine_gael_government = yes
+		}
+
+		NOT = {  
+			119 = {
+				is_claimed_by = ENG
+			}
+		}
+	}
+	
+	available_if_capitulated = yes
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus IRE_thaw_accord_relations"
+
+		set_temp_variable = { IRE_temp_unionist_opinion_change = 10 }
+		IRE_change_unionist_opinion = yes
+
+		CAN = {
+			add_opinion_modifier = {
+				target = IRE
+				modifier = small_increase
+			}
+			reverse_add_opinion_modifier = {
+				target = IRE
+				modifier = small_increase
+			}
+		}
+		ENG = {
+			add_opinion_modifier = {
+				target = IRE
+				modifier = small_increase
+			}
+			reverse_add_opinion_modifier = {
+				target = IRE
+				modifier = small_increase
+			}
+		}
+		NFA = {
+			add_opinion_modifier = {
+				target = IRE
+				modifier = small_increase
+			}
+			reverse_add_opinion_modifier = {
+				target = IRE
+				modifier = small_increase
+			}
+		}
+		ITA = {
+			add_opinion_modifier = {
+				target = IRE
+				modifier = small_increase
+			}
+			reverse_add_opinion_modifier = {
+				target = IRE
+				modifier = small_increase
+			}
+		}
+	}
+
+	search_filters = {
+		FOCUS_FILTER_FOREIGN_AFFAIRS
+	}
+
+	ai_will_do = {
+		base = 20
+	}
+}
+
+shared_focus = {
+	id = IRE_foreign_battalions
+	icon = GFX_focus_ETH_peacekeeping_forces
+	x = 1
+	y = 1
+	relative_position_id = IRE_thaw_accord_relations
+
+	cost = 6
+
+	prerequisite = {
+		focus = IRE_thaw_accord_relations
+		focus = IRE_maintain_the_status_quo
+	}
+	
+	available_if_capitulated = yes
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus IRE_foreign_battalions"
+		add_ideas = {
+			IRE_foreign_battalions
+		}
+	}
+
+	search_filters = {
+		FOCUS_FILTER_FOREIGN_AFFAIRS
+	}
+
+	ai_will_do = {
+		base = 20
+	}
+}
+
+shared_focus = {
+	id = IRE_ancestral_ties
+	icon = GFX_NEE_senate_icon
+	x = -1
+	y = 1
+	relative_position_id = IRE_thaw_accord_relations
+
+	cost = 7
+
+	prerequisite = {
+		focus = IRE_thaw_accord_relations
+	}
+
+	available_if_capitulated = yes
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus IRE_ancestral_ties"
+		NEE = {
+			add_opinion_modifier = {
+				target = IRE
+				modifier = large_increase
+			}
+			reverse_add_opinion_modifier = {
+				target = IRE
+				modifier = large_increase
+			}
+		}
+		add_ideas = IRE_ancestral_ties
+	}
+
+	search_filters = {
+		FOCUS_FILTER_FOREIGN_AFFAIRS
+	}
+
+	ai_will_do = {
+		base = 20
+	}
+}
+
+shared_focus = {
+	id = IRE_swapping_trade_partners
+	icon = GFX_CAN_naval_dominance
+	x = 0
+	y = 1
+	relative_position_id = IRE_ancestral_ties
+
+	cost = 10
+
+	prerequisite = {
+		focus = IRE_ancestral_ties
+	}
+
+	available_if_capitulated = yes
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus IRE_swapping_trade_partners"
+
+		MIT_remove_from_mitteleuropa = yes
+		set_temp_variable = {
+			temp_level = 2
+		}
+		set_accord_alignment = yes
+		unlock_decision_tooltip = IRE_reach_out_to_britain
+	}
+
+	search_filters = {
+		FOCUS_FILTER_FOREIGN_AFFAIRS
+	}
+
+	ai_will_do = {
+		base = 20
+	}
+}
+
+shared_focus = {
+	id = IRE_maintain_the_status_quo
+	icon = GFX_GENERIC_peace
+	x = 0
+	y = 1
+	relative_position_id = IRE_new_world_stage
+
+	cost = 5
+
+	mutually_exclusive = {
+		focus = IRE_next_step_to_RP
+		focus = IRE_thaw_accord_relations
+	}
+
+	prerequisite = {
+		focus = IRE_new_world_stage
+	}
+
+	available = {
+		OR = {
+			IRE_has_saorstat_criostuil_government = yes
+			IRE_has_anh_government = yes
+		}
+	}
+	
+	available_if_capitulated = yes
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus IRE_maintain_the_status_quo"
+		add_stability = 0.05
+		add_political_power = 100
+	}
+
+	search_filters = {
+		FOCUS_FILTER_FOREIGN_AFFAIRS
+	}
+
+	ai_will_do = {
+		base = 20
+	}
+}
+
+shared_focus = {
+	id = IRE_decouple_economy
+	icon = GFX_generic_GXC_Second_Guangdong_Arsenal
+	x = 0
+	y = 1
+	relative_position_id = IRE_maintain_the_status_quo
+
+	cost = 8
+
+	mutually_exclusive = {
+		focus = IRE_deepen_MIT_ties
+	}
+
+	prerequisite = {
+		focus = IRE_maintain_the_status_quo
+	}
+	
+	available_if_capitulated = yes
+
+	completion_reward = {
+		if = {
+			limit = { 
+				is_mitteleuropa_member = yes
+			}
+			MIT_remove_from_mitteleuropa = yes
+		}
+		if = {
+			limit = { 
+				check_variable = {
+					reichspakt_alignment_level = 2
+				}
+			}
+			set_temp_variable = { temp_level = 1 }
+			set_reichspakt_alignment = yes
+		}
+		add_stability = -0.1
+		113 = {
+			remove_building = {
+				type = industrial_complex
+				level = 1
+			}
+		}
+		log = "[GetDateText]: [Root.GetName]: Focus IRE_decouple_economy"
+	}
+
+	search_filters = {
+		FOCUS_FILTER_FOREIGN_AFFAIRS
+	}
+
+	ai_will_do = {
+		base = 20
+	}
+}
+
+shared_focus = {
+	id = IRE_irish_neutrality
+	icon = GFX_focus_SWI_neutrality_on_the_move
+	x = 0
+	y = 1
+	relative_position_id = IRE_decouple_economy
+
+	cost = 10
+
+	prerequisite = {
+		focus = IRE_decouple_economy
+		focus = IRE_deepen_MIT_ties
+	}
+
+	prerequisite = {
+		focus = IRE_foreign_battalions
+	}
+	
+	available_if_capitulated = yes
+
+	completion_reward = {
+		news_event = {
+			id = krg_ire_news.7
+		}
+		add_ideas = IRE_neutrality
+		log = "[GetDateText]: [Root.GetName]: Focus IRE_irish_neutrality"
+	}
+
+	search_filters = {
+		FOCUS_FILTER_FOREIGN_AFFAIRS
+	}
+
+	ai_will_do = {
+		base = 20
+	}
+}

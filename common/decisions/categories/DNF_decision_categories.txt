@@ -1,0 +1,258 @@
+DNF_parliament = {
+	priority = 150
+	icon = GFX_decision_category_dnf_eagle
+	allowed = {
+		original_tag = DNF
+	}
+	visible = {
+		original_tag = DNF
+	}
+	visible_when_empty = yes
+	scripted_gui = DNF_chamber_of_deputies
+}
+
+DNF_states_approvals = {
+	icon = GFX_decision_category_dnf_eagle
+	picture = GFX_decision_cat_DNF_national_diet
+	priority = 100
+	allowed = {
+		original_tag = DNF
+	}
+	visible = {
+		original_tag = DNF
+		has_idea = DNF_nations_within_a_state
+	}
+	scripted_gui = DNF_states_decision_ui
+	visible_when_empty = yes
+}
+
+DNF_austrian_national_election_cat = {
+	icon = GFX_decision_category_dnf_aus
+	picture = GFX_decision_cat_DNF_wien
+	priority = 200
+	allowed = {
+		original_tag = DNF
+	}
+	visible = {
+		check_variable = { DNF_austrian_election_involved = 1 }	
+	}
+}	
+
+DNF_bohemian_national_election_cat = {
+	icon = GFX_decision_category_dnf_boh
+	picture = GFX_decision_cat_DNF_prague
+	priority = 200
+	allowed = {
+		original_tag = DNF
+	}
+	visible = {
+			check_variable = { DNF_bohemian_election_involved = 1 }
+	}
+}
+
+DNF_illyrian_national_election_cat = {
+	icon = GFX_decision_category_dnf_ill
+	picture = GFX_decision_cat_DNF_zagreb
+	priority = 200
+	allowed = {
+		original_tag = DNF
+	}
+		visible = {
+			check_variable = { DNF_illyrian_election_involved = 1 }
+	}
+}
+
+DNF_galician_national_election_cat = {
+	icon = GFX_decision_category_dnf_gal
+	picture = GFX_decision_cat_DNF_lwow
+	priority = 200
+	allowed = {
+		original_tag = DNF
+	}
+		visible = {
+			check_variable = { DNF_galician_election_involved = 1 }
+	}
+}
+
+DNF_slovakian_national_election_cat = {
+	icon = GFX_decision_category_dnf_svk
+	picture = GFX_decision_cat_DNF_bratislava
+	priority = 200
+	allowed = {
+		original_tag = DNF
+	}
+
+	visible = {
+			check_variable = { DNF_slovakian_election_involved = 1 }
+	}
+}
+
+DNF_transylvania_election_cat = {
+	icon = GFX_decision_category_dnf_tra
+	picture = GFX_decision_cat_DNF_cluj
+	priority = 200
+	allowed = {
+		original_tag = DNF
+	}
+		visible = {
+			check_variable = { DNF_transylvanian_election_involved = 1 }
+	}
+}
+
+DNF_hungarian_national_election_cat = {
+	icon = GFX_decision_category_dnf_hun
+	picture = GFX_decision_cat_DNF_budapest
+	priority = 200
+	allowed = {
+		original_tag = DNF
+	}
+		visible = {
+			check_variable = { DNF_hungarian_election_involved = 1 }
+	}
+}
+
+DNF_nuclear_ambition_cat = {
+	priority = 75
+	allowed = {
+		original_tag = DNF
+	}
+	visible = {
+			has_country_flag = DNF_nuclear_ambition
+			has_completed_focus = DNF_quiet_flows_the_danube
+	}
+	visible_when_empty = yes
+}
+
+DNF_Federalisation_Plans_cat = {
+	priority = 60
+	icon = usa_congress
+	allowed = {
+		original_tag = DNF
+	}
+		visible = {
+			has_completed_focus = DNF_strengthen_the_coalition
+			NOT = { has_completed_focus = DNF_federalize_the_christian_bloc }
+	}
+}
+
+DNF_Milan_Vienna_Axis_cat = {
+	priority = 65
+	icon = generic_economy
+	allowed = {
+		original_tag = DNF
+	}	
+	visible = {
+			check_variable = { DNF_Milan_Vienna_Axis = 1 }
+	}
+}
+
+DNF_Figl_Plan_cat = {
+	priority = 67
+	icon = dnf_figl_plan
+	allowed = {
+		original_tag = DNF
+	}	
+	visible = {
+			check_variable = { DNF_Figl_Plan_Active > 0 }
+	}
+}
+
+DNF_Modernise_Illyria_cat = {
+	priority = 66
+	icon = generic_economy
+	allowed = {
+		original_tag = DNF
+	}
+	visible = {
+			check_variable = { DNF_Activate_Modernising_Illyria = 1}
+	}
+}
+
+DNF_Keeping_Russia_Down_cat = {
+	priority = 40
+	icon = generic_revolt
+	allowed = {
+		original_tag = DNF
+	}
+	visible = {
+			NOT = { GER = { has_country_flag = GER_RUS_cont_war_victory } }
+			RUS = { 
+				has_country_leader = { 
+					name = "Boris Savinkov" 
+				}
+			}
+			check_variable = { var = DNF_Activate_Partisans value = 1}
+	}
+}
+
+DNF_Danubian_Highways_cat = {
+	priority = 55
+
+	icon = generic_economy
+	allowed = {
+		original_tag = DNF
+	}
+	visible = {
+		has_country_flag = DNF_Build_Highways_flag
+		has_country_flag = DNF_Build_Highways_Approved
+		NOT = {has_country_flag = DNF_completed_SS5 }
+	}
+}
+
+DNF_Danubia_Plan_cat = {
+	priority = 58
+	icon = generic_economy
+	allowed = {
+		original_tag = DNF
+	}
+	visible = {
+		has_country_flag = DNF_Danubia_Plan_flag
+	}
+}
+
+DNF_Danubian_Space_Program_cat = {
+	priority = 0
+	icon = generic_economy
+	allowed = {
+		original_tag = DNF
+	}
+	visible = {
+		has_country_flag = DNF_Danubian_Space_Program_flag
+	}
+}
+
+DNF_Landsturm_cat = {
+	priority = 30
+	icon = GFX_decision_category_dnf_eagle
+	allowed = {
+		original_tag = DNF
+	}
+	visible = {
+		has_country_flag = DNF_Landsturm
+	}
+}
+
+DNF_Holtzberg_Waffenhersteller_cat = {
+	priority = 10
+	icon = GFX_decision_category_dnf_eagle
+	visible = {
+		DNF = { has_country_flag = DNF_Holtzberg_Waffenhersteller }
+		THIS = { 
+			NOT = { 
+				OR = {
+					tag = RUS #no sales to Russia
+					tag = IRE #special mechanic 
+					tag = ITA #literally restricted with treaty
+				}
+			}
+		} 
+		OR = {
+			THIS = { tag = CHI } #always sell to the Chinas
+			THIS = { tag = FNG }
+			THIS = { tag = DNF } #wanna see as the papa
+			has_country_flag = Holtzberg_Buyer
+		}
+		NOT = { has_country_flag = Holtzberg_Hidden }		
+	}
+	visible_when_empty = yes
+}

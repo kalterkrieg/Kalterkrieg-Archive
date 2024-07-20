@@ -1,0 +1,4304 @@
+#!gfx:interface\krg_goals.gfx
+focus_tree = {
+	id = tex_focus
+	country = {
+		factor = 0
+		modifier = {
+			add = 20
+			tag = TEX
+		}
+	}
+	initial_show_position = {
+		focus = TEX_state_of_the_union
+	}
+	default = no
+	continuous_focus_position = {
+		x = 100
+		y = 1600
+	}
+	### State of the Union ###
+	focus = {
+		id = TEX_state_of_the_union
+		icon = GFX_TEX_america_first_eagle
+		x = 0
+		y = 0
+		cost = 4
+		available = {
+			always = no
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_state_of_the_union"
+			custom_effect_tooltip = unlock_focuses
+		}
+	}
+	focus = {
+		id = TEX_continue_union_dollar_implementation
+		icon = GFX_TEX_currency_question
+		relative_position_id = TEX_state_of_the_union
+		x = -4
+		y = 1
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_state_of_the_union
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_continue_union_dollar_implementation"
+			add_ideas = TEX_union_state_dollar_integration
+		}
+	}
+	focus = {
+		id = TEX_cut_the_red_tape
+		icon = GFX_SAF_colonialist_crusade2
+		relative_position_id = TEX_state_of_the_union
+		x = -2
+		y = 1
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_state_of_the_union
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_cut_the_red_tape"
+			TEX_upgrade_lost_generation = yes
+		}
+	}
+	focus = {
+		id = TEX_review_party_cohesion
+		icon = GFX_TEX_handshake
+		relative_position_id = TEX_state_of_the_union
+		x = 0
+		y = 1
+		cost = 4
+		cancelable = no		#we're doing a review >:c
+		available = {
+			TEX_has_chosen_candidate = yes
+		}
+		prerequisite = {
+			focus = TEX_state_of_the_union
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_review_party_cohesion"
+			country_event = {
+				id = tex.focus.0
+			}
+		}
+	}
+	focus = {
+		id = TEX_fight_the_primaries
+		icon = GFX_generic_microphone
+		relative_position_id = TEX_state_of_the_union
+		x = -1
+		y = 2
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_review_party_cohesion
+		}
+		mutually_exclusive = {
+			focus = TEX_focus_on_reform
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_fight_the_primaries"
+			set_variable = {
+				TEX_attack_power = 7
+			}
+			custom_effect_tooltip = TEX_set_attack_power_7_tt
+		}
+	}
+	focus = {
+		id = TEX_focus_on_reform
+		icon = GFX_generic_social_reforms
+		relative_position_id = TEX_state_of_the_union
+		x = 1
+		y = 2
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_review_party_cohesion
+		}
+		mutually_exclusive = {
+			focus = TEX_fight_the_primaries
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_focus_on_reform"
+			custom_effect_tooltip = TEX_focus_on_reform_tt
+		}
+	}
+	focus = {
+		id = TEX_meet_with_cronies
+		icon = GFX_generic_shady_deal
+		relative_position_id = TEX_state_of_the_union
+		x = -1
+		y = 3
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_focus_on_reform
+			focus = TEX_fight_the_primaries
+		}
+		mutually_exclusive = {
+			focus = TEX_national_unity_pledge
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_meet_with_cronies"
+			every_state = {
+				limit = {
+					is_core_of = TEX
+				}
+				if = {
+					limit = {
+						TEX = {
+							check_variable = {
+								primary_candidate = 0
+							}
+						}
+					}
+					set_temp_variable = {
+						pop_type_added = 0
+					}
+					set_temp_variable = {
+						pop_value_added = 10
+					}
+					TEX_add_electoral_popularity = yes
+				}
+				else_if = {
+					limit = {
+						TEX = {
+							check_variable = {
+								primary_candidate = 1
+							}
+						}
+					}
+					set_temp_variable = {
+						pop_type_added = 1
+					}
+					set_temp_variable = {
+						pop_value_added = 5
+					}
+					TEX_add_electoral_popularity = yes
+					set_temp_variable = {
+						pop_type_added = 0
+					}
+					set_temp_variable = {
+						pop_value_added = 5
+					}
+					TEX_add_electoral_popularity = yes
+				}
+				else_if = {
+					limit = {
+						TEX = {
+							check_variable = {
+								primary_candidate = 2
+							}
+						}
+					}
+					set_temp_variable = {
+						pop_type_added = 3
+					}
+					set_temp_variable = {
+						pop_value_added = 5
+					}
+					TEX_add_electoral_popularity = yes
+					set_temp_variable = {
+						pop_type_added = 0
+					}
+					set_temp_variable = {
+						pop_value_added = 5
+					}
+					TEX_add_electoral_popularity = yes
+				}
+			}
+		}
+	}
+	focus = {
+		id = TEX_national_unity_pledge
+		icon = GFX_TEX_america_map
+		relative_position_id = TEX_state_of_the_union
+		x = 1
+		y = 3
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_focus_on_reform
+			focus = TEX_fight_the_primaries
+		}
+		mutually_exclusive = {
+			focus = TEX_meet_with_cronies
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_national_unity_pledge"
+			add_stability = 0.05
+			add_war_support = 0.05
+		}
+	}
+	focus = {
+		id = TEX_one_more_term
+		icon = GFX_TEX_America_First_Party
+		relative_position_id = TEX_state_of_the_union
+		x = 0
+		y = 4
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_meet_with_cronies
+			focus = TEX_national_unity_pledge
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_one_more_term"
+			every_state = {
+				limit = {
+					is_core_of = TEX
+				}
+				if = {
+					limit = {
+						TEX = {
+							check_variable = {
+								primary_candidate = 0
+							}
+						}
+					}
+					set_temp_variable = {
+						pop_type_added = 0
+					}
+					set_temp_variable = {
+						pop_value_added = 5
+					}
+					TEX_add_electoral_popularity = yes
+				}
+				else_if = {
+					limit = {
+						TEX = {
+							check_variable = {
+								primary_candidate = 1
+							}
+						}
+					}
+					set_temp_variable = {
+						pop_type_added = 1
+					}
+					set_temp_variable = {
+						pop_value_added = 5
+					}
+					TEX_add_electoral_popularity = yes
+				}
+				else_if = {
+					limit = {
+						TEX = {
+							check_variable = {
+								primary_candidate = 2
+							}
+						}
+					}
+					set_temp_variable = {
+						pop_type_added = 3
+					}
+					set_temp_variable = {
+						pop_value_added = 5
+					}
+					TEX_add_electoral_popularity = yes
+				}
+			}
+		}
+	}
+	focus = {
+		id = TEX_the_american_dilemma
+		icon = GFX_generic_crisis
+		relative_position_id = TEX_state_of_the_union
+		x = 2
+		y = 1
+		cost = 4
+		available = {
+			always = no
+		}
+		prerequisite = {
+			focus = TEX_state_of_the_union
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_the_american_dilemma"
+			custom_effect_tooltip = unlock_focuses
+		}
+	}
+	focus = {
+		id = TEX_damage_control
+		icon = GFX_generic_media_controls
+		relative_position_id = TEX_state_of_the_union
+		x = 3
+		y = 2
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_the_american_dilemma
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_damage_control"
+			country_event = {
+				id = tex.focus.2
+			}
+		}
+	}
+	focus = {
+		id = TEX_stemming_the_great_migration
+		icon = GFX_FRA_germanic_migration
+		relative_position_id = TEX_state_of_the_union
+		x = 2
+		y = 4
+		cost = 4
+		available = {
+			NOT = {
+				has_completed_focus = TEX_focus_on_reform
+			}
+		}
+		prerequisite = {
+			focus = TEX_the_american_dilemma
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_stemming_the_great_migration"
+			set_country_flag = TEX_the_great_migration
+			custom_effect_tooltip = TEX_the_great_migration_tt
+		}
+	}
+	focus = {
+		id = TEX_the_mountaintop_insurgency
+		icon = GFX_generic_broken_red_star
+		relative_position_id = TEX_state_of_the_union
+		x = -3
+		y = 2
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_continue_union_dollar_implementation
+			focus = TEX_cut_the_red_tape
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_the_mountaintop_insurgency"
+			TEX_upgrade_lost_generation = yes
+		}
+	}
+	focus = {
+		id = TEX_planning_an_offensive
+		icon = GFX_NEE_remove_syndies
+		relative_position_id = TEX_state_of_the_union
+		x = -3
+		y = 3
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_the_mountaintop_insurgency
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_planning_an_offensive"
+			TEX_upgrade_lost_generation = yes
+		}
+	}
+	focus = {
+		id = TEX_battle_of_helen
+		icon = GFX_generic_planning_bonus
+		relative_position_id = TEX_state_of_the_union
+		x = -3
+		y = 4
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_planning_an_offensive
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_battle_of_helen"
+			TEX_upgrade_lost_generation = yes
+		}
+	}
+	#### 1948 Tree ####
+	### Long Branch ###
+	focus = {
+		id = TEX_President_Long
+		icon = GFX_TEX_President_Earl_Long
+		#relative_position_id = TEX_President_Long
+		x = 13
+		y = 0
+		cost = 4
+		available = {
+			always = no
+		}
+		prerequisite = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_President_Long"
+			custom_effect_tooltip = unlock_focuses
+		}
+	}
+	### Syndicalist Registration Act ###
+	focus = {
+		id = TEX_Long_Syndicalist_Registration_Act
+		icon = GFX_OTT_constitution
+		relative_position_id = TEX_President_Long
+		x = -2
+		y = 1
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_President_Long
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_Long_Syndicalist_Registration_Act"
+			unlock_decision_tooltip = TEX_Syndicalist_Registration_Act_Start
+			custom_effect_tooltip = CAL_Bill_Focus_Tree_tt
+			effect_tooltip = {
+				TEX_upgrade_red_scare = yes
+			}
+		}
+	}
+	focus = {
+		id = TEX_Long_Syndicalist_Control_Act
+		icon = GFX_ENG_ban_unions
+		relative_position_id = TEX_President_Long
+		x = -2
+		y = 3
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_Long_Syndicalist_Registration_Act
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_Long_Syndicalist_Control_Act"
+			unlock_decision_tooltip = TEX_Syndicalist_Control_Act_Start
+			custom_effect_tooltip = CAL_Bill_Focus_Tree_tt
+			effect_tooltip = {
+				TEX_upgrade_red_scare = yes
+			}
+		}
+	}
+	### Federal Employees Loyalty Program ###
+	focus = {
+		id = TEX_Long_Federal_Employees_Loyalty_Program
+		icon = GFX_generic_stable_government
+		relative_position_id = TEX_President_Long
+		x = 0
+		y = 1
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_President_Long
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_Long_Federal_Employees_Loyalty_Program"
+			TEX_upgrade_red_scare = yes
+		}
+	}
+	focus = {
+		id = TEX_Long_Internal_Security_Act
+		icon = GFX_MAF_And_A_Dagger_in_the_Other
+		relative_position_id = TEX_President_Long
+		x = 0
+		y = 3
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_Long_Federal_Employees_Loyalty_Program
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_Long_Internal_Security_Act"
+			unlock_decision_tooltip = TEX_Internal_Security_Act_Start
+			custom_effect_tooltip = CAL_Bill_Focus_Tree_tt
+			effect_tooltip = {
+				TEX_upgrade_red_scare = yes
+			}
+		}
+	}
+	focus = {
+		id = TEX_Long_Form_HUAC
+		icon = GFX_generic_council
+		relative_position_id = TEX_President_Long
+		x = -1
+		y = 2
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_Long_Federal_Employees_Loyalty_Program
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_Long_Internal_Security_Act"
+			TEX_upgrade_red_scare = yes
+		}
+	}
+	### Emergency Powers for Governors Act ###
+	focus = {
+		id = TEX_Long_Emergency_Powers_Governors_Act
+		icon = GFX_generic_new_ideology_authdem
+		relative_position_id = TEX_President_Long
+		x = -1
+		y = 4
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_Long_Internal_Security_Act
+		}
+		prerequisite = {
+			focus = TEX_Long_Syndicalist_Control_Act
+		}
+		prerequisite = {
+			focus = TEX_Long_Form_HUAC
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_Long_Emergency_Powers_Governors_Act"
+			unlock_decision_tooltip = TEX_Emergency_Powers_Governors_Act_Start
+			custom_effect_tooltip = CAL_Bill_Focus_Tree_tt
+			effect_tooltip = {
+				TEX_upgrade_red_scare = yes
+			}
+		}
+	}
+	### Social Security Act ###
+	focus = {
+		id = TEX_Long_Social_Security_Act
+		icon = GFX_generic_social_reforms
+		relative_position_id = TEX_President_Long
+		x = 6
+		y = 1
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_President_Long
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_Long_Social_Security_Act"
+			TEX_focus_social_security_act = yes
+		}
+	}
+	focus = {
+		id = TEX_Long_Vocational_Schools_Act
+		icon = GFX_KTG_Bookstack
+		relative_position_id = TEX_President_Long
+		x = 1
+		y = 2
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_President_Long
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_Long_Vocational_Schools_Act"
+			TEX_focus_vocational_schools = yes
+		}
+	}
+	focus = {
+		id = TEX_Long_Federal_Healthcare_Act
+		icon = GFX_generic_FIN_promote_the_red_cross
+		relative_position_id = TEX_President_Long
+		x = 5
+		y = 2
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_Long_Social_Security_Act
+		}
+		mutually_exclusive = {
+			focus = TEX_Long_Rural_Healthcare_Act
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_Long_Federal_Healthcare_Act"
+			TEX_focus_Federal_Healthcare_Act = yes
+		}
+	}
+	focus = {
+		id = TEX_Long_Rural_Healthcare_Act
+		icon = GFX_generic_healthcare
+		relative_position_id = TEX_President_Long
+		x = 7
+		y = 2
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_Long_Social_Security_Act
+		}
+		mutually_exclusive = {
+			focus = TEX_Long_Federal_Healthcare_Act
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_Long_Rural_Healthcare_Act"
+			TEX_focus_Rural_Healthcare_Act = yes
+		}
+	}
+	### Uphold Separate but Equal ###
+	focus = {
+		id = TEX_Long_Separate_but_Equal
+		icon = GFX_TEX_jim_crow
+		relative_position_id = TEX_President_Long
+		x = 2
+		y = 1
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_President_Long
+		}
+		mutually_exclusive = {
+			focus = TEX_Long_Groundwork_Civil_Rights
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_Long_Separate_but_Equal"
+			TEX_focus_Separate_but_Equal = yes
+		}
+	}
+	focus = {
+		id = TEX_Long_Groundwork_Civil_Rights
+		icon = GFX_TEX_race_politics
+		relative_position_id = TEX_President_Long
+		x = 4
+		y = 1
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_President_Long
+		}
+		mutually_exclusive = {
+			focus = TEX_Long_Separate_but_Equal
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_Long_Groundwork_Civil_Rights"
+			TEX_focus_Groundwork_Civil_Rights = yes
+		}
+	}
+	focus = {
+		id = TEX_Long_Anti_Lynching_Act
+		icon = GFX_TEX_federal_system
+		relative_position_id = TEX_President_Long
+		x = 3
+		y = 2
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_Long_Separate_but_Equal
+			focus = TEX_Long_Groundwork_Civil_Rights
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_Long_Anti_Lynching_Act"
+			TEX_focus_Anti_Lynching_Act = yes
+		}
+	}
+	focus = {
+		id = TEX_Long_Minority_Voting_Rights_Act
+		icon = GFX_generic_electoral_law
+		relative_position_id = TEX_President_Long
+		x = 4
+		y = 3
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_Long_Anti_Lynching_Act
+		}
+		prerequisite = {
+			focus = TEX_Long_Vocational_Schools_Act
+		}
+		mutually_exclusive = {
+			focus = TEX_Long_States_Rights_Act
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_Long_Minority_Voting_Rights_Act"
+			TEX_focus_Minority_Voting_Rights_Act = yes
+		}
+	}
+	focus = {
+		id = TEX_Long_States_Rights_Act
+		icon = GFX_TEX_states_rights
+		relative_position_id = TEX_President_Long
+		x = 2
+		y = 3
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_Long_Anti_Lynching_Act
+		}
+		prerequisite = {
+			focus = TEX_Long_Vocational_Schools_Act
+		}
+		mutually_exclusive = {
+			focus = TEX_Long_Minority_Voting_Rights_Act
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_Long_States_Rights_Act"
+			TEX_focus_States_Rights_Act = yes
+		}
+	}
+	focus = {
+		id = TEX_Long_Equal_Teaching_Opportunities_Act
+		icon = GFX_TEX_integrate_schools
+		relative_position_id = TEX_President_Long
+		x = 1
+		y = 4
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_Long_Vocational_Schools_Act
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_Long_Equal_Teaching_Opportunities_Act"
+			TEX_focus_Equal_Teaching_Opportunities_Act = yes
+		}
+	}
+	### Rural Reconstruction Act ###
+	focus = {
+		id = TEX_Long_Rural_Reconstruction_Act
+		icon = GFX_SZC_improvised_farming_machinery
+		relative_position_id = TEX_President_Long
+		x = -4
+		y = 1
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_President_Long
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_Long_Rural_Reconstruction_Act"
+			TEX_focus_rural_reconstruction_act = yes
+		}
+	}
+	focus = {
+		id = TEX_Long_Land_Development_Act
+		icon = GFX_generic_agrarian_reform
+		relative_position_id = TEX_President_Long
+		x = -3
+		y = 2
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_Long_Rural_Reconstruction_Act
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_Long_Land_Development_Act"
+			TEX_focus_Land_Development_Act = yes
+		}
+	}
+	focus = {
+		id = TEX_Long_Industrial_Reconstruction_Act
+		icon = GFX_generic_construction_krg
+		relative_position_id = TEX_President_Long
+		x = -4
+		y = 3
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_Long_Rural_Reconstruction_Act
+		}
+		prerequisite = {
+			focus = TEX_Long_Demolish_and_Replace
+			focus = TEX_Long_Rename_and_Construct
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_Long_Industrial_Reconstruction_Act"
+			TEX_focus_Industrial_Reconstruction_Act = yes
+		}
+	}
+	focus = {
+		id = TEX_Long_Agricultural_Relief_Act
+		icon = GFX_generic_agricultural_aid2
+		relative_position_id = TEX_President_Long
+		x = -3
+		y = 4
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_Long_Land_Development_Act
+		}
+		prerequisite = {
+			focus = TEX_Long_Industrial_Reconstruction_Act
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_Long_Agricultural_Relief_Act"
+			unlock_decision_tooltip = TEX_Agricultural_Relief_Act_Start
+			custom_effect_tooltip = CAL_Bill_Focus_Tree_tt
+			effect_tooltip = {
+				TEX_focus_Agricultural_Relief_Act = yes
+			}
+		}
+	}
+	### Limited Inheritance Act ###
+	focus = {
+		id = TEX_Long_Limited_Inheritance_Act
+		icon = GFX_TEX_dollar
+		relative_position_id = TEX_President_Long
+		x = 6
+		y = 3
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_Long_Federal_Healthcare_Act
+			focus = TEX_Long_Rural_Healthcare_Act
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_Long_Limited_Inheritance_Act"
+			unlock_decision_tooltip = TEX_Limited_Inheritance_Act_Start
+			custom_effect_tooltip = CAL_Bill_Focus_Tree_tt
+			effect_tooltip = {
+				add_ideas = TEX_limited_inheritance_idea
+			}
+		}
+	}
+	focus = {
+		id = TEX_Long_Standardization_of_Labor_Act
+		icon = GFX_tblra_union_agreement
+		relative_position_id = TEX_President_Long
+		x = 2
+		y = 5
+		cost = 4
+		available = {
+			NOT = {
+				has_government = social_conservative
+			}
+		}
+		prerequisite = {
+			focus = TEX_Long_Equal_Teaching_Opportunities_Act
+		}
+		prerequisite = {
+			focus = TEX_Long_Minority_Voting_Rights_Act
+			focus = TEX_Long_States_Rights_Act
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_Long_Standardization_of_Labor_Act"
+			TEX_focus_Standardization_of_Labor_Act = yes
+		}
+	}
+	### Union Highways Act ###
+	focus = {
+		id = TEX_Long_Union_Highways_Act
+		icon = GFX_TEX_union_highways_act
+		relative_position_id = TEX_President_Long
+		x = -6
+		y = 1
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_President_Long
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_Long_Union_Highways_Act"
+			unlock_decision_category_tooltip = TEX_interstate_highway
+		}
+	}
+	focus = {
+		id = TEX_Long_Demolish_and_Replace
+		icon = GFX_TEX_national_transit_commission
+		relative_position_id = TEX_President_Long
+		x = -7
+		y = 2
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_Long_Union_Highways_Act
+		}
+		mutually_exclusive = {
+			focus = TEX_Long_Rename_and_Construct
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_Long_Demolish_and_Replace"
+			TEX_focus_Demolish_and_Replace = yes
+		}
+	}
+	focus = {
+		id = TEX_Long_Rename_and_Construct
+		icon = GFX_TEX_reconnect_america
+		relative_position_id = TEX_President_Long
+		x = -5
+		y = 2
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_Long_Union_Highways_Act
+		}
+		mutually_exclusive = {
+			focus = TEX_Long_Demolish_and_Replace
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_Long_Rename_and_Construct"
+			TEX_focus_Rename_and_Construct = yes
+		}
+	}
+	focus = {
+		id = TEX_Long_Construct_Union_Highways
+		icon = GFX_TEX_union_highways
+		relative_position_id = TEX_President_Long
+		x = -6
+		y = 3
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_Long_Rename_and_Construct
+			focus = TEX_Long_Demolish_and_Replace
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_Long_Construct_Union_Highways"
+			TEX_focus_construct_union_highways = yes
+		}
+	}
+	### McMath Branch ###
+	focus = {
+		id = TEX_President_McMath
+		icon = GFX_TEX_President_Sid_McMath
+		#relative_position_id = TEX_President_Long
+		x = 29
+		y = 0
+		cost = 4
+		available = {
+			always = no
+		}
+		prerequisite = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_President_McMath"
+			custom_effect_tooltip = unlock_focuses
+		}
+	}
+	focus = {
+		id = TEX_McMath_Fight_Corporatists
+		icon = GFX_TEX_unitary_system
+		relative_position_id = TEX_President_McMath
+		x = -2
+		y = 1
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_President_McMath
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_McMath_Fight_Corporatists"
+			unlock_decision_tooltip = TEX_Executive_Order_Fight_Corporatism
+		}
+	}
+	focus = {
+		id = TEX_McMath_ILR_Act
+		icon = GFX_generic_control_lobyists
+		relative_position_id = TEX_President_McMath
+		x = -1
+		y = 4
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_McMath_Defense_Democracy_Act
+			focus = TEX_McMath_Reconcile_Orthodox
+		}
+		prerequisite = {
+			focus = TEX_McMath_Northern_Party
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_McMath_ILR_Act"
+			set_temp_variable = {
+				TEX_factionalism_pop = 15
+			}
+			TEX_factionalism_rem_pop_orthodox = yes
+			TEX_factionalism_rem_pop_conservative = yes
+		}
+	}
+	focus = {
+		id = TEX_McMath_Defense_Democracy_Act
+		icon = GFX_TEX_democracy
+		relative_position_id = TEX_President_McMath
+		x = -2
+		y = 3
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_McMath_Fight_Corporatists
+		}
+		mutually_exclusive = {
+			focus = TEX_McMath_Reconcile_Orthodox
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_McMath_Defense_Democracy_Act"
+			unlock_decision_tooltip = TEX_Defense_Democracy_Act_Start
+			custom_effect_tooltip = CAL_Bill_Focus_Tree_tt
+			custom_effect_tooltip = TEX_Defense_Democracy_Act_tt
+		}
+	}
+	focus = {
+		id = TEX_McMath_Manage_Louisiana
+		icon = GFX_TEX_contain_louisiana
+		relative_position_id = TEX_President_McMath
+		x = 0
+		y = 1
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_President_McMath
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_McMath_Manage_Louisiana"
+			371 = {
+				set_temp_variable = {
+					v = 105
+				}
+				custom_effect_tooltip = state_lose_idea
+				remove_from_array = {
+					state_idea_array = 105
+				}
+				set_temp_variable = {
+					pop_type_subtracted = 0
+				}
+				set_temp_variable = {
+					pop_value_subtracted = 5
+				}
+				TEX_subtract_electoral_popularity = yes
+				set_temp_variable = {
+					pop_type_added = 3
+				}
+				set_temp_variable = {
+					pop_value_added = 5
+				}
+				TEX_add_electoral_popularity = yes
+			}
+		}
+	}
+	focus = {
+		id = TEX_McMath_Northern_Party
+		icon = GFX_TEX_american_eagle
+		relative_position_id = TEX_President_McMath
+		x = -1
+		y = 2
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_McMath_Manage_Louisiana
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_McMath_Strengthen_Northern_Party"
+			every_state = {
+				limit = {
+					is_owned_and_controlled_by = TEX
+					OR = {
+						state = 261
+						state = 360
+						state = 391
+						state = 392
+						state = 395
+						state = 396
+					}
+				}
+				set_temp_variable = {
+					pop_type_added = 3
+				}
+				# 0 is auth dem, 1 is conservative etc. refer to order of ids
+				set_temp_variable = {
+					pop_value_added = 5
+				}
+				# percent added
+				TEX_add_electoral_popularity = yes
+			}
+		}
+	}
+	focus = {
+		id = TEX_McMath_Reconcile_Orthodox
+		icon = GFX_generic_shady_deal
+		relative_position_id = TEX_President_McMath
+		x = 0
+		y = 3
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_McMath_Manage_Louisiana
+		}
+		mutually_exclusive = {
+			focus = TEX_McMath_Defense_Democracy_Act
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_McMath_Reconcile_Orthodox"
+			if = {
+				limit = {
+					NOT = {
+						is_in_array = {
+							array = coal_list
+							value = 8
+						}
+					}
+				}
+				coal_add_auth_dem = yes
+			}
+			add_popularity = {
+				ideology = authoritarian_democrat
+				popularity = 0.05
+			}
+			add_popularity = {
+				ideology = social_democrat
+				popularity = 0.05
+			}
+		}
+	}
+	### Social Security Act ###
+	focus = {
+		id = TEX_McMath_Social_Security_Act
+		icon = GFX_generic_social_reforms
+		relative_position_id = TEX_President_McMath
+		x = 6
+		y = 1
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_President_McMath
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_McMath_Social_Security_Act"
+			TEX_focus_social_security_act = yes
+		}
+	}
+	focus = {
+		id = TEX_McMath_Vocational_Schools_Act
+		icon = GFX_KTG_Bookstack
+		relative_position_id = TEX_President_McMath
+		x = 1
+		y = 2
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_President_McMath
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_McMath_Vocational_Schools_Act"
+			TEX_focus_vocational_schools = yes
+		}
+	}
+	focus = {
+		id = TEX_McMath_Federal_Healthcare_Act
+		icon = GFX_generic_FIN_promote_the_red_cross
+		relative_position_id = TEX_President_McMath
+		x = 5
+		y = 2
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_McMath_Social_Security_Act
+		}
+		mutually_exclusive = {
+			focus = TEX_McMath_Rural_Healthcare_Act
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_McMath_Federal_Healthcare_Act"
+			TEX_focus_Federal_Healthcare_Act = yes
+		}
+	}
+	focus = {
+		id = TEX_McMath_Rural_Healthcare_Act
+		icon = GFX_generic_healthcare
+		relative_position_id = TEX_President_McMath
+		x = 7
+		y = 2
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_McMath_Social_Security_Act
+		}
+		mutually_exclusive = {
+			focus = TEX_McMath_Federal_Healthcare_Act
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_McMath_Rural_Healthcare_Act"
+			TEX_focus_Rural_Healthcare_Act = yes
+		}
+	}
+	focus = {
+		id = TEX_McMath_Groundwork_Civil_Rights
+		icon = GFX_TEX_race_politics
+		relative_position_id = TEX_President_McMath
+		x = 3
+		y = 1
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_President_McMath
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_McMath_Groundwork_Civil_Rights"
+			TEX_focus_Groundwork_Civil_Rights = yes
+		}
+	}
+	focus = {
+		id = TEX_McMath_Anti_Lynching_Act
+		icon = GFX_TEX_federal_system
+		relative_position_id = TEX_President_McMath
+		x = 3
+		y = 2
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_McMath_Groundwork_Civil_Rights
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_McMath_Anti_Lynching_Act"
+			TEX_focus_Anti_Lynching_Act = yes
+		}
+	}
+	focus = {
+		id = TEX_McMath_Minority_Voting_Rights_Act
+		icon = GFX_generic_electoral_law
+		relative_position_id = TEX_President_McMath
+		x = 2
+		y = 3
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_McMath_Anti_Lynching_Act
+		}
+		prerequisite = {
+			focus = TEX_McMath_Vocational_Schools_Act
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_McMath_Minority_Voting_Rights_Act"
+			TEX_focus_Minority_Voting_Rights_Act = yes
+		}
+	}
+	focus = {
+		id = TEX_McMath_Equal_Teaching_Opportunities_Act
+		icon = GFX_TEX_integrate_schools
+		relative_position_id = TEX_President_McMath
+		x = 1
+		y = 4
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_McMath_Vocational_Schools_Act
+		}
+		prerequisite = {
+			focus = TEX_McMath_Minority_Voting_Rights_Act
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_McMath_Equal_Teaching_Opportunities_Act"
+			TEX_focus_Equal_Teaching_Opportunities_Act = yes
+		}
+	}
+	### Rural Reconstruction Act ###
+	focus = {
+		id = TEX_McMath_Rural_Reconstruction_Act
+		icon = GFX_SZC_improvised_farming_machinery
+		relative_position_id = TEX_President_McMath
+		x = -4
+		y = 1
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_President_McMath
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_McMath_Rural_Reconstruction_Act"
+			TEX_focus_rural_reconstruction_act = yes
+		}
+	}
+	focus = {
+		id = TEX_McMath_Land_Development_Act
+		icon = GFX_generic_agrarian_reform
+		relative_position_id = TEX_President_McMath
+		x = -3
+		y = 2
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_McMath_Rural_Reconstruction_Act
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_McMath_Land_Development_Act"
+			TEX_focus_Land_Development_Act = yes
+		}
+	}
+	focus = {
+		id = TEX_McMath_Industrial_Reconstruction_Act
+		icon = GFX_generic_construction_krg
+		relative_position_id = TEX_President_McMath
+		x = -4
+		y = 3
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_McMath_Rural_Reconstruction_Act
+		}
+		prerequisite = {
+			focus = TEX_McMath_Demolish_and_Replace
+			focus = TEX_McMath_Rename_and_Construct
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_McMath_Industrial_Reconstruction_Act"
+			TEX_focus_Industrial_Reconstruction_Act = yes
+		}
+	}
+	focus = {
+		id = TEX_McMath_Agricultural_Relief_Act
+		icon = GFX_generic_agricultural_aid2
+		relative_position_id = TEX_President_McMath
+		x = -3
+		y = 4
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_McMath_Land_Development_Act
+		}
+		prerequisite = {
+			focus = TEX_McMath_Industrial_Reconstruction_Act
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_McMath_Agricultural_Relief_Act"
+			unlock_decision_tooltip = TEX_Agricultural_Relief_Act_Start
+			custom_effect_tooltip = CAL_Bill_Focus_Tree_tt
+			effect_tooltip = {
+				TEX_focus_Agricultural_Relief_Act = yes
+			}
+		}
+	}
+	### Limited Inheritance Act ###
+	focus = {
+		id = TEX_McMath_Limited_Inheritance_Act
+		icon = GFX_TEX_dollar
+		relative_position_id = TEX_President_McMath
+		x = 6
+		y = 3
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_McMath_Federal_Healthcare_Act
+			focus = TEX_McMath_Rural_Healthcare_Act
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_McMath_Limited_Inheritance_Act"
+			unlock_decision_tooltip = TEX_Limited_Inheritance_Act_Start
+			custom_effect_tooltip = CAL_Bill_Focus_Tree_tt
+			effect_tooltip = {
+				add_ideas = TEX_limited_inheritance_idea
+			}
+		}
+	}
+	focus = {
+		id = TEX_McMath_Standardization_of_Labor_Act
+		icon = GFX_tblra_union_agreement
+		relative_position_id = TEX_President_McMath
+		x = 4
+		y = 3
+		cost = 4
+		available = {
+		}
+		mutually_exclusive = {
+		}
+		prerequisite = {
+			focus = TEX_McMath_Anti_Lynching_Act
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_McMath_Standardization_of_Labor_Act"
+			TEX_focus_Standardization_of_Labor_Act = yes
+		}
+	}
+	### Union Highways Act ###
+	focus = {
+		id = TEX_McMath_Union_Highways_Act
+		icon = GFX_TEX_union_highways_act
+		relative_position_id = TEX_President_McMath
+		x = -6
+		y = 1
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_President_McMath
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_McMath_Union_Highways_Act"
+			unlock_decision_category_tooltip = TEX_interstate_highway
+		}
+	}
+	focus = {
+		id = TEX_McMath_Demolish_and_Replace
+		icon = GFX_TEX_national_transit_commission
+		relative_position_id = TEX_President_McMath
+		x = -7
+		y = 2
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_McMath_Union_Highways_Act
+		}
+		mutually_exclusive = {
+			focus = TEX_McMath_Rename_and_Construct
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_McMath_Demolish_and_Replace"
+			TEX_focus_Demolish_and_Replace = yes
+		}
+	}
+	focus = {
+		id = TEX_McMath_Rename_and_Construct
+		icon = GFX_TEX_reconnect_america
+		relative_position_id = TEX_President_McMath
+		x = -5
+		y = 2
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_McMath_Union_Highways_Act
+		}
+		mutually_exclusive = {
+			focus = TEX_McMath_Demolish_and_Replace
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_McMath_Rename_and_Construct"
+			TEX_focus_Rename_and_Construct = yes
+		}
+	}
+	focus = {
+		id = TEX_McMath_Construct_Union_Highways
+		icon = GFX_TEX_union_highways
+		relative_position_id = TEX_President_McMath
+		x = -6
+		y = 3
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_McMath_Rename_and_Construct
+			focus = TEX_McMath_Demolish_and_Replace
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_McMath_Construct_Union_Highways"
+			TEX_focus_construct_union_highways = yes
+		}
+	}
+	### Holt Branch ###
+	focus = {
+		id = TEX_President_Holt
+		icon = GFX_TEX_President_Rush_Holt
+		#relative_position_id = TEX_President_McMath
+		x = 45
+		y = 0
+		cost = 4
+		available = {
+			always = no
+		}
+		prerequisite = {
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_President_Holt"
+			custom_effect_tooltip = unlock_focuses
+		}
+	}
+	focus = {
+		id = TEX_Holt_Restrict_Protest
+		icon = GFX_TEX_fight_unions
+		relative_position_id = TEX_President_Holt
+		x = -1
+		y = 1
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_President_Holt
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_Holt_Restrict_Protest"
+			add_ideas = TEX_protests_restricted
+		}
+	}
+	focus = {
+		id = TEX_Holt_Labor_Reconciliation
+		icon = GFX_generic_end_strikes
+		relative_position_id = TEX_President_Holt
+		x = -1
+		y = 3
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_Holt_Restrict_Protest
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_Holt_Labor_Reconciliation"
+			swap_ideas = {
+				remove_idea = TEX_protests_restricted
+				add_idea = TEX_protests_restricted2
+			}
+		}
+	}
+	focus = {
+		id = TEX_Holt_Defund_CCC
+		icon = GFX_TEX_disband_minutemen
+		relative_position_id = TEX_President_Holt
+		x = 1
+		y = 1
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_President_Holt
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_Holt_Defund_CCC"
+			TEX_increase_privatization_efforts = yes
+		}
+	}
+	focus = {
+		id = TEX_Holt_Conservative_Values
+		icon = GFX_TEX_conservative
+		relative_position_id = TEX_President_Holt
+		x = 0
+		y = 4
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_Holt_Indiviualization_of_Utilities
+		}
+		prerequisite = {
+			focus = TEX_Holt_Private_Orphanges
+		}
+		prerequisite = {
+			focus = TEX_Holt_Labor_Reconciliation
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_Holt_Conservative_Values"
+			add_popularity = {
+				ideology = social_conservative
+				popularity = 0.05
+			}
+		}
+	}
+	focus = {
+		id = TEX_Holt_Private_Orphanges
+		icon = GFX_generic_privatisation
+		relative_position_id = TEX_President_Holt
+		x = 0
+		y = 2
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_Holt_Defund_CCC
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_Holt_Private_Orphanges"
+			TEX_increase_privatization_efforts = yes
+		}
+	}
+	focus = {
+		id = TEX_Holt_Indiviualization_of_Utilities
+		icon = GFX_TEX_autarky
+		relative_position_id = TEX_President_Holt
+		x = 1
+		y = 3
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_Holt_Defund_CCC
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_Holt_Private_Orphanges"
+			TEX_increase_privatization_efforts = yes
+		}
+	}
+	focus = {
+		id = TEX_Holt_Vocational_Schools_Act
+		icon = GFX_KTG_Bookstack
+		relative_position_id = TEX_President_Holt
+		x = 2
+		y = 2
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_President_Holt
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_Holt_Vocational_Schools_Act"
+			TEX_focus_vocational_schools = yes
+		}
+	}
+	focus = {
+		id = TEX_Holt_Separate_but_Equal
+		icon = GFX_TEX_race_politics
+		relative_position_id = TEX_President_Holt
+		x = 4
+		y = 1
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_President_Holt
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_Holt_Separate_but_Equal"
+			TEX_focus_Separate_but_Equal = yes
+		}
+	}
+	focus = {
+		id = TEX_Holt_Anti_Lynching_Act
+		icon = GFX_TEX_federal_system
+		relative_position_id = TEX_President_Holt
+		x = 4
+		y = 2
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_Holt_Separate_but_Equal
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_Holt_Anti_Lynching_Act"
+			TEX_focus_Anti_Lynching_Act = yes
+		}
+	}
+	focus = {
+		id = TEX_Holt_States_Rights_Act
+		icon = GFX_TEX_states_rights
+		relative_position_id = TEX_President_Holt
+		x = 3
+		y = 3
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_Holt_Anti_Lynching_Act
+		}
+		prerequisite = {
+			focus = TEX_Holt_Vocational_Schools_Act
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_Holt_States_Rights_Act"
+			TEX_focus_States_Rights_Act = yes
+		}
+	}
+	### Rural Reconstruction Act ###
+	focus = {
+		id = TEX_Holt_Rural_Reconstruction_Act
+		icon = GFX_SZC_improvised_farming_machinery
+		relative_position_id = TEX_President_Holt
+		x = -3
+		y = 1
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_President_Holt
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_Holt_Rural_Reconstruction_Act"
+			TEX_focus_rural_reconstruction_act = yes
+		}
+	}
+	focus = {
+		id = TEX_Holt_Land_Development_Act
+		icon = GFX_generic_agrarian_reform
+		relative_position_id = TEX_President_Holt
+		x = -2
+		y = 2
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_Holt_Rural_Reconstruction_Act
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_Holt_Land_Development_Act"
+			TEX_focus_Land_Development_Act = yes
+		}
+	}
+	focus = {
+		id = TEX_Holt_Industrial_Reconstruction_Act
+		icon = GFX_generic_construction_krg
+		relative_position_id = TEX_President_Holt
+		x = -3
+		y = 3
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_Holt_Rural_Reconstruction_Act
+		}
+		prerequisite = {
+			focus = TEX_Holt_Demolish_and_Replace
+			focus = TEX_Holt_Rename_and_Construct
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_Holt_Industrial_Reconstruction_Act"
+			TEX_focus_Industrial_Reconstruction_Act = yes
+		}
+	}
+	focus = {
+		id = TEX_Holt_Agricultural_Relief_Act
+		icon = GFX_generic_agricultural_aid2
+		relative_position_id = TEX_President_Holt
+		x = -2
+		y = 4
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_Holt_Land_Development_Act
+		}
+		prerequisite = {
+			focus = TEX_Holt_Industrial_Reconstruction_Act
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_Holt_Agricultural_Relief_Act"
+			unlock_decision_tooltip = TEX_Agricultural_Relief_Act_Start
+			custom_effect_tooltip = CAL_Bill_Focus_Tree_tt
+			effect_tooltip = {
+				TEX_focus_Agricultural_Relief_Act = yes
+			}
+		}
+	}
+	### Union Highways Act ###
+	focus = {
+		id = TEX_Holt_Union_Highways_Act
+		icon = GFX_TEX_union_highways_act
+		relative_position_id = TEX_President_Holt
+		x = -5
+		y = 1
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_President_Holt
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_Holt_Union_Highways_Act"
+			unlock_decision_category_tooltip = TEX_interstate_highway
+		}
+	}
+	focus = {
+		id = TEX_Holt_Demolish_and_Replace
+		icon = GFX_TEX_national_transit_commission
+		relative_position_id = TEX_President_Holt
+		x = -6
+		y = 2
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_Holt_Union_Highways_Act
+		}
+		mutually_exclusive = {
+			focus = TEX_Holt_Rename_and_Construct
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_Holt_Demolish_and_Replace"
+			TEX_focus_Demolish_and_Replace = yes
+		}
+	}
+	focus = {
+		id = TEX_Holt_Rename_and_Construct
+		icon = GFX_TEX_reconnect_america
+		relative_position_id = TEX_President_Holt
+		x = -4
+		y = 2
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_Holt_Union_Highways_Act
+		}
+		mutually_exclusive = {
+			focus = TEX_Holt_Demolish_and_Replace
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_Holt_Rename_and_Construct"
+			TEX_focus_Rename_and_Construct = yes
+		}
+	}
+	focus = {
+		id = TEX_Holt_Construct_Union_Highways
+		icon = GFX_TEX_union_highways
+		relative_position_id = TEX_President_Holt
+		x = -5
+		y = 3
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_Holt_Rename_and_Construct
+			focus = TEX_Holt_Demolish_and_Replace
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_Holt_Construct_Union_Highways"
+			TEX_focus_construct_union_highways = yes
+		}
+	}
+	### UNION NAVY ###
+	#TODO: Make sure that these focuses has effects (other than log)
+	focus = {
+		id = TEX_Navy
+		icon = GFX_TEX_navy
+		#relative_position_id = TEX_Navy
+		x = 38		#To make room for the Economic Focuses
+		y = 7
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			#focus = 
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_Navy"
+			navy_experience = 25
+		}
+	}
+	focus = {
+		id = TEX_Navy_Surface_Fleet
+		icon = GFX_generic_naval_battleship2
+		relative_position_id = TEX_Navy
+		x = -1
+		y = 1
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_Navy
+		}
+		mutually_exclusive = {
+			focus = TEX_Navy_German_Submarine
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_Navy_Surface_Fleet"
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 1
+				category = bb_tech
+			}
+		}
+	}
+	focus = {
+		id = TEX_Navy_Modernize_Destroyers
+		icon = GFX_generic_naval_destroyer2
+		relative_position_id = TEX_Navy
+		x = -2
+		y = 2
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_Navy_Surface_Fleet
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_Navy_Modernize_Destroyers"
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 1
+				category = dd_tech
+			}
+		}
+	}
+	focus = {
+		id = TEX_Navy_Frigate_Development
+		icon = GFX_generic_naval_industry
+		relative_position_id = TEX_Navy
+		x = -3
+		y = 3
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_Navy_Modernize_Destroyers
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_Navy_Frigate_Development"
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 1
+				category = ff_tech
+			}
+		}
+	}
+	focus = {
+		id = TEX_Navy_German_Submarine
+		icon = GFX_GER_submarine
+		relative_position_id = TEX_Navy
+		x = 1
+		y = 1
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_Navy
+		}
+		mutually_exclusive = {
+			focus = TEX_Navy_Surface_Fleet
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_Navy_German_Submarine"
+			add_tech_bonus = {
+				bonus = 0.5
+				uses = 1
+				category = ss_tech
+			}
+		}
+	}
+	focus = {
+		id = TEX_Navy_German_Licenses
+		icon = GFX_generic_buy_ships
+		relative_position_id = TEX_Navy
+		x = 2
+		y = 2
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_Navy_German_Submarine
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_Navy_German_Licenses"
+			add_ideas = TEX_ger_sub_licenses
+		}
+	}
+	focus = {
+		id = TEX_Navy_German_Officers
+		icon = GFX_SAF_Germany
+		relative_position_id = TEX_Navy
+		x = 3
+		y = 3
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_Navy_German_Licenses
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_Navy_German_Officers"
+			add_timed_idea = {
+				idea = TEX_ger_naval_officers
+				days = 450
+			}
+		}
+	}
+	focus = {
+		id = TEX_Navy_Build
+		icon = GFX_USA_navy
+		relative_position_id = TEX_Navy
+		x = 0
+		y = 2
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_Navy_German_Submarine
+			focus = TEX_Navy_Surface_Fleet
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_Navy_Build"
+			371 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = dockyard
+					level = 1
+					instant_build = yes
+				}
+			}
+			375 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = dockyard
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+	focus = {
+		id = TEX_Navy_Rebuild_Drydock_1
+		icon = GFX_generic_naval_fleet_in_being
+		relative_position_id = TEX_Navy
+		x = -1
+		y = 3
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_Navy_Build
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_Navy_Rebuild_Drydock_1"
+			362 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = dockyard
+					level = 2
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = coastal_bunker
+					level = 2
+					province = 788
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = naval_base
+					level = 2
+					province = 788
+					instant_build = yes
+				}
+			}
+		}
+	}
+	focus = {
+		id = TEX_Navy_Expand_Charleston
+		icon = GFX_BEL_naval_industry_focus
+		relative_position_id = TEX_Navy
+		x = 1
+		y = 3
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_Navy_Build
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_Navy_Expand_Charleston"
+			364 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = dockyard
+					level = 2
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = coastal_bunker
+					level = 2
+					province = 7202
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = naval_base
+					level = 2
+					province = 7202
+					instant_build = yes
+				}
+			}
+		}
+	}
+	focus = {
+		id = TEX_Navy_Beneath_Waves
+		icon = GFX_generic_naval_submarine2
+		relative_position_id = TEX_Navy
+		x = 2
+		y = 4
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_Navy_Expand_Charleston
+		}
+		prerequisite = {
+			focus = TEX_Navy_German_Licenses
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_Navy_Expand_Charleston"
+			add_tech_bonus = {
+				name = TEX_sub
+				uses = 2
+				bonus = 0.5
+				category = submarine_doctrine
+			}
+		}
+	}
+	focus = {
+		id = TEX_Navy_Securing_Trade
+		icon = GFX_generic_commercial_trade
+		relative_position_id = TEX_Navy
+		x = -2
+		y = 4
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_Navy_Rebuild_Drydock_1
+		}
+		prerequisite = {
+			focus = TEX_Navy_Frigate_Development
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_Navy_Securing_Trade"
+			add_tech_bonus = {
+				name = TEX_surface
+				uses = 2
+				bonus = 0.5
+				category = naval_doctrine				#TODO change this to surface doctrine once implemented
+			}
+		}
+	}
+	### The Union Air Force ###
+	#TODO: Make sure that these focuses has effects (other than log)
+	focus = {
+		id = TEX_Air
+		icon = GFX_TEX_airforce
+		relative_position_id = TEX_Navy
+		x = 7
+		y = 0
+		cost = 6
+		available = {
+		}
+		prerequisite = {
+			#focus = TEX_Air
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_Air"
+			air_experience = 25
+		}
+	}
+	focus = {
+		id = TEX_Air_Assisting_Patton
+		icon = GFX_generic_air_command
+		relative_position_id = TEX_Air
+		x = -1
+		y = 1
+		cost = 6
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_Air
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_Air_Assisting_Patton"
+			add_tech_bonus = {
+				name = TEX_cas_doctrine
+				uses = 1
+				bonus = 0.75
+				category = cat_battlefield_support
+			}
+		}
+	}
+	focus = {
+		id = TEX_Air_Surface_Coordination
+		icon = GFX_generic_air_fighter_new
+		relative_position_id = TEX_Air
+		x = -2
+		y = 2
+		cost = 6
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_Air_Assisting_Patton
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_Air_Surface_Coordination"
+			add_ideas = TEX_ground_air_coordination
+		}
+	}
+	focus = {
+		id = TEX_Air_Develop_B43
+		icon = GFX_generic_air_strategic_bomber_new
+		relative_position_id = TEX_Air
+		x = -1
+		y = 3
+		cost = 6
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_Air_Assisting_Patton
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_Air_Develop_B43"
+			add_tech_bonus = {
+				name = TEX_jetmaster
+				uses = 1
+				bonus = 1
+				technology = jet_strike_2
+			}
+		}
+	}
+	focus = {
+		id = TEX_Air_Striking_Cities
+		icon = GFX_generic_combined_bomber_offensive
+		relative_position_id = TEX_Air
+		x = -2
+		y = 4
+		cost = 6
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_Air_Surface_Coordination
+		}
+		prerequisite = {
+			focus = TEX_Air_Develop_B43
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_Air_Striking_Cities"
+			add_tech_bonus = {
+				name = TEX_bomber
+				uses = 1
+				bonus = 1
+				category = strategic_bomber_tech
+			}
+			swap_ideas = {
+				remove_idea = TEX_ground_air_coordination
+				add_idea = TEX_ground_air_coordination_1
+			}
+		}
+	}
+	focus = {
+		id = TEX_Air_Superiority_Doctrine
+		icon = GFX_generic_air_fighter2_new
+		relative_position_id = TEX_Air
+		x = 1
+		y = 1
+		cost = 6
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_Air
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_Air_Superiority_Doctrine"
+			add_tech_bonus = {
+				name = TEX_fighter_doctrine
+				uses = 1
+				bonus = 0.75
+				category = cat_operational_integrity
+			}
+		}
+	}
+	focus = {
+		id = TEX_Air_Controlling_Skies
+		icon = GFX_TEX_air_militias
+		relative_position_id = TEX_Air
+		x = 2
+		y = 2
+		cost = 6
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_Air_Superiority_Doctrine
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_Air_Controlling_Skies"
+			add_ideas = TEX_air_superiority
+		}
+	}
+	focus = {
+		id = TEX_Air_Expand_McDonnell_Contracts
+		icon = GFX_generic_air_interceptor
+		relative_position_id = TEX_Air
+		x = 0
+		y = 2
+		cost = 6
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_Air_Assisting_Patton
+			focus = TEX_Air_Superiority_Doctrine
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_Air_Expand_McDonnell_Contracts"
+			add_ideas = TEX_mcdonnell
+		}
+	}
+	focus = {
+		id = TEX_Air_Phantom_Banshee
+		icon = GFX_generic_aircraft_carrier
+		relative_position_id = TEX_Air
+		x = 1
+		y = 3
+		cost = 6
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_Air_Superiority_Doctrine
+		}
+		prerequisite = {
+			focus = TEX_Air_Expand_McDonnell_Contracts
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_Air_Phantom_Banshee"
+			add_tech_bonus = {
+				name = TEX_phantom
+				uses = 1
+				bonus = 1
+				technology = jet_fighter_2
+			}
+			add_tech_bonus = {
+				name = TEX_banshee
+				uses = 1
+				bonus = 1
+				technology = interceptor_2
+			}
+		}
+	}
+	focus = {
+		id = TEX_Air_Develop_F101
+		icon = GFX_generic_air_jet_new
+		relative_position_id = TEX_Air
+		x = 2
+		y = 4
+		cost = 6
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_Air_Controlling_Skies
+		}
+		prerequisite = {
+			focus = TEX_Air_Phantom_Banshee
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_Air_Develop_F101"
+			swap_ideas = {
+				remove_idea = TEX_air_superiority
+				add_idea = TEX_air_superiority_1
+			}
+			add_tech_bonus = {
+				name = TEX_phantom
+				uses = 1
+				bonus = 1
+				technology = jet_fighter_3
+			}
+		}
+	}
+	focus = {
+		id = TEX_Air_License_HH43
+		icon = GFX_generic_helicopter
+		relative_position_id = TEX_Air
+		x = 0
+		y = 4
+		cost = 6
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_Air_Expand_McDonnell_Contracts
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_Air_License_HH43"
+			add_tech_bonus = {
+				name = TEX_huskie
+				uses = 1
+				bonus = 1
+				technology = tech_utility_helicopter
+			}
+		}
+	}
+	focus = {
+		id = TEX_Air_Missile_Development
+		icon = GFX_generic_bombs_away
+		relative_position_id = TEX_Air
+		x = 0
+		y = 5
+		cost = 6
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_Air_Striking_Cities
+		}
+		prerequisite = {
+			focus = TEX_Air_License_HH43
+		}
+		prerequisite = {
+			focus = TEX_Air_Develop_F101
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_Air_Missile_Development"
+			add_tech_bonus = {
+				name = TEX_missiles
+				uses = 2
+				bonus = 0.75
+				category = missile_tech
+			}
+		}
+	}
+	### Army Tree ###
+	focus = {
+		id = TEX_Army
+		icon = GFX_TEX_army
+		relative_position_id = TEX_Navy
+		x = -10
+		y = 0
+		cost = 4
+		available = {
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_Army"
+			army_experience = 25
+			custom_effect_tooltip = TEX_Army_tt
+			hidden_effect = {
+				add_to_variable = {
+					TEX_mil_plan_speed = 0.15
+				}
+				add_dynamic_modifier = {
+					modifier = TEX_military_modifier
+				}
+			}
+		}
+	}
+	focus = {
+		id = TEX_Army_Reform_Patton
+		icon = GFX_generic_recruitment_upgrade
+		relative_position_id = TEX_Army
+		x = -4
+		y = 1
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_Army
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_Army_Reform_Patton"
+			custom_effect_tooltip = TEX_modify_mil_tt
+			add_to_variable = {
+				TEX_mil_leader_start_level = 1
+				tooltip = TEX_mil_leader_start_level_tt
+			}
+			add_to_variable = {
+				TEX_mil_command_power_gain = 0.1
+				tooltip = TEX_mil_command_power_gain_tt
+			}
+		}
+	}
+	focus = {
+		id = TEX_Army_Expand_Armored
+		icon = GFX_generic_army_tanks2
+		relative_position_id = TEX_Army
+		x = -5
+		y = 2
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_Army_Reform_Patton
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_Army_Expand_Armored"
+			custom_effect_tooltip = TEX_modify_mil_tt
+			add_to_variable = {
+				TEX_mil_armor_speed = 0.075
+				tooltip = TEX_mil_armor_speed_tt
+			}
+		}
+	}
+	focus = {
+		id = TEX_Army_M46_Patton
+		icon = GFX_generic_army_tanks2
+		relative_position_id = TEX_Army
+		x = -6
+		y = 3
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_Army_Expand_Armored
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_Army_M46_Patton"
+			add_tech_bonus = {
+				name = TEX_armour_bonus
+				uses = 2
+				bonus = 0.5
+				category = MBT_armor				#TODO make sure this is modern armour
+			}
+			custom_effect_tooltip = TEX_modify_mil_tt
+			add_to_variable = {
+				TEX_mil_armor_attack = 0.05
+				tooltip = TEX_mil_armor_attack_tt
+			}
+		}
+	}
+	focus = {
+		id = TEX_Army_Expand_M46
+		icon = GFX_generic_army_tanks3
+		relative_position_id = TEX_Army
+		x = -6
+		y = 4
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_Army_M46_Patton
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_Army_Expand_M46"
+			add_tech_bonus = {
+				name = TEX_armour_bonus
+				uses = 1
+				bonus = 1
+				category = light_armor
+			}
+			custom_effect_tooltip = TEX_modify_mil_tt
+			add_to_variable = {
+				TEX_mil_armor_attack = 0.05
+				tooltip = TEX_mil_armor_attack_tt
+			}
+		}
+	}
+	focus = {
+		id = TEX_Army_Armored_Spearhead
+		icon = GFX_generic_doctrine_tank_warfare
+		relative_position_id = TEX_Army
+		x = -5
+		y = 5
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_Army_Expand_M46
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_Army_Armored_Spearhead"
+			custom_effect_tooltip = TEX_modify_mil_tt
+			add_to_variable = {
+				TEX_mil_breakthrough = 0.1
+				tooltip = TEX_mil_breakthrough_tt
+			}
+		}
+	}
+	focus = {
+		id = TEX_Army_Modernize_Logistics
+		icon = GFX_generic_railroad_2
+		relative_position_id = TEX_Army
+		x = -3
+		y = 2
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_Army_Reform_Patton
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_Army_Modernize_Logistics"
+			#TODO add supply hubs and railroads
+			custom_effect_tooltip = TEX_modify_mil_tt
+			add_to_variable = {
+				TEX_mil_morale_factor = 0.1
+				tooltip = army_morale_factor_tt
+			}
+			build_railway = {
+				level = 1
+				start_province = 880
+				target_province = 3697
+				fallback = yes
+				path = {
+					880
+					3880
+					702
+					11817
+					3697
+				}
+			}
+			build_railway = {
+				level = 1
+				start_province = 10640
+				target_province = 4860
+				fallback = yes
+				path = {
+					10640
+					10711
+					7814
+					12585
+					7760
+					4860
+				}
+			}
+		}
+	}
+	focus = {
+		id = TEX_Army_Mechanization
+		icon = GFX_generic_light_tanks
+		relative_position_id = TEX_Army
+		x = -4
+		y = 3
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_Army_Modernize_Logistics
+		}
+		mutually_exclusive = {
+			focus = TEX_Army_Motorization
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_Army_Mechanization"
+			custom_effect_tooltip = TEX_modify_mil_tt
+			add_to_variable = {
+				TEX_mil_mech_attack = 0.05
+				tooltip = TEX_mil_mech_attack_tt
+			}
+			add_to_variable = {
+				TEX_mil_mech_defence = 0.05
+				tooltip = TEX_mil_mech_defence_tt
+			}
+		}
+	}
+	focus = {
+		id = TEX_Army_Motorization
+		icon = GFX_generic_armored_cars
+		relative_position_id = TEX_Army
+		x = -2
+		y = 3
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_Army_Modernize_Logistics
+		}
+		mutually_exclusive = {
+			focus = TEX_Army_Mechanization
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_Army_Motorization"
+			custom_effect_tooltip = TEX_modify_mil_tt
+			add_to_variable = {
+				TEX_mil_mot_attack = 0.05
+				tooltip = TEX_mil_mot_attack_tt
+			}
+			add_to_variable = {
+				TEX_mil_mot_defence = 0.05
+				tooltip = TEX_mil_mot_defence_tt
+			}
+		}
+	}
+	focus = {
+		id = TEX_Army_Streamline
+		icon = GFX_generic_production
+		relative_position_id = TEX_Army
+		x = -4
+		y = 4
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_Army_Mechanization
+			focus = TEX_Army_Motorization
+		}
+		prerequisite = {
+			focus = TEX_Army_M46_Patton
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_Army_Streamline"
+			add_ideas = TEX_production
+		}
+	}
+	focus = {
+		id = TEX_Army_Mobile_Infantry
+		icon = GFX_generic_army_cooperation
+		relative_position_id = TEX_Army
+		x = -2
+		y = 5
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_Army_Mechanization
+			focus = TEX_Army_Motorization
+		}
+		prerequisite = {
+			focus = TEX_Army_Streamline
+		}
+		mutually_exclusive = {
+			focus = TEX_Army_New_Infantry_Corps
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_Army_Mobile_Infantry"
+			custom_effect_tooltip = TEX_modify_mil_tt
+			add_to_variable = {
+				TEX_mil_speed = 0.05
+				tooltip = TEX_mil_speed_tt
+			}
+			add_to_variable = {
+				TEX_mil_attack = 0.05
+				tooltip = TEX_mil_attack_tt
+			}
+			add_to_variable = {
+				TEX_reinforce_rate = 0.01
+				tooltip = TEX_reinforce_rate_tt
+			}
+		}
+	}
+	focus = {
+		id = TEX_Army_Operation_Kingfish
+		icon = GFX_TEX_huey_long_dead
+		relative_position_id = TEX_Army
+		x = -4
+		y = 6
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_Army_Streamline
+		}
+		prerequisite = {
+			focus = TEX_Army_Armored_Spearhead
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_Army_Operation_Kingfish"
+			hidden_effect = {
+				set_country_flag = nuclear_power
+			}
+		}
+	}
+	focus = {
+		id = TEX_Army_Demobilize_Militias
+		icon = GFX_generic_demobilisation
+		relative_position_id = TEX_Army
+		x = 0
+		y = 1
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_Army
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_Army_Demobilize_Militias"
+			country_event = {
+				id = tex.5
+				days = 1
+			}
+		}
+	}
+	focus = {
+		id = TEX_Army_Expand_GI_Bill
+		icon = GFX_generic_veterans_benefits
+		relative_position_id = TEX_Army
+		x = -1
+		y = 2
+		cost = 4
+		available = {
+			has_country_flag = TEX_militia_review_complete
+		}
+		prerequisite = {
+			focus = TEX_Army_Demobilize_Militias
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_Army_Expand_GI_Bill"
+			hidden_effect = {
+				TEX_lower_low_morale = yes
+			}
+			effect_tooltip = {
+				remove_ideas = TEX_demoralized_military_11
+			}
+		}
+	}
+	focus = {
+		id = TEX_Army_Reorganize_Armament_Committee
+		icon = GFX_generic_army_command_power
+		relative_position_id = TEX_Army
+		x = 0
+		y = 3
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_Army_Demobilize_Militias
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_Army_Reorganize_Armament_Committee"
+			365 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+			362 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+	focus = {
+		id = TEX_Army_Artillery_Contracts
+		icon = GFX_generic_artillery
+		relative_position_id = TEX_Army
+		x = -1
+		y = 4
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_Army_Reorganize_Armament_Committee
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_Army_Artillery_Contracts"
+			add_tech_bonus = {
+				name = TEX_arty
+				uses = 1
+				bonus = 1
+				category = artillery
+			}
+			custom_effect_tooltip = TEX_modify_mil_tt
+			add_to_variable = {
+				TEX_mil_artillery_attack = 0.05
+				tooltip = TEX_mil_artillery_attack_tt
+			}
+			add_to_variable = {
+				TEX_mil_artillery_defence = 0.05
+				tooltip = TEX_mil_artillery_defence_tt
+			}
+		}
+	}
+	focus = {
+		id = TEX_Army_Standardize_M2
+		icon = GFX_generic_anti_tank
+		relative_position_id = TEX_Army
+		x = 1
+		y = 4
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_Army_Reorganize_Armament_Committee
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_Army_Standardize_M2"
+			add_tech_bonus = {
+				name = TEX_arty
+				uses = 1
+				bonus = 1
+				category = anti_tank
+			}
+		}
+	}
+	focus = {
+		id = TEX_Army_New_Infantry_Corps
+		icon = GFX_generic_army_guy_2
+		relative_position_id = TEX_Army
+		x = 0
+		y = 5
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_Army_Artillery_Contracts
+		}
+		prerequisite = {
+			focus = TEX_Army_Standardize_M2
+		}
+		mutually_exclusive = {
+			focus = TEX_Army_Mobile_Infantry
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_Army_New_Infantry_Corps"
+			custom_effect_tooltip = TEX_modify_mil_tt
+			add_to_variable = {
+				TEX_org_factor = 0.075
+				tooltip = TEX_org_factor_tt
+			}
+			add_to_variable = {
+				TEX_mil_defense = 0.05
+				tooltip = TEX_mil_defense_tt
+			}
+		}
+	}
+	focus = {
+		id = TEX_Army_Professional_Army
+		icon = GFX_TEX_fortress
+		relative_position_id = TEX_Army
+		x = -1
+		y = 6
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_Army_Mobile_Infantry
+			focus = TEX_Army_New_Infantry_Corps
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_Army_Professional_Army"
+			custom_effect_tooltip = TEX_modify_mil_tt
+			add_to_variable = {
+				TEX_org_factor = 0.05
+				tooltip = TEX_org_factor_tt
+			}
+			add_to_variable = {
+				TEX_reinforce_rate = 0.05
+				tooltip = TEX_reinforce_rate_tt
+			}
+			add_to_variable = {
+				TEX_mil_plan_speed = 0.05
+				tooltip = TEX_mil_plan_speed_tt
+			}
+		}
+	}
+	focus = {
+		id = TEX_Army_New_Officer_Corps
+		icon = GFX_generic_army_high_command
+		relative_position_id = TEX_Army
+		x = 3
+		y = 1
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_Army
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_Army_New_Officer_Corps"
+			army_experience = 15
+			custom_effect_tooltip = TEX_modify_mil_tt
+			add_to_variable = {
+				TEX_mil_leader_start_level = 1
+				tooltip = TEX_mil_leader_start_level_tt
+			}
+			add_to_variable = {
+				TEX_mil_command_power_gain = 0.05
+				tooltip = TEX_mil_command_power_gain_tt
+			}
+		}
+	}
+	focus = {
+		id = TEX_Army_Expand_Citadel
+		icon = GFX_generic_military_academy
+		relative_position_id = TEX_Army
+		x = 1
+		y = 2
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_Army_New_Officer_Corps
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_Army_Expand_Citadel"
+			army_experience = 25
+			364 = {
+				add_building_construction = {
+					type = naval_base
+					level = 3
+					province = 7202
+					instant_build = yes
+				}
+			}
+		}
+	}
+	focus = {
+		id = TEX_Army_Study_War
+		icon = GFX_generic_investigation
+		relative_position_id = TEX_Army
+		x = 3
+		y = 2
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_Army_New_Officer_Corps
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_Army_Study_War"
+			army_experience = 35
+			add_tech_bonus = {
+				name = TEX_study
+				uses = 1
+				bonus = 0.75
+				category = land_doctrine
+			}
+		}
+	}
+	focus = {
+		id = TEX_Army_New_ROTC_Programs
+		icon = GFX_generic_army_guard
+		relative_position_id = TEX_Army
+		x = 5
+		y = 2
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_Army_New_Officer_Corps
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_Army_New_ROTC_Programs"
+			custom_effect_tooltip = TEX_modify_mil_tt
+			add_to_variable = {
+				TEX_special_forces_cap = 0.1
+				tooltip = TEX_special_forces_cap_tt
+			}
+		}
+	}
+	focus = {
+		id = TEX_Army_Study_Battle_Rust_Belt
+		icon = GFX_generic_army_mass_assault
+		relative_position_id = TEX_Army
+		x = 2
+		y = 3
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_Army_Expand_Citadel
+			focus = TEX_Army_Study_War
+		}
+		mutually_exclusive = {
+			focus = TEX_Army_Study_Battle_Rockies
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_Army_Study_Battle_Rust_Belt"
+			army_experience = 25
+			custom_effect_tooltip = TEX_modify_mil_tt
+			add_to_variable = {
+				TEX_equipment_capture = 0.1
+				tooltip = TEX_equipment_capture_tt
+			}
+		}
+	}
+	focus = {
+		id = TEX_Army_Study_Battle_Rockies
+		icon = GFX_generic_army_grand_battleplan
+		relative_position_id = TEX_Army
+		x = 4
+		y = 3
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_Army_Study_War
+			focus = TEX_Army_New_ROTC_Programs
+		}
+		mutually_exclusive = {
+			focus = TEX_Army_Study_Battle_Rust_Belt
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_Army_Study_Battle_Rockies"
+			army_experience = 25
+			custom_effect_tooltip = TEX_modify_mil_tt
+			add_to_variable = {
+				TEX_terrain_reduction = 0.1
+				tooltip = TEX_terrain_reduction_tt
+			}
+		}
+	}
+	focus = {
+		id = TEX_Army_Grow_New_Generation
+		icon = GFX_generic_enlistment
+		relative_position_id = TEX_Army
+		x = 5
+		y = 4
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_Army_New_ROTC_Programs
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_Army_Grow_New_Generation"
+			TEX_upgrade_lost_generation = yes
+		}
+	}
+	focus = {
+		id = TEX_Army_Man_Not_Starve
+		icon = GFX_generic_agrarian_soldiers
+		relative_position_id = TEX_Army
+		x = 3
+		y = 5
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_Army_Grow_New_Generation
+		}
+		prerequisite = {
+			focus = TEX_Army_Artillery_Contracts
+		}
+		prerequisite = {
+			focus = TEX_Army_Standardize_M2
+		}
+		prerequisite = {
+			focus = TEX_Army_Study_Battle_Rockies
+			focus = TEX_Army_Study_Battle_Rust_Belt
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_Army_Man_Not_Starve"
+			360 = {
+				add_building_construction = {
+					type = supply_node
+					level = 1
+					instant_build = yes
+					province = 3697
+				}
+				add_extra_state_shared_building_slots = 1
+			}
+			381 = {
+				add_building_construction = {
+					type = supply_node
+					level = 1
+					instant_build = yes
+					province = 7814
+				}
+				add_extra_state_shared_building_slots = 1
+			}
+		}
+	}
+	#### 1952 Focus ####
+	###PROGRESSIVES
+	focus = {
+		id = TEX_1952_McMath
+		icon = GFX_TEX_President_Sid_McMath
+		#relative_position_id = TEX_1952_McMath
+		x = -3
+		y = 7
+		cost = 4
+		available = {
+			always = no
+		}
+		prerequisite = {
+			#focus = 
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_McMath"
+			custom_effect_tooltip = unlock_focuses
+		}
+	}
+	focus = {
+		id = TEX_1952_Arnall
+		icon = GFX_TEX_President_Ellis_Arnall
+		#relative_position_id = TEX_1952_McMath
+		x = -1
+		y = 7
+		cost = 4
+		available = {
+			always = no
+		}
+		prerequisite = {
+			#focus = 
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_Arnall"
+			custom_effect_tooltip = unlock_focuses
+		}
+	}
+	focus = {
+		id = TEX_1952_Prog_Eliminate_Poll_Tax
+		icon = GFX_TEX_dollar
+		relative_position_id = TEX_1952_McMath
+		x = 2
+		y = 1
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_1952_McMath
+			focus = TEX_1952_Arnall
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_Prog_Eliminate_Poll_Tax"
+			unlock_decision_tooltip = TEX_Eliminate_the_Poll_Tax_Start
+			custom_effect_tooltip = CAL_Bill_Focus_Tree_tt
+			effect_tooltip = {
+				add_ideas = TEX_eliminated_poll_tax
+				every_state = {
+					limit = {
+						is_owned_and_controlled_by = TEX
+						OR = {
+							state = 364
+							state = 365
+							state = 367
+							state = 368
+							state = 370
+							state = 371
+							state = 372
+							state = 374
+						}
+					}
+					set_temp_variable = {
+						pop_type_added = 3
+					}
+					set_temp_variable = {
+						pop_value_added = 5
+					}
+					TEX_add_electoral_popularity = yes
+				}
+			}
+		}
+	}
+	focus = {
+		id = TEX_1952_Prog_Lower_Voting_Age
+		icon = GFX_TEX_democracy
+		relative_position_id = TEX_1952_McMath
+		x = 3
+		y = 2
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_1952_Prog_Eliminate_Poll_Tax
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_Prog_Lower_Voting_Age"
+			unlock_decision_tooltip = TEX_Lowered_Voting_Rights_Act_Start
+			custom_effect_tooltip = CAL_Bill_Focus_Tree_tt
+			custom_effect_tooltip = TEX_1952_Prog_Lower_Voting_Age_tt
+		}
+	}
+	focus = {
+		id = TEX_1952_Prog_Smash_Segregation
+		icon = GFX_TEX_crush_dixie
+		relative_position_id = TEX_1952_McMath
+		x = 0
+		y = 1
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_1952_McMath
+			focus = TEX_1952_Arnall
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_Prog_Smash_Segregation"
+			unlock_decision_tooltip = TEX_Executive_Order_Confederation_Removal
+		}
+	}
+	focus = {
+		id = TEX_1952_Prog_Integrate_Schools
+		icon = GFX_TEX_integrate_schools
+		relative_position_id = TEX_1952_McMath
+		x = -1
+		y = 2
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_1952_Prog_Smash_Segregation
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_Prog_Integrate_Schools"
+			unlock_decision_tooltip = TEX_Executive_Order_Desegregate_Schools
+		}
+	}
+	focus = {
+		id = TEX_1952_Prog_Save_HBCUs
+		icon = GFX_TEX_race_relations
+		relative_position_id = TEX_1952_McMath
+		x = 0
+		y = 3
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_1952_Prog_Integrate_Schools
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_Prog_Save_HBCUs"
+			custom_effect_tooltip = TEX_black_community_like_this_tt
+			hidden_effect = {
+				country_event = tex.focus.3
+			}
+		}
+	}
+	focus = {
+		id = TEX_1952_Prog_Increase_Minimum_Wage
+		icon = GFX_TEX_dollar_treaty
+		relative_position_id = TEX_1952_McMath
+		x = 1
+		y = 2
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_1952_Prog_Smash_Segregation
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_Prog_Increase_Minimum_Wage"
+			custom_effect_tooltip = TEX_1952_Prog_Increase_Minimum_Wage_tt
+		}
+	}
+	focus = {
+		id = TEX_1952_Prog_Integrate_Primaries
+		icon = GFX_generic_microphone
+		relative_position_id = TEX_1952_McMath
+		x = 2
+		y = 3
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_1952_Prog_Lower_Voting_Age
+		}
+		prerequisite = {
+			focus = TEX_1952_Prog_Increase_Minimum_Wage
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_Prog_Integrate_Primaries"
+			custom_effect_tooltip = TEX_1952_Prog_Integrate_Primaries_tt
+			set_country_flag = TEX_abolished_primaries
+		}
+	}
+	###LONGISTS
+	focus = {
+		id = TEX_1952_Long
+		icon = GFX_TEX_President_Earl_Long
+		#relative_position_id = TEX_1952_Long
+		x = 7
+		y = 7
+		cost = 4
+		available = {
+			always = no
+		}
+		prerequisite = {
+			#focus = 
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_Long"
+			custom_effect_tooltip = unlock_focuses
+		}
+	}
+	focus = {
+		id = TEX_1952_Russell
+		icon = GFX_TEX_President_Russell_Long
+		#relative_position_id = TEX_1952_Long
+		x = 9
+		y = 7
+		cost = 4
+		available = {
+			always = no
+		}
+		prerequisite = {
+			#focus = 
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_Russell"
+			custom_effect_tooltip = unlock_focuses
+		}
+	}
+	focus = {
+		id = TEX_1952_Orthodox_Income_Tax_Credit
+		icon = GFX_generic_foreign_investments
+		relative_position_id = TEX_1952_Long
+		x = 0
+		y = 1
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_1952_Long
+			focus = TEX_1952_Russell
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_Orthodox_Income_Tax_Credit"
+			add_ideas = TEX_taxes
+		}
+	}
+	focus = {
+		id = TEX_1952_Orthodox_Expand_Social_Security
+		icon = GFX_TEX_dollar_treaty
+		relative_position_id = TEX_1952_Long
+		x = -1
+		y = 2
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_1952_Orthodox_Income_Tax_Credit
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_Orthodox_Expand_Social_Security"
+			move_up_service_spending = yes
+		}
+	}
+	focus = {
+		id = TEX_1952_Orthodox_Employee_Stock_Ownership
+		icon = GFX_generic_deals
+		relative_position_id = TEX_1952_Long
+		x = 0
+		y = 3
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_1952_Orthodox_Expand_Social_Security
+		}
+		mutually_exclusive = {
+			focus = TEX_1952_Orthodox_Reform_Tax_Code
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_Orthodox_Employee_Stock_Ownership"
+			TEX_upgrade_social_security = yes
+		}
+	}
+	focus = {
+		id = TEX_1952_Orthodox_Tax_Cuts_Economy
+		icon = GFX_generic_economic_report
+		relative_position_id = TEX_1952_Long
+		x = 1
+		y = 2
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_1952_Orthodox_Income_Tax_Credit
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_Orthodox_Tax_Cuts_Economy"
+			swap_ideas = {
+				remove_idea = TEX_taxes
+				add_idea = TEX_taxes_1
+			}
+		}
+	}
+	focus = {
+		id = TEX_1952_Orthodox_Agriculture_Act
+		icon = GFX_generic_agriculture_dept
+		relative_position_id = TEX_1952_Long
+		x = 2
+		y = 1
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_1952_Long
+			focus = TEX_1952_Russell
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_Orthodox_Agriculture_Act"
+			unlock_decision_tooltip = TEX_Expand_Agricultural_Relief_Act_Start
+			custom_effect_tooltip = CAL_Bill_Focus_Tree_tt
+			effect_tooltip = {
+				TEX_focus_Agricultural_Relief_Act = yes
+			}
+		}
+	}
+	focus = {
+		id = TEX_1952_Orthodox_Reform_Tax_Code
+		icon = GFX_generic_bill
+		relative_position_id = TEX_1952_Long
+		x = 2
+		y = 3
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_1952_Orthodox_Agriculture_Act
+		}
+		prerequisite = {
+			focus = TEX_1952_Orthodox_Tax_Cuts_Economy
+		}
+		mutually_exclusive = {
+			focus = TEX_1952_Orthodox_Employee_Stock_Ownership
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_Orthodox_Reform_Tax_Code"
+			remove_ideas = TEX_taxes_1
+		}
+	}
+	###CONSERVATIVES
+	focus = {
+		id = TEX_1952_Holt
+		icon = GFX_TEX_President_Rush_Holt
+		#relative_position_id = TEX_1952_Holt
+		x = 16
+		y = 7
+		cost = 4
+		available = {
+			always = no
+		}
+		prerequisite = {
+			#focus = 
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_Holt"
+			custom_effect_tooltip = unlock_focuses
+		}
+	}
+	focus = {
+		id = TEX_1952_Thurmond
+		icon = GFX_TEX_President_Strom_Thurmond
+		#relative_position_id = TEX_1952_Holt
+		x = 18
+		y = 7
+		cost = 4
+		available = {
+			always = no
+		}
+		prerequisite = {
+			#focus = 
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_Thurmond"
+			custom_effect_tooltip = unlock_focuses
+		}
+	}
+	focus = {
+		id = TEX_1952_Conservative_Expand_Tariffs
+		icon = GFX_TEX_tariffs
+		relative_position_id = TEX_1952_Holt
+		x = -1
+		y = 1
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_1952_Holt
+			focus = TEX_1952_Thurmond
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_Conservative_Expand_Tariffs"
+			custom_effect_tooltip = TEX_1952_Conservative_Expand_Tariffs_tt
+			add_ideas = TEX_tariffs
+		}
+	}
+	focus = {
+		id = TEX_1952_Conservative_Trading_Enemies_Act
+		icon = GFX_generic_skull_treaty2
+		relative_position_id = TEX_1952_Holt
+		x = 1
+		y = 1
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_1952_Holt
+			focus = TEX_1952_Thurmond
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_Conservative_Trading_Enemies_Act"
+			add_opinion_modifier = {
+				target = CAL
+				modifier = KRG_trade_sanctions
+			}
+			add_opinion_modifier = {
+				target = NEE
+				modifier = KRG_trade_sanctions
+			}
+			add_opinion_modifier = {
+				target = GLG
+				modifier = KRG_trade_sanctions
+			}
+		}
+	}
+	focus = {
+		id = TEX_1952_Conservative_Yellow_Scare
+		icon = GFX_generic_radio
+		relative_position_id = TEX_1952_Holt
+		x = 0
+		y = 2
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_1952_Conservative_Expand_Tariffs
+		}
+		prerequisite = {
+			focus = TEX_1952_Conservative_Trading_Enemies_Act
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_Conservative_Yellow_Scare"
+			add_ideas = TEX_yellow_scare
+		}
+	}
+	focus = {
+		id = TEX_1952_Conservative_Stem_Great_Migration
+		icon = GFX_generic_conspiracy
+		relative_position_id = TEX_1952_Holt
+		x = 3
+		y = 1
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_1952_Holt
+			focus = TEX_1952_Thurmond
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_Conservative_Stem_Great_Migration"
+		}
+	}
+	focus = {
+		id = TEX_1952_Conservative_Expand_Police_Funding
+		icon = GFX_generic_conscription
+		relative_position_id = TEX_1952_Holt
+		x = 2
+		y = 2
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_1952_Conservative_Stem_Great_Migration
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_Conservative_Expand_Police_Funding"
+			add_ideas = TEX_expanded_police_funding
+		}
+	}
+	focus = {
+		id = TEX_1952_Conservative_Permanent_Segregation
+		icon = GFX_SAF_Apartheid
+		relative_position_id = TEX_1952_Holt
+		x = 1
+		y = 3
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_1952_Conservative_Yellow_Scare
+		}
+		prerequisite = {
+			focus = TEX_1952_Conservative_Expand_Police_Funding
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_Conservative_Permanent_Segregation"
+			add_ideas = TEX_permanent_segregation
+		}
+	}
+	###GENERIC 1952 TREE
+	focus = {
+		id = TEX_1952_generic_reconcile_unions
+		icon = GFX_generic_unions
+		relative_position_id = TEX_1952_McMath
+		x = 4
+		y = 1
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_1952_Long
+			focus = TEX_1952_Russell
+			focus = TEX_1952_McMath
+			focus = TEX_1952_Arnall
+		}
+		mutually_exclusive = {
+			focus = TEX_1952_generic_expand_right_to_work
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_generic_reconcile_unions"
+			set_temp_variable = {
+				TEX_factionalism_pop = 15
+			}
+			TEX_factionalism_rem_pop_conservative = yes
+			add_ideas = TEX_reconciled_unions
+		}
+	}
+	focus = {
+		id = TEX_1952_generic_expand_right_to_work
+		icon = GFX_generic_workers_for_business
+		relative_position_id = TEX_1952_McMath
+		x = 6
+		y = 1
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_1952_Long
+			focus = TEX_1952_Russell
+			focus = TEX_1952_Holt
+			focus = TEX_1952_Thurmond
+		}
+		mutually_exclusive = {
+			focus = TEX_1952_generic_reconcile_unions
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_generic_expand_right_to_work"
+			add_ideas = TEX_right_to_work_laws
+		}
+	}
+	focus = {
+		id = TEX_1952_generic_expand_ford_industrial_complex
+		icon = GFX_generic_car
+		relative_position_id = TEX_1952_Long
+		x = -5
+		y = 2
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_1952_generic_expand_right_to_work
+			focus = TEX_1952_generic_reconcile_unions
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_generic_expand_ford_industrial_complex"
+			every_state = {
+				limit = {
+					is_owned_and_controlled_by = TEX
+					OR = {
+						state = 261
+						state = 369
+						state = 373
+						state = 395
+					}
+				}
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+				add_extra_state_shared_building_slots = 1
+			}
+		}
+	}
+	focus = {
+		id = TEX_1952_generic_self_sufficient_economy
+		icon = GFX_generic_economic_control
+		relative_position_id = TEX_1952_Long
+		x = -6
+		y = 3
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_1952_generic_expand_ford_industrial_complex
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_generic_self_sufficient_economy"
+			random_owned_state = {
+				add_building_construction = {
+					type = industrial_complex
+					level = 4
+					instant_build = yes
+				}
+				add_extra_state_shared_building_slots = 1
+			}
+		}
+	}
+	focus = {
+		id = TEX_1952_generic_expand_highway_system
+		icon = GFX_TEX_national_transit_commission
+		relative_position_id = TEX_1952_Long
+		x = -3
+		y = 2
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_1952_Long
+			focus = TEX_1952_Russell
+			focus = TEX_1952_Holt
+			focus = TEX_1952_Thurmond
+			focus = TEX_1952_McMath
+			focus = TEX_1952_Arnall
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_generic_expand_highway_system"
+			custom_effect_tooltip = TEX_add_25_bil
+			custom_effect_tooltip = tooltip_white_line
+			add_to_variable = {
+				TEX_interstate_budget = 25
+			}
+			unlock_decision_tooltip = TEX_I_26
+			unlock_decision_tooltip = TEX_I_35
+			unlock_decision_tooltip = TEX_I_37
+			unlock_decision_tooltip = TEX_I_94
+		}
+	}
+	focus = {
+		id = TEX_1952_generic_expand_defense_infrastructure
+		icon = GFX_TEX_fortress
+		relative_position_id = TEX_1952_Long
+		x = -4
+		y = 3
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_1952_generic_expand_highway_system
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_generic_expand_defense_infrastructure"
+			every_owned_state = {
+				limit = {
+					num_owned_neighbour_states = {
+						owner = CAL
+						count > 0
+					}
+					is_owned_and_controlled_by = TEX
+				}
+				add_building_construction = {
+					type = bunker
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+	focus = {
+		id = TEX_1952_generic_prepared_force
+		icon = GFX_TEX_militias
+		relative_position_id = TEX_1952_Long
+		x = -2
+		y = 1
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_1952_Long
+			focus = TEX_1952_Russell
+			focus = TEX_1952_Holt
+			focus = TEX_1952_Thurmond
+			focus = TEX_1952_McMath
+			focus = TEX_1952_Arnall
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_generic_prepared_force"
+			move_up_econ_mobilization = yes
+		}
+	}
+	focus = {
+		id = TEX_1952_generic_expand_peacetime_reserves
+		icon = GFX_TEX_recruitment
+		relative_position_id = TEX_1952_Long
+		x = -2
+		y = 3
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_1952_generic_prepared_force
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_generic_expand_peacetime_reserves"
+			custom_effect_tooltip = TEX_1952_generic_expand_peacetime_reserves_tt
+		}
+	}
+	focus = {
+		id = TEX_1952_generic_new_capital
+		icon = GFX_TEX_america_map
+		relative_position_id = TEX_1952_Long
+		x = 4
+		y = 1
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_1952_Long
+			focus = TEX_1952_Russell
+			focus = TEX_1952_Holt
+			focus = TEX_1952_Thurmond
+			focus = TEX_1952_McMath
+			focus = TEX_1952_Arnall
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_generic_new_capital"
+			country_event = {
+				id = tex.focus.1
+			}
+		}
+	}
+	focus = {
+		id = TEX_1952_generic_washington_dc
+		icon = GFX_TEX_washington_dc
+		relative_position_id = TEX_1952_Long
+		x = 3
+		y = 2
+		cost = 4
+		available = {
+			has_country_flag = TEX_washington_capital
+		}
+		prerequisite = {
+			focus = TEX_1952_generic_new_capital
+		}
+		mutually_exclusive = {
+			focus = TEX_1952_generic_st_louis
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_generic_washington_dc"
+			custom_effect_tooltip = TEX_capital_moved_tt
+			set_victory_points = {
+				province = 3957
+				value = 40
+			}
+			set_victory_points = {
+				province = 7552
+				value = 10
+			}
+			hidden_effect = {
+				set_capital = {
+					state = 361
+				}
+				set_province_name = {
+					id = 3957
+					name = "Washington, D.C."
+				}
+			}
+		}
+	}
+	focus = {
+		id = TEX_1952_generic_st_louis
+		icon = GFX_TEX_st_louis
+		relative_position_id = TEX_1952_Long
+		x = 5
+		y = 2
+		cost = 4
+		available = {
+			has_country_flag = TEX_st_louis_capital
+		}
+		prerequisite = {
+			focus = TEX_1952_generic_new_capital
+		}
+		mutually_exclusive = {
+			focus = TEX_1952_generic_washington_dc
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_generic_st_louis"
+			custom_effect_tooltip = TEX_capital_moved2_tt
+			set_victory_points = {
+				province = 4569
+				value = 40
+			}
+			set_victory_points = {
+				province = 7552
+				value = 10
+			}
+			hidden_effect = {
+				set_capital = {
+					state = 373
+				}
+				set_province_name = {
+					id = 3957
+					name = "St. Louis, D.C."
+				}
+			}
+		}
+	}
+	focus = {
+		id = TEX_1952_generic_reforge_steel_belt
+		icon = GFX_TEX_steel_industry
+		relative_position_id = TEX_1952_Long
+		x = 6
+		y = 1
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_1952_Long
+			focus = TEX_1952_Russell
+			focus = TEX_1952_Holt
+			focus = TEX_1952_Thurmond
+			focus = TEX_1952_McMath
+			focus = TEX_1952_Arnall
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_generic_reforge_steel_belt"
+			custom_effect_tooltip = TEX_1952_generic_reforge_steel_belt_tt
+			custom_effect_tooltip = tooltip_white_line
+			every_state = {
+				limit = {
+					is_owned_and_controlled_by = TEX
+					has_resources_amount = {
+						resource = steel
+						amount > 10
+						delivered = yes
+					}
+				}
+				add_resource = {
+					type = steel
+					amount = 10
+				}
+			}
+		}
+	}
+	focus = {
+		id = TEX_1952_generic_expand_coastal_ports
+		icon = GFX_generic_shipyard
+		relative_position_id = TEX_1952_Long
+		x = 7
+		y = 2
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_1952_generic_reforge_steel_belt
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_generic_expand_coastal_ports"
+			random_owned_state = {
+				limit = {
+					is_coastal = yes
+				}
+				add_building_construction = {
+					type = coastal_bunker
+					level = 2
+					instant_build = yes
+					province = {
+						all_provinces = yes
+						limit_to_coastal = yes
+					}
+				}
+			}
+		}
+	}
+	focus = {
+		id = TEX_1952_generic_expand_urban_industrilization
+		icon = GFX_generic_industrial_towns
+		relative_position_id = TEX_1952_Long
+		x = 4
+		y = 3
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_1952_generic_expand_coastal_ports
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_generic_expand_urban_industrilization"
+			every_owned_state = {
+				limit = {
+					OR = {
+						has_state_category = two
+						has_state_category = three
+					}
+				}
+				set_state_category = four
+			}
+		}
+	}
+	focus = {
+		id = TEX_1952_generic_housing_act
+		icon = GFX_GENERIC_worker_housing
+		relative_position_id = TEX_1952_Long
+		x = 6
+		y = 3
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_1952_generic_expand_coastal_ports
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_generic_housing_act"
+			random_owned_state = {
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+				add_extra_state_shared_building_slots = 1
+			}
+		}
+	}
+	focus = {
+		id = TEX_1952_generic_food_exports
+		icon = GFX_generic_agriculture4
+		relative_position_id = TEX_1952_Long
+		x = 8
+		y = 3
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_1952_generic_expand_coastal_ports
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_generic_food_exports"
+			every_country = {
+				limit = {
+					is_in_faction_with = GER
+				}
+				TEX = {
+					add_opinion_modifier = {
+						target = PREV
+						modifier = KRG_trade_agreement
+					}
+				}
+			}
+		}
+	}
+}

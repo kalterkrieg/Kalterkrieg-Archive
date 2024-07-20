@@ -1,0 +1,54 @@
+add_namespace = krg_famed
+
+country_event ={ ###ITA (or NFA) proposes the plan to NFA (or ITA)
+	id = krg_famed.0
+	title = krg_famed.0.t
+	desc = krg_famed.0.d
+
+	is_triggered_only = yes
+    option ={ 
+		custom_effect_tooltip = famed_first_event_tt
+		name = krg_famed.0.a
+		if = {
+			limit = { tag = NFA }
+			set_country_flag = is_in_FAMED
+			add_dynamic_modifier ={
+				modifier = FAMED_modifiers
+			}
+			ITA ={ 
+				set_country_flag = is_in_FAMED
+				add_dynamic_modifier ={ modifier = FAMED_modifiers }
+			}
+
+		}
+		
+		if = {
+			limit = { tag = ITA }
+			set_country_flag = is_in_FAMED
+			add_dynamic_modifier ={
+				modifier = FAMED_modifiers
+			}
+			NFA ={ 
+				set_country_flag = is_in_FAMED
+				add_dynamic_modifier ={ modifier = FAMED_modifiers }
+			}
+
+		}
+		reset_values_FAMED_for_all = yes
+		calculate_influence_for_all = yes
+	}
+}
+country_event ={ ###invitation event
+	id = krg_famed.1
+	title = krg_famed.1.t
+	desc = krg_famed.1.d
+
+	is_triggered_only = yes
+    option ={ 
+		name = krg_famed.1.a
+		set_country_flag = is_in_FAMED
+		add_dynamic_modifier = { modifier = FAMED_modifiers }
+		reset_values_FAMED_for_all = yes
+		calculate_influence_for_all = yes
+	}
+}

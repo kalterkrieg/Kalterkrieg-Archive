@@ -1,0 +1,158 @@
+add_namespace = krg_rom
+
+country_event = { #Bye Horia
+	id = krg_rom.0
+	title = krg_rom.0.t
+	desc = krg_rom.0.d
+	is_triggered_only = yes
+
+	option = {
+		name = krg_rom.0.a
+		add_political_power = 100
+		retire_character = ROM_horia_sima
+		add_country_leader_role = {
+			character = ROM_carol_ii
+			promote_leader = yes
+			country_leader = {
+				ideology = national_populist_subtype
+				desc = POLITICS_CAROL_DESC
+				expire= 1953.4.3.1
+				traits = {
+					hedonist
+					headstrong
+				}
+			}
+		}
+		set_party_name = {
+			ideology = national_populist
+			name = ROM_national_populist_party_kp
+			long_name = ROM_national_populist_party_long_kp
+		}
+	}
+}
+
+country_event = { #Bye Carol
+	id = krg_rom.1
+	title = krg_rom.1.t
+	desc = krg_rom.1.d
+	is_triggered_only = yes
+
+	immediate = {
+		retire_character = ROM_carol_ii
+		coal_add_pat_aut = yes
+		remove_ideas = ROM_idea_dreams_of_transylvania
+		hidden_effect = {
+			add_country_leader_role = {
+				character = ROM_michael_i
+				promote_leader = yes
+				country_leader = {
+					ideology = authoritarian_democrat_subtype
+					desc = POLITICS_MICHAEL_OF_ROMANIA_DESC
+					expire = 2001.1.1.1
+					traits = {
+					}
+				}
+			}	
+			add_country_leader_role = {
+				character = ROM_michael_i
+				promote_leader = yes
+				country_leader = {
+					ideology = social_conservative_subtype
+					desc = POLITICS_MICHAEL_OF_ROMANIA_DESC
+					expire = 2001.1.1.1
+					traits = {
+					}
+				}
+			}	
+			add_country_leader_role = {
+				character = ROM_michael_i
+				promote_leader = yes
+				country_leader = {
+					ideology = paternal_autocrat_subtype
+					desc = POLITICS_MICHAEL_OF_ROMANIA_DESC
+					expire = 2001.1.1.1
+					traits = {
+					}
+				}
+			}	
+			add_country_leader_role = {
+				character = ROM_michael_i
+				promote_leader = yes
+				country_leader = {
+					ideology = market_liberal_subtype
+					desc = POLITICS_MICHAEL_OF_ROMANIA_DESC
+					expire = 2001.1.1.1
+					traits = {
+					}
+				}
+			}		
+			add_country_leader_role = {
+				character = ROM_michael_i
+				promote_leader = yes
+				country_leader = {
+					ideology = social_liberal_subtype
+					desc = POLITICS_MICHAEL_OF_ROMANIA_DESC
+					expire = 2001.1.1.1
+					traits = {
+					}
+				}
+			}		
+			add_country_leader_role = {
+				character = ROM_michael_i
+				promote_leader = yes
+				country_leader = {
+					ideology = social_democrat_subtype
+					desc = POLITICS_MICHAEL_OF_ROMANIA_DESC
+					expire = 2001.1.1.1
+					traits = {
+					}
+				}
+			}	
+			add_country_leader_role = {
+				character = ROM_michael_i
+				promote_leader = yes
+				country_leader = {
+					ideology = national_populist_subtype
+					desc = POLITICS_MICHAEL_OF_ROMANIA_DESC
+					expire = 2001.1.1.1
+					traits = {
+					}
+				}
+			}
+			set_politics = {
+				ruling_party = authoritarian_democrat
+			}
+			add_popularity = {
+				ideology = authoritarian_democrat
+				popularity = 0.33
+			}
+			add_popularity = {
+				ideology = paternal_autocrat
+				popularity = -0.33
+			}
+			swap_ideas = {
+				remove_idea = KRG_absolute_rulership
+				add_idea = KRG_authoritarian_system
+			}		
+		}
+	}
+	option = {
+		name = krg_rom.1.a
+		news_event = {
+			id = krg_rom.2
+		}
+	}
+}
+
+news_event = { # news
+	id = krg_rom.2
+	title = krg_rom.2.t
+	desc = krg_rom.2.d
+	picture = GFX_news_event_generic_funeral
+    major = yes
+	is_triggered_only = yes
+
+	option = {
+		name = krg_rom.2.a
+	}
+}

@@ -1,0 +1,395 @@
+focus_tree = {
+	id = GLG_focus_tree
+	country = {
+		factor = 0
+		modifier = {
+			add = 20
+			tag = GLG
+		}
+	}
+	default = no
+	initial_show_position = {
+		focus = GLG_finish_the_duluth_pocket
+	}
+	shared_focus = GLG_invite_new_englander_advisors
+	shared_focus = GLG_finish_the_duluth_pocket
+}
+
+# Starting Tree
+shared_focus = {
+	id = GLG_finish_the_duluth_pocket
+	icon = GFX_NEE_remove_syndies
+	allow_branch = {
+		has_country_flag = GLG_starting_tree
+	}
+	cost = 8
+	x = 1
+	y = 0
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus GLG_finish_the_duluth_pocket"
+		if = {
+			limit = {
+				794 = {
+					has_resistance = yes
+				}
+			}
+			794 = {
+				add_resistance = -30
+			}
+		}
+		else = {
+			add_stability = 0.1
+		}
+	}
+}
+
+shared_focus = {
+	id = GLG_invite_new_englander_advisors
+	icon = GFX_NEE_handshake_GLG
+	allow_branch = {
+		has_country_flag = GLG_starting_tree
+	}
+	cost = 8
+	x = 5
+	y = 0
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus GLG_invite_new_englander_advisors"
+		add_ideas = GLG_new_englander_advisors
+	}
+}
+
+shared_focus = {
+	id = GLG_reopen_the_mines
+	icon = GFX_generic_coal_mining
+	cost = 8
+	x = 0
+	y = 1
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus GLG_reopen_the_mines"
+		add_resource = {
+			type = steel
+			amount = 22
+			state = 794
+		}
+		if = {
+			limit = {
+				794 = {
+					has_resistance = yes
+				}
+			}
+			794 = {
+				add_resistance = -30
+			}
+		}
+		else = {
+			add_stability = 0.1
+		}
+	}
+	relative_position_id = GLG_finish_the_duluth_pocket
+	prerequisite = {
+		focus = GLG_finish_the_duluth_pocket
+	}
+}
+
+shared_focus = {
+	id = GLG_opening_mackinac_bridge
+	icon = GFX_generic_bridge
+	cost = 8
+	x = 2
+	y = 1
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus GLG_opening_mackinac_bridge"
+		set_country_flag = GLG_mackinac_built
+		custom_effect_tooltip = GLG_unlock_mackinac
+		clr_global_flag = KRG_MACKINAC_DISABLED
+		build_railway = {
+			level = 1
+			path = {
+				11669
+				3766
+				11731
+				10233
+				5205
+				751
+				709
+			}
+		}
+	}
+	relative_position_id = GLG_finish_the_duluth_pocket
+	prerequisite = {
+		focus = GLG_finish_the_duluth_pocket
+		focus = GLG_invite_new_englander_advisors
+	}
+}
+
+shared_focus = {
+	id = GLG_expand_lake_michigan_ferry_services
+	icon = GFX_USA_goal_liberty_ships
+	cost = 8
+	x = -1
+	y = 2
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus GLG_expand_lake_michigan_ferry_services"
+		move_up_inf_spending = yes
+		add_equipment_to_stockpile = {
+			type = convoy
+			amount = -10
+		}
+	}
+	relative_position_id = GLG_invite_new_englander_advisors
+	prerequisite = {
+		focus = GLG_finish_the_duluth_pocket
+		focus = GLG_invite_new_englander_advisors
+	}
+}
+
+shared_focus = {
+	id = GLG_the_local_government_ordinance
+	icon = GFX_DOM_The_Trial
+	cost = 8
+	x = 0
+	y = 1
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus GLG_the_local_government_ordinance"
+		every_owned_state = {
+			limit = {
+				has_active_resistance = yes
+			}
+			add_compliance = 10
+		}
+	}
+	relative_position_id = GLG_invite_new_englander_advisors
+	prerequisite = {
+		focus = GLG_invite_new_englander_advisors
+	}
+}
+
+shared_focus = {
+	id = GLG_general_amnesty_ordinance
+	icon = GFX_ITA_Amnesty
+	cost = 8
+	x = -1
+	y = 1
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus GLG_general_amnesty_ordinance"
+		every_owned_state = {
+			limit = {
+				has_resistance = yes
+			}
+			add_compliance = 10
+			add_resistance = 15
+		}
+	}
+	mutually_exclusive = {
+		focus = GLG_continue_the_prosecutions
+	}
+	relative_position_id = GLG_reopen_the_mines
+	prerequisite = {
+		focus = GLG_reopen_the_mines
+	}
+}
+
+shared_focus = {
+	id = GLG_continue_the_prosecutions
+	icon = GFX_generic_trials
+	cost = 8
+	x = 1
+	y = 1
+	mutually_exclusive = {
+		focus = GLG_general_amnesty_ordinance
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus GLG_continue_the_prosecutions"
+		every_owned_state = {
+			limit = {
+				has_resistance = yes
+			}
+			add_compliance = 5
+			add_resistance = -10
+		}
+	}
+	relative_position_id = GLG_reopen_the_mines
+	prerequisite = {
+		focus = GLG_reopen_the_mines
+	}
+}
+
+shared_focus = {
+	id = GLG_local_police_establishment_ordinance
+	icon = GFX_generic_enlist_the_police
+	cost = 8
+	x = 1
+	y = 1
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus GLG_local_police_establishment_ordinance"
+		every_owned_state = {
+			limit = {
+				has_resistance = yes
+			}
+			add_compliance = 10
+			add_resistance = -15
+		}
+	}
+	relative_position_id = GLG_general_amnesty_ordinance
+	prerequisite = {
+		focus = GLG_general_amnesty_ordinance
+		focus = GLG_continue_the_prosecutions
+	}
+}
+
+shared_focus = {
+	id = GLG_reestablish_civil_liberties
+	icon = GFX_generic_KRG_social_liberal
+	cost = 8
+	x = 0
+	y = 2
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus GLG_reestablish_civil_liberties"
+		every_owned_state = {
+			limit = {
+				has_resistance = yes
+			}
+			add_compliance = 5
+			add_resistance = 5
+		}
+		remove_ideas = GLG_socialist_resistance
+	}
+	relative_position_id = GLG_general_amnesty_ordinance
+	prerequisite = {
+		focus = GLG_general_amnesty_ordinance
+	}
+}
+
+shared_focus = {
+	id = GLG_the_internment_ordinance
+	icon = GFX_HOL_papua_camps
+	cost = 8
+	x = 0
+	y = 2
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus GLG_the_internment_ordinance"
+		every_owned_state = {
+			limit = {
+				has_resistance = yes
+			}
+			add_resistance = 5
+			add_resistance_target = -20
+		}
+		remove_ideas = GLG_socialist_resistance
+	}
+	relative_position_id = GLG_continue_the_prosecutions
+	prerequisite = {
+		focus = GLG_continue_the_prosecutions
+	}
+}
+
+shared_focus = {
+	id = GLG_collaborate_with_the_dsa
+	icon = GFX_generic_ideology_social_democrat_deal
+	cost = 8
+	x = 3
+	y = 1
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus GLG_collaborate_with_the_dsa"
+		coal_add_rad_soc = yes
+		every_owned_state = {
+			limit = {
+				has_resistance = yes
+			}
+			add_compliance = 10
+		}
+	}
+	relative_position_id = GLG_general_amnesty_ordinance
+	prerequisite = {
+		focus = GLG_general_amnesty_ordinance
+		focus = GLG_continue_the_prosecutions
+	}
+}
+
+shared_focus = {
+	id = GLG_ending_the_mandate
+	icon = GFX_generic_ratify_the_accord
+	cost = 8
+	x = 0
+	y = 2
+	available = {
+		393 = {
+			is_core_of = GLG
+		}
+		CAN = {
+			OR = {
+				AND = {
+					NOT = {
+						has_idea = CAN_idea_american_integration
+					}
+					NOT = {
+						has_idea = CAN_idea_american_integration_2
+					}
+				}
+				AND = {
+					has_government = social_conservative
+					has_completed_focus = CAN_crackdown_on_radical_socialism
+				}
+			}
+		}
+	}
+	bypass = {
+		AND = {
+			is_subject = no
+			is_puppet = no
+		}
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus GLG_ending_the_mandate"
+		CAN = {
+			end_puppet = GLG
+		}
+	}
+	relative_position_id = GLG_the_local_government_ordinance
+	prerequisite = {
+		focus = GLG_the_local_government_ordinance
+	}
+}
+
+shared_focus = {
+	id = GLG_distribute_federal_funds
+	icon = GFX_generic_coin_money_pot
+	cost = 8
+	x = 1
+	y = 1
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus GLG_distribute_federal_funds"
+		move_up_service_spending = yes
+	}
+	relative_position_id = GLG_the_local_government_ordinance
+	prerequisite = {
+		focus = GLG_the_local_government_ordinance
+	}
+}
+
+shared_focus = {
+	id = GLG_join_the_ottawa_protocols
+	icon = GFX_generic_new_treaty
+	cost = 8
+	x = 1
+	y = 1
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus GLG_join_the_ottawa_protocols"
+		if = {
+			limit = {
+				has_idea = GLG_questionable_legitimacy
+			}
+			remove_ideas = GLG_questionable_legitimacy
+		}
+		else = {
+			remove_ideas = GLG_questionable_legitimacy_1
+		}
+	}
+	relative_position_id = GLG_collaborate_with_the_dsa
+	prerequisite = {
+		focus = GLG_collaborate_with_the_dsa
+	}
+	prerequisite = {
+		focus = GLG_ending_the_mandate
+	}
+}

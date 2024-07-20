@@ -1,0 +1,392 @@
+test_silo_stuff = {
+	#clear_array = FROM.states_with_silos 
+	add_to_array = { FROM.states_with_silos = THIS }
+	set_variable = { missile_range_@FROM = 150 }
+	set_variable = { num_missiles_based_here_@FROM = 5 }
+	add_to_array = { silo_owners_array = FROM }
+}
+
+test_silo_stuff_again = {
+	if = {
+		limit = {
+			land_based_nuking_possible = yes 
+		}
+
+		for_each_scope_loop = {
+			array = temp_array_test
+
+			log = "[v.GetName] is in silo array"
+		}
+	}
+	else = {
+		log = "[?FROM.states_with_silos^num] is number of states with silos FROM has"
+	}
+}
+
+sort_silo_list = {
+	ROOT = {
+		for_each_scope_loop = {
+			array = states_with_silos
+
+			if = {
+				limit = {
+					check_variable = { missile_range_@var:nuking_country > distance_to@var:target_silo_state }
+                	check_variable = { num_missiles_based_here@var:nuking_country > 0.999 }
+				}
+
+				add_to_temp_array = { silos_in_range = THIS }
+				add_to_temp_array = { silos_in_range_ranges = distance_to_@var:target_silo_state }
+			}
+
+			find_lowest_in_array = {
+				array = silos_in_range_ranges
+
+				index = index_range_value #used to select the correct state to do the nuking from! 
+			}
+		}
+
+		set_variable = { missile_silo_used_@ROOT = silos_in_range^index_range_value } #remember to clear this!
+	}
+}
+
+clear_WMD_menu = {
+	# clear WMD menu stuff here
+}
+
+launch_silo_missile = {
+	sort_silo_list = yes
+	custom_effect_tooltip = launch_missile_using_silo_tt
+
+	#do the nuking here!
+}
+
+
+# leave_tech_sphere = { #leaves all tech spheres
+#     custom_effect_tooltip = leave_tech_sphere_tt
+#     var:tech_sphere_owner = {
+#         remove_from_array = { tech_sphere = PREV }   
+#         remove_from_array = { tech_leaders = PREV }
+#     }
+#     clear_variable = tech_sphere_owner
+# }
+
+# join_tech_sphere = { #set temp variable temp_tech_sphere_owner to target and use this effect
+# 	if = {
+# 		limit = {
+# 			has_variable = tech_sphere_owner
+# 		}
+# 		var:tech_sphere_owner = {
+# 			remove_from_array = { tech_sphere = PREV }   
+# 			remove_from_array = { tech_leaders = PREV }
+# 		}
+# 		clear_variable = tech_sphere_owner
+# 	}
+	
+#     set_variable = { tech_sphere_owner = temp_tech_sphere_owner }
+#     var:tech_sphere_owner = {
+#         add_to_array = { tech_sphere = PREV }
+#     }
+#     for_each_scope_loop = {
+#         array = tech_sphere_owner:tech_leaders
+
+#         if = {
+#             limit = {
+#                 NOT = {
+#                     is_in_array = { temp_overlord_grants_techs = token:overlord_unlocks_afterburners }
+#                 }
+#                 OR = {
+#                     has_tech = jet_fighter_1
+#                     has_tech = jet_strike_1
+#                     has_tech = jet_strategic_bomber_1 
+#                     #etc
+#             	}
+# 			}
+#             add_to_temp_array = { temp_overlord_grants_techs = token:overlord_unlocks_afterburners }
+#         }
+#         if = {
+#             limit = {
+#                 NOT = {
+#                     is_in_array = { temp_overlord_grants_techs = token:overlord_unlocks_area_ruling }
+#                 }
+#                 OR = {
+#                     has_tech = jet_fighter_2
+#                     has_tech = jet_strike_2
+#                     #etc 
+#                 }
+#             }
+#             add_to_temp_array = { temp_overlord_grants_techs = token:overlord_unlocks_area_ruling }
+#         }
+#         #repeated for each overlord unlock (2 more for jets right now )
+#     }
+
+#     for_each_loop = {
+#         array = temp_overlord_grants_techs
+        
+#         set_technology = { #this might need a meta effect, not sure - may also need to use a meta-effect triggered event loop or something similar
+#             var:v = 1 #needs testing
+#             popup = no 
+#         }
+#     }
+#     custom_effect_tooltip = join_tech_sphere_tt
+# }
+
+become_tech_leader = { #becomes a tech leader
+     set_country_flag = tech_leader
+     custom_effect_tooltip = become_tech_leader_tt
+}
+
+# stop_being_tech_leader = { #stops being a tech leader
+#     var:tech_sphere_owner = {
+#         remove_from_array = { tech_leaders = PREV }
+#     }
+#     clr_country_flag = tech_leader
+#     custom_effect_tooltip = stop_being_tech_leader_tt 
+# }
+
+# initialize_new_tech_sphere = { #starts a new tech sphere
+#     set_country_flag = tech_leader
+#     set_variable = { tech_sphere_owner = THIS }
+#     add_to_array = { tech_leaders = THIS }
+#     add_to_array = { tech_sphere = THIS }
+#     custom_effect_tooltip = initialize_new_tech_sphere_tt
+# }
+
+# destroy_tech_sphere = { #destroys a tech sphere
+#     for_each_scope_loop = {
+#         array = tech_sphere
+
+#         clear_variable = tech_sphere_owner
+#     }
+#     clear_array = tech_leaders
+#     clear_array = tech_sphere
+#     custom_effect_tooltip = destroy_tech_sphere_tt
+# }
+
+# tech_leader_unlock_effect = { #not your concern
+
+# 	if = {
+# 		limit = {
+# 			has_country_flag = tech_leader 
+# 		}
+# 		var:tech_sphere_owner = {
+# 			for_each_scope_loop = {
+# 				array = tech_sphere
+# 				set_technology = {
+# 					var:unlocked_technology = 1 
+# 					popup = no 
+# 				}
+# 			}
+# 		}
+# 		custom_effect_tooltip = tech_leader_unlocks_technology_tt
+
+# 	}
+
+# 	else = {
+# 		custom_effect_tooltip = not_tech_leader_tt
+# 	}
+# }
+# tech_leader_plane_unlock = { #not your concern
+
+# 	if = {
+# 		limit = {
+# 			has_country_flag = tech_leader 
+# 		}
+# 		if = { 
+# 			limit = { 
+# 				NOT = { 
+# 					has_tech = var:unlocked_technology 
+# 				}
+# 			} 
+# 			hidden_effect = { 
+# 				set_technology = { 
+# 					var:unlocked_technology = 1 
+# 					popup = no 
+# 				} 
+# 			} 
+# 			custom_effect_tooltip = tech_leader_unlock_technology_tt 
+# 		} 
+# 		else = { 
+# 			custom_effect_tooltip = tech_leader_has_technology_tt 
+# 		}
+# 	}
+# }
+
+unlock_turbofans = {
+	if = {
+		limit = {
+			has_country_flag = tech_leader
+			NOT = {
+				any_allied_country = {
+					has_country_flag = turbofans_unlocked
+				}
+			}
+		}
+		set_country_flag = turbofans_unlocked
+		custom_effect_tooltip = turbofans_unlocked_tt
+	}
+}
+
+unlock_afterburners = {
+	if = {
+		limit = {
+			has_country_flag = tech_leader
+			NOT = {
+				any_allied_country = {
+					has_country_flag = afterburners_unlocked
+				}
+			}
+		}
+		set_country_flag = afterburners_unlocked
+		custom_effect_tooltip = afterburners_unlocked_tt
+	}
+}
+
+unlock_area_ruling = {
+	if = {
+		limit = {
+			has_country_flag = tech_leader
+			NOT = {
+				any_allied_country = {
+					has_country_flag = area_ruling_unlocked
+				}
+			}
+		}
+		set_country_flag = area_ruling_unlocked
+		custom_effect_tooltip = area_ruling_unlocked_tt
+	}
+}
+
+unlock_radar_integration = {
+	if = {
+		limit = {
+			has_country_flag = tech_leader
+			NOT = {
+				any_allied_country = {
+					has_country_flag = radar_integration_unlocked
+				}
+			}
+		}
+		set_country_flag = radar_integration_unlocked
+		custom_effect_tooltip = radar_integration_unlocked_tt
+	}
+}
+
+### NUCLEAR WEAPONS ###
+# calculate_per_state_strike_success = {
+# 	for_each_scope_loop = {
+# 		array = nuke_state_targets
+
+# 		set_temp_variable = { state_air_defense_level = non_damaged_building_level@anti_air_building }
+
+# 		set_temp_variable = { state_radar_defense_level = non_damaged_building_level@radar_station}
+
+# 		set_temp_variable = { temp_attacker_efficiency = 1 } # THIS IS FOR BALANCING
+# 		multiply_temp_variable = { temp_attacker_efficiency = temp_attacker_nuclear_attack_efficiency }
+# 		# returns X (a(attacker efficiency)
+# 		log = "[?temp_attacker_efficiency] calculated [PREV.This.GetName] attacker efficiency"
+
+# 		set_temp_variable = { temp_defender_state_efficiency = 50 } # THIS IS FOR BALANCING
+# 		set_temp_variable = { temp_state_defense = state_air_defense_level }
+# 		add_to_temp_variable = { temp_state_defense = state_radar_defense_level }
+# 		multiply_temp_variable = { temp_state_defense = temp_defender_state_efficiency }
+# 		divide_temp_variable = { temp_state_defense = 2 }
+
+# 		clamp_temp_variable = {
+# 			var = temp_state_defense 
+# 			min = 1 
+# 		}
+
+# 		log = "[?temp_state_defense] calculated [This.Getname] state defense"
+# 		# returns Y (b(state radar + state AA )/2 )
+
+# 		set_temp_variable = { temp_interception_efficiency = 1 } #THIS IS FOR BALANCING
+# 		set_temp_variable = { temp_interception_capacity = temp_nuclear_target_interceptors_state }
+# 		multiply_temp_variable = { temp_interception_capacity = temp_nuclear_target_nuclear_interception_efficiency }
+# 		multiply_temp_variable = { temp_interception_capacity = temp_interception_efficiency }
+
+# 		clamp_temp_variable = {
+# 			var = temp_interception_capacity
+# 			min = 1
+# 		}
+
+# 		log = "[?temp_interception_capacity] calculated target tag interception capacity"
+# 		# returns Z (p+c(number of interceptors per state * target interception efficiency))
+
+# 		set_temp_variable = { temp_total_defense_capacity = temp_state_defense }
+# 		multiply_temp_variable = { temp_total_defense_capacity = temp_interception_capacity }
+
+# 		log = "[?temp_total_defense_capacity] is total state defense capacity for [This.Getname]"
+
+# 		# multiplies Y and Z giving A
+
+
+# 		set_temp_variable = { temp_state_strike_loss_ratio_inverted = temp_attacker_efficiency }
+# 		divide_temp_variable = { temp_state_strike_loss_ratio_inverted = temp_total_defense_capacity }
+
+# 		log = "[?temp_state_strike_loss_ratio_inverted] calculated inverted strike loss ratio for one bomber for target State [This.Getname]"
+# 		# returns B, divides X by A
+
+# 		add_to_temp_variable = { temp_state_strike_loss_ratio_inverted = -1 }
+# 		multiply_temp_variable = { temp_state_strike_loss_ratio_inverted = -1 }
+# 		set_temp_variable = { temp_state_strike_loss_ratio = temp_state_strike_loss_ratio_inverted }
+
+# 		log = "[?temp_state_strike_loss_ratio] calculated correct strike loss ration for one bomber for target state [This.Getname]"
+# 		# 1 - B
+
+# 		set_temp_variable = { temp_original_value = temp_state_strike_loss_ratio }
+# 		set_temp_variable = { temp_exponented_value = temp_state_strike_loss_ratio }
+# 		set_temp_variable = { temp_power = temp_attacker_nuclear_strike_factor } # TODO replace with nuclear_strike_factor
+
+# 		log = "set exponent value to [?temp_power] for [This.Getname]"
+
+# 		while_loop_effect = {
+
+# 			limit = {
+# 				NOT = {
+# 					check_variable = { temp_power = 1 }
+# 				}
+# 			}
+
+# 			multiply_temp_variable = { temp_exponented_value = temp_original_value }
+# 			subtract_from_temp_variable = { temp_power = 1 }
+
+# 			log = "[?temp_exponented_value] exponent values ongoing for [This.Getname]"
+# 			log = "[?temp_power] remaining powers for [This.Getname]"
+
+# 		}
+
+# 		log = "[?temp_exponented_value] is the exponent value for state [This.Getname]"
+# 		#Returns C, puts (1-B)^nuclear_strike_factor
+
+# 		set_temp_variable = { temp_strike_loss_ratio_all_bombers_state = temp_exponented_value } 
+		
+# 		set_variable = { failed_strike_chance_state = temp_strike_loss_ratio_all_bombers_state  }
+# 		clamp_variable = {
+# 			var = failed_strike_chance_state
+# 			min = 0
+# 			max = 1
+# 		}
+
+# 		set_temp_variable = { bomber_lossrate_state = temp_strike_loss_ratio_all_bombers_state }
+# 		clamp_temp_variable = {
+# 			var = bomber_lossrate_state
+# 			min = 0.1
+# 			max = 1
+# 		}
+# 		set_temp_variable = { bomber_lossrate_state_display = failed_strike_chance_state }
+# 		multiply_temp_variable = { bomber_lossrate_state_display = -1 }
+# 		add_to_temp_variable = { bomber_lossrate_state_display = 1 }
+
+# 		add_to_array = {
+# 			array = PREV.THIS.state_target_success_chance_array
+# 			value = failed_strike_chance_state
+# 		}
+
+# 		add_to_array = {
+# 			array = PREV.THIS.state_target_success_chance_array_display
+# 			value = bomber_lossrate_state_display
+# 		}
+
+# 		log = "[?bomber_lossrate_state] is [PREV.This.GetName] lossrate for [This.Getname]"
+# 	}
+# }

@@ -1,0 +1,64 @@
+China_change_CCW_tension = {
+	if = {
+		limit = { 
+			check_variable = { China_temp_CCW_tension_change < -1 }
+		}
+		custom_effect_tooltip = CCW_tension_decrease_big_tt
+	}
+	else_if = {
+		limit = { 
+			check_variable = { China_temp_CCW_tension_change < 0 }
+		}
+		custom_effect_tooltip = CCW_tension_decrease_tt
+	}
+	else_if = {
+		limit = { 
+			check_variable = { China_temp_CCW_tension_change > 1 }
+		}
+		custom_effect_tooltip = CCW_tension_increase_big_tt 
+	}
+	else = {
+		custom_effect_tooltip = CCW_tension_increase_tt
+	}
+
+	
+
+	multiply_temp_variable = {
+		China_temp_CCW_tension_change = -15
+	}
+
+	effect_tooltip = {
+		if = {
+			limit = {
+				original_tag = CHI
+			}
+			add_days_mission_timeout = {
+				mission = CHI_war_starts
+				days = China_temp_CCW_tension_change
+			}
+		}
+		else = {
+			add_days_mission_timeout = {
+				mission = FNG_war_starts
+				days = China_temp_CCW_tension_change
+			}
+		}
+	}
+	
+
+	hidden_effect = {
+		CHI = {
+			add_days_mission_timeout = {
+				mission = CHI_war_starts
+				days = China_temp_CCW_tension_change
+			}
+		}
+		
+		FNG = {
+			add_days_mission_timeout = {
+				mission = FNG_war_starts
+				days = China_temp_CCW_tension_change
+			}
+		}
+	}
+}

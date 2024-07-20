@@ -1,0 +1,463 @@
+CHI_civil_war_decisions = {
+	CHI_war_starts = {
+        activation = {
+            NOT = {
+                has_war_with = CHI
+                has_global_flag = ccw_begun_flag
+            }
+        }
+    
+        available = {
+             has_global_flag = ccw_peace_flag
+        }
+    
+        icon = "GFX_decision_peace_dove"
+        is_good = yes
+        days_mission_timeout = 365
+    	complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete CHI_war_starts target: [From.GetName]"
+        	FNG = {
+        		puppet = CHI
+        	}
+    	}
+        timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout CHI_war_starts target: [From.GetName]"
+            custom_effect_tooltip = CHI_beijing_angered_tt
+            	FNG = { 
+            	    country_event = {
+            	        id = krg_fng_ccw.10
+            	        days = 5
+            	    }
+    		set_global_flag = ccw_begun_flag
+			set_global_flag = CCW_ongoing
+            }
+        }
+    }
+
+	CHI_salvage_weapons_caches = {
+		available = {
+			has_country_flag = CHI_salvage
+		}
+        visible = {
+            has_country_flag = CHI_salvage
+            NOT = {
+                has_war_with = FNG
+                has_global_flag = ccw_begun_flag
+            }
+        }
+		days_remove = 31
+		days_re_enable = 5
+		cost = 50
+        ai_will_do = { base = 15 }
+        complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete CHI_salvage_weapons_caches target: [From.GetName]"
+            random_list = {
+				50 = {
+					add_equipment_to_stockpile = {
+						type = infantry_equipment_1
+						amount = 400
+						producer = JAP
+					}
+				}
+				25 = {
+					add_equipment_to_stockpile = {
+						type = artillery_equipment_1
+						amount = 25
+						producer = JAP
+					}
+				}
+				25 = {
+					add_equipment_to_stockpile = {
+						type = motorized_equipment
+						amount = 10
+						producer = JAP
+					}
+				}
+			}
+        }
+	}
+	
+	CHI_expand_guerilla = { 
+   		
+		state_target = yes
+		target_array = FNG.owned_states
+		 
+		allowed = { original_tag = CHI }
+	 	available = {
+			has_equipment = {
+				infantry_equipment > 199
+			}
+		 	command_power > 39
+		 	has_manpower > 19999
+	 	}
+		target_root_trigger = {
+			FROM = {
+				has_dynamic_modifier = {
+					modifier = CHI_base_area
+				}
+			}
+		}
+		target_trigger = {
+			FROM = {
+				is_owned_by = FNG
+			}	
+		}
+		visible = {
+			ROOT = {
+				has_war_with = FNG
+			}
+		}
+		days_remove = 30
+		on_map_mode = map_and_decisions_view
+		icon = chinese_flag
+		cost = 20
+		days_re_enable = 35
+		ai_will_do = {
+			base = 100
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete CHI_expand_guerilla target: [From.GetName]"
+			add_manpower = 1000 ### Placeholder,still experimenting with effects
+		}
+ 	}
+
+	 CHI_request_guns_dummy = {
+		allowed = {
+            tag = CHI
+        }
+        visible = {
+    		always = no
+		}
+	 }
+	 CHI_request_truck_dummy = {
+		allowed = {
+            tag = CHI
+        }
+        visible = {
+    		always = no
+		}
+	 }
+
+	 CHI_request_artillery_dummy = {
+		allowed = {
+            tag = CHI
+        }
+        visible = {
+    		always = no
+		}
+	 }
+
+	 CHI_request_support_dummy = {
+		allowed = {
+            tag = CHI
+        }
+        visible = {
+    		always = no
+		}
+	 }
+
+
+    CHI_request_guns = {
+        allowed = {
+            tag = CHI
+        }
+        visible = {
+    		has_war = yes
+			has_completed_focus = CHI_seek_accord_support
+		}
+		available = {
+    		has_war = yes
+			has_completed_focus = CHI_purchase_accord_equipments
+		}
+        targets = { CAL CAN NEE NFA ITA NOR }
+    	targets_dynamic = yes
+		target_trigger = { 
+			FROM = { 
+				has_equipment = { infantry_equipment > 4999 } 
+				NOT = {
+					has_country_flag = CCW_stop_lend_lease
+				}
+			} 
+		}
+        icon = GFX_decision_hand_out
+        cost = 15
+        days_remove = 3
+        days_re_enable = 14
+		ai_will_do = {
+			base = 250
+			modifier = {
+				stockpile_ratio = {
+					archetype = infantry_equipment
+					ratio > 1.3
+				}
+				factor = -1
+			}
+		}
+        remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove CHI_request_guns target: [From.GetName]"
+            FROM = {
+                country_event = { 
+                	id = krg_ccw.2
+                	hours = 8 
+            	} 
+        	}
+        }
+    }
+    CHI_request_support = {
+        allowed = {
+            tag = CHI
+        }
+        visible = {
+    		has_war = yes
+			has_completed_focus = CHI_seek_accord_support
+		}
+		available = {
+    		has_war = yes
+			has_completed_focus = CHI_purchase_accord_equipments
+		}
+        targets = { CAL CAN NEE NFA ITA NOR }
+    	targets_dynamic = yes
+		target_trigger = { FROM = { has_equipment = { support_equipment > 299 } } }
+        icon = GFX_decision_support_equipment
+        cost = 30
+        days_remove = 3
+        days_re_enable = 28
+		ai_will_do = {
+			base = 200
+			modifier = {
+				stockpile_ratio = {
+					archetype = support_equipment
+					ratio > 1.3
+				}
+				factor = -1
+			}
+		}
+        remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove CHI_request_support target: [From.GetName]"
+            FROM = {
+                country_event = { 
+                	id = krg_ccw.4
+                	hours = 8 
+            	} 
+        	}
+        }
+    }
+
+    CHI_request_artillery = {
+        allowed = {
+            tag = CHI
+        }
+        visible = {
+    		has_war = yes
+			has_completed_focus = CHI_seek_accord_support
+		}
+		available = {
+    		has_war = yes
+			has_completed_focus = CHI_purchase_accord_equipments
+		}
+        targets = { CAL CAN NEE NFA ITA NOR }
+    	targets_dynamic = yes
+		target_trigger = { FROM = { has_equipment = { artillery_equipment > 299 } } }
+        icon = GFX_decision_artillery
+        cost = 30
+        days_remove = 3
+        days_re_enable = 35
+		ai_will_do = {
+			base = 150
+			modifier = {
+				stockpile_ratio = {
+					archetype = artillery_equipment
+					ratio > 1.3
+				}
+				factor = -1
+			}
+		}
+        remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove CHI_request_artillery target: [From.GetName]"
+            FROM = {
+                country_event = { 
+                	id = krg_ccw.6
+                	hours = 8 
+            	} 
+        	}
+        }
+    }
+
+    CHI_request_truck = {
+        allowed = {
+            tag = CHI
+        }
+        visible = {
+    		has_war = yes
+			has_completed_focus = CHI_seek_accord_support
+		}
+		available = {
+    		has_war = yes
+			has_completed_focus = CHI_purchase_accord_equipments
+		}
+        targets = { CAL CAN NEE NFA ITA NOR }
+    	targets_dynamic = yes
+		target_trigger = { FROM = { has_equipment = { motorized_equipment > 299 } } }
+        icon = GFX_decision_generic_motorized
+        cost = 30
+        days_remove = 3
+        days_re_enable = 35
+		ai_will_do = {
+			base = 200
+			modifier = {
+				stockpile_ratio = {
+					archetype = motorized_equipment
+					ratio > 1.3
+				}
+				factor = -1
+			}
+		}
+        remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove CHI_request_truck target: [From.GetName]"
+            FROM = {
+                country_event = { 
+                	id = krg_ccw.8
+                	hours = 8 
+            	} 
+        	}
+        }
+    }
+
+	CHI_frontline_support_construction = {
+		allowed = {
+            tag = CHI
+        }
+        visible = {
+    		has_war = yes
+		}
+		available = {
+    		has_war = yes
+			has_completed_focus = CHI_frontline_support_movement
+		}        
+		cost = 30
+        days_remove = 30
+        days_re_enable = 3
+		ai_will_do = {
+			base = 200
+			modifier = {
+				has_idea = CHI_idea_CCW_frontline_support_construction_2
+				factor = -1
+			}
+		}
+        complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete CHI_frontline_support_construction target: [From.GetName]"
+			if = {
+				limit = {
+					has_idea = 	CHI_idea_CCW_frontline_support_construction_1
+				}
+				remove_ideas = CHI_idea_CCW_frontline_support_construction_1
+				add_timed_idea = {
+					idea = CHI_idea_CCW_frontline_support_construction_2
+					days = 90
+				}
+			}
+			else = {
+				add_timed_idea = {
+					idea = CHI_idea_CCW_frontline_support_construction_1
+					days = 90
+				}
+			}
+		}
+	}
+	
+	CHI_frontline_support_production = {
+		allowed = {
+            tag = CHI
+        }
+        visible = {
+    		has_war = yes
+		}
+		available = {
+    		has_war = yes
+			has_completed_focus = CHI_frontline_support_movement
+		}        
+		cost = 30
+        days_remove = 30
+        days_re_enable = 3
+		ai_will_do = {
+			base = 200
+			modifier = {
+				has_idea = CHI_idea_CCW_frontline_support_supplies_2
+				factor = -1
+			}
+		}
+        complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete CHI_frontline_support_production target: [From.GetName]"
+			if = {
+				limit = {
+					has_idea = 	CHI_idea_CCW_frontline_support_supplies_1
+				}
+				remove_ideas = CHI_idea_CCW_frontline_support_supplies_1
+				add_timed_idea = {
+					idea = CHI_idea_CCW_frontline_support_supplies_2
+					days = 90
+				}
+			}
+			else = {
+				add_timed_idea = {
+					idea = CHI_idea_CCW_frontline_support_supplies_1
+					days = 90
+				}
+			}
+		}
+
+	}
+	
+	CHI_frontline_support_outsourcing = {		
+	allowed = {
+		tag = CHI
+	}
+	visible = {
+		has_war = yes
+	}
+	available = {
+		has_war = yes
+		has_completed_focus = CHI_frontline_support_movement
+	}        
+	cost = 30
+	days_remove = 30
+	days_re_enable = 3
+	ai_will_do = {
+		base = 200
+		modifier = {
+			has_idea = CHI_idea_CCW_frontline_support_outsourcing_2
+			factor = -1
+		}
+	}
+	complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete CHI_frontline_support_outsourcing target: [From.GetName]"
+		if = {
+			limit = {
+				has_idea = 	CHI_idea_CCW_frontline_support_outsourcing_1
+			}
+			remove_ideas = CHI_idea_CCW_frontline_support_outsourcing_1
+			add_timed_idea = {
+				idea = CHI_idea_CCW_frontline_support_outsourcing_2
+				days = 90
+			}
+		}
+		else = {
+			add_timed_idea = {
+				idea = CHI_idea_CCW_frontline_support_outsourcing_1
+				days = 90
+			}
+		}
+	}
+
+	}
+
+}
+
+
+
+
+
+CHI_war_tension_decisions = {
+    
+
+}

@@ -1,0 +1,564 @@
+### PACIFIC STATES OF AMERICA (CAL) ###
+CAL_update_state = {
+	custom_effect_tooltip = US_update_state_tt
+	clear_array = CAL_electoral_party_seat_array
+	clear_array = CAL_electoral_party_popularity_array
+	clear_array = CAL_electoral_party_array
+	
+    for_each_loop = {
+        array = PREV.CAL_electoral_party_popularity_array
+        add_to_array = { CAL_electoral_party_popularity_array = PREV.CAL_electoral_party_popularity_array^i }
+    }
+    for_each_loop = {
+        array = PREV.CAL_electoral_party_seat_array
+        add_to_array = { CAL_electoral_party_seat_array = PREV.CAL_electoral_party_seat_array^i }
+    }
+
+    set_variable = { CAL_electoral_lean = PREV.CAL_electoral_lean }
+    set_variable = { CAL_electoral_vote = PREV.CAL_electoral_vote }
+    set_variable = { CAL_governor = PREV.CAL_governor }
+    set_variable = { CAL_electoral_senate_seat_1 = PREV.CAL_electoral_senate_seat_1 }
+    set_variable = { CAL_electoral_senate_seat_class_1 = PREV.CAL_electoral_senate_seat_class_1 }
+    set_variable = { CAL_electoral_senate_seat_2 = PREV.CAL_electoral_senate_seat_2 }
+    set_variable = { CAL_electoral_senate_seat_class_2 = PREV.CAL_electoral_senate_seat_class_2 }
+	set_variable = { CAL_house_seat = PREV.CAL_house_seat }
+
+	# clear all arrays in all states
+	clear_array = CAL_electoral_party_array
+	# makes an array for the seat ids 1-5 in all states, and initialises predicted seats to 0 (its calculated later)
+	for_loop_effect = {
+		start = 1
+		end = 6
+		compare = less_than_or_equals
+		add_to_array = {
+			CAL_electoral_party_array = v
+		}
+		add_to_array = {
+			CAL_electoral_party_predicted_seat_array = 0
+		}
+	}
+
+	# set house seats as electoral vote - 2
+	set_variable = {
+		CAL_house_seat = CAL_electoral_vote
+	}
+	subtract_from_variable = {
+		CAL_house_seat = 2
+	}
+	# does the magic
+	CAL_electoral_reload = yes
+	# most popular party
+	find_highest_in_array = {
+		array = CAL_electoral_party_popularity_array
+		index = highest_index
+	}
+	set_variable = {
+		CAL_electoral_lean = CAL_electoral_party_array^highest_index
+	}
+	# update predicted seats
+	CAL_update_predictions = yes
+	CAL_get_senate_class = yes		#just sets this up
+}
+CAL_updated_NM = {
+	log = "[GetDateText]: [Root.GetName]: CAL_updated_NM = yes"
+    793 = {
+	    376 = {
+			CAL_update_state = yes
+		}
+	}
+}
+CAL_updated_CO = {
+	log = "[GetDateText]: [Root.GetName]: CAL_updated_CO = yes"
+    931 = {
+	    392 = {
+			CAL_update_state = yes
+		}
+	}
+}
+CAL_updated_MO = {
+	log = "[GetDateText]: [Root.GetName]: CAL_updated_MO = yes"
+    788 = {
+	    388 = {
+			CAL_update_state = yes
+		}
+	}
+}
+CAL_updated_MN = {
+	log = "[GetDateText]: [Root.GetName]: CAL_updated_MN = yes"
+    794 = {
+	    391 = {
+			CAL_update_state = yes
+		}
+	}
+}
+CAL_updated_IN = {
+	log = "[GetDateText]: [Root.GetName]: CAL_updated_IN = yes"
+    933 = {
+	    396 = {
+			CAL_update_state = yes
+		}
+	}
+}
+CAL_updated_OH = {
+	log = "[GetDateText]: [Root.GetName]: CAL_updated_OH = yes"
+    932 = {
+	    261 = {
+			CAL_update_state = yes
+		}
+	}
+}
+CAL_updated_PA = {
+	log = "[GetDateText]: [Root.GetName]: CAL_updated_PA = yes"
+    796 = {
+	    360	= {
+			CAL_update_state = yes
+		}
+	}
+}
+
+### AMERICAN UNION STATE (TEX) ###
+TEX_update_state = {
+	custom_effect_tooltip = US_update_state_tt
+	for_each_loop = {
+		array = PREV.electoral_pie_chart_number_array
+		add_to_array = { electoral_pie_chart_number_array = PREV.electoral_pie_chart_number_array^i }
+	}
+    set_variable = { electoral_lean = PREV.electoral_lean }
+    set_variable = { governor = PREV.governor }
+    set_variable = { electoral_vote = PREV.electoral_vote }
+    set_variable = { house_seats = PREV.house_seats }
+	TEX_create_pie_chart = yes
+}
+TEX_updated_NM = {
+	log = "[GetDateText]: [Root.GetName]: TEX_updated_NM = yes"
+	376 = {
+		793 = {
+			TEX_update_state = yes
+		}
+	}
+}
+TEX_updated_CO = {
+	log = "[GetDateText]: [Root.GetName]: TEX_updated_CO = yes"
+	392 = {
+		931 = {
+			TEX_update_state = yes
+		}
+	}
+}
+TEX_updated_MO = {
+	log = "[GetDateText]: [Root.GetName]: TEX_updated_MO = yes"
+	388 = {
+		788 = {
+			TEX_update_state = yes
+		}
+	}
+}
+TEX_updated_MN = {
+	log = "[GetDateText]: [Root.GetName]: TEX_updated_MN = yes"
+	391 = {
+		794 = {
+			TEX_update_state = yes
+		}
+	}
+}
+TEX_updated_IN = {
+	log = "[GetDateText]: [Root.GetName]: TEX_updated_IN = yes"
+	396 = {
+		933 = {
+			TEX_update_state = yes
+		}
+	}
+}
+TEX_updated_OH = {
+	log = "[GetDateText]: [Root.GetName]: TEX_updated_OH = yes"
+	261 = {
+		932 = {
+			TEX_update_state = yes
+		}
+	}
+}
+TEX_updated_PA = {
+	log = "[GetDateText]: [Root.GetName]: TEX_updated_PA = yes"
+	360	= {
+		796 = {
+			TEX_update_state = yes
+		}
+	}
+}
+
+#### Election Timing Calculations
+
+USA_set_election_time = {
+	if = {
+		limit = {
+			date > 1947.12.31
+			date < 1949.1.1
+		}
+		#elections in 1949
+		set_politics = {
+			ruling_party = revolutionary_republican
+			last_election = "1945.11.3"
+			elections_allowed = yes
+			election_frequency = 48
+		}
+		promote_character = {
+			character = CAL_earl_warren
+			ideology = social_liberal_subtype
+		}
+		promote_character = {
+			character = NEE_raymond_e_baldwin
+			ideology = market_liberal_subtype
+		}
+		promote_character = {
+			character = NEE_w_averell_harriman
+			ideology = social_conservative_subtype
+		}
+		promote_character = {
+			character = CAL_several_politicians
+			ideology = social_democrat_subtype
+		}
+	}
+	else_if = {
+		limit = {
+			date > 1949.1.1
+			date < 1950.1.1
+		}
+		#elections in 1950
+		set_politics = {
+			ruling_party = revolutionary_republican
+			last_election = "1946.11.3"
+			elections_allowed = yes
+			election_frequency = 48
+		}
+		promote_character = {
+			character = CAL_earl_warren
+			ideology = social_liberal_subtype
+		}
+		promote_character = {
+			character = NEE_raymond_e_baldwin
+			ideology = market_liberal_subtype
+		}
+		promote_character = {
+			character = NEE_w_averell_harriman
+			ideology = social_conservative_subtype
+		}
+		promote_character = {
+			character = CAL_several_politicians
+			ideology = social_democrat_subtype
+		}
+	}
+	else_if = {
+		limit = {
+			date > 1950.1.1
+			date < 1951.1.1
+		}
+		#elections in 1951
+		set_politics = {
+			ruling_party = revolutionary_republican
+			last_election = "1947.11.3"
+			elections_allowed = yes
+			election_frequency = 48
+		}
+		promote_character = {
+			character = CAL_earl_warren
+			ideology = social_liberal_subtype
+		}
+		promote_character = {
+			character = NEE_raymond_e_baldwin
+			ideology = market_liberal_subtype
+		}
+		promote_character = {
+			character = NEE_w_averell_harriman
+			ideology = social_conservative_subtype
+		}
+		promote_character = {
+			character = CAL_several_politicians
+			ideology = social_democrat_subtype
+		}
+	}
+	else_if = {
+		limit = {
+			date > 1951.1.1
+			date < 1952.1.1
+		}
+		#elections in 1952
+		set_politics = {
+			ruling_party = revolutionary_republican
+			last_election = "1948.11.3"
+			elections_allowed = yes
+			election_frequency = 48
+		}
+		promote_character = {
+			character = CAL_earl_warren
+			ideology = social_liberal_subtype
+		}
+		promote_character = {
+			character = NEE_raymond_e_baldwin
+			ideology = market_liberal_subtype
+		}
+		promote_character = {
+			character = NEE_w_averell_harriman
+			ideology = social_conservative_subtype
+		}
+		promote_character = {
+			character = CAL_several_politicians
+			ideology = social_democrat_subtype
+		}
+	}
+	else_if = {
+		limit = {
+			date > 1952.1.1
+			date < 1953.1.1
+		}
+		#elections in 1953
+		set_politics = {
+			ruling_party = revolutionary_republican
+			last_election = "1949.11.3"
+			elections_allowed = yes
+			election_frequency = 48
+		}
+		promote_character = {
+			character = CAL_adlai_stevenson_ii
+			ideology = social_liberal_subtype
+		}
+		promote_character = {
+			character = NEE_thomas_dewey
+			ideology = market_liberal_subtype
+		}
+		promote_character = {
+			character = CAL_several_politicians
+			ideology = social_conservative_subtype
+		}
+		promote_character = {
+			character = CAL_several_politicians
+			ideology = social_democrat_subtype
+		}
+	}
+	else_if = {
+		limit = {
+			date > 1953.1.1
+			date < 1954.1.1
+		}
+		#elections in 1954
+		set_politics = {
+			ruling_party = revolutionary_republican
+			last_election = "1950.11.3"
+			elections_allowed = yes
+			election_frequency = 48
+		}
+		promote_character = {
+			character = CAL_adlai_stevenson_ii
+			ideology = social_liberal_subtype
+		}
+		promote_character = {
+			character = NEE_thomas_dewey
+			ideology = market_liberal_subtype
+		}
+		promote_character = {
+			character = CAL_several_politicians
+			ideology = social_conservative_subtype
+		}
+		promote_character = {
+			character = CAL_several_politicians
+			ideology = social_democrat_subtype
+		}
+	}
+	else_if = {
+		limit = {
+			date > 1954.1.1
+			date < 1955.1.1
+		}
+		#elections in 1955
+		set_politics = {
+			ruling_party = revolutionary_republican
+			last_election = "1951.11.3"
+			elections_allowed = yes
+			election_frequency = 48
+		}
+		promote_character = {
+			character = CAL_adlai_stevenson_ii
+			ideology = social_liberal_subtype
+		}
+		promote_character = {
+			character = NEE_thomas_dewey
+			ideology = market_liberal_subtype
+		}
+		promote_character = {
+			character = CAL_several_politicians
+			ideology = social_conservative_subtype
+		}
+		promote_character = {
+			character = CAL_several_politicians
+			ideology = social_democrat_subtype
+		}
+	}
+	else_if = {
+		limit = {
+			date > 1955.1.1
+			date < 1956.1.1
+		}
+		#elections in 1956
+		set_politics = {
+			ruling_party = revolutionary_republican
+			last_election = "1952.11.3"
+			elections_allowed = yes
+			election_frequency = 48
+		}
+		promote_character = {
+			character = NEE_john_f_kennedy
+			ideology = social_liberal_subtype
+		}
+		promote_character = {
+			character = NEE_Nelson_Rockefeller
+			ideology = market_liberal_subtype
+		}
+		promote_character = {
+			character = CAL_several_politicians
+			ideology = social_conservative_subtype
+		}
+		promote_character = {
+			character = CAL_several_politicians
+			ideology = social_democrat_subtype
+		}
+	}
+	else_if = {
+		limit = {
+			date > 1956.1.1
+			date < 1957.1.1
+		}
+		#elections in 1957
+		set_politics = {
+			ruling_party = revolutionary_republican
+			last_election = "1953.11.3"
+			elections_allowed = yes
+			election_frequency = 48
+		}
+		promote_character = {
+			character = NEE_john_f_kennedy
+			ideology = social_liberal_subtype
+		}
+		promote_character = {
+			character = NEE_Nelson_Rockefeller
+			ideology = market_liberal_subtype
+		}
+		promote_character = {
+			character = CAL_several_politicians
+			ideology = social_conservative_subtype
+		}
+		promote_character = {
+			character = CAL_several_politicians
+			ideology = social_democrat_subtype
+		}
+	}
+	else_if = {
+		limit = {
+			date > 1957.1.1
+			date < 1958.1.1
+		}
+		#elections in 1958
+		set_politics = {
+			ruling_party = revolutionary_republican
+			last_election = "1954.11.3"
+			elections_allowed = yes
+			election_frequency = 48
+		}
+		promote_character = {
+			character = NEE_john_f_kennedy
+			ideology = social_liberal_subtype
+		}
+		promote_character = {
+			character = NEE_Nelson_Rockefeller
+			ideology = market_liberal_subtype
+		}
+		promote_character = {
+			character = CAL_several_politicians
+			ideology = social_conservative_subtype
+		}
+		promote_character = {
+			character = CAL_several_politicians
+			ideology = social_democrat_subtype
+		}
+	}
+	else_if = {
+		limit = {
+			date > 1958.1.1
+			date < 1959.1.1
+		}
+		#elections in 1959
+		set_politics = {
+			ruling_party = revolutionary_republican
+			last_election = "1955.11.3"
+			elections_allowed = yes
+			election_frequency = 48
+		}
+		promote_character = {
+			character = NEE_john_f_kennedy
+			ideology = social_liberal_subtype
+		}
+		promote_character = {
+			character = NEE_Nelson_Rockefeller
+			ideology = market_liberal_subtype
+		}
+		promote_character = {
+			character = CAL_several_politicians
+			ideology = social_conservative_subtype
+		}
+		promote_character = {
+			character = CAL_several_politicians
+			ideology = social_democrat_subtype
+		}
+	}
+	else_if = {
+		limit = {
+			date > 1959.1.1
+			date < 1960.1.1
+		}
+		#elections in 1960
+		set_politics = {
+			ruling_party = revolutionary_republican
+			last_election = "1956.11.3"
+			elections_allowed = yes
+			election_frequency = 48
+		}
+		promote_character = {
+			character = NEE_john_f_kennedy
+			ideology = social_liberal_subtype
+		}
+		promote_character = {
+			character = NEE_Nelson_Rockefeller
+			ideology = market_liberal_subtype
+		}
+		promote_character = {
+			character = CAL_several_politicians
+			ideology = social_conservative_subtype
+		}
+		promote_character = {
+			character = CAL_several_politicians
+			ideology = social_democrat_subtype
+		}
+	}
+	else = {
+		set_politics = {
+			ruling_party = revolutionary_republican
+			last_election = "1957.11.3"
+			elections_allowed = yes
+			election_frequency = 48
+		}
+		promote_character = {
+			character = NEE_john_f_kennedy
+			ideology = social_liberal_subtype
+		}
+		promote_character = {
+			character = NEE_Nelson_Rockefeller
+			ideology = market_liberal_subtype
+		}
+		promote_character = {
+			character = CAL_several_politicians
+			ideology = social_conservative_subtype
+		}
+		promote_character = {
+			character = CAL_several_politicians
+			ideology = social_democrat_subtype
+		}
+	}
+}

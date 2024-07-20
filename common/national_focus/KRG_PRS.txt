@@ -1,0 +1,785 @@
+focus_tree = {
+	id = KRG_PRS_start_tree
+	country = {
+		factor = 0
+		modifier = {
+			add = 10
+			tag = PRS
+		}
+	}
+	default = no
+	continuous_focus_position = { x = 2800 y = 800 }
+
+	focus = {
+		id = PRS_against_madness
+		icon = GFX_RUS_vozhd_vatutin
+		
+		x = 3
+		y = 0
+		cost = 1
+
+		available = {
+			
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRS_against_madness"
+		}
+	}
+	focus = {
+		id = PRS_denikinsk
+		icon = GFX_generic_national_arsenal
+		
+		x = 2
+		y = 1
+		cost = 2
+
+		prerequisite = { focus = PRS_against_madness }
+		relative_position_id = PRS_against_madness
+		mutually_exclusive = {
+			focus = PRS_call_the_reserves
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRS_denikinsk"
+			
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = 10000
+				producer = RUS
+			}
+		}
+	}
+	focus = {
+		id = PRS_call_the_reserves
+		icon = GFX_generic_agrarian_soldiers
+		
+		x = -3
+		y = 1
+		cost = 2
+
+		prerequisite = { focus = PRS_against_madness }
+		relative_position_id = PRS_against_madness
+		mutually_exclusive = {
+			focus = PRS_denikinsk
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRS_call_the_reserves"
+			move_up_mobilization = yes
+			move_up_econ_mobilization = yes
+		}
+	}
+	focus = {
+		id = PRS_labour_in_factories
+		icon = GFX_generic_workers_for_business
+		
+		x = -1
+		y = 1
+		cost = 2
+
+		prerequisite = { focus = PRS_call_the_reserves }
+		mutually_exclusive = { focus = PRS_labour_on_battlefield }
+		relative_position_id = PRS_call_the_reserves
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRS_labour_in_factories"
+			random_core_state = {
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_core_state = {
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+	focus = {
+		id = PRS_labour_on_battlefield
+		icon = GFX_generic_gun_demobilise
+		
+		x = 1
+		y = 1
+		cost = 2
+
+		prerequisite = { focus = PRS_call_the_reserves }
+		mutually_exclusive = { focus = PRS_labour_in_factories }
+		relative_position_id = PRS_call_the_reserves
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRS_labour_on_battlefield"
+			add_manpower = 100000
+		}
+	}
+	focus = {
+		id = PRS_worker_battalions
+		icon = GFX_generic_army_cooperation
+		
+		x = 0
+		y = 1
+		cost = 3
+
+		prerequisite = { focus = PRS_labour_on_battlefield }
+		relative_position_id = PRS_labour_on_battlefield
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRS_worker_battalions"
+			load_oob = "PRS_workers"
+			add_popularity = {
+				ideology = authoritarian_socialist
+				popularity = 0.03
+			}
+			add_popularity = {
+				ideology = radical_socialist
+				popularity = 0.03
+			}
+		}
+	}
+	focus = {
+		id = PRS_work_for_victory
+		icon = GFX_ITA_Workplace_Democracy
+		
+		x = 0
+		y = 1
+		cost = 3
+
+		prerequisite = { focus = PRS_labour_in_factories }
+		relative_position_id = PRS_labour_in_factories
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRS_work_for_victory"
+			add_ideas= {
+				RUS_long_hours_less_pay
+			}
+		}
+	}
+	focus = {
+		id = PRS_Vasilevskys_Orders
+		icon = GFX_RUS_vasilevsky
+		
+		x = 1
+		y = 1
+		cost = 2
+
+		prerequisite = { focus = PRS_work_for_victory focus = PRS_worker_battalions  }
+		relative_position_id = PRS_work_for_victory
+
+		available = {
+			
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRS_Vasilevskys_Orders"
+			add_timed_idea = { idea = RUS_aggressive_war days = 365 }
+		}
+	}
+	focus = {
+		id = PRS_offer_old_positions
+		icon = GFX_generic_officers
+		
+		x = 1
+		y = 1
+		cost = 3
+
+		prerequisite = { focus = PRS_Vasilevskys_Orders }
+		mutually_exclusive = { focus = PRS_veteran_training }
+		relative_position_id = PRS_Vasilevskys_Orders
+
+		available = {
+					
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRS_offer_old_positions"
+			army_experience = 50
+		}
+	}
+	focus = {
+		id = PRS_veteran_training
+		icon = GFX_generic_veterans_benefits
+		
+		x = -1
+		y = 1
+		cost = 3
+
+		prerequisite = { focus = PRS_Vasilevskys_Orders }
+		mutually_exclusive = { focus = PRS_offer_old_positions }
+		relative_position_id = PRS_Vasilevskys_Orders
+
+		available = {
+			
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRS_veteran_training"
+			move_up_military = yes
+		}
+	}
+	focus = {
+		id = PRS_an_end_to_savinkovism
+		icon = GFX_RUS_vilify_savinkov
+		
+		x = 1
+		y = 1
+		cost = 2
+
+		prerequisite = { focus = PRS_veteran_training focus = PRS_offer_old_positions  }
+		relative_position_id = PRS_veteran_training
+
+		available = {
+			
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRS_an_end_to_savinkovism"
+			add_political_power = 100
+			set_country_flag = RUS_Vatutin_Denounced_Savinkov
+			RUS = { set_country_flag = RUS_Vatutin_Denounced_Savinkov }
+		}
+	}
+	focus = {
+		id = PRS_propaganda
+		icon = GFX_RUS_disinformation
+		
+		x = 2
+		y = 1
+		cost = 1
+
+		prerequisite = { focus = PRS_denikinsk }
+		relative_position_id = PRS_denikinsk
+
+		available = {
+			
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRS_propaganda"
+			add_political_power = 50	
+		}
+	}
+	focus = {
+		id = PRS_secure_bases
+		icon = GFX_generic_bastion_of_democracy
+		
+		x = 0
+		y = 1
+		cost = 2
+
+		prerequisite = { focus = PRS_denikinsk }
+		relative_position_id = PRS_denikinsk
+
+		available = {
+			
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRS_secure_bases"
+			217 = {
+				add_building_construction = {
+					type = bunker
+					level = 3
+					instant_build = yes
+					province = 9504
+				}
+				add_building_construction = {
+					type = bunker
+					level = 3
+					instant_build = yes
+					province = 3555
+				}
+				add_building_construction = {
+					type = bunker
+					level = 3
+					instant_build = yes
+					province = 6527
+				}
+				add_building_construction = {
+					type = bunker
+					level = 3
+					instant_build = yes
+					province = 498
+				}
+			}
+			401 = {				
+				add_building_construction = {
+					type = bunker
+					level = 2
+					instant_build = yes
+					province = 11523
+				}		
+				add_building_construction = {
+					type = bunker
+					level = 2
+					instant_build = yes
+					province = 6502
+				}
+			}
+			218 = {
+				add_building_construction = {
+					type = bunker
+					level = 2
+					instant_build = yes
+					province = 9430
+				}		
+				add_building_construction = {
+					type = bunker
+					level = 2
+					instant_build = yes
+					province = 11434
+				}
+			}
+		}
+	}
+	focus = {
+		id = PRS_assign_railway_guards
+		icon = GFX_generic_great_railway_incident
+		
+		x = -2
+		y = 1
+		cost = 3
+
+		prerequisite = { focus = PRS_denikinsk }
+		relative_position_id = PRS_denikinsk
+
+		available = {
+			
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRS_assign_railway_guards"
+			move_up_inf_spending = yes
+		}
+	}
+	focus = {
+		id = PRS_material_superiority
+		icon = GFX_generic_human_tsunam_2
+		
+		x = 1
+		y = 1
+		cost = 3
+
+		prerequisite = { focus = PRS_secure_bases }
+		prerequisite = { focus = PRS_propaganda }
+		relative_position_id = PRS_secure_bases
+
+		available = {
+			
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRS_material_superiority"
+			add_equipment_to_stockpile = {	
+				type = infantry_equipment
+				amount = 10000
+				producer = RUS
+			}
+			add_equipment_to_stockpile = {	
+				type = artillery_equipment
+				amount = 1000
+				producer = RUS
+			}
+			add_equipment_to_stockpile = {	
+				type = anti_tank_equipment
+				amount = 1000
+				producer = RUS
+			}
+		}
+	}
+	focus = {
+		id = PRS_supply_chains
+		icon = GFX_RUS_reinforce_river
+		
+		x = 1
+		y = 1
+		cost = 2
+
+		prerequisite = { focus = PRS_assign_railway_guards }
+		relative_position_id = PRS_assign_railway_guards
+
+		available = {
+			
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRS_supply_chains"
+			add_equipment_to_stockpile = {	
+				type = train_equipment
+				amount = 100
+				producer = RUS
+			}
+		}
+	}
+	focus = {
+		id = PRS_requisition_trucks
+		icon = GFX_goal_generic_army_motorized_shine
+		
+		x = -1
+		y = 1
+		cost = 2
+
+		prerequisite = { focus = PRS_supply_chains }
+		prerequisite = { focus = PRS_material_superiority }
+		relative_position_id = PRS_material_superiority
+
+		available = {
+			
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRS_requisition_trucks"
+			add_equipment_to_stockpile = {	
+				type = motorized_equipment
+				amount = 1000
+				producer = RUS
+			}
+		}
+	}
+	focus = {
+		id = PRS_increase_production
+		icon = GFX_generic_production
+		
+		x = -1
+		y = 1
+		cost = 2
+		prerequisite = { focus = PRS_requisition_trucks }
+		relative_position_id = PRS_requisition_trucks
+
+		available = {
+			
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRS_increase_production"
+			random_core_state = {
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+	focus = {
+		id = PRS_the_legitimate_russia
+		icon = GFX_RUS_flag
+		
+		x = 0
+		y = 1
+		cost = 2
+
+		prerequisite = { focus = PRS_increase_production }
+		relative_position_id = PRS_increase_production
+
+		available = {
+			
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRS_the_legitimate_russia"
+			add_ideas = {
+				RUS_true_russia
+			}
+		}
+	}
+	focus = {
+		id = PRS_something_has_to_give
+		icon = GFX_PAL_Russian_Refugees
+		
+		x = -2
+		y = 1
+		cost = 3
+
+		prerequisite = { focus = PRS_the_legitimate_russia  focus = PRS_an_end_to_savinkovism }
+		relative_position_id = PRS_the_legitimate_russia
+
+		available = {
+			
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRS_something_has_to_give"
+			add_timed_idea = { idea = RUS_crunch_time days = 210 }
+		}
+	}
+	focus = {
+		id = PRS_commissars_return
+		icon = GFX_generic_authority
+		
+		x = 2
+		y = 1
+		cost = 2
+
+		prerequisite = { focus = PRS_something_has_to_give }
+		relative_position_id = PRS_something_has_to_give
+
+		available = {
+			
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRS_commissars_return"
+			add_ideas = {
+				RUS_commissars
+			}
+		}
+	}
+	focus = {
+		id = PRS_penal_battalions
+		icon = GFX_focus_SOV_penal_battalions
+		
+		x = 0
+		y = 1
+		cost = 3
+
+		prerequisite = { focus = PRS_commissars_return }
+		relative_position_id = PRS_commissars_return
+
+		available = {
+			
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRS_penal_battalions"
+			add_manpower = 100000
+		}
+	}
+	focus = {
+		id = PRS_amnesty_for_defectors
+		icon = GFX_generic_demobilise_guns
+		
+		x = 0
+		y = 1
+		cost = 2
+
+		prerequisite = { focus = PRS_penal_battalions }
+		relative_position_id = PRS_penal_battalions
+
+		available = {
+			
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRS_amnesty_for_defectors"
+			add_manpower = 100000
+		}
+	 }
+	# focus = {
+	# 	id = PRS_look_the_rural_folk
+	# 	icon = GFX_generic_agriculture_dept
+		
+	# 	x = -4
+	# 	y = 1
+	# 	cost = 2
+
+	# 	prerequisite = { focus = PRS_something_has_to_give }
+	# 	relative_position_id = PRS_something_has_to_give
+
+	# 	available = {
+			
+	# 	}
+
+	# 	completion_reward = {
+	# 		log = "[GetDateText]: [Root.GetName]: Focus PRS_look_the_rural_folk"
+	# 	}
+	# }
+	# focus = {
+	# 	id = PRS_seize_materials
+	# 	icon = GFX_generic_all_resources
+		
+	# 	x = 1
+	# 	y = 1
+	# 	cost = 3
+
+	# 	prerequisite = { focus = PRS_look_the_rural_folk }
+	# 	mutually_exclusive = { focus = PRS_backyard_industry }
+	# 	relative_position_id = PRS_look_the_rural_folk
+
+	# 	available = {
+			
+	# 	}
+
+	# 	completion_reward = {
+	# 		log = "[GetDateText]: [Root.GetName]: Focus PRS_seize_materials"
+	# 		move_down_business_spending = yes
+	# 	}
+	# }
+	# focus = {
+	# 	id = PRS_backyard_industry
+	# 	icon = GFX_generic_industrial_towns
+		
+	# 	x = -1
+	# 	y = 1
+	# 	cost = 3
+
+	# 	prerequisite = { focus = PRS_look_the_rural_folk }
+	# 	mutually_exclusive = { focus = PRS_seize_materials }
+	# 	relative_position_id = PRS_look_the_rural_folk
+
+	# 	available = {
+			
+	# 	}
+
+	# 	completion_reward = {
+	# 		log = "[GetDateText]: [Root.GetName]: Focus PRS_backyard_industry"
+			
+	# 	}
+	# }
+	focus = {
+		id = PRS_increase_conscription
+		icon = GFX_TEX_recruitment
+		
+		x = -2
+		y = 1
+		cost = 2
+
+		prerequisite = { focus = PRS_something_has_to_give }
+		relative_position_id = PRS_something_has_to_give
+
+		available = {
+			
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRS_increase_conscription"
+			move_down_military = yes
+			move_up_mobilization = yes
+		}
+	}
+	focus = {
+		id = PRS_rural_conscription
+		icon = GFX_RUS_serfdom_is_dead
+		
+		x = -1
+		y = 1
+		cost = 3
+
+		prerequisite = { focus = PRS_increase_conscription }
+		mutually_exclusive = { focus = PRS_urban_conscription }
+		relative_position_id = PRS_increase_conscription
+
+		available = {
+			
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRS_rural_conscription"
+			add_manpower = 100000
+			
+			add_popularity = {
+				ideology = national_populist
+				popularity = 0.03
+			}
+			add_popularity = {
+				ideology = authoritarian_democrat
+				popularity = 0.03
+			}
+		}
+	}
+	focus = {
+		id = PRS_urban_conscription
+		icon = GFX_RUS_local_baracks
+		
+		x = 1
+		y = 1
+		cost = 3
+
+		prerequisite = { focus = PRS_increase_conscription }
+		mutually_exclusive = { focus = PRS_rural_conscription }
+		relative_position_id = PRS_increase_conscription
+
+		available = {
+			
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRS_urban_conscription"
+			add_manpower = 150000
+			
+			add_popularity = {
+				ideology = authoritarian_socialist
+				popularity = 0.03
+			}
+			add_popularity = {
+				ideology = radical_socialist
+				popularity = 0.03
+			}
+		}
+	}
+	focus = {
+		id = PRS_factory_divisions
+		icon = GFX_BEL_military_industry_in_the_sillon
+		
+		x = 0
+		y = 1
+		cost = 2
+
+		prerequisite = { focus = PRS_urban_conscription }
+		relative_position_id = PRS_urban_conscription
+
+		available = {
+			
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRS_factory_divisions"
+			add_ideas = {
+				RUS_economic_crisis_bad
+			}
+			add_manpower = 50000
+		}
+	}
+	focus = {
+		id = PRS_missed_harvest
+		icon = GFX_generic_agriculture2
+		
+		x = 0
+		y = 1
+		cost = 2
+
+		prerequisite = { focus = PRS_rural_conscription }
+		relative_position_id = PRS_rural_conscription
+
+		available = {
+			
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRS_missed_harvest"
+			add_ideas = {
+				RUS_economic_crisis_manageable
+			}
+		}
+	}
+
+	focus = {
+		id = PRS_victory_finally
+		icon = GFX_RUS_verify_the_kremlins_role
+		
+		x = 1
+		y = 1
+		cost = 2
+
+		prerequisite = { focus = PRS_missed_harvest focus = PRS_factory_divisions }
+		relative_position_id = PRS_missed_harvest
+
+		available = {
+			OR = {
+			219 = {
+					is_controlled_by = PRS
+				} 
+			195 = {
+					is_controlled_by = PRS
+				}
+			}
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus PRS_victory_finally"
+			RUS_End_Winter = yes
+		}
+	}
+}

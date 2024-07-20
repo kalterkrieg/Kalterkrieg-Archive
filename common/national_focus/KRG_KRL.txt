@@ -1,0 +1,601 @@
+#################################
+# KRG Kurland Focus Tree        #
+#################################
+# By Damascius :P 				#
+#################################
+focus_tree = {
+	id = KRG_KRL_reconstruction
+	country = {
+		factor = 0
+		modifier = {
+			add = 10
+			tag = KRL
+		}
+	}
+	default = no
+	continuous_focus_position = {
+		x = 1150
+		y = 100
+	}
+	######################
+	### Starting Stuff ###
+	######################
+	### Economic Reconstruction ###
+	focus = {
+		id = KRL_Weidling_Plan
+		icon = GFX_generic_social_reforms
+		x = 5
+		y = 0
+		cost = 5
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus KRL_Weidling_Plan"
+			country_event = {
+				id = krg_krl.0
+			}
+		}
+	}
+	focus = {
+		id = KRL_rebuild_Libau
+		icon = GFX_generic_bricks
+		prerequisite = {
+			focus = KRL_Weidling_Plan
+		}
+		relative_position_id = KRL_Weidling_Plan
+		x = -2
+		y = 1
+		cost = 5
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus KRL_rebuild_Libau"
+			add_timed_idea = {
+				idea = KRL_German_Construction_Corps
+				days = 180
+			}
+		}
+	}
+	focus = {
+		id = KRL_build_policing_institutions
+		icon = GFX_generic_conspiracy
+		prerequisite = {
+			focus = KRL_Weidling_Plan
+		}
+		relative_position_id = KRL_Weidling_Plan
+		x = 3
+		y = 1
+		cost = 5
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus KRL_build_policing_institutions"
+			add_stability = 0.05
+		}
+	}
+	focus = {
+		id = KRL_repair_the_railways
+		icon = GFX_generic_improve_railways
+		prerequisite = {
+			focus = KRL_Weidling_Plan
+		}
+		relative_position_id = KRL_Weidling_Plan
+		x = 0
+		y = 1
+		cost = 5
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus KRL_repair_the_railways"
+			build_railway = {
+				path = {
+					9262
+					3319
+					3296
+					6322
+					3525
+					6222
+				}
+			}
+			move_up_inf_spending = yes
+		}
+	}
+	focus = {
+		id = KRL_support_latvian_farmers
+		icon = GFX_generic_agriculture
+		prerequisite = {
+			focus = KRL_Weidling_Plan
+		}
+		relative_position_id = KRL_Weidling_Plan
+		x = -4
+		y = 1
+		cost = 5
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus KRL_support_latvian_farmers"
+			country_event = {
+				id = krg_krl.5
+			}
+			move_up_business_spending = yes
+		}
+	}
+	focus = {
+		id = KRL_revive_rural_economy
+		icon = GFX_SZC_improvised_farming_machinery
+		prerequisite = {
+			focus = KRL_support_latvian_farmers
+		}
+		prerequisite = {
+			focus = KRL_rebuild_Libau
+		}
+		relative_position_id = KRL_Weidling_Plan
+		x = -3
+		y = 2
+		cost = 9
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus IRE_revive_rural_economies"
+			random_owned_controlled_state = {
+				limit = {
+					OR = {
+						has_state_category = two
+						has_state_category = four
+						has_state_category = three
+					}
+					is_core_of = ROOT
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_controlled_state = {
+				limit = {
+					OR = {
+						has_state_category = two
+						has_state_category = four
+						has_state_category = three
+					}
+					is_core_of = ROOT
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_owned_controlled_state = {
+				limit = {
+					OR = {
+						has_state_category = two
+						has_state_category = four
+						has_state_category = three
+					}
+					is_core_of = ROOT
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+	focus = {
+		id = KRL_build_the_Libau_port
+		icon = GFX_goal_generic_construct_naval_dockyard
+		prerequisite = {
+			focus = KRL_revive_rural_economy
+		}
+		prerequisite = {
+			focus = KRL_repair_the_railways
+		}
+		relative_position_id = KRL_Weidling_Plan
+		x = -1
+		y = 3
+		cost = 3
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus KRL_build_the_Libau_port"
+			190 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = dockyard
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = naval_base
+					province = 9262
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+	focus = {
+		id = KRL_develop_Libau_further
+		icon = GFX_goal_generic_construct_civ_factory
+		prerequisite = {
+			focus = KRL_build_the_Libau_port
+		}
+		relative_position_id = KRL_Weidling_Plan
+		x = 0
+		y = 4
+		cost = 7
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus KRL_develop_Libau_further"
+			190 = {
+				add_extra_state_shared_building_slots = 3
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 2
+					instant_build = yes
+				}
+				move_up_state_category = yes
+			}
+		}
+	}
+	focus = {
+		id = KRL_legitimise_judiciary
+		icon = GFX_generic_trials
+		prerequisite = {
+			focus = KRL_build_policing_institutions
+		}
+		relative_position_id = KRL_Weidling_Plan
+		x = 2
+		y = 2
+		cost = 5
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus KRL_legitimise_judiciary"
+			move_up_service_spending = yes
+		}
+	}
+	focus = {
+		id = KRL_root_out_syndicalists
+		icon = GFX_generic_army_guard
+		prerequisite = {
+			focus = KRL_build_policing_institutions
+		}
+		relative_position_id = KRL_Weidling_Plan
+		x = 4
+		y = 2
+		cost = 5
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus KRL_root_out_syndicalists"
+			remove_ideas = KRL_Socialist_Resistance
+		}
+	}
+	focus = {
+		id = KRL_clean_the_stain
+		icon = GFX_generic_crisis
+		prerequisite = {
+			focus = KRL_legitimise_judiciary
+		}
+		relative_position_id = KRL_Weidling_Plan
+		x = 2
+		y = 3
+		cost = 5
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus KRL_clean_the_stain"
+			swap_ideas = {
+				remove_idea = KRL_Baltic_Shame
+				add_idea = KRL_Baltic_Shame_2
+			}
+		}
+	}
+	focus = {
+		id = KRL_reallow_service
+		icon = GFX_generic_conscription
+		prerequisite = {
+			focus = KRL_root_out_syndicalists
+		}
+		prerequisite = {
+			focus = KRL_clean_the_stain
+		}
+		relative_position_id = KRL_Weidling_Plan
+		x = 3
+		y = 4
+		cost = 5
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus KRL_reallow_service"
+			swap_ideas = {
+				remove_idea = KRG_disarmed_nation
+				add_idea = KRG_volunteer_only
+			}
+			set_division_template_lock = {
+				division_template = "Garnisonsdivision"
+				is_locked = no
+			}
+		}
+	}
+	focus = {
+		id = KRL_open_Libau_technical_school
+		icon = GFX_generic_research_grant
+		prerequisite = {
+			focus = KRL_build_the_Libau_port
+		}
+		relative_position_id = KRL_build_the_Libau_port
+		x = -1
+		y = 1
+		cost = 7
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus KRL_open_Libau_technical_school"
+			add_research_slot = 1
+		}
+	}
+	focus = {
+		id = KRL_hand_over_to_civilian_government
+		icon = GFX_generic_civilian_oversight
+		prerequisite = {
+			focus = KRL_develop_Libau_further
+		}
+		prerequisite = {
+			focus = KRL_reallow_service
+		}
+		relative_position_id = KRL_Weidling_Plan
+		x = 2
+		y = 5
+		cost = 10
+		available_if_capitulated = yes
+		completion_reward = {
+			set_cosmetic_tag = KRL_DOC
+			set_politics = {
+				ruling_party = authoritarian_democrat
+				elections_allowed = no
+			}
+			coal_add_pat_aut = yes
+			swap_ideas = {
+				remove_idea = krg_military_occupation
+				add_idea = KRG_authoritarian_system
+			}
+			remove_ideas = KRL_Berlins_Administration
+			country_event = {
+				id = krg_krl.1
+			}
+		}
+	}
+	focus = {
+		id = KRL_introduce_conscription
+		icon = GFX_generic_enlist_the_police
+		prerequisite = {
+			focus = KRL_hand_over_to_civilian_government
+		}
+		relative_position_id = KRL_Weidling_Plan
+		x = 1
+		y = 6
+		cost = 8
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus KRL_introduce_conscription"
+			swap_ideas = {
+				remove_idea = KRG_volunteer_only
+				add_idea = KRG_limited_conscription
+			}
+		}
+	}
+	focus = {
+		id = KRL_open_markets
+		icon = GFX_generic_cash_stimulus_plan
+		prerequisite = {
+			focus = KRL_hand_over_to_civilian_government
+		}
+		relative_position_id = KRL_Weidling_Plan
+		
+		x = 5
+		y = 6
+		cost = 10
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus KRL_introduce_conscription"
+			move_down_trade_laws = yes
+		}
+	}
+	focus = {
+		id = KRL_seek_mitteleuropa_readmission
+		icon = GFX_GER_mitteleuropa
+		prerequisite = {
+			focus = KRL_hand_over_to_civilian_government
+		}
+		relative_position_id = KRL_Weidling_Plan
+		
+		x = 3
+		y = 6
+		cost = 10
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus KRL_introduce_conscription"
+			MIT_add_to_mitteleuropa = yes
+		}
+	}
+	focus = {
+		id = KRL_relax_border_controls
+		icon = GFX_generic_army_guy
+		prerequisite = {
+			focus = KRL_hand_over_to_civilian_government
+		}
+		relative_position_id = KRL_Weidling_Plan
+		x = 7
+		y = 6
+		cost = 10
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus KRL_introduce_conscription"
+			move_up_immigration = yes
+		}
+	}
+	focus = {
+		id = KRL_new_eastern_bulwark
+		icon = GFX_GER_freikorps_question
+		prerequisite = {
+			focus = KRL_introduce_conscription
+		}
+		relative_position_id = KRL_Weidling_Plan
+		x = 1
+		y = 7
+		cost = 5
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus KRL_introduce_conscription"
+			add_war_support = 0.1
+		}
+	}
+	focus = {
+		id = KRL_foreign_investments
+		icon = GFX_generic_gold_reserve
+		prerequisite = {
+			focus = KRL_seek_mitteleuropa_readmission
+			focus = KRL_open_markets
+		}
+		relative_position_id = KRL_Weidling_Plan
+		x = 4
+		y = 7
+		cost = 5
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus KRL_foreign_investments	"
+			random_owned_controlled_state = {
+				limit = {
+					OR = {
+						has_state_category = two
+						has_state_category = four
+						has_state_category = three
+					}
+					is_core_of = ROOT
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+	focus = {
+		id = KRL_open_labour_market_further
+		icon = GFX_generic_labour_legislation
+		prerequisite = {
+			focus = KRL_open_markets
+		}
+		prerequisite = {
+			focus = KRL_relax_border_controls
+		}
+		relative_position_id = KRL_Weidling_Plan
+		x = 7
+		y = 7
+		cost = 5
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus KRL_open_labour_market_further	"
+			swap_ideas = {
+				remove_idea = KRG_immigration_heavy
+				add_idea = KRG_immigration_merit_based
+			}
+		}
+	}
+	focus = {
+		id = KRL_new_hardware
+		icon = GFX_generic_gun_trials
+		prerequisite = {
+			focus = KRL_new_eastern_bulwark
+		}
+		prerequisite = {
+			focus = KRL_seek_mitteleuropa_readmission
+		}
+		relative_position_id = KRL_Weidling_Plan
+		x = 2
+		y = 8
+		cost = 5
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus KRL_new_hardware	"
+			GER = {
+				send_equipment = {
+					type = infantry_equipment
+					amount = 5000
+					target = KRL
+				}
+				create_production_license = {
+					target = KRL
+					cost_factor = 0
+					equipment = {
+						type = infantry_equipment_1
+					}
+				}
+			}
+		}
+	}
+
+	focus = {
+		id = KRL_victorious_unification
+		icon = GFX_GER_integrate_baltic
+		prerequisite = {
+			focus = KRL_hand_over_to_civilian_government
+		}
+		available = {
+			12 = {
+				is_owned_and_controlled_by = KRL
+			}
+		}
+		relative_position_id = KRL_hand_over_to_civilian_government
+		x = -3
+		y = 1
+		cost = 5
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus IRE_fisheries_act"
+			remove_ideas = KRL_Rump_State
+			every_state = {
+				display_individual_scopes = yes
+				limit = {
+					is_core_of = LAT
+				}
+				add_core_of = KRL
+			}
+			hidden_effect = {
+				add_war_support = -0.5
+				news_event = {
+					id = krg_krl.3
+				}
+			}
+			GER = {
+				KRL = {
+					get_current_government_type = yes
+				}
+				if = {
+					limit = {
+						has_subject_autonomy_feature = yes
+					}
+					set_autonomy = {
+						target = KRL
+						autonomous_state = krg_herrschaftsgebiet
+					}
+				}
+				else = {
+					puppet = KRL
+				}
+				save_event_target_as = on_puppet_master_tag
+				KRL = {
+					standard_on_puppet_effect = yes
+					restore_previous_government_type = yes
+				}
+			}
+			country_event = {
+				id = krg_krl.4
+			}
+			
+		}
+	}
+}

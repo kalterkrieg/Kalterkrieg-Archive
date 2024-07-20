@@ -1,0 +1,7530 @@
+#!gfx:interface/Kalterkrieg/KRG_goals.gfx
+focus_tree = {
+	id = KRG_Germany_Base
+	country = {
+   		factor = 0
+	#	modifier = {
+	#		add = 10
+	#		tag = GER
+	#	}
+	}
+	shared_focus = GER_press_censorship
+	shared_focus = GER_expand_verpo
+	shared_focus = GER_aftermath_of_koln
+	shared_focus = GER_grand_coalition
+	shared_focus = GER_repair_wilhelmshaven
+	shared_focus = GER_reconstitute_verpo
+	shared_focus = GER_1951_election
+	shared_focus = GER_begin_the_reconstruction
+	shared_focus = GER_dealing_with_the_dreadnought
+	shared_focus = GER_the_red_barons_legacy
+	shared_focus = GER_implement_kesselring_doctrine
+	shared_focus = GER_maintain_orthodox_bewegungskrieg
+	shared_focus = GER_weltreich
+	#shared_focus = GER_imperial_succesion_act
+	shared_focus = GER_bredows_vision_holds_2
+	continuous_focus_position = { x = 175 y = 1475 }
+}
+
+focus_tree = {
+	id = KRG_Germany_Goerdeler
+	country = {
+		factor = 0
+	}
+	shared_focus = GER_grand_coalition
+	shared_focus = GER_repair_wilhelmshaven
+	shared_focus = GER_reconstitute_verpo
+	shared_focus = GER_1951_election
+	shared_focus = GER_begin_the_reconstruction
+	shared_focus = GER_dealing_with_the_dreadnought
+	shared_focus = GER_the_red_barons_legacy
+	shared_focus = GER_implement_kesselring_doctrine
+	shared_focus = GER_maintain_orthodox_bewegungskrieg
+	shared_focus = GER_weltreich
+	#shared_focus = GER_imperial_succesion_act
+	#shared_focus = GER_bredows_vision_holds_2
+	continuous_focus_position = { x = 2075 y = 1475 }
+}
+
+focus_tree = {
+	id = KRG_Germany_Bredowist_System
+	country = {
+		factor = 0
+		modifier = {
+			add = 10
+			tag = GER
+		}
+	}
+	shared_focus = GER_press_censorship
+	shared_focus = GER_expand_verpo
+	shared_focus = GER_aftermath_of_koln
+	shared_focus = GER_repair_wilhelmshaven
+	shared_focus = GER_begin_the_reconstruction
+	shared_focus = GER_dealing_with_the_dreadnought
+	shared_focus = GER_the_red_barons_legacy
+	shared_focus = GER_implement_kesselring_doctrine
+	shared_focus = GER_maintain_orthodox_bewegungskrieg
+	shared_focus = GER_weltreich
+	#shared_focus = GER_imperial_succesion_act
+	shared_focus = GER_bredows_vision_holds_2
+	continuous_focus_position = { x = 175 y = 1475 }
+}
+
+focus_tree = {
+	id = KRG_Germany_Blumenthal
+	country = {
+		factor = 0
+	}
+	shared_focus = GER_rule_of_brothers
+	shared_focus = GER_repair_wilhelmshaven
+	shared_focus = GER_begin_the_reconstruction
+	shared_focus = GER_dealing_with_the_dreadnought
+	shared_focus = GER_the_red_barons_legacy
+	shared_focus = GER_implement_kesselring_doctrine
+	shared_focus = GER_maintain_orthodox_bewegungskrieg
+	shared_focus = GER_weltreich
+	#shared_focus = GER_imperial_succesion_act
+	#shared_focus = GER_bredows_vision_holds_2
+	continuous_focus_position = { x = 175 y = 1475 }
+}
+
+shared_focus = {
+	id = GER_press_censorship
+	icon = GFX_generic_media_controls
+	x = -1
+	y = 0
+	cost = 4
+
+	ai_will_do = {
+		base = 250
+		modifier = {
+			OR = {
+				has_country_flag = koln_crisis_negotiated
+				has_country_flag = koln_crisis_pacified
+			}
+			factor = 30
+		}
+	}
+
+	available = {
+		has_government = paternal_autocrat
+	}
+	completion_reward = {
+		unlock_decision_tooltip = GER_amend_the_imperial_press_law
+		unlock_decision_tooltip = GER_crackdown_on_socialist_media
+		unlock_decision_tooltip = GER_crackdown_on_catholic_media
+		log = "[GetDateText]: [Root.GetName]: Focus GER_press_censorship"
+	}
+}
+
+shared_focus = {
+	id = GER_bureaucratic_overhaul
+	icon = GFX_generic_social_reforms
+	relative_position_id = GER_press_censorship
+	x = -0
+	y = 1
+	cost = 4
+
+	ai_will_do = {
+		base = 150
+		modifier = {
+			OR = {
+				has_country_flag = koln_crisis_negotiated
+				has_country_flag = koln_crisis_pacified
+			}
+			factor = 30
+		}
+	}
+
+	available = {
+		has_government = paternal_autocrat
+	}
+	prerequisite = {
+		focus = GER_press_censorship
+	}
+	completion_reward = {
+		add_political_power = 50
+		unlock_decision_tooltip = GER_von_bose_minstry_reforms
+		unlock_decision_tooltip = GER_bundesrat_reform
+		unlock_decision_tooltip = GER_pack_the_courts
+		log = "[GetDateText]: [Root.GetName]: Focus GER_bureaucratic_overhaul"
+	}
+}
+
+shared_focus = {
+	id = GER_aftermath_of_koln
+	icon = GFX_GER_peace_in_the_rhineland
+	relative_position_id = GER_press_censorship
+	x = 4
+	y = 1
+	cost = 4
+
+	ai_will_do = {
+		base = 150
+		modifier = {
+			OR = {
+				has_country_flag = koln_crisis_negotiated
+				has_country_flag = koln_crisis_pacified
+			}
+			factor = 30
+		}
+	}
+
+	available = {
+		has_government = paternal_autocrat
+		OR = {
+			has_country_flag = koln_crisis_negotiated
+			has_country_flag = koln_crisis_pacified
+		}
+	}
+	completion_reward = {
+		unlock_decision_tooltip = GER_pass_the_peace_law
+		complete_national_focus = GER_weltreich
+		log = "[GetDateText]: [Root.GetName]: Focus GER_aftermath_of_koln"
+	}
+}
+
+shared_focus = {
+	id = GER_break_up_democrats
+	icon = GFX_generic_authoritarian
+	relative_position_id = GER_press_censorship
+	x = 2
+	y = 1
+	cost = 4
+
+	ai_will_do = {
+		base = 150
+		modifier = {
+			OR = {
+				has_country_flag = koln_crisis_negotiated
+				has_country_flag = koln_crisis_pacified
+			}
+			factor = 30
+		}
+	}
+	
+	available = {
+		has_government = paternal_autocrat
+	}
+	prerequisite = {
+		focus = GER_press_censorship
+	}
+	completion_reward = {
+		country_event = {
+			id = krg_ger.82
+		}
+		unlock_decision_tooltip = GER_fund_the_DNAP
+		unlock_decision_tooltip = GER_crackdown_on_SPD_trade_unions
+		unlock_decision_tooltip = GER_encourage_liberal_splinters
+		log = "[GetDateText]: [Root.GetName]: Focus GER_break_up_democrats"
+	}
+}
+
+shared_focus = {
+	id = GER_politicise_militarists
+	icon = GFX_GER_heavy_tanks
+	relative_position_id = GER_press_censorship
+	x = 4
+	y = 2
+	cost = 4
+
+	ai_will_do = {
+		base = 150
+		modifier = {
+			OR = {
+				has_country_flag = koln_crisis_negotiated
+				has_country_flag = koln_crisis_pacified
+			}
+			factor = 20
+		}
+	}
+
+	available = {
+		has_government = paternal_autocrat
+		OR = {
+			has_idea = GER_Ferdinand_von_Bredow_hog_pau
+			has_idea = GER_Eberhard_von_Mackensen_hog_pau
+		}
+	}
+	prerequisite = {
+		focus = GER_aftermath_of_koln
+	}
+	completion_reward = {
+		add_popularity = {
+			ideology = paternal_autocrat
+			popularity = 0.02
+		}
+		add_popularity = {
+			ideology = national_populist
+			popularity = 0.01
+		}
+		GER_increase_general_staff_support = yes
+	}
+}
+
+shared_focus = {
+	id = GER_maintain_wartime_spending
+	icon = GFX_generic_money_deal
+	relative_position_id = GER_politicise_militarists
+	x = 1
+	y = 1
+	cost = 4
+
+	ai_will_do = {
+		base = 150
+		modifier = {
+			OR = {
+				has_country_flag = koln_crisis_negotiated
+				has_country_flag = koln_crisis_pacified
+			}
+			factor = 20
+		}
+	}
+
+	available = {
+		has_government = paternal_autocrat
+	}
+	prerequisite = {
+		focus = GER_politicise_militarists
+	}
+	# prerequisite = { focus = GER_celebrate_our_victory }
+	completion_reward = {
+		add_ideas = GER_maintain_military_spending
+	}
+}
+
+shared_focus = {
+	id = GER_form_a_military_industrial_complex
+	icon = GFX_goal_generic_construct_mil_factory
+	relative_position_id = GER_maintain_wartime_spending
+	x = 1
+	y = 1
+	cost = 4
+
+	ai_will_do = {
+		base = 150
+		modifier = {
+			OR = {
+				has_country_flag = koln_crisis_negotiated
+				has_country_flag = koln_crisis_pacified
+			}
+			factor = 20
+		}
+	}
+
+	available = {
+		has_government = paternal_autocrat
+	}
+	prerequisite = {
+		focus = GER_maintain_wartime_spending
+	}
+	completion_reward = {
+		GER_increase_general_staff_support = yes
+		51 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = arms_factory
+				level = 1
+				instant_build = yes
+			}
+		}
+		59 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = arms_factory
+				level = 1
+				instant_build = yes
+			}
+		}
+		62 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = arms_factory
+				level = 1
+				instant_build = yes
+			}
+		}
+		68 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = arms_factory
+				level = 1
+				instant_build = yes
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = GER_arm_the_police
+	icon = GFX_generic_army_guy_2
+	relative_position_id = GER_politicise_militarists
+	x = 0
+	y = 2
+	cost = 4
+
+	ai_will_do = {
+		base = 150
+		modifier = {
+			OR = {
+				has_country_flag = koln_crisis_negotiated
+				has_country_flag = koln_crisis_pacified
+			}
+			factor = 20
+		}
+	}
+
+	available = {
+		has_government = paternal_autocrat
+	}
+	prerequisite = {
+		focus = GER_politicise_militarists
+	}
+	completion_reward = {
+		add_political_power = 50
+		add_war_support = -0.05
+	}
+}
+
+shared_focus = {
+	id = GER_expand_verpo
+	icon = GFX_generic_secret_agents
+	relative_position_id = GER_press_censorship
+	x = -2
+	y = 1
+	cost = 4
+
+	ai_will_do = {
+		base = 250
+		modifier = {
+			OR = {
+				has_country_flag = koln_crisis_negotiated
+				has_country_flag = koln_crisis_pacified
+			}
+			factor = 20
+		}
+	}
+
+	available = {
+		has_government = paternal_autocrat
+	}
+	completion_reward = {
+		unlock_decision_tooltip = GER_verpo_merger
+		unlock_decision_tooltip = GER_log_socialist_agitators
+		unlock_decision_tooltip = GER_establish_SPD_surveilance
+	}
+}
+
+shared_focus = {
+	id = GER_politicise_the_intelligence_services
+	icon = GFX_goal_generic_intelligence_exchange
+	relative_position_id = GER_press_censorship
+	x = -0
+	y = 2
+	cost = 4
+
+	ai_will_do = {
+		base = 150
+		modifier = {
+			OR = {
+				has_country_flag = koln_crisis_negotiated
+				has_country_flag = koln_crisis_pacified
+			}
+			factor = 20
+		}
+	}
+
+	available = {
+		has_government = paternal_autocrat
+		has_idea = GER_Johannes_Popitz_hog_pau
+	}
+	prerequisite = {
+		focus = GER_aftermath_of_koln
+	}
+	prerequisite = {
+		focus = GER_expand_verpo
+	}
+	completion_reward = {
+		add_stability = 0.03
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = 0.01
+		}
+		add_popularity = {
+			ideology = paternal_autocrat
+			popularity = 0.02
+		}
+	}
+}
+
+shared_focus = {
+	id = GER_introduce_corporatist_reforms
+	icon = GFX_generic_corporatism
+	relative_position_id = GER_politicise_the_intelligence_services
+	x = -1
+	y = 1
+	cost = 4
+
+	ai_will_do = {
+		base = 150
+		modifier = {
+			OR = {
+				has_country_flag = koln_crisis_negotiated
+				has_country_flag = koln_crisis_pacified
+			}
+			factor = 20
+		}
+	}
+
+	available = {
+		has_government = paternal_autocrat
+	}
+	prerequisite = {
+		focus = GER_politicise_the_intelligence_services
+	}
+	completion_reward = {
+		add_ideas = GER_popitzplan_1
+	}
+}
+
+shared_focus = {
+	id = GER_meet_with_the_giants
+	icon = GFX_LEP_krupp_industial
+	relative_position_id = GER_introduce_corporatist_reforms
+	x = -1
+	y = 1
+	cost = 4
+
+	ai_will_do = {
+		base = 150
+		modifier = {
+			OR = {
+				has_country_flag = koln_crisis_negotiated
+				has_country_flag = koln_crisis_pacified
+			}
+			factor = 20
+		}
+	}
+
+	available = {
+		has_government = paternal_autocrat
+	}
+	prerequisite = {
+		focus = GER_introduce_corporatist_reforms
+	}
+	completion_reward = {
+		if = {
+			limit = {
+				has_idea = GER_popitzplan_2
+			}
+			swap_ideas = {
+				remove_idea = GER_popitzplan_2
+				add_idea = GER_popitzplan_3
+			}
+			else = {
+				swap_ideas = {
+					remove_idea = GER_popitzplan_1
+					add_idea = GER_popitzplan_2
+				}
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = GER_empower_conservative_businesses
+	icon = GFX_generic_align_germany
+	relative_position_id = GER_introduce_corporatist_reforms
+	x = 1
+	y = 1
+	cost = 4
+
+	ai_will_do = {
+		base = 150
+		modifier = {
+			OR = {
+				has_country_flag = koln_crisis_negotiated
+				has_country_flag = koln_crisis_pacified
+			}
+			factor = 20
+		}
+	}
+
+	available = {
+		has_government = paternal_autocrat
+	}
+	prerequisite = {
+		focus = GER_introduce_corporatist_reforms
+	}
+	completion_reward = {
+		if = {
+			limit = {
+				has_idea = GER_popitzplan_2
+			}
+			swap_ideas = {
+				remove_idea = GER_popitzplan_2
+				add_idea = GER_popitzplan_3
+			}
+			else = {
+				swap_ideas = {
+					remove_idea = GER_popitzplan_1
+					add_idea = GER_popitzplan_2
+				}
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = GER_gather_support_for_centralisation
+	icon = GFX_generic_shady_deal
+	relative_position_id = GER_press_censorship
+	x = 2
+	y = 2
+	cost = 4
+
+	ai_will_do = {
+		base = 150
+		modifier = {
+			OR = {
+				has_country_flag = koln_crisis_negotiated
+				has_country_flag = koln_crisis_pacified
+			}
+			factor = 30
+		}
+	}
+
+	available = {
+		has_government = paternal_autocrat
+		custom_trigger_tooltip = {
+			tooltip = GER_new_state_progress_50
+			check_variable = {
+				var = GER_new_state_reform_progress
+				value = 50
+				compare = greater_than_or_equals
+			}
+		}
+	}
+	prerequisite = {
+		focus = GER_aftermath_of_koln
+	}
+	prerequisite = {
+		focus = GER_bureaucratic_overhaul
+	}
+	prerequisite = {
+		focus = GER_break_up_democrats
+	}
+	completion_reward = {
+		custom_effect_tooltip = GER_centralisation_negotiations_tooltip
+		hidden_effect = {
+			country_event = {
+				id = krg_ger.60
+				days = 50
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = GER_the_centralisation_act
+	icon = GFX_BAT_germanisation
+	relative_position_id = GER_gather_support_for_centralisation
+	prerequisite = {
+		focus = GER_gather_support_for_centralisation
+	}
+	prerequisite = {
+		focus = GER_politicise_militarists
+		focus = GER_politicise_the_intelligence_services
+	}
+	x = 0
+	y = 1
+	cost = 4
+
+	ai_will_do = {
+		base = 150
+		modifier = {
+			OR = {
+				has_country_flag = koln_crisis_negotiated
+				has_country_flag = koln_crisis_pacified
+			}
+			factor = 30
+		}
+	}
+
+	available = {
+		has_government = paternal_autocrat
+		custom_trigger_tooltip = {
+			tooltip = GER_new_state_progress_50
+			check_variable = {
+				var = GER_new_state_reform_progress
+				value = 50
+				compare = greater_than_or_equals
+			}
+		}
+		custom_trigger_tooltip = {
+			tooltip = GER_reichstag_majority
+			OR = {
+				check_variable = {
+					var = GER_new_state_reform_support
+					value = 207
+					compare = greater_than_or_equals
+				}
+				is_ai = yes
+			}
+			
+		}
+		has_country_flag = GER_krosigkplan_trialed
+	}
+	completion_reward = {
+		unlock_decision_tooltip = GER_implement_krosigkplan
+		unlock_decision_tooltip = GER_pressure_moderate_conservatives
+		unlock_decision_tooltip = GER_ban_the_democrats
+	}
+}
+
+### Goerdeler Tree ###
+shared_focus = {
+	id = GER_grand_coalition
+	icon = GFX_COS_Ferrer_Coup
+	x = 0
+	y = 0
+	cost = 4
+
+	ai_will_do = {
+		base = 200
+	}
+
+	available = {
+		has_government = authoritarian_democrat
+		has_idea = GER_Carl_Friedrich_Goerdeler_hog_ade
+	}
+	completion_reward = {
+		add_political_power = 120
+		#unlock_decision_tooltip = GER_reassert_the_landtags
+		coal_add_soc_lib = yes
+		coal_add_mar_lib = yes
+		coal_add_soc_con = yes
+		complete_national_focus = GER_weltreich
+
+		GER_grand_coalition_effect = yes
+		
+	}
+}
+
+shared_focus = {
+	id = GER_a_conservative_approach
+	icon = GFX_GER_Conservative_Revolution
+	relative_position_id = GER_grand_coalition
+	x = -1
+	y = 1
+	cost = 3
+
+	ai_will_do = {
+		base = 200
+	}
+
+	available = {
+		has_government = authoritarian_democrat
+		has_idea = GER_Carl_Friedrich_Goerdeler_hog_ade
+	}
+	prerequisite = {
+		focus = GER_grand_coalition
+	}
+	mutually_exclusive = {
+		focus = GER_lean_to_reformism
+	}
+	completion_reward = {
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = 0.05
+		}
+		add_political_power = 25
+	}
+}
+
+shared_focus = {
+	id = GER_lean_to_reformism
+	icon = GFX_generic_ideology_social_conservative
+	relative_position_id = GER_grand_coalition
+	x = 1
+	y = 1
+	cost = 3
+
+	ai_will_do = {
+		base = 200
+	}
+
+	available = {
+		has_government = authoritarian_democrat
+		has_idea = GER_Carl_Friedrich_Goerdeler_hog_ade
+	}
+	prerequisite = {
+		focus = GER_grand_coalition
+	}
+	mutually_exclusive = {
+		focus = GER_a_conservative_approach
+	}
+	completion_reward = {
+		add_popularity = {
+			ideology = market_liberal
+			popularity = 0.01
+		}
+		add_popularity = {
+			ideology = social_conservative
+			popularity = 0.04
+		}
+		add_stability = 0.05
+	}
+}
+
+shared_focus = {
+	id = GER_restore_constitution
+	icon = GFX_generic_constitutional_guarantees
+	relative_position_id = GER_grand_coalition
+	x = 0
+	y = 2
+	cost = 5
+
+	ai_will_do = {
+		base = 200
+	}
+
+	available = {
+		has_government = authoritarian_democrat
+		has_idea = GER_Carl_Friedrich_Goerdeler_hog_ade
+	}
+	prerequisite = {
+		focus = GER_a_conservative_approach
+		focus = GER_lean_to_reformism
+	}
+	completion_reward = {
+		unlock_decision_tooltip = GER_restore_the_1920_constitution
+	}
+}
+
+shared_focus = {
+	id = GER_reconstitute_verpo
+	icon = GFX_MAF_secret_police
+	x = 3
+	y = 0
+	cost = 5
+
+	ai_will_do = {
+		base = 200
+	}
+
+	available = {
+		has_government = authoritarian_democrat
+		has_idea = GER_Carl_Friedrich_Goerdeler_hog_ade
+	}
+	completion_reward = {
+		add_command_power = -50
+		unlock_decision_tooltip = GER_rationalise_the_verpo
+	}
+}
+
+shared_focus = {
+	id = GER_dismantle_dne
+	icon = GFX_generic_old_administration
+	relative_position_id = GER_reconstitute_verpo
+	x = 0
+	y = 1
+	cost = 5
+
+	ai_will_do = {
+		base = 200
+	}
+
+	available = {
+		has_government = authoritarian_democrat
+		has_idea = GER_Carl_Friedrich_Goerdeler_hog_ade
+	}
+	prerequisite = {
+		focus = GER_reconstitute_verpo
+	}
+	completion_reward = {
+		hidden_effect = {
+			set_party_name = {
+				ideology = paternal_autocrat
+				name = GER_paternal_autocrat_DKP_party
+				long_name = GER_paternal_autocrat_DKP_party_long
+			}
+		}
+		custom_effect_tooltip = GER_paternal_autocrat_DKP_party_custom_tt
+		add_popularity = {
+			ideology = paternal_autocrat
+			popularity = -0.1
+		}
+		coal_add_pat_aut = yes
+	}
+}
+
+shared_focus = {
+	id = GER_reverse_bredow_oppression
+	icon = GFX_SAF_colonialist_crusade2
+	relative_position_id = GER_reconstitute_verpo
+	x = -1
+	y = 2
+	cost = 5
+
+	ai_will_do = {
+		base = 200
+	}
+
+	available = {
+		has_government = authoritarian_democrat
+		has_idea = GER_Carl_Friedrich_Goerdeler_hog_ade
+	}
+	prerequisite = {
+		focus = GER_reconstitute_verpo
+	}
+	prerequisite = {
+		focus = GER_lean_to_reformism
+	}
+	mutually_exclusive = {
+		focus = GER_anti_socialist_agenda
+	}
+	completion_reward = {
+		unlock_decision_tooltip = GER_lift_anti_socialist_laws
+		unlock_decision_tooltip = GER_nullify_press_law
+	}
+}
+
+shared_focus = {
+	id = GER_anti_socialist_agenda
+	icon = GFX_GER_Anti_Socialist_Laws
+	relative_position_id = GER_reconstitute_verpo
+	x = 1
+	y = 2
+	cost = 5
+
+	ai_will_do = {
+		base = 200
+	}
+
+	available = {
+		has_government = authoritarian_democrat
+		has_idea = GER_Carl_Friedrich_Goerdeler_hog_ade
+	}
+	prerequisite = {
+		focus = GER_reconstitute_verpo
+	}
+	mutually_exclusive = {
+		focus = GER_reverse_bredow_oppression
+	}
+	completion_reward = {
+		unlock_decision_tooltip = GER_implement_anti_socialist_laws
+	}
+}
+
+shared_focus = {
+	id = GER_embrace_voting_reform
+	icon = GFX_generic_elections
+	relative_position_id = GER_grand_coalition
+	x = 1
+	y = 3
+	cost = 10
+
+	ai_will_do = {
+		base = 200
+	}
+
+	available = {
+		has_government = authoritarian_democrat
+		has_idea = GER_Carl_Friedrich_Goerdeler_hog_ade
+	}
+	prerequisite = {
+		focus = GER_restore_constitution
+	}
+	prerequisite = {
+		focus = GER_reverse_bredow_oppression
+		focus = GER_anti_socialist_agenda
+	}
+	completion_reward = {
+		#unlock_decision_tooltip = GER_bundesrat_expansion
+		#unlock_decision_tooltip = GER_abolish_the_three_class_system
+		unlock_decision_tooltip = GER_redraw_constituency_boundaries
+	}
+}
+
+shared_focus = {
+	id = GER_negotiate_with_dne_supporters
+	icon = GFX_GER_take_in_bredowists
+	relative_position_id = GER_reconstitute_verpo
+	x = 0
+	y = 3
+	cost = 5
+
+	ai_will_do = {
+		base = 200
+	}
+
+	available = {
+		has_government = authoritarian_democrat
+		has_idea = GER_Carl_Friedrich_Goerdeler_hog_ade
+	}
+	prerequisite = {
+		focus = GER_dismantle_dne
+	}
+	prerequisite = {
+		focus = GER_reverse_bredow_oppression
+		focus = GER_anti_socialist_agenda
+	}
+	completion_reward = {
+		custom_effect_tooltip = GER_bredowist_negotiations_tooltip
+	}
+}
+
+shared_focus = {
+	id = GER_for_kaiser_and_country
+	icon = GFX_GER_democracy_in_prussia
+	relative_position_id = GER_grand_coalition
+	x = 2
+	y = 4
+	cost = 4
+
+	ai_will_do = {
+		base = 200
+	}
+
+	available = {
+		has_government = authoritarian_democrat
+		has_idea = GER_Carl_Friedrich_Goerdeler_hog_ade
+	}
+	prerequisite = {
+		focus = GER_embrace_voting_reform
+	}
+	prerequisite = {
+		focus = GER_negotiate_with_dne_supporters
+	}
+	completion_reward = {
+		add_stability = 0.2
+	}
+}
+
+shared_focus = {
+	id = GER_1951_election
+	icon = GFX_GER1951Election
+	relative_position_id = GER_grand_coalition
+	x = 2
+	y = 5
+	cost = 1
+
+	ai_will_do = {
+		base = 200
+	}
+
+	available = {
+		always = no
+	}
+	prerequisite = {
+		focus = GER_for_kaiser_and_country
+	}
+	completion_reward = {
+	}
+}
+
+shared_focus = {
+	id = GER_DKP_victory
+	icon = GFX_GER_DkP
+	relative_position_id = GER_1951_election
+	x = -5
+	y = 1
+	cost = 2
+
+	ai_will_do = {
+		base = 200
+	}
+
+	available = {
+		always = no
+	}
+	prerequisite = {
+		focus = GER_1951_election
+	}
+	
+	completion_reward = {
+	}
+}
+
+shared_focus = {
+	id = GER_bismarckian_welfare
+	icon = GFX_GER_bismarckian_welfare
+	relative_position_id = GER_DKP_victory
+	x = -1
+	y = 1
+	cost = 4
+
+	ai_will_do = {
+		base = 200
+	}
+
+	available = {
+		has_government = authoritarian_democrat
+	}
+	prerequisite = {
+		focus = GER_DKP_victory
+	}
+	completion_reward = {
+		add_political_power = 70
+	}
+}
+
+shared_focus = {
+	id = GER_protecting_the_old_and_vulnerable
+	icon = GFX_TEX_uphold_2a
+	relative_position_id = GER_DKP_victory
+	x = -2
+	y = 2
+	cost = 9
+	
+	ai_will_do = {
+		base = 200
+	}
+	
+	available = {
+		has_government = authoritarian_democrat
+	}
+	prerequisite = {
+		focus = GER_bismarckian_welfare
+	}
+	mutually_exclusive = {
+		focus = GER_universal_coverage
+	}
+	select_effect = {
+		set_temp_variable = { GER_active_law = 4 }
+		GER_Start_Law_Process = yes
+	}
+	completion_reward = {
+		custom_effect_tooltip = GER_passing_law_trough_reichstag_bundesrat_tt
+		effect_tooltip = {
+			GER_law_4_effect = yes
+		}
+	}
+}
+
+shared_focus = {
+	id = GER_universal_coverage
+	icon = GFX_generic_healthcare
+	relative_position_id = GER_DKP_victory
+	x = 0
+	y = 2
+	cost = 9
+
+	ai_will_do = {
+		base = 200
+	}
+
+	available = {
+		has_government = authoritarian_democrat
+	}
+	prerequisite = {
+		focus = GER_bismarckian_welfare
+	}
+	mutually_exclusive = {
+		focus = GER_protecting_the_old_and_vulnerable
+	}
+	select_effect = {
+		set_temp_variable = { GER_active_law = 2 }
+		GER_Start_Law_Process = yes
+	}
+	completion_reward = {
+		custom_effect_tooltip = GER_passing_law_trough_reichstag_bundesrat_tt
+		effect_tooltip = {
+			GER_law_2_effect = yes
+		}
+	}
+}
+
+shared_focus = {
+	id = GER_enabling_our_youth
+	icon = GFX_KTG_Educate_natives
+	relative_position_id = GER_DKP_victory
+	x = -1
+	y = 3
+	cost = 9
+
+	ai_will_do = {
+		base = 200
+	}
+
+	available = {
+		has_government = authoritarian_democrat
+	}
+	prerequisite = {
+		focus = GER_universal_coverage
+		focus = GER_protecting_the_old_and_vulnerable
+	}
+	select_effect = {
+		set_temp_variable = { GER_active_law = 3 }
+		GER_Start_Law_Process = yes
+	}
+	completion_reward = {
+		custom_effect_tooltip = GER_passing_law_trough_reichstag_bundesrat_tt
+		effect_tooltip = {
+			GER_law_3_effect = yes
+		}
+		add_research_slot = 1
+	}
+}
+
+shared_focus = {
+	id = GER_das_staatskapitalistsche_modell
+	icon = GFX_FRA_CapitalistMeasures
+	relative_position_id = GER_DKP_victory
+	x = 1
+	y = 1
+	cost = 5
+
+	ai_will_do = {
+		base = 200
+	}
+
+	available = {
+		has_government = authoritarian_democrat
+		has_idea = GER_Johannes_Popitz_em_pau
+	}
+	prerequisite = {
+		focus = GER_DKP_victory
+	}
+	mutually_exclusive = {
+		focus = GER_continue_the_schachtplan
+	}
+	completion_reward = {
+		add_ideas = GER_1951_staatkapitalistsche
+	}
+}
+
+shared_focus = {
+	id = GER_the_military_industrial_complex
+	icon = GFX_GER_factories
+	relative_position_id = GER_DKP_victory
+	x = 1
+	y = 3
+	cost = 5
+
+	ai_will_do = {
+		base = 200
+	}
+
+	prerequisite = {
+		focus = GER_das_staatskapitalistsche_modell
+	}
+	completion_reward = {
+		swap_ideas = {
+			remove_idea = GER_1951_staatkapitalistsche
+			add_idea = GER_1951_staatkapitalistsche_mic
+		}
+		GER_increase_general_staff_support = yes
+		57 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = arms_factory
+				level = 1
+				instant_build = yes
+			}
+		}
+		65 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = arms_factory
+				level = 1
+				instant_build = yes
+			}
+		}
+		67 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = arms_factory
+				level = 1
+				instant_build = yes
+			}
+		}
+		68 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = arms_factory
+				level = 1
+				instant_build = yes
+			}
+		}
+		824 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = arms_factory
+				level = 1
+				instant_build = yes
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = GER_subsidies_for_key_spending
+	icon = GFX_generic_bag_of_money
+	relative_position_id = GER_1951_election
+	x = -3
+	y = 3
+	cost = 9
+
+	ai_will_do = {
+		base = 200
+	}
+
+	prerequisite = {
+		focus = GER_das_staatskapitalistsche_modell
+		focus = GER_continue_the_schachtplan
+		focus = GER_die_soziale_marktwirtschaft
+	}
+	select_effect = {
+		set_temp_variable = { GER_active_law = 5 }
+		GER_Start_Law_Process = yes
+	}
+	completion_reward = {
+		custom_effect_tooltip = GER_passing_law_trough_reichstag_bundesrat_tt
+		effect_tooltip = {
+			GER_law_5_effect = yes
+		}
+	}
+}
+
+shared_focus = {
+	id = GER_dealing_with_the_wartime_debt
+	icon = GFX_generic_seize_money
+	relative_position_id = GER_1951_election
+	x = -2
+	y = 4
+	cost = 5
+
+	ai_will_do = {
+		base = 200
+	}
+
+	available = {
+		has_completed_focus = GER_the_second_ruhr_boom
+	}
+	prerequisite = {
+		focus = GER_das_staatskapitalistsche_modell
+		focus = GER_continue_the_schachtplan
+		focus = GER_die_soziale_marktwirtschaft
+	}
+	completion_reward = {
+		add_timed_idea = {
+			idea = GER_1951_austerity
+			days = 365
+		}
+		GER_decrease_general_staff_support = yes
+		hidden_effect = {
+			country_event = {
+				id = krg_ger.399
+				days = 365
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = GER_expand_the_reichsautobahn
+	icon = GFX_KRG_generic_highway
+	relative_position_id = GER_1951_election
+	x = 2
+	y = 3
+	cost = 9
+
+	ai_will_do = {
+		base = 200
+	}
+
+	prerequisite = {
+		focus = GER_das_staatskapitalistsche_modell
+		focus = GER_continue_the_schachtplan
+		focus = GER_die_soziale_marktwirtschaft
+	}
+	select_effect = {
+		set_temp_variable = { GER_active_law = 6 }
+		GER_Start_Law_Process = yes
+	}
+	completion_reward = {
+		custom_effect_tooltip = GER_passing_law_trough_reichstag_bundesrat_tt
+		effect_tooltip = {
+			GER_law_6_effect = yes
+		}
+	}
+}
+
+shared_focus = {
+	id = GER_zentrum_victory
+	icon = GFX_GER_Zentrum
+	relative_position_id = GER_1951_election
+	x = 5
+	y = 1
+	cost = 2
+
+	ai_will_do = {
+		base = 200
+	}
+
+	available = {
+		always = no
+	}
+	prerequisite = {
+		focus = GER_1951_election
+	}
+	completion_reward = {
+	}
+}
+
+shared_focus = {
+	id = GER_continue_the_schachtplan
+	icon = GFX_generic_ideology_market_liberal
+	relative_position_id = GER_zentrum_victory
+	x = -1
+	y = 1
+	cost = 5
+
+	ai_will_do = {
+		base = 200
+	}
+
+	prerequisite = {
+		focus = GER_zentrum_victory
+		focus = GER_DKP_victory
+	}
+	mutually_exclusive = {
+		focus = GER_das_staatskapitalistsche_modell
+	}
+	mutually_exclusive = {
+		focus = GER_die_soziale_marktwirtschaft
+	}
+	completion_reward = {
+		remove_ideas_with_trait = economy_minister
+		add_ideas = GER_Hjalmar_Schacht_em_mli		#Independent
+		add_ideas = GER_1951_schachtplan
+	}
+}
+
+shared_focus = {
+	id = GER_the_schuldenbremse_amendment
+	icon = GFX_generic_media_controls
+	relative_position_id = GER_zentrum_victory
+	x = -1
+	y = 3
+	cost = 5
+
+	ai_will_do = {
+		base = 200
+	}
+
+	prerequisite = {
+		focus = GER_continue_the_schachtplan
+	}
+	completion_reward = {
+		swap_ideas = {
+			remove_idea = GER_1951_schachtplan
+			add_idea = GER_1951_schachtplan_schuldenbremse
+		}
+	}
+}
+
+shared_focus = {
+	id = GER_form_the_national_christian_union
+	icon = GFX_generic_unions
+	relative_position_id = GER_zentrum_victory
+	x = 0
+	y = 2
+	cost = 5
+
+	ai_will_do = {
+		base = 200
+	}
+
+	available = {
+		has_government = social_conservative
+	}
+	prerequisite = {
+		focus = GER_zentrum_victory
+	}
+	completion_reward = {
+		add_ideas = GER_national_christian_union
+	}
+}
+
+shared_focus = {
+	id = GER_die_soziale_marktwirtschaft
+	icon = GFX_generic_financial_markets
+	relative_position_id = GER_zentrum_victory
+	x = 1
+	y = 1
+	cost = 5
+
+	ai_will_do = {
+		base = 200
+	}
+
+	available = {
+		has_government = social_conservative
+		has_idea = GER_Ludwig_Erhard_em_sco
+	}
+	prerequisite = {
+		focus = GER_zentrum_victory
+	}
+	mutually_exclusive = {
+		focus = GER_continue_the_schachtplan
+	}
+	completion_reward = {
+		add_ideas = GER_1951_social_market_economy
+	}
+}
+
+shared_focus = {
+	id = GER_die_sozialversicherungsgesetz
+	icon = GFX_generic_social_housing
+	relative_position_id = GER_zentrum_victory
+	x = 1
+	y = 3
+	cost = 9
+
+	ai_will_do = {
+		base = 200
+	}
+
+	available = {
+		has_government = social_conservative
+		NOT = { has_country_flag = GER_voting_on_law }
+	}
+	prerequisite = {
+		focus = GER_die_soziale_marktwirtschaft
+	}
+	select_effect = {
+		set_temp_variable = { GER_active_law = 1 }
+		GER_Start_Law_Process = yes
+	}
+	completion_reward = {
+		custom_effect_tooltip = GER_passing_law_trough_reichstag_bundesrat_tt
+		effect_tooltip = {
+			GER_law_1_effect = yes
+		}
+	}
+}
+
+shared_focus = {
+	id = GER_invest_in_the_future
+	icon = GFX_PAN_Create_the_Universidad_de_Panama
+	relative_position_id = GER_zentrum_victory
+	x = 0
+	y = 4
+	cost = 9
+
+	ai_will_do = {
+		base = 200
+	}
+
+	available = {
+		has_government = social_conservative
+	}
+	prerequisite = {
+		focus = GER_the_schuldenbremse_amendment
+		focus = GER_form_the_national_christian_union
+		focus = GER_die_sozialversicherungsgesetz
+	}
+	select_effect = {
+		set_temp_variable = { GER_active_law = 3 }
+		GER_Start_Law_Process = yes
+	}
+	completion_reward = {
+		custom_effect_tooltip = GER_passing_law_trough_reichstag_bundesrat_tt
+		effect_tooltip = {
+			GER_law_3_effect = yes
+		}
+		add_research_slot = 1
+	}
+}
+
+shared_focus = {
+	id = GER_national_railway_company
+	icon = GFX_generic_railroad_2
+	relative_position_id = GER_zentrum_victory
+	x = 2
+	y = 2
+	cost = 5
+
+	ai_will_do = {
+		base = 200
+	}
+
+	available = {
+		has_government = social_conservative
+	}
+	prerequisite = {
+		focus = GER_die_soziale_marktwirtschaft
+	}
+	completion_reward = {
+		build_railway = {
+			level = 5
+			build_only_on_allied = yes
+			fallback = yes
+			start_province = 6521
+			target_province = 514
+			path = {
+				6521
+				3499
+				6441
+				514
+			}
+		}
+		build_railway = {
+			level = 4
+			build_only_on_allied = yes
+			fallback = yes
+			start_province = 3499
+			target_province = 587
+			path = {
+				3499
+				9456
+				3522
+				9375
+				526
+				6377
+				11493
+				6513
+				564
+				11533
+				9443
+				495
+				6469
+				587
+			}
+		}
+		build_railway = {
+			level = 4
+			build_only_on_allied = yes
+			fallback = yes
+			start_province = 6521
+			target_province = 9347
+			path = {
+				6521
+				375
+				11219
+				9294
+				9320
+				9347
+			}
+		}
+	}
+}
+
+#shared_focus = {
+#	id = GER_female_sufferage
+#	icon = GFX_ITA_Women
+#	relative_position_id = GER_1951_election
+#	x = 7
+#	y = 1
+#	cost = 5
+#
+#	ai_will_do = {
+#		base = 200
+#	}
+#
+#	available = {
+#		has_country_flag = women_can_vote
+#	}
+#	prerequisite = {
+#		focus = GER_1951_election
+#	}
+#	completion_reward = {
+#		add_stability = 0.15
+#		add_popularity = {
+#			ideology = authoritarian_democrat
+#			popularity = 0.05
+#		}
+#		add_popularity = {
+#			ideology = social_conservative
+#			popularity = 0.1
+#		}
+#	}
+#}
+
+### redundant given KR Rework
+#shared_focus = {
+#	id = GER_introduce_the_reichstag_expansion_act
+#	icon = GFX_TEX_german_bureaucracy
+#	relative_position_id = GER_zentrum_victory
+#	x = 3
+#	y = 1
+#	cost = 5
+#
+#	available = { 
+#		has_government = social_conservative
+#	}
+#
+#	prerequisite = { focus = GER_zentrum_victory }
+#
+#	completion_reward = {
+#		
+#	}
+#}
+#shared_focus = {
+#	id = GER_update_constituency_boundaries
+#	icon = GFX_generic_media_controls
+#	relative_position_id = GER_zentrum_victory
+#	x = 3
+#	y = 3
+#	cost = 5
+#
+#	available = { 
+#		has_government = social_conservative
+#	}
+#
+#	prerequisite = { focus = GER_introduce_the_reichstag_expansion_act }
+#
+#	completion_reward = {
+#		
+#	}
+#}
+### Industry ###
+shared_focus = {
+	id = GER_begin_the_reconstruction
+	icon = GFX_GER_begin_reconstruction
+	x = 13
+	y = 0
+
+	cost = 5
+
+	ai_will_do = {
+		base = 250
+	}
+
+	cancelable = no
+	completion_reward = {
+		add_ideas = GER_begin_the_reconstruction
+	}
+}
+
+shared_focus = {
+	id = GER_resume_the_sozialwohnungsbauprogramm
+	icon = GFX_generic_social_housing
+	relative_position_id = GER_begin_the_reconstruction
+	x = -3
+	y = 1
+	cost = 2
+
+	ai_will_do = {
+		base = 250
+	}
+
+	prerequisite = {
+		focus = GER_begin_the_reconstruction
+	}
+	completion_reward = {
+		add_ideas = GER_resume_the_sozialwohnungsbauprogramm
+	}
+}
+
+shared_focus = {
+	id = GER_new_industrial_towns
+	icon = GFX_generic_industrial_towns
+	relative_position_id = GER_begin_the_reconstruction
+	x = -1
+	y = 1
+	cost = 10
+	
+	ai_will_do = {
+		base = 250
+	}
+
+	prerequisite = {
+		focus = GER_begin_the_reconstruction
+	}
+	mutually_exclusive = {
+		focus = GER_urban_revitalization
+	}
+	completion_reward = {
+		random_owned_state = {
+			limit = {
+				OR = {
+					has_state_category = three
+					has_state_category = four
+					has_state_category = five
+				}
+				is_core_of = ROOT
+			}
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = industrial_complex
+				level = 2
+				instant_build = yes
+			}
+		}
+		random_owned_state = {
+			limit = {
+				OR = {
+					has_state_category = three
+					has_state_category = four
+					has_state_category = five
+				}
+				is_core_of = ROOT
+			}
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = industrial_complex
+				level = 2
+				instant_build = yes
+			}
+		}
+		random_owned_state = {
+			limit = {
+				OR = {
+					has_state_category = three
+					has_state_category = four
+					has_state_category = five
+				}
+				is_core_of = ROOT
+			}
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = industrial_complex
+				level = 2
+				instant_build = yes
+			}
+		}
+		GER_move_up_scars_of_the_kommunenbund = yes
+	}
+}
+
+shared_focus = {
+	id = GER_urban_revitalization
+	icon = GFX_goal_generic_construct_civilian
+	relative_position_id = GER_begin_the_reconstruction
+	x = 1
+	y = 1
+	cost = 10
+	
+	ai_will_do = {
+		base = 250
+	}
+	
+	prerequisite = {
+		focus = GER_begin_the_reconstruction
+	}
+	mutually_exclusive = {
+		focus = GER_new_industrial_towns
+	}
+	completion_reward = {
+		random_owned_state = {
+			limit = {
+				OR = {
+					has_state_category = six
+					has_state_category = seven
+					has_state_category = eight
+					has_state_category = nine
+				}
+				is_core_of = ROOT
+			}
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = industrial_complex
+				level = 2
+				instant_build = yes
+			}
+		}
+		random_owned_state = {
+			limit = {
+				OR = {
+					has_state_category = six
+					has_state_category = seven
+					has_state_category = eight
+					has_state_category = nine
+				}
+				is_core_of = ROOT
+			}
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = industrial_complex
+				level = 2
+				instant_build = yes
+			}
+		}
+		random_owned_state = {
+			limit = {
+				OR = {
+					has_state_category = six
+					has_state_category = seven
+					has_state_category = eight
+					has_state_category = nine
+				}
+				is_core_of = ROOT
+			}
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = industrial_complex
+				level = 2
+				instant_build = yes
+			}
+		}
+		GER_move_up_scars_of_the_kommunenbund = yes
+	}
+}
+
+shared_focus = {
+	id = GER_soldiers_to_workers
+	icon = GFX_generic_pickaxe
+	relative_position_id = GER_begin_the_reconstruction
+	x = 2
+	y = 2
+	cost = 4
+	
+	ai_will_do = {
+		base = 250
+	}
+	
+	prerequisite = {
+		focus = GER_urban_revitalization
+		focus = GER_new_industrial_towns
+	}
+	prerequisite = {
+		focus = GER_veteran_benefits
+	}
+	completion_reward = {
+		GER_reduce_endloser_krieg = yes
+	}
+}
+
+shared_focus = {
+	id = GER_brick_by_brick
+	icon = GFX_generic_bricks
+	relative_position_id = GER_begin_the_reconstruction
+	x = -2
+	y = 2
+	cost = 5
+	
+	ai_will_do = {
+		base = 250
+	}
+
+	prerequisite = {
+		focus = GER_urban_revitalization
+		focus = GER_new_industrial_towns
+	}
+	prerequisite = {
+		focus = GER_resume_the_sozialwohnungsbauprogramm
+	}
+	completion_reward = {
+		GER_move_up_scars_of_the_kommunenbund = yes
+		swap_ideas = {
+			remove_idea = GER_begin_the_reconstruction
+			add_idea = GER_begin_the_reconstruction_2
+		}
+	}
+}
+
+shared_focus = {
+	id = GER_industrial_subsidies
+	icon = GFX_generic_industrial_legislature
+	relative_position_id = GER_begin_the_reconstruction
+	x = -1
+	y = 3
+	cost = 5
+	
+	ai_will_do = {
+		base = 250
+	}
+
+	prerequisite = {
+		focus = GER_soldiers_to_workers
+		focus = GER_brick_by_brick
+	}
+	completion_reward = {
+		add_timed_idea = {
+			idea = GER_industrial_subsidies
+			days = 365
+		}
+	}
+}
+
+shared_focus = {
+	id = GER_tax_breaks
+	icon = GFX_generic_price_control
+	relative_position_id = GER_begin_the_reconstruction
+	x = 1
+	y = 3
+	cost = 9
+	
+	ai_will_do = {
+		base = 250
+	}
+
+	select_effect = {
+		set_temp_variable = { GER_active_law = 9 }
+		GER_Start_Law_Process = yes
+	}
+	prerequisite = {
+		focus = GER_soldiers_to_workers
+		focus = GER_brick_by_brick
+	}
+	completion_reward = {
+		custom_effect_tooltip = GER_passing_law_trough_reichstag_bundesrat_tt
+		effect_tooltip = {
+			GER_law_9_effect = yes
+		}
+		GER_move_up_scars_of_the_kommunenbund = yes
+		64 = {
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = industrial_complex
+				level = 2
+				instant_build = yes
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = GER_extensive_research_grants
+	icon = GFX_generic_research_grant
+	relative_position_id = GER_begin_the_reconstruction
+	x = 0
+	y = 4
+	cost = 7
+	
+	ai_will_do = {
+		base = 250
+	}
+
+	prerequisite = {
+		focus = GER_industrial_subsidies
+	}
+	prerequisite = {
+		focus = GER_tax_breaks
+	}
+	completion_reward = {
+		add_research_slot = 1
+		add_ideas = GER_extensive_research_grants
+	}
+}
+
+shared_focus = {
+	id = GER_cooperation_with_krupp
+	icon = GFX_GER_krupp
+	relative_position_id = GER_begin_the_reconstruction
+	x = 2
+	y = 4
+	cost = 4
+
+	ai_will_do = {
+		base = 250
+	}
+	
+	prerequisite = {
+		focus = GER_industrial_subsidies
+	}
+	prerequisite = {
+		focus = GER_tax_breaks
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus GER_cooperation_with_krupp"
+		add_ideas = GER_cooperation_with_krupp
+		57 = {
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = arms_factory
+				level = 2
+				instant_build = yes
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = GER_ruckkehrprogramm
+	icon = GFX_GER_rhine_population
+	relative_position_id = GER_begin_the_reconstruction
+	x = -4
+	y = 2
+	cost = 3
+
+	ai_will_do = {
+		base = 250
+	}
+	
+	prerequisite = {
+		focus = GER_resume_the_sozialwohnungsbauprogramm
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus GER_ruckkehrprogramm"
+		swap_ideas = {
+			remove_idea = GER_resume_the_sozialwohnungsbauprogramm
+			add_idea = GER_resume_the_sozialwohnungsbauprogramm_2
+		}
+		unlock_decision_category_tooltip = GER_Ruckkehrprogram
+	}
+}
+
+shared_focus = {
+	id = GER_modellstadt
+	icon = GFX_generic_railroad
+	relative_position_id = GER_begin_the_reconstruction
+	x = -3
+	y = 3
+	cost = 5
+
+	ai_will_do = {
+		base = 250
+	}
+	
+	prerequisite = {
+		focus = GER_ruckkehrprogramm
+	}
+	prerequisite = {
+		focus = GER_brick_by_brick
+	}
+	completion_reward = {
+		8 = {
+			add_building_construction = {
+				type = infrastructure
+				level = 2
+				instant_build = yes
+			}
+		}
+		28 = {
+			add_building_construction = {
+				type = infrastructure
+				level = 2
+				instant_build = yes
+			}
+		}
+		42 = {
+			add_building_construction = {
+				type = infrastructure
+				level = 2
+				instant_build = yes
+			}
+		}
+		804 = {
+			add_building_construction = {
+				type = infrastructure
+				level = 2
+				instant_build = yes
+			}
+		}
+		51 = {
+			add_building_construction = {
+				type = infrastructure
+				level = 2
+				instant_build = yes
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = GER_complete_reconstruction
+	icon = GFX_GER_finish_reconstruction
+	relative_position_id = GER_begin_the_reconstruction
+	x = -2
+	y = 4
+	cost = 8
+
+	ai_will_do = {
+		base = 500
+	}
+
+	prerequisite = {
+		focus = GER_modellstadt
+	}
+	prerequisite = {
+		focus = GER_industrial_subsidies
+	}
+	prerequisite = {
+		focus = GER_tax_breaks
+	}
+	completion_reward = {
+		GER_move_up_scars_of_the_kommunenbund = yes
+		remove_ideas = GER_begin_the_reconstruction_2
+		add_stability = 0.1
+	}
+}
+
+shared_focus = {
+	id = GER_the_second_ruhr_boom
+	icon = GFX_GER_ruhr_boom
+	relative_position_id = GER_begin_the_reconstruction
+	x = -2
+	y = 5
+	cost = 15
+
+	ai_will_do = {
+		base = 1000
+	}
+
+	available = {
+		has_stability > 0.9
+		has_country_flag = GER_Ruckkehrprogram_complete
+	}
+	prerequisite = {
+		focus = GER_extensive_research_grants
+	}
+	prerequisite = {
+		focus = GER_cooperation_with_krupp
+	}
+	prerequisite = {
+		focus = GER_complete_reconstruction
+	}
+	completion_reward = {
+		57 = {
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = industrial_complex
+				level = 2
+				instant_build = yes
+			}
+		}
+		824 = {
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = industrial_complex
+				level = 2
+				instant_build = yes
+			}
+		}
+		804 = {
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = industrial_complex
+				level = 2
+				instant_build = yes
+			}
+		}
+		51 = {
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = industrial_complex
+				level = 2
+				instant_build = yes
+			}
+		}
+		55 = {
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = industrial_complex
+				level = 2
+				instant_build = yes
+			}
+		}
+		66 = {
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = industrial_complex
+				level = 2
+				instant_build = yes
+			}
+		}
+		8 = {
+			move_up_state_category = yes
+		}
+		42 = {
+			move_up_state_category = yes
+		}
+		62 = {
+			move_up_state_category = yes
+		}
+		68 = {
+			move_up_state_category = yes
+		}
+		821 = {
+			move_up_state_category = yes
+		}
+		every_owned_state = {
+			limit = {
+				OR = {
+					has_state_category = twelve
+					has_state_category = eleven
+					has_state_category = ten
+				}
+				is_core_of = ROOT
+			}
+			add_dynamic_modifier = {
+				modifier = GER_2nd_ruhr_boom
+			}
+		}
+		add_ideas = GER_the_second_ruhr_boom_idea
+		unlock_decision_category_tooltip = GER_the_second_ruhr_boom
+		unlock_decision_category_tooltip = GER_rhine_donau_canal_cat
+		country_event = {
+			id = krg_ger.298
+		}
+		hidden_effect = {
+			country_event = {
+				id = krg_ger.299
+				days = 3650
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = GER_bayer_and_basf
+	icon = GFX_generic_Basic_Oil
+	x = -4
+	y = 6
+	relative_position_id = GER_begin_the_reconstruction
+	cost = 7
+
+	ai_will_do = {
+		base = 150
+	}
+	
+	prerequisite = {
+		focus = GER_the_second_ruhr_boom
+	}
+	completion_reward = {
+		57 = {
+			add_extra_state_shared_building_slots = 4
+			add_building_construction = {
+				type = synthetic_refinery
+				level = 4
+				instant_build = yes
+			}
+		}
+		42 = {
+			add_extra_state_shared_building_slots = 4
+			add_building_construction = {
+				type = synthetic_refinery
+				level = 4
+				instant_build = yes
+			}
+		}
+		824 = {
+			add_extra_state_shared_building_slots = 4
+			add_building_construction = {
+				type = synthetic_refinery
+				level = 4
+				instant_build = yes
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = GER_bridge_east_west
+	icon = GFX_generic_railroad_2
+	x = 0
+	y = 6
+	relative_position_id = GER_begin_the_reconstruction
+	cost = 4
+
+	ai_will_do = {
+		base = 150
+	}
+
+	available = {
+		has_completed_focus = GER_announce_warsaw_plan
+	}
+	prerequisite = {
+		focus = GER_the_second_ruhr_boom
+	}
+	completion_reward = {
+		68 = {
+			move_up_state_category = yes
+		}
+		86 = {
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = industrial_complex
+				level = 2
+				instant_build = yes
+			}
+			move_up_state_category = yes
+		}
+		unlock_decision_category_tooltip = GER_bridging_east_west_cat
+		build_railway = {
+			level = 4
+			build_only_on_allied = yes
+			fallback = yes
+			start_province = 6521
+			target_province = 3295
+			path = {
+				6521
+				9428
+				9496
+				3473
+				11478
+				3532
+				6558
+				388
+				11232
+				279
+				3295
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = GER_silesian_epicenter
+	icon = GFX_generic_coal_mining
+	x = 1
+	y = 7
+	relative_position_id = GER_begin_the_reconstruction
+	cost = 5
+
+	ai_will_do = {
+		base = 150
+	}
+	
+	prerequisite = {
+		focus = GER_bridge_east_west
+	}
+	completion_reward = {
+		unlock_decision_category_tooltip = GER_upper_silesian_coal_basin_cat
+		67 = {
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = industrial_complex
+				level = 2
+				instant_build = yes
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = GER_hydrocarbon_exploration
+	icon = GFX_oil_surveys
+	x = -1
+	y = 7
+	relative_position_id = GER_begin_the_reconstruction
+	cost = 2
+
+	ai_will_do = {
+		base = 150
+	}
+	
+	prerequisite = {
+		focus = GER_bridge_east_west
+	}
+	completion_reward = {
+		unlock_decision_category_tooltip = GER_drilling_hydrocarbons_cat
+	}
+}
+
+shared_focus = {
+	id = GER_wintershall_ag
+	icon = GFX_goal_generic_oil_refinery
+	x = -2
+	y = 8
+	relative_position_id = GER_begin_the_reconstruction
+	cost = 4
+
+	ai_will_do = {
+		base = 150
+	}
+	
+	prerequisite = {
+		focus = GER_hydrocarbon_exploration
+		focus = GER_bayer_and_basf
+	}
+	completion_reward = {
+		add_ideas = GER_wintershall
+	}
+}
+
+shared_focus = {
+	id = GER_veteran_benefits
+	icon = GFX_generic_veterans_benefits
+	x = 3
+	y = 1
+	relative_position_id = GER_begin_the_reconstruction
+	cost = 2
+
+	ai_will_do = {
+		base = 250
+	}
+	
+	prerequisite = {
+		focus = GER_begin_the_reconstruction
+	}
+	completion_reward = {
+		add_timed_idea = {
+			idea = GER_veteran_assistance_bill_payments
+			days = 2000
+		}
+		GER_reduce_endloser_krieg = yes
+	}
+}
+
+shared_focus = {
+	id = GER_honour_our_heroes
+	icon = GFX_GER_honour_the_vets
+	relative_position_id = GER_veteran_benefits
+	x = 0
+	y = 2
+	cost = 4
+
+	ai_will_do = {
+		base = 150
+	}
+	
+	prerequisite = {
+		focus = GER_veteran_benefits
+	}
+	completion_reward = {
+		GER_reduce_endloser_krieg = yes
+	}
+}
+
+shared_focus = {
+	id = GER_continue_demobilisation
+	icon = GFX_generic_industry_reallocation
+	relative_position_id = GER_begin_the_reconstruction
+	x = 0
+	y = 2
+	cost = 5
+	
+	ai_will_do = {
+		base = 250
+	}
+
+	prerequisite = {
+		focus = GER_begin_the_reconstruction
+	}
+	completion_reward = {
+		64 = {
+			remove_building = {
+				type = arms_factory
+				level = 4
+			}
+			add_building_construction = {
+				type = industrial_complex
+				level = 4
+				instant_build = yes
+			}
+		}
+		65 = {
+			remove_building = {
+				type = arms_factory
+				level = 2
+			}
+			add_building_construction = {
+				type = industrial_complex
+				level = 2
+				instant_build = yes
+			}
+		}
+		67 = {
+			remove_building = {
+				type = arms_factory
+				level = 2
+			}
+			add_building_construction = {
+				type = industrial_complex
+				level = 2
+				instant_build = yes
+			}
+		}
+		57 = {
+			remove_building = {
+				type = arms_factory
+				level = 2
+			}
+			add_building_construction = {
+				type = industrial_complex
+				level = 2
+				instant_build = yes
+			}
+		}
+		GER_decrease_general_staff_support = yes
+		if = {
+			limit = {
+				has_idea = KRG_total_mob
+			}
+			swap_ideas = {
+				remove_idea = KRG_total_mob
+				add_idea = KRG_civilian_economy
+			}
+		}
+		else_if = {
+			limit = {
+				has_idea = KRG_war_economy
+			}
+			swap_ideas = {
+				remove_idea = KRG_war_economy
+				add_idea = KRG_civilian_economy
+			}
+		}
+		else_if = {
+			limit = {
+				has_idea = KRG_partial_mob
+			}
+			swap_ideas = {
+				remove_idea = KRG_partial_mob
+				add_idea = KRG_civilian_economy
+			}
+		}
+		else_if = {
+			limit = {
+				has_idea = KRG_early_mob
+			}
+			swap_ideas = {
+				remove_idea = KRG_early_mob
+				add_idea = KRG_civilian_economy
+			}
+		}
+		else = {
+			add_stability = 0.05
+		}
+		hidden_effect = {
+			set_country_flag = GER_demobilized_flag
+		}
+	}
+}
+
+shared_focus = {
+	id = GER_expand_the_victory_column
+	icon = GFX_GER_victory_column
+	relative_position_id = GER_veteran_benefits
+	x = 1
+	y = 1
+	cost = 2
+
+	ai_will_do = {
+		base = 150
+	}
+	
+	prerequisite = {
+		focus = GER_veteran_benefits
+	}
+	completion_reward = {
+		add_stability = 0.05
+		add_war_support = 0.05
+		add_political_power = 25
+	}
+}
+
+shared_focus = {
+	id = GER_friedrich_krupp_germaniawerft
+	icon = GFX_goal_generic_navy_battleship
+	relative_position_id = GER_begin_the_reconstruction
+	x = 4
+	y = 5
+	cost = 10
+
+	ai_will_do = {
+		base = 100
+	}
+	
+	prerequisite = {
+		focus = GER_repair_wilhelmshaven
+	}
+	prerequisite = {
+		focus = GER_cooperation_with_krupp
+	}
+	completion_reward = {
+		add_ideas = GER_germaniawerft
+		58 = {
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = dockyard
+				level = 2
+				instant_build = yes
+			}
+		}
+		823 = {
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = dockyard
+				level = 2
+				instant_build = yes
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = GER_expand_kaiser_wilhelm_kanal
+	icon = GFX_generic_battleship
+	relative_position_id = GER_friedrich_krupp_germaniawerft
+	x = -1
+	y = 1
+	cost = 5
+
+	ai_will_do = {
+		base = 100
+	}
+	
+	prerequisite = {
+		focus = GER_friedrich_krupp_germaniawerft
+	}
+	completion_reward = {
+		unlock_decision_category_tooltip = GER_kiel_canal_cat
+	}
+}
+
+shared_focus = {
+	id = GER_dealing_with_the_dreadnought
+	icon = GFX_generic_navy_hat_ships
+	x = 22
+	y = 0
+	cost = 5
+	available = {
+		always = no
+	}
+	completion_reward = {
+		navy_experience = 50
+	}
+}
+
+shared_focus = {
+	id = GER_the_next_generation_kaiserliche_marine
+	icon = GFX_goal_generic_navy_doctrines_tactics
+	relative_position_id = GER_dealing_with_the_dreadnought
+	x = 0
+	y = 1
+	cost = 5
+
+	ai_will_do = {
+		base = 100
+	}
+	
+	prerequisite = {
+		focus = GER_dealing_with_the_dreadnought
+	}
+	completion_reward = {
+		swap_ideas = {
+			remove_idea = GER_legacy_of_the_deadnought_race_1
+			add_idea = GER_legacy_of_the_deadnought_race_2
+		}
+		set_country_flag = GER_kaiserliche_marine
+		log = "[GetDateText]: [Root.GetName]: Focus GER_the_next_generation_kaiserliche_marine"
+	}
+}
+
+shared_focus = {
+	id = GER_repair_wilhelmshaven
+	icon = GFX_goal_generic_construct_naval_dockyard
+	relative_position_id = GER_dealing_with_the_dreadnought
+	x = -4
+	y = 3
+	cost = 5
+
+	ai_will_do = {
+		base = 100
+	}
+
+	available = {
+		has_completed_focus = GER_the_next_generation_kaiserliche_marine
+	}
+	completion_reward = {
+		56 = {
+			add_extra_state_shared_building_slots = 4
+			add_building_construction = {
+				type = dockyard
+				level = 4
+				instant_build = yes
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = GER_beneath_the_waves
+	icon = GFX_goal_generic_navy_submarine
+	relative_position_id = GER_dealing_with_the_dreadnought
+	x = -1
+	y = 2
+	cost = 5
+
+	ai_will_do = {
+		base = 75
+	}
+	
+	prerequisite = {
+		focus = GER_the_next_generation_kaiserliche_marine
+	}
+	mutually_exclusive = {
+		focus = GER_above_the_seas
+	}
+	completion_reward = {
+		add_doctrine_cost_reduction = {
+			cost_reduction = 0.5
+			uses = 2
+			category = naval_doctrine
+		}
+		swap_ideas = {
+			remove_idea = GER_legacy_of_the_deadnought_race_2
+			add_idea = GER_legacy_of_the_deadnought_race_3
+		}
+	}
+}
+
+shared_focus = {
+	id = GER_above_the_seas
+	icon = GFX_generic_ship_destroyer
+	relative_position_id = GER_dealing_with_the_dreadnought
+	x = 1
+	y = 2
+	cost = 5
+
+	ai_will_do = {
+		base = 75
+	}
+	
+	prerequisite = {
+		focus = GER_the_next_generation_kaiserliche_marine
+	}
+	mutually_exclusive = {
+		focus = GER_beneath_the_waves
+	}
+	completion_reward = {
+		add_doctrine_cost_reduction = {
+			cost_reduction = 0.5
+			uses = 2
+			category = naval_doctrine
+		}
+		swap_ideas = {
+			remove_idea = GER_legacy_of_the_deadnought_race_2
+			add_idea = GER_legacy_of_the_deadnought_race_3
+		}
+	}
+}
+
+shared_focus = {
+	id = GER_a_silent_stalker
+	icon = GFX_goal_generic_navy_anti_submarine
+	relative_position_id = GER_dealing_with_the_dreadnought
+	x = -2
+	y = 3
+	cost = 5
+
+	ai_will_do = {
+		base = 75
+	}
+	
+	prerequisite = {
+		focus = GER_beneath_the_waves
+	}
+	completion_reward = {
+		add_tech_bonus = {
+			bonus = 1
+			uses = 1
+			category = ss_tech
+		}
+	}
+}
+
+shared_focus = {
+	id = GER_naval_rocketry
+	icon = GFX_GER_Peenemunde
+	relative_position_id = GER_dealing_with_the_dreadnought
+	x = 0
+	y = 3
+	cost = 5
+
+	ai_will_do = {
+		base = 75
+	}
+	
+	prerequisite = {
+		focus = GER_the_next_generation_kaiserliche_marine
+	}
+	completion_reward = {
+		add_tech_bonus = {
+			uses = 1
+			bonus = 0.5
+			category = missile_tech
+		}
+	}
+}
+
+shared_focus = {
+	id = GER_radar_guided_systems
+	icon = GFX_focus_generic_cryptologic_bomb
+	relative_position_id = GER_dealing_with_the_dreadnought
+	x = 0
+	y = 5
+	cost = 5
+
+	ai_will_do = {
+		base = 75
+	}
+	
+	prerequisite = {
+		focus = GER_naval_rocketry
+	}
+	prerequisite = {
+		focus = GER_a_silent_stalker
+		focus = GER_modern_carrier_aircraft
+	}
+	completion_reward = {
+		add_ideas = GER_radar_guided_systems
+	}
+}
+
+shared_focus = {
+	id = GER_the_supercarrier
+	icon = GFX_goal_generic_navy_carrier
+	relative_position_id = GER_dealing_with_the_dreadnought
+	x = 2
+	y = 5
+	cost = 5
+
+	ai_will_do = {
+		base = 75
+	}
+	
+	prerequisite = {
+		focus = GER_the_modern_navy
+	}
+	prerequisite = {
+		focus = GER_expand_the_marine_fliegerabteilung
+	}
+	completion_reward = {
+		swap_ideas = {
+			remove_idea = GER_legacy_of_the_deadnought_race_3
+			add_idea = GER_supercarrier_doctrine
+		}
+		add_tech_bonus = {
+			bonus = 1.5
+			uses = 1
+			technology = supercarrier_1
+		}
+	}
+}
+
+shared_focus = {
+	id = GER_the_h2o2_torpedo
+	icon = GFX_focus_rocketry
+	relative_position_id = GER_dealing_with_the_dreadnought
+	x = -2
+	y = 5
+	cost = 5
+
+	ai_will_do = {
+		base = 75
+	}
+	
+	prerequisite = {
+		focus = GER_advanced_escorts
+	}
+	prerequisite = {
+		focus = GER_undersea_launch_platforms
+	}
+	completion_reward = {
+		swap_ideas = {
+			remove_idea = GER_legacy_of_the_deadnought_race_3
+			add_idea = GER_h2o2_torpedos
+		}
+		add_tech_bonus = {
+			name = GER_h2o2_torpedos
+			bonus = 1.5
+			uses = 1
+			technology = mtg_1956_torpedo
+		}
+	}
+}
+
+shared_focus = {
+	id = GER_advanced_escorts
+	icon = GFX_focus_generic_destroyer
+	relative_position_id = GER_dealing_with_the_dreadnought
+	x = -1
+	y = 4
+	cost = 5
+
+	ai_will_do = {
+		base = 75
+	}
+	
+	prerequisite = {
+		focus = GER_repair_wilhelmshaven
+	}
+	prerequisite = {
+		focus = GER_modern_carrier_aircraft
+		focus = GER_a_silent_stalker
+	}
+	prerequisite = {
+		focus = GER_naval_rocketry
+	}
+	completion_reward = {
+		add_tech_bonus = {
+			bonus = 0.5
+			uses = 2
+			category = dd_tech
+		}
+	}
+}
+
+shared_focus = {
+	id = GER_undersea_launch_platforms
+	icon = GFX_goal_generic_build_navy
+	relative_position_id = GER_dealing_with_the_dreadnought
+	x = -3
+	y = 4
+	cost = 5
+
+	ai_will_do = {
+		base = 75
+	}
+	
+	prerequisite = {
+		focus = GER_a_silent_stalker
+	}
+	prerequisite = {
+		focus = GER_repair_wilhelmshaven
+	}
+	completion_reward = {
+		add_ideas = GER_undersea_launch_platforms
+	}
+}
+
+shared_focus = {
+	id = GER_the_modern_navy
+	icon = GFX_focus_generic_cruiser2
+	relative_position_id = GER_dealing_with_the_dreadnought
+	x = 1
+	y = 4
+	cost = 5
+
+	ai_will_do = {
+		base = 75
+	}
+	
+	prerequisite = {
+		focus = GER_modern_carrier_aircraft
+		focus = GER_a_silent_stalker
+	}
+	prerequisite = {
+		focus = GER_naval_rocketry
+	}
+	prerequisite = {
+		focus = GER_repair_wilhelmshaven
+	}
+	completion_reward = {
+		add_tech_bonus = {
+			bonus = 0.5
+			uses = 2
+			category = ca_tech
+		}
+	}
+}
+
+shared_focus = {
+	id = GER_advanced_construction_techniques
+	icon = GFX_generic_construction_krg
+	relative_position_id = GER_dealing_with_the_dreadnought
+	x = -4
+	y = 6
+	cost = 5
+
+	ai_will_do = {
+		base = 75
+	}
+	
+	prerequisite = {
+		focus = GER_radar_guided_systems
+	}
+	prerequisite = {
+		focus = GER_friedrich_krupp_germaniawerft
+	}
+	completion_reward = {
+		swap_ideas = {
+			remove_idea = GER_germaniawerft
+			add_idea = GER_advanced_naval_construction
+		}
+	}
+}
+
+shared_focus = {
+	id = GER_the_red_barons_legacy
+	icon = GFX_GER_red_baron
+	x = 29
+	y = 0
+	cost = 5
+
+	ai_will_do = {
+		base = 100
+	}
+
+	available = {
+		always = no
+	}
+	completion_reward = {
+		air_experience = 25
+		add_doctrine_cost_reduction = {
+			cost_reduction = 0.5
+			uses = 1
+			category = air_doctrine
+		}
+		log = "[GetDateText]: [Root.GetName]: Focus GER_the_red_barons_legacy"
+	}
+}
+
+shared_focus = {
+	id = GER_the_young_ace_galland
+	icon = GFX_GER_galland
+	relative_position_id = GER_the_red_barons_legacy
+	x = -1
+	y = 1
+	cost = 5
+
+	ai_will_do = {
+		base = 100
+	}
+	
+	prerequisite = {
+		focus = GER_the_red_barons_legacy
+	}
+	mutually_exclusive = {
+		focus = GER_the_seasoned_veteran_udet
+	}
+	completion_reward = {
+		add_ideas = GER_fighter_mafia
+	}
+}
+
+shared_focus = {
+	id = GER_the_seasoned_veteran_udet
+	icon = GFX_GER_udet
+	relative_position_id = GER_the_red_barons_legacy
+	x = 1
+	y = 1
+	cost = 5
+
+	ai_will_do = {
+		base = 100
+	}
+	
+	prerequisite = {
+		focus = GER_the_red_barons_legacy
+	}
+	mutually_exclusive = {
+		focus = GER_the_young_ace_galland
+	}
+	completion_reward = {
+		add_ideas = GER_seasoned_stikers
+	}
+}
+
+shared_focus = {
+	id = GER_improved_radar
+	icon = GFX_goal_generic_radar
+	relative_position_id = GER_the_red_barons_legacy
+	x = -3
+	y = 1
+	cost = 5
+
+	ai_will_do = {
+		base = 50
+	}
+	
+	prerequisite = {
+		focus = GER_the_red_barons_legacy
+	}
+	completion_reward = {
+		add_tech_bonus = {
+			uses = 1
+			bonus = 0.75
+			category = radar_tech
+		}
+	}
+}
+
+shared_focus = {
+	id = GER_expanded_pilot_training_programs
+	icon = GFX_generic_pilot_training
+	relative_position_id = GER_the_red_barons_legacy
+	x = 4
+	y = 1
+	cost = 5
+
+	ai_will_do = {
+		base = 75
+	}
+	
+	prerequisite = {
+		focus = GER_the_red_barons_legacy
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus GER_expanded_pilot_training_programs"
+		add_ideas = GER_pilot_training
+	}
+}
+
+shared_focus = {
+	id = GER_advanced_fighter_designs
+	icon = GFX_generic_fighter_designs
+	relative_position_id = GER_the_young_ace_galland
+	x = -1
+	y = 1
+	cost = 5
+	
+	ai_will_do = {
+		base = 75
+	}
+
+	prerequisite = {
+		focus = GER_the_young_ace_galland
+	}
+	completion_reward = {
+		add_tech_bonus = {
+			uses = 1
+			bonus = 1
+			category = light_air
+		}
+	}
+}
+
+shared_focus = {
+	id = GER_multi_role_jets
+	icon = GFX_GER_fighter_jet
+	relative_position_id = GER_the_seasoned_veteran_udet
+	x = 1
+	y = 1
+	cost = 5
+
+	ai_will_do = {
+		base = 75
+	}
+	
+	prerequisite = {
+		focus = GER_the_seasoned_veteran_udet
+	}
+	completion_reward = {
+		add_tech_bonus = {
+			uses = 1
+			bonus = 1
+			technology = jet_strike_1
+		}
+	}
+}
+
+shared_focus = {
+	id = GER_control_the_skies
+	icon = GFX_generic_air_armada
+	relative_position_id = GER_the_young_ace_galland
+	x = 1
+	y = 1
+	cost = 5
+
+	ai_will_do = {
+		base = 75
+	}
+	
+	prerequisite = {
+		focus = GER_the_seasoned_veteran_udet
+		focus = GER_the_young_ace_galland
+	}
+	completion_reward = {
+		add_ideas = GER_skies_controlled
+	}
+}
+
+shared_focus = {
+	id = GER_storm_on_the_ground
+	icon = GFX_generic_air_CAS_new
+	relative_position_id = GER_the_seasoned_veteran_udet
+	x = 2
+	y = 2
+	cost = 5
+
+	ai_will_do = {
+		base = 75
+	}
+	
+	prerequisite = {
+		focus = GER_expanded_pilot_training_programs
+	}
+	completion_reward = {
+		add_tech_bonus = {
+			uses = 1
+			bonus = 0.5
+			category = cas_tech
+		}
+	}
+}
+
+shared_focus = {
+	id = GER_icbm_development
+	icon = GFX_generic_icbm_development
+	relative_position_id = GER_the_red_barons_legacy
+	x = 1
+	y = 3
+	cost = 5
+
+	ai_will_do = {
+		base = 100
+	}
+	
+	prerequisite = {
+		focus = GER_multi_role_jets
+		focus = GER_advanced_fighter_designs
+	}
+	completion_reward = {
+		add_tech_bonus = {
+			uses = 1
+			bonus = 0.75
+			category = missile_tech
+		}
+	}
+}
+
+shared_focus = {
+	id = GER_improved_jet_engines
+	icon = GFX_generic_jet_engine
+	relative_position_id = GER_the_red_barons_legacy
+	x = -1
+	y = 3
+	cost = 5
+
+	ai_will_do = {
+		base = 75
+	}
+	
+	prerequisite = {
+		focus = GER_multi_role_jets
+		focus = GER_advanced_fighter_designs
+	}
+	completion_reward = {
+		add_tech_bonus = {
+			uses = 1
+			bonus = 0.75
+			category = jet_technology
+		}
+	}
+}
+
+shared_focus = {
+	id = GER_a_nuclear_delivery
+	icon = GFX_SAF_nuclear
+	relative_position_id = GER_the_red_barons_legacy
+	x = 0
+	y = 4
+	cost = 5
+
+	ai_will_do = {
+		base = 75
+	}
+	
+	prerequisite = {
+		focus = GER_icbm_development
+		focus = GER_improved_jet_engines
+	}
+	completion_reward = {
+		add_tech_bonus = {
+			uses = 1
+			bonus = 1.5
+			category = rocketry
+		}
+	}
+}
+
+shared_focus = {
+	id = GER_ground_attack_jets
+	icon = GFX_GER_jet
+	relative_position_id = GER_the_young_ace_galland
+	x = -1
+	y = 3
+	cost = 5
+
+	ai_will_do = {
+		base = 75
+	}
+	
+	prerequisite = {
+		focus = GER_advanced_fighter_designs
+	}
+	completion_reward = {
+		add_tech_bonus = {
+			uses = 1
+			bonus = 0.25
+			category = interceptor_tech
+		}
+	}
+}
+
+shared_focus = {
+	id = GER_lessons_of_the_pacific
+	icon = GFX_goal_generic_air_naval_bomber
+	relative_position_id = GER_the_young_ace_galland
+	x = -2
+	y = 2
+	cost = 5
+
+	ai_will_do = {
+		base = 75
+	}
+	
+	prerequisite = {
+		focus = GER_the_seasoned_veteran_udet
+		focus = GER_the_young_ace_galland
+	}
+	completion_reward = {
+		add_tech_bonus = {
+			uses = 1
+			bonus = 0.5
+			technology = jet_cv_fighter_1
+		}
+		add_tech_bonus = {
+			uses = 1
+			bonus = 0.5
+			technology = cv_jet_strike_1
+		}
+	}
+}
+
+shared_focus = {
+	id = GER_expand_the_marine_fliegerabteilung
+	icon = GFX_generic_carrier_aircraft
+	relative_position_id = GER_dealing_with_the_dreadnought
+	x = 3
+	y = 4
+	cost = 5
+
+	ai_will_do = {
+		base = 75
+	}
+	
+	prerequisite = {
+		focus = GER_modern_carrier_aircraft
+	}
+	prerequisite = {
+		focus = GER_lessons_of_the_pacific
+	}
+	prerequisite = {
+		focus = GER_repair_wilhelmshaven
+	}
+	completion_reward = {
+		add_equipment_to_stockpile = {
+			type = jet_fighter_equipment
+			amount = 150
+			producer = GER
+		}
+	}
+}
+
+shared_focus = {
+	id = GER_attracting_skilled_aviators
+	icon = GFX_generic_air_armada
+	relative_position_id = GER_the_seasoned_veteran_udet
+	x = 2
+	y = 4
+	cost = 5
+
+	ai_will_do = {
+		base = 75
+	}
+
+	available = {
+		has_completed_focus = GER_modern_carrier_aircraft
+	}
+	prerequisite = {
+		focus = GER_advanced_targeting_systems
+	}
+	prerequisite = {
+		focus = GER_storm_on_the_ground
+	}
+	completion_reward = {
+		if = {
+			limit = {
+				has_idea = GER_pilot_training
+			}
+			swap_ideas = {
+				remove_idea = GER_pilot_training
+				add_idea = GER_pilot_training_cv
+			}
+		}
+		if = {
+			limit = {
+				has_idea = GER_interservice_cooperation
+			}
+			swap_ideas = {
+				remove_idea = GER_interservice_cooperation
+				add_idea = GER_interservice_cooperation_triforce
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = GER_modern_carrier_aircraft
+	icon = GFX_DNF_Aircraft_Carrier
+	relative_position_id = GER_expand_the_marine_fliegerabteilung
+	x = -1
+	y = -1
+	cost = 5
+
+	ai_will_do = {
+		base = 75
+	}
+	
+	prerequisite = {
+		focus = GER_above_the_seas
+	}
+	completion_reward = {
+		add_tech_bonus = {
+			bonus = 0.75
+			uses = 2
+			category = naval_air
+		}
+	}
+}
+
+shared_focus = {
+	id = GER_advanced_targeting_systems
+	icon = GFX_generic_advanced_targeting
+	relative_position_id = GER_the_seasoned_veteran_udet
+	x = 1
+	y = 3
+	cost = 5
+
+	ai_will_do = {
+		base = 75
+	}
+	
+	prerequisite = {
+		focus = GER_the_seasoned_veteran_udet
+	}
+	completion_reward = {
+		add_tech_bonus = {
+			uses = 1
+			bonus = 0.5
+			category = strategic_bomber_tech
+		}
+	}
+}
+
+shared_focus = {
+	id = GER_learning_from_the_great_retreat
+	icon = GFX_generic_air_CAS_russian
+	relative_position_id = GER_the_young_ace_galland
+	x = -2
+	y = 4
+	cost = 5
+
+	ai_will_do = {
+		base = 75
+	}
+
+	available = {
+		has_completed_focus = GER_develop_mobile_command_structure
+	}
+	prerequisite = {
+		focus = GER_lessons_of_the_pacific
+	}
+	prerequisite = {
+		focus = GER_ground_attack_jets
+	}
+	completion_reward = {
+		add_ideas = GER_great_retreat
+	}
+}
+
+shared_focus = {
+	id = GER_supersonic_flight
+	icon = GFX_generic_air_jet_new
+	relative_position_id = GER_the_red_barons_legacy
+	x = -1
+	y = 5
+	cost = 5
+
+	ai_will_do = {
+		base = 75
+	}
+	
+	prerequisite = {
+		focus = GER_ground_attack_jets
+	}
+	prerequisite = {
+		focus = GER_improved_jet_engines
+	}
+	completion_reward = {
+		swap_ideas = {
+			remove_idea = GER_fighter_mafia
+			add_idea = GER_supersonic_fighters
+		}
+	}
+}
+
+shared_focus = {
+	id = GER_unseen_and_unheard
+	icon = GFX_generic_air_tactical_bomber_german
+	relative_position_id = GER_the_red_barons_legacy
+	x = 1
+	y = 5
+	cost = 5
+
+	ai_will_do = {
+		base = 75
+	}
+	
+	prerequisite = {
+		focus = GER_advanced_targeting_systems
+	}
+	completion_reward = {
+		swap_ideas = {
+			remove_idea = GER_seasoned_stikers
+			add_idea = GER_stealth_strikers
+		}
+	}
+}
+
+shared_focus = {
+	id = GER_beyond_the_karman_line
+	icon = GFX_goal_GER_beyond_the_karman_line
+	relative_position_id = GER_the_red_barons_legacy
+	x = 0
+	y = 6
+	cost = 5
+
+	ai_will_do = {
+		base = 250
+	}
+
+	available = {
+		date > 1955.1.1
+	}
+	prerequisite = {
+		focus = GER_supersonic_flight
+		focus = GER_unseen_and_unheard
+	}
+	prerequisite = {
+		focus = GER_a_nuclear_delivery
+	}
+	completion_reward = {
+		country_event = krg_ger.2001
+	}
+}
+
+shared_focus = {
+	id = GER_implement_kesselring_doctrine
+	icon = GFX_GER_kesselring_doctrine
+	relative_position_id = GER_the_red_barons_legacy
+	x = 7
+	y = 0
+	cost = 5
+
+	ai_will_do = {
+		base = 100
+	}
+
+	available = {
+		always = no
+	}
+	prerequisite = {
+	}
+	mutually_exclusive = {
+		focus = GER_maintain_orthodox_bewegungskrieg
+	}
+	completion_reward = {
+		if = {
+			limit = {
+				has_idea = GER_general_staff_highlyprogovernment
+			}
+			swap_ideas = {
+				remove_idea = GER_general_staff_highlyprogovernment
+				add_idea = GER_general_staff_kesselring_highlyprogovernment
+			}
+		}
+		if = {
+			limit = {
+				has_idea = GER_general_staff_mildlyprogovernment
+			}
+			swap_ideas = {
+				remove_idea = GER_general_staff_mildlyprogovernment
+				add_idea = GER_general_staff_kesselring_mildlyprogovernment
+			}
+		}
+		if = {
+			limit = {
+				has_idea = GER_general_staff_neutral
+			}
+			swap_ideas = {
+				remove_idea = GER_general_staff_neutral
+				add_idea = GER_general_staff_kesselring_neutral
+			}
+		}
+		if = {
+			limit = {
+				has_idea = GER_general_staff_mildlyantigovernment
+			}
+			swap_ideas = {
+				remove_idea = GER_general_staff_mildlyantigovernment
+				add_idea = GER_general_staff_kesselring_mildlyantigovernment
+			}
+		}
+		if = {
+			limit = {
+				has_idea = GER_general_staff_highlyantigovernment
+			}
+			swap_ideas = {
+				remove_idea = GER_general_staff_highlyantigovernment
+				add_idea = GER_general_staff_kesselring_highlyantigovernment
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = GER_maintain_orthodox_bewegungskrieg
+	icon = GFX_GER_orthodox_bewgungeskrieg
+	relative_position_id = GER_the_red_barons_legacy
+	x = 11
+	y = 0
+	cost = 5
+
+	ai_will_do = {
+		base = 100
+	}
+
+	available = {
+		always = no
+	}
+	prerequisite = {
+	}
+	mutually_exclusive = {
+		focus = GER_implement_kesselring_doctrine
+	}
+	completion_reward = {
+		if = {
+			limit = {
+				has_idea = GER_general_staff_highlyprogovernment
+			}
+			swap_ideas = {
+				remove_idea = GER_general_staff_highlyprogovernment
+				add_idea = GER_general_staff_guderian_highlyprogovernment
+			}
+		}
+		if = {
+			limit = {
+				has_idea = GER_general_staff_mildlyprogovernment
+			}
+			swap_ideas = {
+				remove_idea = GER_general_staff_mildlyprogovernment
+				add_idea = GER_general_staff_guderian_mildlyprogovernment
+			}
+		}
+		if = {
+			limit = {
+				has_idea = GER_general_staff_neutral
+			}
+			swap_ideas = {
+				remove_idea = GER_general_staff_neutral
+				add_idea = GER_general_staff_guderian_neutral
+			}
+		}
+		if = {
+			limit = {
+				has_idea = GER_general_staff_mildlyantigovernment
+			}
+			swap_ideas = {
+				remove_idea = GER_general_staff_mildlyantigovernment
+				add_idea = GER_general_staff_guderian_mildlyantigovernment
+			}
+		}
+		if = {
+			limit = {
+				has_idea = GER_general_staff_highlyantigovernment
+			}
+			swap_ideas = {
+				remove_idea = GER_general_staff_highlyantigovernment
+				add_idea = GER_general_staff_guderian_highlyantigovernment
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = GER_promote_interservice_cooperation
+	icon = GFX_generic_army_cooperation
+	relative_position_id = GER_implement_kesselring_doctrine
+	x = -2
+	y = 2
+	cost = 5
+
+	ai_will_do = {
+		base = 75
+	}
+	
+	prerequisite = {
+		focus = GER_implement_kesselring_doctrine
+	}
+	prerequisite = {
+		focus = GER_expanded_pilot_training_programs
+	}
+	prerequisite = {
+		focus = GER_the_young_ace_galland
+		focus = GER_the_seasoned_veteran_udet
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus GER_promote_interservice_cooperation"
+		if = {
+			limit = {
+				has_idea = GER_pilot_training
+			}
+			swap_ideas = {
+				remove_idea = GER_pilot_training
+				add_idea = GER_interservice_cooperation
+			}
+		}
+		if = {
+			limit = {
+				has_idea = GER_pilot_training_cv
+			}
+			swap_ideas = {
+				remove_idea = GER_pilot_training_cv
+				add_idea = GER_interservice_cooperation_triforce
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = GER_develop_gep_mtw
+	icon = GFX_goal_generic_army_motorized
+	relative_position_id = GER_implement_kesselring_doctrine
+	x = -1
+	y = 1
+	cost = 5
+
+	ai_will_do = {
+		base = 75
+	}
+	
+	prerequisite = {
+		focus = GER_implement_kesselring_doctrine
+	}
+	completion_reward = {
+		add_tech_bonus = {
+			uses = 1
+			bonus = 0.75
+			technology = basic_mechanized
+		}
+	}
+}
+
+shared_focus = {
+	id = GER_integrate_panzer_brigades
+	icon = GFX_generic_army_tanks3
+	relative_position_id = GER_implement_kesselring_doctrine
+	x = -1
+	y = 3
+	cost = 5
+
+	ai_will_do = {
+		base = 75
+	}
+	
+	prerequisite = {
+		focus = GER_develop_gep_mtw
+	}
+	completion_reward = {
+		add_ideas = GER_kesselring_doctrine
+		GER_increase_general_staff_support = yes
+	}
+}
+
+shared_focus = {
+	id = GER_develop_spg
+	icon = GFX_generic_tank_destroyer
+	relative_position_id = GER_implement_kesselring_doctrine
+	x = 0
+	y = 2
+	cost = 5
+
+	ai_will_do = {
+		base = 75
+	}
+	
+	prerequisite = {
+		focus = GER_develop_gep_mtw
+	}
+	completion_reward = {
+			add_tech_bonus = {
+				name = NEE_transitioning_to_spgs
+				uses = 1
+				bonus = 1
+				technology = artillery_1952
+			}
+		}
+}
+
+shared_focus = {
+	id = GER_develop_new_infantry_equipment
+	icon = GFX_focus_chi_army_reform
+	relative_position_id = GER_implement_kesselring_doctrine
+	x = 1
+	y = 1
+	cost = 5
+
+	ai_will_do = {
+		base = 75
+	}
+	
+	prerequisite = {
+		focus = GER_implement_kesselring_doctrine
+		focus = GER_maintain_orthodox_bewegungskrieg
+	}
+	completion_reward = {
+		add_ideas = GER_rifles
+	}
+}
+
+shared_focus = {
+	id = GER_modernize_kriegsakademie
+	icon = GFX_goal_generic_army_doctrines
+	relative_position_id = GER_maintain_orthodox_bewegungskrieg
+	x = -1
+	y = 1
+	cost = 5
+
+	ai_will_do = {
+		base = 75
+	}
+	
+	prerequisite = {
+		focus = GER_implement_kesselring_doctrine
+		focus = GER_maintain_orthodox_bewegungskrieg
+	}
+	completion_reward = {
+		add_doctrine_cost_reduction = {
+			cost_reduction = 0.7
+			uses = 1
+			category = land_doctrine
+		}
+	}
+}
+
+shared_focus = {
+	id = GER_streamline_weapons_procurement
+	icon = GFX_generic_demobilise_guns
+	relative_position_id = GER_implement_kesselring_doctrine
+	x = 2
+	y = 2
+	cost = 5
+
+	ai_will_do = {
+		base = 75
+	}
+	
+	prerequisite = {
+		focus = GER_modernize_kriegsakademie
+	}
+	prerequisite = {
+		focus = GER_develop_new_infantry_equipment
+	}
+	completion_reward = {
+		add_tech_bonus = {
+			uses = 2
+			bonus = 0.75
+			category = infantry_tech
+		}
+		log = "[GetDateText]: [Root.GetName]: Focus GER_streamline_weapons_procurement"
+	}
+}
+
+shared_focus = {
+	id = GER_the_standardgewehr_trials
+	icon = GFX_generic_gun_trials
+	relative_position_id = GER_implement_kesselring_doctrine
+	x = 1
+	y = 3
+	cost = 5
+
+	ai_will_do = {
+		base = 75
+	}
+	
+	prerequisite = {
+		focus = GER_streamline_weapons_procurement
+	}
+	completion_reward = {
+		country_event = {
+			id = krg_ger.2000
+		}
+	}
+}
+
+shared_focus = {
+	id = GER_promote_new_generals
+	icon = GFX_generic_officers
+	relative_position_id = GER_maintain_orthodox_bewegungskrieg
+	x = -1
+	y = 3
+	cost = 5
+
+	ai_will_do = {
+		base = 75
+	}
+	
+	prerequisite = {
+		focus = GER_modernize_kriegsakademie
+	}
+	completion_reward = {
+		country_event = krg_ger.2002
+		GER_decrease_general_staff_support = yes
+	}
+}
+
+shared_focus = {
+	id = GER_the_standardpanzer_program
+	icon = GFX_generic_doctrine_tank_warfare
+	relative_position_id = GER_maintain_orthodox_bewegungskrieg
+	x = 1
+	y = 1
+	cost = 5
+
+	ai_will_do = {
+		base = 75
+	}
+	
+	prerequisite = {
+		focus = GER_maintain_orthodox_bewegungskrieg
+	}
+	completion_reward = {
+		add_tech_bonus = {
+			uses = 1
+			bonus = 0.5
+			technology = modern_tank_1
+		}
+	}
+}
+
+shared_focus = {
+	id = GER_develop_mobile_command_structure
+	icon = GFX_generic_military_academy
+	relative_position_id = GER_maintain_orthodox_bewegungskrieg
+	x = 2
+	y = 2
+	cost = 5
+
+	ai_will_do = {
+		base = 75
+	}
+	
+	prerequisite = {
+		focus = GER_maintain_orthodox_bewegungskrieg
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus GER_develop_mobile_command_structure"
+		add_ideas = GER_mobile_command
+	}
+}
+
+shared_focus = {
+	id = GER_create_panzertruppenschule
+	icon = GFX_GER_heavy_tanks
+	relative_position_id = GER_maintain_orthodox_bewegungskrieg
+	x = 0
+	y = 2
+	cost = 5
+
+	ai_will_do = {
+		base = 75
+	}
+	
+	prerequisite = {
+		focus = GER_the_standardpanzer_program
+	}
+	prerequisite = {
+		focus = GER_develop_new_infantry_equipment
+	}
+	prerequisite = {
+		focus = GER_modernize_kriegsakademie
+	}
+	completion_reward = {
+		army_experience = 50
+		log = "[GetDateText]: [Root.GetName]: Focus GER_create_panzertruppenschule"
+	}
+}
+
+shared_focus = {
+	id = GER_fix_becks_mistakes
+	icon = GFX_GER_fix_becks_mistakes
+	relative_position_id = GER_maintain_orthodox_bewegungskrieg
+	x = 1
+	y = 3
+	cost = 5
+
+	ai_will_do = {
+		base = 75
+	}
+	
+	prerequisite = {
+		focus = GER_create_panzertruppenschule
+	}
+	prerequisite = {
+		focus = GER_develop_mobile_command_structure
+	}
+	completion_reward = {
+		add_ideas = GER_orthodox_bewegungskrieg
+		GER_increase_general_staff_support = yes
+		log = "[GetDateText]: [Root.GetName]: Focus GER_fix_becks_mistakes"
+	}
+}
+
+shared_focus = {
+	id = GER_weltreich
+	icon = GFX_GER_Deutsches_Weltreich
+	relative_position_id = GER_maintain_orthodox_bewegungskrieg
+	x = 12
+	y = 0
+	cost = 2
+
+	ai_will_do = {
+		base = 125
+	}
+
+	available = {
+		OR = {
+			has_completed_focus = GER_grand_coalition
+			has_completed_focus = GER_aftermath_of_koln
+		}
+	}
+	bypass = {
+		has_completed_focus = GER_rossing_dossier
+	}
+	completion_reward = {
+		add_political_power = 25
+		add_war_support = 0.05
+	}
+}
+
+shared_focus = {
+	id = GER_mie_matters
+	icon = GFX_GER_mitteleuropa
+	relative_position_id = GER_weltreich
+	x = -5
+	y = 1
+	cost = 5
+
+	ai_will_do = {
+		base = 125
+	}
+	
+	prerequisite = {
+		focus = GER_weltreich
+	}
+	completion_reward = {
+		unlock_decision_category_tooltip = Mitteleuropa_cat
+		country_event = {
+			id = krg_gerdip.14
+		}
+	}
+}
+
+shared_focus = {
+	id = GER_rossing_dossier
+	icon = GFX_generic_crush_MAF
+	relative_position_id = GER_weltreich
+	x = 7
+	y = 1
+	cost = 5
+
+	ai_will_do = {
+		base = 125
+	}
+
+	available = {
+		always = no
+	}
+	prerequisite = {
+		focus = GER_weltreich
+	}
+	completion_reward = {
+		add_stability = -0.25
+		add_war_support = -0.15
+	}
+}
+
+shared_focus = {
+	id = GER_europaischer
+	icon = GFX_GER_Master_of_the_World
+	relative_position_id = GER_weltreich
+	x = 2
+	y = 1
+	cost = 5
+
+	ai_will_do = {
+		base = 125
+	}
+	
+	prerequisite = {
+		focus = GER_weltreich
+	}
+	completion_reward = {
+		add_political_power = 100
+	}
+}
+
+shared_focus = {
+	id = GER_build_west_europe
+	icon = GFX_GER_Rebuilding_West
+	relative_position_id = GER_europaischer
+	x = -1
+	y = 1
+	cost = 2
+	
+	ai_will_do = {
+		base = 125
+	}
+
+	prerequisite = {
+		focus = GER_europaischer
+	}
+	completion_reward = {
+		unlock_decision_category_tooltip = GER_reconstruction_assistance
+		unlock_decision_tooltip = GER_netherlands
+		unlock_decision_tooltip = GER_belgium
+		unlock_decision_tooltip = GER_france
+		unlock_decision_tooltip = GER_ireland
+	}
+}
+
+shared_focus = {
+	id = GER_build_east_europe
+	icon = GFX_GER_Rebuilding_East
+	relative_position_id = GER_europaischer
+	x = 1
+	y = 1
+	cost = 2
+
+	ai_will_do = {
+		base = 125
+	}
+	
+	prerequisite = {
+		focus = GER_europaischer
+	}
+	completion_reward = {
+		unlock_decision_category_tooltip = GER_reconstruction_assistance 
+		unlock_decision_tooltip = GER_ukraine
+		unlock_decision_tooltip = GER_poland
+		unlock_decision_tooltip = GER_lithuania
+		unlock_decision_tooltip = GER_kurland
+		unlock_decision_tooltip = GER_finland
+	}
+}
+
+shared_focus = {
+	id = GER_announce_warsaw_plan
+	icon = GFX_generic_flag_large_POL
+	relative_position_id = GER_build_east_europe
+	x = 1
+	y = 1
+	cost = 2
+	
+	prerequisite = {
+		focus = GER_build_east_europe
+	}
+	completion_reward = {
+		country_event = krg_ger.200
+		unlock_decision_category_tooltip = GER_warsaw_plan_cat
+	}
+}
+
+shared_focus = {
+	id = GER_renegotiate_mitt
+	icon = GFX_GER_Mitteleuropa_German
+	relative_position_id = GER_mie_matters
+	x = 3
+	y = 1
+	cost = 5
+	
+	ai_will_do = {
+		base = 125
+	}
+
+	prerequisite = {
+		focus = GER_mie_matters
+	}
+	completion_reward = {
+		unlock_decision_tooltip = GER_invite_danubia
+		
+	}
+}
+
+shared_focus = {
+	id = GER_munich_conference
+	icon = GFX_SAF_Denounce_Germany	#probably remove flames?
+	relative_position_id = GER_mie_matters
+	x = -2
+	y = 1
+	cost = 5
+
+	ai_will_do = {
+		base = 125
+	}
+	
+	prerequisite = {
+		focus = GER_mie_matters
+	}
+	completion_reward = {
+		country_event = {
+			id = krg_gerdip.10
+		}
+	}
+}
+
+shared_focus = {
+	id = GER_example
+	icon = GFX_GER_Pax_Germanica
+	relative_position_id = GER_munich_conference
+	x = -1
+	y = 1
+	cost = 5
+
+	ai_will_do = {
+		base = 125
+	}
+
+	available = {
+	}
+	prerequisite = {
+		focus = GER_munich_conference
+	}
+	mutually_exclusive = {
+		focus = GER_equals
+	}
+	completion_reward = {
+		add_ideas = GER_lead_by_example
+	}
+}
+
+shared_focus = {
+	id = GER_equals
+	icon = GFX_GER_Mitteleuropa_European
+	relative_position_id = GER_munich_conference
+	x = 1
+	y = 1
+	cost = 5
+
+	ai_will_do = {
+		base = 125
+	}
+
+	prerequisite = {
+		focus = GER_munich_conference
+	}
+	mutually_exclusive = {
+		focus = GER_example
+	}
+	completion_reward = {
+		add_ideas = GER_first_of_equals
+
+		if = {
+			limit = { 
+				DNF = {
+					is_mitteleuropa_member = yes
+				}
+			}
+			DNF = {
+				add_ideas = GER_first_of_equals
+			}
+		}
+
+		every_country = {
+			limit = {
+				is_mitteleuropa_member = yes
+				NOT = { 
+					tag = GER 
+					tag = DNF
+				}
+			}
+			add_ideas = MIT_first_of_equals
+		}
+	}
+}
+
+shared_focus = {
+	id = GER_anti_accord
+	icon = GFX_GER_Operation_Scharnhorst
+	relative_position_id = GER_example
+	x = 1
+	y = 1
+	cost = 5
+
+	ai_will_do = {
+		base = 125
+	}
+	
+	prerequisite = {
+		focus = GER_example
+		focus = GER_equals
+	}
+	completion_reward = {
+		every_country = {
+			limit = {
+				is_mitteleuropa_member = yes
+			}
+			add_ideas = MIT_anti_accord_wargames
+		}
+	}
+}
+
+shared_focus = {
+	id = GER_europa_combined_operat
+	icon = 	GFX_GER_Sturmtruppen
+
+	relative_position_id = GER_anti_accord
+	x = 1
+	y = 1
+	cost = 5
+
+	ai_will_do = {
+		base = 125
+	}
+	prerequisite = {
+		focus = GER_create_ev
+	}
+	
+	prerequisite = {
+		focus = GER_anti_accord
+	}
+	completion_reward = {
+		every_country = {
+			limit = {
+				is_mitteleuropa_member = yes
+			}
+			swap_ideas = {
+				remove_idea = MIT_anti_accord_wargames
+				add_idea = MIT_europa_combined_operations
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = GER_army_missions
+	icon = GFX_GER_Woe_to_the_Vanquished
+	relative_position_id = GER_example
+	x = 0
+	y = 2
+	cost = 5
+
+	ai_will_do = {
+		base = 125
+	}
+	
+	prerequisite = {
+		focus = GER_example
+	}
+	completion_reward = {
+		effect_tooltip = {
+			every_country = {
+				limit = {
+					is_mitteleuropa_member = yes
+					NOT = {
+						tag = DNF
+						tag = GER
+					}
+				}
+				add_ideas = MIT_german_army_missions
+			}
+		}
+		#add_ideas = GER_staff_from_mitt
+	}
+}
+
+
+
+shared_focus = {
+	id = GER_europaprojekt
+	icon = GFX_GER_europaprojekt
+	relative_position_id = GER_renegotiate_mitt
+	x = -2
+	y = 1
+	cost = 5
+
+	mutually_exclusive = {
+		focus = GER_strengthen_regulatory_system
+	}
+
+	ai_will_do = {
+		base = 125
+	}
+
+	available = {
+		DNF_is_mitteleuropa_member = yes
+	}
+	prerequisite = {
+		focus = GER_renegotiate_mitt
+	}
+	completion_reward = {
+		effect_tooltip = {
+			every_country = {
+				limit = {
+					is_mitteleuropa_member = yes
+					NOT = {
+						tag = DNF
+						tag = GER
+						
+					}
+				}
+				swap_ideas = {
+					remove_idea = MIT_effects_dummy
+					add_idea = MIT_europaprojekt_effects_dummy
+				}
+			}
+		}
+
+		for_each_loop = {
+			array = global.MIT_member_array
+			MIT_europaprojekt_effects = yes
+		}
+	}
+}
+
+shared_focus = {
+	id = GER_create_ev
+	icon = GFX_generic_join_faction
+	relative_position_id = GER_europaprojekt
+	x = -1
+	y = 1
+	cost = 5
+
+	ai_will_do = {
+		base = 125
+	}
+
+	prerequisite = {
+		focus = GER_europaprojekt
+		focus = GER_equals
+	}
+	completion_reward = {
+		effect_tooltip = {
+			every_country = {
+				limit = {
+					is_mitteleuropa_member = yes
+				}
+				swap_ideas = {
+					remove_idea = MIT_effects_dummy
+					add_idea = MIT_joint_army_effects_dummy
+				}
+			}
+		}
+
+		for_each_loop = {
+			array = global.MIT_member_array
+			MIT_create_joint_army_effects = yes
+		}
+	}
+}
+
+shared_focus = {
+	#in the future could be similar to accord voting
+	id = GER_europacouncil
+	icon = GFX_GER_paneuropa
+	relative_position_id = GER_europaprojekt
+	x = 1
+	y = 1
+	cost = 5
+
+	ai_will_do = {
+		base = 125
+	}
+	
+	prerequisite = {
+		focus = GER_europaprojekt
+	}
+	completion_reward = {
+		effect_tooltip = {
+			every_country = {
+				limit = {
+					is_mitteleuropa_member = yes
+					NOT = {
+						tag = DNF
+						tag = GER
+					}
+				}
+				swap_ideas = {
+					remove_idea = MIT_effects_dummy
+					add_idea = MIT_europacouncil_effects_dummy
+				}
+			}
+
+			GER = {
+				swap_ideas = {
+					remove_idea = MIT_effects_dummy
+					add_idea = MIT_europacouncil_effects_GER_DNF_dummy
+				}
+			}
+
+			DNF = {
+				swap_ideas = {
+					remove_idea = MIT_effects_dummy
+					add_idea = MIT_europacouncil_effects_GER_DNF_dummy
+				}
+			}
+		}
+
+		for_each_loop = {
+			array = global.MIT_member_array
+			MIT_europacouncil_effects = yes
+		}
+	}
+}
+
+shared_focus = {
+	id = GER_mitt_staff
+	icon = GFX_generic_army_high_command
+	relative_position_id = GER_create_ev
+	x = 1
+	y = 1
+	cost = 5
+
+	ai_will_do = {
+		base = 125
+	}
+	
+	prerequisite = {
+		focus = GER_europacouncil
+	}
+
+	prerequisite = {
+		focus = GER_create_ev
+	}
+	completion_reward = {
+		hidden_effect = {
+			every_country = {
+				limit = {
+					has_country_flag = GER_mitteleuropa_leader_flag
+				}
+				add_ideas = GER_combined_european_staff
+			}
+			every_country = {
+				limit = {
+					has_country_flag = GER_mitteleuropa_member_flag
+				}
+				add_ideas = GER_combined_european_staff
+			}
+			every_country = {
+				limit = {
+					has_country_flag = GER_mitteleuropa_DNF_flag
+				}
+				add_ideas = GER_combined_european_staff
+			}
+		}
+
+		effect_tooltip = {
+			every_country = {
+				limit = {
+					is_mitteleuropa_member = yes
+				}
+				swap_ideas = {
+					remove_idea = MIT_effects_dummy
+					add_idea = MIT_joint_general_staff_dummy
+				}
+			}
+		}
+
+		for_each_loop = {
+			array = global.MIT_member_array
+			MIT_joint_general_staff_effects = yes
+		}
+	}
+}
+
+
+
+shared_focus = {
+	id = GER_strengthen_regulatory_system
+	icon = GFX_generic_suspend_constitution
+	relative_position_id = GER_renegotiate_mitt
+	x = 2
+	y = 1
+	cost = 5
+
+	mutually_exclusive = {
+		focus = GER_europaprojekt
+	}
+
+	ai_will_do = {
+		base = 125
+	}
+	
+	prerequisite = {
+		focus = GER_renegotiate_mitt
+	}
+	completion_reward = {
+		DNF = {
+			add_opinion_modifier = {
+				target = ROOT
+				modifier = medium_decrease
+			}
+		}
+		
+	}
+}
+
+
+shared_focus = {
+	id = GER_enforcement_commission
+	icon = GFX_generic_investigate_corruption
+	relative_position_id = GER_strengthen_regulatory_system
+	x = -1
+	y = 1
+	cost = 5
+
+
+	ai_will_do = {
+		base = 125
+	}
+	
+	prerequisite = {
+		focus = GER_strengthen_regulatory_system
+	}
+	completion_reward = {
+		effect_tooltip = {
+			every_country = {
+				limit = {
+					is_mitteleuropa_member = yes
+					NOT = {
+						tag = GER
+					}
+				}
+				swap_ideas = {
+					remove_idea = MIT_effects_dummy
+					add_idea = MIT_enforcement_commission_dummy
+				}
+			}
+		}
+
+		for_each_loop = {
+			array = global.MIT_member_array
+			MIT_enforcement_commission_effects = yes
+		}
+	}
+}
+
+shared_focus = {
+	id = GER_restart_enlargment
+	icon = GFX_GER_mitteleuropa
+	relative_position_id = GER_europaprojekt
+	x = 2
+	y = 2
+	cost = 5
+
+
+	ai_will_do = {
+		base = 125
+	}
+	
+	prerequisite = {
+		focus = GER_strengthen_regulatory_system
+		focus = GER_europaprojekt
+	}
+
+	completion_reward = {
+		unlock_decision_tooltip = MIT_invite_Bulgaria
+		unlock_decision_tooltip = MIT_invite_Ottoman
+	}
+}
+
+shared_focus = {
+	id = GER_contributory_discretion
+	icon = GFX_generic_state_economy
+	relative_position_id = GER_restart_enlargment
+	x = 1
+	y = 1
+	cost = 5
+
+
+	ai_will_do = {
+		base = 125
+	}
+	
+	prerequisite = {
+		focus = GER_restart_enlargment
+	}
+
+	prerequisite = {
+		focus = GER_enforcement_commission
+	}
+	completion_reward = {
+		effect_tooltip = {
+			every_country = {
+				limit = {
+					is_mitteleuropa_member = yes
+					NOT = {
+						tag = GER
+					}
+				}
+				swap_ideas = {
+					remove_idea = MIT_effects_dummy
+					add_idea = MIT_contributory_discretion_dummy 
+				}
+			}
+			GER = {
+				swap_ideas = {
+					remove_idea = MIT_effects_dummy
+					add_idea = MIT_contributory_discretion_GER_dummy
+				}
+			}
+		}
+
+		for_each_loop = {
+			array = global.MIT_member_array
+			MIT_contributory_discretion_effects = yes
+		}
+	}
+}
+
+shared_focus = {
+	id = GER_mitt_energy
+	icon = GFX_generic_electricity
+	relative_position_id = GER_strengthen_regulatory_system
+	x = 0
+	y = 2
+	cost = 5
+
+	ai_will_do = {
+		base = 125
+	}
+	
+	prerequisite = {
+		focus = GER_strengthen_regulatory_system
+	}
+	completion_reward = {
+		unlock_decision_tooltip = GER_mitt_electrify
+	}
+}
+
+shared_focus = {
+	id = GER_mitt_nuclear
+	icon = GFX_generic_nuclear_science_reichspakt
+	relative_position_id = GER_mitt_energy
+	x = 0
+	y = 2
+	cost = 5
+
+	ai_will_do = {
+		base = 125
+	}
+	prerequisite = {
+		focus = GER_mitt_university
+		focus = GER_mitt_energy
+	}
+	completion_reward = {
+		#unlock_decision_tooltip = GER_mitt_nuclear_umbrella
+		country_event = {
+			id = krg_gerdip.11
+		}
+
+		effect_tooltip = {
+			every_country = {
+				limit = {
+					is_mitteleuropa_member = yes
+				}
+				swap_ideas = {
+					remove_idea = MIT_effects_dummy
+					add_idea = MIT_nuclear_effects_dummy
+				}
+			}
+		}
+
+		for_each_loop = {
+			array = global.MIT_member_array
+			MIT_nuclear_effects = yes
+		}
+
+	}
+}
+
+shared_focus = {
+	id = GER_mitt_university
+	icon = GFX_generic_brain
+	relative_position_id = GER_europacouncil
+	x = 0
+	y = 2
+	cost = 5
+
+	ai_will_do = {
+		base = 125
+	}
+	
+	prerequisite = {
+		focus = GER_europacouncil
+	}
+	completion_reward = {
+		unlock_decision_tooltip = MIT_exchange_university_students
+	}
+}
+
+shared_focus = {
+	id = GER_seek_markets
+	icon = GFX_GENERIC_european_trade
+	relative_position_id = GER_renegotiate_mitt
+	x = 4
+	y = 1
+	cost = 5
+
+	ai_will_do = {
+		base = 125
+	}
+	
+	#prerequisite = {
+	#	focus = GER_renegotiate_mitt
+	#}
+	prerequisite = {
+		focus = GER_build_west_europe
+		focus = GER_build_east_europe
+	}
+	completion_reward = {
+		add_ideas = GER_european_markets
+		every_country = {
+			limit = {
+				is_mitteleuropa_partner = yes
+			}
+			add_ideas = GER_german_market
+		}
+		if = {
+			limit = {
+				905 = { is_controlled_by = FRA } 
+			}
+			SWI = {
+				add_ideas = GER_german_market
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = GER_danubian_deal
+	icon = GFX_generic_german_danubian_coop
+	relative_position_id = GER_seek_markets
+	x = -1
+	y = 1
+	cost = 5
+
+	ai_will_do = {
+		base = 125
+	}
+	
+	prerequisite = {
+		focus = GER_seek_markets
+	}
+
+	prerequisite = {
+		focus = GER_strengthen_regulatory_system
+	}
+
+	completion_reward = {
+		add_ideas = GER_danubian_german_open_border
+		DNF = {
+			add_ideas = GER_danubian_german_open_border
+		}
+	}
+}
+
+shared_focus = {
+	id = GER_beyond
+	icon = GFX_AST_new_markets
+	relative_position_id = GER_seek_markets
+	x = 1
+	y = 1
+	cost = 5
+
+	ai_will_do = {
+		base = 125
+	}
+	
+	prerequisite = {
+		focus = GER_seek_markets
+	}
+	completion_reward = {
+		swap_ideas = {
+			remove_idea = GER_european_markets
+			add_idea = GER_world_markets
+		}
+		every_country = {
+			limit = {
+				OR = {
+					is_mitteleuropa_member_plus_partner = yes
+				}
+				NOT = { has_idea = GER_german_market }
+			}
+			add_ideas = GER_german_market
+		}
+	}
+}
+
+shared_focus = {
+	id = GER_establish_the_ae
+	icon = GFX_MAF_bureaucratic_consolidation
+	relative_position_id = GER_rossing_dossier
+	x = -2
+	y = 1
+	cost = 5
+
+	ai_will_do = {
+		base = 125
+		modifier = {
+			NOT = {
+				has_game_rule = {
+					rule = MAF_NEW_GOVERNOR
+					option = DEFAULT
+				}
+				has_game_rule = {
+					rule = MAF_NEW_GOVERNOR
+					option = MAF_NEW_GOVERNOR_KRUPP
+				}
+			}
+			factor = 0
+		}
+	}
+
+	available = {
+		MAF = {
+			has_country_flag = MAF_succession_enabled
+		}
+	}
+	bypass = {
+		has_country_leader = {
+			character = MAF_Alfried_Krupp
+			ruling_only = yes
+		}
+	}
+	prerequisite = {
+		focus = GER_rossing_dossier
+	}
+	mutually_exclusive = {
+		focus = GER_new_admin
+		focus = GER_bolster
+	}
+	completion_reward = {
+		MAF = {
+			add_popularity = {
+				ideology = paternal_autocrat
+				popularity = 0.1
+			}
+			MAF_move_adea_to_krupp = yes
+			MAF_move_hardliner_to_krupp = yes
+		}
+	}
+}
+
+shared_focus = {
+	id = GER_new_admin
+	icon = GFX_MAF_Ribbentrop
+	relative_position_id = GER_rossing_dossier
+	x = 0
+	y = 1
+	cost = 5
+
+	ai_will_do = {
+		base = 125
+		modifier = {
+			NOT = {
+				has_game_rule = {
+					rule = MAF_NEW_GOVERNOR
+					option = DEFAULT
+				}
+				has_game_rule = {
+					rule = MAF_NEW_GOVERNOR
+					option = MAF_NEW_GOVERNOR_RIBBENTROP
+				}
+			}
+			factor = 0
+		}
+	}
+
+	available = {
+		MAF = {
+			has_country_flag = MAF_succession_enabled
+		}
+	}
+	bypass = {
+		has_country_leader = {
+			character = MAF_joachim_von_ribbentrop
+			ruling_only = yes
+		}
+	}
+	prerequisite = {
+		focus = GER_rossing_dossier
+	}
+	mutually_exclusive = {
+		focus = GER_bolster
+		focus = GER_establish_the_ae
+	}
+	completion_reward = {
+		MAF = {
+			add_popularity = {
+				ideology = social_conservative
+				popularity = 0.1
+			}
+			MAF_move_pragmatists_towards_ribbentrop = yes
+			MAF_move_adea_to_ribbentrop = yes
+		}
+	}
+}
+
+shared_focus = {
+	id = GER_bolster
+	icon = GFX_MAF_Recruiting_Local_Germans
+	relative_position_id = GER_rossing_dossier
+	x = 2
+	y = 1
+	cost = 5
+
+	ai_will_do = {
+		base = 125
+		modifier = {
+			NOT = {
+				has_game_rule = {
+					rule = MAF_NEW_GOVERNOR
+					option = DEFAULT
+				}
+				has_game_rule = {
+					rule = MAF_NEW_GOVERNOR
+					option = MAF_NEW_GOVERNOR_HIPPEL
+				}
+			}
+			factor = 0
+		}
+	}
+
+	available = {
+		MAF = {
+			has_country_flag = MAF_succession_enabled
+		}
+	}
+	bypass = {
+		has_country_leader = {
+			character = MAF_theodor_von_hippel
+			ruling_only = yes
+		}
+	}
+	prerequisite = {
+		focus = GER_rossing_dossier
+	}
+	mutually_exclusive = {
+		focus = GER_new_admin
+		focus = GER_establish_the_ae
+	}
+	completion_reward = {
+		MAF = {
+			add_popularity = {
+				ideology = paternal_autocrat
+				popularity = 0.05
+			}
+			add_popularity = {
+				ideology = authoritarian_democrat
+				popularity = 0.05
+			}
+		}
+		MAF_move_hardliner_to_hippel = yes
+		MAF_move_conbureau_towards_hippel = yes
+	}
+}
+
+shared_focus = {
+	id = GER_maf_question
+	icon = GFX_generic_flag_large_MAF
+	relative_position_id = GER_new_admin
+	x = 0
+	y = 1
+	cost = 5
+
+	ai_will_do = {
+		base = 125
+	}
+	
+	bypass = {
+		has_global_flag = MAF_collapsed
+	}
+	prerequisite = {
+		focus = GER_new_admin
+		focus = GER_establish_the_ae
+		focus = GER_bolster
+	}
+	completion_reward = {
+		add_war_support = 0.05
+		MAF = {
+			add_stability = 0.05
+		}
+		country_event = {
+			id = krg_gerdip.9
+		}
+	}
+}
+
+shared_focus = {
+	id = GER_overseas
+	icon = GFX_focus_generic_africa_naval
+	relative_position_id = GER_maf_question
+	x = -1
+	y = 1
+	cost = 5
+
+	ai_will_do = {
+		base = 125
+	}
+	
+	prerequisite = {
+		focus = GER_maf_question
+	}
+	completion_reward = {
+		MAF = {
+			add_stability = 0.05
+		}
+		unlock_decision_category_tooltip = GER_overseas_integration_cat
+	}
+}
+
+shared_focus = {
+	id = GER_colonial_protection_act
+	icon = GFX_MAF_bind_the_continent
+	relative_position_id = GER_maf_question
+	x = 1
+	y = 1
+	cost = 5
+
+	ai_will_do = {
+		base = 125
+	}
+	
+	prerequisite = {
+		focus = GER_maf_question
+	}
+	completion_reward = {
+		MAF = {
+			add_stability = 0.05
+			add_ideas = GER_protection_from_germany
+		}
+	}
+}
+
+shared_focus = {
+	id = GER_post_colonial_order
+	icon = GFX_DAH_No_German
+	relative_position_id = GER_maf_question
+	x = 0
+	y = 2
+	cost = 5
+
+	ai_will_do = {
+		base = 125
+	}
+
+	available = {
+		#Auto-fires once MAF collapses
+		always = no
+	}
+	prerequisite = {
+		focus = GER_maf_question
+	}
+	completion_reward = {
+		add_war_support = -0.25
+		add_stability = -0.20
+	}
+}
+
+shared_focus = {
+	id = GER_cin
+	icon = GFX_MAF_African_Armies
+	relative_position_id = GER_post_colonial_order
+	x = -1
+	y = 1
+	cost = 5
+
+	ai_will_do = {
+		base = 125
+	}
+	
+	prerequisite = {
+		focus = GER_post_colonial_order
+	}
+	completion_reward = {
+		custom_effect_tooltip = GER_cin_tt
+		every_country = {
+			limit = {
+				has_country_flag = MAF_rp_path
+			}
+			add_ideas = GER_cin_member
+			if = {
+				limit = { 
+					check_variable = { reichspakt_alignment_level = 1 }
+				}
+				set_temp_variable = { temp_level = 2 }
+				set_reichspakt_alignment = yes
+			}
+			if = {
+				limit = { 
+					has_country_flag = MAF_core_colony
+				}
+				set_temp_variable = { temp_level = 3 }
+				set_reichspakt_alignment = yes
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = GER_neo_colonialism
+	icon = GFX_MAF_And_A_Dagger_in_the_Other
+	relative_position_id = GER_post_colonial_order
+	x = 1
+	y = 1
+	cost = 5
+
+	ai_will_do = {
+		base = 125
+	}
+	
+	prerequisite = {
+		focus = GER_post_colonial_order
+	}
+	completion_reward = {
+		country_event = {
+			id = krg_gerdip.12
+		}
+	}
+}
+
+# New Dip #
+shared_focus = {
+	id = GER_american_diplomacy
+	icon = GFX_TEX_americas
+	relative_position_id = GER_weltreich
+	x = 14
+	y = 1
+	cost = 3
+
+	ai_will_do = {
+		base = 125
+	}
+
+	prerequisite = {
+		focus = GER_weltreich
+	}
+	completion_reward = {
+		add_political_power = 25
+		country_event = krg_gerdip.1
+	}
+}
+
+shared_focus = {
+	id = GER_buenos_aires_military_mission
+	icon = GFX_GER_honour_the_vets
+	relative_position_id = GER_american_diplomacy
+	x = -3
+	y = 1
+	cost = 5
+
+	ai_will_do = {
+		base = 125
+	}
+	available = {
+		ARG = { 
+			exists = yes 
+			has_idea = GER_argentine_military_mission
+		}
+	}
+
+
+	prerequisite = {
+		focus = GER_american_diplomacy
+	}
+	completion_reward = {
+		country_event = krg_gerdip.3
+		custom_effect_tooltip = GER_argentine_mission_expansion
+	}
+}
+
+shared_focus = {
+	id = GER_german_argentina_armament_programme
+	icon = GFX_ARG_argentina_flag
+	relative_position_id = GER_american_diplomacy
+	x = -1
+	y = 1
+	cost = 5
+
+	ai_will_do = {
+		base = 125
+	}
+	available = {
+		ARG = { exists = yes }
+	}
+
+
+	prerequisite = {
+		focus = GER_american_diplomacy
+	}
+	completion_reward = {
+		country_event = krg_gerdip.4
+	}
+}
+
+shared_focus = {
+	id = GER_intervene_in_south_america
+	icon = GFX_generic_authority
+	relative_position_id = GER_american_diplomacy
+	x = -2
+	y = 2
+	cost = 5
+
+	ai_will_do = {
+		base = 125
+		modifier = {
+			has_global_flag = great_south_american_war
+			factor = 50
+		}
+	}
+	available = {
+		ARG = { exists = yes }
+	}
+
+	available = {
+		has_global_flag = great_south_american_war
+	}
+	prerequisite = {
+		focus = GER_buenos_aires_military_mission
+	}
+	prerequisite = {
+		focus = GER_german_argentina_armament_programme
+	}
+	completion_reward = {
+		country_event = krg_gerdip.7
+		custom_effect_tooltip = GER_intervene_in_the_GSAW
+	}
+}
+
+shared_focus = {
+	id = GER_fund_our_caribbean_counterweight
+	icon = GFX_DOM_Trujillo_en_Tierra
+	relative_position_id = GER_american_diplomacy
+	x = 1
+	y = 1
+	cost = 5
+
+	ai_will_do = {
+		base = 125
+	}
+	available = {
+		DOM = { 
+			exists = yes 
+			DOM_rafael_trujillo = {
+				is_country_leader = yes
+			}
+		}
+
+	}
+
+
+	prerequisite = {
+		focus = GER_american_diplomacy
+	}
+	completion_reward = {
+		country_event = krg_gerdip.2
+		DOM = {
+			set_temp_variable = {
+				temp_level = 4
+			}
+			set_reichspakt_alignment = yes
+		}
+	}
+}
+
+shared_focus = {
+	id = GER_one_america_policy
+	icon = GFX_TEX_deal
+	relative_position_id = GER_american_diplomacy
+	x = 0
+	y = 2
+	cost = 5
+
+	ai_will_do = {
+		base = 125
+	}
+	available = {
+		TEX = { exists = yes }
+	}
+
+	prerequisite = {
+		focus = GER_american_diplomacy
+	}
+	completion_reward = {
+		#custom_effect_tooltip = GER_AUS_one_america
+		TEX = {
+			add_opinion_modifier = {
+				target = GER 
+				modifier = large_increase
+			}
+
+			reverse_add_opinion_modifier = {
+				target = GER 
+				modifier = medium_increase
+			}
+
+			add_opinion_modifier = {
+				target = GER 
+				modifier = KRG_trade_agreement
+			}
+
+			reverse_add_opinion_modifier = {
+				target = GER 
+				modifier = KRG_trade_agreement
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = GER_german_friendly_senators
+	icon = GFX_TEX_congress_icon
+	relative_position_id = GER_american_diplomacy
+	x = -1
+	y = 3
+	cost = 5
+
+	ai_will_do = {
+		base = 125
+	}
+	available = {
+		TEX = { exists = yes }
+	}
+
+	prerequisite = {
+		focus = GER_one_america_policy
+	}
+	completion_reward = {
+		#custom_effect_tooltip = GER_AUS_sympathisers
+		375 = {
+			set_temp_variable = {
+				pop_type_added = 1
+			}
+			# 0 is auth dem, 1 is conservative etc. refer to order of ids
+			set_temp_variable = {
+				pop_value_added = 2
+			}
+			# percent added
+			TEX_add_electoral_popularity = yes
+		}
+
+		371 = {
+			set_temp_variable = {
+				pop_type_added = 1
+			}
+			# 0 is auth dem, 1 is conservative etc. refer to order of ids
+			set_temp_variable = {
+				pop_value_added = 2
+			}
+			# percent added
+			TEX_add_electoral_popularity = yes
+		}
+
+		361 = {
+			set_temp_variable = {
+				pop_type_added = 1
+			}
+			# 0 is auth dem, 1 is conservative etc. refer to order of ids
+			set_temp_variable = {
+				pop_value_added = 2
+			}
+			# percent added
+			TEX_add_electoral_popularity = yes
+		}
+		
+	}
+}
+
+shared_focus = {
+	id = GER_longist_military_cooperation
+	icon = GFX_TEX_army
+	relative_position_id = GER_american_diplomacy
+	x = 1
+	y = 3
+	cost = 5
+
+	ai_will_do = {
+		base = 125
+	}
+	available = {
+		TEX = { exists = yes }
+	}
+	prerequisite = {
+		focus = GER_one_america_policy
+	}
+	completion_reward = {
+		#custom_effect_tooltip = GER_AUS_share_expertise
+		TEX = {
+			army_experience = 25
+			add_doctrine_cost_reduction = {
+				cost_reduction = 0.5
+				uses = 2
+				category = cat_combined_operations
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = GER_special_relationship
+	icon = GFX_TEX_conservative
+	relative_position_id = GER_american_diplomacy
+	x = 0
+	y = 4
+	cost = 5
+
+	ai_will_do = {
+		base = 125
+	}
+	available = {
+		TEX = { 
+			exists = yes 
+			has_government = social_conservative
+		}
+
+	}
+
+	prerequisite = {
+		focus = GER_german_friendly_senators
+	}
+	prerequisite = {
+		focus = GER_longist_military_cooperation
+	}
+	completion_reward = {
+		custom_effect_tooltip = GER_AUS_special_relationship
+		TEX = {
+			if = {
+				limit = { 
+					check_variable = { reichspakt_alignment_level = 1 }
+				}
+				set_temp_variable = { temp_level = 2 }
+				set_reichspakt_alignment = yes
+			}
+			add_opinion_modifier = {
+				target = GER 
+				modifier = large_increase
+			}
+
+			reverse_add_opinion_modifier = {
+				target = GER 
+				modifier = large_increase
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = GER_lean_on_longist_elections
+	icon = GFX_DOM_Call_Special_Election
+	relative_position_id = GER_american_diplomacy
+	x = -1
+	y = 5
+	cost = 5
+
+	ai_will_do = {
+		base = 125
+	}
+	available = {
+		TEX = { exists = yes }
+	}
+
+	prerequisite = {
+		focus = GER_german_friendly_senators
+	}
+	completion_reward = {
+		#custom_effect_tooltip = GER_AUS_altering_elections
+		375 = {
+			set_temp_variable = {
+				pop_type_added = 1
+			}
+			# 0 is auth dem, 1 is conservative etc. refer to order of ids
+			set_temp_variable = {
+				pop_value_added = 4
+			}
+			# percent added
+			TEX_add_electoral_popularity = yes
+		}
+
+		371 = {
+			set_temp_variable = {
+				pop_type_added = 1
+			}
+			# 0 is auth dem, 1 is conservative etc. refer to order of ids
+			set_temp_variable = {
+				pop_value_added = 4
+			}
+			# percent added
+			TEX_add_electoral_popularity = yes
+		}
+
+		361 = {
+			set_temp_variable = {
+				pop_type_added = 1
+			}
+			# 0 is auth dem, 1 is conservative etc. refer to order of ids
+			set_temp_variable = {
+				pop_value_added = 4
+			}
+			# percent added
+			TEX_add_electoral_popularity = yes
+		}
+
+		366 = {
+			set_temp_variable = {
+				pop_type_added = 1
+			}
+			# 0 is auth dem, 1 is conservative etc. refer to order of ids
+			set_temp_variable = {
+				pop_value_added = 2
+			}
+			# percent added
+			TEX_add_electoral_popularity = yes
+		}
+
+		362 = {
+			set_temp_variable = {
+				pop_type_added = 1
+			}
+			# 0 is auth dem, 1 is conservative etc. refer to order of ids
+			set_temp_variable = {
+				pop_value_added = 2
+			}
+			# percent added
+			TEX_add_electoral_popularity = yes
+		}
+	}
+}
+
+shared_focus = {
+	id = GER_build_union_navy
+	icon = GFX_TEX_navy
+	relative_position_id = GER_american_diplomacy
+	x = 1
+	y = 5
+	cost = 5
+
+	ai_will_do = {
+		base = 125
+	}
+	available = {
+		TEX = { exists = yes }
+	}
+	
+	prerequisite = {
+		focus = GER_longist_military_cooperation
+	}
+	completion_reward = {
+		#custom_effect_tooltip = GER_AUS_buiding_navy
+		unlock_decision_category_tooltip = GER_tex_naval_support_cat
+	}
+}
+
+#shared_focus = { #Accord is focusing on America
+#	id = GER_european_back_door
+#	icon = GFX_FRA_FrenchMonarchistMilitaryIcon
+#	y = 6
+#	cost = 5
+#
+#available = { 
+#	has_golobal_flag = ACW_start
+#}
+#
+#	prerequisite = { focus = GER_build_union_navy }
+#	prerequisite = { focus = GER_special_relationship }
+#
+#	completion_reward = {
+#		declare_war_on = {
+#			target = NFA
+#			type = annex_everything
+#		}
+#	}
+#}
+# Blumenthal Tree
+shared_focus = {
+	id = GER_imperial_succesion_act
+	icon = GFX_POL_german_king
+	x = 0
+	y = 3
+	relative_position_id = GER_1951_election
+	cost = 5
+
+	prerequisite = {
+		focus = GER_1951_election
+	}
+
+
+	ai_will_do = {
+		base = 150
+	}
+	
+	available = {
+		has_country_flag = GER_salic_repealed
+	}
+	completion_reward = {
+	}
+}
+
+shared_focus = {
+	id = GER_bredows_vision_holds_2
+	text = GER_bredows_vision_holds
+	icon = GFX_GER_take_in_bredowists
+	relative_position_id = GER_the_centralisation_act
+	x = 0
+	y = 1
+	cost = 5
+
+	ai_will_do = {
+		base = 150
+	}
+
+	available = {
+		has_country_flag = GER_salic_repealed
+		#has_government = paternal_autocrat
+		#NOT = {
+		#	has_idea = GER_Hans_Jurgen_von_Blumenthal_hog_pau
+		#}
+	}
+	prerequisite = {
+		focus = GER_the_centralisation_act
+	}
+	#mutually_exclusive = {
+	#	focus = GER_rule_of_brothers
+	#}
+	completion_reward = {
+	}
+}
+
+shared_focus = {
+	id = GER_beholden_to_constitutionalism
+	icon = GFX_focus_ger_return_of_the_kaiser
+	relative_position_id = GER_imperial_succesion_act
+	x = 0
+	y = 2
+	cost = 5
+
+	ai_will_do = {
+		base = 150
+	}
+
+	available = {
+		has_idea = GER_Hans_Jurgen_von_Blumenthal_hog_pau
+	}
+	prerequisite = {
+		focus = GER_imperial_succesion_act
+	}
+	mutually_exclusive = {
+		focus = GER_rule_of_brothers
+	}
+	completion_reward = {
+	}
+}
+
+shared_focus = {
+	id = GER_rule_of_brothers
+	icon = GFX_GER_rule_of_brothers
+	x = 2
+	y = 0
+	cost = 5
+
+	ai_will_do = {
+		base = 150
+	}
+
+	available = {
+		has_idea = GER_Hans_Jurgen_von_Blumenthal_hog_pau
+	}
+	mutually_exclusive = {
+		focus = GER_beholden_to_constitutionalism
+	}
+	completion_reward = {
+	}
+}
+
+shared_focus = {
+	id = GER_cultivating_our_coalition
+	icon = GFX_generic_plotting
+	relative_position_id = GER_beholden_to_constitutionalism
+	x = -2
+	y = 1
+	cost = 5
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = {
+		focus = GER_beholden_to_constitutionalism
+	}
+	completion_reward = {
+		coal_add_soc_lib = yes
+		coal_add_soc_lib = yes
+		coal_add_soc_con = yes
+		coal_add_auth_dem = yes
+		coal_add_nat_pop = yes
+	}
+}
+
+shared_focus = {
+	id = GER_restrained_reformism
+	icon = GFX_generic_deny_democracy
+	relative_position_id = GER_cultivating_our_coalition
+	x = -1
+	y = 1
+	cost = 5
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = {
+		focus = GER_cultivating_our_coalition
+	}
+	completion_reward = {
+		add_ideas = GER_restrained_reforms
+	}
+}
+
+shared_focus = {
+	id = GER_expand_veteranenhilfegesetz
+	icon = GFX_NEE_next_generation
+	relative_position_id = GER_restrained_reformism
+	x = 3
+	y = 1
+	cost = 9
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = {
+		focus = GER_restrained_reformism
+	}
+	select_effect = {
+		set_temp_variable = { GER_active_law = 3 }
+		GER_Start_Law_Process = yes
+	}
+	completion_reward = {
+		custom_effect_tooltip = GER_passing_law_trough_reichstag_bundesrat_tt
+		effect_tooltip = {
+			GER_law_3_effect = yes
+		}
+		add_research_slot = 1
+	}
+}
+
+shared_focus = {
+	id = GER_enchanced_healthcare
+	icon = GFX_generic_healthcare
+	relative_position_id = GER_restrained_reformism
+	x = 1
+	y = 1
+	cost = 9
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = {
+		focus = GER_restrained_reformism
+	}
+	select_effect = {
+		set_temp_variable = { GER_active_law = 2 }
+		GER_Start_Law_Process = yes
+	}
+	completion_reward = {
+		custom_effect_tooltip = GER_passing_law_trough_reichstag_bundesrat_tt
+		effect_tooltip = {
+			GER_law_2_effect = yes
+		}
+	}
+}
+
+shared_focus = {
+	id = GER_kohle_und_stahl
+	icon = GFX_generic_coal_mining
+	relative_position_id = GER_cultivating_our_coalition
+	x = 1
+	y = 1
+	cost = 5
+
+	ai_will_do = {
+		base = 150
+	}
+	
+	prerequisite = {
+		focus = GER_cultivating_our_coalition
+	}
+	completion_reward = {
+		add_resource = {
+			type = steel
+			amount = 24
+			state = 57
+		}
+		add_resource = {
+			type = steel
+			amount = 28
+			state = 51
+		}
+		add_resource = {
+			type = steel
+			amount = 6
+			state = 8
+		}
+		add_resource = {
+			type = steel
+			amount = 30
+			state = 65
+		}
+	}
+}
+
+shared_focus = {
+	id = GER_promote_prussian_spirit
+	icon = GFX_GER_Prussia_Empire
+	relative_position_id = GER_cultivating_our_coalition
+	x = 5
+	y = 1
+	cost = 5
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = {
+		focus = GER_permanent_government
+	}
+	completion_reward = {
+		add_ideas = GER_prussian_spirit
+	}
+}
+
+shared_focus = {
+	id = GER_reafirm_heers_trust
+	icon = GFX_generic_army_cooperation
+	relative_position_id = GER_promote_prussian_spirit
+	x = -1
+	y = 1
+	cost = 5
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = {
+		focus = GER_promote_prussian_spirit
+	}
+	completion_reward = {
+		GER_increase_general_staff_support = yes
+	}
+}
+
+shared_focus = {
+	id = GER_military_expending_act
+	icon = GFX_generic_military_equipment
+	relative_position_id = GER_expand_veteranenhilfegesetz
+	x = -1
+	y = 1
+	cost = 5
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = {
+		focus = GER_expand_veteranenhilfegesetz
+	}
+	prerequisite = {
+		focus = GER_reafirm_heers_trust
+	}
+	prerequisite = {
+		focus = GER_kohle_und_stahl
+	}
+	select_effect = {
+		set_temp_variable = { GER_active_law = 7 }
+		GER_Start_Law_Process = yes
+	}
+	completion_reward = {
+		custom_effect_tooltip = GER_passing_law_trough_reichstag_bundesrat_tt
+		effect_tooltip = {
+			GER_law_7_effect = yes
+		}
+	}
+}
+
+shared_focus = {
+	id = GER_national_defense_highways
+	icon = GFX_KRG_generic_highway
+	relative_position_id = GER_reafirm_heers_trust
+	x = -1
+	y = 1
+	cost = 9
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = {
+		focus = GER_reafirm_heers_trust
+	}
+	select_effect = {
+		set_temp_variable = { GER_active_law = 6 }
+		GER_Start_Law_Process = yes
+	}
+	completion_reward = {
+		custom_effect_tooltip = GER_passing_law_trough_reichstag_bundesrat_tt
+		effect_tooltip = {
+			GER_law_6_effect = yes
+		}
+	}
+}
+
+shared_focus = {
+	id = GER_manage_national_debt
+	icon = GFX_FRA_Reclaim_France
+	relative_position_id = GER_enchanced_healthcare
+	x = 2
+	y = 2
+	cost = 5
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = {
+		focus = GER_enchanced_healthcare
+	}
+	prerequisite = {
+		focus = GER_military_expending_act
+	}
+	prerequisite = {
+		focus = GER_national_defense_highways
+	}
+	completion_reward = {
+		add_timed_idea = {
+			idea = GER_reperations_into_debts
+			days = 365
+		}
+		FRA = {
+			add_timed_idea = {
+				idea = FRA_reperations_into_debts
+				days = 365
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = GER_stability_breeds_prosperity
+	icon = GFX_generic_stable_government
+	relative_position_id = GER_manage_national_debt
+	x = 0
+	y = 1
+	cost = 5
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = {
+		focus = GER_manage_national_debt
+	}
+	completion_reward = {
+		add_ideas = GER_constitutional_stability
+		add_country_leader_trait = popular_figurehead
+	}
+}
+
+shared_focus = {
+	id = GER_universal_suffrage
+	icon = GFX_GER_Pursue_Equal_Suffrage_in_Prussia
+	relative_position_id = GER_beholden_to_constitutionalism
+	x = 1
+	y = -1
+	cost = 5
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = {
+		focus = GER_imperial_succesion_act
+	}
+	available = {
+		has_country_flag = women_can_vote
+	}
+	completion_reward = {
+		add_stability = 0.15
+		add_political_power = 25
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = 0.03
+		}
+		add_popularity = {
+			ideology = paternal_autocrat
+			popularity = 0.03
+		}
+	}
+}
+
+shared_focus = {
+	id = GER_abolish_three_class_system
+	icon = GFX_GER_Fundamental_Rights
+	relative_position_id = GER_beholden_to_constitutionalism
+	x = 1
+	y = 2
+	cost = 5
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = {
+		focus = GER_beholden_to_constitutionalism
+	}
+	completion_reward = {
+		add_political_power = 75
+		add_stability = 0.08
+		add_popularity = {
+			ideology = paternal_autocrat
+			popularity = 0.03
+		}
+		add_popularity = {
+			ideology = social_conservative
+			popularity = 0.03
+		}
+	}
+}
+
+shared_focus = {
+	id = GER_permanent_government
+	icon = GFX_generic_fake_democracy
+	relative_position_id = GER_cultivating_our_coalition
+	x = 4
+	y = 0
+	cost = 5
+
+	ai_will_do = {
+		base = 150
+	}
+	
+	prerequisite = {
+		focus = GER_beholden_to_constitutionalism
+	}
+	completion_reward = {
+		add_ideas = GER_anti_radicalism_act
+		add_popularity = {
+			ideology = social_democrat
+			popularity = -0.1
+		}
+		add_popularity = {
+			ideology = revolutionary_republican
+			popularity = -0.05
+		}
+		add_popularity = {
+			ideology = paternal_autocrat
+			popularity = 0.1
+		}
+	}
+}
+
+shared_focus = {
+	id = GER_fund_stahlhelm
+	icon = GFX_generic_veterans_benefits
+	relative_position_id = GER_promote_prussian_spirit
+	x = 1
+	y = 1
+	cost = 5
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = {
+		focus = GER_promote_prussian_spirit
+	}
+	completion_reward = {
+		add_war_support = 0.075
+	}
+}
+
+shared_focus = {
+	id = GER_mandate_einheitfront
+	icon = GFX_generic_civil_service
+	relative_position_id = GER_rule_of_brothers
+	x = -1
+	y = 1
+	cost = 5
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = {
+		focus = GER_rule_of_brothers
+	}
+	completion_reward = {
+		add_popularity = {
+			ideology = paternal_autocrat
+			popularity = 0.03
+		}
+		country_event = {
+			id = krg_ger.505
+		}
+	}
+}
+
+shared_focus = {
+	id = GER_secure_corporate_alliance
+	icon = GFX_generic_loans
+	relative_position_id = GER_rule_of_brothers
+	x = 1
+	y = 1
+	cost = 5
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = {
+		focus = GER_rule_of_brothers
+	}
+	completion_reward = {
+		country_event = {
+			id = krg_ger.502
+		}
+		country_event = {
+			id = krg_ger.503
+			days = 10
+		}
+		country_event = {
+			id = krg_ger.504
+			days = 20
+		}
+	}
+}
+
+shared_focus = {
+	id = GER_enlightening_the_citizen
+	icon = GFX_focus_research2
+	relative_position_id = GER_mandate_einheitfront
+	x = 1
+	y = 1
+	cost = 9
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = {
+		focus = GER_mandate_einheitfront
+	}
+	select_effect = {
+		set_temp_variable = { GER_active_law = 3 }
+		GER_Start_Law_Process = yes
+	}
+	completion_reward = {
+		custom_effect_tooltip = GER_passing_law_trough_reichstag_bundesrat_tt
+		effect_tooltip = {
+			GER_law_3_effect = yes
+		}
+		add_research_slot = 1
+		hidden_effect = {
+			country_event = {
+				id = krg_ger.509
+				days = 140
+			}
+		}
+	}
+}
+
+#shared_focus = {
+#	id = GER_mantain_the_peace
+#	icon = GFX_HON_peace_in_our_time
+#	relative_position_id = GER_mandate_einheitfront
+#	x = -5
+#	y = 4
+#	cost = 5
+#
+#	prerequisite = { focus = GER_mandate_einheitfront }
+#	prerequisite = { focus = GER_secure_corporate_alliance }
+#
+#	completion_reward = {
+#
+#	}
+#}
+shared_focus = {
+	id = GER_transform_stahlhelm
+	icon = GFX_GER_freikorps_question
+	relative_position_id = GER_enlightening_the_citizen
+	x = -1
+	y = 1
+	cost = 5
+	
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = {
+		focus = GER_enlightening_the_citizen
+	}
+	completion_reward = {
+		if = {
+			limit = {
+				has_idea = GER_pfadfinderbund_prev
+			}
+			swap_ideas = {
+				remove_idea = GER_pfadfinderbund_prev
+				add_idea = GER_pfadfinderbund
+			}
+		}
+		else = {
+			add_ideas = GER_stahlhelm
+		}
+		country_event = {
+			id = krg_ger.510
+		}
+	}
+}
+
+shared_focus = {
+	id = GER_export_german_ideal
+	icon = GFX_BAT_germanisation
+	relative_position_id = GER_enlightening_the_citizen
+	x = 1
+	y = 1
+	cost = 5
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = {
+		focus = GER_enlightening_the_citizen
+	}
+	completion_reward = {
+		add_popularity = {
+			ideology = paternal_autocrat
+			popularity = 0.05
+		}
+		every_country = {
+			limit = {
+				is_in_faction_with = GER
+			}
+			country_event = {
+				id = krg_ger.546
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = GER_emulating_iron_chancellor
+	icon = GFX_GER_Iron_Chancellor
+	relative_position_id = GER_secure_corporate_alliance
+	x = 1
+	y = 1
+	cost = 5
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = {
+		focus = GER_secure_corporate_alliance
+	}
+	completion_reward = {
+		#Idea = People's Community
+		country_event = {
+			id = krg_ger.531
+		}
+	}
+}
+
+shared_focus = {
+	id = GER_reorganize_pfadfinderbund
+	icon = GFX_generic_army_guard
+	relative_position_id = GER_fund_stahlhelm
+
+	x = -1
+	y = 1
+	cost = 5
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = {
+		focus = GER_fund_stahlhelm
+	}
+	
+	completion_reward = {
+		if = {
+			limit = {
+				has_idea = GER_stahlhelm
+			}
+			swap_ideas = {
+				remove_idea = GER_stahlhelm
+				add_idea = GER_pfadfinderbund
+			}
+		}
+		else = {
+			add_ideas = GER_pfadfinderbund
+		}
+	}
+}
+
+shared_focus = {
+	id = GER_centralise_veterans_organisations
+	icon = GFX_GER_honour_the_vets
+	relative_position_id = GER_transform_stahlhelm
+	x = 0
+	y = 1
+	cost = 5
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = {
+		focus = GER_transform_stahlhelm
+	}
+	completion_reward = {
+		swap_ideas = {
+			remove_idea = GER_stahlhelm
+			add_idea = GER_centralized_stahlhelm
+		}
+	}
+}
+
+shared_focus = {
+	id = GER_sledgehammer_to_class_divide
+	icon = GFX_generic_social_reforms
+	relative_position_id = GER_emulating_iron_chancellor
+	x = 1
+	y = 1
+	cost = 9
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = {
+		focus = GER_emulating_iron_chancellor
+	}
+	select_effect = {
+		set_temp_variable = { GER_active_law = 4 }
+		GER_Start_Law_Process = yes
+	}
+	completion_reward = {
+		custom_effect_tooltip = GER_passing_law_trough_reichstag_bundesrat_tt
+		effect_tooltip = {
+			GER_law_4_effect = yes
+		}
+		hidden_effect = {
+			country_event = {
+				id = krg_ger.533
+				days = 14
+			}
+		}
+	}
+
+}
+
+shared_focus = {
+	id = GER_blumenthalist_welfare
+	icon = GFX_generic_agency
+	relative_position_id = GER_sledgehammer_to_class_divide
+	x = -1
+	y = 1
+	cost = 9
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = {
+		focus = GER_sledgehammer_to_class_divide
+	}
+	select_effect = {
+		set_temp_variable = { GER_active_law = 2 }
+		GER_Start_Law_Process = yes
+	}
+	completion_reward = {
+		custom_effect_tooltip = GER_passing_law_trough_reichstag_bundesrat_tt
+		effect_tooltip = {
+			GER_law_2_effect = yes
+		}
+	}
+}
+
+
+
+shared_focus = {
+	id = GER_loyal_trade_union
+	icon = GFX_generic_yellow_union
+	relative_position_id = GER_sledgehammer_to_class_divide
+	x = 1
+	y = 1
+	cost = 5
+
+	ai_will_do = {
+		base = 150
+	}
+	
+	prerequisite = {
+		focus = GER_sledgehammer_to_class_divide
+	}
+	completion_reward = {
+		add_popularity = {
+			ideology = paternal_autocrat
+			popularity = 0.025
+		}
+		add_stability = 0.02
+		country_event = {
+			id = krg_ger.535
+		}
+	}
+}
+
+shared_focus = {
+	id = GER_volksgemeinschaft
+	icon = GFX_BAT_germanisation
+	relative_position_id = GER_blumenthalist_welfare
+	x = 1
+	y = 1
+	cost = 5
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = {
+		focus = GER_blumenthalist_welfare
+	}
+	prerequisite = {
+		focus = GER_loyal_trade_union
+	}
+	completion_reward = {
+		country_event = {
+			id = krg_ger.537
+			days = 14
+		}
+	}
+}
+
+shared_focus = {
+	id = GER_arbiter_of_stability
+	icon = GFX_generic_new_ideology_authdem
+	relative_position_id = GER_centralise_veterans_organisations
+	x = 1
+	y = 1
+	cost = 5
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = {
+		focus = GER_centralise_veterans_organisations
+	}
+	prerequisite = {
+		focus = GER_export_german_ideal
+	}
+	completion_reward = {
+		add_country_leader_trait = popular_figurehead2
+	}
+}
+
+#shared_focus = {
+#	id = GER_campaigning_agaisnt_iron_front
+#	icon = GFX_generic_WIP
+#	relative_position_id = GER_arbiter_of_stability
+#	x = -6
+#	y = 8
+#	cost = 5
+#
+#	prerequisite = { focus = GER_arbiter_of_stability }
+#
+#	completion_reward = {
+#
+#	}
+#}
+#shared_focus = {
+#	id = GER_guarantee_german_federalism
+#	icon = GFX_GER_democracy_in_prussia
+#	relative_position_id = GER_arbiter_of_stability
+#	x = -7
+#	y = 9
+#	cost = 5
+#
+#	prerequisite = { focus = GER_arbiter_of_stability }
+#	mutually_exclusive = { focus = GER_subvert_landtags }
+#
+#	completion_reward = {
+#
+#	}
+#}
+#shared_focus = {
+#	id = GER_subvert_landtags
+#	icon = GFX_generic_anti_parliamentarism
+#	relative_position_id = GER_arbiter_of_stability
+#	x = -5
+#	y = 9
+#	cost = 5
+#
+#	prerequisite = { focus = GER_arbiter_of_stability }
+#	mutually_exclusive = { focus = GER_guarantee_german_federalism }
+#
+#	completion_reward = {
+#		add_ideas = GER_subverted_landtags
+#		add_popularity = {
+#			ideology = paternal_autocrat
+#			popularity = 0.1
+#		}
+#		add_stability = -0.1
+#	}
+#}
+shared_focus = {
+	id = GER_heil_kaiser_dir
+	icon = GFX_generic_flag_large_GER
+	relative_position_id = GER_arbiter_of_stability
+	x = 2
+	y = 1
+	cost = 5
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = {
+		focus = GER_arbiter_of_stability
+	}
+	prerequisite = {
+		focus = GER_volksgemeinschaft
+	}
+	completion_reward = {
+		add_ideas = GER_unityfront_stability
+		swap_ruler_traits = {
+			remove = popular_figurehead2
+			add = popular_figurehead
+		}
+	}
+}
+
+shared_focus = {
+	id = GER_ott_cabinet
+	icon = GFX_GER_heavy_tanks
+	relative_position_id = GER_bredows_vision_holds_2
+	x = -5
+	y = 1
+	cost = 1
+
+	ai_will_do = {
+		base = 150
+	}
+
+	available = {
+		has_government = paternal_autocrat
+		has_idea = GER_Eugen_Ott_hog_pau
+	}
+	prerequisite = {
+		focus = GER_bredows_vision_holds_2
+	}
+	mutually_exclusive = {
+		focus = GER_bose_cabinet
+	}
+	completion_reward = {
+		country_event = {
+			id = krg_ger.650
+			days = 7
+		}
+		log = "[GetDateText]: [Root.GetName]: Focus GER_ott_cabinet"
+	}
+}
+
+shared_focus = {
+	id = GER_dne_establish_asbp
+	icon = GFX_generic_folder_signature
+	relative_position_id = GER_bredows_vision_holds_2
+	x = -6
+	y = 2
+	cost = 5
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = {
+		focus = GER_ott_cabinet
+	}
+	completion_reward = {
+		add_ideas = GER_arbeitsgemeinschaft_staatsburgerlichepolitik
+		log = "[GetDateText]: [Root.GetName]: Focus GER_dne_establish_asbp"
+	}
+}
+
+shared_focus = {
+	id = GER_dne_deputy_chancellor
+	icon = GFX_generic_shadow_government
+	relative_position_id = GER_bredows_vision_holds_2
+	x = -4
+	y = 2
+	cost = 5
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = {
+		focus = GER_ott_cabinet
+	}
+	completion_reward = {
+		country_event = {
+			id = krg_ger.651
+			days = 7
+		}
+		log = "[GetDateText]: [Root.GetName]: Focus GER_dne_deputy_chancellor"
+	}
+}
+
+shared_focus = {
+	id = GER_dne_fight_agrarianism
+	icon = GFX_NEE_big_apple
+	relative_position_id = GER_bredows_vision_holds_2
+	x = -8
+	y = 3
+	cost = 5
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = {
+		focus = GER_dne_establish_asbp
+	}
+	completion_reward = {
+		add_political_power = -25
+		country_event = krg_ger.652
+		log = "[GetDateText]: [Root.GetName]: Focus GER_dne_fight_agrarianism"
+	}
+}
+
+shared_focus = {
+	id = GER_dne_end_agrarianism
+	icon = GFX_generic_anti_reichspakt
+	relative_position_id = GER_bredows_vision_holds_2
+	x = -9
+	y = 4
+	cost = 5
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = {
+		focus = GER_dne_fight_agrarianism
+	}
+	#prerequisite = { has_country_flag = GER_hardline_anti_agri }
+	mutually_exclusive = {
+		focus = GER_dne_junker_counterweight
+	}
+	completion_reward = {
+		add_popularity = {
+			ideology = paternal_autocrat
+			popularity = -0.09
+		}
+		add_popularity = {
+			ideology = national_populist
+			popularity = -0.01
+		}
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = 0.1
+		}
+		swap_ideas = {
+			remove_idea = GER_fighting_junkers
+			add_idea = GER_junkers_neutered
+		}
+		log = "[GetDateText]: [Root.GetName]: Focus GER_dne_end_agrarianism"
+	}
+}
+
+shared_focus = {
+	id = GER_dne_junker_counterweight
+	icon = GFX_focus_eng_concessions_to_the_trade_unions
+	relative_position_id = GER_bredows_vision_holds_2
+	x = -7
+	y = 4
+	cost = 5
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = {
+		focus = GER_dne_fight_agrarianism
+	}
+	#prerequisite = { has_country_flag = GER_counterweight_anti_agri }
+	mutually_exclusive = {
+		focus = GER_dne_end_agrarianism
+	}
+	completion_reward = {
+		add_popularity = {
+			ideology = social_conservative
+			popularity = -0.04
+		}
+		add_popularity = {
+			ideology = national_populist
+			popularity = -0.01
+		}
+		add_popularity = {
+			ideology = social_democrat
+			popularity = 0.05
+		}
+		swap_ideas = {
+			remove_idea = GER_fighting_junkers
+			add_idea = GER_junkers_contested
+		}
+		log = "[GetDateText]: [Root.GetName]: Focus GER_dne_junker_counterweight"
+	}
+}
+
+shared_focus = {
+	id = GER_dne_support_restrained_unions
+	icon = GFX_generic_controlled_board
+	relative_position_id = GER_bredows_vision_holds_2
+	x = -8
+	y = 5
+	cost = 5
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = {
+		focus = GER_dne_end_agrarianism
+		focus = GER_dne_junker_counterweight
+	}
+	completion_reward = {
+		country_event = {
+			id = krg_ger.653
+			days = 7
+		}
+		add_ideas = GER_daap_unions
+		add_popularity = {
+			ideology = social_conservative
+			popularity = -0.02
+		}
+		add_popularity = {
+			ideology = social_democrat
+			popularity = 0.02
+		}
+		log = "[GetDateText]: [Root.GetName]: Focus GER_dne_support_restrained_unions"
+	}
+}
+
+shared_focus = {
+	id = GER_dne_mobilise_population
+	icon = GFX_GENERIC_armament_production
+	relative_position_id = GER_bredows_vision_holds_2
+	x = -6
+	y = 3
+	cost = 5
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = {
+		focus = GER_dne_establish_asbp
+	}
+	completion_reward = {
+		add_manpower = 50000
+		64 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = arms_factory
+				level = 1
+				instant_build = yes
+			}
+		}
+		65 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = arms_factory
+				level = 1
+				instant_build = yes
+			}
+		}
+		55 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = arms_factory
+				level = 1
+				instant_build = yes
+			}
+		}
+		5 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = arms_factory
+				level = 1
+				instant_build = yes
+			}
+		}
+		824 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = arms_factory
+				level = 1
+				instant_build = yes
+			}
+		}
+		log = "[GetDateText]: [Root.GetName]: Focus GER_dne_mobilise_population"
+	}
+}
+
+shared_focus = {
+	id = GER_dne_schulenberg_committee
+	icon = GFX_generic_army_command_power
+	relative_position_id = GER_bredows_vision_holds_2
+	x = -4
+	y = 3
+	cost = 5
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = {
+		focus = GER_dne_deputy_chancellor
+	}
+	completion_reward = {
+		add_ideas = GER_schulenburg_committee
+		log = "[GetDateText]: [Root.GetName]: Focus GER_dne_schulenberg_committee"
+	}
+}
+
+shared_focus = {
+	id = GER_dne_wehrstatt
+	icon = GFX_GER_honour_the_vets
+	relative_position_id = GER_bredows_vision_holds_2
+	x = -5
+	y = 5
+	cost = 5
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = {
+		focus = GER_dne_mobilise_population
+	}
+	prerequisite = {
+		focus = GER_dne_schulenberg_committee
+	}
+	completion_reward = {
+		country_event = {
+			id = krg_ger.654
+			days = 7
+		}
+		add_ideas = GER_finished_wehrstatt
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = -0.02
+		}
+		add_popularity = {
+			ideology = paternal_autocrat
+			popularity = 0.02
+		}
+		log = "[GetDateText]: [Root.GetName]: Focus GER_dne_wehrstatt"
+	}
+}
+
+shared_focus = {
+	id = GER_dne_second_red_general
+	icon = GFX_GER_Red_General_Regime
+	relative_position_id = GER_bredows_vision_holds_2
+	x = -6
+	y = 6
+	cost = 5
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = {
+		focus = GER_dne_support_restrained_unions
+	}
+	prerequisite = {
+		focus = GER_dne_wehrstatt
+	}
+	completion_reward = {
+		hidden_effect = {
+			remove_ideas = GER_finished_wehrstatt
+		}
+		country_event = {
+			id = krg_ger.655
+			days = 7
+		}
+		log = "[GetDateText]: [Root.GetName]: Focus GER_dne_second_red_general"
+	}
+}
+
+shared_focus = {
+	id = GER_bose_cabinet
+	icon = GFX_generic_the_new_regime
+	relative_position_id = GER_bredows_vision_holds_2
+	x = 0
+	y = 1
+	cost = 1
+
+	ai_will_do = {
+		base = 150
+	}
+
+	available = {
+		has_government = paternal_autocrat
+		has_idea = GER_Herbert_von_Bose_hog_pau
+	}
+	prerequisite = {
+		focus = GER_bredows_vision_holds_2
+	}
+	mutually_exclusive = {
+		focus = GER_ott_cabinet
+	}
+	completion_reward = {
+		country_event = {
+			id = krg_ger.600
+			days = 10
+		}
+		log = "[GetDateText]: [Root.GetName]: Focus GER_bose_cabinet"
+	}
+}
+
+shared_focus = {
+	id = GER_dne_agrarian_pact
+	icon = GFX_generic_collaborate_local_elites
+	relative_position_id = GER_bredows_vision_holds_2
+	x = -2
+	y = 2
+	cost = 5
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = {
+		focus = GER_bose_cabinet
+	}
+	completion_reward = {
+		country_event = {
+			id = krg_ger.601
+			days = 10
+		}
+		log = "[GetDateText]: [Root.GetName]: Focus GER_dne_agrarian_pact"
+	}
+}
+
+shared_focus = {
+	id = GER_dne_reactionary_thinkers
+	icon = GFX_generic_national_populism
+	relative_position_id = GER_bredows_vision_holds_2
+	x = 0
+	y = 2
+	cost = 5
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = {
+		focus = GER_bose_cabinet
+	}
+	completion_reward = {
+		add_ideas = GER_reactionary_thinkers
+		add_popularity = {
+			ideology = social_democrat
+			popularity = -0.05
+		}
+		add_popularity = {
+			ideology = paternal_autocrat
+			popularity = 0.02
+		}
+		add_popularity = {
+			ideology = national_populist
+			popularity = 0.03
+		}
+		log = "[GetDateText]: [Root.GetName]: Focus GER_dne_reactionary_thinkers"
+	}
+}
+
+shared_focus = {
+	id = GER_dne_verpo_organisation
+	icon = GFX_generic_political_purge
+	relative_position_id = GER_bredows_vision_holds_2
+	x = 2
+	y = 2
+	cost = 5
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = {
+		focus = GER_bose_cabinet
+	}
+	completion_reward = {
+		country_event = {
+			id = krg_ger.602
+			days = 10
+		}
+		log = "[GetDateText]: [Root.GetName]: Focus GER_dne_verpo_organisation"
+	}
+}
+
+shared_focus = {
+	id = GER_dne_principles_of_administrative_stability
+	icon = GFX_focus_usa_voter_registration_act
+	relative_position_id = GER_bredows_vision_holds_2
+	x = 0
+	y = 3
+	cost = 5
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = {
+		focus = GER_dne_agrarian_pact
+	}
+	prerequisite = {
+		focus = GER_dne_reactionary_thinkers
+	}
+	prerequisite = {
+		focus = GER_dne_verpo_organisation
+	}
+	completion_reward = {
+		add_ideas = GER_principles_of_administrative_stability
+		hidden_effect = {
+			country_event = {
+				id = krg_ger.6xx
+				days = 140
+			}
+		}
+		log = "[GetDateText]: [Root.GetName]: Focus GER_dne_principles_of_administrative_stability"
+	}
+}
+
+shared_focus = {
+	id = GER_dne_vilify_progressivism_of_all_colours
+	icon = GFX_generic_crush_unions
+	relative_position_id = GER_bredows_vision_holds_2
+	x = -1
+	y = 5
+	cost = 5
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = {
+		focus = GER_dne_principles_of_administrative_stability
+	}
+	completion_reward = {
+		add_popularity = {
+			ideology = social_democrat
+			popularity = -0.02
+		}
+		add_popularity = {
+			ideology = social_liberal
+			popularity = -0.03
+		}
+		add_popularity = {
+			ideology = paternal_autocrat
+			popularity = 0.05
+		}
+		log = "[GetDateText]: [Root.GetName]: Focus GER_dne_vilify_progressivism_of_all_colours"
+	}
+}
+
+shared_focus = {
+	id = GER_dne_new_eastern_aid
+	icon = GFX_generic_coin_money_pot
+	relative_position_id = GER_bredows_vision_holds_2
+	x = 2
+	y = 4
+	cost = 5
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = {
+		focus = GER_dne_principles_of_administrative_stability
+	}
+	completion_reward = {
+		country_event = {
+			id = krg_ger.6xx
+			days = 10
+		}
+		log = "[GetDateText]: [Root.GetName]: Focus GER_dne_new_eastern_aid"
+	}
+}
+
+shared_focus = {
+	id = GER_dne_expand_press_law
+	icon = GFX_generic_discredit_the_press_2
+	relative_position_id = GER_bredows_vision_holds_2
+	x = 1
+	y = 5
+	cost = 8
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = {
+		focus = GER_dne_principles_of_administrative_stability
+	}
+	completion_reward = {
+		custom_effect_tooltip = GER_passing_law_dne_tt
+		add_ideas = GER_expanded_press_law
+		log = "[GetDateText]: [Root.GetName]: Focus GER_dne_expand_press_law"
+	}
+}
+
+shared_focus = {
+	id = GER_dne_austere_approach
+	icon = GFX_goal_generic_neutrality_focus
+	relative_position_id = GER_bredows_vision_holds_2
+	x = 0
+	y = 4
+	cost = 8
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = {
+		focus = GER_dne_principles_of_administrative_stability
+	}
+	select_effect = {
+		country_event = {
+			id = krg_ger.606
+			days = 4
+		}
+	}
+	completion_reward = {
+		custom_effect_tooltip = GER_passing_law_dne_tt
+		move_up_taxation = yes
+		add_popularity = {
+			ideology = paternal_autocrat
+			popularity = -0.05
+		}
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = 0.05
+		}
+		log = "[GetDateText]: [Root.GetName]: Focus GER_dne_austere_approach"
+	}
+}
+
+shared_focus = {
+	id = GER_dne_chavinist_economy
+	icon = GFX_SAF_Germany
+	relative_position_id = GER_bredows_vision_holds_2
+	x = 0
+	y = 6
+	cost = 5
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = {
+		focus = GER_dne_austere_approach
+	}
+	completion_reward = {
+		add_ideas = GER_chavinist_economy
+		log = "[GetDateText]: [Root.GetName]: Focus GER_dne_chavinist_economy"
+	}
+}
+
+shared_focus = {
+	id = GER_dne_melt_iron_front
+	icon = GFX_NEE_escalate
+	relative_position_id = GER_bredows_vision_holds_2
+	x = -2
+	y = 4
+	cost = 5
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = {
+		focus = GER_dne_schulenberg_committee
+		focus = GER_dne_principles_of_administrative_stability
+	}
+	completion_reward = {
+		country_event = {
+			id = krg_ger.6xx
+			days = 7
+		}
+		add_popularity = {
+			ideology = revolutionary_republican
+			popularity = -0.02
+		}
+		add_popularity = {
+			ideology = social_liberal
+			popularity = 0.02
+		}
+		log = "[GetDateText]: [Root.GetName]: Focus GER_dne_melt_iron_front"
+	}
+}
+
+shared_focus = {
+	id = GER_dne_strengthen_nuclear_deterrent
+	icon = GFX_generic_nuclear_bomb
+	relative_position_id = GER_bredows_vision_holds_2
+	x = 2
+	y = 1
+	cost = 5
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = {
+		focus = GER_bredows_vision_holds_2
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus GER_dne_strengthen_nuclear_deterrent"
+	}
+}
+
+shared_focus = {
+	id = GER_dne_mandate_membership
+	icon = GFX_generic_civil_service
+	relative_position_id = GER_bredows_vision_holds_2
+	x = 4
+	y = 1
+	cost = 5
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = {
+		focus = GER_bredows_vision_holds_2
+	}
+	completion_reward = {
+		add_popularity = {
+			ideology = paternal_autocrat
+			popularity = 0.03
+		}
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = -0.03
+		}
+		country_event = {
+			id = krg_ger.505
+		}
+		log = "[GetDateText]: [Root.GetName]: Focus GER_dne_mandate_membership"
+	}
+}
+
+shared_focus = {
+	id = GER_dne_infrastructure_committee
+	icon = GFX_generic_railroad_treaty
+	relative_position_id = GER_bredows_vision_holds_2
+	x = 3
+	y = 3
+	cost = 8
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = {
+		focus = GER_dne_mandate_membership
+	}
+	completion_reward = {
+		custom_effect_tooltip = GER_passing_law_dne_tt
+		move_up_inf_spending = yes
+		64 = {
+			add_building_construction = {
+				type = infrastructure
+				level = 1
+				instant_build = yes
+			}
+		}
+		65 = {
+			add_building_construction = {
+				type = infrastructure
+				level = 1
+				instant_build = yes
+			}
+		}
+		59 = {
+			add_building_construction = {
+				type = infrastructure
+				level = 1
+				instant_build = yes
+			}
+		}
+		55 = {
+			add_building_construction = {
+				type = infrastructure
+				level = 1
+				instant_build = yes
+			}
+		}
+		log = "[GetDateText]: [Root.GetName]: Focus GER_dne_infrastructure_committee"
+	}
+}
+
+shared_focus = {
+	id = GER_dne_extend_womens_role
+	icon = GFX_ITA_Women
+	relative_position_id = GER_bredows_vision_holds_2
+	x = 4
+	y = 2
+	cost = 5
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = {
+		focus = GER_dne_mandate_membership
+	}
+	available = {
+		has_country_flag = women_can_vote
+	}
+	completion_reward = {
+		#		custom_effect_tooltip = GER_passing_law_dne_tt
+		add_stability = 0.05
+		add_popularity = {
+			ideology = paternal_autocrat
+			popularity = 0.03
+		}
+		log = "[GetDateText]: [Root.GetName]: Focus GER_dne_extend_womens_role"
+	}
+}
+
+shared_focus = {
+	id = GER_dne_bolster_state_schools
+	icon = GFX_generic_research_grant
+	relative_position_id = GER_bredows_vision_holds_2
+	x = 5
+	y = 3
+	cost = 8
+
+	ai_will_do = {
+		base = 150
+	}
+	
+	prerequisite = {
+		focus = GER_dne_mandate_membership
+	}
+	completion_reward = {
+		custom_effect_tooltip = GER_passing_law_dne_tt
+		move_up_edu_spending = yes
+		add_research_slot = 1
+		log = "[GetDateText]: [Root.GetName]: Focus GER_dne_bolster_state_schools"
+	}
+}

@@ -1,0 +1,414 @@
+add_namespace = krg_syr #syr = cheese in Czech.
+add_namespace = krg_syr_news 
+
+country_event = { #Basic setup
+	id = krg_syr.0
+	title = krg_syr.0.t
+	desc = krg_syr.0.d
+
+	is_triggered_only = yes
+	#fire_only_once = no
+
+	immediate = {
+		log = "[Root.GetName]: fires event krg_syr.0" 
+		hidden_effect = {
+			country_event = {
+				id = krg_syr.1
+				days = 2
+			}
+		}
+	}
+	option = {
+		name = krg_syr.0.a
+		add_political_power = 20
+	}
+}
+
+country_event = { #Lebanon
+	id = krg_syr.1
+	title = krg_syr.1.t
+	desc = krg_syr.1.d
+
+	is_triggered_only = yes
+	#fire_only_once = no
+
+	immediate = {
+		log = "[Root.GetName]: fires event krg_syr.1" 
+		hidden_effect = {
+			country_event = {
+				id = krg_syr.2
+				days = 3
+			}
+		}
+	}
+	option = {
+		name = krg_syr.1.a
+		swap_ideas = {
+			remove_idea = SYR_SSNP_idea
+			add_idea = SYR_SSNP_idea_2
+		}
+	}
+}
+
+
+country_event = { #Palestine
+	id = krg_syr.2
+	title = krg_syr.2.t
+	desc = krg_syr.2.d
+
+	is_triggered_only = yes
+	#fire_only_once = no
+
+	immediate = {
+		log = "[Root.GetName]: fires event krg_syr.2" 
+		hidden_effect = {
+			country_event = {
+				id = krg_syr.3
+				days = 2
+			}
+		}
+	}
+	option = {
+		name = krg_syr.2.a
+		add_political_power = 10
+	}
+}
+
+
+country_event = { #Kurdish border
+	id = krg_syr.3
+	title = krg_syr.3.t
+	desc = krg_syr.3.d
+
+	is_triggered_only = yes
+	#fire_only_once = no
+
+	immediate = {
+		log = "[Root.GetName]: fires event krg_syr.3" 
+		hidden_effect = {
+			country_event = {
+				id = krg_syr.4
+				days = 3
+			}
+		}
+	}
+	option = {
+		name = krg_syr.3.a
+		1158 = { 
+			add_manpower = 5000
+		}
+	}
+}
+
+
+country_event = { #Yishuv
+	id = krg_syr.4
+	title = krg_syr.4.t
+	desc = krg_syr.4.d
+
+	is_triggered_only = yes
+	#fire_only_once = no
+
+	immediate = {
+		log = "[Root.GetName]: fires event krg_syr.4" 
+		hidden_effect = {
+			country_event = {
+				id = krg_syr.5
+				days = 365
+			}
+		}
+	}
+	option = {
+		name = krg_syr.4.a
+	}
+}
+
+
+country_event = { #Shishakli's Coup?
+	id = krg_syr.5
+	title = krg_syr.5.t
+	desc = krg_syr.5.d
+
+	is_triggered_only = yes
+	#fire_only_once = no
+	immediate = {
+		log = "[Root.GetName]: fires event krg_syr.5" 
+	}
+	# option = {
+	# 	name = krg_syr.5.a #ridiculous!
+	# 	ai_chance = { base = 25 }
+	# 	hidden_effect = {
+	# 		country_event = {
+	# 			id = krg_syr.6
+	# 			days = 20
+	# 		}
+	# 	}
+	# }
+
+	option = {
+		name = krg_syr.5.b #arrest Shishakli
+		ai_chance = { base = 25 }
+		hidden_effect = {
+			country_event = {
+				id = krg_syr.7
+				days = 4
+			}
+		}
+		log = "[Root.GetName]: picked option krg_syr.5.b" 
+
+	}
+
+	option = {
+		name = krg_syr.5.c #arrest Saadeh and Shishakli
+		ai_chance = { base = 25 }
+		hidden_effect = {
+			country_event = {
+				id = krg_syr.9
+				days = 4
+			}
+		}
+		log = "[Root.GetName]: picked option krg_syr.5.c" 
+	}
+
+	option = {
+		name = krg_syr.5.e #4d Chess Time
+		ai_chance = { base = 25 }
+		hidden_effect = {
+			country_event = {
+				id = krg_syr.10
+				days = 12
+			}
+		}
+		log = "[Root.GetName]: picked option krg_syr.5.a" 
+	}
+}
+
+country_event = { #Betrayal!
+	id = krg_syr.6
+	title = krg_syr.6.t
+	desc = krg_syr.6.d
+
+	is_triggered_only = yes
+	#fire_only_once = no
+
+	immediate = {
+		SYR_Sami_Al_Hinnawi = {
+			retire = yes
+		}
+		SYR_adib_bin_hassan_alshishakli = {
+			promote_character = yes
+		}
+		coal_rev_auth_dem = yes
+		coal_add_nat_pop = yes
+		log = "[Root.GetName]: fired event krg_syr.6" 
+	}
+	option = {
+		name = krg_syr.6.a
+		news_event = {
+			id = krg_syr_news.0
+		}
+	}
+}
+
+country_event = { #arrest Shishakli
+	id = krg_syr.7
+	title = krg_syr.7.t
+	desc = krg_syr.7.d
+
+	is_triggered_only = yes
+	#fire_only_once = no
+
+	immediate = {
+		hidden_effect = {
+			country_event = {
+				id = krg_syr.8
+				days = 7
+			}
+		}
+		log = "[Root.GetName]: fired event krg_syr.7" 
+	}
+	option = {
+		name = krg_syr.7.a
+		SYR_adib_bin_hassan_alshishakli = {
+			retire = yes
+		}
+	}
+}
+
+country_event = { #the SSNP seize power!
+	id = krg_syr.8
+	title = krg_syr.8.t
+	desc = krg_syr.8.d
+
+	is_triggered_only = yes
+	#fire_only_once = no
+	immediate = {
+		log = "[Root.GetName]: fired event krg_syr.8" 
+	}
+
+	option = {
+		ai_chance = { base = 100 }
+		name = krg_syr.8.a
+		SYR_SSNP_Baathist_War = yes
+		news_event = {
+			id = krg_syr_news.1
+		}
+	}
+	option = {
+		ai_chance = { base = 0 }
+		name = krg_syr.8.b
+		SYR_SSNP_Baathist_War = yes
+		BSY = { change_tag_from = SYR }
+		news_event = {
+			id = krg_syr_news.1
+		}
+	}
+}
+
+country_event = { #arrest Saadeh and Shishakli
+	id = krg_syr.9
+	title = krg_syr.9.t
+	desc = krg_syr.9.d
+
+	is_triggered_only = yes
+	#fire_only_once = no
+
+	immediate = {
+		log = "[Root.GetName]: fired event krg_syr.9" 
+		SYR_adib_bin_hassan_alshishakli = {
+			retire = yes
+		}
+		SYR_Antoun_Saadeh = {
+			retire = yes
+		}
+		SYR_Juliette_El_Mir_Saadeh = {
+			promote_character = yes
+		}
+		hidden_effect = {
+			country_event = {
+				id = krg_syr.8
+				days = 7
+			}
+		}
+	}
+	option = {
+		name = krg_syr.9.a
+	}
+}
+
+country_event = { #4dchess
+	id = krg_syr.10
+	title = krg_syr.10.t
+	desc = krg_syr.10.d
+
+	is_triggered_only = yes
+	#fire_only_once = no
+
+	immediate = {
+		log = "[Root.GetName]: fired event krg_syr.10" 
+	}
+	option = {
+		name = krg_syr.10.a
+		SYR_adib_bin_hassan_alshishakli = {
+			retire = yes
+		}
+		SYR_Antoun_Saadeh = {
+			retire = yes
+		}
+		SYR_Juliette_El_Mir_Saadeh = {
+			promote_character = yes
+		}
+		hidden_effect = {
+			country_event = {
+				id = krg_syr.8
+				days = 7
+			}
+		}
+	}
+	# option = {
+	# 	name = krg_syr.10.b
+	# 	SYR_adib_bin_hassan_alshishakli = {
+	# 		promote_character = yes
+	# 	}
+	# 	news_event = {
+	# 		id = krg_syr_news.0
+	# 	}
+	# }
+}
+
+country_event = { #baathists return from Egypt
+	id = krg_syr.11
+	title = krg_syr.11.t
+	desc = krg_syr.11.d
+
+	is_triggered_only = yes
+	#fire_only_once = no
+	immediate = {
+		log = "[Root.GetName]: fired event krg_syr.11" 
+	}
+
+	option = {
+		name = krg_syr.11.a
+		677 = { 
+			create_unit = {
+				division = "name = \"Al Ead\" division_template = \"Al Ead\""
+				owner = BSY
+			}
+			create_unit = {
+				division = "name = \"Al Ead\" division_template = \"Al Ead\""
+				owner = BSY
+			}
+			create_unit = {
+				division = "name = \"Al Ead\" division_template = \"Al Ead\""
+				owner = BSY
+			}
+		}	
+	}
+}
+
+news_event = {
+	id = krg_syr_news.0
+	title = krg_syr_news.0.t
+	desc = krg_syr_news.0.d
+	is_triggered_only = yes
+	picture = GFX_ne_SYR_baathists
+	major = yes
+	option = {
+		name = krg_syr_news.0.a
+	}
+}
+
+news_event = {
+	id = krg_syr_news.1
+	title = krg_syr_news.1.t
+	desc = krg_syr_news.1.d
+	is_triggered_only = yes
+	picture = GFX_ne_SYR_SSNP
+	major = yes
+	option = {
+		name = krg_syr_news.1.a
+	}
+}
+news_event = {
+	id = krg_syr_news.2
+	title = krg_syr_news.2.t
+	desc = krg_syr_news.2.d
+	is_triggered_only = yes
+	picture = GFX_ne_SYR_SSNP
+	major = yes
+	option = {
+		name = krg_syr_news.2.a
+	}
+}
+
+news_event = {
+	id = krg_syr_news.3
+	title = krg_syr_news.3.t
+	desc = krg_syr_news.3.d
+	is_triggered_only = yes
+	picture = GFX_ne_SYR_baathists
+	major = yes
+	option = {
+		name = krg_syr_news.3.a
+	}
+}

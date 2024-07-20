@@ -1,0 +1,3456 @@
+# Various useful scripted effects
+# Contributed to by: Avalon, Gabo, Kennedy, Maho
+# Removes all current ministers for the country in scope - no tooltips displayed
+remove_all_ministers = {
+	hidden_effect = {
+		remove_head_of_government = yes
+		remove_foreign_minister = yes
+		remove_economy_minister = yes
+		remove_justice_minister = yes
+		remove_interior_minister = yes
+		remove_head_of_intel = yes
+		fill_empty_positions_with_vacant_positions = yes
+	}
+}
+
+remove_all_ministers_with_tooltip = {
+	remove_head_of_government = yes
+	remove_foreign_minister = yes
+	remove_economy_minister = yes
+	remove_justice_minister = yes
+	remove_interior_minister = yes
+	remove_head_of_intel = yes
+	hidden_effect = {
+		fill_empty_positions_with_vacant_positions = yes
+	}
+}
+
+# Removes all current ministers (other than HoG) for the country in scope - no tooltips displayed
+remove_all_ministers_but_hog = {
+	hidden_effect = {
+		remove_foreign_minister = yes
+		remove_economy_minister = yes
+		remove_justice_minister = yes
+		remove_interior_minister = yes
+		remove_head_of_intel = yes
+		fill_empty_positions_with_vacant_positions = yes
+	}
+}
+
+remove_all_ministers_but_hog_with_tooltip = {
+	remove_foreign_minister = yes
+	remove_economy_minister = yes
+	remove_justice_minister = yes
+	remove_interior_minister = yes
+	remove_head_of_intel = yes
+	hidden_effect = {
+		fill_empty_positions_with_vacant_positions = yes
+	}
+}
+
+remove_head_of_government = {
+	hidden_effect = {
+		every_character = {
+			limit = {
+				has_character_flag = is_head_of_government
+			}
+			add_trait = {
+				slot = head_of_government
+				trait = to_be_fired
+			}
+			ROOT = {
+				remove_ideas_with_trait = to_be_fired
+			}
+			remove_trait = {
+				slot = head_of_government
+				trait = to_be_fired
+			}
+		}
+	}
+	effect_tooltip = {
+		remove_ideas_with_trait = head_of_government
+	}
+}
+
+remove_foreign_minister = {
+	hidden_effect = {
+		every_character = {
+			limit = {
+				has_character_flag = is_foreign_minister
+			}
+			add_trait = {
+				slot = foreign_minister
+				trait = to_be_fired
+			}
+			ROOT = {
+				remove_ideas_with_trait = to_be_fired
+			}
+			remove_trait = {
+				slot = foreign_minister
+				trait = to_be_fired
+			}
+		}
+	}
+	effect_tooltip = {
+		remove_ideas_with_trait = foreign_minister
+	}
+}
+
+remove_economy_minister = {
+	hidden_effect = {
+		every_character = {
+			limit = {
+				has_character_flag = is_economy_minister
+			}
+			add_trait = {
+				slot = economy_minister
+				trait = to_be_fired
+			}
+			ROOT = {
+				remove_ideas_with_trait = to_be_fired
+			}
+			remove_trait = {
+				slot = economy_minister
+				trait = to_be_fired
+			}
+		}
+	}
+	effect_tooltip = {
+		remove_ideas_with_trait = economy_minister
+	}
+}
+
+remove_justice_minister = {
+	hidden_effect = {
+		every_character = {
+			limit = {
+				has_character_flag = is_justice_minister
+			}
+			add_trait = {
+				slot = justice_minister
+				trait = to_be_fired
+			}
+			ROOT = {
+				remove_ideas_with_trait = to_be_fired
+			}
+			remove_trait = {
+				slot = justice_minister
+				trait = to_be_fired
+			}
+		}
+	}
+	effect_tooltip = {
+		remove_ideas_with_trait = justice_minister
+	}
+}
+
+remove_interior_minister = {
+	hidden_effect = {
+		every_character = {
+			limit = {
+				has_character_flag = is_interior_minister
+			}
+			add_trait = {
+				slot = interior_minister
+				trait = to_be_fired
+			}
+			ROOT = {
+				remove_ideas_with_trait = to_be_fired
+			}
+			remove_trait = {
+				slot = interior_minister
+				trait = to_be_fired
+			}
+		}
+	}
+	effect_tooltip = {
+		remove_ideas_with_trait = interior_minister
+	}
+}
+
+remove_head_of_intel = {
+	hidden_effect = {
+		every_character = {
+			limit = {
+				has_character_flag = is_head_of_intel
+			}
+			add_trait = {
+				slot = head_of_intel
+				trait = to_be_fired
+			}
+			ROOT = {
+				remove_ideas_with_trait = to_be_fired
+			}
+			remove_trait = {
+				slot = head_of_intel
+				trait = to_be_fired
+			}
+		}
+	}
+	effect_tooltip = {
+		remove_ideas_with_trait = head_of_intel
+	}
+}
+
+fill_empty_positions_with_vacant_positions = {
+	if = {
+		limit = { 
+			NOT = {
+				any_character = {
+					has_character_flag = is_head_of_government
+				}
+			}
+		}
+		add_ideas = generic_vacant_position_head_of_government
+	}
+
+	if = {
+		limit = { 
+			NOT = {
+				any_character = {
+					has_character_flag = is_foreign_minister
+				}
+			}
+		}
+		add_ideas = generic_vacant_position_foreign_minister
+	}
+
+	if = {
+		limit = { 
+			NOT = {
+				any_character = {
+					has_character_flag = is_economy_minister
+				}
+			}
+		}
+		add_ideas = generic_vacant_position_economy_minister
+	}
+
+	if = {
+		limit = { 
+			NOT = {
+				any_character = {
+					has_character_flag = is_justice_minister
+				}
+			}
+		}
+		add_ideas = generic_vacant_position_justice_minister
+	}
+
+	if = {
+		limit = { 
+			NOT = {
+				any_character = {
+					has_character_flag = is_interior_minister
+				}
+			}
+		}
+		add_ideas = generic_vacant_position_interior_minister
+	}
+
+	if = {
+		limit = { 
+			NOT = {
+				any_character = {
+					has_character_flag = is_head_of_intel
+				}
+			}
+		}
+		add_ideas = generic_vacant_position_head_of_intel
+	}
+}
+
+remove_econ_mobilisation = {
+	if = {
+		limit = {
+			has_idea = KRG_total_demobilization
+		}
+		remove_ideas = KRG_total_demobilization
+	}
+	else_if = {
+		limit = {
+			has_idea = KRG_civilian_economy
+		}
+		remove_ideas = KRG_civilian_economy
+	}
+	else_if = {
+		limit = {
+			has_idea = KRG_early_mob
+		}
+		remove_ideas = KRG_early_mob
+	}
+	else_if = {
+		limit = {
+			has_idea = KRG_partial_mob
+		}
+		remove_ideas = KRG_partial_mob
+	}
+	else_if = {
+		limit = {
+			has_idea = KRG_war_economy
+		}
+		remove_ideas = KRG_war_economy
+	}
+	else = {
+		remove_ideas = KRG_total_mob
+	}
+}
+
+# Increasing and lowering Laws / Policies
+# Mobilization
+move_up_mobilization = {
+	if = {
+		limit = {
+			has_idea = KRG_disarmed_nation
+		}
+		swap_ideas = {
+			remove_idea = KRG_disarmed_nation
+			add_idea = KRG_volunteer_only
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = KRG_volunteer_only
+		}
+		swap_ideas = {
+			remove_idea = KRG_volunteer_only
+			add_idea = KRG_limited_conscription
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = KRG_limited_conscription
+		}
+		swap_ideas = {
+			remove_idea = KRG_limited_conscription
+			add_idea = KRG_extensive_conscription
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = KRG_extensive_conscription
+		}
+		swap_ideas = {
+			remove_idea = KRG_extensive_conscription
+			add_idea = KRG_service_by_requirement
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = KRG_service_by_requirement
+		}
+		swap_ideas = {
+			remove_idea = KRG_service_by_requirement
+			add_idea = KRG_all_adults_serve
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = KRG_all_adults_serve
+		}
+		swap_ideas = {
+			remove_idea = KRG_all_adults_serve
+			add_idea = KRG_scraping_the_barrel
+		}
+	}
+	else = {
+		add_political_power = 75		#?
+	}
+}
+
+move_down_mobilization = {
+	if = {
+		limit = {
+			has_idea = KRG_scraping_the_barrel
+		}
+		swap_ideas = {
+			remove_idea = KRG_scraping_the_barrel
+			add_idea = KRG_all_adults_serve
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = KRG_all_adults_serve
+		}
+		swap_ideas = {
+			remove_idea = KRG_all_adults_serve
+			add_idea = KRG_service_by_requirement
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = KRG_service_by_requirement
+		}
+		swap_ideas = {
+			remove_idea = KRG_service_by_requirement
+			add_idea = KRG_extensive_conscription
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = KRG_extensive_conscription
+		}
+		swap_ideas = {
+			remove_idea = KRG_extensive_conscription
+			add_idea = KRG_limited_conscription
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = KRG_limited_conscription
+		}
+		swap_ideas = {
+			remove_idea = KRG_limited_conscription
+			add_idea = KRG_volunteer_only
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = KRG_volunteer_only
+		}
+		swap_ideas = {
+			remove_idea = KRG_volunteer_only
+			add_idea = KRG_disarmed_nation
+		}
+	}
+	else = {
+		add_political_power = 75		#?
+	}
+}
+
+# Trade Laws
+move_up_trade_laws = {
+	# going to closed economy
+	if = {
+		limit = {
+			has_idea = KRG_free_trade
+		}
+		swap_ideas = {
+			remove_idea = KRG_free_trade
+			add_idea = KRG_export_focus
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = KRG_export_focus
+		}
+		swap_ideas = {
+			remove_idea = KRG_export_focus
+			add_idea = KRG_limited_exports
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = KRG_limited_exports
+		}
+		swap_ideas = {
+			remove_idea = KRG_limited_exports
+			add_idea = KRG_closed_economy
+		}
+	}
+	else = {
+		add_political_power = 75		#?
+	}
+}
+
+move_down_trade_laws = {
+	# going to free market
+	if = {
+		limit = {
+			has_idea = KRG_closed_economy
+		}
+		swap_ideas = {
+			remove_idea = KRG_closed_economy
+			add_idea = KRG_limited_exports
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = KRG_limited_exports
+		}
+		swap_ideas = {
+			remove_idea = KRG_limited_exports
+			add_idea = KRG_export_focus
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = KRG_export_focus
+		}
+		swap_ideas = {
+			remove_idea = KRG_export_focus
+			add_idea = KRG_free_trade
+		}
+	}
+	else = {
+		add_political_power = 75		#?
+	}
+}
+
+# Economic Mobilization
+move_up_econ_mobilization = {
+	#from total demobilization to total mobilization
+	if = {
+		limit = {
+			has_idea = KRG_total_demobilization
+		}
+		swap_ideas = {
+			remove_idea = KRG_total_demobilization
+			add_idea = KRG_civilian_economy
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = KRG_civilian_economy
+		}
+		swap_ideas = {
+			remove_idea = KRG_civilian_economy
+			add_idea = KRG_early_mob
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = KRG_early_mob
+		}
+		swap_ideas = {
+			remove_idea = KRG_early_mob
+			add_idea = KRG_partial_mob
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = KRG_partial_mob
+		}
+		swap_ideas = {
+			remove_idea = KRG_partial_mob
+			add_idea = KRG_war_economy
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = KRG_war_economy
+		}
+		swap_ideas = {
+			remove_idea = KRG_war_economy
+			add_idea = KRG_total_mob
+		}
+	}
+}
+
+move_down_econ_mobilization = {
+	#from total mobilization to total demobilization
+	if = {
+		limit = {
+			has_idea = KRG_total_mob
+		}
+		swap_ideas = {
+			remove_idea = KRG_total_mob
+			add_idea = KRG_war_economy
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = KRG_war_economy
+		}
+		swap_ideas = {
+			remove_idea = KRG_war_economy
+			add_idea = KRG_partial_mob
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = KRG_partial_mob
+		}
+		swap_ideas = {
+			remove_idea = KRG_partial_mob
+			add_idea = KRG_early_mob
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = KRG_early_mob
+		}
+		swap_ideas = {
+			remove_idea = KRG_early_mob
+			add_idea = KRG_civilian_economy
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = KRG_civilian_economy
+		}
+		swap_ideas = {
+			remove_idea = KRG_civilian_economy
+			add_idea = KRG_total_demobilization
+		}
+	}
+}
+
+remove_economic_mobilization_law = {
+	#so that if a player wants to set to a specific level they can
+	if = {
+		limit = {
+			has_idea = KRG_total_mob
+		}
+		remove_ideas = KRG_total_mob
+	}
+	else_if = {
+		limit = {
+			has_idea = KRG_war_economy
+		}
+		remove_ideas = KRG_war_economy
+	}
+	else_if = {
+		limit = {
+			has_idea = KRG_partial_mob
+		}
+		remove_ideas = KRG_partial_mob
+	}
+	else_if = {
+		limit = {
+			has_idea = KRG_early_mob
+		}
+		remove_ideas = KRG_early_mob
+	}
+	else_if = {
+		limit = {
+			has_idea = KRG_civilian_economy
+		}
+		remove_ideas = KRG_civilian_economy
+	}
+	else_if = {
+		limit = {
+			has_idea = KRG_total_demobilization
+		}
+		remove_ideas = KRG_total_demobilization
+	}
+}
+
+# Military
+move_up_military = {
+	if = {
+		limit = {
+			has_idea = KRG_unprofessional_military
+		}
+		swap_ideas = {
+			remove_idea = KRG_unprofessional_military
+			add_idea = KRG_semi_professional_military
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = KRG_semi_professional_military
+		}
+		swap_ideas = {
+			remove_idea = KRG_semi_professional_military
+			add_idea = KRG_professional_military
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = KRG_professional_military
+		}
+		swap_ideas = {
+			remove_idea = KRG_professional_military
+			add_idea = KRG_semi_elite_military
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = KRG_semi_elite_military
+		}
+		swap_ideas = {
+			remove_idea = KRG_semi_elite_military
+			add_idea = KRG_elite_military
+		}
+	}
+	else = {
+		add_political_power = 75		#?
+	}
+}
+
+move_down_military = {
+	if = {
+		limit = {
+			has_idea = KRG_elite_military
+		}
+		swap_ideas = {
+			remove_idea = KRG_elite_military
+			add_idea = KRG_semi_elite_military
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = KRG_semi_elite_military
+		}
+		swap_ideas = {
+			remove_idea = KRG_semi_elite_military
+			add_idea = KRG_professional_military
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = KRG_professional_military
+		}
+		swap_ideas = {
+			remove_idea = KRG_professional_military
+			add_idea = KRG_semi_professional_military
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = KRG_semi_professional_military
+		}
+		swap_ideas = {
+			remove_idea = KRG_semi_professional_military
+			add_idea = KRG_unprofessional_military
+		}
+	}
+	else = {
+		add_political_power = -75		#?
+	}
+}
+
+# Immigration
+move_up_immigration = {
+	# towards open
+	if = {
+		limit = {
+			has_idea = KRG_immigration_closed
+		}
+		swap_ideas = {
+			remove_idea = KRG_immigration_closed
+			add_idea = KRG_immigration_heavy
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = KRG_immigration_heavy
+		}
+		swap_ideas = {
+			remove_idea = KRG_immigration_heavy
+			add_idea = KRG_immigration_merit_based
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = KRG_immigration_merit_based
+		}
+		swap_ideas = {
+			remove_idea = KRG_immigration_merit_based
+			add_idea = KRG_immigration_quota_based
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = KRG_immigration_quota_based
+		}
+		swap_ideas = {
+			remove_idea = KRG_immigration_quota_based
+			add_idea = KRG_immigration_light
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = KRG_immigration_light
+		}
+		swap_ideas = {
+			remove_idea = KRG_immigration_light
+			add_idea = KRG_immigration_open
+		}
+	}
+	else = {
+		add_political_power = 75		#?
+	}
+}
+
+move_down_immigration = {
+	# towards closed
+	if = {
+		limit = {
+			has_idea = KRG_immigration_open
+		}
+		swap_ideas = {
+			remove_idea = KRG_immigration_open
+			add_idea = KRG_immigration_light
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = KRG_immigration_light
+		}
+		swap_ideas = {
+			remove_idea = KRG_immigration_light
+			add_idea = KRG_immigration_merit_based
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = KRG_immigration_merit_based
+		}
+		swap_ideas = {
+			remove_idea = KRG_immigration_merit_based
+			add_idea = KRG_immigration_heavy
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = KRG_immigration_heavy
+		}
+		swap_ideas = {
+			remove_idea = KRG_immigration_heavy
+			add_idea = KRG_immigration_closed
+		}
+	}
+	else = {
+		add_political_power = 75		#?
+	}
+}
+
+# Taxation
+move_up_taxation = {
+	if = {
+		limit = {
+			has_idea = econ_minimal_taxation
+		}
+		swap_ideas = {
+			remove_idea = econ_minimal_taxation
+			add_idea = econ_low_taxation
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = econ_low_taxation
+		}
+		swap_ideas = {
+			remove_idea = econ_low_taxation
+			add_idea = econ_moderate_taxation
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = econ_moderate_taxation
+		}
+		swap_ideas = {
+			remove_idea = econ_moderate_taxation
+			add_idea = econ_high_taxation
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = econ_high_taxation
+		}
+		swap_ideas = {
+			remove_idea = econ_high_taxation
+			add_idea = econ_extreme_taxation
+		}
+	}
+	else = {
+		add_political_power = 75		#?
+	}
+}
+
+move_down_taxation = {
+	if = {
+		limit = {
+			has_idea = econ_extreme_taxation
+		}
+		swap_ideas = {
+			remove_idea = econ_extreme_taxation
+			add_idea = econ_high_taxation
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = econ_high_taxation
+		}
+		swap_ideas = {
+			remove_idea = econ_high_taxation
+			add_idea = econ_moderate_taxation
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = econ_moderate_taxation
+		}
+		swap_ideas = {
+			remove_idea = econ_moderate_taxation
+			add_idea = econ_low_taxation
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = econ_low_taxation
+		}
+		swap_ideas = {
+			remove_idea = econ_low_taxation
+			add_idea = econ_minimal_taxation
+		}
+	}
+	else = {
+		add_political_power = 75		#?
+	}
+}
+
+# Business Spending
+move_up_business_spending = {
+	if = {
+		limit = {
+			has_idea = econ_no_business_spending
+		}
+		swap_ideas = {
+			remove_idea = econ_no_business_spending
+			add_idea = econ_small_business_spending
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = econ_small_business_spending
+		}
+		swap_ideas = {
+			remove_idea = econ_small_business_spending
+			add_idea = econ_medium_business_spending
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = econ_medium_business_spending
+		}
+		swap_ideas = {
+			remove_idea = econ_medium_business_spending
+			add_idea = econ_large_business_spending
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = econ_large_business_spending
+		}
+		swap_ideas = {
+			remove_idea = econ_large_business_spending
+			add_idea = econ_massive_business_spending
+		}
+	}
+	else = {
+		add_political_power = 75		#?
+	}
+}
+
+move_down_business_spending = {
+	if = {
+		limit = {
+			has_idea = econ_massive_business_spending
+		}
+		swap_ideas = {
+			remove_idea = econ_massive_business_spending
+			add_idea = econ_large_business_spending
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = econ_large_business_spending
+		}
+		swap_ideas = {
+			remove_idea = econ_large_business_spending
+			add_idea = econ_medium_business_spending
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = econ_medium_business_spending
+		}
+		swap_ideas = {
+			remove_idea = econ_medium_business_spending
+			add_idea = econ_small_business_spending
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = econ_small_business_spending
+		}
+		swap_ideas = {
+			remove_idea = econ_small_business_spending
+			add_idea = econ_no_business_spending
+		}
+	}
+	else = {
+		add_political_power = 75		#?
+	}
+}
+
+# Education Spending
+move_up_edu_spending = {
+	if = {
+		limit = {
+			has_idea = econ_tiny_edu_spending
+		}
+		swap_ideas = {
+			remove_idea = econ_tiny_edu_spending
+			add_idea = econ_small_edu_spending
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = econ_small_edu_spending
+		}
+		swap_ideas = {
+			remove_idea = econ_small_edu_spending
+			add_idea = econ_medium_edu_spending
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = econ_medium_edu_spending
+		}
+		swap_ideas = {
+			remove_idea = econ_medium_edu_spending
+			add_idea = econ_large_edu_spending
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = econ_large_edu_spending
+		}
+		swap_ideas = {
+			remove_idea = econ_large_edu_spending
+			add_idea = econ_massive_edu_spending
+		}
+	}
+	else = {
+		add_political_power = 75		#?
+	}
+}
+
+move_down_edu_spending = {
+	if = {
+		limit = {
+			has_idea = econ_massive_edu_spending
+		}
+		swap_ideas = {
+			remove_idea = econ_massive_edu_spending
+			add_idea = econ_large_edu_spending
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = econ_large_edu_spending
+		}
+		swap_ideas = {
+			remove_idea = econ_large_edu_spending
+			add_idea = econ_medium_edu_spending
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = econ_medium_edu_spending
+		}
+		swap_ideas = {
+			remove_idea = econ_medium_edu_spending
+			add_idea = econ_small_edu_spending
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = econ_small_edu_spending
+		}
+		swap_ideas = {
+			remove_idea = econ_small_edu_spending
+			add_idea = econ_tiny_edu_spending
+		}
+	}
+	else = {
+		add_political_power = 75		#?
+	}
+}
+
+# Healthcare Spending
+move_up_hc_spending = {
+	if = {
+		limit = {
+			has_idea = econ_tiny_hc_spending
+		}
+		swap_ideas = {
+			remove_idea = econ_tiny_hc_spending
+			add_idea = econ_small_hc_spending
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = econ_small_hc_spending
+		}
+		swap_ideas = {
+			remove_idea = econ_small_hc_spending
+			add_idea = econ_medium_hc_spending
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = econ_medium_hc_spending
+		}
+		swap_ideas = {
+			remove_idea = econ_medium_hc_spending
+			add_idea = econ_large_hc_spending
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = econ_large_hc_spending
+		}
+		swap_ideas = {
+			remove_idea = econ_large_hc_spending
+			add_idea = econ_massive_hc_spending
+		}
+	}
+	else = {
+		add_political_power = 75		#?
+	}
+}
+
+move_down_hc_spending = {
+	if = {
+		limit = {
+			has_idea = econ_massive_hc_spending
+		}
+		swap_ideas = {
+			remove_idea = econ_massive_hc_spending
+			add_idea = econ_large_hc_spending
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = econ_large_hc_spending
+		}
+		swap_ideas = {
+			remove_idea = econ_large_hc_spending
+			add_idea = econ_medium_hc_spending
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = econ_medium_hc_spending
+		}
+		swap_ideas = {
+			remove_idea = econ_medium_hc_spending
+			add_idea = econ_small_hc_spending
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = econ_small_hc_spending
+		}
+		swap_ideas = {
+			remove_idea = econ_small_hc_spending
+			add_idea = econ_tiny_hc_spending
+		}
+	}
+	else = {
+		add_political_power = 75		#?
+	}
+}
+
+# Infrastructure Spending
+move_up_inf_spending = {
+	if = {
+		limit = {
+			has_idea = econ_tiny_inf_spending
+		}
+		swap_ideas = {
+			remove_idea = econ_tiny_inf_spending
+			add_idea = econ_small_inf_spending
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = econ_small_inf_spending
+		}
+		swap_ideas = {
+			remove_idea = econ_small_inf_spending
+			add_idea = econ_medium_inf_spending
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = econ_medium_inf_spending
+		}
+		swap_ideas = {
+			remove_idea = econ_medium_inf_spending
+			add_idea = econ_large_inf_spending
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = econ_large_inf_spending
+		}
+		swap_ideas = {
+			remove_idea = econ_large_inf_spending
+			add_idea = econ_massive_inf_spending
+		}
+	}
+	else = {
+		add_political_power = 75		#?
+	}
+}
+
+move_down_inf_spending = {
+	if = {
+		limit = {
+			has_idea = econ_massive_inf_spending
+		}
+		swap_ideas = {
+			remove_idea = econ_massive_inf_spending
+			add_idea = econ_large_inf_spending
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = econ_large_inf_spending
+		}
+		swap_ideas = {
+			remove_idea = econ_large_inf_spending
+			add_idea = econ_medium_inf_spending
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = econ_medium_inf_spending
+		}
+		swap_ideas = {
+			remove_idea = econ_medium_inf_spending
+			add_idea = econ_small_inf_spending
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = econ_small_inf_spending
+		}
+		swap_ideas = {
+			remove_idea = econ_small_inf_spending
+			add_idea = econ_tiny_inf_spending
+		}
+	}
+	else = {
+		add_political_power = 75		#?
+	}
+}
+
+# Service Spending
+move_up_service_spending = {
+	if = {
+		limit = {
+			has_idea = econ_tiny_service_spending
+		}
+		swap_ideas = {
+			remove_idea = econ_tiny_service_spending
+			add_idea = econ_small_service_spending
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = econ_small_service_spending
+		}
+		swap_ideas = {
+			remove_idea = econ_small_service_spending
+			add_idea = econ_medium_service_spending
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = econ_medium_service_spending
+		}
+		swap_ideas = {
+			remove_idea = econ_medium_service_spending
+			add_idea = econ_large_service_spending
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = econ_large_service_spending
+		}
+		swap_ideas = {
+			remove_idea = econ_large_service_spending
+			add_idea = econ_massive_service_spending
+		}
+	}
+	else = {
+		add_political_power = 75		#?
+	}
+}
+
+move_down_service_spending = {
+	if = {
+		limit = {
+			has_idea = econ_massive_service_spending
+		}
+		swap_ideas = {
+			remove_idea = econ_massive_service_spending
+			add_idea = econ_large_service_spending
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = econ_large_service_spending
+		}
+		swap_ideas = {
+			remove_idea = econ_large_service_spending
+			add_idea = econ_medium_service_spending
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = econ_medium_service_spending
+		}
+		swap_ideas = {
+			remove_idea = econ_medium_service_spending
+			add_idea = econ_small_service_spending
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = econ_small_service_spending
+		}
+		swap_ideas = {
+			remove_idea = econ_small_service_spending
+			add_idea = econ_tiny_service_spending
+		}
+	}
+	else = {
+		add_political_power = 75		#?
+	}
+}
+
+# Increasing and lowering state categories
+move_up_state_category = {
+	if = {
+		limit = {
+			has_state_category = one
+		}
+		set_state_category = two
+	}
+	else_if = {
+		limit = {
+			has_state_category = two
+		}
+		set_state_category = three
+	}
+	else_if = {
+		limit = {
+			has_state_category = three
+		}
+		set_state_category = four
+	}
+	else_if = {
+		limit = {
+			has_state_category = four
+		}
+		set_state_category = five
+	}
+	else_if = {
+		limit = {
+			has_state_category = five
+		}
+		set_state_category = six
+	}
+	else_if = {
+		limit = {
+			has_state_category = six
+		}
+		set_state_category = seven
+	}
+	else_if = {
+		limit = {
+			has_state_category = seven
+		}
+		set_state_category = eight
+	}
+	else_if = {
+		limit = {
+			has_state_category = eight
+		}
+		set_state_category = nine
+	}
+	else_if = {
+		limit = {
+			has_state_category = nine
+		}
+		set_state_category = ten
+	}
+	else_if = {
+		limit = {
+			has_state_category = ten
+		}
+		set_state_category = eleven
+	}
+	else_if = {
+		limit = {
+			has_state_category = eleven
+		}
+		set_state_category = twelve
+	}
+	else = {
+		# do nothing :P 
+	}
+}
+
+move_down_state_category = {
+	if = {
+		limit = {
+			has_state_category = twelve
+		}
+		set_state_category = eleven
+	}
+	else_if = {
+		limit = {
+			has_state_category = eleven
+		}
+		set_state_category = ten
+	}
+	else_if = {
+		limit = {
+			has_state_category = ten
+		}
+		set_state_category = nine
+	}
+	else_if = {
+		limit = {
+			has_state_category = nine
+		}
+		set_state_category = eight
+	}
+	else_if = {
+		limit = {
+			has_state_category = eight
+		}
+		set_state_category = seven
+	}
+	else_if = {
+		limit = {
+			has_state_category = seven
+		}
+		set_state_category = six
+	}
+	else_if = {
+		limit = {
+			has_state_category = six
+		}
+		set_state_category = five
+	}
+	else_if = {
+		limit = {
+			has_state_category = five
+		}
+		set_state_category = four
+	}
+	else_if = {
+		limit = {
+			has_state_category = four
+		}
+		set_state_category = three
+	}
+	else_if = {
+		limit = {
+			has_state_category = three
+		}
+		set_state_category = two
+	}
+	else_if = {
+		limit = {
+			has_state_category = two
+		}
+		set_state_category = one
+	}
+	else = {
+		# lol problem
+	}
+}
+
+
+# Essentially a selection sort using find_lowest_in_array
+# Implemented by Strategy Gamer
+# I added a meta effect & scripted loc to take in array arguments - reimu
+naive_sorting = {
+	meta_effect = {
+		text = {
+			set_temp_variable = {
+				length_temp = [ARRAY]^num
+			}
+			for_loop_effect = {
+				start = 0
+				end = length_temp
+				value = v
+				find_highest_in_array = {
+					array = [ARRAY]
+					value = max
+					index = max_index
+				}
+				remove_from_array = {
+					array = [ARRAY]
+					index = max_index
+				}
+				add_to_temp_array = {
+					arr_temp = max
+				}
+			}
+			clear_array = [ARRAY]
+			for_each_loop = {
+				array = arr_temp
+				add_to_array = {
+					[ARRAY] = v
+				}
+			}
+			clear_temp_array = arr_temp
+			clear_variable = max
+			clear_variable = max_index
+		}
+		ARRAY = "[ROOT.GetToQuicksortArray]"
+	}
+}
+
+# Randomized Iterative Quicksort by Yard1
+# Feel free to use in your mods, but give credits to Yard1 (both in code, with comments; and on your download page)
+# I added a meta effect & scripted loc to take in array arguments - reimu
+quicksort = {
+	meta_effect = {
+		text = {
+			set_variable = {
+				high = [SORTARRAY]^num
+			}
+			subtract_from_variable = {
+				high = 1
+			}
+			set_variable = {
+				low = 0
+			}
+			set_temp_variable = {
+				stack_size = high
+			}
+			subtract_from_temp_variable = {
+				stack_size = low
+			}
+			add_to_temp_variable = {
+				stack_size = 1
+			}
+			resize_temp_array = {
+				array = stack
+				value = 0
+				size = stack_size
+			}
+			set_temp_variable = {
+				top = 0
+			}
+			set_temp_variable = {
+				stack^top = low
+			}
+			add_to_temp_variable = {
+				top = 1
+			}
+			set_temp_variable = {
+				stack^top = high
+			}
+			while_loop_effect = {
+				limit = {
+					check_variable = {
+						var = top
+						value = 0
+						compare = greater_than_or_equals
+					}
+				}
+				set_variable = {
+					high = stack^top
+				}
+				subtract_from_temp_variable = {
+					top = 1
+				}
+				set_variable = {
+					low = stack^top
+				}
+				subtract_from_temp_variable = {
+					top = 1
+				}
+				set_variable = {
+					random_pivot = random
+				}
+				multiply_variable = {
+					random_pivot = high
+				}
+				round_variable = random_pivot
+				add_to_variable = {
+					random_pivot = low
+				}
+				clamp_variable = {
+					var = random_pivot
+					min = low
+					max = high
+				}
+				set_temp_variable = {
+					swap = [SORTARRAY]^high
+				}
+				set_variable = {
+					[SORTARRAY]^high = [SORTARRAY]^random_pivot
+				}
+				set_variable = {
+					[SORTARRAY]^random_pivot = swap
+				}
+				set_temp_variable = {
+					idx = low
+				}
+				subtract_from_temp_variable = {
+					idx = 1
+				}
+				meta_effect = {
+					text = {
+						var:[SORTARRAY]^high = {
+							set_variable = {
+								PREV.minimum = [SORTVALUE]
+							}
+						}
+						for_loop_effect = {
+							start = low
+							end = high
+							var:[SORTARRAY]^v = {
+								set_variable = {
+									PREV.tmp = [SORTVALUE]
+								}
+							}
+							if = {
+								limit = {
+									check_variable = {
+										var = tmp
+										value = minimum
+										compare = greater_than_or_equals
+									}
+								}
+								add_to_temp_variable = {
+									idx = 1
+								}
+								set_temp_variable = {
+									swap = [SORTARRAY]^idx
+								}
+								set_variable = {
+									[SORTARRAY]^idx = [SORTARRAY]^v
+								}
+								set_variable = {
+									[SORTARRAY]^v = swap
+								}
+							}
+						}
+					}
+					SORTVALUE = "[ROOT.GetSortValue]"
+				}
+				add_to_temp_variable = {
+					idx = 1
+				}
+				set_temp_variable = {
+					swap = [SORTARRAY]^idx
+				}
+				set_variable = {
+					[SORTARRAY]^idx = [SORTARRAY]^high
+				}
+				set_variable = {
+					[SORTARRAY]^high = swap
+				}
+				set_temp_variable = {
+					qs_partition_return = idx
+				}
+				set_temp_variable = {
+					qs_partition_return_plus_1 = qs_partition_return
+				}
+				set_temp_variable = {
+					qs_partition_return_minus_1 = qs_partition_return
+				}
+				add_to_temp_variable = {
+					qs_partition_return_plus_1 = 1
+				}
+				subtract_from_temp_variable = {
+					qs_partition_return_minus_1 = 1
+				}
+				if = {
+					limit = {
+						check_variable = {
+							qs_partition_return_minus_1 > low
+						}
+					}
+					add_to_temp_variable = {
+						top = 1
+					}
+					set_temp_variable = {
+						stack^top = low
+					}
+					add_to_temp_variable = {
+						top = 1
+					}
+					set_temp_variable = {
+						stack^top = qs_partition_return_minus_1
+					}
+				}
+				if = {
+					limit = {
+						check_variable = {
+							qs_partition_return_plus_1 < high
+						}
+					}
+					add_to_temp_variable = {
+						top = 1
+					}
+					set_temp_variable = {
+						stack^top = qs_partition_return_plus_1
+					}
+					add_to_temp_variable = {
+						top = 1
+					}
+					set_temp_variable = {
+						stack^top = high
+					}
+				}
+			}
+			clear_variable = minimum
+			clear_variable = tmp
+			clear_variable = random_pivot
+		}
+		SORTARRAY = "[ROOT.GetSortArray]"
+		SORTVALUE = "[ROOT.GetSortValue]"
+	}
+}
+
+# adding/subtracting fairly a percentage
+add_percentage_popularity = {
+	for_loop_effect = {
+		start = 0
+		end = percentage_popularity^num
+		add_to_temp_array = {
+			temp_percentage_popularity_array = v
+		}
+	}
+	remove_from_temp_array = {
+		array = temp_percentage_popularity_array
+		value = pop_type_added
+	}
+	add_to_variable = {
+		percentage_popularity^pop_type_added = pop_value_added
+	}
+	clamp_variable = {
+		var = percentage_popularity^pop_type_added
+		min = 0
+		max = 100
+	}
+	while_loop_effect = {
+		limit = {
+			check_variable = {
+				pop_value_added > 0
+			}
+		}
+		for_loop_effect = {
+			start = 0
+			end = temp_percentage_popularity_array^num
+			if = {
+				limit = {
+					check_variable = {
+						percentage_popularity^temp_percentage_popularity_array^v > 0
+					}
+					check_variable = {
+						pop_value_added > 0
+					}
+				}
+				subtract_from_variable = {
+					percentage_popularity^temp_percentage_popularity_array^v = 1
+				}
+				subtract_from_temp_variable = {
+					pop_value_added = 1
+				}
+			}
+		}
+	}
+}
+
+subtract_percentage_popularity = {
+	for_loop_effect = {
+		start = 0
+		end = percentage_popularity^num
+		add_to_temp_array = {
+			temp_percentage_popularity_array = v
+		}
+	}
+	remove_from_temp_array = {
+		array = temp_percentage_popularity_array
+		value = pop_type_subtracted
+	}
+	subtract_from_variable = {
+		percentage_popularity^pop_type_subtracted = pop_value_subtracted
+	}
+	clamp_variable = {
+		var = percentage_popularity^pop_type_subtracted
+		min = 0
+		max = 100
+	}
+	while_loop_effect = {
+		limit = {
+			check_variable = {
+				pop_value_subtracted > 0
+			}
+		}
+		for_loop_effect = {
+			start = 0
+			end = temp_percentage_popularity_array^num
+			if = {
+				limit = {
+					check_variable = {
+						percentage_popularity^temp_percentage_popularity_array^v < 100
+					}
+					check_variable = {
+						pop_value_subtracted > 0
+					}
+				}
+				add_to_variable = {
+					percentage_popularity^temp_percentage_popularity_array^v = 1
+				}
+				subtract_from_temp_variable = {
+					pop_value_subtracted = 1
+				}
+			}
+		}
+	}
+}
+
+increase_conscription = {
+	if = {
+		limit = {
+			has_idea = KRG_all_adults_serve
+		}
+		swap_ideas = {
+			remove_idea = KRG_all_adults_serve
+			add_idea = KRG_scraping_the_barrel
+		}
+	}
+	if = {
+		limit = {
+			has_idea = KRG_service_by_requirement
+		}
+		swap_ideas = {
+			remove_idea = KRG_service_by_requirement
+			add_idea = KRG_all_adults_serve
+		}
+	}
+	if = {
+		limit = {
+			has_idea = KRG_extensive_conscription
+		}
+		swap_ideas = {
+			remove_idea = KRG_extensive_conscription
+			add_idea = KRG_service_by_requirement
+		}
+	}
+	if = {
+		limit = {
+			has_idea = KRG_limited_conscription
+		}
+		swap_ideas = {
+			remove_idea = KRG_limited_conscription
+			add_idea = KRG_extensive_conscription
+		}
+	}
+	if = {
+		limit = {
+			has_idea = KRG_volunteer_only
+		}
+		swap_ideas = {
+			remove_idea = KRG_volunteer_only
+			add_idea = KRG_limited_conscription
+		}
+	}
+	if = {
+		limit = {
+			has_idea = KRG_disarmed_nation
+		}
+		swap_ideas = {
+			remove_idea = KRG_disarmed_nation
+			add_idea = KRG_volunteer_only
+		}
+	}
+}
+
+decrease_conscription = {
+	if = {
+		limit = {
+			has_idea = KRG_volunteer_only
+		}
+		swap_ideas = {
+			remove_idea = KRG_volunteer_only
+			add_idea = KRG_disarmed_nation
+		}
+	}
+	if = {
+		limit = {
+			has_idea = KRG_limited_conscription
+		}
+		swap_ideas = {
+			remove_idea = KRG_limited_conscription
+			add_idea = KRG_volunteer_only
+		}
+	}
+	if = {
+		limit = {
+			has_idea = KRG_extensive_conscription
+		}
+		swap_ideas = {
+			remove_idea = KRG_extensive_conscription
+			add_idea = KRG_limited_conscription
+		}
+	}
+	if = {
+		limit = {
+			has_idea = KRG_service_by_requirement
+		}
+		swap_ideas = {
+			remove_idea = KRG_service_by_requirement
+			add_idea = KRG_extensive_conscription
+		}
+	}
+	if = {
+		limit = {
+			has_idea = KRG_all_adults_serve
+		}
+		swap_ideas = {
+			remove_idea = KRG_all_adults_serve
+			add_idea = KRG_service_by_requirement
+		}
+	}
+	if = {
+		limit = {
+			has_idea = KRG_scraping_the_barrel
+		}
+		swap_ideas = {
+			remove_idea = KRG_scraping_the_barrel
+			add_idea = KRG_all_adults_serve
+		}
+	}
+}
+
+replace_civ_with_arms_factories = {
+	random_owned_controlled_state = {
+		limit = {
+			is_fully_controlled_by = ROOT
+			industrial_complex > 0
+		}
+		remove_building = {
+			type = industrial_complex
+			level = 1
+		}
+		add_building_construction = {
+			type = arms_factory
+			level = 1
+			instant_build = yes
+		}
+	}
+	random_owned_controlled_state = {
+		limit = {
+			is_fully_controlled_by = ROOT
+			industrial_complex > 0
+		}
+		remove_building = {
+			type = industrial_complex
+			level = 1
+		}
+		add_building_construction = {
+			type = arms_factory
+			level = 1
+			instant_build = yes
+		}
+	}
+	random_owned_controlled_state = {
+		limit = {
+			is_fully_controlled_by = ROOT
+			industrial_complex > 0
+		}
+		remove_building = {
+			type = industrial_complex
+			level = 1
+		}
+		add_building_construction = {
+			type = arms_factory
+			level = 1
+			instant_build = yes
+		}
+	}
+	random_owned_controlled_state = {
+		limit = {
+			is_fully_controlled_by = ROOT
+			industrial_complex > 0
+		}
+		remove_building = {
+			type = industrial_complex
+			level = 1
+		}
+		add_building_construction = {
+			type = arms_factory
+			level = 1
+			instant_build = yes
+		}
+	}
+	random_owned_controlled_state = {
+		limit = {
+			is_fully_controlled_by = ROOT
+			industrial_complex > 0
+		}
+		remove_building = {
+			type = industrial_complex
+			level = 1
+		}
+		add_building_construction = {
+			type = arms_factory
+			level = 1
+			instant_build = yes
+		}
+	}
+}
+
+#Country scope
+ROOT_inherit_current_scope_wars_effect = {
+	custom_effect_tooltip = ROOT_inherit_current_scope_wars_effect
+	hidden_effect = {
+		every_country = {
+			limit = {
+				has_defensive_war_with = PREV
+			}
+			ROOT = {
+				declare_war_on = {
+					target = PREV
+					type = annex_everything
+				}
+			}
+		}
+		every_country = {
+			limit = {
+				has_offensive_war_with = PREV
+			}
+			declare_war_on = {
+				target = ROOT
+				type = annex_everything
+			}
+		}
+	}
+}
+
+# Add AI strategies in case of Central European Alliance
+GER_democratic_nations_ai_strategies = {
+	# Reduce Contain against Italy
+	add_ai_strategy = {
+		type = contain
+		id = "ITA"
+		value = -800
+	}
+	# Poland
+	add_ai_strategy = {
+		type = protect
+		id = "POL"
+		value = -200
+	}
+	add_ai_strategy = {
+		type = ignore
+		id = "POL"
+		value = 200
+	}
+	add_ai_strategy = {
+		type = befriend
+		id = "POL"
+		value = -200
+	}
+	add_ai_strategy = {
+		type = alliance
+		id = "POL"
+		value = -200
+	}
+	# Finland
+	add_ai_strategy = {
+		type = protect
+		id = "FIN"
+		value = -200
+	}
+	add_ai_strategy = {
+		type = ignore
+		id = "FIN"
+		value = 200
+	}
+	add_ai_strategy = {
+		type = befriend
+		id = "FIN"
+		value = -200
+	}
+	add_ai_strategy = {
+		type = alliance
+		id = "FIN"
+		value = -200
+	}
+	# Estonia
+	add_ai_strategy = {
+		type = protect
+		id = "EST"
+		value = -200
+	}
+	add_ai_strategy = {
+		type = ignore
+		id = "EST"
+		value = 200
+	}
+	add_ai_strategy = {
+		type = befriend
+		id = "EST"
+		value = -200
+	}
+	add_ai_strategy = {
+		type = alliance
+		id = "EST"
+		value = -200
+	}
+	# Latvia
+	add_ai_strategy = {
+		type = protect
+		id = "LAT"
+		value = -200
+	}
+	add_ai_strategy = {
+		type = ignore
+		id = "LAT"
+		value = 200
+	}
+	add_ai_strategy = {
+		type = befriend
+		id = "LAT"
+		value = -200
+	}
+	add_ai_strategy = {
+		type = alliance
+		id = "LAT"
+		value = -200
+	}
+	# Lithuania
+	add_ai_strategy = {
+		type = protect
+		id = "LIT"
+		value = -200
+	}
+	add_ai_strategy = {
+		type = ignore
+		id = "LIT"
+		value = 200
+	}
+	add_ai_strategy = {
+		type = befriend
+		id = "LIT"
+		value = -200
+	}
+	add_ai_strategy = {
+		type = alliance
+		id = "LIT"
+		value = -200
+	}
+	# Romania
+	add_ai_strategy = {
+		type = protect
+		id = "ROM"
+		value = -200
+	}
+	add_ai_strategy = {
+		type = ignore
+		id = "ROM"
+		value = 200
+	}
+	add_ai_strategy = {
+		type = befriend
+		id = "ROM"
+		value = -200
+	}
+	add_ai_strategy = {
+		type = alliance
+		id = "ROM"
+		value = -200
+	}
+	# Norway
+	add_ai_strategy = {
+		type = ignore
+		id = "NOR"
+		value = 200
+	}
+	add_ai_strategy = {
+		type = protect
+		id = "NOR"
+		value = -200
+	}
+	add_ai_strategy = {
+		type = befriend
+		id = "NOR"
+		value = -200
+	}
+	add_ai_strategy = {
+		type = alliance
+		id = "NOR"
+		value = -200
+	}
+	# Sweden
+	add_ai_strategy = {
+		type = ignore
+		id = "SWE"
+		value = 200
+	}
+	add_ai_strategy = {
+		type = protect
+		id = "SWE"
+		value = -200
+	}
+	add_ai_strategy = {
+		type = befriend
+		id = "SWE"
+		value = -200
+	}
+	add_ai_strategy = {
+		type = alliance
+		id = "SWE"
+		value = -200
+	}
+	# Denmark
+	add_ai_strategy = {
+		type = ignore
+		id = "DEN"
+		value = 200
+	}
+	add_ai_strategy = {
+		type = protect
+		id = "DEN"
+		value = -200
+	}
+	add_ai_strategy = {
+		type = befriend
+		id = "DEN"
+		value = -200
+	}
+	add_ai_strategy = {
+		type = alliance
+		id = "DEN"
+		value = -200
+	}
+	# Netherlands
+	add_ai_strategy = {
+		type = ignore
+		id = "HOL"
+		value = 200
+	}
+	add_ai_strategy = {
+		type = protect
+		id = "HOL"
+		value = -200
+	}
+	add_ai_strategy = {
+		type = befriend
+		id = "HOL"
+		value = -200
+	}
+	add_ai_strategy = {
+		type = alliance
+		id = "HOL"
+		value = -200
+	}
+	# Belgium
+	add_ai_strategy = {
+		type = ignore
+		id = "BEL"
+		value = 200
+	}
+	add_ai_strategy = {
+		type = protect
+		id = "BEL"
+		value = -200
+	}
+	add_ai_strategy = {
+		type = befriend
+		id = "BEL"
+		value = -200
+	}
+	add_ai_strategy = {
+		type = alliance
+		id = "BEL"
+		value = -200
+	}
+	# Luxemburg
+	add_ai_strategy = {
+		type = ignore
+		id = "LUX"
+		value = 200
+	}
+	add_ai_strategy = {
+		type = protect
+		id = "LUX"
+		value = -200
+	}
+	add_ai_strategy = {
+		type = befriend
+		id = "LUX"
+		value = -200
+	}
+	add_ai_strategy = {
+		type = alliance
+		id = "LUX"
+		value = -200
+	}
+	# Austria
+	add_ai_strategy = {
+		type = ignore
+		id = "AUS"
+		value = 200
+	}
+	add_ai_strategy = {
+		type = protect
+		id = "AUS"
+		value = -200
+	}
+	add_ai_strategy = {
+		type = befriend
+		id = "AUS"
+		value = -200
+	}
+	add_ai_strategy = {
+		type = alliance
+		id = "AUS"
+		value = -200
+	}
+	# Danubian Federation
+	add_ai_strategy = {
+		type = ignore
+		id = "DNF"
+		value = 200
+	}
+	add_ai_strategy = {
+		type = protect
+		id = "DNF"
+		value = -200
+	}
+	add_ai_strategy = {
+		type = befriend
+		id = "DNF"
+		value = -200
+	}
+	add_ai_strategy = {
+		type = alliance
+		id = "DNF"
+		value = -200
+	}
+	# Hungary
+	add_ai_strategy = {
+		type = ignore
+		id = "HUN"
+		value = 200
+	}
+	add_ai_strategy = {
+		type = protect
+		id = "HUN"
+		value = -200
+	}
+	add_ai_strategy = {
+		type = befriend
+		id = "HUN"
+		value = -200
+	}
+	add_ai_strategy = {
+		type = alliance
+		id = "HUN"
+		value = -200
+	}
+}
+
+print_variable_log_effect = {
+	print_variables = {
+		file = variables_yug
+		append = yes
+	}
+}
+
+get_best_alliance_match_democratic_effect = {
+	#arguably a trigger, but it does stuff so we keep it in here. If this is your first time seeing this, welcome to my personal hell.
+	if = {
+		limit = {
+			any_other_country = {
+				is_faction_leader = yes
+				is_major = yes
+				OR = {
+					has_government = social_democrat
+					has_government = social_liberal
+					has_government = market_liberal
+					has_government = social_conservative
+				}
+				not = {
+					has_war_with = ROOT
+				}
+				set_temp_variable = {
+					ROOT.best_leader = this
+				}
+				set_temp_variable = {
+					ROOT.best_leader_score = 0
+				}
+			}
+		}
+	}
+	if = {
+		limit = {
+			all_other_country = {
+				is_faction_leader = yes
+				is_major = yes
+				OR = {
+					has_government = social_democrat
+					has_government = social_liberal
+					has_government = market_liberal
+					has_government = social_conservative
+				}
+				not = {
+					has_war_with = ROOT
+				}
+				set_temp_variable = {
+					this.leader_score = num_of_factories
+				}
+				add_to_temp_variable = {
+					this.leader_score = num_battalions
+				}
+				all_of_scopes = {
+					array = allies
+					add_to_temp_variable = {
+						PREV.leader_score = num_of_factories
+					}
+					add_to_temp_variable = {
+						PREV.leader_score = num_battalions
+					}
+				}
+				if = {
+					limit = {
+						capital_scope = {
+							is_on_continent = ROOT
+						}
+					}
+					multiply_temp_variable = {
+						leader_score = 2
+					}
+				}
+				if = {
+					limit = {
+						any_neighbor_country = {
+							tag = ROOT
+						}
+					}
+					multiply_temp_variable = {
+						leader_score = 1.25
+					}
+				}
+				if = {
+					limit = {
+						check_variable = {
+							ROOT.best_leader_score < leader_score
+						}
+						set_temp_variable = {
+							ROOT.best_leader = this
+						}
+						set_temp_variable = {
+							ROOT.best_leader_score = leader_score
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+get_best_alliance_match_fascism_effect = {
+	#arguably a trigger, but it does stuff so we keep it in here. If this is your first time seeing this, welcome to my personal hell.
+	if = {
+		limit = {
+			any_other_country = {
+				is_faction_leader = yes
+				is_major = yes
+				has_government = national_populist
+				not = {
+					has_war_with = ROOT
+				}
+				set_temp_variable = {
+					ROOT.best_leader = this
+				}
+				set_temp_variable = {
+					ROOT.best_leader_score = 0
+				}
+			}
+		}
+	}
+	if = {
+		limit = {
+			all_other_country = {
+				is_faction_leader = yes
+				is_major = yes
+				has_government = national_populist
+				not = {
+					has_war_with = ROOT
+				}
+				set_temp_variable = {
+					this.leader_score = num_of_factories
+				}
+				add_to_temp_variable = {
+					this.leader_score = num_battalions
+				}
+				all_of_scopes = {
+					array = allies
+					add_to_temp_variable = {
+						PREV.leader_score = num_of_factories
+					}
+					add_to_temp_variable = {
+						PREV.leader_score = num_battalions
+					}
+				}
+				if = {
+					limit = {
+						capital_scope = {
+							is_on_continent = ROOT
+						}
+					}
+					multiply_temp_variable = {
+						this.leader_score = 2
+					}
+				}
+				if = {
+					limit = {
+						any_neighbor_country = {
+							tag = ROOT
+						}
+					}
+					multiply_temp_variable = {
+						this.leader_score = 1.25
+					}
+				}
+				if = {
+					limit = {
+						check_variable = {
+							ROOT.best_leader_score < this.leader_score
+						}
+					}
+					set_temp_variable = {
+						ROOT.best_leader = this
+					}
+					set_temp_variable = {
+						ROOT.best_leader_score = this.leader_score
+					}
+				}
+			}
+		}
+	}
+}
+
+get_best_alliance_match_communism_effect = {
+	#arguably a trigger, but it does stuff so we keep it in here. If this is your first time seeing this, welcome to my personal hell.
+	if = {
+		limit = {
+			any_other_country = {
+				is_faction_leader = yes
+				is_major = yes
+				OR = {
+					has_government = authoritarian_socialist
+					has_government = radical_socialist
+				}
+				not = {
+					has_war_with = ROOT
+				}
+				set_temp_variable = {
+					ROOT.best_leader = this
+				}
+				set_temp_variable = {
+					ROOT.best_leader_score = 0
+				}
+			}
+		}
+	}
+	if = {
+		limit = {
+			all_other_country = {
+				is_faction_leader = yes
+				is_major = yes
+				OR = {
+					has_government = authoritarian_socialist
+					has_government = radical_socialist
+				}
+				not = {
+					has_war_with = ROOT
+				}
+				set_temp_variable = {
+					this.leader_score = num_of_factories
+				}
+				add_to_temp_variable = {
+					this.leader_score = num_battalions
+				}
+				all_of_scopes = {
+					array = allies
+					add_to_temp_variable = {
+						PREV.leader_score = num_of_factories
+					}
+					add_to_temp_variable = {
+						PREV.leader_score = num_battalions
+					}
+				}
+				if = {
+					limit = {
+						capital_scope = {
+							is_on_continent = ROOT
+						}
+					}
+					multiply_temp_variable = {
+						leader_score = 2
+					}
+				}
+				if = {
+					limit = {
+						any_neighbor_country = {
+							tag = ROOT
+						}
+					}
+					multiply_temp_variable = {
+						leader_score = 1.25
+					}
+				}
+				if = {
+					limit = {
+						check_variable = {
+							ROOT.best_leader_score < leader_score
+						}
+						set_temp_variable = {
+							ROOT.best_leader = this
+						}
+						set_temp_variable = {
+							ROOT.best_leader_score = leader_score
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+remove_naval_treaty_effect = {
+	set_country_flag = MTG_naval_treaty_abandoned
+}
+
+civil_war_anti_exploiter_punitive_action = {
+	# Anti-exploiter punitive brigades! BET YA DIDN'T SEE THAT COMING DID YA?!
+	if = {
+		limit = {
+			has_army_size = {
+				size < 1
+			}
+		}
+		division_template = {
+			name = "Anti-Exploit Punitive Brigade"
+			priority = 1
+			division_names_group = ENG_MAR_01
+			is_locked = yes
+			regiments = {
+				infantry = {
+					x = 0
+					y = 0
+				}
+				infantry = {
+					x = 0
+					y = 1
+				}
+				infantry = {
+					x = 0
+					y = 2
+				}
+				infantry = {
+					x = 1
+					y = 0
+				}
+				infantry = {
+					x = 1
+					y = 1
+				}
+				infantry = {
+					x = 1
+					y = 2
+				}
+				infantry = {
+					x = 2
+					y = 0
+				}
+				artillery_brigade = {
+					x = 2
+					y = 1
+				}
+				artillery_brigade = {
+					x = 2
+					y = 2
+				}
+			}
+			support = {
+				engineer = {
+					x = 0
+					y = 0
+				}
+				recon = {
+					x = 0
+					y = 1
+				}
+				artillery = {
+					x = 0
+					y = 2
+				}
+			}
+		}
+		random_state = {
+			limit = {
+				is_capital = yes
+				is_fully_controlled_by = PREV
+			}
+			create_unit = {
+				division = "division_template = \"Anti-Exploit Punitive Brigade\" start_experience_factor = 1 start_equipment_factor = 1"
+				owner = PREV
+			}
+			create_unit = {
+				division = "division_template = \"Anti-Exploit Punitive Brigade\" start_experience_factor = 1 start_equipment_factor = 1"
+				owner = PREV
+			}
+			create_unit = {
+				division = "division_template = \"Anti-Exploit Punitive Brigade\" start_experience_factor = 1 start_equipment_factor = 1"
+				owner = PREV
+			}
+			create_unit = {
+				division = "division_template = \"Anti-Exploit Punitive Brigade\" start_experience_factor = 1 start_equipment_factor = 1"
+				owner = PREV
+			}
+		}
+		random_state = {
+			limit = {
+				is_in_home_area = yes
+				is_fully_controlled_by = PREV
+			}
+			create_unit = {
+				division = "division_template = \"Anti-Exploit Punitive Brigade\" start_experience_factor = 1 start_equipment_factor = 1"
+				owner = PREV
+			}
+			create_unit = {
+				division = "division_template = \"Anti-Exploit Punitive Brigade\" start_experience_factor = 1 start_equipment_factor = 1"
+				owner = PREV
+			}
+			create_unit = {
+				division = "division_template = \"Anti-Exploit Punitive Brigade\" start_experience_factor = 1 start_equipment_factor = 1"
+				owner = PREV
+			}
+			create_unit = {
+				division = "division_template = \"Anti-Exploit Punitive Brigade\" start_experience_factor = 1 start_equipment_factor = 1"
+				owner = PREV
+			}
+		}
+		random_state = {
+			limit = {
+				is_in_home_area = yes
+				is_fully_controlled_by = PREV
+			}
+			create_unit = {
+				division = "division_template = \"Anti-Exploit Punitive Brigade\" start_experience_factor = 1 start_equipment_factor = 1"
+				owner = PREV
+			}
+			create_unit = {
+				division = "division_template = \"Anti-Exploit Punitive Brigade\" start_experience_factor = 1 start_equipment_factor = 1"
+				owner = PREV
+			}
+			create_unit = {
+				division = "division_template = \"Anti-Exploit Punitive Brigade\" start_experience_factor = 1 start_equipment_factor = 1"
+				owner = PREV
+			}
+			create_unit = {
+				division = "division_template = \"Anti-Exploit Punitive Brigade\" start_experience_factor = 1 start_equipment_factor = 1"
+				owner = PREV
+			}
+		}
+		random_state = {
+			limit = {
+				is_in_home_area = yes
+				is_fully_controlled_by = PREV
+			}
+			create_unit = {
+				division = "division_template = \"Anti-Exploit Punitive Brigade\" start_experience_factor = 1 start_equipment_factor = 1"
+				owner = PREV
+			}
+			create_unit = {
+				division = "division_template = \"Anti-Exploit Punitive Brigade\" start_experience_factor = 1 start_equipment_factor = 1"
+				owner = PREV
+			}
+			create_unit = {
+				division = "division_template = \"Anti-Exploit Punitive Brigade\" start_experience_factor = 1 start_equipment_factor = 1"
+				owner = PREV
+			}
+			create_unit = {
+				division = "division_template = \"Anti-Exploit Punitive Brigade\" start_experience_factor = 1 start_equipment_factor = 1"
+				owner = PREV
+			}
+		}
+		random_state = {
+			limit = {
+				is_in_home_area = yes
+				is_fully_controlled_by = PREV
+			}
+			create_unit = {
+				division = "division_template = \"Anti-Exploit Punitive Brigade\" start_experience_factor = 1 start_equipment_factor = 1"
+				owner = PREV
+			}
+			create_unit = {
+				division = "division_template = \"Anti-Exploit Punitive Brigade\" start_experience_factor = 1 start_equipment_factor = 1"
+				owner = PREV
+			}
+			create_unit = {
+				division = "division_template = \"Anti-Exploit Punitive Brigade\" start_experience_factor = 1 start_equipment_factor = 1"
+				owner = PREV
+			}
+			create_unit = {
+				division = "division_template = \"Anti-Exploit Punitive Brigade\" start_experience_factor = 1 start_equipment_factor = 1"
+				owner = PREV
+			}
+		}
+	}
+}
+
+clear_sabotaged_resources_if_necesary = {
+}
+
+remove_from_allowed_party = {
+	if = {
+		limit = {
+			OR = {
+				has_government = social_democrat
+				has_government = social_liberal
+				has_government = market_liberal
+				has_government = social_conservative
+			}
+		}
+		set_temp_variable = {
+			allowed_party_democratic = 0
+		}
+	}
+	else_if = {
+		limit = {
+			has_government = national_populist
+		}
+		set_temp_variable = {
+			allowed_party_fascism = 0
+		}
+	}
+	else_if = {
+		limit = {
+			OR = {
+				has_government = authoritarian_socialist
+				has_government = radical_socialist
+			}
+		}
+		set_temp_variable = {
+			allowed_party_communism = 0
+		}
+	}
+	else_if = {
+		limit = {
+			OR = {
+				has_government = authoritarian_democrat
+				has_government = paternal_autocrat
+				has_government = revolutionary_republican
+			}
+		}
+		set_temp_variable = {
+			allowed_party_neutrality = 0
+		}
+	}
+}
+
+#expectes a temp variable country_to_initiate which should contain original_tag to instantiate as a collabration government
+instantiate_collaboration_government = {
+	custom_effect_tooltip = compliance_80_effect_tooltip
+	hidden_effect = {
+		set_variable = {
+			collaboration_formed@var:country_to_initiate = 1
+		}
+		if = {
+			# if country_to_initiate does not exist, simply release it as a puppet
+			limit = {
+				var:country_to_initiate = {
+					exists = no
+				}
+			}
+			var:country_to_initiate = {
+				set_variable = {
+					collaboration_formed_by = PREV
+				}
+			}
+			release_autonomy = {
+				target = country_to_initiate
+				autonomy_state = autonomy_collaboration_government
+				freedom_level = 0.5
+				release_non_owned_controlled = yes
+			}
+		}
+		else = {
+			# if country_to_initiate exists, create a dynamic country as our new puppet
+			create_dynamic_country = {
+				original_tag = country_to_initiate
+				set_variable = {
+					collaboration_formed_by = PREV
+				}
+				set_temp_variable = {
+					new_country = this
+				}
+				PREV = {
+					every_controlled_state = {
+						limit = {
+							occupied_country_tag = country_to_initiate
+						}
+						var:new_country = {
+							transfer_state = PREV
+						}
+					}
+					puppet = new_country
+					set_autonomy = {
+						target = new_country
+						autonomy_state = autonomy_collaboration_government
+						freedom_level = 0.5
+					}
+					save_event_target_as = on_puppet_master_tag
+					var:new_country = {
+						standard_on_puppet_effect = yes
+					}
+				}
+			}
+		}
+	}
+}
+
+abandon_colony_tag = {
+	if = {
+		limit = {
+			is_subject = yes
+		}
+		if = {
+			limit = {
+				original_tag = CAN
+			}
+			if = {
+				limit = {
+					NOT = {
+						has_dlc = "Together for Victory"
+					}
+				}
+				set_cosmetic_tag = CAN_ALY
+			}
+			else = {
+				set_cosmetic_tag = CAN_UK
+			}
+		}
+		else_if = {
+			limit = {
+				original_tag = RAJ
+			}
+			set_cosmetic_tag = RAJ_UK
+		}
+		else_if = {
+			limit = {
+				original_tag = MAL
+			}
+			set_cosmetic_tag = MAL_UK
+		}
+		else_if = {
+			limit = {
+				original_tag = INS
+			}
+			set_cosmetic_tag = INS_HOL
+		}
+	}
+	else = {
+		if = {
+			limit = {
+				OR = {
+					has_cosmetic_tag = united_polynesia
+					has_cosmetic_tag = MAJ_UNIFIED
+				}
+			}
+		}
+		else = {
+			drop_cosmetic_tag = yes
+		}
+	}
+}
+
+on_daily = {
+}
+
+#on_daily_USA = {
+#	# you can specify an on daily action for a specific country
+#}
+### STATE MECHANIC ###
+# EXAMPLE:
+# 372 = {
+# 	set_temp_variable = { state_modifier_added = X } #Where X is the State Idea ID
+#	USA_state_add_modifier = yes
+# }
+#
+# 372 = {
+# 	set_temp_variable = { state_modifier_added = X } #Where X is the State Idea ID
+#	USA_state_remove_modifier = yes
+# }
+#
+USA_state_add_modifier = {
+	set_temp_variable = {
+		v = state_modifier_added
+	}
+	if = {
+		limit = {
+			is_in_array = {
+				array = state_idea_array
+				value = v
+			}
+		}
+		if = {
+			limit = {
+				state = 372
+				check_variable = {
+					v = 1
+				}
+			}
+			set_variable = {
+				local_srf = 0.5
+			}
+			add_dynamic_modifier = {
+				modifier = TEX_agriculture
+			}
+		}
+	}
+}
+
+USA_state_remove_modifier = {
+	set_temp_variable = {
+		v = state_modifier_added
+	}
+	if = {
+		limit = {
+			is_in_array = {
+				array = state_idea_array
+				value = v
+			}
+		}
+		if = {
+			limit = {
+				state = 372
+				check_variable = {
+					v = 1
+				}
+			}
+			clear_variable = local_srf
+			remove_dynamic_modifier = {
+				modifier = TEX_agriculture
+			}
+		}
+	}
+}
+
+### Remove Government Type
+remove_government_type = {
+	custom_effect_tooltip = remove_government_type_tt
+	hidden_effect = {
+		if = {
+			limit = {
+				has_idea = KRG_union_democracy
+			}
+			remove_ideas = KRG_union_democracy
+		}
+		if = {
+			limit = {
+				has_idea = KRG_peoples_democracy
+			}
+			remove_ideas = KRG_peoples_democracy
+		}
+		if = {
+			limit = {
+				has_idea = KRG_parliamentary_democracy
+			}
+			remove_ideas = KRG_parliamentary_democracy
+		}
+		if = {
+			limit = {
+				has_idea = KRG_presidential_democracy
+			}
+			remove_ideas = KRG_presidential_democracy
+		}
+		if = {
+			limit = {
+				has_idea = KRG_illiberal_democracy
+			}
+			remove_ideas = KRG_illiberal_democracy
+		}
+		if = {
+			limit = {
+				has_idea = KRG_authoritarian_system
+			}
+			remove_ideas = KRG_authoritarian_system
+		}
+		if = {
+			limit = {
+				has_idea = KRG_fanatical_dictatorship
+			}
+			remove_ideas = KRG_fanatical_dictatorship
+		}
+		if = {
+			limit = {
+				has_idea = KRG_absolute_rulership
+			}
+			remove_ideas = KRG_absolute_rulership
+		}
+		if = {
+			limit = {
+				has_idea = KRG_bredowist_system
+			}
+			remove_ideas = KRG_bredowist_system
+		}
+		if = {
+			limit = {
+				has_idea = KRG_prussian_constitutionalism
+			}
+			remove_ideas = KRG_prussian_constitutionalism
+		}
+		if = {
+			limit = {
+				has_idea = KRG_american_democracy
+			}
+			remove_ideas = KRG_american_democracy
+		}
+		if = {
+			limit = {
+				has_idea = KRG_military_occupation
+			}
+			remove_ideas = KRG_military_occupation
+		}
+		if = {
+			limit = {
+				has_idea = KRG_colonial_bureaucracy
+			}
+			remove_ideas = KRG_colonial_bureaucracy
+		}
+		if = {
+			limit = {
+				has_idea = KRG_danubian_plurinationalism
+			}
+			remove_ideas = KRG_danubian_plurinationalism
+		}
+	}
+}
+
+remove_government_type_no_tooltip = {
+	hidden_effect = {
+		if = {
+			limit = {
+				has_idea = KRG_union_democracy
+			}
+			remove_ideas = KRG_union_democracy
+		}
+		if = {
+			limit = {
+				has_idea = KRG_peoples_democracy
+			}
+			remove_ideas = KRG_peoples_democracy
+		}
+		if = {
+			limit = {
+				has_idea = KRG_parliamentary_democracy
+			}
+			remove_ideas = KRG_parliamentary_democracy
+		}
+		if = {
+			limit = {
+				has_idea = KRG_presidential_democracy
+			}
+			remove_ideas = KRG_presidential_democracy
+		}
+		if = {
+			limit = {
+				has_idea = KRG_illiberal_democracy
+			}
+			remove_ideas = KRG_illiberal_democracy
+		}
+		if = {
+			limit = {
+				has_idea = KRG_authoritarian_system
+			}
+			remove_ideas = KRG_authoritarian_system
+		}
+		if = {
+			limit = {
+				has_idea = KRG_fanatical_dictatorship
+			}
+			remove_ideas = KRG_fanatical_dictatorship
+		}
+		if = {
+			limit = {
+				has_idea = KRG_absolute_rulership
+			}
+			remove_ideas = KRG_absolute_rulership
+		}
+		if = {
+			limit = {
+				has_idea = KRG_bredowist_system
+			}
+			remove_ideas = KRG_bredowist_system
+		}
+		if = {
+			limit = {
+				has_idea = KRG_prussian_constitutionalism
+			}
+			remove_ideas = KRG_prussian_constitutionalism
+		}
+		if = {
+			limit = {
+				has_idea = KRG_american_democracy
+			}
+			remove_ideas = KRG_american_democracy
+		}
+		if = {
+			limit = {
+				has_idea = KRG_military_occupation
+			}
+			remove_ideas = KRG_military_occupation
+		}
+		if = {
+			limit = {
+				has_idea = KRG_colonial_bureaucracy
+			}
+			remove_ideas = KRG_colonial_bureaucracy
+		}
+		if = {
+			limit = {
+				has_idea = KRG_danubian_plurinationalism
+			}
+			remove_ideas = KRG_danubian_plurinationalism
+		}
+	}
+}
+
+assign_government_type_ideology = {
+	# This function should not be used as a good indicator for a Government Type
+	if = {
+		limit = {
+			OR = {
+				has_government = authoritarian_socialist
+				has_government = radical_socialist
+			}
+		}
+		add_ideas = KRG_union_democracy
+	}
+	if = {
+		limit = {
+			OR = {
+				has_government = revolutionary_republican
+				has_government = social_democrat
+				has_government = social_liberal
+				has_government = market_liberal
+				has_government = social_conservative
+			}
+		}
+		# We do a little bit of trolling
+		random_list = {
+			1 = {
+				add_ideas = KRG_parliamentary_democracy
+			}
+			1 = {
+				add_ideas = KRG_illiberal_democracy
+			}
+		}
+	}
+	if = {
+		limit = {
+			OR = {
+				has_government = authoritarian_democrat
+				has_government = paternal_autocrat
+				has_government = national_populist
+			}
+		}
+		# We do a little bit of trolling
+		random_list = {
+			1 = {
+				add_ideas = KRG_illiberal_democracy
+			}
+			1 = {
+				add_ideas = KRG_fanatical_dictatorship
+			}
+			1 = {
+				add_ideas = KRG_absolute_rulership
+			}
+		}
+	}
+}
+
+standard_on_puppet_effect = {
+	if = {
+		limit = {
+			NOT = {event_target:on_puppet_master_tag = { check_variable = {reichspakt_alignment_level = prev.reichspakt_alignment_level }}}
+		}
+		set_temp_variable = {
+			temp_level = event_target:on_puppet_master_tag.reichspakt_alignment_level
+		}
+		set_reichspakt_alignment = yes
+	}
+	if = {
+		limit = {
+			NOT = {event_target:on_puppet_master_tag = { check_variable = {accord_alignment_level = prev.accord_alignment_level }}}
+		}
+		set_temp_variable = {
+			temp_level = event_target:on_puppet_master_tag.accord_alignment_level
+		}
+		set_accord_alignment = yes
+	}
+
+	if = {
+		limit = {
+			NOT = {event_target:on_puppet_master_tag = { check_variable = {geacps_alignment_level = prev.geacps_alignment_level }}}
+		}
+		set_temp_variable = {
+			temp_level = event_target:on_puppet_master_tag.geacps_alignment_level
+		}
+		set_geacps_alignment = yes
+		
+	}
+
+	if = {
+		limit = {
+			NOT = {event_target:on_puppet_master_tag = { check_variable = {nam_alignment_level = prev.nam_alignment_level }}}
+		}
+		set_temp_variable = {
+			temp_level = event_target:on_puppet_master_tag.nam_alignment_level
+		}
+		set_non_aligned_movement_alignment = yes
+	}
+}
+
+
+# the following effects are excellent for preserving a puppet's government so it doesn't change to the overlord
+# use the first command in the scope of the about-to-be-puppeted country right before the puppet command is executed
+# and then the second, also in the scope of the puppet, right after
+get_current_government_type = {
+	clear_variable = original_government_type
+	set_variable = { original_government_type = current_party_ideology_group }
+
+	if = {
+		limit = { has_elections = yes }
+		set_country_flag = original_government_type_had_elections
+	}
+
+	clear_array = original_popularities
+	add_to_array = { original_popularities = party_popularity_100@authoritarian_socialist }
+	add_to_array = { original_popularities = party_popularity_100@radical_socialist }
+	add_to_array = { original_popularities = party_popularity_100@social_democrat }
+	add_to_array = { original_popularities = party_popularity_100@revolutionary_republican }
+	add_to_array = { original_popularities = party_popularity_100@social_liberal }
+	add_to_array = { original_popularities = party_popularity_100@market_liberal }
+	add_to_array = { original_popularities = party_popularity_100@social_conservative }
+	add_to_array = { original_popularities = party_popularity_100@authoritarian_democrat }
+	add_to_array = { original_popularities = party_popularity_100@paternal_autocrat }
+
+	set_temp_variable = { sum = 100 }
+	for_each_loop = {
+		array = original_popularities
+		subtract_from_temp_variable = { sum = v }
+	}
+	add_to_array = { original_popularities = sum } #last value (natpop), calculated directly to avoid rounding errors
+
+	if = {
+		limit = { has_coal = yes }
+		for_each_loop = {
+			array = coal_list
+			add_to_array = { original_coalitions = v }
+		}
+	}
+}
+
+restore_previous_government_type = {
+	hidden_effect = {
+		if = {
+			limit = { has_variable = original_government_type } #needed to avoid a CTD
+			if = {
+				limit = { has_country_flag = original_government_type_had_elections }
+				clr_country_flag = original_government_type_had_elections
+				set_politics = {
+					ruling_party = var:original_government_type
+					elections_allowed = yes
+				}
+			}
+			else = {
+				set_politics = {
+					ruling_party = var:original_government_type
+					elections_allowed = no
+				}
+			}
+		}
+		clear_variable = original_government_type
+
+		if = {
+			limit = { check_variable = { original_popularities^num > 0 } }
+			set_popularities = {
+				authoritarian_socialist = original_popularities^0
+				radical_socialist = original_popularities^1
+				social_democrat = original_popularities^2
+				revolutionary_republican = original_popularities^3
+				social_liberal = original_popularities^4
+				market_liberal = original_popularities^5
+				social_conservative = original_popularities^6
+				authoritarian_democrat = original_popularities^7
+				paternal_autocrat = original_popularities^8
+				national_populist = original_popularities^9
+			}
+			clear_array = original_popularities
+		}
+
+		if = {
+			limit = { is_in_array = { array = original_coalitions value = 1 } }
+			coal_add_auth_soc = yes
+		}
+
+		if = {
+			limit = { is_in_array = { array = original_coalitions value = 2 } }
+			coal_add_rad_soc = yes
+		}
+
+		if = {
+			limit = { is_in_array = { array = original_coalitions value = 3 } }
+			coal_add_soc_dem = yes
+		}
+
+		if = {
+			limit = { is_in_array = { array = original_coalitions value = 4 } }
+			coal_add_rev_rep = yes
+		}
+
+		if = {
+			limit = { is_in_array = { array = original_coalitions value = 5 } }
+			coal_add_soc_lib = yes
+		}
+
+		if = {
+			limit = { is_in_array = { array = original_coalitions value = 6 } }
+			coal_add_mar_lib = yes
+		}
+
+		if = {
+			limit = { is_in_array = { array = original_coalitions value = 7 } }
+			coal_add_soc_con = yes
+		}
+
+		if = {
+			limit = { is_in_array = { array = original_coalitions value = 8 } }
+			coal_add_auth_dem = yes
+		}
+
+		if = {
+			limit = { is_in_array = { array = original_coalitions value = 9 } }
+			coal_add_pat_aut = yes
+		}
+
+		if = {
+			limit = { is_in_array = { array = original_coalitions value = 10 } }
+			coal_add_nat_pop = yes
+		}
+
+		clr_country_flag = colonial_government
+		clr_country_flag = integrated_puppet
+		clr_country_flag = occupied_puppet
+		clr_country_flag = autonomous_puppet
+		clr_country_flag = nominal_puppet
+	}
+}

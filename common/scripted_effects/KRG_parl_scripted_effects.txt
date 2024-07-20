@@ -1,0 +1,1351 @@
+###Made by Flizzy#6123 for Kalterkrieg, Imperial Twilight and Aftershocks of the Revolution###
+
+PARL_VARRESETIFNEEDED = {
+	IF = {
+		LIMIT = {
+			NOT = {
+				has_variable = parl_authsocsupport
+			}
+		}
+		set_variable = {
+			var = parl_authsocsupport
+			value = 0
+		}
+	}
+	IF = {
+		LIMIT = {
+			NOT = {
+				has_variable = parl_radsocsupport
+			}
+		}
+		set_variable = {
+			var = parl_radsocsupport
+			value = 0
+		}
+	}
+	IF = {
+		LIMIT = {
+			NOT = {
+				has_variable = parl_socdemsupport
+			}
+		}
+		set_variable = {
+			var = parl_socdemsupport
+			value = 0
+		}
+	}
+	IF = {
+		LIMIT = {
+			NOT = {
+				has_variable = parl_revrepsupport
+			}
+		}
+		set_variable = {
+			var = parl_revrepsupport
+			value = 0
+		}
+	}
+	IF = {
+		LIMIT = {
+			NOT = {
+				has_variable = parl_soclibsupport
+			}
+		}
+		set_variable = {
+			var = parl_soclibsupport
+			value = 0
+		}
+	}
+	IF = {
+		LIMIT = {
+			NOT = {
+				has_variable = parl_marklibsupport
+			}
+		}
+		set_variable = {
+			var = parl_marklibsupport
+			value = 0
+		}
+	}
+	IF = {
+		LIMIT = {
+			NOT = {
+				has_variable = parl_socconsupport
+			}
+		}
+		set_variable = {
+			var = parl_socconsupport
+			value = 0
+		}
+	}
+	IF = {
+		LIMIT = {
+			NOT = {
+				has_variable = parl_authdemsupport
+			}
+		}
+		set_variable = {
+			var = parl_authdemsupport
+			value = 0
+		}
+	}
+	IF = {
+		LIMIT = {
+			NOT = {
+				has_variable = parl_patautsupport
+			}
+		}
+		set_variable = {
+			var = parl_patautsupport
+			value = 0
+		}
+	}
+	IF = {
+		LIMIT = {
+			NOT = {
+				has_variable = parl_natpopsupport
+			}
+		}
+		set_variable = {
+			var = parl_natpopsupport
+			value = 0
+		}
+	}
+}
+
+PARL_START_UP = {
+	PARL_VARRESETIFNEEDED = yes
+	IF = {
+		LIMIT = {
+			check_variable = { parl_authsocsupport = 0 }
+		}
+		set_variable = {
+			var = parl_authsocsupport
+			value = 50
+		}
+	}
+	IF = {
+		LIMIT = {
+			check_variable = { parl_radsocsupport = 0 }
+		}
+		set_variable = {
+			var = parl_radsocsupport
+			value = 50
+		}
+	}
+	IF = {
+		LIMIT = {
+			check_variable = { parl_socdemsupport = 0 }
+		}
+		set_variable = {
+			var = parl_socdemsupport
+			value = 50
+		}
+	}
+	IF = {
+		LIMIT = {
+			check_variable = { parl_revrepsupport = 0 }
+		}
+		set_variable = {
+			var = parl_revrepsupport
+			value = 50
+		}
+	}
+	IF = {
+		LIMIT = {
+			check_variable = { parl_soclibsupport = 0 }
+		}
+		set_variable = {
+			var = parl_soclibsupport
+			value = 50
+		}
+	}
+	IF = {
+		LIMIT = {
+			check_variable = { parl_marklibsupport = 0 }
+		}
+		set_variable = {
+			var = parl_marklibsupport
+			value = 50
+		}
+	}
+	IF = {
+		LIMIT = {
+			check_variable = { parl_socconsupport = 0 }
+		}
+		set_variable = {
+			var = parl_socconsupport
+			value = 50
+		}
+	}
+	IF = {
+		LIMIT = {
+			check_variable = { parl_authdemsupport = 0 }
+		}
+		set_variable = {
+			var = parl_authdemsupport
+			value = 50
+		}
+	}
+	IF = {
+		LIMIT = {
+			check_variable = { parl_patautsupport = 0 }
+		}
+		set_variable = {
+			var = parl_patautsupport
+			value = 50
+		}
+	}
+	IF = {
+		LIMIT = {
+			check_variable = { parl_natpopsupport = 0 }
+		}
+		set_variable = {
+			var = parl_natpopsupport
+			value = 50
+		}
+	}
+	PARL_SET_UP = yes
+}
+
+PARL_SET_UP = {
+	set_variable = {
+		var = parl_current_seats
+		value = 0
+	}
+	set_variable = {
+		var = parl_support_seats
+		value = 0
+	}
+	set_temp_variable = { authsocseatsto = parl_maxseats }
+	multiply_temp_variable = { authsocseatsto = party_popularity@authoritarian_socialist }
+	round_temp_variable = authsocseatsto
+	IF = {
+		LIMIT = {
+			NOT = {
+				has_country_flag = authsoc_banned
+			}
+		}
+		set_variable = {
+			var = parl_authsocseats
+			value = authsocseatsto
+		}
+	ELSE = {
+		add_to_variable = {
+			var = parl_banned_to_add
+			value = authsocseatsto
+		}
+	}
+	}
+	add_to_variable = {
+		var = parl_current_seats
+		value = authsocseatsto
+	}
+	set_temp_variable = { radsocseatsto = parl_maxseats }
+	multiply_temp_variable = { radsocseatsto = party_popularity@radical_socialist }
+	round_temp_variable = radsocseatsto
+	IF = {
+		LIMIT = {
+			NOT = {
+				has_country_flag = radsoc_banned
+			}
+		}
+		set_variable = {
+			var = parl_radsocseats
+			value = radsocseatsto
+		}
+	ELSE = {
+		add_to_variable = {
+			var = parl_banned_to_add
+			value = radsocseatsto
+		}
+	}
+	}
+	add_to_variable = {
+		var = parl_current_seats
+		value = radsocseatsto
+	}
+	set_temp_variable = { socdemseatsto = parl_maxseats }
+	multiply_temp_variable = { socdemseatsto = party_popularity@social_democrat }
+	round_temp_variable = socdemseatsto
+	IF = {
+		LIMIT = {
+			NOT = {
+				has_country_flag = socdem_banned
+			}
+		}
+		set_variable = {
+			var = parl_socdemseats
+			value = socdemseatsto
+		}
+	ELSE = {
+		add_to_variable = {
+			var = parl_banned_to_add
+			value = socdemseatsto
+		}
+	}
+	}
+	add_to_variable = {
+		var = parl_current_seats
+		value = socdemseatsto
+	}
+	set_temp_variable = { revrepseatsto = parl_maxseats }
+	multiply_temp_variable = { revrepseatsto = party_popularity@revolutionary_republican }
+	round_temp_variable = revrepseatsto
+	IF = {
+		LIMIT = {
+			NOT = {
+				has_country_flag = revrep_banned
+			}
+		}
+		set_variable = {
+			var = parl_revrepseats
+			value = revrepseatsto
+		}
+	ELSE = {
+		add_to_variable = {
+			var = parl_banned_to_add
+			value = revrepseatsto
+		}
+	}
+	}
+	add_to_variable = {
+		var = parl_current_seats
+		value = revrepseatsto
+	}
+	set_temp_variable = { soclibseatsto = parl_maxseats }
+	multiply_temp_variable = { soclibseatsto = party_popularity@social_liberal }
+	round_temp_variable = soclibseatsto
+	IF = {
+		LIMIT = {
+			NOT = {
+				has_country_flag = soclib_banned
+			}
+		}
+		set_variable = {
+			var = parl_soclibseats
+			value = soclibseatsto
+		}
+	ELSE = {
+		add_to_variable = {
+			var = parl_banned_to_add
+			value = soclibseatsto
+		}
+	}
+	}
+	add_to_variable = {
+		var = parl_current_seats
+		value = soclibseatsto
+	}
+	set_temp_variable = { marklibseatsto = parl_maxseats }
+	multiply_temp_variable = { marklibseatsto = party_popularity@market_liberal }
+	round_temp_variable = marklibseatsto
+	IF = {
+		LIMIT = {
+			NOT = {
+				has_country_flag = marklib_banned
+			}
+		}
+		set_variable = {
+			var = parl_marklibseats
+			value = marklibseatsto
+		}
+	ELSE = {
+		add_to_variable = {
+			var = parl_banned_to_add
+			value = marklibseatsto
+		}
+	}
+	}
+	add_to_variable = {
+		var = parl_current_seats
+		value = marklibseatsto
+	}
+	set_temp_variable = { socconseatsto = parl_maxseats }
+	multiply_temp_variable = { socconseatsto = party_popularity@social_conservative }
+	round_temp_variable = socconseatsto
+	IF = {
+		LIMIT = {
+			NOT = {
+				has_country_flag = soccon_banned
+			}
+		}
+		set_variable = {
+			var = parl_socconseats
+			value = socconseatsto
+		}
+	ELSE = {
+		add_to_variable = {
+			var = parl_banned_to_add
+			value = socconseatsto
+		}
+	}
+	}
+	add_to_variable = {
+		var = parl_current_seats
+		value = socconseatsto
+	}
+	set_temp_variable = { authdemseatsto = parl_maxseats }
+	multiply_temp_variable = { authdemseatsto = party_popularity@authoritarian_democrat }
+	round_temp_variable = authdemseatsto
+	IF = {
+		LIMIT = {
+			NOT = {
+				has_country_flag = authdem_banned
+			}
+		}
+		set_variable = {
+			var = parl_authdemseats
+			value = authdemseatsto
+		}
+	ELSE = {
+		add_to_variable = {
+			var = parl_banned_to_add
+			value = authdemseatsto
+		}
+	}
+	}
+	add_to_variable = {
+		var = parl_current_seats
+		value = authdemseatsto
+	}
+	set_temp_variable = { patautseatsto = parl_maxseats }
+	multiply_temp_variable = { patautseatsto = party_popularity@paternal_autocrat }
+	round_temp_variable = patautseatsto
+	set_variable = {
+		var = parl_patautseats
+		value = patautseatsto
+	}
+	IF = {
+		LIMIT = {
+			NOT = {
+				has_country_flag = pataut_banned
+			}
+		}
+		set_variable = {
+			var = parl_patautseats
+			value = patautseatsto
+		}
+	ELSE = {
+		add_to_variable = {
+			var = parl_banned_to_add
+			value = patautseatsto
+		}
+	}
+	}
+	set_temp_variable = { natpopseatsto = parl_maxseats }
+	multiply_temp_variable = { natpopseatsto = party_popularity@national_populist }
+	round_temp_variable = natpopseatsto
+	IF = {
+		LIMIT = {
+			NOT = {
+				has_country_flag = natpop_banned
+			}
+		}
+		set_variable = {
+			var = parl_natpopseats
+			value = natpopseatsto
+		}
+	ELSE = {
+		add_to_variable = {
+			var = parl_banned_to_add
+			value = natpopseatsto
+		}
+	}
+	}
+	add_to_variable = {
+		var = parl_current_seats
+		value = natpopseatsto
+	}
+	parl_get_support = yes
+	IF = {
+		LIMIT = {
+			check_variable = { parl_banned_to_add > 0 }
+		}
+		PARL_HANDLE_BANNED = yes
+	}
+	IF = {
+		LIMIT = {
+			check_variable = { parl_current_seats < parl_maxseats }
+		}
+		parl_fix_empty_seats = yes
+	}
+}
+parl_get_support_authsoc = {
+	IF = {
+		LIMIT = {
+			NOT = {
+				has_variable = parl_authsocsupport
+			}
+		}
+		set_variable = {
+			var = parl_authsocsupport
+			value = 0
+		}
+	}
+	clamp_variable = {
+		var = parl_authsocsupport
+		min = 0
+		max = 100
+	}
+	set_temp_variable = {
+		var = authsocsupportdiv
+		value = parl_authsocsupport
+	}
+	divide_temp_variable = {
+		var = authsocsupportdiv
+		value = 100
+	}
+	set_variable = {
+		var = parl_auth_soc_supported_seats
+		value = parl_authsocseats
+	}
+	multiply_variable = {
+		var = parl_auth_soc_supported_seats
+		value = authsocsupportdiv
+	}
+	round_variable = parl_auth_soc_supported_seats
+	add_to_variable = {
+		var = parl_support_seats
+		value = parl_auth_soc_supported_seats
+	}
+	parl_PERCENT_SUPPORT = yes
+	IF = {
+		LIMIT = {
+			original_tag = CAN
+		}
+		parl_CAN_get_frame = yes
+	}
+}
+parl_get_support_radsoc = {
+	IF = {
+		LIMIT = {
+			NOT = {
+				has_variable = parl_radsocsupport
+			}
+		}
+		set_variable = {
+			var = parl_radsocsupport
+			value = 0
+		}
+	}
+	clamp_variable = {
+		var = parl_radsocsupport
+		min = 0
+		max = 100
+	}
+	set_temp_variable = {
+		var = radsocsupportdiv
+		value = parl_radsocsupport
+	}
+	divide_temp_variable = {
+		var = radsocsupportdiv
+		value = 100
+	}
+	set_variable = {
+		var = parl_rad_soc_supported_seats
+		value = parl_radsocseats
+	}
+	multiply_variable = {
+		var = parl_rad_soc_supported_seats
+		value = radsocsupportdiv
+	}
+	round_variable = parl_rad_soc_supported_seats
+	add_to_variable = {
+		var = parl_support_seats
+		value = parl_rad_soc_supported_seats
+	}
+	parl_PERCENT_SUPPORT = yes
+	IF = {
+		LIMIT = {
+			original_tag = CAN
+		}
+		parl_CAN_get_frame = yes
+	}
+}
+parl_get_support_socdem = {
+	IF = {
+		LIMIT = {
+			NOT = {
+				has_variable = parl_socdemsupport
+			}
+		}
+		set_variable = {
+			var = parl_socdemsupport
+			value = 0
+		}
+	}
+	clamp_variable = {
+		var = parl_socdemsupport
+		min = 0
+		max = 100
+	}
+	set_temp_variable = {
+		var = socdemsupportdiv
+		value = parl_socdemsupport
+	}
+	divide_temp_variable = {
+		var = socdemsupportdiv
+		value = 100
+	}
+	set_variable = {
+		var = parl_soc_dem_supported_seats
+		value = parl_socdemseats
+	}
+	multiply_variable = {
+		var = parl_soc_dem_supported_seats
+		value = socdemsupportdiv
+	}
+	round_variable = parl_soc_dem_supported_seats
+	add_to_variable = {
+		var = parl_support_seats
+		value = parl_soc_dem_supported_seats
+	}
+	parl_PERCENT_SUPPORT = yes
+	
+	IF = {
+		LIMIT = {
+			original_tag = CAN
+		}
+		parl_CAN_get_frame = yes
+	}
+}
+parl_get_support_revrep = {
+	IF = {
+		LIMIT = {
+			NOT = {
+				has_variable = parl_revrepsupport
+			}
+		}
+		set_variable = {
+			var = parl_revrepsupport
+			value = 0
+		}
+	}
+	clamp_variable = {
+		var = parl_revrepsupport
+		min = 0
+		max = 100
+	}
+	set_temp_variable = {
+		var = revrepsupportdiv
+		value = parl_revrepsupport
+	}
+	divide_temp_variable = {
+		var = revrepsupportdiv
+		value = 100
+	}
+	set_variable = {
+		var = parl_rev_rep_supported_seats
+		value = parl_revrepseats
+	}
+	multiply_variable = {
+		var = parl_rev_rep_supported_seats
+		value = revrepsupportdiv
+	}
+	round_variable = parl_rev_rep_supported_seats
+	add_to_variable = {
+		var = parl_support_seats
+		value = parl_rev_rep_supported_seats
+	}
+	parl_PERCENT_SUPPORT = yes
+	IF = {
+		LIMIT = {
+			original_tag = CAN
+		}
+		parl_CAN_get_frame = yes
+	}
+}
+parl_get_support_soclib = {
+	IF = {
+		LIMIT = {
+			NOT = {
+				has_variable = parl_soclibsupport
+			}
+		}
+		set_variable = {
+			var = parl_soclibsupport
+			value = 0
+		}
+	}
+	clamp_variable = {
+		var = parl_soclibsupport
+		min = 0
+		max = 100
+	}
+	set_temp_variable = {
+		var = soclibsupportdiv
+		value = parl_soclibsupport
+	}
+	divide_temp_variable = {
+		var = soclibsupportdiv
+		value = 100
+	}
+	set_variable = {
+		var = parl_soc_lib_supported_seats
+		value = parl_soclibseats
+	}
+	multiply_variable = {
+		var = parl_soc_lib_supported_seats
+		value = soclibsupportdiv
+	}
+	round_variable = parl_soc_lib_supported_seats
+	add_to_variable = {
+		var = parl_support_seats
+		value = parl_soc_lib_supported_seats
+	}
+	parl_PERCENT_SUPPORT = yes
+	IF = {
+		LIMIT = {
+			original_tag = CAN
+		}
+		parl_CAN_get_frame = yes
+	}
+}
+parl_get_support_marklib = {
+	IF = {
+		LIMIT = {
+			NOT = {
+				has_variable = parl_marklibsupport
+			}
+		}
+		set_variable = {
+			var = parl_marklibsupport
+			value = 0
+		}
+	}
+	clamp_variable = {
+		var = parl_marklibsupport
+		min = 0
+		max = 100
+	}
+	set_temp_variable = {
+		var = marklibsupportdiv
+		value = parl_marklibsupport
+	}
+	divide_temp_variable = {
+		var = marklibsupportdiv
+		value = 100
+	}
+	set_variable = {
+		var = parl_mark_lib_supported_seats
+		value = parl_marklibseats
+	}
+	multiply_variable = {
+		var = parl_mark_lib_supported_seats
+		value = marklibsupportdiv
+	}
+	round_variable = parl_mark_lib_supported_seats
+	add_to_variable = {
+		var = parl_support_seats
+		value = parl_mark_lib_supported_seats
+	}
+	parl_PERCENT_SUPPORT = yes
+	IF = {
+		LIMIT = {
+			original_tag = CAN
+		}
+		parl_CAN_get_frame = yes
+	}
+}
+parl_get_support_soccon = {
+	IF = {
+		LIMIT = {
+			NOT = {
+				has_variable = parl_socconsupport
+			}
+		}
+		set_variable = {
+			var = parl_socconsupport
+			value = 0
+		}
+	}
+	clamp_variable = {
+		var = parl_socconsupport
+		min = 0
+		max = 100
+	}
+	set_temp_variable = {
+		var = socconsupportdiv
+		value = parl_socconsupport
+	}
+	divide_temp_variable = {
+		var = socconsupportdiv
+		value = 100
+	}
+	set_variable = {
+		var = parl_soc_con_supported_seats
+		value = parl_socconseats
+	}
+	multiply_variable = {
+		var = parl_soc_con_supported_seats
+		value = socconsupportdiv
+	}
+	round_variable = parl_soc_con_supported_seats
+	add_to_variable = {
+		var = parl_support_seats
+		value = parl_soc_con_supported_seats
+	}
+	parl_PERCENT_SUPPORT = yes
+	IF = {
+		LIMIT = {
+			original_tag = CAN
+		}
+		parl_CAN_get_frame = yes
+	}
+}
+parl_get_support_authdem = {
+	IF = {
+		LIMIT = {
+			NOT = {
+				has_variable = parl_authdemsupport
+			}
+		}
+		set_variable = {
+			var = parl_authdemsupport
+			value = 0
+		}
+	}
+	clamp_variable = {
+		var = parl_authdemsupport
+		min = 0
+		max = 100
+	}
+	set_temp_variable = {
+		var = authdemsupportdiv
+		value = parl_authdemsupport
+	}
+	divide_temp_variable = {
+		var = authdemsupportdiv
+		value = 100
+	}
+	set_variable = {
+		var = parl_auth_dem_supported_seats
+		value = parl_authdemseats
+	}
+	multiply_variable = {
+		var = parl_auth_dem_supported_seats
+		value = authdemsupportdiv
+	}
+	round_variable = parl_auth_dem_supported_seats
+	add_to_variable = {
+		var = parl_support_seats
+		value = parl_auth_dem_supported_seats
+	}
+	parl_PERCENT_SUPPORT = yes
+	IF = {
+		LIMIT = {
+			original_tag = CAN
+		}
+		parl_CAN_get_frame = yes
+	}
+}
+parl_get_support_pataut = {
+	IF = {
+		LIMIT = {
+			NOT = {
+				has_variable = parl_patautsupport
+			}
+		}
+		set_variable = {
+			var = parl_patautsupport
+			value = 0
+		}
+	}
+	clamp_variable = {
+		var = parl_patautsupport
+		min = 0
+		max = 100
+	}
+	set_temp_variable = {
+		var = patautsupportdiv
+		value = parl_patautsupport
+	}
+	divide_temp_variable = {
+		var = patautsupportdiv
+		value = 100
+	}
+	set_variable = {
+		var = parl_pat_aut_supported_seats
+		value = parl_patautseats
+	}
+	multiply_variable = {
+		var = parl_pat_aut_supported_seats
+		value = patautsupportdiv
+	}
+	round_variable = parl_pat_aut_supported_seats
+	add_to_variable = {
+		var = parl_support_seats
+		value = parl_pat_aut_supported_seats
+	}
+	parl_PERCENT_SUPPORT = yes
+	IF = {
+		LIMIT = {
+			original_tag = CAN
+		}
+		parl_CAN_get_frame = yes
+	}
+}
+parl_get_support_natpop = {
+	IF = {
+		LIMIT = {
+			NOT = {
+				has_variable = parl_natpopsupport
+			}
+		}
+		set_variable = {
+			var = parl_natpopsupport
+			value = 0
+		}
+	}
+	clamp_variable = {
+		var = parl_natpopsupport
+		min = 0
+		max = 100
+	}
+	set_temp_variable = {
+		var = natpopsupportdiv
+		value = parl_natpopsupport
+	}
+	divide_temp_variable = {
+		var = natpopsupportdiv
+		value = 100
+	}
+	set_variable = {
+		var = parl_nat_pop_supported_seats
+		value = parl_natpopseats
+	}
+	multiply_variable = {
+		var = parl_nat_pop_supported_seats
+		value = natpopsupportdiv
+	}
+	round_variable = parl_nat_pop_supported_seats
+	add_to_variable = {
+		var = parl_support_seats
+		value = parl_nat_pop_supported_seats
+	}
+	parl_PERCENT_SUPPORT = yes
+	IF = {
+		LIMIT = {
+			original_tag = CAN
+		}
+		parl_CAN_get_frame = yes
+	}
+}
+
+
+parl_get_support = {
+	set_variable = {
+		var = parl_support_seats
+		value = 0
+	}
+	parl_get_support_authsoc = yes
+	parl_get_support_radsoc = yes
+	parl_get_support_socdem = yes
+	parl_get_support_revrep = yes
+	parl_get_support_soclib = yes
+	parl_get_support_marklib = yes
+	parl_get_support_soccon = yes
+	parl_get_support_authdem = yes
+	parl_get_support_pataut = yes
+	parl_get_support_natpop = yes
+}
+
+parl_change_authsoc_support = {
+	add_to_variable = {
+		var = parl_authsocsupport
+		value = parl_authsoc_support_to_add_percent
+	}
+	parl_get_support_authsoc = yes
+}
+
+parl_change_radsoc_support = {
+	add_to_variable = {
+		var = parl_radsocsupport
+		value = parl_radsoc_support_to_add_percent
+	}
+	parl_get_support_radsoc = yes
+}
+
+parl_change_socdem_support = {
+	add_to_variable = {
+		var = parl_socdemsupport
+		value = parl_socdem_support_to_add_percent
+	}
+	parl_get_support_socdem = yes
+}
+
+parl_change_revrep_support = {
+	add_to_variable = {
+		var = parl_revrepsupport
+		value = parl_revrep_support_to_add_percent
+	}
+	parl_get_support_revrep = yes
+}
+
+parl_change_soclib_support = {
+	add_to_variable = {
+		var = parl_soclibsupport
+		value = parl_soclib_support_to_add_percent
+	}
+	parl_get_support_soclib = yes
+}
+
+parl_change_marklib_support = {
+	add_to_variable = {
+		var = parl_marklibsupport
+		value = parl_marklib_support_to_add_percent
+	}
+	parl_get_support_marklib = yes
+}
+
+parl_change_soccon_support = {
+	add_to_variable = {
+		var = parl_socconsupport
+		value = parl_soccon_support_to_add_percent
+	}
+	parl_get_support_soccon = yes
+}
+
+parl_change_authdem_support = {
+	add_to_variable = {
+		var = parl_authdemsupport
+		value = parl_authdem_support_to_add_percent
+	}
+	parl_get_support_authdem = yes
+}
+
+parl_change_pataut_support = {
+	add_to_variable = {
+		var = parl_patautsupport
+		value = parl_pataut_support_to_add_percent
+	}
+	parl_get_support_pataut = yes
+}
+
+parl_change_natpop_support = {
+	add_to_variable = {
+		var = parl_natpopsupport
+		value = parl_natpop_support_to_add_percent
+	}
+	parl_get_support_natpop = yes
+}
+
+parl_fix_empty_seats = {
+	set_temp_variable = {
+		var = seatstoadd
+		value = parl_maxseats
+	}
+	subtract_from_temp_variable = {
+		var = seatstoadd
+		value = parl_current_seats
+	}
+	IF = {
+		LIMIT = {
+			has_government = authoritarian_socialist
+		}
+		add_to_variable = {
+			var = parl_authsocseats
+			value = seatstoadd
+		}
+	}
+	IF = {
+		LIMIT = {
+			has_government = radical_socialist
+		}
+		add_to_variable = {
+			var = parl_radsocseats
+			value = seatstoadd
+		}
+	}
+	IF = {
+		LIMIT = {
+			has_government = social_democrat
+		}
+		add_to_variable = {
+			var = parl_socdemseats
+			value = seatstoadd
+		}
+	}
+	IF = {
+		LIMIT = {
+			has_government = revolutionary_republican
+		}
+		add_to_variable = {
+			var = parl_revrepseats
+			value = seatstoadd
+		}
+	}
+	IF = {
+		LIMIT = {
+			has_government = social_liberal
+		}
+		add_to_variable = {
+			var = parl_soclibseats
+			value = seatstoadd
+		}
+	}
+	IF = {
+		LIMIT = {
+			has_government = market_liberal
+		}
+		add_to_variable = {
+			var = parl_marklibseats
+			value = seatstoadd
+		}
+	}
+	IF = {
+		LIMIT = {
+			has_government = social_conservative
+		}
+		add_to_variable = {
+			var = parl_socconseats
+			value = seatstoadd
+		}
+	}
+	IF = {
+		LIMIT = {
+			has_government = authoritarian_democrat
+		}
+		add_to_variable = {
+			var = parl_authdemseats
+			value = seatstoadd
+		}
+	}
+	IF = {
+		LIMIT = {
+			has_government = paternal_autocrat
+		}
+		add_to_variable = {
+			var = parl_patautseats
+			value = seatstoadd
+		}
+	}
+	IF = {
+		LIMIT = {
+			has_government = national_populist
+		}
+		add_to_variable = {
+			var = parl_natpopseats
+			value = seatstoadd
+		}
+	}
+	parl_get_support = yes
+}
+parl_PERCENT_SUPPORT = {
+	set_variable = {
+		var = parl_percent_support
+		value = parl_support_seats
+	}
+	divide_variable = {
+		var = parl_percent_support
+		value = parl_maxseats
+	}
+}
+PARL_HANDLE_BANNED = {
+	IF = {
+		LIMIT = {
+			has_government = authoritarian_socialist
+		}
+		add_to_variable = {
+			var = parl_authsocseats
+			value = parl_banned_to_add
+		}
+	}
+	IF = {
+		LIMIT = {
+			has_government = radical_socialist
+		}
+		add_to_variable = {
+			var = parl_radsocseats
+			value = parl_banned_to_add
+		}
+	}
+	IF = {
+		LIMIT = {
+			has_government = social_conservative
+		}
+		add_to_variable = {
+			var = parl_socconseats
+			value = parl_banned_to_add
+		}
+	}
+	IF = {
+		LIMIT = {
+			has_government = revolutionary_republican
+		}
+		add_to_variable = {
+			var = parl_revrepcseats
+			value = parl_banned_to_add
+		}
+	}
+	IF = {
+		LIMIT = {
+			has_government = social_liberal
+		}
+		add_to_variable = {
+			var = parl_soclibseats
+			value = parl_banned_to_add
+		}
+	}
+	IF = {
+		LIMIT = {
+			has_government = market_liberal
+		}
+		add_to_variable = {
+			var = parl_marklibseats
+			value = parl_banned_to_add
+		}
+	}
+	IF = {
+		LIMIT = {
+			has_government = social_conservative
+		}
+		add_to_variable = {
+			var = parl_socconseats
+			value = parl_banned_to_add
+		}
+	}
+	IF = {
+		LIMIT = {
+			has_government = authoritarian_democrat
+		}
+		add_to_variable = {
+			var = parl_authdemseats
+			value = parl_banned_to_add
+		}
+	}
+	IF = {
+		LIMIT = {
+			has_government = paternal_autocrat
+		}
+		add_to_variable = {
+			var = parl_patautseats
+			value = parl_banned_to_add
+		}
+	}
+	IF = {
+		LIMIT = {
+			has_government = national_populist
+		}
+		add_to_variable = {
+			var = parl_natpopseats
+			value = parl_banned_to_add
+		}
+	}
+	set_variable = {
+		var = parl_banned_to_add
+		value = 0
+	}
+	parl_get_support = yes
+}
+parl_ban_authsoc = {
+	add_to_variable = {
+		var = parl_banned_to_add
+		value = parl_authsocseats
+	}
+	set_variable = {
+		var = parl_authsocseats
+		value = 0
+	}
+	PARL_HANDLE_BANNED = yes
+}
+parl_ban_radsoc = {
+	add_to_variable = {
+		var = parl_banned_to_add
+		value = parl_radsocseats
+	}
+	set_variable = {
+		var = parl_radsocseats
+		value = 0
+	}
+	PARL_HANDLE_BANNED = yes
+}
+parl_ban_socdem = {
+	add_to_variable = {
+		var = parl_banned_to_add
+		value = parl_socdemseats
+	}
+	set_variable = {
+		var = parl_socdemseats
+		value = 0
+	}
+	PARL_HANDLE_BANNED = yes
+}
+parl_ban_revrep = {
+	add_to_variable = {
+		var = parl_banned_to_add
+		value = parl_revrepseats
+	}
+	set_variable = {
+		var = parl_revrepseats
+		value = 0
+	}
+	PARL_HANDLE_BANNED = yes
+}
+parl_ban_soclib = {
+	add_to_variable = {
+		var = parl_banned_to_add
+		value = parl_soclibseats
+	}
+	set_variable = {
+		var = parl_soclibseats
+		value = 0
+	}
+	PARL_HANDLE_BANNED = yes
+}
+parl_ban_marklib = {
+	add_to_variable = {
+		var = parl_banned_to_add
+		value = parl_marklibseats
+	}
+	set_variable = {
+		var = parl_marklibseats
+		value = 0
+	}
+	PARL_HANDLE_BANNED = yes
+}
+parl_ban_soccon = {
+	add_to_variable = {
+		var = parl_banned_to_add
+		value = parl_socconseats
+	}
+	set_variable = {
+		var = parl_socconseats
+		value = 0
+	}
+	PARL_HANDLE_BANNED = yes
+}
+parl_ban_authdem = {
+	add_to_variable = {
+		var = parl_banned_to_add
+		value = parl_authdemseats
+	}
+	set_variable = {
+		var = parl_authdemseats
+		value = 0
+	}
+	PARL_HANDLE_BANNED = yes
+}
+parl_ban_pataut = {
+	add_to_variable = {
+		var = parl_banned_to_add
+		value = parl_patautseats
+	}
+	set_variable = {
+		var = parl_patautseats
+		value = 0
+	}
+	PARL_HANDLE_BANNED = yes
+}
+parl_ban_natpop = {
+	add_to_variable = {
+		var = parl_banned_to_add
+		value = parl_natpopseats
+	}
+	set_variable = {
+		var = parl_natpopseats
+		value = 0
+	}
+	PARL_HANDLE_BANNED = yes
+}

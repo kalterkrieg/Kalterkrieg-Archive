@@ -1,0 +1,2048 @@
+#!gfx:interface/Kalterkrieg/KRG_goals.gfx
+shared_focus = {
+	id = CAL_Implement_the_National_Security_Act
+	icon = GFX_USA_goal_jcs
+	x = 30
+	y = 7
+	cost = 3
+
+	ai_will_do = {
+		base = 100
+	}
+
+	available_if_capitulated = yes
+	available = {
+		OR = {
+			has_country_flag = CAL_First_Inaug_Finished
+			custom_trigger_tooltip = {
+				tooltip = CAL_has_completed_starting_focus
+				has_completed_focus = CAL_Our_City_On_A_Hill
+				has_completed_focus = CAL_South_Coulee_Dam
+				has_completed_focus = CAL_Prepare_the_Federal_Capital
+				OR = {
+					has_completed_focus = CAL_Meet_With_The_Nation
+					has_completed_focus = CAL_Make_The_Tour
+				}
+			}
+		}
+	}
+	completion_reward = {
+		
+	}
+}
+
+##########
+###ARMY###
+##########
+
+shared_focus = {
+	id = CAL_The_Atlantic_Proposal
+	icon = GFX_USA_america_domain
+	relative_position_id = CAL_Implement_the_National_Security_Act
+	x = -2
+	y = 1
+	cost = 3
+
+	ai_will_do = {
+		base = 100
+	}
+
+	prerequisite = { focus = CAL_Implement_the_National_Security_Act }
+	mutually_exclusive = { focus = CAL_Continue_The_Pacific_First_Strategy }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		add_ideas = { CAL_Atlantic_Proposal_idea_1 }
+		custom_effect_tooltip = CAL_Atlantic_Doctrine_Modification_tt
+	}
+}
+shared_focus = {
+	id = CAL_Prioritize_Armored_Units
+	icon = GFX_generic_army_tanks2
+	relative_position_id = CAL_Implement_the_National_Security_Act
+	x = -3
+	y = 2
+	cost = 3
+
+	ai_will_do = {
+		base = 100
+	}
+
+	prerequisite = { focus = CAL_The_Atlantic_Proposal }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		swap_ideas = {
+			remove_idea  = CAL_Atlantic_Proposal_idea_1
+			add_idea = CAL_Atlantic_Proposal_idea_2
+		}
+	}
+}
+shared_focus = {
+	id = CAL_Study_The_Battles_For_Texas
+	icon = GFX_generic_doctrine_tank_warfare
+	relative_position_id = CAL_Implement_the_National_Security_Act
+	x = -5
+	y = 3
+	cost = 3
+
+	ai_will_do = {
+		base = 100
+	}
+
+	prerequisite = { focus = CAL_Prioritize_Armored_Units }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		army_experience = 35
+		air_experience = 15
+		swap_ideas = {
+			remove_idea  = CAL_Atlantic_Proposal_idea_2
+			add_idea = CAL_Atlantic_Proposal_idea_3
+		}
+	}
+}
+shared_focus = {
+	id = CAL_Develop_A_New_MBT
+	icon = GFX_CAL_Design_Main_Battle_Tank
+	relative_position_id = CAL_Implement_the_National_Security_Act
+	x = -4
+	y = 4
+	cost = 3
+
+	ai_will_do = {
+		base = 100
+	}
+
+	prerequisite = { focus = CAL_Study_The_Battles_For_Texas }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		add_tech_bonus = {
+			name = CAL_DeWitt
+			uses = 1
+			bonus = 1
+			technology = modern_tank_1
+		}
+	}
+}
+shared_focus = {
+	id = CAL_Prepare_For_The_Logistical_Nightmare
+	icon = GFX_SAF_Rails
+	relative_position_id = CAL_Implement_the_National_Security_Act
+	x = -6
+	y = 4
+	cost = 3
+	
+	ai_will_do = {
+		base = 100
+	}
+
+	prerequisite = { focus = CAL_Study_The_Battles_For_Texas }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		add_ideas = {
+			CAL_Atlantic_Proposal_Logistics
+		}
+		custom_effect_tooltip = CAL_Merge_Doctrine_Ideas_tt
+		if = {
+			limit = { 
+				has_idea = CAL_Atlantic_Proposal_idea_5
+				has_idea = CAL_Atlantic_Proposal_Planning
+			}
+			hidden_effect = {
+				remove_ideas = CAL_Atlantic_Proposal_Planning
+				remove_ideas = CAL_Atlantic_Proposal_idea_5
+				remove_ideas = CAL_Atlantic_Proposal_Logistics
+				add_ideas = CAL_Atlantic_Proposal_idea_6
+			}
+		}
+	}
+}
+shared_focus = {
+	id = CAL_Pre_Select_Offensive_Zones
+	icon = GFX_CAL_Pre_Select_Offensive_Zones
+	relative_position_id = CAL_Implement_the_National_Security_Act
+	x = -5
+	y = 5
+	cost = 3
+	
+	ai_will_do = {
+		base = 100
+	}
+
+	prerequisite = { focus = CAL_Study_The_Battles_For_Texas }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		add_ideas = {
+			CAL_Atlantic_Proposal_Planning
+		}
+		custom_effect_tooltip = CAL_Merge_Doctrine_Ideas_tt
+		if = {
+			limit = { 
+				has_idea = CAL_Atlantic_Proposal_idea_5
+				has_idea = CAL_Atlantic_Proposal_Logistics
+			}
+			hidden_effect = {
+				remove_ideas = CAL_Atlantic_Proposal_Planning
+				remove_ideas = CAL_Atlantic_Proposal_idea_5
+				remove_ideas = CAL_Atlantic_Proposal_Logistics
+				add_ideas = CAL_Atlantic_Proposal_idea_6
+			}
+		}
+	}
+}
+shared_focus = {
+	id = CAL_Expand_the_Special_Forces
+	icon = GFX_generic_veterans_benefits
+	relative_position_id = CAL_Implement_the_National_Security_Act
+	x = -3
+	y = 3
+	cost = 3
+
+	ai_will_do = {
+		base = 100
+	}
+
+	prerequisite = { focus = CAL_Prioritize_Armored_Units }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		add_tech_bonus = {
+			name = CAL_special_forces
+			uses = 2
+			bonus = 0.5
+			technology = tech_special_forces
+		}
+	}
+}
+shared_focus = {
+	id = CAL_Develop_Rapid_Assault_Doctrine
+	icon = GFX_generic_army_mobile_warfare
+	relative_position_id = CAL_Implement_the_National_Security_Act
+	x = -2
+	y = 4
+	cost = 3
+
+	ai_will_do = {
+		base = 100
+	}
+
+	prerequisite = { focus = CAL_Expand_the_Special_Forces }
+	prerequisite = { focus = CAL_Study_The_Battles_For_Texas }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		add_tech_bonus = {
+			name = CAL_doctrine
+			uses = 1
+			bonus = 1
+			category = mechanized_equipment
+		}
+		swap_ideas = {
+			remove_idea  = CAL_Atlantic_Proposal_idea_3
+			add_idea = CAL_Atlantic_Proposal_idea_4
+		}
+	}
+}
+shared_focus = {
+	id = CAL_Perfect_Combined_Arms_Offensives
+	icon = GFX_focus_generic_combined_arms
+	relative_position_id = CAL_Implement_the_National_Security_Act
+	x = -3
+	y = 5
+	cost = 3
+
+	ai_will_do = {
+		base = 100
+	}
+
+	prerequisite = { focus = CAL_Develop_A_New_MBT }
+	prerequisite = { focus = CAL_Develop_Rapid_Assault_Doctrine }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		swap_ideas = {
+			remove_idea  = CAL_Atlantic_Proposal_idea_4
+			add_idea = CAL_Atlantic_Proposal_idea_5
+		}
+		custom_effect_tooltip = CAL_Merge_Doctrine_Ideas_tt
+		if = {
+			limit = { 
+				has_idea = CAL_Atlantic_Proposal_Logistics
+				has_idea = CAL_Atlantic_Proposal_Planning
+			}
+			hidden_effect = {
+				remove_ideas = CAL_Atlantic_Proposal_Planning
+				remove_ideas = CAL_Atlantic_Proposal_idea_5
+				remove_ideas = CAL_Atlantic_Proposal_Logistics
+				add_ideas = CAL_Atlantic_Proposal_idea_6
+			}
+		}
+	}
+}
+shared_focus = {
+	id = CAL_Broaden_Civilian_Defense_Schemes
+	icon = GFX_CAL_shield
+	relative_position_id = CAL_Implement_the_National_Security_Act
+	x = 0
+	y = 2
+	cost = 3
+
+	ai_will_do = {
+		base = 100
+	}
+
+	prerequisite = { focus = CAL_The_Atlantic_Proposal focus = CAL_Continue_The_Pacific_First_Strategy }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		add_war_support = 0.05
+		army_experience = 15
+	}
+}
+shared_focus = {
+	id = CAL_Learn_From_The_Federalists
+	icon = GFX_USA_goal_macarthur_2
+	relative_position_id = CAL_Implement_the_National_Security_Act
+	x = -1
+	y = 3
+	cost = 3
+
+	ai_will_do = {
+		base = 100
+	}
+
+	prerequisite = { focus = CAL_Broaden_Civilian_Defense_Schemes }
+	mutually_exclusive = { focus = CAL_Develop_A_New_Army }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		swap_ideas = {
+			remove_idea = CAL_Legacy_Of_The_Federalists
+			add_idea = CAL_The_United_American_Army
+		}
+	}
+}
+shared_focus = {
+	id = CAL_Develop_A_New_Army
+	icon = GFX_CAL_new_army
+	relative_position_id = CAL_Implement_the_National_Security_Act
+	x = 1
+	y = 3
+	cost = 3
+
+	ai_will_do = {
+		base = 100
+	}
+
+	prerequisite = { focus = CAL_Broaden_Civilian_Defense_Schemes }
+	mutually_exclusive = { focus = CAL_Learn_From_The_Federalists }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		swap_ideas = {
+			remove_idea = CAL_Legacy_Of_The_Federalists
+			add_idea = CAL_The_New_Pacific_Army
+		}
+	}
+}
+shared_focus = {
+	id = CAL_Found_The_Pacific_Military_Institute
+	icon = GFX_generic_military_academy
+	relative_position_id = CAL_Implement_the_National_Security_Act
+	x = 0
+	y = 4
+	cost = 3
+
+	ai_will_do = {
+		base = 100
+	}
+
+	prerequisite = { focus = CAL_Learn_From_The_Federalists focus = CAL_Develop_A_New_Army }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		army_experience = 50
+		add_command_power = 25
+	}
+}
+shared_focus = {
+	id = CAL_Continue_The_Pacific_First_Strategy
+	icon = GFX_CAL_army
+	relative_position_id = CAL_Implement_the_National_Security_Act
+	x = 2
+	y = 1
+	cost = 3
+
+	ai_will_do = {
+		base = 100
+	}
+
+	prerequisite = { focus = CAL_Implement_the_National_Security_Act }
+	mutually_exclusive = { focus = CAL_The_Atlantic_Proposal }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		add_ideas = { CAL_Pacific_Proposal_idea_1 }
+		custom_effect_tooltip = CAL_Pacific_Doctrine_Modification_tt
+	}
+}
+shared_focus = {
+	id = CAL_Modernize_Our_Defenses
+	icon = GFX_generic_generic_air_defense2
+	relative_position_id = CAL_Implement_the_National_Security_Act
+	x = 2
+	y = 2
+	cost = 3
+
+	ai_will_do = {
+		base = 100
+	}
+
+	prerequisite = { focus = CAL_Continue_The_Pacific_First_Strategy }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		add_timed_idea = {
+			idea = CAL_Defense_Modernization_Scheme
+			days = 365
+		}
+	}
+}
+shared_focus = {
+	id = CAL_Fortify_The_Cheyenne_Line
+	icon = GFX_generic_nested_fortifications
+	relative_position_id = CAL_Implement_the_National_Security_Act
+	x = 3
+	y = 3
+	cost = 6
+
+	ai_will_do = {
+		base = 100
+	}
+
+	prerequisite = { focus = CAL_Continue_The_Pacific_First_Strategy }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		929 = {
+			add_building_construction = {
+				type = bunker
+				level = 2
+				province = { 
+					id = 12561
+					id = 7688
+				}
+				instant_build = yes
+			}
+		}
+		788 = {
+			add_building_construction = {
+				type = bunker
+				level = 2
+				province = { 
+					id = 13219
+					id = 1854
+					id = 1851
+				}
+				instant_build = yes
+			}
+		}
+		931 = {
+			add_building_construction = {
+				type = bunker
+				level = 2
+				province = { 
+					id = 1658
+					id = 868
+					id = 10535
+				}
+				instant_build = yes
+			}
+		}
+		793 = {
+			add_building_construction = {
+				type = bunker
+				level = 2
+				province = { 
+					id = 12552
+					id = 13220
+					id = 13223
+					id = 5044
+				}
+				instant_build = yes
+			}
+		}
+	}
+}
+shared_focus = {
+	id = CAL_Expand_Resupply_Routes
+	icon = GFX_generic_railroad
+	relative_position_id = CAL_Implement_the_National_Security_Act
+	x = 2
+	y = 4
+	cost = 3
+
+	ai_will_do = {
+		base = 100
+	}
+
+	prerequisite = { focus = CAL_Fortify_The_Cheyenne_Line }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		build_railway = {
+			level = 3
+			path = { 13220 13225 13224 7999 13222 }
+		}
+		add_timed_idea = {
+			idea = CAL_Logistics_Improvement_Initiative
+			days = 365
+		}
+	}
+}
+shared_focus = {
+	id = CAL_Pre_Range_Artillery_Emplacements
+	icon = GFX_generic_artillery
+	relative_position_id = CAL_Implement_the_National_Security_Act
+	x = 4
+	y = 2
+	cost = 3
+	
+	ai_will_do = {
+		base = 100
+	}
+
+	prerequisite = { focus = CAL_Continue_The_Pacific_First_Strategy }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		swap_ideas = {
+			remove_idea = CAL_Pacific_Proposal_idea_1
+			add_idea = CAL_Pacific_Proposal_idea_2
+		}
+	}
+}
+shared_focus = {
+	id = CAL_Designate_Secondary_Defenses
+	icon = GFX_Designate_Secondary_Defenses
+	relative_position_id = CAL_Implement_the_National_Security_Act
+	x = 5
+	y = 3
+	cost = 3
+
+	ai_will_do = {
+		base = 100
+	}
+
+	prerequisite = { focus = CAL_Pre_Range_Artillery_Emplacements }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		380 = {
+			add_building_construction = {
+				type = bunker
+				level = 2
+				province = { 
+					id = 4865
+					id = 4668
+					id = 764
+					id = 10662
+				}
+				instant_build = yes
+			}
+		}
+		377 = {
+			add_building_construction = {
+				type = bunker
+				level = 2
+				province = { 
+					id = 853
+					id = 3834
+					id = 7747
+					id = 2765
+				}
+				instant_build = yes
+			}
+		}
+		387 = {
+			add_building_construction = {
+				type = bunker
+				level = 2
+				province = {
+					id = 12535 
+					id = 10672 
+					id = 10602 
+				}
+				instant_build = yes
+			}
+		}
+	}
+}
+shared_focus = {
+	id = CAL_Study_Operation_Stalemate
+	icon = GFX_study_operation_stalemate
+	relative_position_id = CAL_Implement_the_National_Security_Act
+	x = 4
+	y = 4
+	cost = 3
+
+	ai_will_do = {
+		base = 100
+	}
+
+	prerequisite = { focus = CAL_Pre_Range_Artillery_Emplacements }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		army_experience = 35
+		air_experience = 15
+		swap_ideas = {
+			remove_idea = CAL_Pacific_Proposal_idea_2
+			add_idea = CAL_Pacific_Proposal_idea_3
+		}
+	}
+}
+shared_focus = {
+	id = CAL_Expand_the_National_Guard
+	icon = GFX_USA_national_guard_2
+	relative_position_id = CAL_Implement_the_National_Security_Act
+	x = 5
+	y = 5
+	cost = 3
+
+	ai_will_do = {
+		base = 100
+	}
+
+	prerequisite = { focus = CAL_Study_Operation_Stalemate }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		add_ideas = CAL_National_Guard_Expansion
+		custom_effect_tooltip = CAL_Merge_Doctrine_Ideas_tt
+		if = {
+			limit = { 
+				has_idea = CAL_Pacific_Proposal_idea_4
+			}
+			hidden_effect = {
+				remove_ideas = CAL_National_Guard_Expansion
+				remove_ideas = CAL_Pacific_Proposal_idea_4
+				add_ideas = CAL_Pacific_Proposal_idea_5
+			}
+		}
+	}
+}
+shared_focus = {
+	id = CAL_Form_Rapid_Reaction_Forces
+	icon = GFX_Form_Rapid_Reaction_Forces
+	relative_position_id = CAL_Implement_the_National_Security_Act
+	x = 3
+	y = 5
+	cost = 3
+
+	ai_will_do = {
+		base = 100
+	}
+
+	prerequisite = { focus = CAL_Fortify_The_Cheyenne_Line }
+	prerequisite = { focus = CAL_Study_Operation_Stalemate }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		swap_ideas = {
+			remove_idea = CAL_Pacific_Proposal_idea_3
+			add_idea = CAL_Pacific_Proposal_idea_4
+		}
+		custom_effect_tooltip = CAL_Merge_Doctrine_Ideas_tt
+		if = {
+			limit = { 
+				has_idea = CAL_National_Guard_Expansion
+			}
+			hidden_effect = {
+				remove_ideas = CAL_National_Guard_Expansion
+				remove_ideas = CAL_Pacific_Proposal_idea_4
+				add_ideas = CAL_Pacific_Proposal_idea_5
+			}
+		}
+	}
+}
+shared_focus = {
+	id = CAL_Establish_Operation_Columbia
+	icon = GFX_LEC_armsUSA
+	relative_position_id = CAL_Implement_the_National_Security_Act
+	x = 0
+	y = 6
+	cost = 3
+
+	ai_will_do = {
+		base = 100
+	}
+
+	prerequisite = { focus = CAL_Found_The_Pacific_Military_Institute }
+	prerequisite = { focus = CAL_Perfect_Combined_Arms_Offensives focus = CAL_Form_Rapid_Reaction_Forces }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		army_experience = 100
+		add_command_power = 50
+	}
+}
+shared_focus = {
+	id = CAL_Establish_Acquisition_Pipelines
+	icon = GFX_generic_industry_reallocation
+	relative_position_id = CAL_Implement_the_National_Security_Act
+	x = 7
+	y = 2
+	cost = 3
+
+	ai_will_do = {
+		base = 100
+	}
+
+	prerequisite = { focus = CAL_Continue_The_Pacific_First_Strategy focus = CAL_The_Atlantic_Proposal }
+	prerequisite = { focus = CAL_Prioritize_the_Bomber_Force focus = CAL_Emphasize_Fighter_Defense }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		825 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = arms_factory
+				level = 1
+				instant_build = yes
+			}
+		}
+		949 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = arms_factory
+				level = 1
+				instant_build = yes
+			}
+		}
+		380 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = arms_factory
+				level = 1
+				instant_build = yes
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = CAL_Contracts_With_Sorensen
+	icon = GFX_CAN_the_autoboom_industry_car
+	relative_position_id = CAL_Implement_the_National_Security_Act
+	x = 7
+	y = 3
+	cost = 3
+
+	ai_will_do = {
+		base = 100
+	}
+
+	prerequisite = { focus = CAL_Establish_Acquisition_Pipelines }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		add_tech_bonus = {
+			category = motorized_equipment
+			uses = 1
+			bonus = 1
+		}
+		add_equipment_to_stockpile = {
+			type = motorized_equipment
+			amount = 650
+		}
+	}
+}
+shared_focus = {
+	id = CAL_Fund_ArmaLite
+	icon = GFX_generic_gun_trials
+	relative_position_id = CAL_Implement_the_National_Security_Act
+	x = 6
+	y = 4
+	cost = 3
+
+	ai_will_do = {
+		base = 100
+	}
+
+	prerequisite = { focus = CAL_Establish_Acquisition_Pipelines }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		949 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = arms_factory
+				level = 1
+				instant_build = yes
+			}
+		}
+		add_tech_bonus = {
+			category = infantry_weapons
+			uses = 2
+			bonus = 0.5
+		}
+	}
+}
+shared_focus = {
+	id = CAL_Rotorcraft_Experiments
+	icon = GFX_generic_begin_rotorcraft_experiments
+	relative_position_id = CAL_Implement_the_National_Security_Act
+	x = 8
+	y = 4
+	cost = 3
+
+	ai_will_do = {
+		base = 100
+	}
+
+	prerequisite = { focus = CAL_Establish_Acquisition_Pipelines }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		add_tech_bonus = {
+			category = helicopter_tech
+			uses = 2
+			bonus = 0.5
+		}
+	}
+}
+
+##########
+###NAVY###
+##########
+
+shared_focus = {
+	id = CAL_Focus_On_Our_Shores
+	icon = GFX_generic_commercial_trade
+	relative_position_id = CAL_Implement_the_National_Security_Act
+	x = -15
+	y = 1
+	cost = 3
+
+	ai_will_do = {
+		base = 100
+	}
+
+	prerequisite = { focus = CAL_Implement_the_National_Security_Act }
+	mutually_exclusive = { focus = CAL_Re_Commit_To_Power_Projection }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		add_ideas = CAL_A_Green_Water_Navy
+	}
+}
+shared_focus = {
+	id = CAL_Prioritize_Shipping_Lanes
+	icon = GFX_USA_goal_liberty_ships
+	relative_position_id = CAL_Implement_the_National_Security_Act
+	x = -16
+	y = 2
+	cost = 3
+
+	ai_will_do = {
+		base = 100
+	}
+
+	prerequisite = { focus = CAL_Focus_On_Our_Shores }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		swap_ideas = {
+			remove_idea = CAL_A_Green_Water_Navy
+			add_idea = CAL_A_Green_Water_Navy_2
+		}
+	}
+}
+shared_focus = {
+	id = CAL_Develop_Escort_Vessels
+	icon = GFX_generic_coastal_navy2
+	relative_position_id = CAL_Implement_the_National_Security_Act
+	x = -15
+	y = 3
+	cost = 3
+
+	ai_will_do = {
+		base = 100
+	}
+
+	prerequisite = { focus = CAL_Prioritize_Shipping_Lanes }
+	prerequisite = { focus = CAL_Finance_Shipyard_Construction }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		add_tech_bonus = {
+		    bonus = 0.5
+		    uses = 1
+		    category = dd_tech
+		}
+		add_tech_bonus = {
+		    bonus = 0.5
+		    uses = 1
+		    category = ff_tech
+		}
+	}
+}
+shared_focus = {
+	id = CAL_Expand_the_Silent_Service
+	icon = GFX_generic_naval_submarine2
+	relative_position_id = CAL_Implement_the_National_Security_Act
+	x = -17
+	y = 3
+	cost = 3
+
+	ai_will_do = {
+		base = 100
+	}
+
+	prerequisite = { focus = CAL_Focus_On_Our_Shores }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		add_tech_bonus = {
+		    bonus = 0.5
+		    uses = 1
+		    category = ss_tech
+		}
+	}
+}
+shared_focus = {
+	id = CAL_Adopt_asymmetrical_Tactics
+	icon = GFX_generic_naval_command
+	relative_position_id = CAL_Implement_the_National_Security_Act
+	x = -16
+	y = 4
+	cost = 3
+
+	ai_will_do = {
+		base = 100
+	}
+
+	prerequisite = { focus = CAL_Prioritize_Shipping_Lanes }
+	prerequisite = { focus = CAL_Expand_the_Silent_Service }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		add_tech_bonus = {
+			name = TEX_sub
+			uses = 2
+			bonus = 0.5
+			category = submarine_doctrine
+		}
+	}
+}
+shared_focus = {
+	id = CAL_Trial_New_Torpedoes
+	icon = GFX_generic_navy_decision
+	relative_position_id = CAL_Implement_the_National_Security_Act
+	x = -18
+	y = 4
+	cost = 3
+
+	ai_will_do = {
+		base = 100
+	}
+
+	prerequisite = { focus = CAL_Expand_the_Silent_Service }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		swap_ideas = {
+			remove_idea = CAL_A_Green_Water_Navy_2
+			add_idea = CAL_A_Green_Water_Navy_3
+		}
+	}
+}
+shared_focus = {
+	id = CAL_Coordinate_Shoreline_Operations
+	icon = GFX_generic_ship_destroyer
+	relative_position_id = CAL_Implement_the_National_Security_Act
+	x = -17
+	y = 5
+	cost = 3
+
+	ai_will_do = {
+		base = 100
+	}
+
+	prerequisite = { focus = CAL_Trial_New_Torpedoes }
+	prerequisite = { focus = CAL_Adopt_asymmetrical_Tactics }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		swap_ideas = {
+			remove_idea = CAL_A_Green_Water_Navy_3
+			add_idea = CAL_A_Green_Water_Navy_4
+		}
+	}
+}
+shared_focus = {
+	id = CAL_Support_Rickovers_Experiment
+	icon = GFX_generic_nuclear_submarine
+	relative_position_id = CAL_Implement_the_National_Security_Act
+	x = -19
+	y = 5
+	cost = 3
+
+	ai_will_do = {
+		base = 100
+	}
+
+	prerequisite = { focus = CAL_Expand_the_Silent_Service }
+	available = {
+		OR = {
+			NEE = {
+				has_completed_focus = NEE_rickovers_discovery
+			}
+			NEE = { has_tech = nuclear_propulsion }
+		}
+	}
+	available_if_capitulated = yes
+
+	completion_reward = {
+		add_tech_bonus = {
+			name = NEE_rickovers_discovery
+			uses = 1
+			bonus = 1
+			technology = nuclear_propulsion
+		}
+	}
+}
+shared_focus = {
+	id = CAL_Re_Commit_To_Power_Projection
+	icon = GFX_CAL_navy
+	relative_position_id = CAL_Implement_the_National_Security_Act
+	x = -13
+	y = 1
+	cost = 3
+
+	ai_will_do = {
+		base = 100
+	}
+
+	prerequisite = { focus = CAL_Implement_the_National_Security_Act }
+	mutually_exclusive = { focus = CAL_Focus_On_Our_Shores }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		add_ideas = CAL_A_Blue_Water_Navy
+	}
+}
+shared_focus = {
+	id = CAL_Study_the_Weltkrieg
+	icon = GFX_generic_navy_battleship3
+	relative_position_id = CAL_Implement_the_National_Security_Act
+	x = -12
+	y = 2
+	cost = 3
+
+	ai_will_do = {
+		base = 100
+	}
+
+	prerequisite = { focus = CAL_Re_Commit_To_Power_Projection }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		add_tech_bonus = {
+			name = NEE_studying_new_carrier_doctrine
+			uses = 2
+			bonus = 0.5
+			category = cat_blue_water_navy
+		}
+		swap_ideas = {
+			remove_idea = CAL_A_Blue_Water_Navy
+			add_idea = CAL_A_Blue_Water_Navy_2
+		}
+	}
+}
+shared_focus = {
+	id = CAL_Develop_the_Task_Group_Concept
+	icon = GFX_generic_aircraft_carrier
+	relative_position_id = CAL_Implement_the_National_Security_Act
+	x = -13
+	y = 3
+	cost = 3
+
+	ai_will_do = {
+		base = 100
+	}
+
+	prerequisite = { focus = CAL_Study_the_Weltkrieg }
+	prerequisite = { focus = CAL_Finance_Shipyard_Construction }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		swap_ideas = {
+			remove_idea = CAL_A_Blue_Water_Navy_2
+			add_idea = CAL_A_Blue_Water_Navy_3
+		}
+	}
+}
+shared_focus = {
+	id = CAL_Modernize_Heavy_Ship_Designs
+	icon = GFX_BEL_Battleship_Investements
+	relative_position_id = CAL_Implement_the_National_Security_Act
+	x = -11
+	y = 3
+	cost = 3
+
+	ai_will_do = {
+		base = 100
+	}
+
+	prerequisite = { focus = CAL_Study_the_Weltkrieg }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		add_tech_bonus = {
+		    bonus = 0.5
+		    uses = 2
+		    category = ca_tech
+		}
+	}
+}
+shared_focus = {
+	id = CAL_Kickstart_Naval_Aviation_Developments
+	icon = GFX_generic_fighter_designs
+	relative_position_id = CAL_Implement_the_National_Security_Act
+	x = -12
+	y = 4
+	cost = 3
+
+	ai_will_do = {
+		base = 100
+	}
+
+	prerequisite = { focus = CAL_Develop_the_Task_Group_Concept }
+	prerequisite = { focus = CAL_Modernize_Heavy_Ship_Designs }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		add_tech_bonus = {
+			name = NEE_lisencing_the_f9f_panther
+			uses = 1
+			bonus = 0.75
+			technology = cv_jet_strike_2
+		}
+		add_tech_bonus = {
+			name = NEE_lisencing_the_f9f_panther
+			uses = 1
+			bonus = 0.75
+			technology = jet_cv_fighter_2
+		}
+		swap_ideas = {
+			remove_idea = CAL_A_Blue_Water_Navy_3
+			add_idea = CAL_A_Blue_Water_Navy_4
+		}
+	}
+}
+shared_focus = {
+	id = CAL_Construct_The_Next_Carriers
+	icon = GFX_generic_naval_carrier2
+	relative_position_id = CAL_Implement_the_National_Security_Act
+	x = -11
+	y = 5
+	cost = 3
+
+	ai_will_do = {
+		base = 100
+	}
+
+	prerequisite = { focus = CAL_Develop_the_Task_Group_Concept }
+	prerequisite = { focus = CAL_Modernize_Heavy_Ship_Designs }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		add_tech_bonus = {
+			name = NEE_laying_down_the_next_generation
+			uses = 1
+			bonus = 1
+			ahead_reduction = 1
+			technology = wartime_carrier
+		}
+	}
+}
+shared_focus = {
+	id = CAL_Draw_Up_The_Next_Battleships
+	icon = GFX_generic_naval_battleship2
+	relative_position_id = CAL_Implement_the_National_Security_Act
+	x = -10
+	y = 4
+	cost = 3
+
+	ai_will_do = {
+		base = 100
+	}
+
+	prerequisite = { focus = CAL_Modernize_Heavy_Ship_Designs }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		add_tech_bonus = {
+		    bonus = 0.5
+		    uses = 1
+		    category = bb_tech
+		}
+	}
+}
+shared_focus = {
+	id = CAL_Finance_Shipyard_Construction
+	icon = GFX_SAF_Port
+	relative_position_id = CAL_Implement_the_National_Security_Act
+	x = -14
+	y = 2
+	cost = 3
+
+	ai_will_do = {
+		base = 100
+	}
+
+	prerequisite = { focus = CAL_Re_Commit_To_Power_Projection focus = CAL_Focus_On_Our_Shores }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		386 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = dockyard
+				level = 1
+				instant_build = yes
+			}
+		}
+		378 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = dockyard
+				level = 1
+				instant_build = yes
+			}
+		}
+	}
+}
+shared_focus = {
+	id = CAL_Expand_San_Diego
+	icon = GFX_SIA_maritmesilkroad
+	relative_position_id = CAL_Implement_the_National_Security_Act
+	x = -14
+	y = 4
+	cost = 5
+
+	ai_will_do = {
+		base = 100
+	}
+
+	prerequisite = { focus = CAL_Finance_Shipyard_Construction }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		949 = {
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = dockyard
+				level = 2
+				instant_build = yes
+			}
+			add_building_construction = {
+				type = coastal_bunker
+				level = 2
+				instant_build = yes
+				province = 1562
+			}
+		}
+	}
+}
+shared_focus = {
+	id = CAL_Arctic_Circle_Basing
+	icon = GFX_CAN_alaskan_railway
+	relative_position_id = CAL_Implement_the_National_Security_Act
+	x = -15
+	y = 5
+	cost = 7
+
+	ai_will_do = {
+		base = 100
+	}
+
+	prerequisite = { focus = CAL_Expand_San_Diego }
+	available = {
+		CAL = {
+			owns_state = 463
+		}
+	}
+	available_if_capitulated = yes
+
+	completion_reward = {
+		463 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = dockyard
+				level = 1
+				instant_build = yes
+			}
+			add_building_construction = {
+				type = naval_base
+				level = 2
+				instant_build = yes
+				province = 13091
+			}
+			add_building_construction = {
+				type = naval_base
+				level = 1
+				instant_build = yes
+				province = 13203
+			}
+			add_building_construction = {
+				type = air_base
+				level = 1
+				instant_build = yes
+			} 
+		}
+	}
+}
+shared_focus = {
+	id = CAL_Re_Establish_Pearl_Harbor
+	icon = GFX_CAL_re_establish_pearl_harbor
+	relative_position_id = CAL_Implement_the_National_Security_Act
+	x = -13
+	y = 5
+	cost = 7
+
+	ai_will_do = {
+		base = 100
+	}
+
+	prerequisite = { focus = CAL_Expand_San_Diego }
+	available = {
+		CAL = {
+			owns_state = 629
+		}
+	}
+	available_if_capitulated = yes
+
+	completion_reward = {
+		629 = {
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = dockyard
+				level = 2
+				instant_build = yes
+			}
+			add_building_construction = {
+				type = air_base
+				level = 2
+				instant_build = yes
+			} 
+		}
+	}
+}
+shared_focus = {
+	id = CAL_Reform_the_Californian_Maritime_Academy
+	icon = GFX_generic_naval_academy
+	relative_position_id = CAL_Implement_the_National_Security_Act
+	x = -14
+	y = 6
+	cost = 3
+
+	ai_will_do = {
+		base = 100
+	}
+
+	prerequisite = { focus = CAL_Expand_San_Diego }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		navy_experience = 50
+	}
+}
+shared_focus = {
+	id = CAL_Conduct_Joint_Accord_Training
+	icon = GFX_generic_accord_align
+	relative_position_id = CAL_Implement_the_National_Security_Act
+	x = -10
+	y = 2
+	cost = 3
+
+	ai_will_do = {
+		base = 100
+	}
+
+	prerequisite = { focus = CAL_Re_Commit_To_Power_Projection }
+	prerequisite = { focus = CAL_The_Atlantic_Proposal  focus = CAL_Continue_The_Pacific_First_Strategy }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		every_country = {
+			limit = {
+				is_in_faction_with = NEE
+			}
+			navy_experience = 25
+		}
+		navy_experience = 25
+	}
+}
+shared_focus = {
+	id = CAL_Reconstruct_The_Marine_Corps
+	icon = GFX_NFA_Troupes_de_Marine_Focus
+	relative_position_id = CAL_Implement_the_National_Security_Act
+	x = -8
+	y = 2
+	cost = 3
+
+	ai_will_do = {
+		base = 100
+	}
+
+	prerequisite = { focus = CAL_Re_Commit_To_Power_Projection focus = CAL_Focus_On_Our_Shores }
+	prerequisite = { focus = CAL_The_Atlantic_Proposal  focus = CAL_Continue_The_Pacific_First_Strategy }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		add_ideas = CAL_The_Pacific_Marine_Corps
+	}
+}
+shared_focus = {
+	id = CAL_Americas_Long_Arm
+	icon = GFX_generic_liberty
+	relative_position_id = CAL_Implement_the_National_Security_Act
+	x = -9
+	y = 3
+	cost = 3
+
+	ai_will_do = {
+		base = 100
+	}
+
+	prerequisite = { focus = CAL_Reconstruct_The_Marine_Corps }
+	mutually_exclusive = { focus = CAL_Americas_Striking_Spear }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		swap_ideas = {
+			add_idea = CAL_The_Pacific_Marine_Corps_Arm
+			remove_idea = CAL_The_Pacific_Marine_Corps
+		}
+	}
+}
+shared_focus = {
+	id = CAL_Americas_Striking_Spear
+	icon = GFX_USA_crush_TEX
+	relative_position_id = CAL_Implement_the_National_Security_Act
+	x = -7
+	y = 3
+	cost = 3
+
+	ai_will_do = {
+		base = 100
+	}
+
+	prerequisite = { focus = CAL_Reconstruct_The_Marine_Corps }
+	mutually_exclusive = { focus = CAL_Americas_Long_Arm }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		swap_ideas = {
+			add_idea = CAL_The_Pacific_Marine_Corps_Spear
+			remove_idea = CAL_The_Pacific_Marine_Corps
+		}
+	}
+}
+shared_focus = {
+	id = CAL_Expand_Camp_Pendleton
+	icon = GFX_generic_marines2
+	relative_position_id = CAL_Implement_the_National_Security_Act
+	x = -8
+	y = 4
+	cost = 3
+
+	ai_will_do = {
+		base = 100
+	}
+
+	prerequisite = { focus = CAL_Americas_Long_Arm focus = CAL_Americas_Striking_Spear }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		if = {
+			limit = { has_idea = CAL_The_Pacific_Marine_Corps_Arm }
+			swap_ideas = {
+				add_idea = CAL_The_Pacific_Marine_Corps_Arm_Pendleton
+				remove_idea = CAL_The_Pacific_Marine_Corps_Arm
+			}
+		}
+		else_if = {
+			limit = { has_idea = CAL_The_Pacific_Marine_Corps_Spear }
+			swap_ideas = {
+				add_idea = CAL_The_Pacific_Marine_Corps_Spear_Pendleton
+				remove_idea = CAL_The_Pacific_Marine_Corps_Spear
+			}
+		}
+		else = {
+			swap_ideas = {
+				add_idea = CAL_The_Pacific_Marine_Corps_Spear_Pendleton
+				remove_idea = CAL_The_Pacific_Marine_Corps_Spear
+			}
+		}
+	}
+}
+
+###############
+###AIR FORCE###
+###############
+
+shared_focus = {
+	id = CAL_Prioritize_the_Bomber_Force
+	icon = GFX_generic_air_prioritize_bomber_force
+	relative_position_id = CAL_Implement_the_National_Security_Act
+	x = 12
+	y = 1
+	cost = 3
+
+	ai_will_do = {
+		base = 100
+	}
+
+	prerequisite = { focus = CAL_Implement_the_National_Security_Act }
+	mutually_exclusive = { focus = CAL_Emphasize_Fighter_Defense }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		add_ideas = CAL_Bomber_Oriented_Force
+	}
+}
+shared_focus = {
+	id = CAL_Expand_The_Bomber_Fleets
+	icon = GFX_RUS_bombers_to_reach_berlin
+	relative_position_id = CAL_Implement_the_National_Security_Act
+	x = 9
+	y = 2
+	cost = 3
+
+	ai_will_do = {
+		base = 100
+	}
+
+	prerequisite = { focus = CAL_Prioritize_the_Bomber_Force }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		swap_ideas = {
+			remove_idea = CAL_Bomber_Oriented_Force
+			add_idea = CAL_Bomber_Oriented_Force_1
+		}
+		add_equipment_to_stockpile = {
+			type = strat_bomber_equipment_2
+			amount = 75
+			producer = CAL
+		}
+		
+	}
+}
+shared_focus = {
+	id = CAL_Sign_New_Boeing_Contracts
+	icon = GFX_CAL_sign_new_boeing_contracts
+	relative_position_id = CAL_Implement_the_National_Security_Act
+	x = 11
+	y = 2
+	cost = 3
+
+	ai_will_do = {
+		base = 100
+	}
+
+	prerequisite = { focus = CAL_Prioritize_the_Bomber_Force }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		386 = {
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = arms_factory
+				level = 2
+				instant_build = yes
+			}
+		}
+	}
+}
+shared_focus = {
+	id = CAL_Earmark_Escort_Forces
+	icon = GFX_generic_air_earmark_escort_forces
+	relative_position_id = CAL_Implement_the_National_Security_Act
+	x = 10
+	y = 3
+	cost = 3
+
+	ai_will_do = {
+		base = 100
+	}
+
+	prerequisite = { focus = CAL_Sign_New_Boeing_Contracts }
+	prerequisite = { focus = CAL_Expand_The_Bomber_Fleets }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		swap_ideas = {
+			remove_idea = CAL_Bomber_Oriented_Force_1
+			add_idea = CAL_Bomber_Oriented_Force_2
+		}
+	}
+}
+shared_focus = {
+	id = CAL_Expand_Backline_Bases
+	icon = GFX_generic_construction_engineering
+	relative_position_id = CAL_Implement_the_National_Security_Act
+	x = 12
+	y = 3
+	cost = 3
+
+	ai_will_do = {
+		base = 100
+	}
+
+	prerequisite = { focus = CAL_Sign_New_Boeing_Contracts }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		380 = {
+			add_building_construction = {
+				type = air_base
+				level = 4
+				instant_build = yes
+			}
+		}
+		387 = {
+			add_building_construction = {
+				type = air_base
+				level = 2
+				instant_build = yes
+			}
+		}
+		377 = {
+			add_building_construction = {
+				type = air_base
+				level = 2
+				instant_build = yes
+			}
+		}
+		380 = {
+			add_building_construction = {
+				type = radar_station
+				level = 2
+				instant_build = yes
+			}
+		}
+		387 = {
+			add_building_construction = {
+				type = radar_station
+				level = 2
+				instant_build = yes
+			}
+		}
+	}
+}
+shared_focus = {
+	id = CAL_Develop_Strategic_Doctrine
+	icon = GFX_generic_bombs_away
+	relative_position_id = CAL_Implement_the_National_Security_Act
+	x = 11
+	y = 4
+	cost = 3
+
+	ai_will_do = {
+		base = 100
+	}
+
+	prerequisite = { focus = CAL_Earmark_Escort_Forces }
+	prerequisite = { focus = CAL_Expand_Backline_Bases }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		add_tech_bonus = {
+			name = NEE_studying_new_carrier_doctrine
+			uses = 1
+			bonus = 0.75
+			category = strategic_bomber_tech
+		}
+		add_tech_bonus = {
+			name = NEE_studying_new_carrier_doctrine
+			uses = 1
+			bonus = 0.75
+			category = tactical_bomber_tech
+		}
+	}
+}
+shared_focus = {
+	id = CAL_Pre_Designate_Bombing_Targets
+	icon = GFX_generic_combined_bomber_offensive
+	relative_position_id = CAL_Implement_the_National_Security_Act
+	x = 10
+	y = 5
+	cost = 3
+
+	ai_will_do = {
+		base = 100
+	}
+
+	prerequisite = { focus = CAL_Earmark_Escort_Forces }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		swap_ideas = {
+			remove_idea = CAL_Bomber_Oriented_Force_2
+			add_idea = CAL_Bomber_Oriented_Force_3
+		}
+	}
+}
+shared_focus = {
+	id = CAL_Emphasize_Fighter_Defense
+	icon = GFX_CAL_freedom_fighters
+	relative_position_id = CAL_Implement_the_National_Security_Act
+	x = 14
+	y = 1
+	cost = 3
+
+	ai_will_do = {
+		base = 100
+	}
+
+	prerequisite = { focus = CAL_Implement_the_National_Security_Act }
+	mutually_exclusive = { focus = CAL_Prioritize_the_Bomber_Force }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		add_ideas = CAL_Fighter_Oriented_Force
+	}
+}
+shared_focus = {
+	id = CAL_Shift_Towards_the_Interceptor
+	icon = GFX_generic_air_interceptor
+	relative_position_id = CAL_Implement_the_National_Security_Act
+	x = 14
+	y = 3
+	cost = 3
+
+	ai_will_do = {
+		base = 100
+	}
+
+	prerequisite = { focus = CAL_Emphasize_Fighter_Defense }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		add_tech_bonus = {
+			name = NEE_studying_new_carrier_doctrine
+			uses = 1
+			bonus = 0.75
+			category = interceptor_tech
+		}
+	}
+}
+shared_focus = {
+	id = CAL_Construct_Early_Warning_Positions
+	icon = GFX_goal_generic_radar
+	relative_position_id = CAL_Implement_the_National_Security_Act
+	x = 15
+	y = 2
+	cost = 3
+
+	ai_will_do = {
+		base = 100
+	}
+
+	prerequisite = { focus = CAL_Emphasize_Fighter_Defense }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		swap_ideas = {
+			remove_idea = CAL_Fighter_Oriented_Force
+			add_idea = CAL_Fighter_Oriented_Force_1
+		}
+		931 = {
+			add_building_construction = {
+				type = radar_station
+				level = 2
+				instant_build = yes
+			}
+		}
+		793 = {
+			add_building_construction = {
+				type = radar_station
+				level = 1
+				instant_build = yes
+			}
+		}
+		929 = {
+			add_building_construction = {
+				type = radar_station
+				level = 1
+				instant_build = yes
+			}
+		}
+		788 = {
+			add_building_construction = {
+				type = radar_station
+				level = 2
+				instant_build = yes
+			}
+		}
+	}
+}
+shared_focus = {
+	id = CAL_Develop_SAM_Systems
+	icon = GFX_DNF_Sam_And_Radar
+	relative_position_id = CAL_Implement_the_National_Security_Act
+	x = 16
+	y = 3
+	cost = 3
+
+	ai_will_do = {
+		base = 100
+	}
+
+	prerequisite = { focus = CAL_Construct_Early_Warning_Positions }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		swap_ideas = {
+			remove_idea = CAL_Fighter_Oriented_Force_1
+			add_idea = CAL_Fighter_Oriented_Force_2
+		}
+	}
+}
+shared_focus = {
+	id = CAL_Link_The_Rocky_Warning_Line
+	icon = GFX_CAL_link_the_rockies
+	relative_position_id = CAL_Implement_the_National_Security_Act
+	x = 17
+	y = 4
+	cost = 3
+
+	ai_will_do = {
+		base = 100
+	}
+
+	prerequisite = { focus = CAL_Develop_SAM_Systems }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		931 = {
+			add_building_construction = {
+				type = anti_air_building
+				level = 1
+				instant_build = yes
+			}
+		}
+		793 = {
+			add_building_construction = {
+				type = anti_air_building
+				level = 1
+				instant_build = yes
+			}
+		}
+		929 = {
+			add_building_construction = {
+				type = anti_air_building
+				level = 1
+				instant_build = yes
+			}
+		}
+		788 = {
+			add_building_construction = {
+				type = anti_air_building
+				level = 1
+				instant_build = yes
+			}
+		}
+		380 = {
+			add_building_construction = {
+				type = radar_station
+				level = 2
+				instant_build = yes
+			}
+		}
+	}
+}
+shared_focus = {
+	id = CAL_Research_Strike_Fighters
+	icon = GFX_RUS_roll_out_new_Fighters
+	relative_position_id = CAL_Implement_the_National_Security_Act
+	x = 15
+	y = 4
+	cost = 3
+
+	ai_will_do = {
+		base = 100
+	}
+
+	prerequisite = { focus = CAL_Construct_Early_Warning_Positions }
+	prerequisite = { focus = CAL_Shift_Towards_the_Interceptor }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		add_tech_bonus = {
+			name = NEE_studying_new_carrier_doctrine
+			uses = 1
+			bonus = 0.75
+			category = cas_tech
+		}
+	}
+}
+shared_focus = {
+	id = CAL_Air_Support_Thirty_Minutes
+	icon = GFX_CAL_air_support_thirty
+	relative_position_id = CAL_Implement_the_National_Security_Act
+	x = 16
+	y = 5
+	cost = 3
+
+	ai_will_do = {
+		base = 100
+	}
+
+	prerequisite = { focus = CAL_Research_Strike_Fighters }
+	prerequisite = { focus = CAL_Link_The_Rocky_Warning_Line }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		swap_ideas = {
+			remove_idea = CAL_Fighter_Oriented_Force_2
+			add_idea = CAL_Fighter_Oriented_Force_3
+		}
+	}
+}
+shared_focus = {
+	id = CAL_Resettle_The_Aviation_Industry
+	icon = GFX_generic_industry_air
+	relative_position_id = CAL_Implement_the_National_Security_Act
+	x = 13
+	y = 2
+	cost = 3
+	
+	ai_will_do = {
+		base = 100
+	}
+
+	prerequisite = { focus = CAL_Prioritize_the_Bomber_Force focus = CAL_Emphasize_Fighter_Defense }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		378 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
+		385 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
+	}
+}
+shared_focus = {
+	id = CAL_Develop_New_Engines
+	icon = GFX_generic_jet_engine
+	relative_position_id = CAL_Implement_the_National_Security_Act
+	x = 13
+	y = 4
+	cost = 3
+
+	ai_will_do = {
+		base = 100
+	}
+
+	prerequisite = { focus = CAL_Resettle_The_Aviation_Industry }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		if = {
+			limit = {
+				has_area_ruling = yes
+			}
+			unlock_radar_integration = yes
+		}
+		else_if = {
+			limit = {
+				has_afterburners = yes
+			}
+			unlock_area_ruling = yes
+		}
+		else = {
+			unlock_turbofans = yes 
+		}
+		
+	}
+}
+shared_focus = {
+	id = CAL_Contract_Lockheed_Skunk_Works
+	icon = GFX_CAL_Contract_Lockheeds_Skunk_Works
+	relative_position_id = CAL_Implement_the_National_Security_Act
+	x = 12
+	y = 5
+	cost = 3
+
+	ai_will_do = {
+		base = 100
+	}
+
+	prerequisite = { focus = CAL_Develop_New_Engines }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		air_experience = 25
+	}
+}
+shared_focus = {
+	id = CAL_Work_With_Northrop
+	icon = GFX_CAL_Work_With_Northrops_Designs
+	relative_position_id = CAL_Implement_the_National_Security_Act
+	x = 14
+	y = 5
+	cost = 3
+
+	ai_will_do = {
+		base = 100
+	}
+
+	prerequisite = { focus = CAL_Develop_New_Engines }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		air_experience = 25
+	}
+}
+shared_focus = {
+	id = CAL_Fund_the_Goddard_Laboratory
+	icon = GFX_GER_beyond_the_karman_line
+	relative_position_id = CAL_Implement_the_National_Security_Act
+	x = 13
+	y = 6
+	cost = 3
+
+	ai_will_do = {
+		base = 100
+	}
+	prerequisite = { focus = CAL_Contract_Lockheed_Skunk_Works }
+	prerequisite = { focus = CAL_Work_With_Northrop }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		country_event = {
+			id = krg_cal_flavor.5
+		}
+	}
+}

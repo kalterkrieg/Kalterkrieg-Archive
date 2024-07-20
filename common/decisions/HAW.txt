@@ -1,0 +1,1498 @@
+HAW_major_influence_category = {
+	HAW_About_The_Factions = {
+		available = {
+			always = yes
+		}
+		ai_will_do = {
+			base = 0
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete HAW_About_The_Factions target: [From.GetName]"
+			country_event = {
+				id = HAW_influence.0
+			}
+		}
+	}
+	#PSA Decisions
+	HAW_CAL_Send_Constables = {
+		icon = generic_prepare_civil_war
+		allowed = {
+			tag = CAL
+		}
+		available = {
+			has_war = no
+			
+		}
+		visible = {
+			has_war = no
+			HAW = {
+				is_subject = no
+				exists = yes
+				NOT = {
+					has_global_flag = HAW_fate_decided
+				}
+			}
+		
+		}
+		ai_will_do = {
+			base = 100
+			modifier = {
+				has_political_power > 150
+				factor = 3
+			}
+			modifier = {
+				HAW = {
+					OR = {
+						paternal_autocrat < 0.1
+						social_liberal < 0.2
+					}
+				}
+				factor = 2
+			}
+
+			modifier = {
+				HAW = {
+					OR = {
+						radical_socialist > 0.075
+						authoritarian_socialist > 0.05
+					}
+				}
+				
+				factor = 3
+			}
+
+			modifier = {
+				NOT = {
+					AND = {
+						has_game_rule = {
+							rule = HAW_REFERENDUM
+							option = DEFAULT
+						}
+						has_game_rule = {
+							rule = HAW_REVOLUTION
+							option = DEFAULT
+						}
+					}
+					
+					OR = {
+						has_game_rule = {
+							rule = HAW_REFERENDUM
+							option = HAW_REFERENDUM_AMERICAN_STATE
+						}
+					}
+					
+				}
+				factor = 0
+			}
+		}
+		custom_cost_text = decision_cost_ie_500_MP_1000
+
+		custom_cost_trigger = {
+			has_equipment = {
+				infantry_equipment > 500
+			}
+			has_manpower > 1000
+		}
+
+		days_re_enable = 45
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete HAW_CAL_Send_Constables target: [From.GetName]"
+			hidden_effect = {
+				add_manpower = -1000
+				send_equipment = {
+					target = HAW
+					type = infantry_equipment
+					amount = 500
+				}
+			}
+			HAW = {
+				add_stability = 0.015
+			}
+			HAW = {
+				add_popularity = {
+					ideology = paternal_autocrat
+					popularity = 0.005
+				}
+				add_popularity = {
+					ideology = social_liberal
+					popularity = 0.015
+				}
+			}
+		}
+	}
+	HAW_CAL_Send_Bureaucrats = {
+		icon = GFX_decision_generic_political_discourse
+		allowed = {
+			tag = CAL
+		}
+		available = {
+			has_war = no
+			has_manpower > 500
+			command_power > 20
+		}
+		visible = {
+			has_war = no
+			HAW = {
+				is_subject = no
+				exists = yes
+				NOT = {
+					has_global_flag = HAW_fate_decided
+				}
+			}
+			
+		}
+		ai_will_do = {
+			base = 100
+			modifier = {
+				has_political_power > 150
+				factor = 3
+			}
+			modifier = {
+				HAW = {
+					OR = {
+						authoritarian_democrat < 0.1
+						social_liberal < 0.2
+					}
+				}
+				factor = 2
+			}
+			modifier = {
+				HAW = {
+					has_stability < 0.75
+				}
+				factor = 1.5
+			}
+
+			modifier = {
+				HAW = {
+					OR = {
+						radical_socialist > 0.075
+						authoritarian_socialist > 0.05
+					}
+				}
+				
+				factor = 3
+			}
+
+			modifier = {
+				NOT = {
+					AND = {
+						has_game_rule = {
+							rule = HAW_REFERENDUM
+							option = DEFAULT
+						}
+						has_game_rule = {
+							rule = HAW_REVOLUTION
+							option = DEFAULT
+						}
+					}
+					
+					OR = {
+						has_game_rule = {
+							rule = HAW_REFERENDUM
+							option = HAW_REFERENDUM_AMERICAN_STATE
+						}
+					}
+					
+				}
+				factor = 0
+			}
+		}
+		cost = 50
+		days_re_enable = 45
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete HAW_CAL_Send_Bureaucrats target: [From.GetName]"
+			add_manpower = -500
+			add_command_power = -20
+			HAW = {
+				add_stability = 0.015
+			}
+			HAW = {
+				add_popularity = {
+					ideology = authoritarian_democrat
+					popularity = 0.005
+				}
+				add_popularity = {
+					ideology = social_liberal
+					popularity = 0.015
+				}
+			}
+		}
+	}
+	HAW_CAL_Prioritize_Hawaiian_American_Business = {
+		icon = GFX_decision_generic_industry
+		allowed = {
+			tag = CAL
+		}
+		available = {
+			has_war = no
+		}
+		visible = {
+			has_war = no
+			HAW = {
+				is_subject = no
+				exists = yes
+				NOT = {
+					has_global_flag = HAW_fate_decided
+				}
+			}
+			
+		}
+		ai_will_do = {
+			base = 100
+			modifier = {
+				has_political_power > 150
+				factor = 3
+			}
+			modifier = {
+				HAW = {
+					OR = {
+						social_liberal < 0.2
+					}
+				}
+
+				factor = 2
+			}
+
+			modifier = {
+				HAW = {
+					OR = {
+						radical_socialist > 0.075
+						authoritarian_socialist > 0.05
+					}
+				}
+				
+				factor = 3
+			}
+
+			modifier = {
+				NOT = {
+					AND = {
+						has_game_rule = {
+							rule = HAW_REFERENDUM
+							option = DEFAULT
+						}
+						has_game_rule = {
+							rule = HAW_REVOLUTION
+							option = DEFAULT
+						}
+					}
+					
+					OR = {
+						has_game_rule = {
+							rule = HAW_REFERENDUM
+							option = HAW_REFERENDUM_AMERICAN_STATE
+						}
+						has_game_rule = {
+							rule = HAW_REVOLUTION
+							option = HAW_REVOLUTION_AMERICAN_STATE
+						}
+					}
+					
+				}
+				factor = 0
+			}
+		}
+		custom_cost_text = decision_cost_civ_factory_2
+
+		custom_cost_trigger = {
+			num_of_civilian_factories_available_for_projects > 1
+		}
+		modifier = {
+			civilian_factory_use = 2
+		}
+		days_remove = 30
+		days_re_enable = 45
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove HAW_CAL_Prioritize_Hawaiian_American_Business target: [From.GetName]"
+			random_list = {
+				25 = {
+					629 = {
+						add_extra_state_shared_building_slots = 1
+						add_building_construction = {
+							type = industrial_complex
+							level = 1
+							instant_build = yes
+						}
+					}
+				}
+				25 = {
+					629 = {
+						add_building_construction = {
+							type = infrastructure
+							level = 1
+							instant_build = yes
+						}
+					}
+				}
+				25 = {
+					629 = {
+						add_extra_state_shared_building_slots = 1
+						add_building_construction = {
+							type = arms_factory
+							level = 1
+							instant_build = yes
+						}
+					}
+				}
+				25 = {
+					629 = {
+						add_extra_state_shared_building_slots = 1
+						add_building_construction = {
+							type = dockyard
+							level = 1
+							instant_build = yes
+						}
+					}
+				}
+			}
+			HAW = {
+				add_popularity = {
+					ideology = social_liberal
+					popularity = 0.025
+				}
+			}
+		}
+	}
+	HAW_CAL_Support_Hawaiian_Resistance_Groups = {
+		icon = GFX_decision_generic_civil_support
+		allowed = {
+			tag = CAL
+		}
+		available = {
+			has_war = no
+			has_manpower > 500
+		}
+		visible = {
+			has_war = no
+			HAW = {
+				is_subject = no
+				exists = yes
+				NOT = {
+					has_global_flag = HAW_fate_decided
+				}
+			}
+			
+		}
+		ai_will_do = {
+			base = 100
+			modifier = {
+				has_political_power > 150
+				factor = 3
+			}
+			modifier = {
+				HAW = {
+					OR = {
+						social_democrat < 0.1
+						revolutionary_republican < 0.1
+					}
+				}
+				
+				factor = 2
+			}
+
+			modifier = {
+				HAW = {
+					OR = {
+						radical_socialist > 0.075
+						authoritarian_socialist > 0.05
+					}
+				}
+				
+				factor = 3
+			}
+			modifier = {
+				NOT = {
+					AND = {
+						has_game_rule = {
+							rule = HAW_REFERENDUM
+							option = DEFAULT
+						}
+						has_game_rule = {
+							rule = HAW_REVOLUTION
+							option = DEFAULT
+						}
+					}
+					
+					OR = {
+						has_game_rule = {
+							rule = HAW_REVOLUTION
+							option = HAW_REVOLUTION_AMERICAN_STATE
+						}
+					}
+					
+				}
+				factor = 0
+			}
+		}
+		cost = 50
+		days_re_enable = 45
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove HAW_CAL_Support_Hawaiian_Resistance_Groups target: [From.GetName]"
+			add_manpower = -500
+			HAW = {
+				add_stability = -0.025
+			}
+			HAW = {
+				add_popularity = {
+					ideology = revolutionary_republican
+					popularity = 0.01
+				}
+				add_popularity = {
+					ideology = social_democrat
+					popularity = 0.01
+				}
+			}
+		}
+	}
+	#Japan
+	HAW_JAP_Increase_Consular_Police = {
+		icon = generic_prepare_civil_war
+		allowed = {
+			tag = JAP
+		}
+		available = {
+			has_war = no
+			has_manpower > 1000
+			has_equipment = {
+				infantry_equipment > 500
+			}
+		}
+		visible = {
+			has_war = no
+			HAW = {
+				is_subject = no
+				exists = yes
+				NOT = {
+					has_global_flag = HAW_fate_decided
+				}
+			}
+			
+		}
+		ai_will_do = {
+			base = 100
+			modifier = {
+				has_political_power > 150
+				factor = 3
+			}
+			modifier = {
+				HAW = {
+					OR = {
+						market_liberal < 0.15
+						paternal_autocrat < 0.15
+					}
+				}
+				
+				factor = 2
+			}
+			modifier = {
+				HAW = {
+					has_stability < 0.75
+				}
+				factor = 1.5
+			}
+
+			modifier = {
+				HAW = {
+					OR = {
+						radical_socialist > 0.075
+						authoritarian_socialist > 0.05
+					}
+				}
+				
+				factor = 3
+			}
+
+			modifier = {
+				NOT = {
+					AND = {
+						has_game_rule = {
+							rule = HAW_REFERENDUM
+							option = DEFAULT
+						}
+						has_game_rule = {
+							rule = HAW_REVOLUTION
+							option = DEFAULT
+						}
+					}
+					
+					OR = {
+						has_game_rule = {
+							rule = HAW_REFERENDUM
+							option = HAW_REFERENDUM_AMERICAN_STATE
+						}
+					}
+					
+				}
+				factor = 0
+			}
+		}
+		custom_cost_text = decision_cost_ie_500_MP_1000
+
+		custom_cost_trigger = {
+			has_equipment = {
+				infantry_equipment > 500
+			}
+			has_manpower > 1000
+		}
+
+		days_re_enable = 45
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete HAW_JAP_Increase_Consular_Police target: [From.GetName]"
+			hidden_effect = {
+				add_manpower = -1000
+				send_equipment = {
+					target = HAW
+					type = infantry_equipment
+					amount = 500
+				}
+			}
+			HAW = {
+				add_stability = 0.015
+			}
+			HAW = {
+				add_popularity = {
+					ideology = market_liberal
+					popularity = 0.01
+				}
+				add_popularity = {
+					ideology = paternal_autocrat
+					popularity = 0.005
+				}
+			}
+		}
+	}
+	HAW_JAP_Expand_The_Shipping_Office = {
+		icon = GFX_decision_generic_political_discourse
+		allowed = {
+			tag = JAP
+		}
+		available = {
+			has_war = no
+			has_manpower > 500
+			command_power > 20
+		}
+		visible = {
+			has_war = no
+			HAW = {
+				is_subject = no
+				exists = yes
+				NOT = {
+					has_global_flag = HAW_fate_decided
+				}
+			}
+			
+		}
+		ai_will_do = {
+			base = 100
+			modifier = {
+				has_political_power > 150
+				factor = 3
+			}
+			modifier = {
+				HAW = {
+					OR = {
+						market_liberal < 0.15
+						authoritarian_democrat < 0.1
+					}
+				}
+				
+				factor = 2
+			}
+			modifier = {
+				HAW = {
+					has_stability < 0.75
+				}
+				factor = 1.5
+			}
+
+			modifier = {
+				HAW = {
+					OR = {
+						radical_socialist > 0.075
+						authoritarian_socialist > 0.05
+					}
+				}
+				
+				factor = 3
+			}
+
+			modifier = {
+				NOT = {
+					AND = {
+						has_game_rule = {
+							rule = HAW_REFERENDUM
+							option = DEFAULT
+						}
+						has_game_rule = {
+							rule = HAW_REVOLUTION
+							option = DEFAULT
+						}
+					}
+					
+					OR = {
+						has_game_rule = {
+							rule = HAW_REFERENDUM
+							option = HAW_REFERENDUM_JAPANESE
+						}
+					}
+					
+				}
+				factor = 0
+			}
+		}
+		cost = 50
+		days_re_enable = 45
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete HAW_JAP_Expand_The_Shipping_Office target: [From.GetName]"
+			add_manpower = -500
+			add_command_power = -20
+			HAW = {
+				add_stability = 0.015
+			}
+			HAW = {
+				add_popularity = {
+					ideology = market_liberal
+					popularity = 0.015
+				}
+				add_popularity = {
+					ideology = authoritarian_democrat
+					popularity = 0.01
+				}
+			}
+		}
+	}
+	HAW_JAP_Prioritize_Hawaiian_Business_Ventures = {
+		icon = GFX_decision_generic_industry
+		allowed = {
+			tag = JAP
+		}
+		available = {
+			has_war = no
+		}
+		visible = {
+			has_war = no
+			HAW = {
+				is_subject = no
+				exists = yes
+				NOT = {
+					has_global_flag = HAW_fate_decided
+				}
+			}
+			
+		}
+		ai_will_do = {
+			base = 100
+			modifier = {
+				has_political_power > 150
+				factor = 3
+			}
+			modifier = {
+				HAW = {
+					OR = {
+						market_liberal < 0.15
+					}
+				}
+				
+				factor = 2
+			}
+
+			modifier = {
+				HAW = {
+					OR = {
+						radical_socialist > 0.075
+						authoritarian_socialist > 0.05
+					}
+				}
+				
+				factor = 3
+			}
+
+			modifier = {
+				NOT = {
+					AND = {
+						has_game_rule = {
+							rule = HAW_REFERENDUM
+							option = DEFAULT
+						}
+						has_game_rule = {
+							rule = HAW_REVOLUTION
+							option = DEFAULT
+						}
+					}
+					
+					OR = {
+						has_game_rule = {
+							rule = HAW_REFERENDUM
+							option = HAW_REFERENDUM_JAPANESE
+						}
+						has_game_rule = {
+							rule = HAW_REVOLUTION
+							option = HAW_REVOLUTION_JAPANESE
+						}
+					}
+					
+				}
+				factor = 0
+			}
+		}
+		custom_cost_text = decision_cost_civ_factory_2
+
+		custom_cost_trigger = {
+			num_of_civilian_factories_available_for_projects > 1
+		}
+		modifier = {
+			civilian_factory_use = 2
+		}
+		days_remove = 30
+		days_re_enable = 45
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove HAW_JAP_Prioritize_Hawaiian_Business_Ventures target: [From.GetName]"
+			random_list = {
+				25 = {
+					629 = {
+						add_extra_state_shared_building_slots = 1
+						add_building_construction = {
+							type = industrial_complex
+							level = 1
+							instant_build = yes
+						}
+					}
+				}
+				25 = {
+					629 = {
+						add_building_construction = {
+							type = infrastructure
+							level = 1
+							instant_build = yes
+						}
+					}
+				}
+				25 = {
+					629 = {
+						add_extra_state_shared_building_slots = 1
+						add_building_construction = {
+							type = arms_factory
+							level = 1
+							instant_build = yes
+						}
+					}
+				}
+				25 = {
+					629 = {
+						add_extra_state_shared_building_slots = 1
+						add_building_construction = {
+							type = dockyard
+							level = 1
+							instant_build = yes
+						}
+					}
+				}
+			}
+			HAW = {
+				add_popularity = {
+					ideology = market_liberal
+					popularity = 0.025
+				}
+			}
+		}
+	}
+	HAW_JAP_Cut_A_Deal = {
+		icon = GFX_decision_generic_civil_support
+		allowed = {
+			tag = JAP
+		}
+		available = {
+			has_war = no
+			has_stability > 0.5
+		}
+		visible = {
+			has_war = no
+			HAW = {
+				is_subject = no
+				exists = yes
+				NOT = {
+					has_global_flag = HAW_fate_decided
+				}
+			}
+			
+		}
+		ai_will_do = {
+			base = 100
+			modifier = {
+				has_political_power > 150
+				factor = 3
+			}
+			modifier = {
+				HAW = {
+					OR = {
+						national_populist < 0.1
+					}
+				}
+				
+				factor = 2
+			}
+
+			modifier = {
+				HAW = {
+					OR = {
+						radical_socialist > 0.075
+						authoritarian_socialist > 0.05
+					}
+				}
+				
+				factor = 3
+			}
+
+			modifier = {
+				NOT = {
+					AND = {
+						has_game_rule = {
+							rule = HAW_REFERENDUM
+							option = DEFAULT
+						}
+						has_game_rule = {
+							rule = HAW_REVOLUTION
+							option = DEFAULT
+						}
+					}
+					OR = {
+						has_game_rule = {
+							rule = HAW_REVOLUTION
+							option = HAW_REVOLUTION_JAPANESE
+						}
+					}
+					
+				}
+				factor = 0
+			}
+		}
+		cost = 50
+		days_re_enable = 45
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove HAW_JAP_Cut_A_Deal target: [From.GetName]"
+			HAW = {
+				add_stability = -0.025
+			}
+			HAW = {
+				add_popularity = {
+					ideology = national_populist
+					popularity = 0.025
+				}
+			}
+		}
+	}
+	#Canada
+	HAW_CAN_Deploy_Municipal_Police = {
+		icon = generic_prepare_civil_war
+		allowed = {
+			tag = CAN
+		}
+		available = {
+			has_war = no
+			has_manpower > 1000
+			has_equipment = {
+				infantry_equipment > 500
+			}
+		}
+		visible = {
+			has_war = no
+			HAW = {
+				is_subject = no
+				exists = yes
+				NOT = {
+					has_global_flag = HAW_fate_decided
+				}
+			}
+			
+		}
+		ai_will_do = {
+			base = 100
+			modifier = {
+				has_political_power > 150
+				factor = 3
+			}
+			modifier = {
+				HAW = {
+					OR = {
+						social_conservative < 0.2
+						paternal_autocrat < 0.1
+					}
+				}
+				
+				factor = 2
+			}
+			modifier = {
+				HAW = {
+					has_stability < 0.75
+				}
+				factor = 1.5
+			}
+
+			modifier = {
+				HAW = {
+					OR = {
+						radical_socialist > 0.075
+						authoritarian_socialist > 0.05
+					}
+				}
+				
+				factor = 3
+			}
+
+			modifier = {
+				NOT = {
+					AND = {
+						has_game_rule = {
+							rule = HAW_REFERENDUM
+							option = DEFAULT
+						}
+						has_game_rule = {
+							rule = HAW_REVOLUTION
+							option = DEFAULT
+						}
+					}
+					OR = {
+						has_game_rule = {
+							rule = HAW_REFERENDUM
+							option = HAW_REFERENDUM_ACCORD_REPUBLIC
+						}
+					}
+					
+				}
+				factor = 0
+			}
+		}
+		custom_cost_text = decision_cost_ie_500_MP_1000
+
+		custom_cost_trigger = {
+			has_equipment = {
+				infantry_equipment > 500
+			}
+			has_manpower > 1000
+		}
+
+		days_re_enable = 45
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete HAW_CAN_Deploy_Municipal_Police target: [From.GetName]"
+			hidden_effect = {
+				add_manpower = -1000
+				send_equipment = {
+					target = HAW
+					type = infantry_equipment
+					amount = 500
+				}
+			}
+			HAW = {
+				add_stability = 0.015
+			}
+			HAW = {
+				add_popularity = {
+					ideology = social_conservative
+					popularity = 0.015
+				}
+				add_popularity = {
+					ideology = paternal_autocrat
+					popularity = 0.005
+				}
+			}
+		}
+	}
+	HAW_CAN_Employ_Increased_Foreign_Officers = {
+		icon = GFX_decision_generic_political_discourse
+		allowed = {
+			tag = CAN
+		}
+		available = {
+			has_war = no
+			has_manpower > 500
+			command_power > 20
+		}
+		visible = {
+			has_war = no
+			HAW = {
+				is_subject = no
+				exists = yes
+				NOT = {
+					has_global_flag = HAW_fate_decided
+				}
+			}
+			
+		}
+		ai_will_do = {
+			base = 100
+			modifier = {
+				has_political_power > 150
+				factor = 3
+			}
+			modifier = {
+				HAW = {
+					OR = {
+						social_conservative < 0.2
+						authoritarian_democrat < 0.1
+					}
+				}
+				
+				factor = 2
+			}
+			modifier = {
+				HAW = {
+					has_stability < 0.75
+				}
+				factor = 1.5
+			}
+
+			modifier = {
+				HAW = {
+					OR = {
+						radical_socialist > 0.075
+						authoritarian_socialist > 0.05
+					}
+				}
+				
+				factor = 3
+			}
+
+			modifier = {
+				NOT = {
+					AND = {
+						has_game_rule = {
+							rule = HAW_REFERENDUM
+							option = DEFAULT
+						}
+						has_game_rule = {
+							rule = HAW_REVOLUTION
+							option = DEFAULT
+						}
+					}
+					OR = {
+						has_game_rule = {
+							rule = HAW_REFERENDUM
+							option = HAW_REFERENDUM_ACCORD_REPUBLIC
+						}
+					}
+				}
+				factor = 0
+			}
+		}
+		cost = 50
+		days_re_enable = 45
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete HAW_CAN_Employ_Increased_Foreign_Officers target: [From.GetName]"
+			add_manpower = -500
+			add_command_power = -20
+			HAW = {
+				add_stability = 0.015
+			}
+			HAW = {
+				add_popularity = {
+					ideology = social_conservative
+					popularity = 0.015
+				}
+				add_popularity = {
+					ideology = authoritarian_democrat
+					popularity = 0.005
+				}
+			}
+		}
+	}
+	HAW_CAN_Encourage_Hawaiian_Investment = {
+		icon = GFX_decision_generic_industry
+		allowed = {
+			tag = CAN
+		}
+		available = {
+			has_war = no
+		}
+		visible = {
+			has_war = no
+			HAW = {
+				is_subject = no
+				exists = yes
+				NOT = {
+					has_global_flag = HAW_fate_decided
+				}
+			}
+			
+		}
+		ai_will_do = {
+			base = 100
+			modifier = {
+				has_political_power > 150
+				factor = 3
+			}
+			modifier = {
+				HAW = {
+					OR = {
+						social_conservative < 0.2
+					}
+				}
+				
+				factor = 2
+			}
+
+			modifier = {
+				HAW = {
+					OR = {
+						radical_socialist > 0.075
+						authoritarian_socialist > 0.05
+					}
+				}
+				
+				factor = 3
+			}
+
+			modifier = {
+				NOT = {
+					AND = {
+						has_game_rule = {
+							rule = HAW_REFERENDUM
+							option = DEFAULT
+						}
+						has_game_rule = {
+							rule = HAW_REVOLUTION
+							option = DEFAULT
+						}
+					}
+					OR = {
+						has_game_rule = {
+							rule = HAW_REFERENDUM
+							option = HAW_REFERENDUM_ACCORD_REPUBLIC
+						}
+						has_game_rule = {
+							rule = HAW_REVOLUTION
+							option = HAW_REVOLUTION_ACCORD_REPUBLIC
+						}
+					}
+					
+				}
+				factor = 0
+			}
+		}
+		custom_cost_text = decision_cost_civ_factory_2
+
+		custom_cost_trigger = {
+			num_of_civilian_factories_available_for_projects > 1
+		}
+		modifier = {
+			civilian_factory_use = 2
+		}
+		days_remove = 30
+		days_re_enable = 90
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove HAW_CAN_Encourage_Hawaiian_Investment target: [From.GetName]"
+			random_list = {
+				25 = {
+					629 = {
+						add_extra_state_shared_building_slots = 1
+						add_building_construction = {
+							type = industrial_complex
+							level = 1
+							instant_build = yes
+						}
+					}
+				}
+				25 = {
+					629 = {
+						add_building_construction = {
+							type = infrastructure
+							level = 1
+							instant_build = yes
+						}
+					}
+				}
+				25 = {
+					629 = {
+						add_extra_state_shared_building_slots = 1
+						add_building_construction = {
+							type = arms_factory
+							level = 1
+							instant_build = yes
+						}
+					}
+				}
+				25 = {
+					629 = {
+						add_extra_state_shared_building_slots = 1
+						add_building_construction = {
+							type = dockyard
+							level = 1
+							instant_build = yes
+						}
+					}
+				}
+			}
+			HAW = {
+				add_popularity = {
+					ideology = social_conservative
+					popularity = 0.025
+				}
+			}
+		}
+	}
+	HAW_Support_Anti_Soclialist_Operations = {
+		icon = GFX_decision_ban_iron_front
+
+		allowed = {
+			OR = {
+				tag = CAN
+				tag = JAP
+				tag = CAL
+			}
+		}
+
+		available = {
+			HAW = {
+				OR = {
+					radical_socialist > 0.05
+					authoritarian_socialist > 0.025
+				}
+			}
+		}
+
+		custom_cost_trigger = {
+            has_equipment = { infantry_equipment > 249 }
+        }
+
+		ai_will_do = {
+
+			base = 50
+
+			modifier = {
+				HAW = {
+					OR = {
+						radical_socialist > 0.075
+						authoritarian_socialist > 0.05
+					}
+				}
+				factor = 5
+			}
+
+			modifier = {
+				OR = {
+					has_game_rule = {
+						rule = HAW_REFERENDUM
+						option = HAW_REFERENDUM_SOCIALIST_REPUBLIC
+					}
+					has_game_rule = {
+						rule = HAW_REVOLUTION
+						option = HAW_REVOLUTION_SOCIALIST_REPUBLIC
+					}
+					NOT = {
+						has_game_rule = {
+							rule = HAW_REVOLUTION
+							option = DEFAULT
+						}
+					}
+				}
+				factor = 0
+			}
+
+			modifier = {
+				HAW = {
+					has_stability < 0.75
+				}
+				factor = 1.5
+			}
+		}
+
+
+		custom_cost_text = decision_cost_ie_250
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete HAW_Support_Anti_Soclialist_Operations target: [From.GetName]"
+			hidden_effect = {
+				add_equipment_to_stockpile = {
+					type = infantry_equipment
+					amount = -250
+				}
+			}
+		}
+
+
+		days_remove = 30
+		days_re_enable = 90
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove HAW_Support_Anti_Soclialist_Operations target: [From.GetName]"
+			HAW = {
+				add_stability = 0.025
+				add_popularity = {
+					ideology = radical_socialist
+					popularity = -0.025
+				}
+				add_popularity = {
+					ideology = authoritarian_socialist
+					popularity = -0.015
+				}
+
+				add_popularity = {
+					ideology = authoritarian_democrat
+					popularity = 0.01
+				}
+				add_popularity = {
+					ideology = paternal_autocrat
+					popularity = 0.005
+				}
+			}
+		}
+	}
+	HAW_Hawaiian_Revolution_Imminent = {
+		icon = GFX_decision_generic_civil_support
+		activation = {
+			#date > 1950.01.01
+			NOT = {
+				has_global_flag = HAW_fate_decided
+			}
+			if = {
+				limit = { 
+					date < 1950.01.01
+				}
+				HAW = {
+					has_stability < 0.2
+				}
+			}
+			else_if = {
+				limit = { 
+					date < 1952.01.01
+				}
+				HAW = {
+					has_stability < 0.35
+				}
+			}
+			else = {
+				HAW = {
+					has_stability < 0.45
+				}
+			}
+		}
+		available = {
+			if = {
+				limit = { 
+					date < 1950.01.01
+				}
+				HAW = {
+					has_stability > 0.2
+				}
+			}
+			else_if = {
+				limit = { 
+					date < 1952.01.01
+				}
+				HAW = {
+					has_stability > 0.35
+				}
+			}
+			else = {
+				HAW = {
+					has_stability > 0.45
+				}
+			}
+		}
+		is_good = no
+		days_mission_timeout = 30
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout HAW_Hawaiian_Revolution_Imminent target: [From.GetName]"
+			custom_effect_tooltip = HAW_Revolution_Imminent
+			hidden_effect = {
+				if = {
+					limit = { 
+						tag = HAW
+					}
+					HAW_Revolution = yes
+				}
+			}
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete HAW_Hawaiian_Revolution_Imminent target: [From.GetName]"
+			custom_effect_tooltip = HAW_Revolution_Avoided
+		}
+	}
+	HAW_Hawaiian_Referendum_Imminent = {
+		icon = GFX_decision_generic_political_discourse
+		activation = {
+			if = {
+				limit = { 
+					date < 1950.01.01
+				}
+				HAW = {
+					has_stability > 0.95
+				}
+			}
+			else_if = {
+				limit = { 
+					date < 1952.01.01
+				}
+				HAW = {
+					has_stability > 0.85
+				}
+			}
+			else_if = {
+				limit = { 
+					date < 1954.01.01
+				}
+				HAW = {
+					has_stability > 0.75
+				}
+			}
+			else = {
+				HAW = {
+					has_stability > 0.65
+				}
+			}
+			
+			NOT = {
+				has_global_flag = HAW_fate_decided
+			}
+			
+		}
+		available = {
+			if = {
+				limit = { 
+					date < 1950.01.01
+				}
+				HAW = {
+					has_stability < 0.95
+				}
+			}
+			else_if = {
+				limit = { 
+					date < 1952.01.01
+				}
+				HAW = {
+					has_stability < 0.85
+				}
+			}
+			else_if = {
+				limit = { 
+					date < 1954.01.01
+				}
+				HAW = {
+					has_stability < 0.75
+				}
+			}
+			else = {
+				HAW = {
+					has_stability < 0.65
+				}
+			}
+		}
+		is_good = yes
+		days_mission_timeout = 30
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout HAW_Hawaiian_Referendum_Imminent target: [From.GetName]"
+			custom_effect_tooltip = HAW_Referendum_Happens
+			hidden_effect = {
+				if = {
+					limit = { 
+						tag = HAW
+					}
+					HAW_Referendum = yes
+				}
+			}
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete HAW_Hawaiian_Referendum_Imminent target: [From.GetName]"
+			custom_effect_tooltip = HAW_Referendum_Delayed
+		}
+	}
+}

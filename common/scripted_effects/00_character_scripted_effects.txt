@@ -1,0 +1,507 @@
+## Character flags and variables for cabinet
+#Adapted from KR team. Love you guys.
+kill_character = {
+	hidden_effect = {
+		set_nationality = ROOT
+		remove_all_country_leader_roles = yes
+		remove_civilian_advisor_roles = yes
+		remove_military_advisor_roles = yes
+		if = {
+			limit = { is_unit_leader = yes }
+			remove_unit_leader_role = yes
+		}
+		clr_character_flag = is_monarch
+		clr_character_flag = is_regent
+		clr_character_flag = character_event_only
+		clr_character_flag = show_unit_leader_role
+		clr_character_flag = show_political_advisor_role
+		set_character_as_dead = yes
+		retire = yes
+	}
+	custom_effect_tooltip = kill_character_tt
+}
+
+set_character_as_dead = {
+	set_character_flag = is_dead
+}
+
+#removes all country leader roles of a character (if they have any)
+remove_all_country_leader_roles = {
+	remove_country_leader_role_authoritarian_socialist = yes
+	remove_country_leader_role_radical_socialist = yes
+	remove_country_leader_role_revolutionary_republican = yes
+	remove_country_leader_role_social_democrat = yes
+	remove_country_leader_role_social_liberal = yes
+	remove_country_leader_role_market_liberal = yes
+	remove_country_leader_role_social_conservative = yes
+	remove_country_leader_role_authoritarian_democrat = yes
+	remove_country_leader_role_paternal_autocrat = yes
+	remove_country_leader_role_national_populist = yes
+}
+
+remove_head_of_government_role = {
+	if = {
+		limit = { has_advisor_role = head_of_government }
+		remove_advisor_role = { slot = head_of_government }
+	}
+}
+
+remove_foreign_minister_role = {
+	if = {
+		limit = { has_advisor_role = foreign_minister }
+		remove_advisor_role = { slot = foreign_minister }
+	}
+}
+
+remove_economy_minister_role = {
+	if = {
+		limit = { has_advisor_role = economy_minister }
+		remove_advisor_role = { slot = economy_minister }
+	}
+}
+
+remove_justice_minister_role = {
+	if = {
+		limit = { has_advisor_role = justice_minister }
+		remove_advisor_role = { slot = justice_minister }
+	}
+}
+
+remove_interior_minister_role = {
+	if = {
+		limit = { has_advisor_role = interior_minister }
+		remove_advisor_role = { slot = interior_minister }
+	}
+}
+
+remove_head_of_intel_role = {
+	if = {
+		limit = { has_advisor_role = head_of_intel }
+		remove_advisor_role = { slot = head_of_intel }
+	}
+}
+remove_civilian_advisor_roles = {
+	remove_head_of_government_role = yes
+	remove_foreign_minister_role = yes
+	remove_economy_minister_role = yes
+	remove_justice_minister_role = yes
+	remove_interior_minister_role = yes
+	remove_head_of_intel_role = yes
+}
+remove_theorist_role = {
+	if = {
+		limit = { has_advisor_role = theorist }
+		remove_advisor_role = { slot = theorist }
+	}
+}
+
+remove_army_chief_role = {
+	if = {
+		limit = { has_advisor_role = army_chief }
+		remove_advisor_role = { slot = army_chief }
+	}
+}
+
+remove_navy_chief_role = {
+	if = {
+		limit = { has_advisor_role = navy_chief }
+		remove_advisor_role = { slot = navy_chief }
+	}
+}
+
+remove_air_chief_role = {
+	if = {
+		limit = { has_advisor_role = air_chief }
+		remove_advisor_role = { slot = air_chief }
+	}
+}
+
+remove_high_command_role = {
+	if = {
+		limit = { has_advisor_role = high_command }
+		remove_advisor_role = { slot = high_command }
+	}
+}
+
+remove_military_advisor_roles = {
+	remove_army_chief_role = yes
+	remove_navy_chief_role = yes
+	remove_air_chief_role = yes
+	remove_high_command_role = yes
+	remove_theorist_role = yes
+}
+
+head_of_government_on_add = {
+	set_character_flag = is_head_of_government
+	set_variable = { ROOT.current_head_of_government_character = THIS }
+}
+
+head_of_government_on_remove = {
+	clr_character_flag = is_head_of_government
+	clear_variable = ROOT.current_head_of_government_character
+}
+
+foreign_minister_on_add = {
+	set_character_flag = is_foreign_minister
+	set_variable = { ROOT.current_foreign_minister_character = THIS }
+}
+
+foreign_minister_on_remove = {
+	clr_character_flag = is_foreign_minister
+	clear_variable = ROOT.current_foreign_minister_character
+}
+
+economy_minister_on_add = {
+	set_character_flag = is_economy_minister
+	set_variable = { ROOT.current_economy_minister_character = THIS }
+}
+
+economy_minister_on_remove = {
+	clr_character_flag = is_economy_minister
+	clear_variable = ROOT.current_economy_minister_character
+}
+
+justice_minister_on_add = {
+	set_character_flag = is_justice_minister
+	set_variable = { ROOT.current_justice_minister_character = THIS }
+}
+
+justice_minister_on_remove = {
+	clr_character_flag = is_justice_minister
+	clear_variable = ROOT.current_justice_minister_character
+}
+
+interior_minister_on_add = {
+	set_character_flag = is_interior_minister
+	set_variable = { ROOT.current_interior_minister_character = THIS }
+}
+
+interior_minister_on_remove = {
+	clr_character_flag = is_interior_minister
+	clear_variable = ROOT.current_interior_minister_character
+}
+
+head_of_intel_on_add = {
+	set_character_flag = is_head_of_intel
+	set_variable = { ROOT.current_head_of_intel_character = THIS }
+}
+
+head_of_intel_on_remove = {
+	clr_character_flag = is_head_of_intel
+	clear_variable = ROOT.current_head_of_intel_character
+}
+
+theorist_on_add = {
+	set_character_flag = is_theorist
+	set_variable = { ROOT.current_theorist_character = THIS }
+}
+
+theorist_on_remove = {
+	clr_character_flag = is_theorist
+	clear_variable = ROOT.current_theorist_character
+}
+
+high_command_on_add = {
+	set_character_flag = is_high_command
+	set_variable = { ROOT.current_high_command_character = THIS }
+}
+
+high_command_on_remove = {
+	clr_character_flag = is_high_command
+	clear_variable = ROOT.current_high_command_character
+}
+
+army_chief_on_add = {
+	set_character_flag = is_army_chief
+	set_variable = { ROOT.current_army_chief_character = THIS }
+}
+
+army_chief_on_remove = {
+	clr_character_flag = is_army_chief
+	clear_variable = ROOT.current_army_chief_character
+}
+
+navy_chief_on_add = {
+	set_character_flag = is_navy_chief
+	set_variable = { ROOT.current_navy_chief_character = THIS }
+}
+
+navy_chief_on_remove = {
+	clr_character_flag = is_navy_chief
+	clear_variable = ROOT.current_navy_chief_character
+}
+
+air_chief_on_add = {
+	set_character_flag = is_air_chief
+	set_variable = { ROOT.current_air_chief_character = THIS }
+}
+
+air_chief_on_remove = {
+	clr_character_flag = is_air_chief
+	clear_variable = ROOT.current_air_chief_character
+}
+
+add_temp_unit_leader_role = {
+	hidden_effect = {
+		if = {
+			limit = { is_unit_leader = no }
+			add_corps_commander_role = {
+				skill = 1
+				traits = { just_visiting }
+				visible = { always = no }
+			}
+			set_character_flag = temp_unit_leader
+		}
+	}
+}
+
+remove_temp_unit_leader_role = {
+	hidden_effect = {
+		if = {
+			limit = { has_character_flag = temp_unit_leader }
+			remove_unit_leader_role = yes
+			clr_character_flag = temp_unit_leader
+		}
+	}
+}
+
+remove_country_leader_role_authoritarian_socialist = {
+	if = {
+		limit = { has_ideology  = authoritarian_socialist_subtype }
+		remove_country_leader_role = { ideology = authoritarian_socialist_subtype }
+	}
+	if = {
+		limit = { has_ideology  = authoritarian_socialist_totalism }
+		remove_country_leader_role = { ideology = authoritarian_socialist_totalism }
+	}
+	if = {
+		limit = { has_ideology  = authoritarian_socialist_vanguardist_syndicalism }
+		remove_country_leader_role = { ideology = authoritarian_socialist_vanguardist_syndicalism }
+	}
+	if = {
+		limit = { has_ideology  = authoritarian_socialist_leninism }
+		remove_country_leader_role = { ideology = authoritarian_socialist_leninism }
+	}
+	if = {
+		limit = { has_ideology  = authoritarian_socialist_afro_vanguardism }
+		remove_country_leader_role = { ideology = authoritarian_socialist_afro_vanguardism }
+	}
+}
+remove_country_leader_role_radical_socialist = {
+	if = {
+		limit = { has_ideology  = radical_socialist_subtype }
+		remove_country_leader_role = { ideology = radical_socialist_subtype }
+	}
+	if = {
+		limit = { has_ideology  = radical_socialist_orthodox_syndicalism }
+		remove_country_leader_role = { ideology = radical_socialist_orthodox_syndicalism }
+	}
+	if = {
+		limit = { has_ideology  = radical_socialist_christian_socialism }
+		remove_country_leader_role = { ideology = radical_socialist_christian_socialism }
+	}
+	if = {
+		limit = { has_ideology  = radical_socialist_titoism }
+		remove_country_leader_role = { ideology = radical_socialist_titoism }
+	}
+	if = {
+		limit = { has_ideology  = radical_socialist_african_socialism }
+		remove_country_leader_role = { ideology = radical_socialist_african_socialism }
+	}
+	if = {
+		limit = { has_ideology  = radical_socialist_socialist_federalism }
+		remove_country_leader_role = { ideology = radical_socialist_socialist_federalism }
+	}
+}
+remove_country_leader_role_revolutionary_republican = {
+	if = {
+		limit = { has_ideology  = revolutionary_republican_subtype }
+		remove_country_leader_role = { ideology = revolutionary_republican_subtype }
+	}
+	if = {
+		limit = { has_ideology  = revolutionary_republican_social_nationalism }
+		remove_country_leader_role = { ideology = revolutionary_republican_social_nationalism }
+	}
+	if = {
+		limit = { has_ideology  = revolutionary_republican_tridemism }
+		remove_country_leader_role = { ideology = revolutionary_republican_tridemism }
+	}
+	if = {
+		limit = { has_ideology  = revolutionary_republican_african_nationalism }
+		remove_country_leader_role = { ideology = revolutionary_republican_african_nationalism }
+	}
+}
+remove_country_leader_role_social_democrat = {
+	if = {
+		limit = { has_ideology  = social_democrat_subtype }
+		remove_country_leader_role = { ideology = social_democrat_subtype }
+	}
+	if = {
+		limit = { has_ideology  = social_democrat_democratic_syndicalism }
+		remove_country_leader_role = { ideology = social_democrat_democratic_syndicalism }
+	}
+	if = {
+		limit = { has_ideology  = social_democrat_new_federalism }
+		remove_country_leader_role = { ideology = social_democrat_new_federalism }
+	}
+	if = {
+		limit = { has_ideology  = social_democrat_longism }
+		remove_country_leader_role = { ideology = social_democrat_longism }
+	}
+	if = {
+		limit = { has_ideology  = social_democrat_american_progressivism }
+		remove_country_leader_role = { ideology = social_democrat_american_progressivism }
+	}
+}
+remove_country_leader_role_social_liberal = {
+	if = {
+		limit = { has_ideology  = social_liberal_subtype }
+		remove_country_leader_role = { ideology = social_liberal_subtype }
+	}
+	if = {
+		limit = { has_ideology  = social_liberal_christian_democracy }
+		remove_country_leader_role = { ideology = social_liberal_christian_democracy }
+	}
+	if = {
+		limit = { has_ideology  = social_liberal_agrarianism }
+		remove_country_leader_role = { ideology = social_liberal_agrarianism }
+	}
+	if = {
+		limit = { has_ideology  = social_liberal_american_progressivism }
+		remove_country_leader_role = { ideology = social_liberal_american_progressivism }
+	}
+}
+remove_country_leader_role_market_liberal = {
+	if = {
+		limit = { has_ideology  = market_liberal_subtype }
+		remove_country_leader_role = { ideology = market_liberal_subtype }
+	}
+	if = {
+		limit = { has_ideology  = market_liberal_christian_democracy }
+		remove_country_leader_role = { ideology = market_liberal_christian_democracy }
+	}
+	if = {
+		limit = { has_ideology  = market_liberal_liberal_conservatism }
+		remove_country_leader_role = { ideology = market_liberal_liberal_conservatism }
+	}
+	if = {
+		limit = { has_ideology  = market_liberal_progressive_conservatism }
+		remove_country_leader_role = { ideology = market_liberal_progressive_conservatism }
+	}
+	if = {
+		limit = { has_ideology  = market_liberal_american_republicanism }
+		remove_country_leader_role = { ideology = market_liberal_american_republicanism }
+	}
+}
+remove_country_leader_role_social_conservative = {
+	if = {
+		limit = { has_ideology  = social_conservative_subtype }
+		remove_country_leader_role = { ideology = social_conservative_subtype }
+	}
+	if = {
+		limit = { has_ideology  = social_conservative_christian_democracy }
+		remove_country_leader_role = { ideology = social_conservative_christian_democracy }
+	}
+	if = {
+		limit = { has_ideology  = social_conservative_liberal_conservatism }
+		remove_country_leader_role = { ideology = social_conservative_liberal_conservatism }
+	}
+	if = {
+		limit = { has_ideology  = social_conservative_tridemism }
+		remove_country_leader_role = { ideology = social_conservative_tridemism }
+	}
+	if = {
+		limit = { has_ideology  = social_conservative_longism }
+		remove_country_leader_role = { ideology = social_conservative_longism }
+	}
+	if = {
+		limit = { has_ideology  = social_conservative_toryism }
+		remove_country_leader_role = { ideology = social_conservative_toryism }
+	}
+}
+remove_country_leader_role_authoritarian_democrat = {
+	if = {
+		limit = { has_ideology  = authoritarian_democrat_subtype }
+		remove_country_leader_role = { ideology = authoritarian_democrat_subtype }
+	}
+	if = {
+		limit = { has_ideology  = authoritarian_democrat_christian_democracy }
+		remove_country_leader_role = { ideology = authoritarian_democrat_christian_democracy }
+	}
+	if = {
+		limit = { has_ideology  = authoritarian_democrat_interim_government }
+		remove_country_leader_role = { ideology = authoritarian_democrat_interim_government }
+	}
+	if = {
+		limit = { has_ideology  = authoritarian_democrat_democratic_corporatism }
+		remove_country_leader_role = { ideology = authoritarian_democrat_democratic_corporatism }
+	}
+	if = {
+		limit = { has_ideology  = authoritarian_democrat_national_conservatism }
+		remove_country_leader_role = { ideology = authoritarian_democrat_national_conservatism }
+	}
+	if = {
+		limit = { has_ideology  = authoritarian_democrat_longism }
+		remove_country_leader_role = { ideology = authoritarian_democrat_longism }
+	}
+	if = {
+		limit = { has_ideology  = authoritarian_democrat_jungkonservativen }
+		remove_country_leader_role = { ideology = authoritarian_democrat_jungkonservativen }
+	}
+}
+remove_country_leader_role_paternal_autocrat = {
+	if = {
+		limit = { has_ideology  = paternal_autocrat_subtype }
+		remove_country_leader_role = { ideology = paternal_autocrat_subtype }
+	}
+	if = {
+		limit = { has_ideology  = paternal_autocrat_absolute_monarchism }
+		remove_country_leader_role = { ideology = paternal_autocrat_absolute_monarchism }
+	}
+	if = {
+		limit = { has_ideology  = paternal_autocrat_military_junta }
+		remove_country_leader_role = { ideology = paternal_autocrat_military_junta }
+	}
+	if = {
+		limit = { has_ideology  = paternal_autocrat_corporatism }
+		remove_country_leader_role = { ideology = paternal_autocrat_corporatism }
+	}
+	if = {
+		limit = { has_ideology  = paternal_autocrat_schleicherism }
+		remove_country_leader_role = { ideology = paternal_autocrat_schleicherism }
+	}
+	if = {
+		limit = { has_ideology  = paternal_autocrat_theocracy }
+		remove_country_leader_role = { ideology = paternal_autocrat_theocracy }
+	}
+	if = {
+		limit = { has_ideology  = paternal_autocrat_warlordism }
+		remove_country_leader_role = { ideology = paternal_autocrat_warlordism }
+	}
+}
+remove_country_leader_role_national_populist = {
+	if = {
+		limit = { has_ideology  = national_populist_subtype }
+		remove_country_leader_role = { ideology = national_populist_subtype }
+	}
+	if = {
+		limit = { has_ideology  = national_populist_fundamentalism }
+		remove_country_leader_role = { ideology = national_populist_fundamentalism }
+	}
+	if = {
+		limit = { has_ideology  = national_populist_national_corporatism }
+		remove_country_leader_role = { ideology = national_populist_national_corporatism }
+	}
+	if = {
+		limit = { has_ideology  = national_populist_ultranationalism }
+		remove_country_leader_role = { ideology = national_populist_ultranationalism }
+	}
+	if = {
+		limit = { has_ideology  = national_populist_savinkovism }
+		remove_country_leader_role = { ideology = national_populist_savinkovism }
+	}
+	if = {
+		limit = { has_ideology  = national_populist_clerical_nationalism }
+		remove_country_leader_role = { ideology = national_populist_clerical_nationalism }
+	}
+}

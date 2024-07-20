@@ -1,0 +1,35 @@
+GRE_recalc_parliament_icon_frames = {
+	
+	set_temp_variable = { house_temp = prog_support }
+	divide_temp_variable = { house_temp = prog_total }
+	multiply_temp_variable = { house_temp = 21 }
+	if = {
+		limit = { check_variable = { house_temp > 0 } }
+		clamp_temp_variable = {
+			var = house_temp
+			min = 1
+			max = 21
+		}
+	}
+	else = {
+		set_temp_variable = { house_temp = 1 }
+	}
+	set_variable = { GRE_current_house_icon_frame = house_temp }
+	
+	set_temp_variable = { house_temp = con_support }
+	divide_temp_variable = { house_temp = con_total }
+	multiply_temp_variable = { house_temp = 21 }
+	if = {
+		limit = { check_variable = { house_temp > 0 } }
+		clamp_temp_variable = {
+			var = house_temp
+			min = 1
+			max = 21
+		}
+	}
+	else = {
+		set_temp_variable = { house_temp = 1 }
+	}
+	set_variable = { GRE_current_house_icon_frame = house_temp }
+	
+}

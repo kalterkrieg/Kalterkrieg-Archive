@@ -1,0 +1,197 @@
+﻿capital = 1038
+set_oob = "MAF"
+if = {
+	limit = {
+		has_dlc = "Man the Guns"
+	}
+	set_naval_oob = "MAF_naval"
+}
+universal_starting_techs = yes
+reichspakt_starting_techs = yes
+
+set_research_slots = 2
+set_convoys = 50
+set_stability = 0.33
+
+set_variable = { MAF.reichspakt_alignment_level = 4 } # reichspakt member
+GER = {	
+	if = {
+		limit = {
+			has_subject_autonomy_feature = yes
+		}
+		set_autonomy = {
+			target = MAF
+			autonomous_state = krg_colony
+		}
+		else = {
+			puppet = MAF
+		}
+	}
+}
+
+set_politics = {
+	ruling_party = paternal_autocrat
+	last_election = "1930.11.9"
+	election_frequency = 48
+	elections_allowed = no
+}
+
+set_popularities = {
+	authoritarian_socialist = 1
+	radical_socialist = 2
+	social_democrat = 4
+	revolutionary_republican = 8
+	social_liberal = 3
+	market_liberal = 14
+	social_conservative = 11
+	authoritarian_democrat = 18
+	paternal_autocrat = 28
+	national_populist = 11
+}
+
+add_dynamic_modifier = {
+	modifier = MAF_colonial_insurgency
+}
+
+add_dynamic_modifier = {
+	modifier = MAF_status_of_MAF
+}
+
+country_event = {
+	id = MAF.2
+	days = 3
+}
+
+country_event = { #Nigerian Oil discovered
+	id = krg_ngr.0
+	months = 66
+	days = 4
+}
+
+country_event = {
+	id = MAF.4
+	days = 1
+}
+
+country_event = {
+	id = MAF.50
+	days = 372
+}
+
+country_event = {
+	id = MAF.99
+	days = 797
+}
+
+country_event = {
+	id = MAF.800
+	days = 90
+}
+
+country_event = {
+	id = MAF.2000
+	months = 36
+	random_days = 180
+}
+
+country_event = {
+	id = MAF.700
+	months = 48
+	days = 182
+}
+
+set_country_flag = MAF_foreign_influence_hidden
+set_country_flag = MAF_resistance_activity_hidden
+
+
+MAF_instantiate_all_variables = yes
+MAF_recalculate_modifier = yes
+coal_add_auth_dem = yes
+coal_add_nat_pop = yes
+
+add_coal_type = yes
+
+MAF_insurgency_initial = yes
+
+create_intelligence_agency = {
+	icon = GFX_intelligence_agency_logo_krg_maf
+	name = "RKSuNA" # (Reichskolonialsicherheits- und Nachrichtenamt) #TODO - if you don't like this Axolotl just change it. 
+}
+
+recruit_character = MAF_various
+recruit_character = MAF_heinrich_schnee
+recruit_character = MAF_edgar_sengier
+recruit_character = MAF_rudolf_asmis #Also Minister
+recruit_character = MAF_joachim_von_ribbentrop
+recruit_character = MAF_fritz_thyssen
+recruit_character = MAF_richard_walther_darré
+recruit_character = MAF_aapm_central_committee
+
+### Generals ###
+recruit_character = MAF_ferdinand_schorner
+recruit_character = MAF_theodor_von_hippel #Also Minister
+# recruit_character = MAF_adrian_von_folkersam
+recruit_character = MAF_emile_janssens
+recruit_character = MAF_frédéric_vandewalle
+recruit_character = MAF_hans_christern
+recruit_character = MAF_heinz_harmel
+recruit_character = MAF_julian_scherner #Also Minister
+recruit_character = MAF_kaiuwe_von_hassel
+recruit_character = MAF_ludwig_crüwell
+recruit_character = MAF_walter_gericke
+recruit_character = MAF_wilhelm_bittrich
+recruit_character = MAF_wilhelm_mohnke
+recruit_character = MAF_Max_von_Looff
+
+### Ministers
+#Hog
+recruit_character = MAF_Alfried_Krupp #money...
+recruit_character = MAF_Hans_Albert_von_Lettow_Vorbeck #nephew
+recruit_character = MAF_Otto_Abetz #hon hon hon
+recruit_character = MAF_Wolf_Heinrich_Graf_von_Helldorff #if Abetz gets merc'd
+recruit_character = MAF_Ludwig_Bockholt
+recruit_character = MAF_Ernst_Junger
+
+#Ostafrika
+recruit_character = MAF_Wilhelm_Rothhaupt
+recruit_character = MAF_Hans_Huttig #I need an administrator by my side
+recruit_character = MAF_Heinz_Jost
+
+#Kamerun
+#recruit_character = MAF_karl_ritter
+recruit_character = MAF_hermann_detzner
+
+#Südwestafrika
+recruit_character = MAF_Heinrich_Kirchheim
+recruit_character = MAF_hansbogislav_graf_von_schwerinlowitz
+
+#Kongo
+recruit_character = MAF_Eugene_jungers
+
+#HoI
+recruit_character = MAF_Georg_hansen
+
+add_ideas = {
+	MAF_bloated_admin
+	MAF_thyssen_reform
+	MAF_conscripts_return
+	MAF_eyes_on_africa
+	MAF_colonial_insurgency_dummy
+	KRG_extensive_conscription
+	KRG_limited_exports
+	KRG_war_economy
+	KRG_semi_professional_military
+	econ_no_business_spending
+	econ_tiny_edu_spending
+	econ_tiny_hc_spending
+	econ_tiny_service_spending
+	KRG_colonial_bureaucracy
+	#Ministers
+	MAF_Alfried_Krupp_hog_pau
+	MAF_Wilhelm_Rothhaupt_fm_o_pau
+	MAF_hermann_detzner_im_k_pau
+	MAF_Heinrich_Kirchheim_jm_s_pau
+	MAF_Eugene_jungers_em_k_mli
+	MAF_Georg_hansen_hoi_ade
+}
+

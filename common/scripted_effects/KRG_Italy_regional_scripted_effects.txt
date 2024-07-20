@@ -1,0 +1,234 @@
+start_ITA_coup ={ 
+	set_variable ={ 
+		var = ITA_coup_Italian_alertness
+		value = 0
+	}
+	set_variable ={ 
+		var = ITA_coup_progress
+		value = 0
+	}
+	set_variable ={ 
+		var = ITA_coup_infiltrate_army_flag_success_var
+		value = 70
+	}
+	set_variable ={ 
+		var = ITA_coup_infiltrate_army_failure_var
+		value = 30
+	}
+	set_variable ={ 
+		var = ITA_coup_corrupt_local_bureaucrats_success_var
+		value = 70
+	}
+	set_variable ={ 
+		var = ITA_coup_corrupt_local_bureaucrats_failure_var
+		value = 30
+	}
+	set_variable ={ 
+		var = ITA_coup_do_nothing_success_var
+		value = 70
+	}
+	set_variable ={ 
+		var = ITA_coup_corrupt_general_success_var
+		value = 60
+	}
+	set_variable ={ 
+		var = ITA_coup_corrupt_general_failure_var
+		value = 40
+	}
+	set_variable ={ 
+		var = ITA_coup_corrupt_high_ranking_bureaucrat_success_var
+		value = 60
+	}
+	set_variable ={ 
+		var = ITA_coup_corrupt_high_ranking_bureaucrat_failure_var
+		value = 40
+	}
+	set_variable ={ 
+		var = ITA_coup_infiltrate_commandos_success_var
+		value = 60
+	}
+	set_variable ={ 
+		var = ITA_coup_infiltrate_commandos_failure_var
+		value = 40
+	}
+	set_variable ={ 
+		var = ITA_coup_counter_nothing_var
+		value = 60
+	}
+	set_variable ={ 
+		var = ITA_coup_counter_small_var
+		value = 30
+	}
+	set_variable ={ 
+		var = ITA_coup_counter_big_var
+		value = 10
+	}
+}
+add_success_chance_for_actions ={ 
+	add_to_variable ={ 
+		var  = ITA_coup_corrupt_local_bureaucrats_success_var
+		value = 5
+	}
+	add_to_variable ={ 
+		var  = ITA_coup_corrupt_local_bureaucrats_failure_var
+		value = -5
+	}
+	add_to_variable ={ 
+		var  = ITA_coup_infiltrate_army_flag_success_var
+		value = 5
+	}
+	add_to_variable ={ 
+		var  = ITA_coup_infiltrate_army_flag_success_var
+		value = -5
+	}
+	add_to_variable ={ 
+		var  = ITA_coup_corrupt_general_success_var
+		value = 5
+	}
+	add_to_variable ={ 
+		var  = ITA_coup_corrupt_general_failure_var
+		value = -5
+	}
+	add_to_variable ={ 
+		var  = ITA_coup_corrupt_high_ranking_bureaucrat_success_var
+		value = 5
+	}
+	add_to_variable ={ 
+		var  = ITA_coup_corrupt_high_ranking_bureaucrat_failure_var
+		value = -5
+	}
+}
+clamp_the_variables_ITA_coup ={ 
+	clamp_variable ={ 
+		var = ITA_coup_Italian_alertness
+		min = 0
+		max = 10
+	}
+	clamp_variable = {
+		var = ITA_coup_progress
+		min = 0
+		max = 100
+	}
+}
+Otto_note_referendum_in_human_country = { 
+	if ={ 
+		limit ={ 
+			ITA ={ 
+				is_ai = no
+			}
+		}
+		ITA ={ 
+			country_event = { 
+				id = otto_note.50
+				days = otto_note_days_until_referendum_var
+			}
+		}
+	}
+	else ={ 
+		ITA ={ 
+			country_event = { 
+				id = otto_note.50
+				days = otto_note_days_until_referendum_var 
+			}
+		}
+	}
+}
+coup_italy_on_command = { 
+	clr_global_flag = Otto_note_aligned_with_Accord
+	ITA ={ 
+		set_politics = { ruling_party = paternal_autocrat }
+		add_stability = -0.1
+		add_political_power = -200
+		set_party_name = {
+			ideology = paternal_autocrat
+			long_name = "Esercito Italiano"
+			name = "EI" 
+		}
+		retire_country_leader = yes
+		swap_ideas ={ 
+			remove_idea = KRG_parliamentary_democracy
+			add_idea = KRG_authoritarian_system
+		}
+	}
+}
+change_italy_alignment = { 
+	if ={ 
+		limit ={ 
+			country_exists = ITA
+			has_country_flag = Otto_note_aligned_with_Reichspakt
+		}
+		ITA ={
+			set_temp_variable =  { temp_level = 1 }
+			set_reichspakt_alignment = yes
+		}
+	}
+	else_if ={ 
+		limit ={ 
+			country_exists = ITA
+			has_global_flag = Otto_note_aligned_with_Accord
+		}
+		ITA ={ 
+			set_temp_variable =  { temp_level = 1 }
+			set_accord_alignment = yes
+		}
+	}
+	else_if ={ 
+		limit ={ 
+			country_exists = ITA
+		}
+		ITA ={ 
+			set_temp_variable = {temp_level = 0}
+			set_accord_alignment = yes
+		}
+	}
+	else_if ={ 
+		limit ={ 
+			country_exists = ITA
+			has_country_flag = Otto_note_aligned_with_Reichspakt
+		}
+		ITA ={ 
+			set_temp_variable =  { temp_level = 1 }
+			set_reichspakt_alignment = yes
+		}
+	}
+	else_if ={ 
+		limit ={ 
+			country_exists = ITA
+			has_global_flag = Otto_note_aligned_with_Accord
+		}
+		ITA ={ 
+			set_temp_variable =  { temp_level = 1 }
+			set_accord_alignment = yes
+		}
+	}
+	else_if ={ 
+		limit ={ 
+			country_exists = ITA
+		}
+		ITA ={ 
+			set_temp_variable = {temp_level = 0}
+			set_reichspakt_alignment = yes
+		}
+	}
+}
+Italy_remove_dictator = { 
+	if ={ 
+		limit ={ 
+			ITA ={ 
+				has_country_leader ={ 
+					character = ITA_Giacomo_Metellini
+					ruling_only = yes
+				} 
+			}
+		}
+		ITA ={ 
+			set_politics = { ruling_party = social_conservative }
+			add_stability = 0.1
+			add_political_power = 200
+			swap_ideas ={ 
+				remove_idea = KRG_authoritarian_system
+				add_idea = KRG_parliamentary_democracy
+			}
+		}
+	}	
+}

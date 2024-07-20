@@ -1,0 +1,218 @@
+﻿capital = 371
+set_oob = "TEX"
+set_research_slots = 3
+set_convoys = 120
+set_stability = 0.55
+set_war_support = 0.65
+add_ideas = {
+	TEX_american_nightmare
+	TEX_lost_generation
+	TEX_legacy_of_the_kingfish
+	TEX_demoralized_military
+	TEX_racial_discrimination
+	KRG_civilian_economy
+	KRG_semi_professional_military
+	KRG_immigration_quota_based
+	KRG_extensive_conscription
+	econ_high_taxation
+	econ_medium_business_spending
+	econ_small_edu_spending
+	econ_medium_inf_spending
+	econ_small_hc_spending
+	econ_small_service_spending
+	KRG_illiberal_democracy	#government type
+}
+
+### Setup for 1948 Election ###
+set_variable = {
+	pop_state = 371
+}
+
+become_tech_leader = yes #TEX is considered a tech leader despite not being a part of a Tech Sphere
+TEX_Election_Census = yes
+set_country_flag = country_show_pm #Used for VP
+set_country_flag = TEX_VP_Lewis_L_Morgan
+country_event = {
+	id = tex_pol.1
+	days = 25
+}
+
+set_politics = {
+	ruling_party = authoritarian_democrat
+	last_election = "1937.05.01"
+	election_frequency = 60
+	elections_allowed = no
+}
+
+universal_starting_techs = yes
+union_state_starting_techs = yes
+
+if = {
+	limit = {
+		has_dlc = "Man the Guns"
+	}
+	set_naval_oob = "TEX_naval"
+}
+
+if = {
+	limit = {
+		NOT = {
+			has_dlc = "Man the Guns"
+		}
+	}
+	set_naval_oob = "TEX_naval_legacy"
+}
+
+set_air_oob = "TEX_air_wings"
+
+set_popularities = {
+	authoritarian_socialist = 0
+	radical_socialist = 1
+	social_democrat = 21
+	revolutionary_republican = 0
+	social_liberal = 2
+	market_liberal = 3
+	social_conservative = 26
+	authoritarian_democrat = 32
+	paternal_autocrat = 10
+	national_populist = 5
+}
+
+### Scripted Effects
+TEX_state_electoral_initial = yes
+TEX_state_seats_initial = yes
+TEX_house_semicircle = yes
+TEX_start_naval_variant = yes
+TEX_set_mountaintop_insurgency_values_initial = yes
+TEX_factionalism_setup = yes
+###Events that needs to fire
+activate_mission = TEX_general_election_mission
+activate_mission = TEX_The_Insurgency_Grows_In_Strength
+country_event = {
+	id = tex.elections.9
+	days = 2
+}
+country_event = {
+	id = tex.1
+	days = 5
+}
+country_event = {
+	id = tex.144
+	days = 18
+}
+country_event = {
+	id = tex.105
+	days = 51
+}
+country_event = {
+	id = tex.2000
+	days = 123
+}
+country_event = {
+	id = tex.143
+	days = 288
+}
+country_event = {
+	id = tex.103
+	days = 638
+}
+country_event = {
+	id = tex.gubernatorial.1
+	days = 251
+}
+country_event = {
+	id = krg_acw.0
+	days = 1948
+}
+news_event = {
+	id = tex.100
+	days = 2595
+}
+news_event = {
+	id = tex.101
+	days = 4631
+}
+
+set_variable = {
+	primary_candidate = 4
+}
+
+set_variable = {
+	TEX_attack_power = 5
+}
+
+#0-100
+set_variable = {
+	reichspakt_alignment_level = 1
+}
+
+set_variable = {
+	TEX_executive_order_no = 9919
+}
+
+set_variable = {
+	TEX_primary_mana = 0
+}
+
+###Coalition
+coal_add_pat_aut = yes
+coal_add_soc_dem = yes
+coal_add_soc_con = yes
+### Political Leaders ###
+recruit_character = TEX_james_w_ford
+recruit_character = TEX_oakley_c_johnson
+recruit_character = TEX_sid_mcmath #Also Minister
+recruit_character = TEX_john_sherwood_dixon
+recruit_character = TEX_robert_a_taft
+recruit_character = TEX_happy_chandler
+recruit_character = TEX_rush_holt #Also Minister
+recruit_character = TEX_earl_kemp_long #Also Minister
+recruit_character = TEX_gerald_l_k_smith
+recruit_character = TEX_russell_long
+recruit_character = TEX_ellis_arnall
+recruit_character = TEX_strom_thurmond
+recruit_character = TEX_richard_russell_jr
+recruit_character = TEX_ralph_yarborough
+recruit_character = TEX_lyndon_b_johnson
+### Field Marshals and Commanders ###
+recruit_character = TEX_joseph_lawton_collins
+recruit_character = TEX_matthew_ridgway
+recruit_character = TEX_courtney_hodges
+recruit_character = TEX_thomas_t_handy
+recruit_character = TEX_wade_h_haislip
+recruit_character = TEX_walton_walker
+recruit_character = TEX_pedro_del_valle
+recruit_character = TEX_edward_almond
+recruit_character = TEX_oliver_p_smith
+recruit_character = TEX_james_van_fleet 
+recruit_character = TEX_lucian_truscott
+recruit_character = TEX_lucius_d_clay
+recruit_character = TEX_withers_a_burress
+## Admirals ###
+recruit_character = TEX_arthur_c_davis
+recruit_character = TEX_charles_turner_joy
+recruit_character = TEX_harold_page_smith
+recruit_character = TEX_henry_kent_hewitt
+recruit_character = TEX_joseph_j_clark
+### Ministers ###
+recruit_character = TEX_James_Byrnes
+recruit_character = TEX_Russell_Long_em
+recruit_character = TEX_Jack_PF_Gremillion
+recruit_character = TEX_J_Edgar_Hoover
+recruit_character = TEX_John_McCain_Jr
+recruit_character = TEX_Burton_K_Wheeler
+recruit_character = TEX_Jesse_H_Jones
+recruit_character = TEX_John_Wesley_Snyder
+recruit_character = TEX_Tom_C_Clark
+recruit_character = TEX_William_D_Mitchell
+recruit_character = TEX_William_March
+recruit_character = TEX_Edwin_A_Pollock
+
+add_ideas = {
+	TEX_Earl_Long_hog_ade
+	TEX_James_Byrnes_fm_sco
+	TEX_Russell_Long_em_ade
+	TEX_Jack_PF_Gremillion_jm_ade
+	TEX_J_Edgar_Hoover_im_ade
+	TEX_John_McCain_Jr_hoi_sco
+}

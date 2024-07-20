@@ -1,0 +1,850 @@
+add_namespace = krg_arg
+add_namespace = krg_argnat
+add_namespace = krg_arglib
+
+country_event = { #Revolución Libertadora
+	id = krg_argnat.1
+	title = krg_argnat.1.t
+	desc = krg_argnat.1.d
+	picture = GFX_event_picture
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_argnat.1" }
+
+	option = {
+		name = krg_argnat.1.a
+		ARG_manuel_domecq_garcia = { kill_character = yes }
+		promote_character = {
+			character = ARG_eduardo_lonardi
+			ideology = national_populist_clerical_nationalism
+		}
+		promote_character = {
+			character = ARG_pedro_pablo_ramirez
+			ideology = paternal_autocrat_military_junta
+		}
+		promote_character = {
+			character = ARG_reynaldo_pastor
+			ideology = market_liberal_christian_democracy
+		}
+		remove_ideas = ARG_mask_off
+		remove_ideas = ARG_aimless_regime
+		add_ideas = ARG_fallout_of_may_coup_1
+		set_cosmetic_tag = ARG_revolution
+		set_politics = {
+	        ruling_party = authoritarian_democrat
+			election_frequency = 48
+			elections_allowed = no
+        }
+		set_party_name = {
+			ideology = market_liberal
+			long_name = ARG_market_liberal_conservative_party_long
+			name = ARG_market_liberal_conservative_party
+		}
+		set_party_name = {
+			ideology = paternal_autocrat
+			long_name = ARG_paternal_autocrat_army_party_long
+			name = ARG_paternal_autocrat_army_party
+		}
+		set_party_name = {
+			ideology = national_populist
+			long_name = ARG_national_populist_army_party_long
+			name = ARG_national_populist_army_party
+		}
+		add_popularity = {
+			ideology = national_populist
+			popularity = 0.05
+		}
+		add_popularity = {
+			ideology = paternal_autocrat
+			popularity = 0.10
+		}
+		add_popularity = {
+			ideology = market_liberal
+			popularity = 0.15
+		}
+		coal_add_pat_aut = yes
+		coal_add_nat_pop = yes
+		news_event = {
+			id = worldnews.39
+		}
+		country_event = {
+			id = krg_argnat.2
+			days = 540
+		}
+	}
+}
+
+country_event = { #Power Struggle Victor
+	id = krg_argnat.2
+	title = krg_argnat.2.t
+	desc = krg_argnat.2.d
+	picture = GFX_event_picture
+
+	is_triggered_only = yes
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_argnat.2" }
+
+	option = { #Lonardi
+		name = krg_argnat.2.a
+		retire_character = ARG_council_of_generals
+		remove_ideas = ARG_fallout_of_may_coup_1
+		promote_character = {
+			character = ARG_justo_leon_bengoa
+			ideology = paternal_autocrat_military_junta
+		}
+		promote_character = {
+			character = ARG_pedro_eugenio_aramburu
+			ideology = authoritarian_democrat_interim_government
+		}
+		set_party_name = {
+			ideology = national_populist
+			long_name = ARG_national_populist_military_democracy_party_long
+			name = ARG_national_populist_military_democracy_party
+		}
+		set_party_name = {
+			ideology = paternal_autocrat
+			long_name = ARG_paternal_autocrat_military_democracy_party_long
+			name = ARG_paternal_autocrat_military_democracy_party
+		}
+		set_party_name = {
+			ideology = authoritarian_democrat
+			long_name = ARG_authoritarian_democrat_military_democracy_party_long
+			name = ARG_authoritarian_democrat_military_democracy_party
+		}
+		set_politics = {
+	        ruling_party = national_populist
+			election_frequency = 48
+			elections_allowed = no
+        }
+		coal_rev_all = yes
+		coal_add_auth_dem = yes
+		coal_add_pat_aut = yes
+		add_popularity = {
+			ideology = national_populist
+			popularity = 0.05
+		}
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = -0.05
+		}
+		country_event = {
+			id = krg_argnat.3
+			days = 1881
+		}
+		news_event = {
+			id = worldnews.250
+		}
+
+		ai_chance = {
+			base = 60
+
+		}
+	}
+	option = { #Solari
+		name = krg_argnat.2.b
+		retire_character = ARG_council_of_generals
+		add_country_leader_role = {
+			character = ARG_angel_ovidio_solari
+			promote_leader = yes
+			country_leader = {
+				ideology = paternal_autocrat_military_junta
+				desc = "POLITICS_ANGEL_SOLARI_DESC"
+				expire = "1980.1.1"
+				id=-1
+			}
+		}
+		add_country_leader_role = {
+			character = ARG_juan_domingo_peron
+			promote_leader = yes
+			country_leader = {
+				ideology=authoritarian_democrat_subtype
+				desc = "POLITICS_JUAN_DOMINGO_PERON_DESC"
+				expire = "1980.1.1"
+				id=-1
+			}
+		}
+		remove_ideas = ARG_fallout_of_may_coup_1
+		set_politics = {
+	        ruling_party = paternal_autocrat
+			election_frequency = 48
+			elections_allowed = no
+        }
+		add_popularity = {
+			ideology = social_liberal
+			popularity = -0.05
+		}
+		add_popularity = {
+			ideology = market_liberal
+			popularity = -0.05
+		}
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = -0.15
+		}
+		add_popularity = {
+			ideology = paternal_autocrat
+			popularity = 0.20
+		}
+		coal_add_auth_dem = yes
+		coal_add_nat_pop = yes
+		news_event = {
+			id = worldnews.251
+		}
+
+		ai_chance = {
+			base = 15
+		}
+	}
+	option = { #Savio
+		name = krg_argnat.2.c
+		retire_character = ARG_council_of_generals
+		add_country_leader_role = {
+			character = ARG_angel_ovidio_solari
+			promote_leader = yes
+			country_leader = {
+				ideology = paternal_autocrat_military_junta
+				desc = "POLITICS_ANGEL_SOLARI_DESC"
+				expire = "1980.1.1"
+				id=-1
+			}
+		}
+		add_country_leader_role = {
+			character = ARG_manuel_savio
+			promote_leader = yes
+			country_leader={
+				ideology=authoritarian_democrat_national_conservatism
+				desc = "POLITICS_MANUEL_SAVIO_DESC"
+				expire="1980.1.1"
+				id=-1
+			}
+		}
+		remove_ideas = ARG_fallout_of_may_coup_1
+		set_politics = {
+	        ruling_party = authoritarian_democrat
+			election_frequency = 48
+			elections_allowed = no
+        }
+		add_popularity = {
+			ideology = social_liberal
+			popularity = -0.05
+		}
+		add_popularity = {
+			ideology = market_liberal
+			popularity = -0.05
+		}
+		add_popularity = {
+			ideology = paternal_autocrat
+			popularity = -0.10
+		}
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = 0.20
+		}
+		coal_add_pat_aut = yes
+		coal_add_nat_pop = yes
+		news_event = {
+			id = worldnews.252
+		}
+		ai_chance = {
+			base = 25
+	
+		}
+	}
+}
+
+country_event = { #Lonardi Retires
+	id = krg_argnat.3
+	title = krg_argnat.3.t
+	desc = krg_argnat.3.d
+	picture = GFX_event_picture
+
+	is_triggered_only = yes
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_argnat.3" }
+	
+	option = { #Aramburu
+		name = krg_argnat.3.a
+		retire_character = ARG_eduardo_lonardi
+		set_politics = {
+	        ruling_party = authoritarian_democrat
+			election_frequency = 48
+			elections_allowed = no
+        }
+		coal_add_pat_aut = yes
+		coal_add_nat_pop = yes
+		add_popularity = {
+			ideology = social_conservative
+			popularity = 0.05
+		}
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = 0.05
+		}
+		country_event = {
+			id = krg_argnat.4
+			days = 45
+		}
+		news_event = {
+			id = worldnews.253
+		}
+		ai_chance = {
+			base = 65
+		}
+	}
+	option = { #Bengoa
+		name = krg_argnat.3.b
+		retire_character = ARG_eduardo_lonardi
+		set_politics = {
+	        ruling_party = paternal_autocrat
+			election_frequency = 48
+			elections_allowed = no
+        }
+		coal_add_auth_dem = yes
+		coal_add_nat_pop = yes
+		add_popularity = {
+			ideology = paternal_autocrat
+			popularity = 0.05
+		}
+		add_popularity = {
+			ideology = market_liberal
+			popularity = 0.05
+		}
+		country_event = {
+			id = krg_argnat.5
+			days = 45
+		}
+		news_event = {
+			id = worldnews.254
+		}
+
+		ai_chance = {
+			base = 35
+		}
+	}
+}
+
+country_event = { #Aramburu Consolidation
+	id = krg_argnat.4
+	title = krg_argnat.4.t
+	desc = krg_argnat.4.d
+	picture = GFX_event_picture
+
+	is_triggered_only = yes
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_argnat.4" }
+
+	option = { #Aramburu
+		name = krg_argnat.4.a
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = 0.05
+		}
+		coal_add_mar_lib = yes
+		coal_add_soc_con = yes
+		set_party_name = {
+			ideology = market_liberal
+			long_name = ARG_market_liberal_UDELPA_party_long
+			name = ARG_market_liberal_UDELPA_party
+		}
+		set_party_name = {
+			ideology = social_conservative
+			long_name = ARG_social_conservative_UDELPA_party_long
+			name = ARG_social_conservative_UDELPA_party
+		}
+		set_party_name = {
+			ideology = authoritarian_democrat
+			long_name = ARG_authoritarian_democrat_UDELPA_party_long
+			name = ARG_authoritarian_democrat_UDELPA_party
+		}
+		set_party_name = {
+			ideology = paternal_autocrat
+			long_name = ARG_paternal_autocrat_UDELPA_party_long
+			name = ARG_paternal_autocrat_UDELPA_party
+		}
+		set_party_name = {
+			ideology = national_populist
+			long_name = ARG_national_populist_UDELPA_party_long
+			name = ARG_national_populist_UDELPA_party
+		}
+		news_event = {
+			id = worldnews.255
+		}
+	}
+}
+
+country_event = { #Civilians take power
+	id = krg_argnat.5
+	title = krg_argnat.5.t
+	desc = krg_argnat.5.d
+	picture = GFX_event_picture
+
+	is_triggered_only = yes
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_argnat.5" }
+
+	option = {
+		name = krg_argnat.5.a
+		promote_character = {
+			character = ARG_benito_de_miguel
+			ideology = authoritarian_democrat_national_conservatism
+		}
+		add_popularity = {
+			ideology = social_liberal
+			popularity = 0.10
+		}
+		add_popularity = {
+			ideology = market_liberal
+			popularity = 0.05
+		}
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = -0.10
+		}
+		set_politics = {
+	        ruling_party = market_liberal
+			election_frequency = 48
+			elections_allowed = yes
+        }
+		set_party_name = {
+			ideology = national_populist
+			long_name = ARG_national_populist_party_long
+			name = ARG_national_populist_party
+		}
+		set_party_name = {
+			ideology = paternal_autocrat
+			long_name = ARG_paternal_autocrat_army_party_long
+			name = ARG_paternal_autocrat_army_party
+		}
+		set_party_name = {
+			ideology = authoritarian_democrat
+			long_name = ARG_authoritarian_democrat_conservative_party_long
+			name = ARG_authoritarian_democrat_conservative_party
+		}
+		set_party_name = {
+			ideology = market_liberal
+			long_name = ARG_market_liberal_conservative_party_long
+			name = ARG_market_liberal_conservative_party
+		}
+		coal_add_auth_dem = yes
+		coal_add_nat_pop = yes
+		news_event = {
+			id = worldnews.256
+		}
+	}
+}
+
+country_event = { #Regime Entrenched
+	id = krg_argnat.6
+	title = krg_argnat.6.t
+	desc = krg_argnat.6.d
+	picture = GFX_event_picture
+
+	is_triggered_only = yes
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_argnat.6" }
+
+	option = {
+		name = krg_argnat.6.a
+		add_popularity = {
+			ideology = national_populist
+			popularity = 0.05
+		}
+		add_popularity = {
+			ideology = paternal_autocrat
+			popularity = 0.10
+		}
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = 0.10
+		}
+	}
+}
+
+country_event = { #The national catastrophe
+	id = krg_arg.1
+	title = krg_arg.1.t
+	desc = krg_arg.1.d
+	picture = GFX_event_picture
+
+	is_triggered_only = yes
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_arg.1" }
+
+	option = {
+		name = krg_arg.1.a
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = -0.05
+		}
+		add_popularity = {
+			ideology = paternal_autocrat
+			popularity = -0.10
+		}
+		add_popularity = {
+			ideology = national_populist
+			popularity = -0.15
+		}
+		country_event = {
+			id = krg_arg.2
+			days = 30
+		}
+	}
+}
+
+country_event = { #Alsogaray coup
+	id = krg_arg.2
+	title = krg_arg.2.t
+	desc = krg_arg.2.d
+	picture = GFX_event_picture
+
+	is_triggered_only = yes
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_arg.2" }
+
+	option = {
+		name = krg_arg.2.a
+		retire_country_leader = yes
+		add_popularity = {
+			ideology = revolutionary_republican
+			popularity = 0.15
+		}
+		add_country_leader_role = { #ARG_julio_rodolfo_alsogaray post 0.1
+			character = ARG_carlos_von_der_becke
+			promote_leader = yes
+			country_leader={
+				desc="POLITICS_ARG_BENITO_MIGUEL_DESC"
+				ideology=authoritarian_democrat_interim_government
+				expire="1965.1.1.1"
+				id=-1
+			}
+		}
+		add_country_leader_role = {
+			character = ARG_carlos_von_der_becke
+			promote_leader = yes
+			country_leader={
+				desc="POLITICS_ARG_BENITO_MIGUEL_DESC"
+				ideology=paternal_autocrat_military_junta
+				expire="1965.1.1.1"
+				id=-1
+			}
+		}
+		set_politics = {
+	        ruling_party = authoritarian_democrat
+			election_frequency = 48
+			elections_allowed = no
+        }
+		set_party_name = {
+			ideology = authoritarian_democrat
+			long_name = ARG_authoritarian_democrat_government_party_long
+			name = ARG_authoritarian_democrat_government_party
+		}
+		country_event = {
+			id = krg_arg.3
+			days = 90
+		}
+		news_event = {
+			id = worldnews.259
+		}
+	}
+}
+
+country_event = { #Battlle presedency
+	id = krg_arg.3
+	title = krg_arg.3.t
+	desc = krg_arg.3.d
+	picture = GFX_event_picture
+
+	is_triggered_only = yes
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_arg.3" }
+
+	option = {
+		name = krg_arg.3.a
+		add_popularity = {
+			ideology = social_liberal
+			popularity = 0.10
+		}
+		add_popularity = {
+			ideology = market_liberal
+			popularity = 0.10
+		}
+		set_politics = {
+	        ruling_party = revolutionary_republican
+			election_frequency = 48
+			elections_allowed = yes
+        }
+		coal_add_soc_lib = yes
+		# news_event = {
+		# 	id = worldnews.260
+		# }
+	}
+}
+
+### 0.2 events
+
+country_event = { #pronunciamiento
+	id = krg_arglib.1
+	title = krg_arglib.1.t
+	desc = krg_arglib.1.d
+	picture = GFX_event_picture
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_arglib.1" }
+
+	option = {
+		name = krg_arglib.1.a
+
+		remove_ideas = ARG_mask_off
+		remove_ideas = ARG_aimless_regime
+		#add_ideas = ARG_fallout_of_pronunciamiento_1
+		set_politics = {
+	        ruling_party = authoritarian_democrat
+			election_frequency = 48
+			elections_allowed = no
+        }
+		set_party_name = {
+			ideology = market_liberal
+			long_name = ARG_market_liberal_conservative_party_long
+			name = ARG_market_liberal_conservative_party
+		}
+		set_party_name = {
+			ideology = paternal_autocrat
+			long_name = ARG_paternal_autocrat_army_party_long
+			name = ARG_paternal_autocrat_army_party
+		}
+		promote_character = ARG_carlos_von_der_becke
+		promote_character = ARG_reynaldo_pastor
+		add_popularity = {
+			ideology = social_conservative
+			popularity = 0.10
+		}
+		add_popularity = {
+			ideology = market_liberal
+			popularity = 0.15
+		}
+		add_popularity = {
+			ideology = social_liberal
+			popularity = 0.05
+		}
+		coal_add_pat_aut = yes
+		news_event = {
+			id = worldnews.39
+		}
+		country_event = {
+			id = krg_arglib.2
+			days = 365
+		}
+	}
+}
+
+country_event = { #First Elections
+	id = krg_arglib.2
+	title = krg_arglib.2.t
+	desc = krg_arglib.2.d
+	picture = GFX_event_picture
+
+	is_triggered_only = yes
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_arglib.2" }
+
+	option = { #Conservatives
+		name = krg_arglib.2.a
+		ai_chance = {
+			base = 60
+		}
+		#remove_ideas = ARG_fallout_of_pronunciamiento_1
+		promote_character = ARG_benito_de_miguel
+		set_party_name = {
+			ideology = authoritarian_democrat
+			long_name = ARG_authoritarian_democrat_conservative_party_long
+			name = ARG_authoritarian_democrat_conservative_party
+		}
+		set_politics = {
+	        ruling_party = authoritarian_democrat
+			election_frequency = 48
+			elections_allowed = yes
+        }
+		coal_rev_all = yes
+		coal_add_nat_pop = yes
+		coal_add_mar_lib = yes
+		add_popularity = {
+			ideology = national_populist
+			popularity = 0.05
+		}
+		add_popularity = {
+			ideology = market_liberal
+			popularity = 0.05
+		}
+		country_event = {
+			id = krg_arglib.3
+			days = 1460
+		}
+		news_event = {
+			id = worldnews.250
+		}
+	}
+	option = { #Antipersonalists
+		name = krg_arglib.2.b
+		ai_chance = {
+			base = 40
+		}
+		#remove_ideas = ARG_fallout_of_pronunciamiento_1
+		promote_character = ARG_benito_de_miguel
+		set_politics = {
+	        ruling_party = social_conservative
+			election_frequency = 48
+			elections_allowed = yes
+        }
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = -0.15
+		}
+		add_popularity = {
+			ideology = social_conservative
+			popularity = 0.10
+		}
+		add_popularity = {
+			ideology = social_liberal
+			popularity = 0.05
+		}
+		add_popularity = {
+			ideology = revolutionary_republican
+			popularity = 0.05
+		}
+		coal_add_soc_lib = yes
+		country_event = {
+			id = krg_arglib.4
+			days = 1460
+		}
+		news_event = {
+			id = worldnews.251
+		}
+	}
+}
+
+country_event = { #Second Elections - Conservatives
+	id = krg_arglib.3
+	title = krg_arglib.3.t
+	desc = krg_arglib.3.d
+	picture = GFX_event_picture
+
+	is_triggered_only = yes
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_arglib.3" }
+
+	option = { #Fresco
+		name = krg_arglib.3.a
+		ai_chance = {
+			base = 20
+		}
+		set_politics = {
+	        ruling_party = national_populist
+			election_frequency = 48
+			elections_allowed = no
+        }
+		coal_rev_all = yes
+		coal_add_auth_dem = yes
+		coal_add_mar_lib = yes
+		add_popularity = {
+			ideology = national_populist
+			popularity = 0.10
+		}
+		add_popularity = {
+			ideology = social_democrat
+			popularity = 0.10
+		}
+		news_event = {
+			id = worldnews.250
+		}
+	}
+	option = { #Pastor
+		name = krg_arglib.3.b
+		ai_chance = {
+			base = 80
+		}
+		set_politics = {
+	        ruling_party = market_liberal
+			election_frequency = 48
+			elections_allowed = yes
+        }
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = -0.15
+		}
+		add_popularity = {
+			ideology = market_liberal
+			popularity = 0.10
+		}
+		add_popularity = {
+			ideology = social_liberal
+			popularity = 0.05
+		}
+		add_popularity = {
+			ideology = revolutionary_republican
+			popularity = 0.05
+		}
+		coal_add_nat_pop = yes
+		coal_add_auth_dem = yes
+		news_event = {
+			id = worldnews.251
+		}
+	}
+}
+
+country_event = { #Second Elections - Antipersonalists
+	id = krg_arglib.4
+	title = krg_arglib.4.t
+	desc = krg_arglib.4.d
+	picture = GFX_event_picture
+
+	is_triggered_only = yes
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_arglib.4" }
+
+	option = { #UCR
+		name = krg_arglib.4.a
+		ai_chance = {
+			base = 75
+		}
+		set_politics = {
+	        ruling_party = social_liberal
+			election_frequency = 48
+			elections_allowed = yes
+        }
+		coal_add_rev_rep = yes
+		add_popularity = {
+			ideology = social_liberal
+			popularity = 0.10
+		}
+		add_popularity = {
+			ideology = market_liberal
+			popularity = 0.10
+		}
+		news_event = {
+			id = worldnews.250
+		}
+	}
+	option = { #PDN
+		name = krg_arglib.4.b
+		ai_chance = {
+			base = 25
+		}
+		set_politics = {
+	        ruling_party = market_liberal
+			election_frequency = 48
+			elections_allowed = yes
+        }
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = -0.15
+		}
+		add_popularity = {
+			ideology = market_liberal
+			popularity = 0.10
+		}
+		add_popularity = {
+			ideology = social_liberal
+			popularity = 0.05
+		}
+		add_popularity = {
+			ideology = revolutionary_republican
+			popularity = 0.05
+		}
+		coal_add_nat_pop = yes
+		coal_add_auth_dem = yes
+		news_event = {
+			id = worldnews.251
+		}
+	}
+}

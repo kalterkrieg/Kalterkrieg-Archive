@@ -1,0 +1,96 @@
+COUNTRY DECISIONS
+
+Decisions are made available to countries that fulfill the right conditions.
+Some triggers are only checked once per day, once per frame or once per game.
+
+allowed:
+- Scope: THIS = Country
+- Checked once per game at start (or when save is loaded)
+- Used to filter out decisions that will never be available to a given country (usually checks original_tag = XXX)
+- Important to use on performance-heavy decisions (especially targeted decisions) to avoid unnecessary computations
+
+visible:
+- Scope: THIS = Country, FROM = Country/State (if targeted)
+- Checked each frame when the interface is refreshed if allowed was true
+- Used to filter out decisions that should appear in decision interface (they may still be greyed out, see 'available' next)
+- Caveat: this trigger can become performance heavy for targeted decisions, see 'target_root_trigger' and 'target_trigger'.
+
+available:
+- Scope: THIS = Country, FROM = Country/State (if targeted)
+- Checked each frame when the interface is refreshed if both allowed and visible were true
+- Used to indicate if a visible decision can be taken right now and it not, what the player should do to be able to.
+  No condition should be impossible to match at this point (for example, do not require completion of locked out focus)
+
+target_root_trigger:
+- Scope: THIS = Country
+- Checked once per day (updated in one of the 24 hourly ticks depending on country), if allowed was true
+- Used to lessen the impact of targeted decisions that cannot be restricted by 'targets' and 'allowed'.
+  Since targeted decisions are checked against each state/country in the game each frame in the 'visible' trigger, this offers a way to do a pre-check once a day.
+  This trigger should be a subset of the 'visible' trigger that only uses the acting country scope.
+
+target_trigger:
+- Scope: THIS = Country, FROM = Target Country/State
+- Checked once per day for each state/country in the world if both allowed and target_root_trigger were true.
+- Used to select which country/states this targeted decision should apply to. Each match will create a dedicated decision entry.
+- Similarly to target_root_trigger, this should contain a subset of the 'visible' trigger that pertains to a given target state/country.
+  The lower frequency of this check will help avoiding checking the visible trigger against each country/state each frame when possible.
+
+Decision templates/guides by Axolotl >{O.O}<
+standard layout: 
+{Country Tag}_{Short Title} #{Optional Comment About the event} = {
+    icon = {Icon fiting of the effect}
+
+    allowed = {
+        - in cases where the decision is supposed to be used by this tag or any tag spliting from it
+        original_tag = {Country Tag}
+
+        - in cases where the decision is only for the specific tag
+        tag = {Country Tag}
+    }
+
+    visible = {
+        - cases who make the event visible
+        - generally uses triggers tied to unlocks, e.g: has_completed_focus, has_country_flag
+    }
+
+    available = {
+        - cases to allow the decision to be selected
+        - generally used when a country needs to be in a spesific situation that can change
+    }
+
+    - makes the decision one time
+    fire_only_once = yes
+
+    - number of days for the decision to be removed, any defined modifiers will apply in this time
+    days_remove = {int number}
+
+    - number of days for the decision to become visible again, only applies if fire_only_once = yes is not set or = no
+    days_re_enable = {int number}
+
+    - pp cost of a decision
+    cost = {int number}
+
+    - used when the cost wanted is more complex than pp
+    - the text is what is displayed at the right with icons to show the cost, text defined in decisions_l_english
+    - removal of the resources must be done in complete_effect
+    custom_cost_text = decision_cost_{material and number needed}
+
+    - trigger like available used for the resources of the custom cost
+    custom_cost_trigger = {
+        - trigger for the resources
+    }
+
+    - effect happening instantly when chosen
+    complete_effect = {
+        log = "[GetDateText]: [Root.GetName]: Decision complete {Decision Title}"
+        hidden_effect = {
+            - effect that need to be hidden
+            - any custom cost should be here as well
+        }
+    }
+    
+    - effect happening when the amount of days in days_remove has passed
+    remove_effect = {
+        log = "[GetDateText]: [Root.GetName]: Decision remove {Decision Title}"
+    }
+}

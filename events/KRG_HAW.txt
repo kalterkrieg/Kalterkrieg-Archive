@@ -1,0 +1,655 @@
+add_namespace = HAW_influence
+add_namespace = HAW_outcomes
+
+country_event = { ###introduction event
+	id = HAW_influence.0
+	title = HAW_influence.0.t
+	desc = HAW_influence.0.d
+
+	is_triggered_only = yes
+	#fire_only_once = yes
+	option = {
+		name = HAW_influence.0.a
+		country_event = {
+			id = HAW_influence.1
+		}
+	}
+	option = {
+		name = HAW_influence.0.b
+		country_event = {
+			id = HAW_influence.2
+		}
+	}
+	option = {
+		name = HAW_influence.0.c
+	}
+}
+
+country_event = { ###how the mandate got set up
+	id = HAW_influence.1
+	title = HAW_influence.1.t
+	desc = HAW_influence.1.d
+
+	is_triggered_only = yes
+	#fire_only_once = yes
+	option = {
+		name = HAW_influence.1.a
+		country_event = {
+			id = HAW_influence.2
+		}
+	}
+	option = {
+		name = HAW_influence.1.b
+	}
+}
+
+country_event = { ###the mandate
+	id = HAW_influence.2
+	title = HAW_influence.2.t
+	desc = HAW_influence.2.d
+
+	is_triggered_only = yes
+	#fire_only_once = yes
+	option = {
+		name = HAW_influence.2.a
+	}
+	option = {
+		name = HAW_influence.2.b
+		country_event = {
+			id = HAW_influence.1
+		}
+	}
+}
+
+news_event = { ###American Hawaii
+	id = HAW_outcomes.1
+	picture = GFX_ne_HAW_American_Victory
+	title = HAW_outcomes.1.t
+	desc = HAW_outcomes.1.d
+	
+	major = yes
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = HAW_outcomes.1.a
+	}
+}
+
+country_event = { ###American Hawaii Country Event
+	id = HAW_outcomes.11
+	title = HAW_outcomes.11.t
+	desc = HAW_outcomes.11.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = HAW_outcomes.11.a
+		HAW = {
+			get_current_government_type = yes
+		}
+		if = {
+			limit = {
+				has_subject_autonomy_feature = yes
+			}
+			set_autonomy = {
+				target = HAW
+				autonomous_state = krg_colony
+			}
+		}
+		else = {
+			puppet = HAW
+		}
+		save_event_target_as = on_puppet_master_tag
+		HAW = {
+			standard_on_puppet_effect = yes
+			restore_previous_government_type = yes
+		}
+
+		HAW = { 
+			set_politics = {
+				ruling_party = authoritarian_democrat
+			}
+			set_party_name = {
+				ideology = authoritarian_democrat
+				long_name = HAW_coalition_government_long
+				name = HAW_coalition_government
+			}
+			set_party_name = {
+				ideology = social_conservative
+				long_name = HAW_american_democratic_party_long
+				name = HAW_american_democratic_party
+			}
+			set_party_name = {
+				ideology = market_liberal
+				long_name = HAW_american_republican_party_long
+				name = HAW_american_republican_party
+			}
+			set_party_name = {
+				ideology = social_liberal
+				long_name = HAW_progressive_party_long
+				name = HAW_progressive_party
+			}
+			set_party_name = {
+				ideology = social_democrat
+				long_name = HAW_progressive_party_long
+				name = HAW_progressive_party
+			}
+			add_popularity = {
+				ideology = authoritarian_democrat
+				popularity = 0.7
+			}
+			add_popularity = {
+				ideology = social_liberal
+				popularity = 0.15
+			}
+			add_popularity = {
+				ideology = market_liberal
+				popularity = 0.15
+			}
+			add_popularity = {
+				ideology = social_conservative
+				popularity = 0.08
+			}
+			add_popularity = {
+				ideology = social_democrat
+				popularity = 0.07
+			}
+			add_popularity = {
+				ideology = radical_socialist
+				popularity = 0.05
+			}
+			set_popularities = {
+				authoritarian_democrat = 50
+				social_liberal = 15
+				market_liberal = 15
+				social_conservative = 8
+				social_democrat = 7
+				radical_socialist = 5
+
+			}
+			set_cosmetic_tag = HAW_american
+			news_event = HAW_outcomes.1
+			add_to_array = { global.influence_log = 21 }
+			add_to_array = { global.influence_log_val = 5 }
+			influence_recalc = yes
+		}
+	}
+}
+
+news_event = { ###Japanese Hawaii Monarchy
+	id = HAW_outcomes.2
+	picture = GFX_ne_HAW_Monarchial_Hawaii
+	title = HAW_outcomes.2.t
+	desc = HAW_outcomes.2.d
+		
+	major = yes
+
+	is_triggered_only = yes
+	option = {
+		name = HAW_outcomes.2.a
+	}
+}
+
+country_event = { ###Japan Hawaii Monarchy Country Event
+	id = HAW_outcomes.21
+	title = HAW_outcomes.21.t
+	desc = HAW_outcomes.21.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = HAW_outcomes.21.a
+		HAW = {
+			get_current_government_type = yes
+		}
+		if = {
+			limit = {
+				has_subject_autonomy_feature = yes
+			}
+			set_autonomy = {
+				target = HAW
+				autonomous_state = krg_protectorate
+			}
+		}
+		else = {
+			puppet = HAW
+		}
+		save_event_target_as = on_puppet_master_tag
+		HAW = {
+			standard_on_puppet_effect = yes
+			restore_previous_government_type = yes
+		}
+
+		HAW = { 
+			set_politics = {
+				ruling_party = authoritarian_democrat
+			}
+			set_party_name = {
+				ideology = authoritarian_democrat
+				long_name = HAW_royal_party_long
+				name = HAW_royal_party
+			}
+			set_party_name = {
+				ideology = paternal_autocrat
+				long_name = HAW_japanese_administration_long
+				name = HAW_japanese_administration
+			}
+			set_party_name = {
+				ideology = market_liberal
+				long_name = HAW_national_liberal_party_long
+				name = HAW_national_liberal_party
+			}
+			set_party_name = {
+				ideology = social_liberal
+				long_name = HAW_national_liberal_party_long
+				name = HAW_national_liberal_party
+			}
+			set_party_name = {
+				ideology = social_conservative
+				long_name = HAW_national_party_long
+				name = HAW_national_party
+			}
+			set_popularities = {
+				revolutionary_republican = 10
+				social_liberal = 6
+				market_liberal = 9
+				social_conservative = 15
+				authoritarian_democrat = 40
+				paternal_autocrat = 15
+				national_populist = 5
+			}
+			set_country_flag = HAW_Lydia_Selected
+			promote_character = {
+				character = HAW_Lydia_Liliuokalani
+				ideology = authoritarian_democrat_subtype
+			}
+			promote_character = {
+				character = HAW_Lydia_Liliuokalani
+				ideology = paternal_autocrat_subtype
+			}
+			promote_character = {
+				character = HAW_Lydia_Liliuokalani
+				ideology = national_populist_subtype
+			}
+			promote_character = {
+				character = HAW_Lydia_Liliuokalani
+				ideology = market_liberal_subtype
+			}
+			set_cosmetic_tag = HAW_monarchy 
+			news_event = HAW_outcomes.2
+		}
+	}
+}
+
+news_event = { ###Accord Hawaii Republic
+	id = HAW_outcomes.3
+	picture = GFX_ne_HAW_Independent_Hawaii
+	title = HAW_outcomes.3.t
+	desc = HAW_outcomes.3.d
+	major = yes
+
+	is_triggered_only = yes
+	option = {
+		name = HAW_outcomes.3.a
+	}
+}
+
+country_event = { ###Accord Hawaii Republic Country Event
+	id = HAW_outcomes.31
+	title = HAW_outcomes.31.t
+	desc = HAW_outcomes.31.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = HAW_outcomes.31.a
+		HAW = { 
+			set_politics = {
+				ruling_party = social_conservative
+			}
+			
+			set_party_name = {
+				ideology = revolutionary_republican
+				long_name = HAW_national_reform_party_long
+				name = HAW_national_reform_party
+			}
+			set_party_name = {
+				ideology = social_democrat
+				long_name = HAW_labor_party_long
+				name = HAW_labor_party
+			}
+			set_party_name = {
+				ideology = market_liberal
+				long_name = HAW_republican_party_long
+				name = HAW_republican_party
+			}
+			set_party_name = {
+				ideology = social_liberal
+				long_name = HAW_liberal_party_long
+				name = HAW_liberal_party
+			}
+			set_party_name = {
+				ideology = social_conservative
+				long_name = HAW_national_democratic_party_long
+				name = HAW_national_democratic_party
+			}
+			set_party_name = {
+				ideology = authoritarian_democrat
+				long_name = HAW_Armed_Forces_of_Hawaii_long
+				name = HAW_Armed_Forces_of_Hawaii
+			}
+			set_party_name = {
+				ideology = paternal_autocrat
+				long_name = HAW_Armed_Forces_of_Hawaii_long
+				name = HAW_Armed_Forces_of_Hawaii
+			}
+			set_party_name = {
+				ideology = national_populist
+				long_name = HAW_national_party_republic_long
+				name = HAW_national_party_republic
+			}
+			set_popularities = {
+				social_conservative = 40
+				market_liberal = 25
+				social_liberal = 25
+				social_democrat = 5
+				revolutionary_republican = 5
+			}
+			set_cosmetic_tag = HAW_republic
+			set_temp_variable =  { temp_level = 4 }
+			set_accord_alignment = yes
+			
+			news_event = HAW_outcomes.3
+			add_to_array = { global.influence_log = 20 }
+			add_to_array = { global.influence_log_val = 15 }
+			influence_recalc = yes
+		}
+	}
+}
+
+
+news_event = { ###Japanese Hawaii Republic
+	id = HAW_outcomes.4
+	picture = GFX_ne_HAW_Independent_Hawaii
+	title = HAW_outcomes.4.t
+	desc = HAW_outcomes.4.d
+		
+	major = yes
+
+	is_triggered_only = yes
+	option = {
+		name = HAW_outcomes.4.a
+	}
+}
+
+country_event = { ###Japan Hawaii Republic Country Event
+	id = HAW_outcomes.41
+	title = HAW_outcomes.41.t
+	desc = HAW_outcomes.41.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = HAW_outcomes.41.a
+		HAW = {
+			get_current_government_type = yes
+		}
+		if = {
+			limit = {
+				has_subject_autonomy_feature = yes
+			}
+			set_autonomy = {
+				target = HAW
+				autonomous_state = krg_protectorate
+			}
+		}
+		else = {
+			puppet = HAW
+		}
+		save_event_target_as = on_puppet_master_tag
+		HAW = {
+			standard_on_puppet_effect = yes
+			restore_previous_government_type = yes
+		}
+		
+		HAW = { 
+			set_politics = {
+				ruling_party = authoritarian_democrat
+			}
+			set_party_name = {
+				ideology = authoritarian_democrat
+				long_name = HAW_national_party_rep_long
+				name = HAW_national_party_rep
+			}
+			set_party_name = {
+				ideology = paternal_autocrat
+				long_name = HAW_japanese_administration_long
+				name = HAW_japanese_administration
+			}
+			set_party_name = {
+				ideology = market_liberal
+				long_name = HAW_national_liberal_party_rep_long
+				name = HAW_national_liberal_party_rep
+			}
+			set_party_name = {
+				ideology = social_liberal
+				long_name = HAW_national_liberal_party_rep_long
+				name = HAW_national_liberal_party_rep
+			}
+			set_party_name = {
+				ideology = social_conservative
+				long_name = HAW_national_party_rep_long
+				name = HAW_national_party_rep
+			}
+			
+			set_popularities = {
+				revolutionary_republican = 10
+				social_liberal = 6
+				market_liberal = 6
+				social_conservative = 10
+				authoritarian_democrat = 40
+				paternal_autocrat = 25
+				national_populist = 3
+			}
+			set_cosmetic_tag = HAW_republic
+			news_event = HAW_outcomes.4
+		}
+	}
+}
+
+news_event = { ###Socialist Hawaii Republic
+	id = HAW_outcomes.5
+	picture = GFX_ne_HAW_Socialist_Hawaii
+	title = HAW_outcomes.5.t
+	desc = {
+		text = HAW_outcomes.5.d
+		trigger = {
+			has_global_flag = HAW_Revolution_Socialists
+		}
+	}
+
+	major = yes
+
+	is_triggered_only = yes
+	option = {
+		name = HAW_outcomes.5.a
+	}
+}
+
+country_event = { ###Socialist Hawaii Country Event
+	id = HAW_outcomes.51
+	title = HAW_outcomes.51.t
+	desc = HAW_outcomes.51.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = HAW_outcomes.51.a
+		HAW = { 
+			set_politics = {
+				ruling_party = radical_socialist
+			}
+			set_party_name = {
+				ideology = radical_socialist
+				long_name = HAW_hawaiian_socialist_party_radsoc_long
+				name = HAW_hawaiian_socialist_party_radsoc
+			}
+			set_party_name = {
+				ideology = authoritarian_socialist
+				long_name = HAW_hawaiian_socialist_party_authsoc_long
+				name = HAW_hawaiian_socialist_party_authsoc
+			}
+			set_party_name = {
+				ideology = market_liberal
+				long_name = HAW_republican_party_long
+				name = HAW_republican_party
+			}
+			set_party_name = {
+				ideology = social_liberal
+				long_name = HAW_progressive_party_indep_long
+				name = HAW_progressive_party_indep
+			}
+			set_party_name = {
+				ideology = revolutionary_republican
+				long_name = HAW_national_reform_party_long
+				name = HAW_national_reform_party
+			}
+			set_party_name = {
+				ideology = social_democrat
+				long_name = HAW_labor_party_long
+				name = HAW_labor_party
+			}
+			set_party_name = {
+				ideology = social_conservative
+				long_name = HAW_national_party_rep_long
+				name = HAW_national_party_rep
+			}
+			set_party_name = {
+				ideology = authoritarian_democrat
+				long_name = HAW_Armed_Forces_of_Hawaii_long
+				name = HAW_Armed_Forces_of_Hawaii
+			}
+			set_party_name = {
+				ideology = paternal_autocrat
+				long_name = HAW_Armed_Forces_of_Hawaii_long
+				name = HAW_Armed_Forces_of_Hawaii
+			}
+			set_party_name = {
+				ideology = national_populist
+				long_name = HAW_national_party_republic_long
+				name = HAW_national_party_republic
+			}
+			add_popularity = {
+				ideology = radical_socialist
+				popularity = 0.5
+			}
+			add_popularity = {
+				ideology = authoritarian_socialist
+				popularity = 0.25
+			}
+			add_popularity = {
+				ideology = social_democrat
+				popularity = 0.25
+			}
+			add_popularity = {
+				ideology = social_liberal
+				popularity = 0.05
+			}
+			add_popularity = {
+				ideology = revolutionary_republican
+				popularity = 0.05
+			}
+			set_popularities = {
+				radical_socialist = 50
+				authoritarian_socialist = 25
+				social_democrat = 25
+				social_liberal = 5
+				revolutionary_republican = 5
+			}
+			clear_geacps_alignment =  yes
+			set_cosmetic_tag = HAW_socialist
+			news_event = HAW_outcomes.5
+		}
+	}
+}
+
+news_event = { ###Independent Hawaii Republic
+	id = HAW_outcomes.6
+	picture = GFX_ne_HAW_Independent_Hawaii
+	title = HAW_outcomes.6.t
+	desc = HAW_outcomes.6.d
+	
+
+	major = yes
+
+	is_triggered_only = yes
+	option = {
+		name = HAW_outcomes.6.a
+	}
+}
+
+country_event = { ###Hawaii Republic Country Event
+	id = HAW_outcomes.61
+	title = HAW_outcomes.61.t
+	desc = HAW_outcomes.61.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = HAW_outcomes.61.a
+		set_politics = {
+			ruling_party = social_conservative
+		}
+		set_party_name = {
+			ideology = revolutionary_republican
+			long_name = HAW_national_reform_party_long
+			name = HAW_national_reform_party
+		}
+		set_party_name = {
+			ideology = social_democrat
+			long_name = HAW_labor_party_long
+			name = HAW_labor_party
+		}
+		set_party_name = {
+			ideology = market_liberal
+			long_name = HAW_republican_party_long
+			name = HAW_republican_party
+		}
+		set_party_name = {
+			ideology = social_liberal
+			long_name = HAW_liberal_party_long
+			name = HAW_liberal_party
+		}
+		set_party_name = {
+			ideology = social_conservative
+			long_name = HAW_national_democratic_party_long
+			name = HAW_national_democratic_party
+		}
+		set_party_name = {
+			ideology = authoritarian_democrat
+			long_name = HAW_Armed_Forces_of_Hawaii_long
+			name = HAW_Armed_Forces_of_Hawaii
+		}
+		set_party_name = {
+			ideology = paternal_autocrat
+			long_name = HAW_Armed_Forces_of_Hawaii_long
+			name = HAW_Armed_Forces_of_Hawaii
+		}
+		set_party_name = {
+			ideology = national_populist
+			long_name = HAW_national_party_republic_long
+			name = HAW_national_party_republic
+		}
+		set_popularities = {
+			social_conservative = 40
+			market_liberal = 25
+			social_liberal = 25
+			social_democrat = 5
+			revolutionary_republican = 5
+		}
+		clear_geacps_alignment =  yes
+		set_cosmetic_tag = HAW_republic
+		news_event = HAW_outcomes.6
+	}
+}

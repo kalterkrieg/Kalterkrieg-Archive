@@ -1,0 +1,2034 @@
+technologies = {
+
+	naval_supremacy = {
+		doctrine_name = "TITLE_NAVAL_SUPREMACY"
+
+		#carriers, carriers, carriers!
+
+		# EFFECT #############
+		category_all_ships = {
+			max_organisation = 10
+		}
+		#####
+
+		xor = { blue_water_navy green_water_navy brown_water_navy }
+
+		path = {
+			leads_to_tech = submarine_operations_ns
+			research_cost_coeff = 1
+		}
+
+		path = {
+			leads_to_tech = naval_air_operations_ns
+			research_cost_coeff = 1
+		}
+
+		path = {
+			leads_to_tech = screening_vessel_coordination_ns
+			research_cost_coeff = 1
+		}
+
+		path = {
+			leads_to_tech = convoy_escorts_shared
+			research_cost_coeff = 1
+		}
+
+		xp_research_type = navy
+		xp_unlock_cost = 100
+		doctrine = yes
+		research_cost = 3
+
+		categories = {
+			naval_doctrine
+			
+			cat_naval_supremacy
+		}
+
+		folder = {
+			name = naval_doctrine_folder
+			position = { x = 0 y = 0 }
+		}
+	}
+
+	submarine_operations_ns = {
+		# EFFECT #############
+		########
+
+		submarine = {
+			max_organisation = 8
+		}
+
+		path = {
+			leads_to_tech = attack_submarines_ns
+			research_cost_coeff = 1
+		}
+
+		xp_research_type = navy
+		xp_unlock_cost = 100
+		doctrine = yes
+		research_cost = 3
+
+		categories = {
+			naval_doctrine
+			
+			cat_naval_supremacy
+			submarine_doctrine
+		}
+
+		folder = {
+			name = naval_doctrine_folder
+			position = { x = -2 y = 2 }
+		}
+	}
+
+	attack_submarines_ns = {
+		# EFFECT #############
+		########
+
+		submarine = {
+			torpedo_attack = 0.1
+		}
+
+		path = {
+			leads_to_tech = subsurface_warfare_ns
+			research_cost_coeff = 1
+		}
+
+		xp_research_type = navy
+		xp_unlock_cost = 100
+		doctrine = yes
+		research_cost = 3
+
+		categories = {
+			naval_doctrine
+			
+			cat_naval_supremacy
+			submarine_doctrine
+		}
+
+		folder = {
+			name = naval_doctrine_folder
+			position = { x = -2 y = 4 }
+		}
+	}
+
+	subsurface_warfare_ns = {
+		# EFFECT #############
+		########
+		submarine = {
+			mines_planting = 0.1
+		}
+		navy_submarine_detection_factor = 0.1
+
+		path = {
+			leads_to_tech = silent_killers_ns
+			research_cost_coeff = 1
+		}
+
+		xp_research_type = navy
+		xp_unlock_cost = 100
+		doctrine = yes
+		research_cost = 3
+
+		categories = {
+			naval_doctrine
+			
+			cat_naval_supremacy
+			submarine_doctrine
+		}
+
+		folder = {
+			name = naval_doctrine_folder
+			position = { x = -2 y = 6 }
+		}
+	}
+
+	silent_killers_ns = {
+		# EFFECT #############
+		########
+
+		submarine = {
+			sub_visibility = -0.1
+		}
+
+		path = {
+			leads_to_tech = surface_subsurface_integration_ns
+			research_cost_coeff = 1
+		}
+
+		xp_research_type = navy
+		xp_unlock_cost = 100
+		doctrine = yes
+		research_cost = 3
+
+		categories = {
+			naval_doctrine
+			
+			cat_naval_supremacy
+			submarine_doctrine
+		}
+
+		folder = {
+			name = naval_doctrine_folder
+			position = { x = -2 y = 8 }
+		}
+	}
+
+	surface_subsurface_integration_ns = {
+		# EFFECT #############
+
+		########
+
+		submarine = {
+			combat_width = -1
+			supply_consumption_factor = -0.1
+			max_organisation = 4
+		}
+
+		xp_research_type = navy
+		xp_unlock_cost = 100
+		doctrine = yes
+		research_cost = 3
+
+		categories = {
+			naval_doctrine
+			
+			cat_naval_supremacy
+			submarine_doctrine
+		}
+
+		folder = {
+			name = naval_doctrine_folder
+			position = { x = -2 y = 10 }
+		}
+	}
+
+	naval_air_operations_ns = {
+		# EFFECT #############
+		########
+
+		carrier = {
+			carrier_size = 0.05
+		}
+		category_cv_fighter = {
+			naval_strike_attack = 0.1 
+			naval_strike_targetting = 0.1 
+		}
+		category_cv_cas = {
+			naval_strike_attack = 0.1 
+			naval_strike_targetting = 0.1 
+		}
+		category_marine_patrol = {
+			naval_strike_attack = 0.1  
+			naval_strike_targetting = 0.1 
+		}
+		sortie_efficiency = 0.1
+
+		path = {
+			leads_to_tech = carrier_primacy_ns
+			research_cost_coeff = 1
+		}
+
+		xp_research_type = navy
+		xp_unlock_cost = 100
+		doctrine = yes
+		research_cost = 3
+
+		categories = {
+			naval_doctrine
+			
+			cat_naval_supremacy
+		}
+
+		folder = {
+			name = naval_doctrine_folder
+			position = { x = 0 y = 2 }
+		}
+	}
+
+	carrier_primacy_ns = {
+		# EFFECT #############
+		########
+		carrier = {
+			max_organisation = 10
+			build_cost_ic = -0.05
+		}
+		naval_has_potf_in_combat_attack = 0.1
+
+		path = {
+			leads_to_tech = carrier_task_forces_ns
+			research_cost_coeff = 1
+		}
+
+		xp_research_type = navy
+		xp_unlock_cost = 100
+		doctrine = yes
+		research_cost = 3
+
+		categories = {
+			naval_doctrine
+			
+			cat_naval_supremacy
+		}
+
+		folder = {
+			name = naval_doctrine_folder
+			position = { x = 0 y = 4 }
+		}
+	}
+
+	carrier_task_forces_ns = {
+		# EFFECT #############
+		########
+		carrier = {
+			combat_width = -2
+			naval_range = 0.05
+		}
+		naval_enemy_positioning_in_initial_attack = 0.1
+
+		path = {
+			leads_to_tech = force_projection_ns
+			research_cost_coeff = 1
+		}
+
+		xp_research_type = navy
+		xp_unlock_cost = 100
+		doctrine = yes
+		research_cost = 3
+
+		categories = {
+			naval_doctrine
+			
+			cat_naval_supremacy
+		}
+
+		folder = {
+			name = naval_doctrine_folder
+			position = { x = 0 y = 6 }
+		}
+	}
+
+	force_projection_ns = {
+		# EFFECT #############
+		########
+
+		carrier_capacity_penalty_reduction = -0.2
+		carrier = {
+			maximum_speed = 0.1
+			armor_value = 0.1
+			max_organisation = 2
+		}
+
+		path = {
+			leads_to_tech = fleet_replenishment_emphasis_ns
+			research_cost_coeff = 1
+		}
+
+		xp_research_type = navy
+		xp_unlock_cost = 100
+		doctrine = yes
+		research_cost = 3
+
+		categories = {
+			naval_doctrine
+			
+			cat_naval_supremacy
+		}
+
+		folder = {
+			name = naval_doctrine_folder
+			position = { x = 0 y = 8 }
+		}
+	}
+
+	fleet_replenishment_emphasis_ns = {
+		# EFFECT #############
+		########
+		naval_attrition = -0.05
+		destroyer = {
+			max_organisation = 5
+		}
+		cruiser = {
+			max_organisation = 5
+		}
+		naval_morale = 0.1
+
+		path = {
+			leads_to_tech = forward_deployed_fleets_ns
+			research_cost_coeff = 1
+		}
+
+		xp_research_type = navy
+		xp_unlock_cost = 100
+		doctrine = yes
+		research_cost = 3
+
+		categories = {
+			naval_doctrine
+			
+			cat_naval_supremacy
+		}
+
+		folder = {
+			name = naval_doctrine_folder
+			position = { x = 0 y = 10 }
+		}
+	}
+
+	forward_deployed_fleets_ns = {
+		# EFFECT #############
+		########
+
+		navy_fuel_consumption_factor = -0.05
+		naval_coordination = 0.05
+		carrier = {
+			naval_range = 0.1
+		}
+		cruiser = {
+			naval_range = 0.1
+		}
+		destroyer = {
+			naval_range = 0.1
+		}
+
+
+		xp_research_type = navy
+		xp_unlock_cost = 100
+		doctrine = yes
+		research_cost = 3
+
+		categories = {
+			naval_doctrine
+			
+			cat_naval_supremacy
+		}
+
+		folder = {
+			name = naval_doctrine_folder
+			position = { x = 0 y = 12 }
+		}
+	}
+
+	screening_vessel_coordination_ns = {
+		# EFFECT #############
+		########
+
+		destroyer = {
+			max_organisation = 5
+			armor_value = 0.1
+		}
+		frigate = {
+			max_organisation = 5
+			armor_value = 0.1
+		}
+		ships_at_battle_start = 0.1
+
+		path = {
+			leads_to_tech = integrated_air_interdiction_ns
+			research_cost_coeff = 1
+		}
+
+
+		xp_research_type = navy
+		xp_unlock_cost = 100
+		doctrine = yes
+		research_cost = 3
+
+		categories = {
+			naval_doctrine
+			
+			cat_naval_supremacy
+		}
+
+		folder = {
+			name = naval_doctrine_folder
+			position = { x = 2 y = 2 }
+		}
+	}
+
+	integrated_air_interdiction_ns = {
+		# EFFECT #############
+		########
+		cruiser = {
+			anti_air_attack = 0.1
+		}
+		destroyer = {
+			anti_air_attack = 0.1
+		}
+		frigate = {
+			anti_air_attack = 0.1
+		}
+		navy_carrier_air_targetting_factor = 0.05
+		navy_carrier_air_agility_factor = 0.05
+		navy_carrier_air_attack_factor = 0.05
+
+		path = {
+			leads_to_tech = group_wide_detection_ns
+			research_cost_coeff = 1
+		}
+
+
+		xp_research_type = navy
+		xp_unlock_cost = 100
+		doctrine = yes
+		research_cost = 3
+
+		categories = {
+			naval_doctrine
+			
+			cat_naval_supremacy
+		}
+
+		folder = {
+			name = naval_doctrine_folder
+			position = { x = 2 y = 4 }
+		}
+	}
+
+	group_wide_detection_ns = {
+		# EFFECT #############
+		########
+		cruiser = {
+			surface_detection = 0.1
+		}
+		destroyer = {
+			surface_detection = 0.1
+		}
+		frigate = {
+			surface_detection = 0.1
+		}
+		night_spotting_chance = 0.1
+
+		xp_research_type = navy
+		xp_unlock_cost = 100
+		doctrine = yes
+		research_cost = 3
+
+		categories = {
+			naval_doctrine
+			
+			cat_naval_supremacy
+		}
+
+		folder = {
+			name = naval_doctrine_folder
+			position = { x = 2 y = 6 }
+		}
+	}
+
+	convoy_escorts_shared = {
+		#Assigning dedicated convoy escorts to keep them safe
+
+		# EFFECT #############
+		convoy_escort_efficiency = 0.1
+		naval_detection = 0.05
+		#####
+
+		path = {
+			leads_to_tech = escort_coordination
+			research_cost_coeff = 1
+		}
+
+		xp_research_type = navy
+		xp_unlock_cost = 100
+		doctrine = yes
+		research_cost = 3
+
+		categories = {
+			naval_doctrine
+			cat_naval_supremacy
+			cat_blue_water_navy
+			
+		}
+
+		folder = {
+			name = naval_doctrine_folder
+			position = { x = 5 y = 0 }
+		}
+	}
+
+	escort_coordination = {
+		#Assigning dedicated convoy escorts to keep them safe
+
+		# EFFECT #############
+		naval_coordination = 0.05
+		air_escort_efficiency = 0.05
+		destroyer = {
+			max_organisation = 5
+		}
+		frigate = {
+			max_organisation = 5
+		}
+		#####
+
+		path = {
+			leads_to_tech = maritime_patrol_emphasis_shared
+			research_cost_coeff = 1
+		}
+
+		xp_research_type = navy
+		xp_unlock_cost = 100
+		doctrine = yes
+		research_cost = 3
+
+		categories = {
+			naval_doctrine
+			cat_naval_supremacy
+			cat_blue_water_navy
+			
+		}
+
+		folder = {
+			name = naval_doctrine_folder
+			position = { x = 5 y = 2 }
+		}
+	}
+
+	maritime_patrol_emphasis_shared = {
+		#Assigning dedicated convoy escorts to keep them safe
+
+		# EFFECT #############
+		frigate = {
+			sub_detection = 0.1
+			surface_detection = 0.1
+		}
+		#####
+
+		path = {
+			leads_to_tech = integrated_escort_operations
+			research_cost_coeff = 1
+		}
+
+		xp_research_type = navy
+		xp_unlock_cost = 100
+		doctrine = yes
+		research_cost = 3
+
+		categories = {
+			naval_doctrine
+			cat_naval_supremacy
+			cat_blue_water_navy
+			
+		}
+
+		folder = {
+			name = naval_doctrine_folder
+			position = { x = 5 y = 4 }
+		}
+	}
+
+	integrated_escort_operations = {
+		#Assigning dedicated convoy escorts to keep them safe
+
+		# EFFECT #############
+		convoy_retreat_speed = 0.1
+		naval_coordination = 0.05
+		#####
+
+		path = {
+			leads_to_tech = antisubmarine_area_denial
+			research_cost_coeff = 1
+		}
+
+		xp_research_type = navy
+		xp_unlock_cost = 100
+		doctrine = yes
+		research_cost = 3
+
+		categories = {
+			naval_doctrine
+			cat_naval_supremacy
+			cat_blue_water_navy
+			
+		}
+
+		folder = {
+			name = naval_doctrine_folder
+			position = { x = 5 y = 6 }
+		}
+	}
+
+	antisubmarine_area_denial = {
+		#Assigning dedicated convoy escorts to keep them safe
+
+		# EFFECT #############
+		destroyer = {
+			sub_detection = 0.1
+			mines_sweeping = 0.1
+		}
+		frigate = {
+			sub_detection = 0.1
+			mines_sweeping = 0.1
+		}
+		#####
+
+		path = {
+			leads_to_tech = sea_lane_security
+			research_cost_coeff = 1
+		}
+
+		xp_research_type = navy
+		xp_unlock_cost = 100
+		doctrine = yes
+		research_cost = 3
+
+		categories = {
+			naval_doctrine
+			cat_naval_supremacy
+			cat_blue_water_navy
+			
+		}
+
+		folder = {
+			name = naval_doctrine_folder
+			position = { x = 5 y = 8 }
+		}
+	}
+
+	sea_lane_security = {
+		#Assigning dedicated convoy escorts to keep them safe
+
+		# EFFECT #############
+		convoy_escort_efficiency = 0.1
+		destroyer = {
+			naval_range = 0.1
+			maximum_speed = 0.05
+		}
+		frigate = {
+			naval_range = 0.1
+			maximum_speed = 0.05
+		}
+		#####
+
+		xp_research_type = navy
+		xp_unlock_cost = 100
+		doctrine = yes
+		research_cost = 3
+
+		categories = {
+			naval_doctrine
+			cat_naval_supremacy
+			cat_blue_water_navy
+			
+		}
+
+		folder = {
+			name = naval_doctrine_folder
+			position = { x = 5 y = 10 }
+		}
+	}
+
+	blue_water_navy = {
+		doctrine_name = "TITLE_BLUE_WATER_NAVY"
+
+		#a good navy but not as fuckhueg as USN!
+
+		# EFFECT #############
+		carrier = {
+			max_organisation = 5
+		}
+		cruiser = {
+			max_organisation = 5
+		}
+		destroyer = {
+			max_organisation = 5
+		}
+		frigate = {
+			max_organisation = 5
+		}
+
+		#####
+
+		xor = { naval_supremacy green_water_navy brown_water_navy }
+
+		path = {
+			leads_to_tech = independent_operational_capacity
+			research_cost_coeff = 1
+		}
+
+		path = {
+			leads_to_tech = allied_naval_cooperation
+			research_cost_coeff = 1
+		}
+
+		path = {
+			leads_to_tech = submarine_operations_bwn
+			research_cost_coeff = 1
+		}
+
+		path = {
+			leads_to_tech = convoy_escorts_shared
+			research_cost_coeff = 1
+		}
+
+		xp_research_type = navy
+		xp_unlock_cost = 100
+		doctrine = yes
+		research_cost = 3
+
+		categories = {
+			naval_doctrine
+			
+			cat_blue_water_navy
+		}
+
+		folder = {
+			name = naval_doctrine_folder
+			position = { x = 10 y = 0 }
+		}
+	}
+
+	submarine_operations_bwn = {
+		# EFFECT #############
+		########
+		submarine = {
+			max_organisation = 5
+			sub_visibility = -0.1
+		}
+
+		path = {
+			leads_to_tech = subsurface_warfare_bwn
+			research_cost_coeff = 1
+		}
+
+		xp_research_type = navy
+		xp_unlock_cost = 100
+		doctrine = yes
+		research_cost = 3
+
+		categories = {
+			naval_doctrine
+			
+			cat_blue_water_navy
+			submarine_doctrine
+		}
+
+		folder = {
+			name = naval_doctrine_folder
+			position = { x = 8 y = 2 }
+		}
+	}
+
+	subsurface_warfare_bwn = {
+		# EFFECT #############
+		########
+
+		navy_submarine_detection_factor = 0.1
+		submarine = {
+			mines_planting = 0.1
+		}
+
+		path = {
+			leads_to_tech = silent_killers_bwn
+			research_cost_coeff = 1
+		}
+
+		xp_research_type = navy
+		xp_unlock_cost = 100
+		doctrine = yes
+		research_cost = 3
+
+		categories = {
+			naval_doctrine
+			
+			cat_blue_water_navy
+			submarine_doctrine
+		}
+
+		folder = {
+			name = naval_doctrine_folder
+			position = { x = 8 y = 4 }
+		}
+	}
+
+	silent_killers_bwn = {
+		# EFFECT #############
+		########
+
+		submarine = {
+			convoy_raiding_coordination = 0.1
+			max_organisation = 0.1
+		}
+
+		path = {
+			leads_to_tech = attack_submarines_bwn
+			research_cost_coeff = 1
+		}
+
+		xp_research_type = navy
+		xp_unlock_cost = 100
+		doctrine = yes
+		research_cost = 3
+
+		categories = {
+			naval_doctrine
+			
+			cat_blue_water_navy
+			submarine_doctrine
+		}
+
+		folder = {
+			name = naval_doctrine_folder
+			position = { x = 8 y = 6 }
+		}
+	}
+
+	attack_submarines_bwn = {
+		# EFFECT #############
+		########
+		submarine = {
+			torpedo_attack = 0.1
+			maximum_speed = 0.1
+		}
+
+		path = {
+			leads_to_tech = undersea_exclusion
+			research_cost_coeff = 1
+		}
+
+		xp_research_type = navy
+		xp_unlock_cost = 100
+		doctrine = yes
+		research_cost = 3
+
+		categories = {
+			naval_doctrine
+			
+			cat_blue_water_navy
+			submarine_doctrine
+		}
+
+		folder = {
+			name = naval_doctrine_folder
+			position = { x = 8 y = 8 }
+		}
+	}
+
+	undersea_exclusion = {
+		# EFFECT #############
+		########
+
+		submarine = {
+			sub_visibility = -0.1
+		}
+
+		xp_research_type = navy
+		xp_unlock_cost = 100
+		doctrine = yes
+		research_cost = 3
+
+		categories = {
+			naval_doctrine
+			
+			cat_blue_water_navy
+			submarine_doctrine
+		}
+
+		folder = {
+			name = naval_doctrine_folder
+			position = { x = 8 y = 10 }
+		}
+	}
+
+	independent_operational_capacity = {
+		# EFFECT #############
+		########
+
+		carrier = {
+			supply_consumption = -0.1
+		}
+		cruiser = {
+			supply_consumption = -0.1
+		}
+		destroyer = {
+			supply_consumption = -0.1
+		}
+		submarine = {
+			supply_consumption = -0.1
+		}
+		
+		navy_max_range_factor = 0.1
+		path = {
+			leads_to_tech = naval_air_operations_bwn
+			research_cost_coeff = 1
+		}
+
+		xp_research_type = navy
+		xp_unlock_cost = 100
+		doctrine = yes
+		research_cost = 3
+
+		xor = { allied_naval_cooperation }
+
+		categories = {
+			naval_doctrine
+			
+			cat_blue_water_navy
+		}
+
+		folder = {
+			name = naval_doctrine_folder
+			position = { x = 10 y = 2 }
+		}
+	}
+
+	naval_air_operations_bwn = {
+		# EFFECT #############
+		########
+
+		carrier = {
+			carrier_size = 0.05
+		}
+		category_cv_fighter = {
+			naval_strike_attack = 0.1 
+			naval_strike_targetting = 0.1 
+		}
+		category_cv_cas = {
+			naval_strike_attack = 0.1 
+			naval_strike_targetting = 0.1 
+		}
+		maritime_patrol_plane = {
+			naval_strike_attack = 0.1  
+			naval_strike_targetting = 0.1 
+		}
+
+		path = {
+			leads_to_tech = carrier_task_forces_bwn
+			research_cost_coeff = 1
+		}
+
+		xp_research_type = navy
+		xp_unlock_cost = 100
+		doctrine = yes
+		research_cost = 3
+
+		categories = {
+			naval_doctrine
+			
+			cat_blue_water_navy
+		}
+
+		folder = {
+			name = naval_doctrine_folder
+			position = { x = 10 y = 4 }
+		}
+	}
+
+	carrier_task_forces_bwn = {
+		# EFFECT #############
+		########
+		carrier = {
+			max_organisation = 8
+		}
+
+		path = {
+			leads_to_tech = fleet_role_designation_ioc
+			research_cost_coeff = 1
+		}
+
+		xp_research_type = navy
+		xp_unlock_cost = 100
+		doctrine = yes
+		research_cost = 3
+
+		categories = {
+			naval_doctrine
+			
+			cat_blue_water_navy
+		}
+
+		folder = {
+			name = naval_doctrine_folder
+			position = { x = 10 y = 6 }
+		}
+	}
+
+	fleet_role_designation_ioc = {
+		# EFFECT #############
+		########
+		carrier = {
+			max_organisation = 5
+			combat_width = -2
+		}
+		naval_coordination = 0.05
+
+		path = {
+			leads_to_tech = fleet_replenishment_emphasis_bwn
+			research_cost_coeff = 1
+		}
+
+		xp_research_type = navy
+		xp_unlock_cost = 100
+		doctrine = yes
+		research_cost = 3
+
+		categories = {
+			naval_doctrine
+			
+			cat_blue_water_navy
+		}
+
+		folder = {
+			name = naval_doctrine_folder
+			position = { x = 10 y = 8 }
+		}
+	}
+
+	fleet_replenishment_emphasis_bwn = {
+		# EFFECT #############
+		########
+
+		destroyer = {
+			max_organisation = 5
+		}
+		cruiser = {
+			max_organisation = 5
+		}
+		naval_morale = 0.1
+		naval_attrition = -0.05
+		
+
+		path = {
+			leads_to_tech = extended_deployments
+			research_cost_coeff = 1
+		}
+
+		xp_research_type = navy
+		xp_unlock_cost = 100
+		doctrine = yes
+		research_cost = 3
+
+		categories = {
+			naval_doctrine
+			
+			cat_blue_water_navy
+		}
+
+		folder = {
+			name = naval_doctrine_folder
+			position = { x = 10 y = 10 }
+		}
+	}
+
+	extended_deployments = {
+		# EFFECT #############
+		########
+		navy_fuel_consumption_factor = -0.05
+		carrier = {
+			naval_range = 0.1
+		}
+		cruiser = {
+			naval_range = 0.1
+		}
+		destroyer = {
+			naval_range = 0.1
+		}
+
+
+		xp_research_type = navy
+		xp_unlock_cost = 100
+		doctrine = yes
+		research_cost = 3
+
+		categories = {
+			naval_doctrine
+			
+			cat_blue_water_navy
+		}
+
+		folder = {
+			name = naval_doctrine_folder
+			position = { x = 10 y = 12 }
+		}
+	}
+
+	allied_naval_cooperation = {
+		# EFFECT #############
+		########
+
+		cruiser = {
+			max_organisation = 8
+		}
+		destroyer = {
+			max_organisation = 8
+		}
+		frigate = {
+			max_organisation = 8
+		}
+
+		xp_research_type = navy
+		xp_unlock_cost = 100
+		doctrine = yes
+		research_cost = 3
+
+		path = {
+			leads_to_tech = surface_combat_emphasis
+			research_cost_coeff = 1
+		}
+
+		xor = { independent_operational_capacity }
+
+		categories = {
+			naval_doctrine
+			
+			cat_blue_water_navy
+		}
+
+		folder = {
+			name = naval_doctrine_folder
+			position = { x = 12 y = 2 }
+		}
+	}
+	surface_combat_emphasis = {
+		# EFFECT #############
+		########
+		cruiser = {
+			hg_attack = 0.1
+			lg_attack = 0.1
+			armor_value = 0.1
+		}
+		destroyer = {
+			lg_attack = 0.1
+			armor_value = 0.1
+		}
+		frigate = {
+			lg_attack = 0.1
+			armor_value = 0.1
+		}
+
+		xp_research_type = navy
+		xp_unlock_cost = 100
+		doctrine = yes
+		research_cost = 3
+
+		path = {
+			leads_to_tech = surface_action_groups
+			research_cost_coeff = 1
+		}
+
+		categories = {
+			naval_doctrine
+			cat_blue_water_navy
+		}
+
+		folder = {
+			name = naval_doctrine_folder
+			position = { x = 12 y = 4 }
+		}
+	}
+	surface_action_groups = {
+		# EFFECT #############
+		########
+		cruiser = {
+			max_organisation = 5
+			combat_width = -2
+		}
+		destroyer = {
+			max_organisation = 5
+			combat_width = -1
+		}
+		
+
+		xp_research_type = navy
+		xp_unlock_cost = 100
+		doctrine = yes
+		research_cost = 3
+
+		path = {
+			leads_to_tech = allied_escort_integration
+			research_cost_coeff = 1
+		}
+
+		categories = {
+			naval_doctrine
+			cat_blue_water_navy
+		}
+
+		folder = {
+			name = naval_doctrine_folder
+			position = { x = 12 y = 6 }
+		}
+	}
+	allied_escort_integration = {
+		# EFFECT #############
+		########
+		cruiser = {
+			search_and_destroy_coordination = 0.1
+		}
+		destroyer = {
+			search_and_destroy_coordination = 0.1
+		}
+
+		xp_research_type = navy
+		xp_unlock_cost = 100
+		doctrine = yes
+		research_cost = 3
+
+		path = {
+			leads_to_tech = fleet_role_designation_ac
+			research_cost_coeff = 1
+		}
+
+		categories = {
+			naval_doctrine
+			cat_blue_water_navy
+		}
+
+		folder = {
+			name = naval_doctrine_folder
+			position = { x = 12 y = 8 }
+		}
+	}
+	fleet_role_designation_ac = {
+		# EFFECT #############
+		########
+		carrier = {
+			max_organisation = 5
+			combat_width = -2
+		}
+
+		xp_research_type = navy
+		xp_unlock_cost = 100
+		doctrine = yes
+		research_cost = 3
+
+		path = {
+			leads_to_tech = group_wide_detection
+			research_cost_coeff = 1
+		}
+
+		categories = {
+			naval_doctrine
+			cat_blue_water_navy
+		}
+
+		folder = {
+			name = naval_doctrine_folder
+			position = { x = 12 y = 10 }
+		}
+	}
+	group_wide_detection = {
+		# EFFECT #############
+		########
+		cruiser = {
+			surface_detection = 0.1
+		}
+		destroyer = {
+			sub_detection = 0.1
+			surface_detection = 0.1
+		}
+		night_spotting_chance = 0.1
+
+		xp_research_type = navy
+		xp_unlock_cost = 100
+		doctrine = yes
+		research_cost = 3
+
+		categories = {
+			naval_doctrine
+			cat_blue_water_navy
+		}
+
+		folder = {
+			name = naval_doctrine_folder
+			position = { x = 12 y = 12 }
+		}
+	}
+
+	green_water_navy = {
+		doctrine_name = "TITLE_GREEN_WATER_NAVY"
+
+		#a coastal defense force with some little power projection
+
+		# EFFECT #############
+		frigate = {
+			max_organisation = 5
+		}
+		destroyer = {
+			max_organisation = 5
+		}
+		cruiser = {
+			max_organisation = 5
+		}
+		#####
+
+		xor = { naval_supremacy blue_water_navy brown_water_navy }
+
+		path = {
+			leads_to_tech = submarine_operations_gwn
+			research_cost_coeff = 1
+		}
+
+		path = {
+			leads_to_tech = coastal_security
+			research_cost_coeff = 1
+		}
+
+		
+		xp_research_type = navy
+		xp_unlock_cost = 100
+		doctrine = yes
+		research_cost = 3
+
+		categories = {
+			naval_doctrine
+
+			cat_green_water_navy
+		}
+
+		folder = {
+			name = naval_doctrine_folder
+			position = { x = 18 y = 0 }
+		}
+	}
+	submarine_operations_gwn = {
+		# EFFECT #############
+		########
+
+		submarine = {
+			max_organisation = 5
+			sub_visibility = -0.1
+		}
+
+		xp_research_type = navy
+		xp_unlock_cost = 100
+		doctrine = yes
+		research_cost = 3
+
+		path = {
+			leads_to_tech = convoy_escorts_gwn
+			research_cost_coeff = 1
+		}
+
+		categories = {
+			naval_doctrine
+			cat_green_water_navy
+		}
+
+		folder = {
+			name = naval_doctrine_folder
+			position = { x = 16 y = 2 }
+		}
+	}
+	convoy_escorts_gwn = {
+		# EFFECT #############
+		########
+
+		convoy_escort_efficiency = 0.1
+
+		xp_research_type = navy
+		xp_unlock_cost = 100
+		doctrine = yes
+		research_cost = 3
+
+		path = {
+			leads_to_tech = attack_submarines_gwn
+			research_cost_coeff = 1
+		}
+
+		categories = {
+			naval_doctrine
+			cat_green_water_navy
+		}
+
+		folder = {
+			name = naval_doctrine_folder
+			position = { x = 16 y = 4 }
+		}
+	}
+	attack_submarines_gwn = {
+		# EFFECT #############
+		########
+		submarine = {
+			torpedo_attack = 0.1
+			maximum_speed = 0.1
+		}
+
+		xp_research_type = navy
+		xp_unlock_cost = 100
+		doctrine = yes
+		research_cost = 3
+
+		path = {
+			leads_to_tech = subsurface_warfare_gwn
+			research_cost_coeff = 1
+		}
+
+		categories = {
+			naval_doctrine
+			cat_green_water_navy
+		}
+
+		folder = {
+			name = naval_doctrine_folder
+			position = { x = 16 y = 6 }
+		}
+	}
+	subsurface_warfare_gwn = {
+		# EFFECT #############
+		########
+
+		navy_submarine_detection_factor = 0.1
+		submarine = {
+			mines_planting = 0.1
+		}
+
+		xp_research_type = navy
+		xp_unlock_cost = 100
+		doctrine = yes
+		research_cost = 3
+
+		path = {
+			leads_to_tech = surface_action_groups_gwn
+			research_cost_coeff = 1
+		}
+
+		categories = {
+			naval_doctrine
+			cat_green_water_navy
+		}
+
+		folder = {
+			name = naval_doctrine_folder
+			position = { x = 16 y = 8 }
+		}
+	}
+	surface_action_groups_gwn = {
+		# EFFECT #############
+		########
+
+		submarine = {
+			max_organisation = 10
+		}
+		xp_research_type = navy
+		xp_unlock_cost = 100
+		doctrine = yes
+		research_cost = 3
+
+		path = {
+			leads_to_tech = regional_maritime_patrols
+			research_cost_coeff = 1
+		}
+
+		categories = {
+			naval_doctrine
+			cat_green_water_navy
+		}
+
+		folder = {
+			name = naval_doctrine_folder
+			position = { x = 16 y = 10 }
+		}
+	}
+	regional_maritime_patrols = {
+		# EFFECT #############
+		########
+
+		frigate = {
+			max_organisation = 8
+		}
+		destroyer = {
+			max_organisation = 8
+		}
+
+		xp_research_type = navy
+		xp_unlock_cost = 100
+		doctrine = yes
+		research_cost = 3
+
+
+		categories = {
+			naval_doctrine
+			cat_green_water_navy
+		}
+
+		folder = {
+			name = naval_doctrine_folder
+			position = { x = 16 y = 12 }
+		}
+	}
+	coastal_security = {
+		# EFFECT #############
+		########
+		coastal_bunker_effectiveness_factor = 0.1
+
+		xp_research_type = navy
+		xp_unlock_cost = 100
+		doctrine = yes
+		research_cost = 3
+
+		path = {
+			leads_to_tech = forward_defense_capability
+			research_cost_coeff = 1
+		}
+
+		categories = {
+			naval_doctrine
+			cat_green_water_navy
+		}
+
+		folder = {
+			name = naval_doctrine_folder
+			position = { x = 20 y = 2 }
+		}
+	}
+	forward_defense_capability = {
+		# EFFECT #############
+		########
+		destroyer = {
+			max_organisation = 5
+			surface_detection = 0.1
+		}
+		frigate = {
+			max_organisation = 5
+			surface_detection = 0.1
+		}
+
+		xp_research_type = navy
+		xp_unlock_cost = 100
+		doctrine = yes
+		research_cost = 3
+
+		path = {
+			leads_to_tech = surface_combatant_emphasis
+			research_cost_coeff = 1
+		}
+
+		categories = {
+			naval_doctrine
+			cat_green_water_navy
+		}
+
+		folder = {
+			name = naval_doctrine_folder
+			position = { x = 20 y = 4 }
+		}
+	}
+	surface_combatant_emphasis = {
+		# EFFECT #############
+		########
+
+		destroyer = {
+			max_organisation = 10
+			lg_attack = 0.1
+			search_and_destroy_coordination = 5
+		}
+
+		xp_research_type = navy
+		xp_unlock_cost = 100
+		doctrine = yes
+		research_cost = 3
+
+		path = {
+			leads_to_tech = reconnaissance_sweeps
+			research_cost_coeff = 1
+		}
+
+		categories = {
+			naval_doctrine
+			cat_green_water_navy
+		}
+
+		folder = {
+			name = naval_doctrine_folder
+			position = { x = 20 y = 6 }
+		}
+	}
+	reconnaissance_sweeps = {
+		# EFFECT #############
+		########
+
+		maritime_patrol_plane = {
+			naval_strike_targetting = 0.1
+		}
+		frigate = {
+			surface_detection = 0.1
+		}
+
+		xp_research_type = navy
+		xp_unlock_cost = 100
+		doctrine = yes
+		research_cost = 3
+
+		path = {
+			leads_to_tech = coastal_submarine_optimization
+			research_cost_coeff = 1
+		}
+
+		categories = {
+			naval_doctrine
+			cat_green_water_navy
+		}
+
+		folder = {
+			name = naval_doctrine_folder
+			position = { x = 20 y = 8 }
+		}
+	}
+	coastal_submarine_optimization = {
+		# EFFECT #############
+		########
+
+		submarine = {
+			max_organisation = 5
+		}
+
+		xp_research_type = navy
+		xp_unlock_cost = 100
+		doctrine = yes
+		research_cost = 3
+
+		path = {
+			leads_to_tech = littoral_defense
+			research_cost_coeff = 1
+		}
+
+		categories = {
+			naval_doctrine
+			cat_green_water_navy
+		}
+
+		folder = {
+			name = naval_doctrine_folder
+			position = { x = 20 y = 10 }
+		}
+	}
+	littoral_defense = {
+		# EFFECT #############
+		########
+
+		coastal_bunker_effectiveness_factor = 0.05
+		destroyer = {
+            armor_value = 0.1
+        }
+		frigate = {
+            armor_value = 0.1
+        }
+
+		xp_research_type = navy
+		xp_unlock_cost = 100
+		doctrine = yes
+		research_cost = 3
+
+		categories = {
+			naval_doctrine
+			cat_green_water_navy
+		}
+
+		folder = {
+			name = naval_doctrine_folder
+			position = { x = 20 y = 12 }
+		}
+	}
+
+	brown_water_navy = {
+		doctrine_name = "TITLE_BROWN_WATER_NAVY"
+
+		#a coastal defense force with some little power projection
+
+		# EFFECT #############
+		destroyer = {
+			surface_detection = 0.10
+		}
+		frigate = {
+			surface_detection = 0.10
+		}
+		destroyer = {
+			max_organisation = 5
+		}
+		frigate = {
+			max_organisation = 5
+		}
+		#####
+
+		xor = { naval_supremacy blue_water_navy green_water_navy }
+		
+		path = {
+			leads_to_tech = coastal_security_brwn
+			research_cost_coeff = 1
+		}
+		path = {
+			leads_to_tech = patrol_gunboats
+			research_cost_coeff = 1
+		}
+
+		xp_research_type = navy
+		xp_unlock_cost = 100
+		doctrine = yes
+		research_cost = 3
+
+		categories = {
+			naval_doctrine
+			cat_brown_water_navy
+		}
+
+		folder = {
+			name = naval_doctrine_folder
+			position = { x = 26 y = 0 }
+		}
+	}
+	coastal_security_brwn = {
+		# EFFECT #############
+		########
+
+		coastal_bunker_effectiveness_factor = 0.1
+
+		frigate = {
+			anti_air_attack = 0.1
+		}
+
+
+		xp_research_type = navy
+		xp_unlock_cost = 100
+		doctrine = yes
+		research_cost = 3
+
+		path = {
+			leads_to_tech = reconnaissance_sweeps_brwn
+			research_cost_coeff = 1
+		}
+
+		categories = {
+			naval_doctrine
+			cat_brown_water_navy
+		}
+
+		folder = {
+			name = naval_doctrine_folder
+			position = { x = 24 y = 2 }
+		}
+	}
+	reconnaissance_sweeps_brwn = {
+		# EFFECT #############
+		########
+
+		maritime_patrol_plane = {
+			naval_strike_targetting = 0.1
+		}
+		frigate = {
+			surface_detection = 0.1
+		}
+
+		xp_research_type = navy
+		xp_unlock_cost = 100
+		doctrine = yes
+		research_cost = 3
+
+		path = {
+			leads_to_tech = coastal_submarine_optimization_brwn
+			research_cost_coeff = 1
+		}
+
+		categories = {
+			naval_doctrine
+			cat_brown_water_navy
+		}
+
+		folder = {
+			name = naval_doctrine_folder
+			position = { x = 24 y = 4 }
+		}
+	}
+	coastal_submarine_optimization_brwn = {
+		# EFFECT #############
+		########
+		submarine = {
+			max_organisation = 5
+		}
+
+		xp_research_type = navy
+		xp_unlock_cost = 100
+		doctrine = yes
+		research_cost = 3
+
+		path = {
+			leads_to_tech = local_escort_capability
+			research_cost_coeff = 1
+		}
+
+		categories = {
+			naval_doctrine
+			cat_brown_water_navy
+		}
+
+		folder = {
+			name = naval_doctrine_folder
+			position = { x = 24 y = 6 }
+		}
+	}
+	patrol_gunboats = {
+		# EFFECT #############
+		########
+
+		frigate = {
+			maximum_speed = 0.1
+		}
+		frigate = {
+			reliability = 0.1
+		}
+
+		xp_research_type = navy
+		xp_unlock_cost = 100
+		doctrine = yes
+		research_cost = 3
+
+		path = {
+			leads_to_tech = surface_combatant_emphasis_brwn
+			research_cost_coeff = 1
+		}
+
+		categories = {
+			naval_doctrine
+			cat_brown_water_navy
+		}
+
+		folder = {
+			name = naval_doctrine_folder
+			position = { x = 28 y = 2 }
+		}
+	}
+	surface_combatant_emphasis_brwn = {
+		# EFFECT #############
+		########
+
+		destroyer = {
+			max_organisation = 10
+			lg_attack = 0.1
+			search_and_destroy_coordination = 5
+		}
+
+		xp_research_type = navy
+		xp_unlock_cost = 100
+		doctrine = yes
+		research_cost = 3
+
+		path = {
+			leads_to_tech = littoral_defense_brwn
+			research_cost_coeff = 1
+		}
+
+		categories = {
+			naval_doctrine
+			cat_brown_water_navy
+		}
+
+		folder = {
+			name = naval_doctrine_folder
+			position = { x = 28 y = 4 }
+		}
+	}
+	littoral_defense_brwn = {
+		# EFFECT #############
+		########
+		coastal_bunker_effectiveness_factor = 0.05
+		destroyer = {
+            armor_value = 0.1
+        }
+		frigate = {
+            armor_value = 0.1
+        }
+
+		xp_research_type = navy
+		xp_unlock_cost = 100
+		doctrine = yes
+		research_cost = 3
+
+		path = {
+			leads_to_tech = local_escort_capability
+			research_cost_coeff = 1
+		}
+
+		categories = {
+			naval_doctrine
+			cat_brown_water_navy
+		}
+
+		folder = {
+			name = naval_doctrine_folder
+			position = { x = 28 y = 6 }
+		}
+	}
+	local_escort_capability = {
+		# EFFECT #############
+		########
+
+		convoy_escort_efficiency = 0.1
+
+		xp_research_type = navy
+		xp_unlock_cost = 100
+		doctrine = yes
+		research_cost = 3
+
+		path = {
+			leads_to_tech = inland_operations
+			research_cost_coeff = 1
+		}
+
+		categories = {
+			naval_doctrine
+			cat_brown_water_navy
+		}
+
+		folder = {
+			name = naval_doctrine_folder
+			position = { x = 26 y = 8 }
+		}
+	}
+	inland_operations = {
+		# EFFECT #############
+		########
+
+		naval_invasion_capacity = 5
+		amphibious_invasion = 0.1
+		naval_invasion_penalty = -0.1
+
+		xp_research_type = navy
+		xp_unlock_cost = 100
+		doctrine = yes
+		research_cost = 3
+
+		path = {
+			leads_to_tech = small_ship_patrols
+			research_cost_coeff = 1
+		}
+
+		categories = {
+			naval_doctrine
+			cat_brown_water_navy
+		}
+
+		folder = {
+			name = naval_doctrine_folder
+			position = { x = 26 y = 10 }
+		}
+	}
+	small_ship_patrols = {
+		# EFFECT #############
+		########
+
+		destroyer = {
+			max_organisation = 5
+			search_and_destroy_coordination = 0.1
+		}
+		frigate = {
+			max_organisation = 5
+			search_and_destroy_coordination = 0.1
+		}
+		
+		xp_research_type = navy
+		xp_unlock_cost = 100
+		doctrine = yes
+		research_cost = 3
+
+		categories = {
+			naval_doctrine
+			cat_brown_water_navy
+		}
+
+		folder = {
+			name = naval_doctrine_folder
+			position = { x = 26 y = 12 }
+		}
+	}
+}
+

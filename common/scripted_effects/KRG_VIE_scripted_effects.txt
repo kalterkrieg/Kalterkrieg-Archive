@@ -1,0 +1,186 @@
+VIE_revolt = {
+	JAP = {
+		VIN = {
+			get_current_government_type = yes
+		}
+		if = {
+			limit = {
+				has_subject_autonomy_feature = yes
+			}
+			set_autonomy = {
+				target = VIN
+				autonomous_state = krg_military_occupation
+			}
+		}
+		else = {
+			puppet = VIN
+		}
+		save_event_target_as = on_puppet_master_tag
+		VIN = {
+			standard_on_puppet_effect = yes
+			restore_previous_government_type = yes
+		}
+	}
+	VIN = {
+		hidden_effect = {
+			939 = {
+				add_core_of = VIE
+			}
+			940 = {
+				add_core_of = VIE
+			}
+			941 = {
+				add_core_of = VIE
+			}
+			937 = {
+				add_core_of = VIE
+			}
+			every_owned_state = {
+				limit = { is_core_of = VIE }
+				transfer_state_to = VIE
+			}
+			VIE = {
+				inherit_technology = PREV
+				create_faction = "Indochinese Liberation Struggle"
+				load_oob = "VIE_revolt"
+			}
+			every_owned_state = {
+				add_core_of = VIE
+			}
+			SIA = {
+				966 = {
+					transfer_state_to = CAM
+				}
+				967 = {
+					add_resistance = 50
+				}
+				964 = {
+					add_resistance = 50
+				}
+				962 = {
+					add_resistance = 50
+				}
+				741 = {
+					add_resistance = 50
+				}
+				968 = {
+					add_resistance = 50
+				}
+				963 = {
+					add_resistance = 50
+				}
+				country_event = { #Siam will resolve their shit and intervene in the war if it's till ongoing.
+					id = krg_vin.1
+					months = 24
+					days = 3
+				}
+			}
+			VIE = {
+				if = {
+					limit = {
+						has_subject_autonomy_feature = yes
+					}
+					set_autonomy = {
+						target = CAM
+						autonomous_state = krg_puppet
+					}
+				}
+				else = {
+					puppet = CAM
+				}
+				save_event_target_as = on_puppet_master_tag
+				CAM = {
+					standard_on_puppet_effect = yes
+				}
+			}
+			LAO = {
+				clear_geacps_alignment = yes
+				JAP = { end_puppet = PREV }
+				set_politics = {
+					ruling_party = radical_socialist
+					last_election = "1888.6.15"
+					election_frequency = 48
+					elections_allowed = no
+				}
+				add_popularity = {
+					ideology = radical_socialist
+					popularity = 0.2
+				}
+				add_popularity = {
+					ideology = authoritarian_socialist
+					popularity = 0.1
+				}
+				add_popularity = {
+					ideology = social_democrat
+					popularity = 0.1
+				}
+				coal_add_auth_soc = yes
+				coal_add_soc_dem = yes		
+				load_oob = "LAO_revolt"	
+			}
+			CAM = {
+				inherit_technology = SIA
+				set_politics = {
+					ruling_party = radical_socialist
+					last_election = "1888.6.15"
+					election_frequency = 48
+					elections_allowed = no
+				}
+				set_popularities = {
+					authoritarian_socialist = 5
+					radical_socialist = 38
+					social_democrat = 13
+					revolutionary_republican = 17
+					social_liberal = 0
+					market_liberal = 0
+					social_conservative = 7
+					authoritarian_democrat = 2
+					paternal_autocrat = 17
+					national_populist = 1
+				}
+				coal_add_auth_soc = yes
+				load_oob = "CAM_revolt"
+			}
+			VIE = {
+				add_to_faction = CAM
+				add_to_faction = LAO
+			}
+			SIA = {
+				add_ideas = SIA_national_disorder
+			}
+			
+			CAL = {
+				VIE = { save_event_target_as = volunteer_target }
+				send_volunteers_to_TARGET = yes
+			}
+			
+		}
+		declare_war_on = {
+			target = VIE
+			type = civil_war
+		}
+		CAM = {
+			add_to_war = { 
+				targeted_alliance = VIE
+				enemy = VIN 
+				hostility_reason = asked_to_join
+			}
+		}
+		LAO = {
+			add_to_war = { 
+				targeted_alliance = VIE
+				enemy = VIN 
+				hostility_reason = asked_to_join
+			}
+		}
+
+		AST = {
+			country_event = { id = AST_dip.0 days = 5 }
+		}
+
+		CHI = {
+			country_event = { id = krg_chi_dip.0 days = 5 }
+		}
+		
+	}
+}

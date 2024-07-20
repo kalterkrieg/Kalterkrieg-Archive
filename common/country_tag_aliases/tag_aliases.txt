@@ -1,0 +1,45 @@
+#	# while checking for triggers/variables, current scope will be the country we are checking and PREV will be the scope that uses the alias
+#	# if none of the following targets are defined, the game will check all existing countries but this is highly discouraged for performance reasons
+#	original_tag = GER # pick a country that has original_tag of GER
+#	targets = { GER FRA ENG } # search within the list of tags/variables
+#	target_array = array_name # search within an array 
+#
+#	# by default alias will return the first existing country that it matches and fulfils the triggers. you can also define a scoring system like this and it will pick the tag with the highest score > 0
+#	country_score = {
+#		base = 1
+#		modifier = {
+#			add = 10
+#			# if mapped tag is in same faction with the country in scope that calls this alias give it a higher score
+#			is_in_faction_with = PREV
+#		}
+#		modifier = {
+#			add = 5
+#			# if the mapped tag has fascism give it a higher score
+#			has_government = fascism
+#		}
+#	}
+#
+#	fallback = GER # if the alias can't match anything, use this one as fallback (no triggers or weight will be checked)
+#
+#	# you can define a list of trigger, in that case it will chech is tags that this alias is mapped to and return only if the triggers are true
+#	or = {
+#		#only accept targets that is ally with us or is fascist
+#		is_in_faction_with = PREV
+#		has_government = fascism
+#	}
+#	# trigger 2
+#	# trigger 3
+#	# ...
+#}
+
+ENT = {
+	global_event_target = KRG_entente_leader
+
+	fallback = CAN
+}
+
+COA = { ##AAPM Kongo
+	global_event_target = KRG_AAPM_congo
+
+	fallback = COG
+}

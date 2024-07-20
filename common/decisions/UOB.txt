@@ -1,0 +1,81 @@
+crisis = {
+	UOB_accord_intervention = {
+		allowed = {
+			OR = {
+				tag = MXF
+				tag = UOB
+				tag = ENG
+			}
+		}
+
+		activation = {
+			always = no
+		}
+
+		cancel_trigger = {
+			NOT = {
+				OR = {
+					ENG = {
+						has_war_with_wargoal_against = {
+							target = UOB
+							type = civil_war
+						}
+					}
+					ENG = {
+						has_war_with_wargoal_against = {
+							target = MXF
+							type = civil_war
+						}
+					}
+				}
+			}
+		}
+
+		available = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+
+		days_mission_timeout = 60
+
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout UOB_accord_intervention target: [From.GetName]"
+			effect_tooltip = {
+				news_event = { id = krg_uob_news.4 }
+				CAN = {
+					add_to_war = {
+						targeted_alliance = ENG
+						enemy = UOB
+						hostility_reason = asked_to_join
+					}
+					add_to_war = {
+						targeted_alliance = ENG
+						enemy = MXF
+						hostility_reason = asked_to_join
+					}
+				}
+			}
+			hidden_effect = {
+				if = {
+					limit = { 
+						tag = ENG
+					}
+					news_event = { id = krg_uob_news.4 }
+					CAN = {
+						add_to_war = {
+							targeted_alliance = ENG
+							enemy = UOB
+							hostility_reason = asked_to_join
+						}
+						add_to_war = {
+							targeted_alliance = ENG
+							enemy = MXF
+							hostility_reason = asked_to_join
+						}
+					}
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,350 @@
+TEX_focus_rural_reconstruction_act = {
+	unlock_decision_tooltip = TEX_Rural_Reconstruction_Act_Start
+	custom_effect_tooltip = CAL_Bill_Focus_Tree_tt
+	effect_tooltip = {
+		TEX_upgrade_lost_generation = yes
+	}
+}
+
+TEX_focus_Separate_but_Equal = {
+	swap_ideas = {
+		remove_idea = TEX_racial_discrimination
+		add_idea = TEX_racial_discrimination_2
+	}
+}
+
+TEX_focus_Groundwork_Civil_Rights = {
+	swap_ideas = {
+		remove_idea = TEX_racial_discrimination
+		add_idea = TEX_civil_rights
+	}
+}
+
+TEX_focus_Anti_Lynching_Act = {
+	unlock_decision_tooltip = TEX_Anti_Lynching_Act_Start
+	custom_effect_tooltip = CAL_Bill_Focus_Tree_tt
+	effect_tooltip = {
+		if = {
+			limit = {
+				has_idea = TEX_civil_rights
+			}
+			swap_ideas = {
+				remove_idea = TEX_civil_rights
+				add_idea = TEX_civil_rights_2
+			}
+		}
+		else_if = {
+			limit = {
+				has_idea = TEX_racial_discrimination_2
+			}
+			swap_ideas = {
+				remove_idea = TEX_racial_discrimination_2
+				add_idea = TEX_racial_discrimination
+			}
+		}
+		else = {
+			custom_effect_tooltip = TEX_Anti_Lynching_Act_tt
+			swap_ideas = {
+				remove_idea = TEX_civil_rights
+				add_idea = TEX_civil_rights_2
+			}
+			custom_effect_tooltip = TEX_Anti_Lynching_Act_tt2
+			swap_ideas = {
+				remove_idea = TEX_racial_discrimination_2
+				add_idea = TEX_racial_discrimination
+			}
+		}
+	}
+}
+
+TEX_focus_Minority_Voting_Rights_Act = {
+	unlock_decision_tooltip = TEX_Minority_Voting_Rights_Act_Start
+	custom_effect_tooltip = CAL_Bill_Focus_Tree_tt
+	effect_tooltip = {
+		if = {
+			limit = {
+				has_idea = TEX_civil_rights_2
+			}
+			swap_ideas = {
+				remove_idea = TEX_civil_rights_2
+				add_idea = TEX_civil_rights_3
+			}
+		}
+		else_if = {
+			limit = {
+				has_idea = TEX_racial_discrimination
+			}
+			swap_ideas = {
+				remove_idea = TEX_racial_discrimination
+				add_idea = TEX_civil_rights
+			}
+		}
+		else = {
+			custom_effect_tooltip = TEX_Long_Anti_Lynching_Act_tt
+			swap_ideas = {
+				remove_idea = TEX_civil_rights_2
+				add_idea = TEX_civil_rights_3
+			}
+			custom_effect_tooltip = TEX_Long_Anti_Lynching_Act_tt2
+			swap_ideas = {
+				remove_idea = TEX_racial_discrimination
+				add_idea = TEX_civil_rights
+			}
+		}
+	}
+}
+
+TEX_focus_States_Rights_Act = {
+	unlock_decision_tooltip = TEX_States_Rights_Act_Start
+	custom_effect_tooltip = CAL_Bill_Focus_Tree_tt
+	effect_tooltip = {
+		if = {
+			limit = {
+				has_idea = TEX_civil_rights_2
+			}
+			swap_ideas = {
+				remove_idea = TEX_civil_rights_2
+				add_idea = TEX_civil_rights
+			}
+		}
+		else_if = {
+			limit = {
+				has_idea = TEX_racial_discrimination
+			}
+			swap_ideas = {
+				remove_idea = TEX_racial_discrimination
+				add_idea = TEX_racial_discrimination_2
+			}
+		}
+	}
+}
+
+TEX_focus_social_security_act = {
+	unlock_decision_tooltip = TEX_Social_Security_Act_Start
+	custom_effect_tooltip = CAL_Bill_Focus_Tree_tt
+	effect_tooltip = {
+		move_up_service_spending = yes
+		TEX_upgrade_social_security = yes
+	}
+}
+
+TEX_focus_vocational_schools = {
+	unlock_decision_tooltip = TEX_Vocational_Schools_Act_Start
+	custom_effect_tooltip = CAL_Bill_Focus_Tree_tt
+	effect_tooltip = {
+		swap_ideas = {
+			remove_idea = econ_small_edu_spending
+			add_idea = econ_medium_edu_spending
+		}
+	}
+}
+
+TEX_focus_Land_Development_Act = {
+	unlock_decision_tooltip = TEX_Land_Development_Act_Start
+	custom_effect_tooltip = CAL_Bill_Focus_Tree_tt
+	effect_tooltip = {
+		TEX_upgrade_lost_generation = yes
+	}
+}
+
+TEX_focus_Industrial_Reconstruction_Act = {
+	unlock_decision_tooltip = TEX_Industrial_Reconstruction_Act_Start
+	custom_effect_tooltip = CAL_Bill_Focus_Tree_tt
+	effect_tooltip = {
+		TEX_upgrade_lost_generation = yes
+	}
+}
+
+TEX_focus_Standardization_of_Labor_Act = {
+	unlock_decision_tooltip = TEX_Standardization_of_Labor_Act_Start
+	custom_effect_tooltip = CAL_Bill_Focus_Tree_tt
+	effect_tooltip = {
+		add_ideas = TEX_protection_workers
+	}
+}
+
+TEX_focus_Demolish_and_Replace = {
+	every_owned_state = {
+		limit = {
+			is_core_of = TEX
+		}
+		custom_effect_tooltip = TEX_Long_Demolish_and_Replace_tt
+		set_variable = {
+			TEX_highways_modifier1 = -0.05
+		}
+		set_variable = {
+			TEX_highways_modifier2 = 0.05
+		}
+		add_dynamic_modifier = {
+			modifier = TEX_state_highways
+		}
+	}
+}
+
+TEX_focus_Rename_and_Construct = {
+	every_owned_state = {
+		limit = {
+			is_core_of = TEX
+		}
+		custom_effect_tooltip = TEX_Long_Rename_and_Construct_tt
+		set_variable = {
+			TEX_highways_modifier1 = 0.05
+		}
+		set_variable = {
+			TEX_highways_modifier2 = -0.05
+		}
+		add_dynamic_modifier = {
+			modifier = TEX_state_highways
+		}
+	}
+}
+
+TEX_focus_construct_union_highways = {
+	random_owned_state = {
+		add_building_construction = {
+			type = infrastructure
+			level = 5
+			instant_build = yes
+		}
+	}
+}
+
+TEX_focus_Rural_Healthcare_Act = {
+	custom_effect_tooltip = generic_healthcare_large_tt
+	if = {
+		limit = {
+			has_idea = econ_tiny_hc_spending
+		}
+		swap_ideas = {
+			remove_idea = econ_tiny_hc_spending
+			add_idea = econ_large_hc_spending
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = econ_small_hc_spending
+		}
+		swap_ideas = {
+			remove_idea = econ_small_hc_spending
+			add_idea = econ_large_hc_spending
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = econ_medium_hc_spending
+		}
+		swap_ideas = {
+			remove_idea = econ_medium_hc_spending
+			add_idea = econ_large_hc_spending
+		}
+	}
+	else = {
+		add_political_power = 75		#?
+	}
+}
+
+TEX_focus_Federal_Healthcare_Act = {
+	custom_effect_tooltip = generic_healthcare_move_up_tt
+	move_up_hc_spending = yes
+}
+
+TEX_focus_Federal_Healthcare_Act = {
+	custom_effect_tooltip = generic_healthcare_move_up_tt
+	move_up_hc_spending = yes
+}
+
+TEX_focus_Agricultural_Relief_Act = {
+	363 = {
+		add_extra_state_shared_building_slots = 1
+		add_building_construction = {
+			type = industrial_complex
+			level = 1
+			instant_build = yes
+		}
+	}
+	372 = {
+		add_extra_state_shared_building_slots = 1
+		add_building_construction = {
+			type = industrial_complex
+			level = 1
+			instant_build = yes
+		}
+	}
+	383 = {
+		add_extra_state_shared_building_slots = 1
+		add_building_construction = {
+			type = industrial_complex
+			level = 1
+			instant_build = yes
+		}
+	}
+	custom_effect_tooltip = TEX_Agricultural_Relief_Act_Complete_tt
+	hidden_effect = {
+		IF = {
+			limit = {
+				OR = {
+					has_government = authoritarian_democrat
+					has_government = paternal_autocrat
+				}
+			}
+			set_temp_variable = {
+				TEX_ea_attacker = 0
+			}
+		}
+		else_if = {
+			limit = {
+				OR = {
+					has_government = social_conservative
+					has_government = social_liberal
+				}
+			}
+			set_temp_variable = {
+				TEX_ea_attacker = 1
+			}
+		}
+		ELSE_IF = {
+			limit = {
+				has_government = social_democrat
+			}
+			set_temp_variable = {
+				TEX_ea_attacker = 3
+			}
+		}
+		363 = {
+			set_temp_variable = {
+				pop_type_added = TEX.TEX_ea_attacker
+			}			# 0 is auth dem, 1 is conservative etc. refer to order of ids
+			set_temp_variable = {
+				pop_value_added = 2
+			}			# percent added
+			TEX_add_electoral_popularity = yes
+		}
+		372 = {
+			set_temp_variable = {
+				pop_type_added = TEX.TEX_ea_attacker
+			}			# 0 is auth dem, 1 is conservative etc. refer to order of ids
+			set_temp_variable = {
+				pop_value_added = 2
+			}			# percent added
+			TEX_add_electoral_popularity = yes
+		}
+		383 = {
+			set_temp_variable = {
+				pop_type_added = TEX.TEX_ea_attacker
+			}			# 0 is auth dem, 1 is conservative etc. refer to order of ids
+			set_temp_variable = {
+				pop_value_added = 2
+			}			# percent added
+			TEX_add_electoral_popularity = yes
+		}
+	}
+}
+
+TEX_focus_Equal_Teaching_Opportunities_Act = {
+	unlock_decision_tooltip = TEX_Minority_Voting_Rights_Act_Start
+	custom_effect_tooltip = CAL_Bill_Focus_Tree_tt
+	add_timed_idea = {
+		idea = TEX_equal_teaching_rights
+		days = 180
+	}
+}

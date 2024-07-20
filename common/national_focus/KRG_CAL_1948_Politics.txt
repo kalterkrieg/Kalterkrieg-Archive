@@ -1,0 +1,2086 @@
+#!gfx:interface/Kalterkrieg/KRG_goals.gfx
+####################################
+### Guess Who's Back, Back Again ###
+### Warren's Back, Tell a Friend ###
+### Warren Tree: By Desu		 ###
+####################################
+
+shared_focus = {
+	id = CAL_Warrens_Second_Term
+	icon = GFX_CAL_Warren
+	x = 22
+	y = 0
+	cost = 3
+	available_if_capitulated = yes
+	available = {
+		has_country_flag = CAL_Warren_Inaugurated
+	}
+	completion_reward = {
+		add_political_power = 40
+	}
+}
+### DOMESTIC POLICY ###
+shared_focus = {
+	id = CAL_The_Fair_Labor_Standards_Act
+	icon = GFX_generic_workers_rights
+	relative_position_id = CAL_Warrens_Second_Term
+	x = -5
+	y = 1
+	cost = 3
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = { focus = CAL_Warrens_Second_Term }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		unlock_decision_tooltip = CAL_Law_Fair_Labor_Standards_Act_Start
+		custom_effect_tooltip = CAL_Bill_Focus_Tree_tt
+		effect_tooltip = {
+			CAL_law_3_effect = yes
+		}
+	}
+}
+shared_focus = {
+	id = CAL_Electrify_Rural_Regions
+	icon = GFX_generic_electricity
+	relative_position_id = CAL_Warrens_Second_Term
+	x = -7
+	y = 2
+	cost = 3
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = { focus = CAL_The_Fair_Labor_Standards_Act }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		unlock_decision_tooltip = CAL_Law_National_Electrification_Act_Start
+		custom_effect_tooltip = CAL_Bill_Focus_Tree_tt
+		effect_tooltip = {
+			788 = {
+				move_up_state_category = yes
+			}
+			929 = {
+				move_up_state_category = yes
+			}
+			931 = {
+				move_up_state_category = yes
+			}
+			custom_effect_tooltip = CAL_National_Electrification_Act_Complete_tt
+		}
+	}
+}
+shared_focus = {
+	id = CAL_Fund_Infrastructure_Initiatives
+	icon = GFX_generic_railroad_2
+	relative_position_id = CAL_Warrens_Second_Term
+	x = -6
+	y = 3
+	cost = 3
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = { focus = CAL_Electrify_Rural_Regions }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		unlock_decision_tooltip = CAL_Law_Federal_Highway_And_Infrastructure_Act_Start
+		custom_effect_tooltip = CAL_Bill_Focus_Tree_tt
+		effect_tooltip = {
+			random_core_state = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}	
+			} 
+			random_core_state = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}	
+			} 
+			move_up_inf_spending = yes
+			add_timed_idea = {
+				idea = CAL_Infrastructure_Boom
+				days = 180
+			}
+		}
+	}
+}
+shared_focus = {
+	id = CAL_The_Housing_And_Residency_Act
+	icon = GFX_generic_social_housing
+	relative_position_id = CAL_Warrens_Second_Term
+	x = -8
+	y = 3
+	cost = 3
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = { focus = CAL_Electrify_Rural_Regions }
+	prerequisite = { focus = CAL_Expand_Refugee_Programs }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		unlock_decision_tooltip = CAL_Law_Housing_and_Residency_Act_Start
+		custom_effect_tooltip = CAL_Bill_Focus_Tree_tt
+		effect_tooltip = {
+			random_core_state = {
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}	
+			} 
+			random_core_state = {
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}	
+			} 
+			add_stability = 0.05
+			add_manpower = 10000
+		}
+	}
+}
+shared_focus = {
+	id = CAL_Modernize_the_Agricultural_Sector
+	icon = GFX_AUS_agriculture
+	relative_position_id = CAL_Warrens_Second_Term
+	x = -7
+	y = 4
+	cost = 3
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = { focus = CAL_Electrify_Rural_Regions }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		unlock_decision_tooltip = CAL_Law_Agricultural_Modernization_Act_Start
+		custom_effect_tooltip = CAL_Bill_Focus_Tree_tt
+		effect_tooltip = {
+			387 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			825 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			385 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			custom_effect_tooltip = CAL_National_Electrification_Act_Complete_tt
+				hidden_effect = {
+					set_temp_variable = { temp_popularity = 2 }
+					set_temp_variable = { temp_party = 3 }
+					set_temp_variable = { temp_state = 788 }
+					CAL_electoral_modify_popularity = yes
+					set_temp_variable = { temp_popularity = 2 }
+					set_temp_variable = { temp_party = 3 }
+					set_temp_variable = { temp_state = 929 }
+					CAL_electoral_modify_popularity = yes
+					set_temp_variable = { temp_popularity = 2 }
+					set_temp_variable = { temp_party = 3 }
+					set_temp_variable = { temp_state = 931 }
+					CAL_electoral_modify_popularity = yes
+					set_temp_variable = { temp_popularity = 2 }
+					set_temp_variable = { temp_party = 3 }
+					set_temp_variable = { temp_state = 379 }
+					CAL_electoral_modify_popularity = yes
+					set_temp_variable = { temp_popularity = 2 }
+					set_temp_variable = { temp_party = 3 }
+					set_temp_variable = { temp_state = 387 }
+					CAL_electoral_modify_popularity = yes
+					if = {
+						limit = {
+							463 = {
+								has_state_flag = alaska_state
+							}
+						}
+						set_temp_variable = { temp_popularity = 2 }
+						set_temp_variable = { temp_party = 3 }
+						set_temp_variable = { temp_state = 463 }
+						CAL_electoral_modify_popularity = yes
+					}
+				}
+		}
+	}
+}
+shared_focus = {
+	id = CAL_Enact_Pollution_Limitations
+	icon = GFX_generic_trees
+	relative_position_id = CAL_Warrens_Second_Term
+	x = -8
+	y = 5
+	cost = 3
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = { focus = CAL_Modernize_the_Agricultural_Sector }
+	prerequisite = { focus = CAL_The_Housing_And_Residency_Act }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		unlock_decision_tooltip = CAL_Law_Air_Pollution_and_Environmental_Act_Start
+		custom_effect_tooltip = CAL_Bill_Focus_Tree_tt
+		effect_tooltip = {
+			add_ideas = CAL_Environment_Agency
+			add_stability = 0.05
+		}
+		custom_effect_tooltip = CAL_Environment_Agency_tt
+	}
+}
+shared_focus = {
+	id = CAL_Expand_Refugee_Programs
+	icon = GFX_NEE_integrate_refugees
+	relative_position_id = CAL_Warrens_Second_Term
+	x = -5
+	y = 2
+	cost = 3
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = { focus = CAL_The_Fair_Labor_Standards_Act }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		unlock_decision_tooltip = CAL_Law_Displaced_Persons_And_Refugees_Act_Start
+		custom_effect_tooltip = CAL_Bill_Focus_Tree_tt
+		effect_tooltip = {
+			if = { limit = { has_idea = CAL_Altered_Refugee_Quotas }
+			swap_ideas = {
+				remove_idea = CAL_Altered_Refugee_Quotas
+				add_idea = CAL_Displaced_Persons_And_Refugees_Act_idea_2
+			}
+		}
+		else = {
+			add_ideas = CAL_Displaced_Persons_And_Refugees_Act_idea
+		}
+			add_manpower = 100000
+		}
+	}
+}
+shared_focus = {
+	id = CAL_Tackle_War_Profiteering
+	icon = GFX_generic_seize_money
+	relative_position_id = CAL_Warrens_Second_Term
+	x = -4
+	y = 3
+	cost = 3
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = { focus = CAL_Expand_Refugee_Programs }
+	prerequisite = { focus = CAL_Adjust_the_Tax_Code }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		unlock_decision_tooltip = CAL_Law_War_Profiteering_Investigative_Act_Start
+		custom_effect_tooltip = CAL_Bill_Focus_Tree_tt
+		effect_tooltip = {
+				country_event = {
+					id = krg_cal_politics.15
+				}
+				add_stability = 0.05
+				add_timed_idea = {
+					idea = CAL_Market_Disruptions
+					days = 180
+				}
+		}
+	}
+}
+shared_focus = {
+	id = CAL_Assist_Our_Veterans
+	icon = GFX_generic_veterans_benefits
+	relative_position_id = CAL_Warrens_Second_Term
+	x = -5
+	y = 4
+	cost = 3
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = { focus = CAL_Expand_Refugee_Programs }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		unlock_decision_tooltip = CAL_Law_Veterans_Readjustment_and_Assistance_Act_Start
+		custom_effect_tooltip = CAL_Bill_Focus_Tree_tt
+		effect_tooltip = {
+			move_up_hc_spending = yes
+			add_war_support = 0.05
+		}
+	}
+}
+shared_focus = {
+	id = CAL_Adjust_the_Tax_Code
+	icon = GFX_generic_tax
+	relative_position_id = CAL_Warrens_Second_Term
+	x = -3
+	y = 2
+	cost = 3
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = { focus = CAL_The_Fair_Labor_Standards_Act }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		unlock_decision_tooltip = CAL_Law_Revenue_Act_Start
+		custom_effect_tooltip = CAL_Bill_Focus_Tree_tt
+		effect_tooltip = {
+			add_ideas = { CAL_Streamlined_Tax_Code }
+		}
+	}
+}
+shared_focus = {
+	id = CAL_Toughen_Anti_Trust_Laws
+	icon = GFX_generic_price_control
+	relative_position_id = CAL_Warrens_Second_Term
+	x = -2
+	y = 3
+	cost = 3
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = { focus = CAL_Adjust_the_Tax_Code }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		unlock_decision_tooltip = CAL_Law_Anti-Merger_Act_Start
+		custom_effect_tooltip = CAL_Bill_Focus_Tree_tt
+		effect_tooltip = {
+			add_ideas = { CAL_Anti_Trust_Legislation }
+		}
+	}
+}
+shared_focus = {
+	id = CAL_Restrict_Lobbying_Activities
+	icon = GFX_generic_control_lobyists
+	relative_position_id = CAL_Warrens_Second_Term
+	x = -3
+	y = 4
+	cost = 3
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = { focus = CAL_Toughen_Anti_Trust_Laws }
+	prerequisite = { focus = CAL_Tackle_War_Profiteering }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		unlock_decision_tooltip = CAL_Law_Lobbying_And_Legislative_Organization_Act_Start
+		custom_effect_tooltip = CAL_Bill_Focus_Tree_tt
+		effect_tooltip = {
+			add_ideas = { CAL_Lobbying_Act }
+			add_stability = 0.05
+		}
+		custom_effect_tooltip = CAL_Extra_Lobbying_Cost_tt
+	}
+}
+shared_focus = {
+	id = CAL_The_Social_Security_Act
+	icon = GFX_generic_social_reforms
+	relative_position_id = CAL_Warrens_Second_Term
+	x = -5
+	y = 5
+	cost = 3
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = { focus = CAL_Restrict_Lobbying_Activities }
+	prerequisite = { focus = CAL_Assist_Our_Veterans }
+	prerequisite = { focus = CAL_Modernize_the_Agricultural_Sector }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		unlock_decision_tooltip = CAL_Law_Social_Security_Amendment_Act_Start
+		custom_effect_tooltip = CAL_Bill_Focus_Tree_tt
+		effect_tooltip = {
+			move_up_service_spending = yes
+		}
+	}
+}
+### SHARED FOREIGN POLICY ###
+shared_focus = {
+	id = CAL_Restart_Diplomatic_Initiatives
+	icon = GFX_generic_foreign_diplomacy
+	relative_position_id = CAL_Warrens_Second_Term
+	x = 8
+	y = 1
+	cost = 3
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = { focus = CAL_Warrens_Second_Term focus = CAL_Hughes_Admin }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		add_political_power = 50
+	}
+}
+shared_focus = {
+	id = CAL_Connect_Americas_Remnants
+	icon = GFX_NEE_handshake_GLG
+	relative_position_id = CAL_Warrens_Second_Term
+	x = 3
+	y = 2
+	cost = 3
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = { focus = CAL_Restart_Diplomatic_Initiatives }
+	available = { has_completed_focus = CAL_Warrens_Second_Term }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		CAL = { add_ideas = CAL_Free_Peoples_Of_America 
+			add_opinion_modifier = {
+				target = GLG
+				modifier = cal_accordist_state
+			}
+			add_opinion_modifier = {
+				target = NEE
+				modifier = cal_accordist_state
+			}
+		}
+		NEE = { add_ideas = CAL_Free_Peoples_Of_America 
+			add_opinion_modifier = {
+				target = GLG
+				modifier = cal_accordist_state
+			}
+			add_opinion_modifier = {
+				target = CAL
+				modifier = cal_accordist_state
+			}
+		}
+		GLG = { add_ideas = CAL_Free_Peoples_Of_America 
+			add_opinion_modifier = {
+				target = CAL
+				modifier = cal_accordist_state
+			}
+			add_opinion_modifier = {
+				target = NEE
+				modifier = cal_accordist_state
+			}	
+		}
+	}
+}
+shared_focus = {
+	id = CAL_Visit_Boston
+	icon = GFX_CAL_visit_boston
+	relative_position_id = CAL_Warrens_Second_Term
+	x = 2
+	y = 3
+	cost = 3
+
+	ai_will_do = {
+		base = 150
+	}
+	
+	prerequisite = { focus = CAL_Connect_Americas_Remnants }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		country_event = {
+			id = krg_cal_warren.2
+		}
+	}
+}
+shared_focus = {
+	id = CAL_Visit_Detroit
+	icon = GFX_CAL_tour_motor_city
+	relative_position_id = CAL_Warrens_Second_Term
+	x = 4
+	y = 3
+	cost = 3
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = { focus = CAL_Connect_Americas_Remnants }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		country_event = {
+			id = krg_cal_warren.4
+		}
+	}
+}
+shared_focus = {
+	id = CAL_Coordinate_Economic_Initiatives
+	icon = GFX_generic_state_economy
+	relative_position_id = CAL_Warrens_Second_Term
+	x = 3
+	y = 4
+	cost = 3
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = { focus = CAL_Visit_Boston }
+	prerequisite = { focus = CAL_Visit_Detroit }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		swap_ideas = {
+			remove_idea = CAL_Free_Peoples_Of_America
+			add_idea = CAL_Free_Peoples_Of_America_2
+		}
+		CAL = {
+			random_core_state = {
+				add_extra_state_shared_building_slots = 3
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		NEE = {
+			random_core_state = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		GLG = {
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+}
+shared_focus = {
+	id = CAL_Begin_Joint_Intelligence_Operations
+	icon = GFX_generic_file_investigation
+	relative_position_id = CAL_Warrens_Second_Term
+	x = 1
+	y = 4
+	cost = 3
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = { focus = CAL_Visit_Boston }
+	prerequisite = { focus = CAL_Visit_Detroit }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		if = { limit = { has_dlc = "La Resistance"}
+			CAL = {
+				if = { limit = { has_intelligence_agency = no }
+					create_intelligence_agency = yes
+				}
+				else = {
+					upgrade_intelligence_agency = upgrade_anti_partisan
+				}
+			}
+			NEE = {
+				if = { limit = { has_intelligence_agency = no }
+					create_intelligence_agency = yes
+				}
+				else = {
+					upgrade_intelligence_agency = upgrade_anti_partisan
+				}
+			}
+			GLG = {
+				if = { limit = { has_intelligence_agency = no }
+					create_intelligence_agency = yes
+				}
+				else = {
+					upgrade_intelligence_agency = upgrade_anti_partisan
+				}
+			}
+		}
+		else = {
+			CAL = {
+				add_war_support = 0.05
+				add_stability = 0.03
+			}
+			NEE = {
+				add_war_support = 0.05
+				add_stability = 0.03
+			}
+			GLG = {
+				add_war_support = 0.05
+				add_stability = 0.03
+			}
+		}
+	}
+}
+shared_focus = {
+	id = CAL_The_Gateway_To_The_Americas
+	icon = GFX_USA_golden_gate
+	relative_position_id = CAL_Warrens_Second_Term
+	x = 4
+	y = 5
+	cost = 3
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = { focus = CAL_Coordinate_Economic_Initiatives }
+	prerequisite = { focus = CAL_Establish_Permanent_Ties_To_Ottawa }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		378 = {
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = industrial_complex
+				level = 2
+				instant_build = yes
+			}
+		}
+		swap_ideas = {
+			remove_idea = CAL_Free_Peoples_Of_America_2
+			add_idea = CAL_Free_Peoples_Of_America_3
+		}
+	}
+}
+shared_focus = {
+	id = CAL_Establish_Permanent_Ties_To_Ottawa
+	icon = GFX_CAN_psaalliance
+	relative_position_id = CAL_Warrens_Second_Term
+	x = 5
+	y = 4
+	cost = 3
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = { focus = CAL_Visit_Boston }
+	prerequisite = { focus = CAL_Visit_Detroit }
+	prerequisite = { focus = CAL_Expand_The_Foreign_Service }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		add_opinion_modifier = {
+			target = CAN
+			modifier = cal_accordist_state
+		}
+		add_political_power = 50
+		CAN = { 
+			add_opinion_modifier = {
+				target = CAL
+				modifier = cal_accordist_state
+			}
+			add_political_power = 50
+		} 
+		
+	}
+}
+shared_focus = {
+	id = CAL_Reintegrate_Former_Emigres
+	icon = GFX_PAL_American_Refugees
+	relative_position_id = CAL_Warrens_Second_Term
+	x = 6
+	y = 2
+	cost = 3
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = { focus = CAL_Restart_Diplomatic_Initiatives }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		add_timed_idea = {
+			idea = CAL_Reintegrate_Former_Emigres_idea
+			days = 365
+		}
+
+		378 = {
+			add_manpower = 73982
+		}
+
+		825 = {
+			add_manpower = 42817
+		}
+	}
+}
+shared_focus = {
+	id = CAL_Reopen_Air_Corridors
+	icon = GFX_generic_new_airforce
+	relative_position_id = CAL_Warrens_Second_Term
+	x = 10
+	y = 2
+	cost = 3
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = { focus = CAL_Restart_Diplomatic_Initiatives }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		add_stability = 0.025
+		add_political_power = 35
+		378 = {
+			add_building_construction = {
+				type = infrastructure
+				level = 2
+				instant_build = yes
+			}
+			add_building_construction = {
+				type = air_base
+				level = 3
+				instant_build = yes
+			}
+		}
+	}
+}
+shared_focus = {
+	id = CAL_Expand_The_Foreign_Service
+	icon = GFX_generic_globe
+	relative_position_id = CAL_Warrens_Second_Term
+	x = 8
+	y = 2
+	cost = 3
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = { focus = CAL_Restart_Diplomatic_Initiatives }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		unlock_decision_category_tooltip = CAL_foreign_diplomacy
+	}
+}
+shared_focus = {
+	id = CAL_Reaffirm_Asian_Relations
+	icon = GFX_generic_reaffirm_asian_relations
+	relative_position_id = CAL_Warrens_Second_Term
+	x = 6
+	y = 3
+	cost = 3
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = { focus = CAL_Expand_The_Foreign_Service }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		unlock_decision_tooltip = CAL_Establish_Australasian_Embassy
+		#unlock_decision_tooltip = CAL_Expand_the_Hawaiian_Mission
+		unlock_decision_tooltip = CAL_Send_Mission_to_India
+	}
+}
+shared_focus = {
+	id = CAL_Reach_Towards_Guangzhou
+	icon = GFX_generic_flag_large_CHI
+	relative_position_id = CAL_Warrens_Second_Term
+	x = 7
+	y = 4
+	cost = 3
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = { focus = CAL_Reaffirm_Asian_Relations }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		unlock_decision_tooltip = CAL_Establish_Chinese_Embassy
+		custom_effect_tooltip = CAL_Unlock_Chinese_Actions_Tooltip
+		unlock_decision_tooltip = CAL_Expand_Business_Ties_to_China
+		unlock_decision_tooltip = CAL_Sell_Small_Arms_to_China
+		unlock_decision_tooltip = CAL_Conduct_Training_Operations_with_China
+
+	}
+}
+shared_focus = {
+	id = CAL_Interfere_With_The_Sphere
+	icon = GFX_JAP_Co_Prosperity_Sphere
+	relative_position_id = CAL_Warrens_Second_Term
+	x = 6
+	y = 5
+	cost = 3
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = { focus = CAL_Reaffirm_Asian_Relations }
+	available = {
+		JAP = {
+			has_country_flag = JAP_Sphere_Destabilized
+		}
+	}
+	available_if_capitulated = yes
+
+	completion_reward = {
+		unlock_decision_tooltip = CAL_Create_the_Philippines_Mission
+		unlock_decision_tooltip = CAL_Create_the_Vietnam_Mission
+		custom_effect_tooltip = CAL_Unlock_Philippines_Actions_Tooltip
+		unlock_decision_tooltip = CAL_Fund_Filipino_Dissidents
+		unlock_decision_tooltip = CAL_Destabilize_the_Filipino_Administration
+		custom_effect_tooltip = CAL_Unlock_Vietnam_Actions_Tooltip
+		unlock_decision_tooltip = CAL_Support_Vietnamese_Rebels
+		unlock_decision_tooltip = CAL_Coordinate_with_the_Chinese
+	}
+}
+shared_focus = {
+	id = CAL_Meet_With_Europe
+	icon = GFX_generic_meet_europe
+	relative_position_id = CAL_Warrens_Second_Term
+	x = 10
+	y = 3
+	cost = 3
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = { focus = CAL_Expand_The_Foreign_Service }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		unlock_decision_tooltip = CAL_Send_Mission_to_Germany
+		unlock_decision_tooltip = CAL_Send_Mission_to_Danubia
+		unlock_decision_tooltip = CAL_Establish_British_Embassy
+		unlock_decision_tooltip = CAL_Establish_French_Embassy
+	}
+}
+shared_focus = {
+	id = CAL_Promote_European_Democracy
+	icon = GFX_generic_liberty
+	relative_position_id = CAL_Warrens_Second_Term
+	x = 9
+	y = 4
+	cost = 3
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = { focus = CAL_Meet_With_Europe }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		unlock_decision_tooltip = CAL_Send_Mission_to_Spain
+		unlock_decision_tooltip = CAL_Send_Mission_to_Norway
+		unlock_decision_tooltip = CAL_Send_Mission_to_Ireland
+		unlock_decision_tooltip = CAL_Send_Mission_to_Sweden
+	}
+}
+shared_focus = {
+	id = CAL_Look_Towards_The_Americas
+	icon = GFX_GUA_bananas
+	relative_position_id = CAL_Warrens_Second_Term
+	x = 8
+	y = 3
+	cost = 3
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = { focus = CAL_Expand_The_Foreign_Service }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		unlock_decision_tooltip = CAL_Send_Mission_to_Panama
+		unlock_decision_tooltip = CAL_Send_Mission_to_Central_America
+		unlock_decision_tooltip = CAL_Send_Mission_to_Venezuela
+		unlock_decision_tooltip = CAL_Send_Mission_to_Colombia
+		unlock_decision_tooltip = CAL_Send_Mission_to_Ecuador
+	}
+}
+shared_focus = {
+	id = CAL_Strengthen_Mexican_Ties
+	icon = GFX_generic_flag_large_MEX
+	relative_position_id = CAL_Warrens_Second_Term
+	x = 8
+	y = 5
+	cost = 3
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = { focus = CAL_Look_Towards_The_Americas }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		unlock_decision_tooltip = CAL_Establish_Mexican_Embassy
+		custom_effect_tooltip = CAL_Unlock_Mexican_Actions_Tooltip
+		unlock_decision_tooltip = CAL_Negotiate_Economic_Agreements
+		unlock_decision_tooltip = CAL_Repatriate_American_Refugees
+		unlock_decision_tooltip = CAL_Expand_Border_Infrastructure
+	}
+}
+shared_focus = {
+	id = CAL_Oppose_Argentine_Hegemony
+	icon = GFX_generic_anti_parliamentarism
+	relative_position_id = CAL_Warrens_Second_Term
+	x = 7
+	y = 6
+	cost = 3
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = { focus = CAL_Strengthen_Mexican_Ties }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		unlock_decision_tooltip = CAL_Send_Mission_to_Brazil
+		unlock_decision_tooltip = CAL_Send_Mission_to_Bolivia
+		unlock_decision_tooltip = CAL_Create_the_Southern_Cone_Mission
+		custom_effect_tooltip = CAL_Unlock_Southern_Cone_Actions_Tooltip
+		unlock_decision_tooltip = CAL_Support_Chilean_Dissidents
+		unlock_decision_tooltip = CAL_Support_Argentine_Dissidents
+	}
+}
+shared_focus = {
+	id = CAL_Establish_the_Caribbean_Office
+	icon = GFX_CUB_regional_diplomacy
+	relative_position_id = CAL_Warrens_Second_Term
+	x = 9
+	y = 6
+	cost = 3
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = { focus = CAL_Strengthen_Mexican_Ties }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		unlock_decision_tooltip = CAL_Send_Mission_to_Cuba
+		unlock_decision_tooltip = CAL_Send_Mission_to_Jamaica
+		unlock_decision_tooltip = CAL_Send_Mission_to_Puerto_Rico
+	}
+}
+shared_focus = {
+	id = CAL_Invite_Foreign_Businesses
+	icon = GFX_CAL_foreign_business
+	relative_position_id = CAL_Warrens_Second_Term
+	x = 13
+	y = 2
+	cost = 3
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = { focus = CAL_Restart_Diplomatic_Initiatives }
+	available = { has_completed_focus = CAL_Hughes_Admin }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		add_ideas = CAL_Foreign_Businesses
+	}
+}
+shared_focus = {
+	id = CAL_Investigate_New_Markets
+	icon = GFX_generic_positive_trade_relations_gold
+	relative_position_id = CAL_Warrens_Second_Term
+	x = 12
+	y = 3
+	cost = 3
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = { focus = CAL_Invite_Foreign_Businesses }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		move_up_CAL_Foreign_Businesses = yes
+	}
+}
+shared_focus = {
+	id = CAL_Just_Good_Business
+	icon = GFX_HOL_sustain_neutrality
+	relative_position_id = CAL_Warrens_Second_Term
+	x = 11
+	y = 4
+	cost = 3
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = { focus = CAL_Investigate_New_Markets }
+	prerequisite = { focus = CAL_Meet_With_Europe }
+	mutually_exclusive = { focus = CAL_Our_Favored_Friends }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		add_timed_idea = {
+			idea = CAL_Reichspakt_Trade_Agreement
+			days = 120
+		}
+
+		add_opinion_modifier = {
+			target = GER
+			modifier = Trade_partners
+		}
+		add_opinion_modifier = {
+			target = GER
+			modifier = medium_increase
+		}
+
+		add_opinion_modifier = {
+			target = DNF
+			modifier = Trade_partners
+		}
+		add_opinion_modifier = {
+			target = DNF
+			modifier = medium_increase
+		}
+
+		add_opinion_modifier = {
+			target = CAN
+			modifier = medium_decrease
+		}
+	}
+}
+shared_focus = {
+	id = CAL_Reassure_The_Canadians
+	icon = GFX_generic_canada_big_flag
+	relative_position_id = CAL_Warrens_Second_Term
+	x = 12
+	y = 5
+	cost = 3
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = { focus = CAL_Just_Good_Business }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		add_stability = 0.025
+		add_opinion_modifier = {
+			target = CAN
+			modifier = Trade_partners
+		}
+		add_opinion_modifier = {
+			target = CAN
+			modifier = large_increase
+		}
+	}
+}
+shared_focus = {
+	id = CAL_Promote_Boeings_Over_Berlin
+	icon = GFX_CAL_boeing_over_berlin
+	relative_position_id = CAL_Warrens_Second_Term
+	x = 10
+	y = 5
+	cost = 3
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = { focus = CAL_Just_Good_Business }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		move_up_CAL_Foreign_Businesses = yes
+		386 = {
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+			add_building_construction = {
+				type = arms_factory
+				level = 1
+				instant_build = yes
+			}
+		}
+	}
+}
+shared_focus = {
+	id = CAL_No_Friends_Only_Interests
+	icon = GFX_RUS_reshuffle
+	relative_position_id = CAL_Warrens_Second_Term
+	x = 11
+	y = 6
+	cost = 3
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = { focus = CAL_Reassure_The_Canadians }
+	prerequisite = { focus = CAL_Promote_Boeings_Over_Berlin }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		move_up_CAL_Foreign_Businesses = yes
+	}
+}
+shared_focus = {
+	id = CAL_Kickstart_American_Trade
+	icon = GFX_USA_goal_champagn
+	relative_position_id = CAL_Warrens_Second_Term
+	x = 14
+	y = 3
+	cost = 3
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = { focus = CAL_Invite_Foreign_Businesses }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		move_up_CAL_Foreign_Businesses_Accord = yes
+	}
+}
+shared_focus = {
+	id = CAL_Our_Favored_Friends
+	icon = GFX_CAN_psaalliance
+	relative_position_id = CAL_Warrens_Second_Term
+	x = 13
+	y = 4
+	cost = 3
+	
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = { focus = CAL_Kickstart_American_Trade }
+	mutually_exclusive = { focus = CAL_Just_Good_Business }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		add_opinion_modifier = {
+			target = CAN
+			modifier = large_increase
+		}
+		386 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = arms_factory
+				level = 1
+				instant_build = yes
+			}
+		}
+	}
+}
+shared_focus = {
+	id = CAL_Reinforce_Our_Special_Relationship
+	icon = GFX_NEE_handshake_GLG
+	relative_position_id = CAL_Warrens_Second_Term
+	x = 14
+	y = 5
+	cost = 3
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = { focus = CAL_Our_Favored_Friends }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		473 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
+		move_up_CAL_Foreign_Businesses_Accord = yes
+	}
+}
+shared_focus = {
+	id = CAL_Make_Arrangements_With_the_Accord
+	icon = GFX_generic_ratify_the_accord
+	relative_position_id = CAL_Warrens_Second_Term
+	x = 13
+	y = 6
+	cost = 3
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = { focus = CAL_Reinforce_Our_Special_Relationship }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		797 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
+		every_country = {
+			limit = {
+				is_in_faction_with = CAN
+			}
+			CAL = {
+				add_opinion_modifier = {
+					target = prev
+					modifier = Trade_partners
+				}
+				add_opinion_modifier = {
+					target = prev
+					modifier = medium_increase
+				}
+			}
+		}
+	}
+}
+shared_focus = {
+	id = CAL_The_New_Heart_Of_The_Free_World
+	icon = GFX_USA_american_industry
+	relative_position_id = CAL_Warrens_Second_Term
+	x = 15
+	y = 6
+	cost = 3
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = { focus = CAL_Reinforce_Our_Special_Relationship }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		move_up_CAL_Foreign_Businesses_Accord = yes
+	}
+}
+### EARLY CIVIL RIGHTS ###
+shared_focus = {
+	id = CAL_The_Start_Of_Civil_Rights
+	icon = GFX_PAL_Closed_Immigration
+	relative_position_id = CAL_Warrens_Second_Term
+	x = 0
+	y = 1
+	cost = 3
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = { focus = CAL_Warrens_Second_Term }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		country_event = {
+			id = krg_cal_warren.1
+		}
+	}
+}
+shared_focus = {
+	id = CAL_Prioritize_State_Level_Reform
+	icon = GFX_generic_controlled_board
+	relative_position_id = CAL_Warrens_Second_Term
+	x = -1
+	y = 2
+	cost = 3
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = { focus = CAL_The_Start_Of_Civil_Rights }
+	mutually_exclusive = { focus = CAL_Begin_National_Reform }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		custom_effect_tooltip = CAL_State_Level_Civil_Rights_tt
+	}
+}
+shared_focus = {
+	id = CAL_Begin_National_Reform
+	icon = GFX_generic_new_treaty
+	relative_position_id = CAL_Warrens_Second_Term
+	x = 1
+	y = 2
+	cost = 3
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = { focus = CAL_The_Start_Of_Civil_Rights }
+	mutually_exclusive = { focus = CAL_Prioritize_State_Level_Reform }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		custom_effect_tooltip = CAL_National_Civil_Rights_tt
+	}
+}
+shared_focus = {
+	id = CAL_Alter_Refugee_Quotas
+	icon = GFX_SAF_Refugee_Relief
+	relative_position_id = CAL_Warrens_Second_Term
+	x = 0
+	y = 3
+	cost = 3
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = { focus = CAL_Begin_National_Reform focus = CAL_Prioritize_State_Level_Reform }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		if = { limit = { has_idea = CAL_Displaced_Persons_And_Refugees_Act_idea }
+			swap_ideas = {
+				remove_idea = CAL_Displaced_Persons_And_Refugees_Act_idea
+				add_idea = CAL_Displaced_Persons_And_Refugees_Act_idea_2
+			}
+		}
+		else = {
+			add_ideas = CAL_Altered_Refugee_Quotas
+		}
+	}
+}
+shared_focus = {
+	id = CAL_Create_The_Western_Route
+	icon = GFX_NEE_freemen
+	relative_position_id = CAL_Warrens_Second_Term
+	x = -1
+	y = 4
+	cost = 3
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = { focus = CAL_Visit_Boston }
+	prerequisite = { focus = CAL_Visit_Detroit }
+	prerequisite = { focus = CAL_Alter_Refugee_Quotas }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		unlock_decision_category_tooltip = CAL_underground_railroad
+		set_country_flag = CAL_underground_railroad
+		set_variable = {
+			var = CAL_stops_opened
+			value = 0
+		}
+		set_variable = {
+			var = CAL_stops_expanded
+			value = 0
+		}
+	}
+}
+
+############################
+### Flyboy Time 		 ###
+### Hughes Tree: By Desu ###
+############################
+
+shared_focus = {
+	id = CAL_Hughes_Admin
+	icon = GFX_CAL_Hughes
+	x = 38
+	y = 0
+	cost = 3
+
+	ai_will_do = {
+		base = 150
+	}
+
+	available_if_capitulated = yes
+	available = {
+		has_country_flag = CAL_Hughes_Inaugurated
+	}
+	completion_reward = {
+		add_political_power = 40
+	}
+}
+### DOMESTIC POLICY ###
+shared_focus = {
+	id = CAL_The_American_Businesses_Act
+	icon = GFX_generic_workers_for_business
+	relative_position_id = CAL_Hughes_Admin
+	x = 6
+	y = 1
+	cost = 3
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = { focus = CAL_Hughes_Admin }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		unlock_decision_tooltip = CAL_Law_American_Businesses_Act_Start
+		custom_effect_tooltip = CAL_Bill_Focus_Tree_tt
+		effect_tooltip = {
+			CAL_law_1_effect = yes
+		}
+	}
+}
+shared_focus = {
+	id = CAL_The_Pacific_Agriculture_Act
+	icon = GFX_generic_the_ministry_of_agriculture_trade_and_industry
+	relative_position_id = CAL_Hughes_Admin
+	x = 9
+	y = 2
+	cost = 3
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = { focus = CAL_The_American_Businesses_Act }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		unlock_decision_tooltip = CAL_Law_The_Pacific_Agriculture_Act_Start
+		custom_effect_tooltip = CAL_Bill_Focus_Tree_tt
+		effect_tooltip = {
+			CAL_law_21_effect = yes
+		}
+	}
+}
+shared_focus = {
+	id = CAL_Expand_the_Film_Industry
+	icon = GFX_generic_movie_camera
+	relative_position_id = CAL_Hughes_Admin
+	x = 10
+	y = 3
+	cost = 3
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = { focus = CAL_The_Pacific_Agriculture_Act }
+	prerequisite = { focus = CAL_Restructure_The_Tax_Code	}
+	available_if_capitulated = yes
+
+	completion_reward = {
+		add_tech_bonus = {
+			category = electronics_tech
+			bonus = 1
+			uses = 2
+		}
+		949 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
+	}
+}
+shared_focus = {
+	id = CAL_Support_Medical_Developments
+	icon = GFX_generic_healthcare
+	relative_position_id = CAL_Hughes_Admin
+	x = 8
+	y = 3
+	cost = 3
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = { focus = CAL_The_Pacific_Agriculture_Act }
+	prerequisite = { focus = CAL_Restructure_The_Tax_Code	}
+	available_if_capitulated = yes
+
+	completion_reward = {
+		move_up_hc_spending = yes
+		add_tech_bonus = {
+			category = hospital_tech
+			bonus = 1
+			uses = 1
+		}
+	}
+}
+shared_focus = {
+	id = CAL_Revitalize_Pacific_Entertainment
+	icon = GFX_generic_cinema
+	relative_position_id = CAL_Hughes_Admin
+	x = 9
+	y = 4
+	cost = 3
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = { focus = CAL_Expand_the_Film_Industry }
+	prerequisite = { focus = CAL_Support_Medical_Developments	}
+	available_if_capitulated = yes
+
+	completion_reward = {
+		add_war_support = 0.05
+		949 = {
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = infrastructure
+				level = 2
+				instant_build = yes
+			}
+			add_manpower = 32000
+		}
+	}
+}
+shared_focus = {
+	id = CAL_Restructure_The_Tax_Code
+	icon = GFX_generic_tax
+	relative_position_id = CAL_Hughes_Admin
+	x = 6
+	y = 2
+	cost = 3
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = { focus = CAL_The_American_Businesses_Act }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		unlock_decision_tooltip = CAL_Law_Tax_Code_Revision_Act_Start
+		custom_effect_tooltip = CAL_Bill_Focus_Tree_tt
+		effect_tooltip = {
+			CAL_law_2_effect = yes
+		}
+	}
+}
+shared_focus = {
+	id = CAL_Scale_Back_Progressive_Overreach
+	icon = GFX_CAL_scale_back_progressive_overreach
+	relative_position_id = CAL_Hughes_Admin
+	x = 3
+	y = 2
+	cost = 3
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = { focus = CAL_The_American_Businesses_Act }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		add_political_power = -75
+		set_temp_variable = { temp_popularity = 3 }
+		set_temp_variable = { temp_party = 4 }
+		set_temp_variable = { temp_state = 379 }
+		CAL_electoral_modify_popularity = yes
+
+		set_temp_variable = { temp_popularity = 3 }
+		set_temp_variable = { temp_party = 4 }
+		set_temp_variable = { temp_state = 386 }
+		CAL_electoral_modify_popularity = yes
+		CAL_Remove_L_Prog_Reps = yes
+		CAL_Remove_L_Prog_Senators = yes
+		CAL_Remove_Prog_Reps = yes
+		CAL_Remove_Prog_Senators = yes
+	}
+}
+shared_focus = {
+	id = CAL_Mandate_Sane_And_Sensible_Spending
+	icon = GFX_generic_stable_economy
+	relative_position_id = CAL_Hughes_Admin
+	x = 6
+	y = 3
+	cost = 3
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = { focus = CAL_Restructure_The_Tax_Code }
+	prerequisite = { focus = CAL_Scale_Back_Progressive_Overreach }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		effect_tooltip = {
+			custom_effect_tooltip = CAL_if_restructured_the_tax_code_passed
+			swap_ideas = {
+				remove_idea = CAL_Streamlined_Tax_Code
+				add_idea = CAL_Streamlined_Tax_Code_2
+			}
+			custom_effect_tooltip = CAL_else_restructured_the_tax_code_passed
+			add_ideas = CAL_Mandate_Sane_And_Sensible_Spending
+		}
+		
+		hidden_effect = {
+			if = {
+				limit = { 
+					has_idea = CAL_Streamlined_Tax_Code
+				}
+				swap_ideas = {
+					remove_idea = CAL_Streamlined_Tax_Code
+					add_idea = CAL_Streamlined_Tax_Code_2
+				}
+			}
+			else = {
+				add_ideas = CAL_Mandate_Sane_And_Sensible_Spending
+			}
+		}
+	}
+}
+shared_focus = {
+	id = CAL_Privatize_Infrastructure_Initiatives
+	icon = GFX_generic_advanced_construction_techniques
+	relative_position_id = CAL_Hughes_Admin
+	x = 4
+	y = 3
+	cost = 3
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = { focus = CAL_Restructure_The_Tax_Code }
+	prerequisite = { focus = CAL_Scale_Back_Progressive_Overreach }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		move_down_inf_spending = yes
+		825 = {
+			add_building_construction = {
+				type = infrastructure
+				level = 1
+				instant_build = yes
+			}
+		}
+		386 = {
+			add_building_construction = {
+				type = infrastructure
+				level = 1
+				instant_build = yes
+			}
+		}
+		379 = {
+			add_building_construction = {
+				type = infrastructure
+				level = 1
+				instant_build = yes
+			}
+		}
+		378 = {
+			add_building_construction = {
+				type = naval_base
+				level = 1
+				instant_build = yes
+				province = 9671
+			}
+		}
+		949 = {
+			add_building_construction = {
+				type = naval_base
+				level = 1
+				instant_build = yes
+				province = 9814
+			}
+		}
+	}
+}
+shared_focus = {
+	id = CAL_Promote_Private_Enterprise
+	icon = GFX_generic_production
+	relative_position_id = CAL_Hughes_Admin
+	x = 2
+	y = 3
+	cost = 3
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = { focus = CAL_Restructure_The_Tax_Code }
+	prerequisite = { focus = CAL_Scale_Back_Progressive_Overreach }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		move_up_business_spending = yes
+		825 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
+		386 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
+	}
+}
+shared_focus = {
+	id = CAL_Finance_Large_Conglomerates
+	icon = GFX_generic_state_economy
+	relative_position_id = CAL_Hughes_Admin
+	x = 7
+	y = 4
+	cost = 3
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = { focus = CAL_Mandate_Sane_And_Sensible_Spending }
+	prerequisite = { focus = CAL_Privatize_Infrastructure_Initiatives }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		move_up_business_spending = yes
+		825 = {
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = industrial_complex
+				level = 2
+				instant_build = yes
+			}
+		}
+		379 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
+	}
+}
+shared_focus = {
+	id = CAL_The_Union_Acts
+	icon = GFX_generic_workers_rights
+	relative_position_id = CAL_Hughes_Admin
+	x = 5
+	y = 4
+	cost = 3
+	
+	ai_will_do = {
+		base = 150
+	}
+	
+	prerequisite = { focus = CAL_Promote_Private_Enterprise }
+	prerequisite = { focus = CAL_Privatize_Infrastructure_Initiatives }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		unlock_decision_tooltip = CAL_Law_Tax_Code_Revision_Act_Start
+		custom_effect_tooltip = CAL_Bill_Focus_Tree_tt
+		effect_tooltip = {
+			CAL_law_20_effect = yes
+		}
+	}
+}
+shared_focus = {
+	id = CAL_Sponsor_Aviation_Industry
+	icon = GFX_generic_new_airforce
+	relative_position_id = CAL_Hughes_Admin
+	x = 3
+	y = 4
+	cost = 3
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = { focus = CAL_Promote_Private_Enterprise }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		386 = {
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = arms_factory
+				level = 2
+				instant_build = yes
+			}
+		}
+	}
+}
+shared_focus = {
+	id = CAL_The_Pacific_Jewel
+	icon = GFX_CAL_goal_champagne
+	relative_position_id = CAL_Hughes_Admin
+	x = 6
+	y = 5
+	cost = 3
+	
+	ai_will_do = {
+		base = 150
+	}
+	
+	prerequisite = { focus = CAL_Sponsor_Aviation_Industry }
+	prerequisite = { focus = CAL_Revitalize_Pacific_Entertainment }
+	prerequisite = { focus = CAL_The_Union_Acts }
+	prerequisite = { focus = CAL_Finance_Large_Conglomerates }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		add_ideas = CAL_The_Pacific_Jewel_idea
+	}
+}
+###FOREIGN/POLITICAL###
+shared_focus = {
+	id = CAL_The_American_Enemies_Act
+	icon = GFX_LEP_selective_enforcement
+	relative_position_id = CAL_Hughes_Admin
+	x = 0
+	y = 1
+	cost = 3
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = { focus = CAL_Hughes_Admin }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		unlock_decision_tooltip = CAL_Law_The_American_Enemies_Act_Start
+		custom_effect_tooltip = CAL_Bill_Focus_Tree_tt
+		effect_tooltip = {
+			CAL_law_19_effect = yes
+		}
+	}
+}
+shared_focus = {
+	id = CAL_Encourage_Anti_Longist_Propaganda
+	icon = GFX_TEX_american_eagle
+	relative_position_id = CAL_Hughes_Admin
+	x = 1
+	y = 2
+	cost = 3
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = { focus = CAL_The_American_Enemies_Act }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		add_war_support = 0.05
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = -0.05
+		}
+		TEX = {
+			add_opinion_modifier = {
+				target = CAL
+				modifier = medium_decrease
+			}
+		}
+	}
+}
+shared_focus = {
+	id = CAL_Denounce_Neo_Syndicalists
+	icon = GFX_generic_no_unions
+	relative_position_id = CAL_Hughes_Admin
+	x = -1
+	y = 2
+	cost = 3
+
+	ai_will_do = {
+		base = 150
+	}
+	
+	prerequisite = { focus = CAL_The_American_Enemies_Act }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		set_temp_variable = { temp_all_popularity = -5 }
+		set_temp_variable = { temp_all_party = 1 }
+		CAL_electoral_modify_popularity_all = yes
+		add_popularity = {
+			ideology = radical_socialist
+			popularity = -0.05
+		}
+	}
+}
+shared_focus = {
+	id = CAL_Monitor_Foreign_Interest_Groups
+	icon = GFX_generic_investigation
+	relative_position_id = CAL_Hughes_Admin
+	x = 0
+	y = 3
+	cost = 3
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = { focus = CAL_Encourage_Anti_Longist_Propaganda }
+	prerequisite = { focus = CAL_Denounce_Neo_Syndicalists }
+	prerequisite = { focus = CAL_Invite_Foreign_Businesses }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		if = { 
+			limit = { has_intelligence_agency = no }
+			create_intelligence_agency = yes
+		}
+		else = {
+			upgrade_intelligence_agency = upgrade_diplo_training
+		}
+	}
+}
+shared_focus = {
+	id = CAL_The_Morse_Domestic_Affairs_Act
+	icon = GFX_generic_folder_signature
+	relative_position_id = CAL_Hughes_Admin
+	x = 1
+	y = 4
+	cost = 3
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = { focus = CAL_Encourage_Anti_Longist_Propaganda }
+	mutually_exclusive = { focus = CAL_The_McCarran_Internal_Security_Act }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		unlock_decision_tooltip = CAL_Law_The_Morse_Domestic_Affairs_Act_Start
+		custom_effect_tooltip = CAL_Bill_Focus_Tree_tt
+		effect_tooltip = {
+			CAL_law_23_effect = yes
+		}
+	}
+}
+shared_focus = {
+	id = CAL_The_McCarran_Internal_Security_Act
+	icon = GFX_generic_file_investigation
+	relative_position_id = CAL_Hughes_Admin
+	x = -1
+	y = 4
+	cost = 3
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = { focus = CAL_Denounce_Neo_Syndicalists }
+	mutually_exclusive = { focus = CAL_The_Morse_Domestic_Affairs_Act }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		unlock_decision_tooltip = CAL_Law_The_McCarran_Internal_Security_Act_Start
+		custom_effect_tooltip = CAL_Bill_Focus_Tree_tt
+		effect_tooltip = {
+			CAL_law_22_effect = yes
+		}
+	}
+}
+shared_focus = {
+	id = CAL_Investigate_The_Progressives
+	icon = GFX_CAL_investigate_progressives
+	relative_position_id = CAL_Hughes_Admin
+	x = 0
+	y = 5
+	cost = 3
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = { focus = CAL_The_McCarran_Internal_Security_Act focus = CAL_The_Morse_Domestic_Affairs_Act }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		
+	}
+}

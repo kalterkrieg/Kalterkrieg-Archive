@@ -1,0 +1,111 @@
+FNG_rivalry_bop = {
+	initial_value = 0
+	left_side = FNG_rivalry_bop_yang
+	right_side = FNG_rivalry_bop_zhang
+	decision_category = FNG_rivalry_bop_decisions
+
+	range = { # Balanced
+		id = FNG_rivalry_bop_balanced
+		min = -0.2
+		max = 0.2
+		modifier = {
+			national_populist_drift = 0.01
+			non_core_manpower = 0.1
+			resistance_activity = -0.1
+			stability_factor = -0.05
+			political_power_cost = 0.1
+		}
+	}
+
+  ### Zhang
+
+	side = {
+		id = FNG_rivalry_bop_zhang
+		icon = GFX_idea_bop_FNG_zhang_xueliang_side
+
+		range = {
+			id = FNG_rivalry_bop_small_zhang
+			min = 0.2
+			max = 0.75
+			modifier = {
+				authoritarian_democrat_drift = 0.01
+				industrial_capacity_factory = 0.05
+				stability_factor = -0.075
+				political_power_cost = 0.15
+			}
+			on_activate = {
+				log = "Zhang Xueliang is winning!"
+				set_power_balance_gfx = {
+					id = FNG_rivalry_bop
+					side = FNG_rivalry_bop_zhang
+					gfx = GFX_idea_bop_FNG_zhang_xueliang_side
+				}
+			}
+		}
+		
+		range = {
+			id = FNG_rivalry_bop_big_zhang
+			min = 0.75
+			max = 1
+			modifier = {
+				authoritarian_democrat_drift = 0.02
+				industrial_capacity_factory = 0.1
+				stability_factor = -0.1
+				political_power_cost = 0.2
+			}
+			on_activate = {
+				log = "Zhang Xueliang rules!"
+				#activate_mission = FNG_zhang_xueliang_sementing_his_control
+				set_power_balance_gfx = {
+					id = FNG_rivalry_bop
+					side = FNG_rivalry_bop_zhang
+					gfx = GFX_idea_bop_FNG_zhang_xueliang_improved_side
+				}
+			}
+		}
+	}
+
+	side = {
+		id = FNG_rivalry_bop_yang
+		icon = GFX_idea_bop_FNG_yang_yuting_side
+		range = {
+			id = FNG_rivalry_bop_small_yang
+			min = -0.75
+			max = -0.2
+			modifier = {
+				paternal_autocrat_drift = 0.01
+				stability_factor = -0.075
+				political_power_cost = 0.15
+				army_attack_factor = 0.05
+			}
+			on_activate = {
+				log = "Yang Yuting is winning!"
+				set_power_balance_gfx = {
+					id = FNG_rivalry_bop
+					side = FNG_rivalry_bop_yang
+					gfx = GFX_idea_bop_FNG_yang_yuting_side
+				}
+			}
+		}
+
+		range = {
+			id = FNG_rivalry_bop_big_yang
+			min = -1
+			max = -0.75
+			modifier = {
+				paternal_autocrat_drift = 0.02
+				stability_factor = -0.1
+				political_power_cost = 0.2
+				army_attack_factor = 0.075
+			}
+			on_activate = {
+				set_power_balance_gfx = {
+					id = FNG_rivalry_bop
+					side = FNG_rivalry_bop_yang
+					gfx = GFX_idea_bop_FNG_yang_yuting_improved_side
+				}
+				log = "Yang Yuting rules!"
+			}
+		}
+	}
+} 

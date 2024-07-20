@@ -1,0 +1,201 @@
+add_namespace = krg_caribbean
+
+country_event = { #Canadian Response JAM
+	id = krg_caribbean.1
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_caribbean.1 FROM = [From.GetName]" }
+	title = krg_caribbean.1.t
+	desc = krg_caribbean.1.d
+	immediate = {
+		hidden_effect = {
+			if = {
+				limit = {
+					has_subject_autonomy_feature = yes
+				}
+				set_autonomy = {
+					target = TRI
+					autonomy_state = autonomy_free
+				}
+			}
+			else = {
+				end_puppet = TRI
+			}
+		}
+	}
+
+	is_triggered_only = yes
+	option = {
+		name = krg_caribbean.1.a
+		add_political_power = 10
+		JAM = { country_event = { id = krg_caribbean.4 } }
+	}
+}
+country_event = { #Canadian Response TRI
+	id = krg_caribbean.2
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_caribbean.2 FROM = [From.GetName]" }
+	title = krg_caribbean.2.t
+	desc = krg_caribbean.2.d
+	immediate = {
+		hidden_effect = {
+			if = {
+				limit = {
+					has_subject_autonomy_feature = yes
+				}
+				set_autonomy = {
+					target = TRI
+					autonomy_state = autonomy_free
+				}
+			}
+			else = {
+				end_puppet = TRI
+			}
+		}
+	}
+
+	is_triggered_only = yes
+	option = {
+		name = krg_caribbean.2.a
+		add_political_power = 10
+		TRI = { country_event = { id = krg_caribbean.5 } }
+	}
+}
+country_event = { #Canadian Response GUY
+	id = krg_caribbean.3
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_caribbean.3 FROM = [From.GetName]" }
+	title = krg_caribbean.3.t
+	desc = krg_caribbean.3.d
+	immediate = {
+		hidden_effect = {
+			if = {
+				limit = {
+					has_subject_autonomy_feature = yes
+				}
+				set_autonomy = {
+					target = GUY
+					autonomy_state = autonomy_free
+				}
+			}
+			else = {
+				end_puppet = GUY
+			}
+		}
+	}
+
+	is_triggered_only = yes
+	option = {
+		name = krg_caribbean.3.a
+		add_political_power = 10
+		GUY = { country_event = { id = krg_caribbean.6 } }
+	}
+}
+country_event = { #Jamaica Independence!
+	id = krg_caribbean.4
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_caribbean.4 FROM = [From.GetName]" }
+	title = krg_caribbean.4.t
+	desc = krg_caribbean.4.d
+	immediate = {
+		hidden_effect = {
+			JAM = {
+				set_cosmetic_tag = JAM_independence
+			}
+		}
+	}
+	is_triggered_only = yes
+	option = { #Manley
+		name = krg_caribbean.7.a 
+		ai_chance = {
+			base = 50
+		}
+		add_political_power = 10
+		set_politics = {
+			ruling_party = social_democrat
+		}
+		coal_add_mar_lib = yes
+		add_popularity = {
+			ideology = social_democrat
+			popularity = 0.15
+		}
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = -0.15
+		}
+	}
+	option = { #Bustamante
+		name = krg_caribbean.7.b
+		ai_chance = {
+			base = 50
+		}
+		add_political_power = 10
+		set_politics = {
+			ruling_party = social_liberal
+		}
+		coal_add_soc_con = yes
+		add_popularity = {
+			ideology = social_liberal
+			popularity = 0.15
+		}
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = -0.15
+		}
+	}
+}
+country_event = { #Trinidad Independence!
+	id = krg_caribbean.5
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_caribbean.5 FROM = [From.GetName]" }
+	title = krg_caribbean.5.t
+	desc = krg_caribbean.5.d
+	immediate = {
+		hidden_effect = {
+			TRI = {
+				set_cosmetic_tag = TRI_independence
+			}
+		}
+	}
+	is_triggered_only = yes
+	option = {
+		name = krg_caribbean.5.a
+		add_political_power = 10
+		set_politics = {
+			ruling_party = market_liberal
+		}
+		coal_add_mar_lib = yes
+		add_popularity = {
+			ideology = market_liberal
+			popularity = 0.18
+		}
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = -0.18
+		}
+	}
+}
+country_event = { #Guyana Independence!
+	id = krg_caribbean.6
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_caribbean.6 FROM = [From.GetName]" }
+	title = krg_caribbean.6.t
+	desc = krg_caribbean.6.d
+	immediate = {
+		hidden_effect = {
+			GUY = {
+				set_cosmetic_tag = GUY_independence
+			}
+		}
+	}
+	is_triggered_only = yes
+	option = {
+		name = krg_caribbean.6.a
+		add_political_power = 10
+		set_politics = {
+			ruling_party = social_liberal
+		}
+		coal_add_rev_rep = yes
+		add_popularity = {
+			ideology = social_liberal
+			popularity = 0.18
+		}
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = -0.18
+		}
+	}
+}

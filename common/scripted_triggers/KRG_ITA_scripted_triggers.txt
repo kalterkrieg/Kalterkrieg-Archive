@@ -1,0 +1,57 @@
+ITA_has_chamber_majority = {
+	custom_trigger_tooltip = {
+		tooltip = ITA_has_majority_of_seats
+		NOT = {
+			check_variable = { ITA_chamber_of_deputies_support_total < ITA_chamber_of_deputies_majority }
+		}
+	}
+	if = {
+		limit = {
+			NOT = {
+				OR = {
+					has_country_flag = ITA_senate_sidelined
+					has_country_flag = ITA_senate_reformed
+				}
+			}
+		}
+		custom_trigger_tooltip = {
+			tooltip = ITA_senate_supports_government
+			NOT = {
+				OR = {
+					has_country_flag = ITA_senate_deeply_opposed
+					has_country_flag = ITA_senate_opposed
+				}
+			}
+		}
+	}
+}
+
+ITA_has_senate_support = {
+	custom_trigger_tooltip = {
+		tooltip = ITA_senate_supports_government
+		NOT = {
+			OR = {
+				has_country_flag = ITA_senate_deeply_opposed
+				has_country_flag = ITA_senate_opposed
+			}
+		}
+	}
+}
+
+has_montreal_idea_trigger = {
+	if = {
+		limit = {
+			has_idea = ITA_montreal_agreement_temp_bonus
+		}
+		has_idea = ITA_montreal_agreement_temp_bonus
+	}
+	else_if = {
+		limit = {
+			has_idea = ITA_montreal_agreement_bonus
+		}
+		has_idea = ITA_montreal_agreement_bonus
+	}
+	else = {
+		has_idea = ITA_montreal_agreement
+	}
+}

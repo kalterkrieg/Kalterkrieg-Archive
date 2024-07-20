@@ -1,0 +1,210 @@
+default_pp_spend_amount = {
+	enable = { always = yes }
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = pp_spend_amount
+		id = idea
+		value = 100
+	}
+	ai_strategy = {
+		type = pp_spend_amount
+		id = decision
+		value = 100
+	}
+
+	ai_strategy = {
+		type = pp_spend_priority
+		id = relation
+		value = -9999
+	}
+	ai_strategy = {
+		type = pp_spend_priority
+		id = relation
+		value = -9999
+	}
+}
+
+
+dont_guard_against_overlord_puppets = {
+	enable = {
+		is_subject = yes
+		is_in_faction = no
+		overlord = { num_subjects > 1 }
+	}
+
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = front_unit_request
+		country_trigger = {
+			is_subject = yes
+			overlord = { has_subject = ROOT }
+		}
+		value = -2000
+	}
+}
+
+default_railway_gun_management = {
+	allowed = { has_dlc = "No Step Back" }
+	enable = {
+		num_divisions > 150
+		is_major = yes
+	}
+	abort = {
+		num_divisions < 120
+	}
+
+	ai_strategy = { # This will add the specified value to the RAILWAY_GUN_PRODUCTION_BASE_DIVISIONS_RATIO_PERCENT define and use that as the desired railway guns / divisions ratio (in %)
+		type = railway_gun_divisions_ratio
+		value = 4
+	}
+}
+
+default_produce_floating_harbors = {
+	allowed = { has_dlc = "No Step Back" }
+	enable = {
+		has_war = yes
+		num_of_naval_factories > 25
+		num_of_military_factories > 40 # floating harbors are used for invasions. Why do large invasions if you don't have the industrial capacity?
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = unit_ratio
+		id = floating_harbor # for floating harbors, 'unit_ratio' is actually not a ratio but an absolute desired number
+		value = 10
+	}
+}
+
+dont_deploy_in_caspian = {
+	enable = {
+		always = yes
+	}
+
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = naval_avoid_region
+		id = 70 #Caspian Sea
+		value = 75
+	}
+}
+
+default_stockpile_management = {
+	enable = {
+		num_divisions > 150
+	}
+
+	abort = {
+		num_divisions < 130
+	}
+
+	ai_strategy = {
+		type = equipment_stockpile_surplus_ratio
+		value = 35
+	}
+}
+
+build_patrol_bombers = {
+	enable = {
+		has_navy_size = { size > 1 }
+	}
+
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = unit_ratio
+		id = maritime_patrol_plane
+		value = 1
+	}
+}
+
+
+put_garrisons_on_high_prio = {
+	enable = { always = yes }
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = garrison_reinforcement_priority
+		value = 100 # positive is high prio, negative is low prio
+	}
+}
+
+avoid_tanks_in_mountains = {
+	enable = { always = yes }
+	abort_when_not_enabled = yes
+
+	ai_strategy = { type = front_armor_score id = "GRE" value = -100 }
+	ai_strategy = { type = front_armor_score id = "SWI" value = -100 }
+	ai_strategy = { type = front_armor_score id = "ARM" value = -100 }
+	ai_strategy = { type = front_armor_score id = "GEO" value = -100 }
+	ai_strategy = { type = front_armor_score id = "AZB" value = -100 }
+	ai_strategy = { type = front_armor_score id = "TIB" value = -100 }
+	ai_strategy = { type = front_armor_score id = "BHU" value = -100 }
+	ai_strategy = { type = front_armor_score id = "NEP" value = -100 }
+	ai_strategy = { type = front_armor_score id = "ETH" value = -100 }
+	ai_strategy = { type = front_armor_score id = "PRU" value = -100 }
+}
+
+avoid_tanks_in_deserts = {
+	enable = { always = yes }
+	abort_when_not_enabled = yes
+
+	ai_strategy = { type = front_armor_score id = "CYR" value = -100 }
+	ai_strategy = { type = front_armor_score id = "ARA" value = -100 }
+	ai_strategy = { type = front_armor_score id = "YEM" value = -100 }
+	ai_strategy = { type = front_armor_score id = "OMA" value = -100 }
+	ai_strategy = { type = front_armor_score id = "SOM" value = -100 }
+	ai_strategy = { type = front_armor_score id = "KAZ" value = -100 }
+	ai_strategy = { type = front_armor_score id = "UZB" value = -100 }
+	ai_strategy = { type = front_armor_score id = "KHI" value = -100 }
+	ai_strategy = { type = front_armor_score id = "BUK" value = -100 }
+	ai_strategy = { type = front_armor_score id = "SIK" value = -100 }
+	ai_strategy = { type = front_armor_score id = "XSM" value = -100 }
+	ai_strategy = { type = front_armor_score id = "MON" value = -100 }
+}
+
+default_surplus_management = {
+	# If we manage to get all equipment we want, keep producing more stuff according to this
+	enable = {
+		always = yes  # For now, applies to everyone
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = equipment_production_surplus_management
+		id = infantry_equipment
+		value = 10
+	}
+
+	ai_strategy = {
+		type = equipment_production_surplus_management
+		id = support_equipment
+		value = 3
+	}
+
+	ai_strategy = {
+		type = equipment_production_surplus_management
+		id = artillery_equipment
+		value = 5
+	}
+
+	ai_strategy = {  # Potentially move into a "specialization" strategy
+		type = equipment_production_surplus_management
+		id = anti_air_equipment
+		value = 2
+	}
+
+	ai_strategy = {  # Potentially move into a "specialization" strategy
+		type = equipment_production_surplus_management
+		id = anti_tank_equipment
+		value = 1
+	}
+
+	ai_strategy = {
+		type = equipment_production_surplus_management
+		id = convoy
+		value = 5
+	}
+}

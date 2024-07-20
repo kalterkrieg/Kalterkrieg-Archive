@@ -1,0 +1,570 @@
+Mitteleuropa_cat = {
+	GER_invite_danubia = {
+		icon = generic_agreement
+
+		allowed = {
+			original_tag = GER
+		}
+
+		visible = {
+			has_completed_focus = GER_renegotiate_mitt
+			DNF = { NOT = { has_country_flag = DNF_Mitteleuropa_Invitation }}
+		}
+
+		ai_will_do = {
+			base = 250
+		}
+
+		fire_only_once = yes
+
+		targets = {
+			DNF
+		}
+
+		cost = 10
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete GER_invite_danubia target: [From.GetName]"
+			custom_effect_tooltip = GER_invite_danubia_tt
+			FROM = { country_event = { id = krg_dnf.136 }}
+		}
+	}
+
+	MIT_invite_Bulgaria = {
+		icon = generic_agreement
+
+		allowed = {
+			original_tag = GER
+		}
+
+		visible = {
+			has_completed_focus = GER_restart_enlargment
+			BUL = {
+				OR = {
+					BUL_boris_iii = {
+						is_country_leader = yes
+					}
+				}
+			}
+		}
+
+		targets = {
+			BUL
+		}
+
+		cost = 10
+		ai_will_do = {
+			base = 100
+		}
+
+		fire_only_once = yes
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete MIT_invite_Bulgaria target: [From.GetName]"
+			FROM = {
+				country_event = { id = krg_mit_invitation.1 }
+			}
+		}
+	}
+
+	MIT_invite_Ottoman = {
+		icon = generic_agreement
+
+		allowed = {
+			original_tag = GER
+		}
+
+		visible = {
+			has_completed_focus = GER_restart_enlargment
+		}
+
+		targets = {
+			TUR
+		}
+
+		cost = 10
+		ai_will_do = {
+			base = 100
+		}
+
+		fire_only_once = yes
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete MIT_invite_Ottoman target: [From.GetName]"
+			FROM = {
+				country_event = { id = krg_mit_invitation.1 }
+			}
+		}
+	}
+
+	MIT_reincorporate_GER_puppets_to_MIT = {
+		icon = generic_agreement
+
+		allowed = {
+			original_tag = GER
+		}
+
+		visible = {
+			
+		}
+
+		targets = {
+			EST
+			GEO
+			AZB
+		}
+
+		target_trigger = {
+			FROM = {
+				OR = {
+					is_puppet_of = GER
+					AND = {
+						is_puppet_of = TUR
+						TUR = {
+							is_mitteleuropa_member = yes
+						}
+					}
+				}
+			}
+		}
+
+		cost = 10
+		ai_will_do = {
+			base = 100
+		}
+
+		fire_only_once = yes
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete MIT_reincorporate_GER_puppets_to_MIT target: [From.GetName]"
+			FROM = {
+				MIT_add_to_mitteleuropa = yes
+			}
+		}
+
+	}
+
+	MIT_invite_MIT_partnership = {
+		icon = generic_agreement
+
+		allowed = {
+			original_tag = GER
+		}
+
+		visible = {
+			has_completed_focus = GER_restart_enlargment
+		}
+
+		targets = { #added a couple of additional partners in Africa 
+			NAM
+			TNZ
+			KAM
+			NGR
+		}
+
+		target_trigger = {
+			FROM = {
+				check_variable = { reichspakt_alignment_level > 0 }
+			}
+		}
+
+		cost = 10
+		ai_will_do = {
+			base = 100
+		}
+
+		fire_only_once = yes
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete MIT_invite_MIT_partnership target: [From.GetName]"
+			FROM = {
+				country_event = { id = krg_mit_invitation.2 }
+			}
+		}
+	}
+
+	GER_mitt_electrify = {
+		icon = GFX_decision_electrify
+
+		allowed = {
+			original_tag = GER
+		}
+
+		visible = {
+			GER = { has_completed_focus = GER_mitt_energy }
+		}
+
+		ai_will_do = {
+			base = 1
+			modifier = {
+				check_variable = {
+					var = GER_Mitt_Project_Facs
+					value = 15
+					compare = greater_than_or_equals
+				}
+				factor = 0
+			}	
+		}
+		
+		target_trigger = {
+			FROM = {
+				is_in_or_aligned_with_reichspakt = yes
+				NOT = { has_country_flag = GER_mitt_electrification }
+			}
+		}
+		
+		targets = { UKR POL FRA FIN LIT HOL BEL KRL DEN SWE NOR IRE }
+
+		modifier = {
+			civilian_factory_use = 2
+		}
+
+		days_remove = 270
+		cost = 15
+
+		complete_effect = { 
+			log = "[GetDateText]: [Root.GetName]: Decision complete GER_mitt_electrify target: [From.GetName]"
+			add_to_variable = {var = GER_Mitt_Project_Facs value = 2 }	
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove GER_mitt_electrify target: [From.GetName]"
+			FROM = { 
+				random_owned_state = { 
+					limit = { 
+						is_core_of = PREV
+					} 
+					add_building_construction = { 
+						type = industrial_complex 
+						level = 1 
+						instant_build = yes 
+					}
+					add_extra_state_shared_building_slots = 1
+				}
+				PREV = { set_country_flag = GER_mitt_electrification }
+				GER = { add_to_variable = {var = GER_Mitt_Project_Facs value = -2 } }
+			}
+		}
+	}
+	
+	GER_mitt_nuclear_umbrella = {
+		icon = GFX_decision_nuclear_planning
+
+		allowed = {
+			original_tag = GER
+		}
+
+		visible = {
+			GER = { has_completed_focus = GER_mitt_nuclear }
+		}
+
+		ai_will_do = {
+			base = 1
+			modifier = {
+				check_variable = {
+					var = GER_Mitt_Project_Facs
+					value = 15
+					compare = greater_than_or_equals
+				}
+				factor = 0
+			}	
+		}
+
+		target_trigger = {
+			FROM = {
+				is_in_or_aligned_with_reichspakt = yes
+			}
+		}
+		
+		targets = { UKR POL FRA FIN LIT HOL BEL KRL DEN SWE IRE }
+
+		modifier = {
+			civilian_factory_use = 5
+		}
+
+		days_remove = 365
+		cost = 50
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete GER_mitt_nuclear_umbrella target: [From.GetName]"
+
+			FROM = {
+				add_opinion_modifier = {
+					target = root
+					modifier = large_increase
+				}
+			}
+			ROOT = {
+				give_guarantee = FROM
+			}
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove GER_mitt_nuclear_umbrella target: [From.GetName]"
+			FROM = { 
+				random_owned_state = { 
+					limit = { 
+						is_core_of = PREV
+					} 
+					add_building_construction = { 
+						type = anti_air_building
+						level = 3
+						instant_build = yes
+					}
+
+				}
+			}
+		}
+	}
+	MIT_exchange_university_students = {
+		icon = GFX_decision_generic_research
+
+		visible = {
+			GER = { has_completed_focus = GER_mitt_university }
+		}
+
+		targets_dynamic = yes
+		target_trigger = { 
+			FROM = {
+				is_mitteleuropa_member_plus_partner = yes
+				is_neighbor_of = root
+			}
+		}
+
+		ai_will_do = {
+			base = 300
+		}
+
+		cost = 25
+
+
+		fire_only_once = yes
+		days_remove = 270
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete MIT_exchange_university_students target: [From.GetName]"
+			FROM = {
+				add_opinion_modifier = {
+					target = root
+					modifier = medium_increase
+				}
+				MIT_increase_exchange_university_students_idea = yes
+			}
+		}
+
+		modifier = {
+			research_speed_factor = 0.025
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove MIT_exchange_university_students target: [From.GetName]"
+			FROM = {
+				MIT_decrease_exchange_university_students_idea = yes
+			}
+		}
+	}
+
+	MIT_BLR_assist_reconstruction_infrastructure = {
+		icon = GFX_decision_railroad
+
+		targets = {
+			BLR
+		}
+
+		allowed = {
+			OR = {
+				tag = GER
+				tag = UKR
+				tag = KRL
+				tag = POL
+			}
+		}
+
+		visible = {
+			is_mitteleuropa_member = yes
+			BLR = { 
+				exists = yes 
+				is_mitteleuropa_member = yes
+			}
+		}
+
+		ai_will_do = {
+			base = 200
+		}
+
+		fire_only_once = yes
+
+		custom_cost_text = decision_cost_civ_factory_3
+
+		custom_cost_trigger = {
+			num_of_civilian_factories_available_for_projects > 2
+		}
+
+		modifier = {
+			civilian_factory_use = 3
+		}
+
+		days_remove = 180
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove MIT_BLR_assist_reconstruction_infrastructure target: [From.GetName]"
+			BLR = {
+				random_owned_controlled_state = {
+					add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+						type = infrastructure
+						level = 1
+						instant_build = yes
+					}
+				}
+				random_owned_controlled_state = {
+					add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+						type = infrastructure
+						level = 1
+						instant_build = yes
+					}
+				}
+			}	
+		}
+	}
+
+	MIT_BLR_assist_reconstruction_industry = {
+		icon = GFX_decision_cement_mixer
+
+		targets = {
+			BLR
+		}
+
+		allowed = {
+			OR = {
+				tag = GER
+				tag = UKR
+				tag = KRL
+				tag = POL
+			}
+		}
+
+		visible = {
+			is_mitteleuropa_member = yes
+			BLR = { 
+				exists = yes 
+				is_mitteleuropa_member = yes
+			}
+		}
+
+		ai_will_do = {
+			base = 200
+		}
+
+		fire_only_once = yes
+
+		custom_cost_text = decision_cost_civ_factory_5
+
+		custom_cost_trigger = {
+			num_of_civilian_factories_available_for_projects > 4
+		}
+
+		modifier = {
+			civilian_factory_use = 5
+		}
+
+		days_remove = 280
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove MIT_BLR_assist_reconstruction_industry target: [From.GetName]"
+			BLR = {
+				random_owned_controlled_state = {
+					add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+						type = industrial_complex
+						level = 1
+						instant_build = yes
+					}
+				}
+			}	
+		}
+	}
+
+	MIT_generic_ost_reconstruction = {
+		icon = GFX_decision_cement_mixer
+
+		targets = { UKR POL FIN LIT KRL }
+
+		allowed = {
+			OR = {
+				tag = GER
+				tag = IRE
+				tag = FRA
+				tag = DEN
+				tag = SWE
+				tag = BEL
+				tag = HOL
+			}
+		}
+
+		visible = {
+			is_mitteleuropa_member = yes
+			FROM = { is_mitteleuropa_member = yes }
+		}
+
+		custom_cost_text = decision_cost_civ_factory_5_pp_25
+
+		custom_cost_trigger = {
+			num_of_civilian_factories_available_for_projects > 4
+			has_political_power > 24.99
+		}
+
+		modifier = {
+			civilian_factory_use = 5
+		}
+
+		fire_only_once = yes
+
+		ai_hint_pp_cost = 25
+
+		ai_will_do = {
+			base = 200
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete MIT_generic_ost_reconstruction target: [From.GetName]"
+			hidden_effect = {
+				add_political_power = -25
+			}
+			
+			FROM = {
+				add_stability = 0.03
+			}
+		}
+
+		days_remove = 200
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove MIT_generic_ost_reconstruction target: [From.GetName]"
+			FROM = {
+				random_owned_controlled_state = {
+					add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+						type = industrial_complex
+						level = 1
+						instant_build = yes
+					}
+					add_building_construction = {
+						type = infrastructure
+						level = 1
+						instant_build = yes
+					}
+
+				}
+				random_owned_controlled_state = {
+					add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+						type = infrastructure
+						level = 1
+						instant_build = yes
+					}
+				}
+				
+			}
+		}
+	}
+}

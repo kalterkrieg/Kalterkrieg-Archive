@@ -1,0 +1,43 @@
+#########################
+### Kingdom of Sweden ###
+#########################
+ideas = {
+	country = {
+		SWE_folkhemmet = {
+			on_add = { log = "[GetDateText]: [Root.GetName]: add idea SWE_folkhemmet" }
+			picture = generic_production_bonus
+
+			modifier = {
+				stability_factor = 0.05
+				consumer_goods_factor = 0.06
+				monthly_population = 0.60
+				political_power_gain = 0.10
+			}
+		}
+		SWE_national_unity_government = {
+			on_add = { log = "[GetDateText]: [Root.GetName]: add idea SWE_national_unity_government" }
+			picture = generic_broken_government
+
+			modifier = {
+				stability_factor = -0.15
+				political_power_gain = 0.10
+			}
+		}
+		SWE_neutrality_idea = {
+			on_add = { log = "[GetDateText]: [Root.GetName]: add idea SWE_neutrality" }
+			picture = SWE_neutrality
+
+			cancel = {
+				has_war = yes
+			}
+
+			modifier = {
+				join_faction_tension = 1
+				surrender_limit = 0.2
+				stability_factor = 0.05
+				recruitable_population_factor = -0.05
+				war_support_factor = -0.05
+			}
+		}
+	}
+}

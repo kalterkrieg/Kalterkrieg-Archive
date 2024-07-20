@@ -1,0 +1,275 @@
+﻿add_namespace = KRG_JAP_Domestic #Domestic (Flavor) Events
+add_namespace = KRG_JAP_Foreign #Foreign Events
+add_namespace = KRG_JAP_Sphere #Co-Prosperity Sphere Related Events
+add_namespace = KRG_JAP_Minseikai #Minseikai Events (aka all Politics Events)
+add_namespace = KRG_JAP_Shitshow #Basically the early game event chain which kills Japan's newly created Minseikai :)
+
+###################################################
+####### KRG Japan Starting Situation Events #######
+####### REMEMBER TO REVISE FOR JAPAN REWORK #######
+###################################################
+
+country_event = { # Land of the Dying Sun
+	id = KRG_JAP_Domestic.0
+	title = KRG_JAP_Domestic.0.t
+	desc = KRG_JAP_Domestic.0.d
+	picture = GFX_ce_JAP_Empire_Kids
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { # Discuss Japan's History!
+		name = KRG_JAP_Domestic.0.a 
+		country_event = { id = KRG_JAP_Domestic.1 }
+	}
+	option = { # Discuss Japan's Political Structure!
+		name = KRG_JAP_Domestic.0.b
+		country_event = { id = KRG_JAP_Domestic.6 }
+	}
+	option = { # Revere the Emperor, Destroy the Traitors!
+		name = KRG_JAP_Domestic.0.c
+	}
+}
+
+country_event = {
+	id = KRG_JAP_Domestic.1 # The Shining Jewel of the Far East
+	title = KRG_JAP_Domestic.1.t
+	desc = KRG_JAP_Domestic.1.d
+	picture = GFX_ce_JAP_Meiji_Restoration
+
+	is_triggered_only = yes
+	#fire_only_once = yes
+
+	option = { # Enrich the Country, Strengthen the Armed Forces!
+		name = KRG_JAP_Domestic.1.a
+		country_event = { id = KRG_JAP_Domestic.2 }
+	}
+}
+
+country_event = { # A Political Pendulum
+	id = KRG_JAP_Domestic.2
+	title = KRG_JAP_Domestic.2.t
+	desc = KRG_JAP_Domestic.2.d
+	picture = GFX_ce_JAP_Twin_Titans
+
+	is_triggered_only = yes
+	#fire_only_once = yes
+
+	option = { # As long as they serve the Crown, what's a little discord going to do?
+		name = KRG_JAP_Domestic.2.a
+		country_event = { id = KRG_JAP_Domestic.3 }	
+	}
+}
+
+country_event = { # The National Defense State 
+	id = KRG_JAP_Domestic.3
+	title = KRG_JAP_Domestic.3.t
+	desc = KRG_JAP_Domestic.3.d
+	picture = GFX_ce_JAP_Hayashi_Inauguration
+
+	is_triggered_only = yes
+	#fire_only_once = yes
+
+	option = { # The World Under One Roof!
+		name = KRG_JAP_Domestic.3.a
+		country_event = { id = KRG_JAP_Domestic.4 }	
+	}
+}
+
+country_event = { # Total War, Total Disaster
+	id = KRG_JAP_Domestic.4
+	title = KRG_JAP_Domestic.4.t
+	desc = KRG_JAP_Domestic.4.d
+	#picture = GFX_ce_JAP_China_War
+
+	is_triggered_only = yes
+	#fire_only_once = yes
+
+	option = { # Well, shit...
+		name = KRG_JAP_Domestic.4.a
+		country_event = { id = KRG_JAP_Domestic.5 }	
+	}
+}
+
+country_event = { # The New Order
+	id = KRG_JAP_Domestic.5
+	title = KRG_JAP_Domestic.5.t
+	desc = KRG_JAP_Domestic.5.d
+	picture = GFX_ce_JAP_Diet_Farm
+
+	is_triggered_only = yes
+	#fire_only_once = yes
+
+	option = { # Revere the Emperor, Destroy the Traitors!
+		name = KRG_JAP_Domestic.5.a 
+	}
+	option = { # Discuss Japan's Political System!
+		name = KRG_JAP_Domestic.5.b
+		country_event = { id = KRG_JAP_Domestic.6 }
+	}
+}
+
+country_event = { # The Structures of Power
+	id = KRG_JAP_Domestic.6
+	title = KRG_JAP_Domestic.6.t
+	desc = KRG_JAP_Domestic.6.d
+	picture = GFX_ce_JAP_Imperial_Diet
+
+	is_triggered_only = yes
+	#fire_only_once = yes
+
+	option = { # Revere the Emperor, Destroy the Traitors!
+		name = KRG_JAP_Domestic.6.a
+	}
+	option = { # Discuss Japan's History!
+		name = KRG_JAP_Domestic.6.b
+		country_event = { id = KRG_JAP_Domestic.1 }
+	}
+}
+
+
+###################
+### Peace Deals ###
+###################
+
+country_event = { #hidden event to fire the peace mission
+	id = KRG_JAP_Foreign.1
+
+	hidden = yes
+
+	trigger = {
+		original_tag = JAP
+		has_war = yes
+		is_valid_peace_target = yes
+		NOT = { surrender_progress > 0.15 }
+		NOT = { has_active_mission = JAP_withdrawl_from_VIE_timer }
+		OR = {
+			is_ai = no
+			NOT = { has_global_flag = JAP_will_surrender }
+		}
+		VIN = { has_capitulated = yes }
+		VIE = { controls_all_owned_states = yes }
+		if = {
+			limit = { SIA = { has_war_with = VIE } }
+			SIA = { surrender_progress > 0.15 }
+		}
+	}
+
+	mean_time_to_happen = {
+		days = 10
+	}
+
+	option = {
+		log = "[GetLogInfo]: event KRG_JAP_Foreign.1 option 1"
+		activate_mission = JAP_withdrawl_from_VIE_timer
+		VIE = {
+			activate_mission = JAP_withdrawl_from_VIE_timer_enemy
+		}
+	}
+}
+
+country_event = { #Japan Offers Peace
+	id = KRG_JAP_Foreign.2
+	title = KRG_JAP_Foreign.2.t
+	desc = KRG_JAP_Foreign.2.d
+
+	picture = GFX_ce_JAP_Imperial_Diet
+
+	is_triggered_only = yes
+
+	option = {
+		log = "[GetLogInfo]: event KRG_JAP_Foreign.2 option KRG_JAP_Foreign.2.a"
+		name = KRG_JAP_Foreign.2.a
+		ai_chance = { base = 100 }
+		JAP = {
+			country_event = KRG_JAP_Foreign.3
+		}
+		effect_tooltip = {
+			KRG_peace_VIE_VIN = yes
+		}
+	}
+
+	option = {
+		log = "[GetLogInfo]: event KRG_JAP_Foreign.2 option KRG_JAP_Foreign.2.b"
+		name = KRG_JAP_Foreign.2.b
+		ai_chance = { base = 0 }
+		add_political_power = -100
+		add_war_support = -0.1
+		JAP = { country_event = KRG_JAP_Foreign.5 }
+	}
+}
+
+country_event = { #Peace Goes Into Effect
+	id = KRG_JAP_Foreign.3
+	title = KRG_JAP_Foreign.3.t
+	desc = KRG_JAP_Foreign.3.d
+
+	picture = GFX_ce_JAP_Imperial_Diet
+
+	is_triggered_only = yes
+
+	immediate = {
+		VIE = {
+			save_event_target_as = JAP_peace_with_vietnam
+		}
+	}
+
+	option = {
+		log = "[GetLogInfo]: event KRG_JAP_Foreign.3 option KRG_JAP_Foreign.3.a"
+		name = KRG_JAP_Foreign.3.a
+		set_global_flag = JAP_defeated_by_vietnam
+		clr_global_flag = JAP_will_surrender
+
+		KRG_peace_VIE_VIN = yes
+	}
+}
+
+country_event = { #End of the Sino-Japanese War
+	id = KRG_JAP_Foreign.4
+	title = KRG_JAP_Foreign.4.t
+	desc = {
+		text = KRG_JAP_Foreign.4.d.victory
+		trigger = {
+			NOT = { has_global_flag = JAP_defeated_by_vietnam_total_victory }
+		}
+	}
+	desc = {
+		text = KRG_JAP_Foreign.4.d.totalvictory
+		trigger = {
+			has_global_flag = JAP_defeated_by_vietnam_total_victory
+		}
+	}
+
+	picture = GFX_ce_JAP_Imperial_Diet
+
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+			set_truce = { target = FROM days = 730 }
+		}
+	}
+
+	option = {
+		log = "[GetLogInfo]: event  KRG_JAP_Foreign.4 option  KRG_JAP_Foreign.4.a"
+		name = KRG_JAP_Foreign.4.a
+		news_event = { id = krg_vin_news.1 }
+		effect_tooltip = {
+			set_truce = { target = FROM days = 730 }
+		}
+	}
+}
+
+country_event = { #FROM Refuses Peace
+	id = KRG_JAP_Foreign.5
+	title = KRG_JAP_Foreign.5.t
+	desc = KRG_JAP_Foreign.5.d
+	picture = GFX_ce_JAP_Imperial_Diet
+
+	is_triggered_only = yes
+
+	option = {
+		log = "[GetLogInfo]: event KRG_JAP_Foreign.5 option KRG_JAP_Foreign.5.a"
+		name = KRG_JAP_Foreign.5.a
+	}
+}

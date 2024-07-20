@@ -1,0 +1,1048 @@
+ENG_calc_socialist_popularity = {
+	set_variable = {
+		var = ENG_syndicalist_influence_var
+		value = 0
+	}
+	set_variable = {
+		var = ENG_syndicalist_influence_var
+		value = ENG.party_popularity@authoritarian_socialist
+	}
+	add_to_variable = {
+		var = ENG_syndicalist_influence_var
+		value = ENG.party_popularity@radical_socialist
+	}
+	multiply_variable = {
+		ENG_syndicalist_influence_var = -2
+	}
+}
+
+ENG_syndie_dmz = {
+	121 = {
+		set_demilitarized_zone = yes
+	}
+	122 = {
+		set_demilitarized_zone = yes
+	}
+	128 = {
+		set_demilitarized_zone = yes
+	}
+	131 = {
+		set_demilitarized_zone = yes
+	}
+	132 = {
+		set_demilitarized_zone = yes
+	}
+	133 = {
+		set_demilitarized_zone = yes
+	}
+	849 = {
+		set_demilitarized_zone = yes
+	}
+	855 = {
+		set_demilitarized_zone = yes
+	}
+}
+
+ENG_release_syndicalists = {
+	
+#	MXF = {
+#		add_state_core = 121
+#		add_state_core = 131
+#		add_state_core = 849
+#		add_dynamic_modifier = {
+#			modifier = ENG_aftermath_of_the_blitz
+#			scope = MXF
+#		}
+#		activate_mission = UOB_accord_intervention
+#		add_ideas = UOB_second_british_revolution_idea
+#	}
+	UOB = {
+		add_state_core = 122
+		add_state_core = 128
+		add_state_core = 132
+		add_state_core = 133
+		add_state_core = 855
+		add_state_core = 121
+		add_state_core = 131
+		add_state_core = 849
+		add_dynamic_modifier = {
+			modifier = ENG_aftermath_of_the_blitz
+			scope = OUB
+		}
+		add_ideas = UOB_second_british_revolution_idea
+		activate_mission = UOB_accord_intervention
+	}
+	ENG = {
+#		MXF = {
+#			inherit_technology = PREV
+#		}
+		UOB = {
+			inherit_technology = PREV
+		}
+		every_owned_state = {
+			set_demilitarized_zone = no
+		}
+		add_ideas = {
+			ENG_second_british_revolution_idea
+		}
+#		every_owned_state = {
+#			limit = {
+#				is_core_of = MXF
+#			}
+#			MXF = {
+#				transfer_state = PREV
+#			}
+#			teleport_armies = {
+#				limit = {
+#					tag = ENG
+#				}
+#				to_state_array = owned_controlled_states
+#			}
+#		}
+		every_owned_state = {
+			limit = {
+				is_core_of = UOB
+			}
+			UOB = {
+				transfer_state = PREV
+			}
+			teleport_armies = {
+				limit = {
+					tag = ENG
+				}
+				to_state_array = owned_controlled_states
+			}
+		}
+		remove_dynamic_modifier = {
+			modifier = ENG_oxford_treaty_dynamic
+		}
+		activate_mission = UOB_accord_intervention
+	}
+	UOB = {
+		if = {
+			limit = {
+				has_template = "Foot Guards"
+			}
+			delete_unit_template_and_units = {
+				division_template = "Foot Guards"
+			}
+		}
+		if = {
+			limit = {
+				has_template = "Line Infantry"
+			}
+			delete_unit_template_and_units = {
+				division_template = "Line Infantry"
+			}
+		}
+		if = {
+			limit = {
+				has_template = "Marine Infantry"
+			}
+			delete_unit_template_and_units = {
+				division_template = "Marine Infantry"
+			}
+		}
+		create_faction = "Syndicalist Liberation Front"
+		add_to_faction = MXF
+		load_oob = MXF_revolution
+		load_oob = UOB_revolution
+		every_state = {
+			limit = {
+				is_core_of = ENG
+			}
+			add_core_of = UOB
+		}
+		850 = {
+			add_core_of = UOB
+		}
+	}
+#	MXF = {
+#		if = {
+#			limit = {
+#				has_template = "Foot Guards"
+#			}
+#			delete_unit_template_and_units = {
+#				division_template = "Foot Guards"
+#			}
+#		}
+#		if = {
+#			limit = {
+#				has_template = "Line Infantry"
+#			}
+#			delete_unit_template_and_units = {
+#				division_template = "Line Infantry"
+#			}
+#		}
+#		if = {
+#			limit = {
+#				has_template = "Marine Infantry"
+#			}
+#			delete_unit_template_and_units = {
+#				division_template = "Marine Infantry"
+#			}
+#		}
+#		load_oob = MXF_revolution
+#		every_state = {
+#			limit = {
+#				is_core_of = ENG
+#			}
+#			add_core_of = MXF
+#		}
+#		850 = {
+#			add_core_of = UOB
+#		}
+#	}
+	ENG = {
+		declare_war_on = {
+			target = UOB
+			type = civil_war
+		}
+	}
+#	MXF = {
+#		add_to_war = {
+#			#should skip the whole 'call in' waiting period which might give ENG some advantage
+#			targeted_alliance = UOB
+#			enemy = ENG
+#			hostility_reason = civil_war
+#		}
+#	}
+	hidden_effect = {
+		ENG = {
+			add_to_variable = {
+				var = ENG_syndicalist_tension_var
+				value = 0.1				#reduce tensions a big chunk so no immediate stealth uprising comes if ENG annexes Syndies
+			}
+		}
+	}
+}
+
+KRG_ENG_improve_desyndicalisation_state_start = {
+	if = {
+		limit = {
+			has_state_flag = ENG_secured
+		}
+		set_state_flag = ENG_getting_the_blue
+	}
+	else_if = {
+		limit = {
+			has_state_flag = ENG_estabilished_blue
+		}
+		set_state_flag = ENG_getting_rid_of_BPLA
+	}
+	else = {
+		set_state_flag = ENG_securing
+	}
+}
+
+KRG_ENG_improve_desyndicalisation_state_cancel = {
+	if = {
+		limit = {
+			has_state_flag = ENG_secured
+		}
+		clr_state_flag = ENG_getting_the_blue
+	}
+	else_if = {
+		limit = {
+			has_state_flag = ENG_estabilished_blue
+		}
+		clr_state_flag = ENG_getting_rid_of_BPLA
+	}
+	else = {
+		clr_state_flag = ENG_securing
+	}
+}
+
+KRG_ENG_improve_desyndicalisation_state = {
+	if = {
+		limit = {
+			has_state_flag = ENG_secured
+		}
+		set_state_flag = ENG_estabilished_blue
+		clr_state_flag = ENG_secured
+		clr_state_flag = ENG_getting_the_blue
+	}
+	else_if = {
+		limit = {
+			has_state_flag = ENG_estabilished_blue
+		}
+		set_state_flag = ENG_got_rid_of_BPLA
+		clr_state_flag = ENG_estabilished_blue
+		clr_state_flag = ENG_getting_rid_of_BPLA
+	}
+	else = {
+		set_state_flag = ENG_secured
+		clr_state_flag = ENG_securing
+	}		
+}
+
+KRG_ENG_improve_desyndicalisation_country = {
+	hidden_effect = {
+		add_popularity = {
+			ideology = radical_socialist
+			popularity = -0.01
+		}
+		add_popularity = {
+			ideology = authoritarian_socialist
+			popularity = -0.005
+		}
+	}
+	set_temp_variable = { ENG_temp_change_syndie_tension = 0.01 }
+	KRG_ENG_change_syndie_tension = yes
+}
+
+KRG_ENG_change_syndie_tension = {
+	custom_effect_tooltip = KRG_ENG_change_syndie_tension
+	add_to_variable = {
+		var = ENG_syndicalist_tension_var
+		value = ENG_temp_change_syndie_tension
+	}
+}
+
+ENG_oxford_treaty_signed = {
+	remove_ideas = ENG_lingering_german_occupation
+	338 = {
+		set_demilitarized_zone = no
+	}
+	854 = {
+		set_demilitarized_zone = no
+	}
+	856 = {
+		set_demilitarized_zone = no
+	}
+	123 = {
+		set_demilitarized_zone = no
+	}
+	127 = {
+		set_demilitarized_zone = no
+	}
+	#if = {
+	#	limit = {
+	#		NOT = {
+	#			OR = {
+	#				has_idea = ENG_treaty_of_oxford_light
+	#				has_idea = ENG_treaty_of_oxford_moderate
+	#				has_idea = ENG_treaty_of_oxford_heavy
+	#			}
+	#		}
+	#	}
+	#	add_ideas = KRG_disarmed_nation 
+	#}
+	123 = {
+		clr_state_flag = ENG_foreign_occupation
+	}
+	854 = {
+		clr_state_flag = ENG_foreign_occupation
+	}
+	127 = {
+		clr_state_flag = ENG_foreign_occupation
+	}
+	338 = {
+		clr_state_flag = ENG_foreign_occupation
+	}
+	remove_from_array = {
+		array = global.influence_targets
+		value = 1
+	}
+	ENG = {
+		country_event = {
+			id = krg_eng.249
+			days = 14
+		}
+	}
+	GER = {
+		country_event = {
+			id = krg_eng.249
+			days = 14
+		}
+	}
+	CAN = {
+		country_event = {
+			id = krg_eng.249
+			days = 14
+		}
+	}
+}
+
+ENG_oxford_harsh = {
+	set_country_flag = oxford_conference_over
+	
+	add_ideas = {
+		KRG_disarmed_nation
+	}
+	set_country_flag = KRG_mobilization_laws_locked
+
+	hidden_effect = {
+		add_dynamic_modifier = {
+			modifier = ENG_oxford_treaty_dynamic
+		}
+	}
+	set_variable = { ENG_oxford_stability = -0.10 }
+	set_variable = { ENG_oxford_dockyard = -1 }
+	set_variable = { ENG_oxford_factory = -0.7 }
+	set_variable = { ENG_oxford_training = 0.9 }
+	set_variable = { ENG_oxford_max_cruiser = 5500 }
+	set_variable = { ENG_oxford_max_carrier = 4500 }
+	set_country_flag = cannot_produce_bombers
+	custom_effect_tooltip = ENG_oxford_dynam_add_tt
+	
+	ENG_oxford_treaty_signed = yes
+}
+
+ENG_oxford_moderate = {
+	set_country_flag = oxford_conference_over
+	
+	add_ideas = {
+		KRG_disarmed_nation
+	}
+	set_country_flag = KRG_mobilization_laws_locked
+
+	hidden_effect = {
+		add_dynamic_modifier = {
+			modifier = ENG_oxford_treaty_dynamic
+		}
+	}
+	set_variable = { ENG_oxford_stability = -0.05 }
+	set_variable = { ENG_oxford_dockyard = -1 }
+	set_variable = { ENG_oxford_factory = -0.5 }
+	set_variable = { ENG_oxford_training = 0.7 }
+	set_variable = { ENG_oxford_max_cruiser = 6000 }
+	set_variable = { ENG_oxford_max_carrier = 5500 }
+	custom_effect_tooltip = ENG_oxford_dynam_add_tt
+	
+	ENG_oxford_treaty_signed = yes
+}
+
+ENG_oxford_light = {
+	set_country_flag = oxford_conference_over
+	
+	add_ideas = {
+		KRG_disarmed_nation
+	}
+	set_country_flag = KRG_mobilization_laws_locked
+
+	hidden_effect = {
+		add_dynamic_modifier = {
+			modifier = ENG_oxford_treaty_dynamic
+		}
+	}
+	set_variable = { ENG_oxford_stability = -0.03 }
+	set_variable = { ENG_oxford_dockyard = -1 }
+	set_variable = { ENG_oxford_factory = -0.3 }
+	set_variable = { ENG_oxford_training = 0.5 }
+	set_variable = { ENG_oxford_max_cruiser = 6500 }
+	set_variable = { ENG_oxford_max_carrier = 6000 }
+	custom_effect_tooltip = ENG_oxford_dynam_add_tt
+	
+	ENG_oxford_treaty_signed = yes
+}
+
+ENG_remove_oxford = {
+	custom_effect_tooltip = ENG_oxford_withdrawal_tt
+	clr_country_flag = KRG_mobilization_laws_locked
+	clr_country_flag = cannot_produce_bombers
+	hidden_effect = {
+		remove_dynamic_modifier = {
+			modifier = ENG_oxford_treaty_dynamic
+		}
+	}
+	custom_effect_tooltip = ENG_oxford_dynam_remove_tt
+}
+
+ENG_oxford_germany_lost = {
+	add_ideas = ENG_german_trade_embargo
+	add_stability = -0.05
+	856 = {
+		remove_building = {
+			type = dockyard
+			level = 1
+		}
+		remove_building = {
+			type = industrial_complex
+			level = 1
+		}
+		remove_building = {
+			type = naval_base
+			level = 5
+			province = 540
+		}
+		damage_building = {
+			type = infrastructure
+			damage = 4
+		}
+	}
+	123 = {
+		remove_building = {
+			type = industrial_complex
+			level = 1
+		}
+		remove_building = {
+			type = naval_base
+			level = 5
+			province = 13242
+		}
+		damage_building = {
+			type = infrastructure
+			damage = 4
+		}
+		remove_building = {
+			type = air_base
+			level = 4
+		}
+	}
+	854 = {
+		remove_building = {
+			type = industrial_complex
+			level = 1
+		}
+		remove_building = {
+			type = arms_factory
+			level = 1
+		}
+		remove_building = {
+			type = dockyard
+			level = 1
+		}
+		remove_building = {
+			type = naval_base
+			level = 5
+			province = 6489
+		}
+		damage_building = {
+			type = infrastructure
+			damage = 4
+		}
+	}
+	338 = {
+		remove_building = {
+			type = industrial_complex
+			level = 1
+		}
+		remove_building = {
+			type = arms_factory
+			level = 2
+		}
+		remove_building = {
+			type = air_base
+			level = 2
+		}
+		remove_building = {
+			type = naval_base
+			level = 5
+			province = 6489
+		}
+		damage_building = {
+			type = infrastructure
+			damage = 4
+		}
+	}
+}
+
+
+ENG_liberal_succession_1951_mlg = {
+	#MLG = Megan Lloyd George
+	set_politics = {
+		ruling_party = social_liberal
+		election_frequency = 60
+		elections_allowed = yes
+		last_election = "1950.7.20"
+	}
+	coal_add_mar_lib = yes
+	set_country_flag = ENG_first_megan_lloyd_george_ministry
+	remove_head_of_government = yes
+	add_ideas = ENG_Megan_Lloyd_George_hog_sli
+}
+
+ENG_liberal_succession_1951_jhs = {
+	#JHS = James Henderson Stewart
+	set_politics = {
+		ruling_party = market_liberal
+		election_frequency = 60
+		elections_allowed = yes
+		last_election = "1950.7.20"
+	}
+	coal_add_soc_lib = yes
+	set_country_flag = ENG_first_james_henderson_stewart_ministry
+	remove_head_of_government = yes
+	add_ideas = ENG_James_Henderson_Stewart_hog_mli
+	remove_economy_minister = yes
+	add_ideas = ENG_Archibald_Sinclair_em_mli
+}
+
+ENG_BPLA_missions_effect = {
+	if = {
+		limit = { 
+			NOT = {
+				has_country_flag = nationalist_syndicalist_fights
+			}
+			has_country_flag = ENG_paramilitaries_activity_increased
+		}
+		random_list = {
+			40 = {
+				set_temp_variable = { ENG_temp_change_syndie_tension = -0.02 }
+				KRG_ENG_change_syndie_tension = yes
+			}
+			40 = {
+				add_popularity = {
+					ideology = radical_socialist
+					popularity = 0.015
+				}
+			}
+			10 = {
+				add_manpower = -50
+				effect_tooltip = {
+					add_equipment_to_stockpile = {
+						type = infantry_equipment
+						amount = -1000
+					}
+				}
+				hidden_effect = {
+					send_equipment = {
+						equipment = infantry_equipment
+						amount = 1000
+						target = UOB
+					}
+				}
+			}
+			10 = {
+				random_owned_state = {
+					prioritize = {
+						128 129 132
+					}
+					damage_building = {
+						type = infrastructure
+						damage = 2
+					}
+					damage_building = {
+						type = industrial_complex
+						damage = 1
+					}
+				}
+
+				random_owned_state = {
+					prioritize = {
+						851 122 
+					}
+					damage_building = {
+						type = infrastructure
+						damage = 1
+					}
+					damage_building = {
+						type = industrial_complex
+						damage = 1
+					}
+				}
+			}
+		}
+	}
+	else_if = {
+		limit = { 
+			has_country_flag = nationalist_syndicalist_fights
+		}
+		random_list = {
+			15 = {
+				set_temp_variable = { ENG_temp_change_syndie_tension = -0.025 }
+				KRG_ENG_change_syndie_tension = yes
+			}
+			15 = {
+				add_popularity = {
+					ideology = radical_socialist
+					popularity = 0.02
+				}
+			}
+			35 = {
+				add_manpower = -45
+				effect_tooltip = {
+					add_equipment_to_stockpile = {
+						type = infantry_equipment
+						amount = -2000
+					}
+				}
+				hidden_effect = {
+					send_equipment = {
+						equipment = infantry_equipment
+						amount = 2000
+						target = UOB
+					}
+				}
+			}
+			35 = {
+				random_owned_state = {
+					prioritize = {
+						128 129 
+					}
+					damage_building = {
+						type = infrastructure
+						damage = 3
+					}
+					damage_building = {
+						type = industrial_complex
+						damage = 1
+					}
+					damage_building = {
+						type = arms_factory
+						damage = 1
+					}
+				}
+
+				random_owned_state = {
+					prioritize = {
+						132
+					}
+					damage_building = {
+						type = infrastructure
+						damage = 2
+					}
+					damage_building = {
+						type = arms_factory
+						damage = 1
+					}
+				}
+
+				random_owned_state = {
+					prioritize = {
+						851 122 
+					}
+					damage_building = {
+						type = infrastructure
+						damage = 2
+					}
+					damage_building = {
+						type = industrial_complex
+						damage = 1
+					}
+				}
+			}
+		}
+	}
+	else = {
+		random_list = {
+			50 = {
+				set_temp_variable = { ENG_temp_change_syndie_tension = -0.015 }
+				KRG_ENG_change_syndie_tension = yes
+			}
+			50 = {
+				add_popularity = {
+					ideology = radical_socialist
+					popularity = 0.01
+				}
+			}
+		}
+		
+	}
+
+	if = {
+		limit = { 
+			has_game_rule = {
+				rule = ENG_SYNDICALIST_REVOLUTION
+				option = ENG_SYNDICALIST_REVOLUTION_GUARANTEED
+			}
+		}
+
+		set_temp_variable = { ENG_temp_change_syndie_tension = -0.025 }
+		KRG_ENG_change_syndie_tension = yes
+	}
+}
+
+ENG_maximist_front_missions_effect = {
+	if = {
+		limit = { 
+			NOT = {
+				has_country_flag = nationalist_syndicalist_fights
+			}
+			has_country_flag = ENG_paramilitaries_activity_increased
+		}
+		random_list = {
+			35 = {
+				set_temp_variable = { ENG_temp_change_syndie_tension = -0.025 }
+				KRG_ENG_change_syndie_tension = yes
+			}
+			35 = {
+				add_popularity = {
+					ideology = authoritarian_socialist
+					popularity = 0.02
+				}
+			}
+			15 = {
+				add_manpower = -50
+				effect_tooltip = {
+					add_equipment_to_stockpile = {
+						type = infantry_equipment
+						amount = -1500
+					}
+				}
+				hidden_effect = {
+					send_equipment = {
+						equipment = infantry_equipment
+						amount = 1500
+						target = MXF
+					}
+				}
+			}
+			15 = {
+				random_owned_state = {
+					prioritize = {
+						130 
+					}
+					damage_building = {
+						type = infrastructure
+						damage = 2
+					}
+					damage_building = {
+						type = industrial_complex
+						damage = 1
+					}
+				}
+
+				random_owned_state = {
+					prioritize = {
+						131 
+					}
+					damage_building = {
+						type = infrastructure
+						damage = 2
+					}
+					damage_building = {
+						type = industrial_complex
+						damage = 1
+					}
+				}
+			}
+		}
+	}
+	else_if = {
+		limit = { 
+			has_country_flag = nationalist_syndicalist_fights
+		}
+		random_list = {
+			15 = {
+				set_temp_variable = { ENG_temp_change_syndie_tension = -0.03 }
+				KRG_ENG_change_syndie_tension = yes
+			}
+			15 = {
+				add_popularity = {
+					ideology = authoritarian_socialist
+					popularity = 0.025
+				}
+			}
+			35 = {
+				add_manpower = -75
+				effect_tooltip = {
+					add_equipment_to_stockpile = {
+						type = infantry_equipment
+						amount = -2500
+					}
+				}
+				hidden_effect = {
+					send_equipment = {
+						equipment = infantry_equipment
+						amount = 2500
+						target = MXF
+					}
+				}
+			}
+			35 = {
+				random_owned_state = {
+					prioritize = {
+						130 
+					}
+					damage_building = {
+						type = infrastructure
+						damage = 3
+					}
+					damage_building = {
+						type = industrial_complex
+						damage = 1
+					}
+					damage_building = {
+						type = arms_factory
+						damage = 1
+					}
+				}
+
+				random_owned_state = {
+					prioritize = {
+						131 
+					}
+					damage_building = {
+						type = infrastructure
+						damage = 3
+					}
+					damage_building = {
+						type = industrial_complex
+						damage = 1
+					}
+					damage_building = {
+						type = arms_factory
+						damage = 1
+					}
+				}
+
+				random_owned_state = {
+					prioritize = {
+						849 
+					}
+					damage_building = {
+						type = infrastructure
+						damage = 3
+					}
+					damage_building = {
+						type = industrial_complex
+						damage = 1
+					}
+					damage_building = {
+						type = arms_factory
+						damage = 1
+					}
+				}
+			}
+		}
+	}
+	else = {
+		random_list = {
+			50 = {
+				set_temp_variable = { ENG_temp_change_syndie_tension = -0.02 }
+				KRG_ENG_change_syndie_tension = yes
+			}
+			50 = {
+				add_popularity = {
+					ideology = authoritarian_socialist
+					popularity = 0.015
+				}
+			}
+		}
+		
+	}
+
+	if = {
+		limit = { 
+			has_game_rule = {
+				rule = ENG_SYNDICALIST_REVOLUTION
+				option = ENG_SYNDICALIST_REVOLUTION_GUARANTEED
+			}
+		}
+
+		set_temp_variable = { ENG_temp_change_syndie_tension = -0.025 }
+		KRG_ENG_change_syndie_tension = yes
+	}
+}
+
+ENG_demlab_improve_distrust = {
+	if = {
+		limit = { 
+			has_idea = ENG_demlab_distrusted_government
+		}
+		swap_ideas = {
+			remove_idea = ENG_demlab_distrusted_government
+			add_idea = ENG_demlab_distrusted_government_2
+		}
+	}
+	else_if = {
+		limit = { 
+			has_idea = ENG_demlab_distrusted_government_2
+		}
+		swap_ideas = {
+			remove_idea = ENG_demlab_distrusted_government_2
+			add_idea = ENG_demlab_distrusted_government_3
+		}
+	}
+	else_if = {
+		limit = { 
+			has_idea = ENG_demlab_distrusted_government_3
+		}
+		swap_ideas = {
+			remove_idea = ENG_demlab_distrusted_government_3
+			add_idea = ENG_demlab_distrusted_government_4
+		}
+	}
+}
+
+### Cosmetic Tag ###
+ENG_update_to_britain = {
+	ENG = {
+		set_cosmetic_tag = ENG_no_ulster
+	}
+	hidden_effect = {
+		AST = {
+			if = {
+				if = {
+					limit = {
+						has_cosmetic_tag = AST_australia
+					}
+					set_cosmetic_tag = AST_australia_britain
+				}
+				else_if = {
+					limit = {
+						NOT = {
+							has_cosmetic_tag = AST_republic
+						}
+					}
+					set_cosmetic_tag = AST_britain
+				}
+			}
+		}
+		CAN = {
+			if = {
+				limit = {
+					NOT = {
+						has_cosmetic_tag = CAN_redesign
+					}
+				}
+				set_cosmetic_tag = CAN_britain
+			}
+		}
+		GUY = {
+			if = {
+				limit = {
+					NOT = {
+						has_cosmetic_tag = GUY_independence
+					}
+				}
+				set_cosmetic_tag = GUY_britain
+			}
+		}
+		JAM = {
+			if = {
+				limit = {
+					NOT = {
+						has_cosmetic_tag = JAM_independence
+					}
+				}
+				set_cosmetic_tag = JAM_britain
+			}
+		}
+		NZL = {
+			set_cosmetic_tag = NZL_britain
+		}
+		SAF = {
+			if = {
+				limit = {
+					NOT = {
+						has_cosmetic_tag = SAF_republic
+					}
+				}
+				set_cosmetic_tag = SAF_britain	
+			}
+		}
+		SIE = {
+			if = {
+				limit = {
+					NOT = {
+						has_cosmetic_tag = SIE_Independence
+					}
+				}
+				set_cosmetic_tag = SIE_britain	
+			}
+		}
+		TRI = {
+			if = {
+				limit = {
+					NOT = {
+						has_cosmetic_tag = TRI_Independence
+					}
+				}
+				set_cosmetic_tag = TRI_britain	
+			}
+		}
+	}
+}

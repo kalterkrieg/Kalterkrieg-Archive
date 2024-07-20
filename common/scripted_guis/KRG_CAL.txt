@@ -1,0 +1,205 @@
+scripted_gui = {
+	CAL_electoral = {
+		context_type = selected_state_context
+		parent_window_token = selected_state_view
+		window_name = "CAL_electoral_container"
+		# dirty = show_CAL_electoral fuck you paradox
+
+		visible = { 
+			ROOT = { original_tag = CAL }
+			is_owned_by = CAL
+			has_variable = CAL_electoral_vote
+		}
+
+		triggers = {
+			CAL_electoral_pie_radsoc_visible = {
+				check_variable = { CAL_electoral_party_popularity_array^0 > 0 }
+			}
+			CAL_electoral_pie_socdem_visible = {
+				check_variable = { CAL_electoral_party_popularity_array^1 > 0 }
+				set_temp_variable = { temp_socdem_popularity = CAL_electoral_party_popularity_array^0 }
+				add_to_temp_variable = { temp_socdem_popularity = CAL_electoral_party_popularity_array^1 }
+			}
+			CAL_electoral_pie_soclib_visible = {
+				check_variable = { CAL_electoral_party_popularity_array^2 > 0 }
+				set_temp_variable = { temp_soclib_popularity = CAL_electoral_party_popularity_array^0 }
+				add_to_temp_variable = { temp_soclib_popularity = CAL_electoral_party_popularity_array^1 }
+				add_to_temp_variable = { temp_soclib_popularity = CAL_electoral_party_popularity_array^2 }
+			}
+			CAL_electoral_pie_marlib_visible = {
+				check_variable = { CAL_electoral_party_popularity_array^3 > 0 }
+				set_temp_variable = { temp_marlib_popularity = CAL_electoral_party_popularity_array^0 }
+				add_to_temp_variable = { temp_marlib_popularity = CAL_electoral_party_popularity_array^1 }
+				add_to_temp_variable = { temp_marlib_popularity = CAL_electoral_party_popularity_array^2 }
+				add_to_temp_variable = { temp_marlib_popularity = CAL_electoral_party_popularity_array^3 }
+			}
+			CAL_electoral_pie_soccon_visible = {
+				check_variable = { CAL_electoral_party_popularity_array^4 > 0 }
+			}
+			CAL_state_idea_img_visible = {
+				has_variable = state_idea
+			}
+		}
+
+		dynamic_lists = {
+			CAL_electoral_main_grid = {
+				array = CAL_electoral_main_array
+				index = CAL_electoral_main_index
+				change_scope = yes
+				entry_container = CAL_electoral_main_entry
+			}
+			CAL_state_idea_grid = {
+				array = state_idea_array
+				index = v
+				change_scope = no
+				entry_container = CAL_state_idea_grid_container
+			}
+		}
+
+		properties = {
+			CAL_electoral_senate_seat_1 = {
+				frame = CAL_electoral_senate_seat_1
+			}
+			CAL_electoral_senate_seat_2 = {
+				frame = CAL_electoral_senate_seat_2
+			}
+			CAL_electoral_main = {
+				frame = v
+			}
+			CAL_electoral_pie_soccon = {
+				frame = 100
+			}
+			CAL_electoral_pie_marlib = {
+				frame = temp_marlib_popularity
+			}
+			CAL_electoral_pie_soclib = {
+				frame = temp_soclib_popularity
+			}
+			CAL_electoral_pie_socdem = {
+				frame = temp_socdem_popularity
+			}
+			CAL_electoral_pie_radsoc = {
+				frame = CAL_electoral_party_popularity_array^0
+			}
+			CAL_state_flag = {
+		        image = "[GFX_StateGetGFXFlag]"
+			}
+			CAL_state_idea_img = {
+		       image = "[StateGetIdeaImage]"
+			}
+			CAL_party = {
+		        image = "[GFX_StateGetParty]"
+			}
+			CAL_governor = {
+		        image = "[GFX_StateGetGovernor]"
+			}
+			CAL_region = {
+		        image = "[StateGetRegionGFX]"
+			}
+		}
+	}
+	
+	CAL_congress_open = {
+		context_type = player_context
+		parent_window_token = politics_tab
+		window_name = "CAL_congress_open_container"
+
+		visible = {
+			tag = CAL
+		}
+
+		effects = {
+			CAL_congress_open_button_click = {
+				if = {
+					limit = { has_variable = show_CAL_congress }
+					clear_variable = show_CAL_congress
+				}
+				else = {
+					set_variable = { show_CAL_congress = 1 }
+					CAL_congress_reload = yes
+				}
+			}
+		}
+	}
+
+	CAL_congress_open_decision = {
+		context_type = decision_category
+		window_name = "CAL_congress_open_decision_container"
+
+		effects = {
+			CAL_congress_open_button_click = {
+				if = {
+					limit = { has_variable = show_CAL_congress }
+					clear_variable = show_CAL_congress
+				}
+				else = {
+					set_variable = { show_CAL_congress = 1 }
+					CAL_congress_reload = yes
+				}
+			}
+		}
+	}
+
+	CAL_congress = {
+		context_type = player_context
+		window_name = "CAL_congress_container"
+		dirty = show_CAL_congress
+
+		visible = {
+			check_variable = { show_CAL_congress > 0 }
+		}
+
+		dynamic_lists = {
+			CAL_senate_main_grid = {
+				array = CAL_electoral_state_array
+				index = CAL_electoral_state_index
+				change_scope = yes
+				entry_container = CAL_senate_main_entry
+			}
+			CAL_senate_party_grid = {
+				array = CAL_senate_party_array
+				index = CAL_senate_party_index
+				change_scope = yes
+				entry_container = CAL_senate_party_entry
+			}
+			CAL_house_main_grid = {
+				array = CAL_house_main_array
+				index = CAL_house_main_index
+				change_scope = yes
+				entry_container = CAL_house_main_entry
+			}
+			CAL_house_party_grid = {
+				array = CAL_house_party_array
+				index = CAL_house_party_index
+				change_scope = yes
+				entry_container = CAL_house_party_entry
+			}
+		}
+
+		effects = {
+			CAL_congress_close_button_click = {
+				clear_variable = show_CAL_congress
+			}
+		}
+
+		properties = {
+			CAL_senate_main_seat_1_icon = {
+				frame = THIS.CAL_electoral_senate_seat_1
+			}
+			CAL_senate_main_seat_2_icon = {
+				frame = THIS.CAL_electoral_senate_seat_2
+			}
+			CAL_house_main_seat_icon = {
+				frame = v
+				x = CAL.CAL_house_x_array^CAL_house_main_index
+				y = CAL.CAL_house_y_array^CAL_house_main_index
+			}
+			CAL_senate_party_icon = {
+				frame = v
+			}
+			CAL_house_party_icon = {
+				frame = v
+			}
+		}
+	}
+}

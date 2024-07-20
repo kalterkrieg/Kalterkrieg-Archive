@@ -1,0 +1,2395 @@
+#!gfx:interface/Kalterkrieg/KRG_goals.gfx
+shared_focus = {
+	id = ENG_ministry_of_defense
+	text = ENG_ministry_of_defense
+	icon = GFX_focus_eng_chiefs_of_staff_committee
+	x = 42
+	y = 0
+	cost = 5
+
+	available = {
+		has_country_flag = first_tree_done
+	}
+
+	ai_will_do = {
+		base = 35
+		modifier = {
+			add = 50
+			NOT = {
+				has_dynamic_modifier = {
+					modifier = ENG_oxford_treaty_dynamic
+				}
+			}
+		}
+	}
+
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_ARMY_XP
+		FOCUS_FILTER_AIR_XP
+		FOCUS_FILTER_NAVY_XP
+	}
+
+	completion_reward = {
+		army_experience = 20
+		navy_experience = 20
+		air_experience = 20
+		country_event = {
+			id = krg_engmil.1
+		}
+	}
+}
+
+### Army Tree ###
+
+shared_focus = {
+	id = ENG_chief_of_general_staff
+	text = ENG_chief_of_general_staff
+	icon = GFX_ENG_royal_army
+	prerequisite = {
+		focus = ENG_ministry_of_defense
+	}
+
+	relative_position_id = ENG_ministry_of_defense
+	x = -6
+	y = 1
+	cost = 6
+
+	ai_will_do = {
+		base = 35
+		modifier = {
+			add = 50
+			NOT = {
+				has_dynamic_modifier = {
+					modifier = ENG_oxford_treaty_dynamic
+				}
+			}
+		}
+	}
+
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_ARMY_BONUS
+	}
+
+	completion_reward = {
+		country_event = {
+			id = krg_engmil.2
+		}
+	}
+}
+
+shared_focus = {
+	id = ENG_hardings_army
+	icon = GFX_ENG_chief_harding
+	prerequisite = {
+		focus = ENG_chief_of_general_staff
+	}
+	mutually_exclusive = {
+		focus = ENG_keightleys_army
+		focus = ENG_gales_army
+	}
+
+	relative_position_id = ENG_chief_of_general_staff
+	x = -2
+	y = 1
+	cost = 6
+
+	ai_will_do = {
+		base = 65
+	}
+
+	available = {
+		has_country_flag = ENG_army_harding
+		custom_trigger_tooltip = {
+			tooltip = operation_avalon
+			NOT = {
+				has_dynamic_modifier = {
+					modifier = ENG_oxford_treaty_dynamic
+				}
+			}
+		}
+	}
+
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_ARMY_XP
+		FOCUS_FILTER_ARMY_BONUS
+	}
+
+	completion_reward = {
+		clr_country_flag = ENG_army_harding
+		army_experience = 30
+		add_ideas = ENG_hardings_army_1
+		add_trait = {
+			character = ENG_john_harding
+			slot = high_command
+			trait = KRG_military_theorist
+		}
+	}
+}
+
+shared_focus = {
+	id = ENG_keightleys_army
+	icon = GFX_ENG_chief_keightley
+	prerequisite = {
+		focus = ENG_chief_of_general_staff
+	}
+	mutually_exclusive = {
+		focus = ENG_hardings_army
+		focus = ENG_gales_army
+	}
+
+	relative_position_id = ENG_chief_of_general_staff
+	x = 0
+	y = 1
+	cost = 6
+
+	ai_will_do = {
+		base = 65
+	}
+
+	available = {
+		has_country_flag = ENG_army_keightley
+		custom_trigger_tooltip = {
+			tooltip = operation_avalon
+			NOT = {
+				has_dynamic_modifier = {
+					modifier = ENG_oxford_treaty_dynamic
+				}
+			}
+		}
+	}
+
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_ARMY_XP
+		FOCUS_FILTER_ARMY_BONUS
+	}
+
+	completion_reward = {
+		clr_country_flag = ENG_army_keightley
+		army_experience = 30
+		add_ideas = ENG_keightleys_army_1
+		add_trait = {
+			character = ENG_charles_keightley
+			slot = high_command
+			trait = KRG_combined_arms_expert
+		}
+	}
+}
+
+shared_focus = {
+	id = ENG_gales_army
+	icon = GFX_ENG_chief_gale
+	prerequisite = {
+		focus = ENG_chief_of_general_staff
+	}
+	mutually_exclusive = {
+		focus = ENG_hardings_army
+		focus = ENG_keightleys_army
+	}
+
+	relative_position_id = ENG_chief_of_general_staff
+	x = 2
+	y = 1
+	cost = 6
+
+	ai_will_do = {
+		base = 45
+	}
+
+	available = {
+		has_country_flag = ENG_army_gale
+		custom_trigger_tooltip = {
+			tooltip = operation_avalon
+			NOT = {
+				has_dynamic_modifier = {
+					modifier = ENG_oxford_treaty_dynamic
+				}
+			}
+		}
+	}
+
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_ARMY_XP
+		FOCUS_FILTER_ARMY_BONUS
+	}
+
+	completion_reward = {
+		clr_country_flag = ENG_army_gale
+		army_experience = 30
+		add_ideas = ENG_gales_army_1
+		add_trait = {
+			character = ENG_richard_gale
+			slot = high_command
+			trait = KRG_speciaL_forces_expert
+		}
+	}
+}
+
+shared_focus = {
+	id = ENG_question_of_syndicalist_officers
+	icon = GFX_generic_socialist_cooperation
+	prerequisite = {
+		focus = ENG_hardings_army
+		focus = ENG_keightleys_army
+		focus = ENG_gales_army
+	}
+
+	relative_position_id = ENG_chief_of_general_staff
+	x = -1
+	y = 2
+	cost = 6
+
+	ai_will_do = {
+		base = 50
+	}
+
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_ARMY_BONUS
+	}
+
+	completion_reward = {
+		country_event = {
+			id = krg_engmil.3
+		}
+	}
+}
+
+shared_focus = {
+	id = ENG_adopt_the_em2
+	text = ENG_adopt_the_em2
+	icon = GFX_generic_canadian_bullpup_rifles
+	prerequisite = {
+		focus = ENG_hardings_army
+		focus = ENG_keightleys_army
+		focus = ENG_gales_army
+	}
+
+	relative_position_id = ENG_chief_of_general_staff
+	x = 1
+	y = 2
+	cost = 6
+
+	ai_will_do = {
+		base = 50
+	}
+
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_RESEARCH
+	}
+
+	completion_reward = {
+		add_tech_bonus = {
+			name = ENG_adopt_the_em2
+			bonus = 2
+			uses = 1
+			category = infantry_weapons
+		}
+	}
+}
+
+shared_focus = {
+	id = ENG_focus_on_soldiers
+	text = ENG_focus_on_soldiers
+	icon = GFX_generic_army_cooperation
+	prerequisite = {
+		focus = ENG_hardings_army
+	}
+
+	relative_position_id = ENG_chief_of_general_staff
+	x = -2
+	y = 3
+	cost = 6
+
+	ai_will_do = {
+		base = 50
+	}
+
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_RESEARCH
+	}
+
+	completion_reward = {
+		add_tech_bonus = {
+			name = ENG_focus_on_soldiers
+			bonus = 1
+			uses = 2
+			category = support_tech
+		}
+	}
+}
+
+shared_focus = {
+	id = ENG_create_the_centurion
+	icon = GFX_generic_tank_design_new
+	prerequisite = {
+		focus = ENG_keightleys_army
+	}
+	prerequisite = {
+		focus = ENG_adopt_the_em2
+	}
+
+	relative_position_id = ENG_chief_of_general_staff
+	x = 0
+	y = 3
+	cost = 6
+
+	ai_will_do = {
+		base = 50
+	}
+
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_RESEARCH
+	}
+
+	completion_reward = {
+		add_tech_bonus = {
+			name = ENG_create_the_centurion
+			bonus = 1
+			uses = 2
+			category = armor
+		}
+	}
+}
+
+shared_focus = {
+	id = ENG_develop_new_strategies
+	text = ENG_develop_new_strategies
+	icon = GFX_generic_planning
+	prerequisite = {
+		focus = ENG_gales_army
+	}
+	prerequisite = {
+		focus = ENG_adopt_the_em2
+	}
+
+	relative_position_id = ENG_chief_of_general_staff
+	x = 2
+	y = 3
+	cost = 6
+
+	ai_will_do = {
+		base = 50
+	}
+
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_ARMY_XP
+	}
+
+	completion_reward = {
+		army_experience = 50
+		add_tech_bonus = {
+			name = ENG_develop_new_strategies
+			bonus = 1
+			uses = 2
+			category = land_doctrine
+		}
+	}
+}
+
+shared_focus = {
+	id = ENG_rebuild_the_reserves
+	icon = GFX_generic_army_guard
+	prerequisite = {
+		focus = ENG_rearming_britain
+	}
+	prerequisite = {
+		focus = ENG_focus_on_soldiers
+		focus = ENG_create_the_centurion
+	}
+
+	relative_position_id = ENG_chief_of_general_staff
+	x = -3
+	y = 4
+	cost = 6
+
+	ai_will_do = {
+		base = 55
+	}
+
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_ARMY_BONUS
+	}
+
+	completion_reward = {
+		if = {
+			limit = {
+				has_idea = ENG_hardings_army_2
+			}
+			swap_ideas = {
+				add_idea = ENG_hardings_army_4
+				remove_idea = ENG_hardings_army_2
+			}
+		}
+		else_if = {
+			limit = {
+				has_idea = ENG_hardings_army_1
+			}
+			swap_ideas = {
+				add_idea = ENG_hardings_army_3
+				remove_idea = ENG_hardings_army_1
+			}
+		}
+		else_if = {
+			limit = {
+				has_idea = ENG_keightleys_army_2
+			}
+			swap_ideas = {
+				add_idea = ENG_keightleys_army_4
+				remove_idea = ENG_keightleys_army_2
+			}
+		}
+		else = {
+			swap_ideas = {
+				add_idea = ENG_keightleys_army_3
+				remove_idea = ENG_keightleys_army_1
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = ENG_new_staff_colleges
+	text = ENG_new_staff_colleges
+	icon = GFX_generic_army_high_command
+	prerequisite = {
+		focus = ENG_focus_on_soldiers
+		focus = ENG_create_the_centurion
+	}
+	prerequisite = {
+		focus = ENG_question_of_syndicalist_officers
+	}
+
+	relative_position_id = ENG_chief_of_general_staff
+	x = -1
+	y = 4
+	cost = 6
+
+	ai_will_do = {
+		base = 50
+	}
+
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_ARMY_BONUS
+	}
+
+	completion_reward = {
+		if = {
+			limit = {
+				has_idea = ENG_keightleys_army_3
+			}
+			swap_ideas = {
+				add_idea = ENG_keightleys_army_4
+				remove_idea = ENG_keightleys_army_3
+			}
+		}
+		else_if = {
+			limit = {
+				has_idea = ENG_keightleys_army_1
+			}
+			swap_ideas = {
+				add_idea = ENG_keightleys_army_2
+				remove_idea = ENG_keightleys_army_1
+			}
+		}
+		else_if = {
+			limit = {
+					has_idea = ENG_hardings_army_3
+				}
+				swap_ideas = {
+					add_idea = ENG_hardings_army_4
+					remove_idea = ENG_hardings_army_3
+				}
+			}
+		else = {
+			swap_ideas = {
+				add_idea = ENG_hardings_army_2
+				remove_idea = ENG_hardings_army_1
+			}
+		}
+	}
+}
+
+
+shared_focus = {
+	id = ENG_continue_montys_model
+	text = ENG_continue_montys_model
+	icon = GFX_CAN_special_branch
+	prerequisite = {
+		focus = ENG_develop_new_strategies
+	}
+
+	relative_position_id = ENG_chief_of_general_staff
+	x = 1
+	y = 4
+	cost = 6
+
+	ai_will_do = {
+		base = 50
+	}
+
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_ARMY_BONUS
+	}
+
+	completion_reward = {
+		swap_ideas = {
+			add_idea = ENG_gales_army_2
+			remove_idea = ENG_gales_army_1
+		}
+	}
+}
+
+shared_focus = {
+	id = ENG_expand_the_paras
+	text = ENG_expand_the_paras
+	icon = GFX_ENG_the_paras
+	prerequisite = {
+		focus = ENG_develop_new_strategies
+	}
+
+	relative_position_id = ENG_chief_of_general_staff
+	x = 3
+	y = 4
+	cost = 6
+
+	ai_will_do = {
+		base = 50
+	}
+
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_RESEARCH
+	}
+
+	completion_reward = {
+		add_tech_bonus = {
+			name = ENG_army_modernisation_campaign
+			bonus = 1
+			uses = 2
+			category = para_tech
+		}
+	}
+}
+
+shared_focus = {
+	id = ENG_army_modernisation_campaign
+	text = ENG_army_modernisation_campaign
+	icon = GFX_generic_military_research
+	prerequisite = {
+		focus = ENG_new_staff_colleges
+		focus = ENG_continue_montys_model
+	}
+
+	relative_position_id = ENG_chief_of_general_staff
+	x = 0
+	y = 5
+	cost = 6
+
+	ai_will_do = {
+		base = 50
+	}
+
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_RESEARCH
+	}
+
+	completion_reward = {
+		add_tech_bonus = {
+			name = ENG_army_modernisation_campaign
+			bonus = 1
+			uses = 2
+			category = infantry_weapons
+		}
+		add_tech_bonus = {
+			name = ENG_army_modernisation_campaign
+			bonus = 1
+			uses = 2
+			category = land_doctrine
+		}
+	}
+}
+
+### Navy Tree ###
+
+shared_focus = {
+	id = ENG_frasers_navy
+	text = ENG_frasers_navy
+	icon = GFX_generic_ship_destroyer
+	prerequisite = {
+		focus = ENG_ministry_of_defense
+	}
+	mutually_exclusive = {
+		focus = ENG_mountbattens_navy
+	}
+
+	relative_position_id = ENG_ministry_of_defense
+	x = -1
+	y = 1
+	cost = 5
+	
+	ai_will_do = {
+		base = 35
+		modifier = {
+			add = 50
+			NOT = {
+				has_dynamic_modifier = {
+					modifier = ENG_oxford_treaty_dynamic
+				}
+			}
+		}
+	}
+
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_RESEARCH
+	}
+
+	completion_reward = {
+		add_ideas = ENG_integrated_naval_doctrine_1
+		add_tech_bonus = {
+			name = ENG_frasers_navy
+			bonus = 1
+			uses = 3
+			category = naval_doctrine
+		}
+		add_trait = {
+			character = ENG_bruce_fraser
+			slot = navy_chief
+			trait = KRG_blue_water_navy_proponent
+		}
+	}
+}
+
+shared_focus = {
+	id = ENG_mountbattens_navy
+	text = ENG_mountbattens_navy
+	icon = GFX_generic_aircraft_carrier
+	prerequisite = {
+		focus = ENG_ministry_of_defense
+	}
+	mutually_exclusive = {
+		focus = ENG_frasers_navy
+	}
+
+	relative_position_id = ENG_frasers_navy
+	x = 2
+	y = 0
+	cost = 5
+
+	ai_will_do = {
+		base = 35
+		modifier = {
+			add = 50
+			NOT = {
+				has_dynamic_modifier = {
+					modifier = ENG_oxford_treaty_dynamic
+				}
+			}
+		}
+	}
+
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_RESEARCH
+		FOCUS_FILTER_NAVY_BONUS
+	}
+
+	completion_reward = {
+		add_ideas = ENG_independent_naval_doctrine_1
+		add_tech_bonus = {
+			name = ENG_mountbattens_navy
+			bonus = 1
+			uses = 3
+			category = naval_doctrine
+		}
+		add_trait = {
+			character = ENG_louis_mountbatten
+			slot = navy_chief
+			trait = KRG_naval_supremacy_proponent
+		}
+	}
+}
+
+shared_focus = {
+	id = ENG_study_hortons_theories
+	icon = GFX_generic_nuclear_submarine
+	prerequisite = {
+		focus = ENG_frasers_navy
+	}
+
+	relative_position_id = ENG_frasers_navy
+	x = -2
+	y = 2
+	cost = 6
+
+	ai_will_do = {
+		base = 35
+		modifier = {
+			add = 50
+			NOT = {
+				has_dynamic_modifier = {
+					modifier = ENG_oxford_treaty_dynamic
+				}
+			}
+		}
+	}
+
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_NAVY_BONUS
+	}
+
+	completion_reward = {
+		if = {
+			limit = { #Taken Restructure the Admiralty
+				has_idea = ENG_integrated_naval_doctrine_2
+			}
+			swap_ideas = {
+				remove_idea = ENG_integrated_naval_doctrine_2
+				add_idea = ENG_integrated_naval_doctrine_4
+			}
+		}
+		else = { #Not Taken Restructure the Admiralty
+			swap_ideas = {
+				remove_idea = ENG_integrated_naval_doctrine_1
+				add_idea = ENG_integrated_naval_doctrine_3
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = ENG_restructure_the_admiralty
+	icon = GFX_navy_hat_ships
+
+	prerequisite = {
+		focus = ENG_frasers_navy
+		focus = ENG_mountbattens_navy
+	}
+
+	relative_position_id = ENG_frasers_navy
+	x = -1
+	y = 1
+	cost = 6
+
+	ai_will_do = {
+		base = 35
+		modifier = {
+			add = 50
+			NOT = {
+				has_dynamic_modifier = {
+					modifier = ENG_oxford_treaty_dynamic
+				}
+			}
+		}
+	}
+
+	search_filters = {
+		FOCUS_FILTER_NAVY_XP
+		FOCUS_FILTER_NAVY_BONUS
+	}
+
+	completion_reward = {
+		navy_experience = 100
+		if = {
+			limit = { #Mountbatten Navy
+				has_idea = ENG_independent_naval_doctrine_1
+			}
+			swap_ideas = {
+				remove_idea = ENG_independent_naval_doctrine_1
+				add_idea = ENG_independent_naval_doctrine_2
+			}
+		}
+		else_if = {
+			limit = { #Horton's Theories
+				has_idea = ENG_integrated_naval_doctrine_3
+			}
+			swap_ideas = {
+				remove_idea = ENG_integrated_naval_doctrine_3
+				add_idea = ENG_integrated_naval_doctrine_4
+			}
+		}
+		else = { #Fraser Navy
+			swap_ideas = {
+				remove_idea = ENG_integrated_naval_doctrine_1
+				add_idea = ENG_integrated_naval_doctrine_2
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = ENG_build_a_new_royal_navy
+	icon = GFX_ENG_royal_navy
+	prerequisite = {
+		focus = ENG_frasers_navy
+		focus = ENG_mountbattens_navy
+	}
+
+	relative_position_id = ENG_frasers_navy
+	x = 1
+	y = 1
+	cost = 8
+
+	ai_will_do = {
+		base = 50
+	}
+
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = operation_avalon
+			NOT = {
+				has_dynamic_modifier = {
+					modifier = ENG_oxford_treaty_dynamic
+				}
+			}
+		}
+	}
+
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_NAVY_BONUS
+	}
+
+	completion_reward = {
+		add_timed_idea = { 
+			idea = ENG_rebuilding_the_royal_navy  
+			days = 1825
+		}
+	}
+}
+
+shared_focus = {
+	id = ENG_syndicalist_naval_vets
+	icon = GFX_focus_focus_fra_revolution_utmost
+	prerequisite = {
+		focus = ENG_frasers_navy
+		focus = ENG_mountbattens_navy
+	}
+
+	relative_position_id = ENG_frasers_navy
+	x = 3
+	y = 1
+	cost = 3
+
+	ai_will_do = {
+		base = 35
+		modifier = {
+			add = 50
+			NOT = {
+				has_dynamic_modifier = {
+					modifier = ENG_oxford_treaty_dynamic
+				}
+			}
+		}
+	}
+
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_NAVY_XP
+	}
+
+	completion_reward = {
+		navy_experience = 25
+		add_manpower = 5000
+		add_war_support = -0.03
+	}
+}
+
+shared_focus = {
+	id = ENG_overhaul_naval_yards
+	icon = GFX_generic_naval_industry
+	prerequisite = {
+		focus = ENG_restructure_the_admiralty
+	}
+	prerequisite = {
+		focus = ENG_build_a_new_royal_navy
+	}
+
+	relative_position_id = ENG_frasers_navy
+	x = 0
+	y = 2
+	cost = 8
+
+	ai_will_do = {
+		base = 50
+	}
+
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_INDUSTRY
+	}
+
+	completion_reward = {
+		132 = {
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = dockyard
+				level = 2
+				instant_build = yes
+			}
+		}
+		133 = {
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = dockyard
+				level = 2
+				instant_build = yes
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = ENG_purchase_allied_ships
+	icon = GFX_BEL_naval_industry_focus
+	prerequisite = {
+		focus = ENG_build_a_new_royal_navy
+	}
+
+	relative_position_id = ENG_frasers_navy
+	x = 1
+	y = 3
+	cost = 3
+
+	ai_will_do = {
+		base = 50
+	}
+
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_NAVY_BONUS
+		FOCUS_FILTER_FOREIGN_AFFAIRS
+	}
+
+	completion_reward = {
+		custom_effect_tooltip = ENG_purchase_allied_ships_tt
+		hidden_effect = {
+			if = {
+				limit = {
+					has_dlc = "Man the Guns"
+				}
+				load_oob = "ENG_purchased_ships"
+			} else = {
+				load_oob = "ENG_purchased_ships_legacy"
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = ENG_develop_supportive_task_forces
+	icon = GFX_generic_naval_cruiser2
+	prerequisite = {
+		focus = ENG_study_hortons_theories
+	}
+	prerequisite = {
+		focus = ENG_overhaul_naval_yards
+	}
+
+	relative_position_id = ENG_frasers_navy
+	x = -1
+	y = 3
+	cost = 6
+
+	ai_will_do = {
+		base = 50
+	}
+
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_RESEARCH
+	}
+
+	completion_reward = {
+		add_tech_bonus = {
+			name = ENG_develop_supportive_task_forces
+			bonus = 1
+			uses = 2
+			category = ca_tech
+		}
+	}
+}
+
+shared_focus = {
+	id = ENG_fleet_for_the_accord
+	text = ENG_fleet_for_the_accord
+	icon = GFX_goal_generic_navy_cruiser
+	prerequisite = {
+		focus = ENG_develop_supportive_task_forces
+	}
+	prerequisite = {
+		focus = ENG_purchase_allied_ships
+	}
+
+	relative_position_id = ENG_frasers_navy
+	x = 0
+	y = 4
+	cost = 6
+
+	ai_will_do = {
+		base = 50
+	}
+
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_NAVY_BONUS
+	}
+
+	completion_reward = {
+		swap_ideas = {
+			remove_idea = ENG_integrated_naval_doctrine_4
+			add_idea = ENG_integrated_naval_doctrine_5
+		}
+	}
+}
+
+shared_focus = {
+	id = ENG_fleet_for_the_nation
+	icon = GFX_generic_english_channel
+	prerequisite = {
+		focus = ENG_restructure_the_admiralty
+	}
+	prerequisite = {
+		focus = ENG_build_a_new_royal_navy
+	}
+	prerequisite = {
+		focus = ENG_mountbattens_navy
+	}
+
+	relative_position_id = ENG_frasers_navy
+	x = 2
+	y = 2
+	cost = 6
+
+	ai_will_do = {
+		base = 50
+	}
+
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_NAVY_BONUS
+	}
+
+	completion_reward = {
+		add_war_support = 0.05
+		swap_ideas = {
+			remove_idea = ENG_independent_naval_doctrine_2
+			add_idea = ENG_independent_naval_doctrine_3
+		}
+	}
+}
+
+shared_focus = {
+	id = ENG_embrace_the_carrier_age
+	icon = GFX_generic_carrier_aircraft
+
+	prerequisite = {
+		focus = ENG_fleet_for_the_nation
+	}
+
+	relative_position_id = ENG_frasers_navy
+	x = 3
+	y = 3
+	cost = 6
+
+	ai_will_do = {
+		base = 50
+	}
+
+	available = {
+		OR = {
+			custom_trigger_tooltip = {
+				tooltip = operation_avalon
+				NOT = {
+					has_dynamic_modifier = {
+						modifier = ENG_oxford_treaty_dynamic
+					}
+				}
+			}
+			has_country_flag = ENG_operation_avalon_dock_1_flag
+		}
+		
+	}
+
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_RESEARCH
+		FOCUS_FILTER_NAVY_BONUS
+	}
+
+	completion_reward = {
+		swap_ideas = {
+			remove_idea = ENG_independent_naval_doctrine_3
+			add_idea = ENG_independent_naval_doctrine_4
+		}
+		add_tech_bonus = {
+			name = ENG_embrace_the_carrier_age
+			bonus = 1
+			uses = 1
+			category = cv_tech
+		}
+	}
+}
+
+shared_focus = {
+	id = ENG_pride_of_the_fleet
+	icon = GFX_generic_naval_light_carrier2
+
+	prerequisite = {
+		focus = ENG_embrace_the_carrier_age
+	}
+
+	relative_position_id = ENG_frasers_navy
+	x = 3
+	y = 4
+	cost = 6
+
+	ai_will_do = {
+		base = 50
+	}
+
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_NAVY_BONUS
+	}
+
+	completion_reward = {
+		custom_effect_tooltip = ENG_pride_of_the_fleet_tt
+		hidden_effect = {
+			if = {
+				limit = {
+					has_dlc = "Man the Guns"
+				}
+				load_oob = "ENG_pride_of_fleet"
+			} else = {
+				load_oob = "ENG_pride_of_fleet_legacy"
+			}
+		}
+	}
+}
+
+### Airforce Tree ###
+
+
+shared_focus = {
+	id = ENG_rebuild_the_RAF
+	icon = GFX_ENG_royal_air_force
+	prerequisite = {
+		focus = ENG_ministry_of_defense
+	}
+
+	relative_position_id = ENG_ministry_of_defense
+	x = 3
+	y = 1
+	cost = 6
+
+	ai_will_do = {
+		base = 35
+		modifier = {
+			add = 50
+			NOT = {
+				has_dynamic_modifier = {
+					modifier = ENG_oxford_treaty_dynamic
+				}
+			}
+		}
+	}
+
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_AIRFORCE_BONUS
+	}
+
+	completion_reward = {
+		add_timed_idea = {
+			idea = ENG_airforce_development_plan
+			days = 720
+		}
+	}
+}
+
+shared_focus = {
+	id = ENG_renovate_airfields
+	icon = GFX_generic_airports
+	prerequisite = {
+		focus = ENG_ministry_of_defense
+	}
+
+	relative_position_id = ENG_ministry_of_defense
+	x = 5
+	y = 1
+	cost = 6
+
+	ai_will_do = {
+		base = 35
+		modifier = {
+			add = 50
+			NOT = {
+				has_dynamic_modifier = {
+					modifier = ENG_oxford_treaty_dynamic
+				}
+			}
+		}
+	}
+
+	available_if_capitulated = yes
+
+	completion_reward = {
+		random_owned_controlled_state = {
+			limit = {
+				AND = {
+					is_owned_and_controlled_by = ROOT
+					is_core_of = ROOT
+					is_in_home_area = yes
+					air_base < 5
+				}
+			}
+			add_building_construction = { type = air_base level = 2 }
+		}
+		random_owned_controlled_state = {
+			limit = {
+				AND = {
+					is_owned_and_controlled_by = ROOT
+					is_core_of = ROOT
+					is_in_home_area = yes
+					air_base < 5
+				}
+			}
+			add_building_construction = { type = air_base level = 2 }
+		}
+		random_owned_controlled_state = {
+			limit = {
+				AND = {
+					is_owned_and_controlled_by = ROOT
+					is_core_of = ROOT
+					is_in_home_area = yes
+					air_base < 5
+				}
+			}
+			add_building_construction = { type = air_base level = 2 }
+		}
+	}
+}
+
+shared_focus = {
+	id = ENG_perfect_the_jet_engine
+	text = ENG_perfect_the_jet_engine
+	icon = GFX_generic_jet_engine
+	prerequisite = {
+		focus = ENG_rebuild_the_RAF
+	}
+
+	relative_position_id = ENG_rebuild_the_RAF
+	x = 1
+	y = 1
+	cost = 6
+
+	ai_will_do = {
+		base = 35
+		modifier = {
+			add = 50
+			NOT = {
+				has_dynamic_modifier = {
+					modifier = ENG_oxford_treaty_dynamic
+				}
+			}
+		}
+	}
+
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_RESEARCH
+		FOCUS_FILTER_AIR_XP
+	}
+
+	completion_reward = {
+		air_experience = 20
+		add_tech_bonus = {
+			name = ENG_jet_research
+			bonus = 1
+			uses = 1
+			category = rocketry
+		}
+	}
+}
+
+shared_focus = {
+	id = ENG_appropriate_syndicalist_designs
+	text = ENG_appropriate_syndicalist_designs
+	icon = GFX_SAF_Plane
+	prerequisite = {
+		focus = ENG_perfect_the_jet_engine
+	}
+
+	relative_position_id = ENG_rebuild_the_RAF
+	x = 0
+	y = 2
+	cost = 6
+
+	ai_will_do = {
+		base = 35
+		modifier = {
+			add = 50
+			NOT = {
+				has_dynamic_modifier = {
+					modifier = ENG_oxford_treaty_dynamic
+				}
+			}
+		}
+	}
+
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_RESEARCH
+	}
+
+	completion_reward = {
+		add_tech_bonus = {
+			name = ENG_steal_syndie_designs
+			bonus = 0.5
+			uses = 3
+			category = air_equipment
+		}
+	}
+}
+
+shared_focus = {
+	id = ENG_modern_RADAR
+	text = ENG_modern_RADAR
+	icon = GFX_generic_radar
+	prerequisite = {
+		focus = ENG_rebuild_the_RAF
+	}
+
+	relative_position_id = ENG_rebuild_the_RAF
+	x = 2
+	y = 2
+	cost = 6
+
+	ai_will_do = {
+		base = 35
+		modifier = {
+			add = 50
+			NOT = {
+				has_dynamic_modifier = {
+					modifier = ENG_oxford_treaty_dynamic
+				}
+			}
+		}
+	}
+
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_RESEARCH
+	}
+
+	completion_reward = {
+		add_tech_bonus = {
+			name = ENG_modernise_radar_systems
+			bonus = 1
+			uses = 1
+			category = radar_tech
+		}
+		random_owned_controlled_state = {
+			limit = {
+				AND = {
+					is_owned_and_controlled_by = ROOT
+					is_core_of = ROOT
+					is_in_home_area = yes
+					radar_station  < 5
+				}
+			}
+			add_building_construction = { type = radar_station  level = 2 }
+		}
+		random_owned_controlled_state = {
+			limit = {
+				AND = {
+					is_owned_and_controlled_by = ROOT
+					is_core_of = ROOT
+					is_in_home_area = yes
+					radar_station  < 5
+				}
+			}
+			add_building_construction = { type = radar_station  level = 2 }
+		}
+	}
+}
+
+shared_focus = {
+	id = ENG_offensive_airforce
+	icon = GFX_RUS_bombers_to_reach_berlin
+	prerequisite = {
+		focus = ENG_perfect_the_jet_engine
+	}
+	prerequisite = {
+		focus = ENG_modern_RADAR
+	}
+	mutually_exclusive = {
+		focus = ENG_defensive_airforce
+	}
+
+	relative_position_id = ENG_rebuild_the_RAF
+	x = 1
+	y = 3
+	cost = 6
+
+	ai_will_do = {
+		base = 35
+		modifier = {
+			add = 50
+			NOT = {
+				has_dynamic_modifier = {
+					modifier = ENG_oxford_treaty_dynamic
+				}
+			}
+		}
+	}
+
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_RESEARCH
+		FOCUS_FILTER_AIRFORCE_BONUS
+	}
+
+	completion_reward = {
+		add_tech_bonus = {
+			name = ENG_DO_IT_AGAIN_BOMBER_HARRIS
+			bonus = 1
+			uses = 1
+			category = strategic_bomber_tech
+		}
+		add_ideas = ENG_bomber_focus
+	}
+}
+
+shared_focus = {
+	id = ENG_defensive_airforce
+	text = ENG_defensive_airforce
+	icon = GFX_generic_fighter_designs
+	prerequisite = {
+		focus = ENG_modern_RADAR
+	}
+	mutually_exclusive = {
+		focus = ENG_offensive_airforce
+	}
+
+	relative_position_id = ENG_rebuild_the_RAF
+	x = 3
+	y = 3
+	cost = 6
+
+	ai_will_do = {
+		base = 35
+		modifier = {
+			add = 50
+			NOT = {
+				has_dynamic_modifier = {
+					modifier = ENG_oxford_treaty_dynamic
+				}
+			}
+		}
+	}
+
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_RESEARCH
+		FOCUS_FILTER_AIRFORCE_BONUS
+	}
+	
+	completion_reward = {
+		add_tech_bonus = {
+			name = ENG_DO_IT_AGAIN_BOMBER_HARRIS
+			bonus = 1
+			uses = 1
+			category = light_air
+		}
+		add_ideas = ENG_fighter_focus
+	}
+}
+
+### Diplomatic Tree ###
+
+shared_focus = {
+	id = ENG_joining_the_kalterkrieg
+	text = ENG_joining_the_kalterkrieg
+	icon = GFX_generic_kalterkrieg
+	
+	x = 24
+	y = 0
+
+	cost = 5
+
+	available = {
+		has_country_flag = first_tree_done
+	}
+
+	ai_will_do = {
+		base = 45
+	}
+
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_FOREIGN_AFFAIRS
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus ENG_joining_the_kalterkrieg"
+		country_event = {
+			id = krg_engdip.1
+		}
+		add_political_power = 50
+	}
+}
+
+shared_focus = {
+	id = ENG_accept_the_new_britain
+	text = ENG_accept_the_new_britain
+	icon = GFX_focus_eng_global_defense
+	
+	prerequisite = {
+		focus = ENG_joining_the_kalterkrieg
+	}
+	
+	relative_position_id = ENG_joining_the_kalterkrieg
+	x = 0
+	y = 1
+	cost = 5	
+
+	ai_will_do = {
+		base = 55
+	}
+
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_FOREIGN_AFFAIRS
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus ENG_accept_the_new_britain"
+		country_event = {
+			id = krg_engdip.3
+		}
+		add_stability = 0.01
+	}
+}
+
+shared_focus = {
+	id = ENG_legitimise_diplomatic_offices
+	text = ENG_legitimise_diplomatic_offices
+	icon = GFX_goal_tfv_strengthen_commonwealth_ties
+	
+	prerequisite = {
+		focus = ENG_accept_the_new_britain
+	}
+	
+	relative_position_id = ENG_accept_the_new_britain
+	x = -1
+	y = 1
+	cost = 5
+
+	ai_will_do = {
+		base = 55
+	}
+
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_FOREIGN_AFFAIRS
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus ENG_legitimise_diplomatic_offices"
+		country_event = {
+			id = krg_engdip.9
+		}
+	}
+}
+
+shared_focus = {
+	id = ENG_royal_commonwealth_institute
+	text = ENG_royal_commonwealth_institute
+	icon = GFX_ENG_commonwealth_institute
+	
+	prerequisite = {
+		focus = ENG_accept_the_new_britain
+	}
+	
+	relative_position_id = ENG_accept_the_new_britain
+	x = 1
+	y = 1
+	cost = 5
+
+	ai_will_do = {
+		base = 55
+	}
+
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_FOREIGN_AFFAIRS
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus ENG_royal_commonwealth_institute"
+		country_event = {
+			id = krg_engdip.12
+		}
+	}
+}
+
+shared_focus = {
+	id = ENG_our_seat_at_the_table
+	text = ENG_our_seat_at_the_table
+	icon = GFX_generic_ratify_the_accord
+	
+	prerequisite = {
+		focus = ENG_legitimise_diplomatic_offices
+	}
+	
+	relative_position_id = ENG_accept_the_new_britain
+	x = -1
+	y = 2
+	cost = 5
+
+	ai_will_do = {
+		base = 55
+	}
+
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_FOREIGN_AFFAIRS
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus ENG_our_seat_at_the_table"
+		#Britain now is an Accord Major#
+		CAN = {
+			end_puppet = ENG
+		}
+		add_to_array = { global.accord_voting_major_country_array = ENG }
+		set_country_flag = accord_military_major_ai
+		custom_effect_tooltip = ENG_our_seat_at_the_table_tt
+		accord_screen_refresh = yes
+		hidden_effect = {
+			ENT_accord_set_leader = yes
+		}
+	}
+}
+
+shared_focus = {
+	id = ENG_the_london_conference
+	text = ENG_the_london_conference
+	icon = GFX_ENG_commonwealth_deals
+	
+	prerequisite = {
+		focus = ENG_legitimise_diplomatic_offices
+	}
+	prerequisite = {
+		focus = ENG_royal_commonwealth_institute
+	}
+	
+	relative_position_id = ENG_accept_the_new_britain
+	x = 1
+	y = 2
+	cost = 5
+
+	ai_will_do = {
+		base = 35
+	}
+
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_FOREIGN_AFFAIRS
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus ENG_the_london_conference"
+		country_event = {
+			id = krg_engdip.14
+		}
+	}
+}
+
+shared_focus = {
+	id = ENG_commonwealth_investment_campaigns
+	text = ENG_commonwealth_investment_campaigns
+	icon = GFX_ENG_commonwealth_CIA
+	
+	prerequisite = {
+		focus = ENG_the_london_conference
+	}
+
+	available = {
+		has_country_flag = ENG_commonwealth_formed
+	}
+	
+	relative_position_id = ENG_accept_the_new_britain
+	x = 0
+	y = 3
+	cost = 5
+
+	ai_will_do = {
+		base = 45
+	}
+
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_FOREIGN_AFFAIRS
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus ENG_commonwealth_investment_campaigns"
+		add_ideas = ENG_commonwealth_industries_association
+		CAN = {
+			country_event = {
+				id = krg_engdip.22
+			}
+		}
+		SAF = {
+			country_event = {
+				id = krg_engdip.22
+			}
+		}
+		AST = {
+			country_event = {
+				id = krg_engdip.22
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = ENG_secure_commonwealth_interests
+	text = ENG_secure_commonwealth_interests
+	icon = GFX_generic_doctrine_tank_warfare
+	
+	prerequisite = {
+		focus = ENG_the_london_conference
+	}
+	
+	relative_position_id = ENG_accept_the_new_britain
+	x = 2
+	y = 3
+	cost = 5
+
+	ai_will_do = {
+		base = 45
+	}
+
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_FOREIGN_AFFAIRS
+	}
+
+	completion_reward = {
+		custom_effect_tooltip = ENG_commonwealth_member_upgrade
+		hidden_effect = {
+			every_country = {
+				limit = {
+					has_idea = ENG_commonwealth_member
+				}
+				swap_ideas = {
+					remove_idea = ENG_commonwealth_member
+					add_idea = ENG_commonwealth_member_2
+				}
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = ENG_fate_of_mann
+	text = ENG_fate_of_mann
+	icon = GFX_ENG_isle_of_man
+	
+	prerequisite = {
+		focus = ENG_royal_commonwealth_institute
+	}
+	
+	relative_position_id = ENG_accept_the_new_britain
+	x = 3
+	y = 2
+	cost = 5
+
+	ai_will_do = {
+		base = 55
+	}
+
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_FOREIGN_AFFAIRS
+	}
+
+	completion_reward = {
+		CAN = {
+			country_event = krg_engdip.28
+		}
+	}
+}
+
+#shared_focus = {
+#	id = ENG_bases_for_benefits
+#	text = ENG_bases_for_benefits
+#	icon = GFX_generic_navy_decision
+#	
+#	prerequisite = {
+#		focus = ENG_fate_of_mann
+#	}
+#	prerequisite = {
+#		focus = ENG_rearming_britain
+#	}
+#	
+#	relative_position_id = ENG_accept_the_new_britain
+#	x = 4
+#	y = 3
+#	cost = 5
+#
+#	available = {
+#	}
+#
+#	available_if_capitulated = yes
+#
+#	completion_reward = {
+#
+#	}
+#}
+#
+#shared_focus = {
+#	id = ENG_the_nuclear_debate
+#	text = ENG_the_nuclear_debate
+#	icon = GFX_generic_nuclear_bomb
+#	
+#	prerequisite = {
+#		focus = ENG_bases_for_benefits
+#	}
+#	
+#	relative_position_id = ENG_accept_the_new_britain
+#	x = 4
+#	y = 4
+#	cost = 5
+#
+#	available = {
+#	}
+#
+#	available_if_capitulated = yes
+#
+#	completion_reward = {
+#
+#	}
+#}
+
+shared_focus = {
+	id = ENG_cooperate_with_the_irish
+	text = ENG_cooperate_with_the_irish
+	icon = GFX_generic_befriend_ireland
+	
+	prerequisite = {
+		focus = ENG_our_seat_at_the_table
+	}
+	
+	relative_position_id = ENG_accept_the_new_britain
+	x = -2
+	y = 3
+	cost = 5
+
+	available = {
+		is_in_faction_with = IRE
+	}
+
+	ai_will_do = {
+		base = 35
+	}
+
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_FOREIGN_AFFAIRS
+	}
+
+	completion_reward = {
+		add_ideas = ENG_cooperate_with_the_irish_idea
+		IRE = {
+			add_ideas = ENG_cooperate_with_the_irish_idea_IRE
+		}
+	}
+}
+
+shared_focus = {
+	id = ENG_form_home_affairs_buerau
+	icon = GFX_generic_foreign_policy
+	
+	prerequisite = {
+		focus = ENG_joining_the_kalterkrieg
+	}
+	
+	relative_position_id = ENG_joining_the_kalterkrieg
+	x = 3
+	y = 1
+	cost = 5
+
+
+	ai_will_do = {
+		base = 20
+
+		modifier = {
+			has_country_flag = begin_avalon
+			add = 45
+		}
+	}
+
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_FOREIGN_AFFAIRS
+	}
+
+	completion_reward = {
+		add_stability = 0.05
+	}
+}
+
+shared_focus = {
+	id = ENG_expand_the_SIS
+	text = ENG_expand_the_SIS
+	icon = GFX_ENG_secret_intellegence_service
+	
+	prerequisite = {
+		focus = ENG_joining_the_kalterkrieg
+	}
+	
+	relative_position_id = ENG_form_home_affairs_buerau
+	x = 2
+	y = 0
+	cost = 5
+
+	
+
+	ai_will_do = {
+		base = 20
+
+		modifier = {
+			has_country_flag = begin_avalon
+			add = 45
+		}
+	}
+
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_FOREIGN_AFFAIRS
+	}
+
+	completion_reward = {
+		if = {
+			limit = { has_dlc = "La Resistance" }
+			add_ideas = ENG_expanded_intelligence
+		}
+		else = {
+			add_ideas = ENG_expanded_intelligence_no_LaR
+		}
+	}
+}
+
+shared_focus = {
+	id = ENG_censor_german_media
+	text = ENG_censor_german_media
+	icon = GFX_ENG_german_censorship
+	
+	prerequisite = {
+		focus = ENG_form_home_affairs_buerau
+	}
+	
+	relative_position_id = ENG_form_home_affairs_buerau
+	x = 1
+	y = 1
+	cost = 5
+
+	ai_will_do = {
+		base = 35
+	}
+
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_FOREIGN_AFFAIRS
+	}
+
+	completion_reward = {
+		add_stability = 0.03
+		country_event = {
+			id = krg_engdip.101
+		}
+		# Opinion Modifer #
+	}
+}
+
+shared_focus = {
+	id = ENG_operation_avalon
+	icon = GFX_generic_secret_documents
+	
+	prerequisite = {
+		focus = ENG_form_home_affairs_buerau
+	}
+	prerequisite = {
+		focus = ENG_expand_the_SIS
+	}
+
+	relative_position_id = ENG_form_home_affairs_buerau
+	x = 3
+	y = 1
+	cost = 5
+
+	available = {
+		has_country_flag = begin_avalon
+	}
+
+	bypass = {
+		custom_trigger_tooltip = {
+			tooltip = operation_avalon
+			NOT = {
+				has_dynamic_modifier = {
+					modifier = ENG_oxford_treaty_dynamic
+				}
+			}
+		}
+	}
+
+	ai_will_do = {
+		base = 65
+	}
+
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_FOREIGN_AFFAIRS
+	}
+
+	completion_reward = {
+		unlock_decision_category_tooltip = ENG_operation_avalon_decisions
+		hidden_effect = {
+			country_event = {
+				id = krg_engdip.51
+				days = 270
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = ENG_embed_agents_in_reichspakt
+	text = ENG_embed_agents_in_reichspakt
+	icon = GFX_MAF_secret_police
+	
+	prerequisite = {
+		focus = ENG_expand_the_SIS
+	}
+	
+	relative_position_id = ENG_form_home_affairs_buerau
+	x = 5
+	y = 1
+	cost = 5
+
+	ai_will_do = {
+		base = 35
+	}
+
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_FOREIGN_AFFAIRS
+	}
+
+	completion_reward = {
+		if = {
+			limit = { has_dlc = "La Resistance" }
+			swap_ideas = {
+				remove_idea = ENG_expanded_intelligence
+				add_idea = ENG_expanded_intelligence_improved
+			}
+		}
+		else = {
+			swap_ideas = {
+				remove_idea = ENG_expanded_intelligence_no_LaR
+				add_idea = ENG_expanded_intelligence_no_LaR_improved
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = ENG_restart_anti_german_propaganda
+	icon = GFX_generic_accord_propaganda
+	
+	prerequisite = {
+		focus = ENG_censor_german_media
+	}
+	prerequisite = {
+		focus = ENG_operation_avalon
+	}
+	
+	relative_position_id = ENG_form_home_affairs_buerau
+	x = 2
+	y = 2
+	cost = 5
+
+	ai_will_do = {
+		base = 25
+	}
+
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_FOREIGN_AFFAIRS
+	}
+
+	completion_reward = {
+		add_popularity = {
+			ideology = paternal_autocrat
+			popularity = -0.02
+		}
+		country_event = {
+			id = krg_engdip.102
+		}
+	}
+}
+
+shared_focus = {
+	id = ENG_rearming_britain
+	icon = GFX_generic_army_mass_assault
+
+	prerequisite = {
+		focus = ENG_operation_avalon
+	}
+	prerequisite = {
+		focus = ENG_hardings_army
+		focus = ENG_keightleys_army
+		focus = ENG_gales_army
+	}
+	
+	relative_position_id = ENG_form_home_affairs_buerau
+	x = 4
+	y = 2
+	cost = 5
+
+	ai_will_do = {
+		base = 55
+	}
+
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_ARMY_BONUS
+	}
+
+	completion_reward = {
+		add_ideas = ENG_defence_action_group
+		country_event = {
+			id = krg_engdip.100
+		}
+	}
+}
+
+shared_focus = {
+	id = ENG_fighting_with_the_pound
+	icon = GFX_ENG_coin
+	prerequisite = {
+		focus = ENG_rearming_britain
+	}
+	mutually_exclusive = {
+		focus = ENG_raise_defence_spending
+	}
+
+	relative_position_id = ENG_form_home_affairs_buerau
+	x = 3
+	y = 3
+	cost = 6
+
+	ai_will_do = {
+		base = 55
+	}
+
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_LEC_CURRENCY
+	}
+
+	completion_reward = {
+		add_timed_idea = {
+			idea = ENG_civilian_factory_growth
+			days = 720
+		}
+	}
+}
+
+shared_focus = {
+	id = ENG_raise_defence_spending
+	icon = GFX_BEL_military_industry_in_the_sillon
+	prerequisite = {
+		focus = ENG_rearming_britain
+	}
+	mutually_exclusive = {
+		focus = ENG_fighting_with_the_pound
+	}
+
+	relative_position_id = ENG_form_home_affairs_buerau
+	x = 5
+	y = 3
+	cost = 6
+
+	ai_will_do = {
+		base = 55
+	}
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_INDUSTRY
+	}
+
+	completion_reward = {
+		add_timed_idea = {
+			idea = ENG_military_rearmament
+			days = 720
+		}
+		hidden_effect = {
+			country_event = {
+				id = krg_engdip.103
+				days = 12
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = ENG_invest_into_the_armouries
+	icon = GFX_generic_munitions_factories
+	prerequisite = {
+		focus = ENG_fighting_with_the_pound
+		focus = ENG_raise_defence_spending
+	}
+
+	relative_position_id = ENG_form_home_affairs_buerau
+	x = 4
+	y = 4
+	cost = 6
+
+	ai_will_do = {
+		base = 55
+	}
+
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_INDUSTRY
+	}
+
+	completion_reward = {
+		random_owned_controlled_state = {
+			limit = {
+				is_core_of = ENG
+			}
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = arms_factory
+				level = 1
+				instant_build = yes
+			}
+		}
+		random_owned_controlled_state = {
+			limit = {
+				is_core_of = ENG
+			}
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = arms_factory
+				level = 1
+				instant_build = yes
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = ENG_lynchpin_of_the_atlantic
+	text = ENG_lynchpin_of_the_atlantic
+	icon = GFX_NFA_protector_of_the_mediterranean
+	prerequisite = {
+		focus = ENG_invest_into_the_armouries
+	}
+	prerequisite = {
+		focus = ENG_rebuild_the_reserves
+	}
+
+	relative_position_id = ENG_form_home_affairs_buerau
+	x = 5
+	y = 5
+	cost = 6
+
+	ai_will_do = {
+		base = 55
+	}
+
+	available_if_capitulated = yes
+
+	search_filters = {
+		FOCUS_FILTER_ARMY_BONUS
+	}
+
+	completion_reward = {
+		add_ideas = ENG_atlantic_lynchpin
+	}
+}

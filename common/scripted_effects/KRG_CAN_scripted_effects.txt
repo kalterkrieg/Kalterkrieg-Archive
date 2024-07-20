@@ -1,0 +1,3691 @@
+
+CAN_move_up_american_integration = {
+	if = {
+		limit = { has_idea = CAN_idea_american_integration }
+		swap_ideas = {
+			remove_idea = CAN_idea_american_integration
+			add_idea = CAN_idea_american_integration_2
+		}
+	} #else_if = {
+	#	limit = { has_idea = CAN_idea_american_integration_2 }
+	#	swap_ideas = {
+	#		remove_idea = CAN_idea_american_integration_2
+	#		add_idea = CAN_idea_american_integration_3
+	#	}
+	#} 
+	else_if = {
+		limit = { has_idea = CAN_idea_american_integration_2 }
+		remove_ideas = CAN_idea_american_integration_2
+	}
+}
+
+CAN_move_up_unsettled_foreign_policy = {
+	if = {
+		limit = { has_idea = CAN_idea_unsettled_foreign_policy }
+		swap_ideas = {
+			remove_idea = CAN_idea_unsettled_foreign_policy
+			add_idea = CAN_idea_unsettled_foreign_policy_2
+		}
+	} else_if = {
+		limit = { has_idea = CAN_idea_unsettled_foreign_policy_2 }
+		swap_ideas = {
+			remove_idea = CAN_idea_unsettled_foreign_policy_2
+			add_idea = CAN_idea_unsettled_foreign_policy_3
+		}
+	} else_if = {
+		limit = { has_idea = CAN_idea_unsettled_foreign_policy_3 }
+		remove_ideas = CAN_idea_unsettled_foreign_policy_3
+	}
+}
+
+CAN_monthly = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_monthly"
+	CAN_update_region_populations = yes
+	if = {
+		limit = {
+			CAN = {
+				is_ai = no
+			}
+		}
+		CAN_update_region_poll_pie = yes #purely visual effect
+	}
+	random_list = {
+		15 = { #scandal
+			random_list = {
+				121 = {
+					set_variable = { CAN_political_scandal_state = 276 }
+				}
+				78 = {
+					set_variable = { CAN_political_scandal_state = 466 }
+				}
+				29 = {
+					set_variable = { CAN_political_scandal_state = 464 }
+				}
+				32 = {
+					set_variable = { CAN_political_scandal_state = 467 }
+				}
+				78 = {
+					set_variable = { CAN_political_scandal_state = 473 }
+				}
+			}
+			if = {
+				limit = { date > 1949.07.01 }
+				random_list = {
+					30 = {
+						set_variable = { CAN_political_scandal_target = 0 }
+						if = {
+							limit = {
+								has_global_flag = CAN_parl_ndp_formed
+							}
+							country_event = {
+								id = krg_can_elect.10
+								days = 15
+								random_days = 10
+							}
+						} else = {
+							country_event = {
+								id = krg_can_elect.2
+								days = 15
+								random_days = 10
+							}
+						}
+					} 
+					30 = {
+						set_variable = { CAN_political_scandal_target = 1 }
+						country_event = {
+							id = krg_can_elect.3
+							days = 15
+							random_days = 10
+						}
+					}
+					30 = {
+						set_variable = { CAN_political_scandal_target = 2 }
+						if = {
+							limit = {
+								has_global_flag = CAN_parl_pc_formed
+							}
+							country_event = {
+								id = krg_can_elect.11
+								days = 15
+								random_days = 10
+							}
+						} else = {
+							country_event = {
+								id = krg_can_elect.4
+								days = 15
+								random_days = 10
+							}
+						}
+					} 
+					15 = {
+						set_variable = { CAN_political_scandal_target = 3 }
+						country_event = {
+							id = krg_can_elect.5
+							days = 15
+							random_days = 10
+						}
+					}
+				}
+			} else = {
+				random_list = {
+					60 = {
+						set_variable = { CAN_political_scandal_target = 1 }
+						country_event = {
+							id = krg_can_elect.3
+							days = 15
+							random_days = 10
+						}
+					}
+					20 = {
+						set_variable = { CAN_political_scandal_target = 0 }
+						country_event = {
+							id = krg_can_elect.2
+							days = 15
+							random_days = 10
+						}
+					} 
+					20 = {
+						set_variable = { CAN_political_scandal_target = 2 }
+						country_event = {
+							id = krg_can_elect.4
+							days = 15
+							random_days = 10
+						}
+					}
+				}
+			}
+		}
+		15 = { #speech/rally
+			random_list = {
+				121 = {
+					set_variable = { CAN_political_speech_state = 276 }
+				}
+				78 = {
+					set_variable = { CAN_political_speech_state = 466 }
+				}
+				29 = {
+					set_variable = { CAN_political_speech_state = 464 }
+				}
+				32 = {
+					set_variable = { CAN_political_speech_state = 467 }
+				}
+				78 = {
+					set_variable = { CAN_political_speech_state = 473 }
+				}
+			}
+			random_list = {
+				30 = {
+					set_variable = { CAN_political_speech_target = 0 }
+					if = {
+						limit = {
+							has_global_flag = CAN_parl_ndp_formed
+						}
+						country_event = {
+							id = krg_can_elect.12
+							days = 15
+							random_days = 10
+						}
+					} else = {
+						country_event = {
+							id = krg_can_elect.6
+							days = 15
+							random_days = 10
+						}
+					}
+				} 
+				30 = {
+					set_variable = { CAN_political_speech_target = 1 }
+					country_event = {
+						id = krg_can_elect.7
+						days = 15
+						random_days = 10
+					}
+				}
+				30 = {
+					set_variable = { CAN_political_speech_target = 2 }
+					if = {
+						limit = {
+							has_global_flag = CAN_parl_pc_formed
+						}
+						country_event = {
+							id = krg_can_elect.13
+							days = 15
+							random_days = 10
+						}
+					} else = {
+						country_event = {
+							id = krg_can_elect.8
+							days = 15
+							random_days = 10
+						}
+					}
+				} 
+				15 = {
+					set_variable = { CAN_political_speech_target = 3 }
+					country_event = {
+						id = krg_can_elect.9
+						days = 15
+						random_days = 10
+					}
+				}
+			}
+		}
+		70 = {
+			##nothing!
+		}
+	}
+	if = {
+		limit = {
+			check_variable = { global.month = 1 }
+		}
+		CAN_yearly_events = yes
+	}
+}
+
+CAN_yearly_events = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_yearly_events"
+	if = {
+		limit = {
+			date < 1949.1.2 
+		}
+		country_event = { id = krg_can.1 }
+	} else_if = {
+		limit = {
+			date < 1950.1.2 
+		}
+		country_event = { id = krg_can.2 }
+	} else_if = {
+		limit = {
+			date < 1951.1.2 
+		}
+		country_event = { id = krg_can.3 }
+	} else_if = {
+		limit = {
+			date < 1952.1.2 
+		}
+		country_event = { id = krg_can.4 }
+	} else_if = {
+		limit = {
+			date < 1953.1.2 
+		}
+		country_event = { id = krg_can.5 }
+	} else_if = {
+		limit = {
+			date < 1954.1.2 
+		}
+		country_event = { id = krg_can.6 }
+	}
+}
+
+##██████╗  █████╗ ██████╗ ██╗
+##██╔══██╗██╔══██╗██╔══██╗██║ parl category
+##██████╔╝███████║██████╔╝██║
+##██╔═══╝ ██╔══██║██╔══██╗██║
+##██║     ██║  ██║██║  ██║███████╗
+##╚═╝     ╚═╝  ╚═╝╚═╝  ╚═╝╚══════╝
+
+parl_CAN_get_frame = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run parl_CAN_get_frame"
+
+	set_temp_variable = { seats_temp = parl_support_seats }
+	divide_temp_variable = { seats_temp = parl_maxseats }
+	multiply_temp_variable = { seats_temp = 11 }
+	if = {
+		limit = { check_variable = { seats_temp > 0 } }
+		clamp_temp_variable = {
+			var = seats_temp
+			min = 1
+			max = 11
+		}
+	}
+	else = {
+		set_temp_variable = { seats_temp = 1 }
+	}
+	set_variable = { CAN_parl_current_frame = seats_temp }
+}
+
+CAN_parl_initial_values = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_parl_initial_values"
+	add_to_array = { global.CAN_parl_seat_array = 8 } # CCF RadSoc
+	add_to_array = { global.CAN_parl_seat_array = 28 } # CCF/NDP SocDem
+	add_to_array = { global.CAN_parl_seat_array = 0 } # Liberal RevReps
+	add_to_array = { global.CAN_parl_seat_array = 92 } # Liberal SocLib
+	add_to_array = { global.CAN_parl_seat_array = 103 } # Liberal MarLib
+	add_to_array = { global.CAN_parl_seat_array = 97 } # Conservatives
+	add_to_array = { global.CAN_parl_seat_array = 10 } # Dominionist/Unionist
+
+	#0: Nonexistant, 1: Opposition, 2: Confidence/Supply, 3: Coalition, 4: Government
+	add_to_array = { global.CAN_parl_support_array = 1 } # CCF RadSoc
+	add_to_array = { global.CAN_parl_support_array = 1 } # CCF/NDP SocDem
+	add_to_array = { global.CAN_parl_support_array = 0 } # Liberal RevReps
+	add_to_array = { global.CAN_parl_support_array = 4 } # Liberal SocLib
+	add_to_array = { global.CAN_parl_support_array = 4 } # Liberal MarLib
+	add_to_array = { global.CAN_parl_support_array = 1 } # Conservatives
+	add_to_array = { global.CAN_parl_support_array = 1 } # Dominionist/Unionist
+}
+
+CAN_parl_adjust = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_parl_adjust"
+	### First reset everything
+	clear_array = global.CAN_parl_member_array
+	clear_array = global.CAN_parl_status_array
+	clear_array = global.CAN_parl_seat_inhoc_array
+	clear_array = global.CAN_parl_opp_array
+	clear_array = global.CAN_parl_gov_array
+	set_variable = { CAN.CAN_parl_support_confidence_value = 0 }
+	set_variable = { CAN.CAN_parl_support_coalition_value = 0 }
+	set_variable = { CAN.CAN_parl_support_government_value = 0 }
+	set_variable = { CAN.CAN_parl_majority_value = 0 }
+	set_variable = { CAN.CAN_parl_total_value = 0 }
+	
+	for_each_loop = {
+		array = global.CAN_parl_support_array
+		
+		### Prepare the member array (list of parties in the list) and the inhoc array (seat array but excluding nonexistant parties)
+		if = {
+			limit = {
+				check_variable = { global.CAN_parl_support_array^i > 0 }
+			}
+			set_temp_variable = { temp_CAN_parl_idx = i }
+			add_to_temp_variable = { temp_CAN_parl_idx = 1 }
+			add_to_array = { global.CAN_parl_member_array = temp_CAN_parl_idx }
+			add_to_array = { global.CAN_parl_seat_inhoc_array = global.CAN_parl_seat_array^i }
+		}
+		
+		### Calculate the controlled and total seats in parliament
+		if = {
+			limit = {
+				check_variable = { global.CAN_parl_support_array^i > 1 }
+			}
+			add_to_variable = { CAN.CAN_parl_support_confidence_value = global.CAN_parl_seat_array^i }
+			if = {
+				limit = {
+					check_variable = { global.CAN_parl_support_array^i > 2 }
+				}
+				add_to_variable = { CAN.CAN_parl_support_coalition_value = global.CAN_parl_seat_array^i }
+				if = {
+					limit = {
+						check_variable = { global.CAN_parl_support_array^i > 3 }
+					}
+					add_to_variable = { CAN.CAN_parl_support_government_value = global.CAN_parl_seat_array^i }
+				}
+			}
+		}
+
+		add_to_variable = { CAN.CAN_parl_total_value = global.CAN_parl_seat_array^i }
+		
+		### Fill out the main array with seats
+		if = {
+			limit = {
+				check_variable = { global.CAN_parl_support_array^i > 0 }
+				check_variable = { global.CAN_parl_seat_array^i > 0 }
+			}
+			set_temp_variable = { temp_CAN_seat_num = global.CAN_parl_seat_array^i }
+			set_temp_variable = { temp_CAN_idx = i }
+			add_to_temp_variable = { temp_CAN_idx = 1 }
+			if = {
+				limit = {
+					check_variable = { global.CAN_parl_support_array^i > 1 }
+				}
+				while_loop_effect = {
+					limit = {
+						check_variable = { temp_CAN_seat_num > 0 }
+					}
+					add_to_array = { global.CAN_parl_gov_array = temp_CAN_idx }
+					subtract_from_temp_variable = { temp_CAN_seat_num = 1 }
+				}
+			}
+			else = {
+				while_loop_effect = {
+					limit = {
+						check_variable = { temp_CAN_seat_num > 0 }
+					}
+					add_to_array = { global.CAN_parl_opp_array = temp_CAN_idx }
+					subtract_from_temp_variable = { temp_CAN_seat_num = 1 }
+				}
+			}
+		}
+	}
+	
+	### Now prepare the status array, which is just the support array but a -1 is added to the end to deal with index issues
+	add_to_array = { global.CAN_parl_status_array = -1 }
+	for_each_loop = {
+		array = global.CAN_parl_support_array
+		add_to_array = { global.CAN_parl_status_array = v }
+	}
+	
+	### Calculate the majority
+	set_temp_variable = { CAN_parl_majority_value_tmp = CAN.CAN_parl_total_value }
+	divide_temp_variable = { CAN_parl_majority_value_tmp = 2 }
+	set_variable = { CAN.CAN_parl_majority_value = CAN_parl_majority_value_tmp }
+	round_variable = CAN.CAN_parl_majority_value
+	if = {
+		limit = {
+			check_variable = { CAN.CAN_parl_majority_value = CAN_parl_majority_value_tmp }
+		}
+		add_to_variable = { CAN.CAN_parl_majority_value = 1 }
+	}
+}
+
+CAN_parl_add_caribbean = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_parl_add_caribbean"
+	set_country_flag = CAN_canadian_caribbean_provinces
+	690 = {
+		set_variable = { region_seats = 12 }
+	}
+	set_temp_variable = { sum = 0 }
+	add_to_temp_array = { seat_count = 690.election_support_array^0 }
+	add_to_temp_array = { seat_count = 690.election_support_array^1 }
+	add_to_temp_array = { seat_count = 690.election_support_array^2 }
+	add_to_temp_array = { seat_count = 690.election_support_array^3 }
+	for_each_loop = {
+		array = seat_count
+
+		divide_temp_variable = { seat_count^i = 100 }
+		multiply_temp_variable = { seat_count^i = 12 }
+		round_temp_variable = seat_count^i
+		add_to_temp_variable = { sum = seat_count^i }
+	}
+	if = {
+		limit = {
+			NOT = {
+				check_variable = { sum = 12 }
+			}
+		}
+		set_temp_variable = { diff = sum }
+		subtract_from_temp_variable = { diff = 12 }
+		if = {
+			limit = {
+				check_variable = { diff > 0 }
+			}
+			find_highest_in_array = {
+				array = seat_count
+				value = max
+				index = max_index
+			}
+			add_to_temp_variable = { seat_count^max_index = diff }
+		} else_if = {
+			limit = {
+				check_variable = { diff < 0 }
+			}
+			find_lowest_in_array = {
+				array = seat_count
+				value = low
+				index = low_index
+			}
+			subtract_from_temp_variable = { seat_count^low_index = diff }
+		}
+	}
+
+	add_to_variable = { global.CAN_parl_seat_array^1 = seat_count^0 }
+	add_to_variable = { global.CAN_parl_seat_array^3 = seat_count^1 }
+	add_to_variable = { global.CAN_parl_seat_array^5 = seat_count^2 }
+	add_to_variable = { global.CAN_parl_seat_array^6 = seat_count^3 }
+	add_to_variable = { parl_maxseats = 18 }
+	CAN_parl_adjust = yes
+}
+
+CAN_form_PC = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_form_PC"
+	CAN_popularity_update_popularities = yes
+	clear_array = global.CAN_parl_member_array
+	set_temp_variable = { ccf_seats = global.CAN_parl_seat_array^0 }
+	add_to_temp_variable = { ccf_seats = global.CAN_parl_seat_array^1 }
+	set_temp_variable = { lib_seats = global.CAN_parl_seat_array^3 }
+	add_to_temp_variable = { lib_seats = global.CAN_parl_seat_array^4 }
+	set_temp_variable = { tory_seats = global.CAN_parl_seat_array^5 }
+	add_to_temp_variable = { tory_seats = global.CAN_parl_seat_array^6 }
+	add_to_array = { global.CAN_parl_member_array = 1 }
+	add_to_array = { global.CAN_parl_member_array = 2 }
+	add_to_array = { global.CAN_parl_member_array = 3 }
+	add_to_array = { global.CAN_parl_member_array = 4 }
+	add_to_array = { global.CAN_parl_member_array = 5 }
+	add_to_array = { global.CAN_parl_member_array = 6 }
+	add_to_array = { global.CAN_parl_member_array = 7 }
+	add_to_temp_array = { new_seat_array = global.CAN_parl_seat_array^0 }
+	add_to_temp_array = { new_seat_array = global.CAN_parl_seat_array^1 }
+	add_to_temp_array = { new_seat_array = 0 }
+	add_to_temp_array = { new_seat_array = 0 }
+	add_to_temp_array = { new_seat_array = 0 }
+	add_to_temp_array = { new_seat_array = global.CAN_parl_seat_array^5 }
+	add_to_temp_array = { new_seat_array = global.CAN_parl_seat_array^6 }
+	if = {
+		limit = { has_government = social_liberal }
+		set_variable = { global.CAN_parl_support_array^2 = 4 }
+		set_variable = { global.CAN_parl_support_array^4 = 1 }
+		set_temp_variable = { lib_margin = global.CAN_parl_seat_array^3 }
+		add_to_temp_variable = { lib_margin = global.CAN_parl_seat_array^4 }
+		subtract_from_temp_variable = { lib_margin = global.CAN_parl_seat_array^0 }
+		subtract_from_temp_variable = { lib_margin = global.CAN_parl_seat_array^1 }
+		subtract_from_temp_variable = { lib_margin = global.CAN_parl_seat_array^5 }
+		subtract_from_temp_variable = { lib_margin = global.CAN_parl_seat_array^6 }
+		multiply_temp_variable = { lib_margin = 0.5 }
+		round_temp_variable = lib_margin
+		add_to_temp_variable = { new_seat_array^4 = lib_margin }
+	} else = {
+		set_variable = { global.CAN_parl_support_array^2 = 1 }
+		set_variable = { global.CAN_parl_support_array^4 = 1 }
+		set_temp_variable = { new_lib_seats = global.CAN_parl_seat_array^4 }
+		multiply_temp_variable = { new_lib_seats = 0.25 }
+		round_temp_variable = new_lib_seats
+		add_to_temp_variable = { new_seat_array^4 = new_lib_seats }
+	}
+	if = {
+		limit = { has_government = social_conservative }
+		set_temp_variable = { con_margin = global.CAN_parl_seat_array^5 }
+		add_to_temp_variable = { con_margin = global.CAN_parl_seat_array^6 }
+		if = {
+			limit = { check_variable = { lib_seats > ccf_seats } }
+			subtract_from_temp_variable = { con_margin = global.CAN_parl_seat_array^3 }
+			subtract_from_temp_variable = { con_margin = global.CAN_parl_seat_array^4 }
+		} else = {
+			subtract_from_temp_variable = { con_margin = global.CAN_parl_seat_array^0 }
+			subtract_from_temp_variable = { con_margin = global.CAN_parl_seat_array^1 }
+		}
+		log="[?con_margin]"
+		multiply_temp_variable = { con_margin = 0.5 }
+		log="[?con_margin]"
+		round_temp_variable = con_margin
+		add_to_temp_variable = { new_seat_array^4 = con_margin }
+		subtract_from_temp_variable = { new_seat_array^5 = con_margin }
+	} else = {
+		set_temp_variable = { new_con_seats = global.CAN_parl_seat_array^4 }
+		multiply_temp_variable = { new_con_seats = 0.50 }
+		round_temp_variable = new_con_seats
+		add_to_temp_variable = { new_seat_array^4 = new_con_seats }
+		subtract_from_temp_variable = { new_seat_array^5 = new_con_seats }
+	}
+	set_temp_variable = { new_rre_seats = global.CAN_parl_seat_array^3 }
+	add_to_temp_variable = { new_rre_seats = global.CAN_parl_seat_array^4 }
+	subtract_from_temp_variable = { new_rre_seats = lib_margin }
+	subtract_from_temp_variable = { new_rre_seats = new_lib_seats }
+	set_temp_variable = { old_lib_seats = new_rre_seats }
+	multiply_temp_variable = { new_rre_seats = CAN_popularity_lib_marlib }
+	round_temp_variable = new_rre_seats
+	add_to_temp_variable = { new_seat_array^2 = new_rre_seats }
+	subtract_from_temp_variable = { old_lib_seats = new_seat_array^2 }
+	set_temp_variable = { new_seat_array^3 = old_lib_seats }
+	clear_array = global.CAN_parl_seat_array
+	for_each_loop = {
+		array = new_seat_array
+
+		add_to_array = { global.CAN_parl_seat_array = v }
+	}
+	CAN_parl_adjust = yes
+
+	set_party_name = {
+		ideology = market_liberal
+		name = CAN_market_liberal_party_2
+		long_name = CAN_market_liberal_party_2_long
+	}
+	set_party_name = {
+		ideology = social_conservative
+		name = CAN_social_conservative_party_2
+		long_name = CAN_social_conservative_party_2_long
+	}
+	CAN_popularity_unionists_increase_large = yes
+	CAN_popularity_unionists_increase_medium = yes
+	CAN_popularity_conservatives_increase_large = yes
+	CAN_popularity_conservatives_increase_large = yes
+	custom_effect_tooltip = CAN_PC_formed_flee_tt
+	if = {
+		limit = { has_government = social_liberal }
+		coal_rev_mark_lib = yes
+		coal_add_rev_rep = yes
+		add_country_leader_role = {
+			Character = CAN_wac_bennet
+			promote_leader = yes
+			Country_leader = {
+				ideology = social_conservative_subtype
+				expire="1982.1.1.1"
+			}
+		}
+	} else_if = {
+		limit = { has_government = social_conservative }
+		coal_add_auth_dem = yes
+		set_country_flag = CAN_change_drew_bennett
+	}
+}
+
+##███████╗██╗     ███████╗ █████╗ ████████╗
+##██╔════╝██║     ██╔════╝██╔══██╗╚══██╔══╝ elect category
+##█████╗  ██║     █████╗  ██║  ╚═╝   ██║
+##██╔══╝  ██║     ██╔══╝  ██║  ██╗   ██║
+##███████╗███████╗███████╗╚█████╔╝   ██║
+##╚══════╝╚══════╝╚══════╝ ╚════╝    ╚═╝
+
+#pretty self-explanatory at large, less self-explanatory in detail. sets up the electoral systems starting values
+CAN_elections_initial = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_elections_initial"
+	#this array is state ID's for where all electoral information is stored
+	add_to_array = { election_region_array = 276 } 
+	add_to_array = { election_region_array = 466 }
+	add_to_array = { election_region_array = 467 }
+	add_to_array = { election_region_array = 464 }
+	add_to_array = { election_region_array = 473 }
+	add_to_array = { election_region_array = 690 }
+
+	# Ontario
+	276 = {
+		#number of seats in parliament this region gets
+		set_variable = { region_seats = 121 }
+
+		#election_support_array holds percentage supports for each party, indexed as: 0=CCF 1=Lib 2=Con/PC 3=Unionists
+		add_to_array = { election_support_array = 40 }
+		add_to_array = { election_support_array = 39 }
+		add_to_array = { election_support_array = 18 }
+		add_to_array = { election_support_array = 3 }
+
+		#same thing as election_support_array, this array is purely for the political tooltip.
+		add_to_array = { CAN_region_last_election_result = 21 }
+		add_to_array = { CAN_region_last_election_result = 50 }
+		add_to_array = { CAN_region_last_election_result = 26 }
+		add_to_array = { CAN_region_last_election_result = 3 }
+	}
+	#this flag is set on all states so that the political tooltip will show up when you select that state
+	682 = { set_state_flag = CAN_part_of_region }
+	276 = { set_state_flag = CAN_part_of_region }
+	1077 = { set_state_flag = CAN_part_of_region }
+	1075 = { set_state_flag = CAN_part_of_region }
+	1076 = { set_state_flag = CAN_part_of_region }
+	# Quebec
+	466 = {
+		set_variable = { region_seats = 78 }
+
+		add_to_array = { election_support_array = 17 }
+		add_to_array = { election_support_array = 51 }
+		add_to_array = { election_support_array = 32 }
+		add_to_array = { election_support_array = 0 }
+
+		add_to_array = { CAN_region_last_election_result = 6 }
+		add_to_array = { CAN_region_last_election_result = 68 }
+		add_to_array = { CAN_region_last_election_result = 26 }
+		add_to_array = { CAN_region_last_election_result = 0 }
+	}
+	468 = { set_state_flag = CAN_part_of_region }
+	1078 = { set_state_flag = CAN_part_of_region }
+	1079 = { set_state_flag = CAN_part_of_region }
+	466 = { set_state_flag = CAN_part_of_region }
+	# Praire
+	467 = {
+		set_variable = { region_seats = 29 }
+
+		add_to_array = { election_support_array = 31 }
+		add_to_array = { election_support_array = 41 }
+		add_to_array = { election_support_array = 25 }
+		add_to_array = { election_support_array = 3 }
+
+		add_to_array = { CAN_region_last_election_result = 18 }
+		add_to_array = { CAN_region_last_election_result = 45 }
+		add_to_array = { CAN_region_last_election_result = 52 }
+		add_to_array = { CAN_region_last_election_result = 1 }
+	}
+	693 = { set_state_flag = CAN_part_of_region }
+	469 = { set_state_flag = CAN_part_of_region }
+	683 = { set_state_flag = CAN_part_of_region }
+	467 = { set_state_flag = CAN_part_of_region }
+	1098 = { set_state_flag = CAN_part_of_region }
+	# Atlantic
+	464 = {
+		set_variable = { region_seats = 32 }
+
+		add_to_array = { election_support_array = 9 }
+		add_to_array = { election_support_array = 52 }
+		add_to_array = { election_support_array = 36 }
+		add_to_array = { election_support_array = 3 }
+
+		add_to_array = { CAN_region_last_election_result = 23 }
+		add_to_array = { CAN_region_last_election_result = 43 }
+		add_to_array = { CAN_region_last_election_result = 34 }
+		add_to_array = { CAN_region_last_election_result = 0 }
+	}
+	465 = { set_state_flag = CAN_part_of_region }
+	464 = { set_state_flag = CAN_part_of_region }
+	331 = { set_state_flag = CAN_part_of_region }
+	332 = { set_state_flag = CAN_part_of_region }
+	# West
+	473 = {
+		set_variable = { region_seats = 78 }
+
+		add_to_array = { election_support_array = 36 }
+		add_to_array = { election_support_array = 35 }
+		add_to_array = { election_support_array = 26 }
+		add_to_array = { election_support_array = 3 }
+
+		add_to_array = { CAN_region_last_election_result = 19 }
+		add_to_array = { CAN_region_last_election_result = 34 }
+		add_to_array = { CAN_region_last_election_result = 47 }
+		add_to_array = { CAN_region_last_election_result = 0 }
+	}
+	740 = { set_state_flag = CAN_part_of_region }
+	473 = { set_state_flag = CAN_part_of_region }
+	1083 = { set_state_flag = CAN_part_of_region }
+	1084 = { set_state_flag = CAN_part_of_region }
+	471 = { set_state_flag = CAN_part_of_region }
+	470 = { set_state_flag = CAN_part_of_region }
+	1082 = { set_state_flag = CAN_part_of_region }
+	472 = { set_state_flag = CAN_part_of_region }
+	# Caribbean
+	690 = {
+		set_variable = { region_seats = 0 } #the Caribbean does not have voting status at the start of game
+
+		add_to_array = { election_support_array = 52 } #6
+		add_to_array = { election_support_array = 37 } #4
+		add_to_array = { election_support_array = 9 } #1
+		add_to_array = { election_support_array = 2 } #1
+	}
+
+	##Campaign decision category GUI initialization
+	set_variable = { CAN_elections_gui_selected_state = 276 } #this changes as you click the buttons at the top of the GUI
+
+	#copy the array for the selected state into this array used for display purposes in the campaign GUI
+	for_each_loop = {
+		array = 276.election_support_array
+		
+		add_to_array = { selected_state_election_support_array = v }
+	}
+
+	###Party pop vars
+	#party popularity on the in-game country pie chart is determined first by party and then split according to these percentages among different ideologies
+	#these variables should always add to 1.
+	set_variable = { CAN_popularity_lib_soclib = 0.55 }
+	set_variable = { CAN_popularity_lib_marlib = 0.45 }
+
+	###Copy past election results to all states in the region for tooltip purposes
+	#Ontario
+	set_variable = { arr_clone_id = 276 }
+	682 = { CAN_distribute_region_past_arr = yes }
+	1077 = { CAN_distribute_region_past_arr = yes }
+	1075 = { CAN_distribute_region_past_arr = yes }
+	1076 = { CAN_distribute_region_past_arr = yes }
+	# Quebec
+	set_variable = { arr_clone_id = 466 }
+	468 = { CAN_distribute_region_past_arr = yes }
+	1078 = { CAN_distribute_region_past_arr = yes }
+	1079 = { CAN_distribute_region_past_arr = yes }
+	# Praire
+	set_variable = { arr_clone_id = 467 }
+	693 = { CAN_distribute_region_past_arr = yes }
+	469 = { CAN_distribute_region_past_arr = yes }
+	683 = { CAN_distribute_region_past_arr = yes }
+	1098 = { CAN_distribute_region_past_arr = yes }
+	# Atlantic
+	set_variable = { arr_clone_id = 464 }
+	465 = { CAN_distribute_region_past_arr = yes }
+	331 = { CAN_distribute_region_past_arr = yes }
+	332 = { CAN_distribute_region_past_arr = yes }
+	# West
+	set_variable = { arr_clone_id = 473 }
+	740 = { CAN_distribute_region_past_arr = yes }
+	1083 = { CAN_distribute_region_past_arr = yes }
+	1084 = { CAN_distribute_region_past_arr = yes }
+	471 = { CAN_distribute_region_past_arr = yes }
+	470 = { CAN_distribute_region_past_arr = yes }
+	1082 = { CAN_distribute_region_past_arr = yes }
+	472 = { CAN_distribute_region_past_arr = yes }
+
+	#pie chart setup for political tooltip. basically black magic.
+	every_owned_state = {
+		limit = {
+			has_state_flag = CAN_part_of_region
+		}
+		clear_array = past_pie_chart
+		resize_array = {
+			array = past_pie_chart
+			value = 1 # 1 is value for neutrality frame, so we don't have to make a loop for it
+			size = 100 # 100 pieces, each percent is one piece
+		}
+		set_temp_variable = { socdem_pop = THIS.CAN_region_last_election_result^0 }
+		round_temp_variable = socdem_pop
+
+		set_temp_variable = { lib_pop = THIS.CAN_region_last_election_result^1 }
+		round_temp_variable = lib_pop 
+		set_variable = { ROOT.last_idx = socdem_pop }
+		add_to_temp_variable = { lib_pop = ROOT.last_idx }
+		for_loop_effect = {
+			start = ROOT.last_idx
+			end = lib_pop
+			set_variable = { past_pie_chart^v = 2 }
+			add_to_variable = { ROOT.last_idx = 1 }
+		}
+
+		set_temp_variable = { con_pop = THIS.CAN_region_last_election_result^2 }
+		round_temp_variable = con_pop
+		add_to_temp_variable = { con_pop = ROOT.last_idx }
+		for_loop_effect = {
+			start = ROOT.last_idx
+			end = con_pop
+			set_variable = { past_pie_chart^v = 3 }
+			add_to_variable = { ROOT.last_idx = 1 }
+		}
+
+		set_temp_variable = { uni_pop = THIS.CAN_region_last_election_result^3 }
+		round_temp_variable = uni_pop 
+		add_to_temp_variable = { uni_pop = ROOT.last_idx }
+		for_loop_effect = {
+			start = ROOT.last_idx
+			end = uni_pop
+			set_variable = { past_pie_chart^v = 4 }
+		}
+
+		clear_variable = ROOT.last_idx
+		add_to_variable = { past_pie_chart_dirty = 1 }
+	}
+}
+
+CAN_elections_1949 = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_elections"
+	log = "Results of the Canadian elections of [?global.date.GetDateStringNoHourLong]"
+
+	clear_array = global.CAN_parl_seat_array
+
+	resize_array = { array = global.CAN_parl_seat_array value = 0 size = 7 }
+
+	for_each_scope_loop = {
+		array = election_region_array
+
+		set_temp_variable = { temp_CAN_seat_total = 0 }
+
+		for_each_loop = {
+			array = election_support_array
+
+			if = {
+				limit = {
+					check_variable = { election_support_array^i > 5 }
+				}
+				set_temp_variable = { temp_CAN_seats = region_seats }
+				multiply_temp_variable = { temp_CAN_seats = election_support_array^i }
+				divide_temp_variable = { temp_CAN_seats = 100 }
+				round_temp_variable = temp_CAN_seats
+
+				if = {
+					limit = {
+						check_variable = { i = 0 } # CCF
+					}
+
+					set_temp_variable = { temp_CAN_radsoc = temp_CAN_seats }
+					multiply_temp_variable = { temp_CAN_radsoc = 0.3 }
+					round_temp_variable = temp_CAN_radsoc
+					add_to_variable = { global.CAN_parl_seat_array^0 = temp_CAN_radsoc }
+					add_to_temp_variable = { temp_CAN_seat_total = temp_CAN_radsoc }
+					log = "[?temp_CAN_radsoc] CCFs added to seat total [?temp_CAN_seat_total]"
+					
+
+					set_temp_variable = { temp_CAN_socdem = temp_CAN_seats }
+					multiply_temp_variable = { temp_CAN_socdem = 0.7 }
+					round_temp_variable = temp_CAN_socdem
+					add_to_variable = { global.CAN_parl_seat_array^1 = temp_CAN_socdem }
+					add_to_temp_variable = { temp_CAN_seat_total = temp_CAN_socdem }
+					log = "[?temp_CAN_socdem] CCFs added to seat total [?temp_CAN_seat_total]"
+				}
+				else_if = {
+					limit = {
+						check_variable = { i = 1 } # Liberals
+					}
+
+					set_temp_variable = { temp_CAN_soclib = temp_CAN_seats }
+					multiply_temp_variable = { temp_CAN_soclib = 0.65 }
+					round_temp_variable = temp_CAN_soclib
+					add_to_variable = { global.CAN_parl_seat_array^3 = temp_CAN_soclib }
+					add_to_temp_variable = { temp_CAN_seat_total = temp_CAN_soclib }
+					log = "[?temp_CAN_soclib] Liberals added to seat total [?temp_CAN_seat_total]"
+
+					set_temp_variable = { temp_CAN_marlib = temp_CAN_seats }
+					multiply_temp_variable = { temp_CAN_marlib = 0.35 }
+					round_temp_variable = temp_CAN_marlib
+					add_to_variable = { global.CAN_parl_seat_array^4 = temp_CAN_marlib }
+					add_to_temp_variable = { temp_CAN_seat_total = temp_CAN_marlib }
+					log = "[?temp_CAN_marlib] Liberals added to seat total [?temp_CAN_seat_total]"
+
+				}
+				else_if = {
+					limit = {
+						check_variable = { i = 2 } # Conservatives
+					}
+					add_to_variable = { global.CAN_parl_seat_array^5 = temp_CAN_seats }
+					add_to_temp_variable = { temp_CAN_seat_total = temp_CAN_seats }
+					log = "[?temp_CAN_seats] Conservatives added to seat total [?temp_CAN_seat_total]"
+				}
+				else_if = {
+					limit = {
+						check_variable = { i = 3 } # Dominionists
+					}
+					add_to_variable = { global.CAN_parl_seat_array^6 = temp_CAN_seats }
+					add_to_temp_variable = { temp_CAN_seat_total = temp_CAN_seats }
+					log = "[?temp_CAN_seats] Dominionists added to seat total [?temp_CAN_seat_total]"
+				}
+			}
+		}
+
+		if = {
+			limit = {
+				check_variable = { temp_CAN_seat_total > region_seats }
+			}
+			set_temp_variable = { temp_CAN_difference = temp_CAN_seat_total }
+			subtract_from_temp_variable = { temp_CAN_difference = region_seats }
+
+			find_highest_in_array = { array = global.CAN_parl_seat_array index = seat_highest_index }
+			subtract_from_variable = { global.CAN_parl_seat_array^seat_highest_index = temp_CAN_difference }
+		}
+		else_if = {
+			limit = {
+				check_variable = { temp_CAN_seat_total < region_seats }
+			}
+			set_temp_variable = { temp_CAN_difference = region_seats }
+			subtract_from_temp_variable = { temp_CAN_difference = temp_CAN_seat_total }
+
+			find_highest_in_array = { array = global.CAN_parl_seat_array index = seat_highest_index }
+			add_to_variable = { global.CAN_parl_seat_array^seat_highest_index = temp_CAN_difference }
+		}
+
+		log = "Current Values after [THIS.GetName]:"
+
+		for_each_loop = {
+			array = global.CAN_parl_seat_array
+
+			log = "Value - [?global.CAN_parl_seat_array^i]"
+		}
+	}
+
+	#hold off the UI update for the event
+	#CAN_parl_adjust = yes
+	
+	add_to_temp_variable = { seats_ccf = global.CAN_parl_seat_array^0 }
+	add_to_temp_variable = { seats_ccf = global.CAN_parl_seat_array^1 }
+	add_to_temp_variable = { seats_lib = global.CAN_parl_seat_array^3 }
+	add_to_temp_variable = { seats_lib = global.CAN_parl_seat_array^4 }
+	add_to_temp_variable = { seats_con = global.CAN_parl_seat_array^5 }
+	log = "seats_ccf: [?seats_ccf], lib: [?seats_lib], con: [?seats_con]"
+	if = {
+		limit = {
+			check_variable = { seats_ccf > seats_lib }
+			check_variable = { seats_ccf > seats_con }
+		}
+		country_event = {
+			id = krg_can_elect.1008
+			hours = 6
+		}
+	}
+	else_if = {
+		limit = {
+			check_variable = { seats_lib > seats_ccf }
+			check_variable = { seats_lib > seats_con }
+		}
+		country_event = {
+			id = krg_can_elect.1009
+			hours = 6
+		}
+	}
+	else_if = {
+		limit = {
+			check_variable = { seats_con > seats_ccf }
+			check_variable = { seats_con > seats_lib }
+		}
+		country_event = {
+			id = krg_can_elect.1010
+			hours = 6
+		}
+	}
+	else = { #no ties please; give a dominionist seat to one of the tied parties in this order: player's selected party, liberals, conservatives
+		if = {
+			limit = {
+				has_country_flag = CAN_1949_election_support_ccf
+				OR = {
+					check_variable = { seats_ccf > seats_lib }
+					check_variable = { seats_ccf > seats_con }
+				}
+			}
+			add_to_variable = { global.CAN_parl_seat_array^1 = 1 }
+			add_to_variable = { global.CAN_parl_seat_array^6 = -1 }
+			country_event = {
+				id = krg_can_elect.1008
+				hours = 6
+			}
+		}
+		else_if = {
+			limit = {
+				has_country_flag = CAN_1949_election_support_libs
+				OR = {
+					check_variable = { seats_lib > seats_ccf }
+					check_variable = { seats_lib > seats_con }
+				}
+			}
+			add_to_variable = { global.CAN_parl_seat_array^6 = -1 }
+			if = {
+				limit = {
+					has_country_flag = CAN_1949_election_libs_laurent
+				}
+				add_to_variable = { global.CAN_parl_seat_array^3 = 1 }
+				else = {
+					add_to_variable = { global.CAN_parl_seat_array^4 = 1 }
+				}
+			}
+			country_event = {
+				id = krg_can_elect.1009
+				hours = 6
+			}
+		}
+		else_if = {
+			limit = {
+				has_country_flag = CAN_1949_election_support_con
+				OR = {
+					check_variable = { seats_con > seats_ccf }
+					check_variable = { seats_con > seats_con }
+				}
+			}
+			add_to_variable = { global.CAN_parl_seat_array^5 = 1 }
+			add_to_variable = { global.CAN_parl_seat_array^6 = -1 }
+			country_event = {
+				id = krg_can_elect.1010
+				hours = 6
+			}
+		}
+		else_if = {
+			limit = {
+				OR = {
+					check_variable = { seats_lib > seats_ccf }
+					check_variable = { seats_lib > seats_con }
+				}
+			}
+			add_to_variable = { global.CAN_parl_seat_array^6 = -1 }
+			if = {
+				limit = {
+					has_country_flag = CAN_1949_election_libs_laurent
+				}
+				add_to_variable = { global.CAN_parl_seat_array^3 = 1 }
+				else = {
+					add_to_variable = { global.CAN_parl_seat_array^4 = 1 }
+				}
+			}
+			country_event = {
+				id = krg_can_elect.1009
+				hours = 6
+			}
+		}
+		else = {
+			add_to_variable = { global.CAN_parl_seat_array^5 = 1 }
+			add_to_variable = { global.CAN_parl_seat_array^6 = -1 }
+			country_event = {
+				id = krg_can_elect.1010
+				hours = 6
+			}
+		}
+	}
+
+	CAN_distribute_region_pop_arr = yes
+	CAN_election_copy_current_results = yes
+}
+
+CAN_elections_1953 = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_elections"
+	log = "Results of the Canadian elections of [?global.date.GetDateStringNoHourLong]"
+
+	clear_array = global.CAN_parl_seat_array
+
+	resize_array = { array = global.CAN_parl_seat_array value = 0 size = 7 }
+
+	for_each_scope_loop = {
+		array = election_region_array
+
+		set_temp_variable = { temp_CAN_seat_total = 0 }
+
+		for_each_loop = {
+			array = election_support_array
+
+			if = {
+				limit = {
+					OR = {
+						check_variable = { election_support_array^i > 5 }
+						check_variable = { i = 3 } #scripted dominionist seats
+					}
+				}
+				set_temp_variable = { temp_CAN_seats = region_seats }
+				multiply_temp_variable = { temp_CAN_seats = election_support_array^i }
+				divide_temp_variable = { temp_CAN_seats = 100 }
+				round_temp_variable = temp_CAN_seats
+
+				if = {
+					limit = {
+						check_variable = { i = 0 } # CCF
+					}
+					set_temp_variable = { temp_CAN_party_popularity = CAN.party_popularity_100@radical_socialist }
+					add_to_temp_variable = { temp_CAN_party_popularity = CAN.party_popularity_100@social_democrat }
+
+					set_temp_variable = { temp_CAN_radsoc = temp_CAN_seats }
+					multiply_temp_variable = { temp_CAN_radsoc = CAN.party_popularity_100@radical_socialist }
+					divide_temp_variable = { temp_CAN_radsoc = temp_CAN_party_popularity }
+					round_temp_variable = temp_CAN_radsoc
+					add_to_variable = { global.CAN_parl_seat_array^0 = temp_CAN_radsoc }
+					add_to_temp_variable = { temp_CAN_seat_total = temp_CAN_radsoc }
+					log = "[?temp_CAN_radsoc] CCFs added to seat total [?temp_CAN_seat_total]"
+					
+
+					set_temp_variable = { temp_CAN_socdem = temp_CAN_seats }
+					multiply_temp_variable = { temp_CAN_socdem = CAN.party_popularity_100@social_democrat }
+					divide_temp_variable = { temp_CAN_socdem = temp_CAN_party_popularity }
+					round_temp_variable = temp_CAN_socdem
+					add_to_variable = { global.CAN_parl_seat_array^1 = temp_CAN_socdem }
+					add_to_temp_variable = { temp_CAN_seat_total = temp_CAN_socdem }
+					log = "[?temp_CAN_socdem] CCFs added to seat total [?temp_CAN_seat_total]"
+				}
+				else_if = {
+					limit = {
+						check_variable = { i = 1 } # Liberals
+					}
+					set_temp_variable = { temp_CAN_party_popularity = CAN.party_popularity_100@revolutionary_republican }
+					add_to_temp_variable = { temp_CAN_party_popularity = CAN.party_popularity_100@social_liberal }
+
+					set_temp_variable = { temp_CAN_revrep = temp_CAN_seats }
+					multiply_temp_variable = { temp_CAN_revrep = CAN.party_popularity_100@radical_socialist }
+					divide_temp_variable = { temp_CAN_revrep = temp_CAN_party_popularity }
+					round_temp_variable = temp_CAN_revrep
+					add_to_variable = { global.CAN_parl_seat_array^2 = temp_CAN_revrep }
+					add_to_temp_variable = { temp_CAN_seat_total = temp_CAN_revrep }
+					log = "[?temp_CAN_revrep] Liberals added to seat total [?temp_CAN_seat_total]"
+
+					set_temp_variable = { temp_CAN_soclib = temp_CAN_seats }
+					multiply_temp_variable = { temp_CAN_soclib = CAN.party_popularity_100@social_liberal }
+					divide_temp_variable = { temp_CAN_soclib = temp_CAN_party_popularity }
+					round_temp_variable = temp_CAN_soclib
+					add_to_variable = { global.CAN_parl_seat_array^3 = temp_CAN_soclib }
+					add_to_temp_variable = { temp_CAN_seat_total = temp_CAN_soclib }
+					log = "[?temp_CAN_soclib] Liberals added to seat total [?temp_CAN_seat_total]"
+				}
+				else_if = {
+					limit = {
+						check_variable = { i = 2 } # ProgCons
+					}
+					set_temp_variable = { temp_CAN_party_popularity = CAN.party_popularity_100@market_liberal }
+
+					set_temp_variable = { temp_CAN_marklib = temp_CAN_seats }
+					multiply_temp_variable = { temp_CAN_marklib = CAN.party_popularity_100@market_liberal }
+					divide_temp_variable = { temp_CAN_marklib = temp_CAN_party_popularity }
+					round_temp_variable = temp_CAN_marklib
+					add_to_variable = { global.CAN_parl_seat_array^4 = temp_CAN_marklib }
+					add_to_temp_variable = { temp_CAN_seat_total = temp_CAN_marklib }
+					log = "[?temp_CAN_marklib] ProgCons added to seat total [?temp_CAN_seat_total]"
+				}
+				else_if = {
+					limit = {
+						check_variable = { i = 3 } # Unionists
+					}
+					set_temp_variable = { temp_CAN_party_popularity = CAN.party_popularity_100@social_conservative }
+					add_to_temp_variable = { temp_CAN_party_popularity = CAN.party_popularity_100@authoritarian_democrat }
+
+					set_temp_variable = { temp_CAN_soccon = temp_CAN_seats }
+					multiply_temp_variable = { temp_CAN_soccon = CAN.party_popularity_100@social_conservative }
+					divide_temp_variable = { temp_CAN_soccon = temp_CAN_party_popularity }
+					round_temp_variable = temp_CAN_soccon
+					add_to_variable = { global.CAN_parl_seat_array^5 = temp_CAN_soccon }
+					add_to_temp_variable = { temp_CAN_seat_total = temp_CAN_soccon }
+					log = "[?temp_CAN_soccon] Unionists added to seat total [?temp_CAN_seat_total]"
+
+					set_temp_variable = { temp_CAN_authdem = temp_CAN_seats }
+					multiply_temp_variable = { temp_CAN_authdem = CAN.party_popularity_100@authoritarian_democrat }
+					divide_temp_variable = { temp_CAN_authdem = temp_CAN_party_popularity }
+					round_temp_variable = temp_CAN_authdem
+					add_to_variable = { global.CAN_parl_seat_array^6 = temp_CAN_authdem }
+					add_to_temp_variable = { temp_CAN_seat_total = temp_CAN_authdem }
+					log = "[?temp_CAN_authdem] Unionists added to seat total [?temp_CAN_seat_total]"
+				}
+			}
+		}
+
+		if = {
+			limit = {
+				check_variable = { temp_CAN_seat_total > region_seats }
+			}
+			set_temp_variable = { temp_CAN_difference = temp_CAN_seat_total }
+			subtract_from_temp_variable = { temp_CAN_difference = region_seats }
+
+			find_highest_in_array = { array = global.CAN_parl_seat_array index = seat_highest_index }
+			subtract_from_variable = { global.CAN_parl_seat_array^seat_highest_index = temp_CAN_difference }
+		}
+		else_if = {
+			limit = {
+				check_variable = { temp_CAN_seat_total < region_seats }
+			}
+			set_temp_variable = { temp_CAN_difference = region_seats }
+			subtract_from_temp_variable = { temp_CAN_difference = temp_CAN_seat_total }
+
+			find_highest_in_array = { array = global.CAN_parl_seat_array index = seat_highest_index }
+			add_to_variable = { global.CAN_parl_seat_array^seat_highest_index = temp_CAN_difference }
+		}
+
+		log = "Current Values after [THIS.GetName]:"
+
+		for_each_loop = {
+			array = global.CAN_parl_seat_array
+
+			log = "Value - [?global.CAN_parl_seat_array^i]"
+		}
+	}
+
+	#hold off the UI update for the event
+	#CAN_parl_adjust = yes
+	
+	add_to_temp_variable = { seats_ccf = global.CAN_parl_seat_array^0 }
+	add_to_temp_variable = { seats_ccf = global.CAN_parl_seat_array^1 }
+	add_to_temp_variable = { seats_lib = global.CAN_parl_seat_array^2 }
+	add_to_temp_variable = { seats_lib = global.CAN_parl_seat_array^3 }
+	add_to_temp_variable = { seats_con = global.CAN_parl_seat_array^4 }
+	add_to_temp_variable = { seats_uni = global.CAN_parl_seat_array^5 }
+	add_to_temp_variable = { seats_uni = global.CAN_parl_seat_array^6 }
+	log = "seats_ccf: [?seats_ccf], lib: [?seats_lib], con: [?seats_con]"
+	if = {
+		limit = {
+			check_variable = { seats_ccf > seats_lib }
+			check_variable = { seats_ccf > seats_con }
+			check_variable = { seats_ccf > seats_uni }
+		}
+		country_event = {
+			id = krg_can_elect.1016
+			hours = 6
+		}
+	}
+	else_if = {
+		limit = {
+			check_variable = { seats_lib > seats_ccf }
+			check_variable = { seats_lib > seats_con }
+			check_variable = { seats_lib > seats_uni }
+		}
+		country_event = {
+			id = krg_can_elect.1017
+			hours = 6
+		}
+	}
+	else_if = {
+		limit = {
+			check_variable = { seats_con > seats_ccf }
+			check_variable = { seats_con > seats_lib }
+			check_variable = { seats_con > seats_uni }
+		}
+		country_event = {
+			id = krg_can_elect.1018
+			hours = 6
+		}
+	}
+	else_if = {
+		limit = {
+			check_variable = { seats_uni > seats_ccf }
+			check_variable = { seats_uni > seats_lib }
+			check_variable = { seats_uni > seats_con }
+		}
+		country_event = {
+			id = krg_can_elect.1019
+			hours = 6
+		}
+	}
+	else = { #no ties please; give a dominionist seat to one of the tied parties in this order: player's selected party, liberals, conservatives
+		if = {
+			limit = {
+				has_country_flag = CAN_1953_election_support_ndp
+				OR = {
+					check_variable = { seats_ccf > seats_lib }
+					check_variable = { seats_ccf > seats_con }
+					check_variable = { seats_ccf > seats_uni }
+				}
+			}
+			add_to_variable = { global.CAN_parl_seat_array^1 = 1 }
+			add_to_variable = { global.CAN_parl_seat_array^6 = -1 }
+			country_event = {
+				id = krg_can_elect.1016
+				hours = 6
+			}
+		}
+		else_if = {
+			limit = {
+				has_country_flag = CAN_1953_election_support_libs
+				OR = {
+					check_variable = { seats_lib > seats_ccf }
+					check_variable = { seats_lib > seats_con }
+					check_variable = { seats_lib > seats_uni }
+				}
+			}
+			add_to_variable = { global.CAN_parl_seat_array^6 = -1 }
+			if = {
+				limit = {
+					has_country_flag = CAN_1953_election_libs_laurent
+				}
+				add_to_variable = { global.CAN_parl_seat_array^3 = 1 }
+				else = {
+					add_to_variable = { global.CAN_parl_seat_array^4 = 1 }
+				}
+			}
+			country_event = {
+				id = krg_can_elect.1017
+				hours = 6
+			}
+		}
+		else_if = {
+			limit = {
+				has_country_flag = CAN_1953_election_support_con
+				OR = {
+					check_variable = { seats_con > seats_ccf }
+					check_variable = { seats_con > seats_con }
+					check_variable = { seats_con > seats_uni }
+				}
+			}
+			add_to_variable = { global.CAN_parl_seat_array^5 = 1 }
+			add_to_variable = { global.CAN_parl_seat_array^6 = -1 }
+			country_event = {
+				id = krg_can_elect.1018
+				hours = 6
+			}
+		}
+		else = {
+			add_to_variable = { global.CAN_parl_seat_array^5 = 1 }
+			add_to_variable = { global.CAN_parl_seat_array^6 = -1 }
+			country_event = {
+				id = krg_can_elect.1019
+				hours = 6
+			}
+		}
+	}
+	CAN_distribute_region_pop_arr = yes
+	if = {
+		limit = {
+			is_ai = no
+		}
+		CAN_election_copy_current_results = yes
+	}
+}
+
+CAN_snap_elections_crisis_effect_1 = {
+	clr_country_flag = CAN_crisis_election_start
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_snap_elections_crisis_effect_1"
+	log = "Results of the Canadian elections of [?global.date.GetDateStringNoHourLong]"
+
+	clear_array = global.CAN_parl_seat_array
+
+	resize_array = { array = global.CAN_parl_seat_array value = 0 size = 7 }
+
+	for_each_scope_loop = {
+		array = election_region_array
+
+		set_temp_variable = { temp_CAN_seat_total = 0 }
+
+		for_each_loop = {
+			array = election_support_array
+
+			if = {
+				limit = {
+					OR = {
+						check_variable = { election_support_array^i > 5 }
+						check_variable = { i = 3 } #scripted dominionist seats
+					}
+				}
+				set_temp_variable = { temp_CAN_seats = region_seats }
+				multiply_temp_variable = { temp_CAN_seats = election_support_array^i }
+				divide_temp_variable = { temp_CAN_seats = 100 }
+				round_temp_variable = temp_CAN_seats
+
+				if = {
+					limit = {
+						check_variable = { i = 0 } # CCF
+					}
+					set_temp_variable = { temp_CAN_party_popularity = CAN.party_popularity_100@radical_socialist }
+					add_to_temp_variable = { temp_CAN_party_popularity = CAN.party_popularity_100@social_democrat }
+
+					set_temp_variable = { temp_CAN_radsoc = temp_CAN_seats }
+					multiply_temp_variable = { temp_CAN_radsoc = CAN.party_popularity_100@radical_socialist }
+					divide_temp_variable = { temp_CAN_radsoc = temp_CAN_party_popularity }
+					round_temp_variable = temp_CAN_radsoc
+					add_to_variable = { global.CAN_parl_seat_array^0 = temp_CAN_radsoc }
+					add_to_temp_variable = { temp_CAN_seat_total = temp_CAN_radsoc }
+					log = "[?temp_CAN_radsoc] CCFs added to seat total [?temp_CAN_seat_total]"
+					
+
+					set_temp_variable = { temp_CAN_socdem = temp_CAN_seats }
+					multiply_temp_variable = { temp_CAN_socdem = CAN.party_popularity_100@social_democrat }
+					divide_temp_variable = { temp_CAN_socdem = temp_CAN_party_popularity }
+					round_temp_variable = temp_CAN_socdem
+					add_to_variable = { global.CAN_parl_seat_array^1 = temp_CAN_socdem }
+					add_to_temp_variable = { temp_CAN_seat_total = temp_CAN_socdem }
+					log = "[?temp_CAN_socdem] CCFs added to seat total [?temp_CAN_seat_total]"
+				}
+				else_if = {
+					limit = {
+						check_variable = { i = 1 } # Liberals
+					}
+					set_temp_variable = { temp_CAN_party_popularity = CAN.party_popularity_100@revolutionary_republican }
+					add_to_temp_variable = { temp_CAN_party_popularity = CAN.party_popularity_100@social_liberal }
+
+					set_temp_variable = { temp_CAN_revrep = temp_CAN_seats }
+					multiply_temp_variable = { temp_CAN_revrep = CAN.party_popularity_100@radical_socialist }
+					divide_temp_variable = { temp_CAN_revrep = temp_CAN_party_popularity }
+					round_temp_variable = temp_CAN_revrep
+					add_to_variable = { global.CAN_parl_seat_array^2 = temp_CAN_revrep }
+					add_to_temp_variable = { temp_CAN_seat_total = temp_CAN_revrep }
+					log = "[?temp_CAN_revrep] Liberals added to seat total [?temp_CAN_seat_total]"
+
+					set_temp_variable = { temp_CAN_soclib = temp_CAN_seats }
+					multiply_temp_variable = { temp_CAN_soclib = CAN.party_popularity_100@social_liberal }
+					divide_temp_variable = { temp_CAN_soclib = temp_CAN_party_popularity }
+					round_temp_variable = temp_CAN_soclib
+					add_to_variable = { global.CAN_parl_seat_array^3 = temp_CAN_soclib }
+					add_to_temp_variable = { temp_CAN_seat_total = temp_CAN_soclib }
+					log = "[?temp_CAN_soclib] Liberals added to seat total [?temp_CAN_seat_total]"
+				}
+				else_if = {
+					limit = {
+						check_variable = { i = 2 } # ProgCons
+					}
+					set_temp_variable = { temp_CAN_party_popularity = CAN.party_popularity_100@market_liberal }
+
+					set_temp_variable = { temp_CAN_marklib = temp_CAN_seats }
+					multiply_temp_variable = { temp_CAN_marklib = CAN.party_popularity_100@market_liberal }
+					divide_temp_variable = { temp_CAN_marklib = temp_CAN_party_popularity }
+					round_temp_variable = temp_CAN_marklib
+					add_to_variable = { global.CAN_parl_seat_array^4 = temp_CAN_marklib }
+					add_to_temp_variable = { temp_CAN_seat_total = temp_CAN_marklib }
+					log = "[?temp_CAN_marklib] ProgCons added to seat total [?temp_CAN_seat_total]"
+				}
+				else_if = {
+					limit = {
+						check_variable = { i = 3 } # Unionists
+					}
+					set_temp_variable = { temp_CAN_party_popularity = CAN.party_popularity_100@social_conservative }
+					add_to_temp_variable = { temp_CAN_party_popularity = CAN.party_popularity_100@authoritarian_democrat }
+
+					set_temp_variable = { temp_CAN_soccon = temp_CAN_seats }
+					multiply_temp_variable = { temp_CAN_soccon = CAN.party_popularity_100@social_conservative }
+					divide_temp_variable = { temp_CAN_soccon = temp_CAN_party_popularity }
+					round_temp_variable = temp_CAN_soccon
+					add_to_variable = { global.CAN_parl_seat_array^5 = temp_CAN_soccon }
+					add_to_temp_variable = { temp_CAN_seat_total = temp_CAN_soccon }
+					log = "[?temp_CAN_soccon] Unionists added to seat total [?temp_CAN_seat_total]"
+
+					set_temp_variable = { temp_CAN_authdem = temp_CAN_seats }
+					multiply_temp_variable = { temp_CAN_authdem = CAN.party_popularity_100@authoritarian_democrat }
+					divide_temp_variable = { temp_CAN_authdem = temp_CAN_party_popularity }
+					round_temp_variable = temp_CAN_authdem
+					add_to_variable = { global.CAN_parl_seat_array^6 = temp_CAN_authdem }
+					add_to_temp_variable = { temp_CAN_seat_total = temp_CAN_authdem }
+					log = "[?temp_CAN_authdem] Unionists added to seat total [?temp_CAN_seat_total]"
+				}
+			}
+		}
+
+		if = {
+			limit = {
+				check_variable = { temp_CAN_seat_total > region_seats }
+			}
+			set_temp_variable = { temp_CAN_difference = temp_CAN_seat_total }
+			subtract_from_temp_variable = { temp_CAN_difference = region_seats }
+
+			find_highest_in_array = { array = global.CAN_parl_seat_array index = seat_highest_index }
+			subtract_from_variable = { global.CAN_parl_seat_array^seat_highest_index = temp_CAN_difference }
+		}
+		else_if = {
+			limit = {
+				check_variable = { temp_CAN_seat_total < region_seats }
+			}
+			set_temp_variable = { temp_CAN_difference = region_seats }
+			subtract_from_temp_variable = { temp_CAN_difference = temp_CAN_seat_total }
+
+			find_highest_in_array = { array = global.CAN_parl_seat_array index = seat_highest_index }
+			add_to_variable = { global.CAN_parl_seat_array^seat_highest_index = temp_CAN_difference }
+		}
+
+		log = "Current Values after [THIS.GetName]:"
+
+		for_each_loop = {
+			array = global.CAN_parl_seat_array
+
+			log = "Value - [?global.CAN_parl_seat_array^i]"
+		}
+	}
+
+	#hold off the UI update for the event
+	#CAN_parl_adjust = yes
+	
+	add_to_temp_variable = { seats_ccf = global.CAN_parl_seat_array^0 }
+	add_to_temp_variable = { seats_ccf = global.CAN_parl_seat_array^1 }
+	add_to_temp_variable = { seats_lib = global.CAN_parl_seat_array^2 }
+	add_to_temp_variable = { seats_lib = global.CAN_parl_seat_array^3 }
+	add_to_temp_variable = { seats_con = global.CAN_parl_seat_array^4 }
+	add_to_temp_variable = { seats_uni = global.CAN_parl_seat_array^5 }
+	add_to_temp_variable = { seats_uni = global.CAN_parl_seat_array^6 }
+	log = "seats_ccf: [?seats_ccf], lib: [?seats_lib], con: [?seats_con]"
+	if = { #this election is scripted for a liberal win
+		limit = {
+			OR = {
+				check_variable = { seats_ccf > seats_lib }
+				check_variable = { seats_con > seats_lib }
+				check_variable = { seats_uni > seats_lib }
+			}
+		}
+		set_variable = { global.CAN_parl_seat_array^0 = 24 }
+		set_variable = { global.CAN_parl_seat_array^1 = 34 }
+		set_variable = { global.CAN_parl_seat_array^3 = 142 }
+		set_variable = { global.CAN_parl_seat_array^4 = 96 }
+		set_variable = { global.CAN_parl_seat_array^5 = 30 }
+		set_variable = { global.CAN_parl_seat_array^6 = 12 }
+	}
+	CAN_distribute_region_pop_arr = yes
+	if = {
+		limit = {
+			is_ai = no
+		}
+		CAN_election_copy_current_results = yes
+	}
+}
+
+CAN_snap_elections_crisis_effect_2 = {
+	clr_country_flag = CAN_crisis_election_start
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_snap_elections_crisis_effect_2"
+	log = "Results of the Canadian elections of [?global.date.GetDateStringNoHourLong]"
+
+	clear_array = global.CAN_parl_seat_array
+
+	resize_array = { array = global.CAN_parl_seat_array value = 0 size = 7 }
+
+	for_each_scope_loop = {
+		array = election_region_array
+
+		set_temp_variable = { temp_CAN_seat_total = 0 }
+
+		for_each_loop = {
+			array = election_support_array
+
+			if = {
+				limit = {
+					OR = {
+						check_variable = { election_support_array^i > 5 }
+						check_variable = { i = 3 } #scripted dominionist seats
+					}
+				}
+				set_temp_variable = { temp_CAN_seats = region_seats }
+				multiply_temp_variable = { temp_CAN_seats = election_support_array^i }
+				divide_temp_variable = { temp_CAN_seats = 100 }
+				round_temp_variable = temp_CAN_seats
+
+				if = {
+					limit = {
+						check_variable = { i = 0 } # CCF
+					}
+					set_temp_variable = { temp_CAN_party_popularity = CAN.party_popularity_100@radical_socialist }
+					add_to_temp_variable = { temp_CAN_party_popularity = CAN.party_popularity_100@social_democrat }
+
+					set_temp_variable = { temp_CAN_radsoc = temp_CAN_seats }
+					multiply_temp_variable = { temp_CAN_radsoc = CAN.party_popularity_100@radical_socialist }
+					divide_temp_variable = { temp_CAN_radsoc = temp_CAN_party_popularity }
+					round_temp_variable = temp_CAN_radsoc
+					add_to_variable = { global.CAN_parl_seat_array^0 = temp_CAN_radsoc }
+					add_to_temp_variable = { temp_CAN_seat_total = temp_CAN_radsoc }
+					log = "[?temp_CAN_radsoc] CCFs added to seat total [?temp_CAN_seat_total]"
+					
+
+					set_temp_variable = { temp_CAN_socdem = temp_CAN_seats }
+					multiply_temp_variable = { temp_CAN_socdem = CAN.party_popularity_100@social_democrat }
+					divide_temp_variable = { temp_CAN_socdem = temp_CAN_party_popularity }
+					round_temp_variable = temp_CAN_socdem
+					add_to_variable = { global.CAN_parl_seat_array^1 = temp_CAN_socdem }
+					add_to_temp_variable = { temp_CAN_seat_total = temp_CAN_socdem }
+					log = "[?temp_CAN_socdem] CCFs added to seat total [?temp_CAN_seat_total]"
+				}
+				else_if = {
+					limit = {
+						check_variable = { i = 1 } # Liberals
+					}
+					set_temp_variable = { temp_CAN_party_popularity = CAN.party_popularity_100@revolutionary_republican }
+					add_to_temp_variable = { temp_CAN_party_popularity = CAN.party_popularity_100@social_liberal }
+
+					set_temp_variable = { temp_CAN_revrep = temp_CAN_seats }
+					multiply_temp_variable = { temp_CAN_revrep = CAN.party_popularity_100@radical_socialist }
+					divide_temp_variable = { temp_CAN_revrep = temp_CAN_party_popularity }
+					round_temp_variable = temp_CAN_revrep
+					add_to_variable = { global.CAN_parl_seat_array^2 = temp_CAN_revrep }
+					add_to_temp_variable = { temp_CAN_seat_total = temp_CAN_revrep }
+					log = "[?temp_CAN_revrep] Liberals added to seat total [?temp_CAN_seat_total]"
+
+					set_temp_variable = { temp_CAN_soclib = temp_CAN_seats }
+					multiply_temp_variable = { temp_CAN_soclib = CAN.party_popularity_100@social_liberal }
+					divide_temp_variable = { temp_CAN_soclib = temp_CAN_party_popularity }
+					round_temp_variable = temp_CAN_soclib
+					add_to_variable = { global.CAN_parl_seat_array^3 = temp_CAN_soclib }
+					add_to_temp_variable = { temp_CAN_seat_total = temp_CAN_soclib }
+					log = "[?temp_CAN_soclib] Liberals added to seat total [?temp_CAN_seat_total]"
+				}
+				else_if = {
+					limit = {
+						check_variable = { i = 2 } # ProgCons
+					}
+					set_temp_variable = { temp_CAN_party_popularity = CAN.party_popularity_100@market_liberal }
+
+					set_temp_variable = { temp_CAN_marklib = temp_CAN_seats }
+					multiply_temp_variable = { temp_CAN_marklib = CAN.party_popularity_100@market_liberal }
+					divide_temp_variable = { temp_CAN_marklib = temp_CAN_party_popularity }
+					round_temp_variable = temp_CAN_marklib
+					add_to_variable = { global.CAN_parl_seat_array^4 = temp_CAN_marklib }
+					add_to_temp_variable = { temp_CAN_seat_total = temp_CAN_marklib }
+					log = "[?temp_CAN_marklib] ProgCons added to seat total [?temp_CAN_seat_total]"
+				}
+				else_if = {
+					limit = {
+						check_variable = { i = 3 } # Unionists
+					}
+					set_temp_variable = { temp_CAN_party_popularity = CAN.party_popularity_100@social_conservative }
+					add_to_temp_variable = { temp_CAN_party_popularity = CAN.party_popularity_100@authoritarian_democrat }
+
+					set_temp_variable = { temp_CAN_soccon = temp_CAN_seats }
+					multiply_temp_variable = { temp_CAN_soccon = CAN.party_popularity_100@social_conservative }
+					divide_temp_variable = { temp_CAN_soccon = temp_CAN_party_popularity }
+					round_temp_variable = temp_CAN_soccon
+					add_to_variable = { global.CAN_parl_seat_array^5 = temp_CAN_soccon }
+					add_to_temp_variable = { temp_CAN_seat_total = temp_CAN_soccon }
+					log = "[?temp_CAN_soccon] Unionists added to seat total [?temp_CAN_seat_total]"
+
+					set_temp_variable = { temp_CAN_authdem = temp_CAN_seats }
+					multiply_temp_variable = { temp_CAN_authdem = CAN.party_popularity_100@authoritarian_democrat }
+					divide_temp_variable = { temp_CAN_authdem = temp_CAN_party_popularity }
+					round_temp_variable = temp_CAN_authdem
+					add_to_variable = { global.CAN_parl_seat_array^6 = temp_CAN_authdem }
+					add_to_temp_variable = { temp_CAN_seat_total = temp_CAN_authdem }
+					log = "[?temp_CAN_authdem] Unionists added to seat total [?temp_CAN_seat_total]"
+				}
+			}
+		}
+
+		if = {
+			limit = {
+				check_variable = { temp_CAN_seat_total > region_seats }
+			}
+			set_temp_variable = { temp_CAN_difference = temp_CAN_seat_total }
+			subtract_from_temp_variable = { temp_CAN_difference = region_seats }
+
+			find_highest_in_array = { array = global.CAN_parl_seat_array index = seat_highest_index }
+			subtract_from_variable = { global.CAN_parl_seat_array^seat_highest_index = temp_CAN_difference }
+		}
+		else_if = {
+			limit = {
+				check_variable = { temp_CAN_seat_total < region_seats }
+			}
+			set_temp_variable = { temp_CAN_difference = region_seats }
+			subtract_from_temp_variable = { temp_CAN_difference = temp_CAN_seat_total }
+
+			find_highest_in_array = { array = global.CAN_parl_seat_array index = seat_highest_index }
+			add_to_variable = { global.CAN_parl_seat_array^seat_highest_index = temp_CAN_difference }
+		}
+
+		log = "Current Values after [THIS.GetName]:"
+
+		for_each_loop = {
+			array = global.CAN_parl_seat_array
+
+			log = "Value - [?global.CAN_parl_seat_array^i]"
+		}
+	}
+
+	#hold off the UI update for the event
+	#CAN_parl_adjust = yes
+	
+	add_to_temp_variable = { seats_ccf = global.CAN_parl_seat_array^0 }
+	add_to_temp_variable = { seats_ccf = global.CAN_parl_seat_array^1 }
+	add_to_temp_variable = { seats_lib = global.CAN_parl_seat_array^2 }
+	add_to_temp_variable = { seats_lib = global.CAN_parl_seat_array^3 }
+	add_to_temp_variable = { seats_con = global.CAN_parl_seat_array^4 }
+	add_to_temp_variable = { seats_uni = global.CAN_parl_seat_array^5 }
+	add_to_temp_variable = { seats_uni = global.CAN_parl_seat_array^6 }
+	log = "seats_ccf: [?seats_ccf], lib: [?seats_lib], con: [?seats_con]"
+	if = { #this election is scripted for a HUGE ccf win
+		limit = {
+			OR = {
+				check_variable = { seats_lib > seats_ccf }
+				check_variable = { seats_con > seats_ccf }
+				check_variable = { seats_uni > seats_ccf }
+			}
+		}
+		set_variable = { global.CAN_parl_seat_array^0 = 96 }
+		set_variable = { global.CAN_parl_seat_array^1 = 142 }
+		set_variable = { global.CAN_parl_seat_array^3 = 38 }
+		set_variable = { global.CAN_parl_seat_array^4 = 16 }
+		set_variable = { global.CAN_parl_seat_array^5 = 30 }
+		set_variable = { global.CAN_parl_seat_array^6 = 12 }
+	}
+	CAN_distribute_region_pop_arr = yes
+	if = {
+		limit = {
+			is_ai = no
+		}
+		CAN_election_copy_current_results = yes
+	}
+}
+
+CAN_snap_elections_crisis_effect_3 = {
+	clr_country_flag = CAN_crisis_election_start
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_snap_elections_crisis_effect_3"
+	log = "Results of the Canadian elections of [?global.date.GetDateStringNoHourLong]"
+
+	clear_array = global.CAN_parl_seat_array
+
+	resize_array = { array = global.CAN_parl_seat_array value = 0 size = 7 }
+
+	for_each_scope_loop = {
+		array = election_region_array
+
+		set_temp_variable = { temp_CAN_seat_total = 0 }
+
+		for_each_loop = {
+			array = election_support_array
+
+			if = {
+				limit = {
+					OR = {
+						check_variable = { election_support_array^i > 5 }
+						check_variable = { i = 3 } #scripted dominionist seats
+					}
+				}
+				set_temp_variable = { temp_CAN_seats = region_seats }
+				multiply_temp_variable = { temp_CAN_seats = election_support_array^i }
+				divide_temp_variable = { temp_CAN_seats = 100 }
+				round_temp_variable = temp_CAN_seats
+
+				if = {
+					limit = {
+						check_variable = { i = 0 } # CCF
+					}
+					set_temp_variable = { temp_CAN_party_popularity = CAN.party_popularity_100@radical_socialist }
+					add_to_temp_variable = { temp_CAN_party_popularity = CAN.party_popularity_100@social_democrat }
+
+					set_temp_variable = { temp_CAN_radsoc = temp_CAN_seats }
+					multiply_temp_variable = { temp_CAN_radsoc = CAN.party_popularity_100@radical_socialist }
+					divide_temp_variable = { temp_CAN_radsoc = temp_CAN_party_popularity }
+					round_temp_variable = temp_CAN_radsoc
+					add_to_variable = { global.CAN_parl_seat_array^0 = temp_CAN_radsoc }
+					add_to_temp_variable = { temp_CAN_seat_total = temp_CAN_radsoc }
+					log = "[?temp_CAN_radsoc] CCFs added to seat total [?temp_CAN_seat_total]"
+					
+
+					set_temp_variable = { temp_CAN_socdem = temp_CAN_seats }
+					multiply_temp_variable = { temp_CAN_socdem = CAN.party_popularity_100@social_democrat }
+					divide_temp_variable = { temp_CAN_socdem = temp_CAN_party_popularity }
+					round_temp_variable = temp_CAN_socdem
+					add_to_variable = { global.CAN_parl_seat_array^1 = temp_CAN_socdem }
+					add_to_temp_variable = { temp_CAN_seat_total = temp_CAN_socdem }
+					log = "[?temp_CAN_socdem] CCFs added to seat total [?temp_CAN_seat_total]"
+				}
+				else_if = {
+					limit = {
+						check_variable = { i = 1 } # Liberals
+					}
+					set_temp_variable = { temp_CAN_party_popularity = CAN.party_popularity_100@revolutionary_republican }
+					add_to_temp_variable = { temp_CAN_party_popularity = CAN.party_popularity_100@social_liberal }
+
+					set_temp_variable = { temp_CAN_revrep = temp_CAN_seats }
+					multiply_temp_variable = { temp_CAN_revrep = CAN.party_popularity_100@radical_socialist }
+					divide_temp_variable = { temp_CAN_revrep = temp_CAN_party_popularity }
+					round_temp_variable = temp_CAN_revrep
+					add_to_variable = { global.CAN_parl_seat_array^2 = temp_CAN_revrep }
+					add_to_temp_variable = { temp_CAN_seat_total = temp_CAN_revrep }
+					log = "[?temp_CAN_revrep] Liberals added to seat total [?temp_CAN_seat_total]"
+
+					set_temp_variable = { temp_CAN_soclib = temp_CAN_seats }
+					multiply_temp_variable = { temp_CAN_soclib = CAN.party_popularity_100@social_liberal }
+					divide_temp_variable = { temp_CAN_soclib = temp_CAN_party_popularity }
+					round_temp_variable = temp_CAN_soclib
+					add_to_variable = { global.CAN_parl_seat_array^3 = temp_CAN_soclib }
+					add_to_temp_variable = { temp_CAN_seat_total = temp_CAN_soclib }
+					log = "[?temp_CAN_soclib] Liberals added to seat total [?temp_CAN_seat_total]"
+				}
+				else_if = {
+					limit = {
+						check_variable = { i = 2 } # ProgCons
+					}
+					set_temp_variable = { temp_CAN_party_popularity = CAN.party_popularity_100@market_liberal }
+
+					set_temp_variable = { temp_CAN_marklib = temp_CAN_seats }
+					multiply_temp_variable = { temp_CAN_marklib = CAN.party_popularity_100@market_liberal }
+					divide_temp_variable = { temp_CAN_marklib = temp_CAN_party_popularity }
+					round_temp_variable = temp_CAN_marklib
+					add_to_variable = { global.CAN_parl_seat_array^4 = temp_CAN_marklib }
+					add_to_temp_variable = { temp_CAN_seat_total = temp_CAN_marklib }
+					log = "[?temp_CAN_marklib] ProgCons added to seat total [?temp_CAN_seat_total]"
+				}
+				else_if = {
+					limit = {
+						check_variable = { i = 3 } # Unionists
+					}
+					set_temp_variable = { temp_CAN_party_popularity = CAN.party_popularity_100@social_conservative }
+					add_to_temp_variable = { temp_CAN_party_popularity = CAN.party_popularity_100@authoritarian_democrat }
+
+					set_temp_variable = { temp_CAN_soccon = temp_CAN_seats }
+					multiply_temp_variable = { temp_CAN_soccon = CAN.party_popularity_100@social_conservative }
+					divide_temp_variable = { temp_CAN_soccon = temp_CAN_party_popularity }
+					round_temp_variable = temp_CAN_soccon
+					add_to_variable = { global.CAN_parl_seat_array^5 = temp_CAN_soccon }
+					add_to_temp_variable = { temp_CAN_seat_total = temp_CAN_soccon }
+					log = "[?temp_CAN_soccon] Unionists added to seat total [?temp_CAN_seat_total]"
+
+					set_temp_variable = { temp_CAN_authdem = temp_CAN_seats }
+					multiply_temp_variable = { temp_CAN_authdem = CAN.party_popularity_100@authoritarian_democrat }
+					divide_temp_variable = { temp_CAN_authdem = temp_CAN_party_popularity }
+					round_temp_variable = temp_CAN_authdem
+					add_to_variable = { global.CAN_parl_seat_array^6 = temp_CAN_authdem }
+					add_to_temp_variable = { temp_CAN_seat_total = temp_CAN_authdem }
+					log = "[?temp_CAN_authdem] Unionists added to seat total [?temp_CAN_seat_total]"
+				}
+			}
+		}
+
+		if = {
+			limit = {
+				check_variable = { temp_CAN_seat_total > region_seats }
+			}
+			set_temp_variable = { temp_CAN_difference = temp_CAN_seat_total }
+			subtract_from_temp_variable = { temp_CAN_difference = region_seats }
+
+			find_highest_in_array = { array = global.CAN_parl_seat_array index = seat_highest_index }
+			subtract_from_variable = { global.CAN_parl_seat_array^seat_highest_index = temp_CAN_difference }
+		}
+		else_if = {
+			limit = {
+				check_variable = { temp_CAN_seat_total < region_seats }
+			}
+			set_temp_variable = { temp_CAN_difference = region_seats }
+			subtract_from_temp_variable = { temp_CAN_difference = temp_CAN_seat_total }
+
+			find_highest_in_array = { array = global.CAN_parl_seat_array index = seat_highest_index }
+			add_to_variable = { global.CAN_parl_seat_array^seat_highest_index = temp_CAN_difference }
+		}
+
+		log = "Current Values after [THIS.GetName]:"
+
+		for_each_loop = {
+			array = global.CAN_parl_seat_array
+
+			log = "Value - [?global.CAN_parl_seat_array^i]"
+		}
+	}
+
+	#hold off the UI update for the event
+	#CAN_parl_adjust = yes
+	
+	add_to_temp_variable = { seats_ccf = global.CAN_parl_seat_array^0 }
+	add_to_temp_variable = { seats_ccf = global.CAN_parl_seat_array^1 }
+	add_to_temp_variable = { seats_lib = global.CAN_parl_seat_array^2 }
+	add_to_temp_variable = { seats_lib = global.CAN_parl_seat_array^3 }
+	add_to_temp_variable = { seats_con = global.CAN_parl_seat_array^4 }
+	add_to_temp_variable = { seats_uni = global.CAN_parl_seat_array^5 }
+	add_to_temp_variable = { seats_uni = global.CAN_parl_seat_array^6 }
+	log = "seats_ccf: [?seats_ccf], lib: [?seats_lib], con: [?seats_con]"
+	if = { #this election is scripted for a PC-Lib-Unionist (mostly PC) win
+		limit = {
+			OR = {
+				check_variable = { seats_ccf > seats_con }
+				check_variable = { seats_lib > seats_con }
+				check_variable = { seats_uni > seats_con }
+			}
+		}
+		set_variable = { global.CAN_parl_seat_array^0 = 42 }
+		set_variable = { global.CAN_parl_seat_array^1 = 119 }
+		set_variable = { global.CAN_parl_seat_array^3 = 67 }
+		set_variable = { global.CAN_parl_seat_array^4 = 97 }
+		set_variable = { global.CAN_parl_seat_array^5 = 9 }
+		set_variable = { global.CAN_parl_seat_array^6 = 4 }
+	}
+	CAN_distribute_region_pop_arr = yes
+	if = {
+		limit = {
+			is_ai = no
+		}
+		CAN_election_copy_current_results = yes
+	}
+}
+
+CAN_election_decide_campaign = {
+	if = {
+		limit = { check_variable = { opponent_party_psuedo_pp_arr^party_decide_index > 60 } }
+		set_variable = { party_target_arr^party_decide_index = 276 }
+		subtract_from_variable = { opponent_party_psuedo_pp_arr^party_decide_index = 40 }
+	} else_if = {
+		limit = { check_variable = { opponent_party_psuedo_pp_arr^party_decide_index > 40 } }
+		random_list = {
+			50 = {
+				set_variable = { party_target_arr^party_decide_index = 466 }
+				subtract_from_variable = { opponent_party_psuedo_pp_arr^party_decide_index = 25 }
+			}
+			50 = {
+				set_variable = { party_target_arr^party_decide_index = 473 }
+				subtract_from_variable = { opponent_party_psuedo_pp_arr^party_decide_index = 20 }
+			}
+		}
+	} else_if = {
+		limit = { check_variable = { opponent_party_psuedo_pp_arr^party_decide_index < 5 } }
+		##cant do anything
+	} else = {
+		if = {
+			limit = { has_country_flag = CAN_canadian_caribbean_provinces }
+			random_list = {
+				40 = {
+					set_variable = { party_target_arr^party_decide_index = 464 }
+				}
+				40 = {
+					set_variable = { party_target_arr^party_decide_index = 467 }
+				}
+				20 = {
+					set_variable = { party_target_arr^party_decide_index = 690 }
+				}
+			}
+		} else = {
+			random_list = {
+				50 = {
+					set_variable = { party_target_arr^party_decide_index = 464 }
+				}
+				50 = {
+					set_variable = { party_target_arr^party_decide_index = 467 }
+				}
+			}
+		}
+		subtract_from_variable = { opponent_party_psuedo_pp_arr^party_decide_index = 10 }
+	}
+	if = {
+		limit = { check_variable = { party_decide_index = 0 } }
+		activate_mission = CAN_election_socdem_campaign
+	} else_if = {
+		limit = { check_variable = { party_decide_index = 1 } }
+		activate_mission = CAN_election_liberal_campaign
+	} else_if = {
+		limit = { check_variable = { party_decide_index = 2 } }
+		activate_mission = CAN_election_conservative_campaign
+	} else_if = {
+		limit = { check_variable = { party_decide_index = 3 } }
+		activate_mission = CAN_election_unionist_campaign
+	}
+}
+
+CAN_election_campaign_in_state = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_election_campaign_in_state in state [This.GetName]"
+	random_list = {
+		15 = {
+			#An excellent campaign
+			set_variable = { change_more = 4 }
+			set_variable = { change_less = 3 }
+			custom_effect_tooltip = CAN_election_increase_large_tt
+		}
+		45 = { 
+			#A successful campaign
+			set_variable = { change_more = 3 }
+			set_variable = { change_less = 2 }
+			custom_effect_tooltip = CAN_election_increase_medium_tt
+		}
+		25 = {
+			#A mediocre campaign
+			set_variable = { change_more = 2 }
+			set_variable = { change_less = 1 }
+			custom_effect_tooltip = CAN_election_increase_small_tt
+		}
+		10 = {
+			# Poor campaign
+			set_variable = { change_more = 1 }
+			set_variable = { change_less = 1 }
+			custom_effect_tooltip = CAN_election_increase_tiny_tt
+		}
+		5 = {
+			#A catastrophic campaign
+			set_variable = { change_more = 0 }
+			set_variable = { change_less = 0 }
+			custom_effect_tooltip = CAN_election_increase_none_tt
+		}
+	}
+	if = {
+		limit = {
+			CAN = {
+				OR = {
+					AND = {
+						has_country_flag = CAN_1949_election_support_ccf
+						NOT = {has_country_flag = CAN_1949_election_done}
+					}
+					AND = {
+						has_country_flag = CAN_1953_election_support_ndp
+						NOT = {has_country_flag = CAN_1953_election_done}
+					}	
+				}
+			}
+		}
+		if = {
+			limit = {
+				check_variable = { THIS.election_support_array^1 > 5 }
+			}
+			add_to_variable = { THIS.election_support_array^0 = change_more }
+			subtract_from_variable = { THIS.election_support_array^1 = change_more }
+		} 
+		else = {
+			limit = {
+				check_variable = { THIS.election_support_array^3 > 5 }
+			}
+			add_to_variable = { THIS.election_support_array^0 = change_less }
+			subtract_from_variable = { THIS.election_support_array^3 = change_less }
+		}
+		if = {
+			limit = {
+				check_variable = { THIS.election_support_array^2 > 5 }
+			}
+			add_to_variable = { THIS.election_support_array^0 = change_less }
+			subtract_from_variable = { THIS.election_support_array^2 = change_less }
+		} else = {
+			limit = {
+				check_variable = { THIS.election_support_array^3 > 5 }
+			}
+			add_to_variable = { THIS.election_support_array^0 = change_less }
+			subtract_from_variable = { THIS.election_support_array^3 = change_less }
+		}
+	}
+	if = {
+		limit = {
+			CAN = {
+				OR = {
+					AND = {
+						has_country_flag = CAN_1949_election_support_libs
+						NOT = {has_country_flag = CAN_1949_election_done}
+					}
+					AND = {
+						has_country_flag = CAN_1953_election_support_libs
+						NOT = {has_country_flag = CAN_1953_election_done}
+					}
+					has_country_flag = CAN_crisis_election_support_lib
+				}
+			}
+		}
+		if = {
+			limit = {
+				check_variable = { THIS.election_support_array^0 > 5 }
+			}
+			subtract_from_variable = { THIS.election_support_array^0 = change_more }
+			add_to_variable = { THIS.election_support_array^1 = change_more }
+		} else = {
+			limit = {
+				check_variable = { THIS.election_support_array^3 > 5 }
+			}
+			add_to_variable = { THIS.election_support_array^1 = change_less }
+			subtract_from_variable = { THIS.election_support_array^3 = change_less }
+		}
+		if = {
+			limit = {
+				check_variable = { THIS.election_support_array^2 > 5 }
+			}
+			add_to_variable = { THIS.election_support_array^1 = change_less }
+			subtract_from_variable = { THIS.election_support_array^2 = change_less }
+		} else = {
+			limit = {
+				check_variable = { THIS.election_support_array^3 > 5 }
+			}
+			add_to_variable = { THIS.election_support_array^1 = change_less }
+			subtract_from_variable = { THIS.election_support_array^3 = change_less }
+		}
+	}
+	if = {
+		limit = {
+			CAN = {
+				OR = {
+					AND = {
+						has_country_flag = CAN_1949_election_support_tories
+						NOT = {has_country_flag= CAN_1949_election_done}
+					}
+					AND = {
+						has_country_flag = CAN_1953_election_support_pc
+						NOT = {has_country_flag= CAN_1953_election_done}
+					}
+					has_country_flag = CAN_crisis_election_support_pc
+				}
+			}
+		}
+		if = {
+			limit = {
+				check_variable = { THIS.election_support_array^3 > 5 }
+			}
+			subtract_from_variable = { THIS.election_support_array^3 = change_less }
+			add_to_variable = { THIS.election_support_array^2 = change_less }
+		} else = {
+			limit = {
+				check_variable = { THIS.election_support_array^0 > 5 }
+			}
+			add_to_variable = { THIS.election_support_array^2 = change_less }
+			subtract_from_variable = { THIS.election_support_array^0 = change_less }
+		}
+		if = {
+			limit = {
+				check_variable = { THIS.election_support_array^1 > 5 }
+			}
+			subtract_from_variable = { THIS.election_support_array^1 = change_more }
+			add_to_variable = { THIS.election_support_array^2 = change_more }
+		} else = {
+			limit = {
+				check_variable = { THIS.election_support_array^0 > 5 }
+			}
+			add_to_variable = { THIS.election_support_array^2 = change_less }
+			subtract_from_variable = { THIS.election_support_array^0 = change_less }
+		}
+	}
+	if = {
+		limit = {
+			CAN = {
+				OR = {
+					has_country_flag = CAN_1953_election_support_dominionist
+				}
+			}
+		}
+		if = {
+			limit = {
+				check_variable = { THIS.election_support_array^1 > 5 }
+			}
+			subtract_from_variable = { THIS.election_support_array^1 = change_less }
+			add_to_variable = { THIS.election_support_array^3 = change_less }
+		} else = {
+			limit = {
+				check_variable = { THIS.election_support_array^0 > 5 }
+			}
+			add_to_variable = { THIS.election_support_array^3 = change_less }
+			subtract_from_variable = { THIS.election_support_array^0 = change_less }
+		}
+		if = {
+			limit = {
+				check_variable = { THIS.election_support_array^2 > 5 }
+			}
+			subtract_from_variable = { THIS.election_support_array^2 = change_more }
+			add_to_variable = { THIS.election_support_array^3 = change_more }
+		} else = {
+			limit = {
+				check_variable = { THIS.election_support_array^0 > 5 }
+			}
+			add_to_variable = { THIS.election_support_array^3 = change_less }
+			subtract_from_variable = { THIS.election_support_array^0 = change_less }
+		}
+	}
+	clamp_variable = {
+		var = THIS.election_support_array^0
+		min = 0
+		max = 100
+	}
+	clamp_variable = {
+		var = THIS.election_support_array^1
+		min = 0
+		max = 100
+	}
+	clamp_variable = {
+		var = THIS.election_support_array^2
+		min = 0
+		max = 100
+	}
+	clamp_variable = {
+		var = THIS.election_support_array^3
+		min = 0
+		max = 100
+	}
+}
+
+CAN_election_ai_campaign_in_state = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_election_campaign_in_state in state [This.GetName]"
+	random_list = {
+		15 = {
+			#An excellent campaign
+			set_variable = { change_more = 3 }
+			set_variable = { change_less = 2 }
+		}
+		45 = { 
+			#A successful campaign
+			set_variable = { change_more = 2 }
+			set_variable = { change_less = 1 }
+		}
+		25 = {
+			#A mediocre campaign
+			set_variable = { change_more = 1 }
+			set_variable = { change_less = 1 }
+		}
+		10 = {
+			# Poor campaign
+			set_variable = { change_more = 1 }
+			set_variable = { change_less = 0 }
+		}
+		5 = {
+			#A catastrophic campaign
+			set_variable = { change_more = 0 }
+			set_variable = { change_less = 0 }
+		}
+	}
+	if = { # AI cheating
+		limit = {
+			ROOT = {
+				is_ai = yes
+			}
+			OR = {
+				AND = {
+					ROOT = {
+						has_country_flag = CAN_1949_election_support_ccf
+					}
+					check_variable = { CAN_current_ai_campaign = 0 }
+				}
+				AND = {
+					ROOT = {
+						has_country_flag = CAN_1949_election_support_libs
+					}
+					check_variable = { CAN_current_ai_campaign = 1 }
+				}
+				AND = {
+					ROOT = {
+						has_country_flag = CAN_1949_election_support_tories
+					}
+					check_variable = { CAN_current_ai_campaign = 2 }
+				}
+
+				AND = {
+					ROOT = {
+						has_country_flag = CAN_1953_election_support_ndp
+					}
+					check_variable = { CAN_current_ai_campaign = 0 }
+				}
+				AND = {
+					ROOT = {
+						has_country_flag = CAN_1953_election_support_libs
+					}
+					check_variable = { CAN_current_ai_campaign = 1 }
+				}
+				AND = {
+					ROOT = {
+						has_country_flag = CAN_1953_election_support_pc
+					}
+					check_variable = { CAN_current_ai_campaign = 2 }
+				}
+				AND = {
+					ROOT = {
+						has_country_flag = CAN_1953_election_support_dominionist
+					}
+					check_variable = { CAN_current_ai_campaign = 3 }
+				}
+			}
+		}
+
+		set_variable = { change_more = 4 }
+		set_variable = { change_less = 4 }
+	}
+	if = {
+		limit = {
+			check_variable = { CAN_current_ai_campaign = 0 }
+		}
+		if = {
+			limit = {
+				check_variable = { THIS.election_support_array^1 > 5 }
+			}
+			add_to_variable = { THIS.election_support_array^0 = change_more }
+			subtract_from_variable = { THIS.election_support_array^1 = change_more }
+		} 
+		else = {
+			limit = {
+				check_variable = { THIS.election_support_array^3 > 5 }
+			}
+			add_to_variable = { THIS.election_support_array^0 = change_less }
+			subtract_from_variable = { THIS.election_support_array^3 = change_less }
+		}
+		if = {
+			limit = {
+				check_variable = { THIS.election_support_array^2 > 5 }
+			}
+			add_to_variable = { THIS.election_support_array^0 = change_less }
+			subtract_from_variable = { THIS.election_support_array^2 = change_less }
+		} else = {
+			limit = {
+				check_variable = { THIS.election_support_array^3 > 5 }
+			}
+			add_to_variable = { THIS.election_support_array^0 = change_less }
+			subtract_from_variable = { THIS.election_support_array^3 = change_less }
+		}
+	}
+	if = {
+		limit = {
+			check_variable = { CAN_current_ai_campaign = 1 }
+		}
+		if = {
+			limit = {
+				check_variable = { THIS.election_support_array^0 > 5 }
+			}
+			subtract_from_variable = { THIS.election_support_array^0 = change_more }
+			add_to_variable = { THIS.election_support_array^1 = change_more }
+		} else = {
+			limit = {
+				check_variable = { THIS.election_support_array^3 > 5 }
+			}
+			add_to_variable = { THIS.election_support_array^1 = change_less }
+			subtract_from_variable = { THIS.election_support_array^3 = change_less }
+		}
+		if = {
+			limit = {
+				check_variable = { THIS.election_support_array^2 > 5 }
+			}
+			add_to_variable = { THIS.election_support_array^1 = change_less }
+			subtract_from_variable = { THIS.election_support_array^2 = change_less }
+		} else = {
+			limit = {
+				check_variable = { THIS.election_support_array^3 > 5 }
+			}
+			add_to_variable = { THIS.election_support_array^1 = change_less }
+			subtract_from_variable = { THIS.election_support_array^3 = change_less }
+		}
+	}
+	if = {
+		limit = {
+			check_variable = { CAN_current_ai_campaign = 2 }
+		}
+		if = {
+			limit = {
+				check_variable = { THIS.election_support_array^3 > 5 }
+			}
+			subtract_from_variable = { THIS.election_support_array^3 = change_less }
+			add_to_variable = { THIS.election_support_array^2 = change_less }
+		} else = {
+			limit = {
+				check_variable = { THIS.election_support_array^0 > 5 }
+			}
+			add_to_variable = { THIS.election_support_array^2 = change_less }
+			subtract_from_variable = { THIS.election_support_array^0 = change_less }
+		}
+		if = {
+			limit = {
+				check_variable = { THIS.election_support_array^1 > 5 }
+			}
+			subtract_from_variable = { THIS.election_support_array^1 = change_more }
+			add_to_variable = { THIS.election_support_array^2 = change_more }
+		} else = {
+			limit = {
+				check_variable = { THIS.election_support_array^0 > 5 }
+			}
+			add_to_variable = { THIS.election_support_array^2 = change_less }
+			subtract_from_variable = { THIS.election_support_array^0 = change_less }
+		}
+	}
+	if = {
+		limit = {
+			check_variable = { CAN_current_ai_campaign = 3 }
+		}
+		if = {
+			limit = {
+				check_variable = { THIS.election_support_array^1 > 5 }
+			}
+			subtract_from_variable = { THIS.election_support_array^1 = change_less }
+			add_to_variable = { THIS.election_support_array^3 = change_less }
+		} else = {
+			limit = {
+				check_variable = { THIS.election_support_array^0 > 5 }
+			}
+			add_to_variable = { THIS.election_support_array^3 = change_less }
+			subtract_from_variable = { THIS.election_support_array^0 = change_less }
+		}
+		if = {
+			limit = {
+				check_variable = { THIS.election_support_array^2 > 5 }
+			}
+			subtract_from_variable = { THIS.election_support_array^2 = change_more }
+			add_to_variable = { THIS.election_support_array^3 = change_more }
+		} else = {
+			limit = {
+				check_variable = { THIS.election_support_array^0 > 5 }
+			}
+			add_to_variable = { THIS.election_support_array^3 = change_less }
+			subtract_from_variable = { THIS.election_support_array^0 = change_less }
+		}
+	}
+	clamp_variable = {
+		var = THIS.election_support_array^0
+		min = 0
+		max = 100
+	}
+	clamp_variable = {
+		var = THIS.election_support_array^1
+		min = 0
+		max = 100
+	}
+	clamp_variable = {
+		var = THIS.election_support_array^2
+		min = 0
+		max = 100
+	}
+	clamp_variable = {
+		var = THIS.election_support_array^3
+		min = 0
+		max = 100
+	}
+}
+
+CAN_clear_election_stuff = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clear_election_stuff"
+	for_each_scope_loop = {
+		array = election_region_array
+
+		clear_array = election_support_array
+	}
+
+	clear_array = election_region_array
+}
+
+CAN_election_update_viewing_array = {
+	clear_array = selected_state_election_support_array
+	clear_array = selected_state_election_visual_array
+	meta_effect = {
+		text = {
+			for_each_loop = {
+				array = [SELECTED_STATE].election_support_array
+				
+				add_to_array = { selected_state_election_support_array = v }
+			}
+		}
+		SELECTED_STATE = CAN_elections_gui_selected_state
+	}
+	find_highest_in_array = { 
+		array = selected_state_election_support_array 
+		value = topval 
+	}
+	log="[?topval]"
+	for_each_loop = {
+		array = selected_state_election_support_array
+
+		add_to_array = { selected_state_election_visual_array = v }
+		divide_variable = { selected_state_election_visual_array^i = topval }
+		multiply_variable = { selected_state_election_visual_array^i = 100 }
+	}
+}
+
+CAN_election_copy_current_results = {
+	every_owned_state = {
+		limit = {
+			has_state_flag = CAN_part_of_region
+		}
+		log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_election_copy_current_results"
+		clear_array = CAN_region_last_election_result
+		add_to_array = { CAN_region_last_election_result = election_support_array^0 }
+		add_to_array = { CAN_region_last_election_result = election_support_array^1 }
+		add_to_array = { CAN_region_last_election_result = election_support_array^2 }
+		add_to_array = { CAN_region_last_election_result = election_support_array^3 }
+
+		clear_array = past_pie_chart
+		resize_array = {
+			array = past_pie_chart
+			value = 1 # 1 is value for neutrality frame, so we don't have to make a loop for it
+			size = 100 # 100 pieces, each percent is one piece
+		}
+		set_temp_variable = { socdem_pop = THIS.CAN_region_last_election_result^0 }
+		round_temp_variable = socdem_pop
+
+		set_temp_variable = { lib_pop = THIS.CAN_region_last_election_result^1 }
+		round_temp_variable = lib_pop 
+		set_variable = { ROOT.last_idx = socdem_pop }
+		add_to_temp_variable = { lib_pop = ROOT.last_idx }
+		for_loop_effect = {
+			start = ROOT.last_idx
+			end = lib_pop
+			set_variable = { past_pie_chart^v = 2 }
+			add_to_variable = { ROOT.last_idx = 1 }
+		}
+
+		set_temp_variable = { con_pop = THIS.CAN_region_last_election_result^2 }
+		round_temp_variable = con_pop
+		add_to_temp_variable = { con_pop = ROOT.last_idx }
+		for_loop_effect = {
+			start = ROOT.last_idx
+			end = con_pop
+			set_variable = { past_pie_chart^v = 3 }
+			add_to_variable = { ROOT.last_idx = 1 }
+		}
+
+		set_temp_variable = { uni_pop = THIS.CAN_region_last_election_result^3 }
+		round_temp_variable = uni_pop 
+		add_to_temp_variable = { uni_pop = ROOT.last_idx }
+		for_loop_effect = {
+			start = ROOT.last_idx
+			end = uni_pop
+			set_variable = { past_pie_chart^v = 4 }
+		}
+
+		clear_variable = ROOT.last_idx
+		add_to_variable = { pie_chart_dirty = 1 }
+	}
+}
+
+#██╗      █████╗  ██╗       ██╗
+#██║     ██╔══██╗ ██║  ██╗  ██║
+#██║     ███████║ ╚██╗████╗██╔╝ law category
+#██║     ██╔══██║  ████╔═████║
+#███████╗██║  ██║  ╚██╔╝ ╚██╔╝
+#╚══════╝╚═╝  ╚═╝   ╚═╝   ╚═╝
+CAN_laws_new_law = {
+	meta_effect = {
+		text = {
+			activate_mission = CAN_law_[LAW_ID]
+		}
+		LAW_ID = "[?CAN_current_law]"
+	}
+	clear_array = CAN_laws_clauses_available
+	clear_array = CAN_laws_clauses_selected
+	for_loop_effect = {
+		start = 0
+		end = CAN_current_law_max_clause
+
+		add_to_array = { CAN_laws_clauses_selected = 0 }
+	}
+	CAN_laws_recalc_slots_available = yes
+	clear_array = CAN_laws_current_support
+	for_each_loop = {
+		array = global.CAN_parl_support_array
+
+		if = {
+			limit = { check_variable = { v = 4 } }
+		
+			add_to_array = { CAN_laws_current_support = 1 }
+		}
+		else = {
+			add_to_array = { CAN_laws_current_support = 0 }
+		}
+	}
+	CAN_laws_recalc_support = yes
+	if = {
+		limit = {
+			is_ai = yes
+		}
+		meta_effect = {
+			text = {
+				CAN_law_[LAW_ID]_ai_setup = yes
+			}
+			LAW_ID = "[?CAN_current_law]"
+		}
+	}
+}
+
+CAN_laws_clause_selection = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_laws_clause_selection"
+	if = {
+		limit = {
+			check_variable = { CAN_laws_clauses_selected^CAN_law_clause_selection_slot > 0 }
+		}
+		meta_effect = {
+			text = {
+				CAN_clause_[ADD_CLAUSE]_add_effect = yes
+				CAN_clause_[REMOVE_CLAUSE]_remove_effect = yes
+			}
+			ADD_CLAUSE = CAN_laws_clauses_available^CAN_law_clause_selected_num
+			REMOVE_CLAUSE = CAN_laws_clauses_selected^CAN_law_clause_selection_slot
+			debug = yes
+		}
+		add_to_array = { CAN_laws_clauses_available = CAN_laws_clauses_selected^CAN_law_clause_selection_slot }
+		set_variable = { CAN_laws_clauses_selected^CAN_law_clause_selection_slot = CAN_laws_clauses_available^CAN_law_clause_selected_num }
+		remove_from_array = {
+			array = CAN_laws_clauses_available
+			index = CAN_law_clause_selected_num
+		}
+	} else = {
+		meta_effect = {
+			text = {
+				CAN_clause_[ADD_CLAUSE]_add_effect = yes
+			}
+			ADD_CLAUSE = CAN_laws_clauses_available^CAN_law_clause_selected_num
+			debug = yes
+		}
+		set_variable = { CAN_laws_clauses_selected^CAN_law_clause_selection_slot = CAN_laws_clauses_available^CAN_law_clause_selected_num }
+		remove_from_array = {
+			array = CAN_laws_clauses_available
+			index = CAN_law_clause_selected_num
+		}
+	}
+	CAN_laws_recalc_slots_available = yes
+	clr_country_flag = CAN_selecting_clause
+}
+
+CAN_laws_recalc_slots_available = {
+	set_temp_variable = { count = 0 }
+	for_each_loop = {
+		array = CAN_laws_clauses_selected
+
+		if = {
+			limit = { check_variable = { v = 0 } }
+			add_to_temp_variable = { count = 1 }
+		}
+	}
+	set_variable = { CAN_law_slots_available = count }
+}
+
+CAN_laws_recalc_support = {
+	set_variable = { CAN_law_current_support = 0 }
+	set_variable = { CAN_laws_support_percent = 0 }
+	for_each_loop = {
+		array = CAN_laws_current_support
+
+		if = {
+			limit = { check_variable = { v = 1} }
+			add_to_variable = { CAN_law_current_support = global.CAN_parl_seat_array^i }
+		}
+	}
+	set_variable = { CAN_laws_support_percent = CAN_law_current_support }
+	divide_variable = { CAN_laws_support_percent = parl_maxseats }
+	multiply_variable = { CAN_laws_support_percent = 100 }
+}
+
+CAN_laws_support = {
+	set_variable = { CAN_laws_current_support^CAN_laws_support_change = 1 }
+	CAN_laws_recalc_support = yes
+}
+
+CAN_laws_oppose = {
+	set_variable = { CAN_laws_current_support^CAN_laws_support_change = 0 }
+	CAN_laws_recalc_support = yes
+}
+
+CAN_law_effect = {
+	for_each_loop = {
+		array = CAN_laws_clauses_selected
+
+		meta_effect = {
+			text = {
+				CAN_clause_[CLAUSE_ID]_effect = yes
+			}
+			CLAUSE_ID = v
+		}
+	}
+}
+
+
+#██████╗  █████╗ ██████╗  ██████╗
+#██╔══██╗██╔══██╗██╔══██╗██╔════╝
+#██████╔╝██║  ██║██████╔╝╚█████╗
+#██╔═══╝ ██║  ██║██╔═══╝  ╚═══██╗ pop category
+#██║     ╚█████╔╝██║     ██████╔╝
+#╚═╝      ╚════╝ ╚═╝     ╚═════╝
+CAN_update_region_populations = { #would i like to avoid this number of operations? yes! yes i would!
+	log = "[GetDateText]: [ROOT.GetName]: Scripted Effect CAN_update_region_populations target: [THIS.GetName]"
+	clear_array = region_pops
+	set_variable = { region_pop_total = 0 }
+	add_to_array = { region_pops = 276.state_population_k }
+	add_to_variable = { region_pops^0 = 1075.state_population_k }
+	add_to_variable = { region_pops^0 = 1076.state_population_k }
+	add_to_variable = { region_pops^0 = 1077.state_population_k }
+	add_to_variable = { region_pops^0 = 682.state_population_k }
+	add_to_array = { region_pops = 468.state_population_k }
+	add_to_variable = { region_pops^1 = 1078.state_population_k }
+	add_to_variable = { region_pops^1 = 1079.state_population_k }
+	add_to_variable = { region_pops^1 = 466.state_population_k }
+	add_to_array = { region_pops = 1098.state_population_k }
+	add_to_variable = { region_pops^2 = 467.state_population_k }
+	add_to_variable = { region_pops^2 = 683.state_population_k }
+	add_to_variable = { region_pops^2 = 469.state_population_k }
+	add_to_variable = { region_pops^2 = 693.state_population_k }
+	add_to_array = { region_pops = 331.state_population_k }
+	add_to_variable = { region_pops^3 = 332.state_population_k }
+	add_to_variable = { region_pops^3 = 464.state_population_k }
+	add_to_variable = { region_pops^3 = 465.state_population_k }
+	add_to_array = { region_pops = 473.state_population_k }
+	add_to_variable = { region_pops^4 = 740.state_population_k }
+	add_to_variable = { region_pops^4 = 1083.state_population_k }
+	add_to_variable = { region_pops^4 = 470.state_population_k }
+	add_to_variable = { region_pops^4 = 1084.state_population_k }
+	add_to_variable = { region_pops^4 = 1082.state_population_k }
+	add_to_variable = { region_pops^4 = 471.state_population_k }
+	add_to_variable = { region_pops^4 = 472.state_population_k }
+	add_to_array = { region_pops = 690.state_population_k }
+	add_to_variable = { region_pops^5 = 692.state_population_k }
+	add_to_variable = { region_pops^5 = 308.state_population_k }
+	for_each_loop = {
+		array = region_pops
+		add_to_variable = { region_pop_total = v }
+	}
+}
+
+CAN_popularity_update_popularities = {
+	log = "[GetDateText]: [ROOT.GetName]: Scripted Effect CAN_popularity_update_popularities target: [THIS.GetName]"
+	set_temp_variable = { main_party_pop = 1 }
+	subtract_from_temp_variable = { main_party_pop = party_popularity@authoritarian_socialist }
+	subtract_from_temp_variable = { main_party_pop = party_popularity@paternal_autocrat }
+	subtract_from_temp_variable = { main_party_pop = party_popularity@national_populist }
+	resize_array = { ideology_percentages = 7 }
+	set_temp_variable = { ideology_percentages^0 = 0 }
+	set_temp_variable = { ideology_percentages^1 = 0 }
+	set_temp_variable = { ideology_percentages^2 = 0 }
+	set_temp_variable = { ideology_percentages^3 = 0 }
+	set_temp_variable = { ideology_percentages^4 = 0 }
+	set_temp_variable = { ideology_percentages^5 = 0 }
+	set_temp_variable = { ideology_percentages^6 = 0 }
+	for_each_loop = {
+		array = election_region_array
+
+		set_temp_variable = { population_proportion = region_pops^i }
+		divide_temp_variable = { population_proportion = region_pop_total }
+		multiply_temp_variable = { population_proportion = main_party_pop }
+		var:v = {
+			for_each_loop = {
+				array = THIS.election_support_array
+				value = val
+				index = j
+	
+				set_temp_variable = { pop_add = val } 
+				multiply_temp_variable = { pop_add = population_proportion }
+				add_to_temp_variable = { ideology_percentages^j = pop_add }
+			}	
+		}
+	}
+	if = {
+		limit = {
+			has_global_flag = CAN_parl_pc_formed
+		}
+		set_temp_variable = { ideology_percentages^5 = ideology_percentages^3 }
+		set_temp_variable = { ideology_percentages^6 = ideology_percentages^3 }
+		multiply_temp_variable = { ideology_percentages^5 = 0.75 }
+		multiply_temp_variable = { ideology_percentages^6 = 0.25 }
+		set_temp_variable = { ideology_percentages^4 = ideology_percentages^2 }
+		set_temp_variable = { ideology_percentages^2 = ideology_percentages^1 }
+		set_temp_variable = { ideology_percentages^3 = ideology_percentages^1 }
+		multiply_temp_variable = { ideology_percentages^2 = 0.25 }
+		multiply_temp_variable = { ideology_percentages^3 = 0.75 }
+		set_temp_variable = { ideology_percentages^1 = ideology_percentages^0 }
+		multiply_temp_variable = { ideology_percentages^0 = 0.25 }
+		multiply_temp_variable = { ideology_percentages^1 = 0.75 }
+	} else = {
+		set_temp_variable = { ideology_percentages^6 = ideology_percentages^3 }
+		set_temp_variable = { ideology_percentages^5 = ideology_percentages^2 }
+		set_temp_variable = { ideology_percentages^2 = 0 }
+		set_temp_variable = { ideology_percentages^3 = ideology_percentages^1 }
+		set_temp_variable = { ideology_percentages^4 = ideology_percentages^1 }
+		multiply_temp_variable = { ideology_percentages^3 = CAN_popularity_lib_soclib }
+		multiply_temp_variable = { ideology_percentages^4 = CAN_popularity_lib_marlib }
+		set_temp_variable = { ideology_percentages^1 = ideology_percentages^0 }
+		multiply_temp_variable = { ideology_percentages^0 = 0.25 }
+		multiply_temp_variable = { ideology_percentages^1 = 0.75 }
+	}
+	multiply_temp_variable = { main_party_pop = 100 }
+	set_temp_variable = { tot_pop = 0 }
+	for_each_loop = {
+		array = ideology_percentages
+		add_to_temp_variable = { tot_pop = v }
+	}
+	if = {
+		limit = { 
+			check_variable = { 
+				var = tot_pop
+				value = main_party_pop
+				compare = not_equals
+			}
+		}
+		subtract_from_temp_variable = { tot_pop = main_party_pop }
+		subtract_from_temp_variable = { ideology_percentages^0 = tot_pop }
+	}
+	hidden_effect = {
+		set_popularities = {
+			authoritarian_socialist = party_popularity_100@authoritarian_socialist
+			radical_socialist = ideology_percentages^0
+			social_democrat = ideology_percentages^1
+			revolutionary_republican = ideology_percentages^2
+			social_liberal = ideology_percentages^3
+			market_liberal = ideology_percentages^4
+			social_conservative = ideology_percentages^5
+			authoritarian_democrat = ideology_percentages^6
+			paternal_autocrat = party_popularity_100@paternal_autocrat
+			national_populist = party_popularity_100@national_populist
+		}
+	}
+}
+
+
+# Scripted GUI Pie Chart example by Yard1
+# Feel free to use in your mods, but give credits to Yard1 (both in code, with comments; and on your download page)
+CAN_update_region_poll_pie = {
+	#Ontario
+	set_variable = { arr_clone_id = 276 }
+	682 = { CAN_distribute_region_pop_arr = yes }
+	1077 = { CAN_distribute_region_pop_arr = yes }
+	1075 = { CAN_distribute_region_pop_arr = yes }
+	1076 = { CAN_distribute_region_pop_arr = yes }
+	# Quebec
+	set_variable = { arr_clone_id = 466 }
+	468 = { CAN_distribute_region_pop_arr = yes }
+	1078 = { CAN_distribute_region_pop_arr = yes }
+	1079 = { CAN_distribute_region_pop_arr = yes }
+	# Praire
+	set_variable = { arr_clone_id = 467 }
+	693 = { CAN_distribute_region_pop_arr = yes }
+	469 = { CAN_distribute_region_pop_arr = yes }
+	683 = { CAN_distribute_region_pop_arr = yes }
+	1098 = { CAN_distribute_region_pop_arr = yes }
+	# Atlantic
+	set_variable = { arr_clone_id = 464 }
+	465 = { CAN_distribute_region_pop_arr = yes }
+	331 = { CAN_distribute_region_pop_arr = yes }
+	332 = { CAN_distribute_region_pop_arr = yes }
+	# West
+	set_variable = { arr_clone_id = 473 }
+	740 = { CAN_distribute_region_pop_arr = yes }
+	1083 = { CAN_distribute_region_pop_arr = yes }
+	1084 = { CAN_distribute_region_pop_arr = yes }
+	471 = { CAN_distribute_region_pop_arr = yes }
+	470 = { CAN_distribute_region_pop_arr = yes }
+	1082 = { CAN_distribute_region_pop_arr = yes }
+	472 = { CAN_distribute_region_pop_arr = yes }
+	every_owned_state = {
+		limit = { has_state_flag = CAN_part_of_region }
+		clear_array = poll_pie_chart
+		resize_array = {
+			array = poll_pie_chart
+			value = 1 # 1 is value for neutrality frame, so we don't have to make a loop for it
+			size = 100 # 100 pieces, each percent is one piece
+		}
+		set_temp_variable = { socdem_pop = THIS.election_support_array^0 }
+		round_temp_variable = socdem_pop
+
+		set_temp_variable = { lib_pop = THIS.election_support_array^1 }
+		round_temp_variable = lib_pop 
+		set_variable = { ROOT.last_idx = socdem_pop }
+		add_to_temp_variable = { lib_pop = ROOT.last_idx }
+		for_loop_effect = {
+			start = ROOT.last_idx
+			end = lib_pop
+			set_variable = { poll_pie_chart^v = 2 }
+			add_to_variable = { ROOT.last_idx = 1 }
+		}
+
+		set_temp_variable = { con_pop = THIS.election_support_array^2 }
+		round_temp_variable = con_pop
+		add_to_temp_variable = { con_pop = ROOT.last_idx }
+		for_loop_effect = {
+			start = ROOT.last_idx
+			end = con_pop
+			set_variable = { poll_pie_chart^v = 3 }
+			add_to_variable = { ROOT.last_idx = 1 }
+		}
+
+		set_temp_variable = { uni_pop = THIS.election_support_array^3 }
+		round_temp_variable = uni_pop 
+		add_to_temp_variable = { uni_pop = ROOT.last_idx }
+		for_loop_effect = {
+			start = ROOT.last_idx
+			end = uni_pop
+			set_variable = { poll_pie_chart^v = 4 }
+		}
+
+		clear_variable = ROOT.last_idx
+		add_to_variable = { pie_chart_dirty = 1 }
+	}
+}
+
+CAN_distribute_region_pop_arr = {
+	clear_array = election_support_array
+	var:ROOT.arr_clone_id = {
+		set_variable = { PREV.election_support_array^0 = election_support_array^0 }
+		set_variable = { PREV.election_support_array^1 = election_support_array^1 }
+		set_variable = { PREV.election_support_array^2 = election_support_array^2 }
+		set_variable = { PREV.election_support_array^3 = election_support_array^3 }
+	}
+}
+
+CAN_distribute_region_past_arr = {
+	clear_array = CAN_region_last_election_result
+	var:ROOT.arr_clone_id = {
+		set_variable = { PREV.CAN_region_last_election_result^0 = CAN_region_last_election_result^0 }
+		set_variable = { PREV.CAN_region_last_election_result^1 = CAN_region_last_election_result^1 }
+		set_variable = { PREV.CAN_region_last_election_result^2 = CAN_region_last_election_result^2 }
+		set_variable = { PREV.CAN_region_last_election_result^3 = CAN_region_last_election_result^3 }
+	}
+}
+
+CAN_popularity_ruling_increase = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_popularity_ruling_increase"
+	if = {
+		limit = { CAN_has_socdem_government = yes }
+		if = {
+			limit = { check_variable = { THIS = CAN } }
+			CAN_popularity_socdem_increase_countrywide = yes
+		} else = {
+			CAN_popularity_socdem_increase = yes
+		}
+	} 
+	else_if = {
+		limit = { CAN_has_liberal_government = yes }
+		if = {
+			limit = { check_variable = { THIS = CAN } }
+			CAN_popularity_liberals_increase_countrywide = yes
+		} else = {
+			CAN_popularity_liberals_increase = yes
+		}
+	} 
+	else_if = {
+		limit = { CAN_has_conservative_government = yes }
+		if = {
+			limit = { check_variable = { THIS = CAN } }
+			CAN_popularity_conservatives_increase_countrywide = yes
+		} else = {
+			CAN_popularity_conservatives_increase = yes
+		}
+	} 
+	else_if = {
+		limit = { CAN_has_unionist_government = yes }
+		if = {
+			limit = { check_variable = { THIS = CAN } }
+			CAN_popularity_unionists_increase_countrywide = yes
+		} else = {
+			CAN_popularity_unionists_increase = yes
+		}
+	}
+}
+
+CAN_popularity_ruling_decrease = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_popularity_ruling_decrease"
+	if = {
+		limit = { CAN_has_socdem_government = yes }
+		if = {
+			limit = { check_variable = { THIS = CAN } }
+			CAN_popularity_socdem_decrease_countrywide = yes
+		} else = {
+			CAN_popularity_socdem_decrease = yes
+		}
+	} 
+	else_if = {
+		limit = { CAN_has_liberal_government = yes }
+		if = {
+			limit = { check_variable = { THIS = CAN } }
+			CAN_popularity_liberals_decrease_countrywide = yes
+		} else = {
+			CAN_popularity_liberals_decrease = yes
+		}
+	} 
+	else_if = {
+		limit = { CAN_has_conservative_government = yes }
+		if = {
+			limit = { check_variable = { THIS = CAN } }
+			CAN_popularity_conservatives_decrease_countrywide = yes
+		} else = {
+			CAN_popularity_conservatives_decrease = yes
+		}
+	} 
+	else_if = {
+		limit = { CAN_has_unionist_government = yes }
+		if = {
+			limit = { check_variable = { THIS = CAN } }
+			CAN_popularity_unionists_decrease_countrywide = yes
+		} else = {
+			CAN_popularity_unionists_decrease = yes
+		}
+	}
+}
+
+CAN_popularity_ruling_increase_tiny = {
+	log = "[GetDateText]: [ROOT.GetName]: Scripted Effect CAN_popularity_ruling_increase_tiny target: [THIS.GetName]"
+	set_variable = { change_more = 1 }
+	set_variable = { change_less = 0 }
+	CAN_popularity_ruling_increase = yes
+	custom_effect_tooltip = CAN_increase_ruling_nationwide_tiny_tt
+}
+
+CAN_popularity_ruling_increase_small = {
+	log = "[GetDateText]: [ROOT.GetName]: Scripted Effect CAN_popularity_ruling_increase_small target: [THIS.GetName]"
+	set_variable = { change_more = 1 }
+	set_variable = { change_less = 1 }
+	CAN_popularity_ruling_increase = yes
+	custom_effect_tooltip = CAN_increase_ruling_nationwide_small_tt
+}
+
+CAN_popularity_ruling_increase_medium = {
+	log = "[GetDateText]: [ROOT.GetName]: Scripted Effect CAN_popularity_ruling_increase_medium target: [THIS.GetName]"
+	set_variable = { change_more = 2 }
+	set_variable = { change_less = 1 }
+	CAN_popularity_ruling_increase = yes
+	custom_effect_tooltip = CAN_increase_ruling_nationwide_medium_tt
+}
+
+CAN_popularity_ruling_increase_large = {
+	log = "[GetDateText]: [ROOT.GetName]: Scripted Effect CAN_popularity_ruling_increase_large target: [THIS.GetName]"
+	set_variable = { change_more = 3 }
+	set_variable = { change_less = 2 }
+	CAN_popularity_ruling_increase = yes
+	custom_effect_tooltip = CAN_increase_ruling_nationwide_large_tt
+}
+
+CAN_popularity_ruling_decrease_tiny = {
+	log = "[GetDateText]: [ROOT.GetName]: Scripted Effect CAN_popularity_ruling_decrease_tiny target: [THIS.GetName]"
+	set_variable = { change_more = 1 }
+	set_variable = { change_less = 0 }
+	CAN_popularity_ruling_decrease = yes
+	custom_effect_tooltip = CAN_decrease_ruling_nationwide_tiny_tt
+}
+
+CAN_popularity_ruling_decrease_small = {
+	log = "[GetDateText]: [ROOT.GetName]: Scripted Effect CAN_popularity_ruling_decrease_small target: [THIS.GetName]"
+	set_variable = { change_more = 1 }
+	set_variable = { change_less = 1 }
+	CAN_popularity_ruling_decrease = yes
+	custom_effect_tooltip = CAN_decrease_ruling_nationwide_small_tt
+}
+
+CAN_popularity_ruling_decrease_medium = {
+	log = "[GetDateText]: [ROOT.GetName]: Scripted Effect CAN_popularity_ruling_decrease_medium target: [THIS.GetName]"
+	set_variable = { change_more = 2 }
+	set_variable = { change_less = 1 }
+	CAN_popularity_ruling_decrease = yes
+	custom_effect_tooltip = CAN_decrease_ruling_nationwide_medium_tt
+}
+
+CAN_popularity_ruling_decrease_large = {
+	log = "[GetDateText]: [ROOT.GetName]: Scripted Effect CAN_popularity_ruling_decrease_large target: [THIS.GetName]"
+	set_variable = { change_more = 3 }
+	set_variable = { change_less = 2 }
+	CAN_popularity_ruling_decrease = yes
+	custom_effect_tooltip = CAN_decrease_ruling_nationwide_large_tt
+}
+
+CAN_popularity_socdem_increase_tiny = {
+	log = "[GetDateText]: [ROOT.GetName]: Scripted Effect CAN_popularity_socdem_increase_tiny target: [THIS.GetName]"
+	set_variable = { change_more = 1 }
+	set_variable = { change_less = 0 }
+	if = {
+		limit = { check_variable = { THIS = CAN } }
+		CAN_popularity_socdem_increase_countrywide = yes
+	} else = {
+		CAN_popularity_socdem_increase = yes
+	}
+}
+
+CAN_popularity_socdem_increase_small = {
+	log = "[GetDateText]: [ROOT.GetName]: Scripted Effect CAN_popularity_socdem_increase_small target: [THIS.GetName]"
+	set_variable = { change_more = 1 }
+	set_variable = { change_less = 1 }
+	if = {
+		limit = { check_variable = { THIS = CAN } }
+		CAN_popularity_socdem_increase_countrywide = yes
+	} else = {
+		CAN_popularity_socdem_increase = yes
+	}
+}
+
+CAN_popularity_socdem_increase_medium = {
+	log = "[GetDateText]: [ROOT.GetName]: Scripted Effect CAN_popularity_socdem_increase_medium target: [THIS.GetName]"
+	set_variable = { change_more = 2 }
+	set_variable = { change_less = 1 }
+	if = {
+		limit = { check_variable = { THIS = CAN } }
+		CAN_popularity_socdem_increase_countrywide = yes
+	} else = {
+		CAN_popularity_socdem_increase = yes
+	}
+}
+
+CAN_popularity_socdem_increase_large = {
+	log = "[GetDateText]: [ROOT.GetName]: Scripted Effect CAN_popularity_socdem_increase_large target: [THIS.GetName]"
+	set_variable = { change_more = 3 }
+	set_variable = { change_less = 2 }
+	if = {
+		limit = { check_variable = { THIS = CAN } }
+		CAN_popularity_socdem_increase_countrywide = yes
+	} else = {
+		CAN_popularity_socdem_increase = yes
+	}
+}
+
+CAN_popularity_liberals_increase_tiny = {
+	log = "[GetDateText]: [ROOT.GetName]: Scripted Effect CAN_popularity_liberals_increase_tiny target: [THIS.GetName]"
+	set_variable = { change_more = 1 }
+	set_variable = { change_less = 0 }
+	if = {
+		limit = { check_variable = { THIS = CAN } }
+		CAN_popularity_liberals_increase_countrywide = yes
+	} else = {
+		CAN_popularity_liberals_increase = yes
+	}
+}
+
+CAN_popularity_liberals_increase_small = {
+	log = "[GetDateText]: [ROOT.GetName]: Scripted Effect CAN_popularity_liberals_increase_small target: [THIS.GetName]"
+	set_variable = { change_more = 1 }
+	set_variable = { change_less = 1 }
+	if = {
+		limit = { check_variable = { THIS = CAN } }
+		CAN_popularity_liberals_increase_countrywide = yes
+	} else = {
+		CAN_popularity_liberals_increase = yes
+	}
+}
+
+CAN_popularity_liberals_increase_medium = {
+	log = "[GetDateText]: [ROOT.GetName]: Scripted Effect CAN_popularity_liberals_increase_medium target: [THIS.GetName]"
+	set_variable = { change_more = 2 }
+	set_variable = { change_less = 1 }
+	if = {
+		limit = { check_variable = { THIS = CAN } }
+		CAN_popularity_liberals_increase_countrywide = yes
+	} else = {
+		CAN_popularity_liberals_increase = yes
+	}
+}
+
+CAN_popularity_liberals_increase_large = {
+	log = "[GetDateText]: [ROOT.GetName]: Scripted Effect CAN_popularity_liberals_increase_large target: [THIS.GetName]"
+	set_variable = { change_more = 3 }
+	set_variable = { change_less = 2 }
+	if = {
+		limit = { check_variable = { THIS = CAN } }
+		CAN_popularity_liberals_increase_countrywide = yes
+	} else = {
+		CAN_popularity_liberals_increase = yes
+	}
+}
+
+CAN_popularity_conservatives_increase_tiny = {
+	log = "[GetDateText]: [ROOT.GetName]: Scripted Effect CAN_popularity_conservatives_increase_tiny target: [THIS.GetName]"
+	set_variable = { change_more = 1 }
+	set_variable = { change_less = 0 }
+	if = {
+		limit = { check_variable = { THIS = CAN } }
+		CAN_popularity_conservatives_increase_countrywide = yes
+	} else = {
+		CAN_popularity_conservatives_increase = yes
+	}
+}
+
+CAN_popularity_conservatives_increase_small = {
+	log = "[GetDateText]: [ROOT.GetName]: Scripted Effect CAN_popularity_conservatives_increase_small target: [THIS.GetName]"
+	set_variable = { change_more = 1 }
+	set_variable = { change_less = 1 }
+	if = {
+		limit = { check_variable = { THIS = CAN } }
+		CAN_popularity_conservatives_increase_countrywide = yes
+	} else = {
+		CAN_popularity_conservatives_increase = yes
+	}
+}
+
+CAN_popularity_conservatives_increase_medium = {
+	log = "[GetDateText]: [ROOT.GetName]: Scripted Effect CAN_popularity_conservatives_increase_medium target: [THIS.GetName]"
+	set_variable = { change_more = 2 }
+	set_variable = { change_less = 1 }
+	if = {
+		limit = { check_variable = { THIS = CAN } }
+		CAN_popularity_conservatives_increase_countrywide = yes
+	} else = {
+		CAN_popularity_conservatives_increase = yes
+	}
+}
+
+CAN_popularity_conservatives_increase_large = {
+	log = "[GetDateText]: [ROOT.GetName]: Scripted Effect CAN_popularity_conservatives_increase_large target: [THIS.GetName]"
+	set_variable = { change_more = 3 }
+	set_variable = { change_less = 2 }
+	if = {
+		limit = { check_variable = { THIS = CAN } }
+		CAN_popularity_conservatives_increase_countrywide = yes
+	} else = {
+		CAN_popularity_conservatives_increase = yes
+	}
+}
+
+CAN_popularity_unionists_increase_tiny = {
+	log = "[GetDateText]: [ROOT.GetName]: Scripted Effect CAN_popularity_unionists_increase_tiny target: [THIS.GetName]"
+	set_variable = { change_more = 1 }
+	set_variable = { change_less = 0 }
+	if = {
+		limit = { check_variable = { THIS = CAN } }
+		CAN_popularity_unionists_increase_countrywide = yes
+	} else = {
+		CAN_popularity_unionists_increase = yes
+	}
+}
+
+CAN_popularity_unionists_increase_small = {
+	log = "[GetDateText]: [ROOT.GetName]: Scripted Effect CAN_popularity_unionists_increase_small target: [THIS.GetName]"
+	set_variable = { change_more = 1 }
+	set_variable = { change_less = 1 }
+	if = {
+		limit = { check_variable = { THIS = CAN } }
+		CAN_popularity_unionists_increase_countrywide = yes
+	} 
+	else = {
+		CAN_popularity_unionists_increase = yes
+	}
+}
+
+CAN_popularity_unionists_increase_medium = {
+	log = "[GetDateText]: [ROOT.GetName]: Scripted Effect CAN_popularity_unionists_increase_medium target: [THIS.GetName]"
+	set_variable = { change_more = 2 }
+	set_variable = { change_less = 1 }
+	if = {
+		limit = { check_variable = { THIS = CAN } }
+		CAN_popularity_unionists_increase_countrywide = yes
+	} else = {
+		CAN_popularity_unionists_increase = yes
+	}
+}
+
+CAN_popularity_unionists_increase_large = {
+	log = "[GetDateText]: [ROOT.GetName]: Scripted Effect CAN_popularity_unionists_increase_large target: [THIS.GetName]"
+	set_variable = { change_more = 3 }
+	set_variable = { change_less = 2 }
+	if = {
+		limit = { check_variable = { THIS = CAN } }
+		CAN_popularity_unionists_increase_countrywide = yes
+	} else = {
+		CAN_popularity_unionists_increase = yes
+	}
+}
+
+CAN_popularity_socdem_increase_countrywide = {
+	for_each_scope_loop = {
+		array = election_region_array
+
+		set_variable = { change_more = CAN.change_more }
+		set_variable = { change_less = CAN.change_less }
+		CAN_popularity_socdem_increase = yes
+	}
+}
+
+CAN_popularity_liberals_increase_countrywide = {
+	for_each_scope_loop = {
+		array = election_region_array
+
+		set_variable = { change_more = CAN.change_more }
+		set_variable = { change_less = CAN.change_less }
+		CAN_popularity_liberals_increase = yes
+	}
+}
+
+CAN_popularity_conservatives_increase_countrywide = {
+	for_each_scope_loop = {
+		array = election_region_array
+
+		set_variable = { change_more = CAN.change_more }
+		set_variable = { change_less = CAN.change_less }
+		CAN_popularity_conservatives_increase = yes
+	}
+}
+
+CAN_popularity_unionists_increase_countrywide = {
+	for_each_scope_loop = {
+		array = election_region_array
+
+		set_variable = { change_more = CAN.change_more }
+		set_variable = { change_less = CAN.change_less }
+		CAN_popularity_unionists_increase = yes
+	}
+}
+
+CAN_popularity_socdem_increase = {
+	log = "[GetDateText]: [ROOT.GetName]: Scripted Effect CAN_popularity_socdem_increase target: [THIS.GetName]"
+	if = {
+		limit = {
+			check_variable = { election_support_array^1 > 5 }
+		}
+		add_to_variable = { election_support_array^0 = change_more }
+		subtract_from_variable = { election_support_array^1 = change_more }
+	}
+	if = {
+		limit = {
+			check_variable = { election_support_array^2 > 5 }
+		}
+		add_to_variable = { election_support_array^0 = change_less }
+		subtract_from_variable = { election_support_array^2 = change_less }
+	}
+	CAN = {
+		CAN_popularity_update_popularities = yes
+	}
+}
+
+CAN_popularity_liberals_increase = {
+	log = "[GetDateText]: [ROOT.GetName]: Scripted Effect CAN_popularity_liberals_increase target: [THIS.GetName]"
+	if = {
+		limit = {
+			check_variable = { election_support_array^0 > 5 }
+		}
+		subtract_from_variable = { election_support_array^0 = change_more }
+		add_to_variable = { election_support_array^1 = change_more }
+	}
+	if = {
+		limit = {
+			check_variable = { election_support_array^2 > 5 }
+		}
+		add_to_variable = { election_support_array^1 = change_less }
+		subtract_from_variable = { election_support_array^2 = change_less }
+	}
+	CAN = {
+		CAN_popularity_update_popularities = yes
+	}
+}
+
+CAN_popularity_conservatives_increase = {
+	log = "[GetDateText]: [ROOT.GetName]: Scripted Effect CAN_popularity_conservative_increase target: [THIS.GetName]"
+	if = {
+		limit = {
+			check_variable = { election_support_array^0 > 5 }
+		}
+		subtract_from_variable = { election_support_array^0 = change_less }
+		add_to_variable = { election_support_array^2 = change_less }
+	}
+	if = {
+		limit = {
+			check_variable = { election_support_array^1 > 5 }
+		}
+		subtract_from_variable = { election_support_array^1 = change_more }
+		add_to_variable = { election_support_array^2 = change_more }
+	}
+	CAN = {
+		CAN_popularity_update_popularities = yes
+	}
+}
+
+CAN_popularity_unionists_increase = {
+	log = "[GetDateText]: [ROOT.GetName]: Scripted Effect CAN_popularity_unionist_increase target: [THIS.GetName]"
+	if = {
+		limit = {
+			check_variable = { election_support_array^1 > 5 }
+		}
+		subtract_from_variable = { election_support_array^1 = change_less }
+		add_to_variable = { election_support_array^3 = change_less }
+	}
+	if = {
+		limit = {
+			check_variable = { election_support_array^2 > 5 }
+		}
+		subtract_from_variable = { election_support_array^2 = change_more }
+		add_to_variable = { election_support_array^3 = change_more }
+	}
+	CAN = {
+		CAN_popularity_update_popularities = yes
+	}
+}
+
+CAN_popularity_socdem_decrease_tiny = {
+	log = "[GetDateText]: [ROOT.GetName]: Scripted Effect CAN_popularity_socdem_decrease_tiny target: [THIS.GetName]"
+	set_variable = { change_more = 1 }
+	set_variable = { change_less = 0 }
+	if = {
+		limit = { check_variable = { THIS = CAN } }
+		CAN_popularity_socdem_decrease_countrywide = yes
+	} else = {
+		CAN_popularity_socdem_decrease = yes
+	}
+}
+
+CAN_popularity_socdem_decrease_small = {
+	log = "[GetDateText]: [ROOT.GetName]: Scripted Effect CAN_popularity_socdem_decrease_small target: [THIS.GetName]"
+	set_variable = { change_more = 1 }
+	set_variable = { change_less = 1 }
+	if = {
+		limit = { check_variable = { THIS = CAN } }
+		CAN_popularity_socdem_decrease_countrywide = yes
+	} else = {
+		CAN_popularity_socdem_decrease = yes
+	}
+}
+
+CAN_popularity_socdem_decrease_medium = {
+	log = "[GetDateText]: [ROOT.GetName]: Scripted Effect CAN_popularity_socdem_decrease_medium target: [THIS.GetName]"
+	set_variable = { change_more = 2 }
+	set_variable = { change_less = 1 }
+	if = {
+		limit = { check_variable = { THIS = CAN } }
+		CAN_popularity_socdem_decrease_countrywide = yes
+	} else = {
+		CAN_popularity_socdem_decrease = yes
+	}
+}
+
+CAN_popularity_socdem_decrease_large = {
+	log = "[GetDateText]: [ROOT.GetName]: Scripted Effect CAN_popularity_socdem_decrease_large target: [THIS.GetName]"
+	set_variable = { change_more = 3 }
+	set_variable = { change_less = 2 }
+	if = {
+		limit = { check_variable = { THIS = CAN } }
+		CAN_popularity_socdem_decrease_countrywide = yes
+	} else = {
+		CAN_popularity_socdem_decrease = yes
+	}
+}
+
+CAN_popularity_liberals_decrease_tiny = {
+	log = "[GetDateText]: [ROOT.GetName]: Scripted Effect CAN_popularity_liberals_decrease_tiny target: [THIS.GetName]"
+	set_variable = { change_more = 1 }
+	set_variable = { change_less = 0 }
+	if = {
+		limit = { check_variable = { THIS = CAN } }
+		CAN_popularity_liberals_decrease_countrywide = yes
+	} else = {
+		CAN_popularity_liberals_decrease = yes
+	}
+}
+
+CAN_popularity_liberals_decrease_small = {
+	log = "[GetDateText]: [ROOT.GetName]: Scripted Effect CAN_popularity_liberals_decrease_small target: [THIS.GetName]"
+	set_variable = { change_more = 1 }
+	set_variable = { change_less = 1 }
+	if = {
+		limit = { check_variable = { THIS = CAN } }
+		CAN_popularity_liberals_decrease_countrywide = yes
+	} else = {
+		CAN_popularity_liberals_decrease = yes
+	}
+}
+
+CAN_popularity_liberals_decrease_medium = {
+	log = "[GetDateText]: [ROOT.GetName]: Scripted Effect CAN_popularity_liberals_decrease_medium target: [THIS.GetName]"
+	set_variable = { change_more = 2 }
+	set_variable = { change_less = 1 }
+	if = {
+		limit = { check_variable = { THIS = CAN } }
+		CAN_popularity_liberals_decrease_countrywide = yes
+	} else = {
+		CAN_popularity_liberals_decrease = yes
+	}
+}
+
+CAN_popularity_liberals_decrease_large = {
+	log = "[GetDateText]: [ROOT.GetName]: Scripted Effect CAN_popularity_liberals_decrease_large target: [THIS.GetName]"
+	set_variable = { change_more = 3 }
+	set_variable = { change_less = 2 }
+	if = {
+		limit = { check_variable = { THIS = CAN } }
+		CAN_popularity_liberals_decrease_countrywide = yes
+	} else = {
+		CAN_popularity_liberals_decrease = yes
+	}
+}
+
+CAN_popularity_conservatives_decrease_tiny = {
+	log = "[GetDateText]: [ROOT.GetName]: Scripted Effect CAN_popularity_conservatives_decrease_tiny target: [THIS.GetName]"
+	set_variable = { change_more = 1 }
+	set_variable = { change_less = 0 }
+	if = {
+		limit = { check_variable = { THIS = CAN } }
+		CAN_popularity_conservatives_decrease_countrywide = yes
+	} else = {
+		CAN_popularity_conservatives_decrease = yes
+	}
+}
+
+CAN_popularity_conservatives_decrease_small = {
+	log = "[GetDateText]: [ROOT.GetName]: Scripted Effect CAN_popularity_conservatives_decrease_small target: [THIS.GetName]"
+	set_variable = { change_more = 1 }
+	set_variable = { change_less = 1 }
+	if = {
+		limit = { check_variable = { THIS = CAN } }
+		CAN_popularity_conservatives_decrease_countrywide = yes
+	} else = {
+		CAN_popularity_conservatives_decrease = yes
+	}
+}
+
+CAN_popularity_conservatives_decrease_medium = {
+	log = "[GetDateText]: [ROOT.GetName]: Scripted Effect CAN_popularity_conservatives_decrease_medium target: [THIS.GetName]"
+	set_variable = { change_more = 2 }
+	set_variable = { change_less = 1 }
+	if = {
+		limit = { check_variable = { THIS = CAN } }
+		CAN_popularity_conservatives_decrease_countrywide = yes
+	} else = {
+		CAN_popularity_conservatives_decrease = yes
+	}
+}
+
+CAN_popularity_conservatives_decrease_large = {
+	log = "[GetDateText]: [ROOT.GetName]: Scripted Effect CAN_popularity_conservatives_decrease_large target: [THIS.GetName]"
+	set_variable = { change_more = 3 }
+	set_variable = { change_less = 2 }
+	if = {
+		limit = { check_variable = { THIS = CAN } }
+		CAN_popularity_conservatives_decrease_countrywide = yes
+	} else = {
+		CAN_popularity_conservatives_decrease = yes
+	}
+}
+
+CAN_popularity_unionists_decrease_tiny = {
+	log = "[GetDateText]: [ROOT.GetName]: Scripted Effect CAN_popularity_unionists_decrease_tiny target: [THIS.GetName]"
+	set_variable = { change_more = 1 }
+	set_variable = { change_less = 0 }
+	if = {
+		limit = { check_variable = { THIS = CAN } }
+		CAN_popularity_unionists_decrease_countrywide = yes
+	} else = {
+		CAN_popularity_unionists_decrease = yes
+	}
+}
+
+CAN_popularity_unionists_decrease_small = {
+	log = "[GetDateText]: [ROOT.GetName]: Scripted Effect CAN_popularity_unionists_decrease_small target: [THIS.GetName]"
+	set_variable = { change_more = 1 }
+	set_variable = { change_less = 1 }
+	if = {
+		limit = { check_variable = { THIS = CAN } }
+		CAN_popularity_unionists_decrease_countrywide = yes
+	} 
+	else = {
+		CAN_popularity_unionists_decrease = yes
+	}
+}
+
+CAN_popularity_unionists_decrease_medium = {
+	log = "[GetDateText]: [ROOT.GetName]: Scripted Effect CAN_popularity_unionists_decrease_medium target: [THIS.GetName]"
+	set_variable = { change_more = 2 }
+	set_variable = { change_less = 1 }
+	if = {
+		limit = { check_variable = { THIS = CAN } }
+		CAN_popularity_unionists_decrease_countrywide = yes
+	} else = {
+		CAN_popularity_unionists_decrease = yes
+	}
+}
+
+CAN_popularity_unionists_decrease_large = {
+	log = "[GetDateText]: [ROOT.GetName]: Scripted Effect CAN_popularity_unionists_decrease_large target: [THIS.GetName]"
+	set_variable = { change_more = 3 }
+	set_variable = { change_less = 2 }
+	if = {
+		limit = { check_variable = { THIS = CAN } }
+		CAN_popularity_unionists_decrease_countrywide = yes
+	} else = {
+		CAN_popularity_unionists_decrease = yes
+	}
+}
+
+CAN_popularity_socdem_decrease_countrywide = {
+	log = "[GetDateText]: [ROOT.GetName]: Scripted Effect CAN_popularity_socdem_decrease_countrywide target: [THIS.GetName]"
+	for_each_scope_loop = {
+		array = election_region_array
+
+		set_variable = { change_more = CAN.change_more }
+		set_variable = { change_less = CAN.change_less }
+		CAN_popularity_socdem_decrease = yes
+	}
+}
+
+CAN_popularity_liberals_decrease_countrywide = {
+	log = "[GetDateText]: [ROOT.GetName]: Scripted Effect CAN_popularity_liberals_decrease_countrywide target: [THIS.GetName]"
+	for_each_scope_loop = {
+		array = election_region_array
+
+		set_variable = { change_more = CAN.change_more }
+		set_variable = { change_less = CAN.change_less }
+		CAN_popularity_liberals_decrease = yes
+	}
+}
+
+CAN_popularity_conservatives_decrease_countrywide = {
+	log = "[GetDateText]: [ROOT.GetName]: Scripted Effect CAN_popularity_conservatives_decrease_countrywide target: [THIS.GetName]"
+	for_each_scope_loop = {
+		array = election_region_array
+
+		set_variable = { change_more = CAN.change_more }
+		set_variable = { change_less = CAN.change_less }
+		CAN_popularity_conservatives_decrease = yes
+	}
+}
+
+CAN_popularity_unionists_decrease_countrywide = {
+	log = "[GetDateText]: [ROOT.GetName]: Scripted Effect CAN_popularity_unionists_decrease_countrywide target: [THIS.GetName]"
+	for_each_scope_loop = {
+		array = election_region_array
+
+		set_variable = { change_more = CAN.change_more }
+		set_variable = { change_less = CAN.change_less }
+		CAN_popularity_unionists_decrease = yes
+	}
+}
+
+CAN_popularity_socdem_decrease = {
+	log = "[GetDateText]: [ROOT.GetName]: Scripted Effect CAN_popularity_socdem_decrease target: [THIS.GetName]"
+	if = {
+		limit = {
+			check_variable = { election_support_array^1 < 95 }
+		}
+		add_to_variable = { election_support_array^1 = change_more }
+		subtract_from_variable = { election_support_array^0 = change_more }
+	}
+	if = {
+		limit = {
+			check_variable = { election_support_array^2 < 95 }
+		}
+		add_to_variable = { election_support_array^2 = change_less }
+		subtract_from_variable = { election_support_array^0 = change_less }
+	}
+	CAN = {
+		CAN_popularity_update_popularities = yes
+	}
+}
+
+CAN_popularity_liberals_decrease = {
+	log = "[GetDateText]: [ROOT.GetName]: Scripted Effect CAN_popularity_liberals_decrease target: [THIS.GetName]"
+	if = {
+		limit = {
+			check_variable = { election_support_array^0 < 95 }
+		}
+		subtract_from_variable = { election_support_array^1 = change_more }
+		add_to_variable = { election_support_array^0 = change_more }
+	}
+	if = {
+		limit = {
+			check_variable = { election_support_array^2 < 95 }
+		}
+		add_to_variable = { election_support_array^2 = change_less }
+		subtract_from_variable = { election_support_array^1 = change_less }
+	}
+	CAN = {
+		CAN_popularity_update_popularities = yes
+	}
+}
+
+CAN_popularity_conservatives_decrease = {
+	log = "[GetDateText]: [ROOT.GetName]: Scripted Effect CAN_popularity_conservatives_decrease target: [THIS.GetName]"
+	if = {
+		limit = {
+			check_variable = { election_support_array^0 < 95 }
+		}
+		subtract_from_variable = { election_support_array^2 = change_less }
+		add_to_variable = { election_support_array^0 = change_less }
+	}
+	if = {
+		limit = {
+			check_variable = { election_support_array^1 < 95 }
+		}
+		subtract_from_variable = { election_support_array^2 = change_more }
+		add_to_variable = { election_support_array^1 = change_more }
+	}
+	CAN = {
+		CAN_popularity_update_popularities = yes
+	}
+}
+
+CAN_popularity_unionists_decrease = {
+	log = "[GetDateText]: [ROOT.GetName]: Scripted Effect CAN_popularity_unionists_decrease target: [THIS.GetName]"
+	if = {
+		limit = {
+			check_variable = { election_support_array^1 < 95 }
+		}
+		subtract_from_variable = { election_support_array^3 = change_less }
+		add_to_variable = { election_support_array^1 = change_less }
+	}
+	if = {
+		limit = {
+			check_variable = { election_support_array^2 < 95 }
+		}
+		subtract_from_variable = { election_support_array^3 = change_more }
+		add_to_variable = { election_support_array^2 = change_more }
+	}
+	CAN = {
+		CAN = {
+		CAN_popularity_update_popularities = yes
+	}
+	}
+}
+
+CAN_set_flag_to_redesign_flag = {
+	set_cosmetic_tag = CAN_redesign
+
+	HAW = {
+		if = {
+			limit = {
+				has_cosmetic_tag = HAW_mandate
+			}
+			set_cosmetic_tag = HAW_mandate_can
+		}
+	}
+	hidden_effect = {
+		CHI = {
+			if = {
+				limit = {
+					has_idea = CHI_accord_advisors_idea_CAN_flag_1
+				}
+			}
+			swap_ideas = {
+				remove_idea = CHI_accord_advisors_idea_CAN_flag_1
+				add_idea = CHI_accord_advisors_idea_CAN_flag_2
+			}
+		}
+	}
+}

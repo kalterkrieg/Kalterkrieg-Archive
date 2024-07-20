@@ -1,0 +1,978 @@
+NFA_SNCF_decision_category = {
+
+	NFA_seek_more_funding = {
+		icon = GFX_decision_generic_political_discourse
+
+		available = {
+			check_variable = {
+				var = NFA_SNCF_BUDGET_VAR
+				value = 300
+				compare = less_than_or_equals
+			}
+			check_variable = {
+				NFA_rail_completion < 5
+			}
+		}
+
+		cost = 25
+
+		fire_only_once = no
+
+		days_remove = 15
+		days_re_enable = 100
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove NFA_seek_more_funding target: [From.GetName]"
+			add_to_variable = {
+				NFA_SNCF_BUDGET_VAR = 200
+				tooltip = NFA_SNCF_BUDGET_VAR_tt
+			}
+		}
+	}
+
+	NFA_rebuild_the_bordeaux_to_lyon_railroad = {
+		icon = GFX_decision_generic_construction
+		available = {
+			num_of_civilian_factories_available_for_projects > 6
+		}
+		custom_cost_trigger = {
+			check_variable = {
+				NFA_SNCF_BUDGET_VAR > 199
+			}
+		}
+		custom_cost_text = NFA_has_200_m
+		fire_only_once = yes
+
+		days_remove = 365
+		modifier = {
+			civilian_factory_use = 7
+		}
+		highlight_states = {
+			highlight_state_targets = {
+				state = 19
+			}
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove NFA_rebuild_the_bordeaux_to_lyon_railroad target: [From.GetName]"
+			add_to_variable = {
+				NFA_rail_completion = 1
+			}
+			set_country_flag = SNCF_bordeaux_to_lyon_line_completed
+			
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NFA_rebuild_the_bordeaux_to_lyon_railroad target: [From.GetName]"
+			add_to_variable = {
+				var = NFA_SNCF_BUDGET_VAR
+				value = -200
+			}
+			build_railway = {
+				level = 2
+				fallback = yes
+				start_province = 9737
+				target_province = 6613
+			}
+		}
+	}
+	NFA_rebuild_the_lyon_to_marseille_line = {
+		icon = GFX_decision_generic_construction
+
+		cost = 75
+
+		available = {
+			has_country_flag = SNCF_bordeaux_to_lyon_line_completed
+			num_of_civilian_factories_available_for_projects > 4
+		}
+
+		custom_cost_trigger = {
+			check_variable = {
+				NFA_SNCF_BUDGET_VAR > 99
+			}
+		}
+		custom_cost_text = NFA_has_100_m
+
+		fire_only_once = yes
+
+		days_remove = 720
+		modifier = {
+			civilian_factory_use = 5
+		}
+		highlight_states = {
+			highlight_state_targets = {
+				state = 951
+			}
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove NFA_rebuild_the_lyon_to_marseille_line target: [From.GetName]"
+			add_to_variable = {
+				NFA_rail_completion = 1
+			}
+			set_country_flag = SNCF_lyon_to_marseille_line_completed
+			build_railway = {
+				level = 2
+				fallback = yes
+				start_province = 11834
+				target_province = 6613
+			}
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NFA_rebuild_the_lyon_to_marseille_line target: [From.GetName]"
+			subtract_from_variable = {
+				var = NFA_SNCF_BUDGET_VAR
+				value = 100
+			}
+		}
+	}
+	NFA_connect_marseille_to_toulouse = {
+		icon = GFX_decision_railroad
+
+		cost = 50
+
+		available = {
+			has_country_flag = SNCF_lyon_to_marseille_line_completed
+			num_of_civilian_factories_available_for_projects > 2
+		}
+
+		custom_cost_trigger = {
+			check_variable = {
+				NFA_SNCF_BUDGET_VAR > 99
+			}
+		}
+		custom_cost_text = NFA_has_100_m
+
+		fire_only_once = yes
+
+		days_remove = 180
+		modifier = {
+			civilian_factory_use = 3
+		}
+		highlight_states = {
+			highlight_state_targets = {
+				state = 31
+			}
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove NFA_connect_marseille_to_toulouse target: [From.GetName]"
+			add_to_variable = {
+				NFA_rail_completion = 1
+			}
+			build_railway = {
+				level = 2
+				fallback = yes
+				start_province = 11834
+				target_province = 911
+			}
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NFA_connect_marseille_to_toulouse target: [From.GetName]"
+			subtract_from_variable = {
+				var = NFA_SNCF_BUDGET_VAR
+				value = 100
+			}
+		}
+	}
+	NFA_connect_bordeaux_to_orleans = {
+		icon = GFX_decision_railroad
+
+		cost = 50
+		custom_cost_trigger = {
+			check_variable = {
+				NFA_SNCF_BUDGET_VAR > 99
+			}
+		}
+		custom_cost_text = NFA_has_100_m
+
+		available = {
+			has_country_flag = SNCF_bordeaux_to_lyon_line_completed
+			num_of_civilian_factories_available_for_projects > 2
+		}
+
+		fire_only_once = yes
+
+		days_remove = 180
+		modifier = {
+			civilian_factory_use = 3
+		}
+		highlight_states = {
+			highlight_state_targets = {
+				state = 33
+			}
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove NFA_connect_bordeaux_to_orleans target: [From.GetName]"
+			add_to_variable = {
+				NFA_rail_completion = 1
+			}
+			build_railway = {
+				level = 2
+				fallback = yes
+				start_province = 651
+				target_province = 13288
+			}
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NFA_connect_bordeaux_to_orleans target: [From.GetName]"
+			subtract_from_variable = {
+				var = NFA_SNCF_BUDGET_VAR
+				value = 100
+			}
+		}
+	}
+	NFA_connect_marseille_to_turin = {
+		icon = GFX_decision_railroad
+
+		cost = 150
+		custom_cost_trigger = {
+			check_variable = {
+				NFA_SNCF_BUDGET_VAR > 299
+			}
+		}
+		custom_cost_text = NFA_has_300_m
+
+		available = {
+			has_country_flag = SNCF_lyon_to_marseille_line_completed
+			is_in_faction_with = ITA
+			num_of_civilian_factories_available_for_projects > 7
+		}
+
+		visible = {
+			original_tag = NFA
+		}
+
+		fire_only_once = yes
+
+		days_remove = 720
+		modifier = {
+			civilian_factory_use = 8
+		}
+		highlight_states = {
+			highlight_state_targets = {
+				state = 921
+			}
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove NFA_connect_marseille_to_turin target: [From.GetName]"
+			add_to_variable = {
+				NFA_rail_completion = 1
+			}
+			build_railway = {
+				level = 2
+				fallback = yes
+				start_province = 11834
+				target_province = 6780
+			}
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NFA_connect_marseille_to_turin target: [From.GetName]"
+			add_to_variable = {
+				var = NFA_SNCF_BUDGET_VAR
+				value = -300
+			}
+		}
+	}
+}
+NFA_invasion = {
+	NFA_invasion_mission = {
+		selectable_mission = no
+
+		activation = {
+			always = no
+		}
+
+		available = {
+			controls_province = 3552
+			controls_province = 11483
+			controls_province = 3652
+			OR = {
+				PCO = {
+					controls_province = 9523
+				}
+				NFA = {
+					controls_province = 9523
+				}
+			}  
+		}
+
+		is_good = no
+
+		days_mission_timeout = NFA_invasion_mission_length
+
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout NFA_invasion_mission target: [From.GetName]"
+			GER = {
+				declare_war_on = {
+					target = NFA
+					type = annex_everything
+				}
+			}
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NFA_invasion_mission target: [From.GetName]"
+			GER = {
+				country_event = {
+					id = fra_rev.38
+				}
+			}
+		}
+	}
+}
+
+
+NFA_North_France_infiltration_decision_category = {
+	NFA_activists_contact_level = {
+		icon = GFX_decision_generic_political_discourse
+		visible = {
+			always = yes
+		}
+		available = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+	}
+	NFA_militia_supply_level = {
+		icon = GFX_decision_support_equipment
+		visible = {
+			always = yes
+		}
+		available = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+	}
+	NFA_sabotage_preparation_level = {
+		icon = GFX_decision_railroad
+		visible = {
+			date > 1952.1.1
+		}
+		available = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+	}
+	NFA_invasion_coordination_level = {
+		icon = GFX_decision_soldierly_discipline
+		visible = {
+			always = yes
+		}
+		available = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+	}
+	NFA_contact_student_activists = {
+		icon = GFX_decision_generic_political_discourse
+		visible = {
+			always = yes
+		}
+		available = {
+			if = {
+				limit = {
+					has_dlc = "La Resistance"
+				}
+				network_strength = {
+					target = FRA
+					value > 59
+				}
+			}
+			check_variable = {
+				NFA_activists_contacted < 6
+			}
+		}
+		fixed_random_seed = no
+		days_re_enable = 90
+		days_remove = 270
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NFA_contact_student_activists target: [From.GetName]"
+			
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove NFA_contact_student_activists target: [From.GetName]"
+			
+			random_list = {
+				10 = {
+					add_to_variable = {
+						NFA_activists_contacted = -1
+						tooltip = NFA_activists_contacted
+					}
+					clamp_variable = {
+						var = NFA_activists_contacted
+						min = 1
+						max = 5
+					}
+				}
+				80 = {
+					add_to_variable = {
+						NFA_activists_contacted = 1
+						tooltip = NFA_activists_contacted
+					}
+					clamp_variable = {
+						var = NFA_activists_contacted
+						min = 1
+						max = 5
+					}
+				}
+				10 = {
+					add_to_variable = {
+						NFA_activists_contacted = 2
+						tooltip = NFA_activists_contacted
+					}
+					clamp_variable = {
+						var = NFA_activists_contacted
+						min = 1
+						max = 5
+					}
+				}
+			}
+		}
+	}
+	NFA_supply_militas = {
+		icon = GFX_decision_support_equipment
+		visible = {
+			always = yes
+		}
+		available = {
+			if = {
+				limit = {
+					has_dlc = "La Resistance"
+				}
+				network_strength = {
+					target = FRA
+					value > 74
+				}
+			}
+			custom_trigger_tooltip = {
+				tooltip = NFA_contact_level_2
+				check_variable = {
+					NFA_activists_contacted > 1
+				}
+			}
+			check_variable = {
+				NFA_militas_supplied < 6
+			}
+		}
+		fixed_random_seed = no
+		days_re_enable = 180
+		days_remove = 90
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NFA_supply_militas target: [From.GetName]"
+			
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove NFA_supply_militas target: [From.GetName]"
+			random_list = {
+				10 = {
+					add_to_variable = {
+						NFA_militas_supplied = -1
+						tooltip = NFA_militas_supplied
+					}
+					clamp_variable = {
+						var = NFA_militas_supplied
+						min = 1
+						max = 5
+					}
+				}
+				80 = {
+					add_to_variable = {
+						NFA_militas_supplied = 1
+						tooltip = NFA_militas_supplied
+					}
+					clamp_variable = {
+						var = NFA_militas_supplied
+						min = 1
+						max = 5
+					}
+				}
+				10 = {
+					add_to_variable = {
+						NFA_militas_supplied = 2
+						tooltip = NFA_militas_supplied
+					}
+					clamp_variable = {
+						var = NFA_militas_supplied
+						min = 1
+						max = 5
+					}
+				}
+			}
+		}
+	}
+	NFA_prepare_sabotage_crews = {
+		icon = GFX_decision_railroad
+		visible = {
+			date > 1952.1.1
+		}
+		available = {
+			if = {
+				limit = {
+					has_dlc = "La Resistance"
+				}
+				network_strength = {
+					target = FRA
+					value > 79
+				}
+			}
+			check_variable = {
+				NFA_sabotage_preparation < 6
+			}
+			custom_trigger_tooltip = {
+				tooltip = NFA_contact_level_3
+				check_variable = {
+					NFA_activists_contacted > 2
+				}
+			}
+		}
+		fixed_random_seed = no
+		days_re_enable = 60
+		days_remove = 180
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NFA_prepare_sabotage_crews target: [From.GetName]"
+			
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove NFA_prepare_sabotage_crews target: [From.GetName]"
+			random_list = {
+				10 = {
+					add_to_variable = {
+						NFA_sabotage_preparation = -1
+						tooltip = NFA_sabotage_preparation
+					}
+					clamp_variable = {
+						var = NFA_sabotage_preparation
+						min = 1
+						max = 5
+					}
+				}
+				80 = {
+					add_to_variable = {
+						NFA_sabotage_preparation = 1
+						tooltip = NFA_sabotage_preparation
+					}
+					clamp_variable = {
+						var = NFA_sabotage_preparation
+						min = 1
+						max = 5
+					}
+				}
+				10 = {
+					add_to_variable = {
+						NFA_sabotage_preparation = 2
+						tooltip = NFA_sabotage_preparation
+					}
+					clamp_variable = {
+						var = NFA_sabotage_preparation
+						min = 1
+						max = 5
+					}
+				}
+			}
+		}
+	}
+	NFA_coordinate_invasion_efforts = {
+		icon = GFX_decision_soldierly_discipline
+		visible = {
+			always = yes
+		}
+		available = {
+			if = {
+				limit = {
+					has_dlc = "La Resistance"
+				}
+				network_strength = {
+					target = FRA
+					value > 74
+				}
+			}
+			check_variable = {
+				NFA_invasion_coordination < 6
+			}
+			custom_trigger_tooltip = {
+				tooltip = NFA_contact_level_3
+				check_variable = {
+					NFA_activists_contacted > 2
+				}
+			}
+		}
+		fixed_random_seed = no
+		days_re_enable = 60
+		days_remove = 180
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NFA_coordinate_invasion_efforts target: [From.GetName]"
+			
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove NFA_coordinate_invasion_efforts target: [From.GetName]"
+			random_list = {
+				10 = {
+					add_to_variable = {
+						NFA_invasion_coordination = -1
+						tooltip = NFA_invasion_coordination
+					}
+					clamp_variable = {
+						var = NFA_invasion_coordination
+						min = 1
+						max = 5
+					}
+				}
+				80 = {
+					add_to_variable = {
+						NFA_invasion_coordination = 1
+						tooltip = NFA_invasion_coordination
+					}
+					clamp_variable = {
+						var = NFA_invasion_coordination
+						min = 1
+						max = 5
+					}
+				}
+				10 = {
+					add_to_variable = {
+						NFA_invasion_coordination = 2
+						tooltip = NFA_invasion_coordination
+					}
+					clamp_variable = {
+						var = NFA_invasion_coordination
+						min = 1
+						max = 5
+					}
+				}
+			}
+		}
+	}
+}
+
+NFA_colonial_reform = {
+    NFA_reform_process = {
+		icon = GFX_decision_eng_trade_unions_support
+        available = {
+            custom_trigger_tooltip = {
+                tooltip = NFA_reform_process_tt
+                check_variable = { NFA_reform_process_var > 9 }
+            }
+        }
+        activation = {
+            always = no
+        }
+        visible = {
+            has_country_flag = NFA_reform_process
+        }
+        is_good = no
+        days_mission_timeout = 1795
+
+        complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NFA_reform_process target: [From.GetName]"
+			NFA_clear_colonial_unrest = yes
+            if = {
+                limit = {
+                    has_country_flag = NFA_french_community
+                }
+                for_each_scope_loop = {
+					array = NFA_african_states
+					
+					add_core_of = NFA
+                    add_dynamic_modifier = {
+                        modifier = autonomous_state
+                    }
+				}
+				custom_effect_tooltip = NFA_all_african_states
+				custom_effect_tooltip = NFA_add_core_of_tt
+				effect_tooltip = {
+                    add_dynamic_modifier = {
+                        modifier = autonomous_state
+                    }
+				}
+            }
+			else = {
+				custom_effect_tooltip = NFA_french_union_effect_tt
+				for_each_scope_loop = {
+					array = NFA_african_states
+
+					if = {
+						limit = {
+							compliance > 89
+						}
+						add_core_of = NFA
+					}
+				}
+			}
+        }
+
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout NFA_reform_process target: [From.GetName]"
+			NFA_clear_colonial_unrest = yes
+			add_timed_idea = { idea = NFA_colonial_turmoil days = 750 }
+			custom_effect_tooltip = NFA_colonial_failure_tt
+			hidden_effect = {
+				country_event = {
+					id = nfa_colonial.5
+					days = 90
+					random_days = 15
+				}	
+				country_event = {
+					id = nfa_colonial.14
+					days = 270
+					random_days = 30
+				}
+				if = {
+					limit = {
+						TUN = {
+							exists = no
+						}
+					}
+					country_event = {
+						id = nfa_colonial.13
+						days = 30
+						random_days = 8
+					}
+				}
+
+				MAF = {
+					country_event = {
+						id = MAF.1100
+						days = 120
+					}
+				}
+			}
+		}
+    }
+	NFA_algerian_revolt = {
+        available = {
+			OR = {
+				custom_trigger_tooltip = {
+					tooltip = NFA_algerian_army
+					check_variable = { NFA_army_size > NFA_army_limit }
+				}	
+				NOT = {
+					has_war_with = ALG
+				}
+				hidden_trigger = {
+					has_war_with = GER
+				}
+			}
+        }
+        activation = {
+            always = no
+        }
+        visible = {
+            has_country_flag = NFA_algerian_war
+        }
+        is_good = yes
+        days_mission_timeout = 30
+
+        complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NFA_algerian_revolt target: [From.GetName]"
+            save_event_target_as = white_peace_receiver
+			ALG = {
+				white_peace_with_TARGET = yes
+			}
+			clr_country_flag = NFA_algerian_war
+
+        }
+
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout NFA_algerian_revolt target: [From.GetName]"
+			custom_effect_tooltip = NFA_war_continues
+			hidden_effect = {
+				activate_mission = NFA_algerian_revolt
+			}
+			set_variable = { NFA_army_limit = num_divisions }
+			divide_variable = {
+				NFA_army_limit = 3
+			}
+			set_variable = {
+				NFA_army_size = num_armies_in_state@460
+			}
+			add_to_variable = {
+				NFA_army_size = num_armies_in_state@899
+			}
+			add_to_variable = {
+				NFA_army_size = num_armies_in_state@459
+			}
+			add_to_variable = {
+				NFA_army_size = num_armies_in_state@898
+			}
+			add_to_variable = {
+				NFA_army_size = num_armies_in_state@513
+			}
+		}
+    }
+	NFA_make_peace_with_ALG = {
+		available = {
+			has_war_with = ALG
+			is_ai = no
+		}
+		visible = {
+			has_country_flag = NFA_algerian_war
+		}
+
+		fire_only_once = yes
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NFA_make_peace_with_ALG target: [From.GetName]"
+			save_event_target_as = white_peace_receiver
+			ALG = {
+				white_peace_with_TARGET = yes
+			}
+			add_political_power = -150
+		}
+	}
+	NFA_promoting_autonomists = {
+		icon = hand_out
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = NFA_no_more_than_3
+				check_variable = {
+					NFA_autonomists_promoted < 3 
+				}
+			}
+		}
+		
+		visible = {
+			has_country_flag = NFA_promoting_autonomists
+		}
+				
+		targets = {
+			458 665 460 459 899 898 513 1056 774 781 556 778 780 272 701 557
+		}
+
+		state_target = yes
+
+		target_trigger = {
+			FROM = {
+				AND = {
+					is_owned_by = NFA
+					NOT = {
+						is_core_of = NFA
+					}
+				}
+			}
+		}
+		
+		cost = 25
+
+		fire_only_once = yes
+
+		days_remove = 45
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NFA_promoting_autonomists target: [From.GetName]"
+			add_to_variable = {
+				NFA_autonomists_promoted = 1
+			}
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove NFA_promoting_autonomists target: [From.GetName]"
+			add_to_variable = {
+				NFA_autonomists_promoted = -1
+			}
+			FROM = {
+				cancel_resistance = yes
+				set_state_flag = NFA_promoted_autonomists
+			}
+			custom_effect_tooltip = NFA_reform_progress_info_tt
+			hidden_effect = {
+				if = {
+					limit = {
+						all_of_scopes = {
+							array = NFA_african_states
+							has_state_flag = NFA_promoted_autonomists
+						}
+					}
+					NFA = {
+						add_to_variable = { 
+							NFA_reform_process_var = 1 
+							tooltip = NFA_reform_process_var_tt
+						}
+					}
+				}
+			}
+			
+		}
+	}
+
+	NFA_integrating_missions = {
+		icon = GFX_decision_generic_political_discourse
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = NFA_no_more_than_3
+				check_variable = {
+					NFA_missions_integrated < 3 
+				}
+			}
+		}
+		
+		visible = {
+			has_country_flag = NFA_integrating_mission
+		}
+		
+		
+		targets = {
+			459 458 774 781 778 556 780 272 557
+		}
+		state_target = yes
+		target_trigger = {
+			FROM = {
+				AND = {
+					is_owned_by = NFA
+					NOT = {
+						is_core_of = NFA
+					}
+				}
+			}
+		}
+		
+		cost = 40
+
+		fire_only_once = yes
+
+		days_remove = 60
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NFA_integrating_missions target: [From.GetName]"
+			add_to_variable = {
+				NFA_missions_integrated = 1
+			}
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove NFA_integrating_missions target: [From.GetName]"
+			add_to_variable = {
+				NFA_missions_integrated = -1
+			}
+			FROM = {
+				add_compliance = 10
+				add_resistance_target = {
+					amount = 15
+				}
+				set_state_flag = NFA_integrating_missions
+			}
+			custom_effect_tooltip = NFA_reform_progress_info_regions_tt
+			hidden_effect = {
+				if = {
+					limit = {
+						all_of_scopes = {
+							array = NFA_african_states
+							has_state_flag = NFA_integrating_missions
+						}
+					}
+					NFA = {
+						add_to_variable = { 
+							NFA_reform_process_var = 1 
+							tooltip = NFA_reform_process_var_tt
+						}
+					}
+				}
+			}
+			
+		}
+	}
+}

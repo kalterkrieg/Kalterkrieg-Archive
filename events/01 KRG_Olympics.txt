@@ -1,0 +1,129 @@
+###########################
+# Olympics Events
+###########################
+# By Damascius and Leaf
+###########################
+add_namespace = olympics
+news_event = { #Agreement Reached for '52 Olympics
+	id = olympics.0
+	title = olympics.0.t
+	desc = olympics.0.d
+	picture = GFX_ne_generic_olympics
+
+	is_triggered_only = yes
+	major = yes
+
+	option = { # We need to start to prepare!
+		name = olympics.0.a
+		trigger = {
+			OR = {
+				tag = CAN
+				tag = GER
+			}
+		}
+	}
+
+	option = { # At least they can agree on that...
+		name = olympics.0.b
+		trigger = {
+			NOT = {
+				tag = CAN
+				tag = GER
+			}
+		}
+	}
+}
+news_event = { #1952 Berlin Olympics (XIIIth Summer Olympics)
+	id = olympics.1
+	title = olympics.1.t
+	desc = {
+		text = olympics.1.war
+		trigger = {
+			GER = {
+				has_war = yes
+			}
+		}
+	}
+	desc = {
+		text = olympics.1.d
+		trigger = {
+			GER = {
+				has_war = no
+			}
+		}
+	}
+	picture = GFX_ne_generic_olympics
+
+	is_triggered_only = yes
+	major = yes
+
+	option = { # This isn't right, that was ours!
+		name = olympics.1.a
+		trigger = {
+			tag = GER
+			has_war = yes
+		}
+	}
+
+	option = { # Better luck next time...
+		name = olympics.1.b
+		trigger = {
+			NOT = { tag = GER }
+			GER = { has_war = yes }
+		}
+	}
+
+	option = { # Another great preformance!
+		name = olympics.1.c
+		trigger = {
+			GER = { has_war = no }
+		}
+	}
+}
+news_event = { #1952 Montreal Olympics (Vth Winter Olympics)
+	id = olympics.2
+	title = olympics.2.t
+	desc = {
+		text = olympics.2.war
+		trigger = {
+			CAN = {
+				has_war = yes
+			}
+		}
+	}
+	desc = {
+		text = olympics.2.d
+		trigger = {
+			CAN = {
+				has_war = no
+			}
+		}
+	}
+	picture = GFX_ne_generic_olympics
+
+	is_triggered_only = yes
+	major = yes
+
+	option = { # This isn't right, that was ours!
+		name = olympics.2.a
+		trigger = {
+			tag = CAN
+			has_war = yes
+		}
+	}
+
+	option = { # Better luck next time...
+		name = olympics.2.b
+		trigger = {
+			NOT = { tag = CAN }
+			CAN = { has_war = yes }
+		}
+	}
+
+	option = { # Another great preformance!
+		name = olympics.2.c
+		trigger = {
+			CAN = { has_war = no }
+		}
+	}
+}

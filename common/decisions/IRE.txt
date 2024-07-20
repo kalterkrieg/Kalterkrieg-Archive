@@ -1,0 +1,2946 @@
+foreign_politics = {
+	IRE_join_rp = {
+		icon = generic_prepare_civil_war
+	
+		visible = {
+			has_completed_focus = IRE_petition_RP_membership
+		}
+		targets = { GER }
+		target_trigger = {
+			is_faction_leader = yes
+		}
+
+		ai_will_do = {
+			base = 100
+		}
+		
+		days_remove = 7
+		cost = 50
+		fire_only_once = yes
+	
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove IRE_join_rp target: [From.GetName]"
+			
+			GER = {
+				country_event = krg_ire_alignment.1
+			}
+		}
+	}
+	IRE_reach_out_to_britain = {
+		icon = GFX_decision_generic_political_discourse
+		
+		visible = {
+			has_completed_focus = IRE_swapping_trade_partners
+		}
+		
+		targets = { ENG }
+		ai_will_do = {
+			base = 100
+		}
+		
+		days_remove = 7
+		cost = 50
+		fire_only_once = yes
+	
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove IRE_reach_out_to_britain target: [From.GetName]"
+			ENG = {
+				country_event = {
+					id = krg_ire_alignment.4
+					days = 15
+				}
+			}
+		}
+	}
+
+	IRE_adopt_RP_military_standards = {
+		icon = GFX_decision_soldierly_discipline
+
+		targets = {
+			GER
+		}
+
+		visible = {
+			has_completed_focus = IRE_RP_military_alignment
+		}
+
+		days_remove = 280
+
+		fire_only_once = yes
+		cost = 50
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete IRE_adopt_RP_military_standards target: [From.GetName]"
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove IRE_adopt_RP_military_standards target: [From.GetName]"
+			if = {
+				limit = { 
+					has_idea = IRE_german_rifle
+				}
+				swap_ideas = {
+					remove_idea = IRE_german_rifle
+					add_idea = IRE_RP_style_military_SG
+				}
+			}
+			else = { 
+				add_ideas = IRE_RP_style_military
+			}
+		}
+	}
+}
+
+IRE_national_revitalisation_cat = {
+
+	IRE_agricultural_subsidies = {
+		icon = GFX_decision_hand_out
+
+		visible = {
+			NOT = {
+				has_completed_focus = IRE_agricultural_relief_bank
+			}
+		}
+
+		priority = 50
+
+		cost = 100
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				OR = {
+					has_game_rule = {
+						rule = IRE_1952_ELECTION
+						option = IRE_FINE_GAEL_1952
+					}
+					has_game_rule = {
+						rule = IRE_1952_ELECTION
+						option = IRE_ANH_1952
+					}
+					has_game_rule = {
+						rule = IRE_1952_ELECTION
+						option = IRE_MULCAHY_COUP_1952
+					}
+				}
+				add = 25
+			}
+		}
+
+		fire_only_once = no
+
+		days_re_enable = 120
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete IRE_agricultural_subsidies target: [From.GetName]"
+			add_power_balance_value = {
+				id = IRE_reconstruction_bop
+				value = 0.1
+			}
+		}
+	}
+
+	IRE_agricultural_subsidies_improved = {
+		icon = GFX_decision_hand_out
+
+		visible = {
+			has_completed_focus = IRE_agricultural_relief_bank
+		}
+
+
+		priority = 50
+
+		cost = 50
+
+		ai_will_do = {
+			base = 10
+			modifier = {
+				OR = {
+					has_game_rule = {
+						rule = IRE_1952_ELECTION
+						option = IRE_FINE_GAEL_1952
+					}
+					has_game_rule = {
+						rule = IRE_1952_ELECTION
+						option = IRE_ANH_1952
+					}
+					has_game_rule = {
+						rule = IRE_1952_ELECTION
+						option = IRE_MULCAHY_COUP_1952
+					}
+				}
+				add = 50
+			}
+		}
+
+		fire_only_once = no
+
+		days_re_enable = 120
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete IRE_agricultural_subsidies_improved target: [From.GetName]"
+			add_power_balance_value = {
+				id = IRE_reconstruction_bop
+				value = 0.15
+			}
+			add_stability = 0.01
+		}
+	}
+
+	IRE_business_subsidies = {
+		icon = GFX_decision_generic_factory
+
+		priority = 49
+
+		cost = 100
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				OR = {
+					has_game_rule = {
+						rule = IRE_1952_ELECTION
+						option = IRE_MULCAHY_1952
+					}
+					has_game_rule = {
+						rule = IRE_1952_ELECTION
+						option = IRE_VALERA_1952
+					}
+				}
+				add = 25
+			}
+		}
+
+		fire_only_once = no
+
+		days_re_enable = 120
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete IRE_business_subsidies target: [From.GetName]"
+			add_power_balance_value = {
+				id = IRE_reconstruction_bop
+				value = -0.1
+			}
+		}
+	}
+
+
+	IRE_receive_german_aid = {
+		icon = GFX_decision_give_cash
+
+		priority = 45
+
+		visible = {
+			has_completed_focus = IRE_foreign_support
+		}
+
+		available = {
+			if = {
+				limit = { 
+					DNF = {
+						has_completed_focus = DNF_figl_plan
+					}
+				}
+				NOT = {
+					has_idea = IRE_figl_aid
+				}
+			}
+			if = {
+				limit = { 
+					has_country_flag = montgomery_plan_accepted
+				}
+				NOT = {
+					has_idea = IRE_montgomery_aid
+				}
+			}
+		}
+
+		ai_will_do = {
+			base = 35
+			modifier = {
+				OR = {
+					has_game_rule = {
+						rule = IRE_1952_ELECTION
+						option = IRE_MULCAHY_1952
+					}
+					has_game_rule = {
+						rule = IRE_1952_ELECTION
+						option = IRE_VALERA_1952
+					}
+				}
+				add = 25
+			}
+		}
+
+		targets = {
+			GER
+		}
+
+		fire_only_once = no
+		days_re_enable = 180
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete IRE_receive_german_aid target: [From.GetName]"
+			add_political_power = 100
+			add_timed_idea = {
+				idea = IRE_german_aid
+				days = 90
+			}
+		}
+	}
+
+	IRE_receive_figl_plan_aid = {
+		icon = GFX_decision_give_cash
+
+		priority = 44
+
+		visible = {
+			DNF = {
+				has_completed_focus = DNF_figl_plan
+			}
+			has_completed_focus = IRE_foreign_support
+		}
+
+		available = {
+			if = {
+				limit = { 
+					has_country_flag = montgomery_plan_accepted
+				}
+				NOT = {
+					has_idea = IRE_montgomery_aid
+				}
+			}
+			NOT = {
+				has_idea = IRE_german_aid
+			}
+		}
+
+		ai_will_do = {
+			base = 60
+		}
+
+		targets = {
+			DNF
+		}
+
+		days_re_enable = 180
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete IRE_receive_figl_plan_aid target: [From.GetName]"
+			add_political_power = 50
+			add_timed_idea = {
+				idea = IRE_figl_aid
+				days = 90
+			}
+		}
+	}
+
+	IRE_receive_montgomery_plan_aid = {
+		icon = GFX_decision_give_cash
+
+		priority = 43
+
+		visible = {
+			has_completed_focus = IRE_foreign_support
+			has_country_flag = montgomery_plan_accepted
+		}
+
+		available = {
+			if = {
+				limit = { 
+					DNF = {
+						has_completed_focus = DNF_figl_plan
+					}
+				}
+				NOT = {
+					has_idea = IRE_figl_aid
+				}
+			}
+			NOT = {
+				has_idea = IRE_german_aid
+			}
+		}
+
+		ai_will_do = {
+			base = 35
+			modifier = {
+				OR = {
+					has_game_rule = {
+						rule = IRE_1952_ELECTION
+						option = IRE_FINE_GAEL_1952
+					}
+					has_game_rule = {
+						rule = IRE_1952_ELECTION
+						option = IRE_ANH_1952
+					}
+					has_game_rule = {
+						rule = IRE_1952_ELECTION
+						option = IRE_MULCAHY_COUP_1952
+					}
+				}
+				add = 25
+			}
+		}
+
+		targets = {
+			CAN
+		}
+
+		days_re_enable = 180
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete IRE_receive_montgomery_plan_aid target: [From.GetName]"
+			add_political_power = 50
+			add_timed_idea = {
+				idea = IRE_montgomery_aid
+				days = 90
+			}
+		}
+	}
+
+	IRE_Draft_Youth_To_The_Work_Gangs = {
+		icon = GFX_decision_soldierly_discipline
+		
+		priority = 40
+
+		visible = {
+			has_completed_focus = IRE_expand_the_public_work_camps
+		}
+
+		ai_will_do = {
+			base = 100
+		}
+
+		days_remove = 90
+
+		ai_hint_pp_cost = 50
+
+		days_re_enable = 180
+		custom_cost_text = decision_cost_mp_2000_pp_50
+		custom_cost_trigger = {
+			has_manpower > 1999
+			has_political_power > 49
+		}
+
+		modifier = { 
+			production_speed_buildings_factor = 0.05 
+			consumer_goods_factor = -0.15
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete IRE_Draft_Youth_To_The_Work_Gangs target: [From.GetName]"
+			hidden_effect = {
+				add_manpower = -2000
+				add_political_power = -50
+			}
+			
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove IRE_Draft_Youth_To_The_Work_Gangs target: [From.GetName]"
+			IRE_increase_reconstruction = yes
+			add_power_balance_value = {
+				id = IRE_reconstruction_bop
+				value = 0.025
+			}
+		}
+	}
+
+	IRE_Repair_The_Railways = {
+
+		priority = 39
+
+		icon = GFX_decision_railroad
+
+		allowed = {
+		  	original_tag = IRE
+		}
+		
+		visible = {
+			has_completed_focus = IRE_rebuild_irish_railway
+		}
+
+		ai_will_do = {
+			base = 100
+		}
+
+		ai_hint_pp_cost = 75
+		
+		custom_cost_text = decision_cost_civ_factory_1_pp_75
+
+		custom_cost_trigger = {
+			has_political_power > 74
+			num_of_civilian_factories_available_for_projects > 0
+		}
+
+		days_remove = 270
+
+		fire_only_once = yes
+
+		modifier = { 
+			production_speed_infrastructure_factor = 0.1  
+			consumer_goods_factor = -0.15
+			civilian_factory_use = 1
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete IRE_Repair_The_Railways target: [From.GetName]"
+			hidden_effect = {
+				add_political_power = -75
+			}
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove IRE_Repair_The_Railways target: [From.GetName]"
+			build_railway = {
+				level = 2
+				build_only_on_allied = yes
+				fallback = yes
+				start_province = 11293
+				target_province = 9303
+				path  = { 11293 3217 369 11287 9303 }
+			}
+			build_railway = {
+				level = 2
+				build_only_on_allied = yes
+				fallback = yes
+				start_province = 11293
+				target_province = 3379
+				path  = { 11293 3359 13238 3242 3379 }
+			}
+			IRE_increase_reconstruction = yes
+			add_power_balance_value = {
+				id = IRE_reconstruction_bop
+				value = -0.05
+			}
+		}
+  	}	
+
+  	IRE_land_redistribution_pre_occupation = {
+		icon = GFX_decision_generic_agriculture
+
+		visible = {
+			has_country_flag = IRE_pre_occupation_land_reform
+		}
+
+		cost = 25
+
+		ai_will_do = {
+			base = 150
+		}
+
+		fire_only_once = yes
+		days_remove = 180
+
+		modifier = {
+			political_power_cost = 0.1
+			consumer_goods_factor = 0.1
+			production_speed_buildings_factor = -0.15
+		}
+		
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove IRE_land_redistribution_pre_occupation target: [From.GetName]"
+			IRE_increase_IRE_collectivized_economy = yes
+
+			every_owned_state = {
+				add_extra_state_shared_building_slots = 1
+			}
+			add_power_balance_value = {
+				id = IRE_reconstruction_bop
+				value = -0.05
+			}
+		}
+	}
+
+	IRE_land_redistribution_new = {
+		icon = GFX_decision_generic_agriculture
+
+		visible = {
+			has_country_flag = IRE_new_land_reform
+		}
+
+		cost = 50
+
+		ai_will_do = {
+			base = 150
+		}
+
+		fire_only_once = yes
+		days_remove = 180
+
+		modifier = {
+			political_power_cost = 0.15
+			consumer_goods_factor = 0.15
+			production_speed_buildings_factor = -0.2
+		}
+		
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove IRE_land_redistribution_new target: [From.GetName]"
+			IRE_increase_IRE_collectivized_economy = yes
+
+			every_owned_state = {
+				add_extra_state_shared_building_slots = 2
+			}
+			add_power_balance_value = {
+				id = IRE_reconstruction_bop
+				value = 0.05
+			}
+		}
+	}
+
+	IRE_Land_Army = {
+		icon = GFX_decision_generic_agriculture
+		
+		available = {
+			NOT = {  has_completed_focus = IRE_slow_recovery }
+			
+		}
+		visible = {
+			has_completed_focus = IRE_agri_focus
+		}
+
+
+		custom_cost_text = decision_cost_5000_mp
+
+		custom_cost_trigger = {
+			has_manpower > 5000
+		}
+		ai_will_do = {
+			base = 100
+		}
+		fire_only_once = yes
+		cost = 75
+		days_remove = 200
+
+		modifier = { 
+			mobilization_speed = -0.1
+			political_power_cost = 0.05
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete IRE_Land_Army target: [From.GetName]"
+			hidden_effect = {
+				add_manpower = -5000
+			}
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove IRE_Land_Army target: [From.GetName]"
+			add_power_balance_value = {
+				id = IRE_reconstruction_bop
+				value = 0.05
+			}
+			IRE_increase_reconstruction = yes
+			swap_ideas = {
+				remove_idea = IRE_domestic_grain_1
+				add_idea = IRE_domestic_grain_2
+			}
+		}
+	}
+
+	IRE_decollectivize_industrial_groups = {
+		icon = GFX_decision_hand_grab
+
+		visible = {
+			has_completed_focus = IRE_begin_decollectivization
+		}
+
+		ai_will_do = {
+			base = 100
+		}
+
+		cost = 75
+
+		fire_only_once = yes
+
+		days_remove = 180
+
+		modifier = {
+			political_power_cost = 0.1
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove IRE_decollectivize_industrial_groups target: [From.GetName]"
+			IRE_increase_IRE_collectivized_economy = yes
+
+			set_country_flag = IRE_decollectivize_industrial_groups_flag
+
+			if = {
+				limit = {
+					has_dlc_aat = yes
+					always = no
+				}
+				custom_effect_tooltip = tooltip_white_line
+				custom_effect_tooltip = available_mio_tt
+				show_mio_tooltip = ENG_harland_wolff_organization
+			}
+			else = {
+				custom_effect_tooltip = tooltip_white_line
+				custom_effect_tooltip = available_industrial_concern
+				show_ideas_tooltip = harland_wolff
+			}
+
+			custom_effect_tooltip = tooltip_white_line
+			custom_effect_tooltip = available_industrial_concern
+			show_ideas_tooltip = goulding_chemicals
+			custom_effect_tooltip = tooltip_white_line
+			custom_effect_tooltip = available_industrial_concern
+			show_ideas_tooltip = mcmullan_bros
+		}
+	}
+
+	IRE_decollectivize_arms_groups = {
+		icon = GFX_decision_hand_grab
+
+		visible = {
+			has_completed_focus = IRE_begin_decollectivization
+		}
+
+		ai_will_do = {
+			base = 100
+		}
+
+		cost = 75
+
+		fire_only_once = yes
+
+		days_remove = 180
+
+		modifier = {
+			political_power_cost = 0.1
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove IRE_decollectivize_arms_groups target: [From.GetName]"
+			IRE_increase_IRE_collectivized_economy = yes
+			set_country_flag = IRE_decollectivize_arms_groups_flag
+			
+			if = {
+				limit = {
+					has_dlc_aat = yes
+					always = no
+				}
+
+				custom_effect_tooltip = tooltip_white_line
+				custom_effect_tooltip = available_mio_tt
+				show_mio_tooltip = IRE_john_rigby_organization
+				custom_effect_tooltip = tooltip_white_line
+				custom_effect_tooltip = available_mio_tt
+				show_mio_tooltip = IRE_james_mackie_sons_organization
+				custom_effect_tooltip = tooltip_white_line
+				custom_effect_tooltip = available_mio_tt
+				show_mio_tooltip = IRE_workman_clark_company_organization
+			}
+			
+			
+			else = {
+				custom_effect_tooltip = tooltip_white_line
+				custom_effect_tooltip = available_industrial_concern
+				show_ideas_tooltip = john_rigby
+				custom_effect_tooltip = tooltip_white_line
+				custom_effect_tooltip = available_industrial_concern
+				show_ideas_tooltip = james_mackie_sons
+				custom_effect_tooltip = tooltip_white_line
+				custom_effect_tooltip = available_industrial_concern
+				show_ideas_tooltip = workman_clark_company
+			}
+		}
+	}
+	
+
+	IRE_decollectivize_irish_business = {
+		icon = GFX_decision_hand_grab
+
+		visible = {
+			has_completed_focus = IRE_irish_business
+		}
+
+		ai_will_do = {
+			base = 100
+		}
+
+		cost = 75
+
+		fire_only_once = yes
+
+		days_remove = 180
+
+		modifier = {
+			political_power_cost = 0.1
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove IRE_decollectivize_irish_business target: [From.GetName]"
+			IRE_increase_IRE_collectivized_economy = yes
+			if = {
+				limit = {
+					has_dlc_aat = yes
+					always = no
+				}
+				custom_effect_tooltip = tooltip_white_line
+				custom_effect_tooltip = available_mio_tt
+				show_mio_tooltip = ENG_harland_wolff_organization
+			}
+			else = {
+				custom_effect_tooltip = tooltip_white_line
+				custom_effect_tooltip = available_industrial_concern
+				show_ideas_tooltip = harland_wolff
+			}
+		
+			set_country_flag = IRE_decollectivize_irish_business_flag
+			custom_effect_tooltip = tooltip_white_line
+			custom_effect_tooltip = available_industrial_concern
+			show_ideas_tooltip = o_gorman
+			custom_effect_tooltip = tooltip_white_line
+			custom_effect_tooltip = available_industrial_concern
+			show_ideas_tooltip = aer_lingus
+		}
+	}
+
+	IRE_build_poulaphouca_hydroelectric = {
+		icon = GFX_decision_generic_electricity
+		visible = {
+			has_completed_focus = IRE_hydro_electric_projects
+		}
+
+		available = {
+			num_of_civilian_factories_available_for_projects > 1
+		}
+		
+		custom_cost_text = decision_cost_civ_factory_2
+		custom_cost_trigger = {
+			num_of_civilian_factories_available_for_projects > 1
+		}
+
+		fire_only_once = yes
+		days_remove = 270
+
+		modifier = {
+			civilian_factory_use = 2
+			political_power_cost = 0.2
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove IRE_build_poulaphouca_hydroelectric target: [From.GetName]"
+			IRE_increase_reconstruction = yes
+			add_power_balance_value = {
+				id = IRE_reconstruction_bop
+				value = -0.025
+			}
+			113 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			add_to_variable = { IRE_hydro_electric_projects_completed = 1 }
+		}
+
+		ai_will_do = {
+			base = 40
+		}
+	}
+
+	IRE_build_cathaleens_fall_hydroelectric = {
+		icon = GFX_decision_generic_electricity
+		visible = {
+			has_completed_focus = IRE_hydro_electric_projects
+		}
+
+		available = {
+			num_of_civilian_factories_available_for_projects > 1
+		}
+		
+		custom_cost_text = decision_cost_civ_factory_2
+		custom_cost_trigger = {
+			num_of_civilian_factories_available_for_projects > 1
+		}
+
+		fire_only_once = yes
+		days_remove = 270
+
+		modifier = {
+			civilian_factory_use = 2
+			political_power_cost = 0.2
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove IRE_build_cathaleens_fall_hydroelectric target: [From.GetName]"
+			IRE_increase_reconstruction = yes
+			add_power_balance_value = {
+				id = IRE_reconstruction_bop
+				value = -0.025
+			}
+			844 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			add_to_variable = { IRE_hydro_electric_projects_completed = 1 }
+		}
+
+		ai_will_do = {
+			base = 40
+		}
+	}
+
+	IRE_build_inniscarra_hydroelectric = {
+		icon = GFX_decision_generic_electricity
+		visible = {
+			has_completed_focus = IRE_hydro_electric_projects
+		}
+
+		available = {
+			num_of_civilian_factories_available_for_projects > 1
+		}
+		
+		custom_cost_text = decision_cost_civ_factory_2
+		custom_cost_trigger = {
+			num_of_civilian_factories_available_for_projects > 1
+		}
+
+		fire_only_once = yes
+		days_remove = 270
+
+		modifier = {
+			civilian_factory_use = 2
+			political_power_cost = 0.2
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove IRE_build_inniscarra_hydroelectric target: [From.GetName]"
+			IRE_increase_reconstruction = yes
+			add_power_balance_value = {
+				id = IRE_reconstruction_bop
+				value = -0.025
+			}
+			135 = { 
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			add_to_variable = { IRE_hydro_electric_projects_completed = 1 }
+		}
+
+		ai_will_do = {
+			base = 200
+		}
+	}
+	
+
+}
+
+IRE_irish_republican_army_cat = {
+	IRE_advanced_modernization = {
+		visible = {
+			has_country_flag = show_generic_debug_flag
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete IRE_advanced_modernization target: [From.GetName]"
+			set_temp_variable = { IRE_IRA_increase_temp = 10 }
+			IRE_increase_IRA_restructuring = yes
+		}
+		
+	}
+
+	IRE_organise_militias = {
+		icon = GFX_decision_soldierly_discipline
+		fire_only_once = yes
+		
+		days_remove = 180
+
+		ai_will_do = {
+			base = 50
+			modifier = {
+				has_political_power > 175
+				add = 50
+			}
+		}
+		
+		custom_cost_trigger = {
+			command_power > 24
+			has_political_power > 24
+		}
+		custom_cost_text = decision_cost_CP_25_pp_25
+
+		ai_hint_pp_cost = 25
+		
+		modifier = {
+			military_spending_factor = 0.05
+		}
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete IRE_organise_militias target: [From.GetName]"
+			hidden_effect = {
+				add_command_power = -25
+				add_political_power = -25
+			}
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove IRE_organise_militias target: [From.GetName]"
+			add_units_to_division_template = {
+				template_name = "An Fórsa Cosanta Áitiúil"
+				support = {
+					divhq_company = 0
+				}
+			}
+			
+			set_temp_variable = { IRE_IRA_increase_temp = 15 }
+			IRE_increase_IRA_restructuring = yes
+			
+		}
+	}
+
+	IRE_expand_militias = {
+		icon = GFX_decision_eng_blackshirt_march
+
+		days_remove = 90
+		days_re_enable = 180
+
+		visible = {
+			has_completed_focus = IRE_bolster_home_reserve
+			check_variable = {
+				IRE_militia_division_cap < IRE_max_militia_division_cap 
+			}
+		}
+
+		custom_cost_trigger = {
+            command_power > 14
+        }
+        custom_cost_text = decision_cost_CP_15
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete IRE_expand_militias target: [From.GetName]"
+			hidden_effect = {
+				add_command_power = -15
+			}
+		}
+
+		ai_will_do = {
+			base = 100
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove IRE_expand_militias target: [From.GetName]"
+			set_temp_variable = { IRE_IRA_increase_temp = -2.5 }
+			IRE_increase_IRA_restructuring = yes
+			IRE_increase_militia_cap = yes
+
+			if = {
+				limit = { 
+					has_country_flag = IRE_troubles_active
+				}
+			set_temp_variable = { IRE_temp_nationalist_strength_change = 5 }
+			IRE_change_nationalist_strength = yes
+			}
+		}
+
+	}
+
+	IRE_strengthen_defences = {
+		icon = GFX_decision_fortress
+
+		cost = 50
+
+		visible = {
+			has_completed_focus = IRE_fortress_ireland_doctrine
+		}
+
+		days_remove = 180
+		days_re_enable = 150
+
+		ai_will_do = {
+			base = 100
+		}
+
+		modifier = {
+			army_defence_factor  = 0.1
+			state_production_speed_bunker_factor = 0.3
+			state_production_speed_coastal_bunker_factor = 0.3
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove IRE_strengthen_defences target: [From.GetName]"
+			set_temp_variable = { IRE_IRA_increase_temp = 10 }
+			IRE_increase_IRA_restructuring = yes
+		}
+	}
+
+	IRE_improved_guerilla_tactics = {
+		icon = GFX_decision_generic_prepare_civil_war
+		fire_only_once = yes
+
+		custom_cost_trigger = {
+            has_army_experience > 24
+        }
+        custom_cost_text = decision_cost_ArmXP_25
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete IRE_improved_guerilla_tactics target: [From.GetName]"
+			hidden_effect = {
+				army_experience  = -25
+			}
+		}
+
+		ai_will_do = {
+			base = 100
+		}
+
+		visible = {
+			has_completed_focus = IRE_lessons_of_occupation
+		}
+
+		days_remove = 35
+		
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove IRE_improved_guerilla_tactics target: [From.GetName]"
+			set_temp_variable = { IRE_IRA_increase_temp = 10 }
+			IRE_increase_IRA_restructuring = yes
+
+			if = {
+				limit = { has_idea = IRE_lessons_of_occupation_idea_1 }
+				swap_ideas = {
+					remove_idea = IRE_lessons_of_occupation_idea_1
+					add_idea = IRE_lessons_of_occupation_idea_2
+				}
+			}
+			
+		}
+	}
+
+	IRE_train_recruits = {
+		icon = GFX_decision_generic_reorganize_irregulars
+
+		days_remove = 35
+		days_re_enable = 90
+
+		custom_cost_trigger = {
+            has_equipment = {infantry_equipment > 249}
+        }
+
+		ai_will_do = {
+			base = 50
+			modifier = {
+				has_equipment = {infantry_equipment > 2000}
+				add = 75
+			}
+		}
+
+
+        custom_cost_text = decision_cost_ie_250
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete IRE_train_recruits target: [From.GetName]"
+			hidden_effect = {
+				add_equipment_to_stockpile = {
+					type = infantry_equipment
+					amount = -250
+					producer = IRE
+				}
+			}
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove IRE_train_recruits target: [From.GetName]"
+			set_temp_variable = { IRE_IRA_increase_temp = 7.5 }
+			IRE_increase_IRA_restructuring = yes
+			add_manpower = 200
+		}
+	}
+
+	IRE_young_officers = {
+		icon = GFX_decision_generic_army_support
+		fire_only_once = yes
+
+		days_remove = 180
+
+		visible = {
+			has_completed_focus = IRE_new_generation_officers
+		}
+
+		custom_cost_trigger = {
+            has_political_power > 14
+			has_army_experience > 14
+        }
+
+		ai_will_do = {
+			base = 150
+		}
+
+		ai_hint_pp_cost = 15
+
+        custom_cost_text = decision_cost_pp_15_ArmXP_10
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete IRE_young_officers target: [From.GetName]"
+			hidden_effect = {
+				add_political_power = -15
+				army_experience = -15
+			}
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove IRE_young_officers target: [From.GetName]"
+			set_temp_variable = { IRE_IRA_increase_temp = 15 }
+			IRE_increase_IRA_restructuring = yes
+			every_unit_leader = {
+				gain_xp = 300
+			}
+		}
+	}
+
+	IRE_increase_readiness = {
+		icon = GFX_decision_generic_intelligence_operation
+
+		days_remove = 70
+		days_re_enable = 150
+		visible = {
+			has_completed_focus = IRE_pre_emptive_doctrine
+		}
+
+		ai_will_do = {
+			base = 75
+		}
+
+		ai_hint_pp_cost = 15
+
+		custom_cost_trigger = {
+			command_power > 24
+            has_political_power > 14
+        }
+        custom_cost_text = decision_cost_CP_25_pp_15
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete IRE_increase_readiness target: [From.GetName]"
+			hidden_effect = {
+				add_command_power = -25
+				add_political_power = -15
+			}
+		}
+
+		modifier = {
+			training_time_factor = 0.2
+			experience_gain_army = 0.1
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove IRE_increase_readiness target: [From.GetName]"
+			set_temp_variable = { IRE_IRA_increase_temp = 10 }
+			IRE_increase_IRA_restructuring = yes
+		}
+	}
+
+	IRE_build_radar_stations = {
+		icon = GFX_decision_radar
+		fire_only_once = yes
+
+		days_remove = 180
+
+		visible = {
+			has_completed_focus = IRE_eyes_in_atlantic
+		}
+
+		ai_will_do = {
+			base = 100
+		}
+
+		custom_cost_trigger = {
+			num_of_civilian_factories_available_for_projects > 0
+		}
+		custom_cost_text = decision_cost_civ_factory_1
+
+		modifier = {
+			civilian_factory_use = 1
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove IRE_build_radar_stations target: [From.GetName]"
+			134 = {
+				add_building_construction = {
+					type = radar_station
+					level = 1
+					instant_build = yes
+				}
+			}
+			135 = {
+				add_building_construction = {
+					type = radar_station
+					level = 1
+					instant_build = yes
+				}
+			}
+			set_temp_variable = { IRE_IRA_increase_temp = 10 }
+			IRE_increase_IRA_restructuring = yes
+		}
+
+	}
+
+	IRE_purchase_DNF_arms = {
+		icon = GFX_decision_generic_prepare_civil_war
+
+		days_remove = 30
+		days_re_enable = 180
+
+		cost = 25
+		targets = {
+			DNF
+		}
+		visible = {
+			DNF = {
+				has_country_flag = DNF_Holtzberg_Waffenhersteller
+			}
+		}
+
+		ai_will_do = {
+			base = 50
+			modifier = {
+				has_equipment = {infantry_equipment < 2000}
+				add = 100
+			}
+		}
+
+		available = {
+			set_temp_variable = { IRE_IRA_purchase_amount_temp = 500 }
+			IRE_IRA_purchase_weapons_trigger = yes
+			custom_trigger_tooltip = {
+				tooltip = IRE_purchase_DNF_arms_requirment_tt
+				IRE_IRA_purchase_weapons_trigger = yes
+			}
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete IRE_purchase_DNF_arms target: [From.GetName]"
+			hidden_effect = {
+				DNF = {
+					subtract_from_variable = { DNF_Holtzberg_Inventory_small_arms = 500 }
+				}
+			}
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove IRE_purchase_DNF_arms target: [From.GetName]"
+			set_temp_variable = { IRE_IRA_purchase_amount_temp = 500 } 
+			add_equipment_to_stockpile = {
+				type = infantry_equipment_1
+				amount = IRE_IRA_purchase_amount_temp
+				producer = DNF
+			}
+			set_temp_variable = { IRE_IRA_increase_temp = 2.5 }
+			IRE_increase_IRA_restructuring = yes
+		}
+	}
+
+
+	IRE_purchase_DNF_support = {
+		icon = GFX_decision_support_equipment
+
+		days_remove = 30
+		days_re_enable = 180
+
+		cost = 25
+		targets = {
+			DNF
+		}
+		visible = {
+			DNF = {
+				has_country_flag = DNF_Holtzberg_Waffenhersteller
+			}
+		}
+
+		ai_will_do = {
+			base = 50
+			modifier = {
+				has_equipment = {support_equipment > 500}
+				add = 100
+			}
+		}
+
+		available = {
+			set_temp_variable = { IRE_IRA_purchase_amount_temp = 75}
+			IRE_IRA_purchase_support_trigger = yes
+			custom_trigger_tooltip = {
+				tooltip = IRE_purchase_DNF_support_requirment_tt
+				IRE_IRA_purchase_support_trigger = yes
+			}
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete IRE_purchase_DNF_support target: [From.GetName]"
+			hidden_effect = {
+				DNF = {
+					subtract_from_variable = { DNF_Holtzberg_Inventory_supply_equipment = 75 }
+				}
+			}
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove IRE_purchase_DNF_support target: [From.GetName]"
+			set_temp_variable = { IRE_IRA_purchase_amount_temp = 75}
+			add_equipment_to_stockpile = {
+				type = support_equipment_1
+				amount = IRE_IRA_purchase_amount_temp
+				producer = DNF
+			}
+			set_temp_variable = { IRE_IRA_increase_temp = 2.5 }
+			IRE_increase_IRA_restructuring = yes
+		}
+	}
+
+	IRE_study_german_designs = {
+		icon = GFX_decision_tank
+		fire_only_once = yes
+
+		days_remove = 80
+		available = {
+			NOT = { has_country_flag = IRE_studied_CAN_designs }
+		}
+		visible = {
+			has_completed_focus = IRE_acquire_advanced_hardware
+			NOT = { has_country_flag = IRE_studied_CAN_designs }
+		}
+
+		ai_will_do = {
+			base = 75
+		}
+
+		ai_hint_pp_cost = 25
+
+		targets = {
+			GER
+		}
+		custom_cost_trigger = {
+			command_power > 4
+            has_political_power > 24
+        }
+        custom_cost_text = decision_cost_CP_5_pp_25
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete IRE_study_german_designs target: [From.GetName]"
+			hidden_effect = {
+				set_country_flag = IRE_studied_GER_designs
+				add_command_power = -5
+				add_political_power = -25
+			}
+		}
+
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove IRE_study_german_designs target: [From.GetName]"
+			army_experience = 75
+			add_tech_bonus = {
+				bonus = 1
+				uses = 2
+				category = armor
+				category = mechanized_equipment
+			}
+			set_temp_variable = { IRE_IRA_increase_temp = 12.5 }
+			IRE_increase_IRA_restructuring = yes
+		}
+
+		
+	}
+
+	IRE_study_canadian_designs = {
+		icon = GFX_decision_generic_naval
+		fire_only_once = yes
+
+		days_remove = 80
+
+		available = {
+			NOT = { has_country_flag = IRE_studied_GER_designs }
+		}
+
+		visible = {
+			has_completed_focus = IRE_acquire_advanced_hardware
+			NOT = { has_country_flag = IRE_studied_GER_designs }
+		}
+
+		ai_will_do = {
+			base = 75
+		}
+
+		ai_hint_pp_cost = 25
+
+		targets = {
+			CAN
+		}
+		custom_cost_trigger = {
+			command_power > 4
+            has_political_power > 24
+        }
+        custom_cost_text = decision_cost_CP_5_pp_25
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete IRE_study_canadian_designs target: [From.GetName]"
+			hidden_effect = {
+				set_country_flag = IRE_studied_CAN_designs
+				add_command_power = -5
+				add_political_power = -25
+			}
+		}
+
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove IRE_study_canadian_designs target: [From.GetName]"
+			navy_experience = 75
+			add_tech_bonus = {
+				bonus = 1
+				uses = 2
+				category = naval_equipment
+			}
+			set_temp_variable = { IRE_IRA_increase_temp = 12.5 }
+			IRE_increase_IRA_restructuring = yes
+		}
+	}
+
+	IRE_establish_air_bases = {
+		icon = GFX_decision_plane
+		fire_only_once = yes
+
+		days_remove = 90
+
+		modifier = {
+			military_spending_factor = 0.05
+		}
+
+		visible = {
+			has_completed_focus = IRE_new_airbases
+			check_variable = { IRE_airport_build < 2 }
+		}
+
+		ai_will_do = {
+			base = 125
+		}
+
+		target_root_trigger = {
+			has_completed_focus = IRE_new_airbases
+			check_variable = { IRE_airport_build < 2 }
+		}
+
+		state_target = yes
+
+		target_array = IRE.core_states
+		target_trigger = {
+			FROM = {
+				is_owned_by = ROOT
+			}
+		}
+		on_map_mode = map_only 
+		icon = my_icon
+
+		custom_cost_trigger = {
+			command_power > 14
+        }
+        custom_cost_text = decision_cost_CP_15
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete IRE_establish_air_bases target: [From.GetName]"
+			hidden_effect = {
+				add_command_power = -15
+				add_to_variable = { IRE_airport_build = 1}
+			}
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove IRE_establish_air_bases target: [From.GetName]"
+			FROM = {
+				add_building_construction = {
+					type = air_base
+					level = 2
+					instant_build = yes
+				}
+			}
+			set_temp_variable = { IRE_IRA_increase_temp = 2.5 }
+			IRE_increase_IRA_restructuring = yes
+    	}
+	}
+}
+
+IRE_the_troubles_cat = { ### Troubles
+
+	IRE_unionist_actions = {
+		icon = GFX_decision_generic_political_rally
+
+		priority = 1
+
+		activation = {
+			has_country_flag = IRE_troubles_active
+		}
+
+		available = {
+			hidden_trigger = {
+				NOT = {
+					has_country_flag = IRE_troubles_active
+				}
+			}
+		}
+		
+		days_mission_timeout = IRE_unionist_mission_time
+		days_re_enable = 3
+
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout IRE_unionist_actions target: [From.GetName]"
+			IRE_unionist_actions_effect = yes
+			activate_mission = IRE_unionist_actions
+		}
+	}
+
+	IRE_nationalist_actions = {
+		icon = GFX_decision_generic_political_rally
+
+		priority = 0
+		
+		activation = {
+			has_country_flag = IRE_troubles_active
+		}
+
+		available = {
+			hidden_trigger = {
+				NOT = {
+					has_country_flag = IRE_troubles_active
+				}
+			}
+		}
+
+		
+
+		days_mission_timeout = IRE_nationalist_mission_time
+		days_re_enable = 3
+
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout IRE_nationalist_actions target: [From.GetName]"
+			IRE_nationalist_actions_effect = yes
+			activate_mission = IRE_nationalist_actions
+		}
+	}
+
+	IRE_gardai_actions = {
+		icon = GFX_decision_generic_police_action
+
+		priority = 0
+		
+		activation = {
+			has_country_flag = IRE_troubles_active
+		}
+
+		available = {
+			hidden_trigger = {
+				NOT = {
+					has_country_flag = IRE_troubles_active
+				}
+			}
+		}
+
+		days_mission_timeout = IRE_gardai_mission_time
+		days_re_enable = 3
+
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout IRE_gardai_actions target: [From.GetName]"
+			IRE_gardai_actions_effect = yes
+			activate_mission = IRE_gardai_actions
+		}
+	}
+
+	IRE_unionist_protests = {
+		icon = GFX_decision_generic_political_rally
+
+		priority = 3
+		selectable_mission = yes
+
+		cost = 5
+
+		allowed = {
+			always = no
+		}
+
+		available = {
+			hidden_trigger = {
+
+			}
+		}
+
+		days_mission_timeout = 14
+		days_re_enable = 1
+
+		fixed_random_seed = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete IRE_unionist_protests target: [From.GetName]"
+			custom_effect_tooltip = IRE_putdown_protest_option_tt
+			remove_ideas = { IRE_unionist_protests_idea }
+			random_list = {
+				50 = {
+
+				}
+				50 = {
+					IRE_unionist_rioting_effect = yes
+				}
+			}
+		}
+
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout IRE_unionist_protests target: [From.GetName]"
+			hidden_effect = {
+				remove_ideas = { IRE_unionist_protests_idea }
+			}
+			random_list = {
+				75 = {
+
+				}
+				25 = {
+					IRE_nationalist_protesting_effect = yes
+				}
+			}
+		}
+	}
+
+	IRE_nationalist_protests = {
+		icon = GFX_decision_generic_political_rally
+
+		priority = 2
+		selectable_mission = yes
+
+		cost = 5
+
+		allowed = {
+			always = no
+		}
+
+		available = {
+			hidden_trigger = {
+
+			}
+		}
+		
+		days_mission_timeout = 14
+		days_re_enable = 1
+
+		fixed_random_seed = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete IRE_nationalist_protests target: [From.GetName]"
+			custom_effect_tooltip = IRE_putdown_protest_option_tt
+			remove_ideas = { IRE_nationalist_protests_idea }
+			random_list = {
+				50 = {
+
+				}
+				50 = {
+					IRE_nationalist_rioting_effect = yes
+				}
+			}
+		}
+
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout IRE_nationalist_protests target: [From.GetName]"
+			hidden_effect = {
+				remove_ideas = { IRE_nationalist_protests_idea }
+			}
+			random_list = {
+				75 = {
+
+				}
+				25 = {
+					IRE_unionist_protesting_effect = yes
+				}
+			}
+		}
+	}
+
+	IRE_unionist_riots = {
+		icon = GFX_decision_generic_political_rally
+
+		priority = 3
+		selectable_mission = yes
+
+		allowed = {
+			always = no
+		}
+
+		available = {
+			hidden_trigger = {
+				NOT = {
+					has_country_flag = IRE_troubles_active
+				}
+			}
+		}
+
+		days_mission_timeout = 14
+		days_re_enable = 1
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete IRE_unionist_riots target: [From.GetName]"
+			remove_ideas = { IRE_unionist_riots_idea }
+		}
+
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout IRE_unionist_riots target: [From.GetName]"
+			hidden_effect = {
+				remove_ideas = { IRE_unionist_riots_idea }
+			}
+		}
+	}
+
+	IRE_nationalist_riots = {
+		icon = GFX_decision_generic_political_rally
+
+		priority = 2
+		selectable_mission = yes
+
+		allowed = {
+			always = no
+		}
+
+		available = {
+			hidden_trigger = {
+				NOT = {
+					has_country_flag = IRE_troubles_active
+				}
+			}
+		}
+		
+		days_mission_timeout = 14
+		days_re_enable = 1
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete IRE_nationalist_riots target: [From.GetName]"
+			remove_ideas = { IRE_nationalist_riots_idea }
+		}
+
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout IRE_nationalist_riots target: [From.GetName]"
+			hidden_effect = {
+				remove_ideas = { IRE_nationalist_riots_idea }
+			}
+		}
+	}
+
+	IRE_unionist_strikes = {
+		icon = GFX_decision_generic_strikes
+
+		priority = 3
+		selectable_mission = yes
+
+		allowed = {
+			always = no
+		}
+
+		available = {
+			hidden_trigger = {
+
+			}
+		}
+
+		days_mission_timeout = 14
+		days_re_enable = 1
+
+		fixed_random_seed = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete IRE_unionist_strikes target: [From.GetName]"
+			remove_ideas = { IRE_unionist_strikes_idea }
+			random_list = {
+				75 = {
+
+				}
+				25 = {
+					IRE_unionist_striking_standard_effect = yes
+					IRE_unionist_protesting_effect = yes
+				}
+			}
+		}
+
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout IRE_unionist_strikes target: [From.GetName]"
+			hidden_effect = {
+				remove_ideas = { IRE_unionist_strikes_idea }
+			}
+		}
+	}
+
+	IRE_nationalist_strikes = {
+		icon = GFX_decision_generic_strikes
+
+		priority = 2
+		selectable_mission = yes
+
+		allowed = {
+			always = no
+		}
+
+		available = {
+			hidden_trigger = {
+
+			}
+		}
+		
+		days_mission_timeout = 14
+		days_re_enable = 1
+
+		fixed_random_seed = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete IRE_nationalist_strikes target: [From.GetName]"
+			remove_ideas = { IRE_nationalist_strikes_idea }
+			random_list = {
+				75 = {
+
+				}
+				25 = {
+					IRE_nationalist_striking_standard_effect = yes
+					IRE_nationalist_protesting_effect = yes
+				}
+			}
+		}
+
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout IRE_nationalist_strikes target: [From.GetName]"
+			hidden_effect = {
+				remove_ideas = { IRE_nationalist_strikes_idea }
+			}
+		}
+	}
+
+
+
+	IRE_deploy_the_army_into_NI = {
+		icon = GFX_decision_oppression
+
+		days_remove = 25
+
+		priority = 40
+
+		visible = {
+			NOT = {
+				has_idea = IRE_military_presence_in_NI
+			}
+			has_completed_focus = IRE_military_mission_in_ulster
+		}
+
+		available = {
+			if = {
+				limit = { 
+					is_ai = yes
+				}
+				always = yes
+			}
+			else = {
+				divisions_in_state = {
+					size > 1
+					state = 119
+				}
+			}
+		}
+
+		custom_cost_trigger = {
+			command_power > 24
+			has_political_power > 74
+		}
+		custom_cost_text = decision_cost_CP_25_pp_75
+
+		ai_hint_pp_cost = 25
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete IRE_deploy_the_army_into_NI target: [From.GetName]"
+			hidden_effect = {
+				add_command_power = -5
+				add_political_power = -25
+			}
+			news_event = { id = krg_ire_news.9 hours = 1}
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove IRE_deploy_the_army_into_NI target: [From.GetName]"
+			add_ideas = { IRE_military_presence_in_NI }
+			unlock_decision_category_tooltip = IRE_military_presence_NI_cat
+
+			set_temp_variable = { IRE_temp_nationalist_opinion_change = 5 }
+			IRE_change_nationalist_opinion = yes
+
+			set_temp_variable = { IRE_temp_unionist_opinion_change = 2.5 }
+			IRE_change_unionist_opinion = yes
+		}
+
+		ai_will_do = {
+			base = 100
+		}
+	}
+
+
+	IRE_train_special_reconnaissance_units = {
+		icon = GFX_decision_infiltration
+
+		visible = {
+			has_completed_focus = IRE_deploy_the_G2
+		}
+
+		priority = 11
+
+		days_remove = 30
+
+		days_re_enable = 60
+
+		custom_cost_trigger = {
+			command_power > 9
+			has_equipment = {infantry_equipment > 49}
+		}
+		custom_cost_text = decision_cost_CP_10_ie_50
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete IRE_train_special_reconnaissance_units target: [From.GetName]"
+			hidden_effect = {
+				add_command_power = -10
+				add_equipment_to_stockpile = {
+					type = infantry_equipment
+					amount = -50
+				}
+			}
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove IRE_train_special_reconnaissance_units target: [From.GetName]"
+			set_temp_variable = { IRE_temp_unionist_intel_change = 5 }
+			IRE_change_unionist_intel = yes
+
+			set_temp_variable = { IRE_temp_nationalist_intel_change = 5 }
+			IRE_change_nationalist_intel = yes
+		}
+
+		ai_will_do = {
+			base = 50
+			modifier = {
+				AND = {
+					check_variable = { IRE_unionist_intel > 40 }
+					check_variable = { IRE_nationalist_intel > 40 }
+				}
+				add = -40
+			}
+		}
+	}
+
+	IRE_infiltrate_unionist = {
+		icon = GFX_decision_infiltration
+
+		visible = {
+			has_completed_focus = IRE_deploy_the_G2
+		}
+
+		priority = 10
+
+		days_remove = 30
+
+		days_re_enable = 45
+
+		custom_cost_trigger = {
+			command_power > 14
+		}
+		custom_cost_text = decision_cost_CP_15
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete IRE_infiltrate_unionist target: [From.GetName]"
+			hidden_effect = {
+				add_command_power = -15
+			}
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove IRE_infiltrate_unionist target: [From.GetName]"
+			set_temp_variable = { IRE_temp_unionist_intel_change = 15 }
+			IRE_change_unionist_intel = yes
+		}
+
+		ai_will_do = {
+			base = 50
+			modifier = {
+				check_variable = { IRE_unionist_intel > 40 }
+				factor = -1
+			}
+		}
+
+	}
+
+	IRE_infiltrate_nationalist = {
+		icon = GFX_decision_infiltration
+
+		visible = {
+			has_completed_focus = IRE_deploy_the_G2
+		}
+
+		priority = 9
+
+		days_remove = 30
+
+		days_re_enable = 45
+
+		custom_cost_trigger = {
+			command_power > 14
+		}
+		custom_cost_text = decision_cost_CP_15
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete IRE_infiltrate_nationalist target: [From.GetName]"
+			hidden_effect = {
+				add_command_power = -15
+			}
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove IRE_infiltrate_nationalist target: [From.GetName]"
+			set_temp_variable = { IRE_temp_nationalist_intel_change = 15 }
+			IRE_change_nationalist_intel = yes
+		}
+
+		ai_will_do = {
+			base = 50
+			modifier = {
+				check_variable = { IRE_nationalist_intel > 40 }
+				factor = -1
+			}
+		}
+	}
+
+	IRE_organise_unionist_supply_raid = {
+		icon = GFX_decision_ban_iron_front
+
+		visible = {
+			NOT = {
+				has_country_flag = IRE_organising_nationalist_mission
+				has_country_flag = IRE_executing_nationalist_mission
+				has_country_flag = IRE_organising_unionist_mission
+				has_country_flag = IRE_executing_unionist_mission
+			}
+			has_completed_focus = IRE_military_mission_in_ulster
+		}
+
+		available = {
+			has_idea = IRE_military_presence_in_NI
+		}
+
+		priority = 31
+
+		days_re_enable = 180
+
+		custom_cost_trigger = {
+			command_power > 4
+		}
+		custom_cost_text = decision_cost_CP_5
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete IRE_organise_unionist_supply_raid target: [From.GetName]"
+			hidden_effect = {
+				add_command_power = -5
+			}
+			set_country_flag = IRE_organising_unionist_mission
+			set_country_flag = IRE_organising_unionist_supply_raid
+			IRE_setup_organise_unionist_mission = yes
+		}
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				OR = {
+					check_variable = { IRE_unionist_strength > 50 }
+				}
+				add = 10
+			}
+
+			modifier = {
+				OR = {
+					check_variable = { IRE_unionist_strength > 70 }
+				}
+				add = 10
+			}
+
+			modifier = {
+				OR = {
+					check_variable = { IRE_nationalist_opinion < -20 }
+				}
+				add = 15
+			}
+		}
+	}
+
+	IRE_execute_unionist_supply_raid = {
+		icon = GFX_decision_generic_industry
+
+		visible = {
+			has_country_flag = IRE_organising_unionist_mission
+			has_country_flag = IRE_organising_unionist_supply_raid
+		}
+
+		priority = 31
+
+		days_remove = 15
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete IRE_execute_unionist_supply_raid target: [From.GetName]"
+			clr_country_flag = IRE_organising_unionist_supply_raid
+			clr_country_flag = IRE_organising_unionist_mission
+			set_country_flag = IRE_executing_unionist_mission
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove IRE_execute_unionist_supply_raid target: [From.GetName]"
+			IRE_execute_unionist_supply_raid = yes
+			clr_country_flag = IRE_executing_unionist_mission
+		}
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				check_variable = { IRE_unionist_mission_effectiveness > 65 }
+				add = 5
+			}
+
+			modifier = {
+				check_variable = { IRE_unionist_mission_effectiveness > 85 }
+				add = 10
+			}
+
+			modifier = {
+				check_variable = { IRE_unionist_mission_effectiveness > 95 }
+				add = 50
+			}
+		}
+	}
+
+	IRE_organise_unionist_no_go_raid = {
+		icon = GFX_decision_ban_iron_front
+
+		visible = {
+			NOT = {
+				has_country_flag = IRE_organising_nationalist_mission
+				has_country_flag = IRE_executing_nationalist_mission
+				has_country_flag = IRE_organising_unionist_mission
+				has_country_flag = IRE_executing_unionist_mission
+			}
+			has_completed_focus = IRE_military_mission_in_ulster
+		}
+
+		available = {
+			has_idea = IRE_military_presence_in_NI
+		}
+
+		priority = 30
+
+		days_re_enable = 180
+
+		custom_cost_trigger = {
+			command_power > 4
+		}
+		custom_cost_text = decision_cost_CP_5
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete IRE_organise_unionist_no_go_raid target: [From.GetName]"
+			hidden_effect = {
+				add_command_power = -5
+			}
+			set_country_flag = IRE_organising_unionist_mission
+			set_country_flag = IRE_organising_unionist_no_go_raid
+			IRE_setup_organise_unionist_mission = yes
+		}
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				OR = {
+					check_variable = { IRE_unionist_entrenchment > 0.1 }
+				}
+				add = 10
+			}
+
+			modifier = {
+				OR = {
+					check_variable = { IRE_unionist_entrenchment > 0.3 }
+				}
+				add = 10
+			}
+
+			modifier = {
+				OR = {
+					check_variable = { IRE_nationalist_opinion < -20 }
+				}
+				add = 15
+			}
+		}
+	}
+
+	IRE_execute_unionist_no_go_raid = {
+		icon = GFX_decision_generic_industry
+
+		visible = {
+			has_country_flag = IRE_organising_unionist_mission
+			has_country_flag = IRE_organising_unionist_no_go_raid
+		}
+
+		priority = 30
+
+		days_remove = 15
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete IRE_execute_unionist_no_go_raid target: [From.GetName]"
+			clr_country_flag = IRE_organising_unionist_no_go_raid
+			clr_country_flag = IRE_organising_unionist_mission
+			set_country_flag = IRE_executing_unionist_mission
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove IRE_execute_unionist_no_go_raid target: [From.GetName]"
+			IRE_execute_unionist_no_go_raid = yes
+			clr_country_flag = IRE_executing_unionist_mission
+		}
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				check_variable = { IRE_unionist_mission_effectiveness > 65 }
+				add = 5
+			}
+
+			modifier = {
+				check_variable = { IRE_unionist_mission_effectiveness > 85 }
+				add = 10
+			}
+
+			modifier = {
+				check_variable = { IRE_unionist_mission_effectiveness > 95 }
+				add = 50
+			}
+		}
+	}
+
+	IRE_utilise_unionist_informants_mission = {
+		icon = GFX_decision_SWI_expand_covert_operations
+
+		visible = {
+			has_country_flag = IRE_organising_unionist_mission
+		}
+
+		priority = 29
+
+		days_remove = 5
+
+		days_re_enable = 20
+
+		custom_cost_trigger = {
+			check_variable = { IRE_unionist_intel > 14 }
+		}
+		custom_cost_text = decision_cost_IRE_intel_15
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete IRE_utilise_unionist_informants_mission target: [From.GetName]"
+			hidden_effect = {
+				set_temp_variable = { IRE_temp_unionist_intel_change = -15}
+				IRE_change_unionist_intel = yes
+			}
+			set_temp_variable = { IRE_unionist_mission_effectiveness_temp_change = 15 }
+			IRE_change_unionist_mission_effectiveness = yes
+		}
+
+		ai_will_do = {
+			base = 100
+		}
+	}
+
+	IRE_special_training_unionist_mission = {
+		icon = GFX_decision_soldierly_discipline
+
+		visible = {
+			has_country_flag = IRE_organising_unionist_mission
+		}
+
+		priority = 28
+
+		days_remove = 20
+		
+		days_re_enable = 30
+
+		custom_cost_trigger = {
+			command_power > 4
+		}
+		custom_cost_text = decision_cost_CP_5
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete IRE_special_training_unionist_mission target: [From.GetName]"
+			hidden_effect = {
+				add_command_power = -5
+			}
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove IRE_special_training_unionist_mission target: [From.GetName]"
+			set_temp_variable = { IRE_unionist_mission_effectiveness_temp_change = 10 }
+			IRE_change_unionist_mission_effectiveness = yes
+		}
+
+		ai_will_do = {
+			base = 100
+		}
+	}
+
+	IRE_use_advanced_military_hardware_unionist_mission = {
+		icon = GFX_decision_soldierly_discipline
+
+		visible = {
+			has_country_flag = IRE_organising_unionist_mission
+		}
+
+		priority = 27
+
+		days_remove = 15
+
+		days_re_enable = 20
+
+		custom_cost_trigger = {
+			has_equipment = {support_equipment > 9}
+			has_equipment = {infantry_equipment > 19}
+		}
+		custom_cost_text = decision_cost_SPE_10_ie_20
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete IRE_use_advanced_military_hardware_unionist_mission target: [From.GetName]"
+			hidden_effect = {
+				add_equipment_to_stockpile = {
+					type = support_equipment
+					amount = -10
+				}
+				add_equipment_to_stockpile = {
+					type = infantry_equipment
+					amount = -20
+				}
+			}
+			set_temp_variable = { IRE_unionist_mission_effectiveness_temp_change = 20 }
+			IRE_change_unionist_mission_effectiveness = yes
+		}
+
+		ai_will_do = {
+			base = 100
+		}
+	}
+
+	
+	IRE_organise_nationalist_supply_raid = {
+		icon = GFX_decision_ban_iron_front
+
+		visible = {
+			NOT = {
+				has_country_flag = IRE_organising_unionist_mission
+				has_country_flag = IRE_executing_unionist_mission
+				has_country_flag = IRE_organising_nationalist_mission
+				has_country_flag = IRE_executing_nationalist_mission
+				
+			}
+			has_completed_focus = IRE_military_mission_in_ulster
+		}
+
+		available = {
+			has_idea = IRE_military_presence_in_NI
+		}
+
+		priority = 21
+
+		days_re_enable = 180
+
+		custom_cost_trigger = {
+			command_power > 4
+		}
+		custom_cost_text = decision_cost_CP_5
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete IRE_organise_nationalist_supply_raid target: [From.GetName]"
+			hidden_effect = {
+				add_command_power = -5
+			}
+			set_country_flag = IRE_organising_nationalist_mission
+			set_country_flag = IRE_organising_nationalist_supply_raid
+			IRE_setup_organise_nationalist_mission = yes
+		}
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				OR = {
+					check_variable = { IRE_nationalist_strength > 50 }
+				}
+				add = 10
+			}
+
+			modifier = {
+				OR = {
+					check_variable = { IRE_nationalist_strength > 70 }
+				}
+				add = 10
+			}
+
+			modifier = {
+				OR = {
+					check_variable = { IRE_unionist_opinion < -20 }
+				}
+				add = 10
+			}
+		}
+	}
+
+	IRE_execute_nationalist_supply_raid = {
+		icon = GFX_decision_generic_industry
+
+		visible = {
+			has_country_flag = IRE_organising_nationalist_mission
+			has_country_flag = IRE_organising_nationalist_supply_raid
+		}
+
+		priority = 21
+
+		days_remove = 15
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete IRE_execute_nationalist_supply_raid target: [From.GetName]"
+			clr_country_flag = IRE_organising_nationalist_supply_raid
+			clr_country_flag = IRE_organising_nationalist_mission
+			set_country_flag = IRE_executing_nationalist_mission
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove IRE_execute_nationalist_supply_raid target: [From.GetName]"
+			IRE_execute_nationalist_supply_raid = yes
+			clr_country_flag = IRE_executing_nationalist_mission
+		}
+
+		
+		ai_will_do = {
+			base = 0
+			modifier = {
+				check_variable = { IRE_nationalist_mission_effectiveness > 65 }
+				add = 5
+			}
+
+			modifier = {
+				check_variable = { IRE_nationalist_mission_effectiveness > 85 }
+				add = 10
+			}
+
+			modifier = {
+				check_variable = { IRE_nationalist_mission_effectiveness > 95 }
+				add = 50
+			}
+		}
+	}
+
+	IRE_organise_nationalist_no_go_raid = {
+		icon = GFX_decision_ban_iron_front
+
+		visible = {
+			NOT = {
+				has_country_flag = IRE_organising_unionist_mission
+				has_country_flag = IRE_executing_unionist_mission
+				has_country_flag = IRE_organising_nationalist_mission
+				has_country_flag = IRE_executing_nationalist_mission
+				
+			}
+			has_completed_focus = IRE_military_mission_in_ulster
+		}
+
+		available = {
+			has_idea = IRE_military_presence_in_NI
+		}
+
+		priority = 20
+
+		days_re_enable = 180
+
+		custom_cost_trigger = {
+			command_power > 4
+		}
+		custom_cost_text = decision_cost_CP_5
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete IRE_organise_nationalist_no_go_raid target: [From.GetName]"
+			hidden_effect = {
+				add_command_power = -5
+			}
+			set_country_flag = IRE_organising_nationalist_mission
+			set_country_flag = IRE_organising_nationalist_no_go_raid
+			IRE_setup_organise_nationalist_mission = yes
+		}
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				OR = {
+					check_variable = { IRE_nationalist_entrenchment > 0.1 }
+				}
+				add = 10
+			}
+
+			modifier = {
+				OR = {
+					check_variable = { IRE_nationalist_entrenchment > 0.3 }
+				}
+				add = 10
+			}
+
+			modifier = {
+				OR = {
+					check_variable = { IRE_unionist_opinion < -20 }
+				}
+				add = 15
+			}
+		}
+	}
+
+	IRE_execute_nationalist_no_go_raid = {
+		icon = GFX_decision_generic_industry
+
+		visible = {
+			has_country_flag = IRE_organising_nationalist_mission
+			has_country_flag = IRE_organising_nationalist_no_go_raid
+		}
+
+		priority = 20
+
+		days_remove = 15
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete IRE_execute_nationalist_no_go_raid target: [From.GetName]"
+			clr_country_flag = IRE_organising_nationalist_no_go_raid
+			clr_country_flag = IRE_organising_nationalist_mission
+			set_country_flag = IRE_executing_nationalist_mission
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove IRE_execute_nationalist_no_go_raid target: [From.GetName]"
+			IRE_execute_nationalist_no_go_raid = yes
+			clr_country_flag = IRE_executing_nationalist_mission
+		}
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				check_variable = { IRE_nationalist_mission_effectiveness > 65 }
+				add = 5
+			}
+
+			modifier = {
+				check_variable = { IRE_nationalist_mission_effectiveness > 85 }
+				add = 10
+			}
+
+			modifier = {
+				check_variable = { IRE_nationalist_mission_effectiveness > 95 }
+				add = 50
+			}
+		}
+	}
+
+	IRE_utilise_nationalist_informants_mission = {
+		icon = GFX_decision_SWI_expand_covert_operations
+
+		visible = {
+			has_country_flag = IRE_organising_nationalist_mission
+		}
+
+		priority = 19
+
+		days_remove = 5
+
+		days_re_enable = 20
+
+		custom_cost_trigger = {
+			check_variable = { IRE_nationalist_intel > 14 }
+		}
+		custom_cost_text = decision_cost_IRE_intel_15
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete IRE_utilise_nationalist_informants_mission target: [From.GetName]"
+			hidden_effect = {
+				set_temp_variable = { IRE_temp_nationalist_intel_change = -15}
+				IRE_change_nationalist_intel = yes
+			}
+			set_temp_variable = { IRE_nationalist_mission_effectiveness_temp_change = 15 }
+			IRE_change_nationalist_mission_effectiveness = yes
+		}
+
+		ai_will_do = {
+			base = 100
+		}
+	}
+
+	IRE_special_training_nationalist_mission = {
+		icon = GFX_decision_soldierly_discipline
+
+		visible = {
+			has_country_flag = IRE_organising_nationalist_mission
+		}
+
+		priority = 18
+
+		days_remove = 20
+		
+		days_re_enable = 30
+
+		custom_cost_trigger = {
+			command_power > 4
+		}
+		custom_cost_text = decision_cost_CP_5
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete IRE_special_training_nationalist_mission target: [From.GetName]"
+			hidden_effect = {
+				add_command_power = -5
+			}
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove IRE_special_training_nationalist_mission target: [From.GetName]"
+			set_temp_variable = { IRE_nationalist_mission_effectiveness_temp_change = 10 }
+			IRE_change_nationalist_mission_effectiveness = yes
+		}
+
+		ai_will_do = {
+			base = 100
+		}
+	}
+
+	IRE_use_advanced_military_hardware_nationalist_mission = {
+		icon = GFX_decision_soldierly_discipline
+
+		visible = {
+			has_country_flag = IRE_organising_nationalist_mission
+		}
+
+		priority = 17
+
+		days_remove = 15
+
+		days_re_enable = 20
+
+		custom_cost_trigger = {
+			has_equipment = {support_equipment > 9}
+			has_equipment = {infantry_equipment > 19}
+		}
+		custom_cost_text = decision_cost_SPE_10_ie_20
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete IRE_use_advanced_military_hardware_nationalist_mission target: [From.GetName]"
+			hidden_effect = {
+				add_equipment_to_stockpile = {
+					type = support_equipment
+					amount = -10
+				}
+				add_equipment_to_stockpile = {
+					type = infantry_equipment
+					amount = -20
+				}
+			}
+			set_temp_variable = { IRE_nationalist_mission_effectiveness_temp_change = 20 }
+			IRE_change_nationalist_mission_effectiveness = yes
+		}
+
+		ai_will_do = {
+			base = 100
+		}
+	}
+
+	IRE_nationalist_favor_for_intel = {
+		icon = GFX_decision_hand_out
+
+		visible = {
+			has_completed_focus = IRE_contact_paramilitaries
+		}
+
+		priority = 12
+
+		days_remove = 7
+
+		days_re_enable = 90
+
+		cost = 25
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete IRE_nationalist_favor_for_intel target: [From.GetName]"
+			set_temp_variable = { IRE_temp_nationalist_opinion_change = 5 }
+			IRE_change_nationalist_opinion = yes
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove IRE_nationalist_favor_for_intel target: [From.GetName]"
+			set_temp_variable = { IRE_temp_unionist_intel_change = 7.5 }
+			IRE_change_unionist_intel = yes
+		}
+
+		ai_will_do = {
+			base = 75
+		}
+	}
+
+	IRE_focus_unionist_neighbourhoods = {
+		icon = GFX_decision_generic_arrest
+
+		visible = {
+			has_completed_focus = IRE_expand_policing
+			NOT = {
+				has_decision = IRE_focus_nationalist_neighbourhoods
+			}
+		}
+
+		available = {
+			NOT = {
+				has_decision = IRE_focus_nationalist_neighbourhoods
+			}
+		}
+
+		custom_cost_trigger = {
+			command_power > 4
+			has_political_power > 24
+		}
+		custom_cost_text = decision_cost_CP_5_pp_25
+
+		ai_hint_pp_cost = 25
+
+		priority = 5
+
+		days_remove = 180
+
+		days_re_enable = 180
+
+		modifier = {
+			command_power_gain_mult = -0.5
+			ireland_unionist_opinion_weekly_gain = 1.5
+			ireland_gardai_unionist_focus = 1
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete IRE_focus_unionist_neighbourhoods target: [From.GetName]"
+			hidden_effect = {
+				add_command_power = -5
+				add_political_power = -25
+			}
+			set_temp_variable = { IRE_temp_change_unionist_mission_time = 5 }
+			IRE_change_unionist_mission_time = yes
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove IRE_focus_unionist_neighbourhoods target: [From.GetName]"
+			set_temp_variable = { IRE_temp_change_unionist_mission_time = -5 }
+			IRE_change_unionist_mission_time = yes
+		}
+
+		ai_will_do = {
+			base = 100
+			modifier = {
+				check_variable = { IRE_nationalist_opinion > IRE_unionist_opinion }
+				add = -50
+			}
+		}
+	}
+
+	IRE_focus_nationalist_neighbourhoods = {
+		icon = GFX_decision_generic_arrest
+
+		visible = {
+			has_completed_focus = IRE_expand_policing
+			NOT = {
+				has_decision = IRE_focus_unionist_neighbourhoods
+			}
+		}
+
+		available = {
+			NOT = {
+				has_decision = IRE_focus_unionist_neighbourhoods
+			}
+		}
+
+		custom_cost_trigger = {
+			command_power > 4
+			has_political_power > 24
+		}
+		custom_cost_text = decision_cost_CP_5_pp_25
+
+		ai_hint_pp_cost = 25
+
+		priority = 6
+
+		days_remove = 180
+
+		days_re_enable = 180
+
+		modifier = {
+			command_power_gain_mult = -0.5
+			ireland_nationalist_opinion_weekly_gain = 1.5
+			ireland_gardai_nationalist_focus = 1
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete IRE_focus_nationalist_neighbourhoods target: [From.GetName]"
+			hidden_effect = {
+				add_command_power = -5
+				add_political_power = -25
+			}
+			set_temp_variable = { IRE_temp_change_nationalist_mission_time = 5 }
+			IRE_change_nationalist_mission_time = yes
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove IRE_focus_nationalist_neighbourhoods target: [From.GetName]"
+			set_temp_variable = { IRE_temp_change_nationalist_mission_time = -5 }
+			IRE_change_nationalist_mission_time = yes
+		}
+
+		ai_will_do = {
+			base = 100
+			modifier = {
+				check_variable = { IRE_unionist_opinion > IRE_nationalist_opinion }
+				add = -50
+			}
+		}
+	}
+
+	IRE_build_peace_lines = {
+		icon = GFX_decision_border_war
+
+		visible = {
+			has_completed_focus = IRE_seperate_neighbourhoods
+			check_variable = { IRE_peace_line_level < 3 }
+		}
+		
+		cost = 75
+
+		priority = 4
+
+		days_remove = 70
+
+		modifier = {
+			civilian_factory_use = 2
+			ireland_unionist_opinion_weekly_gain = -0.25
+			ireland_nationalist_opinion_weekly_gain = -0.25
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove IRE_build_peace_lines target: [From.GetName]"
+			set_temp_variable = { IRE_temp_change_peace_line_level = 1 }
+			IRE_change_peace_line_level = yes
+		}
+
+		ai_will_do = {
+			base = 50
+		}
+
+	}	
+}
+
+
+
+

@@ -1,0 +1,1512 @@
+NEE_clear_bill_voting_flags = {
+	clr_country_flag = NEE_voting_on_bill
+	clr_country_flag = NEE_progressive_support
+	clr_country_flag = NEE_progressive_oppose
+	clr_country_flag = NEE_libdems_support
+	clr_country_flag = NEE_libdems_oppose
+	clr_country_flag = NEE_reps_support
+	clr_country_flag = NEE_reps_oppose
+	clr_country_flag = NEE_Soccon_support
+	clr_country_flag = NEE_Soccon_oppose
+	set_variable = {
+		NEE_senators_in_favor = 0
+	}
+	set_variable = {
+		NEE_senators_opposed = 0
+	}
+	set_variable = {
+		NEE_representatives_in_favor = 0
+	}
+	set_variable = {
+		NEE_representatives_opposed = 0
+	}
+	clear_variable = NEE_legislation
+}
+NEE_vote_setup = {
+	NEE_setup_congress = yes
+	set_variable = {
+		NEE_senators_against = 0
+	}
+	set_variable = {
+		NEE_senators_in_favor = 0
+	}
+	set_variable = {
+		NEE_representatives_against = 0
+	}
+	set_variable = {
+		NEE_representatives_in_favor = 0
+	}
+	set_country_flag = NEE_voting_on_bill
+}
+NEE_progressives_support = {
+	custom_effect_tooltip = NEE_progressives_support_tt
+	set_country_flag = NEE_progressive_support
+	add_to_variable = {
+		var = NEE_senators_in_favor
+		value = senate_seat_array^0
+	}
+	add_to_variable = {
+		var = NEE_representatives_in_favor
+		value = house_seat_array^0
+	}
+}
+NEE_progressives_oppose = {
+	custom_effect_tooltip = NEE_progressives_oppose_tt
+	set_country_flag = NEE_progressive_oppose
+	add_to_variable = {
+		var = NEE_senators_against
+		value = senate_seat_array^0
+	}
+	add_to_variable = {
+		var = NEE_representatives_against
+		value = house_seat_array^0
+	}
+}
+NEE_libdems_support = {
+	custom_effect_tooltip = NEE_libdems_support_tt
+	set_country_flag = NEE_libdems_support
+	add_to_variable = {
+		var = NEE_senators_in_favor
+		value = senate_seat_array^1
+	}
+	add_to_variable = {
+		var = NEE_representatives_in_favor
+		value = house_seat_array^1
+	}
+}
+NEE_libdems_oppose = {
+	custom_effect_tooltip = NEE_libdems_oppose_tt
+	set_country_flag = NEE_libdems_oppose
+	add_to_variable = {
+		var = NEE_senators_against
+		value = senate_seat_array^1
+	}
+	add_to_variable = {
+		var = NEE_representatives_against
+		value = house_seat_array^1
+	}
+}
+NEE_reps_support = {
+	custom_effect_tooltip = NEE_reps_support_tt
+	set_country_flag = NEE_reps_support
+	add_to_variable = {
+		var = NEE_senators_in_favor
+		value = senate_seat_array^2
+	}
+	add_to_variable = {
+		var = NEE_representatives_in_favor
+		value = house_seat_array^2
+	}
+}
+NEE_reps_oppose = {
+	custom_effect_tooltip = NEE_reps_oppose_tt
+	set_country_flag = NEE_reps_oppose
+	add_to_variable = {
+		var = NEE_senators_against
+		value = senate_seat_array^2
+	}
+	add_to_variable = {
+		var = NEE_representatives_against
+		value = house_seat_array^2
+	}
+}
+NEE_soccons_support = {
+	custom_effect_tooltip = NEE_soccons_support_tt
+	set_country_flag = NEE_soccon_support
+	add_to_variable = {
+		var = NEE_senators_in_favor
+		value = senate_seat_array^3
+	}
+	add_to_variable = {
+		var = NEE_representatives_in_favor
+		value = house_seat_array^3
+	}
+}
+NEE_soccons_oppose = {
+	custom_effect_tooltip = NEE_soccons_oppose_tt
+	set_country_flag = NEE_soccon_oppose
+	add_to_variable = {
+		var = NEE_senators_against
+		value = senate_seat_array^3
+	}
+	add_to_variable = {
+		var = NEE_representatives_against
+		value = house_seat_array^3
+	}
+}
+NEE_state_electoral_initial = {
+	NEE = {
+		797 = { #Massachusetts
+			set_variable = { electoral_lean = 2 }
+			set_variable = { electoral_vote = 19 }
+			set_variable = { house_seats = electoral_vote }
+			add_to_variable = { house_seats = -2 }
+			set_variable = { state_id = 797 }
+		}
+		357 = { #Maine
+			set_variable = { electoral_lean = 3 }
+			set_variable = { electoral_vote = 5 }
+			set_variable = { house_seats = electoral_vote }
+			add_to_variable = { house_seats = -2 }
+			set_variable = { state_id = 357 }
+		}
+		800 = { #New Hampshire
+			set_variable = { electoral_lean = 3 }
+			set_variable = { electoral_vote = 4 }
+			set_variable = { house_seats = electoral_vote }
+			add_to_variable = { house_seats = -2 }
+			set_variable = { state_id = 800 }
+		}
+		799 = { #Vermont
+			set_variable = { electoral_lean = 3 }
+			set_variable = { electoral_vote = 3 }
+			set_variable = { house_seats = electoral_vote }
+			add_to_variable = { house_seats = -2 }
+			set_variable = { state_id = 799 }
+		}
+		892 = { #Rhode Island
+			set_variable = { electoral_lean = 4 }
+			set_variable = { electoral_vote = 4 }
+			set_variable = { house_seats = electoral_vote }
+			add_to_variable = { house_seats = -2 }
+			set_variable = { state_id = 892 }
+		}
+		798 = { #Connecticut
+			set_variable = { electoral_lean = 4 }
+			set_variable = { electoral_vote = 10 }
+			set_variable = { house_seats = electoral_vote }
+			add_to_variable = { house_seats = -2 }
+			set_variable = { state_id = 798 }
+		}
+		358 = { #Upstate New York
+			set_variable = { electoral_lean = 3 }
+			set_variable = { electoral_vote = 26 }
+			set_variable = { house_seats = electoral_vote }
+			add_to_variable = { house_seats = -2 }
+			set_variable = { state_id = 358 }
+		}
+		822 = { #New York City
+			set_variable = { electoral_lean = 2 }
+			set_variable = { electoral_vote = 29 }
+			set_variable = { house_seats = electoral_vote }
+			add_to_variable = { house_seats = -2 }
+			set_variable = { state_id = 822 }
+		}
+		clear_array = senate_main_array
+		add_to_array = { senate_main_array = 798 }
+		add_to_array = { senate_main_array = 357 }
+		add_to_array = { senate_main_array = 797 }
+		add_to_array = { senate_main_array = 800 }
+		add_to_array = { senate_main_array = 822 }
+		add_to_array = { senate_main_array = 892 }
+		add_to_array = { senate_main_array = 358 }
+		add_to_array = { senate_main_array = 799 }
+	}
+}
+NEE_state_seats_initial = { #AVERAGE 350k population per district
+	NEE = {
+		797 = { #Massachusetts
+			# make sure election_count is 0 initially
+			clear_variable = election_count
+			# resets the arrays
+			clear_array = electoral_seat_number_array
+			clear_array = electoral_pie_chart_number_array
+			clear_array = electoral_seat_id_array
+			# governor
+			set_variable = { governor_party = 2 } 
+			# senate seats
+			set_variable = { senate_seat_party_1 = 2 } 
+			set_variable = { senate_seat_party_2 = 3 } 
+            # make sure they add up to the number of house seats
+            add_to_array = { electoral_seat_number_array = 2 } # number of Soc Dems
+            add_to_array = { electoral_seat_number_array = 7 } # number of Soc Libs
+            add_to_array = { electoral_seat_number_array = 6 } # number of Mar Libs
+            add_to_array = { electoral_seat_number_array = 2 } # number of Soc Cons
+			# party popularity values make sure they add up to 100
+			add_to_array = { electoral_pie_chart_number_array = 15 } # soc dems popularity
+			add_to_array = { electoral_pie_chart_number_array = 40 } # soc libs popularity
+			add_to_array = { electoral_pie_chart_number_array = 35 } # mar libs popularity
+			add_to_array = { electoral_pie_chart_number_array = 10 } # soc con popularity
+			# makes an array for the seat ids 1-4
+            for_loop_effect = {
+                start = 1
+                end = 5
+                add_to_array = { electoral_seat_id_array = v }
+            }
+			# executes the main code below
+            NEE_modify_state_senate = yes
+			NEE_create_pie_chart = yes
+		}
+		798 = { #Connecticut
+			# make sure election_count is 0 initially
+			clear_variable = election_count
+			# resets the arrays
+			clear_array = electoral_seat_number_array
+			clear_array = electoral_pie_chart_number_array
+			clear_array = electoral_seat_id_array
+			# governor
+			set_variable = { governor_party = 2 } 
+			# senate seats
+			set_variable = { senate_seat_party_1 = 2 } 
+			set_variable = { senate_seat_party_2 = 4 } 
+            # make sure they add up to the number of house seats
+            add_to_array = { electoral_seat_number_array = 0 } # number of Soc Dems
+            add_to_array = { electoral_seat_number_array = 2 } # number of Soc Libs
+            add_to_array = { electoral_seat_number_array = 2 } # number of Mar Libs
+            add_to_array = { electoral_seat_number_array = 4 } # number of Soc Cons
+			# party popularity values make sure they add up to 100
+			add_to_array = { electoral_pie_chart_number_array = 10 } # soc dems popularity
+			add_to_array = { electoral_pie_chart_number_array = 25 } # soc libs popularity
+			add_to_array = { electoral_pie_chart_number_array = 25 } # mar libs popularity
+			add_to_array = { electoral_pie_chart_number_array = 40 } # soc con popularity
+			# makes an array for the seat ids 1-4
+            for_loop_effect = {
+                start = 1
+                end = 5
+                add_to_array = { electoral_seat_id_array = v }
+            }
+			# executes the main code below
+            NEE_modify_state_senate = yes
+			NEE_create_pie_chart = yes
+		}
+		822 = { #New York City 
+			# make sure election_count is 0 initially
+			clear_variable = election_count
+			# resets the arrays
+			clear_array = electoral_seat_number_array
+			clear_array = electoral_pie_chart_number_array
+			clear_array = electoral_seat_id_array
+			# governor
+			set_variable = { governor_party = 1 } 
+			# senate seats
+			set_variable = { senate_seat_party_1 = 4 } 
+			set_variable = { senate_seat_party_2 = 2 } 
+            # make sure they add up to the number of house seats
+            add_to_array = { electoral_seat_number_array = 4 } # number of Soc Dems
+            add_to_array = { electoral_seat_number_array = 11 } # number of Soc Libs
+            add_to_array = { electoral_seat_number_array = 3 } # number of Mar Libs
+            add_to_array = { electoral_seat_number_array = 9 } # number of Soc Cons
+			# party popularity values make sure they add up to 100
+			add_to_array = { electoral_pie_chart_number_array = 20 } # soc dems popularity
+			add_to_array = { electoral_pie_chart_number_array = 35 } # soc libs popularity
+			add_to_array = { electoral_pie_chart_number_array = 10 } # mar libs popularity
+			add_to_array = { electoral_pie_chart_number_array = 25 } # soc con popularity
+			# makes an array for the seat ids 1-4
+            for_loop_effect = {
+                start = 1
+                end = 5
+                add_to_array = { electoral_seat_id_array = v }
+            }
+			# executes the main code below
+            NEE_modify_state_senate = yes
+			NEE_create_pie_chart = yes
+		}
+		358 = { #Upstate New York
+			# make sure election_count is 0 initially
+			clear_variable = election_count
+			# resets the arrays
+			clear_array = electoral_seat_number_array
+			clear_array = electoral_pie_chart_number_array
+			clear_array = electoral_seat_id_array
+			# governor
+			set_variable = { governor_party = 2 } 
+			# senate seats
+			set_variable = { senate_seat_party_1 = 3 } 
+			set_variable = { senate_seat_party_2 = 3 } 
+            # make sure they add up to the number of house seats
+            add_to_array = { electoral_seat_number_array = 2 } # number of Soc Dems
+            add_to_array = { electoral_seat_number_array = 4 } # number of Soc Libs
+            add_to_array = { electoral_seat_number_array = 14 } # number of Mar Libs
+            add_to_array = { electoral_seat_number_array = 4 } # number of Soc Cons
+			# party popularity values make sure they add up to 100
+			add_to_array = { electoral_pie_chart_number_array = 5 } # soc dems popularity
+			add_to_array = { electoral_pie_chart_number_array = 20 } # soc libs popularity
+			add_to_array = { electoral_pie_chart_number_array = 65 } # mar libs popularity
+			add_to_array = { electoral_pie_chart_number_array = 10 } # soc con popularity
+			# makes an array for the seat ids 1-4
+            for_loop_effect = {
+                start = 1
+                end = 5
+                add_to_array = { electoral_seat_id_array = v }
+            }
+			# executes the main code below
+            NEE_modify_state_senate = yes
+			NEE_create_pie_chart = yes
+		}
+		892 = { #Rhode Island
+			# make sure election_count is 0 initially
+			clear_variable = election_count
+			# resets the arrays
+			clear_array = electoral_seat_number_array
+			clear_array = electoral_pie_chart_number_array
+			clear_array = electoral_seat_id_array
+			# governor
+			set_variable = { governor_party = 4 } 
+			# senate seats
+			set_variable = { senate_seat_party_1 = 4 } 
+			set_variable = { senate_seat_party_2 = 4 } 
+            # make sure they add up to the number of house seats
+            add_to_array = { electoral_seat_number_array = 0 } # number of Soc Dems
+            add_to_array = { electoral_seat_number_array = 0 } # number of Soc Libs
+            add_to_array = { electoral_seat_number_array = 0 } # number of Mar Libs
+            add_to_array = { electoral_seat_number_array = 2 } # number of Soc Cons
+			# party popularity values make sure they add up to 100
+			add_to_array = { electoral_pie_chart_number_array = 18 } # soc dems popularity
+			add_to_array = { electoral_pie_chart_number_array = 17 } # soc libs popularity
+			add_to_array = { electoral_pie_chart_number_array = 15 } # mar libs popularity
+			add_to_array = { electoral_pie_chart_number_array = 50 } # soc con popularity
+			# makes an array for the seat ids 1-4
+            for_loop_effect = {
+                start = 1
+                end = 5
+                add_to_array = { electoral_seat_id_array = v }
+            }
+			# executes the main code below
+            NEE_modify_state_senate = yes
+			NEE_create_pie_chart = yes
+		}
+		799 = { #Vermont
+			# make sure election_count is 0 initially
+			clear_variable = election_count
+			# resets the arrays
+			clear_array = electoral_seat_number_array
+			clear_array = electoral_pie_chart_number_array
+			clear_array = electoral_seat_id_array
+			# governor
+			set_variable = { governor_party = 2 } 
+			# senate seats
+			set_variable = { senate_seat_party_1 = 3 } 
+			set_variable = { senate_seat_party_2 = 3 } 
+            # make sure they add up to the number of house seats
+            add_to_array = { electoral_seat_number_array = 0 } # number of Soc Dems
+            add_to_array = { electoral_seat_number_array = 0 } # number of Soc Libs
+            add_to_array = { electoral_seat_number_array = 1 } # number of Mar Libs
+            add_to_array = { electoral_seat_number_array = 0 } # number of Soc Cons
+			# party popularity values make sure they add up to 100
+			add_to_array = { electoral_pie_chart_number_array = 18 } # soc dems popularity
+			add_to_array = { electoral_pie_chart_number_array = 12 } # soc libs popularity
+			add_to_array = { electoral_pie_chart_number_array = 55 } # mar libs popularity
+			add_to_array = { electoral_pie_chart_number_array = 15 } # soc con popularity
+			# makes an array for the seat ids 1-4
+            for_loop_effect = {
+                start = 1
+                end = 5
+                add_to_array = { electoral_seat_id_array = v }
+            }
+			# executes the main code below
+            NEE_modify_state_senate = yes
+			NEE_create_pie_chart = yes
+		}
+		800 = { #New Hampshire
+			# make sure election_count is 0 initially
+			clear_variable = election_count
+			# resets the arrays
+			clear_array = electoral_seat_number_array
+			clear_array = electoral_pie_chart_number_array
+			clear_array = electoral_seat_id_array
+			# governor
+			set_variable = { governor_party = 2 } 
+			# senate seats
+			set_variable = { senate_seat_party_1 = 3 } 
+			set_variable = { senate_seat_party_2 = 3 } 
+            # make sure they add up to the number of house seats
+            add_to_array = { electoral_seat_number_array = 0 } # number of Soc Dems
+            add_to_array = { electoral_seat_number_array = 0 } # number of Soc Libs
+            add_to_array = { electoral_seat_number_array = 2 } # number of Mar Libs
+            add_to_array = { electoral_seat_number_array = 0 } # number of Soc Cons
+			# party popularity values make sure they add up to 100
+			add_to_array = { electoral_pie_chart_number_array = 12 } # soc dems popularity
+			add_to_array = { electoral_pie_chart_number_array = 13 } # soc libs popularity
+			add_to_array = { electoral_pie_chart_number_array = 60 } # mar libs popularity
+			add_to_array = { electoral_pie_chart_number_array = 15 } # soc con popularity
+			# makes an array for the seat ids 1-4
+            for_loop_effect = {
+                start = 1
+                end = 5
+                add_to_array = { electoral_seat_id_array = v }
+            }
+			# executes the main code below
+            NEE_modify_state_senate = yes
+			NEE_create_pie_chart = yes
+		}
+		357 = { #Maine
+			# make sure election_count is 0 initially
+			clear_variable = election_count
+			# resets the arrays
+			clear_array = electoral_seat_number_array
+			clear_array = electoral_pie_chart_number_array
+			clear_array = electoral_seat_id_array
+			# governor
+			set_variable = { governor_party = 2 } 
+			# senate seats
+			set_variable = { senate_seat_party_1 = 3 } 
+			set_variable = { senate_seat_party_2 = 3 } 
+            # make sure they add up to the number of house seats
+            add_to_array = { electoral_seat_number_array = 0 } # number of Soc Dems
+            add_to_array = { electoral_seat_number_array = 0 } # number of Soc Libs
+            add_to_array = { electoral_seat_number_array = 3 } # number of Mar Libs
+            add_to_array = { electoral_seat_number_array = 0 } # number of Soc Cons
+			# party popularity values make sure they add up to 100
+			add_to_array = { electoral_pie_chart_number_array = 8 } # soc dems popularity
+			add_to_array = { electoral_pie_chart_number_array = 13 } # soc libs popularity
+			add_to_array = { electoral_pie_chart_number_array = 62 } # mar libs popularity
+			add_to_array = { electoral_pie_chart_number_array = 17 } # soc con popularity
+			# makes an array for the seat ids 1-4
+            for_loop_effect = {
+                start = 1
+                end = 5
+                add_to_array = { electoral_seat_id_array = v }
+            }
+			# executes the main code below
+            NEE_modify_state_senate = yes
+			NEE_create_pie_chart = yes
+		}
+		359 = {
+			set_variable = { governor_party = 0 } 
+		}
+		796 = {
+			set_variable = { governor_party = 0 } 
+		}
+	}
+}
+NEE_PA_NJ_setup = {
+	NEE = {
+		796 = { #PA
+			set_variable = { electoral_lean = 4 }
+			set_variable = { electoral_vote = 20 }
+			set_variable = { house_seats = electoral_vote }
+			add_to_variable = { house_seats = -2 }
+			set_variable = { state_id = 796 }
+		}
+		796 = { #Pennsylvania
+			# make sure election_count is 0 initially
+			clear_variable = election_count
+			# resets the arrays
+			clear_array = electoral_seat_number_array
+			clear_array = electoral_pie_chart_number_array
+			clear_array = electoral_seat_id_array
+			# governor
+			set_variable = { governor_party = 3 } 
+			# senate seats
+			set_variable = { senate_seat_party_1 = 2 } 
+			set_variable = { senate_seat_party_2 = 4 } 
+            # make sure they add up to the number of house seats
+            add_to_array = { electoral_seat_number_array = 4 } # number of Soc Dems
+            add_to_array = { electoral_seat_number_array = 5 } # number of Soc Libs
+            add_to_array = { electoral_seat_number_array = 1 } # number of Mar Libs
+            add_to_array = { electoral_seat_number_array = 8 } # number of Soc Cons
+			# party popularity values make sure they add up to 100
+			add_to_array = { electoral_pie_chart_number_array = 20 } # soc dems popularity
+			add_to_array = { electoral_pie_chart_number_array = 25 } # soc libs popularity
+			add_to_array = { electoral_pie_chart_number_array = 10 } # mar libs popularity
+			add_to_array = { electoral_pie_chart_number_array = 45 } # soc con popularity
+			# makes an array for the seat ids 1-4
+            for_loop_effect = {
+                start = 1
+                end = 5
+                add_to_array = { electoral_seat_id_array = v }
+            }
+			# executes the main code below
+            NEE_modify_state_senate = yes
+			NEE_create_pie_chart = yes
+		}
+		359 = { #New Jersey
+			set_variable = { electoral_lean = 4 }
+			set_variable = { electoral_vote = 15 }
+			set_variable = { house_seats = electoral_vote }
+			add_to_variable = { house_seats = -2 }
+			set_variable = { state_id = 359 }
+		}
+		359 = { #New Jersey
+			# make sure election_count is 0 initially
+			clear_variable = election_count
+			# resets the arrays
+			clear_array = electoral_seat_number_array
+			clear_array = electoral_pie_chart_number_array
+			clear_array = electoral_seat_id_array
+			# governor
+			set_variable = { governor_party = 4 } 
+			# senate seats
+			set_variable = { senate_seat_party_1 = 4 } 
+			set_variable = { senate_seat_party_2 = 4 } 
+            # make sure they add up to the number of house seats
+            add_to_array = { electoral_seat_number_array = 4 } # number of Soc Dems
+            add_to_array = { electoral_seat_number_array = 1 } # number of Soc Libs
+            add_to_array = { electoral_seat_number_array = 0 } # number of Mar Libs
+            add_to_array = { electoral_seat_number_array = 8 } # number of Soc Cons
+			# party popularity values make sure they add up to 100
+			add_to_array = { electoral_pie_chart_number_array = 30 } # soc dems popularity
+			add_to_array = { electoral_pie_chart_number_array = 10 } # soc libs popularity
+			add_to_array = { electoral_pie_chart_number_array = 5 } # mar libs popularity
+			add_to_array = { electoral_pie_chart_number_array = 55 } # soc con popularity
+			# makes an array for the seat ids 1-4
+            for_loop_effect = {
+                start = 1
+                end = 5
+                add_to_array = { electoral_seat_id_array = v }
+            }
+			# executes the main code below
+            NEE_modify_state_senate = yes
+			NEE_create_pie_chart = yes
+		}
+		clear_array = senate_main_array
+		add_to_array = { senate_main_array = 798 }
+		add_to_array = { senate_main_array = 357 }
+		add_to_array = { senate_main_array = 797 }
+		add_to_array = { senate_main_array = 800 }
+		add_to_array = { senate_main_array = 359 }
+		add_to_array = { senate_main_array = 822 }
+		add_to_array = { senate_main_array = 796 }
+		add_to_array = { senate_main_array = 892 }
+		add_to_array = { senate_main_array = 358 }
+		add_to_array = { senate_main_array = 799 }
+		NEE_house_semicircle_2 = yes
+	}
+}
+NEE_calculate_electoral_seat = {
+	NEE = {
+		every_owned_state = {
+			# senate calculations
+			if = {
+				limit = {
+					check_variable = { election_count < 2 }
+				}
+				find_highest_in_array = { array = electoral_pie_chart_number_array index = pie_highest_index }
+				set_temp_variable = { temp = pie_highest_index }
+				add_to_temp_variable = { temp = 1 }
+				if = {
+					limit = {
+						check_variable = { election_count = 1 }
+					}
+					set_variable = { senate_seat_party_2 = temp }
+				}
+				else = {
+					set_variable = { senate_seat_party_1 = temp }
+				}
+				add_to_variable = { election_count = 1 }
+			}
+			else = {
+				clear_variable = election_count
+			}
+			# house calculations
+			clear_variable = temp_total
+			log = "[THIS.GetName]"
+			for_each_loop = {
+				array = electoral_pie_chart_number_array
+				set_temp_variable = { temp_seats = electoral_pie_chart_number_array^i } # put a party popularity to a temp var
+				divide_temp_variable = { temp_seats = 100 } # divide party popularity so you get 0.65 from 65% for example
+				multiply_temp_variable = { temp_seats = house_seats } # multiply that by number of seats to get seat share
+				round_temp_variable = temp_seats # round it up
+				set_variable = { electoral_seat_number_array^i = temp_seats } # set electoral seat to new value
+				add_to_variable = { temp_total = temp_seats }
+				log = "[?i] - [?electoral_seat_number_array^i] ([?temp_total])"
+			}
+			# extra to make sure it adds up to electoral seats in state
+			if = {
+				limit = {
+					check_variable = { temp_total < house_seats } # if total is less than number of seats
+				}
+				set_temp_variable = { temp = house_seats } # put number of seats to a temp var
+				subtract_from_temp_variable = { temp = temp_total } # get seat difference
+				find_highest_in_array = { array = electoral_seat_number_array index = highest_index }
+				add_to_variable = { electoral_seat_number_array^highest_index = temp } # add seat difference to most popular party
+			}
+			else_if = {
+				limit = {
+					check_variable = { temp_total > house_seats } # if total is more than number of seats
+				}
+				subtract_from_variable = { temp_total = house_seats } # get seat difference
+				find_highest_in_array = { array = electoral_seat_number_array index = highest_index }
+				subtract_from_variable = { electoral_seat_number_array^highest_index = temp_total } # subtract seat difference from most popular party
+			}
+		}
+	}
+}
+NEE_calculate_president = {
+	hidden_effect = {
+		every_owned_state = {
+			limit = {
+				is_core_of = NEE
+			}
+			find_highest_in_array = { 
+				array = electoral_pie_chart_number_array 
+				index = index 
+			}
+			if = {
+				limit = {
+					check_variable = { index = 0 }
+				}
+				add_to_variable = { progressives_electoral_votes = electoral_vote }
+				set_variable = {
+					electoral_lean = 1
+				}
+			}
+			else_if = {
+				limit = {
+					check_variable = { index = 1 }
+				}
+				add_to_variable = { soclib_electoral_votes = electoral_vote }
+				set_variable = {
+					electoral_lean = 2
+				}
+			}
+			else_if = {
+				limit = {
+					check_variable = { index = 2 }
+				}
+				add_to_variable = { marlib_electoral_votes = electoral_vote }
+				set_variable = {
+					electoral_lean = 3
+				}
+			}
+			else_if = {
+				limit = {
+					check_variable = { index = 3 }
+				}
+				add_to_variable = { soccon_electoral_votes = electoral_vote }
+				set_variable = {
+					electoral_lean = 4
+				}
+			}
+			if = { #Before 1952 progressives vote for the democrats for president
+				limit = { date < 1952.1.1 }
+				add_to_variable = {
+					var = NEE.soccon_electoral_votes
+					value = progressives_electoral_votes
+				}
+			}
+			else = {
+				add_to_variable = { #after 1942 progressives vote for soc lib dems for president
+					var = NEE.soclib_electoral_votes
+					value = progressives_electoral_votes
+				}
+			}
+			if = {
+				limit = { date < 1952.1.1 } 
+				add_to_variable = {
+					var = NEE.soccon_electoral_votes
+					value = soclib_electoral_votes
+				}
+			}
+			else = {
+				add_to_variable = { #After 1952 Social liberals vote for soc lib democrats
+					var = NEE.soclib_electoral_votes
+					value = soclib_electoral_votes
+				}
+			}
+			add_to_variable = { #market liberals always vote for mar lib GOP
+				var = NEE.marlib_electoral_votes
+				value = marlib_electoral_votes
+			}
+			if = { #Before 1952 soc cons vote for soc  con dems
+				limit = { date < 1952.1.1 }
+				add_to_variable = {
+					var = NEE.soccon_electoral_votes
+					value = soccon_electoral_votes
+				}
+			}
+			else_if = { #For 1953 election Soccons vote for Soclibs
+				limit = { 
+						date < 1955.1.1
+						date > 1952.1.1
+				}
+				add_to_variable = {
+					var = NEE.soclib_electoral_votes
+					value = soccon_electoral_votes
+				}
+			}
+			else = {
+				add_to_variable = { #after 1955 soc cons vote for mar lib GOP
+					var = NEE.marlib_electoral_votes
+					value = soccon_electoral_votes
+				}
+			}
+		}	
+	}
+	if = { #1949 election
+		limit = {
+			date < 1950.1.1
+		}
+		if = {
+			limit = {				
+				check_variable = {
+					marlib_electoral_votes > 50
+				}
+			}
+			hidden_effect = {
+				country_event = {
+					id = nee.15
+					days = 2
+				}
+			}
+			set_country_flag = NEE_republicanselected		
+			custom_effect_tooltip = NEE_republican_victory
+			add_popularity = {
+				ideology = market_liberal
+				popularity = 0.15
+			}
+		}
+		else_if = {
+			limit = {				
+				check_variable = {
+					soccon_electoral_votes > 50
+				}
+			}
+			hidden_effect = {
+				set_politics = {
+					ruling_party = social_conservative
+					elections_allowed = yes
+					last_election = 1949.11.8
+					election_frequency = 48
+				}
+				country_event = {
+					id = nee.16
+					days = 2
+				}
+			}
+			set_country_flag = NEE_democratselected	
+			custom_effect_tooltip = NEE_democratic_victory
+			add_popularity = {
+				ideology = social_conservative
+				popularity = 0.06
+			}
+			add_popularity = {
+				ideology = social_liberal
+				popularity = 0.06
+			}
+		}
+		else = {
+			log = "The 1949 NEE elections have fucked up, make an error report and ping Kennedy"
+		}
+	}
+	else_if = { #1953 election
+		limit = {
+			date < 1954.1.1
+		}
+		if = {
+			limit = {				
+				check_variable = {
+					marlib_electoral_votes > 50
+				}
+			}
+			hidden_effect = {
+				country_event = {
+					id = nee.30
+					days = 1
+				}
+			}
+			set_country_flag = NEE_republicanselected_1953		
+			custom_effect_tooltip = NEE_republican_victory
+		}
+		else_if = {
+			limit = {				
+				check_variable = {
+					soccon_electoral_votes > 50
+				}
+			}
+			hidden_effect = {
+				country_event = {
+					id = nee.31
+					days = 1
+				}
+			}
+			set_country_flag = NEE_democratselected_1953
+			custom_effect_tooltip = NEE_democratic_victory
+		}
+		else = {
+			log = "The 1953 NEE elections have fucked up, make an error report and ping Kennedy"
+		}
+	}
+	else_if = { #1957 election
+		limit = {
+			date < 1958.1.1
+		}
+		if = {
+			limit = {				
+				check_variable = {
+					marlib_electoral_votes > 50
+				}
+			}
+			hidden_effect = {
+				country_event = {
+					id = nee.40
+					days = 1
+				}
+			}
+			set_country_flag = NEE_republicanselected_1957		
+			custom_effect_tooltip = NEE_republican_victory
+		}
+		else_if = {
+			limit = {				
+				check_variable = {
+					soclib_electoral_votes > 50
+				}
+			}
+			hidden_effect = {
+				country_event = {
+					id = nee.39
+					days = 1
+				}
+			}
+			set_country_flag = NEE_democratselected_1957
+			custom_effect_tooltip = NEE_democratic_victory
+		}
+		else = {
+			log = "The 1957 NEE elections have fucked up, make an error report and ping Kennedy"
+		}
+	}
+}
+# ignore all code below (they work based on code above it so it doesnt need to be modified *usually*)
+# Scripted GUI Pie Chart example by Yard1
+# Feel free to use in your mods, but give credits to Yard1 (both in code, with comments; and on your download page)
+# this creates a pie chart of popularities - can be easily adapted to show anything that adds up to 100%
+# Slightly modified by Maho
+NEE_create_pie_chart = {
+	clear_array = pie_chart
+	clear_array = temp_pie
+	for_each_loop = {
+		array = electoral_pie_chart_number_array
+		add_to_array = { temp_pie = electoral_pie_chart_number_array^i }
+	}
+	set_temp_variable = { temp = 0 }
+	set_temp_variable = { temp_index = 1 }
+	while_loop_effect = {
+		limit = {
+			check_variable = { temp < temp_pie^num }
+		}
+		add_to_variable = { temp_pie^temp_index = temp_pie^temp }
+		add_to_temp_variable = { temp = 1 }
+		add_to_temp_variable = { temp_index = 1 }
+	}
+	set_temp_variable = { temp = 0 }
+	while_loop_effect = {
+		limit = {
+			check_variable = { temp < temp_pie^num }
+		}
+		resize_array = { array = pie_chart value = electoral_seat_id_array^temp size = temp_pie^temp }
+		add_to_temp_variable = { temp = 1 }
+	}
+}
+NEE_modify_state_senate = {
+	clear_array = state_senate_main_array
+	clear_array = temp_seat
+	for_each_loop = {
+		array = electoral_seat_number_array
+		add_to_array = { temp_seat = electoral_seat_number_array^i }
+	}
+	set_temp_variable = { temp = 0 }
+	set_temp_variable = { temp_index = 1 }
+	while_loop_effect = {
+		limit = {
+			check_variable = { temp < temp_seat^num }
+		}
+		add_to_variable = { temp_seat^temp_index = temp_seat^temp }
+		add_to_temp_variable = { temp = 1 }
+		add_to_temp_variable = { temp_index = 1 }
+	}
+	set_temp_variable = { temp = 0 }
+	while_loop_effect = {
+		limit = {
+			check_variable = { temp < temp_seat^num }
+		}
+		resize_array = { array = state_senate_main_array value = electoral_seat_id_array^temp size = temp_seat^temp }
+		add_to_temp_variable = { temp = 1 }
+	}
+}
+NEE_add_electoral_popularity = {
+	set_temp_variable = { v =  pop_type_added }
+	add_to_temp_variable = { v = 1 }
+	custom_effect_tooltip = NEE_add_electoral_popularity_tt
+	set_temp_variable = { temp =  electoral_pie_chart_number_array^pop_type_added }
+	add_to_temp_variable = { temp = pop_value_added }
+	if = {
+		limit = {
+			check_variable = { temp > 100 }
+		}
+		subtract_from_temp_variable = { temp = 100 }
+		subtract_from_temp_variable = { pop_value_added = temp }
+	}
+	for_each_loop = {
+		array = electoral_pie_chart_number_array
+		add_to_array = { percentage_popularity = electoral_pie_chart_number_array^i }
+	}
+	add_percentage_popularity = yes
+	for_each_loop = {
+		array = percentage_popularity
+		set_variable = { electoral_pie_chart_number_array^i = percentage_popularity^i }
+	}
+	clear_array = percentage_popularity
+	TEX_create_pie_chart = yes
+}
+NEE_subtract_electoral_popularity = {
+	set_temp_variable = { v = pop_type_subtracted }
+	add_to_temp_variable = { v = 1 }
+	custom_effect_tooltip = NEE_subtract_electoral_popularity_tt
+	set_temp_variable = { temp =  electoral_pie_chart_number_array^pop_type_subtracted }
+	subtract_from_temp_variable = { temp = pop_value_subtracted }
+	if = {
+		limit = {
+			check_variable = { temp < 0 }
+		}
+		multiply_temp_variable = { temp = -1 }
+		subtract_from_temp_variable = { pop_value_subtracted = temp }
+	}
+	for_each_loop = {
+		array = electoral_pie_chart_number_array
+		add_to_array = { percentage_popularity = electoral_pie_chart_number_array^i }
+	}
+	subtract_percentage_popularity = yes
+	for_each_loop = {
+		array = percentage_popularity
+		set_variable = { electoral_pie_chart_number_array^i = percentage_popularity^i }
+	}
+	clear_array = percentage_popularity
+	TEX_create_pie_chart = yes
+}
+NEE_setup_congress = {
+	clear_variable = seat_total
+	clear_array = senate_id_array
+	clear_array = senate_seat_array
+	clear_array = house_id_array
+	clear_array = house_seat_array
+	for_loop_effect = {
+		start = 1
+		end = 5
+		add_to_array = { senate_id_array = v }
+		add_to_array = { senate_seat_array = 0 }
+		add_to_array = { house_id_array = v }
+		add_to_array = { house_seat_array = 0 }
+	}
+	for_each_scope_loop = {
+		array = senate_main_array
+		set_temp_variable = { temp_senate_seat_party_1 = senate_seat_party_1 }
+		set_temp_variable = { temp_senate_seat_party_2 = senate_seat_party_2 }
+		subtract_from_temp_variable = { temp_senate_seat_party_1 = 1 }
+		subtract_from_temp_variable = { temp_senate_seat_party_2 = 1 }
+		add_to_variable = { NEE.senate_seat_array^temp_senate_seat_party_1 = 1 }
+		add_to_variable = { NEE.senate_seat_array^temp_senate_seat_party_2 = 1 }
+		add_to_variable = { NEE.house_seat_array^0 = electoral_seat_number_array^0 }
+		add_to_variable = { NEE.house_seat_array^1 = electoral_seat_number_array^1 }
+		add_to_variable = { NEE.house_seat_array^2 = electoral_seat_number_array^2 }
+		add_to_variable = { NEE.house_seat_array^3 = electoral_seat_number_array^3 }
+		set_variable = { state_total = electoral_seat_number_array^0 }
+		add_to_variable = { state_total = electoral_seat_number_array^1 }
+		add_to_variable = { state_total = electoral_seat_number_array^2 }
+		add_to_variable = { state_total = electoral_seat_number_array^3 }
+		log = "[THIS.GetName] - [?state_total] Seats"
+		add_to_variable = { NEE.seat_total = NEE.electoral_vote }
+	}
+	for_each_loop = {
+		array = house_seat_array
+		log = "[?v]"
+	}
+	NEE_modify_house_array = yes
+}
+NEE_modify_house_array = {
+	clear_array = house_main_array
+	clear_array = temp_seat
+	for_each_loop = {
+		array = house_seat_array
+		add_to_array = { temp_seat = house_seat_array^i }
+	}
+	set_temp_variable = { temp = 0 }
+	set_temp_variable = { temp_index = 1 }
+	set_temp_variable = { temp_size = temp_seat^num }
+	while_loop_effect = {
+		limit = {
+			check_variable = { temp < temp_size }
+		}
+		add_to_variable = { temp_seat^temp_index = temp_seat^temp }
+		add_to_temp_variable = { temp = 1 }
+		add_to_temp_variable = { temp_index = 1 }
+	}
+	set_temp_variable = { temp = 0 }
+	while_loop_effect = {
+		limit = {
+			check_variable = { temp < temp_size }
+		}
+		resize_array = { array = house_main_array value = house_id_array^temp size = temp_seat^temp }
+		add_to_temp_variable = { temp = 1 }
+	}
+}
+NEE_house_semicircle = {
+	clear_array = house_member_x_array
+	clear_array = house_member_y_array
+	add_to_array = { house_member_x_array = 0 }
+	add_to_array = { house_member_y_array = 87 }
+	add_to_array = { house_member_x_array = 12 }
+	add_to_array = { house_member_y_array = 87 }
+	add_to_array = { house_member_x_array = 25 }
+	add_to_array = { house_member_y_array = 87 }
+	add_to_array = { house_member_x_array = 37 }
+	add_to_array = { house_member_y_array = 87 }
+	add_to_array = { house_member_x_array = 49 }
+	add_to_array = { house_member_y_array = 87 }
+	add_to_array = { house_member_x_array = 2 }
+	add_to_array = { house_member_y_array = 74 }
+	add_to_array = { house_member_x_array = 15 }
+	add_to_array = { house_member_y_array = 75 }
+	add_to_array = { house_member_x_array = 27 }
+	add_to_array = { house_member_y_array = 75 }
+	add_to_array = { house_member_x_array = 6 }
+	add_to_array = { house_member_y_array = 62 }
+	add_to_array = { house_member_x_array = 40 }
+	add_to_array = { house_member_y_array = 76 }
+	add_to_array = { house_member_x_array = 19 }
+	add_to_array = { house_member_y_array = 64 }
+	add_to_array = { house_member_x_array = 53 }
+	add_to_array = { house_member_y_array = 76 }
+	add_to_array = { house_member_x_array = 32 }
+	add_to_array = { house_member_y_array = 64 }
+	add_to_array = { house_member_x_array = 12 }
+	add_to_array = { house_member_y_array = 51 }
+	add_to_array = { house_member_x_array = 25 }
+	add_to_array = { house_member_y_array = 53 }
+	add_to_array = { house_member_x_array = 46 }
+	add_to_array = { house_member_y_array = 65 }
+	add_to_array = { house_member_x_array = 19 }
+	add_to_array = { house_member_y_array = 40 }
+	add_to_array = { house_member_x_array = 39 }
+	add_to_array = { house_member_y_array = 54 }
+	add_to_array = { house_member_x_array = 32 }
+	add_to_array = { house_member_y_array = 43 }
+	add_to_array = { house_member_x_array = 60 }
+	add_to_array = { house_member_y_array = 67 }
+	add_to_array = { house_member_x_array = 28 }
+	add_to_array = { house_member_y_array = 31 }
+	add_to_array = { house_member_x_array = 54 }
+	add_to_array = { house_member_y_array = 56 }
+	add_to_array = { house_member_x_array = 47 }
+	add_to_array = { house_member_y_array = 46 }
+	add_to_array = { house_member_x_array = 41 }
+	add_to_array = { house_member_y_array = 35 }
+	add_to_array = { house_member_x_array = 37 }
+	add_to_array = { house_member_y_array = 22 }
+	add_to_array = { house_member_x_array = 69 }
+	add_to_array = { house_member_y_array = 60 }
+	add_to_array = { house_member_x_array = 63 }
+	add_to_array = { house_member_y_array = 49 }
+	add_to_array = { house_member_x_array = 57 }
+	add_to_array = { house_member_y_array = 39 }
+	add_to_array = { house_member_x_array = 51 }
+	add_to_array = { house_member_y_array = 28 }
+	add_to_array = { house_member_x_array = 48 }
+	add_to_array = { house_member_y_array = 16 }
+	add_to_array = { house_member_x_array = 62 }
+	add_to_array = { house_member_y_array = 23 }
+	add_to_array = { house_member_x_array = 68 }
+	add_to_array = { house_member_y_array = 34 }
+	add_to_array = { house_member_x_array = 60 }
+	add_to_array = { house_member_y_array = 10 }
+	add_to_array = { house_member_x_array = 74 }
+	add_to_array = { house_member_y_array = 44 }
+	add_to_array = { house_member_x_array = 80 }
+	add_to_array = { house_member_y_array = 55 }
+	add_to_array = { house_member_x_array = 73 }
+	add_to_array = { house_member_y_array = 19 }
+	add_to_array = { house_member_x_array = 72 }
+	add_to_array = { house_member_y_array = 7 }
+	add_to_array = { house_member_x_array = 79 }
+	add_to_array = { house_member_y_array = 30 }
+	add_to_array = { house_member_x_array = 85 }
+	add_to_array = { house_member_y_array = 42 }
+	add_to_array = { house_member_x_array = 85 }
+	add_to_array = { house_member_y_array = 17 }
+	add_to_array = { house_member_x_array = 85 }
+	add_to_array = { house_member_y_array = 5 }
+	add_to_array = { house_member_x_array = 91 }
+	add_to_array = { house_member_y_array = 54 }
+	add_to_array = { house_member_x_array = 91 }
+	add_to_array = { house_member_y_array = 29 }
+	add_to_array = { house_member_x_array = 98 }
+	add_to_array = { house_member_y_array = 5 }
+	add_to_array = { house_member_x_array = 97 }
+	add_to_array = { house_member_y_array = 17 }
+	add_to_array = { house_member_x_array = 97 }
+	add_to_array = { house_member_y_array = 42 }
+	add_to_array = { house_member_x_array = 103 }
+	add_to_array = { house_member_y_array = 30 }
+	add_to_array = { house_member_x_array = 110 }
+	add_to_array = { house_member_y_array = 7 }
+	add_to_array = { house_member_x_array = 109 }
+	add_to_array = { house_member_y_array = 19 }
+	add_to_array = { house_member_x_array = 103 }
+	add_to_array = { house_member_y_array = 55 }
+	add_to_array = { house_member_x_array = 109 }
+	add_to_array = { house_member_y_array = 44 }
+	add_to_array = { house_member_x_array = 123 }
+	add_to_array = { house_member_y_array = 10 }
+	add_to_array = { house_member_x_array = 115 }
+	add_to_array = { house_member_y_array = 34 }
+	add_to_array = { house_member_x_array = 121 }
+	add_to_array = { house_member_y_array = 23 }
+	add_to_array = { house_member_x_array = 134 }
+	add_to_array = { house_member_y_array = 16 }
+	add_to_array = { house_member_x_array = 132 }
+	add_to_array = { house_member_y_array = 28 }
+	add_to_array = { house_member_x_array = 126 }
+	add_to_array = { house_member_y_array = 39 }
+	add_to_array = { house_member_x_array = 120 }
+	add_to_array = { house_member_y_array = 49 }
+	add_to_array = { house_member_x_array = 113 }
+	add_to_array = { house_member_y_array = 60 }
+	add_to_array = { house_member_x_array = 145 }
+	add_to_array = { house_member_y_array = 22 }
+	add_to_array = { house_member_x_array = 142 }
+	add_to_array = { house_member_y_array = 35 }
+	add_to_array = { house_member_x_array = 136 }
+	add_to_array = { house_member_y_array = 46 }
+	add_to_array = { house_member_x_array = 129 }
+	add_to_array = { house_member_y_array = 56 }
+	add_to_array = { house_member_x_array = 155 }
+	add_to_array = { house_member_y_array = 31 }
+	add_to_array = { house_member_x_array = 123 }
+	add_to_array = { house_member_y_array = 67 }
+	add_to_array = { house_member_x_array = 151 }
+	add_to_array = { house_member_y_array = 43 }
+	add_to_array = { house_member_x_array = 144 }
+	add_to_array = { house_member_y_array = 54 }
+	add_to_array = { house_member_x_array = 164 }
+	add_to_array = { house_member_y_array = 40 }
+	add_to_array = { house_member_x_array = 137 }
+	add_to_array = { house_member_y_array = 65 }
+	add_to_array = { house_member_x_array = 158 }
+	add_to_array = { house_member_y_array = 53 }
+	add_to_array = { house_member_x_array = 171 }
+	add_to_array = { house_member_y_array = 51 }
+	add_to_array = { house_member_x_array = 151 }
+	add_to_array = { house_member_y_array = 64 }
+	add_to_array = { house_member_x_array = 129 }
+	add_to_array = { house_member_y_array = 76 }
+	add_to_array = { house_member_x_array = 164 }
+	add_to_array = { house_member_y_array = 64 }
+	add_to_array = { house_member_x_array = 143 }
+	add_to_array = { house_member_y_array = 76 }
+	add_to_array = { house_member_x_array = 177 }
+	add_to_array = { house_member_y_array = 62 }
+	add_to_array = { house_member_x_array = 155 }
+	add_to_array = { house_member_y_array = 75 }
+	add_to_array = { house_member_x_array = 168 }
+	add_to_array = { house_member_y_array = 75 }
+	add_to_array = { house_member_x_array = 181 }
+	add_to_array = { house_member_y_array = 74 }
+	add_to_array = { house_member_x_array = 133 }
+	add_to_array = { house_member_y_array = 87 }
+	add_to_array = { house_member_x_array = 146 }
+	add_to_array = { house_member_y_array = 87 }
+	add_to_array = { house_member_x_array = 158 }
+	add_to_array = { house_member_y_array = 87 }
+	add_to_array = { house_member_x_array = 171 }
+	add_to_array = { house_member_y_array = 87 }
+	add_to_array = { house_member_x_array = 183 }
+	add_to_array = { house_member_y_array = 87 }
+	for_each_loop = {
+		array = house_member_x_array
+		add_to_variable = { house_member_x_array^i = 100 }
+	}
+	for_each_loop = {
+		array = house_member_y_array
+		add_to_variable = { house_member_y_array^i = 40 }
+	}
+}
+NEE_house_semicircle_2 = {
+	clear_array = house_member_x_array
+	clear_array = house_member_y_array
+	add_to_array = { house_member_x_array = 0 }
+	add_to_array = { house_member_y_array = 119 }
+	add_to_array = { house_member_x_array = 13 }
+	add_to_array = { house_member_y_array = 119 }
+	add_to_array = { house_member_x_array = 26 }
+	add_to_array = { house_member_y_array = 119 }
+	add_to_array = { house_member_x_array = 40 }
+	add_to_array = { house_member_y_array = 119 }
+	add_to_array = { house_member_x_array = 53 }
+	add_to_array = { house_member_y_array = 119 }
+	add_to_array = { house_member_x_array = 66 }
+	add_to_array = { house_member_y_array = 119 }
+	add_to_array = { house_member_x_array = 2 }
+	add_to_array = { house_member_y_array = 105 }
+	add_to_array = { house_member_x_array = 16 }
+	add_to_array = { house_member_y_array = 104 }
+	add_to_array = { house_member_x_array = 29 }
+	add_to_array = { house_member_y_array = 104 }
+	add_to_array = { house_member_x_array = 42 }
+	add_to_array = { house_member_y_array = 105 }
+	add_to_array = { house_member_x_array = 6 }
+	add_to_array = { house_member_y_array = 90 }
+	add_to_array = { house_member_x_array = 56 }
+	add_to_array = { house_member_y_array = 105 }
+	add_to_array = { house_member_x_array = 20 }
+	add_to_array = { house_member_y_array = 90 }
+	add_to_array = { house_member_x_array = 70 }
+	add_to_array = { house_member_y_array = 106 }
+	add_to_array = { house_member_x_array = 34 }
+	add_to_array = { house_member_y_array = 90 }
+	add_to_array = { house_member_x_array = 11 }
+	add_to_array = { house_member_y_array = 76 }
+	add_to_array = { house_member_x_array = 48 }
+	add_to_array = { house_member_y_array = 92 }
+	add_to_array = { house_member_x_array = 26 }
+	add_to_array = { house_member_y_array = 77 }
+	add_to_array = { house_member_x_array = 63 }
+	add_to_array = { house_member_y_array = 92 }
+	add_to_array = { house_member_x_array = 18 }
+	add_to_array = { house_member_y_array = 63 }
+	add_to_array = { house_member_x_array = 41 }
+	add_to_array = { house_member_y_array = 77 }
+	add_to_array = { house_member_x_array = 34 }
+	add_to_array = { house_member_y_array = 64 }
+	add_to_array = { house_member_x_array = 55 }
+	add_to_array = { house_member_y_array = 79 }
+	add_to_array = { house_member_x_array = 77 }
+	add_to_array = { house_member_y_array = 94 }
+	add_to_array = { house_member_x_array = 27 }
+	add_to_array = { house_member_y_array = 51 }
+	add_to_array = { house_member_x_array = 50 }
+	add_to_array = { house_member_y_array = 65 }
+	add_to_array = { house_member_x_array = 72 }
+	add_to_array = { house_member_y_array = 80 }
+	add_to_array = { house_member_x_array = 44 }
+	add_to_array = { house_member_y_array = 52 }
+	add_to_array = { house_member_x_array = 37 }
+	add_to_array = { house_member_y_array = 40 }
+	add_to_array = { house_member_x_array = 65 }
+	add_to_array = { house_member_y_array = 68 }
+	add_to_array = { house_member_x_array = 86 }
+	add_to_array = { house_member_y_array = 84 }
+	add_to_array = { house_member_x_array = 61 }
+	add_to_array = { house_member_y_array = 54 }
+	add_to_array = { house_member_x_array = 55 }
+	add_to_array = { house_member_y_array = 42 }
+	add_to_array = { house_member_x_array = 48 }
+	add_to_array = { house_member_y_array = 31 }
+	add_to_array = { house_member_x_array = 83 }
+	add_to_array = { house_member_y_array = 70 }
+	add_to_array = { house_member_x_array = 76 }
+	add_to_array = { house_member_y_array = 59 }
+	add_to_array = { house_member_x_array = 73 }
+	add_to_array = { house_member_y_array = 45 }
+	add_to_array = { house_member_x_array = 67 }
+	add_to_array = { house_member_y_array = 34 }
+	add_to_array = { house_member_x_array = 60 }
+	add_to_array = { house_member_y_array = 22 }
+	add_to_array = { house_member_x_array = 98 }
+	add_to_array = { house_member_y_array = 77 }
+	add_to_array = { house_member_x_array = 89 }
+	add_to_array = { house_member_y_array = 52 }
+	add_to_array = { house_member_x_array = 74 }
+	add_to_array = { house_member_y_array = 16 }
+	add_to_array = { house_member_x_array = 95 }
+	add_to_array = { house_member_y_array = 63 }
+	add_to_array = { house_member_x_array = 80 }
+	add_to_array = { house_member_y_array = 27 }
+	add_to_array = { house_member_x_array = 87 }
+	add_to_array = { house_member_y_array = 38 }
+	add_to_array = { house_member_x_array = 87 }
+	add_to_array = { house_member_y_array = 10 }
+	add_to_array = { house_member_x_array = 94 }
+	add_to_array = { house_member_y_array = 22 }
+	add_to_array = { house_member_x_array = 102 }
+	add_to_array = { house_member_y_array = 47 }
+	add_to_array = { house_member_x_array = 110 }
+	add_to_array = { house_member_y_array = 72 }
+	add_to_array = { house_member_x_array = 101 }
+	add_to_array = { house_member_y_array = 34 }
+	add_to_array = { house_member_x_array = 109 }
+	add_to_array = { house_member_y_array = 59 }
+	add_to_array = { house_member_x_array = 102 }
+	add_to_array = { house_member_y_array = 7 }
+	add_to_array = { house_member_x_array = 109 }
+	add_to_array = { house_member_y_array = 19 }
+	add_to_array = { house_member_x_array = 117 }
+	add_to_array = { house_member_y_array = 45 }
+	add_to_array = { house_member_x_array = 116 }
+	add_to_array = { house_member_y_array = 31 }
+	add_to_array = { house_member_x_array = 117 }
+	add_to_array = { house_member_y_array = 5 }
+	add_to_array = { house_member_x_array = 124 }
+	add_to_array = { house_member_y_array = 70 }
+	add_to_array = { house_member_x_array = 124 }
+	add_to_array = { house_member_y_array = 57 }
+	add_to_array = { house_member_x_array = 124 }
+	add_to_array = { house_member_y_array = 18 }
+	add_to_array = { house_member_x_array = 131 }
+	add_to_array = { house_member_y_array = 5 }
+	add_to_array = { house_member_x_array = 132 }
+	add_to_array = { house_member_y_array = 31 }
+	add_to_array = { house_member_x_array = 131 }
+	add_to_array = { house_member_y_array = 45 }
+	add_to_array = { house_member_x_array = 139 }
+	add_to_array = { house_member_y_array = 19 }
+	add_to_array = { house_member_x_array = 146 }
+	add_to_array = { house_member_y_array = 7 }
+	add_to_array = { house_member_x_array = 139 }
+	add_to_array = { house_member_y_array = 59 }
+	add_to_array = { house_member_x_array = 147 }
+	add_to_array = { house_member_y_array = 34 }
+	add_to_array = { house_member_x_array = 138 }
+	add_to_array = { house_member_y_array = 72 }
+	add_to_array = { house_member_x_array = 146 }
+	add_to_array = { house_member_y_array = 47 }
+	add_to_array = { house_member_x_array = 154 }
+	add_to_array = { house_member_y_array = 22 }
+	add_to_array = { house_member_x_array = 161 }
+	add_to_array = { house_member_y_array = 10 }
+	add_to_array = { house_member_x_array = 161 }
+	add_to_array = { house_member_y_array = 38 }
+	add_to_array = { house_member_x_array = 168 }
+	add_to_array = { house_member_y_array = 27 }
+	add_to_array = { house_member_x_array = 153 }
+	add_to_array = { house_member_y_array = 63 }
+	add_to_array = { house_member_x_array = 174 }
+	add_to_array = { house_member_y_array = 16 }
+	add_to_array = { house_member_x_array = 159 }
+	add_to_array = { house_member_y_array = 52 }
+	add_to_array = { house_member_x_array = 150 }
+	add_to_array = { house_member_y_array = 77 }
+	add_to_array = { house_member_x_array = 188 }
+	add_to_array = { house_member_y_array = 22 }
+	add_to_array = { house_member_x_array = 181 }
+	add_to_array = { house_member_y_array = 34 }
+	add_to_array = { house_member_x_array = 175 }
+	add_to_array = { house_member_y_array = 45 }
+	add_to_array = { house_member_x_array = 172 }
+	add_to_array = { house_member_y_array = 59 }
+	add_to_array = { house_member_x_array = 165 }
+	add_to_array = { house_member_y_array = 70 }
+	add_to_array = { house_member_x_array = 200 }
+	add_to_array = { house_member_y_array = 31 }
+	add_to_array = { house_member_x_array = 193 }
+	add_to_array = { house_member_y_array = 42 }
+	add_to_array = { house_member_x_array = 187 }
+	add_to_array = { house_member_y_array = 54 }
+	add_to_array = { house_member_x_array = 162 }
+	add_to_array = { house_member_y_array = 84 }
+	add_to_array = { house_member_x_array = 183 }
+	add_to_array = { house_member_y_array = 68 }
+	add_to_array = { house_member_x_array = 211 }
+	add_to_array = { house_member_y_array = 40 }
+	add_to_array = { house_member_x_array = 204 }
+	add_to_array = { house_member_y_array = 52 }
+	add_to_array = { house_member_x_array = 176 }
+	add_to_array = { house_member_y_array = 80 }
+	add_to_array = { house_member_x_array = 198 }
+	add_to_array = { house_member_y_array = 65 }
+	add_to_array = { house_member_x_array = 221 }
+	add_to_array = { house_member_y_array = 51 }
+	add_to_array = { house_member_x_array = 171 }
+	add_to_array = { house_member_y_array = 94 }
+	add_to_array = { house_member_x_array = 193 }
+	add_to_array = { house_member_y_array = 79 }
+	add_to_array = { house_member_x_array = 214 }
+	add_to_array = { house_member_y_array = 64 }
+	add_to_array = { house_member_x_array = 207 }
+	add_to_array = { house_member_y_array = 77 }
+	add_to_array = { house_member_x_array = 230 }
+	add_to_array = { house_member_y_array = 63 }
+	add_to_array = { house_member_x_array = 185 }
+	add_to_array = { house_member_y_array = 92 }
+	add_to_array = { house_member_x_array = 222 }
+	add_to_array = { house_member_y_array = 77 }
+	add_to_array = { house_member_x_array = 200 }
+	add_to_array = { house_member_y_array = 92 }
+	add_to_array = { house_member_x_array = 237 }
+	add_to_array = { house_member_y_array = 76 }
+	add_to_array = { house_member_x_array = 214 }
+	add_to_array = { house_member_y_array = 90 }
+	add_to_array = { house_member_x_array = 178 }
+	add_to_array = { house_member_y_array = 106 }
+	add_to_array = { house_member_x_array = 228 }
+	add_to_array = { house_member_y_array = 90 }
+	add_to_array = { house_member_x_array = 192 }
+	add_to_array = { house_member_y_array = 105 }
+	add_to_array = { house_member_x_array = 242 }
+	add_to_array = { house_member_y_array = 90 }
+	add_to_array = { house_member_x_array = 205 }
+	add_to_array = { house_member_y_array = 105 }
+	add_to_array = { house_member_x_array = 219 }
+	add_to_array = { house_member_y_array = 104 }
+	add_to_array = { house_member_x_array = 232 }
+	add_to_array = { house_member_y_array = 104 }
+	add_to_array = { house_member_x_array = 246 }
+	add_to_array = { house_member_y_array = 105 }
+	add_to_array = { house_member_x_array = 182 }
+	add_to_array = { house_member_y_array = 119 }
+	add_to_array = { house_member_x_array = 195 }
+	add_to_array = { house_member_y_array = 119 }
+	add_to_array = { house_member_x_array = 208 }
+	add_to_array = { house_member_y_array = 119 }
+	add_to_array = { house_member_x_array = 222 }
+	add_to_array = { house_member_y_array = 119 }
+	add_to_array = { house_member_x_array = 235 }
+	add_to_array = { house_member_y_array = 119 }
+	add_to_array = { house_member_x_array = 248 }
+	add_to_array = { house_member_y_array = 119 }
+	for_each_loop = {
+		array = house_member_x_array
+		add_to_variable = { house_member_x_array^i = 80 }
+	}
+	for_each_loop = {
+		array = house_member_y_array
+		add_to_variable = { house_member_y_array^i = 40 }
+	}
+}
+NEE_improve_devastated_economy = {
+	add_to_variable = { NEE_devastated_econ_var = 0.1 }
+	if = {
+		limit = {
+			check_variable = {
+				NEE_devastated_econ_var > -0.1
+			}
+		}
+		remove_dynamic_modifier = {
+			modifier = NEE_devastated_economy
+		}
+		remove_from_array = { state_idea_array = 51 }
+	}
+	else = {
+		custom_effect_tooltip = NEE_improve_state_modifier
+	}
+}
+NEE_initiate_state_ideas = {
+	#Massachusetts#
+	797 = {
+		clear_array = state_idea_array
+	}
+	#Connecticut#
+	798 = {
+		clear_array = state_idea_array
+	}
+	#Rhode Island#
+	892 = {
+		clear_array = state_idea_array
+	}
+	#Vermont#
+	799 = {
+		clear_array = state_idea_array
+	}
+	#New Hampshire#
+	800	= {
+		clear_array = state_idea_array
+	}
+	#Maine#
+	357 = {
+		clear_array = state_idea_array
+	}
+	#Upstate New York#
+	358 = {
+		clear_array = state_idea_array
+	}
+	#New York City#
+	822 = {
+		clear_array = state_idea_array
+	}
+	#New Jersey#
+	359 = {
+		clear_array = state_idea_array
+	}
+	#Eastern Pennsylvania#
+	796 = {
+		clear_array = state_idea_array
+	}
+}	

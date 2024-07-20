@@ -1,0 +1,81 @@
+NEE_defection_TEX = { 
+	icon = GFX_operations_make_resistance_contacts
+	map_icon = GFX_make_resistance_contacts_map
+	name = operation_NEE_defection_TEX
+	desc = operation_NEE_defection_TEX_desc
+	days = 120
+
+	allowed = {
+		original_tag = NEE
+	}
+	available = { 
+		network_strength = {
+			target = TEX
+			value > 50
+		}
+		NOT = {
+			ROOT = {
+				has_country_flag = NEE_defector_secured
+			}
+		}
+	}
+	visible = {
+		NOT = { has_war_with = TEX }
+		network_strength = {
+			target = TEX
+			value > 0
+		}
+		FROM = {
+			tag = TEX
+		}
+		#trigger tbd
+	}
+
+	priority = 100000
+
+	selection_target_state = {
+		state = 365
+	}
+	danger_level = 3
+	target_type = strategic_region
+
+	operatives = 1
+
+	network_strength = 50
+
+	on_start = {  # SCOPE_OPERATION
+		#event
+	}
+
+	cost_modifiers = { operation_cost operation_infiltrate_cost }
+	risk_modifiers = { operation_infiltrate_risk operation_risk }
+	outcome_modifiers = { operation_infiltrate_outcome}
+
+	outcome_potential = {
+		#event or something idk
+	}
+	risk_chance = 0.20
+	outcome_extra_chance = 0.25
+	experience = 1
+	# outcome is an effect that runs when the operation has completed
+	outcome_execute = { # SCOPE_OPERATION
+		#event or something idk
+		ROOT = {
+			set_country_flag = NEE_defector_secured
+		}
+	}
+	
+	# This is where all the separate phases are defined
+	# Each phase for an operation may have a single actual phase assigned to it, which is determined here
+	phases = { 
+		NEE_make_contact = { base = 100 }
+	}
+	phases = { 
+		NEE_secure_target = { base = 100 }
+	}
+	phases = { 
+		exfiltration_air_pickup = { base = 34 }
+		exfiltration_submarine_pickup = { base = 33 }
+		exfiltration_border = { base = 33 }
+	}
+}

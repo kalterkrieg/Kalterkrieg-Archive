@@ -1,0 +1,628 @@
+### AI strategy for CHINA
+# befriend
+# conquer
+# antagonize
+# build_ship
+# build_army
+# unit_ratio
+# build_building
+# research_tech
+# garrison
+# protect
+# influence
+# Modified by Leaf
+
+CHINA_unit_production = {
+	allowed = { 
+		OR = {
+			original_tag = CHI
+			original_tag = FNG
+		}
+	}
+	enable = {
+		country_exists = CHI
+		country_exists = FNG
+	}
+	abort_when_not_enabled = yes
+	
+	ai_strategy = {
+		type = role_ratio
+		id = garrison
+		value = 0
+	}
+
+
+	ai_strategy = {
+		type = role_ratio
+		id = paratroopers
+		value = 0
+	}
+
+	ai_strategy = {
+		type = role_ratio
+		id = mountaineers
+		value = 15
+	}
+
+	ai_strategy = {
+		type = role_ratio
+		id = marines
+		value = 0
+	}
+
+	ai_strategy = {
+		type = role_ratio
+		id = armor
+		value = -10
+	}
+
+	ai_strategy = {
+		type = role_ratio
+		id = infantry
+		value = 100
+	}
+	
+	#Air unit factors
+	ai_strategy = {
+		type = unit_ratio
+		id = fighter
+		value = 75 # From 70 to 75
+	}
+	
+	ai_strategy = {
+		type = unit_ratio
+		id = cas
+		value = 0
+	}
+	
+	ai_strategy = {
+		type = unit_ratio
+		id = tactical_bomber
+		value = 0
+	}
+	
+	ai_strategy = {
+		type = unit_ratio
+		id = strategic_bomber
+		value = 0
+	}
+	
+	ai_strategy = {
+		type = unit_ratio
+		id = naval_bomber
+		value = 0
+	}
+	
+	ai_strategy = {
+		type = unit_ratio
+		id = maritime_patrol_plane
+		value = 0
+	}
+
+	# Naval unit factors
+	ai_strategy = {
+		type = unit_ratio
+		id = capital_ship
+		value = 25 # from 15 to 25
+	}
+
+	ai_strategy = {
+		type = unit_ratio
+		id = submarine
+		value = 40 #from 50 to 40
+	}
+
+	ai_strategy = {
+		type = unit_ratio
+		id = screen_ship
+		value = 20
+	}
+
+	ai_strategy = {
+		type = unit_ratio
+		id = convoy
+		value = 20
+	}
+	
+	ai_strategy = {
+		type = equipment_production_factor
+		id = fighter
+		value = 20
+	}
+	
+	ai_strategy = {
+		type = equipment_production_factor
+		id = infantry
+		value = 35
+	}
+	
+	ai_strategy = {
+		type = equipment_production_factor
+		id = artillery
+		value = 25
+	}
+	
+	ai_strategy = {
+		type = equipment_production_factor
+		id = armor
+		value = 0
+	}
+	
+	ai_strategy = {
+		type = ignore_army_incompetence
+		value = 50
+	}
+
+	ai_strategy = {
+		type = min_wanted_supply_trucks
+		value = 300
+	}
+
+	ai_strategy = {
+		type = min_wanted_supply_trains
+		value = 25
+	}
+}
+
+CHINA_dont_waste_on_offensive_air_early = {
+	allowed = { 
+		OR = {
+			original_tag = CHI
+			original_tag = FNG
+		}
+	}
+	enable = {
+		date < 1952.1.1
+	}
+	abort = {
+		date > 1952.1.1
+	}
+
+	ai_strategy = {
+		type = equipment_variant_production_factor
+		id = tac_bomber_equipment
+		value = -100
+	}
+	
+	ai_strategy = {
+		type = equipment_variant_production_factor
+		id = strat_bomber_equipment
+		value = -100
+	}
+}
+
+CHINA_armored_production = {
+	allowed = { 
+		OR = {
+			original_tag = CHI
+			original_tag = FNG
+		}
+	}
+	enable = {
+		ai_wants_divisions > 0 #Decreasing the amount of tanks the AI wants
+	}
+	abort = {
+		ai_wants_divisions < 1 #Decreasing the amount of tanks the AI wants
+	}
+
+	ai_strategy = {
+		type = role_ratio
+		id = armor
+		value = 0
+	}
+}
+
+CHINA_highered_armored_production = {
+	allowed = { 
+		OR = {
+			original_tag = CHI
+			original_tag = FNG
+		}
+	}
+	enable = {
+		num_of_military_factories > 109
+	}
+	abort = {
+		num_of_military_factories < 110
+	}
+
+	ai_strategy = {
+		type = role_ratio
+		id = armor
+		value = 25
+	}
+}
+
+CHINA_prio_military_even_at_peace = {
+	allowed = { 
+		OR = {
+			original_tag = CHI
+			original_tag = FNG
+		}
+	}
+	enable = {
+		country_exists = CHI
+		country_exists = FNG
+	}
+
+	abort_when_not_enabled = yes
+	
+	ai_strategy = {
+		type = added_military_to_civilian_factory_ratio
+		value = 50
+	}
+	
+}
+
+CHINA_some_safer_places_to_build = {
+	allowed = { 
+		OR = {
+			original_tag = CHI
+			original_tag = FNG
+		}
+	}
+	enable = {
+		country_exists = CHI
+		country_exists = FNG
+	}
+	abort_when_not_enabled = yes
+
+	abort = {
+		date > 1953.1.1
+	}
+
+	ai_strategy = {
+        type = factory_build_score_factor
+        target =  602
+        value = 300
+    }
+
+	ai_strategy = {
+        type = factory_build_score_factor
+        target =  605
+        value = 300
+    }
+}
+
+CHINA_you_should_be_prepared_for_war = {
+	allowed = { 
+		OR = {
+			original_tag = CHI
+			original_tag = FNG
+		}
+	}
+	enable = {
+		country_exists = FNG
+		country_exists = CHI
+	}
+	abort_when_not_enabled = yes
+	
+	ai_strategy = {
+        type = force_build_armies
+        value = 1000
+    }
+}
+
+
+FNG_focus_CHI_border = {
+	allowed = { 
+		original_tag = FNG
+	}
+	enable = {
+		country_exists = CHI
+		NOT = {
+			has_war_with = FNG
+		}
+	}
+	abort_when_not_enabled = yes
+	
+
+	ai_strategy = {
+		type = front_unit_request
+		tag = CHI
+		value = 2000
+	}
+}
+
+CHI_focus_FNG_border = {
+	allowed = { 
+		original_tag = CHI
+	}
+	enable = {
+		country_exists = FNG
+		NOT = {
+			has_war_with = CHI
+
+		}
+	}
+	abort_when_not_enabled = yes
+	
+
+	ai_strategy = {
+		type = front_unit_request
+		tag = FNG
+		value = 2000
+	}
+
+	ai_strategy = {
+		type = front_unit_request
+		tag = XSM
+		value = 150
+	}
+}
+
+SIK_focus_XSM_border = {
+	allowed = { 
+		original_tag = SIK
+	}
+	enable = {
+		country_exists = XSM
+		NOT = {
+			has_war_with = XSM
+		}
+	}
+	abort_when_not_enabled = yes
+	
+
+	ai_strategy = {
+		type = front_unit_request
+		tag = XSM
+		value = 2000
+	}
+}
+
+XSM_focus_SIK_border = {
+	allowed = { 
+		original_tag = XSM
+	}
+	enable = {
+		OR = {
+			country_exists = SIK
+			country_exists = CHI
+		}
+		NOT = {
+			has_war_with = SIK
+			has_war_with = CHI
+		}
+	}
+	abort_when_not_enabled = yes
+	
+
+	ai_strategy = {
+		type = front_unit_request
+		tag = SIK
+		value = 200
+	}
+
+	ai_strategy = {
+		type = front_unit_request
+		tag = XSM
+		value = 125
+	}
+}
+
+CHI_wants_TIB_access = { #The AI tends to just send troops. Bro you're literally in the war??
+	allowed = {
+		tag = CHI
+	}
+	enable = {
+		NOT = {
+			has_military_access_to = TIB
+		}
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = diplo_action_desire
+		id = TIB
+		target = military_access
+		value = 1000
+	}
+}
+TIB_wants_CHI_access = { #The AI tends to just send troops. Bro you're literally in the war??
+	allowed = {
+		tag = TIB
+	}
+	enable = {
+		NOT = {
+			has_military_access_to = CHI
+		}
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = diplo_action_desire
+		id = CHI
+		target = military_access
+		value = 1000
+	}
+}
+CHI_TIB_war_with_FNG = { #The Tibet AI tends to just send troops.
+	allowed = {
+		OR = {
+			tag = CHI
+			tag = TIB
+		}
+	}
+	enable = {
+		has_war_with = FNG
+		IF = {
+			limit = {
+				tag = TIB
+			}
+			has_military_access_to = CHI
+		}
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = area_priority
+		id = oceania
+		value = -200
+	}
+	ai_strategy = {
+		type = area_priority
+		id = pacific
+		value = -200
+	}
+	ai_strategy = {
+		type = front_unit_request
+		tag = FNG
+		value = 200
+	}
+	ai_strategy = {
+		type = front_unit_request
+		tag = XSM
+		value = 35
+	}
+
+	ai_strategy = {
+		type = front_control
+		state_trigger = {
+			is_owned_by = FNG
+		}
+		ratio = 1
+		ordertype = front
+		execution_type = rush
+		manual_attack = yes
+	}
+}
+FNG_war_with_CHI = { #The Tibet AI tends to just send troops.
+	allowed = {
+		original_tag = FNG
+	}
+	enable = {
+		has_war_with = CHI
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = area_priority
+		id = oceania
+		value = -200
+	}
+	ai_strategy = {
+		type = area_priority
+		id = pacific
+		value = -200
+	}
+	ai_strategy = {
+		type = front_unit_request
+		tag = CHI
+		value = 200
+	}
+	ai_strategy = {
+		type = front_unit_request
+		tag = SIK
+		value = 25
+	}
+	ai_strategy = { #stop garrisonning Manchuria Bro!
+		type = ignore 
+		id = "RUS"
+		value = 5000
+	}
+	ai_strategy = {
+		type = front_control
+		state_trigger = {
+			is_owned_by = CHI
+		}
+		ratio = 0.9
+		ordertype = front
+		execution_type = rush
+		manual_attack = yes
+	}
+	ai_strategy = {
+		type = front_control
+		state_trigger = {
+			is_owned_by = TIB
+		}
+		ratio = 0.1
+		ordertype = front
+		execution_type = careful
+		manual_attack = yes
+	}
+}
+FNG_war_with_TIB = { #The Tibet AI tends to just send troops.
+	allowed = {
+		original_tag = FNG
+	}
+	enable = {
+		has_war_with = TIB
+		is_neighbor_of = TIB
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = front_unit_request
+		tag = TIB
+		value = 30
+	}
+}
+
+SIK_war_with_XSM = { #The Tibet AI tends to just send troops.
+	allowed = {
+		original_tag = SIK
+	}
+	enable = {
+		has_war_with = XSM
+		is_neighbor_of = XSM
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = front_unit_request
+		tag = XSM
+		value = 125
+	}
+}
+
+SIK_war_with_FNG = { #The Tibet AI tends to just send troops.
+	allowed = {
+		original_tag = SIK
+	}
+	enable = {
+		has_war_with = FNG
+		is_neighbor_of = FNG
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = front_unit_request
+		tag = FNG
+		value = 200
+	}
+}
+
+XSM_war_with_CHI = { #The Tibet AI tends to just send troops.
+	allowed = {
+		original_tag = XSM
+	}
+	enable = {
+		has_war_with = CHI
+		is_neighbor_of = CHI
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = front_unit_request
+		tag = CHI
+		value = 200
+	}
+}
+
+XSM_war_with_SIK = { #The Tibet AI tends to just send troops.
+	allowed = {
+		original_tag = XSM
+	}
+	enable = {
+		has_war_with = SIK
+		is_neighbor_of = SIK
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = front_unit_request
+		tag = SIK
+		value = 200
+	}
+}

@@ -1,0 +1,302 @@
+scripted_gui = {
+	ITA_chamber_of_deputies = {
+		context_type = decision_category
+		window_name = "ITA_chamber_of_deputies_container"
+		dirty = show_ITA_chamber_of_deputies
+
+		visible = {
+			always = yes
+		}
+
+        dynamic_lists = {
+			ITA_chamber_of_deputies_main_grid = {
+				array = ITA_chamber_of_deputies_main_array
+				index = ITA_chamber_of_deputies_main_index
+				change_scope = yes
+				entry_container = ITA_chamber_of_deputies_main_entry
+			}
+			ITA_chamber_of_deputies_coalition_grid = {
+				array = ITA_chamber_of_deputies_coalition_array
+				index = ITA_chamber_of_deputies_coalition_index
+				change_scope = yes
+				entry_container = ITA_chamber_of_deputies_party_entry
+			}
+			ITA_chamber_of_deputies_opposition_grid = {
+				array = ITA_chamber_of_deputies_opposition_array
+				index = ITA_chamber_of_deputies_opposition_index
+				change_scope = yes
+				entry_container = ITA_chamber_of_deputies_party_entry
+			}
+		}
+
+		properties = {
+			ITA_chamber_of_deputies_main_icon = {
+				frame = v
+				x = ITA.ITA_chamber_of_deputies_x_array^ITA_chamber_of_deputies_main_index
+				y = ITA.ITA_chamber_of_deputies_y_array^ITA_chamber_of_deputies_main_index
+			}
+			ITA_chamber_of_deputies_party_icon = {
+				frame = v
+			}
+		}
+    }
+
+	ITA_parliament = {
+		context_type = decision_category
+		window_name = "ITA_parliament_container"
+		dirty = ITA_parliament_dirty
+
+		visible = {
+			always = yes
+		}
+
+        dynamic_lists = {
+			ITA_parliament_screen_grid = {
+				array = ITA_parliament_screen_array
+				index = ITA_parliament_screen_index
+				change_scope = no
+				entry_container = "[GetITAParliamentScreen]"
+			}
+
+			ITA_chamber_of_deputies_main_grid = {
+				array = ITA_chamber_of_deputies_main_array
+				index = ITA_chamber_of_deputies_main_index
+				change_scope = yes
+				entry_container = ITA_chamber_of_deputies_main_entry
+			}
+			ITA_chamber_of_deputies_government_grid = {
+				array = ITA_chamber_of_deputies_government_array
+				index = ITA_chamber_of_deputies_government_index
+				change_scope = yes
+				entry_container = ITA_chamber_of_deputies_party_entry
+			}
+			ITA_chamber_of_deputies_opposition_grid = {
+				array = ITA_chamber_of_deputies_opposition_array
+				index = ITA_chamber_of_deputies_opposition_index
+				change_scope = yes
+				entry_container = ITA_chamber_of_deputies_party_entry
+			}
+
+			ITA_senate_main_grid = {
+				array = ITA_senate_main_array
+				index = ITA_senate_main_index
+				change_scope = yes
+				entry_container = ITA_senate_main_entry
+			}
+			ITA_senate_government_grid = {
+				array = ITA_senate_government_array
+				index = ITA_senate_government_index
+				change_scope = yes
+				entry_container = ITA_senate_party_entry
+			}
+			ITA_senate_opposition_grid = {
+				array = ITA_senate_opposition_array
+				index = ITA_senate_opposition_index
+				change_scope = yes
+				entry_container = ITA_senate_party_entry
+			}
+		}
+
+		effects = {
+			ITA_parliament_screen_change_button_click = {
+				if = {
+					limit = { has_country_flag = ITA_parliament_senate_screen }
+					clr_country_flag = ITA_parliament_senate_screen
+				}
+				else = {
+					set_country_flag = ITA_parliament_senate_screen
+				}
+				add_to_variable = { ITA_parliament_dirty = 1 }
+			}
+		}
+
+		properties = {
+			ITA_chamber_of_deputies_main_icon = {
+				frame = v
+				x = ITA.ITA_chamber_of_deputies_x_array^ITA_chamber_of_deputies_main_index
+				y = ITA.ITA_chamber_of_deputies_y_array^ITA_chamber_of_deputies_main_index
+			}
+			ITA_chamber_of_deputies_party_icon = {
+				frame = v
+			}
+
+			ITA_senate_main_icon = {
+				frame = v
+				x = ITA.ITA_senate_x_array^ITA_senate_main_index
+				y = ITA.ITA_senate_y_array^ITA_senate_main_index
+			}
+			ITA_senate_party_icon = {
+				frame = v
+			}
+		}
+
+		triggers = {
+			ITA_senate_support_visible = {
+				NOT = {
+					OR = {
+						has_country_flag = ITA_senate_sidelined
+						has_country_flag = ITA_senate_reformed
+					}
+				}
+			}
+			ITA_king_support_visible = {
+				NOT = {
+					OR = {
+						has_country_flag = ITA_senate_sidelined
+						has_country_flag = ITA_senate_reformed
+					}
+				}
+			}
+			ITA_parliament_screen_change_button_visible = {
+				has_country_flag = ITA_senate_reformed
+			}
+		}
+	}
+
+	ITA_congress_decision_ui = {
+		context_type = decision_category
+		window_name = "ITA_congress_decision_ui_window"
+
+		properties = {
+			senate_icon = {
+				frame = current_senate_icon_frame
+			}
+
+			house_icon = {
+				frame = current_house_icon_frame
+			}
+		}
+
+		triggers = {
+			box_ideology_soc_dem_visible = {
+				has_government = social_democrat
+			}
+			box_ideology_soc_lib_visible = {
+				has_government = social_liberal
+			}
+			box_ideology_soc_con_visible = {
+				has_government = social_conservative
+			}
+			box_ideology_auth_dem_visible = {
+				has_government = authoritarian_democrat
+			}
+			box_ideology_pat_aut_visible = {
+				has_government = paternal_autocrat
+			}
+			Regional_Parties_support_visible = {
+				NOT = {
+					has_country_flag = ITA_Regional_Parties_Zentrum_unification
+				}
+			}
+		}
+	}
+	
+	ITA_senate_decision_ui_window = {
+		context_type = decision_category
+		window_name = "ITA_senate_decision_ui_window"
+		triggers = {
+			ITA_senate_decision_ui_window_visible = {
+				NOT = {
+					OR = {
+						has_country_flag = ITA_senate_sidelined
+						has_country_flag = ITA_senate_reformed
+					}
+				}
+			}
+		}
+	}
+	
+	ITA_1954_gov_formation_window = {
+		context_type = decision_category
+		window_name = "ITA_1954_gov_formation_window"
+		effects = {
+			marazza_portrait_click = {
+				set_country_flag = ita_gov_negotiations_in_progress
+				set_country_flag = ita_marazza_had_mandate
+				set_country_flag = ita_marazza_has_mandate
+				activate_mission = KRG_ITA_1954_form_marazza_government
+			}
+			pella_portrait_click = {
+				set_country_flag = ita_gov_negotiations_in_progress
+				set_country_flag = ita_pella_had_mandate
+				set_country_flag = ita_pella_has_mandate
+				activate_mission = KRG_ITA_1954_form_pella_government
+			}
+			scotti_portrait_click = {
+				set_country_flag = ita_gov_negotiations_in_progress
+				set_country_flag = ita_scotti_had_mandate
+				set_country_flag = ita_scotti_has_mandate
+				activate_mission = KRG_ITA_1954_form_scotti_government
+			}
+			melis_portrait_click = {
+				set_country_flag = ita_gov_negotiations_in_progress
+				set_country_flag = ita_melis_had_mandate
+				set_country_flag = ita_melis_has_mandate
+				activate_mission = KRG_ITA_1954_form_melis_government
+			}
+		}
+		triggers = {
+			marazza_portrait_click_enabled = {
+				has_country_flag = KRG_ITA_1954_institutional_crisis_begun
+				NOT = {
+					OR = {
+						has_country_flag = ita_gov_negotiations_in_progress
+						has_country_flag = ita_marazza_had_mandate
+					}
+				}
+			}
+			pella_portrait_click_enabled = {
+				has_country_flag = KRG_ITA_1954_institutional_crisis_begun
+				NOT = {
+					OR = {
+						has_country_flag = ita_gov_negotiations_in_progress
+						has_country_flag = ita_pella_had_mandate
+					}
+				}
+			}
+			scotti_portrait_click_enabled = {
+				has_country_flag = KRG_ITA_1954_institutional_crisis_begun
+				NOT = {
+					OR = {
+						has_country_flag = ita_gov_negotiations_in_progress
+						has_country_flag = ita_scotti_had_mandate
+						has_country_flag = ITA_farmers_collapsed
+					}
+				}
+			}
+			melis_portrait_click_enabled = {
+				has_country_flag = KRG_ITA_1954_institutional_crisis_begun
+				NOT = {
+					OR = {
+						has_country_flag = ita_gov_negotiations_in_progress
+						has_country_flag = ita_melis_had_mandate
+					}
+				}
+			}
+		}
+	}
+	
+	ITA_region_gui = {
+		context_type = selected_state_context
+		parent_window_token = selected_state_view
+		window_name = "ITA_region_container"
+
+		visible = { 
+			always = no #temp
+			ROOT = { original_tag = ITA }
+			is_owned_by = ITA
+			has_state_flag = ITA_region_has_autonomy
+		}
+
+		properties = {
+			ITA_governor = {
+		        image = "[ITA_GFX_region_governor]"
+			}
+		}
+	}
+
+	ITA_impossible_coalition_gui = {
+		context_type = decision_category
+		window_name = "ITA_impossible_coalition_ui_window"
+	}
+}

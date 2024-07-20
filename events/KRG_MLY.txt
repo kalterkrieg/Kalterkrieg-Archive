@@ -1,0 +1,563 @@
+add_namespace = krg_mly
+add_namespace = krg_mly_news
+
+country_event = { #National Convention
+	id = krg_mly.0
+	title = krg_mly.0.t
+	desc = krg_mly.0.d
+	#picture = ?
+	is_triggered_only = yes
+
+	option = { 
+		name = krg_mly.0.a
+		country_event = {
+			id = krg_mly.1
+			days = 6
+		}
+	}
+}
+
+country_event = { #Nationality Question
+	id = krg_mly.1
+	title = krg_mly.1.t
+	desc = krg_mly.1.d
+	#picture = ?
+	is_triggered_only = yes
+
+	option = { 
+		name = krg_mly.1.a #Asia for Asians, Malaya for Malays
+		set_country_flag = MLY_malay_primacy
+		country_event = {
+			id = krg_mly.2
+			days = 6
+		}
+	}
+
+	# option = { 
+	# 	name = krg_mly.1.b #Pluralism (not 0.1)
+	#   set_country_flag = MLY_multiethnic
+	# 	country_event = {
+	# 		id = krg_mly.2
+	# 		days = 6
+	# 	}
+	# }
+}
+
+country_event = { #Configuration Question
+	id = krg_mly.2
+	title = krg_mly.2.t
+	desc = krg_mly.2.d
+	#picture = ?
+	is_triggered_only = yes
+
+	option = { #Federalism
+		trigger = {
+			has_country_flag = MLY_malay_primacy
+		}
+		name = krg_mly.2.a 
+		set_country_flag = MLY_federation
+		country_event = {
+			id = krg_mly.3
+			days = 6
+		}
+	}
+
+
+	# option = { 
+	# 	name = krg_mly.2.b #Confederation (not 0.1)
+	#	set_country_flag = MLY_confederation
+	# 	country_event = {
+	# 		id = krg_mly.3
+	# 		days = 6
+	# 	}
+	# }
+
+	option = { 
+		name = krg_mly.2.c #Unitary/Centralist (not 0.1)
+	 	trigger = {
+	 		has_country_flag = MLY_multiethnic
+	 	}
+		set_country_flag = MLY_centralist
+	 	country_event = {
+	 		id = krg_mly.3
+	 		days = 6
+	 	}
+	}
+}
+
+country_event = { #Head of State Question
+	id = krg_mly.3
+	title = krg_mly.3.t
+	desc = krg_mly.3.d
+	#picture = ?
+	is_triggered_only = yes
+
+	option = { #Rotary System
+		trigger = {
+			OR = { 
+				has_country_flag = MLY_federation
+				has_country_flag = MLY_confederation
+			}	
+		}
+		name = krg_mly.3.a 
+		country_event = {
+			id = krg_mly.4
+			days = 6
+		}
+	}
+
+	option = { 
+		name = krg_mly.3.b #Elect A President (not 0.1)
+		trigger = {
+			OR = {
+				has_country_flag = MLY_centralist
+				has_country_flag = MLY_confederation
+			}
+		}
+		country_event = {
+			id = krg_mly.
+			days = 6
+		}
+	}
+}
+
+country_event = { #A Constitutional Monarchy
+	id = krg_mly.4
+	title = krg_mly.4.t
+	desc = krg_mly.4.d
+	#picture = ?
+	is_triggered_only = yes
+
+	option = { #The Natural Outcome
+		name = krg_mly.4.a 
+		set_country_flag = MLY_monarchy
+		country_event = {
+			id = krg_mly.5
+			days = 6
+		}
+	}
+}
+
+country_event = { #An Empowered Executive
+	id = krg_mly.5
+	title = krg_mly.5.t
+	desc = krg_mly.5.d
+	#picture = ?
+	is_triggered_only = yes
+
+	option = { #The Voice of the Ruler is Relevant
+		name = krg_mly.5.a 
+		country_event = {
+			id = krg_mly.6
+			days = 6
+		}
+		add_stability = 0.05
+	}
+}
+
+country_event = { #Lese Majeste
+	id = krg_mly.6
+	title = krg_mly.6.t
+	desc = krg_mly.6.d
+	#picture = ?
+	is_triggered_only = yes
+
+	option = { #Protect our Leaders and in turn be protected
+		name = krg_mly.6.a 
+		country_event = {
+			id = krg_mly.7
+			days = 6
+		}
+		add_political_power = 50
+	}
+}
+
+country_event = { #Finalising the Constitution
+	id = krg_mly.7
+	title = krg_mly.7.t
+	desc = krg_mly.7.d
+	#picture = ?
+	is_triggered_only = yes
+
+	option = { #We will hold the 1949 Durbar to celebrate!
+		trigger = {
+			has_country_flag = MLY_monarchy
+		}
+		name = krg_mly.7.a 
+		country_event = {
+			id = krg_mly.8
+			days = 80
+		}
+	}
+	option = { #We we best select a president
+		trigger = {
+			has_country_flag = MLY_republic
+		}
+		name = krg_mly.7.b 
+		country_event = {
+			id = krg_mly.13
+			days = 80
+		}
+	}
+}
+
+country_event = { #The 1949 Durbar
+	id = krg_mly.8
+	title = krg_mly.8.t
+	desc = krg_mly.8.d
+	#picture = ?
+	is_triggered_only = yes
+
+	option = { 
+		name = krg_mly.8.a #now to elect a parliament
+		country_event = {
+			id = krg_mly.9
+			days = 270
+		}
+	}
+}
+
+
+country_event = { #The 1950 election
+	id = krg_mly.9
+	title = krg_mly.9.t
+	desc = krg_mly.9.d
+	#picture = ?
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+			JAP = {
+				country_event = {
+					id = krg_mly.10
+					hours = 2
+				}
+			}
+		}
+	}
+
+	option = { 
+		name = krg_mly.9.a #PRM victory!
+		trigger = {
+			has_country_flag = MLY_republic
+			has_country_flag = MLY_centralist
+		}
+		ai_chance  = {
+			base = 100
+		}
+		add_popularity = {
+			ideology = social_democrat
+			popularity = 0.15
+		}
+		meta_effect = {
+			text = {
+				set_politics = {
+					ruling_party = social_democrat
+					last_election = "[CURRENT_DATE]"
+					election_frequency = 48
+					elections_allowed = yes
+				}
+			}
+			CURRENT_DATE = "[GetDate]"
+		}
+		coal_add_rad_soc = yes
+	}
+
+	option = { 
+		name = krg_mly.9.b #PPP victory!
+		trigger = {
+			has_country_flag = MLY_multiethnic
+			has_country_flag = MLY_centralist
+		}
+		ai_chance  = {
+			base = 100
+		}
+		add_popularity = {
+			ideology = revolutionary_republican
+			popularity = 0.1
+		}
+		add_popularity = {
+			ideology = social_liberal
+			popularity = 0.05
+		}
+		meta_effect = {
+			text = {
+				set_politics = {
+					ruling_party = revolutionary_republican
+					last_election = "[CURRENT_DATE]"
+					election_frequency = 48
+					elections_allowed = yes
+				}
+			}
+			CURRENT_DATE = "[GetDate]"
+		}
+		coal_add_soc_lib = yes
+	}
+
+	# option = { 
+	# 	name = krg_mly.9.c #UMNO-PPP coalition!
+	#	ai_chance  = {
+	#		base = 50
+	#	}
+	# 	add_popularity = {
+	# 		ideology = market_liberal
+	# 		popularity = 0.1
+	# 	}
+	# 	add_popularity = {
+	# 		ideology = social_liberal
+	# 		popularity = 0.05
+	# 	}
+		# meta_effect = {
+		# 	text = {
+		# 		set_politics = {
+		# 			ruling_party = market_liberal
+		# 			last_election = "[CURRENT_DATE]"
+		# 			election_frequency = 48
+		# 			elections_allowed = yes
+		# 		}
+		# 	}
+		# 	CURRENT_DATE = "[GetDate]"
+		# }
+	# 	coal_add_soc_lib = yes
+	# }
+	
+	option = { 
+		name = krg_mly.9.v #Alliance victory!
+		trigger = {
+			has_country_flag = MLY_alliance #TODO, this needs an event to set it somewhere
+		}
+		ai_chance  = {
+			base = 200
+		}
+		add_popularity = {
+			ideology = social_conservative
+			popularity = 0.15
+		}
+		meta_effect = {
+			text = {
+				set_politics = {
+					ruling_party = social_conservative
+					last_election = "[CURRENT_DATE]"
+					election_frequency = 48
+					elections_allowed = yes
+				}
+			}
+			CURRENT_DATE = "[GetDate]"
+		}
+	}
+
+	option = { 
+		name = krg_mly.9.e #UMNO victory!
+		trigger = {
+			has_country_flag = MLY_malay_primacy
+		}
+		ai_chance  = {
+			base = 100
+		}
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = 0.05
+		}
+		meta_effect = {
+			text = {
+				set_politics = {
+					ruling_party = authoritarian_democrat
+					last_election = "[CURRENT_DATE]"
+					election_frequency = 48
+					elections_allowed = yes
+				}
+			}
+			CURRENT_DATE = "[GetDate]"
+		}
+	}
+}
+
+country_event = { #Japanese 'Handover'
+	id = krg_mly.10
+	title = krg_mly.10.t
+	desc = krg_mly.10.d
+	#picture = ?
+	is_triggered_only = yes
+
+	option = { #direct military control is unneeded
+		ai_chance  = {
+			base = 100
+		}
+		name = krg_mly.10.a
+		MLY = {
+			if = {
+				limit = {
+					has_country_flag = MLY_federation
+				}
+				set_cosmetic_tag = MLY_federation_cos
+			}
+			else_if = {
+				limit = {
+					has_country_flag = MLY_confederation
+				}
+				set_cosmetic_tag = MLY_confederation_cos
+			}
+			else = {
+				set_cosmetic_tag = MLY_centralist_cos
+			}
+			
+			if = {
+				limit = {
+					has_country_flag = MLY_republic
+					has_country_flag = MLY_presidential_system
+				}
+				swap_ideas = {
+					remove_idea = KRG_military_occupation
+					add_idea = KRG_presidential_democracy
+				}
+			}
+			else = {
+				swap_ideas = {
+					remove_idea = KRG_military_occupation
+					add_idea = KRG_parliamentary_democracy
+				}
+			}
+			news_event = {
+				id = krg_mly_news.0
+				hours = 4
+			}
+		}
+	}
+
+	option = { #cute but actually the military wants to annex it into japan so no.
+		ai_chance  = {
+			base = 0
+		}
+		name = krg_mly.10.b
+		983 = {
+			remove_core_of = MLY
+			add_claim_by = MLY
+			start_resistance = yes
+			set_resistance = 30
+		}
+		985 = {
+			remove_core_of = MLY
+			add_claim_by = MLY
+			start_resistance = yes
+			set_resistance = 30
+		}
+		986 = {
+			remove_core_of = MLY
+			add_claim_by = MLY
+			start_resistance = yes
+			set_resistance = 30
+		}
+		987 = {
+			remove_core_of = MLY
+			add_claim_by = MLY
+			start_resistance = yes
+			set_resistance = 30
+		}
+		MLY = {
+			news_event = {
+				id = krg_mly_news.1
+				hours = 4
+			}
+			meta_effect = {
+				text = {
+					set_politics = {
+						ruling_party = paternal_autocrat
+						last_election = "[CURRENT_DATE]"
+						election_frequency = 48
+						elections_allowed = no
+					}
+				}
+				CURRENT_DATE = "[GetDate]"
+			}
+		}
+	}
+}
+
+country_event = { #A President and so a Republic?
+	id = krg_mly.11
+	title = krg_mly.11.t
+	desc = krg_mly.11.d
+	#picture = ?
+	is_triggered_only = yes
+
+	option = { #The Natural Outcome
+		name = krg_mly.11.a 
+		set_country_flag = MLY_republic
+		country_event = {
+			id = krg_mly.12
+			days = 6
+		}
+	}
+}
+
+country_event = { #Who will lead
+	id = krg_mly.12
+	title = krg_mly.12.t
+	desc = krg_mly.12.d
+	#picture = ?
+	is_triggered_only = yes
+
+	option = { #Empowered Legislature
+		name = krg_mly.12.a 
+		country_event = {
+			id = krg_mly.7
+			days = 6
+		}
+	}
+	option = { #Empowered President
+		name = krg_mly.12.b 
+		country_event = {
+			id = krg_mly.7
+			days = 6
+		}
+		set_country_flag = MLY_presidential_system
+	}
+}
+
+country_event = { #Provisional President
+	id = krg_mly.13
+	title = krg_mly.13.t
+	desc = krg_mly.13.d
+	#picture = ?
+	is_triggered_only = yes
+
+	option = { # Provisional President Placeholder selected
+		name = krg_mly.13.a 
+		country_event = {
+			id = krg_mly.9
+			days = 270
+		}
+	}
+}
+
+news_event = { #Japanese Handover of Malaya
+	id = krg_mly_news.0
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event krg_mly_news.0"
+	}
+	title = krg_mly_news.0.t
+	desc = krg_mly_news.0.d
+	major = yes
+	is_triggered_only = yes
+	picture = GFX_ne_MLY_handover
+
+	option = {
+		name = krg_mly_news.0.a
+	}
+}
+
+news_event = { #Unrest After Failure to Handover
+	id = krg_mly_news.1
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event krg_mly_news.1"
+	}
+	title = krg_mly_news.1.t
+	desc = krg_mly_news.1.d
+	major = yes
+	is_triggered_only = yes
+	picture = GFX_ne_MLY_military
+
+	option = {
+		name = krg_mly_news.1.a
+	}
+}

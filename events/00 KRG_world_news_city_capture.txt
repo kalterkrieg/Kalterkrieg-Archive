@@ -1,0 +1,4329 @@
+###########################
+# City Capture Events
+###########################
+#
+# If you want to add more city capture events:
+#
+# First add an entry for the city in KR_on_actions_city_capture in the common\on_actions folder
+#
+# Then add a news event here - you can copy worldnewscitycapture.251 for the most basic version
+# which provides a separate comment for the owner (old_controller), the conqueror (new_controller), and then everyone else
+#
+
+add_namespace = worldnewscitycapture
+
+# The Fall of London
+news_event = {
+	id = worldnewscitycapture.251
+	immediate = { log = "[GetDateText]: [Root.GetName]: event worldnewscitycapture.251 FROM = [From.GetName]" }
+	title = worldnewscitycapture.251.t
+	desc = {
+		text = worldnewscitycapture.251.d.generic
+		trigger = {
+			event_target:new_controller = {
+				NOT = {
+					tag = UOB
+					tag = MXF
+				}
+			}
+		}
+	}
+	desc = {
+		text = worldnewscitycapture.251.d.uob
+		trigger = {
+			event_target:new_controller = {
+				OR = {
+					tag = UOB
+					tag = MXF
+				}
+			}
+		}
+	}
+	picture = GFX_news_event_capture_london
+
+	major = yes
+	is_triggered_only = yes
+
+	trigger = {
+		wants_world_news = yes
+	}
+
+	immediate = {
+		126 = {
+			set_state_flag = state_has_fallen
+			owner = { save_event_target_as = old_controller }
+			controller = { save_event_target_as = new_controller }
+		}
+	}
+
+	option = { #This is only a temporary setback
+		name = worldnewscitycapture.251.a
+		trigger = {
+			tag = event_target:old_controller
+			event_target:new_controller = {
+				NOT = {
+					tag = UOB
+					tag = MXF
+				}
+			}
+		}
+	}
+
+	option = { #This is the beginning of the end
+		name = worldnewscitycapture.251.b
+		trigger = {
+			tag = event_target:new_controller
+			NOT = {
+				tag = UOB
+				tag = MXF
+			}
+		}
+	}
+
+	option = { #The Sun sets on the British
+		name = worldnewscitycapture.251.c
+		trigger = {
+			NOT = {
+				tag = event_target:old_controller
+				tag = event_target:new_controller
+				event_target:new_controller = {
+					OR = {
+						tag = UOB
+						tag = MXF
+					}
+				}
+			}
+		}
+	}
+	
+	option = { #A nightmare reborn.
+		name = worldnewscitycapture.251.a.uob
+		trigger = {
+			OR ={
+				tag = event_target:old_controller
+				tag = ENT
+				tag = GER
+			}
+			event_target:new_controller = {
+				OR = {
+					tag = UOB
+					tag = MXF
+				}
+			}
+		}
+	}
+	
+	option = { #We shall keep the red flag flying here
+		name = worldnewscitycapture.251.b.uob
+		trigger = {
+			tag = event_target:new_controller
+			event_target:new_controller = {
+				OR = {
+					tag = UOB
+					tag = MXF
+				}
+			}
+		}
+	}
+	
+	option = { #History repeats itself.
+		name = worldnewscitycapture.251.c.uob
+		trigger = {
+			NOT = {
+				tag = event_target:old_controller
+				tag = event_target:new_controller
+				tag = ENT
+				tag = GER
+			}
+			event_target:new_controller = {
+				OR = {
+					tag = UOB
+					tag = MXF
+				}
+			}
+		}
+	}
+}
+
+# The Fall of Paris
+news_event = {
+	id = worldnewscitycapture.252
+	immediate = { log = "[GetDateText]: [Root.GetName]: event worldnewscitycapture.252 FROM = [From.GetName]" }
+	title = worldnewscitycapture.252.t
+	picture = GFX_news_event_capture_paris
+
+	desc = {
+		text = worldnewscitycapture.252.d.germany
+		trigger = {
+			event_target:new_controller = {
+				tag = GER
+			}
+		}
+	}
+	desc = {
+		text = worldnewscitycapture.252.d
+		trigger = {
+			event_target:new_controller = {
+				NOT = { 
+					tag = ENT
+					tag = NFA
+					tag = GER
+				}
+			}
+		}
+	}
+	desc = {
+		text = worldnewscitycapture.252.d.nfa
+		trigger = {
+			event_target:new_controller = {
+				OR = { 
+					tag = ENT
+					tag = NFA
+				}
+			}
+		}
+	}
+	
+	major = yes
+	is_triggered_only = yes
+
+	trigger = {
+		wants_world_news = yes
+	}
+
+	immediate = {
+		735 = {
+			set_state_flag = state_has_fallen
+			owner = { save_event_target_as = old_controller }
+			controller = { save_event_target_as = new_controller }
+		}
+	}
+
+	option = { #We did not come this far to lose to the Germans again.
+		name = worldnewscitycapture.252.a.germany
+		trigger = {
+			tag = event_target:old_controller
+			event_target:new_controller = {
+				tag = GER
+			}
+		}
+	}
+	
+	option = { #This is not the end! We shall return.
+		name = worldnewscitycapture.252.a
+		trigger = {
+			tag = event_target:old_controller
+			event_target:new_controller = {
+				NOT = {
+					tag = GER
+				}
+			}
+		}
+	}
+	
+	option = { #Third Time's the Charm.
+		name = worldnewscitycapture.252.b.germany
+		trigger = {
+			tag = event_target:new_controller
+			event_target:new_controller = {
+				tag = GER
+			}
+		}
+	}
+	
+	option = { #At last, Paris is finally free.
+		name = worldnewscitycapture.252.b.nfa
+		trigger = {
+			tag = event_target:new_controller
+			event_target:new_controller = {
+				OR = {
+					tag = NFA
+					tag = ENT
+				}
+			}
+		}
+	}
+
+	option = { #Our victory over France is now all but assured
+		name = worldnewscitycapture.252.b
+		trigger = {
+			tag = event_target:new_controller
+			event_target:new_controller = {
+				NOT = {
+					tag = GER
+					tag = NFA
+					tag = ENT
+				}
+			}
+		}
+	}
+
+	option = { #The Third Weltkrieg seems similar to the first...and the second.
+		name = worldnewscitycapture.252.c.germany
+		trigger = {
+			event_target:new_controller = {
+				tag = GER
+			}
+			NOT = {
+				tag = event_target:new_controller
+				tag = event_target:old_controller
+			}
+		}
+	}
+
+	option = { #It seems the fall of France is now all but assured
+		name = worldnewscitycapture.252.c
+		trigger = {
+			event_target:new_controller = {
+				NOT = {
+					tag = GER
+				}
+			}
+			NOT = {
+				tag = event_target:new_controller
+				tag = event_target:old_controller
+			}
+		}
+	}
+}
+
+# The Fall of Berlin
+news_event = {
+	id = worldnewscitycapture.253
+	immediate = { log = "[GetDateText]: [Root.GetName]: event worldnewscitycapture.253 FROM = [From.GetName]" }
+	title = worldnewscitycapture.253.t
+	picture = GFX_news_event_german_reichstag_ruins
+
+	desc = {
+		text = worldnewscitycapture.253.d.france
+		trigger = {
+			event_target:new_controller = {
+				is_french_tag = yes
+			}
+		}
+	}
+	
+	desc = {
+		text = worldnewscitycapture.253.d.other
+		trigger = {
+			event_target:new_controller = {
+				NOT = {
+					is_french_tag = yes
+				}
+			}
+		}
+	}
+
+	major = yes
+	is_triggered_only = yes
+
+	trigger = {
+		wants_world_news = yes
+	}
+
+	immediate = {
+		64 = {
+			set_state_flag = state_has_fallen
+			owner = { save_event_target_as = old_controller }
+			controller = { save_event_target_as = new_controller }
+		}
+	}
+
+	option = { #Berlin, in the hands of the French? How is it possible?
+		name = worldnewscitycapture.253.a.france
+		trigger = {
+			tag = event_target:old_controller
+			event_target:new_controller = {
+				is_french_tag = yes
+			}
+		}
+	}
+
+	option = { #This cannot be! How can Berlin have fallen?!
+		name = worldnewscitycapture.253.a
+		trigger = {
+			tag = event_target:old_controller
+			event_target:new_controller = {
+				NOT = {
+					is_french_tag = yes
+				}
+			}
+		}
+	}
+
+	option = { #Decades of humiliation, finally avenged.
+		name = worldnewscitycapture.253.b.france
+		trigger = {
+			tag = event_target:new_controller
+			event_target:new_controller = {
+				is_french_tag = yes
+			}
+		}
+	}
+	
+	option = { #Russia shall be Europe's new master.
+		name = worldnewscitycapture.253.b.russia
+		trigger = {
+			tag = event_target:new_controller
+			event_target:new_controller = {
+				tag = RUS
+			}
+		}
+	}
+
+	option = { #It is all but over for the Germans now
+		name = worldnewscitycapture.253.b
+		trigger = {
+			tag = event_target:new_controller
+			event_target:new_controller = {
+				NOT = {
+					is_french_tag = yes
+					tag = RUS
+				}
+			}
+		}
+	}
+
+	option = { #A great victory indeed
+		name = worldnewscitycapture.253.c
+		trigger = {
+			NOT = {
+				tag = event_target:old_controller
+				tag = event_target:new_controller
+			}
+		}
+	}
+}
+
+# The Fall of Madrid
+news_event = {
+	id = worldnewscitycapture.254
+	immediate = { log = "[GetDateText]: [Root.GetName]: event worldnewscitycapture.254 FROM = [From.GetName]" }
+	title = worldnewscitycapture.254.t
+	desc = worldnewscitycapture.254.d
+	picture = GFX_news_event_capture_madrid
+
+	major = yes
+	is_triggered_only = yes
+
+	trigger = {
+		wants_world_news = yes
+	}
+
+	immediate = {
+		41 = {
+			set_state_flag = state_has_fallen
+			owner = { save_event_target_as = old_controller }
+			controller = { save_event_target_as = new_controller }
+		}
+	}
+
+	option = { #Without Madrid we are lost
+		name = worldnewscitycapture.254.a
+		trigger = {
+			tag = event_target:old_controller
+		}
+	}
+
+	option = { #Madrid is finally ours!
+		name = worldnewscitycapture.254.b
+		trigger = {
+			tag = event_target:new_controller
+		}
+	}
+
+	option = { #So falls the heart of Spain
+		name = worldnewscitycapture.254.c
+		trigger = {
+			NOT = {
+				tag = event_target:old_controller
+				tag = event_target:new_controller
+			}
+		}
+	}
+}
+
+# The Fall of Barcelona
+news_event = {
+	id = worldnewscitycapture.255
+	immediate = { log = "[GetDateText]: [Root.GetName]: event worldnewscitycapture.255 FROM = [From.GetName]" }
+	title = worldnewscitycapture.255.t
+	desc = worldnewscitycapture.255.d
+	picture = GFX_news_event_capture_barcelona
+
+	major = yes
+	is_triggered_only = yes
+
+	trigger = {
+		wants_world_news = yes
+	}
+
+	show_major = {
+		regional_europe_news = yes
+	}
+
+	immediate = {
+		165 = {
+			set_state_flag = state_has_fallen
+			owner = { save_event_target_as = old_controller }
+			controller = { save_event_target_as = new_controller }
+		}
+	}
+
+	option = { #This is not good...
+		name = worldnewscitycapture.255.a
+		trigger = {
+			tag = event_target:old_controller
+		}
+	}
+
+	option = { #Barcelona is finally ours!
+		name = worldnewscitycapture.255.b
+		trigger = {
+			tag = event_target:new_controller
+		}
+	}
+
+	option = { #So falls the heart of old Catalan
+		name = worldnewscitycapture.255.c
+		trigger = {
+			NOT = {
+				tag = event_target:old_controller
+				tag = event_target:new_controller
+			}
+		}
+	}
+}
+
+# The Fall of Gibraltar
+news_event = {
+	id = worldnewscitycapture.257
+	immediate = { log = "[GetDateText]: [Root.GetName]: event worldnewscitycapture.257 FROM = [From.GetName]" }
+	title = worldnewscitycapture.257.t
+	desc = worldnewscitycapture.257.d
+	picture = GFX_news_event_capture_gibraltar
+
+	major = yes
+	is_triggered_only = yes
+
+	trigger = {
+		wants_world_news = yes
+	}
+
+	show_major = {
+		regional_europe_news = yes
+	}
+
+	immediate = {
+		118 = {
+			set_state_flag = state_has_fallen
+			owner = { save_event_target_as = old_controller }
+			controller = { save_event_target_as = new_controller }
+		}
+	}
+
+	option = { #Now they control access to the Mediterranean...
+		name = worldnewscitycapture.257.a
+		trigger = {
+			tag = event_target:old_controller
+		}
+	}
+
+	option = { #The gateway to the Mediterranean is ours!
+		name = worldnewscitycapture.257.b
+		trigger = {
+			tag = event_target:new_controller
+		}
+	}
+
+	option = { #The mighty Rock of Gibraltar has fallen?
+		name = worldnewscitycapture.257.c
+		trigger = {
+			NOT = {
+				tag = event_target:old_controller
+				tag = event_target:new_controller
+			}
+		}
+	}
+}
+
+# The Fall of Lisbon
+news_event = {
+	id = worldnewscitycapture.258
+	immediate = { log = "[GetDateText]: [Root.GetName]: event worldnewscitycapture.258 FROM = [From.GetName]" }
+	title = worldnewscitycapture.258.t
+	desc = worldnewscitycapture.258.d
+	picture = GFX_news_event_city_captured
+
+	major = yes
+	is_triggered_only = yes
+
+	trigger = {
+		wants_world_news = yes
+	}
+
+	show_major = {
+		regional_europe_news = yes
+	}
+
+	immediate = {
+		112 = {
+			set_state_flag = state_has_fallen
+			owner = { save_event_target_as = old_controller }
+			controller = { save_event_target_as = new_controller }
+		}
+	}
+
+	option = { #We shall fight to the last!
+		name = worldnewscitycapture.258.a
+		trigger = {
+			tag = event_target:old_controller
+		}
+	}
+
+	option = { #The gateway to the Mediterranean is ours!
+		name = worldnewscitycapture.258.b
+		trigger = {
+			tag = event_target:new_controller
+		}
+	}
+
+	option = { #The mighty Rock of Gibraltar has fallen?
+		name = worldnewscitycapture.258.c
+		trigger = {
+			NOT = {
+				tag = event_target:old_controller
+				tag = event_target:new_controller
+			}
+		}
+	}
+}
+
+# The Fall of Chicago (ACW only)
+news_event = {
+	id = worldnewscitycapture.259
+	immediate = { log = "[GetDateText]: [Root.GetName]: event worldnewscitycapture.259 FROM = [From.GetName]" }
+	title = worldnewscitycapture.259.t
+	picture = GFX_news_event_capture_chicago
+
+	desc = worldnewscitycapture.259.d
+
+	major = yes
+	is_triggered_only = yes
+
+	trigger = {
+		wants_world_news = yes
+	}
+
+	immediate = {
+		395 = {
+			set_state_flag = state_has_fallen
+			owner = { save_event_target_as = old_controller }
+			controller = { save_event_target_as = new_controller }
+		}
+	}
+
+	option = { #The fight is not over yet!
+		name = worldnewscitycapture.259.a
+		trigger = {
+			tag = event_target:old_controller
+		}
+	}
+
+	option = { #The Windy City is firmly in our grasp.
+		name = worldnewscitycapture.259.b
+		trigger = {
+			tag = event_target:new_controller
+		}
+	}
+
+	option = { #Perhaps the war will soon be over?
+		name = worldnewscitycapture.259.c
+		trigger = {
+			NOT = {
+				tag = event_target:old_controller
+				tag = event_target:new_controller
+			}
+		}
+	}
+}
+
+# The Fall of New Orleans (ACW only)
+news_event = {
+	id = worldnewscitycapture.260
+	immediate = { log = "[GetDateText]: [Root.GetName]: event worldnewscitycapture.260 FROM = [From.GetName]" }
+	title = worldnewscitycapture.260.t
+	picture = GFX_news_event_capture_atlanta
+	desc = worldnewscitycapture.260.d
+
+	major = yes
+	is_triggered_only = yes
+
+	trigger = {
+		wants_world_news = yes
+	}
+
+	immediate = {
+		371 = {
+			set_state_flag = state_has_fallen
+			owner = { save_event_target_as = old_controller }
+			controller = { save_event_target_as = new_controller }
+		}
+	}
+
+	option = { #The fight is not over yet!
+		name = worldnewscitycapture.260.a
+		trigger = {
+			tag = event_target:old_controller
+			NOT = {
+				tag = TEX
+			}
+		}
+	}
+	
+	option = { #The Kingfish's legacy cannot end like this!
+		name = worldnewscitycapture.260.a.tex
+		trigger = {
+				tag = event_target:old_controller
+				tag = TEX
+		}
+	}
+
+	option = { #The Jewel of the South is ours!
+		name = worldnewscitycapture.260.b
+		trigger = {
+			tag = event_target:new_controller
+			event_target:new_controller = {
+				NOT ={
+					tag = CAL
+					tag = NEE
+					tag = GLG
+					tag = CAN
+				}
+			}
+		}
+	}
+
+	option = { #Liberty finally comes to the South.
+		name = worldnewscitycapture.260.b.tex
+		trigger = {
+			tag = event_target:new_controller
+			event_target:new_controller = {
+				OR ={
+					tag = CAL
+					tag = NEE
+					tag = GLG
+					tag = CAN
+				}
+			}
+		}
+	}
+
+	option = { #Perhaps the war will soon be over?
+		name = worldnewscitycapture.260.c
+		trigger = {
+			NOT = {
+				tag = event_target:old_controller
+				tag = event_target:new_controller
+			}
+		}
+	}
+}
+
+# The Fall of Denver (ACW only)
+news_event = {
+	id = worldnewscitycapture.261
+	immediate = { log = "[GetDateText]: [Root.GetName]: event worldnewscitycapture.261 FROM = [From.GetName]" }
+	title = worldnewscitycapture.261.t
+	picture = GFX_news_event_capture_denver
+
+	desc = {
+		text = worldnewscitycapture.261.d.psa
+		trigger = {
+			event_target:new_controller = {
+				tag = CAL
+			}
+		}
+	}
+	desc = {
+		text = worldnewscitycapture.261.d.other
+		trigger = {
+			event_target:new_controller = {
+				NOT = {
+					tag = CAL
+				}
+			}
+		}
+	}
+
+	major = yes
+	is_triggered_only = yes
+
+	trigger = {
+		wants_world_news = yes
+	}
+
+	immediate = {
+		382 = {
+			set_state_flag = state_has_fallen
+			owner = { save_event_target_as = old_controller }
+			controller = { save_event_target_as = new_controller }
+		}
+	}
+
+	option = { #The fight is far from over!
+		name = worldnewscitycapture.261.a
+		trigger = {
+			tag = event_target:old_controller
+		}
+	}
+
+	option = { #With Denver captured the Rockies are ours!
+		name = worldnewscitycapture.261.b
+		trigger = {
+			tag = event_target:new_controller
+			NOT = { tag = CAL }
+		}
+	}
+	
+	option = { #The first step in a long reclamation.
+		name = worldnewscitycapture.261.b.psa
+		trigger = {
+			tag = event_target:new_controller
+			tag = CAL
+		}
+	}
+
+	option = { #Control of the West slips from the AUS.
+		name = worldnewscitycapture.261.c
+		trigger = {
+			NOT = {
+				tag = event_target:old_controller
+				tag = event_target:new_controller
+			}
+		}
+	}
+}
+
+# The Fall of Sacramento (ACW only)
+news_event = {
+	id = worldnewscitycapture.262
+	immediate = { log = "[GetDateText]: [Root.GetName]: event worldnewscitycapture.262 FROM = [From.GetName]" }
+	title = worldnewscitycapture.262.t
+	desc = worldnewscitycapture.262.d
+	picture = GFX_news_event_city_captured
+
+	major = yes
+	is_triggered_only = yes
+
+	trigger = {
+		wants_world_news = yes
+	}
+
+	immediate = {
+		825 = {
+			set_state_flag = state_has_fallen
+			owner = { save_event_target_as = old_controller }
+			controller = { save_event_target_as = new_controller }
+		}
+	}
+
+	option = { #The fight is not over yet!
+		name = worldnewscitycapture.262.a
+		trigger = {
+			tag = event_target:old_controller
+		}
+	}
+
+	option = { #The Californian stronghold has fallen!
+		name = worldnewscitycapture.262.b
+		trigger = {
+			tag = event_target:new_controller
+			NOT = {
+				tag = TEX
+			}
+		}
+	}
+	
+	option = { #California is now open to the true America.
+		name = worldnewscitycapture.262.b.tex
+		trigger = {
+			tag = event_target:new_controller
+			tag = TEX
+		}
+	}
+
+	option = { #Will America ever see peace?
+		name = worldnewscitycapture.262.c
+		trigger = {
+			NOT = {
+				tag = event_target:old_controller
+				tag = event_target:new_controller
+			}
+		}
+	}
+}
+
+# The Fall of Washington
+news_event = {
+	id = worldnewscitycapture.263
+	immediate = { log = "[GetDateText]: [Root.GetName]: event worldnewscitycapture.263 FROM = [From.GetName]" }
+	title = worldnewscitycapture.263.t
+	picture = GFX_news_event_capture_washington
+
+	desc = {
+		text = worldnewscitycapture.263.d.psa_nee
+		trigger = {
+			event_target:new_controller = {
+				OR = {
+					tag = CAL
+					tag = NEE
+					tag = GLG
+				}
+			}
+		}
+	}
+	desc = {
+		text = worldnewscitycapture.263.d.can
+		trigger = {
+			event_target:new_controller = { tag = CAN }
+		}
+	}
+	desc = {
+		text = worldnewscitycapture.263.d.other
+		trigger = {
+			event_target:new_controller = {
+				NOT = {
+					is_american_tag = yes
+					tag = CAN
+				}
+			}
+		}
+	}
+
+	major = yes
+	is_triggered_only = yes
+
+	trigger = {
+		wants_world_news = yes
+	}
+
+	immediate = {
+		361 = {
+			set_state_flag = state_has_fallen
+			owner = { save_event_target_as = old_controller }
+			controller = { save_event_target_as = new_controller }
+		}
+	}
+
+	option = {
+		name = worldnewscitycapture.263.a.psa_nee
+		trigger = {
+			tag = event_target:old_controller
+			event_target:new_controller = {
+				is_american_tag = yes
+			}
+		}
+	}
+	
+	option = {
+		name = worldnewscitycapture.263.a.can
+		trigger = {
+			tag = event_target:old_controller
+			event_target:new_controller = {
+				tag = CAN
+			}
+		}
+	}
+	
+	option = {
+		name = worldnewscitycapture.263.a.other
+		trigger = {
+			tag = event_target:old_controller
+			event_target:new_controller = {
+				NOT = { 
+					is_american_tag = yes
+					tag = CAN
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = worldnewscitycapture.263.b.psa_nee
+		trigger = {
+			tag = event_target:new_controller
+			event_target:new_controller = {
+				is_american_tag = yes
+			}
+		}
+	}
+	
+	option = {
+		name = worldnewscitycapture.263.b.can
+		trigger = {
+			tag = event_target:new_controller
+			event_target:new_controller = {
+				tag = ENT
+			}
+		}
+	}
+	
+	option = {
+		name = worldnewscitycapture.263.b.other
+		trigger = {
+			tag = event_target:new_controller
+			event_target:new_controller = {
+				NOT = { 
+					is_american_tag = yes
+					tag = ENT
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = worldnewscitycapture.263.c.can_psa_nee
+		trigger = {
+			NOT = {
+				tag = event_target:old_controller
+				tag = event_target:new_controller
+			}
+			tag = CAN
+			event_target:new_controller = {
+				OR = { 
+					tag = CAL
+					tag = NEE
+					tag = GLG
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = worldnewscitycapture.263.c.american_psa_nee
+		trigger = {
+			NOT = {
+				tag = event_target:old_controller
+				tag = event_target:new_controller
+			}
+			OR = { 
+					tag = CAL
+					tag = NEE
+					tag = GLG
+				}
+			event_target:new_controller = {
+				OR = { 
+					tag = CAL
+					tag = NEE
+					tag = GLG
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = worldnewscitycapture.263.c.american_can
+		trigger = {
+			NOT = {
+				tag = event_target:old_controller
+				tag = event_target:new_controller
+			}
+			OR = { 
+					tag = CAL
+					tag = NEE
+					tag = GLG
+				}
+			event_target:new_controller = {
+				tag = ENT
+			}
+		}
+	}
+	
+	option = {
+		name = worldnewscitycapture.263.c.american_other
+		trigger = {
+			NOT = {
+				tag = event_target:old_controller
+				tag = event_target:new_controller
+			}
+			OR = { 
+					is_american_tag = yes
+					tag = CAN
+				}
+			event_target:new_controller = {
+				NOT = { 
+					tag = CAL
+					tag = NEE
+					tag = GLG
+					tag = ENT
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = worldnewscitycapture.263.c.non_american
+		trigger = {
+			NOT = {
+				tag = event_target:old_controller
+				tag = event_target:new_controller
+			}
+			NOT = { 
+				is_american_tag = yes
+				tag = CAN
+			}
+		}
+	}
+}
+
+news_event = { # The Fall of Singapore - xxxxxxx
+	id = worldnewscitycapture.264
+	immediate = { log = "[GetDateText]: [Root.GetName]: event worldnewscitycapture.264 FROM = [From.GetName]" }
+	title = worldnewscitycapture.264.t
+	picture = GFX_news_event_city_captured
+	desc = worldnewscitycapture.264.d
+
+	major = yes
+	is_triggered_only = yes
+
+	trigger = {
+		wants_world_news = yes
+	}
+
+	show_major = {
+		regional_asia_news = yes
+	}
+
+	immediate = {
+		336 = {
+			set_state_flag = state_has_fallen
+			owner = { save_event_target_as = old_controller }
+			controller = { save_event_target_as = new_controller }
+		}
+	}
+
+	option = { #Japanese dominance in the East Indies is heavily shaken by XXX.
+		name = worldnewscitycapture.264.a
+		trigger = {
+			NOT = {
+				tag = event_target:old_controller
+				tag = event_target:new_controller
+				is_in_faction_with = event_target:old_controller
+			}
+		}
+	}
+
+	option = { # The Lion City is now in our hands!
+		name = worldnewscitycapture.264.b
+		trigger = {
+			tag = event_target:new_controller
+		}
+	}
+
+	option = { #They will soon regret this!
+		name = worldnewscitycapture.264.c
+		trigger = {
+			OR = {
+				tag = event_target:old_controller
+				is_in_faction_with = event_target:old_controller
+			}
+		}
+	}
+}
+
+news_event = { # The Fall of New York City (ACW only)
+	id = worldnewscitycapture.265
+	immediate = { log = "[GetDateText]: [Root.GetName]: event worldnewscitycapture.265 FROM = [From.GetName]" }
+	title = worldnewscitycapture.265.t
+	picture = GFX_news_event_capture_new_york
+	desc = worldnewscitycapture.265.d
+
+	major = yes
+	is_triggered_only = yes
+
+	trigger = {
+		wants_world_news = yes
+	}
+
+	show_major = {
+		regional_north_america_news = yes
+	}
+
+	immediate = {
+		822 = {
+			set_state_flag = state_has_fallen
+			owner = { save_event_target_as = old_controller }
+			controller = { save_event_target_as = new_controller }
+		}
+	}
+
+	option = { #New York is ours!
+		name = worldnewscitycapture.265.a
+		trigger = {
+			tag = event_target:new_controller
+			event_target:new_controller = {
+				NOT = {
+					tag = TEX
+				}
+			}
+		}
+	}
+
+	option = { #Lady Liberty is in our rightful hands!
+		name = worldnewscitycapture.265.a.tex
+		trigger = {
+			tag = event_target:new_controller
+			event_target:new_controller = {
+				tag = TEX
+				}
+			}
+		}
+		
+	option = { #New York must not remain in enemy hands!
+		name = worldnewscitycapture.265.b
+		trigger = {
+			tag = event_target:old_controller
+		}
+	}
+
+	option = { #And to the victors goes the Statue of Liberty.
+		name = worldnewscitycapture.265.c
+		trigger = {
+			NOT = {
+				tag = event_target:new_controller
+				tag = event_target:old_controller
+			}
+		}
+	}
+}
+
+news_event = { # The Fall of Hong Kong
+	id = worldnewscitycapture.266
+	immediate = { log = "[GetDateText]: [Root.GetName]: event worldnewscitycapture.266 FROM = [From.GetName]" }
+	title = worldnewscitycapture.266.t
+	picture = GFX_news_event_capture_hong_kong
+
+	desc = worldnewscitycapture.266.d
+
+	major = yes
+	is_triggered_only = yes
+
+	trigger = {
+		wants_world_news = yes
+	}
+
+	show_major = {
+		regional_asia_news = yes
+	}
+
+	immediate = {
+		326 = {
+			set_state_flag = state_has_fallen
+			owner = {
+				save_event_target_as = old_controller
+			}
+			controller = {
+				save_event_target_as = new_controller
+			}
+		}
+	}
+
+	option = { #The fall of Hong Kong is a serious blow to the Guangzhou Government.
+		name = worldnewscitycapture.266.a
+		trigger = {
+			NOT = {
+				tag = event_target:old_controller
+				tag = event_target:new_controller
+			}
+		}
+	}
+
+	option = { #The Pearl of the East is secured.
+		name = worldnewscitycapture.266.b
+		trigger = {
+			tag = event_target:new_controller
+		}
+	}
+
+	option = { #This cannot stand. We must reclaim the city!
+		name = worldnewscitycapture.266.c
+		trigger = {
+			tag = event_target:old_controller
+		}
+	}
+}
+
+news_event = { # The Fall of Manila
+	id = worldnewscitycapture.267
+	immediate = { log = "[GetDateText]: [Root.GetName]: event worldnewscitycapture.267 FROM = [From.GetName]" }
+	title = worldnewscitycapture.267.t
+	desc = worldnewscitycapture.267.d
+	picture = GFX_news_event_capture_manilla
+
+	major = yes
+	is_triggered_only = yes
+
+	trigger = {
+		wants_world_news = yes
+	}
+
+	immediate = {
+		327 = {
+			set_state_flag = state_has_fallen
+			owner = { save_event_target_as = old_controller }
+			controller = { save_event_target_as = new_controller }
+		}
+	}
+
+	option = { #The fall of Manila secures our grasp on the East Indies.
+		name = worldnewscitycapture.267.a
+		trigger = {
+			NOT = {
+				tag = event_target:old_controller
+				tag = event_target:new_controller
+			}
+		}
+	}
+	option = { #The whole of the Philippines will soon be under our control.
+		name = worldnewscitycapture.267.b
+		trigger = {
+			tag = event_target:new_controller
+		}
+	}
+	option = { #Retreat to the jungles, we will not let the Phillippines fall!
+		name = worldnewscitycapture.267.c
+		trigger = {
+			tag = event_target:old_controller
+		}
+	}
+}
+
+news_event = { # The Fall of Calcutta (To be converted from Siam only)
+	id = worldnewscitycapture.268
+	immediate = { log = "[GetDateText]: [Root.GetName]: event worldnewscitycapture.268 FROM = [From.GetName]" }
+	title = worldnewscitycapture.268.t
+	desc = worldnewscitycapture.268.d
+	picture = GFX_news_event_SIA_saharat_thai_doem_tank
+
+	major = yes
+	is_triggered_only = yes
+
+	trigger = {
+		wants_world_news = yes
+	}
+
+	show_major = {
+		regional_asia_news = yes
+	}
+
+	immediate = {
+		431 = {
+			set_state_flag = state_has_fallen
+			owner = { save_event_target_as = old_controller }
+			controller = { save_event_target_as = new_controller }
+		}
+	}
+
+	option = { #With the fall of Calcutta, eastern India opens to capture.
+		name = worldnewscitycapture.268.a
+		trigger = {
+			is_indian_tag = no
+			NOT = {
+				tag = event_target:new_controller
+				tag = event_target:old_controller
+				is_ally_with = IND
+			}
+		}
+	}
+
+	option = { #The Jewel of India is in our hands!
+		name = worldnewscitycapture.268.b
+		trigger = {
+			tag = event_target:new_controller
+		}
+	}
+
+	option = { #A setback, but we are far from defeat.
+		name = worldnewscitycapture.268.c
+		trigger = {
+			tag = event_target:old_controller
+		}
+	}
+
+	option = { #Imperialists have no place in India!
+		name = worldnewscitycapture.268.e
+		trigger = {
+			OR = {
+				is_indian_tag = yes
+				is_ally_with = IND
+			}
+			NOT = { tag = event_target:old_controller }
+		}
+	}
+}
+
+#This is interesting as a Siam only capture event, will keep for posterity's sake, but it will probably never come up
+#news_event = { # The Fall of Delhi (Siam)
+#	id = worldnewscitycapture.269
+#	immediate = { log = "[GetDateText]: [Root.GetName]: event worldnewscitycapture.269 FROM = [From.GetName]" }
+#	title = worldnewscitycapture.269.t
+#	desc = worldnewscitycapture.269.d
+#	picture = GFX_news_event_city_captured
+#
+#	major = yes
+#	is_triggered_only = yes
+#
+#	trigger = {
+#		wants_world_news = yes
+#	}
+#	show_major = {
+#		regional_asia_news = yes
+#	}
+#
+#	immediate = {
+#		439 = {
+#			set_state_flag = state_has_fallen
+#			owner = { save_event_target_as = old_controller }
+#			controller = { save_event_target_as = new_controller }
+#		}
+#	}
+#
+#	option = { #Delhi still was the capital of a divided India. And divided it falls.
+#		name = worldnewscitycapture.269.a
+#		trigger = {
+#			is_indian_tag = no
+#			NOT = {
+#				tag = event_target:new_controller
+#				tag = event_target:old_controller
+#				AND = {
+#					is_ally_with = ENT
+#					event_target:old_controller = { is_ally_with = ENT }
+#				}
+#			}
+#		}
+#	}
+#
+#	option = { #With Delhi in our hands, we promise the Indian people freedom from Western infleunce.
+#		name = worldnewscitycapture.269.b
+#		trigger = {
+#			tag = event_target:new_controller
+#		}
+#	}
+#
+#	option = { #This is an absolute disaster, we must consult with our Entente allies, now!
+#		name = worldnewscitycapture.269.c
+#		trigger = {
+#			tag = event_target:old_controller
+#		}
+#	}
+#
+#	option = { #Are Siamese Imperialists really any better than British Imperialists?
+#		name = worldnewscitycapture.269.e
+#		trigger = {
+#			is_indian_tag = yes
+#			NOT = { tag = event_target:old_controller }
+#		}
+#	}
+#
+#	option = { #We cannot afford to lose our last bastion in Asia. Let us hold an emergency meeting.
+#		name = worldnewscitycapture.269.f
+#		trigger = {
+#			is_ally_with = ENT
+#			event_target:old_controller = { is_ally_with = ENT }
+#			NOT = { tag = event_target:old_controller }
+#		}
+#	}
+#}
+
+# The Fall of Bangkok
+news_event = {
+	id = worldnewscitycapture.270
+	immediate = { log = "[GetDateText]: [Root.GetName]: event worldnewscitycapture.270 FROM = [From.GetName]" }
+	title = worldnewscitycapture.270.t
+	picture = GFX_news_event_capture_bangkok
+
+	desc = worldnewscitycapture.270.d
+
+	major = yes
+	is_triggered_only = yes
+
+	trigger = {
+		wants_world_news = yes
+	}
+
+	show_major = {
+		regional_asia_news = yes
+	}
+
+	immediate = {
+		289 = {
+			set_state_flag = state_has_fallen
+			owner = { save_event_target_as = old_controller }
+			controller = { save_event_target_as = new_controller }
+		}
+	}
+
+	option = { #We shall fight to the last!
+		name = worldnewscitycapture.270.a
+		trigger = {
+			tag = event_target:old_controller
+		}
+	}
+
+	option = { #Finally Bangkok is ours
+		name = worldnewscitycapture.270.b
+		trigger = {
+			tag = event_target:new_controller
+		}
+	}
+
+	option = { #I see...
+		name = worldnewscitycapture.270.c
+		trigger = {
+			NOT = {
+				tag = event_target:old_controller
+				tag = event_target:new_controller
+			}
+		}
+	}
+}
+
+# The Fall of Moscow
+news_event = {
+	id = worldnewscitycapture.271
+	immediate = { log = "[GetDateText]: [Root.GetName]: event worldnewscitycapture.271 FROM = [From.GetName]" }
+	title = worldnewscitycapture.271.t
+	desc = worldnewscitycapture.271.d
+	picture = GFX_news_event_capture_moscow
+
+	major = yes
+	is_triggered_only = yes
+
+	trigger = {
+		wants_world_news = yes
+	}
+
+	immediate = {
+		219 = {
+			set_state_flag = state_has_fallen
+			owner = { save_event_target_as = old_controller }
+			controller = { save_event_target_as = new_controller }
+		}
+	}
+
+	option = { #We shall fight on to the bitter end
+		name = worldnewscitycapture.271.a
+		trigger = {
+			tag = event_target:old_controller
+		}
+	}
+
+	option = { #The heart of Russia is now ours!
+		name = worldnewscitycapture.271.b
+		trigger = {
+			tag = event_target:new_controller
+		}
+	}
+
+	option = { #The situation in Russia appears dire, indeed
+		name = worldnewscitycapture.271.c
+		trigger = {
+			NOT = {
+				tag = event_target:old_controller
+				tag = event_target:new_controller
+			}
+		}
+	}
+}
+
+# The Fall of Petrograd
+news_event = {
+	id = worldnewscitycapture.272
+	immediate = { log = "[GetDateText]: [Root.GetName]: event worldnewscitycapture.272 FROM = [From.GetName]" }
+	title = worldnewscitycapture.272.t
+	desc = worldnewscitycapture.272.d
+	picture = GFX_news_event_capture_petrograd
+
+	major = yes
+	is_triggered_only = yes
+
+	trigger = {
+		wants_world_news = yes
+	}
+
+	immediate = {
+		195 = {
+			set_state_flag = state_has_fallen
+			owner = { save_event_target_as = old_controller }
+			controller = { save_event_target_as = new_controller }
+		}
+	}
+
+	option = { #The glorious jewel of the north has fallen
+		name = worldnewscitycapture.272.a
+		trigger = {
+			tag = event_target:old_controller
+		}
+	}
+
+	option = { #The blow to Russian morale will be severe
+		name = worldnewscitycapture.272.b
+		trigger = {
+			tag = event_target:new_controller
+		}
+	}
+
+	option = { #Terrible!
+		name = worldnewscitycapture.272.c
+		trigger = {
+			NOT = {
+				tag = event_target:old_controller
+				tag = event_target:new_controller
+			}
+		}
+	}
+}
+
+# The Fall of Kiev
+news_event = {
+	id = worldnewscitycapture.273
+	immediate = { log = "[GetDateText]: [Root.GetName]: event worldnewscitycapture.273 FROM = [From.GetName]" }
+	title = worldnewscitycapture.273.t
+	desc = worldnewscitycapture.273.d
+	picture = GFX_news_event_capture_kiev
+
+	major = yes
+	is_triggered_only = yes
+
+	trigger = {
+		wants_world_news = yes
+		NOT = { 202 = { controller = { tag = UKR } } }
+	}
+
+	immediate = {
+		202 = {
+			set_state_flag = state_has_fallen
+			owner = { save_event_target_as = old_controller }
+			controller = { save_event_target_as = new_controller }
+		}
+	}
+
+	option = { #This does not end here
+		name = worldnewscitycapture.273.a
+		trigger = {
+			tag = event_target:old_controller
+		}
+	}
+
+	option = { #Finally Kiev is ours!
+		name = worldnewscitycapture.273.b
+		trigger = {
+			tag = event_target:new_controller
+		}
+	}
+
+	option = { #The Ukrainian situation appears dire
+		name = worldnewscitycapture.273.c
+		trigger = {
+			NOT = {
+				tag = event_target:old_controller
+				tag = event_target:new_controller
+			}
+		}
+	}
+}
+
+# The Fall of Rio de Janeiro
+news_event = {
+	id = worldnewscitycapture.274
+	immediate = { log = "[GetDateText]: [Root.GetName]: event worldnewscitycapture.274 FROM = [From.GetName]" }
+	title = worldnewscitycapture.274.t
+	desc = worldnewscitycapture.274.d
+	picture = GFX_news_event_capture_rio_de_janeiro
+
+	major = yes
+	is_triggered_only = yes
+
+	trigger = {
+		wants_world_news = yes
+	}
+
+	show_major = {
+		OR = {
+			regional_north_america_news = yes
+			regional_south_america_news = yes
+		}
+	}
+
+	immediate = {
+		500 = {
+			set_state_flag = state_has_fallen
+			owner = { save_event_target_as = old_controller }
+			controller = { save_event_target_as = new_controller }
+		}
+	}
+
+	option = { #No! How can this be?!
+		name = worldnewscitycapture.274.a
+		trigger = {
+			tag = event_target:old_controller
+		}
+	}
+
+	option = { #Our commanders have done well
+		name = worldnewscitycapture.274.b
+		trigger = {
+			tag = event_target:new_controller
+		}
+	}
+
+	option = { #The Brazilian situation appears dire
+		name = worldnewscitycapture.274.c
+		trigger = {
+			NOT = {
+				tag = event_target:old_controller
+				tag = event_target:new_controller
+			}
+		}
+	}
+}
+
+# The Fall of Havana
+news_event = {
+	id = worldnewscitycapture.275
+	immediate = { log = "[GetDateText]: [Root.GetName]: event worldnewscitycapture.275 FROM = [From.GetName]" }
+	title = worldnewscitycapture.275.t
+	desc = worldnewscitycapture.275.d
+	picture = GFX_news_event_capture_havana
+
+	major = yes
+	is_triggered_only = yes
+
+	trigger = {
+		wants_world_news = yes
+	}
+
+	show_major = {
+		OR = {
+			regional_north_america_news = yes
+			regional_south_america_news = yes
+		}
+	}
+
+	immediate = {
+		315 = {
+			set_state_flag = state_has_fallen
+			owner = { save_event_target_as = old_controller }
+			controller = { save_event_target_as = new_controller }
+		}
+	}
+
+	option = { # Tell the people, to fight on for their freedom...
+		name = worldnewscitycapture.275.a
+		trigger = {
+			tag = event_target:old_controller
+		}
+	}
+	option = { # The Americans repeat history again, it seems.
+		name = worldnewscitycapture.275.b
+		trigger = {
+			NOT = {
+				tag = event_target:old_controller
+				tag = event_target:new_controller
+			}
+			event_target:new_controller = {
+				is_american_tag = yes
+			}
+		}
+	}
+	option = { # Despite their defiance, they could never prevail
+		name = worldnewscitycapture.275.c
+		trigger = {
+			tag = event_target:new_controller
+			event_target:new_controller = {
+				is_american_tag = yes
+			}
+		}
+	}
+	option = { # It seems that Cuba, has chosen the wrong side...
+		name = worldnewscitycapture.275.e
+		trigger = {
+			NOT = {
+				tag = event_target:old_controller
+				tag = event_target:new_controller
+			}
+			event_target:new_controller = {
+				NOT = {
+					is_american_tag = yes
+				}
+			}
+		}
+	}
+	option = { # The island will be ours, shortly.
+		name = worldnewscitycapture.275.f
+		trigger = {
+			tag = event_target:new_controller
+			event_target:new_controller = {
+				NOT = {
+					is_american_tag = yes
+				}
+			}
+		}
+	}
+}
+
+# The Fall of Rome
+news_event = {
+	id = worldnewscitycapture.276
+	immediate = { log = "[GetDateText]: [Root.GetName]: event worldnewscitycapture.276 FROM = [From.GetName]" }
+	title = worldnewscitycapture.276.t
+	desc = worldnewscitycapture.276.d
+	picture = GFX_news_event_capture_rome
+
+	major = yes
+	is_triggered_only = yes
+
+	trigger = {
+		wants_world_news = yes
+	}
+
+	immediate = {
+		2 = {
+			set_state_flag = state_has_fallen
+			owner = { save_event_target_as = old_controller }
+			controller = { save_event_target_as = new_controller }
+		}
+	}
+
+	option = { #Rome is lost!
+		name = worldnewscitycapture.276.a
+		trigger = {
+			tag = event_target:old_controller
+		}
+	}
+
+	option = { #Finally Rome is ours!
+		name = worldnewscitycapture.276.b
+		trigger = {
+			tag = event_target:new_controller
+		}
+	}
+
+	option = { #How will Italy recover from this?
+		name = worldnewscitycapture.276.c
+		trigger = {
+			NOT = {
+				tag = event_target:old_controller
+				tag = event_target:new_controller
+			}
+		}
+	}
+}
+
+# The Fall of Vienna
+news_event = {
+	id = worldnewscitycapture.277
+	immediate = { log = "[GetDateText]: [Root.GetName]: event worldnewscitycapture.277 FROM = [From.GetName]" }
+	title = worldnewscitycapture.277.t
+	desc = worldnewscitycapture.277.d
+	picture = GFX_news_event_capture_vienna
+
+	major = yes
+	is_triggered_only = yes
+
+	trigger = {
+		wants_world_news = yes
+	}
+
+	immediate = {
+		4 = {
+			set_state_flag = state_has_fallen
+			owner = { save_event_target_as = old_controller }
+			controller = { save_event_target_as = new_controller }
+		}
+	}
+
+	option = { #Vienna has fallen? How can this be?!
+		name = worldnewscitycapture.277.a
+		trigger = {
+			tag = event_target:old_controller
+		}
+	}
+
+	option = { #Finally Vienna is ours!
+		name = worldnewscitycapture.277.b
+		trigger = {
+			tag = event_target:new_controller
+		}
+	}
+
+	option = { #Austria has fallen far, it seems...
+		name = worldnewscitycapture.277.c
+		trigger = {
+			NOT = {
+				tag = event_target:old_controller
+				tag = event_target:new_controller
+			}
+		}
+	}
+}
+
+# The Fall of Beijing
+news_event = {
+	id = worldnewscitycapture.278
+	immediate = { log = "[GetDateText]: [Root.GetName]: event worldnewscitycapture.278 FROM = [From.GetName]" }
+	title = worldnewscitycapture.278.t
+	picture = GFX_news_event_capture_beijing
+	desc = {
+		text = worldnewscitycapture.278.d
+		trigger = {
+			event_target:new_controller = {
+				NOT = { tag = CHI }
+			}
+		}
+	}
+	
+	desc = {
+		text = worldnewscitycapture.278.d.chi
+		trigger = {
+			event_target:new_controller = { tag = CHI }
+		}
+	}
+	major = yes
+	is_triggered_only = yes
+
+	trigger = {
+		wants_world_news = yes
+	}
+
+	show_major = {
+		regional_asia_news = yes
+	}
+
+	immediate = {
+		608 = {
+			set_state_flag = state_has_fallen
+			owner = { save_event_target_as = old_controller }
+			controller = { save_event_target_as = new_controller }
+		}
+	}
+	option = { #Beijing has fallen? How can this be?!
+		name = worldnewscitycapture.278.a
+		trigger = {
+			tag = event_target:old_controller
+			event_target:new_controller = {
+				NOT = { tag = CHI }
+			}
+		}
+	}
+
+	option = { #At last the Forbidden City is ours!
+		name = worldnewscitycapture.278.b
+		trigger = {
+			tag = event_target:new_controller
+			event_target:new_controller = {
+				NOT = { tag = CHI }
+			}
+		}
+	}
+	option = { #Another war in China, another occupation of Beijing.
+		name = worldnewscitycapture.278.c
+		trigger = {
+			NOT = {
+				tag = event_target:new_controller
+				tag = event_target:old_controller
+			}
+			event_target:new_controller = {
+				NOT = { tag = CHI }
+			}
+		}
+	}
+	option = { #We cannot lose Beijing again!
+		name = worldnewscitycapture.278.a.chi
+		trigger = {
+			tag = event_target:old_controller
+			event_target:new_controller = { tag = CHI }
+		}
+	}
+	option = { #Soon China will be united and free!
+		name = worldnewscitycapture.278.b.chi
+		trigger = {
+			tag = event_target:new_controller
+			tag = CHI
+		}
+	}
+	option = { #Surely China can be united only by the sword?
+		name = worldnewscitycapture.278.c.chi
+		trigger = {
+			event_target:new_controller = { tag = CHI }
+			NOT = {
+				tag = event_target:new_controller
+				tag = event_target:old_controller
+			}
+		}
+	}
+
+}
+
+# The Fall of Shanghai
+news_event = {
+	id = worldnewscitycapture.279
+	immediate = { log = "[GetDateText]: [Root.GetName]: event worldnewscitycapture.279 FROM = [From.GetName]" }
+	title = worldnewscitycapture.279.t
+	picture = GFX_news_event_capture_shanghai
+
+	desc = worldnewscitycapture.279.d
+
+	major = yes
+	is_triggered_only = yes
+
+	trigger = {
+		wants_world_news = yes
+	}
+
+	show_major = {
+		regional_asia_news = yes
+	}
+
+	immediate = {
+		613 = {
+			set_state_flag = state_has_fallen
+			owner = { save_event_target_as = old_controller }
+			controller = { save_event_target_as = new_controller }
+		}
+	}
+
+	option = { #We will retake the city, no matter what
+		name = worldnewscitycapture.279.a
+		trigger = {
+			tag = event_target:old_controller
+		}
+	}
+
+	option = { #Finally Shanghai is ours!
+		name = worldnewscitycapture.279.b
+		trigger = {
+			tag = event_target:new_controller
+		}
+	}
+
+	option = { #The days of the Legation Cities seem long gone...
+		name = worldnewscitycapture.279.c
+		trigger = {
+			NOT = {
+				tag = event_target:old_controller
+				tag = event_target:new_controller
+			}
+		}
+	}
+}
+
+# The Fall of Warsaw
+news_event = {
+	id = worldnewscitycapture.280
+	immediate = { log = "[GetDateText]: [Root.GetName]: event worldnewscitycapture.280 FROM = [From.GetName]" }
+	title = worldnewscitycapture.280.t
+	desc = worldnewscitycapture.280.d
+	picture = GFX_news_event_capture_warsaw
+
+	major = yes
+	is_triggered_only = yes
+
+	trigger = {
+		wants_world_news = yes
+	}
+
+	show_major = {
+		regional_europe_news = yes
+	}
+
+	immediate = {
+		10 = {
+			set_state_flag = state_has_fallen
+			owner = { save_event_target_as = old_controller }
+			controller = { save_event_target_as = new_controller }
+		}
+	}
+
+	option = { #Not Warsaw!
+		name = worldnewscitycapture.280.a
+		trigger = {
+			tag = event_target:old_controller
+		}
+	}
+
+	option = { #Finally Warsaw is ours!
+		name = worldnewscitycapture.280.b
+		trigger = {
+			tag = event_target:new_controller
+		}
+	}
+
+	option = { #I see...
+		name = worldnewscitycapture.280.c
+		trigger = {
+			NOT = {
+				tag = event_target:old_controller
+				tag = event_target:new_controller
+			}
+		}
+	}
+}
+
+# The Fall of Sydney
+news_event = {
+	id = worldnewscitycapture.281
+	immediate = { log = "[GetDateText]: [Root.GetName]: event worldnewscitycapture.281 FROM = [From.GetName]" }
+	title = worldnewscitycapture.281.t
+	picture = GFX_news_event_capture_sydney
+	desc = worldnewscitycapture.281.d
+
+	major = yes
+	is_triggered_only = yes
+
+	trigger = {
+		wants_world_news = yes
+	}
+
+	immediate = {
+		285 = {
+			set_state_flag = state_has_fallen
+			owner = { save_event_target_as = old_controller }
+			controller = { save_event_target_as = new_controller }
+		}
+	}
+
+	option = { #We shall return to Sydney soon enough
+		name = worldnewscitycapture.281.a
+		trigger = {
+			tag = event_target:old_controller
+		}
+	}
+
+	option = { #Finally Sydney is ours!
+		name = worldnewscitycapture.281.b
+		trigger = {
+			tag = event_target:new_controller
+		}
+	}
+
+	option = { #The Australian situation is dire
+		name = worldnewscitycapture.281.c
+		trigger = {
+			NOT = {
+				tag = event_target:old_controller
+				tag = event_target:new_controller
+			}
+		}
+	}
+}
+
+# The Fall of Mexico City
+news_event = {
+	id = worldnewscitycapture.282
+	immediate = { log = "[GetDateText]: [Root.GetName]: event worldnewscitycapture.282 FROM = [From.GetName]" }
+	title = worldnewscitycapture.282.t
+	desc = worldnewscitycapture.282.d
+	picture = GFX_news_event_capture_mexico_city
+
+	major = yes
+	is_triggered_only = yes
+
+	trigger = {
+		wants_world_news = yes
+	}
+
+	show_major = {
+		OR = {
+			regional_north_america_news = yes
+			regional_south_america_news = yes
+		}
+	}
+
+	immediate = {
+		277 = {
+			set_state_flag = state_has_fallen
+			owner = { save_event_target_as = old_controller }
+			controller = { save_event_target_as = new_controller }
+		}
+	}
+
+	option = { #It does not end here
+		name = worldnewscitycapture.282.a
+		trigger = {
+			tag = event_target:old_controller
+		}
+	}
+
+	option = { #The heart of Mexico is ours!
+		name = worldnewscitycapture.282.b
+		trigger = {
+			tag = event_target:new_controller
+		}
+	}
+
+	option = { #I see...
+		name = worldnewscitycapture.282.c
+		trigger = {
+			NOT = {
+				tag = event_target:old_controller
+				tag = event_target:new_controller
+			}
+		}
+	}
+}
+
+# The Fall of Algiers
+news_event = {
+	id = worldnewscitycapture.283
+	immediate = { log = "[GetDateText]: [Root.GetName]: event worldnewscitycapture.283 FROM = [From.GetName]" }
+	title = worldnewscitycapture.283.t
+	desc = {
+		text = worldnewscitycapture.283.d
+		trigger = {
+			NOT ={
+				AND = {
+					event_target:new_controller = {
+						is_french_tag = yes
+					}
+					event_target:old_controller = {
+						tag = ALG
+					}
+				}
+			}
+		}
+	}
+	
+	desc = {
+		text = worldnewscitycapture.283.d.alg
+		trigger = {
+			AND = {
+				event_target:new_controller = {
+					is_french_tag = yes
+				}
+				event_target:old_controller = {
+					tag = ALG
+				}
+			}
+		}
+	}
+	picture = GFX_news_event_NFA_fall_algiers
+
+	major = yes
+	is_triggered_only = yes
+
+	trigger = {
+		wants_world_news = yes
+	}
+
+	immediate = {
+		459 = {
+			set_state_flag = state_has_fallen
+			owner = { save_event_target_as = old_controller }
+			controller = { save_event_target_as = new_controller }
+		}
+	}
+
+	option = { #Our fight for liberation is far from over!
+		name = worldnewscitycapture.283.a.alg
+		trigger = {
+			tag = event_target:old_controller
+			AND = {
+				event_target:new_controller = {
+					is_french_tag = yes
+				}
+				event_target:old_controller = {
+					tag = ALG
+				}
+			}
+		}
+	}
+	option = { #The French flag will fly over the city again.
+		name = worldnewscitycapture.283.a
+		trigger = {
+			tag = event_target:old_controller
+			NOT = {
+				AND = {
+					event_target:new_controller = {
+						is_french_tag = yes
+					}
+					event_target:old_controller = {
+						tag = ALG
+					}
+				}
+			}
+		}
+	}
+	
+	option = { #Algiers is, and always will be, French.
+		name = worldnewscitycapture.283.b.alg
+		trigger = {
+			tag = event_target:new_controller
+			event_target:new_controller = {
+				is_french_tag = yes
+			}
+			event_target:old_controller = {
+				tag = ALG
+			}
+		}
+	}
+
+	option = { #Securing Algiers means securing North Africa.
+		name = worldnewscitycapture.283.b
+		trigger = {
+			tag = event_target:new_controller
+			NOT = {
+				AND = {
+					event_target:new_controller = {
+						is_french_tag = yes
+					}
+					event_target:old_controller = {
+						tag = ALG
+					}
+				}
+			}
+		}
+	}
+
+	option = { #The French would never give up that city.
+		name = worldnewscitycapture.283.c.alg
+		trigger = {
+			event_target:new_controller = {
+				is_french_tag = yes
+			}
+			event_target:old_controller = {
+				tag = ALG
+			}
+			NOT = {
+				tag = event_target:new_controller
+				tag = event_target:old_controller
+			}
+		}
+	}
+
+	option = { #A symbolic blow to the French.
+		name = worldnewscitycapture.283.c
+		trigger = {
+			NOT = {
+				tag = event_target:new_controller
+				tag = event_target:old_controller
+				AND = {
+					event_target:new_controller = {
+						is_french_tag = yes
+					}
+					event_target:old_controller = {
+						tag = ALG
+					}
+				}
+			}
+		}
+	}
+}
+
+news_event = { # The Fall of Detroit
+	id = worldnewscitycapture.284
+	immediate = { log = "[GetDateText]: [Root.GetName]: event worldnewscitycapture.284 FROM = [From.GetName]" }
+	title = worldnewscitycapture.284.t
+	picture = GFX_news_event_capture_detroit
+	desc = worldnewscitycapture.284.d
+
+	major = yes
+	is_triggered_only = yes
+
+	trigger = {
+		wants_world_news = yes
+	}
+
+	show_major = {
+		regional_north_america_news = yes
+	}
+
+	immediate = {
+		393 = {
+			set_state_flag = state_has_fallen
+			owner = { save_event_target_as = old_controller }
+			controller = { save_event_target_as = new_controller }
+		}
+	}
+
+	option = { #The road to Michigan is now wide open.
+		name = worldnewscitycapture.284.a
+		trigger = {
+			tag = event_target:new_controller
+			NOT = {
+				AND = {
+					event_target:new_controller = {
+						tag = TEX
+					}
+					event_target:old_controller = {
+						tag = GLG
+					}
+				}
+			}
+		}
+	}
+	
+	option = { #The new America will not tolerate Canadian meddling.
+		name = worldnewscitycapture.284.a.tex
+		trigger = {
+			tag = event_target:new_controller
+			event_target:new_controller = {
+				tag = TEX
+			}
+			event_target:old_controller = {
+				tag = GLG
+			}
+		}
+	}
+
+	option = { #We must recover Detroit, quickly!
+		name = worldnewscitycapture.284.b
+		trigger = {
+			tag = event_target:old_controller
+		}
+	}
+
+	option = { #A blow to Canadian influence for sure.
+		name = worldnewscitycapture.284.c
+		trigger = {
+			event_target:old_controller = {
+				tag = GLG
+			}
+			NOT = {
+				tag = event_target:new_controller
+				tag = event_target:old_controller
+			}
+		}
+	}
+
+	option = { #War in America rages on...
+		name = worldnewscitycapture.284.e
+		trigger = {
+			event_target:old_controller = {
+				NOT = { tag = GLG }
+			}
+			NOT = {
+				tag = event_target:new_controller
+				tag = event_target:old_controller
+			}
+		}
+	}
+}
+
+news_event = { # The Fall of Boston
+	id = worldnewscitycapture.285
+	immediate = { log = "[GetDateText]: [Root.GetName]: event worldnewscitycapture.285 FROM = [From.GetName]" }
+	title = worldnewscitycapture.285.t
+	picture = GFX_news_event_capture_boston
+	desc = {
+		text = worldnewscitycapture.285.d.nee
+		trigger = {
+			event_target:old_controller = {
+				tag = NEE
+			}
+		}
+	}
+	desc = {
+		text = worldnewscitycapture.285.d.other
+		trigger = {
+			event_target:old_controller = {
+				NOT = { tag = NEE }
+			}
+		}
+	}
+
+	major = yes
+	is_triggered_only = yes
+
+	trigger = {
+		wants_world_news = yes
+	}
+
+	show_major = {
+		regional_north_america_news = yes
+	}
+
+	immediate = {
+		797 = {
+			set_state_flag = state_has_fallen
+			owner = { save_event_target_as = old_controller }
+			controller = { save_event_target_as = new_controller }
+		}
+	}
+
+	option = { #With Boston on our hands, New England is secured.
+		name = worldnewscitycapture.285.a
+		trigger = {
+			tag = event_target:new_controller
+		}
+	}
+
+	option = { #Freedom will not be extinguished!
+		name = worldnewscitycapture.285.b
+		trigger = {
+			tag = event_target:old_controller
+		}
+	}
+
+	option = { #The Athens of America has fallen...
+		name = worldnewscitycapture.285.c
+		trigger = {
+			NOT = {
+				tag = event_target:new_controller
+				tag = event_target:old_controller
+			}
+		}
+	}
+}
+
+news_event = { # The Fall of Tokyo
+	id = worldnewscitycapture.286
+	immediate = { log = "[GetDateText]: [Root.GetName]: event worldnewscitycapture.286 FROM = [From.GetName]" }
+	title = worldnewscitycapture.286.t
+	desc = worldnewscitycapture.286.d
+	picture = GFX_news_event_capture_tokyo
+
+	major = yes
+	is_triggered_only = yes
+
+	trigger = {
+		wants_world_news = yes
+	}
+
+	show_major = {
+		regional_asia_news = yes
+	}
+
+	immediate = {
+		282 = {
+			set_state_flag = state_has_fallen
+			owner = { save_event_target_as = old_controller }
+			controller = { save_event_target_as = new_controller }
+		}
+	}
+
+	option = { # A great victory!
+		name = worldnewscitycapture.286.a
+		trigger = {
+			tag = event_target:new_controller
+		}
+	}
+
+	option = { # We must not lose hope.
+		name = worldnewscitycapture.286.b
+		trigger = {
+			tag = event_target:old_controller
+		}
+	}
+
+	option = { # The jewel of all Asia has fallen.
+		name = worldnewscitycapture.286.c
+		trigger = {
+			NOT = {
+				tag = event_target:new_controller
+				tag = event_target:old_controller
+			}
+		}
+	}
+}
+
+news_event = { # The Fall of Fengtian
+	id = worldnewscitycapture.287
+	immediate = { log = "[GetDateText]: [Root.GetName]: event worldnewscitycapture.287 FROM = [From.GetName]" }
+	title = worldnewscitycapture.287.t
+	picture = GFX_news_event_capture_shenyang
+	desc = {
+		text = worldnewscitycapture.287.d.chi
+		trigger = {
+			event_target:new_controller = {
+				tag = CHI
+			}
+		}
+	}
+	desc = {
+		text = worldnewscitycapture.287.d.other
+		trigger = {
+			event_target:new_controller = {
+				NOT = {
+					tag = CHI
+				}
+			}
+		}
+	}
+
+	major = yes
+	is_triggered_only = yes
+
+	trigger = {
+		wants_world_news = yes
+	}
+
+	show_major = {
+		regional_asia_news = yes
+	}
+
+	immediate = {
+		716 = {
+			set_state_flag = state_has_fallen
+			owner = { save_event_target_as = old_controller }
+			controller = { save_event_target_as = new_controller }
+		}
+	}
+
+	option = {
+		name = worldnewscitycapture.287.a
+		trigger = {
+			tag = event_target:new_controller
+		}
+	}
+
+	option = {
+		name = worldnewscitycapture.287.b
+		trigger = {
+			tag = event_target:old_controller
+			NOT = { tag = FNG }
+		}
+	}
+	
+	option = {
+		name = worldnewscitycapture.287.b.chi
+		trigger = {
+			tag = event_target:old_controller
+			tag = FNG
+		}
+	}
+
+	option = {
+		name = worldnewscitycapture.287.c
+		trigger = {
+			NOT = {
+				tag = event_target:new_controller
+				tag = event_target:old_controller
+			}
+		}
+	}
+}
+
+news_event = { # The Fall of Vladivostok
+	id = worldnewscitycapture.288
+	immediate = { log = "[GetDateText]: [Root.GetName]: event worldnewscitycapture.288 FROM = [From.GetName]" }
+	title = worldnewscitycapture.288.t
+	desc = worldnewscitycapture.288.d
+	picture = GFX_news_event_capture_vladivostock
+
+	major = yes
+	is_triggered_only = yes
+
+	trigger = {
+		wants_world_news = yes
+	}
+
+	show_major = {
+		regional_asia_news = yes
+	}
+
+	immediate = {
+		408 = {
+			set_state_flag = state_has_fallen
+			owner = { save_event_target_as = old_controller }
+			controller = { save_event_target_as = new_controller }
+		}
+	}
+
+	option = {
+		name = worldnewscitycapture.288.a
+		trigger = {
+			tag = event_target:new_controller
+		}
+	}
+
+	option = {
+		name = worldnewscitycapture.288.b
+		trigger = {
+			tag = event_target:old_controller
+		}
+	}
+
+	option = {
+		name = worldnewscitycapture.288.c
+		trigger = {
+			NOT = {
+				tag = event_target:new_controller
+				tag = event_target:old_controller
+			}
+		}
+	}
+}
+
+# The Fall of Dublin
+news_event = {
+	id = worldnewscitycapture.289
+	immediate = { log = "[GetDateText]: [Root.GetName]: event worldnewscitycapture.289 FROM = [From.GetName]" }
+	title = worldnewscitycapture.289.t
+	desc = worldnewscitycapture.289.d
+	picture = GFX_news_event_capture_dublin
+
+	major = yes
+	is_triggered_only = yes
+
+	trigger = {
+		wants_world_news = yes
+	}
+
+	show_major = {
+		regional_europe_news = yes
+	}
+
+	immediate = {
+		113 = {
+			set_state_flag = state_has_fallen
+			owner = { save_event_target_as = old_controller }
+			controller = { save_event_target_as = new_controller }
+		}
+	}
+
+	option = {
+		name = worldnewscitycapture.289.a
+		trigger = {
+			tag = event_target:old_controller
+		}
+	}
+
+	option = {
+		name = worldnewscitycapture.289.b
+		trigger = {
+			tag = event_target:new_controller
+		}
+	}
+
+	option = {
+		name = worldnewscitycapture.289.c
+		trigger = {
+			NOT = {
+				tag = event_target:new_controller
+				tag = event_target:old_controller
+			}
+		}
+	}
+}
+
+news_event = { # The Fall of Batavia
+	id = worldnewscitycapture.290
+	immediate = { log = "[GetDateText]: [Root.GetName]: event worldnewscitycapture.290 FROM = [From.GetName]" }
+	title = worldnewscitycapture.290.t
+	picture = GFX_news_event_capture_batavia
+	desc = {
+		text = worldnewscitycapture.290.d.ins
+		trigger = {
+			event_target:old_controller = {
+				tag = INS
+			}
+		}
+	}
+	desc = {
+		text = worldnewscitycapture.290.d.other
+		trigger = {
+			event_target:old_controller = {
+				NOT = {
+					tag = INS
+				}
+			}
+		}
+	}
+
+	major = yes
+	is_triggered_only = yes
+
+	trigger = {
+		wants_world_news = yes
+	}
+
+	show_major = {
+		regional_asia_news = yes
+	}
+
+	immediate = {
+		1020 = {
+			set_state_flag = state_has_fallen
+			owner = { save_event_target_as = old_controller }
+			controller = { save_event_target_as = new_controller }
+		}
+	}
+
+	option = {
+		name = worldnewscitycapture.290.a
+		trigger = {
+			tag = event_target:new_controller
+		}
+	}
+
+	option = {
+		name = worldnewscitycapture.290.b
+		trigger = {
+			tag = event_target:old_controller
+		}
+	}
+
+	option = {
+		name = worldnewscitycapture.290.c
+		trigger = {
+			NOT = {
+				tag = event_target:new_controller
+				tag = event_target:old_controller
+			}
+		}
+	}
+}
+
+# The Fall of Bucharest
+news_event = {
+	id = worldnewscitycapture.291
+	immediate = { log = "[GetDateText]: [Root.GetName]: event worldnewscitycapture.291 FROM = [From.GetName]" }
+	title = worldnewscitycapture.291.t
+	desc = worldnewscitycapture.291.d
+	picture = GFX_news_event_capture_bucharest
+
+	major = yes
+	is_triggered_only = yes
+
+	trigger = {
+		wants_world_news = yes
+	}
+
+	show_major = {
+		regional_europe_news = yes
+	}
+
+	immediate = {
+		46 = {
+			set_state_flag = state_has_fallen
+			owner = { save_event_target_as = old_controller }
+			controller = { save_event_target_as = new_controller }
+		}
+	}
+
+	option = {
+		name = worldnewscitycapture.291.a
+		trigger = {
+			tag = event_target:old_controller
+		}
+	}
+
+	option = {
+		name = worldnewscitycapture.291.b
+		trigger = {
+			tag = event_target:new_controller
+		}
+	}
+
+	option = {
+		name = worldnewscitycapture.291.c
+		trigger = {
+			NOT = {
+				tag = event_target:new_controller
+				tag = event_target:old_controller
+			}
+		}
+	}
+}
+
+# The Fall of Constantinople
+news_event = {
+	id = worldnewscitycapture.292
+	immediate = { log = "[GetDateText]: [Root.GetName]: event worldnewscitycapture.292 FROM = [From.GetName]" }
+	title = worldnewscitycapture.292.t
+	picture = GFX_news_event_capture_constantinople
+
+	desc = {
+		text = worldnewscitycapture.292.d.orthodox
+		trigger = {
+			event_target:new_controller = {
+				OR = {
+					tag = GRE
+					tag = BUL
+					tag = RUS
+					tag = SER
+					tag = ROM
+					tag = UKR
+				}
+			}
+		}
+	}
+	desc = {
+		text = worldnewscitycapture.292.d.other
+		trigger = {
+			event_target:new_controller = {
+				NOT = {
+					tag = GRE
+					tag = BUL
+					tag = RUS
+					tag = SER
+					tag = ROM
+					tag = UKR
+				}
+			}
+		}
+	}
+
+	major = yes
+	is_triggered_only = yes
+
+	trigger = {
+		wants_world_news = yes
+	}
+
+	immediate = {
+		341 = {
+			set_state_flag = state_has_fallen
+			owner = { save_event_target_as = old_controller }
+			controller = { save_event_target_as = new_controller }
+		}
+	}
+
+	option = { #We have lost the straits, for now
+		name = worldnewscitycapture.292.a
+		trigger = {
+			tag = event_target:old_controller
+		}
+	}
+
+	option = { #Constantine�s city is ours!
+		name = worldnewscitycapture.292.b
+		trigger = {
+			tag = event_target:new_controller
+			event_target:new_controller = {
+				NOT = {
+					tag = GRE
+					tag = BUL
+					tag = RUS
+					tag = SER
+					tag = UKR
+				}
+			}
+		}
+	}
+	option = { #Tsargrad is ours!
+		name = worldnewscitycapture.292.c
+		trigger = {
+			tag = event_target:new_controller
+			event_target:new_controller = {
+				OR = {
+					tag = BUL
+					tag = RUS
+					tag = SER
+					tag = UKR
+				}
+			}
+		}
+	}
+	option = { #Constantinople has been reclaimed for Greece!
+		name = worldnewscitycapture.292.e
+		trigger = {
+			tag = event_target:new_controller
+			event_target:new_controller = { tag = GRE }
+		}
+	}
+	option = { #The Turks have finally been driven out of Europe
+		name = worldnewscitycapture.292.f
+		trigger = {
+			NOT = {
+				tag = event_target:new_controller
+				tag = event_target:old_controller
+			}
+			event_target:old_controller = { tag = TUR }
+			event_target:new_controller = { is_in_array = { global.european_tags_array = THIS } }
+		}
+	}
+	option = { #The Bosporus has a new master
+		name = worldnewscitycapture.292.g
+		trigger = {
+			NOT = {
+				tag = event_target:new_controller
+				tag = event_target:old_controller
+			}
+			OR = {
+				NOT = { event_target:old_controller = { tag = TUR } }
+				NOT = { event_target:new_controller = { is_in_array = { global.european_tags_array = THIS } } }
+			}
+		}
+	}
+}
+
+### Fall of Ceuta
+news_event = {
+	id = worldnewscitycapture.293
+	immediate = { log = "[GetDateText]: [Root.GetName]: event worldnewscitycapture.293 FROM = [From.GetName]" }
+	title = worldnewscitycapture.293.t
+	desc = worldnewscitycapture.293.d
+	picture = GFX_news_event_SPA_capture_ceuta
+
+	major = yes
+	is_triggered_only = yes
+
+	trigger = {
+		wants_world_news = yes
+	}
+
+	show_major = {
+		regional_europe_news = yes
+	}
+
+	immediate = {
+		1154 = {
+			set_state_flag = state_has_fallen
+			owner = { save_event_target_as = old_controller }
+			controller = { save_event_target_as = new_controller }
+		}
+	}
+
+	option = { #One of the Pillars of Hercules has fallen...
+		name = worldnewscitycapture.293.a
+		trigger = {
+			tag = event_target:old_controller
+		}
+	}
+
+	option = { #We now control access to the Mediterranean!
+		name = worldnewscitycapture.293.b
+		trigger = {
+			tag = event_target:new_controller
+		}
+	}
+
+	option = { #One by one, the Pillars of Hercules fall.
+		name = worldnewscitycapture.293.c
+		trigger = {
+			NOT = {
+				tag = event_target:old_controller
+				tag = event_target:new_controller
+			}
+		}
+	}
+}
+
+### The Fall of Amsterdam
+news_event = {
+	id = worldnewscitycapture.294
+	immediate = { log = "[GetDateText]: [Root.GetName]: event worldnewscitycapture.294 FROM = [From.GetName]" }
+	title = worldnewscitycapture.294.t
+	picture = GFX_news_event_HOL_troops
+	desc =  worldnewscitycapture.294.d
+
+	major = yes
+	is_triggered_only = yes
+
+	trigger = {
+		wants_world_news = yes
+	}
+
+	show_major = {
+		regional_europe_news = yes
+	}
+
+	immediate = {
+		7 = {
+			set_state_flag = state_has_fallen
+			owner = { save_event_target_as = old_controller }
+			controller = { save_event_target_as = new_controller }
+		}
+	}
+
+	option = { #A dark time for the Dutch people
+		name = worldnewscitycapture.294.a
+		trigger = {
+			tag = event_target:old_controller
+		}
+	}
+	
+	option = { #The Venice of the North is ours!
+		name = worldnewscitycapture.294.b
+		trigger = {
+			tag = event_target:new_controller
+		}
+	}
+	
+	option = { #So falls the heart of Bavaria
+		name = worldnewscitycapture.294.c
+		trigger = {
+			NOT = {
+				tag = event_target:old_controller
+				tag = event_target:new_controller
+			}
+		}
+	}
+}
+# The Fall of Munich
+news_event = {
+	id = worldnewscitycapture.295
+	immediate = { log = "[GetDateText]: [Root.GetName]: event worldnewscitycapture.295 FROM = [From.GetName]" }
+	title = worldnewscitycapture.295.t
+	picture = GFX_news_event_capture_munich
+	desc = worldnewscitycapture.295.d
+
+	major = yes
+	is_triggered_only = yes
+
+	trigger = {
+		wants_world_news = yes
+	}
+
+	show_major = {
+		regional_europe_news = yes
+	}
+
+	immediate = {
+		52 = {
+			set_state_flag = state_has_fallen
+			owner = { save_event_target_as = old_controller }
+			controller = { save_event_target_as = new_controller }
+		}
+	}
+
+	option = { #The fall of Munich means that Southern Germany is ours!
+		name = worldnewscitycapture.295.a
+		trigger = {
+			tag = event_target:new_controller
+		}
+	}
+	option = { #With the loss of Munich, Southern Germany is lost
+		name = worldnewscitycapture.295.b
+		trigger = {
+			tag = event_target:old_controller
+		}
+	}
+	option = { #So falls the heart of Bavaria
+		name = worldnewscitycapture.295.c
+		trigger = {
+			NOT = {
+				tag = event_target:old_controller
+				tag = event_target:new_controller
+			}
+		}
+	}
+}
+# The Fall of Delhi
+news_event = {
+	id = worldnewscitycapture.296
+	immediate = { log = "[GetDateText]: [Root.GetName]: event worldnewscitycapture.296 FROM = [From.GetName]" }
+	title = worldnewscitycapture.296.t
+	desc = worldnewscitycapture.296.d
+	picture = GFX_news_event_RAJ_british_india
+
+	major = yes
+	is_triggered_only = yes
+
+	trigger = {
+		wants_world_news = yes
+	}
+	show_major = {
+		regional_asia_news = yes
+	}
+	immediate = {
+		439 = {
+			set_state_flag = state_has_fallen
+			owner = { save_event_target_as = old_controller }
+			controller = { save_event_target_as = new_controller }
+		}
+	}
+	option = { #A setback...but we shall not surrender!
+		name = worldnewscitycapture.296.a
+		trigger = {
+			tag = event_target:old_controller
+		}
+	}
+	option = { #The Heart of Northern India is ours!
+		name = worldnewscitycapture.296.b
+		trigger = {
+			tag = event_target:new_controller
+		}
+	}
+	option = { #Once again, Delhi has a new master
+		name = worldnewscitycapture.296.c
+		trigger = {
+			NOT = {
+				tag = event_target:old_controller
+				tag = event_target:new_controller
+			}
+		}
+	}
+}
+# The Fall of Riga
+news_event = {
+	id = worldnewscitycapture.297
+	immediate = { log = "[GetDateText]: [Root.GetName]: event worldnewscitycapture.297 FROM = [From.GetName]" }
+	title = worldnewscitycapture.297.t
+	desc = worldnewscitycapture.297.d
+	picture = GFX_news_event_capture_riga
+
+	major = yes
+	is_triggered_only = yes
+
+	trigger = {
+		wants_world_news = yes
+	}
+	show_major = {
+		regional_europe_news = yes
+	}
+	immediate = {
+		12 = {
+			set_state_flag = state_has_fallen
+			owner = { save_event_target_as = old_controller }
+			controller = { save_event_target_as = new_controller }
+		}
+	}
+	option = { #Our situation is looking dire.
+		name = worldnewscitycapture.297.a
+		trigger = {
+			tag = event_target:old_controller
+		}
+	}
+	option = { #At last, the Pearl of the Baltic is ours!
+		name = worldnewscitycapture.297.b
+		trigger = {
+			tag = event_target:new_controller
+		}
+	}
+	option = { #The situation looks grim for Riga
+		name = worldnewscitycapture.297.c
+		trigger = {
+			NOT = {
+				tag = event_target:old_controller
+				tag = event_target:new_controller
+			}
+		}
+	}
+}
+# The Fall of Cairo
+news_event = {
+	id = worldnewscitycapture.298
+	immediate = { log = "[GetDateText]: [Root.GetName]: event worldnewscitycapture.298 FROM = [From.GetName]" }
+	title = worldnewscitycapture.298.t
+	picture = GFX_news_event_capture_cairo
+	desc = worldnewscitycapture.298.d
+
+	major = yes
+	is_triggered_only = yes
+
+	trigger = {
+		wants_world_news = yes
+	}
+
+	show_major = {
+		regional_asia_news = yes
+	}
+
+	immediate = {
+		446 = {
+			set_state_flag = state_has_fallen
+			owner = { save_event_target_as = old_controller }
+			controller = { save_event_target_as = new_controller }
+		}
+	}
+
+	option = { #Cairo, city of the Pharaohs is ours!
+		name = worldnewscitycapture.298.a
+		trigger = {
+			tag = event_target:new_controller
+		}
+	}
+	option = { #We have suffered a serious defeat. We will be back!
+		name = worldnewscitycapture.298.b
+		trigger = {
+			tag = event_target:old_controller
+		}
+	}
+	option = { #The ancient city of the sands shall serve a new master once more
+		name = worldnewscitycapture.298.c
+		trigger = {
+			NOT = {
+				tag = event_target:old_controller
+				tag = event_target:new_controller
+			}
+		}
+	}
+}
+
+# The Fall of Cape Town
+news_event = {
+	id = worldnewscitycapture.299
+	immediate = { log = "[GetDateText]: [Root.GetName]: event worldnewscitycapture.299 FROM = [From.GetName]" }
+	title = worldnewscitycapture.299.t
+	desc = worldnewscitycapture.299.d
+	picture = GFX_news_event_capture_cape_town
+
+	major = yes
+	is_triggered_only = yes
+
+	trigger = {
+		wants_world_news = yes
+	}
+	show_major = {
+		regional_europe_news = yes
+	}
+
+	immediate = {
+		681 = {
+			set_state_flag = state_has_fallen
+			owner = { save_event_target_as = old_controller }
+			controller = { save_event_target_as = new_controller }
+		}
+	}
+
+	option = { #We may have lost the battle but the war is not yet lost!
+		name = worldnewscitycapture.299.a
+		trigger = {
+			tag = event_target:old_controller
+		}
+	}
+	option = { #The major port of Cape Town is ours!
+		name = worldnewscitycapture.299.b
+		trigger = {
+			tag = event_target:new_controller
+		}
+	}
+	option = { #The Mother City has been occupied.
+		name = worldnewscitycapture.299.c
+		trigger = {
+			NOT = {
+				tag = event_target:old_controller
+				tag = event_target:new_controller
+			}
+		}
+	}
+}
+
+# The Fall of Buenos Aires
+news_event = {
+	id = worldnewscitycapture.300
+	immediate = { log = "[GetDateText]: [Root.GetName]: event worldnewscitycapture.300 FROM = [From.GetName]" }
+	title = worldnewscitycapture.300.t
+	picture = GFX_news_event_capture_buenos_aires
+	desc = worldnewscitycapture.300.d
+
+	major = yes
+	is_triggered_only = yes
+
+	trigger = {
+		wants_world_news = yes
+	}
+
+	show_major = {
+		regional_south_america_news = yes
+	}
+
+	immediate = {
+		278 = {
+			set_state_flag = state_has_fallen
+			owner = { save_event_target_as = old_controller }
+			controller = { save_event_target_as = new_controller }
+		}
+	}
+
+	option = { #The great city of South America is ours!
+		name = worldnewscitycapture.300.a
+		trigger = {
+			tag = event_target:new_controller
+		}
+	}
+	option = { #With the loss of Buenos Aires, we will have to redouble our efforts.
+		name = worldnewscitycapture.300.b
+		trigger = {
+			tag = event_target:old_controller
+		}
+	}
+	option = { #The Queen of El Plata has fallen!
+		name = worldnewscitycapture.300.c
+		trigger = {
+			NOT = {
+				tag = event_target:old_controller
+				tag = event_target:new_controller
+			}
+		}
+	}
+}
+# The Fall of Santiago
+news_event = {
+	id = worldnewscitycapture.301
+	immediate = { log = "[GetDateText]: [Root.GetName]: event worldnewscitycapture.301 FROM = [From.GetName]" }
+	title = worldnewscitycapture.301.t
+	picture = GFX_news_event_capture_santiago
+
+	desc = {
+		text = worldnewscitycapture.301.d.argentina
+		trigger = {
+			event_target:new_controller = { tag = ARG }
+		}
+	}
+	desc = {
+		text = worldnewscitycapture.301.d
+		trigger = {
+			NOT = { event_target:new_controller = { tag = ARG } }
+		}
+	}
+
+	major = yes
+	is_triggered_only = yes
+
+	trigger = {
+		wants_world_news = yes
+	}
+
+	show_major = {
+		regional_south_america_news = yes
+	}
+
+	immediate = {
+		279 = {
+			set_state_flag = state_has_fallen
+			owner = { save_event_target_as = old_controller }
+			controller = { save_event_target_as = new_controller }
+		}
+	}
+
+	option = { #The city of St. James is ours!
+		name = worldnewscitycapture.301.a
+		trigger = {
+			tag = event_target:new_controller
+			NOT = { event_target:new_controller = { tag = ARG } }
+		}
+	}
+	option = { #We will never surrender! Counterattack when we are ready!
+		name = worldnewscitycapture.301.b
+		trigger = {
+			tag = event_target:old_controller
+		}
+	}
+	option = { #The City of the Island Hills has fallen...
+		name = worldnewscitycapture.301.c
+		trigger = {
+			NOT = {
+				tag = event_target:old_controller
+				tag = event_target:new_controller
+				event_target:new_controller = { tag = ARG }
+			}
+		}
+	}
+	option = { #A glorious victory, we have triumphed once again!
+		name = worldnewscitycapture.301.a.argentina
+		trigger = {
+			tag = event_target:new_controller
+			event_target:new_controller = { tag = ARG }
+		}
+	}
+	
+	option = { #History repeats itself once more.
+		name = worldnewscitycapture.301.c.argentina
+		trigger = {
+			NOT = {
+				tag = event_target:old_controller
+				tag = event_target:new_controller
+			}
+			event_target:new_controller = { tag = ARG }
+		}
+	}
+}
+
+# The Fall of Minsk
+news_event = {
+	id = worldnewscitycapture.302
+	immediate = { log = "[GetDateText]: [Root.GetName]: event worldnewscitycapture.302 FROM = [From.GetName]" }
+	title = worldnewscitycapture.302.t
+	picture = GFX_news_event_capture_minsk
+
+	desc = worldnewscitycapture.302.d
+	major = yes
+	is_triggered_only = yes
+
+	trigger = {
+		wants_world_news = yes
+	}
+
+	show_major = {
+		regional_europe_news = yes
+	}
+
+	immediate = {
+		206 = {
+			set_state_flag = state_has_fallen
+			owner = { save_event_target_as = old_controller }
+			controller = { save_event_target_as = new_controller }
+		}
+	}
+	option = { #The great city of Belarus is ours!
+		name = worldnewscitycapture.302.a
+		trigger = {
+			tag = event_target:new_controller
+		}
+	}
+	option = { #We will never surrender!
+		name = worldnewscitycapture.302.b
+		trigger = {
+			tag = event_target:old_controller
+		}
+	}
+	option = { #Minsk has fallen
+		name = worldnewscitycapture.302.c
+		trigger = {
+			NOT = {
+				tag = event_target:old_controller
+				tag = event_target:new_controller
+			}
+		}
+	}
+}
+
+# The Fall of Vilnius
+news_event = {
+	id = worldnewscitycapture.303
+	immediate = { log = "[GetDateText]: [Root.GetName]: event worldnewscitycapture.303 FROM = [From.GetName]" }
+	title = worldnewscitycapture.303.t
+	desc = worldnewscitycapture.303.d
+	picture = GFX_news_event_capture_vilnius
+
+	major = yes
+	is_triggered_only = yes
+
+	trigger = {
+		wants_world_news = yes
+	}
+
+	show_major = {
+		regional_europe_news = yes
+	}
+	immediate = {
+		784 = {
+			set_state_flag = state_has_fallen
+			owner = { save_event_target_as = old_controller }
+			controller = { save_event_target_as = new_controller }
+		}
+	}
+	option = { #We shall fight to the last!
+		name = worldnewscitycapture.303.a
+		trigger = {
+			tag = event_target:old_controller
+		}
+	}
+	option = { #The "Jerusalem" of the North is ours!
+		name = worldnewscitycapture.303.b
+		trigger = {
+			tag = event_target:new_controller
+		}
+	}
+	option = { #The great Lithuanian city has fallen?
+		name = worldnewscitycapture.303.c
+		trigger = {
+			NOT = {
+				tag = event_target:old_controller
+				tag = event_target:new_controller
+			}
+		}
+	}
+}
+
+# The Fall of Nanjing
+news_event = {
+	id = worldnewscitycapture.304
+	immediate = { log = "[GetDateText]: [Root.GetName]: event worldnewscitycapture.304 FROM = [From.GetName]" }
+	title = worldnewscitycapture.304.t
+	picture = GFX_news_event_nanjing_captured
+
+	desc = worldnewscitycapture.304.d
+	
+	major = yes
+	is_triggered_only = yes
+
+	trigger = {
+		wants_world_news = yes
+	}
+	show_major = {
+		regional_asia_news = yes
+	}
+	immediate = {
+		743 = {
+			set_state_flag = state_has_fallen
+			owner = { save_event_target_as = old_controller }
+			controller = { save_event_target_as = new_controller }
+		}
+	}
+	option = { #The "Southern" Capital is ours!
+		name = worldnewscitycapture.304.a
+		trigger = {
+			tag = event_target:new_controller
+		}
+	}
+	option = { #We would rather die than surrender! We will be back!
+		name = worldnewscitycapture.304.b
+		trigger = {
+			tag = event_target:old_controller
+		}
+	}
+	option = { #The great city of Nanjing has fallen
+		name = worldnewscitycapture.304.c
+		trigger = {
+			NOT = {
+				tag = event_target:old_controller
+				tag = event_target:new_controller
+			}
+		}
+	}
+}
+
+# The Fall of Wuhan
+news_event = {
+	id = worldnewscitycapture.305
+	immediate = { log = "[GetDateText]: [Root.GetName]: event worldnewscitycapture.305 FROM = [From.GetName]" }
+	title = worldnewscitycapture.305.t
+	picture = GFX_news_event_capture_wuhan
+
+	desc = worldnewscitycapture.305.d
+	major = yes
+	is_triggered_only = yes
+
+	trigger = {
+		wants_world_news = yes
+	}
+	show_major = {
+		regional_asia_news = yes
+	}
+	immediate = {
+		620 = {
+			set_state_flag = state_has_fallen
+			owner = { save_event_target_as = old_controller }
+			controller = { save_event_target_as = new_controller }
+		}
+	}
+	option = { #Wuhan, the city of rivers is ours!
+		name = worldnewscitycapture.305.a
+		trigger = {
+			tag = event_target:new_controller
+		}
+	}
+	option = { #We would rather die than surrender! We will be back!
+		name = worldnewscitycapture.305.b
+		trigger = {
+			tag = event_target:old_controller
+		}
+	}
+	option = { #A serious defeat for the [old_controller.GetAdjective]
+		name = worldnewscitycapture.305.c
+		trigger = {
+			NOT = {
+				tag = event_target:old_controller
+				tag = event_target:new_controller
+			}
+		}
+	}
+}
+
+# The Fall of Guangzhou
+news_event = {
+	id = worldnewscitycapture.306
+	immediate = { log = "[GetDateText]: [Root.GetName]: event worldnewscitycapture.306 FROM = [From.GetName]" }
+	title = worldnewscitycapture.306.t
+	picture = GFX_news_event_capture_guangzhou
+	desc = worldnewscitycapture.306.d
+
+	major = yes
+	is_triggered_only = yes
+
+	trigger = {
+		wants_world_news = yes
+	}
+	show_major = {
+		regional_asia_news = yes
+	}
+	immediate = {
+		592 = {
+			set_state_flag = state_has_fallen
+			owner = { save_event_target_as = old_controller }
+			controller = { save_event_target_as = new_controller }
+		}
+	}
+	option = { #With Guangzhou secured, Southern China is ours!
+		name = worldnewscitycapture.306.a
+		trigger = {
+			tag = event_target:new_controller
+			NOT = { tag = FNG }
+		}
+	}
+	
+	option = { #We are China's true and only government!
+		name = worldnewscitycapture.306.a.fng
+		trigger = {
+			tag = event_target:new_controller
+			tag = FNG
+		}
+	}
+	
+	option = { #A defeat but one that we shall return from!
+		name = worldnewscitycapture.306.b
+		trigger = {
+			tag = event_target:old_controller
+		}
+	}
+	
+	option = { #A great loss for [old_controller.GetName]
+		name = worldnewscitycapture.306.c
+		trigger = {
+			NOT = {
+				tag = event_target:old_controller
+				tag = event_target:new_controller
+				event_target:new_controller = { tag = FNG }
+			}
+		}
+	}
+	
+	option = { #Surely China can be united only by the sword?
+		name = worldnewscitycapture.306.c.fng
+		trigger = {
+			NOT = {
+				tag = event_target:old_controller
+				tag = event_target:new_controller
+			}
+			event_target:new_controller = { tag = FNG }
+		}
+	}
+}
+
+# The Fall of Chongqing
+news_event = {
+	id = worldnewscitycapture.307
+	immediate = { log = "[GetDateText]: [Root.GetName]: event worldnewscitycapture.307 FROM = [From.GetName]" }
+	title = worldnewscitycapture.307.t
+	desc = worldnewscitycapture.307.d
+	picture = GFX_news_event_capture_chongqing
+	major = yes
+	is_triggered_only = yes
+
+	trigger = {
+		wants_world_news = yes
+	}
+
+	show_major = {
+		regional_asia_news = yes
+	}
+	immediate = {
+		605 = {
+			set_state_flag = state_has_fallen
+			owner = { save_event_target_as = old_controller }
+			controller = { save_event_target_as = new_controller }
+		}
+	}
+	option = { #With this victory, we have secured Sichuan!
+		name = worldnewscitycapture.307.a
+		trigger = {
+			tag = event_target:new_controller
+		}
+	}
+	option = { #A serious loss but one that we will recover from!
+		name = worldnewscitycapture.307.b
+		trigger = {
+			tag = event_target:old_controller
+		}
+	}
+	option = { #A major defeat for the Guangzhou Government
+		name = worldnewscitycapture.307.c
+		trigger = {
+			NOT = {
+				tag = event_target:old_controller
+				tag = event_target:new_controller
+
+			}
+		}
+	}
+}
+# The Fall of Kunming
+news_event = {
+	id = worldnewscitycapture.308
+	immediate = { log = "[GetDateText]: [Root.GetName]: event worldnewscitycapture.308 FROM = [From.GetName]" }
+	title = worldnewscitycapture.308.t
+	picture = GFX_news_event_capture_kunming
+
+	desc = worldnewscitycapture.308.d
+
+	major = yes
+	is_triggered_only = yes
+
+	trigger = {
+		wants_world_news = yes
+	}
+	show_major = {
+		regional_asia_news = yes
+	}
+	immediate = {
+		325 = {
+			set_state_flag = state_has_fallen
+			owner = { save_event_target_as = old_controller }
+			controller = { save_event_target_as = new_controller }
+		}
+	}
+	option = { #With this victory, our hold in the west of China is secured.
+		name = worldnewscitycapture.308.a
+		trigger = {
+			tag = event_target:new_controller
+			NOT = { event_target:new_controller = { tag = JAP } }
+		}
+	}
+	option = { #To the mountains we go! We will make our stand there
+		name = worldnewscitycapture.308.b
+		trigger = {
+			tag = event_target:old_controller
+			NOT = { event_target:new_controller = { tag = JAP } }
+		}
+	}
+	option = { #The mountains of Yunnan have a new master...
+		name = worldnewscitycapture.308.c
+		trigger = {
+			NOT = {
+				tag = event_target:old_controller
+				tag = event_target:new_controller
+				event_target:new_controller = { tag = JAP }
+			}
+		}
+	}
+}
+
+# The Fall of Jinan! (Made alternative Loc for this, but it probably should just be axed as an event)
+#news_event = {
+#	id = worldnewscitycapture.309
+#	immediate = { log = "[GetDateText]: [Root.GetName]: event worldnewscitycapture.309 FROM = [From.GetName]" }
+#	title = worldnewscitycapture.309.t
+#	desc = {
+#		text = worldnewscitycapture.309.d_Zongchang
+#		trigger = {
+#			SQI = {
+#				has_country_leader = { character = SQI_zhang_zongchang }
+#			}
+#		}
+#	}
+#	desc = {
+#		text = worldnewscitycapture.309.d_Tianran
+#		trigger = {
+#			SQI = {
+#				has_country_leader = { character = SQI_zhang_tianran }
+#			}
+#		}
+#	}
+#	major = yes
+#	is_triggered_only = yes
+#	show_major = {
+#		is_han_chinese_tag = yes
+#		regional_asia_news = yes
+#	}
+#	trigger = {
+#		wants_world_news = yes
+#		SQI = {
+#			597 = { is_owned_by = SQI is_capital = yes }
+#			OR = {
+#				has_country_leader = { character = SQI_zhang_zongchang }
+#				has_country_leader = { character = SQI_zhang_tianran }
+#			}
+#		}
+#	}
+#	immediate = {
+#		597 = {
+#			set_state_flag = state_has_fallen
+#			owner = { save_event_target_as = old_controller }
+#			controller = { save_event_target_as = new_controller }
+#		}
+#	}
+#	option = { # Good riddance!
+#		name = worldnewscitycapture.309.a
+#		trigger = {
+#			tag = event_target:new_controller
+#		}
+#	}
+#	option = { # This is nothing but a tactical retreat!
+#		name = worldnewscitycapture.309.b
+#		trigger = {
+#			tag = event_target:old_controller
+#		}
+#	}
+#	option = { # An end to China�s basest warlord?
+#		name = worldnewscitycapture.309.c
+#		trigger = {
+#			NOT = {
+#				tag = event_target:old_controller
+#				tag = event_target:new_controller
+#			}
+#			SQI = { has_country_leader = { character = SQI_zhang_zongchang } }
+#		}
+#	}
+#	option = { # An early end for a strange faith
+#		name = worldnewscitycapture.309.e
+#		trigger = {
+#			NOT = {
+#				tag = event_target:old_controller
+#				tag = event_target:new_controller
+#			}
+#			SQI = { has_country_leader = { character = SQI_zhang_tianran } }
+#		}
+#	}
+#}
+
+# The Fall of Alexandria
+news_event = {
+	id = worldnewscitycapture.310
+	immediate = { log = "[GetDateText]: [Root.GetName]: event worldnewscitycapture.310 FROM = [From.GetName]" }
+	title = worldnewscitycapture.310.t
+	picture = GFX_news_event_capture_alexandria
+	desc =  worldnewscitycapture.310.d
+	
+	major = yes
+	is_triggered_only = yes
+
+	trigger = {
+		wants_world_news = yes
+	}
+	show_major = {
+		regional_asia_news = yes
+	}
+	immediate = {
+		447 = {
+			set_state_flag = state_has_fallen
+			owner = { save_event_target_as = old_controller }
+			controller = { save_event_target_as = new_controller }
+		}
+	}
+	option = { #With this victory, the city of Alexander is ours!
+		name = worldnewscitycapture.310.a
+		trigger = {
+			tag = event_target:new_controller
+		}
+	}
+	option = { #A serious defeat! We will not tolerate it
+		name = worldnewscitycapture.310.b
+		trigger = {
+			tag = event_target:old_controller
+		}
+	}
+	option = { #The city of Alexander has been conquered yet again...
+		name = worldnewscitycapture.310.c
+		trigger = {
+			NOT = {
+				tag = event_target:old_controller
+				tag = event_target:new_controller
+			}
+		}
+	}
+}
+
+# The Fall of Marseille
+news_event = {
+	id = worldnewscitycapture.311
+	immediate = { log = "[GetDateText]: [Root.GetName]: event worldnewscitycapture.311 FROM = [From.GetName]" }
+	title = worldnewscitycapture.311.t
+	picture = GFX_news_event_capture_marseille
+	desc =  worldnewscitycapture.311.d
+	
+	major = yes
+	is_triggered_only = yes
+
+	trigger = {
+		wants_world_news = yes
+	}
+	show_major = {
+		regional_europe_news = yes
+	}
+	immediate = {
+		921 = {
+			set_state_flag = state_has_fallen
+			owner = { save_event_target_as = old_controller }
+			controller = { save_event_target_as = new_controller }
+		}
+	}
+	option = { #Placeholder
+		name = worldnewscitycapture.311.a
+		trigger = {
+			tag = event_target:new_controller
+		}
+	}
+	option = { #Placeholder
+		name = worldnewscitycapture.311.b
+		trigger = {
+			tag = event_target:old_controller
+		}
+	}
+	option = { #Placeholder
+		name = worldnewscitycapture.311.c
+		trigger = {
+			NOT = {
+				tag = event_target:old_controller
+				tag = event_target:new_controller
+			}
+		}
+	}
+}
+
+# The Fall of Turin
+news_event = {
+	id = worldnewscitycapture.312
+	immediate = { log = "[GetDateText]: [Root.GetName]: event worldnewscitycapture.312 FROM = [From.GetName]" }
+	title = worldnewscitycapture.312.t
+	picture = GFX_news_event_capture_turin
+	desc =  worldnewscitycapture.312.d
+	
+	major = yes
+	is_triggered_only = yes
+
+	trigger = {
+		wants_world_news = yes
+	}
+	show_major = {
+		regional_europe_news = yes
+	}
+	immediate = {
+		158 = {
+			set_state_flag = state_has_fallen
+			owner = { save_event_target_as = old_controller }
+			controller = { save_event_target_as = new_controller }
+		}
+	}
+	option = { #Placeholder
+		name = worldnewscitycapture.312.a
+		trigger = {
+			tag = event_target:new_controller
+		}
+	}
+	option = { #Placeholder
+		name = worldnewscitycapture.312.b
+		trigger = {
+			tag = event_target:old_controller
+		}
+	}
+	option = { #Placeholder
+		name = worldnewscitycapture.312.c
+		trigger = {
+			NOT = {
+				tag = event_target:old_controller
+				tag = event_target:new_controller
+			}
+		}
+	}
+}
+
+# The Fall of Naples
+news_event = {
+	id = worldnewscitycapture.313
+	immediate = { log = "[GetDateText]: [Root.GetName]: event worldnewscitycapture.313 FROM = [From.GetName]" }
+	title = worldnewscitycapture.313.t
+	picture = GFX_news_event_capture_naples
+	desc =  worldnewscitycapture.313.d
+	
+	major = yes
+	is_triggered_only = yes
+
+	trigger = {
+		wants_world_news = yes
+	}
+	show_major = {
+		regional_europe_news = yes
+	}
+	immediate = {
+		117 = {
+			set_state_flag = state_has_fallen
+			owner = { save_event_target_as = old_controller }
+			controller = { save_event_target_as = new_controller }
+		}
+	}
+	option = { #Placeholder
+		name = worldnewscitycapture.313.a
+		trigger = {
+			tag = event_target:new_controller
+		}
+	}
+	option = { #Placeholder
+		name = worldnewscitycapture.313.b
+		trigger = {
+			tag = event_target:old_controller
+		}
+	}
+	option = { #Placeholder
+		name = worldnewscitycapture.313.c
+		trigger = {
+			NOT = {
+				tag = event_target:old_controller
+				tag = event_target:new_controller
+			}
+		}
+	}
+}
+
+# The Fall of Milan
+news_event = {
+	id = worldnewscitycapture.314
+	immediate = { log = "[GetDateText]: [Root.GetName]: event worldnewscitycapture.314 FROM = [From.GetName]" }
+	title = worldnewscitycapture.314.t
+	picture = GFX_news_event_capture_milan
+	desc =  worldnewscitycapture.314.d
+	
+	major = yes
+	is_triggered_only = yes
+
+	trigger = {
+		wants_world_news = yes
+	}
+	show_major = {
+		regional_europe_news = yes
+	}
+	immediate = {
+		159 = {
+			set_state_flag = state_has_fallen
+			owner = { save_event_target_as = old_controller }
+			controller = { save_event_target_as = new_controller }
+		}
+	}
+	option = { #Placeholder
+		name = worldnewscitycapture.314.a
+		trigger = {
+			tag = event_target:new_controller
+		}
+	}
+	option = { #Placeholder
+		name = worldnewscitycapture.314.b
+		trigger = {
+			tag = event_target:old_controller
+		}
+	}
+	option = { #Placeholder
+		name = worldnewscitycapture.314.c
+		trigger = {
+			NOT = {
+				tag = event_target:old_controller
+				tag = event_target:new_controller
+			}
+		}
+	}
+}
+
+# The Fall of Helsinki
+news_event = {
+	id = worldnewscitycapture.315
+	immediate = { log = "[GetDateText]: [Root.GetName]: event worldnewscitycapture.315 FROM = [From.GetName]" }
+	title = worldnewscitycapture.315.t
+	picture = GFX_news_event_capture_helsinki
+	desc =  worldnewscitycapture.315.d
+	
+	major = yes
+	is_triggered_only = yes
+
+	trigger = {
+		wants_world_news = yes
+	}
+	show_major = {
+		regional_europe_news = yes
+	}
+	immediate = {
+		111 = {
+			set_state_flag = state_has_fallen
+			owner = { save_event_target_as = old_controller }
+			controller = { save_event_target_as = new_controller }
+		}
+	}
+	option = { #Placeholder
+		name = worldnewscitycapture.315.a
+		trigger = {
+			tag = event_target:new_controller
+		}
+	}
+	option = { #Placeholder
+		name = worldnewscitycapture.315.b
+		trigger = {
+			tag = event_target:old_controller
+		}
+	}
+	option = { #Placeholder
+		name = worldnewscitycapture.315.c
+		trigger = {
+			NOT = {
+				tag = event_target:old_controller
+				tag = event_target:new_controller
+			}
+		}
+	}
+}
+
+# The Fall of Sofia
+news_event = {
+	id = worldnewscitycapture.316
+	immediate = { log = "[GetDateText]: [Root.GetName]: event worldnewscitycapture.316 FROM = [From.GetName]" }
+	title = worldnewscitycapture.316.t
+	picture = GFX_news_event_capture_sofia
+	desc =  worldnewscitycapture.316.d
+	
+	major = yes
+	is_triggered_only = yes
+
+	trigger = {
+		wants_world_news = yes
+	}
+	show_major = {
+		regional_europe_news = yes
+	}
+	immediate = {
+		48 = {
+			set_state_flag = state_has_fallen
+			owner = { save_event_target_as = old_controller }
+			controller = { save_event_target_as = new_controller }
+		}
+	}
+	option = { #Placeholder
+		name = worldnewscitycapture.316.a
+		trigger = {
+			tag = event_target:new_controller
+		}
+	}
+	option = { #Placeholder
+		name = worldnewscitycapture.316.b
+		trigger = {
+			tag = event_target:old_controller
+		}
+	}
+	option = { #Placeholder
+		name = worldnewscitycapture.316.c
+		trigger = {
+			NOT = {
+				tag = event_target:old_controller
+				tag = event_target:new_controller
+			}
+		}
+	}
+}
+
+# The Fall of Dar-es-Salaam
+news_event = {
+	id = worldnewscitycapture.317
+	immediate = { log = "[GetDateText]: [Root.GetName]: event worldnewscitycapture.317 FROM = [From.GetName]" }
+	title = worldnewscitycapture.317.t
+	picture = GFX_news_event_capture_daressalaam
+	desc =  worldnewscitycapture.317.d
+	
+	major = yes
+	is_triggered_only = yes
+
+	trigger = {
+		wants_world_news = yes
+	}
+
+	immediate = {
+		1038 = {
+			set_state_flag = state_has_fallen
+			owner = { save_event_target_as = old_controller }
+			controller = { save_event_target_as = new_controller }
+		}
+	}
+	option = { #Placeholder
+		name = worldnewscitycapture.317.a
+		trigger = {
+			tag = event_target:new_controller
+		}
+	}
+	option = { #Placeholder
+		name = worldnewscitycapture.317.b
+		trigger = {
+			tag = event_target:old_controller
+		}
+	}
+	option = { #Placeholder
+		name = worldnewscitycapture.317.c
+		trigger = {
+			NOT = {
+				tag = event_target:old_controller
+				tag = event_target:new_controller
+			}
+		}
+	}
+}
+
+# The Fall of Seoul
+news_event = {
+	id = worldnewscitycapture.318
+	immediate = { log = "[GetDateText]: [Root.GetName]: event worldnewscitycapture.318 FROM = [From.GetName]" }
+	title = worldnewscitycapture.318.t
+	picture = GFX_news_event_capture_seoul
+	desc =  worldnewscitycapture.318.d
+	
+	major = yes
+	is_triggered_only = yes
+
+	trigger = {
+		wants_world_news = yes
+	}
+	show_major = {
+		regional_asia_news = yes
+	}
+	immediate = {
+		525 = {
+			set_state_flag = state_has_fallen
+			owner = { save_event_target_as = old_controller }
+			controller = { save_event_target_as = new_controller }
+		}
+	}
+	option = { #Placeholder
+		name = worldnewscitycapture.318.a
+		trigger = {
+			tag = event_target:new_controller
+		}
+	}
+	option = { #Placeholder
+		name = worldnewscitycapture.318.b
+		trigger = {
+			tag = event_target:old_controller
+		}
+	}
+	option = { #Placeholder
+		name = worldnewscitycapture.318.c
+		trigger = {
+			NOT = {
+				tag = event_target:old_controller
+				tag = event_target:new_controller
+			}
+		}
+	}
+}
+
+# The Fall of Leopoldville
+news_event = {
+	id = worldnewscitycapture.319
+	immediate = { log = "[GetDateText]: [Root.GetName]: event worldnewscitycapture.319 FROM = [From.GetName]" }
+	title = worldnewscitycapture.319.t
+	picture = GFX_news_event_capture_leopoldville
+	desc =  worldnewscitycapture.319.d
+	
+	major = yes
+	is_triggered_only = yes
+
+	trigger = {
+		wants_world_news = yes
+	}
+
+	immediate = {
+		1024 = {
+			set_state_flag = state_has_fallen
+			owner = { save_event_target_as = old_controller }
+			controller = { save_event_target_as = new_controller }
+		}
+	}
+	option = { #Placeholder
+		name = worldnewscitycapture.319.a
+		trigger = {
+			tag = event_target:new_controller
+		}
+	}
+	option = { #Placeholder
+		name = worldnewscitycapture.319.b
+		trigger = {
+			tag = event_target:old_controller
+		}
+	}
+	option = { #Placeholder
+		name = worldnewscitycapture.319.c
+		trigger = {
+			NOT = {
+				tag = event_target:old_controller
+				tag = event_target:new_controller
+			}
+		}
+	}
+}

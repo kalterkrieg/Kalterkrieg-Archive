@@ -1,0 +1,1552 @@
+shared_focus = {
+	id = CAN_1949_election
+	icon = GFX_generic_elections
+	cost = 8
+	x = 16
+
+	y = 0
+	available = {
+		has_country_flag = CAN_1949_election_start
+		hidden_trigger = { always = no }
+	}
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = {
+		
+	}
+	completion_reward = {
+		custom_effect_tooltip = unlock_focuses
+	}
+
+}
+shared_focus = {
+	id = CAN_ccf_rises
+	icon = GFX_CAN_CCF_Victory
+	cost = 8
+	x = -5
+	y = 1
+	available = {
+		has_country_flag = CAN_1949_election_done
+		has_government = social_democrat
+		always = no
+	}
+	relative_position_id = CAN_1949_election
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = {
+		focus = CAN_1949_election
+	}
+	completion_reward = {
+		add_political_power = 50
+		custom_effect_tooltip = unlock_focuses
+	}
+
+}
+shared_focus = {
+	id = CAN_hasten_demobilization
+	icon = GFX_generic_construction_krg
+	cost = 8
+	x = -6
+	y = 2
+	available = {
+
+	}
+	relative_position_id = CAN_1949_election
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = {
+		focus = CAN_ccf_rises
+	}
+	completion_reward = {
+		clr_country_flag = econmob_law_locked
+		custom_effect_tooltip = change_ec_mob_allow
+		swap_ideas = {
+			remove_idea = KRG_partial_mob
+			add_idea = KRG_civilian_economy
+		}
+		1076 = {
+			remove_building = {
+				type = arms_factory
+				level = 1
+			}
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
+		1075 = {
+			remove_building = {
+				type = arms_factory
+				level = 1
+			}
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
+	}
+}
+shared_focus = {
+	id = CAN_dissolve_stlaurant_committee
+	icon = GFX_generic_treaty
+	cost = 8
+	x = -4
+	y = 2
+	available = {
+
+	}
+	relative_position_id = CAN_1949_election
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = {
+		focus = CAN_ccf_rises
+
+	}
+	completion_reward = {
+		add_stability = -0.05
+		CAN_popularity_socdem_increase_small = yes
+		custom_effect_tooltip = CAN_increase_socdem_small_tt
+		swap_ideas = {
+			remove_idea = CAN_idea_beacon_of_liberty
+			add_idea = CAN_idea_beacon_of_liberty_2
+		}
+	}
+
+}
+shared_focus = {
+	id = CAN_socialist_welfare_reforms
+	icon = GFX_generic_social_reforms
+	cost = 8
+	x = -5
+	y = 3
+	available = {
+
+	}
+	relative_position_id = CAN_1949_election
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = {
+		focus = CAN_ccf_rises
+
+	}
+	completion_reward = {
+		swap_ideas = {
+			remove_idea = econ_small_service_spending
+			add_idea = econ_large_service_spending
+		}
+	}
+
+}
+shared_focus = {
+	id = CAN_expand_electric_programmes
+	icon = GFX_generic_electricity
+	cost = 8
+	x = -7
+	y = 3
+	available = {
+
+	}
+	relative_position_id = CAN_1949_election
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = {
+		focus = CAN_ccf_rises
+
+	}
+	completion_reward = {
+		add_tech_bonus = {
+			uses = 1
+			bonus = 1
+			category = electronics_tech #may change to crpyto later
+		}
+		467 = {
+			move_up_state_category = yes
+		}
+		469 = {
+			move_up_state_category = yes
+		}
+	}
+
+}
+shared_focus = {
+	id = CAN_hisd_act
+	icon = GFX_CAN_welfare
+	cost = 8 
+	x = -3
+	y = 3
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = CAN_passing_another_law_tt
+			check_variable = { CAN_current_law = 0 }
+		}
+	}
+	cancel_if_invalid = no
+	continue_if_invalid = yes
+	relative_position_id = CAN_1949_election
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = {
+		focus = CAN_dissolve_stlaurant_committee
+		focus = CAN_expand_social_welfare_programmes
+	}
+	select_effect = {
+		set_variable = { CAN_current_law = 2 }
+		set_variable = { CAN_current_law_max_clause = 3 }
+		CAN_laws_new_law = yes
+		add_to_array = { CAN_laws_clauses_available = 5 }
+		add_to_array = { CAN_laws_clauses_available = 6 }
+		add_to_array = { CAN_laws_clauses_available = 7 }
+		add_to_array = { CAN_laws_clauses_available = 8 }
+		add_to_array = { CAN_laws_clauses_available = 9 }
+		if = {
+			limit = {
+				CAN_has_socdem_government = yes
+			}
+			set_variable = { CAN_laws_support_change = 0 }
+			CAN_laws_oppose = yes
+			if = {
+				limit = {
+					has_global_flag = CAN_parl_pc_formed
+				}
+				set_variable = { CAN_laws_support_change = 2 }
+				CAN_laws_support = yes
+				set_variable = { CAN_laws_support_change = 3 }
+				CAN_laws_support = yes
+			} else = {
+				set_variable = { CAN_laws_support_change = 3 }
+				CAN_laws_support = yes
+				set_variable = { CAN_laws_support_change = 4 }
+				CAN_laws_support = yes
+			}
+		} else = {
+			set_variable = { CAN_laws_support_change = 1 }
+			CAN_laws_support = yes
+		}
+		if = {
+			limit = {
+				has_global_flag = CAN_parl_pc_formed
+			}
+			remove_from_array = { CAN_laws_clauses_available = 9 }
+			add_to_array = { CAN_laws_clauses_available = 67 }
+		}
+	}
+	completion_reward = {
+		custom_effect_tooltip = CAN_laws_2_introduce_tt
+		effect_tooltip = {
+			move_up_hc_spending = yes
+		}
+	}
+	ai_will_do = { factor = 1000 }
+}
+shared_focus = {
+	id = CAN_refugee_housing_programmes
+	icon = GFX_generic_collective_housing
+	cost = 8
+	x = -8
+	y = 4
+	available = {
+
+	}
+	relative_position_id = CAN_1949_election
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = {
+		focus = CAN_expand_electric_programmes
+
+	}
+	completion_reward = {
+		1079 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
+		1076 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
+		add_stability = -0.05
+		add_timed_idea = { idea = CAN_refugee_housing_programmes days = 180 }
+	}
+
+}
+shared_focus = {
+	id = CAN_breadbasket_of_world
+	icon = GFX_CAN_breadbasket_world
+	cost = 8
+	x = -6
+	y = 4
+	available = {
+
+	}
+	relative_position_id = CAN_1949_election
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = {
+		focus = CAN_expand_electric_programmes
+	}
+	prerequisite = {
+		focus = CAN_socialist_welfare_reforms
+	}
+	prerequisite = {
+		focus = CAN_hisd_act
+	}
+	completion_reward = {
+		every_country = {
+			limit = {
+				is_in_or_aligned_with_accord = yes
+			}
+			add_opinion_modifier = {
+                target = ROOT
+                modifier = can_trade 
+			}
+			add_ideas = CAN_Canadian_grain
+		}
+	}
+
+}
+shared_focus = {
+	id = CAN_amnesty_for_americans
+	icon = GFX_generic_trials
+	cost = 8
+	x = -4
+	y = 4
+	available = {
+
+	}
+	relative_position_id = CAN_1949_election
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = {
+		focus = CAN_expand_electric_programmes
+	}
+	prerequisite = {
+		focus = CAN_socialist_welfare_reforms
+	}
+	prerequisite = {
+		focus = CAN_hisd_act
+	}
+	completion_reward = {
+		CAN_move_up_american_integration = yes
+		CAN_popularity_socdem_increase_small = yes
+		custom_effect_tooltip = CAN_increase_socdem_small_tt
+	}
+
+}
+shared_focus = {
+	id = CAN_open_immigration
+	icon = GFX_socialist_constitution
+	cost = 8
+	x = -6
+	y = 5
+	available = {
+
+	}
+	relative_position_id = CAN_1949_election
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = {
+		focus = CAN_amnesty_for_americans
+	}
+	prerequisite = {
+		focus = CAN_breadbasket_of_world
+	}
+
+	completion_reward = {
+		swap_ideas = {
+			remove_idea = CAN_idea_beacon_of_liberty_2
+			add_idea = CAN_idea_beacon_of_liberty_3
+		}
+	}
+
+}
+shared_focus = {
+	id = CAN_ameliorate_socialisms_reputation
+	icon = GFX_Socialist_Law
+	cost = 8
+	x = -4
+	y = 5
+	available = {
+
+	}
+	relative_position_id = CAN_1949_election
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = {
+		focus = CAN_amnesty_for_americans
+	}
+	prerequisite = {
+		focus = CAN_breadbasket_of_world
+	}
+
+	completion_reward = {
+		add_political_power = 50
+		CAN_popularity_socdem_increase_medium = yes
+		custom_effect_tooltip = CAN_increase_socdem_medium_tt
+	}
+
+}
+shared_focus = {
+	id = CAN_restrict_govgen_power
+	icon = GFX_CAN_restrict_governor_general
+	cost = 8
+	x = -5
+	y = 6
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = CAN_passing_another_crisis_law_tt
+			OR = {
+				check_variable = { CAN_current_law = 0 }
+				check_variable = { CAN_current_law = 4 }
+			}
+		}
+		hidden_trigger = {
+			NOT = { has_country_flag = CAN_constitutional_crisis }
+		}
+	}
+	cancel_if_invalid = yes
+
+	relative_position_id = CAN_1949_election
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = {
+		focus = CAN_ameliorate_socialisms_reputation
+	}
+	prerequisite = {
+		focus = CAN_open_immigration
+	}
+	select_effect = {
+		set_variable = { CAN_ggact_radicalism = 0 }
+		set_variable = { CAN_current_law = 4 }
+		set_variable = { CAN_current_law_max_clause = 3 }
+		CAN_laws_new_law = yes
+		add_to_array = { CAN_laws_clauses_available = 15 }
+		add_to_array = { CAN_laws_clauses_available = 16 }
+		add_to_array = { CAN_laws_clauses_available = 17 }
+		add_to_array = { CAN_laws_clauses_available = 18 }
+		add_to_array = { CAN_laws_clauses_available = 19 }
+	}
+	completion_reward = {
+		custom_effect_tooltip = CAN_laws_4_introduce_tt
+	}
+
+}
+shared_focus = {
+	id = CAN_stlaurants_liberals
+	icon = GFX_CAN_St_Laurent_Victory
+	cost = 8
+	x = 0
+	y = 1
+	available = {
+		has_country_flag = CAN_1949_election_done
+		has_government = social_liberal
+		always = no
+	}
+	relative_position_id = CAN_1949_election
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = {
+		focus = CAN_1949_election
+	}
+	#mutually_exclusive = {
+	#	focus = CAN_diefenbakers_liberals
+	#}
+
+	completion_reward = {
+		add_political_power = 50
+		custom_effect_tooltip = unlock_focuses
+	}
+}
+shared_focus = {
+	id = CAN_expand_social_welfare_programmes
+	icon = GFX_CAN_Family_Allowance_Act
+	cost = 8
+	x = 0
+	y = 2
+	available = {
+
+	}
+	relative_position_id = CAN_1949_election
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = {
+		focus = CAN_stlaurants_liberals
+	}
+
+
+	completion_reward = {
+		move_up_service_spending = yes
+		CAN_popularity_liberals_increase_small = yes
+		custom_effect_tooltip = CAN_increase_liberals_small_tt
+		add_stability = 0.05
+	}
+
+}
+shared_focus = {
+	id = CAN_expanding_our_intelligence_services
+	icon = GFX_generic_spies
+	cost = 8
+	x = -2
+	y = 2
+	available = {
+
+	}
+	relative_position_id = CAN_1949_election
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = {
+		focus = CAN_stlaurants_liberals
+	}
+	completion_reward = {
+		if = {
+			limit = {
+				has_dlc = "La Resistance"
+			}
+			upgrade_intelligence_agency = upgrade_decryption_boost
+		}
+		else = {
+			add_tech_bonus = {
+				bonus = 1
+				uses = 1
+				category = encryption_tech #may change to crypto later
+			}
+		}
+		add_stability = 0.025
+	}
+}
+shared_focus = {
+	id = CAN_military_police_organization_act
+	icon = GFX_focus_secret_rearmament
+	cost = 8
+	x = 2
+	y = 2
+	available = {
+
+	}
+	relative_position_id = CAN_1949_election
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = {
+		focus = CAN_stlaurants_liberals
+		#focus = CAN_diefenbakers_liberals
+	}
+	completion_reward = {
+		CAN_move_up_american_integration = yes
+		GLG = {
+			add_stability = 0.05
+		}
+	}
+}
+shared_focus = {
+	id = CAN_a_slow_peacetime_transition
+	icon = GFX_GENERIC_peace
+	cost = 8
+	x = -1
+	y = 3
+	available = {
+
+	}
+	relative_position_id = CAN_1949_election
+
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = {
+		focus = CAN_expand_social_welfare_programmes
+	}
+	prerequisite = {
+		focus = CAN_military_police_organization_act
+	}
+	completion_reward = {
+        clr_country_flag = econmob_law_locked
+		custom_effect_tooltip = change_ec_mob_allow
+		move_down_econ_mobilization = yes
+		1076 = {
+			remove_building = {
+				type = arms_factory
+				level = 1
+			}
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
+		1075 = {
+			remove_building = {
+				type = arms_factory
+				level = 1
+			}
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
+	}
+}
+shared_focus = {
+	id = KRG_CAN_national_housing_act
+	icon = GFX_generic_house
+	cost = 8
+	x = 1
+	y = 3
+	relative_position_id = CAN_1949_election
+
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = {
+		focus = CAN_expand_social_welfare_programmes
+	}
+	prerequisite = {
+		focus = CAN_military_police_organization_act
+	}
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = CAN_passing_another_law_tt
+			check_variable = { CAN_current_law = 0 }
+		}
+	}
+	continue_if_invalid = yes
+	select_effect = {
+		set_variable = { CAN_current_law = 5 }
+		set_variable = { CAN_current_law_max_clause = 3 }
+		CAN_laws_new_law = yes
+		add_to_array = { CAN_laws_clauses_available = 20 }
+		add_to_array = { CAN_laws_clauses_available = 21 }
+		add_to_array = { CAN_laws_clauses_available = 22 }
+		add_to_array = { CAN_laws_clauses_available = 23 }
+		if = {
+			limit = { has_global_flag = CAN_parl_pc_formed }
+			add_to_array = { CAN_laws_clauses_available = 68 }
+		} else = {
+			add_to_array = { CAN_laws_clauses_available = 24 }
+		}
+	}
+	completion_reward = {
+		custom_effect_tooltip = CAN_laws_5_introduce_tt
+	}
+}
+shared_focus = {
+	id = CAN_equalisation_payments
+	icon = GFX_focus_mex_privatisation
+	cost = 8
+	x = -2
+	y = 4
+	available = {
+
+	}
+	relative_position_id = CAN_1949_election
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = {
+		focus = KRG_CAN_national_housing_act
+	}
+	prerequisite = {
+		focus = CAN_a_slow_peacetime_transition
+	}
+	
+	completion_reward = {
+		add_timed_idea = {
+			idea = CAN_idea_equalisation_payments
+			days = 240
+		}
+		add_stability = 0.05
+	}
+}
+shared_focus = {
+	id = CAN_breadbasket_of_accord
+	icon = GFX_generic_agriculture_dept
+	cost = 8
+	x = -1
+	y = 5
+	available = {
+
+	}
+	relative_position_id = CAN_1949_election
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = {
+		focus = CAN_equalisation_payments
+	}
+	completion_reward = {
+		every_country = {
+			limit = {
+				is_in_faction_with = CAN
+			}
+			add_opinion_modifier = {
+                target = ROOT
+                modifier = can_trade 
+			}
+			add_ideas = CAN_Canadian_grain
+		}
+	}
+}
+shared_focus = {
+	id = CAN_tundra_name_this
+	icon = GFX_generic_infrastructure
+	cost = 8
+	x = 0
+	y = 4
+	available = {
+
+	}
+	relative_position_id = CAN_1949_election
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = {
+		focus = KRG_CAN_national_housing_act
+	}
+	prerequisite = {
+		focus = CAN_a_slow_peacetime_transition
+	}
+	completion_reward = {
+		276 = {
+			add_building_construction = {
+				type = infrastructure
+				level = 2
+				instant_build = yes
+			}
+		}
+		467 = {
+			add_building_construction = {
+				type = infrastructure
+				level = 2
+				instant_build = yes
+			}
+		}
+		693 = {
+			add_building_construction = {
+				type = infrastructure
+				level = 2
+				instant_build = yes
+			}
+		}
+		1083 = {
+			add_building_construction = {
+				type = infrastructure
+				level = 2
+				instant_build = yes
+			}
+		}
+	}
+}
+shared_focus = {
+	id = CAN_expand_citizenship_act
+	icon = GFX_generic_stable_government
+	cost = 8
+	x = 2
+	y = 4
+	available = {
+
+	}
+	relative_position_id = CAN_1949_election
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = {
+		focus = KRG_CAN_national_housing_act
+	}
+	completion_reward = {
+		add_ideas = CAN_idea_expand_citizenship_act
+		add_opinion_modifier = {
+			target = ENG
+			modifier = CAN_court
+		}
+	}
+}
+shared_focus = {
+	id = CAN_multi_racial_partnership
+	icon = GFX_generic_foreign_policy
+	cost = 8
+	x = 1
+	y = 5
+	available = {
+
+	}
+	relative_position_id = CAN_1949_election
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = {
+		focus = CAN_expand_citizenship_act
+	}
+	completion_reward = {
+		country_event = {
+			id = krg_can.78
+			days = 1
+		}
+	}
+}
+
+shared_focus = {
+	id = CAN_the_canadian_century
+	icon = GFX_generic_canada_big_flag
+	cost = 8
+	x = 0
+	y = 6
+	available = {
+
+	}
+	relative_position_id = CAN_1949_election
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = {
+		focus = CAN_breadbasket_of_accord
+	}
+	prerequisite = {
+		focus = CAN_multi_racial_partnership
+	}
+	completion_reward = {
+		CAN_move_up_american_integration = yes
+		country_event = { id = krg_can.81 }
+	}
+}
+shared_focus = {
+	id = CAN_return_of_tories
+	icon = GFX_CAN_Drew_Victory
+	cost = 8
+	x = 5
+	y = 1
+	available = {
+		has_country_flag = CAN_1949_election_done
+		has_government = social_conservative
+		always = no
+	}
+	relative_position_id = CAN_1949_election
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = {
+		focus = CAN_1949_election
+	}
+	completion_reward = {
+		add_political_power = 50
+		custom_effect_tooltip = unlock_focuses
+	}
+}
+shared_focus = {
+	id = CAN_slow_down_economic_demobilization
+	icon = GFX_generic_demobilise_econ
+	cost = 8
+	x = 4
+	y = 2
+	available = {
+
+	}
+	relative_position_id = CAN_1949_election
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = {
+		focus = CAN_return_of_tories
+	}
+	completion_reward = { 
+		clr_country_flag = econmob_law_locked
+		custom_effect_tooltip = change_ec_mob_allow
+        add_tech_bonus = {
+            bonus = 0.50
+            uses = 1
+            category = dockyard_tech
+        }
+		add_stability = -0.05
+	} 
+}
+shared_focus = {
+	id = CAN_increase_tariffs
+	icon = GFX_generic_positive_trade_relations_gold
+	cost = 8
+	x = 3
+	y = 3
+	available = {
+
+	}
+	relative_position_id = CAN_1949_election
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = {
+		focus = CAN_slow_down_economic_demobilization
+	}
+	completion_reward = {
+		move_up_trade_laws = yes
+	}
+}
+shared_focus = {
+	id = CAN_repeal_wealth_taxes
+	icon = GFX_focus_generic_treaty
+	cost = 8
+	x = 4
+	y = 4
+	relative_position_id = CAN_1949_election
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = {
+		focus = CAN_increase_tariffs
+	}
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = CAN_passing_another_law_tt
+			check_variable = { CAN_current_law = 0 }
+		}
+	}
+	continue_if_invalid = yes
+	select_effect = {
+		set_variable = { CAN_current_law = 6 }
+		set_variable = { CAN_current_law_max_clause = 3 }
+		CAN_laws_new_law = yes
+		add_to_array = { CAN_laws_clauses_available = 25 }
+		add_to_array = { CAN_laws_clauses_available = 26 }
+		add_to_array = { CAN_laws_clauses_available = 27 }
+		add_to_array = { CAN_laws_clauses_available = 28 }
+		add_to_array = { CAN_laws_clauses_available = 29 }
+		set_variable = { CAN_laws_support_change = 6 }
+		CAN_laws_support = yes
+		if = {
+			limit = {
+				has_global_flag = CAN_parl_pc_formed
+				CAN_has_conservative_government = yes
+			}
+			set_variable = { CAN_laws_support_change = 5 }
+			CAN_laws_support = yes
+		} else_if = {
+			limit = {
+				has_global_flag = CAN_parl_pc_formed
+				CAN_has_unionist_government = yes
+			}
+			remove_from_array = { CAN_laws_clauses_available = 25 }
+			add_to_array = { CAN_laws_clauses_available = 69 }
+		}
+	}
+	completion_reward = {
+		custom_effect_tooltip = CAN_laws_6_introduce_tt
+		effect_tooltip = {
+			move_down_taxation = yes
+		}
+	}
+}
+shared_focus = {
+	id = CAN_focus_on_internal_development
+	icon = GFX_focus_generic_industry_2
+	cost = 8
+	x = 3
+	y = 5
+	available = {
+
+	}
+	relative_position_id = CAN_1949_election
+
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = {
+		focus = CAN_increase_tariffs
+	}
+	completion_reward = {
+		682 = {
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
+		693 = {
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
+		473 = {
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
+	}
+}
+shared_focus = {
+	id = CAN_expand_the_rcmp
+	icon = GFX_focus_generic_little_entente
+	cost = 8
+	x = 5
+	y = 3
+	available = {
+
+	}
+	relative_position_id = CAN_1949_election
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = {
+		focus = CAN_slow_down_economic_demobilization
+	}
+	completion_reward = {
+		if = {
+			limit = {
+				has_dlc = "La Resistance"
+			}
+			upgrade_intelligence_agency = upgrade_decryption_boost
+		}
+		else = {
+			add_tech_bonus = {
+				bonus = 1
+				uses = 1
+				category = encryption_tech #may change to crypto later
+			}
+		}
+		add_stability = 0.025
+	}
+}
+shared_focus = {
+	id = CAN_expand_the_stlaurant_committee
+	icon = GFX_generic_secret_agents
+	cost = 8
+	x = 5
+	y = 5
+	available = {
+
+	}
+	relative_position_id = CAN_1949_election
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = {
+		focus = CAN_expand_the_rcmp
+	}
+	completion_reward = {
+		CAN_move_up_american_integration = yes
+		add_ideas = CAN_st_laurant_committe_expansion
+	}
+}
+shared_focus = {
+	id = CAN_revise_immigration_policies
+	icon = GFX_generic_imprison_people
+	cost = 8
+	x = 6 
+	y = 2
+	available = {
+
+	}
+	relative_position_id = CAN_1949_election
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = {
+		focus = CAN_return_of_tories
+	}
+	completion_reward = {
+		move_down_immigration = yes
+	}
+}
+shared_focus = {
+	id = CAN_bring_the_british_home
+	icon = GFX_focus_eng_the_sun_never_sets
+	cost = 8
+	x = 7
+	y = 3
+	available = {
+
+	}
+	relative_position_id = CAN_1949_election
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = {
+		focus = CAN_revise_immigration_policies
+	}
+	completion_reward = {
+		add_manpower = 2000
+		if = {
+			limit = { has_global_flag = CAN_parl_pc_formed }
+			CAN_popularity_unionists_increase_small = yes
+			custom_effect_tooltip = CAN_increase_unionists_small_tt
+		} else = {
+			CAN_popularity_conservatives_increase_small = yes
+			custom_effect_tooltip = CAN_increase_conservatives_small_tt
+		}
+		country_event = {
+			id = krg_can.76
+			days = 1
+		}
+	}
+}
+shared_focus = {
+	id = CAN_preserving_our_faith
+	icon = GFX_generic_ideology_social_conservative
+	cost = 8
+	x = 6
+	y = 4
+	available = {
+
+	}
+	relative_position_id = CAN_1949_election
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = {
+		focus = CAN_bring_the_british_home
+	}
+	completion_reward = {
+		if = {
+			limit = { has_global_flag = CAN_parl_pc_formed }
+			CAN_popularity_unionists_increase_small = yes
+			custom_effect_tooltip = CAN_increase_unionists_small_tt
+		} else = {
+			CAN_popularity_conservatives_increase_small = yes
+			custom_effect_tooltip = CAN_increase_conservatives_small_tt
+		}
+		add_political_power = 100
+		add_stability = 0.05
+	}
+}
+shared_focus = {
+	id = CAN_crackdown_on_radical_socialism
+	icon = GFX_generic_no_unions
+	cost = 8
+	x = 6
+	y = 6
+	available = {
+
+	}
+	relative_position_id = CAN_1949_election
+
+	ai_will_do = {
+		base = 150
+	}
+
+	prerequisite = {
+		focus = CAN_preserving_our_faith
+	}
+	prerequisite = {
+		focus = CAN_expand_the_stlaurant_committee
+	}
+	completion_reward = {
+		custom_effect_tooltip = CAN_decrease_socdem_large_tt
+		CAN_popularity_socdem_decrease_large = yes
+		country_event = {
+			id = krg_can.77
+		}
+	
+	}
+}
+shared_focus = {
+	id = CAN_veterans_housing_act
+	icon = GFX_generic_build_housing
+	cost = 8
+	x = 4
+	y = 6
+	available = {
+
+	}
+	relative_position_id = CAN_1949_election
+
+	ai_will_do = {
+		base = 150
+	}
+	
+	prerequisite = {
+		focus = CAN_repeal_wealth_taxes
+	}
+	prerequisite = {
+		focus = CAN_focus_on_internal_development
+	}
+	completion_reward = {
+		276 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
+		1078 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
+		1098 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
+		470 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
+	}
+}
+
+##REMOVED DIEF STUFF
+#shared_focus = {
+#	id = CAN_diefenbakers_liberals
+#	icon = GFX_CAN_Diefenbaker_Victory
+#	cost = 8
+#	x = 1
+#	y = 1
+#	available = {
+#		has_country_flag = CAN_1949_election_done
+#		has_government = market_liberal
+#	}
+#	relative_position_id = CAN_1949_election
+#	prerequisite = {
+#		focus = CAN_1949_election
+#	}
+#	mutually_exclusive = {
+#		focus = CAN_stlaurants_liberals 
+#	}
+#
+#	completion_reward = {
+#		add_political_power = 100
+#	}
+#
+#}
+#shared_focus = {
+#	id = CAN_child_benefit_act
+#	icon = GFX_CAN_Family_Allowance_Act
+#	cost = 8
+#	x = 2
+#	y = 2
+#	available = {
+#
+#	}
+#	relative_position_id = CAN_1949_election
+#	prerequisite = {
+#		focus = CAN_diefenbakers_liberals
+#	}
+#	completion_reward = {
+#		move_up_service_spending = yes
+#	}
+#}
+#shared_focus = {
+#	id = CAN_corporation_tax_adjustments
+#	icon = GFX_generic_intelligence_exchange
+#	cost = 8
+#	x = 3
+#	y = 5
+#	available = {
+#
+#	}
+#	relative_position_id = CAN_1949_election
+#	prerequisite = {
+#		focus = CAN_transition_to_laissais-faire
+#	}
+#	completion_reward = {
+#        add_ideas = CAN_idea_reduced_revenue
+#		move_down_taxation = yes
+#	}
+#}
+#shared_focus = {
+#	id = CAN_breadbasket_of_commonwealth
+#	icon = GFX_generic_agriculture_dept
+#	cost = 8
+#	x = 5
+#	y = 5
+#	available = {
+#
+#	}
+#	relative_position_id = CAN_1949_election
+#	prerequisite = {
+#		focus = CAN_transition_to_laissais-faire
+#	}
+#	completion_reward = {
+#        every_country = {
+#			limit = {
+#				or = { 
+#					tag = AST
+#					tag = ENG
+#					tag = SAF
+#					tag = JAM
+#					tag = TRI
+#				}
+#			}
+#			add_opinion_modifier = {
+#                target = ROOT
+#                modifier = can_trade 
+#			}
+#        }
+#	}
+#}
+#shared_focus = {
+#	id = CAN_divert_military_funding
+#	icon = GFX_focus_mex_privatisation
+#	cost = 8
+#	x = 4
+#	y = 2
+#	available = {
+#
+#	}
+#	relative_position_id = CAN_1949_election
+#	prerequisite = {
+#		focus = CAN_diefenbakers_liberals
+#	}
+#	completion_reward = {
+#        add_tech_bonus = {
+#            bonus = 0.100
+#            uses = 1
+#            category = industry_tech
+#        }
+#		move_down_military = yes
+#	}
+#}
+#shared_focus = {
+#	id = CAN_transition_to_laissais-faire
+#	icon = GFX_generic_positive_trade_relations
+#	cost = 8
+#	x = 4
+#	y = 3
+#	available = {
+#
+#	}
+#	relative_position_id = CAN_1949_election
+#	prerequisite = {
+#		focus = CAN_divert_military_funding
+#	}
+#	completion_reward = {
+#        add_war_support = -0.15
+#		move_down_business_spending = yes
+#	}
+#}
+#shared_focus = {
+#	id = CAN_tap_into_the_north
+#	icon = GFX_generic_all_resources
+#	cost = 8
+#	x = 4
+#	y = 4
+#	available = {
+#
+#	}
+#	relative_position_id = CAN_1949_election
+#	prerequisite = {
+#		focus = CAN_transition_to_laissais-faire
+#	}
+#	completion_reward = {
+#        471 = {
+#			add_building_construction = {
+#                type = infrastructure
+#                level = 1
+#                instant_build = yes
+#			}
+#			add_building_construction = {
+#                type = air_base
+#                level = 1
+#                instant_build = yes
+#			}
+#        }
+#		add_resource = {
+#            type = oil
+#            amount = 5
+#            state = 477
+#        }
+#		683 = {
+#			add_building_construction = {
+#                type = infrastructure
+#                level = 1
+#                instant_build = yes
+#			}
+#			add_building_construction = {
+#                type = air_base
+#                level = 1
+#                instant_build = yes
+#			}
+#        }
+#		add_resource = {
+#            type = chromium
+#            amount = 5
+#            state = 683
+#        }
+#	}
+#}
+#shared_focus = {
+#	id = CAN_tundra_name_this2
+#	icon = GFX_generic_KRG_social_liberal
+#	cost = 8
+#	x = -1
+#	y = 6
+#	available = {
+#
+#	}
+#	relative_position_id = CAN_1949_election
+#	prerequisite = {
+#		focus = CAN_multi_racial_partnership
+#	}
+#	prerequisite = {
+#		focus = CAN_breadbasket_of_accord
+#	}
+#	completion_reward = {
+#
+#	}
+#}
+# shared_focus = {
+# 	id = CAN_one_canada_programme
+# 	icon = GFX_generic_flag_CAN
+# 	cost = 8
+# 	x = 2
+# 	y = 3
+# 	available = {
+
+# 	}
+# 	relative_position_id = CAN_1949_election
+	
+# 	prerequisite = {
+# 		focus = CAN_military_police_organization_act
+# 	}
+# 	completion_reward = {
+
+# 	}
+# }
+# shared_focus = {
+# 	id = CAN_concessions_to_canadiens
+# 	icon = GFX_generic_improve_relations
+# 	cost = 8
+# 	x = 3
+# 	y = 4
+# 	available = {
+
+# 	}
+# 	relative_position_id = CAN_1949_election
+# 	prerequisite = {
+# 		focus = CAN_one_canada_programme
+# 	}
+
+# 	completion_reward = {
+
+# 	}
+# }
+# shared_focus = {
+# 	id = CAN_give_natives_vote
+# 	icon = GFX_DOM_Call_Special_Election
+# 	cost = 8
+# 	x = 2
+# 	y = 5
+# 	available = {
+
+# 	}
+# 	relative_position_id = CAN_1949_election
+# 	prerequisite = {
+# 		focus = CAN_concessions_to_canadiens
+# 	}
+# 	prerequisite = {
+# 		focus = CAN_expand_citizenship_act
+# 	}
+# 	completion_reward = {
+#         add_stability = 0.05
+# 		add_political_power = -50
+# 		add_manpower = 1000
+# 	}
+# }

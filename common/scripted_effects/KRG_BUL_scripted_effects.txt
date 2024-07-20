@@ -1,0 +1,153 @@
+BUL_three_sided_war = {
+	hidden_effect = {
+		SBL = {
+			add_state_core = 880
+			add_state_core = 879
+		}
+		LBL = {
+			add_state_core = 212
+		}
+		
+		BUL = {
+			LBL = { inherit_technology = PREV }
+			SBL = { inherit_technology = PREV }
+			every_owned_state = {
+				limit = { is_core_of = LBL }
+				LBL = { transfer_state = PREV }
+				teleport_armies = {
+					limit = { tag = BUL }
+					to_state_array = owned_controlled_states
+				}
+			}
+			
+			every_owned_state = {
+				limit = { is_core_of = SBL }
+				SBL = { transfer_state = PREV }
+				teleport_armies = {
+					limit = { tag = BUL }
+					to_state_array = owned_controlled_states
+				}
+			}
+			load_oob = BUL_3_way_civil_war
+		}
+	}
+
+	LBL = { 
+		declare_war_on = { target = BUL type = civil_war } 
+		declare_war_on = { target = SBL type = civil_war } 
+	}
+	SBL = { declare_war_on = { target = BUL type = civil_war } }
+	
+	hidden_effect = {
+		BUL = {
+			remove_ideas = BUL_idea_growing_nationalist_discontent
+			remove_ideas = BUL_idea_political_crisis
+			add_timed_idea = { idea = BUL_idea_for_the_king  days = 100 }
+			clr_country_flag = KRG_mobilization_laws_locked
+		}
+		SBL = {
+			load_oob = SBL_start
+			every_state = {
+				limit = {
+					is_core_of = BUL
+				}
+				add_core_of = SBL
+			}
+			add_timed_idea = { idea = BUL_idea_for_the_revolution  days = 100 }
+		}
+		LBL = {
+			load_oob = LBL_start
+			every_state = {
+				limit = {
+					is_core_of = BUL
+				}
+				add_core_of = LBL
+			}
+			add_timed_idea = { idea = BUL_idea_for_the_leader days = 100 }
+		}
+	}
+}
+
+BUL_monarchist_socialist_civil_war = {
+	hidden_effect = {
+		SBL = {
+			add_state_core = 211
+			add_state_core = 880
+		}
+		
+		BUL = {
+			SBL = { inherit_technology = PREV }
+			every_owned_state = {
+				limit = { is_core_of = SBL }
+				SBL = { transfer_state = PREV }
+				teleport_armies = {
+					limit = { tag = BUL }
+					to_state_array = owned_controlled_states
+				}
+			}
+		}
+	}
+
+	SBL = { declare_war_on = { target = BUL type = civil_war } }
+	
+	hidden_effect = {
+		BUL = {
+			remove_ideas = BUL_idea_growing_nationalist_discontent
+			remove_ideas = BUL_idea_political_crisis
+			add_timed_idea = { idea = BUL_idea_for_the_king  days = 100 }
+			clr_country_flag = KRG_mobilization_laws_locked
+		}
+		SBL = {
+			load_oob = SBL_start_2_way
+			every_state = {
+				limit = {
+					is_core_of = BUL
+				}
+				add_core_of = SBL
+			}
+			add_timed_idea = { idea = BUL_idea_for_the_revolution  days = 100 }
+		}
+	}
+}
+
+BUL_monarchist_legionary_civil_war = {
+	hidden_effect = {
+		LBL = {
+			add_state_core = 211
+			add_state_core = 212
+		}
+		
+		BUL = {
+			LBL = { inherit_technology = PREV }
+			every_owned_state = {
+				limit = { is_core_of = LBL }
+				LBL = { transfer_state = PREV }
+				teleport_armies = {
+					limit = { tag = BUL }
+					to_state_array = owned_controlled_states
+				}
+			}
+		}
+	}
+
+	LBL = { declare_war_on = { target = BUL type = civil_war	} }
+	
+	hidden_effect = {
+		BUL = {
+			remove_ideas = BUL_idea_growing_nationalist_discontent
+			remove_ideas = BUL_idea_political_crisis
+			add_timed_idea = { idea = BUL_idea_for_the_king  days = 100 }
+			clr_country_flag = KRG_mobilization_laws_locked
+		}
+		LBL = {
+			load_oob = LBL_start_2_way
+			every_state = {
+				limit = {
+					is_core_of = BUL
+				}
+				add_core_of = LBL
+			}
+			add_timed_idea = { idea = BUL_idea_for_the_leader  days = 100 }
+		}
+	}
+}

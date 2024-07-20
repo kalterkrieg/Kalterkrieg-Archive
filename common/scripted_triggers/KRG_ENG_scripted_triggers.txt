@@ -1,0 +1,83 @@
+KRG_ENG_not_desyndicalisation_done = {
+	NOT = {
+		OR = {
+			has_state_flag = ENG_foreign_occupation
+			has_state_flag = ENG_got_rid_of_BPLA
+		}
+	}
+	
+	if = {
+		limit = { 
+			has_state_flag = ENG_secured
+		}
+		owner = {
+			has_country_flag = ENG_form_the_BLUE_completed
+		}
+	}
+
+	if = {
+		limit = { 
+			has_state_flag = ENG_estabilished_blue
+		}
+		owner = {
+			has_country_flag = ENG_hunt_down_the_BPLA_completed
+		}
+	}	
+}
+
+KRG_ENG_desyndicalisation_basically_finished_trigger = {
+	custom_trigger_tooltip = {
+		tooltip = ENG_less_than_5_pp_from_syndies
+		check_variable = {
+			var = ENG_syndicalist_influence_var
+			value = -0.10
+			compare = greater_than
+		}
+	}
+}
+
+ENG_commons_conservative_victory_trigger = {
+	set_temp_variable = { ENG_commons_calcuate_government = 0 }
+
+	add_to_temp_variable = { ENG_commons_calcuate_government = ENG_commons_expected_seats_IndCon }
+	add_to_temp_variable = { ENG_commons_calcuate_government = ENG_commons_expected_seats_SocCon_ON }
+
+	set_temp_variable = { ENG_commons_total_seats_half = ENG_commons_total_seats }
+	divide_temp_variable = { ENG_commons_total_seats_half = 2 }
+	check_variable = { ENG_commons_calcuate_government > ENG_commons_total_seats_half}
+}
+
+ENG_commons_conservative_BPP_victory_trigger = {
+	set_temp_variable = { ENG_commons_calcuate_government = 0 }
+
+	add_to_temp_variable = { ENG_commons_calcuate_government = ENG_commons_expected_seats_IndCon }
+	add_to_temp_variable = { ENG_commons_calcuate_government = ENG_commons_expected_seats_SocCon_ON }
+	add_to_temp_variable = { ENG_commons_calcuate_government = ENG_commons_expected_seats_PatAut }
+
+	set_temp_variable = { ENG_commons_total_seats_half = ENG_commons_total_seats }
+	divide_temp_variable = { ENG_commons_total_seats_half = 2 }
+	check_variable = { ENG_commons_calcuate_government > ENG_commons_total_seats_half}
+}
+
+ENG_commons_liberal_victory_trigger = {
+	set_temp_variable = { ENG_commons_calcuate_government = 0 }
+
+	add_to_temp_variable = { ENG_commons_calcuate_government = ENG_commons_expected_seats_IndLib }
+	add_to_temp_variable = { ENG_commons_calcuate_government = ENG_commons_expected_seats_MarLib }
+	add_to_temp_variable = { ENG_commons_calcuate_government = ENG_commons_expected_seats_SocLib }
+
+	set_temp_variable = { ENG_commons_total_seats_half = ENG_commons_total_seats }
+	divide_temp_variable = { ENG_commons_total_seats_half = 2 }
+	check_variable = { ENG_commons_calcuate_government > ENG_commons_total_seats_half}
+}
+
+ENG_commons_DemLab_victory_trigger = {
+	set_temp_variable = { ENG_commons_calcuate_government = 0 }
+
+	add_to_temp_variable = { ENG_commons_calcuate_government = ENG_commons_expected_seats_IndLab }
+	add_to_temp_variable = { ENG_commons_calcuate_government = ENG_commons_expected_seats_SocDem }
+
+	set_temp_variable = { ENG_commons_total_seats_half = ENG_commons_total_seats }
+	divide_temp_variable = { ENG_commons_total_seats_half = 2 }
+	check_variable = { ENG_commons_calcuate_government > ENG_commons_total_seats_half}
+}

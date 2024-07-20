@@ -1,0 +1,463 @@
+# These checks are needed because we have parties shifting ideologies mid-game as detailed here: https://discord.com/channels/465297966685618177/873100565297659964/874377766131347497
+# These will need to be updated if we add more complexity
+CAN_has_socdem_government = { ##this one is pretty simple
+	OR = {
+		has_government = radical_socialist ##this isnt possible but its here just in case
+		has_government = social_democrat
+	}
+}
+
+CAN_has_liberal_government = {
+	OR = {
+		has_government = social_liberal
+		AND = {
+			has_government = market_liberal
+			NOT = { has_global_flag = CAN_parl_pc_formed }
+		}
+	}
+}
+
+CAN_has_conservative_government = {
+	OR = {
+		AND = {
+			has_government = market_liberal
+			has_global_flag = CAN_parl_pc_formed
+		}
+		AND = {
+			has_government = social_conservative
+			NOT = { has_global_flag = CAN_parl_pc_formed }
+		}
+	}
+}
+
+CAN_has_unionist_government = {
+	OR = {
+		has_government = authoritarian_democrat
+		AND = {
+			has_government = social_conservative
+			has_global_flag = CAN_parl_pc_formed
+		}
+	}
+}
+
+CAN_region_atlantic_trigger = {
+	OR = {
+		state = 465
+		state = 464
+		state = 332
+		state = 331
+	}
+}
+
+CAN_region_quebec_trigger = {
+	OR = {
+		state = 1079
+		state = 468
+		state = 466
+		state = 1078
+	}
+}
+
+CAN_region_ontario_trigger = {
+	OR = {
+		state = 682
+		state = 276
+		state = 1077
+		state = 1076
+		state = 1075
+	}
+}
+
+CAN_region_prairie_trigger = {
+	OR = {
+		state = 693
+		state = 469
+		state = 683
+		state = 467
+		state = 1098
+	}
+}
+
+CAN_region_west_trigger = {
+	OR = {
+		state = 740
+		state = 473
+		state = 1083
+		state = 1084
+		state = 471
+		state = 470
+		state = 1082
+		state = 472
+	}
+}
+
+CAN_region_caribbean_trigger = {
+	OR = {
+		state = 690
+		state = 847
+		state = 692
+		state = 308
+		state = 696
+	}
+}
+
+CAN_parl_has_support_confidence = {
+	custom_trigger_tooltip = {
+		tooltip = CAN_parl_has_support_confidence
+		check_variable = { CAN.CAN_parl_support_confidence_value > CAN.CAN_parl_majority_value }
+	}
+}
+#Require enough support to pass a law
+CAN_parl_has_support_coalition = {
+	custom_trigger_tooltip = {
+		tooltip = CAN_parl_has_support_coalition
+		check_variable = { CAN.CAN_parl_support_coalition_value > CAN.CAN_parl_majority_value }
+	}
+}
+#Require the ruling party to have a majority without coalition partners
+CAN_parl_has_support_government = {
+	custom_trigger_tooltip = {
+		tooltip = CAN_parl_has_support_government
+		check_variable = { CAN.CAN_parl_support_government_value > CAN.CAN_parl_majority_value }
+	}
+}
+
+CAN_clause_0_trigger = {
+
+}
+
+CAN_clause_1_trigger = {
+
+}
+
+CAN_clause_2_trigger = {
+	has_political_power > 49.999
+}
+
+CAN_clause_3_trigger = {
+
+}
+
+CAN_clause_4_trigger = {
+
+}
+
+CAN_clause_5_trigger = {
+	has_political_power > 74.999
+}
+
+CAN_clause_6_trigger = {
+	has_political_power > 49.999
+}
+
+CAN_clause_7_trigger = {
+	has_political_power > 24.999
+}
+
+CAN_clause_8_trigger = {
+	has_political_power > 24.999
+}
+
+CAN_clause_9_trigger = {
+	has_political_power > 49.999
+}
+
+CAN_clause_67_trigger = {
+	has_political_power > 49.999
+}
+
+CAN_clause_10_trigger = {
+	has_political_power > 24.999
+}
+
+CAN_clause_11_trigger = {
+	has_political_power > 49.999
+}
+
+CAN_clause_12_trigger = {
+	has_political_power > 24.999
+}
+
+CAN_clause_13_trigger = {
+	has_political_power > 49.999
+}
+
+CAN_clause_14_trigger = {
+	has_political_power > 24.999
+}
+
+CAN_clause_15_trigger = {
+	has_political_power > 24.999
+}
+
+CAN_clause_16_trigger = {
+	has_political_power > 24.999
+}
+
+CAN_clause_17_trigger = {
+	has_political_power > 24.999
+}
+
+CAN_clause_18_trigger = {
+	has_political_power > 49.999
+}
+
+CAN_clause_19_trigger = {
+	has_political_power > 49.999
+}
+
+CAN_clause_20_trigger = {
+	has_political_power > 24.999
+}
+
+CAN_clause_21_trigger = {
+	has_political_power > 49.999
+}
+
+CAN_clause_22_trigger = {
+	has_political_power > 24.999
+}
+
+CAN_clause_23_trigger = {
+	has_political_power > 24.999
+}
+
+CAN_clause_24_trigger = {
+	has_political_power > 24.999
+}
+
+CAN_clause_68_trigger = {
+	has_political_power > 24.999
+}
+
+CAN_clause_25_trigger = {
+	has_political_power > 24.999
+}
+
+CAN_clause_69_trigger = {
+	has_political_power > 24.999
+}
+
+CAN_clause_26_trigger = {
+	has_political_power > 24.999
+}
+
+CAN_clause_27_trigger = {
+	has_political_power > 24.999
+}
+
+CAN_clause_28_trigger = {
+	has_political_power > 24.999
+}
+
+CAN_clause_29_trigger = {
+	has_political_power > 24.999
+}
+
+CAN_clause_30_trigger = {
+	has_political_power > 24.999
+}
+
+CAN_clause_31_trigger = {
+	has_political_power > 24.999
+}
+
+CAN_clause_32_trigger = {
+	has_political_power > 24.999
+}
+
+CAN_clause_33_trigger = {
+	has_political_power > 24.999
+}
+
+CAN_clause_34_trigger = {
+	has_political_power > 49.999
+}
+
+CAN_clause_35_trigger = {
+	has_political_power > 74.999
+}
+
+CAN_clause_36_trigger = {
+	has_political_power > 49.999
+}
+
+CAN_clause_37_trigger = {
+	has_political_power > 49.999
+}
+
+CAN_clause_38_trigger = {
+	has_political_power > 24.999
+}
+
+CAN_clause_39_trigger = {
+	has_political_power > 24.999
+}
+
+CAN_clause_40_trigger = {
+	has_political_power > 49.999
+}
+
+CAN_clause_41_trigger = {
+	has_political_power > 49.999
+}
+
+CAN_clause_42_trigger = {
+	has_political_power > 24.999
+}
+
+CAN_clause_43_trigger = {
+	has_political_power > 24.999
+}
+
+CAN_clause_44_trigger = {
+	has_political_power > 74.999
+}
+
+CAN_clause_45_trigger = {
+	has_political_power > 49.999
+}
+
+CAN_clause_46_trigger = {
+	has_political_power > 49.999
+}
+
+CAN_clause_47_trigger = {
+	has_political_power > 24.999
+}
+
+CAN_clause_48_trigger = {
+	has_political_power > 49.999
+}
+
+CAN_clause_49_trigger = {
+	has_political_power > 24.999
+}
+
+CAN_clause_50_trigger = {
+	has_political_power > 49.999
+}
+
+CAN_clause_51_trigger = {
+	has_political_power > 49.999
+}
+
+CAN_clause_52_trigger = {
+	has_political_power > 49.999
+}
+
+CAN_clause_53_trigger = {
+	has_political_power > 24.999
+}
+
+CAN_clause_54_trigger = {
+	has_political_power > 24.999
+}
+
+CAN_clause_55_trigger = {
+	has_political_power > 24.999
+}
+
+CAN_clause_56_trigger = {
+	has_political_power > 49.999
+}
+
+CAN_clause_57_trigger = {
+	has_political_power > 24.999
+}
+
+CAN_clause_58_trigger = {
+	has_political_power > 49.999
+}
+
+CAN_clause_59_trigger = {
+	has_political_power > 24.999
+}
+
+CAN_clause_60_trigger = {
+	has_political_power > 24.999
+}
+
+CAN_clause_61_trigger = {
+	has_political_power > 24.999
+}
+
+CAN_clause_62_trigger = {
+	has_political_power > 49.999
+}
+
+CAN_clause_63_trigger = {
+	has_political_power > 24.999
+}
+
+CAN_clause_64_trigger = {
+	has_political_power > 49.999
+}
+
+CAN_clause_65_trigger = {
+	has_political_power > 24.999
+}
+
+CAN_clause_66_trigger = {
+	has_political_power > 24.999
+}
+
+CAN_clause_70_trigger = {
+	has_political_power > 49.999
+}
+
+CAN_clause_71_trigger = {
+	has_political_power > 49.999
+}
+
+CAN_clause_72_trigger = {
+	has_political_power > 24.999
+}
+
+CAN_clause_73_trigger = {
+	has_political_power > 24.999
+}
+
+CAN_clause_74_trigger = {
+	has_political_power > 24.999
+}
+
+CAN_clause_75_trigger = {
+	has_political_power > 49.999
+}
+
+CAN_clause_76_trigger = {
+	has_political_power > 49.999
+}
+
+CAN_clause_77_trigger = {
+	has_political_power > 24.999
+}
+
+CAN_clause_78_trigger = {
+	has_political_power > 24.999
+}
+
+CAN_clause_79_trigger = {
+	has_political_power > 24.999
+}
+
+CAN_clause_80_trigger = {
+	has_political_power > 49.999
+}
+
+CAN_clause_81_trigger = {
+	has_political_power > 49.999
+}
+
+CAN_clause_82_trigger = {
+	has_political_power > 24.999
+}
+
+CAN_clause_83_trigger = {
+	has_political_power > 24.999
+}
+
+CAN_clause_84_trigger = {
+	has_political_power > 24.999
+}

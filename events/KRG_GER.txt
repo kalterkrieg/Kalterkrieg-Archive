@@ -1,0 +1,6383 @@
+add_namespace = krg_ger
+add_namespace = krg_gerdip
+add_namespace = krg_gerfla
+
+### Welcome Events ###
+
+	country_event = { #Heimdallr's Violent Peace
+		id = krg_ger.0
+		title = krg_ger.0.t
+		desc = krg_ger.0.d
+		picture = GFX_ce_heimdallr
+		
+		is_triggered_only = yes
+		
+		trigger = {
+			tag = GER
+		}
+
+		option = {
+			name = krg_ger.0.a
+			GER_starting_infrastructure_damage = yes
+		}
+	}
+
+	country_event = { #The German Empire, 1948
+		id = krg_ger.1
+		title = krg_ger.1.t
+		desc = krg_ger.1.d
+		picture = GFX_ce_ger_empire
+
+		is_triggered_only = yes
+		fire_only_once = yes
+
+		trigger = {
+			tag = GER
+		}
+		option = {
+			name = krg_ger.1.a
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.3
+					days = 60
+				}
+			}
+
+		}
+	}
+
+
+	country_event = { #The Red Baron's Legacy
+		id = krg_ger.2
+		title = krg_ger.2.t
+		desc = krg_ger.2.d
+		picture = GFX_ce_ger_jet_figthers
+
+		is_triggered_only = yes
+		fire_only_once = yes
+
+		trigger = {
+			tag = GER
+		}
+		option = {
+			name = krg_ger.2.a
+			hidden_effect = {
+				complete_national_focus = GER_the_red_barons_legacy
+			}
+		}
+	}
+
+	country_event = { #The Deutsches Heer
+		id = krg_ger.3
+		title = krg_ger.3.t
+		desc = krg_ger.3.d
+		picture = GFX_ce_ger_heer
+
+		is_triggered_only = yes
+		fire_only_once = yes
+
+		trigger = {
+			tag = GER
+		}
+		option = {
+			name = krg_ger.3.a
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.4
+					days = 14
+				}
+			}
+		}
+	}
+
+	country_event = { #Kaiser Wilhelm II's Dreadnoughts
+		id = krg_ger.4
+		title = krg_ger.4.t
+		desc = krg_ger.4.d
+		picture = GFX_ce_ger_dreadnaught
+
+		is_triggered_only = yes
+		fire_only_once = yes
+
+		trigger = {
+			tag = GER
+		}
+		option = {
+			name = krg_ger.4.a
+			hidden_effect = {
+				complete_national_focus = GER_dealing_with_the_dreadnought
+				country_event = {
+					id = krg_ger.2
+					days = 14
+				}
+			}
+		}
+	}
+
+	country_event = { #The Next OHL
+		id = krg_ger.5
+		title = krg_ger.5.t
+		desc = krg_ger.5.d
+		picture = GFX_ce_ger_beck
+
+		is_triggered_only = yes
+		fire_only_once = yes
+
+		immediate = {
+			hidden_effect = {
+				clr_country_flag = GER_beck_ohl
+			}
+		}
+
+		trigger = {
+			tag = GER
+			#Focus on OHL is taken
+		}
+		option = {
+			name = krg_ger.5.a
+			retire_character = GER_ludwig_beck
+			hidden_effect = {
+				complete_national_focus = GER_maintain_orthodox_bewegungskrieg
+				set_country_flag = GER_guderian_ohl
+			}
+		}
+
+		option = {
+			name = krg_ger.5.b
+			retire_character = GER_ludwig_beck
+			hidden_effect = {
+				complete_national_focus = GER_implement_kesselring_doctrine
+				set_country_flag = GER_kesselring_ohl
+			}
+		}
+	}
+
+### Koln Crisis ###
+
+	country_event = {
+		id = krg_ger.6
+		title = krg_ger.6.t
+		desc = krg_ger.6.d
+		picture = GFX_ce_ger_koln_1
+		immediate = { log = "[GetDateText]: [Root.GetName]: event krg_ger.6 FROM = [From.GetName]" }
+		
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		trigger = {
+			tag = GER
+		}
+		option = { #Arrest Ringleaders
+			name = krg_ger.6.a
+			add_war_support = 0.05
+			add_stability = -0.05
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.7
+					days = 14
+				}
+			}
+
+			ai_chance = {
+				base = 60
+			}
+		}
+		option = { #Increase Enforcement
+			name = krg_ger.6.b
+			add_political_power = 50
+			add_stability = -0.05
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.7
+					days = 14
+				}
+			}
+
+			ai_chance = {
+				base = 40
+			}
+		}
+	}
+
+	country_event = {
+		id = krg_ger.7
+		title = krg_ger.7.t
+		desc = krg_ger.7.d
+		picture = GFX_ce_ger_freikorps
+		immediate = { log = "[GetDateText]: [Root.GetName]: event krg_ger.7 FROM = [From.GetName]" }
+		
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		trigger = {
+			tag = GER
+		}
+		option = { #Send Bredow
+			name = krg_ger.7.a
+			add_stability = 0.05
+			add_ideas = GER_the_koln_crisis
+			hidden_effect = {
+				news_event = {
+					id = worldnews.12
+				}
+				country_event = {
+					id = krg_ger.8
+					days = 1
+				}
+			}
+
+			ai_chance = {
+				base = 60
+				modifier = {
+					has_game_rule = {
+						rule = GER_AFTERMATH_KOLN
+						option = GER_AFTERMATH_KOLN_BREDOW
+					}
+					factor = 1000
+				}
+			}
+		}
+		option = { #Send minion
+			name = krg_ger.7.b
+			add_political_power = 50
+			add_ideas = GER_the_koln_crisis
+			hidden_effect = {
+				news_event = {
+					id = worldnews.12
+				}
+				country_event = {
+					id = krg_ger.9
+					days = 1
+				}
+			}
+			ai_chance = {
+				base = 40
+			}
+		}
+	}
+
+	country_event = { #Chaos in Koln, Bredow
+		id = krg_ger.8
+		title = krg_ger.8.t
+		desc = krg_ger.8.d
+		picture = GFX_ce_ger_kanzler_in_koln
+		immediate = { log = "[GetDateText]: [Root.GetName]: event krg_ger.8 FROM = [From.GetName]" }
+		
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		trigger = {
+			tag = GER
+		}
+		option = {
+			name = krg_ger.8.a
+			add_stability = -0.05
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.10
+					days = 1
+				}
+			}
+		}
+	}	
+
+	country_event = { #Chaos in Koln, Buttmann
+		id = krg_ger.9
+		title = krg_ger.9.t
+		desc = krg_ger.9.d
+		picture = GFX_ce_ger_kanzler_in_koln
+		immediate = { log = "[GetDateText]: [Root.GetName]: event krg_ger.9 FROM = [From.GetName]" }
+		
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		trigger = {
+			tag = GER
+		}
+		option = {
+			name = krg_ger.9.a
+			add_political_power = -50
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.11
+					days = 1
+				}
+			}
+		}
+	}
+
+	country_event = { #The Koln Address
+		id = krg_ger.10
+		title = krg_ger.10.t
+		desc = krg_ger.10.d
+		#picture = GFX_event_picture
+		immediate = { log = "[GetDateText]: [Root.GetName]: event krg_ger.10 FROM = [From.GetName]" }
+		
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		trigger = {
+			tag = GER
+		}
+		option = { #He is right, why are we fighting amongst ourselves?
+			name = krg_ger.10.a
+			add_political_power = -100
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.12
+					days = 1
+				}
+			}
+
+			ai_chance = {
+				base = 40
+				modifier = {
+					has_game_rule = {
+						rule = GER_AFTERMATH_KOLN
+						option = GER_AFTERMATH_KOLN_BREDOW
+					}
+					factor = 1000
+				}
+			}
+		}
+		option = { #Easy to say when he does not face any of the hardships we do!
+			name = krg_ger.10.b
+			add_war_support = 0.05
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.13
+					days = 1
+				}
+			}
+
+			ai_chance = {
+				base = 40
+			}
+		}
+	}
+
+	country_event = { #The Koln Address
+		id = krg_ger.11
+		title = krg_ger.11.t
+		desc = krg_ger.11.d
+		#picture = GFX_event_picture
+		immediate = { log = "[GetDateText]: [Root.GetName]: event krg_ger.11 FROM = [From.GetName]" }
+		
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		trigger = {
+			tag = GER
+		}
+		option = { #Easy to say when he does not face any of the hardships we do!
+			name = krg_ger.11.a
+			add_war_support = 0.05
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.14
+					days = 1
+				}
+			}
+		}
+	}
+
+	country_event = { #Meeting with the Mayor
+		id = krg_ger.12
+		title = krg_ger.12.t
+		desc = krg_ger.12.d
+		#picture = GFX_event_picture
+		immediate = { log = "[GetDateText]: [Root.GetName]: event krg_ger.12 FROM = [From.GetName]" }
+		
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		trigger = {
+			tag = GER
+		}
+		option = { #curfew-bad
+			name = krg_ger.12.a
+			add_stability = 0.05
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.15
+					days = 1
+				}
+			}
+
+			ai_chance = {
+				base = 65
+			}
+		}
+		option = { #appeasement-good
+			name = krg_ger.12.b
+			add_stability = -0.05
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.16
+					days = 1
+				}
+			}
+
+			ai_chance = {
+				base = 35
+				modifier = {
+					has_game_rule = {
+						rule = GER_AFTERMATH_KOLN
+						option = GER_AFTERMATH_KOLN_BREDOW
+					}
+					factor = 1000
+				}
+			}
+		}
+	}
+
+	country_event = { #Meeting with the Mayor (Bredow's impending death)
+		id = krg_ger.13
+		title = krg_ger.13.t
+		desc = krg_ger.13.d
+		#picture = GFX_event_picture
+		immediate = { log = "[GetDateText]: [Root.GetName]: event krg_ger.13 FROM = [From.GetName]" }
+		
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		trigger = {
+			tag = GER
+		}
+		option = { #curfew-bad
+			name = krg_ger.13.a
+			add_stability = 0.05
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.15
+					days = 1
+				}
+			}
+		}
+		option = { #appeasement-good
+			name = krg_ger.13.b
+			add_political_power = 50
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.15
+					days = 1
+				}
+			}
+		}
+	}
+
+	country_event = { #Meeting with the Mayor
+		id = krg_ger.14
+		title = krg_ger.14.t
+		desc = krg_ger.14.d
+		#picture = GFX_event_picture
+		immediate = { log = "[GetDateText]: [Root.GetName]: event krg_ger.14 FROM = [From.GetName]" }
+		
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		trigger = {
+			tag = GER
+		}
+		option = { #curfew-bad
+			name = krg_ger.14.a
+			add_stability = 0.05
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.17
+					days = 1
+				}
+			}
+		}
+	}
+
+	country_event = { #assassination of bredow
+		id = krg_ger.15
+		title = krg_ger.15.t
+		desc = krg_ger.15.d
+		picture = GFX_ce_carbomb
+		immediate = { log = "[GetDateText]: [Root.GetName]: event krg_ger.15 FROM = [From.GetName]" }
+		
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		trigger = {
+			tag = GER
+		}
+		option = {
+			name = krg_ger.15.a
+			GER_ferdinand_von_bredow = {
+				retire = yes
+			}
+			add_manpower = -1
+			add_stability = -0.2
+			add_war_support = -0.2
+			add_political_power = -200
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.19
+					days = 1
+				}
+				add_ideas = generic_vacant_position_head_of_government
+			}
+		}
+	}
+
+	country_event = { #deal with devil
+		id = krg_ger.16
+		title = krg_ger.16.t
+		desc = krg_ger.16.d
+		#picture = GFX_event_picture
+		immediate = { log = "[GetDateText]: [Root.GetName]: event krg_ger.16 FROM = [From.GetName]" }
+		
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		trigger = {
+			tag = GER
+		}
+		option = { #agree to demands
+			name = krg_ger.16.a
+			add_political_power = -100
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.18
+					days = 1
+				}
+			}
+
+			ai_chance = {
+				base = 40
+				modifier = {
+					has_game_rule = {
+						rule = GER_AFTERMATH_KOLN
+						option = GER_AFTERMATH_KOLN_BREDOW
+					}
+					factor = 1000
+				}
+			}
+		}
+		option = { #everything is fine as is
+			name = krg_ger.16.b
+			add_stability = 0.05
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.20
+					days = 1
+				}
+			}
+			ai_chance = {
+				base = 60
+				modifier = {
+					NOT = {
+						has_game_rule = {
+							rule = GER_AFTERMATH_KOLN
+							option = DEFAULT
+						}
+						has_game_rule = {
+							rule = GER_AFTERMATH_KOLN
+							option = GER_AFTERMATH_KOLN_BREDOW
+						}
+					}
+					factor = 1000
+				}
+			}
+		}
+	}
+
+	country_event = { #rip minion
+		id = krg_ger.17
+		title = krg_ger.17.t
+		desc = krg_ger.17.d
+		#picture = GFX_event_picture
+		immediate = { log = "[GetDateText]: [Root.GetName]: event krg_ger.17 FROM = [From.GetName]" }
+		
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		trigger = {
+			tag = GER
+		}
+		option = {
+			name = krg_ger.17.a
+			add_manpower = -1
+			add_stability = -0.1
+			add_war_support = -0.1
+			add_political_power = -100
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.20
+					days = 1
+				}
+			}
+		}
+	}
+
+	country_event = { #bredow good end
+		id = krg_ger.18
+		title = krg_ger.18.t
+		desc = krg_ger.18.d
+		#picture = GFX_event_picture
+		immediate = { log = "[GetDateText]: [Root.GetName]: event krg_ger.18 FROM = [From.GetName]" }
+		
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		trigger = {
+			tag = GER
+		}
+		option = { #send army
+			name = krg_ger.18.a
+			add_command_power = -25
+			add_political_power = -25
+			set_country_flag = koln_crisis_pacified
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.24
+					days = 7
+				}
+			}
+		}
+		option = { #negotiate
+			name = krg_ger.18.b
+			add_political_power = -50
+			set_country_flag = koln_crisis_negotiated
+			GER_decrease_general_staff_support = yes
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.25
+					days = 7
+				}
+			}
+		}
+	}
+
+	country_event = { #bredow successor
+		id = krg_ger.19
+		title = krg_ger.19.t
+		desc = krg_ger.19.d
+		#picture = GFX_event_picture
+		immediate = { log = "[GetDateText]: [Root.GetName]: event krg_ger.19 FROM = [From.GetName]" }
+		
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		trigger = {
+			tag = GER
+		}
+		option = { #mackensen
+			name = krg_ger.19.a
+			add_ideas = GER_Eberhard_von_Mackensen_hog_pau
+			add_war_support = 0.05
+			GER_increase_general_staff_support = yes
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.21
+					days = 1
+				}
+			}
+			ai_chance = {
+				base = 35
+				modifier = {
+					factor = 0
+					OR = {
+						has_game_rule = {
+							rule = GER_AFTERMATH_KOLN
+							option = GER_AFTERMATH_KOLN_GOERDELER
+						}
+						has_game_rule = {
+							rule = GER_AFTERMATH_KOLN
+							option = GER_AFTERMATH_KOLN_POPITZ
+						}
+					}
+				}
+				modifier = {
+					factor = 1000
+					has_game_rule = {
+						rule = GER_AFTERMATH_KOLN
+						option = GER_AFTERMATH_KOLN_MACKENSEN
+					}
+				}
+			}
+		}
+		option = { #popitz
+			name = krg_ger.19.b
+			add_ideas = GER_Johannes_Popitz_hog_pau
+			add_stability = 0.05
+			hidden_effect = {
+				country_event = {
+				id = krg_ger.22
+				days = 1
+				}
+			}
+			ai_chance = {
+				base = 35
+				modifier = {
+					factor = 0
+					OR = {
+						has_game_rule = {
+							rule = GER_AFTERMATH_KOLN
+							option = GER_AFTERMATH_KOLN_GOERDELER
+						}
+						has_game_rule = {
+							rule = GER_AFTERMATH_KOLN
+							option = GER_AFTERMATH_KOLN_MACKENSEN
+						}
+					}
+				}
+				modifier = {
+					factor = 1000
+					has_game_rule = {
+						rule = GER_AFTERMATH_KOLN
+						option = GER_AFTERMATH_KOLN_POPITZ
+					}
+				}
+			}
+		}
+		option = { #goerdeler
+			name = krg_ger.19.c
+			add_ideas = GER_Carl_Friedrich_Goerdeler_hog_ade
+			add_political_power = 50
+			GER_decrease_general_staff_support = yes
+			set_politics = {
+				ruling_party = authoritarian_democrat
+				election_frequency = 60
+				elections_allowed = no
+			}
+			hidden_effect = {
+				load_focus_tree = { tree = KRG_Germany_Goerdeler keep_completed = yes }
+				country_event = {
+					id = krg_ger.23
+					days = 1
+				}
+			}
+			ai_chance = {
+				base = 30
+				modifier = {
+					factor = 0
+					OR = {
+						has_game_rule = {
+							rule = GER_AFTERMATH_KOLN
+							option = GER_AFTERMATH_KOLN_POPITZ
+						}
+						has_game_rule = {
+							rule = GER_AFTERMATH_KOLN
+							option = GER_AFTERMATH_KOLN_MACKENSEN
+						}
+					}
+				}
+				modifier = {
+					factor = 1000
+					has_game_rule = {
+						rule = GER_AFTERMATH_KOLN
+						option = GER_AFTERMATH_KOLN_GOERDELER
+					}
+				}
+			}
+		}
+	}
+
+	country_event = { #kaiser intervention
+		id = krg_ger.20
+		title = krg_ger.20.t
+		desc = krg_ger.20.d
+		#picture = GFX_event_picture
+		immediate = { log = "[GetDateText]: [Root.GetName]: event krg_ger.20 FROM = [From.GetName]" }
+		
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		trigger = {
+			tag = GER
+		}
+		option = { #mackensen
+			name = krg_ger.19.a
+			remove_ideas = GER_Ferdinand_von_Bredow_hog_pau
+			add_ideas = GER_Eberhard_von_Mackensen_hog_pau
+			add_war_support = -0.05
+			GER_increase_general_staff_support = yes
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.21
+					days = 3
+				}
+			}
+
+			ai_chance = {
+				base = 35
+				modifier = {
+					has_game_rule = {
+						rule = GER_AFTERMATH_KOLN
+						option = GER_AFTERMATH_KOLN_MACKENSEN
+					}
+					factor = 1000
+				}
+			}
+		}
+		option = { #popitz
+			name = krg_ger.19.b
+			remove_ideas = GER_Ferdinand_von_Bredow_hog_pau
+			add_ideas = GER_Johannes_Popitz_hog_pau
+			add_stability = -0.05
+			hidden_effect = {
+				country_event = {
+				id = krg_ger.22
+				days = 3
+				}
+			}
+			ai_chance = {
+				base = 35
+				modifier = {
+					has_game_rule = {
+						rule = GER_AFTERMATH_KOLN
+						option = GER_AFTERMATH_KOLN_POPITZ
+					}
+					factor = 1000
+				}
+			}
+		}
+		option = { #goerdeler
+			name = krg_ger.20.c
+			remove_ideas = GER_Ferdinand_von_Bredow_hog_pau
+			add_ideas = GER_Carl_Friedrich_Goerdeler_hog_ade
+			set_politics = {
+				ruling_party = authoritarian_democrat
+			}
+			add_political_power = -50
+			GER_decrease_general_staff_support = yes
+			hidden_effect = {
+				load_focus_tree = { tree = KRG_Germany_Goerdeler keep_completed = yes }
+				country_event = {
+					id = krg_ger.23
+					days = 3
+				}
+			}
+			ai_chance = {
+				base = 30
+				modifier = {
+					has_game_rule = {
+						rule = GER_AFTERMATH_KOLN
+						option = GER_AFTERMATH_KOLN_GOERDELER
+					}
+					factor = 1000
+				}
+			}
+		}
+	}
+
+	country_event = { #mackensen
+		id = krg_ger.21
+		title = krg_ger.21.t
+		desc = krg_ger.21.d
+		#picture = GFX_event_picture
+		immediate = { log = "[GetDateText]: [Root.GetName]: event krg_ger.21 FROM = [From.GetName]" }
+		
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		trigger = {
+			tag = GER
+		}
+		option = { #send army
+			name = krg_ger.21.a
+			add_command_power = -25
+			add_political_power = -25
+			set_country_flag = koln_crisis_pacified
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.24
+					days = 7
+				}
+			}
+		}
+	}
+
+	country_event = { #popitz
+		id = krg_ger.22
+		title = krg_ger.22.t
+		desc = krg_ger.22.d
+		#picture = GFX_event_picture
+		immediate = { log = "[GetDateText]: [Root.GetName]: event krg_ger.22 FROM = [From.GetName]" }
+		
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		trigger = {
+			tag = GER
+		}
+		option = { #negotiate
+			name = krg_ger.22.a
+			add_political_power = -50
+			set_country_flag = koln_crisis_negotiated
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.25
+					days = 7
+				}
+			}
+		}
+	}
+
+	country_event = { #goerdeler
+		id = krg_ger.23
+		title = krg_ger.23.t
+		desc = krg_ger.23.d
+		#picture = GFX_event_picture
+		immediate = { log = "[GetDateText]: [Root.GetName]: event krg_ger.23 FROM = [From.GetName]" }
+		
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		trigger = {
+			tag = GER
+		}
+		option = { #formally negotiate
+			name = krg_ger.23.a
+			add_political_power = -50
+			set_country_flag = koln_crisis_negotiated
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.25
+					days = 7
+				}
+			}
+		}
+	}
+
+	country_event = { #Koln under Martial Law
+		id = krg_ger.24
+		title = krg_ger.24.t
+		desc = krg_ger.24.d
+		#picture = GFX_ce
+		immediate = { log = "[GetDateText]: [Root.GetName]: event krg_ger.24 FROM = [From.GetName]" }
+
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		
+
+		option = {
+			name = krg_ger.24.a
+			add_timed_idea = {
+				idea = GER_rhineland_pacification
+				days = 180
+			}
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.29
+					days = 180
+				}
+				country_event = {
+					id = krg_ger.30
+					days = 51
+				}
+				country_event = {
+					id = krg_ger.31
+					days = 60
+				}
+				country_event = {
+					id = krg_ger.32
+					days = 100
+				}
+			}
+		}
+	}
+
+	country_event = {#Negotiations continue
+		id = krg_ger.25
+		title = krg_ger.25.t
+		desc = krg_ger.25.d
+		#picture = GFX_ce
+		immediate = { log = "[GetDateText]: [Root.GetName]: event krg_ger.25 FROM = [From.GetName]" }
+
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		
+
+		option = {
+			name = krg_ger.25.a
+			add_political_power = -10
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.26
+					days = 5
+				}
+			}
+		}
+	}
+
+	country_event = { #The Final Demands
+		id = krg_ger.26
+		title = krg_ger.26.t
+		desc = krg_ger.26.d
+		#picture = GFX_ce
+		immediate = { log = "[GetDateText]: [Root.GetName]: event krg_ger.26 FROM = [From.GetName]" }
+
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		
+
+		option = { #Agree to their demands
+			name = krg_ger.26.a
+			add_political_power = -50
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.27
+					days = 5
+				}
+			}
+		}
+		option = { #Screw this, deploy the Heer
+			name = krg_ger.26.b
+			trigger = {
+				has_idea = GER_Ferdinand_von_Bredow_hog_pau
+			}
+			add_stability = -0.05
+			add_command_power = -25
+			add_popularity = {
+				ideology = paternal_autocrat
+				popularity = -0.02
+			}
+			clr_country_flag = koln_crisis_negotiated
+			set_country_flag = koln_crisis_pacified
+			GER_increase_general_staff_support = yes
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.24
+					days = 7
+				}
+			}
+		}
+	}
+
+	country_event = { #Protests Dissapate
+		id = krg_ger.27
+		title = krg_ger.27.t
+		desc = krg_ger.27.d
+		#picture = GFX_ce
+		immediate = { log = "[GetDateText]: [Root.GetName]: event krg_ger.27 FROM = [From.GetName]" }
+
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		
+
+		option = {
+			name = krg_ger.27.a
+			add_stability = 0.05
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.28
+					days = 7
+				}
+			}
+		}
+	}
+
+	country_event = { #Peace in the Rhineland
+		id = krg_ger.28
+		title = krg_ger.28.t
+		desc = krg_ger.28.d
+		picture = GFX_ce_ger_koln_2
+		immediate = { log = "[GetDateText]: [Root.GetName]: event krg_ger.28 FROM = [From.GetName]" }
+
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		
+
+		option = {
+			name = krg_ger.28.a
+			add_popularity = {
+				ideology = authoritarian_socialist
+				popularity = -0.05
+			}
+			remove_ideas = GER_the_koln_crisis
+			if = {
+				limit = {
+					has_idea = GER_Carl_Friedrich_Goerdeler_hog_ade
+				}
+				log = "KRG_Event_Logging;Koln Crisis - Goerdeler;[GetDateText];[ROOT.GetName];[FROM.GetName]"
+				news_event = {
+					id = worldnews.16
+				}
+			}
+			else_if = {
+				limit = {
+					has_idea = GER_Johannes_Popitz_hog_pau
+				}
+				log = "KRG_Event_Logging;Koln Crisis - Popitz;[GetDateText];[ROOT.GetName];[FROM.GetName]"
+				news_event = {
+					id = worldnews.15
+				}
+			}
+			else = {
+				log = "KRG_Event_Logging;Koln Crisis - Bredow;[GetDateText];[ROOT.GetName];[FROM.GetName]"
+				news_event = {
+					id = worldnews.13
+				}
+			}
+		}
+	}
+
+	country_event = { #Peace in the Rhineland (Pacification)
+		id = krg_ger.29
+		title = krg_ger.29.t
+		desc = krg_ger.29.d
+		picture = GFX_ce_ger_koln_2
+		immediate = { log = "[GetDateText]: [Root.GetName]: event krg_ger.29 FROM = [From.GetName]" }
+
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		
+
+		option = {
+			name = krg_ger.29.a
+			add_popularity = {
+				ideology = authoritarian_socialist
+				popularity = -0.05
+			}
+			remove_ideas = GER_the_koln_crisis
+			if = {
+				limit = {
+					has_idea = GER_Eberhard_von_Mackensen_hog_pau
+				}
+				log = "KRG_Event_Logging;Koln Crisis - Mackensen;[GetDateText];[ROOT.GetName];[FROM.GetName]"
+				news_event = {
+					id = worldnews.14
+				}
+			}
+			else = {
+				log = "KRG_Event_Logging;Koln Crisis - Bredow;[GetDateText];[ROOT.GetName];[FROM.GetName]"
+				news_event = {
+					id = worldnews.13
+				}
+			}
+		}
+	}
+
+	country_event = { #Adenauer resigns as Mayor
+		id = krg_ger.30
+		title = krg_ger.30.t
+		desc = krg_ger.30.d
+		#picture = GFX_ce
+		immediate = { log = "[GetDateText]: [Root.GetName]: event krg_ger.30 FROM = [From.GetName]" }
+
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		
+
+		option = {
+			name = krg_ger.30.a
+			add_political_power = -25
+			add_popularity = {
+				ideology = social_conservative
+				popularity = -0.01
+			}
+		}
+	}
+
+### Centralising
+
+	country_event = { #Heavy criticism from the political spectrum
+		id = krg_ger.31
+		title = krg_ger.31.t
+		desc = krg_ger.31.d
+		#picture = GFX_ce
+
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		
+
+		option = {
+			name = krg_ger.31.a
+			add_political_power = -50
+		}
+	}
+
+	country_event = { #Random Syndie group stamped out
+		id = krg_ger.32
+		title = krg_ger.32.t
+		desc = krg_ger.32.d
+		#picture = GFX_ce
+
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		
+
+		option = {
+			name = krg_ger.32.a
+			add_stability = 0.03
+			add_popularity = {
+				ideology = radical_socialist
+				popularity = -0.02
+			}
+			add_popularity = {
+				ideology = paternal_autocrat
+				popularity = 0.02
+			}
+		}
+	}
+
+	country_event = { #Imperial Press Law
+		id = krg_ger.33
+		title = krg_ger.33.t
+		desc = krg_ger.33.d
+		#picture = GFX_ce
+
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		
+
+		option = {
+			name = krg_ger.33.a
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.61
+					days = 90
+				}
+			}
+		}
+	}
+
+	country_event = { #Kaiser opens the Reichstag
+		id = krg_ger.34
+		title = krg_ger.34.t
+		desc = krg_ger.34.d
+		picture = GFX_ce_ger_wilhelm_iii_1
+
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		
+
+		option = {
+			name = krg_ger.34.a
+			set_country_flag = GER_reichstag_opened
+			country_event = {
+				id = krg_ger.35
+				days = 7
+			}
+		}
+	}
+
+	country_event = { #Bredow's Speech
+		id = krg_ger.35
+		title = krg_ger.35.t
+		desc = krg_ger.35.d
+		picture = GFX_ce_ger_bredow_1
+
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		
+
+		option = { #We must heal our wounds
+			name = krg_ger.35.a
+			add_stability = 0.03
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.36
+					days = 7
+				}
+				country_event = {
+					id = krg_ger.39
+					days = 20
+				}
+			}
+		}
+		option = { #We must rebuild our might
+			name = krg_ger.35.b
+			add_war_support = 0.03
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.37
+					days = 7
+				}
+				country_event = {
+					id = krg_ger.39
+					days = 20
+				}
+			}
+		}
+		option = { #We must reform our constitution
+			name = krg_ger.35.c
+			add_political_power = 25
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.38
+					days = 7
+				}
+			}
+		}
+	}
+
+	country_event = { #Josef Frings applauds the speech
+		id = krg_ger.36
+		title = krg_ger.36.t
+		desc = krg_ger.36.d
+		picture = GFX_ce_ger_frings
+
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		trigger = {
+			tag = GER
+		}
+
+		option = {
+			name = krg_ger.36.a
+			add_stability = 0.02
+			add_popularity = {
+				ideology = paternal_autocrat
+				popularity = 0.01
+			}
+		}
+	}
+
+	country_event = { #Ludwig Beck applauds the speech
+		id = krg_ger.37
+		title = krg_ger.37.t
+		desc = krg_ger.37.d
+		picture = GFX_ce_ger_beck
+
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		trigger = {
+			tag = GER
+		}
+
+		option = {
+			name = krg_ger.37.a
+			add_war_support = 0.02
+			GER_increase_general_staff_support = yes
+			add_popularity = {
+				ideology = paternal_autocrat
+				popularity = 0.01
+			}
+		}
+	}
+
+	country_event = { #Outrage from the moderates
+		id = krg_ger.38
+		title = krg_ger.38.t
+		desc = krg_ger.38.d
+		picture = GFX_ce_ger_moderates
+
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		
+
+		option = {
+			name = krg_ger.38.a
+			add_stability = -0.05
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.40
+					days = 21
+				}
+			}
+		}
+	}	
+
+	country_event = { #Rumours in the Reichstag
+		id = krg_ger.39
+		title = krg_ger.39.t
+		desc = krg_ger.39.d
+		picture = GFX_ce_ger_moderates
+
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		
+
+		option = {
+			name = krg_ger.39.a
+			add_stability = -0.03
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.40
+					days = 21
+				}
+			}
+		}
+	}
+
+	country_event = { #Collapse of the Grand Coalition
+		id = krg_ger.40
+		title = krg_ger.40.t
+		desc = krg_ger.40.d
+		picture = GFX_ce_ger_moderates
+
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		
+
+		option = {
+			name = krg_ger.40.a
+			add_political_power = -50
+			add_stability = -0.05
+			coal_rev_soc_con = yes
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.41
+					days = 7
+				}
+			}
+		}
+	}
+
+	country_event = { #Meeting with the Ministries
+		id = krg_ger.41
+		title = krg_ger.41.t
+		desc = krg_ger.41.d
+		picture = GFX_ce_ger_meeting
+
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		
+
+		option = {
+			name = krg_ger.41.a
+			add_political_power = 25
+			#Opens up political decisions?#
+		}
+	}
+
+	country_event = { #The Enabling Act Expires (now with consequences!)
+		id = krg_ger.42
+		title = krg_ger.42.t
+		desc = krg_ger.42.d
+		picture = GFX_ce_ger_enabling
+
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		trigger = {
+			tag = GER
+		}
+
+		option = {
+			name = krg_ger.42.a
+			hidden_effect = { coal_rev_all = yes }
+			set_politics = {
+				ruling_party = authoritarian_democrat
+			}
+			coal_add_pat_aut = yes
+			set_party_name = {
+				ideology = paternal_autocrat
+				name = GER_paternal_autocrat_DKP_party
+				long_name = GER_paternal_autocrat_DKP_party_long
+			}
+			remove_all_ministers = yes
+			add_ideas = GER_Carl_Friedrich_Goerdeler_hog_ade
+			add_ideas = GER_Heinrich_von_Brentano_fm_ade
+			add_ideas = GER_Johannes_Popitz_em_pau
+			add_ideas = GER_Hans_Koch_jm_ade
+			add_ideas = GER_Gottfried_Reinhold_Treviranus_im_ade
+			add_ideas = GER_Wilhelm_Canaris_hoi_ade
+			hidden_effect = {
+				load_focus_tree = { tree = KRG_Germany_Goerdeler keep_completed = yes }
+			}
+		}
+	}
+
+	country_event = { #Negotiating with the DNAP
+		id = krg_ger.43
+		title = krg_ger.43.t
+		desc = krg_ger.43.d
+		picture = GFX_ce_ger_schliecher
+
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		
+
+		option = {
+			name = krg_ger.43.a
+			add_timed_idea = {
+				idea = GER_negotiation_DNAP_welfare
+				days = 180
+			}
+			custom_effect_tooltip = GER_DNAP_new_state_support_tooltip
+			add_to_variable = { 
+				var = GER_new_state_reform_support
+				value = GER_DNAP_deputies
+			}
+		}
+		option = {
+			name = krg_ger.43.b
+			add_political_power = 5
+		}
+	}
+
+	country_event = { #Negotiating with the National Liberals
+		id = krg_ger.44
+		title = krg_ger.44.t
+		desc = krg_ger.44.d
+		picture = GFX_ce_ger_flick
+
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		
+
+		option = {
+			name = krg_ger.44.a
+			add_timed_idea = {
+				idea = GER_negotiation_NLP_taxbreaks
+				days = 180
+			}
+			custom_effect_tooltip = GER_NLP_new_state_support_tooltip
+			add_to_variable = { 
+				var = GER_new_state_reform_support
+				value = GER_LVP_R_deputies
+			}
+		}
+		option = {
+			name = krg_ger.44.b
+			add_political_power = 12
+		}
+	}
+
+	country_event = { #Negotiating with the National Liberals (Popitz)
+		id = krg_ger.45
+		title = krg_ger.45.t
+		desc = krg_ger.45.d
+		picture = GFX_ce_ger_flick
+
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		
+
+		option = {
+			name = krg_ger.45.a
+			custom_effect_tooltip = GER_NLP_new_state_support_tooltip
+			add_to_variable = { 
+				var = GER_new_state_reform_support
+				value = GER_LVP_R_deputies
+			}
+		}
+	}
+
+	country_event = { #Negotiating with the Zentrum Federalists
+		id = krg_ger.46
+		title = krg_ger.46.t
+		desc = krg_ger.46.d
+		picture = GFX_ce_ger_bruning_1
+
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		
+
+		option = {
+			name = krg_ger.46.a
+			set_country_flag = GER_zentrum_federalist_support
+			add_timed_idea = {
+				idea = GER_negotiation_Z_catholic_assurances
+				days = 365
+			}
+			custom_effect_tooltip = GER_ZF_new_state_support_tooltip
+			add_to_variable = { 
+				var = GER_new_state_reform_support
+				value = GER_Zentrum_F_deputies
+			}
+		}
+		option = {
+			name = krg_ger.46.b
+			add_political_power = 25
+		}
+	}
+
+	country_event = { #Negotiating with Papen
+		id = krg_ger.47
+		title = krg_ger.47.t
+		desc = krg_ger.47.d
+		picture = GFX_ce_ger_papen
+
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		
+
+		option = {
+			name = krg_ger.47.a
+			remove_ideas_with_trait = foreign_minister
+			add_ideas = GER_Franz_von_Papen_fm_sco
+			custom_effect_tooltip = GER_ZR_new_state_support_tooltip
+			add_to_variable = { 
+				var = GER_new_state_reform_support
+				value = GER_Zentrum_R_deputies
+			}
+		}
+		option = {
+			name = krg_ger.47.b
+			add_political_power = 12
+		}
+	}
+
+	country_event = { #Negotiating with the BVP
+		id = krg_ger.48
+		title = krg_ger.48.t
+		desc = krg_ger.48.d
+		picture = GFX_ce_ger_fischbacker
+
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		
+
+		option = {
+			name = krg_ger.48.a
+			add_timed_idea = {
+				idea = GER_negotiation_bavarian_investments
+				days = 180
+			}
+			add_to_variable = { 
+				var = GER_new_state_reform_support
+				value = GER_BVP_deputies
+			}
+			custom_effect_tooltip = GER_BVP_new_state_support_tooltip
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.56
+					days = 180
+				}
+			}
+		}
+		option = {
+			name = krg_ger.48.b
+			add_political_power = 25
+		}
+	}
+
+	country_event = { #Negotiating with the BVP (Post-Fed)
+		id = krg_ger.49
+		title = krg_ger.49.t
+		desc = krg_ger.49.d
+		picture = GFX_ce_ger_fischbacker
+
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		
+
+		option = {
+			name = krg_ger.49.a
+			custom_effect_tooltip = GER_BVP_new_state_support_tooltip
+			add_to_variable = { 
+				var = GER_new_state_reform_support
+				value = GER_BVP_deputies
+			}
+		}
+	}
+
+	country_event = { #Negotiating with the Polish
+		id = krg_ger.50
+		title = krg_ger.50.t
+		desc = krg_ger.50.d
+		picture = GFX_ce_ger_szczepaniak
+
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		
+
+		option = {
+			name = krg_ger.50.a
+			set_country_flag = GER_polish_party_support
+			add_timed_idea = {
+				idea = GER_negotiation_polish_investments
+				days = 180
+			}
+			custom_effect_tooltip = GER_PP_new_state_support_tooltip
+			add_to_variable = { 
+				var = GER_new_state_reform_support
+				value = GER_PP_deputies
+			}
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.57
+					days = 180
+				}
+			}
+		}
+		option = {
+			name = krg_ger.50.b
+			add_political_power = 12
+		}
+	}
+
+	country_event = { #Negotiating with the Ind. Cons
+		id = krg_ger.51
+		title = krg_ger.51.t
+		desc = krg_ger.51.d
+		picture = GFX_ce_ger_hellwege
+
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		
+
+		option = {
+			name = krg_ger.51.a
+			add_timed_idea = {
+				idea = GER_negotiation_indcon_bribes
+				days = 30
+			}
+			custom_effect_tooltip = GER_IndCon_new_state_support_tooltip
+			add_to_variable = { 
+				var = GER_new_state_reform_support
+				value = GER_Conservative_deputies
+			}
+		}
+		option = {
+			name = krg_ger.51.b
+			add_political_power = 5
+		}
+		option = {
+			name = krg_ger.51.c
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.48
+					days = 5
+				}
+			}
+		}
+	}
+
+	country_event = { #Negotiating with the Agrarians
+		id = krg_ger.52
+		title = krg_ger.52.t
+		desc = krg_ger.52.d
+		picture = GFX_ce_ger_willikens
+
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		
+
+		option = {
+			name = krg_ger.52.a
+			add_timed_idea = {
+				idea = GER_negotiation_agrarian_reforms
+				days = 180
+			}
+			custom_effect_tooltip = GER_Agr_new_state_support_tooltip
+			add_to_variable = { 
+				var = GER_new_state_reform_support
+				value = GER_Agrarian_deputies
+			}
+		}
+		option = {
+			name = krg_ger.52.b
+			add_political_power = 12
+		}
+	}
+
+	country_event = { #Negotiating with the Regionalists
+		id = krg_ger.53
+		title = krg_ger.53.t
+		desc = krg_ger.53.d
+		picture = GFX_ce_ger_dupong
+
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		
+
+		option = {
+			name = krg_ger.53.a
+			add_timed_idea = {
+				idea = GER_negotiation_regional_investments
+				days = 180
+			}
+			custom_effect_tooltip = GER_Reg_new_state_support_tooltip
+			add_to_variable = { 
+				var = GER_new_state_reform_support
+				value = GER_Regional_deputies
+			}
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.58
+					days = 180
+				}
+			}
+		}
+		option = {
+			name = krg_ger.53.b
+			add_political_power = 12
+		}
+	}
+
+	country_event = { #Negotiating with the Regionalists (Post Polish)
+		id = krg_ger.54
+		title = krg_ger.54.t
+		desc = krg_ger.54.d
+		picture = GFX_ce_ger_dupong
+
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		
+
+		option = {
+			name = krg_ger.54.a
+			add_timed_idea = {
+				idea = GER_negotiation_regional_investments_2
+				days = 180
+			}
+			custom_effect_tooltip = GER_Reg_new_state_support_tooltip
+			add_to_variable = { 
+				var = GER_new_state_reform_support
+				value = GER_Regional_deputies
+			}
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.59
+					days = 180
+				}
+			}
+		}
+		option = {
+			name = krg_ger.54.b
+			add_political_power = 12
+		}
+	}
+
+	country_event = { #Pressuring the Ind. Cons.
+		id = krg_ger.55
+		title = krg_ger.55.t
+		desc = krg_ger.55.d
+		picture = GFX_ce_ger_hellwege
+
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		
+
+		option = {
+			name = krg_ger.55.a
+			add_political_power = 10
+			custom_effect_tooltip = GER_IndCon_new_state_support_tooltip
+			add_to_variable = { 
+				var = GER_new_state_reform_support
+				value = GER_Conservative_deputies
+			}
+		}
+	}
+
+	country_event = { #Bavarian Investment
+		id = krg_ger.56
+		title = krg_ger.56.t
+		desc = krg_ger.56.d
+		picture = GFX_ce_ger_investments
+
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		
+
+		option = {
+			name = krg_ger.56.a
+		}
+	}
+
+	country_event = { #Polish Investment
+		id = krg_ger.57
+		title = krg_ger.57.t
+		desc = krg_ger.57.d
+		picture = GFX_ce_ger_investments
+
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		
+
+		option = {
+			name = krg_ger.57.a
+		}
+	}
+
+	country_event = { #Regional Investment
+		id = krg_ger.58
+		title = krg_ger.58.t
+		desc = krg_ger.58.d
+		picture = GFX_ce_ger_investments
+
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		
+
+		option = {
+			name = krg_ger.58.a
+		}
+	}
+
+	country_event = { #Regional Investment but worse value for money
+		id = krg_ger.59
+		title = krg_ger.59.t
+		desc = krg_ger.59.d
+		picture = GFX_ce_ger_investments
+
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		
+
+		option = {
+			name = krg_ger.59.a
+		}
+	}
+
+	country_event = { #Dabbing on the Volkisch lads
+		id = krg_ger.60
+		title = krg_ger.60.t
+		desc = krg_ger.60.d
+		picture = GFX_ce_ger_h_class
+
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		
+
+		option = {
+			name = krg_ger.60.a
+			add_popularity = {
+				ideology = national_populist
+				popularity = -0.02
+			}
+		}
+	}
+
+	country_event = { #Radical Papers Banned
+		id = krg_ger.61
+		title = krg_ger.61.t
+		desc = krg_ger.61.d
+		##picture = GFX_ce
+
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		
+
+		option = {
+			name = krg_ger.61.a
+			add_stability = 0.03
+			add_popularity = {
+				ideology = authoritarian_socialist
+				popularity = -0.02
+			}
+			add_popularity = {
+				ideology = national_populist
+				popularity = -0.01
+			}
+		}
+	}
+
+	country_event = { #Vorwarts Circulation Changes
+		id = krg_ger.62
+		title = krg_ger.62.t
+		desc = krg_ger.62.d
+		picture = GFX_ce_ger_vorwarts
+
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		
+
+		option = {
+			name = krg_ger.62.a
+			add_popularity = {
+				ideology = social_democrat
+				popularity = 0.01
+			}
+		}
+		option = {
+			name = krg_ger.62.b
+			add_political_power = -10
+			add_stability = -0.01
+		}
+	}
+
+	country_event = { #Kolnsche Volkszeitung Circulation Falls
+		id = krg_ger.63
+		title = krg_ger.63.t
+		desc = krg_ger.63.d
+		picture = GFX_ce_ger_kz
+
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		
+
+		option = {
+			name = krg_ger.63.a
+			add_political_power = 10
+		}
+	}
+
+	country_event = { #Complaints from Abteilung Veterans
+		id = krg_ger.64
+		title = krg_ger.64.t
+		desc = krg_ger.64.d
+		picture = GFX_ce_ger_veterans
+
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		
+
+		option = {
+			name = krg_ger.64.a
+			add_political_power = -10
+		}
+	}
+
+	country_event = { #Finalising the Merger
+		id = krg_ger.65
+		title = krg_ger.65.t
+		desc = krg_ger.65.d
+		picture = GFX_ce_ger_wilhelm_iii_2
+
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		
+
+		option = {
+			name = krg_ger.65.a
+			add_political_power = 20
+		}
+	}
+
+	country_event = { #Detention of Socialist Activists
+		id = krg_ger.66
+		title = krg_ger.66.t
+		desc = krg_ger.66.d
+		picture = GFX_ce_ger_protests
+
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		
+
+		option = {
+			name = krg_ger.66.a
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.67
+					days = 30
+				}
+			}
+		}
+	}
+
+	country_event = { #Criminal Activity Unearthed
+		id = krg_ger.67
+		title = krg_ger.67.t
+		desc = krg_ger.67.d
+		picture = GFX_ce_ger_verpo
+
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		
+
+		option = {
+			name = krg_ger.67.a
+			add_stability = 0.02
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.68
+					days = 30
+				}
+			}
+		}
+	}
+
+	country_event = { #Syndicalist Entryists Discovered
+		id = krg_ger.68
+		title = krg_ger.68.t
+		desc = krg_ger.68.d
+		picture = GFX_ce_ger_verpo
+
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		
+
+		option = {
+			name = krg_ger.68.a
+			add_political_power = 10
+			add_popularity = {
+				ideology = social_democrat
+				popularity = -0.01
+			}
+		}
+	}
+
+	country_event = { #Agents Infiltrate the SPD
+		id = krg_ger.69
+		title = krg_ger.69.t
+		desc = krg_ger.69.d
+		picture = GFX_ce_ger_verpo
+
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		
+
+		option = {
+			name = krg_ger.69.a
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.70
+					days = 21
+				}
+			}
+		}
+	}
+
+	country_event = { #Verpo Agents Begin to Act
+		id = krg_ger.70
+		title = krg_ger.70.t
+		desc = krg_ger.70.d
+		picture = GFX_ce_ger_verpo
+
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		
+
+		option = {
+			name = krg_ger.70.a
+			add_political_power = -10
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.71
+					days = 14
+				}
+			}
+		}
+	}
+
+	country_event = { #SPD Meeting Implodes
+		id = krg_ger.71
+		title = krg_ger.71.t
+		desc = krg_ger.71.d
+		#picture = GFX_ce
+
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		
+
+		option = {
+			name = krg_ger.71.a
+			add_political_power = 15
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.72
+					days = 20
+				}
+			}
+		}
+	}
+
+	country_event = { #SPD Infighting Continues to Rise
+		id = krg_ger.72
+		title = krg_ger.72.t
+		desc = krg_ger.72.d
+		#picture = GFX_ce
+
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		
+
+		option = {
+			name = krg_ger.72.a
+			add_popularity = {
+				ideology = social_democrat
+				popularity = -0.01
+			}
+		}
+	}
+
+	country_event = { #Consulting Herbert von Bose
+		id = krg_ger.73
+		title = krg_ger.73.t
+		desc = krg_ger.73.d
+		#picture = GFX_ce
+
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		
+
+		option = {
+			name = krg_ger.73.a
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.74
+					days = 10
+				}
+			}
+		}
+	}
+
+	country_event = { #Streamlining the Cabinet
+		id = krg_ger.74
+		title = krg_ger.74.t
+		desc = krg_ger.74.d
+		#picture = GFX_ce
+
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		
+
+		option = {
+			name = krg_ger.74.a
+			add_political_power = 10
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.75
+					days = 10
+				}
+			}
+		}
+	}
+
+	country_event = { #Complaints from the Secrataries
+		id = krg_ger.75
+		title = krg_ger.75.t
+		desc = krg_ger.75.d
+		#picture = GFX_ce
+
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		
+
+		option = {
+			name = krg_ger.75.a
+			add_political_power = -5
+		}
+	}
+
+	country_event = { #A Modern Cabinet
+		id = krg_ger.76
+		title = krg_ger.76.t
+		desc = krg_ger.76.d
+		#picture = GFX_ce
+
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		
+
+		option = {
+			name = krg_ger.76.a
+			add_political_power = 50
+		}
+	}
+
+	country_event = { #Results of the Krosigkplan Trial
+		id = krg_ger.77
+		title = krg_ger.77.t
+		desc = krg_ger.77.d
+		#picture = GFX_ce
+
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		
+
+		option = {
+			name = krg_ger.77.a
+			add_popularity = {
+				ideology = paternal_autocrat
+				popularity = 0.02
+			}
+			set_country_flag = GER_krosigkplan_trialed
+		}
+	}
+
+	country_event = { #Implementing the Peace Law
+		id = krg_ger.78
+		title = krg_ger.78.t
+		desc = krg_ger.78.d
+		picture = GFX_ce_ger_police
+
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		
+
+		option = {
+			name = krg_ger.78.a
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.79
+					days = 30
+				}
+			}
+		}
+	}
+
+	country_event = { #SPD Rally Suppressed
+		id = krg_ger.79
+		title = krg_ger.79.t
+		desc = krg_ger.79.d
+		picture = GFX_ce_ger_protests
+
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		
+
+		option = {
+			name = krg_ger.79.a
+			add_stability = -0.01
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.80
+					days = 40
+				}
+			}
+		}
+	}
+
+	country_event = { #Wirth Rally Suppressed
+		id = krg_ger.80
+		title = krg_ger.80.t
+		desc = krg_ger.80.d
+		picture = GFX_ce_ger_protests
+
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		
+
+		option = {
+			name = krg_ger.80.a
+			add_stability = -0.01
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.81
+					days = 40
+				}
+			}
+		}
+	}
+
+	country_event = { #Accusations of Unfair Treatment
+		id = krg_ger.81
+		title = krg_ger.81.t
+		desc = krg_ger.81.d
+		#picture = GFX_ce
+
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		
+
+		option = {
+			name = krg_ger.81.a
+			add_political_power = -15
+			add_stability = 0.01
+		}
+		option = {
+			name = krg_ger.81.b
+			add_political_power = 15
+			add_stability = -0.01
+		}
+	}
+
+	country_event = { #Socialist Smear Campaign Resumes
+		id = krg_ger.82
+		title = krg_ger.82.t
+		desc = krg_ger.82.d
+		picture = GFX_ce_ger_verpo
+
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		
+
+		option = {
+			name = krg_ger.82.a
+			add_stability = -0.01
+			add_popularity = {
+				ideology = social_democrat
+				popularity = -0.01
+			}
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.83
+					days = 60
+				}
+			}
+		}
+	}
+
+	country_event = { #'Witchhunts' against Socialist Officials
+		id = krg_ger.83
+		title = krg_ger.83.t
+		desc = krg_ger.83.d
+		picture = GFX_ce_ger_verpo
+
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		
+
+		option = {
+			name = krg_ger.83.a
+			add_stability = 0.02
+			add_political_power = -25
+		}
+		option = {
+			name = krg_ger.83.b
+			add_stability = -0.02
+			add_political_power = 25
+		}
+	}
+
+	country_event = { #Meeting with Erdmann
+		id = krg_ger.84
+		title = krg_ger.84.t
+		desc = krg_ger.84.d
+		#picture = GFX_ce
+
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		
+
+		option = {
+			name = krg_ger.84.a
+			add_political_power = 10
+		}
+	}
+
+	country_event = { #The [GetYear] DNAP Conference
+		id = krg_ger.85
+		title = krg_ger.85.t
+		desc = krg_ger.85.d
+		#picture = GFX_ce
+
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		
+
+		option = {
+			name = krg_ger.85.a
+			add_political_power = 10
+			custom_effect_tooltip = GER_DNAP_funding_tooltip
+			add_to_variable = { 
+				var = GER_SPD_deputies
+				value = -10
+			}
+			add_to_variable = { 
+				var = GER_DNAP_deputies
+				value = 10
+			}
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.86
+					days = 60
+				}
+				country_event = {
+					id = krg_ger.87
+					days = 75
+				}
+			}
+		}
+	}
+
+	country_event = { #DNAP Membership Grows
+		id = krg_ger.86
+		title = krg_ger.86.t
+		desc = krg_ger.86.d
+		#picture = GFX_ce
+
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		
+
+		option = {
+			name = krg_ger.86.a
+			add_stability = 0.02
+		}
+	}
+
+	country_event = { #SPD Denounces the DNAP
+		id = krg_ger.87
+		title = krg_ger.87.t
+		desc = krg_ger.87.d
+		#picture = GFX_ce
+
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		
+
+		option = {
+			name = krg_ger.87.a
+			add_stability = -0.01
+			add_political_power = -10
+		}
+	}
+
+	country_event = { #The GGB Splits
+		id = krg_ger.88
+		title = krg_ger.88.t
+		desc = krg_ger.88.d
+		#picture = GFX_ce
+
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		
+
+		option = {
+			name = krg_ger.88.a
+			add_stability = 0.01
+			add_popularity = {
+				ideology = authoritarian_socialist
+				popularity = -0.01
+			}
+			add_popularity = {
+				ideology = radical_socialist
+				popularity = -0.01
+			}
+			add_popularity = {
+				ideology = social_democrat
+				popularity = -0.02
+			}
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.89
+					days = 100
+				}
+			}
+		}
+	}
+
+	country_event = { #Elimination of the FVdG
+		id = krg_ger.89
+		title = krg_ger.89.t
+		desc = krg_ger.89.d
+		#picture = GFX_ce
+
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		
+
+		option = {
+			name = krg_ger.89.a
+			add_stability = 0.01
+			add_popularity = {
+				ideology = radical_socialist
+				popularity = -0.05
+			}
+		}
+	}
+
+	country_event = { #Extending the Smear Campaign?
+		id = krg_ger.90
+		title = krg_ger.90.t
+		desc = krg_ger.90.d
+		#picture = GFX_ce
+
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		
+
+		option = {
+			name = krg_ger.90.a
+			add_stability = 0.02
+			add_political_power = 10
+		}
+		option = {
+			name = krg_ger.90.b
+			add_stability = -0.02
+			add_war_support = 0.02
+			add_popularity = {
+				ideology = social_liberal
+				popularity = -0.01
+			}
+		}
+	}
+
+	country_event = { #Formation of the DstP
+		id = krg_ger.91
+		title = krg_ger.91.t
+		desc = krg_ger.91.d
+		#picture = GFX_ce
+
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		
+
+		option = {
+			name = krg_ger.91.a
+			custom_effect_tooltip = GER_DStP_formation_tooltip
+			custom_effect_tooltip = GER_DStP_new_state_support_tooltip
+			add_political_power = 20
+			add_to_variable = { 
+				var = GER_new_state_reform_support
+				value = 5
+			}
+			add_to_variable = { 
+				var = GER_DStP_deputies
+				value = 5
+			}
+			add_to_variable = { 
+				var = GER_LVP_R_deputies
+				value = -3
+			}
+			add_to_variable = { 
+				var = GER_LVP_L_deputies
+				value = -2
+			}
+			set_party_name = {
+				ideology = market_liberal
+				name = GER_market_liberal_DStP_party
+				long_name = GER_market_liberal_DStP_party_long
+			}
+			coal_add_mar_lib = yes
+			set_country_flag = GER_DStP_Formation
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.92
+					days = 100
+				}
+			}
+		}
+	}
+
+	country_event = { #LVP Membership Levels Fall
+		id = krg_ger.92
+		title = krg_ger.92.t
+		desc = krg_ger.92.d
+		#picture = GFX_ce
+
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		
+
+		option = {
+			name = krg_ger.92.a
+			add_stability = 0.01
+		}
+	}
+
+	country_event = { #Building Political Apprehension
+		id = krg_ger.93
+		title = krg_ger.93.t
+		desc = krg_ger.93.d
+		#picture = GFX_ce
+
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		
+
+		option = {
+			name = krg_ger.93.a
+			add_stability = -0.01
+			add_political_power = -10
+		}
+	}
+
+	country_event = { #The Zentraliserung Vote
+		id = krg_ger.94
+		title = krg_ger.94.t
+		desc = krg_ger.94.d
+		#picture = GFX_ce
+
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		trigger = {
+			tag = GER
+		}
+
+		option = {
+			name = krg_ger.94.a
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.95
+					days = 1
+				}
+			}
+		}
+	}
+
+	country_event = { #The Zentraliserung Passes
+		id = krg_ger.95
+		title = krg_ger.95.t
+		desc = krg_ger.95.d
+		#picture = GFX_ce
+
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		
+
+		option = {
+			name = krg_ger.95.a
+			add_popularity = {
+				ideology = paternal_autocrat
+				popularity = 0.10
+			}
+			swap_ideas = {
+				remove_idea = GER_the_enabling_act
+				add_idea = GER_the_new_state
+			}
+			set_country_flag = GER_der_neue_staat
+			news_event = {
+				id = worldnews.17
+			}
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.96
+					days = 10
+				}
+			}
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.99
+					days = 3
+				}
+			}
+		}
+	}
+
+	country_event = { #Socialist Outrage continues
+		id = krg_ger.96
+		title = krg_ger.96.t
+		desc = krg_ger.96.d
+		#picture = GFX_ce
+
+		immediate = {
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.97
+					days = 30
+				}
+			}
+		}
+
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		
+		option = {
+			name = krg_ger.96.a
+			add_stability = -0.02
+		}
+
+		option = {
+			name = krg_ger.96.b
+			add_political_power = -15
+		}
+	}
+
+	country_event = { #Iron Front Rumours
+		id = krg_ger.97
+		title = krg_ger.97.t
+		desc = krg_ger.97.d
+		#picture = GFX_ce
+
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		option = {
+			name = krg_ger.97.a #They're just rumours
+			add_stability = -0.01
+		}
+		option = {
+			name = krg_ger.97.b #Get the Verpo to Investigate
+			add_political_power = -10
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.98
+					days = 75
+				}
+			}
+		}
+	}
+
+	country_event = { #Verpo investigation completes
+		id = krg_ger.98
+		title = krg_ger.98.t
+		desc = krg_ger.98.d
+		#picture = GFX_ce
+
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		option = {
+			name = krg_ger.98.a
+			add_stability = 0.01
+		}
+	}
+
+	country_event = { #The Kaiser Congratulates the Reichskanzler
+		id = krg_ger.99
+		title = krg_ger.99.t
+		desc = krg_ger.99.d
+		#picture = GFX_ce
+
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		
+
+		option = {
+			name = krg_ger.99.a
+		}
+	}
+
+### Treaty of Oxford ###
+
+	country_event = { #Neurath Returns to Germany (Light Victory)
+		id = krg_ger.100
+		title = krg_ger.100.t
+		desc = krg_ger.100.d
+		picture = GFX_ce_ger_neurath_2
+
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		
+
+		option = {
+			name = krg_ger.100.a
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.104
+					days = 60
+				}
+			}
+		}
+	}
+
+	country_event = { #Neurath Returns to Germany (Moderate Victory)
+		id = krg_ger.101
+		title = krg_ger.101.t
+		desc = krg_ger.101.d
+		picture = GFX_ce_ger_neurath_2
+
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		
+
+		option = {
+			name = krg_ger.101.a
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.104
+					days = 60
+				}
+			}
+		}
+	}
+
+	country_event = { #Neurath Returns to Germany (Harsh Victory)
+		id = krg_ger.102
+		title = krg_ger.102.t
+		desc = krg_ger.102.d
+		picture = GFX_ce_ger_neurath_2
+
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		
+
+		option = {
+			name = krg_ger.102.a
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.104
+					days = 60
+				}
+			}
+		}
+	}
+
+	country_event = { #Neurath Returns to Germany (Failure)
+		id = krg_ger.103
+		title = krg_ger.103.t
+		desc = krg_ger.103.d
+		picture = GFX_ce_ger_neurath_3
+
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		
+
+		option = {
+			name = krg_ger.103.a
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.104
+					days = 60
+				}
+			}
+		}
+	}
+
+	country_event = { #Neurath Retires
+		id = krg_ger.104
+		title = krg_ger.104.t
+		desc = krg_ger.104.d
+		picture = GFX_ce_ger_neurath_1
+
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		
+
+		option = {
+			name = krg_ger.104.a
+			remove_ideas_with_trait = foreign_minister
+			add_ideas = GER_Erwin_Ettel_fm_pau
+			add_war_support = 0.02
+			GER_increase_general_staff_support = yes
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.105
+					days = 75
+				}
+			}
+		}
+		# option = {
+		# 	name = krg_ger.104.b
+		# 	remove_ideas_with_trait = foreign_minister
+		# 	add_ideas = GER_Ulrich_von_Hassell_fm_pau
+		# 	add_political_power = 20
+		# 	hidden_effect = {
+		# 		country_event = {
+		# 			id = krg_ger.106
+		# 			days = 75
+		# 		}
+		# 	}
+		# }
+		option = {
+			name = krg_ger.104.c
+			remove_ideas_with_trait = foreign_minister
+			add_ideas = GER_Ernst_von_Weizsaecker_fm_ade
+			add_stability = 0.01
+			GER_decrease_general_staff_support = yes
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.107
+					days = 75
+				}
+			}
+		}
+	}
+
+	country_event = { #Militarists Staff the Foreign Ministry
+		id = krg_ger.105
+		title = krg_ger.105.t
+		desc = krg_ger.105.d
+		picture = GFX_ce_ger_binoculars
+
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		
+
+		option = {
+			name = krg_ger.105.a
+			add_war_support = 0.01
+			add_popularity = {
+				ideology = paternal_autocrat
+				popularity = 0.01
+			}
+		}
+	}
+
+	country_event = { #Beauracrats Staff the Foreign Ministry
+		id = krg_ger.106
+		title = krg_ger.106.t
+		desc = krg_ger.106.d
+		picture = GFX_ce_ger_meeting
+
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		
+
+		option = {
+			name = krg_ger.106.a
+			add_popularity = {
+				ideology = paternal_autocrat
+				popularity = 0.01
+			}
+		}
+	}
+
+	country_event = { #Conservatives Staff the Foreign Ministry
+		id = krg_ger.107
+		title = krg_ger.107.t
+		desc = krg_ger.107.d
+		picture = GFX_ce_ger_consforeignmin
+
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		
+
+		option = {
+			name = krg_ger.107.a
+			add_stability = 0.01
+			add_popularity = {
+				ideology = authoritarian_democrat
+				popularity = 0.01
+			}
+		}
+	}
+
+### Post Centalising ###
+
+	country_event = { #The moderates comply
+		id = krg_ger.108
+		title = krg_ger.108.t
+		desc = krg_ger.108.d
+		#picture = GFX_ce
+
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		
+
+		option = {
+			name = krg_ger.108.a
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.109
+					days = 27
+				}
+				country_event = {
+					id = krg_ger.113
+					days = 35
+				}
+				country_event = {
+					id = krg_ger.117
+					days = 56
+				}
+			}
+		}
+	}
+
+	country_event = { #Conservatives join the DNEF
+		id = krg_ger.109
+		title = krg_ger.109.t
+		desc = krg_ger.109.d
+		#picture = GFX_ce
+
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		
+
+		option = {
+			name = krg_ger.109.a
+			add_popularity = {
+				ideology = authoritarian_democrat
+				popularity = -0.03
+			}
+			add_popularity = {
+				ideology = paternal_autocrat
+				popularity = 0.03
+			}
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.110
+					days = 33
+				}
+			}
+		}
+	}
+
+	country_event = { #DkP in internal disarray
+		id = krg_ger.110
+		title = krg_ger.110.t
+		desc = krg_ger.110.d
+		#picture = GFX_ce
+
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		
+
+		option = {
+			name = krg_ger.110.a
+			add_popularity = {
+				ideology = authoritarian_democrat
+				popularity = -0.05
+			}
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.111
+					days = 14
+				}
+			}
+		}
+	}
+
+	country_event = { #Lehr takes over the DkP remnants
+		id = krg_ger.111
+		title = krg_ger.111.t
+		desc = krg_ger.111.d
+		#picture = GFX_ce
+
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		
+
+		option = {
+			name = krg_ger.111.a
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.112
+					days = 70
+				}
+			}
+		}
+	}
+
+	country_event = { #Founding of the PDP
+		id = krg_ger.112
+		title = krg_ger.112.t
+		desc = krg_ger.112.d
+		#picture = GFX_ce
+
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		
+
+		option = {
+			name = krg_ger.112.a
+			set_party_name = {
+				ideology = authoritarian_democrat
+				name = GER_authoritarian_democrat_PDP_party
+				long_name = GER_authoritarian_democrat_PDP_party_long
+			}
+			add_popularity = {
+				ideology = authoritarian_democrat
+				popularity = 0.03
+			}
+			coal_rev_auth_dem = yes
+			set_country_flag = GER_PDP_Formation
+		}
+	}
+
+	country_event = { #The Zentrum splits
+		id = krg_ger.113
+		title = krg_ger.113.t
+		desc = krg_ger.113.d
+		#picture = GFX_ce
+
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		
+
+		option = {
+			name = krg_ger.113.a
+			add_popularity = {
+				ideology = social_conservative
+				popularity = -0.02
+			}
+			add_popularity = {
+				ideology = paternal_autocrat
+				popularity = 0.02
+			}
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.114
+					days = 40
+				}
+			}
+		}
+	}
+
+	country_event = { #Emergency Zentrumspartei Conference
+		id = krg_ger.114
+		title = krg_ger.114.t
+		desc = krg_ger.114.d
+		#picture = GFX_ce
+
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		
+
+		option = {
+			name = krg_ger.114.a
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.115
+					days = 7
+				}
+			}
+		}
+	}
+
+	country_event = { #Stegerwald gets ousted from leadership
+		id = krg_ger.115
+		title = krg_ger.115.t
+		desc = krg_ger.115.d
+		#picture = GFX_ce
+
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		
+
+		option = {
+			name = krg_ger.115.a
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.116
+					days = 7
+				}
+			}
+		}
+	}
+
+	country_event = { #Wirth takes over the Zentrum
+		id = krg_ger.116
+		title = krg_ger.116.t
+		desc = krg_ger.116.d
+		#picture = GFX_ce
+
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		
+
+		option = {
+			name = krg_ger.116.a
+			set_country_flag = GER_Zentrum_NS_Opposition
+			add_popularity = {
+				ideology = social_conservative
+				popularity = 0.03
+			}
+		}
+	}
+
+	country_event = { #Collapse of the LVP
+		id = krg_ger.117
+		title = krg_ger.117.t
+		desc = krg_ger.117.d
+		#picture = GFX_ce
+
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		
+
+		option = {
+			name = krg_ger.117.a
+			add_popularity = {
+				ideology = social_liberal
+				popularity = -0.02
+			}
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.118
+					days = 10
+				}
+			}
+		}
+	}
+
+	country_event = { #Liberal politicians meet
+		id = krg_ger.118
+		title = krg_ger.118.t
+		desc = krg_ger.118.d
+		#picture = GFX_ce
+
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		
+
+		option = {
+			name = krg_ger.118.a
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.119
+					days = 17
+				}
+			}
+		}
+	}
+
+	country_event = { #Formation of the DDP
+		id = krg_ger.119
+		title = krg_ger.119.t
+		desc = krg_ger.119.d
+		#picture = GFX_ce
+
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		
+
+		option = {
+			name = krg_ger.119.a
+			set_party_name = {
+				ideology = social_liberal
+				name = GER_social_liberal_DDP_party
+				long_name = GER_social_liberal_DDP_party_long
+			}
+			add_popularity = {
+				ideology = social_liberal
+				popularity = 0.03
+			}
+			set_country_flag = GER_DDP_Formation
+		}
+	}
+
+	country_event = { #Report on the Moderates
+		id = krg_ger.120
+		title = krg_ger.120.t
+		desc = krg_ger.120.d
+		#picture = GFX_ce
+
+		fire_only_once = yes
+		
+		trigger = {
+			date > 1951.03.01
+			has_country_flag = GER_PDP_Formation
+			has_country_flag = GER_Zentrum_NS_Opposition
+			has_country_flag = GER_DStP_Formation
+		}
+
+		option = {
+			name = krg_ger.120.a
+			add_stability = -0.01
+			clr_country_flag = GER_PDP_Formation
+			clr_country_flag = GER_Zentrum_NS_Opposition
+			clr_country_flag = GER_DStP_Formation
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.121
+					days = 20
+				}
+			}
+		}
+	}
+
+	country_event = { #Moderate politicians meet
+		id = krg_ger.121
+		title = krg_ger.121.t
+		desc = krg_ger.121.d
+		#picture = GFX_ce
+
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		
+
+		option = {
+			name = krg_ger.121.a
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.122
+					days = 16
+				}
+			}
+		}
+	}
+
+	country_event = { #The Reichskanzler's concerns
+		id = krg_ger.122
+		title = krg_ger.122.t
+		desc = krg_ger.122.d
+		#picture = GFX_ce
+
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		
+
+		option = {
+			name = krg_ger.122.a
+			add_political_power = -10
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.123
+					days = 24
+				}
+			}
+		}
+	}
+
+	country_event = { #Formation of the BfD
+		id = krg_ger.123
+		title = krg_ger.123.t
+		desc = krg_ger.123.d
+		#picture = GFX_ce
+
+		is_triggered_only = yes
+		fire_only_once = yes
+		
+		
+
+		option = {
+			name = krg_ger.123.a
+			set_party_name = {
+				ideology = market_liberal
+				name = GER_market_liberal_alliance_party
+				long_name = GER_market_liberal_alliance_party_long
+			}
+			set_party_name = {
+				ideology = social_conservative
+				name = GER_social_conservative_alliance_party
+				long_name = GER_social_conservative_alliance_party_long
+			}
+			set_party_name = {
+				ideology = authoritarian_democrat
+				name = GER_authoritarian_democrat_PDP_alliance_party
+				long_name = GER_authoritarian_democrat_PDP_alliance_party_long
+			}
+			add_popularity = {
+				ideology = market_liberal
+				popularity = 0.03
+			}
+			add_popularity = {
+				ideology =	social_conservative
+				popularity = 0.03
+			}
+			add_popularity = {
+				ideology =	authoritarian_democrat
+				popularity = 0.03
+			}
+			coal_rev_mark_lib = yes
+			set_country_flag = GER_BfD_formation
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.124
+					days = 24
+				}
+			}
+		}
+	}
+
+	country_event = { #Forming a Grand Coalition
+		id = krg_ger.124
+		title = krg_ger.124.t
+		desc = krg_ger.124.d
+		#picture = GFX_event_picture
+
+		is_triggered_only = yes
+
+		option = {
+			name = krg_ger.124.a
+			set_party_name = {
+				ideology = social_democrat
+				name = GER_social_democrat_DNEF_DNAP_party
+				long_name = GER_social_democrat_DNEF_DNAP_party_long
+			}
+			set_party_name = {
+				ideology = paternal_autocrat
+				name = GER_paternal_autocrat_DNEF_party
+				long_name = GER_paternal_autocrat_DNEF_party_long
+			}
+			set_party_name = {
+				ideology = national_populist
+				name = GER_national_populist_DNEF_fraktion_party
+				long_name = GER_national_populist_DNEF_party_fraktion_long
+			}
+			coal_add_soc_dem = yes
+		}	
+	}
+
+### Economic Events ###
+
+	country_event = { #announce EEDP
+		id = krg_ger.200
+		title = krg_ger.200.t
+		desc = krg_ger.200.d
+		#picture = GFX_event_picture
+
+		is_triggered_only = yes
+		fire_only_once = yes
+
+		trigger = {
+			tag = GER
+		}
+		option = {
+			name = krg_ger.200.a
+			POL = {
+				add_ideas = { GER_warsaw_plan_puppet }
+			}
+			LIT = {
+				add_ideas = { GER_warsaw_plan_puppet }
+			}
+			UKR = {
+				add_ideas = { GER_warsaw_plan_puppet }
+			}
+			KRL = {
+				add_ideas = { GER_warsaw_plan_puppet }
+			}
+		}
+	}
+
+	country_event = { #Ruhr Boom
+		id = krg_ger.298
+		title = krg_ger.298.t
+		desc = krg_ger.298.d
+		#picture = GFX_event_picture
+
+		is_triggered_only = yes
+
+		option = {
+			name = krg_ger.298.a
+		}	
+	}
+
+	country_event = { #Ruhr Boom 10 years later
+		id = krg_ger.299
+		title = krg_ger.299.t
+		desc = krg_ger.299.d
+		#picture = GFX_event_picture
+
+		is_triggered_only = yes
+
+		option = {
+			name = krg_ger.299.a
+			remove_ideas = GER_the_second_ruhr_boom_idea
+			add_timed_idea = {
+				idea = GER_the_second_ruhr_boom_idea_2
+				days = 1825
+			}
+			every_owned_state = {
+				remove_dynamic_modifier = {
+					modifier = GER_2nd_ruhr_boom
+				}
+			}
+		}
+	}
+
+	country_event = { #europaprojekt invitation
+		id = krg_ger.304
+		title = krg_ger.304.t
+		desc = krg_ger.304.d
+		picture = GFX_ce_ger_wilhelm_iv_2
+
+		is_triggered_only = yes
+
+		option = {
+			name = krg_ger.304.a
+			if = {
+				limit = {
+					has_idea = GER_mitteleuropa_leader2
+				}
+				swap_ideas = {
+					remove_idea = GER_mitteleuropa_leader2
+					add_idea = GER_europaprojekt
+				}
+			}
+			if = {
+				limit = {
+					has_idea = GER_mitteleuropa_member2
+				}
+				swap_ideas = {
+					remove_idea = GER_mitteleuropa_member
+					add_idea = GER_europaprojekt
+				}
+			}
+			if = {
+				limit = {
+					has_idea = GER_mitteleuropa_member_overseas2
+				}
+				swap_ideas = {
+					remove_idea = GER_mitteleuropa_member_overseas2
+					add_idea = GER_mitteleuropa_member_overseas3
+				}
+			}
+			GER = {
+				country_event = krg_ger.306
+			}
+		}
+
+		option = {
+			name = krg_ger.304.b
+			GER = {
+				country_event = krg_ger.305
+			}
+		}	
+	}
+
+	country_event = { #country rejects
+		id = krg_ger.305
+		title = krg_ger.305.t
+		desc = krg_ger.305.d
+		picture = u
+
+		is_triggered_only = yes
+
+		option = {
+			name = krg_ger.305.a
+		}	
+	}
+
+	country_event = { #country accepts
+		id = krg_ger.306
+		title = krg_ger.306.t
+		desc = krg_ger.306.d
+		picture = u
+
+		is_triggered_only = yes
+
+		option = {
+			name = krg_ger.306.a
+		}	
+	}
+
+	country_event = { #Ruckkehrprogram complete
+		id = krg_ger.307
+		title = krg_ger.307.t
+		desc = krg_ger.307.d
+		picture = u
+
+		is_triggered_only = yes
+
+		option = {
+			name = krg_ger.307.a
+			add_stability = 0.05
+			set_country_flag = GER_Ruckkehrprogram_complete
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.311
+					days = 730
+				}
+			}
+		}	
+	}
+	country_event = { #Invitation from Germany to Join Mitteleuropa - DNF
+		id = krg_ger.308
+		title = krg_ger.308.t
+		desc = krg_ger.308.d
+		picture = u
+
+		is_triggered_only = yes
+
+		option = { #hell yeah count me in
+			name = krg_ger.308.a
+			DNF_join_MIT = yes
+			FROM = { country_event = krg_ger.309 }
+		}
+		option = {#hell no
+			name = krg_ger.308.a
+			FROM = { country_event = krg_ger.310 }
+		}	
+	}
+
+	country_event = { #Danubia says yes
+		id = krg_ger.309
+		title = krg_ger.309.t
+		desc = krg_ger.309.d
+		picture = u
+
+		is_triggered_only = yes
+
+		option = {
+			name = krg_ger.309.a
+		}
+	}
+
+	country_event = { #Danubia says no
+		id = krg_ger.310
+		title = krg_ger.310.t
+		desc = krg_ger.310.d
+		picture = u
+
+		is_triggered_only = yes
+
+		option = {
+			name = krg_ger.310.a
+		}
+	}
+
+	country_event = { 
+		id = krg_ger.311
+		title = krg_ger.311.t
+		desc = krg_ger.311.d
+		picture = u
+
+		is_triggered_only = yes
+
+		option = {
+			name = krg_ger.311.a
+			42 = {
+				remove_dynamic_modifier = {
+					modifier = GER_ruckkehr
+				}
+			}
+			51 = {
+				remove_dynamic_modifier = {
+					modifier = GER_ruckkehr
+				}
+			}
+			55 = {
+				remove_dynamic_modifier = {
+					modifier = GER_ruckkehr
+				}
+			}
+			57 = {
+				remove_dynamic_modifier = {
+					modifier = GER_ruckkehr
+				}
+			}
+			804 = {
+				remove_dynamic_modifier = {
+					modifier = GER_ruckkehr
+				}
+			}
+		}
+	}
+
+	country_event = { #rhine-main-danube complete
+		id = krg_ger.312
+		title = krg_ger.312.t
+		desc = krg_ger.312.d
+		picture = u
+
+		is_triggered_only = yes
+
+		option = {
+			name = krg_ger.312.a
+			add_ideas = GER_rhine_main_donau_canal_DNF
+			4 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	country_event = { # 1951 budget cuts
+		id = krg_ger.399
+		title = krg_ger.399.t
+		desc = krg_ger.399.d
+		picture = u
+		
+		is_triggered_only = yes
+		
+		option = {
+			name = krg_ger.399.a
+			random_owned_controlled_state = {
+				limit = {
+					OR = {
+						has_state_category = eleven
+						has_state_category = ten
+						has_state_category = nine
+						has_state_category = eight
+					}
+					is_core_of = ROOT
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_owned_controlled_state = {
+				limit = {
+					OR = {
+						has_state_category = eleven
+						has_state_category = ten
+						has_state_category = nine
+						has_state_category = eight
+					}
+					is_core_of = ROOT
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_owned_controlled_state = {
+				limit = {
+					OR = {
+						has_state_category = eleven
+						has_state_category = ten
+						has_state_category = nine
+						has_state_category = eight
+					}
+					is_core_of = ROOT
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+			random_owned_controlled_state = {
+				limit = {
+					OR = {
+						has_state_category = eleven
+						has_state_category = ten
+						has_state_category = nine
+						has_state_category = eight
+					}
+					is_core_of = ROOT
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+### The Sailian Crisis ###
+
+	country_event = { #Wilhelm 3's Funeral
+		id = krg_ger.400	
+		title = krg_ger.400.t
+		desc = krg_ger.400.d
+		#picture = GFX_event_picture
+
+		is_triggered_only = yes
+
+		option = {
+			name = krg_ger.400.a
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.401
+					days = 7
+				}
+			}
+			retire_character = GER_wilhelm_iii
+			GER_wilhelm_iv = {
+				promote_leader = yes
+			}
+		}	
+	}
+
+	country_event = { #Wilhelm 4's Coronation
+		id = krg_ger.401
+		title = krg_ger.401.t
+		desc = krg_ger.401.d
+		picture = GFX_ce_ger_wilhelm_iv_coronation
+
+		is_triggered_only = yes
+
+		option = {
+			name = krg_ger.401.a
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.402
+					days = 1
+				}
+			}
+		}	
+	}
+
+	country_event = { #The Coronation Speech
+		id = krg_ger.402
+		title = krg_ger.402.t
+		desc = krg_ger.402.d
+		picture = GFX_ce_ger_sufferage_speech
+
+		is_triggered_only = yes
+
+		option = {
+			name = krg_ger.402.a
+			add_stability = -0.10
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.403
+					days = 7
+				}
+			}
+		}
+		option = {
+			name = krg_ger.402.b
+			add_stability = -0.10
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.403
+					days = 7
+				}
+			}
+		}	
+	}
+
+	country_event = { #Succession Question Brought Up
+		id = krg_ger.403
+		title = krg_ger.403.t
+		desc = krg_ger.403.d
+		picture = GFX_ce_ger_wilhelm_iv_2
+
+		is_triggered_only = yes
+
+		option = {
+			name = krg_ger.403.a
+			add_ideas = GER_constitutional_crisis
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.404
+					days = 7
+				}
+			}
+		}	
+	}
+
+	country_event = { #A Constitutional Crisis
+		id = krg_ger.404
+		title = krg_ger.404.t
+		desc = krg_ger.404.d
+		picture = GFX_ce_ger_wilhelm_iv_2
+
+		is_triggered_only = yes
+
+		option = {
+			name = krg_ger.404.a
+			trigger = {
+				has_idea = GER_Ferdinand_von_Bredow_hog_pau
+			}
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.405
+					days = 7
+				}
+			}
+		}
+		
+		option = {
+			name = krg_ger.404.b
+			trigger = {
+				has_idea = GER_Eberhard_von_Mackensen_hog_pau
+			}
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.410
+					days = 7
+				}
+			}
+		}
+
+		option = {
+			name = krg_ger.404.c
+			trigger = {
+				has_idea = GER_Johannes_Popitz_hog_pau
+			}
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.419
+					days = 7
+				}
+			}
+		}
+		
+		option = {
+			name = krg_ger.404.e
+			trigger = {
+				has_idea = GER_Carl_Friedrich_Goerdeler_hog_ade
+			}
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.421
+					days = 7
+				}
+			}
+		}
+		option = {
+			name = krg_ger.404.f
+			trigger = {
+				NOT = {
+					has_idea = GER_Ferdinand_von_Bredow_hog_pau
+					has_idea = GER_Eberhard_von_Mackensen_hog_pau
+					has_idea = GER_Johannes_Popitz_hog_pau
+					has_idea = GER_Carl_Friedrich_Goerdeler_hog_ade
+				}
+			}
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.423
+					days = 7
+				}
+			}
+		}
+	}
+
+	country_event = { #The Reichskanzler's concern (Bredow)
+		id = krg_ger.405
+		title = krg_ger.405.t
+		desc = krg_ger.405.d
+		picture = GFX_ce_ger_wilhelm_iv_2
+
+		is_triggered_only = yes
+
+		option = {
+			name = krg_ger.405.a
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.406
+					days = 7
+				}
+			}
+		}	
+	}
+
+	country_event = { #The Reichskanzler falls ill
+		id = krg_ger.406
+		title = krg_ger.406.t
+		desc = krg_ger.406.d
+		picture = GFX_ce_ger_wilhelm_iv_2
+
+		is_triggered_only = yes
+
+		option = {
+			name = krg_ger.406.a
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.407
+					days = 7
+				}
+			}
+		}	
+	}
+
+	country_event = { #Bredow is released from hospital.
+		id = krg_ger.407
+		title = krg_ger.407.t
+		desc = krg_ger.407.d
+		picture = GFX_ce_ger_wilhelm_iv_2
+
+		is_triggered_only = yes
+
+		option = {
+			name = krg_ger.407.a
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.408
+					days = 60 
+				}
+			}
+		}	
+	}
+
+	country_event = { #The Death of Ferdinand von Bredow
+		id = krg_ger.408
+		title = krg_ger.408.t
+		desc = krg_ger.408.d
+		picture = GFX_ce_ger_wilhelm_iv_2
+
+		is_triggered_only = yes
+
+		option = {
+			name = krg_ger.408.a
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.409
+					days = 14
+				}
+				country_event = {
+					id = krg_ger.424
+					days = 7
+				}
+			}
+			remove_ideas = GER_Ferdinand_von_Bredow_hog_pau
+			add_ideas = GER_Herbert_von_Bose_hog_pau
+			remove_ideas = GER_constitutional_crisis
+			set_country_flag = GER_salic_repealed
+		}
+		
+		option = {
+			name = krg_ger.408.b
+			hidden_effect = {
+				load_focus_tree = { tree = KRG_Germany_Blumenthal keep_completed = yes }
+				country_event = {
+					id = krg_ger.409
+					days = 14
+				}
+				country_event = {
+					id = krg_ger.424
+					days = 7
+				}
+			}
+			remove_ideas = GER_Ferdinand_von_Bredow_hog_pau
+			add_ideas = GER_Hans_Jurgen_von_Blumenthal_hog_pau
+			remove_ideas = GER_constitutional_crisis
+			set_country_flag = GER_salic_repealed
+		}
+	}
+
+	country_event = { #Ferdinand Von Bredow's Funeral
+		id = krg_ger.409
+		title = krg_ger.409.t
+		desc = krg_ger.409.d
+		#picture = GFX_event_picture
+
+		is_triggered_only = yes
+
+		option = {
+			name = krg_ger.409.a
+		}	
+	}
+
+	country_event = { #The Reichskanzler's concern (Mackensen)
+		id = krg_ger.410
+		title = krg_ger.410.t
+		desc = krg_ger.410.d
+		picture = GFX_ce_ger_wilhelm_iv_2
+
+		is_triggered_only = yes
+
+		option = {
+			name = krg_ger.410.a
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.411
+					days = 7
+				}
+			}
+		}	
+	}
+
+	country_event = { #The Kaiser is not pleased
+		id = krg_ger.411
+		title = krg_ger.411.t
+		desc = krg_ger.411.d
+		picture = GFX_ce_ger_wilhelm_iv_2
+
+		is_triggered_only = yes
+
+		option = {
+			name = krg_ger.411.a
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.412
+					days = 7
+				}
+			}
+		}
+		
+		option = {
+			name = krg_ger.411.b
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.415
+					days = 14
+				}
+			}
+		}
+	}
+
+	country_event = { #A change in leadership (Bose/Ott path)
+		id = krg_ger.412
+		title = krg_ger.412.t
+		desc = krg_ger.412.d
+		picture = GFX_ce_ger_wilhelm_iv_2
+
+		is_triggered_only = yes
+
+		option = {
+			name = krg_ger.412.a
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.413
+					days = 7
+				}
+			}
+		}
+		
+		option = {
+			name = krg_ger.412.b
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.414
+					days = 7
+				}
+			}
+			
+		}	
+	}
+
+	country_event = { #Stirrings within the cabinet (Bose)
+		id = krg_ger.413
+		title = krg_ger.413.t
+		desc = krg_ger.413.d
+		picture = GFX_ce_ger_wilhelm_iv_2
+
+		is_triggered_only = yes
+
+		option = {
+			name = krg_ger.413.a
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.416
+					days = 7
+				}
+			}
+		}	
+	}
+
+	country_event = { #Meeting with the stakeholders (Ott)
+		id = krg_ger.414
+		title = krg_ger.414.t
+		desc = krg_ger.414.d
+		picture = GFX_ce_ger_wilhelm_iv_2
+
+		is_triggered_only = yes
+
+		option = {
+			name = krg_ger.414.a
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.417
+					days = 7
+				}
+			}
+		}	
+	}
+
+	country_event = { #The Shadow Reichskanzler (Blumenthal path)
+		id = krg_ger.415
+		title = krg_ger.415.t
+		desc = krg_ger.415.d
+		picture = GFX_ce_ger_wilhelm_iv_2
+
+		is_triggered_only = yes
+
+		option = {
+			name = krg_ger.415.a
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.418
+					days = 14
+				}
+			}
+		}	
+	}
+
+	country_event = { #The Kaiser's will prevails (Bose)
+		id = krg_ger.416
+		title = krg_ger.416.t
+		desc = krg_ger.416.d
+		picture = GFX_ce_ger_wilhelm_iv_2
+
+		is_triggered_only = yes
+
+		option = {
+			name = krg_ger.416.a
+			remove_ideas = GER_constitutional_crisis
+			set_country_flag = GER_salic_repealed
+			remove_ideas = GER_Eberhard_von_Mackensen_hog_pau
+			add_ideas = GER_Herbert_von_Bose_hog_pau
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.424
+					days = 7
+				}
+			}
+		}	
+	}
+
+	country_event = { #The Kaiser's will prevails (Ott)
+		id = krg_ger.417
+		title = krg_ger.417.t
+		desc = krg_ger.417.d
+		picture = GFX_ce_ger_wilhelm_iv_2
+
+		is_triggered_only = yes
+
+		option = {
+			name = krg_ger.417.a
+			remove_ideas = GER_constitutional_crisis
+			set_country_flag = GER_salic_repealed
+			remove_ideas = GER_Eberhard_von_Mackensen_hog_pau
+			add_ideas = GER_Eugen_Ott_hog_pau
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.424
+					days = 7
+				}
+			}
+		}	
+	}
+
+	country_event = { #The Kaiser's will prevails (Blumenthal)
+		id = krg_ger.418
+		title = krg_ger.418.t
+		desc = krg_ger.418.d
+		picture = GFX_ce_ger_wilhelm_iv_2
+
+		is_triggered_only = yes
+
+		option = {
+			name = krg_ger.418.a
+			remove_ideas = GER_constitutional_crisis
+			set_country_flag = GER_salic_repealed
+			remove_ideas = GER_Eberhard_von_Mackensen_hog_pau
+			add_ideas = GER_Hans_Jurgen_von_Blumenthal_hog_pau
+			hidden_effect = {
+				load_focus_tree = { tree = KRG_Germany_Blumenthal keep_completed = yes }
+				country_event = {
+					id = krg_ger.424
+					days = 7
+				}
+			}
+		}	
+	}
+
+	country_event = { #The Reichskanzler's concern (Popitz)
+		id = krg_ger.419
+		title = krg_ger.419.t
+		desc = krg_ger.419.d
+		picture = GFX_ce_ger_wilhelm_iv_2
+
+		is_triggered_only = yes
+
+		option = {
+			name = krg_ger.419.a
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.420
+					days = 7
+				}
+			}
+		}	
+	}
+
+	country_event = { #The unsurprising dismissal (Popitz)
+		id = krg_ger.420
+		title = krg_ger.420.t
+		desc = krg_ger.420.d
+		picture = GFX_ce_ger_wilhelm_iv_2
+
+		is_triggered_only = yes
+
+		option = {
+			name = krg_ger.420.a
+			remove_ideas = GER_constitutional_crisis
+			set_country_flag = GER_salic_repealed
+			remove_ideas = GER_Johannes_Popitz_hog_pau
+			add_ideas = GER_Hans_Jurgen_von_Blumenthal_hog_pau
+			hidden_effect = {
+				load_focus_tree = { tree = KRG_Germany_Blumenthal keep_completed = yes }
+				country_event = {
+					id = krg_ger.424
+					days = 7
+				}
+			}
+		}		
+	}
+
+	country_event = { #The Reichskanzler's concern (Goerdeler)
+		id = krg_ger.421
+		title = krg_ger.421.t
+		desc = krg_ger.421.d
+		picture = GFX_ce_ger_wilhelm_iv_2
+
+		is_triggered_only = yes
+
+		option = {
+			name = krg_ger.421.a
+			remove_ideas = GER_constitutional_crisis
+			set_country_flag = GER_salic_repealed
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.424
+					days = 7
+				}
+			}
+		}
+
+		option = {
+			name = krg_ger.421.b
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.422
+					days = 7
+				}
+			}
+		}	
+	}
+
+	country_event = { #Rapid rise, rapid fall (Goerdeler)
+		id = krg_ger.422
+		title = krg_ger.422.t
+		desc = krg_ger.422.d
+		picture = GFX_ce_ger_wilhelm_iv_2
+
+		is_triggered_only = yes
+
+		option = {
+			name = krg_ger.422.a
+			remove_ideas = GER_constitutional_crisis
+			set_country_flag = GER_salic_repealed
+			remove_ideas = GER_Carl_Friedrich_Goerdeler_hog_ade
+			add_ideas = GER_Hans_Jurgen_von_Blumenthal_hog_pau
+			set_politics = {
+				ruling_party = paternal_autocrat
+			}
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.424
+					days = 7
+				}
+			}
+		}		
+	}
+
+	country_event = { #The Reichskanzler's concern (Lehr/Brüning/Wirth)
+		id = krg_ger.423
+		title = krg_ger.423.t
+		desc = krg_ger.423.d
+		picture = GFX_ce_ger_wilhelm_iv_2
+
+		is_triggered_only = yes
+
+		option = {
+			name = krg_ger.423.a
+			remove_ideas = GER_constitutional_crisis
+			set_country_flag = GER_salic_repealed
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.424
+					days = 7
+				}
+			}
+		}	
+	}
+
+	country_event = { #salic repealed
+		id = krg_ger.424
+		title = krg_ger.424.t
+		desc = krg_ger.424.d
+		picture = GFX_ce_ger_wilhelm_iv_2
+
+		is_triggered_only = yes
+
+		option = {
+			name = krg_ger.424.a
+			set_temp_variable = { GER_active_law = 8 }
+			GER_Start_Law_Process = yes
+			activate_mission = GER_women_suffrage_timer
+			if = {
+				limit = {
+					has_focus_tree = KRG_Germany_Goerdeler
+				}
+				complete_national_focus = GER_imperial_succesion_act
+			}
+		}
+	}
+
+	country_event = { #women no vote
+		id = krg_ger.425
+		title = krg_ger.425.t
+		desc = krg_ger.425.d
+		picture = GFX_ce_ger_wilhelm_iv_2
+
+		is_triggered_only = yes
+
+		option = {
+			name = krg_ger.425.a
+			set_temp_variable = { GER_active_law = 8 }
+			GER_Start_Law_Process = yes
+			activate_mission = GER_women_suffrage_timer
+		}
+	}
+
+### Chancellor Blumenthal Events ###
+
+	country_event = { #Blumenthal: Unchained
+		id = krg_ger.500
+		title = krg_ger.500.t
+		desc = krg_ger.500.d
+		#picture = ?
+
+		is_triggered_only = yes
+
+		option = {
+			name = krg_ger.500.a
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.501
+					days = 7
+				}
+			}
+		}
+	}
+
+	country_event = { #Powerbase Spooked
+		id = krg_ger.501
+		title = krg_ger.501.t
+		desc = krg_ger.501.d
+		#picture = ?
+
+		is_triggered_only = yes
+
+		option = {
+			name = krg_ger.501.a
+			add_ideas = GER_fractured_powerbase
+		}
+	}
+
+	country_event = { #Assuaging the Industrialists Fears
+		id = krg_ger.502
+		title = krg_ger.502.t
+		desc = krg_ger.502.d
+		#picture = u
+
+		is_triggered_only = yes
+
+		option = { #improve
+			name = krg_ger.502.a
+			add_political_power = -75
+			trigger = {
+				NOT = { has_idea = GER_military_agari_support }
+			}
+			if = {
+				limit = {
+					has_idea = GER_fractured_powerbase
+				}
+				swap_ideas = {
+					remove_idea = GER_fractured_powerbase
+					add_idea = GER_industrial_support
+				}
+			}
+			if = {
+				limit = {
+					has_idea = GER_agrarian_support
+				}
+				swap_ideas = {
+					remove_idea = GER_agrarian_support
+					add_idea = GER_agrari_industry_support
+				}
+			}
+			if = {
+				limit = {
+					has_idea = GER_militarist_support
+				}
+				swap_ideas = {
+					remove_idea = GER_militarist_support
+					add_idea = GER_military_industrial_support
+				}
+			}
+		}
+		option = { #Concession
+			name = krg_ger.502.b
+			add_political_power = 25
+			add_popularity = {
+				ideology = paternal_autocrat
+				popularity = -0.05
+			}
+			add_popularity = {
+				ideology = market_liberal
+				popularity = 0.05
+			}
+		}
+	}
+
+	country_event = { #Meeting with the BdL
+		id = krg_ger.503
+		title = krg_ger.503.t
+		desc = krg_ger.503.d
+		#picture = ?
+
+		is_triggered_only = yes
+
+		option = { #improve
+			name = krg_ger.503.a
+			add_political_power = -75
+			trigger = {
+				NOT = { has_idea = GER_military_industrial_support }
+			}
+			if = {
+				limit = {
+					has_idea = GER_fractured_powerbase
+				}
+				swap_ideas = {
+					remove_idea = GER_fractured_powerbase
+					add_idea = GER_agrarian_support
+				}
+			}
+			if = {
+				limit = {
+					has_idea = GER_industrial_support
+				}
+				swap_ideas = {
+					remove_idea = GER_industrial_support
+					add_idea = GER_agrari_industry_support
+				}
+			}
+			if = {
+				limit = {
+					has_idea = GER_militarist_support
+				}
+				swap_ideas = {
+					remove_idea = GER_militarist_support
+					add_idea = GER_military_agari_support
+				}
+			}
+		}
+		option = { #Concession
+			name = krg_ger.503.a
+			add_political_power = 25
+			add_popularity = {
+				ideology = paternal_autocrat
+				popularity = -0.03
+			}
+			add_popularity = {
+				ideology = national_populist
+				popularity = -0.02
+			}
+			add_popularity = {
+				ideology = authoritarian_democrat
+				popularity = 0.05
+			}
+		}
+	}
+
+	country_event = { #Securing the OHL's Support
+		id = krg_ger.504
+		title = krg_ger.504.t
+		desc = krg_ger.504.d
+		#picture = ?
+
+		is_triggered_only = yes
+
+		option = { #improve
+			name = krg_ger.504.a
+			add_political_power = -75
+			trigger = {
+				NOT = { has_idea = GER_agrari_industry_support }
+			}
+			if = {
+				limit = {
+					has_idea = GER_fractured_powerbase
+				}
+				swap_ideas = {
+					remove_idea = GER_fractured_powerbase
+					add_idea = GER_militarist_support
+				}
+			}
+			if = {
+				limit = {
+					has_idea = GER_agrarian_support
+				}
+				swap_ideas = {
+					remove_idea = GER_agrarian_support
+					add_idea = GER_military_agari_support
+				}
+			}
+			if = {
+				limit = {
+					has_idea = GER_industrial_support
+				}
+				swap_ideas = {
+					remove_idea = GER_industrial_support
+					add_idea = GER_military_industrial_support
+				}
+			}
+		}
+		option = { #Concession
+			name = krg_ger.504.b
+			add_political_power = 25
+			GER_decrease_general_staff_support = yes
+			add_popularity = {
+				ideology = authoritarian_democrat
+				popularity = 0.05
+			}
+		}
+	}
+
+	country_event = { #DNEF Membership Mandated
+		id = krg_ger.505
+		title = krg_ger.505.t
+		desc = krg_ger.505.d
+		#picture = ?
+
+		is_triggered_only = yes
+
+		option = {
+			name = krg_ger.505.a
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.506
+					days = 21
+				}
+			}
+		}
+	}
+
+	country_event = { #Iron Front Grows Stronger
+		id = krg_ger.506
+		title = krg_ger.506.t
+		desc = krg_ger.506.d
+		#picture = ?
+
+		is_triggered_only = yes
+
+		option = {
+			name = krg_ger.506.a
+			add_stability = -0.05
+			add_popularity = {
+				ideology =	revolutionary_republican
+				popularity = 0.05
+			}
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.507
+					days = 21
+				}
+			}
+		}
+	}
+
+	country_event = { #Civil Servants Join the DNEF
+		id = krg_ger.507
+		title = krg_ger.507.t
+		desc = krg_ger.507.d
+		#picture = ?
+
+		is_triggered_only = yes
+
+		option = {
+			name = krg_ger.507.a
+			add_political_power = 25
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.508
+					days = 50
+				}
+			}
+		}
+	}
+
+	country_event = { #DNEF Entrenched in Regional Diets
+		id = krg_ger.508
+		title = krg_ger.508.t
+		desc = krg_ger.508.d
+		#picture = ?
+
+		is_triggered_only = yes
+
+		option = {
+			name = krg_ger.508.a
+			add_popularity = {
+				ideology =	paternal_autocrat
+				popularity = 0.05
+			}
+		}
+	}
+
+	country_event = {  #Universities Expand to Match Demand
+		id = krg_ger.509
+		title = krg_ger.509.t
+		desc = krg_ger.509.d
+		#picture = ?
+
+		is_triggered_only = yes
+
+		option = {
+			name = krg_ger.509.a
+			add_stability = 0.01
+		}
+	}
+
+	country_event = {  #The Stahlhelm is Mobilised
+		id = krg_ger.510
+		title = krg_ger.510.t
+		desc = krg_ger.510.d
+		#picture = ?
+
+		is_triggered_only = yes
+
+		option = {
+			name = krg_ger.510.a
+			#Few Divisions
+			add_popularity = {
+				ideology =	national_populist
+				popularity = 0.01
+			}
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.511
+					days = 250
+				}
+			}
+		}
+	}
+
+	country_event = {  #The People's League is Formed
+		id = krg_ger.511
+		title = krg_ger.511.t
+		desc = krg_ger.511.d
+		#picture = ?
+
+		is_triggered_only = yes
+
+		option = {
+			name = krg_ger.511.a
+			set_party_name = {
+				ideology = national_populist
+				name = GER_national_populist_DNEF_fraktion_party
+				long_name = GER_national_populist_DNEF_party_fraktion_long
+			}
+			add_popularity = {
+				ideology =	national_populist
+				popularity = 0.03
+			}
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.512
+					days = 250
+				}
+			}
+		}
+	}
+
+	country_event = {  #The People's League Grows
+		id = krg_ger.512
+		title = krg_ger.512.t
+		desc = krg_ger.512.d
+		#picture = ?
+
+		is_triggered_only = yes
+
+		option = {
+			name = krg_ger.512.a
+			add_stability = -0.03
+			add_popularity = {
+				ideology =	national_populist
+				popularity = 0.03
+			}
+		}
+	}
+
+	country_event = {  #A Plan for the Volksgemeinschaft
+		id = krg_ger.531
+		title = krg_ger.531.t
+		desc = krg_ger.531.d
+		#picture = ?
+
+		is_triggered_only = yes
+
+		option = {
+			name = krg_ger.531.a
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.532
+					days = 7
+				}
+			}
+		}
+	}
+
+	country_event = {  #Chancellor Blumenthal Adresses the Nation
+		id = krg_ger.532
+		title = krg_ger.532.t
+		desc = krg_ger.532.d
+		#picture = ?
+
+		is_triggered_only = yes
+
+		option = {
+			name = krg_ger.532.a
+		}
+	}
+
+	country_event = {  #Reactionary Backlash
+		id = krg_ger.533
+		title = krg_ger.533.t
+		desc = krg_ger.533.d
+		#picture = ?
+
+		is_triggered_only = yes
+
+		option = {
+			name = krg_ger.533.a
+			add_stability = -0.05
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.534
+					days = 20
+				}
+			}
+		}
+	}
+
+	country_event = {  #Wilhelm Mediates Junker Disputes
+		id = krg_ger.534
+		title = krg_ger.534.t
+		desc = krg_ger.534.d
+		#picture = ?
+
+		is_triggered_only = yes
+
+		option = {
+			name = krg_ger.534.a
+			add_stability = 0.02
+		}
+	}
+
+	country_event = {  #The Foundation of the DBGAF
+		id = krg_ger.535
+		title = krg_ger.535.t
+		desc = krg_ger.535.d
+		#picture = ?
+
+		is_triggered_only = yes
+
+		option = {
+			name = krg_ger.535.a
+			add_popularity = {
+				ideology =	social_democrat
+				popularity = 0.01
+			}
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.536
+					days = 300
+				}
+			}
+		}
+	}
+
+	country_event = {  #The Foundation of the DBGAF
+		id = krg_ger.536
+		title = krg_ger.536.t
+		desc = krg_ger.536.d
+		#picture = ?
+
+		is_triggered_only = yes
+
+		option = {
+			name = krg_ger.536.a
+			add_stability = -0.02
+			add_popularity = {
+				ideology =	social_democrat
+				popularity = 0.04
+			}
+		}
+	}
+
+	country_event = {  #P E O P L E S C O M M U N I T Y
+		id = krg_ger.537
+		title = krg_ger.537.t
+		desc = krg_ger.537.d
+		#picture = ?
+
+		is_triggered_only = yes
+
+		option = {
+			name = krg_ger.537.a
+			add_stability = 0.03
+			add_war_support = 0.03
+		}
+	}
+
+	country_event = {
+		id = krg_ger.546
+		title = krg_ger.546.t
+		desc = krg_ger.546.d
+		#picture = ?
+
+		is_triggered_only = yes
+
+		option = {
+			name = krg_ger.546.a
+			add_war_support = 0.01
+			add_opinion_modifier = {
+				target = GER
+				modifier = KRG_german_ideal
+			}
+		}
+	}
+
+### Chancellor Goerdeler Events ###
+
+	country_event = {  # 1951 Elections Begin
+		id = krg_ger.538
+		immediate = { log = "[GetDateText]: [Root.GetName]: event krg_ger.538 FROM = [From.GetName]" }
+		title = krg_ger.538.t
+		desc = {
+			text = krg_ger.538.d1
+			trigger = {
+				has_country_flag = GER_der_neue_staat
+			}
+		}
+
+		desc = {
+			text = krg_ger.538.d2
+			trigger = {
+				NOT = { has_country_flag = GER_der_neue_staat }
+			}
+		}
+		#picture = ?
+
+		is_triggered_only = yes
+
+		option = {
+			name = krg_ger.538.a
+			trigger  = {
+				NOT = { has_country_flag = GER_der_neue_staat } 
+			}
+			hidden_effect = { 
+				country_event = {
+					id = krg_ger.539 
+						days = 3
+				}
+				coal_rev_soc_con = yes
+			}
+		}
+
+		option = {
+			name = krg_ger.538.b
+			trigger  = {
+				has_country_flag = GER_der_neue_staat 
+			}
+		}
+	}
+
+	country_event = {  # 1951 Elections Begin
+		id = krg_ger.539
+		immediate = { log = "[GetDateText]: [Root.GetName]: event krg_ger.538 FROM = [From.GetName]" }
+		title = krg_ger.539.t
+		desc = krg_ger.539.d
+		#picture = ?
+
+		is_triggered_only = yes
+
+		immediate = {
+			hidden_effect = {
+				set_country_flag = GER_1951_elections
+				activate_mission = GER_election_campaign_timer
+				activate_mission = GER_opposition_campaign_timer
+				complete_national_focus = GER_1951_election
+			}
+		}
+
+		option = {
+			name = krg_ger.539.a
+		}
+	}
+
+	country_event = { # Goerdeler  v. Lehr
+		id = krg_ger.540
+		immediate = { log = "[GetDateText]: [Root.GetName]: event krg_ger.540 FROM = [From.GetName]" }
+		title = krg_ger.540.t
+		desc = krg_ger.540.d
+		#picture = ?
+
+		is_triggered_only = yes
+
+		option = {
+			name = krg_ger.540.a # Goerdeler
+			country_event = {
+				id = krg_ger.542
+				days = 3
+			}
+			set_country_flag = GER_goerdeler_1951
+
+			ai_chance = {
+				base = 75
+				modifier = {
+					has_game_rule = {
+						rule = GER_1951_REICHSTAGWAHL
+						option = GER_1951_REICHSTAGWAHL_DKP_GOERDELER
+					}
+					factor = 1000
+				}
+			}
+		}
+
+		option = {
+			name = krg_ger.540.b # Lehr
+			country_event = {
+				id = krg_ger.543
+				days = 3
+			}
+			set_country_flag = GER_lehr_1951
+
+			ai_chance = {
+				base = 25
+				modifier = {
+					has_game_rule = {
+						rule = GER_1951_REICHSTAGWAHL
+						option = GER_1951_REICHSTAGWAHL_DKP_LEHR
+					}
+					factor = 1000
+				}
+			}
+		}
+	}
+
+	country_event = { # Brüning v. Wirth
+		id = krg_ger.541
+		immediate = { log = "[GetDateText]: [Root.GetName]: event krg_ger.541 FROM = [From.GetName]" }
+		title = krg_ger.541.t
+		desc = krg_ger.541.d
+		#picture = ?
+
+		is_triggered_only = yes
+
+		option = {
+			name = krg_ger.541.a # Brüning
+			country_event = {
+				id = krg_ger.544
+				days = 3
+			}
+			set_country_flag = GER_bruning_1951
+
+			ai_chance = {
+				base = 65
+				modifier = {
+					has_game_rule = {
+						rule = GER_1951_REICHSTAGWAHL
+						option = GER_1951_REICHSTAGWAHL_CVP_BRUNING
+					}
+					factor = 1000
+				}
+			}
+		}
+
+		option = {
+			name = krg_ger.541.b # Wirth
+			country_event = {
+				id = krg_ger.545
+				days = 3
+			}
+			set_country_flag = GER_wirth_1951
+			ai_chance = {
+				base = 35
+				modifier = {
+					has_game_rule = {
+						rule = GER_1951_REICHSTAGWAHL
+						option = GER_1951_REICHSTAGWAHL_CVP_WIRTH
+					}
+					factor = 1000
+				}
+			}
+		}
+
+	}
+
+	country_event = { # Goerdeler's Cabinet
+		id = krg_ger.542
+		immediate = { log = "[GetDateText]: [Root.GetName]: event krg_ger.542 FROM = [From.GetName]" }
+		title = krg_ger.542.t
+		desc = krg_ger.542.d
+		#picture = ?
+
+		is_triggered_only = yes
+
+		option = {
+			name = krg_ger.542.a
+			remove_all_ministers_but_hog = yes
+			add_ideas = GER_Heinrich_von_Brentano_fm_ade #Z-C
+			add_ideas = GER_Johannes_Popitz_em_pau
+			add_ideas = GER_Hans_Koch_jm_ade
+			add_ideas = GER_Gottfried_Reinhold_Treviranus_im_ade
+			add_ideas = GER_Wilhelm_Canaris_hoi_ade
+		}
+	}
+
+	country_event = { # Lehr's Cabinet
+		id = krg_ger.543
+		immediate = { log = "[GetDateText]: [Root.GetName]: event krg_ger.543 FROM = [From.GetName]" }
+		title = krg_ger.543.t
+		desc = krg_ger.543.d
+		#picture = ?
+
+		is_triggered_only = yes
+
+		option = {
+			name = krg_ger.543.a
+			remove_all_ministers = yes
+			add_ideas = GER_Robert_Lehr_hog_ade
+			add_ideas = GER_Heinrich_von_Brentano_fm_ade #Z-C
+			add_ideas = GER_Johannes_Popitz_em_pau
+			add_ideas = GER_Hans_Koch_jm_ade
+			add_ideas = GER_Gottfried_Reinhold_Treviranus_im_ade
+			add_ideas = GER_Wilhelm_Canaris_hoi_ade
+		}
+	}
+
+	country_event = { # Brunning's Cabinet
+		id = krg_ger.544
+		immediate = { log = "[GetDateText]: [Root.GetName]: event krg_ger.544 FROM = [From.GetName]" }
+		title = krg_ger.544.t
+		desc = krg_ger.544.d
+		#picture = ?
+
+		is_triggered_only = yes
+
+		option = {
+			name = krg_ger.544.a
+			remove_all_ministers = yes
+			add_ideas = GER_Heinrich_Bruning_hog_sco
+			add_ideas = GER_Franz_von_Papen_fm_sco
+			add_ideas = GER_Ludwig_Erhard_em_sco
+			add_ideas = GER_Fritz_Schaffer_jm_sco
+			add_ideas = GER_Eugen_Bolz_im_sco
+			add_ideas = GER_Wilhelm_Canaris_hoi_ade
+		}
+	}
+
+	country_event = { # Wirth's Cabinet
+		id = krg_ger.545
+		immediate = { log = "[GetDateText]: [Root.GetName]: event krg_ger.545 FROM = [From.GetName]" }
+		title = krg_ger.545.t
+		desc = krg_ger.545.d
+		#picture = ?
+
+		is_triggered_only = yes
+
+		option = {
+			name = krg_ger.545.a
+			remove_all_ministers = yes
+			add_ideas = GER_Joseph_Wirth_hog_sco
+			add_ideas = GER_Franz_von_Papen_fm_sco
+			add_ideas = GER_Ludwig_Erhard_em_sco
+			add_ideas = GER_Fritz_Schaffer_jm_sco
+			add_ideas = GER_Eugen_Bolz_im_sco
+			add_ideas = GER_Wilhelm_Canaris_hoi_ade
+		}
+	}
+	
+
+### Orthodox Tree ###
+
+	country_event = { # von Bose: Unbroken
+		id = krg_ger.600
+		title = krg_ger.600.t
+		desc = krg_ger.600.d
+		#picture = ?
+
+		is_triggered_only = yes
+
+		option = {
+			name = krg_ger.600.a
+			remove_all_ministers_but_hog = yes
+			add_ideas = GER_Fritz_Gunther_von_Tschirschky_fm_pau
+			add_ideas = GER_Lutz_von_Krosigk_em_pau
+			add_ideas = GER_Carl_Schmitt_jm_pau
+			add_ideas = GER_Hans_Bernd_Gisevius_im_pau
+			add_ideas = generic_vacant_position_head_of_government
+		}
+	}
+
+	country_event = { # Bose-Meinberg
+		id = krg_ger.601
+		title = krg_ger.601.t
+		desc = krg_ger.601.d
+		#picture = ?
+
+		is_triggered_only = yes
+
+		option = { #improve
+			name = krg_ger.601.a
+			add_ideas = GER_agrarian_support
+		}
+		option = { #improve
+			name = krg_ger.601.b
+			add_ideas = GER_agrarian_support
+			add_political_power = -75
+			add_popularity = {
+				ideology = paternal_autocrat
+				popularity = -0.05
+			}
+			add_popularity = {
+				ideology = market_liberal
+				popularity = 0.05
+			}
+		}
+	}
+
+	country_event = { #Organisation Gisevius 
+		id = krg_ger.602
+		title = krg_ger.602.t
+		desc = krg_ger.602.d
+		#picture = ?
+
+		is_triggered_only = yes
+
+		option = {
+			name = krg_ger.602.a
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.603
+					days = 43
+				}
+			}
+			add_ideas = GER_Hans_Bernd_Gisevius_hoi_pau
+			add_ideas = GER_orgisation_gisevius
+		}
+	}
+
+	country_event = { 
+		id = krg_ger.603
+		title = krg_ger.603.t
+		desc = krg_ger.603.d
+		#picture = ?
+
+		is_triggered_only = yes
+
+		option = {
+			name = krg_ger.603.a
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.604
+					days = 70
+				}
+			}
+			add_popularity = {
+				ideology =	social_liberal
+				popularity = -0.01
+			}
+			add_popularity = {
+				ideology =	revolutionary_republican
+				popularity = 0.01
+			}
+			add_manpower = -50
+		}
+	}
+
+	country_event = { 
+		id = krg_ger.604
+		title = krg_ger.604.t
+		desc = krg_ger.604.d
+		#picture = ?
+
+		is_triggered_only = yes
+
+		option = {
+			name = krg_ger.604.a
+			hidden_effect = {
+				country_event = {
+					id = krg_ger.605
+					days = 28
+				}
+			}
+			add_popularity = {
+				ideology =	social_democrat
+				popularity = -0.05
+			}
+			add_popularity = {
+				ideology =	paternal_autocrat
+				popularity = -0.025
+			}
+			add_popularity = {
+				ideology =	revolutionary_republican
+				popularity = 0.05
+			}
+			add_popularity = {
+				ideology =	social_liberal
+				popularity = 0.025
+			}
+			add_stability = -0.15
+		}
+
+		option = {
+			name = krg_ger.604.b
+			remove_ideas = GER_Hans_Bernd_Gisevius_hoi_pau
+			add_ideas = GER_Reinhard_Gehlen_hoi_pau
+			remove_ideas = GER_orgisation_gisevius
+			add_political_power = -75
+		}
+	}
+
+	country_event = { 
+		id = krg_ger.605
+		title = krg_ger.605.t
+		desc = krg_ger.605.d
+		#picture = ?
+
+		is_triggered_only = yes
+
+		option = {
+			name = krg_ger.605.a
+			add_popularity = {
+				ideology =	revolutionary_republican
+				popularity = -0.05
+			}
+			add_popularity = {
+				ideology =	social_liberal
+				popularity = -0.10
+			}
+			add_popularity = {
+				ideology =	paternal_autocrat
+				popularity = 0.10
+			}
+			add_popularity = {
+				ideology =	national_populist
+				popularity = 0.05
+			}
+			add_ideas = GER_die_nacht_der_langen_messer
+		}
+	}
+
+	country_event = {
+		id = krg_ger.606
+		title = krg_ger.606.t
+		desc = krg_ger.606.d
+		#picture = ?
+
+		is_triggered_only = yes
+
+		option = {
+			name = krg_ger.606.a
+			move_down_edu_spending = yes
+			add_popularity = {
+				ideology =	paternal_autocrat
+				popularity = -0.10
+			}
+			add_popularity = {
+				ideology =	market_liberal
+				popularity = 0.075
+			}
+			add_popularity = {
+				ideology =	social_liberal
+				popularity = 0.025
+			}
+		}
+		option = {
+			name = krg_ger.606.b
+			move_down_hc_spending = yes
+			add_popularity = {
+				ideology =	paternal_autocrat
+				popularity = -0.05
+			}
+			add_popularity = {
+				ideology =	social_democrat
+				popularity = -0.10
+			}
+			add_popularity = {
+				ideology =	social_liberal
+				popularity = 0.10
+			}
+			add_popularity = {
+				ideology =	revolutionary_republican
+				popularity = 0.05
+			}
+		}
+
+		option = {
+			name = krg_ger.606.c
+			move_down_inf_spending = yes
+			add_popularity = {
+				ideology =	paternal_autocrat
+				popularity = -0.05
+			}
+			add_popularity = {
+				ideology =	social_conservative
+				popularity = 0.05
+			}
+		}
+	}
+
+	country_event = { #Ott: Unleashed
+		id = krg_ger.650
+		title = krg_ger.650.t
+		desc = krg_ger.650.d
+		#picture = ?
+
+		is_triggered_only = yes
+
+		option = {
+			name = krg_ger.650.a
+			remove_all_ministers_but_hog = yes
+			add_ideas = generic_vacant_position_foreign_minister
+			add_ideas = GER_Lutz_von_Krosigk_em_pau
+			add_ideas = GER_Otto_Georg_Thierack_jm_pau
+			add_ideas = GER_Julius_Leber_im_sde
+			add_ideas = GER_Reinhard_Gehlen_hoi_pau
+		}
+	}
+
+	country_event = {
+		id = krg_ger.651
+		title = krg_ger.651.t
+		desc = krg_ger.651.d
+		#picture = ?
+
+		is_triggered_only = yes
+
+		option = {
+			name = krg_ger.651.a
+			add_political_power = 15
+			hidden_effect = { remove_ideas = generic_vacant_position_foreign_minister }
+			add_ideas = GER_Friedrich_Werner_Graf_von_der_Schulenburg_fm_pau
+		}
+	}
+
+	country_event = {
+		id = krg_ger.652
+		title = krg_ger.652.t
+		desc = krg_ger.652.d
+		#picture = ?
+
+		is_triggered_only = yes
+
+		option = {
+			name = krg_ger.krg_ger.652.a
+			add_political_power = -100
+			add_popularity = {
+				ideology = paternal_autocrat
+				popularity = -0.04
+			}
+			add_popularity = {
+				ideology = national_populist
+				popularity = -0.01
+			}
+			add_popularity = {
+				ideology = authoritarian_democrat
+				popularity = 0.05
+			}
+			add_ideas = GER_fighting_junkers
+			hidden_effect = {
+				set_country_flag = GER_hardline_anti_agri
+			}
+		}
+
+		option = {
+			name = krg_ger.652.b
+			add_stability = -0.15
+			add_popularity = {
+				ideology = paternal_autocrat
+				popularity = -0.04
+			}
+			add_popularity = {
+				ideology = national_populist
+				popularity = -0.01
+			}
+			add_popularity = {
+				ideology = social_democrat
+				popularity = 0.05
+			}
+			add_ideas = GER_fighting_junkers
+			hidden_effect = {
+				set_country_flag = GER_counterweight_anti_agri
+			}
+		}
+	}
+
+	country_event = {
+		id = krg_ger.653
+		title = krg_ger.653.t
+		desc = krg_ger.653.d
+		#picture = ?
+
+		is_triggered_only = yes
+
+		option = {
+			name = krg_ger.653.a
+			add_political_power = -25
+			add_popularity = {
+				ideology = social_democrat
+				popularity = 0.03
+			}
+			add_popularity = {
+				ideology = social_conservative
+				popularity = -0.03
+			}
+		}
+
+		option = {
+			name = krg_ger.653.b
+			add_political_power = 15
+			add_popularity = {
+				ideology = social_democrat
+				popularity = -0.05
+			}
+			add_popularity = {
+				ideology = social_conservative
+				popularity = 0.03
+			}
+			add_popularity = {
+				ideology = revolutionary_republican
+				popularity = 0.02
+			}
+		}
+	}
+
+	country_event = {
+		id = krg_ger.654
+		title = krg_ger.654.t
+		desc = krg_ger.654.d
+		#picture = ?
+
+		is_triggered_only = yes
+
+		option = {
+			name = krg_ger.654.a
+			add_political_power = 15
+			if = {
+				limit = { has_completed_focus = GER_implement_kesselring_doctrine }
+				GER_increase_general_staff_support = yes
+			}
+			else = {
+				GER_decrease_general_staff_support = yes
+			}
+		}
+		option = {
+			name = krg_ger.654.b
+			add_political_power = 15
+			if = {
+				limit = { has_completed_focus = GER_maintain_orthodox_bewegungskrieg }
+				GER_increase_general_staff_support = yes
+			}
+			else = {
+				GER_decrease_general_staff_support = yes
+			}
+		}
+
+		option = {
+			name = krg_ger.654.c
+			add_political_power = 15
+			GER_decrease_general_staff_support = yes
+			add_ideas = GER_reformist_young_guard
+			add_popularity = {
+				ideology = social_democrat
+				popularity = 0.2
+			}
+			add_popularity = {
+				ideology = paternal_autocrat
+				popularity = 0.3
+			}
+		}
+	}
+
+	country_event = {
+		id = krg_ger.655
+		title = krg_ger.655.t
+		desc = krg_ger.655.d
+		#picture = ?
+
+		is_triggered_only = yes
+
+		option = {
+			name = krg_ger.655.a
+			add_political_power = 50
+			add_stability = 0.10
+			swap_ideas = {
+				remove_idea = GER_daap_unions
+				add_idea = GER_second_red_general
+			}
+		}
+	}
+
+### Military Events ###
+
+	country_event = { #Rifle
+		id = krg_ger.2000
+		title = krg_ger.2000.t
+		desc = krg_ger.2000.d
+		#picture = ?
+
+		is_triggered_only = yes
+
+		option = {
+			name = krg_ger.2000.a
+			swap_ideas = {
+				remove_idea = GER_rifles
+				add_idea = GER_rifles_quality
+			}
+		}
+
+		option = {
+			name = krg_ger.2000.b
+			swap_ideas = {
+				remove_idea = GER_rifles
+				add_idea = GER_rifles_quantity
+			}
+		}
+
+		option = {
+			name = krg_ger.2000.c
+			swap_ideas = {
+				remove_idea = GER_rifles
+				add_idea = GER_rifles_reliability
+			}
+		}
+	}
+
+	country_event = { # Kármán Line Broken
+		id = krg_ger.2001
+		title = krg_ger.2001.t
+		desc = krg_ger.2001.d
+		picture = GFX_ce_ger_rocket_launch
+
+		is_triggered_only = yes
+
+		option = {
+			name = krg_ger.2001.a
+			add_political_power = 100
+			add_stability = 0.1
+			set_country_flag = GER_karaman_broken #Big boost to German Int Standing
+			news_event = { id = worldnews.2001 }
+		}
+	}
+
+	country_event = { # New Generals
+		id = krg_ger.2002
+		title = krg_ger.2002.t
+		desc = krg_ger.2002.d
+		#picture = ?
+
+		is_triggered_only = yes
+
+		option = {
+			name = krg_ger.2002.a
+			add_command_power = -50
+			add_war_support = -0.25
+			# Recruits mew Generals
+		}
+	}
+
+### Diplomatic Tree ###
+
+	country_event = {
+		id = krg_gerdip.0
+		immediate = { log = "[GetDateText]: [Root.GetName]: event krg_gerdip.0 FROM = [From.GetName]" }
+		title = krg_gerdip.0.t
+		desc = krg_gerdip.0.d
+		picture = GFX_ce_maf_sudwest_map
+
+		is_triggered_only = yes
+
+		option = {
+			name = krg_gerdip.0.a
+			complete_national_focus = GER_rossing_dossier
+		}
+	}
+
+	country_event = {  #Report on America
+		id = krg_gerdip.1
+		immediate = { log = "[GetDateText]: [Root.GetName]: event krg_gerdip.1 FROM = [From.GetName]" }
+		title = krg_gerdip.1.t
+		desc = krg_gerdip.1.d
+		#picture = ?
+
+		is_triggered_only = yes
+
+		option = {
+			name = krg_gerdip.1.a
+		}
+	}
+
+	country_event = {  #Dominican Republic
+		id = krg_gerdip.2
+		immediate = { log = "[GetDateText]: [Root.GetName]: event krg_gerdip.2 FROM = [From.GetName]" }
+		title = krg_gerdip.2.t
+		desc = krg_gerdip.2.d
+		#picture = ?
+
+		is_triggered_only = yes
+
+		option = {
+			name = krg_gerdip.2.a
+			DOM = { add_ideas = GER_dominican_republic_deal }
+		}
+	}
+
+	country_event = {  #Bolstering the Argentine Mission
+		id = krg_gerdip.3
+		immediate = { log = "[GetDateText]: [Root.GetName]: event krg_gerdip.3 FROM = [From.GetName]" }
+		title = krg_gerdip.3.t
+		desc = krg_gerdip.3.d
+		#picture = ?
+
+		is_triggered_only = yes
+
+		option = {
+			name = krg_gerdip.3.a
+			GER_gotthard_heinrici = { set_nationality = ARG }
+			add_manpower = -10000
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = -10000
+			}
+			add_equipment_to_stockpile = {
+				type = artillery_equipment
+				amount = -1000
+			}
+			add_equipment_to_stockpile = {
+				type = motorized_equipment
+				amount = -1000
+			}
+			add_equipment_to_stockpile = {
+				type = support_equipment
+				amount = -10000
+			}
+			add_equipment_to_stockpile = {
+				type = anti_air_equipment
+				amount = -1000
+			}
+			add_equipment_to_stockpile = {
+				type = anti_tank_equipment
+				amount = -1000
+			}
+			ARG = {
+				swap_ideas = {
+					remove_idea = GER_argentine_military_mission
+					add_idea = GER_argentine_military_mission_heinrici
+				}
+				add_manpower = 10000
+				add_equipment_to_stockpile = {
+					type = infantry_equipment
+					amount = 10000
+					producer = GER
+				}
+				add_equipment_to_stockpile = {
+					type = artillery_equipment
+					amount = 1000
+					producer = GER
+				}
+				add_equipment_to_stockpile = {
+					type = motorized_equipment
+					amount = 1000
+					producer = GER
+				}
+				add_equipment_to_stockpile = {
+					type = support_equipment
+					amount = 10000
+					producer = GER
+				}
+				add_equipment_to_stockpile = {
+					type = anti_air_equipment
+					amount = 1000
+					producer = GER
+				}
+				add_equipment_to_stockpile = {
+					type = anti_tank_equipment
+					amount = 1000
+					producer = GER
+				}
+			}
+			add_ideas = GER_argentine_military_mission_GER
+			news_event = worldnews.258
+			hidden_effect = {
+				country_event = {
+					id = krg_gerdip.6
+					days = 250
+				}
+			}
+		}
+		option = {
+			name = krg_gerdip.3.b
+			GER_friedrich_foertsch = { set_nationality = ARG }
+			add_manpower = -10000
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = -10000
+			}
+			add_equipment_to_stockpile = {
+				type = artillery_equipment
+				amount = -1000
+			}
+			add_equipment_to_stockpile = {
+				type = motorized_equipment
+				amount = -1000
+			}
+			add_equipment_to_stockpile = {
+				type = support_equipment
+				amount = -10000
+			}
+			add_equipment_to_stockpile = {
+				type = anti_air_equipment
+				amount = -1000
+			}
+			add_equipment_to_stockpile = {
+				type = anti_tank_equipment
+				amount = -1000
+			}
+			ARG = {
+				swap_ideas = {
+					remove_idea = GER_argentine_military_mission
+					add_idea = GER_argentine_military_mission_foertsch
+				}
+				add_manpower = 10000
+				add_equipment_to_stockpile = {
+					type = infantry_equipment
+					amount = 10000
+					producer = GER
+				}
+				add_equipment_to_stockpile = {
+					type = artillery_equipment
+					amount = 1000
+					producer = GER
+				}
+				add_equipment_to_stockpile = {
+					type = motorized_equipment
+					amount = 1000
+					producer = GER
+				}
+				add_equipment_to_stockpile = {
+					type = support_equipment
+					amount = 10000
+					producer = GER
+				}
+				add_equipment_to_stockpile = {
+					type = anti_air_equipment
+					amount = 1000
+					producer = GER
+				}
+				add_equipment_to_stockpile = {
+					type = anti_tank_equipment
+					amount = 1000
+					producer = GER
+				}
+			}
+			add_ideas = GER_argentine_military_mission_GER
+			news_event = worldnews.258
+			hidden_effect = {
+				country_event = {
+					id = krg_gerdip.6
+					days = 250
+				}
+			}
+		}
+		option = {
+			name = krg_gerdip.3.c
+			GER_fritz_bayerlein = { set_nationality = ARG }
+			add_manpower = -10000
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = -10000
+			}
+			add_equipment_to_stockpile = {
+				type = artillery_equipment
+				amount = -1000
+			}
+			add_equipment_to_stockpile = {
+				type = motorized_equipment
+				amount = -1000
+			}
+			add_equipment_to_stockpile = {
+				type = support_equipment
+				amount = -10000
+			}
+			add_equipment_to_stockpile = {
+				type = anti_air_equipment
+				amount = -1000
+			}
+			add_equipment_to_stockpile = {
+				type = anti_tank_equipment
+				amount = -1000
+			}
+			ARG = {
+				swap_ideas = {
+					remove_idea = GER_argentine_military_mission
+					add_idea = GER_argentine_military_mission_bayerlein
+				}
+				add_manpower = 10000
+				add_equipment_to_stockpile = {
+					type = infantry_equipment
+					amount = 10000
+					producer = GER
+				}
+				add_equipment_to_stockpile = {
+					type = artillery_equipment
+					amount = 1000
+					producer = GER
+				}
+				add_equipment_to_stockpile = {
+					type = motorized_equipment
+					amount = 1000
+					producer = GER
+				}
+				add_equipment_to_stockpile = {
+					type = support_equipment
+					amount = 10000
+					producer = GER
+				}
+				add_equipment_to_stockpile = {
+					type = anti_air_equipment
+					amount = 1000
+					producer = GER
+				}
+				add_equipment_to_stockpile = {
+					type = anti_tank_equipment
+					amount = 1000
+					producer = GER
+				}
+			}
+			add_ideas = GER_argentine_military_mission_GER
+			news_event = worldnews.258
+			hidden_effect = {
+				country_event = {
+					id = krg_gerdip.6
+					days = 250
+				}
+			}
+		}
+	}
+
+	country_event = { #Germany meets with the Argentine Chancellory
+		id = krg_gerdip.4
+		immediate = { log = "[GetDateText]: [Root.GetName]: event krg_gerdip.4 FROM = [From.GetName]" }
+		title = krg_gerdip.4.t
+		desc = krg_gerdip.4.d
+		#picture = ?
+
+		is_triggered_only = yes
+
+		option = {
+			name = krg_gerdip.4.a
+			hidden_effect = {
+				country_event = {
+					id = krg_gerdip.5
+					days = 20
+				}
+			}
+		}
+	}
+
+	country_event = { #Agreement with Argentina forged
+		id = krg_gerdip.5
+		immediate = { log = "[GetDateText]: [Root.GetName]: event krg_gerdip.5 FROM = [From.GetName]" }
+		title = krg_gerdip.5.t
+		desc = krg_gerdip.5.d
+		#picture = ?
+
+		is_triggered_only = yes
+
+		option = {
+			name = krg_gerdip.5.a
+			ARG = {
+				if = {
+					limit = {
+						NOT = {
+							is_in_tech_sharing_group = reichspakt_research
+					}
+				}
+				add_to_tech_sharing_group = reichspakt_research
+				set_country_flag = reichspakt_research
+				}
+				# if = {
+				# 	limit = {
+				# 		NOT = {
+				# 			check_variable = {
+				# 				tech_sphere_owner = GER
+				# 			}
+				# 		}
+				# 	}
+				# 		set_temp_variable = {
+				# 		temp_tech_sphere_owner = GER
+				# 	}
+				# 	join_tech_sphere = yes
+				# }
+			}
+		}
+	}
+
+	country_event = { #Mauser sets up shop in Buenos Aires
+		id = krg_gerdip.6
+		immediate = { log = "[GetDateText]: [Root.GetName]: event krg_gerdip.6 FROM = [From.GetName]" }
+		title = krg_gerdip.6.t
+		desc = krg_gerdip.6.d
+		#picture = ?
+
+		is_triggered_only = yes
+
+		option = {
+			name = krg_gerdip.6.a
+			add_offsite_building = { type = arms_factory level = 1 }
+			278 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	country_event = { #The Cone Aflame
+		id = krg_gerdip.7
+		immediate = { log = "[GetDateText]: [Root.GetName]: event krg_gerdip.7 FROM = [From.GetName]" }
+		title = krg_gerdip.7.t
+		desc = krg_gerdip.7.d
+		#picture = ?
+
+		is_triggered_only = yes
+
+		option = {
+			name = krg_gerdip.7.a
+			#Add national spirit allowing more volunteers?
+			country_event = krg_gerdip.8
+		}
+	}
+
+	country_event = { #The Shipments begin
+		id = krg_gerdip.8
+		immediate = { log = "[GetDateText]: [Root.GetName]: event krg_gerdip.8 FROM = [From.GetName]" }
+		title = krg_gerdip.8.t
+		desc = krg_gerdip.8.d
+		picture = GFX_ce_ger_jet_figthers_2
+
+		is_triggered_only = yes
+
+		option = {
+			name = krg_gerdip.8.a
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = -1000
+			}
+			ARG = {
+				add_equipment_to_stockpile = {
+					type = infantry_equipment
+					amount = 1000
+				}
+			}
+		}
+	}
+
+	country_event = { #The MAF question
+		id = krg_gerdip.9
+		immediate = { log = "[GetDateText]: [Root.GetName]: event krg_gerdip.9 FROM = [From.GetName]" }
+		title = krg_gerdip.9.t
+		desc = krg_gerdip.9.d
+		picture = GFX_ce_maf_generic_map
+
+		is_triggered_only = yes
+
+		option = {
+			name = krg_gerdip.9.a #supply volenteers
+		}
+		option = {
+			name = krg_gerdip.9.b #demand tribute
+		}
+		option = {
+			name = krg_gerdip.9.c #assure the administration
+		}
+	}
+
+	country_event = {
+		id = krg_gerdip.10 #Confrence on combating the accord
+		immediate = { log = "[GetDateText]: [Root.GetName]: event krg_gerdip.10 FROM = [From.GetName]" }
+		title = krg_gerdip.10.t
+		desc = krg_gerdip.10.d
+		#picture = ?
+
+		is_triggered_only = yes
+
+		option = { #security measures
+			name = krg_gerdip.10.a
+		}
+		option = { #diplomatic leverage
+			name = krg_gerdip.10.b
+		}
+	}
+
+	country_event = {
+		id = krg_gerdip.11 #The European Nuclear umbrella
+		immediate = { log = "[GetDateText]: [Root.GetName]: event krg_gerdip.11 FROM = [From.GetName]" }
+		title = krg_gerdip.11.t
+		desc = krg_gerdip.11.d
+		#picture = ?
+
+		is_triggered_only = yes
+
+		option = {
+			name = krg_gerdip.11.a
+		}
+	}
+
+	country_event = { #Neo-colonial policy
+		id = krg_gerdip.12
+		immediate = { log = "[GetDateText]: [Root.GetName]: event krg_gerdip.12 FROM = [From.GetName]" }
+		title = krg_gerdip.12.t
+		desc = krg_gerdip.12.d
+		picture = GFX_ce_maf_generic_map
+
+		is_triggered_only = yes
+
+		option = {
+			name = krg_gerdip.12.a #support German interests
+		}
+		option = {
+			name = krg_gerdip.12.b #sabotage Accord interests
+		}
+		option = {
+			name = krg_gerdip.12.c #save what we can
+		}
+	}
+
+	country_event = { #Madagaskar Revolt
+		id = krg_gerdip.13
+		immediate = { log = "[GetDateText]: [Root.GetName]: event krg_gerdip.13 FROM = [From.GetName]" }
+		title = krg_gerdip.13.t
+		desc = krg_gerdip.13.d
+		picture = GFX_ce_maf_generic_map
+
+		is_triggered_only = yes
+
+		option = {
+			name = krg_gerdip.13.a
+		}
+	}
+	
+
+	country_event = {
+		id = krg_gerdip.14 #The State of Mitteleuropa
+		immediate = { log = "[GetDateText]: [Root.GetName]: event krg_gerdip.10 FROM = [From.GetName]" }
+		title = krg_gerdip.14.t
+		desc = krg_gerdip.14.d
+		picture = GFX_ce_ger_ost_staaten
+
+		is_triggered_only = yes
+
+		option = {
+			name = krg_gerdip.14.a
+		}
+	}
+
+### Flavour Events (Deaths, Cultural things etc) ###
+
+	country_event = { #The Kaiser is dying
+		id = krg_gerfla.1
+		title = krg_gerfla.1.t
+		desc = krg_gerfla.1.d
+		#picture = GFX_ce
+		
+		trigger = {
+			has_country_leader = {
+				name = "Wilhelm III"
+			}
+		}
+
+		is_triggered_only = yes
+		fire_only_once = yes
+
+
+		option = {
+			name = krg_gerfla.1.a
+		}
+	}
+
+	country_event = { #The Kaiser is Dead
+		id = krg_gerfla.2
+		title = krg_gerfla.2.t
+		desc = krg_gerfla.2.d
+		#picture = GFX_event_picture
+		
+		trigger = {
+			has_country_leader = { character = GER_wilhelm_iii ruling_only = yes }
+		}
+
+		is_triggered_only = yes
+		fire_only_once = yes
+
+		option = {
+			name = krg_gerfla.2.a
+			add_political_power = 10
+			retire_character = GER_wilhelm_iii
+			hidden_effect = {
+				news_event = {
+					id = worldnews.18
+				}
+				country_event = {
+					id = krg_ger.400
+					days = 7
+				}
+			}
+		}
+	}
+
+	country_event = { #Louis Ferdinand being a lib 1
+		id = krg_gerfla.3
+		title = krg_gerfla.3.t
+		desc = krg_gerfla.3.d
+		picture = GFX_ce_ger_louis_ferdinand_1
+
+		is_triggered_only = yes
+		fire_only_once = yes
+
+
+		option = {
+			name = krg_gerfla.3.a
+		}
+	}
+
+	country_event = { #chugga chugga choo choo spandau ed.
+		id = krg_gerfla.4
+		title = krg_gerfla.4.t
+		desc = krg_gerfla.4.d
+		picture = GFX_ce_ger_spandau_bahnhof
+
+		is_triggered_only = yes
+		fire_only_once = yes
+
+
+		option = {
+			name = krg_gerfla.4.a
+			64 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+
+	country_event = { #Will 4 goes hunting
+		id = krg_gerfla.6
+		title = krg_gerfla.6.t
+		desc = krg_gerfla.6.d
+		picture = GFX_ce_ger_hunt
+
+		is_triggered_only = yes
+		fire_only_once = yes
+
+
+		option = {
+			name = krg_gerfla.6.a
+		}
+	}

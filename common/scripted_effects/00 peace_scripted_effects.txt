@@ -1,0 +1,1514 @@
+KRG_peace_form_puppet_EST_of_GER = { #This was implemented for testing purposes, government isn't in any way correct
+	GER = {
+		puppet = EST
+	}
+	set_politics = {
+		ruling_party = authoritarian_democrat
+		elections_allowed = no
+	}
+	set_popularities = {
+		authoritarian_socialist = 2
+		radical_socialist = 4
+		social_democrat = 2
+		revolutionary_republican = 25
+		social_liberal = 2
+		market_liberal = 2
+		social_conservative = 2
+		authoritarian_democrat = 30
+		paternal_autocrat = 28
+		national_populist = 3
+	}	
+	log = "KRG_Event_Logging;German victory in War vs Estonia;[GetDateText];[ROOT.GetName];[FROM.GetName]"
+}
+KRG_peace_SPR_MOR = { #SPR = Winner, MOR = Loser
+	if = {
+		limit = {
+			has_global_flag = accord_formed
+		}
+		SPR = {
+			MOR = {
+				get_current_government_type = yes
+			}
+			if = {
+				limit = {
+					has_subject_autonomy_feature = yes
+				}
+				set_autonomy = {
+					target = MOR
+					autonomous_state = krg_joint_accord_mandate
+				}
+			}
+			else = {
+				puppet = MOR
+			}
+			save_event_target_as = on_puppet_master_tag
+			MOR = {
+				standard_on_puppet_effect = yes
+				restore_previous_government_type = yes
+			}
+		}
+	}
+	else = {
+		SPR = {
+			MOR = {
+				get_current_government_type = yes
+			}
+			if = {
+				limit = {
+					has_subject_autonomy_feature = yes
+				}
+				set_autonomy = {
+					target = MOR
+					autonomous_state = krg_joint_entente_mandate
+				}
+			}
+			else = {
+				puppet = MOR
+			}
+			save_event_target_as = on_puppet_master_tag
+			MOR = {
+				standard_on_puppet_effect = yes
+				restore_previous_government_type = yes
+			}
+		}
+	}
+	log = "KRG_Event_Logging;Spanish victory in War vs Morocco;[GetDateText];[ROOT.GetName];[FROM.GetName]"
+}
+KRG_peace_SPR_NFA_MOR = { #SPR+NFA = Winner, MOR = Loser
+	if = {
+		limit = {
+			has_global_flag = accord_formed
+		}
+		SPR = {
+			MOR = {
+				get_current_government_type = yes
+			}
+			if = {
+				limit = {
+					has_subject_autonomy_feature = yes
+				}
+				set_autonomy = {
+					target = MOR
+					autonomous_state = krg_joint_accord_mandate
+				}
+			}
+			else = {
+				puppet = MOR
+			}
+			save_event_target_as = on_puppet_master_tag
+			MOR = {
+				standard_on_puppet_effect = yes
+				restore_previous_government_type = yes
+			}
+		}
+	}
+	else = {
+		SPR = {
+			MOR = {
+				get_current_government_type = yes
+			}
+			if = {
+				limit = {
+					has_subject_autonomy_feature = yes
+				}
+				set_autonomy = {
+					target = MOR
+					autonomous_state = krg_joint_entente_mandate
+				}
+			}
+			else = {
+				puppet = MOR
+			}
+			save_event_target_as = on_puppet_master_tag
+			MOR = {
+				standard_on_puppet_effect = yes
+				restore_previous_government_type = yes
+			}
+		}
+	}
+	log = "KRG_Event_Logging;Franco-Spanish victory in War vs Morocco;[GetDateText];[ROOT.GetName];[FROM.GetName]"
+}
+KRG_peace_DEN_ICE = { #DEN = Winner, ICE = Loser
+	DEN = {
+		puppet = ICE
+	}
+	set_politics = {
+		ruling_party = authoritarian_democrat
+		elections_allowed = no
+	}
+	add_popularity = {
+		ideology = authoritarian_democrat
+		popularity = 0.2
+	}
+	log = "KRG_Event_Logging;Danish victory in War vs Iceland;[GetDateText];[ROOT.GetName];[FROM.GetName]"
+}
+KRG_peace_UOB_ENG = { #UOB = Winner, ENG = Loser
+	UOB_victory = yes
+	log = "KRG_Event_Logging;Revolutionary Britain victory in Civil War vs Royalists;[GetDateText];[ROOT.GetName];[FROM.GetName]"
+}
+KRG_peace_UOB_MXF = { #UOB = Winner, MXF = Loser
+	MXF = {
+		transfer_navy = { target = UOB } 
+	}
+	UOB = {
+		annex_country = { target = MXF }
+	}
+	log = "KRG_Event_Logging;Revolutionary Britain victory in Civil War vs Maximalists;[GetDateText];[ROOT.GetName];[FROM.GetName]"
+}
+KRG_peace_MXF_ENG = { #MXF = Winner, ENG = Loser
+	UOB_victory = yes
+	log = "KRG_Event_Logging;Maximalist Britain victory in Civil War vs Royalists;[GetDateText];[ROOT.GetName];[FROM.GetName]"
+}
+KRG_peace_MXF_UOB = { #MXF = Winner, UOB = Loser
+	UOB = {
+		transfer_navy = { target = MXF } 
+	}
+	MXF = {
+		annex_country = { target = UOB }
+	}
+	log = "KRG_Event_Logging;Maximalist Britain victory in Civil War vs Revolutionarys;[GetDateText];[ROOT.GetName];[FROM.GetName]"
+}
+KRG_peace_ENG_MXF = { #ENG = Winner, MXF = Loser
+	if = {
+		limit = {
+			NOT = {
+				country_exists = UOB
+			}
+		}
+		news_event = { id = krg_uob_news.3 }
+		ENG = {
+			remove_ideas = ENG_second_british_revolution_idea
+		}
+	}
+	MXF = {
+		transfer_navy = { target = ENG } 
+	}
+	ENG = {
+		annex_country = { target = MXF }
+	}
+	log = "KRG_Event_Logging;Royalist Britain victory in Civil War vs Maximalist;[GetDateText];[ROOT.GetName];[FROM.GetName]"
+}
+KRG_peace_ENG_UOB = { #ENG = Winner, UOB = Loser
+	if = {
+		limit = {
+			NOT = {
+				country_exists = MXF
+			}
+		}
+		news_event = { id = krg_uob_news.3 }
+		ENG = {
+			remove_ideas = ENG_second_british_revolution_idea
+		}
+	}
+	UOB = {
+		transfer_navy = { target = ENG } 
+	}
+	ENG = {
+		annex_country = { target = UOB }
+	}
+	log = "KRG_Event_Logging;Royalist Britain victory in Civil War vs Revolutionarys;[GetDateText];[ROOT.GetName];[FROM.GetName]"
+}
+
+KRG_peace_GER_UOB = { #GER = Winner, UOB = Loser
+	UOB = {
+		UOB_GER_puppet_effect = yes
+	}
+	log = "KRG_Event_Logging;German victory in Revolutionary Britain;[GetDateText];[ROOT.GetName];[FROM.GetName]"
+}
+
+KRG_peace_NFA_ALG = { #NFA = Winner, ALG = Loser
+	NFA = {
+		annex_country = { target = ALG }
+	}
+	log = "KRG_Event_Logging;French victory in Algeria;[GetDateText];[ROOT.GetName];[FROM.GetName]"
+}
+
+KRG_peace_WK3_RP_Accord_south_france = {
+	set_global_flag = WK3_ended
+	add_to_array = { global.influence_log = 38 }
+	add_to_array = { global.influence_log_val = -10 }
+	influence_recalc = yes
+
+	if = {
+		limit = { 
+			has_global_flag = ACW_WK3_escalation
+		}
+		NEE = {
+			create_faction = "American Reclamation Alliance"
+			add_to_faction = CAL
+			add_to_faction = GLG
+			if = {
+				limit = { 
+					is_ai = no
+				}
+				country_event = {
+					id = WK3_peace.15
+				}
+			}
+		}
+		GLG = {
+			if = {
+				limit = { 
+					is_ai = no
+				}
+				country_event = {
+					id = WK3_peace.15
+				}
+			}
+		}
+		CAL = {
+			country_event = {
+				id = WK3_peace.15
+			}
+		}
+	}
+
+	every_country = {
+		limit = {
+			is_in_faction_with = ENT
+		}
+		every_country = {
+			limit = {
+				is_in_faction_with = GER
+			}
+			PREV = { white_peace = PREV }
+		}
+	}
+
+	FRA = {
+		annex_country = { target = NFA }
+	}
+
+	
+}
+
+KRG_peace_WK3_RP_Accord_light = { #RP = Winner, Accord = Loser
+	set_global_flag = WK3_ended
+	add_to_array = { global.influence_log = 38 }
+	add_to_array = { global.influence_log_val = -25 }
+	influence_recalc = yes
+
+	if = {
+		limit = { 
+			has_global_flag = ACW_WK3_escalation
+		}
+		NEE = {
+			create_faction = "American Reclamation Alliance"
+			add_to_faction = CAL
+			add_to_faction = GLG
+			if = {
+				limit = { 
+					is_ai = no
+				}
+				country_event = {
+					id = WK3_peace.15
+				}
+			}
+		}
+		GLG = {
+			if = {
+				limit = { 
+					is_ai = no
+				}
+				country_event = {
+					id = WK3_peace.15
+				}
+			}
+		}
+		CAL = {
+			country_event = {
+				id = WK3_peace.15
+			}
+		}
+	}
+
+
+	every_country = {
+		limit = {
+			is_in_faction_with = ENT
+		}
+		every_country = {
+			limit = {
+				is_in_faction_with = GER
+			}
+			PREV = { white_peace = PREV }
+		}
+	}
+	FRA = {
+		annex_country = { target = NFA }
+	}
+	if = {
+		limit = { 
+			SPR = {
+				is_in_faction_with = ENT
+			}
+		}
+		165 = {
+			set_demilitarized_zone = yes
+		}
+		166 = {
+			set_demilitarized_zone = yes
+		}
+		172 = {
+			set_demilitarized_zone = yes
+		}
+	}
+	
+	if = {
+		limit = { 
+			ITA = {
+				is_in_faction_with = ENT
+			}
+		}
+		907 = {
+			set_demilitarized_zone = yes
+		}
+		158 = {
+			set_demilitarized_zone = yes
+		}
+		877 = {
+			set_demilitarized_zone = yes
+		}
+	}
+
+	if = {
+		limit = { 
+			SER = {
+				is_in_faction_with = ENT
+			}
+			BUL = {
+				is_in_faction_with = GER
+			}
+		}
+		106 = {
+			transfer_state_to = BUL
+		}
+		829 = {
+			transfer_state_to = BUL
+		}
+	}
+
+	if = {
+		limit = { 
+			SER = {
+				is_in_faction_with = ENT
+			}
+			DNF = {
+				is_in_faction_with = GER
+			}
+		}
+		105 = {
+			set_demilitarized_zone = yes
+		}
+		108 = {
+			set_demilitarized_zone = yes
+		}
+		107 = {
+			set_demilitarized_zone = yes
+		}
+		827 = {
+			set_demilitarized_zone = yes
+		}
+		828 = {
+			set_demilitarized_zone = yes
+		}
+	}
+
+	if = {
+		limit = { 
+			ITA = {
+				is_in_faction_with = ENT
+			}
+			DNF = {
+				is_in_faction_with = GER
+			}
+		}
+		909 = {
+			set_demilitarized_zone = yes
+		}
+		160 = {
+			set_demilitarized_zone = yes
+		}
+		159 = {
+			set_demilitarized_zone = yes
+		}
+	}
+
+	if = {
+		limit = { 
+			GRE = {
+				is_in_faction_with = ENT
+			}
+			BUL = {
+				is_in_faction_with = GER
+			}
+		}
+		184 = {
+			transfer_state_to = BUL
+		}
+	}
+
+	if = {
+		limit = { 
+			GRE = {
+				is_in_faction_with = ENT
+			}
+			TUR = {
+				is_in_faction_with = GER
+			}
+		}
+		187 = {
+			transfer_state_to = TUR
+		}
+		183 = {
+			transfer_state_to = TUR
+		}
+	}
+	log = "KRG_Event_Logging;Reichspakt WK3 light victory;[GetDateText];[ROOT.GetName];[FROM.GetName]"	
+}
+
+KRG_peace_WK3_RP_Accord_harsh = { ##RP = Winner, Accord = Loser
+	set_global_flag = WK3_ended
+	add_to_array = { global.influence_log = 38 }
+	add_to_array = { global.influence_log_val = -50 }
+	influence_recalc = yes
+
+	if = {
+		limit = { 
+			has_global_flag = ACW_WK3_escalation
+		}
+		NEE = {
+			create_faction = "American Reclamation Alliance"
+			add_to_faction = CAL
+			add_to_faction = GLG
+			if = {
+				limit = { 
+					is_ai = no
+				}
+				country_event = {
+					id = WK3_peace.15
+				}
+			}
+		}
+		GLG = {
+			if = {
+				limit = { 
+					is_ai = no
+				}
+				country_event = {
+					id = WK3_peace.15
+				}
+			}
+		}
+		CAL = {
+			country_event = {
+				id = WK3_peace.15
+			}
+		}
+	}
+
+
+	every_country = {
+		limit = {
+			is_in_faction_with = ENT
+		}
+		every_country = {
+			limit = {
+				is_in_faction_with = GER
+			}
+			PREV = { white_peace = PREV }
+		}
+	}
+	FRA = {
+		annex_country = { target = NFA }
+	}
+	if = {
+		limit = { 
+			SPR = {
+				is_in_faction_with = ENT
+			}
+		}
+		165 = {
+			set_demilitarized_zone = yes
+		}
+		166 = {
+			set_demilitarized_zone = yes
+		}
+		172 = {
+			set_demilitarized_zone = yes
+		}
+	}
+	
+	if = {
+		limit = { 
+			ITA = {
+				is_in_faction_with = ENT
+			}
+		}
+		907 = {
+			set_demilitarized_zone = yes
+		}
+		158 = {
+			set_demilitarized_zone = yes
+		}
+		877 = {
+			set_demilitarized_zone = yes
+		}
+	}
+
+	if = {
+		limit = { 
+			SER = {
+				is_in_faction_with = ENT
+			}
+			BUL = {
+				is_in_faction_with = GER
+			}
+		}
+		106 = {
+			transfer_state_to = BUL
+		}
+		829 = {
+			transfer_state_to = BUL
+		}
+	}
+
+	if = {
+		limit = { 
+			SER = {
+				is_in_faction_with = ENT
+			}
+			DNF = {
+				is_in_faction_with = GER
+			}
+		}
+		105 = {
+			set_demilitarized_zone = yes
+		}
+		108 = {
+			set_demilitarized_zone = yes
+		}
+		107 = {
+			set_demilitarized_zone = yes
+		}
+		827 = {
+			set_demilitarized_zone = yes
+		}
+		828 = {
+			set_demilitarized_zone = yes
+		}
+	}
+
+	if = {
+		limit = { 
+			ITA = {
+				is_in_faction_with = ENT
+			}
+			DNF = {
+				is_in_faction_with = GER
+			}
+		}
+		909 = {
+			set_demilitarized_zone = yes
+		}
+		160 = {
+			set_demilitarized_zone = yes
+		}
+		159 = {
+			set_demilitarized_zone = yes
+		}
+	}
+
+	if = {
+		limit = { 
+			GRE = {
+				is_in_faction_with = ENT
+			}
+			BUL = {
+				is_in_faction_with = GER
+			}
+		}
+		184 = {
+			transfer_state_to = BUL
+		}
+	}
+
+	if = {
+		limit = { 
+			GRE = {
+				is_in_faction_with = ENT
+			}
+			TUR = {
+				is_in_faction_with = GER
+			}
+		}
+		187 = {
+			transfer_state_to = TUR
+		}
+		183 = {
+			transfer_state_to = TUR
+		}
+	}
+	
+	if = {
+		limit = { 
+			CAL = { is_in_faction_with = ENT }
+		}
+		
+	}
+	log = "KRG_Event_Logging;Reichspakt WK3 harsh victory;[GetDateText];[ROOT.GetName];[FROM.GetName]"
+}
+
+KRG_peace_WK3_Accord_RP_light = { #Accord = Winner, RP = Loser
+	set_global_flag = WK3_ended
+	add_to_array = { global.influence_log = 39 }
+	add_to_array = { global.influence_log_val = 25 }
+	influence_recalc = yes
+
+	if = {
+		limit = { 
+			has_global_flag = ACW_WK3_escalation
+		}
+		TEX = {
+			leave_faction = yes
+			country_event = {
+				id = WK3_peace.16
+			}
+		}
+	}
+
+	every_country = {
+		limit = {
+			is_in_faction_with = ENT
+		}
+		every_country = {
+			limit = {
+				is_in_faction_with = GER
+			}
+			PREV = { white_peace = PREV }
+		}
+	}
+	NFA = {
+		annex_country = { target = FRA }
+	}
+	ENT = {
+		BEL = {
+			get_current_government_type = yes
+		}
+		if = {
+			limit = {
+				has_subject_autonomy_feature = yes
+			}
+			set_autonomy = {
+				target = BEL
+				autonomous_state = krg_joint_accord_mandate
+			}
+		}
+		else = {
+			puppet = BEL
+		}
+		save_event_target_as = on_puppet_master_tag
+		BEL = {
+			standard_on_puppet_effect = yes
+			restore_previous_government_type = yes
+		}
+	}
+	if = {
+		limit = { 
+			ITA = {
+				is_in_faction_with = ENT
+			}
+			DNF = {
+				is_in_faction_with = GER
+			}
+		}
+		839 = {
+			transfer_state_to = ITA
+		}
+		39 = {
+			transfer_state_to = ITA
+		}
+		842 = {
+			transfer_state_to = ITA
+		}
+		920 = {
+			transfer_state_to = ITA
+		}
+		919 = {
+			transfer_state_to = ITA
+		}
+		736 = {
+			transfer_state_to = ITA
+		}
+	}
+	
+	if = {
+		limit = { 
+			SER = {
+				is_in_faction_with = ENT
+			}
+			DNF = {
+				is_in_faction_with = GER
+				surrender_progress > 0.5
+			}
+		}
+		890 = {
+			transfer_state_to = SER
+		}
+		104 = {
+			transfer_state_to = SER
+		}
+	}
+
+	if = {
+		limit = { 
+			GRE = {
+				is_in_faction_with = ENT
+			}
+			TUR = {
+				is_in_faction_with = GER
+			}
+		}
+		807 = {
+			transfer_state_to = GRE
+		}
+	}
+	log = "KRG_Event_Logging;Accord WK3 light victory;[GetDateText];[ROOT.GetName];[FROM.GetName]"
+}
+
+KRG_peace_WK3_Accord_RP_harsh = {
+	set_global_flag = WK3_ended
+	add_to_array = { global.influence_log = 39 }
+	add_to_array = { global.influence_log_val = 50 }
+	influence_recalc = yes
+
+	if = {
+		limit = { 
+			has_global_flag = ACW_WK3_escalation
+		}
+		TEX = {
+			leave_faction = yes
+			country_event = {
+				id = WK3_peace.16
+			}
+		}
+	}
+
+	every_country = {
+		limit = {
+			is_in_faction_with = ENT
+		}
+		every_country = {
+			limit = {
+				is_in_faction_with = GER
+			}
+			PREV = { white_peace = PREV }
+		}
+	}
+	NFA = {
+		annex_country = { target = FRA }
+	}
+	28 = {
+		transfer_state_to = NFA
+	}
+	
+	ENT = {
+		BEL = {
+			get_current_government_type = yes
+		}
+		if = {
+			limit = {
+				has_subject_autonomy_feature = yes
+			}
+			set_autonomy = {
+				target = BEL
+				autonomous_state = krg_joint_accord_mandate
+			}
+		}
+		else = {
+			puppet = BEL
+		}
+		save_event_target_as = on_puppet_master_tag
+		BEL = {
+			standard_on_puppet_effect = yes
+			restore_previous_government_type = yes
+		}
+	}
+	8 = {
+		transfer_state_to = BEL
+	}
+
+	ENT = {
+		HOL = {
+			get_current_government_type = yes
+		}
+		if = {
+			limit = {
+				has_subject_autonomy_feature = yes
+			}
+			set_autonomy = {
+				target = HOL
+				autonomous_state = krg_joint_accord_mandate
+			}
+		}
+		else = {
+			puppet = HOL
+		}
+		save_event_target_as = on_puppet_master_tag
+		HOL = {
+			standard_on_puppet_effect = yes
+			restore_previous_government_type = yes
+		}
+	}
+
+
+	HOL = {
+		clear_reichspakt_alignment = yes
+		set_temp_variable = {
+			temp_level = 4
+		}
+		set_accord_alignment = yes
+	}
+
+	if = {
+		limit = { 
+			ITA = {
+				is_in_faction_with = ENT
+			}
+			DNF = {
+				is_in_faction_with = GER
+			}
+		}
+		839 = {
+			transfer_state_to = ITA
+		}
+		39 = {
+			transfer_state_to = ITA
+		}
+		842 = {
+			transfer_state_to = ITA
+		}
+		920 = {
+			transfer_state_to = ITA
+		}
+		919 = {
+			transfer_state_to = ITA
+		}
+		736 = {
+			transfer_state_to = ITA
+		}
+		163 = {
+			transfer_state_to = ITA
+		}
+	}
+
+	if = {
+		limit = { 
+			SER = {
+				is_in_faction_with = ENT
+			}
+			DNF = {
+				is_in_faction_with = GER
+				surrender_progress > 0.5
+			}
+		}
+		890 = {
+			transfer_state_to = SER
+		}
+		104 = {
+			transfer_state_to = SER
+		}
+		764 = {
+			transfer_state_to = SER
+		}
+		945 = {
+			transfer_state_to = SER
+		}
+		103 = {
+			transfer_state_to = SER
+		}
+		891 = {
+			transfer_state_to = SER
+		}
+		45 = {
+			transfer_state_to = SER
+		}
+		109 = {
+			transfer_state_to = SER
+		}
+		102 = {
+			transfer_state_to = SER
+		}
+	}
+
+	if = {
+		limit = { 
+			GRE = {
+				is_in_faction_with = ENT
+			}
+			TUR = {
+				is_in_faction_with = GER
+			}
+		}
+		807 = {
+			transfer_state_to = GRE
+		}
+	}
+	log = "KRG_Event_Logging;Accord WK3 harsh victory;[GetDateText];[ROOT.GetName];[FROM.GetName]"
+}
+
+RUS_RP_Peace = {
+	every_country = { 
+		limit = {
+			is_in_faction_with = GER
+		}
+		white_peace = RUS
+	}
+	GER = {
+		set_country_flag = GER_RUS_cont_war_victory
+	}
+	RUS = {
+		set_country_flag = RUS_Thirty_Six_Borders
+		RUS_Surrender_Claimed_Territories = yes
+
+		every_state = {
+			limit = {
+				OR = {
+					is_owned_by = RUS
+					is_owned_by = TCC
+					is_owned_by = TRK
+				}
+				is_core_of = GEO
+			}
+			transfer_state_to = GEO
+		}
+		GER = {
+			GEO = {
+				get_current_government_type = yes
+			}
+			if = {
+				limit = {
+					has_subject_autonomy_feature = yes
+				}
+				set_autonomy = {
+					target = GEO
+					autonomous_state = krg_herrschaftsgebiet
+				}
+			}
+			else = {
+				puppet = GEO
+			}
+			save_event_target_as = on_puppet_master_tag
+			GEO = {
+				standard_on_puppet_effect = yes
+				restore_previous_government_type = yes
+			}
+		}
+
+		every_state = {
+			limit = {
+				OR = {
+					is_owned_by = RUS
+					is_owned_by = TCC
+					is_owned_by = TRK
+				}
+				is_core_of = AZB
+			}
+			transfer_state_to = AZB
+		}
+		if = {
+			limit = { 
+				TUR = { is_in_faction_with = GER }
+			}
+			TUR = {
+				AZB = {
+					get_current_government_type = yes
+				}
+				if = {
+					limit = {
+						has_subject_autonomy_feature = yes
+					}
+					set_autonomy = {
+						target = AZB
+						autonomous_state = krg_military_occupation
+					}
+				}
+				else = {
+					puppet = AZB
+				}
+				save_event_target_as = on_puppet_master_tag
+				AZB = {
+					standard_on_puppet_effect = yes
+					restore_previous_government_type = yes
+				}
+			}
+		}
+		else = {
+			GER = {
+				AZB = {
+					get_current_government_type = yes
+				}
+				if = {
+					limit = {
+						has_subject_autonomy_feature = yes
+					}
+					set_autonomy = {
+						target = AZB
+						autonomous_state = krg_herrschaftsgebiet
+					}
+				}
+				else = {
+					puppet = AZB
+				}
+				save_event_target_as = on_puppet_master_tag
+				AZB = {
+					standard_on_puppet_effect = yes
+					restore_previous_government_type = yes
+				}
+			}
+		}
+
+		1012 = { transfer_state_to = TUR }
+
+		218 = { transfer_state_to = UKR }
+		234 = { transfer_state_to = UKR }
+		240 = { transfer_state_to = UKR }
+
+		838 = { transfer_state_to = LIT }
+
+		215 = { transfer_state_to = FIN }
+		213 = { transfer_state_to = FIN }
+
+
+		every_state = {
+			limit = {
+				OR = {
+					is_owned_by = RUS
+					is_owned_by = TCC
+					is_owned_by = TRK
+				}
+				is_core_of = BUK
+			}
+			transfer_state_to = BUK
+		}
+
+		every_state = {
+			limit = {
+				OR = {
+					is_owned_by = RUS
+					is_owned_by = TCC
+					is_owned_by = TRK
+				}
+				is_core_of = KHI
+			}
+			transfer_state_to = KHI
+		}
+
+
+		every_state = {
+			limit = {
+				OR = {
+					is_owned_by = RUS
+					is_owned_by = TCC
+					is_owned_by = TRK
+				}
+				is_core_of = UZB
+			}
+			transfer_state_to = UZB
+		}
+
+		every_state = {
+			limit = {
+				OR = {
+					is_owned_by = RUS
+					is_owned_by = TCC
+					is_owned_by = TRK
+				}
+				is_core_of = KAZ
+			}
+			transfer_state_to = KAZ
+		}
+	}
+}
+
+IND_RP_Peace = {
+	every_country = { 
+		limit = {
+			is_in_faction_with = GER
+		}
+		white_peace = IND
+	}
+	961 = {
+		transfer_state_to = IND
+	}
+	IND = {
+		if = {
+			limit = { 
+				423 = {
+					is_controlled_by_ROOT_or_ally = yes
+				}
+				864 = {
+					is_controlled_by_ROOT_or_ally = yes
+				}
+			}
+			959 = {
+				transfer_state_to = IND
+			}
+			958 = {
+				transfer_state_to = IND
+			}
+		}
+	
+		if = {
+			limit = { 
+				952 = {
+					is_controlled_by_ROOT_or_ally = yes
+				}
+			}
+			960 = {
+				transfer_state_to = IND
+			}
+		}
+	}
+}
+
+Accord_DNF_white_peace = {
+	every_country = {
+		limit = {
+			OR = {
+				original_tag = DNF
+				is_ally_with = DNF
+			}
+		}
+		clear_all_alignments = yes
+	}
+
+	every_country = {
+		limit = {
+			is_in_faction_with = ENT
+		}
+		every_country = {
+			limit = {
+				OR = {
+					original_tag = DNF
+					is_ally_with = DNF
+				}
+			}
+			PREV = { white_peace = PREV }
+		}
+	}
+}
+
+
+CHI_CCW_victory = {
+	CHI = {
+		annex_country = {
+			target = FNG
+		}
+	}
+	CHI = { member_entry_resolution_effect = yes }
+	CHI = { senate_promotion_resolution_effect = yes }
+	add_to_array = { global.influence_log = 11 }
+	add_to_array = { global.influence_log_val = 25 }
+	if = {
+		limit = {
+			is_in_array = {
+				global.influence_targets = 19
+			}
+		}
+		remove_from_array = { global.influence_targets = 19 }
+	}
+	influence_recalc = yes
+	set_global_flag = CCW_CHI_victory
+	clr_global_flag = CCW_ongoing
+	every_country = {
+		remove_relation_modifier = {
+			target = CHI
+			modifier = volunteer_limit_minus_hundred_percent
+		}
+	}
+	log = "KRG_Event_Logging;Chinese Civil War - CHI Victory;[GetDateText];[ROOT.GetName];[FROM.GetName]"
+}
+
+FNG_CCW_victory = {
+	FNG = {
+		annex_country = {
+			target = CHI
+		}
+	}
+	FNG = { member_entry_resolution_effect = yes }
+	FNG = { senate_promotion_resolution_effect = yes }
+	add_to_array = { global.influence_log = 10 }
+	add_to_array = { global.influence_log_val = -25 }
+	if = {
+		limit = {
+			is_in_array = {
+				global.influence_targets = 19
+			}
+		}
+		remove_from_array = { global.influence_targets = 19 }
+	}
+	influence_recalc = yes
+	set_global_flag = CCW_FNG_victory
+	clr_global_flag = CCW_ongoing
+	every_country = {
+		remove_relation_modifier = {
+			target = FNG
+			modifier = volunteer_limit_minus_hundred_percent
+		}
+	}
+	log = "KRG_Event_Logging;Chinese Civil War - FNG Victory;[GetDateText];[ROOT.GetName];[FROM.GetName]"
+}
+
+DNF_Serbian_Intervention_Victory = {
+	hidden_effect = {
+		DNF = {
+			if = {
+				limit = { 
+					ALB = { is_subject_of = SER }
+				}
+
+				ALB = {
+					get_current_government_type = yes
+				}
+				if = {
+					limit = {
+						has_subject_autonomy_feature = yes
+					}
+					set_autonomy = {
+						target = ALB
+						autonomous_state = krg_herrschaftsgebiet
+					}
+				}
+				else = {
+					puppet = ALB
+				}
+				save_event_target_as = on_puppet_master_tag
+				ALB = {
+					standard_on_puppet_effect = yes
+					restore_previous_government_type = yes
+				}
+			}
+			SER = {
+				get_current_government_type = yes
+			}
+			if = {
+				limit = {
+					has_subject_autonomy_feature = yes
+				}
+				set_autonomy = {
+					target = SER
+					autonomous_state = krg_herrschaftsgebiet
+				}
+			}
+			else = {
+				puppet = SER
+			}
+			save_event_target_as = on_puppet_master_tag
+			SER = {
+				standard_on_puppet_effect = yes
+				restore_previous_government_type = yes
+			}
+		}	
+		SER = {
+			set_politics = {
+				ruling_party = authoritarian_democrat
+				election_frequency = 60
+				elections_allowed = yes
+			}
+			set_party_name = {
+				ideology = authoritarian_socialist
+				name = SER_authsoc_democracy_party
+				long_name = SER_authsoc_democracy_party_long
+			}
+			set_party_name = {
+				ideology = radical_socialist
+				name = SER_radsoc_peoples_front_party
+				long_name = SER_radsoc_peoples_front_party_long
+			}
+			set_party_name = {
+				ideology = social_democrat
+				name = SER_socdem_peoples_front_party
+				long_name = SER_socdem_peoples_front_party_long
+			}
+			set_party_name = {
+				ideology = social_liberal
+				name = SER_soclib_peoples_front_party
+				long_name = SER_soclib_peoples_front_party_long
+			}
+			retire_character = SER_milovan_dilas
+			SER_mosa_pijade={
+				promote_character = {
+					ideology=radical_socialist_subtype
+				}
+				promote_character = {
+					ideology=social_democrat_subtype
+				}
+				promote_character = {
+					ideology=social_liberal_subtype
+				}
+			}
+		}
+		log = "KRG_Event_Logging;Danubian Intervention in Serbia - Danubian Victory;[GetDateText];[ROOT.GetName];[FROM.GetName]"
+	}
+}
+
+TEX_ARA_victory = {
+	TEX = {
+		if = {
+			limit = { 
+				HAW = {
+					is_subject_of = CAL
+				}
+			}
+			annex_country = {
+				target = HAW
+			}
+		}
+		annex_country = {
+			target = CAL
+		}
+		annex_country = {
+			target = NEE
+		}
+		annex_country = {
+			target = GLG
+		}
+		country_event = {
+			id = krg_acw.39
+			days = 5
+		}
+		log = "KRG_Event_Logging;3rd ACW - TEX Victory;[GetDateText];[ROOT.GetName];[FROM.GetName]"
+		news_event = {
+			id = worldnews.82
+			hours = 6
+		}
+		if = {
+			limit = { has_global_flag = accord_acw_send_volunteers_effect_pass }
+			for_each_scope_loop = {
+				array = global.accord_voting_country_array
+		
+				remove_ideas = Accord_volunteers
+			}
+		}
+	}
+}
+
+KRG_peace_SYR_BSY = {
+	SYR = {
+		annex_country = {
+			target = BSY
+		}
+		if = {
+			limit = { 
+				LEB = {
+					has_idea = LEB_SSNP_rule
+				}
+			}
+			annex_country = {
+				target = LEB
+			}
+		}
+	}
+}
+
+KRG_peace_BSY_SYR = {
+	BSY = {
+		annex_country = {
+			target = SYR
+		}
+	}
+
+	LEB = {
+		if = {
+			limit = { 
+				has_idea = LEB_SSNP_rule
+			}
+			#country_event = {
+			#	id = krg_leb.1
+			#}
+		}
+	}
+	
+}
+
+KRG_peace_KRL_LAT = { #KRL = Winner, LAT = Loser
+	KRL = {
+		annex_country = {
+			target = LAT
+		}
+	}
+}
+
+KRG_peace_VIN_VIE = { #VIN = Winner, VIE = Loser
+	VIN = {
+		annex_country = {
+			target = VIE
+		}
+	}
+	SIA = {
+		annex_country = {
+			target = CAM
+		}
+	}
+	JAP = {
+		LAO = {
+			set_politics = {
+				ruling_party = authoritarian_democrat
+			}
+			get_current_government_type = yes
+		}
+		if = {
+			limit = {
+				has_subject_autonomy_feature = yes
+			}
+			set_autonomy = {
+				target = LAO
+				autonomous_state = krg_military_occupation
+			}
+		}
+		else = {
+			puppet = LAO
+		}
+		save_event_target_as = on_puppet_master_tag
+		LAO = {
+			standard_on_puppet_effect = yes
+			restore_previous_government_type = yes
+		}
+	}
+	log = "KRG_Event_Logging;Vietnam War - VIN Victory;[GetDateText];[ROOT.GetName];[FROM.GetName]"
+}
+KRG_peace_VIE_VIN = { #VIE = Winner, VIN = Loser
+	if = {
+		limit = { 
+			has_war_with = SIA
+		}
+		741 = {
+			transfer_state_to = CAM
+		}
+		968 = {
+			transfer_state_to = CAM
+		}
+		967 = {
+			transfer_state_to = CAM
+		}
+
+		962 = {
+			transfer_state_to = LAO
+		}
+		964 = {
+			transfer_state_to = LAO
+		}
+	}
+
+	VIE = {
+		white_peace = JAP
+		white_peace = VIN 
+		annex_country = {
+			target = VIN
+		}
+		country_event = { id = KRG_JAP_Foreign.4 }
+		set_global_flag = JAP_defeated_by_vietnam_total_victory
+	}
+	log = "KRG_Event_Logging;Vietnam War - VIE Victory;[GetDateText];[ROOT.GetName];[FROM.GetName]"
+}

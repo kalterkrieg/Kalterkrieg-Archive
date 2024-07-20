@@ -1,0 +1,2152 @@
+add_namespace = krg_nfa
+add_namespace = nfa_colonial
+add_namespace = nfa_flavor
+add_namespace = nfa_elections
+
+country_event = { ### Welcome Event
+	id = krg_nfa.1
+	title = krg_nfa.1.t
+	desc = krg_nfa.1.d
+	picture = GFX_ce_NFA_start
+	is_triggered_only = yes
+	fire_only_once = yes
+	trigger = {
+		tag = NFA
+	}
+	option = {
+		name = krg_nfa.1.a
+	}
+}
+
+country_event = { ### ExCommunards Drink, Piss and Moan
+	id = krg_nfa.2
+	title = krg_nfa.2.t
+	desc = krg_nfa.2.d
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = krg_nfa.2.a
+		add_ideas = FRA_French_Disease
+	}
+}
+
+country_event = { ### The Retirement
+	id = krg_nfa.3
+	title = krg_nfa.3.t
+	desc = krg_nfa.3.d
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = krg_nfa.3.a
+		retire_character = NFA_Maurice_Mathenet
+		retire_character = NFA_J_de_Monsabert
+		retire_character = NFA_Emile_Muselier
+		retire_character = NFA_Thierry_dArgenlieu
+		retire_character = NFA_Jean_Decoux
+		retire_character = NFA_Henri_Blehaut
+		retire_character = NFA_Jean_Marie_Charles_Abrial
+		retire_character = NFA_Charles_Platon
+		set_country_flag = NFA_Old_Guard_Retired
+	}
+}
+
+country_event = { ### La Peste
+	id = krg_nfa.4
+	title = krg_nfa.4.t
+	desc = krg_nfa.4.d
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = {
+		hidden_effect = {
+			country_event = {
+				id = krg_nfa.5
+				months = 36
+				days = 24
+			}
+		}
+	}
+	option = {
+		name = krg_nfa.4.a
+		add_political_power = 5
+	}
+}
+
+
+country_event = { ### L'Homme Révolté
+	id = krg_nfa.5
+	title = krg_nfa.5.t
+	desc = krg_nfa.5.d
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = krg_nfa.5.a
+		add_political_power = 5
+	}
+}
+
+
+country_event = { ### France offers aid to Britain
+	id = krg_nfa.7
+	title = krg_nfa.7.t
+	desc = krg_nfa.7.d
+	picture = GFX_ce_NFA_send_aid_to_britain
+	is_triggered_only = yes
+	fire_only_once = yes
+	trigger = {
+		tag = ENG
+	}
+	option = {
+		name = krg_nfa.7.a
+		ai_chance = {
+			base = 90
+		}
+		NFA = {
+			country_event = {
+				id = krg_nfa.8
+				days = 10
+			}
+		}
+		add_political_power = 5
+	}
+	option = {
+		name = krg_nfa.7.b
+		ai_chance = {
+			base = 10
+		}
+		NFA = {
+			country_event = {
+				id = krg_nfa.9
+				days = 10
+			}
+		}
+		add_political_power = -5
+	}
+}
+country_event = { ### Britain accepts our aid
+	id = krg_nfa.8
+	title = krg_nfa.8.t
+	desc = krg_nfa.8.d
+	picture = GFX_ce_NFA_send_aid_to_britain
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = krg_nfa.8.a
+		add_political_power = 5
+		ENG = {
+			set_country_flag = NFA_french_aid
+		}
+	}
+}
+country_event = { ### Britain rejects our aid
+	id = krg_nfa.9
+	title = krg_nfa.9.t
+	desc = krg_nfa.9.d
+	picture = GFX_ce_NFA_send_aid_to_britain
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = krg_nfa.9.a
+		add_political_power = -5
+	}
+}
+country_event = { ### In Canada's Shadow speech
+	id = krg_nfa.10
+	title = krg_nfa.10.t
+	desc = krg_nfa.10.d
+	picture = GFX_ce_NFA_in_canadas_shadow_speech
+	is_triggered_only = yes
+	fire_only_once = yes
+	trigger = {}
+	option = {
+		name = krg_nfa.10.a
+	}
+}
+country_event = { ### Trade Agreements choices
+	id = krg_nfa.11
+	title = krg_nfa.11.t
+	desc = krg_nfa.11.d
+	picture = GFX_ce_NFA_trade_agreements_choosing
+	is_triggered_only = yes
+	fire_only_once = yes
+	trigger = {}
+	option = { ### Focus on the allies closest to us (GRE, ITA, SPR, POR)
+		name = krg_nfa.11.a
+		add_opinion_modifier = {
+			target = GRE
+			modifier = Trade_partners
+		}
+		add_opinion_modifier = {
+			target = ITA
+			modifier = Trade_partners
+		}
+		add_opinion_modifier = {
+			target = POR
+			modifier = Trade_partners
+		}
+		add_opinion_modifier = {
+			target = SPR
+			modifier = Trade_partners
+		}
+	}
+	option = { ### Focus on our North American allies (CAN, PSA)
+		name = krg_nfa.11.b
+		add_opinion_modifier = {
+			target = NEE
+			modifier = Trade_partners
+		}
+		add_opinion_modifier = {
+			target = CAN
+			modifier = Trade_partners
+		}
+		add_opinion_modifier = {
+			target = CAL
+			modifier = Trade_partners
+		}
+	}
+	option = { ### Focus on broadening our trade outside of the Accord (SPR, CHI, JAP, others)
+		name = krg_nfa.11.c
+		add_opinion_modifier = {
+			target = CHI
+			modifier = Trade_partners
+		}
+		add_opinion_modifier = {
+			target = IND
+			modifier = Trade_partners
+		}
+		add_opinion_modifier = {
+			target = TUR
+			modifier = Trade_partners
+		}
+		add_opinion_modifier = {
+			target = BRA
+			modifier = Trade_partners
+		}
+	}
+}
+country_event = { ### Reaction to Algiers Shooting
+	id = krg_nfa.12
+	title = krg_nfa.12.t
+	desc = krg_nfa.12.d
+	picture = GFX_NFA_algiers_shooting_response
+	is_triggered_only = yes
+	fire_only_once = yes
+	trigger = {
+		tag = NFA
+	}
+	option = {
+		name = krg_nfa.12.a
+	}
+}
+country_event = { ###Choosing a Coalition
+	id = krg_nfa.13
+	title = krg_nfa.13.t
+	desc = krg_nfa.13.d
+	is_triggered_only = yes
+	fire_only_once = yes
+	trigger = {
+		tag = NFA
+	}
+	option = { #USR
+		name = krg_nfa.13.a
+		add_popularity = {
+			ideology = social_liberal
+			popularity = 0.05
+		}
+		add_popularity = {
+			ideology = social_democrat
+			popularity = 0.05
+		}
+		set_country_flag = NFA_socdem_coalition
+	}
+	option = { #UDC
+		name = krg_nfa.13.a
+		add_popularity = {
+			ideology = social_liberal
+			popularity = 0.05
+		}
+		add_popularity = {
+			ideology = social_conservative
+			popularity = 0.05
+		}
+		set_country_flag = NFA_marlib_coalition
+	}
+}
+country_event = { ###Informing of Aid completion
+	id = krg_nfa.14
+	title = krg_nfa.14.t
+	desc = krg_nfa.14.d
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = { #USR
+		name = krg_nfa.14.a
+		add_political_power = 5
+		custom_effect_tooltip = NFA_aid_completed
+	}
+}
+
+country_event = { ###Prime Minister DLR Introduces POlitical Reforms
+	id = krg_nfa.15
+	title = krg_nfa.15.t
+	desc = krg_nfa.15.d
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = { 
+		name = krg_nfa.15.a
+		hidden_effect = {
+			country_event = {
+				id = krg_nfa.16
+				days = 10
+			}
+		}
+	}
+}
+
+country_event = { ###Constitutional Reforms Pass
+	id = krg_nfa.16
+	title = krg_nfa.16.t
+	desc = krg_nfa.16.d
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = { 
+		name = krg_nfa.16.a #Long Live the 4th Republic!
+		hidden_effect = {
+			country_event = {
+				id = krg_nfa.17
+				days = 30
+			}
+			news_event = {
+				id = worldnews.77
+				days = 1
+			}
+		}
+	}
+}
+
+country_event = { ###Radicals pick their man!
+	id = krg_nfa.17
+	title = krg_nfa.17.t
+	desc = krg_nfa.17.d
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = { 
+		name = krg_nfa.17.a 
+		hidden_effect = {
+			country_event = {
+				id = nfa_elections.4
+				days = 90
+			}
+		}
+	}
+}
+
+country_event = { ###The Death of DLR
+	id = krg_nfa.18
+	title = krg_nfa.18.t
+	desc = krg_nfa.18.d
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = { 
+		name = krg_nfa.18.a 
+		retire_character = NFA_Francois_de_la_Rocque
+		hidden_effect = {
+			retire_character = NFA_Francois_de_la_Rocque_im
+		}
+		NFA_jean_mermoz = {
+			promote_character = yes
+		}
+		hidden_effect = {
+			news_event = {
+				id = worldnews.79
+				days = 1
+			}
+		}
+	}
+}
+
+country_event = { ###Choosing DLR's Successor
+	id = krg_nfa.19
+	title = krg_nfa.19.t
+	desc = krg_nfa.19.d
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = { 
+		name = krg_nfa.19.a #Mermoz
+		set_country_flag = NFA_mermoz_successor
+		swap_ideas = {
+			remove_idea = NFA_uncertain_succession
+			add_idea = NFA_illegitimate_succession
+		}
+	}
+}
+
+country_event = { ###Recovering the Red Fleet
+	id = krg_nfa.20
+	title = krg_nfa.20.t
+	desc = krg_nfa.20.d
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = { 
+		name = krg_nfa.20.a #Battleships and Cruisers
+		create_ship = {
+			type = ship_hull_heavy_1
+			equipment_variant = "Commune Class" #TODO add variant
+			creator = NFA
+			name = "Bretagne"
+		}
+		create_ship = {
+			type = ship_hull_cruiser_1
+			equipment_variant = "Commune Class" #TODO add variant
+			creator = NFA
+			name = "Aigrette"
+		}
+	}
+	option = { 
+		name = krg_nfa.20.b #Destroyers
+		create_ship = {
+			type = ship_hull_light_1
+			equipment_variant = "Commune Class" #TODO add variant
+			creator = NFA
+			name = "Cassards"
+		}
+		create_ship = {
+			type = ship_hull_light_1
+			equipment_variant = "Commune Class" #TODO add variant
+			creator = NFA
+			name = "L'Audacieux"
+		}
+		create_ship = {
+			type = ship_hull_light_1
+			equipment_variant = "Commune Class" #TODO add variant
+			creator = NFA
+			name = "Le Fantasque"
+		}
+		create_ship = {
+			type = ship_hull_light_1
+			equipment_variant = "Commune Class" #TODO add variant
+			creator = NFA
+			name = "Le Malin"
+		}
+		create_ship = {
+			type = ship_hull_light_1
+			equipment_variant = "Commune Class" #TODO add variant
+			creator = NFA
+			name = "Le Terrible"
+		}
+		create_ship = {
+			type = ship_hull_light_1
+			equipment_variant = "Commune Class" #TODO add variant
+			creator = NFA
+			name = "L'Indomptable"
+		}
+	}
+	option = { 
+		name = krg_nfa.20.c #Subs
+		create_ship = {
+			type = ship_hull_submarine_1
+			equipment_variant = "Commune Class" #TODO add variant
+			creator = NFA
+			name = "Émeraude"
+		}
+		create_ship = {
+			type = ship_hull_submarine_1
+			equipment_variant = "Commune Class" #TODO add variant
+			creator = NFA
+			name = "Opale"
+		}
+		create_ship = {
+			type = ship_hull_submarine_1
+			equipment_variant = "Commune Class" #TODO add variant
+			creator = NFA
+			name = "Loutre"
+		}
+		create_ship = {
+			type = ship_hull_submarine_1
+			equipment_variant = "Commune Class" #TODO add variant
+			creator = NFA
+			name = "Bonite"
+		}
+		create_ship = {
+			type = ship_hull_submarine_1
+			equipment_variant = "Commune Class" #TODO add variant
+			creator = NFA
+			name = "Dorade"
+		}
+		create_ship = {
+			type = ship_hull_submarine_1
+			equipment_variant = "Commune Class" #TODO add variant
+			creator = NFA
+			name = "Esturgeon"
+		}
+		create_ship = {
+			type = ship_hull_submarine_1
+			equipment_variant = "Commune Class" #TODO add variant
+			creator = NFA
+			name = "Ludion"
+		}
+		create_ship = {
+			type = ship_hull_submarine_1
+			equipment_variant = "Commune Class" #TODO add variant
+			creator = NFA
+			name = "Perle"
+		}
+	}
+}
+
+###FLAVOR EVENTS
+country_event = { ###  Film Festival in Nice?
+	id = nfa_flavor.1
+	title = nfa_flavor.1.t
+	desc = nfa_flavor.1.d
+	picture = GFX_ce_nice
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = nfa_flavor.1.a
+		add_stability = 0.01
+	}
+}
+
+
+
+###COLONIAL EVENTS
+
+country_event = { ###  The Algiers Conference
+	id = nfa_colonial.1
+	title = nfa_colonial.1.t 
+	desc = nfa_colonial.1.d
+	picture = GFX_ce_NFA_herriot_chosen
+	immediate = {
+		set_country_flag = NFA_reform_process	
+		hidden_effect = {
+			news_event = {
+				id = worldnews.86
+				days = 1
+			}
+			activate_mission = NFA_reform_process
+			country_event = {
+				id = nfa_colonial.25
+				days = 150
+				random_days = 20
+			} 
+			country_event = {
+				id = nfa_colonial.27
+				days = 45
+				random_days = 9
+			}
+			country_event = {
+				id = nfa_colonial.32
+				days = 750
+				random_days = 80
+			}
+			country_event = {
+				id = nfa_colonial.33
+				days = 800
+				random_days = 50
+			}
+		}
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #We must reform the empire
+		name = nfa_colonial.1.a		
+		complete_national_focus = NFA_algiers_conference 
+		custom_effect_tooltip = NFA_reform_process_mission_tt
+	}
+
+	
+}
+
+country_event = { ### The African Pension Fund
+	id = nfa_colonial.2
+	title = nfa_colonial.2.t
+	desc = nfa_colonial.2.d
+	#picture = 
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #We must give them their full pensions
+		name = nfa_colonial.2.a
+		add_timed_idea = { idea = NFA_African_pensions days = 365 }
+		add_to_variable = { 
+			NFA_reform_process_var = 1 
+			tooltip = NFA_reform_process_var_tt
+		}
+	}
+
+	option = { #Give them a more reasonable amount
+		name = nfa_colonial.2.b
+		add_timed_idea = { idea = NFA_African_pensions_small days = 365 }
+	}
+}
+
+country_event = { ### The Alegerian Citizenship Question
+	id = nfa_colonial.3
+	title = nfa_colonial.3.t
+	desc = nfa_colonial.3.d
+	#picture = 
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #We must grant them citizenship
+		name = nfa_colonial.3.a
+		add_to_variable = { 
+			NFA_reform_process_var = 1 
+			tooltip = NFA_reform_process_var_tt
+		}	
+		every_owned_state = {
+			limit = {
+				OR = {
+					state = 459
+					state = 460
+					state = 898
+					state = 899
+					state = 513
+				}
+			}
+			add_resistance = -25
+			add_compliance = 20
+		}
+		add_political_power = -100
+		add_stability = -0.1
+	}
+
+	option = { #They arent Frenchmen, despite their service
+		name = nfa_colonial.3.b 
+		every_owned_state = {
+			limit = {
+				OR = {
+					state = 459
+					state = 460
+					state = 898
+					state = 899
+					state = 513
+				}
+			}
+			add_resistance = 20
+			add_compliance = -15
+		} 
+	}
+}
+
+country_event = { ### Status of Tunisia
+	id = nfa_colonial.4
+	title = nfa_colonial.4.t
+	desc = nfa_colonial.4.d
+	#picture = 
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #Let them keep their Protectorate Status, they may remain outside the French Union
+		name = nfa_colonial.4.a
+		trigger = {
+			has_government = social_liberal
+			NOT = {
+				has_country_flag = NFA_formed_LMR
+			}
+		}
+		release_autonomy = {
+			target = TUN
+			autonomy_state = krg_protectorate
+		}
+		hidden_effect = {
+			TUN = {
+				set_cosmetic_tag = TUN_protectorate
+				set_politics = {
+					ruling_party = authoritarian_democrat
+				}
+				set_popularities = {
+					authoritarian_socialist = 0
+					radical_socialist = 0
+					social_democrat = 13
+					revolutionary_republican = 0
+					social_liberal = 7
+					market_liberal = 5
+					social_conservative = 17
+					authoritarian_democrat = 38
+					paternal_autocrat = 17
+					national_populist = 3
+				} 
+				add_ideas = KRG_authoritarian_system
+			}
+		}
+	}
+
+	option = { #Integrate them into the French Union
+		name = nfa_colonial.4.b
+		add_to_variable = { 
+			NFA_reform_process_var = -1 
+			tooltip = NFA_reform_process_var_tt
+		}
+		458 = {
+			add_resistance_target = {
+				amount = 15
+			}
+			add_resistance = 15
+		}
+		665 = {
+			add_resistance_target = {
+				amount = 15
+			}
+			add_resistance = 15
+		} 
+	}
+}
+
+country_event = { ### Guinea declares Independence!
+	id = nfa_colonial.5
+	title = nfa_colonial.5.t
+	desc = nfa_colonial.5.d
+	#picture = 
+	immediate = {
+		hidden_effect = {
+			country_event = {
+				id = nfa_colonial.6
+				days = 60
+				random_days = 15
+			}
+		}
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #Lets see how they do on their own
+		name = nfa_colonial.5.a
+		every_owned_state = {
+			limit = { is_core_of = GNE }
+			transfer_state_to = GNE
+		}
+		GNE = {
+			every_owned_state = {
+				remove_from_array = {
+					array = NFA.NFA_african_states
+					value = PREV
+				}
+			}
+		}
+	}
+}
+
+country_event = { ### Senegal declares Independence!
+	id = nfa_colonial.6
+	title = nfa_colonial.6.t
+	desc = nfa_colonial.6.d
+	#picture = 
+	immediate = {
+		hidden_effect = {
+			country_event = {
+				id = nfa_colonial.7
+				days = 45
+				random_days = 15
+			}
+		}
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #Lets see how they do on their own
+		name = nfa_colonial.6.a
+		every_owned_state = {
+			limit = { is_core_of = SEN }
+			transfer_state_to = SEN
+		}
+		SEN = {
+			every_owned_state = {
+				remove_from_array = {
+					array = NFA.NFA_african_states
+					value = PREV
+				}
+			}
+		}
+	}
+}
+
+country_event = { ### Mali declares Independence!
+	id = nfa_colonial.7
+	title = nfa_colonial.7.t
+	desc = nfa_colonial.7.d
+	#picture = 
+	immediate = {
+		hidden_effect = {
+			country_event = {
+				id = nfa_colonial.8
+				days = 30
+				random_days = 15
+			}
+		}
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #Lets see how they do on their own
+		name = nfa_colonial.7.a
+		every_owned_state = {
+			limit = { is_core_of = MAL }
+			transfer_state_to = MAL
+		}
+		MAL = {
+			every_owned_state = {
+				remove_from_array = {
+					array = NFA.NFA_african_states
+					value = PREV
+				}
+			}
+		}
+	}
+}
+
+country_event = { ### Niger declares Independence!
+	id = nfa_colonial.8
+	title = nfa_colonial.8.t
+	desc = nfa_colonial.8.d
+	#picture = 
+	immediate = {
+		hidden_effect = {
+			country_event = {
+				id = nfa_colonial.9
+				days = 20
+				random_days = 15
+			}
+		}
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #Lets see how they do on their own
+		name = nfa_colonial.8.a
+		every_owned_state = {
+			limit = { is_core_of = NER }
+			transfer_state_to = NER
+		}
+		NER = {
+			every_owned_state = {
+				remove_from_array = {
+					array = NFA.NFA_african_states
+					value = PREV
+				}
+				teleport_armies = {
+					limit = {
+						OR = {
+							tag = NFA
+							is_in_faction_with = NFA
+						}
+					}
+					to_state_array = owned_controlled_states
+				}
+			}
+		}
+	}
+}
+
+country_event = { ### Upper Volta declares Independence!
+	id = nfa_colonial.9
+	title = nfa_colonial.9.t
+	desc = nfa_colonial.9.d
+	#picture = 
+	immediate = {
+		hidden_effect = {
+			country_event = {
+				id = nfa_colonial.10
+				days = 20
+				random_days = 15
+			}
+		}
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #Lets see how they do on their own
+		name = nfa_colonial.9.a
+		every_owned_state = {
+			limit = { is_core_of = VOL }
+			transfer_state_to = VOL
+		}
+		VOL = {
+			every_owned_state = {
+				remove_from_array = {
+					array = NFA.NFA_african_states
+					value = PREV
+				}
+				teleport_armies = {
+					limit = {
+						OR = {
+							tag = NFA
+							is_in_faction_with = NFA
+						}
+					}
+					to_state_array = owned_controlled_states
+				}
+			}
+		}
+	}
+}
+
+country_event = { ### Tchad declares Independence!
+	id = nfa_colonial.10
+	title = nfa_colonial.10.t
+	desc = nfa_colonial.10.d
+	#picture = 
+	immediate = {
+		hidden_effect = {
+			country_event = {
+				id = nfa_colonial.11
+				days = 20
+				random_days = 15
+			}
+		}
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #Lets see how they do on their own
+		name = nfa_colonial.10.a
+		every_owned_state = {
+			limit = { is_core_of = CHD }
+			transfer_state_to = CHD
+		}
+		CHD = {
+			every_owned_state = {
+				remove_from_array = {
+					array = NFA.NFA_african_states
+					value = PREV
+				}
+				teleport_armies = {
+					limit = {
+						OR = {
+							tag = NFA
+							is_in_faction_with = NFA
+						}
+					}
+					to_state_array = owned_controlled_states
+				}
+			}
+		}
+	}
+}
+
+country_event = { ### Mauritania declares Independence!
+	id = nfa_colonial.11
+	title = nfa_colonial.11.t
+	desc = nfa_colonial.11.d
+	#picture = 
+	immediate = {
+		hidden_effect = {
+			country_event = {
+				id = nfa_colonial.12
+				days = 60
+				random_days = 15
+			}
+		}
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #Lets see how they do on their own
+		name = nfa_colonial.11.a
+		every_owned_state = {
+			limit = { is_core_of = MRT }
+			transfer_state_to = MRT
+		}
+		MRT = {
+			every_owned_state = {
+				remove_from_array = {
+					array = NFA.NFA_african_states
+					value = PREV
+				}
+				teleport_armies = {
+					limit = {
+						OR = {
+							tag = NFA
+							is_in_faction_with = NFA
+						}
+					}
+					to_state_array = owned_controlled_states
+				}
+			}
+		}
+	}
+}
+
+country_event = { ### Cote D'Ivoire declares Independence!
+	id = nfa_colonial.12
+	title = nfa_colonial.12.t
+	desc = nfa_colonial.12.d
+	#picture = 
+	immediate = {
+		# ? 
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #Lets see how they do on their own
+		name = nfa_colonial.12.a
+		every_owned_state = {
+			limit = { is_core_of = CIV }
+			transfer_state_to = CIV
+		}
+		CIV = {
+			every_owned_state = {
+				remove_from_array = {
+					array = NFA.NFA_african_states
+					value = PREV
+				}
+			}
+		}
+	}
+}
+
+country_event = { ### Tunisia declares Independence!
+	id = nfa_colonial.13
+	title = nfa_colonial.13.t
+	desc = nfa_colonial.13.d
+	#picture = 
+	immediate = {
+	
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #Lets see how they do on their own
+		name = nfa_colonial.13.a
+		every_owned_state = {
+			limit = { is_core_of = TUN }
+			transfer_state_to = TUN
+		}
+		TUN = {
+			every_owned_state = {
+				remove_from_array = {
+					array = NFA.NFA_african_states
+					value = PREV
+				}
+			}
+			add_ideas = KRG_authoritarian_system
+			coal_add_auth_dem = yes
+			coal_add_nat_pop = yes
+		}
+	}
+}
+
+country_event = { ### Algeria declares Independence!
+	id = nfa_colonial.14
+	title = nfa_colonial.14.t
+	desc = nfa_colonial.14.d
+	#picture = 
+	immediate = {
+		hidden_effect = {
+			every_owned_state = {
+				limit = { is_core_of = ALG }
+				transfer_state_to = ALG
+			}
+			every_owned_state = {
+				limit = {
+					is_core_of = ALG 
+				}
+				teleport_armies = {
+					limit = { tag = NFA }
+					to_province = 7132 #Oran is the last holdout!
+				} 
+			}
+			ALG = {
+				load_oob = "ALG"
+				every_owned_state = {
+					remove_from_array = {
+						array = NFA.NFA_african_states
+						value = PREV
+					}
+				}
+			}
+			TUN = {
+				country_event = {
+					id = nfa_colonial.40
+					days = 30
+				}
+			}
+		}
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #Lets see how they do on their own
+		name = nfa_colonial.14.a
+		ai_chance = {
+			base = 0
+	   }
+		trigger = {
+			has_government = social_liberal
+		}
+		# TODO - MORE consequences for abandoning integral French territory
+		add_stability = -0.4		
+	}
+	option = { #L'Algerie c'est France!
+		ai_chance = {
+			 base = 100
+		}
+		name = nfa_colonial.14.b
+		NFA = {
+			set_country_flag = NFA_algerian_war
+			hidden_effect = {
+				activate_mission = NFA_algerian_revolt					
+			}
+			declare_war_on = {
+				target = ALG
+				type = annex_everything
+			}
+			hidden_effect = {
+				load_oob = "NFA_oas"
+			}
+			add_ideas = NFA_algerian_war
+			set_variable = { NFA_army_limit = num_divisions }
+			divide_variable = {
+				NFA_army_limit = 3
+			}
+			set_variable = {
+				NFA_army_size = num_armies_in_state@460
+			}
+			add_to_variable = {
+				NFA_army_size = num_armies_in_state@899
+			}
+			add_to_variable = {
+				NFA_army_size = num_armies_in_state@459
+			}
+			add_to_variable = {
+				NFA_army_size = num_armies_in_state@898
+			}
+			add_to_variable = {
+				NFA_army_size = num_armies_in_state@513
+			}
+			ALG = {
+				add_ideas = {
+					ALG_revolt
+					KRG_extensive_conscription
+					KRG_unprofessional_military
+					KRG_partial_mobilisation
+					KRG_presidential_democracy
+				}
+			}
+		}
+	}
+}
+
+country_event = { ###Redefining the Empire
+	id = nfa_colonial.15
+	title = nfa_colonial.15.t
+	desc = nfa_colonial.15.d
+	#picture = 
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #French Community
+		name = nfa_colonial.15.a
+		trigger = {
+			has_government = social_liberal
+		}
+		set_country_flag = NFA_french_community
+		complete_national_focus = NFA_towards_guided_autonomy
+		hidden_effect = {
+			country_event = {
+				id = nfa_colonial.31
+				days = 90
+				random_days = 10
+			}	
+		}
+	}
+	option = { #French Union
+		name = nfa_colonial.15.b
+		set_country_flag = NFA_french_union
+		complete_national_focus = NFA_fulfilling_the_mission_civilisatrice
+	}
+}
+
+country_event = { ###The first Senate of the Union
+	id = nfa_colonial.16
+	title = nfa_colonial.16.t
+	desc = nfa_colonial.16.d
+	#picture = 
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #French Community
+		name = nfa_colonial.16.a
+		add_to_variable = { 
+			NFA_reform_process_var = 1 
+			tooltip = NFA_reform_process_var_tt
+		}
+	}
+}
+
+country_event = { ###Protests in Sétif
+	id = nfa_colonial.17
+	title = nfa_colonial.17.t
+	desc = nfa_colonial.17.d
+	#picture = 
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #They will pay
+		name = nfa_colonial.17.a
+		460 = { add_resistance = 25 }
+		hidden_effect = {
+			country_event = {
+				id = nfa_colonial.18
+				days = 7
+			}
+			country_event = {
+				id = nfa_colonial.1
+				days = 190
+				random_days = 10
+			}
+		}	
+	}
+}
+
+country_event = { ###French Settlers Killed by Algerian Protesters
+	id = nfa_colonial.18
+	title = nfa_colonial.18.t
+	desc = nfa_colonial.18.d
+	#picture = 
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #Respond Harshly
+		name = nfa_colonial.18.a
+		
+		hidden_effect = {
+			country_event = {
+				id = nfa_colonial.19
+				days = 5
+			}
+		}	
+	}
+
+	option = { #Respond Softly
+		name = nfa_colonial.18.b
+		trigger = {
+			has_government = social_liberal
+		}
+		hidden_effect = {
+			country_event = {
+				id = nfa_colonial.20
+				days = 5
+			}
+		}
+	}	
+}
+
+country_event = { ###Thousands of ALgerians Killed in Reprisals
+	id = nfa_colonial.19
+	title = nfa_colonial.19.t
+	desc = nfa_colonial.19.d
+	#picture = 
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #They started it!
+		name = nfa_colonial.19.a
+		# if = {
+		# 	limit = {
+		# 		check_variable = { NFA_reform_process_var > 0 }
+		# 	}
+		# 	add_to_variable = { 
+		# 		NFA_reform_process_var = -1 
+		# 		tooltip = NFA_reform_process_var_tt
+		# 	}
+		# }
+		add_manpower = -6000
+		460 = { add_resistance = -30 add_compliance = 5 }
+		899 = { add_resistance = 10 add_compliance = -10 }
+		513 = { add_resistance = 10 add_compliance = -10 }
+		898 = { add_resistance = 10 add_compliance = -10 }
+		459 = { add_resistance = 10 add_compliance = -10 }
+		458 = { add_resistance = 10 add_compliance = -10 }
+		665 = { add_resistance = 10 add_compliance = -10 }
+		news_event = {
+			id = nfa_colonial.37
+		}
+	}
+}
+
+country_event = { ###Hundreds of ALgerians Killed in Reprisals
+	id = nfa_colonial.20
+	title = nfa_colonial.20.t
+	desc = nfa_colonial.20.d
+	#picture = 
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #They started it!
+		name = nfa_colonial.20.a
+		add_political_power = -25
+		add_manpower = -600
+		460 = { add_resistance = -10 add_compliance = -5 }
+		899 = { add_resistance = 5 add_compliance = -5 }
+		513 = { add_resistance = 5 add_compliance = -5 }
+		898 = { add_resistance = 5 add_compliance = -5 }
+		459 = { add_resistance = 5 add_compliance = -5 }
+		458 = { add_resistance = 5 add_compliance = -5 }
+		665 = { add_resistance = 5 add_compliance = -5 }
+		hidden_effect = {
+			country_event = {
+				id = nfa_colonial.21
+				days = 14
+			}
+		}
+	}
+}
+
+country_event = { ###The PSF Protests Government Inaction in Algeria
+	id = nfa_colonial.21
+	title = nfa_colonial.21.t
+	desc = nfa_colonial.21.d
+	#picture = 
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #Accept criticism
+		name = nfa_colonial.21.a
+		add_political_power = -40
+		add_popularity = {
+			ideology = social_liberal
+			popularity = -0.025
+		}
+		add_popularity = {
+			ideology = social_conservative
+			popularity = 0.025
+		}
+	}
+
+	option = { #Fine
+		name = nfa_colonial.21.b
+		add_political_power = 10
+		hidden_effect = {
+			country_event = {
+				id = nfa_colonial.22
+				days = 14
+			}
+		}
+	}
+}
+
+country_event = { ###French Reprisals in Algeria kill thousands
+	id = nfa_colonial.22
+	title = nfa_colonial.22.t
+	desc = nfa_colonial.22.d
+	#picture = 
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #They started it!
+		name = nfa_colonial.22.a
+		# if = {
+		# 	limit = {
+		# 		check_variable = { NFA_reform_process_var > 0 }
+		# 	}
+		# 	add_to_variable = { 
+		# 		NFA_reform_process_var = -1 
+		# 		tooltip = NFA_reform_process_var_tt
+		# 	}
+		# }
+		add_manpower = -6000
+		460 = { add_resistance = -20 add_compliance = 5 }
+		899 = { add_resistance = 10 add_compliance = -5 }
+		513 = { add_resistance = 10 add_compliance = -5 }
+		898 = { add_resistance = 10 add_compliance = -5 }
+		459 = { add_resistance = 10 add_compliance = -5 }
+		458 = { add_resistance = 10 add_compliance = -5 }
+		665 = { add_resistance = 10 add_compliance = -5 }
+		news_event = {
+			id = nfa_colonial.37
+		}
+	}
+}
+
+country_event = { ###Formation of the UMDA
+	id = nfa_colonial.23
+	title = nfa_colonial.23.t
+	desc = nfa_colonial.23.d
+	#picture = 
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #Hopefully they shall be an ally
+		name = nfa_colonial.23.a
+	}
+}
+
+country_event = { ###Ferhat Abbas elected to the National Assembly
+	id = nfa_colonial.24
+	title = nfa_colonial.24.t
+	desc = nfa_colonial.24.d
+	#picture = 
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #Together we can work towards reform
+		name = nfa_colonial.24.a
+	}
+}
+
+country_event = { ###Formation of the Organisation spéciale
+	id = nfa_colonial.25
+	title = nfa_colonial.25.t
+	desc = nfa_colonial.25.d
+	#picture = 
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #Uh oh
+		name = nfa_colonial.25.a
+		hidden_effect = {
+			country_event = {
+				id = nfa_colonial.26
+				days = 14
+			}
+		}
+	}
+}
+
+country_event = { ###Bank robbed by Ahmed Ben Bella for the OS
+	id = nfa_colonial.26
+	title = nfa_colonial.26.t
+	desc = nfa_colonial.26.d
+	#picture = 
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #Hey! Thats ours!
+		name = nfa_colonial.26.a
+		if = {
+			limit = {
+				check_variable = { NFA_reform_process_var > 0 }
+			}
+			add_to_variable = { 
+				NFA_reform_process_var = -1 
+				tooltip = NFA_reform_process_var_tt
+			}
+		}
+		hidden_effect = {
+			country_event = {
+				id = nfa_colonial.38
+				days = 313
+				random_days = 14
+			}
+		}
+	}
+}
+
+country_event = { ###Formation of La Main Rouge?
+	id = nfa_colonial.27
+	title = nfa_colonial.27.t
+	desc = nfa_colonial.27.d
+	#picture = 
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #Lets do it
+		name = nfa_colonial.27.a
+		set_country_flag = NFA_formed_LMR
+		hidden_effect = {
+			country_event = {
+				id = nfa_colonial.28
+				days = 90
+				random_days = 10
+			}
+		}
+	}
+	option = { #No, its too dangerous
+		name = nfa_colonial.27.b
+		trigger = {
+			has_government = social_liberal
+		}
+		#lead to further promenince of Farhat Hached
+	}
+}
+
+country_event = { ###LMR raids Tunisian partisans
+	id = nfa_colonial.28
+	title = nfa_colonial.28.t
+	desc = nfa_colonial.28.d
+	#picture = 
+	is_triggered_only = yes
+
+	option = { #Excellent
+		name = nfa_colonial.28.a
+		ai_chance = { base = 100 }
+		random_owned_state = {
+			limit = {
+				state = 458
+				state = 665
+			}
+			add_resistance = -5
+			add_resistance_target = -5
+		}
+		hidden_effect = {
+			random_list = {
+				80 = {
+					country_event = {
+						id = nfa_colonial.28
+						days = 180
+						random_days = 18
+					}
+				}
+				15 = {
+					country_event = {
+						id = nfa_colonial.29
+						days = 180
+						random_days = 18
+					}
+				}
+				5 = {
+					country_event = {
+						id = nfa_colonial.30
+						days = 180
+						random_days = 18
+					}
+				}
+			}
+			country_event = {
+				id = nfa_colonial.33
+				days = 100
+				random_days = 25
+			}
+		}
+	}
+
+	option = { #that's enough
+	
+	ai_chance = { base = 0
+				modifier = {
+					has_country_flag = NFA_Hached_Failed
+					add = 50
+				} }
+		name = nfa_colonial.28.b
+	}
+}
+
+country_event = { ###The assasination of Farhat Hached
+	id = nfa_colonial.29
+	title = nfa_colonial.29.t
+	desc = nfa_colonial.29.d
+	#picture = 
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #This is not what we meant (loc should vary here)
+		name = nfa_colonial.29.a
+		if = {
+			limit = {
+				check_variable = { NFA_reform_process_var > 0 }
+			}
+			add_to_variable = { 
+				NFA_reform_process_var = -1 
+				tooltip = NFA_reform_process_var_tt
+			}
+		}
+		if = {
+			limit = {
+				has_country_flag = NFA_Hached_Failed
+			}
+			hidden_effect = {
+				country_event = {
+					id = nfa_colonial.28
+					days = 180
+					random_days = 18
+				}	
+			}
+		}
+	}
+}
+
+country_event = { ###The assasination of Farhat Hached fails
+	id = nfa_colonial.30
+	title = nfa_colonial.30.t
+	desc = nfa_colonial.30.d
+	#picture = 
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #This is not what we meant, shut down the LMR
+		name = nfa_colonial.30.a
+		trigger = {
+			has_government = social_liberal
+		}
+				
+	}
+	option = { #Damn, shouldda aimed better
+		name = nfa_colonial.30.b
+		set_country_flag = NFA_Hached_Failed
+		hidden_effect = {
+			country_event = {
+				id = nfa_colonial.29
+				days = 200
+				random_days = 40
+			}
+		}
+	}
+}
+
+country_event = { ###Passage of the Loi-Cadre
+	id = nfa_colonial.31
+	title = nfa_colonial.31.t
+	desc = nfa_colonial.31.d
+	#picture = 
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #TThe First Step towards Reform
+		name = nfa_colonial.31.a
+		add_to_variable = { 
+			NFA_reform_process_var = 1 
+			tooltip = NFA_reform_process_var_tt
+		}  
+	}
+}
+country_event = { ###The Constantine Plan
+	id = nfa_colonial.32
+	title = nfa_colonial.32.t
+	desc = nfa_colonial.32.d
+	#picture = 
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #Perhaps this will make things more equal
+		name = nfa_colonial.32.a
+		add_political_power = -75
+		459 = {
+			add_resistance = -5
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
+		460 = {
+			add_resistance = -5
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
+		898 = {
+			add_resistance = -5
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
+		add_to_variable = { 
+			NFA_reform_process_var = 1 
+			tooltip = NFA_reform_process_var_tt
+		}  
+	}
+	option = { #Its too expensive
+		name = nfa_colonial.32.b
+
+	}
+}
+
+country_event = { ###The Assassination of Améziane Aït Ahcène
+	id = nfa_colonial.33
+	title = nfa_colonial.33.t
+	desc = nfa_colonial.33.d
+	#picture = 
+	is_triggered_only = yes
+	fire_only_once = yes
+
+
+	option = { #The price of plausible deniability
+		name = nfa_colonial.33.a
+		GER = {
+			country_event = {
+				id = nfa_colonial.34
+				hours = 8
+			}
+		}
+		hidden_effect = {
+			news_event = {
+				id = worldnews.85
+				days = 1
+			}
+		}
+	}
+}
+
+country_event = { ###GER notification of the Assassination of Améziane Aït Ahcène
+	id = nfa_colonial.34
+	title = nfa_colonial.34.t
+	desc = nfa_colonial.34.d
+	#picture = 
+	is_triggered_only = yes
+	fire_only_once = yes
+
+
+	option = { #Goodness
+		name = nfa_colonial.34.a
+	}
+}
+
+country_event = { ###Ferhat Abbas calls for a moderate approach to decolonization
+	id = nfa_colonial.35
+	title = nfa_colonial.35.t
+	desc = nfa_colonial.35.d
+	#picture = 
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #Together we can work towards reform
+		name = nfa_colonial.35.a
+		trigger = {
+			has_government = social_liberal
+		}
+		add_to_variable = { 
+			NFA_reform_process_var = 1 
+			tooltip = NFA_reform_process_var_tt
+		}
+	}
+	option = { #Together we can work towards reform
+		name = nfa_colonial.35.b
+		trigger = {
+			has_government = social_conservative
+		}
+	}
+}
+
+news_event = { #death of Moncef Bey
+	id = nfa_colonial.36
+	title = nfa_colonial.36.t
+	desc = nfa_colonial.36.d
+	picture = GFX_ne_NFA_tunis_mourns
+	is_triggered_only = yes
+	
+	option = {
+		name = nfa_colonial.36.a
+	}
+}
+
+
+news_event = { #Setif makes global news
+	id = nfa_colonial.37
+	title = nfa_colonial.37.t
+	desc = nfa_colonial.37.d
+	picture = GFX_ne_NFA_setif
+	is_triggered_only = yes
+	major = yes	
+	option = {
+		name = nfa_colonial.37.a
+	}
+}
+
+country_event = { ###Ahmed Ben Bella captured
+	id = nfa_colonial.38
+	title = nfa_colonial.38.t
+	desc = nfa_colonial.38.d
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #Finally a success out of Algeria!
+		name = nfa_colonial.38.a
+		add_political_power = 25
+		hidden_effect = {
+			country_event = {
+				id = nfa_colonial.39
+				days = 380
+				random_days = 25
+			}	
+		}
+	}
+}
+
+country_event = { ###Ahmed Ben Bella escapes
+	id = nfa_colonial.39
+	title = nfa_colonial.39.t
+	desc = nfa_colonial.39.d
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #Goddamnit!
+		name = nfa_colonial.39.a
+		if = {
+			limit = {
+				check_variable = { NFA_reform_process_var > 0 }
+			}
+			add_to_variable = { 
+				NFA_reform_process_var = -1 
+				tooltip = NFA_reform_process_var_tt
+			}
+		}
+	}
+}
+
+
+country_event = { ###Tunisian Revolution
+	id = nfa_colonial.40
+	title = nfa_colonial.40.t
+	desc = nfa_colonial.40.d
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #Goddamnit!
+		name = nfa_colonial.40.a
+		hidden_effect = {
+			coal_rev_all = yes
+			add_popularity = {
+				ideology = revolutionary_republican
+				popularity = 0.2
+			}
+			add_popularity = {
+				ideology = social_liberal
+				popularity = 0.05
+			}
+			add_popularity = {
+				ideology = market_liberal
+				popularity = 0.05
+			}
+			add_popularity = {
+				ideology = social_democrat
+				popularity = 0.05
+			}
+		}
+
+		meta_effect = {
+			text = {
+				set_politics = {
+					ruling_party = revolutionary_republican
+					last_election = "[CURRENT_DATE]"
+					election_frequency = 48
+					elections_allowed = yes
+				}
+			}
+			CURRENT_DATE = "[GetDate]"
+		}
+		coal_add_soc_dem = yes
+		coal_add_mar_lib = yes
+		coal_add_soc_lib = yes
+		remove_ideas = KRG_authoritarian_system
+		add_ideas = KRG_presidential_democracy
+
+		
+
+		if = {
+			limit = { is_puppet_of = NFA }
+			end_puppet = THIS
+		}
+		news_event = {
+			id = nfa_colonial.41
+		}
+	}
+}
+
+news_event = { #Tunisian Revolution
+	id = nfa_colonial.41
+	title = nfa_colonial.41.t
+	desc = nfa_colonial.41.d
+	picture = GFX_ne_NFA_Bourguiba
+	is_triggered_only = yes
+	major = yes	
+	option = {
+		name = nfa_colonial.41.a
+	}
+}
+
+
+#Election Events
+country_event = { ### 1950 elections
+	id = nfa_elections.1
+	title = nfa_elections.1.t
+	desc = nfa_elections.1.d
+	picture = GFX_event_picture
+	immediate = {
+		hidden_effect = {
+			country_event = {
+				id = nfa_colonial.24
+				days = 10
+			}	
+		}	
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = nfa_elections.1.a #Radicals
+		set_country_flag = NFA_parliamentary_path
+		add_popularity = {
+			ideology = social_liberal
+			popularity = 0.075
+		}
+		meta_effect = {
+			text = {
+				set_politics = {
+					ruling_party = social_liberal
+					last_election = "[CURRENT_DATE]"
+					election_frequency = 36
+					elections_allowed = yes
+				}
+			}
+			CURRENT_DATE = "[GetDate]"
+		}
+		complete_national_focus = NFA_new_republican_centre
+		coal_add_mar_lib = yes
+		remove_all_ministers = yes
+		#TODO add ministers
+		hidden_effect = {
+			country_event = {
+				id = nfa_elections.2
+				days = 800
+			}	
+			news_event = {
+				id = worldnews.73
+			}
+		}
+
+		ai_chance = {
+			base = 55
+			modifier = {
+				has_game_rule = {
+					rule = NFA_1950_ELECTIONS
+					option = NFA_1950_ELECTIONS_PR
+				}
+				factor = 1000
+			}
+		}
+	}
+	option = {
+		name = nfa_elections.1.b #PSF
+		meta_effect = {
+			text = {
+				set_politics = {
+					ruling_party = social_conservative
+					last_election = "[CURRENT_DATE]"
+					election_frequency = 36
+					elections_allowed = yes
+				}
+			}
+			CURRENT_DATE = "[GetDate]"
+		}
+		add_popularity = {
+			ideology = social_conservative
+			popularity = 0.15
+		}
+		set_country_flag = NFA_corporatist_path
+		complete_national_focus = NFA_the_colonels_final_triumph
+		add_ideas = NFA_uncertain_succession
+		remove_all_ministers = yes
+		add_ideas = NFA_Francois_de_la_Rocque_hog_sco
+		#TODO add ministers
+		hidden_effect = {
+			news_event = {
+				id = worldnews.74
+			}	
+			country_event = {
+				id = krg_nfa.15
+				days = 30
+			}
+		}
+		ai_chance = {
+			base = 45
+			modifier = {
+				has_game_rule = {
+					rule = NFA_1950_ELECTIONS
+					option = NFA_1950_ELECTIONS_PSF
+				}
+				factor = 1000
+			}
+		}
+	}
+}
+country_event = { ### 1953 Radical Candidate
+	id = nfa_elections.2
+	title = nfa_elections.2.t
+	desc = nfa_elections.2.d
+	picture = GFX_event_picture
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = nfa_elections.2.a #Left
+		set_country_flag = NFA_faure_candidate
+
+		ai_chance = {
+			base = 50
+			modifier = {
+				has_game_rule = {
+					rule = NFA_1953_ELECTIONS
+					option = NFA_1953_ELECTIONS_PR_FAURE
+				}
+				factor = 1000
+			}
+		}
+	}
+
+	option = {
+		name = nfa_elections.2.b #Compromise
+		set_country_flag = NFA_Gaillard_candidate
+
+		ai_chance = {
+			base = 50
+			modifier = {
+				has_game_rule = {
+					rule = NFA_1953_ELECTIONS
+					option = NFA_1953_ELECTIONS_PR_GALLIARD
+				}
+				factor = 1000
+			}
+		}
+	}
+}
+country_event = { ### 1953 elections
+	id = nfa_elections.3
+	title = nfa_elections.3.t
+	desc = nfa_elections.3.d
+	picture = GFX_event_picture
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = nfa_elections.3.a #Radicals
+		add_popularity = {
+			ideology = social_liberal
+			popularity = 0.075
+		}
+		meta_effect = {
+			text = {
+				set_politics = {
+					ruling_party = social_liberal
+					last_election = "[CURRENT_DATE]"
+					election_frequency = 36
+					elections_allowed = yes
+				}
+			}
+			CURRENT_DATE = "[GetDate]"
+		}
+		remove_all_ministers = yes
+		if = {
+			limit = {
+				has_country_flag = NFA_faure_candidate
+			}
+			add_ideas = {
+				NFA_Edgar_Faure_hog_sli
+			}
+			#TODO add ministers
+		}
+		else_if = {
+			limit = {
+				has_country_flag = NFA_Gaillard_candidate
+			}
+			add_ideas = NFA_Felix_Gaillard_hog_sli
+			#TODO add ministers
+		}
+		hidden_effect = {
+			news_event = {
+				id = worldnews.75
+			}	
+		}
+
+		ai_chance = {
+			base = 50
+			modifier = {
+				NOT = {
+					has_game_rule = {
+						rule = NFA_1953_ELECTIONS
+						option = DEFAULT
+					}
+					has_game_rule = {
+						rule = NFA_1953_ELECTIONS
+						option = NFA_1953_ELECTIONS_PSF
+					}
+				}
+				factor = 1000
+			}
+		}
+	}
+	option = {
+		name = nfa_elections.3.b #PSF
+		meta_effect = {
+			text = {
+				set_politics = {
+					ruling_party = social_conservative
+					last_election = "[CURRENT_DATE]"
+					election_frequency = 36
+					elections_allowed = yes
+				}
+			}
+			CURRENT_DATE = "[GetDate]"
+		}
+		add_popularity = {
+			ideology = social_conservative
+			popularity = 0.20
+		}
+		coal_add_mar_lib = yes
+		remove_all_ministers = yes
+		add_ideas = NFA_Francois_de_la_Rocque_hog_sco
+		#TODO add ministers
+		hidden_effect = {
+			news_event = {
+				id = worldnews.76
+			}	
+		}
+
+		ai_chance = {
+			base = 50
+			modifier = {
+				has_game_rule = {
+					rule = NFA_1953_ELECTIONS
+					option = NFA_1953_ELECTIONS_PSF
+				}
+				factor = 1000
+			}
+		}
+	}
+}
+
+country_event = { ### 1951 Presidential Elections
+	id = nfa_elections.4 
+	title = nfa_elections.4.t
+	desc = nfa_elections.4.d
+	picture = GFX_event_picture
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = nfa_elections.4.a #DLR is our man!
+		add_popularity = {
+			ideology = social_conservative
+			popularity = 0.1
+		}
+		set_politics = {
+			ruling_party = social_conservative
+			elections_allowed = yes
+			election_frequency = 84
+		}
+		retire_character = NFA_albert_sarraut
+		NFA_Francois_de_la_Rocque = {
+			promote_character = yes
+		}
+		NFA_Michel_Clemenceau = {
+			promote_character = yes
+		}
+		NFA_Pierre_Mendes_France = {
+			promote_character = yes
+		}
+		NFA_edgar_faure = {
+			promote_character = yes
+		}
+		clr_country_flag = country_show_pm
+		swap_ideas = {
+			remove_idea = KRG_parliamentary_democracy
+			add_idea = KRG_presidential_democracy
+		} 
+		#TODO set ministers
+		hidden_effect = {
+			news_event = {
+				id = worldnews.78
+			}	
+		}
+
+	}
+	
+}

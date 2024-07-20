@@ -1,0 +1,684 @@
+###Scripted effects like this function as setup for the issue (Section 2 of https://discord.com/channels/465297966685618177/465298810780778515/1054473932964630558)
+###Example:
+#accord_issue_[ID]_effect = {
+#    set_variable = {
+#        global.accord_issue = [ID]
+#    }
+#    for_each_scope_loop = {
+#        array = global.accord_voting_country_array #this chunk sets all nations voting intention, in this example, all would vote yes
+#        set_variable = {
+#            accord_ai_vote_choice = 1 #1 is yes, 2 is abstain, 3 is no
+#        }
+#    }
+#    accord_screen_refresh = yes
+#}
+ENT_accord_set_leader = {
+	clear_global_event_target = KRG_entente_leader
+	CAN = {
+		get_highest_scored_country_temp = { scorer = player_entente_leader_scorer var = highest_scored_country }
+		if = {
+			limit = { NOT = { check_variable = { highest_scored_country = 0 } } }
+			var:highest_scored_country = {
+				save_global_event_target_as = KRG_entente_leader
+				set_faction_leader = yes
+			}
+		}
+	}
+}
+
+accord_issue_1_effect = {
+	set_variable = {
+		global.accord_issue = 1
+	}
+	for_each_scope_loop = {
+		array = global.accord_voting_country_array
+		set_variable = {
+			accord_ai_vote_choice = 1
+		}
+	}
+	accord_screen_refresh = yes
+}
+
+accord_issue_1_effect_pass = {
+	CAN = {
+		SPR = {
+			set_temp_variable = {
+				temp_level = 4
+			}
+			set_accord_alignment = yes
+		}
+	}
+	news_event = {
+		id = worldnews.400
+	}
+	add_to_array = {
+		global.accord_voting_country_array = SPR
+	}
+}
+
+accord_issue_2_effect = {
+	set_variable = {
+		global.accord_issue = 2
+	}
+	for_each_scope_loop = {
+		array = global.accord_voting_country_array
+		set_variable = {
+			accord_ai_vote_choice = 1
+		}
+	}
+	accord_screen_refresh = yes
+}
+
+accord_issue_2_effect_pass = {
+	for_each_scope_loop = {
+		array = global.accord_voting_country_array
+		add_ideas = Accord_volunteers
+	}
+}
+
+accord_issue_ccw_lend_lease_effect = {
+	set_variable = {
+		global.accord_issue = 3
+	}
+	for_each_scope_loop = {
+		array = global.accord_voting_country_array
+		set_variable = {
+			accord_ai_vote_choice = 1
+		}
+	}
+	accord_screen_refresh = yes
+}
+
+accord_issue_ccw_lend_lease_effect_pass = {
+	set_global_flag = accord_ccw_lend_lease_pass
+}
+
+accord_issue_ccw_limited_mission_effect = {
+	set_variable = {
+		global.accord_issue = 4
+	}
+	for_each_scope_loop = {
+		array = global.accord_voting_country_array
+		set_variable = {
+			accord_ai_vote_choice = 1
+		}
+	}
+	accord_screen_refresh = yes
+}
+
+accord_issue_ccw_limited_mission_effect_pass = {
+	set_global_flag = accord_ccw_limited_mission_pass
+	ENT = {
+		CHI = { save_event_target_as = volunteer_target }
+		send_volunteers_to_TARGET = yes
+	}
+	GER = {
+		FNG = { save_event_target_as = volunteer_target }
+		send_volunteers_to_TARGET = yes
+	}
+}
+
+accord_issue_ccw_send_volunteers_effect = {
+	set_variable = {
+		global.accord_issue = 5
+	}
+	for_each_scope_loop = {
+		array = global.accord_voting_country_array
+		set_variable = {
+			accord_ai_vote_choice = 1
+		}
+	}
+	accord_screen_refresh = yes
+}
+
+accord_issue_ccw_send_volunteers_effect_pass = {
+	set_global_flag = accord_ccw_volunteers_pass
+	for_each_scope_loop = {
+		array = CAN.allies
+		CHI = { save_event_target_as = volunteer_target }
+		send_volunteers_to_TARGET = yes
+	}
+	for_each_scope_loop = {
+		array = GER.allies
+		FNG = { save_event_target_as = volunteer_target }
+		send_volunteers_to_TARGET = yes
+	}
+}
+
+accord_issue_6_effect = {
+	set_variable = {
+		global.accord_issue = 6
+	}
+	for_each_scope_loop = {
+		array = global.accord_voting_country_array
+		random_list = {
+			20 = {
+				set_variable = {
+					accord_ai_vote_choice = 1
+				}
+				# 20% yes
+			}
+			50 = {
+				set_variable = {
+					accord_ai_vote_choice = 2
+				}
+				# 50% abstain
+			}
+			30 = {
+				set_variable = {
+					accord_ai_vote_choice = 3
+				}
+				# 30% no
+			}
+		}
+	}
+	accord_screen_refresh = yes
+}
+
+accord_issue_6_effect_pass = {
+	third_weltkrieg = yes
+	PCO = {
+		set_temp_variable = { temp_level = 4 }
+		set_accord_alignment = yes 
+	}
+}
+
+accord_issue_acw_send_volunteers_effect = {
+	set_variable = {
+		global.accord_issue = 7
+	}
+	for_each_scope_loop = {
+		array = global.accord_voting_country_array
+		set_variable = {
+			accord_ai_vote_choice = 1
+		}
+	}
+	accord_screen_refresh = yes
+}
+
+accord_issue_acw_send_volunteers_effect_pass = {
+	for_each_scope_loop = {
+		array = global.accord_voting_country_array
+		set_country_flag = ACW_can_send_volunteers
+		add_ideas = accord_acw_volunteers_ideas
+	}
+}
+
+accord_issue_acw_declare_on_aus_effect = {
+	set_variable = {
+		global.accord_issue = 8
+	}
+	for_each_scope_loop = {
+		array = global.accord_voting_country_array
+		set_variable = {
+			accord_ai_vote_choice = 1
+		}
+	}
+	accord_screen_refresh = yes
+}
+
+accord_issue_acw_declare_on_aus_effect_pass = {
+	if = {
+		limit = {
+			OR = {
+				country_exists = NEE
+				country_exists = CAL
+				country_exists = GLG
+			}
+		}
+		CAN = {
+			declare_war_on = {
+				target = TEX
+				type = annex_everything
+			}	
+		}
+		for_each_scope_loop = {
+			array = global.accord_voting_country_array
+			add_to_war = {
+				targeted_alliance = CAN
+				enemy = TEX
+			}
+		}
+	}
+}
+
+accord_issue_colonial_policy_effect = {
+	set_variable = {
+		global.accord_issue = 9
+	}
+	for_each_scope_loop = {
+		array = global.accord_voting_country_array
+		set_variable = {
+			accord_ai_vote_choice = 1
+		}
+	}
+	accord_screen_refresh = yes
+}
+
+accord_issue_colonial_policy_effect_pass = {
+	set_global_flag = accord_colonial_policy_decolonization
+	hidden_effect = {
+		news_event = {
+			id = worldnews.90
+			days = 1
+		}
+	}
+	clr_global_flag = accord_colonial_policy_pass
+}
+
+accord_issue_10_effect = {
+	set_variable = {
+		global.accord_issue = 10
+	}
+	for_each_scope_loop = {
+		array = global.accord_voting_country_array		#this chunk sets all nations voting intention, in this example, all would vote yes
+		set_variable = {
+			accord_ai_vote_choice = 1			#1 is yes, 2 is abstain, 3 is no
+		}
+	}
+	accord_screen_refresh = yes
+}
+
+accord_issue_10_effect_pass = {
+	ITA = {
+		add_ideas = KRG_italy_international_war_support_idea
+	}
+}
+
+accord_issue_10_effect_fail = {
+	ITA = {
+		country_event = {
+			id = krg_ita.177
+			days = 10
+		}
+	}
+}
+
+accord_end_voting_effect = {
+	##Runs when a voting mission ends, two sections for vote passing and failing
+	if = {
+		limit = {
+			check_variable = {
+				global.accord_yes_vote > global.accord_no_vote
+			}
+		}
+		##Pass section, Put all your success effects here! Example below: (Section 4 of https://discord.com/channels/465297966685618177/465298810780778515/1054473932964630558)
+		#else_if = {
+		#    limit = {
+		#        check_variable = {
+		#            global.accord_issue = [ID]
+		#        }
+		#    }
+		#    [pass effect] = yes
+		#}
+		if = {
+			limit = {
+				check_variable = {
+					global.accord_issue = 1
+				}
+			}
+			accord_issue_1_effect_pass = yes
+		}
+		else_if = {
+			limit = {
+				check_variable = {
+					global.accord_issue = 2
+				}
+			}
+			accord_issue_2_effect_pass = yes
+		}
+		else_if = {
+			limit = {
+				check_variable = {
+					global.accord_issue = 3
+				}
+			}
+			accord_issue_ccw_lend_lease_effect_pass = yes
+		}
+		else_if = {
+			limit = {
+				check_variable = {
+					global.accord_issue = 4
+				}
+			}
+			accord_issue_ccw_limited_mission_effect_pass = yes
+		}
+		else_if = {
+			limit = {
+				check_variable = {
+					global.accord_issue = 5
+				}
+			}
+			accord_issue_ccw_send_volunteers_effect_pass = yes
+		}
+		else_if = {
+			limit = {
+				check_variable = {
+					global.accord_issue = 6
+				}
+			}
+			accord_issue_6_effect_pass = yes
+		}
+		else_if = {
+			limit = {
+				check_variable = {
+					global.accord_issue = 7
+				}
+			}
+			accord_issue_acw_send_volunteers_effect_pass = yes
+		}
+		else_if = {
+			limit = {
+				check_variable = {
+					global.accord_issue = 8
+				}
+			}
+			accord_issue_acw_declare_on_aus_effect_pass = yes
+		}
+		else_if = {
+			limit = {
+				check_variable = {
+					global.accord_issue = 9
+				}
+			}
+			accord_issue_colonial_policy_effect_pass = yes
+		}
+		else_if = {
+			limit = {
+				check_variable = {
+					global.accord_issue = 10
+				}
+			}
+			accord_issue_10_effect_pass = yes
+		}
+	}
+	else_if = {
+		limit = {
+			OR = {
+				check_variable = {
+					global.accord_yes_vote < global.accord_no_vote
+				}
+				check_variable = {
+					global.accord_yes_vote = global.accord_no_vote
+				}
+			}
+		}
+		##Fail section. Put all your fail effects here! Example below: (Optional section of https://discord.com/channels/465297966685618177/465298810780778515/1054473932964630558)
+		#else_if = {
+		#    limit = {
+		#        check_variable = {
+		#            global.accord_issue = [ID]
+		#        }
+		#    }
+		#    [fail effect] = yes
+		#}
+		else_if = {
+			limit = {
+				check_variable = {
+					global.accord_issue = 10
+				}
+			}
+			accord_issue_10_effect_fail = yes
+		}
+	}
+}
+
+###If you are not touching the system itself, you don't need to touch anything below here.
+accord_initial = {
+	clear_array = global.accord_voting_major_country_array
+	clear_array = global.accord_voting_country_array
+	clear_array = global.accord_voting_bar_array
+	add_to_array = {
+		global.accord_voting_major_country_array = CAN
+	}
+	add_to_array = {
+		global.accord_voting_major_country_array = NEE
+	}
+	add_to_array = {
+		global.accord_voting_major_country_array = NFA
+	}
+	add_to_array = {
+		global.accord_voting_country_array = AST
+	}
+	add_to_array = {
+		global.accord_voting_country_array = CAN
+	}
+	add_to_array = {
+		global.accord_voting_country_array = ENG
+	}
+	add_to_array = {
+		global.accord_voting_country_array = GRE
+	}
+	add_to_array = {
+		global.accord_voting_country_array = ICE
+	}
+	add_to_array = {
+		global.accord_voting_country_array = JAM
+	}
+	add_to_array = {
+		global.accord_voting_country_array = NEE
+	}
+	add_to_array = {
+		global.accord_voting_country_array = NFA
+	}
+	add_to_array = {
+		global.accord_voting_country_array = PAN
+	}
+	add_to_array = {
+		global.accord_voting_country_array = POR
+	}
+	add_to_array = {
+		global.accord_voting_country_array = SAF
+	}
+	add_to_array = {
+		global.accord_voting_country_array = SIE
+	}
+	add_to_array = {
+		global.accord_voting_country_array = ITA
+	}
+	add_to_array = {
+		global.accord_voting_country_array = TRI
+	}
+	if = {
+		limit = {
+			has_subject_autonomy_feature = yes
+		}
+		every_country = {
+			limit = {
+				has_autonomy_state = krg_joint_entente_mandate
+			}
+			##Changing autonomy states blows up party pops/ruling party, store those to set them later on in the effect.
+			get_current_government_type = yes
+			overlord = {
+				set_autonomy = {
+					target = PREV
+					autonomy_state = krg_joint_accord_mandate
+					end_wars = no
+					end_civil_wars = no
+				}
+				save_event_target_as = on_puppet_master_tag
+				PREV = {
+					standard_on_puppet_effect = yes
+					restore_previous_government_type = yes
+				}
+			}
+		}
+	}
+	add_to_array = {
+		global.accord_voting_bar_array = 1
+	}
+	set_variable = {
+		global.accord_unity = 75
+	}
+	accord_screen_refresh = yes
+}
+
+accord_clear_issue = {
+	clear_array = global.accord_percentage
+	clear_variable = global.accord_yes_vote
+	clear_variable = global.accord_no_vote
+	clear_variable = global.accord_abstain_vote
+	clear_variable = global.accord_issue
+	clear_variable = global.accord_total_vote
+	for_each_scope_loop = {
+		array = global.accord_voting_country_array
+		clr_country_flag = accord_vote_whipped
+		clear_variable = accord_vote
+		clear_variable = accord_vote_block
+		clear_variable = accord_ai_vote_choice
+	}
+	accord_screen_refresh = yes
+}
+
+accord_screen_refresh = {
+	for_each_scope_loop = {
+		array = global.accord_voting_country_array
+		add_to_variable = {
+			show_KRG_accord_voting = 1
+		}
+	}
+}
+
+accord_whip_effect = {
+	set_country_flag = accord_vote_whipped
+	if = {
+		limit = {
+			check_variable = {
+				accord_vote = 1
+			}
+		}
+		subtract_from_variable = {
+			global.accord_yes_vote = 1
+		}
+	}
+	else_if = {
+		limit = {
+			check_variable = {
+				accord_vote = 2
+			}
+		}
+		subtract_from_variable = {
+			global.accord_abstain_vote = 1
+		}
+	}
+	else_if = {
+		limit = {
+			check_variable = {
+				accord_vote = 3
+			}
+		}
+		subtract_from_variable = {
+			global.accord_no_vote = 1
+		}
+	}
+	subtract_from_variable = {
+		global.accord_total_vote = 1
+	}
+	set_variable = {
+		accord_vote = ROOT.accord_vote
+	}
+	if = {
+		limit = {
+			check_variable = {
+				accord_vote = 1
+			}
+		}
+		add_to_variable = {
+			global.accord_yes_vote = 1
+		}
+	}
+	else_if = {
+		limit = {
+			check_variable = {
+				accord_vote = 2
+			}
+		}
+		add_to_variable = {
+			global.accord_abstain_vote = 1
+		}
+	}
+	else_if = {
+		limit = {
+			check_variable = {
+				accord_vote = 3
+			}
+		}
+		add_to_variable = {
+			global.accord_no_vote = 1
+		}
+	}
+	subtract_from_variable = {
+		global.accord_unity = 2
+	}
+	accord_vote_effect = yes
+}
+
+accord_vote_effect = {
+	add_to_variable = {
+		global.accord_total_vote = 1
+	}
+	clear_array = global.accord_percentage
+	add_to_array = {
+		global.accord_percentage = global.accord_yes_vote
+	}
+	divide_variable = {
+		global.accord_percentage^0 = global.accord_total_vote
+	}
+	multiply_variable = {
+		global.accord_percentage^0 = 100
+	}
+	round_variable = global.accord_percentage^0
+	add_to_array = {
+		global.accord_percentage = global.accord_abstain_vote
+	}
+	divide_variable = {
+		global.accord_percentage^1 = global.accord_total_vote
+	}
+	multiply_variable = {
+		global.accord_percentage^1 = 100
+	}
+	round_variable = global.accord_percentage^1
+	set_variable = {
+		global.accord_bar_frame = global.accord_percentage^0
+	}
+	add_to_variable = {
+		global.accord_bar_frame = global.accord_percentage^1
+	}
+	add_to_array = {
+		global.accord_percentage = 100
+	}
+	subtract_from_variable = {
+		global.accord_percentage^2 = global.accord_percentage^0
+	}
+	subtract_from_variable = {
+		global.accord_percentage^2 = global.accord_percentage^1
+	}
+	accord_screen_refresh = yes
+}
+
+accord_collapse = {
+	add_to_array = { global.influence_log = 40 }
+	add_to_array = { global.influence_log_val = -1000 }
+	influence_recalc = yes
+	ENT = {
+		faction_leader = { dismantle_faction = yes }
+	}
+	every_country = {
+		limit = {
+			is_in_or_aligned_with_accord = yes
+		}
+		clear_all_alignments = yes
+	}
+
+	for_each_scope_loop = {
+		array = global.accord_voting_country_array
+		remove_from_array = {
+			array = global.accord_voting_country_array
+			value = FROM
+		}
+	}
+
+	set_global_flag = accord_collapsed
+
+	accord_screen_refresh = yes
+}

@@ -1,0 +1,251 @@
+third_weltkrieg = {
+	set_global_flag = WK3
+	news_event = {
+		id = worldnews.1000
+		days = 0
+	}
+	GER = {
+		declare_war_on = {
+			target = ENT
+			type = annex_everything
+		}
+	}
+	DNF = { country_event = { id = WK3.1 days = 14 } }
+	RUS = { country_event = { id = WK3.1 days = 45 } }
+
+	JAP = { country_event = { id = WK3.1 days = 70 } } #Tenno Heika Banzai!
+
+	TUR = { country_event = { id = WK3.1 days = 180  random_days = 60 } }
+	BRA = { country_event = { id = WK3.1 days = 180  random_days = 60 } }
+	ARG = { country_event = { id = WK3.1 days = 180  random_days = 60 } }
+	NOR = { country_event = { id = WK3.1 days = 180  random_days = 90 } }
+	IND = { country_event = { id = WK3.1 days = 365  random_days = 180 } }
+
+	BUL = { country_event = { id = WK3.1 days = 90  random_days = 60 } }
+	SBL = { country_event = { id = WK3.1 days = 90  random_days = 60 } }
+	LBL = { country_event = { id = WK3.1 days = 90  random_days = 60 } }
+	ROM = { country_event = { id = WK3.1 days = 90  random_days = 60 } }
+	MOR = { country_event = { id = WK3.1 days = 90  random_days = 60 } }
+	ARA = { country_event = { id = WK3.1 days = 90  random_days = 60 } }
+	SWE = { country_event = { id = WK3.1 days = 90  random_days = 60 } }
+
+
+	GER = { diplomatic_relation = { country = DNF relation = guarantee active = no } }
+	DNF = { diplomatic_relation = { country = GER relation = guarantee active = no } }
+	ITA = { diplomatic_relation = { country = DNF relation = guarantee active = no } }
+	DNF = { diplomatic_relation = { country = ITA relation = guarantee active = no } }
+	DNF = { diplomatic_relation = { country = UKR relation = guarantee active = no } }
+	DNF = { diplomatic_relation = { country = POL relation = guarantee active = no } }
+	DNF = { diplomatic_relation = { country = LIT relation = guarantee active = no } } 
+
+	MAF = {
+		if = {
+			limit = { 
+				has_country_flag = MAF_AAPM_total_victory
+			}
+			country_event = {
+				id = MAF.1110
+				days = 15
+			}
+		}
+	}
+}
+
+
+# This can be used normally: TAG = { white_peace_with_ROOT = yes }
+# Remember: ROOT is the country running the current event
+# TAG is the country you want ROOT to completely be at peace with
+# meaning it will ensure peace with all faction members and puppets on either side
+
+white_peace_with_ROOT = {
+	hidden_effect = {
+		save_event_target_as = peace_country
+
+		# first check for a faction leader to white peace with
+		if = {
+			limit = {
+				is_in_faction = yes
+				is_faction_leader = no
+				faction_leader = { has_war_with = ROOT }
+			}
+			set_country_flag = KRG_war_skip
+			faction_leader = {
+				white_peace = ROOT
+			}
+		}
+		if = {
+			limit = {
+				ROOT = {
+					is_in_faction = yes
+					is_faction_leader = no
+					faction_leader = { has_war_with = event_target:peace_country }
+				}
+			}
+			set_country_flag = KRG_war_skip
+			ROOT = {
+				faction_leader = {
+					white_peace = event_target:peace_country
+				}
+			}
+		}
+
+		# then check for an overlord to white peace with
+		if = {
+			limit = {
+				is_subject = yes
+				overlord = { has_war_with = ROOT }
+			}
+			set_country_flag = KRG_war_skip
+			overlord = { white_peace = ROOT }
+		}
+		if = {
+			limit = {
+				ROOT = {
+					is_subject = yes
+					overlord = { has_war_with = event_target:peace_country }
+				}
+			}
+			set_country_flag = KRG_war_skip
+			ROOT = {
+				overlord = {
+					white_peace = event_target:peace_country
+				}
+			}
+		}
+	}
+
+	if = {
+		limit = { has_country_flag = KRG_war_skip }
+		clr_country_flag = KRG_war_skip
+		country_event = { id = krg_political.3  hours = 2 }
+	}
+	else = {
+		white_peace = ROOT
+	}
+
+	hidden_effect = {
+		# now double-check to ensure all faction members are peaced out
+		every_enemy_country = {
+			limit = {
+				OR = {
+					is_in_faction_with = ROOT
+					is_subject_of = ROOT
+					has_subject = ROOT
+				}
+			}
+			country_event = { id = krg_political.2 hours = 2 }
+		}
+		ROOT = {
+			every_enemy_country = {
+				limit = {
+					OR = {
+						is_in_faction_with = event_target:peace_country
+						is_subject_of = event_target:peace_country
+						has_subject = event_target:peace_country
+					}
+				}
+				country_event = { id = krg_political.3 hours = 2 }
+			}
+		}
+	}
+}
+
+# NOTE: "save_event_target_as = white_peace_receiver" needs to be performed first
+# Then you use "TAG = { white_peace_with_TARGET = yes }"
+# TAG is the country you want the event target to completely be at peace with
+# meaning it will ensure peace with all faction members and puppets on either side
+# remember: if you don't use TAG and just use "white_peace_with_TARGET = yes" then the event target is making peace with ROOT
+
+white_peace_with_TARGET = {
+	hidden_effect = {
+		save_event_target_as = peace_country
+
+		# first check for a faction leader to white peace with
+		if = {
+			limit = {
+				is_in_faction = yes
+				is_faction_leader = no
+				faction_leader = { has_war_with = event_target:white_peace_receiver }
+			}
+			set_country_flag = KRG_war_skip
+			faction_leader = {
+				white_peace = event_target:white_peace_receiver
+			}
+		}
+		if = {
+			limit = {
+				event_target:white_peace_receiver = {
+					is_in_faction = yes
+					is_faction_leader = no
+					faction_leader = { has_war_with = event_target:peace_country }
+				}
+			}
+			set_country_flag = KRG_war_skip
+			event_target:white_peace_receiver = {
+				faction_leader = {
+					white_peace = event_target:peace_country
+				}
+			}
+		}
+
+		# then check for an overlord to white peace with
+		if = {
+			limit = {
+				is_subject = yes
+				overlord = { has_war_with = event_target:white_peace_receiver }
+			}
+			set_country_flag = KRG_war_skip
+			overlord = { white_peace = event_target:white_peace_receiver }
+		}
+		if = {
+			limit = {
+				event_target:white_peace_receiver = {
+					is_subject = yes
+					overlord = { has_war_with = event_target:peace_country }
+				}
+			}
+			set_country_flag = KRG_war_skip
+			event_target:white_peace_receiver = {
+				overlord = {
+					white_peace = event_target:peace_country
+				}
+			}
+		}
+	}
+
+	if = {
+		limit = { has_country_flag = KRG_war_skip }
+		clr_country_flag = KRG_war_skip
+		country_event = { id = krg_political.1 hours = 2 }
+	}
+	else = {
+		white_peace = event_target:white_peace_receiver
+	}
+
+	hidden_effect = {
+		# now double-check to ensure all faction members are peaced out
+		every_enemy_country = {
+			limit = {
+				OR = {
+					is_in_faction_with = event_target:white_peace_receiver
+					is_subject_of = event_target:white_peace_receiver
+					has_subject = event_target:white_peace_receiver
+				}
+			}
+			country_event = { id = krg_political.2 hours = 2 }
+		}
+		event_target:white_peace_receiver = {
+			every_enemy_country = {
+				limit = {
+					OR = {
+						is_in_faction_with = event_target:peace_country
+						is_subject_of = event_target:peace_country
+						has_subject = event_target:peace_country
+					}
+				}
+				country_event = { id = krg_political.1 hours = 2 }
+			}
+		}
+	}
+}
+

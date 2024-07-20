@@ -1,0 +1,38 @@
+###########################
+# Welcome to Turkey
+###########################
+
+###########################
+
+add_namespace = krg_tur
+
+country_event = { #Eat Ayntab when Syria go boom
+    id = krg_tur.1
+    title = krg_tur.1.t
+    desc = krg_tur.1.d
+
+    is_triggered_only = yes
+
+    immediate = {
+        log = "[GetDateText]: [Root.GetName]: event krg_tur.1 FROM = [From.GetName]"
+    } 
+
+    option = {
+        name = krg_tur.1.a
+		set_state_controller = 809
+		transfer_state = 809
+        ai_chance = {
+            factor = 9999999999
+        }
+    }
+    
+    option = {
+        name = krg_tur.1.b
+		add_stability = -0.05
+        add_political_power = -100
+        #you would take the land
+        ai_chance = {
+            factor = 0
+        }
+    }
+}

@@ -1,0 +1,1324 @@
+#!gfx:interface/Kalterkrieg/KRG_goals.gfx
+
+shared_focus = {
+	id = ENG_demlab_1950_democraticlabour_victory
+	icon = GFX_generic_new_ideology_socdem
+	x = 12
+	y = 0
+	cost = 0
+
+	ai_will_do = {
+		base = 100
+	}
+
+	available = {
+		always = no
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus ENG_demlab_1950_democraticlabour_victory"
+		unlock_decision_tooltip = ENG_demlab_1950_legal_aid_and_advice_act
+		unlock_decision_tooltip = ENG_demlab_1950_criminal_justice_act
+		unlock_decision_tooltip = ENG_demlab_1950_british_nationality_act
+		unlock_decision_tooltip = ENG_demlab_1950_marriage_act
+		unlock_decision_tooltip = ENG_demlab_1950_local_government_act
+	}
+}
+
+### Politics ###
+
+shared_focus = {
+	id = ENG_demlab_1950_finish_desyndicalisation
+	icon = GFX_generic_syndicalism
+
+	x = -5
+	y = 1
+
+	cost = 5
+
+	relative_position_id = ENG_demlab_1950_democraticlabour_victory
+
+	ai_will_do = {
+		base = 100
+	}
+
+	available = {
+		KRG_ENG_desyndicalisation_basically_finished_trigger = yes
+	}
+
+	prerequisite = {
+		focus = ENG_demlab_1950_democraticlabour_victory
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus ENG_demlab_1950_finish_desyndicalisation"
+		remove_dynamic_modifier = {
+			modifier = ENG_syndicalist_resistance_modifier
+		}		
+		country_event = {
+			id = krg_engdemlab.5
+		}
+	}
+}
+
+shared_focus = {
+	id = ENG_demlab_1950_amend_parliament_act
+	icon = GFX_ENG_parliament
+	x = -7
+	y = 1
+	cost = 5
+
+	ai_will_do = {
+		base = 65
+	}
+
+	relative_position_id = ENG_demlab_1950_democraticlabour_victory
+	
+	prerequisite = {
+		focus = ENG_demlab_1950_democraticlabour_victory
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus ENG_demlab_1950_amend_parliament_act"
+		country_event = {
+			id = krg_engdemlab.10
+		}
+	}
+}
+
+shared_focus = {
+	id = ENG_demlab_1950_repeal_trade_unions_act
+	icon = GFX_tblra_union_agreement
+	x = -7
+	y = 3
+	cost = 5
+
+	ai_will_do = {
+		base = 65
+	}
+
+	relative_position_id = ENG_demlab_1950_democraticlabour_victory
+	
+	bypass = {
+		NOT = { has_country_flag = ENG_trade_union_restrictions }
+	}
+	prerequisite = {
+		focus = ENG_demlab_1950_finish_desyndicalisation
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus ENG_demlab_1950_repeal_trade_unions_act"
+		add_popularity = {
+			ideology = social_democrat
+			popularity = 0.01
+		}
+		add_popularity = {
+			ideology = social_conservative
+			popularity = -0.01
+		}
+	}
+}
+
+shared_focus = {
+	id = ENG_demlab_1950_legalise_socialists
+	icon = GFX_Socialist_Law
+	x = -6
+	y = 2
+	cost = 5
+
+	ai_will_do = {
+		base = 65
+	}
+
+	relative_position_id = ENG_demlab_1950_democraticlabour_victory
+	
+	mutually_exclusive = {
+		focus = ENG_demlab_1950_danger_of_revolution
+	}
+	prerequisite = {
+		focus = ENG_demlab_1950_finish_desyndicalisation
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus ENG_demlab_1950_legalise_socialists"
+		add_stability = 0.02
+		custom_effect_tooltip = ENG_demlab_faction_left_rise_2
+		custom_effect_tooltip = ENG_demlab_faction_centre_rise_1
+		custom_effect_tooltip = ENG_demlab_faction_right_fall_3
+		hidden_effect = {
+			add_to_variable = {
+				var = ENG_demlab_faction_left_var
+				value = 2
+			}
+			add_to_variable = {
+				var = ENG_demlab_faction_centre_var
+				value = 1
+			}
+			add_to_variable = {
+				var = ENG_demlab_faction_right_var
+				value = -3
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = ENG_demlab_1950_danger_of_revolution
+	icon = GFX_ENG_ban_unions
+	x = -4
+	y = 2
+	cost = 5
+
+	ai_will_do = {
+		base = 65
+	}
+
+	relative_position_id = ENG_demlab_1950_democraticlabour_victory
+	
+	mutually_exclusive = {
+		focus = ENG_demlab_1950_legalise_socialists
+	}
+	prerequisite = {
+		focus = ENG_demlab_1950_finish_desyndicalisation
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus ENG_demlab_1950_danger_of_revolution"
+		add_stability = -0.02
+		add_popularity = {
+			ideology = authoritarian_socialist
+			popularity = -0.01
+		}
+		add_popularity = {
+			ideology = radical_socialist
+			popularity = -0.01
+		}
+		add_popularity = {
+			ideology = social_democrat
+			popularity = 0.02
+		}
+		custom_effect_tooltip = ENG_demlab_party_unity_fall
+		custom_effect_tooltip = ENG_demlab_faction_left_fall_2
+		custom_effect_tooltip = ENG_demlab_faction_centre_fall_1
+		custom_effect_tooltip = ENG_demlab_faction_right_rise_3
+		hidden_effect = {
+			add_to_variable = {
+				var = ENG_demlab_faction_left_var
+				value = -2
+			}
+			add_to_variable = {
+				var = ENG_demlab_faction_centre_var
+				value = -1
+			}
+			add_to_variable = {
+				var = ENG_demlab_faction_right_var
+				value = 3
+			}
+			add_to_variable = {
+				var = ENG_demlab_party_unity_var
+				value = -1
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = ENG_demlab_1950_new_type_of_union
+	icon = GFX_ENG_new_british_union
+	x = -5
+	y = 3
+	cost = 5
+
+	ai_will_do = {
+		base = 55
+	}
+
+	relative_position_id = ENG_demlab_1950_democraticlabour_victory
+	available = {
+		has_completed_focus = ENG_demlab_1950_repeal_trade_unions_act
+	}
+	prerequisite = {
+		focus = ENG_demlab_1950_danger_of_revolution
+		focus = ENG_demlab_1950_legalise_socialists
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus ENG_demlab_1950_new_type_of_union"
+		add_ideas = ENG_demlab_new_british_union
+	}
+}
+
+shared_focus = {
+	id = ENG_demlab_1950_deputy_pm
+	icon = GFX_LEP_governor_question
+	x = -6
+	y = 4
+	cost = 8
+
+	ai_will_do = {
+		base = 55
+	}
+
+	relative_position_id = ENG_demlab_1950_democraticlabour_victory
+	available = {
+		date > 1954.1.1
+	}
+	mutually_exclusive = {
+		focus = ENG_demlab_1950_unite_the_party
+	}
+	prerequisite = {
+		focus = ENG_demlab_1950_new_type_of_union
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus ENG_demlab_1950_deputy_pm"
+		country_event = {
+			id = krg_engdemlab.15
+		}
+		custom_effect_tooltip = ENG_demlab_deputy_pm_tt
+	}
+}
+
+shared_focus = {
+	id = ENG_demlab_1950_unite_the_party
+	icon = GFX_goal_generic_neutrality_focus
+	x = -4
+	y = 4
+	cost = 8
+
+	ai_will_do = {
+		base = 55
+	}
+
+	relative_position_id = ENG_demlab_1950_democraticlabour_victory
+	available = {
+		date > 1954.1.1
+	}
+	mutually_exclusive = {
+		focus = ENG_demlab_1950_deputy_pm
+	}
+	prerequisite = {
+		focus = ENG_demlab_1950_new_type_of_union
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus ENG_demlab_1950_unite_the_party"
+		custom_effect_tooltip = ENG_demlab_unite_the_party_tt
+	}
+}
+
+shared_focus = {
+	id = ENG_demlab_1950_rescue_farms
+	icon = GFX_SZC_improvised_farming_machinery
+	x = -3
+	y = 1
+	cost = 5
+
+	ai_will_do = {
+		base = 65
+	}
+
+	relative_position_id = ENG_demlab_1950_democraticlabour_victory
+	available = {
+		has_country_flag = ENG_chancellor_chosen
+		custom_trigger_tooltip = {
+			tooltip = ENG_demlab_party_unity_not_collapsed
+			check_variable = {
+				var = ENG_demlab_party_unity_var
+				value = 1
+				compare = greater_than_or_equals
+			}
+		}
+	}
+	prerequisite = {
+		focus = ENG_demlab_1950_democraticlabour_victory
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus ENG_demlab_1950_rescue_farms"
+		unlock_decision_tooltip = ENG_demlab_1950_agriculture_act
+	}
+}
+
+shared_focus = {
+	id = ENG_demlab_1950_town_planning
+	icon = GFX_KRG_generic_highway
+	x = -3
+	y = 3
+	cost = 5
+
+	ai_will_do = {
+		base = 55
+	}
+
+	relative_position_id = ENG_demlab_1950_democraticlabour_victory
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = ENG_demlab_party_unity_not_collapsed
+			check_variable = {
+				var = ENG_demlab_party_unity_var
+				value = 1
+				compare = greater_than_or_equals
+			}
+		}
+	}
+	prerequisite = {
+		focus = ENG_demlab_1950_rescue_farms
+	}
+	prerequisite = {
+		focus = ENG_demlab_1950_establish_welfare_state
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus ENG_demlab_1950_town_planning"
+		clr_country_flag = ENG_chancellor_chosen
+		unlock_decision_tooltip = ENG_demlab_1950_town_country_planning_act
+		unlock_decision_tooltip = ENG_demlab_1950_trunk_road_act
+	}
+}
+
+shared_focus = {
+	id = ENG_demlab_1950_new_towns
+	icon = GFX_generic_industrial_towns
+	x = -3
+	y = 5
+	cost = 5
+
+	ai_will_do = {
+		base = 55
+	}
+
+	relative_position_id = ENG_demlab_1950_democraticlabour_victory
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = ENG_demlab_party_unity_not_collapsed
+			check_variable = {
+				var = ENG_demlab_party_unity_var
+				value = 1
+				compare = greater_than_or_equals
+			}
+		}
+	}
+	prerequisite = {
+		focus = ENG_demlab_1950_town_planning
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus ENG_demlab_1950_new_towns"
+		unlock_decision_tooltip = ENG_demlab_1950_new_towns_act
+	}
+}
+
+shared_focus = {
+	id = ENG_demlab_1950_public_housing_initative
+	icon = GFX_generic_build_housing
+	x = -2
+	y = 4
+	cost = 5
+
+	ai_will_do = {
+		base = 55
+	}
+
+	relative_position_id = ENG_demlab_1950_democraticlabour_victory
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = ENG_demlab_party_unity_not_collapsed
+			check_variable = {
+				var = ENG_demlab_party_unity_var
+				value = 1
+				compare = greater_than_or_equals
+			}
+		}
+	}
+	prerequisite = {
+		focus = ENG_demlab_1950_town_planning
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus ENG_demlab_1950_public_housing_initative"
+		add_stability = 0.02
+		random_owned_state = {
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
+		random_owned_state = {
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = ENG_demlab_1950_establish_welfare_state
+	icon = GFX_generic_social_reforms
+	x = -1
+	y = 1
+	cost = 5
+
+	ai_will_do = {
+		base = 65
+	}
+
+	relative_position_id = ENG_demlab_1950_democraticlabour_victory
+	available = {
+		has_country_flag = ENG_chancellor_chosen
+		custom_trigger_tooltip = {
+			tooltip = ENG_demlab_party_unity_not_collapsed
+			check_variable = {
+				var = ENG_demlab_party_unity_var
+				value = 1
+				compare = greater_than_or_equals
+			}
+		}
+	}
+	prerequisite = {
+		focus = ENG_demlab_1950_democraticlabour_victory
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus ENG_demlab_1950_establish_welfare_state"
+		unlock_decision_tooltip = ENG_demlab_1950_fire_service_act
+		unlock_decision_tooltip = ENG_demlab_1950_national_assistance_amendment_act
+	}
+}
+
+shared_focus = {
+	id = ENG_demlab_1950_establish_NHS
+	icon = GFX_generic_FIN_promote_the_red_cross
+	x = -2
+	y = 2
+	cost = 5
+
+	ai_will_do = {
+		base = 55
+	}
+
+	relative_position_id = ENG_demlab_1950_democraticlabour_victory
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = ENG_demlab_party_unity_not_collapsed
+			check_variable = {
+				var = ENG_demlab_party_unity_var
+				value = 1
+				compare = greater_than_or_equals
+			}
+		}
+	}
+		prerequisite = {
+			focus = ENG_demlab_1950_establish_welfare_state
+		}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus ENG_demlab_1950_establish_NHS"
+		custom_effect_tooltip = ENG_demlab_faction_left_rise_1
+		custom_effect_tooltip = ENG_demlab_faction_right_fall_1
+		hidden_effect = {
+			add_to_variable = {
+				var = ENG_demlab_faction_left_var
+				value = 1
+			}
+			add_to_variable = {
+				var = ENG_demlab_faction_right_var
+				value = -1
+			}
+		}
+		unlock_decision_tooltip = ENG_demlab_1950_national_health_service_act
+	}
+}
+
+shared_focus = {
+	id = ENG_demlab_1950_rewrite_national_insurance
+	icon = GFX_generic_constitutional_guarantees
+	x = 0
+	y = 2
+	cost = 5
+
+	ai_will_do = {
+		base = 55
+	}
+
+	relative_position_id = ENG_demlab_1950_democraticlabour_victory
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = ENG_demlab_party_unity_not_collapsed
+			check_variable = {
+				var = ENG_demlab_party_unity_var
+				value = 1
+				compare = greater_than_or_equals
+			}
+		}
+	}
+	prerequisite = {
+		focus = ENG_demlab_1950_establish_welfare_state
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus ENG_demlab_1950_rewrite_national_insurance"
+		unlock_decision_tooltip = ENG_demlab_1950_national_insurance_act
+	}
+}
+
+shared_focus = {
+	id = ENG_demlab_1950_enforce_fairer_wages
+	icon = GFX_generic_industrial_legislature
+	x = -1
+	y = 3
+	cost = 5
+
+	ai_will_do = {
+		base = 55
+	}
+
+	relative_position_id = ENG_demlab_1950_democraticlabour_victory
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = ENG_demlab_party_unity_not_collapsed
+			check_variable = {
+				var = ENG_demlab_party_unity_var
+				value = 1
+				compare = greater_than_or_equals
+			}
+		}
+	}
+	prerequisite = {
+		focus = ENG_demlab_1950_establish_NHS
+	}
+	prerequisite = {
+		focus = ENG_demlab_1950_rewrite_national_insurance
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus ENG_demlab_1950_enforce_fairer_wages"
+		add_timed_idea = {
+			idea = ENG_fair_wages
+			days = 360
+		}
+	}
+}
+
+
+shared_focus = {
+	id = ENG_demlab_1950_education_act
+	icon = GFX_generic_research_grant
+	x = -1
+	y = 5
+	cost = 5
+
+	ai_will_do = {
+		base = 55
+	}
+
+	relative_position_id = ENG_demlab_1950_democraticlabour_victory
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = ENG_demlab_party_unity_not_collapsed
+			check_variable = {
+				var = ENG_demlab_party_unity_var
+				value = 1
+				compare = greater_than_or_equals
+			}
+		}
+	}
+	prerequisite = {
+		focus = ENG_demlab_1950_enforce_fairer_wages
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus ENG_demlab_1950_education_act"
+		unlock_decision_tooltip = ENG_demlab_1950_education_act_decision
+	}
+}
+
+### Economics ###
+
+shared_focus = {
+	id = ENG_demlab_1950_chancellor_gaitskell
+	icon = GFX_generic_hugh_gaitskell
+	x = 1
+	y = 1
+	cost = 5
+
+	ai_will_do = {
+		base = 65
+	}
+
+	relative_position_id = ENG_demlab_1950_democraticlabour_victory
+	
+	prerequisite = {
+		focus = ENG_demlab_1950_democraticlabour_victory
+	}
+	mutually_exclusive = {
+		focus = ENG_demlab_1950_chancellor_marquand
+		focus = ENG_demlab_1950_chancellor_bevan
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus ENG_demlab_1950_chancellor_gaitskell"
+		if = {
+			limit = {
+				has_idea = ENG_Hugh_Gaitskell_em_sde
+			}
+			custom_effect_tooltip = ENG_demlab_faction_left_fall_2
+			custom_effect_tooltip = ENG_demlab_faction_centre_fall_1
+			custom_effect_tooltip = ENG_demlab_faction_right_rise_3
+			hidden_effect = {
+				set_country_flag = ENG_chancellor_chosen
+				add_to_variable = {
+					var = ENG_demlab_faction_left_var
+					value = -2
+				}
+				add_to_variable = {
+					var = ENG_demlab_faction_centre_var
+					value = -1
+				}
+				add_to_variable = {
+					var = ENG_demlab_faction_right_var
+					value = 3
+				}
+			}
+		}
+		else = {
+			add_ideas = ENG_Hugh_Gaitskell_em_sde
+			custom_effect_tooltip = ENG_demlab_faction_left_fall_3
+			custom_effect_tooltip = ENG_demlab_faction_centre_fall_2
+			custom_effect_tooltip = ENG_demlab_faction_right_rise_5
+			custom_effect_tooltip = ENG_demlab_party_unity_fall
+			hidden_effect = {	
+				set_country_flag = ENG_chancellor_chosen
+				add_to_variable = {
+					var = ENG_demlab_faction_left_var
+					value = -3
+				}
+				add_to_variable = {
+					var = ENG_demlab_faction_centre_var
+					value = -2
+				}
+				add_to_variable = {
+					var = ENG_demlab_faction_right_var
+					value = 5
+				}
+				add_to_variable = {
+					var = ENG_demlab_party_unity_var
+					value = -1
+				}
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = ENG_demlab_1950_chancellor_marquand
+	icon = GFX_generic_hilary_marquand
+	x = 2
+	y = 0
+	cost = 5
+
+	ai_will_do = {
+		base = 65
+	}
+
+	relative_position_id = ENG_demlab_1950_chancellor_gaitskell
+	
+	prerequisite = {
+		focus = ENG_demlab_1950_democraticlabour_victory
+	}
+	mutually_exclusive = {
+		focus = ENG_demlab_1950_chancellor_gaitskell
+		focus = ENG_demlab_1950_chancellor_bevan
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus ENG_demlab_1950_chancellor_marquand"
+		if = {
+			limit = {
+				has_idea = ENG_Hilary_Marquand_em_sde
+			}
+			custom_effect_tooltip = ENG_demlab_faction_left_fall_1
+			custom_effect_tooltip = ENG_demlab_faction_centre_rise_2
+			custom_effect_tooltip = ENG_demlab_faction_right_fall_1
+			hidden_effect = {
+				set_country_flag = ENG_chancellor_chosen
+				add_to_variable = {
+					var = ENG_demlab_faction_left_var
+					value = -1
+				}
+				add_to_variable = {
+					var = ENG_demlab_faction_centre_var
+					value = 2
+				}
+				add_to_variable = {
+					var = ENG_demlab_faction_right_var
+					value = -1
+				}
+			}
+		}
+		else = {
+			add_ideas = ENG_Hilary_Marquand_em_sde
+			custom_effect_tooltip = ENG_demlab_faction_left_fall_2
+			custom_effect_tooltip = ENG_demlab_faction_centre_rise_4
+			custom_effect_tooltip = ENG_demlab_faction_right_fall_2
+			custom_effect_tooltip = ENG_demlab_party_unity_fall
+			hidden_effect = {
+				set_country_flag = ENG_chancellor_chosen
+				add_to_variable = {
+					var = ENG_demlab_faction_left_var
+					value = -2
+				}
+				add_to_variable = {
+					var = ENG_demlab_faction_centre_var
+					value = 4
+				}
+				add_to_variable = {
+					var = ENG_demlab_faction_right_var
+					value = -2
+				}
+				add_to_variable = {
+					var = ENG_demlab_party_unity_var
+					value = -1
+				}
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = ENG_demlab_1950_chancellor_bevan
+	icon = GFX_ENG_nye_bevan
+	x = 4
+	y = 0
+	cost = 5
+
+	ai_will_do = {
+		base = 65
+	}
+
+	relative_position_id = ENG_demlab_1950_chancellor_gaitskell
+	
+	prerequisite = {
+		focus = ENG_demlab_1950_democraticlabour_victory
+	}
+	mutually_exclusive = {
+		focus = ENG_demlab_1950_chancellor_gaitskell
+		focus = ENG_demlab_1950_chancellor_marquand
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus ENG_demlab_1950_chancellor_bevan"
+		if = {
+			limit = {
+				has_idea = ENG_Aneurin_Nye_Bevan_em_sde
+			}
+			custom_effect_tooltip = ENG_demlab_faction_left_rise_3
+			custom_effect_tooltip = ENG_demlab_faction_centre_fall_1
+			custom_effect_tooltip = ENG_demlab_faction_right_fall_2
+			hidden_effect = {
+				set_country_flag = ENG_chancellor_chosen
+				add_to_variable = {
+					var = ENG_demlab_faction_left_var
+					value = 3
+				}
+				add_to_variable = {
+					var = ENG_demlab_faction_centre_var
+					value = -1
+				}
+				add_to_variable = {
+					var = ENG_demlab_faction_right_var
+					value = -2
+				}
+			}
+		}
+		else = {
+			add_ideas = ENG_Aneurin_Nye_Bevan_em_sde
+			custom_effect_tooltip = ENG_demlab_faction_left_rise_5
+			custom_effect_tooltip = ENG_demlab_faction_centre_fall_2
+			custom_effect_tooltip = ENG_demlab_faction_right_fall_3
+			custom_effect_tooltip = ENG_demlab_party_unity_fall
+			hidden_effect = {	
+				set_country_flag = ENG_chancellor_chosen
+				add_to_variable = {
+					var = ENG_demlab_faction_left_var
+					value = 5
+				}
+				add_to_variable = {
+					var = ENG_demlab_faction_centre_var
+					value = -2
+				}
+				add_to_variable = {
+					var = ENG_demlab_faction_right_var
+					value = -3
+				}
+				add_to_variable = {
+					var = ENG_demlab_party_unity_var
+					value = -1
+				}
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = ENG_demlab_1950_secure_international_loans
+	icon = GFX_generic_loans
+	x = 2
+	y = 1
+	cost = 5
+
+	ai_will_do = {
+		base = 55
+	}
+
+	relative_position_id = ENG_demlab_1950_chancellor_gaitskell
+	
+	prerequisite = {
+		focus = ENG_demlab_1950_chancellor_gaitskell
+		focus = ENG_demlab_1950_chancellor_marquand
+		focus = ENG_demlab_1950_chancellor_bevan
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus ENG_demlab_1950_secure_international_loans"
+		country_event = {
+			id = krg_eng.242
+		}
+	}
+}
+
+shared_focus = {
+	id = ENG_demlab_1950_maintain_rationing_programmes
+	icon = GFX_ENG_rationing
+	x = 0
+	y = 2
+	cost = 5
+
+	ai_will_do = {
+		base = 55
+	}
+
+	relative_position_id = ENG_demlab_1950_chancellor_gaitskell
+	
+	prerequisite = {
+		focus = ENG_demlab_1950_secure_international_loans
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus ENG_demlab_1950_maintain_rationing_programmes"
+		custom_effect_tooltip = ENG_continued_rationing_tt
+		hidden_effect = {
+			remove_ideas = ENG_rationing
+			add_timed_idea = {
+				idea = ENG_rationing
+				days = 1460
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = ENG_demlab_1950_begin_nationalisation
+	icon = GFX_generic_state_economy
+	x = 2
+	y = 2
+	cost = 5
+
+	ai_will_do = {
+		base = 55
+	}
+
+	relative_position_id = ENG_demlab_1950_chancellor_gaitskell
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = ENG_demlab_party_unity_not_collapsed
+			check_variable = {
+				var = ENG_demlab_party_unity_var
+				value = 1
+				compare = greater_than_or_equals
+			}
+		}
+	}
+	prerequisite = {
+		focus = ENG_demlab_1950_secure_international_loans
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus ENG_demlab_1950_begin_nationalisation"
+		unlock_decision_tooltip = ENG_national_coal_board
+		unlock_decision_tooltip = ENG_railway_nationalisation_plan
+		unlock_decision_tooltip = ENG_british_electricity_board
+		unlock_decision_tooltip = ENG_nationalise_weak_sectors
+		unlock_decision_tooltip = ENG_nationalise_bank_of_england
+		unlock_decision_tooltip = ENG_organise_the_iron_and_steel_corporation
+	}
+}
+
+shared_focus = {
+	id = ENG_demlab_1950_reconstruction_departments
+	icon = GFX_generic_economic_control
+	x = 4
+	y = 2
+	cost = 5
+
+	ai_will_do = {
+		base = 55
+	}
+
+	relative_position_id = ENG_demlab_1950_chancellor_gaitskell
+	
+	prerequisite = {
+		focus = ENG_demlab_1950_secure_international_loans
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus ENG_demlab_1950_reconstruction_departments"
+		hidden_effect = {
+			remove_ideas = ENG_department_of_national_reconstruction_industry
+			remove_ideas = ENG_department_of_national_reconstruction_infrastructure_railroad
+		}
+		remove_ideas = ENG_department_of_national_reconstruction_infrastructure_highway
+		add_political_power = 50
+	}
+}
+
+shared_focus = {
+	id = ENG_demlab_1950_ease_regulations
+	icon = GFX_generic_positive_trade_relations_gold
+	x = -1
+	y = 3
+	cost = 5
+
+	ai_will_do = {
+		base = 55
+	}
+
+	relative_position_id = ENG_demlab_1950_chancellor_gaitskell
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = ENG_demlab_party_unity_not_collapsed
+			check_variable = {
+				var = ENG_demlab_party_unity_var
+				value = 1
+				compare = greater_than_or_equals
+			}
+		}
+		has_idea = ENG_Hugh_Gaitskell_em_sde
+	}
+	prerequisite = {
+		focus = ENG_demlab_1950_begin_nationalisation
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus ENG_demlab_1950_ease_regulations"
+		custom_effect_tooltip = ENG_demlab_1950_ease_regulations_tt
+		add_stability = 0.02
+		add_to_variable = {
+			var = ENG_BlitzConsumerGoods
+			value = -0.05
+		}
+	}
+}
+
+
+shared_focus = {
+	id = ENG_demlab_1950_expand_labour_pool
+	icon = GFX_generic_pickaxe
+	x = 3
+	y = 3
+	cost = 5
+
+	ai_will_do = {
+		base = 55
+	}
+
+	relative_position_id = ENG_demlab_1950_chancellor_gaitskell
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = ENG_demlab_party_unity_not_collapsed
+			check_variable = {
+				var = ENG_demlab_party_unity_var
+				value = 1
+				compare = greater_than_or_equals
+			}
+		}
+		OR = {
+			has_idea = ENG_Hilary_Marquand_em_sde
+			has_idea = ENG_Hugh_Gaitskell_em_sde
+		}
+	}
+	prerequisite = {
+		focus = ENG_demlab_1950_begin_nationalisation
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus ENG_demlab_1950_expand_labour_pool"
+		custom_effect_tooltip = ENG_demlab_1950_expand_labour_pool_tt
+		add_to_variable = {
+			var = ENG_BlitzMonthlyPop
+			value = -0.10
+		}
+		add_to_variable = {
+			var = ENG_BlitzIndustrialFactory
+			value = 0.05
+		}
+	}
+}
+
+shared_focus = {
+	id = ENG_demlab_1950_tackle_inflation
+	icon = GFX_generic_gold_up
+	x = 1
+	y = 3
+	cost = 5
+
+	ai_will_do = {
+		base = 55
+	}
+
+	relative_position_id = ENG_demlab_1950_chancellor_gaitskell
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = ENG_demlab_party_unity_not_collapsed
+			check_variable = {
+				var = ENG_demlab_party_unity_var
+				value = 1
+				compare = greater_than_or_equals
+			}
+		}
+	}
+	prerequisite = {
+		focus = ENG_demlab_1950_begin_nationalisation
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus ENG_demlab_1950_tackle_inflation"
+		custom_effect_tooltip = ENG_demlab_1950_tackle_inflation_tt
+		add_to_variable = {
+			var = ENG_BlitzIndustrialFactory
+			value = 0.05
+		}
+		add_to_variable = {
+			var = ENG_BlitzMaxEfficiency
+			value = 0.10
+		}
+		add_timed_idea = {
+			idea = ENG_fighting_inflation
+			days = 270
+		}
+	}
+}
+
+shared_focus = {
+	id = ENG_demlab_1950_increase_purchase_tax
+	icon = GFX_generic_tax
+	x = 0
+	y = 4
+	cost = 5
+
+	ai_will_do = {
+		base = 55
+	}
+
+	relative_position_id = ENG_demlab_1950_chancellor_gaitskell
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = ENG_demlab_party_unity_not_collapsed
+			check_variable = {
+				var = ENG_demlab_party_unity_var
+				value = 1
+				compare = greater_than_or_equals
+			}
+		}
+		has_idea = ENG_Hugh_Gaitskell_em_sde
+	}
+	prerequisite = {
+		focus = ENG_demlab_1950_ease_regulations
+	}
+	prerequisite = {
+		focus = ENG_demlab_1950_tackle_inflation
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus ENG_demlab_1950_increase_purchase_tax"
+		unlock_decision_tooltip = ENG_demlab_1950_consumption_tax_act
+	}
+}
+
+shared_focus = {
+	id = ENG_demlab_1950_universal_family_scheme
+	icon = GFX_CAN_Family_Allowance_Act
+	x = 2
+	y = 4
+	cost = 5
+
+	ai_will_do = {
+		base = 55
+	}
+
+	relative_position_id = ENG_demlab_1950_chancellor_gaitskell
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = ENG_demlab_party_unity_not_collapsed
+			check_variable = {
+				var = ENG_demlab_party_unity_var
+				value = 1
+				compare = greater_than_or_equals
+			}
+		}
+		has_idea = ENG_Hilary_Marquand_em_sde
+	}
+	prerequisite = {
+		focus = ENG_demlab_1950_expand_labour_pool
+	}
+	prerequisite = {
+		focus = ENG_demlab_1950_tackle_inflation
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus ENG_demlab_1950_universal_family_scheme"
+		unlock_decision_tooltip = ENG_demlab_1950_family_allowance_act
+	}
+}
+
+shared_focus = {
+	id = ENG_demlab_1950_industrial_strategy
+	icon = GFX_generic_workers_rights
+	x = 5
+	y = 3
+	cost = 5
+
+	ai_will_do = {
+		base = 55
+	}
+
+	relative_position_id = ENG_demlab_1950_chancellor_gaitskell
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = ENG_demlab_party_unity_not_collapsed
+			check_variable = {
+				var = ENG_demlab_party_unity_var
+				value = 1
+				compare = greater_than_or_equals
+			}
+		}
+		has_idea = ENG_Aneurin_Nye_Bevan_em_sde
+	}
+	prerequisite = {
+		focus = ENG_demlab_1950_begin_nationalisation
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus ENG_demlab_1950_industrial_strategy"
+		random_owned_state = {
+			add_building_construction = {
+				type = industrial_complex
+				level = 2
+				instant_build = yes
+			}
+		}
+		random_owned_state = {
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = industrial_complex
+				level = 2
+				instant_build = yes
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = ENG_demlab_1950_public_works_programme
+	icon = GFX_generic_syndicalist_workers
+	x = 4
+	y = 4
+	cost = 5
+
+	ai_will_do = {
+		base = 55
+	}
+
+	relative_position_id = ENG_demlab_1950_chancellor_gaitskell
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = ENG_demlab_party_unity_not_collapsed
+			check_variable = {
+				var = ENG_demlab_party_unity_var
+				value = 1
+				compare = greater_than_or_equals
+			}
+		}
+		OR = {
+			has_idea = ENG_Aneurin_Nye_Bevan_em_sde
+			has_idea = ENG_Hilary_Marquand_em_sde
+		}
+	}
+	prerequisite = {
+		focus = ENG_demlab_1950_industrial_strategy
+		focus = ENG_demlab_1950_expand_labour_pool
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus ENG_demlab_1950_public_works_programme"
+		random_owned_state = {
+			add_building_construction = {
+				type = infrastructure
+				level = 1
+				instant_build = yes
+			}
+		}
+		random_owned_state = {
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
+		build_railway = {
+			level = 2
+			build_only_on_allied = yes
+			fallback = yes
+			start_province = 6103
+			target_province = 9297
+			path = { 6103 13252 9268 6270 9297 }
+		}
+		build_railway = {
+			level = 2
+			build_only_on_allied = yes
+			fallback = yes
+			start_province = 9297
+			target_province = 6384
+			path = { 9297 11345 9315 6318 6384 }
+		}
+		build_railway = {
+			level = 2
+			build_only_on_allied = yes
+			fallback = yes
+			start_province = 6103
+			target_province = 3369
+			path = { 6103 13251 11471 3369 }
+		}
+	}
+}
+
+shared_focus = {
+	id = ENG_demlab_1950_dock_labour_scheme
+	icon = GFX_generic_advanced_construction_techniques
+	x = 5
+	y = 5
+	cost = 5
+
+	ai_will_do = {
+		base = 55
+	}
+	relative_position_id = ENG_demlab_1950_chancellor_gaitskell
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = ENG_demlab_party_unity_not_collapsed
+			check_variable = {
+				var = ENG_demlab_party_unity_var
+				value = 1
+				compare = greater_than_or_equals
+			}
+		}
+		has_idea = ENG_Aneurin_Nye_Bevan_em_sde
+	}
+	prerequisite = {
+		focus = ENG_demlab_1950_industrial_strategy
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus ENG_demlab_1950_dock_labour_scheme"
+		random_owned_state = {
+			add_building_construction = {
+				type = dockyard
+				level = 2
+				instant_build = yes
+			}
+		}
+		random_owned_state = {
+			add_building_construction = {
+				type = dockyard
+				level = 1
+				instant_build = yes
+			}
+		}
+	}
+}

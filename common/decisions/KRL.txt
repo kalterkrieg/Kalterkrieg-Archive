@@ -1,0 +1,58 @@
+foreign_politics = {
+	KRL_attack_LAT = {
+		icon = GFX_decision_infiltrate_state
+
+		allowed = {
+			tag = KRL
+		}
+
+		targets = {
+			LAT
+		}
+		
+		available = {
+			NOT = {
+				LAT = {
+					OR = {
+						is_puppet_of = RUS
+						is_guaranteed_by = RUS
+					}
+				}
+			}
+		}
+
+		fire_only_once = yes
+
+		war_with_on_remove = LAT
+
+		days_remove = 90
+
+		ai_will_do = {
+			base = 1000 #Just do it
+		}
+
+		custom_cost_text = decision_cost_CP_15
+
+		custom_cost_trigger = {
+			command_power > 14.99
+		}
+
+		complete_effect = {
+			hidden_effect = {
+				add_command_power = -15
+			}
+			add_war_support = 0.25
+
+		}
+
+		remove_effect = {
+			declare_war_on = {
+				target = LAT
+				type = annex_everything
+			}
+			news_event = {
+				id = krg_krl.2
+			}
+		}
+	}
+}

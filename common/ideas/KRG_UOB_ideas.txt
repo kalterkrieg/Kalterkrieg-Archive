@@ -1,0 +1,49 @@
+ideas = {
+	country = {
+		UOB_second_british_revolution_idea = {
+			picture = GBR_legacy_revolution
+
+			on_add = {
+				log = "[GetDateText]: [Root.GetName]: add idea ENG_second_british_revolution_idea"
+			}
+
+			modifier = {
+				stability_weekly_factor = -0.005
+				industrial_capacity_factory = 0.25
+			}
+		}
+
+		UOB_GER_german_occupation = {
+            on_add = { 
+				log = "[GetDateText]: [Root.GetName]: add idea FRA_german_occupation" 
+				country_lock_all_division_template = yes
+			}
+
+			on_remove = {
+				country_lock_all_division_template = no
+			}
+            picture = KRG_german_occupation
+
+            modifier = {
+                stability_factor = -0.15
+                conscription_factor = -0.45
+                war_support_factor = -0.20
+                custom_modifier_tooltip = FRA_german_occupation_modifier_tt
+            }
+        }
+        UOB_GER_lingering_spectre = {
+            on_add = { log = "[GetDateText]: [Root.GetName]: add idea FRA_lingering_spectre_1" }
+            picture = FRA_lingering_spectre
+
+            allowed = { always = no }
+            allowed_civil_war = { always = yes }
+
+            modifier = {
+                conscription_factor = -0.15
+                political_power_gain = -0.20
+                production_speed_buildings_factor = -0.10
+                stability_factor = -0.10
+            }
+        }
+	}
+}

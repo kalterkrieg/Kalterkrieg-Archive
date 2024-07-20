@@ -1,0 +1,7412 @@
+DNF_parliament = {
+	
+	DNF_The_Federal_Election_1951  = {
+		icon = election
+		available = {
+			always = no
+		}
+		activation = {
+			always = no
+		}
+		visible = {
+			has_completed_focus = DNF_The_1951_Election
+			NOT = { has_completed_focus = DNF_The_Election_Concludes_51 }
+		}
+		days_mission_timeout = 60
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout DNF_The_Federal_Election_1951  target: [From.GetName]"
+			country_event = { id = krg_dnf_federal_elections.2 }
+			custom_effect_tooltip = DNF_The_Federal_Election_1951_tt
+			}
+	}
+
+	DNF_The_CSP_Campaign_51  = {
+		icon = shield
+		allowed = {
+			always = no
+		}
+		available = {
+			always = no
+		}
+		visible = {
+			check_variable = { 1951_election_season = 1 }
+			NOT = { has_completed_focus = DNF_The_CSP_51 } 
+		}
+		days_mission_timeout = 15
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout DNF_The_CSP_Campaign_51  target: [From.GetName]"
+			custom_effect_tooltip = DNF_CSP_Gains_5_tt
+			add_to_variable = {
+				var = DNF_51_CSP
+				value = 5
+			}
+			activate_mission = DNF_The_CSP_Campaign_51
+		}
+	}
+
+	DNF_The_SDAPD_Campaign_51  = {
+		icon = wrenches
+		allowed = {
+			always = no
+		}
+		available = {
+			always = no
+		}
+		visible = {
+			check_variable = { 1951_election_season = 1}
+			NOT = { has_completed_focus = DNF_The_SDAPD_51 }
+		}
+		days_mission_timeout = 15
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout DNF_The_SDAPD_Campaign_51  target: [From.GetName]"
+			custom_effect_tooltip = DNF_SDAPD_Gains_5_tt
+			add_to_variable = {
+				var = DNF_51_SDAPD
+				value = 5
+			}
+			activate_mission = DNF_The_SDAPD_Campaign_51
+		}
+	}
+
+	DNF_The_AG_Campaign_51 = {
+		icon = freedom
+		allowed = {
+			always = no
+		}
+		available = {
+			always = no
+		}
+		visible = {
+			check_variable = { 1951_election_season = 1}
+			NOT = { has_completed_focus = DNF_The_Agrarians_51 }
+		}
+		days_mission_timeout = 15
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout DNF_The_AG_Campaign_51 target: [From.GetName]"
+			custom_effect_tooltip = DNF_AG_Gains_5_tt
+			add_to_variable = {
+				var = DNF_51_AG
+				value = 5
+			}
+			activate_mission = DNF_The_AG_Campaign_51
+		}
+	}
+
+	DNF_The_Federal_Election_1955 = {
+		icon = election
+		available = {
+			always = no
+		}
+		activation = {
+			always = no
+		}
+		visible = {
+			has_completed_focus = DNF_The_1955_Election
+			NOT = { has_completed_focus = DNF_The_Election_Concludes_55 }
+		}
+		days_mission_timeout = 60
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout DNF_The_Federal_Election_1955 target: [From.GetName]"
+			country_event = { id = krg_dnf_federal_elections.27 }
+			custom_effect_tooltip = DNF_The_Federal_Election_1955_tt
+		}
+	}
+	DNF_The_CSP_Campaign_55  = {
+		icon = shield
+		allowed = {
+			always = no
+		}
+		available = {
+			always = no
+		}
+		visible = {
+			check_variable = { 1955_election_season = 1 }
+			NOT = { has_completed_focus = DNF_The_CSP_55 } 
+		}
+		days_mission_timeout = 15
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout DNF_The_CSP_Campaign_55  target: [From.GetName]"
+			custom_effect_tooltip = DNF_CSP_Gains_5_tt
+			add_to_variable = {
+				var = DNF_55_CSP
+				value = 5
+			}
+			activate_mission = DNF_The_CSP_Campaign_55
+		}
+	}
+	DNF_The_SDAPD_Campaign_55  = {
+		icon = wrenches
+		allowed = {
+			always = no
+		}
+		available = {
+			always = no
+		}
+		visible = {
+			check_variable = { 1955_election_season = 1}
+			NOT = { has_completed_focus = DNF_The_SDAPD_55 }
+		}
+		days_mission_timeout = 15
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout DNF_The_SDAPD_Campaign_55  target: [From.GetName]"
+			custom_effect_tooltip = DNF_SDAPD_Gains_5_tt
+			add_to_variable = {
+				var = DNF_55_SDAPD
+				value = 5
+			}
+			activate_mission = DNF_The_SDAPD_Campaign_55
+		}
+	}
+}
+
+DNF_states_approvals = {
+	DNF_Join_Mitteleuropa = {
+		
+		visible = {
+			AND = {
+				NOT = { DNF_is_mitteleuropa_member = yes }
+				has_country_flag = DNF_Mitteleuropa_Question
+			}
+		}
+		cost = 100
+		available = {
+			count_triggers = {
+				amount = 5
+				has_country_flag = DNF_galicia_agrees
+				has_country_flag = DNF_illyria_agrees
+				has_country_flag = DNF_austria_agrees
+				has_country_flag = DNF_bohemia_agrees
+				has_country_flag = DNF_slovakia_agrees
+				has_country_flag = DNF_hungary_agrees
+				has_country_flag = DNF_transylvania_agrees
+			}
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_Join_Mitteleuropa target: [From.GetName]"
+			custom_effect_tooltip = DNF_Join_Mitteleuropa_tt
+			country_event = {
+				id = krg_dnf_post_el.5
+			}
+			hidden_effect = {
+				set_country_flag = GER_mitteleuropa_DNF_flag
+			}
+		}		
+	}
+
+	DNF_Abolishing_Staatsrecht = {
+		
+		visible = {
+			AND = {
+				NOT = { DNF_is_mitteleuropa_member = yes }
+				has_country_flag = DNF_Personal_Prinzip_Regionals 
+			}
+		}
+		cost = 100
+		available = {
+			count_triggers = {
+				amount = 5
+				has_country_flag = DNF_galicia_agrees
+				has_country_flag = DNF_illyria_agrees
+				has_country_flag = DNF_austria_agrees
+				has_country_flag = DNF_bohemia_agrees
+				has_country_flag = DNF_slovakia_agrees
+				has_country_flag = DNF_hungary_agrees
+				has_country_flag = DNF_transylvania_agrees
+			}
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_Abolishing_Staatsrecht target: [From.GetName]"
+			custom_effect_tooltip = DNF_Abolishing_Staatsrecht_tt
+			country_event = {
+				id = krg_dnf_post_el.3
+			}
+		}		
+	}
+	
+	DNF_Federal_Highways_Approval = {
+			
+		days_remove = 90
+
+		fire_only_once = yes
+
+		cost = 50
+		
+		visible = {
+			has_country_flag = DNF_Build_Highways_flag
+			NOT = { has_country_flag = DNF_Build_Highways_Approved }
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete DNF_Federal_Highways_Approval target: [From.GetName]"
+			set_country_flag = DNF_Build_Highways_Approved
+			activate_mission = DNF_Highways_funding_Round
+		}
+	   
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_Federal_Highways_Approval target: [From.GetName]"
+			custom_effect_tooltip = DNF_25_bil_tt
+			add_to_variable = { DNF_interstate_budget = 25 }
+		}
+	}
+
+
+	DNF_Lean_On_Regional_Leaders = {
+		visible = {
+			always = no
+		}
+	}
+	
+	DNF_Lean_On_Regional_Leaders_Austria = {
+		
+		visible = {
+			AND = {
+				OR = { NOT = { DNF_is_mitteleuropa_member = yes }
+					   NOT = { has_idea = DNF_The_Personal_Prinzip } }
+				OR = { has_country_flag = DNF_Mitteleuropa_Question 
+					   has_country_flag = DNF_Personal_Prinzip_Regionals }
+				has_country_flag = DNF_austria_disagrees
+			}
+		}
+		available = {
+			has_country_flag = DNF_austria_disagrees
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete DNF_Lean_On_Regional_Leaders_Austria target: [From.GetName]"
+			clr_country_flag = DNF_austria_disagrees
+			set_country_flag = DNF_austria_agrees
+		}
+		cost = 200
+		days_remove = 60
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_Lean_On_Regional_Leaders_Austria target: [From.GetName]"
+			custom_effect_tooltip = DNF_Regional_Leader_Lean_tt
+			clr_country_flag = DNF_austria_agrees
+			set_country_flag = DNF_austria_disagrees
+		}		
+	}
+
+	DNF_Lean_On_Regional_Leaders_Bohemia = {
+		
+		visible = {
+			AND = {
+				OR = { NOT = { DNF_is_mitteleuropa_member = yes }
+					   NOT = { has_idea = DNF_The_Personal_Prinzip } }
+				OR = { has_country_flag = DNF_Mitteleuropa_Question 
+					   has_country_flag = DNF_Personal_Prinzip_Regionals }
+				has_country_flag = DNF_bohemia_disagrees
+			}
+		}
+		available = {
+			has_country_flag = DNF_bohemia_disagrees
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete DNF_Lean_On_Regional_Leaders_Bohemia target: [From.GetName]"
+			clr_country_flag = DNF_bohemia_disagrees
+			set_country_flag = DNF_bohemia_agrees
+		}
+		cost = 200
+		days_remove = 60
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_Lean_On_Regional_Leaders_Bohemia target: [From.GetName]"
+			custom_effect_tooltip = DNF_Regional_Leader_Lean_tt
+			clr_country_flag = DNF_bohemia_agrees
+			set_country_flag = DNF_bohemia_disagrees
+		}		
+	}
+
+	DNF_Lean_On_Regional_Leaders_Galicia = {
+		
+		visible = {
+			AND = {
+				OR = { NOT = { DNF_is_mitteleuropa_member = yes }
+					   NOT = { has_idea = DNF_The_Personal_Prinzip } }
+				OR = { has_country_flag = DNF_Mitteleuropa_Question 
+					   has_country_flag = DNF_Personal_Prinzip_Regionals }
+				has_country_flag = DNF_galicia_disagrees
+			}
+		}
+		available = {
+			has_country_flag = DNF_galicia_disagrees
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete DNF_Lean_On_Regional_Leaders_Galicia target: [From.GetName]"
+			clr_country_flag = DNF_galicia_disagrees
+			set_country_flag = DNF_galicia_agrees
+		}
+		cost = 200
+		days_remove = 60
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_Lean_On_Regional_Leaders_Galicia target: [From.GetName]"
+			custom_effect_tooltip = DNF_Regional_Leader_Lean_tt
+			clr_country_flag = DNF_galicia_agrees
+			set_country_flag = DNF_galicia_disagrees
+		}		
+	}
+
+	DNF_Lean_On_Regional_Leaders_Hungary = {
+		
+		visible = {
+			AND = {
+				OR = { NOT = { DNF_is_mitteleuropa_member = yes }
+					   NOT = { has_idea = DNF_The_Personal_Prinzip } }
+				OR = { has_country_flag = DNF_Mitteleuropa_Question 
+				       has_country_flag = DNF_Personal_Prinzip_Regionals }
+				has_country_flag = DNF_hungary_disagrees
+			}
+		}
+		available = {
+			has_country_flag = DNF_hungary_disagrees
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete DNF_Lean_On_Regional_Leaders_Hungary target: [From.GetName]"
+			clr_country_flag = DNF_hungary_disagrees
+			set_country_flag = DNF_hungary_agrees
+		}
+		cost = 200
+		days_remove = 60
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_Lean_On_Regional_Leaders_Hungary target: [From.GetName]"
+			custom_effect_tooltip = DNF_Regional_Leader_Lean_tt
+			clr_country_flag = DNF_hungary_agrees
+			set_country_flag = DNF_hungary_disagrees
+		}		
+	}
+
+	DNF_Lean_On_Regional_Leaders_Illyria = {
+		
+		visible = {
+			AND = {
+				OR = { NOT = { DNF_is_mitteleuropa_member = yes }
+					   NOT = { has_idea = DNF_The_Personal_Prinzip } }
+				OR = { has_country_flag = DNF_Mitteleuropa_Question 
+				       has_country_flag = DNF_Personal_Prinzip_Regionals }
+				has_country_flag = DNF_illyria_disagrees
+			}
+		}
+		available = {
+			OR = { AND = { has_country_flag = DNF_illyria_disagrees 
+						   NOT = { has_country_flag = DNF_illyrian_MP_broz }
+						}
+				   AND = { 
+					   NOT = {  has_country_flag = DNF_Illyria_1952_Rugpull
+					 			has_country_flag = DNF_Adolf_Scharf }
+					 			has_country_flag = DNF_illyrian_MP_broz 
+								has_country_flag = DNF_illyria_disagrees
+							}
+				}
+			}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete DNF_Lean_On_Regional_Leaders_Illyria target: [From.GetName]"
+			clr_country_flag = DNF_illyria_disagrees
+			set_country_flag = DNF_illyria_agrees
+		}
+		cost = 200
+		days_remove = 60
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_Lean_On_Regional_Leaders_Illyria target: [From.GetName]"
+			custom_effect_tooltip = DNF_Regional_Leader_Lean_tt
+			clr_country_flag = DNF_illyria_agrees
+			set_country_flag = DNF_illyria_disagrees
+		}		
+	}
+	
+	DNF_Lean_On_Regional_Leaders_Slovakia = {
+		
+		visible = {
+			AND = {
+				OR = { NOT = { DNF_is_mitteleuropa_member = yes }
+					   NOT = { has_idea = DNF_The_Personal_Prinzip } }
+				OR = { has_country_flag = DNF_Mitteleuropa_Question 
+				       has_country_flag = DNF_Personal_Prinzip_Regionals }
+				has_country_flag = DNF_slovakia_disagrees
+			}
+		}
+		available = {
+			has_country_flag = DNF_slovakia_disagrees
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete DNF_Lean_On_Regional_Leaders_Slovakia target: [From.GetName]"
+			clr_country_flag = DNF_slovakia_disagrees
+			set_country_flag = DNF_slovakia_agrees
+		}
+		cost = 200
+		days_remove = 60
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_Lean_On_Regional_Leaders_Slovakia target: [From.GetName]"
+			custom_effect_tooltip = DNF_Regional_Leader_Lean_tt
+			clr_country_flag = DNF_slovakia_agrees
+			set_country_flag = DNF_slovakia_disagrees
+		}		
+	}
+	
+	DNF_Lean_On_Regional_Leaders_Transylvania = {
+		
+		visible = {
+			AND = {
+				OR = { NOT = { DNF_is_mitteleuropa_member = yes }
+					   NOT = { has_idea = DNF_The_Personal_Prinzip } }
+				OR = { has_country_flag = DNF_Mitteleuropa_Question 
+				       has_country_flag = DNF_Personal_Prinzip_Regionals }
+				has_country_flag = DNF_transylvania_disagrees
+			}
+		}
+		available = {
+			has_country_flag = DNF_transylvania_disagrees
+			NOT = { has_country_flag = DNF_transylvanian_MP_hossu } 
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete DNF_Lean_On_Regional_Leaders_Transylvania target: [From.GetName]"
+			clr_country_flag = DNF_transylvania_disagrees
+			set_country_flag = DNF_transylvania_agrees
+		}
+		cost = 200
+		days_remove = 60
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_Lean_On_Regional_Leaders_Transylvania target: [From.GetName]"
+			custom_effect_tooltip = DNF_Regional_Leader_Lean_tt
+			clr_country_flag = DNF_transylvania_agrees
+			set_country_flag = DNF_transylvania_disagrees
+		}		
+	}
+}
+
+DNF_austrian_national_election_cat = {
+
+	DNF_austria_con_countryside = {
+		icon = generic_agriculture
+		visible = {
+			AND = {
+				check_variable = { DNF_austrian_election_involved = 1 }
+				NOT = {
+					has_country_flag = DNF_austrian_election_picked_focus
+				}
+			}
+		}
+		
+		cost = 50
+		days_remove = 50
+		
+		modifier = {
+			political_power_cost = 0.05
+		}
+		
+		
+		ai_will_do = { 
+			base = 1
+			modifier = {
+                factor = 0
+				OR = {
+					has_game_rule = {
+						rule = DNF_AUSTRIAN_ELECTIONS
+						option = DNF_AUSTRIAN_ELECTIONS_SOC
+					}
+					has_country_flag = DNF_austrian_election_picked_focus
+				}
+            }
+            modifier = {
+                factor = 10
+                has_game_rule = {
+                    rule = DNF_AUSTRIAN_ELECTIONS
+                    option = DNF_AUSTRIAN_ELECTIONS_CON
+                }
+				NOT = {
+					has_country_flag = DNF_austrian_election_picked_focus
+				}
+            }
+		}
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete DNF_austria_con_countryside target: [From.GetName]"
+			set_country_flag = DNF_austrian_election_picked_focus
+		}
+		
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_austria_con_countryside target: [From.GetName]"
+			custom_effect_tooltip = DNF_austria_election_con_countryside_tt
+			add_to_variable = { 
+				var = DNF_austria_conservative_pop
+				value = 3
+			}
+			add_to_variable = { 
+				var = DNF_austria_other_pop
+				value = -3
+			}
+		}
+	}
+	
+	DNF_austria_con_city = {
+		icon = factories
+		visible = {
+			AND = {
+				check_variable = { DNF_austrian_election_involved = 1 }
+				NOT = {
+					has_country_flag = DNF_austrian_election_picked_focus
+				}
+			}
+		}
+		
+		cost = 50
+		days_remove = 50
+		
+		modifier = {
+			political_power_cost = 0.05
+		}
+		
+		ai_will_do = { 
+			base = 1
+			modifier = {
+                factor = 0
+				OR = {
+					has_game_rule = {
+						rule = DNF_AUSTRIAN_ELECTIONS
+						option = DNF_AUSTRIAN_ELECTIONS_SOC
+					}
+					has_country_flag = DNF_austrian_election_picked_focus
+				}
+            }
+            modifier = {
+                factor = 10
+                has_game_rule = {
+                    rule = DNF_AUSTRIAN_ELECTIONS
+                    option = DNF_AUSTRIAN_ELECTIONS_CON
+                }
+				NOT = {
+					has_country_flag = DNF_austrian_election_picked_focus
+				}
+            }
+		}
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete DNF_austria_con_city target: [From.GetName]"
+			set_country_flag = DNF_austrian_election_picked_focus
+		}
+		
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_austria_con_city target: [From.GetName]"
+			custom_effect_tooltip = DNF_austria_election_con_city_tt
+			add_to_variable = { 
+				var = DNF_austria_conservative_pop
+				value = 3
+			}
+			add_to_variable = { 
+				var = DNF_austria_socialist_pop
+				value = -3
+			}
+		}
+	}
+	
+	DNF_austria_con_rallies = {
+		icon = shield
+		visible = {
+			check_variable = { DNF_austrian_election_involved = 1 }
+		}
+		
+		cost = 25
+		days_remove = 14
+		
+		modifier = {
+			political_power_cost = 0.05
+		}
+
+		ai_will_do = { 
+			base = 1
+			modifier = {
+                factor = 0
+				has_game_rule = {
+					rule = DNF_AUSTRIAN_ELECTIONS
+					option = DNF_AUSTRIAN_ELECTIONS_SOC
+				}
+            }
+            modifier = {
+                factor = 10
+                has_game_rule = {
+                    rule = DNF_AUSTRIAN_ELECTIONS
+                    option = DNF_AUSTRIAN_ELECTIONS_CON
+                }
+            }
+		}
+		
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_austria_con_rallies target: [From.GetName]"
+			custom_effect_tooltip = DNF_austria_election_con_rallys_tt
+			add_to_variable = { 
+				var = DNF_austria_socialist_pop
+				value = -1
+			}
+			add_to_variable = { 
+				var = DNF_austria_conservative_pop
+				value = 2
+			}
+			add_to_variable = { 
+				var = DNF_austria_other_pop
+				value = -1
+			}
+		}
+	}
+	
+	DNF_austria_socialist_smear = {
+		icon = wrenches
+		visible = {
+			check_variable = { DNF_austrian_election_1948_involved = 1 }
+		}
+		
+		cost = 25
+		days_remove = 10
+		
+		modifier = {
+			political_power_cost = 0.05
+		}
+		
+		ai_will_do = { 
+			base = 1
+			modifier = {
+                factor = 0
+				has_game_rule = {
+					rule = DNF_AUSTRIAN_ELECTIONS
+					option = DNF_AUSTRIAN_ELECTIONS_SOC
+				}
+            }
+            modifier = {
+                factor = 10
+                has_game_rule = {
+                    rule = DNF_AUSTRIAN_ELECTIONS
+                    option = DNF_AUSTRIAN_ELECTIONS_CON
+                }
+            }
+		}
+		
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_austria_socialist_smear target: [From.GetName]"
+			custom_effect_tooltip = DNF_austria_election_socialist_smear_tt
+			add_to_variable = { 
+				var = DNF_austria_socialist_pop
+				value = -3
+			}
+			add_to_variable = { 
+				var = DNF_austria_conservative_pop
+				value = 1
+			}
+			add_to_variable = { 
+				var = DNF_austria_other_pop
+				value = 2
+			}
+			hidden_effect = {
+				country_event = {
+					id = krg_dnf_regional_elections_austria.6
+					days = 14
+				}
+			}
+		}
+	}
+	
+	DNF_austria_royal_intervene = {
+		icon = generic_political_rally
+		visible = {
+			check_variable = { DNF_austrian_election_1948_involved = 1 }
+		}
+		
+		cost = 25
+		days_remove = 14
+		
+		modifier = {
+			political_power_cost = 0.05
+		}
+		
+		ai_will_do = { 
+			base = 1
+			modifier = {
+                factor = 0
+				has_game_rule = {
+					rule = DNF_AUSTRIAN_ELECTIONS
+					option = DNF_AUSTRIAN_ELECTIONS_SOC
+				}
+            }
+            modifier = {
+                factor = 10
+                has_game_rule = {
+                    rule = DNF_AUSTRIAN_ELECTIONS
+                    option = DNF_AUSTRIAN_ELECTIONS_CON
+                }
+            }
+		}
+		
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_austria_royal_intervene target: [From.GetName]"
+			custom_effect_tooltip = DNF_austria_election_royal_intervene_tt
+			add_to_variable = { 
+				var = DNF_austria_socialist_pop
+				value = -2
+			}
+			add_to_variable = { 
+				var = DNF_austria_conservative_pop
+				value = 1
+			}
+			add_to_variable = { 
+				var = DNF_austria_other_pop
+				value = 1
+			}
+			hidden_effect = {
+				country_event = {
+					id = krg_dnf_regional_elections_austria.8
+					days = 7
+				}
+			}
+		}
+	}
+	
+	DNF_austria_mobilise_tyrol = {
+		icon = mountains
+
+		visible = {
+			check_variable = { DNF_austrian_election_1948_involved = 1 }
+		}
+		
+		cost = 50
+		days_remove = 30
+		
+		modifier = {
+			political_power_cost = 0.05
+		}
+		
+		ai_will_do = { 
+			base = 1
+			modifier = {
+                factor = 0
+				has_game_rule = {
+					rule = DNF_AUSTRIAN_ELECTIONS
+					option = DNF_AUSTRIAN_ELECTIONS_SOC
+				}
+            }
+            modifier = {
+                factor = 10
+                has_game_rule = {
+                    rule = DNF_AUSTRIAN_ELECTIONS
+                    option = DNF_AUSTRIAN_ELECTIONS_CON
+                }
+            }
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_austria_mobilise_tyrol target: [From.GetName]"
+			set_country_flag = DNF_Austria_48_CSP_Built_Italian_Support
+			country_event = {
+				id = krg_dnf_regional_elections_austria.5
+			}
+		}
+	}
+
+	DNF_austria_mobilise_tyrol_52 = {
+		icon = mountains
+
+		
+		visible = {
+			check_variable = { DNF_austrian_election_1952_involved = 1 }
+			NOT = { has_country_flag = DNF_Adolf_Scharf }
+		}
+
+		days_remove = 30
+		cost = 50
+
+		modifier = {
+			political_power_cost = 0.05
+		}
+		
+		ai_will_do = { 
+			base = 1
+			modifier = {
+                factor = 0
+				OR =  {
+					has_game_rule = {
+						rule = DNF_AUSTRIAN_ELECTIONS
+						option = DNF_AUSTRIAN_ELECTIONS_SOC
+					}
+					NOT = { 
+						has_country_flag = DNF_Austria_48_CSP_Built_Italian_Support
+					}
+				}
+            }
+            modifier = {
+                factor = 10
+                has_game_rule = {
+                    rule = DNF_AUSTRIAN_ELECTIONS
+                    option = DNF_AUSTRIAN_ELECTIONS_CON
+                }
+				has_country_flag = DNF_Austria_48_CSP_Built_Italian_Support
+            }
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_austria_mobilise_tyrol_52 target: [From.GetName]"
+			hidden_effect = { 
+				if = { 
+					limit = {  
+						has_country_flag = DNF_Austria_48_Built_Italian_Support 
+					}
+					country_event = {
+						id = krg_dnf_regional_elections_austria.14
+					}
+			} 
+			else = {
+				country_event = {
+						id = krg_dnf_regional_elections_austria.15
+					}
+				}
+			}
+		}
+	}
+
+	DNF_austria_experiment_with_tv_ads_1952 = {
+		icon = television
+		
+		visible = {
+			check_variable = { DNF_austrian_election_1952_involved = 1 }
+		}
+
+		days_remove = 25
+		cost = 70
+
+		modifier = {
+			political_power_cost = 0.05
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_austria_experiment_with_tv_ads_1952 target: [From.GetName]"
+			country_event = {
+				id = krg_dnf_regional_elections_austria.16
+			}
+		}
+	}
+	
+	DNF_austrian_election_1948 = {
+		icon = election
+		
+		allowed = { 
+			always = no
+		}
+		available = {
+			always = no
+		}
+		activation = {
+			check_variable = { DNF_austrian_election_1948_involved = 1 }
+		}
+		
+		days_mission_timeout = 80
+		fire_only_once = yes
+		
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout DNF_austrian_election_1948 target: [From.GetName]"
+			if = {
+				limit = {
+					check_variable = { DNF_austria_socialist_pop > DNF_austria_conservative_pop }
+				} 
+				country_event = {
+					id = krg_dnf_regional_elections_austria.2
+				}
+			} 
+			else = {
+				country_event = {
+					id = krg_dnf_regional_elections_austria.3
+				}
+			}
+		}
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete DNF_austrian_election_1948 target: [From.GetName]"
+			clr_country_flag = DNF_austrian_election_1948_involved
+			clr_country_flag = DNF_austrian_election_involved
+		}
+	}
+	
+	DNF_austrian_SDAPD_campaigning = {
+		icon = wrenches
+		
+		allowed = { 
+			always = no
+		}
+		available = {
+			check_variable = { DNF_austrian_election_1948_involved = 1 }
+		}
+		
+		selectable_mission = yes
+		days_mission_timeout = 30
+		cost = 30
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete DNF_austrian_SDAPD_campaigning target: [From.GetName]"
+			custom_effect_tooltip = DNF_stymie_opposition_tt
+		}
+
+		ai_will_do = { 
+			base = 1
+			modifier = {
+                factor = 10
+				has_game_rule = {
+					rule = DNF_AUSTRIAN_ELECTIONS
+                    option = DNF_AUSTRIAN_ELECTIONS_CON
+				}
+            }
+            modifier = {
+                factor = 0
+                has_game_rule = {
+                    rule = DNF_AUSTRIAN_ELECTIONS
+					option = DNF_AUSTRIAN_ELECTIONS_SOC
+                }
+            }
+		}
+		
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout DNF_austrian_SDAPD_campaigning target: [From.GetName]"
+			custom_effect_tooltip = DNF_austria_election_socialist_campaigning_tt
+			add_to_variable = {
+				var = DNF_austria_socialist_pop
+				value = 3
+			}
+			add_to_variable = {
+				var = DNF_austria_conservative_pop
+				value = -3
+			}
+			country_event = {
+				id = krg_dnf_regional_elections_austria.7
+			}
+		}
+	}
+
+	DNF_austrian_election_1952 = {
+		icon = election
+
+		allowed = {
+			always = no
+		}
+		available = {
+			always = no
+		}
+		activation = {
+			check_variable = { DNF_austrian_election_1952_involved = 1 }
+		}
+
+		days_mission_timeout = 80
+		fire_only_once = yes
+
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout DNF_austrian_election_1952 target: [From.GetName]"
+			if = { 
+				limit = { 
+					check_variable = { DNF_austria_socialist_pop > DNF_austria_conservative_pop }
+				} 
+				country_event = { 
+					id = krg_dnf_regional_elections_austria.11 
+				}
+			} else = {
+				country_event = { 
+					id = krg_dnf_regional_elections_austria.12 
+				}
+			}
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete DNF_austrian_election_1952 target: [From.GetName]"
+			clr_country_flag = DNF_austrian_election_1952_involved
+			clr_country_flag = DNF_austrian_election_involved
+		}
+	}
+
+	DNF_austrian_1952_opposition_campaigning = {
+		icon = generic_political_rally
+		
+		allowed = { 
+			always = no
+		}
+		available = {
+			check_variable = { DNF_austrian_election_1952_involved = 1 }
+		}
+		
+		selectable_mission = yes
+		days_mission_timeout = 30
+		cost = 30
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete DNF_austrian_1952_opposition_campaigning target: [From.GetName]"
+			custom_effect_tooltip = DNF_stymie_opposition_tt
+		}
+		
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout DNF_austrian_1952_opposition_campaigning target: [From.GetName]"
+			if = { 
+				limit = { has_country_flag = DNF_Adolf_Scharf }
+				custom_effect_tooltip = DNF_austria_52_election_opposition_campaigning_SDAPD_tt
+				add_to_variable = { var = DNF_austria_conservative_pop value = 3}
+				add_to_variable = { var = DNF_austria_socialist_pop value = -5}
+			} 
+			else = {
+				custom_effect_tooltip = DNF_austria_52_election_opposition_campaigning_tt
+				add_to_variable = { var = DNF_austria_socialist_pop value = 3 }
+				add_to_variable = { var = DNF_austria_conservative_pop value = -5 }
+			}
+			add_to_variable = { var = DNF_austria_other_pop value = 2}
+
+			country_event = {
+				id = krg_dnf_regional_elections_austria.13
+			}
+		}
+	}
+}
+
+
+DNF_bohemian_national_election_cat = {
+
+	DNF_bohemia_soclib_countryside = {
+		icon = generic_agriculture
+		visible = {
+			AND = {
+				check_variable = { DNF_bohemian_election_involved = 1 }
+				NOT = {
+					has_country_flag = DNF_bohemian_election_picked_focus
+					OR = { 	has_country_flag = DNF_Adolf_Scharf
+							has_country_flag = DNF_Josip_Broz
+							has_country_flag = DNF_Anna_Kethly
+							has_country_flag = DNF_Bruno_Pitterman 	} 
+				}
+			}
+		}
+		
+		cost = 50
+		days_remove = 50
+		
+		modifier = {
+			political_power_cost = 0.05
+		}
+		
+		ai_will_do = { 
+			base = 1
+			modifier = {
+                factor = 0
+				OR = {
+					has_game_rule = {
+						rule = DNF_BOHEMIAN_ELECTIONS
+						option = DNF_BOHEMIAN_ELECTIONS_MARKLIB
+					}
+					has_game_rule = {
+						rule = DNF_BOHEMIAN_ELECTIONS
+						option = DNF_BOHEMIAN_ELECTIONS_CON
+					}
+				}
+            }
+            modifier = {
+                factor = 10
+                has_game_rule = {
+                    rule = DNF_BOHEMIAN_ELECTIONS
+					option = DNF_BOHEMIAN_ELECTIONS_SOCLIB
+                }
+            }
+		}
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete DNF_bohemia_soclib_countryside target: [From.GetName]"
+			set_country_flag = DNF_bohemian_election_picked_focus
+		}
+		
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_bohemia_soclib_countryside target: [From.GetName]"
+			custom_effect_tooltip = DNF_bohemia_soclib_countryside_tt
+			add_to_variable = { 
+				var = DNF_bohemia_socialist_pop
+				value = -1
+			}
+			add_to_variable = { 
+				var = DNF_bohemia_conservative_pop
+				value = -1
+			}
+			add_to_variable = { 
+				var = DNF_bohemia_liberal_pop
+				value = -1
+			}
+			add_to_variable = { 
+				var = DNF_bohemia_agrarian_pop
+				value = 3
+			}
+		}
+	}
+	
+	DNF_bohemia_marklib_city = {
+		icon = factories
+		visible = {
+			AND = {
+				check_variable = { DNF_bohemian_election_involved = 1 }
+				NOT = {
+					has_country_flag = DNF_bohemian_election_picked_focus
+					OR = { 	has_country_flag = DNF_Adolf_Scharf
+							has_country_flag = DNF_Josip_Broz
+							has_country_flag = DNF_Anna_Kethly
+							has_country_flag = DNF_Bruno_Pitterman 	} 
+				}
+			}
+		}
+		
+		cost = 50
+		days_remove = 50
+		
+		modifier = {
+			political_power_cost = 0.05
+		}
+		
+		ai_will_do = { 
+			base = 1
+			modifier = {
+                factor = 0
+				OR = {
+					has_game_rule = {
+						rule = DNF_BOHEMIAN_ELECTIONS
+						option = DNF_BOHEMIAN_ELECTIONS_SOCLIB
+					}
+					has_game_rule = {
+						rule = DNF_BOHEMIAN_ELECTIONS
+						option = DNF_BOHEMIAN_ELECTIONS_CON
+					}
+				}
+            }
+            modifier = {
+                factor = 10
+                has_game_rule = {
+                    rule = DNF_BOHEMIAN_ELECTIONS
+					option = DNF_BOHEMIAN_ELECTIONS_MARKLIB
+                }
+            }
+		}
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete DNF_bohemia_marklib_city target: [From.GetName]"
+			set_country_flag = DNF_bohemian_election_picked_focus
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_bohemia_marklib_city target: [From.GetName]"
+			custom_effect_tooltip = DNF_bohemia_marklib_city_tt
+			add_to_variable = { 
+				var = DNF_bohemia_socialist_pop
+				value = -1
+			}
+			add_to_variable = { 
+				var = DNF_bohemia_conservative_pop
+				value = -1
+			}
+			add_to_variable = { 
+				var = DNF_bohemia_liberal_pop
+				value = 3
+			}
+			add_to_variable = { 
+				var = DNF_bohemia_agrarian_pop
+				value = -1
+			}
+		}
+	}
+	
+	DNF_bohemia_con_rallies = {
+		icon = shield
+		visible = {
+			check_variable = { DNF_bohemian_election_involved = 1 }
+			NOT = { 			OR = { 	has_country_flag = DNF_Adolf_Scharf
+										has_country_flag = DNF_Josip_Broz
+										has_country_flag = DNF_Anna_Kethly
+										has_country_flag = DNF_Bruno_Pitterman 	} 
+					}
+		}
+
+		available = {
+			check_variable = { DNF_bohemia_socialist_pop > 0 }
+		}
+		
+		cost = 25
+		days_remove = 14
+		
+		modifier = {
+			political_power_cost = 0.05
+		}
+		
+		ai_will_do = { 
+			base = 1
+			modifier = {
+                factor = 0
+				OR = {
+					has_game_rule = {
+						rule = DNF_BOHEMIAN_ELECTIONS
+						option = DNF_BOHEMIAN_ELECTIONS_SOCLIB
+					}
+					has_game_rule = {
+						rule = DNF_BOHEMIAN_ELECTIONS
+						option = DNF_BOHEMIAN_ELECTIONS_MARKLIB
+					}
+				}
+            }
+            modifier = {
+                factor = 10
+                has_game_rule = {
+                    rule = DNF_BOHEMIAN_ELECTIONS
+					option = DNF_BOHEMIAN_ELECTIONS_CON
+                }
+            }
+		}
+		
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_bohemia_con_rallies target: [From.GetName]"
+			custom_effect_tooltip = DNF_bohemia_con_rallies_tt
+			add_to_variable = { 
+				var = DNF_bohemia_socialist_pop
+				value = -1
+			}
+			add_to_variable = { 
+				var = DNF_bohemia_conservative_pop
+				value = 2
+			}
+			add_to_variable = { 
+				var = DNF_bohemia_agrarian_pop
+				value = -1
+			}
+			hidden_effect = {
+				country_event = {
+				id = krg_dnf_regional_elections_bohemia.5
+				days = 2
+				}
+			}
+		}
+	}
+	
+	DNF_bohemia_marklib_rallies = {
+		icon = freedom
+		visible = {
+			check_variable = { DNF_bohemian_election_involved = 1 }
+			NOT = { 			OR = { 	has_country_flag = DNF_Adolf_Scharf
+										has_country_flag = DNF_Josip_Broz
+										has_country_flag = DNF_Anna_Kethly
+										has_country_flag = DNF_Bruno_Pitterman 	} 
+				}
+			}
+
+			available = {
+				check_variable = { DNF_bohemia_socialist_pop > 0 }
+			}
+		
+			
+		cost = 25
+		days_remove = 10
+		
+		modifier = {
+			political_power_cost = 0.05
+		}
+		
+		ai_will_do = { 
+			base = 1
+			modifier = {
+                factor = 0
+				OR = {
+					has_game_rule = {
+						rule = DNF_BOHEMIAN_ELECTIONS
+						option = DNF_BOHEMIAN_ELECTIONS_SOCLIB
+					}
+					has_game_rule = {
+						rule = DNF_BOHEMIAN_ELECTIONS
+						option = DNF_BOHEMIAN_ELECTIONS_CON
+					}
+				}
+            }
+            modifier = {
+                factor = 10
+                has_game_rule = {
+                    rule = DNF_BOHEMIAN_ELECTIONS
+					option = DNF_BOHEMIAN_ELECTIONS_MARKLIB
+                }
+            }
+		}
+		
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_bohemia_marklib_rallies target: [From.GetName]"
+			custom_effect_tooltip = DNF_bohemia_marklib_rallies_tt
+			add_to_variable = { 
+				var = DNF_bohemia_socialist_pop
+				value = -3
+			}
+			add_to_variable = { 
+				var = DNF_bohemia_liberal_pop
+				value = 3
+			}
+		}
+	}
+	
+	DNF_bohemia_soclib_rallies = {
+		icon = generic_agriculture
+		visible = {
+			check_variable = { DNF_bohemian_election_involved = 1 }
+			NOT = { 			OR = { 	has_country_flag = DNF_Adolf_Scharf
+										has_country_flag = DNF_Josip_Broz
+										has_country_flag = DNF_Anna_Kethly
+										has_country_flag = DNF_Bruno_Pitterman } 
+				}
+			}
+		
+		cost = 25
+		days_remove = 10
+		
+		modifier = {
+			political_power_cost = 0.05
+		}
+
+		available = {
+			check_variable = { DNF_bohemia_socialist_pop > 0 }
+		}
+		
+		ai_will_do = { 
+			base = 1
+			modifier = {
+                factor = 0
+				OR = {
+					has_game_rule = {
+						rule = DNF_BOHEMIAN_ELECTIONS
+						option = DNF_BOHEMIAN_ELECTIONS_MARKLIB
+					}
+					has_game_rule = {
+						rule = DNF_BOHEMIAN_ELECTIONS
+						option = DNF_BOHEMIAN_ELECTIONS_CON
+					}
+				}
+            }
+            modifier = {
+                factor = 10
+                has_game_rule = {
+                    rule = DNF_BOHEMIAN_ELECTIONS
+					option = DNF_BOHEMIAN_ELECTIONS_SOCLIB
+                }
+            }
+		}
+		
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_bohemia_soclib_rallies target: [From.GetName]"
+			custom_effect_tooltip = DNF_bohemia_soclib_rallies_tt
+			add_to_variable = { 
+				var = DNF_bohemia_socialist_pop
+				value = -3
+			}
+			add_to_variable = { 
+				var = DNF_bohemia_agrarian_pop
+				value = 3
+			}
+		}
+	}
+	
+	DNF_bohemia_socdem_rallies = {
+		icon = wrenches
+		visible = {
+			check_variable = { DNF_bohemian_election_involved = 1 }
+			OR = { 	has_country_flag = DNF_Adolf_Scharf
+					has_country_flag = DNF_Josip_Broz
+					has_country_flag = DNF_Anna_Kethly
+					has_country_flag = DNF_Bruno_Pitterman
+				}
+			}
+
+			available = {
+				OR = { check_variable = { DNF_bohemia_agrarian_pop > 0 }
+				check_variable = { DNF_bohemia_liberal_pop > 0 }
+				check_variable = { DNF_bohemia_conservative_pop > 0 } }
+			}
+		
+		cost = 25
+		days_remove = 10
+		
+		modifier = {
+			political_power_cost = 0.05
+		}
+		
+		ai_will_do = { 
+			base = 1
+			modifier = {
+                factor = 0
+				OR = {
+					has_game_rule = {
+						rule = DNF_BOHEMIAN_ELECTIONS
+						option = DNF_BOHEMIAN_ELECTIONS_MARKLIB
+					}
+					has_game_rule = {
+						rule = DNF_BOHEMIAN_ELECTIONS
+						option = DNF_BOHEMIAN_ELECTIONS_CON
+					}
+					has_game_rule = {
+							rule = DNF_BOHEMIAN_ELECTIONS
+							option = DNF_BOHEMIAN_ELECTIONS_SOCLIB
+						}
+					}
+            	}
+            # modifier = {
+            #     factor = 10
+            #     has_game_rule = {
+            #         rule = DNF_BOHEMIAN_ELECTIONS
+			# 		option = DNF_BOHEMIAN_ELECTIONS_SOCDEM
+            # 	    }
+        	#     }
+			}
+		
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_bohemia_socdem_rallies target: [From.GetName]"
+			custom_effect_tooltip = DNF_bohemia_socdem_rallies_tt
+			add_to_variable = { 
+				var = DNF_bohemia_socialist_pop
+				value = 5
+			}
+			add_to_variable = { 
+				var = DNF_bohemia_agrarian_pop
+				value = -2
+			}
+			add_to_variable = { 
+				var = DNF_bohemia_liberal_pop
+				value = -2
+			}
+			add_to_variable = { 
+				var = DNF_bohemia_conservative_pop
+				value = -1
+			}
+		}
+	}
+
+	DNF_bohemia_remove_CSM_leadership = {
+		icon = generic_inflation
+		visible = {
+			check_variable = { DNF_bohemian_election_1952_involved = 1 }
+			has_country_flag = DNF_CSM_strike
+			OR = { 	has_country_flag = DNF_Adolf_Scharf
+					has_country_flag = DNF_Josip_Broz
+					has_country_flag = DNF_Anna_Kethly
+					has_country_flag = DNF_Bruno_Pitterman
+				}
+			}
+		
+		cost = 50
+		days_remove = 31
+		
+		modifier = {
+			political_power_cost = 0.05
+		}
+		
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_bohemia_remove_CSM_leadership target: [From.GetName]"
+			custom_effect_tooltip = DNF_bohemia_CSM_handled_tt
+			add_to_variable = { 
+				var = DNF_bohemia_socialist_pop
+				value = 3
+			}
+			clr_country_flag = DNF_CSM_strike
+		}
+	}
+
+	DNF_bohemia_mobilise_sokol = {
+		icon = generic_political_rally
+		visible = {
+			check_variable = { DNF_bohemian_election_1948_involved = 1 }
+		}
+		
+		cost = 50
+		days_remove = 30
+		
+		modifier = {
+			political_power_cost = 0.05
+		}
+		
+		ai_will_do = { 
+			base = 1
+			modifier = {
+                factor = 0
+				OR = {
+					has_game_rule = {
+						rule = DNF_BOHEMIAN_ELECTIONS
+						option = DNF_BOHEMIAN_ELECTIONS_SOCLIB
+					}
+					has_game_rule = {
+						rule = DNF_BOHEMIAN_ELECTIONS
+						option = DNF_BOHEMIAN_ELECTIONS_CON
+					}
+				}
+            }
+            modifier = {
+                factor = 10
+                has_game_rule = {
+                    rule = DNF_BOHEMIAN_ELECTIONS
+					option = DNF_BOHEMIAN_ELECTIONS_MARKLIB
+                }
+            }
+		}
+		
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_bohemia_mobilise_sokol target: [From.GetName]"
+			custom_effect_tooltip = DNF_bohemia_mobilise_sokol_tt
+			add_to_variable = { 
+				var = DNF_bohemia_socialist_pop
+				value = 1
+			}
+			add_to_variable = { 
+				var = DNF_bohemia_conservative_pop
+				value = -2
+			}
+			add_to_variable = { 
+				var = DNF_bohemia_liberal_pop
+				value = 2
+			}
+			add_to_variable = { 
+				var = DNF_bohemia_agrarian_pop
+				value = -1
+			}
+			country_event = {
+				id = krg_dnf_regional_elections_bohemia.6
+			}
+		}
+	}
+	
+	DNF_bohemian_election_1948 = {
+		icon = election
+		
+		allowed = { 
+			always = no
+		}
+		available = {
+			always = no
+		}
+		activation = {
+			check_variable = { DNF_bohemian_election_1948_involved = 1 }
+		}
+		
+		days_mission_timeout = 80
+		fire_only_once = yes
+		
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout DNF_bohemian_election_1948 target: [From.GetName]"
+			add_to_variable = {
+				var = DNF_bohemia_coalition_pop
+				value = DNF_bohemia_liberal_pop
+			}
+			add_to_variable = {
+				var = DNF_bohemia_coalition_pop
+				value = DNF_bohemia_agrarian_pop
+			}
+			add_to_variable = {
+				var = DNF_bohemia_coalition_pop
+				value = DNF_bohemia_conservative_pop
+			}
+			custom_effect_tooltip = DNF_bohemia_outcome_tt
+			hidden_effect = {
+				if = {
+					limit = {
+						check_variable = { DNF_bohemia_socialist_pop > DNF_bohemia_coalition_pop }
+					}
+					country_event = {
+						id = krg_dnf_regional_elections_bohemia.2
+					}
+				}
+				else_if = {
+					limit = {
+						check_variable = { DNF_bohemia_liberal_pop > DNF_bohemia_agrarian_pop }
+					}
+					country_event = {
+						id = krg_dnf_regional_elections_bohemia.3
+					}
+				}
+				else = {
+					country_event = {
+						id = krg_dnf_regional_elections_bohemia.4
+					}
+				}
+			}
+		}
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete DNF_bohemian_election_1948 target: [From.GetName]"
+		}
+	}
+	
+	DNF_bohemian_election_1952 = {
+		icon = election
+		
+		allowed = { 
+			always = no
+		}
+		available = {
+			always = no
+		}
+		activation = {
+			check_variable = { DNF_bohemian_election_1952_involved = 1 }
+		}
+		
+		days_mission_timeout = 80
+		fire_only_once = yes
+		
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout DNF_bohemian_election_1952 target: [From.GetName]"
+			add_to_variable = { var = DNF_bohemia_coalition_pop value = DNF_bohemia_liberal_pop }
+			add_to_variable = { var = DNF_bohemia_coalition_pop value = DNF_bohemia_agrarian_pop }
+			add_to_variable = { var = DNF_bohemia_coalition_pop value = DNF_bohemia_conservative_pop }
+			custom_effect_tooltip = DNF_bohemia_outcome_tt
+			hidden_effect = {
+				if = { limit = { check_variable = { DNF_bohemia_socialist_pop > DNF_bohemia_coalition_pop }}
+					country_event = { id = krg_dnf_regional_elections_bohemia.10 }
+				} else_if = { limit = {check_variable = { DNF_bohemia_liberal_pop > DNF_bohemia_agrarian_pop }}
+					country_event = { id = krg_dnf_regional_elections_bohemia.8 }
+				} else = {
+					country_event = { id = krg_dnf_regional_elections_bohemia.9 }
+				}
+			}
+		}
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete DNF_bohemian_election_1952 target: [From.GetName]"
+		}
+	}
+
+	DNF_bohemian_SDAPD_campaigning = {
+		icon = wrenches
+		
+		allowed = { 
+			always = no
+		}
+		available = {
+			check_variable = { DNF_bohemian_election_1948_involved = 1 }
+		}
+		
+		selectable_mission = yes
+		days_mission_timeout = 30
+		cost = 60
+		
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete DNF_bohemian_SDAPD_campaigning target: [From.GetName]"
+			custom_effect_tooltip = DNF_stymie_opposition_tt
+		}
+		
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout DNF_bohemian_SDAPD_campaigning target: [From.GetName]"
+			custom_effect_tooltip = DNF_bohemia_1948_election_socialist_campaigning_tt
+			add_to_variable = { 
+				var = DNF_bohemia_socialist_pop
+				value = 12
+			}
+			add_to_variable = { 
+				var = DNF_bohemia_conservative_pop
+				value = -4
+			}
+			add_to_variable = { 
+				var = DNF_bohemia_liberal_pop
+				value = -4
+			}
+			add_to_variable = { 
+				var = DNF_bohemia_agrarian_pop
+				value = -4
+			}
+		}
+	}
+
+	DNF_bohemian_1952_opposition_campaigning = {
+			icon = generic_political_rally
+			
+			allowed = { 
+				always = no
+			}
+			available = {
+				check_variable = { DNF_bohemian_election_1952_involved = 1 }
+			}
+			
+			selectable_mission = yes
+			days_mission_timeout = 30
+			cost = 60
+			
+			
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete DNF_bohemian_1952_opposition_campaigning target: [From.GetName]"
+			custom_effect_tooltip = DNF_stymie_opposition_tt
+		}
+			
+			timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout DNF_bohemian_1952_opposition_campaigning target: [From.GetName]"
+				if = { limit = { OR = { has_country_flag = DNF_Adolf_Scharf 
+										has_country_flag = DNF_Josip_Broz_Tito
+										has_country_flag = DNF_Bruno_Pitterman
+										has_country_flag = DNF_Anna_Kethly}}
+				custom_effect_tooltip = DNF_bohemian_1952_opposition_campaigning_SDAPD_tt
+				add_to_variable = { var = DNF_bohemia_socialist_pop value = -12 }
+				add_to_variable = { var = DNF_bohemia_conservative_pop value = 4 }
+				add_to_variable = { var = DNF_bohemia_liberal_pop value = 4 }
+				add_to_variable = { var = DNF_bohemia_agrarian_pop value = 4 }	
+				}
+				else = {
+				custom_effect_tooltip = DNF_bohemian_1952_opposition_campaigning_tt
+				add_to_variable = { var = DNF_bohemia_socialist_pop value = 12 }
+				add_to_variable = { var = DNF_bohemia_conservative_pop value = -4 }
+				add_to_variable = { var = DNF_bohemia_liberal_pop value = -4 }
+				add_to_variable = { var = DNF_bohemia_agrarian_pop value = -4 }	
+				}
+			}
+	}
+}
+
+DNF_illyrian_national_election_cat = {
+
+	DNF_illyria_divisive_campaign = {
+		icon = cavalry
+		visible = {
+			AND = {
+				check_variable = { DNF_illyrian_election_1948_involved = 1 }
+				NOT = {
+					has_country_flag = DNF_illyrian_election_picked_focus
+				}
+			}
+		}
+
+		cost = 50
+		days_remove = 50
+		
+		modifier = {
+			political_power_cost = 0.05
+		}
+		
+		ai_will_do = { 
+			base = 1
+            modifier = {
+                factor = 0
+                has_game_rule = {
+                    rule = DNF_ILLYRIAN_ELECTIONS
+					option = DNF_ILLYRIAN_ELECTIONS_SOCDEM
+                }
+            }
+            modifier = {
+                factor = 10
+                has_game_rule = {
+                    rule = DNF_ILLYRIAN_ELECTIONS
+					option = DNF_ILLYRIAN_ELECTIONS_CON
+                }
+            }
+		}
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete DNF_illyria_divisive_campaign target: [From.GetName]"
+			set_country_flag = DNF_illyrian_election_picked_focus
+		}
+		
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_illyria_divisive_campaign target: [From.GetName]"
+			custom_effect_tooltip = DNF_illyria_divisive_campaign_tt
+			add_to_variable = { 
+				var = DNF_illyria_socialist_pop
+				value = -2
+			}
+			add_to_variable = { 
+				var = DNF_illyria_conservative_pop
+				value = 5
+			}
+			add_to_variable = { 
+				var = DNF_illyria_agrarian_pop
+				value = -3
+			}
+		}
+	}
+	
+	DNF_illyria_inclusive_campaign = {
+		icon = peace_dove
+		visible = {
+			AND = {
+				check_variable = { DNF_illyrian_election_1948_involved = 1 }
+				NOT = {
+					has_country_flag = DNF_illyrian_election_picked_focus
+				}
+			}
+		}
+		
+		cost = 50
+		days_remove = 50
+		
+		modifier = {
+			political_power_cost = 0.05
+		}
+		
+		ai_will_do = { 
+			base = 1
+            modifier = {
+                factor = 0
+                has_game_rule = {
+                    rule = DNF_ILLYRIAN_ELECTIONS
+					option = DNF_ILLYRIAN_ELECTIONS_SOCDEM
+                }
+            }
+            modifier = {
+                factor = 10
+                has_game_rule = {
+                    rule = DNF_ILLYRIAN_ELECTIONS
+					option = DNF_ILLYRIAN_ELECTIONS_CON
+                }
+            }
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete DNF_illyria_inclusive_campaign target: [From.GetName]"
+			set_country_flag = DNF_illyrian_election_picked_focus
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_illyria_inclusive_campaign target: [From.GetName]"
+			custom_effect_tooltip = DNF_illyria_inclusive_campaign_tt
+			add_to_variable = { 
+				var = DNF_illyria_socialist_pop
+				value = -4
+			}
+			add_to_variable = { 
+				var = DNF_illyria_conservative_pop
+				value = 5
+			}
+			add_to_variable = { 
+				var = DNF_illyria_agrarian_pop
+				value = -1
+			}
+		}
+	}
+
+	DNF_illyria_soccon_rallies = {
+		icon = shield
+		visible = {
+			check_variable = { DNF_illyrian_election_involved = 1 }
+			OR = { has_country_flag = DNF_Zoltan_Tildy
+				   has_country_flag = DNF_Alcide_De_Gasperi
+				   has_country_flag = DNF_Engelbert_Dollfuss
+				   has_country_flag = DNF_Wilhelm_Miklas
+				   has_country_flag = DNF_Julius_Raab
+				   has_country_flag = DNF_Leopold_Figl }
+						
+			}
+		
+		cost = 50
+		days_remove = 20
+		
+		modifier = {
+			political_power_cost = 0.05
+		}
+				
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_illyria_soccon_rallies target: [From.GetName]"
+			custom_effect_tooltip = DNF_illyrian_soccon_rallies_tt
+			hidden_effect = { country_event = { id = krg_dnf_regional_elections_illyria.3 } }
+			add_to_variable = { 
+				var = DNF_illyria_socialist_pop
+				value = -2
+			}
+			add_to_variable = { 
+				var = DNF_illyria_conservative_pop
+				value = 3
+			}
+
+			add_to_variable = { 
+				var = DNF_illyria_agrarian_pop
+				value = -1
+			}
+		}
+	}
+
+	DNF_illyria_soclib_rallies = {
+		icon = freedom
+		visible = {
+			check_variable = { DNF_illyrian_election_involved = 1 }
+			has_country_flag = DNF_Peter_Veres
+		}
+		
+		cost = 50
+		days_remove = 20
+		
+		modifier = {
+			political_power_cost = 0.05
+		}
+				
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_illyria_soclib_rallies target: [From.GetName]"
+			custom_effect_tooltip = DNF_illyrian_soclib_rallies_tt
+			add_to_variable = { 
+				var = DNF_illyria_socialist_pop
+				value = -2
+			}
+			add_to_variable = { 
+				var = DNF_illyria_conservative_pop
+				value = -1
+			}
+
+			add_to_variable = { 
+				var = DNF_illyria_agrarian_pop
+				value = 3
+			}
+		}
+	}
+	
+	DNF_illyria_socdem_rallies = {
+		icon = wrenches
+		visible = {
+			check_variable = { DNF_illyrian_election_involved = 1 }
+			OR = { 	has_country_flag = DNF_Karl_Renner 
+					has_country_flag = DNF_Adolf_Scharf
+			 		has_country_flag = DNF_Josip_Broz
+					has_country_flag = DNF_Anna_Kethly
+					has_country_flag = DNF_Bruno_Pitterman }
+		}
+		
+		cost = 50
+		days_remove = 20
+		
+		modifier = {
+			political_power_cost = 0.05
+		}
+				
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_illyria_socdem_rallies target: [From.GetName]"
+			custom_effect_tooltip = DNF_illyrian_socdem_rallies_tt
+			add_to_variable = { 
+				var = DNF_illyria_socialist_pop
+				value = 3
+			}
+			add_to_variable = { 
+				var = DNF_illyria_conservative_pop
+				value = -2
+			}
+
+			add_to_variable = { 
+				var = DNF_illyria_agrarian_pop
+				value = -1
+			}
+		}
+	}
+
+	DNF_illyrian_election_1948 = {
+		icon = election
+		
+		allowed = { 
+			always = no
+		}
+		available = {
+			always = no
+		}
+		activation = {
+			check_variable = { DNF_illyrian_election_1948_involved = 1 }
+		}
+		
+		days_mission_timeout = 80
+		fire_only_once = yes
+		
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout DNF_illyrian_election_1948 target: [From.GetName]"
+			hidden_effect = {
+				country_event = {
+					id = krg_dnf_regional_elections_illyria.1
+				}
+			}
+		}	
+	}
+		
+	DNF_illyrian_SDAPD_campaigning = {
+		icon = wrenches
+		
+		allowed = { 
+			always = no
+		}
+		available = {
+			check_variable = { DNF_illyrian_election_1948_involved = 1 }
+		}
+		
+		selectable_mission = yes
+		days_mission_timeout = 30
+		cost = 200
+				
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete DNF_illyrian_SDAPD_campaigning target: [From.GetName]"
+			custom_effect_tooltip = DNF_stymie_opposition_tt
+		}
+		
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout DNF_illyrian_SDAPD_campaigning target: [From.GetName]"
+			custom_effect_tooltip = DNF_illyria_1948_election_socialist_campaigning_tt
+			country_event = { 
+				id = krg_dnf_regional_elections_illyria.4 
+			}
+			add_to_variable = { 
+				var = DNF_illyria_socialist_pop
+				value = 25
+			}
+			add_to_variable = { 
+				var = DNF_illyria_conservative_pop
+				value = -10
+			}
+			add_to_variable = { 
+				var = DNF_illyria_agrarian_pop
+				value = -15
+			}
+		}
+	}
+
+	DNF_illyrian_election_1952 = {
+		icon = election
+		
+		allowed = { 
+			always = no
+		}
+		available = {
+			always = no
+		}
+		activation = {
+			check_variable = { DNF_illyrian_election_1952_involved = 1 }
+		}
+		
+		days_mission_timeout = 80
+		fire_only_once = yes
+		
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout DNF_illyrian_election_1952 target: [From.GetName]"
+			hidden_effect = {
+				set_variable = { DNF_illyria_coalition_pop = DNF_illyria_conservative_pop }
+				add_to_variable = {
+					var = DNF_illyria_coalition_pop
+					value = DNF_illyria_agrarian_pop
+				}
+				if = {
+					limit = {
+						check_variable = { DNF_illyria_socialist_pop > DNF_illyria_coalition_pop} 
+					}
+					country_event = { id = krg_dnf_regional_elections_illyria.7}
+				}
+				else = {
+					country_event = { id = krg_dnf_regional_elections_illyria.6 }
+				}
+			}
+		}	
+	}
+
+	DNF_illyrian_1952_opposition_campaigning = {
+		icon = generic_political_rally
+		
+		allowed = { 
+			always = no
+		}
+		available = {
+			check_variable = { DNF_illyrian_election_1952_involved = 1 }
+		}
+		
+		selectable_mission = yes
+		days_mission_timeout = 30
+		cost = 200
+		
+			
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete DNF_illyrian_1952_opposition_campaigning target: [From.GetName]"
+			custom_effect_tooltip = DNF_stymie_opposition_tt
+		}
+		
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout DNF_illyrian_1952_opposition_campaigning target: [From.GetName]"
+			if = { limit = { OR = { has_country_flag = DNF_Zoltan_Tildy
+									has_country_flag = DNF_Alcide_De_Gasperi
+									has_country_flag = DNF_Engelbert_Dollfuss
+									has_country_flag = DNF_Wilhelm_Miklas
+									has_country_flag = DNF_Julius_Raab
+									has_country_flag = DNF_Leopold_Figl
+									has_country_flag = DNF_Peter_Veres }}
+				custom_effect_tooltip = DNF_illyria_1952_election_opposition_campaigning_tt
+				add_to_variable = { var = DNF_illyria_socialist_pop value = 10 }
+				add_to_variable = { var = DNF_illyria_conservative_pop value = -5 }
+				add_to_variable = { var = DNF_illyria_agrarian_pop value = -5 }
+
+			} else = {
+				custom_effect_tooltip = DNF_illyria_1952_election_opposition_campaigning_SDAPD_tt
+				add_to_variable = { var = DNF_illyria_socialist_pop value = -5 }
+				add_to_variable = { var = DNF_illyria_conservative_pop value = 3 }
+				add_to_variable = { var = DNF_illyria_agrarian_pop value = 2 }
+			}
+		}
+	}
+
+	DNF_illyria_send_vote_observers = {
+		icon = election
+		
+		allowed = { 
+			always = no
+		}
+		available = {
+			check_variable = { DNF_illyrian_election_1952_involved = 1 }
+			has_country_flag = DNF_Illyria_1952_Rugpull
+		}
+		
+		selectable_mission = yes
+		days_mission_timeout = 30
+		cost = 35
+				
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete DNF_illyria_send_vote_observers target: [From.GetName]"
+		}
+		
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout DNF_illyria_send_vote_observers target: [From.GetName]"
+			country_event = {
+				id = krg_dnf_regional_elections_illyria.17
+			}
+		}
+	}
+}
+
+DNF_galician_national_election_cat = {
+	DNF_galician_election_1949 = {
+		icon = election
+		
+		allowed = { 
+			always = no
+		}
+		available = {
+			always = no
+		}
+		activation = {
+			check_variable = { DNF_galician_election_1949_involved = 1 }
+		}
+		
+		days_mission_timeout = 80
+		fire_only_once = yes
+		
+		timeout_effect = {	
+			log = "[GetDateText]: [Root.GetName]: Decision timeout DNF_galician_election_1949 target: [From.GetName]"
+		
+			hidden_effect = {
+				if = {
+					limit = {
+						check_variable = { DNF_galicia_marlib_pop > DNF_galicia_soclib_pop }
+						check_variable = { DNF_galicia_marlib_pop > DNF_galicia_soccon_pop }
+					}
+					country_event = {
+						id = krg_dnf_regional_elections_galicia.2
+					}
+				}
+				else_if = {
+					limit = {
+						check_variable = { DNF_galicia_soclib_pop > DNF_galicia_marlib_pop }
+						check_variable = { DNF_galicia_soclib_pop > DNF_galicia_soccon_pop }
+					}
+					country_event = {
+						id = krg_dnf_regional_elections_galicia.3
+					}
+				}
+				else = {
+					country_event = {
+						id = krg_dnf_regional_elections_galicia.4
+					}
+				}
+			}
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete DNF_galician_election_1949 target: [From.GetName]"
+		}
+	}
+	
+	DNF_galician_opposition_campaigning = {
+		icon = generic_political_rally
+		
+		allowed = { 
+			always = no
+		}
+		available = {
+			check_variable = { DNF_galician_election_involved = 1 }
+		}
+		
+		selectable_mission = yes
+		days_mission_timeout = 30
+		cost = 50
+			
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete DNF_galician_opposition_campaigning target: [From.GetName]"
+			custom_effect_tooltip = DNF_stymie_opposition_tt
+		}
+		
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout DNF_galician_opposition_campaigning target: [From.GetName]"
+			custom_effect_tooltip = DNF_galician_1949_opposition_campaigning_tt
+			add_to_variable = { 
+				var = DNF_galicia_marlib_pop
+				value = 3
+			}
+			add_to_variable = { 
+				var = DNF_galicia_soclib_pop
+				value = 2
+			}
+			add_to_variable = { 
+				var = DNF_galicia_soccon_pop
+				value = -5
+			}
+		}
+	}
+
+	DNF_galicia_mobilise_the_countryside = {
+		icon = generic_agriculture
+		visible = {
+			check_variable = { DNF_galician_election_1949_involved = 1 }
+		}
+		
+		cost = 40
+		days_remove = 25
+		
+		modifier = {
+			political_power_cost = 0.05
+		}
+		
+		ai_will_do = { 
+			base = 1
+            modifier = {
+                factor = 0
+                has_game_rule = {
+                    rule = DNF_GALICIAN_ELECTIONS
+					option = DNF_GALICIAN_ELECTIONS_SOCDEM
+                }
+            }
+            modifier = {
+                factor = 10
+                has_game_rule = {
+                    rule = DNF_GALICIAN_ELECTIONS
+					option = DNF_GALICIAN_ELECTIONS_CON
+                }
+            }
+		}
+		
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_galicia_mobilise_the_countryside target: [From.GetName]"
+			custom_effect_tooltip = DNF_galicia_mobilise_the_countryside_tt
+			country_event = { id = krg_dnf_regional_elections_galicia.5 }
+		}
+	}
+	DNF_galicia_soccon_rallies = {
+		icon = shield
+		visible = {
+			check_variable = { DNF_galician_election_1949_involved = 1 }
+		}
+		
+		cost = 40
+		days_remove = 20
+		
+		modifier = {
+			political_power_cost = 0.05
+		}
+		
+		ai_will_do = { 
+			base = 1
+            modifier = {
+                factor = 0
+                has_game_rule = {
+                    rule = DNF_GALICIAN_ELECTIONS
+					option = DNF_GALICIAN_ELECTIONS_SOCDEM
+                }
+            }
+            modifier = {
+                factor = 10
+                has_game_rule = {
+                    rule = DNF_GALICIAN_ELECTIONS
+					option = DNF_GALICIAN_ELECTIONS_CON
+                }
+            }
+		}
+		
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_galicia_soccon_rallies target: [From.GetName]"
+			custom_effect_tooltip = DNF_galician_soccon_rallies_tt
+			add_to_variable = { 
+				var = DNF_galicia_soccon_pop
+				value = 3
+			}
+			add_to_variable = { 
+				var = DNF_galicia_soclib_pop
+				value = -1
+			}
+
+			add_to_variable = { 
+				var = DNF_galicia_marlib_pop
+				value = -2
+			}
+		}
+	}
+
+	DNF_galician_western_polish_campaign = {
+		icon = factories
+		visible = {
+			AND = {
+				check_variable = { DNF_galician_election_1949_involved = 1 }
+				NOT = {
+					has_country_flag = DNF_galician_election_picked_focus
+				}
+			}
+		}
+		
+		cost = 35
+		days_remove = 50
+		
+		modifier = {
+			political_power_cost = 0.05
+		}
+		
+		ai_will_do = { 
+			base = 1
+            modifier = {
+                factor = 0
+                has_game_rule = {
+                    rule = DNF_GALICIAN_ELECTIONS
+					option = DNF_GALICIAN_ELECTIONS_SOCDEM
+                }
+            }
+            modifier = {
+                factor = 10
+                has_game_rule = {
+                    rule = DNF_GALICIAN_ELECTIONS
+					option = DNF_GALICIAN_ELECTIONS_CON
+                }
+            }
+		}
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete DNF_galician_western_polish_campaign target: [From.GetName]"
+			set_country_flag = DNF_galician_election_picked_focus
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_galician_western_polish_campaign target: [From.GetName]"
+			custom_effect_tooltip = DNF_galician_western_polish_campaign_tt
+			add_to_variable = { DNF_galicia_soccon_pop = 3 }
+			add_to_variable = { DNF_galicia_soclib_pop = -3 }
+			country_event = { id = krg_dnf_regional_elections_galicia.6 }
+		}
+	}
+	
+	DNF_galician_eastern_ukrainian_campaign = {
+		icon = generic_agriculture
+		visible = {
+			AND = {
+				check_variable = { DNF_galician_election_1949_involved = 1 }
+				NOT = {
+					has_country_flag = DNF_galician_election_picked_focus
+				}
+			}
+		}
+		
+		cost = 35
+		days_remove = 50
+		
+		modifier = {
+			political_power_cost = 0.05
+		}
+		
+		ai_will_do = { 
+			base = 1
+            modifier = {
+                factor = 0
+                has_game_rule = {
+                    rule = DNF_GALICIAN_ELECTIONS
+					option = DNF_GALICIAN_ELECTIONS_SOCDEM
+                }
+            }
+            modifier = {
+                factor = 10
+                has_game_rule = {
+                    rule = DNF_GALICIAN_ELECTIONS
+					option = DNF_GALICIAN_ELECTIONS_CON
+                }
+            }
+		}
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete DNF_galician_eastern_ukrainian_campaign target: [From.GetName]"
+			set_country_flag = DNF_galician_election_picked_focus
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_galician_eastern_ukrainian_campaign target: [From.GetName]"
+			custom_effect_tooltip = DNF_galician_eastern_ukrainian_campaign_tt
+			add_to_variable = { DNF_galicia_soccon_pop = 3 }
+			add_to_variable = { DNF_galicia_marlib_pop = -3 }
+			country_event = { id = krg_dnf_regional_elections_galicia.7 }
+		}
+	}
+	DNF_galician_election_1953 = {
+		icon = election
+		
+		allowed = { 
+			always = no
+		}
+		available = {
+			always = no
+		}
+		activation = {
+			check_variable = { DNF_galician_election_1953_involved = 1 }
+		}
+		
+		days_mission_timeout = 80
+		fire_only_once = yes
+		
+		timeout_effect = {	
+			log = "[GetDateText]: [Root.GetName]: Decision timeout DNF_galician_election_1953 target: [From.GetName]"
+		
+			hidden_effect = {
+				if = {
+					limit = {
+						check_variable = { DNF_galicia_marlib_pop > DNF_galicia_soclib_pop }
+						check_variable = { DNF_galicia_marlib_pop > DNF_galicia_soccon_pop }
+						check_variable = { DNF_galicia_marlib_pop > DNF_galicia_socdem_pop }
+					}
+					country_event = {
+						id = krg_dnf_regional_elections_galicia.12
+					}
+				}
+				else_if = {
+					limit = {
+						check_variable = { DNF_galicia_soclib_pop > DNF_galicia_marlib_pop }
+						check_variable = { DNF_galicia_soclib_pop > DNF_galicia_soccon_pop }
+						check_variable = { DNF_galicia_soclib_pop > DNF_galicia_socdem_pop }
+					}
+					country_event = {
+						id = krg_dnf_regional_elections_galicia.13
+					}
+				}
+				else_if = {
+					limit = {
+						check_variable = { DNF_galicia_socdem_pop > DNF_galicia_marlib_pop }
+						check_variable = { DNF_galicia_socdem_pop > DNF_galicia_soccon_pop }
+						check_variable = { DNF_galicia_socdem_pop > DNF_galicia_soclib_pop }
+					}
+					country_event = {
+						id = krg_dnf_regional_elections_galicia.14
+					}
+				}
+				else = {
+					country_event = {
+						id = krg_dnf_regional_elections_galicia.11
+					}
+				}
+			}
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete DNF_galician_election_1953 target: [From.GetName]"
+		}
+	}
+	
+	DNF_galician_election_1953_opposition_campaigning = {
+		icon = generic_political_rally
+		
+		allowed = { 
+			always = no
+		}
+		available = {
+			check_variable = { DNF_galician_election_1953_involved = 1 }
+		}
+		
+		selectable_mission = yes
+		days_mission_timeout = 30
+		cost = 50
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete DNF_galician_election_1953_opposition_campaigning target: [From.GetName]"
+			custom_effect_tooltip = DNF_stymie_opposition_tt
+		}
+		
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout DNF_galician_election_1953_opposition_campaigning target: [From.GetName]"
+			if = { limit = { OR = { has_country_flag = DNF_Adolf_Scharf 
+			has_country_flag = DNF_Josip_Broz_Tito
+			has_country_flag = DNF_Bruno_Pitterman
+			has_country_flag = DNF_Anna_Kethly}}
+			custom_effect_tooltip = DNF_galician_1953_opposition_campaigning_SDAPD_tt
+				add_to_variable = { var = DNF_galicia_socdem_pop value = -5 }
+				add_to_variable = { var = DNF_galicia_soccon_pop value = 5 }
+				add_to_variable = { var = DNF_galicia_soclib_pop value = 8 }
+				add_to_variable = { var = DNF_galicia_marlib_pop value = 4 }	
+			}
+			else = {
+			custom_effect_tooltip = DNF_galician_1953_opposition_campaigning_tt
+				add_to_variable = { var = DNF_galicia_socdem_pop value = 5 }
+				add_to_variable = { var = DNF_galicia_soccon_pop value = -5 }
+				add_to_variable = { var = DNF_galicia_soclib_pop value = 8 }
+				add_to_variable = { var = DNF_galicia_marlib_pop value = 4 }	
+			}
+		}
+	}
+
+	DNF_galicia_1953_Krakow_Crackdown = {
+		icon = cavalry
+		cost = 20
+		days_remove = 5
+		visible = {
+			has_country_flag = DNF_Krakow_Riots
+		}
+		available = {
+			check_variable = { DNF_galician_election_1953_involved = 1 }
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete DNF_galicia_1953_Krakow_Crackdown target: [From.GetName]"
+			
+		}
+		
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_galicia_1953_Krakow_Crackdown target: [From.GetName]"
+			if = { limit = { OR = { has_country_flag = DNF_Adolf_Scharf 
+			has_country_flag = DNF_Josip_Broz_Tito
+			has_country_flag = DNF_Bruno_Pitterman
+			has_country_flag = DNF_Anna_Kethly}}
+			custom_effect_tooltip = DNF_krakow_crackdown_SDAPD_tt
+				add_to_variable = { var = DNF_galicia_socdem_pop value = 4 }
+				add_to_variable = { var = DNF_galicia_soccon_pop value = -2 }
+				add_to_variable = { var = DNF_galicia_soclib_pop value = -3 }
+				add_to_variable = { var = DNF_galicia_marlib_pop value = -2 }	
+			}
+			else = {
+			custom_effect_tooltip = DNF_krakow_crackdown_tt
+				add_to_variable = { var = DNF_galicia_socdem_pop value = -2 }
+				add_to_variable = { var = DNF_galicia_soccon_pop value = 7 } #party of law and order innit
+				add_to_variable = { var = DNF_galicia_soclib_pop value = -5 }
+				add_to_variable = { var = DNF_galicia_marlib_pop value = -2 }	
+			}
+			country_event = { 
+				id = krg_dnf_regional_elections_galicia.16 
+			}
+		}
+	}
+
+	DNF_galicia_1953_SDAPD_funds = {
+		icon = wrenches
+		cost = 20
+		days_remove = 15
+		available = {
+			check_variable = { DNF_galician_election_1953_involved = 1 }
+		}
+		visible = {
+			OR = { has_country_flag = DNF_Adolf_Scharf 
+			has_country_flag = DNF_Josip_Broz_Tito
+			has_country_flag = DNF_Bruno_Pitterman
+			has_country_flag = DNF_Anna_Kethly}
+			check_variable = { DNF_galician_election_1953_involved = 1 }
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete DNF_galicia_1953_SDAPD_funds target: [From.GetName]"
+			
+		}
+		
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_galicia_1953_SDAPD_funds target: [From.GetName]"
+					custom_effect_tooltip = DNF_galicia_1953_SDAPD_funds_tt
+				add_to_variable = { var = DNF_galicia_socdem_pop value = 5 }
+		
+		}
+	}
+
+	DNF_galicia_1953_CSP_funds = {
+		icon = shield
+		cost = 20
+		days_remove = 15
+		visible = {
+			OR = { has_country_flag = DNF_Alcide_De_Gasperi 
+			has_country_flag = DNF_Julius_Raab
+			has_country_flag = DNF_Wilhelm_Miklas
+			has_country_flag = DNF_Leopold_Figl
+			has_country_flag = DNF_Zoltan_Tildy
+			has_country_flag = DNF_Engelbert_Dollfuss }
+			check_variable = { DNF_galician_election_1953_involved = 1 }
+		}
+		available = {
+			check_variable = { DNF_galician_election_1953_involved = 1 }
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete DNF_galicia_1953_CSP_funds target: [From.GetName]"
+			
+		}
+		
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_galicia_1953_CSP_funds target: [From.GetName]"
+					custom_effect_tooltip = DNF_galicia_1953_CSP_funds_tt
+				add_to_variable = { var = DNF_galicia_soccon_pop value = 5 }
+		}
+	}
+	
+	DNF_galicia_1953_Lib_funds = {
+		icon = freedom
+		cost = 20
+		days_remove = 15
+		visible = {
+			has_country_flag = DNF_Peter_Veres
+			check_variable = { DNF_galician_election_1953_involved = 1 }
+		}
+		available = {
+			check_variable = { DNF_galician_election_1953_involved = 1 }
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete DNF_galicia_1953_Lib_funds target: [From.GetName]"
+			
+		}
+		
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_galicia_1953_Lib_funds target: [From.GetName]"
+                custom_effect_tooltip = DNF_galicia_1953_lib_funds_tt
+				add_to_variable = { var = DNF_galicia_soclib_pop value = 5 }
+		}
+	}
+}
+
+DNF_slovakian_national_election_cat = {
+	DNF_slovakian_election_1949 = {
+		icon = election
+		
+		allowed = { 
+			always = no
+		}
+		available = {
+			always = no
+		}
+		activation = {
+			check_variable = { DNF_slovakian_election_1949_involved = 1 }
+		}
+		
+		days_mission_timeout = 80
+		fire_only_once = yes
+		
+		timeout_effect = {	
+			log = "[GetDateText]: [Root.GetName]: Decision timeout DNF_slovakian_election_1949 target: [From.GetName]"
+			hidden_effect = {
+				if = {
+					limit = {
+						check_variable = { DNF_slovakia_soccon_pop > DNF_slovakia_soclib_pop }
+						check_variable = { DNF_slovakia_soccon_pop > DNF_slovakia_socdem_pop }
+					}
+					country_event = {
+						id = krg_dnf_regional_elections_slovakia.2
+					}
+				}
+				else_if = {
+					limit = {
+						check_variable = { DNF_slovakia_soclib_pop > DNF_slovakia_socdem_pop }
+						check_variable = { DNF_slovakia_soclib_pop > DNF_slovakia_soccon_pop }
+					}
+					country_event = {
+						id = krg_dnf_regional_elections_slovakia.3
+					}
+				}
+				else = {
+					country_event = {
+						id = krg_dnf_regional_elections_slovakia.4
+						}
+					}
+				}
+			}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete DNF_slovakian_election_1949 target: [From.GetName]"
+		}
+	}
+	
+	DNF_slovakian_opposition_campaigning = {
+		icon = generic_political_rally
+		
+		allowed = { 
+			always = no
+		}
+		available = {
+			check_variable = { DNF_slovakian_election_1949_involved = 1 }
+		}
+		
+		selectable_mission = yes
+		days_mission_timeout = 30
+		cost = 75
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete DNF_slovakian_opposition_campaigning target: [From.GetName]"
+				custom_effect_tooltip = DNF_stymie_opposition_tt
+		}	
+		
+		
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout DNF_slovakian_opposition_campaigning target: [From.GetName]"
+			custom_effect_tooltip = DNF_slovakian_1949_opposition_campaigning_tt
+			add_to_variable = { 
+				var = DNF_slovakia_socdem_pop
+				value = 4
+			}
+			add_to_variable = { 
+				var = DNF_slovakia_soclib_pop
+				value = 3
+			}
+			add_to_variable = { 
+				var = DNF_slovakia_soccon_pop
+				value = -7
+			}
+		}
+	}
+
+	DNF_slovakian_csp_smear_campaigns = {
+		icon = wrenches
+		
+		available = {
+			check_variable = { DNF_slovakian_election_1949_involved = 1 }
+		}
+		
+		cost = 35
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete DNF_slovakian_csp_smear_campaigns target: [From.GetName]"
+			custom_effect_tooltip = DNF_slovakian_1949_smear_campaigns_tt
+		}
+		
+		ai_will_do = { 
+			base = 1
+            modifier = {
+                factor = 0
+                has_game_rule = {
+                    rule = DNF_SLOVAKIAN_ELECTIONS
+					option = DNF_SLOVAKIAN_ELECTIONS_SOCDEM
+                }
+            }
+            modifier = {
+                factor = 10
+                has_game_rule = {
+                    rule = DNF_SLOVAKIAN_ELECTIONS
+					option = DNF_SLOVAKIAN_ELECTIONS_CON
+                }
+            }
+		}
+
+		days_remove = 30
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_slovakian_csp_smear_campaigns target: [From.GetName]"
+			add_to_variable = { 
+				var = DNF_slovakia_socdem_pop
+				value = -2
+			}
+			add_to_variable = { 
+				var = DNF_slovakia_soccon_pop
+				value = 2
+			}
+			country_event = {
+				id = krg_dnf_regional_elections_slovakia.5
+			}
+		}
+	}
+	
+	DNF_slovakian_soccon_rallies = {
+		icon = shield
+		
+		available = {
+			check_variable = { DNF_slovakian_election_involved = 1 }
+			NOT = { OR = { 	has_country_flag = DNF_Peter_Veres
+							has_country_flag = DNF_Adolf_Scharf
+							has_country_flag = DNF_Anna_Kethly
+							has_country_flag = DNF_Bruno_Pitterman
+							has_country_flag = DNF_Josip_Broz
+							has_country_flag = DNF_Karl_Renner }}
+		}
+
+		visible = {
+			check_variable = { DNF_slovakian_election_involved = 1 }
+			NOT = { OR = { 	has_country_flag = DNF_Peter_Veres
+							has_country_flag = DNF_Adolf_Scharf
+							has_country_flag = DNF_Anna_Kethly
+							has_country_flag = DNF_Bruno_Pitterman
+							has_country_flag = DNF_Josip_Broz
+							has_country_flag = DNF_Karl_Renner }}
+		}
+		
+		cost = 20
+		days_remove = 30
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete DNF_slovakian_soccon_rallies target: [From.GetName]"
+			custom_effect_tooltip = DNF_slovakian_soccon_rallies_tt
+		}
+		
+		ai_will_do = { 
+			base = 1
+            modifier = {
+                factor = 0
+                has_game_rule = {
+                    rule = DNF_SLOVAKIAN_ELECTIONS
+					option = DNF_SLOVAKIAN_ELECTIONS_SOCDEM
+                }
+            }
+            modifier = {
+                factor = 10
+                has_game_rule = {
+                    rule = DNF_SLOVAKIAN_ELECTIONS
+					option = DNF_SLOVAKIAN_ELECTIONS_CON
+                }
+            }
+		}
+		
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_slovakian_soccon_rallies target: [From.GetName]"
+			add_to_variable = { 
+				var = DNF_slovakia_socdem_pop
+				value = -1
+			}
+			add_to_variable = { 
+				var = DNF_slovakia_soclib_pop
+				value = -2
+			}
+			add_to_variable = { 
+				var = DNF_slovakia_soccon_pop
+				value = 3
+			}
+		}
+	}
+
+	
+	DNF_slovakian_soclib_rallies = {
+		icon = generic_agriculture
+		
+		available = {
+			check_variable = { DNF_slovakian_election_involved = 1 }
+			has_country_flag = DNF_Peter_Veres
+		}
+
+		visible = {
+			check_variable = { DNF_slovakian_election_involved = 1 }
+			has_country_flag = DNF_Peter_Veres
+		}
+		
+		cost = 20
+		days_remove = 30
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete DNF_slovakian_soclib_rallies target: [From.GetName]"
+			custom_effect_tooltip = DNF_slovakian_soclib_rallies_tt
+		}
+		
+		ai_will_do = { 
+			base = 1
+            modifier = {
+                factor = 0
+                has_game_rule = {
+                    rule = DNF_SLOVAKIAN_ELECTIONS
+					option = DNF_SLOVAKIAN_ELECTIONS_SOCDEM
+                }
+            }
+            modifier = {
+                factor = 0
+                has_game_rule = {
+                    rule = DNF_SLOVAKIAN_ELECTIONS
+					option = DNF_SLOVAKIAN_ELECTIONS_CON
+                }
+            }
+		}
+		
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_slovakian_soclib_rallies target: [From.GetName]"
+			add_to_variable = { 
+				var = DNF_slovakia_socdem_pop
+				value = -1
+			}
+			add_to_variable = { 
+				var = DNF_slovakia_soclib_pop
+				value = 3
+			}
+			add_to_variable = { 
+				var = DNF_slovakia_soccon_pop
+				value = -2
+			}
+		}
+	}
+
+	DNF_slovakian_socdem_rallies = {
+		icon = wrenches
+		
+		available = {
+			check_variable = { DNF_slovakian_election_involved = 1 }
+			OR = { 			has_country_flag = DNF_Adolf_Scharf
+							has_country_flag = DNF_Anna_Kethly
+							has_country_flag = DNF_Bruno_Pitterman
+							has_country_flag = DNF_Josip_Broz
+							has_country_flag = DNF_Karl_Renner }
+		}
+
+		visible = {
+			check_variable = { DNF_slovakian_election_involved = 1 }
+			OR = { 			has_country_flag = DNF_Adolf_Scharf
+							has_country_flag = DNF_Anna_Kethly
+							has_country_flag = DNF_Bruno_Pitterman
+							has_country_flag = DNF_Josip_Broz
+							has_country_flag = DNF_Karl_Renner }
+		}
+		
+		cost = 20
+		days_remove = 30
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete DNF_slovakian_socdem_rallies target: [From.GetName]"
+			custom_effect_tooltip = DNF_slovakian_socdem_rallies_tt
+		}
+		
+		ai_will_do = { 
+			base = 1
+            modifier = {
+                factor = 10
+                has_game_rule = {
+                    rule = DNF_SLOVAKIAN_ELECTIONS
+					option = DNF_SLOVAKIAN_ELECTIONS_SOCDEM
+                }
+            }
+            modifier = {
+                factor = 0
+                has_game_rule = {
+                    rule = DNF_SLOVAKIAN_ELECTIONS
+					option = DNF_SLOVAKIAN_ELECTIONS_CON
+                }
+            }
+		}
+		
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_slovakian_socdem_rallies target: [From.GetName]"
+			add_to_variable = { 
+				var = DNF_slovakia_socdem_pop
+				value = 3
+			}
+			add_to_variable = { 
+				var = DNF_slovakia_soclib_pop
+				value = -1
+			}
+			add_to_variable = { 
+				var = DNF_slovakia_soccon_pop
+				value = -2
+			}
+		}
+	}
+
+	DNF_slovakian_election_1953 = {
+		icon = election
+		
+		allowed = { 
+			always = no
+		}
+		available = {
+			always = no
+		}
+		activation = {
+			check_variable = { DNF_slovakian_election_1953_involved = 1 }
+		}
+		
+		days_mission_timeout = 80
+		fire_only_once = yes
+		
+		timeout_effect = {	
+			log = "[GetDateText]: [Root.GetName]: Decision timeout DNF_slovakian_election_1953 target: [From.GetName]"
+			hidden_effect = {
+				if = {
+					limit = {
+						check_variable = { DNF_slovakia_soccon_pop > DNF_slovakia_soclib_pop }
+						check_variable = { DNF_slovakia_soccon_pop > DNF_slovakia_socdem_pop }
+					}
+					country_event = {
+						id = krg_dnf_regional_elections_slovakia.12
+					}
+				}
+				else_if = {
+					limit = {
+						check_variable = { DNF_slovakia_soclib_pop > DNF_slovakia_socdem_pop }
+						check_variable = { DNF_slovakia_soclib_pop > DNF_slovakia_soccon_pop }
+					}
+					country_event = {
+						id = krg_dnf_regional_elections_slovakia.13
+					}
+				}
+				else = {
+					country_event = {
+						id = krg_dnf_regional_elections_slovakia.14
+						}
+					}
+				}
+			}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete DNF_slovakian_election_1953 target: [From.GetName]"
+		}
+	}
+		
+	DNF_slovakian_election_1953_opposition_campaign = {
+		icon = generic_political_rally
+		
+		allowed = { 
+			always = no
+		}
+		available = {
+			check_variable = { DNF_slovakian_election_1953_involved = 1 }
+		}
+		
+		selectable_mission = yes
+		days_mission_timeout = 30
+		cost = 75
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete DNF_slovakian_election_1953_opposition_campaign target: [From.GetName]"
+			custom_effect_tooltip = DNF_stymie_opposition_tt
+		}
+
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout DNF_slovakian_election_1953_opposition_campaign target: [From.GetName]"
+			if = { limit = { OR = { has_country_flag = DNF_Adolf_Scharf 
+			has_country_flag = DNF_Josip_Broz_Tito
+			has_country_flag = DNF_Bruno_Pitterman
+			has_country_flag = DNF_Anna_Kethly }}
+			custom_effect_tooltip = DNF_slovak_1953_opposition_campaigning_SDAPD_tt
+				add_to_variable = { var = DNF_slovakia_socdem_pop value = -7 }
+				add_to_variable = { var = DNF_slovakia_soccon_pop value = 3 }
+				add_to_variable = { var = DNF_slovakia_soclib_pop value = 4 }	
+			}
+			else_if = { limit = { has_country_flag = DNF_Peter_Veres }
+			custom_effect_tooltip = DNF_slovak_1953_opposition_campaigning_veres_tt
+			add_to_variable = { var = DNF_slovakia_socdem_pop value = 3 }
+			add_to_variable = { var = DNF_slovakia_soccon_pop value = 4 }
+			add_to_variable = { var = DNF_slovakia_soclib_pop value = -7 }	
+			}
+			else = {
+			custom_effect_tooltip = DNF_slovak_1953_opposition_campaigning_tt
+			add_to_variable = { var = DNF_slovakia_socdem_pop value = 3 }
+			add_to_variable = { var = DNF_slovakia_soccon_pop value = -7 }
+			add_to_variable = { var = DNF_slovakia_soclib_pop value = 4 }	
+			}
+		}
+	}
+}
+
+DNF_transylvania_election_cat = {
+	DNF_transylvania_PNR_election_1950 = {
+		icon = trumpet
+		
+		allowed = { 
+			always = no
+		}
+		available = {
+			always = no
+		}
+		activation = {
+			check_variable = { DNF_transylvanian_PNR_election_1950_involved = 1 }
+		}
+		
+		days_mission_timeout = 30
+		fire_only_once = yes
+		
+		timeout_effect = {	
+			log = "[GetDateText]: [Root.GetName]: Decision timeout DNF_transylvania_PNR_election_1950 target: [From.GetName]"
+			hidden_effect = {
+				if = {
+					limit = {
+						check_variable = { DNF_PNR_penescu_pop > DNF_PNR_hossu_pop }
+						check_variable = { DNF_PNR_penescu_pop > DNF_PNR_nistor_pop }
+					}
+					country_event = {
+						id = krg_dnf_regional_elections_transylvania.2
+					}
+				}
+				else_if = {
+					limit = {
+						check_variable = { DNF_PNR_hossu_pop > DNF_PNR_nistor_pop }
+						check_variable = { DNF_PNR_hossu_pop > DNF_PNR_penescu_pop }
+					}
+					country_event = {
+						id = krg_dnf_regional_elections_transylvania.3
+					}
+				}
+				else = {
+					country_event = {
+						id = krg_dnf_regional_elections_transylvania.4
+					}
+				}
+			}
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete DNF_transylvania_PNR_election_1950 target: [From.GetName]"
+		}
+	}
+
+	DNF_promote_our_man = {
+		icon = give_cash
+		
+		available = {
+			check_variable = { DNF_transylvanian_PNR_election_1950_involved = 1 }
+		}
+		
+		cost = 50
+		days_remove = 5		
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete DNF_promote_our_man target: [From.GetName]"
+			custom_effect_tooltip =	DNF_1950_pnr_pen_strength_gain_tt
+			custom_effect_tooltip =	DNF_1950_pnr_hos_strength_loss_tt
+		}
+		
+		ai_will_do = { 
+			base = 1
+            modifier = {
+                factor = 0
+				OR = {
+					has_game_rule = {
+						rule = DNF_TRANSYLVANIA_ELECTIONS
+						option = DNF_TRANSYLVANIA_ELECTIONS_HOSSU
+					}
+					has_game_rule = {
+						rule = DNF_TRANSYLVANIA_ELECTIONS
+						option = DNF_TRANSYLVANIA_ELECTIONS_NISTOR
+					}
+				}
+            }
+            modifier = {
+                factor = 10
+                has_game_rule = {
+                    rule = DNF_TRANSYLVANIA_ELECTIONS
+					option = DNF_TRANSYLVANIA_ELECTIONS_PENESCU
+                }
+            }
+		}
+			
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_promote_our_man target: [From.GetName]"
+			if = { 
+				limit = { has_completed_focus = DNF_transylvanian_infrastructure }	
+				add_to_variable = { 
+					var = DNF_PNR_penescu_pop
+					value = 10
+				}
+				add_to_variable = { 
+					var = DNF_PNR_hossu_pop
+					value = -6
+				}
+				add_to_variable = { 
+					var = DNF_PNR_nistor_pop
+					value = -4
+				}
+			}
+		
+			else = {
+				add_to_variable = { 
+					var = DNF_PNR_penescu_pop
+					value = 5
+				}
+				add_to_variable = { 
+					var = DNF_PNR_hossu_pop
+					value = -3
+				}
+				add_to_variable = { 
+					var = DNF_PNR_nistor_pop
+					value = -2
+				}
+			}
+		}
+	}
+
+	DNF_smear_Hossu = {
+		icon = radio
+		
+		available = {
+			check_variable = { DNF_transylvanian_PNR_election_1950_involved = 1 }
+		}
+		
+		cost = 25
+		days_remove = 10	
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete DNF_smear_Hossu target: [From.GetName]"
+			custom_effect_tooltip =	DNF_1950_pnr_pen_strength_gain_tt
+			custom_effect_tooltip =	DNF_1950_pnr_hos_strength_loss_tt
+		}
+		
+		ai_will_do = { 
+			base = 1
+            modifier = {
+                factor = 0
+				OR = {
+					has_game_rule = {
+						rule = DNF_TRANSYLVANIA_ELECTIONS
+						option = DNF_TRANSYLVANIA_ELECTIONS_HOSSU
+					}
+					has_game_rule = {
+						rule = DNF_TRANSYLVANIA_ELECTIONS
+						option = DNF_TRANSYLVANIA_ELECTIONS_NISTOR
+					}
+				}
+            }
+            modifier = {
+                factor = 10
+                has_game_rule = {
+                    rule = DNF_TRANSYLVANIA_ELECTIONS
+					option = DNF_TRANSYLVANIA_ELECTIONS_PENESCU
+                }
+            }
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_smear_Hossu target: [From.GetName]"
+			if = { 
+				limit = { has_completed_focus = DNF_transylvanian_infrastructure }
+				add_to_variable = { 
+					var = DNF_PNR_penescu_pop
+					value = 5
+				}
+				add_to_variable = { 
+					var = DNF_PNR_hossu_pop
+					value = -5
+				}
+			}
+			else = {
+				add_to_variable = { 
+					var = DNF_PNR_penescu_pop
+					value = 2
+				}
+				add_to_variable = { 
+					var = DNF_PNR_hossu_pop
+					value = -2
+				}
+			}
+		}
+	}
+	
+	DNF_smear_Nistor = {
+		icon = radio
+		
+		available = {
+			check_variable = { DNF_transylvanian_PNR_election_1950_involved = 1 }
+		}
+		
+		cost = 25
+		days_remove = 10	
+		fire_only_once = yes
+		complete_effect = {	
+			log = "[GetDateText]: [Root.GetName]: Decision complete DNF_smear_Nistor target: [From.GetName]"
+			custom_effect_tooltip =	DNF_1950_pnr_pen_strength_gain_tt
+			custom_effect_tooltip =	DNF_1950_pnr_nis_strength_loss_tt
+		}
+		
+		ai_will_do = { 
+			base = 1
+            modifier = {
+                factor = 0
+				OR = {
+					has_game_rule = {
+						rule = DNF_TRANSYLVANIA_ELECTIONS
+						option = DNF_TRANSYLVANIA_ELECTIONS_HOSSU
+					}
+					has_game_rule = {
+						rule = DNF_TRANSYLVANIA_ELECTIONS
+						option = DNF_TRANSYLVANIA_ELECTIONS_NISTOR
+					}
+				}
+            }
+            modifier = {
+                factor = 10
+                has_game_rule = {
+                    rule = DNF_TRANSYLVANIA_ELECTIONS
+					option = DNF_TRANSYLVANIA_ELECTIONS_PENESCU
+                }
+            }
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_smear_Nistor target: [From.GetName]"
+			if = { 
+				limit = { has_completed_focus = DNF_transylvanian_infrastructure }
+				add_to_variable = { 
+					var = DNF_PNR_penescu_pop
+					value = 5
+				}
+				add_to_variable = { 
+					var = DNF_PNR_nistor_pop
+					value = -5
+				}
+			}
+			else = {
+				add_to_variable = { 
+					var = DNF_PNR_penescu_pop
+					value = 2
+				}
+				add_to_variable = { 
+					var = DNF_PNR_nistor_pop
+					value = -2
+				}
+			}
+		}
+	}
+
+	DNF_politicise_funeral_vv = {
+		icon = generic_flags
+		
+		available = {
+			check_variable = { DNF_transylvanian_PNR_election_1950_involved = 1 }
+		}
+		
+		cost = 35
+		days_remove = 2	
+		fire_only_once = yes
+		
+		ai_will_do = { 
+			base = 1
+            modifier = {
+                factor = 0
+				OR = {
+					has_game_rule = {
+						rule = DNF_TRANSYLVANIA_ELECTIONS
+						option = DNF_TRANSYLVANIA_ELECTIONS_HOSSU
+					}
+					has_game_rule = {
+						rule = DNF_TRANSYLVANIA_ELECTIONS
+						option = DNF_TRANSYLVANIA_ELECTIONS_PENESCU
+					}
+				}
+            }
+            modifier = {
+                factor = 10
+                has_game_rule = {
+                    rule = DNF_TRANSYLVANIA_ELECTIONS
+					option = DNF_TRANSYLVANIA_ELECTIONS_NISTOR
+                }
+            }
+		}
+		
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_politicise_funeral_vv target: [From.GetName]"
+			if = { 
+				limit = { has_completed_focus = DNF_transylvanian_infrastructure }
+			
+				add_to_variable = { 
+					var = DNF_PNR_penescu_pop
+					value = -4
+				}
+				add_to_variable = { 
+					var = DNF_PNR_hossu_pop
+					value = -2
+				}
+				add_to_variable = { 
+					var = DNF_PNR_nistor_pop
+					value = 6
+				}
+			}
+			else = {
+				add_to_variable = { 
+					var = DNF_PNR_penescu_pop
+					value = -8
+					}
+				add_to_variable = { 
+					var = DNF_PNR_hossu_pop
+					value = 2
+					}
+				add_to_variable = { 
+					var = DNF_PNR_nistor_pop
+					value = 6
+				}
+			}
+			country_event = {
+				id = krg_dnf_regional_elections_transylvania.7 #damage depends on the focus or not
+			}
+		}
+	}
+	
+	DNF_endorse_Hossu = {
+		icon = give_cash
+		
+		available = {
+			check_variable = { DNF_transylvanian_PNR_election_1950_involved = 1 }
+		}
+		
+		cost = 40
+		days_remove = 2	
+		fire_only_once = yes
+		
+		ai_will_do = { 
+			base = 1
+            modifier = {
+                factor = 0
+				OR = {
+					has_game_rule = {
+						rule = DNF_TRANSYLVANIA_ELECTIONS
+						option = DNF_TRANSYLVANIA_ELECTIONS_NISTOR
+					}
+					has_game_rule = {
+						rule = DNF_TRANSYLVANIA_ELECTIONS
+						option = DNF_TRANSYLVANIA_ELECTIONS_PENESCU
+					}
+				}
+            }
+            modifier = {
+                factor = 10
+                has_game_rule = {
+                    rule = DNF_TRANSYLVANIA_ELECTIONS
+					option = DNF_TRANSYLVANIA_ELECTIONS_HOSSU
+                }
+            }
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_endorse_Hossu target: [From.GetName]"
+			if = { 
+				limit = { has_completed_focus = DNF_transylvanian_infrastructure }
+				add_to_variable = { 
+					var = DNF_PNR_hossu_pop
+					value = -6
+				}
+				add_to_variable = { 
+					var = DNF_PNR_nistor_pop
+					value = 3
+				}
+				add_to_variable = { 
+					var = DNF_PNR_penescu_pop
+					value = 3
+				}
+				country_event = {
+					id = krg_dnf_regional_elections_transylvania.8 #they're so confused
+				}
+			}
+			else = {
+				add_to_variable = { 
+					var = DNF_PNR_hossu_pop
+					value = 2
+				}
+				add_to_variable = { 
+					var = DNF_PNR_nistor_pop
+					value = -1
+				}
+				add_to_variable = { 
+					var = DNF_PNR_penescu_pop
+					value = -1
+				}
+				country_event = {
+					id = krg_dnf_regional_elections_transylvania.9 #it backfired!
+				}
+			}
+		}
+	}
+
+	DNF_transylvania_election_1954 = {
+		icon = election
+		
+		days_mission_timeout = 80
+		fire_only_once = yes
+
+		allowed = { 
+			always = no
+		}
+		available = {
+			always = no
+		}
+		activation = {
+			check_variable = { DNF_Transylvania_1954_involved = 1 }
+		}
+		
+		timeout_effect = {	
+			log = "[GetDateText]: [Root.GetName]: Decision timeout DNF_transylvania_election_1954 target: [From.GetName]"
+			custom_effect_tooltip = DNF_transylvania_election_54_outcome_tt
+			hidden_effect = {
+				country_event = {
+					id = krg_dnf_regional_elections_transylvania.19
+				}
+			}
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete DNF_transylvania_election_1954 target: [From.GetName]"
+		}
+	}
+
+	DNF_transylvania_54_sdapd_funding = {
+		icon = wrenches
+		
+		visible = {
+			check_variable = { DNF_Transylvania_1954_involved = 1 }
+			OR = { 			has_country_flag = DNF_Adolf_Scharf
+							has_country_flag = DNF_Anna_Kethly
+							has_country_flag = DNF_Bruno_Pitterman
+							has_country_flag = DNF_Josip_Broz
+							has_country_flag = DNF_Karl_Renner }
+		}
+		
+		cost = 20
+		days_remove = 25
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete DNF_transylvania_54_sdapd_funding target: [From.GetName]"
+			custom_effect_tooltip = DNF_transylvania_54_sdapd_funding_tt
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_transylvania_54_sdapd_funding target: [From.GetName]"
+			add_to_variable = { 
+				var = DNF_Transylvania_SDAPD
+				value = 4
+			}
+		}
+	}
+
+	DNF_transylvania_54_pct_funding = {
+		icon = shield
+		
+		visible = {
+			check_variable = { DNF_Transylvania_1954_involved = 1 }
+			NOT = { has_country_flag = DNF_transylvanian_PNR_Original }
+			OR = { has_country_flag = DNF_Zoltan_Tildy
+			has_country_flag = DNF_Alcide_De_Gasperi
+			has_country_flag = DNF_Engelbert_Dollfuss
+			has_country_flag = DNF_Wilhelm_Miklas
+			has_country_flag = DNF_Julius_Raab
+			has_country_flag = DNF_Leopold_Figl }
+		}
+		
+		cost = 20
+		days_remove = 25
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete DNF_transylvania_54_pct_funding target: [From.GetName]"
+			custom_effect_tooltip = DNF_transylvania_54_pct_funding_tt
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_transylvania_54_pct_funding target: [From.GetName]"
+			add_to_variable = { 
+				var = DNF_Transylvania_PCT
+				value = 4
+			}
+		}
+	}
+
+	DNF_transylvania_54_pat_funding = {
+		icon = freedom
+		
+		visible = {
+			check_variable = { DNF_Transylvania_1954_involved = 1 }
+			has_country_flag = DNF_Peter_Veres
+		}
+		
+		cost = 20
+		days_remove = 25
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete DNF_transylvania_54_pat_funding target: [From.GetName]"
+			custom_effect_tooltip = DNF_transylvania_54_pat_funding_tt
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_transylvania_54_pat_funding target: [From.GetName]"
+			add_to_variable = { 
+				var = DNF_Transylvania_PAT
+				value = 4
+			}
+		}
+	}
+
+	DNF_transylvania_54_pnr_funding = {
+		icon = shield
+		
+		visible = {
+			check_variable = { DNF_Transylvania_1954_involved = 1 }
+			OR = { has_country_flag = DNF_TRANSYLVANIAN_MP_NISTOR
+				   has_country_flag = DNF_TRANSYLVANIAN_MP_PENESCU	}
+			OR = { has_country_flag = DNF_Zoltan_Tildy
+				   has_country_flag = DNF_Alcide_De_Gasperi
+				   has_country_flag = DNF_Engelbert_Dollfuss
+				   has_country_flag = DNF_Wilhelm_Miklas
+				   has_country_flag = DNF_Julius_Raab
+				   has_country_flag = DNF_Leopold_Figl }
+		}
+		
+		cost = 20
+		days_remove = 25
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete DNF_transylvania_54_pnr_funding target: [From.GetName]"
+			custom_effect_tooltip = DNF_transylvania_54_pnr_funding_tt
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_transylvania_54_pnr_funding target: [From.GetName]"
+			add_to_variable = { 
+				var = DNF_Transylvania_PNR
+				value = 4
+			}
+		}
+	}
+
+	DNF_transylvania_54_interfere_unificationists = {
+		icon = ban_iron_front
+		
+		visible = {
+			check_variable = { DNF_Transylvania_1954_involved = 1 }
+		}
+		
+		cost = 45
+		days_remove = 15
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete DNF_transylvania_54_interfere_unificationists target: [From.GetName]"
+			if = { limit = { has_country_flag = DNF_transylvanian_MP_hossu }
+				custom_effect_tooltip = DNF_transylvania_54_interfere_hossusPNR_tt
+			}
+			else = {
+				custom_effect_tooltip = DNF_transylvania_54_interfere_PNRH_tt
+			}
+
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_transylvania_54_interfere_unificationists target: [From.GetName]"
+			if = { limit = { has_country_flag = DNF_transylvanian_MP_hossu }
+				add_to_variable = {
+					var = DNF_Transylvania_PNR
+					value = -2
+				}
+			}
+			else = {
+				add_to_variable = { 
+					var = DNF_Transylvania_PNRH
+					value = -2
+				}
+			}
+		}
+	}
+}
+
+DNF_hungarian_national_election_cat = {
+	DNF_hungarian_election_1954 = {
+		icon = election
+		allowed = { 
+			always = no
+		}
+		available = {
+			always = no
+		}
+		activation = {
+			check_variable = { DNF_hungarian_election_1954_involved = 1 }
+		}
+		days_mission_timeout = 80
+		fire_only_once = yes
+		
+		timeout_effect = {	
+			log = "[GetDateText]: [Root.GetName]: Decision timeout DNF_hungarian_election_1954 target: [From.GetName]"
+			custom_effect_tooltip = DNF_hungarian_outcome_tt
+			hidden_effect = {
+				if = {
+					limit = {
+						check_variable = { DNF_hungary_soccon_pop > DNF_hungary_soclib_pop }
+						check_variable = { DNF_hungary_soccon_pop > DNF_hungary_socdem_pop }
+					}
+					country_event = {
+						id = krg_dnf_regional_elections_hungary.16
+					}
+				}
+				else_if = {
+					limit = {
+						check_variable = { DNF_hungary_soclib_pop > DNF_hungary_soccon_pop }
+						check_variable = { DNF_hungary_soclib_pop > DNF_hungary_socdem_pop }
+					}
+					country_event = {
+						id = krg_dnf_regional_elections_hungary.17
+					}
+				}
+				else = {
+					country_event = {
+						id = krg_dnf_regional_elections_hungary.18
+					}
+				}
+			}
+		}
+	}
+
+	DNF_hungarian_election_1950	= {
+		icon = election
+		
+		allowed = { 
+			always = no
+		}
+		available = {
+			always = no
+		}
+		activation = {
+			check_variable = { DNF_hungarian_election_1950_involved = 1 }
+		}
+		
+		days_mission_timeout = 80
+		fire_only_once = yes
+		
+		timeout_effect = {	
+			log = "[GetDateText]: [Root.GetName]: Decision timeout DNF_hungarian_election_1950	= { target: [From.GetName]"
+			custom_effect_tooltip = DNF_hungarian_outcome_tt
+			hidden_effect = {
+				if = {
+					limit = {
+						check_variable = { DNF_hungary_soccon_pop > DNF_hungary_soclib_pop }
+						check_variable = { DNF_hungary_soccon_pop > DNF_hungary_socdem_pop }
+					}
+					country_event = {
+						id = krg_dnf_regional_elections_hungary.3
+					}
+				}
+				else_if = {
+					limit = {
+						check_variable = { DNF_hungary_soclib_pop > DNF_hungary_soccon_pop }
+						check_variable = { DNF_hungary_soclib_pop > DNF_hungary_socdem_pop }
+					}
+					country_event = {
+						id = krg_dnf_regional_elections_hungary.2
+					}
+				}
+				else = {
+					country_event = {
+						id = krg_dnf_regional_elections_hungary.4
+					}
+				}
+			}
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete DNF_hungarian_election_1950	= { target: [From.GetName]"
+		}
+	}
+
+	DNF_hungarian_opposition_campaigning = {
+		icon = generic_political_rally
+		
+		allowed = { 
+			always = no
+		}
+		available = {
+			check_variable = { DNF_hungarian_election_1950_involved = 1 }
+		}
+		
+		selectable_mission = yes
+		days_mission_timeout = 30
+		cost = 100
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete DNF_hungarian_opposition_campaigning target: [From.GetName]"
+			if = { limit = { OR = { has_country_flag = DNF_Karl_Renner
+			has_country_flag = DNF_Adolf_Scharf
+			has_country_flag = DNF_Josip_Broz
+			has_country_flag = DNF_Anna_Kethly 
+			has_country_flag = DNF_Bruno_Pitterman }}
+				custom_effect_tooltip = DNF_hungarian_1950_opposition_campaigning_SDAPD_tt
+			}
+			else = {
+				custom_effect_tooltip = DNF_hungarian_1950_opposition_campaigning_tt
+			}
+		}
+		
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout DNF_hungarian_opposition_campaigning target: [From.GetName]"
+			add_to_variable = { 
+				var = DNF_hungary_soclib_pop
+				value = 5
+			}
+			if = { limit = { OR = { has_country_flag = DNF_Karl_Renner
+			has_country_flag = DNF_Adolf_Scharf
+			has_country_flag = DNF_Josip_Broz
+			has_country_flag = DNF_Anna_Kethly 
+			has_country_flag = DNF_Bruno_Pitterman }}
+									add_to_variable = { 
+										var = DNF_hungary_socdem_pop
+										value = -10
+									}
+									add_to_variable = { 
+										var = DNF_hungary_soccon_pop
+										value = 5
+									}
+									add_to_variable = { 
+										var = DNF_hungary_soclib_pop
+										value = 5
+									}
+			}
+			else = {
+				add_to_variable = { 
+					var = DNF_hungary_socdem_pop
+					value = 5
+				}
+				add_to_variable = { 
+					var = DNF_hungary_soccon_pop
+					value = -10
+				}
+				add_to_variable = { 
+					var = DNF_hungary_soclib_pop
+					value = 5
+				}
+			}
+		}
+	}
+	DNF_hungarian_radio_campaign = {
+		icon = radio
+		
+		available = {
+			check_variable = { DNF_hungarian_election_involved = 1 }
+		}
+		
+		cost = 45
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete DNF_hungarian_radio_campaign target: [From.GetName]"
+			if = { limit = { OR = { has_country_flag = DNF_Karl_Renner
+									has_country_flag = DNF_Adolf_Scharf
+									has_country_flag = DNF_Josip_Broz
+									has_country_flag = DNF_Anna_Kethly 
+									has_country_flag = DNF_Bruno_Pitterman }}
+				custom_effect_tooltip = DNF_hungarian_1950_radio_campaigning_SDAPD_tt
+			}
+			else = {
+				custom_effect_tooltip = DNF_hungarian_1950_radio_campaigning_tt
+			}
+		}
+		
+		days_remove = 30
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_hungarian_radio_campaign target: [From.GetName]"
+			add_to_variable = { 
+				var = DNF_hungary_soclib_pop
+				value = -4
+			}
+			if = { limit = { OR = { has_country_flag = DNF_Karl_Renner
+									has_country_flag = DNF_Adolf_Scharf
+								    has_country_flag = DNF_Josip_Broz
+									has_country_flag = DNF_Anna_Kethly 
+								    has_country_flag = DNF_Bruno_Pitterman }}
+									add_to_variable = { 
+										var = DNF_hungary_socdem_pop
+										value = 5
+									}
+									add_to_variable = { 
+										var = DNF_hungary_soccon_pop
+										value = -1
+									}
+									add_to_variable = { 
+										var = DNF_hungary_soclib_pop
+										value = -4
+									}
+			}
+			else = {
+				add_to_variable = { 
+					var = DNF_hungary_socdem_pop
+					value = -1
+				}
+				add_to_variable = { 
+					var = DNF_hungary_soccon_pop
+					value = 5
+				}
+				add_to_variable = { 
+					var = DNF_hungary_soclib_pop
+					value = -4
+				}
+			}
+			if = { limit = {check_variable = {DNF_hungarian_election_1950_involved = 1 }}
+			country_event = {
+				id = krg_dnf_regional_elections_hungary.12
+			}}
+		}
+	}
+	DNF_otto_goes_to_hungary = {
+		icon = DNF_flag_hungary
+		
+		available = {
+			check_variable = { DNF_hungarian_election_1950_involved = 1 }
+		}
+		visible = {
+			check_variable = { DNF_hungarian_election_1950_involved = 1 }
+		}
+		
+		
+		cost = 50
+		fire_only_once = yes
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete DNF_otto_goes_to_hungary target: [From.GetName]"
+			if = { limit = { OR = { has_country_flag = DNF_Karl_Renner
+									has_country_flag = DNF_Adolf_Scharf }}
+				custom_effect_tooltip = DNF_hungarian_1950_otto_SDAPD_tt
+			}
+			else = {
+				custom_effect_tooltip = DNF_hungarian_1950_otto_tt
+			}
+		}
+
+		days_remove = 15
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_otto_goes_to_hungary target: [From.GetName]"
+			
+			add_to_variable = { 
+				var = DNF_hungary_soclib_pop
+				value = -2
+			}
+			if = { limit = { OR = { has_country_flag = DNF_Karl_Renner
+									has_country_flag = DNF_Adolf_Scharf }}
+				add_to_variable = { 
+					var = DNF_hungary_socdem_pop
+					value = 4
+				}
+				add_to_variable = { 
+					var = DNF_hungary_soccon_pop
+					value = -2
+				}
+			}
+			else = {
+				add_to_variable = { 
+					var = DNF_hungary_socdem_pop
+					value = -2
+				}
+				add_to_variable = { 
+					var = DNF_hungary_soccon_pop
+					value = 4
+				}
+			}
+			
+			country_event = {
+				id = krg_dnf_regional_elections_hungary.13
+			}
+		}
+	}
+
+	DNF_Hungary_campaign_in_the_countryside = {
+		icon = generic_agriculture
+		
+		available = {
+			check_variable = { DNF_hungarian_election_involved = 1 }
+			NOT = {check_variable = { Hungary_Pick_One = 1 }}
+		}
+		
+		cost = 50
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete DNF_Hungary_campaign_in_the_countryside target: [From.GetName]"
+			if = { limit = { 
+				OR = { 	has_country_flag = DNF_Adolf_Scharf }
+					  	has_country_flag = DNF_Karl_Renner }
+				
+				custom_effect_tooltip = DNF_hungarian_1950_countryside_SDAPD_tt
+			}
+			else = {
+				custom_effect_tooltip = DNF_hungarian_1950_countryside_tt
+			}
+			set_variable = {
+				var = Hungary_Pick_One
+				value = 1
+			}
+		}
+
+		days_remove = 40
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_Hungary_campaign_in_the_countryside target: [From.GetName]"
+			add_to_variable = { 
+				var = DNF_hungary_soclib_pop
+				value = -3
+			}
+			if = { limit = { 
+				OR = { 	has_country_flag = DNF_Adolf_Scharf }
+					  	has_country_flag = DNF_Karl_Renner }							
+				add_to_variable = { 
+					var = DNF_hungary_socdem_pop
+					value = 3
+				}	
+			}
+			else = {
+				add_to_variable = { 
+					var = DNF_hungary_soccon_pop
+					value = 3
+				}
+			}
+		}
+	}
+
+	DNF_Hungary_campaign_in_the_cities = {
+		icon = factories
+		
+		available = {
+			check_variable = { DNF_hungarian_election_involved = 1 }
+			NOT = {check_variable = { Hungary_Pick_One = 1 }}
+		}
+		
+		cost = 50
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete DNF_Hungary_campaign_in_the_cities target: [From.GetName]"
+			if = { limit = { 
+				OR = { 	has_country_flag = DNF_Adolf_Scharf }
+					  	has_country_flag = DNF_Karl_Renner }
+				
+				custom_effect_tooltip = DNF_hungarian_1950_SDAPD_cities_tt
+			}
+			else = {
+				custom_effect_tooltip = DNF_hungarian_1950_cities_tt
+			}
+			set_variable = {
+				var = Hungary_Pick_One
+				value = 1
+			}
+		}
+
+		days_remove = 40
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_Hungary_campaign_in_the_cities target: [From.GetName]"
+			if = { limit = { 
+				OR = { 	has_country_flag = DNF_Adolf_Scharf }
+					  	has_country_flag = DNF_Karl_Renner } 
+				
+				add_to_variable = { 
+					var = DNF_hungary_socdem_pop
+					value = -3
+				}
+				add_to_variable = { 
+					var = DNF_hungary_soccon_pop
+					value = 3
+				}
+			}
+			else = {
+				add_to_variable = { 
+					var = DNF_hungary_socdem_pop
+					value = 6
+				}
+				add_to_variable = { 
+					var = DNF_hungary_soccon_pop
+					value = -3
+				}
+
+			}
+		}
+	}
+
+	DNF_Mobilise_the_Donauschwaben = {
+		icon = generic_flags
+		
+		available = {
+			check_variable = { DNF_hungarian_election_1950_involved = 1 }
+		}
+		visible = {
+			check_variable = { DNF_hungarian_election_1950_involved = 1 }
+		}
+		
+		cost = 35
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete DNF_Mobilise_the_Donauschwaben target: [From.GetName]"
+			if = { limit = { OR = { has_country_flag = DNF_Karl_Renner
+									has_country_flag = DNF_Adolf_Scharf }}
+				custom_effect_tooltip = DNF_hungarian_1950_SDAPD_donauschwaben_tt
+			}
+			else = {
+				custom_effect_tooltip = DNF_hungarian_1950_donauschwaben_tt
+			}
+		}
+		ai_will_do = { 
+			base = 1
+            modifier = {
+                factor = 0
+				has_game_rule = {
+					rule = DNF_HUNGARIAN_ELECTIONS
+					option = DNF_HUNGARIAN_ELECTIONS_SOCLIB
+				}
+            }
+            modifier = {
+                factor = 10
+                has_game_rule = {
+                    rule = DNF_HUNGARIAN_ELECTIONS
+					option = DNF_HUNGARIAN_ELECTIONS_SOCCON
+                }
+            }
+            modifier = {
+                factor = 10
+                has_game_rule = {
+                    rule = DNF_HUNGARIAN_ELECTIONS
+					option = DNF_HUNGARIAN_ELECTIONS_SOCDEM
+                }
+            }
+		}
+
+		days_remove = 40
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_Mobilise_the_Donauschwaben target: [From.GetName]"
+			country_event = { 
+				id = krg_dnf_regional_elections_hungary.14
+			}
+			add_to_variable = { 
+				var = DNF_hungary_soclib_pop
+				value = -4
+			}
+			if = { limit = { OR = { has_country_flag = DNF_Karl_Renner
+									has_country_flag = DNF_Adolf_Scharf }}
+				add_to_variable = { 
+					var = DNF_hungary_socdem_pop
+					value = 4
+				}
+			}
+			else = {
+				add_to_variable = { 
+					var = DNF_hungary_soccon_pop
+					value = 4
+				}
+			}
+		}
+	}
+
+	
+	DNF_hungary_54_sdapd_funding = {
+		icon = wrenches
+		
+		visible = {
+			check_variable = { DNF_hungarian_election_1954_involved = 1 }
+			OR = { 			has_country_flag = DNF_Adolf_Scharf
+							has_country_flag = DNF_Anna_Kethly
+							has_country_flag = DNF_Bruno_Pitterman
+							has_country_flag = DNF_Josip_Broz
+							has_country_flag = DNF_Karl_Renner }
+		}
+		
+		cost = 20
+		days_remove = 15
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete DNF_hungary_54_sdapd_funding target: [From.GetName]"
+			custom_effect_tooltip = DNF_hungary_54_sdapd_funding_tt
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_hungary_54_sdapd_funding target: [From.GetName]"
+			add_to_variable = { 
+				var = DNF_hungary_socdem_pop
+				value = 4
+			}
+		}
+	}
+
+	DNF_hungary_54_balaton_funding = {
+		icon = shield
+		
+		visible = {
+			check_variable = { DNF_hungarian_election_1954_involved = 1 }
+			OR = { has_country_flag = DNF_Zoltan_Tildy
+			has_country_flag = DNF_Alcide_De_Gasperi
+			has_country_flag = DNF_Engelbert_Dollfuss
+			has_country_flag = DNF_Wilhelm_Miklas
+			has_country_flag = DNF_Julius_Raab
+			has_country_flag = DNF_Leopold_Figl }
+		}
+		
+		cost = 20
+		days_remove = 15
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete DNF_hungary_54_balaton_funding target: [From.GetName]"
+			custom_effect_tooltip = DNF_hungary_54_balaton_funding_tt
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_hungary_54_balaton_funding target: [From.GetName]"
+			add_to_variable = { 
+				var = DNF_hungary_soccon_pop
+				value = 4
+			}
+		}
+	}
+
+	DNF_hungary_54_lib_funding = {
+		icon = freedom
+		
+		visible = {
+			check_variable = { DNF_hungarian_election_1954_involved = 1 }
+			has_country_flag = DNF_Peter_Veres
+		}
+		
+		cost = 20
+		days_remove = 15
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete DNF_hungary_54_lib_funding target: [From.GetName]"
+			custom_effect_tooltip = DNF_hungary_54_lib_funding_tt
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_hungary_54_lib_funding target: [From.GetName]"
+			add_to_variable = { 
+				var = DNF_hungary_soclib_pop
+				value = 4
+			}
+		}
+	}
+}
+
+DNF_nuclear_ambition_cat = {
+	DNF_Issue_Research_Grants  = {
+		icon = hand_grab
+
+		cost = 20
+
+		visible = {
+			original_tag = DNF
+			NOT = { check_variable = { DNF_nuclear_ambition_progress > 99 } }
+		}
+
+		fire_only_once = yes
+
+		remove_effect  = {
+			hidden_effect = { 
+				country_event = {
+					id = krg_dnf.410		
+				}
+			}
+			if = {
+				limit = {
+					check_variable = { DNF_nuclear_ambition_progress < 101 } 
+				}
+				add_to_variable = {
+					var = DNF_nuclear_ambition_progress
+					value = 1
+				}
+				custom_effect_tooltip = DNF_Develop_Institutions_tt
+			}
+		}
+		days_remove = 180
+
+		ai_will_do = {
+			base = 50
+		}
+	}
+
+	DNF_Develop_Institutions  = {
+		icon = generic_propaganda
+		cost = 20
+
+		visible = {
+			original_tag = DNF
+			NOT = { check_variable = { DNF_nuclear_ambition_progress > 99 } }
+		}
+
+		fire_only_once = no
+
+		remove_effect  = {
+			if = {
+				limit = {
+					check_variable = { DNF_nuclear_ambition_progress < 101 } 
+				}
+				add_to_variable = {
+					var = DNF_nuclear_ambition_progress
+					value = 1
+				}
+			custom_effect_tooltip = DNF_Research_Grants_tt
+			}
+		}
+		days_remove = 180
+		days_re_enable = 90
+
+		ai_will_do = {
+			base = 50
+		}
+	}
+
+	DNF_Study_German_Developments  = {
+		icon = binoculars
+		cost = 20
+
+		visible = {
+			NOT = { has_country_flag = DNF_Diplomatic_Autonomy_flag } 
+			NOT = { check_variable = { DNF_nuclear_ambition_progress > 99 } }
+		}
+
+		fire_only_once = no
+
+		remove_effect  = {
+			if = {
+				limit = {
+					check_variable = { DNF_nuclear_ambition_progress < 101 } 
+				}
+				add_to_variable = {
+					var = DNF_nuclear_ambition_progress
+					value = 2
+				}
+				custom_effect_tooltip = DNF_Study_German_Developments_tt
+			}
+		}
+		days_remove = 180
+		days_re_enable = 90
+
+		ai_will_do = {
+			base = 5
+		}
+	}
+	
+	DNF_Decide_On_A_Strategy  = {
+		icon = generic_propaganda
+
+		cost = 35
+		visible = {
+			original_tag = DNF
+			OR = { 	has_completed_focus = DNF_independent_deterrent
+					has_completed_focus = DNF_alliance_with_atomic_emperors }
+			NOT = { check_variable = { DNF_nuclear_ambition_progress > 99 } }
+		}
+
+		fire_only_once = yes
+
+		remove_effect  = {
+			if = {
+				limit = {
+					check_variable = { DNF_nuclear_ambition_progress < 101 } 
+				}
+				add_to_variable = {
+					var = DNF_nuclear_ambition_progress
+					value = 4
+				}	
+				country_event = { 
+					id = krg_dnf.412
+				}
+			}
+		}
+		days_remove = 120
+		
+		ai_will_do = {
+			base = 5
+		}
+	}
+	
+	DNF_Exploiting_Jachymov  = {
+		icon = tungsten
+
+		cost = 50
+		visible = {
+			original_tag = DNF
+			has_completed_focus = DNF_extracting_bohemian_uranium
+			NOT = { check_variable = { DNF_nuclear_ambition_progress > 99 } }
+		}
+
+		fire_only_once = no
+
+		remove_effect  = {
+			if = {
+				limit = {
+					check_variable = { DNF_nuclear_ambition_progress < 101 } 
+				}
+				add_to_variable = {
+					var = DNF_nuclear_ambition_progress
+					value = 4
+				}
+				custom_effect_tooltip = DNF_Jachymov_tt
+				if = {
+					limit = {
+						check_variable = { DNF_nuclear_ambition_progress > 99 }
+					}
+					set_variable = { DNF_nuclear_ambition_progress = 100 }
+				}
+			}
+		}
+		days_remove = 120
+		days_re_enable = 90
+
+		ai_will_do = {
+			base = 5
+		}
+	}
+	
+	DNF_Excavate_Underground_Testing_Site  = {
+		icon = cement_mixer
+
+		cost = 50
+		visible = {
+			original_tag = DNF
+			has_completed_focus = DNF_siting_a_testing_ground
+			NOT = { check_variable = { DNF_nuclear_ambition_progress > 99 } }
+		}
+
+		fire_only_once = no
+
+		remove_effect  = {
+			if = {
+				limit = {
+					check_variable = { DNF_nuclear_ambition_progress < 101 } 
+				}
+				add_to_variable = {
+					var = DNF_nuclear_ambition_progress
+					value = 6
+				}
+				custom_effect_tooltip = DNF_Expand_Test_Site_tt
+				if = {
+					limit = {
+						check_variable = { DNF_nuclear_ambition_progress > 99 }
+					}
+					set_variable = { DNF_nuclear_ambition_progress = 100 }
+				}
+			}
+		}
+		days_remove = 90
+		days_re_enable = 90
+
+		ai_will_do = {
+			base = 5
+		}
+	}	
+	DNF_Observe_Tests_In_SWA  = {
+		icon = binoculars
+
+		cost = 50
+		visible = {
+			original_tag = DNF
+			has_completed_focus = DNF_delegation_of_observers
+			NOT = { check_variable = { DNF_nuclear_ambition_progress > 99 } }
+		}
+
+		fire_only_once = no
+
+		remove_effect  = {
+			if = {
+				limit = {
+					check_variable = { DNF_nuclear_ambition_progress < 101 } 
+				}
+				add_to_variable = {
+					var = DNF_nuclear_ambition_progress
+					value = 10
+				}
+				custom_effect_tooltip = DNF_SWA_tt
+				if = {
+					limit = {
+						check_variable = { DNF_nuclear_ambition_progress > 99 }
+					}
+						set_variable = { DNF_nuclear_ambition_progress = 100 }
+				}
+			}
+		}
+		days_remove = 90
+		days_re_enable = 90
+
+		ai_will_do = {
+			base = 5
+		}
+	}	
+}
+
+DNF_Figl_Plan_cat = {
+	DNF_Figl_Plan_Stage_One = {
+		icon = hand_out		visible = {
+			check_variable = {
+				DNF_Figl_Plan_Active = 1
+			} 
+		}
+
+		available = {
+			date < 1954.4.1
+			OR = { 	has_idea = DNF_figl_plan_1 
+					has_idea = DNF_figl_plan_2 }
+		}
+
+		target_trigger = {
+			FROM = {
+				is_in_or_aligned_with_reichspakt = yes
+			}
+		}
+
+		targets = { UKR POL FRA FIN LIT HOL BEL KRL DEN IRE }
+		
+		days_remove = 270
+		days_re_enable = 60
+
+		modifier = {
+			civilian_factory_use = 5
+		}
+
+		custom_cost_text = decision_cost_civ_factory_5_pp_25
+
+		custom_cost_trigger = {
+			num_of_civilian_factories_available_for_projects > 4
+			has_political_power > 24.99
+		}
+
+		ai_hint_pp_cost = 25
+
+		ai_will_do = {
+			base = 1
+			modifier = {
+				check_variable = {
+					var = DNF_Figl_Plan_Facs
+					value = 30
+					compare = greater_than_or_equals
+				}
+				factor = 0
+			}	
+		}
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete DNF_Figl_Plan_Stage_One target: [From.GetName]"
+			hidden_effect = {
+				add_political_power = -25
+			}
+			add_to_variable = {var = DNF_Figl_Plan_Facs value = 5 }	
+		}	
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_Figl_Plan_Stage_One target: [From.GetName]"
+			FROM = { 
+				random_owned_state = { 
+					limit = { 
+						is_core_of = PREV
+					} 
+					add_building_construction = { 
+						type = industrial_complex 
+						level = 1 
+						instant_build = yes 
+					}
+					add_extra_state_shared_building_slots = 1
+				}
+				country_event = { id = krg_dnf.139 }
+				DNF = { add_to_variable = {var = DNF_Figl_Plan_Facs value = -5 } }
+			}
+		}
+	}
+
+	DNF_Figl_Plan_Stage_Two = {
+		icon = hand_out
+		
+		visible = {
+			check_variable = {
+				DNF_Figl_Plan_Active = 2
+			} 
+			date > 1954.4.1
+		}
+
+		available = {
+			has_country_flag = DNF_Engelbert_Dollfuss
+		}
+
+		target_trigger = {
+			FROM = {
+				is_in_or_aligned_with_reichspakt = yes
+			}
+		}
+
+		targets = { ENG NFA SPR POR BUL GRE TUR IRE MAF }
+		
+		days_remove = 270
+		days_re_enable = 60
+		cost = 40
+
+		modifier = {
+			civilian_factory_use = 5
+		}
+
+		custom_cost_text = decision_cost_civ_factory_5_pp_40
+
+		custom_cost_trigger = {
+			num_of_civilian_factories_available_for_projects > 4
+			has_political_power > 39.99
+		}
+
+		ai_hint_pp_cost = 40
+		
+
+		ai_will_do = {
+			base = 1
+			modifier = {
+				check_variable = {
+					var = DNF_Figl_Plan_Facs
+					value = 40
+					compare = greater_than_or_equals
+					}
+				factor = 0
+			}	
+		}
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete DNF_Figl_Plan_Stage_Two target: [From.GetName]"
+			hidden_effect = {
+				add_political_power = -40
+			}
+			add_to_variable = {var = DNF_Figl_Plan_Facs value = 5 }	
+		}	
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_Figl_Plan_Stage_Two target: [From.GetName]"
+			FROM = { 
+				random_owned_state = { 
+					limit = { 
+						is_core_of = PREV
+					} 
+					add_building_construction = { 
+						type = industrial_complex 
+						level = 1 
+						instant_build = yes 
+					}
+					add_extra_state_shared_building_slots = 1
+				}
+				country_event = { id = krg_dnf.139 }
+			}
+			DNF = { add_to_variable = {var = DNF_Figl_Plan_Facs value = -5 } }
+		}
+	}
+}
+
+DNF_Modernise_Illyria_cat = {
+	DNF_The_Split_Shipyards = {
+			icon = generic_naval_base					
+			fire_only_once = yes 
+			days_remove = 90
+			available = { 
+				NOT = { has_country_flag = DNF_Illyria_1 }
+				check_variable = { DNF_Activate_Modernising_Illyria = 1 }
+			}
+						
+			cost = 50
+			remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_The_Split_Shipyards target: [From.GetName]"
+				country_event = { 
+					id = krg_dnf.401 
+				}
+				add_to_variable = { var = DNF_Modernising_Illyria_Decisions value = 1 }
+				add_to_variable = { var = DNF_Modernising_Illyria_Type_A value = 1 }
+				163 = {
+					add_building_construction = {
+							type = dockyard
+							level = 1
+							instant_build = yes
+						}
+				 add_extra_state_shared_building_slots = 1
+				}
+			}
+			
+			complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete DNF_The_Split_Shipyards target: [From.GetName]"
+				set_country_flag = DNF_Illyria_1
+			}
+			ai_will_do = {
+				base = 50
+				# modifier = {
+				# 	has_game_rule = {
+				# 		rule = DNF_FEDERAL_ELECTION_51
+				# 		OR = {
+				# 			option = RULE_OPTION_DNF_FEDERAL_ELECTION_51_SOCCON
+				# 			option = RULE_OPTION_DNF_FEDERAL_ELECTION_51_SOCLIB
+				# 			}
+				# 		}
+				# 	factor = 100
+				# }
+				# modifier = {
+				# 	has_game_rule = {
+				# 		rule = DNF_FEDERAL_ELECTION_51
+				# 		option = RULE_OPTION_DNF_FEDERAL_ELECTION_51_SOCDEM
+				# 	}
+				# 	factor = 0
+				# }
+			}
+			
+		}
+		
+	
+	DNF_Mines_in_Bosna = {
+			icon = tungsten
+			
+			fire_only_once = yes # Will not re-enable after being removed
+			days_remove = 90 
+	
+			available = { 
+			NOT = { has_country_flag = DNF_Illyria_1 }
+			check_variable = { DNF_Activate_Modernising_Illyria = 1 }
+			}
+			
+			cost = 50
+	
+			remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_Mines_in_Bosna target: [From.GetName]"
+				country_event = { id = krg_dnf.402	}
+							add_to_variable = { var = DNF_Modernising_Illyria_Type_B value = 1 }
+							add_to_variable = { var = DNF_Modernising_Illyria_Decisions value = 1 }
+							add_resource = { type = aluminium amount = 10 state = 891 }
+							add_resource = { type = chromium amount = 10 state = 890 }
+							890 = {
+								add_building_construction = {
+										type = industrial_complex
+									level = 1
+									instant_build = yes
+								}
+				 add_extra_state_shared_building_slots = 1
+				}
+							891 = {
+								add_building_construction = {
+										type = industrial_complex
+									level = 1
+									instant_build = yes
+								}
+				 add_extra_state_shared_building_slots = 1
+				}
+			}
+			
+			complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete DNF_Mines_in_Bosna target: [From.GetName]"
+							set_country_flag = DNF_Illyria_1
+			}
+			ai_will_do = {
+				base = 50
+				# modifier = {
+				# 	has_game_rule = {
+				# 		rule = DNF_FEDERAL_ELECTION_51
+				# 		option = RULE_OPTION_DNF_FEDERAL_ELECTION_51_SOCDEM
+				# 	}
+				# 	factor = 100
+				# }
+				# modifier = {
+				# 	has_game_rule = {
+				# 		rule = DNF_FEDERAL_ELECTION_51
+				# 		OR = {
+				# 			option = RULE_OPTION_DNF_FEDERAL_ELECTION_51_SOCCON
+				# 			option = RULE_OPTION_DNF_FEDERAL_ELECTION_51_SOCLIB
+				# 			}
+				# 		}
+				# 		factor = 0
+				# }
+			}
+		}
+	
+
+	DNF_Invest_In_Rijeka = {
+			icon = generic_naval_base
+			 
+			fire_only_once = yes # Will not re-enable after being removed
+			days_remove = 110
+	
+			available = { 
+			NOT = { has_country_flag = DNF_Illyria_2 }
+			check_variable = { DNF_Activate_Modernising_Illyria = 1 }
+			}
+
+				
+			cost = 50
+			
+			remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_Invest_In_Rijeka target: [From.GetName]"
+				country_event = { id = krg_dnf.403 }
+					add_to_variable = { var = DNF_Modernising_Illyria_Type_A value = 1 }
+					add_to_variable = { var = DNF_Modernising_Illyria_Decisions value = 1 }
+					919 = {
+						add_building_construction = {
+								type = dockyard
+							level = 1
+							instant_build = yes
+						}
+				 add_extra_state_shared_building_slots = 1
+				}
+				}
+			
+			complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete DNF_Invest_In_Rijeka target: [From.GetName]"
+					set_country_flag = DNF_Illyria_2
+			}
+			ai_will_do = {
+				base = 50
+				# modifier = {
+				# 	has_game_rule = {
+				# 		rule = DNF_FEDERAL_ELECTION_51
+				# 		OR = {
+				# 			option = RULE_OPTION_DNF_FEDERAL_ELECTION_51_SOCCON
+				# 			option = RULE_OPTION_DNF_FEDERAL_ELECTION_51_SOCLIB
+				# 			}
+				# 		}
+				# 		factor = 100
+				# 	}
+				# 	modifier = {
+				# 		has_game_rule = {
+				# 			rule = DNF_FEDERAL_ELECTION_51
+				# 			option = RULE_OPTION_DNF_FEDERAL_ELECTION_51_SOCDEM
+				# 		}
+				# 		factor = 0				
+				# 	}
+				}
+		}
+			
+		
+	DNF_Banja_Luka_Steel = {
+			icon = steel
+			
+			fire_only_once = yes # Will not re-enable after being removed
+			days_remove = 110
+			
+			available = { 
+			NOT = { has_country_flag = DNF_Illyria_2 }
+			check_variable = { DNF_Activate_Modernising_Illyria = 1 }
+			}
+
+			
+			cost = 50
+			
+			remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_Banja_Luka_Steel target: [From.GetName]"
+				country_event = { id = krg_dnf.404 }
+					add_to_variable = { var = DNF_Modernising_Illyria_Type_B value = 1 }
+					add_to_variable = { var = DNF_Modernising_Illyria_Decisions value = 1 }
+					add_resource = { type = steel amount = 10 state = 891 }
+			891 = {
+				add_building_construction = {
+  				  	type = arms_factory
+    				level = 1
+    				instant_build = yes
+				}
+				add_building_construction = {
+  				  	type = industrial_complex
+    				level = 1
+    				instant_build = yes
+				}
+				add_extra_state_shared_building_slots = 2
+			}
+				}
+				
+			complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete DNF_Banja_Luka_Steel target: [From.GetName]"
+					set_country_flag = DNF_Illyria_2
+			}
+			ai_will_do = {
+				base = 50
+				# modifier = {
+				# 	has_game_rule = {
+				# 		rule = DNF_FEDERAL_ELECTION_51
+				# 		option = RULE_OPTION_DNF_FEDERAL_ELECTION_51_SOCDEM
+				# 	}
+				# 	factor = 100
+				# }
+				# modifier = {
+				# 	has_game_rule = {
+				# 		rule = DNF_FEDERAL_ELECTION_51
+				# 		OR = {
+				# 			option = RULE_OPTION_DNF_FEDERAL_ELECTION_51_SOCCON
+				# 			option = RULE_OPTION_DNF_FEDERAL_ELECTION_51_SOCLIB
+				# 			}
+				# 		}
+				# 		factor = 0
+				# }
+			}
+		}
+	
+
+	DNF_Dalmatian_Rail_Link = {
+		icon = railroad
+				
+		fire_only_once = yes # Will not re-enable after being removed
+		days_remove = 120
+
+		available = { 
+			NOT = { has_country_flag = DNF_Illyria_3 }
+			check_variable = { DNF_Activate_Modernising_Illyria = 1 }
+			}
+			cost = 50
+			
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_Dalmatian_Rail_Link target: [From.GetName]"
+			country_event = { id = krg_dnf.405 }
+			add_to_variable = { var = DNF_Modernising_Illyria_Type_A value = 1 }
+			add_to_variable = { var = DNF_Modernising_Illyria_Decisions value = 1 }
+			build_railway = {
+				level = 4
+				build_only_on_allied = yes
+				fallback = yes
+				start_province = 6889
+				target_province = 9627
+				path  = { 6889 9894 6942 6957 3924 3943 6611 591 11564 9627 }
+		  	}
+		}
+			
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete DNF_Dalmatian_Rail_Link target: [From.GetName]"
+			set_country_flag = DNF_Illyria_3
+		}	
+
+		ai_will_do = {
+			base = 50
+				# modifier = {
+				# 	has_game_rule = {
+				# 		rule = DNF_FEDERAL_ELECTION_51
+				# 		OR = {
+				# 			option = RULE_OPTION_DNF_FEDERAL_ELECTION_51_SOCCON
+				# 			option = RULE_OPTION_DNF_FEDERAL_ELECTION_51_SOCLIB
+				# 			}
+				# 		}
+				# 		factor = 100
+				# 	}
+				# 	modifier = {
+				# 		has_game_rule = {
+				# 			rule = DNF_FEDERAL_ELECTION_51
+				# 			option = RULE_OPTION_DNF_FEDERAL_ELECTION_51_SOCDEM
+				# 		}
+				# 		factor = 0
+				# 	}
+			}
+	}
+
+	DNF_Infrastructure_Bosna = {
+		icon = cement_mixer
+
+		fire_only_once = yes # Will not re-enable after being removed
+		days_remove = 120 
+		
+		available = { 
+			NOT = { 
+				has_country_flag = DNF_Illyria_3 
+			}
+			check_variable = { 
+				DNF_Activate_Modernising_Illyria = 1 
+			}
+		}
+		
+		cost = 50
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete DNF_Infrastructure_Bosna target: [From.GetName]"
+			set_country_flag = DNF_Illyria_3
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_Infrastructure_Bosna target: [From.GetName]"
+			country_event = { id = krg_dnf.406 }
+			add_to_variable = { DNF_Modernising_Illyria_Type_B = 1 }
+			add_to_variable = { DNF_Modernising_Illyria_Decisions = 1 }
+			891 = {
+				add_building_construction = {
+						type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+						type = infrastructure
+					level = 2
+					instant_build = no
+				}
+			}
+			890 = {
+				add_building_construction = {
+						type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+						type = infrastructure
+					level = 2
+					instant_build = no
+				}
+			}
+			104 = {
+				add_building_construction = {
+						type = infrastructure
+					level = 1
+					instant_build = no
+				}
+			}	
+		}
+		
+		ai_will_do = {
+			base = 50
+			# modifier = {
+			# 	has_game_rule = {
+			# 		rule = DNF_FEDERAL_ELECTION_51
+			# 		option = RULE_OPTION_DNF_FEDERAL_ELECTION_51_SOCDEM
+			# 	}
+			# 		factor = 100
+			# 	}
+			# 	modifier = {
+			# 		has_game_rule = {
+			# 			rule = DNF_FEDERAL_ELECTION_51
+			# 			OR = {
+			# 				option = RULE_OPTION_DNF_FEDERAL_ELECTION_51_SOCCON
+			# 				option = RULE_OPTION_DNF_FEDERAL_ELECTION_51_SOCLIB
+			# 				}
+			# 			}
+			# 		factor = 0
+			# 	}
+		}
+	}
+}
+
+DNF_Keeping_Russia_Down_cat= {
+	DNF_Propaganda_Leaflets = {
+		icon = generic_propaganda
+		
+		allowed = { 
+			tag  = DNF
+		}
+		
+		days_remove = 30
+		fire_only_once = yes # Will not re-enable after being removed
+		
+		visible = {
+			NOT = { GER = { has_country_flag = GER_RUS_cont_war_victory } }
+			check_variable = { var = DNF_Activate_Partisans value = 1 }
+			RUS = { 
+				has_country_leader = { 
+					name = "Boris Savinkov" 
+				}
+			}
+		}
+		
+		
+		cost =  50
+		
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_Propaganda_Leaflets target: [From.GetName]"
+			custom_effect_tooltip = DNF_Ukraine_Escalation_tt
+			country_event = { id = krg_dnf.38 }
+			add_to_variable = { var = DNF_Activate_Partisans value = 1 }
+		}
+	}
+	
+	DNF_Open_Training_Camps = {
+		icon = support_equipment
+		
+		fire_only_once = yes # Will not re-enable after being removed
+		
+		days_remove =  180
+		
+		visible = {
+			NOT = { GER = { has_country_flag = GER_RUS_cont_war_victory } }
+			check_variable = { var = DNF_Activate_Partisans value = 2 }
+			RUS = { 
+				has_country_leader = { 
+					name = "Boris Savinkov" 
+				}
+			}
+		}
+		
+		
+		cost =  50
+		
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_Open_Training_Camps target: [From.GetName]"
+			custom_effect_tooltip = DNF_Ukraine_Escalation_tt
+			country_event = { id = krg_dnf.32 } 
+			add_to_variable = { var = DNF_Activate_Partisans value = 1 }
+		}
+	}
+	
+	DNF_Smuggle_Weapons_Into_Ukraine = {
+		icon = plane
+		allowed = { 
+			tag  = DNF
+		}
+		
+		days_remove =  90
+		
+		visible = {
+			NOT = { GER = { has_country_flag = GER_RUS_cont_war_victory } }
+			check_variable = { var = DNF_Activate_Partisans value = 2 }
+			RUS = { 
+				has_country_leader = { 
+					name = "Boris Savinkov" 
+				}
+			}
+		}
+		
+		
+		cost =  50
+		
+		remove_effect = { 
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_Smuggle_Weapons_Into_Ukraine target: [From.GetName]"
+			custom_effect_tooltip = DNF_Ukraine_Escalation_tt
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = -300
+			}
+			country_event = { id = krg_dnf.39 }
+			add_to_variable = { var = DNF_Activate_Partisans value = 1 }
+		}
+	}
+	
+	DNF_Send_Special_Advisors = {
+		icon = lebensraum	
+		fire_only_once = yes # Will not re-enable after being removed
+		
+		days_remove =  150
+		
+		visible = {
+			NOT = { GER = { has_country_flag = GER_RUS_cont_war_victory } }
+			check_variable = { var = DNF_Activate_Partisans value = 4 }
+			RUS = { 
+				has_country_leader = { 
+					name = "Boris Savinkov" 
+				}
+			}
+		}
+		
+		
+		cost =  50
+		
+		remove_effect = { 
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_Send_Special_Advisors target: [From.GetName]"
+			custom_effect_tooltip = DNF_Ukraine_Escalation_tt
+			country_event = { id = krg_dnf.33 } 
+			add_to_variable = { var = DNF_Activate_Partisans value = 2 }
+			add_manpower = -200
+		}
+	}
+	
+	
+	DNF_Intensify_The_Insurgency = {
+		icon = lebensraum
+		allowed = { 
+			tag  = DNF
+		}
+		
+		fire_only_once = yes # Will not re-enable after being removed
+		
+		days_remove =  180
+		
+		visible = {
+			NOT = { GER = { has_country_flag = GER_RUS_cont_war_victory } }
+			check_variable = { var = DNF_Activate_Partisans value = 6 }
+			RUS = { 
+				has_country_leader = { 
+					name = "Boris Savinkov" 
+				}
+			}
+		}
+		
+		cost =  100
+		
+		remove_effect = { 
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_Intensify_The_Insurgency target: [From.GetName]"
+			country_event = { id = krg_dnf.34 } 
+			custom_effect_tooltip = DNF_Ukraine_Big_Escalation_tt
+			add_to_variable = { var = DNF_Activate_Partisans value = 4 }
+		}
+	}
+	
+	DNF_Mortar_Attacks_On_Russian_Garrisons = {
+		icon = artillery
+		allowed = { 
+			tag = DNF
+		}
+		
+		fire_only_once = no # Will not re-enable after being removed
+		
+		days_remove =  60
+		
+		visible = {
+			check_variable = { var = DNF_Activate_Partisans value = 10 }
+			NOT = { GER = { has_country_flag = GER_RUS_cont_war_victory } }
+			RUS = { 
+				has_country_leader = { 
+					name = "Boris Savinkov" 
+				} 
+			}
+		}
+		
+		
+		cost =  100
+		
+		remove_effect = { 
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_Mortar_Attacks_On_Russian_Garrisons target: [From.GetName]"
+			custom_effect_tooltip = DNF_Ukraine_Big_Escalation_tt
+			add_to_variable = { var = DNF_Activate_Partisans value = 1 }
+			country_event = { id = krg_dnf.35 } 
+		}
+	}
+	
+	DNF_Assassinate_Regional_Leaders = {
+		icon = fortress
+		
+		allowed = { 
+			tag  = DNF
+		}
+		
+		fire_only_once = yes # Will not re-enable after being removed
+		
+		days_remove =  120
+		
+		visible = {
+			NOT = { GER = { has_country_flag = GER_RUS_cont_war_victory } }
+			check_variable = { var = DNF_Activate_Partisans value = 11 }
+			NOT = { check_variable = { var = DNF_Ukraine_Choice value = 1 } }
+			RUS = { has_country_leader = { name = "Boris Savinkov" } }
+		}		
+		
+		cost =  150
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete DNF_Assassinate_Regional_Leaders target: [From.GetName]"
+			set_variable = { var = DNF_Ukraine_Choice value = 1 }
+		}
+		
+		remove_effect = { 
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_Assassinate_Regional_Leaders target: [From.GetName]"
+			custom_effect_tooltip = DNF_Ukraine_Final_Escalation_tt
+			country_event = { id = krg_dnf.36 }
+		}
+	}
+}
+
+DNF_Milan_Vienna_Axis_cat = {
+	DNF_Investing_In_Lombardy = {
+		icon = italy_flag
+			
+		days_remove = 365
+		days_re_enable = 180
+		cost = 50
+			
+			available = { 
+			has_country_flag = DNF_Von_Mises_Commission
+			check_variable = { DNF_Milan_Vienna_Axis = 1 }
+			country_exists = ITA
+			has_country_flag = DNF_green_italy_cooperation			
+			}
+
+
+			ai_will_do = {
+				factor = 1
+				modifier = {
+					check_variable = {
+						var = DNF_Italy_Facs
+						value = 14
+						compare = greater_than_or_equals
+						}
+					factor = 0
+				}	
+			}
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete DNF_Investing_In_Lombardy target: [From.GetName]"
+			add_to_variable = {var = DNF_Italy_Facs value = 5 }		
+		}
+
+		modifier = {
+			civilian_factory_use = 5
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_Investing_In_Lombardy target: [From.GetName]"
+				country_event = { id = krg_dnf.48 }
+				DNF = { 
+					add_to_variable = {var = DNF_Italy_Facs value = -5 }		
+				}
+			}
+		}
+
+	DNF_Investing_In_Veneto = {
+		icon = italy_flag
+
+		available = { 
+			has_country_flag = DNF_Von_Mises_Commission
+			check_variable = { DNF_Milan_Vienna_Axis = 1 }
+			country_exists = ITA
+			has_country_flag = DNF_green_italy_cooperation
+		}
+			
+		ai_will_do = {
+			base = 1
+			modifier = {
+				check_variable = {
+					var = DNF_Italy_Facs
+					value = 14
+					compare = greater_than_or_equals
+					}
+				factor = 0
+			}	
+		}
+		days_remove = 365
+		days_re_enable = 180
+		cost = 50
+			
+		modifier = {
+			civilian_factory_use = 5
+		}
+		complete_effect = { 
+			log = "[GetDateText]: [Root.GetName]: Decision complete DNF_Investing_In_Veneto target: [From.GetName]"
+			add_to_variable = {var = DNF_Italy_Facs value = 5 }	
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_Investing_In_Veneto target: [From.GetName]"
+			country_event = { id = krg_dnf.49 }
+			DNF = { 
+				add_to_variable = {var = DNF_Italy_Facs value = -5 }		
+			}
+		}
+	}
+
+	DNF_Investing_In_Romagna = {
+		icon = italy_flag
+		
+		available = { 
+			has_country_flag = DNF_Von_Mises_Commission
+			check_variable = { DNF_Milan_Vienna_Axis = 1 }
+			country_exists = ITA
+			has_country_flag = DNF_green_italy_cooperation
+		}
+
+		ai_will_do = {
+			base = 1
+			modifier = {
+				check_variable = {
+					var = DNF_Italy_Facs
+					value = 14
+					compare = greater_than_or_equals
+					}
+				factor = 0
+			}	
+		}
+		days_remove = 365
+		days_re_enable = 180
+		cost = 50
+
+		modifier = {
+			civilian_factory_use = 5
+		}
+		complete_effect = { 
+			log = "[GetDateText]: [Root.GetName]: Decision complete DNF_Investing_In_Romagna target: [From.GetName]"
+			add_to_variable = {var = DNF_Italy_Facs value = 5 }
+		}	
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_Investing_In_Romagna target: [From.GetName]"
+			country_event = { id = krg_dnf.50}
+			DNF = { 
+				add_to_variable = { var = DNF_Italy_Facs value = -5 }		
+			}
+		}
+	}
+
+	DNF_Investing_In_Tuscany  = {
+		icon = italy_flag
+
+		days_remove = 365
+		days_re_enable = 180
+		cost = 50
+		
+		ai_will_do = {
+			base = 1
+			modifier = {
+				check_variable = {
+					var = DNF_Italy_Facs
+					value = 14
+					compare = greater_than_or_equals
+					}
+				factor = 0
+			}	
+		}
+		available = { 
+		has_country_flag = DNF_Von_Mises_Commission
+		check_variable = { DNF_Milan_Vienna_Axis = 1 }
+		country_exists = ITA
+		has_country_flag = DNF_green_italy_cooperation
+		}
+		
+		
+		
+		modifier = {
+			civilian_factory_use = 5
+		}
+		complete_effect = { 
+			log = "[GetDateText]: [Root.GetName]: Decision complete DNF_Investing_In_Tuscany  target: [From.GetName]"
+			add_to_variable = {var = DNF_Italy_Facs value = 5 }
+		}	
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_Investing_In_Tuscany  target: [From.GetName]"
+			country_event = { id = krg_dnf.51 }
+			DNF = { 
+				add_to_variable = {var = DNF_Italy_Facs value = -5 }		
+			}
+		}
+	}
+
+	DNF_Equipping_The_Italian_Army   = {
+		icon = artillery
+
+		days_remove = 150		
+
+		days_re_enable = 60
+		
+		available = { 
+		has_country_flag = DNF_Holtzberg_Waffenhersteller
+		check_variable = { DNF_Milan_Vienna_Axis = 1 }
+		country_exists = ITA
+		has_country_flag = DNF_green_italy_cooperation
+		}
+		
+		cost = 50
+		
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_Equipping_The_Italian_Army   target: [From.GetName]"
+			
+
+			country_event = { id = krg_dnf.47	}
+		}
+	}
+	
+	DNF_Training_Cadres_In_Danubia   = {
+		icon = binoculars
+
+		days_remove = 150		
+
+		days_re_enable = 60
+		
+		available = { 
+		check_variable = { DNF_Milan_Vienna_Axis = 1 }
+		country_exists = ITA
+		has_country_flag = DNF_green_italy_cooperation
+		}
+		
+		cost = 50
+		
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_Training_Cadres_In_Danubia   target: [From.GetName]"
+			
+			ITA ={ 
+				add_command_power = 10
+			}
+		}
+	}
+
+	DNF_Joint_Naval_Exercises   = {
+		icon = generic_naval_base
+
+		days_remove = 80		
+
+		days_re_enable = 60
+		
+		available = { 
+		check_variable = { DNF_Milan_Vienna_Axis = 1 }
+		country_exists = ITA
+		has_country_flag = DNF_green_italy_cooperation
+		}
+		
+		cost = 50
+		
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_Joint_Naval_Exercises   target: [From.GetName]"
+			navy_experience = 20
+		}
+	}
+	
+	DNF_Joint_Army_Exercises   = {
+		icon = tank		days_remove = 80		
+
+		days_re_enable = 60
+		
+		available = { 
+		check_variable = { DNF_Milan_Vienna_Axis = 1 }
+		country_exists = ITA
+		has_country_flag = DNF_green_italy_cooperation
+		}
+		
+		cost = 50
+		
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_Joint_Army_Exercises   target: [From.GetName]"
+			army_experience = 20
+		}
+	}
+
+	DNF_Request_Help_With_Italian_Minority = {
+		icon = italy_flag		days_remove = 365
+		
+		available = { 
+		check_variable = { DNF_Milan_Vienna_Axis = 1 }
+		country_exists = ITA
+		has_country_flag = DNF_green_italy_cooperation
+		OR = { 	
+				has_idea = DNF_nationalist_tensions_2 
+				has_idea = DNF_nationalist_tensions_3
+			 }
+		}
+		
+		cost = 100
+		fire_only_once = yes
+		
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_Request_Help_With_Italian_Minority target: [From.GetName]"
+			country_event = { id = krg_dnf.52	}
+			
+			if = { limit = { NOT = { has_dlc = "La Resistance" } }
+			add_to_variable = { var = DNF_Piano_Solo_Acceptance value = -5 }
+			add_to_variable = { var = DNF_Piano_Solo_Likelihood value = -10 }
+			}
+		}
+	}
+}
+
+DNF_Federalisation_Plans_cat = {
+
+	DNF_Hammer_Out_A_Deal_With_The_Hungarians = {
+		icon = DNF_flag_hungary
+		 
+		fire_only_once = yes # Will not re-enable after being removed
+		days_remove = 60
+
+		available = { 
+			check_variable = { DNF_Federalisation_var < 3 }
+			check_variable = {
+				var = DNF_Federalisation_percent
+				value = 100
+				compare = less_than
+			}
+		}
+		
+		visible = {
+			has_completed_focus = DNF_strengthen_the_coalition
+			NOT = { has_completed_focus = DNF_federalize_the_christian_bloc }
+		}
+	
+		cost = 80
+		
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_Hammer_Out_A_Deal_With_The_Hungarians target: [From.GetName]"
+			add_to_variable = { DNF_Federalisation_var = -1 }
+			add_to_variable = { DNF_Federalisation_percent = 30 }
+			country_event = {
+				id = krg_dnf.88
+				}
+				custom_effect_tooltip = DNF_major_federalisation_tt
+			}
+		
+			
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete DNF_Hammer_Out_A_Deal_With_The_Hungarians target: [From.GetName]"
+			add_to_variable = { DNF_Federalisation_var = 1 }
+		}	
+	}
+	
+	DNF_Convince_The_Austrians = {
+		icon = DNF_flag_austria
+		
+		fire_only_once = yes # Will not re-enable after being removed
+		days_remove = 60
+
+		available = { 
+			check_variable = { DNF_Federalisation_var < 3 }
+			check_variable = {
+				var = DNF_Federalisation_percent
+				value = 100
+				compare = less_than
+			}
+		}
+		
+		visible = {
+			has_completed_focus = DNF_strengthen_the_coalition
+			NOT = { has_completed_focus = DNF_federalize_the_christian_bloc }
+		}
+		
+		cost = 80
+		
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_Convince_The_Austrians target: [From.GetName]"
+			add_to_variable = { DNF_Federalisation_var = -1 }
+			add_to_variable = { DNF_Federalisation_percent = 30 }
+			country_event = {
+				id = krg_dnf.89
+				}
+				custom_effect_tooltip = DNF_major_federalisation_tt
+			}
+		
+			
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete DNF_Convince_The_Austrians target: [From.GetName]"
+			add_to_variable = { DNF_Federalisation_var = 1 }
+		}	
+	}
+
+	DNF_Strong_Arm_The_Illyrians = {
+		icon = DNF_flag_illyria
+		fire_only_once = yes # Will not re-enable after being removed
+		days_remove = 50
+
+		available = { 
+			check_variable = { DNF_Federalisation_var < 3 }
+			check_variable = {
+				var = DNF_Federalisation_percent
+				value = 100
+				compare = less_than
+			}
+		}
+
+		modifier = {
+			civilian_factory_use = 5
+		}
+		
+		cost = 20
+		
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_Strong_Arm_The_Illyrians target: [From.GetName]"
+			add_to_variable = { DNF_Federalisation_var = -1 }
+			add_to_variable = { DNF_Federalisation_percent = 10 }
+			country_event = {
+				id = krg_dnf.90
+				}
+				custom_effect_tooltip = DNF_minor_federalisation_tt
+			}
+		
+			
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete DNF_Strong_Arm_The_Illyrians target: [From.GetName]"
+			add_to_variable = { DNF_Federalisation_var = 1 }
+		}	
+	}
+
+	DNF_Persuade_The_Bohemians = {
+		icon = DNF_flag_bohemia
+		 		fire_only_once = yes # Will not re-enable after being removed
+		days_remove = 50
+
+		available = { 
+			check_variable = { DNF_Federalisation_var < 3 }
+			check_variable = {
+				var = DNF_Federalisation_percent
+				value = 100
+				compare = less_than
+			}
+		}
+		
+		modifier = {
+			civilian_factory_use = 5
+		}
+
+		cost = 20
+		
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_Persuade_The_Bohemians target: [From.GetName]"
+			add_to_variable = { DNF_Federalisation_var = -1 }
+			add_to_variable = { DNF_Federalisation_percent = 10 }
+			country_event = {
+				id = krg_dnf.91
+				}
+				custom_effect_tooltip = DNF_minor_federalisation_tt
+			}
+		
+			
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete DNF_Persuade_The_Bohemians target: [From.GetName]"
+			add_to_variable = { DNF_Federalisation_var = 1 }
+		}	
+	}	
+
+	DNF_Bribe_The_Galicians = {
+		icon = DNF_flag_galicia
+		 		fire_only_once = yes # Will not re-enable after being removed
+		days_remove = 50
+
+		available = { 
+			check_variable = { DNF_Federalisation_var < 3 }
+			check_variable = {
+				var = DNF_Federalisation_percent
+				value = 100
+				compare = less_than
+			}
+		}
+
+		modifier = {
+			civilian_factory_use = 5
+		}
+		
+		cost = 20
+		
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_Bribe_The_Galicians target: [From.GetName]"
+			add_to_variable = { DNF_Federalisation_var = -1 }
+			add_to_variable = { DNF_Federalisation_percent = 10 }
+			country_event = {
+				id = krg_dnf.92
+				}
+				custom_effect_tooltip = DNF_minor_federalisation_tt
+			}
+		
+			
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete DNF_Bribe_The_Galicians target: [From.GetName]"
+			add_to_variable = { DNF_Federalisation_var = 1 }
+		}	
+	}	
+
+	DNF_Educate_The_Slovakians = {
+		icon = DNF_flag_slovakia
+		 
+		fire_only_once = yes # Will not re-enable after being removed
+		days_remove = 50
+
+		available = { 
+			check_variable = { DNF_Federalisation_var < 3 }
+			check_variable = {
+				var = DNF_Federalisation_percent
+				value = 100
+				compare = less_than
+			}
+		}
+
+		modifier = {
+			civilian_factory_use = 5
+		}
+
+		cost = 20
+		
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_Educate_The_Slovakians target: [From.GetName]"
+			add_to_variable = { DNF_Federalisation_var = -1 }
+			add_to_variable = { DNF_Federalisation_percent = 10 }
+			country_event = {
+				id = krg_dnf.93
+				}
+				custom_effect_tooltip = DNF_minor_federalisation_tt
+			}
+		
+			
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete DNF_Educate_The_Slovakians target: [From.GetName]"
+			add_to_variable = { DNF_Federalisation_var = 1 }
+		}	
+	}	
+
+	DNF_Build_Consensus_Between_The_Main_Players = {
+		icon = generic_agreement
+		 
+		fire_only_once = yes # Will not re-enable after being removed
+		days_remove = 20
+
+		available = { 
+			check_variable = { DNF_Federalisation_var < 3 }
+			check_variable = {
+				var = DNF_Federalisation_percent
+				value = 100
+				compare = less_than
+			}
+		}
+
+		visible = {
+			has_country_flag = DNF_SDAPD_Federal_Tips
+		}
+
+		
+		cost = 50
+		
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_Build_Consensus_Between_The_Main_Players target: [From.GetName]"
+			add_to_variable = { DNF_Federalisation_var = -1 }
+			add_to_variable = { DNF_Federalisation_percent = 20 }
+			country_event = {
+				id = krg_dnf.94
+				}
+			custom_effect_tooltip = DNF_SDAPD_Federal_Tips_tt
+			}
+		
+			
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete DNF_Build_Consensus_Between_The_Main_Players target: [From.GetName]"
+			add_to_variable = { DNF_Federalisation_var = 1 }
+		}	
+	}	
+
+	DNF_Force_Strategic_Concessions_From_Less_Populous_Regions = {
+		icon = hand_palm_down
+
+		fire_only_once = yes # Will not re-enable after being removed
+		days_remove = 20
+
+		available = { 
+			check_variable = { DNF_Federalisation_var < 3 }
+			check_variable = {
+				var = DNF_Federalisation_percent
+				value = 100
+				compare = less_than
+			}
+		}
+
+		visible = {
+			has_country_flag = DNF_SDAPD_Federal_Tips
+		}
+
+		
+		cost = 50
+		
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_Force_Strategic_Concessions_From_Less_Populous_Regions target: [From.GetName]"
+			add_to_variable = { DNF_Federalisation_var = -1 }
+			add_to_variable = { DNF_Federalisation_percent = 20 }
+			country_event = {
+				id = krg_dnf.95
+				}
+			custom_effect_tooltip = DNF_SDAPD_Federal_Tips_tt
+			}
+		
+			
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete DNF_Force_Strategic_Concessions_From_Less_Populous_Regions target: [From.GetName]"
+			add_to_variable = { DNF_Federalisation_var = 1 }
+			}	
+		}	
+	
+}
+
+DNF_Danubia_Plan_cat = {
+	DNF_Danubia_Plan_construction = {
+		icon = factories
+
+		visible = {
+			has_country_flag = DNF_Danubia_Plan
+		}
+
+		available = {
+		}
+	
+		days_remove = 365
+		days_re_enable = 180
+		cost = 50
+
+		modifier = {
+			civilian_factory_use = 5
+		}
+
+		ai_will_do = {
+			base = 1
+			modifier = {
+				check_variable = {
+					var = DNF_Danubia_Plan_Facs
+					value = 10
+					compare = greater_than_or_equals
+					}
+				factor = 0
+			}	
+		}
+		
+		complete_effect = { 
+			log = "[GetDateText]: [Root.GetName]: Decision complete DNF_Danubia_Plan_construction target: [From.GetName]"
+			add_to_variable = {var = DNF_Danubia_Plan_Facs value = 5 }	
+		}	
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_Danubia_Plan_construction target: [From.GetName]"
+			random_core_state = { 
+					limit = { 
+						free_building_slots = {
+							building = industrial_complex
+							size > 0
+							include_locked = no
+						}
+					} 
+					add_building_construction = { 
+						type = industrial_complex 
+						level = 1 
+						instant_build = yes 
+					}
+					add_extra_state_shared_building_slots = 1
+				}
+				add_to_variable = {var = DNF_Danubia_Plan_Facs value = -5 }
+			}
+		}
+
+	DNF_Danubia_Plan_mils = {
+		icon = industry
+
+		visible = {
+			has_country_flag = DNF_Danubia_Plan
+		}
+
+		available = {
+		}
+	
+		days_remove = 365
+		days_re_enable = 180
+		cost = 50
+
+		modifier = {
+			civilian_factory_use = 10
+		}
+
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				check_variable = {
+					var = DNF_Danubia_Plan_Facs
+					value = 10
+					compare = greater_than_or_equals
+					}
+				factor = 0
+			}	
+		}
+		
+		complete_effect = { 
+			log = "[GetDateText]: [Root.GetName]: Decision complete DNF_Danubia_Plan_mils target: [From.GetName]"
+			add_to_variable = {var = DNF_Danubia_Plan_Facs value = 5 }
+		}	
+	
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_Danubia_Plan_mils target: [From.GetName]"
+			random_core_state = { 
+					limit = { 
+						free_building_slots = {
+							building = arms_factory
+							size > 0
+							include_locked = no
+						}
+					} 
+					add_building_construction = { 
+						type = arms_factory 
+						level = 1 
+						instant_build = yes 
+					}
+				add_extra_state_shared_building_slots = 1
+			}
+			add_to_variable = {var = DNF_Danubia_Plan_Facs value = -5 }
+		}
+	}
+	
+
+	DNF_Danubia_Plan_extraction ={
+		icon = factories		
+		
+		visible = {
+			has_country_flag = DNF_Danubia_Plan
+		}
+	
+		days_remove = 365
+		days_re_enable = 180
+		cost = 50
+
+		modifier = {
+			civilian_factory_use = 5
+		}
+
+		ai_will_do = {
+			base = 1
+			modifier = {
+				check_variable = {
+					var = DNF_Danubia_Plan_Facs
+					value = 10
+					compare = greater_than_or_equals
+					}
+				factor = 0
+			}	
+		}
+		
+		complete_effect = { 
+			log = "[GetDateText]: [Root.GetName]: Decision complete DNF_Danubia_Plan_extraction ={ target: [From.GetName]"
+			add_to_variable = {var = DNF_Danubia_Plan_Facs value = 5 }
+		}	
+
+		fixed_random_seed = no
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_Danubia_Plan_extraction target: [From.GetName]"
+			random_core_state = { 
+					random_list = {
+						20 = {
+							add_resource = {
+								type = oil
+								amount = 2
+							}
+						}
+						20 = {
+							add_resource = {
+								type = chromium
+								amount = 2
+							}
+						}
+						20 = {
+							add_resource = {
+								type = tungsten
+								amount = 2
+							}
+						}
+						20 = {
+							add_resource = {
+								type = steel
+								amount = 2
+							}
+						}
+						20 = {
+							add_resource = {
+								type = rubber
+								amount = 2
+							}
+						}
+					}
+				}
+				add_to_variable = {var = DNF_Danubia_Plan_Facs value = -5 }
+			}
+		}
+	}
+
+DNF_Danubian_Highways_cat = {
+	DNF_Highways_funding_Round = {
+		icon = give_cash
+		days_mission_timeout = 365
+		fire_only_once = no
+		fixed_random_seed = no
+
+		available = {
+			always = no
+		}
+
+		activation = {
+			has_country_flag = DNF_Build_Highways_Approved
+			NOT =  { has_country_flag = DNF_completed_SS5 }
+		}
+
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout DNF_Highways_funding_Round target: [From.GetName]"
+			if = { limit = { NOT = {has_country_flag = DNF_completed_SS5 }}
+			activate_mission = DNF_Highways_funding_Round }
+			random_list = {
+				25 = {
+					add_to_variable = {
+						var = DNF_interstate_budget
+						value = 5
+					}
+					custom_effect_tooltip = DNF_highway_add_5_tt
+				}
+				50 = {
+					add_to_variable = {
+						var = DNF_interstate_budget
+						value = 7
+					}
+					custom_effect_tooltip = DNF_highway_add_8_tt
+				}
+				25 = {
+					add_to_variable = {
+						var = DNF_interstate_budget
+						value = 10
+					}
+					custom_effect_tooltip = DNF_highway_add_10_tt
+				}
+			}
+		}
+	}
+
+	DNF_SS1 = {		
+		icon = road	
+		days_remove = 540
+
+		fire_only_once = yes
+
+		custom_cost_trigger = {
+			check_variable = {
+			DNF_interstate_budget > 15.99
+			}
+		}
+		custom_cost_text = DNF_16_bil
+
+		complete_effect = {
+		log = "[GetDateText]: [Root.GetName]: Decision complete DNF_SS1 target: [From.GetName]"
+			add_to_variable = { DNF_interstate_budget = -16 }
+		}
+		
+		remove_effect = {
+		log = "[GetDateText]: [Root.GetName]: Decision remove DNF_SS1 target: [From.GetName]"
+			set_country_flag = DNF_completed_SS1
+			9 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			75 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+	DNF_SS2 = {
+		icon = road
+		days_remove = 540
+
+		fire_only_once = yes
+
+		custom_cost_trigger = {
+		check_variable = {
+			DNF_interstate_budget > 18.99
+			}
+		}
+		custom_cost_text = DNF_19_bil
+
+		complete_effect = {
+		log = "[GetDateText]: [Root.GetName]: Decision complete DNF_SS2 target: [From.GetName]"
+			add_to_variable = { DNF_interstate_budget = -19 }
+		}
+	
+		remove_effect = {
+		log = "[GetDateText]: [Root.GetName]: Decision remove DNF_SS2 target: [From.GetName]"
+			set_country_flag = DNF_completed_SS2
+			70 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			71 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			948 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			73 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			72 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			843 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			102 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+	DNF_SS3 = {
+		icon = road
+		available = {
+			has_country_flag = DNF_completed_SS1
+			has_country_flag = DNF_completed_SS2
+		}
+		
+		days_remove = 360
+
+		fire_only_once = yes
+
+		custom_cost_trigger = {
+		check_variable = {
+			DNF_interstate_budget > 15.99
+		}
+		}
+		custom_cost_text = DNF_16_bil
+
+		complete_effect = {
+		log = "[GetDateText]: [Root.GetName]: Decision complete DNF_SS3 target: [From.GetName]"
+			add_to_variable = { DNF_interstate_budget = -16 }
+		}
+	
+		remove_effect = {
+		log = "[GetDateText]: [Root.GetName]: Decision remove DNF_SS3 target: [From.GetName]"
+			set_country_flag = DNF_completed_SS3
+			
+			84 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			664 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			947 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			
+		}
+	}
+	DNF_SS4 = {
+		icon = road
+		available = {
+			has_country_flag = DNF_completed_SS1
+			has_country_flag = DNF_completed_SS2
+		}
+		
+		days_remove = 360
+
+		fire_only_once = yes
+
+		custom_cost_trigger = {
+		check_variable = {
+			DNF_interstate_budget > 15.99
+		}
+		}
+		custom_cost_text = DNF_16_bil
+
+		complete_effect = {
+		log = "[GetDateText]: [Root.GetName]: Decision complete DNF_SS4 target: [From.GetName]"
+			add_to_variable = { DNF_interstate_budget = -16 }
+		}
+	
+		remove_effect = {
+		log = "[GetDateText]: [Root.GetName]: Decision remove DNF_SS4 target: [From.GetName]"
+			set_country_flag = DNF_completed_SS4
+			
+			82 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			764 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			45 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			43 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+	DNF_SS5 = {
+		icon = road
+		available = {
+			has_country_flag = DNF_completed_SS3
+			has_country_flag = DNF_completed_SS4
+		}
+		
+		days_remove = 360
+
+		fire_only_once = yes
+
+		custom_cost_trigger = {
+		check_variable = {
+			DNF_interstate_budget > 12.99
+		}
+		}
+		custom_cost_text = DNF_13_bil
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete DNF_SS5 target: [From.GetName]"
+			add_to_variable = { DNF_interstate_budget = -13 }
+		}
+	
+		remove_effect = {
+		log = "[GetDateText]: [Root.GetName]: Decision remove DNF_SS5 target: [From.GetName]"
+			set_country_flag = DNF_completed_SS5
+			155 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			72 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+}
+
+DNF_Landsturm_cat = {
+	DNF_austrian_landsturm_raise = {
+		icon = DNF_flag_austria
+		available = {
+			OR = {
+				has_country_flag = DNF_collapsing
+				has_war = yes
+			}	
+			NOT = { has_country_flag = DNF_austrian_landsturm_raised }
+		}
+
+		visible = {
+			NOT = { has_country_flag = DNF_austrian_landsturm_raised }
+		}
+
+	days_remove = 21
+	cost = 10
+	
+	remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_austrian_landsturm_raise target: [From.GetName]"
+		set_country_flag = DNF_austrian_landsturm_raised
+		custom_effect_tooltip = DNF_AusLandsturm_tt
+		hidden_effect = { load_oob = DNF_AusLandsturm }
+		
+			if = { limit = { has_country_flag = DNF_expanded_landsturm }
+			custom_effect_tooltip = DNF_AusLandsturm_extra_tt
+				hidden_effect = { load_oob = DNF_AusLandsturm_extra }
+			}
+		}
+	}
+
+	DNF_austrian_landsturm_lower = {
+		icon = DNF_flag_austria
+		available = {
+			has_country_flag = DNF_austrian_landsturm_raised
+		}
+
+		visible = {
+			has_country_flag = DNF_austrian_landsturm_raised
+		}
+
+	days_remove = 21
+	
+	remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_austrian_landsturm_lower target: [From.GetName]"
+		clr_country_flag = DNF_austrian_landsturm_raised
+		delete_units = {
+			division_template = "Austrian Landsturm Division"
+			disband = yes
+		}
+		}
+	}
+	
+	DNF_hungarian_landsturm_raise = {
+		icon = DNF_flag_hungary
+		available = {
+			OR = {
+				has_country_flag = DNF_collapsing
+				has_war = yes
+			}	
+			NOT = { has_country_flag = DNF_hungarian_landsturm_raised }
+		}
+
+		visible = {
+			NOT = { has_country_flag = DNF_hungarian_landsturm_raised }
+		}
+
+	days_remove = 21
+	cost = 10
+	
+	remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_hungarian_landsturm_raise target: [From.GetName]"
+		set_country_flag = DNF_hungarian_landsturm_raised
+		custom_effect_tooltip = DNF_HunLandsturm_tt
+		hidden_effect = { load_oob = DNF_HunLandsturm }
+		
+			if = { limit = { has_country_flag = DNF_expanded_landsturm }
+			custom_effect_tooltip = DNF_HunLandsturm_extra_tt
+				hidden_effect = { load_oob = DNF_HunLandsturm_extra }
+			}
+		}
+	}
+
+	DNF_hungarian_landsturm_lower = {
+		icon = DNF_flag_hungary
+		available = {
+			has_country_flag = DNF_hungarian_landsturm_raised
+		}
+
+		visible = {
+			has_country_flag = DNF_hungarian_landsturm_raised
+		}
+
+	days_remove = 21
+	
+	remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_hungarian_landsturm_lower target: [From.GetName]"
+		clr_country_flag = DNF_hungarian_landsturm_raised
+		delete_units = {
+			division_template = "Hungarian Landsturm Division"
+			disband = yes
+		}
+		}
+	}
+	
+	DNF_bohemian_landsturm_raise = {
+		icon = DNF_flag_bohemia
+		available = {
+			OR = {
+				has_country_flag = DNF_collapsing
+				has_war = yes
+			}	
+			NOT = { has_country_flag = DNF_bohemian_landsturm_raised }
+		}
+
+		visible = {
+			NOT = { has_country_flag = DNF_bohemian_landsturm_raised }
+		}
+
+	days_remove = 21
+	cost = 10
+	
+	remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_bohemian_landsturm_raise target: [From.GetName]"
+		set_country_flag = DNF_bohemian_landsturm_raised
+		custom_effect_tooltip = DNF_BohLandsturm_tt
+		hidden_effect = { load_oob = DNF_BohLandsturm }
+		
+			if = { limit = { has_country_flag = DNF_expanded_landsturm }
+			custom_effect_tooltip = DNF_BohLandsturm_extra_tt
+				hidden_effect = { load_oob = DNF_BohLandsturm_extra }
+			}
+		}
+	}
+
+	DNF_bohemian_landsturm_lower = {
+		icon = DNF_flag_bohemia
+		available = {
+			has_country_flag = DNF_bohemian_landsturm_raised
+		}
+
+		visible = {
+			has_country_flag = DNF_bohemian_landsturm_raised
+		}
+
+	days_remove = 21
+	
+	remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_bohemian_landsturm_lower target: [From.GetName]"
+		clr_country_flag = DNF_bohemian_landsturm_raised
+		delete_units = {
+			division_template = "Bohemian Landsturm Division"
+			disband = yes
+		}
+		}
+	}
+	
+	DNF_illyrian_landsturm_raise = {
+		icon = DNF_flag_illyria
+		available = {
+			OR = {
+				has_country_flag = DNF_collapsing
+				has_war = yes
+			}	
+			NOT = { has_country_flag = DNF_illyrian_landsturm_raised }
+		}
+
+		visible = {
+			NOT = { has_country_flag = DNF_illyrian_landsturm_raised }
+		}
+
+	days_remove = 21
+	cost = 10
+	
+	remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_illyrian_landsturm_raise target: [From.GetName]"
+		set_country_flag = DNF_illyrian_landsturm_raised
+		custom_effect_tooltip = DNF_IllLandsturm_tt
+		hidden_effect = { load_oob = DNF_IllLandsturm }
+		
+			if = { limit = { has_country_flag = DNF_expanded_landsturm }
+			custom_effect_tooltip = DNF_IllLandsturm_extra_tt
+				hidden_effect = { load_oob = DNF_IllLandsturm_extra }
+			}
+		}
+	}
+
+	DNF_illyrian_landsturm_lower = {
+		icon = DNF_flag_illyria
+		available = {
+			has_country_flag = DNF_illyrian_landsturm_raised
+		}
+
+		visible = {
+			has_country_flag = DNF_illyrian_landsturm_raised
+		}
+
+	days_remove = 21
+	
+	remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_illyrian_landsturm_lower target: [From.GetName]"
+		clr_country_flag = DNF_illyrian_landsturm_raised
+		delete_units = {
+			division_template = "Illyrian Landsturm Division"
+			disband = yes
+		}
+		}
+	}
+	
+	DNF_slovakian_landsturm_raise = {
+		icon = DNF_flag_slovakia
+		available = {
+			OR = {
+				has_country_flag = DNF_collapsing
+				has_war = yes
+			}	
+			NOT = { has_country_flag = DNF_slovakian_landsturm_raised }
+		}
+
+		visible = {
+			NOT = { has_country_flag = DNF_slovakian_landsturm_raised }
+		}
+
+	days_remove = 21
+	cost = 10
+	
+	remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_slovakian_landsturm_raise target: [From.GetName]"
+		set_country_flag = DNF_slovakian_landsturm_raised
+		custom_effect_tooltip = DNF_SloLandsturm_tt
+		hidden_effect = { load_oob = DNF_SloLandsturm }
+		
+			if = { limit = { has_country_flag = DNF_expanded_landsturm }
+			custom_effect_tooltip = DNF_SloLandsturm_extra_tt
+				hidden_effect = { load_oob = DNF_SloLandsturm_extra }
+			}
+		}
+	}
+
+	DNF_slovakian_landsturm_lower = {
+		icon = DNF_flag_slovakia
+		available = {
+			has_country_flag = DNF_slovakian_landsturm_raised
+		}
+
+		visible = {
+			has_country_flag = DNF_slovakian_landsturm_raised
+		}
+
+	days_remove = 21
+	
+	remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_slovakian_landsturm_lower target: [From.GetName]"
+		clr_country_flag = DNF_slovakian_landsturm_raised
+		delete_units = {
+			division_template = "Slovakian Landsturm Division"
+			disband = yes
+		}
+		}
+	}
+	
+	DNF_galician_landsturm_raise = {
+		icon = DNF_flag_galicia
+		available = {
+			OR = {
+				has_country_flag = DNF_collapsing
+				has_war = yes
+			}	
+			NOT = { has_country_flag = DNF_galician_landsturm_raised }
+		}
+
+		visible = {
+			NOT = { has_country_flag = DNF_galician_landsturm_raised }
+		}
+
+	days_remove = 21
+	cost = 10
+	
+	remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_galician_landsturm_raise target: [From.GetName]"
+		set_country_flag = DNF_galician_landsturm_raised
+		custom_effect_tooltip = DNF_GalLandsturm_tt
+		hidden_effect = { load_oob = DNF_GalLandsturm }
+		
+			if = { limit = { has_country_flag = DNF_expanded_landsturm }
+			custom_effect_tooltip = DNF_GalLandsturm_extra_tt
+				hidden_effect = { load_oob = DNF_GalLandsturm_extra }
+			}
+		}
+	}
+
+	DNF_galician_landsturm_lower = {
+		icon = DNF_flag_galicia
+		available = {
+			has_country_flag = DNF_galician_landsturm_raised
+		}
+
+		visible = {
+			has_country_flag = DNF_galician_landsturm_raised
+		}
+
+	days_remove = 21
+	
+	remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_galician_landsturm_lower target: [From.GetName]"
+		clr_country_flag = DNF_galician_landsturm_raised
+		delete_units = {
+			division_template = "Galician Landsturm Division"
+			disband = yes
+		}
+		}
+	}
+	
+	DNF_transylvanian_landsturm_raise = {
+		icon = DNF_flag_transylvania
+		available = {
+			OR = {
+				has_country_flag = DNF_collapsing
+				has_war = yes
+			}	
+			NOT = { has_country_flag = DNF_transylvanian_landsturm_raised }
+		}
+
+		visible = {
+			NOT = { has_country_flag = DNF_transylvanian_landsturm_raised }
+		}
+
+	days_remove = 21
+	cost = 10
+	
+	remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_transylvanian_landsturm_raise target: [From.GetName]"
+		set_country_flag = DNF_transylvanian_landsturm_raised
+		custom_effect_tooltip = DNF_TraLandsturm_tt
+		hidden_effect = { load_oob = DNF_TraLandsturm }
+		
+			if = { limit = { has_country_flag = DNF_expanded_landsturm }
+			custom_effect_tooltip = DNF_TraLandsturm_extra_tt
+				hidden_effect = { load_oob = DNF_TraLandsturm_extra }
+			}
+		}
+	}
+
+	DNF_transylvanian_landsturm_lower = {
+		icon = DNF_flag_transylvania
+		available = {
+			has_country_flag = DNF_transylvanian_landsturm_raised
+		}
+
+		visible = {
+			has_country_flag = DNF_transylvanian_landsturm_raised
+		}
+
+	days_remove = 21
+	
+	remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_transylvanian_landsturm_lower target: [From.GetName]"
+		clr_country_flag = DNF_transylvanian_landsturm_raised
+			delete_units = {
+				division_template = "Transylvanian Landsturm Division"
+				disband = yes
+			}
+		}
+	}
+}
+
+DNF_Holtzberg_Waffenhersteller_cat = {
+	DNF_Holtzberg_no_interest = {
+		icon = generic_prepare_civil_war
+		
+		visible = {
+			NOT = { original_tag = DNF }
+		}
+
+		available = {
+			always = yes
+		}
+	
+	days_remove = 1
+	cost = 0
+	
+	ai_will_do = { 
+		base = 0
+	}
+	
+	remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_Holtzberg_no_interest target: [From.GetName]"
+		set_country_flag = Holtzberg_Hidden
+	}
+
+	}
+	DNF_Holtzberg_Add_Rifles = {
+		icon = generic_prepare_civil_war
+		
+		visible = {
+			original_tag = DNF
+		}
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = DNF_Holtzberg_Inventory_small_arms_15000_tt
+				check_variable = {
+					DNF_Holtzberg_Inventory_small_arms < 15000
+				}
+			}
+			NOT = {
+				has_country_flag = DNF_collapsing
+			}
+			has_equipment = {
+				infantry_equipment_0 > 19999
+			}
+		}
+	
+	days_remove = 10
+	days_re_enable = 180
+	cost = 0
+	
+	ai_will_do = { 
+		base = 1
+		modifier = {
+			factor = 0
+			check_variable = {
+				DNF_Holtzberg_Inventory_small_arms < 20000
+			}
+			
+			check_variable = {
+				DNF_Holtzberg_Inventory_small_arms > 10000
+			}
+		}
+		modifier = {
+			factor = 10
+			check_variable = {
+				DNF_Holtzberg_Inventory_small_arms < 10000
+			}
+			check_variable = {
+				DNF_Holtzberg_Inventory_small_arms > 5000
+			}
+		}
+		modifier = {
+			factor = 20
+			check_variable = {
+				DNF_Holtzberg_Inventory_small_arms < 5000
+			}
+			check_variable = {
+				DNF_Holtzberg_Inventory_small_arms > 1000
+			}
+		}
+		modifier = {
+			factor = 50
+			check_variable = {
+				DNF_Holtzberg_Inventory_small_arms < 1000
+			}
+		}
+	}
+	
+	remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_Holtzberg_Add_Rifles target: [From.GetName]"
+			add_equipment_to_stockpile = {
+				type = infantry_equipment_0
+				amount = -20000
+				producer = DNF
+			}
+			add_political_power = 25
+		}
+	}
+
+	DNF_Holtzberg_Add_Supply = {
+		icon = generic_prepare_civil_war
+
+		visible = {
+			original_tag = DNF
+		}
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = DNF_Holtzberg_Inventory_supply_15000_tt
+				check_variable = {
+					DNF_Holtzberg_Inventory_supply_equipment < 15000
+				}
+			}
+			NOT = {
+				has_country_flag = DNF_collapsing
+			}
+			has_equipment = {
+				support_equipment_1 > 19999
+			}
+		}
+	days_remove = 10
+	days_re_enable = 180
+	cost = 0
+	
+	ai_will_do = { 
+		base = 1
+		modifier = {
+			factor = 0
+			check_variable = {
+				DNF_Holtzberg_Inventory_supply_equipment < 20000
+			}
+			
+			check_variable = {
+				DNF_Holtzberg_Inventory_supply_equipment > 10000
+			}
+		}
+		modifier = {
+			factor = 10
+			check_variable = {
+				DNF_Holtzberg_Inventory_supply_equipment < 10000
+			}
+			check_variable = {
+				DNF_Holtzberg_Inventory_supply_equipment > 5000
+			}
+		}
+		modifier = {
+			factor = 20
+			check_variable = {
+				DNF_Holtzberg_Inventory_supply_equipment < 5000
+			}
+			check_variable = {
+				DNF_Holtzberg_Inventory_supply_equipment > 1000
+			}
+		}
+		modifier = {
+			factor = 50
+			check_variable = {
+				DNF_Holtzberg_Inventory_supply_equipment < 1000
+			}
+		}
+	}
+	
+	remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_Holtzberg_Add_Supply target: [From.GetName]"
+			add_equipment_to_stockpile = {
+				type = support_equipment_1
+				amount = -20000
+				producer = DNF
+			}
+			add_political_power = 25
+		}
+	}
+
+	DNF_Holtzberg_Sell_Rifles_To_Private_Dealers = {
+		icon = generic_prepare_civil_war
+		
+		visible = {
+			has_country_flag = DNF_Independent_Arms_Sales
+			original_tag = DNF
+		}
+
+		available = {
+			check_variable = {
+				DNF_Holtzberg_Inventory_small_arms > 0
+			}
+			NOT = {
+				has_country_flag = DNF_collapsing
+			}
+			has_country_flag = DNF_Independent_Arms_Sales
+		}
+
+	days_remove = 90 #trans-shipment takes time
+	days_re_enable = 45
+	cost = 0
+	
+	ai_will_do = { 
+		base = 1		
+		modifier = {
+			factor = 15
+			check_variable = {
+				DNF_Holtzberg_Inventory_small_arms < 60000
+			}
+			check_variable = {
+				DNF_Holtzberg_Inventory_small_arms > 20000
+			}
+		}
+		modifier = {
+			factor = 0
+			check_variable = {
+				DNF_Holtzberg_Inventory_small_arms < 20000 #basically leave some guns for players!
+			}
+		}
+	}
+	
+	remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_Holtzberg_Sell_Rifles_To_Private_Dealers target: [From.GetName]"
+			subtract_from_variable = {
+				var = DNF_Holtzberg_Inventory_small_arms
+				value = 5000
+			}
+			add_political_power = 5
+		}
+	}
+
+	DNF_Holtzberg_Sell_Tanks_To_Private_Dealers = {
+		icon = tank
+		
+		visible = {
+			has_country_flag = DNF_Independent_Arms_Sales
+			original_tag = DNF
+		}
+
+		available = {
+			check_variable = {
+				DNF_Holtzberg_Inventory_tanks > 0
+			}
+			NOT = {
+				has_country_flag = DNF_collapsing
+			}
+			has_country_flag = DNF_Independent_Arms_Sales
+		}
+
+	days_remove = 90 #trans-shipment takes time
+	days_re_enable = 45
+	cost = 0
+	
+	ai_will_do = { 
+		base = 1		
+		modifier = {
+			factor = 15
+			check_variable = {
+				DNF_Holtzberg_Inventory_tanks < 15000
+			}
+			check_variable = {
+				DNF_Holtzberg_Inventory_tanks > 3500
+			}
+		}
+		modifier = {
+			factor = 0
+			check_variable = {
+				DNF_Holtzberg_Inventory_tanks < 3500 #basically leave some tanks for players!
+			}
+		}
+	}
+	
+	remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_Holtzberg_Sell_Tanks_To_Private_Dealers target: [From.GetName]"
+			subtract_from_variable = {
+				var = DNF_Holtzberg_Inventory_tanks
+				value = 25
+			}
+			add_political_power = 15
+		}
+	}
+
+	DNF_Holtzberg_Sell_Anti_Tank_To_Private_Dealers = {
+		icon = generic_prepare_civil_war
+		
+		visible = {
+			has_country_flag = DNF_Independent_Arms_Sales
+			original_tag = DNF
+		}
+
+		available = {
+			check_variable = {
+				DNF_Holtzberg_Inventory_anti_tank > 0
+			}
+			NOT = {
+				has_country_flag = DNF_collapsing
+			}
+			has_country_flag = DNF_Independent_Arms_Sales
+		}
+
+	days_remove = 90 #trans-shipment takes time
+	days_re_enable = 45
+	cost = 0
+	
+	ai_will_do = { 
+		base = 1		
+		modifier = {
+			factor = 15
+			check_variable = {
+				DNF_Holtzberg_Inventory_anti_tank < 60000
+			}
+			check_variable = {
+				DNF_Holtzberg_Inventory_anti_tank > 15000
+			}
+		}
+		modifier = {
+			factor = 0
+			check_variable = {
+				DNF_Holtzberg_Inventory_anti_tank < 15000 #basically leave some at for players!
+			}
+		}
+	}
+	
+	remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_Holtzberg_Sell_Anti_Tank_To_Private_Dealers target: [From.GetName]"
+			subtract_from_variable = {
+				var = DNF_Holtzberg_Inventory_anti_tank
+				value = 500
+			}
+			add_political_power = 15
+		}
+	}
+
+	DNF_Holtzberg_Sell_Artillery_To_Private_Dealers= {
+		icon = artillery
+		
+		visible = {
+			has_country_flag = DNF_Independent_Arms_Sales
+			original_tag = DNF
+		}
+
+		available = {
+			check_variable = {
+				DNF_Holtzberg_Inventory_artillery  > 0
+			}
+			NOT = {
+				has_country_flag = DNF_collapsing
+			}
+			has_country_flag = DNF_Independent_Arms_Sales
+		}
+
+	days_remove = 90 #trans-shipment takes time
+	days_re_enable = 45
+	cost = 0
+	
+	ai_will_do = { 
+		base = 1		
+		modifier = {
+			factor = 15
+			check_variable = {
+				DNF_Holtzberg_Inventory_artillery  < 60000
+			}
+			check_variable = {
+				DNF_Holtzberg_Inventory_artillery  > 15000
+			}
+		}
+		modifier = {
+			factor = 0
+			check_variable = {
+				DNF_Holtzberg_Inventory_artillery  < 15000 #basically leave some at for players!
+			}
+		}
+	}
+	
+	remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_Holtzberg_Sell_Artillery_To_Private_Dealers= { target: [From.GetName]"
+			subtract_from_variable = {
+				var = DNF_Holtzberg_Inventory_artillery 
+				value = 500
+			}
+			add_political_power = 15
+		}
+	}
+
+	DNF_Holtzberg_Sell_Supply_To_Private_Dealers= {
+		icon = generic_prepare_civil_war
+		
+		visible = {
+			has_country_flag = DNF_Independent_Arms_Sales
+			original_tag = DNF
+		}
+
+		available = {
+			check_variable = {
+				DNF_Holtzberg_Inventory_supply_equipment  > 0
+			}
+			NOT = {
+				has_country_flag = DNF_collapsing
+			}
+			has_country_flag = DNF_Independent_Arms_Sales
+		}
+
+	days_remove = 90 #trans-shipment takes time
+	days_re_enable = 45
+	cost = 0
+	
+	ai_will_do = { 
+		base = 1		
+		modifier = {
+			factor = 15
+			check_variable = {
+				DNF_Holtzberg_Inventory_supply_equipment  < 110000
+			}
+			check_variable = {
+				DNF_Holtzberg_Inventory_supply_equipment  > 40000
+			}
+		}
+		modifier = {
+			factor = 0
+			check_variable = {
+				DNF_Holtzberg_Inventory_supply_equipment  < 40000 #basically leave some at for players!
+			}
+		}
+	}
+	
+	remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_Holtzberg_Sell_Supply_To_Private_Dealers= { target: [From.GetName]"
+			subtract_from_variable = {
+				var = DNF_Holtzberg_Inventory_supply_equipment 
+				value = 2000
+			}
+			add_political_power = 5
+		}
+	}
+
+	DNF_Holtzberg_Tag_Purchase_Rifles = {
+		icon = generic_prepare_civil_war
+
+		visible= {
+			NOT = { original_tag = DNF }
+			DNF = {
+				check_variable = {
+					DNF_Holtzberg_Inventory_small_arms > 0
+				}
+			}
+		}
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = DNF_Holtzberg_Has_Stock_tt
+				DNF = {
+					check_variable = {
+						DNF_Holtzberg_Inventory_small_arms > 0
+					}
+				}
+			}
+			NOT = { has_country_flag = Waiting_For_Rifle_Shipment }
+		}
+
+	days_remove = 90 #trans-shipment takes time
+	days_re_enable = 45
+	cost = 25
+	
+	ai_will_do = { 
+		base = 0
+		modifier = {	
+			has_equipment = {
+				infantry_equipment < 1000
+			}
+			has_political_power > 25
+			add = 50
+		}
+	}
+	
+	complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete DNF_Holtzberg_Tag_Purchase_Rifles target: [From.GetName]"
+		DNF = {
+			subtract_from_variable = {
+				var = DNF_Holtzberg_Inventory_small_arms
+				value = 5000
+			}
+		}
+		set_country_flag = Waiting_For_Rifle_Shipment
+	}
+	remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_Holtzberg_Tag_Purchase_Rifles target: [From.GetName]"
+			add_equipment_to_stockpile = {
+				type = infantry_equipment_0
+				amount = 5000
+				producer = DNF
+			}
+			DNF = { add_political_power = 15 } #might want to tweak this for balance later - Ovalue is 15 - 10 of that pp you spend is used for stuff ;)
+			THIS = { clr_country_flag = Waiting_For_Rifle_Shipment }
+		}
+	}
+
+	DNF_Holtzberg_Tag_Purchase_Supply = {
+		icon = generic_prepare_civil_war
+
+		visible= {
+			NOT = { original_tag = DNF }
+			DNF = {
+				check_variable = {
+					DNF_Holtzberg_Inventory_supply_equipment > 0
+				}
+			}
+		}
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = DNF_Holtzberg_Has_Stock_tt
+				DNF = {
+					check_variable = {
+						DNF_Holtzberg_Inventory_supply_equipment > 0
+					}
+				}
+			}
+			NOT = { has_country_flag = Waiting_For_Supply_Shipment }
+		}
+
+	days_remove = 90 #trans-shipment takes time
+	days_re_enable = 45
+	cost = 25
+
+	ai_will_do = { 
+		base = 0
+		modifier = {
+			has_equipment = {
+				support_equipment < 1000
+			}
+			has_political_power > 25
+			add = 50
+		}
+	}
+	
+	
+	
+	complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete DNF_Holtzberg_Tag_Purchase_Supply target: [From.GetName]"
+		DNF = {
+			subtract_from_variable = {
+				var = DNF_Holtzberg_Inventory_supply_equipment
+				value = 2000
+			}
+		}
+		set_country_flag = Waiting_For_Supply_Shipment
+	}
+	remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_Holtzberg_Tag_Purchase_Supply target: [From.GetName]"
+			add_equipment_to_stockpile = {
+				type = support_equipment_1
+				amount = 2000
+				producer = DNF
+			}
+			DNF = { add_political_power = 15 } #might want to tweak this for balance later - Ovalue is 15 - 10 of that pp you spend is used for stuff ;)
+			THIS = { clr_country_flag = Waiting_For_Supply_Shipment }
+		}
+	}
+
+	DNF_Holtzberg_Tag_Purchase_Artillery = {
+		icon = artillery
+
+		visible= {
+			NOT = { original_tag = DNF }
+			DNF = {
+				check_variable = {
+					DNF_Holtzberg_Inventory_artillery > 0
+				}
+			}
+		}
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = DNF_Holtzberg_Has_Stock_tt
+				DNF = {
+					check_variable = {
+						DNF_Holtzberg_Inventory_artillery > 0
+					}
+				}
+			}
+			NOT = { has_country_flag = Waiting_For_Arty_Shipment }
+		}
+
+	days_remove = 90 #trans-shipment takes time
+	days_re_enable = 45
+	cost = 25
+
+	ai_will_do = { 
+		base = 0
+		modifier = {
+			has_equipment = {
+				artillery_equipment < 400
+			}
+			has_template_containing_unit = artillery
+			has_political_power > 25
+			add = 50
+		}
+	}
+	
+	
+	complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete DNF_Holtzberg_Tag_Purchase_Artillery target: [From.GetName]"
+		DNF = {
+			subtract_from_variable = {
+				var = DNF_Holtzberg_Inventory_artillery
+				value = 500
+			}
+		}
+		set_country_flag = Waiting_For_Arty_Shipment
+	}
+	remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_Holtzberg_Tag_Purchase_Artillery target: [From.GetName]"
+			add_equipment_to_stockpile = {
+				type = artillery_equipment_1
+				amount = 500
+				producer = DNF
+			}
+			DNF = { add_political_power = 15 } #might want to tweak this for balance later - Ovalue is 15 - 10 of that pp you spend is used for stuff ;)
+			THIS = { clr_country_flag = Waiting_For_Arty_Shipment }
+		}
+	}
+
+	DNF_Holtzberg_Tag_Purchase_Tanks = {
+		icon = tank
+
+		visible= {
+			NOT = { original_tag = DNF }
+			DNF = {
+				check_variable = {
+					DNF_Holtzberg_Inventory_tanks > 0
+				}
+			}
+		}
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = DNF_Holtzberg_Has_Stock_tt
+				DNF = {
+					check_variable = {
+						DNF_Holtzberg_Inventory_tanks > 0
+					}
+				}
+			}
+			NOT = { has_country_flag = Waiting_For_Tank_Shipment }
+		}
+
+	days_remove = 90 #trans-shipment takes time
+	days_re_enable = 45
+	cost = 25
+	
+	ai_will_do = { 
+		base = 0
+		modifier = {
+			has_equipment = {
+					modern_tank_equipment < 100
+			}
+			has_template_containing_unit = modern_armor
+			has_political_power > 25
+			add = 50
+		}
+	}	
+	
+	complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete DNF_Holtzberg_Tag_Purchase_Tanks target: [From.GetName]"
+		DNF = {
+			subtract_from_variable = {
+				var = DNF_Holtzberg_Inventory_tanks
+				value = 100
+			}
+		}
+		set_country_flag = Waiting_For_Tank_Shipment
+	}
+	remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_Holtzberg_Tag_Purchase_Tanks target: [From.GetName]"
+			add_equipment_to_stockpile = {
+				type = modern_tank_equipment_1 #COV - FIX THIS PLZ
+				amount = 100
+				producer = DNF
+			}
+			DNF = { add_political_power = 15 } #might want to tweak this for balance later - Ovalue is 15 - 10 of that pp you spend is used for stuff ;)
+			THIS = { clr_country_flag = Waiting_For_Tank_Shipment }
+		}
+	}
+	DNF_Holtzberg_Tag_Purchase_AntiTank = {
+		icon = artillery
+
+		visible= {
+			NOT = { original_tag = DNF }
+			DNF = {
+				check_variable = {
+					DNF_Holtzberg_Inventory_anti_tank > 0
+				}
+			}
+		}
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = DNF_Holtzberg_Has_Stock_tt
+				DNF = {
+					check_variable = {
+						DNF_Holtzberg_Inventory_anti_tank > 0
+					}
+				}
+			}
+			NOT = { has_country_flag = Waiting_For_AntiTank_Shipment }
+		}
+
+	days_remove = 90 #trans-shipment takes time
+	days_re_enable = 45
+	cost = 25
+	
+
+	ai_will_do = { 
+		base = 0
+		modifier = {
+			has_equipment = {
+				anti_tank_equipment < 400
+			}
+			has_template_containing_unit = anti_tank
+			has_political_power > 25
+			add = 50
+		}
+	}
+	
+	
+	complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete DNF_Holtzberg_Tag_Purchase_AntiTank target: [From.GetName]"
+		DNF = {
+			subtract_from_variable = {
+				var = DNF_Holtzberg_Inventory_anti_tank
+				value = 500
+			}
+		}
+		set_country_flag = Waiting_For_AntiTank_Shipment
+	}
+	remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove DNF_Holtzberg_Tag_Purchase_AntiTank target: [From.GetName]"
+			add_equipment_to_stockpile = {
+				type = anti_tank_equipment_1
+				amount = 500
+				producer = DNF
+			}
+			DNF = { add_political_power = 15 } #might want to tweak this for balance later - Ovalue is 15 - 10 of that pp you spend is used for stuff ;)
+			THIS = { clr_country_flag = Waiting_For_AntiTank_Shipment }
+		}
+	}
+}

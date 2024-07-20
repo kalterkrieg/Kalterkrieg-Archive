@@ -1,0 +1,1747 @@
+﻿add_namespace = krg_bul
+
+country_event = { #inflation
+	id = krg_bul.1
+	title = krg_bul.1.t
+	desc = krg_bul.1.d
+	#picture = u
+
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_bul.1 FROM = [From.GetName] - inflation crisis begins" }
+
+	option = {
+		name = krg_bul.1.a
+		news_event = {
+			id = worldnews.26
+		}
+		hidden_effect = {
+			country_event = {
+				id = krg_bul.3
+				days = 7
+			}
+		}
+            SER = {
+                country_event = {
+				    id = krg_bul.2
+				    days = 2
+				}
+			}
+            GRE = {
+                country_event = {
+				   id = krg_bul.2
+				   days = 2
+				}
+			}
+            ROM = {
+                country_event = {
+				   id = krg_bul.2
+				   days = 2
+				}
+			}
+		remove_ideas = BUL_idea_treaty_of_dedinje
+	}
+}
+
+country_event = { #can't pay 
+	id = krg_bul.2
+	title = krg_bul.2.t
+	desc = krg_bul.2.d
+	#picture = u
+
+	is_triggered_only = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_bul.2 FROM = [From.GetName] - BP lose dedinje buff" }
+	option = {
+		name = krg_bul.2.a
+		THIS = {
+			add_opinion_modifier = {
+				target = BUL
+				modifier = KRG_disapproves_of_govt
+			}
+		}
+		if = {
+			limit = {
+				has_idea = ROM_idea_treaty_of_dedinje
+			}
+			remove_ideas = {
+				ROM_idea_treaty_of_dedinje
+			}
+		}
+		else_if = {
+			limit = {
+				has_idea = SER_idea_treaty_of_dedinje
+			}
+			remove_ideas = {
+				SER_idea_treaty_of_dedinje
+			}
+		}
+		else_if = {
+			limit = {
+				has_idea = GRE_idea_treaty_of_dedinje
+			}
+			remove_ideas = {
+				GRE_idea_treaty_of_dedinje
+			}
+		}
+		else = {
+			# you should never get here
+		}
+	}
+}
+
+country_event = { #protests
+	id = krg_bul.3
+	title = krg_bul.3.t
+	desc = krg_bul.3.d
+	#picture = u
+
+	is_triggered_only = yes
+	
+	trigger = {
+	    tag = BUL
+	}
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_bul.3 FROM = [From.GetName] - protests" }
+
+	option = {
+		name = krg_bul.3.a
+        hidden_effect = {
+			country_event = {
+				id = krg_bul.4
+				days = 7
+			}
+        }
+		add_stability = -0.01
+	}
+}
+
+country_event = { #gridlock
+	id = krg_bul.4
+	title = krg_bul.4.t
+	desc = krg_bul.4.d
+	#picture = u
+
+	is_triggered_only = yes
+	
+	trigger = {
+	    tag = BUL
+	}
+
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_bul.4 FROM = [From.GetName] - political gridlock" }
+	option = {
+		name = krg_bul.4.a
+        hidden_effect = {
+			country_event = {
+				id = krg_bul.5
+				days = 7
+			}
+        }
+		add_stability = -0.02
+	}
+}
+
+country_event = { #riots
+	id = krg_bul.5
+	title = krg_bul.5.t
+	desc = krg_bul.5.d
+	#picture = u
+
+	is_triggered_only = yes
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_bul.5 FROM = [From.GetName] - rioting" }
+	
+	trigger = {
+	    tag = BUL
+	}
+
+	option = {
+		name = krg_bul.5.a
+        hidden_effect = {
+			country_event = {
+				id = krg_bul.6
+				days = 7
+			}
+        }
+		add_stability = -0.04
+	}
+}
+
+country_event = { #gov falls
+	id = krg_bul.6
+	title = krg_bul.6.t
+	desc = krg_bul.6.d
+	#picture = u
+
+	is_triggered_only = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_bul.6 FROM = [From.GetName] - government falls" }
+	trigger = {
+	    tag = BUL
+	}
+
+	option = {
+		name = krg_bul.6.a
+		coal_rev_all = yes
+        hidden_effect = {
+			country_event = {
+				id = krg_bul.7
+				days = 14
+			}
+        }
+		
+	 	log = "[GetDateText]: [Root.GetName]: event krg_bul.6.a FROM = [From.GetName] - snap election chosen" 
+		ai_chance = {
+			base = 100
+		}
+	}
+    
+    option = {
+		name = krg_bul.6.b
+        set_politics = {
+	        ruling_party = social_democrat
+        }
+		log = "[GetDateText]: [Root.GetName]: event krg_bul.6.b FROM = [From.GetName] - soc dems hang on chosen" 
+		ai_chance = {
+			base = 0
+		}
+	}
+    
+    option = {
+		name = krg_bul.6.c
+        set_politics = {
+	        ruling_party = social_liberal
+        }
+		log = "[GetDateText]: [Root.GetName]: event krg_bul.6.a FROM = [From.GetName] - soc libs form a govt chosen" 
+		ai_chance = {
+			base = 0
+		}
+	}
+}
+
+country_event = { #elections
+	id = krg_bul.7
+	title = krg_bul.7.t
+	desc = krg_bul.7.d
+	#picture = u
+
+	is_triggered_only = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_bul.7 FROM = [From.GetName] - election agreed with monarch" }
+	trigger = {
+	    tag = BUL
+	}
+
+	option = {
+		name = krg_bul.7.a
+        hidden_effect = {
+			country_event = {
+				id = krg_bul.8
+				days = 14
+			}
+        }
+	}
+}
+
+country_event = { #alliance
+	id = krg_bul.8
+	title = krg_bul.8.t
+	desc = krg_bul.8.d
+	#picture = u
+
+	is_triggered_only = yes
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_bul.8 FROM = [From.GetName] - popular bloc forms" }
+	
+	trigger = {
+	    tag = BUL
+	}
+
+	option = {
+		name = krg_bul.8.a
+		set_party_name = {
+			ideology = social_liberal
+			long_name = BUL_social_liberal_popular_bloc_party_long
+			name = BUL_social_liberal_popular_bloc_party
+		}
+		set_party_name = {
+			ideology = market_liberal
+			long_name = BUL_market_liberal_popular_bloc_party_long
+			name = BUL_market_liberal_popular_bloc_party
+		}
+		set_party_name = {
+			ideology = social_conservative
+			long_name = BUL_social_conservative_popular_bloc_party_long
+			name = BUL_social_conservative_popular_bloc_party
+		}
+		set_party_name = {
+			ideology = authoritarian_democrat
+			long_name = BUL_authoritarian_democrat_popular_bloc_party_long
+			name = BUL_authoritarian_democrat_popular_bloc_party
+		}
+        hidden_effect = {
+			country_event = {
+				id = krg_bul.9
+				days = 14
+			}
+        }
+	}
+}
+
+country_event = { #election day
+	id = krg_bul.9
+	title = krg_bul.9.t
+	desc = krg_bul.9.d
+	#picture = u
+
+	is_triggered_only = yes
+	
+	trigger = {
+	    tag = BUL
+	}
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_bul.9 FROM = [From.GetName] - election happens" }
+	
+
+	option = {
+		name = krg_bul.9.a
+		news_event = {
+			id = worldnews.27
+		}
+        hidden_effect = {
+			country_event = {
+				id = krg_bul.10
+				days = 10
+			}
+        }
+		set_politics = {
+			ruling_party = market_liberal
+			election_frequency = 48
+			elections_allowed = yes
+		}
+		coal_rev_all = yes
+		coal_add_soc_lib = yes
+		coal_add_soc_con = yes
+		coal_add_auth_dem = yes
+		log = "[GetDateText]: [Root.GetName]: event krg_bul.9a FROM = [From.GetName] - popular block win" 
+		
+    }
+    
+    option = {
+		name = krg_bul.9.b
+		news_event = {
+			id = worldnews.29
+		}
+        hidden_effect = {
+			country_event = {
+				id = krg_bul.16
+				days = 2
+			}
+        }
+        set_politics = {
+	        ruling_party = authoritarian_socialist
+			election_frequency = 48
+			elections_allowed = no
+        }
+		coal_rev_all = yes
+		coal_add_rad_soc = yes
+		log = "[GetDateText]: [Root.GetName]: event krg_bul.9b FROM = [From.GetName] - auth socs win" 
+    }
+    
+    option = {
+		name = krg_bul.9.c
+		news_event = {
+			id = worldnews.28
+		}
+        hidden_effect = {
+			country_event = {
+				id = krg_bul.27
+				days = 2
+			}
+        }
+        set_politics = {
+	        ruling_party = national_populist
+			election_frequency = 48
+			elections_allowed = no
+        }
+		coal_rev_all = yes
+		log = "[GetDateText]: [Root.GetName]: event krg_bul.9c FROM = [From.GetName] - nat pops win" 
+	}
+}
+
+country_event = { #pop bloc
+	id = krg_bul.10
+	title = krg_bul.10.t
+	desc = krg_bul.10.d
+	#picture = u
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_bul.10 FROM = [From.GetName] - pop bloc 1" }
+
+	is_triggered_only = yes
+	
+	trigger = {
+	    tag = BUL
+	}
+
+	option = {
+		name = krg_bul.10.a
+        hidden_effect = {
+			country_event = {
+				id = krg_bul.11
+				days = 10
+			}
+        }
+		add_political_power = 50
+		add_stability = -0.01
+	}
+}
+
+country_event = { #crisis
+	id = krg_bul.11
+	title = krg_bul.11.t
+	desc = krg_bul.11.d
+	#picture = u
+
+	is_triggered_only = yes
+	
+	trigger = {
+	    tag = BUL
+	}
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_bul.11 FROM = [From.GetName] - pop bloc move to kill Lukov" }
+
+	option = {
+		name = krg_bul.11.a
+        hidden_effect = {
+			country_event = {
+				id = krg_bul.12
+				days = 5
+			}
+        }
+	}
+}
+
+country_event = { #lukov dead
+	id = krg_bul.12
+	title = krg_bul.12.t
+	desc = krg_bul.12.d
+	#picture = u
+
+	is_triggered_only = yes
+	
+	trigger = {
+	    tag = BUL
+	}
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_bul.12 FROM = [From.GetName] - pop bloc move to kill Lukov" }
+
+	option = {
+		name = krg_bul.12.a
+        hidden_effect = {
+			country_event = {
+				id = krg_bul.13
+				days = 14
+			}
+			retire_character = BUL_hristo_lukov 
+			BUL_hristo_lukov = {
+				kill_character = yes
+			}
+			hidden_effect = {
+				LBL_hristo_lukov = {
+					kill_character = yes
+				}
+				SBL_hristo_lukov = {
+					kill_character = yes
+				}
+			}
+        }
+	}
+}
+
+country_event = { #ban ospb
+	id = krg_bul.13
+	title = krg_bul.13.t
+	desc = krg_bul.13.d
+	#picture = u
+
+	is_triggered_only = yes
+	
+	trigger = {
+	    tag = BUL
+	}
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_bul.13 FROM = [From.GetName] - pop bloc move to ban the socialists" }
+
+	option = {
+		name = krg_bul.13.a
+        hidden_effect = {
+			country_event = {
+				id = krg_bul.14
+				days = 7
+			}
+        }
+		log = "[GetDateText]: [Root.GetName]: event krg_bul.13a FROM = [From.GetName] - they fail" 
+	}
+    
+    option = {
+		name = krg_bul.13.b
+        hidden_effect = {
+			country_event = {
+				id = krg_bul.15
+				days = 28
+			}
+        }
+		log = "[GetDateText]: [Root.GetName]: event krg_bul.13b FROM = [From.GetName] - they succeed" 
+    }
+}
+
+country_event = { #civil war
+	id = krg_bul.14
+	title = krg_bul.14.t
+	desc = krg_bul.14.d
+	#picture = u
+
+	is_triggered_only = yes
+	
+	trigger = {
+	    tag = BUL
+	}
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_bul.14 FROM = [From.GetName] - pop bloc vs socialists civil war" }
+
+	option = {
+		name = krg_bul.14.a
+		BUL_monarchist_socialist_civil_war = yes
+		news_event = {
+			id = worldnews.33
+		}
+	}
+
+	option = {
+		name = krg_bul.14.b
+		BUL_monarchist_socialist_civil_war = yes
+		news_event = {
+			id = worldnews.33
+		}
+		SBL = { change_tag_from = BUL }
+	}
+}
+
+country_event = { #crisis over
+	id = krg_bul.15
+	title = krg_bul.15.t
+	desc = krg_bul.15.d
+	#picture = u
+
+	is_triggered_only = yes
+	
+	trigger = {
+	    tag = BUL
+	}
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_bul.15 FROM = [From.GetName] - pop bloc end the political crisis" }
+
+	option = {
+		name = krg_bul.15.a
+		remove_ideas = BUL_idea_political_crisis
+		set_popularities = {
+			authoritarian_socialist = 3
+			radical_socialist = 1
+			social_democrat = 20
+			revolutionary_republican = 0
+			social_liberal = 23
+			market_liberal = 31
+			social_conservative = 10
+			authoritarian_democrat = 5
+			paternal_autocrat = 3
+			national_populist = 4
+		}
+		add_stability = 0.1
+	}
+}
+
+country_event = { #socialist gov
+	id = krg_bul.16
+	title = krg_bul.16.t
+	desc = krg_bul.16.d
+	#picture = u
+
+	is_triggered_only = yes
+	
+	trigger = {
+	    tag = BUL
+	}
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_bul.16 FROM = [From.GetName] - socialists come to power" }
+
+	option = {
+		name = krg_bul.16.a
+        hidden_effect = {
+			country_event = {
+				id = krg_bul.23
+				days = 5
+			}
+        }
+		log = "[GetDateText]: [Root.GetName]: event krg_bul.16a FROM = [From.GetName] - try to assassinate Lukov" 
+    }
+    
+    option = {
+		name = krg_bul.16.b
+        hidden_effect = {
+			country_event = {
+				id = krg_bul.17
+				days = 21
+			}
+        }
+		log = "[GetDateText]: [Root.GetName]: event krg_bul.16b FROM = [From.GetName] - cache guns and so on" 
+	}
+}
+
+country_event = { #march to sofia
+	id = krg_bul.17
+	title = krg_bul.17.t
+	desc = krg_bul.17.d
+	#picture = u
+
+	is_triggered_only = yes
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_bul.17 FROM = [From.GetName] - legionaries march on Sofia" }
+	
+	trigger = {
+	    tag = BUL
+	}
+
+	option = { #legionary failure
+		name = krg_bul.17.a
+        hidden_effect = {
+			country_event = {
+				id = krg_bul.21
+				days = 28
+			}
+			log = "[GetDateText]: [Root.GetName]: event krg_bul.17a FROM = [From.GetName] - the march fails" 
+        }
+    }
+    
+    option = { #legionary victory
+		name = krg_bul.17.b
+		news_event = {
+			id = worldnews.30
+		}
+        hidden_effect = {
+			country_event = {
+				id = krg_bul.29
+				days = 21
+			}
+        }
+		set_politics = {
+	        ruling_party = national_populist
+			election_frequency = 48
+			elections_allowed = no
+        }
+		coal_rev_all = yes
+		log = "[GetDateText]: [Root.GetName]: event krg_bul.17a FROM = [From.GetName] - the march topples the socialists and legionaries come to power" 
+	}
+}
+
+country_event = { #Zveno Attempts To Seize Control
+	id = krg_bul.18
+	title = krg_bul.18.t
+	desc = krg_bul.18.d
+	#picture = u
+
+	is_triggered_only = yes
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event krg_bul.18 FROM = [From.GetName] - Zveno tries to counter coup the Socialists" 	
+	} 
+	
+	trigger = {
+	    tag = BUL
+	}
+
+	option = {
+		name = krg_bul.18.a
+		news_event = {
+			id = worldnews.32
+		}
+		set_politics = {
+	        ruling_party = paternal_autocrat
+			election_frequency = 48
+			elections_allowed = no
+        }
+		set_popularities = {
+			authoritarian_socialist = 5
+			radical_socialist = 1
+			social_democrat = 18
+			revolutionary_republican = 0
+			social_liberal = 20
+			market_liberal = 10
+			social_conservative = 7
+			authoritarian_democrat = 4
+			paternal_autocrat = 30
+			national_populist = 5
+		}
+		coal_rev_all = yes
+        hidden_effect = {
+			country_event = {
+				id = krg_bul.19
+				days = 7
+			}
+        }
+		log = "[GetDateText]: [Root.GetName]: event krg_bul.18a FROM = [From.GetName] - partial success - socialists escape" 	
+    }
+
+    option = {
+		name = krg_bul.18.b
+		news_event = {
+			id = worldnews.32
+		}
+		set_politics = {
+	        ruling_party = paternal_autocrat
+			election_frequency = 48
+			elections_allowed = no
+        }
+		set_popularities = {
+			authoritarian_socialist = 5
+			radical_socialist = 1
+			social_democrat = 18
+			revolutionary_republican = 0
+			social_liberal = 20
+			market_liberal = 10
+			social_conservative = 7
+			authoritarian_democrat = 4
+			paternal_autocrat = 30
+			national_populist = 5
+		}
+		coal_rev_all = yes
+        hidden_effect = {
+			country_event = {
+				id = krg_bul.20
+				days = 21
+			}
+        }
+		log = "[GetDateText]: [Root.GetName]: event krg_bul.18b FROM = [From.GetName] - complete success - socialists wiped out" 	
+    }
+}
+
+country_event = { #civil war
+	id = krg_bul.19
+	title = krg_bul.19.t
+	desc = krg_bul.19.d
+	#picture = u
+
+	is_triggered_only = yes
+	
+	trigger = {
+	    tag = BUL
+	}
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event krg_bul.19 FROM = [From.GetName] - Zveno vs Socialists civil war" 	
+	} 
+
+	option = {
+		name = krg_bul.19.a
+		news_event = {
+			id = worldnews.33
+		}
+		BUL_monarchist_socialist_civil_war = yes
+    }
+
+	option = {
+		name = krg_bul.19.b
+		news_event = {
+			id = worldnews.33
+		}
+		BUL_monarchist_socialist_civil_war = yes
+		SBL = {
+			change_tag_from = BUL
+		}
+    }
+}
+
+country_event = { #consolidation
+	id = krg_bul.20
+	title = krg_bul.20.t
+	desc = krg_bul.20.d
+	#picture = u
+
+	is_triggered_only = yes
+	
+	trigger = {
+	    tag = BUL
+	}
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event krg_bul.20 FROM = [From.GetName] - Zveno consolidate their regime ending the political crisis" 	
+	} 
+
+	option = {
+		name = krg_bul.20.a
+		remove_ideas = BUL_idea_political_crisis
+		set_popularities = {
+			authoritarian_socialist = 5
+			radical_socialist = 1
+			social_democrat = 18
+			revolutionary_republican = 0
+			social_liberal = 20
+			market_liberal = 10
+			social_conservative = 7
+			authoritarian_democrat = 4
+			paternal_autocrat = 30
+			national_populist = 5
+		}
+		add_stability = 0.1
+    }
+}
+
+country_event = { #Revolution Secured
+	id = krg_bul.21
+	title = krg_bul.21.t
+	desc = krg_bul.21.d
+	#picture = u
+
+	is_triggered_only = yes
+	
+	trigger = {
+	    tag = BUL
+	}
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event krg_bul.21 FROM = [From.GetName] - Socialists consolidate the revolution ending the political crisis" 	
+	} 
+	option = {
+		name = krg_bul.21.a
+		remove_ideas = BUL_idea_political_crisis
+		set_popularities = {
+			authoritarian_socialist = 48
+			radical_socialist = 7
+			social_democrat = 10
+			revolutionary_republican = 0
+			social_liberal = 11
+			market_liberal = 8
+			social_conservative = 6
+			authoritarian_democrat = 3
+			paternal_autocrat = 2
+			national_populist = 5
+		}
+        hidden_effect = {
+			country_event = {
+				id = krg_bul.22
+				days = 14
+			}
+        }
+		add_stability = 0.1
+    }
+}
+
+country_event = { #monarchy abolished
+	id = krg_bul.22
+	title = krg_bul.22.t
+	desc = krg_bul.22.d
+	#picture = u
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event krg_bul.22 FROM = [From.GetName] - Socialists abolish the monarchy" 	
+	} 
+	is_triggered_only = yes
+	
+	trigger = {
+	    tag = BUL
+	}
+
+	option = {
+		name = krg_bul.22.a
+		add_political_power = 100
+    }
+
+}
+
+country_event = { #carbombing fails
+	id = krg_bul.23
+	title = krg_bul.23.t
+	desc = krg_bul.23.d
+	#picture = u
+
+	is_triggered_only = yes
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event krg_bul.23 FROM = [From.GetName] - Socialist attempt to kill Lukov fails" 	
+	} 
+	
+	trigger = {
+	    tag = BUL
+	}
+
+	option = {
+		name = krg_bul.23.a
+        hidden_effect = {
+			country_event = {
+				id = krg_bul.24
+				days = 5
+			}
+        }
+    }
+}
+
+country_event = { #legionaries organize
+	id = krg_bul.24
+	title = krg_bul.24.t
+	desc = krg_bul.24.d
+	#picture = u
+
+	is_triggered_only = yes
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event krg_bul.23 FROM = [From.GetName] - Legionaries prepare for war" 	
+	} 
+	
+	trigger = {
+	    tag = BUL
+	}
+
+	option = {
+		name = krg_bul.24.a
+        hidden_effect = {
+			country_event = {
+				id = krg_bul.25
+				days = 7
+			}
+        }
+    }
+}
+
+country_event = { #zveno coup
+	id = krg_bul.25
+	title = krg_bul.25.t
+	desc = krg_bul.25.d
+	#picture = u
+
+	is_triggered_only = yes
+	
+	trigger = {
+	    tag = BUL
+	}
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event krg_bul.25 FROM = [From.GetName] - Zveno coup the Socialists, but they escape" 	
+	} 
+
+	option = {
+		name = krg_bul.25.a
+		news_event = {
+			id = worldnews.32
+		}
+        hidden_effect = {
+			country_event = {
+				id = krg_bul.26
+				days = 7
+			}
+        }
+		set_politics = {
+	        ruling_party = paternal_autocrat
+			election_frequency = 48
+			elections_allowed = no
+        }
+		set_popularities = {
+			authoritarian_socialist = 5
+			radical_socialist = 1
+			social_democrat = 18
+			revolutionary_republican = 0
+			social_liberal = 20
+			market_liberal = 10
+			social_conservative = 7
+			authoritarian_democrat = 4
+			paternal_autocrat = 30
+			national_populist = 5
+		}
+		coal_rev_all = yes
+    }
+}
+
+country_event = { #civil war
+	id = krg_bul.26
+	title = krg_bul.26.t
+	desc = krg_bul.26.d
+	#picture = u
+
+	is_triggered_only = yes
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event krg_bul.26 FROM = [From.GetName] - Bulgaria gets a three sided civil war! (what is this, TNO IRAN?)" 	
+	} 
+	
+	trigger = {
+	    tag = BUL
+	}
+
+	option = {
+		name = krg_bul.26.a
+		BUL_three_sided_war = yes
+		news_event = {
+			id = worldnews.33
+		}
+    }
+	option = {
+		name = krg_bul.26.b
+		BUL_three_sided_war = yes
+		news_event = {
+			id = worldnews.33
+		}
+		SBL = { change_tag_from = BUL }
+	}
+	option = {
+		name = krg_bul.26.c
+		BUL_three_sided_war = yes
+		news_event = {
+			id = worldnews.33
+		}
+		LBL = { change_tag_from = BUL }
+    }
+}
+
+country_event = { #legionary gov 
+	id = krg_bul.27
+	title = krg_bul.27.t
+	desc = krg_bul.27.d
+	#picture = u
+
+	is_triggered_only = yes
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event krg_bul.27 FROM = [From.GetName] - Legionaries come to power" 	
+	} 
+	
+	trigger = {
+	    tag = BUL
+	}
+
+	option = {
+		name = krg_bul.27.a
+		clear_all_alignments = yes
+        hidden_effect = {
+			country_event = {
+				id = krg_bul.28
+				days = 21
+			}
+        }
+			log = "[GetDateText]: [Root.GetName]: event krg_bul.27a FROM = [From.GetName] then cache guns" 	 
+    }
+    
+    option = {
+		name = krg_bul.27.b
+		clear_all_alignments = yes
+        hidden_effect = {
+			country_event = {
+				id = krg_bul.33
+				days = 5
+			}
+        }
+		log = "[GetDateText]: [Root.GetName]: event krg_bul.27b FROM = [From.GetName] then try and kill Chervenkov" 	
+	}
+}
+
+country_event = { #march on sofia
+	id = krg_bul.28
+	title = krg_bul.28.t
+	desc = krg_bul.28.d
+	#picture = u
+
+	is_triggered_only = yes
+	
+	trigger = {
+	    tag = BUL
+	}
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event krg_bul.28 FROM = [From.GetName] - socialists march on Sofia" 	
+	} 
+	option = {
+		name = krg_bul.28.a
+		news_event = {
+			id = worldnews.31
+		}
+        hidden_effect = {
+			country_event = {
+				id = krg_bul.18
+				days = 21
+			}
+        }
+		set_politics = {
+	        ruling_party = authoritarian_socialist
+			election_frequency = 48
+			elections_allowed = no
+        }
+		coal_rev_all = yes
+		coal_add_rad_soc = yes
+		log = "[GetDateText]: [Root.GetName]: event krg_bul.28 FROM = [From.GetName] - the march succeeds and Socialists topple the govt" 	
+    }
+	
+	option = {
+		name = krg_bul.28.b
+        hidden_effect = {
+			country_event = {
+				id = krg_bul.31
+				days = 2
+			}
+        }
+		log = "[GetDateText]: [Root.GetName]: event krg_bul.28 FROM = [From.GetName] - the march fails"
+	}
+}
+
+country_event = { #zveno
+	id = krg_bul.29
+	title = krg_bul.29.t
+	desc = krg_bul.29.d
+	#picture = u
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event krg_bul.29 FROM = [From.GetName] - the zveno try to counter coup the legionaries"
+	} 
+
+	is_triggered_only = yes
+	
+	trigger = {
+	    tag = BUL
+	}
+
+	option = {
+		name = krg_bul.29.a
+		news_event = {
+			id = worldnews.32
+		}
+        hidden_effect = {
+			country_event = {
+				id = krg_bul.30
+				days = 7
+			}
+        }
+		log = "[GetDateText]: [Root.GetName]: event krg_bul.29a FROM = [From.GetName] - the zveno partially succeed"
+		set_politics = {
+	        ruling_party = paternal_autocrat
+			election_frequency = 48
+			elections_allowed = no
+        }
+		set_popularities = {
+			authoritarian_socialist = 5
+			radical_socialist = 1
+			social_democrat = 18
+			revolutionary_republican = 0
+			social_liberal = 20
+			market_liberal = 10
+			social_conservative = 7
+			authoritarian_democrat = 4
+			paternal_autocrat = 30
+			national_populist = 5
+		}
+		coal_rev_all = yes
+    }
+	
+	option = {
+		name = krg_bul.29.b
+		news_event = {
+			id = worldnews.32
+		}
+        hidden_effect = {
+			country_event = {
+				id = krg_bul.20
+				days = 21
+			}
+        }
+		set_politics = {
+	        ruling_party = paternal_autocrat
+			election_frequency = 48
+			elections_allowed = no
+        }
+		set_popularities = {
+			authoritarian_socialist = 5
+			radical_socialist = 1
+			social_democrat = 18
+			revolutionary_republican = 0
+			social_liberal = 20
+			market_liberal = 10
+			social_conservative = 7
+			authoritarian_democrat = 4
+			paternal_autocrat = 30
+			national_populist = 5
+		}
+		coal_rev_all = yes
+		log = "[GetDateText]: [Root.GetName]: event krg_bul.29b FROM = [From.GetName] - the zveno completely succeed"
+    }
+}
+
+country_event = { #civil war
+	id = krg_bul.30
+	title = krg_bul.30.t
+	desc = krg_bul.30.d
+	#picture = u
+
+	is_triggered_only = yes
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event krg_bul.30 FROM = [From.GetName] - the monarchists fight the legionaries in a civil war"
+	}
+	trigger = {
+	    tag = BUL
+	}
+
+	option = {
+		name = krg_bul.30.a
+		news_event = {
+			id = worldnews.33
+		}
+		BUL_monarchist_legionary_civil_war = yes
+    }
+	
+	option = {
+		name = krg_bul.30.b
+		news_event = {
+			id = worldnews.33
+		}
+		BUL_monarchist_legionary_civil_war = yes
+		LBL = { change_tag_from = BUL }
+    }
+}
+
+country_event = { #Legionaries Secure Control
+	id = krg_bul.31
+	title = krg_bul.31.t
+	desc = krg_bul.31.d
+	#picture = u
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event krg_bul.31 FROM = [From.GetName] - the legionaries end the political crisis"
+	}
+
+	is_triggered_only = yes
+	
+	trigger = {
+	    tag = BUL
+	}
+
+	option = {
+		name = krg_bul.31.a
+		remove_ideas = BUL_idea_political_crisis
+		set_popularities = {
+			authoritarian_socialist = 4
+			radical_socialist = 1
+			social_democrat = 10
+			revolutionary_republican = 0
+			social_liberal = 11
+			market_liberal = 8
+			social_conservative = 6
+			authoritarian_democrat = 3
+			paternal_autocrat = 2
+			national_populist = 55
+		}
+        hidden_effect = {
+			country_event = {
+				id = krg_bul.32
+				days = 21
+			}
+        }
+
+    }
+}
+
+country_event = { #monarchy abolished
+	id = krg_bul.32
+	title = krg_bul.32.t
+	desc = krg_bul.32.d
+	#picture = u
+
+	is_triggered_only = yes
+	
+	trigger = {
+	    tag = BUL
+	}
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event krg_bul.32 FROM = [From.GetName] - the legionaries abolish the monarchy"
+	}
+
+	option = {
+		name = krg_bul.32.a
+		add_political_power = 100
+    }
+}
+
+country_event = { #bomb fails
+	id = krg_bul.33
+	title = krg_bul.33.t
+	desc = krg_bul.33.d
+	#picture = u
+
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event krg_bul.33 FROM = [From.GetName] - Chervenkov survives the assassination attempt"
+	}
+	trigger = {
+	    tag = BUL
+	}
+
+	option = {
+		name = krg_bul.33.a
+        hidden_effect = {
+			country_event = {
+				id = krg_bul.34
+				days = 5
+			}
+        }
+    }
+}
+
+country_event = { #socialists organize
+	id = krg_bul.34
+	title = krg_bul.34.t
+	desc = krg_bul.34.d
+	#picture = u
+
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event krg_bul.34 FROM = [From.GetName] - socialists prepare for civil war"
+	}
+	trigger = {
+	    tag = BUL
+	}
+
+	option = {
+		name = krg_bul.34.a
+        hidden_effect = {
+			country_event = {
+				id = krg_bul.35
+				days = 7
+			}
+        }
+    }
+}
+
+country_event = { #Covert Negotiations with the OSPB
+	id = krg_bul.35
+	title = krg_bul.35.t
+	desc = krg_bul.35.d
+	#picture = u
+
+	is_triggered_only = yes
+	
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event krg_bul.35 FROM = [From.GetName] - negotiations with the moderate socialists occur"
+	}
+	trigger = {
+	    tag = BUL
+	}
+
+	option = {
+		name = krg_bul.35.a
+		add_political_power = -50
+        hidden_effect = {
+			country_event = {
+				id = krg_bul.36
+				days = 20
+			}
+        }
+    }
+}
+
+country_event = { #The Socialists Splinter
+	id = krg_bul.36
+	title = krg_bul.36.t
+	desc = krg_bul.36.d
+	#picture = u
+
+	is_triggered_only = yes
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event krg_bul.36 FROM = [From.GetName] - the socialists have a public split"
+	}
+	
+	trigger = {
+	    tag = BUL
+	}
+
+	option = {
+		name = krg_bul.36.a
+		add_popularity = {
+			ideology = authoritarian_socialist
+			popularity = -0.15
+		}
+		add_popularity = {
+			ideology = radical_socialist
+			popularity = 0.05
+		}
+        hidden_effect = {
+			country_event = {
+				id = krg_bul.38
+				days = 10
+			}
+        }
+    }
+}
+
+country_event = { #Striking at the Legionaries
+	id = krg_bul.38
+	title = krg_bul.38.t
+	desc = krg_bul.38.d
+	#picture = u
+
+	is_triggered_only = yes
+	
+	trigger = {
+	    tag = BUL
+	}
+
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event krg_bul.38 FROM = [From.GetName] - the socialists try to kill Lukov"
+	}
+	option = { #Lukov Dies
+		name = krg_bul.38.a
+		add_popularity = {
+			ideology = national_populist
+			popularity = -0.15
+		}
+		retire_character = BUL_hristo_lukov 
+		BUL_hristo_lukov = {
+			kill_character = yes
+		}
+		hidden_effect = {
+			LBL_hristo_lukov = {
+				kill_character = yes
+			}
+			SBL_hristo_lukov = {
+				kill_character = yes
+			}
+		}
+		BUL_ivan_dochev = {
+			promote_character = yes
+		}
+		
+			log = "[GetDateText]: [Root.GetName]: event krg_bul.38a FROM = [From.GetName] - and succeed in killing him"
+		
+        hidden_effect = {
+			country_event = {
+				id = krg_bul.39
+				days = 7
+			}
+        }
+		
+    }
+	option = { #Lukov Survives
+		name = krg_bul.38.a
+        hidden_effect = {
+			country_event = {
+				id = krg_bul.40
+				days = 7
+			}
+        }
+		log = "[GetDateText]: [Root.GetName]: event krg_bul.38b FROM = [From.GetName] - and fail in killing him"
+    }
+}
+
+country_event = { #The Crisis is Over
+	id = krg_bul.39
+	title = krg_bul.39.t
+	desc = krg_bul.39.d
+	#picture = u
+
+	is_triggered_only = yes
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event krg_bul.39 FROM = [From.GetName] - the death of Lukov calms things"
+	}
+	trigger = {
+	    tag = BUL
+	}
+
+	option = {
+		name = krg_bul.39.a
+		remove_ideas = BUL_idea_political_crisis
+    }
+}
+
+country_event = { #Civil War Begins
+	id = krg_bul.40
+	title = krg_bul.40.t
+	desc = krg_bul.40.d
+	#picture = u
+
+	is_triggered_only = yes
+	
+	trigger = {
+	    tag = BUL
+	}
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event krg_bul.40 FROM = [From.GetName] - the socialists rise up to kill Lukov properly"
+	}
+
+	option = {
+		name = krg_bul.40.a
+		add_popularity = {
+			ideology = authoritarian_socialist
+			popularity = -0.15
+		}
+		BUL_monarchist_socialist_civil_war = yes
+    }
+	option = {
+		name = krg_bul.40.b
+		add_popularity = {
+			ideology = authoritarian_socialist
+			popularity = -0.15
+		}
+		BUL_monarchist_socialist_civil_war = yes
+		SBL = { change_tag_from = BUL }
+    }
+}
+
+country_event = { #First Government Dies
+	id = krg_bul.50
+	title = krg_bul.50.t
+	desc = krg_bul.50.d
+	##picture = u
+
+	is_triggered_only = yes
+	
+	trigger = {
+	    tag = BUL
+	}
+
+	option = { #Social Democrats renegotiate a government
+		name = krg_bul.50.a
+		ai_chance = { 
+			base = 30
+		}
+		add_popularity = {
+			ideology = market_liberal
+			popularity = 0.03
+		}
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = 0.03
+		}
+        hidden_effect = {
+			country_event = {
+				id = krg_bul.51
+				days = 110
+			}
+        }
+    }
+	
+	option = { #The agrarians negotiate a government
+		name = krg_bul.50.b
+		ai_chance = { 
+			base = 70
+		}
+		set_politics = {
+	        ruling_party = social_liberal
+        }
+		coal_rev_all = yes
+		coal_add_soc_con = yes
+		add_popularity = {
+			ideology = social_liberal
+			popularity = 0.03
+		}
+		add_popularity = {
+			ideology = social_conservative
+			popularity = 0.03
+		}
+        hidden_effect = {
+			country_event = {
+				id = krg_bul.51
+				days = 110
+			}
+        }
+    }
+}
+
+country_event = { #Stambolyski Shot
+	id = krg_bul.51
+	title = krg_bul.51.t
+	desc = krg_bul.51.d
+	#picture = u
+
+	is_triggered_only = yes
+	
+	trigger = {
+	    tag = BUL
+	}
+
+	option = { #A Socdem government with support from Dimitrovite Socialists
+		name = krg_bul.51.a
+		ai_chance = { 
+			base = 50
+		}
+		set_politics = {
+	        ruling_party = social_democrat
+        }
+		coal_rev_all = yes
+		coal_add_rad_soc = yes
+		coal_add_mar_lib = yes
+		add_popularity = {
+			ideology = radical_socialist
+			popularity = 0.02
+		}
+		add_stability = -0.1
+		remove_ideas = BUL_idea_growing_nationalist_discontent
+		add_ideas = BUL_idea_political_crisis
+		news_event = {
+			id = worldnews.25
+		}
+        hidden_effect = {
+			country_event = {
+				id = krg_bul.52
+				days = 100
+			}
+        }
+    }
+	option = { #Radical Democrats form a liberal-conservative government
+		name = krg_bul.51.b
+		ai_chance = { 
+			base = 25
+		}
+		set_politics = {
+	        ruling_party = market_liberal
+        }
+		coal_rev_all = yes
+		coal_add_soc_con = yes
+		coal_add_auth_dem = yes
+		add_popularity = {
+			ideology = market_liberal
+			popularity = 0.02
+		}
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = 0.02
+		}
+		add_stability = -0.1
+		remove_ideas = BUL_idea_growing_nationalist_discontent
+		add_ideas = BUL_idea_political_crisis
+		news_event = {
+			id = worldnews.25
+		}
+    }
+	option = { #The Democrats lead a broad government
+		name = krg_bul.51.c
+		ai_chance = { 
+			base = 25
+		}
+		set_politics = {
+	        ruling_party = social_conservative
+        }
+		coal_rev_all = yes
+		coal_add_soc_lib = yes
+		coal_add_mar_lib = yes
+		coal_add_auth_dem = yes
+		add_popularity = {
+			ideology = social_conservative
+			popularity = 0.03
+		}
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = 0.02
+		}
+		add_stability = -0.1
+		remove_ideas = BUL_idea_growing_nationalist_discontent
+		add_ideas = BUL_idea_political_crisis
+		news_event = {
+			id = worldnews.25
+		}
+    }
+}
+
+country_event = { #Dimitrov dies, Social Democrats lose their majority
+	id = krg_bul.52
+	title = krg_bul.52.t
+	desc = krg_bul.52.d
+	##picture = u
+
+	is_triggered_only = yes
+	
+	trigger = {
+	    tag = BUL
+	}
+
+	option = { #Social Democrats survive again, the progressive front returns
+		name = krg_bul.52.a
+		ai_chance = { 
+			base = 25
+		}
+		add_political_power = -100
+		coal_rev_all = yes
+		coal_add_mar_lib = yes
+		coal_add_auth_dem = yes
+		add_popularity = {
+			ideology = radical_socialist
+			popularity = -0.02
+		}
+		hidden_effect = {
+			country_event = {
+				id = krg_bul.53
+				days = 190
+			}
+        }
+    }
+	
+	option = { #The Liberals form a government with elements of the agrarians supporting them
+		name = krg_bul.52.a
+		ai_chance = { 
+			base = 75
+		}
+		add_political_power = -100
+		set_politics = {
+	        ruling_party = market_liberal
+        }
+		coal_rev_all = yes
+		coal_add_soc_lib = yes
+		coal_add_auth_dem = yes
+		add_popularity = {
+			ideology = radical_socialist
+			popularity = -0.02
+		}
+		add_popularity = {
+			ideology = social_democrat
+			popularity = -0.02
+		}
+    }
+}
+
+country_event = { #Attempt on Dzhidrov's life, he retires and another government falls
+	id = krg_bul.53
+	title = krg_bul.53.t
+	desc = krg_bul.53.d
+	##picture = u
+
+	is_triggered_only = yes
+	
+	trigger = {
+	    tag = BUL
+	}
+
+	option = { #Reorganised Agarians form a government
+		name = krg_bul.53.a
+		ai_chance = { 
+			base = 35
+		}
+		set_politics = {
+	        ruling_party = social_liberal
+        }
+		coal_rev_all = yes
+		coal_add_soc_con = yes
+		coal_add_auth_dem = yes
+		add_stability = -0.05
+		add_popularity = {
+			ideology = social_democrat
+			popularity = -0.02
+		}
+    }
+	
+	option = { #Liberals form a broad front government
+		name = krg_bul.53.b
+		ai_chance = { 
+			base = 55
+		}
+		add_stability = -0.05
+		set_politics = {
+	        ruling_party = market_liberal
+        }
+		coal_rev_all = yes
+		coal_add_soc_lib = yes
+		coal_add_soc_con = yes
+		coal_add_auth_dem = yes
+		add_popularity = {
+			ideology = social_democrat
+			popularity = -0.02
+		}
+        hidden_effect = {
+			country_event = {
+				id = krg_bul.52
+				days = 110
+			}
+        }
+    }
+	
+	option = { #THE SOCIAL DEMOCRATS HOLD ON AGAIN
+		name = krg_bul.53.c
+		ai_chance = { 
+			base  = 10
+		}
+		add_stability = -0.05
+    }
+}

@@ -1,0 +1,1785 @@
+add_namespace = ent
+add_namespace = ent_dip
+
+country_event = { # The Formation of the AAPM
+	id = ent.1
+	title = ent.1.t
+	desc = ent.1.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: ent.1" }
+	immediate = {
+		hidden_effect = {
+			ENT = {
+				country_event = {
+					id = ent.2
+					days = 5
+				}
+			}
+			NFA = {
+				country_event = {
+					id = ent.3
+					days = 5
+				}
+			}
+			ITA = {
+				country_event = {
+					id = ent.4
+					days = 5
+				}
+			}
+			SAF = {
+				country_event = {
+					id = ent.5
+					days = 5
+				}
+			}
+			POR = {
+				country_event = {
+					id = ent.6
+					days = 5
+				}
+			}
+			ENG = {
+				country_event = {
+					id = ent.7
+					days = 5
+				}
+			}
+			NEE = {
+				country_event = {
+					id = ent.8
+					days = 5
+				}
+			}
+			every_country = {
+				limit = {
+					is_in_or_aligned_with_accord = yes
+				}
+				country_event = {
+					id = ent.9
+					days = 21
+				}
+			}
+		}	
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = ent.1.a
+		
+	}
+}
+
+country_event = { #CAN: The Colonial Policy of the Accord
+	id = ent.2
+	title = ent.2.t
+	desc = ent.2.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: ent.2" }
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #This would destroy France, we must remain neutral.
+		name = ent.2.a
+		trigger = {
+			NOT = {
+				has_government = social_democrat
+			}
+		}
+		ai_chance = {
+			base = 10
+			modifier = {
+				has_government = social_liberal
+				factor = 0.25
+			}
+			modifier = {
+				has_government = social_democrat
+				factor = 0
+			}
+		}
+		ENT = {
+			set_country_flag = CAN_decolonization_oppose
+		}
+	}
+	option = { #Colonialism in Africa has been a failure, it is time to free the continent
+		name = ent.2.b
+		trigger = {
+			NOT = {
+				has_government = social_conservative
+			}
+		}
+		ai_chance = {
+			base = 10
+			modifier = {
+				has_government = market_liberal
+				factor = 0.5
+			}
+			modifier = {
+				has_government = social_conservative
+				factor = 0
+			}
+		}
+		ENT = {
+			set_country_flag = CAN_decolonization_support
+		}
+	}
+}
+
+country_event = { #NFA: The Colonial Policy of the Accord
+	id = ent.3
+	title = ent.3.t
+	desc = ent.3.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: ent.3" }
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #Just as we are granting autonomy, it is time for Germany to leave
+		name = ent.3.a
+		trigger = {
+			OR = {
+				has_government = social_democrat
+				has_government = social_liberal
+			}
+			is_ai = no
+		}
+		ai_chance = {
+			base = 1	
+		}
+		ENT = {
+			set_country_flag = NFA_decolonization_support
+		}
+	}
+	option = { #Colonialism in Africa has been a failure, it is time to free the continent
+		name = ent.3.b
+		ai_chance = {
+			base = 3
+		}
+		ENT = {
+			set_country_flag = NFA_decolonization_oppose
+		}
+	}
+}
+
+country_event = { #ITA: The Colonial Policy of the Accord
+	id = ent.4
+	title = ent.4.t
+	desc = ent.4.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: ent.4" }
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #Colonialism in Africa has been a failure, it is time to free the continent
+		name = ent.4.a
+		ai_chance = {
+			base = 10
+			modifier = {
+				has_government = social_conservative
+				factor = 0.5
+			}
+		}
+		ENT = {
+			set_country_flag = ITA_decolonization_support
+		}
+	}
+	option = { #This would destroy France, we must remain neutral.
+		name = ent.4.b
+		ai_chance = {
+			base = 5
+		}
+		ENT = {
+			set_country_flag = ITA_decolonization_oppose
+		}
+	}
+}
+
+country_event = { #SAF: The Colonial Policy of the Accord
+	id = ent.5
+	title = ent.5.t
+	desc = ent.5.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: ent.5" }
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #Supporting the AAPM would enable us to pick up the pieces
+		name = ent.5.a
+		ai_chance = {
+			base = 10
+		}
+		ENT = {
+			set_country_flag = SAF_decolonization_support
+		}
+	}
+	option = { #Further chaos on the continent is not worth the risk
+		name = ent.5.b
+		ai_chance = {
+			base = 1
+		}
+		ENT = {
+			set_country_flag = SAF_decolonization_oppose
+		}
+	}
+}
+
+country_event = { #POR: The Colonial Policy of the Accord
+	id = ent.6
+	title = ent.6.t
+	desc = ent.6.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: ent.6" }
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #This is a new day in the republic, Africa must be free!
+		name = ent.6.a
+		ai_chance = {
+			base = 1
+			modifier = {
+				OR = {
+					has_government = social_democrat
+					has_government = revolutionary_republican
+				}
+				factor = 20
+			}
+		}
+		
+		ENT = {
+			set_country_flag = POR_decolonization_support
+		}
+	}
+	option = { #It is not worth the risk to our own colonies
+		name = ent.6.b
+		ai_chance = {
+			base = 10
+		}
+		ENT = {
+			set_country_flag = POR_decolonization_oppose
+		}
+	}
+}
+
+country_event = { #ENG: The Colonial Policy of the Accord
+	id = ent.7
+	title = ent.7.t
+	desc = ent.7.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: ent.7" }
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #Colonialism in Africa has been a failure, it is time to free the continent
+		name = ent.7.a
+		ai_chance = {
+			base = 10
+			modifier = {
+				OR = {
+					has_government = social_democrat
+					has_government = social_liberal
+				}
+				factor = 2
+			}
+		}
+		
+		ENT = {
+			set_country_flag = ENG_decolonization_support
+		}
+	}
+	option = { #This would destroy France, we must remain neutral.
+		name = ent.7.b
+		ai_chance = {
+			base = 10
+			modifier = {
+				OR = {
+					has_government = social_conservative
+					has_government = market_liberal
+				}
+				factor = 2
+			}
+		}
+		ENT = {
+			set_country_flag = ENG_decolonization_oppose
+		}
+	}
+}
+
+country_event = { #NEE: The Colonial Policy of the Accord
+	id = ent.8
+	title = ent.8.t
+	desc = ent.8.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: ent.8" }
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #Colonialism in Africa has been a failure, it is time to free the continent
+		name = ent.8.a
+		
+		ENT = {
+			set_country_flag = NEE_decolonization_support
+		}
+	}
+}
+
+country_event = { #The Debate on Accord Colonial Policy Begins
+	id = ent.9
+	title = ent.9.t
+	desc = ent.9.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: ent.9" }
+	immediate = {
+		hidden_effect = {
+			every_country = {
+				limit = {
+					is_in_or_aligned_with_accord = yes
+				}
+				country_event = {
+					id = ent.10
+					days = 5
+				}
+			}
+		}
+	}
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #Lets hear what everyone has to say
+		name = ent.9.a
+		
+	}
+}
+
+country_event = { #New England Advocates Strict Anti-Colonial Policy
+	id = ent.10
+	title = ent.10.t
+	desc = ent.10.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: ent.10" }
+	immediate = {
+		hidden_effect = {
+			every_country = {
+				limit = {
+					is_in_or_aligned_with_accord = yes
+				}
+				country_event = {
+					id = ent.11
+					days = 5
+				}
+			}
+		}
+	}
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { 
+		name = ent.10.a
+		
+	}
+}
+
+country_event = { #Canada presents their position
+	id = ent.11
+	title = {
+		text = ent.11.t1
+		trigger = {
+			ENT = {
+				has_country_flag = CAN_decolonization_support
+			}
+		}
+	}
+	title = {
+		text = ent.11.t2
+		trigger = {
+			ENT = {
+				has_country_flag = CAN_decolonization_oppose
+			}
+		}
+	}
+	desc = {
+		text = ent.11.d1
+		trigger = {
+			ENT = {
+				has_country_flag = CAN_decolonization_support
+			}
+		}
+	}
+	desc = {
+		text = ent.11.d2
+		trigger = {
+			ENT = {
+				has_country_flag = CAN_decolonization_oppose
+			}
+		}
+	}
+	immediate = { log = "[GetDateText]: [Root.GetName]: ent.11" }
+	immediate = {
+		hidden_effect = {
+			every_country = {
+				limit = {
+					is_in_or_aligned_with_accord = yes
+				}
+				country_event = {
+					id = ent.12
+					days = 5
+				}
+			}
+		}
+	}
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { 
+		name = ent.11.a
+		
+	}
+}
+
+country_event = { #France presents their position
+	id = ent.12
+	title = {
+		text = ent.12.t1
+		trigger = {
+			ENT = {
+				has_country_flag = NFA_decolonization_support
+			}
+		}
+	}
+	title = {
+		text = ent.12.t2
+		trigger = {
+			ENT = {
+				has_country_flag = NFA_decolonization_oppose
+			}
+		}
+	}
+	desc = {
+		text = ent.12.d1
+		trigger = {
+			ENT = {
+				has_country_flag = NFA_decolonization_support
+			}
+		}
+	}
+	desc = {
+		text = ent.12.d2
+		trigger = {
+			ENT = {
+				has_country_flag = NFA_decolonization_oppose
+			}
+		}
+	}
+	immediate = { log = "[GetDateText]: [Root.GetName]: ent.12" }
+	immediate = {
+		hidden_effect = {
+			every_country = {
+				limit = {
+					is_in_or_aligned_with_accord = yes
+				}
+				country_event = {
+					id = ent.13
+					days = 5
+				}
+			}
+		}
+	}
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { 
+		name = ent.12.a
+		
+	}
+}
+
+country_event = { #Portugal presents their position
+	id = ent.13
+	title = {
+		text = ent.13.t1
+		trigger = {
+			ENT = {
+				has_country_flag = POR_decolonization_support
+			}
+		}
+	}
+	title = {
+		text = ent.13.t2
+		trigger = {
+			ENT = {
+				has_country_flag = POR_decolonization_oppose
+			}
+		}
+	}
+	desc = {
+		text = ent.13.d1
+		trigger = {
+			ENT = {
+				has_country_flag = POR_decolonization_support
+			}
+		}
+	}
+	desc = {
+		text = ent.13.d2
+		trigger = {
+			ENT = {
+				has_country_flag = POR_decolonization_oppose
+			}
+		}
+	}
+	immediate = { log = "[GetDateText]: [Root.GetName]: ent.13" }
+	immediate = {
+		hidden_effect = {
+			every_country = {
+				limit = {
+					is_in_or_aligned_with_accord = yes
+				}
+				country_event = {
+					id = ent.14
+					days = 5
+				}
+			}
+		}
+	}
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { 
+		name = ent.13.a
+		
+	}
+}
+
+country_event = { #South Africa presents their position
+	id = ent.14
+	title = {
+		text = ent.14.t1
+		trigger = {
+			ENT = {
+				has_country_flag = SAF_decolonization_support
+			}
+		}
+	}
+	title = {
+		text = ent.14.t2
+		trigger = {
+			ENT = {
+				has_country_flag = SAF_decolonization_oppose
+			}
+		}
+	}
+	desc = {
+		text = ent.14.d1
+		trigger = {
+			ENT = {
+				has_country_flag = SAF_decolonization_support
+			}
+		}
+	}
+	desc = {
+		text = ent.14.d2
+		trigger = {
+			ENT = {
+				has_country_flag = SAF_decolonization_oppose
+			}
+		}
+	}
+	immediate = { log = "[GetDateText]: [Root.GetName]: ent.14" }
+	immediate = {
+		hidden_effect = {
+			every_country = {
+				limit = {
+					is_in_or_aligned_with_accord = yes
+				}
+				country_event = {
+					id = ent.15
+					days = 5
+				}
+			}
+		}
+	}
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { 
+		name = ent.14.a
+		
+	}
+}
+
+country_event = { #The United Kingdom presents their position
+	id = ent.15
+	title = {
+		text = ent.15.t1
+		trigger = {
+			ENT = {
+				has_country_flag = ENG_decolonization_support
+			}
+		}
+	}
+	title = {
+		text = ent.15.t2
+		trigger = {
+			ENT = {
+				has_country_flag = ENG_decolonization_oppose
+			}
+		}
+	}
+	desc = {
+		text = ent.15.d1
+		trigger = {
+			ENT = {
+				has_country_flag = ENG_decolonization_support
+			}
+		}
+	}
+	desc = {
+		text = ent.15.d2
+		trigger = {
+			ENT = {
+				has_country_flag = ENG_decolonization_oppose
+			}
+		}
+	}
+	immediate = { log = "[GetDateText]: [Root.GetName]: ent.15" }
+	immediate = {
+		hidden_effect = {
+			every_country = {
+				limit = {
+					is_in_or_aligned_with_accord = yes
+				}
+				country_event = {
+					id = ent.16
+					days = 5
+				}
+			}
+		}
+	}
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { 
+		name = ent.15.a
+		
+	}
+}
+
+country_event = { #Sardinia presents their position
+	id = ent.16
+	title = {
+		text = ent.16.t1
+		trigger = {
+			ENT = {
+				has_country_flag = ITA_decolonization_support
+			}
+		}
+	}
+	title = {
+		text = ent.16.t2
+		trigger = {
+			ENT = {
+				has_country_flag = ITA_decolonization_oppose
+			}
+		}
+	}
+	desc = {
+		text = ent.16.d1
+		trigger = {
+			ENT = {
+				has_country_flag = ITA_decolonization_support
+			}
+		}
+	}
+	desc = {
+		text = ent.16.d2
+		trigger = {
+			ENT = {
+				has_country_flag = ITA_decolonization_oppose
+			}
+		}
+	}
+	immediate = { log = "[GetDateText]: [Root.GetName]: ent.16" }
+	immediate = {
+		hidden_effect = {
+			every_country = {
+				limit = {
+					is_in_or_aligned_with_accord = yes
+				}
+				country_event = {
+					id = ent.17
+					days = 10
+				}
+			}
+		}
+	}
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { 
+		name = ent.16.a
+		
+	}
+}
+
+country_event = { #Voting Begins
+	id = ent.17
+	title = ent.17.t
+	desc = ent.17.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: ent.17" }
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { 
+		name = ent.17.a
+		set_global_flag = accord_colonial_policy
+	}
+}
+
+country_event = { #Collapse of the Accord
+	id = ent.1000
+	title = ent.1000.t
+	desc = ent.1000.d
+	picture = GFX_CAN_ce_accord_signed
+	immediate = { log = "[GetDateText]: [Root.GetName]: ent.1000" }
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { 
+		name = ent.1000.a
+		accord_collapse = yes
+	}
+}
+
+
+###Diplomacy Events
+
+country_event = { ##SHAPE presents plans for 1951 naval exercises
+	id = ent_dip.1
+	title = ent_dip.1.t
+	desc = ent_dip.1.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: ent_dip.1"}
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #North Atlantic
+		name = ent_dip.1.a
+		hidden_effect = {
+			every_country = {
+				limit = {
+					is_ally_with = ENT
+				}
+				country_event = {
+					id = ent_dip.2
+					days = 5
+				}
+			}
+		}
+	}
+	option = { #North Sea
+		name = ent_dip.1.b
+		hidden_effect = {
+			every_country = {
+				limit = {
+					is_ally_with = ENT
+				}
+				country_event = {
+					id = ent_dip.16
+					days = 5
+				}
+			}
+		}
+	}
+}
+
+country_event = { ##SHAPE selects North Atlantic for Naval Exercises
+	id = ent_dip.2
+	title = ent_dip.2.t
+	desc = ent_dip.2.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: ent_dip.2"}
+	immediate = {
+		hidden_effect = {
+			country_event = {
+				id = ent_dip.3
+				days = 28
+			}
+		}
+		hidden_effect = {
+			GER = {
+				country_event = {
+					id = ent_dip.8
+					days = 3
+				}
+			}	
+		}
+	}
+	is_triggered_only = yes
+
+	option = { #An excellent choice
+		name = ent_dip.2.a
+	}
+}
+
+
+country_event = { ##The Beginning of Exercise Mainbrace
+	id = ent_dip.3
+	title = ent_dip.3.t
+	desc = ent_dip.3.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: ent_dip.3"}
+	immediate = {
+		hidden_effect = {
+			country_event = {
+				id = ent_dip.4
+				days = 7
+			}
+		}
+	}
+	is_triggered_only = yes
+
+	option = { #Lets see what our navy can do!
+		name = ent_dip.3.a
+	}
+}
+
+country_event = { ##SHAPE begins carrier strike exercises
+	id = ent_dip.4
+	title = ent_dip.4.t
+	desc = ent_dip.4.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: ent_dip.4"}
+	immediate = {
+		hidden_effect = {
+			country_event = {
+				id = ent_dip.5
+				days = 7
+			}
+		}
+	}
+	is_triggered_only = yes
+
+	option = { #Bombs away!
+		name = ent_dip.4.a
+		navy_experience = 15
+		air_experience = 10
+	}
+}
+
+country_event = { ##SHAPE begins naval air attack exercises
+	id = ent_dip.5
+	title = ent_dip.5.t
+	desc = ent_dip.5.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: ent_dip.5"}
+	immediate = {
+		hidden_effect = {
+			country_event = {
+				id = ent_dip.6
+				days = 7
+			}
+		}
+	}
+	is_triggered_only = yes
+
+	option = { #Shoot em down!
+		name = ent_dip.5.a
+		navy_experience = 15
+		air_experience = 10
+	}
+}
+
+country_event = { ##SHAPE begins anti-submarine exercises
+	id = ent_dip.6
+	title = ent_dip.6.t
+	desc = ent_dip.6.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: ent_dip.6"}
+	immediate = {
+		hidden_effect = {
+			if = {
+				limit = {
+					tag = ENT
+					GER = {
+						has_country_flag = GER_sent_submarine
+					}		
+				}
+				ENT = {
+					country_event = {
+						id = ent_dip.7
+						days = 4
+					}
+				}	
+			}
+		}		
+	}
+	is_triggered_only = yes
+
+	option = { #Shoot em down!
+		name = ent_dip.6.a
+		navy_experience = 15
+		air_experience = 10
+	}
+}
+
+country_event = { ##HMCS Louise spots an unidentified submarine during exercises
+	id = ent_dip.7
+	title = ent_dip.7.t
+	desc = ent_dip.7.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: ent_dip.7"}
+	is_triggered_only = yes
+
+	option = { #"Attention submarine, this is a restricted area, leave immediately"
+		name = ent_dip.7.a
+		hidden_effect = {
+			GER = {
+				country_event = {
+					id = ent_dip.9
+					days = 3
+				}
+			}	
+		}
+	}
+}
+
+country_event = { ##The Accord begins naval exercises in the North Atlantic
+	id = ent_dip.8
+	title = ent_dip.8.t
+	desc = ent_dip.8.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: ent_dip.8"}
+	immediate = {
+		hidden_effect = {
+			set_global_flag = ENT_north_atlantic_exercise
+		}
+	}
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = { #Send a submarine to monitor them
+		name = ent_dip.8.a
+		set_country_flag = GER_sent_submarine
+		news_event = {
+			id = worldnews.285
+			days = 1
+		}
+	}
+	option = { #Let them have their fun
+		name = ent_dip.8.b
+		add_war_support = -0.01
+	}
+}
+
+country_event = { ##Accord tells us to leave
+	id = ent_dip.9
+	title = ent_dip.9.t
+	desc = ent_dip.9.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: ent_dip.9"}
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = { #We will continue to observe them
+		name = ent_dip.9.a
+		hidden_effect = {
+			ENT = {
+				country_event = {
+					id = ent_dip.10
+					days = 2
+				}
+			}
+		}
+		ai_chance = {
+			base = 80
+			modifier = {
+				has_game_rule = {
+					rule = KRG_WK3_ALLOWED
+					option = KRG_WK3_NORTH_SEA
+				}
+				factor = 1000
+			}
+		}
+	}
+	option = { #Our orders were to depart if challenged
+		name = ent_dip.9.b
+		add_to_array = { global.influence_log = 36 }
+		add_to_array = { global.influence_log_val = 15 }
+		influence_recalc = yes
+		hidden_effect = {
+			log = "KRG_Event_Logging;North Sea Crisis - CAN North Atlantic;[GetDateText];[ROOT.GetName];[FROM.GetName]"
+			news_event = {
+				id = worldnews.62
+				days = 1
+			}	
+		}
+		ai_chance = {
+			base = 20
+		}
+	}
+}
+
+country_event = { ##Mystery sub doesn't leave
+	id = ent_dip.10
+	title = ent_dip.10.t
+	desc = ent_dip.10.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: ent_dip.10"}
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = { #Drive them off with practice depth charges
+		name = ent_dip.10.a
+		hidden_effect = {
+			GER = {
+				country_event = {
+					id = ent_dip.11
+					days = 3
+				}
+			}
+		}
+		ai_chance = {
+			base = 70
+			modifier = {
+				has_game_rule = {
+					rule = KRG_WK3_ALLOWED
+					option = KRG_WK3_NORTH_SEA
+				}
+				factor = 1000
+			}
+		}
+	}
+	option = { #Have ASW aircraft shadow them for the rest of the exercise
+		name = ent_dip.10.c
+		hidden_effect = {
+			GER = {
+				country_event = {
+					id = ent_dip.13
+					days = 3
+				}
+			}
+		}
+		ai_chance = {
+			base = 30
+		}
+	}
+}
+
+country_event = { ##The Accord Navy drops signal charges
+	id = ent_dip.11
+	title = ent_dip.11.t
+	desc = ent_dip.11.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: ent_dip.11"}
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = { #Surface at once!
+		name = ent_dip.11.a
+		ENT = {
+			country_event = {
+				id = ent_dip.23
+				days = 3
+			}
+		}
+	}
+	option = { #Withdraw
+		name = ent_dip.11.b
+		ENT = {
+			country_event = {
+				id = ent_dip.23
+				days = 3
+			}
+		}	
+	}
+}
+
+#country_event = { ##We have been detected; Accord might be getting ready to attack us
+#	id = ent_dip.12
+#	title = ent_dip.12.t
+#	desc = ent_dip.12.d
+#	immediate = { log = "[GetDateText]: [Root.GetName]: ent_dip.12"}
+#	fire_only_once = yes
+#	is_triggered_only = yes
+#
+#	option = { #Launch torpedoes
+#		name = ent_dip.12.a
+#		hidden_effect = {
+#			ENT = {
+#				country_event = {
+#					id = ent_dip.14
+#					days = 3
+#				}
+#			}
+#		}
+#	}
+#	option = { #They wouldn't dare
+#		name = ent_dip.12.a
+#		hidden_effect = {
+#			GER = {
+#				country_event = {
+#					id = ent_dip.15
+#					days = 3
+#				}
+#			}
+#		}		
+#	}
+#}
+
+country_event = { ##We are being shadowed by Accord aircraft
+	id = ent_dip.13
+	title = ent_dip.13.t
+	desc = ent_dip.13.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: ent_dip.13"}
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = { #Withdraw
+		name = ent_dip.13.a
+		hidden_effect = {
+			add_to_array = { global.influence_log = 37 }
+			add_to_array = { global.influence_log_val = 10 }
+			influence_recalc = yes
+			hidden_effect = {
+				log = "KRG_Event_Logging;North Sea Crisis - CAN North Atlantic;[GetDateText];[ROOT.GetName];[FROM.GetName]"
+				news_event = {
+					id = worldnews.62
+					days = 1
+				}	
+			}
+		}
+	}
+}
+
+country_event = { ##Unidentified sub attacks! It's Germans!!
+	id = ent_dip.14
+	title = ent_dip.14.t
+	desc = ent_dip.14.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: ent_dip.14"}
+	immediate = {
+		set_global_flag = WK3_trigger_north_atlantic_sub_attack_while_flee
+		hidden_effect = {
+			third_weltkrieg = yes
+		}
+	}
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = { #Oh God
+		name = ent_dip.14.a
+	
+	}
+}
+
+country_event = { ##Our intelligence gathering mission is over
+	id = ent_dip.15
+	title = ent_dip.15.t
+	desc = ent_dip.15.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: ent_dip.15"}
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = { #Withdraw
+		name = ent_dip.15.a
+		hidden_effect = {
+			add_to_array = { global.influence_log = 37 }
+			add_to_array = { global.influence_log_val = 15 }
+			influence_recalc = yes
+			hidden_effect = {
+				log = "KRG_Event_Logging;North Sea Crisis - CAN North Atlantic;[GetDateText];[ROOT.GetName];[FROM.GetName]"
+				news_event = {
+					id = worldnews.62
+					days = 1
+				}	
+			}
+		}
+	}
+}
+
+
+country_event = { ##SHAPE selects North Sea for Naval Exercises
+	id = ent_dip.16
+	title = ent_dip.16.t
+	desc = ent_dip.16.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: ent_dip.16"}
+	immediate = {
+		hidden_effect = {
+			GER = {
+				country_event = {
+					id = ent_dip.17
+					days = 3
+				}
+			}	
+		}
+	}
+	is_triggered_only = yes
+
+	option = { #An excellent choice
+		name = ent_dip.16.a
+	}
+}
+
+country_event = { ##Accord exercises in the North Sea
+	id = ent_dip.17
+	title = ent_dip.17.t
+	desc = ent_dip.17.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: ent_dip.17"}
+	immediate = {
+		set_global_flag = ENT_north_sea_exercise
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #Very well, we do not wish to risk a war
+		name = ent_dip.17.a
+		hidden_effect = {
+			log = "KRG_Event_Logging;North Sea Crisis - CAN North Sea;[GetDateText];[ROOT.GetName];[FROM.GetName]"
+			news_event = {
+				id = worldnews.63
+				days = 1
+			}
+			add_to_array = { global.influence_log = 36 }
+			add_to_array = { global.influence_log_val = 25 }
+			influence_recalc = yes
+		}
+
+		ai_chance = {
+			base = 20
+		}
+	}
+
+	option = { #Unacceptable. Deploy the fleet to show our power
+		name = ent_dip.17.b
+		hidden_effect = {
+			ENT = {
+				country_event = {
+					id = ent_dip.18
+					days = 3
+				}
+			}
+		}
+		news_event = {
+			id = worldnews.285
+			days = 1
+		}
+
+		ai_chance = {
+			base = 80
+			modifier = {
+				has_game_rule = {
+					rule = KRG_WK3_ALLOWED
+					option = KRG_WK3_NORTH_SEA
+				}
+				factor = 1000
+			}
+		}
+	}
+}
+
+country_event = { ##German fleet will be close to planned exercise
+	id = ent_dip.18
+	title = ent_dip.18.t
+	desc = ent_dip.18.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: ent_dip.18"}
+
+	is_triggered_only = yes
+
+	option = { #Move the exercises to the North Atlantic instead
+		name = ent_dip.18.a
+		hidden_effect = {
+			log = "KRG_Event_Logging;North Sea Crisis - GER North Sea;[GetDateText];[ROOT.GetName];[FROM.GetName]"
+			news_event = {
+				id = worldnews.64
+				days = 1
+			}
+			add_to_array = { global.influence_log = 35 }
+			add_to_array = { global.influence_log_val = -20 }
+			influence_recalc = yes
+			hidden_effect = {
+				every_country = {
+					limit = {
+						is_ally_with = ENT
+					}
+					country_event = {
+						id = ent_dip.3
+						days = 5
+					}
+				}
+			}
+		}
+
+		ai_chance = {
+			base = 20
+		}
+	}
+
+	option = { #The exercise will proceed as planned
+		name = ent_dip.18.b
+		hidden_effect = {
+			GER = {
+				country_event = {
+					id = ent_dip.19
+					days = 3
+				}
+			}
+		}
+
+		ai_chance = {
+			base = 80
+			modifier = {
+				has_game_rule = {
+					rule = KRG_WK3_ALLOWED
+					option = KRG_WK3_NORTH_SEA
+				}
+				factor = 1000
+			}
+		}
+	}
+}
+
+country_event = { ##Accord navies demonstrating near our fleet
+	id = ent_dip.19
+	title = ent_dip.19.t
+	desc = ent_dip.19.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: ent_dip.19"}
+
+	is_triggered_only = yes
+
+	option = { #The potential for an accident is very high, withdraw the fleet
+		name = ent_dip.19.a
+		hidden_effect = {
+			log = "KRG_Event_Logging;North Sea Crisis - CAN North Sea;[GetDateText];[ROOT.GetName];[FROM.GetName]"
+			news_event = {
+				id = worldnews.63
+				days = 1
+			}
+			set_global_flag = ENT_north_sea_victory_after_german_deployment
+			add_to_array = { global.influence_log = 36 }
+			add_to_array = { global.influence_log_val = 25 }
+			influence_recalc = yes
+		}
+
+		ai_chance = {
+			base = 15
+			modifier = {
+				has_game_rule = {
+					rule = KRG_WK3_ALLOWED
+					option = KRG_WK3_BLOCKED
+				}
+				factor = 1000
+			}
+		}
+	}
+
+	option = { #The North Sea is ours!
+		name = ent_dip.19.b
+		hidden_effect = {
+			ENT = {
+				country_event = {
+					id = ent_dip.20
+					days = 3
+				}
+			}
+		}
+
+		ai_chance = {
+			base = 80
+			modifier = {
+				has_game_rule = {
+					rule = KRG_WK3_ALLOWED
+					option = KRG_WK3_NORTH_SEA
+				}
+				factor = 1000
+			}
+		}
+	}
+	option = { #They mean to attack! Battle stations!
+		name = ent_dip.19.c
+		ENT = {
+			country_event = {
+				id = ent_dip.21
+				days = 3
+			}
+		}
+		ai_chance = {
+			base = 10
+			modifier = {
+				has_game_rule = {
+					rule = KRG_WK3_ALLOWED
+					option = KRG_WK3_NORTH_SEA
+				}
+				factor = 1000
+			}
+		}
+	}
+}
+
+country_event = { ##German fleet going to combat stations; enemy naval bombers in the air
+	id = ent_dip.20
+	title = ent_dip.20.t
+	desc = ent_dip.20.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: ent_dip.20"}
+
+	is_triggered_only = yes
+
+	option = { #We do not wish to risk a war, cancel the day's exercises and defuse the situation
+		name = ent_dip.20.a
+		hidden_effect = {
+			log = "KRG_Event_Logging;North Sea Crisis - GER North Sea;[GetDateText];[ROOT.GetName];[FROM.GetName]"
+			news_event = {
+				id = worldnews.64
+				days = 1
+			}
+			set_global_flag = GER_north_sea_victory_after_german_deployment
+			add_to_array = { global.influence_log = 35 }
+			add_to_array = { global.influence_log_val = -20 }
+			influence_recalc = yes
+		}
+
+		ai_chance = {
+			base = 65
+			modifier = {
+				has_game_rule = {
+					rule = KRG_WK3_ALLOWED
+					option = KRG_WK3_BLOCKED
+				}
+				factor = 1000
+			}
+		}
+	}
+
+	option = { #They are preparing to attack us! Launch a strike on the German flagship
+		name = ent_dip.20.b
+		hidden_effect = {
+			GER = {
+				country_event = {
+					id = ent_dip.22
+					days = 3
+				}
+			}
+		}
+		ai_chance = {
+			base = 15
+			modifier = {
+				has_game_rule = {
+					rule = KRG_WK3_ALLOWED
+					option = KRG_WK3_NORTH_SEA
+				}
+				factor = 1000
+			}
+		}
+	}
+}
+
+country_event = { ##German fleet attacks!
+	id = ent_dip.21
+	title = ent_dip.21.t
+	desc = ent_dip.21.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: ent_dip.21"}
+	hidden = yes
+	immediate = {
+		hidden_effect = {
+			third_weltkrieg = yes
+			set_global_flag = WK3_trigger_north_sea
+		}
+	}
+	is_triggered_only = yes
+
+	option = { #Battlestations!
+		name = ent_dip.21.a
+	
+	}
+}
+
+country_event = { ##Canadian fleet attacks!
+	id = ent_dip.22
+	title = ent_dip.22.t
+	desc = ent_dip.22.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: ent_dip.22"}
+	hidden = yes
+	immediate = {
+		hidden_effect = {
+			third_weltkrieg = yes
+			set_global_flag = WK3_trigger_north_sea
+		}
+	}
+	is_triggered_only = yes
+
+	option = { #Battlestations!
+		name = ent_dip.22.a
+	
+	}
+}
+
+country_event = { ##Mystery sub flees
+	id = ent_dip.23
+	title = ent_dip.23.t
+	desc = ent_dip.23.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: ent_dip.23"}
+	hidden = yes
+	is_triggered_only = yes
+
+	option = { #After them!
+		name = ent_dip.23.a
+		GER = {
+			country_event = {
+				id = ent_dip.24
+				days = 2
+			}
+		}
+
+		ai_chance = {
+			base = 65
+			modifier = {
+				has_game_rule = {
+					rule = KRG_WK3_ALLOWED
+					option = KRG_WK3_NORTH_SEA
+				}
+				factor = 1000
+			}
+		}
+	}
+
+	option = { #Let them go
+		name = ent_dip.23.b
+		#small german diplo gain
+		ai_chance = {
+			base = 35
+		}
+	}
+}
+
+country_event = { ##Accord Chases
+	id = ent_dip.24
+	title = ent_dip.24.t
+	desc = ent_dip.24.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: ent_dip.24"}
+	hidden = yes
+	is_triggered_only = yes
+
+	option = { #We have to surface
+		name = ent_dip.24.a
+		ENT = {
+			country_event = {
+				id = ent_dip.25
+				days = 2
+			}
+		}
+
+		ai_chance = {
+			base = 90
+			modifier = {
+				has_game_rule = {
+					rule = KRG_WK3_ALLOWED
+					option = KRG_WK3_BLOCKED
+				}
+				factor = 1000
+			}
+		}
+	}
+
+	option = { #They mean to attack, launch torpedos!
+		name = ent_dip.24.b
+		ENT = {
+			country_event = {
+				id = ent_dip.14
+				days = 2
+			}
+		}
+
+		ai_chance = {
+			base = 10
+			modifier = {
+				has_game_rule = {
+					rule = KRG_WK3_ALLOWED
+					option = KRG_WK3_NORTH_SEA
+				}
+				factor = 1000
+			}
+		}
+	}
+}
+
+country_event = { ##zomg its the germans
+	id = ent_dip.25
+	title = ent_dip.25.t
+	desc = ent_dip.25.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: ent_dip.25"}
+	hidden = yes
+	is_triggered_only = yes
+
+	option = { #Let them go
+		name = ent_dip.25.a
+		#conclusion of crisis, can diplo gain
+		hidden_effect = {
+			log = "KRG_Event_Logging;North Sea Crisis - CAN North Atlantic;[GetDateText];[ROOT.GetName];[FROM.GetName]"
+			set_global_flag = ENT_north_sea_victory_after_sub_let_go
+			news_event = {
+				id = worldnews.62
+				days = 1
+			}	
+		}
+
+		ai_chance = {
+			base = 50
+		}
+	}
+
+	option = { #Hold them hostage
+		name = ent_dip.25.b
+		GER = {
+			country_event = {
+				id = ent_dip.26
+				days = 2
+			}
+		}
+
+		ai_chance = {
+			base = 50
+			modifier = {
+				has_game_rule = {
+					rule = KRG_WK3_ALLOWED
+					option = KRG_WK3_NORTH_SEA
+				}
+				factor = 1000
+			}
+		}
+	}
+}
+
+country_event = { ##Submarine crew held hostage
+	id = ent_dip.26
+	title = ent_dip.26.t
+	desc = ent_dip.26.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: ent_dip.26"}
+	hidden = yes
+	is_triggered_only = yes
+
+	option = { #Negotiate their release
+		name = ent_dip.26.a
+		#large canadian diplo gain
+		set_global_flag = ENT_north_atlantic_victory_after_sub_held_negotiation
+		news_event = {
+			id = worldnews.62
+			days = 1
+		}
+
+		ai_chance = {
+			base = 60
+		}
+	}
+
+	option = { #Issue ultimatum
+		name = ent_dip.26.b
+		news_event = {
+			id = worldnews.95
+			days = 2
+		}
+		ENT = {
+			country_event = {
+				id = ent_dip.27
+				days = 2
+			}
+		}
+
+		ai_chance = {
+			base = 40
+			modifier = {
+				has_game_rule = {
+					rule = KRG_WK3_ALLOWED
+					option = KRG_WK3_NORTH_SEA
+				}
+				factor = 1000
+			}
+		}
+	}
+}
+
+country_event = { ##The german ultimatum
+	id = ent_dip.27
+	title = ent_dip.27.t
+	desc = ent_dip.27.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: ent_dip.27"}
+	hidden = yes
+	is_triggered_only = yes
+
+	option = { #fine
+		name = ent_dip.27.a
+		#conclusion of crisis, huge german diplo gain
+		set_global_flag = GER_north_atlantic_victory
+		news_event = {
+			id = worldnews.96
+			days = 1
+		}
+
+		ai_chance = {
+			base = 90
+		}
+	}
+
+	option = { #no lol
+		name = ent_dip.27.b
+		set_global_flag = ENT_north_sea_ultimatum_canada_refuses
+		GER = {
+			country_event = {
+				id = ent_dip.28
+				days = 2
+			}
+		}
+
+		ai_chance = {
+			base = 10
+			modifier = {
+				has_game_rule = {
+					rule = KRG_WK3_ALLOWED
+					option = KRG_WK3_NORTH_SEA
+				}
+				factor = 1000
+			}
+		}
+	}
+}
+
+country_event = { ##The german ultimatum
+	id = ent_dip.28
+	title = ent_dip.28.t
+	desc = ent_dip.28.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: ent_dip.28"}
+	hidden = yes
+	is_triggered_only = yes
+
+	option = { #back down
+		name = ent_dip.28.a
+		#conclusion of crisis, huge canadian diplo gain
+		set_global_flag = ENT_north_atlantic_victory_after_sub_held_negotiation
+		news_event = {
+			id = worldnews.62
+			days = 1
+		}
+		ai_chance = {
+			base = 70
+			modifier = {
+				has_game_rule = {
+					rule = KRG_WK3_ALLOWED
+					option = KRG_WK3_BLOCKED
+				}
+				factor = 1000
+			}
+		}
+	}
+
+	option = { #war!
+		name = ent_dip.28.b
+		set_global_flag = WK3_trigger_north_atlantic
+		third_weltkrieg = yes
+
+		ai_chance = {
+			base = 30
+			modifier = {
+				has_game_rule = {
+					rule = KRG_WK3_ALLOWED
+					option = KRG_WK3_NORTH_SEA
+				}
+				factor = 1000
+			}
+		}
+	}
+}

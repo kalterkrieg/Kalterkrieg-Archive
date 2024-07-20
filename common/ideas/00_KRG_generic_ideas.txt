@@ -1,0 +1,2840 @@
+### GENERIC IDEAS
+ideas = {
+	KRG_mobilization = {
+		law = yes
+		
+		KRG_disarmed_nation = {
+			available = {
+				if = {
+					limit = {
+						NOT = {
+							has_idea = KRG_disarmed_nation
+						}
+					}
+					NOT = {
+						has_country_flag = KRG_mobilization_laws_locked
+					}
+				}
+			}
+			removal_cost = -1
+			level = 7
+			cost = 100
+			picture = disarmed_nation
+			modifier = {
+				conscription = 0.01
+			}
+			ai_will_do = {
+				factor = 0
+			}
+			cancel_if_invalid = no
+		}
+		KRG_volunteer_only = {
+			available = {
+				if = {
+					limit = {
+						NOT = {
+							has_idea = KRG_volunteer_only
+						}
+					}
+					NOT = {
+						has_country_flag = KRG_mobilization_laws_locked
+					}
+				}
+			}
+			removal_cost = -1
+			level = 6
+			cost = 100
+			picture = volunteer_only
+			default = yes
+			modifier = {
+				conscription = 0.015
+			}
+			ai_will_do = {
+				factor = 1
+				modifier = {
+					factor = 60					# being disarmed is bad in a wargame yo
+					has_idea = KRG_disarmed_nation
+					NOT = {
+						has_country_flag = KRG_mobilization_laws_locked
+					}
+				}
+				
+			}
+			cancel_if_invalid = no
+		}
+		KRG_limited_conscription = {
+			available = {
+				if = {
+					limit = {
+						NOT = {
+							has_idea = KRG_limited_conscription
+						}
+					}
+					NOT = {
+						has_country_flag = KRG_mobilization_laws_locked
+					}
+				}
+			}
+			removal_cost = -1
+			cost = 100
+			level = 5
+			picture = limited_conscription
+			modifier = {
+				conscription = 0.025
+			}
+			ai_will_do = {
+				factor = 1
+				modifier = {
+					#Prio if low on manpower
+					factor = 20
+					manpower_per_military_factory < 1000
+					NOT = {
+						has_country_flag = KRG_mobilization_laws_locked
+					}
+				}
+				modifier = {
+					#Prio if low on manpower
+					factor = 20
+					manpower_per_military_factory < 800
+					NOT = {
+						has_country_flag = KRG_mobilization_laws_locked
+					}
+				}
+				
+			}
+			cancel_if_invalid = no
+		}
+		KRG_extensive_conscription = {
+			available = {
+				OR = {
+					has_war = yes
+					has_government = national_populist
+					has_government = authoritarian_socialist
+					has_government = paternal_autocrat
+					hidden_trigger = {
+						original_tag = JAP
+					}
+				}
+				if = {
+					limit = {
+						NOT = {
+							has_idea = KRG_extensive_conscription
+						}
+					}
+					NOT = {
+						has_country_flag = KRG_mobilization_laws_locked
+					}
+				}
+			}
+			removal_cost = -1
+			level = 4
+			cost = 100
+			picture = extensive_conscription
+			modifier = {
+				conscription = 0.05
+				training_time_factor = 0.1
+			}
+			ai_will_do = {
+				factor = 1
+				
+				
+				modifier = {
+					#Prio if low on manpower
+					factor = 20
+					manpower_per_military_factory < 700
+					NOT = {
+						has_country_flag = KRG_mobilization_laws_locked
+					}
+					
+				}
+				modifier = {
+					#Lower chance if has decent amount
+					factor = 0.5
+					manpower_per_military_factory > 1000
+					NOT = {
+						has_country_flag = KRG_mobilization_laws_locked
+					}
+					
+				}
+			}
+			cancel_if_invalid = no
+		}
+		KRG_service_by_requirement = {
+			available = {
+				OR = {
+					has_war = yes
+					has_government = national_populist
+					has_government = authoritarian_socialist
+					hidden_trigger = {
+						AND = {
+							original_tag = JAP
+							date < 1950.1.1
+						}
+					}
+				}
+				if = {
+					limit = {
+						NOT = {
+							has_idea = KRG_service_by_requirement
+						}
+					}
+					NOT = {
+						has_country_flag = KRG_mobilization_laws_locked
+					}
+				}
+				
+			}
+			removal_cost = -1
+			level = 3
+			cost = 100
+			picture = service_by_requirement
+			modifier = {
+				conscription = 0.1
+				training_time_factor = 0.2
+			}
+			ai_will_do = {
+				factor = 1
+				modifier = {
+					#Prio if low on manpower
+					factor = 20
+					manpower_per_military_factory < 700
+					NOT = {
+						has_country_flag = KRG_mobilization_laws_locked
+					}
+					
+				}
+				modifier = {
+					#Lower chance if has decent amount
+					factor = 0.5
+					manpower_per_military_factory > 1000
+					NOT = {
+						has_country_flag = KRG_mobilization_laws_locked
+					}
+					
+				}
+				
+				
+			}
+			cancel_if_invalid = no
+		}
+		KRG_all_adults_serve = {
+			available = {
+				OR = {
+					has_war = yes
+					has_government = national_populist
+					has_government = authoritarian_socialist
+				}
+				if = {
+					limit = {
+						NOT = {
+							has_idea = KRG_all_adults_serve
+						}
+					}
+					NOT = {
+						has_country_flag = KRG_mobilization_laws_locked
+					}
+				}
+				
+			}
+			removal_cost = -1
+			level = 2
+			cost = 100
+			picture = all_adults_serve
+			modifier = {
+				conscription = 0.2
+				training_time_factor = 0.3
+			}
+			ai_will_do = {
+				factor = 1
+				modifier = {
+					#Prio if low on manpower
+					factor = 20
+					manpower_per_military_factory < 600
+					NOT = {
+						has_country_flag = KRG_mobilization_laws_locked
+					}
+					
+				}
+				modifier = {
+					#Lower chance if has decent amount
+					factor = 0.5
+					manpower_per_military_factory > 1000
+					NOT = {
+						has_country_flag = KRG_mobilization_laws_locked
+					}
+					
+				}
+				
+				
+			}
+			cancel_if_invalid = no
+		}
+		KRG_scraping_the_barrel = {
+			available = {
+				OR = {
+					has_war = yes
+					has_government = national_populist
+					has_government = authoritarian_socialist
+				}
+				if = {
+					limit = {
+						NOT = {
+							has_idea = KRG_scraping_the_barrel
+						}
+					}
+					NOT = {
+						has_country_flag = KRG_mobilization_laws_locked
+					}
+				}
+				
+			}
+			removal_cost = -1
+			cost = 100
+			level = 1
+			picture = scraping_the_barrel
+			modifier = {
+				conscription = 0.25
+				training_time_factor = 0.5
+			}
+			ai_will_do = {
+				factor = 1
+				modifier = {
+					#Prio if low on manpower
+					factor = 20
+					AND = {
+						manpower_per_military_factory < 500
+						NOT = {
+							has_country_flag = KRG_mobilization_laws_locked
+						}
+					}
+				}
+				modifier = {
+					#Lower chance if has decent amount
+					factor = 0.5
+					AND = {
+						manpower_per_military_factory > 1000
+						NOT = {
+							has_country_flag = KRG_mobilization_laws_locked
+						}
+					}
+				}
+				modifier = {
+					#Block has plenty manpower
+					factor = 0
+					manpower_per_military_factory > 5000
+				}
+				
+				
+			}
+			cancel_if_invalid = no
+		}
+	}
+	KRG_trade_laws = {
+		law = yes
+		
+		KRG_free_trade = {
+			cost = 150
+			removal_cost = -1
+			level = 7
+			modifier = {
+				min_export = 0.8
+				industrial_capacity_factory = 0.15
+				industrial_capacity_dockyard = 0.15
+				#production_speed_buildings_factor = 0.15
+				research_speed_factor = 0.1
+			}
+			picture = free_trade
+			cancel_if_invalid = no
+		}
+		KRG_export_focus = {
+			available = {
+				always = yes
+			}
+			cost = 150
+			removal_cost = -1
+			modifier = {
+				min_export = 0.5
+				industrial_capacity_factory = 0.1
+				industrial_capacity_dockyard = 0.1
+				#production_speed_buildings_factor = 0.1
+				research_speed_factor = 0.05
+			}
+			default = yes
+			cancel_if_invalid = no
+			picture = export_focus
+			ai_will_do = {
+				factor = 1
+				# portugal and sweden are special tungsten snowflakes
+				modifier = {
+					factor = 0
+					is_major = no
+					has_war = no
+					is_in_faction = no
+					OR = {
+						tag = POR
+						tag = SWE
+					}
+				}
+			}
+		}
+		KRG_limited_exports = {
+			available = {
+				always = yes
+			}
+			cost = 150
+			removal_cost = -1
+			modifier = {
+				min_export = 0.25
+				industrial_capacity_factory = 0.05
+				industrial_capacity_dockyard = 0.05
+				#production_speed_buildings_factor = 0.05
+				research_speed_factor = 0.01
+			}
+			cancel_if_invalid = no
+			picture = limited_exports
+			ai_will_do = {
+				factor = 1
+				modifier = {
+					factor = 0
+					is_major = no
+					is_in_faction = yes
+					has_war = yes
+				}
+				# minors not at war should want to get the bonuses from free trade
+				modifier = {
+					factor = 0
+					is_major = no
+					has_war = no
+				}
+			}
+		}
+		KRG_closed_economy = {
+			available = {
+				always = yes
+			}
+			picture = closed_economy
+			cost = 150
+			removal_cost = -1
+			modifier = {
+				min_export = 0
+			}
+			on_add = {
+				custom_effect_tooltip = closed_economy_TT
+			}
+			cancel_if_invalid = no
+			ai_will_do = {
+				factor = 1
+				modifier = {
+					factor = 0
+					is_major = no
+					is_in_faction = yes
+					has_war = yes
+				}
+				# minors not at war should want to get the bonuses from free trade
+				modifier = {
+					factor = 0
+					is_major = no
+					has_war = no
+				}
+			}
+		}
+	}
+	KRG_govt_type = {
+		law = yes
+		
+		KRG_union_democracy = {
+			available = {
+				hidden_trigger = {
+					always = no
+				}
+				custom_trigger_tooltip = {
+					tooltip = govt_type_law_available
+					always = no
+				}
+			}
+			default = no
+			cancel_if_invalid = no
+			cost = 0
+			removal_cost = -1
+			picture = govt_union_democracy
+			modifier = {
+				industrial_capacity_factory = 0.05
+				political_power_gain = -0.1
+			}
+			on_add = {
+				log = "[GetDateText]: [Root.GetName]: add idea KRG_union_democracy"
+			}
+		}
+		KRG_peoples_democracy = {
+			available = {
+				hidden_trigger = {
+					always = no
+				}
+				custom_trigger_tooltip = {
+					tooltip = govt_type_law_available
+					always = no
+				}
+			}
+			default = no
+			cancel_if_invalid = no
+			cost = 0
+			removal_cost = -1
+			picture = govt_peoples_democracy
+			modifier = {
+				industrial_capacity_factory = 0.05
+				stability_factor = -0.05
+			}
+			on_add = {
+				log = "[GetDateText]: [Root.GetName]: add idea KRG_peoples_democracy"
+			}
+		}
+		KRG_parliamentary_democracy = {
+			available = {
+				hidden_trigger = {
+					always = no
+				}
+				custom_trigger_tooltip = {
+					tooltip = govt_type_law_available
+					always = no
+				}
+			}
+			default = no
+			cancel_if_invalid = no
+			cost = 0
+			removal_cost = -1
+			picture = govt_parliamentary_democracy
+			modifier = {
+				political_power_gain = -0.05
+				stability_factor = 0.05
+			}
+			on_add = {
+				log = "[GetDateText]: [Root.GetName]: add idea KRG_parliamentary_democracy"
+			}
+		}
+		KRG_presidential_democracy = {
+			available = {
+				hidden_trigger = {
+					always = no
+				}
+				custom_trigger_tooltip = {
+					tooltip = govt_type_law_available
+					always = no
+				}
+			}
+			default = no
+			cancel_if_invalid = no
+			removal_cost = -1
+			picture = govt_presidential_democracy
+			modifier = {
+				political_power_factor = 0.05
+			}
+			on_add = {
+				log = "[GetDateText]: [Root.GetName]: add idea KRG_presidential_democracy"
+			}
+		}
+		KRG_illiberal_democracy = {
+			available = {
+				hidden_trigger = {
+					always = no
+				}
+				custom_trigger_tooltip = {
+					tooltip = govt_type_law_available
+					always = no
+				}
+			}
+			default = no
+			cancel_if_invalid = no
+			cost = 0
+			removal_cost = -1
+			picture = govt_illiberal_democracy
+			modifier = {
+				stability_factor = -0.05
+				war_support_factor = 0.05
+			}
+			on_add = {
+				log = "[GetDateText]: [Root.GetName]: add idea KRG_illiberal_democracy"
+			}
+		}
+		KRG_authoritarian_system = {
+			available = {
+				hidden_trigger = {
+					always = no
+				}
+				custom_trigger_tooltip = {
+					tooltip = govt_type_law_available
+					always = no
+				}
+			}
+			default = no
+			cancel_if_invalid = no
+			cost = 0
+			removal_cost = -1
+			picture = govt_authoritarian_system
+			modifier = {
+				political_power_factor = -0.05
+				war_support_factor = 0.05
+			}
+			on_add = {
+				log = "[GetDateText]: [Root.GetName]: add idea KRG_authoritarian_system"
+			}
+		}
+		KRG_fanatical_dictatorship = {
+			available = {
+				hidden_trigger = {
+					always = no
+				}
+				custom_trigger_tooltip = {
+					tooltip = govt_type_law_available
+					always = no
+				}
+			}
+			default = no
+			cancel_if_invalid = no
+			cost = 0
+			removal_cost = -1
+			picture = govt_fanatical_dictatorship
+			modifier = {
+				stability_factor = -0.05
+				conscription_factor = 0.05
+			}
+			on_add = {
+				log = "[GetDateText]: [Root.GetName]: add idea KRG_fanatical_dictatorship"
+			}
+		}
+		KRG_absolute_rulership = {
+			available = {
+				hidden_trigger = {
+					always = no
+				}
+				custom_trigger_tooltip = {
+					tooltip = govt_type_law_available
+					always = no
+				}
+			}
+			default = no
+			cancel_if_invalid = no
+			cost = 0
+			removal_cost = -1
+			picture = govt_absolute_rulership
+			modifier = {
+				political_power_factor = 0.1
+				stability_factor = -0.05
+			}
+			on_add = {
+				log = "[GetDateText]: [Root.GetName]: add idea KRG_absolute_rulership"
+			}
+		}
+		KRG_bredowist_system = {
+			available = {
+				hidden_trigger = {
+					always = no
+				}
+				custom_trigger_tooltip = {
+					tooltip = govt_type_law_available
+					always = no
+				}
+			}
+			visible = {
+				OR = {
+					tag = GER
+					tag = FRA
+				}
+			}
+			default = no
+			cancel_if_invalid = no
+			cost = 0
+			removal_cost = -1
+			picture = govt_bredowist_system
+			modifier = {
+				war_support_factor = 0.05
+				recruitable_population = 0.05
+				political_power_factor = -0.1
+			}
+			on_add = {
+				log = "[GetDateText]: [Root.GetName]: add idea KRG_bredowist_system"
+			}
+		}
+		KRG_prussian_constitutionalism = {
+			available = {
+				hidden_trigger = {
+					always = no
+				}
+				custom_trigger_tooltip = {
+					tooltip = govt_type_law_available
+					always = no
+				}
+			}
+			visible = {
+				tag = GER
+			}
+			default = no
+			cancel_if_invalid = no
+			cost = 0
+			removal_cost = -1
+			picture = govt_prussian_constitutionalism
+			modifier = {
+				war_support_factor = 0.05
+				stability_factor = 0.05
+				political_power_factor = -0.1
+			}
+			on_add = {
+				log = "[GetDateText]: [Root.GetName]: add idea KRG_prussian_constitutionalism"
+			}
+		}
+		KRG_american_democracy = {
+			available = {
+				hidden_trigger = {
+					always = no
+				}
+				custom_trigger_tooltip = {
+					tooltip = govt_type_law_available
+					always = no
+				}
+			}
+			visible = {
+				OR = {
+					tag = CAL
+					tag = NEE
+					tag = GLG
+				}
+			}
+			default = no
+			cancel_if_invalid = no
+			cost = 0
+			removal_cost = -1
+			picture = govt_american_democracy
+			modifier = {
+				war_support_factor = -0.05
+				stability_factor = 0.05
+				political_power_factor = 0.05
+			}
+			on_add = {
+				log = "[GetDateText]: [Root.GetName]: add idea KRG_american_democracy"
+			}
+		}
+		KRG_military_occupation = {
+			available = {
+				hidden_trigger = {
+					always = no
+				}
+				custom_trigger_tooltip = {
+					tooltip = govt_type_law_available
+					always = no
+				}
+			}
+			default = no
+			cancel_if_invalid = no
+			cost = 0
+			removal_cost = -1
+			picture = govt_military_occupation
+			modifier = {
+				recruitable_population = -0.25
+				political_power_factor = -0.25
+			}
+			on_add = {
+				log = "[GetDateText]: [Root.GetName]: add idea KRG_military_occupation"
+			}
+		}
+		KRG_colonial_bureaucracy = {
+			available = {
+				hidden_trigger = {
+					always = no
+				}
+				custom_trigger_tooltip = {
+					tooltip = govt_type_law_available
+					always = no
+				}
+			}
+			visible = {
+				tag = MAF
+			}
+			default = no
+			cancel_if_invalid = no
+			cost = 0
+			removal_cost = -1
+			picture = govt_colonial_bureaucracy
+			modifier = {
+				recruitable_population = -0.5
+				command_power_gain_mult = 0.35
+			}
+			on_add = {
+				log = "[GetDateText]: [Root.GetName]: add idea KRG_colonial_bureaucracy"
+			}
+		}
+		KRG_danubian_plurinationalism = {
+			available = {
+				hidden_trigger = {
+					always = no
+				}
+				custom_trigger_tooltip = {
+					tooltip = govt_type_law_available
+					always = no
+				}
+			}
+			visible = {
+				tag = DNF
+			}
+			default = no
+			cancel_if_invalid = no
+			cost = 0
+			removal_cost = -1
+			picture = govt_danubian_plurinationalism
+			modifier = {
+				recruitable_population = 0.05
+				political_power_factor = 0.05
+				war_support_factor = -0.05
+			}
+			on_add = {
+				log = "[GetDateText]: [Root.GetName]: add idea KRG_danubian_plurinationalism"
+			}
+		}
+	}
+	KRG_economy_mobilization = {
+		law = yes
+		
+		KRG_total_mob = {
+			level = 1
+			available = {
+				has_war = yes
+				has_war_support > 0.8
+				if = {
+					limit = {
+						has_country_flag = econmob_law_locked
+					}
+					custom_trigger_tooltip = {
+						tooltip = change_ec_mob_disallowed
+						NOT = {
+							has_country_flag = econmob_law_locked
+						}
+					}
+				}
+			}
+			removal_cost = -1
+			cost = 150
+			picture = tot_economic_mobilisation
+			modifier = {
+				consumer_goods_factor = -0.25
+				military_spending_factor = 0.1
+				experience_gain_army_factor = 0.2
+				experience_gain_army = 0.1
+				experience_gain_navy_factor = 0.2
+				experience_gain_navy = 0.1
+				experience_gain_air_factor = 0.2
+				experience_gain_air = 0.1
+				command_power_gain_mult = 0.2
+				command_power_gain = 0.1
+				army_org_Factor = 0.1
+			}
+		}
+		KRG_war_economy = {
+			level = 2
+			available = {
+				has_war = yes
+				OR = {
+					has_idea = KRG_total_mob
+					has_war_support > 0.7
+				}
+				if = {
+					limit = {
+						has_country_flag = econmob_law_locked
+					}
+					custom_trigger_tooltip = {
+						tooltip = change_ec_mob_disallowed
+						NOT = {
+							has_country_flag = econmob_law_locked
+						}
+					}
+				}
+			}
+			allowed_to_remove = {
+				has_war_support < 0.7
+				NOT = {
+					has_country_flag = econmob_law_locked
+				}
+			}
+			cancel_if_invalid = no
+			removal_cost = -1
+			cost = 150
+			picture = war_economy
+			modifier = {
+				consumer_goods_factor = -0.2
+				experience_gain_army_factor = 0.1
+				experience_gain_army = 0.05
+				experience_gain_navy_factor = 0.1
+				experience_gain_navy = 0.05
+				experience_gain_air_factor = 0.1
+				experience_gain_air = 0.05
+				command_power_gain_mult = 0.1
+				command_power_gain = 0.05
+				army_org_Factor = 0.05
+			}
+		}
+		KRG_partial_mob = {
+			level = 3
+			available = {
+				OR = {
+					has_idea = KRG_total_mob
+					has_idea = KRG_war_economy
+					has_war_support > 0.6
+				}
+				if = {
+					limit = {
+						has_country_flag = econmob_law_locked
+					}
+					custom_trigger_tooltip = {
+						tooltip = change_ec_mob_disallowed
+						NOT = {
+							has_country_flag = econmob_law_locked
+						}
+					}
+				}
+			}
+			allowed_to_remove = {
+				has_war_support < 0.6
+				NOT = {
+					has_country_flag = econmob_law_locked
+				}
+			}
+			cancel_if_invalid = no
+			removal_cost = -1
+			cost = 150
+			picture = partial_economic_mobilisation
+			modifier = {
+				consumer_goods_factor = -0.15
+				military_spending_factor = -0.05
+			}
+		}
+		KRG_early_mob = {
+			level = 4
+			available = {
+				has_war_support > 0.5
+				if = {
+					limit = {
+						has_country_flag = econmob_law_locked
+					}
+					custom_trigger_tooltip = {
+						tooltip = change_ec_mob_disallowed
+						NOT = {
+							has_country_flag = econmob_law_locked
+						}
+					}
+				}
+			}
+			allowed_to_remove = {
+				has_war_support < 0.5
+				NOT = {
+					has_country_flag = econmob_law_locked
+				}
+			}
+			cancel_if_invalid = no
+			removal_cost = -1
+			cost = 150
+			picture = low_economic_mobilisation
+			modifier = {
+				consumer_goods_factor = -0.1
+				military_spending_factor = -0.1
+				experience_gain_army_factor = -0.15
+				experience_gain_navy_factor = -0.15
+				experience_gain_air_factor = -0.15
+				command_power_gain_mult = -0.15
+				army_org_Factor = -0.05
+			}
+		}
+		KRG_civilian_economy = {
+			level = 5
+			available = {
+				if = {
+					limit = {
+						has_country_flag = econmob_law_locked
+					}
+					custom_trigger_tooltip = {
+						tooltip = change_ec_mob_disallowed
+						NOT = {
+							has_country_flag = econmob_law_locked
+						}
+					}
+				}
+			}
+			allowed_to_remove = {
+				NOT = {
+					has_country_flag = econmob_law_locked
+				}
+			}
+			cancel_if_invalid = no
+			default = yes
+			removal_cost = -1
+			cost = 150
+			picture = civilian_economy
+			modifier = {
+				consumer_goods_factor = -0.05
+				military_spending_factor = -0.15
+				experience_gain_army_factor = -0.2
+				experience_gain_navy_factor = -0.2
+				experience_gain_air_factor = -0.2
+				command_power_gain_mult = -0.2
+				army_org_Factor = -0.1
+			}
+		}
+		KRG_total_demobilization = {
+			level = 6
+			available = {
+				always = no
+			}
+			allowed_to_remove = {
+				OR = {
+					has_war_support > 0.75
+					has_war = yes
+				}
+				NOT = {
+					has_country_flag = econmob_law_locked
+				}
+			}
+			cancel_if_invalid = no
+			removal_cost = -1
+			cost = 150
+			picture = isolation
+			modifier = {
+				military_spending_factor = -0.25
+				experience_gain_army_factor = -0.5
+				experience_gain_navy_factor = -0.5
+				experience_gain_air_factor = -0.5
+				command_power_gain_mult = -0.5
+				army_org_Factor = -0.25
+			}
+			ai_will_do = {
+				factor = 0
+			}
+		}
+	}
+	KRG_military = {
+		law = yes
+		
+		KRG_unprofessional_military = {
+			level = 5
+			available = {
+				always = yes
+			}
+			removal_cost = -1
+			level = 5
+			cost = 150
+			picture = military_unprofessional
+			modifier = {
+				military_spending_factor = -0.5
+				army_org_Factor = -0.15
+			}
+		}
+		KRG_semi_professional_military = {
+			level = 4
+			available = {
+				always = yes
+			}
+			removal_cost = -1
+			cost = 150
+			level = 4
+			picture = military_semiprofessional
+			modifier = {
+				military_spending_factor = -0.25
+				army_org_Factor = -0.075
+			}
+		}
+		KRG_professional_military = {
+			level = 3
+			default = yes
+			available = {
+				always = yes
+			}
+			removal_cost = -1
+			level = 3
+			cost = 150
+			picture = military_professional
+			modifier = {
+			}
+		}
+		KRG_semi_elite_military = {
+			level = 2
+			available = {
+				always = yes
+			}
+			removal_cost = -1
+			level = 2
+			cost = 150
+			picture = military_semielite
+			modifier = {
+				military_spending_factor = 0.25
+				army_org_Factor = 0.075
+			}
+		}
+		KRG_elite_military = {
+			level = 1
+			available = {
+				always = yes
+			}
+			level = 1
+			removal_cost = -1
+			cost = 150
+			picture = military_elite
+			modifier = {
+				military_spending_factor = 0.5
+				army_org_Factor = 0.15
+			}
+		}
+	}
+	KRG_immigration = {
+		law = yes
+		
+		KRG_immigration_closed = {
+			level = 6
+			available = {
+				always = yes
+			}
+			removal_cost = -1
+			cost = 200
+			picture = immigration_closed
+			modifier = {
+				MONTHLY_POPULATION = -0.3
+				stability_factor = 0.1
+			}
+		}
+		KRG_immigration_heavy = {
+			level = 5
+			available = {
+				always = yes
+			}
+			removal_cost = -1
+			cost = 200
+			picture = immigration_heavy
+			modifier = {
+				MONTHLY_POPULATION = -0.15
+				stability_factor = 0.05
+			}
+		}
+		KRG_immigration_merit_based = {
+			level = 4
+			available = {
+				always = yes
+			}
+			removal_cost = -1
+			cost = 200
+			picture = immigration_merit_based
+			modifier = {
+				production_factory_efficiency_gain_factor = 0.05
+				production_factory_max_efficiency_factor = 0.05
+				research_speed_factor = 0.05
+			}
+		}
+		KRG_immigration_quota_based = {
+			level = 3
+			available = {
+				always = yes
+			}
+			default = yes
+			removal_cost = -1
+			cost = 200
+			picture = immigration_quota_based
+			modifier = {
+				MONTHLY_POPULATION = 0.1
+			}
+		}
+		KRG_immigration_light = {
+			level = 2
+			available = {
+				always = yes
+			}
+			removal_cost = -1
+			cost = 200
+			picture = immigration_light
+			modifier = {
+				MONTHLY_POPULATION = 0.2
+				stability_factor = -0.05
+			}
+		}
+		KRG_immigration_open = {
+			level = 1
+			available = {
+				always = yes
+			}
+			removal_cost = -1
+			cost = 200
+			picture = immigration_open
+			modifier = {
+				MONTHLY_POPULATION = 0.4
+				stability_factor = -0.1
+			}
+		}
+	}
+	econ_taxation = {
+		law = yes
+		
+		econ_minimal_taxation = {
+			available = {
+				hidden_trigger = { always = no } 
+				   custom_trigger_tooltip = {
+						tooltip = economy_law_available
+						always = no
+				}
+			}
+
+			removal_cost = -1
+
+			cost = 0
+
+			picture = taxation_minimal
+
+			cancel_if_invalid = no
+
+			modifier = {
+				consumer_goods_expected_value = 0.2
+				political_power_gain = -0.2
+				stability_factor = 0.1
+				production_speed_buildings_factor = 0.1
+			}
+		}
+		econ_low_taxation = {
+			available = {
+				hidden_trigger = { always = no } 
+				   custom_trigger_tooltip = {
+						tooltip = economy_law_available
+						always = no
+				}
+			}
+
+			removal_cost = -1
+
+			cost = 0
+
+			picture = taxation_low
+
+			cancel_if_invalid = no
+
+			modifier = {
+				consumer_goods_expected_value = 0.15
+				political_power_gain = -0.15
+				stability_factor = 0.075
+				production_speed_buildings_factor = 0.075
+			}
+		}
+		econ_moderate_taxation = {
+			available = {
+				hidden_trigger = { always = no } 
+				   custom_trigger_tooltip = {
+						tooltip = economy_law_available
+						always = no
+				}
+			}
+			default = yes
+			removal_cost = -1
+
+			cost = 0
+
+			picture = taxation_moderate
+
+			cancel_if_invalid = no
+
+			modifier = {
+				consumer_goods_expected_value = 0.1
+				political_power_gain = -0.1
+				stability_factor = 0.05
+				production_speed_buildings_factor = 0.05
+			}
+		}
+		econ_high_taxation = {
+			available = {
+				hidden_trigger = { always = no } 
+				   custom_trigger_tooltip = {
+						tooltip = economy_law_available
+						always = no
+				}
+			}
+
+			removal_cost = -1
+
+			cost = 0
+
+			picture = taxation_high
+
+			cancel_if_invalid = no
+
+			modifier = {
+				consumer_goods_expected_value = 0.05
+				political_power_gain = -0.05
+				stability_factor = 0.025
+				production_speed_buildings_factor = 0.025
+			}
+		}
+		econ_extreme_taxation = {
+			available = {
+				hidden_trigger = { always = no } 
+				   custom_trigger_tooltip = {
+						tooltip = economy_law_available
+						always = no
+				}
+			}
+
+			removal_cost = -1
+
+			cost = 0
+
+			picture = taxation_extreme
+
+			cancel_if_invalid = no
+
+			modifier = {
+				consumer_goods_expected_value = -0.05
+				political_power_gain = 0.05
+				stability_factor = -0.025
+				production_speed_buildings_factor = -0.025
+			}
+		}
+	}
+	econ_business_spending ={
+		law = yes
+		
+		econ_no_business_spending = {
+			available = {
+				hidden_trigger = { always = no } 
+				   custom_trigger_tooltip = {
+						tooltip = economy_law_available
+						always = no
+				}
+			}
+			
+			removal_cost = -1
+
+			cost = 0
+
+			picture = business_none
+
+			cancel_if_invalid = no
+
+			modifier = {
+				consumer_goods_expected_value = 0.0
+				industrial_capacity_factory = -0.2
+				industrial_capacity_dockyard = -0.2
+				production_speed_buildings_factor = -0.2
+			}
+		}
+		econ_small_business_spending = {
+			available = {
+				hidden_trigger = { always = no } 
+				   custom_trigger_tooltip = {
+						tooltip = economy_law_available
+						always = no
+				}
+			}
+			default = yes
+			removal_cost = -1
+
+			cost = 0
+
+			picture = business_low
+
+			cancel_if_invalid = no
+
+			modifier = {
+				consumer_goods_expected_value = 0.025
+				industrial_capacity_factory = -0.10
+				industrial_capacity_dockyard = -0.10
+				production_speed_buildings_factor = -0.05
+			}
+		}
+		econ_medium_business_spending = {
+			available = {
+				hidden_trigger = { always = no } 
+				   custom_trigger_tooltip = {
+						tooltip = economy_law_available
+						always = no
+				}
+			}
+		
+			
+
+			removal_cost = -1
+
+			cost = 0
+
+			picture = business_medium
+
+			cancel_if_invalid = no
+
+			modifier = {
+				consumer_goods_expected_value = 0.05
+				industrial_capacity_factory = -0.05
+				industrial_capacity_dockyard = -0.05
+			
+			}
+		}
+		econ_large_business_spending = {
+			available = {
+				hidden_trigger = { always = no } 
+				   custom_trigger_tooltip = {
+						tooltip = economy_law_available
+						always = no
+				}
+			}
+
+			removal_cost = -1
+
+			cost = 0
+
+			picture = business_large
+
+			cancel_if_invalid = no
+
+			modifier = {
+				consumer_goods_expected_value = 0.075
+				production_speed_buildings_factor = 0.05
+			}
+		}
+		econ_massive_business_spending = {
+			available = {
+				hidden_trigger = { always = no } 
+				   custom_trigger_tooltip = {
+						tooltip = economy_law_available
+						always = no
+				}
+			}
+
+			removal_cost = -1
+
+			cost = 0
+
+			picture = business_massive
+
+			cancel_if_invalid = no
+
+			modifier = {
+				consumer_goods_expected_value = 0.1
+				industrial_capacity_factory = 0.05
+				industrial_capacity_dockyard = 0.05
+				production_speed_buildings_factor = 0.10
+			}
+		}
+	}
+	econ_edu_spending = {
+		law = yes
+		
+		econ_tiny_edu_spending = {
+			available = {
+				hidden_trigger = { always = no } 
+				   custom_trigger_tooltip = {
+						tooltip = economy_law_available
+						always = no
+				}
+			}
+
+			removal_cost = -1
+
+			cost = 0
+
+			picture = education_none
+
+			cancel_if_invalid = no
+
+			modifier = {
+				consumer_goods_expected_value = 0.0
+				stability_factor = -0.05
+				research_speed_factor = -0.04
+				production_speed_buildings_factor = -0.2
+			}
+		}
+		econ_small_edu_spending = {
+			available = {
+				hidden_trigger = { always = no } 
+				   custom_trigger_tooltip = {
+						tooltip = economy_law_available
+						always = no
+				}
+			}
+			default = yes
+			removal_cost = -1
+
+			cost = 0
+
+			picture = education_basic
+
+			cancel_if_invalid = no
+
+			modifier = {
+				consumer_goods_expected_value = 0.025
+				stability_factor = -0.025
+				research_speed_factor = -0.02
+				production_speed_buildings_factor = -0.1
+			}
+		}
+		econ_medium_edu_spending = {
+			available = {
+				hidden_trigger = { always = no } 
+				   custom_trigger_tooltip = {
+						tooltip = economy_law_available
+						always = no
+				}
+			}
+			
+			
+
+			removal_cost = -1
+
+			cost = 0
+
+			picture = education_k8
+
+			cancel_if_invalid = no
+
+			modifier = {
+				consumer_goods_expected_value = 0.05
+				stability_factor = 0
+				research_speed_factor = 0
+				production_speed_buildings_factor = 0
+			}
+		}
+		econ_large_edu_spending = {
+			available = {
+				hidden_trigger = { always = no } 
+				   custom_trigger_tooltip = {
+						tooltip = economy_law_available
+						always = no
+				}
+			}
+
+			removal_cost = -1
+
+			cost = 0
+
+			picture = education_k12
+
+			cancel_if_invalid = no
+
+			modifier = {
+				consumer_goods_expected_value = 0.075
+				stability_factor = 0.025
+				research_speed_factor = 0.04
+				production_speed_buildings_factor = 0.05
+			}
+		}
+		econ_massive_edu_spending = {
+			available = {
+				hidden_trigger = { always = no } 
+				   custom_trigger_tooltip = {
+						tooltip = economy_law_available
+						always = no
+				}
+			}
+
+			removal_cost = -1
+
+			cost = 0
+
+			picture = education_publicuni
+
+			cancel_if_invalid = no
+
+			modifier = {
+				consumer_goods_expected_value = 0.1
+				stability_factor = 0.05
+				research_speed_factor = 0.08
+				production_speed_buildings_factor = 0.1
+			}
+		}
+	}
+	econ_healthcare = {
+		law = yes
+		
+		econ_tiny_hc_spending = {
+			available = {
+				hidden_trigger = { always = no } 
+				   custom_trigger_tooltip = {
+						tooltip = economy_law_available
+						always = no
+				}
+			}
+
+			removal_cost = -1
+
+			cost = 0
+
+			picture = healthcare_minimal
+
+			cancel_if_invalid = no
+
+			modifier = {
+				political_power_gain = -0.1
+				stability_factor = -0.05
+				MONTHLY_POPULATION = -0.30
+				consumer_goods_expected_value = 0.0
+			}
+		}
+		econ_small_hc_spending = {
+			available = {
+				hidden_trigger = { always = no } 
+				   custom_trigger_tooltip = {
+						tooltip = economy_law_available
+						always = no
+				}
+			}
+			default = yes
+
+			removal_cost = -1
+
+			cost = 0
+
+			picture = healthcare_trinket
+
+			cancel_if_invalid = no
+
+			modifier = {
+				political_power_gain = -0.05
+				stability_factor = -0.025
+				MONTHLY_POPULATION = -0.15
+				consumer_goods_expected_value = 0.025
+			}
+		}
+		econ_medium_hc_spending = {
+			available = {
+				hidden_trigger = { always = no } 
+				   custom_trigger_tooltip = {
+						tooltip = economy_law_available
+						always = no
+				}
+			}
+
+			removal_cost = -1
+
+			cost = 0
+
+			picture = healthcare_needbased
+
+			cancel_if_invalid = no
+
+			modifier = {
+				political_power_gain = 0
+				stability_factor = 0
+				MONTHLY_POPULATION = 0.025
+				consumer_goods_expected_value = 0.05
+			}
+		}
+		econ_large_hc_spending = {
+			available = {
+				hidden_trigger = { always = no } 
+				   custom_trigger_tooltip = {
+						tooltip = economy_law_available
+						always = no
+				}
+			}
+			removal_cost = -1
+
+			cost = 0
+
+			picture = healthcare_publicoption
+
+			cancel_if_invalid = no
+
+			modifier = {
+				political_power_gain = 0.05
+				stability_factor = 0.025
+				MONTHLY_POPULATION = 0.1
+				consumer_goods_expected_value = 0.075
+			}
+		}
+		econ_massive_hc_spending = {
+			available = {
+				hidden_trigger = { always = no } 
+				   custom_trigger_tooltip = {
+						tooltip = economy_law_available
+						always = no
+				}
+			}
+
+			removal_cost = -1
+
+			cost = 0
+
+			picture = healthcare_universal
+
+			cancel_if_invalid = no
+
+			modifier = {
+				political_power_gain = 0.1
+				stability_factor = 0.05
+				MONTHLY_POPULATION = 0.2
+				consumer_goods_expected_value = 0.1
+			}
+		}
+	}
+	econ_inf_spending = {
+		law = yes
+		
+		econ_tiny_inf_spending = {
+			available = {
+				hidden_trigger = { always = no } 
+				   custom_trigger_tooltip = {
+						tooltip = economy_law_available
+						always = no
+				}
+			}
+
+			removal_cost = -1
+
+			cost = 0
+
+			picture = infrastructure_minimal
+
+			cancel_if_invalid = no
+
+			modifier = {
+				consumer_goods_expected_value = 0.0
+				production_speed_buildings_factor = -0.1
+				global_building_slots_factor = -0.1
+				production_factory_max_efficiency_factor = -0.1
+			}
+		}
+		econ_small_inf_spending = {
+			available = {
+				hidden_trigger = { always = no } 
+				   custom_trigger_tooltip = {
+						tooltip = economy_law_available
+						always = no
+				}
+			}
+			default = yes
+
+			removal_cost = -1
+
+			cost = 0
+
+			picture = infrastructure_low
+
+			cancel_if_invalid = no
+
+			modifier = {
+				consumer_goods_expected_value = 0.025
+				production_speed_buildings_factor = -0.05
+				global_building_slots_factor = -0.05
+				production_factory_max_efficiency_factor = -0.05
+			}
+		}
+		econ_medium_inf_spending = {
+			available = {
+				hidden_trigger = { always = no } 
+				   custom_trigger_tooltip = {
+						tooltip = economy_law_available
+						always = no
+				}
+			}
+
+			removal_cost = -1
+
+			cost = 0
+
+			picture = infrastructure_medium
+
+			cancel_if_invalid = no
+
+			modifier = {
+				consumer_goods_expected_value = 0.05
+				production_factory_max_efficiency_factor = 0.05
+			}
+		}
+		econ_large_inf_spending = {
+			available = {
+				hidden_trigger = { always = no } 
+				   custom_trigger_tooltip = {
+						tooltip = economy_law_available
+						always = no
+				}
+			}
+
+			removal_cost = -1
+
+			cost = 0
+
+			picture = infrastructure_large
+
+			cancel_if_invalid = no
+
+			modifier = {
+				consumer_goods_expected_value = 0.075
+				production_speed_buildings_factor = 0.05
+				global_building_slots_factor = 0.05
+				production_factory_max_efficiency_factor = 0.05
+			}
+		}
+		econ_massive_inf_spending = {
+			available = {
+				hidden_trigger = { always = no } 
+				   custom_trigger_tooltip = {
+						tooltip = economy_law_available
+						always = no
+				}
+			}
+
+			removal_cost = -1
+
+			cost = 0
+
+			picture = infrastructure_huge
+
+			cancel_if_invalid = no
+
+			modifier = {
+				consumer_goods_expected_value = 0.1
+				production_speed_buildings_factor = 0.1
+				global_building_slots_factor = 0.1
+				production_factory_max_efficiency_factor = 0.1
+			}
+		}
+	}
+	econ_service_spending = {
+		law = yes
+		
+		econ_tiny_service_spending = {
+			available = {
+				hidden_trigger = { always = no } 
+				   custom_trigger_tooltip = {
+						tooltip = economy_law_available
+						always = no
+				}
+			}
+
+			removal_cost = -1
+
+			cost = 0
+
+			picture = welfare_minimum
+
+			cancel_if_invalid = no
+
+			modifier = {
+				consumer_goods_expected_value = 0.0
+				production_speed_buildings_factor = -0.05
+				war_support_factor = -0.10
+				stability_factor = 0
+				industrial_capacity_factory = -0.10
+			}
+		}
+		econ_small_service_spending = {
+			available = {
+				hidden_trigger = { always = no } 
+				   custom_trigger_tooltip = {
+						tooltip = economy_law_available
+						always = no
+				}
+			}
+			default = yes
+
+			removal_cost = -1
+
+			cost = 0
+
+			picture = welfare_low
+
+			cancel_if_invalid = no
+
+			modifier = {
+				consumer_goods_expected_value = 0.025
+				war_support_factor = -0.05
+				stability_factor = 0.025
+				industrial_capacity_factory = -0.05
+			}
+		}
+		econ_medium_service_spending = {
+			available = {
+				hidden_trigger = { always = no } 
+				   custom_trigger_tooltip = {
+						tooltip = economy_law_available
+						always = no
+				}
+			}
+
+			removal_cost = -1
+
+			cost = 0
+
+			picture = welfare_medium
+
+			cancel_if_invalid = no
+
+			modifier = {
+				consumer_goods_expected_value = 0.05
+				war_support_factor = 0.05
+				stability_factor = 0.05
+			}
+
+		}
+		econ_large_service_spending = {
+			available = {
+				hidden_trigger = { always = no } 
+				   custom_trigger_tooltip = {
+						tooltip = economy_law_available
+						always = no
+				}
+			}
+
+			removal_cost = -1
+
+			cost = 0
+
+			picture = welfare_large
+
+			cancel_if_invalid = no
+
+			modifier = {
+				consumer_goods_expected_value = 0.075
+				war_support_factor = 0.05
+				stability_factor = 0.075
+				industrial_capacity_factory = 0.05
+			}
+		}
+		econ_massive_service_spending = {
+			available = {
+				hidden_trigger = { always = no } 
+				   custom_trigger_tooltip = {
+						tooltip = economy_law_available
+						always = no
+				}
+			}
+
+			removal_cost = -1
+
+			cost = 0
+
+			picture = welfare_high
+
+			cancel_if_invalid = no
+
+			modifier = {
+				consumer_goods_expected_value = 0.1
+				war_support_factor = 0.1
+				stability_factor = 0.1
+				industrial_capacity_factory = 0.1
+			}
+		}
+	}
+	###Fuel Mechanic
+	fuel_slot = {
+		law = yes
+		use_list_view = yes
+		KRG_coal_economy = {
+			on_add = {
+				log = "[GetDateText]: [Root.GetName]: add KRG_coal_economy"
+			}
+			on_add = {
+				calculate_fuel_needs = yes
+			}
+			allowed = {
+				always = yes
+			}
+			removal_cost = -1
+			modifier = {
+				daily_factory_fuel_need = 4
+				daily_pop_m_fuel_need = 0
+				fuel_shortage_pain_factor = 0.1
+			}
+		}
+		KRG_mixed_economy = {
+			on_add = {
+				log = "[GetDateText]: [Root.GetName]: add KRG_mixed_economy"
+			}
+			on_add = {
+				calculate_fuel_needs = yes
+			}
+			allowed = {
+				always = yes
+			}
+			default = yes
+			removal_cost = -1
+			modifier = {
+				daily_factory_fuel_need = 16
+				daily_pop_m_fuel_need = 25
+				global_building_slots_factor = 0.05
+				industrial_capacity_dockyard = 0.05
+				industrial_capacity_factory = 0.05
+				production_speed_buildings_factor = 0.05
+				supply_node_range = 0.05
+				production_factory_efficiency_gain_factor = 0.1
+				production_factory_max_efficiency_factor = 0.05
+				fuel_shortage_pain_factor = 0.5
+			}
+		}
+		KRG_oil_economy = {
+			on_add = {
+				log = "[GetDateText]: [Root.GetName]: add KRG_oil_economy"
+			}
+			on_add = {
+				calculate_fuel_needs = yes
+			}
+			allowed = {
+				always = yes
+			}
+			removal_cost = -1
+			modifier = {
+				daily_factory_fuel_need = 24
+				daily_pop_m_fuel_need = 40
+				global_building_slots_factor = 0.1
+				industrial_capacity_dockyard = 0.15
+				industrial_capacity_factory = 0.15
+				production_speed_buildings_factor = 0.1
+				supply_node_range = 0.2
+				production_factory_efficiency_gain_factor = 0.15
+				production_factory_max_efficiency_factor = 0.1
+				fuel_shortage_pain_factor = 1
+			}
+		}
+	}
+	### COMPANIES
+	materiel_manufacturer_ideas = {
+		generic_arms_company = {
+			on_add = {
+				log = "[GetDateText]: [Root.GetName]: add idea generic_arms_company"
+			}
+			allowed = {
+				ignore_generic_companies = no
+			}
+			traits = {
+				infantry_equipment_producer_offense_0
+			}
+			research_bonus = {
+				infantry_weapons = 0.1
+			}
+		}
+	}
+	tank_manufacturer_ideas = {
+		generic_tank_company = {
+			on_add = {
+				log = "[GetDateText]: [Root.GetName]: add idea generic_tank_company"
+			}
+			allowed = {
+				ignore_generic_companies = no
+			}
+			traits = {
+				small_tank_producer_offense_0
+			}
+			research_bonus = {
+				armor = 0.1
+			}
+		}
+		generic_artillery_company = {
+			on_add = {
+				log = "[GetDateText]: [Root.GetName]: add idea generic_artillery_company"
+			}
+			allowed = {
+				ignore_generic_companies = no
+			}
+			traits = {
+				artillery_producer_offense_0
+			}
+			research_bonus = {
+				artillery = 0.1
+			}
+		}
+		generic_car_company = {
+			on_add = {
+				log = "[GetDateText]: [Root.GetName]: add idea generic_car_company"
+			}
+			allowed = {
+				ignore_generic_companies = no
+			}
+			traits = {
+				motorised_equipment_producer_offense_0
+			}
+			research_bonus = {
+				motorized_equipment = 0.1
+			}
+		}
+	}
+	air_naval_manufacturer_ideas = {
+		#Generic Naval Company
+		generic_naval_manufacturer = {
+			#designer = yes
+			allowed = {
+				ignore_generic_companies = no
+			}
+			removal_cost = -1
+			cost = 150
+			picture = generic_naval_manufacturer_1
+			traits = {
+				small_ship_producer_offense_0
+			}
+		}
+		#Generic Air Company
+		generic_light_aircraft_manufacturer = {
+			picture = generic_air_manufacturer_1
+			allowed = {
+				ignore_generic_companies = no
+			}
+			cost = 150
+			removal_cost = 10
+			research_bonus = {
+				air_equipment = 0.15
+			}
+			traits = {
+				fighter_producer_offense_0
+			}
+		}
+		generic_medium_aircraft_manufacturer = {
+			picture = generic_air_manufacturer_3
+			allowed = {
+				ignore_generic_companies = no
+			}
+			cost = 150
+			removal_cost = 10
+			research_bonus = {
+				air_equipment = 0.15
+			}
+			traits = {
+				fighter_producer_mass_0
+			}
+		}
+		generic_heavy_aircraft_manufacturer = {
+			picture = generic_air_manufacturer_2
+			allowed = {
+				ignore_generic_companies = no
+			}
+			cost = 150
+			removal_cost = 10
+			research_bonus = {
+				air_equipment = 0.15
+			}
+			traits = {
+				fighter_producer_defense_0
+			}
+		}
+		generic_naval_aircraft_manufacturer = {
+			picture = generic_naval_manufacturer_2
+			allowed = {
+				ignore_generic_companies = no
+			}
+			cost = 150
+			removal_cost = 10
+			research_bonus = {
+				air_equipment = 0.15
+			}
+			traits = {
+				nav_cas_producer_offense_0
+			}
+		}
+	}
+	industrial_concern = {
+		generic_industrial_concern = {
+			picture = generic_industrial_concern_1
+			allowed = {
+				ignore_generic_companies = no
+			}
+			cost = 150
+			removal_cost = 10
+			research_bonus = {
+				industry_tech = 0.15
+			}
+			traits = {
+				industrial_manufacturer
+			}
+		}
+		generic_electronics_concern = {
+			picture = generic_electronics_concern_1
+			allowed = {
+				ignore_generic_companies = no
+			}
+			cost = 150
+			removal_cost = 10
+			research_bonus = {
+				electronics_tech = 0.15
+			}
+			traits = {
+				electronics_manufacturer
+			}
+		}
+	}
+	### GENERALS
+	high_command = {
+		KRG_dummy_general = {
+			available = {
+				always = yes
+			}
+			removal_cost = -1
+			cost = 150
+			picture = blank_army
+			modifier = {
+			}
+		}
+	}
+	army_chief = {
+		KRG_dummy_general2 = {
+			available = {
+				always = yes
+			}
+			removal_cost = -1
+			cost = 150
+			picture = blank_army
+			modifier = {
+			}
+		}
+	}
+	navy_chief = {
+		KRG_dummy_general3 = {
+			available = {
+				always = yes
+			}
+			removal_cost = -1
+			cost = 150
+			picture = blank_army
+			modifier = {
+			}
+		}
+	}
+	air_chief = {
+		KRG_dummy_general4 = {
+			available = {
+				always = yes
+			}
+			removal_cost = -1
+			cost = 150
+			picture = blank_army
+			modifier = {
+			}
+		}
+	}
+	theorist = {
+		KRG_dummy_general5 = {
+			available = {
+				always = yes
+			}
+			removal_cost = -1
+			cost = 150
+			picture = blank_army
+			modifier = {
+			}
+		}
+	}
+	country = {
+		### Generic Focus Tree Ideas ###
+		generic_liberty_idea = {
+			on_add = {
+				log = "[GetDateText]: [Root.GetName]: add idea generic_liberty_idea"
+			}
+			picture = generic_democratic_drift_bonus
+			modifier = {
+				political_power_gain = 0.3
+			}
+		}
+		generic_militarism_focus = {
+			on_add = {
+				log = "[GetDateText]: [Root.GetName]: add idea generic_militarism_focus"
+			}
+			picture = generic_manpower_bonus
+			modifier = {
+				resistance_damage_to_garrison = -0.1
+			}
+		}
+		generic_military_youth_focus = {
+			on_add = {
+				log = "[GetDateText]: [Root.GetName]: add idea generic_military_youth_focus"
+			}
+			picture = generic_manpower_bonus
+			modifier = {
+				conscription = 0.02
+			}
+		}
+		generic_ideological_fanaticism_focus = {
+			on_add = {
+				log = "[GetDateText]: [Root.GetName]: add idea generic_ideological_fanaticism_focus"
+			}
+			picture = generic_pp_unity_bonus
+			modifier = {
+				army_core_attack_factor = 0.1
+				army_core_defence_factor = 0.1
+			}
+		}
+		generic_liberty_research_idea = {
+			on_add = {
+				log = "[GetDateText]: [Root.GetName]: add idea generic_liberty_research_idea"
+			}
+			picture = generic_research_bonus
+			modifier = {
+				research_speed_factor = 0.05
+			}
+		}
+		generic_welfare_idea = {
+			on_add = {
+				log = "[GetDateText]: [Root.GetName]: add idea generic_welfare_idea"
+			}
+			picture = generic_goods_red_bonus
+			modifier = {
+				consumer_goods_factor = -0.15
+			}
+		}
+		##Vanilla
+		received_attache = {
+			allowed = {
+				always = no
+			}
+			allowed_civil_war = {
+				always = yes
+			}
+			removal_cost = -1
+			modifier = {
+				army_org_factor = 0.02
+				planning_speed = 0.1
+			}
+		}
+		draft_dodging = {
+			allowed = {
+				always = no
+			}
+			removal_cost = -1
+			allowed_civil_war = {
+				always = yes
+			}
+			picture = generic_manpower_bonus
+			modifier = {
+				conscription_factor = -0.2
+			}
+		}
+		draft_dodging_2 = {
+			allowed = {
+				always = no
+			}
+			removal_cost = -1
+			allowed_civil_war = {
+				always = yes
+			}
+			picture = generic_manpower_bonus
+			modifier = {
+				conscription_factor = -0.3
+			}
+		}
+		draft_dodging_3 = {
+			allowed = {
+				always = no
+			}
+			removal_cost = -1
+			allowed_civil_war = {
+				always = yes
+			}
+			picture = generic_manpower_bonus
+			modifier = {
+				conscription_factor = -0.4
+			}
+		}
+		strikes_1 = {
+			allowed = {
+				always = no
+			}
+			removal_cost = -1
+			allowed_civil_war = {
+				always = yes
+			}
+			picture = generic_production_bonus
+			modifier = {
+				consumer_goods_factor = 0.35
+				local_resources_factor = -0.2
+				industrial_capacity_factory = -0.2
+				industrial_capacity_dockyard = -0.2
+			}
+		}
+		strikes_2 = {
+			allowed = {
+				always = no
+			}
+			removal_cost = -1
+			allowed_civil_war = {
+				always = yes
+			}
+			picture = generic_production_bonus
+			modifier = {
+				consumer_goods_factor = 0.5
+				local_resources_factor = -0.3
+				industrial_capacity_factory = -0.3
+				industrial_capacity_dockyard = -0.3
+			}
+		}
+		strikes_3 = {
+			allowed = {
+				always = no
+			}
+			removal_cost = -1
+			allowed_civil_war = {
+				always = yes
+			}
+			picture = generic_production_bonus
+			modifier = {
+				consumer_goods_factor = 0.75
+				local_resources_factor = -0.5
+				industrial_capacity_factory = -0.5
+				industrial_capacity_dockyard = -0.5
+			}
+		}
+		mutiny_1 = {
+			allowed = {
+				always = no
+			}
+			removal_cost = -1
+			allowed_civil_war = {
+				always = yes
+			}
+			picture = generic_army_problems
+			modifier = {
+				army_morale_factor = -0.2
+				training_time_factor = 0.2
+				army_attack_factor = -0.25
+				experience_gain_army = -0.1
+				army_org_factor = -0.1
+			}
+		}
+		mutiny_2 = {
+			allowed = {
+				always = no
+			}
+			removal_cost = -1
+			allowed_civil_war = {
+				always = yes
+			}
+			picture = generic_army_problems
+			modifier = {
+				army_morale_factor = -0.35
+				training_time_factor = 0.35
+				army_attack_factor = -0.5
+				experience_gain_army = -0.2
+				army_org_factor = -0.2
+			}
+		}
+		mutiny_3 = {
+			allowed = {
+				always = no
+			}
+			removal_cost = -1
+			allowed_civil_war = {
+				always = yes
+			}
+			picture = generic_army_problems
+			modifier = {
+				army_morale_factor = -0.5
+				training_time_factor = 0.5
+				army_attack_factor = -0.75
+				experience_gain_army = -0.3
+				army_org_factor = -0.5
+			}
+		}
+
+		WK3_reichspakt_volunteers = {
+			picture = advisors_germany
+
+			on_add = {
+				log = "[GetDateText]: [Root.GetName]: add idea WK3_reichspakt_volunteers"
+				add_relation_modifier = {
+					target = GER
+					modifier = volunteer_limit_plus_five
+				}
+				GER = { save_event_target_as = volunteer_target }
+				send_volunteers_to_TARGET = yes
+
+				add_relation_modifier = {
+					target = DNF
+					modifier = volunteer_limit_plus_three
+				}
+				DNF = { save_event_target_as = volunteer_target }
+				send_volunteers_to_TARGET = yes
+
+				add_relation_modifier = {
+					target = FRA
+					modifier = volunteer_limit_plus_two
+				}
+				FRA = { save_event_target_as = volunteer_target }
+				send_volunteers_to_TARGET = yes
+
+				add_relation_modifier = {
+					target = UKR
+					modifier = volunteer_limit_plus_two
+				}
+				UKR = { save_event_target_as = volunteer_target }
+				send_volunteers_to_TARGET = yes
+			}
+			on_remove = {
+				log = "[GetDateText]: [Root.GetName]: remove idea WK3_reichspakt_volunteers"
+				remove_relation_modifier = {
+					target = GER
+					modifier = volunteer_limit_plus_five
+				}
+				GER = { save_event_target_as = volunteer_target }
+				clear_volunteers_to_TARGET = yes
+
+				remove_relation_modifier = {
+					target = DNF
+					modifier = volunteer_limit_plus_three
+				}
+				DNF = { save_event_target_as = volunteer_target }
+				clear_volunteers_to_TARGET = yes
+
+				remove_relation_modifier = {
+					target = DNF
+					modifier = volunteer_limit_plus_three
+				}
+				DNF = { save_event_target_as = volunteer_target }
+				clear_volunteers_to_TARGET = yes
+			}
+			allowed = { always = no }
+			modifier = {
+				custom_modifier_tooltip = WK3_reichspakt_volunteers_Volunteers_GER_TT
+				custom_modifier_tooltip = WK3_reichspakt_volunteers_Volunteers_DNF_TT
+				custom_modifier_tooltip = WK3_reichspakt_volunteers_Volunteers_FRA_TT
+				custom_modifier_tooltip = WK3_reichspakt_volunteers_Volunteers_UKR_TT
+			}
+		}
+
+		WK3_accord_volunteers = {
+			picture = advisors_CAN2
+
+			on_add = {
+				log = "[GetDateText]: [Root.GetName]: add idea WK3_accord_volunteers"
+				add_relation_modifier = {
+					target = CAN
+					modifier = volunteer_limit_plus_two
+				}
+				CAN = { save_event_target_as = volunteer_target }
+				send_volunteers_to_TARGET = yes
+
+				add_relation_modifier = {
+					target = NFA
+					modifier = volunteer_limit_plus_two
+				}
+				NFA = { save_event_target_as = volunteer_target }
+				send_volunteers_to_TARGET = yes
+
+				add_relation_modifier = {
+					target = NEE
+					modifier = volunteer_limit_plus_one
+				}
+				NEE = { save_event_target_as = volunteer_target }
+				send_volunteers_to_TARGET = yes
+
+				add_relation_modifier = {
+					target = ENG
+					modifier = volunteer_limit_plus_one
+				}
+				ENG = { save_event_target_as = volunteer_target }
+				send_volunteers_to_TARGET = yes
+
+				add_relation_modifier = {
+					target = ITA
+					modifier = volunteer_limit_plus_one
+				}
+				ITA = { save_event_target_as = volunteer_target }
+				send_volunteers_to_TARGET = yes
+
+				add_relation_modifier = {
+					target = AST
+					modifier = volunteer_limit_plus_one
+				}
+				AST = { save_event_target_as = volunteer_target }
+				send_volunteers_to_TARGET = yes
+			}
+			on_remove = {
+				log = "[GetDateText]: [Root.GetName]: remove idea WK3_accord_volunteers"
+				remove_relation_modifier = {
+					target = CAN
+					modifier = volunteer_limit_plus_two
+				}
+				CAN = { save_event_target_as = volunteer_target }
+				clear_volunteers_to_TARGET = yes
+
+				remove_relation_modifier = {
+					target = NFA
+					modifier = volunteer_limit_plus_two
+				}
+				NFA = { save_event_target_as = volunteer_target }
+				clear_volunteers_to_TARGET = yes
+
+				remove_relation_modifier = {
+					target = NEE
+					modifier = volunteer_limit_plus_one
+				}
+				NEE = { save_event_target_as = volunteer_target }
+				clear_volunteers_to_TARGET = yes
+
+				remove_relation_modifier = {
+					target = ENG
+					modifier = volunteer_limit_plus_one
+				}
+				ENG = { save_event_target_as = volunteer_target }
+				clear_volunteers_to_TARGET = yes
+
+				remove_relation_modifier = {
+					target = ITA
+					modifier = volunteer_limit_plus_one
+				}
+				ITA = { save_event_target_as = volunteer_target }
+				clear_volunteers_to_TARGET = yes
+
+				remove_relation_modifier = {
+					target = AST
+					modifier = volunteer_limit_plus_one
+				}
+				AST = { save_event_target_as = volunteer_target }
+				clear_volunteers_to_TARGET = yes
+			}
+			allowed = { always = no }
+			modifier = {
+				custom_modifier_tooltip = WK3_accord_volunteers_Volunteers_CAN_TT
+				custom_modifier_tooltip = WK3_accord_volunteers_Volunteers_NFA_TT
+				custom_modifier_tooltip = WK3_accord_volunteers_Volunteers_NEE_TT
+				custom_modifier_tooltip = WK3_accord_volunteers_Volunteers_ENG_TT
+				custom_modifier_tooltip = WK3_accord_volunteers_Volunteers_ITA_TT
+				custom_modifier_tooltip = WK3_accord_volunteers_Volunteers_AST_TT
+			}
+		}
+
+		ACCORD_acw_volunteers_ideas = {
+			picture = ACW_entente_help
+
+			on_add = {
+				add_relation_modifier = {
+					target = CAL
+					modifier = volunteer_limit_plus_one
+				}
+				CAL = { save_event_target_as = volunteer_target }
+				send_volunteers_to_TARGET = yes
+
+				add_relation_modifier = {
+					target = NEE
+					modifier = volunteer_limit_plus_one
+				}
+				NEE = { save_event_target_as = volunteer_target }
+				send_volunteers_to_TARGET = yes
+
+				add_relation_modifier = {
+					target = GLG
+					modifier = volunteer_limit_plus_one
+				}
+				GLG = { save_event_target_as = volunteer_target }
+				send_volunteers_to_TARGET = yes
+			}
+
+			on_remove = {
+				remove_relation_modifier = {
+					target = CAL
+					modifier = volunteer_limit_plus_one
+				}
+				CAL = { save_event_target_as = volunteer_target }
+				clear_volunteers_to_TARGET = yes
+
+				remove_relation_modifier = {
+					target = NEE
+					modifier = volunteer_limit_plus_one
+				}
+				NEE = { save_event_target_as = volunteer_target }
+				clear_volunteers_to_TARGET = yes
+
+				remove_relation_modifier = {
+					target = GLG
+					modifier = volunteer_limit_plus_one
+				}
+				GLG = { save_event_target_as = volunteer_target }
+				clear_volunteers_to_TARGET = yes
+			}
+
+			allowed = {
+				has_global_flag = ACW_ongoing
+			}
+
+			modifier = {
+				custom_modifier_tooltip = ACW_accord_volunteers_Volunteers_CAL_TT
+				custom_modifier_tooltip = ACW_accord_volunteers_Volunteers_NEE_TT
+				custom_modifier_tooltip = ACW_accord_volunteers_Volunteers_GLG_TT
+			}
+
+		}
+
+		RP_acw_volunteers_ideas = {
+			picture = ACW_reichspakt_help
+
+			on_add = {
+				add_relation_modifier = {
+					target = TEX
+					modifier = volunteer_limit_plus_two
+				}
+				TEX = { save_event_target_as = volunteer_target }
+				send_volunteers_to_TARGET = yes
+			}
+
+			on_remove = {
+				remove_relation_modifier = {
+					target = TEX
+					modifier = volunteer_limit_plus_two
+				}
+				TEX = { save_event_target_as = volunteer_target }
+				clear_volunteers_to_TARGET = yes
+			}
+
+			allowed = {
+				has_global_flag = ACW_ongoing
+			}
+
+			modifier = {
+				custom_modifier_tooltip = ACW_rp_volunteers_Volunteers_TEX_TT
+			}
+		}
+
+		Accord_ccw_volunteers_ideas = {
+			on_add = {
+				add_relation_modifier = {
+					target = CHI
+					modifier = volunteer_limit_plus_one
+				}
+				CHI = { save_event_target_as = volunteer_target }
+				send_volunteers_to_TARGET = yes
+			}
+
+			on_remove = {
+				remove_relation_modifier = {
+					target = CHI
+					modifier = volunteer_limit_plus_one
+				}
+				CHI = { save_event_target_as = volunteer_target }
+				clear_volunteers_to_TARGET = yes
+			}
+
+			allowed = {
+				has_global_flag = CCW_ongoing
+			}
+
+			modifier = {
+				custom_modifier_tooltip = CCW_accord_volunteers_Volunteers_CHI_TT
+			}	
+		}
+
+		severe_fuel_shortage = {
+			modifier = {	
+				production_speed_buildings_factor = -0.50 
+			}
+		}
+	}
+	hidden_ideas = {
+		continuous_naval_production = {
+			on_add = {
+				log = "[GetDateText]: [Root.GetName]: add idea continuous_naval_production"
+			}
+			allowed = {
+				always = no
+			}
+			allowed_civil_war = {
+				always = yes
+			}
+			removal_cost = -1
+			modifier = {
+				industrial_capacity_dockyard = 0.2
+			}
+		}
+		continuous_air_production = {
+			on_add = {
+				log = "[GetDateText]: [Root.GetName]: add idea continuous_air_production"
+			}
+			allowed = {
+				always = no
+			}
+			allowed_civil_war = {
+				always = yes
+			}
+			removal_cost = -1
+			equipment_bonus = {
+				# small_plane_airframe = {
+				# 	instant = yes
+				# 	build_cost_ic = -0.10
+				# }
+				# cv_small_plane_airframe = {
+				# 	instant = yes
+				# 	build_cost_ic = -0.10
+				# }
+				# small_plane_cas_airframe = {
+				# 	instant = yes
+				# 	build_cost_ic = -0.10
+				# }
+				# cv_small_plane_cas_airframe = {
+				# 	instant = yes
+				# 	build_cost_ic = -0.10
+				# }
+				# small_plane_naval_bomber_airframe = {
+				# 	instant = yes
+				# 	build_cost_ic = -0.10
+				# }
+				# cv_small_plane_naval_bomber_airframe = {
+				# 	instant = yes
+				# 	build_cost_ic = -0.10
+				# }
+				# medium_plane_airframe = {
+				# 	instant = yes
+				# 	build_cost_ic = -0.10
+				# }
+				# medium_plane_fighter_airframe = {
+				# 	instant = yes
+				# 	build_cost_ic = -0.10
+				# }
+				# medium_plane_scout_plane_airframe = {
+				# 	instant = yes
+				# 	build_cost_ic = -0.10
+				# }
+				# large_plane_airframe = {
+				# 	instant = yes
+				# 	build_cost_ic = -0.10
+				# }
+				# large_plane_maritime_patrol_plane_airframe = {
+				# 	instant = yes
+				# 	build_cost_ic = -0.10
+				# }
+				cv_fighter_equipment = {
+					instant = yes
+					build_cost_ic = -0.1
+				}
+				jet_fighter_equipment = {
+					instant = yes
+					build_cost_ic = -0.1
+				}
+				cv_CAS_equipment = {
+					instant = yes
+					build_cost_ic = -0.1
+				}
+				CAS_equipment = {
+					instant = yes
+					build_cost_ic = -0.1
+				}
+				tac_bomber_equipment = {
+					instant = yes
+					build_cost_ic = -0.1
+				}
+				heavy_fighter_equipment = {
+					instant = yes
+					build_cost_ic = -0.1
+				}
+				strat_bomber_equipment = {
+					instant = yes
+					build_cost_ic = -0.1
+				}
+				jet_strat_bomber_equipment = {
+					instant = yes
+					build_cost_ic = -0.1
+				}
+				transport_plane_equipment = {
+					instant = yes
+					build_cost_ic = -0.1
+				}
+				guided_missile_equipment = {
+					instant = yes
+					build_cost_ic = -0.1
+				}
+				scout_plane_equipment = {
+					instant = yes
+					build_cost_ic = -0.1
+				}
+			}
+		}
+		ready_to_surrender = {
+			#workaround to force-surrender tags in specific circumstances
+			on_add = {
+				log = "[GetDateText]: [Root.GetName]: add idea ready_to_surrender"
+			}
+			available = {
+				has_war = yes
+			}
+			modifier = {
+				forced_surrender_limit = -1
+			}
+		}
+	}
+}

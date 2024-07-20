@@ -1,0 +1,1198 @@
+add_namespace = krg_fng
+add_namespace = krg_fng_news
+
+country_event = {
+	id = krg_fng.0
+	hidden = yes
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_fng.0"
+	}
+	is_triggered_only = yes
+	option = {
+		
+	}
+}
+
+country_event = {
+	# Two Suns, One Sky
+	id = krg_fng.1
+	title = krg_fng.1.t
+	desc = krg_fng.1.d
+	picture = GFX_ce_zhangzuolindies
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_fng.1"
+	}
+	is_triggered_only = yes
+	option = {
+		name = krg_fng.1.a
+		custom_effect_tooltip = FNG_struggle_start_tooltip
+		add_political_power = -20
+		set_power_balance = {
+			id = FNG_rivalry_bop
+			left_side = FNG_rivalry_bop_yang
+			right_side = FNG_rivalry_bop_zhang
+			set_value = 0
+		}
+		FNG = {
+			country_event = {
+				id = krg_fng.2
+				days = 5
+			}
+		}
+	}
+}
+
+country_event = {
+	# The Bickering Funeral Committee
+	id = krg_fng.2
+	title = krg_fng.2.t
+	desc = krg_fng.2.d
+	picture = GFX_ce_fng_funeral_committee
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_fng.2"
+	}
+	is_triggered_only = yes
+	option = {
+		### In Beijing
+		name = krg_fng.2.a
+		custom_effect_tooltip = FNG_zhang_gain_power_tooltip
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = 0.02
+		}
+		add_political_power = 150
+		FNG_zhang_power_up = yes
+		country_event = { id = krg_fng.3 days = 7 }
+
+		ai_chance = {
+			base = 65
+			modifier = {
+				has_game_rule = {
+					rule = FNG_POWER_STRUGGLE
+					option = FNG_ZHANG
+				}
+				factor = 1000
+			}
+		}
+	}
+	option = {
+		### In Fengtian
+		name = krg_fng.2.b
+		custom_effect_tooltip = FNG_yang_gain_power_tooltip
+		add_popularity = {
+			ideology = paternal_autocrat
+			popularity = 0.02
+		}
+		873 = {
+			set_compliance = 65
+			set_resistance = 5
+		}
+		606 = {
+			set_compliance = 65
+			set_resistance = 5
+		}
+		FNG_yang_power_up = yes
+		country_event = { id = krg_fng.3 days = 7 }
+
+		ai_chance = {
+			base = 35
+			modifier = {
+				has_game_rule = {
+					rule = FNG_POWER_STRUGGLE
+					option = FNG_YANG
+				}
+				factor = 1000
+			}
+		}
+	}
+}
+
+country_event = {
+	# Material vs Spirit
+	id = krg_fng.3
+	title = krg_fng.3.t
+	desc = krg_fng.3.d
+	picture = GFX_ce_fng_material_vs_spirit
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_fng.3"
+	}
+	is_triggered_only = yes
+	option = {
+		name = krg_fng.3.a
+		ai_chance = {
+			base = 45
+			modifier = {
+				has_game_rule = {
+					rule = FNG_POWER_STRUGGLE
+					option = FNG_ZHANG
+				}
+				factor = 1000
+			}
+		}
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = 0.02
+		}
+		army_experience = 40
+		custom_effect_tooltip = FNG_zhang_gain_power_tooltip
+		FNG_zhang_power_up = yes
+		country_event = { id = krg_fng.4 days = 7 }
+	}
+	option = {
+		name = krg_fng.3.b
+		ai_chance = {
+			base = 35
+			modifier = {
+				has_game_rule = {
+					rule = FNG_POWER_STRUGGLE
+					option = FNG_YANG
+				}
+				factor = 1000
+			}
+		}
+		custom_effect_tooltip = FNG_yang_gain_power_tooltip
+		add_popularity = {
+			ideology = paternal_autocrat
+			popularity = 0.02
+		}
+		add_to_variable = {
+			var = FNG_supply_consumption_factor_var
+			value = -0.05
+			tooltip = FNG_mil_supply_consumption_factor_tooltip
+		}
+		FNG_yang_power_up = yes
+		country_event = { id = krg_fng.4 days = 7 }
+	}
+	option = {
+		name = krg_fng.3.c
+		ai_chance = {
+			base = 20
+		}
+		add_war_support = 0.05
+	}
+}
+
+country_event = {
+	# Unhealthy Teutophilia
+	id = krg_fng.4
+	title = krg_fng.4.t
+	desc = krg_fng.4.d
+	picture = GFX_ce_fng_lu_zhengcao
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_fng.4"
+	}
+	is_triggered_only = yes
+	option = {
+		# Suppress it to appease Yang
+		name = krg_fng.4.a
+		ai_chance = {
+			base = 60
+			modifier = {
+				has_game_rule = {
+					rule = FNG_POWER_STRUGGLE
+					option = FNG_YANG
+				}
+				factor = 1000
+			}
+		}
+		custom_effect_tooltip = FNG_zhang_gain_power_tooltip
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = 0.02
+		}
+		FNG_yang_power_up = yes
+		add_manpower = 100000
+		country_event = { id = krg_fng.5 days = 7 }
+		set_temp_variable = { China_temp_CCW_tension_change = -1 }
+		China_change_CCW_tension = yes
+	}
+	option = {
+		# Leave them alone
+		name = krg_fng.4.b
+		ai_chance = {
+			base = 40
+		}
+		FNG_sheng_power_up = yes
+		add_popularity = {
+			ideology = national_populist
+			popularity = 0.04
+		}
+
+		set_temp_variable = { China_temp_CCW_tension_change = 1 }
+		China_change_CCW_tension = yes
+		
+		random_owned_state = {
+			limit = {
+				has_resistance = yes
+			}
+			add_resistance = -15
+		}
+		country_event = { id = krg_fng.5 days = 7 }
+	}
+}
+
+country_event = {
+	# An Abrupt Invitation
+	id = krg_fng.5
+	title = krg_fng.5.t
+	desc = krg_fng.5.d
+	picture = GFX_ce_fng_zhongnanhai
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_fng.5"
+	}
+	is_triggered_only = yes
+	option = {
+		# YCP stay away
+		name = krg_fng.5.a
+		add_political_power = 30
+		FNG = {
+			country_event = {
+				id = krg_fng.6
+				days = 2
+			}
+		}
+	}
+	option = {
+		# YCP works with Zhang
+		name = krg_fng.5.b
+		add_political_power = -30
+		FNG = {
+			country_event = {
+				id = krg_fng.7
+				days = 2
+			}
+		}
+	}
+}
+
+country_event = {
+	# A Fish on the Cutting Board
+	id = krg_fng.6
+	title = krg_fng.6.t
+	desc = krg_fng.6.d
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_fng.6"
+	}
+	is_triggered_only = yes
+	picture = GFX_ce_fng_national_assembly
+	option = {
+		# We don't have much of choice.
+		name = krg_fng.6.a
+		FNG_sheng_power_up = yes
+		add_popularity = {
+			ideology = national_populist
+			popularity = 0.02
+		}
+		set_country_flag = {
+			flag = ycp_with_sheng
+		}
+	}
+}
+
+country_event = {
+	# The opposition in Beijing was torn apart
+	id = krg_fng.7
+	title = krg_fng.7.t
+	desc = krg_fng.7.d
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_fng.7"
+	}
+	is_triggered_only = yes
+	picture = GFX_ce_fng_zeng_qi
+	option = {
+		### In Beijing
+		name = krg_fng.7.a
+		custom_effect_tooltip = FNG_parliament_with_zhang
+		custom_effect_tooltip = FNG_zhang_gain_power_tooltip
+
+		set_temp_variable = { China_temp_CCW_tension_change = 1 }
+		China_change_CCW_tension = yes
+
+		add_popularity = {
+			ideology = social_democrat
+			popularity = -0.05
+		}
+		add_popularity = {
+			ideology = social_liberal
+			popularity = -0.05
+		}
+		add_popularity = {
+			ideology = market_liberal
+			popularity = -0.05
+		}
+		add_popularity = {
+			ideology = social_conservative
+			popularity = -0.05
+		}
+		set_global_flag = FNG_parliament_with_zhang_flag
+		FNG_zhang_power_up = yes
+	}
+}
+
+country_event = {
+	# Urban Takeovers
+	id = krg_fng.11
+	title = krg_fng.11.t
+	desc = krg_fng.11.d
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_fng.11"
+	}
+	is_triggered_only = yes
+	picture = GFX_ce_fng_crackdown
+	option = {
+		name = krg_fng.11.a
+		597 = {
+			if = {
+				limit = {
+					has_active_resistance = yes
+				}
+				add_compliance = 5
+				add_resistance = 10
+				else = {
+					set_resistance = 10
+					set_compliance = 5
+				}
+			}
+		}
+		1103 = {
+			if = {
+				limit = {
+					has_active_resistance = yes
+				}
+				add_compliance = 5
+				add_resistance = 10
+				else = {
+					set_resistance = 10
+					set_compliance = 5
+				}
+			}
+		}
+		598 = {
+			if = {
+				limit = {
+					has_active_resistance = yes
+				}
+				add_compliance = 5
+				add_resistance = 10
+				else = {
+					set_resistance = 10
+					set_compliance = 5
+				}
+			}
+		}
+		add_political_power = -10
+	}
+}
+
+country_event = {
+	# Punish Hanjians
+	id = krg_fng.12
+	title = krg_fng.12.t
+	desc = krg_fng.12.d
+	picture = GFX_ce_fng_ycp_troops
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_fng.12"
+	}
+	is_triggered_only = yes
+	option = {
+		name = krg_fng.12.a
+		
+		custom_effect_tooltip = FNG_zhang_gain_power_tooltip
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = 0.05
+		}
+		#load_oob = FNG_temporary_zhang
+		add_equipment_to_stockpile = {
+			type = infantry_equipment_0
+			amount = 2000
+			producer = JAP
+		}
+		add_manpower = 50000
+		FNG_zhang_power_up = yes
+
+		ai_chance = {
+			base = 55
+			modifier = {
+				has_game_rule = {
+					rule = FNG_POWER_STRUGGLE
+					option = FNG_ZHANG
+				}
+				factor = 1000
+			}
+		}
+	}
+	option = {
+		name = krg_fng.12.b
+		custom_effect_tooltip = FNG_yang_gain_power_tooltip
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = 0.02
+		}
+		add_popularity = {
+			ideology = paternal_autocrat
+			popularity = 0.03
+		}
+		#load_oob = FNG_temporary_zhang
+		#load_oob = FNG_temporary_yang
+		FNG_yang_power_up = yes
+		set_temp_variable = { China_temp_CCW_tension_change = 1 }
+		China_change_CCW_tension = yes
+		ai_chance = {
+			base = 30
+			modifier = {
+				has_game_rule = {
+					rule = FNG_POWER_STRUGGLE
+					option = FNG_YANG
+				}
+				factor = 1000
+			}
+		}
+	}
+	option = {
+		name = krg_fng.12.c
+		ai_chance = {
+			base = 15
+		}
+		
+		FNG_sheng_power_up = yes
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = 0.02
+		}
+		add_popularity = {
+			ideology = national_populist
+			popularity = 0.03
+		}
+		#load_oob = FNG_temporary_zhang
+		#load_oob = FNG_temporary_sheng
+		set_temp_variable = { China_temp_CCW_tension_change = 2 }
+		China_change_CCW_tension = yes
+		custom_effect_tooltip = FNG_guangzhou_hates_that
+	}
+}
+
+country_event = {
+	# Former Enemy Assets
+	id = krg_fng.13
+	title = krg_fng.13.t
+	desc = krg_fng.13.d
+	picture = GFX_ce_fire
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_fng.13"
+	}
+	is_triggered_only = yes
+	option = {
+		name = krg_fng.13.a
+		custom_effect_tooltip = FNG_zhang_gain_power_tooltip
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = 0.02
+		}
+		608 = {
+			add_building_construction = {
+				type = industrial_complex
+				level = 2
+				instant_build = yes
+			}
+			add_extra_state_shared_building_slots = 3
+		}
+		FNG_zhang_power_up = yes
+
+		ai_chance = {
+			base = 50
+			modifier = {
+				has_game_rule = {
+					rule = FNG_POWER_STRUGGLE
+					option = FNG_ZHANG
+				}
+				factor = 1000
+			}
+		}
+	}
+	option = {
+		name = krg_fng.13.b
+		custom_effect_tooltip = FNG_yang_gain_power_tooltip
+		add_popularity = {
+			ideology = paternal_autocrat
+			popularity = 0.02
+		}
+		328 = {
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+			add_extra_state_shared_building_slots = 1
+		}
+		716 = {
+			add_building_construction = {
+				type = arms_factory
+				level = 2
+				instant_build = yes
+			}
+			add_extra_state_shared_building_slots = 3
+		}
+		FNG_yang_power_up = yes
+		ai_chance = {
+			base = 30
+			modifier = {
+				has_game_rule = {
+					rule = FNG_POWER_STRUGGLE
+					option = FNG_YANG
+				}
+				factor = 1000
+			}
+		}
+	}
+	option = {
+		name = krg_fng.13.c
+		ai_chance = {
+			base = 20
+		}
+		FNG_sheng_power_up = yes
+		add_popularity = {
+			ideology = national_populist
+			popularity = 0.02
+		}
+		744 = {
+			add_building_construction = {
+				type = arms_factory
+				level = 3
+				instant_build = yes
+			}
+			add_extra_state_shared_building_slots = 3
+		}
+	}
+}
+
+country_event = {
+	# Japanese Repatriation
+	id = krg_fng.14
+	title = krg_fng.14.t
+	desc = krg_fng.14.d
+	picture = GFX_
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_fng.14"
+	}
+	is_triggered_only = yes
+	option = {
+		name = krg_fng.14.a
+		
+		custom_effect_tooltip = FNG_zhang_gain_power_tooltip
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = 0.02
+		}
+		set_country_flag = {
+			flag = shanxi_with_zhang
+		}
+		add_political_power = 50
+		add_manpower = -100
+		FNG_zhang_power_up = yes
+
+		ai_chance = {
+			base = 50
+			modifier = {
+				has_game_rule = {
+					rule = FNG_POWER_STRUGGLE
+					option = FNG_ZHANG
+				}
+				factor = 1000
+			}
+		}
+	}
+	option = {
+		name = krg_fng.14.b
+		
+		custom_effect_tooltip = FNG_yang_gain_power_tooltip
+		add_popularity = {
+			ideology = paternal_autocrat
+			popularity = 0.02
+		}
+		add_resource = {
+			type = steel
+			amount = 10
+			state = 615
+		}
+		set_country_flag = {
+			flag = shanxi_with_yang
+		}
+		FNG_yang_power_up = yes
+
+		ai_chance = {
+			base = 30
+			modifier = {
+				has_game_rule = {
+					rule = FNG_POWER_STRUGGLE
+					option = FNG_YANG
+				}
+				factor = 1000
+			}
+		}
+	}
+	option = {
+		name = krg_fng.14.c
+	
+		FNG_sheng_power_up = yes
+		add_popularity = {
+			ideology = national_populist
+			popularity = 0.02
+		}
+		add_tech_bonus = {
+			bonus = 0.5
+			uses = 1
+			category = land_doctrine
+		}
+
+		ai_chance = {
+			base = 20
+		}
+	}
+}
+
+country_event = {
+	# New Diplomatic Relations
+	id = krg_fng.15
+	title = krg_fng.15.t
+	desc = krg_fng.15.d
+	picture = GFX_ce_FNG_chennalt
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_fng.15"
+	}
+	is_triggered_only = yes
+	option = {
+		name = krg_fng.15.a
+		
+		custom_effect_tooltip = FNG_zhang_gain_power_tooltip
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = 0.02
+		}
+		FNG_zhang_power_up = yes
+		set_temp_variable = { China_temp_CCW_tension_change = 1 }
+		China_change_CCW_tension = yes
+
+		ai_chance = {
+			base = 65
+			modifier = {
+				has_game_rule = {
+					rule = FNG_POWER_STRUGGLE
+					option = FNG_ZHANG
+				}
+				factor = 1000
+			}
+		}
+	}
+	option = {
+		name = krg_fng.15.b
+		
+		custom_effect_tooltip = FNG_yang_gain_power_tooltip
+		add_popularity = {
+			ideology = paternal_autocrat
+			popularity = 0.02
+		}
+		add_opinion_modifier = {
+			target = TEX
+			modifier = china_first_recognition
+		}
+		FNG_yang_power_up = yes
+		set_temp_variable = { China_temp_CCW_tension_change = 2 }
+		China_change_CCW_tension = yes
+		custom_effect_tooltip = FNG_guangzhou_hates_that
+
+		ai_chance = {
+			base = 35
+			modifier = {
+				has_game_rule = {
+					rule = FNG_POWER_STRUGGLE
+					option = FNG_YANG
+				}
+				factor = 1000
+			}
+		}
+	}
+}
+
+country_event = {
+	# End Martial Law - Event Chain TBD
+	id = krg_fng.16
+	title = krg_fng.16.t
+	desc = krg_fng.16.d
+	picture = GFX_
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_fng.16"
+	}
+	is_triggered_only = yes
+	option = {
+		name = krg_fng.16.a
+	}
+}
+
+country_event = {
+	# Curtail Military Localism - Event Chain TBD
+	id = krg_fng.17
+	title = krg_fng.17.t
+	desc = krg_fng.17.d
+	picture = GFX_
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_fng.17"
+	}
+	is_triggered_only = yes
+	option = {
+		name = krg_fng.17.a
+	}
+}
+
+country_event = {
+	# Partisan Question
+	id = krg_fng.18
+	title = krg_fng.18.t
+	desc = krg_fng.18.d
+	picture = GFX_
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_fng.18"
+	}
+	is_triggered_only = yes
+	option = {
+		name = krg_fng.18.a
+		add_manpower = -1
+		1106 = {
+			add_compliance = 5
+		}
+	}
+}
+
+country_event = {
+	# Glorify Our Heroes
+	id = krg_fng.19
+	title = krg_fng.19.t
+	desc = krg_fng.19.d
+	picture = GFX_ce_fng_militaryparade2
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_fng.19"
+	}
+	is_triggered_only = yes
+	option = {
+		name = krg_fng.19.a
+		FNG_sheng_power_up = yes
+		add_popularity = {
+			ideology = national_populist
+			popularity = 0.02
+		}
+		add_war_support = 0.1
+		hidden_effect = {
+		}
+	}
+}
+
+country_event = {
+	# Grand Demobilization
+	id = krg_fng.20
+	title = krg_fng.20.t
+	desc = krg_fng.20.d
+	picture = GFX_ce_fng_material_vs_spirit
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_fng.20"
+	}
+	is_triggered_only = yes
+	option = {
+		name = krg_fng.20.a
+		
+		custom_effect_tooltip = FNG_zhang_gain_power_tooltip
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = 0.02
+		}
+		move_down_mobilization = yes
+		FNG_zhang_power_up = yes
+		hidden_effect = {
+		}
+		add_stability = 0.05
+
+		ai_chance = {
+			base = 65
+			modifier = {
+				has_game_rule = {
+					rule = FNG_POWER_STRUGGLE
+					option = FNG_ZHANG
+				}
+				factor = 1000
+			}
+		}
+	}
+	option = {
+		name = krg_fng.20.b
+		
+		custom_effect_tooltip = FNG_yang_gain_power_tooltip
+		add_popularity = {
+			ideology = paternal_autocrat
+			popularity = 0.02
+		}
+		add_popularity = {
+			ideology = national_populist
+			popularity = 0.02
+		}
+		add_war_support = 0.05
+		FNG_yang_power_up = yes
+
+		ai_chance = {
+			base = 35
+			modifier = {
+				has_game_rule = {
+					rule = FNG_POWER_STRUGGLE
+					option = FNG_YANG
+				}
+				factor = 1000
+			}
+		}
+	}
+}
+
+country_event = {
+	# Stabilize Prices - Event Chain TBD
+	id = krg_fng.21
+	title = krg_fng.21.t
+	desc = krg_fng.21.d
+	picture = GFX_
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_fng.21"
+	}
+	is_triggered_only = yes
+	option = {
+		name = krg_fng.21.a
+	}
+}
+
+country_event = {
+	# Transitional Tax Cut
+	id = krg_fng.22
+	title = krg_fng.22.t
+	desc = krg_fng.22.d
+	picture = GFX_
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_fng.22"
+	}
+	is_triggered_only = yes
+	option = {
+		name = krg_fng.22.a
+		
+		custom_effect_tooltip = FNG_zhang_gain_power_tooltip
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = 0.02
+		}
+		swap_ideas = {
+			remove_idea = econ_high_taxation
+			add_idea = econ_moderate_taxation
+		}
+		FNG_zhang_power_up = yes
+
+		ai_chance = {
+			base = 65
+			modifier = {
+				has_game_rule = {
+					rule = FNG_POWER_STRUGGLE
+					option = FNG_ZHANG
+				}
+				factor = 1000
+			}
+		}
+	}
+	option = {
+		name = krg_fng.22.b
+		
+		custom_effect_tooltip = FNG_yang_gain_power_tooltip
+		add_popularity = {
+			ideology = paternal_autocrat
+			popularity = 0.02
+		}
+		FNG_yang_power_up = yes
+
+		ai_chance = {
+			base = 35
+			modifier = {
+				has_game_rule = {
+					rule = FNG_POWER_STRUGGLE
+					option = FNG_YANG
+				}
+				factor = 1000
+			}
+		}
+	}
+}
+
+country_event = {
+	# Establish China Welfare Institute
+	id = krg_fng.23
+	title = krg_fng.23.t
+	desc = krg_fng.23.d
+	picture = GFX_
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_fng.23"
+	}
+	is_triggered_only = yes
+	option = {
+		name = krg_fng.23.a
+	}
+}
+
+country_event = {
+	# Uniting the Long Divided
+	id = krg_fng.24
+	title = krg_fng.24.t
+	desc = krg_fng.24.d
+	picture = GFX_
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_fng.24"
+	}
+	is_triggered_only = yes
+	option = {
+		name = krg_fng.24.a
+	}
+}
+
+
+country_event = {
+	# FNG Shimonoseki 
+	id = krg_fng.25
+	title = krg_fng.25.t
+	desc = krg_fng.25.d
+	picture = GFX_
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_fng.25"
+		hidden_effect = {
+			if = {
+				limit = {
+					CHI = { NOT = { has_completed_focus = CHI_bitter_peace } }
+				}
+				CHI = {
+					complete_national_focus = CHI_bitter_peace
+				}
+			}
+		}
+	}
+	is_triggered_only = yes
+	option = {
+		name = krg_fng.25.a
+		add_war_support = 0.05
+		add_manpower = -1
+		add_political_power = -10
+		set_country_flag = FNG_shimonoseki_signed
+		if = {
+			limit = {
+				CHI = { NOT = { has_country_flag = CHI_shimonoseki_signed } }
+			}
+			news_event = {
+				id = krg_chi_news.0
+			}
+		}
+	}
+}
+
+country_event = {
+	id = krg_fng.100
+	title = krg_fng.100.t
+	desc = krg_fng.100.d
+	picture = GFX_ce_zhangzuolindies
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_fng.100"
+	}
+	is_triggered_only = yes
+	option = {
+		name = krg_fng.100.a
+		add_political_power = -20
+	}
+}
+
+country_event = {
+	# Premonitions - effects are severely b
+	id = krg_fng.101
+	title = krg_fng.101.t
+	desc = krg_fng.101.d
+	picture = GFX_ce_fng_tiananmen
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_fng.101"
+	}
+	is_triggered_only = yes
+	option = {
+		name = krg_fng.101.a
+		add_political_power = -20
+		activate_mission = FNG_Yang_making_his_move
+	}
+}
+
+country_event = {
+	# Everything is going according to plan - Zhang
+	id = krg_fng.102
+	title = krg_fng.102.t
+	desc = krg_fng.102.d
+	picture = GFX_ce_fng_coup
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_fng.102"
+	}
+	is_triggered_only = yes
+	option = {
+		name = krg_fng.102.a
+		add_political_power = -20
+		country_event = { id = krg_fng.106 days = 7 }
+	}
+}
+
+country_event = {
+	# Everything is going according to plan - Yang
+	id = krg_fng.103
+	title = krg_fng.103.t
+	desc = krg_fng.103.d
+	picture = GFX_ce_fng_npa
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_fng.103"
+	}
+	is_triggered_only = yes
+	option = {
+		name = krg_fng.103.a
+		add_political_power = -20
+		country_event = { id = krg_fng.107 days = 7 }
+	}
+}
+
+country_event = {
+	# A Deadly Mistake - Yang
+	id = krg_fng.104
+	title = krg_fng.104.t
+	desc = krg_fng.104.d
+	picture = GFX_ce_FNG_Sheng_Dead
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_fng.104"
+	}
+	is_triggered_only = yes
+	option = {
+		name = krg_fng.104.a
+		add_political_power = -20
+	}
+}
+
+country_event = {
+	# A Deadly Mistake - Sheng
+	id = krg_fng.105
+	title = krg_fng.105.t
+	desc = krg_fng.105.d
+	picture = GFX_ce_FNG_Sheng_Shicai
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_fng.105"
+	}
+	is_triggered_only = yes
+	option = {
+		name = krg_fng.105.a
+		add_political_power = -20
+	}
+}
+
+country_event = {
+	# Endgame - Zhang Victory
+	id = krg_fng.106
+	title = krg_fng.106.t
+	desc = krg_fng.106.d
+	picture = GFX_ce_FNG_Yang_Arrested
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_fng.106"
+	}
+	is_triggered_only = yes
+	option = {
+		name = krg_fng.106.a
+		add_political_power = -20
+		remove_power_balance = {
+			id = FNG_rivalry_bop
+		}
+		retire_character = FNG_yang_yuting
+
+		every_army_leader = {
+			limit = {
+				has_trait = FNG_yang_officer
+			}
+			retire = yes
+		}
+
+		add_ideas = {
+			FNG_Mo_Tehui_hog_ade
+			FNG_W_Koo_fm_ade
+			FNG_Gao_Xibing_em_ade
+			FNG_Zhang_Fuyun_jm_ade
+			FNG_Zhang_Xueming_im_ade
+			FNG_Su_Bingwen_hoi_ade
+		}
+		news_event = { id = krg_fng_news.1 }
+	}
+}
+
+country_event = {
+	# Endgame - Yang Victory
+	id = krg_fng.107
+	title = krg_fng.107.t
+	desc = krg_fng.107.d
+	picture = GFX_ce_FNG_Zhang_Removed
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_fng.107"
+	}
+	is_triggered_only = yes
+	option = {
+		name = krg_fng.107.a
+		add_political_power = -20
+		remove_power_balance = {
+			id = FNG_rivalry_bop
+		}
+		set_politics = {
+			ruling_party = paternal_autocrat
+		}
+		retire_character = FNG_zhang_xueliang 
+		remove_all_ministers = yes
+
+		every_army_leader = {
+			limit = {
+				has_trait = FNG_zhang_officer
+			}
+			retire = yes
+		}
+		add_ideas = {
+			FNG_Xing_Shilian_hog_pau
+			FNG_W_Koo_fm_ade
+			FNG_Zang_Qifang_em_pau
+			FNG_Han_Junjie_jm_pau
+			FNG_Chang_Yinhuai_im_pau
+			FNG_Shen_Honglie_hoi_pau
+		}
+		news_event = { id = krg_fng_news.2 }
+	}
+}
+
+news_event = {
+	id = krg_fng_news.1
+	title = krg_fng_news.1.t
+	desc = krg_fng_news.1.d
+	picture = GFX_ne_fng_young_marshal_prevails
+	is_triggered_only = yes
+	major = yes
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_fng_news.1"
+	}
+	
+	option = {
+		name = krg_fng_news.1.a
+	}
+}
+
+news_event = {
+	id = krg_fng_news.2
+	title = krg_fng_news.2.t
+	desc = krg_fng_news.2.d
+	picture = GFX_ne_fng_coup_yang
+	is_triggered_only = yes
+	major = yes
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_fng_news.2"
+	}
+	
+	option = {
+		name = krg_fng_news.2.a
+	}
+}

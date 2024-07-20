@@ -1,0 +1,211 @@
+add_namespace = krg_pol
+
+country_event = {
+	id = krg_pol.0	
+	is_triggered_only = yes
+	fire_only_once = yes
+	title = krg_pol.0.t
+	desc = krg_pol.0.d
+	trigger = {
+		has_country_leader = { character = POL_wolfgang_von_kries ruling_only = yes }
+	}
+	option = {
+		name = krg_pol.0.a
+		POL = { 
+			retire_character = POL_wolfgang_von_kries
+			pol_alexander_ii = {
+				promote_leader = yes
+			}
+			add_ideas = POL_return_of_the_king 
+			country_event = { id = krg_pol.2 days = 70 }
+		} 
+		news_event = { id = krg_pol.1 }
+	}
+}
+
+news_event = {
+	id = krg_pol.1
+	title = krg_pol.1.t
+	desc = krg_pol.1.d
+	picture = GFX_ne_generic_funeral
+	is_triggered_only = yes
+	fire_for_sender = no
+	major = yes
+		
+	option = {
+		name = krg_pol.1.a
+	}
+}
+
+country_event = {
+	id = krg_pol.2
+	is_triggered_only = yes
+	fire_only_once = yes
+	title = krg_pol.2.t
+	desc = krg_pol.2.d
+	option = {
+		name = krg_pol.2.a
+		POL = { # Polish Schlicherism
+			swap_ideas = {
+				remove_idea = KRG_military_occupation
+				add_idea = KRG_bredowist_system
+			}
+			remove_ideas = POL_general_government
+			837 = { set_demilitarized_zone = no }
+			set_party_name = {
+				ideology = paternal_autocrat
+				long_name = POL_paternal_autocrat_party_DNEF_long
+				name = POL_paternal_autocrat_DNEF_party
+			}
+			coal_add_auth_dem = yes
+			add_popularity = {
+				ideology = social_democrat
+				popularity = -0.05
+			}
+			add_popularity = {
+				ideology = social_conservative
+				popularity = -0.10
+			}
+			add_popularity = {
+				ideology = authoritarian_socialist
+				popularity = 0.10
+			}
+			add_popularity = {
+				ideology = national_populist
+				popularity = 0.05
+			}
+		}
+		news_event = { id = krg_pol.3 }
+	}
+	option = { # German Constitutionalism
+		name = krg_pol.2.b
+		POL = {
+			swap_ideas = {
+				remove_idea = KRG_military_occupation
+				add_idea = KRG_parliamentary_democracy
+			}
+			837 = { set_demilitarized_zone = no }
+			remove_ideas = POL_general_government
+			set_politics = {
+				ruling_party = market_liberal
+				election_frequency = 48
+				elections_allowed = yes
+			}
+			coal_add_auth_dem = yes
+			coal_add_pat_aut = yes
+			add_popularity = {
+				ideology = paternal_autocrat
+				popularity = -0.30
+			}
+			add_popularity = {
+				ideology = authoritarian_socialist
+				popularity = -0.05
+			}add_popularity = {
+				ideology = radical_socialist
+				popularity = 0.05
+			}
+			add_popularity = {
+				ideology = social_democrat
+				popularity = 0.05
+			}
+			add_popularity = {
+				ideology = social_liberal
+				popularity = 0.05
+			}
+			add_popularity = {
+				ideology = market_liberal
+				popularity = 0.15
+			}
+			add_popularity = {
+				ideology = social_conservative
+				popularity = 0.05
+			}
+			set_party_name = {
+				ideology = paternal_autocrat
+				long_name = POL_paternal_autocrat_party_geheimrat_long
+				name = POL_paternal_autocrat_party_geheimrat
+			}
+			country_event = {
+				id = krg_pol.5
+				days = 1424
+			}
+		}
+		news_event = { id = krg_pol.4 }
+	}
+}
+
+news_event = {
+	id = krg_pol.3
+	title = krg_pol.3.t
+	desc = krg_pol.3.d
+	picture = GFX_ne_POL_troops
+	is_triggered_only = yes
+	fire_for_sender = no
+	major = yes
+		
+	option = {
+		name = krg_pol.3.a
+	}
+}
+
+news_event = {
+	id = krg_pol.4
+	title = krg_pol.4.t
+	desc = krg_pol.4.d
+	picture = GFX_ne_POL_troops
+	is_triggered_only = yes
+	fire_for_sender = no
+	major = yes
+		
+	option = {
+		name = krg_pol.4.a
+	}
+}
+
+country_event = {
+	id = krg_pol.5
+	is_triggered_only = yes
+	fire_only_once = yes
+	title = krg_pol.5.t
+	desc = krg_pol.5.d
+	option = {
+		name = krg_pol.5.a
+		POL = { # Civic Pact
+		remove_ideas = POL_lust_for_freedom
+		set_politics = {
+			ruling_party = market_liberal
+			election_frequency = 48
+			elections_allowed = yes
+		}
+		coal_add_auth_dem = yes
+		add_popularity = {
+				ideology = social_conservative
+				popularity = -0.05
+			}
+		add_popularity = {
+				ideology = national_populist
+				popularity = 0.05
+			}
+		}
+	}
+	option = { # United Poland
+		name = krg_pol.5.b
+		remove_ideas = POL_lust_for_freedom
+		POL = {
+			set_politics = {
+				ruling_party = social_conservative
+				election_frequency = 48
+				elections_allowed = yes
+			}
+			coal_add_soc_lib = yes
+			add_popularity = {
+				ideology = national_populist
+				popularity = -0.10
+			}
+			add_popularity = {
+				ideology = revolutionary_republican
+				popularity = 0.10
+			}
+		}
+	}
+}

@@ -1,0 +1,2437 @@
+##how to define a law effect
+
+##CAN_law_[law id]_effect = {
+##	CAN_law_effect = yes ##you must have CAN_law_effect = yes or your clauses wont work
+##	any other effects, so adding a dynamic modifer or smth
+##}
+
+##how to define a law fail effect
+##CAN_law_[law id]_fail = {
+##	any effects, pp hit, event or other
+##}
+
+
+##how to define a clause effect
+##CAN_clause_[clause id]_effect = {
+##	any effects, like adding to a variable for a dynamic modifier
+##}
+
+##how to define a clause add effect
+##CAN_clause_[clause id]_add_effect = {
+##	any effects, like adding to a variable for a dynamic modifier
+##}
+
+##how to define a clause remove effect
+##CAN_clause_[clause id]_remove_effect = {
+##	any effects, like adding to a variable for a dynamic modifier
+##}
+
+##how to define a law effect for the AI -- this system is NOT coded for the ai, it will not work for them if you dont do this
+##CAN_law_[law id]_ai_setup = {
+##	CAN_law_effect = yes ##you must have CAN_law_effect = yes or your clauses wont work
+##	you should set up clauses here, so something like this to add clauses 1, 4, and 3:
+##  CAN_clause_1_add_effect = yes
+##	CAN_clause_4_add_effect = yes
+##	CAN_clause_3_add_effect = yes
+##	that is all you have to do for the ai, the rest of the code will handle it
+##}
+
+CAN_law_1_effect = {
+	CAN_law_effect = yes
+	add_stability = 0.05
+}
+
+CAN_law_1_fail = {
+	add_political_power = -50
+}
+
+CAN_law_2_effect = {
+	CAN_law_effect = yes
+	hidden_effect = {
+		add_dynamic_modifier = {
+			modifier = CAN_hospital_insurance_and_diagnostic_services_act
+		}
+	}
+	if = {
+		limit = {
+			OR = {
+				check_variable = { var = CAN_hisdact_cg value = 0 compare = not_equals }
+				check_variable = { var = CAN_hisdact_stab value = 0 compare = not_equals }
+				check_variable = { var = CAN_hisdact_popgrowth value = 0 compare = not_equals }
+				check_variable = { var = CAN_hisdact_pp value = 0 compare = not_equals }
+			}
+		}
+		custom_effect_tooltip = CAN_law_2_modifier
+	}
+	if = { 
+		limit = { check_variable = { var = CAN_hisdact_cg value = 0 compare = not_equals } }
+		custom_effect_tooltip = CAN_law_2_modifier_cg
+	}
+	if = { 
+		limit = { check_variable = { var = CAN_hisdact_stab value = 0 compare = not_equals }  }
+		custom_effect_tooltip = CAN_law_2_modifier_stab
+	}
+	if = { 
+		limit = { check_variable = { var = CAN_hisdact_popgrowth value = 0 compare = not_equals } }
+		custom_effect_tooltip = CAN_law_2_modifier_popgrowth
+	}
+	if = { 
+		limit = { check_variable = { var = CAN_hisdact_pp value = 0 compare = not_equals } }
+		custom_effect_tooltip = CAN_law_2_modifier_pp
+	}
+	move_up_hc_spending = yes
+	CAN_popularity_ruling_increase_small = yes
+}
+
+CAN_law_2_fail = {
+	add_political_power = -100
+	CAN_popularity_ruling_decrease_tiny = yes
+}
+
+CAN_law_3_effect = {
+	CAN_law_effect = yes
+	hidden_effect = {
+		add_dynamic_modifier = {
+			modifier = CAN_immigration_reform_act
+		}
+	}
+	if = {
+		limit = {
+			OR = {
+				check_variable = { var = CAN_iract_fo value = 0 compare = not_equals }
+				check_variable = { var = CAN_iract_cs value = 0 compare = not_equals }
+				check_variable = { var = CAN_iract_stab value = 0 compare = not_equals }
+				check_variable = { var = CAN_iract_popgrowth value = 0 compare = not_equals }
+				check_variable = { var = CAN_iract_pp value = 0 compare = not_equals }
+			}
+		}
+		custom_effect_tooltip = CAN_law_3_modifier
+	}
+	if = { 
+		limit = { check_variable = { var = CAN_iract_fo value = 0 compare = not_equals } }
+		custom_effect_tooltip = CAN_law_3_modifier_fo
+	}
+	if = { 
+		limit = { check_variable = { var = CAN_iract_cs value = 0 compare = not_equals } }
+		custom_effect_tooltip = CAN_law_3_modifier_cs
+	}
+	if = { 
+		limit = { check_variable = { var = CAN_iract_stab value = 0 compare = not_equals }  }
+		custom_effect_tooltip = CAN_law_3_modifier_stab
+	}
+	if = { 
+		limit = { check_variable = { var = CAN_iract_popgrowth value = 0 compare = not_equals } }
+		custom_effect_tooltip = CAN_law_3_modifier_popgrowth
+	}
+	if = { 
+		limit = { check_variable = { var = CAN_iract_pp value = 0 compare = not_equals } }
+		custom_effect_tooltip = CAN_law_3_modifier_pp
+	}
+	CAN_popularity_ruling_increase_small = yes
+}
+
+CAN_law_3_fail = {
+	add_political_power = -50
+	CAN_popularity_ruling_decrease_tiny = yes
+}
+
+CAN_law_4_effect = {
+	CAN_law_effect = yes
+	hidden_effect = {
+		add_dynamic_modifier = {
+			modifier = CAN_govgen_powers_act
+		}
+	}
+	if = {
+		limit = {
+			OR = {
+				check_variable = { var = CAN_ggpact_stab value = 0 compare = not_equals }
+				check_variable = { var = CAN_ggpact_pp value = 0 compare = not_equals }
+			}
+		}
+		custom_effect_tooltip = CAN_law_4_modifier
+	}
+	if = { 
+		limit = { check_variable = { var = CAN_ggpact_stab value = 0 compare = not_equals }  }
+		custom_effect_tooltip = CAN_law_4_modifier_stab
+	}
+	if = { 
+		limit = { check_variable = { var = CAN_ggpact_pp value = 0 compare = not_equals } }
+		custom_effect_tooltip = CAN_law_4_modifier_pp
+	}
+	if = {
+		limit = { has_country_flag = CAN_constitutional_crisis }
+		CAN_popularity_ruling_increase_large = yes
+		CAN_popularity_ruling_increase_large = yes
+		custom_effect_tooltip = CAN_increase_socdem_large_tt
+		custom_effect_tooltip = CAN_increase_socdem_large_tt
+	} else = {
+		CAN_popularity_ruling_increase_small = yes
+	}
+}
+
+CAN_law_4_fail = {
+	add_political_power = -150
+	CAN_popularity_ruling_decrease_tiny = yes
+}
+
+
+CAN_law_5_effect = {
+	CAN_law_effect = yes
+	hidden_effect = {
+		add_dynamic_modifier = {
+			modifier = CAN_national_housing_act_modifier
+			days = 548
+		}
+	}
+	if = {
+		limit = {
+			OR = {
+				check_variable = { var = CAN_nhact_cg value = 0 compare = not_equals }
+				check_variable = { var = CAN_nhact_cs value = 0 compare = not_equals }
+				check_variable = { var = CAN_nhact_mp value = 0 compare = not_equals }
+			}
+		}
+		custom_effect_tooltip = CAN_law_5_modifier
+	}
+	if = { 
+		limit = { check_variable = { var = CAN_nhact_cg value = 0 compare = not_equals } }
+		custom_effect_tooltip = CAN_law_5_modifier_cg
+	}
+	if = { 
+		limit = { check_variable = { var = CAN_nhact_cs value = 0 compare = not_equals } }
+		custom_effect_tooltip = CAN_law_5_modifier_cs
+	}
+	if = { 
+		limit = { check_variable = { var = CAN_nhact_mp value = 0 compare = not_equals }  }
+		custom_effect_tooltip = CAN_law_5_modifier_mp
+	}
+	custom_effect_tooltip = CAN_law_5_effect_civ_tt
+	hidden_effect = {
+		for_loop_effect = {
+			end = CAN_nhact_civs
+
+			random_owned_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+	CAN_popularity_ruling_increase_small = yes
+}
+
+CAN_law_5_fail = {
+	add_political_power = -50
+	CAN_popularity_ruling_decrease_tiny = yes
+}
+
+CAN_law_6_effect = {
+	CAN_law_effect = yes
+	hidden_effect = {
+		add_dynamic_modifier = {
+			modifier = CAN_wealth_tax_repeal_modifier
+		}
+	}
+	if = {
+		limit = {
+			OR = {
+				check_variable = { var = CAN_wtract_cg value = 0 compare = not_equals }
+				check_variable = { var = CAN_wtract_cs value = 0 compare = not_equals }
+				check_variable = { var = CAN_wtract_stab value = 0 compare = not_equals }
+				check_variable = { var = CAN_wtract_mp value = 0 compare = not_equals }
+				check_variable = { var = CAN_wtract_pp value = 0 compare = not_equals }
+				check_variable = { var = CAN_wtract_fo value = 0 compare = not_equals }
+			}
+		}
+		custom_effect_tooltip = CAN_law_6_modifier
+	}
+	if = { 
+		limit = { check_variable = { var = CAN_wtract_cg value = 0 compare = not_equals } }
+		custom_effect_tooltip = CAN_law_6_modifier_cg
+	}
+	if = { 
+		limit = { check_variable = { var = CAN_wtract_cs value = 0 compare = not_equals } }
+		custom_effect_tooltip = CAN_law_6_modifier_cs
+	}
+	if = { 
+		limit = { check_variable = { var = CAN_wtract_fo value = 0 compare = not_equals } }
+		custom_effect_tooltip = CAN_law_6_modifier_fo
+	}
+	if = { 
+		limit = { check_variable = { var = CAN_wtract_stab value = 0 compare = not_equals }  }
+		custom_effect_tooltip = CAN_law_6_modifier_stab
+	}
+	if = { 
+		limit = { check_variable = { var = CAN_wtract_mp value = 0 compare = not_equals } }
+		custom_effect_tooltip = CAN_law_6_modifier_mp
+	}
+	if = { 
+		limit = { check_variable = { var = CAN_wtract_pp value = 0 compare = not_equals } }
+		custom_effect_tooltip = CAN_law_6_modifier_pp
+	}
+	move_down_taxation = yes
+	CAN_popularity_ruling_increase_small = yes
+}
+
+CAN_law_6_fail = {
+	add_political_power = -50
+	CAN_popularity_ruling_decrease_tiny = yes
+}
+
+CAN_law_7_effect = {
+	CAN_law_effect = yes
+	hidden_effect = {
+		add_dynamic_modifier = {
+			modifier = CAN_deregulation_tax_relief_act
+		}
+	}
+	if = {
+		limit = {
+			OR = {
+				check_variable = { var = CAN_dtaact_cg value = 0 compare = not_equals }
+				check_variable = { var = CAN_dtaact_cs value = 0 compare = not_equals }
+				check_variable = { var = CAN_dtaact_fuelout value = 0 compare = not_equals }
+				check_variable = { var = CAN_dtaact_mp value = 0 compare = not_equals }
+				check_variable = { var = CAN_dtaact_pp value = 0 compare = not_equals }
+				check_variable = { var = CAN_dtaact_fo value = 0 compare = not_equals }
+			}
+		}
+		custom_effect_tooltip = CAN_law_7_modifier
+	}
+	if = { 
+		limit = { check_variable = { var = CAN_dtaact_cg value = 0 compare = not_equals } }
+		custom_effect_tooltip = CAN_law_7_modifier_cg
+	}
+	if = { 
+		limit = { check_variable = { var = CAN_dtaact_cs value = 0 compare = not_equals } }
+		custom_effect_tooltip = CAN_law_7_modifier_cs
+	}
+	if = { 
+		limit = { check_variable = { var = CAN_dtaact_fo value = 0 compare = not_equals } }
+		custom_effect_tooltip = CAN_law_7_modifier_fo
+	}
+	if = { 
+		limit = { check_variable = { var = CAN_dtaact_fuelout value = 0 compare = not_equals }  }
+		custom_effect_tooltip = CAN_law_7_modifier_fuelout
+	}
+	if = { 
+		limit = { check_variable = { var = CAN_dtaact_mp value = 0 compare = not_equals } }
+		custom_effect_tooltip = CAN_law_7_modifier_mp
+	}
+	if = { 
+		limit = { check_variable = { var = CAN_dtaact_pp value = 0 compare = not_equals } }
+		custom_effect_tooltip = CAN_law_7_modifier_pp
+	}
+	move_down_taxation = yes
+	CAN_popularity_ruling_increase_small = yes
+}
+
+CAN_law_7_fail = {
+	add_political_power = -50
+	CAN_popularity_ruling_decrease_tiny = yes
+}
+
+CAN_law_8_effect = {
+	CAN_law_effect = yes
+	hidden_effect = {
+		add_dynamic_modifier = {
+			modifier = CAN_old_age_security_act
+		}
+	}
+	if = {
+		limit = {
+			OR = {
+				check_variable = { var = CAN_oasact_cg value = 0 compare = not_equals }
+				check_variable = { var = CAN_oasact_cs value = 0 compare = not_equals }
+				check_variable = { var = CAN_oasact_stab value = 0 compare = not_equals }
+				check_variable = { var = CAN_oasact_mp value = 0 compare = not_equals }
+				check_variable = { var = CAN_oasact_pp value = 0 compare = not_equals }
+				check_variable = { var = CAN_oasact_fo value = 0 compare = not_equals }
+			}
+		}
+		custom_effect_tooltip = CAN_law_8_modifier
+	}
+	if = { 
+		limit = { check_variable = { var = CAN_oasact_cg value = 0 compare = not_equals } }
+		custom_effect_tooltip = CAN_law_8_modifier_cg
+	}
+	if = { 
+		limit = { check_variable = { var = CAN_oasact_cs value = 0 compare = not_equals } }
+		custom_effect_tooltip = CAN_law_8_modifier_cs
+	}
+	if = { 
+		limit = { check_variable = { var = CAN_oasact_fo value = 0 compare = not_equals } }
+		custom_effect_tooltip = CAN_law_8_modifier_fo
+	}
+	if = { 
+		limit = { check_variable = { var = CAN_oasact_stab value = 0 compare = not_equals }  }
+		custom_effect_tooltip = CAN_law_8_modifier_stab
+	}
+	if = { 
+		limit = { check_variable = { var = CAN_oasact_mp value = 0 compare = not_equals } }
+		custom_effect_tooltip = CAN_law_8_modifier_mp
+	}
+	if = { 
+		limit = { check_variable = { var = CAN_oasact_pp value = 0 compare = not_equals } }
+		custom_effect_tooltip = CAN_law_8_modifier_pp
+	}
+	move_up_service_spending = yes
+	CAN_popularity_ruling_increase_small = yes
+}
+
+CAN_law_8_fail = {
+	add_political_power = -50
+	CAN_popularity_ruling_decrease_tiny = yes
+}
+
+CAN_law_9_effect = {
+	CAN_law_effect = yes
+	hidden_effect = {
+		add_dynamic_modifier = {
+			modifier = CAN_canadian_values_act
+		}
+	}
+	if = {
+		limit = {
+			OR = {
+				check_variable = { var = CAN_cvaact_cg value = 0 compare = not_equals }
+				check_variable = { var = CAN_cvaact_stab value = 0 compare = not_equals }
+				check_variable = { var = CAN_cvaact_mp value = 0 compare = not_equals }
+				check_variable = { var = CAN_cvaact_pp value = 0 compare = not_equals }
+			}
+		}
+		custom_effect_tooltip = CAN_law_9_modifier
+	}
+	if = { 
+		limit = { check_variable = { var = CAN_cvaact_cg value = 0 compare = not_equals } }
+		custom_effect_tooltip = CAN_law_9_modifier_cg
+	}
+	if = { 
+		limit = { check_variable = { var = CAN_cvaact_stab value = 0 compare = not_equals }  }
+		custom_effect_tooltip = CAN_law_9_modifier_stab
+	}
+	if = { 
+		limit = { check_variable = { var = CAN_cvaact_mp value = 0 compare = not_equals } }
+		custom_effect_tooltip = CAN_law_9_modifier_mp
+	}
+	if = { 
+		limit = { check_variable = { var = CAN_cvaact_pp value = 0 compare = not_equals } }
+		custom_effect_tooltip = CAN_law_9_modifier_pp
+	}
+	CAN_popularity_ruling_increase_small = yes
+}
+
+CAN_law_9_fail = {
+	add_political_power = -50
+	CAN_popularity_ruling_decrease_tiny = yes
+}
+
+CAN_law_10_effect = {
+	CAN_law_effect = yes
+	hidden_effect = {
+		add_dynamic_modifier = {
+			modifier = CAN_save_the_tax_act
+		}
+	}
+	if = {
+		limit = {
+			OR = {
+				check_variable = { var = CAN_staact_cg value = 0 compare = not_equals }
+				check_variable = { var = CAN_staact_cs value = 0 compare = not_equals }
+				check_variable = { var = CAN_staact_fo value = 0 compare = not_equals }
+				check_variable = { var = CAN_staact_stab value = 0 compare = not_equals }
+				check_variable = { var = CAN_staact_mp value = 0 compare = not_equals }
+				check_variable = { var = CAN_staact_pp value = 0 compare = not_equals }
+			}
+		}
+		custom_effect_tooltip = CAN_law_10_modifier
+	}
+	if = { 
+		limit = { check_variable = { var = CAN_staact_cg value = 0 compare = not_equals } }
+		custom_effect_tooltip = CAN_law_10_modifier_cg
+	}
+	if = { 
+		limit = { check_variable = { var = CAN_staact_cs value = 0 compare = not_equals } }
+		custom_effect_tooltip = CAN_law_10_modifier_cs
+	}
+	if = { 
+		limit = { check_variable = { var = CAN_staact_fo value = 0 compare = not_equals } }
+		custom_effect_tooltip = CAN_law_10_modifier_fo
+	}
+	if = { 
+		limit = { check_variable = { var = CAN_staact_stab value = 0 compare = not_equals }  }
+		custom_effect_tooltip = CAN_law_10_modifier_stab
+	}
+	if = { 
+		limit = { check_variable = { var = CAN_staact_mp value = 0 compare = not_equals } }
+		custom_effect_tooltip = CAN_law_10_modifier_mp
+	}
+	if = { 
+		limit = { check_variable = { var = CAN_staact_pp value = 0 compare = not_equals } }
+		custom_effect_tooltip = CAN_law_10_modifier_pp
+	}
+	move_down_taxation = yes
+	CAN_popularity_ruling_increase_small = yes
+}
+
+CAN_law_10_fail = {
+	add_political_power = -50
+	CAN_popularity_ruling_decrease_tiny = yes
+}
+
+CAN_law_11_effect = {
+	CAN_law_effect = yes
+	hidden_effect = {
+		add_dynamic_modifier = {
+			modifier = CAN_equitable_tax_act
+		}
+	}
+	if = {
+		limit = {
+			OR = {
+				check_variable = { var = CAN_etaact_cg value = 0 compare = not_equals }
+				check_variable = { var = CAN_etaact_cs value = 0 compare = not_equals }
+				check_variable = { var = CAN_etaact_fo value = 0 compare = not_equals }
+				check_variable = { var = CAN_etaact_stab value = 0 compare = not_equals }
+				check_variable = { var = CAN_etaact_mp value = 0 compare = not_equals }
+				check_variable = { var = CAN_etaact_pp value = 0 compare = not_equals }
+			}
+		}
+		custom_effect_tooltip = CAN_law_11_modifier
+	}
+	if = { 
+		limit = { check_variable = { var = CAN_etaact_cg value = 0 compare = not_equals } }
+		custom_effect_tooltip = CAN_law_11_modifier_cg
+	}
+	if = { 
+		limit = { check_variable = { var = CAN_etaact_cs value = 0 compare = not_equals } }
+		custom_effect_tooltip = CAN_law_11_modifier_cs
+	}
+	if = { 
+		limit = { check_variable = { var = CAN_etaact_fo value = 0 compare = not_equals } }
+		custom_effect_tooltip = CAN_law_11_modifier_fo
+	}
+	if = { 
+		limit = { check_variable = { var = CAN_etaact_stab value = 0 compare = not_equals }  }
+		custom_effect_tooltip = CAN_law_11_modifier_stab
+	}
+	if = { 
+		limit = { check_variable = { var = CAN_etaact_mp value = 0 compare = not_equals } }
+		custom_effect_tooltip = CAN_law_11_modifier_mp
+	}
+	if = { 
+		limit = { check_variable = { var = CAN_etaact_pp value = 0 compare = not_equals } }
+		custom_effect_tooltip = CAN_law_11_modifier_pp
+	}
+	move_up_taxation = yes
+	CAN_popularity_ruling_increase_small = yes
+}
+
+CAN_law_11_fail = {
+	add_political_power = -50
+	CAN_popularity_ruling_decrease_tiny = yes
+}
+
+CAN_law_12_effect = {
+	CAN_law_effect = yes
+	hidden_effect = {
+		add_dynamic_modifier = {
+			modifier = CAN_contributory_health_insurance_act
+		}
+	}
+	if = {
+		limit = {
+			OR = {
+				check_variable = { var = CAN_etaact_cg value = 0 compare = not_equals }
+				check_variable = { var = CAN_etaact_cs value = 0 compare = not_equals }
+				check_variable = { var = CAN_etaact_fo value = 0 compare = not_equals }
+				check_variable = { var = CAN_etaact_stab value = 0 compare = not_equals }
+				check_variable = { var = CAN_etaact_mp value = 0 compare = not_equals }
+			}
+		}
+		custom_effect_tooltip = CAN_law_12_modifier
+	}
+	if = { 
+		limit = { check_variable = { var = CAN_chiact_cg value = 0 compare = not_equals } }
+		custom_effect_tooltip = CAN_law_12_modifier_cg
+	}
+	if = { 
+		limit = { check_variable = { var = CAN_chiact_cs value = 0 compare = not_equals } }
+		custom_effect_tooltip = CAN_law_12_modifier_cs
+	}
+	if = { 
+		limit = { check_variable = { var = CAN_chiact_fo value = 0 compare = not_equals } }
+		custom_effect_tooltip = CAN_law_12_modifier_fo
+	}
+	if = { 
+		limit = { check_variable = { var = CAN_chiact_stab value = 0 compare = not_equals }  }
+		custom_effect_tooltip = CAN_law_12_modifier_stab
+	}
+	if = { 
+		limit = { check_variable = { var = CAN_chiact_mp value = 0 compare = not_equals } }
+		custom_effect_tooltip = CAN_law_12_modifier_mp
+	}
+	move_up_hc_spending = yes
+	CAN_popularity_ruling_increase_small = yes
+}
+
+CAN_law_12_fail = {
+	add_political_power = -50
+	CAN_popularity_ruling_decrease_tiny = yes
+}
+
+CAN_law_13_effect = {
+	CAN_law_effect = yes
+	hidden_effect = {
+		add_dynamic_modifier = {
+			modifier = CAN_social_welfare_act
+		}
+	}
+	if = {
+		limit = {
+			OR = {
+				check_variable = { var = CAN_swaact_cg value = 0 compare = not_equals }
+				check_variable = { var = CAN_swaact_cs value = 0 compare = not_equals }
+				check_variable = { var = CAN_swaact_fo value = 0 compare = not_equals }
+				check_variable = { var = CAN_swaact_stab value = 0 compare = not_equals }
+				check_variable = { var = CAN_swaact_mp value = 0 compare = not_equals }
+				check_variable = { var = CAN_swaact_pp value = 0 compare = not_equals }
+			}
+		}
+		custom_effect_tooltip = CAN_law_13_modifier
+	}
+	if = { 
+		limit = { check_variable = { var = CAN_swaact_cg value = 0 compare = not_equals } }
+		custom_effect_tooltip = CAN_law_13_modifier_cg
+	}
+	if = { 
+		limit = { check_variable = { var = CAN_swaact_cs value = 0 compare = not_equals } }
+		custom_effect_tooltip = CAN_law_13_modifier_cs
+	}
+	if = { 
+		limit = { check_variable = { var = CAN_swaact_fo value = 0 compare = not_equals } }
+		custom_effect_tooltip = CAN_law_13_modifier_fo
+	}
+	if = { 
+		limit = { check_variable = { var = CAN_swaact_stab value = 0 compare = not_equals }  }
+		custom_effect_tooltip = CAN_law_13_modifier_stab
+	}
+	if = { 
+		limit = { check_variable = { var = CAN_swaact_mp value = 0 compare = not_equals } }
+		custom_effect_tooltip = CAN_law_13_modifier_mp
+	}
+	if = { 
+		limit = { check_variable = { var = CAN_swaact_pp value = 0 compare = not_equals } }
+		custom_effect_tooltip = CAN_law_13_modifier_pp
+	}
+	move_up_service_spending = yes
+	CAN_popularity_ruling_increase_small = yes
+}
+
+CAN_law_13_fail = {
+	add_political_power = -50
+	CAN_popularity_ruling_decrease_tiny = yes
+}
+
+CAN_law_14_effect = {
+	CAN_law_effect = yes
+	hidden_effect = {
+		add_dynamic_modifier = {
+			modifier = CAN_social_foundations_act
+		}
+	}
+	if = {
+		limit = {
+			OR = {
+				check_variable = { var = CAN_sfaact_cg value = 0 compare = not_equals }
+				check_variable = { var = CAN_sfaact_cs value = 0 compare = not_equals }
+				check_variable = { var = CAN_sfaact_fo value = 0 compare = not_equals }
+				check_variable = { var = CAN_sfaact_stab value = 0 compare = not_equals }
+				check_variable = { var = CAN_sfaact_mp value = 0 compare = not_equals }
+				check_variable = { var = CAN_sfaact_pp value = 0 compare = not_equals }
+			}
+		}
+		custom_effect_tooltip = CAN_law_14_modifier
+	}
+	if = { 
+		limit = { check_variable = { var = CAN_sfaact_cg value = 0 compare = not_equals } }
+		custom_effect_tooltip = CAN_law_14_modifier_cg
+	}
+	if = { 
+		limit = { check_variable = { var = CAN_sfaact_cs value = 0 compare = not_equals } }
+		custom_effect_tooltip = CAN_law_14_modifier_cs
+	}
+	if = { 
+		limit = { check_variable = { var = CAN_sfaact_fo value = 0 compare = not_equals } }
+		custom_effect_tooltip = CAN_law_14_modifier_fo
+	}
+	if = { 
+		limit = { check_variable = { var = CAN_sfaact_stab value = 0 compare = not_equals }  }
+		custom_effect_tooltip = CAN_law_14_modifier_stab
+	}
+	if = { 
+		limit = { check_variable = { var = CAN_sfaact_mp value = 0 compare = not_equals } }
+		custom_effect_tooltip = CAN_law_14_modifier_mp
+	}
+	if = { 
+		limit = { check_variable = { var = CAN_sfaact_pp value = 0 compare = not_equals } }
+		custom_effect_tooltip = CAN_law_14_modifier_pp
+	}
+	move_up_service_spending = yes
+	CAN_popularity_ruling_increase_small = yes
+}
+
+CAN_law_14_fail = {
+	add_political_power = -50
+	CAN_popularity_ruling_decrease_tiny = yes
+}
+
+CAN_law_15_effect = {
+	CAN_law_effect = yes
+	hidden_effect = {
+		add_dynamic_modifier = {
+			modifier = CAN_healthy_canada_act
+		}
+	}
+	if = {
+		limit = {
+			OR = {
+				check_variable = { var = CAN_hcnact_cg value = 0 compare = not_equals }
+				check_variable = { var = CAN_hcnact_cs value = 0 compare = not_equals }
+				check_variable = { var = CAN_hcnact_fo value = 0 compare = not_equals }
+				check_variable = { var = CAN_hcnact_stab value = 0 compare = not_equals }
+				check_variable = { var = CAN_hcnact_mp value = 0 compare = not_equals }
+				check_variable = { var = CAN_hcnact_pp value = 0 compare = not_equals }
+			}
+		}
+		custom_effect_tooltip = CAN_law_15_modifier
+	}
+	if = { 
+		limit = { check_variable = { var = CAN_hcnact_cg value = 0 compare = not_equals } }
+		custom_effect_tooltip = CAN_law_15_modifier_cg
+	}
+	if = { 
+		limit = { check_variable = { var = CAN_hcnact_cs value = 0 compare = not_equals } }
+		custom_effect_tooltip = CAN_law_15_modifier_cs
+	}
+	if = { 
+		limit = { check_variable = { var = CAN_hcnact_fo value = 0 compare = not_equals } }
+		custom_effect_tooltip = CAN_law_15_modifier_fo
+	}
+	if = { 
+		limit = { check_variable = { var = CAN_hcnact_stab value = 0 compare = not_equals }  }
+		custom_effect_tooltip = CAN_law_15_modifier_stab
+	}
+	if = { 
+		limit = { check_variable = { var = CAN_hcnact_mp value = 0 compare = not_equals } }
+		custom_effect_tooltip = CAN_law_15_modifier_mp
+	}
+	if = { 
+		limit = { check_variable = { var = CAN_hcnact_pp value = 0 compare = not_equals } }
+		custom_effect_tooltip = CAN_law_15_modifier_pp
+	}
+	move_up_hc_spending = yes
+	CAN_popularity_ruling_increase_small = yes
+}
+
+CAN_law_15_fail = {
+	add_political_power = -50
+	CAN_popularity_ruling_decrease_tiny = yes
+}
+
+CAN_law_16_effect = {
+	CAN_law_effect = yes
+	hidden_effect = {
+		add_dynamic_modifier = {
+			modifier = CAN_canadian_families_act
+		}
+	}
+	if = {
+		limit = {
+			OR = {
+				check_variable = { var = CAN_cfaact_cg value = 0 compare = not_equals }
+				check_variable = { var = CAN_cfaact_cs value = 0 compare = not_equals }
+				check_variable = { var = CAN_cfaact_fo value = 0 compare = not_equals }
+				check_variable = { var = CAN_cfaact_stab value = 0 compare = not_equals }
+				check_variable = { var = CAN_cfaact_mp value = 0 compare = not_equals }
+				check_variable = { var = CAN_cfaact_pp value = 0 compare = not_equals }
+			}
+		}
+		custom_effect_tooltip = CAN_law_16_modifier
+	}
+	if = { 
+		limit = { check_variable = { var = CAN_cfaact_cg value = 0 compare = not_equals } }
+		custom_effect_tooltip = CAN_law_16_modifier_cg
+	}
+	if = { 
+		limit = { check_variable = { var = CAN_cfaact_cs value = 0 compare = not_equals } }
+		custom_effect_tooltip = CAN_law_16_modifier_cs
+	}
+	if = { 
+		limit = { check_variable = { var = CAN_cfaact_fo value = 0 compare = not_equals } }
+		custom_effect_tooltip = CAN_law_16_modifier_fo
+	}
+	if = { 
+		limit = { check_variable = { var = CAN_cfaact_stab value = 0 compare = not_equals }  }
+		custom_effect_tooltip = CAN_law_16_modifier_stab
+	}
+	if = { 
+		limit = { check_variable = { var = CAN_cfaact_mp value = 0 compare = not_equals } }
+		custom_effect_tooltip = CAN_law_16_modifier_mp
+	}
+	if = { 
+		limit = { check_variable = { var = CAN_cfaact_pp value = 0 compare = not_equals } }
+		custom_effect_tooltip = CAN_law_16_modifier_pp
+	}
+	CAN_popularity_ruling_increase_small = yes
+}
+
+CAN_law_16_fail = {
+	add_political_power = -50
+	CAN_popularity_ruling_decrease_tiny = yes
+}
+
+CAN_clause_1_effect = {
+	add_political_power = 50
+}
+
+CAN_clause_1_add_effect = {
+	
+}
+
+CAN_clause_1_remove_effect = {
+	
+}
+
+CAN_clause_2_effect = {
+	add_stability = 0.05
+}
+
+CAN_clause_2_add_effect = {
+	
+}
+
+CAN_clause_2_remove_effect = {
+	
+}
+
+CAN_clause_3_effect = {
+	add_war_support = 0.05
+}
+
+CAN_clause_3_add_effect = {
+	
+}
+
+CAN_clause_3_remove_effect = {
+	
+}
+
+CAN_clause_4_effect = {
+	276 = {
+		add_building_construction = {
+			type = infrastructure
+			level = 1
+			instant_build = yes
+		}
+	}
+}
+
+CAN_clause_4_add_effect = {
+	set_variable = { CAN_laws_support_change = 5 }
+	CAN_laws_support = yes
+	set_variable = { CAN_laws_support_change = 3 }
+	CAN_laws_oppose = yes
+}
+
+CAN_clause_4_remove_effect = {
+	set_variable = { CAN_laws_support_change = 5 }
+	CAN_laws_oppose = yes
+	set_variable = { CAN_laws_support_change = 3 }
+	CAN_laws_support = yes
+}
+
+CAN_clause_5_add_effect = {
+	add_political_power = -75
+	add_to_variable = { CAN_hisdact_cg = 0.03 }
+	add_to_variable = { CAN_hisdact_popgrowth = 0.05 }
+	add_to_variable = { CAN_hisdact_pp = 0.10 }
+	if = {
+		limit = {
+			is_in_array = {
+				CAN_laws_clauses_available = 6 
+			}
+		}
+		remove_from_array = { CAN_laws_clauses_available = 6 }
+	}
+}
+
+CAN_clause_5_remove_effect = {
+	subtract_from_variable = { CAN_hisdact_cg = 0.03 }
+	subtract_from_variable = { CAN_hisdact_popgrowth = 0.05 }
+	subtract_from_variable = { CAN_hisdact_pp = 0.10 }
+	add_to_array = { CAN_laws_clauses_available = 6 }
+}
+
+CAN_clause_6_add_effect = {
+	add_political_power = -50
+	add_to_variable = { CAN_hisdact_cg = 0.01 }
+	add_to_variable = { CAN_hisdact_popgrowth = 0.03 }
+	if = {
+		limit = {
+			is_in_array = {
+				CAN_laws_clauses_available = 5 
+			}
+		}
+		remove_from_array = { CAN_laws_clauses_available = 5 }
+	}
+	subtract_from_variable = { CAN_law_clause_selected_num = 1 }  ##needed if mutually exclusive clause # < this clause number
+}
+
+CAN_clause_6_remove_effect = {
+	subtract_from_variable = { CAN_hisdact_cg = 0.01 }
+	subtract_from_variable = { CAN_hisdact_popgrowth = 0.03 }
+	add_to_array = { CAN_laws_clauses_available = 5 }
+}
+
+CAN_clause_7_add_effect = {
+	add_political_power = -25
+	add_to_variable = { CAN_hisdact_popgrowth = 0.03 }
+	add_to_variable = { CAN_hisdact_stab = 0.02 }
+	subtract_from_variable = { CAN_hisdact_pp = 0.03 }
+}
+
+CAN_clause_7_remove_effect = {
+	subtract_from_variable = { CAN_hisdact_popgrowth = 0.03 }
+	subtract_from_variable = { CAN_hisdact_stab = 0.02 }
+	add_to_variable = { CAN_hisdact_pp = 0.03 }
+}
+
+CAN_clause_8_add_effect = {
+	add_political_power = -25
+	add_to_variable = { CAN_hisdact_popgrowth = 0.03 }
+	subtract_from_variable = { CAN_hisdact_stab = 0.01 }
+}
+
+CAN_clause_8_remove_effect = {
+	subtract_from_variable = { CAN_hisdact_popgrowth = 0.03 }
+	add_to_variable = { CAN_hisdact_stab = 0.01 }
+}
+
+CAN_clause_9_add_effect = {
+	add_political_power = -50
+	add_to_variable = { CAN_hisdact_popgrowth = 0.05 }
+	add_to_variable = { CAN_hisdact_cg = 0.03 }
+	add_to_variable = { CAN_hisdact_stab = 0.05 }
+	set_variable = { CAN_laws_support_change = 0 }
+	CAN_laws_support = yes
+	set_variable = { CAN_laws_support_change = 4 }
+	CAN_laws_oppose = yes
+}
+
+CAN_clause_9_remove_effect = {
+	subtract_from_variable = { CAN_hisdact_popgrowth = 0.05 }
+	subtract_from_variable = { CAN_hisdact_cg = 0.03 }
+	subtract_from_variable = { CAN_hisdact_stab = 0.05 }
+	set_variable = { CAN_laws_support_change = 0 }
+	CAN_laws_oppose = yes
+	set_variable = { CAN_laws_support_change = 4 }
+	CAN_laws_support = yes
+}
+
+CAN_clause_67_add_effect = {
+	add_political_power = -50
+	add_to_variable = { CAN_hisdact_popgrowth = 0.05 }
+	add_to_variable = { CAN_hisdact_cg = 0.03 }
+	add_to_variable = { CAN_hisdact_stab = 0.05 }
+	set_variable = { CAN_laws_support_change = 0 }
+	CAN_laws_support = yes
+	set_variable = { CAN_laws_support_change = 3 }
+	CAN_laws_oppose = yes
+}
+
+CAN_clause_67_remove_effect = {
+	subtract_from_variable = { CAN_hisdact_popgrowth = 0.05 }
+	subtract_from_variable = { CAN_hisdact_cg = 0.03 }
+	subtract_from_variable = { CAN_hisdact_stab = 0.05 }
+	set_variable = { CAN_laws_support_change = 0 }
+	CAN_laws_oppose = yes
+	set_variable = { CAN_laws_support_change = 3 }
+	CAN_laws_support = yes
+}
+
+CAN_law_2_ai_setup = {
+	CAN_clause_6_add_effect = yes
+	CAN_clause_7_add_effect = yes
+	CAN_clause_8_add_effect = yes
+}
+
+CAN_clause_10_add_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_10_add_effect"
+	add_political_power = -25
+	subtract_from_variable = { CAN_iract_stab = 0.02 }
+	add_to_variable = { CAN_iract_popgrowth = 0.08 }
+}
+
+CAN_clause_10_remove_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_10_remove_effect"
+	add_to_variable = { CAN_iract_stab = 0.02 }
+	subtract_from_variable = { CAN_iract_popgrowth = 0.08 }
+}
+
+CAN_clause_11_add_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_11_add_effect"
+	add_political_power = -50
+	add_to_variable = { CAN_iract_fo = 0.02 }
+	add_to_variable = { CAN_iract_cs = 0.02 }
+	subtract_from_variable = { CAN_iract_popgrowth = 0.06 }
+}
+
+CAN_clause_11_remove_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_11_remove_effect"
+	subtract_from_variable = { CAN_iract_fo = 0.02 }
+	subtract_from_variable = { CAN_iract_cs = 0.02 }
+	add_to_variable = { CAN_iract_popgrowth = 0.06 }
+}
+
+CAN_clause_12_add_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_12_add_effect"
+	add_political_power = -25
+	add_to_variable = { CAN_iract_popgrowth = 0.03 }
+	subtract_from_variable = { CAN_iract_pp = 0.03 }
+	set_variable = { CAN_laws_support_change = 3 }
+	CAN_laws_support = yes
+}
+
+CAN_clause_12_remove_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_12_remove_effect"
+	subtract_from_variable = { CAN_iract_popgrowth = 0.03 }
+	add_to_variable = { CAN_iract_pp = 0.03 }
+	set_variable = { CAN_laws_support_change = 3 }
+	CAN_laws_oppose = yes
+}
+
+CAN_clause_13_add_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_13_add_effect"
+	add_political_power = -50
+	add_to_variable = { CAN_iract_pp = 0.08 }
+	subtract_from_variable = { CAN_iract_fo = 0.03 }
+	subtract_from_variable = { CAN_iract_cs = 0.03 }
+	set_variable = { CAN_laws_support_change = 1 }
+	CAN_laws_support = yes
+}
+
+CAN_clause_13_remove_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_13_remove_effect"
+	subtract_from_variable = { CAN_iract_pp = 0.08 }
+	add_to_variable = { CAN_iract_fo = 0.03 }
+	add_to_variable = { CAN_iract_cs = 0.03 }
+	set_variable = { CAN_laws_support_change = 1 }
+	CAN_laws_oppose = yes
+}
+
+CAN_clause_14_add_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_14_add_effect"
+	add_political_power = -25
+	add_to_variable = { CAN_iract_popgrowth = 0.03 }
+	subtract_from_variable = { CAN_iract_pp = 0.02 }
+	subtract_from_variable = { CAN_iract_stab = 0.01 }
+}
+
+CAN_clause_14_remove_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_14_remove_effect"
+	subtract_from_variable = { CAN_iract_popgrowth = 0.03 }
+	add_to_variable = { CAN_iract_pp = 0.02 }
+	add_to_variable = { CAN_iract_stab = 0.01 }
+}
+
+CAN_law_3_ai_setup = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_law_3_ai_setup"
+	CAN_clause_10_add_effect = yes
+	CAN_clause_12_add_effect = yes
+	CAN_clause_14_add_effect = yes
+}
+
+CAN_clause_15_add_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_15_add_effect"
+	add_political_power = -25
+	add_to_variable = { CAN_ggpact_pp = 0.05 }
+	add_to_variable = { CAN_ggact_radicalism = 1 }
+	if = {
+		limit = {
+			NOT = {
+				has_game_rule = {
+					rule = CAN_CONSTITUTIONAL_CRISIS
+					option = CAN_MONARCHY_BLOCKED
+				}
+			}
+			OR = {
+				AND = {
+					check_variable = { CAN_ggact_radicalism > 4.999 }
+					NOT = { has_country_flag = CAN_constitutional_crisis_triggered }
+					date < 1952.6.1
+				}
+				AND = {
+					OR = {
+						has_game_rule = {
+							rule = CAN_CONSTITUTIONAL_CRISIS
+							option = CAN_MONARCHY_SNAP_ELECTION_CCF_ABOLISH_MONARCHY
+						}
+						has_game_rule = {
+							rule = CAN_CONSTITUTIONAL_CRISIS
+							option = CAN_MONARCHY_SNAP_ELECTION_CCF_KEEP_MONARCHY
+						}
+						has_game_rule = {
+							rule = CAN_CONSTITUTIONAL_CRISIS
+							option = CAN_MONARCHY_SNAP_ELECTION_LIB_ABOLISH_MONARCHY
+						}
+						has_game_rule = {
+							rule = CAN_CONSTITUTIONAL_CRISIS
+							option = CAN_MONARCHY_SNAP_ELECTION_LIB_KEEP_MONARCHY
+						}
+						has_game_rule = {
+							rule = CAN_CONSTITUTIONAL_CRISIS
+							option = CAN_MONARCHY_COALITION_STATUS_QUO
+						}
+						has_game_rule = {
+							rule = CAN_CONSTITUTIONAL_CRISIS
+							option = CAN_MONARCHY_UNIONISTS
+						}
+					}
+					
+				}
+			}
+			
+		}
+		country_event = {
+			id = krg_can_crisis.1
+			days = 4
+			random_days = 3
+		}
+		set_country_flag = CAN_constitutional_crisis_triggered
+	}
+}
+
+CAN_clause_15_remove_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_15_remove_effect"
+	subtract_from_variable = { CAN_ggpact_pp = 0.05 }
+	subtract_from_variable = { CAN_ggact_radicalism = 1 }
+}
+
+CAN_clause_16_add_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_16_add_effect"
+	add_political_power = -25
+	add_to_variable = { CAN_ggpact_pp = 0.05 }
+	add_to_variable = { CAN_ggpact_stab = 0.03 }
+	add_to_variable = { CAN_ggact_radicalism = 1 }
+	if = {
+		limit = {
+			check_variable = { CAN_ggact_radicalism > 4.999 }
+			NOT = { has_country_flag = CAN_constitutional_crisis_triggered }
+			date < 1952.6.1
+		}
+		country_event = {
+			id = krg_can_crisis.1
+			days = 4
+			random_days = 3
+		}
+		set_country_flag = CAN_constitutional_crisis_triggered
+	}
+}
+
+CAN_clause_16_remove_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_16_remove_effect"
+	subtract_from_variable = { CAN_ggpact_pp = 0.05 }
+	subtract_from_variable = { CAN_ggpact_stab = 0.03 }
+	subtract_from_variable = { CAN_ggact_radicalism = 1 }
+}
+
+CAN_clause_17_add_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_17_add_effect"
+	add_political_power = -25
+	add_to_variable = { CAN_ggpact_pp = 0.05 }
+	add_to_variable = { CAN_ggpact_stab = 0.03 }
+	add_to_variable = { CAN_ggact_radicalism = 1 }
+	if = {
+		limit = {
+			check_variable = { CAN_ggact_radicalism > 4.999 }
+			NOT = { has_country_flag = CAN_constitutional_crisis_triggered }
+			date < 1952.6.1
+		}
+		country_event = {
+			id = krg_can_crisis.1
+			days = 4
+			random_days = 3
+		}
+		set_country_flag = CAN_constitutional_crisis_triggered
+	}
+}
+
+CAN_clause_17_remove_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_17_remove_effect"
+	subtract_from_variable = { CAN_ggpact_pp = 0.05 }
+	subtract_from_variable = { CAN_ggpact_stab = 0.03 }
+	subtract_from_variable = { CAN_ggact_radicalism = 1 }
+}
+
+CAN_clause_18_add_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_18_add_effect"
+	add_political_power = -50
+	add_to_variable = { CAN_ggpact_pp = 0.08 }
+	add_to_variable = { CAN_ggact_radicalism = 2 }
+	if = {
+		limit = {
+			check_variable = { CAN_ggact_radicalism > 4.999 }
+			NOT = { has_country_flag = CAN_constitutional_crisis_triggered }
+			date < 1952.6.1
+		}
+		country_event = {
+			id = krg_can_crisis.1
+			days = 4
+			random_days = 3
+		}
+		set_country_flag = CAN_constitutional_crisis_triggered
+	}
+}
+
+CAN_clause_18_remove_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_18_remove_effect"
+	subtract_from_variable = { CAN_ggpact_pp = 0.08 }
+	subtract_from_variable = { CAN_ggact_radicalism = 2 }
+}
+
+CAN_clause_19_add_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_19_add_effect"
+	add_political_power = -50
+	add_to_variable = { CAN_ggpact_pp = 0.15 }
+	add_to_variable = { CAN_ggpact_stab = 0.10 }
+	add_to_variable = { CAN_ggact_radicalism = 4 }
+	if = {
+		limit = {
+			check_variable = { CAN_ggact_radicalism > 4.999 }
+			NOT = { has_country_flag = CAN_constitutional_crisis_triggered }
+			date < 1952.6.1
+		}
+		country_event = {
+			id = krg_can_crisis.1
+			days = 4
+			random_days = 3
+		}
+		set_country_flag = CAN_constitutional_crisis_triggered
+	}
+}
+
+CAN_clause_19_remove_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_19_remove_effect"
+	subtract_from_variable = { CAN_ggpact_pp = 0.15 }
+	subtract_from_variable = { CAN_ggpact_stab = 0.10 }
+	subtract_from_variable = { CAN_ggact_radicalism = 4 }
+}
+
+CAN_law_4_ai_setup = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_law_4_ai_setup"
+	random_list = {
+		80 = {
+			CAN_clause_15_add_effect = yes
+			CAN_clause_16_add_effect = yes
+		}
+		20 = {
+			CAN_clause_15_add_effect = yes
+			CAN_clause_18_add_effect = yes
+			CAN_clause_19_add_effect = yes
+		}
+	}
+}
+
+CAN_clause_20_add_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_20_add_effect"
+	add_political_power = -25
+	add_to_variable = { CAN_nhact_cg = 0.03 }
+	add_to_variable = { CAN_nhact_cs = 0.05 }
+	add_to_variable = { CAN_nhact_civs = 4 }
+	add_to_variable = { CAN_nhact_mp = 0.07 }
+	if = {
+		limit = {
+			is_in_array = {
+				CAN_laws_clauses_available = 21 
+			}
+		}
+		remove_from_array = { CAN_laws_clauses_available = 21 }
+	}
+}
+
+CAN_clause_20_remove_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_20_remove_effect"
+	add_to_variable = { CAN_nhact_cg = 0.03 }
+	add_to_variable = { CAN_nhact_cs = 0.05 }
+	add_to_variable = { CAN_nhact_civs = 4 }
+	add_to_variable = { CAN_nhact_mp = 0.11 }
+	add_to_array = { CAN_laws_clauses_available = 21 }
+}
+
+CAN_clause_21_add_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_21_add_effect"
+	add_political_power = -50
+	add_to_variable = { CAN_nhact_cg = 0.06 }
+	add_to_variable = { CAN_nhact_cs = 0.07 }
+	add_to_variable = { CAN_nhact_civs = 6 }
+	add_to_variable = { CAN_nhact_mp = 0.11 }
+	set_variable = { CAN_laws_support_change = 1 }
+	CAN_laws_support = yes
+	if = {
+		limit = {
+			is_in_array = {
+				CAN_laws_clauses_available = 20 
+			}
+		}
+		remove_from_array = { CAN_laws_clauses_available = 20 }
+	}
+	subtract_from_variable = { CAN_law_clause_selected_num = 1 } ##needed if mutually exclusive clause # < this clause number
+}
+
+CAN_clause_21_remove_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_21_remove_effect"
+	subtract_from_variable = { CAN_nhact_cg = 0.06 }
+	subtract_from_variable = { CAN_nhact_cs = 0.07 }
+	subtract_from_variable = { CAN_nhact_civs = 6 }
+	subtract_from_variable = { CAN_nhact_mp = 0.11 }
+	set_variable = { CAN_laws_support_change = 1 }
+	CAN_laws_oppose = yes
+	add_to_array = { CAN_laws_clauses_available = 20 }
+}
+
+CAN_clause_22_add_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_22_add_effect"
+	add_political_power = -25
+	subtract_from_variable = { CAN_nhact_cg = 0.01 }
+	add_to_variable = { CAN_nhact_cs = 0.02 }
+	subtract_from_variable = { CAN_nhact_civs = 1 }
+}
+
+CAN_clause_22_remove_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_22_remove_effect"
+	add_to_variable = { CAN_nhact_cg = 0.01 }
+	subtract_from_variable = { CAN_nhact_cs = 0.02 }
+	add_to_variable = { CAN_nhact_civs = 1 }
+}
+
+CAN_clause_23_add_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_23_add_effect"
+	add_political_power = -25
+	add_to_variable = { CAN_nhact_cg = 0.01 }
+	add_to_variable = { CAN_nhact_civs = 1 }
+}
+
+CAN_clause_23_remove_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_23_remove_effect"
+	subtract_from_variable = { CAN_nhact_cg = 0.01 }
+	subtract_from_variable = { CAN_nhact_civs = 1 }
+}
+
+CAN_clause_24_add_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_24_add_effect"
+	add_political_power = -25
+	add_to_variable = { CAN_nhact_cg = 0.01 }
+	add_to_variable = { CAN_nhact_civs = 1 }
+	set_variable = { CAN_laws_support_change = 5 }
+	CAN_laws_support = yes
+}
+
+CAN_clause_24_remove_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_24_remove_effect"
+	subtract_from_variable = { CAN_nhact_cg = 0.01 }
+	subtract_from_variable = { CAN_nhact_civs = 1 }
+	set_variable = { CAN_laws_support_change = 5 }
+	CAN_laws_oppose = yes
+}
+
+CAN_clause_68_add_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_68_add_effect"
+	add_political_power = -25
+	add_to_variable = { CAN_nhact_cg = 0.01 }
+	add_to_variable = { CAN_nhact_civs = 1 }
+	set_variable = { CAN_laws_support_change = 4 }
+	CAN_laws_support = yes
+}
+
+CAN_clause_68_remove_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_68_remove_effect"
+	subtract_from_variable = { CAN_nhact_cg = 0.01 }
+	subtract_from_variable = { CAN_nhact_civs = 1 }
+	set_variable = { CAN_laws_support_change = 4 }
+	CAN_laws_oppose = yes
+}
+
+CAN_law_5_ai_setup = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_law_5_ai_setup"
+	CAN_clause_20_add_effect = yes
+	CAN_clause_22_add_effect = yes
+	CAN_clause_23_add_effect = yes
+}
+
+CAN_clause_25_add_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_25_add_effect"
+	add_political_power = -25
+	add_to_variable = { CAN_wtract_cg = 0.01 }
+	add_to_variable = { CAN_wtract_mp = 0.05 }
+	add_to_variable = { CAN_wtract_stab = 0.03 }
+	set_variable = { CAN_laws_support_change = 4 }
+	CAN_laws_support = yes
+}
+
+CAN_clause_25_remove_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_25_remove_effect"
+	subtract_from_variable = { CAN_wtract_cg = 0.01 }
+	subtract_from_variable = { CAN_wtract_mp = 0.05 }
+	subtract_from_variable = { CAN_wtract_stab = 0.03 }
+	set_variable = { CAN_laws_support_change = 4 }
+	CAN_laws_oppose = yes
+}
+
+CAN_clause_69_add_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_69_add_effect"
+	add_political_power = -25
+	add_to_variable = { CAN_wtract_cg = 0.01 }
+	add_to_variable = { CAN_wtract_mp = 0.05 }
+	add_to_variable = { CAN_wtract_stab = 0.03 }
+}
+
+CAN_clause_69_remove_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_69_remove_effect"
+	subtract_from_variable = { CAN_wtract_cg = 0.01 }
+	subtract_from_variable = { CAN_wtract_mp = 0.05 }
+	subtract_from_variable = { CAN_wtract_stab = 0.03 }
+}
+
+CAN_clause_26_add_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_26_add_effect"
+	add_political_power = -25
+	add_to_variable = { CAN_wtract_cg = 0.01 }
+	add_to_variable = { CAN_wtract_pp = 0.03 }
+	add_to_variable = { CAN_wtract_cs = 0.02 }
+}
+
+CAN_clause_26_remove_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_26_remove_effect"
+	subtract_from_variable = { CAN_wtract_cg = 0.01 }
+	subtract_from_variable = { CAN_wtract_pp = 0.03 }
+	subtract_from_variable = { CAN_wtract_cs = 0.02 }
+}
+
+CAN_clause_27_add_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_27_add_effect"
+	add_political_power = -25
+	subtract_from_variable = { CAN_wtract_cg = 0.01 }
+	subtract_from_variable = { CAN_wtract_pp = 0.05 }
+}
+
+CAN_clause_27_remove_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_27_remove_effect"
+	add_to_variable = { CAN_wtract_cg = 0.01 }
+	add_to_variable = { CAN_wtract_pp = 0.05 }
+}
+
+CAN_clause_28_add_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_28_add_effect"
+	add_political_power = -25
+	subtract_from_variable = { CAN_wtract_cg = 0.01 }
+	subtract_from_variable = { CAN_wtract_stab = 0.03 }
+}
+
+CAN_clause_28_remove_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_28_remove_effect"
+	add_to_variable = { CAN_wtract_cg = 0.01 }
+	add_to_variable = { CAN_wtract_stab = 0.03 }
+}
+
+CAN_clause_29_add_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_29_add_effect"
+	add_political_power = -25
+	add_to_variable = { CAN_wtract_cg = 0.01 }
+	add_to_variable = { CAN_wtract_fo = 0.03 }
+}
+
+CAN_clause_29_remove_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_29_remove_effect"
+	subtract_from_variable = { CAN_wtract_cg = 0.01 }
+	subtract_from_variable = { CAN_wtract_fo = 0.03 }
+}
+
+CAN_law_6_ai_setup = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_law_6_ai_setup"
+	if = {
+		limit = {
+			has_global_flag = CAN_parl_pc_formed
+		}
+		CAN_clause_69_add_effect = yes
+		CAN_clause_28_add_effect = yes
+		CAN_clause_29_add_effect = yes
+	} else = {
+		CAN_clause_25_add_effect = yes
+		CAN_clause_28_add_effect = yes
+		CAN_clause_29_add_effect = yes
+	}
+}
+
+CAN_clause_30_add_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_30_add_effect"
+	add_political_power = -25
+	add_to_variable = { CAN_dtaact_fo = 0.02 }
+	add_to_variable = { CAN_dtaact_cs = 0.01 }
+}
+
+CAN_clause_30_remove_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_30_remove_effect"
+	subtract_from_variable = { CAN_dtaact_fo = 0.02 }
+	subtract_from_variable = { CAN_dtaact_cs = 0.01 }
+}
+
+CAN_clause_31_add_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_31_add_effect"
+	add_political_power = -25
+	add_to_variable = { CAN_dtaact_mp = 0.04 }
+	add_to_variable = { CAN_dtaact_fo = 0.01 }
+}
+
+CAN_clause_31_remove_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_31_remove_effect"
+	subtract_from_variable = { CAN_dtaact_mp = 0.04 }
+	subtract_from_variable = { CAN_dtaact_fo = 0.01 }
+}
+
+CAN_clause_32_add_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_32_add_effect"
+	add_political_power = -25
+	add_to_variable = { CAN_dtaact_fuelout = 0.05 }
+	add_to_variable = { CAN_dtaact_pp = 0.03 }
+}
+
+CAN_clause_32_remove_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_32_remove_effect"
+	subtract_from_variable = { CAN_dtaact_fuelout = 0.05 }
+	subtract_from_variable = { CAN_dtaact_pp = 0.03 }
+}
+
+CAN_clause_33_add_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_33_add_effect"
+	add_political_power = -25
+	add_to_variable = { CAN_dtaact_cs = 0.02 }
+	add_to_variable = { CAN_dtaact_cg = 0.04 }
+	add_to_variable = { CAN_dtaact_pp = 0.03 }
+}
+
+CAN_clause_33_remove_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_33_remove_effect"
+	subtract_from_variable = { CAN_dtaact_cs = 0.02 }
+	subtract_from_variable = { CAN_dtaact_cg = 0.04 }
+	subtract_from_variable = { CAN_dtaact_pp = 0.03 }
+}
+
+CAN_clause_34_add_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_34_add_effect"
+	add_political_power = -50
+	add_to_variable = { CAN_dtaact_cs = 0.02 }
+	add_to_variable = { CAN_dtaact_cg = 0.01 }
+	add_to_variable = { CAN_dtaact_fo = 0.03 }
+	set_variable = { CAN_laws_support_change = 4 }
+	CAN_laws_support = yes
+}
+
+CAN_clause_34_remove_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_34_remove_effect"
+	subtract_from_variable = { CAN_dtaact_cs = 0.02 }
+	subtract_from_variable = { CAN_dtaact_cg = 0.01 }
+	subtract_from_variable = { CAN_dtaact_fo = 0.03 }
+	set_variable = { CAN_laws_support_change = 4 }
+	CAN_laws_oppose = yes
+}
+
+CAN_law_7_ai_setup = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_law_7_ai_setup"
+	CAN_clause_30_add_effect = yes
+	CAN_clause_31_add_effect = yes
+	CAN_clause_34_add_effect = yes
+}
+
+CAN_clause_35_add_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_35_add_effect"
+	add_political_power = -75
+	add_to_variable = { CAN_oasact_cg = 0.04 }
+	add_to_variable = { CAN_oasact_pp = 0.10 }
+	add_to_variable = { CAN_oasact_mp = 0.05 }
+	add_to_variable = { CAN_oasact_stab = 0.05 }
+	set_variable = { CAN_laws_support_change = 1 }
+	CAN_laws_support = yes
+}
+
+CAN_clause_35_remove_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_35_remove_effect"
+	subtract_from_variable = { CAN_oasact_cg = 0.04 }
+	subtract_from_variable = { CAN_oasact_pp = 0.10 }
+	subtract_from_variable = { CAN_oasact_mp = 0.05 }
+	subtract_from_variable = { CAN_oasact_stab = 0.05 }
+	set_variable = { CAN_laws_support_change = 1 }
+	CAN_laws_oppose = yes
+}
+
+CAN_clause_36_add_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_36_add_effect"
+	add_political_power = -50
+	add_to_variable = { CAN_oasact_cg = 0.02 }
+	add_to_variable = { CAN_oasact_pp = 0.05 }
+	add_to_variable = { CAN_oasact_mp = 0.02 }
+}
+
+CAN_clause_36_remove_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_36_remove_effect"
+	subtract_from_variable = { CAN_oasact_cg = 0.02 }
+	subtract_from_variable = { CAN_oasact_pp = 0.05 }
+	subtract_from_variable = { CAN_oasact_mp = 0.02 }
+}
+
+CAN_clause_37_add_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_37_add_effect"
+	add_political_power = -50
+	subtract_from_variable = { CAN_oasact_fo = 0.01 }
+	add_to_variable = { CAN_oasact_pp = 0.03 }
+}
+
+CAN_clause_37_remove_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_37_remove_effect"
+	add_to_variable = { CAN_oasact_fo = 0.01 }
+	subtract_from_variable = { CAN_oasact_pp = 0.03 }
+}
+
+CAN_clause_38_add_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_38_add_effect"
+	add_political_power = -25
+	subtract_from_variable = { CAN_oasact_cg = 0.02 }
+	subtract_from_variable = { CAN_oasact_fo = 0.02 }
+	subtract_from_variable = { CAN_oasact_cs = 0.02 }
+	set_variable = { CAN_laws_support_change = 4 }
+	CAN_laws_oppose = yes
+}
+
+CAN_clause_38_remove_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_38_remove_effect"
+	add_to_variable = { CAN_oasact_cg = 0.02 }
+	add_to_variable = { CAN_oasact_fo = 0.02 }
+	add_to_variable = { CAN_oasact_cs = 0.02 }
+	set_variable = { CAN_laws_support_change = 4 }
+	CAN_laws_support = yes
+}
+
+CAN_clause_39_add_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_39_add_effect"
+	add_political_power = -25
+	add_to_variable = { CAN_oasact_cg = 0.01 }
+	add_to_variable = { CAN_oasact_pp = 0.03 }
+}
+
+CAN_clause_39_remove_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_39_remove_effect"
+	subtract_from_variable = { CAN_oasact_cg = 0.01 }
+	subtract_from_variable = { CAN_oasact_pp = 0.03 }
+}
+
+CAN_law_8_ai_setup = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_law_8_ai_setup"
+	CAN_clause_35_add_effect = yes
+	CAN_clause_37_add_effect = yes
+	CAN_clause_38_add_effect = yes
+}
+
+CAN_clause_40_add_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_40_add_effect"
+	add_political_power = -50
+	subtract_from_variable = { CAN_cvaact_mp = 0.05 }
+	add_to_variable = { CAN_cvaact_pp = 0.02 }
+	add_to_variable = { CAN_cvaact_stab = 0.03 }
+}
+
+CAN_clause_40_remove_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_40_remove_effect"
+	add_to_variable = { CAN_cvaact_mp = 0.05 }
+	subtract_from_variable = { CAN_cvaact_pp = 0.02 }
+	subtract_from_variable = { CAN_cvaact_stab = 0.03 }
+}
+
+CAN_clause_41_add_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_41_add_effect"
+	add_political_power = -50
+	subtract_from_variable = { CAN_oasact_stab = 0.06 }
+	subtract_from_variable = { CAN_oasact_pp = 0.05 }
+	set_variable = { CAN_laws_support_change = 4 }
+	CAN_laws_support = yes
+}
+
+CAN_clause_41_remove_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_41_remove_effect"
+	add_to_variable = { CAN_oasact_stab = 0.06 }
+	add_to_variable = { CAN_oasact_pp = 0.05 }
+	set_variable = { CAN_laws_support_change = 4 }
+	CAN_laws_oppose = yes
+}
+
+CAN_clause_42_add_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_42_add_effect"
+	add_political_power = -25
+	add_to_variable = { CAN_oasact_cg = 0.005 }
+	add_to_variable = { CAN_oasact_stab = 0.03 }
+}
+
+CAN_clause_42_remove_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_42_remove_effect"
+	subtract_from_variable = { CAN_oasact_cg = 0.005 }
+	subtract_from_variable = { CAN_oasact_stab = 0.03 }
+}
+
+CAN_clause_43_add_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_43_add_effect"
+	add_political_power = -25
+	add_to_variable = { CAN_oasact_cg = 0.005 }
+	add_to_variable = { CAN_oasact_pp = 0.07 }
+}
+
+CAN_clause_43_remove_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_43_remove_effect"
+	subtract_from_variable = { CAN_oasact_cg = 0.005 }
+	subtract_from_variable = { CAN_oasact_pp = 0.07 }
+}
+
+CAN_clause_44_add_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_44_add_effect"
+	add_political_power = -75
+	subtract_from_variable = { CAN_cvaact_mp = 0.15 }
+	add_to_variable = { CAN_cvaact_pp = 0.05 }
+	add_to_variable = { CAN_cvaact_stab = 0.10 }
+}
+
+CAN_clause_44_remove_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_44_remove_effect"
+	add_to_variable = { CAN_cvaact_mp = 0.15 }
+	subtract_from_variable = { CAN_cvaact_pp = 0.05 }
+	subtract_from_variable = { CAN_cvaact_stab = 0.10 }
+}
+
+CAN_law_9_ai_setup = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_law_9_ai_setup"
+	CAN_clause_40_add_effect = yes
+	CAN_clause_41_add_effect = yes
+	CAN_clause_43_add_effect = yes
+}
+
+CAN_clause_45_add_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_45_add_effect"
+	add_political_power = -50
+	add_to_variable = { CAN_staact_cg = 0.01 }
+	add_to_variable = { CAN_staact_fo = 0.04 }
+	add_to_variable = { CAN_staact_pp = 0.03 }
+}
+
+CAN_clause_45_remove_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_45_remove_effect"
+	subtract_from_variable = { CAN_staact_cg = 0.01 }
+	subtract_from_variable = { CAN_staact_fo = 0.04 }
+	subtract_from_variable = { CAN_staact_pp = 0.03 }
+}
+
+CAN_clause_46_add_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_46_add_effect"
+	add_political_power = -50
+	add_to_variable = { CAN_staact_cg = 0.02 }
+	add_to_variable = { CAN_staact_cs = 0.05 }
+	add_to_variable = { CAN_staact_stab = 0.03 }
+}
+
+CAN_clause_46_remove_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_46_remove_effect"
+	subtract_from_variable = { CAN_staact_cg = 0.02 }
+	subtract_from_variable = { CAN_staact_cs = 0.05 }
+	subtract_from_variable = { CAN_staact_stab = 0.03 }
+}
+
+CAN_clause_47_add_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_47_add_effect"
+	add_political_power = -25
+	add_to_variable = { CAN_staact_cg = 0.01 }
+	add_to_variable = { CAN_staact_mp = 0.05 }
+	add_to_variable = { CAN_staact_stab = 0.03 }
+	set_variable = { CAN_laws_support_change = 3 }
+	CAN_laws_support = yes
+}
+
+CAN_clause_47_remove_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_47_remove_effect"
+	subtract_from_variable = { CAN_staact_cg = 0.01 }
+	subtract_from_variable = { CAN_staact_mp = 0.05 }
+	subtract_from_variable = { CAN_staact_stab = 0.03 }
+	set_variable = { CAN_laws_support_change = 3 }
+	CAN_laws_oppose = yes
+}
+
+CAN_clause_48_add_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_48_add_effect"
+	add_political_power = -50
+	subtract_from_variable = { CAN_staact_cg = 0.02 }
+	subtract_from_variable = { CAN_staact_pp = 0.07 }
+	subtract_from_variable = { CAN_staact_fo = 0.03 }
+}
+
+CAN_clause_48_remove_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_48_remove_effect"
+	add_to_variable = { CAN_staact_cg = 0.02 }
+	add_to_variable = { CAN_staact_pp = 0.07 }
+	add_to_variable = { CAN_staact_fo = 0.03 }
+}
+
+CAN_clause_49_add_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_49_add_effect"
+	add_political_power = -25
+	subtract_from_variable = { CAN_staact_cg = 0.01 }
+	subtract_from_variable = { CAN_staact_pp = 0.07 }
+}
+
+CAN_clause_49_remove_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_49_remove_effect"
+	add_to_variable = { CAN_staact_cg = 0.01 }
+	add_to_variable = { CAN_staact_pp = 0.07 }
+}
+
+CAN_law_10_ai_setup = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_law_10_ai_setup"
+	CAN_clause_45_add_effect = yes
+	CAN_clause_46_add_effect = yes
+	CAN_clause_47_add_effect = yes
+}
+
+CAN_clause_50_add_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_50_add_effect"
+	add_political_power = -50
+	subtract_from_variable = { CAN_etaact_cg = 0.04 }
+	subtract_from_variable = { CAN_etaact_cs = 0.04 }
+	subtract_from_variable = { CAN_etaact_fo = 0.06 }
+}
+
+CAN_clause_50_remove_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_50_remove_effect"
+	add_to_variable = { CAN_etaact_cg = 0.04 }
+	add_to_variable = { CAN_etaact_cs = 0.04 }
+	add_to_variable = { CAN_etaact_fo = 0.06 }
+}
+
+CAN_clause_51_add_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_51_add_effect"
+	add_political_power = -50
+	add_to_variable = { CAN_etaact_cg = 0.02 }
+	add_to_variable = { CAN_etaact_fo = 0.04 }
+	add_to_variable = { CAN_etaact_stab = 0.03 }
+	add_to_variable = { CAN_etaact_mp = 0.02 }
+}
+
+CAN_clause_51_remove_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_51_remove_effect"
+	subtract_from_variable = { CAN_etaact_cg = 0.02 }
+	subtract_from_variable = { CAN_etaact_fo = 0.04 }
+	subtract_from_variable = { CAN_etaact_stab = 0.03 }
+	subtract_from_variable = { CAN_etaact_mp = 0.02 }
+}
+
+CAN_clause_52_add_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_52_add_effect"
+	add_political_power = -50
+	subtract_from_variable = { CAN_etaact_cg = 0.02 }
+	subtract_from_variable = { CAN_etaact_cs = 0.03 }
+	subtract_from_variable = { CAN_etaact_pp = 0.03 }
+}
+
+CAN_clause_52_remove_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_52_remove_effect"
+	add_to_variable = { CAN_etaact_cg = 0.02 }
+	add_to_variable = { CAN_etaact_cs = 0.03 }
+	add_to_variable = { CAN_etaact_pp = 0.03 }
+}
+
+CAN_clause_53_add_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_53_add_effect"
+	add_political_power = -25
+	subtract_from_variable = { CAN_etaact_cg = 0.01 }
+	subtract_from_variable = { CAN_etaact_pp = 0.07 }
+	set_variable = { CAN_laws_support_change = 2 } #revrep
+	CAN_laws_support = yes
+}
+
+CAN_clause_53_remove_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_53_remove_effect"
+	add_to_variable = { CAN_etaact_cg = 0.01 }
+	add_to_variable = { CAN_etaact_pp = 0.07 }
+	set_variable = { CAN_laws_support_change = 2 } #revrep
+	CAN_laws_oppose = yes
+}
+
+CAN_clause_54_add_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_54_add_effect"
+	add_political_power = -25
+	subtract_from_variable = { CAN_etaact_cg = 0.02 }
+	subtract_from_variable = { CAN_etaact_cs = 0.04 }
+	subtract_from_variable = { CAN_etaact_stab = 0.02 }
+}
+
+CAN_clause_54_remove_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_54_remove_effect"
+	add_to_variable = { CAN_etaact_cg = 0.02 }
+	add_to_variable = { CAN_etaact_cs = 0.04 }
+	add_to_variable = { CAN_etaact_stab = 0.02 }
+}
+
+CAN_clause_55_add_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_55_add_effect"
+	add_political_power = -25
+	subtract_from_variable = { CAN_etaact_cg = 0.01 }
+	subtract_from_variable = { CAN_etaact_cs = 0.02 }
+	subtract_from_variable = { CAN_etaact_fo = 0.01 }
+}
+
+CAN_clause_55_remove_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_55_remove_effect"
+	add_to_variable = { CAN_etaact_cg = 0.01 }
+	add_to_variable = { CAN_etaact_cs = 0.02 }
+	add_to_variable = { CAN_etaact_fo = 0.01 }
+}
+
+CAN_law_11_ai_setup = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_law_11_ai_setup"
+	CAN_clause_50_add_effect = yes
+	CAN_clause_51_add_effect = yes
+	CAN_clause_53_add_effect = yes
+}
+
+CAN_clause_56_add_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_56_add_effect"
+	add_political_power = -50
+	add_to_variable = { CAN_chiact_cg = 0.03 }
+	add_to_variable = { CAN_chiact_stab = 0.05 }
+	add_to_variable = { CAN_chiact_mp = 0.10 }
+	set_variable = { CAN_laws_support_change = 1 } #socdems
+	CAN_laws_support = yes
+	if = {
+		limit = {
+			is_in_array = {
+				CAN_laws_clauses_available = 57 
+			}
+		}
+		remove_from_array = { CAN_laws_clauses_available = 57 }
+	}
+}
+
+CAN_clause_56_remove_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_56_remove_effect"
+	subtract_from_variable = { CAN_chiact_cg = 0.03 }
+	subtract_from_variable = { CAN_chiact_stab = 0.05 }
+	subtract_from_variable = { CAN_chiact_mp = 0.10 }
+	set_variable = { CAN_laws_support_change = 1 } #socdems
+	CAN_laws_oppose = yes
+	add_to_array = { CAN_laws_clauses_available = 57 }
+}
+
+CAN_clause_57_add_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_57_add_effect"
+	add_political_power = -25
+	add_to_variable = { CAN_chiact_cg = 0.01 }
+	add_to_variable = { CAN_chiact_stab = 0.02 }
+	add_to_variable = { CAN_chiact_mp = 0.05 }
+	if = {
+		limit = {
+			is_in_array = {
+				CAN_laws_clauses_available = 56 
+			}
+		}
+		remove_from_array = { CAN_laws_clauses_available = 56 }
+	}
+	subtract_from_variable = { CAN_law_clause_selected_num = 1 }  ##needed if mutually exclusive clause # < this clause number
+}
+
+CAN_clause_57_remove_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_57_remove_effect"
+	subtract_from_variable = { CAN_chiact_cg = 0.01 }
+	subtract_from_variable = { CAN_chiact_stab = 0.02 }
+	subtract_from_variable = { CAN_chiact_mp = 0.05 }
+	add_to_array = { CAN_laws_clauses_available = 56 }
+}
+
+CAN_clause_58_add_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_58_add_effect"
+	add_political_power = -50
+	subtract_from_variable = { CAN_chiact_cg = 0.03 }
+	subtract_from_variable = { CAN_chiact_cs = 0.06 }
+	subtract_from_variable = { CAN_chiact_pp = 0.03 }
+	if = {
+		limit = {
+			is_in_array = {
+				CAN_laws_clauses_available = 59 
+			}
+		}
+		remove_from_array = { CAN_laws_clauses_available = 59 }
+	}
+}
+
+CAN_clause_58_remove_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_58_remove_effect"
+	add_to_variable = { CAN_chiact_cg = 0.03 }
+	add_to_variable = { CAN_chiact_cs = 0.06 }
+	add_to_variable = { CAN_chiact_pp = 0.03 }
+	add_to_array = { CAN_laws_clauses_available = 59 }
+}
+
+CAN_clause_59_add_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_59_add_effect"
+	add_political_power = -25
+	subtract_from_variable = { CAN_chiact_cg = 0.02 }
+	subtract_from_variable = { CAN_chiact_cs = 0.04 }
+	subtract_from_variable = { CAN_chiact_pp = 0.02 }
+	if = {
+		limit = {
+			is_in_array = {
+				CAN_laws_clauses_available = 58 
+			}
+		}
+		remove_from_array = { CAN_laws_clauses_available = 58 }
+	}
+	subtract_from_variable = { CAN_law_clause_selected_num = 1 }  ##needed if mutually exclusive clause # < this clause number
+}
+
+CAN_clause_59_remove_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_59_remove_effect"
+	add_to_variable = { CAN_chiact_cs = 0.04 }
+	add_to_variable = { CAN_chiact_pp = 0.02 }
+	add_to_variable = { CAN_chiact_cg = 0.02 }
+	add_to_array = { CAN_laws_clauses_available = 58 }
+}
+
+CAN_clause_60_add_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_60_add_effect"
+	add_political_power = -25
+	add_to_variable = { CAN_chiact_cg = 0.01 }
+	add_to_variable = { CAN_chiact_stab = 0.03 }
+	add_to_variable = { CAN_chiact_mp = 0.03 }
+}
+
+CAN_clause_60_remove_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_60_remove_effect"
+	subtract_from_variable = { CAN_chiact_cg = 0.01 }
+	subtract_from_variable = { CAN_chiact_stab = 0.03 }
+	subtract_from_variable = { CAN_chiact_mp = 0.03 }
+}
+
+CAN_clause_61_add_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_61_add_effect"
+	add_political_power = -25
+	subtract_from_variable = { CAN_chiact_cg = 0.01 }
+	subtract_from_variable = { CAN_chiact_stab = 0.02 }
+	subtract_from_variable = { CAN_chiact_mp = 0.02 }
+}
+
+CAN_clause_61_remove_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_61_remove_effect"
+	add_to_variable = { CAN_chiact_cg = 0.01 }
+	add_to_variable = { CAN_chiact_stab = 0.02 }
+	add_to_variable = { CAN_chiact_mp = 0.02 }
+}
+
+CAN_law_12_ai_setup = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_law_12_ai_setup"
+	CAN_clause_56_add_effect = yes
+	CAN_clause_59_add_effect = yes
+	CAN_clause_61_add_effect = yes
+}
+
+CAN_clause_62_add_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_62_add_effect"
+	add_political_power = -50
+	add_to_variable = { CAN_swaact_cg = 0.04 }
+	add_to_variable = { CAN_swaact_stab = 0.10 }
+	add_to_variable = { CAN_swaact_mp = 0.30 }
+	add_to_variable = { CAN_swaact_fo = 0.04 }
+	if = {
+		limit = {
+			is_in_array = {
+				CAN_laws_clauses_available = 63 
+			}
+		}
+		remove_from_array = { CAN_laws_clauses_available = 63 }
+	}
+}
+
+CAN_clause_62_remove_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_62_remove_effect"
+	subtract_from_variable = { CAN_swaact_cg = 0.04 }
+	subtract_from_variable = { CAN_swaact_stab = 0.10 }
+	subtract_from_variable = { CAN_swaact_mp = 0.30 }
+	subtract_from_variable = { CAN_swaact_fo = 0.04 }
+	add_to_array = { CAN_laws_clauses_available = 63 }
+}
+
+CAN_clause_63_add_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_63_add_effect"
+	add_political_power = -25
+	add_to_variable = { CAN_swaact_cg = 0.02 }
+	add_to_variable = { CAN_swaact_stab = 0.05 }
+	add_to_variable = { CAN_swaact_mp = 0.20 }
+	add_to_variable = { CAN_swaact_fo = 0.02 }
+	if = {
+		limit = {
+			is_in_array = {
+				CAN_laws_clauses_available = 62 
+			}
+		}
+		remove_from_array = { CAN_laws_clauses_available = 62 }
+	}
+	subtract_from_variable = { CAN_law_clause_selected_num = 1 }  ##needed if mutually exclusive clause # < this clause number
+}
+
+CAN_clause_63_remove_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_63_remove_effect"
+	subtract_from_variable = { CAN_swaact_cg = 0.02 }
+	subtract_from_variable = { CAN_swaact_stab = 0.05 }
+	subtract_from_variable = { CAN_swaact_mp = 0.20 }
+	subtract_from_variable = { CAN_swaact_fo = 0.02 }
+	add_to_array = { CAN_laws_clauses_available = 62 }
+}
+
+CAN_clause_64_add_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_64_add_effect"
+	add_political_power = -50
+	add_to_variable = { CAN_swaact_cg = 0.01 }
+	add_to_variable = { CAN_swaact_pp = 0.07 }
+	add_to_variable = { CAN_swaact_fo = 0.03 }
+}
+
+CAN_clause_64_remove_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_64_remove_effect"
+	subtract_from_variable = { CAN_swaact_cg = 0.01 }
+	subtract_from_variable = { CAN_swaact_pp = 0.07 }
+	subtract_from_variable = { CAN_swaact_fo = 0.03 }
+}
+
+CAN_clause_65_add_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_65_add_effect"
+	add_political_power = -25
+	subtract_from_variable = { CAN_swaact_cg = 0.02 }
+	subtract_from_variable = { CAN_swaact_cs = 0.05 }
+	add_to_variable = { CAN_swaact_fo = 0.02 }
+	subtract_from_variable = { CAN_swaact_pp = 0.05 }
+}
+
+CAN_clause_65_remove_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_65_remove_effect"
+	add_to_variable = { CAN_swaact_cg = 0.02 }
+	add_to_variable = { CAN_swaact_cs = 0.05 }
+	subtract_from_variable = { CAN_swaact_fo = 0.02 }
+	add_to_variable = { CAN_swaact_pp = 0.05 }
+}
+
+CAN_clause_66_add_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_66_add_effect"
+	add_political_power = -25
+	add_to_variable = { CAN_swaact_cg = 0.01 }
+	add_to_variable = { CAN_swaact_stab = 0.03 }
+	add_to_variable = { CAN_swaact_fo = 0.03 }
+	set_variable = { CAN_laws_support_change = 2 } #revrep
+	CAN_laws_support = yes
+}
+
+CAN_clause_66_remove_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_66_remove_effect"
+	subtract_from_variable = { CAN_swaact_cg = 0.01 }
+	subtract_from_variable = { CAN_swaact_stab = 0.03 }
+	subtract_from_variable = { CAN_swaact_fo = 0.03 }
+	set_variable = { CAN_laws_support_change = 2 } #revrep
+	CAN_laws_oppose = yes
+}
+
+CAN_law_13_ai_setup = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_law_13_ai_setup"
+	CAN_clause_63_add_effect = yes
+	CAN_clause_65_add_effect = yes
+	CAN_clause_66_add_effect = yes
+}
+
+CAN_clause_70_add_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_70_add_effect"
+	add_political_power = -50
+	add_to_variable = { CAN_sfaact_cg = 0.02 }
+	add_to_variable = { CAN_sfaact_stab = 0.05 }
+	add_to_variable = { CAN_sfaact_mp = 0.20 }
+	add_to_variable = { CAN_sfaact_fo = 0.02 }
+}
+
+CAN_clause_70_remove_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_70_remove_effect"
+	subtract_from_variable = { CAN_sfaact_cg = 0.02 }
+	subtract_from_variable = { CAN_sfaact_stab = 0.05 }
+	subtract_from_variable = { CAN_sfaact_mp = 0.20 }
+	subtract_from_variable = { CAN_sfaact_fo = 0.02 }
+}
+
+CAN_clause_71_add_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_71_add_effect"
+	add_political_power = -50
+	add_to_variable = { CAN_sfaact_cg = 0.02 }
+	add_to_variable = { CAN_sfaact_stab = 0.03 }
+	add_to_variable = { CAN_sfaact_fo = 0.04 }
+	add_to_variable = { CAN_sfaact_pp = 0.05 }
+}
+
+CAN_clause_71_remove_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_71_remove_effect"
+	subtract_from_variable = { CAN_sfaact_cg = 0.02 }
+	subtract_from_variable = { CAN_sfaact_stab = 0.03 }
+	subtract_from_variable = { CAN_sfaact_fo = 0.04 }
+	subtract_from_variable = { CAN_sfaact_pp = 0.05 }
+}
+
+CAN_clause_72_add_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_72_add_effect"
+	add_political_power = -25
+	subtract_from_variable = { CAN_sfaact_cg = 0.02 }
+	subtract_from_variable = { CAN_sfaact_pp = 0.05 }
+	subtract_from_variable = { CAN_sfaact_stab = 0.03 }
+	add_to_variable = { CAN_sfaact_cs = 0.02 }
+	set_variable = { CAN_laws_support_change = 4 } #marlib
+	CAN_laws_support = yes
+}
+
+CAN_clause_72_remove_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_72_remove_effect"
+	add_to_variable = { CAN_sfaact_cg = 0.02 }
+	add_to_variable = { CAN_sfaact_pp = 0.05 }
+	add_to_variable = { CAN_sfaact_stab = 0.03 }
+	subtract_from_variable = { CAN_sfaact_cs = 0.02 }
+	set_variable = { CAN_laws_support_change = 4 } #marlib
+	CAN_laws_oppose = yes
+}
+
+CAN_clause_73_add_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_73_add_effect"
+	add_political_power = -25
+	add_to_variable = { CAN_sfaact_cg = 0.01 }
+	add_to_variable = { CAN_sfaact_stab = 0.05 }
+	add_to_variable = { CAN_sfaact_cs = 0.03 }
+	add_to_variable = { CAN_sfaact_mp = 0.05 }
+}
+
+CAN_clause_73_remove_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_73_remove_effect"
+	subtract_from_variable = { CAN_sfaact_cg = 0.01 }
+	subtract_from_variable = { CAN_sfaact_stab = 0.05 }
+	subtract_from_variable = { CAN_sfaact_cs = 0.03 }
+	subtract_from_variable = { CAN_sfaact_mp = 0.05 }
+}
+
+CAN_clause_74_add_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_74_add_effect"
+	add_political_power = -25
+	add_to_variable = { CAN_sfaact_cg = 0.01 }
+	add_to_variable = { CAN_sfaact_stab = 0.03 }
+	add_to_variable = { CAN_sfaact_fo = 0.03 }
+}
+
+CAN_clause_74_remove_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_74_remove_effect"
+	subtract_from_variable = { CAN_sfaact_cg = 0.01 }
+	subtract_from_variable = { CAN_sfaact_stab = 0.03 }
+	subtract_from_variable = { CAN_sfaact_fo = 0.03 }
+}
+
+CAN_law_14_ai_setup = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_law_14_ai_setup"
+	CAN_clause_70_add_effect = yes
+	CAN_clause_74_add_effect = yes
+	CAN_clause_72_add_effect = yes
+}
+
+CAN_clause_75_add_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_75_add_effect"
+	add_political_power = -50
+	add_to_variable = { CAN_hcnact_cg = 0.02 }
+	add_to_variable = { CAN_hcnact_stab = 0.03 }
+	add_to_variable = { CAN_hcnact_cs = 0.04 }
+	add_to_variable = { CAN_hcnact_mp = 0.10 }
+}
+
+CAN_clause_75_remove_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_75_remove_effect"
+	subtract_from_variable = { CAN_hcnact_cg = 0.02 }
+	subtract_from_variable = { CAN_hcnact_stab = 0.03 }
+	subtract_from_variable = { CAN_hcnact_cs = 0.04 }
+	subtract_from_variable = { CAN_hcnact_mp = 0.10 }
+}
+
+CAN_clause_76_add_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_76_add_effect"
+	add_political_power = -50
+	add_to_variable = { CAN_hcnact_cg = 0.02 }
+	add_to_variable = { CAN_hcnact_stab = 0.03 }
+	add_to_variable = { CAN_hcnact_fo = 0.04 }
+	add_to_variable = { CAN_hcnact_pp = 0.05 }
+	add_to_variable = { CAN_hcnact_mp = 0.10 }
+}
+
+CAN_clause_76_remove_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_76_remove_effect"
+	subtract_from_variable = { CAN_hcnact_cg = 0.02 }
+	subtract_from_variable = { CAN_hcnact_stab = 0.03 }
+	subtract_from_variable = { CAN_hcnact_fo = 0.04 }
+	subtract_from_variable = { CAN_hcnact_pp = 0.05 }
+	subtract_from_variable = { CAN_hcnact_mp = 0.10 }
+}
+
+CAN_clause_77_add_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_77_add_effect"
+	add_political_power = -25
+	add_to_variable = { CAN_hcnact_cg = 0.01 }
+	add_to_variable = { CAN_hcnact_pp = 0.07 }
+	add_to_variable = { CAN_hcnact_stab = 0.05 }
+	set_variable = { CAN_laws_support_change = 4 } #marlib
+	CAN_laws_support = yes
+}
+
+CAN_clause_77_remove_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_77_remove_effect"
+	subtract_from_variable = { CAN_hcnact_cg = 0.01 }
+	subtract_from_variable = { CAN_hcnact_pp = 0.07 }
+	subtract_from_variable = { CAN_hcnact_stab = 0.05 }
+	set_variable = { CAN_laws_support_change = 4 } #marlib
+	CAN_laws_oppose = yes
+}
+
+CAN_clause_78_add_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_78_add_effect"
+	add_political_power = -25
+	add_to_variable = { CAN_hcnact_cg = 0.01 }
+	add_to_variable = { CAN_hcnact_stab = 0.03 }
+	add_to_variable = { CAN_hcnact_mp = 0.05 }
+}
+
+CAN_clause_78_remove_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_78_remove_effect"
+	subtract_from_variable = { CAN_hcnact_cg = 0.01 }
+	subtract_from_variable = { CAN_hcnact_stab = 0.03 }
+	subtract_from_variable = { CAN_hcnact_mp = 0.05 }
+}
+
+CAN_clause_79_add_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_79_add_effect"
+	add_political_power = -25
+	subtract_from_variable = { CAN_hcnact_cg = 0.01 }
+	subtract_from_variable = { CAN_hcnact_stab = 0.04 }
+	subtract_from_variable = { CAN_hcnact_mp = 0.03 }
+	set_variable = { CAN_laws_support_change = 2 } #revrep
+	CAN_laws_support = yes
+}
+
+CAN_clause_79_remove_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_79_remove_effect"
+	add_to_variable = { CAN_hcnact_cg = 0.01 }
+	add_to_variable = { CAN_hcnact_stab = 0.04 }
+	add_to_variable = { CAN_hcnact_mp = 0.03 }
+	set_variable = { CAN_laws_support_change = 2 } #revrep
+	CAN_laws_oppose = yes
+}
+
+CAN_law_15_ai_setup = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_law_15_ai_setup"
+	CAN_clause_76_add_effect = yes
+	CAN_clause_77_add_effect = yes
+	CAN_clause_79_add_effect = yes
+}
+
+CAN_clause_80_add_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_80_add_effect"
+	add_political_power = -50
+	add_to_variable = { CAN_cfaact_cg = 0.01 }
+	add_to_variable = { CAN_cfaact_stab = 0.03 }
+	add_to_variable = { CAN_cfaact_fo = 0.01 }
+	add_to_variable = { CAN_cfaact_mp = 0.10 }
+	set_variable = { CAN_laws_support_change = 4 } #marlib
+	CAN_laws_support = yes
+}
+
+CAN_clause_80_remove_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_80_remove_effect"
+	subtract_from_variable = { CAN_cfaact_cg = 0.01 }
+	subtract_from_variable = { CAN_cfaact_stab = 0.03 }
+	subtract_from_variable = { CAN_cfaact_fo = 0.01 }
+	subtract_from_variable = { CAN_cfaact_mp = 0.10 }
+	set_variable = { CAN_laws_support_change = 4 } #marlib
+	CAN_laws_oppose = yes
+}
+
+CAN_clause_81_add_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_81_add_effect"
+	add_political_power = -50
+	add_to_variable = { CAN_cfaact_fo = 0.02 }
+	subtract_from_variable = { CAN_cfaact_stab = 0.01 }
+	subtract_from_variable = { CAN_cfaact_pp = 0.05 }
+}
+
+CAN_clause_81_remove_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_81_remove_effect"
+	subtract_from_variable = { CAN_cfaact_fo = 0.02 }
+	add_to_variable = { CAN_cfaact_stab = 0.01 }
+	add_to_variable = { CAN_cfaact_pp = 0.05 }
+}
+
+CAN_clause_82_add_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_82_add_effect"
+	add_political_power = -25
+	add_to_variable = { CAN_cfaact_cg = 0.01 }
+	add_to_variable = { CAN_cfaact_pp = 0.02 }
+	add_to_variable = { CAN_cfaact_cs = 0.03 }
+}
+
+CAN_clause_82_remove_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_82_remove_effect"
+	subtract_from_variable = { CAN_cfaact_cg = 0.01 }
+	subtract_from_variable = { CAN_cfaact_pp = 0.02 }
+	subtract_from_variable = { CAN_cfaact_cs = 0.03 }
+}
+
+CAN_clause_83_add_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_83_add_effect"
+	add_political_power = -25
+	add_to_variable = { CAN_cfaact_stab = 0.02 }
+	subtract_from_variable = { CAN_cfaact_mp = 0.03 }
+}
+
+CAN_clause_83_remove_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_83_remove_effect"
+	subtract_from_variable = { CAN_cfaact_stab = 0.02 }
+	add_to_variable = { CAN_cfaact_mp = 0.03 }
+}
+
+CAN_clause_84_add_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_84_add_effect"
+	add_political_power = -25
+	add_to_variable = { CAN_cfaact_cg = 0.01 }
+	add_to_variable = { CAN_cfaact_stab = 0.05 }
+	add_to_variable = { CAN_cfaact_pp = 0.10 }
+}
+
+CAN_clause_84_remove_effect = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_clause_84_remove_effect"
+	subtract_from_variable = { CAN_cfaact_cg = 0.01 }
+	subtract_from_variable = { CAN_cfaact_stab = 0.05 }
+	subtract_from_variable = { CAN_cfaact_pp = 0.10 }
+}
+
+CAN_law_16_ai_setup = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAN_law_16_ai_setup"
+	CAN_clause_80_add_effect = yes
+	CAN_clause_81_add_effect = yes
+	CAN_clause_82_add_effect = yes
+}

@@ -1,0 +1,480 @@
+add_namespace = krg_uob 
+add_namespace = krg_uob_news
+
+country_event = { 
+	id = krg_uob.0
+	title = krg_uob.0.t
+	desc = krg_uob.0.d
+    #picture = ???
+	is_triggered_only = yes
+
+	option = {
+		name = krg_uob.0.a
+		ENG_syndie_dmz = yes
+		country_event = {
+			id = krg_uob.1
+			days = 7
+		}
+		
+	}
+}
+
+country_event = { 
+	id = krg_uob.1
+	title = krg_uob.1.t
+	desc = krg_uob.1.d
+    #picture = ???
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+			news_event = { id = krg_uob_news.1 hours = 1 }
+			set_country_flag = ENG_second_british_revolution
+		}
+	}
+	option = {
+		name = krg_uob.1.a
+		ENG_release_syndicalists = yes
+		set_country_flag = eng_destablised
+	}
+
+	option = {
+		name = krg_uob.1.b
+		ENG_release_syndicalists = yes
+		set_country_flag = eng_destablised
+		UOB = {
+			change_tag_from	= ENG
+		}
+	}
+
+	#option = {
+	#	name = krg_uob.1.c
+	#	ENG_release_syndicalists = yes
+	#	set_country_flag = eng_destablised
+	#	MXF = {
+	#		change_tag_from	= ENG
+	#	}
+	#}
+}
+
+country_event = { 
+	id = krg_uob.2
+	title = krg_uob.2.t
+	desc = krg_uob.2.d
+    #picture = ???
+	is_triggered_only = yes
+
+	option = {
+		name = krg_uob.2.a
+		dismantle_faction = yes
+		MXF = { declare_war_on = { target = UOB type = annex_everything	} }
+	}
+}
+
+country_event = { #Germany demands compliance
+	id = krg_uob.3
+	title = krg_uob.3.t
+	desc = krg_uob.3.d
+    picture = GFX_ce_oxford_conference_1
+	is_triggered_only = yes
+
+	option = {
+		name = krg_uob.3.a
+		add_dynamic_modifier = {
+			modifier = ENG_oxford_treaty_dynamic
+			scope = OUB
+		}
+		country_event = { id = krg_uob.4 days = 10 }
+		ai_chance = {
+			base = 100
+		}
+	}
+
+	option = {
+		name = krg_uob.3.b
+		GER = {
+			country_event = { id = krg_uob.7 days = 5}
+		}
+	}
+}
+
+
+country_event = { #Further German demands
+	id = krg_uob.4
+	title = krg_uob.4.t
+	desc = krg_uob.4.d
+    picture = GFX_ce_oxford_conference_1
+	is_triggered_only = yes
+
+	option = {
+		name = krg_uob.4.a
+		MIT_add_to_mitteleuropa = yes
+		set_variable = { reichspakt_alignment_level = 2 }
+		set_reichspakt_alignment = yes
+		diplomatic_relation = {
+			country = GER
+			relation = non_aggression_pact
+			active = yes
+		}
+		GER = {
+			diplomatic_relation = {
+				country = UOB
+				relation = guarantee
+				active = yes
+			}
+		}
+
+		country_event = { id = krg_uob.5 days = 30 }
+
+		ai_chance = {
+			base = 100
+		}
+	}
+
+	option = {
+		name = krg_uob.4.b
+		GER = {
+			country_event = { id = krg_uob.7 days = 5}
+		}
+	}
+}
+
+country_event = { #Form of Goverment
+	id = krg_uob.5
+	title = krg_uob.5.t
+	desc = krg_uob.5.d
+    picture = GFX_ce_oxford_conference_1
+	is_triggered_only = yes
+
+	option = {
+		name = krg_uob.5.a #British Republic
+		set_cosmetic_tag = UOB_republic
+		add_ideas = {
+			KRG_peoples_democracy
+		}
+		add_popularity = {
+			ideology = revolutionary_republican
+			popularity = 0.15
+		}
+		add_popularity = {
+			ideology = authoritarian_socialist
+			popularity = -0.1
+		}
+
+		country_event = { id = krg_uob.8 months = 2 }
+		
+		ai_chance = {
+			base = 50
+		}
+	}
+
+	option = {
+		name = krg_uob.5.b #Union of Britain
+		set_cosmetic_tag = UOB_reformed
+		GER = {
+			add_opinion_modifier = {
+				target = UOB
+				modifier = KRG_outraged
+			}
+		}
+		add_ideas = {
+			KRG_union_democracy
+		}
+		add_popularity = {
+			ideology = radical_socialist
+			popularity = 0.05
+		}
+		add_popularity = {
+			ideology = authoritarian_socialist
+			popularity = 0.1
+		}
+
+		country_event = { id = krg_uob.9 months = 2 }
+		ai_chance = {
+			base = 25
+		}
+	}
+}
+
+country_event = { #Germany demands compliance
+	id = krg_uob.6
+	title = krg_uob.6.t
+	desc = krg_uob.6.d
+    picture = GFX_ce_oxford_conference_1
+	is_triggered_only = yes
+
+	option = {
+		name = krg_uob.6.a
+		UOB = {
+			country_event = { id = krg_uob.3 days = 10 }
+		}
+		ai_chance = {
+			base = 100
+		}
+	}
+
+	option = {
+		name = krg_uob.6.b
+		hidden_effect = {
+			UOB = {
+				country_event = { id = krg_uob.5 days = 10 }
+			}
+		}
+	}
+}
+
+country_event = { #Germany demands compliance
+	id = krg_uob.7
+	title = krg_uob.7.t
+	desc = krg_uob.7.d
+    picture = GFX_ce_oxford_conference_1
+	is_triggered_only = yes
+
+	option = {
+		name = krg_uob.7.a
+		hidden_effect = {
+			UOB = {
+				country_event = { id = krg_uob.5 days = 10 }
+			}
+		}
+		declare_war_on = {
+			target = UOB
+			type = puppet_wargoal_focus
+		}
+		
+		ai_chance = {
+			base = 35
+		}
+	}
+
+	option = {
+		name = krg_uob.7.b
+		UOB = {
+			add_popularity = {
+				ideology = paternal_autocrat
+				popularity = 0.05
+			}
+		}
+		hidden_effect = {
+			UOB = {
+				country_event = { id = krg_uob.5 days = 10 }
+			}
+		}
+		ai_chance = {
+			base = 65
+		}
+	}
+}
+
+country_event = { #first British Republic Election
+	id = krg_uob.8
+	title = krg_uob.8.t
+	desc = krg_uob.8.d
+    picture = GFX_report_greek_election
+	is_triggered_only = yes
+
+	option = {
+		name = krg_uob.8.a
+		meta_effect = {
+			text = {
+				set_politics = {
+					ruling_party = revolutionary_republican
+					last_election = "[CURRENT_DATE]"
+					election_frequency = 36
+					elections_allowed = yes
+				}
+			}
+			CURRENT_DATE = "[GetDate]"
+		}
+		hidden_effect = {
+			country_event = { id = krg_uob.8 months = 60 }
+		}
+		
+		ai_chance = {
+			base = 65
+		}
+	}
+
+	option = {
+		name = krg_uob.8.b
+		meta_effect = {
+			text = {
+				set_politics = {
+					ruling_party = radical_socialist
+					last_election = "[CURRENT_DATE]"
+					election_frequency = 60
+					elections_allowed = yes
+				}
+			}
+			CURRENT_DATE = "[GetDate]"
+		}
+
+		hidden_effect = {
+			country_event = { id = krg_uob.8 months = 60 }
+		}
+		
+		ai_chance = {
+			base = 35
+		}
+	}
+}
+
+country_event = { #TUC election
+	id = krg_uob.9
+	title = krg_uob.9.t
+	desc = krg_uob.9.d
+    picture = GFX_report_greek_election
+	is_triggered_only = yes
+
+	option = {
+		name = krg_uob.9.a
+		meta_effect = {
+			text = {
+				set_politics = {
+					ruling_party = radical_socialist
+					last_election = "[CURRENT_DATE]"
+					election_frequency = 36
+					elections_allowed = yes
+				}
+			}
+			CURRENT_DATE = "[GetDate]"
+		}
+		hidden_effect = {
+			country_event = { id = krg_uob.9 months = 36 }
+		}
+		
+		ai_chance = {
+			base = 65
+		}
+	}
+
+	option = {
+		name = krg_uob.9.b
+		meta_effect = {
+			text = {
+				set_politics = {
+					ruling_party = authoritarian_socialist
+					last_election = "[CURRENT_DATE]"
+					election_frequency = 36
+					elections_allowed = yes
+				}
+			}
+			CURRENT_DATE = "[GetDate]"
+		}
+
+		hidden_effect = {
+			country_event = { id = krg_uob.9 months = 36 }
+		}
+		
+		ai_chance = {
+			base = 35
+		}
+	}
+}
+
+country_event = { #Resistance
+	id = krg_uob.10
+	title = krg_uob.10.t
+	desc = krg_uob.10.d
+    picture = GFX_report_event_IRE_neighbourhood_soldiers
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+			every_state = {
+				limit = {
+					is_demilitarized_zone = yes
+				}
+				set_demilitarized_zone = no
+			}
+
+			country_event = { id = krg_uob.10 days = 25 }
+		}
+		
+
+	}
+
+	option = {
+		name = krg_uob.10.a
+		random_owned_controlled_state = {
+			limit = {
+				is_demilitarized_zone = no
+			}
+			set_demilitarized_zone = yes
+		}
+
+		random_owned_controlled_state = {
+			limit = {
+				is_demilitarized_zone = no
+			}
+			set_demilitarized_zone = yes
+		}
+
+		random_owned_controlled_state = {
+			limit = {
+				is_demilitarized_zone = no
+			}
+			set_demilitarized_zone = yes
+		}
+	}
+}
+
+news_event = {
+	id = krg_uob_news.1 ### Second British Revolution
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_uob_news.1" }
+	title = krg_uob_news.1.t
+	desc = krg_uob_news.1.d
+	picture = GFX_ne_UOB_revolution
+	major = yes
+	is_triggered_only = yes
+
+	option = {
+		name = krg_uob_news.1.a
+		
+	}
+}
+
+news_event = {
+	id = krg_uob_news.2 ### Second British Revolution Victory
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_uob_news.1" }
+	title = krg_uob_news.2.t
+	desc = krg_uob_news.2.d
+	picture = GFX_ne_UOB_victory
+	major = yes
+	is_triggered_only = yes
+
+	option = {
+		name = krg_uob_news.2.a
+		
+	}
+}
+
+news_event = {
+	id = krg_uob_news.3 ### Second British Revolution Loss
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_uob_news.1" }
+	title = krg_uob_news.3.t
+	desc = krg_uob_news.3.d
+	picture = GFX_ne_fra_failed_revolution
+	major = yes
+	is_triggered_only = yes
+
+	option = {
+		name = krg_uob_news.3.a
+		
+	}
+}
+
+news_event = {
+	id = krg_uob_news.4 ### Second British Revolution Intervention
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_uob_news.1" }
+	title = krg_uob_news.4.t
+	desc = krg_uob_news.4.d
+	picture = GFX_ne_GRE_albania_accord_intervention
+	major = yes
+	is_triggered_only = yes
+
+	option = {
+		name = krg_uob_news.4.a
+
+	}
+}

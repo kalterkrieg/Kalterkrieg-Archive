@@ -1,0 +1,597 @@
+scripted_gui = {
+	KRG_congress_of_nations_open = {
+		parent_window_token = politics_tab
+		context_type = player_context
+		window_name = "KRG_congress_of_nations_open_container"
+
+		visible = {
+			is_ai = no
+		}
+
+		effects = {
+            KRG_congress_of_nations_open_button_click = {
+				if = {
+					limit = { has_variable = show_congress_of_nations }
+					clear_variable = show_congress_of_nations
+					clear_variable = show_congress_of_nations_resolution
+				}
+				else = {
+					set_variable = { show_congress_of_nations = 1 }
+					if = {
+						limit = {
+							is_in_array = { global.con_member_array = ROOT }
+						}
+						set_variable = { KRG_congress_of_nations_vote_x = 230 }
+						if = {
+							limit = {
+								is_in_array = { global.con_senate_array = ROOT }
+								NOT = {
+									is_in_array = { global.con_council_array = ROOT } 
+								}
+							}
+							set_variable = { KRG_congress_of_nations_apply_council_x = 140 }
+							set_variable = { KRG_congress_of_nations_apply_senate_x = -9000 }
+							set_variable = { KRG_congress_of_nations_apply_member_x = -9000 }
+						}
+						else_if = {
+							limit = {
+								is_in_array = { global.con_council_array = ROOT }
+							}
+							set_variable = { KRG_congress_of_nations_apply_council_x = -9000 }
+							set_variable = { KRG_congress_of_nations_apply_senate_x = -9000 }
+							set_variable = { KRG_congress_of_nations_apply_member_x = -9000 }
+						}
+						else = {
+							set_variable = { KRG_congress_of_nations_apply_council_x = -9000 }
+							set_variable = { KRG_congress_of_nations_apply_senate_x = 140 }
+							set_variable = { KRG_congress_of_nations_apply_member_x = -9000 }
+						}
+					}
+					else_if = {
+						limit = { has_country_flag = con_ineligible }
+						set_variable = { KRG_congress_of_nations_vote_x = -9000 }
+						set_variable = { KRG_congress_of_nations_apply_council_x = -9000 }
+						set_variable = { KRG_congress_of_nations_apply_senate_x = -9000 }
+						set_variable = { KRG_congress_of_nations_apply_member_x = -9000 }
+					}
+					else = {
+						set_variable = { KRG_congress_of_nations_vote_x = -9000 }
+						set_variable = { KRG_congress_of_nations_apply_council_x = -9000 }
+						set_variable = { KRG_congress_of_nations_apply_senate_x = -9000 }
+						set_variable = { KRG_congress_of_nations_apply_member_x = 140 }
+					}
+					#initialise_con_members = yes
+				}
+            }
+        }
+	}
+	KRG_congress_of_nations = {
+		context_type = player_context
+		window_name = "KRG_congress_of_nations_container"
+		dirty = show_congress_of_nations
+
+		visible = {
+			check_variable = { show_congress_of_nations > 0 }
+		}
+
+		dynamic_lists = {
+			KRG_congress_of_nations_member_grid = {
+				array = global.con_member_array
+				index = con_member_index
+				change_scope = yes
+				entry_container = KRG_congress_of_nations_member_entry
+			}
+			KRG_congress_of_nations_council_grid = {
+				array = global.con_council_array
+				index = con_council_index
+				change_scope = yes
+				entry_container = KRG_congress_of_nations_council_entry
+			}
+			KRG_congress_of_nations_senate_grid = {
+				array = global.con_senate_array
+				index = con_senate_index
+				change_scope = yes
+				entry_container = KRG_congress_of_nations_senate_entry
+			}
+			KRG_congress_of_nations_vote_log_grid = {
+				array = global.vote_log_array
+				index = vote_log_index
+				change_scope = yes
+				entry_container = KRG_congress_of_nations_vote_log_entry
+			}
+		}
+
+		triggers = {
+			KRG_congress_of_nations_vote_yes_button_click_enabled = {
+				check_variable = { global.con_resolution > 0 }
+				NOT = {
+					is_in_array = { global.vote_log_array = ROOT }
+				}
+			}
+			KRG_congress_of_nations_vote_no_button_click_enabled = {
+				check_variable = { global.con_resolution > 0 }
+				NOT = {
+					is_in_array = { global.vote_log_array = ROOT }
+				}
+			}
+			KRG_congress_of_nations_abstain_button_click_enabled = {
+				check_variable = { global.con_resolution > 0 }
+				NOT = {
+					is_in_array = { global.vote_log_array = ROOT }
+				}
+			}
+		}
+
+		effects = {
+			KRG_congress_of_nations_vote_yes_button_click = {
+				add_to_array = { global.resolution_vote_array = 1 }
+				add_to_variable = { global.resolution_vote_yes = 1 }
+				add_to_array = { global.vote_log_array = ROOT }
+				add_to_array = { global.vote_log_date_array = global.date }
+				add_to_variable = { show_congress_of_nations = 1 }
+				con_resolution_check = yes
+			}
+			KRG_congress_of_nations_vote_no_button_click = {
+				add_to_array = { global.resolution_vote_array = 2 }
+				add_to_variable = { global.resolution_vote_no = 1 }
+				add_to_array = { global.vote_log_array = ROOT }
+				add_to_array = { global.vote_log_date_array = global.date }
+				if = {
+					limit = {
+						is_in_array = { global.con_council_array = ROOT }
+					}
+					add_to_variable = { global.veto_count = 1 }
+					set_country_flag = con_veto
+				}
+				if = {
+					limit = {
+						is_in_array = { global.con_senate_array = ROOT }
+					}
+					add_to_variable = { global.senate_no = 1 }
+				}
+				add_to_variable = { show_congress_of_nations = 1 }
+				con_resolution_check = yes
+			}
+			KRG_congress_of_nations_abstain_button_click = {
+				add_to_array = { global.resolution_vote_array = 3 }
+				add_to_variable = { global.resolution_abstain = 1 }
+				add_to_array = { global.vote_log_array = ROOT }
+				add_to_array = { global.vote_log_date_array = global.date }
+				add_to_variable = { show_congress_of_nations = 1 }
+				con_resolution_check = yes
+			}
+			KRG_congress_of_nations_pending_resolution_button_click = {
+				# if = {
+				# 	limit = { has_variable = show_congress_of_nations_resolution }
+				# 	clear_variable = show_congress_of_nations_resolution
+				# }
+				# else = {
+				# 	set_variable = { show_congress_of_nations_resolution = 1 }
+				# }
+				# add_to_variable = { show_congress_of_nations = 1 }
+
+				### This is commented out for now pending the adding of CoN mechanics in a future release. - Kennedy
+			}
+			KRG_congress_of_nations_speaker_button_click = {
+				if = {
+					limit = { has_variable = show_congress_of_nations_speaker }
+					clear_variable = show_congress_of_nations_speaker
+				}
+				else = {
+					set_variable = { show_congress_of_nations_speaker = 1 }
+				}
+			}
+			KRG_congress_of_nations_close_button_click = {
+				clear_variable = show_congress_of_nations
+				clear_variable = show_congress_of_nations_resolution
+				clear_variable = show_congress_of_nations_speaker
+			}
+        }
+
+		properties = {
+			KRG_congress_of_nations_member_flag = {
+				image = "[THIS.GetFlag]"
+			}
+			KRG_congress_of_nations_council_icon = {
+				image = "[THIS.GetFlag]"
+				x = global.council_icon_x_array^con_council_index
+				y = global.council_icon_y_array^con_council_index
+			}
+			KRG_congress_of_nations_senate_icon = {
+				image = "[THIS.GetFlag]"
+				x = global.senate_icon_x_array^con_senate_index
+				y = global.senate_icon_y_array^con_senate_index
+			}
+			KRG_congress_of_nations_vote_yes_button = {
+				x = KRG_congress_of_nations_vote_x
+			}
+			KRG_congress_of_nations_vote_no_button = {
+				x = KRG_congress_of_nations_vote_x
+			}
+			KRG_congress_of_nations_abstain_button = {
+				x = KRG_congress_of_nations_vote_x
+			}
+		}
+	}
+
+	KRG_congress_of_nations_speaker = {
+		context_type = player_context
+		window_name = "KRG_congress_of_nations_speaker_container"
+		dirty = show_congress_of_nations_speaker
+
+		visible = {
+			check_variable = { show_congress_of_nations_speaker > 0 }
+		}
+
+		effects = {
+			KRG_congress_of_nations_speaker_close_button_click = {
+				clear_variable = show_congress_of_nations_speaker
+			}
+		}
+
+		properties = {
+			KRG_congress_of_nations_speaker_portrait = {
+				image = "[THIS.GetSpeakerPortrait]"
+			}
+		}
+	}
+
+	KRG_congress_of_nations_resolution = {
+		context_type = player_context
+		window_name = "KRG_congress_of_nations_resolution_container"
+		dirty = show_congress_of_nations_resolution
+
+		visible = {
+			check_variable = { show_congress_of_nations_resolution > 0 }
+		}
+
+		dynamic_lists = {
+			KRG_congress_of_nations_pending_resolution_grid = {
+				array = global.pending_resolution_array
+				index = pending_resolution_index
+				change_scope = yes
+				entry_container = KRG_congress_of_nations_pending_resolution_entry
+			}
+		}
+
+		triggers = {
+			KRG_congress_of_nations_resolution_apply_council_button_click_enabled = {
+				NOT = { has_country_flag = reso_cooldown_flag }
+				NOT = { has_country_flag = reso_sent_flag }
+				NOT = {
+					is_in_array = { global.con_council_array = ROOT }
+				}
+				is_in_array = { global.con_senate_array = ROOT }
+			}
+			KRG_congress_of_nations_resolution_apply_senate_button_click_enabled = {
+				NOT = { has_country_flag = reso_cooldown_flag }
+				NOT = { has_country_flag = reso_sent_flag }
+				NOT = {
+					is_in_array = { global.con_senate_array = ROOT }
+				}
+			}
+			KRG_congress_of_nations_resolution_apply_senate_button_click_enabled = {
+				NOT = { has_country_flag = reso_cooldown_flag }
+				NOT = { has_country_flag = reso_sent_flag }
+				NOT = {
+					is_in_array = { global.con_member_array = ROOT }
+				}
+			}
+		}
+
+		effects = {
+			KRG_congress_of_nations_resolution_apply_council_button_click = {
+				council_promotion_resolution_effect = yes
+			}
+			KRG_congress_of_nations_resolution_apply_senate_button_click = {
+				senate_promotion_resolution_effect = yes
+			}
+			KRG_congress_of_nations_resolution_apply_member_button_click = {
+				member_entry_resolution_effect = yes
+			}
+			# KRG_congress_of_nations_resolution_debug_button_click = {
+			# 	maho_resolution_effect = yes
+			# }
+			# KRG_congress_of_nations_resolution_debug2_button_click = {
+			# 	debug_end_resolution = yes
+			# }
+			KRG_congress_of_nations_resolution_close_button_click = {
+				clear_variable = show_congress_of_nations_resolution
+			}
+		}
+
+		properties = {
+			KRG_congress_of_nations_resolution_apply_council_button = {
+				x = KRG_congress_of_nations_apply_council_x
+			}
+			KRG_congress_of_nations_resolution_apply_senate_button = {
+				x = KRG_congress_of_nations_apply_senate_x
+			}
+			KRG_congress_of_nations_resolution_apply_member_button = {
+				x = KRG_congress_of_nations_apply_member_x
+			}
+		}
+	}
+
+	KRG_congress_of_nations_ai = {
+		context_type = player_context
+		window_name = "KRG_congress_of_nations_ai_container"
+
+		visible = {
+			is_ai = yes
+			is_in_array = { global.con_member_array = THIS }
+		}
+
+		effects = {
+			KRG_congress_of_nations_ai_vote_yes_button_click = {
+				if = {
+					limit = { has_variable = vote_block }
+					clear_variable = vote_block
+					add_to_array = { global.resolution_vote_array = 1 }
+					add_to_variable = { global.resolution_vote_yes = 1 }
+					add_to_array = { global.vote_log_array = ROOT }
+					add_to_array = { global.vote_log_date_array = global.date }
+					every_country = {
+						limit = { is_ai = no }
+						if = {
+							limit = { has_variable = show_congress_of_nations }
+							add_to_variable = { show_congress_of_nations = 1 }
+						}
+					}
+					con_resolution_check = yes
+				}
+				else = {
+					set_variable = { vote_block = 1 }
+				}
+			}
+			KRG_congress_of_nations_ai_vote_no_button_click = {
+				if = {
+					limit = { has_variable = vote_block }
+					clear_variable = vote_block
+					add_to_array = { global.resolution_vote_array = 2 }
+					add_to_variable = { global.resolution_vote_no = 1 }
+					add_to_array = { global.vote_log_array = ROOT }
+					add_to_array = { global.vote_log_date_array = global.date }
+					if = {
+						limit = {
+							is_in_array = { global.con_council_array = ROOT }
+						}
+						add_to_variable = { global.veto_count = 1 }
+					}
+					if = {
+						limit = {
+							is_in_array = { global.con_senate_array = ROOT }
+						}
+						add_to_variable = { global.senate_no = 1 }
+					}
+					every_country = {
+						limit = { is_ai = no }
+						if = {
+							limit = { has_variable = show_congress_of_nations }
+							add_to_variable = { show_congress_of_nations = 1 }
+						}
+					}
+					con_resolution_check = yes
+				}
+				else = {
+					set_variable = { vote_block = 1 }
+				}
+			}
+			KRG_congress_of_nations_ai_vote_abstain_button_click = {
+				if = {
+					limit = { has_variable = vote_block }
+					clear_variable = vote_block
+					add_to_array = { global.resolution_vote_array = 3 }
+					add_to_variable = { global.resolution_abstain = 1 }
+					add_to_array = { global.vote_log_array = ROOT }
+					add_to_array = { global.vote_log_date_array = global.date }
+					every_country = {
+						limit = { is_ai = no }
+						if = {
+							limit = { has_variable = show_congress_of_nations }
+							add_to_variable = { show_congress_of_nations = 1 }
+						}
+					}
+					con_resolution_check = yes
+				}
+				else = {
+					set_variable = { vote_block = 1 }
+				}
+			}
+		}
+
+		triggers = {
+			KRG_congress_of_nations_ai_vote_yes_button_click_enabled = {
+				check_variable = { global.con_resolution > 0 }
+				NOT = {
+					is_in_array = { global.vote_log_array = ROOT }
+				}
+			}
+			KRG_congress_of_nations_ai_vote_no_button_click_enabled = {
+				check_variable = { global.con_resolution > 0 }
+				NOT = {
+					is_in_array = { global.vote_log_array = ROOT }
+				}
+			}
+			KRG_congress_of_nations_ai_vote_abstain_button_click_enabled = {
+				check_variable = { global.con_resolution > 0 }
+				NOT = {
+					is_in_array = { global.vote_log_array = ROOT }
+				}
+			}
+		}
+
+		ai_enabled = {
+			always = yes
+        }
+
+		ai_test_interval = 120
+		ai_test_variance = 0.5
+
+		ai_check = {
+			check_variable = { global.con_resolution > 0 }
+			NOT = {
+				is_in_array = { global.vote_log_array = ROOT }
+			}
+        }
+
+		ai_weights = {
+			KRG_congress_of_nations_ai_vote_yes_button_click = {
+				ai_will_do = {
+					base = -1
+					modifier = {
+						check_variable = { ai_vote_choice_resolution = 1 }
+						add = 10
+					}
+				}
+			}
+			KRG_congress_of_nations_ai_vote_no_button_click = {
+				ai_will_do = {
+					base = -1
+					modifier = {
+						check_variable = { ai_vote_choice_resolution = 2 }
+						add = 10
+					}
+				}
+			}
+			KRG_congress_of_nations_ai_vote_abstain_button_click = {
+				ai_will_do = {
+					base = -1
+					modifier = {
+						check_variable = { ai_vote_choice_resolution = 3 }
+						add = 10
+					}
+				}
+			}
+		}
+	}
+
+	KRG_congress_of_nations_application_ai = {
+		context_type = player_context
+		window_name = "KRG_congress_of_nations_application_ai_container"
+
+		visible = {
+			is_ai = yes
+			NOT = { has_country_flag = con_ineligible }
+		}
+
+		effects = {
+			KRG_congress_of_nations_application_ai_apply_council_button_click = {
+				if = {
+					limit = { has_variable = apply_block }
+					clear_variable = apply_block
+					council_promotion_resolution_effect = yes
+				}
+				else = {
+					set_variable = { apply_block = 1 }
+				}
+			}
+			KRG_congress_of_nations_application_ai_apply_senate_button_click = {
+				if = {
+					limit = { has_variable = apply_block }
+					clear_variable = apply_block
+					senate_promotion_resolution_effect = yes
+				}
+				else = {
+					set_variable = { apply_block = 1 }
+				}
+			}
+			KRG_congress_of_nations_application_ai_apply_member_button_click = {
+				if = {
+					limit = { has_variable = apply_block }
+					clear_variable = apply_block
+					member_entry_resolution_effect = yes
+				}
+				else = {
+					set_variable = { apply_block = 1 }
+				}
+			}
+		}
+
+		triggers = {
+			KRG_congress_of_nations_application_ai_apply_council_button_click_enabled = {
+				NOT = { has_country_flag = reso_cooldown_flag }
+				NOT = { has_country_flag = reso_sent_flag }
+				NOT = {
+					is_in_array = { global.con_council_array = ROOT }
+				}
+				is_in_array = { global.con_senate_array = ROOT }
+			}
+			KRG_congress_of_nations_application_ai_apply_senate_button_click_enabled = {
+				NOT = { has_country_flag = reso_cooldown_flag }
+				NOT = { has_country_flag = reso_sent_flag }
+				NOT = {
+					is_in_array = { global.con_senate_array = ROOT }
+				}
+			}
+			KRG_congress_of_nations_application_ai_apply_member_button_click_enabled = {
+				NOT = { has_country_flag = reso_cooldown_flag }
+				NOT = { has_country_flag = reso_sent_flag }
+				NOT = {
+					is_in_array = { global.con_member_array = ROOT }
+				}
+			}
+		}
+
+		ai_enabled = {
+			always = yes
+        }
+
+		ai_test_interval = 1000
+		ai_test_variance = 0.1
+
+		ai_check = {
+			NOT = { has_country_flag = reso_cooldown_flag }
+			NOT = { has_country_flag = reso_sent_flag }
+        }
+
+		ai_weights = {
+			KRG_congress_of_nations_application_ai_apply_council_button_click = {
+				ai_will_do = {
+					base = -1
+					modifier = {
+						NOT = {
+							is_in_array = { global.con_council_array = ROOT }
+						}
+						is_in_array = { global.con_senate_array = ROOT }
+						add = 10
+					}
+					modifier = {
+						is_ai = yes
+						add = -100
+					}
+				}
+			}
+			KRG_congress_of_nations_application_ai_apply_senate_button_click = {
+				ai_will_do = {
+					base = -1
+					modifier = {
+						NOT = {
+							is_in_array = { global.con_senate_array = ROOT }
+						}
+						add = 10
+					}
+					modifier = {
+						is_ai = yes
+						add = -100
+					}
+				}
+			}
+			KRG_congress_of_nations_application_ai_apply_member_button_click = {
+				ai_will_do = {
+					base = -1
+					modifier = {
+						NOT = {
+							is_in_array = { global.con_member_array = ROOT }
+						}
+						add = 10
+					}
+					modifier = {
+						is_ai = yes
+						add = -100
+					}
+				}
+			}
+		}
+	}
+}

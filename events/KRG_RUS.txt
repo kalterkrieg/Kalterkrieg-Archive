@@ -1,0 +1,2397 @@
+add_namespace = krg_rus
+add_namespace = krg_rus_rwk
+add_namespace = krg_rus_mil
+
+
+country_event = {
+	id = krg_rus.1 ##The Sacred War Speech
+	title = krg_rus.1.t
+	desc = krg_rus.1.d
+	picture = GFX_ce_RUS_savinkov
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_rus.1 FROM = [From.GetName]" }
+
+	option = {
+		name = krg_rus.1.a
+
+		hidden_effect = {
+			set_country_flag = RUS_sacred_war_speech_flag	
+			country_event = {
+				id = krg_rus.2
+				days = 5
+			}
+		}
+    }
+}
+
+country_event = {
+	id = krg_rus.2  ##The Sacred War Protests
+	title = krg_rus.2.t
+	desc = krg_rus.2.d
+	picture = GFX_ce_RUS_riots
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_rus.2 FROM = [From.GetName]" }
+
+	option = {
+		name = krg_rus.2.a
+		add_stability = -0.05
+		#add_ideas = RUS_sacred_war_protests
+		hidden_effect = {
+			country_event = {
+				id = krg_rus.40
+				days = 3
+			}
+		}
+    }
+}
+
+country_event = {
+	id = krg_rus.3 ## The Death of Savinkov
+	title = krg_rus.3.t
+	desc = krg_rus.3.d
+	picture = GFX_ce_RUS_savinkov_removed
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_rus.3 FROM = [From.GetName]" }
+
+	option = {
+		name = krg_rus.3.a
+		add_stability = -0.05
+		hidden_effect = {
+			country_event = {
+				id = krg_rus.4
+				days = 1
+			}
+
+			random_list = {
+				50 = {
+					country_event = {
+						id = krg_rus.49
+						days = 14
+					}
+				}
+				50 = {
+					country_event = {
+						id = krg_rus.50
+						days = 14
+					}
+				}
+			}
+		}
+		set_country_flag = RUS_savinkov_dead
+    }
+}
+
+country_event = {
+	id = krg_rus.4 #Founding of the Troika
+	title = krg_rus.4.t
+	desc = krg_rus.4.d
+	picture = GFX_ce_RUS_founding_troika
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_rus.4 FROM = [From.GetName]" }
+
+	option = {
+		name = krg_rus.4.a
+		add_political_power = 25
+		hidden_effect = {
+			country_event = {
+				id = krg_rus.5
+				days = 1
+			}
+			country_event = {
+				id = krg_rus.51
+				days = 100
+			}
+		}
+    }
+}
+
+country_event = {
+	id = krg_rus.5 ##Savinkovs Death Announced
+	title = krg_rus.5.t
+	desc = krg_rus.5.d
+	picture = GFX_ce_RUS_savinkov_death
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_rus.5 FROM = [From.GetName]" }
+
+	option = {
+		name = krg_rus.5.a
+		add_stability = -0.1
+		add_political_power = -100
+		add_war_support = -0.2
+		RUS_Kill_Savinkov = yes
+		hidden_effect = {
+			country_event = {
+				id = krg_rus.6
+				days = 7
+			}
+			EST = {
+				if = {
+					limit = {
+						has_character = EST_ants_oidermaa
+						has_government = national_populist
+					}
+					country_event = {
+						id = krg_est.1
+						days = 2
+					}
+				}	
+			}
+		}
+    }
+}
+
+country_event = {
+	id = krg_rus.6 ##Protests Spiral out of Control
+	title = krg_rus.6.t
+	desc = krg_rus.6.d
+	picture = GFX_ce_RUS_protests_spiral
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_rus.6 FROM = [From.GetName]" }
+
+	option = {
+		name = krg_rus.6.a
+		add_stability = -0.1
+		hidden_effect = {
+			
+		}
+    }
+}
+
+
+
+country_event = {
+	id = krg_rus.24 ##The Vozhd's New Year's Speech
+	title = krg_rus.24.t
+	desc = krg_rus.24.d
+	picture = GFX_ce_RUS_savinkov
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_rus.24 FROM = [From.GetName]" }
+
+	option = {
+		name = krg_rus.24.a
+		
+		add_political_power = -5
+    }
+}
+
+country_event = {
+	id = krg_rus.25 ##Rebuild the Nation
+	title = krg_rus.25.t
+	desc = krg_rus.25.d
+	picture = GFX_ce_RUS_minsk_ruins
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_rus.25 FROM = [From.GetName]" }
+
+	option = {
+		name = krg_rus.25.a
+    }
+}
+
+country_event = {
+	id = krg_rus.26 ##Project Varangian
+	title = krg_rus.26.t
+	desc = krg_rus.26.d
+	picture = GFX_ce_nuclear_scientists
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_rus.26 FROM = [From.GetName]" }
+
+	option = {
+		name = krg_rus.26.a
+    }
+}
+
+country_event = {
+	id = krg_rus.27 ##Lessons from the Great Patriotic War
+	title = krg_rus.27.t
+	desc = krg_rus.27.d
+	picture = GFX_ce_RUS_soldiers
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_rus.27 FROM = [From.GetName]" }
+
+	option = {
+		name = krg_rus.27.a
+    }
+}
+
+country_event = {
+	id = krg_rus.28 ##Policy of Liberated Land
+	title = krg_rus.28.t
+	desc = krg_rus.28.d
+
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_rus.28 FROM = [From.GetName]" }
+
+	option = {
+		name = krg_rus.28.a
+	
+    }
+}
+
+country_event = {
+	id = krg_rus.29 ##Ukraine Bilingualism
+	title = krg_rus.29.t
+	desc = krg_rus.29.d
+	
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_rus.29 FROM = [From.GetName]" }
+
+	option = {
+		name = krg_rus.29.a
+    }
+}
+
+country_event = {
+	id = krg_rus.30 ##Reassure Minorities
+	title = krg_rus.30.t
+	desc = krg_rus.30.d
+	
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_rus.30 FROM = [From.GetName]" }
+
+	option = {
+		name = krg_rus.30.a
+    }
+}
+
+country_event = {
+	id = krg_rus.31 ##Research Cities
+	title = krg_rus.31.t
+	desc = krg_rus.31.d
+	
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_rus.31 FROM = [From.GetName]" }
+
+	option = {
+		name = krg_rus.31.a
+		
+		swap_ideas = {
+			remove_idea = RUS_better_unis_1
+			add_idea = RUS_better_unis_2
+		}
+    }
+}
+country_event = {
+	id = krg_rus.32 ##Opening Event
+	title = krg_rus.32.t
+	desc = krg_rus.32.d
+	picture = GFX_ce_RUS_starting_event
+	
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_rus.32 FROM = [From.GetName]" }
+
+	option = {
+		name = krg_rus.32.a
+		hidden_effect = {
+			country_event = {
+				id = krg_rus.33
+				days = 7
+			}
+		}
+    }
+} 
+country_event = {
+	id = krg_rus.33 ##The Vozhd
+	title = krg_rus.33.t
+	desc = krg_rus.33.d
+	picture = GFX_ce_RUS_savinkov
+	
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_rus.33 FROM = [From.GetName]" }
+
+	option = {
+		name = krg_rus.33.a
+		hidden_effect = {
+			country_event = {
+				id = krg_rus.34
+				days = 2
+			}
+		}
+    }
+} 
+country_event = {
+	id = krg_rus.34 ##The Tysyatsky
+	title = krg_rus.34.t
+	desc = krg_rus.34.d
+	picture = GFX_ce_RUS_Tysyatsky
+	
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_rus.34 FROM = [From.GetName]" }
+
+	option = {
+		name = krg_rus.34.a
+		hidden_effect = {
+			country_event = {
+				id = krg_rus.35
+				days = 2
+			}
+		}
+    }
+} 
+country_event = {
+	id = krg_rus.35 ##The General Secretary
+	title = krg_rus.35.t
+	desc = krg_rus.35.d
+	picture = GFX_ce_RUS_foreign_minister #yes I know i named it wrong but this is correct -Kennedy
+	
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_rus.35 FROM = [From.GetName]" }
+
+	option = {
+		name = krg_rus.35.a
+		hidden_effect = {
+			country_event = {
+				id = krg_rus.36
+				days = 2
+			}
+		}
+    }
+} 
+country_event = {
+	id = krg_rus.36 ##The Foreign Minister
+	title = krg_rus.36.t
+	desc = krg_rus.36.d
+	picture = GFX_ce_RUS_the_foreign_minister
+	
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_rus.36 FROM = [From.GetName]" }
+
+	option = {
+		name = krg_rus.36.a
+		hidden_effect = {
+			country_event = {
+				id = krg_rus.37
+				days = 2
+			}
+		}
+    }
+} 
+country_event = {
+	id = krg_rus.37 ##The Marshal
+	title = krg_rus.37.t
+	desc = krg_rus.37.d
+	picture = GFX_ce_RUS_the_marshal
+	
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_rus.37 FROM = [From.GetName]" }
+
+	option = {
+		name = krg_rus.37.a
+		hidden_effect = {
+			country_event = {
+				id = krg_rus.38
+				days = 2
+			}
+		}
+    }
+} 
+country_event = {
+	id = krg_rus.38 ##The Commissar and the Natsgvardia
+	title = krg_rus.38.t
+	desc = krg_rus.38.d
+	picture = GFX_ce_RUS_the_commisar
+	
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_rus.38 FROM = [From.GetName]" }
+
+	option = {
+		name = krg_rus.38.a
+		hidden_effect = {
+			country_event = {
+				id = krg_rus_rwk.1
+				days = 7
+			}
+		}
+    }
+} 
+country_event = {
+	id = krg_rus.39 ##Anti war protests
+	title = krg_rus.39.t
+	desc = krg_rus.39.d
+	picture = GFX_ce_Anti_War_Protests
+	
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_rus.39 FROM = [From.GetName]" }
+
+	option = {
+		name = krg_rus.39.a
+		add_ideas = RUS_anti_war_protests
+    }
+} 
+country_event = {
+	id = krg_rus.40  ##protests fester
+	title = krg_rus.40.t
+	desc = krg_rus.40.d
+	picture = GFX_ce_RUS_fester
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_rus.40 FROM = [From.GetName]" }
+
+	option = {
+		name = krg_rus.40.a
+		hidden_effect = {
+			country_event = {
+				id = krg_rus.3
+				days = 4
+			}
+		}
+    }
+}
+country_event = {
+	id = krg_rus.41  ##army coup in moscow
+	title = krg_rus.41.t
+	desc = krg_rus.41.d
+	picture = GFX_ce_RUS_army_coup
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_rus.41 FROM = [From.GetName]" }
+
+	option = {
+		name = krg_rus.41.a
+
+    }
+}
+country_event = {
+	id = krg_rus.42  ##The Troika Stands Tall!
+	title = krg_rus.42.t
+	desc = krg_rus.42.d
+	picture = GFX_ce_RUS_soldiers
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_rus.42 FROM = [From.GetName]" }
+
+	option = {
+		name = krg_rus.42.a
+    }
+}
+country_event = {
+	id = krg_rus.43  ##The Vacancy
+	title = krg_rus.43.t
+	desc = krg_rus.43.d
+	picture = GFX_ce_RUS_founding_troika
+
+	fire_only_once = yes
+	
+	is_triggered_only = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_rus.43 FROM = [From.GetName]" }
+
+	option = {
+		name = krg_rus.43.a
+    }
+}
+
+country_event = {
+	id = krg_rus.44  ##An Argument At The Presidium
+	title = krg_rus.44.t
+	desc = krg_rus.44.d
+	picture = GFX_ce_RUS_founding_troika
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_rus.44 FROM = [From.GetName]" }
+
+	option = {
+		name = krg_rus.44.a
+		add_political_power = -10
+    }
+}
+
+country_event = {
+	id = krg_rus.45  ##Vernadsky's New Book
+	title = krg_rus.45.t
+	desc = krg_rus.45.d
+	picture = GFX_ce_RUS_the_foreign_minister
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_rus.45 FROM = [From.GetName]" }
+
+	option = {
+		name = krg_rus.45.a
+		add_stability = -0.03
+    }
+}
+
+country_event = {
+	id = krg_rus.46  ##National Renewal
+	title = krg_rus.46.t
+	desc = krg_rus.46.d
+	picture = GFX_ce_RUS_Tysyatsky
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_rus.46 FROM = [From.GetName]" }
+
+	option = {
+		name = krg_rus.46.a
+    }
+}
+
+country_event = {
+	id = krg_rus.47  ##The 1951 Party Congress
+	title = krg_rus.47.t
+	desc = krg_rus.47.d
+	picture = GFX_ce_RUS_founding_troika
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_rus.47 FROM = [From.GetName]" }
+
+	option = {
+		name = krg_rus.47.a
+		hidden_effect = {
+			country_event = {
+				id = krg_rus.48
+				days = 7
+			}
+		}
+    }
+}
+
+country_event = {
+	id = krg_rus.48  ##Chaos at the Party Congress
+	title = krg_rus.48.t
+	desc = krg_rus.48.d
+	picture = GFX_ce_RUS_party_congress
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_rus.48 FROM = [From.GetName]" }
+
+	option = {
+		name = krg_rus.48.a
+		add_political_power = -25
+    }
+}
+
+country_event = {
+	id = krg_rus.49  ##Protest grow
+	title = krg_rus.49.t
+	desc = krg_rus.49.d
+	picture = GFX_ce_RUS_party_congress
+
+	is_triggered_only = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_rus.49 FROM = [From.GetName]" }
+
+	option = {
+		name = krg_rus.49.a
+		add_political_power = -10
+		add_to_variable = { RUS_protests = 1 }
+		add_to_variable = { RUS_violence = 1 }
+		hidden_effect = {
+			random_list = {
+				50 = {
+					country_event = {
+						id = krg_rus.49
+						days = 14
+					}
+				}
+				50 = {
+					country_event = {
+						id = krg_rus.50
+						days = 14
+					}
+				}
+			}
+		}
+    }
+}
+
+country_event = {
+	id = krg_rus.50  ##Protest grow a lot
+	title = krg_rus.50.t
+	desc = krg_rus.50.d
+	picture = GFX_ce_RUS_party_congress
+
+	is_triggered_only = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_rus.50 FROM = [From.GetName]" }
+
+	option = {
+		name = krg_rus.50.a
+		add_political_power = -25
+		add_to_variable = { RUS_protests = 2 }
+		add_to_variable = { RUS_violence = 2 }
+
+		hidden_effect = {
+			random_list = {
+				50 = {
+					country_event = {
+						id = krg_rus.49
+						days = 14
+					}
+				}
+				50 = {
+					country_event = {
+						id = krg_rus.50
+						days = 14
+					}
+				}
+			}
+		}
+    }
+}
+
+country_event = {
+	id = krg_rus.51  #The Russian Winter
+	title = krg_rus.51.t
+	desc = krg_rus.51.d
+	picture = GFX_ce_RUS_party_congress
+
+	is_triggered_only = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_rus.51 FROM = [From.GetName]" }
+
+	option = {
+		name = krg_rus.51.a
+		# RUS_civil_war = yes
+		
+		# country_event = {
+		# 	id = krg_rus.52
+		# 	days = 7
+		# }
+		# hidden_effect = {
+		# 	UKR = { country_event = {
+		# 		id = krg_rus.53
+		# 		days = 14
+		# 	} }
+		# 	LIT = { country_event = {
+		# 		id = krg_rus.54
+		# 		days = 16
+		# 	}}
+		# }
+    }
+}
+country_event = {
+	id = krg_rus.52  #FER revolts
+	title = krg_rus.52.t
+	desc = krg_rus.52.d
+	picture = GFX_ce_RUS_party_congress
+
+	is_triggered_only = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_rus.52 FROM = [From.GetName]" }
+
+	option = {
+		name = krg_rus.51.a
+		every_owned_state = {
+			limit = { is_core_of = FER }
+			FER = { transfer_state = PREV }
+			teleport_armies = {
+				limit = { tag = RUS }
+				to_state_array = owned_controlled_states
+			}
+		}
+		FER = {
+			set_country_flag = FER_expansion
+		}
+    }
+}
+
+## RP minors coming in to fuck shit up
+
+country_event = {
+	id = krg_rus.53  #UKR goes in
+	title = krg_rus.53.t
+	desc = krg_rus.53.d
+	picture = GFX_ce_RUS_party_congress
+
+	is_triggered_only = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_rus.53 FROM = [From.GetName]" }
+
+	option = {
+		name = krg_rus.53.a
+		declare_war_on = {
+			target = UKD
+			type = annex_everything
+		}
+		declare_war_on = {
+			target = CRM
+			type = annex_everything
+		}
+    }
+}
+
+country_event = {
+	id = krg_rus.54  #LIT goes in
+	title = krg_rus.53.t
+	desc = krg_rus.54.d
+	picture = GFX_ce_RUS_party_congress
+
+	is_triggered_only = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_rus.54 FROM = [From.GetName]" }
+
+	option = {
+		name = krg_rus.53.a
+		declare_war_on = {
+			target = BDC
+			type = annex_everything
+		}
+    }
+}
+country_event = {
+	id = krg_rus.200 ##Vozhd Vatutin
+	title = krg_rus.200.t
+	desc = krg_rus.200.d
+	picture = GFX_ce_RUS_the_marshal
+
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_rus.200 FROM = [From.GetName]" }
+
+	option = {
+		name = krg_rus.200.a
+    }
+}
+
+# Danubian Involvement in Ukraine 
+country_event = { 
+	id = krg_rus.400 
+	title = krg_rus.400.t
+	desc = krg_rus.400.d
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_rus.400 FROM = [From.GetName]" }
+
+	option = {
+		name = krg_rus.400.a
+		add_political_power = -20
+		add_manpower = -100
+    }
+}
+
+country_event = { # Ukrainian Resistance goes wild
+	id = krg_rus.401 
+	title = krg_rus.401.t
+	desc = krg_rus.401.d
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_rus.401 FROM = [From.GetName]" }
+
+	option = {
+		name = krg_rus.401.a
+		add_political_power = -100
+			196 = { add_resistance = 40 }
+			200 = { add_resistance = 40 }
+			887 = { add_resistance = 40 }
+			259 = { add_resistance = 40 }
+			886 = { add_resistance = 40 }
+			193 = { add_resistance = 40 }
+			221 = { add_resistance = 40 }
+			227 = { add_resistance = 40 }
+    	}
+	}
+
+country_event = { # Ukraine seizes Zaporozhie
+	id = krg_rus.402 
+	title = krg_rus.402.t
+	desc = krg_rus.402.d
+	
+	fire_only_once = yes
+
+	is_triggered_only = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_rus.402 FROM = [From.GetName]" }
+
+	option = {
+		name = krg_rus.402.a
+		add_political_power = -100
+		UKR = {
+			transfer_state = 196 
+			transfer_state = 200 
+			}
+		}
+	
+	option = {
+		name = krg_rus.402.b
+		add_political_power = -100
+		UKR = {
+			transfer_state = 196 
+			transfer_state = 200 
+			}
+		declare_war_on = {
+    		target = UKR
+    		type = annex_everything
+			}
+		}
+	}
+
+
+### Purges
+
+country_event = {
+	id = krg_rus_rwk.1
+	title = krg_rus_rwk.1.t
+	desc = krg_rus_rwk.1.d
+	picture = GFX_ce_RUS_savinkov
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_rus_rwk.1 FROM = [From.GetName]" }
+
+	option = {
+		name = krg_rus_rwk.1.a
+		hidden_effect = {
+			country_event = {
+				id = krg_rus_rwk.2
+				days = 21
+			}
+			country_event = {
+				id = krg_rus_rwk.3
+				days = 4
+			}
+		}
+		RUS_rodion_malinovsky ={
+			remove_unit_leader_role = yes
+		}
+	}
+}
+
+#Trial of Malinovsky
+country_event = {
+	id = krg_rus_rwk.2
+	title = krg_rus_rwk.2.t
+	desc = krg_rus_rwk.2.d
+	picture = GFX_ce_RUS_savinkov
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_rus_rwk.2 FROM = [From.GetName]" }
+
+	option = {
+		name = krg_rus_rwk.2.a
+		hidden_effect = {
+			country_event = {
+				id = krg_rus_rwk.4
+				days = 19
+			}
+		}
+		retire_character = RUS_rodion_malinovsky
+		RUS_reduce_defeatism = yes
+	}
+}
+
+## Troika forms
+
+country_event = {
+	id = krg_rus_rwk.3
+	title = krg_rus_rwk.3.t
+	desc = krg_rus_rwk.3.d
+	# picture = GFX_ce_
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_rus_rwk.3 FROM = [From.GetName]" }
+
+	option = {
+		name = krg_rus_rwk.3.a
+		add_political_power = 25
+		set_country_flag = RUS_Troika_Formed
+		unlock_decision_tooltip = RUS_armistice_negotiations
+	}
+}
+
+#Second Round of Dismissals
+country_event = {
+	id = krg_rus_rwk.4
+	title = krg_rus_rwk.4.t
+	desc = krg_rus_rwk.4.d
+	picture = GFX_ce_RUS_savinkov
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_rus_rwk.4 FROM = [From.GetName]" }
+
+	option = {
+		name = krg_rus_rwk.4.a
+		hidden_effect = {
+			country_event = {
+				id = krg_rus_rwk.5
+				days = 21
+			}
+		}
+		# RUS_bronislav_kaminski ={
+		# 	remove_unit_leader_role = yes
+		# }
+		RUS_dmitri_pavlov ={
+			remove_unit_leader_role = yes
+		}
+		RUS_constantine_kromiadi ={
+			remove_unit_leader_role = yes
+		}
+	}
+}
+
+#The Defeatists Trial
+country_event = {
+	id = krg_rus_rwk.5
+	title = krg_rus_rwk.5.t
+	desc = krg_rus_rwk.5.d
+	picture = GFX_ce_RUS_savinkov
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_rus_rwk.5 FROM = [From.GetName]" }
+
+	option = {
+		name = krg_rus_rwk.5.a
+		#retire_character = RUS_bronislav_kaminski
+		retire_character = RUS_dmitri_pavlov
+		retire_character = RUS_constantine_kromiadi
+		RUS_reduce_defeatism = yes
+		hidden_effect = {
+			country_event = {
+				id = krg_rus_rwk.6
+				days = 19
+			}
+		}
+	}
+}
+
+#Gorgulov's Arms Investigation
+country_event = {
+	id = krg_rus_rwk.6
+	title = krg_rus_rwk.6.t
+	desc = krg_rus_rwk.6.d
+	picture = GFX_ce_RUS_the_commisar
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_rus_rwk.6 FROM = [From.GetName]" }
+
+	option = {
+		name = krg_rus_rwk.6.a
+		hidden_effect = {
+			country_event = {
+				id = krg_rus_rwk.7
+				days = 14
+			}
+		}
+	}
+}
+
+#Savinkov starts to see defeatists everywhere
+country_event = {
+	id = krg_rus_rwk.7
+	title = krg_rus_rwk.7.t
+	desc = krg_rus_rwk.7.d
+	picture = GFX_ce_RUS_savinkov
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_rus_rwk.7 FROM = [From.GetName]" }
+
+	option = {
+		name = krg_rus_rwk.7.a
+		hidden_effect = {
+			country_event = {
+				id = krg_rus_rwk.8
+				days = 17
+			}
+		}
+		RUS_increase_defeatism = yes
+	}
+}
+
+#Administrator Trial
+country_event = {
+	id = krg_rus_rwk.8
+	title = krg_rus_rwk.8.t
+	desc = krg_rus_rwk.8.d
+	picture = GFX_ce_RUS_the_commisar
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_rus_rwk.8 FROM = [From.GetName]" }
+
+	option = {
+		name = krg_rus_rwk.8.a
+		hidden_effect = {
+			country_event = {
+				id = krg_rus_rwk.9
+				days = 7
+			}
+		}
+		RUS_reduce_defeatism = yes
+
+	}
+}
+
+#Special Tribunals
+country_event = {
+	id = krg_rus_rwk.9
+	title = krg_rus_rwk.9.t
+	desc = krg_rus_rwk.9.d
+	picture = GFX_ce_RUS_savinkov
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_rus_rwk.9 FROM = [From.GetName]" }
+
+	option = {
+		name = krg_rus_rwk.9.a
+		RUS_increase_defeatism = yes
+		hidden_effect = {
+			country_event = {
+				id = krg_rus_rwk.19 #Dealing with Gorgulov
+				days = 17
+			}
+		}
+	}
+}
+
+#A Secret Communique to Germany
+country_event = {
+	id = krg_rus_rwk.10
+	title = krg_rus_rwk.10.t
+	desc = krg_rus_rwk.10.d
+	picture = GFX_ce_RUS_the_foreign_minister
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_rus_rwk.10 FROM = [From.GetName]" }
+
+	option = {
+		name = krg_rus_rwk.10.a
+		GER = {
+			country_event = {
+				id = krg_rus_rwk.11
+				days = 4
+			}	
+		}
+		set_country_flag = RUS_opened_negotiations
+	}
+}
+
+#A Secret Communique from Russia
+country_event = {
+	id = krg_rus_rwk.11
+	title = krg_rus_rwk.11.t
+	desc = krg_rus_rwk.11.d
+	picture = GFX_ce_RUS_the_foreign_minister
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_rus_rwk.11 FROM = [From.GetName]" }
+
+	option = {
+		name = krg_rus_rwk.11.a
+		RUS = {
+			country_event = {
+				id = krg_rus_rwk.12
+				days = 7
+			}	
+		}
+	}
+}
+
+
+#The German Demands
+country_event = {
+	id = krg_rus_rwk.12
+	title = krg_rus_rwk.12.t
+	desc = krg_rus_rwk.12.d
+	picture = GFX_ce_RUS_the_foreign_minister
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_rus_rwk.12 FROM = [From.GetName]" }
+
+	option = {	
+		ai_chance = {
+			base = 35
+			modifier = {
+				has_game_rule = {
+					rule = RUS_GER_PEACE_TREATY
+					option = RUS_GER_PEACE_TREATY_1936_BORDERS
+				}
+				factor = 1000
+			}
+		}
+		name = krg_rus_rwk.12.a
+		GER = { 
+			country_event = {
+				id = krg_rus_rwk.13
+				days = 12
+			}
+		}	
+		set_country_flag = RUS_Thirty_Six_Borders
+	}
+	option = {
+		ai_chance = {
+			base = 65
+			modifier = {
+				OR = {
+					has_game_rule = {
+						rule = RUS_GER_PEACE_TREATY
+						option = RUS_GER_PEACE_TREATY_UKRAINE_COMPROMISE
+					}
+					has_game_rule = {
+						rule = RUS_GER_PEACE_TREATY
+						option = RUS_GER_PEACE_TREATY_CONTINUATION_WAR
+					}
+				}
+				
+				factor = 1000
+			}
+		}
+		name = krg_rus_rwk.12.b
+		GER = { 
+			country_event = {
+				id = krg_rus_rwk.14
+				days = 12
+			}	
+		}
+	}
+}
+
+country_event = { #Germany agrees to extend the armistice 
+	id = krg_rus_rwk.13
+	title = krg_rus_rwk.13.t
+	desc = krg_rus_rwk.13.d
+	picture = GFX_ce_RUS_the_foreign_minister
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_rus_rwk.13 FROM = [From.GetName]" }
+
+	option = {	
+		name = krg_rus_rwk.13.a
+		add_stability = 0.05
+		RUS = {
+			country_event = {
+				id = krg_rus_rwk.28
+			}
+		}
+		GER_reduce_endloser_krieg = yes
+	}
+}
+
+country_event = { #Russian Blustering!
+	id = krg_rus_rwk.14
+	title = krg_rus_rwk.14.t
+	desc = krg_rus_rwk.14.d
+	picture = GFX_ce_RUS_the_foreign_minister
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_rus_rwk.14 FROM = [From.GetName]" }
+
+	option = {	
+		ai_chance = {
+			base = 80
+			modifier = {
+				has_game_rule = {
+					rule = RUS_GER_PEACE_TREATY
+					option = RUS_GER_PEACE_TREATY_UKRAINE_COMPROMISE
+				}				
+				factor = 1000
+			}
+		}
+		name = krg_rus_rwk.14.a
+		RUS = {
+			country_event = {
+				id = krg_rus_rwk.15
+				days = 8
+			}
+		}	
+	}
+	option = {	
+		ai_chance = {
+			base = 20
+			modifier = {
+				has_game_rule = {
+					rule = RUS_GER_PEACE_TREATY
+					option = RUS_GER_PEACE_TREATY_CONTINUATION_WAR
+				}
+				factor = 1000
+			}
+		}
+		name = krg_rus_rwk.14.b
+		RUS = {
+			country_event = {
+				id = krg_rus_rwk.16
+				days = 8
+			}
+		}
+	}
+}
+
+
+country_event = { #The Germans compromise
+	id = krg_rus_rwk.15
+	title = krg_rus_rwk.15.t
+	desc = krg_rus_rwk.15.d
+	picture = GFX_ce_RUS_the_foreign_minister
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_rus_rwk.15 FROM = [From.GetName]" }
+
+	option = {	
+		name = krg_rus_rwk.15.a
+		RUS = {
+			country_event = {
+				id = krg_rus_rwk.17
+				days = 8
+			}
+		}	
+	}
+}
+
+country_event = { #The Germans refuse to compromise
+	id = krg_rus_rwk.16
+	title = krg_rus_rwk.16.t
+	desc = krg_rus_rwk.16.d
+	picture = GFX_ce_RUS_the_foreign_minister
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_rus_rwk.16 FROM = [From.GetName]" }
+
+	option = {	
+		name = krg_rus_rwk.16.a
+		GER = {
+			country_event = {
+				id = krg_rus_rwk.18
+				days = 8
+			}
+		}	
+	}
+}
+
+country_event = { #A deal is signed / we need time
+	id = krg_rus_rwk.17
+	title = krg_rus_rwk.17.t
+	desc = krg_rus_rwk.17.d
+	picture = GFX_ce_RUS_the_foreign_minister
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_rus_rwk.17 FROM = [From.GetName]" }
+
+	option = {	
+		name = krg_rus_rwk.17.a
+		GER = {
+		country_event = {
+				id = krg_rus_rwk.13
+				days = 3
+			}
+		}
+		set_country_flag = RUS_GER_Ukraine_Compromise	
+	}
+}
+
+country_event = { #Are we wasting time here?
+	id = krg_rus_rwk.18
+	title = krg_rus_rwk.18.t
+	desc = krg_rus_rwk.18.d
+	picture = GFX_ce_RUS_soldiers
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_rus_rwk.18 FROM = [From.GetName]" }
+
+	option = {	
+		name = krg_rus_rwk.18.a
+		ai_chance = {
+			base = 100
+		}
+		RUS = {
+			country_event = {
+				id = krg_rus_rwk.15
+				days = 3
+			}
+		}
+	}
+	option = { #Fuck yeah, war in March 48! 
+		name = krg_rus_rwk.18.b
+		ai_chance = {
+			base = 0
+			modifier = {
+				has_game_rule = {
+					rule = RUS_GER_PEACE_TREATY
+					option = RUS_GER_PEACE_TREATY_CONTINUATION_WAR
+				}
+				add = 100
+				factor = 1000
+			}
+		}
+		declare_war_on = {
+			target = RUS
+			type = annex_everything
+		}
+		LIT = { add_to_war = { 
+			targeted_alliance = GER
+			enemy = RUS 
+			hostility_reason = asked_to_join
+		} }
+		UKR = { add_to_war = { 
+			targeted_alliance = GER
+			enemy = RUS 
+			hostility_reason = asked_to_join
+		} }
+		POL = { add_to_war = { 
+			targeted_alliance = GER
+			enemy = RUS 
+			hostility_reason = asked_to_join
+		} } 
+		KRL = { add_to_war = { 
+			targeted_alliance = GER
+			enemy = RUS 
+			hostility_reason = asked_to_join
+		} }
+		custom_effect_tooltip = RUS_GER_Continuation_War_tt
+		activate_mission = GER_RUS_Continuation_War_mission
+		RUS = { set_country_flag = RUS_armistice_resolution }
+		news_event = {
+			id = krg_rus_rwk.42
+		}
+	}
+}
+
+country_event = { #Gorgulov is becoming very close to Savinkov
+	id = krg_rus_rwk.19
+	title = krg_rus_rwk.19.t
+	desc = krg_rus_rwk.19.d
+	picture = GFX_ce_RUS_gorgulash
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_rus_rwk.19 FROM = [From.GetName]" }
+
+	option = {	
+		ai_chance = {
+			base = 25
+			modifier = {
+				has_game_rule = {
+					rule = RUS_DEATH_OF_THE_VOZHD
+					option = RUS_VATUTIN_NO_CW
+				}
+				factor = 1000
+			}
+		}
+		name = krg_rus_rwk.19.a #We need to get rid of him! NOW!
+		hidden_effect = {
+			country_event = {
+				id = krg_rus_rwk.20
+				days = 10
+			}
+		}
+	}
+	option = {	
+		ai_chance = { 
+			base = 25
+			modifier = {
+				has_game_rule = {
+					rule = RUS_DEATH_OF_THE_VOZHD
+					option = RUS_GORGULOV_CW
+				}
+				factor = 1000
+			}
+		}
+		name = krg_rus_rwk.19.b #We need to not rush, and use the army
+		hidden_effect = {
+			country_event = {
+				id = krg_rus_rwk.21
+				days = 5
+			}
+		}
+	}
+	option = {	
+		ai_chance = {
+			base = 50 
+			modifier = {
+				has_game_rule = {
+					rule = RUS_DEATH_OF_THE_VOZHD
+					option = RUS_GORGULOV_CW
+				}
+				factor = 1000
+			}
+		}
+		name = krg_rus_rwk.19.c #He can be persuaded to keep this a secret
+		hidden_effect = {
+			country_event = {
+				id = krg_rus_rwk.22
+				days = 4
+			}
+		}
+	}
+}
+
+country_event = { #The Troika make their move
+	id = krg_rus_rwk.20
+	title = krg_rus_rwk.20.t
+	desc = krg_rus_rwk.20.d
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_rus_rwk.20 FROM = [From.GetName]" }
+
+	option = {	
+		name = krg_rus_rwk.20.a
+		hidden_effect = {
+			if = { limit = { has_country_flag = RUS_armistice_army }
+				country_event = {
+					id = krg_rus_rwk.26
+					hours = 8
+				}
+			}
+			else = {
+				random_list ={
+					40 = {
+						country_event = {
+							id = krg_rus_rwk.24 #Gorgulov sniffs a rat
+							hours = 8
+						}
+					}
+					60 = {
+						country_event = {
+							id = krg_rus_rwk.23 #Bye bye G
+							hours = 8
+						}
+					}
+				}
+			}
+		}	
+	}
+}
+
+
+country_event = { #Rope in the army
+	id = krg_rus_rwk.21
+	title = krg_rus_rwk.21.t
+	desc = krg_rus_rwk.21.d
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_rus_rwk.21 FROM = [From.GetName]" }
+
+	option = {	
+		name = krg_rus_rwk.21.a #Dew it
+		ai_chance = {
+			base = 35
+		}
+		set_country_flag = RUS_armistice_army
+		hidden_effect = {
+			country_event = {
+				id = krg_rus_rwk.20
+				days = 5
+			}
+		}
+	}
+	option = {	
+		name = krg_rus_rwk.21.b #Get cold feet and keep them out
+		ai_chance = {
+			base = 25
+		}
+		hidden_effect = {
+			country_event = {
+				id = krg_rus_rwk.20
+				days = 5
+			}
+		}
+	}
+	option = {	
+		name = krg_rus_rwk.21.c #We should try talking to him?
+		ai_chance = {
+			base = 40
+			modifier = {
+				has_game_rule = {
+					rule = RUS_DEATH_OF_THE_VOZHD
+					option = RUS_GORGULOV_CW
+				}
+				factor = 1000
+			}
+		}
+		hidden_effect = {
+			country_event = {
+				id = krg_rus_rwk.22
+				days = 3
+			}
+		}
+	}
+}
+
+country_event = { #Convincing Gorgulov
+	id = krg_rus_rwk.22
+	title = krg_rus_rwk.22.t
+	desc = krg_rus_rwk.22.d
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_rus_rwk.22 FROM = [From.GetName]" }
+
+	option = {	
+		name = krg_rus_rwk.22.a 
+		hidden_effect = {
+			if = { limit = { has_country_flag = RUS_Thirty_Six_Borders }
+				country_event = {
+					id = krg_rus_rwk.24 #Gorgulov reports them
+					days = 5
+				}
+			}
+			else = {
+				country_event = {
+					id = krg_rus_rwk.25 #Peace is secured
+					days = 5
+				}
+			}
+		}	
+	}
+}
+
+country_event = { #Gorgulov tribunal no army
+	id = krg_rus_rwk.23
+	title = krg_rus_rwk.23.t
+	desc = krg_rus_rwk.23.d
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_rus_rwk.23 FROM = [From.GetName]" }
+
+	option = {	
+		name = krg_rus_rwk.23.a 
+		retire_character = RUS_Pavel_Gorgulov
+		hidden_effect = {
+			retire_character = RUS_Pavel_Gorgulov_hoi
+		}
+		add_ideas = RUS_Yakov_Serebryansky_hoi_npo
+		hidden_effect = {
+			country_event = {
+				id = krg_rus_rwk.25
+				days = 3
+			}
+		}
+	}
+}
+
+country_event = { #They get found out or reported
+	id = krg_rus_rwk.24
+	title = krg_rus_rwk.24.t
+	desc = krg_rus_rwk.24.d
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_rus_rwk.24 FROM = [From.GetName]" }
+
+	option = {	
+		name = krg_rus_rwk.24.a 
+		remove_ideas = RUS_Yuri_Shirinsky_Shikhmatov_hog_npo
+		remove_ideas = RUS_Dmitri_Shepilov_jm_npo
+		remove_ideas = RUS_Georgiy_Vernadsky_fm_ade
+
+		add_ideas = RUS_Pavel_Gorgulov_hog_npo
+		add_ideas = RUS_Ivan_Serov_jm_npo
+		add_ideas = RUS_sergei_kruglov_fm_npo
+		add_stability = -0.05
+		set_country_flag = RUS_armistice_resolution
+		hidden_effect = {
+			country_event = {
+				id = krg_rus_rwk.27
+				days = 5
+			}
+		}
+	}
+}
+
+country_event = { #Peace in our time!
+	id = krg_rus_rwk.25
+	title = krg_rus_rwk.25.t
+	desc = krg_rus_rwk.25.d
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_rus_rwk.25 FROM = [From.GetName]" }
+
+	option = {	
+		name = krg_rus_rwk.25.a 
+		set_country_flag = RUS_armistice_resolution
+		load_focus_tree = KRG_RUS_troika_tree
+		complete_national_focus = RUS_troika_stands_tall
+		activate_mission_tooltip = RUS_savinkov_suspicion_mission
+	}
+}
+
+
+country_event = { #Gorgulov tribunal army
+	id = krg_rus_rwk.26
+	title = krg_rus_rwk.26.t
+	desc = krg_rus_rwk.26.d
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_rus_rwk.26 FROM = [From.GetName]" }
+
+	option = {	
+		name = krg_rus_rwk.26.a  #Where's your blessed virgin now, Pavel?
+		retire_character = RUS_Pavel_Gorgulov
+		hidden_effect = {
+			retire_character = RUS_Pavel_Gorgulov_hoi
+		}
+		add_ideas = RUS_Yakov_Serebryansky_hoi_npo
+		hidden_effect = {
+			country_event = {
+				id = krg_rus_rwk.25
+				days = 3
+			}
+		}
+	}
+}
+
+
+country_event = { #The Palace Coup
+	id = krg_rus_rwk.27
+	title = krg_rus_rwk.27.t
+	desc = krg_rus_rwk.27.d
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_rus_rwk.27 FROM = [From.GetName]" }
+
+	option = {	
+		name = krg_rus_rwk.27.a 
+		if = {
+			limit = {
+				NOT = {
+					has_focus_tree = KRG_RUS_troika_tree
+				}
+				OR = {
+					has_idea = RUS_Pavel_Gorgulov_hoi_npo
+					has_idea = RUS_Pavel_Gorgulov_hog_npo
+				}
+			}
+			retire_character = RUS_Pavel_Gorgulov
+			hidden_effect = {
+				retire_character = RUS_Pavel_Gorgulov_hoi	
+			}
+		}
+
+		remove_ideas = RUS_Ivan_Serov_jm_npo
+		remove_ideas = RUS_sergei_kruglov_fm_npo
+
+		add_ideas =  RUS_Yuri_Shirinsky_Shikhmatov_hog_npo
+		add_ideas = RUS_Dmitri_Shepilov_jm_npo
+		
+		add_ideas= RUS_Georgiy_Vernadsky_fm_ade
+		add_stability = -0.02
+		if = {
+			limit = {
+				NOT = {
+					OR = {
+						has_idea = RUS_Yakov_Serebryansky_hoi_npo
+						has_idea = RUS_Pavel_Gorgulov_hoi_npo
+					}
+				}
+			}
+			add_ideas = RUS_Yakov_Serebryansky_hoi_npo
+		}
+		RUS_boris_savinkov = {
+			add_country_leader_trait = secluded
+		}
+		if = {
+			limit = {
+				NOT = {
+					has_focus_tree = KRG_RUS_troika_tree
+				}
+			}
+			load_focus_tree = KRG_RUS_troika_tree
+			complete_national_focus = RUS_troika_stands_tall
+		}
+		news_event = {
+			id = krg_rus_rwk.43
+		}
+	}
+}
+
+
+country_event = { #Armistice agreed extended Russian side
+	id = krg_rus_rwk.28
+	title = krg_rus_rwk.28.t
+	desc = krg_rus_rwk.28.d
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_rus_rwk.28 FROM = [From.GetName]" }
+
+	option = {	
+		name = krg_rus_rwk.28.a 
+		add_stability = 0.05
+	}
+}
+
+country_event = { #Death of Savinkov
+	id = krg_rus_rwk.29
+	title = krg_rus_rwk.29.t
+	desc = krg_rus_rwk.29.d
+	
+	trigger = {
+		has_country_leader = {
+			name = "Boris Savinkov"
+		}
+		# date = 1951.03.21
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_rus_rwk.29 FROM = [From.GetName]" }
+
+	option = {	
+		name = krg_rus_rwk.29.a 
+		country_event = {
+			id = krg_rus_rwk.30
+			days = 2
+			hours = 4
+		}
+	}
+}
+
+country_event = { #Public announcement of the Troika/Savinkov's Death
+	id = krg_rus_rwk.30
+	title = krg_rus_rwk.30.t
+	desc = krg_rus_rwk.30.d
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	picture = GFX_ce_RUS_savinkov_death
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_rus_rwk.30 FROM = [From.GetName]" }
+	
+	option = {	
+		name = krg_rus_rwk.30.a 
+		RUS_Kill_Savinkov = yes
+		hidden_effect = {
+			country_event = {
+				 id = krg_rus_rwk.31 
+				 days = 274 
+			}
+			country_event = {
+				 id = krg_rus_rwk.47 
+				 days = 40 
+			}
+			EST = {
+				if = {
+					limit = {
+						has_character = EST_ants_oidermaa
+						has_government = national_populist
+					}
+					country_event = {
+						id = krg_est.1
+						days = 2
+					}
+				}	
+			}
+		}
+	}
+}
+
+country_event = { #Troika go Boom
+	id = krg_rus_rwk.31
+	title = krg_rus_rwk.31.t
+	desc = krg_rus_rwk.31.d
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_rus_rwk.31 FROM = [From.GetName]" }
+
+	option = {	
+		name = krg_rus_rwk.31.a 
+		RUS_Kill_Troika = yes
+		if = { 
+			limit = { 
+				has_idea = RUS_Leonid_Brezhnev_eco_rso
+			}
+			RUS_Kill_Brezhnev = yes
+		}
+		if = { 
+			limit = {
+				has_idea = RUS_Pavel_Gorgulov_hoi_npo
+			}
+			RUS_Install_Gorgulov = yes
+		}
+		else = {
+			RUS_Install_Vatutin = yes
+		}
+	}
+}
+
+
+country_event = { #Trial of the Century
+	id = krg_rus_rwk.32
+	title = krg_rus_rwk.32.t
+	desc = krg_rus_rwk.32.d
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_rus_rwk.32 FROM = [From.GetName]" }
+
+	option = {
+		name = krg_rus_rwk.32.a
+		complete_national_focus = RUS_blame_the_economy
+	}
+
+	option = {
+		name = krg_rus_rwk.32.b
+		trigger = {
+			NOT = { has_idea = RUS_Pavel_Gorgulov_hoi_npo }
+		}
+
+		ai_chance = {
+			base = 100
+		}
+
+		complete_national_focus = RUS_blaming_the_archdefeatist
+	}
+}
+
+country_event = { #Day of Lead
+	id = krg_rus_rwk.33
+	title = krg_rus_rwk.33.t
+	desc = krg_rus_rwk.33.d
+	is_triggered_only = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_rus_rwk.33 FROM = [From.GetName]" }
+
+	option = {
+		name = krg_rus_rwk.33.a
+	} 
+}
+
+country_event = { #Lists
+	id = krg_rus_rwk.34
+	title = krg_rus_rwk.34.t
+	desc = krg_rus_rwk.34.d
+	is_triggered_only = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_rus_rwk.34 FROM = [From.GetName]" }
+
+	option = {
+		name = krg_rus_rwk.34.a
+	} 
+}
+
+
+country_event = { #Gorgy's Choice
+	id = krg_rus_rwk.35
+	title = krg_rus_rwk.35.t
+	desc = krg_rus_rwk.35.d
+	picture = GFX_ce_RUS_gorgulash
+	is_triggered_only = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_rus_rwk.35 FROM = [From.GetName]" }
+	option = {
+		name = krg_rus_rwk.35.a
+		set_country_flag = RUS_crisis_flag
+		complete_national_focus = RUS_Moscow_Forts_2
+		hidden_effect = {
+			RUS_fortress_moscow_fx = yes	
+		}
+	} 
+	option = {
+		name = krg_rus_rwk.35.b
+		set_country_flag = RUS_crisis_flag
+		complete_national_focus = RUS_fortress_petrograd
+		hidden_effect = {
+			RUS_fortress_petrograd_fx = yes
+		}
+		
+	} 
+	option = { #Noo, I wanna play as Vatutin!
+		ai_chance = {
+			base = 0
+		}
+		name =  krg_rus_rwk.35.c 
+		hidden_effect = {
+			set_country_flag = RUS_crisis_flag
+			random_list = {
+				50 = {
+					complete_national_focus = RUS_Moscow_Forts_2
+					RUS_fortress_moscow_fx = yes	
+				}
+				50 = {
+					complete_national_focus = RUS_fortress_petrograd
+					RUS_fortress_petrograd_fx = yes
+				}
+			}
+		}
+		PRS = { change_tag_from = ROOT }
+	}
+}
+
+country_event = { # continuation war success
+	id =  krg_rus_rwk.36
+	title =  krg_rus_rwk.36.t
+	desc =  krg_rus_rwk.36.d
+	picture = GFX_ce_RUS_minsk_ruins
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_rus_rwk.36 FROM = [From.GetName]" }
+	option = {
+		name = krg_rus_rwk.36.a
+		GER = {
+			set_country_flag = GER_RUS_cont_war_victory
+		}
+		hidden_effect = { DNF = {
+			clear_variable = DNF_Activate_Partisans
+		}}
+		RUS = {	
+			white_peace = GER
+			set_country_flag = RUS_continuation_war			
+			set_country_flag = RUS_Thirty_Six_Borders
+			RUS_Surrender_Claimed_Territories = yes
+		}
+		RUS = { 
+			news_event = {
+				id = krg_rus_rwk.39
+			}
+		}
+	}
+}
+
+
+news_event = { #Winter Ends
+	id =   krg_rus_rwk.37
+	title =   krg_rus_rwk.37.t
+	desc =   krg_rus_rwk.37.d
+	picture = GFX_ne_rus_end_of_winter
+	is_triggered_only = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_rus_rwk.37 FROM = [From.GetName]" }
+	major = yes
+	option = {
+		name =   krg_rus_rwk.37.a
+	}
+}
+
+news_event = { #Ukraine Ceded
+	id =   krg_rus_rwk.38
+	title =   krg_rus_rwk.38.t
+	desc =   krg_rus_rwk.38.d
+	picture = GFX_news_event_kiev_ruins
+	is_triggered_only = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_rus_rwk.38 FROM = [From.GetName]" }
+	major = yes
+	option = {
+		name =   krg_rus_rwk.38.a
+	}
+}
+
+
+news_event = { #East Europe Borders Ceded
+	id =   krg_rus_rwk.39
+	title =   krg_rus_rwk.39.t
+	desc =   krg_rus_rwk.39.d
+	picture = GFX_news_event_kiev_ruins
+	is_triggered_only = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_rus_rwk.39 FROM = [From.GetName]" }
+	major = yes
+	option = {
+		name =   krg_rus_rwk.39.a
+	}
+}
+
+news_event = { #Fuckers stole our shit
+	id =   krg_rus_rwk.40
+	title =   krg_rus_rwk.40.t
+	desc =   krg_rus_rwk.40.d
+	picture = GFX_news_event_kiev_ruins
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_rus_rwk.40 FROM = [From.GetName]" }
+	option = {
+		name =   krg_rus_rwk.40.a
+		news_event = {
+			id = krg_rus_rwk.46
+		}
+	}
+}
+
+
+country_event = { # continuation war failure
+	id =  krg_rus_rwk.41
+	title =  krg_rus_rwk.41.t
+	desc =  krg_rus_rwk.41.d
+	picture = GFX_ce_RUS_minsk_ruins
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_rus_rwk.41 FROM = [From.GetName]" }
+	option = {
+		name = krg_rus_rwk.41.a
+		RUS = { white_peace = GER
+				set_country_flag = RUS_continuation_war } 
+		
+	}
+}
+
+
+news_event = { #Cont war starts
+	id =   krg_rus_rwk.42
+	title =   krg_rus_rwk.42.t
+	desc =   krg_rus_rwk.42.d
+	picture = GFX_ne_ger_cont_war
+	is_triggered_only = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_rus_rwk.42 FROM = [From.GetName]" }
+	major = yes
+	option = {
+		name =   krg_rus_rwk.42.a
+	}
+}
+
+
+news_event = { #Savinkov goes into seclusion
+	id =   krg_rus_rwk.43
+	title =   krg_rus_rwk.43.t
+	desc =   krg_rus_rwk.43.d
+	picture = GFX_ne_rus_generic_red_square
+	is_triggered_only = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_rus_rwk.43 FROM = [From.GetName]" }
+	major = yes
+	option = {
+		name =   krg_rus_rwk.43.a
+	}
+}
+
+
+news_event = { #Savinkov goes into the ground
+	id =   krg_rus_rwk.44
+	title =   krg_rus_rwk.44.t
+	desc =   krg_rus_rwk.44.d
+	picture = GFX_ne_rus_savinkov_funeral
+	is_triggered_only = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_rus_rwk.44 FROM = [From.GetName]" }
+	major = yes
+	option = {
+		name =   krg_rus_rwk.44.a
+	}
+}
+
+news_event = { #Winter Starts
+	id =   krg_rus_rwk.45
+	title =   krg_rus_rwk.45.t
+	desc =   krg_rus_rwk.45.d
+	picture = GFX_ne_rus_end_of_winter
+	is_triggered_only = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_rus_rwk.45 FROM = [From.GetName]" }
+	major = yes
+	option = {
+		name =   krg_rus_rwk.45.a
+	}
+}
+
+news_event = { #Land Stolen News
+	id =   krg_rus_rwk.46
+	title =   krg_rus_rwk.46.t
+	desc =   krg_rus_rwk.46.d
+	picture = GFX_ne_rus_borders_lost
+	is_triggered_only = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_rus_rwk.46 FROM = [From.GetName]" }
+	major = yes
+	option = {
+		name =   krg_rus_rwk.46.a
+	}
+}
+
+country_event = { # force player to sign the treaty
+	id =  krg_rus_rwk.47
+	title =  krg_rus_rwk.47.t
+	desc =  krg_rus_rwk.47.d
+	picture = GFX_ce_RUS_minsk_ruins
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	trigger = {
+		NOT = {
+			has_completed_focus = RUS_signing_a_treaty
+		}
+	}
+
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_rus_rwk.47 FROM = [From.GetName]" }
+	option = {
+		name = krg_rus_rwk.47.a
+		complete_national_focus = RUS_signing_a_treaty	
+	}
+}
+
+country_event = { # Vilify Savinkov
+	id =  krg_rus_rwk.48
+	title =  krg_rus_rwk.48.t
+	desc =  krg_rus_rwk.48.d
+	picture = GFX_ce_RUS_savinkov_removed
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_rus_rwk.48 FROM = [From.GetName]" }
+	option = {
+		name = krg_rus_rwk.48.a
+	}
+}
+
+country_event = { # New Constitution
+	id =  krg_rus_rwk.49
+	title =  krg_rus_rwk.49.t
+	desc =  krg_rus_rwk.49.d
+	picture = GFX_ce_RUS_the_marshal
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_rus_rwk.49 FROM = [From.GetName]" }
+	option = {
+		name = krg_rus_rwk.49.a
+		add_stability = 0.05
+		add_political_power = 50
+	}
+	option = {
+		name = krg_rus_rwk.49.b
+		add_popularity = {
+			ideology = paternal_autocrat
+			popularity = 0.01
+		}
+		add_political_power = 50
+	}
+	option = {
+		name = krg_rus_rwk.49.c
+		add_political_power = 50
+		add_country_leader_trait = big_brother
+	}
+}
+
+
+
+
+country_event = { # The military commission 
+	id = krg_rus_mil.0
+	title = krg_rus_mil.0.t
+	desc = krg_rus_mil.0.d
+	picture = GFX_ce_RUS_party_congress
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_rus_mil.0 FROM = [From.GetName]" }
+
+	option = {
+		trigger = {
+			has_government = national_populist
+		}
+		name = krg_rus_mil.0.a
+		complete_national_focus = RUS_KORA_failed_Russia
+	} 
+	option = {
+		trigger = {
+			has_government = paternal_autocrat
+		}
+		name = krg_rus_mil.0.b
+		complete_national_focus = RUS_SZRS_failed_Russia
+	} 
+}
+
+country_event = { #New Russian Army
+	id = krg_rus_mil.1
+	title = krg_rus_mil.1.t
+	desc = krg_rus_mil.1.d
+	picture = GFX_ce_RUS_party_congress
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_rus_mil.1 FROM = [From.GetName]" }
+
+	option = {
+		name = krg_rus_mil.1.a
+	}
+	
+}
+
+country_event = { #Scythian-Russian Army
+	id = krg_rus_mil.2
+	title = krg_rus_mil.2.t
+	desc = krg_rus_mil.2.d
+	picture = GFX_ce_RUS_party_congress
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_rus_mil.2 FROM = [From.GetName]" }
+
+	option = {
+		name = krg_rus_mil.2.a
+	}
+	
+}
+
+country_event = { #The Navy loyalty
+	id = krg_rus_mil.3
+	title = krg_rus_mil.3.t
+	desc = krg_rus_mil.3.d
+	picture = GFX_ce_RUS_party_congress
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_rus_mil.3 FROM = [From.GetName]" }
+
+	option = {
+		name = krg_rus_mil.3.a
+	}
+	
+}
+
+country_event = { #A modern military indsutrialisation 
+	id = krg_rus_mil.4
+	title = krg_rus_mil.4.t
+	desc = krg_rus_mil.4.d
+	picture = GFX_ce_RUS_party_congress
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_rus_mil.4 FROM = [From.GetName]" }
+
+	option = {
+		name = krg_rus_mil.4.a
+	}
+	
+}
+### Debug ### 
+
+country_event = {
+	id = krg_rus.1001 ##Debug Mission Timer Thing because pds is stoopid
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_rus.1001 FROM = [From.GetName]" }
+
+	hidden = yes
+	is_triggered_only = yes
+
+	immediate = {
+		add_days_mission_timeout = { mission = RUS_armistice_timer_mission days = -304 }
+	}
+}
+

@@ -1,0 +1,1219 @@
+add_namespace = krg_nato
+country_event = {
+	###NATO Approved
+	id = krg_nato.1
+	title = krg_nato.1.t
+	desc = krg_nato.1.d
+	picture = GFX_ce_nato
+	immediate = {
+
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = krg_nato.1.a
+	}
+}
+
+country_event = {
+	###Introducing the 1948 NATO conference
+	id = krg_nato.2
+	title = krg_nato.2.t
+	desc = krg_nato.2.d
+	picture = GFX_CAN_ce_vancouver
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = krg_nato.2.a
+		hidden_effect = {
+			CAN = {
+				set_country_flag = KRG_in_NATO
+				country_event = {
+					id = krg_nato.4
+					days = 15
+				}
+			}
+			NEE = {
+				country_event = {
+					id = krg_nato.3
+					days = 1
+				}
+				country_event = {
+					id = krg_nato.4
+					days = 15
+				}
+			}
+			CAL = {
+				country_event = {
+					id = krg_nato.3
+					days = 1
+				}
+				country_event = {
+					id = krg_nato.4
+					days = 15
+				}
+			}
+			GLG = {
+				country_event = {
+					id = krg_nato.3
+					days = 1
+				}
+				country_event = {
+					id = krg_nato.4
+					days = 15
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	#Canada invites us to the 1948 Nato Conference
+	id = krg_nato.3
+	title = krg_nato.3.t
+	desc = krg_nato.3.d
+	picture = GFX_CAN_ce_vancouver
+	is_triggered_only = yes
+	option = {
+		name = krg_nato.3.a
+		#ai_will_do = 100		
+	}
+}
+
+country_event = {
+	###The Anti-Union State pact
+	id = krg_nato.4
+	title = krg_nato.4.t
+	desc = krg_nato.4.d
+	picture = GFX_ce_generic_party_america_first_party
+	is_triggered_only = yes
+	option = {
+		name = krg_nato.4.a
+		country_event = {
+			id = krg_nato.5
+			days = 2
+		}
+	}
+}
+
+country_event = {
+	###Proposing the Joint Projects Committee
+	id = krg_nato.5
+	title = krg_nato.5.t
+	desc = krg_nato.5.d
+	picture = GFX_report_event_ITA_Construction_1
+	is_triggered_only = yes
+	option = {
+		name = krg_nato.5.a
+		country_event = {
+			id = krg_nato.6
+			days = 2
+		}
+	}
+}
+
+country_event = {
+	###Proposing the Free Trade Zone
+	id = krg_nato.6
+	title = krg_nato.6.t
+	desc = krg_nato.6.d
+	picture = GFX_CAL_Warren_Ballot
+	is_triggered_only = yes
+	option = {
+		name = krg_nato.6.a
+		country_event = {
+			id = krg_nato.40
+			days = 2
+		}
+	}
+}
+
+country_event = {
+	###Proposing common foreign policy objectives
+	id = krg_nato.7
+	title = krg_nato.7.t
+	desc = krg_nato.7.d
+	picture = GFX_CAN_ce_accord_signed
+	is_triggered_only = yes
+	option = {
+		name = krg_nato.7.a
+		set_country_flag = foreign_policy_objectives
+		country_event = {
+			id = krg_nato.8
+			days = 4
+		}
+	}
+}
+
+country_event = {
+	###Ending the NATO Conference
+	id = krg_nato.8
+	title = krg_nato.8.t
+	desc = krg_nato.8.d
+	picture = GFX_CAN_ce_elizabeth
+	is_triggered_only = yes
+	option = {
+		name = krg_nato.8.a
+		set_global_flag = NATO_exists
+		custom_effect_tooltip = NATO_formed_3
+		set_country_flag = krg_in_NATO
+		add_to_array = {
+			array = global.nato_member_array
+			value = ROOT
+		}
+		# why was this encapsulated with root...?
+		add_dynamic_modifier = {
+			modifier = NATO_agreement
+		}
+		if = {
+			limit = {
+				tag = CAL
+			}
+			CAL = {
+				increase_accord_alignment = yes
+			}
+			hidden_effect = {
+				news_event = {
+					id = worldnews.24
+					days = 5
+				}
+				add_to_array = {
+					global.influence_log = 8
+				}
+				add_to_array = {
+					global.influence_log_val = 20
+				}
+				influence_recalc = yes
+			}
+		}
+		else = {
+			effect_tooltip = {
+				CAL = {
+					set_temp_variable = {
+						temp_level = 2
+					}
+					set_accord_alignment = yes
+				}
+			}
+		}
+		hidden_effect = {
+			if = {
+				limit = {
+					tag = NEE
+				}
+				country_event = {
+					id = nee.17
+					days = 7
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	###Coal tariffs Effect
+	id = krg_nato.9
+	title = krg_nato.9.t
+	desc = krg_nato.9.d
+	#picture = 
+	hidden = yes
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = krg_nato.9.a
+		for_each_scope_loop = {
+			array = global.nato_member_array
+			set_country_flag = NATO_coal_tariffs_proposal_passed
+			add_to_variable = {
+				var = NATO_construction_power
+				value = 0.025
+			}
+		}
+	}
+}
+
+country_event = {
+	###New England Starts Construction of St.Lawrence
+	id = krg_nato.10
+	title = krg_nato.10.t
+	desc = krg_nato.10.d
+	#picture = 
+	is_triggered_only = yes
+	option = {
+		name = krg_nato.10.a
+	}
+}
+
+country_event = {
+	###Canada Starts Construction of St.Lawrence
+	id = krg_nato.11
+	title = krg_nato.11.t
+	desc = krg_nato.11.d
+	#picture = 
+	is_triggered_only = yes
+	option = {
+		name = krg_nato.11.a
+	}
+}
+
+country_event = {
+	###New England Continues Construction of St.Lawrence
+	id = krg_nato.12
+	title = krg_nato.12.t
+	desc = krg_nato.12.d
+	#picture = 
+	is_triggered_only = yes
+	option = {
+		name = krg_nato.12.a
+	}
+}
+
+country_event = {
+	###Canada continues Construction of St.Lawrence
+	id = krg_nato.13
+	title = krg_nato.13.t
+	desc = krg_nato.13.d
+	#picture = 
+	is_triggered_only = yes
+	option = {
+		name = krg_nato.13.a
+	}
+}
+
+country_event = {
+	###GLG submits their payment for the Construction of St.Lawrence
+	id = krg_nato.14
+	title = krg_nato.14.t
+	desc = krg_nato.14.d
+	#picture = 
+	is_triggered_only = yes
+	option = {
+		name = krg_nato.14.a
+	}
+}
+
+country_event = {
+	###St.Lawrence Completed
+	id = krg_nato.15
+	title = krg_nato.15.t
+	desc = krg_nato.15.d
+	#picture = 
+	is_triggered_only = yes
+	option = {
+		name = krg_nato.15.a
+		set_global_flag = NATO_st_lawrence_complete
+		GLG = {
+			add_to_variable = {
+				var = NATO_construction_power
+				value = 0.08
+			}
+			add_to_variable = {
+				var = NATO_trade_opinion_factor
+				value = 0.15
+			}
+		}
+		CAN = {
+			add_to_variable = {
+				var = NATO_construction_power
+				value = 0.04
+			}
+			add_to_variable = {
+				var = NATO_trade_opinion_factor
+				value = 0.1
+			}
+		}
+		NEE = {
+			add_to_variable = {
+				var = NATO_construction_power
+				value = 0.04
+			}
+			add_to_variable = {
+				var = NATO_trade_opinion_factor
+				value = 0.1
+			}
+		}
+	}
+}
+
+country_event = {
+	### Generic Investment Removed
+	id = krg_nato.17
+	title = krg_nato.17.t
+	desc = krg_nato.17.d
+	#picture = 
+	is_triggered_only = yes
+	hidden = yes
+	option = {
+		name = krg_nato.17.a
+		add_to_variable = {
+			NATO_consumer_goods_factor = 0.1
+		}
+	}
+}
+
+country_event = {
+	###Cuba Generic Investment
+	id = krg_nato.18
+	title = krg_nato.18.t
+	desc = krg_nato.18.d
+	#picture = 
+	is_triggered_only = yes
+	hidden = yes
+	option = {
+		name = krg_nato.18.a
+		if = {
+			limit = {
+				original_tag = CUB
+			}
+			CUB = {
+				add_to_variable = {
+					var = NATO_consumer_goods_factor
+					value = -0.05
+				}
+				country_event = {
+					id = krg_nato.18
+					days = 365
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	###Cuba Generic Investment Removed
+	id = krg_nato.19
+	title = krg_nato.19.t
+	desc = krg_nato.19.d
+	#picture = 
+	is_triggered_only = yes
+	hidden = yes
+	option = {
+		name = krg_nato.19.a
+		CUB = {
+			add_to_variable = {
+				var = NATO_consumer_goods_factor
+				value = -0.05
+			}
+		}
+	}
+}
+
+country_event = {
+	###Trinidad Generic Investment
+	id = krg_nato.20
+	title = krg_nato.20.t
+	desc = krg_nato.20.d
+	#picture = 
+	is_triggered_only = yes
+	hidden = yes
+	option = {
+		name = krg_nato.20.a
+		if = {
+			limit = {
+				original_tag = TRI
+			}
+			TRI = {
+				add_to_variable = {
+					var = NATO_consumer_goods_factor
+					value = -0.05
+				}
+				country_event = {
+					id = krg_nato.21
+					days = 365
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	###Trinidad Generic Investment Removed
+	id = krg_nato.21
+	title = krg_nato.21.t
+	desc = krg_nato.21.d
+	#picture = 
+	is_triggered_only = yes
+	hidden = yes
+	option = {
+		name = krg_nato.21.a
+		TRI = {
+			add_to_variable = {
+				var = NATO_consumer_goods_factor
+				value = -0.05
+			}
+		}
+	}
+}
+
+country_event = {
+	###Dominican Generic Investment
+	id = krg_nato.22
+	title = krg_nato.22.t
+	desc = krg_nato.22.d
+	#picture = 
+	is_triggered_only = yes
+	hidden = yes
+	option = {
+		name = krg_nato.22.a
+		if = {
+			limit = {
+				original_tag = DOM
+			}
+			DOM = {
+				add_to_variable = {
+					var = NATO_consumer_goods_factor
+					value = -0.05
+				}
+				country_event = {
+					id = krg_nato.23
+					days = 365
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	###Dominican Generic Investment Removed
+	id = krg_nato.23
+	title = krg_nato.23.t
+	desc = krg_nato.23.d
+	#picture = 
+	is_triggered_only = yes
+	hidden = yes
+	option = {
+		name = krg_nato.23.a
+		DOM = {
+			add_to_variable = {
+				var = NATO_consumer_goods_factor
+				value = -0.05
+			}
+		}
+	}
+}
+
+country_event = {
+	###Haiti Generic Investment
+	id = krg_nato.24
+	title = krg_nato.24.t
+	desc = krg_nato.24.d
+	#picture = 
+	is_triggered_only = yes
+	hidden = yes
+	option = {
+		name = krg_nato.24.a
+		if = {
+			limit = {
+				original_tag = HAI
+			}
+			HAI = {
+				add_to_variable = {
+					var = NATO_consumer_goods_factor
+					value = -0.05
+				}
+				country_event = {
+					id = krg_nato.25
+					days = 365
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	###Haiti Generic Investment Removed
+	id = krg_nato.25
+	title = krg_nato.25.t
+	desc = krg_nato.25.d
+	#picture = 
+	is_triggered_only = yes
+	hidden = yes
+	option = {
+		name = krg_nato.25.a
+		HAI = {
+			add_to_variable = {
+				var = NATO_consumer_goods_factor
+				value = -0.05
+			}
+		}
+	}
+}
+
+country_event = {
+	###Panama Generic Investment
+	id = krg_nato.26
+	title = krg_nato.26.t
+	desc = krg_nato.26.d
+	#picture = 
+	is_triggered_only = yes
+	hidden = yes
+	option = {
+		name = krg_nato.26.a
+		if = {
+			limit = {
+				original_tag = PAN
+			}
+			PAN = {
+				add_to_variable = {
+					var = NATO_consumer_goods_factor
+					value = -0.05
+				}
+				country_event = {
+					id = krg_nato.27
+					days = 365
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	###Panama Generic Investment Removed
+	id = krg_nato.27
+	title = krg_nato.27.t
+	desc = krg_nato.27.d
+	#picture = 
+	is_triggered_only = yes
+	hidden = yes
+	option = {
+		name = krg_nato.27.a
+		PAN = {
+			add_to_variable = {
+				var = NATO_consumer_goods_factor
+				value = -0.05
+			}
+		}
+	}
+}
+
+country_event = {
+	###Costa Rica Generic Investment
+	id = krg_nato.28
+	title = krg_nato.28.t
+	desc = krg_nato.28.d
+	#picture = 
+	is_triggered_only = yes
+	hidden = yes
+	option = {
+		name = krg_nato.28.a
+		if = {
+			limit = {
+				original_tag = COS
+			}
+			COS = {
+				add_to_variable = {
+					var = NATO_consumer_goods_factor
+					value = -0.05
+				}
+				country_event = {
+					id = krg_nato.29
+					days = 365
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	###Costa Rica Generic Investment Removed
+	id = krg_nato.29
+	title = krg_nato.29.t
+	desc = krg_nato.29.d
+	#picture = 
+	is_triggered_only = yes
+	hidden = yes
+	option = {
+		name = krg_nato.29.a
+		COS = {
+			add_to_variable = {
+				var = NATO_consumer_goods_factor
+				value = -0.05
+			}
+		}
+	}
+}
+
+country_event = {
+	###Centroamerica Generic Investment
+	id = krg_nato.30
+	title = krg_nato.30.t
+	desc = krg_nato.30.d
+	#picture = 
+	is_triggered_only = yes
+	hidden = yes
+	option = {
+		name = krg_nato.30.a
+		if = {
+			limit = {
+				original_tag = CEN
+			}
+			CEN = {
+				add_to_variable = {
+					var = NATO_consumer_goods_factor
+					value = -0.05
+				}
+				country_event = {
+					id = krg_nato.31
+					days = 365
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	###Centroamerica Generic Investment Removed
+	id = krg_nato.31
+	title = krg_nato.31.t
+	desc = krg_nato.31.d
+	#picture = 
+	is_triggered_only = yes
+	hidden = yes
+	option = {
+		name = krg_nato.31.a
+		CEN = {
+			add_to_variable = {
+				var = NATO_consumer_goods_factor
+				value = -0.05
+			}
+		}
+	}
+}
+
+country_event = {
+	###Puerto Rico Generic Investment
+	id = krg_nato.32
+	title = krg_nato.32.t
+	desc = krg_nato.32.d
+	#picture = 
+	is_triggered_only = yes
+	hidden = yes
+	option = {
+		name = krg_nato.32.a
+		if = {
+			limit = {
+				original_tag = PRI
+			}
+			PRI = {
+				add_to_variable = {
+					var = NATO_consumer_goods_factor
+					value = -0.05
+				}
+				country_event = {
+					id = krg_nato.33
+					days = 365
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	###Puerto Rico Generic Investment Removed
+	id = krg_nato.33
+	title = krg_nato.33.t
+	desc = krg_nato.33.d
+	#picture = 
+	is_triggered_only = yes
+	hidden = yes
+	option = {
+		name = krg_nato.33.a
+		PRI = {
+			add_to_variable = {
+				var = NATO_consumer_goods_factor
+				value = -0.05
+			}
+		}
+	}
+}
+
+country_event = {
+	###Venezuela Generic Investment
+	id = krg_nato.34
+	title = krg_nato.34.t
+	desc = krg_nato.34.d
+	#picture = 
+	is_triggered_only = yes
+	hidden = yes
+	option = {
+		name = krg_nato.34.a
+		if = {
+			limit = {
+				original_tag = VEN
+			}
+			VEN = {
+				add_to_variable = {
+					var = NATO_consumer_goods_factor
+					value = -0.05
+				}
+				country_event = {
+					id = krg_nato.35
+					days = 365
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	###Venezuela  Generic Investment Removed
+	id = krg_nato.35
+	title = krg_nato.35.t
+	desc = krg_nato.35.d
+	#picture = 
+	is_triggered_only = yes
+	hidden = yes
+	option = {
+		name = krg_nato.35.a
+		VEN = {
+			add_to_variable = {
+				var = NATO_consumer_goods_factor
+				value = -0.05
+			}
+		}
+	}
+}
+
+country_event = {
+	###Mexico Generic Investment
+	id = krg_nato.36
+	title = krg_nato.36.t
+	desc = krg_nato.36.d
+	#picture = 
+	is_triggered_only = yes
+	hidden = yes
+	option = {
+		name = krg_nato.36.a
+		if = {
+			limit = {
+				original_tag = MEX
+			}
+			MEX = {
+				add_to_variable = {
+					var = NATO_consumer_goods_factor
+					value = -0.05
+				}
+				country_event = {
+					id = krg_nato.37
+					days = 365
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	###Mexico Generic Investment Removed
+	id = krg_nato.37
+	title = krg_nato.37.t
+	desc = krg_nato.37.d
+	#picture = 
+	is_triggered_only = yes
+	hidden = yes
+	option = {
+		name = krg_nato.37.a
+		MEX = {
+			add_to_variable = {
+				var = NATO_consumer_goods_factor
+				value = -0.05
+			}
+		}
+	}
+}
+
+country_event = {
+	#Caribbean Expansion
+	id = krg_nato.38
+	title = krg_nato.38.t
+	desc = krg_nato.38.d
+	picture = u
+	trigger = {
+		NOT = {
+			AND = {
+				has_country_flag = NEE_has_invited_PRI
+				has_country_flag = NEE_has_invited_JAM
+				has_country_flag = NEE_has_invited_TRI
+				has_country_flag = NEE_has_invited_CUB
+			}
+		}
+	}
+	is_triggered_only = yes
+	trigger = {
+	}
+	option = {
+		#Puerto Rico
+		name = krg_nato.38.a
+		trigger = {
+			NOT = {
+				has_country_flag = NEE_has_invited_PRI
+			}
+		}
+		hidden_effect = {
+			country_event = {
+				id = krg_nato.38
+				days = 1
+			}
+		}
+		PRI = {
+			country_event = {
+				id = krg_nato.39
+				days = 1
+			}
+		}
+		set_country_flag = NEE_has_invited_PRI
+	}
+	option = {
+		#Jamaica
+		name = krg_nato.38.b
+		trigger = {
+			NOT = {
+				has_country_flag = NEE_has_invited_JAM
+			}
+		}
+		hidden_effect = {
+			country_event = {
+				id = krg_nato.38
+				days = 1
+			}
+		}
+		JAM = {
+			country_event = {
+				id = krg_nato.39
+				days = 1
+			}
+		}
+		set_country_flag = NEE_has_invited_JAM
+	}
+	option = {
+		#Trinidad
+		name = krg_nato.38.c
+		trigger = {
+			NOT = {
+				has_country_flag = NEE_has_invited_TRI
+			}
+		}
+		hidden_effect = {
+			country_event = {
+				id = krg_nato.38
+				days = 1
+			}
+		}
+		TRI = {
+			country_event = {
+				id = krg_nato.39
+				days = 1
+			}
+		}
+		set_country_flag = NEE_has_invited_TRI
+	}
+	option = {
+		#Cuba
+		name = krg_nato.38.e
+		trigger = {
+			NOT = {
+				has_country_flag = NEE_has_invited_CUB
+			}
+		}
+		hidden_effect = {
+			country_event = {
+				id = krg_nato.38
+				days = 1
+			}
+		}
+		CUB = {
+			country_event = {
+				id = krg_nato.39
+				days = 1
+			}
+		}
+		set_country_flag = NEE_has_invited_CUB
+	}
+}
+
+country_event = {
+	#Caribbean Expansion
+	id = krg_nato.39
+	title = krg_nato.39.t
+	desc = krg_nato.39.d
+	picture = u
+	is_triggered_only = yes
+	trigger = {
+	}
+	option = {
+		#Of Course
+		name = krg_nato.39.a
+		add_to_array = {
+			array = global.nato_member_array
+			value = ROOT
+		}
+		ai_chance = {
+			base = 60
+		}
+	}
+	option = {
+		#No
+		name = krg_nato.39.b
+		ai_chance = {
+			base = 20
+			modifier = {
+				if = {
+					limit = {
+						ROOT = {
+							is_in_or_aligned_with_accord = yes
+						}
+					}
+				}
+				factor = 0
+			}
+		}
+	}
+}
+
+country_event = {
+	###The First Dispute
+	id = krg_nato.40
+	title = krg_nato.40.t
+	desc = krg_nato.40.d
+	picture = GFX_event_NEE_map
+	is_triggered_only = yes
+	option = {
+		name = krg_nato.40.a
+		country_event = {
+			id = krg_nato.7
+			days = 3
+		}
+	}
+}
+
+country_event = {
+	#Central American Expansion
+	id = krg_nato.41
+	title = krg_nato.41.t
+	desc = krg_nato.41.d
+	picture = u
+	trigger = {
+		NOT = {
+			AND = {
+				has_country_flag = NEE_has_invited_PAN
+				has_country_flag = NEE_has_invited_COS
+				has_country_flag = NEE_has_invited_CEN
+			}
+		}
+	}
+	is_triggered_only = yes
+	trigger = {
+	}
+	option = {
+		#Panama
+		name = krg_nato.41.a
+		trigger = {
+			NOT = {
+				has_country_flag = NEE_has_invited_PAN
+			}
+		}
+		hidden_effect = {
+			country_event = {
+				id = krg_nato.41
+				days = 1
+			}
+		}
+		PAN = {
+			country_event = {
+				id = krg_nato.39
+				days = 1
+			}
+		}
+		set_country_flag = NEE_has_invited_PAN
+	}
+	option = {
+		#Costa Rica
+		name = krg_nato.41.b
+		trigger = {
+			NOT = {
+				has_country_flag = NEE_has_invited_COS
+			}
+		}
+		hidden_effect = {
+			country_event = {
+				id = krg_nato.41
+				days = 1
+			}
+		}
+		COS = {
+			country_event = {
+				id = krg_nato.39
+				days = 1
+			}
+		}
+		set_country_flag = NEE_has_invited_COS
+	}
+	option = {
+		#Centroamerica
+		name = krg_nato.41.c
+		trigger = {
+			NOT = {
+				has_country_flag = NEE_has_invited_CAN
+			}
+		}
+		hidden_effect = {
+			country_event = {
+				id = krg_nato.41
+				days = 1
+			}
+		}
+		CAN = {
+			country_event = {
+				id = krg_nato.39
+				days = 1
+			}
+		}
+		set_country_flag = NEE_has_invited_CAN
+	}
+}
+
+country_event = {
+	#South American ExCOLsion
+	id = krg_nato.42
+	title = krg_nato.42.t
+	desc = krg_nato.42.d
+	picture = u
+	trigger = {
+		NOT = {
+			AND = {
+				has_country_flag = NEE_has_invited_COL
+				has_country_flag = NEE_has_invited_VEN
+				has_country_flag = NEE_has_invited_BRA
+			}
+		}
+	}
+	is_triggered_only = yes
+	trigger = {
+	}
+	option = {
+		#COL
+		name = krg_nato.42.a
+		trigger = {
+			NOT = {
+				has_country_flag = NEE_has_invited_COL
+			}
+		}
+		hidden_effect = {
+			country_event = {
+				id = krg_nato.42
+				days = 1
+			}
+		}
+		COL = {
+			country_event = {
+				id = krg_nato.39
+				days = 1
+			}
+		}
+		set_country_flag = NEE_has_invited_COL
+	}
+	option = {
+		#VEN
+		name = krg_nato.42.b
+		trigger = {
+			NOT = {
+				has_country_flag = NEE_has_invited_VEN
+			}
+		}
+		hidden_effect = {
+			country_event = {
+				id = krg_nato.42
+				days = 1
+			}
+		}
+		VEN = {
+			country_event = {
+				id = krg_nato.39
+				days = 1
+			}
+		}
+		set_country_flag = NEE_has_invited_VEN
+	}
+	option = {
+		#BRA
+		name = krg_nato.42.c
+		trigger = {
+			NOT = {
+				has_country_flag = NEE_has_invited_BRA
+			}
+		}
+		hidden_effect = {
+			country_event = {
+				id = krg_nato.42
+				days = 1
+			}
+		}
+		BRA = {
+			country_event = {
+				id = krg_nato.39
+				days = 1
+			}
+		}
+		set_country_flag = NEE_has_invited_BRA
+	}
+	option = {
+		#GUY
+		name = krg_nato.42.e
+		trigger = {
+			NOT = {
+				has_country_flag = NEE_has_invited_GUY
+			}
+		}
+		hidden_effect = {
+			country_event = {
+				id = krg_nato.42
+				days = 1
+			}
+		}
+		GUY = {
+			country_event = {
+				id = krg_nato.39
+				days = 1
+			}
+		}
+		set_country_flag = NEE_has_invited_GUY
+	}
+}
+
+# country_event = { #The Reduction of Coal and Steel tariffs
+# 	id = krg_nato.13
+# 	title = krg_nato.13.t
+# 	desc = krg_nato.13.d
+# 	#picture =
+# 	is_triggered_only = yes
+# 	trigger = {}
+# 	option = { #Let the Voting Commence
+# 		name = krg_nato.13.a
+# 		set_country_flag = coal_tariff_voting
+# 		set_country_flag = nato_vote_occuring
+# 		hidden_effect = {
+# 			for_each_scope_loop = {
+# 				array = global.nato_member_array
+# 				country_event = {
+# 					id = krg_nato.14
+# 					days = 1
+# 				}
+# 			}
+# 		}
+# 	}
+# }
+# country_event = { #Canada proposes the  Reduction of Coal and Steel tariffs
+# 	id = krg_nato.14
+# 	title = krg_nato.14.t
+# 	desc = krg_nato.14.d
+# 	#picture =
+# 	is_triggered_only = yes
+# 	fire_only_once = yes
+# 	trigger = {}
+# 	option = { #Let the Voting Commence
+# 		name = krg_nato.14.a
+# 		set_country_flag = coal_tariff_voting
+# 		set_country_flag = nato_vote_occuring
+# 		hidden_effect = {
+# 		}
+# 	}
+# }

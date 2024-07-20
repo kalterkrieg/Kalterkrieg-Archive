@@ -1,0 +1,734 @@
+
+FNG_war_tension_decisions = {
+    
+}
+
+
+
+FNG_civil_war_decisions = {
+	### FNG_national_pacification_start = {
+	### 	visible = {
+	### 		has_country_flag = FNG_national_pacification_plan
+	### 	}
+	### 	available = {
+	### 		date > 1948.10.15
+	### 	}
+	### 	ai_will_do = {
+	### 		factor = 100
+	### 	}
+	### 	fire_only_once = yes
+	### 	complete_effect = {
+	###			log = "[GetDateText]: [Root.GetName]: Decision complete ### FNG_national_pacification_start target: [From.GetName]"
+	### 		declare_war_on = {
+	### 			target = CHI
+	### 			type = civil_war
+	### 		}
+	### 		set_global_flag = CCW_ongoing
+	### 		add_to_array = { global.influence_targets = 19 }
+    ###     }
+	### }
+	### FNG_national_pacification_start_2 = {
+	### 	visible = {
+	### 		has_country_flag = FNG_national_pacification_plan_2
+	### 	}
+	### 	available = {
+	### 		date > 1949.3.15
+	### 	}
+	### 	ai_will_do = {
+	### 		factor = 100
+	### 	}
+	### 	fire_only_once = yes
+	### 	complete_effect = {
+	###			log = "[GetDateText]: [Root.GetName]: Decision complete ### FNG_national_pacification_start_2 target: [From.GetName]"
+	### 		declare_war_on = {
+	### 			target = CHI
+	### 			type = civil_war
+	### 		}
+	### 		set_global_flag = CCW_ongoing
+	### 		add_to_array = { global.influence_targets = 19 }
+    ###     }
+	### }
+	
+	FNG_war_starts = {
+        activation = {
+            NOT = {
+                has_war_with = CHI
+                has_global_flag = ccw_begun_flag
+            }
+        }
+    
+        available = {
+            has_global_flag = ccw_peace_flag
+        }
+    
+        icon = "GFX_decision_peace_dove"
+        is_good = yes
+        days_mission_timeout = 365
+        complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete FNG_war_starts target: [From.GetName]"
+            FNG = {
+                puppet = CHI
+                custom_effect_tooltip = FNG_peace_tt
+            }
+        }
+
+        timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout FNG_war_starts target: [From.GetName]"
+            custom_effect_tooltip = FNG_guangzhou_angered_tt
+			CHI = { 
+				country_event = { 
+					id = krg_chi_ccw.6
+					days = 1
+				}
+            	set_global_flag = ccw_begun_flag
+				set_global_flag = CCW_ongoing
+            }
+        }
+    }
+
+	FNG_crush_18_GA_decision = {
+        allowed = {
+            tag = FNG
+        }
+        visible = {
+    		has_war = yes
+		}
+		available = {
+    		has_war = yes
+			has_completed_focus = FNG_encirclement_campaign
+		}
+        icon = GFX_decision_hand_out
+        cost = 15
+        days_remove = 45
+
+		fire_only_once = yes
+		ai_will_do = {
+			base = 250
+		}
+        remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove FNG_crush_18_GA_decision target: [From.GetName]"
+            every_owned_state = {
+				limit = {
+					has_resistance = yes
+				}
+                add_resistance = -5
+				add_compliance = 5
+			}
+        }     
+    }
+
+    FNG_request_guns = {
+        allowed = {
+            tag = FNG
+        }
+        visible = {
+    		has_war = yes
+		}
+		available = {
+    		has_war = yes
+			has_completed_focus = FNG_seek_support_from_reichspakt
+		}
+        targets = { TEX GER DNF POL SWE }
+    	targets_dynamic = yes
+		target_trigger = { 
+			FROM = { 
+				has_equipment = { infantry_equipment > 4999 } 
+				NOT = {
+					has_country_flag = CCW_stop_lend_lease
+				}
+			} 
+		}
+        icon = GFX_decision_hand_out
+        cost = 15
+        days_remove = 3
+        days_re_enable = 30
+		ai_will_do = {
+			base = 250
+			modifier = {
+				stockpile_ratio = {
+					archetype = infantry_equipment
+					ratio > 1.3
+				}
+				factor = -1
+			}
+		}
+        remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove FNG_request_guns target: [From.GetName]"
+            FROM = {
+                country_event = { 
+                	id = krg_ccw.2
+                	hours = 8 
+            	} 
+        	}
+        }
+    }
+
+     FNG_request_support = {
+        allowed = {
+            tag = FNG
+        }
+        visible = {
+    		has_war = yes
+		}
+		available = {
+    		has_war = yes
+			has_completed_focus = FNG_seek_support_from_reichspakt
+		}
+        targets = { TEX GER DNF POL  SWE }
+    	targets_dynamic = yes
+		target_trigger = { FROM = { has_equipment = { support_equipment > 299 } } }
+        icon = GFX_decision_support_equipment
+        cost = 30
+        days_remove = 3
+        days_re_enable = 35
+		ai_will_do = {
+			base = 200
+			modifier = {
+				stockpile_ratio = {
+					archetype = support_equipment
+					ratio > 1.3
+				}
+				factor = -1
+			}
+		}
+        remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove FNG_request_support target: [From.GetName]"
+            FROM = {
+                country_event = { 
+                	id = krg_ccw.4
+                	hours = 8 
+            	} 
+        	}
+        }
+    }
+        FNG_request_artillery = {
+        allowed = {
+            tag = FNG
+        }
+        visible = {
+    		has_war = yes
+		}
+		available = {
+    		has_war = yes
+			has_completed_focus = FNG_seek_support_from_reichspakt
+		}
+        targets = { TEX GER DNF POL  SWE }
+    	targets_dynamic = yes
+		target_trigger = { FROM = { has_equipment = { artillery_equipment > 299 } } }
+        icon = GFX_decision_artillery
+        cost = 30
+        days_remove = 3
+        days_re_enable = 28
+		ai_will_do = {
+			base = 150
+			modifier = {
+				stockpile_ratio = {
+					archetype = artillery_equipment
+					ratio > 1.3
+				}
+				factor = -1
+			}
+		}
+        remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove FNG_request_artillery target: [From.GetName]"
+            FROM = {
+                country_event = { 
+                	id = krg_ccw.6
+                	hours = 8 
+            	} 
+        	}
+        }
+    }
+
+   
+
+    FNG_request_truck = {
+        allowed = {
+            tag = FNG
+        }
+        visible = {
+    		has_war = yes
+		}
+		available = {
+    		has_war = yes
+			has_completed_focus = FNG_seek_support_from_reichspakt
+		}
+        targets = { TEX GER DNF POL  SWE }
+    	targets_dynamic = yes
+		target_trigger = { FROM = { has_equipment = { motorized_equipment > 299 } } }
+        icon = GFX_decision_generic_motorized
+        cost = 30
+        days_remove = 3
+        days_re_enable = 35
+		ai_will_do = {
+			base = 225
+			modifier = {
+				stockpile_ratio = {
+					archetype = motorized_equipment
+					ratio > 1.3
+				}
+				factor = -1
+			}
+		}
+        remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove FNG_request_truck target: [From.GetName]"
+            FROM = {
+                country_event = { 
+                	id = krg_ccw.8
+                	hours = 8 
+            	} 
+        	}
+        }
+    }
+
+	FNG_request_guns_dummy = {
+		allowed = {
+			always = no
+        }
+	}
+	FNG_request_truck_dummy = {
+		allowed = {
+			always = no
+        }
+	}
+
+	FNG_request_artillery_dummy = {
+		allowed = {
+			always = no
+        }
+	}
+
+	FNG_request_support_dummy = {
+		allowed = {
+			always = no
+        }
+	}
+
+}
+
+FNG_rivalry_bop_decisions = {
+	FNG_military_inspections = {
+		icon = GFX_decision_gre_faction_management
+
+		days_re_enable = 125
+
+		days_remove = 15
+
+		custom_cost_text = decision_cost_ArmXP_15
+
+		custom_cost_trigger = {
+			has_army_experience > 14.99
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete FNG_military_inspections target: [From.GetName]"
+			hidden_effect = {
+				army_experience = -15
+			}
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove FNG_military_inspections target: [From.GetName]"
+			add_power_balance_value = {
+				id = FNG_rivalry_bop
+				value = 0.075
+			}
+			add_war_support = -0.025
+			if = {
+				limit = { 
+					has_active_mission = FNG_Yang_making_his_move
+				}
+				add_days_mission_timeout = {
+					mission = FNG_Yang_making_his_move
+					days = 45
+				}
+			}
+		}
+	}
+
+	FNG_pro_military_propaganda = {
+		icon = GFX_decision_eng_propaganda_campaigns
+
+		days_re_enable = 90
+
+		cost = 50
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete FNG_pro_military_propaganda target: [From.GetName]"
+			add_war_support = 0.05
+			add_power_balance_value = {
+				id = FNG_rivalry_bop
+				value = -0.075
+			}
+		}
+	}
+
+	FNG_promote_loyal_officers = {
+		icon = GFX_decision_soldierly_discipline
+
+		visible = {
+			OR = {
+				has_completed_focus = FNG_wartime_censorship
+				has_completed_focus = FNG_footstep_of_the_marshal
+			}
+		}
+
+		ai_will_do = {
+			base = 75
+		}
+
+		custom_cost_text = decision_cost_CP_25
+
+		custom_cost_trigger = {
+			command_power > 24.99
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete FNG_promote_loyal_officers target: [From.GetName]"
+			hidden_effect = {
+				add_command_power = -25
+			}
+			if = {
+				limit = { 
+					has_completed_focus = FNG_wartime_censorship
+				}
+				add_power_balance_value = {
+					id = FNG_rivalry_bop
+					value = -0.075
+				}
+				random_army_leader = {
+					limit = {
+						has_trait = FNG_yang_officer
+					}
+					gain_xp	= 1000
+					promote_leader = yes
+				}
+			}
+			else = {
+				
+				add_power_balance_value = {
+					id = FNG_rivalry_bop
+					value = 0.075
+				}
+				random_army_leader = {
+					limit = {
+						has_trait = FNG_zhang_officer
+					}
+					gain_xp	= 1000
+					promote_leader = yes
+				}
+			}
+		}
+	}
+
+	FNG_gather_warlord_support = {
+		icon = GFX_decision_ban_iron_front
+
+		visible = {
+			has_completed_focus = FNG_warlord_alliance
+		}
+
+		fire_only_once = yes
+
+		days_remove = 85
+
+		custom_cost_text = decision_cost_CP_25_ie_1000
+
+		ai_will_do = {
+			base = 25
+			modifier = {
+				power_balance_value = {
+					id = FNG_rivalry_bop
+					value > 0
+				}
+				factor = 10
+			}
+		}
+
+		custom_cost_trigger = {
+			command_power > 24.99
+			has_equipment = {
+				infantry_equipment > 999
+			}
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete FNG_gather_warlord_support target: [From.GetName]"
+			add_days_mission_timeout = {
+				mission = FNG_Yang_making_his_move
+				days = 95
+			}
+		}
+		
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove FNG_gather_warlord_support target: [From.GetName]"
+			add_stability = -0.05
+			add_power_balance_value = {
+				id = FNG_rivalry_bop
+				value = -0.15
+			}
+		}
+	}
+
+	FNG_promises_of_democratisation = {
+		icon = GFX_decision_election
+
+		visible = {
+			has_completed_focus = FNG_promises_of_democracy
+		}
+
+		cost = 75
+
+		fire_only_once = yes
+
+		ai_will_do = {
+			base = 25
+			modifier = {
+				power_balance_value = {
+					id = FNG_rivalry_bop
+					value < 0
+				}
+				factor = 10
+			}
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete FNG_promises_of_democratisation target: [From.GetName]"
+			add_popularity = {
+				ideology = social_conservative
+				popularity = 0.025
+			}
+			add_popularity = {
+				ideology = market_liberal
+				popularity = 0.025
+			}
+			add_popularity = {
+				ideology = authoritarian_democrat
+				popularity = 0.01
+			}
+			add_power_balance_value = {
+				id = FNG_rivalry_bop
+				value = 0.05
+			}
+			add_stability = 0.05
+			add_days_mission_timeout = {
+				mission = FNG_Yang_making_his_move
+				days = 75
+			}
+
+			set_temp_variable = { China_temp_national_legitimacy_change = 5 }
+			FNG_change_national_legitimacy = yes
+		}
+	}
+
+	FNG_organise_social_groups = {
+		icon = GFX_decision_generic_strikes
+
+		visible = {
+			has_completed_focus = FNG_baojia_system
+		}
+
+		fire_only_once = yes
+
+		days_remove = 80
+
+		custom_cost_text = decision_cost_CP_25_pp_15
+		custom_cost_trigger = {
+			has_political_power > 14.99
+			command_power > 24.99
+		}
+
+		ai_will_do = {
+			base = 75
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete FNG_organise_social_groups target: [From.GetName]"
+			hidden_effect = {
+				add_command_power = -25
+				add_political_power = -15
+			}
+		}
+		
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove FNG_organise_social_groups target: [From.GetName]"
+			add_power_balance_value = {
+				id = FNG_rivalry_bop
+				value = 0.05
+			}
+			add_stability = 0.05
+		}
+	}
+
+	FNG_recruit_peasent_battalions = {
+		icon = GFX_decision_POL_looming_peasants_strike
+
+		custom_cost_text = decision_cost_cp_15_ArmXP_10
+
+		visible = {
+			has_completed_focus = FNG_new_governing_principles
+		}
+
+		custom_cost_trigger = {
+			command_power > 14.99
+			has_army_experience > 9.99
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete FNG_recruit_peasent_battalions target: [From.GetName]"
+			hidden_effect = {
+				add_command_power = -15
+				army_experience = -15
+			}
+		}
+		ai_will_do = {
+			base = 125
+		}
+		days_remove = 60
+
+		days_re_enable = 100
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove FNG_recruit_peasent_battalions target: [From.GetName]"
+			if = {
+				limit = { 
+					has_completed_focus = FNG_footstep_of_the_marshal
+				}
+				add_power_balance_value = {
+					id = FNG_rivalry_bop
+					value = 0.05
+				}
+			}
+			else = {
+				add_power_balance_value = {
+					id = FNG_rivalry_bop
+					value = -0.05
+				}
+			}
+			custom_effect_tooltip = FNG_recruit_peasent_battalions_tt
+			hidden_effect = {
+				load_oob = FNG_peasants
+			}
+		}
+	}
+
+	FNG_crackdown_army_corruption = {
+		icon = GFX_decision_soldierly_discipline
+
+		custom_cost_text = decision_cost_ArmXP_25
+
+		visible = {
+			has_completed_focus = FNG_new_governing_principles
+		}
+
+		custom_cost_trigger = {
+			has_army_experience > 24.99
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete FNG_crackdown_army_corruption target: [From.GetName]"
+			hidden_effect = {
+				army_experience = -25
+			}
+			add_war_support = 0.075
+			add_power_balance_value = {
+				id = FNG_rivalry_bop
+				value = 0.05
+			}
+		}
+
+		days_re_enable = 120
+
+	}
+
+	FNG_commend_local_commanders = {
+		icon = GFX_decision_hand_out
+
+		cost = 25
+
+		visible = {
+			has_completed_focus = FNG_new_governing_principles
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete FNG_commend_local_commanders target: [From.GetName]"
+		
+			if = {
+				limit = { 
+					has_completed_focus = FNG_footstep_of_the_marshal
+				}
+				add_power_balance_value = {
+					id = FNG_rivalry_bop
+					value = 0.05
+				}
+			}
+			else = {
+				add_power_balance_value = {
+					id = FNG_rivalry_bop
+					value = -0.05
+				}
+			}
+
+			random_country_division = {
+				add_divisional_commander_xp = 150
+			}
+
+			random_country_division = {
+				add_divisional_commander_xp = 150
+			}
+
+			random_country_division = {
+				add_divisional_commander_xp = 150
+			}
+		}
+
+		days_re_enable = 90
+
+	}
+
+	FNG_Yang_making_his_move = {
+		activation = { always = no }
+		days_mission_timeout = 620
+
+
+		icon = GFX_decision_hand_grab
+
+		is_good = yes
+
+		available = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout FNG_Yang_making_his_move target: [From.GetName]"
+			if = {
+				limit = {
+					power_balance_value = {
+						id = FNG_rivalry_bop
+						value > 0
+					}
+				}
+				country_event = {
+					id = krg_fng.102
+					days = 3
+				}
+			}
+			else_if = {
+				limit = {
+					power_balance_value = {
+						id = FNG_rivalry_bop
+						value < 0
+					}
+				}
+				country_event = {
+					id = krg_fng.103
+					days = 3
+				}
+			}
+		}
+	}
+
+}

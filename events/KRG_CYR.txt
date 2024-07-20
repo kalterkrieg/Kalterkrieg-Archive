@@ -1,0 +1,78 @@
+add_namespace = krg_cyr_news
+add_namespace = krg_cyr
+
+news_event = {
+	id = krg_cyr_news.0
+	title = krg_cyr_news.0.t
+	desc = krg_cyr_news.0.d
+	picture = GFX_ne_CYR_survey
+	major = yes
+	is_triggered_only = yes
+	option = {
+		name = krg_cyr_news.0.a
+	}
+}
+news_event = {
+	id = krg_cyr_news.1
+	title = krg_cyr_news.1.t
+	desc = krg_cyr_news.1.d
+	picture = GFX_ne_CYR_survey
+	major = yes
+	is_triggered_only = yes
+	option = {
+		name = krg_cyr_news.1.a
+	}
+}
+
+country_event = {
+	id = krg_cyr.0
+	title = krg_cyr.0.t
+	desc = krg_cyr.0.d
+	is_triggered_only = yes
+
+	option = {
+		name = krg_cyr.0.a
+		set_temp_variable = {
+			temp_level = 2
+		}
+		set_non_aligned_movement_alignment = yes
+		retire_character = CYR_idris_i
+		promote_character = CYR_Muammar_Gaddafi
+		set_party_name = {
+			ideology = revolutionary_republican
+			long_name = "Revolutionary Command Council"
+			name = "RCC"
+		}
+		add_popularity = {
+			ideology = revolutionary_republican
+			popularity = 0.5
+		}
+		set_politics = {
+			ruling_party = revolutionary_republican
+			election_frequency = 60
+			elections_allowed = no
+		}
+		swap_ideas = {
+			remove_idea = KRG_absolute_rulership
+			add_idea = KRG_fanatical_dictatorship
+		}
+		set_cosmetic_tag = CYR_republic
+		set_capital = {
+			state = 448
+		}
+		news_event = {
+			id = krg_cyr_news.2
+		}
+	}
+}
+news_event = { #News
+	id = krg_cyr_news.2
+	title = krg_cyr_news.2.t
+	desc = krg_cyr_news.2.d
+	picture = GFX_ne_CYR_coup
+	major = yes
+	is_triggered_only = yes
+	option = {
+		name = krg_cyr_news.2.a
+	}
+}

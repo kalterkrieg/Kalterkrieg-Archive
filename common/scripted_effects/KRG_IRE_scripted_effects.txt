@@ -1,0 +1,2477 @@
+IRE_increase_reconstruction = {
+	effect_tooltip = {
+		if = {
+			limit = { has_idea = IRE_reconstruction_12 }
+			remove_ideas = IRE_reconstruction_12
+		}
+		else = {
+			swap_ideas = {
+				remove_idea = IRE_reconstruction_1
+				add_idea = IRE_reconstruction_2
+			}
+		}
+	}
+	hidden_effect = {
+		if = {
+			limit = { has_idea = IRE_reconstruction_1 }
+			swap_ideas = {
+				remove_idea = IRE_reconstruction_1
+				add_idea = IRE_reconstruction_2
+			}
+		}
+		else_if = {
+			limit = { has_idea = IRE_reconstruction_2 }
+			swap_ideas = {
+				remove_idea = IRE_reconstruction_2
+				add_idea = IRE_reconstruction_3
+			}
+		}
+		else_if = {
+			limit = { has_idea = IRE_reconstruction_3 }
+			swap_ideas = {
+				remove_idea = IRE_reconstruction_3
+				add_idea = IRE_reconstruction_4
+			}
+		}
+		else_if = {
+			limit = { has_idea = IRE_reconstruction_4 }
+			swap_ideas = {
+				remove_idea = IRE_reconstruction_4
+				add_idea = IRE_reconstruction_5
+			}
+		}
+		else_if = {
+			limit = { has_idea = IRE_reconstruction_5 }
+			swap_ideas = {
+				remove_idea = IRE_reconstruction_5
+				add_idea = IRE_reconstruction_6
+			}
+		}
+		else_if = {
+			limit = { has_idea = IRE_reconstruction_6 }
+			swap_ideas = {
+				remove_idea = IRE_reconstruction_6
+				add_idea = IRE_reconstruction_7
+			}
+		}
+		else_if = {
+			limit = { has_idea = IRE_reconstruction_7 }
+			swap_ideas = {
+				remove_idea = IRE_reconstruction_7
+				add_idea = IRE_reconstruction_8
+			}
+		}
+		else_if = {
+			limit = { has_idea = IRE_reconstruction_8 }
+			swap_ideas = {
+				remove_idea = IRE_reconstruction_8
+				add_idea = IRE_reconstruction_9
+			}
+		}
+		else_if = {
+			limit = { has_idea = IRE_reconstruction_9 }
+			swap_ideas = {
+				remove_idea = IRE_reconstruction_9
+				add_idea = IRE_reconstruction_10
+			}
+		}
+		else_if = {
+			limit = { has_idea = IRE_reconstruction_10 }
+			swap_ideas = {
+				remove_idea = IRE_reconstruction_10
+				add_idea = IRE_reconstruction_11
+			}
+		}
+		else_if = {
+			limit = { has_idea = IRE_reconstruction_11 }
+			swap_ideas = {
+				remove_idea = IRE_reconstruction_11
+				add_idea = IRE_reconstruction_12
+			}
+		}
+		else_if = {
+			limit = { has_idea = IRE_reconstruction_12 }
+			remove_ideas = IRE_reconstruction_12
+		}
+	}
+}
+
+IRE_increase_IRE_collectivized_economy = {
+	if = {
+		limit = { has_idea = IRE_collectivized_economy_1 }
+		swap_ideas = {
+			remove_idea = IRE_collectivized_economy_1
+			add_idea = IRE_collectivized_economy_2
+		}
+	}
+	else_if = {
+		limit = { has_idea = IRE_collectivized_economy_2 }
+		swap_ideas = {
+			remove_idea = IRE_collectivized_economy_2
+			add_idea = IRE_collectivized_economy_3
+		}
+	}
+	else_if = {
+		limit = { has_idea = IRE_collectivized_economy_3 }
+		swap_ideas = {
+			remove_idea = IRE_collectivized_economy_3
+			add_idea = IRE_collectivized_economy_4
+		}
+	}
+	else_if = {
+		limit = { has_idea = IRE_collectivized_economy_4 }
+		swap_ideas = {
+			remove_idea = IRE_collectivized_economy_4
+			add_idea = IRE_collectivized_economy_5
+		}
+	}
+	else_if = {
+		limit = { has_idea = IRE_collectivized_economy_5 }
+		swap_ideas = {
+			remove_idea = IRE_collectivized_economy_5
+			add_idea = IRE_collectivized_economy_6
+		}
+	}
+	else_if = {
+		limit = { has_idea = IRE_collectivized_economy_6 }
+		remove_ideas = IRE_collectivized_economy_6
+	}
+	else = {
+		add_stability = 0.075
+	}
+	
+}
+
+IRE_upgrade_template_and_divisions = { #this is meant to upgrade the militia division linearly, create the division if it hasn't been created already. 
+	if = {
+		limit = {
+			has_variable = IRE_militia_template_level
+			check_variable =  { IRE_militia_template_level < 2 }
+		}
+		add_units_to_division_template = {
+			template_name = "An Fórsa Cosanta Áitiúil"
+			regiments = {
+				militia = 0
+				militia = 0 
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			has_variable = IRE_militia_template_level
+			check_variable =  { IRE_militia_template_level < 3 }
+		}
+		add_units_to_division_template = {
+			template_name = "An Fórsa Cosanta Áitiúil"
+			regiments = {
+				militia = 1
+				militia = 1 
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			has_variable = IRE_militia_template_level
+			check_variable =  { IRE_militia_template_level < 4 }
+
+		}
+		add_units_to_division_template = {
+			template_name = "An Fórsa Cosanta Áitiúil"
+			regiments = {
+				militia = 1
+			}
+			support = {
+				engineer = 0
+			} 
+		}
+	}
+	if = { #Increasing the Militia Level variable 
+		limit = {
+			has_variable = IRE_militia_template_level
+			check_variable = { IRE_militia_template_level < 10 }
+		}
+		add_to_variable = { IRE_militia_template_level = 1 }
+	}
+
+	else_if = {
+		limit = {
+			NOT = { has_variable = IRE_militia_template_level }  
+		}
+		set_variable = { IRE_militia_template_level = 1 }
+	}
+}
+
+IRE_increase_militia_cap = { 
+	effect_tooltip = {
+		set_temp_variable = { IRE_new_militia_cap_for_tooltip = IRE_militia_division_cap }
+		add_to_temp_variable = { IRE_new_militia_cap_for_tooltip = IRE_militia_cap_increase }
+		set_division_template_cap = { 
+			division_template = "An Fórsa Cosanta Áitiúil" 
+			division_cap = IRE_new_militia_cap_for_tooltip   
+		}
+	}
+	hidden_effect = {
+		add_to_variable = { IRE_militia_division_cap = IRE_militia_cap_increase }
+		clamp_variable = {
+			var = IRE_militia_division_cap
+			min = 0 
+			max = IRE_max_militia_division_cap
+		}  
+		set_division_template_cap = { 
+			division_template = "An Fórsa Cosanta Áitiúil" 
+			division_cap = IRE_militia_division_cap
+		}
+	}
+}
+
+IRE_set_up_army_restructuring = {
+	set_variable = {
+		var = IRE_IRA_restructuring
+    	value = 0
+    	tooltip = IRE_IRA_restructer_var_tt
+	}
+}
+
+IRE_increase_IRA_restructuring = {
+	if = {
+		limit = {
+			check_variable = { IRE_IRA_increase_temp < 0 }
+		}
+		custom_effect_tooltip = IRE_IRA_decrease_tt
+	}
+	else = {
+		custom_effect_tooltip = IRE_IRA_increase_tt
+	}
+
+	add_to_variable = {
+		IRE_IRA_restructuring = IRE_IRA_increase_temp
+	}
+	clamp_variable = {
+		var = IRE_IRA_restructuring
+		min = 0
+		max = 100
+	}
+}
+
+IRE_setup_troubles = {
+	set_variable = {
+		var = IRE_nationalist_opinion
+		value = 30
+	}
+	set_variable = {
+		var = IRE_nationalist_strength
+		value = 35
+	}
+
+	set_variable = {
+		var = IRE_unionist_opinion
+		value = -10
+	}
+	set_variable = {
+		var = IRE_unionist_strength
+		value = 40
+	}
+
+	set_variable = {
+		var = IRE_nationalist_status
+		value = 0
+	}
+	set_variable = {
+		var = IRE_unionist_status
+		value = 0
+	}
+
+	set_variable = {
+		var = IRE_nationalist_entrenchment
+		value = 0.00
+	}
+	set_variable = {
+		var = IRE_unionist_entrenchment
+		value = 0.00
+	}
+
+	set_variable = {
+		var = IRE_nationalist_intel
+		value = 0
+	}
+	set_variable = {
+		var = IRE_unionist_intel
+		value = 0
+	}
+
+	set_variable = {
+		var = IRE_unionist_mission_time
+		value = 30
+	}
+
+	set_variable = {
+		var = IRE_nationalist_mission_time
+		value = 30
+	}
+
+	set_variable = {
+		var = IRE_gardai_mission_time
+		value = 50
+	}
+
+	set_variable = {
+		var = IRE_peace_line_level
+		value = 0
+	}
+
+
+	IRE_calculate_nationalist_status = yes
+	IRE_calculate_unionist_status = yes
+
+}
+
+
+IRE_change_nationalist_opinion = {
+	if = {
+		limit = { 
+			check_variable = { IRE_temp_nationalist_opinion_change < 0 }
+		}
+		custom_effect_tooltip = IRE_decrease_nationalist_opinion_tt
+	}
+	else = {
+		custom_effect_tooltip = IRE_increase_nationalist_opinion_tt
+	}
+
+	add_to_variable = {
+		IRE_nationalist_opinion = IRE_temp_nationalist_opinion_change
+	}
+
+	clamp_variable = {
+		var = IRE_nationalist_opinion
+		min = -50
+		max = 50
+	}
+	IRE_calculate_unionist_status = yes
+	IRE_calculate_nationalist_status = yes
+}
+
+IRE_change_nationalist_strength = {
+	set_temp_variable = { IRE_temp_one = 1}
+	subtract_from_temp_variable = { IRE_temp_one = IRE_nationalist_entrenchment }
+	multiply_temp_variable = { IRE_temp_unionist_strength_change = IRE_temp_one }
+
+	if = {
+		limit = { 
+			check_variable = { IRE_temp_nationalist_strength_change < 0 }
+		}
+		custom_effect_tooltip = IRE_decrease_nationalist_strength_tt
+	}
+	else = {
+		custom_effect_tooltip = IRE_increase_nationalist_strength_tt
+	}
+
+	add_to_variable = {
+		IRE_nationalist_strength = IRE_temp_nationalist_strength_change
+	}
+	clamp_variable = {
+		var = IRE_nationalist_strength
+		min = 0
+		max = 100
+	}
+	IRE_calculate_unionist_status = yes
+	IRE_calculate_nationalist_status = yes
+}
+
+IRE_change_nationalist_entrenchment = {
+	if = {
+		limit = { 
+			check_variable = { IRE_temp_nationalist_entrenchment_change > 0 }
+		}
+		custom_effect_tooltip = IRE_increase_nationalist_entrenchment_tt
+	}
+	else = {
+		custom_effect_tooltip = IRE_decrease_nationalist_entrenchment_tt
+	}
+
+	add_to_variable = {
+		IRE_nationalist_entrenchment = IRE_temp_nationalist_entrenchment_change
+	}
+	clamp_variable = {
+		var = IRE_nationalist_entrenchment
+		min = 0.00
+		max = 1.00
+	}
+
+}
+
+IRE_change_nationalist_intel = {
+	if = {
+		limit = { 
+			check_variable = { IRE_temp_nationalist_intel_change > 0 }
+		}
+		custom_effect_tooltip = IRE_increase_nationalist_intel_tt
+	}
+	else = {
+		custom_effect_tooltip = IRE_decrease_nationalist_intel_tt
+	}
+
+	add_to_variable = {
+		IRE_nationalist_intel = IRE_temp_nationalist_intel_change
+	}
+	clamp_variable = {
+		var = IRE_nationalist_intel
+		min = 0
+		max = 100
+	}
+
+}
+
+IRE_change_unionist_opinion = {
+	if = {
+		limit = { 
+			check_variable = { IRE_temp_unionist_opinion_change < 0 }
+		}
+		custom_effect_tooltip = IRE_decrease_unionist_opinion_tt
+	}
+	else = {
+		custom_effect_tooltip = IRE_increase_unionist_opinion_tt
+	}
+
+	add_to_variable = {
+		IRE_unionist_opinion = IRE_temp_unionist_opinion_change
+	}
+
+	clamp_variable = {
+		var = IRE_unionist_opinion
+		min = -50
+		max = 50
+	}
+
+	IRE_calculate_unionist_status = yes
+	IRE_calculate_nationalist_status = yes
+
+}
+
+IRE_change_unionist_strength = {
+	set_temp_variable = { IRE_temp_one = 1}
+	subtract_from_temp_variable = { IRE_temp_one = IRE_unionist_entrenchment }
+	multiply_temp_variable = { IRE_temp_unionist_strength_change = IRE_temp_one }
+
+	if = {
+		limit = { 
+			check_variable = { IRE_temp_unionist_strength_change < 0 }
+		}
+		custom_effect_tooltip = IRE_decrease_unionist_strength_tt
+	}
+	else = {
+		custom_effect_tooltip = IRE_increase_unionist_strength_tt
+	}
+
+	add_to_variable = {
+		IRE_unionist_strength = IRE_temp_unionist_strength_change
+	}
+
+	clamp_variable = {
+		var = IRE_unionist_strength
+		min = 0
+		max = 100
+	}
+
+	IRE_calculate_unionist_status = yes
+	IRE_calculate_nationalist_status = yes
+}
+
+IRE_change_unionist_entrenchment = {
+	if = {
+		limit = { 
+			check_variable = { IRE_temp_unionist_entrenchment_change > 0 }
+		}
+		custom_effect_tooltip = IRE_increase_unionist_entrenchment_tt
+	}
+	else = {
+		custom_effect_tooltip = IRE_decrease_unionist_entrenchment_tt
+	}
+
+	add_to_variable = {
+		IRE_unionist_entrenchment = IRE_temp_unionist_entrenchment_change
+	}
+	clamp_variable = {
+		var = IRE_unionist_entrenchment
+		min = 0.00
+		max = 1.00
+	}
+
+
+}
+
+IRE_change_unionist_intel = {
+	if = {
+		limit = { 
+			check_variable = { IRE_temp_unionist_intel_change > 0 }
+		}
+		custom_effect_tooltip = IRE_increase_unionist_intel_tt
+	}
+	else = {
+		custom_effect_tooltip = IRE_decrease_unionist_intel_tt
+	}
+
+	add_to_variable = {
+		IRE_unionist_intel = IRE_temp_unionist_intel_change
+	}
+	clamp_variable = {
+		var = IRE_unionist_intel
+		min = 0
+		max = 100
+	}
+
+}
+
+
+
+
+IRE_calculate_nationalist_status = { 
+	if = { #0 Calm
+		limit = { 
+			check_variable = { IRE_nationalist_opinion > 19 }
+			check_variable = { IRE_nationalist_opinion < 50 }
+			check_variable = { IRE_unionist_strength < 50 }
+	 	}
+		set_variable = { IRE_nationalist_status = 0 }
+	}
+
+	else_if = { #1 tense
+		limit = {
+			OR = {
+				AND = {
+					check_variable = { IRE_nationalist_opinion > 0 }
+					check_variable = { IRE_nationalist_opinion < 20 }
+					check_variable = { IRE_unionist_strength < 65 }
+				}
+				AND = {
+					check_variable = { IRE_nationalist_opinion > 19 }
+					check_variable = { IRE_nationalist_opinion < 50 }
+					check_variable = { IRE_unionist_strength > 49 }
+				}
+			}
+			
+	 	}
+		set_variable = { IRE_nationalist_status = 1 }
+	}
+
+	else_if = { #2 agitated
+		limit = {
+			OR = {
+				AND = {
+					check_variable = { IRE_nationalist_opinion > -19 }
+					check_variable = { IRE_nationalist_opinion < 0 }
+					check_variable = { IRE_unionist_strength < 80 }
+				}
+				AND = {
+					check_variable = { IRE_nationalist_opinion > 0 }
+					check_variable = { IRE_nationalist_opinion < 20 }
+					check_variable = { IRE_unionist_strength > 64 }
+				}
+			}
+	 	}
+		set_variable = { IRE_nationalist_status = 2 }
+	}
+
+	else_if = { #3 angry
+		limit = {
+			OR = {
+				AND = {
+					check_variable = { IRE_nationalist_opinion > -35 }
+					check_variable = { IRE_nationalist_opinion < -20 }
+				}
+				AND = {
+					check_variable = { IRE_nationalist_opinion > 0 }
+					check_variable = { IRE_nationalist_opinion < 20 }
+					check_variable = { IRE_unionist_strength > 79 }
+				}
+			}
+				
+	 	}
+		set_variable = { IRE_nationalist_status = 3 }
+	}
+
+	else_if = { #4 hostile
+		limit = { 
+			check_variable = { IRE_nationalist_opinion < -34 }
+			check_variable = { IRE_nationalist_strength  < 59 }
+
+			check_variable = { IRE_unionist_opinion < -34 }
+			check_variable = { IRE_unionist_strength < 59 }
+	 	}
+		set_variable = { IRE_nationalist_status = 4 }
+	}
+
+	else_if = { #5 inconflict
+		limit = { 
+			check_variable = { IRE_nationalist_opinion < -34 }
+			check_variable = { IRE_nationalist_strength  > 59 }
+
+			check_variable = { IRE_unionist_opinion < -34 }
+			check_variable = { IRE_unionist_strength > 59 }
+	 	}
+		set_variable = { IRE_nationalist_status = 5 }
+	}
+
+}
+
+IRE_calculate_unionist_status = { 
+	if = { #0 Calm
+		limit = { 
+			check_variable = { IRE_unionist_opinion > 19 }
+			check_variable = { IRE_unionist_opinion < 50 }
+			check_variable = { IRE_nationalist_strength < 50 }
+	 	}
+		set_variable = { IRE_unionist_status = 0 }
+	}
+
+	else_if = { #1 tense
+		limit = {
+			OR = {
+				AND = {
+					check_variable = { IRE_unionist_opinion > 0 }
+					check_variable = { IRE_unionist_opinion < 20 }
+					check_variable = { IRE_nationalist_strength > 65 }
+				}
+				AND = {
+					check_variable = { IRE_unionist_opinion > 19 }
+					check_variable = { IRE_unionist_opinion < 50 }
+					check_variable = { IRE_nationalist_strength > 49 }
+				}
+			}
+	 	}
+		set_variable = { IRE_unionist_status = 1 }
+	}
+
+	else_if = { #2 agitated
+		limit = {
+			OR = {
+				AND = {
+					check_variable = { IRE_unionist_opinion > -19 }
+					check_variable = { IRE_unionist_opinion < 0 }
+					check_variable = { IRE_nationalist_strength < 80 }
+				}
+				AND = {
+					check_variable = { IRE_unionist_opinion > 0 }
+					check_variable = { IRE_unionist_opinion < 20 }
+					check_variable = { IRE_nationalist_strength > 64 }
+				}
+			}
+	 	}
+		set_variable = { IRE_unionist_status = 2 }
+	}
+
+	else_if = { #3 angry
+		limit = {
+			OR = {
+				AND = {
+					check_variable = { IRE_unionist_opinion > -35 }
+					check_variable = { IRE_unionist_opinion < -20 }
+				}
+				AND = {
+					check_variable = { IRE_unionist_opinion > 0 }
+					check_variable = { IRE_unionist_opinion < 20 }
+					check_variable = { IRE_nationalist_strength > 79 }
+				}
+			}
+			
+			
+	 	}
+		set_variable = { IRE_unionist_status = 3 }
+	}
+
+	else_if = { #4 hostile
+		limit = {
+			check_variable = { IRE_unionist_opinion < -34 }
+			check_variable = { IRE_unionist_strength < 59 }
+
+			check_variable = { IRE_nationalist_opinion < -34 }
+			check_variable = { IRE_nationalist_strength  < 59 }
+	 	}
+		set_variable = { IRE_unionist_status = 4 }
+	}
+
+	else_if = { #5 inconflict
+		limit = { 
+			check_variable = { IRE_unionist_opinion < -34 }
+			check_variable = { IRE_unionist_strength > 59 }
+
+			check_variable = { IRE_nationalist_opinion < -34 }
+			check_variable = { IRE_nationalist_strength  > 59 }
+	 	}
+		set_variable = { IRE_unionist_status = 5 }
+	}
+
+	
+}
+
+IRE_set_nationalist_chances = {
+	if = { # 0 Calm
+		limit = {
+			check_variable = { IRE_nationalist_status = 0 }
+		}
+
+		set_temp_variable = {
+			var = IRE_nationalist_protesting_chance
+			value = 5
+		}
+		set_temp_variable = {
+			var = IRE_nationalist_rioting_chance
+			value = 0
+		}
+		set_temp_variable = {
+			var = IRE_nationalist_entrenching_chance
+			value = 0
+		}
+		set_temp_variable = {
+			var = IRE_nationalist_striking_chance
+			value = 0
+		}
+		set_temp_variable = {
+			var = IRE_nationalist_strengthening_chance
+			value = 8
+		}
+		set_temp_variable = {
+			var = IRE_nationalist_bombing_chance
+			value = 1
+		}
+		set_temp_variable = {
+			var = IRE_nationalist_shooting_chance
+			value = 2
+		}
+		set_temp_variable = {
+			var = IRE_nationalist_battle_chance
+			value = 0
+		}
+		set_temp_variable = {
+			var = IRE_nationalist_hostage_chance
+			value = 0
+		}
+		set_temp_variable = {
+			var = IRE_nationalist_nothing_chance
+			value = 50
+		}
+
+	}
+	else_if = { #1 tense
+		limit = { 
+			check_variable = { IRE_nationalist_status = 1 }
+		}
+		set_temp_variable = {
+			var = IRE_nationalist_protesting_chance
+			value = 5
+		}
+		set_temp_variable = {
+			var = IRE_nationalist_rioting_chance
+			value = 0
+		}
+		set_temp_variable = {
+			var = IRE_nationalist_entrenching_chance
+			value = 3
+		}
+		set_temp_variable = {
+			var = IRE_nationalist_striking_chance
+			value = 5
+		}
+		set_temp_variable = {
+			var = IRE_nationalist_strengthening_chance
+			value = 15
+		}
+		set_temp_variable = {
+			var = IRE_nationalist_bombing_chance
+			value = 0
+		}
+		set_temp_variable = {
+			var = IRE_nationalist_shooting_chance
+			value = 3
+		}
+		set_temp_variable = {
+			var = IRE_nationalist_battle_chance
+			value = 0
+		}
+		set_temp_variable = {
+			var = IRE_nationalist_hostage_chance
+			value = 0
+		}
+		set_temp_variable = {
+			var = IRE_nationalist_nothing_chance
+			value = 10
+		}
+
+	}
+
+	else_if = { #2 agitated
+		limit = { 
+			check_variable = { IRE_nationalist_status = 2 }
+		}
+		set_temp_variable = {
+			var = IRE_nationalist_protesting_chance
+			value = 7
+		}
+		set_temp_variable = {
+			var = IRE_nationalist_rioting_chance
+			value = 3
+		}
+		set_temp_variable = {
+			var = IRE_nationalist_entrenching_chance
+			value = 5
+		}
+		set_temp_variable = {
+			var = IRE_nationalist_striking_chance
+			value = 3
+		}
+		set_temp_variable = {
+			var = IRE_nationalist_strengthening_chance
+			value = 20
+		}
+		set_temp_variable = {
+			var = IRE_nationalist_bombing_chance
+			value = 5
+		}
+		set_temp_variable = {
+			var = IRE_nationalist_shooting_chance
+			value = 4
+		}
+		set_temp_variable = {
+			var = IRE_nationalist_battle_chance
+			value = 0
+		}
+		set_temp_variable = {
+			var = IRE_nationalist_hostage_chance
+			value = 2
+		}
+		set_temp_variable = {
+			var = IRE_nationalist_nothing_chance
+			value = 8
+		}
+	}
+
+	else_if = { #3 angry
+		limit = { 
+			check_variable = { IRE_nationalist_status = 3 }
+		}
+		set_temp_variable = {
+			var = IRE_nationalist_protesting_chance
+			value = 15
+		}
+		set_temp_variable = {
+			var = IRE_nationalist_rioting_chance
+			value = 8
+		}
+		set_temp_variable = {
+			var = IRE_nationalist_entrenching_chance
+			value = 10
+		}
+		set_temp_variable = {
+			var = IRE_nationalist_striking_chance
+			value = 8
+		}
+		set_temp_variable = {
+			var = IRE_nationalist_strengthening_chance
+			value = 15
+		}
+		set_temp_variable = {
+			var = IRE_nationalist_bombing_chance
+			value = 6
+		}
+		set_temp_variable = {
+			var = IRE_nationalist_shooting_chance
+			value = 5
+		}
+		set_temp_variable = {
+			var = IRE_nationalist_battle_chance
+			value = 1
+		}
+		set_temp_variable = {
+			var = IRE_nationalist_hostage_chance
+			value = 5
+		}
+		set_temp_variable = {
+			var = IRE_nationalist_nothing_chance
+			value = 3
+		}
+	}
+
+	else_if = { #4 hostile
+		limit = { 
+			check_variable = { IRE_nationalist_status = 4 }
+		}
+		set_temp_variable = {
+			var = IRE_nationalist_protesting_chance
+			value = 3
+		}
+		set_temp_variable = {
+			var = IRE_nationalist_rioting_chance
+			value = 9
+		}
+		set_temp_variable = {
+			var = IRE_nationalist_entrenching_chance
+			value = 2
+		}
+		set_temp_variable = {
+			var = IRE_nationalist_striking_chance
+			value = 6
+		}
+		set_temp_variable = {
+			var = IRE_nationalist_strengthening_chance
+			value = 9
+		}
+		set_temp_variable = {
+			var = IRE_nationalist_bombing_chance
+			value = 20
+		}
+		set_temp_variable = {
+			var = IRE_nationalist_shooting_chance
+			value = 16
+		}
+		set_temp_variable = {
+			var = IRE_nationalist_battle_chance
+			value = 10
+		}
+		set_temp_variable = {
+			var = IRE_nationalist_hostage_chance
+			value = 13
+		}
+		set_temp_variable = {
+			var = IRE_nationalist_nothing_chance
+			value = 3
+		}
+	}
+
+	else_if = { #5 inconflict
+		limit = { 
+			check_variable = { IRE_nationalist_status = 5 }
+		}
+		set_temp_variable = {
+			var = IRE_nationalist_protesting_chance
+			value = 2
+		}
+		set_temp_variable = {
+			var = IRE_nationalist_rioting_chance
+			value = 3
+		}
+		set_temp_variable = {
+			var = IRE_nationalist_entrenching_chance
+			value = 1
+		}
+		set_temp_variable = {
+			var = IRE_nationalist_striking_chance
+			value = 1
+		}
+		set_temp_variable = {
+			var = IRE_nationalist_strengthening_chance
+			value = 5
+		}
+		set_temp_variable = {
+			var = IRE_nationalist_bombing_chance
+			value = 15
+		}
+		set_temp_variable = {
+			var = IRE_nationalist_shooting_chance
+			value = 17
+		}
+		set_temp_variable = {
+			var = IRE_nationalist_battle_chance
+			value = 20
+		}
+		set_temp_variable = {
+			var = IRE_nationalist_hostage_chance
+			value = 9
+		}
+		set_temp_variable = {
+			var = IRE_nationalist_nothing_chance
+			value = 0
+		}
+	}
+	
+
+	else = {
+		set_temp_variable = {
+			var = IRE_nationalist_protesting_chance
+			value = 10
+		}
+		set_temp_variable = {
+			var = IRE_nationalist_rioting_chance
+			value = 2
+		}
+		set_temp_variable = {
+			var = IRE_nationalist_entrenching_chance
+			value = 2
+		}
+		set_temp_variable = {
+			var = IRE_nationalist_striking_chance
+			value = 3
+		}
+		set_temp_variable = {
+			var = IRE_nationalist_strengthening_chance
+			value = 12
+		}
+		set_temp_variable = {
+			var = IRE_nationalist_bombing_chance
+			value = 7
+		}
+		set_temp_variable = {
+			var = IRE_nationalist_shooting_chance
+			value = 5
+		}
+		set_temp_variable = {
+			var = IRE_nationalist_battle_chance
+			value = 0
+		}
+		set_temp_variable = {
+			var = IRE_nationalist_hostage_chance
+			value = 0
+		}
+		set_temp_variable = {
+			var = IRE_nationalist_nothing_chance
+			value = 20
+		}
+	}
+}
+
+IRE_set_unionist_chances = {
+	if = { # 0 Calm
+		limit = {
+			check_variable = { IRE_unionist_status = 0 }
+		}
+
+		set_temp_variable = {
+			var = IRE_unionist_protesting_chance
+			value = 5
+		}
+		set_temp_variable = {
+			var = IRE_unionist_rioting_chance
+			value = 0
+		}
+		set_temp_variable = {
+			var = IRE_unionist_entrenching_chance
+			value = 0
+		}
+		set_temp_variable = {
+			var = IRE_unionist_striking_chance
+			value = 0
+		}
+		set_temp_variable = {
+			var = IRE_unionist_strengthening_chance
+			value = 15
+		}
+		set_temp_variable = {
+			var = IRE_unionist_bombing_chance
+			value = 2
+		}
+		set_temp_variable = {
+			var = IRE_unionist_shooting_chance
+			value = 3
+		}
+		set_temp_variable = {
+			var = IRE_unionist_battle_chance
+			value = 0
+		}
+		set_temp_variable = {
+			var = IRE_unionist_hostage_chance
+			value = 2
+		}
+		set_temp_variable = {
+			var = IRE_unionist_nothing_chance
+			value = 25
+		}
+
+	}
+	else_if = { #1 tense
+		limit = { 
+			check_variable = { IRE_unionist_status = 1 }
+		}
+		set_temp_variable = {
+			var = IRE_unionist_protesting_chance
+			value = 5
+		}
+		set_temp_variable = {
+			var = IRE_unionist_rioting_chance
+			value = 0
+		}
+		set_temp_variable = {
+			var = IRE_unionist_entrenching_chance
+			value = 3
+		}
+		set_temp_variable = {
+			var = IRE_unionist_striking_chance
+			value = 5
+		}
+		set_temp_variable = {
+			var = IRE_unionist_strengthening_chance
+			value = 15
+		}
+		set_temp_variable = {
+			var = IRE_unionist_bombing_chance
+			value = 0
+		}
+		set_temp_variable = {
+			var = IRE_unionist_shooting_chance
+			value = 3
+		}
+		set_temp_variable = {
+			var = IRE_unionist_battle_chance
+			value = 0
+		}
+		set_temp_variable = {
+			var = IRE_unionist_hostage_chance
+			value = 0
+		}
+		set_temp_variable = {
+			var = IRE_unionist_nothing_chance
+			value = 10
+		}
+
+	}
+
+	else_if = { #2 agitated
+		limit = { 
+			check_variable = { IRE_unionist_status = 2 }
+		}
+		set_temp_variable = {
+			var = IRE_unionist_protesting_chance
+			value = 7
+		}
+		set_temp_variable = {
+			var = IRE_unionist_rioting_chance
+			value = 3
+		}
+		set_temp_variable = {
+			var = IRE_unionist_entrenching_chance
+			value = 5
+		}
+		set_temp_variable = {
+			var = IRE_unionist_striking_chance
+			value = 3
+		}
+		set_temp_variable = {
+			var = IRE_unionist_strengthening_chance
+			value = 20
+		}
+		set_temp_variable = {
+			var = IRE_unionist_bombing_chance
+			value = 5
+		}
+		set_temp_variable = {
+			var = IRE_unionist_shooting_chance
+			value = 4
+		}
+		set_temp_variable = {
+			var = IRE_unionist_battle_chance
+			value = 0
+		}
+		set_temp_variable = {
+			var = IRE_unionist_hostage_chance
+			value = 2
+		}
+		set_temp_variable = {
+			var = IRE_unionist_nothing_chance
+			value = 8
+		}
+	}
+
+	else_if = { #3 angry
+		limit = { 
+			check_variable = { IRE_unionist_status = 3 }
+		}
+		set_temp_variable = {
+			var = IRE_unionist_protesting_chance
+			value = 15
+		}
+		set_temp_variable = {
+			var = IRE_unionist_rioting_chance
+			value = 8
+		}
+		set_temp_variable = {
+			var = IRE_unionist_entrenching_chance
+			value = 10
+		}
+		set_temp_variable = {
+			var = IRE_unionist_striking_chance
+			value = 8
+		}
+		set_temp_variable = {
+			var = IRE_unionist_strengthening_chance
+			value = 15
+		}
+		set_temp_variable = {
+			var = IRE_unionist_bombing_chance
+			value = 8
+		}
+		set_temp_variable = {
+			var = IRE_unionist_shooting_chance
+			value = 5
+		}
+		set_temp_variable = {
+			var = IRE_unionist_battle_chance
+			value = 1
+		}
+		set_temp_variable = {
+			var = IRE_unionist_hostage_chance
+			value = 5
+		}
+		set_temp_variable = {
+			var = IRE_unionist_nothing_chance
+			value = 3
+		}
+	}
+
+	else_if = { #4 hostile
+		limit = { 
+			check_variable = { IRE_unionist_status = 4 }
+		}
+		set_temp_variable = {
+			var = IRE_unionist_protesting_chance
+			value = 3
+		}
+		set_temp_variable = {
+			var = IRE_unionist_rioting_chance
+			value = 9
+		}
+		set_temp_variable = {
+			var = IRE_unionist_entrenching_chance
+			value = 2
+		}
+		set_temp_variable = {
+			var = IRE_unionist_striking_chance
+			value = 6
+		}
+		set_temp_variable = {
+			var = IRE_unionist_strengthening_chance
+			value = 9
+		}
+		set_temp_variable = {
+			var = IRE_unionist_bombing_chance
+			value = 20
+		}
+		set_temp_variable = {
+			var = IRE_unionist_shooting_chance
+			value = 16
+		}
+		set_temp_variable = {
+			var = IRE_unionist_battle_chance
+			value = 10
+		}
+		set_temp_variable = {
+			var = IRE_unionist_hostage_chance
+			value = 13
+		}
+		set_temp_variable = {
+			var = IRE_unionist_nothing_chance
+			value = 3
+		}
+	}
+
+	else_if = { #5 inconflict
+		limit = { 
+			check_variable = { IRE_unionist_status = 5 }
+		}
+		set_temp_variable = {
+			var = IRE_unionist_protesting_chance
+			value = 2
+		}
+		set_temp_variable = {
+			var = IRE_unionist_rioting_chance
+			value = 3
+		}
+		set_temp_variable = {
+			var = IRE_unionist_entrenching_chance
+			value = 1
+		}
+		set_temp_variable = {
+			var = IRE_unionist_striking_chance
+			value = 1
+		}
+		set_temp_variable = {
+			var = IRE_unionist_strengthening_chance
+			value = 5
+		}
+		set_temp_variable = {
+			var = IRE_unionist_bombing_chance
+			value = 15
+		}
+		set_temp_variable = {
+			var = IRE_unionist_shooting_chance
+			value = 17
+		}
+		set_temp_variable = {
+			var = IRE_unionist_battle_chance
+			value = 20
+		}
+		set_temp_variable = {
+			var = IRE_unionist_hostage_chance
+			value = 9
+		}
+		set_temp_variable = {
+			var = IRE_unionist_nothing_chance
+			value = 0
+		}
+	}
+	
+
+	else = {
+		set_temp_variable = {
+			var = IRE_unionist_protesting_chance
+			value = 10
+		}
+		set_temp_variable = {
+			var = IRE_unionist_rioting_chance
+			value = 2
+		}
+		set_temp_variable = {
+			var = IRE_unionist_entrenching_chance
+			value = 2
+		}
+		set_temp_variable = {
+			var = IRE_unionist_striking_chance
+			value = 3
+		}
+		set_temp_variable = {
+			var = IRE_unionist_strengthening_chance
+			value = 12
+		}
+		set_temp_variable = {
+			var = IRE_unionist_bombing_chance
+			value = 7
+		}
+		set_temp_variable = {
+			var = IRE_unionist_shooting_chance
+			value = 7
+		}
+		set_temp_variable = {
+			var = IRE_unionist_battle_chance
+			value = 5
+		}
+		set_temp_variable = {
+			var = IRE_unionist_hostage_chance
+			value = 0
+		}
+		set_temp_variable = {
+			var = IRE_unionist_nothing_chance
+			value = 20
+		}
+	}
+}
+
+
+IRE_nationalist_actions_effect = {
+	IRE_set_nationalist_chances = yes
+	random_list = {
+		IRE_nationalist_protesting_chance = {
+			IRE_nationalist_protesting_effect = yes
+		}
+		#IRE_nationalist_rioting_chance = {
+		#	IRE_nationalist_rioting_effect = yes
+		#}
+		#IRE_nationalist_entrenching_chance = {
+		#	IRE_nationalist_entrenching_effect = yes
+		#}
+		IRE_nationalist_striking_chance = {
+			IRE_nationalist_striking_effect = yes
+		}
+		IRE_nationalist_strengthening_chance = {
+			IRE_nationalist_strengthening_effect = yes
+		}
+		IRE_nationalist_bombing_chance = {
+			IRE_nationalist_bombing_effect = yes
+		}
+		IRE_nationalist_shooting_chance = {
+			IRE_nationalist_shooting_effect = yes
+		}
+		#IRE_nationalist_battle_chance = {
+		#	IRE_nationalist_battle_effect = yes
+		#}
+		#IRE_nationalist_hostage_chance = {
+		#	IRE_nationalist_hostage_effect = yes
+		#}
+		IRE_nationalist_nothing_chance = {
+			IRE_nationalist_nothing_effect = yes
+		}
+	}
+}
+
+IRE_unionist_actions_effect = {
+	IRE_set_unionist_chances = yes
+	random_list = {
+		IRE_unionist_protesting_chance = {
+			IRE_unionist_protesting_effect = yes
+		}
+		#IRE_unionist_rioting_chance = {
+		#	IRE_unionist_rioting_effect = yes
+		#}
+		IRE_unionist_entrenching_chance = {
+			IRE_unionist_entrenching_effect = yes
+		}
+		IRE_unionist_striking_chance = {
+			IRE_unionist_striking_effect = yes
+		}
+		IRE_unionist_strengthening_chance = {
+			IRE_unionist_strengthening_effect = yes
+		}
+		IRE_unionist_bombing_chance = {
+			IRE_unionist_bombing_effect = yes
+		}
+		IRE_unionist_shooting_chance = {
+			IRE_unionist_shooting_effect = yes
+		}
+		#IRE_unionist_battle_chance = {
+		#	IRE_unionist_battle_effect = yes
+		#}
+		#IRE_unionist_hostage_chance = {
+		#	IRE_unionist_hostage_effect = yes
+		#}
+		IRE_unionist_nothing_chance = {
+			IRE_unionist_nothing_effect = yes
+		}
+	}
+}
+
+
+### Nationalist effects placeholder todo add events 
+
+IRE_nationalist_protesting_effect = {
+	hidden_effect = {
+		IRE_nationalist_protesting_standard_effect = yes
+		random_list = {
+			10 = {
+				country_event = { id = krg_ire_troubles_nationalist_actions.101 }
+			}
+		}
+	}
+
+	custom_effect_tooltip = IRE_nationalist_protesting_tt
+}
+
+IRE_nationalist_protesting_standard_effect = {
+	hidden_effect = {
+		activate_mission = IRE_nationalist_protests
+		add_timed_idea = {
+			idea = IRE_nationalist_protests_idea
+			days = 15
+		}
+	}
+}
+
+IRE_nationalist_rioting_effect = {
+	hidden_effect = {
+		IRE_nationalist_rioting_standard_effect = yes
+		random_list = {
+			10 = {
+				country_event = { id = krg_ire_troubles_nationalist_actions.201 }
+			}
+		}
+	}
+
+	custom_effect_tooltip = IRE_nationalist_rioting_tt
+}
+
+IRE_nationalist_rioting_standard_effect = {
+	hidden_effect = {
+		activate_mission = IRE_nationalist_riots
+		add_timed_idea = {
+			idea = IRE_nationalist_riots_idea
+			days = 15
+		}
+	}
+}
+
+IRE_nationalist_entrenching_effect = {
+	hidden_effect = {
+		random_list = {
+			10 = {
+				country_event = { id = krg_ire_troubles_nationalist_actions.301 }
+			}
+		}
+	}
+
+	custom_effect_tooltip = IRE_nationalist_entrenching_tt
+}
+
+IRE_nationalist_striking_effect = {
+	hidden_effect = {
+		IRE_nationalist_striking_standard_effect = yes
+		random_list = {
+			10 = {
+				country_event = { id = krg_ire_troubles_nationalist_actions.401 }
+			}
+		}
+	}
+
+	custom_effect_tooltip = IRE_nationalist_striking_tt
+}
+
+IRE_nationalist_striking_standard_effect = {
+	hidden_effect = {
+		activate_mission = IRE_nationalist_strikes
+		add_timed_idea = {
+			idea = IRE_nationalist_strikes_idea
+			days = 15
+		}
+	}
+}
+
+IRE_nationalist_strengthening_effect = {
+	hidden_effect = {
+		set_temp_variable = { IRE_temp_nationalist_strength_change = 10 }
+		IRE_change_nationalist_strength = yes
+	}
+
+	custom_effect_tooltip = IRE_nationalist_strengthening_tt
+}
+
+IRE_nationalist_bombing_effect = {
+	hidden_effect = {
+		random_list = {
+			10 = {
+				country_event = { id = krg_ire_troubles_nationalist_actions.601 }
+			}
+		}
+	}
+
+	custom_effect_tooltip = IRE_nationalist_bombing_tt
+}
+
+IRE_nationalist_shooting_effect = {
+	hidden_effect = {
+		random_list = {
+			10 = {
+				country_event = { id = krg_ire_troubles_nationalist_actions.701 }
+			}
+		}
+	}
+
+	custom_effect_tooltip = IRE_nationalist_shooting_tt
+}
+
+IRE_nationalist_battle_effect = {
+	hidden_effect = {
+		random_list = {
+			10 = {
+				country_event = { id = krg_ire_troubles_nationalist_actions.801 }
+			}
+		}
+	}
+
+	custom_effect_tooltip = IRE_nationalist_battle_tt
+}
+
+IRE_nationalist_hostage_effect = {
+	hidden_effect = {
+		set_temp_variable = { IRE_temp_nationalist_strength_change = -3 }
+		IRE_change_nationalist_strength = yes
+
+		set_temp_variable = { IRE_temp_unionist_opinion_change = -5 }
+		IRE_change_unionist_opinion = yes
+	}
+
+	custom_effect_tooltip = IRE_nationalist_hostage_tt
+}
+
+IRE_nationalist_nothing_effect = {
+	hidden_effect = {
+
+	}
+
+	custom_effect_tooltip = IRE_nationalist_nothing_tt
+}
+### Unionist effects placeholder todo add events 
+
+IRE_unionist_protesting_effect = {
+	hidden_effect = {
+		IRE_unionist_protesting_standard_effect = yes
+		random_list = {
+			10 = {
+				country_event = { id = krg_ire_troubles_unionist_actions.101 }
+			}
+		}
+	}
+
+	custom_effect_tooltip = IRE_unionist_protesting_tt
+}
+
+IRE_unionist_protesting_standard_effect = {
+	hidden_effect = {
+		activate_mission = IRE_unionist_protests
+		add_timed_idea = {
+			idea = IRE_unionist_protests_idea
+			days = 15
+		}
+	}
+}
+
+IRE_unionist_rioting_effect = {
+	hidden_effect = {
+		IRE_unionist_rioting_standard_effect = yes
+		random_list = {
+			10 = {
+				country_event = { id = krg_ire_troubles_unionist_actions.201 }
+			}
+		}
+	}
+
+	custom_effect_tooltip = IRE_unionist_rioting_tt
+}
+
+IRE_unionist_rioting_standard_effect = {
+	hidden_effect = {
+		activate_mission = IRE_unionist_riots
+		add_timed_idea = {
+			idea = IRE_unionist_riots_idea
+			days = 15
+		}
+	}
+}
+
+IRE_unionist_entrenching_effect = {
+	hidden_effect = {
+		random_list = {
+			10 = {
+				country_event = { id = krg_ire_troubles_unionist_actions.301 }
+			}
+		}
+	}
+
+	custom_effect_tooltip = IRE_unionist_entrenching_tt
+}
+
+IRE_unionist_striking_effect = {
+	hidden_effect = {
+		IRE_unionist_striking_standard_effect = yes
+		random_list = {
+			10 = {
+				country_event = { id = krg_ire_troubles_unionist_actions.401 }
+			}
+		}
+	}
+
+	custom_effect_tooltip = IRE_unionist_striking_tt
+}
+
+IRE_unionist_striking_standard_effect = {
+	hidden_effect = {
+		activate_mission = IRE_unionist_strikes
+		add_timed_idea = {
+			idea = IRE_unionist_strikes_idea
+			days = 15
+		}
+	}
+}
+
+IRE_unionist_strengthening_effect = {
+	hidden_effect = {
+		set_temp_variable = { IRE_temp_unionist_strength_change = 10 }
+		IRE_change_unionist_strength = yes
+	}
+
+	custom_effect_tooltip = IRE_unionist_strengthening_tt
+}
+
+IRE_unionist_bombing_effect = {
+	hidden_effect = {
+		random_list = {
+			10 = {
+				country_event = { id = krg_ire_troubles_unionist_actions.601 }
+			}
+		}
+	}
+
+	custom_effect_tooltip = IRE_unionist_bombing_tt
+}
+
+IRE_unionist_shooting_effect = {
+	hidden_effect = {
+		random_list = {
+			10 = {
+				country_event = { id = krg_ire_troubles_unionist_actions.701 }
+			}
+		}
+	}
+
+	custom_effect_tooltip = IRE_unionist_shooting_tt
+}
+
+IRE_unionist_battle_effect = {
+	hidden_effect = {
+		random_list = {
+			10 = {
+				country_event = { id = krg_ire_troubles_unionist_actions.801 }
+			}
+		}
+	}
+
+	custom_effect_tooltip = IRE_unionist_battle_tt
+}
+
+IRE_unionist_hostage_effect = {
+	hidden_effect = {
+		set_temp_variable = { IRE_temp_unionist_strength_change = -3 }
+		IRE_change_unionist_strength = yes
+
+		set_temp_variable = { IRE_temp_nationalist_opinion_change = -5 }
+		IRE_change_nationalist_opinion = yes
+	}
+
+	custom_effect_tooltip = IRE_unionist_hostage_tt
+}
+
+IRE_unionist_nothing_effect = {
+	hidden_effect = {
+
+	}
+
+	custom_effect_tooltip = IRE_unionist_nothing_tt
+}
+
+IRE_gardai_actions_effect = {
+	### Setup standard chances
+	set_temp_variable = { IRE_temp_gardai_random_list_successful_nationalist_interrogation = 20 }
+	set_temp_variable = { IRE_temp_gardai_random_list_successful_unionist_interrogation = 20 }
+
+	## Capture informant
+	set_temp_variable = { IRE_temp_gardai_random_list_capture_nationalist_informant = 1 }
+	set_temp_variable = { IRE_temp_gardai_random_list_capture_unionist_informant = 1 }
+
+	multiply_temp_variable = { IRE_temp_gardai_random_list_capture_nationalist_informant = IRE_nationalist_intel }
+	multiply_temp_variable = { IRE_temp_gardai_random_list_capture_unionist_informant = IRE_unionist_intel }
+
+	## Battle 
+	set_temp_variable = { IRE_temp_gardai_random_list_battle_nationalist = -2 }
+	set_temp_variable = { IRE_temp_gardai_random_list_battle_unionist = -2 }
+
+	add_to_temp_variable = { IRE_temp_gardai_random_list_battle_nationalist = IRE_nationalist_status }
+	add_to_temp_variable = { IRE_temp_gardai_random_list_battle_unionist = IRE_unionist_status }
+
+	clamp_temp_variable = {
+		var = IRE_temp_gardai_random_list_battle_nationalist
+		min = 0
+	}
+
+	clamp_temp_variable = {
+		var = IRE_temp_gardai_random_list_battle_unionist
+		min = 0
+	}
+
+	multiply_temp_variable = { IRE_temp_gardai_random_list_battle_nationalist = 5 }
+	multiply_temp_variable = { IRE_temp_gardai_random_list_battle_unionist = 5 }
+
+	add_to_temp_variable = { IRE_temp_gardai_random_list_battle_nationalist = IRE_nationalist_status }
+	add_to_temp_variable = { IRE_temp_gardai_random_list_battle_unionist = IRE_unionist_status }
+
+	#Multiply by Gardai focus
+	set_temp_variable = { IRE_temp_ireland_gardai_nationalist_focus = 1 }
+	set_temp_variable = { IRE_temp_ireland_gardai_unionist_focus = 1 }
+
+	add_to_temp_variable = { IRE_temp_ireland_gardai_nationalist_focus = modifier@ireland_gardai_nationalist_focus }
+	add_to_temp_variable = { IRE_temp_ireland_gardai_unionist_focus = modifier@ireland_gardai_unionist_focus }
+
+	multiply_temp_variable = { IRE_temp_gardai_random_list_capture_nationalist_informant = IRE_temp_ireland_gardai_nationalist_focus }
+	multiply_temp_variable = { IRE_temp_gardai_random_list_successful_nationalist_interrogation = IRE_temp_ireland_gardai_nationalist_focus }
+	multiply_temp_variable = { IRE_temp_gardai_random_list_battle_nationalist = IRE_temp_ireland_gardai_nationalist_focus }
+
+	multiply_temp_variable = { IRE_temp_gardai_random_list_capture_unionist_informant = IRE_temp_ireland_gardai_unionist_focus }
+	multiply_temp_variable = { IRE_temp_gardai_random_list_successful_unionist_interrogation = IRE_temp_ireland_gardai_unionist_focus }
+	multiply_temp_variable = { IRE_temp_gardai_random_list_battle_unionist = IRE_temp_ireland_gardai_unionist_focus }
+	
+	
+	random_list = {
+		IRE_temp_gardai_random_list_successful_nationalist_interrogation = {
+			IRE_gardai_successful_nationalist_interrogation_effect = yes
+		}
+		IRE_temp_gardai_random_list_successful_unionist_interrogation = {
+			IRE_gardai_successful_unionist_interrogation_effect = yes
+		}
+		IRE_temp_gardai_random_list_capture_nationalist_informant = {
+			IRE_gardai_capture_nationalist_informant_effect = yes
+		}
+		IRE_temp_gardai_random_list_capture_unionist_informant = {
+			IRE_gardai_capture_unionist_informant_effect = yes
+		}
+		IRE_temp_gardai_random_list_battle_nationalist = {
+			IRE_gardai_battle_nationalist_effect = yes
+		}
+		IRE_temp_gardai_random_list_battle_unionist = {
+			IRE_gardai_battle_unionist_effect = yes
+		}
+	}
+}
+
+IRE_gardai_successful_nationalist_interrogation_effect = {
+	hidden_effect = {
+		random_list = {
+			10 = {
+				country_event = { id = krg_ire_troubles_operations.301 }
+			}
+		}
+	}
+	custom_effect_tooltip = IRE_gardai_successful_nationalist_interrogation_effect_tt
+}
+
+IRE_gardai_successful_nationalist_interrogation_standard_effect = {
+	set_temp_variable = { IRE_temp_nationalist_intel_change = 5 }
+	IRE_change_nationalist_intel = yes
+}
+
+IRE_gardai_successful_unionist_interrogation_effect = {
+	hidden_effect = {
+		random_list = {
+			10 = {
+				country_event = { id = krg_ire_troubles_operations.311 }
+			}
+		}
+	}
+	custom_effect_tooltip = IRE_gardai_successful_unionist_interrogation_effect_tt
+}
+
+IRE_gardai_successful_unionist_interrogation_standard_effect = {
+	set_temp_variable = { IRE_temp_unionist_intel_change = 5 }
+	IRE_change_unionist_intel = yes
+}
+
+IRE_gardai_capture_nationalist_informant_effect = {
+	hidden_effect = {
+		random_list = {
+			10 = {
+				country_event = { id = krg_ire_troubles_operations.201 }
+			}
+		}
+	}
+	custom_effect_tooltip = IRE_gardai_capture_nationalist_informant_effect_tt
+}
+
+IRE_gardai_capture_nationalist_informant_standard_effect = {
+	set_temp_variable = { IRE_temp_nationalist_intel_change = IRE_nationalist_intel }
+	multiply_temp_variable = { IRE_temp_nationalist_intel_change = -0.25 }
+	IRE_change_nationalist_intel = yes
+}
+
+IRE_gardai_capture_unionist_informant_effect = {
+	hidden_effect = {
+		random_list = {
+			10 = {
+				country_event = { id = krg_ire_troubles_operations.211 }
+			}
+		}
+	}
+	custom_effect_tooltip = IRE_gardai_capture_unionist_informant_effect_tt
+}
+
+IRE_gardai_capture_unionist_informant_standard_effect = {
+	set_temp_variable = { IRE_temp_unionist_intel_change = IRE_unionist_intel }
+	multiply_temp_variable = { IRE_temp_unionist_intel_change = -0.25 }
+	IRE_change_unionist_intel = yes
+}
+
+IRE_gardai_battle_nationalist_effect = {
+	hidden_effect = {
+		random_list = {
+			10 = {
+				country_event = { id = krg_ire_troubles_operations.401 }
+			}
+		}
+	}
+	custom_effect_tooltip = IRE_gardai_battle_nationalist_effect_tt
+}
+
+IRE_gardai_battle_nationalist_standard_effect = {
+	set_temp_variable = { IRE_temp_nationalist_strength_change = -10 }
+	IRE_change_nationalist_strength = yes
+
+	set_temp_variable = { IRE_temp_nationalist_opinion_change = -3 }
+	IRE_change_nationalist_opinion = yes
+}
+
+IRE_gardai_battle_unionist_effect = {
+	hidden_effect = {
+		random_list = {
+			10 = {
+				country_event = { id = krg_ire_troubles_operations.451 }
+			}
+		}
+	}
+	custom_effect_tooltip = IRE_gardai_battle_unionist_effect_tt
+}
+
+IRE_gardai_battle_unionist_standard_effect = {
+	set_temp_variable = { IRE_temp_unionist_strength_change = -10 }
+	IRE_change_unionist_strength = yes
+
+	set_temp_variable = { IRE_temp_unionist_opinion_change = -3 }
+	IRE_change_unionist_opinion = yes
+}
+
+IRE_setup_organise_unionist_mission = {
+	set_variable = { IRE_unionist_mission_effectiveness = 0}
+}
+
+IRE_setup_organise_nationalist_mission = {
+	set_variable = { IRE_nationalist_mission_effectiveness = 0}
+}
+
+IRE_change_unionist_mission_effectiveness = {
+	if = {
+		limit = { check_variable = { IRE_unionist_mission_effectiveness_temp_change > 0 } }
+		custom_effect_tooltip = IRE_change_unionist_mission_effectiveness_increase_tt
+	}
+	else = {
+		custom_effect_tooltip = IRE_change_unionist_mission_effectiveness_decrease_tt
+	}
+
+	add_to_variable = { IRE_unionist_mission_effectiveness = IRE_unionist_mission_effectiveness_temp_change }
+
+	clamp_variable = {
+		var = IRE_unionist_mission_effectiveness
+		min = 0
+		max = 100
+	}
+}
+
+IRE_change_nationalist_mission_effectiveness = {
+	if = {
+		limit = { check_variable = { IRE_nationalist_mission_effectiveness_temp_change > 0 } }
+		custom_effect_tooltip = IRE_change_nationalist_mission_effectiveness_increase_tt
+	}
+	else = {
+		custom_effect_tooltip = IRE_change_nationalist_mission_effectiveness_decrease_tt
+	}
+
+	add_to_variable = { IRE_nationalist_mission_effectiveness = IRE_nationalist_mission_effectiveness_temp_change }
+
+	clamp_variable = {
+		var = IRE_nationalist_mission_effectiveness
+		min = 0
+		max = 100
+	}
+}
+
+IRE_execute_unionist_supply_raid = {
+	set_temp_variable = { IRE_unionist_mission_success = IRE_unionist_mission_effectiveness }
+	multiply_temp_variable = { IRE_unionist_mission_success = 0.5}
+
+	set_temp_variable = { IRE_unionist_mission_critical_success = IRE_unionist_mission_effectiveness }
+	multiply_temp_variable = { IRE_unionist_mission_critical_success = 0.2}
+
+	random_list = {
+		10 = {
+			country_event = { id = krg_ire_troubles_operations.8 }
+		}
+		20 = {
+			country_event = { id = krg_ire_troubles_operations.7 }
+		}
+		IRE_unionist_mission_success = {
+			country_event = { id = krg_ire_troubles_operations.6 }
+		}
+		IRE_unionist_mission_critical_success = {
+			country_event = { id = krg_ire_troubles_operations.5 }
+		}
+	}
+}
+
+IRE_execute_nationalist_supply_raid = {
+	set_temp_variable = { IRE_nationalist_mission_success = IRE_nationalist_mission_effectiveness }
+	multiply_temp_variable = { IRE_nationalist_mission_success = 0.5}
+
+	set_temp_variable = { IRE_nationalist_mission_critical_success = IRE_nationalist_mission_effectiveness }
+	multiply_temp_variable = { IRE_nationalist_mission_critical_success = 0.2}
+
+	random_list = {
+		10 = {
+			country_event = { id = krg_ire_troubles_operations.4 }
+		}
+		20 = {
+			country_event = { id = krg_ire_troubles_operations.3 }
+		}
+		IRE_nationalist_mission_success = {
+			country_event = { id = krg_ire_troubles_operations.2 }
+		}
+		IRE_nationalist_mission_critical_success = {
+			country_event = { id = krg_ire_troubles_operations.1 }
+		}
+	}
+}
+
+IRE_execute_unionist_no_go_raid = {
+	set_temp_variable = { IRE_unionist_mission_success = IRE_unionist_mission_effectiveness }
+	multiply_temp_variable = { IRE_unionist_mission_success = 0.5}
+
+	set_temp_variable = { IRE_unionist_mission_critical_success = IRE_unionist_mission_effectiveness }
+	multiply_temp_variable = { IRE_unionist_mission_critical_success = 0.2}
+
+	random_list = {
+		10 = {
+			country_event = { id = krg_ire_troubles_operations.108 }
+		}
+		20 = {
+			country_event = { id = krg_ire_troubles_operations.107 }
+		}
+		IRE_unionist_mission_success = {
+			country_event = { id = krg_ire_troubles_operations.106 }
+		}
+		IRE_unionist_mission_critical_success = {
+			country_event = { id = krg_ire_troubles_operations.105 }
+		}
+	}
+}
+
+IRE_execute_nationalist_no_go_raid = {
+	set_temp_variable = { IRE_nationalist_mission_success = IRE_nationalist_mission_effectiveness }
+	multiply_temp_variable = { IRE_nationalist_mission_success = 0.5}
+
+	set_temp_variable = { IRE_nationalist_mission_critical_success = IRE_nationalist_mission_effectiveness }
+	multiply_temp_variable = { IRE_nationalist_mission_critical_success = 0.2}
+
+	random_list = {
+		10 = {
+			country_event = { id = krg_ire_troubles_operations.104 }
+		}
+		20 = {
+			country_event = { id = krg_ire_troubles_operations.103 }
+		}
+		IRE_nationalist_mission_success = {
+			country_event = { id = krg_ire_troubles_operations.102 }
+		}
+		IRE_nationalist_mission_critical_success = {
+			country_event = { id = krg_ire_troubles_operations.101 }
+		}
+	}
+}
+
+IRE_change_peace_line_level = {
+	clamp_variable = {
+		var = IRE_temp_change_peace_line_level
+		min = -3
+		max = 3
+	}
+
+	add_to_variable = { IRE_peace_line_level = IRE_temp_change_peace_line_level }
+
+	multiply_temp_variable = { IRE_temp_change_peace_line_level = 5 }
+
+	if = {
+		limit = { 
+			check_variable = { IRE_temp_change_peace_line_level < 0 }
+		}
+		custom_effect_tooltip = IRE_decrease_peace_line_tt
+	}
+	else = {
+		custom_effect_tooltip = IRE_increase_peace_line_tt
+	}
+
+	add_to_variable = { IRE_unionist_mission_time = IRE_temp_change_peace_line_level }
+	add_to_variable = { IRE_nationalist_mission_time = IRE_temp_change_peace_line_level }
+	
+	clamp_variable = {
+		var = IRE_unionist_mission_time
+		min = 30
+		max = 50
+	}
+
+	clamp_variable = {
+		var = IRE_nationalist_mission_time
+		min = 30
+		max = 50
+	}
+
+}
+
+IRE_change_unionist_mission_time = {
+	clamp_variable = {
+		var = IRE_temp_change_unionist_mission_time
+		min = -15
+		max = 15
+	}
+
+	if = {
+		limit = { 
+			check_variable = { IRE_temp_change_unionist_mission_time < 0 }
+		}
+		custom_effect_tooltip = IRE_decrease_unionist_mission_time_tt
+	}
+	else = {
+		custom_effect_tooltip = IRE_increase_unionist_mission_time_tt
+	}
+
+	add_to_variable = { IRE_unionist_mission_time = IRE_temp_change_unionist_mission_time }
+
+	clamp_variable = {
+		var = IRE_unionist_mission_time
+		min = 30
+		max = 50
+	}
+}
+
+IRE_change_nationalist_mission_time = {
+	clamp_variable = {
+		var = IRE_temp_change_nationalist_mission_time
+		min = -15
+		max = 15
+	}
+
+	if = {
+		limit = { 
+			check_variable = { IRE_temp_change_nationalist_mission_time < 0 }
+		}
+		custom_effect_tooltip = IRE_decrease_nationalist_mission_time_tt
+	}
+	else = {
+		custom_effect_tooltip = IRE_increase_nationalist_mission_time_tt
+	}
+
+	add_to_variable = { IRE_nationalist_mission_time = IRE_temp_change_nationalist_mission_time }
+
+	clamp_variable = {
+		var = IRE_nationalist_mission_time
+		min = 30
+		max = 50
+	}
+}
+
+IRE_standard_successful_supply_raid_on_unionist = {
+	set_temp_variable = { IRE_temp_unionist_strength_change = -30 }
+	IRE_change_unionist_strength = yes
+
+	set_temp_variable = { IRE_temp_unionist_opinion_change = -3 }
+	IRE_change_unionist_opinion = yes
+
+	set_temp_variable = { IRE_temp_nationalist_opinion_change = 15 }
+	IRE_change_nationalist_opinion = yes
+}
+
+IRE_standard_partially_successful_supply_raid_on_unionist = {
+	set_temp_variable = { IRE_temp_unionist_strength_change = -20 }
+	IRE_change_unionist_strength = yes
+
+	set_temp_variable = { IRE_temp_unionist_opinion_change = -5 }
+	IRE_change_unionist_opinion = yes
+
+	set_temp_variable = { IRE_temp_nationalist_opinion_change = 10 }
+	IRE_change_nationalist_opinion = yes
+}
+
+IRE_standard_failed_supply_raid_on_unionist = {
+	set_temp_variable = { IRE_temp_unionist_strength_change = -5 }
+	IRE_change_unionist_strength = yes
+
+	set_temp_variable = { IRE_temp_unionist_opinion_change = -7 }
+	IRE_change_unionist_opinion = yes
+
+	set_temp_variable = { IRE_temp_nationalist_opinion_change = 5 }
+	IRE_change_nationalist_opinion = yes
+}
+
+IRE_standard_catastrophic_supply_raid_on_unionist = {
+	set_temp_variable = { IRE_temp_unionist_opinion_change = -10 }
+	IRE_change_unionist_opinion = yes
+
+	set_temp_variable = { IRE_temp_nationalist_opinion_change = 5 }
+	IRE_change_nationalist_opinion = yes
+}
+
+
+
+IRE_standard_successful_supply_raid_on_nationalist = {
+	set_temp_variable = { IRE_temp_nationalist_strength_change = -30 }
+	IRE_change_nationalist_strength = yes
+
+	set_temp_variable = { IRE_temp_nationalist_opinion_change = -3 }
+	IRE_change_nationalist_opinion = yes
+
+	set_temp_variable = { IRE_temp_unionist_opinion_change = 15 }
+	IRE_change_unionist_opinion = yes
+}
+
+IRE_standard_partially_successful_supply_raid_on_nationalist = {
+	set_temp_variable = { IRE_temp_nationalist_strength_change = -20 }
+	IRE_change_nationalist_strength = yes
+
+	set_temp_variable = { IRE_temp_nationalist_opinion_change = -5 }
+	IRE_change_nationalist_opinion = yes
+
+	set_temp_variable = { IRE_temp_unionist_opinion_change = 10 }
+	IRE_change_unionist_opinion = yes
+}
+
+IRE_standard_failed_supply_raid_on_nationalist = {
+	set_temp_variable = { IRE_temp_nationalist_strength_change = -5 }
+	IRE_change_nationalist_strength = yes
+
+	set_temp_variable = { IRE_temp_nationalist_opinion_change = -7 }
+	IRE_change_nationalist_opinion = yes
+
+	set_temp_variable = { IRE_temp_unionist_opinion_change = 5 }
+	IRE_change_unionist_opinion = yes
+}
+
+IRE_standard_catastrophic_supply_raid_on_nationalist = {
+	set_temp_variable = { IRE_temp_nationalist_opinion_change = -10 }
+	IRE_change_nationalist_opinion = yes
+
+	set_temp_variable = { IRE_temp_unionist_opinion_change = 5 }
+	IRE_change_unionist_opinion = yes
+}
+
+### No go Area raids
+
+IRE_standard_successful_no_go_raid_on_unionist = {
+	set_temp_variable = { IRE_temp_unionist_entrenchment_change = -0.2 }
+	IRE_change_unionist_entrenchment = yes
+
+	set_temp_variable = { IRE_temp_unionist_opinion_change = -3 }
+	IRE_change_unionist_opinion = yes
+
+	set_temp_variable = { IRE_temp_nationalist_opinion_change = 15 }
+	IRE_change_nationalist_opinion = yes
+}
+
+IRE_standard_partially_successful_no_go_raid_on_unionist = {
+	set_temp_variable = { IRE_temp_unionist_entrenchment_change = -0.1 }
+	IRE_change_unionist_entrenchment = yes
+
+	set_temp_variable = { IRE_temp_unionist_opinion_change = -5 }
+	IRE_change_unionist_opinion = yes
+
+	set_temp_variable = { IRE_temp_nationalist_opinion_change = 10 }
+	IRE_change_nationalist_opinion = yes
+}
+
+IRE_standard_failed_no_go_raid_on_unionist = {
+	set_temp_variable = { IRE_temp_unionist_entrenchment_change = -0.05 }
+	IRE_change_unionist_entrenchment = yes
+
+	set_temp_variable = { IRE_temp_unionist_opinion_change = -7 }
+	IRE_change_unionist_opinion = yes
+
+	set_temp_variable = { IRE_temp_nationalist_opinion_change = 5 }
+	IRE_change_nationalist_opinion = yes
+}
+
+IRE_standard_catastrophic_no_go_raid_on_unionist = {
+	set_temp_variable = { IRE_temp_unionist_entrenchment_change = 0.02 }
+	IRE_change_unionist_entrenchment = yes
+
+	set_temp_variable = { IRE_temp_unionist_opinion_change = -10 }
+	IRE_change_unionist_opinion = yes
+
+	set_temp_variable = { IRE_temp_nationalist_opinion_change = 5 }
+	IRE_change_nationalist_opinion = yes
+}
+
+
+
+IRE_standard_successful_no_go_raid_on_nationalist = {
+	set_temp_variable = { IRE_temp_nationalist_entrenchment_change = -0.2 }
+	IRE_change_nationalist_entrenchment = yes
+
+	set_temp_variable = { IRE_temp_nationalist_opinion_change = -3 }
+	IRE_change_nationalist_opinion = yes
+
+	set_temp_variable = { IRE_temp_unionist_opinion_change = 15 }
+	IRE_change_unionist_opinion = yes
+}
+
+IRE_standard_partially_successful_no_go_raid_on_nationalist = {
+	set_temp_variable = { IRE_temp_nationalist_entrenchment_change = -0.1 }
+	IRE_change_nationalist_entrenchment = yes
+
+	set_temp_variable = { IRE_temp_nationalist_opinion_change = -5 }
+	IRE_change_nationalist_opinion = yes
+
+	set_temp_variable = { IRE_temp_unionist_opinion_change = 10 }
+	IRE_change_unionist_opinion = yes
+}
+
+IRE_standard_failed_no_go_raid_on_nationalist = {
+	set_temp_variable = { IRE_temp_nationalist_entrenchment_change = -0.05 }
+	IRE_change_nationalist_entrenchment = yes
+
+	set_temp_variable = { IRE_temp_nationalist_opinion_change = -7 }
+	IRE_change_nationalist_opinion = yes
+
+	set_temp_variable = { IRE_temp_unionist_opinion_change = 5 }
+	IRE_change_unionist_opinion = yes
+}
+
+IRE_standard_catastrophic_no_go_raid_on_nationalist = {
+	set_temp_variable = { IRE_temp_nationalist_entrenchment_change = 0.02 }
+	IRE_change_nationalist_entrenchment = yes
+
+	set_temp_variable = { IRE_temp_nationalist_opinion_change = -10 }
+	IRE_change_nationalist_opinion = yes
+
+	set_temp_variable = { IRE_temp_unionist_opinion_change = 5 }
+	IRE_change_unionist_opinion = yes
+}
+
+
+IRE_calculate_troubles_election_effect = {
+	set_temp_variable = { IRE_temp_election_effect_meter = 0 }
+
+	add_to_temp_variable = { IRE_temp_election_effect_meter = IRE_nationalist_status }
+	multiply_temp_variable = { IRE_temp_election_effect_meter = 2 }
+	add_to_temp_variable = { IRE_temp_election_effect_meter = IRE_unionist_status }
+
+	log = "[GetDateText]: [Root.GetName]: IRE_temp_election_effect_meter: [?IRE_temp_election_effect_meter]"
+	if = {
+		limit = { 
+			NOT = {
+				has_country_flag = IRE_1952_election_done
+			}
+		}
+		if = {
+			limit = { 
+				check_variable = { IRE_temp_election_effect_meter > -1 }
+				check_variable = { IRE_temp_election_effect_meter < 4 }
+			}
+			country_event = { id = krg_ire_elections.31 }
+		}
+	
+		else_if = {
+			limit = { 
+				check_variable = { IRE_temp_election_effect_meter > 3 }
+				check_variable = { IRE_temp_election_effect_meter < 6 }
+			}
+			country_event = { id = krg_ire_elections.32 }
+
+			add_to_variable = { IRE_1952_election_shift = 1 }
+		}
+	
+		else_if = {
+			limit = { 
+				check_variable = { IRE_temp_election_effect_meter > 5 }
+				check_variable = { IRE_temp_election_effect_meter < 10 }
+			}
+			country_event = { id = krg_ire_elections.33 }
+
+			add_to_variable = { IRE_1952_election_shift = 2 }
+		}
+	
+		else_if = {
+			limit = { 
+				check_variable = { IRE_temp_election_effect_meter > 9 }
+			}
+			country_event = { id = krg_ire_elections.34 }
+
+			add_to_variable = { IRE_1952_election_shift = 3 }
+		}
+	}
+}
+
+IRE_complete_reconstruction = {
+	remove_power_balance = {
+		id = IRE_reconstruction_bop
+	}
+	if = {
+		limit = { 
+			is_power_balance_in_range = {
+				id = IRE_reconstruction_bop
+				range = IRE_reconstruction_industrial_focus_large_range
+			}
+		}
+		add_ideas = {
+			IRE_post_war_economic_boom_industrial_focus_large
+		}
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = 0.075
+		}
+		add_to_variable = { IRE_1952_election_shift = -3 }
+	}
+	else_if = {
+		limit = { 
+			is_power_balance_in_range = {
+				id = IRE_reconstruction_bop
+				range = IRE_reconstruction_industrial_focus_medium_range
+			}
+		}
+		add_ideas = {
+			IRE_post_war_economic_boom_industrial_focus_medium
+		}
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = 0.05
+		}
+		add_to_variable = { IRE_1952_election_shift = -2 }
+	}
+	else_if = {
+		limit = { 
+			is_power_balance_in_range = {
+				id = IRE_reconstruction_bop
+				range = IRE_reconstruction_industrial_focus_small_range
+			}
+		}
+		add_ideas = {
+			IRE_post_war_economic_boom_industrial_focus_small
+		}
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = 0.025
+		}
+		add_popularity = {
+			ideology = social_conservative
+			popularity = 0.025
+		}
+		add_to_variable = { IRE_1952_election_shift = -1 }
+	}
+	else_if = {
+		limit = { 
+			is_power_balance_in_range = {
+				id = IRE_reconstruction_bop
+				range = IRE_reconstruction_agrarian_focus_large_range
+			}
+		}
+		add_ideas = {
+			IRE_post_war_economic_boom_agrarian_focus_large
+		}
+		add_popularity = {
+			ideology = revolutionary_republican
+			popularity = 0.05
+		}
+		add_popularity = {
+			ideology = national_populist
+			popularity = 0.025
+		}
+		add_to_variable = { IRE_1952_election_shift = 3 }
+	}
+	else_if = {
+		limit = { 
+			is_power_balance_in_range = {
+				id = IRE_reconstruction_bop
+				range = IRE_reconstruction_agrarian_focus_medium_range
+			}
+		}
+		add_ideas = {
+			IRE_post_war_economic_boom_agrarian_focus_medium
+		}
+		add_popularity = {
+			ideology = revolutionary_republican
+			popularity = 0.035
+		}
+		add_to_variable = { IRE_1952_election_shift = 2 }
+	}
+	else_if = {
+		limit = { 
+			is_power_balance_in_range = {
+				id = IRE_reconstruction_bop
+				range = IRE_reconstruction_agrarian_focus_small_range
+			}
+		}
+		add_ideas = {
+			IRE_post_war_economic_boom_agrarian_focus_small
+		}
+		add_popularity = {
+			ideology = revolutionary_republican
+			popularity = 0.025
+		}
+		add_popularity = {
+			ideology = social_conservative
+			popularity = 0.025
+		}
+		add_to_variable = { IRE_1952_election_shift = 1 }
+	}
+	else = {
+		add_ideas = {
+			IRE_post_war_economic_boom_focus_mid
+		}
+		add_popularity = {
+			ideology = social_conservative
+			popularity = 0.075
+		}
+	}
+}

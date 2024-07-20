@@ -1,0 +1,410 @@
+﻿# Division template historical names system. Is a new method of naming the divisions based on the names-group assigned to it's template.
+# If we run out of all historical names, the names will be assigned in the old way.
+#
+# Each group has a made up tag. Use it if you want to append more, or replace existing names with the extra txt files (modding).
+#
+# for_countries - lists all countries that can use it. If empty, or entire tag is missing, all countries in the world can use it.
+#
+# can_use - is a trigger that locks/unlocks the group under specific circumstances. The trigger is in a country scope.
+#
+# division_types - is a list of tokens to corresponding unit types. A player can in fact use any group of names for a div.template
+#                  however this tag is a helper for an automated choice (for AI, or if the group must switch on it's own, because
+#                  for example the current one is no longer available due to the can_use trigger saying so).
+#                  In automated choice, the division template must have at least 1 of the following types for it to be chosen.
+#
+# fallback_name - Is going to be used if we run out of the scripted historical names. If you want to use the old division naming
+#                 mechanics to be used for fallbacks, then just skip this option.
+#
+# unordered - It's a list of historical division names that did not have a number. Regardless if such names happened in history or not
+#             this option is available here mainly for a mods.
+#
+# ordered - Is a list of all historical names. 
+#           Numbers must start from 1 and up. 
+#           Numbers can't repeat in one scope.
+#           If you script the name for this group, at the same number (for example in a mod in another file), the name will be override.
+#           All arguments between the brackets must be separated by spaces. Each argument is wrapped in "quotas".
+#           1st argument = The name. It must contain either: 
+#                          %d (for decimal number placement)
+#                          %s (for string number placement - ROMAN numbers like XIV).
+#           2nd argument is optional = A localizable text describing this historical division. The text will be visible in the tooltip
+#                                      where you choose the historical division name.
+#           3rd argument is optional = An URL preferably pointing to the WIKI. It's a future feature that is not currently working in
+#                                      the current game version.
+
+DNF_INF_01 = {
+	name = "Federal Infantry Division"
+
+	for_countries = {
+		DNF
+	}
+
+	can_use = {
+		always = yes
+	}
+
+	division_types = {
+		"infantry"
+	}
+
+	# Number reservation system will tie to another group.
+	#link_numbering_with = { DNF_INF_01 }
+
+	fallback_name = "%d. Infanteriedivision"
+
+	# Names with numbers (only one number per entry). 
+	# It's okay to have gaps in numbering.
+	ordered = {
+		1 = { "%d. Infanteriedivision" }
+		2 = { "%d. Infanteriedivision" }
+		3 = { "3. Edelweißdivision" }
+		4 = { "%d. Infanteriedivision" }
+		5 = { "%d. Infanteriedivision" }
+		6 = { "%d. Infanteriedivision" }
+		7 = { "%d. Infanteriedivision" }
+		8 = { "%d. Infanteriedivision" }
+		9 = { "%d. Infanteriedivision" }
+		10 = { "%d. Infanteriedivision" }
+	}
+}
+
+DNF_MTN_01 = {
+	name = "Mountain Division"
+
+	for_countries = { 
+		DNF
+	}
+
+	can_use = {
+		always = yes 
+	}
+
+	division_types = { 
+		"mountaineers" 
+	}
+
+	fallback_name = "%d. Kaiserschützendivision"
+
+	ordered = {
+		1 = { "%d. Kaiserschützendivision" }
+		2 = { "%d. Kaiserschützendivision" }
+		3 = { "%d. Kaiserschützendivision" }
+		4 = { "%d. Kaiserschützendivision" }
+		5 = { "%d. Kaiserschützendivision" }
+		6 = { "%d. Kaiserschützendivision" }
+		7 = { "%d. Kaiserschützendivision" }
+		8 = { "8. Kaiserjägerdivision" }
+		9 = { "%d. Kaiserschützendivision" }
+		10 = { "%d. Kaiserschützendivision" }
+	}
+}
+
+DNF_ARM_01 = {
+	name = "Armoured Division"
+
+	for_countries = {
+		DNF 
+	}
+
+	can_use = {
+		always = yes 
+	}
+
+	division_types = {
+		"light_armor" 
+		"modern_armor" 
+	}
+
+	fallback_name = "%d. Panzerdivision"
+
+	ordered = {
+		1 = { "%d. Panzerdivision" }
+		2 = { "%d. Panzerdivision" }
+		3 = { "%d. Panzerdivision" }
+		4 = { "%d. Panzerdivision" }
+		5 = { "%d. Panzerdivision" }
+		6 = { "%d. Panzerdivision" }
+		7 = { "%d. Panzerdivision" }
+		8 = { "%d. Panzerdivision" }
+		9 = { "%d. Panzerdivision" }
+		10 = { "%d. Panzerdivision" }
+	}
+}
+
+DNF_MAR_01 = {
+	name = "Marine Division"
+
+	for_countries = { 
+		DNF 
+	}
+
+	can_use = { 
+		always = yes 
+	}
+
+	division_types = { 
+		"marine" 
+	}
+
+	fallback_name = "%d. Seedivision"
+
+	ordered = {
+		1 = { "%d. Seedivision" }
+		2 = { "%d. Seedivision" }
+		3 = { "%d. Seedivision" }
+		4 = { "%d. Seedivision" }
+		5 = { "%d. Seedivision" }
+		6 = { "%d. Seedivision" }
+		7 = { "%d. Seedivision" }
+		8 = { "%d. Seedivision" }
+		9 = { "%d. Seedivision" }
+		10 = { "%d. Seedivision" }
+	}
+}
+
+DNF_PAR_01 = {
+	name = "Parachutist Division"
+
+	for_countries = { 
+		DNF 
+	}
+
+	can_use = { 
+		always = yes 
+	}
+
+	division_types = { 
+		"paratrooper" 
+	}
+
+	fallback_name = "%d. Fallschirmjägerdivision"
+
+	ordered = {
+		1 = { "%d. Fallschirmjägerdivision 'Falken'" }
+		2 = { "%d. Fallschirmjägerdivision 'Sokoly'" }
+		3 = { "%d. Fallschirmjägerdivision" }
+		4 = { "%d. Fallschirmjägerdivision" }
+		5 = { "%d. Fallschirmjägerdivision" }
+		6 = { "%d. Fallschirmjägerdivision" }
+		7 = { "%d. Fallschirmjägerdivision" }
+		8 = { "%d. Fallschirmjägerdivision" }
+		9 = { "%d. Fallschirmjägerdivision" }
+		10 = { "%d. Fallschirmjägerdivision" }
+	}
+}
+
+DNF_LND_AUS_01 = {
+	name = "Austrian Landsturm Division"
+
+	for_countries = { 
+		DNF AUS 
+	}
+
+	can_use = { 
+		always = yes 
+	}
+
+	division_types = { 
+		"infantry" 
+	}
+
+	fallback_name = "%s. Landsturm Kampfschutzen"
+
+	ordered = {
+		1 = { "%s. Landsturm Kampfschutzen" }
+		2 = { "%s. Landsturm Kampfschutzen" }
+		3 = { "%s. Landsturm Kampfschutzen" }
+		4 = { "%s. Landsturm Kampfschutzen" }
+		5 = { "%s. Landsturm Kampfschutzen" }
+		6 = { "%s. Landsturm Kampfschutzen" }
+		7 = { "%s. Landsturm Kampfschutzen" }
+		8 = { "%s. Landsturm Kampfschutzen" }
+		9 = { "%s. Landsturm Kampfschutzen" }
+		10 = { "%s. Landsturm Kampfschutzen" }
+	}
+}
+
+DNF_LND_HUN_01 = {
+	name = "Hungarian Landsturm Division"
+
+	for_countries = { 
+		DNF HUN 
+	}
+
+	can_use = { 
+		always = yes 
+	}
+
+	division_types = { 
+		"infantry" 
+	}
+
+	fallback_name = "%s. Nemzeti Gárda"
+
+	ordered = {
+		1 = { "%s. Nemzeti Gárda" }
+		2 = { "%s. Nemzeti Gárda" }
+		3 = { "%s. Nemzeti Gárda" }
+		4 = { "%s. Nemzeti Gárda" }
+		5 = { "%s. Nemzeti Gárda" }
+		6 = { "%s. Nemzeti Gárda" }
+		7 = { "%s. Nemzeti Gárda" }
+		8 = { "%s. Nemzeti Gárda" }
+		9 = { "%s. Nemzeti Gárda" }
+		10 = { "%s. Nemzeti Gárda" }
+	}
+}
+
+DNF_LND_TRA_01 = {
+	name = "Transylvanian Landsturm Division"
+
+	for_countries = { 
+		DNF #Transylvania 
+	}
+
+	can_use = { 
+		always = yes 
+	}
+
+	division_types = { 
+		"infantry" 
+	}
+
+	fallback_name = "%s. Furtuna Tarii"
+
+	ordered = {
+		1 = { "%s. Furtuna Tarii" }
+		2 = { "%s. Furtuna Tarii" }
+		3 = { "%s. Furtuna Tarii" }
+		4 = { "%s. Furtuna Tarii" }
+		5 = { "%s. Furtuna Tarii" }
+		6 = { "%s. Furtuna Tarii" }
+		7 = { "%s. Furtuna Tarii" }
+		8 = { "%s. Furtuna Tarii" }
+		9 = { "%s. Furtuna Tarii" }
+		10 = { "%s. Furtuna Tarii" }
+	}
+}
+
+DNF_LND_CZE_01 = {
+	name = "Bohemian Landsturm Division"
+
+	for_countries = { 
+		DNF # BOH
+	}
+
+	can_use = { 
+		always = yes 
+	}
+
+	division_types = { 
+		"infantry" 
+	}
+
+	fallback_name = "%s. Domobrana"
+
+	ordered = {
+		1 = { "%s. Domobrana" }
+		2 = { "%s. Domobrana" }
+		3 = { "%s. Domobrana" }
+		4 = { "%s. Domobrana" }
+		5 = { "%s. Domobrana" }
+		6 = { "%s. Domobrana" }
+		7 = { "%s. Domobrana" }
+		8 = { "%s. Domobrana" }
+		9 = { "%s. Domobrana" }
+		10 = { "%s. Domobrana" }
+	}
+}
+
+DNF_LND_GAL_01 = {
+	name = "Galician Landsturm Division"
+
+	for_countries = { 
+		DNF GAL
+	}
+
+	can_use = { 
+		always = yes 
+	}
+
+	division_types = { 
+		"infantry" 
+	}
+
+	fallback_name = "%s. Milicja"
+
+	ordered = {
+		1 = { "%s. Milicja" }
+		2 = { "%s. Milicja" }
+		3 = { "%s. Milicja" }
+		4 = { "%s. Milicja" }
+		5 = { "%s. Milicja" }
+		6 = { "%s. Milicja" }
+		7 = { "%s. Milicja" }
+		8 = { "%s. Milicja" }
+		9 = { "%s. Milicja" }
+		10 = { "%s. Milicja" }
+	}
+}
+
+DNF_LND_SVK_01 = {
+	name = "Slovakian Landsturm Division"
+
+	for_countries = { 
+		DNF SVK
+	}
+
+	can_use = { 
+		always = yes 
+	}
+
+	division_types = { 
+		"infantry" 
+	}
+
+	fallback_name = "%s. Národná stráž"
+
+	ordered = {
+		1 = { "%s. Národná stráž" }
+		2 = { "%s. Národná stráž" }
+		3 = { "%s. Národná stráž" }
+		4 = { "%s. Národná stráž" }
+		5 = { "%s. Národná stráž" }
+		6 = { "%s. Národná stráž" }
+		7 = { "%s. Národná stráž" }
+		8 = { "%s. Národná stráž" }
+		9 = { "%s. Národná stráž" }
+		10 = { "%s. Národná stráž" }
+	}
+}
+
+DNF_LND_ILL_01 = {
+	name = "Illyrian Landsturm Division"
+
+	for_countries = { 
+		DNF # IL
+	}
+
+	can_use = { 
+		always = yes 
+	}
+
+	division_types = { 
+		"infantry" 
+	}
+
+	fallback_name = "%s. Nacionalna garda"
+
+	ordered = {
+		1 = { "%s. Nacionalna garda" }
+		2 = { "%s. Nacionalna garda" }
+		3 = { "%s. Nacionalna garda" }
+		4 = { "%s. Nacionalna garda" }
+		5 = { "%s. Nacionalna garda" }
+		6 = { "%s. Nacionalna garda" }
+		7 = { "%s. Nacionalna garda" }
+		8 = { "%s. Nacionalna garda" }
+		9 = { "%s. Nacionalna garda" }
+		10 = { "%s. Nacionalna garda" }
+	}
+}

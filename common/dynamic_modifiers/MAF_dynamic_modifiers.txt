@@ -1,0 +1,95 @@
+MAF_state_protectorate = {
+	icon = ""
+	enable = { always = yes }
+	remove_trigger = {
+		NOT = {
+			is_owned_by = MAF
+		}
+	}
+	local_non_core_manpower = -0.70
+}
+
+MAF_state_core_colony = {
+	icon = ""
+	enable = { always = yes }
+	remove_trigger = {
+		NOT = {
+			is_owned_by = MAF
+		}
+	}
+	state_production_speed_buildings_factor = 0.05
+}
+MAF_state_corporate = {
+	icon = ""
+	enable = { always = yes }
+	remove_trigger = {
+		NOT = {
+			is_owned_by = MAF
+		}
+	}
+	state_resources_factor = -0.5
+}
+MAF_state_free_state = {
+	icon = ""
+	enable = { always = yes }
+	remove_trigger = {
+		NOT = {
+			is_owned_by = MAF
+		}
+	}
+	local_non_core_manpower = -0.70
+	state_resources_factor = -0.5
+	state_production_speed_buildings_factor = -0.05
+}
+
+MAF_conscripts_return = {
+	enable = {
+		has_idea = MAF_conscripts_return
+	}	
+	
+	icon = "GFX_idea_MAF_The_Conscripts_Return"
+
+	war_support_factor = MAF_ConscriptsWarSupport
+	army_morale_factor = MAF_ConscriptsArmyRecovery
+	army_org_factor	= MAF_ConscriptsOrganisation
+	industrial_capacity_factory = MAF_ConscriptsFactoryOutput
+	industrial_capacity_dockyard = MAF_ConscriptsDockyardOutput
+}
+
+MAF_colonial_insurgency = {
+	enable = { always = yes }
+	remove_trigger = { always = no }
+
+	consumer_goods_factor = MAF_colonial_insurgency_consumer_goods_factor
+	production_speed_buildings_factor = MAF_colonial_insurgency_production_speed_buildings_factor
+	stability_factor = MAF_colonial_insurgency_stability_factor
+}
+
+MAF_status_of_MAF = {
+	icon = "GFX_idea_MAF_Vorbeck_hat"
+
+	stability_factor = MAF_bureaucracy_modifier_var
+	global_building_slots_factor = MAF_admin_status_modifier_var
+	production_factory_max_efficiency_factor = MAF_settler_modifier_var
+	production_speed_buildings_factor = MAF_economy_modifier_var
+	production_factory_efficiency_gain_factor = MAF_profit_modifier_var
+	political_power_factor = MAF_corruption_modifier_var
+	production_speed_industrial_complex_factor = MAF_urban_modifier_var
+	monthly_population = MAF_rural_modifier_var
+	insurgency_reduction_cost_factor = MAF_military_modifier_var
+	command_power_gain = MAF_military_cp_modifier_var
+	army_org_factor = MAF_askari_modifier_var
+	industrial_factory_donations = MAF_foreign_modifier_var
+	resistance_growth = MAF_resistance_modifier_var
+	compliance_growth = MAF_garrison_modifier_var
+	insurgency_reduction_cost_factor = MAF_resistance_modifier_insurgency_var
+}
+
+MAF_insurgency_state_modifier = {
+	enable = { always = yes }
+	remove_trigger = {
+		NOT = { is_owned_by = MAF }
+	}
+
+	disable_strategic_redeployment = 1
+}

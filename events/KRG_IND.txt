@@ -1,0 +1,494 @@
+add_namespace = krg_ind
+
+country_event = { #Nehru Shot
+	id = krg_ind.1
+	immediate = {log = "[GetDateText]: [Root.GetName]: event krg_ind.1"}
+    title = krg_ind.1.t
+    desc = krg_ind.1.d
+	#picture = 
+
+    is_triggered_only = yes
+
+    option = {
+		name = krg_ind.1.a
+		retire_character = IND_jawaharlal_nehru
+		promote_character = IND_syndicate 
+		news_event = {
+			id = krg_ind_news.1
+		}
+		country_event = {
+			id = krg_ind.2
+			days = 30
+		}
+    }
+}
+
+country_event = { #New Leader Picked
+	id = krg_ind.2
+	immediate = {log = "[GetDateText]: [Root.GetName]: event krg_ind.2"}
+    title = krg_ind.2.t
+    desc = krg_ind.2.d
+	#picture = 
+
+    is_triggered_only = yes
+
+    option = {
+		name = krg_ind.2.a
+		ai_chance = { #previously "ai_will_do" was here, however ai_chance is used for events
+			base = 70
+			modifier = {
+				has_game_rule = {
+					rule = IND_AFTERMATH_NEHRU
+					option = IND_AFTERMATH_NEHRU_SHASTRI
+				}
+				factor = 1000
+			}
+		}
+		retire_character = IND_syndicate
+		promote_character = IND_lal_bahadur_shastri
+		news_event = {
+			id = krg_ind_news.2
+		}
+    }
+    option = {
+		name = krg_ind.2.b
+		ai_chance   = {
+			base = 15
+			modifier = {
+				has_game_rule = {
+					rule = IND_AFTERMATH_NEHRU
+					option = IND_AFTERMATH_NEHRU_DESAI
+				}
+				factor = 1000
+			}
+		}
+		retire_character = IND_syndicate
+		set_politics = {
+			ruling_party = social_conservative
+		}
+		news_event = {
+			id = krg_ind_news.3
+		}
+    }
+    option = {
+		name = krg_ind.2.c
+		ai_chance   = {
+			base = 15
+			modifier = {
+				has_game_rule = {
+					rule = IND_AFTERMATH_NEHRU
+					option = IND_AFTERMATH_NEHRU_NARAYAN
+				}
+				factor = 1000
+			}
+		}
+		retire_character = IND_syndicate
+		set_politics = {
+			ruling_party = radical_socialist
+		}
+		news_event = {
+			id = krg_ind_news.4
+		}
+    }
+}
+
+country_event = { #MYS Election
+	id = krg_ind.3
+	immediate = {log = "[GetDateText]: [Root.GetName]: event krg_ind.3"}
+    title = krg_ind.3.t
+    desc = krg_ind.3.d
+	#picture = 
+
+    is_triggered_only = yes
+
+    option = {
+		name = krg_ind.3.a
+		MYS = {
+			set_popularities = {
+				authoritarian_socialist = 5
+				radical_socialist = 15
+				social_democrat = 30
+				revolutionary_republican = 5
+				social_liberal = 5
+				market_liberal = 10
+				social_conservative = 20
+				authoritarian_democrat = 10
+				paternal_autocrat = 0
+				national_populist = 0
+			}
+			set_politics = {
+				ruling_party = social_democrat
+				election_frequency = 48
+				elections_allowed = yes
+			}
+		}
+		country_event = {
+			id = krg_ind.4
+			days = 60
+		}
+    }
+	option = {
+		name = krg_ind.3.b
+		MYS = {
+			set_politics = {
+				ruling_party = social_conservative
+				election_frequency = 48
+				elections_allowed = yes
+			}
+		}
+		country_event = {
+			id = krg_ind.4
+			days = 60
+		}
+    }
+}
+
+country_event = { #MYS Annexation?
+	id = krg_ind.4
+	immediate = {log = "[GetDateText]: [Root.GetName]: event krg_ind.4"}
+    title = krg_ind.4.t
+    desc = krg_ind.4.d
+	#picture = 
+
+    is_triggered_only = yes
+
+    option = {
+		name = krg_ind.4.a
+		ai_chance = {
+			base = 70
+		}
+		annex_country = {
+			target = MYS
+		}
+    }
+    option = {
+		name = krg_ind.4.b
+		ai_chance = {
+			base = 30
+		}
+    }
+}
+
+country_event = { #TRV Election
+	id = krg_ind.5
+	immediate = {log = "[GetDateText]: [Root.GetName]: event krg_ind.5"}
+    title = krg_ind.5.t
+    desc = krg_ind.5.d
+	#picture = 
+
+    is_triggered_only = yes
+
+    option = {
+		name = krg_ind.5.a
+		TRV = {
+			set_popularities = {
+				authoritarian_socialist = 5
+				radical_socialist = 15
+				social_democrat = 30
+				revolutionary_republican = 4
+				social_liberal = 3
+				market_liberal = 3
+				social_conservative = 25
+				authoritarian_democrat = 15
+				paternal_autocrat = 0
+				national_populist = 0
+			}
+			set_politics = {
+				ruling_party = social_democrat
+				election_frequency = 48
+				elections_allowed = yes
+			}
+		}
+		country_event = {
+			id = krg_ind.6
+			days = 60
+		}
+    }
+	option = {
+		name = krg_ind.5.b
+		TRV = {
+			set_politics = {
+				ruling_party = social_conservative
+				election_frequency = 48
+				elections_allowed = yes
+			}
+		}
+		country_event = {
+			id = krg_ind.6
+			days = 100
+		}
+    }
+}
+
+country_event = { #TRV Annexation?
+	id = krg_ind.6
+	immediate = {log = "[GetDateText]: [Root.GetName]: event krg_ind.6"}
+    title = krg_ind.6.t
+    desc = krg_ind.6.d
+	#picture = 
+
+    is_triggered_only = yes
+
+    option = {
+		name = krg_ind.6.a
+		ai_chance = {
+			base = 70
+			modifier = {
+				add = 0.5
+				country_exists = MYS
+			}
+		}
+		annex_country = {
+			target = TRV
+		}
+    }
+    option = {
+		name = krg_ind.6.b
+		ai_chance = {
+			base = 30
+			modifier = {
+				add = 20
+				country_exists = MYS
+			}
+		}
+    }
+}
+
+country_event = { #MAD Annexation?
+	id = krg_ind.7
+	immediate = {log = "[GetDateText]: [Root.GetName]: event krg_ind.7"}
+    title = krg_ind.7.t
+    desc = krg_ind.7.d
+	#picture = 
+
+    is_triggered_only = yes
+
+    option = {
+		name = krg_ind.7.a
+		ai_chance = {
+			base = 30
+			modifier = {
+				add = -20
+				OR = {
+					MYS = {
+						exists = yes
+					}
+					TRV = {
+						exists = yes
+					}
+				}
+			}
+		}
+		annex_country = {
+			target = MAD
+		}
+    }
+    option = {
+		name = krg_ind.7.b
+		ai_chance = {
+			base = 70
+			modifier = {
+				add = 20
+				OR = {
+					MYS = {
+						exists = yes
+					}
+					TRV = {
+						exists = yes
+					}
+				}
+			}
+		}
+		if = {
+			limit = {
+				OR = {
+					MYS = {
+						exists = yes
+					}
+					TRV = {
+						exists = yes
+					}
+				}
+			}
+			MAD = {
+				country_event = {
+					id = krg_ind.8
+					days = 8
+				}
+			}
+		}
+		else = {
+			country_event = {
+				id = krg_ind.10
+				days = 20
+			}
+		}
+    }
+}
+
+country_event = { #Deccan Alliance
+	id = krg_ind.8
+	immediate = {log = "[GetDateText]: [Root.GetName]: event krg_ind.8"}
+    title = krg_ind.8.t
+    desc = krg_ind.8.d
+	#picture = 
+
+    is_triggered_only = yes
+
+    option = {
+		name = krg_ind.8.a
+		create_faction = MAD_deccan_alliance
+		MYS = {
+			country_event = {
+				id = krg_ind.9
+				days = 3
+			}
+		}
+		TRV = {
+			country_event = {
+				id = krg_ind.9
+				days = 6
+			}
+		}
+		clear_geacps_alignment = yes
+    }
+    option = {
+		name = krg_ind.8.b
+		IND = {
+			country_event = {
+				id = krg_ind.10
+				days = 20
+			}
+		}
+    }
+}
+
+country_event = { #Join the Deccan Alliance?
+	id = krg_ind.9
+	immediate = {log = "[GetDateText]: [Root.GetName]: event krg_ind.9"}
+    title = krg_ind.9.t
+    desc = krg_ind.9.d
+	#picture = 
+
+    is_triggered_only = yes
+
+    option = {
+		name = krg_ind.9.a
+		ai_chance = {
+			base = 30
+			modifier = {
+				factor = 0
+				NOT = {
+					has_government = social_democrat
+				}
+			}
+		}
+		MAD = {
+			add_to_faction = ROOT
+		}
+		IND = {
+			if = {
+				limit = {
+					NOT = {
+						has_country_flag = IND_south_war
+					}
+				}
+				set_country_flag = IND_south_war
+			}
+		}
+    }
+    option = {
+		name = krg_ind.9.b
+		ai_chance = {
+			base = 70
+			modifier = {
+				add = 30
+				NOT = {
+					has_government = social_democrat
+				}
+			}
+		}
+    }
+}
+
+country_event = { #War comes to India
+	id = krg_ind.10
+	immediate = {log = "[GetDateText]: [Root.GetName]: event krg_ind.10"}
+    title = krg_ind.10.t
+    desc = krg_ind.10.d
+	#picture = 
+
+    is_triggered_only = yes
+
+    option = {
+		name = krg_ind.10.a
+		hidden_effect = {
+			424 = {
+				add_claim_by = IND
+			}
+			423 = {
+				add_claim_by = IND
+			}
+			953 = {
+				add_claim_by = IND
+			}
+			864 = {
+				add_claim_by = IND
+			}	
+		}
+		declare_war_on = {
+			target = MAD
+			type = annex_everything
+		}
+		if = {
+			limit = {
+				has_country_flag = IND_south_war
+			}
+			news_event = {
+				id = krg_ind_news.6
+			}
+			if = {
+				limit = {
+					MYS = {
+						exists = yes
+					}
+				}
+				hidden_effect = {
+					320 = {
+						add_claim_by = IND
+					}	
+					425 = {
+						add_claim_by = IND
+					}	
+					955 = {
+						add_claim_by = IND
+					}	
+				}
+			}
+			
+			if = {
+				limit = {
+					TRV = {
+						exists = yes
+					}
+				}
+				hidden_effect = {
+					954 = {
+						add_claim_by = IND
+					}	
+					952 = {
+						add_claim_by = IND
+					}	
+					846 = {
+						add_claim_by = IND
+					}	
+				}
+			}
+		}
+		else = {
+			news_event = {
+				id = krg_ind_news.5
+			}
+		}
+    }
+}

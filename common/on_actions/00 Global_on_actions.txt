@@ -1,0 +1,1156 @@
+on_actions = {
+	##Monthly Counter##
+	on_startup = {
+		effect = {
+			set_variable = { global.month = 1 }
+			### ENT Setup ###
+			CAN = {
+				get_highest_scored_country_temp = { scorer = player_entente_leader_scorer var = highest_scored_country }
+				if = {
+					limit = { NOT = { check_variable = { highest_scored_country = 0 } } }
+					var:highest_scored_country = {
+						save_global_event_target_as = KRG_entente_leader
+						set_faction_leader = yes
+					}
+				}
+			}
+			# alignment stuff
+			GER = {
+				every_country = {
+					limit = {
+						OR = {
+							is_in_or_aligned_with_accord = yes
+							is_in_or_aligned_with_reichspakt = yes
+							is_in_or_aligned_with_geacps = yes
+							is_in_or_aligned_with_nam = yes
+						}
+					}
+					add_to_array = { global.alignment_target_array = THIS }
+				}
+				force_update_map_mode = { mapmode = KRG_alignment_map_mode }
+				add_to_variable = { global.KRG_alignment_map_mode_dirty = 1 }
+				###olympics
+				news_event = { id = olympics.0 days = 25 } #should be major, but just to be safe
+			}
+			every_country = {
+				limit = {
+					is_in_or_aligned_with_accord = yes
+				}
+				every_country = {
+					limit = {
+						is_in_or_aligned_with_reichspakt = yes
+						NOT = { tag = DNF }
+					}
+					add_opinion_modifier = {
+						target = PREV
+						modifier = kalterkrieg_trade
+					}
+					add_opinion_modifier = {
+						target = PREV
+						modifier = kalterkrieg_opinion
+					}
+				}
+			}
+			every_country = {
+				limit = {
+					is_in_or_aligned_with_reichspakt = yes
+					NOT = { tag = DNF }
+				}
+				every_country = {
+					limit = {
+						OR = {
+							is_in_or_aligned_with_accord = yes
+							is_in_or_aligned_with_geacps = yes
+							tag = RUS
+							tag = PER
+							tag = LAT
+							tag = EST
+						}
+					}
+					add_opinion_modifier = {
+						target = PREV
+						modifier = kalterkrieg_trade
+					}
+					add_opinion_modifier = {
+						target = PREV
+						modifier = kalterkrieg_opinion
+					}
+				}
+			}
+			every_country = {
+				limit = {
+					is_in_or_aligned_with_geacps = yes
+				}
+				every_country = {
+					limit = {
+						is_in_or_aligned_with_reichspakt = yes
+						NOT = { tag = DNF }
+					}
+					add_opinion_modifier = {
+						target = PREV
+						modifier = kalterkrieg_trade
+					}
+					add_opinion_modifier = {
+						target = PREV
+						modifier = kalterkrieg_opinion
+					}
+				}
+			}
+			every_country = {
+				limit = {
+					is_in_or_aligned_with_reichspakt = yes
+				}
+				add_opinion_modifier = {
+					target = RUS
+					modifier = kalterkrieg_trade
+				}
+				add_opinion_modifier = {
+					target = RUS
+					modifier = kalterkrieg_opinion
+				}
+				add_opinion_modifier = {
+					target = PER
+					modifier = kalterkrieg_trade
+				}
+				add_opinion_modifier = {
+					target = PER
+					modifier = kalterkrieg_opinion
+				}
+				add_opinion_modifier = {
+					target = LAT
+					modifier = kalterkrieg_trade
+				}
+				add_opinion_modifier = {
+					target = LAT
+					modifier = kalterkrieg_opinion
+				}
+				add_opinion_modifier = {
+					target = EST
+					modifier = kalterkrieg_trade
+				}
+				add_opinion_modifier = {
+					target = EST
+					modifier = kalterkrieg_opinion
+				}
+			}
+			every_country = {
+				#generic_start_tank_variant = yes
+				recalc_military_spending = yes
+				set_variable = {
+					fuel_needed_total = 0
+				}
+				add_dynamic_modifier = {
+					modifier = civilian_fuel_use_modifier
+				}
+				calculate_fuel_needs = yes
+				fill_empty_positions_with_vacant_positions = yes
+			}
+			##this is here to avoid a merge conflict, feel free to move it somewhere else
+			add_to_array = { global.CAN_economic_sphere = CAN }
+			for_each_loop = {
+				array = CAN.allies
+				add_to_array = { global.CAN_economic_sphere = v }
+			}
+			add_to_array = { global.CAN_economic_sphere = SPR }
+			add_to_array = { global.CAN_economic_sphere = NOR }
+			add_to_array = { global.CAN_economic_sphere = CAL }
+			add_to_array = { global.mitteleuropa = GER }
+			for_each_loop = {
+				array = GER.allies
+				add_to_array = { global.mitteleuropa = v }
+			}
+			add_to_array = { global.mitteleuropa = SWE }
+
+			#Party Popularity Setup
+			for_each_scope_loop = {
+				array = countries
+				#if = {
+				#	limit = { has_variable = political_power_ideology }
+				#	map_party_popularity_PP_gain_to_ideology = yes
+				#}
+				#else = {
+				#	default_party_popularity_PP_gain = yes
+				#}
+				add_dynamic_modifier = { modifier = party_popularity_dynamic_modifier }
+				#coalition system handles the coalition dynamic modifier
+				coal_set_up = yes
+			}
+			
+		# Set up news events settings
+			if = {
+				limit = { has_global_flag = is_mp }
+				set_global_flag = NEWS_SOME
+			}
+			else = {
+				set_global_flag = NEWS_ALL
+			}
+		}
+        effect = {
+            # PRI = { country_event = { id = krg_pri.7 days = 1 } }
+            ENG = {
+            	ENG_calc_socialist_popularity = yes
+			}
+			NEE = { country_event = { id = nee.0 days = 1 } }
+			NEE = { country_event = { id = krg_fng.0 days = 1 } }
+			RUS = { country_event = { id = krg_rus.1001 hours = 0 } } # hidden event to add days to armistice mission
+			FRA = {
+				if = {
+					limit = {
+						is_ai = yes
+					}
+					country_event = { id = fra_ai.1 days = 1 }
+				}
+			}
+			##Setup the Welcome Splash
+			every_country = {
+				limit = {
+					is_ai = no
+				}
+				set_country_flag = show_welcome_splash
+			}
+        }
+		### Sardinian Startup
+        effect = {
+			907 = {
+				damage_building = {
+					type = infrastructure
+					damage = 2
+				}
+				damage_building = {
+					type = dockyard
+					damage = 4
+				}
+				damage_building = {
+					type = industrial_complex
+					damage = 3
+				}
+			}
+			158 = {
+				damage_building = {
+					type = infrastructure
+					damage = 4
+				}
+				damage_building = {
+					type = industrial_complex
+					damage = 4
+				}
+				damage_building = {
+					type = arms_factory
+					damage = 4
+				}
+			}
+			157 = {
+				add_province_modifier = {
+					province = 11861
+					static_modifiers = { terrain_san_marino_socialist }
+				}
+			}
+			831 = { damage_building = { type = infrastructure damage = 5 } damage_building = { type = industrial_complex damage = 1 } }
+			161 = { damage_building = { type = infrastructure damage = 6 } damage_building = { type = air_base damage = 2 } }
+			162 = { damage_building = { type = infrastructure damage = 6 } damage_building = { type = naval_dockyard damage = 1 } damage_building = { type = air_base damage = 2 } }
+			908 = { damage_building = { type = infrastructure damage = 5 } }
+			157 = { damage_building = { type = infrastructure damage = 3 } damage_building = { type = industrial_complex damage = 1 } }
+			159 = { damage_building = { type = infrastructure damage = 8 } damage_building = { type = air_base damage = 4 } damage_building = { type = arms_factory damage = 3 } }
+			160 = { damage_building = { type = infrastructure damage = 2 } damage_building = { type = arms_factory damage = 2 } damage_building = { type = industrial_complex damage = 2 } }
+        }
+
+		### Ireland Startup
+        effect = {
+			113 = {
+				damage_building = {
+					type = infrastructure
+					damage = 5
+				}
+				damage_building = {
+					type = naval_base
+					damage = 4
+				}
+				damage_building = {
+					type = industrial_complex
+					damage = 5
+				}
+				damage_building = {
+					type = arms_factory
+					damage = 1
+				}
+			}
+			119 = {
+				damage_building = {
+					type = infrastructure
+					damage = 5
+				}
+				damage_building = {
+					type = naval_base
+					damage = 3
+				}
+				damage_building = {
+					type = industrial_complex
+					damage = 2
+				}
+				damage_building = {
+					type = arms_factory
+					damage = 1
+				}
+				damage_building = {
+					type = dockyard
+					damage = 2
+				}
+			}
+
+			844 = {
+				damage_building = {
+					type = infrastructure
+					damage = 3
+				}
+				damage_building = {
+					type = industrial_complex
+					damage = 1
+				}
+
+			}
+
+			134 = {
+				damage_building = {
+					type = infrastructure
+					damage = 3
+				}
+				damage_building = {
+					type = industrial_complex
+					damage = 1
+				}
+
+			}
+
+			135 = {
+				damage_building = {
+					type = infrastructure
+					damage = 3
+				}
+				damage_building = {
+					type = industrial_complex
+					damage = 2
+				}
+
+			}
+			
+        }
+	}
+
+	on_monthly = {
+		effect = {
+			if = {
+				limit = {
+					NOT = { has_global_flag = on_monthly_done }
+				}
+				add_to_variable = { global.month = 1 }
+				if = {
+					limit = {
+						check_variable = { global.month > 12 }
+					}
+					set_variable = { global.month = 1 }
+				}
+				set_global_flag = { flag = on_monthly_done value = 1 days = 1 }
+
+				# alignment stuff
+				clear_array = global.alignment_target_array
+				every_country = {
+					limit = {
+						OR = {
+							is_in_or_aligned_with_accord = yes
+							is_in_or_aligned_with_reichspakt = yes
+							is_in_or_aligned_with_geacps = yes
+							is_in_or_aligned_with_nam = yes
+						}
+					}
+					add_to_array = { global.alignment_target_array = THIS }
+				}
+				force_update_map_mode = { mapmode = KRG_alignment_map_mode }
+
+				# state pop growth stuff
+				every_state = { 
+					limit = {
+						NOT = {
+							check_variable = { modifier@state_monthly_population = 0 }
+						}
+					}
+					log = "[THIS.GetName] - [?state_population_k]k pop before growth"
+					set_temp_variable = { temp_pop = state_population_k }
+					set_temp_variable = { temp_modifier = 1 }
+					multiply_temp_variable = { temp_modifier = modifier@state_monthly_population }
+					multiply_temp_variable = { temp_modifier = 0.12 }
+					multiply_temp_variable = { temp_pop = temp_modifier }
+					multiply_temp_variable = { temp_pop = 10 }
+					add_manpower = var:temp_pop
+					log = "[THIS.GetName] - [?state_population_k]k pop after growth"
+				}
+			}
+			
+		}
+	}
+
+	on_monthly_MAF = {
+		effect = {
+			MAF_modifier_monthly_tick = yes
+		}
+	}
+
+	#ROOT is new controller #FROM is old controller #FROM.FROM is state ID
+	on_state_control_changed = {
+		effect = {
+			if = {
+				limit = { is_in_peace_conference = yes }
+				log = "State: [FROM.FROM.GetName], OLD: [FROM.GetName], NEW: [ROOT.GetName]"
+			}
+		}
+	}
+	
+	on_puppet = {
+		effect = {
+			meta_effect = {
+				text = {
+					KRG_peace_form_puppet_[PUPPET]_of_[OVERLORD] = yes
+				}
+				PUPPET = "[ROOT.GetTag]"
+				OVERLORD = "[FROM.GetTag]"
+			}
+			FROM = { save_event_target_as = on_puppet_master_tag }
+			ROOT = {
+				standard_on_puppet_effect = yes
+			}
+		}
+	}
+
+
+	##Military Spending and GDP##
+	on_monthly = {
+		effect = {
+			recalc_military_spending = yes
+
+			if = {
+				limit = {
+					OR = {
+						check_variable = { global.month = 3 }
+						check_variable = { global.month = 6 }
+						check_variable = { global.month = 9 }
+						check_variable = { global.month = 12 }
+					}
+				}
+				country_event = krg_gdp.1 
+			}
+		}
+	}
+	###COALITION WEEKLY AND
+	###SOCIALIST CALCULATIONS FOR BRITAIN
+	on_weekly = {
+		effect = {
+			coal_calc_total = yes
+
+			####US State Effects
+
+			822 = { #Progressive Bastion Effects
+				if = {
+					limit = {
+						is_in_array = {
+							array = state_idea_array
+							value = 56
+						}
+						check_variable = {
+							electoral_pie_chart_number_array^0 < 10
+						}
+					}
+					set_variable = {
+						temp_progressive_popularity = electoral_pie_chart_number_array^0
+					}
+					subtract_from_variable = {
+						temp_progressive_popularity = 10
+					}
+					multiply_variable = {
+						temp_progressive_popularity = -1
+					}
+					set_temp_variable = {
+						pop_type_added = 0
+					}
+					set_temp_variable = {
+						pop_value_added = temp_progressive_popularity
+					}
+					NEE_add_electoral_popularity = yes
+					clear_variable = temp_progressive_popularity
+				}
+			}
+			358 = { #Republican Bastion Effects
+				if = {
+					limit = {
+						is_in_array = {
+							array = state_idea_array
+							value = 57
+						}
+						check_variable = {
+							electoral_pie_chart_number_array^2 < 15
+						}
+					}
+					set_variable = {
+						temp_republican_popularity = electoral_pie_chart_number_array^2
+					}
+					subtract_from_variable = {
+						temp_republican_popularity = 15
+					}
+					multiply_variable = {
+						temp_republican_popularity = -1
+					}
+					set_temp_variable = {
+						pop_type_added = 2
+					}
+					set_temp_variable = {
+						pop_value_added = temp_republican_popularity
+					}
+					NEE_add_electoral_popularity = yes
+					clear_variable = temp_republican_popularity
+				}
+			}
+			797 = { #Athens of America Effects
+				if = {
+					limit = {
+						is_in_array = {
+							array = state_idea_array
+							value = 58
+						}
+						check_variable = {
+							electoral_pie_chart_number_array^1 < 15
+						}
+					}
+					set_variable = {
+						temp_lib_dem_popularity = electoral_pie_chart_number_array^1
+					}
+					subtract_from_variable = {
+						temp_lib_dem_popularity = 15
+					}
+					multiply_variable = {
+						temp_lib_dem_popularity = -1
+					}
+					set_temp_variable = {
+						pop_type_added = 1
+					}
+					set_temp_variable = {
+						pop_value_added = temp_lib_dem_popularity
+					}
+					NEE_add_electoral_popularity = yes
+					clear_variable = temp_lib_dem_popularity
+				}
+			}
+			825 = { #Hollywood Effects
+				if = {
+					limit = {
+						is_in_array = {
+							array = state_idea_array
+							value = 108
+						}
+						check_variable = {
+							CAL_electoral_party_popularity_array^1 < 5
+						}
+					}
+					set_variable = {
+						temp_prog_popularity = CAL_electoral_party_popularity_array^1
+					}
+					subtract_from_variable = {
+						temp_prog_popularity = 5
+					}
+					multiply_variable = {
+						temp_prog_popularity = -1
+					}
+					set_temp_variable = {
+						pop_type_added = 1
+					}
+					set_temp_variable = {
+						pop_value_added = temp_prog_popularity
+					}
+					set_temp_variable = { temp_popularity = temp_prog_popularity }
+					set_temp_variable = { temp_party = 2 }
+					set_temp_variable = { temp_state = 825 }
+					CAL_electoral_modify_popularity = yes
+					clear_variable = temp_prog_popularity
+				}
+			}
+			949 = { #Hollywood Effects
+				if = {
+					limit = {
+						is_in_array = {
+							array = state_idea_array
+							value = 108
+						}
+						check_variable = {
+							CAL_electoral_party_popularity_array^1 < 5
+						}
+					}
+					set_variable = {
+						temp_prog_popularity = CAL_electoral_party_popularity_array^1
+					}
+					subtract_from_variable = {
+						temp_prog_popularity = 5
+					}
+					multiply_variable = {
+						temp_prog_popularity = -1
+					}
+					set_temp_variable = {
+						pop_type_added = 1
+					}
+					set_temp_variable = {
+						pop_value_added = temp_prog_popularity
+					}
+					set_temp_variable = { temp_popularity = temp_prog_popularity }
+					set_temp_variable = { temp_party = 2 }
+					set_temp_variable = { temp_state = 949 }
+					CAL_electoral_modify_popularity = yes
+					clear_variable = temp_prog_popularity
+				}
+			}
+		}
+	}
+	on_weekly_ENG = {
+		effect = {
+			ENG_calc_socialist_popularity = yes
+		}
+	}
+	on_ruling_party_change_immediate  = {
+		effect = {
+			if = {
+				limit = {
+					has_country_flag = keep_coalition
+				}
+				clr_country_flag = keep_coalition
+			}
+			else = {
+				coal_rev_all = yes
+			}
+			if = {
+				limit = { tag = ITA }
+				if = {
+					limit = { has_government = social_conservative }
+					coal_add_soc_lib = yes
+				}
+				else_if = {
+					limit = { has_government = social_liberal }
+					coal_add_soc_con = yes
+				}
+			}
+		}
+	}
+    on_government_change = {
+    	effect = {
+    		coal_set_up = yes
+			if = {
+				limit = {
+					tag = SIK
+				}
+				if = {
+					limit = {
+						OR = {
+							has_government = authoritarian_socialist
+							has_government = radical_socialist
+							has_government = social_democrat
+							has_government = revolutionary_republican
+							has_government = social_liberal
+						}
+						NOT = {
+							has_cosmetic_tag = SIK_KMT
+						}
+					}
+					set_cosmetic_tag = SIK_KMT
+				}
+				else_if = {
+					limit = {
+						NOT = {
+							OR = {
+								has_government = authoritarian_socialist
+								has_government = radical_socialist
+								has_government = social_democrat
+								has_government = revolutionary_republican
+								has_government = social_liberal
+							}
+						}
+						has_cosmetic_tag = SIK_KMT
+					}
+					drop_cosmetic_tag = yes
+				}
+			}
+		}
+    }
+	
+	### Influence ###
+	on_monthly_GER = {
+		effect = {
+			influence_tick = yes
+		}
+	}
+	### Canada ##
+	on_monthly_CAN = {
+		effect = {
+			CAN_monthly = yes
+		}
+	}
+
+	### Sardinian Things ###
+	on_monthly_ITA = {
+		effect = {
+			if = {
+				limit = {
+					has_completed_focus = KRG_ITA_embrace_fordism
+				}
+				set_temp_variable = { temp1 = ita_agnelli_cost_decrease }
+				multiply_temp_variable = { temp1 = -1 }
+				add_to_variable = { ita_agnelli_industry_decisions_cost = temp1 }
+				clamp_variable = {
+					var = ita_agnelli_industry_decisions_cost
+					min = 25
+					max = 10000
+				}
+			}
+		}
+	}
+	on_daily_ITA = {
+		effect = {
+			if = {
+				limit = {
+					NOT = {
+						has_country_flag = KRG_ITA_1949_elections_held
+					}
+					has_country_flag = ITA_new_constitution_approved
+				}
+				set_variable = { ITA_laicist_coalition_popularity = party_popularity@market_liberal }
+				add_to_variable = { ITA_laicist_coalition_popularity = party_popularity@social_democrat }
+				add_to_variable = { ITA_laicist_coalition_popularity = party_popularity@authoritarian_democrat }
+			}
+		}
+	}
+
+	on_annex = {
+		effect = {
+			log = "[GetDateText] [Root.GetName] has annexed [From.GetName]"
+			if = {
+				limit = {
+					ROOT = {
+						tag = SIC
+					}
+					FROM = {
+						OR = {
+							tag = ITA
+							tag = ITA
+						}
+					}
+					NOT = {
+						country_exists = ITA
+						country_exists = ITA
+					}
+				}
+				SIC = {
+					country_event = krg_sic.16
+				}
+			}
+			if = {
+				limit = { 
+					FROM = {
+						is_in_array = { global.con_senate_array = THIS }
+					}
+				}
+				FROM = { remove_from_con_senate = yes }
+			}
+			if = {
+				limit = { 
+					FROM = {
+						is_in_array = { global.con_council_array = THIS }
+					}
+				}
+				FROM = { remove_from_con_council = yes }
+			}
+			if = {
+				limit = { 
+					FROM = {
+						is_in_array = { global.con_member_array = THIS }
+					}
+				}
+				FROM = { remove_from_con = yes }
+			}
+		}
+	}
+	on_new_term_election = {
+		effect = {	
+			if = {
+				limit = {
+					tag = ITA
+				}
+				country_event = krg_ita.57
+				country_event = krg_ita.58
+				country_event = krg_ita.99
+				country_event = krg_ita.154
+			}
+			if = {
+				limit = {
+					tag = NEE
+					NOT = {
+						has_country_flag = NEE_1949elections_happened
+					}
+				}
+				country_event = {
+					id = nee.14
+				}
+			}
+			if = {
+				limit = {
+					tag = NEE
+					has_country_flag = NEE_1949elections_happened
+					NOT = {
+						has_country_flag = NEE_1953elections_happened
+					}
+				}
+				country_event = {
+					id = nee.29
+				}
+			}
+			if = {
+				limit = {
+					tag = NEE
+					has_country_flag = NEE_1949elections_happened
+					has_country_flag = NEE_1953elections_happened
+				}
+				country_event = {
+					id = nee.38
+				}
+			}
+			if = {
+				limit = {
+					tag = NFA
+					NOT = {
+						has_country_flag = NFA_1950_elections_happened
+					}
+				}
+				set_country_flag = NFA_1950_elections_happened
+				country_event = {
+					id = nfa_elections.1
+					days = 0
+				}
+			}
+			if = {
+				limit = {
+					tag = NFA
+					has_country_flag = NFA_parliamentary_path
+					has_country_flag = NFA_1950_elections_happened
+					NOT = {
+						has_country_flag = NFA_1953_elections_happened
+					}
+				}
+				set_country_flag = NFA_1953_elections_happened
+				country_event = {
+					id = nfa_elections.3
+					days = 0
+				}
+			}
+			if = {
+				limit = {
+					tag = AST
+					NOT = {
+						has_country_flag = AST_1948_election_held
+					}
+				}
+				country_event = {
+					id = AST_pol.0
+					days = 0
+				}
+				hidden_effect = {
+					complete_national_focus = AST_the_1948_election
+				}
+			}
+			if = {
+				limit = {
+					tag = AST
+					has_country_flag = AST_1948_election_held
+					NOT = {
+						has_country_flag = AST_1951_election_held
+					}
+				}
+				country_event = {
+					id = AST_pol.3
+					days = 0
+				}
+			}
+			if = {
+				limit = {
+					tag = AST
+					has_country_flag = AST_1948_election_held
+					has_country_flag = AST_1951_election_held
+					NOT = {
+						has_country_flag = AST_1954_election_held
+					}
+				}
+				country_event = {
+					id = AST_pol.6
+					days = 0
+				}
+			}
+		}
+	}
+	on_nuke_drop = {
+		effect = {
+			# if = {
+			# 	limit = {
+			# 		FROM = {
+			# 			NOT = {
+			# 				has_state_flag = thermonuclear_strike
+			# 			}
+			# 		}
+			# 	}
+
+			# 	FROM = {
+			# 		add_dynamic_modifier = {
+			# 			modifier = atomic_fallout_state
+			# 		}
+
+			# 		set_temp_variable = {
+			# 			var = state_manpower_hit
+			# 			value = THIS.state_population_k
+			# 		}
+
+			# 		multiply_temp_variable = { state_manpower_hit = -25 }
+
+			# 		add_manpower = state_manpower_hit
+
+			# 	}
+			# }
+
+			# else_if = {
+			# 	limit = {
+			# 		FROM = {
+			# 			has_state_flag = thermonuclear_strike
+			# 		}
+			# 	}
+
+			# 	FROM = {
+			# 		add_dynamic_modifier = {
+			# 			modifier = thermonuclear_fallout_state
+			# 		}
+
+			# 		set_temp_variable = {
+			# 			var = state_manpower_hit
+			# 			value = THIS.state_population_k
+			# 		}
+
+			# 		multiply_temp_variable = { state_manpower_hit = -40 }
+
+			# 		add_manpower = state_manpower_hit
+
+			# 	}
+			# }
+
+			# FROM = {
+			# 	remove_province_modifier = {
+			# 		static_modifiers = { atomic_fallout }
+			# 		province = {
+			# 			all_provinces = yes
+			# 		}
+			# 	}
+			# 	add_province_modifier = {
+			# 		static_modifiers = { atomic_fallout }
+			# 		province = {
+			# 			all_provinces = yes
+			# 		}
+			# 	}
+			# }
+
+			# FROM = {
+			# 	clr_state_flag = thermonuclear_strike
+			# }
+
+			news_event = {
+				id = NuclearEvents.1
+				hours = 3
+			}
+		}
+	}
+	on_capitulation = {
+		effect = {
+			log = "[GetDateText] [Root.GetName] has capitulated to [From.GetName]"
+
+			### French Revolution capitulations
+			if = {
+				limit = {
+					# FRA vs PCO only
+					ROOT = { tag = PCO }
+					FROM = { tag = FRA }
+					NOT = {
+						NFA = { has_war_with = FRA }
+					}
+					NOT = {
+						GER = { has_war_with = PCO }
+					}
+				}
+				hidden_effect = {
+					log = "KRG_Event_Logging;French Revolution - FRA Victory;[GetDateText];[ROOT.GetName];[FROM.GetName]"
+					news_event = {
+						id = worldnews.70
+						hours = 6
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					# FRA and GER vs PCO
+					ROOT = { tag = PCO }
+					FROM = {
+						OR = {
+							tag = FRA
+							tag = GER
+						}
+					}
+					NOT = {
+						NFA = { has_war_with = FRA }
+					}
+					GER = { has_war_with = PCO }
+				}
+				hidden_effect = {
+					log = "KRG_Event_Logging;French Revolution - FRA and GER Victory;[GetDateText];[ROOT.GetName];[FROM.GetName]"
+					news_event = {
+						id = worldnews.72
+						hours = 6
+					}
+				}
+			}
+			else_if = {
+				limit = {
+					# FRA vs PCO and NFA
+					ROOT = { tag = FRA }
+					FROM = {
+						OR = {
+							tag = PCO
+							tag = NFA
+						}
+					}
+					NFA = { has_war_with = FRA }
+					NOT = {
+						GER = { has_war_with = PCO }
+					}
+				}
+				hidden_effect = {
+					log = "KRG_Event_Logging;French Revolution - PCO and NFA Victory;[GetDateText];[ROOT.GetName];[FROM.GetName]"
+				}
+			}
+			else_if = {
+				limit = {
+					ROOT = { tag = POR }
+				}
+				if = {
+					limit = {
+						321 = {
+							is_owned_and_controlled_by = POR
+						}
+					}
+					429 = {
+						owner = {
+							country_event = {
+								id = krg_por.2
+								hours = 2
+							}
+						}
+					}
+				}
+				else = {
+					321 = {
+						controller = {
+							country_event = {
+								id = krg_por.2
+								hours = 2
+							}
+						}
+					}
+				}
+				if = {
+					limit = {
+						729 = {
+							is_owned_and_controlled_by = POR
+						}
+					}
+					1116 = {
+						owner = {
+							country_event = {
+								id = krg_por.3
+								hours = 2
+							}
+						}
+					}
+				}
+				else = {
+					729 = {
+						controller = {
+							country_event = {
+								id = krg_por.3
+								hours = 2
+							}
+						}
+					}
+				}
+				if = {
+					limit = {
+						721 = {
+							is_owned_and_controlled_by = POR
+						}
+					}
+					994 = {
+						owner = {
+							country_event = {
+								id = krg_por.4
+								hours = 2
+							}
+						}
+					}
+				}
+				else = {
+					721 = {
+						controller = {
+							country_event = {
+								id = krg_por.3
+								hours = 2
+							}
+						}
+					}
+				}
+				news_event = {
+					id = worldnews.288
+					days = 2
+				}
+			}
+		}
+	}
+	on_war = {
+		effect = {
+			if = {
+				limit = { tag = MAF }
+				# remilitarise all states
+				for_each_loop = {
+					array = MAF_insurgency_region_array
+
+					set_variable = { v:MAF_insurgency_demilitarise = 0 }
+				}
+			}
+		}
+	}
+	on_peace = {
+		effect = {
+			if = {
+				limit = { tag = MAF }
+				# reload demilitarised states
+				MAF_insurgency_reload = yes
+			}
+		}
+	}
+
+	on_yearly ={ 
+		effect ={ 
+			reset_values_FAMED_for_all = yes
+			calculate_influence_for_all = yes
+			FAMED_yearly_decay = yes
+			
+		}
+	}
+	on_daily = {
+        effect = {
+            calculate_fuel_needs = yes 
+        }
+    }
+}

@@ -1,0 +1,6220 @@
+##########################################
+### New England Decisions - by Kennedy ###
+##########################################
+NEE_unrest = {
+	NEE_secure_state = {
+		icon = GFX_decision_oppression
+		allowed = {
+			original_tag = NEE
+		}
+		highlight_states = {
+			highlight_state_targets = {
+				state = FROM
+			}
+		}
+		state_target = yes
+		targets = {
+			796
+			359
+		}
+		custom_cost_trigger = {
+			command_power > 29.99
+		}
+		custom_cost_text = NEE_30_cp
+		days_remove = 175
+		fire_only_once = no
+		on_map_mode = map_and_decisions_view
+		visible = {
+			FROM = {
+				NOT = {
+					has_state_flag = NEE_state_securing
+					has_state_flag = NEE_state_secured
+				}
+			}
+		}
+		available = {
+			if = {
+				limit = {
+					is_ai = yes
+				}
+				has_country_flag = briefed_on_occupations
+			}
+			else = {
+				AND = {
+					if = {
+						limit = {
+							FROM = {
+								state = 796
+							}
+						}
+						divisions_in_state = {
+							state = 796
+							size > 1
+						}
+					}
+					else = {
+						divisions_in_state = {
+							state = 359
+							size > 0
+						}
+					}
+					has_country_flag = briefed_on_occupations
+				}
+			}
+		}
+		cancel_trigger = {
+			if = {
+				limit = {
+					FROM = {
+						state = 796
+					}
+				}
+				divisions_in_state = {
+					state = 796
+					size < 2
+				}
+			}
+			else = {
+				divisions_in_state = {
+					state = 359
+					size < 1
+				}
+			}
+		}
+		ai_will_do = {
+			base = 100
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_secure_state target: [From.GetName]"
+			hidden_effect = {
+				add_command_power = -30
+			}
+			FROM = {
+				set_state_flag = NEE_state_securing
+			}
+		}
+		cancel_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision cancel NEE_secure_state target: [From.GetName]"
+			FROM = {
+				clr_state_flag = NEE_state_securing
+			}
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove NEE_secure_state target: [From.GetName]"
+			FROM = {
+				clr_state_flag = NEE_state_securing
+				set_state_flag = NEE_state_secured
+				add_compliance = 10
+				add_resistance_target = {
+					amount = -15
+				}
+			}
+			add_to_variable = {
+				var = SPA_influence
+				value = -1
+			}
+		}
+	}
+	NEE_institute_police_nj = {
+		icon = GFX_decision_generic_army_support
+		cost = 25
+		available = {
+			has_country_flag = started_nj
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_institute_police_nj target: [From.GetName]"
+		}
+		fire_only_once = yes
+		days_remove = 90
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove NEE_institute_police_nj target: [From.GetName]"
+			set_country_flag = nj_police
+			custom_effect_tooltip = NEE_remove_influence
+			add_to_variable = {
+				var = SPA_influence
+				value = -1
+			}
+			359 = {
+				add_compliance = 10
+			}
+		}
+		ai_will_do = {
+			base = 100
+		}
+	}
+	NEE_institute_police_phi = {
+		icon = GFX_decision_generic_army_support
+		cost = 25
+		available = {
+			has_country_flag = started_phi
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_institute_police_phi target: [From.GetName]"
+		}
+		fire_only_once = yes
+		days_remove = 90
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove NEE_institute_police_phi target: [From.GetName]"
+			set_country_flag = phi_police
+			custom_effect_tooltip = NEE_remove_influence
+			add_to_variable = {
+				var = SPA_influence
+				value = -1
+			}
+			796 = {
+				add_compliance = 10
+			}
+		}
+		ai_will_do = {
+			base = 100
+		}
+	}
+	NEE_introduce_administration_nj = {
+		icon = GFX_decision_eng_trade_unions_support
+		cost = 25
+		visible = {
+			has_country_flag = nj_police
+		}
+		available = {
+			has_country_flag = nj_police
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_introduce_administration_nj target: [From.GetName]"
+		}
+		fire_only_once = yes
+		days_remove = 90
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove NEE_introduce_administration_nj target: [From.GetName]"
+			set_country_flag = nj_admin
+			custom_effect_tooltip = NEE_remove_influence
+			add_to_variable = {
+				var = SPA_influence
+				value = -1
+			}
+			359 = {
+				add_compliance = 10
+			}
+		}
+		ai_will_do = {
+			base = 100
+		}
+	}
+	NEE_introduce_administration_phi = {
+		icon = GFX_decision_eng_trade_unions_support
+		cost = 25
+		visible = {
+			has_country_flag = phi_police
+		}
+		available = {
+			has_country_flag = phi_police
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_introduce_administration_phi target: [From.GetName]"
+		}
+		fire_only_once = yes
+		days_remove = 90
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove NEE_introduce_administration_phi target: [From.GetName]"
+			set_country_flag = phi_admin
+			custom_effect_tooltip = NEE_remove_influence
+			add_to_variable = {
+				var = SPA_influence
+				value = -1
+			}
+			796 = {
+				add_compliance = 10
+			}
+		}
+		ai_will_do = {
+			base = 100
+		}
+	}
+	NEE_infiltrate_syndies_nj = {
+		icon = GFX_decision_onmap_recruit_operative
+		visible = {
+			has_country_flag = nj_police
+		}
+		available = {
+			has_country_flag = nj_police
+		}
+		custom_cost_trigger = {
+			command_power > 29.99
+		}
+		custom_cost_text = NEE_30_cp
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_infiltrate_syndies_nj target: [From.GetName]"
+			hidden_effect = {
+				add_command_power = -30
+			}
+		}
+		fire_only_once = yes
+		days_remove = 90
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove NEE_infiltrate_syndies_nj target: [From.GetName]"
+			set_country_flag = nj_admin
+			custom_effect_tooltip = NEE_remove_influence
+			add_to_variable = {
+				var = SPA_influence
+				value = -1
+			}
+			359 = {
+				add_resistance_target = {
+					amount = -10
+				}
+			}
+		}
+		ai_will_do = {
+			base = 100
+		}
+	}
+	NEE_infiltrate_syndies_phi = {
+		icon = GFX_decision_onmap_recruit_operative
+		visible = {
+			has_country_flag = phi_police
+		}
+		available = {
+			has_country_flag = phi_police
+		}
+		custom_cost_trigger = {
+			command_power > 29.99
+		}
+		custom_cost_text = NEE_30_cp
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_infiltrate_syndies_phi target: [From.GetName]"
+			hidden_effect = {
+				add_command_power = -30
+			}
+		}
+		fire_only_once = yes
+		days_remove = 90
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove NEE_infiltrate_syndies_phi target: [From.GetName]"
+			set_country_flag = phi_admin
+			custom_effect_tooltip = NEE_remove_influence
+			add_to_variable = {
+				var = SPA_influence
+				value = -1
+			}
+			796 = {
+				add_resistance_target = {
+					amount = -10
+				}
+			}
+		}
+		ai_will_do = {
+			base = 100
+		}
+	}
+}
+NEE_election_season = {
+	NEE_run_positive_campaign = {
+		icon = GFX_decision_generic_political_rally
+		available = {
+			NOT = {
+				FROM = {
+					has_state_flag = active_campaign
+				}
+			}
+			check_variable = {
+				active_campaigns < 3
+			}
+			custom_trigger_tooltip = {
+				tooltip = active_campaigns
+			}
+		}
+		visible = {
+			has_country_flag = NEE_election_season
+		}
+		ai_will_do = {
+			base = 75
+		}
+		cancel_if_not_visible = yes
+		highlight_states = {
+			highlight_state_targets = {
+				state = 357
+				state = 358
+				state = 359
+				state = 796
+				state = 797
+				state = 798
+				state = 799
+				state = 800
+				state = 822
+				state = 892
+			}
+			highlight_color_before_active = 3
+			highlight_color_while_active = 2
+		}
+		on_map_mode = map_and_decisions_view
+		state_target = yes
+		days_remove = 30
+		target_array = core_states
+		cancel_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision cancel NEE_run_positive_campaign target: [From.GetName]"
+			FROM = {
+				clr_state_flag = active_campaign
+			}
+			set_variable = {
+				active_campaigns = 0
+			}
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_run_positive_campaign target: [From.GetName]"
+			NEE = {
+				add_to_variable = {
+					active_campaigns = 1
+				}
+			}
+			FROM = {
+				set_state_flag = active_campaign
+			}
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove NEE_run_positive_campaign target: [From.GetName]"
+			if = {
+				limit = {
+					has_country_flag = NEE_campaigning_as_republicans
+				}
+				FROM = {
+					set_temp_variable = {
+						pop_type_added = 2
+					}
+					set_temp_variable = {
+						pop_value_added = 7
+					}
+					NEE_add_electoral_popularity = yes
+					clr_state_flag = active_campaign
+				}
+			}
+			else_if = {
+				limit = {
+					has_country_flag = NEE_campaigning_as_democrats
+				}
+				FROM = {
+					set_temp_variable = {
+						pop_type_added = 1
+					}
+					set_temp_variable = {
+						pop_value_added = 4
+					}
+					NEE_add_electoral_popularity = yes
+					clr_state_flag = active_campaign
+				}
+				FROM = {
+					set_temp_variable = {
+						pop_type_added = 3
+					}
+					set_temp_variable = {
+						pop_value_added = 3
+					}
+					NEE_add_electoral_popularity = yes
+					clr_state_flag = active_campaign
+				}
+			}
+			else = {
+			}
+			NEE = {
+				add_to_variable = {
+					active_campaigns = -1
+				}
+			}
+		}
+	}
+	NEE_progressive_campaign = {
+		icon = GFX_decision_USA_progressives
+		allowed = {
+			always = no
+		}
+		available = {
+			always = no
+		}
+		visible = {
+			has_country_flag = NEE_election_season
+		}
+		cancel_if_not_visible = yes
+		fixed_random_seed = no
+		is_good = yes
+		selectable_mission = no
+		days_mission_timeout = 30
+		fire_only_once = no
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_progressive_campaign target: [From.GetName]"
+		}
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout NEE_progressive_campaign target: [From.GetName]"
+			if = {
+				limit = {
+					has_country_flag = NEE_election_season
+				}
+				activate_mission = NEE_progressive_campaign
+			}
+			custom_effect_tooltip = progressive_campaign_tooltip
+			for_loop_effect = {
+				end = 3
+				random_owned_state = {
+					limit = {
+						is_core_of = NEE
+					}
+					random_list = {
+						33 = {
+							set_temp_variable = {
+								pop_type_subtracted = 3
+							}
+							set_temp_variable = {
+								pop_value_subtracted = 4
+							}
+							NEE_subtract_electoral_popularity = yes
+						}
+						33 = {
+							set_temp_variable = {
+								pop_type_subtracted = 2
+							}
+							set_temp_variable = {
+								pop_value_subtracted = 4
+							}
+							NEE_subtract_electoral_popularity = yes
+						}
+						34 = {
+							set_temp_variable = {
+								pop_type_added = 0
+							}
+							set_temp_variable = {
+								pop_value_added = 2
+							}
+							NEE_add_electoral_popularity = yes
+						}
+					}
+				}
+			}
+		}
+	}
+	NEE_democrats_campaign = {
+		icon = GFX_decision_USA_democrats
+		allowed = {
+			always = no
+		}
+		available = {
+			always = no
+		}
+		visible = {
+			has_country_flag = NEE_election_season
+		}
+		cancel_if_not_visible = yes
+		fixed_random_seed = no
+		is_good = yes
+		selectable_mission = no
+		days_mission_timeout = 30
+		fire_only_once = no
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_democrats_campaign target: [From.GetName]"
+		}
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout NEE_democrats_campaign target: [From.GetName]"
+			if = {
+				limit = {
+					has_Country_flag = NEE_election_season
+				}
+				activate_mission = NEE_democrats_campaign
+			}
+			custom_effect_tooltip = democrat_campaign_tooltip
+			for_loop_effect = {
+				end = 3
+				random_owned_state = {
+					limit = {
+						is_core_of = NEE
+					}
+					random_list = {
+						33 = {
+							set_temp_variable = {
+								pop_type_subtracted = 2
+							}
+							set_temp_variable = {
+								pop_value_subtracted = 8
+							}
+							NEE_subtract_electoral_popularity = yes
+						}
+						33 = {
+							set_temp_variable = {
+								pop_type_subtracted = 0
+							}
+							set_temp_variable = {
+								pop_value_subtracted = 8
+							}
+							NEE_subtract_electoral_popularity = yes
+						}
+						34 = {
+							set_temp_variable = {
+								pop_type_added = 3
+							}
+							set_temp_variable = {
+								pop_value_added = 5
+							}
+							NEE_add_electoral_popularity = yes
+						}
+					}
+				}
+			}
+		}
+	}
+	NEE_republican_campaign = {
+		icon = GFX_decision_USA_republicans
+		allowed = {
+			always = no
+		}
+		available = {
+			always = no
+		}
+		visible = {
+			has_country_flag = NEE_election_season
+		}
+		cancel_if_not_visible = yes
+		fixed_random_seed = no
+		is_good = yes
+		selectable_mission = no
+		days_mission_timeout = 30
+		fire_only_once = no
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_republican_campaign target: [From.GetName]"
+		}
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout NEE_republican_campaign target: [From.GetName]"
+			if = {
+				limit = {
+					has_country_flag = NEE_election_season
+				}
+				activate_mission = NEE_republican_campaign
+			}
+			custom_effect_tooltip = republican_campaign_tooltip
+			for_loop_effect = {
+				end = 3
+				random_owned_state = {
+					limit = {
+						is_core_of = NEE
+					}
+					random_list = {
+						33 = {
+							set_temp_variable = {
+								pop_type_subtracted = 3
+							}
+							set_temp_variable = {
+								pop_value_subtracted = 3
+							}
+							NEE_subtract_electoral_popularity = yes
+							set_temp_variable = {
+								pop_type_subtracted = 1
+							}
+							set_temp_variable = {
+								pop_value_subtracted = 5
+							}
+							NEE_subtract_electoral_popularity = yes
+						}
+						33 = {
+							set_temp_variable = {
+								pop_type_subtracted = 0
+							}
+							set_temp_variable = {
+								pop_value_subtracted = 8
+							}
+							NEE_subtract_electoral_popularity = yes
+						}
+						34 = {
+							set_temp_variable = {
+								pop_type_added = 2
+							}
+							set_temp_variable = {
+								pop_value_added = 5
+							}
+							NEE_add_electoral_popularity = yes
+						}
+					}
+				}
+			}
+		}
+	}
+}
+NEE_congress = {
+	NEE_NATO_ratification = {
+		icon = GFX_decision_eng_trade_unions_support
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = NEE_has_majority_senate
+				check_variable = {
+					var = NEE_senators_in_favor
+					value = NEE_senate_tie_var
+					compare = greater_than_or_equals
+				}
+			}
+		}
+		activation = {
+			always = no
+		}
+		is_good = no
+		selectable_mission = yes
+		days_mission_timeout = 20
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_NATO_ratification target: [From.GetName]"
+			clr_country_flag = NEE_senate_vote_only
+			if = {
+				limit = {
+					check_variable = {
+						NEE_senators_in_favor = NEE_senate_tie_var
+					}
+				}
+				country_event = {
+					id = nee.20
+					days = 0
+				}
+			}
+			country_event = {
+				id = nee.18
+				days = 1
+			}
+			NEE_clear_bill_voting_flags = yes
+		}
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout NEE_NATO_ratification target: [From.GetName]"
+			clr_country_flag = NEE_senate_vote_only
+			if = {
+				limit = {
+					check_variable = {
+						var = NEE_senators_in_favor
+						value = NEE_senate_tie_var
+						compare = greater_than_or_equals
+					}
+				}
+				if = {
+					limit = {
+						check_variable = {
+							NEE_senators_in_favor = NEE_senate_tie_var
+						}
+					}
+					country_event = {
+						id = nee.20
+						days = 0
+					}
+				}
+				country_event = {
+					id = nee.18
+					days = 1
+				}
+				NEE_clear_bill_voting_flags = yes
+			}
+		}
+		ai_will_do = {
+			base = 1000
+		}
+	}
+	NEE_NJ_pa_statehood_house = {
+		icon = GFX_decision_infiltrate_state
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = NEE_has_majority_house
+				check_variable = {
+					var = NEE_representatives_in_favor
+					value = NEE_house_majority_var
+					compare = greater_than_or_equals
+				}
+			}
+		}
+		activation = {
+			always = no
+		}
+		is_good = no
+		selectable_mission = yes
+		days_mission_timeout = 20
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_NJ_pa_statehood_house target: [From.GetName]"
+			activate_mission = NEE_NJ_pa_statehood_senate
+		}
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout NEE_NJ_pa_statehood_house target: [From.GetName]"
+			if = {
+				limit = {
+					check_variable = {
+						var = NEE_representatives_in_favor
+						value = NEE_house_majority_var
+						compare = greater_than_or_equals
+					}
+				}
+				activate_mission = NEE_NJ_pa_statehood_senate
+			}
+		}
+		ai_will_do = {
+			base = 1000
+		}
+	}
+	NEE_NJ_pa_statehood_senate = {
+		icon = GFX_decision_infiltrate_state
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = NEE_has_majority_senate
+				check_variable = {
+					var = NEE_senators_in_favor
+					value = NEE_senate_tie_var
+					compare = greater_than_or_equals
+				}
+			}
+		}
+		activation = {
+			always = no
+		}
+		is_good = no
+		selectable_mission = yes
+		days_mission_timeout = 20
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_NJ_pa_statehood_senate target: [From.GetName]"
+			country_event = {
+				id = nee.19
+				days = 1
+			}
+			if = {
+				limit = {
+					check_variable = {
+						NEE_senators_in_favor = NEE_senate_tie_var
+					}
+				}
+				country_event = {
+					id = nee.20
+					days = 0
+				}
+			}
+			country_event = {
+				id = nee.19
+				days = 1
+			}
+			country_event = {
+				id = nee.32
+				days = 30
+			}
+			NEE_clear_bill_voting_flags = yes
+		}
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout NEE_NJ_pa_statehood_senate target: [From.GetName]"
+			if = {
+				limit = {
+					check_variable = {
+						var = NEE_senators_in_favor
+						value = NEE_senate_tie_var
+						compare = greater_than_or_equals
+					}
+				}
+				if = {
+					limit = {
+						check_variable = {
+							NEE_senators_in_favor = NEE_senate_tie_var
+						}
+					}
+					country_event = {
+						id = nee.20
+						days = 0
+					}
+				}
+				NEE_clear_bill_voting_flags = yes
+				country_event = {
+					id = nee.19
+					days = 1
+				}
+				country_event = {
+					id = nee.32
+					days = 30
+				}
+			}
+		}
+		ai_will_do = {
+			base = 1000
+		}
+	}
+	NEE_consumer_protections_act_house = {
+		icon = GFX_decision_hol_attract_foreign_investors
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = NEE_has_majority_house
+				check_variable = {
+					var = NEE_representatives_in_favor
+					value = NEE_house_majority_var
+					compare = greater_than_or_equals
+				}
+			}
+		}
+		activation = {
+			always = no
+		}
+		is_good = no
+		selectable_mission = yes
+		days_mission_timeout = 20
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_consumer_protections_act_house target: [From.GetName]"
+			activate_mission = NEE_consumer_protections_act_senate
+		}
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout NEE_consumer_protections_act_house target: [From.GetName]"
+			if = {
+				limit = {
+					check_variable = {
+						var = NEE_representatives_in_favor
+						value = NEE_house_majority_var
+						compare = greater_than_or_equals
+					}
+				}
+				activate_mission = NEE_consumer_protections_act_senate
+			}
+		}
+		ai_will_do = {
+			base = 100
+		}
+	}
+	NEE_consumer_protections_act_senate = {
+		icon = GFX_decision_hol_attract_foreign_investors
+		allowed = {
+			tag = NEE
+		}
+		visible = {
+			always = yes
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = NEE_has_majority_house
+				check_variable = {
+					var = NEE_senators_in_favor
+					value = NEE_senate_tie_var
+					compare = greater_than_or_equals
+				}
+			}
+		}
+		activation = {
+			always = no
+		}
+		is_good = no
+		selectable_mission = yes
+		days_mission_timeout = 20
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_consumer_protections_act_senate target: [From.GetName]"
+			#consumer protections act effect
+			if = {
+				limit = {
+					check_variable = {
+						NEE_senators_in_favor = NEE_senate_tie_var
+					}
+				}
+				country_event = {
+					id = nee.20
+					days = 0
+				}
+			}
+			NEE_clear_bill_voting_flags = yes
+			country_event = {
+				id = nee.22
+				days = 1
+			}
+			every_owned_state = {
+				limit = {
+					is_core_of = NEE
+				}
+				set_temp_variable = {
+					pop_type_subtracted = 2
+				}
+				set_temp_variable = {
+					pop_value_subtracted = 3
+				}
+				NEE_subtract_electoral_popularity = yes
+			}
+		}
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout NEE_consumer_protections_act_senate target: [From.GetName]"
+			if = {
+				limit = {
+					check_variable = {
+						var = NEE_senators_in_favor
+						value = NEE_senate_tie_var
+						compare = greater_than_or_equals
+					}
+				}
+				if = {
+					limit = {
+						check_variable = {
+							NEE_senators_in_favor = NEE_senate_tie_var
+						}
+					}
+					country_event = {
+						id = nee.20
+						days = 0
+					}
+				}
+				every_owned_state = {
+					limit = {
+						is_core_of = NEE
+					}
+					set_temp_variable = {
+						pop_type_subtracted = 2
+					}
+					set_temp_variable = {
+						pop_value_subtracted = 3
+					}
+					NEE_subtract_electoral_popularity = yes
+				}
+				NEE_clear_bill_voting_flags = yes
+				country_event = {
+					id = nee.22
+					days = 1
+				}
+			}
+		}
+		ai_will_do = {
+			base = 1000
+		}
+	}
+	NEE_GI_bill_house = {
+		icon = GFX_decision_generic_military
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = NEE_has_majority_house
+				check_variable = {
+					var = NEE_representatives_in_favor
+					value = NEE_house_majority_var
+					compare = greater_than_or_equals
+				}
+			}
+		}
+		activation = {
+			always = no
+		}
+		is_good = no
+		selectable_mission = yes
+		days_mission_timeout = 20
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_GI_bill_house target: [From.GetName]"
+			activate_mission = NEE_GI_bill_senate
+		}
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout NEE_GI_bill_house target: [From.GetName]"
+			if = {
+				limit = {
+					check_variable = {
+						var = NEE_representatives_in_favor
+						value = NEE_house_majority_var
+						compare = greater_than_or_equals
+					}
+				}
+				activate_mission = NEE_GI_bill_senate
+			}
+		}
+		ai_will_do = {
+			base = 1000
+		}
+	}
+	NEE_GI_bill_senate = {
+		icon = GFX_decision_generic_military
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = NEE_has_majority_senate
+				check_variable = {
+					var = NEE_senators_in_favor
+					value = NEE_senate_tie_var
+					compare = greater_than_or_equals
+				}
+			}
+		}
+		activation = {
+			always = no
+		}
+		is_good = no
+		selectable_mission = yes
+		days_mission_timeout = 20
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_GI_bill_senate target: [From.GetName]"
+			if = {
+				limit = {
+					check_variable = {
+						NEE_senators_in_favor = NEE_senate_tie_var
+					}
+				}
+				country_event = {
+					id = nee.20
+					days = 0
+				}
+			}
+			NEE_clear_bill_voting_flags = yes
+			country_event = {
+				id = nee.23
+				days = 1
+			}
+		}
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout NEE_GI_bill_senate target: [From.GetName]"
+			if = {
+				limit = {
+					check_variable = {
+						var = NEE_senators_in_favor
+						value = NEE_senate_tie_var
+						compare = greater_than_or_equals
+					}
+				}
+				if = {
+					limit = {
+						check_variable = {
+							NEE_senators_in_favor = NEE_senate_tie_var
+						}
+					}
+					country_event = {
+						id = nee.20
+						days = 0
+					}
+				}
+				NEE_clear_bill_voting_flags = yes
+				country_event = {
+					id = nee.23
+					days = 1
+				}
+			}
+		}
+		ai_will_do = {
+			base = 1000
+		}
+	}
+	NEE_Military_review_act_house = {
+		icon = GFX_decision_soldierly_discipline
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = NEE_has_majority_house
+				check_variable = {
+					var = NEE_representatives_in_favor
+					value = NEE_house_majority_var
+					compare = greater_than_or_equals
+				}
+			}
+		}
+		activation = {
+			always = no
+		}
+		is_good = no
+		selectable_mission = yes
+		days_mission_timeout = 20
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_Military_review_act_house target: [From.GetName]"
+			activate_mission = NEE_Military_review_act_senate
+		}
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout NEE_Military_review_act_house target: [From.GetName]"
+			if = {
+				limit = {
+					check_variable = {
+						var = NEE_representatives_in_favor
+						value = NEE_house_majority_var
+						compare = greater_than_or_equals
+					}
+				}
+				activate_mission = NEE_Military_review_act_senate
+			}
+		}
+		ai_will_do = {
+			base = 1000
+		}
+	}
+	NEE_Military_review_act_senate = {
+		icon = GFX_decision_soldierly_discipline
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = NEE_has_majority_senate
+				check_variable = {
+					var = NEE_senators_in_favor
+					value = NEE_senate_tie_var
+					compare = greater_than_or_equals
+				}
+			}
+		}
+		activation = {
+			always = no
+		}
+		is_good = no
+		selectable_mission = yes
+		days_mission_timeout = 20
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_Military_review_act_senate target: [From.GetName]"
+			if = {
+				limit = {
+					check_variable = {
+						NEE_senators_in_favor = NEE_senate_tie_var
+					}
+				}
+				country_event = {
+					id = nee.20
+					days = 0
+				}
+			}
+			NEE_clear_bill_voting_flags = yes
+			set_country_flag = NEE_Military_review_act
+			every_owned_state = {
+				limit = {
+					is_core_of = NEE
+				}
+				set_temp_variable = {
+					pop_type_added = 1
+				}
+				set_temp_variable = {
+					pop_value_added = 2
+				}
+				NEE_add_electoral_popularity = yes
+			}
+		}
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout NEE_Military_review_act_senate target: [From.GetName]"
+			if = {
+				limit = {
+					check_variable = {
+						var = NEE_senators_in_favor
+						value = NEE_senate_tie_var
+						compare = greater_than_or_equals
+					}
+				}
+				if = {
+					limit = {
+						check_variable = {
+							NEE_senators_in_favor = NEE_senate_tie_var
+						}
+					}
+					country_event = {
+						id = nee.20
+						days = 0
+					}
+				}
+				NEE_clear_bill_voting_flags = yes
+				set_country_flag = NEE_Military_review_act
+				every_owned_state = {
+					limit = {
+						is_core_of = NEE
+					}
+					set_temp_variable = {
+						pop_type_added = 1
+					}
+					set_temp_variable = {
+						pop_value_added = 2
+					}
+					NEE_add_electoral_popularity = yes
+				}
+			}
+		}
+		ai_will_do = {
+			base = 1000
+		}
+	}
+	NEE_Baldwin_tax_cut_house = {
+		icon = GFX_decision_gre_paying_ifc_debt
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = NEE_has_majority_house
+				check_variable = {
+					var = NEE_representatives_in_favor
+					value = NEE_house_majority_var
+					compare = greater_than_or_equals
+				}
+			}
+		}
+		activation = {
+			always = no
+		}
+		is_good = no
+		selectable_mission = yes
+		days_mission_timeout = 20
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_Baldwin_tax_cut_house target: [From.GetName]"
+			activate_mission = NEE_Baldwin_tax_cut_senate
+		}
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout NEE_Baldwin_tax_cut_house target: [From.GetName]"
+			if = {
+				limit = {
+					check_variable = {
+						var = NEE_representatives_in_favor
+						value = NEE_house_majority_var
+						compare = greater_than_or_equals
+					}
+				}
+				activate_mission = NEE_Baldwin_tax_cut_senate
+			}
+		}
+		ai_will_do = {
+			base = 1000
+		}
+	}
+	NEE_Baldwin_tax_cut_senate = {
+		icon = GFX_decision_gre_paying_ifc_debt
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = NEE_has_majority_senate
+				check_variable = {
+					var = NEE_senators_in_favor
+					value = NEE_senate_tie_var
+					compare = greater_than_or_equals
+				}
+			}
+		}
+		activation = {
+			always = no
+		}
+		is_good = no
+		selectable_mission = yes
+		days_mission_timeout = 20
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_Baldwin_tax_cut_senate target: [From.GetName]"
+			if = {
+				limit = {
+					check_variable = {
+						NEE_senators_in_favor = NEE_senate_tie_var
+					}
+				}
+				country_event = {
+					id = nee.20
+					days = 0
+				}
+			}
+			every_owned_state = {
+				limit = {
+					is_core_of = NEE
+				}
+				set_temp_variable = {
+					pop_type_added = 1
+				}
+				set_temp_variable = {
+					pop_value_added = 5
+				}
+				NEE_add_electoral_popularity = yes
+			}
+			NEE_clear_bill_voting_flags = yes
+			add_ideas = econ_low_taxation
+		}
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout NEE_Baldwin_tax_cut_senate target: [From.GetName]"
+			if = {
+				limit = {
+					check_variable = {
+						var = NEE_senators_in_favor
+						value = NEE_senate_tie_var
+						compare = greater_than_or_equals
+					}
+				}
+				if = {
+					limit = {
+						check_variable = {
+							NEE_senators_in_favor = NEE_senate_tie_var
+						}
+					}
+					country_event = {
+						id = nee.20
+						days = 0
+					}
+				}
+				every_owned_state = {
+					limit = {
+						is_core_of = NEE
+					}
+					set_temp_variable = {
+						pop_type_added = 1
+					}
+					set_temp_variable = {
+						pop_value_added = 5
+					}
+					NEE_add_electoral_popularity = yes
+				}
+				NEE_clear_bill_voting_flags = yes
+				add_ideas = econ_low_taxation
+			}
+		}
+		ai_will_do = {
+			base = 1000
+		}
+	}
+	NEE_Refugee_act_house = {
+		icon = GFX_decision_eng_blackshirt_march
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = NEE_has_majority_house
+				check_variable = {
+					var = NEE_representatives_in_favor
+					value = NEE_house_majority_var
+					compare = greater_than_or_equals
+				}
+			}
+		}
+		activation = {
+			always = no
+		}
+		is_good = no
+		selectable_mission = yes
+		days_mission_timeout = 20
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_Refugee_act_house target: [From.GetName]"
+			activate_mission = NEE_Refugee_act_senate
+		}
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout NEE_Refugee_act_house target: [From.GetName]"
+			if = {
+				limit = {
+					check_variable = {
+						var = NEE_representatives_in_favor
+						value = NEE_house_majority_var
+						compare = greater_than_or_equals
+					}
+				}
+				activate_mission = NEE_Refugee_act_senate
+			}
+		}
+		ai_will_do = {
+			base = 1000
+		}
+	}
+	NEE_Refugee_act_senate = {
+		icon = GFX_decision_eng_blackshirt_march
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = NEE_has_majority_senate
+				check_variable = {
+					var = NEE_senators_in_favor
+					value = NEE_senate_tie_var
+					compare = greater_than_or_equals
+				}
+			}
+		}
+		activation = {
+			always = no
+		}
+		is_good = no
+		selectable_mission = yes
+		days_mission_timeout = 20
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_Refugee_act_senate target: [From.GetName]"
+			if = {
+				limit = {
+					check_variable = {
+						NEE_senators_in_favor = NEE_senate_tie_var
+					}
+				}
+				country_event = {
+					id = nee.20
+					days = 0
+				}
+			}
+			NEE_clear_bill_voting_flags = yes
+			add_ideas = NEE_refugee_act
+			every_owned_state = {
+				limit = {
+					is_core_of = NEE
+				}
+				set_temp_variable = {
+					pop_type_added = 0
+				}
+				set_temp_variable = {
+					pop_value_added = 2
+				}
+				NEE_add_electoral_popularity = yes
+			}
+			every_owned_state = {
+				limit = {
+					is_core_of = NEE
+				}
+				set_temp_variable = {
+					pop_type_added = 1
+				}
+				set_temp_variable = {
+					pop_value_added = 2
+				}
+				NEE_add_electoral_popularity = yes
+			}
+		}
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout NEE_Refugee_act_senate target: [From.GetName]"
+			if = {
+				limit = {
+					check_variable = {
+						var = NEE_senators_in_favor
+						value = NEE_senate_tie_var
+						compare = greater_than_or_equals
+					}
+				}
+				if = {
+					limit = {
+						check_variable = {
+							NEE_senators_in_favor = NEE_senate_tie_var
+						}
+					}
+					country_event = {
+						id = nee.20
+						days = 0
+					}
+				}
+				NEE_clear_bill_voting_flags = yes
+				add_ideas = NEE_refugee_act
+				every_owned_state = {
+					limit = {
+						is_core_of = NEE
+					}
+					set_temp_variable = {
+						pop_type_added = 0
+					}
+					set_temp_variable = {
+						pop_value_added = 2
+					}
+					NEE_add_electoral_popularity = yes
+				}
+				every_owned_state = {
+					limit = {
+						is_core_of = NEE
+					}
+					set_temp_variable = {
+						pop_type_added = 1
+					}
+					set_temp_variable = {
+						pop_value_added = 2
+					}
+					NEE_add_electoral_popularity = yes
+				}
+			}
+		}
+		ai_will_do = {
+			base = 1000
+		}
+	}
+	NEE_Agriculture_act_house = {
+		icon = GFX_decision_POL_looming_peasants_strike
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = NEE_has_majority_house
+				check_variable = {
+					var = NEE_representatives_in_favor
+					value = NEE_house_majority_var
+					compare = greater_than_or_equals
+				}
+			}
+		}
+		activation = {
+			always = no
+		}
+		is_good = no
+		selectable_mission = yes
+		days_mission_timeout = 20
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_Agriculture_act_house target: [From.GetName]"
+			activate_mission = NEE_Agriculture_act_senate
+		}
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout NEE_Agriculture_act_house target: [From.GetName]"
+			if = {
+				limit = {
+					check_variable = {
+						var = NEE_representatives_in_favor
+						value = NEE_house_majority_var
+						compare = greater_than_or_equals
+					}
+				}
+				activate_mission = NEE_Agriculture_act_senate
+			}
+		}
+		ai_will_do = {
+			base = 1000
+		}
+	}
+	NEE_Agriculture_act_senate = {
+		icon = GFX_decision_POL_looming_peasants_strike
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = NEE_has_majority_senate
+				check_variable = {
+					var = NEE_senators_in_favor
+					value = NEE_senate_tie_var
+					compare = greater_than_or_equals
+				}
+			}
+		}
+		activation = {
+			always = no
+		}
+		is_good = no
+		selectable_mission = yes
+		days_mission_timeout = 20
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_Agriculture_act_senate target: [From.GetName]"
+			if = {
+				limit = {
+					check_variable = {
+						NEE_senators_in_favor = NEE_senate_tie_var
+					}
+				}
+				country_event = {
+					id = nee.20
+					days = 0
+				}
+			}
+			NEE_clear_bill_voting_flags = yes
+			358 = {
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+			every_owned_state = {
+				limit = {
+					is_core_of = NEE
+				}
+				set_temp_variable = {
+					pop_type_added = 2
+				}
+				set_temp_variable = {
+					pop_value_added = 3
+				}
+				NEE_add_electoral_popularity = yes
+			}
+			every_owned_state = {
+				limit = {
+					is_core_of = NEE
+				}
+				set_temp_variable = {
+					pop_type_added = 3
+				}
+				set_temp_variable = {
+					pop_value_added = 3
+				}
+				NEE_add_electoral_popularity = yes
+			}
+		}
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout NEE_Agriculture_act_senate target: [From.GetName]"
+			if = {
+				limit = {
+					check_variable = {
+						var = NEE_senators_in_favor
+						value = NEE_senate_tie_var
+						compare = greater_than_or_equals
+					}
+				}
+				if = {
+					limit = {
+						check_variable = {
+							NEE_senators_in_favor = NEE_senate_tie_var
+						}
+					}
+					country_event = {
+						id = nee.20
+						days = 0
+					}
+				}
+				NEE_clear_bill_voting_flags = yes
+				358 = {
+					add_building_construction = {
+						type = industrial_complex
+						level = 2
+						instant_build = yes
+					}
+				}
+				every_owned_state = {
+					limit = {
+						is_core_of = NEE
+					}
+					set_temp_variable = {
+						pop_type_added = 2
+					}
+					set_temp_variable = {
+						pop_value_added = 3
+					}
+					NEE_add_electoral_popularity = yes
+				}
+				every_owned_state = {
+					limit = {
+						is_core_of = NEE
+					}
+					set_temp_variable = {
+						pop_type_added = 3
+					}
+					set_temp_variable = {
+						pop_value_added = 3
+					}
+					NEE_add_electoral_popularity = yes
+				}
+			}
+		}
+		ai_will_do = {
+			base = 1000
+		}
+	}
+	NEE_National_highway_act_house = {
+		icon = GFX_decision_road
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = NEE_has_majority_house
+				check_variable = {
+					var = NEE_representatives_in_favor
+					value = NEE_house_majority_var
+					compare = greater_than_or_equals
+				}
+			}
+		}
+		activation = {
+			always = no
+		}
+		is_good = no
+		selectable_mission = yes
+		days_mission_timeout = 20
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_National_highway_act_house target: [From.GetName]"
+			activate_mission = NEE_National_highway_act_senate
+		}
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout NEE_National_highway_act_house target: [From.GetName]"
+			if = {
+				limit = {
+					check_variable = {
+						var = NEE_representatives_in_favor
+						value = NEE_house_majority_var
+						compare = greater_than_or_equals
+					}
+				}
+				activate_mission = NEE_National_highway_act_senate
+			}
+		}
+		ai_will_do = {
+			base = 1000
+		}
+	}
+	NEE_National_highway_act_senate = {
+		icon = GFX_decision_road
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = NEE_has_majority_senate
+				check_variable = {
+					var = NEE_senators_in_favor
+					value = NEE_senate_tie_var
+					compare = greater_than_or_equals
+				}
+			}
+		}
+		activation = {
+			always = no
+		}
+		is_good = no
+		selectable_mission = yes
+		days_mission_timeout = 20
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_National_highway_act_senate target: [From.GetName]"
+			if = {
+				limit = {
+					check_variable = {
+						NEE_senators_in_favor = NEE_senate_tie_var
+					}
+				}
+				country_event = {
+					id = nee.20
+					days = 0
+				}
+			}
+			NEE_clear_bill_voting_flags = yes
+			set_country_flag = NEE_national_highway_plan_passed
+			custom_effect_tooltip = NEE_unlock_highway_focus
+		}
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout NEE_National_highway_act_senate target: [From.GetName]"
+			if = {
+				limit = {
+					check_variable = {
+						var = NEE_senators_in_favor
+						value = NEE_senate_tie_var
+						compare = greater_than_or_equals
+					}
+				}
+				if = {
+					limit = {
+						check_variable = {
+							NEE_senators_in_favor = NEE_senate_tie_var
+						}
+					}
+					country_event = {
+						id = nee.20
+						days = 0
+					}
+				}
+				NEE_clear_bill_voting_flags = yes
+				set_country_flag = NEE_national_highway_plan_passed
+				custom_effect_tooltip = NEE_unlock_highway_focus
+			}
+		}
+		ai_will_do = {
+			base = 1000
+		}
+	}
+	NEE_corporations_act_house = {
+		icon = GFX_decision_gre_investment_decisions
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = NEE_has_majority_house
+				check_variable = {
+					var = NEE_representatives_in_favor
+					value = NEE_house_majority_var
+					compare = greater_than_or_equals
+				}
+			}
+		}
+		activation = {
+			always = no
+		}
+		is_good = no
+		selectable_mission = yes
+		days_mission_timeout = 20
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_corporations_act_house target: [From.GetName]"
+			activate_mission = NEE_corporations_act_senate
+		}
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout NEE_corporations_act_house target: [From.GetName]"
+			if = {
+				limit = {
+					check_variable = {
+						var = NEE_representatives_in_favor
+						value = NEE_house_majority_var
+						compare = greater_than_or_equals
+					}
+				}
+				activate_mission = NEE_corporations_act_senate
+			}
+		}
+		ai_will_do = {
+			base = 1000
+		}
+	}
+	NEE_corporations_act_senate = {
+		icon = GFX_decision_gre_investment_decisions
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = NEE_has_majority_senate
+				check_variable = {
+					var = NEE_senators_in_favor
+					value = NEE_senate_tie_var
+					compare = greater_than_or_equals
+				}
+			}
+		}
+		activation = {
+			always = no
+		}
+		is_good = no
+		selectable_mission = yes
+		days_mission_timeout = 20
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_corporations_act_senate target: [From.GetName]"
+			if = {
+				limit = {
+					check_variable = {
+						NEE_senators_in_favor = NEE_senate_tie_var
+					}
+				}
+				country_event = {
+					id = nee.20
+					days = 0
+				}
+			}
+			NEE_clear_bill_voting_flags = yes
+			swap_ideas = {
+				remove_idea = NEE_canadian_partnership_1
+				add_idea = NEE_canadian_partnership_2
+			}
+			797 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+			798 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+			every_owned_state = {
+				limit = {
+					is_core_of = NEE
+				}
+				set_temp_variable = {
+					pop_type_subtracted = 2
+				}
+				set_temp_variable = {
+					pop_value_subtracted = 3
+				}
+				NEE_subtract_electoral_popularity = yes
+			}
+		}
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout NEE_corporations_act_senate target: [From.GetName]"
+			if = {
+				limit = {
+					check_variable = {
+						var = NEE_senators_in_favor
+						value = NEE_senate_tie_var
+						compare = greater_than_or_equals
+					}
+				}
+				if = {
+					limit = {
+						check_variable = {
+							NEE_senators_in_favor = NEE_senate_tie_var
+						}
+					}
+					country_event = {
+						id = nee.20
+						days = 0
+					}
+				}
+				NEE_clear_bill_voting_flags = yes
+				swap_ideas = {
+					remove_idea = NEE_canadian_partnership_1
+					add_idea = NEE_canadian_partnership_2
+				}
+				797 = {
+					add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+						type = arms_factory
+						level = 1
+						instant_build = yes
+					}
+				}
+				798 = {
+					add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+						type = arms_factory
+						level = 1
+						instant_build = yes
+					}
+				}
+				every_owned_state = {
+					limit = {
+						is_core_of = NEE
+					}
+					set_temp_variable = {
+						pop_type_subtracted = 2
+					}
+					set_temp_variable = {
+						pop_value_subtracted = 3
+					}
+					NEE_subtract_electoral_popularity = yes
+				}
+			}
+		}
+		ai_will_do = {
+			base = 1000
+		}
+	}
+	NEE_fls_act_house = {
+		icon = GFX_decision_generic_political_rally
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = NEE_has_majority_house
+				check_variable = {
+					var = NEE_representatives_in_favor
+					value = NEE_house_majority_var
+					compare = greater_than_or_equals
+				}
+			}
+		}
+		activation = {
+			always = no
+		}
+		is_good = no
+		selectable_mission = yes
+		days_mission_timeout = 20
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_fls_act_house target: [From.GetName]"
+			activate_mission = NEE_fls_act_senate
+		}
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout NEE_fls_act_house target: [From.GetName]"
+			if = {
+				limit = {
+					check_variable = {
+						var = NEE_representatives_in_favor
+						value = NEE_house_majority_var
+						compare = greater_than_or_equals
+					}
+				}
+				activate_mission = NEE_fls_act_senate
+			}
+		}
+		ai_will_do = {
+			base = 1000
+		}
+	}
+	NEE_fls_act_senate = {
+		icon = GFX_decision_generic_political_rally
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = NEE_has_majority_senate
+				check_variable = {
+					var = NEE_senators_in_favor
+					value = NEE_senate_tie_var
+					compare = greater_than_or_equals
+				}
+			}
+		}
+		activation = {
+			always = no
+		}
+		is_good = no
+		selectable_mission = yes
+		days_mission_timeout = 20
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_fls_act_senate target: [From.GetName]"
+			if = {
+				limit = {
+					check_variable = {
+						NEE_senators_in_favor = NEE_senate_tie_var
+					}
+				}
+				country_event = {
+					id = nee.20
+					days = 0
+				}
+			}
+			NEE_clear_bill_voting_flags = yes
+			add_ideas = NEE_Fair_Labor_Standards_Act
+			every_owned_state = {
+				limit = {
+					is_core_of = NEE
+				}
+				set_temp_variable = {
+					pop_type_added = 0
+				}
+				set_temp_variable = {
+					pop_value_added = 2
+				}
+				NEE_add_electoral_popularity = yes
+			}
+		}
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout NEE_fls_act_senate target: [From.GetName]"
+			if = {
+				limit = {
+					check_variable = {
+						var = NEE_senators_in_favor
+						value = NEE_senate_tie_var
+						compare = greater_than_or_equals
+					}
+				}
+				if = {
+					limit = {
+						check_variable = {
+							NEE_senators_in_favor = NEE_senate_tie_var
+						}
+					}
+					country_event = {
+						id = nee.20
+						days = 0
+					}
+				}
+				NEE_clear_bill_voting_flags = yes
+				add_ideas = NEE_Fair_Labor_Standards_Act
+				every_owned_state = {
+					limit = {
+						is_core_of = NEE
+					}
+					set_temp_variable = {
+						pop_type_added = 0
+					}
+					set_temp_variable = {
+						pop_value_added = 2
+					}
+					NEE_add_electoral_popularity = yes
+				}
+			}
+		}
+		ai_will_do = {
+			base = 1000
+		}
+	}
+	NEE_housing_act_house = {
+		icon = GFX_decision_SOV_place_hq
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = NEE_has_majority_house
+				check_variable = {
+					var = NEE_representatives_in_favor
+					value = NEE_house_majority_var
+					compare = greater_than_or_equals
+				}
+			}
+		}
+		activation = {
+			always = no
+		}
+		is_good = no
+		selectable_mission = yes
+		days_mission_timeout = 20
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_housing_act_house target: [From.GetName]"
+			activate_mission = NEE_housing_act_senate
+		}
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout NEE_housing_act_house target: [From.GetName]"
+			if = {
+				limit = {
+					check_variable = {
+						var = NEE_representatives_in_favor
+						value = NEE_house_majority_var
+						compare = greater_than_or_equals
+					}
+				}
+				activate_mission = NEE_housing_act_senate
+			}
+		}
+		ai_will_do = {
+			base = 1000
+		}
+	}
+	NEE_housing_act_senate = {
+		icon = GFX_decision_SOV_place_hq
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = NEE_has_majority_senate
+				check_variable = {
+					var = NEE_senators_in_favor
+					value = NEE_senate_tie_var
+					compare = greater_than_or_equals
+				}
+			}
+		}
+		activation = {
+			always = no
+		}
+		is_good = no
+		selectable_mission = yes
+		days_mission_timeout = 20
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_housing_act_senate target: [From.GetName]"
+			if = {
+				limit = {
+					check_variable = {
+						NEE_senators_in_favor = NEE_senate_tie_var
+					}
+				}
+				country_event = {
+					id = nee.20
+					days = 0
+				}
+			}
+			NEE_clear_bill_voting_flags = yes
+			359 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			796 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout NEE_housing_act_senate target: [From.GetName]"
+			if = {
+				limit = {
+					check_variable = {
+						var = NEE_senators_in_favor
+						value = NEE_senate_tie_var
+						compare = greater_than_or_equals
+					}
+				}
+				if = {
+					limit = {
+						check_variable = {
+							NEE_senators_in_favor = NEE_senate_tie_var
+						}
+					}
+					country_event = {
+						id = nee.20
+						days = 0
+					}
+				}
+				NEE_clear_bill_voting_flags = yes
+				359 = {
+					add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+						type = industrial_complex
+						level = 1
+						instant_build = yes
+					}
+				}
+				796 = {
+					add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+						type = industrial_complex
+						level = 1
+						instant_build = yes
+					}
+				}
+			}
+		}
+		ai_will_do = {
+			base = 1000
+		}
+	}
+	NEE_social_security_act_house = {
+		icon = GFX_decision_hol_attract_foreign_investors
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = NEE_has_majority_house
+				check_variable = {
+					var = NEE_representatives_in_favor
+					value = NEE_house_majority_var
+					compare = greater_than_or_equals
+				}
+			}
+		}
+		activation = {
+			always = no
+		}
+		is_good = no
+		selectable_mission = yes
+		days_mission_timeout = 20
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_social_security_act_house target: [From.GetName]"
+			activate_mission = NEE_social_security_act_senate
+		}
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout NEE_social_security_act_house target: [From.GetName]"
+			if = {
+				limit = {
+					check_variable = {
+						var = NEE_representatives_in_favor
+						value = NEE_house_majority_var
+						compare = greater_than_or_equals
+					}
+				}
+				activate_mission = NEE_social_security_act_senate
+			}
+		}
+		ai_will_do = {
+			base = 100
+		}
+	}
+	NEE_social_security_act_senate = {
+		icon = GFX_decision_hol_attract_foreign_investors
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = NEE_has_majority_senate
+				check_variable = {
+					var = NEE_senators_in_favor
+					value = NEE_senate_tie_var
+					compare = greater_than_or_equals
+				}
+			}
+		}
+		activation = {
+			always = no
+		}
+		is_good = no
+		selectable_mission = yes
+		days_mission_timeout = 20
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_social_security_act_senate target: [From.GetName]"
+			if = {
+				limit = {
+					check_variable = {
+						NEE_senators_in_favor = NEE_senate_tie_var
+					}
+				}
+				country_event = {
+					id = nee.20
+					days = 0
+				}
+			}
+			every_owned_state = {
+				limit = {
+					is_core_of = NEE
+				}
+				set_temp_variable = {
+					pop_type_added = 1
+				}
+				set_temp_variable = {
+					pop_value_added = 2
+				}
+				NEE_add_electoral_popularity = yes
+			}
+			every_owned_state = {
+				limit = {
+					is_core_of = NEE
+				}
+				set_temp_variable = {
+					pop_type_subtracted = 3
+				}
+				set_temp_variable = {
+					pop_value_subtracted = 2
+				}
+				NEE_subtract_electoral_popularity = yes
+			}
+			NEE_clear_bill_voting_flags = yes
+			move_up_service_spending = yes
+		}
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout NEE_social_security_act_senate target: [From.GetName]"
+			if = {
+				limit = {
+					check_variable = {
+						var = NEE_senators_in_favor
+						value = NEE_senate_tie_var
+						compare = greater_than_or_equals
+					}
+				}
+				if = {
+					limit = {
+						check_variable = {
+							NEE_senators_in_favor = NEE_senate_tie_var
+						}
+					}
+					country_event = {
+						id = nee.20
+						days = 0
+					}
+				}
+				every_owned_state = {
+					limit = {
+						is_core_of = NEE
+					}
+					set_temp_variable = {
+						pop_type_added = 1
+					}
+					set_temp_variable = {
+						pop_value_added = 2
+					}
+					NEE_add_electoral_popularity = yes
+				}
+				every_owned_state = {
+					limit = {
+						is_core_of = NEE
+					}
+					set_temp_variable = {
+						pop_type_subtracted = 3
+					}
+					set_temp_variable = {
+						pop_value_subtracted = 2
+					}
+					NEE_subtract_electoral_popularity = yes
+				}
+				NEE_clear_bill_voting_flags = yes
+				move_up_service_spending = yes
+			}
+		}
+		ai_will_do = {
+			base = 1000
+		}
+	}
+	NEE_health_care_subsidies_house = {
+		icon = GFX_decision_generic_healthcare
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = NEE_has_majority_house
+				check_variable = {
+					var = NEE_representatives_in_favor
+					value = NEE_house_majority_var
+					compare = greater_than_or_equals
+				}
+			}
+		}
+		activation = {
+			always = no
+		}
+		is_good = no
+		selectable_mission = yes
+		days_mission_timeout = 20
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_health_care_subsidies_house target: [From.GetName]"
+			activate_mission = NEE_health_care_subsidies_senate
+		}
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout NEE_health_care_subsidies_house target: [From.GetName]"
+			if = {
+				limit = {
+					check_variable = {
+						var = NEE_representatives_in_favor
+						value = NEE_house_majority_var
+						compare = greater_than_or_equals
+					}
+				}
+				activate_mission = NEE_health_care_subsidies_senate
+			}
+		}
+		ai_will_do = {
+			base = 1000
+		}
+	}
+	NEE_health_care_subsidies_senate = {
+		icon = GFX_decision_generic_healthcare
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = NEE_has_majority_senate
+				check_variable = {
+					var = NEE_senators_in_favor
+					value = NEE_senate_tie_var
+					compare = greater_than_or_equals
+				}
+			}
+		}
+		activation = {
+			always = no
+		}
+		is_good = no
+		selectable_mission = yes
+		days_mission_timeout = 20
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_health_care_subsidies_senate target: [From.GetName]"
+			if = {
+				limit = {
+					check_variable = {
+						NEE_senators_in_favor = NEE_senate_tie_var
+					}
+				}
+				country_event = {
+					id = nee.20
+					days = 0
+				}
+			}
+			every_owned_state = {
+				limit = {
+					is_core_of = NEE
+				}
+				set_temp_variable = {
+					pop_type_added = 1
+				}
+				set_temp_variable = {
+					pop_value_added = 2
+				}
+				NEE_add_electoral_popularity = yes
+			}
+			every_owned_state = {
+				limit = {
+					is_core_of = NEE
+				}
+				set_temp_variable = {
+					pop_type_subtracted = 3
+				}
+				set_temp_variable = {
+					pop_value_subtracted = 2
+				}
+				NEE_subtract_electoral_popularity = yes
+			}
+			NEE_clear_bill_voting_flags = yes
+			move_up_hc_spending = yes
+		}
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout NEE_health_care_subsidies_senate target: [From.GetName]"
+			if = {
+				limit = {
+					check_variable = {
+						var = NEE_senators_in_favor
+						value = NEE_senate_tie_var
+						compare = greater_than_or_equals
+					}
+				}
+				if = {
+					limit = {
+						check_variable = {
+							NEE_senators_in_favor = NEE_senate_tie_var
+						}
+					}
+					country_event = {
+						id = nee.20
+						days = 0
+					}
+				}
+				NEE_clear_bill_voting_flags = yes
+				move_up_hc_spending = yes
+				every_owned_state = {
+					limit = {
+						is_core_of = NEE
+					}
+					set_temp_variable = {
+						pop_type_added = 1
+					}
+					set_temp_variable = {
+						pop_value_added = 2
+					}
+					NEE_add_electoral_popularity = yes
+				}
+				every_owned_state = {
+					limit = {
+						is_core_of = NEE
+					}
+					set_temp_variable = {
+						pop_type_subtracted = 3
+					}
+					set_temp_variable = {
+						pop_value_subtracted = 2
+					}
+					NEE_subtract_electoral_popularity = yes
+				}
+			}
+		}
+		ai_will_do = {
+			base = 1000
+		}
+	}
+	NEE_social_security_act_1956_house = {
+		icon = GFX_decision_give_cash
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = NEE_has_majority_house
+				check_variable = {
+					var = NEE_representatives_in_favor
+					value = NEE_house_majority_var
+					compare = greater_than_or_equals
+				}
+			}
+		}
+		activation = {
+			always = no
+		}
+		is_good = no
+		selectable_mission = yes
+		days_mission_timeout = 20
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_social_security_act_1956_house target: [From.GetName]"
+			activate_mission = NEE_social_security_act_1956_senate
+		}
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout NEE_social_security_act_1956_house target: [From.GetName]"
+			if = {
+				limit = {
+					check_variable = {
+						var = NEE_representatives_in_favor
+						value = NEE_house_majority_var
+						compare = greater_than_or_equals
+					}
+				}
+				activate_mission = NEE_social_security_act_1956_senate
+			}
+		}
+		ai_will_do = {
+			base = 1000
+		}
+	}
+	NEE_social_security_act_1956_senate = {
+		icon = GFX_decision_give_cash
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = NEE_has_majority_senate
+				check_variable = {
+					var = NEE_senators_in_favor
+					value = NEE_senate_tie_var
+					compare = greater_than_or_equals
+				}
+			}
+		}
+		activation = {
+			always = no
+		}
+		is_good = no
+		selectable_mission = yes
+		days_mission_timeout = 20
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_social_security_act_1956_senate target: [From.GetName]"
+			if = {
+				limit = {
+					check_variable = {
+						NEE_senators_in_favor = NEE_senate_tie_var
+					}
+				}
+				country_event = {
+					id = nee.20
+					days = 0
+				}
+			}
+			every_owned_state = {
+				limit = {
+					is_core_of = NEE
+				}
+				set_temp_variable = {
+					pop_type_added = 1
+				}
+				set_temp_variable = {
+					pop_value_added = 2
+				}
+				NEE_add_electoral_popularity = yes
+			}
+			every_owned_state = {
+				limit = {
+					is_core_of = NEE
+				}
+				set_temp_variable = {
+					pop_type_subtracted = 3
+				}
+				set_temp_variable = {
+					pop_value_subtracted = 2
+				}
+				NEE_subtract_electoral_popularity = yes
+			}
+			NEE_clear_bill_voting_flags = yes
+			move_up_service_spending = yes
+		}
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout NEE_social_security_act_1956_senate target: [From.GetName]"
+			if = {
+				limit = {
+					check_variable = {
+						var = NEE_senators_in_favor
+						value = NEE_senate_tie_var
+						compare = greater_than_or_equals
+					}
+				}
+				if = {
+					limit = {
+						check_variable = {
+							NEE_senators_in_favor = NEE_senate_tie_var
+						}
+					}
+					country_event = {
+						id = nee.20
+						days = 0
+					}
+				}
+				every_owned_state = {
+					limit = {
+						is_core_of = NEE
+					}
+					set_temp_variable = {
+						pop_type_added = 1
+					}
+					set_temp_variable = {
+						pop_value_added = 2
+					}
+					NEE_add_electoral_popularity = yes
+				}
+				every_owned_state = {
+					limit = {
+						is_core_of = NEE
+					}
+					set_temp_variable = {
+						pop_type_subtracted = 3
+					}
+					set_temp_variable = {
+						pop_value_subtracted = 2
+					}
+					NEE_subtract_electoral_popularity = yes
+				}
+				NEE_clear_bill_voting_flags = yes
+				move_up_service_spending = yes
+			}
+		}
+		ai_will_do = {
+			base = 1000
+		}
+	}
+	NEE_public_university_subsidies_house = {
+		icon = GFX_decision_generic_research
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = NEE_has_majority_house
+				check_variable = {
+					var = NEE_representatives_in_favor
+					value = NEE_house_majority_var
+					compare = greater_than_or_equals
+				}
+			}
+		}
+		activation = {
+			always = no
+		}
+		is_good = no
+		selectable_mission = yes
+		days_mission_timeout = 20
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_public_university_subsidies_house target: [From.GetName]"
+			activate_mission = NEE_public_university_subsidies_senate
+		}
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout NEE_public_university_subsidies_house target: [From.GetName]"
+			if = {
+				limit = {
+					check_variable = {
+						var = NEE_representatives_in_favor
+						value = NEE_house_majority_var
+						compare = greater_than_or_equals
+					}
+				}
+				activate_mission = NEE_public_university_subsidies_senate
+			}
+		}
+		ai_will_do = {
+			base = 1000
+		}
+	}
+	NEE_public_university_subsidies_senate = {
+		icon = GFX_decision_generic_research
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = NEE_has_majority_senate
+				check_variable = {
+					var = NEE_senators_in_favor
+					value = NEE_senate_tie_var
+					compare = greater_than_or_equals
+				}
+			}
+		}
+		activation = {
+			always = no
+		}
+		is_good = no
+		selectable_mission = yes
+		days_mission_timeout = 20
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_public_university_subsidies_senate target: [From.GetName]"
+			if = {
+				limit = {
+					check_variable = {
+						NEE_senators_in_favor = NEE_senate_tie_var
+					}
+				}
+				country_event = {
+					id = nee.20
+					days = 0
+				}
+			}
+			NEE_clear_bill_voting_flags = yes
+			move_up_edu_spending = yes
+		}
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout NEE_public_university_subsidies_senate target: [From.GetName]"
+			if = {
+				limit = {
+					check_variable = {
+						var = NEE_senators_in_favor
+						value = NEE_senate_tie_var
+						compare = greater_than_or_equals
+					}
+				}
+				if = {
+					limit = {
+						check_variable = {
+							NEE_senators_in_favor = NEE_senate_tie_var
+						}
+					}
+					country_event = {
+						id = nee.20
+						days = 0
+					}
+				}
+				NEE_clear_bill_voting_flags = yes
+				move_up_edu_spending = yes
+			}
+		}
+		ai_will_do = {
+			base = 1000
+		}
+	}
+	NEE_revenue_act_house = {
+		icon = GFX_decision_eng_trade_unions_support
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = NEE_has_majority_house
+				check_variable = {
+					var = NEE_representatives_in_favor
+					value = NEE_house_majority_var
+					compare = greater_than_or_equals
+				}
+			}
+		}
+		activation = {
+			always = no
+		}
+		is_good = no
+		selectable_mission = yes
+		days_mission_timeout = 20
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_revenue_act_house target: [From.GetName]"
+			activate_mission = NEE_revenue_act_senate
+		}
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout NEE_revenue_act_house target: [From.GetName]"
+			if = {
+				limit = {
+					check_variable = {
+						var = NEE_representatives_in_favor
+						value = NEE_house_majority_var
+						compare = greater_than_or_equals
+					}
+				}
+				activate_mission = NEE_revenue_act_senate
+			}
+		}
+		ai_will_do = {
+			base = 1000
+		}
+	}
+	NEE_revenue_act_senate = {
+		icon = GFX_decision_eng_trade_unions_support
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = NEE_has_majority_senate
+				check_variable = {
+					var = NEE_senators_in_favor
+					value = NEE_senate_tie_var
+					compare = greater_than_or_equals
+				}
+			}
+		}
+		activation = {
+			always = no
+		}
+		is_good = no
+		selectable_mission = yes
+		days_mission_timeout = 20
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_revenue_act_senate target: [From.GetName]"
+			if = {
+				limit = {
+					check_variable = {
+						NEE_senators_in_favor = NEE_senate_tie_var
+					}
+				}
+				country_event = {
+					id = nee.20
+					days = 0
+				}
+			}
+			swap_ideas = {
+				remove_idea = NEE_Democrats_econ_policy_1
+				add_idea = NEE_Democrats_econ_policy_2
+			}
+			NEE_clear_bill_voting_flags = yes
+		}
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout NEE_revenue_act_senate target: [From.GetName]"
+			if = {
+				limit = {
+					check_variable = {
+						var = NEE_senators_in_favor
+						value = NEE_senate_tie_var
+						compare = greater_than_or_equals
+					}
+				}
+				if = {
+					limit = {
+						check_variable = {
+							NEE_senators_in_favor = NEE_senate_tie_var
+						}
+					}
+					country_event = {
+						id = nee.20
+						days = 0
+					}
+				}
+				swap_ideas = {
+					remove_idea = NEE_Democrats_econ_policy_1
+					add_idea = NEE_Democrats_econ_policy_2
+				}
+				NEE_clear_bill_voting_flags = yes
+			}
+		}
+		ai_will_do = {
+			base = 1000
+		}
+	}
+	NEE_relief_act_house = {
+		icon = GFX_decision_generic_political_discourse
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = NEE_has_majority_house
+				check_variable = {
+					var = NEE_representatives_in_favor
+					value = NEE_house_majority_var
+					compare = greater_than_or_equals
+				}
+			}
+		}
+		activation = {
+			always = no
+		}
+		is_good = no
+		selectable_mission = yes
+		days_mission_timeout = 20
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_relief_act_house target: [From.GetName]"
+			activate_mission = NEE_relief_act_senate
+		}
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout NEE_relief_act_house target: [From.GetName]"
+			if = {
+				limit = {
+					check_variable = {
+						var = NEE_representatives_in_favor
+						value = NEE_house_majority_var
+						compare = greater_than_or_equals
+					}
+				}
+				activate_mission = NEE_relief_act_senate
+			}
+		}
+		ai_will_do = {
+			base = 1000
+		}
+	}
+	NEE_relief_act_senate = {
+		icon = GFX_decision_generic_political_discourse
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = NEE_has_majority_senate
+				check_variable = {
+					var = NEE_senators_in_favor
+					value = NEE_senate_tie_var
+					compare = greater_than_or_equals
+				}
+			}
+		}
+		activation = {
+			always = no
+		}
+		is_good = no
+		selectable_mission = yes
+		days_mission_timeout = 20
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_relief_act_senate target: [From.GetName]"
+			if = {
+				limit = {
+					check_variable = {
+						NEE_senators_in_favor = NEE_senate_tie_var
+					}
+				}
+				country_event = {
+					id = nee.20
+					days = 0
+				}
+			}
+			if = {
+				limit = {
+					has_idea = NEE_refugee_act
+				}
+				swap_ideas = {
+					remove_idea = NEE_refugee_act
+					add_idea = NEE_refugee_act_2
+				}
+			}
+			else_if = {
+				limit = {
+					has_idea = NEE_refugee_act_1
+				}
+				swap_ideas = {
+					remove_idea = NEE_refugee_act_1
+					add_idea = NEE_refugee_act_2
+				}
+			}
+			else = {
+				add_ideas = NEE_refugee_act_2
+			}
+			NEE_clear_bill_voting_flags = yes
+		}
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout NEE_relief_act_senate target: [From.GetName]"
+			if = {
+				limit = {
+					check_variable = {
+						var = NEE_senators_in_favor
+						value = NEE_senate_tie_var
+						compare = greater_than_or_equals
+					}
+				}
+				if = {
+					limit = {
+						check_variable = {
+							NEE_senators_in_favor = NEE_senate_tie_var
+						}
+					}
+					country_event = {
+						id = nee.20
+						days = 0
+					}
+				}
+				if = {
+					limit = {
+						has_idea = NEE_refugee_act
+					}
+					swap_ideas = {
+						remove_idea = NEE_refugee_act
+						add_idea = NEE_refugee_act_2
+					}
+				}
+				else_if = {
+					limit = {
+						has_idea = NEE_refugee_act_1
+					}
+					swap_ideas = {
+						remove_idea = NEE_refugee_act_1
+						add_idea = NEE_refugee_act_2
+					}
+				}
+				else = {
+					add_ideas = NEE_refugee_act_2
+				}
+				NEE_clear_bill_voting_flags = yes
+			}
+		}
+		ai_will_do = {
+			base = 1000
+		}
+	}
+	NEE_war_powers_act_house = {
+		icon = GFX_decision_eng_trade_unions_support
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = NEE_has_majority_house
+				check_variable = {
+					var = NEE_representatives_in_favor
+					value = NEE_house_majority_var
+					compare = greater_than_or_equals
+				}
+			}
+		}
+		activation = {
+			always = no
+		}
+		is_good = no
+		selectable_mission = yes
+		days_mission_timeout = 20
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_war_powers_act_house target: [From.GetName]"
+			activate_mission = NEE_war_powers_act_senate
+		}
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout NEE_war_powers_act_house target: [From.GetName]"
+			if = {
+				limit = {
+					check_variable = {
+						var = NEE_representatives_in_favor
+						value = NEE_house_majority_var
+						compare = greater_than_or_equals
+					}
+				}
+				activate_mission = NEE_relief_act_senate
+			}
+		}
+		ai_will_do = {
+			base = 1000
+		}
+	}
+	NEE_war_powers_act_senate = {
+		icon = GFX_decision_eng_trade_unions_support
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = NEE_has_majority_senate
+				check_variable = {
+					var = NEE_senators_in_favor
+					value = NEE_senate_tie_var
+					compare = greater_than_or_equals
+				}
+			}
+		}
+		activation = {
+			always = no
+		}
+		is_good = no
+		selectable_mission = yes
+		days_mission_timeout = 20
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_war_powers_act_senate target: [From.GetName]"
+			if = {
+				limit = {
+					check_variable = {
+						NEE_senators_in_favor = NEE_senate_tie_var
+					}
+				}
+				country_event = {
+					id = nee.20
+					days = 0
+				}
+			}
+			add_ideas = NEE_war_powers_act
+			NEE_clear_bill_voting_flags = yes
+		}
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout NEE_war_powers_act_senate target: [From.GetName]"
+			if = {
+				limit = {
+					check_variable = {
+						var = NEE_senators_in_favor
+						value = NEE_senate_tie_var
+						compare = greater_than_or_equals
+					}
+				}
+				if = {
+					limit = {
+						check_variable = {
+							NEE_senators_in_favor = NEE_senate_tie_var
+						}
+					}
+					country_event = {
+						id = nee.20
+						days = 0
+					}
+				}
+				add_ideas = NEE_war_powers_act
+				NEE_clear_bill_voting_flags = yes
+			}
+		}
+		ai_will_do = {
+			base = 1000
+		}
+	}
+	###### LOBBYING DECISIONS
+	NEE_Court_progressives = {
+		icon = GFX_decision_USA_progressives
+		available = {
+			has_country_flag = NEE_progressive_oppose
+			has_country_flag = NEE_voting_on_bill
+			custom_trigger_tooltip = {
+				tooltip = NEE_progressives_to_sway
+				NOT = {
+					AND = {
+						has_country_flag = NEE_senate_vote_only
+						check_variable = {
+							var = senate_seat_array^0
+							value = 0
+							compare = less_than_or_equals
+						}
+					}
+				}
+			}
+		}
+		ai_will_do = {
+			base = 100
+		}
+		days_re_enable = 30
+		fire_only_once = no
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_Court_progressives target: [From.GetName]"
+			clr_country_flag = NEE_progressive_oppose
+			set_country_flag = NEE_progressive_in_favor
+			subtract_from_variable = {
+				NEE_senators_against = senate_seat_array^0
+			}
+			add_to_variable = {
+				NEE_senators_in_favor = senate_seat_array^0
+			}
+			add_timed_idea = {
+				idea = NEE_courting_progressives
+				days = 30
+			}
+		}
+	}
+	NEE_Court_libdems = {
+		icon = GFX_decision_USA_democrats
+		available = {
+			has_country_flag = NEE_libdems_oppose
+			has_country_flag = NEE_voting_on_bill
+		}
+		days_re_enable = 30
+		fire_only_once = no
+		ai_will_do = {
+			base = 500
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_Court_libdems target: [From.GetName]"
+			clr_country_flag = NEE_libdems_oppose
+			set_country_flag = NEE_libdems_in_favor
+			subtract_from_variable = {
+				NEE_senators_against = senate_seat_array^1
+			}
+			add_to_variable = {
+				NEE_senators_in_favor = senate_seat_array^1
+			}
+			add_timed_idea = {
+				idea = NEE_courting_libdems
+				days = 30
+			}
+		}
+	}
+	NEE_Court_reps = {
+		icon = GFX_decision_USA_republicans
+		available = {
+			has_country_flag = NEE_reps_oppose
+			has_country_flag = NEE_voting_on_bill
+		}
+		days_re_enable = 30
+		fire_only_once = no
+		ai_will_do = {
+			base = 500
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_Court_reps target: [From.GetName]"
+			clr_country_flag = NEE_reps_oppose
+			set_country_flag = NEE_reps_in_favor
+			subtract_from_variable = {
+				NEE_senators_against = senate_seat_array^2
+			}
+			add_to_variable = {
+				NEE_senators_in_favor = senate_seat_array^2
+			}
+			add_timed_idea = {
+				idea = NEE_courting_reps
+				days = 30
+			}
+		}
+	}
+	NEE_Court_soccons = {
+		icon = GFX_decision_USA_democrats
+		available = {
+			has_country_flag = NEE_soccons_oppose
+			has_country_flag = NEE_voting_on_bill
+		}
+		days_re_enable = 30
+		fire_only_once = no
+		ai_will_do = {
+			base = 500
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_Court_soccons target: [From.GetName]"
+			clr_country_flag = NEE_soccons_oppose
+			set_country_flag = NEE_soccon_in_favor
+			subtract_from_variable = {
+				NEE_senators_against = senate_seat_array^3
+			}
+			add_to_variable = {
+				NEE_senators_in_favor = senate_seat_array^3
+			}
+			add_timed_idea = {
+				idea = NEE_courting_soccon
+				days = 30
+			}
+		}
+	}
+}
+accord_voting_decisions = {
+	NEE_show_hide_montgomery_plan_decisions = {
+		visible = {
+			has_country_flag = NEE_assisting_montgomery
+			original_tag = NEE
+		}
+		cost = 0
+		days_re_enable = 0
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_show_hide_montgomery_plan_decisions target: [From.GetName]"
+			if = {
+				limit = {
+					has_country_flag = NEE_montgomery_hidden
+				}
+				clr_country_flag = NEE_montgomery_hidden
+			}
+			else = {
+				set_country_flag = NEE_montgomery_hidden
+			}
+		}
+	}
+	NEE_show_loans_decisions = {
+		visible = {
+			has_country_flag = NEE_accord_loans
+			original_tag = NEE
+		}
+		cost = 0
+		days_re_enable = 0
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_show_loans_decisions target: [From.GetName]"
+			if = {
+				limit = {
+					has_country_flag = NEE_loans_hidden
+				}
+				clr_country_flag = NEE_loans_hidden
+			}
+			else = {
+				set_country_flag = NEE_loans_hidden
+			}
+		}
+	}
+	NEE_Montgomery_plan = {
+		icon = GFX_decision_cement_mixer
+		visible = {
+			NOT = {
+				has_country_flag = NEE_montgomery_hidden
+			}
+			has_country_flag = NEE_assisting_montgomery
+			original_tag = NEE
+		}
+		available = {
+			num_of_civilian_factories_available_for_projects > 4
+		}
+		target_root_trigger = {
+			has_country_flag = NEE_assisting_montgomery
+		}
+		target_trigger = {
+			FROM = {
+				OR = {
+					has_country_flag = is_valid_montgomery_plan_recipient
+					is_in_or_aligned_with_accord = yes
+				}
+			}
+		}
+		ai_will_do = {
+			base = 100
+			modifier = {
+				FROM = {
+					OR = {
+						tag = ENG
+						tag = NFA
+						tag = ITA
+					}
+				}
+				factor = 3
+			}
+			modifier = {
+				FROM = {
+					OR = {
+						tag = SPR
+						tag = SER
+						tag = NOR
+					}
+				}
+				factor = 2
+			}
+		}
+		targets = {
+			ENG
+			ICE
+			NFA
+			GRE
+			ITA
+			SPR
+			POR
+			NOR
+			IRE
+			SER
+			TUR
+		}
+		cost = 25
+		modifier = {
+			civilian_factory_use = 5
+		}
+		days_remove = 180
+		days_re_enable = 180
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_Montgomery_plan target: [From.GetName]"
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove NEE_Montgomery_plan target: [From.GetName]"
+			FROM = {
+				random_owned_state = {
+					limit = {
+						is_core_of = FROM
+					}
+					add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+						type = industrial_complex
+						level = 1
+						instant_build = yes
+					}
+				}
+			}
+		}
+	}
+	NEE_Accord_loans = {
+		icon = GFX_decision_give_cash
+		visible = {
+			NOT = {
+				has_country_flag = NEE_loans_hidden
+			}
+			has_country_flag = NEE_accord_loans
+			original_tag = NEE
+		}
+		available = {
+			num_of_civilian_factories_available_for_projects > 3
+		}
+		target_root_trigger = {
+			has_country_flag = NEE_accord_loans
+		}
+		target_trigger = {
+			FROM = {
+				is_in_or_aligned_with_accord = yes
+			}
+		}
+		targets = {
+			ENG
+			ICE
+			NFA
+			GRE
+			ITA
+			SPR
+			POR
+			NOR
+			IRE
+			SAF
+			AST
+			GLG
+			CHI
+			HAW
+			MEX
+			JAM
+			PRI
+		}
+		ai_will_do = {
+			base = 100
+			modifier = {
+				FROM = {
+					OR = {
+						tag = ENG
+						tag = NFA
+						tag = ITA
+						tag = AST
+						tag = GLG
+					}
+				}
+				factor = 3
+			}
+			modifier = {
+				FROM = {
+					OR = {
+						tag = SPR
+						tag = SER
+						tag = NOR
+						tag = SAF
+					}
+				}
+				factor = 2
+			}
+		}
+		cost = 25
+		modifier = {
+			civilian_factory_use = 4
+		}
+		days_remove = 180
+		days_re_enable = 720
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_Accord_loans target: [From.GetName]"
+			FROM = {
+				add_timed_idea = {
+					idea = NEE_loans_from_new_england
+					days = 365
+				}
+			}
+		}
+	}
+}
+NEE_interstate_highway = {
+	NEE_lobby_congress = {
+		icon = GFX_decision_give_cash
+		days_remove = 90
+		fire_only_once = no
+		cost = 50
+		days_re_enable = 30
+		ai_will_do = {
+			base = 10
+			modifier = {
+				check_variable = {
+					NEE_interstate_budget < 10
+				}
+				factor = 20
+			}
+			modifier = {
+				check_variable = {
+					NEE_interstate_budget < 25
+				}
+				factor = 10
+			}
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_lobby_congress target: [From.GetName]"
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove NEE_lobby_congress target: [From.GetName]"
+			custom_effect_tooltip = NEE_add_25_bil
+			custom_effect_tooltip = tooltip_white_line
+			add_to_variable = {
+				NEE_interstate_budget = 25
+			}
+		}
+	}
+	NEE_I_90 = {
+		icon = GFX_decision_road
+		days_remove = 540
+		fire_only_once = yes
+		custom_cost_trigger = {
+			check_variable = {
+				NEE_interstate_budget > 19.99
+			}
+		}
+		highlight_states = {
+			highlight_state_targets = {
+				state = 797
+			}
+		}
+		ai_will_do = {
+			base = 200
+		}
+		custom_cost_text = NEE_has_20_bil
+		visible = {
+			797 = {
+				is_owned_and_controlled_by = NEE
+			}
+			358 = {
+				is_owned_and_controlled_by = NEE
+			}
+		}
+		cancel_if_not_visible = yes
+		cancel_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision cancel NEE_I_90 target: [From.GetName]"
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_I_90 target: [From.GetName]"
+			add_to_variable = {
+				NEE_interstate_budget = -20
+			}
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove NEE_I_90 target: [From.GetName]"
+			set_country_flag = NEE_completed_i90
+			hidden_effect = {
+				country_event = {
+					id = nee.53
+					days = 10
+				}
+			}
+			add_to_variable = {
+				NEE_highway_infra = 0.03
+				tooltip = NEE_highway_tooltip
+			}
+			797 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			358 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+	NEE_I_95 = {
+		icon = GFX_decision_road
+		days_remove = 540
+		fire_only_once = yes
+		custom_cost_trigger = {
+			check_variable = {
+				NEE_interstate_budget > 24.99
+			}
+		}
+		custom_cost_text = NEE_has_25_bil
+		ai_will_do = {
+			base = 200
+		}
+		highlight_states = {
+			highlight_state_targets = {
+				state = 822
+			}
+		}
+		visible = {
+			359 = {
+				is_owned_and_controlled_by = NEE
+			}
+			822 = {
+				is_owned_and_controlled_by = NEE
+			}
+			358 = {
+				is_owned_and_controlled_by = NEE
+			}
+			798 = {
+				is_owned_and_controlled_by = NEE
+			}
+			892 = {
+				is_owned_and_controlled_by = NEE
+			}
+			797 = {
+				is_owned_and_controlled_by = NEE
+			}
+			800 = {
+				is_owned_and_controlled_by = NEE
+			}
+			357 = {
+				is_owned_and_controlled_by = NEE
+			}
+		}
+		cancel_if_not_visible = yes
+		cancel_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision cancel NEE_I_95 target: [From.GetName]"
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_I_95 target: [From.GetName]"
+			add_to_variable = {
+				NEE_interstate_budget = -25
+			}
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove NEE_I_95 target: [From.GetName]"
+			set_country_flag = NEE_completed_i95
+			add_to_variable = {
+				NEE_highway_infra = 0.06
+				tooltip = NEE_highway_tooltip
+			}
+			359 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			822 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			358 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			798 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			892 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			797 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			800 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			357 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+	NEE_I_91 = {
+		icon = GFX_decision_road
+		available = {
+			has_completed_focus = NEE_Expand_the_federal_highway_act
+			has_country_flag = NEE_completed_i90
+		}
+		days_remove = 360
+		fire_only_once = yes
+		custom_cost_trigger = {
+			check_variable = {
+				NEE_interstate_budget > 14.99
+			}
+		}
+		custom_cost_text = NEE_has_15_bil
+		ai_will_do = {
+			base = 100
+		}
+		highlight_states = {
+			highlight_state_targets = {
+				state = 797
+			}
+		}
+		visible = {
+			798 = {
+				is_owned_and_controlled_by = NEE
+			}
+			797 = {
+				is_owned_and_controlled_by = NEE
+			}
+			799 = {
+				is_owned_and_controlled_by = NEE
+			}
+		}
+		cancel_if_not_visible = yes
+		cancel_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision cancel NEE_I_91 target: [From.GetName]"
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_I_91 target: [From.GetName]"
+			add_to_variable = {
+				NEE_interstate_budget = -15
+			}
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove NEE_I_91 target: [From.GetName]"
+			set_country_flag = NEE_completed_i91
+			add_to_variable = {
+				NEE_highway_infra = 0.025
+				tooltip = NEE_highway_tooltip
+			}
+			798 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			797 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			799 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+	NEE_I_93 = {
+		icon = GFX_decision_road
+		available = {
+			has_completed_focus = NEE_north_south_routes
+			has_country_flag = NEE_completed_i90
+			has_country_flag = NEE_completed_i91
+		}
+		days_remove = 360
+		fire_only_once = yes
+		ai_will_do = {
+			base = 100
+		}
+		custom_cost_trigger = {
+			check_variable = {
+				NEE_interstate_budget > 14.99
+			}
+		}
+		highlight_states = {
+			highlight_state_targets = {
+				state = 800
+			}
+		}
+		custom_cost_text = NEE_has_15_bil
+		visible = {
+			800 = {
+				is_owned_and_controlled_by = NEE
+			}
+		}
+		cancel_if_not_visible = yes
+		cancel_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision cancel NEE_I_93 target: [From.GetName]"
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_I_93 target: [From.GetName]"
+			add_to_variable = {
+				NEE_interstate_budget = -15
+			}
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove NEE_I_93 target: [From.GetName]"
+			set_country_flag = NEE_completed_i93
+			add_to_variable = {
+				NEE_highway_infra = 0.02
+				tooltip = NEE_highway_tooltip
+			}
+			800 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+	NEE_I_89 = {
+		icon = GFX_decision_road
+		available = {
+			has_completed_focus = NEE_north_south_routes
+			has_country_flag = NEE_completed_i93
+		}
+		days_remove = 360
+		fire_only_once = yes
+		custom_cost_trigger = {
+			check_variable = {
+				NEE_interstate_budget > 14.99
+			}
+		}
+		custom_cost_text = NEE_has_15_bil
+		ai_will_do = {
+			base = 75
+		}
+		highlight_states = {
+			highlight_state_targets = {
+				state = 799
+			}
+		}
+		visible = {
+			799 = {
+				is_owned_and_controlled_by = NEE
+			}
+		}
+		cancel_if_not_visible = yes
+		cancel_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision cancel NEE_I_89 target: [From.GetName]"
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_I_89 target: [From.GetName]"
+			add_to_variable = {
+				NEE_interstate_budget = -15
+			}
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove NEE_I_89 target: [From.GetName]"
+			add_to_variable = {
+				NEE_highway_infra = 0.02
+				tooltip = NEE_highway_tooltip
+			}
+			800 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			799 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+	NEE_I_87 = {
+		icon = GFX_decision_road
+		available = {
+			has_completed_focus = NEE_north_south_routes
+			has_country_flag = NEE_completed_i90
+		}
+		days_remove = 450
+		fire_only_once = yes
+		custom_cost_trigger = {
+			check_variable = {
+				NEE_interstate_budget > 19.99
+			}
+		}
+		custom_cost_text = NEE_has_20_bil
+		ai_will_do = {
+			base = 100
+		}
+		highlight_states = {
+			highlight_state_targets = {
+				state = 358
+			}
+		}
+		visible = {
+			800 = {
+				is_owned_and_controlled_by = NEE
+			}
+			358 = {
+				is_owned_and_controlled_by = NEE
+			}
+		}
+		cancel_if_not_visible = yes
+		cancel_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision cancel NEE_I_87 target: [From.GetName]"
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_I_87 target: [From.GetName]"
+			add_to_variable = {
+				NEE_interstate_budget = -20
+			}
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove NEE_I_87 target: [From.GetName]"
+			add_to_variable = {
+				NEE_highway_infra = 0.04
+				tooltip = NEE_highway_tooltip
+			}
+			358 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			822 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+	NEE_I_81 = {
+		icon = GFX_decision_road
+		available = {
+			has_completed_focus = NEE_north_south_routes
+			has_country_flag = NEE_completed_i90
+		}
+		days_remove = 450
+		fire_only_once = yes
+		custom_cost_trigger = {
+			check_variable = {
+				NEE_interstate_budget > 19.99
+			}
+		}
+		custom_cost_text = NEE_has_20_bil
+		ai_will_do = {
+			base = 75
+		}
+		highlight_states = {
+			highlight_state_targets = {
+				state = 796
+			}
+		}
+		visible = {
+			358 = {
+				is_owned_and_controlled_by = NEE
+			}
+			796 = {
+				is_owned_and_controlled_by = NEE
+			}
+		}
+		cancel_if_not_visible = yes
+		cancel_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision cancel NEE_I_81 target: [From.GetName]"
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_I_81 target: [From.GetName]"
+			add_to_variable = {
+				NEE_interstate_budget = -20
+			}
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove NEE_I_81 target: [From.GetName]"
+			set_country_flag = NEE_completed_i81
+			add_to_variable = {
+				NEE_highway_infra = 0.04
+				tooltip = NEE_highway_tooltip
+			}
+			358 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			796 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+	NEE_I_88 = {
+		icon = GFX_decision_road
+		available = {
+			has_completed_focus = NEE_east_west_route
+			has_country_flag = NEE_completed_i90
+		}
+		days_remove = 300
+		fire_only_once = yes
+		ai_will_do = {
+			base = 75
+		}
+		custom_cost_trigger = {
+			check_variable = {
+				NEE_interstate_budget > 9.99
+			}
+		}
+		custom_cost_text = NEE_has_10_bil
+		highlight_states = {
+			highlight_state_targets = {
+				state = 358
+			}
+		}
+		visible = {
+			358 = {
+				is_owned_and_controlled_by = NEE
+			}
+		}
+		cancel_if_not_visible = yes
+		cancel_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision cancel NEE_I_88 target: [From.GetName]"
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_I_88 target: [From.GetName]"
+			add_to_variable = {
+				NEE_interstate_budget = -10
+			}
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove NEE_I_88 target: [From.GetName]"
+			set_country_flag = NEE_completed_i88
+			add_to_variable = {
+				NEE_highway_infra = 0.02
+				tooltip = NEE_highway_tooltip
+			}
+			358 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+	NEE_I_86 = {
+		icon = GFX_decision_road
+		available = {
+			has_completed_focus = NEE_Expand_the_federal_highway_act
+			has_country_flag = NEE_completed_i81
+			has_country_flag = NEE_completed_i88
+		}
+		days_remove = 300
+		fire_only_once = yes
+		custom_cost_trigger = {
+			check_variable = {
+				NEE_interstate_budget > 9.99
+			}
+		}
+		custom_cost_text = NEE_has_10_bil
+		ai_will_do = {
+			base = 50
+		}
+		highlight_states = {
+			highlight_state_targets = {
+				state = 358
+			}
+		}
+		visible = {
+			358 = {
+				is_owned_and_controlled_by = NEE
+			}
+		}
+		cancel_if_not_visible = yes
+		cancel_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision cancel NEE_I_86 target: [From.GetName]"
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_I_86 target: [From.GetName]"
+			add_to_variable = {
+				NEE_interstate_budget = -10
+			}
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove NEE_I_86 target: [From.GetName]"
+			add_to_variable = {
+				NEE_highway_infra = 0.02
+				tooltip = NEE_highway_tooltip
+			}
+			358 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+	NEE_I_84 = {
+		icon = GFX_decision_road
+		available = {
+			has_completed_focus = NEE_east_west_route
+			has_country_flag = NEE_completed_i90
+			has_country_flag = NEE_completed_i95
+		}
+		days_remove = 365
+		fire_only_once = yes
+		highlight_states = {
+			highlight_state_targets = {
+				state = 798
+			}
+		}
+		custom_cost_trigger = {
+			check_variable = {
+				NEE_interstate_budget > 19.99
+			}
+		}
+		ai_will_do = {
+			base = 100
+		}
+		custom_cost_text = NEE_has_20_bil
+		visible = {
+			358 = {
+				is_owned_and_controlled_by = NEE
+			}
+			798 = {
+				is_owned_and_controlled_by = NEE
+			}
+			796 = {
+				is_owned_and_controlled_by = NEE
+			}
+		}
+		cancel_if_not_visible = yes
+		cancel_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision cancel NEE_I_84 target: [From.GetName]"
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_I_84 target: [From.GetName]"
+			add_to_variable = {
+				NEE_interstate_budget = -20
+			}
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove NEE_I_84 target: [From.GetName]"
+			add_to_variable = {
+				NEE_highway_infra = 0.05
+				tooltip = NEE_highway_tooltip
+			}
+			358 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			798 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			796 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+	NEE_I_78 = {
+		icon = GFX_decision_road
+		available = {
+			has_completed_focus = NEE_Expand_the_federal_highway_act
+			has_country_flag = NEE_completed_i95
+			has_country_flag = NEE_completed_i81
+		}
+		days_remove = 300
+		fire_only_once = yes
+		custom_cost_trigger = {
+			check_variable = {
+				NEE_interstate_budget > 9.99
+			}
+		}
+		ai_will_do = {
+			base = 75
+		}
+		custom_cost_text = NEE_has_10_bil
+		highlight_states = {
+			highlight_state_targets = {
+				state = 359
+			}
+		}
+		visible = {
+			359 = {
+				is_owned_and_controlled_by = NEE
+			}
+			796 = {
+				is_owned_and_controlled_by = NEE
+			}
+		}
+		cancel_if_not_visible = yes
+		cancel_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision cancel NEE_I_78 target: [From.GetName]"
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_I_78 target: [From.GetName]"
+			add_to_variable = {
+				NEE_interstate_budget = -10
+			}
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove NEE_I_78 target: [From.GetName]"
+			add_to_variable = {
+				NEE_highway_infra = 0.025
+				tooltip = NEE_highway_tooltip
+			}
+			359 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			796 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+	NEE_I_76 = {
+		icon = GFX_decision_road
+		available = {
+			has_completed_focus = NEE_Expand_the_federal_highway_act
+			has_country_flag = NEE_completed_i95
+		}
+		days_remove = 150
+		fire_only_once = yes
+		custom_cost_trigger = {
+			check_variable = {
+				NEE_interstate_budget > 9.99
+			}
+		}
+		custom_cost_text = NEE_has_10_bil
+		ai_will_do = {
+			base = 75
+		}
+		highlight_states = {
+			highlight_state_targets = {
+				state = 796
+			}
+		}
+		visible = {
+			359 = {
+				is_owned_and_controlled_by = NEE
+			}
+			796 = {
+				is_owned_and_controlled_by = NEE
+			}
+		}
+		cancel_if_not_visible = yes
+		cancel_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision cancel NEE_I_76 target: [From.GetName]"
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_I_76 target: [From.GetName]"
+			add_to_variable = {
+				NEE_interstate_budget = -10
+			}
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove NEE_I_76 target: [From.GetName]"
+			add_to_variable = {
+				NEE_highway_infra = 0.02
+				tooltip = NEE_highway_tooltip
+			}
+			359 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			796 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+}
+NEE_economy = {
+	NEE_create_ma_port_authority = {
+		icon = GFX_decision_generic_naval
+		cost = 50
+		days_remove = 540
+		available = {
+			num_of_civilian_factories_available_for_projects > 1
+			797 = {
+				is_owned_and_controlled_by = NEE
+			}
+		}
+		visible = {
+			797 = {
+				is_owned_and_controlled_by = NEE
+			}
+		}
+		modifier = {
+			civilian_factory_use = 2
+		}
+		ai_will_do = {
+			base = 100
+		}
+		fire_only_once = yes
+		cancel_if_not_visible = yes
+		cancel_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision cancel NEE_create_ma_port_authority target: [From.GetName]"
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_create_ma_port_authority target: [From.GetName]"
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove NEE_create_ma_port_authority target: [From.GetName]"
+			set_country_flag = NEE_ma_port_authority
+			797 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = dockyard
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = naval_base
+					level = 2
+					province = 6732
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = air_base
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+	NEE_expand_logan_airport = {
+		icon = GFX_decision_plane
+		cost = 50
+		available = {
+			has_country_flag = NEE_ma_port_authority
+			num_of_civilian_factories_available_for_projects > 1
+			797 = {
+				is_owned_and_controlled_by = NEE
+			}
+		}
+		visible = {
+			797 = {
+				is_owned_and_controlled_by = NEE
+			}
+		}
+		ai_will_do = {
+			base = 50
+		}
+		days_remove = 365
+		modifier = {
+			civilian_factory_use = 2
+		}
+		fire_only_once = yes
+		cancel_if_not_visible = yes
+		cancel_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision cancel NEE_expand_logan_airport target: [From.GetName]"
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_expand_logan_airport target: [From.GetName]"
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_expand_logan_airport target: [From.GetName]"
+			hidden_effect = {
+				country_event = {
+					id = nee.50
+					days = 90
+				}
+			}
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove NEE_expand_logan_airport target: [From.GetName]"
+			797 = {
+				add_extra_state_shared_building_slots = 3
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+	NEE_promote_tourism_cape = {
+		icon = GFX_decision_oasis
+		cost = 40
+		days_remove = 180
+		available = {
+			num_of_civilian_factories_available_for_projects > 2
+			797 = {
+				is_owned_and_controlled_by = NEE
+			}
+		}
+		visible = {
+			797 = {
+				is_owned_and_controlled_by = NEE
+			}
+		}
+		ai_will_do = {
+			base = 50
+		}
+		modifier = {
+			civilian_factory_use = 3
+		}
+		fire_only_once = yes
+		cancel_if_not_visible = yes
+		cancel_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision cancel NEE_promote_tourism_cape target: [From.GetName]"
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_promote_tourism_cape target: [From.GetName]"
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove NEE_promote_tourism_cape target: [From.GetName]"
+			797 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+	NEE_expand_bangor_steel_mill = {
+		icon = GFX_decision_steel
+		cost = 40
+		days_remove = 365
+		available = {
+			num_of_civilian_factories_available_for_projects > 4
+			357 = {
+				is_owned_and_controlled_by = NEE
+			}
+		}
+		visible = {
+			357 = {
+				is_owned_and_controlled_by = NEE
+			}
+		}
+		modifier = {
+			civilian_factory_use = 2
+		}
+		ai_will_do = {
+			base = 50
+		}
+		fire_only_once = yes
+		cancel_if_not_visible = yes
+		cancel_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision cancel NEE_expand_bangor_steel_mill target: [From.GetName]"
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_expand_bangor_steel_mill target: [From.GetName]"
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove NEE_expand_bangor_steel_mill target: [From.GetName]"
+			add_resource = {
+				type = steel
+				amount = 5
+				state = 357
+			}
+		}
+	}
+	NEE_electrifying_Delaware_valley = {
+		icon = GFX_decision_electrify
+		cost = 50
+		available = {
+			has_completed_focus = NEE_new_states
+			num_of_civilian_factories_available_for_projects > 2
+			796 = {
+				is_owned_and_controlled_by = NEE
+			}
+		}
+		visible = {
+			796 = {
+				is_owned_and_controlled_by = NEE
+			}
+		}
+		days_remove = 180
+		modifier = {
+			civilian_factory_use = 3
+		}
+		ai_will_do = {
+			base = 100
+		}
+		fire_only_once = yes
+		cancel_if_not_visible = yes
+		cancel_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision cancel NEE_electrifying_Delaware_valley target: [From.GetName]"
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_electrifying_Delaware_valley target: [From.GetName]"
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove NEE_electrifying_Delaware_valley target: [From.GetName]"
+			796 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+				NEE_improve_devastated_economy = yes
+			}
+		}
+	}
+	NEE_reestablish_ny_port = {
+		icon = GFX_decision_generic_naval
+		cost = 50
+		available = {
+			has_completed_focus = NEE_new_states
+			num_of_civilian_factories_available_for_projects > 1
+			822 = {
+				is_owned_and_controlled_by = NEE
+			}
+		}
+		visible = {
+			822 = {
+				is_owned_and_controlled_by = NEE
+			}
+		}
+		days_remove = 365
+		modifier = {
+			civilian_factory_use = 2
+		}
+		ai_will_do = {
+			base = 75
+		}
+		fire_only_once = yes
+		cancel_if_not_visible = yes
+		cancel_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision cancel NEE_reestablish_ny_port target: [From.GetName]"
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_reestablish_ny_port target: [From.GetName]"
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove NEE_reestablish_ny_port target: [From.GetName]"
+			set_country_flag = NEE_completed_ny_port
+			822 = {
+				add_extra_state_shared_building_slots = 3
+				add_building_construction = {
+					type = naval_base
+					level = 3
+					province = 3878
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = air_base
+					level = 3
+					instant_build = yes
+				}
+			}
+			359 = {
+				NEE_improve_devastated_economy = yes
+			}
+		}
+	}
+	NEE_build_elizabeth_terminal = {
+		icon = generic_naval_base
+		cost = 60
+		available = {
+			has_completed_focus = NEE_new_states
+			has_country_flag = NEE_completed_ny_port
+			num_of_civilian_factories_available_for_projects > 2
+			359 = {
+				is_owned_and_controlled_by = NEE
+			}
+		}
+		visible = {
+			359 = {
+				is_owned_and_controlled_by = NEE
+			}
+		}
+		ai_will_do = {
+			base = 75
+		}
+		fire_only_once = yes
+		modifier = {
+			civilian_factory_use = 3
+		}
+		days_remove = 270
+		cancel_if_not_visible = yes
+		cancel_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision cancel NEE_build_elizabeth_terminal target: [From.GetName]"
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_build_elizabeth_terminal target: [From.GetName]"
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove NEE_build_elizabeth_terminal target: [From.GetName]"
+			set_country_flag = NEE_expand_elizabeth_terminal
+			359 = {
+				add_building_construction = {
+					type = naval_base
+					level = 4
+					instant_build = yes
+					province = 6882
+				}
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = dockyard
+					level = 1
+					instant_build = yes
+				}
+				NEE_improve_devastated_economy = yes
+			}
+			822 = {
+				add_building_construction = {
+					type = naval_base
+					level = 3
+					instant_build = yes
+					province = 13326
+				}
+			}
+		}
+	}
+	NEE_expand_newark_harbor = {
+		icon = generic_naval_base
+		cost = 50
+		available = {
+			has_completed_focus = NEE_new_states
+			has_country_flag = NEE_expand_elizabeth_terminal
+			num_of_civilian_factories_available_for_projects > 2
+			359 = {
+				is_owned_and_controlled_by = NEE
+			}
+		}
+		visible = {
+			359 = {
+				is_owned_and_controlled_by = NEE
+			}
+		}
+		fire_only_once = yes
+		modifier = {
+			civilian_factory_use = 3
+		}
+		ai_will_do = {
+			base = 75
+		}
+		days_remove = 180
+		cancel_if_not_visible = yes
+		cancel_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision cancel NEE_expand_newark_harbor target: [From.GetName]"
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_expand_newark_harbor target: [From.GetName]"
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove NEE_expand_newark_harbor target: [From.GetName]"
+			359 = {
+				add_building_construction = {
+					type = naval_base
+					level = 2
+					instant_build = yes
+					province = 6882
+				}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = dockyard
+					level = 1
+					instant_build = yes
+				}
+				NEE_improve_devastated_economy = yes
+			}
+		}
+	}
+	NEE_lackawana = {
+		icon = GFX_decision_steel
+		available = {
+			has_completed_focus = NEE_new_states
+			num_of_civilian_factories_available_for_projects > 2
+			796 = {
+				is_owned_and_controlled_by = NEE
+			}
+		}
+		visible = {
+			796 = {
+				is_owned_and_controlled_by = NEE
+			}
+		}
+		ai_will_do = {
+			base = 100
+		}
+		cost = 50
+		fire_only_once = yes
+		days_remove = 90
+		modifier = {
+			civilian_factory_use = 3
+		}
+		cancel_if_not_visible = yes
+		cancel_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision cancel NEE_lackawana target: [From.GetName]"
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_lackawana target: [From.GetName]"
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove NEE_lackawana target: [From.GetName]"
+			add_resource = {
+				type = steel
+				amount = 8
+				state = 796
+			}
+			796 = {
+				NEE_improve_devastated_economy = yes
+			}
+		}
+	}
+	NEE_hope_point = {
+		icon = GFX_decision_generic_construction
+		cost = 50
+		available = {
+			has_completed_focus = NEE_densest_economy_in_the_world
+			num_of_civilian_factories_available_for_projects > 4
+			797 = {
+				is_owned_and_controlled_by = NEE
+			}
+		}
+		visible = {
+			797 = {
+				is_owned_and_controlled_by = NEE
+			}
+		}
+		ai_will_do = {
+			base = 100
+		}
+		days_remove = 365
+		fire_only_once = yes
+		modifier = {
+			civilian_factory_use = 5
+		}
+		cancel_if_not_visible = yes
+		cancel_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision cancel NEE_hope_point target: [From.GetName]"
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_hope_point target: [From.GetName]"
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove NEE_hope_point target: [From.GetName]"
+			797 = {
+				add_extra_state_shared_building_slots = 3
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+	NEE_expand_NYCHA = {
+		icon = GFX_decision_wrenches
+		cost = 50
+		available = {
+			has_completed_focus = NEE_densest_economy_in_the_world
+			num_of_civilian_factories_available_for_projects > 4
+			822 = {
+				is_owned_and_controlled_by = NEE
+			}
+		}
+		visible = {
+			822 = {
+				is_owned_and_controlled_by = NEE
+			}
+		}
+		ai_will_do = {
+			base = 50
+		}
+		days_remove = 365
+		fire_only_once = yes
+		modifier = {
+			civilian_factory_use = 5
+		}
+		cancel_if_not_visible = yes
+		cancel_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision cancel NEE_expand_NYCHA target: [From.GetName]"
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_expand_NYCHA target: [From.GetName]"
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove NEE_expand_NYCHA target: [From.GetName]"
+			822 = {
+				add_extra_state_shared_building_slots = 3
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+	NEE_establish_PHA = {
+		icon = GFX_decision_cement_mixer
+		cost = 50
+		available = {
+			has_completed_focus = NEE_densest_economy_in_the_world
+			num_of_civilian_factories_available_for_projects > 6
+			796 = {
+				is_owned_and_controlled_by = NEE
+			}
+		}
+		visible = {
+			796 = {
+				is_owned_and_controlled_by = NEE
+			}
+		}
+		ai_will_do = {
+			base = 100
+		}
+		days_remove = 365
+		fire_only_once = yes
+		modifier = {
+			civilian_factory_use = 5
+		}
+		cancel_if_not_visible = yes
+		cancel_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision cancel NEE_establish_PHA target: [From.GetName]"
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_establish_PHA target: [From.GetName]"
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove NEE_establish_PHA target: [From.GetName]"
+			796 = {
+				add_extra_state_shared_building_slots = 3
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = infrastructure
+					level = 2
+					instant_build = yes
+				}
+				NEE_improve_devastated_economy = yes
+			}
+		}
+	}
+	NEE_retooling_industry = {
+		icon = GFX_decision_factories
+		cost = 40
+		available = {
+			has_completed_focus = NEE_new_industrial_schemes
+			num_of_civilian_factories_available_for_projects > 2
+			FROM = {
+				is_owned_and_controlled_by = NEE
+			}
+		}
+		visible = {
+			FROM = {
+				is_owned_and_controlled_by = NEE
+			}
+		}
+		days_remove = 180
+		fire_only_once = yes
+		modifier = {
+			civilian_factory_use = 3
+		}
+		ai_will_do = {
+			base = 100
+		}
+		targets = {
+			796
+			359
+		}
+		state_target = yes
+		cancel_if_not_visible = yes
+		cancel_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision cancel NEE_retooling_industry target: [From.GetName]"
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_retooling_industry target: [From.GetName]"
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove NEE_retooling_industry target: [From.GetName]"
+			FROM = {
+				NEE_improve_devastated_economy = yes
+			}
+		}
+	}
+	NEE_retooling_industry_pa = {
+		visible = {
+			always = no
+		}
+	}
+	NEE_retooling_industry_nj = {
+		visible = {
+			always = no
+		}
+	}
+	NEE_investing_in_business = {
+		icon = GFX_decision_give_cash
+		cost = 40
+		available = {
+			has_completed_focus = NEE_small_business_subsidies
+			num_of_civilian_factories_available_for_projects > 2
+			FROM = {
+				is_owned_and_controlled_by = NEE
+			}
+		}
+		visible = {
+			FROM = {
+				is_owned_and_controlled_by = NEE
+			}
+		}
+		days_remove = 270
+		fire_only_once = yes
+		modifier = {
+			civilian_factory_use = 3
+		}
+		ai_will_do = {
+			base = 100
+		}
+		targets = {
+			796
+			359
+		}
+		state_target = yes
+		cancel_if_not_visible = yes
+		cancel_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision cancel NEE_investing_in_business target: [From.GetName]"
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_investing_in_business target: [From.GetName]"
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove NEE_investing_in_business target: [From.GetName]"
+			FROM = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+				NEE_improve_devastated_economy = yes
+			}
+		}
+	}
+	NEE_investing_in_business_pa = {
+		visible = {
+			always = no
+		}
+	}
+	NEE_investing_in_business_nj = {
+		visible = {
+			always = no
+		}
+	}
+	NEE_rebuild_phi_navy_yard = {
+		icon = GFX_decision_generic_naval
+		cost = 50
+		available = {
+			has_completed_focus = NEE_philadelphia_dockyards
+			num_of_civilian_factories_available_for_projects > 2
+			796 = {
+				is_owned_and_controlled_by = NEE
+			}
+		}
+		visible = {
+			796 = {
+				is_owned_and_controlled_by = NEE
+			}
+		}
+		ai_will_do = {
+			base = 100
+		}
+		days_remove = 90
+		fire_only_once = yes
+		modifier = {
+			civilian_factory_use = 3
+		}
+		cancel_if_not_visible = yes
+		cancel_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision cancel NEE_rebuild_phi_navy_yard target: [From.GetName]"
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_rebuild_phi_navy_yard target: [From.GetName]"
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove NEE_rebuild_phi_navy_yard target: [From.GetName]"
+			796 = {
+				add_extra_state_shared_building_slots = 2
+				add_building_construction = {
+					type = dockyard
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+}
+NEE_navy = {
+	NEE_finish_carrier_order = {
+		icon = generic_naval
+		available = {
+			has_navy_size = {
+				size > 4
+				type = carrier
+				archetype = ship_hull_carrier
+			}
+		}
+		ai_will_do = {
+			base = 100000
+		}
+		fire_only_once = yes
+		days_remove = 180
+		modifier = {
+			industrial_factory_donations = 5
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_finish_carrier_order target: [From.GetName]"
+			custom_effect_tooltip = NEE_transfer_ships
+			transfer_ship = {
+				prefer_name = "HMCS Edward VIII"
+				type = carrier
+				target = CAN
+				exclude_refitting = no
+			}
+			transfer_ship = {
+				prefer_name = "HMCS Warrior"
+				type = carrier
+				target = CAN
+				exclude_refitting = no
+			}
+			transfer_ship = {
+				prefer_name = "HMCS Valiant"
+				type = carrier
+				target = CAN
+				exclude_refitting = no
+			}
+			CAN = {
+				add_timed_idea = {
+					idea = NEE_carrier_payments
+					days = 180
+				}
+				country_event = {
+					id = nee.103
+					hours = 4
+				}
+			}
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove NEE_finish_carrier_order target: [From.GetName]"
+		}
+	}
+	NEE_Canadian_carrier_1 = {
+		icon = generic_naval
+		visible = {
+			has_country_flag = NEE_navy
+		}
+		available = {
+			has_navy_experience > 9.99
+			if = {
+				limit = {
+					has_dlc = "Man the Guns"
+				}
+				has_tech = mtg_1950_ship_hull_carrier
+			}
+			else = {
+				has_tech = wartime_carrier
+			}
+			has_completed_focus = NEE_laying_down_the_next_generation
+		}
+		ai_will_do = {
+			base = 200
+		}
+		cost = 25
+		days_remove = 720
+		fire_only_once = yes
+		modifier = {
+			dockyard_donations = -5
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_Canadian_carrier_1 target: [From.GetName]"
+			navy_experience = -10
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove NEE_Canadian_carrier_1 target: [From.GetName]"
+			CAN = {
+				create_ship = {
+					type = ship_hull_carrier_2
+					equipment_variant = "Hermes Class"
+					name = "HMCS Hermes"
+				}
+			}
+		}
+	}
+	NEE_Canadian_carrier_2 = {
+		icon = generic_naval
+		visible = {
+			has_country_flag = NEE_navy
+		}
+		available = {
+			has_navy_experience > 9.99
+			if = {
+				limit = {
+					has_dlc = "Man the Guns"
+				}
+				has_tech = mtg_1950_ship_hull_carrier
+			}
+			else = {
+				has_tech = wartime_carrier
+			}
+			has_completed_focus = NEE_laying_down_the_next_generation
+		}
+		ai_will_do = {
+			base = 200
+		}
+		cost = 25
+		fire_only_once = yes
+		days_remove = 720
+		modifier = {
+			dockyard_donations = -5
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_Canadian_carrier_2 target: [From.GetName]"
+			navy_experience = -10
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove NEE_Canadian_carrier_2 target: [From.GetName]"
+			CAN = {
+				create_ship = {
+					type = ship_hull_carrier_2
+					equipment_variant = "Hermes Class"
+					name = "HMCS Prince Albert"
+				}
+			}
+		}
+	}
+	NEE_Canadian_carrier_3 = {
+		icon = generic_naval
+		visible = {
+			has_country_flag = NEE_navy
+		}
+		available = {
+			has_navy_experience > 9.99
+			if = {
+				limit = {
+					has_dlc = "Man the Guns"
+				}
+				has_tech = mtg_1950_ship_hull_carrier
+			}
+			else = {
+				has_tech = wartime_carrier
+			}
+			has_completed_focus = NEE_laying_down_the_next_generation
+		}
+		ai_will_do = {
+			base = 200
+		}
+		cost = 25
+		fire_only_once = yes
+		days_remove = 720
+		modifier = {
+			dockyard_donations = -5
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_Canadian_carrier_3 target: [From.GetName]"
+			navy_experience = -10
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove NEE_Canadian_carrier_3 target: [From.GetName]"
+			CAN = {
+				create_ship = {
+					type = ship_hull_carrier_2
+					equipment_variant = "Hermes Class"
+					name = "HMCS Bulwark"
+				}
+			}
+		}
+	}
+}
+NEE_underground_railroad = {
+	NEE_view_all_actions = {
+		icon = GFX_decision_binoculars
+		visible = {
+			NOT = {
+				has_country_flag = NEE_show_infiltration_decisions
+			}
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_view_all_actions target: [From.GetName]"
+			set_country_flag = NEE_show_infiltration_decisions
+		}
+	}
+	NEE_hide_all_actions = {
+		icon = GFX_decision_binoculars
+		visible = {
+			has_country_flag = NEE_show_infiltration_decisions
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_hide_all_actions target: [From.GetName]"
+			clr_country_flag = NEE_show_infiltration_decisions
+		}
+	}
+	NEE_established_stops = {
+		icon = GFX_decision_shield
+		target_array = NEE_established_stops
+		state_target = yes
+		on_map_mode = map_only
+		available = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+	}
+	NEE_open_stop = {
+		icon = GFX_decision_railroad
+		visible = {
+			TEX = {
+				exists = yes
+			}
+			custom_trigger_tooltip = {
+				tooltip = NEE_neighboring_states
+			}
+		}
+		ai_will_do = {
+			base = 200
+			modifier = {
+				check_variable = {
+					NEE_stops_opened > 4
+				}
+				factor = 0.5
+			}
+			modifier = {
+				check_variable = {
+					NEE_stops_opened > 6
+				}
+				factor = 0.5
+			}
+		}
+		available = {
+			custom_trigger_tooltip = {
+				check_variable = {
+					NEE_stops_opened < 4
+				}
+				tooltip = NEE_only_three
+			}
+			if = {
+				limit = {
+					NOT = {
+						OR = {
+							FROM = {
+								state = 360
+							}
+							FROM = {
+								state = 361
+							}
+							FROM = {
+								state = 894
+							}
+						}
+					}
+				}
+				FROM = {
+					any_neighbor_state = {
+						has_state_flag = NEE_underground_railroad_stop
+					}
+				}
+			}
+		}
+		targets = {
+			360
+			894
+			361
+			362
+			795
+			363
+			364
+			365
+			366
+			261
+			369
+			368
+			367
+			370
+			371
+		}
+		target_trigger = {
+			FROM = {
+				is_owned_and_controlled_by = TEX
+			}
+		}
+		cost = 50
+		fire_only_once = yes
+		state_target = yes
+		on_map_mode = map_only
+		days_remove = 180
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_open_stop target: [From.GetName]"
+			add_to_variable = {
+				NEE_stops_opened = 1
+			}
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = -250
+			}
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove NEE_open_stop target: [From.GetName]"
+			add_to_variable = {
+				NEE_stops_opened = -1
+			}
+			FROM = {
+				set_state_flag = NEE_underground_railroad_stop
+				add_manpower = -5000
+			}
+			add_to_array = {
+				array = NEE_established_stops
+				value = FROM
+			}
+			every_owned_state = {
+				add_manpower = 500
+			}
+		}
+	}
+	NEE_expand_stop = {
+		icon = GFX_decision_hol_inundate_water_lines
+		visible = {
+			TEX = {
+				exists = yes
+			}
+			NOT = {
+				has_war_with = TEX
+			}
+			OR = {
+				hidden_trigger = {
+					has_country_flag = NEE_show_infiltration_decisions
+				}
+				FROM = {
+					has_state_flag = NEE_underground_railroad_stop
+				}
+			}
+		}
+		cancel_if_not_visible = yes
+		available = {
+			custom_trigger_tooltip = {
+				check_variable = {
+					NEE_stops_expanded < 4
+				}
+				tooltip = NEE_only_three_expanded
+			}
+			FROM = {
+				has_state_flag = NEE_underground_railroad_stop
+			}
+		}
+		ai_will_do = {
+			base = 100
+		}
+		targets = {
+			360
+			894
+			361
+			362
+			795
+			363
+			364
+			365
+			366
+			261
+			369
+			368
+			367
+			370
+			371
+		}
+		target_trigger = {
+			FROM = {
+				is_owned_and_controlled_by = TEX
+			}
+		}
+		cost = 50
+		fire_only_once = yes
+		state_target = yes
+		on_map_mode = map_only
+		days_remove = 180
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_expand_stop target: [From.GetName]"
+			add_to_variable = {
+				NEE_stops_expanded = 1
+			}
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = 500
+			}
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove NEE_expand_stop target: [From.GetName]"
+			add_to_variable = {
+				NEE_stops_expanded = -1
+			}
+			FROM = {
+				set_state_flag = NEE_underground_railroad_stop_expanded
+				add_manpower = -10000
+			}
+			every_owned_state = {
+				add_manpower = 1000
+			}
+		}
+	}
+	NEE_entice_defectors = {
+		icon = GFX_decision_generic_research
+		visible = {
+			TEX = {
+				exists = yes
+			}
+			OR = {
+				hidden_trigger = {
+					has_country_flag = NEE_show_infiltration_decisions
+				}
+				FROM = {
+					has_state_flag = NEE_underground_railroad_stop
+				}
+			}
+		}
+		cancel_if_not_visible = yes
+		available = {
+			NOT = {
+				has_country_flag = NEE_defectors
+			}
+			FROM = {
+				has_state_flag = NEE_underground_railroad_stop
+			}
+		}
+		targets = {
+			361
+			362
+			365
+			261
+			366
+			371
+		}
+		ai_will_do = {
+			base = 100
+		}
+		target_trigger = {
+			FROM = {
+				is_owned_and_controlled_by = TEX
+			}
+		}
+		cost = 50
+		state_target = yes
+		on_map_mode = map_only
+		days_remove = 180
+		fire_only_once = yes
+		modifier = {
+			research_speed_factor = 0.02
+			production_speed_buildings_factor = 0.02
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_entice_defectors target: [From.GetName]"
+			set_country_flag = NEE_defectors
+			TEX = {
+				add_timed_idea = {
+					idea = NEE_brain_drain
+					days = 120
+				}
+			}
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove NEE_entice_defectors target: [From.GetName]"
+			clr_country_flag = NEE_defectors
+		}
+	}
+	NEE_prepare_sleeper_cells = {
+		icon = GFX_decision_us_flag
+		visible = {
+			TEX = {
+				exists = yes
+			}
+			NOT = {
+				has_war_with = TEX
+			}
+			OR = {
+				hidden_trigger = {
+					has_country_flag = NEE_show_infiltration_decisions
+				}
+				FROM = {
+					has_state_flag = NEE_underground_railroad_stop
+				}
+			}
+		}
+		ai_will_do = {
+			base = 100
+		}
+		cancel_if_not_visible = yes
+		available = {
+			NOT = {
+				has_country_flag = NEE_cells
+				has_war_with = TEX
+			}
+			FROM = {
+				has_state_flag = NEE_underground_railroad_stop
+			}
+		}
+		targets = {
+			360
+			894
+			361
+			362
+			795
+			363
+			364
+			365
+			366
+			261
+			369
+			368
+			367
+			370
+			371
+		}
+		target_trigger = {
+			FROM = {
+				is_owned_and_controlled_by = TEX
+			}
+		}
+		cost = 50
+		fire_only_once = yes
+		state_target = yes
+		on_map_mode = map_only
+		days_remove = 180
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_prepare_sleeper_cells target: [From.GetName]"
+			set_country_flag = NEE_cells
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove NEE_prepare_sleeper_cells target: [From.GetName]"
+			clr_country_flag = NEE_cells
+			custom_effect_tooltip = NEE_prepared_sleeper_cells
+			add_to_array = {
+				array = NEE_sabotaged_states
+				value = FROM
+			}
+		}
+	}
+	NEE_plant_political_sleepers = {
+		icon = GFX_decision_generic_political_discourse
+		visible = {
+			TEX = {
+				exists = yes
+			}
+			NOT = {
+				has_war_with = TEX
+			}
+			OR = {
+				hidden_trigger = {
+					has_country_flag = NEE_show_infiltration_decisions
+				}
+				FROM = {
+					has_state_flag = NEE_underground_railroad_stop_expanded
+				}
+			}
+		}
+		ai_will_do = {
+			base = 100
+		}
+		cancel_if_not_visible = yes
+		available = {
+			NOT = {
+				has_country_flag = NEE_planting_political_sleepers
+			}
+			FROM = {
+				has_state_flag = NEE_underground_railroad_stop
+			}
+		}
+		targets = {
+			360
+			894
+			361
+			362
+			795
+			363
+			364
+			365
+			366
+			261
+			369
+			368
+			367
+			370
+			371
+		}
+		target_trigger = {
+			FROM = {
+				is_owned_and_controlled_by = TEX
+			}
+		}
+		cost = 50
+		fire_only_once = yes
+		state_target = yes
+		on_map_mode = map_only
+		days_remove = 180
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_plant_political_sleepers target: [From.GetName]"
+			set_country_flag = NEE_planting_political_sleepers
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = 250
+			}
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove NEE_plant_political_sleepers target: [From.GetName]"
+			clr_country_flag = NEE_planting_political_sleepers
+			FROM = {
+				set_state_flag = NEE_political_cells_planted
+				custom_effect_tooltip = NEE_add_political_sleepers_idea
+				hidden_effect = {
+					set_variable = {
+						state_idea = 1
+					}
+					add_to_array = {
+						array = state_idea_array
+						value = 50
+					}
+					add_dynamic_modifier = {
+						modifier = TEX_NEE_political_sleepers
+					}
+					add_to_variable = {
+						TEX_NEE_political_sleepers_var = -0.1
+					}
+				}
+			}
+		}
+	}
+}
+NEE_gray_eyes = {
+	NEE_build_low_level_contacts = {
+		icon = GFX_decision_onmap_recruit_operative
+		visible = {
+			NOT = {
+				has_country_flag = NEE_gray_eyes_activated
+			}
+		}
+		ai_will_do = {
+			base = 200
+		}
+		cancel_if_not_visible = yes
+		days_remove = 30
+		days_re_enable = 15
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_build_low_level_contacts target: [From.GetName]"
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove NEE_build_low_level_contacts target: [From.GetName]"
+			custom_effect_tooltip = NEE_if_this_mission_succeeds
+			effect_tooltip = {
+				add_to_variable = {
+					NEE_infiltration_level = 5
+					tooltip = NEE_infiltration_level_tt
+				}
+				clamp_temp_variable = {
+					var = NEE_infiltration_level
+					min = 0
+					max = 100
+				}
+				country_event = {
+					id = nee_ge.2
+				}
+			}
+			custom_effect_tooltip = NEE_this_missions_success_is_dependant_on
+			hidden_effect = {
+				set_variable = {
+					NEE_infiltration_level_success = NEE_infiltration_level
+				}
+				multiply_variable = {
+					NEE_infiltration_level_success = -1
+				}
+				subtract_from_variable = {
+					NEE_infiltration_level_success = -100
+				}
+				set_variable = {
+					NEE_infiltration_level_fail = NEE_infiltration_level_success
+				}
+				multiply_variable = {
+					NEE_infiltration_level_fail = -1
+				}
+				subtract_from_variable = {
+					NEE_infiltration_level_fail = -100
+				}
+				if = {
+					limit = {
+						check_variable = {
+							NEE_infiltration_level_success < 25
+						}
+					}
+					set_variable = {
+						NEE_infiltration_level_success = 25
+					}
+					set_variable = {
+						NEE_infiltration_level_fail = 75
+					}
+				}
+				random_list = {
+					NEE_infiltration_level_fail = {
+						add_to_variable = {
+							NEE_infiltration_level = -2
+							tooltip = NEE_infiltration_level_tt
+						}
+						clamp_temp_variable = {
+							var = NEE_infiltration_level
+							min = 0
+							max = 100
+						}
+						country_event = {
+							id = nee_ge.3
+						}
+						TEX = {
+							add_to_variable = {
+								TEX_suspicion = 1
+							}
+						}
+					}
+					NEE_infiltration_level_success = {
+						add_to_variable = {
+							NEE_infiltration_level = 5
+							tooltip = NEE_infiltration_level_tt
+						}
+						clamp_temp_variable = {
+							var = NEE_infiltration_level
+							min = 0
+							max = 100
+						}
+						country_event = {
+							id = nee_ge.2
+						}
+					}
+				}
+				clear_variable = NEE_infiltration_level_success
+				clear_variable = NEE_infiltration_level_fail
+			}
+		}
+	}
+	NEE_establish_contacts_in_state_legislature = {
+		icon = GFX_decision_SWI_expand_covert_operations
+		visible = {
+			NOT = {
+				has_country_flag = NEE_gray_eyes_activated
+			}
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = NEE_infiltration_level_15
+				check_variable = {
+					NEE_infiltration_level > 14
+				}
+			}
+		}
+		ai_will_do = {
+			base = 200
+		}
+		cancel_if_not_visible = yes
+		days_remove = 45
+		days_re_enable = 30
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_establish_contacts_in_state_legislature target: [From.GetName]"
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove NEE_establish_contacts_in_state_legislature target: [From.GetName]"
+			custom_effect_tooltip = NEE_if_this_mission_succeeds
+			effect_tooltip = {
+				add_to_variable = {
+					NEE_infiltration_level = 10
+					tooltip = NEE_infiltration_level_tt
+				}
+				clamp_temp_variable = {
+					var = NEE_infiltration_level
+					min = 0
+					max = 100
+				}
+				country_event = {
+					id = nee_ge.4
+				}
+			}
+			custom_effect_tooltip = NEE_this_missions_success_is_dependant_on_2
+			hidden_effect = {
+				set_variable = {
+					NEE_infiltration_level_success = NEE_infiltration_level
+				}
+				add_to_variable = {
+					NEE_infiltration_level_success = 25
+				}
+				if = {
+					limit = {
+						check_variable = {
+							NEE_infiltration_level_success > 75
+						}
+					}
+					subtract_from_variable = {
+						NEE_infiltration_level_success = 75
+					}
+					multiply_variable = {
+						NEE_infiltration_level_success = -1
+					}
+					add_to_variable = {
+						NEE_infiltration_level_success = 75
+					}
+				}
+				set_variable = {
+					NEE_infiltration_level_fail = NEE_infiltration_level_success
+				}
+				multiply_variable = {
+					NEE_infiltration_level_fail = -1
+				}
+				subtract_from_variable = {
+					NEE_infiltration_level_fail = -100
+				}
+				if = {
+					limit = {
+						check_variable = {
+							NEE_infiltration_level_success < 15
+						}
+					}
+					set_variable = {
+						NEE_infiltration_level_success = 15
+					}
+					set_variable = {
+						NEE_infiltration_level_fail = 85
+					}
+				}
+				random_list = {
+					NEE_infiltration_level_fail = {
+						random_list = {
+							75 = {
+								country_event = {
+									id = nee_ge.5
+								}
+								TEX = {
+									add_to_variable = {
+										TEX_suspicion = 1
+									}
+								}
+							}
+							25 = {
+								country_event = {
+									id = nee_ge.6
+								}
+								TEX = {
+									add_to_variable = {
+										TEX_suspicion = 2
+									}
+								}
+							}
+						}
+					}
+					NEE_infiltration_level_success = {
+						add_to_variable = {
+							NEE_infiltration_level = 10
+							tooltip = NEE_infiltration_level_tt
+						}
+						clamp_temp_variable = {
+							var = NEE_infiltration_level
+							min = 0
+							max = 100
+						}
+						country_event = {
+							id = nee_ge.4
+						}
+					}
+				}
+				clear_variable = NEE_infiltration_level_success
+				clear_variable = NEE_infiltration_level_fail
+			}
+		}
+	}
+	NEE_infiltrate_national_guard_units = {
+		icon = GFX_decision_soldierly_discipline
+		visible = {
+			NOT = {
+				has_country_flag = NEE_gray_eyes_activated
+			}
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = NEE_infiltration_level_25
+				check_variable = {
+					NEE_infiltration_level > 24
+				}
+			}
+		}
+		ai_will_do = {
+			base = 200
+		}
+		custom_cost_text = NEE_250_guns
+		custom_cost_trigger = {
+			has_equipment = {
+				infantry_equipment > 249
+			}
+		}
+		cancel_if_not_visible = yes
+		days_remove = 30
+		days_re_enable = 20
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_infiltrate_national_guard_units target: [From.GetName]"
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = -250
+			}
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove NEE_infiltrate_national_guard_units target: [From.GetName]"
+			custom_effect_tooltip = NEE_if_this_mission_succeeds
+			effect_tooltip = {
+				add_to_variable = {
+					NEE_infiltration_level = 5
+					tooltip = NEE_infiltration_level_tt
+				}
+				clamp_temp_variable = {
+					var = NEE_infiltration_level
+					min = 0
+					max = 100
+				}
+				country_event = {
+					id = nee_ge.7
+				}
+			}
+			custom_effect_tooltip = NEE_this_missions_success_is_dependant_on
+			hidden_effect = {
+				set_variable = {
+					NEE_infiltration_level_success = NEE_infiltration_level
+				}
+				multiply_variable = {
+					NEE_infiltration_level_success = -1
+				}
+				subtract_from_variable = {
+					NEE_infiltration_level_success = -100
+				}
+				set_variable = {
+					NEE_infiltration_level_fail = NEE_infiltration_level_success
+				}
+				multiply_variable = {
+					NEE_infiltration_level_fail = -1
+				}
+				subtract_from_variable = {
+					NEE_infiltration_level_fail = -100
+				}
+				if = {
+					limit = {
+						check_variable = {
+							NEE_infiltration_level_success < 25
+						}
+					}
+					set_variable = {
+						NEE_infiltration_level_success = 25
+					}
+					set_variable = {
+						NEE_infiltration_level_fail = 75
+					}
+				}
+				random_list = {
+					NEE_infiltration_level_fail = {
+						random_list = {
+							75 = {
+								country_event = {
+									id = nee_ge.8
+								}
+								TEX = {
+									add_to_variable = {
+										TEX_suspicion = 2
+									}
+								}
+							}
+							25 = {
+								country_event = {
+									id = nee_ge.9
+								}
+								TEX = {
+									add_to_variable = {
+										TEX_suspicion = 3
+									}
+								}
+							}
+						}
+					}
+					NEE_infiltration_level_success = {
+						add_to_variable = {
+							NEE_infiltration_level = 10
+							tooltip = NEE_infiltration_level_tt
+						}
+						clamp_temp_variable = {
+							var = NEE_infiltration_level
+							min = 0
+							max = 100
+						}
+						country_event = {
+							id = nee_ge.7
+						}
+					}
+				}
+				clear_variable = NEE_infiltration_level_success
+				clear_variable = NEE_infiltration_level_fail
+			}
+		}
+	}
+	NEE_flip_national_guard_command = {
+		icon = GFX_decision_generic_army_support
+		visible = {
+			NOT = {
+				has_country_flag = NEE_gray_eyes_activated
+			}
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = NEE_infiltration_level_70
+				check_variable = {
+					NEE_infiltration_level > 69
+				}
+			}
+		}
+		ai_will_do = {
+			base = 200
+		}
+		cancel_if_not_visible = yes
+		days_remove = 30
+		days_re_enable = 45
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_flip_national_guard_command target: [From.GetName]"
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove NEE_flip_national_guard_command target: [From.GetName]"
+			custom_effect_tooltip = NEE_if_this_mission_succeeds
+			effect_tooltip = {
+				add_to_variable = {
+					NEE_infiltration_level = 5
+					tooltip = NEE_infiltration_level_tt
+				}
+				clamp_temp_variable = {
+					var = NEE_infiltration_level
+					min = 0
+					max = 100
+				}
+				country_event = {
+					id = nee_ge.10
+				}
+				custom_effect_tooltip = NEE_governor_available
+			}
+			custom_effect_tooltip = NEE_this_missions_success_is_dependant_on_3
+			hidden_effect = {
+				random_list = {
+					50 = {
+						random_list = {
+							75 = {
+								country_event = {
+									id = nee_ge.11
+								}
+								TEX = {
+									add_to_variable = {
+										TEX_suspicion = 5
+									}
+								}
+							}
+							25 = {
+								country_event = {
+									id = nee_ge.12
+								}
+								TEX = {
+									add_to_variable = {
+										TEX_suspicion = 10
+									}
+								}
+							}
+						}
+					}
+					50 = {
+						set_country_flag = NEE_guard_command_flipped
+						add_to_variable = {
+							NEE_infiltration_level = 5
+							tooltip = NEE_infiltration_level_tt
+						}
+						clamp_temp_variable = {
+							var = NEE_infiltration_level
+							min = 0
+							max = 100
+						}
+						country_event = {
+							id = nee_ge.10
+						}
+					}
+				}
+				clear_variable = NEE_infiltration_level_success
+				clear_variable = NEE_infiltration_level_fail
+			}
+		}
+	}
+	NEE_contact_the_governor = {
+		icon = GFX_decision_SWI_elect_confederation_president
+		visible = {
+			NOT = {
+				has_country_flag = NEE_gray_eyes_activated
+			}
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = NEE_infiltration_level_80
+				check_variable = {
+					NEE_infiltration_level > 79
+				}
+			}
+			has_country_flag = NEE_guard_command_flipped
+		}
+		ai_will_do = {
+			base = 200
+		}
+		cancel_if_not_visible = yes
+		days_remove = 15
+		fire_only_once = yes
+		cost = 50
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_contact_the_governor target: [From.GetName]"
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove NEE_contact_the_governor target: [From.GetName]"
+			custom_effect_tooltip = NEE_if_this_mission_succeeds
+			effect_tooltip = {
+				add_to_variable = {
+					NEE_infiltration_level = 10
+					tooltip = NEE_infiltration_level_tt
+				}
+				clamp_temp_variable = {
+					var = NEE_infiltration_level
+					min = 0
+					max = 100
+				}
+				country_event = {
+					id = nee_ge.13
+				}
+				custom_effect_tooltip = NEE_gray_eyes_ready
+			}
+			custom_effect_tooltip = NEE_this_missions_success_is_dependant_on_4
+			hidden_effect = {
+				set_variable = {
+					NEE_infiltration_level_success = NEE_infiltration_level
+				}
+				subtract_from_variable = {
+					NEE_infiltration_level_success = -15
+				}
+				if = {
+					limit = {
+						360 = {
+							check_variable = {
+								electoral_lean = 4
+							}
+						}
+					}
+					add_to_variable = {
+						NEE_infiltration_level_success = 10
+					}
+				}
+				set_variable = {
+					NEE_infiltration_level_fail = NEE_infiltration_level_success
+				}
+				multiply_variable = {
+					NEE_infiltration_level_fail = -1
+				}
+				subtract_from_variable = {
+					NEE_infiltration_level_fail = -100
+				}
+				random_list = {
+					NEE_infiltration_level_fail = {
+						country_event = {
+							id = nee_ge.14
+						}
+						TEX = {
+							add_to_variable = {
+								TEX_suspicion = 50
+							}
+						}
+					}
+					NEE_infiltration_level_success = {
+						set_country_flag = NEE_governor_flipped
+						add_to_variable = {
+							NEE_infiltration_level = 5
+							tooltip = NEE_infiltration_level_tt
+						}
+						clamp_temp_variable = {
+							var = NEE_infiltration_level
+							min = 0
+							max = 100
+						}
+						country_event = {
+							id = nee_ge.13
+						}
+					}
+				}
+				clear_variable = NEE_infiltration_level_success
+				clear_variable = NEE_infiltration_level_fail
+			}
+		}
+	}
+	NEE_launch_operation_gray_eyes = {
+		icon = GFX_decision_infiltration
+		visible = {
+			NOT = {
+				has_country_flag = NEE_gray_eyes_activated
+			}
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = NEE_infiltration_level_80
+				check_variable = {
+					NEE_infiltration_level > 79
+				}
+			}
+			has_country_flag = NEE_guard_command_flipped
+			has_country_flag = NEE_governor_flipped
+		}
+		ai_will_do = {
+			base = 200
+		}
+		cancel_if_not_visible = yes
+		fire_only_once = yes
+		cost = 50
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_launch_operation_gray_eyes target: [From.GetName]"
+			set_country_flag = NEE_gray_eyes_activated
+			country_event = {
+				id = nee_ge.15
+				days = 2
+			}
+		}
+	}
+}

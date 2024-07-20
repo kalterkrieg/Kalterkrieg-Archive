@@ -1,0 +1,2486 @@
+add_namespace = fra_debug
+add_namespace = fra_ai
+add_namespace = fra_occupation
+add_namespace = fra_rev
+add_namespace = fra_news
+# Debug Events
+# Regency Council Created
+country_event = {
+	id = fra_debug.0
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event nfa.13 FROM = [From.GetName]"
+	}
+	title = fra_debug.0.t
+	desc = fra_debug.0.d
+	picture = GFX_ce_entente_march
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = fra_debug.0.a
+		FRA_regency_council = {
+			promote_character = paternal_autocrat_corporatism
+		}
+		clr_country_flag = con_ineligible
+	}
+}
+
+# AI Events
+# Path Setting
+country_event = {
+	id = fra_ai.1
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event fra_ai.1 FROM = [From.GetName]"
+	}
+	title = fra_ai.1.t
+	desc = fra_ai.1.d
+	fire_only_once = yes
+	is_triggered_only = yes
+	option = {
+		name = fra_ai.1.a
+		ai_chance = {
+			base = 15
+			modifier = {
+				has_game_rule = {
+					rule = FRA_CONSEIL_DETAT
+					option = FRA_CONSEIL_DETAT_LEFT_WING
+				}
+				factor = 1000
+			}
+		}
+		set_country_flag = FRA_ai_left_wing_bias
+		log = "[GetDateText]: [Root.GetName]: event fra_ai.1.a"
+	}
+	option = {
+		name = fra_ai.2.a
+		ai_chance = {
+			base = 30
+			modifier = {
+				has_game_rule = {
+					rule = FRA_CONSEIL_DETAT
+					option = FRA_CONSEIL_DETAT_TECHNOCRATIC
+				}
+				factor = 1000
+			}
+		}
+		set_country_flag = FRA_ai_technocratic_bias
+		log = "[GetDateText]: [Root.GetName]: event fra_ai.1.b"
+	}
+	option = {
+		name = fra_ai.3.a
+		ai_chance = {
+			base = 30
+			modifier = {
+				has_game_rule = {
+					rule = FRA_CONSEIL_DETAT
+					option = FRA_CONSEIL_DETAT_AGRICULTURIST
+				}
+				factor = 1000
+			}
+		}
+		set_country_flag = FRA_ai_agriculturist_bias
+		log = "[GetDateText]: [Root.GetName]: event fra_ai.1.c"
+	}
+	option = {
+		name = fra_ai.4.a
+		ai_chance = {
+			base = 25
+			modifier = {
+				has_game_rule = {
+					rule = FRA_CONSEIL_DETAT
+					option = FRA_CONSEIL_DETAT_EXTREMIST
+				}
+				factor = 1000
+			}
+		}
+		set_country_flag = FRA_ai_extremist_bias
+		log = "[GetDateText]: [Root.GetName]: event fra_ai.1.d"
+	}
+}
+
+# German Occupation Events
+# Rooting Out Lingering Resistance
+country_event = {
+	id = fra_occupation.1
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event fra_occupation.1 FROM = [From.GetName]"
+	}
+	title = fra_occupation.1.t
+	desc = {
+		text = fra_occupation.1.d.a
+		trigger = {
+			NOT = {
+				has_idea = FRA_lingering_spectre_4
+			}
+		}
+	}
+	desc = {
+		text = fra_occupation.1.d.b
+		trigger = {
+			has_idea = FRA_lingering_spectre_4
+		}
+	}
+	is_triggered_only = yes
+	trigger = {
+		OR = {
+			has_idea = FRA_lingering_spectre_1
+			has_idea = FRA_lingering_spectre_2
+			has_idea = FRA_lingering_spectre_3
+			has_idea = FRA_lingering_spectre_4
+		}
+	}
+	immediate = {
+		hidden_effect = {
+			if = {
+				limit = {
+					OR = {
+						has_completed_focus = FRA_amnesty_for_commune_officials
+						has_completed_focus = FRA_the_guilt_of_a_nation
+					}
+				}
+				country_event = {
+					id = fra_occupation.1
+					days = 75
+					random_days = 10
+				}
+			}
+			else = {
+				country_event = {
+					id = fra_occupation.1
+					days = 100
+					random_days = 10
+				}
+			}
+		}
+	}
+	option = {
+		name = fra_occupation.1.a
+		FRA_remove_lingering_spectre = yes
+		if = {
+			limit = {
+				has_completed_focus = FRA_amnesty_for_commune_officials
+			}
+			add_political_power = -60
+			add_manpower = -500
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = -250
+			}
+		}
+		else_if = {
+			limit = {
+				has_completed_focus = FRA_the_guilt_of_a_nation
+			}
+			add_political_power = -30
+			add_manpower = -250
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = -125
+			}
+		}
+		else = {
+			add_political_power = -30
+			add_manpower = -250
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = -125
+			}
+		}
+	}
+}
+
+# Military Factory Conversion Complete
+country_event = {
+	id = fra_occupation.2
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event fra_occupation.2 FROM = [From.GetName]"
+	}
+	title = fra_occupation.2.t
+	desc = fra_occupation.2.d
+	picture = GFX_ce_factory
+	is_triggered_only = yes
+	option = {
+		name = fra_occupation.2.a
+		every_owned_state = {
+			limit = {
+				has_state_flag = FRA_repurpose_war_industry_civilian_factory
+			}
+			add_building_construction = {
+				type = industrial_complex
+				level = 2
+				instant_build = yes
+			}
+		}
+	}
+}
+
+# Henri d'Orleans Arrives in Paris
+country_event = {
+	id = fra_occupation.3
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event fra_occupation.3 FROM = [From.GetName]"
+	}
+	title = fra_occupation.3.t
+	desc = fra_occupation.3.d
+	picture = GFX_ce_fra_henri_military
+	is_triggered_only = yes
+	option = {
+		name = fra_occupation.3.a
+		set_country_flag = FRA_henri_d_orleans_arrived_flag
+	}
+}
+
+# The Media Coup
+country_event = {
+	id = fra_occupation.4
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event fra_occupation.4 FROM = [From.GetName]"
+	}
+	title = fra_occupation.4.t
+	desc = fra_occupation.4.d
+	picture = GFX_ce_fra_media_coup
+	is_triggered_only = yes
+	option = {
+		name = fra_occupation.4.a
+		hidden_effect = {
+			country_event = {
+				id = fra_occupation.5
+				days = 7
+			}
+		}
+	}
+}
+
+# A Meeting in Paris
+country_event = {
+	id = fra_occupation.5
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event fra_occupation.5 FROM = [From.GetName]"
+	}
+	title = fra_occupation.5.t
+	desc = fra_occupation.5.d
+	picture = GFX_ce_fra_fedor_von_bock
+	is_triggered_only = yes
+	option = {
+		name = fra_occupation.5.a
+		add_political_power = 50
+		hidden_effect = {
+			country_event = {
+				id = fra_occupation.7
+				days = 100
+				random_days = 25
+			}
+			country_event = {
+				id = fra_occupation.8
+				days = 200
+				random_days = 25
+			}
+		}
+	}
+}
+
+# Affairs of the Council of State
+country_event = {
+	id = fra_occupation.6
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event fra_occupation.6 FROM = [From.GetName]"
+	}
+	title = fra_occupation.6.t
+	desc = fra_occupation.6.d
+	picture = GFX_ce_fra_conseil_d_etat
+	is_triggered_only = yes
+	option = {
+		name = fra_occupation.6.a
+		add_political_power = 50
+	}
+}
+
+# New Monthly Journal
+country_event = {
+	id = fra_occupation.7
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event fra_occupation.7 FROM = [From.GetName]"
+	}
+	title = fra_occupation.7.t
+	desc = fra_occupation.7.d
+	picture = GFX_ce_fra_media_coup
+	is_triggered_only = yes
+	option = {
+		name = fra_occupation.7.a
+		FRA_upgrade_media_coup = yes
+	}
+}
+
+# Henri On the Radio
+country_event = {
+	id = fra_occupation.8
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event fra_occupation.8 FROM = [From.GetName]"
+	}
+	title = fra_occupation.8.t
+	desc = fra_occupation.8.d
+	picture = GFX_ce_fra_media_coup
+	is_triggered_only = yes
+	option = {
+		name = fra_occupation.8.a
+		FRA_upgrade_media_coup = yes
+	}
+}
+
+# Resignation of Fedor von Bock
+country_event = {
+	id = fra_occupation.9
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event fra_occupation.9 FROM = [From.GetName]"
+	}
+	title = fra_occupation.9.t
+	desc = fra_occupation.9.d
+	picture = GFX_ce_fra_fedor_von_bock
+	is_triggered_only = yes
+	immediate = {
+		hidden_effect = {
+			set_party_name = {
+				ideology = paternal_autocrat
+				name = FRA_paternal_autocrat_party_regency_council
+				long_name = FRA_paternal_autocrat_party_regency_council_long
+			}
+		}
+	}
+	option = {
+		name = fra_occupation.9.a
+		set_politics = {
+			ruling_party = paternal_autocrat
+			elections_allowed = no
+		}
+		hidden_effect = {
+			coal_add_mar_lib = yes
+			coal_add_pat_aut = yes
+			coal_add_auth_dem = yes
+			coal_add_soc_con = yes
+		}
+		FRA_regency_council = {
+			promote_character = paternal_autocrat_corporatism
+		}
+		FRA_fedor_von_bock = {
+			set_nationality = GER
+		}
+		transfer_units_fraction = {
+			target = GER
+			size = 1
+			stockpile_ratio = 0
+			army_ratio = 1
+			navy_ratio = 0
+			air_ratio = 0
+			keep_unit_leaders_trigger = {
+				always = no
+			}
+		}
+		GER = { 
+			country_event = {
+				id = fra_occupation.14 #return of the troops
+			}
+		}
+		MIT_add_to_mitteleuropa = yes
+		remove_ideas = FRA_german_occupation
+		GER = {
+			FRA = {
+				get_current_government_type = yes
+			}
+			if = {
+				limit = {
+					has_subject_autonomy_feature = yes
+				}
+				set_autonomy = {
+					target = FRA
+					autonomous_state = krg_herrschaftsgebiet
+				}
+			}
+			else = {
+				puppet = FRA
+			}
+			save_event_target_as = on_puppet_master_tag
+			FRA = {
+				standard_on_puppet_effect = yes
+				restore_previous_government_type = yes
+			}
+		}
+		hidden_effect = {
+			country_event = {
+				id = fra_occupation.10
+				days = 5
+			}
+		}
+	}
+}
+
+# The Parisian Government Charter
+country_event = {
+	id = fra_occupation.10
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event fra_occupation.10 FROM = [From.GetName]"
+		complete_national_focus = FRA_the_regencys_mission
+	}
+	title = fra_occupation.10.t
+	desc = fra_occupation.10.d
+	picture = GFX_ce_fra_conseil_d_etat
+	is_triggered_only = yes
+	option = {
+		name = fra_occupation.10.a
+		if = {
+			limit = {
+				has_completed_focus = FRA_mimic_the_bredow_system
+			}
+			swap_ideas = {
+				remove_idea = KRG_military_occupation
+				add_idea = KRG_bredowist_system
+			}
+		}
+		else = {
+			swap_ideas = {
+				remove_idea = KRG_military_occupation
+				add_idea = KRG_authoritarian_system
+			}
+		}
+	}
+}
+
+# Coronation of Henri VI
+country_event = {
+	id = fra_occupation.11
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event fra_occupation.11 FROM = [From.GetName]"
+	}
+	title = fra_occupation.11.t
+	desc = fra_occupation.11.d
+	picture = GFX_ce_fra_henri_2
+	is_triggered_only = yes
+	immediate = {
+		hidden_effect = {
+			set_party_name = {
+				ideology = paternal_autocrat
+				name = FRA_paternal_autocrat_party
+				long_name = FRA_paternal_autocrat_party_long
+			}
+		}
+	}
+	option = {
+		name = fra_occupation.11.a
+		set_politics = {
+			ruling_party = paternal_autocrat
+			elections_allowed = no
+		}
+		FRA_henri_vi = {
+			promote_character = paternal_autocrat_corporatism
+		}
+		remove_ideas = FRA_the_media_coup_4
+		clr_country_flag = con_ineligible
+		hidden_effect = {
+			set_cosmetic_tag = FRA_kingdom
+			FRA_henri_vi = {
+				promote_character = market_liberal_christian_democracy
+			}
+			FRA_henri_vi = {
+				promote_character = social_conservative_christian_democracy
+			}
+			FRA_henri_vi = {
+				promote_character = authoritarian_democrat_democratic_corporatism
+			}
+			FRA_henri_vi = {
+				promote_character = national_populist_clerical_nationalism
+			}
+			coal_add_auth_dem = yes
+			coal_add_nat_pop = yes
+			coal_add_soc_con = yes
+			# country_event = {
+			# 	id = fra_occupation.101
+			# 	days = 365
+			# }
+		}
+		news_event = fra_news.1
+	}
+}
+
+country_event = {
+	#German administrators go home
+	id = fra_occupation.12
+	title = fra_occupation.12.t
+	desc = fra_occupation.12.d
+	is_triggered_only = yes
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event fra_occupation.12 FROM = [From.GetName]"
+	}
+	option = {
+		name = fra_occupation.12.a
+		add_stability = -0.02
+		add_political_power = 25
+	}
+}
+
+country_event = {
+	#The French Disease
+	id = fra_occupation.13
+	title = fra_occupation.13.t
+	desc = fra_occupation.13.d
+	is_triggered_only = yes
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event fra_occupation.13 FROM = [From.GetName]"
+	}
+	option = {
+		name = fra_occupation.13.a
+		add_ideas = FRA_French_Disease
+	}
+}
+
+news_event = {
+	#The Troops Return
+	id = fra_occupation.14
+	title = fra_occupation.14.t
+	desc = fra_occupation.14.d
+	is_triggered_only = yes
+	picture = GFX_ne_GER_troops
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event fra_occupation.14 FROM = [From.GetName]"
+	}
+	option = {
+		name = fra_occupation.14.a
+	}
+}
+
+#New Parties Form (used to be a test event)
+country_event = {
+	id = fra_occupation.100
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event fra_occupation.100 FROM = [From.GetName]"
+	}
+	title = fra_occupation.100.t
+	desc = fra_occupation.100.d
+	# picture = 
+	is_triggered_only = yes
+	option = {
+		#Ah, Democracy!
+		name = fra_occupation.100.a
+		custom_effect_tooltip = fra_occupation.100.tooltip
+		hidden_effect = {
+			set_party_name = {
+				ideology = social_conservative
+				name = FRA_partisan_soccon_party
+				long_name = FRA_partisan_soccon_party_long
+			}
+			set_party_name = {
+				ideology = authoritarian_democrat
+				name = FRA_partisan_authdem_party
+				long_name = FRA_partisan_authdem_party_long
+			}
+			set_party_name = {
+				ideology = paternal_autocrat
+				name = FRA_partisan_pataut_party
+				long_name = FRA_partisan_pataut_party_long
+			}
+			set_party_name = {
+				ideology = national_populist
+				name = FRA_partisan_natpop_party
+				long_name = FRA_partisan_natpop_party_long
+			}
+			set_popularities = {
+				authoritarian_socialist = 1
+				radical_socialist = 5
+				social_democrat = 3
+				revolutionary_republican = 3
+				social_liberal = 6
+				market_liberal = 2
+				social_conservative = 22
+				authoritarian_democrat = 15
+				paternal_autocrat = 21
+				national_populist = 22
+			}
+		}
+	}
+}
+
+country_event = {
+	#The Founding of the National Front
+	id = fra_occupation.102
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event fra_occupation.102 FROM = [From.GetName]"
+	}
+	title = fra_occupation.102.t
+	desc = fra_occupation.102.d
+	is_triggered_only = yes
+	option = {
+		name = fra_occupation.102.a
+		set_party_name = {
+			ideology = social_conservative
+			name = FRA_NF_soccon_party
+			long_name = FRA_NF_soccon_party_long
+		}
+		set_party_name = {
+			ideology = authoritarian_democrat
+			name = FRA_NF_authdem_party
+			long_name = FRA_NF_authdem_party_long
+		}
+		set_party_name = {
+			ideology = paternal_autocrat
+			name = FRA_NF_pataut_party
+			long_name = FRA_NF_pataut_party_long
+		}
+		set_party_name = {
+			ideology = national_populist
+			name = FRA_NF_natpop_party
+			long_name = FRA_NF_natpop_party_long
+		}
+		
+	}
+}
+
+country_event = {
+	#Picking a Candidate
+	id = fra_occupation.103
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event fra_occupation.103 FROM = [From.GetName]"
+	}
+	title = fra_occupation.103.t
+	desc = fra_occupation.103.d
+	is_triggered_only = yes
+	option = {
+		#Left
+		name = fra_occupation.103.a
+		set_temp_variable = {
+			temp_faction = 1
+		}
+		set_temp_variable = {
+			temp_value = 4
+		}
+		FRA_council_of_state_modify_power = yes
+		ai_chance = {
+			base = 25
+			modifier = {
+				factor = 5
+				has_country_flag = FRA_ai_left_wing_bias
+			}
+		}
+		trigger = {
+			has_completed_focus = FRA_enforce_a_political_direction
+		}
+	}
+	option = {
+		#Extremists
+		name = fra_occupation.103.b
+		set_temp_variable = {
+			temp_faction = 6
+		}
+		set_temp_variable = {
+			temp_value = 4
+		}
+		FRA_council_of_state_modify_power = yes
+		ai_chance = {
+			base = 25
+			modifier = {
+				factor = 5
+				has_country_flag = FRA_ai_extremist_bias
+			}
+		}
+		trigger = {
+			has_completed_focus = FRA_enforce_a_political_direction
+		}
+	}
+	option = {
+		#Technocrats
+		name = fra_occupation.103.a2
+		set_temp_variable = {
+			temp_faction = 4
+		}
+		set_temp_variable = {
+			temp_value = 4
+		}
+		FRA_council_of_state_modify_power = yes
+		ai_chance = {
+			base = 25
+			modifier = {
+				factor = 5
+				has_country_flag = FRA_ai_technocratic_bias
+			}
+		}
+		trigger = {
+			has_completed_focus = FRA_the_pluralist_front
+		}
+	}
+	option = {
+		#AgriCon
+		name = fra_occupation.103.b2
+		set_temp_variable = {
+			temp_faction = 2
+		}
+		set_temp_variable = {
+			temp_value = 4
+		}
+		FRA_council_of_state_modify_power = yes
+		ai_chance = {
+			base = 25
+			modifier = {
+				factor = 5
+				has_country_flag = FRA_ai_agriculturist_bias
+			}
+		}
+		trigger = {
+			has_completed_focus = FRA_the_pluralist_front
+		}
+	}
+}
+
+country_event = {
+	#The Democratic Formation
+	id = fra_occupation.104
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event fra_occupation.104 FROM = [From.GetName]"
+	}
+	title = fra_occupation.104.t
+	desc = fra_occupation.104.d
+	is_triggered_only = yes
+	option = {
+		name = fra_occupation.104.a
+		add_political_power = 50
+		
+	}
+}
+
+country_event = {
+	#May Day
+	id = fra_occupation.105
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event fra_occupation.105 FROM = [From.GetName]"
+	}
+	title = fra_occupation.105.t
+	desc = fra_occupation.105.d
+	is_triggered_only = yes
+	trigger = {
+		OR = {
+			has_idea = FRA_lingering_spectre_1
+			has_idea = FRA_lingering_spectre_2
+			has_idea = FRA_lingering_spectre_3
+			has_idea = FRA_lingering_spectre_4
+		}
+	}
+	option = {
+		name = fra_occupation.105.a
+		add_political_power = -25
+		add_manpower = -50
+		add_equipment_to_stockpile = {
+			type = infantry_equipment
+			amount = -150
+		}
+		add_popularity = {
+			ideology = authoritarian_socialist
+			popularity = -0.01
+		}
+		add_popularity = {
+			ideology = radical_socialist
+			popularity = -0.01
+		}
+		hidden_effect = {
+			country_event = {
+				id = fra_occupation.105
+				days = 365
+			}
+		}
+	}
+}
+
+### News Events ###
+news_event = {
+	id = fra_news.1
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event fra_news.1 FROM = [From.GetName]"
+	}
+	title = fra_news.1.t
+	desc = fra_news.1.desc
+	picture = GFX_ne_fra_coronation
+	major = yes
+	is_triggered_only = yes
+	option = {
+		name = fra_news.1.a
+	}
+}
+
+news_event = {
+	id = fra_news.2
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event fra_news.2 FROM = [From.GetName]"
+	}
+	title = fra_news.2.t
+	desc = fra_news.2.d
+	picture = GFX_ne_FRA_edlv
+	major = yes
+	is_triggered_only = yes
+	option = {
+		name = fra_news.2.a
+	}
+}
+
+news_event = {
+	id = fra_news.3
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event fra_news.3 FROM = [From.GetName]"
+	}
+	title = fra_news.3.t
+	desc = fra_news.3.d
+	picture = GFX_ne_FRA_pp
+	major = yes
+	is_triggered_only = yes
+	option = {
+		name = fra_news.3.a
+	}
+}
+
+news_event = {
+	id = fra_news.4
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event fra_news.4 FROM = [From.GetName]"
+	}
+	title = fra_news.4.t
+	desc = fra_news.4.d
+	picture = GFX_ne_FRA_rb
+	major = yes
+	is_triggered_only = yes
+	option = {
+		name = fra_news.4.a
+	}
+}
+
+news_event = {
+	id = fra_news.5
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event fra_news.5 FROM = [From.GetName]"
+	}
+	title = fra_news.5.t
+	desc = fra_news.5.d
+ 	picture = GFX_ne_FRA_ph
+	major = yes
+	is_triggered_only = yes
+	option = {
+		name = fra_news.5.a
+	}
+}
+
+# French Revolution Events
+
+# country_event = {
+# 	id = fra_rev.0
+# 	immediate = {
+# 		log = "[getdatetext]: [root.getname]: event fra_rev.0 from = [from.getname]"
+# 		country_event = {
+# 			id = fra_rev.0
+# 			days = 365
+# 		}
+# 		if = {
+# 			limit = {
+# 				date > 1954.12.24
+# 			}
+# 			country_event = { 
+# 				id = fra_rev.1 
+# 				days = 270 
+# 				random_days = 15 
+# 			} 
+# 		}
+# 	}
+# 	is_triggered_only = yes
+# 	hidden = yes
+# 	option = {
+
+# 	}
+	
+# }
+country_event = {
+	### Whispers of Revolution
+	id = fra_rev.1
+	immediate = {
+		log = "[getdatetext]: [root.getname]: event fra_rev.1 from = [from.getname]"
+		hidden_effect = {
+			NFA = {
+				country_event = {
+					id = fra_rev.43
+					days = 150
+					random_days = 30
+				}
+			}
+		}
+	}
+	title = fra_rev.1.t
+	desc = fra_rev.1.d
+	picture = GFX_ce_Anti_War_Protests
+	is_triggered_only = yes
+	trigger = {
+		NOT = {
+			has_war_with = ENT
+		}
+	}
+	fire_only_once = yes
+	option = {
+		#Its just a few children, nothing to worry about
+		name = fra_rev.1.a
+		hidden_effect = {
+			country_event = {
+				id = fra_rev.2
+				days = 15
+			}
+		}
+	}
+	option = {
+		#Put the Troisième bureau on it, no need to alert the Germans
+		name = fra_rev.1.b
+		hidden_effect = {
+			country_event = {
+				id = fra_rev.3
+				days = 15
+			}
+		}
+	}
+	option = {
+		#IWe must alert Prussian State Security
+		name = fra_rev.1.c
+		hidden_effect = {
+			country_event = {
+				id = fra_rev.4
+				days = 15
+			}
+			GER = {
+				country_event = {
+					id = fra_rev.5
+					days = 15
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	###Students Begin Meeting in Secret
+	id = fra_rev.2
+	immediate = {
+		log = "[getdatetext]: [root.getname]: event fra_rev.2 from = [from.getname]"
+	}
+	title = fra_rev.2.t
+	desc = fra_rev.2.d
+	picture = GFX_ce_Anti_War_Protests
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		#Its just a few students with radical ideas, no threat to our regime
+		name = fra_rev.2.a
+		hidden_effect = {
+			NFA = {
+				country_event = {
+					id = fra_rev.6
+					days = 15
+				}
+			}
+		}
+	}
+	option = {
+		#Begin to monitor them
+		name = fra_rev.2.b
+		hidden_effect = {
+			NFA = {
+				country_event = {
+					id = fra_rev.7
+					days = 15
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	###The Troisième bureau makes targeted arrests
+	id = fra_rev.3
+	immediate = {
+		log = "[getdatetext]: [root.getname]: event fra_rev.3 from = [from.getname]"
+	}
+	title = fra_rev.3.t
+	desc = fra_rev.3.d
+	picture = GFX_ce_Anti_War_Protests
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		#Excellent job gentlemen
+		name = fra_rev.3.a
+		hidden_effect = {
+			NFA = {
+				country_event = {
+					id = fra_rev.8
+					days = 15
+				}
+				country_event = {
+					id = fra_rev.44
+					hours = 2
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	###The Troisième bureau makes targeted arrests
+	id = fra_rev.4
+	immediate = {
+		log = "[getdatetext]: [root.getname]: event fra_rev.4 from = [from.getname]"
+	}
+	title = fra_rev.4.t
+	desc = fra_rev.4.d
+	picture = GFX_ce_Anti_War_Protests
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		#Excellent job gentlemen
+		name = fra_rev.4.a
+		hidden_effect = {
+			NFA = {
+				country_event = {
+					id = fra_rev.44
+					hours = 3
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	###The Troisième bureau makes targeted arrests
+	id = fra_rev.5
+	immediate = {
+		log = "[getdatetext]: [root.getname]: event fra_rev.5 from = [from.getname]"
+	}
+	title = fra_rev.5.t
+	desc = fra_rev.5.d
+	picture = GFX_ce_Anti_War_Protests
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		#Let them handle it
+		name = fra_rev.5.a
+		hidden_effect = {
+			NFA = {
+				country_event = {
+					id = fra_rev.8
+					days = 15
+				}
+			}
+		}
+	}
+	option = {
+		#Time to subvert another French Revolution
+		name = fra_rev.5.b
+		hidden_effect = {
+			NFA = {
+				country_event = {
+					id = fra_rev.9
+					days = 15
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	###Spies in North France Inform us of Student Meetings
+	id = fra_rev.6
+	immediate = {
+		log = "[getdatetext]: [root.getname]: event fra_rev.6 from = [from.getname]"
+	}
+	title = fra_rev.6.t
+	desc = fra_rev.6.d
+	# picture = GFX_ce_entente_march
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		#Send them our support. This is our chance to unify France.
+		name = fra_rev.6.a
+		hidden_effect = {
+			NFA = {
+				country_event = {
+					id = fra_rev.45
+					days = 3
+				}
+			}
+		}
+	}
+	option = {
+		#We cannot risk confrontation
+		name = fra_rev.6.b
+	}
+}
+
+country_event = {
+	###Spies in North France Inform us of Student Meetings
+	id = fra_rev.7
+	immediate = {
+		log = "[getdatetext]: [root.getname]: event fra_rev.7 from = [from.getname]"
+	}
+	title = fra_rev.7.t
+	desc = fra_rev.7.d
+	# picture = GFX_ce_entente_march
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		#Send them our support. This is our chance to unify France.
+		name = fra_rev.7.a
+		hidden_effect = {
+			NFA = {
+				country_event = {
+					id = fra_rev.45
+					days = 3
+				}
+			}
+			random_list = {
+				30 = {
+					FRA = {
+						country_event = {
+							id = fra_rev.10
+							days = 15
+						}
+					}
+				}
+				70 = {
+				}
+			}
+		}
+	}
+	option = {
+		#We cannot risk confrontation
+		name = fra_rev.7.b
+	}
+}
+
+country_event = {
+	###Spies in North France Inform us of Student Meetings
+	id = fra_rev.8
+	immediate = {
+		log = "[getdatetext]: [root.getname]: event fra_rev.8 from = [from.getname]"
+	}
+	title = fra_rev.8.t
+	desc = fra_rev.8.d
+	# picture = GFX_ce_entente_march
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		#Send them our support. This is our chance to unify France.
+		name = fra_rev.8.a
+		hidden_effect = {
+			NFA = {
+				country_event = {
+					id = fra_rev.45
+					days = 3
+				}
+			}
+			random_list = {
+				60 = {
+					FRA = {
+						country_event = {
+							id = fra_rev.10
+							days = 15
+						}
+					}
+				}
+				40 = {
+				}
+			}
+		}
+	}
+	option = {
+		#We cannot risk confrontation
+		name = fra_rev.8.b
+	}
+}
+
+country_event = {
+	###Spies in North France Inform us of Student Meetings
+	id = fra_rev.9
+	immediate = {
+		log = "[getdatetext]: [root.getname]: event fra_rev.9 from = [from.getname]"
+	}
+	title = fra_rev.9.t
+	desc = fra_rev.9.d
+	# picture = GFX_ce_entente_march
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		#Send them our support. This is our chance to unify France.
+		name = fra_rev.9.a
+		hidden_effect = {
+			NFA = {
+				country_event = {
+					id = fra_rev.45
+					days = 3
+				}
+			}
+			random_list = {
+				90 = {
+					FRA = {
+						country_event = {
+							id = fra_rev.10
+							days = 15
+						}
+					}
+				}
+				10 = {
+				}
+			}
+		}
+	}
+	option = {
+		#We cannot risk confrontation
+		name = fra_rev.9.b
+	}
+}
+
+country_event = {
+	###The Troisième bureau Alerts us to the presence of the Accord
+	id = fra_rev.10
+	immediate = {
+		log = "[getdatetext]: [root.getname]: event fra_rev.10 from = [from.getname]"
+	}
+	title = fra_rev.10.t
+	desc = fra_rev.10.d
+	# picture = GFX_ce_entente_march
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		#SDemand an Explanation from the Canadians
+		name = fra_rev.10.a
+		hidden_effect = {
+			NFA = {
+				country_event = {
+					id = fra_rev.11
+					days = 15
+				}
+			}
+		}
+	}
+	option = {
+		#Attempt to root out the Accord spies
+		name = fra_rev.10.b
+		hidden_effect = {
+			NFA = {
+				country_event = {
+					id = fra_rev.12
+					days = 15
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	###North French Claim to know about our support
+	id = fra_rev.11
+	immediate = {
+		log = "[getdatetext]: [root.getname]: event fra_rev.11 from = [from.getname]"
+	}
+	title = fra_rev.11.t
+	desc = fra_rev.11.d
+	# picture = GFX_ce_entente_march
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		#Deny. They cant prove anything
+		name = fra_rev.11.a
+		set_temp_variable = {
+			temp_value = -4
+		}
+		# change value later if you want - maho
+		custom_effect_tooltip = KRG_influence_log_item_accord_presence_in_north_france_exposed_effect_tt
+		hidden_effect = {
+			multiply_temp_variable = {
+				temp_value = -1
+			}
+			add_to_array = {
+				global.influence_log = 14
+			}
+			add_to_array = {
+				global.influence_log_val = temp_value
+			}
+			influence_recalc = yes
+		}
+	}
+}
+
+country_event = {
+	###The Troisième bureau presents 3 proposals
+	id = fra_rev.12
+	immediate = {
+		log = "[getdatetext]: [root.getname]: event fra_rev.12 from = [from.getname]"
+	}
+	title = fra_rev.12.t
+	desc = fra_rev.12.d
+	# picture = GFX_ce_entente_march
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		#Set up a sting at a student meeting
+		name = fra_rev.12.a
+		hidden_effect = {
+			random_list = {
+				75 = {
+					country_event = {
+						id = fra_rev.13
+						days = 15
+					}
+				}
+				25 = {
+					country_event = {
+						id = fra_rev.15
+						days = 15
+					}
+				}
+			}
+		}
+	}
+	option = {
+		#Try and spot them meeting with Canadian embassy officials
+		name = fra_rev.12.b
+		hidden_effect = {
+			random_list = {
+				50 = {
+					country_event = {
+						id = fra_rev.16
+						days = 15
+					}
+				}
+				50 = {
+					country_event = {
+						id = fra_rev.18
+						days = 15
+					}
+				}
+			}
+		}
+	}
+	option = {
+		#Attempt to hit all the suspects at their homes 
+		name = fra_rev.12.c
+		hidden_effect = {
+			random_list = {
+				50 = {
+					country_event = {
+						id = fra_rev.19
+						days = 15
+					}
+				}
+				50 = {
+					country_event = {
+						id = fra_rev.21
+						days = 15
+					}
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	###Raid successful!
+	id = fra_rev.13
+	immediate = {
+		log = "[getdatetext]: [root.getname]: event fra_rev.13 from = [from.getname]"
+	}
+	title = fra_rev.13.t
+	desc = fra_rev.13.d
+	# picture = GFX_ce_entente_march
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		#Excellent!
+		name = fra_rev.13.a
+		hidden_effect = {
+			NFA = {
+				country_event = {
+					id = fra_rev.14
+					days = 15
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	###Spy caught at French radical student meeting
+	id = fra_rev.14
+	immediate = {
+		log = "[getdatetext]: [root.getname]: event fra_rev.14 from = [from.getname]"
+	}
+	title = fra_rev.14.t
+	desc = fra_rev.14.d
+	# picture = GFX_ce_entente_march
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		#A terrible loss
+		name = fra_rev.14.a
+		set_temp_variable = {
+			temp_value = -2
+		}
+		# change value later if you want - maho
+		custom_effect_tooltip = KRG_influence_log_item_NFA_spy_caught_effect_tt
+		hidden_effect = {
+			multiply_temp_variable = {
+				temp_value = -1
+			}
+			add_to_array = {
+				global.influence_log = 15
+			}
+			add_to_array = {
+				global.influence_log_val = temp_value
+			}
+			influence_recalc = yes
+		}
+	}
+}
+
+country_event = {
+	###Raid Unsuccessful!
+	id = fra_rev.15
+	immediate = {
+		log = "[getdatetext]: [root.getname]: event fra_rev.15 from = [from.getname]"
+	}
+	title = fra_rev.15.t
+	desc = fra_rev.15.d
+	# picture = GFX_ce_entente_march
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		#Damn
+		name = fra_rev.15.a
+		set_temp_variable = {
+			temp_value = -4
+		}
+		# change value later if you want - maho
+		custom_effect_tooltip = KRG_influence_log_item_FRA_raid_unsuccessful_effect_tt
+		hidden_effect = {
+			add_to_array = {
+				global.influence_log = 16
+			}
+			add_to_array = {
+				global.influence_log_val = temp_value
+			}
+			influence_recalc = yes
+		}
+	}
+}
+
+country_event = {
+	###Raid successful!
+	id = fra_rev.16
+	immediate = {
+		log = "[getdatetext]: [root.getname]: event fra_rev.16 from = [from.getname]"
+	}
+	title = fra_rev.16.t
+	desc = fra_rev.16.d
+	# picture = GFX_ce_entente_march
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		#Excellent!
+		name = fra_rev.16.a
+		hidden_effect = {
+			NFA = {
+				country_event = {
+					id = fra_rev.17
+					days = 18
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	###Spy caught meeting with an embassy official
+	id = fra_rev.17
+	immediate = {
+		log = "[getdatetext]: [root.getname]: event fra_rev.17 from = [from.getname]"
+	}
+	title = fra_rev.17.t
+	desc = fra_rev.17.d
+	# picture = GFX_ce_entente_march
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		#A terrible loss
+		name = fra_rev.17.a
+		set_temp_variable = {
+			temp_value = -6
+		}
+		# change value later if you want - maho
+		custom_effect_tooltip = KRG_influence_log_item_NFA_spy_caught_effect_tt
+		hidden_effect = {
+			multiply_temp_variable = {
+				temp_value = -1
+			}
+			add_to_array = {
+				global.influence_log = 15
+			}
+			add_to_array = {
+				global.influence_log_val = temp_value
+			}
+			influence_recalc = yes
+		}
+	}
+}
+
+country_event = {
+	###Raid Unsuccessful!
+	id = fra_rev.18
+	immediate = {
+		log = "[getdatetext]: [root.getname]: event fra_rev.18 from = [from.getname]"
+	}
+	title = fra_rev.18.t
+	desc = fra_rev.18.d
+	# picture = GFX_ce_entente_march
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		#Damn
+		name = fra_rev.18.a
+		set_temp_variable = {
+			temp_value = -6
+		}
+		# change value later if you want - maho
+		custom_effect_tooltip = KRG_influence_log_item_FRA_raid_unsuccessful_effect_tt
+		hidden_effect = {
+			add_to_array = {
+				global.influence_log = 16
+			}
+			add_to_array = {
+				global.influence_log_val = temp_value
+			}
+			influence_recalc = yes
+		}
+	}
+}
+
+country_event = {
+	###Raid successful!
+	id = fra_rev.19
+	immediate = {
+		log = "[getdatetext]: [root.getname]: event fra_rev.19 from = [from.getname]"
+	}
+	title = fra_rev.19.t
+	desc = fra_rev.19.d
+	# picture = GFX_ce_entente_march
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		#Excellent!
+		name = fra_rev.19.a
+		hidden_effect = {
+			NFA = {
+				country_event = {
+					id = fra_rev.20
+					days = 24
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	###6 Spies hit simultaneously
+	id = fra_rev.20
+	immediate = {
+		log = "[getdatetext]: [root.getname]: event fra_rev.20 from = [from.getname]"
+	}
+	title = fra_rev.20.t
+	desc = fra_rev.20.d
+	# picture = GFX_ce_entente_march
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		#A terrible loss
+		name = fra_rev.20.a
+		set_temp_variable = {
+			temp_value = -8
+		}
+		# change value later if you want - maho
+		custom_effect_tooltip = KRG_influence_log_item_NFA_spy_caught_effect_tt
+		hidden_effect = {
+			multiply_temp_variable = {
+				temp_value = -1
+			}
+			add_to_array = {
+				global.influence_log = 15
+			}
+			add_to_array = {
+				global.influence_log_val = temp_value
+			}
+			influence_recalc = yes
+		}
+	}
+}
+
+country_event = {
+	###Raid Unsuccessful!
+	id = fra_rev.21
+	immediate = {
+		log = "[getdatetext]: [root.getname]: event fra_rev.21 from = [from.getname]"
+	}
+	title = fra_rev.21.t
+	desc = fra_rev.21.d
+	# picture = GFX_ce_entente_march
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		#Damn
+		name = fra_rev.21.a
+		set_temp_variable = {
+			temp_value = -8
+		}
+		# change value later if you want - maho
+		custom_effect_tooltip = KRG_influence_log_item_FRA_raid_unsuccessful_effect_tt
+		hidden_effect = {
+			add_to_array = {
+				global.influence_log = 16
+			}
+			add_to_array = {
+				global.influence_log_val = temp_value
+			}
+			influence_recalc = yes
+		}
+	}
+}
+
+country_event = {
+	###Students gather in the streets
+	id = fra_rev.22
+	immediate = {
+		log = "[getdatetext]: [root.getname]: event fra_rev.22 from = [from.getname]"
+	}
+	immediate = {
+		hidden_effect = {
+			GER = {
+				country_event = {
+					id = fra_rev.42
+					days = 1
+				}
+			}
+			news_event = {
+				id = worldnews.66
+				days = 1
+			}
+		}
+	}
+	title = fra_rev.22.t
+	desc = fra_rev.22.d
+	# picture = GFX_ce_entente_march
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		#Time to crush them
+		name = fra_rev.22.a
+		hidden_effect = {
+			country_event = {
+				id = fra_rev.23
+				days = 2
+			}
+		}
+	}
+}
+
+country_event = {
+	###The Protests reach the Tuileries Palace
+	id = fra_rev.23
+	immediate = {
+		log = "[getdatetext]: [root.getname]: event fra_rev.23 from = [from.getname]"
+	}
+	immediate = {
+		hidden_effect = {
+			GER = {
+				country_event = {
+					id = fra_rev.35
+					hours = 6
+				}
+			}
+			NFA = {
+				country_event = {
+					id = fra_rev.36
+					hours = 6
+				}
+			}
+		}
+	}
+	title = fra_rev.23.t
+	desc = fra_rev.23.d
+	# picture = GFX_ce_entente_march
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		#Order in the Riot Police, but order restraint
+		name = fra_rev.23.a
+		hidden_effect = {
+			country_event = {
+				id = fra_rev.24
+				days = 5
+			}
+		}
+	}
+	option = {
+		#Open Fire
+		name = fra_rev.23.b
+		hidden_effect = {
+			country_event = {
+				id = fra_rev.32
+				days = 5
+			}
+		}
+	}
+}
+
+country_event = {
+	###Crowds grow, but remain calm
+	id = fra_rev.24
+	immediate = {
+		log = "[getdatetext]: [root.getname]: event fra_rev.24 from = [from.getname]"
+	}
+	title = fra_rev.24.t
+	desc = fra_rev.24.d
+	# picture = GFX_ce_entente_march
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		#This could not get much worse
+		name = fra_rev.24.a
+		hidden_effect = {
+			country_event = {
+				id = fra_rev.25
+				days = 5
+			}
+		}
+	}
+}
+
+country_event = {
+	###Students open fire on the police
+	id = fra_rev.25
+	immediate = {
+		log = "[getdatetext]: [root.getname]: event fra_rev.25 from = [from.getname]"
+	}
+	title = fra_rev.25.t
+	desc = fra_rev.25.d
+	# picture = GFX_ce_entente_march
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		#Tell the men to hold their ground
+		name = fra_rev.25.a
+		hidden_effect = {
+			country_event = {
+				id = fra_rev.26
+				days = 5
+			}
+		}
+	}
+	option = {
+		#Open fire on the crowds
+		name = fra_rev.25.b
+		hidden_effect = {
+			country_event = {
+				id = fra_rev.32
+				days = 5
+			}
+		}
+	}
+}
+
+country_event = {
+	###Crowds Disperse
+	id = fra_rev.26
+	immediate = {
+		log = "[getdatetext]: [root.getname]: event fra_rev.26 from = [from.getname]"
+	}
+	title = fra_rev.26.t
+	desc = fra_rev.26.d
+	# picture = GFX_ce_entente_march
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		#Excellent
+		name = fra_rev.26.a
+		hidden_effect = {
+			country_event = {
+				id = fra_rev.27
+				days = 5
+			}
+		}
+	}
+}
+
+country_event = {
+	###Proposals from the Troisième bureau
+	id = fra_rev.27
+	immediate = {
+		log = "[getdatetext]: [root.getname]: event fra_rev.27 from = [from.getname]"
+	}
+	title = fra_rev.27.t
+	desc = fra_rev.27.d
+	# picture = GFX_ce_entente_march
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		#Prevent any large crowds from gathering
+		name = fra_rev.27.a
+		hidden_effect = {
+			country_event = {
+				id = fra_rev.28
+				days = 5
+			}
+		}
+	}
+	option = {
+		#Take out the Revolutionary leadership
+		name = fra_rev.27.b
+		hidden_effect = {
+			random_list = {
+				20 = {
+					country_event = {
+						id = fra_rev.30
+						days = 5
+					}
+				}
+				80 = {
+					country_event = {
+						id = fra_rev.31
+						days = 5
+					}
+				}
+			}
+		}
+	}
+	option = {
+		#These morons got us into this in the first place, do nothing
+		name = fra_rev.27.c
+		hidden_effect = {
+			country_event = {
+				id = fra_rev.33
+				days = 5
+			}
+		}
+	}
+}
+
+country_event = {
+	###Mass Arrests from Would be Protestors
+	id = fra_rev.28
+	immediate = {
+		log = "[getdatetext]: [root.getname]: event fra_rev.28 from = [from.getname]"
+	}
+	title = fra_rev.28.t
+	desc = fra_rev.28.d
+	# picture = GFX_ce_entente_march
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		#Well they should obey the law
+		name = fra_rev.28.a
+		hidden_effect = {
+			country_event = {
+				id = fra_rev.29
+				days = 5
+			}
+		}
+	}
+}
+
+country_event = {
+	###Parisians Overwhelm the police
+	id = fra_rev.29
+	immediate = {
+		log = "[getdatetext]: [root.getname]: event fra_rev.29 from = [from.getname]"
+	}
+	immediate = {
+		hidden_effect = {
+			FRA_PCO_revolt = yes
+		}
+	}
+	title = fra_rev.29.t
+	desc = fra_rev.29.d
+	# picture = GFX_ce_entente_march
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		#Defend the Kingdom!
+		name = fra_rev.29.a
+		effect_tooltip = {
+			FRA_PCO_revolt = yes
+		}
+		FRA = {
+			declare_war_on = {
+                target = PCO
+                type = annex_everything
+            }
+		}
+	}
+}
+
+country_event = {
+	###Raids successful
+	id = fra_rev.30
+	immediate = {
+		log = "[getdatetext]: [root.getname]: event fra_rev.30 from = [from.getname]"
+	}
+	immediate = {
+		hidden_effect = {
+			news_event = {
+				id = worldnews.67
+				days = 1
+			}
+		}
+	}
+	title = fra_rev.30.t
+	desc = fra_rev.30.d
+	# picture = GFX_ce_entente_march
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		#Excellent
+		name = fra_rev.30.a
+		set_temp_variable = {
+			temp_value = -2
+		}
+		# change value later if you want - maho
+		custom_effect_tooltip = KRG_influence_log_item_french_revolutionaries_defeated_effect_tt
+		hidden_effect = {
+			multiply_temp_variable = {
+				temp_value = -1
+			}
+			add_to_array = {
+				global.influence_log = 17
+			}
+			add_to_array = {
+				global.influence_log_val = temp_value
+			}
+			influence_recalc = yes
+		}
+	}
+}
+
+country_event = {
+	###Raids Unsuccessful
+	id = fra_rev.31
+	immediate = {
+		log = "[getdatetext]: [root.getname]: event fra_rev.31 from = [from.getname]"
+	}
+	immediate = {
+		hidden_effect = {
+			country_event = {
+				id = fra_rev.33
+				days = 5
+			}
+		}
+	}
+	title = fra_rev.31.t
+	desc = fra_rev.31.d
+	# picture = GFX_ce_entente_march
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		#Ugh, the Troisième bureau is incompetent
+		name = fra_rev.31.a
+	}
+}
+
+country_event = {
+	###Students Disperse
+	id = fra_rev.32
+	immediate = {
+		log = "[getdatetext]: [root.getname]: event fra_rev.32 from = [from.getname]"
+	}
+	immediate = {
+		hidden_effect = {
+			country_event = {
+				id = fra_rev.33
+				days = 5
+			}
+		}
+	}
+	title = fra_rev.32.t
+	desc = fra_rev.32.d
+	# picture = GFX_ce_entente_march
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		#As expected
+		name = fra_rev.32.a
+	}
+}
+
+country_event = {
+	###Students and workers Form Militias local councils
+	id = fra_rev.33
+	immediate = {
+		log = "[getdatetext]: [root.getname]: event fra_rev.33 from = [from.getname]"
+	}
+	immediate = {
+		hidden_effect = {
+			country_event = {
+				id = fra_rev.34
+				days = 5
+			}
+		}
+	}
+	title = fra_rev.33.t
+	desc = fra_rev.33.d
+	# picture = GFX_ce_entente_march
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		#What is this, Russia?
+		name = fra_rev.33.a
+	}
+}
+
+country_event = {
+	###National Guard Units Defect
+	id = fra_rev.34
+	immediate = {
+		log = "[getdatetext]: [root.getname]: event fra_rev.34 from = [from.getname]"
+	}
+	immediate = {
+		hidden_effect = {
+			FRA_PCO_revolt = yes
+		}
+	}
+	title = fra_rev.34.t
+	desc = fra_rev.34.d
+	# picture = GFX_ce_entente_march
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		#Defend the Kingdom!
+		name = fra_rev.34.a
+		effect_tooltip = {
+			FRA_PCO_revolt = yes
+		}
+		FRA = {
+			declare_war_on = {
+                target = PCO
+                type = annex_everything
+            }
+		}
+	}
+}
+
+country_event = {
+	###The Protests reach the Tuileries Palace
+	id = fra_rev.35
+	immediate = {
+		log = "[getdatetext]: [root.getname]: event fra_rev.35 from = [from.getname]"
+	}
+	title = fra_rev.35.t
+	desc = fra_rev.35.d
+	# picture = GFX_ce_entente_march
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		#The French can handle it
+		name = fra_rev.35.a
+		FRA = {
+			set_country_flag = FRA_GER_no_support
+		}
+	}
+	option = {
+		#Prepare the border divisions in secret
+		name = fra_rev.35.b
+		FRA = {
+			set_country_flag = FRA_GER_support_troops
+		}
+	}
+}
+
+country_event = {
+	###The Protests reach the Tuileries Palace
+	id = fra_rev.36
+	immediate = {
+		log = "[getdatetext]: [root.getname]: event fra_rev.36 from = [from.getname]"
+	}
+	title = fra_rev.36.t
+	desc = fra_rev.36.d
+	# picture = GFX_ce_entente_march
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		#This is our chance, mobilize the army for an imminent invasion!
+		name = fra_rev.36.a
+		FRA = {
+			set_country_flag = FRA_NFA_mobilization
+		}
+	}
+	option = {
+		#A few children do not make a revolution
+		name = fra_rev.36.b
+		FRA = {
+			set_country_flag = FRA_NFA_no_mobilization
+		}
+	}
+}
+
+country_event = {
+	### Paris rises up!
+	id = fra_rev.37
+	immediate = {
+		log = "[getdatetext]: [root.getname]: event fra_rev.37 from = [from.getname]"
+	}
+	title = fra_rev.37.t
+	desc = fra_rev.37.d
+	# picture = GFX_ce_entente_march
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		#Germany would invade, its too risky
+		name = fra_rev.37.a
+	}
+	option = {
+		#At last, the fatherland will be liberated
+		name = fra_rev.37.b
+		declare_war_on = {
+			target = FRA
+		}
+		if = {
+			limit = {
+				check_variable = {
+					NFA_invasion_coordination = 2
+				}
+			}
+			add_timed_idea = {
+				idea = NFA_invasion_coordination_idea_2
+				days = 30
+			}
+		}
+		else_if = {
+			limit = {
+				check_variable = {
+					NFA_invasion_coordination = 3
+				}
+			}
+			add_timed_idea = {
+				idea = NFA_invasion_coordination_idea_3
+				days = 30
+			}
+		}
+		else_if = {
+			limit = {
+				check_variable = {
+					NFA_invasion_coordination = 4
+				}
+			}
+			add_timed_idea = {
+				idea = NFA_invasion_coordination_idea_4
+				days = 30
+			}
+		}
+		else_if = {
+			limit = {
+				check_variable = {
+					NFA_invasion_coordination = 5
+				}
+			}
+			add_timed_idea = {
+				idea = NFA_invasion_coordination_idea_5
+				days = 30
+			}
+		}
+		else = {
+			add_timed_idea = {
+				idea = NFA_invasion_coordination_idea_1
+				days = 30
+			}
+		}
+		set_global_flag = NFA_invading_FRA
+		set_country_flag = NFA_no_accord_involvement
+		custom_effect_tooltip = NFA_accord_wont_join
+		activate_mission = NFA_invasion_mission
+	}
+}
+
+country_event = {
+	### North France Capitulates!
+	id = fra_rev.38
+	immediate = {
+		log = "[getdatetext]: [root.getname]: event fra_rev.38 from = [from.getname]"
+	}
+	title = fra_rev.38.t
+	desc = fra_rev.38.d
+	# picture = GFX_ce_entente_march
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		#We must cut our losses
+		name = fra_rev.38.a
+		NFA = {
+			annex_country = {
+				target = FRA
+			}
+			annex_country = {
+				target = PCO
+			}
+			white_peace_with_ROOT = yes
+		}
+	}
+	option = {
+		#Prepare the Heer, we will reclaim what is ours!
+		name = fra_rev.38.b
+		clr_global_flag = KRG_5_DAYS_TO_PARIS
+		add_to_war = {
+			targeted_alliance = FRA
+			enemy = PCO
+		}
+		add_to_war = {
+			targeted_alliance = FRA
+			enemy = NFA
+		}
+		third_weltkrieg = yes
+	}
+}
+
+country_event = {
+	### Paris rises up!
+	id = fra_rev.39
+	immediate = {
+		log = "[getdatetext]: [root.getname]: event fra_rev.39 from = [from.getname]"
+	}
+	title = fra_rev.39.t
+	desc = fra_rev.39.d
+	# picture = GFX_ce_entente_march
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		#Petition the Accord
+		name = fra_rev.39.a
+		hidden_effect = {
+			accord_issue_6_effect = yes
+			set_variable = {
+				global.accord_issue_check = 1
+			}
+			for_each_scope_loop = {
+				array = global.accord_voting_country_array
+				country_event = {
+					id = fra_rev.40
+					days = 0
+				}
+				activate_mission = accord_invade_FRA
+			}
+		}
+	}
+	option = {
+		#Germany would invade, its too risky
+		name = fra_rev.39.b
+	}
+}
+
+country_event = {
+	###The French Republic Asks to Approve a Joint Accord Invasion
+	id = fra_rev.40
+	immediate = {
+		log = "[getdatetext]: [root.getname]: event fra_rev.40 from = [from.getname]"
+	}
+	title = fra_rev.40.t
+	desc = fra_rev.40.d
+	# picture = GFX_ce_entente_march
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		#We must cast our vote
+		name = fra_rev.40.a
+	}
+}
+
+country_event = {
+	###Paris Rises Up
+	id = fra_rev.41
+	immediate = {
+		log = "[getdatetext]: [root.getname]: event fra_rev.41 from = [from.getname]"
+	}
+	title = fra_rev.41.t
+	desc = fra_rev.41.d
+	# picture = GFX_ce_entente_march
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		#We will crush these terrorists
+		name = fra_rev.41.a
+		clr_global_flag = KRG_5_DAYS_TO_PARIS
+		add_to_war = {
+			targeted_alliance = FRA
+			enemy = PCO
+		}
+	}
+}
+
+country_event = {
+	###Students gather in the street in Paris
+	id = fra_rev.42
+	immediate = {
+		log = "[getdatetext]: [root.getname]: event fra_rev.42 from = [from.getname]"
+	}
+	title = fra_rev.42.t
+	desc = fra_rev.42.d
+	# picture = GFX_ce_entente_march
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		#Another French Revolution...
+		name = fra_rev.42.a
+	}
+}
+
+country_event = {
+	###North French Activists Warn us of IMpending Revolution
+	id = fra_rev.43
+	immediate = {
+		log = "[getdatetext]: [root.getname]: event fra_rev.43 from = [from.getname]"
+	}
+	immediate = {
+		hidden_effect = {
+			if = {
+				limit = {
+					check_variable = {
+						NFA.NFA_activists_contacted = 2
+					}
+				}
+				country_event = {
+					id = fra_rev.22
+					days = 20
+				}
+			}
+			else_if = {
+				limit = {
+					check_variable = {
+						NFA.NFA_activists_contacted = 3
+					}
+				}
+				country_event = {
+					id = fra_rev.22
+					days = 30
+				}
+			}
+			else_if = {
+				limit = {
+					check_variable = {
+						NFA.NFA_activists_contacted = 4
+					}
+				}
+				country_event = {
+					id = fra_rev.22
+					days = 40
+				}
+			}
+			else_if = {
+				limit = {
+					check_variable = {
+						NFA.NFA_activists_contacted = 5
+					}
+				}
+				country_event = {
+					id = fra_rev.22
+					days = 50
+				}
+			}
+			else = {
+				country_event = {
+					id = fra_rev.22
+					days = 10
+				}
+			}
+		}
+	}
+	title = fra_rev.43.t
+	desc = fra_rev.43.d
+	# picture = GFX_ce_entente_march
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		#We must be ready
+		name = fra_rev.43.a
+	}
+}
+
+country_event = {
+	###North France Makes arrests of activists
+	id = fra_rev.44
+	immediate = {
+		log = "[getdatetext]: [root.getname]: event fra_rev.44 from = [from.getname]"
+	}
+	title = fra_rev.44.t
+	desc = fra_rev.44.d
+	# picture = GFX_ce_entente_march
+	is_triggered_only = yes
+	option = {
+		#A minor setback
+		name = fra_rev.44.a
+		add_to_variable = {
+			NFA_activists_contacted = -1
+			tooltip = NFA_activists_contacted
+		}
+		clamp_variable = {
+			var = NFA_activists_contacted
+			min = 1
+			max = 5
+		}
+		add_to_variable = {
+			NFA_militas_supplied = -1
+			tooltip = NFA_militas_supplied
+		}
+		clamp_variable = {
+			var = NFA_militas_supplied
+			min = 1
+			max = 5
+		}
+		add_to_variable = {
+			NFA_sabotage_preparation = -1
+			tooltip = NFA_sabotage_preparation
+		}
+		clamp_variable = {
+			var = NFA_sabotage_preparation
+			min = 1
+			max = 5
+		}
+		add_to_variable = {
+			NFA_invasion_coordination = -1
+			tooltip = NFA_invasion_coordination
+		}
+		clamp_variable = {
+			var = NFA_invasion_coordination
+			min = 1
+			max = 5
+		}
+	}
+}
+
+country_event = {
+	###Activists and Rebels in North France are Cooperative
+	id = fra_rev.45
+	immediate = {
+		log = "[getdatetext]: [root.getname]: event fra_rev.45 from = [from.getname]"
+	}
+	title = fra_rev.45.t
+	desc = fra_rev.45.d
+	# picture = GFX_ce_entente_march
+	is_triggered_only = yes
+	option = {
+		#Excellent!
+		name = fra_rev.45.a
+		add_to_variable = {
+			NFA_activists_contacted = 1
+			tooltip = NFA_activists_contacted
+		}
+		clamp_variable = {
+			var = NFA_activists_contacted
+			min = 1
+			max = 5
+		}
+		add_to_variable = {
+			NFA_invasion_coordination = 1
+			tooltip = NFA_invasion_coordination
+		}
+		clamp_variable = {
+			var = NFA_invasion_coordination
+			min = 1
+			max = 5
+		}
+	}
+}

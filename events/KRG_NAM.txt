@@ -1,0 +1,198 @@
+add_namespace = krg_namibia
+
+country_event = { #Cancelled Referendum
+	id = krg_namibia.0
+	title = krg_namibia.0.t
+	desc = krg_namibia.0.d
+    picture = GFX_report_event_HOL_Trial
+	is_triggered_only = yes
+
+
+	option = {
+		name = krg_namibia.0.a
+		news_event = {
+			id = worldnews.500
+		}
+		set_temp_variable =  { temp_level = 1 }
+		set_reichspakt_alignment = yes
+		country_event =  { id = krg_namibia.1 days = 60 }
+	}
+}
+
+country_event = { #Creation of Volkstatt Namibia
+	id = krg_namibia.1
+	title = krg_namibia.1.t
+	desc = krg_namibia.1.d
+    picture = GFX_report_event_HOL_Trial
+	is_triggered_only = yes
+
+
+	option = {
+		name = krg_namibia.1.a
+		news_event = {
+			id = worldnews.501
+		}
+		set_party_name = {
+			ideology = authoritarian_socialist
+			long_name = NAM_volkstatt_authoritarian_socialist_party_long
+			name = NAM_volkstatt_authoritarian_socialist_party
+		}
+		set_party_name = {
+			ideology = radical_socialist
+			long_name = NAM_volkstatt_radical_socialist_party_long
+			name = NAM_volkstatt_radical_socialist_party
+		}
+		set_party_name = {
+			ideology = social_democrat
+			long_name = NAM_volkstatt_social_democrat_party_long
+			name = NAM_volkstatt_social_democrat_party
+		}
+		set_party_name = {
+			ideology = revolutionary_republican
+			long_name = NAM_volkstatt_revolutionary_republican_party_long
+			name = NAM_volkstatt_revolutionary_republican_party
+		}
+		set_party_name = {
+			ideology = social_conservative
+			long_name = NAM_volkstatt_social_conservative_party_long
+			name = NAM_volkstatt_social_conservative_party
+		}
+		set_party_name = {
+			ideology = authoritarian_democrat
+			long_name = NAM_volkstatt_authoritarian_democrat_party_long
+			name = NAM_volkstatt_authoritarian_democrat_party
+		}
+		set_party_name = {
+			ideology = paternal_autocrat
+			long_name = NAM_volkstatt_paternal_autocrat_party_long
+			name = NAM_volkstatt_paternal_autocrat_party
+		}
+
+		set_temp_variable =  { temp_level = 3 }
+		set_reichspakt_alignment = yes
+
+		country_event = { id = krg_namibia.1000 days = 180 }
+	}
+}
+
+country_event = { #election test event
+	id = krg_namibia.1000
+	title = krg_namibia.1000.t
+	desc = krg_namibia.1000.d
+    picture = GFX_report_event_HOL_Trial
+	is_triggered_only = yes
+
+
+	option = { #Bach's Conservatives
+		name = krg_namibia.1000.a
+		retire_character = NAM_hansbogislav_graf_von_schwerinlöwitz
+		retire_character = NAM_karl_jung
+		retire_character = NAM_kurt_fischer
+		add_country_leader_role = {
+			character = NAM_hans_von_bach
+			promote_leader = yes
+			country_leader = {
+				ideology = paternal_autocrat_subtype
+				expire = "1990.1.1"
+				traits = {
+				}
+			}
+		}
+		set_politics = {
+			ruling_party = paternal_autocrat
+			election_frequency = 60
+			elections_allowed = yes
+		}
+
+		country_event = { id = krg_namibia.1000 months = 60 }
+		ai_chance = {
+			base = 40
+			modifier = {
+				has_game_rule = {
+					rule = NAM_VOLKSTATT_ELECTION
+					option = NAM_VOLKSTATT_ELECTION_SKP_BACH
+				}
+				factor = 1000
+			}
+		}
+	}
+
+	option = { #Zelewski's Conservatives
+		name = krg_namibia.1000.b
+		retire_character = NAM_hansbogislav_graf_von_schwerinlöwitz
+		retire_character = NAM_karl_jung
+		retire_character = NAM_kurt_fischer
+		retire_character = NAM_hans_von_bach
+		add_country_leader_role = {
+			character = NAM_erich_von_zelewski
+			promote_leader = yes
+			country_leader = {
+				ideology = paternal_autocrat_subtype
+				expire = "1990.1.1"
+				traits = {
+				}
+			}
+		}
+		set_politics = {
+			ruling_party = paternal_autocrat
+			election_frequency = 60
+			elections_allowed = yes
+		}
+		country_event = { id = krg_namibia.1000 months = 60 }
+
+		ai_chance = {
+			base = 35
+			modifier = {
+				has_game_rule = {
+					rule = NAM_VOLKSTATT_ELECTION
+					option = NAM_VOLKSTATT_ELECTION_SKP_ZELEWSKI
+				}
+				factor = 1000
+			}
+		}
+	}
+	option = { #Schenck's Populists
+	name = krg_namibia.1000.c
+		set_politics = {
+			ruling_party = social_conservative
+			election_frequency = 60
+			elections_allowed = yes
+		}
+		hidden_effect = {
+			retire_character = NAM_hansbogislav_graf_von_schwerinlöwitz
+			retire_character = NAM_karl_jung
+			retire_character = NAM_kurt_fischer
+			
+			add_country_leader_role = {
+				character = NAM_hans_von_bach
+				promote_leader = yes
+				country_leader = {
+					ideology = paternal_autocrat_subtype
+					expire = "1990.1.1"
+					traits = {
+					}
+				}
+			}
+			add_popularity = {
+				ideology = social_conservative
+				popularity = 0.20
+			}
+			add_popularity = {
+				ideology = paternal_autocrat
+				popularity = -0.20
+			}
+		}
+		country_event = { id = krg_namibia.1000 months = 60 }
+
+		ai_chance = {
+			base = 25
+			modifier = {
+				has_game_rule = {
+					rule = NAM_VOLKSTATT_ELECTION
+					option = NAM_VOLKSTATT_ELECTION_SVP
+				}
+				factor = 1000
+			}
+		}
+	}
+}

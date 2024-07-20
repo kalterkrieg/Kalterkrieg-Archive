@@ -1,0 +1,197 @@
+semicircle_test_1 = {
+	clear_array = test_array_x
+	clear_array = test_array_y
+
+	set_temp_variable = { radius = 225 } # increase by +15 intervals
+	set_temp_variable = { stepdivide = 38 } # increase by +2 intervals
+	set_temp_variable = { loopend = 39 } # based on stepdivide + 1
+
+	while_loop_effect = {
+		limit = {
+			check_variable = { radius > 59 } # dont go below 60 the dots at the innermost circle look bad bundled together
+		}
+		generate_semicircle = yes
+		subtract_from_temp_variable = { radius = 15 }
+		subtract_from_temp_variable = { stepdivide = 2 }
+		subtract_from_temp_variable = { loopend = 2 }
+	}
+}
+
+generate_semicircle = {
+	set_temp_variable = { step = 3.142 }
+	divide_temp_variable = { step = stepdivide }
+
+	for_loop_effect = {
+		start = 0
+		end = loopend
+		value = circle_v
+
+		meta_effect = {
+			text = {
+				set_temp_variable = { math_sine_number = step }
+				multiply_temp_variable = { math_sine_number = circle_v }
+				math_sine = yes
+				multiply_temp_variable = { math_sine_output = radius }
+				multiply_temp_variable = { math_sine_output = -1 }
+				add_to_array = { [ARRAYY] = math_sine_output }
+
+				set_temp_variable = { math_cosine_number = step }
+				multiply_temp_variable = { math_cosine_number = circle_v }
+				math_cosine = yes
+				multiply_temp_variable = { math_cosine_output = radius }
+				multiply_temp_variable = { math_cosine_output = -1 }
+				add_to_array = { [ARRAYX] = math_cosine_output }
+			}
+			ARRAYX = "[GetSemicircleXArray]"
+			ARRAYY = "[GetSemicircleYArray]"
+		}
+	}
+}
+
+math_square_root = {
+	set_temp_variable = { math_sqrt_output = 1 }
+
+	for_loop_effect = {
+		start = 0
+		end = 10 # probably can converge way less before the end but keep at 10 just in case - reimu
+
+		set_temp_variable = { sqrt_temp = math_sqrt_number }
+		divide_temp_variable = { sqrt_temp = math_sqrt_output }
+		add_to_temp_variable = { math_sqrt_output = sqrt_temp }
+		divide_temp_variable = { math_sqrt_output = 2 }
+	}
+}
+
+math_factorial = {
+	if = {
+		limit = {
+			check_variable = { math_factorial_number = 0 }
+		}
+		set_temp_variable = { math_factorial_output = 1 }
+	}
+	else = {
+		set_temp_variable = { math_factorial_output = math_factorial_number }
+		while_loop_effect = {
+			limit = {
+				check_variable = { math_factorial_number > 1 }
+			}
+			subtract_from_temp_variable = { math_factorial_number = 1 }
+			multiply_temp_variable = { math_factorial_output = math_factorial_number }
+		}
+	}
+}
+
+#WHOLE EXPONENTS ONLY!!!!
+math_exponent = {
+	if = {
+		limit = {
+			check_variable = { math_exponent_power = 0 }
+		}
+		set_temp_variable = { math_exponent_output = 1 }
+	}
+	else_if = {
+		limit = {
+			check_variable = { math_exponent_power > 0 }
+		}
+		set_temp_variable = { math_exponent_output = math_exponent_number }
+		for_loop_effect = {
+			start = 1
+			end = math_exponent_power
+			value = math_exponent_iter
+			break = math_exponent_break
+			multiply_temp_variable = { math_exponent_output = math_exponent_number }
+		}
+	}
+	else = {
+		set_temp_variable = { math_exponent_tmp = math_exponent_number }
+		multiply_temp_variable = { math_exponent_power = -1 }
+		for_loop_effect = {
+			start = 1
+			end = math_exponent_power
+			value = math_exponent_iter
+			break = math_exponent_break
+			multiply_temp_variable = { math_exponent_tmp = math_exponent_number }
+		}
+		set_temp_variable = { math_exponent_output = 1 }
+		divide_temp_variable = { math_exponent_output = math_exponent_tmp }
+	}
+}
+
+math_sine = {
+	while_loop_effect = {
+		limit = { check_variable = { math_sine_number > 3.141 } }
+		subtract_from_temp_variable = { math_sine_number = 6.282 }
+	}
+	while_loop_effect = {
+		limit = { check_variable = { math_sine_number < -3.141 } }
+		add_to_temp_variable = { math_sine_number = 6.282 }
+	}
+	set_temp_variable = { math_sine_output = 0 }
+	for_loop_effect = {
+		start = 0
+		end = 5
+		value = math_sine_v
+		break = math_sine_break
+		
+		set_temp_variable = { xn = 2 }
+		multiply_temp_variable = { xn = math_sine_v }
+		add_to_temp_variable = { xn = 1 }
+		
+		set_temp_variable = { math_exponent_power = xn }
+		set_temp_variable = { math_exponent_number = math_sine_number }
+		math_exponent = yes
+		
+		set_temp_variable = { math_factorial_number = xn }
+		math_factorial = yes
+		
+		divide_temp_variable = { math_exponent_output = math_factorial_output }
+		
+		set_temp_variable = { frac = math_exponent_output }
+		set_temp_variable = { math_exponent_number = -1 }
+		set_temp_variable = { math_exponent_power = math_sine_v }
+		math_exponent = yes
+		
+		multiply_temp_variable = { frac = math_exponent_output }
+		
+		add_to_temp_variable = { math_sine_output = frac }
+	}
+}
+
+math_cosine = {
+	while_loop_effect = {
+		limit = { check_variable = { math_cosine_number > 3.141 } }
+		subtract_from_temp_variable = { math_cosine_number = 6.282 }
+	}
+	while_loop_effect = {
+		limit = { check_variable = { math_cosine_number < -3.141 } }
+		add_to_temp_variable = { math_cosine_number = 6.282 }
+	}
+	set_temp_variable = { math_cosine_output = 0 }
+	for_loop_effect = {
+		start = 0
+		end = 5
+		value = math_cosine_v
+		break = math_cosine_break
+		
+		set_temp_variable = { xn = 2 }
+		multiply_temp_variable = { xn = math_cosine_v }
+		
+		set_temp_variable = { math_exponent_power = xn }
+		set_temp_variable = { math_exponent_number = math_cosine_number }
+		math_exponent = yes
+		
+		set_temp_variable = { math_factorial_number = xn }
+		math_factorial = yes
+		
+		divide_temp_variable = { math_exponent_output = math_factorial_output }
+		
+		set_temp_variable = { frac = math_exponent_output }
+		set_temp_variable = { math_exponent_number = -1 }
+		set_temp_variable = { math_exponent_power = math_cosine_v }
+		math_exponent = yes
+		
+		multiply_temp_variable = { frac = math_exponent_output }
+		
+		add_to_temp_variable = { math_cosine_output = frac }
+	}
+}

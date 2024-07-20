@@ -1,0 +1,44 @@
+con_is_in_council = {
+	has_idea = con_senate
+	exists = yes
+	has_capitulated = no
+}
+con_is_member = {
+	has_idea = con_member
+	exists = yes
+	has_capitulated = no
+}
+con_has_war = {
+	#Checking if you have a war with a country within the CoN
+	any_country = {
+		has_war_with = PREV
+		OR = {
+			has_idea = con_member
+			has_idea = con_senate
+		}
+	}
+}
+has_favour_majority_con = {
+	AND = {
+		check_variable = {
+			var = con_vote_favour
+			value = con_voting_majority
+			compare = greater_than_or_equals
+		}
+		check_variable = {
+			con_vote_favour > con_vote_against
+		}
+	}
+}
+has_against_majority_con = {
+	AND = {
+		check_variable = {
+			var = con_vote_against
+			value = con_voting_majority
+			compare = greater_than_or_equals
+		}
+		check_variable = {
+			con_vote_against > con_vote_favour
+		}
+	}
+}

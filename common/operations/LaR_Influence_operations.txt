@@ -1,0 +1,832 @@
+# increase_german_influence = { ### 1/50
+# 	icon = GFX_operations_make_resistance_contacts
+# 	map_icon = GFX_make_resistance_contacts_map
+# 	name = operation_influence_ger
+# 	desc = operation_influence_ger_desc
+# 	days = 75
+# 	allowed = {
+# 	 original_tag = GER
+# 	}
+# 	available = { 
+# 		network_strength = {
+# 			target = FROM
+# 			value > 50
+# 		}
+# 	}
+# 	visible = {
+# 		NOT = { has_war_with = FROM }
+# 		network_strength = {
+# 			target = FROM
+# 			value > 0
+# 		}
+# 	}
+# 	operatives = 1
+# 	network_strength = 50
+# 	on_start = {  # SCOPE_OPERATION
+# 	}
+# 	outcome_modifiers = { operation_outcome }
+# 	cost_modifiers = { operation_cost }
+# 	risk_modifiers = { operation_risk }
+# 	outcome_potential = {
+# 		FROM = { custom_effect_tooltip = GER_Increase_influence_tt
+# 	        add_to_variable = { GER_Influence = 1 } }
+# 	}
+# 	risk_chance = 0.15
+# 	outcome_extra_chance = 0.25
+# 	experience = 1
+# 	# outcome is an effect that runs when the operation has completed
+# 	outcome_execute = { # SCOPE_OPERATION
+# 		FROM = { custom_effect_tooltip = GER_Increase_influence_tt
+# 		add_to_variable = { GER_Influence = 1 } }
+# 	}
+# 	# This is where all the separate phases are defined
+# 	# Each phase for an operation may have a single actual phase assigned to it, which is determined here
+# 	phases = { #infiltration 
+# 		german_influence_op_1 = { base = 100 }
+# 	}
+# }
+# counter_german_influence = { 
+# 	icon = GFX_operations_targeted_sabotage
+# 	map_icon = GFX_targeted_sabotage_map
+# 	name = operation_counter_influence_ger
+# 	desc = operation_counter_influence_ger_desc
+# 	days = 100
+# 	allowed = {
+# 	NOT = { original_tag = GER }
+# 	}
+# 	available = { 
+# 		network_strength = {
+# 			target = FROM
+# 			value > 50
+# 		}
+# 		custom_trigger_tooltip = {
+# 		tooltip = tt_germany_has_influence
+# 		FROM = { check_variable = { GER_Influence > 0 } }
+# 		}
+# 	}
+# 	visible = {
+# 		NOT = { has_war_with = FROM }
+# 		network_strength = {
+# 			target = FROM
+# 			value > 0
+# 		}
+# 	}
+# 	operatives = 1
+# 	network_strength = 50
+# 	on_start = {  # SCOPE_OPERATION
+# 	}
+# 	outcome_modifiers = { operation_outcome }
+# 	cost_modifiers = { operation_cost }
+# 	risk_modifiers = { operation_risk }
+# 	outcome_potential = {
+# 		FROM = { custom_effect_tooltip = GER_Decrease_influence_tt
+# 	        subtract_from_variable = { GER_Influence = 1 } }
+# 	}
+# 	risk_chance = 0.15
+# 	outcome_extra_chance = 0.25
+# 	experience = 1
+# 	# outcome is an effect that runs when the operation has completed
+# 	outcome_execute = { # SCOPE_OPERATION
+# 		FROM = { custom_effect_tooltip = GER_Decrease_influence_tt
+# 		subtract_from_variable = { GER_Influence = 1 } }
+# 	}
+# 	# This is where all the separate phases are defined
+# 	# Each phase for an operation may have a single actual phase assigned to it, which is determined here
+# 	phases = { #infiltration 
+# 		counter_influence_phase_1 = { base = 100 }
+# 	}
+# 	phases = { #infiltration 
+# 		counter_influence_phase_2 = { base = 100 }
+# 	}
+# 	phases = { #infiltration 
+# 		counter_influence_phase_3 = { base = 100 }
+# 	}
+# }
+# counter_russian_influence = { 
+# 	icon = GFX_operations_targeted_sabotage
+# 	map_icon = GFX_targeted_sabotage_map
+# 	name = operation_counter_influence_rus
+# 	desc = operation_counter_influence_rus_desc
+# 	days = 100
+# 	allowed = {
+# 	NOT = { original_tag = RUS }
+# 	}
+# 	available = { 
+# 		network_strength = {
+# 			target = FROM
+# 			value > 50
+# 		}
+# 		custom_trigger_tooltip = {
+# 		tooltip = tt_russia_has_influence
+# 		FROM = { check_variable = { RUS_Influence > 0 } }
+# 		}
+# 	}
+# 	visible = {
+# 		NOT = { has_war_with = FROM }
+# 		network_strength = {
+# 			target = FROM
+# 			value > 0
+# 		}
+# 	}
+# 	operatives = 1
+# 	network_strength = 50
+# 	on_start = {  # SCOPE_OPERATION
+# 	}
+# 	outcome_modifiers = { operation_outcome }
+# 	cost_modifiers = { operation_cost }
+# 	risk_modifiers = { operation_risk }
+# 	outcome_potential = {
+# 		FROM = { custom_effect_tooltip = RUS_Decrease_influence_tt
+# 	        subtract_from_variable = { RUS_Influence = 1 } }
+# 	}
+# 	risk_chance = 0.15
+# 	outcome_extra_chance = 0.25
+# 	experience = 1
+# 	# outcome is an effect that runs when the operation has completed
+# 	outcome_execute = { # SCOPE_OPERATION
+# 		FROM = { custom_effect_tooltip = GER_Decrease_influence_tt
+# 		subtract_from_variable = { GER_Influence = 1 } }
+# 	}
+# 	# This is where all the separate phases are defined
+# 	# Each phase for an operation may have a single actual phase assigned to it, which is determined here
+# 	phases = { #infiltration 
+# 		counter_influence_phase_1 = { base = 100 }
+# 	}
+# 	phases = { #infiltration 
+# 		counter_influence_phase_2 = { base = 100 }
+# 	}
+# 	phases = { #infiltration 
+# 		counter_influence_phase_3 = { base = 100 }
+# 	}
+# }
+# counter_canadian_influence = { 
+# 	icon = GFX_operations_targeted_sabotage
+# 	map_icon = GFX_targeted_sabotage_map
+# 	name = operation_counter_influence_can
+# 	desc = operation_counter_influence_can_desc
+# 	days = 100
+# 	allowed = {
+# 	NOT = { original_tag = CAN }
+# 	}
+# 	available = { 
+# 		network_strength = {
+# 			target = FROM
+# 			value > 50
+# 		}
+# 		custom_trigger_tooltip = {
+# 		tooltip = tt_canada_has_influence
+# 		FROM = { check_variable = { CAN_Influence > 0 } }
+# 		}
+# 	}
+# 	visible = {
+# 		NOT = { has_war_with = FROM }
+# 		network_strength = {
+# 			target = FROM
+# 			value > 0
+# 		}
+# 	}
+# 	operatives = 1
+# 	network_strength = 50
+# 	on_start = {  # SCOPE_OPERATION
+# 	}
+# 	outcome_modifiers = { operation_outcome }
+# 	cost_modifiers = { operation_cost }
+# 	risk_modifiers = { operation_risk }
+# 	outcome_potential = {
+# 		FROM = { custom_effect_tooltip = CAN_Decrease_influence_tt
+# 	        subtract_from_variable = { CAN_Influence = 1 } }
+# 	}
+# 	risk_chance = 0.15
+# 	outcome_extra_chance = 0.25
+# 	experience = 1
+# 	# outcome is an effect that runs when the operation has completed
+# 	outcome_execute = { # SCOPE_OPERATION
+# 		FROM = { custom_effect_tooltip = CAN_Decrease_influence_tt
+# 		subtract_from_variable = { CAN_Influence = 1 } }
+# 	}
+# 	# This is where all the separate phases are defined
+# 	# Each phase for an operation may have a single actual phase assigned to it, which is determined here
+# 	phases = { #infiltration 
+# 		counter_influence_phase_1 = { base = 100 }
+# 	}
+# 	phases = { #infiltration 
+# 		counter_influence_phase_2 = { base = 100 }
+# 	}
+# 	phases = { #infiltration 
+# 		counter_influence_phase_3 = { base = 100 }
+# 	}
+# }
+# counter_danubian_influence = { 
+# 	icon = GFX_operations_targeted_sabotage
+# 	map_icon = GFX_targeted_sabotage_map
+# 	name = operation_counter_influence_dnf
+# 	desc = operation_counter_influence_dnf_desc
+# 	days = 100
+# 	allowed = {
+# 	NOT = { original_tag = DNF }
+# 	}
+# 	available = { 
+# 		network_strength = {
+# 			target = FROM
+# 			value > 50
+# 		}
+# 		custom_trigger_tooltip = {
+# 		tooltip = tt_dnf_has_influence
+# 		FROM = { check_variable = { DNF_Influence > 0 } }
+# 		}
+# 	}
+# 	visible = {
+# 		NOT = { has_war_with = FROM }
+# 		network_strength = {
+# 			target = FROM
+# 			value > 0
+# 		}
+# 	}
+# 	operatives = 1
+# 	network_strength = 50
+# 	on_start = {  # SCOPE_OPERATION
+# 	}
+# 	outcome_modifiers = { operation_outcome }
+# 	cost_modifiers = { operation_cost }
+# 	risk_modifiers = { operation_risk }
+# 	outcome_potential = {
+# 		FROM = { custom_effect_tooltip = DNF_Decrease_influence_tt
+# 	        subtract_from_variable = { DNF_Influence = 1 } }
+# 	}
+# 	risk_chance = 0.15
+# 	outcome_extra_chance = 0.25
+# 	experience = 1
+# 	# outcome is an effect that runs when the operation has completed
+# 	outcome_execute = { # SCOPE_OPERATION
+# 		FROM = { custom_effect_tooltip = DNF_Decrease_influence_tt
+# 		subtract_from_variable = { DNF_Influence = 1 } }
+# 	}
+# 	# This is where all the separate phases are defined
+# 	# Each phase for an operation may have a single actual phase assigned to it, which is determined here
+# 	phases = { #infiltration 
+# 		counter_influence_phase_1 = { base = 100 }
+# 	}
+# 	phases = { #infiltration 
+# 		counter_influence_phase_2 = { base = 100 }
+# 	}
+# 	phases = { #infiltration 
+# 		counter_influence_phase_3 = { base = 100 }
+# 	}
+# }
+# counter_french_influence = { 
+# 	icon = GFX_operations_targeted_sabotage
+# 	map_icon = GFX_targeted_sabotage_map
+# 	name = operation_counter_influence_nfr
+# 	desc = operation_counter_influence_nfr_desc
+# 	days = 100
+# 	allowed = {
+# 	NOT = { original_tag = NFA }
+# 	}
+# 	available = { 
+# 		network_strength = {
+# 			target = FROM
+# 			value > 50
+# 		}
+# 		custom_trigger_tooltip = {
+# 		tooltip = tt_france_has_influence
+# 		FROM = { check_variable = { NFA_Influence > 0 } }
+# 		}
+# 	}
+# 	visible = {
+# 		NOT = { has_war_with = FROM }
+# 		network_strength = {
+# 			target = FROM
+# 			value > 0
+# 		}
+# 	}
+# 	operatives = 1
+# 	network_strength = 50
+# 	on_start = {  # SCOPE_OPERATION
+# 	}
+# 	outcome_modifiers = { operation_outcome }
+# 	cost_modifiers = { operation_cost }
+# 	risk_modifiers = { operation_risk }
+# 	outcome_potential = {
+# 		FROM = { custom_effect_tooltip = NFA_Decrease_influence_tt
+# 	        subtract_from_variable = { NFA_Influence = 1 } }
+# 	}
+# 	risk_chance = 0.15
+# 	outcome_extra_chance = 0.25
+# 	experience = 1
+# 	# outcome is an effect that runs when the operation has completed
+# 	outcome_execute = { # SCOPE_OPERATION
+# 		FROM = { custom_effect_tooltip = NFA_Decrease_influence_tt
+# 		subtract_from_variable = { NFA_Influence = 1 } }
+# 	}
+# 	# This is where all the separate phases are defined
+# 	# Each phase for an operation may have a single actual phase assigned to it, which is determined here
+# 	phases = { #infiltration 
+# 		counter_influence_phase_1 = { base = 100 }
+# 	}
+# 	phases = { #infiltration 
+# 		counter_influence_phase_2 = { base = 100 }
+# 	}
+# 	phases = { #infiltration 
+# 		counter_influence_phase_3 = { base = 100 }
+# 	}
+# }
+# counter_japanese_influence = { 
+# 	icon = GFX_operations_targeted_sabotage
+# 	map_icon = GFX_targeted_sabotage_map
+# 	name = operation_counter_influence_jap
+# 	desc = operation_counter_influence_jap_desc
+# 	days = 100
+# 	allowed = {
+# 	NOT = { original_tag = JAP }
+# 	}
+# 	available = { 
+# 		network_strength = {
+# 			target = FROM
+# 			value > 50
+# 		}
+# 		custom_trigger_tooltip = {
+# 		tooltip = tt_japan_has_influence
+# 		FROM = { check_variable = { JAP_Influence > 0 } }
+# 		}
+# 	}
+# 	visible = {
+# 		NOT = { has_war_with = FROM }
+# 		network_strength = {
+# 			target = FROM
+# 			value > 0
+# 		}
+# 	}
+# 	operatives = 1
+# 	network_strength = 50
+# 	on_start = {  # SCOPE_OPERATION
+# 	}
+# 	outcome_modifiers = { operation_outcome }
+# 	cost_modifiers = { operation_cost }
+# 	risk_modifiers = { operation_risk }
+# 	outcome_potential = {
+# 		FROM = { custom_effect_tooltip = JAP_Decrease_influence_tt
+# 	        subtract_from_variable = { JAP_Influence = 1 } }
+# 	}
+# 	risk_chance = 0.15
+# 	outcome_extra_chance = 0.25
+# 	experience = 1
+# 	# outcome is an effect that runs when the operation has completed
+# 	outcome_execute = { # SCOPE_OPERATION
+# 		FROM = { custom_effect_tooltip = JAP_Decrease_influence_tt
+# 		subtract_from_variable = { JAP_Influence = 1 } }
+# 	}
+# 	# This is where all the separate phases are defined
+# 	# Each phase for an operation may have a single actual phase assigned to it, which is determined here
+# 	phases = { #infiltration 
+# 		counter_influence_phase_1 = { base = 100 }
+# 	}
+# 	phases = { #infiltration 
+# 		counter_influence_phase_2 = { base = 100 }
+# 	}
+# 	phases = { #infiltration 
+# 		counter_influence_phase_3 = { base = 100 }
+# 	}
+# }
+# counter_british_influence = { 
+# 	icon = GFX_operations_targeted_sabotage
+# 	map_icon = GFX_targeted_sabotage_map
+# 	name = operation_counter_influence_eng
+# 	desc = operation_counter_influence_eng_desc
+# 	days = 100
+# 	allowed = {
+# 	NOT = { original_tag = ENG }
+# 	}
+# 	available = { 
+# 		network_strength = {
+# 			target = FROM
+# 			value > 50
+# 		}
+# 		custom_trigger_tooltip = {
+# 		tooltip = tt_britain_has_influence
+# 		FROM = { check_variable = { ENG_Influence > 0 } }
+# 		}
+# 	}
+# 	visible = {
+# 		NOT = { has_war_with = FROM }
+# 		network_strength = {
+# 			target = FROM
+# 			value > 0
+# 		}
+# 	}
+# 	operatives = 1
+# 	network_strength = 50
+# 	on_start = {  # SCOPE_OPERATION
+# 	}
+# 	outcome_modifiers = { operation_outcome }
+# 	cost_modifiers = { operation_cost }
+# 	risk_modifiers = { operation_risk }
+# 	outcome_potential = {
+# 		FROM = { custom_effect_tooltip = ENG_Decrease_influence_tt
+# 	        subtract_from_variable = { ENG_Influence = 1 } }
+# 	}
+# 	risk_chance = 0.15
+# 	outcome_extra_chance = 0.25
+# 	experience = 1
+# 	# outcome is an effect that runs when the operation has completed
+# 	outcome_execute = { # SCOPE_OPERATION
+# 		FROM = { custom_effect_tooltip = ENG_Decrease_influence_tt
+# 		subtract_from_variable = { ENG_Influence = 1 } }
+# 	}
+# 	# This is where all the separate phases are defined
+# 	# Each phase for an operation may have a single actual phase assigned to it, which is determined here
+# 	phases = { #infiltration 
+# 		counter_influence_phase_1 = { base = 100 }
+# 	}
+# 	phases = { #infiltration 
+# 		counter_influence_phase_2 = { base = 100 }
+# 	}
+# 	phases = { #infiltration 
+# 		counter_influence_phase_3 = { base = 100 }
+# 	}
+# }
+# counter_american_influence = { 
+# 	icon = GFX_operations_targeted_sabotage
+# 	map_icon = GFX_targeted_sabotage_map
+# 	name = operation_counter_influence_tex
+# 	desc = operation_counter_influence_tex_desc
+# 	days = 100
+# 	allowed = {
+# 	NOT = { original_tag = TEX }
+# 	}
+# 	available = { 
+# 		network_strength = {
+# 			target = FROM
+# 			value > 50
+# 		}
+# 		custom_trigger_tooltip = {
+# 		tooltip = tt_america_has_influence
+# 		FROM = { check_variable = { TEX_Influence > 0 } }
+# 		}
+# 	}
+# 	visible = {
+# 		NOT = { has_war_with = FROM }
+# 		network_strength = {
+# 			target = FROM
+# 			value > 0
+# 		}
+# 	}
+# 	operatives = 1
+# 	network_strength = 50
+# 	on_start = {  # SCOPE_OPERATION
+# 	}
+# 	outcome_modifiers = { operation_outcome }
+# 	cost_modifiers = { operation_cost }
+# 	risk_modifiers = { operation_risk }
+# 	outcome_potential = {
+# 		FROM = { custom_effect_tooltip = TEX_Decrease_influence_tt
+# 	        subtract_from_variable = { TEX_Influence = 1 } }
+# 	}
+# 	risk_chance = 0.15
+# 	outcome_extra_chance = 0.25
+# 	experience = 1
+# 	# outcome is an effect that runs when the operation has completed
+# 	outcome_execute = { # SCOPE_OPERATION
+# 		FROM = { custom_effect_tooltip = TEX_Decrease_influence_tt
+# 		subtract_from_variable = { TEX_Influence = 1 } }
+# 	}
+# 	# This is where all the separate phases are defined
+# 	# Each phase for an operation may have a single actual phase assigned to it, which is determined here
+# 	phases = { #infiltration 
+# 		counter_influence_phase_1 = { base = 100 }
+# 	}
+# 	phases = { #infiltration 
+# 		counter_influence_phase_2 = { base = 100 }
+# 	}
+# 	phases = { #infiltration 
+# 		counter_influence_phase_3 = { base = 100 }
+# 	}
+# }
+# increase_danubian_influence = { ### 1/50
+# 	icon = GFX_operations_make_resistance_contacts
+# 	map_icon = GFX_make_resistance_contacts_map
+# 	name = operation_influence_dnf
+# 	desc = operation_influence_dnf_desc
+# 	days = 75
+# 	allowed = {
+# 	 original_tag = DNF
+# 	}
+# 	available = { 
+# 		network_strength = {
+# 			target = FROM
+# 			value > 50
+# 		}
+# 	}
+# 	visible = {
+# 		NOT = { has_war_with = FROM }
+# 		network_strength = {
+# 			target = FROM
+# 			value > 0
+# 		}
+# 	}
+# 	operatives = 1
+# 	network_strength = 50
+# 	on_start = {  # SCOPE_OPERATION
+# 	}
+# 	outcome_modifiers = { operation_outcome }
+# 	cost_modifiers = { operation_cost }
+# 	risk_modifiers = { operation_risk }
+# 	outcome_potential = {
+# 		FROM = { custom_effect_tooltip = DNF_Increase_influence_tt
+# 	        add_to_variable = { DNF_Influence = 1 } }
+# 	}
+# 	risk_chance = 0.15
+# 	outcome_extra_chance = 0.25
+# 	experience = 1
+# 	# outcome is an effect that runs when the operation has completed
+# 	outcome_execute = { # SCOPE_OPERATION
+# 		FROM = { custom_effect_tooltip = DNF_Increase_influence_tt
+# 		add_to_variable = { DNF_Influence = 1 } }
+# 	}
+# 	# This is where all the separate phases are defined
+# 	# Each phase for an operation may have a single actual phase assigned to it, which is determined here
+# 	phases = { #infiltration 
+# 		german_influence_op_1 = { base = 100 }
+# 	}
+# }
+# increase_russian_influence = { ### 1/50
+# 	icon = GFX_operations_make_resistance_contacts
+# 	map_icon = GFX_make_resistance_contacts_map
+# 	name = operation_influence_rus
+# 	desc = operation_influence_rus_desc
+# 	days = 75
+# 	allowed = {
+# 	 original_tag = RUS
+# 	}
+# 	available = { 
+# 		network_strength = {
+# 			target = FROM
+# 			value > 50
+# 		}
+# 	}
+# 	visible = {
+# 		NOT = { has_war_with = FROM }
+# 		network_strength = {
+# 			target = FROM
+# 			value > 0
+# 		}
+# 	}
+# 	operatives = 1
+# 	network_strength = 50
+# 	on_start = {  # SCOPE_OPERATION
+# 	}
+# 	outcome_modifiers = { operation_outcome }
+# 	cost_modifiers = { operation_cost }
+# 	risk_modifiers = { operation_risk }
+# 	outcome_potential = {
+# 		FROM = { custom_effect_tooltip = RUS_Increase_influence_tt
+# 	        add_to_variable = { RUS_Influence = 1 } }
+# 	}
+# 	risk_chance = 0.15
+# 	outcome_extra_chance = 0.25
+# 	experience = 1
+# 	# outcome is an effect that runs when the operation has completed
+# 	outcome_execute = { # SCOPE_OPERATION
+# 		FROM = { custom_effect_tooltip = RUS_Increase_influence_tt
+# 		add_to_variable = { RUS_Influence = 1 } }
+# 	}
+# 	# This is where all the separate phases are defined
+# 	# Each phase for an operation may have a single actual phase assigned to it, which is determined here
+# 	phases = { #infiltration 
+# 		german_influence_op_1 = { base = 100 }
+# 	}
+# }
+# increase_canadian_influence = { ### 1/50
+# 	icon = GFX_operations_make_resistance_contacts
+# 	map_icon = GFX_make_resistance_contacts_map
+# 	name = operation_influence_can
+# 	desc = operation_influence_can_desc
+# 	days = 75
+# 	allowed = {
+# 	 original_tag = CAN
+# 	}
+# 	available = { 
+# 		network_strength = {
+# 			target = FROM
+# 			value > 50
+# 		}
+# 	}
+# 	visible = {
+# 		NOT = { has_war_with = FROM }
+# 		network_strength = {
+# 			target = FROM
+# 			value > 0
+# 		}
+# 	}
+# 	operatives = 1
+# 	network_strength = 50
+# 	on_start = {  # SCOPE_OPERATION
+# 	}
+# 	outcome_modifiers = { operation_outcome }
+# 	cost_modifiers = { operation_cost }
+# 	risk_modifiers = { operation_risk }
+# 	outcome_potential = {
+# 		FROM = { custom_effect_tooltip = CAN_Increase_influence_tt
+# 	        add_to_variable = { CAN_Influence = 1 } }
+# 	}
+# 	risk_chance = 0.15
+# 	outcome_extra_chance = 0.25
+# 	experience = 1
+# 	# outcome is an effect that runs when the operation has completed
+# 	outcome_execute = { # SCOPE_OPERATION
+# 		FROM = { custom_effect_tooltip = CAN_Increase_influence_tt
+# 		add_to_variable = { CAN_Influence = 1 } }
+# 	}
+# 	# This is where all the separate phases are defined
+# 	# Each phase for an operation may have a single actual phase assigned to it, which is determined here
+# 	phases = { #infiltration 
+# 		german_influence_op_1 = { base = 100 }
+# 	}
+# }
+# increase_french_influence = { ### 1/50
+# 	icon = GFX_operations_make_resistance_contacts
+# 	map_icon = GFX_make_resistance_contacts_map
+# 	name = operation_influence_nfr
+# 	desc = operation_influence_nfr_desc
+# 	days = 75
+# 	allowed = {
+# 	 original_tag = NFA
+# 	}
+# 	available = { 
+# 		network_strength = {
+# 			target = FROM
+# 			value > 50
+# 		}
+# 	}
+# 	visible = {
+# 		NOT = { has_war_with = FROM }
+# 		network_strength = {
+# 			target = FROM
+# 			value > 0
+# 		}
+# 	}
+# 	operatives = 1
+# 	network_strength = 50
+# 	on_start = {  # SCOPE_OPERATION
+# 	}
+# 	outcome_modifiers = { operation_outcome }
+# 	cost_modifiers = { operation_cost }
+# 	risk_modifiers = { operation_risk }
+# 	outcome_potential = {
+# 		FROM = { custom_effect_tooltip = NFA_Increase_influence_tt
+# 	        add_to_variable = { NFA_Influence = 1 } }
+# 	}
+# 	risk_chance = 0.15
+# 	outcome_extra_chance = 0.25
+# 	experience = 1
+# 	# outcome is an effect that runs when the operation has completed
+# 	outcome_execute = { # SCOPE_OPERATION
+# 		FROM = { custom_effect_tooltip = NFA_Increase_influence_tt
+# 		add_to_variable = { NFA_Influence = 1 } }
+# 	}
+# 	# This is where all the separate phases are defined
+# 	# Each phase for an operation may have a single actual phase assigned to it, which is determined here
+# 	phases = { #infiltration 
+# 		german_influence_op_1 = { base = 100 }
+# 	}
+# }
+# increase_american_influence = { ### 1/50
+# 	icon = GFX_operations_make_resistance_contacts
+# 	map_icon = GFX_make_resistance_contacts_map
+# 	name = operation_influence_tex
+# 	desc = operation_influence_tex_desc
+# 	days = 75
+# 	allowed = {
+# 	 original_tag = TEX
+# 	}
+# 	available = { 
+# 		network_strength = {
+# 			target = FROM
+# 			value > 50
+# 		}
+# 	}
+# 	visible = {
+# 		NOT = { has_war_with = FROM }
+# 		network_strength = {
+# 			target = FROM
+# 			value > 0
+# 		}
+# 	}
+# 	operatives = 1
+# 	network_strength = 50
+# 	on_start = {  # SCOPE_OPERATION
+# 	}
+# 	outcome_modifiers = { operation_outcome }
+# 	cost_modifiers = { operation_cost }
+# 	risk_modifiers = { operation_risk }
+# 	outcome_potential = {
+# 		FROM = { custom_effect_tooltip = TEX_Increase_influence_tt
+# 	        add_to_variable = { TEX_Influence = 1 } }
+# 	}
+# 	risk_chance = 0.15
+# 	outcome_extra_chance = 0.25
+# 	experience = 1
+# 	# outcome is an effect that runs when the operation has completed
+# 	outcome_execute = { # SCOPE_OPERATION
+# 		FROM = { custom_effect_tooltip = TEX_Increase_influence_tt
+# 		add_to_variable = { TEX_Influence = 1 } }
+# 	}
+# 	# This is where all the separate phases are defined
+# 	# Each phase for an operation may have a single actual phase assigned to it, which is determined here
+# 	phases = { #infiltration 
+# 		german_influence_op_1 = { base = 100 }
+# 	}
+# }
+# increase_japanese_influence = { ### 1/50
+# 	icon = GFX_operations_make_resistance_contacts
+# 	map_icon = GFX_make_resistance_contacts_map
+# 	name = operation_influence_jap
+# 	desc = operation_influence_jap_desc
+# 	days = 75
+# 	allowed = {
+# 	 original_tag = JAP
+# 	}
+# 	available = { 
+# 		network_strength = {
+# 			target = FROM
+# 			value > 50
+# 		}
+# 	}
+# 	visible = {
+# 		NOT = { has_war_with = FROM }
+# 		network_strength = {
+# 			target = FROM
+# 			value > 0
+# 		}
+# 	}
+# 	operatives = 1
+# 	network_strength = 50
+# 	on_start = {  # SCOPE_OPERATION
+# 	}
+# 	outcome_modifiers = { operation_outcome }
+# 	cost_modifiers = { operation_cost }
+# 	risk_modifiers = { operation_risk }
+# 	outcome_potential = {
+# 		FROM = { custom_effect_tooltip = JAP_Increase_influence_tt
+# 	        add_to_variable = { JAP_Influence = 1 } }
+# 	}
+# 	risk_chance = 0.15
+# 	outcome_extra_chance = 0.25
+# 	experience = 1
+# 	# outcome is an effect that runs when the operation has completed
+# 	outcome_execute = { # SCOPE_OPERATION
+# 		FROM = { custom_effect_tooltip = JAP_Increase_influence_tt
+# 		add_to_variable = { JAP_Influence = 1 } }
+# 	}
+# 	# This is where all the separate phases are defined
+# 	# Each phase for an operation may have a single actual phase assigned to it, which is determined here
+# 	phases = { #infiltration 
+# 		german_influence_op_1 = { base = 100 }
+# 	}
+# }
+# increase_british_influence = { ### 1/50
+# 	icon = GFX_operations_make_resistance_contacts
+# 	map_icon = GFX_make_resistance_contacts_map
+# 	name = operation_influence_eng
+# 	desc = operation_influence_eng_desc
+# 	days = 75
+# 	allowed = {
+# 	 original_tag = ENG
+# 	}
+# 	available = { 
+# 		network_strength = {
+# 			target = FROM
+# 			value > 50
+# 		}
+# 	}
+# 	visible = {
+# 		NOT = { has_war_with = FROM }
+# 		network_strength = {
+# 			target = FROM
+# 			value > 0
+# 		}
+# 	}
+# 	operatives = 1
+# 	network_strength = 50
+# 	on_start = {  # SCOPE_OPERATION
+# 	}
+# 	outcome_modifiers = { operation_outcome }
+# 	cost_modifiers = { operation_cost }
+# 	risk_modifiers = { operation_risk }
+# 	outcome_potential = {
+# 		FROM = { custom_effect_tooltip = ENG_Increase_influence_tt
+# 	        add_to_variable = { ENG_Influence = 1 } }
+# 	}
+# 	risk_chance = 0.15
+# 	outcome_extra_chance = 0.25
+# 	experience = 1
+# 	# outcome is an effect that runs when the operation has completed
+# 	outcome_execute = { # SCOPE_OPERATION
+# 		FROM = { custom_effect_tooltip = ENG_Increase_influence_tt
+# 		add_to_variable = { ENG_Influence = 1 } }
+# 	}
+# 	# This is where all the separate phases are defined
+# 	# Each phase for an operation may have a single actual phase assigned to it, which is determined here
+# 	phases = { #infiltration 
+# 		german_influence_op_1 = { base = 100 }
+# 	}
+# }

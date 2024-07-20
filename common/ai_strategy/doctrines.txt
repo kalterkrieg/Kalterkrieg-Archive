@@ -1,0 +1,352 @@
+stop_making_horsies = {
+	enable = {
+		num_of_factories > 5
+	}
+	abort = {
+		always = no
+	}
+	ai_strategy = {
+		type = role_ratio
+		id = cavalry
+		value = -100 # -100% cav
+	}		
+}
+
+############
+### LAND ###
+############
+#armor
+#infantry
+#motorized
+#mechanized
+#air_transport
+#anti_air
+#artillery
+#anti_tank
+#cavalry
+#marines
+#mountaineer
+
+# No cav if we have motor inf
+no_cavalry = {
+	enable = {
+		has_tech = motorised_infantry
+	}
+	abort = {
+		always = no
+	}
+	
+	ai_strategy = {
+		type = role_ratio
+		id = cavalry
+		value = -100 
+	}
+}
+
+#Mobile Warfare branch
+maneuver_warfare_ratios = {
+	enable = {
+		has_tech = maneuver_warfare
+	}
+	abort = {
+		always = no
+	}
+	
+	ai_strategy = {
+		type = role_ratio
+		id = armor
+		value = 10
+	}
+	
+	ai_strategy = {
+		type = role_ratio
+		id = motorized
+		value = 2
+	}
+
+	ai_strategy = {
+		type = role_ratio
+		id = mechanized
+		value = 2
+	}
+}
+
+combined_operations_ratios = {
+	enable = {
+		has_tech = combined_operations
+	}
+	abort = {
+		always = no
+	}
+	
+	ai_strategy = {
+		type = role_ratio
+		id = infantry
+		value = 10
+	}
+
+	ai_strategy = {
+		type = role_ratio
+		id = artillery
+		value = 15
+	}
+	ai_strategy = {
+		type = role_ratio
+		id = armor
+		value = 5
+	}
+	ai_strategy = {
+		type = role_ratio
+		id = cas
+		value = 5
+	}
+}
+
+
+asymmetrical_warfare_ratios = {
+	enable = {
+		has_tech = asymmetrical_warfare
+	}
+	abort = {
+		always = no
+	}
+	
+	ai_strategy = {
+		type = role_ratio
+		id = infantry
+		value = 20
+	}
+	
+	ai_strategy = {
+		type = role_ratio
+		id = anti_tank
+		value = 5
+	}	
+
+	
+}
+
+
+deep_battle_ratios = {
+	enable = {
+		has_tech = deep_battle
+	}
+	abort = {
+		always = no
+	}
+	
+	ai_strategy = {
+		type = role_ratio
+		id = infantry
+		value = 25
+	}	
+
+	ai_strategy = {
+		type = role_ratio
+		id = armor
+		value = 5
+	}
+
+	ai_strategy = {
+		type = role_ratio
+		id = motorized
+		value = 5
+	}
+
+	ai_strategy = {
+		type = role_ratio
+		id = mechanized
+		value = 5
+	}
+
+}
+
+
+##############
+### NAVAL ####
+##############
+#capital_ship
+#submarine
+#screen_ship
+#convoy
+#naval_transport
+#carrier
+
+
+#Fleet in being tree
+naval_supremacy_ratios = {
+	enable = {
+		has_tech = naval_supremacy
+	}
+	abort = {
+		always = no
+	}
+
+	ai_strategy = {
+		type = unit_ratio
+		id = carrier
+		value = 10
+	}
+	ai_strategy = {
+		type = unit_ratio
+		id = screen_ship
+		value = 2
+	}
+}
+blue_water_navy_ratios = {
+	enable = {
+		has_tech = blue_water_navy
+	}
+	abort = {
+		always = no
+	}
+
+	ai_strategy = {
+		type = unit_ratio
+		id = capital_ship
+		value = 5
+	}
+
+	ai_strategy = {
+		type = unit_ratio
+		id = screen_ship
+		value = 5
+	}
+	ai_strategy = {
+		type = unit_ratio
+		id = submarine
+		value = 2
+	}
+}
+
+green_water_navy_ratios = {
+	enable = {
+		has_tech = green_water_navy
+	}
+	abort = {
+		always = no
+	}
+
+	ai_strategy = {
+		type = unit_ratio
+		id = capital_ship
+		value = 2
+	}
+
+	ai_strategy = {
+		type = unit_ratio
+		id = screen_ship
+		value = 10
+	}
+	ai_strategy = {
+		type = unit_ratio
+		id = submarine
+		value = 5
+	}
+}
+
+
+brown_water_navy_ratios = {
+	enable = {
+		has_tech = brown_water_navy
+	}
+	abort = {
+		always = no
+	}
+
+	ai_strategy = {
+		type = unit_ratio
+		id = screen_ship
+		value = 5
+	}
+	ai_strategy = {
+		type = unit_ratio
+		id = submarine
+		value = 5
+	}
+}
+
+##############
+###  AIR  ####
+##############
+#rocket
+#fighter
+#cas
+#interceptor
+#tactical_bomber
+#strategic_bomber
+#naval_bomber
+
+#Strategic Destruction tree
+air_superiority_ratios = {
+	enable = {
+		has_tech = air_superiority
+	}
+	abort = {
+		always = no
+	}
+	
+	ai_strategy = {
+		type = unit_ratio
+		id = fighter
+		value = 50
+	}
+}
+
+air_night_day_bombing_ratios = {
+	enable = {
+		OR = {
+			has_tech = night_bombing
+			has_tech = day_bombing		
+		}
+	}
+	abort = {
+		always = no
+	}
+	
+	ai_strategy = {
+		type = unit_ratio
+		id = strategic_bomber
+		value = 50
+	}
+	
+}
+
+#Battlefield Support tree
+formation_flying = {
+	enable = {
+		has_tech = formation_flying
+	}
+	abort = {
+		always = no
+	}
+	
+	ai_strategy = {
+		type = unit_ratio
+		id = interceptor
+		value = 20
+	}
+
+	ai_strategy = {
+		type = unit_ratio
+		id = cas
+		value = 50
+	}
+}
+
+#Operational Integrity tree
+force_rotation = {
+	enable = {
+		has_tech = force_rotation
+	}
+	abort = {
+		always = no
+	}
+	
+	ai_strategy = {
+		type = unit_ratio
+		id = fighter
+		value = 30
+	}
+	
+}

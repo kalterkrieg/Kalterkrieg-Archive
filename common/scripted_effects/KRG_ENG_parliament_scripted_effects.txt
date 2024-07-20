@@ -1,0 +1,1308 @@
+ENG_commons_government_init = {
+	ENG_commons_process_government_seats = yes
+
+	set_temp_variable = { t1 = ENG_commons_government_AutSoc }
+	set_temp_variable = { t2 = ENG_commons_government_RadSoc }
+	set_temp_variable = { t3 = ENG_commons_government_SocDem }
+	set_temp_variable = { t4 = ENG_commons_government_IndLab} #Old t12
+
+	set_temp_variable = { t5 = ENG_commons_government_RevRep } #Old t4
+	set_temp_variable = { t6 = ENG_commons_government_SocLib } #Old t5
+	set_temp_variable = { t7 = ENG_commons_government_MarLib } #Old t6
+	set_temp_variable = { t8 = ENG_commons_government_IndLib } #Old t13
+	set_temp_variable = { t9 = ENG_commons_government_IndSct } #Old t16
+
+	set_temp_variable = { t10 = ENG_commons_government_SocCon_ON } #Old t7
+	set_temp_variable = { t11 = ENG_commons_government_SocCon_C } #Old t8
+	set_temp_variable = { t12 = ENG_commons_government_IndCon } #Old t14
+
+	set_temp_variable = { t13 = ENG_commons_government_AutDem } #Old t9
+	set_temp_variable = { t14 = ENG_commons_government_PatAut } #Old t10
+	set_temp_variable = { t15 = ENG_commons_government_NatPop } #Old t11
+	
+	set_temp_variable = { t16 = ENG_commons_government_Ind } #Old t15
+
+	add_to_temp_variable = { t2 = t1 }
+	add_to_temp_variable = { t3 = t2 }
+	add_to_temp_variable = { t4 = t3 }
+	add_to_temp_variable = { t5 = t4 }
+	add_to_temp_variable = { t6 = t5 }
+	add_to_temp_variable = { t7 = t6 }
+	add_to_temp_variable = { t8 = t7 }
+	add_to_temp_variable = { t9 = t8 }
+	add_to_temp_variable = { t10 = t9 }
+	add_to_temp_variable = { t11 = t10 }
+	add_to_temp_variable = { t12 = t11 }
+	add_to_temp_variable = { t13 = t12 }
+	add_to_temp_variable = { t14 = t13 }
+	add_to_temp_variable = { t15 = t14 }
+	add_to_temp_variable = { t16 = t15 }
+
+
+	clear_array = ENG_commons_government_seat_frame
+
+	resize_array = {
+		array = ENG_commons_government_seat_frame
+		value = 1
+		size = t1
+	}
+	resize_array = {
+		array = ENG_commons_government_seat_frame
+		value = 2
+		size = t2
+	}
+	resize_array = {
+		array = ENG_commons_government_seat_frame
+		value = 3
+		size = t3
+	}
+	resize_array = {
+		array = ENG_commons_government_seat_frame
+		value = 4
+		size = t4
+	}
+	resize_array = {
+		array = ENG_commons_government_seat_frame
+		value = 5
+		size = t5
+	}
+	resize_array = {
+		array = ENG_commons_government_seat_frame
+		value = 6
+		size = t6
+	}
+	resize_array = {
+		array = ENG_commons_government_seat_frame
+		value = 7
+		size = t7
+	}
+	resize_array = {
+		array = ENG_commons_government_seat_frame
+		value = 8
+		size = t8
+	}
+	resize_array = {
+		array = ENG_commons_government_seat_frame
+		value = 9
+		size = t9
+	}
+	resize_array = {
+		array = ENG_commons_government_seat_frame
+		value = 10
+		size = t10
+	}
+	resize_array = {
+		array = ENG_commons_government_seat_frame
+		value = 11
+		size = t11
+	}
+	resize_array = {
+		array = ENG_commons_government_seat_frame
+		value = 12
+		size = t12
+	}
+	resize_array = {
+		array = ENG_commons_government_seat_frame
+		value = 13
+		size = t13
+	}
+	resize_array = {
+		array = ENG_commons_government_seat_frame
+		value = 14
+		size = t14
+	}
+	resize_array = {
+		array = ENG_commons_government_seat_frame
+		value = 15
+		size = t15
+	}
+	resize_array = {
+		array = ENG_commons_government_seat_frame
+		value = 16
+		size = t16
+	}
+	
+
+	# Loop to generate positions of the seats (Performance heavy to some degree do not run often)	
+	clear_array = ENG_commons_government_seat_x
+	clear_array = ENG_commons_government_seat_y
+	#"For loop" that goes through every seat and calcutaltes their position
+	set_temp_variable = { ENG_parliament_loop_i = 0 }
+	set_temp_variable = { ENG_temp_parliament_divide = 0 }
+	while_loop_effect = {
+		limit = { 
+			check_variable = {
+				var = ENG_parliament_loop_i
+				value = ENG_commons_government_seats
+				compare = less_than
+			}
+		}
+
+		#Decides x position, by dividing i by the set grid height and then round of to find the corresponding x
+		set_temp_variable = { ENG_temp_parliament_x = ENG_parliament_loop_i }
+		set_temp_variable = { ENG_temp_parliament_divide = ENG_temp_parliament_x }
+
+		divide_temp_variable = {
+			var = ENG_temp_parliament_divide
+			value = ENG_parliament_grid_height
+		}
+
+		add_to_temp_variable = {
+			ENG_temp_parliament_divide = -0.5
+		}
+
+		clamp_temp_variable = {
+			var = ENG_temp_parliament_divide
+			min = 0
+		}
+
+		round_temp_variable = ENG_temp_parliament_divide
+
+		set_temp_variable = { ENG_x_divided = ENG_temp_parliament_divide }
+		multiply_temp_variable = { ENG_x_divided = 10 }
+
+		add_to_array = { ENG_commons_government_seat_x =  ENG_x_divided }
+
+		# Decides Y position, it finds its relative y position by finding which row its in and then using its position in that row to give y
+		multiply_temp_variable = { ENG_temp_parliament_divide = ENG_parliament_grid_height }
+
+		set_temp_variable = { ENG_subtract_variabel_y = ENG_temp_parliament_divide }
+		set_temp_variable = { ENG_temp_parliament_divide = ENG_parliament_loop_i }
+
+		subtract_from_temp_variable = { ENG_temp_parliament_divide = ENG_subtract_variabel_y}
+
+		multiply_temp_variable = { ENG_temp_parliament_divide = 10 }
+
+		add_to_array = { ENG_commons_government_seat_y =  ENG_temp_parliament_divide }
+
+		add_to_temp_variable = { ENG_parliament_loop_i =  1 }
+	}
+}
+
+ENG_commons_opposition_init = {
+	ENG_commons_process_opposition_seats = yes
+
+    set_temp_variable = { t1 = ENG_commons_opposition_AutSoc }
+	set_temp_variable = { t2 = ENG_commons_opposition_RadSoc }
+	set_temp_variable = { t3 = ENG_commons_opposition_SocDem }
+	set_temp_variable = { t4 = ENG_commons_opposition_IndLab} #Old t12
+
+	set_temp_variable = { t5 = ENG_commons_opposition_RevRep } #Old t4
+	set_temp_variable = { t6 = ENG_commons_opposition_SocLib } #Old t5
+	set_temp_variable = { t7 = ENG_commons_opposition_MarLib } #Old t6
+	set_temp_variable = { t8 = ENG_commons_opposition_IndLib } #Old t13
+	set_temp_variable = { t9 = ENG_commons_opposition_IndSct } #Old t16
+
+	set_temp_variable = { t10 = ENG_commons_opposition_SocCon_ON } #Old t7
+	set_temp_variable = { t11 = ENG_commons_opposition_SocCon_C } #Old t8
+	set_temp_variable = { t12 = ENG_commons_opposition_IndCon } #Old t14
+
+	set_temp_variable = { t13 = ENG_commons_opposition_AutDem } #Old t9
+	set_temp_variable = { t14 = ENG_commons_opposition_PatAut } #Old t10
+	set_temp_variable = { t15 = ENG_commons_opposition_NatPop } #Old t11
+	
+	set_temp_variable = { t16 = ENG_commons_opposition_Ind } #Old t15
+
+	add_to_temp_variable = { t2 = t1 }
+	add_to_temp_variable = { t3 = t2 }
+	add_to_temp_variable = { t4 = t3 }
+	add_to_temp_variable = { t5 = t4 }
+	add_to_temp_variable = { t6 = t5 }
+	add_to_temp_variable = { t7 = t6 }
+	add_to_temp_variable = { t8 = t7 }
+	add_to_temp_variable = { t9 = t8 }
+	add_to_temp_variable = { t10 = t9 }
+	add_to_temp_variable = { t11 = t10 }
+	add_to_temp_variable = { t12 = t11 }
+	add_to_temp_variable = { t13 = t12 }
+	add_to_temp_variable = { t14 = t13 }
+	add_to_temp_variable = { t15 = t14 }
+	add_to_temp_variable = { t16 = t15 }
+
+    clear_array = ENG_commons_opposition_seat_frame
+
+	resize_array = {
+		array = ENG_commons_opposition_seat_frame
+		value = 1
+		size = t1
+	}
+	resize_array = {
+		array = ENG_commons_opposition_seat_frame
+		value = 2
+		size = t2
+	}
+	resize_array = {
+		array = ENG_commons_opposition_seat_frame
+		value = 3
+		size = t3
+	}
+	resize_array = {
+		array = ENG_commons_opposition_seat_frame
+		value = 4
+		size = t4
+	}
+	resize_array = {
+		array = ENG_commons_opposition_seat_frame
+		value = 5
+		size = t5
+	}
+	resize_array = {
+		array = ENG_commons_opposition_seat_frame
+		value = 6
+		size = t6
+	}
+	resize_array = {
+		array = ENG_commons_opposition_seat_frame
+		value = 7
+		size = t7
+	}
+	resize_array = {
+		array = ENG_commons_opposition_seat_frame
+		value = 8
+		size = t8
+	}
+	resize_array = {
+		array = ENG_commons_opposition_seat_frame
+		value = 9
+		size = t9
+	}
+	resize_array = {
+		array = ENG_commons_opposition_seat_frame
+		value = 10
+		size = t10
+	}
+	resize_array = {
+		array = ENG_commons_opposition_seat_frame
+		value = 11
+		size = t11
+	}
+	resize_array = {
+		array = ENG_commons_opposition_seat_frame
+		value = 12
+		size = t12
+	}
+	resize_array = {
+		array = ENG_commons_opposition_seat_frame
+		value = 13
+		size = t13
+	}
+	resize_array = {
+		array = ENG_commons_opposition_seat_frame
+		value = 14
+		size = t14
+	}
+	resize_array = {
+		array = ENG_commons_opposition_seat_frame
+		value = 15
+		size = t15
+	}
+	resize_array = {
+		array = ENG_commons_opposition_seat_frame
+		value = 16
+		size = t16
+	}
+
+    # Loop to generate positions of the seats (Performance heavy to some degree do not run often)
+    clear_array = ENG_commons_opposition_seat_x
+    clear_array = ENG_commons_opposition_seat_y
+    #"For loop" that goes through every seat and calculates their position
+    set_temp_variable = { ENG_parliament_loop_i = 0 }
+    set_temp_variable = { ENG_temp_parliament_divide = 0 }
+    while_loop_effect = {
+        limit = {
+            check_variable = {
+                var = ENG_parliament_loop_i
+                value = ENG_commons_opposition_seats
+                compare = less_than
+            }
+        }
+
+        # Decides x position, by dividing i by the set grid height and then rounding off to find the corresponding x
+        set_temp_variable = { ENG_temp_parliament_x = ENG_parliament_loop_i }
+        set_temp_variable = { ENG_temp_parliament_divide = ENG_temp_parliament_x }
+
+        divide_temp_variable = {
+            var = ENG_temp_parliament_divide
+            value = ENG_parliament_grid_height
+        }
+
+        add_to_temp_variable = {
+            ENG_temp_parliament_divide = -0.5
+        }
+
+        clamp_temp_variable = {
+            var = ENG_temp_parliament_divide
+            min = 0
+        }
+
+        round_temp_variable = ENG_temp_parliament_divide
+
+        set_temp_variable = { ENG_x_divided = ENG_temp_parliament_divide }
+        multiply_temp_variable = { ENG_x_divided = 10 }
+
+        add_to_array = { ENG_commons_opposition_seat_x =  ENG_x_divided }
+
+        # Decides Y position, it finds its relative y position by finding which row it's in and then using its position in that row to give y
+        multiply_temp_variable = { ENG_temp_parliament_divide = ENG_parliament_grid_height }
+
+        set_temp_variable = { ENG_subtract_variabel_y = ENG_temp_parliament_divide }
+        set_temp_variable = { ENG_temp_parliament_divide = ENG_parliament_loop_i }
+
+        subtract_from_temp_variable = { ENG_temp_parliament_divide = ENG_subtract_variabel_y }
+
+        multiply_temp_variable = { ENG_temp_parliament_divide = 10 }
+
+        add_to_array = { ENG_commons_opposition_seat_y =  ENG_temp_parliament_divide }
+
+        add_to_temp_variable = { ENG_parliament_loop_i =  1 }
+    }
+}
+
+ENG_commons_process_government_seats = {
+	if = {
+		limit = { 
+			NOT = { has_variable = ENG_commons_government_AutSoc }
+		}
+		set_temp_variable = { ENG_commons_government_AutSoc = 0 }
+	}
+	if = {
+		limit = { 
+			NOT = { has_variable = ENG_commons_government_RadSoc }
+		}
+		set_temp_variable = { ENG_commons_government_RadSoc = 0 }
+	}
+	if = {
+		limit = { 
+			NOT = { has_variable = ENG_commons_government_SocDem }
+		}
+		set_temp_variable = { ENG_commons_government_SocDem = 0 }
+	}
+	if = {
+		limit = { 
+			NOT = { has_variable = ENG_commons_government_RevRep }
+		}
+		set_temp_variable = { ENG_commons_government_RevRep = 0 }
+	}
+	if = {
+		limit = { 
+			NOT = { has_variable = ENG_commons_government_SocLib }
+		}
+		set_temp_variable = { ENG_commons_government_SocLib = 0 }
+	}
+	if = {
+		limit = { 
+			NOT = { has_variable = ENG_commons_government_MarLib }
+		}
+		set_temp_variable = { ENG_commons_government_MarLib = 0 }
+	}
+	if = {
+		limit = { 
+			NOT = { has_variable = ENG_commons_government_SocCon_ON }
+		}
+		set_temp_variable = { ENG_commons_government_SocCon_ON = 0 }
+	}
+	if = {
+		limit = { 
+			NOT = { has_variable = ENG_commons_government_SocCon_C }
+		}
+		set_temp_variable = { ENG_commons_government_SocCon_C = 0 }
+	}
+	if = {
+		limit = { 
+			NOT = { has_variable = ENG_commons_government_AutDem }
+		}
+		set_temp_variable = { ENG_commons_government_AutDem = 0 }
+	}
+	if = {
+		limit = { 
+			NOT = { has_variable = ENG_commons_government_PatAut }
+		}
+		set_temp_variable = { ENG_commons_government_PatAut = 0 }
+	}
+	if = {
+		limit = { 
+			NOT = { has_variable = ENG_commons_government_NatPop }
+		}
+		set_temp_variable = { ENG_commons_government_NatPop = 0 }
+	}
+	if = {
+		limit = { 
+			NOT = { has_variable = ENG_commons_government_IndLab }
+		}
+		set_temp_variable = { ENG_commons_government_IndLab = 0 }
+	}
+	if = {
+		limit = { 
+			NOT = { has_variable = ENG_commons_government_IndLib }
+		}
+		set_temp_variable = { ENG_commons_government_IndLib = 0 }
+	}
+	if = {
+		limit = { 
+			NOT = { has_variable = ENG_commons_government_IndCon }
+		}
+		set_temp_variable = { ENG_commons_government_IndCon = 0 }
+	}
+	if = {
+		limit = { 
+			NOT = { has_variable = ENG_commons_government_Ind }
+		}
+		set_temp_variable = { ENG_commons_government_Ind = 0 }
+	}
+	if = {
+		limit = { 
+			NOT = { has_variable = ENG_commons_government_IndSct }
+		}
+		set_temp_variable = { ENG_commons_government_IndSct = 0 }
+	}
+}
+
+ENG_commons_process_opposition_seats = {
+	if = {
+		limit = { 
+			NOT = { has_variable = ENG_commons_opposition_AutSoc }
+		}
+		set_temp_variable = { ENG_commons_opposition_AutSoc = 0 }
+	}
+	if = {
+		limit = { 
+			NOT = { has_variable = ENG_commons_opposition_RadSoc }
+		}
+		set_temp_variable = { ENG_commons_opposition_RadSoc = 0 }
+	}
+	if = {
+		limit = { 
+			NOT = { has_variable = ENG_commons_opposition_SocDem }
+		}
+		set_temp_variable = { ENG_commons_opposition_SocDem = 0 }
+	}
+	if = {
+		limit = { 
+			NOT = { has_variable = ENG_commons_opposition_RevRep }
+		}
+		set_temp_variable = { ENG_commons_opposition_RevRep = 0 }
+	}
+	if = {
+		limit = { 
+			NOT = { has_variable = ENG_commons_opposition_SocLib }
+		}
+		set_temp_variable = { ENG_commons_opposition_SocLib = 0 }
+	}
+	if = {
+		limit = { 
+			NOT = { has_variable = ENG_commons_opposition_MarLib }
+		}
+		set_temp_variable = { ENG_commons_opposition_MarLib = 0 }
+	}
+	if = {
+		limit = { 
+			NOT = { has_variable = ENG_commons_opposition_SocCon_ON }
+		}
+		set_temp_variable = { ENG_commons_opposition_SocCon_ON = 0 }
+	}
+	if = {
+		limit = { 
+			NOT = { has_variable = ENG_commons_opposition_SocCon_C }
+		}
+		set_temp_variable = { ENG_commons_opposition_SocCon_C = 0 }
+	}
+	if = {
+		limit = { 
+			NOT = { has_variable = ENG_commons_opposition_AutDem }
+		}
+		set_temp_variable = { ENG_commons_opposition_AutDem = 0 }
+	}
+	if = {
+		limit = { 
+			NOT = { has_variable = ENG_commons_opposition_PatAut }
+		}
+		set_temp_variable = { ENG_commons_opposition_PatAut = 0 }
+	}
+	if = {
+		limit = { 
+			NOT = { has_variable = ENG_commons_opposition_NatPop }
+		}
+		set_temp_variable = { ENG_commons_opposition_NatPop = 0 }
+	}
+	if = {
+		limit = { 
+			NOT = { has_variable = ENG_commons_opposition_IndLab }
+		}
+		set_temp_variable = { ENG_commons_opposition_IndLab = 0 }
+	}
+	if = {
+		limit = { 
+			NOT = { has_variable = ENG_commons_opposition_IndLib }
+		}
+		set_temp_variable = { ENG_commons_opposition_IndLib = 0 }
+	}
+	if = {
+		limit = { 
+			NOT = { has_variable = ENG_commons_opposition_IndCon }
+		}
+		set_temp_variable = { ENG_commons_opposition_IndCon = 0 }
+	}
+	if = {
+		limit = { 
+			NOT = { has_variable = ENG_commons_opposition_Ind }
+		}
+		set_temp_variable = { ENG_commons_opposition_Ind = 0 }
+	}
+	if = {
+		limit = { 
+			NOT = { has_variable = ENG_commons_opposition_IndSct }
+		}
+		set_temp_variable = { ENG_commons_opposition_IndSct = 0 }
+	}
+}
+
+ENG_start_expected_election_1950 = {
+	set_variable = { ENG_commons_total_seats = 615 }
+
+	set_variable = { ENG_commons_expected_seats_AutSoc = 0 }
+	set_variable = { ENG_commons_expected_seats_RadSoc = 0 }
+	set_variable = { ENG_commons_expected_seats_SocDem = 0 }
+	set_variable = { ENG_commons_expected_seats_RevRep = 0 }
+	set_variable = { ENG_commons_expected_seats_SocLib = 0 }
+	set_variable = { ENG_commons_expected_seats_MarLib = 0 }
+	set_variable = { ENG_commons_expected_seats_SocCon_ON = 0 }
+	set_variable = { ENG_commons_expected_seats_SocCon_C = 0 }
+	set_variable = { ENG_commons_expected_seats_AutDem = 0 }
+	set_variable = { ENG_commons_expected_seats_PatAut = 0 }
+	set_variable = { ENG_commons_expected_seats_NatPop = 0 }
+	set_variable = { ENG_commons_expected_seats_IndLab = 0 }
+	set_variable = { ENG_commons_expected_seats_IndLib = 58 }
+	set_variable = { ENG_commons_expected_seats_IndCon = 425 }
+	set_variable = { ENG_commons_expected_seats_Ind = 116 }
+	set_variable = { ENG_commons_expected_seats_IndSct = 16 }
+}
+
+ENG_commons_setup_national_government = {
+	ENG_start_expected_election_1950 = yes
+	### Party pop setup
+	# government
+	set_temp_variable = { ENG_commons_calcuate_government = 0 }
+	if = {
+		limit = { 
+			has_coal_mark_lib = yes
+			has_coal_soc_lib = yes
+		}
+		add_to_temp_variable = { ENG_commons_calcuate_government = ENG_commons_expected_seats_IndLib }
+		set_temp_variable = { ENG_commons_government_IndLib = ENG_commons_expected_seats_IndLib }
+	}
+	else = {
+		set_temp_variable = { ENG_commons_opposition_IndLib = ENG_commons_expected_seats_IndLib }
+	}
+
+	add_to_temp_variable = { ENG_commons_calcuate_government = ENG_commons_expected_seats_IndCon }
+	set_temp_variable = { ENG_commons_government_IndCon = ENG_commons_expected_seats_IndCon }	
+
+	# oppostion
+	set_temp_variable = { ENG_commons_opposition_Ind = ENG_commons_expected_seats_Ind }
+	set_temp_variable = { ENG_commons_opposition_IndLab = ENG_commons_expected_seats_IndLab }
+	set_temp_variable = { ENG_commons_opposition_IndSct = ENG_commons_expected_seats_IndSct }
+
+	set_variable = { ENG_commons_government_seats = ENG_commons_calcuate_government }
+	set_temp_variable = { ENG_parliament_grid_height = 11 }
+	
+	set_variable = { ENG_commons_opposition_seats = ENG_commons_total_seats }
+	subtract_from_variable = { ENG_commons_opposition_seats = ENG_commons_government_seats  }
+
+	## opens parliment
+	ENG_commons_government_init = yes
+	ENG_commons_opposition_init = yes
+
+	add_ideas = ENG_national_government
+
+	set_variable = { ENG_national_government_complete = 0}
+
+	set_variable = {
+		var = ENG_national_government_decisions_complete
+		value = 0
+	}
+	activate_mission = ENG_national_government_meet_expectations
+}
+
+ENG_change_expected_seats_AutSoc = {
+	if = {
+		limit = { 
+			check_variable = { ENG_change_expected_seats_party > 0 }
+		}
+		custom_effect_tooltip = ENG_change_expected_seats_AutSoc_gain_tt
+	}
+	else_if = {
+		limit = { 
+			check_variable = { ENG_change_expected_seats_party < 0 }
+		}
+		custom_effect_tooltip = ENG_change_expected_seats_AutSoc_lose_tt
+	}
+	add_to_variable = { ENG_commons_expected_seats_AutSoc = ENG_change_expected_seats_party }
+	clamp_variable = {
+		var = ENG_commons_expected_seats_AutSoc
+		min = 0
+	}
+}
+
+ENG_change_expected_seats_RadSoc = {
+	if = {
+		limit = { 
+			check_variable = { ENG_change_expected_seats_party > 0 }
+		}
+		custom_effect_tooltip = ENG_change_expected_seats_RadSoc_gain_tt
+	}
+	else_if = {
+		limit = { 
+			check_variable = { ENG_change_expected_seats_party < 0 }
+		}
+		custom_effect_tooltip = ENG_change_expected_seats_RadSoc_lose_tt
+	}
+	add_to_variable = { ENG_commons_expected_seats_RadSoc = ENG_change_expected_seats_party }
+	clamp_variable = {
+		var = ENG_commons_expected_seats_RadSoc
+		min = 0
+	}
+}
+
+ENG_change_expected_seats_SocDem = {
+	if = {
+		limit = { 
+			check_variable = { ENG_change_expected_seats_party > 0 }
+		}
+		custom_effect_tooltip = ENG_change_expected_seats_SocDem_gain_tt
+	}
+	else_if = {
+		limit = { 
+			check_variable = { ENG_change_expected_seats_party < 0 }
+		}
+		custom_effect_tooltip = ENG_change_expected_seats_SocDem_lose_tt
+	}
+	add_to_variable = { ENG_commons_expected_seats_SocDem = ENG_change_expected_seats_party }
+	clamp_variable = {
+		var = ENG_commons_expected_seats_SocDem
+		min = 0
+	}
+}
+
+ENG_change_expected_seats_RevRep = {
+	if = {
+		limit = { 
+			check_variable = { ENG_change_expected_seats_party > 0 }
+		}
+		custom_effect_tooltip = ENG_change_expected_seats_RevRep_gain_tt
+	}
+	else_if = {
+		limit = { 
+			check_variable = { ENG_change_expected_seats_party < 0 }
+		}
+		custom_effect_tooltip = ENG_change_expected_seats_RevRep_lose_tt
+	}
+	add_to_variable = { ENG_commons_expected_seats_RevRep = ENG_change_expected_seats_party }
+	clamp_variable = {
+		var = ENG_commons_expected_seats_RevRep
+		min = 0
+	}
+}
+
+ENG_change_expected_seats_SocLib = {
+	if = {
+		limit = { 
+			check_variable = { ENG_change_expected_seats_party > 0 }
+		}
+		custom_effect_tooltip = ENG_change_expected_seats_SocLib_gain_tt
+	}
+	else_if = {
+		limit = { 
+			check_variable = { ENG_change_expected_seats_party < 0 }
+		}
+		custom_effect_tooltip = ENG_change_expected_seats_SocLib_lose_tt
+	}
+	add_to_variable = { ENG_commons_expected_seats_SocLib = ENG_change_expected_seats_party }
+	clamp_variable = {
+		var = ENG_commons_expected_seats_SocLib
+		min = 0
+	}
+}
+
+ENG_change_expected_seats_MarLib = {
+	if = {
+		limit = { 
+			check_variable = { ENG_change_expected_seats_party > 0 }
+		}
+		custom_effect_tooltip = ENG_change_expected_seats_MarLib_gain_tt
+	}
+	else_if = {
+		limit = { 
+			check_variable = { ENG_change_expected_seats_party < 0 }
+		}
+		custom_effect_tooltip = ENG_change_expected_seats_MarLib_lose_tt
+	}
+	add_to_variable = { ENG_commons_expected_seats_MarLib = ENG_change_expected_seats_party }
+	clamp_variable = {
+		var = ENG_commons_expected_seats_MarLib
+		min = 0
+	}
+}
+
+ENG_change_expected_seats_SocCon_ON = {
+	if = {
+		limit = { 
+			check_variable = { ENG_change_expected_seats_party > 0 }
+		}
+		custom_effect_tooltip = ENG_change_expected_seats_SocCon_ON_gain_tt
+	}
+	else_if = {
+		limit = { 
+			check_variable = { ENG_change_expected_seats_party < 0 }
+		}
+		custom_effect_tooltip = ENG_change_expected_seats_SocCon_ON_lose_tt
+	}
+	add_to_variable = { ENG_commons_expected_seats_SocCon_ON = ENG_change_expected_seats_party }
+	clamp_variable = {
+		var = ENG_commons_expected_seats_SocCon_ON
+		min = 0
+	}
+}
+
+ENG_change_expected_seats_SocCon_C = {
+	if = {
+		limit = { 
+			check_variable = { ENG_change_expected_seats_party > 0 }
+		}
+		custom_effect_tooltip = ENG_change_expected_seats_SocCon_C_gain_tt
+	}
+	else_if = {
+		limit = { 
+			check_variable = { ENG_change_expected_seats_party < 0 }
+		}
+		custom_effect_tooltip = ENG_change_expected_seats_SocCon_C_lose_tt
+	}
+	add_to_variable = { ENG_commons_expected_seats_SocCon_C = ENG_change_expected_seats_party }
+	clamp_variable = {
+		var = ENG_commons_expected_seats_SocCon_C
+		min = 0
+	}
+}
+
+ENG_change_expected_seats_AutDem = {
+	if = {
+		limit = { 
+			check_variable = { ENG_change_expected_seats_party > 0 }
+		}
+		custom_effect_tooltip = ENG_change_expected_seats_AutDem_gain_tt
+	}
+	else_if = {
+		limit = { 
+			check_variable = { ENG_change_expected_seats_party < 0 }
+		}
+		custom_effect_tooltip = ENG_change_expected_seats_AutDem_lose_tt
+	}
+	add_to_variable = { ENG_commons_expected_seats_AutDem = ENG_change_expected_seats_party }
+	clamp_variable = {
+		var = ENG_commons_expected_seats_AutDem
+		min = 0
+	}
+}
+
+ENG_change_expected_seats_PatAut = {
+	if = {
+		limit = { 
+			check_variable = { ENG_change_expected_seats_party > 0 }
+		}
+		custom_effect_tooltip = ENG_change_expected_seats_PatAut_gain_tt
+	}
+	else_if = {
+		limit = { 
+			check_variable = { ENG_change_expected_seats_party < 0 }
+		}
+		custom_effect_tooltip = ENG_change_expected_seats_PatAut_lose_tt
+	}
+	add_to_variable = { ENG_commons_expected_seats_PatAut = ENG_change_expected_seats_party }
+	clamp_variable = {
+		var = ENG_commons_expected_seats_PatAut
+		min = 0
+	}
+}
+
+ENG_change_expected_seats_NatPop = {
+	if = {
+		limit = { 
+			check_variable = { ENG_change_expected_seats_party > 0 }
+		}
+		custom_effect_tooltip = ENG_change_expected_seats_NatPop_gain_tt
+	}
+	else_if = {
+		limit = { 
+			check_variable = { ENG_change_expected_seats_party < 0 }
+		}
+		custom_effect_tooltip = ENG_change_expected_seats_NatPop_lose_tt
+	}
+	add_to_variable = { ENG_commons_expected_seats_NatPop = ENG_change_expected_seats_party }
+	clamp_variable = {
+		var = ENG_commons_expected_seats_NatPop
+		min = 0
+	}
+}
+
+ENG_change_expected_seats_IndLab = {
+	if = {
+		limit = { 
+			check_variable = { ENG_change_expected_seats_party > 0 }
+		}
+		custom_effect_tooltip = ENG_change_expected_seats_IndLab_gain_tt
+	}
+	else_if = {
+		limit = { 
+			check_variable = { ENG_change_expected_seats_party < 0 }
+		}
+		custom_effect_tooltip = ENG_change_expected_seats_IndLab_lose_tt
+	}
+	add_to_variable = { ENG_commons_expected_seats_IndLab = ENG_change_expected_seats_party }
+	clamp_variable = {
+		var = ENG_commons_expected_seats_IndLab
+		min = 0
+	}
+}
+
+ENG_change_expected_seats_IndLib = {
+	if = {
+		limit = { 
+			check_variable = { ENG_change_expected_seats_party > 0 }
+		}
+		custom_effect_tooltip = ENG_change_expected_seats_IndLib_gain_tt
+	}
+	else_if = {
+		limit = { 
+			check_variable = { ENG_change_expected_seats_party < 0 }
+		}
+		custom_effect_tooltip = ENG_change_expected_seats_IndLib_lose_tt
+	}
+	add_to_variable = { ENG_commons_expected_seats_IndLib = ENG_change_expected_seats_party }
+	clamp_variable = {
+		var = ENG_commons_expected_seats_IndLib
+		min = 0
+	}
+}
+
+ENG_change_expected_seats_IndCon = {
+	if = {
+		limit = { 
+			check_variable = { ENG_change_expected_seats_party > 0 }
+		}
+		add_to_variable = { ENG_commons_expected_seats_IndCon = ENG_change_expected_seats_party }
+		custom_effect_tooltip = ENG_change_expected_seats_IndCon_gain_tt
+	}
+	else_if = {
+		limit = { 
+			check_variable = { ENG_change_expected_seats_party < 0 }
+		}
+		multiply_temp_variable = { ENG_change_expected_seats_party = -1  }
+		subtract_from_variable = { ENG_commons_expected_seats_IndCon = ENG_change_expected_seats_party }
+		log = "[?ENG_change_expected_seats_party]"
+		log = "[?ENG_commons_expected_seats_IndCon]"
+		custom_effect_tooltip = ENG_change_expected_seats_IndCon_lose_tt
+	}
+	clamp_variable = {
+		var = ENG_commons_expected_seats_IndCon
+		min = 0
+	}
+}
+
+ENG_change_expected_seats_Ind = {
+	if = {
+		limit = { 
+			check_variable = { ENG_change_expected_seats_party > 0 }
+		}
+		custom_effect_tooltip = ENG_change_expected_seats_Ind_gain_tt
+	}
+	else_if = {
+		limit = { 
+			check_variable = { ENG_change_expected_seats_party < 0 }
+		}
+		custom_effect_tooltip = ENG_change_expected_seats_Ind_lose_tt
+	}
+	add_to_variable = { ENG_commons_expected_seats_Ind = ENG_change_expected_seats_party }
+	clamp_variable = {
+		var = ENG_commons_expected_seats_Ind
+		min = 0
+	}
+}
+
+ENG_change_expected_seats_IndSct = {
+	if = {
+		limit = { 
+			check_variable = { ENG_change_expected_seats_party > 0 }
+		}
+		custom_effect_tooltip = ENG_change_expected_seats_IndSct_gain_tt
+	}
+	else_if = {
+		limit = { 
+			check_variable = { ENG_change_expected_seats_party < 0 }
+		}
+		custom_effect_tooltip = ENG_change_expected_seats_IndSct_lose_tt
+	}
+	add_to_variable = { ENG_commons_expected_seats_IndSct = ENG_change_expected_seats_party }
+	clamp_variable = {
+		var = ENG_commons_expected_seats_IndSct
+		min = 0
+	}
+}
+
+ENG_commons_fix_over_seats = {
+	while_loop_effect = {
+		limit = { 
+			set_temp_variable = { ENG_commons_total_expected_seats = 0 }
+			add_to_temp_variable = { ENG_commons_total_expected_seats = ENG_commons_expected_seats_AutSoc }
+			add_to_temp_variable = { ENG_commons_total_expected_seats = ENG_commons_expected_seats_RadSoc }
+			add_to_temp_variable = { ENG_commons_total_expected_seats = ENG_commons_expected_seats_SocDem }
+			add_to_temp_variable = { ENG_commons_total_expected_seats = ENG_commons_expected_seats_RevRep }
+			add_to_temp_variable = { ENG_commons_total_expected_seats = ENG_commons_expected_seats_SocLib }
+			add_to_temp_variable = { ENG_commons_total_expected_seats = ENG_commons_expected_seats_MarLib }
+			add_to_temp_variable = { ENG_commons_total_expected_seats = ENG_commons_expected_seats_SocCon_ON }
+			add_to_temp_variable = { ENG_commons_total_expected_seats = ENG_commons_expected_seats_SocCon_C }
+			add_to_temp_variable = { ENG_commons_total_expected_seats = ENG_commons_expected_seats_AutDem }
+			add_to_temp_variable = { ENG_commons_total_expected_seats = ENG_commons_expected_seats_PatAut }
+			add_to_temp_variable = { ENG_commons_total_expected_seats = ENG_commons_expected_seats_NatPop }
+			add_to_temp_variable = { ENG_commons_total_expected_seats = ENG_commons_expected_seats_IndLab }
+			add_to_temp_variable = { ENG_commons_total_expected_seats = ENG_commons_expected_seats_IndLib }
+			add_to_temp_variable = { ENG_commons_total_expected_seats = ENG_commons_expected_seats_IndCon }
+			add_to_temp_variable = { ENG_commons_total_expected_seats = ENG_commons_expected_seats_Ind }
+			add_to_temp_variable = { ENG_commons_total_expected_seats = ENG_commons_expected_seats_IndSct }
+			check_variable = { ENG_commons_total_expected_seats > ENG_commons_total_seats }
+		}
+
+		subtract_from_variable = { ENG_commons_expected_seats_SocDem = 1 }
+
+		if = {
+			limit = { 
+				set_temp_variable = { ENG_commons_total_expected_seats = 0 }
+				add_to_temp_variable = { ENG_commons_total_expected_seats = ENG_commons_expected_seats_AutSoc }
+				add_to_temp_variable = { ENG_commons_total_expected_seats = ENG_commons_expected_seats_RadSoc }
+				add_to_temp_variable = { ENG_commons_total_expected_seats = ENG_commons_expected_seats_SocDem }
+				add_to_temp_variable = { ENG_commons_total_expected_seats = ENG_commons_expected_seats_RevRep }
+				add_to_temp_variable = { ENG_commons_total_expected_seats = ENG_commons_expected_seats_SocLib }
+				add_to_temp_variable = { ENG_commons_total_expected_seats = ENG_commons_expected_seats_MarLib }
+				add_to_temp_variable = { ENG_commons_total_expected_seats = ENG_commons_expected_seats_SocCon_ON }
+				add_to_temp_variable = { ENG_commons_total_expected_seats = ENG_commons_expected_seats_SocCon_C }
+				add_to_temp_variable = { ENG_commons_total_expected_seats = ENG_commons_expected_seats_AutDem }
+				add_to_temp_variable = { ENG_commons_total_expected_seats = ENG_commons_expected_seats_PatAut }
+				add_to_temp_variable = { ENG_commons_total_expected_seats = ENG_commons_expected_seats_NatPop }
+				add_to_temp_variable = { ENG_commons_total_expected_seats = ENG_commons_expected_seats_IndLab }
+				add_to_temp_variable = { ENG_commons_total_expected_seats = ENG_commons_expected_seats_IndLib }
+				add_to_temp_variable = { ENG_commons_total_expected_seats = ENG_commons_expected_seats_IndCon }
+				add_to_temp_variable = { ENG_commons_total_expected_seats = ENG_commons_expected_seats_Ind }
+				add_to_temp_variable = { ENG_commons_total_expected_seats = ENG_commons_expected_seats_IndSct }
+				check_variable = { ENG_commons_total_expected_seats > ENG_commons_total_seats }
+			}
+			subtract_from_variable = { ENG_commons_expected_seats_SocCon_ON = 1 }
+		}
+
+		if = {
+			limit = { 
+				set_temp_variable = { ENG_commons_total_expected_seats = 0 }
+				add_to_temp_variable = { ENG_commons_total_expected_seats = ENG_commons_expected_seats_AutSoc }
+				add_to_temp_variable = { ENG_commons_total_expected_seats = ENG_commons_expected_seats_RadSoc }
+				add_to_temp_variable = { ENG_commons_total_expected_seats = ENG_commons_expected_seats_SocDem }
+				add_to_temp_variable = { ENG_commons_total_expected_seats = ENG_commons_expected_seats_RevRep }
+				add_to_temp_variable = { ENG_commons_total_expected_seats = ENG_commons_expected_seats_SocLib }
+				add_to_temp_variable = { ENG_commons_total_expected_seats = ENG_commons_expected_seats_MarLib }
+				add_to_temp_variable = { ENG_commons_total_expected_seats = ENG_commons_expected_seats_SocCon_ON }
+				add_to_temp_variable = { ENG_commons_total_expected_seats = ENG_commons_expected_seats_SocCon_C }
+				add_to_temp_variable = { ENG_commons_total_expected_seats = ENG_commons_expected_seats_AutDem }
+				add_to_temp_variable = { ENG_commons_total_expected_seats = ENG_commons_expected_seats_PatAut }
+				add_to_temp_variable = { ENG_commons_total_expected_seats = ENG_commons_expected_seats_NatPop }
+				add_to_temp_variable = { ENG_commons_total_expected_seats = ENG_commons_expected_seats_IndLab }
+				add_to_temp_variable = { ENG_commons_total_expected_seats = ENG_commons_expected_seats_IndLib }
+				add_to_temp_variable = { ENG_commons_total_expected_seats = ENG_commons_expected_seats_IndCon }
+				add_to_temp_variable = { ENG_commons_total_expected_seats = ENG_commons_expected_seats_Ind }
+				add_to_temp_variable = { ENG_commons_total_expected_seats = ENG_commons_expected_seats_IndSct }
+				check_variable = { ENG_commons_total_expected_seats > ENG_commons_total_seats }
+			}
+			subtract_from_variable = { ENG_commons_expected_seats_SocLib = 1 }
+		}
+
+		if = {
+			limit = { 
+				set_temp_variable = { ENG_commons_total_expected_seats = 0 }
+				add_to_temp_variable = { ENG_commons_total_expected_seats = ENG_commons_expected_seats_AutSoc }
+				add_to_temp_variable = { ENG_commons_total_expected_seats = ENG_commons_expected_seats_RadSoc }
+				add_to_temp_variable = { ENG_commons_total_expected_seats = ENG_commons_expected_seats_SocDem }
+				add_to_temp_variable = { ENG_commons_total_expected_seats = ENG_commons_expected_seats_RevRep }
+				add_to_temp_variable = { ENG_commons_total_expected_seats = ENG_commons_expected_seats_SocLib }
+				add_to_temp_variable = { ENG_commons_total_expected_seats = ENG_commons_expected_seats_MarLib }
+				add_to_temp_variable = { ENG_commons_total_expected_seats = ENG_commons_expected_seats_SocCon_ON }
+				add_to_temp_variable = { ENG_commons_total_expected_seats = ENG_commons_expected_seats_SocCon_C }
+				add_to_temp_variable = { ENG_commons_total_expected_seats = ENG_commons_expected_seats_AutDem }
+				add_to_temp_variable = { ENG_commons_total_expected_seats = ENG_commons_expected_seats_PatAut }
+				add_to_temp_variable = { ENG_commons_total_expected_seats = ENG_commons_expected_seats_NatPop }
+				add_to_temp_variable = { ENG_commons_total_expected_seats = ENG_commons_expected_seats_IndLab }
+				add_to_temp_variable = { ENG_commons_total_expected_seats = ENG_commons_expected_seats_IndLib }
+				add_to_temp_variable = { ENG_commons_total_expected_seats = ENG_commons_expected_seats_IndCon }
+				add_to_temp_variable = { ENG_commons_total_expected_seats = ENG_commons_expected_seats_Ind }
+				add_to_temp_variable = { ENG_commons_total_expected_seats = ENG_commons_expected_seats_IndSct }
+				check_variable = { ENG_commons_total_expected_seats > ENG_commons_total_seats }
+			}
+			subtract_from_variable = { ENG_commons_expected_seats_MarLib = 1 }
+		}
+	}
+}
+
+ENG_commons_test_parliament = {
+	ENG_commons_fix_over_seats = yes
+
+	set_temp_variable = { ENG_commons_calcuate_government = 0 }	
+
+	#Goverment
+	add_to_temp_variable = { ENG_commons_calcuate_government = ENG_commons_expected_seats_IndCon }
+	set_temp_variable = { ENG_commons_government_IndCon = ENG_commons_expected_seats_IndCon }
+
+	add_to_temp_variable = { ENG_commons_calcuate_government = ENG_commons_expected_seats_SocCon_ON }
+	set_temp_variable = { ENG_commons_government_SocCon_ON = ENG_commons_expected_seats_SocCon_ON }	
+
+	add_to_temp_variable = { ENG_commons_calcuate_government = ENG_commons_expected_seats_PatAut }
+	set_temp_variable = { ENG_commons_government_PatAut = ENG_commons_expected_seats_PatAut }	
+
+	# oppostion
+	set_temp_variable = { ENG_commons_opposition_SocDem = ENG_commons_expected_seats_SocDem }
+	set_temp_variable = { ENG_commons_opposition_RevRep = ENG_commons_expected_seats_RevRep }
+	set_temp_variable = { ENG_commons_opposition_SocLib = ENG_commons_expected_seats_SocLib }
+	set_temp_variable = { ENG_commons_opposition_MarLib = ENG_commons_expected_seats_MarLib }
+
+	set_temp_variable = { ENG_commons_opposition_Ind = ENG_commons_expected_seats_Ind }
+	set_temp_variable = { ENG_commons_opposition_IndLib = ENG_commons_expected_seats_IndLib }
+	set_temp_variable = { ENG_commons_opposition_IndLab = ENG_commons_expected_seats_IndLab }
+	set_temp_variable = { ENG_commons_opposition_IndSct = ENG_commons_expected_seats_IndSct }
+
+	set_variable = { ENG_commons_government_seats = ENG_commons_calcuate_government }
+	set_temp_variable = { ENG_parliament_grid_height = 11 }
+	
+	set_variable = { ENG_commons_opposition_seats = ENG_commons_total_seats }
+	subtract_from_variable = { ENG_commons_opposition_seats = ENG_commons_government_seats  }
+
+	## opens parliment
+	ENG_commons_government_init = yes
+	ENG_commons_opposition_init = yes
+
+}
+
+ENG_commons_setup_tory_government = {
+	ENG_commons_fix_over_seats = yes
+
+	### Party pop setup
+	set_temp_variable = { ENG_commons_calcuate_government = 0 }	
+
+	#Goverment
+	add_to_temp_variable = { ENG_commons_calcuate_government = ENG_commons_expected_seats_IndCon }
+	set_temp_variable = { ENG_commons_government_IndCon = ENG_commons_expected_seats_IndCon }
+
+	add_to_temp_variable = { ENG_commons_calcuate_government = ENG_commons_expected_seats_SocCon_ON }
+	set_temp_variable = { ENG_commons_government_SocCon_ON = ENG_commons_expected_seats_SocCon_ON }	
+
+	# oppostion
+	set_temp_variable = { ENG_commons_opposition_AutDem = ENG_commons_expected_seats_AutDem }
+	set_temp_variable = { ENG_commons_opposition_AutSoc = ENG_commons_expected_seats_AutSoc }
+	set_temp_variable = { ENG_commons_opposition_RadSoc = ENG_commons_expected_seats_RadSoc }
+	set_temp_variable = { ENG_commons_opposition_SocCon_C = ENG_commons_expected_seats_SocCon_C }
+	set_temp_variable = { ENG_commons_opposition_NatPop = ENG_commons_expected_seats_NatPop }
+
+	set_temp_variable = { ENG_commons_opposition_SocDem = ENG_commons_expected_seats_SocDem }
+	set_temp_variable = { ENG_commons_opposition_RevRep = ENG_commons_expected_seats_RevRep }
+	set_temp_variable = { ENG_commons_opposition_SocLib = ENG_commons_expected_seats_SocLib }
+	set_temp_variable = { ENG_commons_opposition_MarLib = ENG_commons_expected_seats_MarLib }
+	set_temp_variable = { ENG_commons_opposition_PatAut = ENG_commons_expected_seats_PatAut }
+
+	set_temp_variable = { ENG_commons_opposition_Ind = ENG_commons_expected_seats_Ind }
+	set_temp_variable = { ENG_commons_opposition_IndLib = ENG_commons_expected_seats_IndLib }
+	set_temp_variable = { ENG_commons_opposition_IndLab = ENG_commons_expected_seats_IndLab }
+	set_temp_variable = { ENG_commons_opposition_IndSct = ENG_commons_expected_seats_IndSct }
+
+	set_variable = { ENG_commons_government_seats = ENG_commons_calcuate_government }
+	set_temp_variable = { ENG_parliament_grid_height = 10 }
+	
+	set_variable = { ENG_commons_opposition_seats = ENG_commons_total_seats }
+	subtract_from_variable = { ENG_commons_opposition_seats = ENG_commons_government_seats  }
+
+	log = "[GetDateText]: [Root.GetName]: ENG ENG_commons_total_seats [?ENG_commons_total_seats]"
+	log = "[GetDateText]: [Root.GetName]: ENG ENG_commons_government_seats [?ENG_commons_government_seats]"
+	log = "[GetDateText]: [Root.GetName]: ENG ENG_commons_opposition_seats [?ENG_commons_opposition_seats]"
+	## opens parliment
+	ENG_commons_government_init = yes
+	ENG_commons_opposition_init = yes
+}
+
+ENG_commons_setup_tory_bpp_government = {
+	ENG_commons_fix_over_seats = yes
+
+	### Party pop setup
+	set_temp_variable = { ENG_commons_calcuate_government = 0 }	
+
+	#Goverment
+	add_to_temp_variable = { ENG_commons_calcuate_government = ENG_commons_expected_seats_IndCon }
+	set_temp_variable = { ENG_commons_government_IndCon = ENG_commons_expected_seats_IndCon }
+
+	add_to_temp_variable = { ENG_commons_calcuate_government = ENG_commons_expected_seats_SocCon_ON }
+	set_temp_variable = { ENG_commons_government_SocCon_ON = ENG_commons_expected_seats_SocCon_ON }
+
+	add_to_temp_variable = { ENG_commons_calcuate_government = ENG_commons_expected_seats_PatAut }
+	set_temp_variable = { ENG_commons_government_PatAut = ENG_commons_expected_seats_PatAut }	
+
+	# oppostion
+	set_temp_variable = { ENG_commons_opposition_AutDem = ENG_commons_expected_seats_AutDem }
+	set_temp_variable = { ENG_commons_opposition_AutSoc = ENG_commons_expected_seats_AutSoc }
+	set_temp_variable = { ENG_commons_opposition_RadSoc = ENG_commons_expected_seats_RadSoc }
+	set_temp_variable = { ENG_commons_opposition_SocCon_C = ENG_commons_expected_seats_SocCon_C }
+	set_temp_variable = { ENG_commons_opposition_NatPop = ENG_commons_expected_seats_NatPop }
+
+	set_temp_variable = { ENG_commons_opposition_SocDem = ENG_commons_expected_seats_SocDem }
+	set_temp_variable = { ENG_commons_opposition_RevRep = ENG_commons_expected_seats_RevRep }
+	set_temp_variable = { ENG_commons_opposition_SocLib = ENG_commons_expected_seats_SocLib }
+	set_temp_variable = { ENG_commons_opposition_MarLib = ENG_commons_expected_seats_MarLib }
+
+	set_temp_variable = { ENG_commons_opposition_Ind = ENG_commons_expected_seats_Ind }
+	set_temp_variable = { ENG_commons_opposition_IndLib = ENG_commons_expected_seats_IndLib }
+	set_temp_variable = { ENG_commons_opposition_IndLab = ENG_commons_expected_seats_IndLab }
+	set_temp_variable = { ENG_commons_opposition_IndSct = ENG_commons_expected_seats_IndSct }
+
+	set_variable = { ENG_commons_government_seats = ENG_commons_calcuate_government }
+	set_temp_variable = { ENG_parliament_grid_height = 10 }
+	
+	set_variable = { ENG_commons_opposition_seats = ENG_commons_total_seats }
+	subtract_from_variable = { ENG_commons_opposition_seats = ENG_commons_government_seats  }
+
+	log = "[GetDateText]: [Root.GetName]: ENG ENG_commons_total_seats [?ENG_commons_total_seats]"
+	log = "[GetDateText]: [Root.GetName]: ENG ENG_commons_government_seats [?ENG_commons_government_seats]"
+	log = "[GetDateText]: [Root.GetName]: ENG ENG_commons_opposition_seats [?ENG_commons_opposition_seats]"
+	## opens parliment
+	ENG_commons_government_init = yes
+	ENG_commons_opposition_init = yes
+}
+
+ENG_commons_setup_liberal_government = {
+	ENG_commons_fix_over_seats = yes
+
+	### Party pop setup
+	set_temp_variable = { ENG_commons_calcuate_government = 0 }	
+
+	#Goverment
+	add_to_temp_variable = { ENG_commons_calcuate_government = ENG_commons_expected_seats_IndLib }
+	set_temp_variable = { ENG_commons_government_IndLib = ENG_commons_expected_seats_IndLib }
+
+	add_to_temp_variable = { ENG_commons_calcuate_government = ENG_commons_expected_seats_IndSct }
+	set_temp_variable = { ENG_commons_government_IndSct = ENG_commons_expected_seats_IndSct }	
+
+	add_to_temp_variable = { ENG_commons_calcuate_government = ENG_commons_expected_seats_SocLib }
+	set_temp_variable = { ENG_commons_government_SocLib = ENG_commons_expected_seats_SocLib }	
+
+	add_to_temp_variable = { ENG_commons_calcuate_government = ENG_commons_expected_seats_MarLib }
+	set_temp_variable = { ENG_commons_government_MarLib = ENG_commons_expected_seats_MarLib }	
+
+	# oppostion
+	set_temp_variable = { ENG_commons_opposition_AutDem = ENG_commons_expected_seats_AutDem }
+	set_temp_variable = { ENG_commons_opposition_AutSoc = ENG_commons_expected_seats_AutSoc }
+	set_temp_variable = { ENG_commons_opposition_RadSoc = ENG_commons_expected_seats_RadSoc }
+	set_temp_variable = { ENG_commons_opposition_SocCon_C = ENG_commons_expected_seats_SocCon_C }
+	set_temp_variable = { ENG_commons_opposition_NatPop = ENG_commons_expected_seats_NatPop }
+
+	set_temp_variable = { ENG_commons_opposition_SocDem = ENG_commons_expected_seats_SocDem }
+	set_temp_variable = { ENG_commons_opposition_RevRep = ENG_commons_expected_seats_RevRep }
+	set_temp_variable = { ENG_commons_opposition_SocCon_ON = ENG_commons_expected_seats_SocCon_ON }
+	set_temp_variable = { ENG_commons_opposition_PatAut = ENG_commons_expected_seats_PatAut }
+
+	set_temp_variable = { ENG_commons_opposition_Ind = ENG_commons_expected_seats_Ind }
+	set_temp_variable = { ENG_commons_opposition_IndCon = ENG_commons_expected_seats_IndCon }
+	set_temp_variable = { ENG_commons_opposition_IndLab = ENG_commons_expected_seats_IndLab }
+
+	set_variable = { ENG_commons_government_seats = ENG_commons_calcuate_government }
+	set_temp_variable = { ENG_parliament_grid_height = 10 }
+	
+	set_variable = { ENG_commons_opposition_seats = ENG_commons_total_seats }
+	subtract_from_variable = { ENG_commons_opposition_seats = ENG_commons_government_seats  }
+
+	log = "[GetDateText]: [Root.GetName]: ENG idea ENG_commons_total_seats [?ENG_commons_total_seats]"
+	log = "[GetDateText]: [Root.GetName]: ENG idea ENG_commons_government_seats [?ENG_commons_government_seats]"
+	log = "[GetDateText]: [Root.GetName]: ENG idea ENG_commons_opposition_seats [?ENG_commons_opposition_seats]"
+	## opens parliment
+	ENG_commons_government_init = yes
+	ENG_commons_opposition_init = yes
+}
+
+ENG_commons_setup_demlab_government = {
+	ENG_commons_fix_over_seats = yes
+
+	### Party pop setup
+	set_temp_variable = { ENG_commons_calcuate_government = 0 }	
+
+	#Goverment
+	add_to_temp_variable = { ENG_commons_calcuate_government = ENG_commons_expected_seats_IndLab }
+	set_temp_variable = { ENG_commons_government_IndLab = ENG_commons_expected_seats_IndLab }
+
+	add_to_temp_variable = { ENG_commons_calcuate_government = ENG_commons_expected_seats_SocDem }
+	set_temp_variable = { ENG_commons_government_SocDem = ENG_commons_expected_seats_SocDem }
+
+	# oppostion
+	set_temp_variable = { ENG_commons_opposition_AutDem = ENG_commons_expected_seats_AutDem }
+	set_temp_variable = { ENG_commons_opposition_AutSoc = ENG_commons_expected_seats_AutSoc }
+	set_temp_variable = { ENG_commons_opposition_RadSoc = ENG_commons_expected_seats_RadSoc }
+	set_temp_variable = { ENG_commons_opposition_SocCon_C = ENG_commons_expected_seats_SocCon_C }
+	set_temp_variable = { ENG_commons_opposition_NatPop = ENG_commons_expected_seats_NatPop }
+
+	set_temp_variable = { ENG_commons_opposition_RevRep = ENG_commons_expected_seats_RevRep }
+	set_temp_variable = { ENG_commons_opposition_SocLib = ENG_commons_expected_seats_SocLib }
+	set_temp_variable = { ENG_commons_opposition_MarLib = ENG_commons_expected_seats_MarLib }
+	set_temp_variable = { ENG_commons_opposition_SocCon_ON = ENG_commons_expected_seats_SocCon_ON }
+	set_temp_variable = { ENG_commons_opposition_PatAut = ENG_commons_expected_seats_PatAut }
+
+	set_temp_variable = { ENG_commons_opposition_Ind = ENG_commons_expected_seats_Ind }
+	set_temp_variable = { ENG_commons_opposition_IndCon = ENG_commons_expected_seats_IndCon }
+	set_temp_variable = { ENG_commons_opposition_IndSct = ENG_commons_expected_seats_IndSct }
+	set_temp_variable = { ENG_commons_opposition_IndLib = ENG_commons_expected_seats_IndLib }
+
+	set_variable = { ENG_commons_government_seats = ENG_commons_calcuate_government }
+	set_temp_variable = { ENG_parliament_grid_height = 10 }
+	
+	set_variable = { ENG_commons_opposition_seats = ENG_commons_total_seats }
+	subtract_from_variable = { ENG_commons_opposition_seats = ENG_commons_government_seats  }
+	
+	## opens parliment
+	ENG_commons_government_init = yes
+	ENG_commons_opposition_init = yes
+}
+
+ENG_commons_who_has_majority_trigger = {
+	set_temp_variable = { ENG_commons_calcuate_con_bpp_government = 0 }
+	set_temp_variable = { ENG_commons_calcuate_demlab_government = 0 }
+	set_temp_variable = { ENG_commons_calcuate_lib_government = 0 }
+
+	add_to_temp_variable = { ENG_commons_calcuate_CON_BPP_government = ENG_commons_expected_seats_IndCon }
+	add_to_temp_variable = { ENG_commons_calcuate_CON_BPP_government = ENG_commons_expected_seats_SocCon_ON }
+	add_to_temp_variable = { ENG_commons_calcuate_CON_BPP_government = ENG_commons_expected_seats_PatAut }
+
+	add_to_temp_variable = { ENG_commons_calcuate_demlab_government = ENG_commons_expected_seats_IndLab }
+	add_to_temp_variable = { ENG_commons_calcuate_demlab_government = ENG_commons_expected_seats_SocDem }
+
+	add_to_temp_variable = { ENG_commons_calcuate_lib_government = ENG_commons_expected_seats_IndLib }
+	add_to_temp_variable = { ENG_commons_calcuate_lib_government = ENG_commons_expected_seats_MarLib }
+	add_to_temp_variable = { ENG_commons_calcuate_lib_government = ENG_commons_expected_seats_SocLib }
+
+	if = {
+		limit = {
+			check_variable = { ENG_commons_calcuate_con_bpp_government > ENG_commons_calcuate_demlab_government }
+			check_variable = { ENG_commons_calcuate_con_bpp_government > ENG_commons_calcuate_lib_government }
+		}
+		set_variable = { ENG_commons_who_has_majority_trigger_return_value = 1 }
+	}
+	else_if = {
+		limit = {
+			check_variable = { ENG_commons_calcuate_demlab_government > ENG_commons_calcuate_con_bpp_government }
+			check_variable = { ENG_commons_calcuate_demlab_government > ENG_commons_calcuate_lib_government }
+		}
+		set_variable = { ENG_commons_who_has_majority_trigger_return_value = 2 }
+	}
+	else_if = {
+		limit = {
+			check_variable = { ENG_commons_calcuate_lib_government > ENG_commons_calcuate_con_bpp_government }
+			check_variable = { ENG_commons_calcuate_lib_government > ENG_commons_calcuate_demlab_government }
+		}
+		set_variable = { ENG_commons_who_has_majority_trigger_return_value = 3 }
+	}
+	
+}

@@ -1,0 +1,135 @@
+JAP_Foreign_Ministry_cat = {
+	#something here to stop the game fucking up and loading base decisions file
+	JAP_foreign_ministry_generic_ambassador = {
+			icon = peace_dove
+				
+			available = {
+				always = yes
+			}
+	
+			targets = { FNG CHI RUS PHI INS SIA VIN MLY LAO NBR GER CAN CAL MEX }
+			
+			days_remove = 270
+			days_re_enable = 60
+			cost = 25
+		
+			ai_will_do = {
+				factor = 1
+				modifier = {
+					has_political_power < 200
+					factor = 0
+				}
+			}
+			
+			complete_effect = { 
+			log = "[GetDateText]: [Root.GetName]: Decision complete JAP_foreign_ministry_generic_ambassador target: [From.GetName]"
+				FROM = { add_political_power = 10 }
+								
+				ROOT = { add_political_power = 35 }
+			}	
+	
+			remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove JAP_foreign_ministry_generic_ambassador target: [From.GetName]"
+			}
+		}
+}
+
+
+@JAP_withdrawl_from_VIE_timeout = 120
+foreign_politics = {
+	JAP_withdrawl_from_VIE_timer = {
+		icon = revolt
+
+		allowed = { always = no } #activated by KRG_JAP_Foreign.1
+
+		available = {
+			VIN = { controls_all_owned_states = yes }
+			if = {
+				limit = { SIA = { has_war_with = VIE } }
+				SIA = { surrender_progress > 0.15 }
+			}
+		}
+
+		cancel_trigger = {
+			OR = {
+				has_war = no
+				is_subject = yes
+				has_capitulated = yes
+				hidden_trigger = {
+					is_ai = yes
+					surrender_progress > 0.15
+				}
+			}
+		}
+
+		is_good = no
+		days_mission_timeout = @JAP_withdrawl_from_VIE_timeout
+
+		cancel_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision cancel JAP_withdrawl_from_VIE_timer target: [From.GetName]"
+			hidden_effect = {
+				every_country = {
+					limit = { has_active_mission = JAP_withdrawl_from_VIE_timer_enemy }
+					remove_mission = JAP_withdrawl_from_VIE_timer_enemy
+				}
+			}
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete JAP_withdrawl_from_VIE_timer target: [From.GetName]"
+			hidden_effect = {
+				every_country = {
+					limit = { has_active_mission = JAP_withdrawl_from_VIE_timer_enemy }
+					remove_mission = JAP_withdrawl_from_VIE_timer_enemy
+				}
+			}
+		}
+
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout JAP_withdrawl_from_VIE_timer target: [From.GetName]"
+			add_stability = -0.1
+			add_war_support = -0.1
+			set_global_flag = JAP_will_surrender
+			VIE = { country_event = KRG_JAP_Foreign.2 }
+		}
+	}
+	JAP_withdrawl_from_VIE_timer_enemy = {
+		icon = revolt
+
+		allowed = { always = no } #activated by KRG_JAP_Foreign.1
+
+		available = {
+			VIN = { controls_all_owned_states = yes }
+			if = {
+				limit = { SIA = { has_war_with = VIE } }
+				SIA = { surrender_progress > 0.15 }
+			}
+		}
+
+		cancel_trigger = {
+			OR = {
+				NOT = { has_war_with = JAP }
+				JAP = { has_capitulated = yes }
+				JAP = { is_subject = yes }
+				JAP = { surrender_progress > 0.15 }
+			}
+		}
+
+		is_good = yes
+		days_mission_timeout = @JAP_withdrawl_from_VIE_timeout
+
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout JAP_withdrawl_from_VIE_timer_enemy target: [From.GetName]"
+			#no logging here - this mission is only meant to give a player information
+			effect_tooltip = {
+				JAP = {
+					add_stability = -0.1
+					add_war_support = -0.1
+				}
+				country_event = KRG_JAP_Foreign.2
+				
+			}
+		}
+	}
+
+}

@@ -1,0 +1,2838 @@
+#1953 Election tree
+shared_focus = {
+	id = CAN_Tommy_douglas_victory
+	icon = GFX_CAN_CCF_Victory_53 
+	x = 30
+	y = 0
+	cost = 8
+
+	available = {
+		has_country_flag = CAN_1953_election_done
+		has_government = social_democrat
+		always = no
+	}
+	
+	ai_will_do = {
+		base = 150
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_Tommy_douglas_victory"
+		add_political_power = 50
+		custom_effect_tooltip = unlock_focuses
+	}
+}
+
+shared_focus = {
+	id = CAN_foundations_for_peace
+	icon = GFX_GENERIC_peace
+	x = -3
+	y = 1
+	cost = 8
+	
+	relative_position_id = CAN_Tommy_douglas_victory
+	prerequisite = {
+		focus = CAN_Tommy_douglas_victory
+	}
+	
+	ai_will_do = {
+		base = 150
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_foundations_for_peace"
+		decrease_conscription = yes
+	}
+}
+
+shared_focus = {
+	id = CAN_expand_the_civil_service
+	icon = GFX_NFA_expand_legal_protections
+	x = -5
+	y = 3
+	cost = 8
+	
+	relative_position_id = CAN_Tommy_douglas_victory
+	prerequisite = {
+		focus = CAN_the_leash_on_the_military
+	}
+	
+	ai_will_do = {
+		base = 150
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_expand_the_civil_service"
+		add_ideas = CAN_expanded_civil_service
+	}
+}
+
+shared_focus = {
+	id = CAN_the_leash_on_the_military
+	icon = GFX_generic_demobilise_guns
+	x = -4
+	y = 2
+	cost = 8
+	
+	relative_position_id = CAN_Tommy_douglas_victory
+	prerequisite = {
+		focus = CAN_foundations_for_peace
+	}
+	
+	ai_will_do = {
+		base = 150
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_the_leash_on_the_military"
+		move_down_military = yes
+	}
+}
+
+shared_focus = {
+	id = CAN_leading_our_allies
+	icon = GFX_GENERIC_parliament
+	x = -3
+	y = 4
+	cost = 8
+	
+	relative_position_id = CAN_Tommy_douglas_victory
+	prerequisite = {
+		focus = CAN_expand_the_civil_service
+	}
+	
+	ai_will_do = {
+		base = 150
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_leading_our_allies"
+		add_political_power = 50
+		every_country = {
+			limit = {
+				is_in_accord = yes
+			}
+			add_war_support = 0.02
+		}
+	}
+}
+
+shared_focus = {
+	id = CAN_canadian_industrial_revolution
+	icon = GFX_CAN_industrialization
+	x = -1
+	y = 1
+	cost = 8
+	
+	relative_position_id = CAN_Tommy_douglas_victory
+	prerequisite = {
+		focus = CAN_Tommy_douglas_victory
+	}
+	
+	ai_will_do = {
+		base = 150
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_canadian_industrial_revolution"
+		add_timed_idea = {
+			idea = CAN_canadian_industrial_revolution_idea
+			days = 548
+		}
+		add_tech_bonus = {
+			bonus = 0.5
+			uses = 2
+			category = industry_tech
+		}
+	}
+}
+
+shared_focus = {
+	id = CAN_new_social_planning
+	icon = GFX_generic_ideology_revolutionary_socialist_deal
+	x = 1
+	y = 1
+	cost = 8
+	
+	relative_position_id = CAN_Tommy_douglas_victory
+	prerequisite = {
+		focus = CAN_Tommy_douglas_victory
+	}
+	
+	ai_will_do = {
+		base = 150
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_new_social_planning"
+		add_political_power = -25
+		add_ideas = CAN_new_social_planning_idea
+	}
+}
+
+shared_focus = {
+	id = CAN_the_problems_of_the_subnormal_family
+	icon = GFX_GENERIC_worker_housing
+	x = 3
+	y = 1
+	cost = 8
+	
+	relative_position_id = CAN_Tommy_douglas_victory
+	prerequisite = {
+		focus = CAN_Tommy_douglas_victory
+	}
+	
+	ai_will_do = {
+		base = 150
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_the_problems_of_the_subnormal_family"
+		country_event = krg_can.87
+	}
+}
+
+shared_focus = {
+	id = CAN_developing_the_rural_base
+	icon = GFX_BUL_developments_in_the_Countryside
+	x = -2
+	y = 2
+	cost = 8
+	
+	relative_position_id = CAN_Tommy_douglas_victory
+	prerequisite = {
+		focus = CAN_canadian_industrial_revolution
+	}
+	prerequisite = {
+		focus = CAN_new_social_planning
+	}
+	
+	ai_will_do = {
+		base = 150
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_developing_the_rural_base"
+		custom_effect_tooltip = CAN_increase_socdem_small_prairie_tt
+		466 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+			add_building_construction = {
+				type = infrastructure
+				level = 2
+				instant_build = yes
+			}
+		}
+		682 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+			add_building_construction = {
+				type = infrastructure
+				level = 2
+				instant_build = yes
+			}
+		}
+		467 = {
+			CAN_popularity_socdem_increase_small = yes
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+			add_building_construction = {
+				type = infrastructure
+				level = 2
+				instant_build = yes
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = CAN_south_saskatchewan_river_project
+	icon = GFX_generic_dam
+	x = -3
+	y = 3	
+	cost = 8
+	
+	relative_position_id = CAN_Tommy_douglas_victory
+	prerequisite = {
+		focus = CAN_developing_the_rural_base
+	}
+	
+	ai_will_do = {
+		base = 150
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_south_saskatchewan_river_project"
+		693 = {
+			move_up_state_category = yes
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+			add_building_construction = {
+				type = infrastructure
+				level = 1
+				instant_build = yes
+			}
+		}
+		469 = {
+			move_up_state_category = yes
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+			add_building_construction = {
+				type = infrastructure
+				level = 1
+				instant_build = yes
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = CAN_subsidies_for_farmers_and_fishers
+	icon = GFX_generic_agricultural_aid
+	x = -1
+	y = 4	
+	cost = 8
+	
+	relative_position_id = CAN_Tommy_douglas_victory
+	prerequisite = {
+		focus = CAN_national_resources_board
+	}
+	
+	ai_will_do = {
+		base = 150
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_subsidies_for_farmers_and_fishers"
+		1082 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
+		467 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
+		331 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
+		464 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = CAN_an_understanding_with_private_business
+	icon = GFX_generic_co_owned_businesses
+	x = 0
+	y = 2
+	cost = 8
+	
+	relative_position_id = CAN_Tommy_douglas_victory
+	prerequisite = {
+		focus = CAN_canadian_industrial_revolution
+	}
+	prerequisite = {
+		focus = CAN_new_social_planning
+	}
+	
+	ai_will_do = {
+		base = 150
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_an_understanding_with_private_business"
+		swap_ideas = {
+			remove_idea = CAN_canadian_industrial_revolution_idea
+			add_idea = CAN_canadian_industrial_revolution_idea_2
+		}
+		hidden_effect = {
+			modify_timed_idea = {
+				idea = CAN_canadian_industrial_revolution_idea_2
+				days = 180
+			}
+		}
+		custom_effect_tooltip = CAN_an_understanding_with_private_business_tt
+	}
+}
+
+shared_focus = {
+	id = CAN_increasing_the_right_to_education
+	icon = GFX_generic_research_improve
+	x = 2
+	y = 2
+	cost = 8
+	
+	relative_position_id = CAN_Tommy_douglas_victory
+	prerequisite = {
+		focus = CAN_new_social_planning
+	}
+	prerequisite = {
+		focus = CAN_the_problems_of_the_subnormal_family
+	}
+	
+	ai_will_do = {
+		base = 150
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_increasing_the_right_to_education"
+		add_ideas = CAN_the_right_to_education
+	}
+}
+
+shared_focus = {
+	id = CAN_national_resources_board
+	icon = GFX_generic_resources
+	x = -1
+	y = 3
+	cost = 8
+	
+	relative_position_id = CAN_Tommy_douglas_victory
+	prerequisite = {
+		focus = CAN_an_understanding_with_private_business
+	}
+	
+	ai_will_do = {
+		base = 150
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_national_resources_board"
+		subtract_from_variable = { CAN_ctb_resource_time = 30 }
+		custom_effect_tooltip = CAN_national_resources_board_tt
+		add_tech_bonus = {
+			bonus = 1
+			uses = 1
+			category = excavation_tech
+		}
+	}
+}
+
+shared_focus = {
+	id = CAN_new_crown_corporations
+	icon = GFX_generic_business_incentives
+	x = 1
+	y = 3
+	cost = 8
+	
+	relative_position_id = CAN_Tommy_douglas_victory
+	prerequisite = {
+		focus = CAN_an_understanding_with_private_business
+	}
+	prerequisite = {
+		focus = CAN_increasing_the_right_to_education
+	}
+	
+	ai_will_do = {
+		base = 150
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_new_crown_corporations"
+		unlock_decision_tooltip = CAN_ctb_canadian_railway_north_expansion
+		unlock_decision_tooltip = CAN_ctb_northern_ports_expansion
+		unlock_decision_tooltip = CAN_ctb_expand_synthetic_rubber
+		unlock_decision_tooltip = CAN_ctb_bc_railway_expansion
+		unlock_decision_tooltip = CAN_ctb_develop_oil_in_saskatchewan
+	}
+}
+
+shared_focus = {
+	id = CAN_female_employees_equal_pay_act
+	icon = GFX_generic_female_workers
+	x = 5
+	y = 3
+	cost = 8
+	
+	relative_position_id = CAN_Tommy_douglas_victory
+	prerequisite = {
+		focus = CAN_expand_hospital_insurance_and_diagnostic_services
+	}
+	
+	
+	ai_will_do = {
+		base = 150
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_female_employees_equal_pay_act"
+		add_ideas = CAN_female_employees_equal_pay_act_idea
+	}
+}
+
+shared_focus = {
+	id = CAN_expand_hospital_insurance_and_diagnostic_services
+	icon = GFX_generic_healthcare
+	x = 4
+	y = 2
+	cost = 8
+	
+	relative_position_id = CAN_Tommy_douglas_victory
+	prerequisite = {
+		focus = CAN_new_social_planning
+	}
+	prerequisite = {
+		focus = CAN_the_problems_of_the_subnormal_family
+	}
+	
+	ai_will_do = {
+		base = 150
+	}
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = CAN_passing_another_law_tt
+			check_variable = { CAN_current_law = 0 }
+		}
+	}
+	continue_if_invalid = yes
+	select_effect = {
+		set_variable = { CAN_current_law = 15 }
+		set_variable = { CAN_current_law_max_clause = 3 }
+		CAN_laws_new_law = yes
+		add_to_array = { CAN_laws_clauses_available = 75 }
+		add_to_array = { CAN_laws_clauses_available = 76 }
+		add_to_array = { CAN_laws_clauses_available = 77 }
+		add_to_array = { CAN_laws_clauses_available = 78 }
+		add_to_array = { CAN_laws_clauses_available = 79 }
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_expand_hospital_insurance_and_diagnostic_services"
+		custom_effect_tooltip = CAN_laws_15_introduce_tt
+		effect_tooltip = {
+			move_up_hc_spending = yes
+		}
+	}
+}
+
+shared_focus = {
+	id = CAN_expanding_other_social_programs
+	icon = GFX_CAN_welfare
+	x = 3
+	y = 3
+	cost = 8
+	
+	relative_position_id = CAN_Tommy_douglas_victory
+	prerequisite = {
+		focus = CAN_expand_hospital_insurance_and_diagnostic_services
+	}
+	ai_will_do = {
+		base = 150
+	}
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = CAN_passing_another_law_tt
+			check_variable = { CAN_current_law = 0 }
+		}
+	}
+	continue_if_invalid = yes
+	select_effect = {
+		set_variable = { CAN_current_law = 13 }
+		set_variable = { CAN_current_law_max_clause = 3 }
+		CAN_laws_new_law = yes
+		add_to_array = { CAN_laws_clauses_available = 62 }
+		add_to_array = { CAN_laws_clauses_available = 63 }
+		add_to_array = { CAN_laws_clauses_available = 64 }
+		add_to_array = { CAN_laws_clauses_available = 65 }
+		add_to_array = { CAN_laws_clauses_available = 66 }
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_expanding_other_social_programs"
+		custom_effect_tooltip = CAN_laws_13_introduce_tt
+		effect_tooltip = {
+			move_up_service_spending = yes
+		}
+	}
+}
+
+shared_focus = {
+	id = CAN_a_more_progressive_tax_code
+	icon = GFX_generic_coin_money_pot
+	x = 1
+	y = 4
+	cost = 8
+	
+	relative_position_id = CAN_Tommy_douglas_victory
+
+	prerequisite = {
+		focus = CAN_national_resources_board
+	}
+	prerequisite = {
+		focus = CAN_new_crown_corporations
+	}
+	ai_will_do = {
+		base = 150
+	}
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = CAN_passing_another_law_tt
+			check_variable = { CAN_current_law = 0 }
+		}
+	}
+	continue_if_invalid = yes
+	select_effect = {
+		set_variable = { CAN_current_law = 11 }
+		set_variable = { CAN_current_law_max_clause = 4 }
+		CAN_laws_new_law = yes
+		add_to_array = { CAN_laws_clauses_available = 50 }
+		add_to_array = { CAN_laws_clauses_available = 51 }
+		add_to_array = { CAN_laws_clauses_available = 52 }
+		add_to_array = { CAN_laws_clauses_available = 53 }
+		add_to_array = { CAN_laws_clauses_available = 54 }
+		add_to_array = { CAN_laws_clauses_available = 55 }
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_a_more_progressive_tax_code"
+		custom_effect_tooltip = CAN_laws_11_introduce_tt
+		effect_tooltip = {
+			move_up_taxation = yes
+		}
+	}
+}
+
+shared_focus = {
+	id = CAN_a_cooperative_commonwealth
+	icon = GFX_CAN_cooperative_commonwealth
+	x = 0
+	y = 5
+	cost = 8
+	
+	relative_position_id = CAN_Tommy_douglas_victory
+	prerequisite = {
+		focus = CAN_subsidies_for_farmers_and_fishers
+	}
+	prerequisite = {
+		focus = CAN_a_more_progressive_tax_code
+	}
+	prerequisite = {
+		focus = CAN_leading_our_allies
+	}
+	prerequisite = {
+		focus = CAN_confidence_in_canada
+	}
+	ai_will_do = {
+		base = 150
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_a_cooperative_commonwealth"
+		CAN_popularity_socdem_increase_large = yes
+		custom_effect_tooltip = CAN_increase_socdem_large_tt
+		add_political_power = 100
+		custom_effect_tooltip = CAN_a_cooperative_commonwealth_tt
+		hidden_effect = {
+			remove_ideas = CAN_expanded_civil_service
+			remove_ideas = CAN_the_right_to_education
+			remove_ideas = CAN_female_employees_equal_pay_act_idea	
+		}
+		add_ideas = CAN_CCF_consolidated_idea
+	}
+}
+
+shared_focus = {
+	id = CAN_confidence_in_canada
+	icon = GFX_generic_canada_big_flag
+	x = 3
+	y = 4
+	cost = 8
+	
+	relative_position_id = CAN_Tommy_douglas_victory
+	prerequisite = {
+		focus = CAN_female_employees_equal_pay_act
+	}
+	prerequisite = {
+		focus = CAN_expanding_other_social_programs
+	}
+	ai_will_do = {
+		base = 150
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_confidence_in_canada"
+		add_stability = 0.05
+		add_ideas = {
+			CAN_canadian_bill_of_rights
+		}
+	}
+}
+
+##Liberals
+
+shared_focus = {
+	id = CAN_St_Laurent_victory_1953
+	icon = GFX_CAN_St_Laurent_Victory
+	x = 41
+	y = 0
+	cost = 8
+	
+	available = {
+		has_country_flag = CAN_1953_election_done
+		has_government = social_liberal
+		always = no
+	}
+	
+	ai_will_do = {
+		base = 150
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_St_Laurent_victory_1953"
+		add_political_power = 50
+		custom_effect_tooltip = unlock_focuses
+	}
+}
+
+shared_focus = {
+	id = CAN_managing_prosperity
+	icon = GFX_generic_price_controls
+	x = -2
+	y = 1
+	cost = 8
+	
+	relative_position_id = CAN_St_Laurent_victory_1953
+	prerequisite = {
+		focus = CAN_St_Laurent_victory_1953
+	}
+	
+	ai_will_do = {
+		base = 150
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_managing_prosperity"
+		add_timed_idea = {
+			idea = CAN_managing_prosperity_idea
+			days = 365
+		}
+	}
+}
+
+shared_focus = {
+	id = CAN_modest_increase_pensions_social_services
+	icon = GFX_generic_pass_legislation
+	x = -3
+	y = 2
+	cost = 8
+	
+	relative_position_id = CAN_St_Laurent_victory_1953
+	prerequisite = {
+		focus = CAN_managing_prosperity
+	}
+	
+	ai_will_do = {
+		base = 150
+	}
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = CAN_passing_another_law_tt
+			check_variable = { CAN_current_law = 0 }
+		}
+	}
+	continue_if_invalid = yes
+	select_effect = {
+		set_variable = { CAN_current_law = 14 }
+		set_variable = { CAN_current_law_max_clause = 3 }
+		CAN_laws_new_law = yes
+		add_to_array = { CAN_laws_clauses_available = 70 }
+		add_to_array = { CAN_laws_clauses_available = 71 }
+		add_to_array = { CAN_laws_clauses_available = 72 }
+		add_to_array = { CAN_laws_clauses_available = 73 }
+		add_to_array = { CAN_laws_clauses_available = 74 }
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_modest_increase_pensions_social_services"
+		custom_effect_tooltip = CAN_laws_14_introduce_tt
+		effect_tooltip = {
+			move_up_service_spending = yes
+		}
+	}
+}
+
+shared_focus = {
+	id = CAN_modern_trade_economics
+	icon = GFX_generic_commercial_trade
+	x = -1
+	y = 2
+	cost = 8
+	
+	relative_position_id = CAN_St_Laurent_victory_1953
+	prerequisite = {
+		focus = CAN_managing_prosperity
+	}
+	
+	ai_will_do = {
+		base = 150
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_modern_trade_economics"
+		add_ideas = CAN_modern_monetary_advances
+	}
+}
+
+shared_focus = {
+	id = CAN_business_like_efficiency
+	icon = GFX_generic_co_owned_businesses
+	x = 1
+	y = 2
+	cost = 8
+	
+	relative_position_id = CAN_St_Laurent_victory_1953
+	prerequisite = {
+		focus = CAN_managing_prosperity
+	}
+	
+	ai_will_do = {
+		base = 150
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_business_like_efficiency"
+		swap_ideas = {
+			remove_idea = CAN_managing_prosperity_idea
+			add_idea = CAN_business_like_efficiency_idea
+		}
+		hidden_effect = {
+			modify_timed_idea = {
+				idea = CAN_business_like_efficiency_idea
+				days = 180
+			}
+		}
+		custom_effect_tooltip = CAN_business_like_efficiency_tt
+	}
+}
+
+shared_focus = {
+	id = CAN_contributory_health_insurance
+	icon = GFX_generic_healthcare
+	x = -4
+	y = 3
+	cost = 8
+	
+	relative_position_id = CAN_St_Laurent_victory_1953
+	prerequisite = {
+		focus = CAN_modest_increase_pensions_social_services
+	}
+	
+	ai_will_do = {
+		base = 150
+	}
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = CAN_passing_another_law_tt
+			check_variable = { CAN_current_law = 0 }
+		}
+	}
+	continue_if_invalid = yes
+	select_effect = {
+		set_variable = { CAN_current_law = 12 }
+		set_variable = { CAN_current_law_max_clause = 3 }
+		CAN_laws_new_law = yes
+		add_to_array = { CAN_laws_clauses_available = 56 }
+		add_to_array = { CAN_laws_clauses_available = 57 }
+		add_to_array = { CAN_laws_clauses_available = 58 }
+		add_to_array = { CAN_laws_clauses_available = 59 }
+		add_to_array = { CAN_laws_clauses_available = 60 }
+		add_to_array = { CAN_laws_clauses_available = 61 }
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_contributory_health_insurance"
+		custom_effect_tooltip = CAN_laws_12_introduce_tt
+		effect_tooltip = {
+			move_up_hc_spending = yes
+		}
+	}
+}
+
+shared_focus = {
+	id = CAN_fair_employment_practices_bargaining_rights
+	icon = GFX_generic_workers_rights
+	x = -3
+	y = 4
+	cost = 8
+	
+	relative_position_id = CAN_St_Laurent_victory_1953
+	prerequisite = {
+		focus = CAN_contributory_health_insurance
+	}
+	
+	ai_will_do = {
+		base = 150
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_fair_employment_practices_bargaining_rights"
+		add_ideas = CAN_fair_employment_practices_idea
+	}
+}
+
+shared_focus = {
+	id = CAN_federal_support_universities
+	icon = GFX_generic_research_grant
+	x = -2
+	y = 3
+	cost = 8
+	
+	relative_position_id = CAN_St_Laurent_victory_1953
+	prerequisite = {
+		focus = CAN_modest_increase_pensions_social_services
+	}
+	prerequisite = {
+		focus = CAN_modern_trade_economics
+	}
+	
+	ai_will_do = {
+		base = 150
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_federal_support_universities"
+		move_up_edu_spending = yes
+		add_tech_bonus = {
+            bonus = 0.5
+            uses = 1
+            category = electronics_tech
+		}
+	}
+}
+
+shared_focus = {
+	id = CAN_rise_of_white_collar
+	icon = GFX_generic_business_incentives
+	x = -1
+	y = 4
+	cost = 8
+	
+	relative_position_id = CAN_St_Laurent_victory_1953
+	prerequisite = {
+		focus = CAN_modern_trade_economics
+	}
+	
+	ai_will_do = {
+		base = 150
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_rise_of_white_collar"
+		468 = {
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = industrial_complex
+				level = 2
+				instant_build = yes
+			}
+		}
+		1077 = {
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = industrial_complex
+				level = 2
+				instant_build = yes
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = CAN_building_new_ties_with_defenceindustrial_multiplex
+	icon = GFX_generic_industry_air
+	x = -2
+	y = 5
+	cost = 8
+	
+	relative_position_id = CAN_St_Laurent_victory_1953
+	prerequisite = {
+		focus = CAN_rise_of_white_collar
+	}
+	prerequisite = {
+		focus = CAN_federal_support_universities
+	}
+	ai_will_do = {
+		base = 150
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_building_new_ties_with_defenceindustrial_multiplex"
+		add_tech_bonus = {
+            bonus = 0.5
+            uses = 1
+            category = infantry_weapons
+		}
+		1076 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = arms_factory
+				level = 1
+				instant_build = yes
+			}
+		}
+		682 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = arms_factory
+				level = 1
+				instant_build = yes
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = CAN_serving_the_domestic_market
+	icon = GFX_generic_deals
+	x = 0
+	y = 3
+	cost = 8
+	
+	relative_position_id = CAN_St_Laurent_victory_1953
+	prerequisite = {
+		focus = CAN_business_like_efficiency
+	}
+	prerequisite = {
+		focus = CAN_modern_trade_economics
+	}
+	
+	ai_will_do = {
+		base = 150
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_serving_the_domestic_market"
+		473 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
+		1098 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
+		276 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = CAN_stimulating_growth_of_consumer_needs
+	icon = GFX_generic_demobilise_econ
+	x = 1
+	y = 4
+	cost = 8
+	
+	relative_position_id = CAN_St_Laurent_victory_1953
+	prerequisite = {
+		focus = CAN_serving_the_domestic_market
+	}
+	
+	ai_will_do = {
+		base = 150
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_stimulating_growth_of_consumer_needs"
+		swap_ideas = {
+			remove_idea = CAN_modern_monetary_advances
+			add_idea = CAN_modern_monetary_advances_2
+		}
+	}
+}
+
+shared_focus = {
+	id = CAN_finishing_the_megaprojects
+	icon = GFX_generic_advanced_construction_techniques
+	x = 0
+	y = 5
+	cost = 8
+	
+	relative_position_id = CAN_St_Laurent_victory_1953
+	prerequisite = {
+		focus = CAN_rise_of_white_collar
+	}
+	prerequisite = {
+		focus = CAN_stimulating_growth_of_consumer_needs
+	}
+	
+	ai_will_do = {
+		base = 150
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_finishing_the_megaprojects"
+		465 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+			add_building_construction = {
+				type = infrastructure
+				level = 1
+				instant_build = yes
+			}
+		}
+		467 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+			add_building_construction = {
+				type = infrastructure
+				level = 1
+				instant_build = yes
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = CAN_serving_quebec_business_needs
+	icon = GFX_CAN_new_status_quebec
+	x = 2
+	y = 5
+	cost = 8
+	
+	relative_position_id = CAN_St_Laurent_victory_1953
+	prerequisite = {
+		focus = CAN_rise_of_white_collar
+	}
+	prerequisite = {
+		focus = CAN_stimulating_growth_of_consumer_needs
+	}
+	
+	ai_will_do = {
+		base = 150
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_serving_quebec_business_needs"
+		1079 = {
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = industrial_complex
+				level = 2
+				instant_build = yes
+			}
+		}
+		468 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = CAN_closing_the_pipeline_debate
+	icon = GFX_CAN_lets_go_canada
+	x = 0
+	y = 6
+	cost = 8
+	
+	relative_position_id = CAN_St_Laurent_victory_1953
+	prerequisite = {
+		focus = CAN_finishing_the_megaprojects
+	}
+	prerequisite = {
+		focus = CAN_serving_quebec_business_needs
+	}
+	prerequisite = {
+		focus = CAN_building_new_ties_with_defenceindustrial_multiplex
+	}
+	
+	ai_will_do = {
+		base = 150
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_closing_the_pipeline_debate"
+		CAN_popularity_liberals_increase_large = yes
+		custom_effect_tooltip = CAN_increase_liberals_large_tt
+		add_political_power = 100
+	}
+}
+
+shared_focus = {
+	id = CAN_bilingual_partnersihp
+	icon = GFX_CAN_new_status_quebec
+	x = 2
+	y = 1
+	cost = 4
+	
+	relative_position_id = CAN_St_Laurent_victory_1953
+	prerequisite = {
+		focus = CAN_St_Laurent_victory_1953
+	}
+	
+	ai_will_do = {
+		base = 150
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_bilingual_partnersihp"
+		add_political_power = 50
+		custom_effect_tooltip = CAN_increase_liberals_medium_quebec_tt
+		466 = {
+			CAN_popularity_liberals_increase_medium = yes
+		}
+	}
+}
+
+shared_focus = {
+	id = CAN_national_council_on_the_arts
+	icon = GFX_generic_culture2
+	x = 3
+	y = 2
+	cost = 8
+	
+	relative_position_id = CAN_St_Laurent_victory_1953
+	prerequisite = {
+		focus = CAN_bilingual_partnersihp
+	}
+	
+	ai_will_do = {
+		base = 150
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_national_council_on_the_arts"
+		add_ideas = CAN_idea_canada_council
+	}
+}
+
+shared_focus = {
+	id = CAN_rekindle_canadian_nationalism
+	icon = GFX_generic_canada_big_flag
+	x = 2
+	y = 3
+	cost = 4
+	
+	relative_position_id = CAN_St_Laurent_victory_1953
+	prerequisite = {
+		focus = CAN_national_council_on_the_arts
+	}
+	
+	ai_will_do = {
+		base = 150
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_rekindle_canadian_nationalism"
+		add_war_support = 0.05
+		add_manpower = 10000
+		#TODO flavor event
+	}
+}
+
+shared_focus = {
+	id = CAN_the_mature_canada
+	icon = GFX_generic_KRG_social_liberal
+	x = 3
+	y = 4
+	cost = 8
+	
+	relative_position_id = CAN_St_Laurent_victory_1953
+	prerequisite = {
+		focus = CAN_rekindle_canadian_nationalism
+	}
+	
+	ai_will_do = {
+		base = 150
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_the_mature_canada"
+		CAN_popularity_liberals_increase_medium = yes
+		custom_effect_tooltip = CAN_increase_liberals_medium_tt
+		add_political_power = 50
+	}
+}
+
+#Progressive Conservatives
+shared_focus = {
+	id = CAN_Diefenbaker_victory_1953
+	icon = GFX_CAN_Diefenbaker_Victory
+	x = 50	
+	y = 0
+	cost = 8
+	
+	available = {
+		has_country_flag = CAN_1953_election_done
+		has_government = market_liberal
+		always = no
+	}
+	
+	ai_will_do = {
+		base = 150
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_Diefenbaker_victory_1953"
+		add_political_power = 50
+		custom_effect_tooltip = CAN_dief_victory_tt
+		custom_effect_tooltip = unlock_focuses
+		add_dynamic_modifier = {
+			modifier = CAN_one_canada_modifier
+		}
+	}
+}
+
+shared_focus = {
+	id = CAN_creation_canadian_human_rights
+	icon = GFX_generic_new_treaty
+	x = -3
+	y = 1
+	cost = 8
+	
+	relative_position_id = CAN_Diefenbaker_victory_1953
+	prerequisite = {
+		focus = CAN_Diefenbaker_victory_1953
+	}
+	
+	ai_will_do = {
+		base = 150
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_creation_canadian_human_rights"
+		add_ideas = CAN_canadian_human_rights_commision_idea
+	}
+}
+
+shared_focus = {
+	id = CAN_restricting_order_in_council
+	icon = GFX_CAN_quebec_thing 
+	x = -4
+	y = 2
+	cost = 8
+	
+	relative_position_id = CAN_Diefenbaker_victory_1953
+	prerequisite = {
+		focus = CAN_creation_canadian_human_rights
+	}
+	
+	ai_will_do = {
+		base = 150
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_restricting_order_in_council"
+		##TODO: flavor?
+		add_political_power = 50
+		custom_effect_tooltip = CAN_increase_conservatives_medium_quebec_tt
+		466 = {
+			CAN_popularity_conservatives_increase_medium = yes
+		}
+	}
+}
+
+shared_focus = {
+	id = CAN_salutez_votre_chef
+	icon = GFX_CAN_new_status_quebec
+	x = -2
+	y = 2
+	cost = 8
+	
+	relative_position_id = CAN_Diefenbaker_victory_1953
+	prerequisite = {
+		focus = CAN_creation_canadian_human_rights
+	}
+	
+	ai_will_do = {
+		base = 150
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_salutez_votre_chef"
+		add_political_power = 50
+		unlock_decision_tooltip = CAN_subsidies_for_quebecois_farmers
+		unlock_decision_tooltip = CAN_denounce_quebecois_seperatism
+		unlock_decision_tooltip = CAN_give_token_concessions_to_quebecois_autonomists
+	}
+}
+
+shared_focus = {
+	id = CAN_soften_immigration_laws
+	icon = GFX_generic_refugee_management
+	x = -4
+	y = 3
+	cost = 8
+	
+	relative_position_id = CAN_Diefenbaker_victory_1953
+	prerequisite = {
+		focus = CAN_restricting_order_in_council
+	}
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = CAN_passing_another_law_tt
+			check_variable = { CAN_current_law = 0 }
+		}
+	}
+	cancel_if_invalid = no
+	continue_if_invalid = yes
+	
+	ai_will_do = {
+		base = 150
+	}
+	select_effect = {
+		log = "[GetDateText]: [Root.GetName]: Focus Select CAN_soften_immigration_laws"
+		set_variable = { CAN_current_law = 3 }
+		set_variable = { CAN_current_law_max_clause = 3 }
+		CAN_laws_new_law = yes
+		add_to_array = { CAN_laws_clauses_available = 10 }
+		add_to_array = { CAN_laws_clauses_available = 11 }
+		add_to_array = { CAN_laws_clauses_available = 12 }
+		add_to_array = { CAN_laws_clauses_available = 13 }
+		add_to_array = { CAN_laws_clauses_available = 14 }
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_soften_immigration_laws"
+		custom_effect_tooltip = CAN_laws_3_introduce_tt
+	}
+}
+
+shared_focus = {
+	id = CAN_calls_for_equality_one_canada
+	icon = GFX_generic_census 
+	x = -2
+	y = 3
+	cost = 8
+	
+	relative_position_id = CAN_Diefenbaker_victory_1953
+	prerequisite = {
+		focus = CAN_salutez_votre_chef
+	}
+	
+	ai_will_do = {
+		base = 150
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_calls_for_equality_one_canada"
+		unlock_decision_tooltip = CAN_end_racial_discrimination_in_immigration
+		unlock_decision_tooltip = CAN_promote_equality_all_canadians
+		unlock_decision_tooltip = CAN_promote_rights_immigrants
+	}
+}
+
+shared_focus = {
+	id = CAN_canadian_bill_of_rights_dief
+	icon = GFX_CAN_bill_of_rights
+	x = -3
+	y = 4
+	cost = 8
+	
+	relative_position_id = CAN_Diefenbaker_victory_1953
+	prerequisite = {
+		focus = CAN_restricting_order_in_council
+	}
+	prerequisite = {
+		focus = CAN_salutez_votre_chef
+	}
+	prerequisite = {
+		focus = CAN_soften_immigration_laws
+	}
+	
+	ai_will_do = {
+		base = 150
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_canadian_bill_of_rights_dief"
+		add_ideas = {
+			CAN_canadian_bill_of_rights
+		}
+	}
+}
+
+shared_focus = {
+	id = CAN_strengthen_bill_of_rights
+	icon = GFX_generic_new_treaty 
+	x = -3
+	y = 5
+	cost = 8
+	
+	relative_position_id = CAN_Diefenbaker_victory_1953
+	prerequisite = {
+		focus = CAN_canadian_bill_of_rights_dief
+	}
+	
+	ai_will_do = {
+		base = 150
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_strengthen_bill_of_rights"
+		add_political_power = 50
+		swap_ideas = {
+			add_idea = CAN_canadian_bill_of_rights_2
+			remove_idea = CAN_canadian_bill_of_rights
+		}
+	}
+}
+
+shared_focus = {
+	id = CAN_western_canada_one_canada
+	icon = GFX_CAN_the_gateway_to_the_west 
+	x = -1
+	y = 4
+	cost = 8
+	
+	relative_position_id = CAN_Diefenbaker_victory_1953
+	prerequisite = {
+		focus = CAN_calls_for_equality_one_canada
+	}
+	
+	ai_will_do = {
+		base = 150
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_western_canada_one_canada"
+		unlock_decision_tooltip = CAN_begin_agricultural_conservation_projects
+		unlock_decision_tooltip = CAN_increase_wheat_exports
+		unlock_decision_tooltip = CAN_develop_west_natural_resources
+	}
+}
+
+shared_focus = {
+	id = CAN_social_justice_one_canada
+	icon = GFX_generic_bag_of_money 
+	x = -1
+	y = 5
+	cost = 8
+	
+	relative_position_id = CAN_Diefenbaker_victory_1953
+	prerequisite = {
+		focus = CAN_western_canada_one_canada
+	}
+	
+	ai_will_do = {
+		base = 150
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_social_justice_one_canada"
+		unlock_decision_tooltip = CAN_income_opportunities_for_rural_canadians
+		unlock_decision_tooltip = CAN_improve_access_to_health_services
+		unlock_decision_tooltip = CAN_price_supports_agricultural_products
+	}
+}
+
+shared_focus = {
+	id = CAN_expansion_old_age_pension
+	icon = GFX_generic_bag_of_money
+	x = 0
+	y = 1
+	cost = 10
+	
+	relative_position_id = CAN_Diefenbaker_victory_1953
+	prerequisite = {
+		focus = CAN_Diefenbaker_victory_1953
+	}
+	
+	ai_will_do = {
+		base = 150
+	}
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = CAN_passing_another_law_tt
+			check_variable = { CAN_current_law = 0 }
+		}
+	}
+	continue_if_invalid = yes
+	select_effect = {
+		set_variable = { CAN_current_law = 8 }
+		set_variable = { CAN_current_law_max_clause = 3 }
+		CAN_laws_new_law = yes
+		add_to_array = { CAN_laws_clauses_available = 35 }
+		add_to_array = { CAN_laws_clauses_available = 36 }
+		add_to_array = { CAN_laws_clauses_available = 37 }
+		add_to_array = { CAN_laws_clauses_available = 38 }
+		add_to_array = { CAN_laws_clauses_available = 39 }
+		set_variable = { CAN_laws_support_change = 3 }
+		CAN_laws_support = yes
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_expansion_old_age_pension"
+		custom_effect_tooltip = CAN_laws_8_introduce_tt
+		effect_tooltip = {
+			move_up_service_spending = yes
+		}
+	}
+}
+
+shared_focus = {
+	id = CAN_expand_national_healthcare
+	icon = GFX_generic_healthcare
+	x = 0
+	y = 2
+	cost = 8
+	
+	relative_position_id = CAN_Diefenbaker_victory_1953
+	prerequisite = {
+		focus = CAN_expansion_old_age_pension
+	}
+	
+	ai_will_do = {
+		base = 150
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_expand_national_healthcare"
+		move_up_hc_spending = yes
+	}
+}
+
+shared_focus = {
+	id = CAN_war_veterans_allowance_benefits
+	icon = GFX_generic_veterans_benefits
+	x = 0
+	y = 3
+	cost = 8
+	
+	relative_position_id = CAN_Diefenbaker_victory_1953
+	prerequisite = {
+		focus = CAN_expand_national_healthcare
+	}
+	
+	ai_will_do = {
+		base = 150
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_war_veterans_allowance_benefits"
+		add_ideas = CAN_war_veteran_benefits
+	}
+}
+
+shared_focus = {
+	id = CAN_national_development_policy
+	icon = GFX_CAN_industrialization
+	x = 3
+	y = 1
+	cost = 8
+	
+	relative_position_id = CAN_Diefenbaker_victory_1953
+	prerequisite = {
+		focus = CAN_Diefenbaker_victory_1953
+	}
+	
+	ai_will_do = {
+		base = 150
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_national_development_policy"
+		custom_effect_tooltip = CAN_modify_dief
+		add_to_variable = {
+			var = CAN_dief_dynam_cg
+			value = 0.05
+			tooltip = CAN_modifier_cg_tt
+		}
+		add_to_variable = {
+			var = CAN_dief_dynam_pp
+			value = 0.08
+			tooltip = CAN_modifier_pp_tt
+		}
+		add_to_variable = {
+			var = CAN_dief_dynam_cs
+			value = 0.10
+			tooltip = CAN_modifier_cs_tt
+		}
+		unlock_decision_tooltip = CAN_develop_central_canada
+		unlock_decision_tooltip = CAN_develop_the_maritimes
+		unlock_decision_tooltip = CAN_develop_northern_canada
+		unlock_decision_tooltip = CAN_develop_western_canada
+	}
+}
+
+shared_focus = {
+	id = CAN_continue_northern_vision
+	icon = GFX_CAN_northern_immigration2
+	x = 2
+	y = 2
+	cost = 8
+	
+	relative_position_id = CAN_Diefenbaker_victory_1953
+	prerequisite = {
+		focus = CAN_national_development_policy
+	}
+	
+	ai_will_do = {
+		base = 150
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_continue_northern_vision"
+		466 = {
+			move_up_state_category = yes
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+			add_building_construction = {
+				type = infrastructure
+				level = 2
+				instant_build = yes
+			}
+		}
+		683 = {
+			move_up_state_category = yes
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+			add_building_construction = {
+				type = infrastructure
+				level = 2
+				instant_build = yes
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = CAN_atlantic_development_board
+	icon = GFX_GENERIC_reinvest_goods 
+	x = 4
+	y = 2
+	cost = 8
+	
+	relative_position_id = CAN_Diefenbaker_victory_1953
+	prerequisite = {
+		focus = CAN_national_development_policy
+	}
+	
+	ai_will_do = {
+		base = 150
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_atlantic_development_board"
+		custom_effect_tooltip = CAN_atlantic_development_board_tt
+		unlock_decision_tooltip = CAN_develop_newfoundland
+		unlock_decision_tooltip = CAN_develop_nova_scotia
+		unlock_decision_tooltip = CAN_develop_new_brunswick
+		hidden_effect = {
+			464 = {
+				add_state_modifier = {
+					modifier = {
+						state_production_speed_buildings_factor = 0.15
+					}
+				}
+			}
+			1078 = {
+				add_state_modifier = {
+					modifier = {
+						state_production_speed_buildings_factor = 0.15
+					}
+				}
+			}
+			1079 = {
+				add_state_modifier = {
+					modifier = {
+						state_production_speed_buildings_factor = 0.15
+					}
+				}
+			}
+			466 = {
+				add_state_modifier = {
+					modifier = {
+						state_production_speed_buildings_factor = 0.15
+					}
+				}
+			}
+			332 = {
+				add_state_modifier = {
+					modifier = {
+						state_production_speed_buildings_factor = 0.15
+					}
+				}
+			}
+			331 = {
+				add_state_modifier = {
+					modifier = {
+						state_production_speed_buildings_factor = 0.15
+					}
+				}
+			} 
+		}
+	}
+}
+
+shared_focus = {
+	id = CAN_supporting_canadian_farmers
+	icon = GFX_AUS_agriculture
+	x = 2
+	y = 3
+	cost = 8
+	
+	relative_position_id = CAN_Diefenbaker_victory_1953
+	prerequisite = {
+		focus = CAN_continue_northern_vision
+	}
+	
+	ai_will_do = {
+		base = 150
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_supporting_canadian_farmers"
+		467 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
+		682 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
+		469 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = CAN_save_the_tax
+	icon = GFX_generic_coin_money_pot 
+	x = 1
+	y = 4
+	cost = 8
+	
+	relative_position_id = CAN_Diefenbaker_victory_1953
+	prerequisite = {
+		focus = CAN_supporting_canadian_farmers
+	}
+	
+	ai_will_do = {
+		base = 150
+	}
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = CAN_passing_another_law_tt
+			check_variable = { CAN_current_law = 0 }
+		}
+	}
+	continue_if_invalid = yes
+	select_effect = {
+		set_variable = { CAN_current_law = 10 }
+		set_variable = { CAN_current_law_max_clause = 3 }
+		CAN_laws_new_law = yes
+		add_to_array = { CAN_laws_clauses_available = 45 }
+		add_to_array = { CAN_laws_clauses_available = 46 }
+		add_to_array = { CAN_laws_clauses_available = 47 }
+		add_to_array = { CAN_laws_clauses_available = 48 }
+		add_to_array = { CAN_laws_clauses_available = 49 }
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_save_the_tax"
+		custom_effect_tooltip = CAN_laws_10_introduce_tt
+		effect_tooltip = {
+			move_down_taxation = yes
+		}
+	}
+}
+
+shared_focus = {
+	id = CAN_atlantic_offshore_drilling
+	x = 4
+	y = 3
+	cost = 8
+	icon = GFX_generic_oil_derrick
+	
+	relative_position_id = CAN_Diefenbaker_victory_1953
+	prerequisite = {
+		focus = CAN_atlantic_development_board
+	}
+	
+	ai_will_do = {
+		base = 150
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_atlantic_offshore_drilling"
+		add_tech_bonus = {
+			bonus = 0.5
+			uses = 2
+			category = refining_tech
+		}
+		464 = {
+			add_resource = {
+				type = oil
+				amount = 10
+			}
+		}
+		331 = {
+			add_resource = {
+				type = oil
+				amount = 8
+			}
+		}
+		332 = {
+			add_resource = {
+				type = oil
+				amount = 6
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = CAN_small_business_big_projects
+	x = 3
+	y = 4
+	cost = 8
+	icon = GFX_generic_business_incentives
+	
+	relative_position_id = CAN_Diefenbaker_victory_1953
+	prerequisite = {
+		focus = CAN_atlantic_offshore_drilling
+	}
+	
+	ai_will_do = {
+		base = 150
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_small_business_big_projects"
+		693 = {
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = industrial_complex
+				level = 2
+				instant_build = yes
+			}
+		}
+		276 = {
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = industrial_complex
+				level = 2
+				instant_build = yes
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = CAN_the_commonwealth_market
+	x = 2
+	y = 5
+	icon = GFX_ENG_commonwealth_deals
+	cost = 8
+	
+	relative_position_id = CAN_Diefenbaker_victory_1953
+	prerequisite = {
+		focus = CAN_save_the_tax
+	}
+	prerequisite = {
+		focus = CAN_small_business_big_projects
+	}
+	
+	ai_will_do = {
+		base = 150
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_the_commonwealth_market"
+		random_country = {
+			limit = { is_ally_with = CAN }
+			add_offsite_building = {
+				type = industrial_complex
+				level = 1
+			}
+			add_offsite_building = {
+				type = arms_factory
+				level = 1
+			}
+		}
+		random_country = {
+			limit = { is_ally_with = CAN }
+			add_offsite_building = {
+				type = industrial_complex
+				level = 1
+			}
+			add_offsite_building = {
+				type = arms_factory
+				level = 1
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = CAN_modernize_diversity_touristify_maritimes
+	x = 6
+	y = 3
+	cost = 8
+	icon = GFX_NOR_passport_convention
+	
+	relative_position_id = CAN_Diefenbaker_victory_1953
+	prerequisite = {
+		focus = CAN_atlantic_development_board
+	}
+	
+	ai_will_do = {
+		base = 150
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_modernize_diversity_touristify_maritimes"
+		473 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
+		331 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
+		464 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = CAN_opportunities_for_young
+	x = 5
+	y = 4
+	cost = 8
+	icon = GFX_generic_production
+	
+	relative_position_id = CAN_Diefenbaker_victory_1953
+	prerequisite = {
+		focus = CAN_modernize_diversity_touristify_maritimes
+	}
+	
+	ai_will_do = {
+		base = 150
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_opportunities_for_young"
+		465 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
+		331 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
+		464 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = CAN_one_canada_in_one_world
+	x = 0
+	y = 6
+	cost = 8
+	icon = GFX_generic_globe
+	
+	relative_position_id = CAN_Diefenbaker_victory_1953
+	prerequisite = {
+		focus = CAN_strengthen_bill_of_rights
+	}
+	prerequisite = {
+		focus = CAN_social_justice_one_canada
+	}
+	prerequisite = {
+		focus = CAN_the_commonwealth_market
+	}
+	
+	ai_will_do = {
+		base = 150
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_one_canada_in_one_world"
+		##TODO: dief final event
+		add_political_power = 100
+		CAN_popularity_conservatives_increase_large = yes
+		custom_effect_tooltip = CAN_increase_conservatives_large_tt
+	}
+}
+
+#WAC Bennett
+shared_focus = {
+	id = CAN_bennett_victory_1953
+	icon = GFX_CAN_Bennett_Victory 
+	x = 62
+	y = 0
+	cost = 8
+	
+	available = {
+		has_country_flag = CAN_1953_election_done
+		has_government = social_conservative
+		always = no
+	}
+	
+	ai_will_do = {
+		base = 150
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_bennett_victory_1953"
+		add_political_power = 50
+		custom_effect_tooltip = CAN_bennett_victory_tt
+		custom_effect_tooltip = unlock_focuses
+		hidden_effect = {
+			add_dynamic_modifier = {
+				modifier = CAN_new_unionist_order
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = CAN_handling_the_aristocracy
+	icon = GFX_generic_plotting
+	x = -2
+	y = 1
+	cost = 8
+	
+	relative_position_id = CAN_bennett_victory_1953
+	prerequisite = {
+		focus = CAN_bennett_victory_1953
+	}
+	
+	ai_will_do = {
+		base = 150
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_handling_the_aristocracy"
+		country_event = { id = krg_can.88 }
+	}
+}
+
+shared_focus = {
+	id = CAN_the_western_base
+	icon = GFX_CAN_the_gateway_to_the_west
+	x = -3
+	y = 2
+	cost = 8
+	
+	relative_position_id = CAN_bennett_victory_1953
+	prerequisite = {
+		focus = CAN_handling_the_aristocracy
+	}
+
+	mutually_exclusive = {
+		focus = CAN_the_quebec_traditionalists
+	}
+	
+	ai_will_do = {
+		base = 150
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_the_western_base"
+		custom_effect_tooltip = CAN_increase_unionists_medium_west_tt
+		473 = {
+			CAN_popularity_unionists_increase_medium = yes
+		}
+		473 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
+		1082 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = arms_factory
+				level = 1
+				instant_build = yes
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = CAN_the_quebec_traditionalists
+	icon = GFX_CAN_new_status_quebec
+	x = -1
+	y = 2
+	cost = 8
+	
+	relative_position_id = CAN_bennett_victory_1953
+	prerequisite = {
+		focus = CAN_handling_the_aristocracy
+	}
+
+	mutually_exclusive = {
+		focus = CAN_the_western_base
+	}
+	
+	ai_will_do = {
+		base = 150
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_the_quebec_traditionalists"
+		custom_effect_tooltip = CAN_increase_unionists_medium_quebec_tt
+		466 = {
+			CAN_popularity_unionists_increase_medium = yes
+		}
+		468 = {
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = industrial_complex
+				level = 2
+				instant_build = yes
+			}
+		}
+		1079 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = arms_factory
+				level = 1
+				instant_build = yes
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = CAN_beautiful_british_columbia
+	icon = GFX_CAN_beautiful_british_colombia 
+	x = -4
+	y = 3
+	cost = 8
+	
+	relative_position_id = CAN_bennett_victory_1953
+	prerequisite = {
+		focus = CAN_the_western_base
+	}
+	
+	ai_will_do = {
+		base = 150
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_beautiful_british_columbia"
+		473 = {
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = industrial_complex
+				level = 2
+				instant_build = yes
+			}
+		}
+		1083 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = arms_factory
+				level = 1
+				instant_build = yes
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = CAN_oil_it_will_be
+	icon = GFX_generic_oil_derrick
+	x = -3
+	y = 4
+	cost = 8
+	
+	relative_position_id = CAN_bennett_victory_1953
+	prerequisite = {
+		focus = CAN_build_the_damn_highways
+	}
+	
+	ai_will_do = {
+		base = 150
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_oil_it_will_be"
+		add_tech_bonus = {
+            bonus = 1
+            uses = 1
+            category = refining_tech
+		}
+		472 = {
+			add_resource = {
+				type = oil
+				amount = 8
+			}
+		}
+		471 = {
+			add_resource = {
+				type = oil
+				amount = 8
+			}
+		}
+		1084 = {
+			add_resource = {
+				type = oil
+				amount = 4
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = CAN_build_the_damn_highways
+	icon = GFX_KRG_generic_highway
+	x = -2
+	y = 3
+	cost = 8
+	
+	relative_position_id = CAN_bennett_victory_1953
+	prerequisite = {
+		focus = CAN_the_western_base
+		focus = CAN_the_quebec_traditionalists
+	}
+	
+	ai_will_do = {
+		base = 150
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_build_the_damn_highways"
+		custom_effect_tooltip = CAN_build_the_damn_highways_tt
+		subtract_from_variable = { CAN_ctb_highway_time = 60 }
+		473 = {
+			add_building_construction = {
+				type = infrastructure
+				level = 1
+				instant_build = yes
+			}
+		}
+		1083 = {
+			add_building_construction = {
+				type = infrastructure
+				level = 1
+				instant_build = yes
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = CAN_increasing_provincial_powers
+	icon = GFX_TEX_federal_system
+	x = -2
+	y = 5
+	cost = 8
+	
+	relative_position_id = CAN_bennett_victory_1953
+	prerequisite = {
+		focus = CAN_oil_it_will_be
+	}
+	
+	ai_will_do = {
+		base = 150
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_increasing_provincial_powers"
+		add_stability = 0.05
+		add_political_power = 100
+	}
+}
+
+shared_focus = {
+	id = CAN_favouring_the_majority
+	icon = GFX_generic_warm_happy_people
+	x = 2
+	y = 1
+	cost = 8
+	
+	relative_position_id = CAN_bennett_victory_1953
+	prerequisite = {
+		focus = CAN_bennett_victory_1953
+	}
+	
+	ai_will_do = {
+		base = 150
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_favouring_the_majority"
+		custom_effect_tooltip = CAN_modify_bennett
+		add_to_variable = { 
+			CAN_bennett_dynam_pp = 0.10 
+			tooltip = CAN_modifier_pp_tt
+		}
+		CAN_popularity_unionists_increase_medium = yes
+		custom_effect_tooltip = CAN_increase_unionists_medium_tt
+	}
+}
+
+shared_focus = {
+	id = CAN_stopping_state_socialism
+	icon = GFX_NEE_remove_syndies
+	x = 1
+	y = 2
+	cost = 8
+	
+	relative_position_id = CAN_bennett_victory_1953
+	prerequisite = {
+		focus = CAN_favouring_the_majority
+	}
+	
+	ai_will_do = {
+		base = 150
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_stopping_state_socialism"
+		add_stability = 0.05
+		CAN_popularity_socdem_decrease_medium = yes
+		custom_effect_tooltip = CAN_decrease_socdem_medium_tt
+		CAN_popularity_unionists_increase_medium = yes
+		custom_effect_tooltip = CAN_increase_unionists_medium_tt
+	}
+}
+
+shared_focus = {
+	id = CAN_loosen_the_tax_codes_deregulation
+	icon = GFX_generic_tax
+	x = 0
+	y = 3
+	cost = 8
+	
+	relative_position_id = CAN_bennett_victory_1953
+
+	ai_will_do = {
+		base = 150
+	}
+	
+	prerequisite = {
+		focus = CAN_stopping_state_socialism
+	}
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = CAN_passing_another_law_tt
+			check_variable = { CAN_current_law = 0 }
+		}
+	}
+	continue_if_invalid = yes
+	select_effect = {
+		set_variable = { CAN_current_law = 7 }
+		set_variable = { CAN_current_law_max_clause = 3 }
+		CAN_laws_new_law = yes
+		add_to_array = { CAN_laws_clauses_available = 30 }
+		add_to_array = { CAN_laws_clauses_available = 31 }
+		add_to_array = { CAN_laws_clauses_available = 32 }
+		add_to_array = { CAN_laws_clauses_available = 33 }
+		add_to_array = { CAN_laws_clauses_available = 34 }
+	}
+	completion_reward = {
+		custom_effect_tooltip = CAN_laws_7_introduce_tt
+		effect_tooltip = {
+			move_down_taxation = yes
+		}
+	}
+}
+
+shared_focus = {
+	id = CAN_pay_as_you_go
+	icon = GFX_CAN_money
+	x = 2
+	y = 3
+	cost = 8
+	
+	relative_position_id = CAN_bennett_victory_1953
+	prerequisite = {
+		focus = CAN_stopping_state_socialism
+	}
+	
+	ai_will_do = {
+		base = 150
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_pay_as_you_go"
+		custom_effect_tooltip = CAN_modify_bennett
+		add_to_variable = { 
+			CAN_bennett_dynam_cg = 0.02 
+			tooltip = CAN_modifier_cg_tt
+		}
+		add_to_variable = { 
+			CAN_bennett_dynam_pp = 0.05
+			tooltip = CAN_modifier_pp_tt
+		}
+		add_to_variable = { 
+			CAN_bennett_dynam_fo = 0.06
+			tooltip = CAN_modifier_fo_tt
+		}
+	}
+}
+
+shared_focus = {
+	id = CAN_competitive_free_enterprise
+	icon = GFX_generic_seize_money
+	x = -1
+	y = 4
+	cost = 8
+	
+	relative_position_id = CAN_bennett_victory_1953
+	prerequisite = {
+		focus = CAN_loosen_the_tax_codes_deregulation
+	}
+	
+	ai_will_do = {
+		base = 150
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_competitive_free_enterprise"
+		add_political_power = 50
+		custom_effect_tooltip = CAN_modify_bennett
+		subtract_from_variable = { 
+			CAN_bennett_dynam_cg = 0.02
+			tooltip = CAN_modifier_cg_tt_sub
+		}
+		add_to_variable = { 
+			CAN_bennett_dynam_cs = 0.06
+			tooltip = CAN_modifier_cs_tt
+		}
+	}
+}
+
+shared_focus = {
+	id = CAN_assuring_export_market
+	icon = GFX_generic_shipyard
+	x = 0
+	y = 5
+	cost = 8
+	
+	relative_position_id = CAN_bennett_victory_1953
+	prerequisite = {
+		focus = CAN_competitive_free_enterprise
+	}
+	
+	ai_will_do = {
+		base = 150
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_assuring_export_market"
+		custom_effect_tooltip = CAN_modify_bennett
+		subtract_from_variable = { 
+			CAN_bennett_dynam_cg = 0.03
+			tooltip = CAN_modifier_cg_tt_sub
+		}
+		add_to_variable = { 
+			CAN_bennett_dynam_export = 0.10
+			tooltip = CAN_modifier_export_tt
+		}
+	}
+}
+
+shared_focus = {
+	id = CAN_dont_tread_on_others
+	icon = GFX_generic_positive_trade_relations_gold
+	x = 1
+	y = 4
+	cost = 8
+	
+	relative_position_id = CAN_bennett_victory_1953
+	prerequisite = {
+		focus = CAN_loosen_the_tax_codes_deregulation
+	}
+	prerequisite = {
+		focus = CAN_pay_as_you_go
+	}
+	
+	ai_will_do = {
+		base = 150
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_dont_tread_on_others"
+		custom_effect_tooltip = CAN_country_to_build_privatize_crown_corps_tt
+	}
+}
+
+shared_focus = {
+	id = CAN_new_changes_to_detainment
+	icon = GFX_generic_imprison_people
+	x = 4
+	y = 2
+	cost = 8
+	
+	relative_position_id = CAN_bennett_victory_1953
+	prerequisite = {
+		focus = CAN_favouring_the_majority
+	}
+	
+	ai_will_do = {
+		base = 150
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_new_changes_to_detainment"
+		custom_effect_tooltip = CAN_modify_bennett
+		subtract_from_variable = { 
+			CAN_bennett_dynam_pp = 0.05 
+			tooltip = CAN_modifier_pp_tt_sub
+		}
+		add_to_variable = { 
+			CAN_bennett_dynam_stab = 0.07 
+			tooltip = CAN_modifier_stab_tt
+		}
+	}
+}
+
+shared_focus = {
+	id = CAN_supressing_socialism
+	icon = GFX_HOL_crackdown_syndie
+	x = 4
+	y = 3
+	cost = 8
+	
+	relative_position_id = CAN_bennett_victory_1953
+	prerequisite = {
+		focus = CAN_new_changes_to_detainment
+	}
+	
+	ai_will_do = {
+		base = 150
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_supressing_socialism"
+		country_event = krg_can.89
+	}
+}
+
+shared_focus = {
+	id = CAN_production_is_consumption
+	icon = GFX_generic_production
+	x = 4
+	y = 4
+	cost = 8
+	
+	relative_position_id = CAN_bennett_victory_1953
+	prerequisite = {
+		focus = CAN_supressing_socialism
+	}
+	
+	ai_will_do = {
+		base = 150
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_production_is_consumption"
+		custom_effect_tooltip = CAN_modify_bennett
+		subtract_from_variable = { 
+			CAN_bennett_dynam_cg = 0.02
+			tooltip = CAN_modifier_cg_tt_sub
+		}
+		add_to_variable = { 
+			CAN_bennett_dynam_fo = 0.06
+			tooltip = CAN_modifier_fo_tt
+		}
+	}
+}
+
+shared_focus = {
+	id = CAN_except_when_its_in_our_interests
+	icon = GFX_generic_canada_big_flag 
+	x = 2
+	y = 5
+	cost = 8
+	
+	relative_position_id = CAN_bennett_victory_1953
+	prerequisite = {
+		focus = CAN_dont_tread_on_others
+	}
+	prerequisite = {
+		focus = CAN_production_is_consumption
+	}
+	
+	ai_will_do = {
+		base = 150
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_except_when_its_in_our_interests"
+		add_political_power = 50
+		custom_effect_tooltip = CAN_modify_bennett
+		subtract_from_variable = { 
+			CAN_bennett_dynam_cg = 0.02
+			tooltip = CAN_modifier_cg_tt_sub
+	 	}
+		add_to_variable = { 
+			CAN_bennett_dynam_cs = 0.10
+			tooltip = CAN_modifier_cs_tt
+		}
+		add_to_variable = { 
+			CAN_bennett_dynam_pp = 0.10
+			tooltip = CAN_modifier_pp_tt
+		}
+	}
+}
+
+shared_focus = {
+	id = CAN_increasing_military_strength
+	icon = GFX_generic_army_cooperation
+	x = 6
+	y = 3
+	cost = 8
+	
+	relative_position_id = CAN_bennett_victory_1953
+	prerequisite = {
+		focus = CAN_new_changes_to_detainment
+	}
+	
+	ai_will_do = {
+		base = 150
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_increasing_military_strength"
+		move_up_military = yes
+		add_tech_bonus = {
+            bonus = 0.5
+            uses = 1
+            category = infantry_weapons
+		}
+	}
+}
+
+shared_focus = {
+	id = CAN_pass_canadian_values_act
+	icon = GFX_CAN_lets_go_canada 
+	x = 6
+	y = 4
+	cost = 8
+	
+	relative_position_id = CAN_bennett_victory_1953
+	prerequisite = {
+		focus = CAN_increasing_military_strength
+	}
+	
+	ai_will_do = {
+		base = 150
+	}
+	##available = {
+	##	custom_trigger_tooltip = {
+	##		tooltip = CAN_passing_another_law_tt
+	##		check_variable = { CAN_current_law = 0 }
+	##	}
+	##}
+	##continue_if_invalid = yes
+	##select_effect = {
+	##	set_variable = { CAN_current_law = 9 }
+	##	set_variable = { CAN_current_law_max_clause = 3 }
+	##	CAN_laws_new_law = yes
+	##	add_to_array = { CAN_laws_clauses_available = 40 }
+	##	add_to_array = { CAN_laws_clauses_available = 41 }
+	##	add_to_array = { CAN_laws_clauses_available = 42 }
+	##	add_to_array = { CAN_laws_clauses_available = 43 }
+	##	add_to_array = { CAN_laws_clauses_available = 44 }
+	##}
+	##completion_reward = {
+	##	log = "[GetDateText]: [Root.GetName]: Focus CAN_pass_canadian_values_act"
+	##	custom_effect_tooltip = CAN_laws_9_introduce_tt
+	##}
+}
+
+shared_focus = {
+	id = CAN_valuing_the_family
+	icon = GFX_CAN_Family_Allowance_Act 
+	x = 5
+	y = 5
+	cost = 8
+	
+	relative_position_id = CAN_bennett_victory_1953
+	prerequisite = {
+		focus = CAN_pass_canadian_values_act
+	}
+	
+	ai_will_do = {
+		base = 150
+	}
+	available = {
+		custom_trigger_tooltip = {
+			tooltip = CAN_passing_another_law_tt
+			check_variable = { CAN_current_law = 0 }
+		}
+	}
+	continue_if_invalid = yes
+	select_effect = {
+		set_variable = { CAN_current_law = 16 }
+		set_variable = { CAN_current_law_max_clause = 3 }
+		CAN_laws_new_law = yes
+		add_to_array = { CAN_laws_clauses_available = 80 }
+		add_to_array = { CAN_laws_clauses_available = 81 }
+		add_to_array = { CAN_laws_clauses_available = 82 }
+		add_to_array = { CAN_laws_clauses_available = 83 }
+		add_to_array = { CAN_laws_clauses_available = 84 }
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_valuing_the_family"
+		custom_effect_tooltip = CAN_laws_16_introduce_tt
+	}
+}
+
+shared_focus = {
+	id = CAN_the_obedient_canada
+	icon = GFX_CAN_Canadian_Military_Pride 
+	x = 0
+	y = 6
+	cost = 8
+	
+	relative_position_id = CAN_bennett_victory_1953
+	prerequisite = {
+		focus = CAN_increasing_provincial_powers
+	}
+	prerequisite = {
+		focus = CAN_assuring_export_market
+	}
+	prerequisite = {
+		focus = CAN_except_when_its_in_our_interests
+	}
+	prerequisite = {
+		focus = CAN_valuing_the_family
+	}
+	
+	ai_will_do = {
+		base = 150
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_the_obedient_canada"
+		CAN = {
+			CAN_popularity_unionists_increase_large = yes
+		}
+		custom_effect_tooltip = CAN_increase_unionists_large_tt
+		add_political_power = 100
+	}
+}

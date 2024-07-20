@@ -1,0 +1,2011 @@
+#HI every one
+#Hi Doctor Nick
+focus_tree = {
+	id = KRG_AST
+	default = no
+	country = {
+		factor = 0
+		modifier = {
+			add = 100
+			tag = AST
+		}
+	}
+	initial_show_position = { x = 8 y = 0}
+	shared_focus = AST_the_1948_election
+	shared_focus = AST_begin_demobilisation
+	#shared_focus = AST_the_pearl_of_the_pacific #TODO COV
+}
+	
+shared_focus = {
+	id = AST_the_1948_election
+	icon = GFX_generic_elections
+	cost = 5
+	x = 9
+	y = 0
+	available = {
+		has_country_flag = AST_1948_election_held
+		hidden_trigger = { always = no }
+	}
+	prerequisite = {
+		
+	}
+	completion_reward = {
+		custom_effect_tooltip = unlock_focuses
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus AST_the_1948_election"
+	}
+}
+
+shared_focus = {
+	id = AST_the_light_on_the_hill
+	icon = GFX_generic_new_ideology_socdem
+	cost = 5
+	x = -2
+	y = 1
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus AST_the_light_on_the_hill"
+		remove_ideas = AST_fragile_government
+		add_political_power = 25
+	}
+	relative_position_id = AST_the_1948_election
+	prerequisite = { focus = AST_the_1948_election }
+	mutually_exclusive = { focus = AST_an_unwinnable_election }
+}
+
+shared_focus = {
+	id = AST_an_unwinnable_election
+	icon = GFX_generic_new_ideology_soccon
+	cost = 5
+	x = 2
+	y = 1
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus AST_an_unwinnable_election"
+		add_political_power = 50
+	}
+	relative_position_id = AST_the_1948_election
+	prerequisite = { focus = AST_the_1948_election }
+	mutually_exclusive = { focus = AST_the_light_on_the_hill }
+}
+
+shared_focus = {
+	id = AST_begin_demobilisation
+	icon = GFX_generic_demobilisation
+	cost = 10
+	x = 34
+	y = 0
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus AST_begin_demobilisation"
+		country_event = {
+			id = AST.3
+			days = 1
+
+		}
+	}
+}
+
+shared_focus = {
+	id = AST_new_australasians
+	icon = GFX_generic_flag_large_AST
+	cost = 5
+	x = 2
+	y = 1
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus AST_new_australasians"
+		add_ideas = AST_new_immigration
+	}
+	relative_position_id = AST_the_light_on_the_hill
+	prerequisite = {
+		focus = AST_the_light_on_the_hill
+		focus = AST_an_unwinnable_election
+	}
+}
+
+shared_focus = {
+	id = AST_open_up_places_for_others
+	icon = GFX_ITA_MediterraneanPolicy
+	cost = 5
+	x = 1
+	y = 3
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus AST_open_up_places_for_others"
+		
+		move_up_immigration = yes 
+
+		add_popularity = {
+			ideology = social_democrat
+			popularity = 0.04
+		}
+	}
+	relative_position_id = AST_the_light_on_the_hill
+	prerequisite = { focus = AST_the_light_on_the_hill }
+	prerequisite = { focus = AST_10_pound_poms }
+	mutually_exclusive = { focus = AST_expansion_of_british_immigration }
+}
+
+shared_focus = {
+	id = AST_expansion_of_british_immigration
+	icon = {
+		trigger = {
+			ENG = {
+				NOT = {
+					has_cosmetic_tag = ENG_no_ulster
+				}
+			}
+		}
+		value = GFX_generic_flag_large_ENG
+	}
+	icon = {
+		trigger = {
+			ENG = {
+				has_cosmetic_tag = ENG_no_ulster
+			}
+		}
+		value = GFX_generic_flag_large_ENG_2
+	}
+
+	dynamic = yes
+	
+	cost = 5
+	x = -1
+	y = 3
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus AST_expansion_of_british_immigration"
+		swap_ideas = {
+			remove_idea = AST_new_immigration_1
+			add_idea = AST_new_immigration_3
+		}
+		add_popularity = {
+			ideology = social_conservative
+			popularity = 0.03
+		}
+	}
+	relative_position_id = AST_an_unwinnable_election
+	prerequisite = { focus = AST_an_unwinnable_election }
+	prerequisite = { focus = AST_10_pound_poms }
+	mutually_exclusive = { focus = AST_open_up_places_for_others }
+}
+
+shared_focus = {
+	id = AST_10_pound_poms
+	icon = GFX_ENG_new_british_union
+	cost = 5
+	x = 0
+	y = 1
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus AST_10_pound_poms"
+		swap_ideas = {
+			remove_idea = AST_new_immigration
+			add_idea = AST_new_immigration_1
+		}
+	}
+	relative_position_id = AST_new_australasians
+	prerequisite = { focus = AST_new_australasians }
+}
+
+shared_focus = {
+	id = AST_whats_best_for_business
+	icon = GFX_generic_co_owned_businesses
+	cost = 5
+	x = 2
+	y = 1
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus AST_whats_best_for_business"
+		add_ideas = AST_pro_business_policy
+		285 = {
+			add_extra_state_shared_building_slots = 1
+		}
+		517 = {
+			add_extra_state_shared_building_slots = 1
+		}
+	}
+	relative_position_id = AST_an_unwinnable_election
+	prerequisite = { focus = AST_an_unwinnable_election }
+}
+
+shared_focus = {
+	id = AST_renegotiating_the_coalition
+	icon = GFX_generic_consolidating_coalitionv2
+	cost = 5
+	x = 0
+	y = 1
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus AST_renegotiating_the_coalition"
+		remove_ideas = AST_fragile_government
+		country_event = {
+			id = AST.7
+			days = 1
+		}
+	}
+	relative_position_id = AST_an_unwinnable_election
+	prerequisite = { focus = AST_an_unwinnable_election }
+}
+
+shared_focus = {
+	id = AST_use_old_troop_transports
+	icon = GFX_USA_goal_liberty_ships
+	cost = 5
+	x = 1
+	y = 1
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus AST_use_old_troop_transports"
+		add_equipment_to_stockpile = {
+			type = convoy
+			amount = -200
+			producer = AST
+		}
+		add_timed_idea = { idea = AST_convoys_for_immigrants days = 1095 }
+
+	}
+	relative_position_id = AST_open_up_places_for_others
+	prerequisite = {
+		focus = AST_open_up_places_for_others
+		focus = AST_expansion_of_british_immigration
+	}
+}
+
+shared_focus = {
+	id = AST_whats_best_for_the_country
+	icon = GFX_generic_workers_rights
+	cost = 5
+	x = -1
+	y = 1
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus AST_whats_best_for_the_country"
+		add_ideas = AST_pro_worker_policy
+	}
+	relative_position_id = AST_the_light_on_the_hill
+	prerequisite = { focus = AST_the_light_on_the_hill }
+}
+
+shared_focus = {
+	id = AST_trans_australasia_airways
+	icon = GFX_AST_Trans_Australasia_Airways
+	cost = 5
+	x = 1
+	y = 1
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus AST_trans_australasia_airways"
+		move_up_inf_spending = yes
+	}
+	relative_position_id = AST_whats_best_for_the_country
+	prerequisite = { focus = AST_whats_best_for_the_country }
+}
+
+shared_focus = {
+	id = AST_nationalize_failing_factories
+	icon = GFX_generic_takeover_industries
+	cost = 5
+	x = -1
+	y = 1
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus AST_nationalize_failing_factories"
+		if = {
+			limit = {
+				has_idea = AST_end_postwar_boom
+			}
+			swap_ideas = {
+				remove_idea = AST_end_postwar_boom
+				add_idea = AST_end_postwar_boom_1
+			}
+		}
+		else = {
+			remove_ideas = AST_end_postwar_boom_1
+			add_timed_idea = { idea = AST_end_postwar_boom_3 days = 450 }
+		}
+	}
+	relative_position_id = AST_whats_best_for_the_country
+	prerequisite = { focus = AST_whats_best_for_the_country }
+}
+
+shared_focus = {
+	id = AST_establish_the_commonwealth_housing_commission
+	icon = GFX_generic_build_housing
+	cost = 5
+	x = -3
+	y = 1
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus AST_establish_the_commonwealth_housing_commission"
+		add_political_power = 25
+		add_timed_idea = { idea = AST_National_Housing_Commission days = 365 }
+		285 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = infrastructure
+				level = 1
+				instant_build = yes
+			}
+		}
+		517 = {
+			add_building_construction = {
+				type = infrastructure
+				level = 1
+				instant_build = yes
+			}
+			add_extra_state_shared_building_slots = 1
+		}
+		521 = {
+			add_building_construction = {
+				type = infrastructure
+				level = 1
+				instant_build = yes
+			}
+			add_extra_state_shared_building_slots = 1
+		}
+	}
+	relative_position_id = AST_the_light_on_the_hill
+	prerequisite = { focus = AST_the_light_on_the_hill }
+}
+
+shared_focus = {
+	id = AST_referendum_on_social_services
+	icon = GFX_generic_social_reforms
+	cost = 5
+	x = -3
+	y = 1
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus AST_referendum_on_social_services"
+		country_event = {
+			id = AST.0
+			days = 1
+		}
+	}
+
+	relative_position_id = AST_establish_the_commonwealth_housing_commission
+	prerequisite = { focus = AST_establish_the_commonwealth_housing_commission }
+}
+
+shared_focus = {
+	id = AST_take_over_collection_of_income_tax
+	icon = GFX_generic_tax
+	cost = 5
+	x = -1
+	y = 1
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus AST_take_over_collection_of_income_tax"
+		move_up_service_spending = yes
+	}
+	relative_position_id = AST_establish_the_commonwealth_housing_commission
+	prerequisite = { focus = AST_establish_the_commonwealth_housing_commission }
+}
+
+shared_focus = {
+	id = AST_tackle_large_monopolies
+	icon = GFX_generic_co_owned_businesses
+	cost = 5
+	x = 1
+	y = 1
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus AST_tackle_large_monopolies"
+		if = {
+			limit = {
+				has_idea = AST_end_postwar_boom
+			}
+			swap_ideas = {
+				remove_idea = AST_end_postwar_boom
+				add_idea = AST_end_postwar_boom_2
+			}
+		}
+		else = {
+			remove_ideas = AST_end_postwar_boom_1
+			add_timed_idea = { idea = AST_end_postwar_boom_3 days = 450 }
+		}
+		move_down_business_spending = yes
+	}
+	relative_position_id = AST_take_over_collection_of_income_tax
+	prerequisite = { focus = AST_take_over_collection_of_income_tax }
+}
+
+shared_focus = {
+	id = AST_a_national_health_service
+	icon = GFX_generic_healthcare
+	cost = 5
+	x = 1
+	y = 1
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus AST_a_national_health_service"
+		move_up_hc_spending = yes
+	}
+	available ={ has_country_flag = AST_social_services_referendum_passed }
+	relative_position_id = AST_referendum_on_social_services
+	prerequisite = { focus = AST_referendum_on_social_services }
+	prerequisite = { focus = AST_take_over_collection_of_income_tax }
+}
+
+shared_focus = {
+	id = AST_begin_the_snowy_mountains_scheme
+	icon = GFX_generic_dam
+	cost = 5
+	x = 0
+	y = 1
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus AST_begin_the_snowy_mountains_scheme"
+		285 = {
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = industrial_complex
+				level = 2
+				instant_build = yes
+			}
+		}
+	}
+	relative_position_id = AST_use_old_troop_transports
+	prerequisite = { focus = AST_use_old_troop_transports }
+	
+}
+
+shared_focus = {
+	id = AST_establish_the_commonweath_employment_service
+	icon = GFX_generic_workers_for_business
+	cost = 5
+	x = -1
+	y = 1
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus AST_establish_the_commonweath_employment_service"
+		swap_ideas = {
+			remove_idea = AST_pro_worker_policy
+			add_idea = AST_pro_worker_policy_1
+		}
+	}
+	relative_position_id = AST_trans_australasia_airways
+	prerequisite = {
+		focus = AST_trans_australasia_airways
+		focus = AST_nationalize_failing_factories
+	}
+}
+
+shared_focus = {
+	id = AST_the_dairy_industry_fund
+	icon = GFX_agricultural_policies
+	cost = 5
+	x = -1
+	y = 1
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus AST_the_dairy_industry_fund"
+		swap_ideas = {
+			remove_idea = AST_pro_worker_policy_1
+			add_idea = AST_pro_worker_policy_2
+		}
+		add_political_power = 25
+		add_popularity = {
+			ideology = market_liberal
+			popularity = -0.05
+		}
+	}
+	relative_position_id = AST_establish_the_commonweath_employment_service
+	prerequisite = { focus = AST_establish_the_commonweath_employment_service }
+}
+
+shared_focus = {
+	id = AST_open_temporary_camps
+	icon = GFX_generic_refugee_management
+	cost = 5
+	x = -1
+	y = 1
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus AST_open_temporary_camps"
+		add_timed_idea = { idea = AST_Temporary_camps days = 730 }
+	}
+	relative_position_id = AST_open_up_places_for_others
+	prerequisite = { focus = AST_open_up_places_for_others }
+	prerequisite = { focus = AST_establish_the_commonweath_employment_service }
+}
+
+shared_focus = {
+	id = AST_limit_the_powers_of_the_ccca
+	icon = GFX_tblra_union_agreement
+	cost = 5
+	x = -1
+	y = 1
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus AST_limit_the_powers_of_the_ccca"
+		add_popularity = {
+			ideology = social_conservative
+			popularity = -0.03
+		}
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = -0.02
+		}
+	}
+	relative_position_id = AST_tackle_large_monopolies
+	prerequisite = { focus = AST_tackle_large_monopolies }
+}
+
+shared_focus = {
+	id = AST_lower_requirements_for_means_test_scholarships
+	icon = GFX_generic_research_grant
+	cost = 5
+	x = 0
+	y = 2
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus AST_lower_requirements_for_means_test_scholarships"
+		add_political_power = 50
+		add_stability = 0.05
+		add_tech_bonus = {
+			uses = 2
+			bonus = 0.50
+			category = industry_tech
+		}
+	}
+	relative_position_id = AST_a_national_health_service
+	prerequisite = { focus = AST_a_national_health_service }
+	prerequisite = { focus = AST_limit_the_powers_of_the_ccca }
+}
+
+shared_focus = {
+	id = AST_nationalise_the_banks
+	icon = GFX_generic_banking_legislation
+	cost = 5
+	x = -1
+	y = 2
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus AST_nationalise_the_banks"
+		add_popularity = {
+			ideology = social_democrat
+			popularity = 0.04
+		}
+		add_ideas = AST_nationalised_banks
+
+		hidden_effect = {
+				country_event = {
+					id = AST.2
+					days = 270
+				}	
+		}
+	}
+	relative_position_id = AST_the_dairy_industry_fund
+	prerequisite = { focus = AST_the_dairy_industry_fund }
+	prerequisite = { focus = AST_limit_the_powers_of_the_ccca }
+}
+
+shared_focus = {
+	id = AST_favour_australasian_investors
+	icon = GFX_AST_Favour_Australasian_Investors
+	cost = 5
+	x = 0
+	y = 1
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus AST_favour_australasian_investors"
+		swap_ideas = {
+			remove_idea = AST_pro_business_policy
+			add_idea = AST_pro_business_policy_2
+		}
+	}
+	relative_position_id = AST_whats_best_for_business
+	prerequisite = { focus = AST_whats_best_for_business }
+	mutually_exclusive = { focus = AST_attract_foreign_investors }
+}
+
+shared_focus = {
+	id = AST_establish_soldiers_pensions
+	icon = GFX_generic_veterans_benefits
+	cost = 5
+	x = 2
+	y = 1
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus AST_establish_soldiers_pensions"
+		add_timed_idea = { idea = AST_pensions days = 365 }
+	}
+	relative_position_id = AST_whats_best_for_business
+	prerequisite = { focus = AST_whats_best_for_business }
+}
+
+shared_focus = {
+	id = AST_attract_foreign_investors
+	icon = GFX_generic_foreign_investments
+	cost = 5
+	x = -2
+	y = 1
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus AST_attract_foreign_investors"
+		swap_ideas = {
+			remove_idea = AST_pro_business_policy
+			add_idea = AST_pro_business_policy_1
+		}
+	}
+	relative_position_id = AST_whats_best_for_business
+	prerequisite = { focus = AST_whats_best_for_business }
+	mutually_exclusive = { focus = AST_favour_australasian_investors }
+}
+
+shared_focus = {
+	id = AST_create_the_business_transition_fund
+	icon = GFX_generic_business_incentives
+	cost = 5
+	x = 1
+	y = 1
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus AST_create_the_business_transition_fund"
+		522 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
+		517 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
+		285 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
+	}
+	relative_position_id = AST_attract_foreign_investors
+	prerequisite = { focus = AST_attract_foreign_investors
+	focus = AST_favour_australasian_investors }
+}
+
+shared_focus = {
+	id = AST_increase_tariffs
+	icon = GFX_generic_deals
+	cost = 5
+	x = -1
+	y = 1
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus AST_increase_tariffs"
+		add_stability = 0.05
+		add_political_power = 25
+	}
+	relative_position_id = AST_create_the_business_transition_fund
+	prerequisite = { focus = AST_create_the_business_transition_fund }
+}
+
+shared_focus = {
+	id = AST_continue_the_crackdown_on_unions
+	icon = GFX_generic_crush_unions
+	cost = 5
+	x = 1
+	y = 1
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus AST_continue_the_crackdown_on_unions"
+		add_popularity = {
+			ideology = social_democrat
+			popularity = -0.05
+		}
+		if = {
+			limit = {
+				has_idea = AST_pro_business_policy_2
+			}
+			swap_ideas = {
+				remove_idea = AST_pro_business_policy_2
+				add_idea = AST_pro_business_policy_3
+			}
+		}
+		else = {
+			swap_ideas = {
+				remove_idea = AST_pro_business_policy_1
+				add_idea = AST_pro_business_policy_4
+			}
+		}
+	}
+	relative_position_id = AST_create_the_business_transition_fund
+	prerequisite = { focus = AST_create_the_business_transition_fund }
+}
+
+shared_focus = {
+	id = AST_subsidize_retraining
+	icon = GFX_generic_controlled_board
+	cost = 5
+	x = 1
+	y = 1
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus AST_subsidize_retraining"
+		285 = {
+			remove_building = {
+				type = arms_factory
+				level = 1
+			}
+		}
+		if = {
+			limit = {
+				has_idea = AST_end_postwar_boom
+			}
+			swap_ideas = {
+				remove_idea = AST_end_postwar_boom
+				add_idea = AST_end_postwar_boom_2
+			}
+		}
+		else = {
+			remove_ideas = AST_end_postwar_boom_1
+			add_timed_idea = { idea = AST_end_postwar_boom_3 days = 450 }
+		}
+		
+	}
+	relative_position_id = AST_establish_soldiers_pensions
+	prerequisite = { focus = AST_establish_soldiers_pensions }
+}
+
+shared_focus = {
+	id = AST_expand_the_powers_of_the_ccca
+	icon = GFX_generic_trials
+	cost = 5
+	x = 0
+	y = 1
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus AST_expand_the_powers_of_the_ccca"
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = 0.02
+		}
+	}
+	relative_position_id = AST_continue_the_crackdown_on_unions
+	prerequisite = { focus = AST_continue_the_crackdown_on_unions }
+}
+
+shared_focus = {
+	id = AST_begin_to_breakup_the_big_unions
+	icon = GFX_ENG_ban_unions
+	cost = 5
+	x = 1
+	y = 2
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus AST_begin_to_breakup_the_big_unions"
+		add_popularity = {
+			ideology = social_democrat
+			popularity = -0.05
+		}
+		add_popularity = {
+			ideology = radical_socialist
+			popularity = -0.025
+		}
+	}
+	relative_position_id = AST_increase_tariffs
+	prerequisite = { focus = AST_increase_tariffs }
+	prerequisite = { focus = AST_expand_the_powers_of_the_ccca }
+}
+
+shared_focus = {
+	id = AST_commonwealth_scholarship_scheme
+	icon = GFX_generic_catholic_education
+	cost = 5
+	x = 4
+	y = 1
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus AST_commonwealth_scholarship_scheme"
+		add_tech_bonus = {
+			uses = 2
+			bonus = 0.75
+			category = industry_tech	
+		}
+	}
+	relative_position_id = AST_whats_best_for_business
+	prerequisite = { focus = AST_whats_best_for_business }
+}
+
+shared_focus = {
+	id = AST_end_rationing
+	icon = GFX_ENG_rationing
+	cost = 5
+	x = 1
+	y = 2
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus AST_end_rationing"
+		if = {
+			limit = {
+				has_idea = AST_end_postwar_boom
+			}
+			swap_ideas = {
+				remove_idea = AST_end_postwar_boom
+				add_idea = AST_end_postwar_boom_1
+			}
+		}
+		else = {
+			remove_ideas = AST_end_postwar_boom_1
+			add_timed_idea = { idea = AST_end_postwar_boom_3 days = 450 }
+		}
+	}
+	relative_position_id = AST_whats_best_for_business
+	prerequisite = { focus = AST_whats_best_for_business }
+}
+
+shared_focus = {
+	id = AST_increase_funds_for_highways
+	icon = GFX_generic_fund_roads
+	cost = 5
+	x = -1
+	y = 1
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus AST_increase_funds_for_highways"
+		move_up_inf_spending = yes
+	}
+	relative_position_id = AST_subsidize_retraining
+	prerequisite = { focus = AST_subsidize_retraining }
+	prerequisite = { focus = AST_end_rationing }
+}
+
+shared_focus = {
+	id = AST_expand_the_csiro
+	icon = GFX_generic_great_science
+	cost = 5
+	x = 0
+	y = 2
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus AST_expand_the_csiro"
+		add_research_slot = 1
+	}
+	relative_position_id = AST_commonwealth_scholarship_scheme
+	prerequisite = { focus = AST_commonwealth_scholarship_scheme }
+}
+
+shared_focus = {
+	id = AST_create_a_federal_public_works_service
+	icon = GFX_generic_railroad_treaty
+	cost = 5
+	x = 0
+	y = 2
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus AST_create_a_federal_public_works_service"
+		move_up_inf_spending = yes
+	}
+	relative_position_id = AST_establish_the_commonweath_employment_service
+	prerequisite = { focus = AST_establish_the_commonweath_employment_service }
+}
+
+shared_focus = {
+	id = AST_provide_loans_to_qantas
+	icon = GFX_AST_Loans_QANTAS
+	cost = 5
+	x = 0
+	y = 2
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus AST_provide_loans_to_qantas"
+		add_timed_idea = { idea = AST_Qantas_loans days = 365 }
+	}
+	relative_position_id = AST_subsidize_retraining
+	prerequisite = { focus = AST_subsidize_retraining }
+	prerequisite = { focus = AST_increase_funds_for_highways }
+}
+
+shared_focus = {
+	id = AST_finish_electrification
+	icon = GFX_generic_electricity
+	cost = 5
+	x = 0
+	y = 2
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus AST_finish_electrification"
+	}
+	relative_position_id = AST_increase_funds_for_highways
+	prerequisite = { focus = AST_increase_funds_for_highways }
+	completion_reward = {
+		519 = {
+			move_up_state_category = yes
+		}
+		521 = {
+			move_up_state_category = yes
+		}
+	}
+}
+
+shared_focus = {
+	id = AST_tender_new_defence_contracts
+	icon = GFX_generic_industrial_legislature
+	cost = 5
+	x = 1
+	y = 1
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus AST_tender_new_defence_contracts"
+		285 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = arms_factory
+				level = 1
+				instant_build = yes
+			}
+		}
+		522 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = arms_factory
+				level = 1
+				instant_build = yes
+			}
+		}
+	}
+	relative_position_id = AST_commonwealth_scholarship_scheme
+	prerequisite = { focus = AST_commonwealth_scholarship_scheme }
+}
+
+shared_focus = {
+	id = AST_expand_anu
+	icon = GFX_AST_national_university
+	cost = 5
+	x = 0
+	y = 1
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus AST_expand_anu"
+		add_research_slot = 1
+	}
+	relative_position_id = AST_lower_requirements_for_means_test_scholarships
+	prerequisite = { focus = AST_lower_requirements_for_means_test_scholarships }
+}
+
+shared_focus = {
+	id = AST_establish_a_permanant_fleet_reserve
+	icon = GFX_AST_state_of_RAN
+	cost = 1
+	x = 0
+	y = 1
+	
+	available = {
+		always = no
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus AST_establish_a_permanant_fleet_reserve"
+		navy_experience = 50
+
+	}
+	relative_position_id = AST_begin_demobilisation
+	prerequisite = { focus = AST_begin_demobilisation }
+}
+
+shared_focus = {
+	id = AST_the_growth_of_the_raaf
+	icon = GFX_AST_state_of_RAAF
+	cost = 1
+	x = -7
+	y = 1
+	
+	available = {
+		always = no
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus AST_the_growth_of_the_raaf"
+		air_experience = 50
+	}
+	relative_position_id = AST_begin_demobilisation
+	prerequisite = { focus = AST_begin_demobilisation }
+}
+
+shared_focus = {
+	id = AST_a_modern_army
+	icon = GFX_AST_state_of_army
+	cost = 1
+	x = 7
+	y = 1
+	available = {
+		always = no
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus AST_a_modern_army"
+		army_experience = 50
+	}
+	relative_position_id = AST_begin_demobilisation
+	prerequisite = { focus = AST_begin_demobilisation }
+}
+
+# shared_focus = {
+# 	id = AST_the_return_of_our_battleships
+# 	icon = GFX_AST_upgrade_reserves2
+# 	cost = 5
+# 	x = 0
+# 	y = 1
+# 	completion_reward = {
+# 		log = "[GetDateText]: [Root.GetName]: Focus AST_the_return_of_our_battleships"
+# 	}
+# 	relative_position_id = AST_establish_a_permanant_fleet_reserve
+# 	prerequisite = { focus = AST_establish_a_permanant_fleet_reserve }
+# }
+
+shared_focus = {
+	id = AST_expand_undersea_warfare
+	icon = GFX_generic_naval_submarine2
+	cost = 5
+	x = 2
+	y = 2
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus AST_expand_undersea_warfare"
+		add_tech_bonus = {
+			name = AST_Submarine_tech
+			uses = 1
+			bonus = 0.5
+			category = ss_tech
+			}
+	}
+	relative_position_id = AST_establish_a_permanant_fleet_reserve
+	prerequisite = { focus = AST_establish_a_permanant_fleet_reserve }
+	mutually_exclusive = { focus = AST_obtain_another_carrier }
+}
+
+shared_focus = {
+	id = AST_obtain_another_carrier
+	icon = GFX_generic_naval_carrier2
+	cost = 5
+	x = -2
+	y = 2
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus AST_obtain_another_carrier"		
+		add_tech_bonus = {
+			name = AST_Carrier_Research
+			uses = 1
+			bonus = 0.5
+			category = cv_tech
+			}
+	}
+	relative_position_id = AST_establish_a_permanant_fleet_reserve
+	prerequisite = { focus = AST_establish_a_permanant_fleet_reserve }
+	mutually_exclusive = { focus = AST_expand_undersea_warfare }
+}
+
+shared_focus = {
+	id = AST_fund_new_shipyards
+	icon = GFX_generic_naval_industry
+	cost = 10
+	x = -2
+	y = 1
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus AST_fund_new_shipyards"
+		285 = {
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = dockyard
+				level = 2
+				instant_build = yes
+			}
+		}
+		517 = {
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = dockyard
+				level = 2
+				instant_build = yes
+			}
+		}
+		519 = {
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = dockyard
+				level = 2
+				instant_build = yes
+			}
+		}
+	}
+	relative_position_id = AST_expand_undersea_warfare
+	prerequisite = {
+		focus = AST_expand_undersea_warfare
+		focus = AST_obtain_another_carrier
+	}
+}
+
+shared_focus = {
+	id = AST_develop_new_escorts
+	icon = GFX_generic_naval_destroyer2
+	cost = 5
+	x = 0
+	y = 1
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus AST_develop_new_escorts"
+		add_tech_bonus = {
+			name = AST_escorts_research_ff
+			uses = 1
+			bonus = 0.5
+			category = ff_tech
+			}
+		add_tech_bonus = {
+			name = AST_escorts_research_dd
+			uses = 1
+			bonus = 0.5
+			category = dd_tech
+			}
+	}
+	relative_position_id = AST_obtain_another_carrier
+	prerequisite = { focus = AST_obtain_another_carrier }
+}
+
+shared_focus = {
+	id = AST_fortress_rabaul
+	icon = GFX_generic_naval_base
+	cost = 5
+	x = 0
+	y = 1
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus AST_fortress_rabaul"
+		737 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = dockyard
+				level = 1
+				instant_build = yes
+			}
+			add_building_construction = {
+				type = air_base
+				level = 3
+				instant_build = yes
+			}
+			add_building_construction = {
+				type = naval_base
+				level = 2
+				instant_build = yes
+				province = 7251
+			}
+			add_building_construction = {
+				type = coastal_bunker
+				level = 3
+				instant_build = yes
+				province = 7251
+			}
+		}
+	}
+	relative_position_id = AST_fund_new_shipyards
+	prerequisite = {
+		focus = AST_fund_new_shipyards
+	}
+}
+
+shared_focus = {
+	id = AST_transition_to_the_cac_platypus
+	icon = GFX_generic_air_naval_bomber_2_new
+	cost = 5
+	x = -2
+	y = 1
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus AST_transition_to_the_cac_platypus"
+		add_tech_bonus = {
+			name = AST_platypus
+			uses = 2
+			bonus = 1
+			category = naval_air
+		}
+	}
+	relative_position_id = AST_obtain_another_carrier
+	prerequisite = { focus = AST_fund_the_expansion_of_cac }
+	prerequisite = { focus = AST_obtain_another_carrier }
+}
+
+shared_focus = {
+	id = AST_new_radar_sets
+	icon = GFX_goal_generic_radar
+	cost = 5
+	x = 0
+	y = 1
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus AST_new_radar_sets"
+		add_tech_bonus = {
+			name = AST_radar_research
+			uses = 2
+			bonus = 0.45
+			category = radar_tech
+			}
+	}
+	relative_position_id = AST_develop_new_escorts
+	prerequisite = { focus = AST_develop_new_escorts }
+	prerequisite = { focus = AST_transition_to_the_cac_platypus }
+}
+
+shared_focus = {
+	id = AST_a_fleet_for_the_pacific
+	icon = GFX_generic_sea_focused_navy2
+	cost = 5
+	x = -1
+	y = 1
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus AST_a_fleet_for_the_pacific"
+		add_tech_bonus = {
+			name = AST_a_fleet_for_the_pacific
+			uses = 2
+			bonus = 0.5
+			category = naval_doctrine
+		}
+		add_ideas = AST_fleet_for_pacific
+
+	}
+	relative_position_id = AST_new_radar_sets
+	prerequisite = { focus = AST_new_radar_sets }
+	prerequisite = { focus = AST_transition_to_the_cac_platypus }
+}
+
+shared_focus = {
+	id = AST_license_new_england_submarines
+	icon = GFX_generic_flag_large_NEE
+	cost = 5
+	x = 1
+	y = 1
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus AST_license_new_england_submarines"
+		NEE = {
+			create_production_license = {
+			target = AST
+				equipment = {
+					type = ship_hull_submarine_3
+					version = 0
+				}
+				cost_factor = 0
+			}
+		}
+	}
+	relative_position_id = AST_expand_undersea_warfare
+	prerequisite = { focus = AST_expand_undersea_warfare }
+}
+
+shared_focus = {
+	id = AST_develop_new_torpedoes
+	icon = GFX_generic_navy_decision
+	cost = 5
+	x = -1
+	y = 1
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus AST_develop_new_torpedoes"
+		add_tech_bonus = {
+			name = AST_torpedo_research
+			uses = 1
+			bonus = 0.33
+			technology = mtg_1956_torpedo
+			}
+	}
+	relative_position_id = AST_license_new_england_submarines
+	prerequisite = { focus = AST_license_new_england_submarines }
+}
+
+shared_focus = {
+	id = AST_the_nuclear_option
+	icon = GFX_generic_nuclear_submarine
+	cost = 5
+	x = 1
+	y = 1
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus AST_the_nuclear_option"
+		add_tech_bonus = {
+			name = AST_nuclear_propulsion
+			uses = 1
+			bonus = 0.33
+			technology = nuclear_propulsion
+			}
+	}
+	relative_position_id = AST_license_new_england_submarines
+	prerequisite = { focus = AST_license_new_england_submarines }
+}
+
+shared_focus = {
+	id = AST_expand_hmas_stirling
+	icon = GFX_navy_hat_ships
+	cost = 5
+	x = 1
+	y = 1
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus AST_expand_hmas_stirling"
+		522 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = dockyard
+				level = 1
+				instant_build = yes
+			}
+			add_building_construction = {
+				type = naval_base
+				level = 3
+				instant_build = yes
+				province = 1652
+			}
+		}
+	}
+	relative_position_id = AST_develop_new_torpedoes
+	prerequisite = { focus = AST_develop_new_torpedoes }
+	prerequisite = { focus = AST_the_nuclear_option }
+}
+
+
+shared_focus = {
+	id = AST_northern_early_warning_positions
+	icon = GFX_generic_radar
+	cost = 5
+	x = -2
+	y = 1
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus AST_northern_early_warning_positions"
+		520 = {
+			add_building_construction = {
+				type = radar_station
+				level = 2
+				instant_build = yes
+			}
+		}
+		521 = {
+			add_building_construction = {
+				type = radar_station
+				level = 2
+				instant_build = yes
+			}
+		}
+		1100 = {
+			add_building_construction = {
+				type = radar_station
+				level = 1
+				instant_build = yes
+			}
+		}
+		523 = {
+			add_building_construction = {
+				type = radar_station
+				level = 1
+				instant_build = yes
+			}
+		}
+		737 = {
+			add_building_construction = {
+				type = radar_station
+				level = 1
+				instant_build = yes
+			}
+		}
+	}
+	relative_position_id = AST_the_growth_of_the_raaf
+	prerequisite = { focus = AST_the_growth_of_the_raaf }
+}
+
+shared_focus = {
+	id = AST_fund_raaf_woomera
+	icon = GFX_generic_nuclear_science
+	cost = 5
+	x = 1
+	y = 1
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus AST_fund_raaf_woomera"
+		add_tech_bonus = {
+			name = AST_Eagle
+			uses = 2
+			bonus = 1
+			category = missile_tech
+		}
+	}
+	relative_position_id = AST_northern_early_warning_positions
+	prerequisite = { focus = AST_northern_early_warning_positions }
+	prerequisite = { focus = AST_moderise_and_expand_our_airfield }
+}
+
+shared_focus = {
+	id = AST_moderise_and_expand_our_airfield
+	icon = GFX_generic_air_armada
+	cost = 5
+	x = 0
+	y = 1
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus AST_moderise_and_expand_our_airfield"
+		285 = {
+			add_building_construction = {
+				type = air_base
+				level = 3
+				instant_build = yes
+			}
+		}
+		521 = {
+			add_building_construction = {
+				type = air_base
+				level = 3
+				instant_build = yes
+			}
+		}
+		520 = {
+			add_building_construction = {
+				type = air_base
+				level = 2
+				instant_build = yes
+			}
+		}
+		1100 = {
+			add_building_construction = {
+				type = air_base
+				level = 2
+				instant_build = yes
+			}
+		}
+	}
+	relative_position_id = AST_the_growth_of_the_raaf
+	prerequisite = { focus = AST_the_growth_of_the_raaf }
+}
+
+shared_focus = {
+	id = AST_testing_site_of_the_accord
+	icon = GFX_generic_nuclear_bomb
+	cost = 5
+	x = 0
+	y = 1
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus AST_testing_site_of_the_accord"
+		add_tech_bonus = {
+			name = AST_Eagle
+			uses = 2
+			bonus = 1
+			category = nuclear
+		}
+	}
+	relative_position_id = AST_fund_raaf_woomera
+	prerequisite = { focus = AST_fund_raaf_woomera }
+}
+
+shared_focus = {
+	id = AST_fund_the_expansion_of_cac
+	icon = GFX_generic_new_airforce
+	cost = 5
+	x = 2
+	y = 1
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus AST_fund_the_expansion_of_cac"
+		517 = {
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = arms_factory
+				level = 1
+				instant_build = yes
+			}
+		}
+		#TODO Add Designer/idea
+	}
+	relative_position_id = AST_the_growth_of_the_raaf
+	prerequisite = { focus = AST_the_growth_of_the_raaf }
+}
+
+shared_focus = {
+	id = AST_cac_eagle
+	icon = GFX_RUS_roll_out_new_Fighters
+	cost = 5
+	x = -1
+	y = 1
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus AST_cac_eagle"
+		add_tech_bonus = {
+			name = AST_Eagle
+			uses = 1
+			bonus = 1
+			category = light_air
+		}
+	}
+	relative_position_id = AST_fund_the_expansion_of_cac
+	prerequisite = { focus = AST_fund_the_expansion_of_cac }
+}
+shared_focus = {
+	id = AST_license_boeing_bombers
+	icon = GFX_CAL_sign_new_boeing_contracts
+	cost = 5
+	x = 0
+	y = 1
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus AST_license_boeing_bombers"
+		add_tech_bonus = {
+			name = AST_bombers
+			uses = 2
+			bonus = 0.5
+			category = strategic_bomber_tech
+		}
+	}
+	relative_position_id = AST_cac_eagle
+	prerequisite = { focus = AST_cac_eagle }
+}
+
+shared_focus = {
+	id = AST_develop_strike_fighters
+	icon = GFX_generic_air_jet_new
+	cost = 5
+	x = -1
+	y = 2
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus AST_develop_strike_fighters"
+		add_tech_bonus = {
+			name = AST_strike
+			uses = 2
+			bonus = 0.5
+			category = cas_tech
+		}
+	}
+	relative_position_id = AST_cac_eagle
+	prerequisite = { focus = AST_cac_eagle }
+	prerequisite = { focus = AST_moderise_and_expand_our_airfield }
+}
+
+shared_focus = {
+	id = AST_a_new_permanant_force
+	icon = GFX_AST_clarify_anzac
+	cost = 5
+	x = 2
+	y = 1
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus AST_a_new_permanant_force"
+		move_down_mobilization = yes
+	}
+	relative_position_id = AST_a_modern_army
+	prerequisite = { focus = AST_a_modern_army }
+}
+
+shared_focus = {
+	id = AST_continue_combined_arms_experiments
+	icon = GFX_generic_army_tanks3
+	cost = 5
+	x = -1
+	y = 1
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus AST_continue_combined_arms_experiments"
+		army_experience = 100
+		add_tech_bonus = {
+			uses = 1
+			bonus = 0.5
+			category = armor
+		}
+	}
+	relative_position_id = AST_a_new_permanant_force
+	prerequisite = {
+		focus = AST_a_new_permanant_force
+	}
+	mutually_exclusive = { focus = AST_focus_on_shock_and_awe }
+}
+
+shared_focus = {
+	id = AST_focus_on_shock_and_awe
+	icon = GFX_generic_mobile_artillery_medium
+	cost = 5
+	x = 1
+	y = 1
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus AST_focus_on_shock_and_awe"
+		army_experience = 100
+		add_tech_bonus = {
+			uses = 1
+			bonus = 0.5
+			category = artillery
+		}
+	}
+	relative_position_id = AST_a_new_permanant_force
+	prerequisite = {
+		focus = AST_a_new_permanant_force
+	}
+	mutually_exclusive = { focus = AST_continue_combined_arms_experiments }
+}
+
+shared_focus = {
+	id = AST_more_native_vehicle_factories
+	icon = GFX_CAN_the_autoboom_industry_car
+	cost = 5
+	x = -2
+	y = 1
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus AST_more_native_vehicle_factories"
+		285 = {
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = arms_factory
+				level = 2
+				instant_build = yes
+			}
+		}
+		517 = {
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = arms_factory
+				level = 2
+				instant_build = yes
+			}
+		}
+	}
+	relative_position_id = AST_a_modern_army
+	prerequisite = { focus = AST_a_modern_army }
+}
+
+shared_focus = {
+	id = AST_expand_the_lithgow_works
+	icon = GFX_generic_munitions_factories
+	cost = 6
+	x = 0
+	y = 1
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus AST_expand_the_lithgow_works"
+		285 = {
+			add_extra_state_shared_building_slots = 3
+			add_building_construction = {
+				type = arms_factory
+				level = 3
+				instant_build = yes
+			}
+		}
+	}
+	relative_position_id = AST_more_native_vehicle_factories
+	prerequisite = { focus = AST_more_native_vehicle_factories }
+}
+
+shared_focus = {
+	id = AST_found_the_marine_regiment
+	icon = GFX_generic_marines2
+	cost = 5
+	x = 1
+	y = 1
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus AST_found_the_marine_regiment"
+		hidden_effect = {
+			285 = {
+				create_unit = {
+					division = " name = \"1st Marine Regiment\" division_template = \"Marine Division\""
+					owner = AST
+				}
+			}
+		}
+		custom_effect_tooltip = AST_Marines_tt
+	}
+	relative_position_id = AST_continue_combined_arms_experiments
+	prerequisite = {
+		focus = AST_continue_combined_arms_experiments
+		focus = AST_focus_on_shock_and_awe
+	}
+}
+
+shared_focus = {
+	id = AST_expand_the_amoured_brigades
+	icon = GFX_generic_doctrine_tank_warfare
+	cost = 5
+	x = -1
+	y = 1
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus AST_expand_the_amoured_brigades"
+		hidden_effect = {
+			285 = {
+				create_unit = {
+					division = " name = \"101st Separate Armoured Brigade\" division_template = \"Armoured Division\""
+					owner = AST
+				}
+			}
+		}
+		custom_effect_tooltip = AST_Armor_tt
+	}
+	relative_position_id = AST_continue_combined_arms_experiments
+	prerequisite = { focus = AST_continue_combined_arms_experiments }
+}
+
+shared_focus = {
+	id = AST_buy_amphibious_tanks
+	icon = GFX_generic_buy_amphibious_tanks
+	cost = 5
+	x = 1
+	y = 1
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus AST_buy_amphibious_tanks"
+		add_tech_bonus = {
+			name = AST_Amphib_tanks
+			uses = 1
+			bonus = 1
+			category = amphibious_armor
+		}
+	}
+	relative_position_id = AST_found_the_marine_regiment
+	prerequisite = { focus = AST_found_the_marine_regiment }
+	prerequisite = { focus = AST_expand_the_amoured_brigades }
+}
+
+
+
+shared_focus = {
+	id = AST_adopt_a_main_battle_tank
+	icon = GFX_generic_tank_design_new
+	cost = 5
+	x = -1
+	y = 1
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus AST_adopt_a_main_battle_tank"
+		add_tech_bonus = {
+			name = AST_MBT
+			uses = 1
+			bonus = 1
+			category = MBT_armor
+		}
+	}
+	relative_position_id = AST_expand_the_amoured_brigades
+	prerequisite = { focus = AST_expand_the_amoured_brigades }
+	mutually_exclusive = { focus = AST_stick_with_light_armour }
+}
+
+shared_focus = {
+	id = AST_study_european_warefare
+	icon = GFX_study_second_weltkrieg
+	cost = 5
+	x = 0
+	y = 1
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus AST_study_european_warefare"
+		army_experience = 100
+	}
+	relative_position_id = AST_adopt_a_main_battle_tank
+	prerequisite = { focus = AST_adopt_a_main_battle_tank }
+}
+
+
+shared_focus = {
+	id = AST_mechanise_the_infantry_brigades
+	icon = GFX_generic_army_mobile_warfare
+	cost = 5
+	x = 1
+	y = 2
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus AST_mechanise_the_infantry_brigades"
+		add_tech_bonus = {
+			uses = 1
+			bonus = 1
+			category = mechanized_equipment
+		}
+	}
+	relative_position_id = AST_adopt_a_main_battle_tank
+	prerequisite = {
+		focus = AST_adopt_a_main_battle_tank
+		focus = AST_stick_with_light_armour
+	}
+}
+
+shared_focus = {
+	id = AST_expand_army_logisitics
+	icon = GFX_Support_equipment_2
+	cost = 5
+	x = 0
+	y = 1
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus AST_expand_army_logisitics"
+		army_experience = 100
+	}
+	relative_position_id = AST_mechanise_the_infantry_brigades
+	prerequisite = { focus = AST_mechanise_the_infantry_brigades }
+}
+
+
+shared_focus = {
+	id = AST_stick_with_light_armour
+	icon = GFX_generic_light_tanks
+	cost = 5
+	x = 1
+	y = 1
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus AST_stick_with_light_armour"
+		add_tech_bonus = {
+			name = AST_Light_armour
+			uses = 1
+			bonus = 1
+			category = light_armor
+		}
+	}
+	relative_position_id = AST_expand_the_amoured_brigades
+	prerequisite = { focus = AST_expand_the_amoured_brigades }
+	mutually_exclusive = { focus = AST_adopt_a_main_battle_tank }
+}
+
+shared_focus = {
+	id = AST_combined_jungle_warfare
+	icon = GFX_SIA_jungletraining
+	cost = 5
+	x = 0
+	y = 1
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus AST_combined_jungle_warfare"
+		army_experience = 50
+	
+	}
+	relative_position_id = AST_stick_with_light_armour
+	prerequisite = { focus = AST_stick_with_light_armour }
+}
+
+shared_focus = {
+	id = AST_advanced_firepower
+	icon = GFX_RUS_Update_The_Artillery
+	cost = 5
+	x = 1
+	y = 1
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus AST_advanced_firepower"
+		add_equipment_to_stockpile = {
+			type = anti_tank_equipment
+			amount = 1000
+		}
+		add_equipment_to_stockpile = {
+			type = artillery_equipment	
+			amount = 1000
+		}
+	
+	}
+	relative_position_id = AST_focus_on_shock_and_awe
+	prerequisite = {
+		focus = AST_focus_on_shock_and_awe
+	}
+}
+
+shared_focus = {
+	id = AST_antitank_guns
+	icon = GFX_generic_anti_tank
+	cost = 5
+	x = 2
+	y = 2
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus AST_antitank_guns"
+		add_tech_bonus = {
+			name = AST_AT_guns
+			uses = 2
+			bonus = 0.5
+			category = anti_tank
+		}
+	}
+	relative_position_id = AST_advanced_firepower
+	prerequisite = { focus = AST_advanced_firepower }
+}
+
+shared_focus = {
+	id = AST_jungle_artillery_tactics
+	icon = GFX_AST_jungle_artillery_tactics
+	cost = 5
+	x = 0
+	y = 2
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus AST_jungle_artillery_tactics"
+		army_experience = 100
+	}
+	relative_position_id = AST_advanced_firepower
+	prerequisite = { focus = AST_advanced_firepower }
+}
+
+shared_focus = {
+	id = AST_rocket_artillery_battalions
+	icon = GFX_generic_mobile_artillery_rocket
+	cost = 5
+	x = -1
+	y = 1
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus AST_rocket_artillery_battalions"
+		add_tech_bonus = {
+			name = AST_rockets
+			uses = 1
+			bonus = 0.5
+			category = rocket_artillery
+		}
+	}
+	relative_position_id = AST_antitank_guns
+	prerequisite = {
+		focus = AST_antitank_guns
+		focus = AST_jungle_artillery_tactics
+	}
+}
+
+shared_focus = {
+	id = AST_study_japanese_tactics
+	icon = GFX_generic_japanese_instructors
+	cost = 5
+	x = 1
+	y = 1
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus AST_study_japanese_tactics"		
+		add_tech_bonus = {
+			name = AST_flamethrowers
+			uses = 1
+			bonus = 1
+			category = flamethrowers_tech
+		}
+		army_experience = 50
+	}
+	relative_position_id = AST_advanced_firepower
+	prerequisite = { focus = AST_advanced_firepower }
+}
+
+
+shared_focus = {
+	id = AST_the_pearl_of_the_pacific
+	icon = GFX_AST_flag_globe
+	cost = 2
+	x = 21
+	y = 0
+	available = {
+		has_country_flag = AST_1948_election_held
+		hidden_trigger = { always = no }
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus AST_the_pearl_of_the_pacific"
+	}
+}
+
+
+shared_focus = {
+	id = AST_stick_to_our_roots
+	icon = GFX_AST_trade_commonwealth
+	cost = 2
+	x = 0
+	y = 1
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus AST_stick_to_our_roots"
+	}
+	relative_position_id = AST_the_pearl_of_the_pacific
+	prerequisite = { focus = AST_the_pearl_of_the_pacific }
+	mutually_exclusive = { focus = AST_diversify_trade_partners }
+}
+
+shared_focus = {
+	id = AST_diversify_trade_partners
+	icon = GFX_AST_new_markets
+	cost = 2
+	x = -2
+	y = 1
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus AST_diversify_trade_partners"
+	}
+	relative_position_id = AST_the_pearl_of_the_pacific
+	prerequisite = { focus = AST_the_pearl_of_the_pacific }
+	mutually_exclusive = { focus = AST_stick_to_our_roots }
+}
+
+shared_focus = {
+	id = AST_looking_north
+	icon = GFX_generic_reaffirm_asian_relations
+	cost = 2
+	x = 2
+	y = 1
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus AST_looking_north"
+	}
+	relative_position_id = AST_the_pearl_of_the_pacific
+	prerequisite = { focus = AST_the_pearl_of_the_pacific }
+}
+
+shared_focus = {
+	id = AST_make_contact_with_rebel_groups
+	icon = GFX_INC_female_vietcong
+	cost = 2
+	x = -1
+	y = 1
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus AST_make_contact_with_rebel_groups"
+	}
+	relative_position_id = AST_looking_north
+	prerequisite = { focus = AST_looking_north }
+}
+
+shared_focus = {
+	id = AST_diplomatic_mission_to_nanjing
+	icon = GFX_generic_flag_large_CHI
+	cost = 2
+	x = 0
+	y = 2
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus AST_diplomatic_mission_to_nanjing"
+	}
+	relative_position_id = AST_looking_north
+	prerequisite = { focus = AST_looking_north }
+}
+
+shared_focus = {
+	id = AST_aid_mission_to_britain
+	icon = GFX_generic_british_foreign_investment
+	cost = 2
+	x = -1
+	y = 1
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus AST_aid_mission_to_britain"
+	}
+	relative_position_id = AST_stick_to_our_roots
+	prerequisite = { focus = AST_stick_to_our_roots }
+	prerequisite = { focus = AST_diversify_trade_partners }
+}
+
+shared_focus = {
+	id = AST_state_visit_to_sacramento
+	icon = GFX_PSA_canada_alliance
+	cost = 2
+	x = 0
+	y = 1
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus AST_state_visit_to_sacramento"
+	}
+	relative_position_id = AST_aid_mission_to_britain
+	prerequisite = { focus = AST_aid_mission_to_britain }
+}
+
+shared_focus = {
+	id = AST_freedom_for_south_east_asia
+	icon = GFX_generic_arms_export
+	cost = 2
+	x = 0
+	y = 2
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus AST_freedom_for_south_east_asia"
+	}
+	relative_position_id = AST_make_contact_with_rebel_groups
+	prerequisite = { focus = AST_make_contact_with_rebel_groups }
+	prerequisite = { focus = AST_diplomatic_mission_to_nanjing }
+}

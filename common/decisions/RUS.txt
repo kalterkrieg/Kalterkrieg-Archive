@@ -1,0 +1,239 @@
+RUS_armistice_decisions = {
+	RUS_armistice_timer_mission = {
+		icon = border_war
+		activation = {
+			has_country_flag = RUS_armistice_game
+		}
+		available = {
+			always = no
+		}
+		cancel_trigger = {
+			has_country_flag = RUS_armistice_resolution
+		}
+		is_good = no
+		fire_only_once = yes
+		days_mission_timeout = 486
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout RUS_armistice_timer_mission target: [From.GetName]"
+			custom_effect_tooltip = RUS_armistice_runs_out_tt
+		}
+	}
+	RUS_armistice_negotiations = {
+		icon = generic_break_treaty
+		visible = {
+			has_country_flag = RUS_Troika_Formed
+			has_country_flag = RUS_armistice_game
+			NOT = {
+				has_country_flag = RUS_opened_negotiations
+			}
+		}
+		cost = 15
+		ai_will_do = {
+			base = 1000
+		}
+		fire_only_once = yes
+		days_remove = 10
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove RUS_armistice_negotiations target: [From.GetName]"
+			country_event = {
+				id = krg_rus_rwk.10
+			}
+		}
+	}
+	RUS_savinkov_suspicion_mission = {
+		icon = border_war
+		activation = {
+			has_focus_tree = KRG_RUS_troika_tree
+			RUS_boris_savinkov = {
+				is_country_leader = yes
+				NOT = {
+					has_trait = secluded
+				}
+			}
+		}
+		available = {
+			always = no
+		}
+		cancel_trigger = {
+			OR = {
+				has_country_leader_with_trait = secluded
+				RUS_boris_savinkov = {
+					is_country_leader = no
+				}
+			}
+		}
+		is_good = no
+		fire_only_once = yes
+		days_mission_timeout = 75
+		selectable_mission = no
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout RUS_savinkov_suspicion_mission target: [From.GetName]"
+			custom_effect_tooltip = RUS_savinkov_suspicion_tt
+			country_event = {
+				id = krg_rus_rwk.24
+			}
+		}
+	}
+	RUS_lying_to_the_old_man = {
+		icon = generic_agreement
+		visible = {
+			has_country_flag = RUS_lying_to_Savinkov
+		}
+		cost = 15
+		ai_will_do = {
+			base = 1000
+		}
+		fire_only_once = no
+		days_remove = 5
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove RUS_lying_to_the_old_man target: [From.GetName]"
+			add_days_mission_timeout = {
+				mission = RUS_savinkov_suspicion_mission
+				days = 10
+			}
+		}
+	}
+	RUS_rigging_up_fake_media = {
+		icon = trumpet
+		visible = {
+			has_country_flag = RUS_fake_news
+		}
+		cost = 30
+		ai_will_do = {
+			base = 1000
+		}
+		fire_only_once = no
+		days_remove = 7
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove RUS_rigging_up_fake_media target: [From.GetName]"
+			add_days_mission_timeout = {
+				mission = RUS_savinkov_suspicion_mission
+				days = 17
+			}
+		}
+	}
+	RUS_provide_false_reports = {
+		icon = soldierly_discipline
+		visible = {
+			has_country_flag = RUS_reports_general
+		}
+		cost = 40
+		ai_will_do = {
+			base = 1000
+		}
+		fire_only_once = no
+		days_remove = 11
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove RUS_provide_false_reports target: [From.GetName]"
+			add_days_mission_timeout = {
+				mission = RUS_savinkov_suspicion_mission
+				days = 26
+			}
+		}
+	}
+	RUS_provide_negative_military_reports = {
+		icon = soldierly_discipline
+		visible = {
+			has_country_flag = RUS_negative_doctors
+		}
+		cost = 30
+		ai_will_do = {
+			base = 1000
+		}
+		fire_only_once = no
+		days_remove = 8
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove RUS_provide_negative_military_reports target: [From.GetName]"
+			add_days_mission_timeout = {
+				mission = RUS_savinkov_suspicion_mission
+				days = 22
+			}
+		}
+	}
+	RUS_replace_his_doctors = {
+		icon = oil
+		visible = {
+			has_country_flag = RUS_negative_doctors
+		}
+		cost = 120
+		ai_will_do = {
+			base = 2000
+		}
+		fire_only_once = yes
+		days_remove = 5
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove RUS_replace_his_doctors target: [From.GetName]"
+			add_days_mission_timeout = {
+				mission = RUS_savinkov_suspicion_mission
+				days = 60
+			}
+		}
+	}
+	RUS_provide_positive_military_reports = {
+		icon = soldierly_discipline
+		visible = {
+			has_country_flag = RUS_positive_poison
+		}
+		cost = 25
+		ai_will_do = {
+			base = 2000
+		}
+		fire_only_once = no
+		days_remove = 8
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove RUS_provide_positive_military_reports target: [From.GetName]"
+			add_days_mission_timeout = {
+				mission = RUS_savinkov_suspicion_mission
+				days = 28
+			}
+		}
+	}
+	RUS_poison_his_food_and_drink = {
+		icon = hand_grab
+		visible = {
+			has_country_flag = RUS_positive_poison
+		}
+		cost = 5
+		ai_will_do = {
+			base = 2000
+		}
+		fire_only_once = no
+		days_remove = 3
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove RUS_poison_his_food_and_drink target: [From.GetName]"
+			add_days_mission_timeout = {
+				mission = RUS_savinkov_suspicion_mission
+				days = 5
+			}
+		}
+	}
+	RUS_force_his_seclusion_due_to_ill_health = {
+		icon = hand_grab
+		visible = {
+			has_country_flag = RUS_russia_bleeding
+		}
+		cost = 180
+		ai_will_do = {
+			base = 5000
+		}
+		fire_only_once = yes
+		days_remove = 3
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove RUS_force_his_seclusion_due_to_ill_health target: [From.GetName]"
+			RUS_boris_savinkov = {
+				add_country_leader_trait = secluded	
+			}
+			hidden_effect = {
+				clr_country_flag = RUS_russia_bleeding
+				clr_country_flag = RUS_positive_poison
+				clr_country_flag = RUS_negative_doctors
+				clr_country_flag = RUS_reports_general
+				clr_country_flag = RUS_fake_news
+				clr_country_flag = RUS_lying_to_Savinkov
+			}
+			news_event = {
+				id = krg_rus_rwk.43
+			}
+		}
+	}
+}

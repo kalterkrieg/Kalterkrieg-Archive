@@ -1,0 +1,97 @@
+ MAF_demob_decisions = {
+	icon = army_reform
+	allowed = {
+		tag = MAF
+	}
+	visible = {
+		has_country_flag = MAF_demobilisation_begins
+	}
+	priority = 200
+}
+MAF_succession_decisions = {
+	icon = GFX_decision_generic_intelligence_operation
+	allowed = {
+		tag = MAF
+	}
+	visible = {
+		has_country_flag = MAF_succession_enabled
+	}
+	priority = 500
+}
+MAF_AAPM_decisions = {
+	icon = generic_revolt
+	allowed = {
+		tag = MAF
+	}
+	visible = {
+		has_country_flag = MAF_AAPM_formed
+	}
+	
+	visible_when_empty = yes
+	scripted_gui = MAF_AAPM_display
+	priority = 400
+}
+MAF_managing = {
+	icon = generic_economy
+	allowed = {
+		tag = MAF
+	}
+	visible_when_empty = yes
+	priority = 100
+}
+MAF_insurgency_decisions = {
+	icon = generic_revolt
+	allowed = {
+		OR = 
+		{
+			tag = MAF
+			tag = GER
+		}
+		is_ai = no
+	}
+
+	priority = 500
+}
+MAF_debug_cat ={
+	icon = generic_revolt
+	priority = 100000000
+	allowed = {
+		tag = MAF
+		is_ai = no
+	}
+}
+
+MAF_ai_cheat = {
+	allowed = {
+		tag = MAF
+	}
+	visible = {
+		is_ai = yes
+	}
+}
+
+MAF_insurgency_category = {
+	icon = GFX_decision_category_canals
+	allowed = {
+		tag = MAF
+	}
+	priority = 500
+	scripted_gui = MAF_insurgency_open_decision_category
+
+	visible = {
+		#has_country_flag = MAF_insurgency_active
+	}
+
+	highlight_states = {
+		highlight_color_while_active = 1
+   		highlight_color_before_active = 0
+		name = MAF_possible_insugrent_attacks
+	}
+	on_map_area = {
+		target_array = MAF_insurgent_controlled_states_neigbours
+		zoom = 350
+		name = MAF_possible_insugrent_attacks
+	}
+
+	visible_when_empty = yes
+}

@@ -1,0 +1,173 @@
+is_allocated_to = { #Make sure to only use PREV to get the country. This isn't necessary for claims/cores.
+	OR = {
+		#### RCW ####
+		AND = {
+			PREV = {
+				OR = {
+					tag = RUS
+					tag = FER
+					tag = PRS
+					tag = MNR
+					tag = ARP
+				}
+			}
+			OR = {
+				is_core_of = RUS
+				is_claimed_by = RUS
+			}
+		}
+		
+		#### MADAGASCAR REVOLT ####
+		AND = {
+			PREV = { tag = MAF }
+			is_owned_by = MAG
+		}
+		
+		
+		#### GERMAN INVASIONS OF UKD/CRM/KAR/BDC ####
+		AND = {
+			PREV = { tag = UKR }
+			is_owned_by = CRM
+		}
+		
+		AND = {
+			PREV = { tag = FIN }
+			is_owned_by = KAR
+		}
+		
+		AND = {
+			PREV = { tag = LIT }
+			is_owned_by = BDC
+		}
+
+		###Israel-Palestine War###
+		AND = {
+			PREV = { OR = { tag = ISR tag = PAL } }
+			OR = { is_owned_by = ISR is_owned_by = PAL }
+		}
+		AND = {
+			PREV = { tag = LEB }
+			is_owned_by = LEB
+		}
+		
+		###Syrian Civil War###
+		#If Syria is not SSNP, Ba-athist Syria or Kurdistan, they should do this
+		AND = {
+			PREV = {
+				OR = {
+					AND = { tag = SYR NOT = { has_government = national_populist } }
+					tag = BSY
+					tag = KUR
+				}
+			}
+			OR = {
+				is_owned_by = SYR
+				is_owned_by = BSY
+				is_owned_by = KUR
+			}
+		}
+		#If Syria is SSNP, they should do this
+		AND = {
+			PREV = { tag = SYR has_government = national_populist }
+			OR = {
+				is_owned_by = SYR
+				is_owned_by = BSY
+				is_owned_by = ISR
+				is_owned_by = KUR
+				is_owned_by = LEB
+				is_owned_by = PAL
+			}
+		}
+		
+		###American Civil War###
+		AND = {
+			PREV = {
+				OR = {
+					tag = CAL
+					tag = GLG
+					tag = NEE
+					tag = TEX
+					tag = USA
+				}
+			}
+			OR = {
+				is_core_of = CAL
+				is_core_of = GLG
+				is_core_of = NEE
+				is_core_of = TEX
+				is_core_of = USA
+				is_claimed_by = CAL
+				is_claimed_by = GLG
+				is_claimed_by = NEE
+				is_claimed_by = TEX
+				is_claimed_by = USA
+			}
+		}
+		
+		###Italian Civil War###
+		AND = {
+			PREV = {
+				OR = {
+					tag = ITA
+					tag = SIC
+					tag = ITA
+				}
+			}
+			OR = {
+				is_core_of = ITA
+				is_core_of = PAP
+				is_core_of = SIC
+				is_core_of = ITA
+				is_claimed_by = ITA
+				is_claimed_by = PAP
+				is_claimed_by = SIC
+				is_claimed_by = ITA
+			}
+		}
+		AND = {
+			PREV = { tag = PAP }
+			OR = {
+				is_owned_by = PAP
+				is_claimed_by = PAP
+			}
+		}
+		
+		###British Civil War###
+		AND = {
+			PREV = {
+				OR = {
+					tag = ENG
+					tag = MXF
+					tag = UOB
+				}
+			}
+			OR = {
+				is_core_of = ENG
+				is_core_of = MXF
+				is_core_of = UOB
+				is_claimed_by = ENG
+				is_claimed_by = MXF
+				is_claimed_by = UOB
+			}
+		}
+		
+		###France should not puppet France###
+		AND = {
+			PREV = {
+				OR = {
+					tag = FRA
+					tag = NFA
+					tag = PCO
+				}
+			}
+			OR = {
+				is_core_of = FRA
+				is_core_of = NFA
+				is_core_of = PCO
+				is_claimed_by = FRA
+				is_claimed_by = NFA
+				is_claimed_by = PCO
+			}
+		}
+	}
+}

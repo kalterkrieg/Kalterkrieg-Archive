@@ -1,0 +1,215 @@
+scripted_gui = {
+	KRG_influence_topbar = {
+		window_name = "KRG_influence_topbar_container"
+		parent_window_token = top_bar
+		context_type = player_context
+		
+		visible = {
+			always = yes
+		}
+		
+		effects = {
+			KRG_influence_topbar_button_click = {
+				if = {
+					limit = {
+						has_country_flag = KRG_influence_show
+					}
+					clr_country_flag = KRG_influence_show
+				}
+				else = {
+					set_country_flag = KRG_influence_show
+				}
+			}
+			KRG_influence_topbar_value_button_click = {
+				if = {
+					limit = {
+						has_country_flag = KRG_influence_show
+					}
+					clr_country_flag = KRG_influence_show
+				}
+				else = {
+					set_country_flag = KRG_influence_show
+				}
+			}
+		}
+	}
+	KRG_influence_button = {
+		window_name = "KRG_influence_button_container"
+		parent_window_name = "world_tension_popup"
+		context_type = player_context
+
+		effects = {
+			KRG_influence_open_click = {
+				clr_country_flag = KRG_influence_hide
+			}
+			KRG_show_wars_button_click = {
+				set_country_flag = KRG_influence_hide
+			}
+		}
+		triggers = {
+			KRG_show_wars_button_visible = {
+				NOT = { has_country_flag = KRG_influence_hide }
+			}
+		}
+	}
+	KRG_influence = {
+		window_name = "KRG_influence_main_container"
+		parent_window_name = "world_tension_popup"
+		context_type = player_context
+		
+		visible = {
+			NOT = { has_country_flag = KRG_influence_hide }
+		}
+		
+		dynamic_lists = {
+			KRG_influence_log_grid = {
+				array = global.influence_log
+				change_scope = yes
+				entry_container = KRG_influence_log_entry
+			}
+			KRG_influence_targets_grid = {
+				array = global.influence_targets
+				change_scope = yes
+				entry_container = KRG_influence_targets_entry
+			}
+		}
+		
+		properties = {
+			KRG_influence_meter_arrow = {
+				frame = global.influence_meter_arrow_frame
+			}
+			KRG_accord_logo = {
+				image = "[GetAccordLogo]"
+			}
+		}
+		
+		triggers = {
+			KRG_influence_debug_can_visible = {
+				always = no
+			}
+			KRG_influence_debug_ger_visible = {
+				always = no
+			}
+			KRG_influence_ticking_debug_visible = {
+				always = no
+			}
+			KRG_influence_debug_tick_visible = {
+				always = no
+			}
+		}
+		
+		effects = {
+			KRG_influence_close_click = {
+				set_country_flag = KRG_influence_hide
+			}
+
+			KRG_influence_debug_tick_click = {
+				GER = {
+					influence_tick = yes
+				}
+			}
+			
+			KRG_influence_debug_can_click = {
+				if = {
+					limit = { NOT = { has_variable = global.influence_debug_log_index } }
+					set_variable = { global.influence_debug_log_index = global.influence_log^num }
+					add_to_array = { global.influence_log = 7 }
+					add_to_array = { global.influence_log_val = 0 }
+					add_to_array = { global.influence_log_val_abs = 0 }
+				}
+				if = {
+					limit = {
+						check_variable = { global.influence_var < 200 }
+					}
+					add_to_variable = { global.influence_log_val^global.influence_debug_log_index = 1 }
+					influence_recalc = yes
+				}
+			}
+			
+			KRG_influence_debug_ger_click = {
+				if = {
+					limit = { NOT = { has_variable = global.influence_debug_log_index } }
+					set_variable = { global.influence_debug_log_index = global.influence_log^num }
+					add_to_array = { global.influence_log = 7 }
+					add_to_array = { global.influence_log_val = 0 }
+					add_to_array = { global.influence_log_val_abs = 0 }
+				}
+				if = {
+					limit = {
+						check_variable = { global.influence_var > -200 }
+					}
+					add_to_variable = { global.influence_log_val^global.influence_debug_log_index = -1 }
+					influence_recalc = yes
+				}
+			}
+			
+			KRG_influence_debug_can_control_click = {
+				if = {
+					limit = { NOT = { has_variable = global.influence_debug_log_index } }
+					set_variable = { global.influence_debug_log_index = global.influence_log^num }
+					add_to_array = { global.influence_log = 7 }
+					add_to_array = { global.influence_log_val = 0 }
+					add_to_array = { global.influence_log_val_abs = 0 }
+				}
+				if = {
+					limit = {
+						check_variable = { global.influence_var > -200 }
+					}
+					add_to_variable = { global.influence_log_val^global.influence_debug_log_index = 5 }
+					influence_recalc = yes
+				}
+			}
+			
+			KRG_influence_debug_ger_control_click = {
+				if = {
+					limit = { NOT = { has_variable = global.influence_debug_log_index } }
+					set_variable = { global.influence_debug_log_index = global.influence_log^num }
+					add_to_array = { global.influence_log = 7 }
+					add_to_array = { global.influence_log_val = 0 }
+					add_to_array = { global.influence_log_val_abs = 0 }
+				}
+				if = {
+					limit = {
+						check_variable = { global.influence_var > -200 }
+					}
+					add_to_variable = { global.influence_log_val^global.influence_debug_log_index = -5 }
+					influence_recalc = yes
+				}
+			}
+			
+			KRG_influence_debug_can_shift_click = {
+				if = {
+					limit = { NOT = { has_variable = global.influence_debug_log_index } }
+					set_variable = { global.influence_debug_log_index = global.influence_log^num }
+					add_to_array = { global.influence_log = 7 }
+					add_to_array = { global.influence_log_val = 0 }
+					add_to_array = { global.influence_log_val_abs = 0 }
+				}
+				if = {
+					limit = {
+						check_variable = { global.influence_var > -200 }
+					}
+					add_to_variable = { global.influence_log_val^global.influence_debug_log_index = 10 }
+					influence_recalc = yes
+				}
+			}
+			
+			KRG_influence_debug_ger_shift_click = {
+				if = {
+					limit = { NOT = { has_variable = global.influence_debug_log_index } }
+					set_variable = { global.influence_debug_log_index = global.influence_log^num }
+					add_to_array = { global.influence_log = 7 }
+					add_to_array = { global.influence_log_val = 0 }
+					add_to_array = { global.influence_log_val_abs = 0 }
+				}
+				if = {
+					limit = {
+						check_variable = { global.influence_var > -200 }
+					}
+					add_to_variable = { global.influence_log_val^global.influence_debug_log_index = -10 }
+					influence_recalc = yes
+				}
+			}
+		}
+	}
+}

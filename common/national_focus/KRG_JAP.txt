@@ -1,0 +1,1625 @@
+############################################
+###            Designed by Nuke          ###
+###            Coded by Avalon           ###
+############################################          
+
+focus_tree = {
+	id = KRG_Japan
+	country = {
+		factor = 0
+		modifier = {
+			add = 10
+			tag = JAP
+		}
+	}
+
+	default = no
+	continuous_focus_position = { x = 75 y = 2400 }
+
+	focus = {
+		id = JAP_amending_the_national_mobilisation_law
+		icon = GFX_generic_conscription
+		x = 0
+		y = 0
+		cost = 3
+
+		available_if_capitulated = yes
+
+		ai_will_do = {
+			base = 1
+		}
+		completion_reward = {
+			move_down_mobilization = yes
+		}
+	}
+
+	focus = {
+		id = JAP_establish_military_welfare_agency
+		icon = GFX_generic_veterans_benefits
+		x = 2
+		y = 0
+
+		relative_position_id = JAP_amending_the_national_mobilisation_law
+		cost = 3
+		available_if_capitulated = yes
+
+		ai_will_do = {
+			base = 1
+		}
+		completion_reward = {
+			move_up_service_spending = yes
+		}
+	}
+
+	focus = {
+		id = JAP_social_harmony_and_preservation_law
+		icon = GFX_generic_police_state
+		x = 4
+		y = 0
+
+		relative_position_id = JAP_amending_the_national_mobilisation_law
+		cost = 3
+		available_if_capitulated = yes
+
+		ai_will_do = {
+			base = 1
+		}
+		completion_reward = {
+			add_stability = 0.02
+			add_political_power = 100
+		}
+	}
+
+	focus = {
+		id = JAP_the_1948_budget
+		icon = GFX_generic_price_control
+		x = 0
+		y = 1
+
+		relative_position_id = JAP_establish_military_welfare_agency
+		cost = 2
+		available_if_capitulated = yes
+		
+		prerequisite = { 
+			focus = JAP_amending_the_national_mobilisation_law 
+		}
+		prerequisite = { 
+			focus = JAP_establish_military_welfare_agency 
+		}
+		prerequisite = { 
+			focus = JAP_social_harmony_and_preservation_law 
+		}
+
+		ai_will_do = {
+			base = 1
+		}
+		completion_reward = {
+			#country_event = {
+				#id =
+			#}
+		}
+	}
+
+	focus = {
+		id = JAP_transcendental_recovery
+		icon = GFX_generic_gold_up
+		cost = 2
+		prerequisite = {
+			focus = JAP_the_1948_budget
+		}
+		available = {
+			has_completed_focus = JAP_the_1948_budget
+			NOT = { has_completed_focus = JAP_pass_budget }
+		}
+		relative_position_id = JAP_the_1948_budget
+		x = -2
+		y = 1
+		mutually_exclusive = {
+			focus = JAP_cooperate_zaibatsu
+		}
+		completion_reward = {
+			JAP_move_down_zaibatsu_support = yes
+			JAP_move_up_kazoku_support = yes
+			custom_effect_tooltip = JAP_zaibatsu_displeased
+			custom_effect_tooltip = JAP_kazoku_pleased
+			add_stability = -0.02 }
+	}
+
+	focus = {
+		id = JAP_cooperate_zaibatsu
+		icon = GFX_focus_jap_zaibatsu
+		cost = 2
+		relative_position_id = JAP_the_1948_budget
+		x = 2
+		y = 1
+		available = {
+			has_completed_focus = JAP_the_1948_budget
+			NOT = { has_completed_focus = JAP_pass_budget }
+		}
+		prerequisite = {
+			focus = JAP_the_1948_budget
+		}
+		mutually_exclusive = {
+			focus = JAP_transcendental_recovery
+		}
+		completion_reward = { 
+			JAP_move_up_zaibatsu_support = yes
+			JAP_move_down_kazoku_support = yes
+			custom_effect_tooltip = JAP_zaibatsu_pleased
+			custom_effect_tooltip = JAP_kazoku_displeased
+			add_stability = 0.02
+		}
+	}
+
+	focus = {
+		id = JAP_open_foreign_ministry
+		icon = GFX_generic_restart_diplomatic_initiatives
+		cost = 2
+		relative_position_id = JAP_the_1948_budget
+		x = 4
+		y = 1
+		available = {
+			has_completed_focus = JAP_the_1948_budget
+			NOT = { has_completed_focus = JAP_pass_budget }
+		}
+		prerequisite = {
+			focus = JAP_the_1948_budget
+		}
+		completion_reward = { 
+			unlock_decision_category_tooltip = JAP_Foreign_Ministry_cat
+			set_country_flag = JAP_foreign_ministry_done
+		}
+	}
+
+	focus = {
+		id = JAP_further_demobilisation
+		icon = GFX_generic_demobilise_guns
+		cost = 3
+		prerequisite = {
+			focus = JAP_transcendental_recovery
+		}
+		available = {
+			has_completed_focus = JAP_the_1948_budget
+			NOT = { has_completed_focus = JAP_pass_budget }
+		}
+		relative_position_id = JAP_transcendental_recovery
+		x = -1
+		y = 1
+		completion_reward = {
+			move_down_mobilization = yes
+			JAP_move_down_kazoku_support = yes
+			custom_effect_tooltip = JAP_kazoku_displeased
+		}
+	}
+
+	focus = {
+		id = JAP_expand_central_bank
+		icon = GFX_generic_banking_legislation
+		cost = 3
+		prerequisite = {
+			focus = JAP_transcendental_recovery
+		}
+		available = {
+			has_completed_focus = JAP_the_1948_budget
+			NOT = { has_completed_focus = JAP_pass_budget }
+		}
+		relative_position_id = JAP_transcendental_recovery
+		x = 1
+		y = 1
+		completion_reward = {
+			add_ideas = JAP_central_bank_idea
+			JAP_move_up_bureaucrat_support = yes
+			custom_effect_tooltip = JAP_bureaucrats_pleased
+		}
+	}
+	
+
+	focus = {
+		id = JAP_ease_corporate_tax
+		icon = GFX_generic_cash_stimulus_plan
+		cost = 3
+		relative_position_id = JAP_cooperate_zaibatsu
+		x = -1
+		y = 1
+		prerequisite = {
+			focus = JAP_cooperate_zaibatsu
+		}
+		available = {
+			has_completed_focus = JAP_the_1948_budget
+			NOT = { has_completed_focus = JAP_pass_budget }
+		}
+		completion_reward = {
+			move_up_business_spending = yes
+		}
+	}
+
+	focus = {
+		id = JAP_reorg_new_zaibatsu
+		icon = GFX_generic_state_economy
+		cost = 3
+		relative_position_id = JAP_cooperate_zaibatsu
+		x = 1
+		y = 1
+		prerequisite = {
+			focus = JAP_cooperate_zaibatsu
+		}
+		available = {
+			has_completed_focus = JAP_the_1948_budget
+			NOT = { has_completed_focus = JAP_pass_budget }
+		}
+		completion_reward = {
+			swap_ideas = {
+				remove_idea = JAP_the_zaibatsu_empire
+				add_idea =  JAP_the_zaibatsu_empire_2
+			}
+			add_timed_idea = {
+				idea = JAP_integration_issues
+				days = 180
+			}
+			JAP_move_up_zaibatsu_support = yes
+			custom_effect_tooltip = JAP_zaibatsu_pleased
+		}
+	}
+	focus = {
+		id = JAP_public_works_projects
+		icon = GFX_generic_construct_public_housing
+		cost = 4
+		relative_position_id = JAP_transcendental_recovery
+		x = 0
+		y = 2
+		
+		prerequisite = {
+			focus = JAP_expand_central_bank
+		}
+		prerequisite = {
+			focus = JAP_further_demobilisation
+		}
+		available = {
+			has_completed_focus = JAP_the_1948_budget
+			NOT = { has_completed_focus = JAP_pass_budget }
+		}
+		completion_reward = {
+			build_railway = {
+				level = 4
+				start_state = 282
+				start_province = 1182
+   				target_state = 531
+				target_province = 7072
+				path = {
+					1182 9998 7157 7087 12097 10125 4142 11960 7072
+				}
+			}
+		}
+	}
+	focus = {
+		id = JAP_phase_out_war_economy
+		icon = GFX_generic_demobilise_econ
+		cost = 4
+		relative_position_id = JAP_cooperate_zaibatsu
+		x = -1
+		y = 2
+		prerequisite = {
+			focus = JAP_ease_corporate_tax
+		}
+		available = {
+			has_completed_focus = JAP_the_1948_budget
+			NOT = { has_completed_focus = JAP_pass_budget }
+		}
+		completion_reward = {
+			move_down_econ_mobilization = yes
+			JAP_move_down_bureaucrat_support = yes
+			custom_effect_tooltip = JAP_bureaucrats_displeased
+		}
+	}
+	focus = {
+		id = JAP_cut_deals
+		icon = GFX_generic_deals
+		cost = 3
+		relative_position_id = JAP_further_demobilisation
+		x = 0
+		y = 2
+		prerequisite = {
+			focus = JAP_further_demobilisation
+		}
+		available = {
+			has_completed_focus = JAP_the_1948_budget
+			NOT = { has_completed_focus = JAP_pass_budget }
+		}
+		completion_reward = {
+			add_ideas = JAP_new_zaibatsu_deals
+			JAP_move_down_zaibatsu_support = yes
+			custom_effect_tooltip = JAP_zaibatsu_pleased
+		}
+	}
+
+	focus = {
+		id = JAP_promote_industry
+		icon = GFX_generic_construction_krg
+		cost = 3
+		relative_position_id = JAP_further_demobilisation
+		x = 2
+		y = 2
+		prerequisite = {
+			focus = JAP_public_works_projects
+			focus = JAP_phase_out_war_economy
+		}
+		available = {
+			has_completed_focus = JAP_the_1948_budget
+			NOT = { has_completed_focus = JAP_pass_budget }
+		}
+		completion_reward = {
+			531 = {
+				move_up_state_category = yes
+			}
+		}
+	}
+
+	focus = {
+		id = JAP_tokyo_city_planning
+		icon = GFX_generic_industrial_towns
+		cost = 3
+		relative_position_id = JAP_further_demobilisation
+		x = 4
+		y = 2
+		prerequisite = {
+			focus = JAP_phase_out_war_economy
+		}
+		available = {
+			has_completed_focus = JAP_the_1948_budget
+			NOT = { has_completed_focus = JAP_pass_budget }
+		}
+		completion_reward = {
+			add_political_power = 25
+			JAP_move_up_bureaucrat_support = yes
+			custom_effect_tooltip = JAP_bureaucrats_pleased
+		}
+	}
+
+	focus = {
+		id = JAP_pass_budget
+		icon = GFX_generic_constitution
+		cost = 1
+		relative_position_id = JAP_further_demobilisation
+		x = 2
+		y = 3
+		prerequisite = {
+			focus = JAP_tokyo_city_planning
+			focus = JAP_cut_deals
+		}
+		prerequisite = {
+			focus = JAP_promote_industry
+		}
+		available = {
+			has_completed_focus = JAP_the_1948_budget
+			NOT = { has_completed_focus = JAP_pass_budget }
+		}
+		completion_reward = {
+			
+		}
+	}
+
+
+
+
+	# focus = {
+	# 	id = JAP_address_the_party_line
+	# 	icon = GFX_generic_parliament2
+	# 	x = 7
+	# 	y = 0
+
+	# 	cost = 1
+	# 	available_if_capitulated = yes
+	# 	relative_position_id = JAP_amending_the_national_mobilisation_law
+
+	# 	available = {
+	# 		has_completed_focus = JAP_pass_budget
+	# 	}
+	# 	search_filters = {FOCUS_FILTER_POLITICAL}
+
+	# 	ai_will_do = {
+	# 		factor = 1
+	# 	}
+	# 	completion_reward = {
+			
+	# 	}
+	# }
+
+	# focus = {
+	# 	id = JAP_guardians_of_the_kokutai
+
+	# 	icon = GFX_focus_jap_spiritual_mobilization
+	# 	x = 3
+	# 	y = 1
+	# 	cost = 1
+
+	# 	relative_position_id = JAP_address_the_party_line
+
+	# 	available_if_capitulated = yes
+	# 	prerequisite = { 
+	# 		focus = JAP_address_the_party_line 
+	# 	}
+
+	# 	search_filters = {FOCUS_FILTER_POLITICAL}
+	# 	mutually_exclusive = { 
+	# 		focus = JAP_revolutionaries_of_the_empire 
+	# 	}
+
+	# 	ai_will_do = {
+	# 		factor = 1
+	# 	}
+	# 	completion_reward = {
+			
+	# 	}
+	# }
+
+	# focus = {
+	# 	id = JAP_sashimi_for_the_marquess
+	# 	icon = GFX_generic_a
+	# 	x = -2
+	# 	y = 1
+	# 	cost = 1
+
+	# 	relative_position_id = JAP_guardians_of_the_kokutai
+	# 	available_if_capitulated = yes
+
+	# 	prerequisite = { 
+	# 		focus = JAP_guardians_of_the_kokutai 
+	# 	}
+	# 	ai_will_do = {
+	# 		factor = 1
+	# 	}
+	# 	completion_reward = {
+			
+	# 	}
+	# }
+
+	# focus = {
+	# 	id = JAP_sake_for_the_freemason
+	# 	icon = GFX_goal_unknown
+	# 	x = 0
+	# 	y = 1
+	# 	cost = 1
+
+	# 	relative_position_id = JAP_guardians_of_the_kokutai
+	# 	available_if_capitulated = yes
+
+	# 	prerequisite = { 
+	# 		focus = JAP_guardians_of_the_kokutai 
+	# 	}
+	# 	ai_will_do = {
+	# 		factor = 1
+	# 	}
+	# 	completion_reward = {
+			
+	# 	}
+	# }
+
+	# focus = {
+	# 	id = JAP_chains_for_the_yokai
+	# 	icon = GFX_generic_crispy_bbq
+	# 	x = 2
+	# 	y = 1
+	# 	cost = 1
+
+	# 	relative_position_id = JAP_guardians_of_the_kokutai
+	# 	available_if_capitulated = yes
+
+	# 	prerequisite = { 
+	# 		focus = JAP_guardians_of_the_kokutai 
+	# 	}
+	# 	ai_will_do = {
+	# 		factor = 1
+	# 	}
+	# 	completion_reward = {
+			
+	# 	}
+	# }
+
+	# focus = {
+	# 	id = JAP_dialectal_coalition
+	# 	icon = GFX_generic_consolidating_coalitionv2
+	# 	x = 1
+	# 	y = 1
+	# 	cost = 1
+
+	# 	relative_position_id = JAP_sashimi_for_the_marquess
+	# 	available_if_capitulated = yes
+
+	# 	prerequisite = { 
+	# 		focus = JAP_sashimi_for_the_marquess 
+	# 	}
+	# 	prerequisite = { 
+	# 		focus = JAP_sake_for_the_freemason 
+	# 	}
+	# 	ai_will_do = {
+	# 		factor = 1
+	# 	}
+	# 	completion_reward = {
+			
+	# 	}
+	# }
+
+	# focus = {
+	# 	id = JAP_targeted_purge
+	# 	icon = GFX_generic_political_purge
+	# 	x = 1
+	# 	y = 1
+	# 	cost = 1
+
+	# 	relative_position_id = JAP_sake_for_the_freemason
+	# 	available_if_capitulated = yes
+
+	# 	prerequisite = { 
+	# 		focus = JAP_sake_for_the_freemason 
+	# 	}
+	# 	prerequisite = { 
+	# 		focus = JAP_chains_for_the_yokai 
+	# 	}
+	# 	ai_will_do = {
+	# 		factor = 1
+	# 	}
+	# 	completion_reward = {
+			
+	# 	}
+	# }
+
+	# focus = {
+	# 	id = JAP_a_future_to_inherit
+	# 	icon = GFX_generic_Fight_for_Freedom
+	# 	x = 3
+	# 	y = 1
+	# 	cost = 1
+
+	# 	relative_position_id = JAP_dialectal_coalition
+	# 	available_if_capitulated = yes
+
+	# 	prerequisite = { 
+	# 		focus = JAP_dialectal_coalition 
+	# 	}
+	# 	prerequisite = { 
+	# 		focus = JAP_targeted_purge 
+	# 	}
+	# 	ai_will_do = {
+	# 		factor = 1
+	# 	}
+	# 	completion_reward = {
+			
+	# 	}
+	# }
+
+	# focus = {
+	# 	id = JAP_a_cleansed_cabinet
+		
+	# 	icon = GFX_GEA_guerilla_warfare
+
+	# 	x = 2
+	# 	y = 1
+	# 	cost = 1
+	# 	available_if_capitulated = yes
+	# 	relative_position_id = JAP_a_future_to_inherit
+
+	# 	prerequisite = { 
+	# 		focus = JAP_a_future_to_inherit 
+	# 	}
+
+	# 	mutually_exclusive = { 
+	# 		focus = JAP_exploiting_the_smoke_rooms 
+	# 	}
+	# 	ai_will_do = {
+	# 		factor = 1
+	# 	}
+	# 	completion_reward = {
+			
+	# 	}
+	# }
+
+	# focus = {
+	# 	id = JAP_sever_our_crooked_partners
+	# 	icon = GFX_generic_purge_opposition
+	# 	x = 2
+	# 	y = 1
+	# 	cost = 1
+
+	# 	relative_position_id = JAP_a_cleansed_cabinet
+	# 	available_if_capitulated = yes
+
+	# 	prerequisite = { 
+	# 		focus = JAP_a_cleansed_cabinet 
+	# 	}
+	# 	ai_will_do = {
+	# 		factor = 1
+	# 	}
+	# 	completion_reward = {
+			
+	# 	}
+	# }
+
+	# focus = {
+	# 	id = JAP_an_independent_audit_commission
+	# 	icon = GFX_generic_investigate_corruption
+	# 	y = 1
+	# 	cost = 1
+
+	# 	relative_position_id = JAP_a_cleansed_cabinet
+	# 	available_if_capitulated = yes
+
+	# 	prerequisite = { 
+	# 		focus = JAP_a_cleansed_cabinet 
+	# 	}
+	# 	ai_will_do = {
+	# 		factor = 1
+	# 	}
+	# 	completion_reward = {
+			
+	# 	}
+	# }
+
+	# focus = {
+	# 	id = JAP_diversify_our_finances
+	# 	icon = GFX_generic_money_deal
+	# 	x = 1
+	# 	y = 1
+	# 	cost = 1
+
+	# 	relative_position_id = JAP_sever_our_crooked_partners
+	# 	available_if_capitulated = yes
+
+	# 	prerequisite = { 
+	# 		focus = JAP_sever_our_crooked_partners 
+	# 	}
+	# 	ai_will_do = {
+	# 		factor = 1
+	# 	}
+	# 	completion_reward = {
+			
+	# 	}
+	# }
+
+	# focus = {
+	# 	id = JAP_sanction_the_unscrupulous
+	# 	icon = GFX_generic_trials
+	# 	x = 1
+	# 	y = 1
+	# 	cost = 1
+
+	# 	relative_position_id = JAP_an_independent_audit_commission
+	# 	available_if_capitulated = yes
+
+	# 	prerequisite = { 
+	# 		focus = JAP_an_independent_audit_commission 
+	# 	}
+	# 	ai_will_do = {
+	# 		factor = 1
+	# 	}
+	# 	completion_reward = {
+			
+	# 	}
+	# }
+
+	# focus = {
+	# 	id = JAP_exploiting_the_smoke_rooms
+		
+	# 	icon = GFX_generic_conspiracy
+
+	# 	x = -1
+	# 	y = 1
+	# 	cost = 1
+	# 	available_if_capitulated = yes
+	# 	relative_position_id = JAP_a_future_to_inherit
+
+	# 	prerequisite = { 
+	# 		focus = JAP_a_future_to_inherit 
+	# 	}
+
+	# 	mutually_exclusive = { 
+	# 		focus = JAP_a_cleansed_cabinet 
+	# 	}
+	# 	ai_will_do = {
+	# 		factor = 1
+	# 	}
+	# 	completion_reward = {
+			
+	# 	}
+	# }
+
+	# focus = {
+	# 	id = JAP_our_contacts_within_the_tokko
+	# 	icon = GFX_generic_enlist_the_police
+	# 	x = 1
+	# 	y = 1
+	# 	cost = 1
+
+	# 	relative_position_id = JAP_exploiting_the_smoke_rooms
+	# 	available_if_capitulated = yes
+
+	# 	prerequisite = { 
+	# 		focus = JAP_exploiting_the_smoke_rooms 
+	# 	}
+	# 	ai_will_do = {
+	# 		factor = 1
+	# 	}
+	# 	completion_reward = {
+			
+	# 	}
+	# }
+
+	# focus = {
+	# 	id = JAP_our_contacts_within_the_yakuza
+	# 	icon = GFX_generic_shadow_government
+	# 	x = -1
+	# 	y = 1
+	# 	cost = 1
+
+	# 	relative_position_id = JAP_exploiting_the_smoke_rooms
+	# 	available_if_capitulated = yes
+
+	# 	prerequisite = { 
+	# 		focus = JAP_exploiting_the_smoke_rooms 
+	# 	}
+	# 	ai_will_do = {
+	# 		factor = 1
+	# 	}
+	# 	completion_reward = {
+			
+	# 	}
+	# }
+
+	# focus = {
+	# 	id = JAP_information_for_power
+	# 	icon = GFX_generic_investigation
+	# 	x = 1
+	# 	y = 1
+	# 	cost = 1
+
+	# 	relative_position_id = JAP_our_contacts_within_the_tokko
+	# 	available_if_capitulated = yes
+
+	# 	prerequisite = { 
+	# 		focus = JAP_our_contacts_within_the_tokko 
+	# 	}
+	# 	ai_will_do = {
+	# 		factor = 1
+	# 	}
+	# 	completion_reward = {
+			
+	# 	}
+	# }
+
+	# focus = {
+	# 	id = JAP_wave_of_accidents
+	# 	icon = GFX_generic_file_investigation
+	# 	x = 1
+	# 	y = 1
+	# 	cost = 1
+
+	# 	relative_position_id = JAP_our_contacts_within_the_yakuza
+	# 	available_if_capitulated = yes
+
+	# 	prerequisite = { 
+	# 		focus = JAP_our_contacts_within_the_yakuza 
+	# 	}
+	# 	ai_will_do = {
+	# 		factor = 1
+	# 	}
+	# 	completion_reward = {
+			
+	# 	}
+	# }
+
+	# focus = {
+	# 	id = JAP_a_legacy_to_accord
+	# 	icon = GFX_JAP_Sakura_Tree
+	# 	x = -1
+	# 	y = 1
+	# 	cost = 1
+
+	# 	relative_position_id = JAP_sanction_the_unscrupulous
+	# 	available_if_capitulated = yes
+
+	# 	prerequisite = { 
+	# 		focus = JAP_diversify_our_finances 
+	# 		focus = JAP_sanction_the_unscrupulous
+	# 		focus = JAP_information_for_power
+	# 		focus = JAP_wave_of_accidents
+	# 	}
+	# 	ai_will_do = {
+	# 		factor = 1
+	# 	}
+	# 	completion_reward = {
+			
+	# 	}
+	# }
+
+	# focus = {
+	# 	id = JAP_revolutionaries_of_the_empire
+		
+	# 	icon = GFX_focus_jap_cast_the_die
+
+	# 	x = 11
+	# 	y = 1
+	# 	cost = 1
+	# 	available_if_capitulated = yes
+	# 	relative_position_id = JAP_address_the_party_line
+
+	# 	prerequisite = { 
+	# 		focus = JAP_address_the_party_line 
+	# 	}
+	# 	search_filters = {FOCUS_FILTER_POLITICAL}
+
+	# 	mutually_exclusive = { 
+	# 		focus = JAP_guardians_of_the_kokutai 
+	# 	}
+	# 	ai_will_do = {
+	# 		factor = 1
+	# 	}
+	# 	completion_reward = {
+			
+	# 	}
+	# }
+
+	# focus = {
+	# 	id = JAP_flowing_with_the_wind
+	# 	icon = GFX_GENERIC_peace
+	# 	x = -2
+	# 	y = 1
+	# 	cost = 1
+	# 	mutually_exclusive = {
+	# 		focus = JAP_tearing_down_a_behemoth
+	# 	}
+
+	# 	relative_position_id = JAP_revolutionaries_of_the_empire
+	# 	available_if_capitulated = yes
+
+	# 	prerequisite = { 
+	# 		focus = JAP_revolutionaries_of_the_empire 
+	# 	}
+	# 	ai_will_do = {
+	# 		factor = 1
+	# 	}
+	# 	completion_reward = {
+			
+	# 	}
+	# }
+
+	# focus = {
+	# 	id = JAP_party_sponsored_study_group
+	# 	icon = GFX_generic_social_reforms
+	# 	x = -1
+	# 	y = 1
+	# 	cost = 1
+
+	# 	relative_position_id = JAP_flowing_with_the_wind
+	# 	available_if_capitulated = yes
+
+	# 	prerequisite = { 
+	# 		focus = JAP_flowing_with_the_wind 
+	# 	}
+	# 	ai_will_do = {
+	# 		factor = 1
+	# 	}
+	# 	completion_reward = {
+			
+	# 	}
+	# }
+
+	# focus = {
+	# 	id = JAP_new_faces_for_the_bureaucracy
+	# 	icon = GFX_goal_generic_dangerous_deal
+	# 	x = 1
+	# 	y = 1
+	# 	cost = 1
+
+	# 	relative_position_id = JAP_flowing_with_the_wind
+	# 	available_if_capitulated = yes
+
+	# 	prerequisite = { 
+	# 		focus = JAP_flowing_with_the_wind 
+	# 	}
+	# 	ai_will_do = {
+	# 		factor = 1
+	# 	}
+	# 	completion_reward = {
+			
+	# 	}
+	# }
+
+	# focus = {
+	# 	id = JAP_integration_of_local_unions
+	# 	icon = GFX_generic_workers_rights
+	# 	x = 0
+	# 	y = 1
+	# 	cost = 1
+
+	# 	relative_position_id = JAP_party_sponsored_study_group
+	# 	available_if_capitulated = yes
+
+	# 	prerequisite = { 
+	# 		focus = JAP_party_sponsored_study_group 
+	# 	}
+	# 	ai_will_do = {
+	# 		factor = 1
+	# 	}
+	# 	completion_reward = {
+			
+	# 	}
+	# }
+
+	# focus = {
+	# 	id = JAP_stacking_the_policy_councils
+	# 	icon = GFX_generic_government_deals
+	# 	x = 0
+	# 	y = 1
+	# 	cost = 1
+
+	# 	relative_position_id = JAP_new_faces_for_the_bureaucracy
+	# 	available_if_capitulated = yes
+
+	# 	prerequisite = { 
+	# 		focus = JAP_new_faces_for_the_bureaucracy 
+	# 	}
+	# 	ai_will_do = {
+	# 		factor = 1
+	# 	}
+	# 	completion_reward = {
+			
+	# 	}
+	# }
+
+	# focus = {
+	# 	id = JAP_an_elegant_gekokujo
+	# 	icon = GFX_generic_officer
+	# 	x = 0
+	# 	y = 1
+	# 	cost = 1
+
+	# 	relative_position_id = JAP_stacking_the_policy_councils
+	# 	available_if_capitulated = yes
+
+	# 	prerequisite = { 
+	# 		focus = JAP_stacking_the_policy_councils 
+	# 	}
+	# 	prerequisite = {
+	# 		focus = JAP_integration_of_local_unions
+	# 	}
+	# 	ai_will_do = {
+	# 		factor = 1
+	# 	}
+	# 	completion_reward = {
+			
+	# 	}
+	# }
+
+	# focus = {
+	# 	id = JAP_tearing_down_a_behemoth
+	# 	icon = GFX_generic_war_in_the_plate
+	# 	x = 3
+	# 	y = 1
+	# 	cost = 1
+
+	# 	relative_position_id = JAP_revolutionaries_of_the_empire
+	# 	available_if_capitulated = yes
+
+	# 	prerequisite = { 
+	# 		focus = JAP_revolutionaries_of_the_empire 
+	# 	}
+	# 	mutually_exclusive = {
+	# 		focus = JAP_flowing_with_the_wind
+	# 	}
+
+	# 	ai_will_do = {
+	# 		factor = 1
+	# 	}
+	# 	completion_reward = {
+			
+	# 	}
+	# }
+
+	# focus = {
+	# 	id = JAP_exploit_the_friction
+	# 	icon = GFX_generic_government_centralised_icon
+	# 	x = 0
+	# 	y = 1
+	# 	cost = 1
+
+	# 	relative_position_id = JAP_tearing_down_a_behemoth
+	# 	available_if_capitulated = yes
+
+	# 	prerequisite = { 
+	# 		focus = JAP_tearing_down_a_behemoth 
+	# 	}
+	# 	ai_will_do = {
+	# 		factor = 1
+	# 	}
+	# 	completion_reward = {
+			
+	# 	}
+	# }
+
+	# focus = {
+	# 	id = JAP_a_gift_for_the_tokko
+	# 	icon = GFX_generic_expel_people
+	# 	x = -2
+	# 	y = 1
+	# 	cost = 1
+
+	# 	relative_position_id = JAP_tearing_down_a_behemoth
+	# 	available_if_capitulated = yes
+
+	# 	prerequisite = { 
+	# 		focus = JAP_tearing_down_a_behemoth 
+	# 	}
+	# 	ai_will_do = {
+	# 		factor = 1
+	# 	}
+	# 	completion_reward = {
+			
+	# 	}
+	# }
+
+	# focus = {
+	# 	id = JAP_the_party_gridlock
+	# 	icon = GFX_generic_barricades
+	# 	x = 0
+	# 	y = 1
+	# 	cost = 1
+
+	# 	relative_position_id = JAP_exploit_the_friction
+	# 	available_if_capitulated = yes
+
+	# 	prerequisite = { 
+	# 		focus = JAP_exploit_the_friction 
+	# 	}
+	# 	ai_will_do = {
+	# 		factor = 1
+	# 	}
+	# 	completion_reward = {
+			
+	# 	}
+	# }
+
+	# focus = {
+	# 	id = JAP_a_fabricated_crisis
+	# 	icon = GFX_generic_burning_globe
+	# 	x = 0
+	# 	y = 1
+	# 	cost = 1
+
+	# 	relative_position_id = JAP_a_gift_for_the_tokko
+	# 	available_if_capitulated = yes
+
+	# 	prerequisite = { 
+	# 		focus = JAP_a_gift_for_the_tokko 
+	# 	}
+	# 	ai_will_do = {
+	# 		factor = 1
+	# 	}
+	# 	completion_reward = {
+			
+	# 	}
+	# }
+
+	# focus = {
+	# 	id = JAP_a_solution_for_price
+	# 	icon = GFX_generic_shady_deal
+	# 	x = -2
+	# 	y = 1
+	# 	cost = 1
+
+	# 	relative_position_id = JAP_the_party_gridlock
+	# 	available_if_capitulated = yes
+
+	# 	prerequisite = { 
+	# 		focus = JAP_the_party_gridlock 
+	# 	}
+	# 	prerequisite = {
+	# 		focus = JAP_a_fabricated_crisis
+	# 	}
+	# 	ai_will_do = {
+	# 		factor = 1
+	# 	}
+	# 	completion_reward = {
+			
+	# 	}
+	# }
+
+	# focus = {
+	# 	id = JAP_the_blessings_of_the_messiah
+	# 	icon = GFX_generic_japanese_democracy
+	# 	x = 1
+	# 	y = 1
+	# 	cost = 1
+
+	# 	relative_position_id = JAP_an_elegant_gekokujo
+	# 	available_if_capitulated = yes
+
+	# 	prerequisite = { 
+	# 		focus = JAP_an_elegant_gekokujo 
+	# 		focus = JAP_a_solution_for_price
+	# 	}
+	# 	ai_will_do = {
+	# 		factor = 1
+	# 	}
+	# 	completion_reward = {
+			
+	# 	}
+	# }
+
+	# focus = {
+	# 	id = JAP_our_hat_in_the_economic_ring
+	# 	icon = GFX_generic_capitalist_system2
+	# 	x = 5
+	# 	y = 2
+	# 	cost = 1
+
+	# 	relative_position_id = JAP_the_1948_budget
+	# 	available_if_capitulated = yes
+
+	# 	available = {
+	# 		has_completed_focus = JAP_pass_budget
+	# 	}
+	# 	prerequisite = { 
+	# 	#	focus = JAP_addressing_our_policy 
+	# 	}
+	# 	ai_will_do = {
+	# 		factor = 1
+	# 	}
+	# 	completion_reward = {
+			
+	# 	}
+	# }
+
+	# focus = {
+	# 	id = JAP_concreting_the_new_order
+
+	# 	icon = GFX_focus_jap_showa_restoration
+	# 	x = 1
+	# 	y = 3
+	# 	cost = 1
+
+	# 	relative_position_id = JAP_our_hat_in_the_economic_ring
+
+	# 	available = {
+	# 		has_completed_focus = JAP_pass_budget
+	# 	}
+	# 	available_if_capitulated = yes
+	# 	prerequisite = { 
+	# 	#	focus = JAP_addressing_our_policy 
+	# 	}
+
+	# 	ai_will_do = {
+	# 		factor = 1
+	# 	}
+	# 	completion_reward = {
+			
+	# 	}
+	# }
+
+	# focus = {
+	# 	id = JAP_promoting_nobility_non_partisanship
+	# 	icon = GFX_generic_japanese_officer
+	# 	x = -3
+	# 	y = 1
+	# 	cost = 1
+
+	# 	relative_position_id = JAP_concreting_the_new_order
+	# 	available_if_capitulated = yes
+
+	# 	prerequisite = { 
+	# 		focus = JAP_concreting_the_new_order 
+	# 	}
+	# 	ai_will_do = {
+	# 		factor = 1
+	# 	}
+	# 	completion_reward = {
+			
+	# 	}
+	# }
+
+	# focus = {
+	# 	id = JAP_weaken_the_bureaucrats
+	# 	icon = GFX_generic_law
+	# 	x = -1
+	# 	y = 1
+	# 	cost = 1
+
+	# 	relative_position_id = JAP_concreting_the_new_order
+	# 	available_if_capitulated = yes
+
+	# 	prerequisite = { 
+	# 		focus = JAP_concreting_the_new_order 
+	# 	}
+	# 	ai_will_do = {
+	# 		factor = 1
+	# 	}
+	# 	completion_reward = {
+			
+	# 	}
+	# }
+
+	# focus = {
+	# 	id = JAP_restrict_corporate_financing
+	# 	icon = GFX_generic_business_incentives
+	# 	x = 1
+	# 	y = 1
+	# 	cost = 1
+
+	# 	relative_position_id = JAP_concreting_the_new_order
+	# 	available_if_capitulated = yes
+
+	# 	prerequisite = { 
+	# 		focus = JAP_concreting_the_new_order 
+	# 	}
+	# 	ai_will_do = {
+	# 		factor = 1
+	# 	}
+	# 	completion_reward = {
+			
+	# 	}
+	# }
+
+	# focus = {
+	# 	id = JAP_politicising_the_lower_classes
+	# 	icon = GFX_generic_plotting
+	# 	x = 1
+	# 	y = 1
+	# 	cost = 1
+
+	# 	relative_position_id = JAP_promoting_nobility_non_partisanship
+	# 	available_if_capitulated = yes
+
+	# 	prerequisite = { 
+	# 		focus = JAP_promoting_nobility_non_partisanship 
+	# 	}
+	# 	prerequisite = { 
+	# 		focus = JAP_weaken_the_bureaucrats 
+	# 	}
+	# 	ai_will_do = {
+	# 		factor = 1
+	# 	}
+	# 	completion_reward = {
+			
+	# 	}
+	# }
+
+	# focus = {
+	# 	id = JAP_crackdown_on_koenkai
+	# 	icon = GFX_generic_censored_press2
+	# 	x = 1
+	# 	y = 1
+	# 	cost = 1
+
+	# 	relative_position_id = JAP_weaken_the_bureaucrats
+	# 	available_if_capitulated = yes
+
+	# 	prerequisite = { 
+	# 		focus = JAP_weaken_the_bureaucrats 
+	# 	}
+	# 	prerequisite = { 
+	# 		focus = JAP_restrict_corporate_financing 
+	# 	}
+	# 	ai_will_do = {
+	# 		factor = 1
+	# 	}
+	# 	completion_reward = {
+			
+	# 	}
+	# }
+
+	# focus = {
+	# 	id = JAP_a_constitutional_revision
+	# 	icon = GFX_generic_constitution_2
+	# 	x = 1
+	# 	y = 1
+	# 	cost = 1
+
+	# 	relative_position_id = JAP_politicising_the_lower_classes
+	# 	available_if_capitulated = yes
+
+	# 	prerequisite = { 
+	# 		focus = JAP_politicising_the_lower_classes 
+	# 	}
+	# 	prerequisite = { 
+	# 		focus = JAP_crackdown_on_koenkai 
+	# 	}
+	# 	ai_will_do = {
+	# 		factor = 1
+	# 	}
+	# 	completion_reward = {
+			
+	# 	}
+	# }
+
+	# focus = {
+	# 	id = JAP_beyond_the_home_isles
+	# 	icon = GFX_JAP_Co_Prosperity_Sphere
+	# 	x = -8
+	# 	y = 3
+	# 	cost = 1
+
+	# 	relative_position_id = JAP_our_hat_in_the_economic_ring
+	# 	available_if_capitulated = yes
+	# 	available = {
+	# 		has_completed_focus = JAP_pass_budget
+	# 	}
+
+	# 	prerequisite = { 
+	# 	#	focus = JAP_addressing_our_policy 
+	# 	}
+	# 	ai_will_do = {
+	# 		factor = 1
+	# 	}
+	# 	completion_reward = {
+			
+	# 	}
+	# }
+
+	# focus = {
+	# 	id = JAP_rollback_the_garrison_forces
+	# 	icon = GFX_generic_army_guy
+	# 	x = 0
+	# 	y = 1
+	# 	cost = 1
+
+	# 	relative_position_id = JAP_beyond_the_home_isles
+	# 	available_if_capitulated = yes
+
+	# 	prerequisite = { 
+	# 		focus = JAP_beyond_the_home_isles 
+	# 	}
+	# 	ai_will_do = {
+	# 		factor = 1
+	# 	}
+	# 	completion_reward = {
+			
+	# 	}
+	# }
+
+	# focus = {
+	# 	id = JAP_assist_in_asias_reconstruction
+	# 	icon = GFX_generic_construction_engineering
+	# 	x = 2
+	# 	y = 1
+	# 	cost = 1
+
+	# 	relative_position_id = JAP_beyond_the_home_isles
+	# 	available_if_capitulated = yes
+
+	# 	prerequisite = { 
+	# 		focus = JAP_beyond_the_home_isles 
+	# 	}
+	# 	ai_will_do = {
+	# 		factor = 1
+	# 	}
+	# 	completion_reward = {
+			
+	# 	}
+	# }
+
+	# focus = {
+	# 	id = JAP_democracy_to_the_colonies
+	# 	icon = GFX_generic_elections
+	# 	x = 0
+	# 	y = 1
+	# 	cost = 1
+
+	# 	relative_position_id = JAP_rollback_the_garrison_forces
+	# 	available_if_capitulated = yes
+
+	# 	prerequisite = { 
+	# 		focus = JAP_rollback_the_garrison_forces 
+	# 	}
+	# 	ai_will_do = {
+	# 		factor = 1
+	# 	}
+	# 	completion_reward = {
+			
+	# 	}
+	# }
+
+	# focus = {
+	# 	id = JAP_the_singapore_reversal
+	# 	icon = GFX_generic_stable_government
+	# 	x = 0
+	# 	y = 1
+	# 	cost = 1
+
+	# 	relative_position_id = JAP_assist_in_asias_reconstruction
+	# 	available_if_capitulated = yes
+
+	# 	prerequisite = { 
+	# 		focus = JAP_assist_in_asias_reconstruction 
+	# 	}
+	# 	ai_will_do = {
+	# 		factor = 1
+	# 	}
+	# 	completion_reward = {
+			
+	# 	}
+	# }
+
+	# focus = {
+	# 	id = JAP_panasian_conference
+	# 	icon = GFX_focus_jap_manchurian_project
+	# 	x = 1
+	# 	y = 1
+	# 	cost = 1
+
+	# 	relative_position_id = JAP_democracy_to_the_colonies
+	# 	available_if_capitulated = yes
+
+	# 	prerequisite = { 
+	# 		focus = JAP_democracy_to_the_colonies 
+	# 	}
+	# 	prerequisite = { 
+	# 		focus = JAP_the_singapore_reversal 
+	# 	}
+	# 	ai_will_do = {
+	# 		factor = 1
+	# 	}
+	# 	completion_reward = {
+			
+	# 	}
+	# }
+
+	# focus = {
+	# 	id = JAP_our_scopes_to_the_big_four
+	# 	icon = GFX_focus_jap_zaibatsu
+	# 	x = -1
+	# 	y = 1
+	# 	cost = 1
+
+	# 	relative_position_id = JAP_our_hat_in_the_economic_ring
+	# 	available_if_capitulated = yes
+
+	# 	prerequisite = { 
+	# 		focus = JAP_our_hat_in_the_economic_ring 
+	# 	}
+	# 	ai_will_do = {
+	# 		factor = 1
+	# 	}
+	# 	completion_reward = {
+			
+	# 	}
+	# }
+
+	# focus = {
+	# 	id = JAP_looking_beyond_the_metropolis
+	# 	icon = GFX_generic_mantetsu_projects
+	# 	x = 1
+	# 	y = 1
+	# 	cost = 1
+
+	# 	relative_position_id = JAP_our_hat_in_the_economic_ring
+	# 	available_if_capitulated = yes
+
+	# 	prerequisite = { 
+	# 		focus = JAP_our_hat_in_the_economic_ring 
+	# 	}
+	# 	ai_will_do = {
+	# 		factor = 1
+	# 	}
+	# 	completion_reward = {
+			
+	# 	}
+	# }
+
+	# focus = {
+	# 	id = JAP_from_salarymen_to_the_manual_worker
+	# 	icon = GFX_generic_workers_for_business
+	# 	x = -1
+	# 	y = 1
+	# 	cost = 1
+
+	# 	relative_position_id = JAP_our_scopes_to_the_big_four
+	# 	available_if_capitulated = yes
+
+	# 	prerequisite = { 
+	# 		focus = JAP_our_scopes_to_the_big_four 
+	# 	}
+	# 	ai_will_do = {
+	# 		factor = 1
+	# 	}
+	# 	completion_reward = {
+			
+	# 	}
+	# }
+
+	# focus = {
+	# 	id = JAP_dismantling_the_monoliths
+	# 	icon = GFX_generic_co_owned_businesses
+	# 	x = 1
+	# 	y = 1
+	# 	cost = 1
+
+	# 	relative_position_id = JAP_our_scopes_to_the_big_four
+	# 	available_if_capitulated = yes
+
+	# 	prerequisite = { 
+	# 		focus = JAP_our_scopes_to_the_big_four 
+	# 	}
+	# 	prerequisite = {
+	# 		focus = JAP_looking_beyond_the_metropolis
+	# 	}
+	# 	ai_will_do = {
+	# 		factor = 1
+	# 	}
+	# 	completion_reward = {
+			
+	# 	}
+	# }
+
+	# focus = {
+	# 	id = JAP_relieve_the_unfortunates
+	# 	icon = GFX_GER_Winterhilfe
+	# 	x = 1
+	# 	y = 1
+	# 	cost = 1
+
+	# 	relative_position_id = JAP_looking_beyond_the_metropolis
+	# 	available_if_capitulated = yes
+
+	# 	prerequisite = { 
+	# 		focus = JAP_looking_beyond_the_metropolis 
+	# 	}
+	# 	ai_will_do = {
+	# 		factor = 1
+	# 	}
+	# 	completion_reward = {
+			
+	# 	}
+	# }
+
+	# focus = {
+	# 	id = JAP_a_new_economy
+	# 	icon = GFX_generic_economic_report
+	# 	x = -3
+	# 	y = 1
+	# 	cost = 1
+
+	# 	relative_position_id = JAP_dismantling_the_monoliths
+	# 	available_if_capitulated = yes
+
+	# 	prerequisite = { 
+	# 		focus = JAP_from_salarymen_to_the_manual_worker 
+	# 	}
+	# 	prerequisite = {
+	# 		focus = JAP_dismantling_the_monoliths
+	# 	}
+	# 	prerequisite = {
+	# 		focus = JAP_relieve_the_unfortunates
+	# 	}
+	# 	ai_will_do = {
+	# 		factor = 1
+	# 	}
+	# 	completion_reward = {
+			
+	# 	}
+	# }
+
+	# focus = {
+	# 	id = JAP_the_foundations_of_a_third_empire
+	# 	icon = GFX_generic_japan_helmet
+	# 	x = -1
+	# 	y = 4
+	# 	cost = 1
+
+	# 	relative_position_id = JAP_a_new_economy
+	# 	available_if_capitulated = yes
+
+	# 	prerequisite = { 
+	# 		focus = JAP_a_constitutional_revision 
+	# 	}
+	# 	prerequisite = {
+	# 		focus = JAP_panasian_conference
+	# 	}
+	# 	prerequisite = {
+	# 		focus = JAP_a_new_economy
+	# 	}
+	# 	ai_will_do = {
+	# 		factor = 1
+	# 	}
+	# 	completion_reward = {
+			
+	# 	}
+	# }
+}

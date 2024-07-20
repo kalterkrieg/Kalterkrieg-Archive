@@ -1,0 +1,793 @@
+FAMED_category_decisions = { 
+	FAMED_invite_people_decision = { 
+		visible = { 
+		    is_in_FAMED = yes
+			there_is_an_accord_country_in_the_med_that_is_not_in_FAMED = yes
+		}
+		target_trigger = { 
+			FROM = {
+				is_an_accord_country_in_mediterranean = yes
+				is_in_FAMED = no
+			}
+		}
+		cost = 20
+		complete_effect = { 
+			log = "[GetDateText]: [Root.GetName]: Decision complete FAMED_invite_people_decision target: [From.GetName]"
+		    ROOT = {
+			    FROM = {
+			        country_event = { 
+				        id = krg_famed.1
+				    }
+			    }
+				add_political_power = -20
+		    }
+		}
+		ai_will_do = { factor =100}
+	}
+	FAMED_vote_in_favor = { 
+		visible = {
+			has_global_flag = FAMED_is_voting
+			NOT = { has_country_flag = FAMED_opposes}
+			NOT = { has_country_flag = FAMED_supports}
+		}
+		days_re_enable = FAMED_voting_re_enable_var
+		cost = 25
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete FAMED_vote_in_favor target: [From.GetName]"
+			ROOT = { 
+				is_FAMED_supporter = yes
+			}
+		}
+		ai_will_do = {
+			base = 100
+			modifier = {
+				factor = 0
+				ROOT = {
+					is_subject = yes
+					OVERLORD = {
+						NOT = {has_country_flag = FAMED_supports}
+					}
+				}
+			}
+		}
+	}
+	FAMED_vote_against = { 
+		visible = {
+			has_global_flag = FAMED_is_voting
+			NOT = { has_country_flag = FAMED_supports}
+			NOT = { has_country_flag = FAMED_opposes}
+		}
+		days_re_enable = FAMED_voting_re_enable_var
+		cost = 25
+		ai_will_do = {
+			base = 100
+			modifier = {
+				factor = 0
+				ROOT = {
+					is_subject = yes
+					OVERLORD = {
+						NOT = {has_country_flag = FAMED_opposes}
+					}
+				}
+			}
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete FAMED_vote_against target: [From.GetName]"
+			ROOT = { 
+				is_FAMED_opposer = yes
+			}
+		}
+	}
+	FAMED_purpose_training = { 
+		visible = {
+			AND = {
+			    NOT = { has_global_flag = FAMED_is_about_training_flag } #FAMED is NOT about worms
+			    NOT = { has_global_flag = FAMED_is_voting } 
+		    }
+		}
+		cost = 25
+		days_remove = 90
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete FAMED_purpose_training target: [From.GetName]"
+			add_political_power = -25
+			set_global_flag = FAMED_is_voting
+			set_variable = {FAMED_voting_re_enable_var = 90}
+			ROOT = { 
+				is_FAMED_supporter = yes
+			}
+			
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove FAMED_purpose_training target: [From.GetName]"
+			set_variable = {FAMED_voting_re_enable_var = 0}
+			hidden_effect = {
+			    if = {
+				    limit = { 
+						check_variable = { FAMED_influence_in_favor > 0.5}
+				    }
+				    set_global_flag = FAMED_is_about_training_flag
+					clear_all_FAMED_voting_flags = yes
+				    add_to_variable = {
+					    FAMED_army_training_var = 0.1
+				    }
+					show_army_training_decisions_FAMED = yes
+		        }
+			    else = {
+					clear_all_FAMED_voting_flags = yes
+				    add_political_power = -20
+			    }
+		    }
+	    }
+	}
+	FAMED_show_training_the_army_decisions = { 
+		visible = { 
+			has_country_flag = FAMED_show_army_training_flag
+		}
+		complete_effect = { 
+			log = "[GetDateText]: [Root.GetName]: Decision complete FAMED_show_training_the_army_decisions target: [From.GetName]"
+			clr_country_flag = FAMED_show_army_training_flag
+			set_country_flag = FAMED_hide_army_training_flag
+		}
+		ai_will_do = {
+			base = 1000 #AI needs to see dem decisions
+		}
+	}
+	FAMED_hide_training_the_army_decisions = { 
+		visible = { 
+			has_country_flag = FAMED_hide_army_training_flag
+		}
+		complete_effect = { 
+			log = "[GetDateText]: [Root.GetName]: Decision complete FAMED_hide_training_the_army_decisions target: [From.GetName]"
+			clr_country_flag = FAMED_hide_army_training_flag
+			set_country_flag = FAMED_show_army_training_flag
+		}
+		ai_will_do = {
+			base = 0 #AI doesnt need to hide dem decisions
+		}
+	}
+	FAMED_train_the_army_decision = { 
+		visible = { 
+			has_country_flag = FAMED_hide_army_training_flag
+		}
+		available = {
+			command_power > 24.999
+		}
+		custom_cost_text = CP_25
+		custom_cost_trigger = {
+			command_power > 24.999
+		}
+		target_trigger = { 
+			check_what_countries_are_in_FAMED = yes
+		}
+		complete_effect = { 
+			log = "[GetDateText]: [Root.GetName]: Decision complete FAMED_train_the_army_decision target: [From.GetName]"
+			add_command_power = -25
+		}
+		days_remove = 90
+		days_re_enable = 180
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove FAMED_train_the_army_decision target: [From.GetName]"
+			FROM = {
+				add_to_variable = { FAMED_army_training_var = 0.1}
+			}
+		}
+		ai_will_do = {
+			base = 100
+			modifier = {
+				factor = 2
+				ROOT = {command_power > 50}
+			}
+		}
+	}
+	FAMED_train_the_airforce_decision = { 
+		visible = { 
+			has_country_flag = FAMED_hide_army_training_flag
+		}
+		available = {
+			command_power > 24.999
+		}
+		custom_cost_text = CP_25
+		custom_cost_trigger = {
+			command_power > 24.999
+		}
+		target_trigger = { 
+			check_what_countries_are_in_FAMED = yes
+		}
+		complete_effect = { 
+			log = "[GetDateText]: [Root.GetName]: Decision complete FAMED_train_the_airforce_decision target: [From.GetName]"
+			add_command_power = -25
+		}
+		days_remove = 90
+		days_re_enable = 180
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove FAMED_train_the_airforce_decision target: [From.GetName]"
+			FROM = {
+				add_to_variable = { FAMED_air_training_var = 0.1}
+			}
+		}
+		ai_will_do = {
+			base = 100
+			modifier = {
+				factor = 2
+				ROOT = {command_power > 50}
+			}
+		}
+	}
+	FAMED_train_the_navy_decision = { 
+		visible = { 
+			has_country_flag = FAMED_hide_army_training_flag
+		}
+		available = {
+			command_power > 24.999
+		}
+		custom_cost_text = CP_25
+		custom_cost_trigger = {
+			command_power > 24.999
+		}
+		target_trigger = { 
+			check_what_countries_are_in_FAMED = yes
+		}
+		complete_effect = { 
+			log = "[GetDateText]: [Root.GetName]: Decision complete FAMED_train_the_navy_decision target: [From.GetName]"
+			add_command_power = -25
+		}
+		days_remove = 90
+		days_re_enable = 180
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove FAMED_train_the_navy_decision target: [From.GetName]"
+			FROM = {
+				add_to_variable = { FAMED_navy_training_var = 0.1}
+			}
+		}
+		ai_will_do = {
+			base = 100
+			modifier = {
+				factor = 2
+				ROOT = {command_power > 50}
+			}
+		}
+	}
+	FAMED_purpose_research = { 
+		visible = {
+			AND = {
+			    NOT = { has_global_flag = FAMED_is_about_research_flag } #maybe FAMED is about worms
+			    NOT = { has_global_flag = FAMED_is_voting } 
+		    }
+		}
+		cost = 25
+		days_remove = 90
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete FAMED_purpose_research target: [From.GetName]"
+			add_political_power = -25
+			set_global_flag = FAMED_is_voting
+			set_variable = {FAMED_voting_re_enable_var = 90}
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove FAMED_purpose_research target: [From.GetName]"
+			set_variable = {FAMED_voting_re_enable_var = 0}
+			hidden_effect = {
+			    if = {
+				    limit = { 
+						check_variable = { FAMED_influence_in_favor > 0.5}
+				    }
+				    set_global_flag = FAMED_is_about_research_flag
+					clear_all_FAMED_voting_flags = yes
+		        }
+			    else = {
+					clear_all_FAMED_voting_flags = yes
+				    add_political_power = -20
+			    }
+		    }
+	    }
+	}
+	FAMED_help_research = { 
+		visible = { 
+			has_country_flag = FAMED_is_about_research_flag
+		}
+		available = {
+			has_political_power > 24.999
+		}
+		cost = 25
+		target_trigger = { 
+			check_what_countries_are_in_FAMED = yes
+		}
+		complete_effect = { 
+			log = "[GetDateText]: [Root.GetName]: Decision complete FAMED_help_research target: [From.GetName]"
+			add_command_power = -25
+		}
+		days_remove = 90
+		days_re_enable = 180
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove FAMED_help_research target: [From.GetName]"
+			FROM = {
+				add_to_variable = { FAMED_research_var = 0.1}
+			}
+		}
+		ai_will_do = {
+			base = 100
+			modifier = {
+				factor = 2
+				ROOT = {has_political_power > 50}
+			}
+		}
+	}
+	FAMED_purpose_investment = { 
+		visible = {
+			AND = {
+			    NOT = { has_global_flag = FAMED_is_about_investment_flag } #FAMED IS about worms
+			    NOT = { has_global_flag = FAMED_is_voting } 
+		    }
+		}
+		cost = 25
+		days_remove = 90
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete FAMED_purpose_investment target: [From.GetName]"
+			set_variable = {FAMED_voting_re_enable_var = 90}
+			add_political_power = -25
+			set_global_flag = FAMED_is_voting
+			ROOT = { 
+				set_country_flag = FAMED_supports
+			}
+			is_FAMED_supporter = yes
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove FAMED_purpose_investment target: [From.GetName]"
+		    set_variable = {FAMED_voting_re_enable_var = 0}
+			hidden_effect = {
+			    if = {
+				    limit = { 
+						check_variable = { FAMED_influence_in_favor > 0.5 }
+				    }
+				    set_global_flag = FAMED_is_about_investment_flag
+					show_investment_decisions_FAMED = yes
+					clear_all_FAMED_voting_flags = yes
+					add_1_factory_from_everybody = yes
+		        }
+			    else = {
+					clear_all_FAMED_voting_flags = yes
+				    add_political_power = -20
+			    }
+		    }
+	    }
+	}
+	FAMED_increase_investment = { 
+		visible = {
+			has_global_flag = FAMED_is_about_investment_flag
+			FAMED_has_recently_changed_how_much_it_invests = no
+			check_variable = {FAMED_industry < 5}
+			not = { has_global_flag = FAMED_is_voting}
+		}
+		available = {
+			always = yes
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete FAMED_increase_investment target: [From.GetName]"
+			set_global_flag = FAMED_is_voting
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove FAMED_increase_investment target: [From.GetName]"
+			clear_all_FAMED_voting_flags = yes
+			if = { 
+				limit = { 
+					check_variable = {
+						FAMED_influence_in_favor > 0.5
+					}
+				}
+				add_1_factory_from_everybody = yes
+			    set_global_flag = {
+				flag = FAMED_has_recently_talked_about_how_much_it_invests_flag
+				days = 360
+			    }
+				
+			}
+			else = { 
+				set_global_flag = {
+					flag = FAMED_has_recently_talked_about_how_much_it_invests_flag
+					days = 360
+				}
+			}
+		}
+	}
+	FAMED_decrease_investment = { 
+		visible = {
+			has_global_flag = FAMED_is_about_investment_flag
+			FAMED_has_recently_changed_how_much_it_invests = no
+			check_variable = {FAMED_industry > 1}
+			not = { has_global_flag = FAMED_is_voting}
+		}
+		available = {
+			always = yes
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete FAMED_decrease_investment target: [From.GetName]"
+			set_global_flag = FAMED_is_voting
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove FAMED_decrease_investment target: [From.GetName]"
+			clear_all_FAMED_voting_flags = yes
+			if = { 
+				limit = { 
+					check_variable = {
+						FAMED_influence_in_favor > 0.5
+					}
+				}
+				remove_1_factory_from_everybody = yes
+			    set_global_flag = {
+				flag = FAMED_has_recently_talked_about_how_much_it_invests_flag
+				days = 360
+			    }
+				
+			}
+			else = { 
+				set_global_flag = {
+					flag = FAMED_has_recently_talked_about_how_much_it_invests_flag
+					days = 360
+				}
+			}
+		}
+	}
+	FAMED_show_invest_in_FAMED_decisions = { 
+		visible = { 
+			has_country_flag = FAMED_show_invest_in_FAMED_flag
+		}
+		complete_effect = { 
+			log = "[GetDateText]: [Root.GetName]: Decision complete FAMED_show_invest_in_FAMED_decisions target: [From.GetName]"
+			clr_country_flag = FAMED_show_invest_in_FAMED_flag
+			set_country_flag = FAMED_hide_invest_in_FAMED_flag
+		}
+		ai_will_do = {
+			base = 1000 #AI needs to see dem decisions
+		}
+	}
+	FAMED_hide_invest_in_FAMED_decisions = { 
+		visible = { 
+			has_country_flag = FAMED_hide_invest_in_FAMED_flag
+		}
+		complete_effect = { 
+			log = "[GetDateText]: [Root.GetName]: Decision complete FAMED_hide_invest_in_FAMED_decisions target: [From.GetName]"
+			clr_country_flag = FAMED_hide_invest_in_FAMED_flag
+			set_country_flag = FAMED_show_invest_in_FAMED_flag
+		}
+		ai_will_do = {
+			base = 0 #AI doesnt need to hide dem decisions
+		}
+	}
+	FAMED_invest_in_airfields_FAMED_decision = { 
+		visible = { 
+			has_country_flag = FAMED_hide_invest_in_FAMED_flag
+		}
+		available = {
+			has_industry_available = yes
+		}
+		cost = 25
+		target_trigger = { 
+			check_what_countries_are_in_FAMED = yes
+		}
+		complete_effect = { 
+			log = "[GetDateText]: [Root.GetName]: Decision complete FAMED_invest_in_airfields_FAMED_decision target: [From.GetName]"
+			add_political_power = -25
+			remove_1_factory_from_the_total = yes
+		}
+		days_remove = 200
+		days_re_enable = 300
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove FAMED_invest_in_airfields_FAMED_decision target: [From.GetName]"
+			FROM = { 
+				random_owned_controlled_state = {
+					limit = { 
+						any_mediterranean_state = yes
+					}
+				    add_building_construction = { 
+					    type = air_base
+					    level = 1
+					    instant_build = yes
+				    }
+				}
+			}
+		}
+		ai_will_do = {
+			base = 100
+			modifier = {
+				factor = 2
+				ROOT = {has_political_power > 25}
+			}
+		}
+	}
+	FAMED_invest_in_anti_air_FAMED_decision = { 
+		visible = { 
+			has_country_flag = FAMED_hide_invest_in_FAMED_flag
+		}
+		available = {
+			has_industry_available = yes
+		}
+		cost = 25
+		target_trigger = { 
+			check_what_countries_are_in_FAMED = yes
+		}
+		complete_effect = { 
+			log = "[GetDateText]: [Root.GetName]: Decision complete FAMED_invest_in_anti_air_FAMED_decision target: [From.GetName]"
+			add_political_power = -25
+			remove_1_factory_from_the_total = yes
+		}
+		days_remove = 200
+		days_re_enable = 300
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove FAMED_invest_in_anti_air_FAMED_decision target: [From.GetName]"
+			FROM = { 
+				random_owned_controlled_state = {
+					limit = { 
+						any_mediterranean_state = yes
+					}
+				    add_building_construction = { 
+					    type = anti_air_building
+					    level = 1
+					    instant_build = yes
+				    }
+				}
+			}
+		}
+		ai_will_do = {
+			base = 100
+			modifier = {
+				factor = 2
+				ROOT = {has_political_power > 25}
+			}
+		}
+	}
+	FAMED_invest_in_radar_FAMED_decision = { 
+		visible = { 
+			has_country_flag = FAMED_hide_invest_in_FAMED_flag
+		}
+		available = {
+			has_industry_available = yes
+		}
+		cost = 25
+		target_trigger = { 
+			check_what_countries_are_in_FAMED = yes
+		}
+		complete_effect = { 
+			log = "[GetDateText]: [Root.GetName]: Decision complete FAMED_invest_in_radar_FAMED_decision target: [From.GetName]"
+			add_political_power = -25
+			remove_1_factory_from_the_total = yes
+		}
+		days_remove = 200
+		days_re_enable = 300
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove FAMED_invest_in_radar_FAMED_decision target: [From.GetName]"
+			FROM = { 
+				random_owned_controlled_state = {
+					limit = { 
+						any_mediterranean_state = yes
+					}
+				    add_building_construction = { 
+					    type = radar_station
+					    level = 1
+					    instant_build = yes
+				    }
+				}
+			}
+		}
+		ai_will_do = {
+			base = 100
+			modifier = {
+				factor = 2
+				ROOT = {has_political_power > 25}
+			}
+		}
+	}
+	FAMED_invest_in_military_factories_FAMED_decision = { 
+		visible = { 
+			has_country_flag = FAMED_hide_invest_in_FAMED_flag
+		}
+		available = {
+			has_industry_available = yes
+		}
+		cost = 25
+		target_trigger = { 
+			check_what_countries_are_in_FAMED = yes
+		}
+		complete_effect = { 
+			log = "[GetDateText]: [Root.GetName]: Decision complete FAMED_invest_in_military_factories_FAMED_decision target: [From.GetName]"
+			add_political_power = -25
+			remove_1_factory_from_the_total = yes
+		}
+		days_remove = 400
+		days_re_enable = 500
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove FAMED_invest_in_military_factories_FAMED_decision target: [From.GetName]"
+			FROM = { 
+				random_owned_controlled_state = {
+					limit = { 
+						any_mediterranean_state = yes
+						free_building_slots = { 
+							building = arms_factory
+							size > 0
+							include_locked = no
+						}
+					}
+				    add_building_construction = { 
+					    type = arms_factory
+					    level = 1
+					    instant_build = yes
+				    }
+				}
+			}
+		}
+		ai_will_do = {
+			base = 100
+			modifier = {
+				factor = 2
+				ROOT = {has_political_power > 25}
+			}
+		}
+	}
+	FAMED_invest_in_dockyards_FAMED_decision = { 
+		visible = { 
+			has_country_flag = FAMED_hide_invest_in_FAMED_flag
+		}
+		available = {
+			has_industry_available = yes
+		}
+		cost = 25
+		target_trigger = { 
+			check_what_countries_are_in_FAMED = yes
+		}
+		complete_effect = { 
+			log = "[GetDateText]: [Root.GetName]: Decision complete FAMED_invest_in_dockyards_FAMED_decision target: [From.GetName]"
+			add_political_power = -25
+			remove_1_factory_from_the_total = yes
+		}
+		days_remove = 400
+		days_re_enable = 500
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove FAMED_invest_in_dockyards_FAMED_decision target: [From.GetName]"
+			FROM = { 
+				random_owned_controlled_state = {
+					limit = { 
+						any_mediterranean_state = yes
+						free_building_slots = { 
+							building = dockyard
+							size > 0
+							include_locked = no
+						}
+					}
+				    add_building_construction = { 
+					    type = dockyard
+					    level = 1
+					    instant_build = yes
+				    }
+				}
+			}
+		}
+		ai_will_do = {
+			base = 100
+			modifier = {
+				factor = 2
+				ROOT = {has_political_power > 25}
+			}
+		}
+	}
+	FAMED_purpose_intelligence = { 
+		visible = {
+			AND = {
+			    NOT = { has_global_flag = FAMED_is_about_intelligence_flag } #FAMEDISABOUTWORMSFAMEDISABOUTWORMSFAMEDISABOUTWORMSFAMEDISABOUTWORMSFAMEDISABOUTWORMSFAMEDISABOUTWORMSFAMEDISABOUTWORMSFAMEDISABOUTWORMSFAMEDISABOUTWORMSFAMEDISABOUTWORMSFAMEDISABOUTWORMSFAMEDISABOUTWORMSFAMEDISABOUTWORMSFAMEDISABOUTWORMSFAMEDISABOUTWORMSFAMEDISABOUTWORMSFAMEDISABOUTWORMS
+			    NOT = { has_global_flag = FAMED_is_voting } 
+		    }
+		}
+		cost = 25
+		days_remove = 90
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete FAMED_purpose_intelligence target: [From.GetName]"
+			add_political_power = -25
+			set_global_flag = FAMED_is_voting
+			set_variable = {FAMED_voting_re_enable_var = 90}
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove FAMED_purpose_intelligence target: [From.GetName]"
+			set_variable = {FAMED_voting_re_enable_var = 0}
+			hidden_effect = {
+			    if = {
+				    limit = { 
+						check_variable = { FAMED_influence_in_favor > 0.5}
+				    }
+				    set_global_flag = FAMED_is_about_intelligence_flag
+					clear_all_FAMED_voting_flags = yes
+		        }
+			    else = {
+					clear_all_FAMED_voting_flags = yes
+				    add_political_power = -20
+			    }
+		    }
+	    }
+	}
+	FAMED_help_intelligence = { 
+		visible = { 
+			has_country_flag = FAMED_is_about_intelligence_flag
+		}
+		available = {
+			has_political_power > 24.999
+		}
+		cost = 25
+		target_trigger = { 
+			check_what_countries_are_in_FAMED = yes
+		}
+		days_remove = 90
+		days_re_enable = 180
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove FAMED_help_intelligence target: [From.GetName]"
+			FROM = {
+				add_to_variable = { FAMED_intelligence_help_var = 0.1}
+			}
+		}
+		ai_will_do = {
+			base = 100
+			modifier = {
+				factor = 2
+				ROOT = {has_political_power > 50}
+			}
+		}
+	}
+}
+
+
+foreign_politics = { #famed precursor makes more sense here (unless someone wants to expand it, in which case move it please)
+	NFA_economic_aid = {
+		icon = GFX_decision_give_cash
+		visible = {
+			NFA = {
+				OR = {
+					has_completed_focus = NFA_help_rebuild_the_italian_peninsula
+					has_completed_focus = NFA_send_aid_to_britain
+				}
+			}
+		}
+		allowed = {
+			tag = NFA
+		}
+		modifier = {
+			civilian_factory_use = 1
+		}
+
+		targets = {
+			ENG GRE
+		}
+		target_trigger = {
+			FROM = {
+				has_country_flag = NFA_french_aid
+			}
+		}
+		target_root_trigger = {
+			ROOT = {
+				exists = yes
+			}
+		}
+		cost = 50
+
+		days_remove = 90
+
+		days_re_enable = 270
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove NFA_economic_aid target: [From.GetName]"
+			hidden_effect = {
+				FROM = {
+					country_event = {
+						id = krg_nfa.14
+						hours = 3
+					}
+				}
+			}
+			FROM = {
+				random_owned_state = {
+					add_extra_state_shared_building_slots = 1
+					add_building_construction = {
+						type = industrial_complex
+						level = 1
+						instant_build = yes
+					}
+				}
+			}
+		}
+	}
+}
+

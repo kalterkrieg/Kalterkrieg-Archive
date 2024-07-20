@@ -1,0 +1,944 @@
+##How To Define a law
+
+##CAL_law_[law id]_start = {
+##	set_country_flag = CAL_generic_act_bill
+##	#POLITICS: 0 = NO SUPPORT, 1 = LOW SUPPORT, 2 = MED SUPPORT, 3 = HIGH SUPPORT, 4 = TOTAL SUPPORT#
+##	set_temp_variable = { CAL_Soc_Support_Var = 2 }
+##	set_temp_variable = { CAL_L_Prog_Support_Var = 2 }
+##	set_temp_variable = { CAL_Prog_Support_Var = 2 }
+##	set_temp_variable = { CAL_Rep_Support_Var = 2 }
+##	set_temp_variable = { CAL_Dem_Support_Var = 2 }
+##	CAL_Set_Congress_Support = yes
+##}
+
+##CAL_law_[law id]_effect = {
+##	clr_country_flag = CAL_generic_act_bill
+##	any effects, so adding a dynamic modifer or smth
+##}
+
+##how to define a law fail effect
+##CAL_law_[law id]_fail = {
+##	clr_country_flag = CAL_generic_act_bill
+##	any effects, pp hit, event or other
+##}
+
+
+### Generic Stuff
+CAL_Start_Law_Process = {
+	set_country_flag = CAL_Bill_Introduced_House
+	set_country_flag = CAL_Voting_On_Bills
+	set_variable = { CAL_active_law = CAL_active_law}
+	
+	meta_effect = {
+		text = {
+			CAL_law_[LAW_ID]_start = yes
+		}
+		LAW_ID = "[?CAL_active_law]"
+	}
+
+	activate_mission = CAL_Pass_Act_House
+}
+
+CAL_Pass_House = {
+	custom_effect_tooltip = CAL_Bill_Will_Pass
+	clr_country_flag = CAL_Bill_Introduced_House
+	set_country_flag = CAL_Bill_Introduced_Senate
+	activate_mission = CAL_Pass_Act_Senate
+}
+
+CAL_Fail_House = {
+	custom_effect_tooltip = CAL_Bill_Will_Fail
+	clr_country_flag = CAL_Bill_Introduced_House
+	clr_country_flag = CAL_Voting_On_Bills
+	meta_effect = {
+		text = {
+			CAL_law_[LAW_ID]_fail = yes
+		}
+		LAW_ID = "[?CAL_active_law]"
+	}
+}
+
+CAL_Pass_Senate = {
+	custom_effect_tooltip = CAL_Bill_Will_Pass_Senate
+	clr_country_flag = CAL_Bill_Introduced_Senate
+	clr_country_flag = CAL_Voting_On_Bills
+
+	meta_effect = {
+		text = {
+			CAL_law_[LAW_ID]_effect = yes
+		}
+		LAW_ID = "[?CAL_active_law]"
+	}
+}
+
+CAL_Fail_Senate = {
+	custom_effect_tooltip = CAL_Bill_Will_Fail
+	clr_country_flag = CAL_Bill_Introduced_Senate
+	clr_country_flag = CAL_Voting_On_Bills
+
+	meta_effect = {
+		text = {
+			CAL_law_[LAW_ID]_fail = yes
+		}
+		LAW_ID = "[?CAL_active_law]"
+	}
+}
+
+
+CAL_law_0_start = {
+	set_country_flag = CAL_generic_act_bill
+	#POLITICS: 0 = NO SUPPORT, 1 = LOW SUPPORT, 2 = MED SUPPORT, 3 = HIGH SUPPORT, 4 = TOTAL SUPPORT#
+	set_temp_variable = { CAL_Soc_Support_Var = 2 }
+	set_temp_variable = { CAL_L_Prog_Support_Var = 2 }
+	set_temp_variable = { CAL_Prog_Support_Var = 2 }
+	set_temp_variable = { CAL_Rep_Support_Var = 2 }
+	set_temp_variable = { CAL_Dem_Support_Var = 2 }
+	CAL_Set_Congress_Support = yes
+}
+
+CAL_law_0_effect = {
+	clr_country_flag = CAL_generic_act_bill
+}
+
+CAL_law_0_fail = {
+	clr_country_flag = CAL_generic_act_bill
+}
+
+### The Actual Laws
+CAL_law_1_start = {
+	set_country_flag = CAL_American_Businesses_Act
+	#POLITICS: 0 = NO SUPPORT, 1 = LOW SUPPORT, 2 = MED SUPPORT, 3 = HIGH SUPPORT, 4 = TOTAL SUPPORT#
+	set_temp_variable = { CAL_Soc_Support_Var = 0 }
+	set_temp_variable = { CAL_L_Prog_Support_Var = 1 }
+	set_temp_variable = { CAL_Prog_Support_Var = 2 }
+	set_temp_variable = { CAL_Rep_Support_Var = 4 }
+	set_temp_variable = { CAL_Dem_Support_Var = 4 }
+	CAL_Set_Congress_Support = yes
+	
+}
+
+CAL_law_1_effect = {
+	clr_country_flag = CAL_American_Businesses_Act
+	swap_ideas = { 
+		remove_idea = econ_small_business_spending 
+		add_idea = econ_medium_business_spending
+	}
+	825 = {
+		add_extra_state_shared_building_slots = 1
+		add_building_construction = {
+			type = industrial_complex
+			level = 1
+			instant_build = yes
+		}
+	}
+	377 = {
+		add_extra_state_shared_building_slots = 1
+		add_building_construction = {
+			type = industrial_complex
+			level = 1
+			instant_build = yes
+		}
+	}
+}
+
+CAL_law_1_fail = {
+	clr_country_flag = CAL_American_Businesses_Act
+}
+
+CAL_law_2_start = {
+	set_country_flag = CAL_Tax_Code_Revision_Act
+	#POLITICS: 0 = NO SUPPORT, 1 = LOW SUPPORT, 2 = MED SUPPORT, 3 = HIGH SUPPORT, 4 = TOTAL SUPPORT#
+	set_temp_variable = { CAL_Soc_Support_Var = 0 }
+	set_temp_variable = { CAL_L_Prog_Support_Var = 1 }
+	set_temp_variable = { CAL_Prog_Support_Var = 2 }
+	set_temp_variable = { CAL_Rep_Support_Var = 4 }
+	set_temp_variable = { CAL_Dem_Support_Var = 4 }
+	CAL_Set_Congress_Support = yes
+}
+
+CAL_law_2_effect = {
+	clr_country_flag = CAL_Tax_Code_Revision_Act
+	add_ideas = CAL_Streamlined_Tax_Code
+}
+
+CAL_law_2_fail = {
+	clr_country_flag = CAL_Tax_Code_Revision_Act
+}
+
+CAL_law_3_start = {
+	set_country_flag = CAL_Fair_Labor_Standards_Act
+	#POLITICS: 0 = NO SUPPORT, 1 = LOW SUPPORT, 2 = MED SUPPORT, 3 = HIGH SUPPORT, 4 = TOTAL SUPPORT#
+	set_temp_variable = { CAL_Soc_Support_Var = 4 }
+	set_temp_variable = { CAL_L_Prog_Support_Var = 4 }
+	set_temp_variable = { CAL_Prog_Support_Var = 3 }
+	set_temp_variable = { CAL_Rep_Support_Var = 1 }
+	set_temp_variable = { CAL_Dem_Support_Var = 2 }
+	CAL_Set_Congress_Support = yes
+}
+
+CAL_law_3_effect = {
+	clr_country_flag = CAL_Fair_Labor_Standards_Act
+	##INSERT EFFECT HERE##
+	move_up_service_spending = yes
+	custom_effect_tooltip = CAL_Labor_Standards_Act_Complete_tt
+	set_country_flag = CAL_NLRB_Formed
+	hidden_effect = {
+		set_temp_variable = { temp_popularity = 3 }
+		set_temp_variable = { temp_party = 3 }
+		set_temp_variable = { temp_state = 825 }
+		CAL_electoral_modify_popularity = yes
+		set_temp_variable = { temp_popularity = 2 }
+		set_temp_variable = { temp_party = 3 }
+		set_temp_variable = { temp_state = 386 }
+		CAL_electoral_modify_popularity = yes
+		set_temp_variable = { temp_popularity = 2 }
+		set_temp_variable = { temp_party = 3 }
+		set_temp_variable = { temp_state = 385 }
+		CAL_electoral_modify_popularity = yes
+		set_temp_variable = { temp_popularity = 2 }
+		set_temp_variable = { temp_party = 3 }
+		set_temp_variable = { temp_state = 788 }
+		CAL_electoral_modify_popularity = yes
+		set_temp_variable = { temp_popularity = 2 }
+		set_temp_variable = { temp_party = 3 }
+		set_temp_variable = { temp_state = 385 }
+		CAL_electoral_modify_popularity = yes
+		if = {
+			limit = {
+				463 = {
+					has_state_flag = alaska_state
+				}
+			}
+			set_temp_variable = { temp_popularity = 2 }
+			set_temp_variable = { temp_party = 3 }
+			set_temp_variable = { temp_state = 463 }
+			CAL_electoral_modify_popularity = yes
+		}
+		set_temp_variable = { temp_popularity = 1 }
+		set_temp_variable = { temp_party = 2 }
+		set_temp_variable = { temp_state = 825 }
+		CAL_electoral_modify_popularity = yes
+		set_temp_variable = { temp_popularity = 1 }
+		set_temp_variable = { temp_party = 2 }
+		set_temp_variable = { temp_state = 386 }
+		CAL_electoral_modify_popularity = yes
+		set_temp_variable = { temp_popularity = 1 }
+		set_temp_variable = { temp_party = 2 }
+		set_temp_variable = { temp_state = 385 }
+		CAL_electoral_modify_popularity = yes
+		set_temp_variable = { temp_popularity = 1 }
+		set_temp_variable = { temp_party = 2 }
+		set_temp_variable = { temp_state = 788 }
+		CAL_electoral_modify_popularity = yes
+		set_temp_variable = { temp_popularity = 1 }
+		set_temp_variable = { temp_party = 2 }
+		set_temp_variable = { temp_state = 385 }
+		CAL_electoral_modify_popularity = yes
+		if = {
+			limit = {
+				463 = {
+					has_state_flag = alaska_state
+				}
+			}
+			set_temp_variable = { temp_popularity = 1 }
+			set_temp_variable = { temp_party = 2 }
+			set_temp_variable = { temp_state = 463 }
+			CAL_electoral_modify_popularity = yes
+		}
+	}
+}
+
+CAL_law_3_fail = {
+	clr_country_flag = CAL_Fair_Labor_Standards_Act
+}
+
+CAL_law_4_start = {
+	set_country_flag = CAL_National_Electrification_Act
+	#POLITICS: 0 = NO SUPPORT, 1 = LOW SUPPORT, 2 = MED SUPPORT, 3 = HIGH SUPPORT, 4 = TOTAL SUPPORT#
+	set_temp_variable = { CAL_Soc_Support_Var = 3 }
+	set_temp_variable = { CAL_L_Prog_Support_Var = 4 }
+	set_temp_variable = { CAL_Prog_Support_Var = 4 }
+	set_temp_variable = { CAL_Rep_Support_Var = 2 }
+	set_temp_variable = { CAL_Dem_Support_Var = 2 }
+	CAL_Set_Congress_Support = yes
+}
+
+CAL_law_4_effect = {
+	clr_country_flag = CAL_National_Electrification_Act
+	##INSERT EFFECT HERE##
+	788 = {
+		move_up_state_category = yes
+	}
+	929 = {
+		move_up_state_category = yes
+	}
+	931 = {
+		move_up_state_category = yes
+	}
+	custom_effect_tooltip = CAL_National_Electrification_Act_Complete_tt
+	hidden_effect = {
+		set_temp_variable = { temp_popularity = 2 }
+		set_temp_variable = { temp_party = 3 }
+		set_temp_variable = { temp_state = 788 }
+		CAL_electoral_modify_popularity = yes
+		set_temp_variable = { temp_popularity = 2 }
+		set_temp_variable = { temp_party = 3 }
+		set_temp_variable = { temp_state = 929 }
+		CAL_electoral_modify_popularity = yes
+		set_temp_variable = { temp_popularity = 2 }
+		set_temp_variable = { temp_party = 3 }
+		set_temp_variable = { temp_state = 931 }
+		CAL_electoral_modify_popularity = yes
+		set_temp_variable = { temp_popularity = 2 }
+		set_temp_variable = { temp_party = 3 }
+		set_temp_variable = { temp_state = 379 }
+		CAL_electoral_modify_popularity = yes
+		set_temp_variable = { temp_popularity = 2 }
+		set_temp_variable = { temp_party = 3 }
+		set_temp_variable = { temp_state = 387 }
+		CAL_electoral_modify_popularity = yes
+		if = {
+			limit = {
+				463 = {
+					has_state_flag = alaska_state
+				}
+			}
+			set_temp_variable = { temp_popularity = 2 }
+			set_temp_variable = { temp_party = 3 }
+			set_temp_variable = { temp_state = 463 }
+			CAL_electoral_modify_popularity = yes
+		}
+	}
+}
+
+CAL_law_4_fail = {
+	clr_country_flag = CAL_National_Electrification_Act
+}
+
+CAL_law_5_start = {
+	set_country_flag = CAL_FederaL_Highway_and_Infrastructure_Act
+	#POLITICS: 0 = NO SUPPORT, 1 = LOW SUPPORT, 2 = MED SUPPORT, 3 = HIGH SUPPORT, 4 = TOTAL SUPPORT#
+	set_temp_variable = { CAL_Soc_Support_Var = 2 }
+	set_temp_variable = { CAL_L_Prog_Support_Var = 4 }
+	set_temp_variable = { CAL_Prog_Support_Var = 4 }
+	set_temp_variable = { CAL_Rep_Support_Var = 1 }
+	set_temp_variable = { CAL_Dem_Support_Var = 1 }
+	CAL_Set_Congress_Support = yes
+}
+
+CAL_law_5_effect = {
+	clr_country_flag = CAL_FederaL_Highway_and_Infrastructure_Act
+	random_core_state = {
+		add_building_construction = {
+			type = infrastructure
+			level = 1
+			instant_build = yes
+		}	
+	} 
+	random_core_state = {
+		add_building_construction = {
+			type = infrastructure
+			level = 1
+			instant_build = yes
+		}	
+	} 
+	move_up_inf_spending = yes
+	add_timed_idea = {
+		idea = CAL_Infrastructure_Boom
+		days = 180
+	}
+}
+
+CAL_law_5_fail = {
+	clr_country_flag = CAL_FederaL_Highway_and_Infrastructure_Act
+}
+
+CAL_law_6_start = {
+	set_country_flag = CAL_Anti_Merger_Act
+	#POLITICS: 0 = NO SUPPORT, 1 = LOW SUPPORT, 2 = MED SUPPORT, 3 = HIGH SUPPORT, 4 = TOTAL SUPPORT#
+	set_temp_variable = { CAL_Soc_Support_Var = 4 }
+	set_temp_variable = { CAL_L_Prog_Support_Var = 4 }
+	set_temp_variable = { CAL_Prog_Support_Var = 3 }
+	set_temp_variable = { CAL_Rep_Support_Var = 0 }
+	set_temp_variable = { CAL_Dem_Support_Var = 1 }
+	CAL_Set_Congress_Support = yes
+}
+
+CAL_law_6_effect = { #Needs to be done
+	clr_country_flag = CAL_Anti_Merger_Act
+	##INSERT EFFECT HERE##
+}
+
+CAL_law_6_fail = {
+	clr_country_flag = CAL_Anti_Merger_Act
+}
+
+CAL_law_7_start = {
+	set_country_flag = CAL_Revenue_Act
+	#POLITICS: 0 = NO SUPPORT, 1 = LOW SUPPORT, 2 = MED SUPPORT, 3 = HIGH SUPPORT, 4 = TOTAL SUPPORT#
+	set_temp_variable = { CAL_Soc_Support_Var = 2 }
+	set_temp_variable = { CAL_L_Prog_Support_Var = 4 }
+	set_temp_variable = { CAL_Prog_Support_Var = 3 }
+	set_temp_variable = { CAL_Rep_Support_Var = 0 }
+	set_temp_variable = { CAL_Dem_Support_Var = 1 }
+	CAL_Set_Congress_Support = yes
+}
+
+CAL_law_7_effect = { #Needs to be done
+	clr_country_flag = CAL_Revenue_Act
+	##INSERT EFFECT HERE##
+}
+
+CAL_law_7_fail = {
+	clr_country_flag = CAL_Revenue_Act
+}
+
+CAL_law_8_start = {
+	set_country_flag = CAL_Displaced_Persons_And_Refugees_Act
+	#POLITICS: 0 = NO SUPPORT, 1 = LOW SUPPORT, 2 = MED SUPPORT, 3 = HIGH SUPPORT, 4 = TOTAL SUPPORT#
+	set_temp_variable = { CAL_Soc_Support_Var = 2 }
+	set_temp_variable = { CAL_L_Prog_Support_Var = 3 }
+	set_temp_variable = { CAL_Prog_Support_Var = 3 }
+	set_temp_variable = { CAL_Rep_Support_Var = 2 }
+	set_temp_variable = { CAL_Dem_Support_Var = 2 }
+	CAL_Set_Congress_Support = yes
+}
+
+CAL_law_8_effect = {
+	clr_country_flag = CAL_Displaced_Persons_And_Refugees_Act
+	##INSERT EFFECT HERE##
+	if = { limit = { has_idea = CAL_Altered_Refugee_Quotas }
+	swap_ideas = {
+			remove_idea = CAL_Altered_Refugee_Quotas
+			add_idea = CAL_Displaced_Persons_And_Refugees_Act_idea_2
+		}
+	}
+	else = {
+		add_ideas = CAL_Displaced_Persons_And_Refugees_Act_idea
+	}	
+	add_manpower = 100000
+}
+
+CAL_law_8_fail = {
+	clr_country_flag = CAL_Displaced_Persons_And_Refugees_Act
+}
+
+CAL_law_9_start = {
+	set_country_flag = CAL_Lobbying_Act_Flag
+	#POLITICS: 0 = NO SUPPORT, 1 = LOW SUPPORT, 2 = MED SUPPORT, 3 = HIGH SUPPORT, 4 = TOTAL SUPPORT#
+	set_temp_variable = { CAL_Soc_Support_Var = 4 }
+	set_temp_variable = { CAL_L_Prog_Support_Var = 3 }
+	set_temp_variable = { CAL_Prog_Support_Var = 2 }
+	set_temp_variable = { CAL_Rep_Support_Var = 1 }
+	set_temp_variable = { CAL_Dem_Support_Var = 1 }
+	CAL_Set_Congress_Support = yes
+}
+
+CAL_law_9_effect = {
+	clr_country_flag = CAL_Lobbying_Act_Flag
+	add_ideas = CAL_Lobbying_Act
+	add_stability = 0.05
+}
+
+CAL_law_9_fail = {
+	clr_country_flag = CAL_Lobbying_Act_Flag
+}
+
+CAL_law_10_start = {
+	set_country_flag = CAL_War_Profiteering_Investigation_Act
+	#POLITICS: 0 = NO SUPPORT, 1 = LOW SUPPORT, 2 = MED SUPPORT, 3 = HIGH SUPPORT, 4 = TOTAL SUPPORT#
+	set_temp_variable = { CAL_Soc_Support_Var = 2 }
+	set_temp_variable = { CAL_L_Prog_Support_Var = 3 }
+	set_temp_variable = { CAL_Prog_Support_Var = 3 }
+	set_temp_variable = { CAL_Rep_Support_Var = 1 }
+	set_temp_variable = { CAL_Dem_Support_Var = 1 }
+	CAL_Set_Congress_Support = yes
+}
+
+CAL_law_10_effect = {
+	clr_country_flag = CAL_War_Profiteering_Investigation_Act
+	country_event = {
+		id = krg_cal_politics.15
+	}
+	add_stability = 0.05
+	add_timed_idea = {
+		idea = CAL_Market_Disruptions
+		days = 180
+	}
+}
+
+CAL_law_10_fail = {
+	clr_country_flag = CAL_War_Profiteering_Investigation_Act
+}
+
+CAL_law_11_start = {
+	set_country_flag = CAL_Agricultural_Modernization_Act
+	#POLITICS: 0 = NO SUPPORT, 1 = LOW SUPPORT, 2 = MED SUPPORT, 3 = HIGH SUPPORT, 4 = TOTAL SUPPORT#
+	set_temp_variable = { CAL_Soc_Support_Var = 2 }
+	set_temp_variable = { CAL_L_Prog_Support_Var = 3 }
+	set_temp_variable = { CAL_Prog_Support_Var = 3 }
+	set_temp_variable = { CAL_Rep_Support_Var = 1 }
+	set_temp_variable = { CAL_Dem_Support_Var = 3 }
+	CAL_Set_Congress_Support = yes
+}
+
+CAL_law_11_effect = {
+	clr_country_flag = CAL_Agricultural_Modernization_Act
+	##INSERT EFFECT HERE##
+	387 = {
+		add_extra_state_shared_building_slots = 1
+		add_building_construction = {
+			type = industrial_complex
+			level = 1
+			instant_build = yes
+		}
+	}
+	825 = {
+		add_extra_state_shared_building_slots = 1
+		add_building_construction = {
+			type = industrial_complex
+			level = 1
+			instant_build = yes
+		}
+	}
+	385 = {
+		add_extra_state_shared_building_slots = 1
+		add_building_construction = {
+			type = industrial_complex
+			level = 1
+			instant_build = yes
+		}
+	}
+	custom_effect_tooltip = CAL_National_Electrification_Act_Complete_tt
+	hidden_effect = {
+		set_temp_variable = { temp_popularity = 2 }
+		set_temp_variable = { temp_party = 3 }
+		set_temp_variable = { temp_state = 788 }
+		CAL_electoral_modify_popularity = yes
+		set_temp_variable = { temp_popularity = 2 }
+		set_temp_variable = { temp_party = 3 }
+		set_temp_variable = { temp_state = 929 }
+		CAL_electoral_modify_popularity = yes
+		set_temp_variable = { temp_popularity = 2 }
+		set_temp_variable = { temp_party = 3 }
+		set_temp_variable = { temp_state = 931 }
+		CAL_electoral_modify_popularity = yes
+		set_temp_variable = { temp_popularity = 2 }
+		set_temp_variable = { temp_party = 3 }
+		set_temp_variable = { temp_state = 379 }
+		CAL_electoral_modify_popularity = yes
+		set_temp_variable = { temp_popularity = 2 }
+		set_temp_variable = { temp_party = 3 }
+		set_temp_variable = { temp_state = 387 }
+		CAL_electoral_modify_popularity = yes
+		if = {
+			limit = {
+				463 = {
+					has_state_flag = alaska_state
+				}
+			}
+			set_temp_variable = { temp_popularity = 2 }
+			set_temp_variable = { temp_party = 3 }
+			set_temp_variable = { temp_state = 463 }
+			CAL_electoral_modify_popularity = yes
+		}
+	}
+}
+
+CAL_law_11_fail = {
+	clr_country_flag = CAL_Agricultural_Modernization_Act
+}
+
+CAL_law_12_start = {
+	set_country_flag = CAL_Housing_and_Residency_Act
+	#POLITICS: 0 = NO SUPPORT, 1 = LOW SUPPORT, 2 = MED SUPPORT, 3 = HIGH SUPPORT, 4 = TOTAL SUPPORT#
+	set_temp_variable = { CAL_Soc_Support_Var = 3 }
+	set_temp_variable = { CAL_L_Prog_Support_Var = 4 }
+	set_temp_variable = { CAL_Prog_Support_Var = 3 }
+	set_temp_variable = { CAL_Rep_Support_Var = 1 }
+	set_temp_variable = { CAL_Dem_Support_Var = 1 }
+	CAL_Set_Congress_Support = yes
+}
+
+CAL_law_12_effect = {
+	clr_country_flag = CAL_Housing_and_Residency_Act
+	random_core_state = {
+		add_building_construction = {
+			type = industrial_complex
+			level = 1
+			instant_build = yes
+		}	
+	} 
+	random_core_state = {
+		add_building_construction = {
+			type = industrial_complex
+			level = 1
+			instant_build = yes
+		}	
+	} 
+	add_stability = 0.05
+	add_manpower = 10000
+}
+
+CAL_law_12_fail = {
+	clr_country_flag = CAL_Housing_and_Residency_Act
+}
+
+CAL_law_13_start = {
+	set_country_flag = CAL_Veterans_Act
+	#POLITICS: 0 = NO SUPPORT, 1 = LOW SUPPORT, 2 = MED SUPPORT, 3 = HIGH SUPPORT, 4 = TOTAL SUPPORT#
+	set_temp_variable = { CAL_Soc_Support_Var = 1 }
+	set_temp_variable = { CAL_L_Prog_Support_Var = 2 }
+	set_temp_variable = { CAL_Prog_Support_Var = 3 }
+	set_temp_variable = { CAL_Rep_Support_Var = 3 }
+	set_temp_variable = { CAL_Dem_Support_Var = 2 }
+	CAL_Set_Congress_Support = yes
+}
+
+CAL_law_13_effect = {
+	clr_country_flag = CAL_Veterans_Act
+	move_up_hc_spending = yes
+	add_war_support = 0.05
+}
+
+CAL_law_13_fail = {
+	clr_country_flag = CAL_Veterans_Act
+}
+
+CAL_law_14_start = {
+	set_country_flag = CAL_Air_Pollution_and_Environmental_Act
+	#POLITICS: 0 = NO SUPPORT, 1 = LOW SUPPORT, 2 = MED SUPPORT, 3 = HIGH SUPPORT, 4 = TOTAL SUPPORT#
+	set_temp_variable = { CAL_Soc_Support_Var = 3 }
+	set_temp_variable = { CAL_L_Prog_Support_Var = 3 }
+	set_temp_variable = { CAL_Prog_Support_Var = 2 }
+	set_temp_variable = { CAL_Rep_Support_Var = 1 }
+	set_temp_variable = { CAL_Dem_Support_Var = 0 }
+	CAL_Set_Congress_Support = yes
+}
+
+CAL_law_14_effect = {
+	clr_country_flag = CAL_Air_Pollution_and_Environmental_Act
+	add_ideas = CAL_Environment_Agency
+	add_stability = 0.05
+}
+
+CAL_law_14_fail = {
+	clr_country_flag = CAL_Air_Pollution_and_Environmental_Act
+}
+
+CAL_law_15_start = {
+	set_country_flag = CAL_Social_Security_Act
+	#POLITICS: 0 = NO SUPPORT, 1 = LOW SUPPORT, 2 = MED SUPPORT, 3 = HIGH SUPPORT, 4 = TOTAL SUPPORT#
+	set_temp_variable = { CAL_Soc_Support_Var = 3 }
+	set_temp_variable = { CAL_L_Prog_Support_Var = 3 }
+	set_temp_variable = { CAL_Prog_Support_Var = 2 }
+	set_temp_variable = { CAL_Rep_Support_Var = 1 }
+	set_temp_variable = { CAL_Dem_Support_Var = 1 }
+	CAL_Set_Congress_Support = yes
+}
+
+CAL_law_15_effect = {
+	clr_country_flag = CAL_Social_Security_Act
+	move_up_service_spending = yes
+}
+
+CAL_law_15_fail = {
+	clr_country_flag = CAL_Social_Security_Act
+}
+
+CAL_law_16_start = {
+	set_country_flag = CAL_Alaska_Statehood_Act
+	#POLITICS: 0 = NO SUPPORT, 1 = LOW SUPPORT, 2 = MED SUPPORT, 3 = HIGH SUPPORT, 4 = TOTAL SUPPORT#
+	set_temp_variable = { CAL_Soc_Support_Var = 2 }
+	set_temp_variable = { CAL_L_Prog_Support_Var = 2 }
+	set_temp_variable = { CAL_Prog_Support_Var = 2 }
+	set_temp_variable = { CAL_Rep_Support_Var = 2 }
+	set_temp_variable = { CAL_Dem_Support_Var = 2 }
+	CAL_Set_Congress_Support = yes
+}
+
+CAL_law_16_effect = {
+	clr_country_flag = CAL_Alaska_Statehood_Act
+	CAL_admit_Alaska = yes
+}
+
+CAL_law_16_fail = {
+	clr_country_flag = CAL_Alaska_Statehood_Act
+}
+
+CAL_law_17_start = {
+	set_country_flag = CAL_Hawaii_Admission_Act
+	#POLITICS: 0 = NO SUPPORT, 1 = LOW SUPPORT, 2 = MED SUPPORT, 3 = HIGH SUPPORT, 4 = TOTAL SUPPORT#
+	set_temp_variable = { CAL_Soc_Support_Var = 2 }
+	set_temp_variable = { CAL_L_Prog_Support_Var = 2 }
+	set_temp_variable = { CAL_Prog_Support_Var = 2 }
+	set_temp_variable = { CAL_Rep_Support_Var = 2 }
+	set_temp_variable = { CAL_Dem_Support_Var = 2 }
+	CAL_Set_Congress_Support = yes
+}
+
+CAL_law_17_effect = {
+	clr_country_flag = CAL_Hawaii_Admission_Act
+	annex_country = {
+		target = HAW
+		transfer_troops = yes
+	}
+	CAL_admit_Hawaii = yes
+}
+
+CAL_law_17_fail = {
+	clr_country_flag = CAL_Hawaii_Admission_Act
+}
+
+CAL_law_18_start = {
+	set_country_flag = CAL_Jefferson_and_South_California_Admission_Act
+	#POLITICS: 0 = NO SUPPORT, 1 = LOW SUPPORT, 2 = MED SUPPORT, 3 = HIGH SUPPORT, 4 = TOTAL SUPPORT#
+	set_temp_variable = { CAL_Soc_Support_Var = 3 }
+	set_temp_variable = { CAL_L_Prog_Support_Var = 2 }
+	set_temp_variable = { CAL_Prog_Support_Var = 2 }
+	set_temp_variable = { CAL_Rep_Support_Var = 3 }
+	set_temp_variable = { CAL_Dem_Support_Var = 3 }
+	CAL_Set_Congress_Support = yes
+}
+
+CAL_law_18_effect = {
+	clr_country_flag = CAL_Jefferson_and_South_California_Admission_Act
+	CAL_split_California = yes
+}
+
+CAL_law_18_fail = {
+	clr_country_flag = CAL_Jefferson_and_South_California_Admission_Act
+}
+
+CAL_law_19_start = {
+	set_country_flag = CAL_The_American_Enemies_Act
+	#POLITICS: 0 = NO SUPPORT, 1 = LOW SUPPORT, 2 = MED SUPPORT, 3 = HIGH SUPPORT, 4 = TOTAL SUPPORT#
+	set_temp_variable = { CAL_Soc_Support_Var = 1 }
+	set_temp_variable = { CAL_L_Prog_Support_Var = 1 }
+	set_temp_variable = { CAL_Prog_Support_Var = 2 }
+	set_temp_variable = { CAL_Rep_Support_Var = 3 }
+	set_temp_variable = { CAL_Dem_Support_Var = 3 }
+	CAL_Set_Congress_Support = yes
+}
+
+CAL_law_19_effect = {
+	clr_country_flag = CAL_The_American_Enemies_Act
+	TEX = {
+		add_opinion_modifier = {
+			target = CAL
+			modifier = large_decrease
+		}
+	}
+	add_ideas = CAL_American_Enemies_Act
+}
+
+CAL_law_19_fail = {
+	clr_country_flag = CAL_The_American_Enemies_Act
+}
+
+CAL_law_20_start = {
+	set_country_flag = CAL_The_Union_Acts
+	#POLITICS: 0 = NO SUPPORT, 1 = LOW SUPPORT, 2 = MED SUPPORT, 3 = HIGH SUPPORT, 4 = TOTAL SUPPORT#
+	set_temp_variable = { CAL_Soc_Support_Var = 1 }
+	set_temp_variable = { CAL_L_Prog_Support_Var = 1 }
+	set_temp_variable = { CAL_Prog_Support_Var = 2 }
+	set_temp_variable = { CAL_Rep_Support_Var = 3 }
+	set_temp_variable = { CAL_Dem_Support_Var = 3 }
+	CAL_Set_Congress_Support = yes
+}
+
+CAL_law_20_effect = {
+	clr_country_flag = CAL_The_Union_Acts
+	move_down_service_spending = yes
+	custom_effect_tooltip = CAL_Law_The_Unions_Act_Complete_tt
+	set_country_flag = CAL_NLRB_Formed
+	hidden_effect = {
+		set_temp_variable = { temp_popularity = 5 }
+		set_temp_variable = { temp_party = 4 }
+		set_temp_variable = { temp_state = 385 }
+		CAL_electoral_modify_popularity = yes
+
+		set_temp_variable = { temp_popularity = 5 }
+		set_temp_variable = { temp_party = 4 }
+		set_temp_variable = { temp_state = 379 }
+		CAL_electoral_modify_popularity = yes
+
+		if = {
+			limit = { 
+				949 = {
+					has_state_flag = south_california
+				}
+			}
+			set_temp_variable = { temp_popularity = 5 }
+			set_temp_variable = { temp_party = 4 }
+			set_temp_variable = { temp_state = 949 }
+			CAL_electoral_modify_popularity = yes
+		}
+
+		set_temp_variable = { temp_popularity = 3 }
+		set_temp_variable = { temp_party = 3 }
+		set_temp_variable = { temp_state = 825 }
+		CAL_electoral_modify_popularity = yes
+		set_temp_variable = { temp_popularity = 2 }
+		set_temp_variable = { temp_party = 3 }
+		set_temp_variable = { temp_state = 386 }
+		CAL_electoral_modify_popularity = yes
+		set_temp_variable = { temp_popularity = 2 }
+		set_temp_variable = { temp_party = 3 }
+		set_temp_variable = { temp_state = 788 }
+		CAL_electoral_modify_popularity = yes
+		if = {
+			limit = {
+				463 = {
+					has_state_flag = alaska_state
+				}
+			}
+			set_temp_variable = { temp_popularity = 2 }
+			set_temp_variable = { temp_party = 3 }
+			set_temp_variable = { temp_state = 463 }
+			CAL_electoral_modify_popularity = yes
+		}
+		set_temp_variable = { temp_popularity = 1 }
+		set_temp_variable = { temp_party = 2 }
+		set_temp_variable = { temp_state = 825 }
+		CAL_electoral_modify_popularity = yes
+		set_temp_variable = { temp_popularity = 1 }
+		set_temp_variable = { temp_party = 2 }
+		set_temp_variable = { temp_state = 386 }
+		CAL_electoral_modify_popularity = yes
+		set_temp_variable = { temp_popularity = 1 }
+		set_temp_variable = { temp_party = 2 }
+		set_temp_variable = { temp_state = 788 }
+		CAL_electoral_modify_popularity = yes
+		if = {
+			limit = {
+				463 = {
+					has_state_flag = alaska_state
+				}
+			}
+			set_temp_variable = { temp_popularity = 1 }
+			set_temp_variable = { temp_party = 2 }
+			set_temp_variable = { temp_state = 463 }
+			CAL_electoral_modify_popularity = yes
+		}
+	}
+}
+
+CAL_law_20_fail = {
+	clr_country_flag = CAL_The_Union_Acts
+}
+
+CAL_law_21_start = {
+	set_country_flag = CAL_Pacific_Agriculture_Act
+	#POLITICS: 0 = NO SUPPORT, 1 = LOW SUPPORT, 2 = MED SUPPORT, 3 = HIGH SUPPORT, 4 = TOTAL SUPPORT#
+	set_temp_variable = { CAL_Soc_Support_Var = 1 }
+	set_temp_variable = { CAL_L_Prog_Support_Var = 1 }
+	set_temp_variable = { CAL_Prog_Support_Var = 2 }
+	set_temp_variable = { CAL_Rep_Support_Var = 3 }
+	set_temp_variable = { CAL_Dem_Support_Var = 2 }
+	CAL_Set_Congress_Support = yes
+}
+
+CAL_law_21_effect = {
+	clr_country_flag = CAL_Pacific_Agriculture_Act
+	950 = {
+		add_extra_state_shared_building_slots = 1
+		add_building_construction = {
+			type = industrial_complex
+			level = 1
+			instant_build = yes
+		}
+	}
+	385 = {
+		add_extra_state_shared_building_slots = 1
+		add_building_construction = {
+			type = industrial_complex
+			level = 1
+			instant_build = yes
+		}
+	}
+	386 = {
+		add_extra_state_shared_building_slots = 1
+		add_building_construction = {
+			type = industrial_complex
+			level = 1
+			instant_build = yes
+		}
+	}
+	custom_effect_tooltip = CAL_Pacific_Agriculture_Act_Complete_tt
+	hidden_effect = {
+		set_temp_variable = { temp_popularity = 2 }
+		set_temp_variable = { temp_party = 4 }
+		set_temp_variable = { temp_state = 788 }
+		CAL_electoral_modify_popularity = yes
+		set_temp_variable = { temp_popularity = 2 }
+		set_temp_variable = { temp_party = 4 }
+		set_temp_variable = { temp_state = 929 }
+		CAL_electoral_modify_popularity = yes
+		set_temp_variable = { temp_popularity = 2 }
+		set_temp_variable = { temp_party = 4 }
+		set_temp_variable = { temp_state = 931 }
+		CAL_electoral_modify_popularity = yes
+		set_temp_variable = { temp_popularity = 2 }
+		set_temp_variable = { temp_party = 4 }
+		set_temp_variable = { temp_state = 379 }
+		CAL_electoral_modify_popularity = yes
+		set_temp_variable = { temp_popularity = 2 }
+		set_temp_variable = { temp_party = 4 }
+		set_temp_variable = { temp_state = 387 }
+		CAL_electoral_modify_popularity = yes
+		if = {
+			limit = {
+				463 = {
+					has_state_flag = alaska_state
+				}
+			}
+			set_temp_variable = { temp_popularity = 2 }
+			set_temp_variable = { temp_party = 4 }
+			set_temp_variable = { temp_state = 463 }
+			CAL_electoral_modify_popularity = yes
+		}
+	}
+}
+
+CAL_law_21_fail = {
+	clr_country_flag = CAL_Pacific_Agriculture_Act
+}
+
+CAL_law_22_start = {
+	set_country_flag = CAL_McCarran_Internal_Security_Act
+	#POLITICS: 0 = NO SUPPORT, 1 = LOW SUPPORT, 2 = MED SUPPORT, 3 = HIGH SUPPORT, 4 = TOTAL SUPPORT#
+	set_temp_variable = { CAL_Soc_Support_Var = 1 }
+	set_temp_variable = { CAL_L_Prog_Support_Var = 1 }
+	set_temp_variable = { CAL_Prog_Support_Var = 1 }
+	set_temp_variable = { CAL_Rep_Support_Var = 3 }
+	set_temp_variable = { CAL_Dem_Support_Var = 2 }
+	CAL_Set_Congress_Support = yes
+}
+
+CAL_law_22_effect = {
+	clr_country_flag = CAL_McCarran_Internal_Security_Act
+}
+
+CAL_law_22_fail = {
+	clr_country_flag = CAL_McCarran_Internal_Security_Act
+}
+
+CAL_law_23_start = {
+	set_country_flag = CAL_Morse_Domestic_Affairs_Act
+	#POLITICS: 0 = NO SUPPORT, 1 = LOW SUPPORT, 2 = MED SUPPORT, 3 = HIGH SUPPORT, 4 = TOTAL SUPPORT#
+	set_temp_variable = { CAL_Soc_Support_Var = 1 }
+	set_temp_variable = { CAL_L_Prog_Support_Var = 1 }
+	set_temp_variable = { CAL_Prog_Support_Var = 1 }
+	set_temp_variable = { CAL_Rep_Support_Var = 3 }
+	set_temp_variable = { CAL_Dem_Support_Var = 2 }
+	CAL_Set_Congress_Support = yes
+}
+
+CAL_law_23_effect = {
+	clr_country_flag = CAL_Morse_Domestic_Affairs_Act
+}
+
+CAL_law_23_fail = {
+	clr_country_flag = CAL_Morse_Domestic_Affairs_Act
+}

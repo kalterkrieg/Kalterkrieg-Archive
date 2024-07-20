@@ -1,0 +1,69 @@
+set_up_ARG_rev_array = {
+	#setting little array
+	add_to_array = { ARG_faction_rev_influence = 0.30 } #Nationalists
+	add_to_array = { ARG_faction_rev_influence = 0.40 } #Catholics
+	add_to_array = { ARG_faction_rev_influence = 0.30 } #Militarists
+
+}
+
+## Use:
+## set_temp_variable = { influence_gain = percentile }
+## set_temp_variable = { faction_id = id }
+modify_influence_rev_gui = {
+	add_to_variable = { ARG_faction_rev_influence^faction_id = influence_gain }
+
+	set_temp_variable = { temp_gain = influence_gain }
+	divide_temp_variable = { temp_gain = 2 }
+	if = {
+		limit = {
+			NOT = {
+				check_variable = { faction_id = 0 }
+			}
+		}
+		subtract_from_variable = { ARG_faction_rev_influence^0 = temp_gain }
+	}
+	if = {
+		limit = {
+			NOT = {
+				check_variable = { faction_id = 1 }
+			}
+		}
+		subtract_from_variable = { ARG_faction_rev_influence^1 = temp_gain }
+	}
+	if = {
+		limit = {
+			NOT = {
+				check_variable = { faction_id = 2 }
+			}
+		}
+		subtract_from_variable = { ARG_faction_rev_influence^2 = temp_gain }
+	}
+
+	set_temp_variable = { sum = 0 }
+	for_each_loop = {
+		array = ARG_faction_rev_influence
+		
+		add_to_temp_variable = { sum = v }
+	}
+	if = {
+		limit = {
+			NOT = {
+				check_variable = { sum = 1 }
+			}
+		}
+		set_temp_variable = { one = 1 }
+		subtract_from_temp_variable = { one = sum }
+		add_to_variable = { ARG_faction_rev_influence^2 = one }
+	}
+}
+ARG_initialize_focus_tree = {
+	complete_national_focus = ARG_greatest_tragedy
+	complete_national_focus = ARG_garcia_presidency
+	complete_national_focus = ARG_montevideo_conference
+	complete_national_focus = ARG_finalize_provincial_reorganization
+	complete_national_focus = ARG_fop_trials
+	complete_national_focus = ARG_yriondo_treaty
+
+	set_country_flag = garcia_presidency
+
+}

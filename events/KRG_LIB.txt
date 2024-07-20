@@ -1,0 +1,129 @@
+add_namespace = krg_lib
+add_namespace = krg_liberia_news
+
+country_event = { #Liberian Election May 1st 1951
+	id = krg_lib.1
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_lib.1 FROM = [From.GetName]" }
+	title = krg_lib.1.t
+	desc = krg_lib.1.d
+	immediate = {
+		hidden_effect = {
+			country_event = {
+				id = krg_lib.2 
+				days = 10
+			}
+		}
+	}
+
+	is_triggered_only = yes
+	option = {
+		name = krg_lib.1.a
+		add_political_power = 10
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = 0.05
+		}
+	}
+}
+country_event = { #Accord backed Coup 
+	id = krg_lib.2
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_lib.2 FROM = [From.GetName]" }
+	title = krg_lib.2.t
+	desc = krg_lib.2.d
+	is_triggered_only = yes
+	option = { #Coup succeeds
+		name = krg_lib.2.a
+		ai_chance = {
+			base = 50
+			modifier = {
+				has_game_rule = {
+					rule = LIB_ACCORD_COUP
+					option = LIB_ACCORD_COUP_SUCCSESS
+				}
+				factor = 1000
+			}
+		}
+		add_political_power = 10
+		increase_accord_alignment = yes
+		set_politics = {
+			ruling_party = revolutionary_republican
+		}
+		coal_add_soc_lib = yes
+		add_popularity = {
+			ideology = revolutionary_republican
+			popularity = 0.30
+		}
+		add_popularity = {
+			ideology = social_liberal
+			popularity = 0.12
+		}
+		add_popularity = {
+			ideology = social_conservative
+			popularity = -0.11
+		}
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = -0.28
+		}
+		news_event = {
+			id = krg_liberia_news.1
+		}
+	}
+	option = { #Coup fails
+		name = krg_lib.2.b
+		ai_chance = {
+			base = 50
+			modifier = {
+				has_game_rule = {
+					rule = LIB_ACCORD_COUP
+					option = LIB_ACCORD_COUP_FAIL
+				}
+				factor = 1000
+			}
+		}
+		add_stability = -0.10
+		add_political_power = -10
+		add_popularity = {
+			ideology = revolutionary_republican
+			popularity = -0.10
+		}
+		add_popularity = {
+			ideology = social_liberal
+			popularity = -0.05
+		}
+		news_event = {
+			id = krg_liberia_news.2
+		}
+	}
+}
+
+news_event = { #Coup Succeeds
+	id = krg_liberia_news.1
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event krg_liberia_news.1"
+	}
+	title = krg_liberia_news.1.t
+	desc = krg_liberia_news.1.d
+	major = yes
+	is_triggered_only = yes
+	picture = GFX_ne_LIB_coup
+
+	option = {
+		name = krg_liberia_news.1.a
+	}
+}
+news_event = { #Coup Fails
+	id = krg_liberia_news.2
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event krg_liberia_news.2"
+	}
+	title = krg_liberia_news.2.t
+	desc = krg_liberia_news.2.d
+	major = yes
+	is_triggered_only = yes
+	picture = GFX_ne_LIB_tubman
+
+	option = {
+		name = krg_liberia_news.2.a
+	}
+}

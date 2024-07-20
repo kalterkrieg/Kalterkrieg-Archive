@@ -1,0 +1,827 @@
+add_namespace = krg_easter_egg
+
+country_event = {
+	id = krg_easter_egg.0
+	title = krg_easter_egg.0.t
+	desc = krg_easter_egg.0.t
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_easter_egg.0.a
+	}
+}
+country_event = { #Pazifische Staaten von Amerika
+	id = krg_easter_egg.1
+	title = krg_easter_egg.1.t
+	desc = krg_easter_egg.1.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+    immediate = { 
+        log = "[GetDateText]: [Root.GetName]: EASTER EGG #1 ACTIVATED FROM = [From.GetName]"
+        log = "[GetDateText]: [Root.GetName]: event krg_easter_egg.1 FROM = [From.GetName]"
+    }
+
+	option = {
+		name = krg_easter_egg.1.a
+		set_cosmetic_tag = CAL_german
+		set_politics = {
+			ruling_party = paternal_autocrat
+			elections_allowed = no
+		}
+		create_country_leader = {
+			name = "Alfried Krupp"
+			desc = "POLITICS_ALFRIED_KRUPP_DESC"
+			picture = "gfx/leaders/MAF/Portrait_MAF_Krupp.png"
+			ideology = paternal_autocrat_military_junta
+			traits = {
+				
+			}
+		}
+		set_party_name = { 
+			ideology = paternal_autocrat 
+			name = CAL_easter_egg_pataut 
+			long_name = CAL_easter_egg_pataut_long
+		}
+		load_focus_tree = MAF_Krupp_tree
+	}
+
+	option = {
+		name = krg_easter_egg.1.b
+	}
+}
+country_event = {
+	id = krg_easter_egg.2
+	title = krg_easter_egg.2.t
+	desc = krg_easter_egg.2.t
+
+    immediate = { 
+        log = "[GetDateText]: [Root.GetName]: EASTER EGG #2 ACTIVATED FROM = [From.GetName]"
+        log = "[GetDateText]: [Root.GetName]: event krg_easter_egg.2 FROM = [From.GetName]"
+    }
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_easter_egg.2.a
+		hidden_effect = {
+			102 ={
+				add_core_of = CRO
+			}
+			842 ={
+				add_core_of = CRO
+			}
+			920 ={
+				add_core_of = CRO
+			}
+			82 ={
+				add_core_of = CRO
+			}
+			45 ={
+				add_core_of = CRO
+			}
+			764 ={
+				add_core_of = CRO
+			}
+			if = {
+				limit = {
+					CRO = {
+						exists = no
+					}
+				}
+				DNF = {
+					591 = {
+						transfer_state_to = ITA
+					}
+					every_owned_state = {
+						limit = { is_core_of = CRO }
+						transfer_state_to = CRO
+					}
+				}
+			}
+		}
+		CRO = {
+			hidden_effect = {
+				set_cosmetic_tag = YUG
+				set_politics = {
+					ruling_party = radical_socialist
+				}
+				if = {
+					limit = {
+						radical_socialist < 0.5
+					}
+					add_popularity = {
+						ideology = radical_socialist
+						popularity = 0.5
+					}
+				}
+				set_party_name = {
+					ideology = radical_socialist
+					name = "KPJ"
+					long_name = "Komunistička partija Jugoslavije (Communist Party of Yugoslavia)" 
+				}
+				create_country_leader = {
+					name = "Josip Broz Tito"
+					ideology = radical_socialist_titoism
+					picture = "gfx/leaders/DNF/Portrait_DNF_Josip_Broz.png"
+				}
+				annex_country = {
+					target = SER
+				}
+				set_capital = {
+					state = 107
+				}
+			}
+		}
+	}
+}
+country_event = {
+	id = krg_easter_egg.3
+	title = krg_easter_egg.3.t
+	desc = krg_easter_egg.3.d
+
+    immediate = { 
+        log = "[GetDateText]: [Root.GetName]: EASTER EGG #3 ACTIVATED FROM = [From.GetName]"
+        log = "[GetDateText]: [Root.GetName]: event krg_easter_egg.3 FROM = [From.GetName]"
+    }
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_easter_egg.3.a
+		hidden_effect = {
+			102 ={
+				add_core_of = CRO
+			}
+			842 ={
+				add_core_of = CRO
+			}
+			920 ={
+				add_core_of = CRO
+			}
+			84 = {
+				add_core_of = TRS
+			}
+			76 = {
+				add_core_of = TRS
+			}
+			664 = {
+				add_core_of = TRS
+			}
+			946 = {
+				add_core_of = TRS
+			}
+			
+			if = {
+				limit = {
+					CRO = {
+						exists = no
+					}
+				}
+				DNF = {
+					every_owned_state = {
+						limit = { is_core_of = CRO }
+						transfer_state_to = CRO
+					}
+					CRO = { inherit_technology = DNF }
+				}
+			}
+			if = {
+				limit = {
+					SVK = {
+						exists = no
+					}
+				}
+				DNF = {
+					every_owned_state = {
+						limit = { is_core_of = SVK }
+						transfer_state_to = SVK
+					}
+					SVK = { inherit_technology = DNF }
+				}
+			}
+			if = {
+				limit = {
+					BOM = {
+						exists = no
+					}
+				}
+				DNF = {
+					every_owned_state = {
+						limit = { is_core_of = BOM }
+						transfer_state_to = BOM
+					}
+					BOM = { inherit_technology = DNF }
+				}
+			}
+			if = {
+				limit = {
+					TRS = {
+						exists = no
+					}
+				}
+				DNF = {
+					every_owned_state = {
+						limit = { is_core_of = TRS }
+						transfer_state_to = TRS
+					}
+					TRS = { inherit_technology = DNF }
+				}
+			}
+			if = {
+				limit = {
+					HUN = {
+						exists = no
+					}
+				}
+				DNF = {
+					every_owned_state = {
+						limit = { is_core_of = HUN }
+						transfer_state_to = HUN
+					}
+					HUN = { inherit_technology = DNF }
+				}
+			}
+			if = {
+				limit = {
+					GAL = {
+						exists = no
+					}
+				}
+				DNF = {
+					every_owned_state = {
+						limit = { is_core_of = GAL }
+						transfer_state_to = GAL
+					}
+					GAL = { inherit_technology = DNF }
+				}
+			}
+			if = {
+				limit = {
+					AUS = {
+						exists = no
+					}
+				}
+				DNF = {
+					every_owned_state = {
+						limit = { is_core_of = AUS }
+						transfer_state_to = AUS
+					}
+					AUS = { inherit_technology = DNF }
+				}
+			}
+			
+		}		
+		BOM = {
+			hidden_effect = {
+				set_cosmetic_tag = BOM_republic
+				set_politics = {
+					ruling_party = social_democrat
+					last_election = 1952.3.1
+					elections_allowed = yes
+					election_frequency = 60
+				}
+				if = {
+					limit = {
+						social_democrat < 0.3
+					}
+					add_popularity = {
+						ideology = social_democrat
+						popularity = 0.3
+					}
+					add_popularity = {
+						ideology = radical_socialist
+						popularity = 0.2
+					}
+				coal_add_rad_soc = yes
+				}
+				create_country_leader = {
+					name = "Ludvík Svoboda"
+					ideology = social_democrat_democratic_syndicalism
+					picture = "gfx/leaders/DNF/Portrait_DNF_Ludvik_Svoboda.png"
+					desc = POLITICS_LUDVIK_SVOBODA_DESC
+				}
+				load_oob = DNF_BohLandsturm
+				load_oob = DNF_BohLandsturm_extra
+				add_ideas = {
+					KRG_peoples_democracy
+				}
+			}
+		}	
+		SVK = {
+			hidden_effect = {
+				set_cosmetic_tag = SVK_crownland
+				set_politics = {
+					ruling_party = authoritarian_democrat
+					last_election = 1953.3.1
+					elections_allowed = yes
+					election_frequency = 60
+				}
+				if = {
+					limit = {
+						paternal_autocrat < 0.3
+					}
+					add_popularity = {
+						ideology = authoritarian_democrat
+						popularity = 0.3
+					}
+					add_popularity = {
+						ideology = paternal_autocrat
+						popularity = 0.2
+					}
+				coal_add_nat_pop = yes
+				}
+				create_country_leader = {
+					name = "Rudolf Viest"
+					ideology = authoritarian_democrat_interim_government
+					picture = "gfx/leaders/DNF/Portrait_DNF_Rudolf_Viest.png"
+					desc = POLITICS_RUDOLF_VIEST_DESC
+				}
+				load_oob = DNF_SloLandsturm
+				load_oob = DNF_SloLandsturm_extra
+				
+				add_ideas = {
+					KRG_illiberal_democracy
+				}
+			}
+		}
+		AUS = {
+			hidden_effect = {
+				set_cosmetic_tag = AUS_republic
+				set_politics = {
+					ruling_party = authoritarian_democrat
+					last_election = 1954.1.1
+					elections_allowed = yes
+					election_frequency = 60
+				}
+				create_country_leader = {
+					name = "Leopold Figl"
+					ideology = authoritarian_democrat_interim_government
+					picture = "gfx/leaders/DNF/Portrait_DNF_Leopold_Figl.png"
+					desc = POLITICS_LEOPOLD_FIGL_DESC
+				}
+				if = {
+					limit = {
+						authoritarian_democrat < 0.3
+					}
+					add_popularity = {
+						ideology = authoritarian_democrat
+						popularity = 0.3
+					}
+				coal_add_rev_rep = yes
+				coal_add_soc_con = yes
+				}
+				load_oob = DNF_AusLandsturm
+				declare_war_on = {
+					target = BOM
+					type = civil_war
+				}
+
+				add_ideas = {
+					KRG_illiberal_democracy
+				}
+			}
+		}
+		GAL = {
+			hidden_effect = {
+				set_cosmetic_tag = GAL_third_way
+				set_politics = {
+					ruling_party = social_liberal
+					last_election = 1951.4.1
+					elections_allowed = yes
+					election_frequency = 60
+				}
+				create_country_leader = {
+					name = "Adam Chądzyński"
+					ideology = social_liberal_subtype
+					picture = "gfx/leaders/DNF/Portrait_DNF_Adam_Chadzynski.png"
+					desc = POLITICS_ADAM_CHADZYNSKI_DESC
+				}
+				if = {
+					limit = {
+						social_liberal < 0.4
+					}
+					add_popularity = {
+						ideology = social_liberal
+						popularity = 0.4
+					}
+				}
+				load_oob = DNF_GalLandsturm
+				
+				add_ideas = {
+					KRG_parliamentary_democracy
+				}
+			}
+		}
+		TRS = {
+			hidden_effect = {
+				set_cosmetic_tag = TRS_crownland
+				set_politics = {
+					ruling_party = social_conservative
+					last_election = 1954.9.1
+					elections_allowed = yes
+					election_frequency = 60
+				}
+				create_country_leader = {
+					name = "Nicolae Penescu"
+					ideology = social_conservative_subtype
+					picture = "gfx/leaders/DNF/Portrait_DNF_Nicolae_Penescu.png"
+					desc = POLITICS_NICOLAE_PENESCU_DESC
+				}
+				if = {
+					limit = {
+						social_conservative < 0.4
+					}
+					add_popularity = {
+						ideology = social_conservative
+						popularity = 0.4
+					}
+				}
+				load_oob = DNF_TraLandsturm
+				add_ideas = {
+					KRG_parliamentary_democracy
+				}
+			}
+		}
+		HUN = {
+			hidden_effect = {
+				set_cosmetic_tag = HUN_imperial
+				set_politics = {
+					ruling_party = paternal_autocrat
+					last_election = 1953.8.1
+					elections_allowed = no
+				}
+				if = {
+					limit = {
+						paternal_autocrat < 0.3
+					}
+					add_popularity = {
+						ideology = paternal_autocrat
+						popularity = 0.3
+					}
+					add_popularity = {
+						ideology = national_populist
+						popularity = 0.2
+					}
+				coal_add_nat_pop = yes
+				}
+				create_country_leader = {
+					name = "Pál Maléter"
+					ideology = paternal_autocrat_military_junta
+					picture = "gfx/leaders/DNF/Portrait_DNF_Pal_Maleter.png"
+					desc = POLITICS_PAL_MALETER_DESC
+				} 	
+				load_oob = DNF_HunLandsturm
+				load_oob = DNF_HunLandsturm_extra
+				
+				declare_war_on = {
+					target = SVK
+					type = annex_everything
+				}
+				declare_war_on = {
+					target = TRS
+					type = annex_everything
+				}
+				add_ideas = {
+					KRG_authoritarian_system
+				}
+			}
+		}	
+		CRO = {
+			hidden_effect = {
+				set_cosmetic_tag = DNF
+				set_politics = {
+					ruling_party = radical_socialist
+					last_election = 1951.8.1
+					elections_allowed = yes
+					election_frequency = 60
+				}
+				if = {
+					limit = {
+						radical_socialist < 0.5
+					}
+					add_popularity = {
+						ideology = radical_socialist
+						popularity = 0.5
+					}
+				}
+				set_party_name = {
+					ideology = radical_socialist
+					name = "SDAPD/I(R)"
+					long_name = "Sozialdemokratische Arbeiterpartei Danubien - Radikale (Social Democratic Workers Party of Danubia - Radical Wing)" 
+				}
+				set_party_name = {
+					ideology = authoritarian_socialist
+					name = "KPJ"
+					long_name = "Komunistička partija Jugoslavije (Communist Party of Yugoslavia)" 
+				}
+				set_party_name = {
+					ideology = social_democrat
+					name = "SDAPD/I(H)"
+					long_name = "Sozialdemokratische Arbeiterpartei Danubien - Hauptströmung (Social Democratic Workers Party of Danubia - Mainstream Wing)" 
+				}
+				set_party_name = {
+					ideology = revolutionary_republican
+					name = "Demokratska zajednica"
+					long_name = "Demokratska zajednica - (Democratic Union)" 
+				}
+				set_party_name = {
+					ideology = social_liberal
+					name = "Demokratska zajednica"
+					long_name = "Demokratska zajednica - (Democratic Union)" 
+				}
+				set_party_name = {
+					ideology = market_liberal
+					name = "Demokratska zajednica"
+					long_name = "Demokratska zajednica - (Democratic Union)" 
+				}
+				set_party_name = {
+					ideology = social_conservative
+					name = "Donauvolkspartei/Ilirija(F)"
+					long_name = "Donauvolkspartei/Ilirija - Föderalisten (Danubian People's Party/Illyria - Federalists)" 
+				}
+				set_party_name = {
+					ideology = authoritarian_democrat
+					name = "Donauvolkspartei/Ilirija(H)"
+					long_name = "Donauvolkspartei/Ilirija - Hardliner (Danubian People's Party/Illyria - Hardliners)" 
+				}
+				set_party_name = {
+					ideology = paternal_autocrat
+					name = "Kaisertreu"
+					long_name = "Kaisertreu" 
+				}
+				set_party_name = {
+					ideology = national_populist
+					name = "Ustaše"
+					long_name = "Ustaša - Hrvatski revolucionarni pokret (Ustaša - Croatian Revolutionary Movement)" 
+				}
+				move_up_mobilization = yes
+				add_ideas = {
+					KRG_peoples_democracy
+				}
+				move_up_econ_mobilization = yes
+				move_up_econ_mobilization = yes
+				move_down_military = yes
+				move_down_immigration = yes
+				coal_add_soc_dem = yes
+
+				create_country_leader = {
+					name = "Josip Broz"
+					ideology = radical_socialist_titoism
+					picture = "gfx/leaders/DNF/Portrait_DNF_Josip_Broz.png"
+					desc = POLITICS_JOSIP_BROZ_DESC
+				}
+				declare_war_on = {
+					target = HUN
+					type = civil_war
+				}
+				declare_war_on = {
+					target = AUS
+					type = civil_war
+				}
+				declare_war_on = {
+					target = SVK
+					type = civil_war
+				}
+				declare_war_on = {
+					target = TRS
+					type = civil_war
+				}
+				declare_war_on = {
+					target = GAL
+					type = civil_war
+				}
+				load_oob = DNF_IllLandsturm
+				load_oob = DNF_IllLandsturm_extra
+				annex_country = {
+					target = DNF
+				}
+				create_faction = "Donauföderationspakt"
+				add_to_faction = BOM
+				change_tag_from = ROOT
+			}
+			BOM = {
+				add_to_war = {
+					targeted_alliance = CRO
+					enemy = AUS
+					hostility_reason = asked_to_join
+				}
+			}
+		}
+	}
+}
+
+country_event = { # English BPP meme
+	id = krg_easter_egg.4
+	title = krg_easter_egg.4.t
+	desc = krg_easter_egg.4.t
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_easter_egg.0.a
+		ENG = {
+			retire_character = ENG_edward_viii
+			set_party_name = {
+				ideology = paternal_autocrat
+				long_name = ENG_pataut_political_party_long
+				name = ENG_pataut_political_party
+			}
+			add_popularity = {
+				ideology = paternal_autocrat
+				popularity = 0.35
+			}
+			set_politics = {
+				ruling_party = paternal_autocrat
+				elections_allowed = no
+			}
+			set_cosmetic_tag = ENG_bpp_meme
+			remove_ideas = {
+				ENG_return_of_the_king
+				ENG_legacy_of_the_maximists
+				ENG_lingering_german_occupation
+			}
+			remove_dynamic_modifier = {
+				modifier = ENG_syndicalist_resistance_modifier
+			}
+			remove_all_ministers = yes
+			add_ideas = KRG_bredowist_system
+			load_focus_tree = KRG_Germany_Base
+			set_temp_variable = {
+				temp_level = 4
+			}
+			set_reichspakt_alignment = yes
+		}
+		GER = {
+			ENG = {
+				get_current_government_type = yes
+			}
+			if = {
+				limit = {
+					has_subject_autonomy_feature = yes
+				}
+				set_autonomy = {
+					target = ENG
+					autonomous_state = krg_herrschaftsgebiet
+				}
+			}
+			else = {
+				puppet = ENG
+			}
+			save_event_target_as = on_puppet_master_tag
+			ENG = {
+				standard_on_puppet_effect = yes
+				restore_previous_government_type = yes
+			}
+		}
+
+	}
+}
+
+country_event = { # The Weird Japanese Civil War
+	id = krg_easter_egg.5
+	title = krg_easter_egg.5.t
+	desc = krg_easter_egg.5.t
+
+	fire_only_once = yes
+	is_triggered_only = yes
+
+	option = {
+		name = krg_easter_egg.0.a
+		KOR = {
+			transfer_state = 525
+			transfer_state = 527
+		}
+		IDU = {
+			transfer_state = 531
+			transfer_state = 535
+			transfer_state = 534
+			transfer_state = 530
+			set_politics = {
+				ruling_party = national_populist
+				elections_allowed = no
+			}
+			add_popularity = {
+				ideology = national_populist
+				popularity = 0.5
+			}			
+			IDU_Yukio_Mishima = {
+				promote_character = yes
+			}
+			set_party_name = {
+				ideology = radical_socialist
+				name = JAP_radical_socialist_party
+				long_name = JAP_radical_socialist_party_long
+			}
+			set_party_name = {
+				ideology = authoritarian_socialist
+				name = JAP_authoritarian_socialist_party
+				long_name = JAP_authoritarian_socialist_party_long
+			}
+			set_party_name = {
+				ideology = social_democrat
+				name = JAP_social_democrat_party
+				long_name = JAP_social_democrat_party_long
+			}
+			set_party_name = {
+				ideology = revolutionary_republican
+				name = JAP_revolutionary_republican_party
+				long_name = JAP_revolutionary_republican_party_long
+			}
+			set_party_name = {
+				ideology = social_liberal
+				name = JAP_social_liberal_party
+				long_name =  JAP_social_liberal_party_long
+			}
+			set_party_name = {
+				ideology = market_liberal
+				name = JAP_market_liberal_party
+				long_name = JAP_market_liberal_party_long
+			}
+			set_party_name = {
+				ideology = social_conservative
+				name = JAP_social_conservative_party
+				long_name = JAP_social_conservative_party_long
+			}
+			set_party_name = {
+				ideology = authoritarian_democrat
+				name = JAP_authoritarian_democrat_party
+				long_name = JAP_authoritarian_democrat_party_long
+			}
+			set_party_name = {
+				ideology = paternal_autocrat
+				name = JAP_paternal_autocrat_party
+				long_name = JAP_paternal_autocrat_party_long
+			}
+			set_party_name = {
+				ideology = national_populist
+				name = "Tatenokai"
+				long_name = "Tatenokai (Shield Society)" 
+			}
+			set_cosmetic_tag = IDU_shogunate
+			declare_war_on = {
+				target = JAP
+				type = civil_war
+			}	
+			IDU_Inejiro_Asanuma = {
+				set_nationality = JAP
+			}
+			every_owned_state = {
+				teleport_armies = {
+					limit = {
+						tag = JAP
+					}
+					to_state_array = owned_controlled_states
+				}
+			}
+			load_oob = IDU_shogunate
+			
+			add_ideas = {
+				KRG_fanatical_dictatorship
+				IDU_Heiko_Tenno_Banzai
+				IDU_Samurai
+			}
+			set_temp_variable =  { temp_level = 4 }
+			set_geacps_alignment = yes
+			change_tag_from = ROOT
+		}
+		JAP = {
+			set_politics = {
+				ruling_party = radical_socialist
+				elections_allowed = no
+			}
+			if = {
+				limit = {
+					radical_socialist < 0.5
+				}
+				add_popularity = {
+					ideology = radical_socialist
+					popularity = 0.5
+				}
+			}
+			move_up_mobilization = yes
+			add_ideas = {
+				KRG_peoples_democracy
+			}
+			IDU_Inejiro_Asanuma = {
+				promote_character = radical_socialist_orthodox_syndicalism
+			}
+			set_party_name = {
+				ideology = national_populist
+				name = "Tatenokai"
+				long_name = "Tatenokai (Shield Society)" 
+			}
+			remove_ideas = {
+				JAP_powder_keg_of_revolution
+				JAP_the_peoples_government_association_2
+			}
+			clear_geacps_alignment = yes
+		}
+	}
+}

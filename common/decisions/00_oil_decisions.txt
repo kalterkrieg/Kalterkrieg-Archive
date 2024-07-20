@@ -1,0 +1,43 @@
+fuel_cat = {
+	fuel_mission = {
+		icon = revolt
+		activation = {
+			OR = {
+				has_minor_shortage_fuel_levels = yes
+				has_major_shortage_fuel_levels = yes
+				has_critical_fuel_levels = yes
+			}
+		}
+		cancel_trigger = {
+			AND = {
+				has_minor_shortage_fuel_levels = no
+				has_major_shortage_fuel_levels = no
+				has_critical_fuel_levels = no
+			}
+		}
+		cost = 0
+		is_good = no
+		selectable_mission = yes
+		days_mission_timeout = 120
+		available = {
+			AND = {
+				has_minor_shortage_fuel_levels = no
+				has_major_shortage_fuel_levels = no
+				has_critical_fuel_levels = no
+			}
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete fuel_mission target: [From.GetName]"
+			add_stability = 0.05
+		}
+		cancel_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision cancel fuel_mission target: [From.GetName]"
+			add_stability = 0.05
+		}
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout fuel_mission target: [From.GetName]"
+			add_stability = -0.1
+      		Custom_effect_tooltip = fuel_mission_tt
+		}
+	}
+}

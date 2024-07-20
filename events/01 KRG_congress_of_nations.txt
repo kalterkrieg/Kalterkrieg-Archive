@@ -1,0 +1,20 @@
+add_namespace = krg_congress_of_nations
+
+# Hidden event to simulate influence decay
+country_event = {
+	id = krg_congress_of_nations.1
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_congress_of_nations.1 FROM = [From.GetName]" }
+
+	immediate = {
+		set_temp_variable = { temp_index = global.con_influence_decay_array^0 }
+		set_variable = { global.influence_log^temp_index = 0 }
+		influence_recalc = yes
+		remove_from_array = { global.con_influence_decay_array = temp_index }
+	}
+
+	hidden = yes
+	is_triggered_only = yes
+
+	option = {
+	}
+}

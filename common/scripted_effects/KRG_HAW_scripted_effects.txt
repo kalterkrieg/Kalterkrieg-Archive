@@ -1,0 +1,142 @@
+HAW_Revolution = {
+	remove_ideas = {
+		HAW_Trans_Pacific_Mandate
+		HAW_Underground_Revolution
+	}
+	set_global_flag = HAW_fate_decided
+
+	set_temp_variable = { HAW_temp_mandate_influence = HAW.party_popularity@authoritarian_democrat }
+	add_to_temp_variable = { HAW_temp_mandate_influence = HAW.party_popularity@paternal_autocrat }
+
+	set_temp_variable = { HAW_temp_american_influence = HAW.party_popularity@social_liberal }
+	add_to_temp_variable = { HAW_temp_american_influence = HAW.party_popularity@revolutionary_republican }
+	add_to_temp_variable = { HAW_temp_american_influence = HAW.party_popularity@social_democrat }
+
+	set_temp_variable = { HAW_temp_japanese_influence = HAW.party_popularity@market_liberal }
+	add_to_temp_variable = { HAW_temp_japanese_influence = HAW.party_popularity@national_populist }
+
+	set_temp_variable = { HAW_temp_canadian_influence = HAW.party_popularity@social_conservative }
+
+	set_temp_variable = { HAW_temp_revolutinary_influence = HAW.party_popularity@authoritarian_socialist }
+	add_to_temp_variable = { HAW_temp_revolutinary_influence = HAW.party_popularity@radical_socialist }
+
+	if = {
+		limit = { 
+			check_variable = { HAW_temp_mandate_influence > HAW_temp_american_influence }
+			check_variable = { HAW_temp_mandate_influence > HAW_temp_japanese_influence }
+			check_variable = { HAW_temp_mandate_influence > HAW_temp_canadian_influence }
+			check_variable = { HAW_temp_mandate_influence > HAW_temp_revolutinary_influence }
+		}
+		HAW = { country_event = HAW_outcomes.61 }
+	}
+
+	else_if = {
+		limit = { 
+			check_variable = { HAW_temp_american_influence > HAW_temp_mandate_influence }
+			check_variable = { HAW_temp_american_influence > HAW_temp_japanese_influence }
+			check_variable = { HAW_temp_american_influence > HAW_temp_canadian_influence }
+			check_variable = { HAW_temp_american_influence > HAW_temp_revolutinary_influence }
+		}
+		if = {
+			limit = { 
+				subtract_from_temp_variable = { HAW_temp_american_influence = HAW.party_popularity@social_liberal }
+				check_variable = { HAW.party_popularity@social_liberal > HAW_temp_american_influence }
+			}
+			set_global_flag = HAW_Revolution_AMCHAM
+		}
+		else = {
+			set_global_flag = HAW_Revolution_Americans
+		}
+		CAL = { country_event = HAW_outcomes.11 }
+	}
+	else_if = {
+		limit = { 
+			check_variable = { HAW_temp_japanese_influence > HAW_temp_mandate_influence }
+			check_variable = { HAW_temp_japanese_influence > HAW_temp_american_influence }
+			check_variable = { HAW_temp_japanese_influence > HAW_temp_canadian_influence }
+			check_variable = { HAW_temp_japanese_influence > HAW_temp_revolutinary_influence }
+		}
+		if = {
+			limit = { 
+				check_variable = { HAW.party_popularity@market_liberal > HAW.party_popularity@national_populist }
+			}
+			set_global_flag = HAW_Revolution_Nikko-sho
+		}
+		else = {
+			set_global_flag = HAW_Revolution_Koedan
+		}
+		JAP = { country_event = HAW_outcomes.41 }
+	}
+
+	else_if = {
+		limit = { 
+			check_variable = { HAW_temp_canadian_influence > HAW_temp_mandate_influence }
+			check_variable = { HAW_temp_canadian_influence > HAW_temp_american_influence }
+			check_variable = { HAW_temp_canadian_influence > HAW_temp_japanese_influence }
+			check_variable = { HAW_temp_canadian_influence > HAW_temp_revolutinary_influence }
+		}
+		set_global_flag = HAW_Revolution_BCH
+		CAN = { country_event = HAW_outcomes.31 }
+	}
+
+	else = {
+		set_global_flag = HAW_Revolution_Socialists
+		HAW = { country_event = HAW_outcomes.51 }
+	}
+}
+
+HAW_Referendum = {
+	remove_ideas = {
+		HAW_Trans_Pacific_Mandate
+		HAW_Underground_Revolution
+	}
+	set_global_flag = HAW_fate_decided
+
+	set_temp_variable = { HAW_temp_mandate_influence = HAW.party_popularity@authoritarian_democrat }
+	add_to_temp_variable = { HAW_temp_mandate_influence = HAW.party_popularity@paternal_autocrat }
+
+	set_temp_variable = { HAW_temp_american_influence = HAW.party_popularity@social_liberal }
+	add_to_temp_variable = { HAW_temp_american_influence = HAW.party_popularity@revolutionary_republican }
+	add_to_temp_variable = { HAW_temp_american_influence = HAW.party_popularity@social_democrat }
+
+	set_temp_variable = { HAW_temp_japanese_influence = HAW.party_popularity@market_liberal }
+	add_to_temp_variable = { HAW_temp_japanese_influence = HAW.party_popularity@national_populist }
+
+	set_temp_variable = { HAW_temp_canadian_influence = HAW.party_popularity@social_conservative }
+
+
+	if = {
+		limit = { 
+			check_variable = { HAW_temp_mandate_influence > HAW_temp_american_influence }
+			check_variable = { HAW_temp_mandate_influence > HAW_temp_japanese_influence }
+			check_variable = { HAW_temp_mandate_influence > HAW_temp_canadian_influence }
+		}
+		set_global_flag = HAW_Referendum_Victory
+		HAW = { country_event = HAW_outcomes.61 }
+	}
+
+	else_if = {
+		limit = { 
+			check_variable = { HAW_temp_american_influence > HAW_temp_mandate_influence }
+			check_variable = { HAW_temp_american_influence > HAW_temp_japanese_influence }
+			check_variable = { HAW_temp_american_influence > HAW_temp_canadian_influence }
+		}
+		set_global_flag = HAW_Referendum_Victory
+		CAL = { country_event = HAW_outcomes.11 }
+	}
+	else_if = {
+		limit = { 
+			check_variable = { HAW_temp_japanese_influence > HAW_temp_mandate_influence }
+			check_variable = { HAW_temp_japanese_influence > HAW_temp_american_influence }
+			check_variable = { HAW_temp_japanese_influence > HAW_temp_canadian_influence }
+		}
+		set_global_flag = HAW_Referendum_Victory
+		JAP = { country_event = HAW_outcomes.21 }
+	}
+
+	else = {
+		set_global_flag = HAW_Referendum_Victory
+		CAN = { country_event = HAW_outcomes.31 }
+	}
+
+}

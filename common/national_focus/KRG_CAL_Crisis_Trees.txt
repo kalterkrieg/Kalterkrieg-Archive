@@ -1,0 +1,502 @@
+#!gfx:interface/Kalterkrieg/KRG_goals.gfx
+###ALASKA###
+shared_focus = {
+	id = CAL_The_North_Returns
+	icon = GFX_CAL_northern_return
+	x = 4
+	y = 6
+	cost = 3
+
+	ai_will_do = {
+		base = 200
+	}
+
+	#allow_branch = {
+	#		has_country_flag = CAL_Alaska_Returned_flag
+	#}
+	available = {
+		CAL = {
+			owns_state = 463
+		}
+	}
+	available_if_capitulated = yes
+
+	completion_reward = {
+		add_stability = 0.05	
+	}
+}
+shared_focus = {
+	id = CAL_Kickstart_the_Alaskan_Economy
+	icon = GFX_CAN_alaskan_railway
+	x = -1
+	y = 1
+	cost = 3
+
+	ai_will_do = {
+		base = 125
+	}
+
+	relative_position_id = CAL_The_North_Returns
+	prerequisite = { focus = CAL_The_North_Returns }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		463 = {
+			add_extra_state_shared_building_slots = 3
+			add_building_construction = {
+				type = industrial_complex
+				level = 3
+				instant_build = yes
+			}
+		}
+		random_owned_state = {
+			remove_building = {
+				type = industrial_complex
+				level = 1
+			}
+		}
+		random_owned_state = {
+			remove_building = {
+				type = industrial_complex
+				level = 1
+			}
+		}
+		random_owned_state = {
+			remove_building = {
+				type = industrial_complex
+				level = 1
+			}
+		}
+	}
+}
+shared_focus = {
+	id = CAL_The_Question_Of_Canadian_Alaskans
+	icon = GFX_CAN_psaalliance
+	x = 1
+	y = 1
+	cost = 3
+
+	ai_will_do = {
+		base = 125
+	}
+
+	relative_position_id = CAL_The_North_Returns
+	prerequisite = { focus = CAL_The_North_Returns }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		add_war_support = -0.02
+		add_political_power = 50
+		463 = {
+			remove_core_of = CAN
+		}
+	}
+}
+shared_focus = {
+	id = CAL_The_Alaska_Statehood_Act
+	icon = GFX_CAL_alaskan_question
+	x = 0
+	y = 2
+	cost = 3
+
+	ai_will_do = {
+		base = 125
+	}
+
+	relative_position_id = CAL_The_North_Returns
+	prerequisite = { focus = CAL_Kickstart_the_Alaskan_Economy }
+	prerequisite = { focus = CAL_The_Question_Of_Canadian_Alaskans }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		unlock_decision_tooltip = CAL_Law_Alaska_Statehood_Act_Start
+		custom_effect_tooltip = CAL_Bill_Focus_Tree_tt
+		custom_effect_tooltip = CAL_Alaska_Statehood_Gained_tt
+	}
+}
+###HAWAII###
+shared_focus = {
+	id = CAL_The_Pearl_In_Our_Crown
+	icon = GFX_CAL_Pearl_in_Our_Crown
+	x = 8
+	y = 6
+	cost = 3
+
+	ai_will_do = {
+		base = 125
+	}
+
+	#allow_branch = {
+	#		has_country_flag = CAL_Hawaii_Returned_flag
+	#}
+	available = {
+		CAL = {
+			has_subject = HAW
+		}
+	}
+	available_if_capitulated = yes
+
+	completion_reward = {
+		add_stability = 0.05	
+	}
+}
+shared_focus = {
+	id = CAL_Reconnect_Hawaiian_Trade
+	icon = GFX_generic_tourism
+	x = -1
+	y = 1
+	cost = 3
+
+	ai_will_do = {
+		base = 125
+	}
+
+	relative_position_id = CAL_The_Pearl_In_Our_Crown
+	prerequisite = { focus = CAL_The_Pearl_In_Our_Crown }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		add_timed_idea = {
+			idea = HAW_Investor_Confidence
+			days = 180
+		}
+	}
+}
+shared_focus = {
+	id = CAL_The_Nature_Of_Hawaiian_Democracy
+	icon = GFX_CAL_nature_of_hawaiian_democracy
+	x = 1
+	y = 1
+	cost = 3
+
+	ai_will_do = {
+		base = 125
+	}
+
+	relative_position_id = CAL_The_Pearl_In_Our_Crown
+	prerequisite = { focus = CAL_The_Pearl_In_Our_Crown }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = 0.02
+		}
+	}
+}
+shared_focus = {
+	id = CAL_Handle_Remaining_Japanese_Influence
+	icon = GFX_JAP_hawaii_colony
+	x = 0
+	y = 2
+	cost = 3
+
+	ai_will_do = {
+		base = 125
+	}
+
+	relative_position_id = CAL_The_Pearl_In_Our_Crown
+	prerequisite = { focus = CAL_Reconnect_Hawaiian_Trade }
+	prerequisite = { focus = CAL_The_Nature_Of_Hawaiian_Democracy }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		add_stability = -0.03
+		add_political_power = 50
+	}
+}
+shared_focus = {
+	id = CAL_The_Hawaii_Admission_Act
+	icon = GFX_CAL_hawaii_admission
+	x = 0
+	y = 3
+	cost = 3
+
+	ai_will_do = {
+		base = 125
+	}
+
+	relative_position_id = CAL_The_Pearl_In_Our_Crown
+	prerequisite = { focus = CAL_Handle_Remaining_Japanese_Influence }
+	available_if_capitulated = yes
+
+	completion_reward = {
+		unlock_decision_tooltip = CAL_Law_Hawaii_Admission_Act_Start
+		custom_effect_tooltip = CAL_Bill_Focus_Tree_tt
+		custom_effect_tooltip = CAL_Hawaii_Statehood_Gained_tt
+	}
+}
+###ACW###
+shared_focus = {
+	id = CAL_ACW_Start
+	icon = GFX_USA_america_fortress_2
+	x = 6
+	y = 10
+	cost = 3
+
+	ai_will_do = {
+		base = 200
+	}
+
+	available = {
+		has_global_flag = ACW_start
+	}
+	available_if_capitulated = yes
+
+	completion_reward = {
+		
+	}
+}
+shared_focus = { 
+	id = CAL_ACW_Reinstitute_Draft
+	icon = GFX_generic_army_cooperation
+	x = 0
+	y = 2
+	cost = 6
+	
+	prerequisite = {
+		focus = CAL_ACW_Start
+	}
+	ai_will_do = {
+		base = 200
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAL_ACW_reinstitute_draft"
+		move_up_mobilization = yes
+	}
+	relative_position_id = CAL_ACW_Start
+}
+shared_focus = { 
+	id = CAL_ACW_War_Powers_Act
+	icon = GFX_generic_martial_law
+	x = -1
+	y = 1
+	cost = 6
+	prerequisite = {
+		focus = CAL_ACW_Start
+	}
+	ai_will_do = {
+		base = 200
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAL_ACW_war_powers_act"
+		move_down_immigration = yes
+		move_up_taxation = yes
+	}
+	relative_position_id = CAL_ACW_Start
+}
+shared_focus = { 
+	id = CAL_ACW_Joint_American_Command
+	icon = GFX_generic_army_high_command
+	x = -2
+	y = 2
+	cost = 6
+	prerequisite = {
+		focus = CAL_ACW_War_Powers_Act
+	}
+	ai_will_do = {
+		base = 200
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAL_ACW_joint_american_command"
+		add_popularity = {
+			ideology = revolutionary_republican
+			popularity = 0.02
+		}
+		add_ideas = CAL_ACW_Joint_American_Command_idea
+		NEE = {
+			add_ideas = CAL_ACW_Joint_American_Command_idea
+		}
+		GLG = {
+			add_ideas = CAL_ACW_Joint_American_Command_idea
+		}
+	}
+	relative_position_id = CAL_ACW_Start
+}
+shared_focus = { 
+	id = CAL_ACW_Joint_American_Licenses
+	icon = GFX_generic_military_mobilisation
+	x = -1
+	y = 3
+	cost = 6
+	prerequisite = {
+		focus = CAL_ACW_Joint_American_Command
+	}
+	ai_will_do = {
+		base = 200
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAL_ACW_joint_american_licenses"
+		create_production_license = {
+			target = NEE
+			equipment = {
+				type = infantry_equipment_1
+				version = 0
+			}
+			cost_factor = 0
+		}
+		create_production_license = {
+			target = NEE
+			equipment = {
+				type = anti_air_equipment_1
+				version = 0
+			}
+			cost_factor = 0
+		}
+		create_production_license = {
+			target = NEE
+			equipment = {
+				type = anti_tank_equipment_1
+				version = 0
+			}
+			cost_factor = 0
+		}
+		create_production_license = {
+			target = GLG
+			equipment = {
+				type = infantry_equipment_1
+				version = 0
+			}
+			cost_factor = 0
+		}
+		create_production_license = {
+			target = GLG
+			equipment = {
+				type = anti_air_equipment_1
+				version = 0
+			}
+			cost_factor = 0
+		}
+		create_production_license = {
+			target = GLG
+			equipment = {
+				type = anti_tank_equipment_1
+				version = 0
+			}
+			cost_factor = 0
+		}
+	}
+	relative_position_id = CAL_ACW_Start
+}
+shared_focus = { 
+	id = CAL_ACW_Nationalize_Industries
+	icon = GFX_NEE_big_apple
+	x = 1
+	y = 1
+	cost = 6
+	prerequisite = {
+		focus = CAL_ACW_Start
+	}
+	mutually_exclusive = {
+		focus = CAL_ACW_Private_Contracts
+	}
+	ai_will_do = {
+		base = 200
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAL_ACW_nationalize_industries"
+		move_up_econ_mobilization = yes
+		add_political_power = -50
+		add_war_support = 0.05
+	}
+	relative_position_id = CAL_ACW_Start
+}
+shared_focus = { 
+	id = CAL_ACW_Private_Contracts
+	icon = GFX_generic_capitalist_system2
+	x = 3
+	y = 1
+	cost = 6
+	prerequisite = {
+		focus = CAL_ACW_Start
+	}
+	mutually_exclusive = {
+		focus = CAL_ACW_Nationalize_Industries
+	}
+	ai_will_do = {
+		base = 200
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAL_ACW_private_contracts"
+		move_up_econ_mobilization = yes
+		add_political_power = 50
+	}
+	relative_position_id = CAL_ACW_Start
+}
+shared_focus = { 
+	id = CAL_ACW_Form_Freedom_Brigades
+	icon = GFX_generic_army_mass_assault
+	x = 2
+	y = 2
+	cost = 6
+	prerequisite = {
+		focus = CAL_ACW_Nationalize_Industries
+		focus = CAL_ACW_Private_Contracts
+	}
+	mutually_exclusive = {
+		#focus = 
+	}
+	ai_will_do = {
+		base = 200
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAL_ACW_reinstitute_fo_15"
+		add_doctrine_cost_reduction = {
+			cost_reduction = 0.5
+			category = land_doctrine
+		}
+		add_manpower = 100000
+	}
+	relative_position_id = CAL_ACW_Start
+}
+shared_focus = { 
+	id = CAL_ACW_Re-Mobilize_Women_Workers
+	icon = GFX_generic_women
+	x = 1
+	y = 3
+	cost = 6
+	prerequisite = {
+		focus = CAL_ACW_Form_Freedom_Brigades
+	}
+	prerequisite = {
+		focus = CAL_ACW_Reinstitute_Draft
+	}
+	ai_will_do = {
+		base = 200
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAL_ACW_Re-Mobilize_Women_Workers"
+		set_rule = {
+			can_generate_female_aces = yes
+		}
+		add_timed_idea = {
+			idea = RUS_labour_army_1
+			days = 180
+		}
+	}
+	relative_position_id = CAL_ACW_Start
+}
+shared_focus = { 
+	id = CAL_ACW_From_Sea_To_Shining_Sea
+	icon = GFX_USA_domain
+	x = 0
+	y = 4
+	cost = 6
+	prerequisite = {
+		focus = CAL_ACW_Joint_American_Licenses
+	}
+	prerequisite = {
+		focus = CAL_ACW_Re-Mobilize_Women_Workers
+	}
+	mutually_exclusive = {
+		#focus = 
+	}
+	ai_will_do = {
+		base = 200
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAL_ACW_johnny_comes_marching_home"
+		add_war_support = 0.1
+	}
+	relative_position_id = CAL_ACW_Start
+}

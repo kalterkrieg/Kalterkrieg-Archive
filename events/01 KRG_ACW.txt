@@ -1,0 +1,2783 @@
+add_namespace = krg_acw
+add_namespace = krg_acw_lend_lease
+add_namespace = krg_acw_admin
+###FIRST CRISIS###
+country_event = {
+	#General Ridgway proposes Operation Homecoming
+	id = krg_acw.0
+	title = krg_acw.0.t
+	desc = krg_acw.0.d
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_acw.0"
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	trigger = {
+		NOT = {
+			has_global_flag = ACW_start
+		}
+	}
+
+	option = {
+		#It might just work
+		name = krg_acw.0.a
+		custom_effect_tooltip = krg_acw_war_ara_tt
+		hidden_effect = {
+			CAL = {
+				country_event = {
+					id = krg_acw.1
+					days = 3
+				}
+			}
+		}
+		ai_chance = {
+			base = 1
+			modifier = {
+				factor = 0.5
+				#IF TEX's government is social democrat, decrease the chance by half
+				has_government = social_democrat
+			}
+		}
+	}
+	option = {
+		#It's too risky
+		name = krg_acw.0.b
+		ai_chance = {
+			base = 1
+			modifier = {
+				factor = 0.5
+				#IF TEX's government is social conservative or authoritarian democrat, decrease the chance by half
+				OR = {
+					has_government = social_conservative
+					has_government = authoritarian_democrat
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	#An Incident on the Border
+	id = krg_acw.1
+	title = krg_acw.1.t
+	desc = krg_acw.1.d
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_acw.1"
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		#Demand an apology
+		name = krg_acw.1.a
+		custom_effect_tooltip = krg_acw_war_tex_tt
+		hidden_effect = {
+			TEX = {
+				country_event = {
+					id = krg_acw.2
+					days = 5
+				}
+			}
+		}
+		ai_chance = {
+			base = 1
+			modifier = {
+				factor = 10
+				CAL_adlai_stevenson_ii = {
+					is_country_leader = yes
+				}
+			}
+		}
+	}
+	option = {
+		#Confer with ARA
+		name = krg_acw.1.b
+		hidden_effect = {
+			NEE = {
+				country_event = {
+					id = krg_acw.14
+					days = 5
+				}
+			}
+			GLG = {
+				country_event = {
+					id = krg_acw.14
+					days = 5
+				}
+			}
+		}
+		ai_chance = {
+			base = 1
+		}
+	}
+	option = {
+		#Extract Info
+		name = krg_acw.1.c
+		custom_effect_tooltip = krg_acw_war_tex_tt
+		hidden_effect = {
+			random_list = {
+				60 = {
+					country_event = {
+						#The Prisoners keep quiet
+						id = krg_acw.20
+						days = 1
+					}
+				}
+				40 = {
+					country_event = {
+						#The Prisoners Break
+						id = krg_acw.21
+						days = 1
+					}
+				}
+			}
+		}
+		ai_chance = {
+			base = 1
+			modifier = {
+				factor = 10
+				CAL_george_marshall = {
+					is_country_leader = yes
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	#CAL asks for a formal apology
+	id = krg_acw.2
+	title = krg_acw.2.t
+	desc = krg_acw.2.d
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_acw.2"
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		#Why?
+		name = krg_acw.2.a
+		custom_effect_tooltip = krg_acw_war_ara_tt
+		hidden_effect = {
+			CAL = {
+				country_event = {
+					id = krg_acw.3
+					days = 5
+				}
+			}
+		}
+		ai_chance = {
+			base = 1
+			modifier = {
+				factor = 5
+				NOT = {
+					has_government = social_democrat
+				}
+			}
+		}
+	}
+	option = {
+		#Ok
+		name = krg_acw.2.b
+		set_global_flag = ACW_TEX_minor_concessions
+		add_timed_idea = {
+			idea = TEX_minor_concessions
+			days = 365
+		}
+		news_event = {
+			id = worldnews.53
+			days = 1
+		}
+		ai_chance = {
+			base = 1
+			modifier = {
+				factor = 5
+				has_government = social_democrat
+			}
+		}
+	}
+}
+
+country_event = {
+	#TEX refuses to apologize
+	id = krg_acw.3
+	title = krg_acw.3.t
+	desc = krg_acw.3.d
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_acw.3"
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		#Ramp up sanctions
+		name = krg_acw.3.a
+		custom_effect_tooltip = krg_acw_war_tex_tt
+		hidden_effect = {
+			TEX = {
+				country_event = {
+					id = krg_acw.4
+					days = 5
+				}
+			}
+		}
+		ai_chance = {
+			base = 1
+			modifier = {
+				factor = 0
+				CAL_george_marshall = {
+					is_country_leader = yes
+				}
+			}
+		}
+	}
+	option = {
+		#Cancel leave and put troops on high alert
+		name = krg_acw.3.b
+		custom_effect_tooltip = krg_acw_war_tex_will_tt
+		hidden_effect = {
+			TEX = {
+				country_event = {
+					id = krg_acw.12
+					days = 5
+				}
+			}
+		}
+		ai_chance = {
+			base = 1
+		}
+	}
+}
+
+country_event = {
+	#CAL Ramps up sanctions
+	id = krg_acw.4
+	title = krg_acw.4.t
+	desc = krg_acw.4.d
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_acw.4"
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		#Issue our own sanctions
+		name = krg_acw.4.a
+		custom_effect_tooltip = krg_acw_war_ara_tt
+		hidden_effect = {
+			CAL = {
+				country_event = {
+					id = krg_acw.5
+					days = 5
+				}
+			}
+		}
+		ai_chance = {
+			base = 1
+			modifier = {
+				factor = 5
+				NOT = {
+					has_government = social_democrat
+				}
+			}
+		}
+	}
+	option = {
+		#backdown and apologize
+		name = krg_acw.4.b
+		set_global_flag = ACW_TEX_minor_concessions
+		add_timed_idea = {
+			idea = TEX_minor_concessions
+			days = 365
+		}
+		news_event = {
+			id = worldnews.53
+			days = 1
+		}
+		ai_chance = {
+			base = 1
+			modifier = {
+				factor = 5
+				has_government = social_democrat
+			}
+		}
+	}
+}
+
+country_event = {
+	#TEX issues sanctions
+	id = krg_acw.5
+	title = krg_acw.5.t
+	desc = krg_acw.5.d
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_acw.5"
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		#Ask New England to begin a blockade
+		name = krg_acw.5.a
+		custom_effect_tooltip = krg_acw_war_tex_tt
+		hidden_effect = {
+			NEE = {
+				country_event = {
+					id = krg_acw.6
+					days = 5
+				}
+			}
+		}
+		ai_chance = {
+			base = 1
+		}
+	}
+	option = {
+		#Do not escalate 
+		name = krg_acw.5.b
+		TEX = {
+			add_timed_idea = {
+				idea = TEX_mutual_sanctions
+				days = 365
+			}
+		}
+		CAL = {
+			add_timed_idea = {
+				idea = TEX_mutual_sanctions
+				days = 365
+			}
+		}
+		news_event = {
+			id = worldnews.54
+			days = 1
+		}
+		set_global_flag = ACW_no_resolution
+		ai_chance = {
+			base = 1
+		}
+	}
+	option = {
+		#Cancel all leave and put troops on high alert
+		name = krg_acw.5.c
+		custom_effect_tooltip = krg_acw_war_tex_tt
+		hidden_effect = {
+			TEX = {
+				country_event = {
+					id = krg_acw.12
+					days = 5
+				}
+			}
+		}
+		ai_chance = {
+			base = 1
+		}
+	}
+}
+
+country_event = {
+	#CAL asks us to issue a blockade
+	id = krg_acw.6
+	title = krg_acw.6.t
+	desc = krg_acw.6.d
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_acw.6"
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		#Absolutely
+		name = krg_acw.6.a
+		custom_effect_tooltip = krg_acw_war_tex_will_tt
+		hidden_effect = {
+			TEX = {
+				country_event = {
+					id = krg_acw.7
+					days = 5
+				}
+				add_ideas = TEX_blockade
+			}
+			news_event = {
+				id = worldnews.55
+			}
+		}
+		#The AI should never hurt Accord Unity on purpose
+		ai_chance = {
+			base = 100
+		}
+	}
+	option = {
+		#Refuse
+		name = krg_acw.6.b
+		hidden_effect = {
+			CAL = {
+				country_event = {
+					id = krg_acw.10
+					days = 5
+				}
+			}
+		}
+		add_to_variable = {
+			global.accord_unity = -3
+			tooltip = Accord_unity_tooltip
+		}
+		#The AI should never hurt Accord Unity on purpose
+		ai_chance = {
+			base = 0
+		}
+	}
+}
+
+country_event = {
+	#New England Begins a blockade
+	id = krg_acw.7
+	title = krg_acw.7.t
+	desc = krg_acw.7.d
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_acw.7"
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		#Call for a general mobilization
+		name = krg_acw.7.a
+		hidden_effect = {
+			CAL = {
+				country_event = {
+					id = krg_acw.8
+					days = 5
+				}
+			}
+			NEE = {
+				country_event = {
+					id = krg_acw.8
+					days = 5
+				}
+			}
+			GLG = {
+				country_event = {
+					id = krg_acw.8
+					days = 5
+				}
+			}
+		}
+		if = {
+			limit = {
+				has_idea = KRG_volunteer_only
+			}
+			move_up_mobilization = yes
+		}
+		add_war_support = 0.1
+		ai_chance = {
+			base = 1
+		}
+	}
+}
+
+country_event = {
+	#TEX Mobilizes
+	id = krg_acw.8
+	title = krg_acw.8.t
+	desc = krg_acw.8.d
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_acw.8"
+	}
+	immediate = {
+		hidden_effect = {
+			TEX = {
+				country_event = {
+					id = krg_acw.9
+					days = 10
+				}
+			}
+		}
+		set_variable = {
+			global.ACW_demobilization = 0
+		}
+		set_variable = {
+			global.ACW_mobilization = 0
+		}
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+	timeout_days = 8
+	option = {
+		#We must mobilize as well!
+		name = krg_acw.8.a
+		add_to_variable = {
+			global.ACW_mobilization = 1
+		}
+		ai_chance = {
+			base = 1
+		}
+	}
+	option = {
+		#Maintain the blockade
+		name = krg_acw.8.b
+		add_to_variable = {
+			global.ACW_demobilization = 1
+		}
+		ai_chance = {
+			base = 1
+		}
+	}
+}
+
+country_event = {
+	#TEX Mobilizes
+	id = krg_acw.9
+	title = {
+		text = krg_acw.9.t_1
+		trigger = {
+			check_variable = {
+				global.ACW_mobilization > 0
+			}
+		}
+	}
+	title = {
+		text = krg_acw.9.t_2
+		trigger = {
+			check_variable = {
+				global.ACW_demobilization > 0
+			}
+		}
+	}
+	desc = {
+		text = krg_acw.9.d_1
+		trigger = {
+			check_variable = {
+				global.ACW_mobilization > 0
+			}
+		}
+	}
+	desc = {
+		text = krg_acw.9.d_2
+		trigger = {
+			check_variable = {
+				global.ACW_demobilization > 0
+			}
+		}
+	}
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_acw.9"
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		#War it is
+		name = krg_acw.9.a
+		if = {
+			limit = {
+				NOT = {
+					has_global_flag = ACW_start
+				}
+			}
+			3_acw = yes
+		}
+		ai_chance = {
+			base = 50
+			modifier = {
+				factor = 3
+				NOT = {
+					has_government = social_democrat
+				}
+			}
+			modifier = {
+				strength_ratio = {
+					tag = NEE
+					ratio > 1.5
+				}
+				factor = 5
+			}
+			modifier = {
+				strength_ratio = {
+					tag = NEE
+					ratio > 2
+				}
+				factor = 5
+			}
+			modifier = {
+				has_game_rule = {
+					rule = KRG_3ACW_ALLOWED
+					option = KRG_3ACW_GUARANTEED
+				}
+				factor = 1000
+			}
+		}
+	}
+	option = {
+		#We must back down
+		name = krg_acw.9.b
+		382 = {
+			add_building_construction = {
+				type = bunker
+				level = -1
+				instant_build = yes
+				province = {
+					all_provinces = yes
+					limit_to_border = yes
+				}
+			}
+		}
+		381 = {
+			add_building_construction = {
+				type = bunker
+				level = -1
+				instant_build = yes
+				province = {
+					all_provinces = yes
+					limit_to_border = yes
+				}
+			}
+		}
+		add_ideas = TEX_reparations
+		CAL = {
+			add_ideas = TEX_reparations_received
+		}
+		hidden_effect = {
+			news_event = {
+				id = worldnews.56
+			}
+			set_global_flag = ACW_TEX_major_concessions
+		}
+		ai_chance = {
+			base = 50
+			modifier = {
+				has_game_rule = {
+					rule = KRG_3ACW_ALLOWED
+					option = KRG_3ACW_BLOCKED
+				}
+				factor = 1000
+			}
+		}
+	}
+}
+
+country_event = {
+	#New England Refuses to Issue a Blockade
+	id = krg_acw.10
+	title = krg_acw.10.t
+	desc = krg_acw.10.d
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_acw.10"
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		#Fair enough, ask TEX for an apology one final time
+		name = krg_acw.10.a
+		hidden_effect = {
+			TEX = {
+				country_event = {
+					id = krg_acw.11
+					days = 5
+				}
+			}
+		}
+		ai_chance = {
+			base = 1
+		}
+	}
+}
+
+country_event = {
+	#CAL Asks for an apology
+	id = krg_acw.11
+	title = krg_acw.11.t
+	desc = krg_acw.11.d
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_acw.11"
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		#Fine
+		name = krg_acw.11.a
+		set_global_flag = ACW_TEX_minor_concessions
+		add_timed_idea = {
+			idea = TEX_minor_concessions
+			days = 365
+		}
+		hidden_effect = {
+			news_event = {
+				id = worldnews.53
+				days = 1
+			}
+		}
+		ai_chance = {
+			base = 1
+		}
+	}
+	option = {
+		#No Way
+		name = krg_acw.11.b
+		hidden_effect = {
+			news_event = {
+				id = worldnews.54
+			}
+		}
+		set_global_flag = ACW_no_resolution
+		ai_chance = {
+			base = 1
+			modifier = {
+				factor = 5
+				NOT = {
+					has_government = social_democrat
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	#CAL Puts troops on high alert
+	id = krg_acw.12
+	title = krg_acw.12.t
+	desc = krg_acw.12.d
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_acw.12"
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		#backdown and apologize
+		name = krg_acw.12.a
+		set_global_flag = ACW_TEX_minor_concessions
+		add_timed_idea = {
+			idea = TEX_minor_concessions
+			days = 365
+		}
+		news_event = {
+			id = worldnews.53
+			days = 1
+		}
+		ai_chance = {
+			base = 1
+		}
+	}
+	option = {
+		#Respond in Kind
+		name = krg_acw.12.b
+		hidden_effect = {
+			CAL = {
+				country_event = {
+					id = krg_acw.13
+					days = 5
+				}
+			}
+		}
+		if = {
+			limit = {
+				has_idea = KRG_volunteer_only
+			}
+			move_up_mobilization = yes
+		}
+		add_war_support = 0.1
+		ai_chance = {
+			base = 1
+		}
+	}
+}
+
+country_event = {
+	#TEX mobilises 
+	id = krg_acw.13
+	title = krg_acw.13.t
+	desc = krg_acw.13.d
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_acw.13"
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		#We must confer with our NATO allies
+		name = krg_acw.13.a
+		hidden_effect = {
+			NEE = {
+				country_event = {
+					id = krg_acw.14
+					days = 5
+				}
+			}
+			GLG = {
+				country_event = {
+					id = krg_acw.14
+					days = 5
+				}
+			}
+		}
+		ai_chance = {
+			base = 1
+		}
+	}
+}
+
+country_event = {
+	#CAL asks for an immediate conference 
+	id = krg_acw.14
+	title = krg_acw.14.t
+	desc = krg_acw.14.d
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_acw.14"
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		#We must support our ally
+		set_global_flag = ACW_ARA_Detroit_Conference
+		name = krg_acw.14.a
+		#news_event = {
+		#	id = worldnews.65
+		#	days = 1
+		#}
+		hidden_effect = {
+			CAL = {
+				country_event = {
+					id = krg_acw.15
+					days = 5
+				}
+			}
+			NEE = {
+				country_event = {
+					id = krg_acw.15
+					days = 5
+				}
+			}
+			GLG = {
+				country_event = {
+					id = krg_acw.15
+					days = 5
+				}
+			}
+		}
+		ai_chance = {
+			base = 1
+		}
+	}
+}
+
+country_event = {
+	#Detroit Conference begins 
+	id = krg_acw.15
+	title = krg_acw.15.t
+	desc = krg_acw.15.d
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_acw.15"
+	}
+	immediate = {
+		hidden_effect = {
+			CAL = {
+				country_event = {
+					id = krg_acw.16
+					days = 10
+				}
+			}
+			set_variable = {
+				global.Detroit_vote = 0
+			}
+		}
+	}
+	timeout_days = 8
+	option = {
+		#We must demand consessions
+		name = krg_acw.15.a
+		add_to_variable = {
+			global.Detroit_vote = 1
+		}
+		ai_chance = {
+			base = 1
+		}
+	}
+	option = {
+		#We must not escalate
+		name = krg_acw.15.b
+		ai_chance = {
+			base = 1
+		}
+	}
+}
+
+country_event = {
+	#Hidden conference calc
+	id = krg_acw.16
+	title = krg_acw.16.t
+	desc = krg_acw.16.d
+	is_triggered_only = yes
+	fire_only_once = yes
+	hidden = yes
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_acw.16"
+	}
+	immediate = {
+		hidden_effect = {
+			#if = {
+			#	limit = {
+			#		check_variable = {global.Detroit_vote > 2}
+			#	}
+			CAL = {
+				country_event = {
+					id = krg_acw.17
+					days = 5
+				}
+			}
+			NEE = {
+				country_event = {
+					id = krg_acw.17
+					days = 5
+				}
+			}
+			GLG = {
+				country_event = {
+					id = krg_acw.17
+					days = 5
+				}
+			}
+			#}
+			#else = {
+			#	CAL = {
+			#		country_event = {
+			#			id = krg_acw.x
+			#			days = 5
+			#		}
+			#	}
+			#	NEE = {
+			#		country_event = {
+			#			id = krg_acw.x
+			#			days = 5
+			#		}
+			#	}
+			#	GLG = {
+			#		country_event = {
+			#			id = krg_acw.x
+			#			days = 5
+			#		}
+			#	}
+			#}
+		}
+	}
+}
+
+country_event = {
+	#ARA votes to demand further concessions
+	id = krg_acw.17
+	title = krg_acw.17.t
+	desc = krg_acw.17.d
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_acw.17"
+	}
+	option = {
+		#We must confer with our NATO allies
+		name = krg_acw.17.a
+		hidden_effect = {
+			TEX = {
+				country_event = {
+					id = krg_acw.18
+					days = 5
+				}
+			}
+		}
+		ai_chance = {
+			base = 1
+		}
+	}
+}
+
+country_event = {
+	#ARA demands further concessions
+	id = krg_acw.18
+	title = krg_acw.18.t
+	desc = krg_acw.18.d
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_acw.18"
+	}
+	option = {
+		#We must surrounded, we must concede
+		name = krg_acw.18.a
+		382 = {
+			add_building_construction = {
+				type = bunker
+				level = -1
+				instant_build = yes
+				province = {
+					all_provinces = yes
+					limit_to_border = yes
+				}
+			}
+		}
+		381 = {
+			add_building_construction = {
+				type = bunker
+				level = -1
+				instant_build = yes
+				province = {
+					all_provinces = yes
+					limit_to_border = yes
+				}
+			}
+		}
+		add_ideas = TEX_reparations
+		CAL = {
+			add_ideas = TEX_reparations_received
+		}
+		hidden_effect = {
+			news_event = {
+				id = worldnews.56
+			}
+			set_global_flag = ACW_TEX_major_concessions
+		}
+		ai_chance = {
+			base = 50
+			modifier = {
+				has_game_rule = {
+					rule = KRG_3ACW_ALLOWED
+					option = KRG_3ACW_BLOCKED
+				}
+				factor = 1000
+			}
+		}
+	}
+	option = {
+		#Mobilise All troops and call up the reserves. They will back down
+		name = krg_acw.18.b
+		hidden_effect = {
+			CAL = {
+				country_event = {
+					id = krg_acw.19
+					days = 5
+				}
+			}
+			#ACW: Implement a ARA voting system. (not for 0.1)
+			#NEE = {
+			#	country_event = {
+			#		id = krg_acw.19
+			#		days = 5
+			#	}
+			#}
+			#GLG = {
+			#	country_event = {
+			#		id = krg_acw.19
+			#		days = 5
+			#	}
+			#}
+		}
+		ai_chance = {
+			base = 50
+			modifier = {
+				has_game_rule = {
+					rule = KRG_3ACW_ALLOWED
+					option = KRG_3ACW_GUARANTEED
+				}
+				factor = 1000
+			}
+		}
+	}
+}
+
+country_event = {
+	#TEX ramps up tension 
+	id = krg_acw.19
+	title = krg_acw.19.t
+	desc = krg_acw.19.d
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_acw.19"
+	}
+	option = {
+		#Continue mobilization, we must be patient.
+		name = krg_acw.19.a
+		TEX = {
+			country_event = krg_acw.36
+		}
+		ai_chance = {
+			base = 75
+			modifier = {
+				has_game_rule = {
+					rule = KRG_3ACW_ALLOWED
+					option = KRG_3ACW_GUARANTEED
+				}
+				factor = 1000
+			}
+		}
+	}
+	option = {
+		#Ask for an apology and minor reparations.
+		name = krg_acw.19.b
+		TEX = {
+			country_event = krg_acw.37
+		}
+		ai_chance = {
+			base = 25
+			modifier = {
+				has_game_rule = {
+					rule = KRG_3ACW_ALLOWED
+					option = KRG_3ACW_BLOCKED
+				}
+				factor = 1000
+			}
+		}
+	}
+	option = {
+		#OK
+		name = krg_acw.19.c
+		ai_chance = {
+			base = 0
+		}
+		trigger = {
+			NOT = {
+				tag = CAL
+			}
+		}
+	}
+}
+
+country_event = {
+	#The Prisoners Break
+	id = krg_acw.20
+	title = krg_acw.20.t
+	desc = krg_acw.20.d
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_acw.20"
+	}
+	option = {
+		#Excellent
+		name = krg_acw.20.a
+		hidden_effect = {
+			TEX = {
+				country_event = {
+					id = krg_acw.22
+					days = 3
+				}
+			}
+		}
+		ai_chance = {
+			base = 1
+		}
+	}
+}
+
+country_event = {
+	#The Prisoners keep quiet
+	id = krg_acw.21
+	title = krg_acw.21.t
+	desc = krg_acw.21.d
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_acw.21"
+	}
+	option = {
+		#Use...unconventional methods
+		name = krg_acw.21.a
+		hidden_effect = {
+			country_event = {
+				id = krg_acw.20
+				days = 1
+			}
+		}
+		ai_chance = {
+			base = 1
+		}
+	}
+	option = {
+		#Keep them under arrest
+		name = krg_acw.21.b
+		ai_chance = {
+			base = 0
+		}
+	}
+	option = {
+		#Try and turn one of them
+		name = krg_acw.21.c
+		hidden_effect = {
+			country_event = {
+				id = krg_acw.24
+				days = 5
+			}
+		}
+		ai_chance = {
+			base = 1
+		}
+	}
+}
+
+country_event = {
+	#Reports of Torture
+	id = krg_acw.22
+	title = krg_acw.22.t
+	desc = krg_acw.22.d
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_acw.22"
+	}
+	option = {
+		#We must Accuse them!
+		name = krg_acw.22.a
+		hidden_effect = {
+			CAL = {
+				country_event = {
+					id = krg_acw.23
+					days = 1
+				}
+			}
+		}
+		ai_chance = {
+			base = 1
+		}
+	}
+	option = {
+		#We cannot risk acknowledging the raid took place
+		name = krg_acw.22.b
+		ai_chance = {
+			base = 1
+		}
+	}
+}
+
+country_event = {
+	#[TEX.GetNameDef] accuses us of torture!
+	id = krg_acw.23
+	title = krg_acw.23.t
+	desc = krg_acw.23.d
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_acw.23"
+	}
+	option = {
+		#They violated our borders! They should apologize!
+		name = krg_acw.23.a
+		hidden_effect = {
+			TEX = {
+				country_event = {
+					id = krg_acw.2
+					days = 5
+				}
+			}
+		}
+		ai_chance = {
+			base = 1
+		}
+	}
+}
+
+country_event = {
+	#An Officer Turns!
+	id = krg_acw.24
+	title = krg_acw.24.t
+	desc = krg_acw.24.d
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_acw.24"
+	}
+	option = {
+		#We must find a way for the Union to "rescue him"
+		name = krg_acw.24.a
+		hidden_effect = {
+			#Just a temporary thing
+			TEX = {
+				country_event = {
+					id = krg_acw.25
+					days = 4
+				}
+			}
+		}
+		ai_chance = {
+			base = 1
+		}
+	}
+}
+
+country_event = {
+	#A Rescue plan!
+	id = krg_acw.25
+	title = krg_acw.25.t
+	desc = krg_acw.25.d
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_acw.25"
+	}
+	option = {
+		#It's a trap!
+		name = krg_acw.25.a
+	}
+	option = {
+		#Attempt the Rescue.
+		name = krg_acw.25.b
+		country_event = {
+			id = krg_acw.26
+			days = 3
+		}
+		hidden_effect = {
+			CAL = {
+				country_event = {
+					id = krg_acw.27
+					days = 3
+				}
+			}
+		}
+		ai_chance = {
+			base = 1
+		}
+	}
+}
+
+country_event = {
+	#Prisoners Recovered
+	id = krg_acw.26
+	title = krg_acw.26.t
+	desc = krg_acw.26.d
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_acw.26"
+	}
+	option = {
+		#Excellent!
+		name = krg_acw.26.a
+		ai_chance = {
+			base = 1
+		}
+	}
+}
+
+country_event = {
+	#Spy Successfully installed
+	id = krg_acw.27
+	title = krg_acw.27.t
+	desc = krg_acw.27.d
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_acw.27"
+	}
+	option = {
+		#Excellent!
+		name = krg_acw.27.a
+		hidden_effect = {
+			TEX = {
+				country_event = {
+					id = krg_acw.30
+					days = 1
+				}
+			}
+		}
+		ai_chance = {
+			base = 1
+		}
+	}
+}
+
+country_event = {
+	#Spy reveals himself
+	id = krg_acw.28
+	title = krg_acw.28.t
+	desc = krg_acw.28.d
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_acw.28"
+	}
+	option = {
+		#I Knew It!
+		name = krg_acw.28.a
+	}
+}
+
+country_event = {
+	#Our spy is a double agent!
+	id = krg_acw.29
+	title = krg_acw.29.t
+	desc = krg_acw.29.d
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_acw.29"
+	}
+	option = {
+		#Blast!
+		name = krg_acw.29.a
+		ai_chance = {
+			base = 1
+		}
+	}
+}
+
+country_event = {
+	#HIDDEN: Spy reveals himself
+	id = krg_acw.30
+	title = krg_acw.30.t
+	desc = krg_acw.30.d
+	is_triggered_only = yes
+	fire_only_once = yes
+	hidden = yes
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_acw.30"
+	}
+	option = {
+		#Blast!
+		name = krg_acw.30.a
+		hidden_effect = {
+			random_list = {
+				70 = {
+					#nothing happens
+				}
+				30 = {
+					TEX = {
+						country_event = {
+							id = krg_acw.28
+							days = 25
+						}
+					}
+				}
+			}
+		}
+		ai_chance = {
+			base = 1
+		}
+	}
+}
+
+country_event = {
+	#HIDDEN: Our spy is a double agent!
+	id = krg_acw.31
+	title = krg_acw.31.t
+	desc = krg_acw.31.d
+	is_triggered_only = yes
+	fire_only_once = yes
+	hidden = yes
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_acw.31"
+	}
+	option = {
+		#Blast!
+		name = krg_acw.31.a
+		hidden_effect = {
+			random_list = {
+				70 = {
+					country_event = {
+						id = krg_acw.31
+						days = 365
+					}
+				}
+				30 = {
+					CAL = {
+						country_event = {
+							id = krg_acw.29
+							days = 25
+						}
+					}
+				}
+			}
+		}
+		ai_chance = {
+			base = 1
+		}
+	}
+}
+
+country_event = {
+	#ARA asks again for an apology
+	id = krg_acw.32
+	title = krg_acw.32.t
+	desc = krg_acw.32.d
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_acw.32"
+	}
+	option = {
+		#Refuse, they are bluffing
+		name = krg_acw.32.a
+		hidden_effect = {
+			CAL = {
+				if = {
+					limit = {
+						is_ai = yes
+					}
+					country_event = {
+						id = krg_acw.19
+						days = 5
+					}
+				}
+				else_if = {
+					limit = {
+						OR = {
+							CAL = {
+								is_ai = no
+							}
+							AND = {
+								CAL = {
+									is_ai = yes
+								}
+								NEE = {
+									is_ai = yes
+								}
+								GLG = {
+									is_ai = yes
+								}
+							}
+						}
+					}
+					country_event = {
+						id = krg_acw.33
+						days = 5
+					}
+				}
+			}
+			NEE = {
+				if = {
+					limit = {
+						is_ai = yes
+					}
+					country_event = {
+						id = krg_acw.19
+						days = 5
+					}
+				}
+				else_if = {
+					limit = {
+						CAL = {
+							is_ai = yes
+						}
+						NEE = {
+							is_ai = no
+						}
+						GLG = {
+							is_ai = yes
+						}
+					}
+					country_event = {
+						id = krg_acw.33
+						days = 5
+					}
+				}
+			}
+			GLG = {
+				if = {
+					limit = {
+						is_ai = yes
+					}
+					country_event = {
+						id = krg_acw.19
+						days = 5
+					}
+				}
+				else_if = {
+					limit = {
+						CAL = {
+							is_ai = yes
+						}
+						NEE = {
+							is_ai = yes
+						}
+						GLG = {
+							is_ai = no
+						}
+					}
+					country_event = {
+						id = krg_acw.33
+						days = 5
+					}
+				}
+			}
+		}
+		ai_chance = {
+			base = 1
+		}
+	}
+	option = {
+		#Very Well
+		name = krg_acw.32.b
+		set_global_flag = ACW_TEX_minor_concessions
+		add_timed_idea = {
+			idea = TEX_minor_concessions
+			days = 365
+		}
+		news_event = {
+			id = worldnews.53
+			days = 1
+		}
+		ai_chance = {
+			base = 1
+		}
+	}
+}
+
+country_event = {
+	#[TEX.GetNameDef] ramps up tensions
+	id = krg_acw.33
+	title = krg_acw.33.t
+	desc = krg_acw.33.d
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_acw.33"
+	}
+	option = {
+		#Continue mobilization, we must be patient.
+		hidden_effect = {
+			TEX = {
+				country_event = {
+					id = krg_acw.36
+					days = 5
+				}
+			}
+		}
+		name = krg_acw.33.a
+		ai_chance = {
+			base = 25
+		}
+	}
+	option = {
+		#[CAL.GetNameDef] should begin airstrikes against outposts in the Rockies
+		name = krg_acw.33.b
+		CAL = {
+			country_event = {
+				id = krg_acw.34
+				days = 5
+			}
+		}
+		trigger = {
+			NOT = {
+				tag = CAL
+			}
+		}
+		ai_chance = {
+			base = 25
+			modifier = {
+				has_game_rule = {
+					rule = KRG_3ACW_ALLOWED
+					option = KRG_3ACW_GUARANTEED
+				}
+				factor = 1000
+			}
+		}
+	}
+	option = {
+		#We must begin airstrikes against outposts in the Rockies
+		name = krg_acw.33.b
+		hidden_effect = {
+			TEX = {
+				country_event = {
+					id = krg_acw.35
+					days = 5
+				}
+			}
+		}
+		trigger = {
+			tag = CAL
+		}
+		ai_chance = {
+			base = 25
+			modifier = {
+				has_game_rule = {
+					rule = KRG_3ACW_ALLOWED
+					option = KRG_3ACW_GUARANTEED
+				}
+				factor = 1000
+			}
+		}
+	}
+	option = {
+		#Allow them to save face. Ask for an apology and minor reparations.
+		name = krg_acw.33.c
+		hidden_effect = {
+			TEX = {
+				country_event = {
+					id = krg_acw.37
+					days = 5
+				}
+			}
+		}
+		ai_chance = {
+			base = 25
+			modifier = {
+				has_game_rule = {
+					rule = KRG_3ACW_ALLOWED
+					option = KRG_3ACW_BLOCKED
+				}
+				factor = 1000
+			}
+		}
+	}
+}
+
+country_event = {
+	#[FROM.GetNameDef] asks us to begin airstrikes
+	id = krg_acw.34
+	title = krg_acw.34.t
+	desc = krg_acw.34.d
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_acw.34"
+	}
+	option = {
+		#Yes, they have taken it too far!
+		name = krg_acw.34.a
+		hidden_effect = {
+			TEX = {
+				country_event = {
+					id = krg_acw.35
+					days = 5
+				}
+			}
+		}
+		ai_chance = {
+			base = 1
+		}
+	}
+}
+
+country_event = {
+	#[CAL.GetNameDef] airstrikes Rocky border outposts
+	id = krg_acw.35
+	title = krg_acw.35.t
+	desc = krg_acw.35.d
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_acw.35"
+	}
+	option = {
+		#It is time for war.
+		name = krg_acw.35.a
+		if = {
+			limit = {
+				NOT = {
+					has_global_flag = ACW_start
+				}
+			}
+			3_acw = yes
+		}
+		ai_chance = {
+			base = 1
+		}
+	}
+}
+
+country_event = {
+	#ARA ramps up mobilization
+	id = krg_acw.36
+	title = krg_acw.36.t
+	desc = krg_acw.36.d
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_acw.36"
+	}
+	option = {
+		#We must back down, we are surrounded.
+		name = krg_acw.36.a
+		ai_chance = {
+			base = 3
+			modifier = {
+				strength_ratio = {
+					tag = NEE
+					ratio < 1.5
+				}
+				factor = 5
+			}
+			modifier = {
+				strength_ratio = {
+					tag = NEE
+					ratio < 1
+				}
+				factor = 20
+			}
+			modifier = {
+				has_game_rule = {
+					rule = KRG_3ACW_ALLOWED
+					option = KRG_3ACW_BLOCKED
+				}
+				factor = 1000
+			}
+		}
+	}
+	option = {
+		#It is time for war.
+		name = krg_acw.36.b
+		if = {
+			limit = {
+				NOT = {
+					has_global_flag = ACW_start
+				}
+			}
+			3_acw = yes
+		}
+		ai_chance = {
+			base = 3
+			modifier = {
+				strength_ratio = {
+					tag = NEE
+					ratio > 1.5
+				}
+				factor = 5
+			}
+			modifier = {
+				strength_ratio = {
+					tag = NEE
+					ratio > 2
+				}
+				factor = 5
+			}
+			modifier = {
+				has_game_rule = {
+					rule = KRG_3ACW_ALLOWED
+					option = KRG_3ACW_GUARANTEED
+				}
+				factor = 1000
+			}
+		}
+	}
+}
+
+country_event = {
+	#ARA lowers their ask
+	id = krg_acw.37
+	title = krg_acw.37.t
+	desc = krg_acw.37.d
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_acw.37"
+	}
+	option = {
+		#Refuse. We cannot back down now.
+		name = krg_acw.37.a
+		custom_effect_tooltip = krg_acw_war_ara_will_tt
+		hidden_effect = {
+			CAL = {
+				country_event = {
+					id = krg_acw.38
+					days = 5
+				}
+			}
+		}
+		ai_chance = {
+			base = 1
+			modifier = {
+				has_game_rule = {
+					rule = KRG_3ACW_ALLOWED
+					option = KRG_3ACW_GUARANTEED
+				}
+				factor = 1000
+			}
+		}
+	}
+	option = {
+		#Accept this offer.
+		name = krg_acw.36.b
+		set_global_flag = ACW_TEX_minor_concessions
+		add_timed_idea = {
+			idea = TEX_minor_concessions
+			days = 365
+		}
+		ai_chance = {
+			base = 1
+			modifier = {
+				has_game_rule = {
+					rule = KRG_3ACW_ALLOWED
+					option = KRG_3ACW_BLOCKED
+				}
+				factor = 1000
+			}
+		}
+	}
+}
+
+country_event = {
+	#[TEX.GetNameDef] refuses
+	id = krg_acw.38
+	title = krg_acw.38.t
+	desc = krg_acw.38.d
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_acw.38"
+	}
+	option = {
+		#It is time for war.
+		name = krg_acw.38.a
+		if = {
+			limit = {
+				NOT = {
+					has_global_flag = ACW_start
+				}
+			}
+			3_acw = yes
+		}
+		ai_chance = {
+			base = 1
+		}
+	}
+}
+
+country_event = {
+	#United once more! (TEX)
+	id = krg_acw.39
+	title = krg_acw.39.t
+	desc = krg_acw.39.d
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_acw.39"
+		clr_global_flag = ACW_ongoing
+	}
+	option = {
+		#Under the Old Glory!
+		name = krg_acw.39.a
+		set_cosmetic_tag = USA_reformed
+		add_stability = 0.05
+		ai_chance = {
+			base = 1
+			modifier = {
+				factor = 0
+				tag = TEX
+			}
+		}
+	}
+	option = {
+		#The Union State Forever!
+		name = krg_acw.39.b
+		add_stability = 0.05
+		trigger = {
+			tag = TEX
+		}
+		ai_chance = {
+			base = 1
+		}
+	}
+}
+
+country_event = {
+	#United once more! (ARA version)
+	id = krg_acw.40
+	title = krg_acw.40.t
+	desc = krg_acw.40.d
+	is_triggered_only = yes
+	fire_only_once = yes
+	picture = GFX_ce_usa_tex_surrenders
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_acw.40"
+		hidden_effect = {
+			ara_reunify = yes
+		}
+	}
+	option = {
+		#Under the Old Glory!
+		name = krg_acw.40.a
+		custom_effect_tooltip = USA_ara_reunify_tt
+		USA = {
+			USA_set_election_time = yes
+			coal_add_mar_lib = yes
+			coal_add_soc_con = yes
+			coal_add_soc_lib = yes
+			coal_add_soc_dem = yes
+
+			set_temp_variable = { USA_temp_amount_of_states = 49 }
+
+			if = {
+				limit = { 
+					463 = {
+						has_state_flag = alaska_state
+					}
+				}
+				add_to_temp_variable = {
+					USA_temp_amount_of_states = 1
+				}
+			}
+
+			if = {
+				limit = { 
+					629 = {
+						has_state_flag = hawaii_state
+					}
+				}
+				add_to_temp_variable = {
+					USA_temp_amount_of_states = 1
+				}
+			}
+			if = {
+				limit = { 
+					949 = {
+						has_state_flag = south_california
+					}
+				}
+				add_to_temp_variable = {
+					USA_temp_amount_of_states = 1
+				}
+			}
+
+			if = {
+				limit = { 
+					950 = {
+						has_state_flag = north_california
+					}
+				}
+				add_to_temp_variable = {
+					USA_temp_amount_of_states = 1
+				}
+			}
+
+			if = {
+				limit = { 
+					check_variable = { USA_temp_amount_of_states = 50 }
+				}
+				set_cosmetic_tag = USA_america_50
+			}
+			else_if = {
+				limit = { 
+					check_variable = { USA_temp_amount_of_states = 51 }
+				}
+				set_cosmetic_tag = USA_america_51
+			}
+
+			else_if = {
+				limit = { 
+					check_variable = { USA_temp_amount_of_states = 52 }
+				}
+				set_cosmetic_tag = USA_america_52
+			}
+
+			else_if = {
+				limit = { 
+					check_variable = { USA_temp_amount_of_states = 53 }
+				}
+				set_cosmetic_tag = USA_america_53
+			}
+		}
+		ai_chance = {
+			base = 1
+		}
+	}
+}
+
+country_event = {
+	#Formation of the Joint American Command
+	id = krg_acw.41
+	title = krg_acw.41.t
+	desc = krg_acw.41.d
+	is_triggered_only = yes
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_acw.41"
+	}
+	option = {
+		#Under the Old Glory!
+		name = krg_acw.41.a
+		effect_tooltip = {
+			add_ideas = ARA_joint_high_command
+		}
+		ai_chance = {
+			base = 1
+		}
+	}
+}
+
+country_event = {
+	#The Accord Offers us Peace!
+	id = krg_acw.42
+	title = krg_acw.42.t
+	desc = krg_acw.42.d
+	is_triggered_only = yes
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_acw.42"
+	}
+	option = {
+		#Yes
+		name = krg_acw.42.a
+		hidden_effect = {
+			ENT = {
+				country_event = {
+					id = krg_acw.43
+					hours = 4
+				}
+			}
+		}
+		ai_chance = {
+			base = 1000
+		}
+	}
+	option = {
+		#No
+		name = krg_acw.42.b
+		ENT = {
+			country_event = {
+				id = krg_acw.44
+				hours = 4
+			}
+		}
+		ai_chance = {
+			base = 0
+		}
+	}
+}
+
+country_event = {
+	#The Union State Accepts
+	id = krg_acw.43
+	title = krg_acw.43.t
+	desc = krg_acw.43.d
+	is_triggered_only = yes
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_acw.43"
+	}
+	option = {
+		#Yes
+		name = krg_acw.43.a
+		TEX = {
+			white_peace_with_ROOT = yes
+		}
+		news_event = {
+			id = worldnews.287
+			hours = 12
+		}
+	}
+}
+
+country_event = {
+	#The Union State Rejects Peace
+	id = krg_acw.44
+	title = krg_acw.44.t
+	desc = krg_acw.44.d
+	is_triggered_only = yes
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_acw.44"
+	}
+	option = {
+		name = krg_acw.44.a
+
+	}
+}
+
+country_event = {
+	#The Union State Offers Us Peace!
+	id = krg_acw.45
+	title = krg_acw.45.t
+	desc = krg_acw.45.d
+	is_triggered_only = yes
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_acw.45"
+	}
+	option = {
+		#Yes
+		name = krg_acw.45.a
+		hidden_effect = {
+			TEX = {
+				country_event = {
+					id = krg_acw.46
+					hours = 4
+				}
+			}
+		}
+		ai_chance = {
+			base = 1000
+		}
+	}
+	option = {
+		#No
+		name = krg_acw.45.b
+		TEX = {
+			country_event = {
+				id = krg_acw.47
+				hours = 4
+			}
+		}
+		ai_chance = {
+			base = 0
+		}
+	}
+}
+
+country_event = {
+	#The Accord Accepts
+	id = krg_acw.46
+	title = krg_acw.46.t
+	desc = krg_acw.46.d
+	is_triggered_only = yes
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_acw.46"
+	}
+	option = {
+		#Yes
+		name = krg_acw.46.a
+		ENT = {
+			white_peace_with_ROOT = yes
+		}
+		news_event = {
+			id = worldnews.287
+			hours = 12
+		}
+	}
+}
+
+country_event = {
+	#The Accord Rejects Peace
+	id = krg_acw.47
+	title = krg_acw.47.t
+	desc = krg_acw.47.d
+	is_triggered_only = yes
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_acw.47"
+	}
+	option = {
+		name = krg_acw.47.a
+
+	}
+}
+
+
+#### Lend Lease Events
+#country_event = {
+#	id = krg_acw_lend_lease.1
+#	title = krg_acw_lend_lease.1.t
+#	desc = krg_acw_lend_lease.1.d
+#	is_triggered_only = yes
+#	option = {
+#		name = krg_acw_lend_lease.1.a
+#		add_equipment_to_stockpile = {
+#			type = infantry_equipment
+#			amount = 1000
+#		}
+#	}
+#}
+#
+#country_event = {
+#	id = krg_acw_lend_lease.2
+#	title = krg_acw_lend_lease.2.t
+#	desc = krg_acw_lend_lease.2.d
+#	is_triggered_only = yes
+#	option = {
+#		name = krg_acw_lend_lease.2.a
+#		add_equipment_to_stockpile = {
+#			type = artillery_equipment
+#			amount = 100
+#		}
+#	}
+#}
+#
+#country_event = {
+#	id = krg_acw_lend_lease.3
+#	title = krg_acw_lend_lease.3.t
+#	desc = krg_acw_lend_lease.3.d
+#	is_triggered_only = yes
+#	option = {
+#		name = krg_acw_lend_lease.3.a
+#		add_equipment_to_stockpile = {
+#			type = support_equipment
+#			amount = 250
+#		}
+#	}
+#}
+#
+#country_event = {
+#	id = krg_acw_lend_lease.4
+#	title = krg_acw_lend_lease.4.t
+#	desc = krg_acw_lend_lease.4.d
+#	is_triggered_only = yes
+#	option = {
+#		name = krg_acw_lend_lease.4.a
+#		add_equipment_to_stockpile = {
+#			type = motorized_equipment
+#			amount = 100
+#		}
+#	}
+#}
+#
+#country_event = {
+#	id = krg_acw_lend_lease.5
+#	title = krg_acw_lend_lease.5.t
+#	desc = krg_acw_lend_lease.5.d
+#	is_triggered_only = yes
+#	option = {
+#		name = krg_acw_lend_lease.5.a
+#		add_equipment_to_stockpile = {
+#			type = anti_tank_equipment
+#			amount = 50
+#		}
+#	}
+#}
+#
+#country_event = {
+#	id = krg_acw_lend_lease.6
+#	title = krg_acw_lend_lease.6.t
+#	desc = krg_acw_lend_lease.6.d
+#	is_triggered_only = yes
+#	option = {
+#		name = krg_acw_lend_lease.6.a
+#		add_equipment_to_stockpile = {
+#			type = anti_air_equipment
+#			amount = 50
+#		}
+#	}
+#}
+#
+#country_event = {
+#	id = krg_acw_lend_lease.7
+#	title = krg_acw_lend_lease.7.t
+#	desc = krg_acw_lend_lease.7.d
+#	is_triggered_only = yes
+#	option = {
+#		name = krg_acw_lend_lease.7.a
+#		add_equipment_to_stockpile = {
+#			type = mechanized_equipment
+#			amount = 50
+#		}
+#	}
+#}
+#
+#country_event = {
+#	id = krg_acw_lend_lease.8
+#	title = krg_acw_lend_lease.8.t
+#	desc = krg_acw_lend_lease.8.d
+#	is_triggered_only = yes
+#	option = {
+#		name = krg_acw_lend_lease.8.a
+#		add_equipment_to_stockpile = {
+#			type = modern_tank_equipment
+#			amount = 50
+#		}
+#	}
+#}
+#
+#country_event = {
+#	id = krg_acw_lend_lease.9
+#	title = krg_acw_lend_lease.9.t
+#	desc = krg_acw_lend_lease.9.d
+#	is_triggered_only = yes
+#	option = {
+#		name = krg_acw_lend_lease.9.a
+#		add_equipment_to_stockpile = {
+#			type = jet_fighter_equipment
+#			amount = 25
+#		}
+#	}
+#}
+#
+#country_event = {
+#	id = krg_acw_lend_lease.10
+#	title = krg_acw_lend_lease.10.t
+#	desc = krg_acw_lend_lease.10.d
+#	is_triggered_only = yes
+#	option = {
+#		name = krg_acw_lend_lease.10.a
+#		add_equipment_to_stockpile = {
+#			type = jet_interceptor_equipment
+#			amount = 25
+#		}
+#	}
+#}
+#
+#country_event = {
+#	id = krg_acw_lend_lease.11
+#	title = krg_acw_lend_lease.11.t
+#	desc = krg_acw_lend_lease.11.d
+#	is_triggered_only = yes
+#	option = {
+#		name = krg_acw_lend_lease.11.a
+#		add_equipment_to_stockpile = {
+#			type = jet_strike_equipment
+#			amount = 25
+#		}
+#	}
+#}
+#
+#country_event = {
+#	id = krg_acw_lend_lease.12
+#	title = krg_acw_lend_lease.12.t
+#	desc = krg_acw_lend_lease.12.d
+#	is_triggered_only = yes
+#	option = {
+#		name = krg_acw_lend_lease.12.a
+#		add_equipment_to_stockpile = {
+#			type = jet_strat_bomber_equipment
+#			amount = 15
+#		}
+#	}
+#}
+#
+#country_event = {
+#	id = krg_acw_lend_lease.13
+#	title = krg_acw_lend_lease.13.t
+#	desc = krg_acw_lend_lease.13.d
+#	is_triggered_only = yes
+#	option = {
+#		name = krg_acw_lend_lease.13.a
+#		add_equipment_to_stockpile = {
+#			type = transport_plane_equipment
+#			amount = 25
+#		}
+#	}
+#}
+
+country_event = {
+	#Our lend lease stopped by New England Warships
+	id = krg_acw_lend_lease.14
+	title = krg_acw_lend_lease.14.t
+	desc = krg_acw_lend_lease.14.d
+	is_triggered_only = yes
+	option = {
+		#Tell them to turn around, we dont want to risk anything
+		name = krg_acw_lend_lease.14.a
+		add_to_variable = {
+			global.ACW_tensions = 1
+			tooltip = ACW_tensions_tt
+		}
+	}
+	option = {
+		#Insist they press forward
+		name = krg_acw_lend_lease.14.b
+		trigger = {
+			check_variable = {
+				global.ACW_tensions > 49
+			}
+		}
+		country_event = {
+			id = krg_acw_lend_lease.15
+			days = 2
+		}
+		ai_chance = {
+			base = 25
+		}
+	}
+	option = {
+		#Send in some of our warships as backup
+		name = krg_acw_lend_lease.14.c
+		trigger = {
+			check_variable = {
+				global.ACW_tensions > 74
+			}
+		}
+		NEE = {
+			country_event = {
+				id = krg_acw_lend_lease.16
+				days = 2
+			}
+		}
+
+		ai_chance = {
+			base = 75
+			modifier = {
+				has_game_rule = {
+					rule = KRG_WK3_ALLOWED
+					option = KRG_WK3_3ACW_ESCALATION
+				}
+				factor = 1000 
+			}
+		}
+	}
+}
+
+country_event = {
+	#Our ship is forced to turn back
+	id = krg_acw_lend_lease.15
+	title = krg_acw_lend_lease.15.t
+	desc = krg_acw_lend_lease.15.d
+	is_triggered_only = yes
+	option = {
+		name = krg_acw_lend_lease.15.a
+		add_to_variable = {
+			global.ACW_tensions = 5
+			tooltip = ACW_tensions_tt
+		}
+	}
+}
+
+country_event = {
+	#Germany Challenges our Blockade
+	id = krg_acw_lend_lease.16
+	title = krg_acw_lend_lease.16.t
+	desc = krg_acw_lend_lease.16.d
+	is_triggered_only = yes
+	option = {
+		#Challenge them, we have superiority in the region
+		name = krg_acw_lend_lease.16.a
+		add_to_variable = {
+			global.ACW_tensions = 10
+			tooltip = ACW_tensions_tt
+		}
+		GER = {
+			country_event = {
+				id = krg_acw_lend_lease.17
+				days = 2
+			}
+		}
+		ai_chance = {
+			base = 1
+			modifier = {
+				has_game_rule = {
+					rule = KRG_WK3_ALLOWED
+					option = KRG_WK3_3ACW_ESCALATION
+				}
+				factor = 1000 
+			}
+		}
+	}
+	option = {
+		#Consult with our allies in the Accord, Europe is at risk
+		name = krg_acw_lend_lease.16.b
+		add_to_variable = {
+			global.ACW_tensions = 5
+			tooltip = ACW_tensions_tt
+		}
+		ENT = {
+			country_event = {
+				id = krg_acw_lend_lease.20
+				days = 2
+			}
+		}
+		ai_chance = {
+			base = 1
+		}
+	}
+}
+
+country_event = {
+	#New England Responds with Force!
+	id = krg_acw_lend_lease.17
+	title = krg_acw_lend_lease.17.t
+	desc = krg_acw_lend_lease.17.d
+	is_triggered_only = yes
+	option = {
+		#This is an act of War!
+		name = krg_acw_lend_lease.17.a
+		every_country = {
+			limit = {
+				is_in_or_aligned_with_accord = yes
+			}
+			country_event = {
+				id = krg_acw_lend_lease.18
+				days = 0
+			}
+		}
+		3ACW_WK3_escalation = yes
+		ai_chance = {
+			base = 2
+			modifier = {
+				has_game_rule = {
+					rule = KRG_WK3_ALLOWED
+					option = KRG_WK3_3ACW_ESCALATION
+				}
+				factor = 1000 
+			}
+		}
+	}
+	option = {
+		#We must back down for now
+		name = krg_acw_lend_lease.17.b
+		add_to_variable = {
+			global.ACW_tensions = 5
+			tooltip = ACW_tensions_tt
+		}
+		NEE = {
+			country_event = {
+				id = krg_acw_lend_lease.19
+				days = 2
+			}
+		}
+		ai_chance = {
+			base = 1
+			modifier = {
+				has_game_rule = {
+					rule = KRG_WK3_ALLOWED
+					option = KRG_WK3_BLOCKED
+				}
+				factor = 1000 
+			}
+		}
+	}
+}
+
+country_event = {
+	#Germany Declares war!
+	id = krg_acw_lend_lease.18
+	title = krg_acw_lend_lease.18.t
+	desc = krg_acw_lend_lease.18.d
+	is_triggered_only = yes
+	option = {
+		name = krg_acw_lend_lease.18.a
+	}
+}
+
+country_event = {
+	#Germany backs down
+	id = krg_acw_lend_lease.19
+	title = krg_acw_lend_lease.19.t
+	desc = krg_acw_lend_lease.19.d
+	is_triggered_only = yes
+	option = {
+		#Excellent
+		name = krg_acw_lend_lease.19.a
+		add_to_array = {
+			global.influence_log = 22
+		}
+		add_to_array = {
+			global.influence_log_val = 10
+		}
+		influence_recalc = yes
+	}
+}
+
+country_event = {
+	#New England Blockade Challenged
+	id = krg_acw_lend_lease.20
+	title = krg_acw_lend_lease.20.t
+	desc = krg_acw_lend_lease.20.d
+	is_triggered_only = yes
+	option = {
+		#Advise them to open fire
+		name = krg_acw_lend_lease.20.a
+		NEE = {
+			country_event = {
+				id = krg_acw_lend_lease.21
+				days = 2
+			}
+		}
+		ai_chance = {
+			base = 1
+		}
+	}
+	option = {
+		#Advise them to back down
+		name = krg_acw_lend_lease.20.b
+		NEE = {
+			country_event = {
+				id = krg_acw_lend_lease.23
+				days = 2
+			}
+		}
+		ai_chance = {
+			base = 1
+		}
+	}
+}
+
+country_event = {
+	#Canada advises us to open fire
+	id = krg_acw_lend_lease.21
+	title = krg_acw_lend_lease.21.t
+	desc = krg_acw_lend_lease.21.d
+	is_triggered_only = yes
+	option = {
+		#Open fire on the German Ship
+		name = krg_acw_lend_lease.21.a
+		GER = {
+			country_event = {
+				id = krg_acw_lend_lease.17
+				days = 2
+			}
+		}
+		ai_chance = {
+			base = 100
+		}
+	}
+	option = {
+		#Back down
+		name = krg_acw_lend_lease.21.b
+		GER = {
+			country_event = {
+				id = krg_acw_lend_lease.22
+				days = 2
+			}
+		}
+		ai_chance = {
+			base = 0
+		}
+	}
+}
+
+country_event = {
+	#New England backs down
+	id = krg_acw_lend_lease.22
+	title = krg_acw_lend_lease.22.t
+	desc = krg_acw_lend_lease.22.d
+	is_triggered_only = yes
+	option = {
+		#
+		name = krg_acw_lend_lease.22.a
+		add_to_array = {
+			global.influence_log = 22
+		}
+		add_to_array = {
+			global.influence_log_val = -10
+		}
+		influence_recalc = yes
+	}
+}
+
+country_event = {
+	#Canada advises us to retreat
+	id = krg_acw_lend_lease.23
+	title = krg_acw_lend_lease.23.t
+	desc = krg_acw_lend_lease.23.d
+	is_triggered_only = yes
+	option = {
+		#Open fire on the German Ship
+		name = krg_acw_lend_lease.23.a
+		GER = {
+			country_event = {
+				id = krg_acw_lend_lease.17
+				days = 2
+			}
+		}
+		ai_chance = {
+			base = 0
+		}
+	}
+	option = {
+		#Back down
+		name = krg_acw_lend_lease.23.b
+		GER = {
+			country_event = {
+				id = krg_acw_lend_lease.22
+				days = 2
+			}
+		}
+		ai_chance = {
+			base = 100
+		}
+	}
+}
+
+country_event = {
+	id = krg_acw_admin.1
+	is_triggered_only = yes
+	hidden = yes
+	option = {
+		set_global_flag = ACW_6_months
+	}
+}
+
+country_event = {
+	id = krg_acw_admin.2
+	is_triggered_only = yes
+	hidden = yes
+	option = {
+		set_global_flag = ACW_12_months
+	}
+}
+
+country_event = {
+	id = krg_acw_admin.3
+	is_triggered_only = yes
+	hidden = yes
+	option = {
+		set_global_flag = ACW_18_months
+	}
+}
+
+country_event = {
+	id = krg_acw_admin.4
+	is_triggered_only = yes
+	hidden = yes
+	option = {
+		set_country_flag = GER_execute_lend_lease
+	}
+}

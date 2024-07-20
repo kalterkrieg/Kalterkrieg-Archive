@@ -1,0 +1,739 @@
+### Imported from Kaiserreich ###
+@stability_decision_duration = 180
+@stability_decision_reenable = 540
+
+political_actions = {
+
+	legislate_more_freedoms = {
+
+		icon = generic_political_discourse
+
+		allowed = {
+			always = yes
+		}
+
+		available = {
+			NOT = { has_country_flag = KR_improving_stability }
+			has_stability < 0.50
+		}
+
+		visible = {
+			has_elected_government = yes
+		}
+
+		cancel_trigger = {
+			OR = {
+				has_stability > 0.75
+				has_elected_government = no
+			}
+		}
+
+		fire_only_once = no
+
+		modifier = {
+			stability_weekly = 0.005
+			political_power_cost = 0.1
+			consumer_goods_factor = 0.1
+		}
+
+		days_remove = @stability_decision_duration
+		days_re_enable = @stability_decision_reenable
+
+		cost = 100
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete legislate_more_freedoms target: [From.GetName]"
+			set_country_flag = { flag = KR_improving_stability days = @stability_decision_duration value = 1 }
+		}
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 1
+				has_stability < 0.25
+			}
+			modifier = {
+				add = 2
+				has_stability < 0.10
+			}
+		}
+	}
+
+	police_crackdown = {
+
+		icon = oppression
+
+		allowed = {
+			always = yes
+		}
+
+		available = {
+			NOT = { has_country_flag = KR_improving_stability }
+			has_stability < 0.50
+		}
+
+		visible = {
+			has_government = authoritarian_democrat
+		}
+
+		cancel_trigger = {
+			OR = {
+				has_stability > 0.75
+				NOT = { has_government = authoritarian_democrat }
+			}
+		}
+
+		fire_only_once = no
+
+		modifier = {
+			stability_weekly = 0.005
+			political_power_cost = 0.1
+			industrial_capacity_factory = -0.05
+			industrial_capacity_dockyard = -0.05
+		}
+
+		days_remove = @stability_decision_duration
+		days_re_enable = @stability_decision_reenable
+
+		cost = 100
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete police_crackdown target: [From.GetName]"
+			set_country_flag = { flag = KR_improving_stability days = @stability_decision_duration value = 1 }
+		}
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 1
+				has_stability < 0.25
+			}
+			modifier = {
+				add = 2
+				has_stability < 0.10
+			}
+		}
+	}
+
+	improved_worker_conditions = {
+
+		icon = generic_industry
+
+		allowed = {
+			always = yes
+		}
+
+		available = {
+			NOT = { has_country_flag = KR_improving_stability }
+			has_stability < 0.50
+		}
+
+		visible = {
+			has_socialist_government = yes
+		}
+
+		cancel_trigger = {
+			OR = {
+				has_stability > 0.75
+				has_socialist_government = no
+			}
+		}
+
+		fire_only_once = no
+
+		modifier = {
+			stability_weekly = 0.005
+			political_power_cost = 0.1
+			industrial_capacity_factory = -0.05
+			industrial_capacity_dockyard = -0.05
+		}
+
+		days_remove = @stability_decision_duration
+		days_re_enable = @stability_decision_reenable
+
+		cost = 100
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete improved_worker_conditions target: [From.GetName]"
+			set_country_flag = { flag = KR_improving_stability days = @stability_decision_duration value = 1 }
+		}
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 1
+				has_stability < 0.25
+			}
+			modifier = {
+				add = 2
+				has_stability < 0.10
+			}
+		}
+	}
+
+	send_in_the_army = {
+
+		icon = GFX_decision_generic_army_support
+
+		allowed = {
+			always = yes
+		}
+
+		available = {
+			NOT = { has_country_flag = KR_improving_stability }
+			has_stability < 0.50
+		}
+
+		visible = {
+			OR = {
+				has_government = paternal_autocrat
+				has_government = national_populist
+				has_government = authoritarian_socialist
+			}
+		}
+
+		cancel_trigger = {
+			OR = {
+				has_stability > 0.75
+				NOT = {
+					has_government = paternal_autocrat
+					has_government = national_populist
+					has_government = authoritarian_socialist
+				}
+			}
+		}
+
+		fire_only_once = no
+
+		modifier = {
+			stability_weekly = 0.005
+			political_power_cost = 0.1
+			army_morale_factor = -0.05
+			conscription_factor = -0.10
+		}
+
+		days_remove = @stability_decision_duration
+		days_re_enable = @stability_decision_reenable
+
+		cost = 100
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete send_in_the_army target: [From.GetName]"
+			set_country_flag = { flag = KR_improving_stability days = @stability_decision_duration value = 1 }
+		}
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 1
+				has_stability < 0.25
+			}
+			modifier = {
+				add = 2
+				has_stability < 0.10
+			}
+			modifier = {
+				add = 10
+				has_stability < 0
+			}
+		}
+	}
+
+	rally_public_support = {
+
+		icon = GFX_decision_generic_civil_support
+
+		allowed = {
+			always = yes
+		}
+
+		available = {
+			NOT = { has_country_flag = KR_improving_popularity }
+			custom_trigger_tooltip = {
+				tooltip = KR_party_pop_less_than_50
+				check_variable = { ROOT.party_popularity@ruling_party < 0.5 }
+			}
+		}
+
+		visible = {
+			OR = {
+				has_government = radical_socialist
+				has_government = social_democrat
+				has_government = social_liberal
+				has_government = market_liberal
+				has_government = social_conservative
+			}
+		}
+
+		cancel_trigger = {
+			OR = {
+				custom_trigger_tooltip = {
+					tooltip = KR_party_pop_more_than_75
+					check_variable = { ROOT.party_popularity@ruling_party > 0.75 }
+				}
+				has_government = authoritarian_socialist
+				has_government = authoritarian_democrat
+				has_government = paternal_autocrat
+				has_government = national_populist
+			}
+		}
+
+		fire_only_once = no
+
+		modifier = {
+			political_power_cost = 0.05
+			consumer_goods_factor = 0.1
+		}
+
+		days_remove = @stability_decision_duration
+		days_re_enable = @stability_decision_reenable
+
+		cost = 100
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete rally_public_support target: [From.GetName]"
+			set_country_flag = { flag = KR_improving_popularity days = @stability_decision_duration value = 1 }
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove rally_public_support target: [From.GetName]"
+			set_temp_variable = { ideology_change_var = 0.05 }
+			change_ruling_party_popularity = yes
+		}
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 1
+				check_variable = { ROOT.party_popularity@ruling_party < 0.25 }
+			}
+			modifier = {
+				add = 2
+				check_variable = { ROOT.party_popularity@ruling_party < 0.1 }
+			}
+		}
+	}
+
+	solidify_control = {
+
+		icon = GFX_decision_generic_political_discourse
+
+		allowed = {
+			always = yes
+		}
+
+		available = {
+			NOT = { has_country_flag = KR_improving_popularity }
+			custom_trigger_tooltip = {
+				tooltip = KR_party_pop_less_than_50
+				check_variable = { ROOT.party_popularity@ruling_party < 0.5 }
+			}
+		}
+
+		visible = {
+			OR = {
+				has_government = authoritarian_socialist
+				has_authoritarian_government = yes
+			}
+		}
+
+		cancel_trigger = {
+			OR = {
+				custom_trigger_tooltip = {
+					tooltip = KR_party_pop_more_than_75
+					check_variable = { ROOT.party_popularity@ruling_party > 0.75 }
+				}
+				NOT = {
+					has_government = authoritarian_socialist
+					has_authoritarian_government = yes
+				}
+			}
+		}
+
+		fire_only_once = no
+
+		modifier = {
+			political_power_cost = 0.05
+			industrial_capacity_factory = -0.05
+			industrial_capacity_dockyard = -0.05
+		}
+
+		days_remove = @stability_decision_duration
+		days_re_enable = @stability_decision_reenable
+
+		cost = 100
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete solidify_control target: [From.GetName]"
+			set_country_flag = { flag = KR_improving_popularity days = @stability_decision_duration value = 1 }
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove solidify_control target: [From.GetName]"
+			set_temp_variable = { ideology_change_var = 0.05 }
+			change_ruling_party_popularity = yes
+		}
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 1
+				check_variable = { ROOT.party_popularity@ruling_party < 0.25 }
+			}
+			modifier = {
+				add = 2
+				check_variable = { ROOT.party_popularity@ruling_party < 0.10 }
+			}
+		}
+	}
+
+	seize_some_trains_woo = { #repeating train seize
+
+		icon = GFX_decision_train
+
+		visible = { 
+			num_of_factories < 60
+		}
+		
+		available = {
+			has_equipment = { train_equipment < 101 }
+			has_tech = basic_train
+		}
+		
+		days_remove = 180
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 1
+				has_stability > 0.74
+			}
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete seize_some_trains_woo #repeating train seize target: [From.GetName]"
+			add_equipment_to_stockpile = {
+				type = train_equipment
+				amount = 15
+			}
+			add_stability = -0.05
+		}
+	}
+
+	restructure_supply_system = { #one time boost to get a few cheap supply hubs
+
+	icon = GFX_decision_railroad
+
+		visible = { 
+			OR = {
+				is_major = no
+				AND = {
+					is_faction_leader = yes
+					num_of_factories < 51 #would be a minor if it wasn't for faction leader status
+				}
+			}
+		}
+		fire_only_once = yes
+
+		days_remove = 120
+
+		ai_will_do = {
+			base = 1
+			modifier = {
+				num_of_factories < 30
+				factor = 0
+			}
+		}
+
+		modifier = {
+			production_speed_supply_node_factor = 3
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete restructure_supply_system #one time boost to get a few cheap supply hubs target: [From.GetName]"
+			set_variable = { node_goal = num_of_supply_nodes }
+			add_to_variable = { node_goal = 3 } #maximum 3 additional nodes
+		}
+
+		cancel_trigger = {
+			
+			 check_variable = { node_goal < num_of_supply_nodes } #if the number of supply nodes exceeds the old number by +3, immediately cancel
+		}
+	}	
+
+	Re_Show_Holtzberg = {
+		allowed = {
+			always = yes
+		}
+		visible = {
+			has_country_flag = Holtzberg_Hidden
+		}
+		days_remove = 1
+		icon = generic_prepare_civil_war
+		ai_will_do = {
+			base = 0
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove Re_Show_Holtzberg target: [From.GetName]"
+			clr_country_flag = Holtzberg_Hidden
+		}
+	}
+}
+
+propaganda_efforts = {
+
+	war_propaganda = {
+
+		icon = GFX_decision_eng_propaganda_campaigns
+
+		available = {
+			has_war_support < 0.5
+		}
+
+		visible = {
+			has_war_with_non_exiled_country = yes
+		}
+
+		cost = war_propaganda_decision_cost?150
+		days_remove = 90
+		days_re_enable = 180
+
+		modifier = {
+			war_support_weekly = 0.005
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete war_propaganda target: [From.GetName]"
+		}
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 1
+				has_war_support < 0.4
+				has_war = yes
+			}
+		}
+	}
+
+	war_propaganda_casualties = {
+
+		icon = generic_prepare_civil_war
+
+		available = {
+			has_casualties_war_support < 0
+		}
+
+		visible = {
+			has_war_with_non_exiled_country = yes
+		}
+
+		fire_only_once = no
+
+		days_remove = 180
+
+		remove_trigger = {
+			has_war = no
+		}
+
+		cost = war_propaganda_casualties_decision_cost?100
+
+		modifier = {
+			weekly_casualties_war_support = 0.006
+		}
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 10 #AI should probably just choose this one for general purposes.
+				has_war = yes
+				has_war_support < 0.7
+			}
+			modifier = {
+				add = 20
+				has_war = yes
+				has_war_support < 0.5
+			}
+			modifier = {
+				add = 30
+				has_war = yes
+				has_war_support < 0.3
+			}
+			modifier = {
+				add = 201 #ie; consider prio idea
+				has_war = yes
+				has_casualties_war_support < -0.25
+			}
+			modifier = {
+				factor = 0
+				has_manpower < 100000
+				has_political_power < 250
+				OR = {
+					has_idea = KRG_volunteer_only
+					has_idea = KRG_limited_conscription
+					has_idea = KRG_extensive_conscription
+				}
+			}
+		}
+	}
+
+	war_propaganda_convoys = {
+
+		icon = GFX_decision_generic_naval
+
+		available = {
+			has_convoys_war_support < 0
+		}
+
+		visible = {
+			has_war_with_non_exiled_country = yes
+		}
+
+		fire_only_once = no
+
+		days_remove = 180
+
+		remove_trigger = {
+			has_war = no
+		}
+
+		cost = war_propaganda_convoys_decision_cost?100
+
+		modifier = {
+			weekly_convoys_war_support = 0.006
+		}
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 201 #ie; consider prio idea
+				has_war = yes
+				has_convoys_war_support < -0.29
+			}
+			modifier = {
+				factor = 0
+				has_manpower < 100000
+				has_political_power < 250
+				OR = {
+					has_idea = KRG_volunteer_only
+					has_idea = KRG_limited_conscription
+					has_idea = KRG_extensive_conscription
+				}
+			}
+		}
+	}
+
+	war_propaganda_bombing = {
+
+		icon = GFX_decision_generic_air
+
+		available = {
+			has_bombing_war_support < 0
+		}
+
+		visible = {
+			has_war_with_non_exiled_country = yes
+		}
+
+		fire_only_once = no
+
+		days_remove = 180
+
+		remove_trigger = {
+			has_war = no
+		}
+
+		cost = war_propaganda_bombing_decision_cost?100
+
+		modifier = {
+			weekly_bombing_war_support = 0.006
+		}
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 10 #AI should probably just choose this one for general purposes.
+				has_war = yes
+				has_war_support < 0.65
+			}
+			modifier = {
+				add = 20
+				has_war = yes
+				has_war_support < 0.50
+			}
+			modifier = {
+				add = 30
+				has_war = yes
+				has_war_support < 0.35
+			}
+			modifier = {
+				add = 201 #ie; consider prio idea
+				has_war = yes
+				has_bombing_war_support < -0.20
+			}
+			modifier = {
+				factor = 0
+				has_manpower < 100000
+				has_political_power < 250
+				OR = {
+					has_idea = KRG_volunteer_only
+					has_idea = KRG_limited_conscription
+					has_idea = KRG_extensive_conscription
+				}
+			}
+		}
+	}
+
+	war_propaganda_radio_industry = {
+
+		icon = generic_prepare_civil_war
+
+		available = {
+			has_tech = radio
+		}
+
+		cost = 75
+		fire_only_once = yes
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete war_propaganda_radio_industry target: [From.GetName]"
+			add_war_support = 0.05
+		}
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 201
+				has_war_support < 0.6
+			}
+		}
+	}
+
+	war_propaganda_film_industry = {
+
+		icon = generic_prepare_civil_war
+
+		available = {
+			has_war_with_non_exiled_country = yes
+			OR = {
+				is_major = yes
+				any_allied_country = { is_major = yes }
+			}
+		}
+
+		cost = 100
+		fire_only_once = yes
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete war_propaganda_film_industry target: [From.GetName]"
+			add_war_support = 0.10
+		}
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = 201
+				has_war_support < 0.6
+			}
+		}
+	}
+}

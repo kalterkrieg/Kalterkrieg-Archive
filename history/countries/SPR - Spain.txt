@@ -1,0 +1,106 @@
+﻿capital = 41
+
+set_oob = "SPR"
+
+starting_train_buffer = 0.8
+set_research_slots = 3
+set_convoys = 70
+set_stability = 0.46
+set_war_support = 0.15
+
+universal_starting_techs = yes
+
+if = {
+    limit = { has_dlc = "Man the Guns" }
+    set_naval_oob = "SPR_naval"
+}
+if = {
+    limit = { not ={has_dlc = "Man the Guns" }}
+    set_naval_oob = "SPR_naval_legacy"
+}
+
+set_variable = { accord_alignment_level = 1 } # accord politically aligned
+add_opinion_modifier = { target = RUS modifier = embargo }
+
+#HoS
+recruit_character = SPR_Indalecio_Prieto
+recruit_character = SPR_Various_representatives_of_each_commune
+recruit_character = SPR_Julio_Alvarez_del_Vayo
+recruit_character = SPR_Alejandro_Lerroux
+recruit_character = SPR_Jose_Maria_Gil_Robles
+recruit_character = SPR_manuel_fal_conde
+
+#Ministers
+recruit_character = SPR_Juan_Negrin
+recruit_character = SPR_Rodolfo_Llopis
+recruit_character = SPR_Julio_Alvarez_del_Vayo_foreign
+recruit_character = SPR_Jose_Giral
+recruit_character = SPR_Enrique_Tierno_Galvan
+recruit_character = SPR_Alvaro_de_Albornoz
+recruit_character = SPR_Julian_Zugazagoitia
+recruit_character = SPR_Antonio_Ortega
+recruit_character = SPR_Rafael_Sanchez_Guerra
+
+### Field Marshal
+recruit_character = SPR_jose_sanjurjo_sacanell
+recruit_character = SPR_francisco_franco_bahamonde
+recruit_character = SPR_camilo_alonso_vega
+recruit_character = SPR_carlos_asensio_cabanillas
+recruit_character = SPR_fidel_dávila_arrondo
+recruit_character = SPR_miguel_cabanellas_ferrer
+recruit_character = SPR_francisco_de_borbon_y_de_la_torre
+recruit_character = SPR_manuel_goded_llopis
+recruit_character = SPR_severiano_martínez_anido
+### Navy Leader
+recruit_character = SPR_rafael_estrada_arnais
+recruit_character = SPR_cervera_valderrama
+
+set_politics = {
+	ruling_party = social_democrat
+	last_election = "1946.6.4"
+	election_frequency = 48
+	elections_allowed = yes
+
+}
+
+add_ideas = {
+	KRG_union_democracy
+	KRG_limited_conscription
+	KRG_export_focus
+	KRG_semi_professional_military
+	KRG_immigration_light
+	KRG_civilian_economy
+
+	SPR_Juan_Negrin_hog_rso
+	SPR_Julio_Alvarez_del_Vayo_fm_rso
+	SPR_Enrique_Tierno_Galvan_em_sde
+	SPR_Alvaro_de_Albornoz_jm_sde
+	SPR_Julian_Zugazagoitia_im_sde
+	SPR_Antonio_Ortega_hoi_rso
+
+	SPR_republican_dream
+	SPR_unrulely_communes
+	SPR_divided_government
+	SPR_right_wing_resistance
+	SPR_galician_nationalism
+	SPR_backwards_economy
+}
+
+country_event = { id = krg_spr.1 days = 1 }
+country_event = { id = krg_spr.3 days = 450 }
+
+coal_add_auth_soc = yes
+coal_add_rad_soc = yes
+
+set_popularities = {
+    authoritarian_socialist = 1
+    radical_socialist = 19
+    social_democrat = 37
+    revolutionary_republican = 6
+    social_liberal = 4
+    market_liberal = 3
+    social_conservative = 22
+    authoritarian_democrat = 8
+    paternal_autocrat = 0
+    national_populist = 0
+}

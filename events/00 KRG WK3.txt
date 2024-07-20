@@ -1,0 +1,800 @@
+###########################
+# WK3 Events
+###########################
+# By Various People
+###########################
+add_namespace = WK3
+add_namespace = WK3_peace
+add_namespace = WK3_news
+
+country_event = {
+	id = WK3.1
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event WK3.1"
+	}
+	title = WK3.1.t
+	desc = WK3.1.d
+	
+	is_triggered_only = yes
+
+	trigger = {
+		has_global_flag = WK3
+		NOT = { has_global_flag = WK3_ended }
+	}
+
+	option = {
+		name = WK3.1.a
+		set_country_flag = WK3_direct_intervention
+		ai_chance = {
+			base = 100
+
+			modifier = {
+				has_war = yes
+				factor = 0
+			}
+		}
+	}
+
+	option = {
+		name = WK3.1.b
+		ai_chance = {
+			base = 0
+			modifier = {
+				tag = DNF
+				has_government = social_democrat
+				add = 400
+			}
+			modifier = {
+				tag = DNF
+				has_idea = DNF_Zoltan_Tildy_hog_sco
+				add = 65
+			}
+			modifier = {
+				tag = DNF
+				has_idea = DNF_Julius_Raab_hog_sco
+				add = 65
+			}
+			modifier = {
+				has_war = yes
+				add = 1
+			}
+		}
+	}
+}
+country_event = { #initiate the invasion of Persia
+	id = WK3.2
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event WK3.2"
+	}
+	title = WK3.2.t
+	desc = WK3.2.d
+	
+	is_triggered_only = yes
+
+	option = {
+		name = WK3.2.a #Bother the other tag
+		ai_chance = {
+			base = 100
+		}
+		if = {
+			limit = {
+				ROOT = { tag = RUS }
+			}
+			set_country_flag = WK3_persia_invasion
+			IND = {
+				country_event = {
+					id = WK3.3 
+					days = 1 
+				}
+				set_country_flag = WK3_persia_invasion
+			}
+		}
+		else_if = {
+			limit = {
+				ROOT = { tag = IND }
+			}
+			set_country_flag = WK3_persia_invasion
+			RUS = {
+				country_event = {
+					id = WK3.3 
+					days = 1 
+				}
+				set_country_flag = WK3_persia_invasion
+			}
+		}
+	}
+
+	option = {
+		name = WK3.2.b #Why did I click this?
+	}
+}
+
+country_event = { #Tag A (Rus or Ind) wants Tag B to invade Persia to ease logistics and get that oil
+	id = WK3.3
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event WK3.3"
+	}
+	title = WK3.3.t
+	desc = WK3.3.d
+	
+	is_triggered_only = yes
+
+	option = {
+		name = WK3.3.a #Haha, yes.
+		ai_chance = {
+			base = 100
+		}
+		RUS = { 
+			declare_war_on = {
+				target = PER
+				type = annex_everything
+			} 
+		}
+		IND = {
+			add_to_war = { targeted_alliance = RUS enemy = PER hostility_reason = asked_to_join }
+		}
+		hidden_effect = {
+			IRQ = {
+				country_event = {
+					id = WK3.4
+					days = 4
+				}
+			}
+		}
+	}
+
+	option = {
+		name = WK3.3.b #I am not into threesomes
+	}
+}
+
+country_event = { #Iraq wants it's piece of the pie!
+	id = WK3.4
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event WK3.4"
+	}
+	title = WK3.4.t
+	desc = WK3.4.d
+	
+	is_triggered_only = yes
+
+	option = {
+		name = WK3.4.a #Haha, yes.
+		ai_chance = {
+			base = 100
+		}
+		IRQ = { 
+			declare_war_on = {
+				target = PER
+				type = take_claimed_state
+			} 
+		}
+	}
+
+	option = {
+		name = WK3.4.b #I am not into group stuff
+	}
+}
+
+
+
+country_event = { # Accord sue for peace light
+	id = WK3_peace.1
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event WK3_peace.1"
+	}
+	title = WK3_peace.1.t
+	desc = WK3_peace.1.d
+	
+	is_triggered_only = yes
+
+	option = {
+		name = WK3_peace.1.a
+		KRG_peace_WK3_RP_Accord_light = yes
+		ai_chance = {
+			base = 75
+		}
+	}
+
+	option = {
+		name = WK3_peace.1.b
+		add_war_support = -0.05
+		ai_chance = {
+			base = 25
+		}
+	}
+}
+
+country_event = { #  Accord sue for peace harsh
+	id = WK3_peace.2
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event WK3_peace.1"
+	}
+	title = WK3_peace.2.t
+	desc = WK3_peace.2.d
+	
+	is_triggered_only = yes
+
+	option = { # Yes
+		name = WK3_peace.2.a
+		KRG_peace_WK3_RP_Accord_harsh = yes
+		ai_chance = {
+			base = 75
+		}
+	}
+
+	option = { # No
+		name = WK3_peace.2.b
+		add_war_support = -0.05
+		ai_chance = {
+			base = 25
+		}
+	}
+}
+
+
+
+country_event = { # RP sue for peace light
+	id = WK3_peace.4
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event WK3_peace.1"
+	}
+	title = WK3_peace.4.t
+	desc = WK3_peace.4.d
+	
+	is_triggered_only = yes
+
+	option = {
+		name = WK3_peace.4.a
+		KRG_peace_WK3_Accord_RP_light = yes
+		ai_chance = {
+			base = 75
+		}
+	}
+
+	option = {
+		name = WK3_peace.4.b
+		add_war_support = -0.05
+		ai_chance = {
+			base = 25
+		}
+	}
+}
+
+country_event = { # RP sue for peace harsh
+	id = WK3_peace.5
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event WK3_peace.1"
+	}
+	title = WK3_peace.5.t
+	desc = WK3_peace.5.d
+	
+	is_triggered_only = yes
+
+	option = {
+		name = WK3_peace.5.a
+		KRG_peace_WK3_Accord_RP_harsh = yes
+		ai_chance = {
+			base = 75
+		}
+	}
+
+	option = {
+		name = WK3_peace.5.b
+		add_war_support = -0.05
+		ai_chance = {
+			base = 25
+		}
+	}
+}
+
+country_event = { # Russia has lost
+	id = WK3_peace.6
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event WK3_peace.1"
+	}
+	title = WK3_peace.6.t
+	desc = WK3_peace.6.d
+
+	trigger = {
+		original_tag = RUS
+		has_global_flag = WK3
+		has_war = yes
+		is_valid_peace_target = yes
+		surrender_progress > 0.35 
+		count_triggers = {
+			amount = 2
+			NOT = { controls_state = 219 }
+			NOT = { controls_state = 195 }
+			NOT = { controls_state = 217 }
+		}
+	}
+	
+	mean_time_to_happen = {
+		days = 10
+	}
+
+	fire_only_once = yes
+
+	option = {
+		name = WK3_peace.6.a # offer peace
+		GER = {
+			country_event = {
+				id = WK3_peace.7
+				days = 3
+			}
+		}
+		ai_chance = {
+			base = 100
+		}
+	}
+
+	option = {
+		name = WK3_peace.6.b
+		add_war_support = -0.15
+		ai_chance = {
+			base = 0
+		}
+	}
+}
+
+country_event = { # Russia has lost
+	id = WK3_peace.7
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event WK3_peace.1"
+	}
+	title = WK3_peace.7.t
+	desc = WK3_peace.7.d
+	
+	is_triggered_only = yes
+
+	option = {
+		name = WK3_peace.7.a
+		RUS_RP_Peace = yes
+		ai_chance = {
+			base = 100
+		}
+	}
+
+	option = {
+		name = WK3_peace.7.b
+		add_war_support = -0.1
+		ai_chance = {
+			base = 0
+		}
+	}
+}
+
+country_event = { # Ind Demands German Withdrawl
+	id = WK3_peace.8
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event WK3_peace.1"
+	}
+	title = WK3_peace.8.t
+	desc = WK3_peace.8.d
+	
+	is_triggered_only = yes
+
+	option = {
+		name = WK3_peace.8.a
+		IND_RP_Peace = yes
+		ai_chance = {
+			base = 100
+		}
+	}
+
+	option = {
+		name = WK3_peace.8.b
+		ai_chance = {
+			base = 0
+		}
+	}
+}
+
+country_event = { # Fuck RP is invading the UK
+	id = WK3_peace.9
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event WK3_peace.9"
+	}
+	title = WK3_peace.9.t
+	desc = WK3_peace.9.d
+	
+	trigger = {
+		has_global_flag = WK3
+		original_tag = ENT
+		has_war_with = GER
+		ENG = {
+			any_core_state = {
+				is_owned_by = ENG
+				NOT = { is_controlled_by = ENG }
+			}
+		}
+		NOT = { ENT = { has_active_mission = accord_WK3_collapse_mission }}
+	}
+
+	fire_only_once = yes
+
+	mean_time_to_happen = {
+		days = 10
+	}
+
+	option = {
+		name = WK3_peace.9.a
+		trigger = {
+			CAN = { has_country_flag = nuclear_power }
+		}
+
+		GER = {
+			country_event = {
+				id = WK3_peace.10
+				days = 3
+			}
+		}
+		ai_chance = {
+			base = 75
+		}
+	}
+
+	option = {
+		name = WK3_peace.9.b
+		trigger = {
+			NOT = { CAN = { has_country_flag = nuclear_power } }
+		}
+		GER = {
+			country_event = {
+				id = WK3_peace.1
+				days = 3
+			}
+		}
+		ai_chance = {
+			base = 75
+		}
+	}
+
+	option = {
+		name = WK3_peace.9.c
+
+		for_each_scope_loop = {
+			array = global.accord_voting_country_array
+			activate_mission = accord_WK3_collapse_mission
+		}
+
+		ai_chance = {
+			base = 25
+		}
+	}
+}
+
+country_event = { # ENT threatens with CAN nukes
+	id = WK3_peace.10
+	immediate = { log = "[GetDateText]: [Root.GetName]: event WK3_peace.10" }
+	title = WK3_peace.10.t
+	desc = WK3_peace.10.d
+	
+	is_triggered_only = yes
+
+	option = {
+		name = WK3_peace.10.a
+		KRG_peace_WK3_RP_Accord_south_france = yes
+		ai_chance = {
+			base = 100
+		}
+	}
+
+	option = {
+		name = WK3_peace.10.b
+		ai_chance = {
+			base = 0
+		}
+	}
+}
+
+country_event = { # Fuck RP is winning
+	id = WK3_peace.11
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event WK3_peace.11"
+	}
+	title = WK3_peace.11.t
+	desc = WK3_peace.11.d
+	
+	trigger = {
+		has_global_flag = WK3
+		original_tag = ENT
+		has_war_with = GER
+		NFA = {
+			has_capitulated = yes
+		}
+		ITA = {
+			surrender_progress > 0.35
+		}
+		NOT = { ENT = { has_active_mission = accord_WK3_collapse_mission }}
+	}
+
+	fire_only_once = yes
+
+	mean_time_to_happen = {
+		days = 10
+	}
+
+	option = {
+		name = WK3_peace.11.a
+		trigger = {
+			CAN = { has_country_flag = nuclear_power }
+		}
+		GER = {
+			country_event = {
+				id = WK3_peace.10
+				days = 3
+			}
+		}
+		ai_chance = {
+			base = 75
+		}
+	}
+
+	option = {
+		name = WK3_peace.11.b
+		trigger = {
+			NOT = { CAN = { has_country_flag = nuclear_power } }
+		}
+		GER = {
+			country_event = {
+				id = WK3_peace.1
+				days = 3
+			}
+		}
+		ai_chance = {
+			base = 75
+		}
+	}
+
+	option = {
+		name = WK3_peace.11.c
+
+		effect_tooltip = {
+			activate_mission = accord_WK3_collapse_mission
+		}
+
+		for_each_scope_loop = {
+			array = global.accord_voting_country_array
+			activate_mission = accord_WK3_collapse_mission
+		}
+		
+		ai_chance = {
+			base = 25
+		}
+	}
+
+}
+
+country_event = { # Fuck Accord is winning
+	id = WK3_peace.12
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event WK3_peace.12"
+	}
+	title = WK3_peace.12.t
+	desc = WK3_peace.12.d
+	
+	trigger = {
+		has_global_flag = WK3
+		original_tag = GER
+		has_war_with = ENT
+		FRA = {
+			has_capitulated = yes
+		}
+	}
+
+	fire_only_once = yes
+
+	mean_time_to_happen = {
+		days = 30
+	}
+
+	option = { # Threaten with nukes
+		name = WK3_peace.12.a
+		ENT = {
+			country_event = {
+				id = WK3_peace.4
+				days = 3
+			}
+		}
+		ai_chance = {
+			base = 100
+		}
+	}
+
+	option = {
+		name = WK3_peace.12.b
+
+		every_country = {
+			limit = {
+				is_in_faction_with = GER
+			}
+			activate_mission = GER_growing_war_unrest
+		}
+
+		if = {
+			limit = { 
+				DNF = {
+					is_in_faction_with = GER
+				}
+			}
+			DNF = {
+				country_event = {
+					id = WK3_peace.13
+					days = 1
+				}
+			}
+		}
+		
+		ai_chance = {
+			base = 0
+		}
+	}
+}
+
+country_event = { # Fuck Accord is winning and germany isnt peaceing out
+	id = WK3_peace.13
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event WK3_peace.13"
+	}
+	title = WK3_peace.13.t
+	desc = WK3_peace.13.d
+	
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = {
+		name = WK3_peace.13.a
+		ENT = {
+			country_event = {
+				id = WK3_peace.14
+				days = 3
+			}
+		}
+		ai_chance = {
+			base = 40
+		}
+	}
+
+	option = {
+		name = WK3_peace.13.b
+		
+
+		ai_chance = {
+			base = 60
+		}
+	}
+}
+
+country_event = { # DNF is getting out of here
+	id = WK3_peace.14
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event WK3_peace.14"
+	}
+	title = WK3_peace.14.t
+	desc = WK3_peace.14.d
+	
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = {
+		name = WK3_peace.14.a
+		Accord_DNF_white_peace = yes
+		ai_chance = {
+			base = 100
+		}
+	}
+
+	option = {
+		name = WK3_peace.14.b
+		
+		ai_chance = {
+			base = 0
+		}
+	}
+}
+
+
+country_event = { # ARA accord noped out what to do now
+	id = WK3_peace.15
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event WK3_peace.15"
+	}
+	title = WK3_peace.15.t
+	desc = WK3_peace.15.d
+	
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = {
+		name = WK3_peace.15.a
+		ara_victory = yes
+		ai_chance = {
+			base = 35
+		}
+	}
+
+	option = {
+		name = WK3_peace.15.b
+		
+		ai_chance = {
+			base = 65
+		}
+	}
+}
+
+country_event = { # RP noped out what to do now
+	id = WK3_peace.16
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event WK3_peace.16"
+	}
+	title = WK3_peace.16.t
+	desc = WK3_peace.16.d
+	
+	is_triggered_only = yes
+
+	fire_only_once = yes
+
+	option = {
+		name = WK3_peace.16.a
+		TEX_ARA_victory = yes
+		ai_chance = {
+			base = 35
+		}
+	}
+
+	option = {
+		name = WK3_peace.16.b
+		
+		ai_chance = {
+			base = 65
+		}
+	}
+}
+
+#news_event = { #RP victory
+#	id = WK3_news.1
+#	immediate = { log = "[GetDateText]: [Root.GetName]: event WK3_news.1" }
+#	title = WK3_news.1.t
+#	desc = WK3_news.1.d
+#	
+#	is_triggered_only = yes
+#	major = yes
+#
+#	option = {
+#		name = WK3_news.1.a
+#	}
+#}
+#
+#news_event = { #Accord victory
+#	id = WK3_news.2
+#	immediate = { log = "[GetDateText]: [Root.GetName]: event WK3_news.2" }
+#	title = WK3_news.2.t
+#	desc = WK3_news.2.d
+#	
+#	is_triggered_only = yes
+#	major = yes
+#
+#	option = {
+#		name = WK3_news.2.a
+#	}
+#}
+#
+#news_event = { #Accord collapse
+#	id = WK3_news.3
+#	immediate = { log = "[GetDateText]: [Root.GetName]: event WK3_news.3" }
+#	title = WK3_news.3.t
+#	desc = WK3_news.3.d
+#	picture = GFX_ne_accord_generic
+#	
+#	is_triggered_only = yes
+#	major = yes
+#
+#	option = {
+#		name = WK3_news.3.a
+#	}
+#}

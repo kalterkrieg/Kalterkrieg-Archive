@@ -1,0 +1,203 @@
+FER_state_loyalty = {
+
+	FER_spend_pp = {
+
+		visible = {
+			FROM = {
+				NOT = {
+					is_owned_by = FER
+				}
+			}
+			
+		}
+
+		days_re_enable = 20
+		available = {
+			has_country_flag = FER_expansion
+		}
+
+		target_root_trigger = {
+			has_country_flag = FER_expansion
+		}
+
+		target_trigger = {
+			FROM = {
+				num_owned_neighbour_states = { 
+					owner = FER 
+					count > 0 
+				}
+				NOT = {
+					is_owned_by = FER
+				}
+			}
+		}
+
+		state_target = yes
+
+		targets = { 409 657 560 561 562 644 637 574 563 564 565 575 566 }
+
+		on_map_mode = map_and_decisions_view
+
+		cost = 25
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete FER_spend_pp target: [From.GetName]"
+			FROM = {
+				add_to_variable = { FER_state_sway = 1 }
+			}
+		}
+	}
+	FER_spend_cp = {
+
+		visible = {
+			FROM = {
+				NOT = {
+					is_owned_by = FER
+				}
+			}
+			
+		}
+
+		days_re_enable = 20
+
+		available = {
+			has_country_flag = FER_expansion
+		}
+
+		target_root_trigger = {
+			has_country_flag = FER_expansion
+		}
+
+		custom_cost_trigger = {
+            command_power > 29.99
+        }
+        custom_cost_text = NEE_30_cp
+
+		target_trigger = {
+			FROM = {
+				num_owned_neighbour_states = { 
+					owner = FER 
+					count > 0 
+				}
+				NOT = {
+					is_owned_by = FER
+				}
+			}
+		}
+
+		state_target = yes
+
+		targets = { 409 657 560 561 562 644 637 574 563 564 565 575 566 }
+
+		on_map_mode = map_and_decisions_view
+
+		cost = 0
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete FER_spend_cp target: [From.GetName]"
+			FROM = {
+				add_to_variable = { FER_state_sway = 1 }
+			}
+		}
+	}
+	FER_attempt_annexation = {
+
+		visible = {
+			FROM = {
+				NOT = {
+					is_owned_by = FER
+				}
+				check_variable = { FER_state_sway > 6 }
+			}
+			
+		}
+
+		days_re_enable = 45
+
+		available = {
+			has_country_flag = FER_expansion
+		}
+
+		target_root_trigger = {
+			has_country_flag = FER_expansion
+		}
+
+		fixed_random_seed = no
+
+		target_trigger = {
+			FROM = {
+				num_owned_neighbour_states = { 
+					owner = FER 
+					count > 0 
+				}
+				NOT = {
+					is_owned_by = FER
+				}
+			}
+		}
+
+		state_target = yes
+
+		targets = { 409 657 560 561 562 644 637 574 563 564 565 575 566 }
+
+		on_map_mode = map_and_decisions_view
+
+		cost = 50
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete FER_attempt_annexation target: [From.GetName]"
+			hidden_effect = {
+				if = {
+					limit = {
+						check_variable = { FROM.FER_state_sway = 7 }
+					}
+					random_list = {
+						25 = {
+							FER = {
+								transfer_state = FROM
+							}	
+						}
+						75 = {
+							add_to_variable = { FROM.FER_state_sway = 4 }
+						}
+					}
+				}
+				else_if = {
+					limit = {
+						check_variable = { FROM.FER_state_sway = 8 }
+					}
+					random_list = {
+						50 = {
+							FER = {
+								transfer_state = FROM
+							}	
+						}
+						50 = {
+							add_to_variable = { FROM.FER_state_sway = 4 }
+						}
+					}
+				}
+				else_if = {
+					limit = {
+						check_variable = { FROM.FER_state_sway = 9 }
+					}
+					random_list = {
+						75 = {
+							FER = {
+								transfer_state = FROM
+							}	
+						}
+						25 = {
+							add_to_variable = { FROM.FER_state_sway = 4 }
+						}
+					}
+				}
+				else_if = {
+					limit = {
+						check_variable = { FROM.FER_state_sway = 10 }
+					}
+					FER = {
+						transfer_state = FROM
+					}
+				}
+			}
+		}
+	}
+}

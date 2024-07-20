@@ -1,0 +1,76 @@
+add_namespace = krg_vin
+add_namespace = krg_vin_news
+
+country_event = { #Civil War
+	id = krg_vin.0
+	title = krg_vin.0.t
+	desc =krg_vin.0.d
+	is_triggered_only = yes
+	immediate = {
+		log = "[ROOT.GetName] fired krg_vin.0"
+	}
+	option = {
+		name = krg_vin.0.a
+		VIE_revolt = yes
+		news_event = {
+			id = krg_vin_news.0
+		}
+	}
+	option = {
+		name = krg_vin.0.b
+		VIE_revolt = yes		
+		VIE = { change_tag_from = VIN }		
+		news_event = {
+			id = krg_vin_news.0
+		}
+	}
+}
+
+country_event = { # Siam sort their shit and join the war
+	id = krg_vin.1
+	title = krg_vin.1.t
+	desc = krg_vin.1.d
+	is_triggered_only = yes
+	immediate = {
+		log = "[ROOT.GetName] fired krg_vin.1"
+	}
+	option = {
+		name = krg_vin.1.a
+		SIA = {	
+			remove_ideas = SIA_national_disorder 
+			if = {
+				limit = { VIE = { exists = yes } }
+				add_to_war = { 
+					targeted_alliance = JAP
+					enemy = VIE
+				hostility_reason = asked_to_join
+				}
+			}
+		}
+	}
+}
+
+
+news_event = {
+	id = krg_vin_news.0
+	title = krg_vin_news.0.t
+	desc = krg_vin_news.0.d
+	is_triggered_only = yes
+	picture = GFX_ne_VIN_revolt
+	major = yes
+	option = {
+		name = krg_vin_news.0.a
+	}
+}
+
+news_event = {
+	id = krg_vin_news.1
+	title = krg_vin_news.1.t
+	desc = krg_vin_news.1.d
+	is_triggered_only = yes
+	picture = GFX_ne_vie_win_revolt
+	major = yes
+	option = {
+		name = krg_vin_news.1.a
+	}
+}

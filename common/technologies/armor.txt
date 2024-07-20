@@ -1,0 +1,838 @@
+technologies = {
+	### GERMAN TANK NAMES IN COMMENTS SO YOU CAN FIND STUFF MORE EASILY
+	modern_tank_0 = {
+		enable_equipments = {
+			modern_tank_equipment_0
+		}
+		on_research_complete = {
+			add_to_array = {
+				array = armored_equipment_for_sale
+				value = token:modern_tank_equipment_0
+			}
+		}
+		enable_subunits = {
+			modern_armor
+		}
+		path = {
+			leads_to_tech = modern_tank_1
+			research_cost_coeff = 1
+		}
+		sub_technologies = {
+			modern_tank_0_AA
+			modern_tank_0_SPA
+		}
+		folder = {
+			name = armour_folder
+			position = {
+				x = 10
+				y = 0
+			}
+		}
+		categories = {
+			armor
+			MBT_armor
+		}
+		research_cost = 2
+		start_year = 1945
+	}
+	modern_tank_0_AA = {
+		enable_equipments = {
+			modern_tank_aa_equipment_0
+		}
+		enable_subunits = {
+			modern_sp_anti_air_brigade
+		}
+		research_cost = 2
+		start_year = 1945
+		sub_tech_index = 2
+		ai_will_do = {
+			base = 1
+		}
+		categories = {
+			armor
+			MBT_armor
+			AA_armor
+		}
+	}
+	modern_tank_0_SPA = {
+		enable_equipments = {
+			modern_tank_artillery_equipment_0
+		}
+		enable_subunits = {
+			modern_sp_artillery_brigade
+		}
+		research_cost = 2
+		start_year = 1945
+		 sub_tech_index = 1
+		ai_will_do = {
+			base = 1
+		}
+		categories = {
+			armor
+			MBT_armor
+			SPA_armor
+		}
+	}
+	modern_tank_1 = {
+		enable_equipments = {
+			modern_tank_equipment_1
+		}
+		on_research_complete = {
+			add_to_array = {
+				array = armored_equipment_for_sale
+				value = token:modern_tank_equipment_1
+			}
+			log = "Added MBT 1 to armored equipment for sale array for [THIS.GetTag]"
+		}
+		path = {
+			leads_to_tech = MBT_gun_upgrade_1
+			research_cost_coeff = 1
+		}
+		path = {
+			leads_to_tech = MBT_armour_upgrade_1
+			research_cost_coeff = 1
+		}
+		path = {
+			leads_to_tech = MBT_chassis_upgrade_1
+			research_cost_coeff = 1
+		}
+		sub_technologies = {
+			modern_tank_1_AA
+			modern_tank_1_SPA
+		}
+		research_cost = 2.5
+		start_year = 1948
+		folder = {
+			name = armour_folder
+			position = {
+				x = 10
+				y = 2
+			}
+		}
+		ai_will_do = {
+			base = 1
+		}
+		categories = {
+			armor
+			MBT_armor
+		}
+	}
+	modern_tank_1_AA = {
+		enable_equipments = {
+			modern_tank_aa_equipment_1
+		}
+		research_cost = 2
+		start_year = 1948
+		sub_tech_index = 2
+		ai_will_do = {
+			base = 1
+		}
+		categories = {
+			armor
+			MBT_armor
+			AA_armor
+		}
+	}
+	modern_tank_1_SPA = {
+		enable_equipments = {
+			modern_tank_artillery_equipment_1
+		}
+		research_cost = 2
+		start_year = 1948
+		 sub_tech_index = 1
+		ai_will_do = {
+			base = 1
+		}
+		categories = {
+			armor
+			MBT_armor
+			SPA_armor
+		}
+	}
+	MBT_gun_upgrade_1 = {
+		modern_armor = {
+			hard_attack = 0.05
+			ap_attack = 0.1
+		}
+		modern_sp_anti_air_brigade = {
+			ap_attack = 0.05
+			air_attack = 0.10
+		}
+		modern_sp_artillery_brigade = {
+			ap_attack = 0.025
+			hard_attack = 0.05
+			soft_attack = 0.1
+		}
+		path = {
+			leads_to_tech = MBT_gun_upgrade_2
+			research_cost_coeff = 1
+		}
+		research_cost = 2
+		start_year = 1950
+		folder = {
+			name = armour_folder
+			position = {
+				x = 10
+				y = 4
+			}
+		}
+		ai_will_do = {
+			base = 1
+		}
+		categories = {
+			armor
+			MBT_armor
+			armor_upgrades
+		}
+	}
+	MBT_gun_upgrade_2 = {
+		modern_armor = {
+			hard_attack = 0.1
+			ap_attack = 0.15
+		}
+		modern_sp_anti_air_brigade = {
+			ap_attack = 0.05
+			air_attack = 0.15
+		}
+		modern_sp_artillery_brigade = {
+			ap_attack = 0.05
+			hard_attack = 0.05
+			soft_attack = 0.1
+		}
+		path = {
+			leads_to_tech = modern_tank_1_complete_upgrade
+			research_cost_coeff = 0.8
+		}
+		on_research_complete = {
+			hidden_effect = {
+				set_technology = {
+					modern_tank_1_complete_upgrade = 1
+					popup = no
+				}
+			}
+			custom_effect_tooltip = unlock_nextgen_MBT
+		}
+		research_cost = 2
+		start_year = 1954
+		folder = {
+			name = armour_folder
+			position = {
+				x = 10
+				y = 8
+			}
+		}
+		ai_will_do = {
+			base = 1
+		}
+		categories = {
+			armor
+			MBT_armor
+			armor_upgrades
+		}
+	}
+	MBT_armour_upgrade_1 = {
+		modern_armor = {
+			armor_value = 0.05
+			breakthrough = 0.05
+		}
+		modern_sp_anti_air_brigade = {
+			armor_value = 0.05
+			breakthrough = 0.05
+		}
+		modern_sp_artillery_brigade = {
+			armor_value = 0.05
+			breakthrough = 0.05
+		}
+		path = {
+			leads_to_tech = MBT_armour_upgrade_2
+			research_cost_coeff = 1
+		}
+		research_cost = 2
+		start_year = 1952
+		folder = {
+			name = armour_folder
+			position = {
+				x = 8
+				y = 6
+			}
+		}
+		ai_will_do = {
+			base = 1
+		}
+		categories = {
+			armor
+			MBT_armor
+			armor_upgrades
+		}
+	}
+	MBT_armour_upgrade_2 = {
+		modern_armor = {
+			armor_value = 0.1
+			breakthrough = 0.1
+		}
+		modern_sp_anti_air_brigade = {
+			armor_value = 0.1
+			breakthrough = 0.1
+		}
+		modern_sp_artillery_brigade = {
+			armor_value = 0.1
+			breakthrough = 0.1
+		}
+		path = {
+			leads_to_tech = modern_tank_1_complete_upgrade
+			research_cost_coeff = 0.8
+		}
+		on_research_complete = {
+			hidden_effect = {
+				set_technology = {
+					modern_tank_1_complete_upgrade = 1
+					popup = no
+				}
+			}
+			custom_effect_tooltip = unlock_nextgen_MBT
+		}
+		research_cost = 2
+		start_year = 1956
+		folder = {
+			name = armour_folder
+			position = {
+				x = 8
+				y = 10
+			}
+		}
+		ai_will_do = {
+			base = 1
+		}
+		categories = {
+			armor
+			MBT_armor
+			armor_upgrades
+		}
+	}
+	MBT_chassis_upgrade_1 = {
+		modern_armor = {
+			maximum_speed = 0.05
+		}
+		modern_sp_anti_air_brigade = {
+			maximum_speed = 0.05
+		}
+		modern_sp_artillery_brigade = {
+			maximum_speed = 0.05
+		}
+		path = {
+			leads_to_tech = MBT_chassis_upgrade_2
+			research_cost_coeff = 1
+		}
+		research_cost = 2
+		start_year = 1952
+		folder = {
+			name = armour_folder
+			position = {
+				x = 12
+				y = 6
+			}
+		}
+		ai_will_do = {
+			base = 1
+		}
+		categories = {
+			armor
+			MBT_armor
+			armor_upgrades
+		}
+	}
+	MBT_chassis_upgrade_2 = {
+		modern_armor = {
+			maximum_speed = 0.1
+		}
+		modern_sp_anti_air_brigade = {
+			maximum_speed = 0.1
+		}
+		modern_sp_artillery_brigade = {
+			maximum_speed = 0.1
+		}
+		path = {
+			leads_to_tech = modern_tank_1_complete_upgrade
+			research_cost_coeff = 0.8
+		}
+		on_research_complete = {
+			hidden_effect = {
+				set_technology = {
+					modern_tank_1_complete_upgrade = 1
+					popup = no
+				}
+			}
+			custom_effect_tooltip = unlock_nextgen_MBT
+		}
+		research_cost = 2
+		start_year = 1956
+		folder = {
+			name = armour_folder
+			position = {
+				x = 12
+				y = 10
+			}
+		}
+		ai_will_do = {
+			base = 1
+		}
+		categories = {
+			armor
+			MBT_armor
+			armor_upgrades
+		}
+	}
+	modern_tank_1_complete_upgrade = {
+		modern_armor = {
+			maximum_speed = 0.1
+			breakthrough = 0.1
+			armor_value = 0.1
+			hard_attack = 0.1
+			ap_attack = 0.15
+		}
+		modern_sp_anti_air_brigade = {
+			maximum_speed = 0.1
+			breakthrough = 0.1
+			armor_value = 0.1
+			ap_attack = 0.05
+			air_attack = 0.15
+		}
+		modern_sp_artillery_brigade = {
+			maximum_speed = 0.1
+			breakthrough = 0.1
+			armor_value = 0.1
+			ap_attack = 0.05
+			hard_attack = 0.05
+			soft_attack = 0.1
+		}
+		path = {
+			leads_to_tech = modern_tank_2
+			research_cost_coeff = 1
+		}
+		research_cost = 2
+		start_year = 1956
+		folder = {
+			name = armour_folder
+			position = {
+				x = 10
+				y = 10
+			}
+		}
+		ai_will_do = {
+			base = 1
+		}
+		categories = {
+			armor
+			MBT_armor
+			armor_upgrades
+		}
+	}
+	modern_tank_2 = {
+		# path = {
+		# 	leads_to_tech = MBT_3rdgen
+		# 	research_cost_coeff = 1
+		# }
+		enable_equipments = {
+			modern_tank_equipment_2
+		}
+		#on_research_complete = {
+		#	add_to_array = {
+		#		array = armored_equipment_for_sale
+		#		value = token:modern_tank_equipment_2
+		#	}
+		#}
+		sub_technologies = {
+			modern_tank_2_AA
+			modern_tank_2_SPA
+		}
+		research_cost = 2.5
+		start_year = 1960
+		folder = {
+			name = armour_folder
+			position = {
+				x = 10
+				y = 12
+			}
+		}
+		ai_will_do = {
+			base = 1
+		}
+		categories = {
+			armor
+			MBT_armor
+			armor_upgrades
+		}
+	}
+	modern_tank_2_AA = {
+		enable_equipments = {
+			modern_tank_aa_equipment_2
+		}
+		research_cost = 2
+		start_year = 1960
+		sub_tech_index = 2
+		ai_will_do = {
+			base = 1
+		}
+		categories = {
+			armor
+			MBT_armor
+			AA_armor
+		}
+	}
+	modern_tank_2_SPA = {
+		enable_equipments = {
+			modern_tank_artillery_equipment_2
+		}
+		research_cost = 2
+		start_year = 1960
+		 sub_tech_index = 1
+		ai_will_do = {
+			base = 1
+		}
+		categories = {
+			armor
+			MBT_armor
+			SPA_armor
+		}
+	}
+	wartime_light_tank = {
+		#light tank 1945
+		enable_equipments = {
+			light_tank_equipment_0
+		}
+		on_research_complete = {
+			add_to_array = {
+				array = armored_equipment_for_sale
+				value = token:light_tank_equipment_0
+			}
+		}
+		path = {
+			leads_to_tech = light_tank_1948
+			research_cost_coeff = 1
+		}
+		enable_subunits = {
+			light_armor
+		}
+		sub_technologies = {
+			amphibious_wartime_tank
+		}
+		research_cost = 2
+		start_year = 1945
+		folder = {
+			name = armour_folder
+			position = {
+				x = 2
+				y = 0
+			}
+		}
+		ai_will_do = {
+			base = 1
+		}
+		categories = {
+			armor
+			light_armor
+		}
+	}
+	amphibious_wartime_tank = {
+		enable_equipments = {
+			amphibious_tank_equipment_1
+		}
+		enable_subunits = {
+			amphibious_armor
+		}
+		research_cost = 2
+		start_year = 1945
+		ai_will_do = {
+			base = 1
+		}
+		categories = {
+			armor
+			light_armor
+			amphibious_armor
+		}
+	}
+	light_tank_1948 = {
+		enable_equipments = {
+			light_tank_equipment_1
+		}
+		on_research_complete = {
+			add_to_array = {
+				array = armored_equipment_for_sale
+				value = token:light_tank_equipment_1
+			}
+		}
+		path = {
+			leads_to_tech = light_tank_1952
+			research_cost_coeff = 1
+		}
+		path = {
+			leads_to_tech = light_tank_speed_upgrade_1948
+			research_cost_coeff = 1
+		}
+		path = {
+			leads_to_tech = light_tank_sa_upgrade_1948
+			research_cost_coeff = 1
+		}
+		sub_technologies = {
+			amphibious_1948_tank
+		}
+		research_cost = 2
+		start_year = 1948
+		folder = {
+			name = armour_folder
+			position = {
+				x = 2
+				y = 2
+			}
+		}
+		ai_will_do = {
+			base = 1
+		}
+		categories = {
+			armor
+		}
+	}
+	amphibious_1948_tank = {
+		enable_equipments = {
+			amphibious_tank_equipment_2
+		}
+		research_cost = 2
+		start_year = 1948
+		ai_will_do = {
+			base = 1
+		}
+		categories = {
+			armor
+			light_armor
+			amphibious_armor
+		}
+	}
+	light_tank_speed_upgrade_1948 = {
+		enable_equipments = {
+		}
+		path = {
+			research_cost_coeff = 1
+		}
+		light_armor = {
+			maximum_speed = 0.05
+		}
+		amphibious_light_armor = {
+			maximum_speed = 0.05
+		}
+		research_cost = 2
+		start_year = 1950
+		folder = {
+			name = armour_folder
+			position = {
+				x = 3
+				y = 4
+			}
+		}
+		ai_will_do = {
+			base = 1
+		}
+		categories = {
+			armor
+			light_armor
+			armor_upgrades
+		}
+	}
+	light_tank_sa_upgrade_1948 = {
+		enable_equipments = {
+		}
+		path = {
+			research_cost_coeff = 1
+		}
+		light_armor = {
+			soft_attack = 0.05
+		}
+		amphibious_light_armor = {
+			soft_attack = 0.05
+		}
+		research_cost = 2
+		start_year = 1950
+		folder = {
+			name = armour_folder
+			position = {
+				x = 1
+				y = 4
+			}
+		}
+		ai_will_do = {
+			base = 1
+		}
+		categories = {
+			armor
+			light_armor
+			armor_upgrades
+		}
+	}
+	light_tank_1952 = {
+		enable_equipments = {
+			light_tank_equipment_2
+		}
+		on_research_complete = {
+			add_to_array = {
+				array = armored_equipment_for_sale
+				value = token:light_tank_equipment_2
+			}
+		}
+		path = {
+			leads_to_tech = light_tank_1960
+			research_cost_coeff = 1
+		}
+		path = {
+			leads_to_tech = light_tank_speed_upgrade_1952
+			research_cost_coeff = 1
+		}
+		path = {
+			leads_to_tech = light_tank_sa_upgrade_1952
+			research_cost_coeff = 1
+		}
+		sub_technologies = {
+			amphibious_1952_tank
+		}
+		research_cost = 2
+		start_year = 1952
+		folder = {
+			name = armour_folder
+			position = {
+				x = 2
+				y = 6
+			}
+		}
+		ai_will_do = {
+			base = 1
+		}
+		categories = {
+			armor
+			light_armor
+		}
+	}
+	amphibious_1952_tank = {
+		enable_equipments = {
+			amphibious_tank_equipment_3
+		}
+		research_cost = 2
+		start_year = 1952
+		ai_will_do = {
+			base = 1
+		}
+		categories = {
+			armor
+			light_armor
+			amphibious_armor
+		}
+	}
+	light_tank_speed_upgrade_1952 = {
+		enable_equipments = {
+		}
+		path = {
+			research_cost_coeff = 1
+		}
+		light_armor = {
+			maximum_speed = 0.05
+		}
+		amphibious_light_armor = {
+			maximum_speed = 0.05
+		}
+		#airborne_light_armor = { #this does not exist in the files.
+		#	maximum_speed = 0.05
+		#}
+		research_cost = 2
+		start_year = 1954
+		folder = {
+			name = armour_folder
+			position = {
+				x = 3
+				y = 8
+			}
+		}
+		ai_will_do = {
+			base = 1
+		}
+		categories = {
+			armor
+			light_armor
+			armor_upgrades
+		}
+	}
+	light_tank_sa_upgrade_1952 = {
+		enable_equipments = {
+		}
+		path = {
+			research_cost_coeff = 1
+		}
+		light_armor = {
+			soft_attack = 0.05
+		}
+		amphibious_light_armor = {
+			soft_attack = 0.05
+		}
+		#airborne_light_armor = { #this does not exist in the files.
+		#	soft_attack = 0.05
+		#}
+		research_cost = 2
+		start_year = 1954
+		folder = {
+			name = armour_folder
+			position = {
+				x = 1
+				y = 8
+			}
+		}
+		ai_will_do = {
+			base = 1
+		}
+		categories = {
+			armor
+			light_armor
+			armor_upgrades
+		}
+	}
+	light_tank_1960 = {
+		enable_equipments = {
+			light_tank_equipment_3
+		}
+		on_research_complete = {
+			add_to_array = {
+				array = armored_equipment_for_sale
+				value = token:light_tank_equipment_3
+			}
+		}
+		sub_technologies = {
+			amphibious_1960_tank
+		}
+		research_cost = 2
+		start_year = 1960
+		folder = {
+			name = armour_folder
+			position = {
+				x = 2
+				y = 12
+			}
+		}
+		ai_will_do = {
+			base = 1
+		}
+		categories = {
+			armor
+			light_armor
+		}
+	}
+	amphibious_1960_tank = {
+		enable_equipments = {
+			amphibious_tank_equipment_4
+		}
+		research_cost = 2
+		start_year = 1952
+		ai_will_do = {
+			base = 1
+		}
+		categories = {
+			armor
+			light_armor
+			amphibious_armor
+		}
+	}
+}

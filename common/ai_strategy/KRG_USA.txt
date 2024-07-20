@@ -1,0 +1,82 @@
+ARA_focus_on_the_ACW = { #ARA = America Restoration Alliance
+	allowed = {
+		OR = {
+			tag = CAL
+			tag = GLG
+			tag = NEE
+		}
+	}
+
+	enable = {
+		has_war_with = TEX
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = area_priority
+		id = oceania
+		value = -200
+	}
+	ai_strategy = {
+		type = area_priority
+		id = pacific
+		value = -200
+	}
+	ai_strategy = {
+		type = front_unit_request
+		tag = TEX
+		value = 30
+	}
+}
+
+TEX_focus_on_the_ACW = {
+	allowed = {
+		tag = TEX
+	}
+
+	enable = {
+		has_war_with = TEX
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = front_unit_request
+		tag = CAL
+		value = 30
+	}
+	ai_strategy = {
+		type = front_unit_request
+		tag = GLG
+		value = 20
+	}
+	ai_strategy = {
+		type = front_unit_request
+		tag = NEE
+		value = 30
+	}
+}
+ARA_defend_GLG_against_TEX = { #Modified vanilla "defend_poland_against_germany"
+	allowed = { OR = { original_tag = CAL original_tag = NEE } }
+	enable = {
+		TEX = { has_war_with = GLG }
+		country_exists = GLG
+		GLG = { surrender_progress > 0.35 }
+	}
+	abort = {
+		OR = {
+			NOT = { country_exists = GLG }
+			has_war_with = GLG
+		}
+	}
+
+	ai_strategy = {
+		type = befriend
+		id = "GLG"
+		value = 200
+	}
+	ai_strategy = {
+		type = alliance
+		id = "GLG"
+		value = 200
+	}
+}

@@ -1,0 +1,178 @@
+scripted_gui = {
+	KRG_alignment = {
+		context_type = selected_country_context
+		parent_window_token = selected_country_view_diplomacy
+		window_name = "KRG_alignment_container"
+		visible = {
+			OR = {
+				is_in_or_aligned_with_accord = yes
+				is_in_or_aligned_with_reichspakt = yes
+				is_in_or_aligned_with_geacps = yes
+				is_in_or_aligned_with_nam = yes
+			}
+		}
+		properties = {
+			KRG_alignment_icon = {
+				image = "[GetCountryAlignmentIcon]"
+			}
+			KRG_alignment_icon2 = {
+				image = "[GetCountryAlignmentIcon]"
+			}
+		}
+		effects = {
+			KRG_alignment_icon_click = {
+				if = {
+					limit = {
+						has_country_flag = KRG_alignment_listing_flag
+					}
+					clr_country_flag = KRG_alignment_listing_flag
+				}
+				else = {
+					set_country_flag = KRG_alignment_listing_flag
+				}
+				add_to_variable = {
+					global.KRG_alignment_listing_dirty = 0.01
+				}
+				clear_array = global.accord_members_alignment_list
+				clear_array = global.reichspakt_members_alignment_list
+				clear_array = global.geacps_members_alignment_list
+				clear_array = global.nam_members_alignment_list
+				for_each_scope_loop = {
+					array = global.countries
+					if = {
+						limit = {
+							is_in_or_aligned_with_accord = yes
+						}
+						add_to_array = {
+							global.accord_members_alignment_list = THIS
+						}
+					}
+					else_if = {
+						limit = {
+							is_in_or_aligned_with_reichspakt = yes
+						}
+						add_to_array = {
+							global.reichspakt_members_alignment_list = THIS
+						}
+					}
+					else_if = {
+						limit = {
+							is_in_or_aligned_with_geacps = yes
+						}
+						add_to_array = {
+							global.geacps_members_alignment_list = THIS
+						}
+					}
+					else_if = {
+						limit = {
+							is_in_or_aligned_with_nam = yes
+						}
+						add_to_array = {
+							global.nam_members_alignment_list = THIS
+						}
+					}
+				}
+				if = {
+					limit = {
+						is_in_or_aligned_with_accord = yes
+					}
+					get_sorted_scored_countries = {
+						scorer = accord_ranking_scorer
+						array = KRG_alignment_array
+					}
+				}
+				else_if = {
+					limit = {
+						is_in_or_aligned_with_reichspakt = yes
+					}
+					get_sorted_scored_countries = {
+						scorer = reichspakt_ranking_scorer
+						array = KRG_alignment_array
+					}
+				}
+				else_if = {
+					limit = {
+						is_in_or_aligned_with_geacps = yes
+					}
+					get_sorted_scored_countries = {
+						scorer = geacps_ranking_scorer
+						array = KRG_alignment_array
+					}
+				}
+				else_if = {
+					limit = {
+						is_in_or_aligned_with_nam = yes
+					}
+					get_sorted_scored_countries = {
+						scorer = nam_ranking_scorer
+						array = KRG_alignment_array
+					}
+				}
+			}
+		}
+	}
+	KRG_alignment_map_mode = {
+		context_type = country_mapicon
+		mapmode = KRG_alignment_map_mode
+		window_name = "KRG_alignment_map_mode_container"
+		dirty = global.KRG_alignment_map_mode_dirty
+		mapicon_targets = {
+			target_array = global.alignment_target_array
+		}
+		properties = {
+			KRG_alignment_map_mode_icon = {
+				image = "[GetCountryAlignmentIcon]"
+			}
+		}
+	}
+	KRG_alignment_listings = {
+		context_type = selected_country_context
+		parent_window_token = selected_country_view_diplomacy
+		window_name = "KRG_alignment_listing_container"
+		dirty = global.KRG_alignment_listing_dirty
+		visible = {
+			has_country_flag = KRG_alignment_listing_flag
+		}
+		effects = {
+			close_btn_click = {
+				clr_country_flag = KRG_alignment_listing_flag
+			}
+		}
+		properties = {
+			KRG_country_flag = {
+				image = "[This.GetFlag]"
+			}
+			KRG_alignment_icon = {
+				image = "[GetCountryAlignmentIcon]"
+			}
+			KRG_alignment_type = {
+				image = "[GetCountryAlignmentGFX]"
+			}
+		}
+		dynamic_lists = {
+			KRG_alignment_grid = {
+				array = KRG_alignment_array
+				entry_container = KRG_alignment_entry_container
+				change_scope = yes
+			}
+		}
+	}
+	KRG_alignment_notification = {
+		context_type = player_context
+		window_name = "KRG_alignment_notification_window"
+		dirty = global.KRG_alignment_notification_dirty
+		visible = {
+			has_country_flag = KRG_alignment_notification
+		}
+		effects = {
+			KRG_alignment_notification_button_click = {
+				clr_country_flag = KRG_alignment_notification
+			}
+		}
+		properties = {
+			KRG_alignment_icon = {
+				image = "[GetCountryAlignmentIcon]"
+			}
+		}
+	}
+}

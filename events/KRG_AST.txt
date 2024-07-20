@@ -1,0 +1,819 @@
+add_namespace = AST
+add_namespace = AST_pol
+add_namespace = AST_dip
+
+#####################
+###   AST EVENTS  ###
+#####################
+country_event = { 
+	id = AST.0 # Social services referendum announcement
+	title = AST.0.t
+	desc = AST.0.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: event AST.0 FROM = [From.GetName]" }
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = AST.0.a #The referendum will be held soon
+		hidden_effect = {
+			country_event = {
+				id = AST.1
+				days = 60
+			}
+		}
+	}
+}
+
+country_event = { 
+	id = AST.1 # Social services referendum
+	title = AST.1.t
+	desc = AST.1.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: event AST.1 FROM = [From.GetName]" }
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = AST.1.a #The referendum passed!
+		hidden_effect = {
+			set_country_flag = AST_social_services_referendum_passed
+		}
+	}
+}
+country_event = { 
+	id = AST.2 # The High court overturns the nationalisation of the banks
+	title = AST.2.t
+	desc = AST.2.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: event AST.2 FROM = [From.GetName]" }
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = AST.2.a  #Damnit
+		remove_ideas = AST_nationalised_banks
+	}
+}
+
+country_event = { 
+	id = AST.3 #Demob event
+	title = AST.3.t
+	desc = AST.3.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: event AST.3 FROM = [From.GetName]" }
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = AST.3.a  #We will begin now
+		country_event = {
+			id = AST.4
+			days = 5
+		}
+	}
+}
+
+country_event = { 
+	id = AST.4 #Army event
+	title = AST.4.t
+	desc = AST.4.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: event AST.4 FROM = [From.GetName]" }
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = AST.4.a  #Keep the citizen militias
+		country_event = {
+			id = AST.5
+			days = 5
+		}
+		complete_national_focus = AST_a_modern_army
+		move_down_military = yes
+	}
+	option = {
+		name = AST.4.b  #A modern permanant army
+		country_event = {
+			id = AST.5
+			days = 5
+		}
+		complete_national_focus = AST_a_modern_army
+		custom_effect_tooltip = AST_new_army_tt
+	}
+}
+
+country_event = { 
+	id = AST.5 #Navy event
+	title = AST.5.t
+	desc = AST.5.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: event AST.5 FROM = [From.GetName]" }
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = AST.5.a  #Scrap the excess
+		country_event = {
+			id = AST.6
+			days = 5
+		}
+		complete_national_focus = AST_establish_a_permanant_fleet_reserve
+		custom_effect_tooltip = AST_scrap_ships_tt
+	}
+	option = {
+		name = AST.5.b  #Establish a large permanant reserve
+		country_event = {
+			id = AST.6
+			days = 5
+		}
+		complete_national_focus = AST_establish_a_permanant_fleet_reserve
+		add_ideas = AST_permanant_fleet_reserve
+	}
+}
+
+country_event = { 
+	id = AST.6 #Airforce event
+	title = AST.6.t
+	desc = AST.6.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: event AST.6 FROM = [From.GetName]" }
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = AST.6.a  #We will begin now
+	complete_national_focus = AST_the_growth_of_the_raaf
+	}
+}
+
+country_event = { 
+	id = AST.7 #Re-negotiate the coalition
+	title = AST.7.t
+	desc = AST.7.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: event AST.7 FROM = [From.GetName]" }
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = AST.7.a  #We will give the Country Party More power
+		hidden_effect = {
+			remove_interior_minister = yes
+			add_ideas = {
+				AST_Arthur_Fadden_im_mli
+			}
+		}
+		custom_effect_tooltip = AST_Replace_IM_tt
+	}
+}
+
+
+#####################
+### AST ELECTIONS ###
+#####################
+country_event = { 
+	id = AST_pol.0 # 1948 election
+	title = AST_pol.0.t
+	desc = AST_pol.0.d
+	picture = GFX_AST_48_election
+	immediate = { log = "[GetDateText]: [Root.GetName]: event AST_pol.0 FROM = [From.GetName]" }
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	trigger = {
+		NOT = { has_country_flag = AST_1948_election_held }
+	}
+	option = {
+		name = AST_pol.0.a # UAP/Country party victory
+		set_politics = {
+			ruling_party = social_conservative
+			election_frequency = 36
+			elections_allowed = yes
+		}
+		add_popularity = {
+			ideology = social_conservative
+			popularity = 0.05
+		}	
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = 0.02
+		}	
+		add_popularity = {
+			ideology = market_liberal
+			popularity = 0.03
+		}
+		set_country_flag = AST_1948_election_held
+		coal_add_mar_lib = yes
+		coal_add_auth_dem = yes
+		hidden_effect = {
+			news_event = {
+				id = worldnews.271
+				days = 5
+			}
+			country_event = {
+				id = AST_pol.1
+				days = 180
+			}
+				log = "KRG_Event_Logging;AST Elections - UAP 48;[GetDateText];[ROOT.GetName];[FROM.GetName]"
+				complete_national_focus = AST_an_unwinnable_election
+		}	
+		ai_chance = {
+			base = 20
+			modifier = {
+				has_game_rule = {
+					rule = AST_1948_ELECTION
+					option = AST_UAP
+				}
+				factor = 1000
+			}
+		}
+	}
+	option = {
+		name = AST_pol.0.b # Labor Victory
+		set_politics = {
+			ruling_party = social_democrat
+			election_frequency = 36
+			elections_allowed = yes
+		}	
+		add_popularity = {
+			ideology = social_democrat
+			popularity = 0.1
+		}
+		set_country_flag = AST_1948_election_held
+		remove_all_ministers = yes
+		remove_ideas = AST_fragile_government
+		add_ideas = { 
+			AST_Ben_Chifley_hog_sde
+			AST_Walter_Nash_fm_sde
+			AST_John_Dedman_em_sde
+			AST_HV_Evatt_jm_sde
+			AST_Jack_Lang_im_sde
+		}
+		hidden_effect = {
+			news_event = {
+				id = worldnews.272
+				days = 5
+			}
+			country_event = {
+				id = AST_pol.2
+				days =180
+			}
+			log = "KRG_Event_Logging;AST Elections - Labor 48;[GetDateText];[ROOT.GetName];[FROM.GetName]"
+			complete_national_focus = AST_the_light_on_the_hill
+		
+		}	
+		ai_chance = {
+			base = 80
+			modifier = {
+				has_game_rule = {
+					rule = AST_1948_ELECTION
+					option = AST_LABOR
+				}
+				factor = 1000
+			}
+		}
+	}
+}
+country_event = { 
+	id = AST_pol.1 # Labor Leadership elections 48
+	title = AST_pol.1.t
+	desc = AST_pol.1.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: event AST_pol.1 FROM = [From.GetName]" }
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = { 
+		name = AST_pol.1.a #Evatt is elected leader of the Party
+		set_country_flag = AST_ALP_Evatt_leader_48
+		custom_effect_tooltip = AST_ALP_leader_1
+		hidden_effect = {
+				log = "KRG_Event_Logging;AST Elections - Labor 48 Leadership Evatt;[GetDateText];[ROOT.GetName];[FROM.GetName]"
+		}
+		ai_chance = {
+			base = 3
+		}		
+	}	
+	option = { 
+		name = AST_pol.1.b #Lang is elected leader of the Party
+		set_country_flag = AST_ALP_Lang_leader_48
+		custom_effect_tooltip = AST_ALP_leader_2
+		hidden_effect = {
+				log = "KRG_Event_Logging;AST Elections - Labor 48 Leadership Lang;[GetDateText];[ROOT.GetName];[FROM.GetName]"
+		}		
+		ai_chance = {
+			base = 3
+		}
+	}	
+	option = { 
+		name = AST_pol.1.c #Nash is elected leader of the Party
+		set_country_flag = AST_ALP_Nash_Leader_48
+		custom_effect_tooltip = AST_ALP_leader_3
+		hidden_effect = {
+				log = "KRG_Event_Logging;AST Elections - Labor 48 Leadership Nash;[GetDateText];[ROOT.GetName];[FROM.GetName]"
+		}		
+		ai_chance = {
+			base = 1
+		}
+	}	
+}
+
+country_event = { 
+	id = AST_pol.2 # UAP Leadership elections 48
+	title = AST_pol.2.t
+	desc = AST_pol.2.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: event AST_pol.2 FROM = [From.GetName]" }
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = { 
+		name = AST_pol.2.a #Holland is elected leader of the Party
+		set_country_flag = AST_UAP_Leader_Holland_48
+		custom_effect_tooltip = AST_UAP_leader_1
+		hidden_effect = {
+				log = "KRG_Event_Logging;AST Elections - Labor 48 Leadership Holland;[GetDateText];[ROOT.GetName];[FROM.GetName]"
+		}
+		ai_chance = {
+			base = 1
+		}		
+	}	
+	option = { 
+		name = AST_pol.2.b #Menzies is elected leader of the Party
+		set_country_flag = AST_UAP_Leader_Menzies_48
+		custom_effect_tooltip = AST_UAP_leader_2
+		hidden_effect = {
+				log = "KRG_Event_Logging;AST Elections - UAP 48 Leadership Menzies;[GetDateText];[ROOT.GetName];[FROM.GetName]"
+		}	
+		ai_chance = {
+			base = 1
+		}	
+	}	
+}
+
+country_event = { 
+	id = AST_pol.3 # 1951 election
+	title = AST_pol.3.t
+	desc = AST_pol.3.d
+	picture = GFX_AST_48_election
+	immediate = { log = "[GetDateText]: [Root.GetName]: event AST_pol.3 FROM = [From.GetName]" }
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	trigger = {
+		NOT = { has_country_flag = AST_1951_election_held }
+	}
+	option = {
+		name = AST_pol.3.a # UAP/Country party victory
+		set_politics = {
+			ruling_party = social_conservative
+			election_frequency = 36
+			elections_allowed = yes
+		}
+		add_popularity = {
+			ideology = social_conservative
+			popularity = 0.05
+		}	
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = 0.02
+		}	
+		add_popularity = {
+			ideology = market_liberal
+			popularity = 0.03
+		}
+		set_country_flag = AST_1951_election_held
+		coal_add_mar_lib = yes
+		coal_add_auth_dem = yes
+		remove_all_ministers = yes
+		if = {
+			limit = {
+				OR = {
+					has_country_flag = AST_UAP_Leader_Holland_48
+					has_completed_focus = AST_an_unwinnable_election
+				}
+			}
+			add_ideas = { 
+				AST_Sidney_Holland_hog_sco
+   				AST_Richard_Casey_fm_sco
+    			AST_Earle_Page_em_mli
+    			AST_John_Spicer_jm_sco
+    			AST_Arthur_Fadden_im_mli
+			}
+			hidden_effect = {
+				news_event = {
+					id = worldnews.273
+					days = 5
+				}
+			}
+		}
+		else_if = {
+			limit = {
+						has_country_flag = AST_UAP_Leader_Menzies_48
+			}
+			add_ideas = { 
+				AST_Robert_Menzies_hog_sco
+   				AST_Richard_Casey_fm_sco
+    			AST_Arthur_Fadden_em_mli
+    			AST_John_Spicer_jm_sco
+    			AST_Keith_Holyoake_im_sco
+			}
+			hidden_effect = {
+				news_event = {
+					id = worldnews.273
+					days = 5
+				}
+			}
+		}
+		hidden_effect = {
+			country_event = {
+				id = AST_pol.4
+				days = 180
+			}
+				log = "KRG_Event_Logging;AST Elections - UAP 51;[GetDateText];[ROOT.GetName];[FROM.GetName]"
+			
+		}	
+		ai_chance = {
+			base = 35
+			modifier = {
+				has_game_rule = {
+					rule = AST_1951_ELECTION
+					option = AST_1951_UAP
+				}
+				factor = 1000
+			}
+		}
+	}
+	option = {
+		name = AST_pol.3.b # Labor Victory
+		set_politics = {
+			ruling_party = social_democrat
+			election_frequency = 36
+			elections_allowed = yes
+		}	
+		add_popularity = {
+			ideology = social_democrat
+			popularity = 0.1
+		}
+		set_country_flag = AST_1951_election_held
+		remove_all_ministers = yes
+		if = {
+			limit = {
+				has_country_flag = AST_ALP_Evatt_leader_48	
+			}
+			add_ideas = { 
+				AST_HV_Evatt_hog_sde
+				AST_Walter_Nash_fm_sde
+				AST_John_Dedman_em_sde
+				AST_Frank_Forde_jm_sde
+				AST_Arthur_Calwell_im_sde
+			}
+			hidden_effect = {
+				news_event = {
+					id = worldnews.274
+					days = 5
+				}
+			}
+		}
+		else_if = {
+			limit = { 
+				has_country_flag = AST_ALP_Lang_leader_48
+			}
+			add_ideas = { 
+				AST_Jack_Lang_hog_sde
+				AST_Eddie_Ward_fm_sde
+				AST_John_Dedman_em_sde
+				AST_HV_Evatt_jm_sde
+				AST_Stan_Amour_im_sde
+			}
+			hidden_effect = {
+				news_event = {
+					id = worldnews.274
+					days = 5
+				}
+			}
+		}
+		else_if ={
+			limit = { 
+				has_country_flag = AST_ALP_Nash_Leader_48
+			}
+			add_ideas = { 
+				AST_Walter_Nash_hog_sde
+				AST_Norman_Makin_fm_sde
+				AST_John_Dedman_em_sde
+				AST_HV_Evatt_jm_sde
+				AST_Jack_Lang_im_sde
+			}
+			hidden_effect = {
+				news_event = {
+					id = worldnews.274
+					days = 5
+				}
+			}
+		}
+		else = {
+			hidden_effect = {
+				set_country_flag = AST_ALL_reelction_51
+			}
+		}
+		hidden_effect = {
+			country_event = {
+				id = AST_pol.5
+				days =180
+			}
+			country_event = {
+				id = AST_pol.7
+				days =100
+			}
+				log = "KRG_Event_Logging;AST Elections - Labor 51;[GetDateText];[ROOT.GetName];[FROM.GetName]"
+		}	
+		ai_chance = {
+			base = 65
+			modifier = {
+				has_game_rule = {
+					rule = AST_1951_ELECTION
+					option = AST_1951_LABOR
+				}
+				factor = 1000
+			}
+		}
+	}
+}
+
+country_event = { 
+	id = AST_pol.4 # Labor Leadership elections 51
+	title = AST_pol.4.t
+	desc = AST_pol.4.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: event AST_pol.4 FROM = [From.GetName]" }
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = { 
+		name = AST_pol.4.a #Evatt is elected leader of the Party
+		set_country_flag = AST_ALP_Evatt_leader_51
+		custom_effect_tooltip = AST_ALP_leader_1
+		hidden_effect = {
+				log = "KRG_Event_Logging;AST Elections - Labor 51 Leadership Evatt;[GetDateText];[ROOT.GetName];[FROM.GetName]"
+		}		
+	}	
+	option = { 
+		name = AST_pol.4.b #Ward is elected leader of the Party
+		set_country_flag = AST_ALP_Ward_leader_51
+		custom_effect_tooltip = AST_ALP_leader_5
+		hidden_effect = {
+				log = "KRG_Event_Logging;AST Elections - Labor 51 Leadership Ward;[GetDateText];[ROOT.GetName];[FROM.GetName]"
+		}		
+	}	
+	option = { 
+		name = AST_pol.4.c #Calwell is elected leader of the Party
+		set_country_flag = AST_ALP_Calwell_Leader_51
+		custom_effect_tooltip = AST_ALP_leader_4
+		hidden_effect = {
+				log = "KRG_Event_Logging;AST Elections - Labor 51 Leadership Calwell;[GetDateText];[ROOT.GetName];[FROM.GetName]"
+		}		
+	}	
+}
+country_event = { 
+	id = AST_pol.5 # UAP Leadership elections 51
+	title = AST_pol.5.t
+	desc = AST_pol.5.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: event AST_pol.5 FROM = [From.GetName]" }
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = { 
+		name = AST_pol.5.a #Casey is elected leader of the Party
+		set_country_flag = AST_UAP_Leader_Casey_51
+		custom_effect_tooltip = AST_UAP_leader_3
+		hidden_effect = {
+				log = "KRG_Event_Logging;AST Elections - Labor 51 Leadership Casey;[GetDateText];[ROOT.GetName];[FROM.GetName]"
+		}		
+	}	
+	option = { 
+		name = AST_pol.5.b #Menzies is elected leader of the Party
+		set_country_flag = AST_UAP_Leader_Menzies_51
+		custom_effect_tooltip = AST_UAP_leader_2
+		hidden_effect = {
+				log = "KRG_Event_Logging;AST Elections - UAP 51 Leadership Menzies;[GetDateText];[ROOT.GetName];[FROM.GetName]"
+		}		
+	}	
+}
+
+country_event = { 
+	id = AST_pol.6 # 1954 election
+	title = AST_pol.6.t
+	desc = AST_pol.6.d
+	picture = GFX_AST_48_election
+	immediate = { log = "[GetDateText]: [Root.GetName]: event AST_pol.6 FROM = [From.GetName]" }
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = {
+		name = AST_pol.6.a # UAP/Country party victory
+		set_politics = {
+			ruling_party = social_conservative
+			election_frequency = 36
+			elections_allowed = yes
+		}
+		add_popularity = {
+			ideology = social_conservative
+			popularity = 0.05
+		}	
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = 0.02
+		}	
+		add_popularity = {
+			ideology = market_liberal
+			popularity = 0.03
+		}
+		set_country_flag = AST_1954_election_held
+		coal_add_mar_lib = yes
+		coal_add_auth_dem = yes
+		remove_all_ministers = yes
+		if = {
+			limit = {
+				has_country_flag = AST_UAP_Leader_Casey_51
+			}
+			add_ideas = { 
+				AST_Richard_Casey_hog_sco
+   				AST_Percy_Spender_fm_sco
+				AST_Arthur_Fadden_em_mli
+    			AST_John_Spicer_jm_sco
+    			AST_Harold_Holt_im_sco
+			}
+		}
+		else_if = {
+			limit = {
+				OR = {
+					has_country_flag = AST_UAP_Leader_Menzies_51
+					has_country_flag = AST_UAP_Leader_Menzies_48
+				}
+			}
+			add_ideas = { 
+				AST_Robert_Menzies_hog_sco
+   				AST_Eric_Harrison_fm_sco
+    			AST_Arthur_Fadden_em_mli
+    			AST_John_Spicer_jm_sco
+    			AST_Harold_Holt_im_sco
+			}
+		}
+		hidden_effect = {
+			log = "KRG_Event_Logging;AST Elections - UAP 54;[GetDateText];[ROOT.GetName];[FROM.GetName]"
+			news_event = {
+				id = worldnews.275
+				days = 5
+			}
+		}
+		ai_chance = {
+			base = 50
+			modifier = {
+				has_game_rule = {
+					rule = AST_1954_ELECTION
+					option = AST_1954_UAP
+				}
+				factor = 1000
+			}
+		}
+
+	}
+	option = {
+		name = AST_pol.6.b # Labor Victory
+		set_politics = {
+			ruling_party = social_democrat
+			election_frequency = 36
+			elections_allowed = yes
+		}	
+		add_popularity = {
+			ideology = social_democrat
+			popularity = 0.1
+		}
+		set_country_flag = AST_1954_election_held
+		remove_all_ministers = yes
+		if = {
+			limit = {
+				has_country_flag = AST_ALP_Evatt_leader_51	
+			}
+			add_ideas = { 
+				AST_HV_Evatt_hog_sde
+				AST_Norman_Makin_fm_sde
+				AST_John_Dedman_em_sde
+				AST_Frank_Forde_jm_sde
+				AST_Arthur_Calwell_im_sde
+			}
+			hidden_effect = {
+				news_event = {
+					id = worldnews.276
+					days = 5
+				}
+			}
+		}
+		else_if = {
+			limit = { 
+				has_country_flag = AST_ALP_Ward_leader_51
+			}
+			add_ideas = { 
+				AST_Eddie_Ward_hog_sde
+				AST_John_Armstrong_fm_sde
+				AST_John_Dedman_em_sde
+				AST_HV_Evatt_jm_sde
+				AST_Arthur_Calwell_im_sde
+			}
+		}
+		else ={
+			add_ideas = { 
+				AST_Arthur_Calwell_hog_sde
+				AST_Norman_Makin_fm_sde
+				AST_John_Dedman_em_sde
+				AST_Kim_Beazley_jm_sde
+				AST_Eddie_Ward_im_sde
+			}
+		}
+		
+		hidden_effect = {
+			log = "KRG_Event_Logging;AST Elections - Labor 54;[GetDateText];[ROOT.GetName];[FROM.GetName]"
+			news_event = {
+				id = worldnews.276
+				days = 5
+			}
+		}
+		ai_chance = {
+			base = 50
+			modifier = {
+				has_game_rule = {
+					rule = AST_1954_ELECTION
+					option = AST_1954_LABOR
+				}
+				factor = 1000
+			}
+		}
+	}
+}
+
+country_event = { 
+	id = AST_pol.7 # Labor Leadership elections 51 chifely death
+	title = AST_pol.7.t
+	desc = AST_pol.7.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: event AST_pol.7 FROM = [From.GetName]" }
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { 
+		remove_all_ministers = yes
+		name = AST_pol.7.a #Evatt is elected leader of the Party
+		set_country_flag = AST_ALP_Evatt_leader_51
+		custom_effect_tooltip = AST_ALP_leader_1
+		hidden_effect = {
+				log = "KRG_Event_Logging;AST Elections - Labor 51 Leadership Evatt;[GetDateText];[ROOT.GetName];[FROM.GetName]"
+		}		
+		add_ideas = { 
+			AST_HV_Evatt_hog_sde
+			AST_Norman_Makin_fm_sde
+			AST_John_Dedman_em_sde
+			AST_Frank_Forde_jm_sde
+			AST_Arthur_Calwell_im_sde
+		}
+	}	
+	option = { 
+		remove_all_ministers = yes
+		name = AST_pol.7.b #Ward is elected leader of the Party
+		set_country_flag = AST_ALP_Ward_leader_51
+		custom_effect_tooltip = AST_ALP_leader_5
+		hidden_effect = {
+				log = "KRG_Event_Logging;AST Elections - Labor 51 Leadership Ward;[GetDateText];[ROOT.GetName];[FROM.GetName]"
+		}
+		add_ideas = { 
+			AST_Eddie_Ward_hog_sde
+			AST_John_Armstrong_fm_sde
+			AST_John_Dedman_em_sde
+			AST_HV_Evatt_jm_sde
+			AST_Arthur_Calwell_im_sde
+		}		
+	}	
+	option = { 
+		remove_all_ministers = yes
+		name = AST_pol.7.c #Calwell is elected leader of the Party
+		set_country_flag = AST_ALP_Calwell_Leader_51
+		custom_effect_tooltip = AST_ALP_leader_4
+		hidden_effect = {
+				log = "KRG_Event_Logging;AST Elections - Labor 51 Leadership Calwell;[GetDateText];[ROOT.GetName];[FROM.GetName]"
+		}
+		add_ideas = { 
+			AST_Arthur_Calwell_hog_sde
+			AST_Norman_Makin_fm_sde
+			AST_John_Dedman_em_sde
+			AST_Kim_Beazley_jm_sde
+			AST_Eddie_Ward_im_sde
+		}		
+	}	
+}
+
+country_event = { # Vietnam Civil war
+	id = AST_dip.0
+	title = AST_dip.0.t
+	desc = AST_dip.0.d
+
+	picture = GFX_AST_vietnam
+
+	is_triggered_only = yes
+	
+	option = {
+		name = AST_dip.0.a
+
+		VIE = { save_event_target_as = volunteer_target }
+		send_volunteers_to_TARGET = yes
+	}
+}

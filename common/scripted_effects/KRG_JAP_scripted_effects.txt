@@ -1,0 +1,1318 @@
+# initial parliament setup trigger in history
+JAP_setup_parliament = {
+	JAP = {
+		#clr_country_flag = JAP_Yoriyasu_Arima
+
+		# set seats and number of seats supporting
+		set_variable = { house_of_representatives_seats = 465 }
+		set_variable = { house_of_representatives_support = 363 }
+
+		# make array containing id for the three japanese parties (hatoyama, yoshida and kidoites)
+		add_to_array = { house_of_representatives_member_array = 1 }
+		add_to_array = { house_of_representatives_member_array = 2 }
+		add_to_array = { house_of_representatives_member_array = 3 }
+
+		JAP_refresh_parliament = yes
+		JAP_parliament_semicircle = yes
+	}
+}
+
+# initial power broker gui setup trigger in history
+JAP_setup_power_brokers = {
+	JAP = {
+		#clr_country_flag = JAP_Yoriyasu_Arima
+		clear_array = power_brokers_array
+
+		# make array for id of each power broker
+		add_to_array = { power_brokers_array = 1 }
+		add_to_array = { power_brokers_array = 2 }
+		add_to_array = { power_brokers_array = 3 }
+
+		# set up vars for power broker 1-3 (it uses states to do it lol)
+		1 = {
+			set_variable = { power_brokers_support = 87 }
+			clear_array = power_brokers_influence_array
+
+			add_to_array = { power_brokers_influence_array = 47 }
+			add_to_array = { power_brokers_influence_array = 31 }
+			add_to_array = { power_brokers_influence_array = 22 }
+		}
+		2 = {
+			set_variable = { power_brokers_support = 45 }
+			clear_array = power_brokers_influence_array
+
+			add_to_array = { power_brokers_influence_array = 29 }
+			add_to_array = { power_brokers_influence_array = 19 }
+			add_to_array = { power_brokers_influence_array = 52 }
+		}
+		3 = {
+			set_variable = { power_brokers_support = 21 }
+			clear_array = power_brokers_influence_array
+
+			add_to_array = { power_brokers_influence_array = 34 }
+			add_to_array = { power_brokers_influence_array = 26 }
+			add_to_array = { power_brokers_influence_array = 40 }
+		}
+
+		JAP_calculate_influence = yes
+	}
+}
+
+# spits out value for the power bar progress of each faction based on influence
+JAP_calculate_influence = {
+	clear_array = power_brokers_influence_array
+	clear_array = power_brokers_influence_percent_array
+	add_to_array = { power_brokers_influence_array = 0 }
+	add_to_array = { power_brokers_influence_array = 0 }
+	add_to_array = { power_brokers_influence_array = 0 }
+
+	for_each_scope_loop = {
+		array = power_brokers_array
+
+		for_each_loop = {
+			array = power_brokers_influence_array
+
+			add_to_variable = { JAP.power_brokers_influence_array^i = power_brokers_influence_array^i }
+		}
+		log = "[?power_brokers_influence_array^i]"
+	}
+
+	for_each_loop = {
+		array = power_brokers_influence_array
+
+		divide_variable = { power_brokers_influence_array^i = power_brokers_array^num }
+		round_variable = power_brokers_influence_array^i
+		add_to_variable = { JAP.temp_total = power_brokers_influence_array^i }
+	}
+
+	# extra to make sure it adds up to 100
+	if = {
+		limit = {
+			check_variable = { temp_total < 100 }
+		}
+		set_temp_variable = { temp = 100 }
+		subtract_from_temp_variable = { temp = temp_total }
+		find_highest_in_array = { array = power_brokers_influence_array index = highest_index }
+		add_to_variable = { power_brokers_influence_array^highest_index = temp }
+	}
+	else_if = {
+		limit = {
+			check_variable = { temp_total > 100 }
+		}
+		subtract_from_temp_variable = { temp_total = 100 }
+		find_highest_in_array = { array = power_brokers_influence_array index = highest_index }
+		subtract_from_variable = { power_brokers_influence_array^highest_index = temp_total }
+	}
+
+	for_each_loop = {
+		array = power_brokers_influence_array
+
+		add_to_array = { power_brokers_influence_percent_array = power_brokers_influence_array^i }
+	}
+
+	add_to_variable = { power_brokers_influence_percent_array^1 = power_brokers_influence_percent_array^0 }
+	set_variable = { power_brokers_influence_percent_array^2 = 100 }
+}
+
+# general parliament code stuff yada yada
+JAP_refresh_parliament = {
+	clear_array = house_of_representatives_main_array
+	clear_array = house_of_representatives_seat_array
+	clear_array = temp_seat
+
+	add_to_array = { house_of_representatives_seat_array = 212 }
+	add_to_array = { house_of_representatives_seat_array = 172 }
+	add_to_array = { house_of_representatives_seat_array = 81 }
+
+	set_variable = { house_of_representatives_support_percent = house_of_representatives_support }
+	divide_variable = { house_of_representatives_support_percent = house_of_representatives_seats }
+	multiply_variable = { house_of_representatives_support_percent = 100 }
+	round_variable = house_of_representatives_support_percent
+
+	for_each_loop = {
+		array = house_of_representatives_seat_array
+
+		add_to_array = { temp_seat = house_of_representatives_seat_array^i }
+	}
+
+	set_temp_variable = { temp = 0 }
+	set_temp_variable = { temp_index = 1 }
+	set_temp_variable = { temp_size = temp_seat^num }
+
+	while_loop_effect = {
+		limit = {
+			check_variable = { temp < temp_size }
+		}
+		add_to_variable = { temp_seat^temp_index = temp_seat^temp }
+		add_to_temp_variable = { temp = 1 }
+		add_to_temp_variable = { temp_index = 1 }
+	}
+
+	set_temp_variable = { temp = 0 }
+
+	while_loop_effect = {
+		limit = {
+			check_variable = { temp < temp_size }
+		}
+		resize_array = { array = house_of_representatives_main_array value = house_of_representatives_member_array^temp size = temp_seat^temp }
+		add_to_temp_variable = { temp = 1 }
+	}
+
+	add_to_variable = { show_JAP_parliament = 1 }
+}
+
+JAP_build_parliament_member_seat = {
+	set_temp_variable = { temp_seat_count = house_of_representatives_seat_array^temp_index }
+
+	while_loop_effect = {
+		limit = {
+			check_variable = { temp_seat_count > 0 }
+		}
+		add_to_array = { house_of_representatives_main_array = temp_current_member }
+		subtract_from_temp_variable = { temp_seat_count = 1 }
+	}
+}
+
+# ignore semicircle shape experiment
+JAP_parliament_semicircle = {
+	add_to_array = { house_of_representatives_x_array = 0 }
+	add_to_array = { house_of_representatives_y_array = 211 }
+	add_to_array = { house_of_representatives_x_array = 11 }
+	add_to_array = { house_of_representatives_y_array = 211 }
+	add_to_array = { house_of_representatives_x_array = 23 }
+	add_to_array = { house_of_representatives_y_array = 211 }
+	add_to_array = { house_of_representatives_x_array = 34 }
+	add_to_array = { house_of_representatives_y_array = 211 }
+	add_to_array = { house_of_representatives_x_array = 45 }
+	add_to_array = { house_of_representatives_y_array = 211 }
+	add_to_array = { house_of_representatives_x_array = 56 }
+	add_to_array = { house_of_representatives_y_array = 211 }
+	add_to_array = { house_of_representatives_x_array = 68 }
+	add_to_array = { house_of_representatives_y_array = 211 }
+	add_to_array = { house_of_representatives_x_array = 79 }
+	add_to_array = { house_of_representatives_y_array = 211 }
+	add_to_array = { house_of_representatives_x_array = 90 }
+	add_to_array = { house_of_representatives_y_array = 211 }
+	add_to_array = { house_of_representatives_x_array = 101 }
+	add_to_array = { house_of_representatives_y_array = 211 }
+	add_to_array = { house_of_representatives_x_array = 113 }
+	add_to_array = { house_of_representatives_y_array = 211 }
+	add_to_array = { house_of_representatives_x_array = 1 }
+	add_to_array = { house_of_representatives_y_array = 200 }
+	add_to_array = { house_of_representatives_x_array = 12 }
+	add_to_array = { house_of_representatives_y_array = 200 }
+	add_to_array = { house_of_representatives_x_array = 23 }
+	add_to_array = { house_of_representatives_y_array = 200 }
+	add_to_array = { house_of_representatives_x_array = 35 }
+	add_to_array = { house_of_representatives_y_array = 200 }
+	add_to_array = { house_of_representatives_x_array = 46 }
+	add_to_array = { house_of_representatives_y_array = 200 }
+	add_to_array = { house_of_representatives_x_array = 57 }
+	add_to_array = { house_of_representatives_y_array = 200 }
+	add_to_array = { house_of_representatives_x_array = 69 }
+	add_to_array = { house_of_representatives_y_array = 200 }
+	add_to_array = { house_of_representatives_x_array = 2 }
+	add_to_array = { house_of_representatives_y_array = 188 }
+	add_to_array = { house_of_representatives_x_array = 80 }
+	add_to_array = { house_of_representatives_y_array = 200 }
+	add_to_array = { house_of_representatives_x_array = 14 }
+	add_to_array = { house_of_representatives_y_array = 188 }
+	add_to_array = { house_of_representatives_x_array = 25 }
+	add_to_array = { house_of_representatives_y_array = 188 }
+	add_to_array = { house_of_representatives_x_array = 92 }
+	add_to_array = { house_of_representatives_y_array = 200 }
+	add_to_array = { house_of_representatives_x_array = 37 }
+	add_to_array = { house_of_representatives_y_array = 188 }
+	add_to_array = { house_of_representatives_x_array = 103 }
+	add_to_array = { house_of_representatives_y_array = 200 }
+	add_to_array = { house_of_representatives_x_array = 48 }
+	add_to_array = { house_of_representatives_y_array = 188 }
+	add_to_array = { house_of_representatives_x_array = 5 }
+	add_to_array = { house_of_representatives_y_array = 176 }
+	add_to_array = { house_of_representatives_x_array = 60 }
+	add_to_array = { house_of_representatives_y_array = 188 }
+	add_to_array = { house_of_representatives_x_array = 115 }
+	add_to_array = { house_of_representatives_y_array = 200 }
+	add_to_array = { house_of_representatives_x_array = 16 }
+	add_to_array = { house_of_representatives_y_array = 177 }
+	add_to_array = { house_of_representatives_x_array = 71 }
+	add_to_array = { house_of_representatives_y_array = 188 }
+	add_to_array = { house_of_representatives_x_array = 27 }
+	add_to_array = { house_of_representatives_y_array = 177 }
+	add_to_array = { house_of_representatives_x_array = 83 }
+	add_to_array = { house_of_representatives_y_array = 188 }
+	add_to_array = { house_of_representatives_x_array = 39 }
+	add_to_array = { house_of_representatives_y_array = 177 }
+	add_to_array = { house_of_representatives_x_array = 7 }
+	add_to_array = { house_of_representatives_y_array = 165 }
+	add_to_array = { house_of_representatives_x_array = 51 }
+	add_to_array = { house_of_representatives_y_array = 176 }
+	add_to_array = { house_of_representatives_x_array = 94 }
+	add_to_array = { house_of_representatives_y_array = 188 }
+	add_to_array = { house_of_representatives_x_array = 19 }
+	add_to_array = { house_of_representatives_y_array = 166 }
+	add_to_array = { house_of_representatives_x_array = 62 }
+	add_to_array = { house_of_representatives_y_array = 177 }
+	add_to_array = { house_of_representatives_x_array = 30 }
+	add_to_array = { house_of_representatives_y_array = 166 }
+	add_to_array = { house_of_representatives_x_array = 106 }
+	add_to_array = { house_of_representatives_y_array = 188 }
+	add_to_array = { house_of_representatives_x_array = 74 }
+	add_to_array = { house_of_representatives_y_array = 177 }
+	add_to_array = { house_of_representatives_x_array = 42 }
+	add_to_array = { house_of_representatives_y_array = 166 }
+	add_to_array = { house_of_representatives_x_array = 11 }
+	add_to_array = { house_of_representatives_y_array = 154 }
+	add_to_array = { house_of_representatives_x_array = 118 }
+	add_to_array = { house_of_representatives_y_array = 188 }
+	add_to_array = { house_of_representatives_x_array = 86 }
+	add_to_array = { house_of_representatives_y_array = 177 }
+	add_to_array = { house_of_representatives_x_array = 22 }
+	add_to_array = { house_of_representatives_y_array = 155 }
+	add_to_array = { house_of_representatives_x_array = 54 }
+	add_to_array = { house_of_representatives_y_array = 165 }
+	add_to_array = { house_of_representatives_x_array = 34 }
+	add_to_array = { house_of_representatives_y_array = 155 }
+	add_to_array = { house_of_representatives_x_array = 66 }
+	add_to_array = { house_of_representatives_y_array = 165 }
+	add_to_array = { house_of_representatives_x_array = 98 }
+	add_to_array = { house_of_representatives_y_array = 177 }
+	add_to_array = { house_of_representatives_x_array = 46 }
+	add_to_array = { house_of_representatives_y_array = 155 }
+	add_to_array = { house_of_representatives_x_array = 15 }
+	add_to_array = { house_of_representatives_y_array = 142 }
+	add_to_array = { house_of_representatives_x_array = 78 }
+	add_to_array = { house_of_representatives_y_array = 166 }
+	add_to_array = { house_of_representatives_x_array = 26 }
+	add_to_array = { house_of_representatives_y_array = 144 }
+	add_to_array = { house_of_representatives_x_array = 110 }
+	add_to_array = { house_of_representatives_y_array = 177 }
+	add_to_array = { house_of_representatives_x_array = 58 }
+	add_to_array = { house_of_representatives_y_array = 154 }
+	add_to_array = { house_of_representatives_x_array = 38 }
+	add_to_array = { house_of_representatives_y_array = 144 }
+	add_to_array = { house_of_representatives_x_array = 90 }
+	add_to_array = { house_of_representatives_y_array = 166 }
+	add_to_array = { house_of_representatives_x_array = 19 }
+	add_to_array = { house_of_representatives_y_array = 132 }
+	add_to_array = { house_of_representatives_x_array = 71 }
+	add_to_array = { house_of_representatives_y_array = 155 }
+	add_to_array = { house_of_representatives_x_array = 50 }
+	add_to_array = { house_of_representatives_y_array = 145 }
+	add_to_array = { house_of_representatives_x_array = 122 }
+	add_to_array = { house_of_representatives_y_array = 177 }
+	add_to_array = { house_of_representatives_x_array = 31 }
+	add_to_array = { house_of_representatives_y_array = 133 }
+	add_to_array = { house_of_representatives_x_array = 102 }
+	add_to_array = { house_of_representatives_y_array = 166 }
+	add_to_array = { house_of_representatives_x_array = 83 }
+	add_to_array = { house_of_representatives_y_array = 155 }
+	add_to_array = { house_of_representatives_x_array = 43 }
+	add_to_array = { house_of_representatives_y_array = 134 }
+	add_to_array = { house_of_representatives_x_array = 63 }
+	add_to_array = { house_of_representatives_y_array = 144 }
+	add_to_array = { house_of_representatives_x_array = 24 }
+	add_to_array = { house_of_representatives_y_array = 121 }
+	add_to_array = { house_of_representatives_x_array = 115 }
+	add_to_array = { house_of_representatives_y_array = 167 }
+	add_to_array = { house_of_representatives_x_array = 56 }
+	add_to_array = { house_of_representatives_y_array = 134 }
+	add_to_array = { house_of_representatives_x_array = 36 }
+	add_to_array = { house_of_representatives_y_array = 123 }
+	add_to_array = { house_of_representatives_x_array = 95 }
+	add_to_array = { house_of_representatives_y_array = 155 }
+	add_to_array = { house_of_representatives_x_array = 76 }
+	add_to_array = { house_of_representatives_y_array = 144 }
+	add_to_array = { house_of_representatives_x_array = 49 }
+	add_to_array = { house_of_representatives_y_array = 124 }
+	add_to_array = { house_of_representatives_x_array = 30 }
+	add_to_array = { house_of_representatives_y_array = 111 }
+	add_to_array = { house_of_representatives_x_array = 69 }
+	add_to_array = { house_of_representatives_y_array = 133 }
+	add_to_array = { house_of_representatives_x_array = 89 }
+	add_to_array = { house_of_representatives_y_array = 145 }
+	add_to_array = { house_of_representatives_x_array = 108 }
+	add_to_array = { house_of_representatives_y_array = 156 }
+	add_to_array = { house_of_representatives_x_array = 128 }
+	add_to_array = { house_of_representatives_y_array = 167 }
+	add_to_array = { house_of_representatives_x_array = 42 }
+	add_to_array = { house_of_representatives_y_array = 113 }
+	add_to_array = { house_of_representatives_x_array = 61 }
+	add_to_array = { house_of_representatives_y_array = 124 }
+	add_to_array = { house_of_representatives_x_array = 82 }
+	add_to_array = { house_of_representatives_y_array = 134 }
+	add_to_array = { house_of_representatives_x_array = 101 }
+	add_to_array = { house_of_representatives_y_array = 145 }
+	add_to_array = { house_of_representatives_x_array = 55 }
+	add_to_array = { house_of_representatives_y_array = 114 }
+	add_to_array = { house_of_representatives_x_array = 36 }
+	add_to_array = { house_of_representatives_y_array = 101 }
+	add_to_array = { house_of_representatives_x_array = 121 }
+	add_to_array = { house_of_representatives_y_array = 156 }
+	add_to_array = { house_of_representatives_x_array = 75 }
+	add_to_array = { house_of_representatives_y_array = 123 }
+	add_to_array = { house_of_representatives_x_array = 48 }
+	add_to_array = { house_of_representatives_y_array = 103 }
+	add_to_array = { house_of_representatives_x_array = 95 }
+	add_to_array = { house_of_representatives_y_array = 135 }
+	add_to_array = { house_of_representatives_x_array = 68 }
+	add_to_array = { house_of_representatives_y_array = 115 }
+	add_to_array = { house_of_representatives_x_array = 115 }
+	add_to_array = { house_of_representatives_y_array = 146 }
+	add_to_array = { house_of_representatives_x_array = 43 }
+	add_to_array = { house_of_representatives_y_array = 91 }
+	add_to_array = { house_of_representatives_x_array = 61 }
+	add_to_array = { house_of_representatives_y_array = 104 }
+	add_to_array = { house_of_representatives_x_array = 89 }
+	add_to_array = { house_of_representatives_y_array = 124 }
+	add_to_array = { house_of_representatives_x_array = 134 }
+	add_to_array = { house_of_representatives_y_array = 157 }
+	add_to_array = { house_of_representatives_x_array = 55 }
+	add_to_array = { house_of_representatives_y_array = 94 }
+	add_to_array = { house_of_representatives_x_array = 108 }
+	add_to_array = { house_of_representatives_y_array = 136 }
+	add_to_array = { house_of_representatives_x_array = 83 }
+	add_to_array = { house_of_representatives_y_array = 114 }
+	add_to_array = { house_of_representatives_x_array = 75 }
+	add_to_array = { house_of_representatives_y_array = 106 }
+	add_to_array = { house_of_representatives_x_array = 51 }
+	add_to_array = { house_of_representatives_y_array = 82 }
+	add_to_array = { house_of_representatives_x_array = 102 }
+	add_to_array = { house_of_representatives_y_array = 125 }
+	add_to_array = { house_of_representatives_x_array = 128 }
+	add_to_array = { house_of_representatives_y_array = 147 }
+	add_to_array = { house_of_representatives_x_array = 69 }
+	add_to_array = { house_of_representatives_y_array = 95 }
+	add_to_array = { house_of_representatives_x_array = 96 }
+	add_to_array = { house_of_representatives_y_array = 115 }
+	add_to_array = { house_of_representatives_x_array = 63 }
+	add_to_array = { house_of_representatives_y_array = 85 }
+	add_to_array = { house_of_representatives_x_array = 122 }
+	add_to_array = { house_of_representatives_y_array = 137 }
+	add_to_array = { house_of_representatives_x_array = 90 }
+	add_to_array = { house_of_representatives_y_array = 105 }
+	add_to_array = { house_of_representatives_x_array = 82 }
+	add_to_array = { house_of_representatives_y_array = 97 }
+	add_to_array = { house_of_representatives_x_array = 58 }
+	add_to_array = { house_of_representatives_y_array = 73 }
+	add_to_array = { house_of_representatives_x_array = 116 }
+	add_to_array = { house_of_representatives_y_array = 127 }
+	add_to_array = { house_of_representatives_x_array = 76 }
+	add_to_array = { house_of_representatives_y_array = 87 }
+	add_to_array = { house_of_representatives_x_array = 142 }
+	add_to_array = { house_of_representatives_y_array = 149 }
+	add_to_array = { house_of_representatives_x_array = 110 }
+	add_to_array = { house_of_representatives_y_array = 117 }
+	add_to_array = { house_of_representatives_x_array = 71 }
+	add_to_array = { house_of_representatives_y_array = 77 }
+	add_to_array = { house_of_representatives_x_array = 104 }
+	add_to_array = { house_of_representatives_y_array = 107 }
+	add_to_array = { house_of_representatives_x_array = 136 }
+	add_to_array = { house_of_representatives_y_array = 139 }
+	add_to_array = { house_of_representatives_x_array = 67 }
+	add_to_array = { house_of_representatives_y_array = 65 }
+	add_to_array = { house_of_representatives_x_array = 91 }
+	add_to_array = { house_of_representatives_y_array = 89 }
+	add_to_array = { house_of_representatives_x_array = 99 }
+	add_to_array = { house_of_representatives_y_array = 97 }
+	add_to_array = { house_of_representatives_x_array = 130 }
+	add_to_array = { house_of_representatives_y_array = 129 }
+	add_to_array = { house_of_representatives_x_array = 85 }
+	add_to_array = { house_of_representatives_y_array = 79 }
+	add_to_array = { house_of_representatives_x_array = 79 }
+	add_to_array = { house_of_representatives_y_array = 69 }
+	add_to_array = { house_of_representatives_x_array = 125 }
+	add_to_array = { house_of_representatives_y_array = 119 }
+	add_to_array = { house_of_representatives_x_array = 119 }
+	add_to_array = { house_of_representatives_y_array = 109 }
+	add_to_array = { house_of_representatives_x_array = 75 }
+	add_to_array = { house_of_representatives_y_array = 57 }
+	add_to_array = { house_of_representatives_x_array = 113 }
+	add_to_array = { house_of_representatives_y_array = 99 }
+	add_to_array = { house_of_representatives_x_array = 99 }
+	add_to_array = { house_of_representatives_y_array = 81 }
+	add_to_array = { house_of_representatives_x_array = 107 }
+	add_to_array = { house_of_representatives_y_array = 89 }
+	add_to_array = { house_of_representatives_x_array = 93 }
+	add_to_array = { house_of_representatives_y_array = 71 }
+	add_to_array = { house_of_representatives_x_array = 151 }
+	add_to_array = { house_of_representatives_y_array = 141 }
+	add_to_array = { house_of_representatives_x_array = 88 }
+	add_to_array = { house_of_representatives_y_array = 61 }
+	add_to_array = { house_of_representatives_x_array = 145 }
+	add_to_array = { house_of_representatives_y_array = 131 }
+	add_to_array = { house_of_representatives_x_array = 85 }
+	add_to_array = { house_of_representatives_y_array = 50 }
+	add_to_array = { house_of_representatives_x_array = 139 }
+	add_to_array = { house_of_representatives_y_array = 121 }
+	add_to_array = { house_of_representatives_x_array = 134 }
+	add_to_array = { house_of_representatives_y_array = 111 }
+	add_to_array = { house_of_representatives_x_array = 128 }
+	add_to_array = { house_of_representatives_y_array = 101 }
+	add_to_array = { house_of_representatives_x_array = 108 }
+	add_to_array = { house_of_representatives_y_array = 74 }
+	add_to_array = { house_of_representatives_x_array = 103 }
+	add_to_array = { house_of_representatives_y_array = 64 }
+	add_to_array = { house_of_representatives_x_array = 122 }
+	add_to_array = { house_of_representatives_y_array = 92 }
+	add_to_array = { house_of_representatives_x_array = 97 }
+	add_to_array = { house_of_representatives_y_array = 54 }
+	add_to_array = { house_of_representatives_x_array = 117 }
+	add_to_array = { house_of_representatives_y_array = 82 }
+	add_to_array = { house_of_representatives_x_array = 94 }
+	add_to_array = { house_of_representatives_y_array = 43 }
+	add_to_array = { house_of_representatives_x_array = 118 }
+	add_to_array = { house_of_representatives_y_array = 67 }
+	add_to_array = { house_of_representatives_x_array = 160 }
+	add_to_array = { house_of_representatives_y_array = 134 }
+	add_to_array = { house_of_representatives_x_array = 112 }
+	add_to_array = { house_of_representatives_y_array = 58 }
+	add_to_array = { house_of_representatives_x_array = 106 }
+	add_to_array = { house_of_representatives_y_array = 48 }
+	add_to_array = { house_of_representatives_x_array = 155 }
+	add_to_array = { house_of_representatives_y_array = 124 }
+	add_to_array = { house_of_representatives_x_array = 149 }
+	add_to_array = { house_of_representatives_y_array = 114 }
+	add_to_array = { house_of_representatives_x_array = 143 }
+	add_to_array = { house_of_representatives_y_array = 105 }
+	add_to_array = { house_of_representatives_x_array = 138 }
+	add_to_array = { house_of_representatives_y_array = 95 }
+	add_to_array = { house_of_representatives_x_array = 132 }
+	add_to_array = { house_of_representatives_y_array = 85 }
+	add_to_array = { house_of_representatives_x_array = 127 }
+	add_to_array = { house_of_representatives_y_array = 75 }
+	add_to_array = { house_of_representatives_x_array = 104 }
+	add_to_array = { house_of_representatives_y_array = 36 }
+	add_to_array = { house_of_representatives_x_array = 116 }
+	add_to_array = { house_of_representatives_y_array = 42 }
+	add_to_array = { house_of_representatives_x_array = 122 }
+	add_to_array = { house_of_representatives_y_array = 52 }
+	add_to_array = { house_of_representatives_x_array = 128 }
+	add_to_array = { house_of_representatives_y_array = 62 }
+	add_to_array = { house_of_representatives_x_array = 114 }
+	add_to_array = { house_of_representatives_y_array = 30 }
+	add_to_array = { house_of_representatives_x_array = 137 }
+	add_to_array = { house_of_representatives_y_array = 69 }
+	add_to_array = { house_of_representatives_x_array = 142 }
+	add_to_array = { house_of_representatives_y_array = 79 }
+	add_to_array = { house_of_representatives_x_array = 148 }
+	add_to_array = { house_of_representatives_y_array = 89 }
+	add_to_array = { house_of_representatives_x_array = 154 }
+	add_to_array = { house_of_representatives_y_array = 99 }
+	add_to_array = { house_of_representatives_x_array = 159 }
+	add_to_array = { house_of_representatives_y_array = 109 }
+	add_to_array = { house_of_representatives_x_array = 165 }
+	add_to_array = { house_of_representatives_y_array = 118 }
+	add_to_array = { house_of_representatives_x_array = 171 }
+	add_to_array = { house_of_representatives_y_array = 128 }
+	add_to_array = { house_of_representatives_x_array = 127 }
+	add_to_array = { house_of_representatives_y_array = 37 }
+	add_to_array = { house_of_representatives_x_array = 132 }
+	add_to_array = { house_of_representatives_y_array = 47 }
+	add_to_array = { house_of_representatives_x_array = 138 }
+	add_to_array = { house_of_representatives_y_array = 56 }
+	add_to_array = { house_of_representatives_x_array = 125 }
+	add_to_array = { house_of_representatives_y_array = 25 }
+	add_to_array = { house_of_representatives_x_array = 147 }
+	add_to_array = { house_of_representatives_y_array = 64 }
+	add_to_array = { house_of_representatives_x_array = 153 }
+	add_to_array = { house_of_representatives_y_array = 74 }
+	add_to_array = { house_of_representatives_x_array = 159 }
+	add_to_array = { house_of_representatives_y_array = 84 }
+	add_to_array = { house_of_representatives_x_array = 137 }
+	add_to_array = { house_of_representatives_y_array = 32 }
+	add_to_array = { house_of_representatives_x_array = 143 }
+	add_to_array = { house_of_representatives_y_array = 42 }
+	add_to_array = { house_of_representatives_x_array = 164 }
+	add_to_array = { house_of_representatives_y_array = 94 }
+	add_to_array = { house_of_representatives_x_array = 136 }
+	add_to_array = { house_of_representatives_y_array = 21 }
+	add_to_array = { house_of_representatives_x_array = 148 }
+	add_to_array = { house_of_representatives_y_array = 52 }
+	add_to_array = { house_of_representatives_x_array = 170 }
+	add_to_array = { house_of_representatives_y_array = 104 }
+	add_to_array = { house_of_representatives_x_array = 176 }
+	add_to_array = { house_of_representatives_y_array = 114 }
+	add_to_array = { house_of_representatives_x_array = 158 }
+	add_to_array = { house_of_representatives_y_array = 60 }
+	add_to_array = { house_of_representatives_x_array = 181 }
+	add_to_array = { house_of_representatives_y_array = 123 }
+	add_to_array = { house_of_representatives_x_array = 148 }
+	add_to_array = { house_of_representatives_y_array = 28 }
+	add_to_array = { house_of_representatives_x_array = 164 }
+	add_to_array = { house_of_representatives_y_array = 70 }
+	add_to_array = { house_of_representatives_x_array = 154 }
+	add_to_array = { house_of_representatives_y_array = 38 }
+	add_to_array = { house_of_representatives_x_array = 147 }
+	add_to_array = { house_of_representatives_y_array = 16 }
+	add_to_array = { house_of_representatives_x_array = 170 }
+	add_to_array = { house_of_representatives_y_array = 80 }
+	add_to_array = { house_of_representatives_x_array = 159 }
+	add_to_array = { house_of_representatives_y_array = 48 }
+	add_to_array = { house_of_representatives_x_array = 175 }
+	add_to_array = { house_of_representatives_y_array = 90 }
+	add_to_array = { house_of_representatives_x_array = 159 }
+	add_to_array = { house_of_representatives_y_array = 24 }
+	add_to_array = { house_of_representatives_x_array = 181 }
+	add_to_array = { house_of_representatives_y_array = 100 }
+	add_to_array = { house_of_representatives_x_array = 170 }
+	add_to_array = { house_of_representatives_y_array = 56 }
+	add_to_array = { house_of_representatives_x_array = 158 }
+	add_to_array = { house_of_representatives_y_array = 13 }
+	add_to_array = { house_of_representatives_x_array = 165 }
+	add_to_array = { house_of_representatives_y_array = 34 }
+	add_to_array = { house_of_representatives_x_array = 175 }
+	add_to_array = { house_of_representatives_y_array = 67 }
+	add_to_array = { house_of_representatives_x_array = 187 }
+	add_to_array = { house_of_representatives_y_array = 110 }
+	add_to_array = { house_of_representatives_x_array = 170 }
+	add_to_array = { house_of_representatives_y_array = 45 }
+	add_to_array = { house_of_representatives_x_array = 181 }
+	add_to_array = { house_of_representatives_y_array = 77 }
+	add_to_array = { house_of_representatives_x_array = 193 }
+	add_to_array = { house_of_representatives_y_array = 120 }
+	add_to_array = { house_of_representatives_x_array = 170 }
+	add_to_array = { house_of_representatives_y_array = 21 }
+	add_to_array = { house_of_representatives_x_array = 169 }
+	add_to_array = { house_of_representatives_y_array = 10 }
+	add_to_array = { house_of_representatives_x_array = 187 }
+	add_to_array = { house_of_representatives_y_array = 87 }
+	add_to_array = { house_of_representatives_x_array = 176 }
+	add_to_array = { house_of_representatives_y_array = 32 }
+	add_to_array = { house_of_representatives_x_array = 181 }
+	add_to_array = { house_of_representatives_y_array = 54 }
+	add_to_array = { house_of_representatives_x_array = 182 }
+	add_to_array = { house_of_representatives_y_array = 42 }
+	add_to_array = { house_of_representatives_x_array = 193 }
+	add_to_array = { house_of_representatives_y_array = 97 }
+	add_to_array = { house_of_representatives_x_array = 187 }
+	add_to_array = { house_of_representatives_y_array = 64 }
+	add_to_array = { house_of_representatives_x_array = 182 }
+	add_to_array = { house_of_representatives_y_array = 19 }
+	add_to_array = { house_of_representatives_x_array = 181 }
+	add_to_array = { house_of_representatives_y_array = 8 }
+	add_to_array = { house_of_representatives_x_array = 193 }
+	add_to_array = { house_of_representatives_y_array = 74 }
+	add_to_array = { house_of_representatives_x_array = 198 }
+	add_to_array = { house_of_representatives_y_array = 108 }
+	add_to_array = { house_of_representatives_x_array = 187 }
+	add_to_array = { house_of_representatives_y_array = 30 }
+	add_to_array = { house_of_representatives_x_array = 193 }
+	add_to_array = { house_of_representatives_y_array = 52 }
+	add_to_array = { house_of_representatives_x_array = 198 }
+	add_to_array = { house_of_representatives_y_array = 85 }
+	add_to_array = { house_of_representatives_x_array = 193 }
+	add_to_array = { house_of_representatives_y_array = 40 }
+	add_to_array = { house_of_representatives_x_array = 204 }
+	add_to_array = { house_of_representatives_y_array = 118 }
+	add_to_array = { house_of_representatives_x_array = 193 }
+	add_to_array = { house_of_representatives_y_array = 18 }
+	add_to_array = { house_of_representatives_x_array = 198 }
+	add_to_array = { house_of_representatives_y_array = 62 }
+	add_to_array = { house_of_representatives_x_array = 193 }
+	add_to_array = { house_of_representatives_y_array = 6 }
+	add_to_array = { house_of_representatives_x_array = 204 }
+	add_to_array = { house_of_representatives_y_array = 96 }
+	add_to_array = { house_of_representatives_x_array = 199 }
+	add_to_array = { house_of_representatives_y_array = 28 }
+	add_to_array = { house_of_representatives_x_array = 204 }
+	add_to_array = { house_of_representatives_y_array = 73 }
+	add_to_array = { house_of_representatives_x_array = 204 }
+	add_to_array = { house_of_representatives_y_array = 50 }
+	add_to_array = { house_of_representatives_x_array = 204 }
+	add_to_array = { house_of_representatives_y_array = 39 }
+	add_to_array = { house_of_representatives_x_array = 204 }
+	add_to_array = { house_of_representatives_y_array = 17 }
+	add_to_array = { house_of_representatives_x_array = 204 }
+	add_to_array = { house_of_representatives_y_array = 5 }
+	add_to_array = { house_of_representatives_x_array = 210 }
+	add_to_array = { house_of_representatives_y_array = 106 }
+	add_to_array = { house_of_representatives_x_array = 210 }
+	add_to_array = { house_of_representatives_y_array = 84 }
+	add_to_array = { house_of_representatives_x_array = 210 }
+	add_to_array = { house_of_representatives_y_array = 61 }
+	add_to_array = { house_of_representatives_x_array = 210 }
+	add_to_array = { house_of_representatives_y_array = 28 }
+	add_to_array = { house_of_representatives_x_array = 216 }
+	add_to_array = { house_of_representatives_y_array = 16 }
+	add_to_array = { house_of_representatives_x_array = 216 }
+	add_to_array = { house_of_representatives_y_array = 118 }
+	add_to_array = { house_of_representatives_x_array = 216 }
+	add_to_array = { house_of_representatives_y_array = 95 }
+	add_to_array = { house_of_representatives_x_array = 216 }
+	add_to_array = { house_of_representatives_y_array = 73 }
+	add_to_array = { house_of_representatives_x_array = 216 }
+	add_to_array = { house_of_representatives_y_array = 50 }
+	add_to_array = { house_of_representatives_x_array = 216 }
+	add_to_array = { house_of_representatives_y_array = 39 }
+	add_to_array = { house_of_representatives_x_array = 216 }
+	add_to_array = { house_of_representatives_y_array = 5 }
+	add_to_array = { house_of_representatives_x_array = 222 }
+	add_to_array = { house_of_representatives_y_array = 28 }
+	add_to_array = { house_of_representatives_x_array = 222 }
+	add_to_array = { house_of_representatives_y_array = 61 }
+	add_to_array = { house_of_representatives_x_array = 222 }
+	add_to_array = { house_of_representatives_y_array = 84 }
+	add_to_array = { house_of_representatives_x_array = 222 }
+	add_to_array = { house_of_representatives_y_array = 106 }
+	add_to_array = { house_of_representatives_x_array = 228 }
+	add_to_array = { house_of_representatives_y_array = 5 }
+	add_to_array = { house_of_representatives_x_array = 228 }
+	add_to_array = { house_of_representatives_y_array = 17 }
+	add_to_array = { house_of_representatives_x_array = 228 }
+	add_to_array = { house_of_representatives_y_array = 39 }
+	add_to_array = { house_of_representatives_x_array = 228 }
+	add_to_array = { house_of_representatives_y_array = 50 }
+	add_to_array = { house_of_representatives_x_array = 228 }
+	add_to_array = { house_of_representatives_y_array = 73 }
+	add_to_array = { house_of_representatives_x_array = 233 }
+	add_to_array = { house_of_representatives_y_array = 28 }
+	add_to_array = { house_of_representatives_x_array = 228 }
+	add_to_array = { house_of_representatives_y_array = 96 }
+	add_to_array = { house_of_representatives_x_array = 240 }
+	add_to_array = { house_of_representatives_y_array = 6 }
+	add_to_array = { house_of_representatives_x_array = 234 }
+	add_to_array = { house_of_representatives_y_array = 62 }
+	add_to_array = { house_of_representatives_x_array = 239 }
+	add_to_array = { house_of_representatives_y_array = 18 }
+	add_to_array = { house_of_representatives_x_array = 228 }
+	add_to_array = { house_of_representatives_y_array = 118 }
+	add_to_array = { house_of_representatives_x_array = 239 }
+	add_to_array = { house_of_representatives_y_array = 40 }
+	add_to_array = { house_of_representatives_x_array = 234 }
+	add_to_array = { house_of_representatives_y_array = 85 }
+	add_to_array = { house_of_representatives_x_array = 239 }
+	add_to_array = { house_of_representatives_y_array = 52 }
+	add_to_array = { house_of_representatives_x_array = 245 }
+	add_to_array = { house_of_representatives_y_array = 30 }
+	add_to_array = { house_of_representatives_x_array = 234 }
+	add_to_array = { house_of_representatives_y_array = 108 }
+	add_to_array = { house_of_representatives_x_array = 239 }
+	add_to_array = { house_of_representatives_y_array = 74 }
+	add_to_array = { house_of_representatives_x_array = 251 }
+	add_to_array = { house_of_representatives_y_array = 8 }
+	add_to_array = { house_of_representatives_x_array = 251 }
+	add_to_array = { house_of_representatives_y_array = 19 }
+	add_to_array = { house_of_representatives_x_array = 245 }
+	add_to_array = { house_of_representatives_y_array = 64 }
+	add_to_array = { house_of_representatives_x_array = 239 }
+	add_to_array = { house_of_representatives_y_array = 97 }
+	add_to_array = { house_of_representatives_x_array = 250 }
+	add_to_array = { house_of_representatives_y_array = 42 }
+	add_to_array = { house_of_representatives_x_array = 251 }
+	add_to_array = { house_of_representatives_y_array = 54 }
+	add_to_array = { house_of_representatives_x_array = 256 }
+	add_to_array = { house_of_representatives_y_array = 32 }
+	add_to_array = { house_of_representatives_x_array = 245 }
+	add_to_array = { house_of_representatives_y_array = 87 }
+	add_to_array = { house_of_representatives_x_array = 263 }
+	add_to_array = { house_of_representatives_y_array = 10 }
+	add_to_array = { house_of_representatives_x_array = 262 }
+	add_to_array = { house_of_representatives_y_array = 21 }
+	add_to_array = { house_of_representatives_x_array = 239 }
+	add_to_array = { house_of_representatives_y_array = 120 }
+	add_to_array = { house_of_representatives_x_array = 251 }
+	add_to_array = { house_of_representatives_y_array = 77 }
+	add_to_array = { house_of_representatives_x_array = 262 }
+	add_to_array = { house_of_representatives_y_array = 45 }
+	add_to_array = { house_of_representatives_x_array = 245 }
+	add_to_array = { house_of_representatives_y_array = 110 }
+	add_to_array = { house_of_representatives_x_array = 257 }
+	add_to_array = { house_of_representatives_y_array = 67 }
+	add_to_array = { house_of_representatives_x_array = 267 }
+	add_to_array = { house_of_representatives_y_array = 34 }
+	add_to_array = { house_of_representatives_x_array = 274 }
+	add_to_array = { house_of_representatives_y_array = 13 }
+	add_to_array = { house_of_representatives_x_array = 263 }
+	add_to_array = { house_of_representatives_y_array = 56 }
+	add_to_array = { house_of_representatives_x_array = 251 }
+	add_to_array = { house_of_representatives_y_array = 100 }
+	add_to_array = { house_of_representatives_x_array = 273 }
+	add_to_array = { house_of_representatives_y_array = 24 }
+	add_to_array = { house_of_representatives_x_array = 257 }
+	add_to_array = { house_of_representatives_y_array = 90 }
+	add_to_array = { house_of_representatives_x_array = 273 }
+	add_to_array = { house_of_representatives_y_array = 48 }
+	add_to_array = { house_of_representatives_x_array = 262 }
+	add_to_array = { house_of_representatives_y_array = 80 }
+	add_to_array = { house_of_representatives_x_array = 285 }
+	add_to_array = { house_of_representatives_y_array = 16 }
+	add_to_array = { house_of_representatives_x_array = 278 }
+	add_to_array = { house_of_representatives_y_array = 38 }
+	add_to_array = { house_of_representatives_x_array = 268 }
+	add_to_array = { house_of_representatives_y_array = 70 }
+	add_to_array = { house_of_representatives_x_array = 284 }
+	add_to_array = { house_of_representatives_y_array = 28 }
+	add_to_array = { house_of_representatives_x_array = 251 }
+	add_to_array = { house_of_representatives_y_array = 123 }
+	add_to_array = { house_of_representatives_x_array = 274 }
+	add_to_array = { house_of_representatives_y_array = 60 }
+	add_to_array = { house_of_representatives_x_array = 256 }
+	add_to_array = { house_of_representatives_y_array = 114 }
+	add_to_array = { house_of_representatives_x_array = 262 }
+	add_to_array = { house_of_representatives_y_array = 104 }
+	add_to_array = { house_of_representatives_x_array = 284 }
+	add_to_array = { house_of_representatives_y_array = 52 }
+	add_to_array = { house_of_representatives_x_array = 296 }
+	add_to_array = { house_of_representatives_y_array = 21 }
+	add_to_array = { house_of_representatives_x_array = 268 }
+	add_to_array = { house_of_representatives_y_array = 94 }
+	add_to_array = { house_of_representatives_x_array = 289 }
+	add_to_array = { house_of_representatives_y_array = 42 }
+	add_to_array = { house_of_representatives_x_array = 295 }
+	add_to_array = { house_of_representatives_y_array = 32 }
+	add_to_array = { house_of_representatives_x_array = 273 }
+	add_to_array = { house_of_representatives_y_array = 84 }
+	add_to_array = { house_of_representatives_x_array = 279 }
+	add_to_array = { house_of_representatives_y_array = 74 }
+	add_to_array = { house_of_representatives_x_array = 285 }
+	add_to_array = { house_of_representatives_y_array = 64 }
+	add_to_array = { house_of_representatives_x_array = 307 }
+	add_to_array = { house_of_representatives_y_array = 25 }
+	add_to_array = { house_of_representatives_x_array = 294 }
+	add_to_array = { house_of_representatives_y_array = 56 }
+	add_to_array = { house_of_representatives_x_array = 300 }
+	add_to_array = { house_of_representatives_y_array = 47 }
+	add_to_array = { house_of_representatives_x_array = 305 }
+	add_to_array = { house_of_representatives_y_array = 37 }
+	add_to_array = { house_of_representatives_x_array = 261 }
+	add_to_array = { house_of_representatives_y_array = 128 }
+	add_to_array = { house_of_representatives_x_array = 267 }
+	add_to_array = { house_of_representatives_y_array = 118 }
+	add_to_array = { house_of_representatives_x_array = 273 }
+	add_to_array = { house_of_representatives_y_array = 109 }
+	add_to_array = { house_of_representatives_x_array = 278 }
+	add_to_array = { house_of_representatives_y_array = 99 }
+	add_to_array = { house_of_representatives_x_array = 284 }
+	add_to_array = { house_of_representatives_y_array = 89 }
+	add_to_array = { house_of_representatives_x_array = 290 }
+	add_to_array = { house_of_representatives_y_array = 79 }
+	add_to_array = { house_of_representatives_x_array = 295 }
+	add_to_array = { house_of_representatives_y_array = 69 }
+	add_to_array = { house_of_representatives_x_array = 318 }
+	add_to_array = { house_of_representatives_y_array = 30 }
+	add_to_array = { house_of_representatives_x_array = 304 }
+	add_to_array = { house_of_representatives_y_array = 62 }
+	add_to_array = { house_of_representatives_x_array = 310 }
+	add_to_array = { house_of_representatives_y_array = 52 }
+	add_to_array = { house_of_representatives_x_array = 316 }
+	add_to_array = { house_of_representatives_y_array = 42 }
+	add_to_array = { house_of_representatives_x_array = 328 }
+	add_to_array = { house_of_representatives_y_array = 36 }
+	add_to_array = { house_of_representatives_x_array = 306 }
+	add_to_array = { house_of_representatives_y_array = 75 }
+	add_to_array = { house_of_representatives_x_array = 300 }
+	add_to_array = { house_of_representatives_y_array = 85 }
+	add_to_array = { house_of_representatives_x_array = 294 }
+	add_to_array = { house_of_representatives_y_array = 95 }
+	add_to_array = { house_of_representatives_x_array = 289 }
+	add_to_array = { house_of_representatives_y_array = 105 }
+	add_to_array = { house_of_representatives_x_array = 283 }
+	add_to_array = { house_of_representatives_y_array = 114 }
+	add_to_array = { house_of_representatives_x_array = 277 }
+	add_to_array = { house_of_representatives_y_array = 124 }
+	add_to_array = { house_of_representatives_x_array = 326 }
+	add_to_array = { house_of_representatives_y_array = 48 }
+	add_to_array = { house_of_representatives_x_array = 320 }
+	add_to_array = { house_of_representatives_y_array = 58 }
+	add_to_array = { house_of_representatives_x_array = 272 }
+	add_to_array = { house_of_representatives_y_array = 134 }
+	add_to_array = { house_of_representatives_x_array = 314 }
+	add_to_array = { house_of_representatives_y_array = 67 }
+	add_to_array = { house_of_representatives_x_array = 338 }
+	add_to_array = { house_of_representatives_y_array = 43 }
+	add_to_array = { house_of_representatives_x_array = 315 }
+	add_to_array = { house_of_representatives_y_array = 82 }
+	add_to_array = { house_of_representatives_x_array = 335 }
+	add_to_array = { house_of_representatives_y_array = 54 }
+	add_to_array = { house_of_representatives_x_array = 310 }
+	add_to_array = { house_of_representatives_y_array = 92 }
+	add_to_array = { house_of_representatives_x_array = 329 }
+	add_to_array = { house_of_representatives_y_array = 64 }
+	add_to_array = { house_of_representatives_x_array = 324 }
+	add_to_array = { house_of_representatives_y_array = 74 }
+	add_to_array = { house_of_representatives_x_array = 304 }
+	add_to_array = { house_of_representatives_y_array = 101 }
+	add_to_array = { house_of_representatives_x_array = 298 }
+	add_to_array = { house_of_representatives_y_array = 111 }
+	add_to_array = { house_of_representatives_x_array = 293 }
+	add_to_array = { house_of_representatives_y_array = 121 }
+	add_to_array = { house_of_representatives_x_array = 347 }
+	add_to_array = { house_of_representatives_y_array = 50 }
+	add_to_array = { house_of_representatives_x_array = 287 }
+	add_to_array = { house_of_representatives_y_array = 131 }
+	add_to_array = { house_of_representatives_x_array = 344 }
+	add_to_array = { house_of_representatives_y_array = 61 }
+	add_to_array = { house_of_representatives_x_array = 281 }
+	add_to_array = { house_of_representatives_y_array = 141 }
+	add_to_array = { house_of_representatives_x_array = 339 }
+	add_to_array = { house_of_representatives_y_array = 71 }
+	add_to_array = { house_of_representatives_x_array = 325 }
+	add_to_array = { house_of_representatives_y_array = 89 }
+	add_to_array = { house_of_representatives_x_array = 333 }
+	add_to_array = { house_of_representatives_y_array = 81 }
+	add_to_array = { house_of_representatives_x_array = 319 }
+	add_to_array = { house_of_representatives_y_array = 99 }
+	add_to_array = { house_of_representatives_x_array = 357 }
+	add_to_array = { house_of_representatives_y_array = 57 }
+	add_to_array = { house_of_representatives_x_array = 313 }
+	add_to_array = { house_of_representatives_y_array = 109 }
+	add_to_array = { house_of_representatives_x_array = 307 }
+	add_to_array = { house_of_representatives_y_array = 119 }
+	add_to_array = { house_of_representatives_x_array = 353 }
+	add_to_array = { house_of_representatives_y_array = 69 }
+	add_to_array = { house_of_representatives_x_array = 347 }
+	add_to_array = { house_of_representatives_y_array = 79 }
+	add_to_array = { house_of_representatives_x_array = 302 }
+	add_to_array = { house_of_representatives_y_array = 129 }
+	add_to_array = { house_of_representatives_x_array = 334 }
+	add_to_array = { house_of_representatives_y_array = 97 }
+	add_to_array = { house_of_representatives_x_array = 341 }
+	add_to_array = { house_of_representatives_y_array = 89 }
+	add_to_array = { house_of_representatives_x_array = 365 }
+	add_to_array = { house_of_representatives_y_array = 65 }
+	add_to_array = { house_of_representatives_x_array = 296 }
+	add_to_array = { house_of_representatives_y_array = 139 }
+	add_to_array = { house_of_representatives_x_array = 328 }
+	add_to_array = { house_of_representatives_y_array = 107 }
+	add_to_array = { house_of_representatives_x_array = 362 }
+	add_to_array = { house_of_representatives_y_array = 77 }
+	add_to_array = { house_of_representatives_x_array = 322 }
+	add_to_array = { house_of_representatives_y_array = 117 }
+	add_to_array = { house_of_representatives_x_array = 290 }
+	add_to_array = { house_of_representatives_y_array = 149 }
+	add_to_array = { house_of_representatives_x_array = 356 }
+	add_to_array = { house_of_representatives_y_array = 87 }
+	add_to_array = { house_of_representatives_x_array = 316 }
+	add_to_array = { house_of_representatives_y_array = 127 }
+	add_to_array = { house_of_representatives_x_array = 374 }
+	add_to_array = { house_of_representatives_y_array = 73 }
+	add_to_array = { house_of_representatives_x_array = 350 }
+	add_to_array = { house_of_representatives_y_array = 97 }
+	add_to_array = { house_of_representatives_x_array = 342 }
+	add_to_array = { house_of_representatives_y_array = 105 }
+	add_to_array = { house_of_representatives_x_array = 310 }
+	add_to_array = { house_of_representatives_y_array = 137 }
+	add_to_array = { house_of_representatives_x_array = 369 }
+	add_to_array = { house_of_representatives_y_array = 85 }
+	add_to_array = { house_of_representatives_x_array = 336 }
+	add_to_array = { house_of_representatives_y_array = 115 }
+	add_to_array = { house_of_representatives_x_array = 363 }
+	add_to_array = { house_of_representatives_y_array = 95 }
+	add_to_array = { house_of_representatives_x_array = 304 }
+	add_to_array = { house_of_representatives_y_array = 147 }
+	add_to_array = { house_of_representatives_x_array = 330 }
+	add_to_array = { house_of_representatives_y_array = 125 }
+	add_to_array = { house_of_representatives_x_array = 381 }
+	add_to_array = { house_of_representatives_y_array = 82 }
+	add_to_array = { house_of_representatives_x_array = 357 }
+	add_to_array = { house_of_representatives_y_array = 106 }
+	add_to_array = { house_of_representatives_x_array = 349 }
+	add_to_array = { house_of_representatives_y_array = 114 }
+	add_to_array = { house_of_representatives_x_array = 324 }
+	add_to_array = { house_of_representatives_y_array = 136 }
+	add_to_array = { house_of_representatives_x_array = 377 }
+	add_to_array = { house_of_representatives_y_array = 94 }
+	add_to_array = { house_of_representatives_x_array = 298 }
+	add_to_array = { house_of_representatives_y_array = 157 }
+	add_to_array = { house_of_representatives_x_array = 343 }
+	add_to_array = { house_of_representatives_y_array = 124 }
+	add_to_array = { house_of_representatives_x_array = 371 }
+	add_to_array = { house_of_representatives_y_array = 104 }
+	add_to_array = { house_of_representatives_x_array = 389 }
+	add_to_array = { house_of_representatives_y_array = 91 }
+	add_to_array = { house_of_representatives_x_array = 317 }
+	add_to_array = { house_of_representatives_y_array = 146 }
+	add_to_array = { house_of_representatives_x_array = 364 }
+	add_to_array = { house_of_representatives_y_array = 115 }
+	add_to_array = { house_of_representatives_x_array = 337 }
+	add_to_array = { house_of_representatives_y_array = 135 }
+	add_to_array = { house_of_representatives_x_array = 384 }
+	add_to_array = { house_of_representatives_y_array = 103 }
+	add_to_array = { house_of_representatives_x_array = 357 }
+	add_to_array = { house_of_representatives_y_array = 123 }
+	add_to_array = { house_of_representatives_x_array = 311 }
+	add_to_array = { house_of_representatives_y_array = 156 }
+	add_to_array = { house_of_representatives_x_array = 396 }
+	add_to_array = { house_of_representatives_y_array = 101 }
+	add_to_array = { house_of_representatives_x_array = 377 }
+	add_to_array = { house_of_representatives_y_array = 114 }
+	add_to_array = { house_of_representatives_x_array = 331 }
+	add_to_array = { house_of_representatives_y_array = 145 }
+	add_to_array = { house_of_representatives_x_array = 350 }
+	add_to_array = { house_of_representatives_y_array = 134 }
+	add_to_array = { house_of_representatives_x_array = 371 }
+	add_to_array = { house_of_representatives_y_array = 124 }
+	add_to_array = { house_of_representatives_x_array = 390 }
+	add_to_array = { house_of_representatives_y_array = 113 }
+	add_to_array = { house_of_representatives_x_array = 304 }
+	add_to_array = { house_of_representatives_y_array = 167 }
+	add_to_array = { house_of_representatives_x_array = 324 }
+	add_to_array = { house_of_representatives_y_array = 156 }
+	add_to_array = { house_of_representatives_x_array = 343 }
+	add_to_array = { house_of_representatives_y_array = 145 }
+	add_to_array = { house_of_representatives_x_array = 363 }
+	add_to_array = { house_of_representatives_y_array = 133 }
+	add_to_array = { house_of_representatives_x_array = 402 }
+	add_to_array = { house_of_representatives_y_array = 111 }
+	add_to_array = { house_of_representatives_x_array = 383 }
+	add_to_array = { house_of_representatives_y_array = 124 }
+	add_to_array = { house_of_representatives_x_array = 356 }
+	add_to_array = { house_of_representatives_y_array = 144 }
+	add_to_array = { house_of_representatives_x_array = 337 }
+	add_to_array = { house_of_representatives_y_array = 155 }
+	add_to_array = { house_of_representatives_x_array = 396 }
+	add_to_array = { house_of_representatives_y_array = 123 }
+	add_to_array = { house_of_representatives_x_array = 376 }
+	add_to_array = { house_of_representatives_y_array = 134 }
+	add_to_array = { house_of_representatives_x_array = 317 }
+	add_to_array = { house_of_representatives_y_array = 167 }
+	add_to_array = { house_of_representatives_x_array = 408 }
+	add_to_array = { house_of_representatives_y_array = 121 }
+	add_to_array = { house_of_representatives_x_array = 369 }
+	add_to_array = { house_of_representatives_y_array = 144 }
+	add_to_array = { house_of_representatives_x_array = 389 }
+	add_to_array = { house_of_representatives_y_array = 134 }
+	add_to_array = { house_of_representatives_x_array = 349 }
+	add_to_array = { house_of_representatives_y_array = 155 }
+	add_to_array = { house_of_representatives_x_array = 330 }
+	add_to_array = { house_of_representatives_y_array = 166 }
+	add_to_array = { house_of_representatives_x_array = 401 }
+	add_to_array = { house_of_representatives_y_array = 133 }
+	add_to_array = { house_of_representatives_x_array = 310 }
+	add_to_array = { house_of_representatives_y_array = 177 }
+	add_to_array = { house_of_representatives_x_array = 382 }
+	add_to_array = { house_of_representatives_y_array = 145 }
+	add_to_array = { house_of_representatives_x_array = 361 }
+	add_to_array = { house_of_representatives_y_array = 155 }
+	add_to_array = { house_of_representatives_x_array = 413 }
+	add_to_array = { house_of_representatives_y_array = 132 }
+	add_to_array = { house_of_representatives_x_array = 342 }
+	add_to_array = { house_of_representatives_y_array = 166 }
+	add_to_array = { house_of_representatives_x_array = 394 }
+	add_to_array = { house_of_representatives_y_array = 144 }
+	add_to_array = { house_of_representatives_x_array = 374 }
+	add_to_array = { house_of_representatives_y_array = 154 }
+	add_to_array = { house_of_representatives_x_array = 322 }
+	add_to_array = { house_of_representatives_y_array = 177 }
+	add_to_array = { house_of_representatives_x_array = 406 }
+	add_to_array = { house_of_representatives_y_array = 144 }
+	add_to_array = { house_of_representatives_x_array = 354 }
+	add_to_array = { house_of_representatives_y_array = 166 }
+	add_to_array = { house_of_representatives_x_array = 417 }
+	add_to_array = { house_of_representatives_y_array = 142 }
+	add_to_array = { house_of_representatives_x_array = 386 }
+	add_to_array = { house_of_representatives_y_array = 155 }
+	add_to_array = { house_of_representatives_x_array = 334 }
+	add_to_array = { house_of_representatives_y_array = 177 }
+	add_to_array = { house_of_representatives_x_array = 366 }
+	add_to_array = { house_of_representatives_y_array = 165 }
+	add_to_array = { house_of_representatives_x_array = 398 }
+	add_to_array = { house_of_representatives_y_array = 155 }
+	add_to_array = { house_of_representatives_x_array = 378 }
+	add_to_array = { house_of_representatives_y_array = 165 }
+	add_to_array = { house_of_representatives_x_array = 410 }
+	add_to_array = { house_of_representatives_y_array = 155 }
+	add_to_array = { house_of_representatives_x_array = 346 }
+	add_to_array = { house_of_representatives_y_array = 177 }
+	add_to_array = { house_of_representatives_x_array = 314 }
+	add_to_array = { house_of_representatives_y_array = 188 }
+	add_to_array = { house_of_representatives_x_array = 421 }
+	add_to_array = { house_of_representatives_y_array = 154 }
+	add_to_array = { house_of_representatives_x_array = 390 }
+	add_to_array = { house_of_representatives_y_array = 166 }
+	add_to_array = { house_of_representatives_x_array = 358 }
+	add_to_array = { house_of_representatives_y_array = 177 }
+	add_to_array = { house_of_representatives_x_array = 326 }
+	add_to_array = { house_of_representatives_y_array = 188 }
+	add_to_array = { house_of_representatives_x_array = 402 }
+	add_to_array = { house_of_representatives_y_array = 166 }
+	add_to_array = { house_of_representatives_x_array = 370 }
+	add_to_array = { house_of_representatives_y_array = 177 }
+	add_to_array = { house_of_representatives_x_array = 413 }
+	add_to_array = { house_of_representatives_y_array = 166 }
+	add_to_array = { house_of_representatives_x_array = 338 }
+	add_to_array = { house_of_representatives_y_array = 188 }
+	add_to_array = { house_of_representatives_x_array = 381 }
+	add_to_array = { house_of_representatives_y_array = 176 }
+	add_to_array = { house_of_representatives_x_array = 425 }
+	add_to_array = { house_of_representatives_y_array = 165 }
+	add_to_array = { house_of_representatives_x_array = 393 }
+	add_to_array = { house_of_representatives_y_array = 177 }
+	add_to_array = { house_of_representatives_x_array = 349 }
+	add_to_array = { house_of_representatives_y_array = 188 }
+	add_to_array = { house_of_representatives_x_array = 405 }
+	add_to_array = { house_of_representatives_y_array = 177 }
+	add_to_array = { house_of_representatives_x_array = 361 }
+	add_to_array = { house_of_representatives_y_array = 188 }
+	add_to_array = { house_of_representatives_x_array = 416 }
+	add_to_array = { house_of_representatives_y_array = 177 }
+	add_to_array = { house_of_representatives_x_array = 317 }
+	add_to_array = { house_of_representatives_y_array = 200 }
+	add_to_array = { house_of_representatives_x_array = 373 }
+	add_to_array = { house_of_representatives_y_array = 188 }
+	add_to_array = { house_of_representatives_x_array = 428 }
+	add_to_array = { house_of_representatives_y_array = 176 }
+	add_to_array = { house_of_representatives_x_array = 384 }
+	add_to_array = { house_of_representatives_y_array = 188 }
+	add_to_array = { house_of_representatives_x_array = 329 }
+	add_to_array = { house_of_representatives_y_array = 200 }
+	add_to_array = { house_of_representatives_x_array = 396 }
+	add_to_array = { house_of_representatives_y_array = 188 }
+	add_to_array = { house_of_representatives_x_array = 340 }
+	add_to_array = { house_of_representatives_y_array = 200 }
+	add_to_array = { house_of_representatives_x_array = 407 }
+	add_to_array = { house_of_representatives_y_array = 188 }
+	add_to_array = { house_of_representatives_x_array = 418 }
+	add_to_array = { house_of_representatives_y_array = 188 }
+	add_to_array = { house_of_representatives_x_array = 352 }
+	add_to_array = { house_of_representatives_y_array = 200 }
+	add_to_array = { house_of_representatives_x_array = 430 }
+	add_to_array = { house_of_representatives_y_array = 188 }
+	add_to_array = { house_of_representatives_x_array = 363 }
+	add_to_array = { house_of_representatives_y_array = 200 }
+	add_to_array = { house_of_representatives_x_array = 375 }
+	add_to_array = { house_of_representatives_y_array = 200 }
+	add_to_array = { house_of_representatives_x_array = 386 }
+	add_to_array = { house_of_representatives_y_array = 200 }
+	add_to_array = { house_of_representatives_x_array = 397 }
+	add_to_array = { house_of_representatives_y_array = 200 }
+	add_to_array = { house_of_representatives_x_array = 409 }
+	add_to_array = { house_of_representatives_y_array = 200 }
+	add_to_array = { house_of_representatives_x_array = 420 }
+	add_to_array = { house_of_representatives_y_array = 200 }
+	add_to_array = { house_of_representatives_x_array = 431 }
+	add_to_array = { house_of_representatives_y_array = 200 }
+	add_to_array = { house_of_representatives_x_array = 319 }
+	add_to_array = { house_of_representatives_y_array = 211 }
+	add_to_array = { house_of_representatives_x_array = 331 }
+	add_to_array = { house_of_representatives_y_array = 211 }
+	add_to_array = { house_of_representatives_x_array = 342 }
+	add_to_array = { house_of_representatives_y_array = 211 }
+	add_to_array = { house_of_representatives_x_array = 353 }
+	add_to_array = { house_of_representatives_y_array = 211 }
+	add_to_array = { house_of_representatives_x_array = 364 }
+	add_to_array = { house_of_representatives_y_array = 211 }
+	add_to_array = { house_of_representatives_x_array = 376 }
+	add_to_array = { house_of_representatives_y_array = 211 }
+	add_to_array = { house_of_representatives_x_array = 387 }
+	add_to_array = { house_of_representatives_y_array = 211 }
+	add_to_array = { house_of_representatives_x_array = 398 }
+	add_to_array = { house_of_representatives_y_array = 211 }
+	add_to_array = { house_of_representatives_x_array = 410 }
+	add_to_array = { house_of_representatives_y_array = 211 }
+	add_to_array = { house_of_representatives_x_array = 421 }
+	add_to_array = { house_of_representatives_y_array = 211 }
+	add_to_array = { house_of_representatives_x_array = 432 }
+	add_to_array = { house_of_representatives_y_array = 211 }
+}
+
+JAP_move_up_zaibatsu_support = {
+	if = {
+		limit = {
+			has_country_flag = JAP_corporations_deeply_opposed
+		}
+		clr_country_flag = JAP_corporations_deeply_opposed
+		set_country_flag = JAP_corporations_opposed
+	}
+	else_if = {
+		limit = {
+			has_country_flag = JAP_corporations_opposed
+		}
+		clr_country_flag = JAP_corporations_opposed
+		set_country_flag = JAP_corporations_neutral
+	}
+	else_if = {
+		limit = {
+			has_country_flag = JAP_corporations_neutral
+		}
+		clr_country_flag = JAP_corporations_neutral
+		set_country_flag = JAP_corporations_supportive
+	}
+	else_if = {
+		limit = {
+			has_country_flag = JAP_corporations_supportive
+		}
+		clr_country_flag = JAP_corporations_supportive
+		set_country_flag = JAP_corporations_highly_supportive
+	}
+	else = {
+		add_political_power = 75		#?
+		add_stability = 0.01
+	}
+}
+
+JAP_move_down_zaibatsu_support = {
+	if = {
+		limit = {
+			has_country_flag = JAP_corporations_highly_supportive
+		}
+		clr_country_flag = JAP_corporations_highly_supportive
+		set_country_flag = JAP_corporations_supportive
+	}
+	else_if = {
+		limit = {
+			has_country_flag = JAP_corporations_supportive
+		}
+		clr_country_flag = JAP_corporations_supportive
+		set_country_flag = JAP_corporations_neutral
+	}
+	else_if = {
+		limit = {
+			has_country_flag = JAP_corporations_neutral
+		}
+		clr_country_flag = JAP_corporations_neutral
+		set_country_flag = JAP_corporations_opposed
+	}
+	else_if = {
+		limit = {
+			has_country_flag = JAP_corporations_opposed
+		}
+		clr_country_flag = JAP_corporations_opposed
+		set_country_flag = JAP_corporations_deeply_opposed
+	}
+	else = {
+		add_political_power = -75		#?
+		add_stability = -0.01
+	}
+}
+
+JAP_move_up_kazoku_support = {
+	if = {
+		limit = {
+			has_country_flag = JAP_kazoku_deeply_opposed
+		}
+		clr_country_flag = JAP_kazoku_deeply_opposed
+		set_country_flag = JAP_kazoku_opposed
+	}
+	else_if = {
+		limit = {
+			has_country_flag = JAP_kazoku_opposed
+		}
+		clr_country_flag = JAP_kazoku_opposed
+		set_country_flag = JAP_kazoku_neutral
+	}
+	else_if = {
+		limit = {
+			has_country_flag = JAP_kazoku_neutral
+		}
+		clr_country_flag = JAP_kazoku_neutral
+		set_country_flag = JAP_kazoku_supportive
+	}
+	else_if = {
+		limit = {
+			has_country_flag = JAP_kazoku_supportive
+		}
+		clr_country_flag = JAP_kazoku_supportive
+		set_country_flag = JAP_kazoku_highly_supportive
+	}
+	else = {
+		add_political_power = 75		#?
+		add_stability = 0.01
+	}
+}
+
+JAP_move_down_kazoku_support = {
+	if = {
+		limit = {
+			has_country_flag = JAP_kazoku_highly_supportive
+		}
+		clr_country_flag = JAP_kazoku_highly_supportive
+		set_country_flag = JAP_kazoku_supportive
+	}
+	else_if = {
+		limit = {
+			has_country_flag = JAP_kazoku_supportive
+		}
+		clr_country_flag = JAP_kazoku_supportive
+		set_country_flag = JAP_kazoku_neutral
+	}
+	else_if = {
+		limit = {
+			has_country_flag = JAP_kazoku_neutral
+		}
+		clr_country_flag = JAP_kazoku_neutral
+		set_country_flag = JAP_kazoku_opposed
+	}
+	else_if = {
+		limit = {
+			has_country_flag = JAP_kazoku_opposed
+		}
+		clr_country_flag = JAP_kazoku_opposed
+		set_country_flag = JAP_kazoku_deeply_opposed
+	}
+	else = {
+		add_political_power = -75		#?
+		add_stability = -0.01
+	}
+}
+
+JAP_move_up_bureaucrat_support = {
+	if = {
+		limit = {
+			has_country_flag = JAP_bureaucrats_deeply_opposed
+		}
+		clr_country_flag = JAP_bureaucrats_deeply_opposed
+		set_country_flag = JAP_bureaucrats_opposed
+	}
+	else_if = {
+		limit = {
+			has_country_flag = JAP_bureaucrats_opposed
+		}
+		clr_country_flag = JAP_bureaucrats_opposed
+		set_country_flag = JAP_bureaucrats_neutral
+	}
+	else_if = {
+		limit = {
+			has_country_flag = JAP_bureaucrats_neutral
+		}
+		clr_country_flag = JAP_bureaucrats_neutral
+		set_country_flag = JAP_bureaucrats_supportive
+	}
+	else_if = {
+		limit = {
+			has_country_flag = JAP_bureaucrats_supportive
+		}
+		clr_country_flag = JAP_bureaucrats_supportive
+		set_country_flag = JAP_bureaucrats_highly_supportive
+	}
+	else = {
+		add_political_power = 75		#?
+		add_stability = 0.01
+	}
+}
+
+JAP_move_down_bureaucrat_support = {
+	if = {
+		limit = {
+			has_country_flag = JAP_bureaucrats_highly_supportive
+		}
+		clr_country_flag = JAP_bureaucrats_highly_supportive
+		set_country_flag = JAP_bureaucrats_supportive
+	}
+	else_if = {
+		limit = {
+			has_country_flag = JAP_bureaucrats_supportive
+		}
+		clr_country_flag = JAP_bureaucrats_supportive
+		set_country_flag = JAP_bureaucrats_neutral
+	}
+	else_if = {
+		limit = {
+			has_country_flag = JAP_bureaucrats_neutral
+		}
+		clr_country_flag = JAP_bureaucrats_neutral
+		set_country_flag = JAP_bureaucrats_opposed
+	}
+	else_if = {
+		limit = {
+			has_country_flag = JAP_bureaucrats_opposed
+		}
+		clr_country_flag = JAP_bureaucrats_opposed
+		set_country_flag = JAP_bureaucrats_deeply_opposed
+	}
+	else = {
+		add_political_power = -75		#?
+		add_stability = -0.01
+	}
+}

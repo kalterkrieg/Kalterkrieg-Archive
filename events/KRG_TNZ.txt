@@ -1,0 +1,139 @@
+add_namespace = krg_tnz
+add_namespace = krg_tnz_news
+country_event = { #aftermath of the Dar conference
+	id = krg_tnz.0
+	title = krg_tnz.0.t
+	desc = krg_tnz.0.d
+    #picture = ?
+	is_triggered_only = yes
+
+
+	option = {
+		name = krg_tnz.0.a
+		set_temp_variable =  { temp_level = 2 }
+		set_reichspakt_alignment = yes
+		hidden_effect = {
+			country_event = {
+				id = krg_tnz.1
+				months = 3
+				days = 8
+			}
+		}
+	}
+}
+
+country_event = { #Huttig creates the herrschaftsgebet
+	id = krg_tnz.1
+	title = krg_tnz.1.t
+	desc = krg_tnz.1.d
+    #picture = ?
+	is_triggered_only = yes
+
+
+	option = {
+		name = krg_tnz.1.a
+		increase_reichspakt_alignment = yes
+		hidden_effect = {
+			country_event = {
+				id = krg_tnz.2
+				days = 12
+				months = 3
+			}
+		}
+		news_event = {
+			id = krg_tnz_news.0
+		}
+	}
+}
+
+country_event = { #Huttig dies  
+	id = krg_tnz.2
+	title = krg_tnz.2.t
+	desc = krg_tnz.2.d
+    #picture = ?
+	is_triggered_only = yes
+
+
+	option = { #The administration survives
+		name = krg_tnz.2.a
+		ai_chance = {
+			base = 25
+		}
+		TNZ_hans_hüttig = {
+			kill_character = yes
+		}
+		add_manpower = -1
+		set_politics = {
+			ruling_party = social_conservative
+			election_frequency = 60
+			elections_allowed = yes
+		}
+		coal_add_auth_dem = yes
+		coal_add_mar_lib = yes
+		news_event = {
+			id = krg_tnz_news.1
+		}
+	}
+
+	option = { #Army coup the country
+		name = krg_tnz.2.b
+		TNZ_hans_hüttig = {
+			kill_character = yes
+		}
+		add_manpower = -1
+		set_politics = {
+			ruling_party = paternal_autocrat
+			elections_allowed = no
+		}
+		ai_chance = {
+			base = 75
+		}
+		decrease_reichspakt_alignment = yes
+		news_event = {
+			id = krg_tnz_news.2
+		}
+		swap_ideas = {
+			remove_idea = KRG_illiberal_democracy
+			add_idea = KRG_authoritarian_system
+		}
+	}
+}
+
+news_event = {
+	id = krg_tnz_news.0
+	title = krg_tnz_news.0.t
+	desc = krg_tnz_news.0.d
+    
+	picture = GFX_ne_MAF_Askaris
+	is_triggered_only = yes
+	major = yes
+	option = {
+		name = krg_tnz_news.0.a
+	}
+}
+
+news_event = {
+	id = krg_tnz_news.1
+	title = krg_tnz_news.1.t
+	desc = krg_tnz_news.1.d
+    
+	picture = GFX_ne_MAF_Tanzanian_Troops
+	is_triggered_only = yes
+	major = yes
+	option = {
+		name = krg_tnz_news.1.a
+	}
+}
+
+news_event = {
+	id = krg_tnz_news.2
+	title = krg_tnz_news.2.t
+	desc = krg_tnz_news.2.d
+    
+	picture = GFX_ne_MAF_Tanzanian_Coup
+	is_triggered_only = yes
+	major = yes
+	option = {
+		name = krg_tnz_news.2.a
+	}
+}

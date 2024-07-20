@@ -1,0 +1,828 @@
+################
+# con old code #
+################
+
+con_reset_vote = {
+	#Setting up variables
+	set_variable = { global.con_voting_members = 0 }
+	set_variable = { global.con_vote_against = 0 }
+	set_variable = { global.con_vote_favour = 0 }
+	set_variable = { global.con_vote_against_percent = 0 }
+	set_variable = { global.con_vote_favour_percent = 0 }
+	set_variable = { global.con_vote_against_win = 0 }
+	set_variable = { global.con_vote_favour_win = 0 }
+	set_variable = { con_voted = 0 }
+	set_variable = { con_vetoed = 0 }
+	set_variable = { global.con_veto_voted = 0 } #Just to make sure, don't want any bugs :P
+
+	#Fixing Varriables
+	every_country = { add_to_variable = { global.con_voting_members = 1 } }
+	set_variable = { global.con_voting_majority = global.con_voting_members }
+	multiply_variable = {
+		global.con_voting_majority = 0.67
+	}
+	round_variable = global.con_voting_majority
+}
+con_se_vote_favour = {
+	if = {
+		limit = {
+			OR = {
+				has_idea = con_member
+				has_idea = con_senate
+			}
+		}
+		add_to_variable = { global.con_vote_favour = 1 }
+		# every_country = {
+		#   	add_to_variable = { global.con_vote_favour = 1 }
+		# }
+		log = "[GetDateText]: [Root.GetName]: voted in favour of the current vote in Congress of Nations [?global.con_vote_favour]"
+	}
+	con_calculate_against = yes
+	con_calculate_favour = yes
+}
+con_se_vote_against = {
+	if = {
+		limit = {
+			OR = {
+				has_idea = con_member
+				has_idea = con_senate
+			}
+		}
+		add_to_variable = { global.con_vote_against = 1 }
+		log = "[GetDateText]: [Root.GetName]: voted against the current vote in Congress of Nations [?global.con_vote_against]"
+	}
+	con_calculate_against = yes
+	con_calculate_favour = yes
+}
+con_veto = {
+	if = {
+		limit = {
+			has_idea = con_senate
+			NOT = {
+				check_variable = { con_veto_voted = 1 }
+			}
+		}
+		set_variable = { con_veto_voted = 1}
+		every_country = {
+			limit = {
+				OR = {
+					has_idea = con_member
+					has_idea = con_senate
+				}
+		  	}
+		  	add_to_variable = { global.con_vetoed = 1 }
+		}
+		log = "[GetDateText]: [Root.GetName]: vetoed the current vote in Congress of Nations"
+	}
+}
+con_calculate_favour = {
+	set_temp_variable = { con_ttt = global.con_voting_members }
+	set_variable = { global.con_vote_favour_percent = global.con_vote_favour }
+	divide_variable = {
+		global.con_vote_favour_percent = con_ttt
+	}
+	multiply_variable = {
+		global.con_vote_favour_percent = 100
+	}
+}
+con_calculate_against = {
+	set_temp_variable = { con_vvv = global.con_voting_members }
+	set_variable = { global.con_vote_against_percent = global.con_vote_against }
+	divide_variable = {
+		global.con_vote_against_percent = con_vvv
+	}
+	multiply_variable = {
+		global.con_vote_against_percent = 100
+	}
+}
+con_calculate_vote_winner = {
+	if = {
+		limit = {
+			has_favour_majority_con = yes
+		}
+		set_variable = { global.con_vote_favour_win = 1 }
+		set_variable = { global.con_vote_against_win = 0 }
+	}
+	if = {
+		limit = {
+			has_against_majority_con = yes
+		}
+		set_variable = { global.con_vote_favour_win = 0 }
+		set_variable = { global.con_vote_against_win = 1 }
+	}
+}
+
+###############################
+# everything past this is new #
+###############################
+
+# yeet the con (for debug)
+con_reset_everything = {
+	clear_array = global.con_council_array
+	clear_array = global.con_senate_array
+	clear_array = global.con_member_array
+}
+
+# main set up for con members
+initialise_con_members = {
+	con_reset_everything = yes
+
+	# 5 council members (use 1 to represent empty)
+	add_to_array = { global.con_council_array = GER }
+	add_to_array = { global.con_council_array = CAN }
+	add_to_array = { global.con_council_array = DNF }
+	add_to_array = { global.con_council_array = 1 }
+	add_to_array = { global.con_council_array = 1 }
+
+	# 15 senate members (use 1 to represent empty)
+	# add council members first!
+	add_to_array = { global.con_senate_array = GER }
+	add_to_array = { global.con_senate_array = CAN }
+	add_to_array = { global.con_senate_array = DNF }
+	add_to_array = { global.con_senate_array = 1 }
+	add_to_array = { global.con_senate_array = 1 }
+
+	add_to_array = { global.con_senate_array = ENG }
+	add_to_array = { global.con_senate_array = UKR }
+	add_to_array = { global.con_senate_array = HOL }
+	add_to_array = { global.con_senate_array = AST }
+	add_to_array = { global.con_senate_array = 1 }
+	add_to_array = { global.con_senate_array = 1 }
+	add_to_array = { global.con_senate_array = 1 }
+	add_to_array = { global.con_senate_array = 1 }
+	add_to_array = { global.con_senate_array = 1 }
+	add_to_array = { global.con_senate_array = 1 }
+
+	# con members (no need to add in order or use 1 to represent empty)
+	add_to_array = { global.con_member_array = GER }
+	add_to_array = { global.con_member_array = CAN }
+	add_to_array = { global.con_member_array = DNF }
+	add_to_array = { global.con_member_array = ENG }
+	add_to_array = { global.con_member_array = UKR }
+	add_to_array = { global.con_member_array = HOL }
+	add_to_array = { global.con_member_array = AST }
+	add_to_array = { global.con_member_array = SAF }
+	add_to_array = { global.con_member_array = ICE }
+	add_to_array = { global.con_member_array = NFA }
+	add_to_array = { global.con_member_array = POR }
+	add_to_array = { global.con_member_array = GRE }
+	add_to_array = { global.con_member_array = PAN }
+	add_to_array = { global.con_member_array = SIE }
+	add_to_array = { global.con_member_array = BEL }
+	add_to_array = { global.con_member_array = DEN }
+	add_to_array = { global.con_member_array = FIN }
+	add_to_array = { global.con_member_array = ITA }
+	add_to_array = { global.con_member_array = POL }
+	add_to_array = { global.con_member_array = KRL }
+	add_to_array = { global.con_member_array = LIT }
+	add_to_array = { global.con_member_array = TRI }
+	add_to_array = { global.con_member_array = JAM }
+	add_to_array = { global.con_member_array = IRE }
+	add_to_array = { global.con_member_array = SWE }
+
+	# ineligible dudes
+	MAF = { set_country_flag = con_ineligible }
+	CHI = { set_country_flag = con_ineligible } #?
+	XSM = { set_country_flag = con_ineligible }
+	SIK = { set_country_flag = con_ineligible }
+	TIB = { set_country_flag = con_ineligible }
+	SOM = { set_country_flag = con_ineligible } #?
+	FRA = { set_country_flag = con_ineligible } #?
+	TRK = { set_country_flag = con_ineligible }
+	TCC = { set_country_flag = con_ineligible }
+
+	# number of council and senate members at start (no need to change it after game starts it will do it automatically when member leaves/joins)
+	set_variable = { global.council_members = 3 }
+	set_variable = { global.senate_members = 7 }
+
+	# set up position of the seats (the semicircle stuff)
+	con_council_positions = yes
+	con_senate_positions = yes
+
+	set_global_flag = speaker_atllio_piccioni
+}
+
+# council semicircle position stuff
+con_council_positions = {
+	clear_array = global.council_icon_x_array
+	clear_array = global.council_icon_y_array
+
+	add_to_array = { global.council_icon_x_array = 70 }
+	add_to_array = { global.council_icon_x_array = 85 }
+	add_to_array = { global.council_icon_x_array = 105 }
+	add_to_array = { global.council_icon_x_array = 123 }
+	add_to_array = { global.council_icon_x_array = 138 }
+
+	add_to_array = { global.council_icon_y_array = 85 }
+	add_to_array = { global.council_icon_y_array = 70 }
+	add_to_array = { global.council_icon_y_array = 65 }
+	add_to_array = { global.council_icon_y_array = 70 }
+	add_to_array = { global.council_icon_y_array = 85 }
+}
+
+# senate semicircle position stuff
+con_senate_positions = {
+	clear_array = global.senate_icon_x_array
+	clear_array = global.senate_icon_y_array
+
+	add_to_array = { global.senate_icon_x_array = 76 }
+	add_to_array = { global.senate_icon_x_array = 91 }
+	add_to_array = { global.senate_icon_x_array = 111 }
+	add_to_array = { global.senate_icon_x_array = 129 }
+	add_to_array = { global.senate_icon_x_array = 144 }
+
+	add_to_array = { global.senate_icon_x_array = 42 }
+	add_to_array = { global.senate_icon_x_array = 52 }
+	add_to_array = { global.senate_icon_x_array = 67 }
+	add_to_array = { global.senate_icon_x_array = 82 }
+	add_to_array = { global.senate_icon_x_array = 98 }
+	add_to_array = { global.senate_icon_x_array = 119 }
+	add_to_array = { global.senate_icon_x_array = 137 }
+	add_to_array = { global.senate_icon_x_array = 152 }
+	add_to_array = { global.senate_icon_x_array = 165 }
+	add_to_array = { global.senate_icon_x_array = 175 }
+
+	add_to_array = { global.senate_icon_y_array = 95 }
+	add_to_array = { global.senate_icon_y_array = 80 }
+	add_to_array = { global.senate_icon_y_array = 75 }
+	add_to_array = { global.senate_icon_y_array = 80 }
+	add_to_array = { global.senate_icon_y_array = 95 }
+
+	add_to_array = { global.senate_icon_y_array = 95 }
+	add_to_array = { global.senate_icon_y_array = 80 }
+	add_to_array = { global.senate_icon_y_array = 65 }
+	add_to_array = { global.senate_icon_y_array = 55 }
+	add_to_array = { global.senate_icon_y_array = 50 }
+	add_to_array = { global.senate_icon_y_array = 50 }
+	add_to_array = { global.senate_icon_y_array = 55 }
+	add_to_array = { global.senate_icon_y_array = 65 }
+	add_to_array = { global.senate_icon_y_array = 80 }
+	add_to_array = { global.senate_icon_y_array = 95 }
+}
+
+# check to see if reso passes or fails
+con_resolution_check = {
+	# check if everyone voted
+	if = {
+		limit = {
+			check_variable = { global.vote_log_array^num = global.con_member_array^num }
+		}
+		# normal resos and entry resos and senate promotion and demotion resos
+		if = {
+			limit = {
+				OR = {
+					check_variable = { global.resolution_type = 1 }
+					check_variable = { global.resolution_type = 2 }
+					check_variable = { global.resolution_type = 3 }
+				}
+			}
+			# prorouged
+			if = {
+				limit = {
+					set_temp_variable = { half = global.con_council_array^num }
+					divide_temp_variable = { half = 2 }
+					set_temp_variable = { prorouge_count = global.con_council_array^num }
+					subtract_from_temp_variable = { prorouge_count = global.veto_count }
+					check_variable = { prorouge_count > half }
+				}
+				con_resolution_pass = yes
+			}
+			# veto with 2/3 majority
+			else_if = {
+				limit = {
+					set_temp_variable = { two_third = global.con_member_array^num }
+					divide_temp_variable = { two_third = 3 }
+					multiply_temp_variable = { two_third = 2 }
+					check_variable = { global.resolution_vote_yes > two_third }
+					check_variable = { global.veto_count > 0 }
+				}
+				if = {
+					limit = {
+						check_variable = { global.veto_count = 1 } # 1 veto only
+					}
+					for_each_scope_loop = {
+						array = global.con_council_array
+
+						if = {
+							limit = {
+								OR = {
+									tag = GER
+									is_in_faction_with = GER
+								}
+								has_country_flag = con_veto
+							}
+							add_to_array = { global.influence_log = 12 }
+							add_to_array = { global.influence_log_val = 5 }
+							influence_recalc = yes
+							set_temp_variable = { temp_influence_decay_index = global.influence_log^num }
+							subtract_from_temp_variable = { temp_influence_decay_index = 1 }
+							add_to_array = { global.con_influence_decay_array = temp_influence_decay_index }
+							country_event = { id = krg_congress_of_nations.1 days = 365 }
+							clr_country_flag = con_veto
+						}
+						else_if = {
+							limit = {
+								OR = {
+									tag = CAN
+									is_in_faction_with = CAN
+								}
+								has_country_flag = con_veto
+							}
+							add_to_array = { global.influence_log = 13 }
+							add_to_array = { global.influence_log_val = -5 }
+							influence_recalc = yes
+							set_temp_variable = { temp_influence_decay_index = global.influence_log^num }
+							subtract_from_temp_variable = { temp_influence_decay_index = 1 }
+							add_to_array = { global.con_influence_decay_array = temp_influence_decay_index }
+							country_event = { id = krg_congress_of_nations.1 days = 365 }
+							clr_country_flag = con_veto
+						}
+					}
+				}
+				con_resolution_fail = yes
+			}
+			# veto without 2/3 majority
+			else_if = {
+				limit = {
+					check_variable = { global.veto_count > 0 }
+				}
+				con_resolution_fail = yes
+			}
+			# simple majority
+			else_if = {
+				limit = {
+					set_temp_variable = { half = global.con_member_array^num }
+					divide_temp_variable = { half = 2 }
+					check_variable = { global.resolution_vote_yes > half }
+				}
+				con_resolution_pass = yes
+			}
+			# no majority
+			else = {
+				con_resolution_fail = yes
+			}
+		}
+		# promotion and demotion to council resos
+		else_if = {
+			limit = {
+				check_variable = { global.resolution_type = 4 }
+			}
+			# veto with 3/4 majority and 2/3 senate majority
+			if = {
+				limit = {
+					set_temp_variable = { three_fourth = global.con_member_array^num }
+					divide_temp_variable = { three_fourth = 4 }
+					multiply_temp_variable = { three_fourth = 3 }
+					set_temp_variable = { two_third = global.con_senate_array^num }
+					divide_temp_variable = { two_third = 3 }
+					multiply_temp_variable = { two_third = 2 }
+					set_temp_variable = { senate_yes = global.con_senate_array^num }
+					subtract_from_temp_variable = { senate_yes = global.senate_no }
+					check_variable = { senate_yes > two_third }
+					check_variable = { global.resolution_vote_yes > three_fourth }
+					check_variable = { global.veto_count > 0 }
+				}
+				if = {
+					limit = {
+						check_variable = { global.veto_count = 1 } # 1 veto only
+					}
+					for_each_scope_loop = {
+						array = global.con_council_array
+
+						if = {
+							limit = {
+								OR = {
+									tag = GER
+									is_in_faction_with = GER
+								}
+								has_country_flag = con_veto
+							}
+							add_to_array = { global.influence_log = 12 }
+							add_to_array = { global.influence_log_val = 5 }
+							influence_recalc = yes
+							set_temp_variable = { temp_influence_decay_index = global.influence_log^num }
+							subtract_from_temp_variable = { temp_influence_decay_index = 1 }
+							add_to_array = { global.con_influence_decay_array = temp_influence_decay_index }
+							country_event = { id = krg_congress_of_nations.1 days = 365 }
+							clr_country_flag = con_veto
+						}
+						else_if = {
+							limit = {
+								OR = {
+									tag = CAN
+									is_in_faction_with = CAN
+								}
+								has_country_flag = con_veto
+							}
+							add_to_array = { global.influence_log = 13 }
+							add_to_array = { global.influence_log_val = -5 }
+							influence_recalc = yes
+							set_temp_variable = { temp_influence_decay_index = global.influence_log^num }
+							subtract_from_temp_variable = { temp_influence_decay_index = 1 }
+							add_to_array = { global.con_influence_decay_array = temp_influence_decay_index }
+							country_event = { id = krg_congress_of_nations.1 days = 365 }
+							clr_country_flag = con_veto
+						}
+					}
+				}
+				con_resolution_fail = yes
+			}
+			# veto without 3/4 majority and 2/3 senate majority
+			else_if = {
+				limit = {
+					check_variable = { global.veto_count > 0 }
+				}
+				con_resolution_fail = yes
+			}
+			# simple majority in member and senate
+			else_if = {
+				limit = {
+					set_temp_variable = { half = global.con_member_array^num }
+					divide_temp_variable = { half = 2 }
+					check_variable = { global.resolution_vote_yes > half }
+					set_temp_variable = { half2 = global.con_member_array^num }
+					divide_temp_variable = { half2 = 2 }
+					set_temp_variable = { senate_yes = global.con_senate_array^num }
+					subtract_from_temp_variable = { senate_yes = global.senate_no }
+					check_variable = { senate_yes > half2 }
+					check_variable = { global.resolution_vote_yes > half }
+				}
+				con_resolution_pass = yes
+			}
+			# no majority
+			else = {
+				con_resolution_fail = yes
+			}
+		}
+	}
+}
+
+member_entry_resolution_effect = {
+	set_country_flag = reso_sent_flag
+	add_to_array = { global.pending_resolution_array = 1 }
+	add_to_array = { global.pending_resolution_type_array = 2 }
+	add_to_array = { global.pending_resolution_target_array = ROOT }
+	set_temp_variable = { temp_index = global.pending_resolution_array^num }
+	subtract_from_temp_variable = { temp_index = 1 }
+	for_each_scope_loop = {
+		array = global.con_member_array
+
+		resize_array = { ai_vote_choice_resolution_array = global.pending_resolution_array^num }
+
+		if = {
+			limit = {
+				OR = {
+					has_opinion = { target = ROOT value > 25 }
+					AND = {
+						has_same_government_as_ROOT = yes
+						has_opinion = { target = ROOT value > -11 }
+					}
+				}
+			}
+			set_variable = { ai_vote_choice_resolution_array^temp_index = 1 }
+		}
+		else_if = {
+			limit = {
+				has_opinion = { target = ROOT value < -25 }
+			}
+			set_variable = { ai_vote_choice_resolution_array^temp_index = 2 }
+		}
+		else = {
+			set_variable = { ai_vote_choice_resolution_array^temp_index = 3 }
+		}
+	}
+	add_resolution = yes
+}
+
+senate_promotion_resolution_effect = {
+	set_country_flag = reso_sent_flag
+	add_to_array = { global.pending_resolution_array = 1 }
+	add_to_array = { global.pending_resolution_type_array = 3 }
+	add_to_array = { global.pending_resolution_target_array = ROOT }
+	set_temp_variable = { temp_index = global.pending_resolution_array^num }
+	subtract_from_temp_variable = { temp_index = 1 }
+	for_each_scope_loop = {
+		array = global.con_member_array
+
+		resize_array = { ai_vote_choice_resolution_array = global.pending_resolution_array^num }
+
+		if = {
+			limit = {
+				OR = {
+					has_opinion = { target = ROOT value > 50 }
+					tag = ROOT
+				}
+			}
+			set_variable = { ai_vote_choice_resolution_array^temp_index = 1 }
+		}
+		else_if = {
+			limit = {
+				has_opinion = { target = ROOT value < -50 }
+			}
+			set_variable = { ai_vote_choice_resolution_array^temp_index = 2 }
+		}
+		else = {
+			set_variable = { ai_vote_choice_resolution_array^temp_index = 3 }
+		}
+	}
+	add_resolution = yes
+}
+
+council_promotion_resolution_effect = {
+	set_country_flag = reso_sent_flag
+	add_to_array = { global.pending_resolution_array = 1 }
+	add_to_array = { global.pending_resolution_type_array = 4 }
+	add_to_array = { global.pending_resolution_target_array = THIS }
+	set_temp_variable = { temp_index = global.pending_resolution_array^num }
+	subtract_from_temp_variable = { temp_index = 1 }
+	for_each_scope_loop = {
+		array = global.con_member_array
+
+		resize_array = { ai_vote_choice_resolution_array = global.pending_resolution_array^num }
+
+		if = {
+			limit = {
+				OR = {
+					has_opinion = { target = PREV value > 75 }
+					tag = PREV
+				}
+			}
+			set_variable = { ai_vote_choice_resolution_array^temp_index = 1 }
+		}
+		else_if = {
+			limit = {
+				has_opinion = { target = PREV value < -75 }
+			}
+			set_variable = { ai_vote_choice_resolution_array^temp_index = 2 }
+		}
+		else = {
+			set_variable = { ai_vote_choice_resolution_array^temp_index = 3 }
+		}
+	}
+	add_resolution = yes
+}
+
+maho_resolution_effect = {
+	add_to_array = { global.pending_resolution_array = 1 }
+	add_to_array = { global.pending_resolution_type_array = 1 }
+	add_to_array = { global.pending_resolution_target_array = ROOT }
+	set_temp_variable = { temp_index = global.pending_resolution_array^num }
+	subtract_from_temp_variable = { temp_index = 1 }
+	for_each_scope_loop = {
+		array = global.con_member_array
+
+		resize_array = { ai_vote_choice_resolution_array = global.pending_resolution_array^num }
+		set_variable = { ai_vote_choice_resolution_array^temp_index = 3 }
+	}
+	add_resolution = yes
+}
+
+add_resolution = {
+	if = {
+		limit = {
+			check_variable = { global.pending_resolution_array^num > 0 }
+			NOT = { has_variable = global.con_resolution }
+		}
+		for_each_scope_loop = {
+			array = global.con_member_array
+
+			set_variable = { ai_vote_choice_resolution = ai_vote_choice_resolution_array^0 }
+			remove_from_array = {
+				array = ai_vote_choice_resolution_array
+				index = 0
+			}
+		}
+		set_variable = { global.con_resolution = global.pending_resolution_array^0 }
+		remove_from_array = {
+			array = global.pending_resolution_array
+			index = 0
+		}
+		set_variable = { global.resolution_type = global.pending_resolution_type_array^0 }
+		remove_from_array = {
+			array = global.pending_resolution_type_array
+			index = 0
+		}
+		add_to_array = { global.con_resolution_target_array = global.pending_resolution_target_array^0 }
+		remove_from_array = {
+			array = global.pending_resolution_target_array
+			index = 0
+		}
+		every_country = {
+			limit = { is_ai = no }
+			if = {
+				limit = {
+					NOT = { has_variable = show_congress_of_nations }
+				}
+				set_variable = { show_congress_of_nations = 1 }
+				if = {
+					limit = {
+						is_in_array = { global.con_member_array = ROOT }
+					}
+					set_variable = { KRG_congress_of_nations_vote_x = 230 }
+					if = {
+						limit = {
+							is_in_array = { global.con_senate_array = ROOT }
+						}
+						set_variable = { KRG_congress_of_nations_apply_council_x = 140 }
+						set_variable = { KRG_congress_of_nations_apply_senate_x = -9000 }
+						set_variable = { KRG_congress_of_nations_apply_member_x = -9000 }
+					}
+					else_if = {
+						limit = {
+							is_in_array = { global.con_council_array = ROOT }
+						}
+						set_variable = { KRG_congress_of_nations_apply_council_x = -9000 }
+						set_variable = { KRG_congress_of_nations_apply_senate_x = -9000 }
+						set_variable = { KRG_congress_of_nations_apply_member_x = -9000 }
+					}
+					else = {
+						set_variable = { KRG_congress_of_nations_apply_council_x = -9000 }
+						set_variable = { KRG_congress_of_nations_apply_senate_x = 140 }
+						set_variable = { KRG_congress_of_nations_apply_member_x = -9000 }
+					}
+				}
+				else_if = {
+					limit = { has_country_flag = con_ineligible }
+					set_variable = { KRG_congress_of_nations_vote_x = -9000 }
+					set_variable = { KRG_congress_of_nations_apply_council_x = -9000 }
+					set_variable = { KRG_congress_of_nations_apply_senate_x = -9000 }
+					set_variable = { KRG_congress_of_nations_apply_member_x = -9000 }
+				}
+				else = {
+					set_variable = { KRG_congress_of_nations_vote_x = -9000 }
+					set_variable = { KRG_congress_of_nations_apply_council_x = -9000 }
+					set_variable = { KRG_congress_of_nations_apply_senate_x = -9000 }
+					set_variable = { KRG_congress_of_nations_apply_member_x = 140 }
+				}
+			}
+		}
+	}
+	every_country = {
+		limit = { is_ai = no }
+		if = {
+			limit = { has_variable = show_congress_of_nations }
+			add_to_variable = { show_congress_of_nations = 1 }
+		}
+		if = {
+			limit = { has_variable = show_congress_of_nations_resolution }
+			add_to_variable = { show_congress_of_nations_resolution = 1 }
+		}
+	}
+}
+
+con_resolution_pass = {
+	if = {
+		limit = {
+			check_variable = { global.resolution_type = 2 }
+		}
+		var:global.con_resolution_target_array^0 = {
+			set_country_flag = {
+				flag = reso_cooldown_flag
+				value = 1
+				days = 300
+			}
+			add_to_con = yes
+			clr_country_flag = reso_sent_flag
+		}
+	}
+	else_if = {
+		limit = {
+			check_variable = { global.resolution_type = 3 }
+		}
+		var:global.con_resolution_target_array^0 = {
+			set_country_flag = {
+				flag = reso_cooldown_flag
+				value = 1
+				days = 300
+			}
+			add_to_con_senate = yes
+			clr_country_flag = reso_sent_flag
+		}
+	}
+	else_if = {
+		limit = {
+			check_variable = { global.resolution_type = 4 }
+		}
+		var:global.con_resolution_target_array^0 = {
+			set_country_flag = {
+				flag = reso_cooldown_flag
+				value = 1
+				days = 300
+			}
+			add_to_con_council = yes
+			clr_country_flag = reso_sent_flag
+		}
+	}
+
+	clear_array = global.resolution_vote_array
+	clear_array = global.vote_log_array
+	clear_array = global.vote_log_date_array
+	clear_array = global.con_resolution_target_array
+	clear_variable = global.resolution_vote_yes
+	clear_variable = global.resolution_vote_no
+	clear_variable = global.resolution_abstain
+	clear_variable = global.senate_no
+	clear_variable = global.veto_count
+	clear_variable = global.con_resolution
+	clear_variable = global.resolution_type
+}
+
+con_resolution_fail = {
+	if = {
+		limit = {
+			OR = {
+				check_variable = { global.resolution_type = 2 }
+				check_variable = { global.resolution_type = 3 }
+				check_variable = { global.resolution_type = 4 }
+			}
+		}
+		var:global.con_resolution_target_array^0 = {
+			set_country_flag = {
+				flag = reso_cooldown_flag
+				value = 1
+				days = 300
+			}
+			clr_country_flag = reso_sent_flag
+		}
+	}
+
+	clear_array = global.resolution_vote_array
+	clear_array = global.vote_log_array
+	clear_array = global.vote_log_date_array
+	clear_array = global.con_resolution_target_array
+	clear_variable = global.resolution_vote_yes
+	clear_variable = global.resolution_vote_no
+	clear_variable = global.resolution_abstain
+	clear_variable = global.senate_no
+	clear_variable = global.veto_count
+	clear_variable = global.con_resolution
+	clear_variable = global.resolution_type
+}
+
+# debug_end_resolution = {
+# 	clear_array = global.resolution_vote_array
+# 	clear_array = global.vote_log_array
+# 	clear_array = global.vote_log_date_array
+# 	clear_array = global.con_resolution_target_array
+# 	clear_variable = global.resolution_vote_yes
+# 	clear_variable = global.resolution_vote_no
+# 	clear_variable = global.resolution_abstain
+# 	clear_variable = global.senate_no
+# 	clear_variable = global.veto_count
+# 	clear_variable = global.con_resolution
+# 	clear_variable = global.resolution_type
+# 	clr_country_flag = reso_cooldown_flag
+# 	clr_country_flag = reso_sent_flag
+# 	add_resolution = yes
+# }
+
+add_to_con = {
+	add_to_array = { global.con_member_array = THIS }
+}
+
+add_to_con_senate = {
+	set_variable = { global.con_senate_array^global.senate_members = THIS }
+	add_to_variable = { global.senate_members = 1 }
+}
+
+add_to_con_council = {
+	set_variable = { global.con_council_array^global.council_members = THIS }
+	set_variable = { global.con_senate_array^global.senate_members = THIS }
+	add_to_variable = { global.council_members = 1 }
+
+	set_temp_variable = { temp = global.senate_members }
+	subtract_from_temp_variable = { temp = 1 }
+	set_variable = { global.con_council_array^temp = 1 }
+}
+
+remove_from_con_council = {
+	set_temp_variable = { temp = global.council_members }
+	subtract_from_temp_variable = { temp = 1 }
+	set_variable = { global.con_council_array^temp = 1 }
+}
+
+remove_from_con_senate = {
+	if = {
+		limit = {
+			is_in_array = { global.con_council_array = THIS }
+		}
+		remove_from_con_council = yes
+	}
+	else = {
+		set_temp_variable = { temp = global.senate_members }
+		subtract_from_temp_variable = { temp = 1 }
+	}
+
+	set_variable = { global.con_senate_array^temp = 1 }
+}
+
+remove_from_con = {
+	if = {
+		limit = {
+			is_in_array = { global.con_senate_array = THIS }
+		}
+		remove_from_con_senate = yes
+	}
+
+	remove_from_array = { global.con_member_array = THIS }
+}

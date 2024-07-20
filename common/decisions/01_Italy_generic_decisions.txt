@@ -1,0 +1,443 @@
+#######################################################
+### Generic Italian Decisions - by The Irredentista ###
+#######################################################
+
+italy_generic_the_reclaimed_lands = {
+    italy_generic_get_core = {
+		icon = infiltrate_state
+		
+		allowed = {
+			original_tag = ITA
+		}
+		
+		highlight_states = {
+			highlight_state_targets = { state = FROM }
+		}
+		state_target = yes
+		targets = { 877 158 159 160 839 909 842 736 919 907 831 161 162 157 908 2 832 117 903 904 156 115 114 918 1 116 }
+		target_trigger = {
+			FROM = {
+				is_controlled_by = ITA
+			}
+		}
+		custom_cost_trigger = {
+			command_power > 49.99
+		}
+		custom_cost_text = italy_generic_get_core_cost
+		days_remove = 90
+		modifier = {
+			command_power_gain = -0.1
+		}
+		fire_only_once = no
+		on_map_mode = map_and_decisions_view
+		visible = {
+			FROM = {
+				is_owned_by = ROOT
+				is_claimed_by = ROOT
+				NOT = {
+					is_core_of = ROOT
+				}
+			}
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = italy_generic_neighbor_state_is_core
+				FROM = {
+					OR = {
+						state = 115
+						state = 918
+						any_neighbor_state = {
+							is_core_of = ROOT
+						}
+					}
+				}
+			}
+			FROM = {
+				is_fully_controlled_by = ROOT
+				NOT = {
+					has_state_flag = events_could_disrupt_core
+				}
+			}
+		}
+
+		ai_will_do = {
+			base = 100
+		}
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete italy_generic_get_core target: [From.GetName]"
+			hidden_effect = {
+				add_command_power = -50
+			}
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove italy_generic_get_core target: [From.GetName]"
+			FROM = {
+				remove_claim_by = ITA
+				add_core_of = ITA
+			}
+		}
+	}
+}
+
+ITA_coup_decisions ={ 
+	###Basic missions
+	ITA_coup_infiltrate_army ={ 
+		custom_cost_trigger ={ command_power > 9.999}
+		custom_cost_text = CP_10
+		available ={ 
+			NOT ={ 
+				has_country_flag = ITA_coup_undertaking_a_mission
+			}
+		}
+		complete_effect ={ 
+			set_country_flag = ITA_coup_undertaking_a_mission
+			set_country_flag = ITA_coup_infiltrate_army_flag
+			add_command_power = -10
+		}
+	}
+	ITA_coup_corrupt_local_bureaucrats ={ 
+		visible ={ always = yes }
+		cost = 20
+		available ={ 
+			NOT ={ 
+				has_country_flag = ITA_coup_undertaking_a_mission
+			}
+		}
+
+		complete_effect ={ 
+			set_country_flag = ITA_coup_undertaking_a_mission
+			set_country_flag = ITA_coup_corrupt_local_bureaucrats_flag
+		}
+	}
+	ITA_coup_do_nothing ={ 
+		visible  ={ always = yes }
+		available ={ 
+			NOT ={ 
+				has_country_flag = ITA_coup_undertaking_a_mission
+			}
+		}
+		complete_effect ={ 
+			set_country_flag = ITA_coup_undertaking_a_mission
+			set_country_flag = ITA_coup_do_nothing_flag
+		}
+	}
+	##Advanced missions
+	ITA_coup_corrupt_general ={ 
+		visible ={ always = yes }
+		custom_cost_trigger ={ command_power > 14.999}
+		custom_cost_text = CP_15
+		available ={ 
+			NOT = { 
+				has_country_flag = ITA_coup_undertaking_a_mission
+			}
+			check_variable ={ 
+			    ITA_coup_progress > 49
+			} 
+		}
+
+		complete_effect ={ 
+			set_country_flag = ITA_coup_undertaking_a_mission
+			set_country_flag = ITA_coup_corrupt_general_flag
+			add_command_power = -15
+		}
+	}
+	ITA_coup_corrupt_high_ranking_bureaucrat ={ 
+		visible ={ always = yes }
+		cost = 30
+		available ={ 
+			NOT ={ 
+				has_country_flag = ITA_coup_undertaking_a_mission
+			}
+			check_variable ={ 
+			    var = ITA_coup_progress 
+			    value = 50
+			    compare = greater_than_or_equals
+			} 
+		}
+
+		complete_effect ={ 
+			set_country_flag = ITA_coup_undertaking_a_mission
+			set_country_flag = ITA_coup_corrupt_high_ranking_bureaucrat_flag
+		}
+	}
+	ITA_infiltrate_commandos ={ 
+		visible ={ always = yes }
+		custom_cost_trigger ={ command_power > 29.999}
+		custom_cost_text = CP_30
+		available ={ 
+			NOT ={ 
+				has_country_flag = ITA_coup_undertaking_a_mission
+			}
+			check_variable ={ 
+			    var = ITA_coup_progress 
+			    value = 50
+			    compare = greater_than_or_equals
+			} 
+		}
+		complete_effect ={ 
+			set_country_flag = ITA_coup_undertaking_a_mission
+			set_country_flag = ITA_coup_infiltrate_commandos_flag
+			add_command_power = -30
+		}
+	}
+	###missions
+	ITA_coup_mission = {                
+        visible ={ always = yes }  
+        available = {                 
+            check_variable ={ 
+			    var = ITA_coup_progress 
+			    value = 100
+			    compare = greater_than_or_equals
+			} 
+        }
+        activation = {            
+			has_country_flag = ITA_coup_allowed_flag
+        }
+        is_good = no                  
+        selectable_mission = yes         
+        days_mission_timeout = 90         
+        timeout_effect = {   
+			log = "[GetDateText]: [Root.GetName]: Decision timeout ITA_coup_mission target: [From.GetName]"
+			custom_effect_tooltip = otto_note_referendum_will_be_held_tt
+			ITA ={ 
+				set_variable = {
+					otto_note_days_until_referendum_var = 0 
+				}
+			}
+			ITA ={
+				set_variable = {
+					otto_note_days_until_referendum_var = 0 
+				}
+			}          
+            Otto_note_referendum_in_human_country = yes
+			clr_country_flag = ITA_coup_allowed_flag
+        }
+        complete_effect = {     
+			log = "[GetDateText]: [Root.GetName]: Decision complete ITA_coup_mission target: [From.GetName]"
+			clr_country_flag = ITA_coup_allowed_flag  
+			if ={ 
+				limit ={ 
+					check_variable = {
+						var = ITA_coup_Italian_alertness
+						value = 5
+						compare = less_than_or_equals
+					} 
+				}
+            	DNF ={ 
+					country_event = { 
+						id = otto_note.15
+					}
+				}
+			} 
+			else ={ 
+				custom_effect_tooltip = otto_note_fake_coup_tt
+				hidden_effect = {
+					DNF ={ 
+						country_event ={ 
+							id = otto_note.51
+						}
+					}
+				}
+			} 
+        }
+    }
+	ITA_coup_counter_intelligence ={ 
+		visible ={ always = yes }
+		available ={ 
+			always = no
+		}
+		activation ={ has_country_flag = ITA_coup_allowed_flag }
+		is_good = no                  
+        selectable_mission = no         
+        days_mission_timeout = 7
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove ITA_coup_counter_intelligence ={ target: [From.GetName]"
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete ITA_coup_counter_intelligence ={ target: [From.GetName]"
+		}
+
+		timeout_effect = { 
+			log = "[GetDateText]: [Root.GetName]: Decision timeout complete_effect target: [From.GetName]"
+			random_list ={
+			    ITA_coup_counter_nothing_var ={ }
+			    ITA_coup_counter_small_var ={ 
+					custom_effect_tooltip = ITA_coup_counter_small_tt
+					subtract_from_variable ={ 
+						variable = ITA_coup_progress
+						value = 5 
+					}
+			    }
+			    ITA_coup_counter_big_var ={ 
+					custom_effect_tooltip = ITA_coup_counter_large_tt
+					subtract_from_variable ={ 
+						variable = ITA_coup_progress
+						value = 10
+					}
+			    }
+		    }
+			hidden_effect = {
+				activate_mission = ITA_coup_counter_intelligence
+			}
+	    }
+	}
+	ITA_coup_weekly_mission ={ 
+		visible ={ always = yes }
+		available ={ 
+			always = no
+		}
+		activation ={ has_country_flag = ITA_coup_allowed_flag }
+		is_good = yes                  
+        selectable_mission = no         
+        days_mission_timeout = 7
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove ITA_coup_weekly_mission ={ target: [From.GetName]"
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete ITA_coup_weekly_mission ={ target: [From.GetName]"
+		}
+
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout complete_effect target: [From.GetName]"
+			if ={ 
+				limit ={ 
+					has_country_flag = ITA_coup_infiltrate_army_flag
+				}
+				random_list ={ 
+					ITA_coup_infiltrate_army_flag_success_var ={
+						custom_effect_tooltip = ITA_get_7_coup_progress_tt
+						add_to_variable ={ 
+							variable = ITA_coup_progress
+						    value = 7
+						}
+					}
+					ITA_coup_infiltrate_army_failure_var ={ 
+						custom_effect_tooltip = ITA_Italian_Alertness_goes_up_1_tt
+						add_to_variable ={ 
+							variable = ITA_coup_Italian_alertness
+							value = 1
+						}
+					}
+				}
+				clr_country_flag = ITA_coup_infiltrate_army_flag
+				clr_country_flag = ITA_coup_undertaking_a_mission
+				clamp_the_variables_ITA_coup = yes
+			}
+			else_if ={ 
+				limit ={ 
+					has_country_flag = ITA_coup_corrupt_local_bureaucrats_flag
+				}
+				random_list ={ 
+					ITA_coup_corrupt_local_bureaucrats_success_var ={
+						custom_effect_tooltip = ITA_get_7_coup_progress_tt
+						add_to_variable ={ 
+						variable = ITA_coup_progress
+					    value = 7
+					    }
+					}
+					ITA_coup_corrupt_local_bureaucrats_failure_var ={ 
+						custom_effect_tooltip = ITA_Italian_Alertness_goes_up_1_tt
+						add_to_variable ={ 
+						variable = ITA_coup_Italian_alertness
+						value = 1
+						}
+					}
+				}
+				clamp_the_variables_ITA_coup = yes
+				clr_country_flag = ITA_coup_corrupt_local_bureaucrats_flag
+				clr_country_flag = ITA_coup_undertaking_a_mission
+			}
+			else_if ={ 
+				limit ={ 
+					has_country_flag = ITA_coup_do_nothing_flag
+				}
+				random_list ={ 
+					ITA_coup_do_nothing_success_var ={
+						add_success_chance_for_actions = yes
+					}
+				}
+				clr_country_flag = ITA_coup_do_nothing_flag
+				clr_country_flag = ITA_coup_undertaking_a_mission
+				clamp_the_variables_ITA_coup = yes
+			}
+			else_if ={ 
+				limit ={ 
+					has_country_flag = ITA_coup_corrupt_general_flag
+				}
+				random_list ={ 
+					ITA_coup_corrupt_general_success_var ={
+						custom_effect_tooltip = ITA_get_10_coup_progress_tt
+						add_to_variable ={ 
+							variable = ITA_coup_progress
+							value = 10
+						}
+					}
+					ITA_coup_corrupt_general_failure_var ={ 
+						custom_effect_tooltip = ITA_Italian_Alertness_goes_up_1_tt
+						add_to_variable ={ 
+							variable = ITA_coup_Italian_alertness
+							value = 1
+						}
+					}
+				}
+				clamp_the_variables_ITA_coup = yes
+				clr_country_flag = ITA_coup_corrupt_general_flag
+				clr_country_flag = ITA_coup_undertaking_a_mission
+			}
+			else_if ={ 
+				limit ={ 
+					has_country_flag = ITA_coup_corrupt_high_ranking_bureaucrat_flag
+				}
+				random_list ={ 
+					ITA_coup_corrupt_high_ranking_bureaucrat_success_var ={
+						custom_effect_tooltip = ITA_get_10_coup_progress_tt
+						add_to_variable ={ 
+							variable = ITA_coup_progress
+							value = 10
+						}
+					}
+					ITA_coup_corrupt_high_ranking_bureaucrat_failure_var ={ 
+						custom_effect_tooltip = ITA_Italian_Alertness_goes_up_1_tt
+						add_to_variable ={ 
+							variable = ITA_coup_Italian_alertness
+							value = 1
+						}
+					}
+				}
+				clamp_the_variables_ITA_coup = yes
+				clr_country_flag = ITA_coup_corrupt_high_ranking_bureaucrat_flag
+				clr_country_flag = ITA_coup_undertaking_a_mission
+			}
+			else_if ={ 
+				limit ={ 
+					has_country_flag = ITA_coup_infiltrate_commandos_flag
+				}
+				random_list ={ 
+					ITA_coup_infiltrate_commandos_success_var ={
+						custom_effect_tooltip = ITA_get_15_coup_progress_tt
+						add_to_variable ={ 
+						variable = ITA_coup_progress
+						value = 15
+						}
+					}
+					ITA_coup_infiltrate_commandos_failure_var ={ 
+						custom_effect_tooltip = ITA_Italian_Alertness_goes_up_2_tt
+						add_to_variable ={ 
+							variable = ITA_coup_Italian_alertness
+							value = 2
+						}
+					}
+				}
+				clamp_the_variables_ITA_coup = yes
+				clr_country_flag = ITA_coup_infiltrate_commandos_flag
+				clr_country_flag = ITA_coup_undertaking_a_mission
+			}
+			hidden_effect = {
+				activate_mission = ITA_coup_weekly_mission
+			}
+		}
+	}
+}

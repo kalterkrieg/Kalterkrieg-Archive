@@ -1,0 +1,117 @@
+scripted_gui = {
+	JAP_open_buttons = {
+		context_type = player_context
+		parent_window_token = politics_tab
+		window_name = "JAP_open_buttons_container"
+
+		visible = {
+			tag = JAP
+			has_country_flag = country_open_pm
+		}
+
+		effects = {
+			JAP_parliament_open_button_click = {
+				if = {
+					limit = { has_variable = show_JAP_parliament }
+					clear_variable = show_JAP_parliament
+				}
+				else = {
+					set_variable = { show_JAP_parliament = 1 }
+					JAP_setup_parliament = yes
+				}
+			}
+			JAP_power_brokers_open_button_click = {
+				if = {
+					limit = { has_variable = show_JAP_power_brokers }
+					clear_variable = show_JAP_power_brokers
+				}
+				else = {
+					set_variable = { show_JAP_power_brokers = 1 }
+					JAP_setup_power_brokers = yes
+				}
+			}
+		}
+	}
+
+	JAP_parliament = {
+		context_type = player_context
+		window_name = "JAP_parliament_container"
+		dirty = show_JAP_parliament
+
+		visible = {
+			check_variable = { show_JAP_parliament > 0 }
+		}
+
+		dynamic_lists = {
+			JAP_house_of_representatives_grid = {
+				array = house_of_representatives_main_array
+				index = house_of_representatives_main_index
+				change_scope = yes
+				entry_container = JAP_house_of_representatives_entry
+			}
+		}
+
+		effects = {
+			JAP_parliament_close_button_click = {
+				clear_variable = show_JAP_parliament
+			}
+		}
+
+		properties = {
+			JAP_house_of_representatives_member_icon = {
+				frame = v
+				x = JAP.house_of_representatives_x_array^house_of_representatives_main_index
+				y = JAP.house_of_representatives_y_array^house_of_representatives_main_index
+			}
+			JAP_house_of_representatives_support_bar = {
+				frame = house_of_representatives_support_percent
+			}
+		}
+	}
+
+	JAP_power_brokers = {
+		context_type = player_context
+		window_name = "JAP_power_brokers_container"
+		dirty = show_JAP_power_brokers
+
+		visible = {
+			check_variable = { show_JAP_power_brokers > 0 }
+		}
+
+		dynamic_lists = {
+			JAP_power_brokers_grid = {
+				array = power_brokers_array
+				index = power_brokers_index
+				change_scope = yes
+				entry_container = JAP_power_brokers_entry
+			}
+			JAP_power_brokers_influence_grid = {
+				array = power_brokers_influence_array
+				index = power_brokers_influence_index
+				change_scope = yes
+				entry_container = JAP_power_brokers_influence_entry
+			}
+		}
+
+		effects = {
+			JAP_power_brokers_close_button_click = {
+				clear_variable = show_JAP_power_brokers
+			}
+		}
+
+		properties = {
+			JAP_power_brokers_support_bar = {
+				frame = power_brokers_support
+			}
+			JAP_power_brokers_total_influence_bar_hatoyama = {
+				frame = power_brokers_influence_percent_array^0
+			}
+			JAP_power_brokers_total_influence_bar_yoshida = {
+				frame = power_brokers_influence_percent_array^1
+			}
+			JAP_power_brokers_total_influence_bar_cda = {
+				frame = power_brokers_influence_percent_array^2
+			}
+		}
+	}
+}

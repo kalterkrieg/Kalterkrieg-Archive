@@ -1,0 +1,72 @@
+autonomy_state = {
+	id = krg_joint_entente_mandate
+	
+	is_puppet = yes
+
+	min_freedom_level = 0.60
+
+	peace_conference_initial_freedom = 0.001
+	
+	manpower_influence = 0.2
+	
+	rule = {
+		can_not_declare_war = yes
+		can_decline_call_to_war = no
+		can_be_spymaster = no
+		can_create_collaboration_government = no
+	}
+	
+	modifier = {
+		autonomy_manpower_share = 0.0
+		extra_trade_to_overlord_factor = 0.25
+		overlord_trade_cost_factor = -0.25
+		autonomy_gain = 2
+	}
+	
+	ai_subject_wants_higher = {
+		factor = 50
+	}
+	
+	ai_overlord_wants_lower = {
+		factor = 0.0
+	}
+
+	ai_overlord_wants_garrison = {
+		always = no
+	}
+
+	allowed = {
+		OVERLORD = {
+			OR = {
+				is_ally_with = CAN
+				tag = CAN
+			}
+		}
+		NOT = { has_global_flag = accord_formed }
+	}
+
+	#ROOT is puppet - FROM is potential OVERLORD
+	use_for_peace_conference_weight = {
+		base = 0
+		modifier = {
+			add = 10
+			FROM = {
+				has_elected_government = yes
+				check_variable = { accord_alignment_level > 0 }
+			}
+			NOT = { has_global_flag = accord_formed }
+		}
+	}
+
+	can_take_level = {
+		hidden_trigger = { always = no }
+	}
+
+	can_lose_level = {
+		hidden_trigger = { always = no }
+	}
+
+	allowed = {
+		has_dlc_tfv = yes
+	}
+}

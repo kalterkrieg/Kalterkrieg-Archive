@@ -1,0 +1,584 @@
+#!gfx:interface/Kalterkrieg/KRG_goals.gfx
+
+shared_focus = {
+	id = CAL_Warrens_Final_Year
+	icon = GFX_generic_flag_CAL
+	x = 6
+	y = 0
+	cost = 3
+
+	ai_will_do = {
+		base = 150
+	}
+
+	allow_branch = {
+	}
+	available_if_capitulated = yes
+
+	completion_reward = {
+		add_political_power = 40
+	}
+}
+shared_focus = {
+	id = CAL_Encourage_Refugee_Resettlement
+	icon = GFX_NEE_integrate_refugees
+	relative_position_id = CAL_Warrens_Final_Year
+	x = -3
+	y = 1
+	cost = 7
+	
+	prerequisite = { focus = CAL_Warrens_Final_Year }
+
+	available_if_capitulated = yes
+
+	ai_will_do = {
+		base = 150
+	}
+
+	completion_reward = {
+		custom_effect_tooltip = CAL_economic_recovery_tooltip
+		CAL_increase_recovery = yes
+		add_stability = 0.025
+		random_owned_controlled_state = {
+			limit = {
+				OR = {
+					state = 386
+					state = 385
+					state = 825
+					state = 950
+					state = 949
+				}
+			}
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
+		random_owned_controlled_state = {
+			limit = {
+				OR = {
+					state = 386
+					state = 385
+					state = 825
+					state = 950
+					state = 949
+				}
+			}
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
+	}
+}
+shared_focus = {
+	id = CAL_Finalize_Western_Recovery
+	icon = GFX_NEE_brotherly_love
+	relative_position_id = CAL_Warrens_Final_Year
+	x = -4
+	y = 2
+	cost = 4
+
+	ai_will_do = {
+		base = 150
+	}
+	
+	prerequisite = { focus = CAL_Encourage_Refugee_Resettlement }
+
+	available_if_capitulated = yes
+
+	completion_reward = {
+		custom_effect_tooltip = CAL_economic_recovery_tooltip
+		CAL_increase_recovery = yes
+	}
+}
+shared_focus = {
+	id = CAL_Conclude_Infrastructure_Initiatives
+	icon = GFX_ITA_Unity_through_Railways
+	relative_position_id = CAL_Warrens_Final_Year
+	x = -2
+	y = 2
+	cost = 4
+
+	ai_will_do = {
+		base = 150
+	}
+	
+	prerequisite = { focus = CAL_Encourage_Refugee_Resettlement }
+
+	available_if_capitulated = yes
+
+	completion_reward = {
+		random_owned_controlled_state = {
+		limit = {
+			is_controlled_by = ROOT
+			NOT = {
+				state = 386
+			}
+			free_building_slots = {
+				building = infrastructure
+				size > 1
+				include_locked = yes
+			}
+		}
+			add_building_construction = {
+				type = infrastructure
+				level = 1
+				instant_build = yes
+			}
+		}
+		random_owned_controlled_state = {
+		limit = {
+			is_controlled_by = ROOT
+			NOT = {
+				state = 386
+			}
+			free_building_slots = {
+				building = infrastructure
+				size > 1
+				include_locked = yes
+			}
+		}
+			add_building_construction = {
+				type = infrastructure
+				level = 1
+				instant_build = yes
+			}
+		}
+	}
+}
+shared_focus = {
+	id = CAL_South_Coulee_Dam
+	icon = GFX_generic_construction_krg
+	relative_position_id = CAL_Warrens_Final_Year
+	x = -3
+	y = 3
+	cost = 3
+
+	ai_will_do = {
+		base = 125
+	}
+	
+	prerequisite = { focus = CAL_Conclude_Infrastructure_Initiatives }
+	prerequisite = { focus = CAL_Finalize_Western_Recovery }
+
+	available_if_capitulated = yes
+
+	completion_reward = {
+		386 = {
+				if = {
+					limit = {
+						free_building_slots = {
+							building = infrastructure
+							size > 1
+							include_locked = yes
+						}
+					}
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		set_temp_variable = { temp_popularity = 2 }
+		set_temp_variable = { temp_party = 3 }
+		set_temp_variable = { temp_state = 386 }
+		CAL_electoral_modify_popularity = yes
+	}
+}
+shared_focus = {
+	id = CAL_Link_The_Rockies
+	icon = GFX_ITA_Unity_through_Railways
+	relative_position_id = CAL_Warrens_Final_Year
+	x = -4
+	y = 4
+	cost = 5
+
+	ai_will_do = {
+		base = 150
+	}
+	
+	prerequisite = { focus = CAL_Finalize_Western_Recovery }
+
+	available_if_capitulated = yes
+
+	completion_reward = {
+		every_owned_state = {
+			limit = {
+				is_controlled_by = CAL
+				OR = {
+					state = 788
+					state = 929
+					state = 931
+					state = 793
+				}
+			}
+			add_extra_state_shared_building_slots = 1
+			add_building_construction = {
+				type = infrastructure
+				level = 1
+				instant_build = yes
+			}
+		}
+	}
+}
+shared_focus = {
+	id = CAL_Finance_National_Electrification
+	icon = GFX_NEE_big_apple
+	relative_position_id = CAL_Warrens_Final_Year
+	x = -2
+	y = 4
+	cost = 3
+
+	ai_will_do = {
+		base = 150
+	}
+	
+	prerequisite = { focus = CAL_Conclude_Infrastructure_Initiatives }
+
+	available_if_capitulated = yes
+
+	completion_reward = {
+		random_owned_controlled_state = {
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
+		random_owned_controlled_state = {
+			add_building_construction = {
+				type = industrial_complex
+				level = 1
+				instant_build = yes
+			}
+		}
+		379 = {
+			move_up_state_category = yes
+		}
+		387 = {
+			move_up_state_category = yes
+		}
+	}
+}
+shared_focus = {
+	id = CAL_Our_City_On_A_Hill
+	icon = GFX_NEE_suburbia
+	relative_position_id = CAL_Warrens_Final_Year
+	x = -3
+	y = 5
+	cost = 5
+
+	ai_will_do = {
+		base = 150
+	}
+	
+	prerequisite = { focus = CAL_Finance_National_Electrification }
+	prerequisite = { focus = CAL_Link_The_Rockies }
+
+	available_if_capitulated = yes
+
+	completion_reward = {
+		custom_effect_tooltip = CAL_economic_recovery_tooltip
+		CAL_increase_recovery = yes
+	}
+}
+shared_focus = {
+	id = CAL_Prepare_the_Federal_Capital
+	icon = GFX_generic_government_icon
+	relative_position_id = CAL_Warrens_Final_Year
+	x = 0
+	y = 1
+	cost = 6
+
+	ai_will_do = {
+		base = 200
+	}
+	
+	prerequisite = { focus = CAL_Warrens_Final_Year }
+
+	available_if_capitulated = yes
+
+	completion_reward = {
+		country_event = {
+			id = krg_cal_politics.100
+			days = 1
+			}
+	}
+}
+shared_focus = {
+	id = CAL_Prepare_For_Campaigning
+	icon = GFX_generic_liberty
+	relative_position_id = CAL_Warrens_Final_Year
+	x = 2
+	y = 1
+	cost = 2
+	
+	prerequisite = { focus = CAL_Warrens_Final_Year }
+	available = { has_country_flag = CAL_Unlock_Focus_Campaign_flag }
+
+	available_if_capitulated = yes
+
+	completion_reward = {
+		country_event = {
+			id = krg_cal_politics.1
+			days = 5
+		}
+	}
+}
+shared_focus = {
+	id = CAL_Continue_The_Course
+	icon = GFX_generic_ideology_social_liberal
+	relative_position_id = CAL_Warrens_Final_Year
+	x = 0
+	y = 2
+	cost = 2
+	
+	prerequisite = { focus = CAL_Prepare_For_Campaigning }
+	mutually_exclusive = { focus = CAL_A_New_Route }
+	available = {
+		has_country_flag = CAL_Prog_Campaign
+	}
+	available_if_capitulated = yes
+
+	completion_reward = {
+		custom_effect_tooltip = CAL_Progressive_Campaign_focus_tt
+	}
+}
+shared_focus = {
+	id = CAL_Secure_Heartland_Support
+	icon = GFX_CAL_protect_homeland
+	relative_position_id = CAL_Warrens_Final_Year
+	x = -1
+	y = 3
+	cost = 3
+
+	ai_will_do = {
+		base = 250
+	}
+	
+	prerequisite = { focus = CAL_Continue_The_Course }
+	mutually_exclusive = { focus = CAL_Shore_Up_Warrens_Five }
+
+	available_if_capitulated = yes
+
+	completion_reward = {
+		custom_effect_tooltip = CAL_Improve_Heartland_View_Prog
+		hidden_effect = {
+			set_temp_variable = { temp_popularity = 2 }
+			set_temp_variable = { temp_party = 3 }
+			set_temp_variable = { temp_state = 825 }
+			CAL_electoral_modify_popularity = yes
+			set_temp_variable = { temp_popularity = 2 }
+			set_temp_variable = { temp_party = 3 }
+			set_temp_variable = { temp_state = 385 }
+			CAL_electoral_modify_popularity = yes
+			set_temp_variable = { temp_popularity = 2 }
+			set_temp_variable = { temp_party = 3 }
+			set_temp_variable = { temp_state = 386 }
+			CAL_electoral_modify_popularity = yes
+			set_temp_variable = { temp_popularity = 2 }
+			set_temp_variable = { temp_party = 3 }
+			set_temp_variable = { temp_state = 379 }
+			CAL_electoral_modify_popularity = yes
+		}
+	}
+}
+shared_focus = {
+	id = CAL_Shore_Up_Warrens_Five
+	icon = GFX_CAL_shore_up
+	relative_position_id = CAL_Warrens_Final_Year
+	x = 1
+	y = 3
+	cost = 3
+
+	ai_will_do = {
+		base = 225
+	}
+	
+	prerequisite = { focus = CAL_Continue_The_Course }
+	mutually_exclusive = { focus = CAL_Secure_Heartland_Support }
+
+	available_if_capitulated = yes
+
+	completion_reward = {
+		custom_effect_tooltip = CAL_Improve_Rockies_View_Prog
+		hidden_effect = {
+			set_temp_variable = { temp_popularity = 2 }
+			set_temp_variable = { temp_party = 3 }
+			set_temp_variable = { temp_state = 380 }
+			CAL_electoral_modify_popularity = yes
+			set_temp_variable = { temp_popularity = 2 }
+			set_temp_variable = { temp_party = 3 }
+			set_temp_variable = { temp_state = 788 }
+			CAL_electoral_modify_popularity = yes
+			set_temp_variable = { temp_popularity = 2 }
+			set_temp_variable = { temp_party = 3 }
+			set_temp_variable = { temp_state = 929 }
+			CAL_electoral_modify_popularity = yes
+			set_temp_variable = { temp_popularity = 2 }
+			set_temp_variable = { temp_party = 3 }
+			set_temp_variable = { temp_state = 931 }
+			CAL_electoral_modify_popularity = yes
+			set_temp_variable = { temp_popularity = 2 }
+			set_temp_variable = { temp_party = 3 }
+			set_temp_variable = { temp_state = 793 }
+			CAL_electoral_modify_popularity = yes
+		}
+	}
+}
+shared_focus = {
+	id = CAL_Meet_With_The_Nation
+	icon = GFX_CAL_Warren
+	relative_position_id = CAL_Warrens_Final_Year
+	x = 0
+	y = 4
+	cost = 4
+
+	ai_will_do = {
+		base = 250
+	}
+	
+	prerequisite = { focus = CAL_Shore_Up_Warrens_Five focus = CAL_Secure_Heartland_Support }
+
+	available_if_capitulated = yes
+
+	completion_reward = {
+		custom_effect_tooltip = CAL_Improve_Total_View_Prog
+		hidden_effect = {
+			set_temp_variable = { temp_all_popularity = 2 }
+			set_temp_variable = { temp_all_party = 3 }
+			CAL_electoral_modify_popularity_all = yes
+		}
+	}
+}
+shared_focus = {
+	id = CAL_A_New_Route
+	icon = GFX_generic_ideology_market_liberal
+	relative_position_id = CAL_Warrens_Final_Year
+	x = 4
+	y = 2
+	cost = 2
+	
+	prerequisite = { focus = CAL_Prepare_For_Campaigning }
+	mutually_exclusive = { focus = CAL_Continue_The_Course }
+	available_if_capitulated = yes
+	available = {
+		has_country_flag = CAL_Rep_Campaign
+	}
+
+	completion_reward = {
+		custom_effect_tooltip = CAL_Republican_Campaign_focus_tt
+	}
+}
+shared_focus = {
+	id = CAL_Promote_Change_At_Home
+	icon = GFX_CAL_promote_change
+	relative_position_id = CAL_Warrens_Final_Year
+	x = 3
+	y = 3
+	cost = 3
+
+	ai_will_do = {
+		base = 250
+	}
+	
+	prerequisite = { focus = CAL_A_New_Route }
+	mutually_exclusive = { focus = CAL_Flip_The_East }
+
+	available_if_capitulated = yes
+
+	completion_reward = {
+		custom_effect_tooltip = CAL_Improve_Heartland_View_Rep
+		hidden_effect = {
+			set_temp_variable = { temp_popularity = 3 }
+			set_temp_variable = { temp_party = 4 }
+			set_temp_variable = { temp_state = 825 }
+			CAL_electoral_modify_popularity = yes
+			set_temp_variable = { temp_popularity = 2 }
+			set_temp_variable = { temp_party = 4 }
+			set_temp_variable = { temp_state = 385 }
+			CAL_electoral_modify_popularity = yes
+			set_temp_variable = { temp_popularity = 2 }
+			set_temp_variable = { temp_party = 4 }
+			set_temp_variable = { temp_state = 386 }
+			CAL_electoral_modify_popularity = yes
+			set_temp_variable = { temp_popularity = 2 }
+			set_temp_variable = { temp_party = 4 }
+			set_temp_variable = { temp_state = 379 }
+			CAL_electoral_modify_popularity = yes
+		}
+	}
+}
+shared_focus = {
+	id = CAL_Flip_The_East
+	icon = GFX_CAL_flip_east
+	relative_position_id = CAL_Warrens_Final_Year
+	x = 5
+	y = 3
+	cost = 3
+
+	ai_will_do = {
+		base = 225
+	}
+	
+	prerequisite = { focus = CAL_A_New_Route }
+	mutually_exclusive = { focus = CAL_Promote_Change_At_Home }
+
+	available_if_capitulated = yes
+
+	completion_reward = {
+		custom_effect_tooltip = CAL_Improve_Rockies_View_Rep
+		hidden_effect = {
+			set_temp_variable = { temp_popularity = 2 }
+			set_temp_variable = { temp_party = 4 }
+			set_temp_variable = { temp_state = 380 }
+			CAL_electoral_modify_popularity = yes
+			set_temp_variable = { temp_popularity = 2 }
+			set_temp_variable = { temp_party = 4 }
+			set_temp_variable = { temp_state = 788 }
+			CAL_electoral_modify_popularity = yes
+			set_temp_variable = { temp_popularity = 2 }
+			set_temp_variable = { temp_party = 4 }
+			set_temp_variable = { temp_state = 929 }
+			CAL_electoral_modify_popularity = yes
+			set_temp_variable = { temp_popularity = 2 }
+			set_temp_variable = { temp_party = 4 }
+			set_temp_variable = { temp_state = 931 }
+			CAL_electoral_modify_popularity = yes
+			set_temp_variable = { temp_popularity = 2 }
+			set_temp_variable = { temp_party = 4 }
+			set_temp_variable = { temp_state = 793 }
+			CAL_electoral_modify_popularity = yes
+		}
+	}
+}
+shared_focus = {
+	id = CAL_Make_The_Tour
+	icon = GFX_CAL_Hughes
+	relative_position_id = CAL_Warrens_Final_Year
+	x = 4
+	y = 4
+	cost = 4
+
+	ai_will_do = {
+		base = 250
+	}
+	
+	prerequisite = { focus = CAL_Flip_The_East focus = CAL_Promote_Change_At_Home }
+
+	available_if_capitulated = yes
+
+	completion_reward = {
+		custom_effect_tooltip = CAL_Improve_Total_View_Rep
+		hidden_effect = {
+			set_temp_variable = { temp_all_popularity = 2 }
+			set_temp_variable = { temp_all_party = 4 }
+			CAL_electoral_modify_popularity_all = yes
+		}
+	}
+}

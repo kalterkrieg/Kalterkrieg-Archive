@@ -1,0 +1,1627 @@
+add_namespace = krg_dnf_federal_elections
+
+### Fuckin' Federal Elections ###
+
+country_event = { #Taking Dollfuss out of play in case the player metagamed him and didn't complete his political tree
+	id = krg_dnf_federal_elections.0
+	title = krg_dnf_federal_elections.0.t
+	desc = krg_dnf_federal_elections.0.d
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_dnf_federal_elections.0.a
+		retire_character = DNF_Engelbert_Dollfuss
+		add_ideas = DNF_Julius_Raab_hog_sco
+		set_politics = {
+			ruling_party = social_conservative
+			election_frequency = 48
+			elections_allowed = yes
+		}
+		coal_add_auth_dem = yes
+		coal_add_soc_dem = yes
+		coal_add_rad_soc = yes
+		clr_country_flag = DNF_Engelbert_Dollfuss
+		set_country_flag = DNF_Julius_Raab
+
+		# Figl 2 dies with Dollfuss
+		if = { limit = { has_idea = DNF_figl_plan_2 } 
+			remove_ideas = DNF_figl_plan_2
+			add_ideas = DNF_figl_plan_1
+		}
+		hidden_effect = {
+			set_country_flag = DNF_dollfuss_disgraced	
+		}
+	}
+}
+
+country_event = {
+	id = krg_dnf_federal_elections.1
+	title = krg_dnf_federal_elections.1.t
+	desc = krg_dnf_federal_elections.1.d
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	immediate = {
+				## very important, timer event clock for following years
+				hidden_effect = { country_event = {
+					id = krg_dnf.143
+					days = 365
+				} }
+				## start counting Scharf Failures
+				set_variable = {
+					var = DNF_Scharf_Electoral_Failures
+					value = 0
+				}
+	}
+
+	option = {
+		name = krg_dnf_federal_elections.1.a
+		set_country_flag = DNF_1951_Election_Triggered
+		mark_focus_tree_layout_dirty = yes
+		complete_national_focus = DNF_The_1951_Election
+		
+
+		if = { limit = { OR = { has_country_flag = DNF_Alcide_De_Gasperi has_country_flag = DNF_Julius_Raab has_country_flag = DNF_Wilhelm_Miklas } }
+			set_variable = { DNF_51_CSP = 50 }
+			set_variable = { DNF_51_AG = 15 }
+			set_variable = { DNF_51_SDAPD = 35 }	
+		}
+		if = { limit = { OR = { has_country_flag = DNF_Karl_Renner has_country_flag = DNF_Adolf_Scharf } NOT = { has_country_flag = DNF_SDAPD_Prepared } }
+		set_variable = { DNF_51_CSP = 40 }
+		set_variable = { DNF_51_AG = 20 }
+		set_variable = { DNF_51_SDAPD = 40 }
+		}
+		if = { limit = { OR = { has_country_flag = DNF_Karl_Renner has_country_flag = DNF_Adolf_Scharf } has_country_flag = DNF_SDAPD_Prepared }
+		set_variable = { DNF_51_CSP = 40 }
+		set_variable = { DNF_51_AG = 10 }
+		set_variable = { DNF_51_SDAPD = 50 }
+		}
+		if = { limit = { has_country_flag = DNF_Zoltan_Tildy }
+		set_variable = { DNF_51_CSP = 40 }
+		set_variable = { DNF_51_AG = 25 }
+		set_variable = { DNF_51_SDAPD = 35 }
+		}
+		activate_mission = DNF_The_Federal_Election_1951
+		if = { limit = { has_country_flag = DNF_austrian_MP_reither } 
+			add_to_variable = { var = DNF_51_CSP value = 3 }
+		}
+		if = { limit = { has_country_flag = DNF_austrian_MP_korner } 
+		add_to_variable = { var = DNF_51_SDAPD value = 3 }
+		}
+		if = { limit = { has_country_flag = DNF_bohemian_MP_stransky } 
+			add_to_variable = { var = DNF_51_CSP value = 3 }
+		}
+		if = { limit = { has_country_flag = DNF_bohemian_MP_beran } 
+		add_to_variable = { var = DNF_51_AG value = 3 }
+		}
+		if = { limit = { has_country_flag = DNF_BOHEMIAN_MP_FIERLINGER } 
+		add_to_variable = { var = DNF_51_SDAPD value = 3 }
+		}
+		if = { limit = { has_country_flag = DNF_hungarian_MP_kallay } 
+		add_to_variable = { var = DNF_51_CSP value = 3 }
+		}
+		if = { limit = { has_country_flag = DNF_hungarian_MP_rassay } 
+		add_to_variable = { var = DNF_51_AG value = 3 }
+		}
+		if = { limit = { has_country_flag = DNF_hungarian_MP_szakasits } 
+		add_to_variable = { var = DNF_51_SDAPD value = 3 }
+		}
+		if = { limit = { has_country_flag = DNF_SLOVAKIAN_MP_TISO } 
+		add_to_variable = { var = DNF_51_CSP value = 3 }
+		}
+		if = { limit = { has_country_flag = DNF_SLOVAKIAN_MP_LETTRICH } 
+		add_to_variable = { var = DNF_51_AG value = 3 }
+		}
+		if = { limit = { has_country_flag = DNF_SLOVAKIAN_MP_DERER } 
+		add_to_variable = { var = DNF_51_SDAPD value = 3 }
+		}
+		if = { limit = { has_country_flag = DNF_transylvanian_MP_vaida-voevod } 
+		add_to_variable = { var = DNF_51_CSP value = 3 }
+		}
+		if = { limit = { has_country_flag = DNF_transylvanian_MP_penescu } 
+		add_to_variable = { var = DNF_51_CSP value = 3 }
+		}
+		if = { limit = { has_country_flag = DNF_illyrian_MP_broz } 
+		add_to_variable = { var = DNF_51_SDAPD value = 3 }
+		}
+		if = { limit = { has_country_flag = DNF_illyrian_MP_macek } 
+		add_to_variable = { var = DNF_51_CSP value = 3 }
+		}
+		if = { limit = { has_country_flag = DNF_galician_MP_chadzynski } 
+		add_to_variable = { var = DNF_51_CSP value = 3 }
+		}
+		if = { limit = { has_country_flag = DNF_galician_MP_romer } 
+		add_to_variable = { var = DNF_51_AG value = 3 }
+		}
+		if = { limit = { has_country_flag = DNF_galician_MP_polakiewicz } 
+		add_to_variable = { var = DNF_51_AG value = 3 }
+		}
+		custom_effect_tooltip = DNF_cancel_focus_tt
+	}
+}
+
+country_event = {
+	id = krg_dnf_federal_elections.2
+	title = krg_dnf_federal_elections.2.t
+	desc = krg_dnf_federal_elections.2.d
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	immediate = {
+		hidden_effect = {
+			country_event = { # Ronge retires
+				id = krg_dnf_post_el.0
+				days = 5
+			}
+			set_country_flag = DNF_1951_election_completed
+		}	
+	}
+
+	option = {
+		name = krg_dnf_federal_elections.2.a
+		if = { limit = { NOT = { has_completed_focus =  DNF_The_Election_Concludes_51 } }
+		unlock_national_focus = DNF_The_Election_Concludes_51
+		}
+		
+		if = { limit = { 
+				check_variable = { DNF_51_CSP > DNF_51_AG }
+				check_variable = { DNF_51_CSP > DNF_51_SDAPD }
+				 }
+					set_country_flag = DNF_CSP_51_Victory
+					 country_event = { id = krg_dnf_federal_elections.3 } #CSP win
+			}
+		if = { limit = { 
+				check_variable = { DNF_51_AG > DNF_51_CSP }
+				check_variable = { DNF_51_AG > DNF_51_SDAPD }
+				 }
+				 	set_country_flag = DNF_AG_51_Victory
+				 	country_event = { id = krg_dnf_federal_elections.5 } #libs win
+			}
+		if = { limit = { 
+				check_variable = { DNF_51_SDAPD > DNF_51_CSP }
+				check_variable = { DNF_51_SDAPD > DNF_51_AG }
+				 }
+				 	set_country_flag = DNF_SDAPD_51_Victory
+				 	country_event = { id = krg_dnf_federal_elections.4 } # SDAPD win
+			}
+		hidden_effect = {
+				remove_mission = DNF_The_Federal_Election_1951
+				remove_mission = DNF_The_SDAPD_Campaign_51
+				remove_mission = DNF_The_CSP_Campaign_51
+				remove_mission = DNF_The_AG_Campaign_51	
+			}
+			mark_focus_tree_layout_dirty = yes
+		}
+	
+}
+
+country_event = { #CSP win
+	id = krg_dnf_federal_elections.3
+	title = krg_dnf_federal_elections.3.t
+	desc = krg_dnf_federal_elections.3.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_dnf_federal_elections.3 FROM = [From.GetName]" }
+	immediate = {
+		log = "KRG_Event_Logging;1951 DNF Elections - Conservatives;[GetDateText];[ROOT.GetName];[FROM.GetName]"
+	}
+
+	immediate = {
+		add_to_variable = {
+			DNF_Scharf_Electoral_Failures = 1
+		}
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_dnf_federal_elections.3.a
+		
+		add_popularity = {
+			ideology = social_conservative
+			popularity = 0.10
+		}
+		add_popularity = {
+			ideology = social_democrat
+			popularity = -0.10
+		}
+
+		if = { limit = { has_country_flag = de_gasperi_elected }
+			clr_country_flag = de_gasperi_elected
+		}
+		if = { limit = { has_country_flag = raab_elected }
+			clr_country_flag = raab_elected
+	   	}
+		if = { limit = { has_country_flag = tildy_elected }
+			clr_country_flag = tildy_elected
+	   	}
+		if = { limit = { has_country_flag = DNF_Adolf_Scharf }
+			clr_country_flag = DNF_Adolf_Scharf
+			set_country_flag = DNF_Julius_Raab
+			remove_ideas = DNF_Adolf_Schaerf_hog_sde
+			add_ideas = DNF_Julius_Raab_hog_sco
+
+			if = { limit = { has_country_flag = DNF_austrian_MP_reither } 
+				set_country_flag = DNF_AUSTRIA_AGREES
+				clr_country_flag = DNF_AUSTRIA_DISAGREES
+			}
+			if = { limit = { has_country_flag = DNF_austrian_MP_korner } 
+				set_country_flag = DNF_AUSTRIA_DISAGREES
+				clr_country_flag = DNF_AUSTRIA_AGREES
+			}
+			if = { limit = { has_country_flag = DNF_bohemian_MP_stransky } 
+				set_country_flag = DNF_BOHEMIA_AGREES
+				clr_country_flag = DNF_BOHEMIA_DISAGREES
+			}
+			if = { limit = { has_country_flag = DNF_bohemian_MP_beran } 
+				set_country_flag = DNF_BOHEMIA_AGREES
+				clr_country_flag = DNF_BOHEMIA_DISAGREES
+			}
+			if = { limit = { has_country_flag = DNF_BOHEMIAN_MP_FIERLINGER } 
+				set_country_flag = DNF_BOHEMIA_DISAGREES
+				clr_country_flag = DNF_BOHEMIA_AGREES
+			}
+			if = { limit = { has_country_flag = DNF_hungarian_MP_kallay } 
+				set_country_flag = DNF_hungary_agrees
+				clr_country_flag = DNF_hungary_disagrees
+			}
+			if = { limit = { has_country_flag = DNF_hungarian_MP_szakasits } 
+				set_country_flag = DNF_hungary_disagrees
+				clr_country_flag = DNF_hungary_agrees
+			}
+			if = { limit = { has_country_flag = DNF_SLOVAKIAN_MP_TISO } 
+				set_country_flag = DNF_slovakia_agrees
+				clr_country_flag = DNF_slovakia_disagrees
+			}
+			if = { limit = { has_country_flag = DNF_SLOVAKIAN_MP_DERER } 
+				set_country_flag = DNF_slovakia_disagrees 
+				clr_country_flag = DNF_slovakia_agrees
+			}
+			if = { limit = { has_country_flag = DNF_transylvanian_MP_penescu } 
+				set_country_flag = DNF_transylvania_agrees 
+				clr_country_flag = DNF_transylvania_disagrees
+			}
+			if = { limit = { has_country_flag = DNF_illyrian_MP_broz has_country_flag = DNF_illyria_agrees } 
+				set_country_flag = DNF_illyria_disagrees 
+				clr_country_flag = DNF_illyria_agrees
+			}
+			if = { limit = { has_country_flag = DNF_galician_MP_romer } 
+				set_country_flag = DNF_galicia_agrees 
+				clr_country_flag = DNF_galicia_disagrees
+			}
+		}
+
+		mark_focus_tree_layout_dirty = yes
+		set_politics = {
+			ruling_party = social_conservative
+			election_frequency = 48
+			elections_allowed = yes
+		}
+
+		coal_add_soc_dem = yes
+		coal_add_rad_soc = yes
+		coal_add_auth_dem = yes
+
+		# clear party alignments
+		for_each_loop = {
+			array = DNF_chamber_of_deputies_party_array
+
+			set_variable = { v:DNF_chamber_of_deputies_alignment = 2 }
+		}
+
+		if = { limit = { has_idea = DNF_Zoltan_Tildy_hog_sco }
+		set_country_flag = DNF_Zoltan_Tildy_Elected_51
+		}
+		# government alignment
+		set_temp_variable = { temp_party = 7 }
+		set_temp_variable = { temp_alignment = 1 }
+		DNF_chamber_of_deputies_modify_alignment = yes
+
+		set_temp_variable = { temp_party = 2 }
+		set_temp_variable = { temp_alignment = 1 }
+		DNF_chamber_of_deputies_modify_alignment = yes
+
+		set_temp_variable = { temp_party = 3 }
+		set_temp_variable = { temp_alignment = 1 }
+		DNF_chamber_of_deputies_modify_alignment = yes
+
+		set_temp_variable = { temp_party = 8 }
+		set_temp_variable = { temp_alignment = 1 }
+		DNF_chamber_of_deputies_modify_alignment = yes
+
+		# calculate new seat composition
+		DNF_chamber_of_deputies_election_effect = yes
+
+		#init politics tree
+		unlock_national_focus = DNF_A_New_Mandate
+		if = { limit = { has_idea = DNF_Zoltan_Tildy_hog_sco }
+		unlock_national_focus = DNF_The_Tildy_Government
+		news_event = {
+			id = krg_dnf_federal_elections.21
+		}  }
+		if = { limit = { has_idea = DNF_Julius_Raab_hog_sco }
+		unlock_national_focus = DNF_The_Raab_Government
+		news_event = {
+			id = krg_dnf_federal_elections.22
+		}  }
+		if = { limit = { has_idea = DNF_Alcide_de_Gasperi_hog_sco }
+		unlock_national_focus = DNF_The_De_Gasperi_Government 
+		news_event = {
+			id = krg_dnf_federal_elections.23
+		} }
+	}
+}
+
+country_event = {
+	id = krg_dnf_federal_elections.4 # sdapd win
+	title = krg_dnf_federal_elections.4.t
+	desc = krg_dnf_federal_elections.4.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_dnf_federal_elections.4 FROM = [From.GetName]" }
+	immediate = {
+		log = "KRG_Event_Logging;1951 DNF Elections - Social Democrats;[GetDateText];[ROOT.GetName];[FROM.GetName]"
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	immediate = {
+		hidden_effect = { if = { limit = { NOT = { has_country_flag = DNF_CSP_Reformed }}
+					country_event = {
+						id = krg_dnf.11 #the Balaton Bloc Federalise offscreen
+						days = 42
+					}				
+				}
+			}	
+	}
+
+	option = {
+		name = krg_dnf_federal_elections.4.a
+		
+		add_popularity = {
+			ideology = social_conservative
+			popularity = -0.10
+		}
+		add_popularity = {
+			ideology = social_democrat
+			popularity = 0.10
+		}
+
+		if = { limit = { has_country_flag = de_gasperi_elected }
+			clr_country_flag = de_gasperi_elected
+			clr_country_flag = DNF_Alcide_De_Gasperi
+			set_country_flag = DNF_Adolf_Scharf
+			remove_ideas = DNF_Alcide_de_Gasperi_hog_sco
+			add_ideas = DNF_Adolf_Schaerf_hog_sde
+		}
+		if = { limit = { has_country_flag = raab_elected }
+			clr_country_flag = raab_elected
+			clr_country_flag = DNF_Julius_Raab
+			set_country_flag = DNF_Adolf_Scharf
+			remove_ideas = DNF_Julius_Raab_hog_sco
+			add_ideas = DNF_Adolf_Schaerf_hog_sde
+	   	}
+		if = { limit = { has_country_flag = tildy_elected }
+			clr_country_flag = tildy_elected
+			clr_country_flag = DNF_Zoltan_Tildy
+			set_country_flag = DNF_Adolf_Scharf
+			remove_ideas = DNF_Zoltan_Tildy_hog_sco
+			add_ideas = DNF_Adolf_Schaerf_hog_sde
+		}
+		mark_focus_tree_layout_dirty = yes
+		set_politics = {
+			ruling_party = social_democrat
+			election_frequency = 48
+			elections_allowed = yes
+		}
+		
+		coal_add_soc_con = yes
+		coal_add_rad_soc = yes
+		coal_add_auth_dem = yes
+
+		# clear party alignments
+		for_each_loop = {
+			array = DNF_chamber_of_deputies_party_array
+
+			set_variable = { v:DNF_chamber_of_deputies_alignment = 2 }
+		}
+
+		# government alignment
+		set_temp_variable = { temp_party = 3 }
+		set_temp_variable = { temp_alignment = 1 }
+		DNF_chamber_of_deputies_modify_alignment = yes
+
+		set_temp_variable = { temp_party = 2 }
+		set_temp_variable = { temp_alignment = 1 }
+		DNF_chamber_of_deputies_modify_alignment = yes
+
+		set_temp_variable = { temp_party = 7 }
+		set_temp_variable = { temp_alignment = 1 }
+		DNF_chamber_of_deputies_modify_alignment = yes
+
+		set_temp_variable = { temp_party = 8 }
+		set_temp_variable = { temp_alignment = 1 }
+		DNF_chamber_of_deputies_modify_alignment = yes
+
+		if = { limit = { has_country_flag = DNF_austrian_MP_reither } 
+				set_country_flag = DNF_AUSTRIA_DISAGREES
+				clr_country_flag = DNF_AUSTRIA_AGREES
+			}
+			if = { limit = { has_country_flag = DNF_austrian_MP_korner } 
+				set_country_flag = DNF_AUSTRIA_AGREES
+				clr_country_flag = DNF_AUSTRIA_DISAGREES
+			}
+			if = { limit = { has_country_flag = DNF_bohemian_MP_stransky } 
+				set_country_flag = DNF_BOHEMIA_DISAGREES
+				clr_country_flag = DNF_BOHEMIA_AGREES
+			}
+			if = { limit = { has_country_flag = DNF_bohemian_MP_beran } 
+				set_country_flag = DNF_BOHEMIA_DISAGREES
+				clr_country_flag = DNF_BOHEMIA_AGREES
+			}
+			if = { limit = { has_country_flag = DNF_BOHEMIAN_MP_FIERLINGER } 
+				set_country_flag = DNF_BOHEMIA_AGREES
+				clr_country_flag = DNF_BOHEMIA_DISAGREES
+			}
+			if = { limit = { has_country_flag = DNF_hungarian_MP_kallay } 
+				set_country_flag = DNF_hungary_disagrees
+				clr_country_flag = DNF_hungary_agrees
+			}
+			if = { limit = { has_country_flag = DNF_hungarian_MP_szakasits } 
+				set_country_flag = DNF_hungary_agrees
+				clr_country_flag = DNF_hungary_disagrees
+			}
+			if = { limit = { has_country_flag = DNF_SLOVAKIAN_MP_TISO } 
+				set_country_flag = DNF_slovakia_disagrees
+				clr_country_flag = DNF_slovakia_agrees
+			}
+			if = { limit = { has_country_flag = DNF_SLOVAKIAN_MP_DERER } 
+				set_country_flag = DNF_slovakia_agrees
+				clr_country_flag = DNF_slovakia_disagrees
+			}
+			if = { limit = { has_country_flag = DNF_transylvanian_MP_penescu } 
+				set_country_flag = DNF_transylvania_disagrees
+				clr_country_flag = DNF_transylvania_agrees  
+			}
+			if = { limit = { has_country_flag = DNF_illyrian_MP_broz has_country_flag = DNF_illyria_disagrees } 
+				set_country_flag = DNF_illyria_agrees
+				clr_country_flag = DNF_illyria_disagrees 
+			}
+			if = { limit = { has_country_flag = DNF_galician_MP_romer } 
+				set_country_flag = DNF_galicia_disagrees
+				clr_country_flag = DNF_galicia_agrees
+			}
+
+		# calculate new seat composition
+		DNF_chamber_of_deputies_election_effect = yes
+		unlock_national_focus = DNF_A_New_Mandate
+		unlock_national_focus = DNF_The_Scharf_Government
+		news_event = {
+			id = krg_dnf_federal_elections.24
+		} 
+	}
+}
+
+
+country_event = {
+	id = krg_dnf_federal_elections.5 #lib win
+	title = krg_dnf_federal_elections.5.t
+	desc = krg_dnf_federal_elections.5.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_dnf_federal_elections.5 FROM = [From.GetName]" }
+	immediate = {
+		log = "KRG_Event_Logging;1951 DNF Elections - Liberals;[GetDateText];[ROOT.GetName];[FROM.GetName]"
+	}
+	
+	immediate = {
+		add_to_variable = {
+			DNF_Scharf_Electoral_Failures = 1
+		}
+		
+		hidden_effect = { if = { limit = { NOT = { has_country_flag = DNF_CSP_Reformed }}
+					country_event = {
+						id = krg_dnf.11 #the Balaton Bloc Federalise offscreen
+						days = 42
+					}				
+				}
+			}
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_dnf_federal_elections.5.a
+		
+		add_popularity = {
+			ideology = social_conservative
+			popularity = -0.05
+		}
+		add_popularity = {
+			ideology = social_democrat
+			popularity = -0.05
+		}
+		add_popularity = {
+			ideology = social_liberal
+			popularity = 0.05
+		}
+		add_popularity = {
+			ideology = market_liberal
+			popularity = 0.05
+		}
+
+		if = { limit = { has_country_flag = de_gasperi_elected }
+			clr_country_flag = de_gasperi_elected
+			clr_country_flag = DNF_Alcide_De_Gasperi
+			set_country_flag = DNF_Peter_Veres
+			remove_ideas = DNF_Alcide_de_Gasperi_hog_sco
+			add_ideas = DNF_Peter_Veres_hog_sli
+		}
+		if = { limit = { has_country_flag = raab_elected }
+			clr_country_flag = raab_elected
+			clr_country_flag = DNF_Julius_Raab
+			set_country_flag = DNF_Peter_Veres
+			remove_ideas = DNF_Julius_Raab_hog_sco
+			add_ideas = DNF_Peter_Veres_hog_sli
+	   	}
+		if = { limit = { has_country_flag = tildy_elected }
+			clr_country_flag = tildy_elected
+			clr_country_flag = DNF_Zoltan_Tildy
+			set_country_flag = DNF_Peter_Veres
+			remove_ideas = DNF_Zoltan_Tildy_hog_sco
+			add_ideas = DNF_Peter_Veres_hog_sli
+	   	}
+		if = { limit = { has_country_flag = DNF_Adolf_Scharf }
+			clr_country_flag = DNF_Adolf_Scharf
+			set_country_flag = DNF_Peter_Veres
+			remove_ideas = DNF_Zoltan_Tildy_hog_sco
+			add_ideas = DNF_Peter_Veres_hog_sli
+		}
+		mark_focus_tree_layout_dirty = yes
+		set_politics = {
+			ruling_party = social_liberal
+			election_frequency = 48
+			elections_allowed = yes
+		}
+		
+		remove_ideas = DNF_Josef_Geroe_jm_sde
+		add_ideas = DNF_Bela_Kovacs_jm_sli
+
+		remove_ideas = DNF_Ferenc_Erdei_im_sde
+		add_ideas = DNF_Gabor_Vajna_im_ade
+
+		remove_ideas = DNF_Leopold_Figl_fm_ade
+		add_ideas = DNF_Dzafer_Kulenovic_fm_sli
+
+		coal_add_soc_con = yes
+		coal_add_mar_lib = yes
+		coal_add_auth_dem = yes
+
+		if = { limit = { has_idea = DNF_grand_coalition_1 }
+			swap_ideas = {
+				add_idea = DNF_Veres_Coalition_sc
+				remove_idea = DNF_grand_coalition_1
+			}
+		}
+		if = { limit = { has_idea = DNF_grand_coalition_2 }
+			swap_ideas = {
+				add_idea = DNF_Veres_Coalition_sc
+				remove_idea = DNF_grand_coalition_2
+			}
+		}
+		if = { limit = { has_idea = DNF_grand_coalition_3 }
+			swap_ideas = {
+				add_idea = DNF_Veres_Coalition_sc
+				remove_idea = DNF_grand_coalition_3
+			}
+		}
+
+		# clear party alignments
+		for_each_loop = {
+			array = DNF_chamber_of_deputies_party_array
+
+			set_variable = { v:DNF_chamber_of_deputies_alignment = 2 }
+		}
+
+		# government alignment
+		set_temp_variable = { temp_party = 5 }
+		set_temp_variable = { temp_alignment = 1 }
+		DNF_chamber_of_deputies_modify_alignment = yes
+
+		set_temp_variable = { temp_party = 6 }
+		set_temp_variable = { temp_alignment = 1 }
+		DNF_chamber_of_deputies_modify_alignment = yes
+
+		set_temp_variable = { temp_party = 7 }
+		set_temp_variable = { temp_alignment = 1 }
+		DNF_chamber_of_deputies_modify_alignment = yes
+
+		set_temp_variable = { temp_party = 8 }
+		set_temp_variable = { temp_alignment = 1 }
+		DNF_chamber_of_deputies_modify_alignment = yes
+
+		# calculate new seat composition
+		DNF_chamber_of_deputies_election_effect = yes
+		unlock_national_focus = DNF_A_New_Mandate
+		unlock_national_focus = DNF_The_Veres_Government
+		news_event = {
+			id = krg_dnf_federal_elections.25
+		} 
+
+		if = { limit = { has_country_flag = DNF_hungarian_MP_rassay } 
+			set_country_flag = DNF_hungary_agrees
+			clr_country_flag = DNF_hungary_disagrees
+		}
+		if = { limit = { has_country_flag = DNF_hungarian_MP_szakasits } 
+			set_country_flag = DNF_hungary_agrees
+			clr_country_flag = DNF_hungary_disagrees
+		}
+		if = { limit = { has_country_flag = DNF_SLOVAKIAN_MP_LETTRICH } 
+			set_country_flag = DNF_slovakia_agrees
+			clr_country_flag = DNF_slovakia_disagrees
+		}
+		if = { limit = { has_country_flag = DNF_transylvanian_MP_penescu } 
+			set_country_flag = DNF_transylvania_disagrees
+			clr_country_flag = DNF_transylvania_agrees  
+		}
+		if = { limit = { OR = { has_country_flag = DNF_galician_MP_chadzynski 
+								has_country_flag = DNF_galician_MP_polakiewicz }} 
+			set_country_flag = DNF_galicia_agrees
+			clr_country_flag = DNF_galicia_disagrees
+		}
+	}
+}
+
+country_event = { #Govt Oversight in Industry Policy
+	id = krg_dnf_federal_elections.6
+	title = krg_dnf_federal_elections.6.t
+	desc = krg_dnf_federal_elections.6.d
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_dnf_federal_elections.6.a
+	}
+}
+
+country_event = { #Josip Broz / Illyria Profile
+	id = krg_dnf_federal_elections.7
+	title = krg_dnf_federal_elections.7.t
+	desc = krg_dnf_federal_elections.7.d
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_dnf_federal_elections.7.a
+	}
+}
+
+country_event = { #True Federation
+	id = krg_dnf_federal_elections.8
+	title = krg_dnf_federal_elections.8.t
+	desc = krg_dnf_federal_elections.8.d
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_dnf_federal_elections.8.a
+	}
+}
+
+country_event = { #Self-Management-Economic Policy
+	id = krg_dnf_federal_elections.9
+	title = krg_dnf_federal_elections.9.t
+	desc = krg_dnf_federal_elections.9.d
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_dnf_federal_elections.9.a
+	}
+}
+
+country_event = { #Personal Principle Explanation Event
+	id = krg_dnf_federal_elections.10
+	title = krg_dnf_federal_elections.10.t
+	desc = krg_dnf_federal_elections.10.d
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_dnf_federal_elections.10.a
+	}
+}
+
+
+country_event = { #Successes / fopo / collective security rhetoric
+	id = krg_dnf_federal_elections.11
+	title = krg_dnf_federal_elections.11.t
+	desc = krg_dnf_federal_elections.11.d
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_dnf_federal_elections.11.a
+	}
+}
+
+country_event = { #Nation of Innovation
+	id = krg_dnf_federal_elections.12
+	title = krg_dnf_federal_elections.12.t
+	desc = krg_dnf_federal_elections.12.d
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_dnf_federal_elections.12.a
+	}
+}
+
+country_event = { #Staatsrecht Merits
+	id = krg_dnf_federal_elections.13
+	title = krg_dnf_federal_elections.13.t
+	desc = krg_dnf_federal_elections.13.d
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_dnf_federal_elections.13.a
+	}
+}
+
+country_event = { #Stewarding the Economy / Breaking Wild SDAPD projects
+	id = krg_dnf_federal_elections.14
+	title = krg_dnf_federal_elections.14.t
+	desc = krg_dnf_federal_elections.14.d
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_dnf_federal_elections.14.a
+	}
+}
+
+country_event = { #MacMillan Danubia
+	id = krg_dnf_federal_elections.15
+	title = krg_dnf_federal_elections.15.t
+	desc = krg_dnf_federal_elections.15.d
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_dnf_federal_elections.15.a
+	}
+}
+
+country_event = { #break the coalition
+	id = krg_dnf_federal_elections.16
+	title = krg_dnf_federal_elections.16.t
+	desc = krg_dnf_federal_elections.16.d
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_dnf_federal_elections.16.a
+	}
+}
+
+country_event = { #Failures of the government
+	id = krg_dnf_federal_elections.17
+	title = krg_dnf_federal_elections.17.t
+	desc = krg_dnf_federal_elections.17.d
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_dnf_federal_elections.17.a
+	}
+}
+
+country_event = { #A Different FoPo
+	id = krg_dnf_federal_elections.18
+	title = krg_dnf_federal_elections.18.t
+	desc = krg_dnf_federal_elections.18.d
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_dnf_federal_elections.13.a
+	}
+}
+
+country_event = { #We're viable candidates
+	id = krg_dnf_federal_elections.19
+	title = krg_dnf_federal_elections.19.t
+	desc = krg_dnf_federal_elections.19.d
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_dnf_federal_elections.19.a
+	}
+}
+
+country_event = { #Brave New World Danubia
+	id = krg_dnf_federal_elections.20
+	title = krg_dnf_federal_elections.20.t
+	desc = krg_dnf_federal_elections.20.d
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_dnf_federal_elections.20.a
+	}
+}
+
+news_event = { # Tildy Win
+	id = krg_dnf_federal_elections.21
+	title =  krg_dnf_federal_elections.21.t
+	desc =  krg_dnf_federal_elections.21.d
+	major = yes
+	is_triggered_only = yes
+	picture = GFX_ne_dnf_tildy
+	option = {
+		name =  krg_dnf_federal_elections.21.a
+	}
+} 
+
+news_event = { # Raab Win
+	id = krg_dnf_federal_elections.22
+	title =  krg_dnf_federal_elections.22.t
+	desc =  krg_dnf_federal_elections.22.d
+	major = yes
+	is_triggered_only = yes
+	picture = GFX_ne_dnf_raab
+	option = {
+		name =  krg_dnf_federal_elections.22.a
+	}
+} 
+
+news_event = { # De Gasperi Win
+	id = krg_dnf_federal_elections.23
+	title =  krg_dnf_federal_elections.23.t
+	desc =  krg_dnf_federal_elections.23.d
+	major = yes
+	is_triggered_only = yes
+	picture = GFX_ne_dnf_gasperi_1951
+	option = {
+		name =  krg_dnf_federal_elections.23.a
+	}
+} 
+
+news_event = { # Scharf Win
+	id = krg_dnf_federal_elections.24
+	title =  krg_dnf_federal_elections.24.t
+	desc =  krg_dnf_federal_elections.24.d
+	major = yes
+	is_triggered_only = yes
+	picture = GFX_ne_dnf_scharf
+	option = {
+		name =  krg_dnf_federal_elections.24.a
+	}
+} 
+
+news_event = { # Veres Win
+	id = krg_dnf_federal_elections.25
+	title =  krg_dnf_federal_elections.25.t
+	desc =  krg_dnf_federal_elections.25.d
+	major = yes
+	is_triggered_only = yes
+	picture = GFX_ne_dnf_veres
+	option = {
+		name =  krg_dnf_federal_elections.25.a
+	}
+} 
+
+### 1955 Election Content Here (!)
+
+country_event = {
+	id = krg_dnf_federal_elections.26
+	title = krg_dnf_federal_elections.26.t
+	desc = krg_dnf_federal_elections.26.d
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	immediate = {
+		set_country_flag = DNF_1955_Election_Triggered
+	}
+
+	option = {
+		name = krg_dnf_federal_elections.26.a
+		mark_focus_tree_layout_dirty = yes
+		complete_national_focus = DNF_The_1955_Election
+
+		if = { limit = { has_country_flag = DNF_Julius_Raab }
+			set_variable = { DNF_55_CSP = 45 }
+			set_variable = { DNF_55_SDAPD = 55 }	
+		}
+		if = { limit = { has_country_flag = DNF_Adolf_Scharf }
+		set_variable = { DNF_55_CSP = 55 }
+		set_variable = { DNF_55_SDAPD = 45 }
+		}
+		if = { limit = { has_country_flag = DNF_Zoltan_Tildy }
+		set_variable = { DNF_55_CSP = 50 }
+		set_variable = { DNF_55_SDAPD = 50 }
+		}
+		if = { limit = { has_country_flag = DNF_Leopold_Figl }
+		set_variable = { DNF_55_CSP = 46 }
+		set_variable = { DNF_55_SDAPD = 54 }
+		}
+		if = { limit = { has_country_flag = DNF_Peter_Veres has_idea = DNF_Veres_Coalition_sd }
+		set_variable = { DNF_55_CSP = 60 }
+		set_variable = { DNF_55_SDAPD = 40 }
+		}
+		if = { limit = { has_country_flag = DNF_Peter_Veres has_idea = DNF_Veres_Coalition_sc  }
+		set_variable = { DNF_55_CSP = 40 }
+		set_variable = { DNF_55_SDAPD = 60 }
+		}
+		activate_mission = DNF_The_Federal_Election_1955
+		if = { limit = { has_country_flag = DNF_Figl_Election_Prep }
+			add_to_variable = { var = DNF_55_CSP value = 3 }
+		}
+		if = { limit = { has_country_flag = DNF_austrian_MP_reither } 
+			add_to_variable = { var = DNF_55_CSP value = 3 }
+		}
+		if = { limit = { has_country_flag = DNF_austrian_MP_korner } 
+		add_to_variable = { var = DNF_55_SDAPD value = 3 }
+		}
+		if = { limit = { has_country_flag = DNF_bohemian_MP_stransky } 
+			add_to_variable = { var = DNF_55_CSP value = 3 }
+		}
+		if = { limit = { has_country_flag = DNF_BOHEMIAN_MP_FIERLINGER } 
+		add_to_variable = { var = DNF_55_SDAPD value = 3 }
+		}
+		if = { limit = { has_country_flag = DNF_hungarian_MP_kallay } 
+		add_to_variable = { var = DNF_55_CSP value = 3 }
+		}
+		if = { limit = { has_country_flag = DNF_hungarian_MP_szakasits } 
+		add_to_variable = { var = DNF_55_SDAPD value = 3 }
+		}
+		if = { limit = { has_country_flag = DNF_SLOVAKIAN_MP_TISO } 
+		add_to_variable = { var = DNF_55_CSP value = 3 }
+		}
+		if = { limit = { has_country_flag = DNF_SLOVAKIAN_MP_DERER } 
+		add_to_variable = { var = DNF_55_SDAPD value = 3 }
+		}
+		if = { limit = { has_country_flag = DNF_transylvanian_MP_vaida-voevod } 
+		add_to_variable = { var = DNF_55_CSP value = 3 }
+		}
+		if = { limit = { has_country_flag = DNF_transylvanian_MP_penescu } 
+		add_to_variable = { var = DNF_55_CSP value = 3 }
+		}
+		if = { limit = { has_country_flag = DNF_illyrian_MP_broz } 
+		add_to_variable = { var = DNF_55_SDAPD value = 3 }
+		}
+		if = { limit = { has_country_flag = DNF_illyrian_MP_macek } 
+		add_to_variable = { var = DNF_55_CSP value = 3 }
+		}
+		if = { limit = { has_country_flag = DNF_galician_MP_chadzynski } 
+		add_to_variable = { var = DNF_55_CSP value = 3 }
+		}
+		custom_effect_tooltip = DNF_cancel_focus_tt
+	}
+}
+
+country_event = {
+	id = krg_dnf_federal_elections.27
+	title = krg_dnf_federal_elections.27.t
+	desc = krg_dnf_federal_elections.27.d
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	immediate = {
+		clear_variable = 1955_election_season
+		set_country_flag = DNF_1955_election_completed
+		hidden_effect = {
+			remove_mission = DNF_The_Federal_Election_1955
+			remove_mission = DNF_The_SDAPD_Campaign_55
+			remove_mission = DNF_The_CSP_Campaign_55
+		}
+	}
+
+	option = {
+		name = krg_dnf_federal_elections.27.a #CSP win
+		if = { limit = { check_variable = { DNF_55_CSP > DNF_55_SDAPD } }
+			country_event = {
+				id = krg_dnf_federal_elections.28
+			}
+			set_country_flag = DNF_CSP_55_Victory
+		}
+		else = { #SDAPD win
+			country_event = {
+				id = krg_dnf_federal_elections.29
+			}
+			set_country_flag = DNF_SDAPD_55_Victory
+		}
+	}
+}
+
+
+country_event = {
+	id = krg_dnf_federal_elections.28
+	title = krg_dnf_federal_elections.28.t
+	desc = krg_dnf_federal_elections.28.d
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	immediate = {
+			add_to_variable = {
+				var = DNF_Scharf_Electoral_Failures
+				value = 1
+			}
+		hidden_effect = {
+		add_popularity = {
+			ideology = social_conservative
+			popularity = 0.10
+		}
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = 0.03
+		}
+		add_popularity = {
+			ideology = social_democrat
+			popularity = -0.07
+		}
+		add_popularity = {
+			ideology = radical_socialist
+			popularity = -0.02
+		}
+		add_popularity = {
+			ideology = authoritarian_socialist
+			popularity = -0.01
+		}
+		add_popularity = {
+			ideology = revolutionary_republican
+			popularity = -0.01
+		}
+		add_popularity = {
+			ideology = national_populist
+			popularity = 0.03
+		}
+
+		add_to_variable = {
+			var = DNF_Scharf_Electoral_Failures
+			value = 1
+		}
+		
+		if = { limit = { has_country_flag = DNF_Adolf_Scharf }
+			set_country_flag = DNF_Julius_Raab
+			clr_country_flag = DNF_Adolf_Scharf
+			remove_ideas_with_trait = head_of_government_minister_president
+			add_ideas = DNF_Julius_Raab_hog_sco
+		}
+		if = { limit = { has_country_flag = DNF_Peter_Veres }
+			clr_country_flag = DNF_Peter_Veres
+			set_country_flag = DNF_Leopold_Figl
+			remove_ideas_with_trait = head_of_government_minister_president
+			add_ideas = DNF_Leopold_Figl_hog_ade
+			remove_ideas_with_trait = head_of_intel_dir_evidenzbureau
+			add_ideas = DNF_Erwin_von_Lahousen_hoi_sco
+
+			
+			set_politics = {
+				ruling_party = authoritarian_democrat
+				election_frequency = 48
+				elections_allowed = yes
+			}	
+		}
+			remove_ideas_with_trait = foreign_minister_foreign_affairs
+			add_ideas = DNF_Karl_Gruber_fm_sco
+			remove_ideas_with_trait = economy_minister_federal_finance_minister
+			add_ideas = DNF_Istvan_Kossa_em_sde
+			remove_ideas_with_trait = justice_minister_minister_justice_attorney_general
+			add_ideas = DNF_Max_Scheffenegger_jm_sde
+			remove_ideas_with_trait = interior_minister_minister_of_intergovernmental_affairs
+			add_ideas = DNF_Anton_Reinthaller_im_ade
+			
+	if = { limit = { NOT = { has_country_flag = DNF_Leopold_Figl } }
+			set_politics = {
+				ruling_party = social_conservative
+				election_frequency = 48
+				elections_allowed = yes
+			}	
+		}
+
+		mark_focus_tree_layout_dirty = yes
+	
+		if = { limit = { has_idea = DNF_Leopold_Figl_hog_ade }
+			coal_add_soc_con = yes
+		}
+		else = {
+			coal_add_auth_dem = yes
+		}
+		coal_add_rad_soc = yes
+		coal_add_soc_dem = yes
+		coal_rev_soc_lib = yes
+		coal_rev_mark_lib = yes
+
+		DNF_clear_Veres_coalitions = yes
+
+		# clear party alignments
+		for_each_loop = {
+			array = DNF_chamber_of_deputies_party_array
+
+			set_variable = { v:DNF_chamber_of_deputies_alignment = 2 }
+		}
+
+		# government alignment
+		set_temp_variable = { temp_party = 3 }
+		set_temp_variable = { temp_alignment = 1 }
+		DNF_chamber_of_deputies_modify_alignment = yes
+
+		set_temp_variable = { temp_party = 2 }
+		set_temp_variable = { temp_alignment = 1 }
+		DNF_chamber_of_deputies_modify_alignment = yes
+
+		set_temp_variable = { temp_party = 7 }
+		set_temp_variable = { temp_alignment = 1 }
+		DNF_chamber_of_deputies_modify_alignment = yes
+
+		set_temp_variable = { temp_party = 8 }
+		set_temp_variable = { temp_alignment = 1 }
+		DNF_chamber_of_deputies_modify_alignment = yes
+
+		if = { limit = { has_country_flag = DNF_austrian_MP_reither } 
+				set_country_flag = DNF_AUSTRIA_AGREES
+				clr_country_flag = DNF_AUSTRIA_DISAGREES
+			}
+			if = { limit = { has_country_flag = DNF_austrian_MP_korner } 
+				set_country_flag = DNF_AUSTRIA_DISAGREES
+				clr_country_flag = DNF_AUSTRIA_AGREES
+			}
+			if = { limit = { has_country_flag = DNF_bohemian_MP_stransky } 
+				set_country_flag = DNF_BOHEMIA_AGREES
+				clr_country_flag = DNF_BOHEMIA_DISAGREES
+			}
+			if = { limit = { has_country_flag = DNF_bohemian_MP_beran } 
+				set_country_flag = DNF_BOHEMIA_AGREES
+				clr_country_flag = DNF_BOHEMIA_DISAGREES
+			}
+			if = { limit = { has_country_flag = DNF_BOHEMIAN_MP_FIERLINGER } 
+				set_country_flag = DNF_BOHEMIA_DISAGREES
+				clr_country_flag = DNF_BOHEMIA_AGREES
+			}
+			if = { limit = { has_country_flag = DNF_hungarian_MP_kallay } 
+				set_country_flag = DNF_hungary_agrees
+				clr_country_flag = DNF_hungary_disagrees
+			}
+			if = { limit = { has_country_flag = DNF_hungarian_MP_szakasits } 
+				set_country_flag = DNF_hungary_disagrees
+				clr_country_flag = DNF_hungary_agrees
+			}
+			if = { limit = { has_country_flag = DNF_SLOVAKIAN_MP_TISO } 
+				set_country_flag = DNF_slovakia_agrees
+				clr_country_flag = DNF_slovakia_disagrees
+			}
+			if = { limit = { has_country_flag = DNF_SLOVAKIAN_MP_DERER } 
+				set_country_flag = DNF_slovakia_disagrees 
+				clr_country_flag = DNF_slovakia_agrees
+			}
+			if = { limit = { has_country_flag = DNF_transylvanian_MP_penescu } 
+				set_country_flag = DNF_transylvania_agrees 
+				clr_country_flag = DNF_transylvania_disagrees
+			}
+			if = { limit = { has_country_flag = DNF_illyrian_MP_broz has_country_flag = DNF_illyria_agrees } 
+				set_country_flag = DNF_illyria_disagrees 
+				clr_country_flag = DNF_illyria_agrees
+			}
+			if = { limit = { has_country_flag = DNF_galician_MP_romer } 
+				set_country_flag = DNF_galicia_agrees 
+				clr_country_flag = DNF_galicia_disagrees
+			}
+
+		# calculate new seat composition
+		DNF_chamber_of_deputies_election_effect = yes
+		}
+	}
+
+	option = {
+		name = krg_dnf_federal_elections.28.a
+			unlock_national_focus = DNF_A_New_Mandate
+			if = { limit = { has_country_flag = DNF_Leopold_Figl }
+				unlock_national_focus = DNF_The_Figl_Government
+				news_event = {
+					id = krg_dnf_federal_elections.44 
+				} 
+			}
+			if = { limit = { has_country_flag = DNF_Julius_Raab }
+			unlock_national_focus = DNF_The_Raab_Government
+			news_event = {
+				id = krg_dnf_federal_elections.22
+				} 		
+			}
+			if = { limit = { has_country_flag = DNF_Zoltan_Tildy }
+			unlock_national_focus = DNF_The_Tildy_Government
+			news_event = {
+				id = krg_dnf_federal_elections.21
+			}  
+			set_country_flag = DNF_Zoltan_Tildy_Elected_55
+			}
+		}
+}
+
+
+country_event = {
+	id = krg_dnf_federal_elections.29
+	title = krg_dnf_federal_elections.29.t
+	desc = krg_dnf_federal_elections.29.d
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	immediate = {
+		hidden_effect = {
+		
+		add_popularity = {
+			ideology = social_conservative
+			popularity = -0.08
+		}
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = -0.05
+		}
+		add_popularity = {
+			ideology = social_democrat
+			popularity = 0.12
+		}
+		add_popularity = {
+			ideology = radical_socialist
+			popularity = 0.04
+		}
+		add_popularity = {
+			ideology = authoritarian_socialist
+			popularity = 0.01
+		}
+		add_popularity = {
+			ideology = revolutionary_republican
+			popularity = 0.01
+		}
+		add_popularity = {
+			ideology = national_populist
+			popularity = -0.03
+		}
+
+		if = { limit = { has_country_flag = DNF_Peter_Veres }
+			remove_ideas_with_trait = head_of_intel_dir_evidenzbureau
+			add_ideas = DNF_Theodor_Koerner_hoi_sde
+		}
+
+		if = { limit = { NOT = { has_country_flag = DNF_Adolf_Scharf }}
+			remove_ideas_with_trait = head_of_government_minister_president
+			add_ideas = DNF_Adolf_Schaerf_hog_sde
+			clr_country_flag = DNF_Julius_Raab
+			clr_country_flag = DNF_Leopold_Figl
+			clr_country_flag = DNF_Zoltan_Tildy
+			clr_country_flag = DNF_Peter_Veres
+			set_country_flag = DNF_Adolf_Scharf
+		}
+
+			remove_ideas_with_trait = head_of_government_minister_president
+			add_ideas = DNF_Adolf_Schaerf_hog_sde
+			remove_ideas_with_trait = foreign_minister_foreign_affairs
+			add_ideas = DNF_Bruno_Kreisky_fm_sde
+			remove_ideas_with_trait = economy_minister_federal_finance_minister
+			add_ideas = DNF_Avdo_Humo_em_sde
+			remove_ideas_with_trait = justice_minister_minister_justice_attorney_general
+			add_ideas = DNF_Istvan_Antal_jm_ade
+			remove_ideas_with_trait = interior_minister_minister_of_intergovernmental_affairs
+			add_ideas = DNF_Alfons_Gorbach_im_sco
+
+
+		mark_focus_tree_layout_dirty = yes
+		set_politics = {
+			ruling_party = social_democrat
+			election_frequency = 48
+			elections_allowed = yes
+		}
+
+		coal_add_soc_con = yes
+		coal_add_rad_soc = yes
+		coal_add_auth_dem = yes
+		coal_rev_soc_lib = yes
+		coal_rev_mark_lib = yes
+
+		DNF_clear_Veres_coalitions = yes
+
+		# clear party alignments
+		for_each_loop = {
+			array = DNF_chamber_of_deputies_party_array
+
+			set_variable = { v:DNF_chamber_of_deputies_alignment = 2 }
+		}
+
+		# government alignment
+		set_temp_variable = { temp_party = 3 }
+		set_temp_variable = { temp_alignment = 1 }
+		DNF_chamber_of_deputies_modify_alignment = yes
+
+		set_temp_variable = { temp_party = 2 }
+		set_temp_variable = { temp_alignment = 1 }
+		DNF_chamber_of_deputies_modify_alignment = yes
+
+		set_temp_variable = { temp_party = 7 }
+		set_temp_variable = { temp_alignment = 1 }
+		DNF_chamber_of_deputies_modify_alignment = yes
+
+		set_temp_variable = { temp_party = 8 }
+		set_temp_variable = { temp_alignment = 1 }
+		DNF_chamber_of_deputies_modify_alignment = yes
+
+		if = { limit = { has_country_flag = DNF_austrian_MP_reither } 
+				set_country_flag = DNF_AUSTRIA_DISAGREES
+				clr_country_flag = DNF_AUSTRIA_AGREES
+			}
+			if = { limit = { has_country_flag = DNF_austrian_MP_korner } 
+				set_country_flag = DNF_AUSTRIA_AGREES
+				clr_country_flag = DNF_AUSTRIA_DISAGREES
+			}
+			if = { limit = { has_country_flag = DNF_bohemian_MP_stransky } 
+				set_country_flag = DNF_BOHEMIA_DISAGREES
+				clr_country_flag = DNF_BOHEMIA_AGREES
+			}
+			if = { limit = { has_country_flag = DNF_bohemian_MP_beran } 
+				set_country_flag = DNF_BOHEMIA_DISAGREES
+				clr_country_flag = DNF_BOHEMIA_AGREES
+			}
+			if = { limit = { has_country_flag = DNF_BOHEMIAN_MP_FIERLINGER } 
+				set_country_flag = DNF_BOHEMIA_AGREES
+				clr_country_flag = DNF_BOHEMIA_DISAGREES
+			}
+			if = { limit = { has_country_flag = DNF_hungarian_MP_kallay } 
+				set_country_flag = DNF_hungary_disagrees
+				clr_country_flag = DNF_hungary_agrees
+			}
+			if = { limit = { has_country_flag = DNF_hungarian_MP_szakasits } 
+				set_country_flag = DNF_hungary_agrees
+				clr_country_flag = DNF_hungary_disagrees
+			}
+			if = { limit = { has_country_flag = DNF_SLOVAKIAN_MP_TISO } 
+				set_country_flag = DNF_slovakia_disagrees
+				clr_country_flag = DNF_slovakia_agrees
+			}
+			if = { limit = { has_country_flag = DNF_SLOVAKIAN_MP_DERER } 
+				set_country_flag = DNF_slovakia_agrees
+				clr_country_flag = DNF_slovakia_disagrees
+			}
+			if = { limit = { has_country_flag = DNF_transylvanian_MP_penescu } 
+				set_country_flag = DNF_transylvania_disagrees
+				clr_country_flag = DNF_transylvania_agrees  
+			}
+			if = { limit = { has_country_flag = DNF_illyrian_MP_broz has_country_flag = DNF_illyria_disagrees } 
+				set_country_flag = DNF_illyria_agrees
+				clr_country_flag = DNF_illyria_disagrees 
+			}
+			if = { limit = { has_country_flag = DNF_galician_MP_romer } 
+				set_country_flag = DNF_galicia_disagrees
+				clr_country_flag = DNF_galicia_agrees
+			}
+
+		# calculate new seat composition
+		DNF_chamber_of_deputies_election_effect = yes
+		}
+	}
+
+	option = {
+		name = krg_dnf_federal_elections.29.a
+			unlock_national_focus = DNF_A_New_Mandate
+			unlock_national_focus = DNF_The_Scharf_Government
+			news_event = {
+				id = krg_dnf_federal_elections.24
+			} 
+		}
+}
+
+
+country_event = { #DNF_A_Pluralist_Campaign
+	id = krg_dnf_federal_elections.30
+	title = krg_dnf_federal_elections.30.t
+	desc = krg_dnf_federal_elections.30.d
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_dnf_federal_elections.30.a
+	}
+}
+
+country_event = { #DNF_Social_Democratic_Modes_Of_Production
+	id = krg_dnf_federal_elections.31
+	title = krg_dnf_federal_elections.31.t
+	desc = krg_dnf_federal_elections.31.d
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_dnf_federal_elections.31.a
+	}
+}
+
+country_event = { #DNF_Tackling_Vested_Interests
+	id = krg_dnf_federal_elections.32
+	title = krg_dnf_federal_elections.32.t
+	desc = krg_dnf_federal_elections.32.d
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_dnf_federal_elections.32.a
+	}
+}
+
+country_event = { #DNF_Freedom_Of_Assembly
+	id = krg_dnf_federal_elections.33
+	title = krg_dnf_federal_elections.33.t
+	desc = krg_dnf_federal_elections.33.d
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_dnf_federal_elections.33.a
+	}
+}
+
+country_event = { #DNF_Polanyi_Contribution
+	id = krg_dnf_federal_elections.34
+	title = krg_dnf_federal_elections.34.t
+	desc = krg_dnf_federal_elections.34.d
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_dnf_federal_elections.34.a
+	}
+}
+
+country_event = { #DNF_Universal_Suffrage
+	id = krg_dnf_federal_elections.35
+	title = krg_dnf_federal_elections.35.t
+	desc = krg_dnf_federal_elections.35.d
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_dnf_federal_elections.35.a
+	}
+}
+
+country_event = { #DNF_The_Rising_Tide
+	id = krg_dnf_federal_elections.36
+	title = krg_dnf_federal_elections.36.t
+	desc = krg_dnf_federal_elections.36.d
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_dnf_federal_elections.36.a
+	}
+}
+
+country_event = { #DNF_Maintaining_Our_Readiness
+	id = krg_dnf_federal_elections.37
+	title = krg_dnf_federal_elections.37.t
+	desc = krg_dnf_federal_elections.37.d
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_dnf_federal_elections.37.a
+	}
+}
+
+country_event = { #DNF_Military_Industrial_Complex
+	id = krg_dnf_federal_elections.38
+	title = krg_dnf_federal_elections.38.t
+	desc = krg_dnf_federal_elections.38.d
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_dnf_federal_elections.38.a
+	}
+}
+
+country_event = { #DNF_State_Economic_Involvement
+	id = krg_dnf_federal_elections.39
+	title = krg_dnf_federal_elections.39.t
+	desc = krg_dnf_federal_elections.39.d
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_dnf_federal_elections.39.a
+	}
+}
+
+country_event = { #DNF_Corporatist_Developments
+	id = krg_dnf_federal_elections.40
+	title = krg_dnf_federal_elections.40.t
+	desc = krg_dnf_federal_elections.40.d
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_dnf_federal_elections.40.a
+	}
+}
+
+country_event = { #Brave New World Danubia
+	id = krg_dnf_federal_elections.41
+	title = krg_dnf_federal_elections.41.t
+	desc = krg_dnf_federal_elections.41.d
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_dnf_federal_elections.41.a
+	}
+}
+
+country_event = { #Brave New World Danubia
+	id = krg_dnf_federal_elections.42
+	title = krg_dnf_federal_elections.42.t
+	desc = krg_dnf_federal_elections.42.d
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_dnf_federal_elections.42.a
+	}
+}
+
+country_event = { #Brave New World Danubia
+	id = krg_dnf_federal_elections.43
+	title = krg_dnf_federal_elections.43.t
+	desc = krg_dnf_federal_elections.43.d
+	
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = krg_dnf_federal_elections.43.a
+	}
+}
+
+
+news_event = { # Figl Win
+	id = krg_dnf_federal_elections.44 
+	title =  krg_dnf_federal_elections.44.t
+	desc =  krg_dnf_federal_elections.44.d
+	major = yes
+	is_triggered_only = yes
+	picture = GFX_ne_dnf_figl
+	option = {
+		name =  krg_dnf_federal_elections.44.a
+	}
+} 

@@ -1,0 +1,288 @@
+add_namespace = krg_bel
+
+
+country_event = {
+	id = krg_bel.0 #Starting Situation
+	title = krg_bel.0.t
+	desc = krg_bel.0.d
+	
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_bel.0 FROM = [From.GetName]" }
+
+	option = {
+		name = krg_bel.0.a
+    }
+}
+
+country_event = {
+	id = krg_bel.1 # Reconstruction proceeds
+	title = krg_bel.1.t
+	desc = krg_bel.1.d
+	
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_bel.0 FROM = [From.GetName]" }
+
+	option = {
+		name = krg_bel.1.a
+		BEL_move_up_recon = yes
+		hidden_effect = {
+			country_event = {
+				id = krg_bel.2
+				months = 13
+				days = 3
+			}
+		}
+    }
+}
+country_event = {
+	id = krg_bel.2 # Reconstruction proceeds
+	title = krg_bel.2.t
+	desc = krg_bel.2.d
+	
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_bel.0 FROM = [From.GetName]" }
+
+	option = {
+		name = krg_bel.2.a
+		BEL_move_up_recon = yes
+		hidden_effect = {
+			country_event = {
+				id = krg_bel.3
+				months = 11
+				days = 7
+			}
+		}
+    }
+}
+country_event = {
+	id = krg_bel.3 # Reconstruction proceeds
+	title = krg_bel.3.t
+	desc = krg_bel.3.d
+	
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_bel.0 FROM = [From.GetName]" }
+
+	option = {
+		name = krg_bel.3.a
+		BEL_move_up_recon = yes
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = 0.05
+		}
+    }
+}
+
+country_event = {
+	id = krg_bel.4 # Wodon's death
+	title = krg_bel.4.t
+	desc = krg_bel.4.d
+	
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_bel.0 FROM = [From.GetName]" }
+
+	option = {
+		name = krg_bel.4.a
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = -0.05
+		}
+		hidden_effect = {
+			country_event = {
+				id = krg_bel.5
+				days = 14
+			}
+		}
+    }
+}
+
+country_event = {
+	id = krg_bel.5 # Lippen's Government
+	title = krg_bel.5.t
+	desc = krg_bel.5.d
+	
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_bel.0 FROM = [From.GetName]" }
+
+	option = {
+		name = krg_bel.5.a
+		coal_add_mar_lib = yes
+		add_popularity = {
+			ideology = market_liberal
+			popularity = 0.10
+		}
+		hidden_effect = {
+			country_event = {
+				id = krg_bel.3
+				months = 11
+				days = 7
+			}
+		}
+    }
+}
+
+country_event = {
+	id = krg_bel.6 # Rightists outraged
+	title = krg_bel.6.t
+	desc = krg_bel.6.d
+	
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_bel.0 FROM = [From.GetName]" }
+
+	option = {
+		name = krg_bel.6.a
+		add_ideas = BEL_flemish_outrage
+		add_popularity = {
+			ideology = national_populist
+			popularity = 0.10
+		}
+		hidden_effect = {
+			country_event = {
+				id = krg_bel.3
+				months = 7
+				days = 28
+			}
+		}
+    }
+}
+
+country_event = {
+	id = krg_bel.7 # Royal Question
+	title = krg_bel.7.t
+	desc = krg_bel.7.d
+	
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_bel.0 FROM = [From.GetName]" }
+
+	option = {
+		name = krg_bel.7.a
+		swap_ideas = {
+			remove_idea = BEL_political_radicalism
+			add_idea = BEL_political_radicalism_2
+		}
+		add_popularity = {
+			ideology = revolutionary_republican
+			popularity = 0.10
+		}
+		add_popularity = {
+			ideology = authoritarian_socialist
+			popularity = 0.05
+		}
+		hidden_effect = {
+			country_event = {
+				id = krg_bel.3
+				months = 3
+				days = 21
+			}
+		}
+    }
+}
+
+country_event = {
+	id = krg_bel.8 # End of the NV/UN
+	title = krg_bel.8.t
+	desc = krg_bel.8.d
+	
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_bel.0 FROM = [From.GetName]" }
+
+	option = {
+		name = krg_bel.8.a
+		set_politics = {
+			ruling_party = authoritarian_democrat
+			elections_allowed = no
+		}
+		coal_add_pat_aut = yes
+		coal_add_mar_lib = yes
+		set_party_name = {
+			ideology = national_populist
+			long_name = BEL_national_populist_verdinaso_party_long
+			name = BEL_national_populist_verdinaso_party
+		}
+		set_party_name = {
+			ideology = paternal_autocrat
+			long_name = BEL_paternal_autocrat_liberal_party_long
+			name = BEL_paternal_autocrat_liberal_party
+		}
+		set_party_name = {
+			ideology = authoritarian_democrat
+			long_name = BEL_authoritarian_democrat_liberal_party_long
+			name = BEL_authoritarian_democrat_liberal_party
+		}
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = -0.15
+		}
+		hidden_effect = {
+			news_event = {
+				id = worldnews.421
+			}
+		}
+    }
+}
+
+country_event = {
+	id = krg_bel.9 # Death of Lippen
+	title = krg_bel.9.t
+	desc = krg_bel.9.d
+	
+	fire_only_once = yes
+	is_triggered_only = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_bel.0 FROM = [From.GetName]" }
+
+	option = {
+		name = krg_bel.9.a
+		hidden_effect = {
+			set_popularities = {
+				authoritarian_socialist = 21
+				radical_socialist = 0
+				social_democrat = 13
+				revolutionary_republican = 14
+				social_liberal = 7
+				market_liberal = 11
+				social_conservative = 15
+				authoritarian_democrat = 4
+				paternal_autocrat = 7
+				national_populist = 8
+			}
+		}
+		set_politics = {
+			ruling_party = social_conservative
+			elections_allowed = no
+		}
+		set_party_name = {
+			ideology = authoritarian_democrat
+			long_name = BEL_authoritarian_christian_democrat_party_long
+			name = BEL_authoritarian_christian_democrat_party
+		}
+		coal_add_pat_aut = yes
+		coal_add_auth_dem = yes
+		coal_add_mar_lib = yes
+		coal_add_soc_lib = yes
+		remove_ideas = BEL_Leopoldism
+		hidden_effect = {
+			news_event = {
+				id = worldnews.422
+			}
+		}
+		
+    }
+}

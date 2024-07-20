@@ -1,0 +1,1663 @@
+add_namespace = krg_mon
+country_event = {
+	#Wind Rising On the Steppe
+	id = krg_mon.0
+	title = krg_mon.0.t
+	desc = krg_mon.0.d
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_mon.0"
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = krg_mon.0.a		#time to consider change?
+		add_political_power = 25
+		hidden_effect = {
+			country_event = {
+				id = krg_mon.1
+				days = 5
+			}
+		}
+
+		ai_chance = {
+			base = 65
+			modifier = {
+				OR = {
+					has_game_rule = {
+						rule = MON_WIND_RISING_ON_THE_STEP
+						option = MON_WIND_RISING_ON_THE_STEP_KHAN
+					}
+					has_game_rule = {
+						rule = MON_WIND_RISING_ON_THE_STEP
+						option = MON_WIND_RISING_ON_THE_STEP_REP
+					}
+				}
+				factor = 1000
+			}
+		}
+	}
+	option = {
+		name = krg_mon.0.b		#business as usual!
+		add_stability = 0.05
+		hidden_effect = {
+			country_event = {
+				id = krg_mon.5
+				days = 9
+			}
+		}
+		ai_chance = {
+			base = 35
+			modifier = {
+				OR = {
+					has_game_rule = {
+						rule = MON_WIND_RISING_ON_THE_STEP
+						option = MON_WIND_RISING_ON_THE_STEP_BERZARIN_RADICALS
+					}
+					has_game_rule = {
+						rule = MON_WIND_RISING_ON_THE_STEP
+						option = MON_WIND_RISING_ON_THE_STEP_BERZARIN_LAMAS
+					}
+				}
+				factor = 1000
+			}
+		}
+	}
+}
+
+##Freedom pre china events
+country_event = {
+	#Mongolia for the Mongols
+	id = krg_mon.1
+	title = krg_mon.1.t
+	desc = krg_mon.1.d
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_mon.1"
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = krg_mon.1.a		#Seize the means of governance!
+		remove_ideas = {
+			MON_russian_yoke
+		}
+		add_stability = -0.02
+		add_popularity = {
+			ideology = social_democrat
+			popularity = 0.05
+		}
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = 0.1
+		}
+		add_popularity = {
+			ideology = social_liberal
+			popularity = 0.05
+		}
+		add_popularity = {
+			ideology = social_conservative
+			popularity = 0.2
+		}
+		add_popularity = {
+			ideology = revolutionary_republican
+			popularity = 0.2
+		}
+		set_politics = {
+			ruling_party = revolutionary_republican
+			election_frequency = 48
+			elections_allowed = yes
+		}
+		remove_ideas = {
+			KRG_military_occupation
+			KRG_professional_military
+		}
+		add_ideas = {
+			KRG_presidential_democracy
+			KRG_semi_professional_military
+		}
+		coal_add_soc_lib = yes
+		coal_add_soc_dem = yes
+		remove_all_ministers = yes
+		add_ideas = {
+			MON_Anandyn_Amar_hog_rre
+			MON_Peljidiin_Genden_fm_sli
+			MON_Darizavyn_Losol_em_rre
+			MON_9th_Jebtsundamba_Khutughtu_im_sco
+			MON_Olziitiin_Badrakh_jm_sde
+			MON_sonomyn_luvsan_hoi_sde
+		}
+		set_cosmetic_tag = MON_REP
+		hidden_effect = {
+			country_event = {
+				id = krg_mon.2
+				days = 8
+			}
+			country_event = {
+				id = krg_mon.3
+				days = 12
+			}
+		}
+	}
+}
+
+country_event = {
+	#The Lama's will rule again?
+	id = krg_mon.2
+	title = krg_mon.2.t
+	desc = krg_mon.2.d
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_mon.2"
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = krg_mon.2.a		#A constitutional theocracy!
+		hidden_effect = {
+			coal_rev_all = yes
+		}
+		add_stability = 0.05
+		set_politics = {
+			ruling_party = social_conservative
+			election_frequency = 48
+			elections_allowed = no
+		}
+		coal_add_auth_dem = yes
+		remove_all_ministers = yes
+		remove_ideas = {
+			KRG_presidential_democracy
+		}
+		add_ideas = {
+			KRG_illiberal_democracy
+		}
+		add_ideas = {
+			MON_9th_Jebtsundamba_Khutughtu_hog_sco
+			MON_demchegdongrov_im_ade
+			MON_Sambadondogiin_Tserendorj_jm_ade
+			MON_Jamsrangiin_Tseveen_fm_mli
+			MON_dambijanstan_em_pau
+			MON_Dambyn_Chagdarjav_hoi_ade
+		}
+		set_cosmetic_tag = MON_TRAD
+		hidden_effect = {
+			if = {
+				limit = {
+					OR = {
+						AND = {
+							country_exists = FNG
+							NOT = {
+								country_exists = CHI
+							}
+						}
+						FNG = {
+							is_neighbor_of = MON
+						}
+					}
+				}
+				FNG = {
+					country_event = {
+						id = krg_mon.19
+						days = 34
+					}
+				}				#FNG promise the aristos their loot
+			}
+			else_if = {
+				limit = {
+					OR = {
+						AND = {
+							country_exists = CHI
+							NOT = {
+								country_exists = FNG
+							}
+						}
+						CHI = {
+							is_neighbor_of = MON
+						}
+					}
+				}
+				CHI = {
+					country_event = {
+						id = krg_mon.23
+						days = 48
+					}
+				}				#CHI open negotiations
+			}
+		}
+
+		ai_chance = {
+			base = 45
+			modifier = {
+				has_game_rule = {
+					rule = MON_WIND_RISING_ON_THE_STEP
+					option = MON_WIND_RISING_ON_THE_STEP_KHAN
+				}
+				factor = 1000
+			}
+		}
+	}
+	option = {
+		name = krg_mon.2.b		#We're good thanks...
+		add_stability = -0.02
+		add_political_power = 25
+		hidden_effect = {
+			country_event = {
+				id = krg_mon.4
+				days = 17
+			}
+			if = {
+				limit = {
+					OR = {
+						AND = {
+							country_exists = FNG
+							NOT = {
+								country_exists = CHI
+							}
+						}
+						FNG = {
+							has_war_with = CHI
+							surrender_progress < 0.2
+						}
+					}
+				}
+				FNG = {
+					country_event = {
+						id = krg_mon.10
+						days = 45
+					}
+				}				#FNG starts their insurgents
+			}
+			else_if = {
+				limit = {
+					OR = {
+						AND = {
+							country_exists = CHI
+							NOT = {
+								country_exists = FNG
+							}
+						}
+						CHI = {
+							has_war_with = FNG
+							surrender_progress < 0.2
+						}
+					}
+				}
+				CHI = {
+					country_event = {
+						id = krg_mon.23
+						days = 27
+					}
+				}				#CHI opens negotiations
+			}
+		}
+		ai_chance = {
+			base = 55
+			modifier = {
+				has_game_rule = {
+					rule = MON_WIND_RISING_ON_THE_STEP
+					option = MON_WIND_RISING_ON_THE_STEP_REP
+				}
+				factor = 1000
+			}
+		}
+	}
+}
+
+country_event = {
+	#Berzarin offers his services
+	id = krg_mon.3
+	title = krg_mon.3.t
+	desc = krg_mon.3.d
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_mon.3"
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = krg_mon.3.a		#He is permitted to remain.
+		add_stability = 0.02
+	}
+	option = {
+		name = krg_mon.3.b		#He may remain... IN JAIL
+		add_stability = -0.02
+		MON_Nikolai_Berzarin = {
+			retire = yes
+		}
+		add_country_leader_role = {
+			character = MON_Jambyn_Lkhumbe
+			promote_leader = yes
+			country_leader = {
+				ideology = paternal_autocrat_subtype
+				# desc = POLITICS_PAVEL_GORGULOV_DESC
+				expire = 2001.1.1.1
+				traits = {
+				}
+			}
+		}
+		add_popularity = {
+			#tyrant penalty lol
+			ideology = national_populist
+			popularity = 0.03
+		}
+		add_popularity = {
+			ideology = paternal_autocrat
+			popularity = 0.02
+		}
+	}
+}
+
+country_event = {
+	#Ja Lama stirs up trouble
+	id = krg_mon.4
+	title = krg_mon.4.t
+	desc = krg_mon.4.d
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_mon.4"
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = krg_mon.4.a		#Goddamn die you old bastard
+		add_stability = -0.01
+		add_equipment_to_stockpile = {
+			type = infantry_equipment_1
+			amount = -105
+			producer = MON
+		}
+		add_manpower = -16
+		MON_dambijanstan = {
+			retire = yes
+		}
+	}
+}
+
+##Berzarin pre China demands events
+country_event = {
+	#Business as Usual?
+	id = krg_mon.5
+	title = krg_mon.5.t
+	desc = krg_mon.5.d
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_mon.5"
+		hidden_effect = {
+			country_event = {
+				id = krg_mon.6
+				days = 11
+			}			#flag debate
+			if = {
+				limit = {
+					OR = {
+						AND = {
+							country_exists = FNG
+							NOT = {
+								country_exists = CHI
+							}
+						}
+						FNG = {
+							has_war_with = CHI
+							surrender_progress < 0.2
+						}
+					}
+				}
+				FNG = {
+					country_event = {
+						id = krg_mon.30
+						days = 45
+					}
+				}				#FNG sends an ultimatum to Berzarin
+			}
+			else_if = {
+				limit = {
+					OR = {
+						AND = {
+							country_exists = CHI
+							NOT = {
+								country_exists = FNG
+							}
+						}
+						CHI = {
+							has_war_with = FNG
+							surrender_progress < 0.2
+						}
+					}
+				}
+				CHI = {
+					country_event = {
+						id = krg_mon.31
+						days = 50
+					}
+				}				#CHI sends an ultimatum to Berzarin
+			}
+		}
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = krg_mon.5.a		#Ally with the Buddhists as Sternberg did
+		add_stability = 0.04
+		coal_add_auth_dem = yes
+		coal_add_soc_con = yes
+		remove_ideas = {
+			MON_Mikhail_Frinovsky_im_npo
+			KRG_military_occupation
+		}
+		add_ideas = {
+			MON_9th_Jebtsundamba_Khutughtu_im_sco
+			KRG_authoritarian_system
+		}
+		load_oob = MON_lamas
+
+		ai_chance = {
+			base = 60
+			modifier = {
+				has_game_rule = {
+					rule = MON_WIND_RISING_ON_THE_STEP
+					option = MON_WIND_RISING_ON_THE_STEP_BERZARIN_LAMAS
+				}
+				factor = 1000
+			}
+		}
+	}
+	option = {
+		name = krg_mon.5.b		#Ally with local radicals
+		add_stability = -0.04
+		add_popularity = {
+			ideology = national_populist
+			popularity = 0.1
+		}
+		remove_ideas = {
+			MON_Nikolai_Berzarin_hog_pau
+			MON_Mikhail_Frinovsky_im_npo
+			MON_Grigory_Semyonov_hoi_pau
+			MON_dambijanstan_em_pau
+			KRG_military_occupation
+		}
+		add_ideas = {
+			MON_Jambyn_Lkhumbe_hog_npo
+			MON_Bat_Ochiryn_Eldev_Ochir_im_npo
+			MON_Tsengeltiin_Jigjidjav_em_npo
+			MON_Khorloogiin_Choibalsan_hoi_npo
+			KRG_fanatical_dictatorship
+		}
+		hidden_effect = {
+			country_event = {
+				id = krg_mon.7
+				days = 25
+			}
+		}
+		load_oob = MON_radicals
+		ai_chance = {
+			base = 40
+			modifier = {
+				has_game_rule = {
+					rule = MON_WIND_RISING_ON_THE_STEP
+					option = MON_WIND_RISING_ON_THE_STEP_BERZARIN_RADICALS
+				}
+				factor = 1000
+			}
+		}
+	}
+}
+
+country_event = {
+	#Flag Debate
+	id = krg_mon.6
+	title = krg_mon.6.t
+	desc = krg_mon.6.d
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_mon.6"
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = krg_mon.6.a		#A traditionalist flag
+		add_stability = 0.02
+		add_political_power = 25
+		add_popularity = {
+			ideology = social_conservative
+			popularity = 0.05
+		}
+		set_cosmetic_tag = MON_TRAD_BERZ
+		ai_chance = {
+			modifier = {
+				has_idea = MON_9th_Jebtsundamba_Khutughtu_im_sco
+				add = 100
+			}
+		}
+	}
+	option = {
+		name = krg_mon.6.b		#A republican flag
+		add_stability = 0.02
+		add_popularity = {
+			ideology = revolutionary_republican
+			popularity = 0.05
+		}
+		set_cosmetic_tag = MON_REP
+		ai_chance = {
+			modifier = {
+				has_idea = MON_Jambyn_Lkhumbe_hog_npo
+				add = 100
+			}
+		}
+	}
+}
+
+country_event = {
+	#slipping away
+	id = krg_mon.7
+	title = krg_mon.7.t
+	desc = krg_mon.7.d
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_mon.7"
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = krg_mon.7.a		#Shootout in the capital!
+		add_stability = -0.02
+		add_equipment_to_stockpile = {
+			type = infantry_equipment_1
+			amount = -109
+			producer = MON
+		}
+		add_manpower = -16
+	}
+}
+
+## chinese negotiations with republicans and lamas
+country_event = {
+	# FNG launches insurgency
+	id = krg_mon.10
+	title = krg_mon.10.t
+	desc = krg_mon.10.d
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_mon.10"
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = krg_mon.10.a		#Send in the Qinghai cavalry
+		add_equipment_to_stockpile = {
+			type = infantry_equipment_1
+			amount = -2000
+		}
+		add_manpower = -2000
+		MON = {
+			country_event = {
+				id = krg_mon.11
+			}
+		}
+	}
+}
+
+country_event = {
+	# FNG launches insurgency Mongolian Response
+	id = krg_mon.11
+	title = krg_mon.11.t
+	desc = krg_mon.11.d
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_mon.11"
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = krg_mon.11.a		#We will whip them!
+		set_country_flag = FNG_mongolian_insurgency
+		set_variable = {
+			var = MON_Qinghai_insurgents
+			value = 2000
+		}
+		activate_mission = MON_crush_insurgents
+	}
+}
+
+country_event = {
+	# FNG feeds more guns and men
+	id = krg_mon.12
+	title = krg_mon.12.t
+	desc = krg_mon.12.d
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_mon.12"
+	}
+	is_triggered_only = yes
+	
+	option = {
+		name = krg_mon.12.a		#Shit!
+		if = {
+			limit = {
+				has_country_flag = MON_passes_closed
+			}
+			add_to_variable = {
+				var = MON_Qinghai_insurgents
+				value = 30
+			}
+		}
+		else = {
+			add_to_variable = {
+				var = MON_Qinghai_insurgents
+				value = 100
+			}
+		}
+	}
+}
+
+country_event = {
+	# MON kills a group of insurgents 
+	id = krg_mon.13
+	title = krg_mon.13.t
+	desc = krg_mon.13.d
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_mon.13"
+	}
+	is_triggered_only = yes
+	
+	option = {
+		name = krg_mon.13.a		#Good
+		random_list = {
+			33 = {
+				add_to_variable = {
+					var = MON_Qinghai_insurgents
+					value = -150
+				}
+			}
+			33 = {
+				add_to_variable = {
+					var = MON_Qinghai_insurgents
+					value = -200
+				}
+			}
+			33 = {
+				add_to_variable = {
+					var = MON_Qinghai_insurgents
+					value = -100
+				}
+			}
+			1 = {
+				add_to_variable = {
+					var = MON_Qinghai_insurgents
+					value = -400
+				}
+			}
+		}
+	}
+}
+
+country_event = {
+	# MON closes the western passes
+	id = krg_mon.14
+	title = krg_mon.14.t
+	desc = krg_mon.14.d
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_mon.14"
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = krg_mon.14.a		#Good
+		set_country_flag = MON_passes_closed
+	}
+}
+
+country_event = {
+	# MON fails to crush insurgency
+	id = krg_mon.15
+	title = krg_mon.15.t
+	desc = krg_mon.15.d
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_mon.15"
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = krg_mon.15.a		#Oh no
+		FNG = {
+			MON = {
+				get_current_government_type = yes
+			}
+			if = {
+				limit = {
+					has_subject_autonomy_feature = yes
+				}
+				set_autonomy = {
+					target = MON
+					autonomous_state = krg_military_occupation
+				}
+			}
+			else = {
+				puppet = MON
+			}
+			save_event_target_as = on_puppet_master_tag
+			MON = {
+				standard_on_puppet_effect = yes
+				restore_previous_government_type = yes
+			}
+		}
+		MON = {
+			remove_all_ministers = yes
+			add_ideas = {
+				#Lamas will be stooges
+				MON_9th_Jebtsundamba_Khutughtu_hog_sco
+				MON_demchegdongrov_im_ade
+				MON_Sambadondogiin_Tserendorj_jm_ade
+				MON_Jamsrangiin_Tseveen_fm_mli
+				MON_dambijanstan_em_pau
+				MON_Dambyn_Chagdarjav_hoi_ade
+			}
+			set_cosmetic_tag = MON_TRAD
+			remove_ideas = {
+				KRG_presidential_democracy
+			}
+			add_ideas = {
+				KRG_military_occupation
+				MON_chinese_yoke
+			}
+			clr_country_flag = FNG_mongolian_insurgency
+		}
+	}
+}
+
+country_event = {
+	# MON succeeds to crush insurgency
+	id = krg_mon.16
+	title = krg_mon.16.t
+	desc = krg_mon.16.d
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_mon.16"
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = krg_mon.16.a		#Good
+		add_stability = 0.1
+		add_political_power = 100
+		add_equipment_to_stockpile = {
+			type = infantry_equipment_1
+			amount = 1793
+			producer = FNG
+		}
+		add_popularity = {
+			ideology = revolutionary_republican
+			popularity = 0.1
+		}
+		FNG = {
+			country_event = {
+				id = krg_mon.17
+			}
+			hidden_effect = {
+				country_event = {
+					id = krg_mon.18
+					days = 90
+				}
+			}
+		}
+		clr_country_flag = FNG_mongolian_insurgency
+	}
+}
+
+country_event = {
+	#FNG opens the window of opportunity
+	id = krg_mon.17
+	title = krg_mon.17.t
+	desc = krg_mon.17.d
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_mon.17"
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = krg_mon.17.a		#you snooze you lose
+		trigger = {
+			NOT = {
+				has_war_with = CHI
+			}
+		}
+		create_wargoal = {
+			type = annex_everything
+			target = MON
+		}
+	}
+	option = {
+		name = krg_mon.17.b	#Too busy not dying!
+		trigger = { 
+			has_war_with = CHI
+		}
+	}
+}
+
+country_event = {
+	#FNG loses the window of opportunity
+	id = krg_mon.18
+	title = krg_mon.18.t
+	desc = krg_mon.18.d
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_mon.18"
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = krg_mon.18.a		#you snooze you lose
+		if = {
+			limit = {
+				has_wargoal_against = MON
+			}
+			remove_wargoal = {
+				type = annex_everything
+				target = MON
+			}
+		}
+	}
+}
+
+#FNG negotiation with the Lamas
+country_event = {
+	id = krg_mon.19
+	title = krg_mon.19.t
+	desc = krg_mon.19.d
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_mon.19"
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = krg_mon.19.a		#send the envoy
+		MON = {
+			country_event = {
+				id = krg_mon.20
+			}
+		}
+	}
+}
+
+country_event = {
+	id = krg_mon.20
+	title = krg_mon.20.t
+	desc = krg_mon.20.d
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_mon.20"
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = krg_mon.20.a		#yeah, we don't care as long as we have our own shit
+		custom_effect_tooltip = MON_annex_warning_tt
+		ai_chance = {
+			base = 70
+		}
+		FNG = {
+			country_event = {
+				id = krg_mon.21
+				days = 5
+			}
+		}
+	}
+	option = {
+		name = krg_mon.20.b		# Independence is awesome
+		ai_chance = {
+			base = 30
+		}
+		FNG = {
+			country_event = {
+				id = krg_mon.22
+				days = 5
+			}
+		}
+	}
+}
+
+country_event = {
+	id = krg_mon.21
+	title = krg_mon.21.t
+	desc = krg_mon.21.d
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_mon.21"
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = krg_mon.21.a		#excellent
+		annex_country = {
+			target = MON
+			transfer_troops = yes
+		}
+	}
+}
+
+country_event = {
+	id = krg_mon.22
+	title = krg_mon.22.t
+	desc = krg_mon.22.d
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_mon.22"
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = krg_mon.22.a		#war it is then
+		declare_war_on = {
+			target = MON
+			type = annex_everything
+		}
+	}
+}
+
+#CHI negotiations with the Republicans/Lamas
+country_event = {
+	id = krg_mon.23
+	title = krg_mon.23.t
+	desc = krg_mon.23.d
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_mon.23"
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = krg_mon.23.a		#send the envoy
+		MON = {
+			country_event = {
+				id = krg_mon.24
+			}
+		}
+	}
+}
+
+country_event = {
+	id = krg_mon.24
+	title = krg_mon.24.t
+	desc = krg_mon.24.d
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_mon.24"
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = krg_mon.24.a		#yeah, we don't care as long as we have our own shit
+		custom_effect_tooltip = MON_annex_warning_tt
+		ai_chance = {
+			base = 70
+		}
+		CHI = {
+			country_event = {
+				id = krg_mon.25
+				days = 5
+			}
+		}
+	}
+	option = {
+		name = krg_mon.24.b		# Independence is awesome
+		ai_chance = {
+			base = 30
+		}
+		CHI = {
+			country_event = {
+				id = krg_mon.26
+				days = 5
+			}
+		}
+	}
+}
+
+country_event = {
+	id = krg_mon.25
+	title = krg_mon.25.t
+	desc = krg_mon.25.d
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_mon.25"
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = krg_mon.25.a		#excellent
+		annex_country = {
+			target = MON
+			transfer_troops = yes
+		}
+	}
+}
+
+country_event = {
+	id = krg_mon.26
+	title = krg_mon.26.t
+	desc = krg_mon.26.d
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_mon.26"
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = krg_mon.26.a		#war it is then
+		declare_war_on = {
+			target = MON
+			type = annex_everything
+		}
+	}
+}
+
+# FNG Ultimatum to Berzarin
+country_event = {
+	id = krg_mon.30
+	title = krg_mon.30.t
+	desc = krg_mon.30.d
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_mon.30"
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = krg_mon.30.a		#send the ultimatum
+		MON = {
+			country_event = {
+				id = krg_mon.32
+			}
+			set_country_flag = MON_FNG_Ultimatum
+		}
+	}
+}
+
+#CHI Ultimatum to Berzarin
+country_event = {
+	id = krg_mon.31
+	title = krg_mon.31.t
+	desc = krg_mon.31.d
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_mon.31"
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = krg_mon.31.a		#send the ultimatum
+		MON = {
+			country_event = {
+				id = krg_mon.32
+			}
+			set_country_flag = MON_CHI_Ultimatum
+		}
+	}
+}
+
+country_event = {
+	#Covie you will need to fix this when you rework Russia in Rel 0.2
+	id = krg_mon.32
+	title = krg_mon.32.t
+	desc = krg_mon.32.d
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_mon.32"
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		trigger = {
+			PRS = {
+				exists = yes
+			}
+			RUS = {
+				exists = yes
+				has_war_with = PRS
+			}
+		}
+		name = krg_mon.32.a		#Request help from Vatutin in Siberia
+		PRS = {
+			country_event = {
+				id = krg_mon.33
+				days = 1
+			}
+		}
+	}
+	option = {
+		trigger = {
+			PRS = {
+				exists = no
+			}
+			RUS = {
+				has_country_leader = {
+					name = RUS_Nikolai_Vatutin
+				}
+			}
+		}
+		name = krg_mon.32.b		#Request help from Vatutin in Moscow
+		RUS = {
+			country_event = {
+				id = krg_mon.34
+				days = 1
+			}
+		}
+	}
+	option = {
+		trigger = {
+			PRS = {
+				exists = no
+			}
+			RUS = {
+				has_country_leader = {
+					name = RUS_Pavel_Gorgulov
+				}
+			}
+		}
+		name = krg_mon.32.c		#Request help from Gorgulov in Moscow :skullemoji:
+		RUS = {
+			country_event = {
+				id = krg_mon.35
+				days = 1
+			}
+		}
+	}
+}
+
+#PRS 'help'
+country_event = {
+	id = krg_mon.33
+	title = krg_mon.33.t
+	desc = krg_mon.33.d
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_mon.33"
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = krg_mon.33.a		#send volunteers and guns, we can't do more
+		ai_chance = {
+			base = 70
+		}
+		MON = {
+			country_event = {
+				id = krg_mon.36
+				days = 1
+			}
+		}
+	}
+	option = {
+		name = krg_mon.33.b		#send just guns, we can't do more
+		ai_chance = {
+			base = 20
+		}
+		MON = {
+			country_event = {
+				id = krg_mon.37
+				days = 1
+			}
+		}
+	}
+	option = {
+		name = krg_mon.33.c		#we can't spare anything rn
+		ai_chance = {
+			base = 10
+		}
+		MON = {
+			country_event = {
+				id = krg_mon.38
+				days = 1
+			}
+		}
+	}
+}
+
+#RUS - Vatutin
+country_event = {
+	id = krg_mon.34
+	title = krg_mon.34.t
+	desc = krg_mon.34.d
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_mon.34"
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = krg_mon.34.a		#return as a protectorate, we'll deal with China
+		ai_chance = {
+			base = 90
+		}
+		MON = {
+			country_event = {
+				id = krg_mon.39
+				days = 1
+			}
+		}
+	}
+	option = {
+		name = krg_mon.34.b		#we have too much work to do to start a war with the chinese!
+		ai_chance = {
+			base = 10
+		}
+		MON = {
+			country_event = {
+				id = krg_mon.38
+				days = 1
+			}
+		}
+	}
+}
+
+#RUS - Gorgulov
+country_event = {
+	id = krg_mon.35
+	title = krg_mon.35.t
+	desc = krg_mon.35.d
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_mon.35"
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = krg_mon.35.a		#the scythians and mongols are brothers. return and we will protect you. At a price.
+		MON = {
+			country_event = {
+				id = krg_mon.41
+				days = 1
+			}
+		}
+	}
+}
+
+#MON - PRS guns and volunteers
+country_event = {
+	id = krg_mon.36
+	title = krg_mon.36.t
+	desc = krg_mon.36.d
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_mon.36"
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = krg_mon.36.a		#best we could have hoped for I suppose, now let's tell them to fuck off.
+		load_oob = MON_PRS_volunteers
+		PRS = {
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = -10000
+			}
+			add_equipment_to_stockpile = {
+				type = support_equipment
+				amount = -20000
+			}
+			add_equipment_to_stockpile = {
+				type = artillery_equipment
+				amount = -1000
+			}
+			add_equipment_to_stockpile = {
+				type = motorized_equipment
+				amount = -1000
+			}
+		}
+		add_equipment_to_stockpile = {
+			type = infantry_equipment
+			amount = 10000
+		}
+		add_equipment_to_stockpile = {
+			type = support_equipment
+			amount = 20000
+		}
+		add_equipment_to_stockpile = {
+			type = artillery_equipment
+			amount = 1000
+		}
+		add_equipment_to_stockpile = {
+			type = motorized_equipment
+			amount = 1000
+		}
+		if = {
+			limit = {
+				has_country_flag = MON_FNG_Ultimatum
+			}
+			FNG = {
+				country_event = {
+					id = krg_mon.43
+				}
+			}
+		}
+		if = {
+			limit = {
+				has_country_flag = MON_CHI_Ultimatum
+			}
+			CHI = {
+				country_event = {
+					id = krg_mon.43
+				}
+			}
+		}
+	}
+}
+
+#MON - PRS guns 
+country_event = {
+	id = krg_mon.37
+	title = krg_mon.37.t
+	desc = krg_mon.37.d
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_mon.37"
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = krg_mon.37.a		#best we could have hoped for I suppose, now let's tell them to fuck off.
+		PRS = {
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = -10000
+			}
+			add_equipment_to_stockpile = {
+				type = support_equipment
+				amount = -20000
+			}
+			add_equipment_to_stockpile = {
+				type = artillery_equipment
+				amount = -1000
+			}
+			add_equipment_to_stockpile = {
+				type = motorized_equipment
+				amount = -1000
+			}
+		}
+		add_equipment_to_stockpile = {
+			type = infantry_equipment
+			amount = 10000
+		}
+		add_equipment_to_stockpile = {
+			type = support_equipment
+			amount = 20000
+		}
+		add_equipment_to_stockpile = {
+			type = artillery_equipment
+			amount = 1000
+		}
+		add_equipment_to_stockpile = {
+			type = motorized_equipment
+			amount = 1000
+		}
+		if = {
+			limit = {
+				has_country_flag = MON_FNG_Ultimatum
+			}
+			FNG = {
+				country_event = {
+					id = krg_mon.43
+				}
+			}
+		}
+		if = {
+			limit = {
+				has_country_flag = MON_CHI_Ultimatum
+			}
+			CHI = {
+				country_event = {
+					id = krg_mon.43
+				}
+			}
+		}
+	}
+}
+
+#MON - PRS sucks
+country_event = {
+	id = krg_mon.38
+	title = krg_mon.38.t
+	desc = krg_mon.38.d
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_mon.38"
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = krg_mon.38.a		#Fuck it. Surrender then rather than die pointlessly
+		ai_chance = {
+			base = 1
+		}
+		if = {
+			limit = {
+				has_country_flag = MON_FNG_Ultimatum
+			}
+			FNG = {
+				country_event = {
+					id = krg_mon.42
+				}
+			}
+		}
+		if = {
+			limit = {
+				has_country_flag = MON_CHI_Ultimatum
+			}
+			CHI = {
+				country_event = {
+					id = krg_mon.42
+				}
+			}
+		}
+	}
+	option = {
+		name = krg_mon.38.b		#Fuck it. No Surrender!
+		ai_chance = {
+			base = 99
+		}
+		if = {
+			limit = {
+				has_country_flag = MON_FNG_Ultimatum
+			}
+			FNG = {
+				country_event = {
+					id = krg_mon.43
+				}
+			}
+		}
+		if = {
+			limit = {
+				has_country_flag = MON_CHI_Ultimatum
+			}
+			CHI = {
+				country_event = {
+					id = krg_mon.43
+				}
+			}
+		}
+	}
+}
+
+#MON - RUS will save us?!
+country_event = {
+	id = krg_mon.39
+	title = krg_mon.39.t
+	desc = krg_mon.39.d
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_mon.39"
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = krg_mon.39.a		#Better this than China.
+		add_ideas = MON_russian_yoke
+		RUS = {
+			MON = {
+				get_current_government_type = yes
+			}
+			if = {
+				limit = {
+					has_subject_autonomy_feature = yes
+				}
+				set_autonomy = {
+					target = MON
+					autonomous_state = krg_protectorate
+				}
+			}
+			else = {
+				puppet = MON
+			}
+			save_event_target_as = on_puppet_master_tag
+			MON = {
+				standard_on_puppet_effect = yes
+				restore_previous_government_type = yes
+			}
+		}
+		if = {
+			limit = {
+				has_country_flag = MON_FNG_Ultimatum
+			}
+			FNG = {
+				country_event = {
+					id = krg_mon.40
+				}
+			}
+		}
+		if = {
+			limit = {
+				has_country_flag = MON_CHI_Ultimatum
+			}
+			CHI = {
+				country_event = {
+					id = krg_mon.40
+				}
+			}
+		}
+	}
+}
+
+#Chinese - Russia has taken the puppet
+country_event = {
+	id = krg_mon.40
+	title = krg_mon.40.t
+	desc = krg_mon.40.d
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_mon.39"
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = krg_mon.40.a		#Well that sucks
+		add_political_power = -40
+		ai_chance = {
+			base = 100
+		}
+	}
+	# option = {
+	# 	trigger = {
+	# 		PREV = { is_ai = no }
+	# 	}
+	# 	name = krg_mon.40.b #Time to start a landwar in ASIA!!!
+	# 	declare_war_on = {
+	# 		target = MON
+	# 		type = annex_everything
+	# 	}
+	# 	ai_chance = {
+	# 		factor = 0
+	# 	}
+	# }
+}
+
+#MON - RUS will save us?!
+country_event = {
+	id = krg_mon.41
+	title = krg_mon.41.t
+	desc = krg_mon.41.d
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_mon.41"
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = krg_mon.41.a		#Better this than China.
+		add_ideas = MON_russian_yoke
+		hidden_effect = {
+			coal_rev_all = yes
+		}
+		set_politics = {
+			ruling_party = national_populist
+			elections_allowed = no
+		}
+		coal_add_pat_aut = yes
+		RUS = {
+			MON = {
+				get_current_government_type = yes
+			}
+			if = {
+				limit = {
+					has_subject_autonomy_feature = yes
+				}
+				set_autonomy = {
+					target = MON
+					autonomous_state = krg_military_occupation
+				}
+			}
+			else = {
+				puppet = MON
+			}
+			save_event_target_as = on_puppet_master_tag
+			MON = {
+				standard_on_puppet_effect = yes
+				restore_previous_government_type = yes
+			}
+		}
+		if = {
+			limit = {
+				has_country_flag = MON_FNG_Ultimatum
+			}
+			FNG = {
+				country_event = {
+					id = krg_mon.40
+				}
+			}
+		}
+		if = {
+			limit = {
+				has_country_flag = MON_CHI_Ultimatum
+			}
+			CHI = {
+				country_event = {
+					id = krg_mon.40
+				}
+			}
+		}
+	}
+}
+
+#Chinese - the Mongolians surrender
+country_event = {
+	id = krg_mon.42
+	title = krg_mon.42.t
+	desc = krg_mon.42.d
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_mon.42"
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = krg_mon.42.a		#Excellent
+		annex_country = {
+			target = MON
+			transfer_troops = yes
+		}
+	}
+}
+
+#Chinese - the Mongolians refuse
+country_event = {
+	id = krg_mon.43
+	title = krg_mon.43.t
+	desc = krg_mon.43.d
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_mon.43"
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		trigger = {
+		NOT = {	
+			PREV = { 
+				OR = { 
+						has_war_with = CHI
+						has_war_with = FNG 
+					}
+				}
+			}
+		}
+		name = krg_mon.43.a		#To Arms!
+		declare_war_on = {
+			target = MON
+			type = annex_everything
+		}
+	}
+	option = {
+		trigger = {
+			PREV = { 
+				OR = { 
+						has_war_with = CHI
+						has_war_with = FNG 
+					}
+				}
+			}
+		name = krg_mon.43.b		#We'll get you later
+	}
+}

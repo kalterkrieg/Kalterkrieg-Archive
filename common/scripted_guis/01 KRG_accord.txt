@@ -1,0 +1,223 @@
+scripted_gui = {
+	KRG_accord_voting = {
+		context_type = decision_category
+		window_name = "KRG_accord_voting_container"
+		dirty = show_KRG_accord_voting
+
+		visible = {
+			always = yes
+		}
+
+		dynamic_lists = {
+			KRG_accord_voting_bar_grid = {
+				array = global.accord_voting_bar_array
+				change_scope = no
+				entry_container = "[GetAccordVotingBar]"
+			}
+			KRG_accord_voting_country_grid = {
+				array = global.accord_voting_country_array
+				index = accord_voting_country_index
+				change_scope = yes
+				entry_container = KRG_accord_voting_country_entry
+			}
+		}
+
+		triggers = {
+			accord_voting_days_left_visible = {
+				check_variable = { global.accord_issue > 0 }
+			}
+			accord_voting_whip_button_visible = {
+				NOT = {
+					check_variable = { accord_vote = ROOT.accord_vote }
+				}
+				NOT = {
+					is_in_array = { global.accord_voting_major_country_array = THIS }
+				}
+				is_in_array = { global.accord_voting_major_country_array = ROOT }
+				check_variable = { accord_vote > 0 }
+			}
+			accord_voting_yes_bar_visible = {
+				check_variable = { global.accord_yes_vote > 0 }
+			}
+			accord_voting_abstain_bar_visible = {
+				check_variable = { global.accord_abstain_vote > 0 }
+			}
+			accord_voting_no_bar_visible = {
+				check_variable = { global.accord_total_vote > 0 }
+			}
+			accord_voting_whip_button_click_enabled = {
+				NOT = { has_country_flag = accord_vote_whipped }
+			}
+			accord_vote_yes_button_click_enabled = {
+				NOT = {
+					custom_trigger_tooltip = {
+						tooltip = accord_voted_tt
+						check_variable = { accord_vote > 0 }
+					}
+				}
+			}
+			accord_abstain_button_click_enabled = {
+				NOT = {
+					custom_trigger_tooltip = {
+						tooltip = accord_voted_tt
+						check_variable = { accord_vote > 0 }
+					}
+				}
+			}
+			accord_vote_no_button_click_enabled = {
+				NOT = {
+					custom_trigger_tooltip = {
+						tooltip = accord_voted_tt
+						check_variable = { accord_vote > 0 }
+					}
+				}
+			}
+		}
+
+		effects = {
+			accord_voting_whip_button_click = {
+				accord_whip_effect = yes
+			}
+			accord_vote_yes_button_click = {
+				set_variable = { accord_vote = 1 }
+				add_to_variable = { global.accord_yes_vote = 1 }
+				accord_vote_effect = yes
+				#TODO add colonial policy voting restrictions
+			}
+			accord_abstain_button_click = {
+				set_variable = { accord_vote = 2 }
+				add_to_variable = { global.accord_abstain_vote = 1 }
+				accord_vote_effect = yes
+			}
+			accord_vote_no_button_click = {
+				set_variable = { accord_vote = 3 }
+				add_to_variable = { global.accord_no_vote = 1 }
+				accord_vote_effect = yes
+			}
+		}
+
+		properties = {
+			accord_voting_yes_bar = {
+				frame = global.accord_percentage^0
+			}
+			accord_voting_abstain_bar = {
+				frame = global.accord_bar_frame
+			}
+			accord_voting_no_bar = {
+				frame = 100
+			}
+			accord_voting_country_flag = {
+				image = "[THIS.GetFlag]"
+			}
+			accord_voting_country_frame = {
+				image = "[THIS.GetAccordFrame]"
+			}
+		}
+	}
+
+	KRG_accord_voting_ai = {
+		context_type = player_context
+		window_name = "KRG_accord_voting_ai_container"
+
+		visible = {
+			is_ai = yes
+			is_in_array = { global.accord_voting_country_array = THIS }
+		}
+
+		triggers = {
+			accord_ai_vote_yes_button_click_enabled = {
+				check_variable = { global.accord_issue > 0 }
+				check_variable = { accord_vote = 0 }
+			}
+			accord_ai_abstain_button_click_enabled = {
+				check_variable = { global.accord_issue > 0 }
+				check_variable = { accord_vote = 0 }
+			}
+			accord_ai_vote_no_button_click_enabled = {
+				check_variable = { global.accord_issue > 0 }
+				check_variable = { accord_vote = 0 }
+			}
+		}
+
+		effects = {
+			accord_ai_vote_yes_button_click = {
+				if = {
+					limit = { has_variable = accord_vote_block }
+					clear_variable = accord_vote_block
+					set_variable = { accord_vote = 1 }
+					add_to_variable = { global.accord_yes_vote = 1 }
+					accord_vote_effect = yes
+				}
+				else = {
+					set_variable = { accord_vote_block = 1 }
+				}
+			}
+			accord_ai_abstain_button_click = {
+				if = {
+					limit = { has_variable = accord_vote_block }
+					clear_variable = accord_vote_block
+					set_variable = { accord_vote = 2 }
+					add_to_variable = { global.accord_abstain_vote = 1 }
+					accord_vote_effect = yes
+				}
+				else = {
+					set_variable = { accord_vote_block = 1 }
+				}
+			}
+			accord_ai_vote_no_button_click = {
+				if = {
+					limit = { has_variable = accord_vote_block }
+					clear_variable = accord_vote_block
+					set_variable = { accord_vote = 3 }
+					add_to_variable = { global.accord_no_vote = 1 }
+					accord_vote_effect = yes
+				}
+				else = {
+					set_variable = { accord_vote_block = 1 }
+				}
+			}
+		}
+
+		ai_enabled = {
+			always = yes
+        }
+
+		ai_test_interval = 120
+		ai_test_variance = 0.5
+
+		ai_check = {
+			check_variable = { global.accord_issue > 0 }
+			check_variable = { accord_vote = 0 }
+        }
+
+		ai_weights = {
+			accord_ai_vote_yes_button_click = {
+				ai_will_do = {
+					base = -1
+					modifier = {
+						check_variable = { accord_ai_vote_choice = 1 }
+						add = 10
+					}
+				}
+			}
+			accord_ai_abstain_button_click = {
+				ai_will_do = {
+					base = -1
+					modifier = {
+						check_variable = { accord_ai_vote_choice = 2 }
+						add = 10
+					}
+				}
+			}
+			accord_ai_vote_no_button_click = {
+				ai_will_do = {
+					base = -1
+					modifier = {
+						check_variable = { accord_ai_vote_choice = 3 }
+						add = 10
+					}
+				}
+			}
+		}
+	}
+}

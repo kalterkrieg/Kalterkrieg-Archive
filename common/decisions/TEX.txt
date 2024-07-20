@@ -1,0 +1,7909 @@
+TEX_factionalism = {
+	TEX_primary_divider = {
+		#icon = GFX_decision_generic_speech
+		priority = 100
+		visible = {
+			has_country_flag = TEX_primary_elections
+		}
+		available = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete TEX_primary_divider target: [From.GetName]"
+		}
+	}
+	TEX_primary_election_mission = {
+		icon = GFX_decision_election
+		allowed = {
+			always = no
+		}
+		available = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+		priority = 99
+		days_mission_timeout = 30
+		#days_re_enable = 1
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout TEX_primary_election_mission target: [From.GetName]"
+			hidden_effect = {
+				if = {
+					limit = {
+						TEX_has_election2 = yes
+					}
+					activate_mission = TEX_primary_election_mission
+					activate_mission = TEX_opposition_electoral1
+					activate_mission = TEX_opposition_electoral2
+				}
+			}
+			TEX = {
+				TEX_Election_Calculation_of_State = yes
+				country_event = {
+					id = tex.elections.2
+					days = 0
+				}
+			}
+			set_variable = {
+				TEX_primary_mana = 100
+			}
+		}
+	}
+	TEX_general_election_mission = {
+		icon = GFX_decision_election
+		available = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+		activation = {
+			always = no #triggered by event
+		}
+		priority = 98
+		is_good = yes
+		fire_only_once = yes
+		selectable_mission = no
+		days_mission_timeout = 306
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout TEX_general_election_mission target: [From.GetName]"
+			activate_mission = TEX_inauguration_mission
+			if = {
+				limit = {
+					date < 1949.1.1
+				}
+				country_event = {
+					id = tex.elections.1948
+				}
+			}
+			if = {
+				limit = {
+					date > 1949.1.1
+					date < 1953.1.1
+				}
+				country_event = {
+					id = tex.elections.1952
+				}
+			}
+			if = {
+				limit = {
+					date > 1953.1.1
+					date < 1957.1.1
+				}
+				country_event = {
+					id = tex.elections.1956
+				}
+			}
+		}
+	}
+	TEX_inauguration_mission = {
+		available = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+		activation = {
+			always = no #triggered by event
+		}
+		priority = 98
+		is_good = yes
+		fire_only_once = yes
+		selectable_mission = no
+		days_mission_timeout = 79 
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout TEX_inauguration_mission target: [From.GetName]"
+			hidden_effect = {
+				if = {
+					limit = {
+						check_variable = {
+							AFP_candidate_election = 1
+						}
+					}
+					if = {
+						limit = {
+							date < 1950.1.1
+						}
+						country_event = tex.elections.213
+					}
+					else_if = {
+						limit = {
+							date > 1950.1.1
+							date < 1954.1.1
+						}
+						if = {
+							limit = {
+								NOT = {
+									has_country_flag = long2_available
+								}
+							}
+							country_event = tex.elections.216
+						}
+						else_if = {
+							limit = {
+								has_country_flag = long2_available
+							}
+							country_event = tex.elections.219
+						}
+					}
+					else_if = {
+						limit = {
+							date > 1954.1.1
+						}
+						# TODO: Fix 1956 election
+						country_event = tex.elections.216
+					}
+				}
+				if = {
+					limit = {
+						check_variable = {
+							AFP_candidate_election = 2
+						}
+					}
+					if = {
+						limit = {
+							date < 1950.1.1
+						}
+						country_event = tex.elections.214
+					}
+					else_if = {
+						limit = {
+							date > 1950.1.1
+							date < 1954.1.1
+						}
+						if = {
+							limit = {
+								NOT = {
+									has_country_flag = thurmond_available
+								}
+							}
+							country_event = tex.elections.217
+						}
+						else_if = {
+							limit = {
+								has_country_flag = thurmond_available
+							}
+							country_event = tex.elections.220
+						}
+					}
+					else_if = {
+						limit = {
+							date > 1954.1.1
+						}
+						# TODO: Fix 1956 election
+						country_event = tex.elections.217
+					}
+				}
+				if = {
+					limit = {
+						check_variable = {
+							AFP_candidate_election = 3
+						}
+					}
+					if = {
+						limit = {
+							date < 1950.1.1
+						}
+						country_event = tex.elections.215
+					}
+					else_if = {
+						limit = {
+							date > 1950.1.1
+							date < 1954.1.1
+						}
+						if = {
+							limit = {
+								NOT = {
+									has_country_flag = arnall_available
+								}
+							}
+							country_event = tex.elections.218
+						}
+						else_if = {
+							limit = {
+								has_country_flag = arnall_available
+							}
+							country_event = tex.elections.221
+						}
+					}
+					else_if = {
+						limit = {
+							date > 1954.1.1
+						}
+						# TODO: Fix 1956 election
+						country_event = tex.elections.218
+					}
+				}
+			}
+		}
+	}
+	TEX_primary_attack_conservatives = {
+		icon = eng_propaganda_campaigns
+		visible = {
+			AND = {
+				has_country_flag = TEX_primary_elections
+				TEX_has_election = yes
+				NOT = {
+					check_variable = {
+						primary_candidate = 1
+					}
+				}
+			}
+		}
+		available = {
+			TEX_has_election = yes
+			custom_trigger_tooltip = {
+				tooltip = TEX_custom_tt_days_left_decision
+				check_variable = {
+					TEX.days_mission_timeout@TEX_primary_election_mission > 10
+				}
+			}
+			TEX_can_attack_conservatives = yes
+		}
+		custom_cost_trigger = {
+			if = {
+				limit = {
+					check_variable = {
+						primary_candidate = 0
+					}
+				}
+				check_variable = {
+					TEX_primary_mana > 4
+				}
+			}
+			if = {
+				limit = {
+					check_variable = {
+						primary_candidate = 2
+					}
+				}
+				check_variable = {
+					TEX_primary_mana > 14
+				}
+			}
+		}
+		custom_cost_text = TEX_primary_cost
+		days_remove = 10
+		fire_only_once = no
+		priority = 97
+		ai_will_do = {
+			base = 10.5
+			modifier = {
+				OR = {
+					check_variable = {
+						primary_candidate = 1
+					}
+					if = {
+						limit = {
+							check_variable = {
+								primary_candidate = 0
+							}
+						}
+						check_variable = {
+							TEX_primary_mana < 4
+						}
+					}
+					if = {
+						limit = {
+							check_variable = {
+								primary_candidate = 2
+							}
+						}
+						check_variable = {
+							TEX_primary_mana < 15
+						}
+					}
+					TEX_can_attack_conservatives = no
+				}
+				factor = 0
+			}
+			modifier = {
+				NOT = {
+					check_variable = {
+						primary_candidate = 1
+					}
+				}
+				if = {
+					limit = {
+						check_variable = {
+							primary_candidate = 0
+						}
+					}
+					check_variable = {
+						TEX_primary_mana > 4
+					}
+				}
+				if = {
+					limit = {
+						check_variable = {
+							primary_candidate = 2
+						}
+					}
+					check_variable = {
+						TEX_primary_mana > 14
+					}
+				}
+				TEX_can_attack_conservatives = yes
+				factor = 10
+			}
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete TEX_primary_attack_conservatives target: [From.GetName]"
+			TEX_primary_remove_political_power = yes
+			set_temp_variable = {
+				TEX_ea_victim = 1
+			}
+			set_temp_variable = {
+				TEX_ea_attacker = primary_candidate
+			}
+			if = {
+				limit = {
+					check_variable = {
+						primary_candidate = 2
+					}
+				}
+				set_temp_variable = {
+					TEX_ea_attacker = 3
+				}
+			}
+			TEX_electoral_attack = yes
+		}
+	}
+	TEX_primary_attack_progressives = {
+		icon = eng_propaganda_campaigns
+		visible = {
+			AND = {
+				has_country_flag = TEX_primary_elections
+				TEX_has_election = yes
+				NOT = {
+					check_variable = {
+						primary_candidate = 2
+					}
+				}
+			}
+		}
+		available = {
+			TEX_has_election = yes
+			custom_trigger_tooltip = {
+				tooltip = TEX_custom_tt_days_left_decision
+				check_variable = {
+					TEX.days_mission_timeout@TEX_primary_election_mission > 10
+				}
+			}
+			TEX_can_attack_progressive = yes
+		}
+		custom_cost_trigger = {
+			if = {
+				limit = {
+					check_variable = {
+						primary_candidate = 0
+					}
+				}
+				check_variable = {
+					TEX_primary_mana > 4
+				}
+			}
+			if = {
+				limit = {
+					check_variable = {
+						primary_candidate = 1
+					}
+				}
+				check_variable = {
+					TEX_primary_mana > 9
+				}
+			}
+		}
+		custom_cost_text = TEX_primary_cost
+		days_remove = 10
+		fire_only_once = no
+		priority = 96
+		ai_will_do = {
+			base = 10.5
+			modifier = {
+				OR = {
+					check_variable = {
+						primary_candidate = 2
+					}
+					if = {
+						limit = {
+							check_variable = {
+								primary_candidate = 0
+							}
+						}
+						check_variable = {
+							TEX_primary_mana < 5
+						}
+					}
+					if = {
+						limit = {
+							check_variable = {
+								primary_candidate = 1
+							}
+						}
+						check_variable = {
+							TEX_primary_mana < 10
+						}
+					}
+					TEX_can_attack_progressive = no
+				}
+				factor = 0
+			}
+			modifier = {
+				NOT = {
+					check_variable = {
+						primary_candidate = 2
+					}
+				}
+				if = {
+					limit = {
+						check_variable = {
+							primary_candidate = 0
+						}
+					}
+					check_variable = {
+						TEX_primary_mana > 4
+					}
+				}
+				if = {
+					limit = {
+						check_variable = {
+							primary_candidate = 1
+						}
+					}
+					check_variable = {
+						TEX_primary_mana > 9
+					}
+				}
+				TEX_can_attack_progressive = yes
+				factor = 10
+			}
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete TEX_primary_attack_progressives target: [From.GetName]"
+			TEX_primary_remove_political_power = yes
+			set_temp_variable = {
+				TEX_ea_victim = 3
+			}
+			set_temp_variable = {
+				TEX_ea_attacker = primary_candidate
+			}
+			TEX_electoral_attack = yes
+		}
+	}
+	TEX_primary_attack_orthodox = {
+		icon = eng_propaganda_campaigns
+		visible = {
+			AND = {
+				has_country_flag = TEX_primary_elections
+				TEX_has_election = yes
+				NOT = {
+					check_variable = {
+						primary_candidate = 0
+					}
+				}
+			}
+		}
+		available = {
+			TEX_has_election = yes
+			custom_trigger_tooltip = {
+				tooltip = TEX_custom_tt_days_left_decision
+				check_variable = {
+					TEX.days_mission_timeout@TEX_primary_election_mission > 10
+				}
+			}
+			TEX_can_attack_orthodox = yes
+		}
+		custom_cost_trigger = {
+			if = {
+				limit = {
+					check_variable = {
+						primary_candidate = 1
+					}
+				}
+				check_variable = {
+					TEX_primary_mana > 9
+				}
+			}
+			if = {
+				limit = {
+					check_variable = {
+						primary_candidate = 2
+					}
+				}
+				check_variable = {
+					TEX_primary_mana > 14
+				}
+			}
+		}
+		custom_cost_text = TEX_primary_cost
+		days_remove = 10
+		fire_only_once = no
+		priority = 95
+		ai_will_do = {
+			base = 10.5
+			modifier = {
+				OR = {
+					check_variable = {
+						primary_candidate = 0
+					}
+					if = {
+						limit = {
+							check_variable = {
+								primary_candidate = 1
+							}
+						}
+						check_variable = {
+							TEX_primary_mana < 10
+						}
+					}
+					if = {
+						limit = {
+							check_variable = {
+								primary_candidate = 2
+							}
+						}
+						check_variable = {
+							TEX_primary_mana < 15
+						}
+					}
+					TEX_can_attack_orthodox = no
+				}
+				factor = 0
+			}
+			modifier = {
+				NOT = {
+					check_variable = {
+						primary_candidate = 0
+					}
+				}
+				if = {
+					limit = {
+						check_variable = {
+							primary_candidate = 1
+						}
+					}
+					check_variable = {
+						TEX_primary_mana > 9
+					}
+				}
+				if = {
+					limit = {
+						check_variable = {
+							primary_candidate = 2
+						}
+					}
+					check_variable = {
+						TEX_primary_mana > 14
+					}
+				}
+				TEX_can_attack_orthodox = yes
+				factor = 10
+			}
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete TEX_primary_attack_orthodox target: [From.GetName]"
+			TEX_primary_remove_political_power = yes
+			set_temp_variable = {
+				TEX_ea_victim = 0
+			}
+			set_temp_variable = {
+				TEX_ea_attacker = primary_candidate
+			}
+			if = {
+				limit = {
+					check_variable = {
+						primary_candidate = 2
+					}
+				}
+				set_temp_variable = {
+					TEX_ea_attacker = 3
+				}
+			}
+			TEX_electoral_attack = yes
+		}
+	}
+	#Rallies
+	TEX_primary_orthodox_rally = {
+		icon = eng_propaganda_campaigns
+		visible = {
+			AND = {
+				has_country_flag = TEX_primary_elections
+				#always = yes
+				TEX_has_election = yes
+				check_variable = {
+					primary_candidate = 0
+				}
+			}
+		}
+		available = {
+			TEX_has_election = yes
+			custom_trigger_tooltip = {
+				tooltip = TEX_custom_tt_days_left_decision
+				check_variable = {
+					TEX.days_mission_timeout@TEX_primary_election_mission > 10
+				}
+			}
+			TEX_can_rally_orthodox = yes
+		}
+		custom_cost_text = TEX_primary_cost
+		custom_cost_trigger = {
+			check_variable = {
+				TEX_primary_mana > 4
+			}
+		}
+		days_remove = 10
+		fire_only_once = no
+		priority = 94
+		ai_will_do = {
+			base = 10.5
+			modifier = {
+				OR = {
+					NOT = {
+						check_variable = {
+							primary_candidate = 0
+						}
+					}
+					check_variable = {
+						TEX_primary_mana < 5
+					}
+					TEX_can_rally_orthodox = no
+				}
+				factor = 0
+			}
+			modifier = {
+				check_variable = {
+					primary_candidate = 0
+				}
+				check_variable = {
+					TEX_primary_mana > 4
+				}
+				TEX_can_rally_orthodox = yes
+				factor = 10
+			}
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete TEX_primary_orthodox_rally target: [From.GetName]"
+			TEX_primary_remove_political_power = yes
+			set_temp_variable = {
+				TEX_er_who = 0
+			}
+			set_temp_variable = {
+				TEX_er_op1 = 3
+			}
+			set_temp_variable = {
+				TEX_er_op2 = 1
+			}
+			TEX_electoral_rally = yes
+		}
+	}
+	TEX_primary_conservative_rally = {
+		icon = eng_propaganda_campaigns
+		visible = {
+			AND = {
+				has_country_flag = TEX_primary_elections
+				#always = yes
+				TEX_has_election = yes
+				check_variable = {
+					primary_candidate = 1
+				}
+			}
+		}
+		available = {
+			TEX_has_election = yes
+			custom_trigger_tooltip = {
+				tooltip = TEX_custom_tt_days_left_decision
+				check_variable = {
+					TEX.days_mission_timeout@TEX_primary_election_mission > 10
+				}
+			}
+			TEX_can_rally_conservatives = yes
+		}
+		custom_cost_text = TEX_primary_cost
+		custom_cost_trigger = {
+			check_variable = {
+				TEX_primary_mana > 9
+			}
+		}
+		days_remove = 10
+		fire_only_once = no
+		priority = 93
+		ai_will_do = {
+			base = 10.5
+			modifier = {
+				OR = {
+					NOT = {
+						check_variable = {
+							primary_candidate = 1
+						}
+					}
+					check_variable = {
+						TEX_primary_mana < 10
+					}
+					TEX_can_rally_conservatives = no
+				}
+				factor = 0
+			}
+			modifier = {
+				check_variable = {
+					primary_candidate = 1
+				}
+				check_variable = {
+					TEX_primary_mana > 9
+				}
+				TEX_can_rally_conservatives = yes
+				factor = 10
+			}
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete TEX_primary_conservative_rally target: [From.GetName]"
+			TEX_primary_remove_political_power = yes
+			set_temp_variable = {
+				TEX_er_who = 1
+			}
+			set_temp_variable = {
+				TEX_er_op1 = 3
+			}
+			set_temp_variable = {
+				TEX_er_op2 = 0
+			}
+			TEX_electoral_rally = yes
+		}
+	}
+	TEX_primary_progressive_rally = {
+		icon = eng_propaganda_campaigns
+		visible = {
+			AND = {
+				has_country_flag = TEX_primary_elections
+				#always = yes
+				TEX_has_election = yes
+				check_variable = {
+					primary_candidate = 2
+				}
+			}
+		}
+		available = {
+			TEX_has_election = yes
+			custom_trigger_tooltip = {
+				tooltip = TEX_custom_tt_days_left_decision
+				check_variable = {
+					TEX.days_mission_timeout@TEX_primary_election_mission > 10
+				}
+			}
+			TEX_can_rally_progressive = yes
+		}
+		custom_cost_text = TEX_primary_cost
+		custom_cost_trigger = {
+			check_variable = {
+				TEX_primary_mana > 14
+			}
+		}
+		days_remove = 10
+		fire_only_once = no
+		priority = 92
+		ai_will_do = {
+			base = 10.5
+			modifier = {
+				OR = {
+					NOT = {
+						check_variable = {
+							primary_candidate = 2
+						}
+					}
+					check_variable = {
+						TEX_primary_mana < 15
+					}
+					TEX_can_rally_progressive = no
+				}
+				factor = 0
+			}
+			modifier = {
+				check_variable = {
+					primary_candidate = 2
+				}
+				check_variable = {
+					TEX_primary_mana > 14
+				}
+				TEX_can_rally_progressive = yes
+				factor = 10
+			}
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete TEX_primary_progressive_rally target: [From.GetName]"
+			TEX_primary_remove_political_power = yes
+			set_temp_variable = {
+				TEX_er_who = 3
+			}
+			set_temp_variable = {
+				TEX_er_op1 = 1
+			}
+			set_temp_variable = {
+				TEX_er_op2 = 0
+			}
+			TEX_electoral_rally = yes
+		}
+	}
+	### Opposition has to do stuff too!
+	TEX_opposition_electoral1 = {
+		icon = hol_radio_oranje
+		fixed_random_seed = no
+		allowed = {
+			tag = TEX
+		}
+		available = {
+			always = no
+		}
+		activation = {
+			has_active_mission = TEX_primary_election_mission
+		}
+		days_mission_timeout = 10
+		#days_re_enable = 0
+		is_good = no
+		selectable_mission = no
+		priority = 91
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout TEX_opposition_electoral1 target: [From.GetName]"
+			hidden_effect = {
+				if = {
+					limit = {
+						check_variable = {
+							TEX.days_mission_timeout@TEX_primary_election_mission > 10
+						}
+					}
+					activate_mission = TEX_opposition_electoral1
+				}
+			}
+			TEX_electoral_random = yes
+		}
+	}
+	TEX_opposition_electoral2 = {
+		icon = hol_radio_oranje
+		fixed_random_seed = no
+		allowed = {
+			tag = TEX
+		}
+		available = {
+			always = no
+		}
+		activation = {
+			has_active_mission = TEX_primary_election_mission
+		}
+		days_mission_timeout = 10
+		days_re_enable = 0
+		is_good = no
+		selectable_mission = no
+		priority = 90
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout TEX_opposition_electoral2 target: [From.GetName]"
+			hidden_effect = {
+				if = {
+					limit = {
+						check_variable = {
+							TEX.days_mission_timeout@TEX_primary_election_mission > 10
+						}
+					}
+					activate_mission = TEX_opposition_electoral2
+				}
+			}
+			TEX_electoral_random2 = yes
+		}
+	}
+	###DIVIDER ###
+	TEX_factionalism_divider = {
+		#icon = GFX_decision_generic_speech
+		visible = {
+			TEX_has_election = no
+			always = no
+		}
+		available = {
+			always = no
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete TEX_factionalism_divider target: [From.GetName]"
+		}
+	}
+	###FACTIONALISM###
+	TEX_factionalism_increase_orthodox = {
+		icon = GFX_decision_generic_speech
+		visible = {
+			NOT = {
+				check_variable = {
+					TEX_factionalism_current = 0
+				}
+			}
+			TEX_has_election = no
+			always = no
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = TEX_can_increase_loyalty
+				NOT = {
+					OR = {
+						check_variable = {
+							TEX_factionalism_orthodox_loyalty = 100
+						}
+						check_variable = {
+							TEX_factionalism_orthodox_loyalty > 100
+						}
+					}
+				}
+			}
+			custom_trigger_tooltip = {
+				tooltip = TEX_orthodox_not_ruling_faction
+				NOT = {
+					check_variable = {
+						TEX_factionalism_current = 0
+					}
+				}
+			}
+			has_political_power > 99
+		}
+		cost = 100
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete TEX_factionalism_increase_orthodox target: [From.GetName]"
+			set_temp_variable = {
+				TEX_factionalism_pop = 5
+			}
+			TEX_factionalism_add_pop_orthodox = yes
+		}
+	}
+	TEX_factionalism_increase_conservative = {
+		icon = GFX_decision_generic_speech
+		visible = {
+			NOT = {
+				check_variable = {
+					TEX_factionalism_current = 1
+				}
+			}
+			TEX_has_election = no
+			always = no
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = TEX_can_increase_loyalty
+				NOT = {
+					OR = {
+						check_variable = {
+							TEX_factionalism_conservative_loyalty = 100
+						}
+						check_variable = {
+							TEX_factionalism_conservative_loyalty > 100
+						}
+					}
+				}
+			}
+			custom_trigger_tooltip = {
+				tooltip = TEX_conservative_not_ruling_faction
+				NOT = {
+					check_variable = {
+						TEX_factionalism_current = 1
+					}
+				}
+			}
+			has_political_power > 99
+		}
+		cost = 100
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete TEX_factionalism_increase_conservative target: [From.GetName]"
+			set_temp_variable = {
+				TEX_factionalism_pop = 5
+			}
+			TEX_factionalism_add_pop_conservative = yes
+		}
+	}
+	TEX_factionalism_increase_progressive = {
+		icon = GFX_decision_generic_speech
+		visible = {
+			NOT = {
+				check_variable = {
+					TEX_factionalism_current = 2
+				}
+			}
+			TEX_has_election = no
+			always = no
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = TEX_can_increase_loyalty
+				NOT = {
+					OR = {
+						check_variable = {
+							TEX_factionalism_progressive_loyalty = 100
+						}
+						check_variable = {
+							TEX_factionalism_progressive_loyalty > 100
+						}
+					}
+				}
+			}
+			custom_trigger_tooltip = {
+				tooltip = TEX_progressive_not_ruling_faction
+				NOT = {
+					check_variable = {
+						TEX_factionalism_current = 2
+					}
+				}
+			}
+			has_political_power > 99
+		}
+		cost = 100
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete TEX_factionalism_increase_progressive target: [From.GetName]"
+			set_temp_variable = {
+				TEX_factionalism_pop = 5
+			}
+			TEX_factionalism_add_pop_progressive = yes
+		}
+	}
+	TEX_factionalism_discredit_orthodox = {
+		icon = GFX_decision_eng_propaganda_campaigns
+		visible = {
+			NOT = {
+				check_variable = {
+					TEX_factionalism_current = 0
+				}
+			}
+			TEX_has_election = no
+			always = no
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = TEX_can_decrease_loyalty
+				NOT = {
+					OR = {
+						check_variable = {
+							TEX_factionalism_orthodox_loyalty = 0
+						}
+						check_variable = {
+							TEX_factionalism_orthodox_loyalty < 0
+						}
+					}
+				}
+			}
+			custom_trigger_tooltip = {
+				tooltip = TEX_orthodox_not_ruling_faction
+				NOT = {
+					check_variable = {
+						TEX_factionalism_current = 0
+					}
+				}
+			}
+			has_political_power > 99
+		}
+		cost = 100
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete TEX_factionalism_discredit_orthodox target: [From.GetName]"
+			set_temp_variable = {
+				TEX_factionalism_pop = 5
+			}
+			TEX_factionalism_rem_pop_orthodox = yes
+		}
+	}
+	TEX_factionalism_discredit_conservative = {
+		icon = GFX_decision_eng_propaganda_campaigns
+		visible = {
+			NOT = {
+				check_variable = {
+					TEX_factionalism_current = 1
+				}
+			}
+			TEX_has_election = no
+			always = no
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = TEX_can_decrease_loyalty
+				NOT = {
+					OR = {
+						check_variable = {
+							TEX_factionalism_conservative_loyalty = 0
+						}
+						check_variable = {
+							TEX_factionalism_conservative_loyalty < 0
+						}
+					}
+				}
+			}
+			custom_trigger_tooltip = {
+				tooltip = TEX_conservative_not_ruling_faction
+				NOT = {
+					check_variable = {
+						TEX_factionalism_current = 1
+					}
+				}
+			}
+			has_political_power > 99
+		}
+		cost = 100
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete TEX_factionalism_discredit_conservative target: [From.GetName]"
+			set_temp_variable = {
+				TEX_factionalism_pop = 5
+			}
+			TEX_factionalism_rem_pop_conservative = yes
+		}
+	}
+	TEX_factionalism_discredit_progressive = {
+		icon = GFX_decision_eng_propaganda_campaigns
+		visible = {
+			NOT = {
+				check_variable = {
+					TEX_factionalism_current = 2
+				}
+			}
+			TEX_has_election = no
+			always = no
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = TEX_can_decrease_loyalty
+				NOT = {
+					OR = {
+						check_variable = {
+							TEX_factionalism_progressive_loyalty = 0
+						}
+						check_variable = {
+							TEX_factionalism_progressive_loyalty < 0
+						}
+					}
+				}
+			}
+			custom_trigger_tooltip = {
+				tooltip = TEX_progressive_not_ruling_faction
+				NOT = {
+					check_variable = {
+						TEX_factionalism_current = 2
+					}
+				}
+			}
+			has_political_power > 99
+		}
+		cost = 100
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete TEX_factionalism_discredit_progressive target: [From.GetName]"
+			set_temp_variable = {
+				TEX_factionalism_pop = 5
+			}
+			TEX_factionalism_rem_pop_progressive = yes
+		}
+	}
+	TEX_factionalism_ally_orthodox = {
+		icon = GFX_decision_hol_exchange_intelligence_data
+		visible = {
+			NOT = {
+				check_variable = {
+					TEX_factionalism_current = 0
+				}
+			}
+			NOT = {
+				check_variable = {
+					TEX_factionalism_deal_orthodox = 1
+				}
+			}
+			TEX_has_election = no
+			always = no
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = TEX_can_ally_orthodox
+				check_variable = {
+					TEX_factionalism_orthodox_loyalty > 49
+				}
+				#0-100
+			}
+			custom_trigger_tooltip = {
+				tooltip = TEX_has_not_orthodox_support
+				check_variable = {
+					TEX_factionalism_deal_orthodox = 0
+				}
+				#0 = No, 1 = Yes
+			}
+			custom_trigger_tooltip = {
+				tooltip = TEX_orthodox_not_ruling_faction
+				NOT = {
+					check_variable = {
+						TEX_factionalism_current = 0
+					}
+				}
+			}
+			has_political_power > 99
+		}
+		cost = 100
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete TEX_factionalism_ally_orthodox target: [From.GetName]"
+			TEX_factionalism_add_orthodox = yes
+		}
+	}
+	TEX_factionalism_ally_conservative = {
+		icon = GFX_decision_hol_exchange_intelligence_data
+		visible = {
+			NOT = {
+				check_variable = {
+					TEX_factionalism_current = 1
+				}
+			}
+			NOT = {
+				check_variable = {
+					TEX_factionalism_deal_conservative = 1
+				}
+			}
+			TEX_has_election = no
+			always = no
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = TEX_can_ally_conservative
+				check_variable = {
+					TEX_factionalism_conservative_loyalty > 49
+				}
+				#0-100
+			}
+			custom_trigger_tooltip = {
+				tooltip = TEX_has_not_conservative_support
+				check_variable = {
+					TEX_factionalism_deal_conservative = 0
+				}
+				#0 = No, 1 = Yes
+			}
+			custom_trigger_tooltip = {
+				tooltip = TEX_conservative_not_ruling_faction
+				NOT = {
+					check_variable = {
+						TEX_factionalism_current = 1
+					}
+				}
+			}
+			has_political_power > 99
+		}
+		cost = 100
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete TEX_factionalism_ally_conservative target: [From.GetName]"
+			TEX_factionalism_add_conservative = yes
+		}
+	}
+	TEX_factionalism_ally_progressive = {
+		icon = GFX_decision_hol_exchange_intelligence_data
+		visible = {
+			NOT = {
+				check_variable = {
+					TEX_factionalism_current = 2
+				}
+			}
+			NOT = {
+				check_variable = {
+					TEX_factionalism_deal_progressive = 1
+				}
+			}
+			TEX_has_election = no
+			always = no
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = TEX_can_ally_progressive
+				check_variable = {
+					TEX_factionalism_progressive_loyalty > 49
+				}
+				#0-100
+			}
+			custom_trigger_tooltip = {
+				tooltip = TEX_has_not_progressive_support
+				check_variable = {
+					TEX_factionalism_deal_progressive = 0
+				}
+				#0 = No, 1 = Yes
+			}
+			custom_trigger_tooltip = {
+				tooltip = TEX_progressive_not_ruling_faction
+				NOT = {
+					check_variable = {
+						TEX_factionalism_current = 2
+					}
+				}
+			}
+			has_political_power > 99
+		}
+		cost = 100
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete TEX_factionalism_ally_progressive target: [From.GetName]"
+			TEX_factionalism_add_progressive = yes
+		}
+	}
+	TEX_factionalism_remove_orthodox = {
+		icon = GFX_decision_generic_break_treaty
+		visible = {
+			NOT = {
+				check_variable = {
+					TEX_factionalism_current = 0
+				}
+			}
+			NOT = {
+				check_variable = {
+					TEX_factionalism_deal_orthodox = 0
+				}
+			}
+			TEX_has_election = no
+			always = no
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = TEX_can_remove_orthodox
+				check_variable = {
+					TEX_factionalism_orthodox_loyalty < 50
+				}
+				#0-100
+			}
+			custom_trigger_tooltip = {
+				tooltip = TEX_has_orthodox_support
+				check_variable = {
+					TEX_factionalism_deal_orthodox = 1
+				}
+				#0 = No, 1 = Yes
+			}
+			custom_trigger_tooltip = {
+				tooltip = TEX_orthodox_not_ruling_faction
+				NOT = {
+					check_variable = {
+						TEX_factionalism_current = 0
+					}
+				}
+			}
+			has_political_power > 99
+		}
+		cost = 100
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete TEX_factionalism_remove_orthodox target: [From.GetName]"
+			TEX_factionalism_rem_orthodox = yes
+		}
+	}
+	TEX_factionalism_remove_conservative = {
+		icon = GFX_decision_generic_break_treaty
+		visible = {
+			NOT = {
+				check_variable = {
+					TEX_factionalism_current = 1
+				}
+			}
+			NOT = {
+				check_variable = {
+					TEX_factionalism_deal_conservative = 0
+				}
+			}
+			TEX_has_election = no
+			always = no
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = TEX_can_remove_conservative
+				check_variable = {
+					TEX_factionalism_conservative_loyalty < 50
+				}
+				#0-100
+			}
+			custom_trigger_tooltip = {
+				tooltip = TEX_has_conservative_support
+				check_variable = {
+					TEX_factionalism_deal_conservative = 1
+				}
+				#0 = No, 1 = Yes
+			}
+			custom_trigger_tooltip = {
+				tooltip = TEX_conservative_not_ruling_faction
+				NOT = {
+					check_variable = {
+						TEX_factionalism_current = 1
+					}
+				}
+			}
+			has_political_power > 99
+		}
+		cost = 100
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete TEX_factionalism_remove_conservative target: [From.GetName]"
+			TEX_factionalism_rem_conservative = yes
+		}
+	}
+	TEX_factionalism_remove_progressive = {
+		icon = GFX_decision_generic_break_treaty
+		visible = {
+			NOT = {
+				check_variable = {
+					TEX_factionalism_current = 2
+				}
+			}
+			NOT = {
+				check_variable = {
+					TEX_factionalism_deal_progressive = 0
+				}
+			}
+			TEX_has_election = no
+			always = no
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = TEX_can_remove_progressive
+				check_variable = {
+					TEX_factionalism_progressive_loyalty < 50
+				}
+				#0-100
+			}
+			custom_trigger_tooltip = {
+				tooltip = TEX_has_progressive_support
+				check_variable = {
+					TEX_factionalism_deal_progressive = 1
+				}
+				#0 = No, 1 = Yes
+			}
+			custom_trigger_tooltip = {
+				tooltip = TEX_progressive_not_ruling_faction
+				NOT = {
+					check_variable = {
+						TEX_factionalism_current = 2
+					}
+				}
+			}
+			has_political_power > 99
+		}
+		cost = 100
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete TEX_factionalism_remove_progressive target: [From.GetName]"
+			TEX_factionalism_rem_progressive = yes
+		}
+	}
+}
+
+# DECISION CATEGORY: TEX_congress
+# THE UNION STATE CONGRESS
+# LAST UPDATED: 2023-05-16
+TEX_congress = {
+	TEX_congress_executive_order_divider = {
+		allowed = {
+			always = no
+		}
+		available = {
+			always = no
+		}
+		visible = {
+			always = yes
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete TEX_congress_executive_order_divider target: [From.GetName]"
+		}
+		ai_will_do = {
+			base = 0
+		}
+	}
+	TEX_congress_issue_veto = {
+		allowed = {
+		}
+		available = {
+			has_country_flag = TEX_Voting_On_Bills
+		}
+		visible = {
+			always = yes
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete TEX_congress_issue_veto target: [From.GetName]"
+		}
+		ai_will_do = {
+			base = 0
+		}
+	}
+	### Presidential Executive Orders ###
+	TEX_Executive_Order_Fight_Corporatism = {
+		allowed = {
+		}
+		available = {
+			has_completed_focus = TEX_McMath_Fight_Corporatists
+			NOT = {
+				has_country_flag = TEX_not_issued_fight_corporatism
+			}
+		}
+		visible = {
+			has_government = social_democrat
+		}
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete TEX_Executive_Order_Fight_Corporatism target: [From.GetName]"
+			custom_effect_tooltip = TEX_Executive_Order_Fight_Corporatism_tt
+			TEX_issue_executive_order = yes
+			set_country_flag = TEX_not_issued_fight_corporatism
+		}
+		ai_will_do = {
+			base = 0
+			modifier = {
+				has_government = social_democrat
+				factor = 1
+			}
+		}
+	}
+	TEX_Executive_Order_Confederation_Removal = {
+		allowed = {
+		}
+		available = {
+			has_completed_focus = TEX_1952_Prog_Smash_Segregation
+			NOT = {
+				has_country_flag = TEX_not_issued_confederate_removal
+			}
+		}
+		visible = {
+			has_government = social_democrat
+		}
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete TEX_Executive_Order_Confederation_Removal target: [From.GetName]"
+			custom_effect_tooltip = TEX_Executive_Order_Confederation_Removal_tt
+			TEX_issue_executive_order = yes
+			custom_effect_tooltip = tooltip_white_line
+			custom_effect_tooltip = TEX_smash_segregation_tt
+			custom_effect_tooltip = tooltip_white_line
+			if = {
+				limit = {
+					365 = {
+						has_state_flag = georgia_segregation_flag
+					}
+				}
+				custom_effect_tooltip = TEX_smash_georgia_segregation_tt
+			}
+			hidden_effect = {
+				365 = {
+					clr_state_flag = georgia_segregation_flag
+				}
+				372 = {
+					set_state_flag = AR_no_segregation_flag
+				}
+				370 = {
+					set_state_flag = MS_no_segregation_flag
+				}
+			}
+			set_country_flag = TEX_not_issued_confederate_removal
+		}
+		ai_will_do = {
+			base = 0
+			modifier = {
+				has_government = social_democrat
+				factor = 1
+			}
+		}
+	}
+	TEX_Executive_Order_Desegregate_Schools = {
+		allowed = {
+		}
+		available = {
+			has_completed_focus = TEX_1952_Prog_Integrate_Schools
+			NOT = {
+				has_country_flag = TEX_not_issued_desegregate_schools
+			}
+		}
+		visible = {
+			has_government = social_democrat
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete TEX_Executive_Order_Desegregate_Schools target: [From.GetName]"
+			custom_effect_tooltip = TEX_Executive_Order_Desegregate_Schools_tt
+			TEX_issue_executive_order = yes
+			set_country_flag = TEX_not_issued_desegregate_schools
+		}
+		ai_will_do = {
+			base = 0
+			modifier = {
+				has_government = social_democrat
+				factor = 1
+			}
+		}
+	}
+	TEX_congress_introduce_act_divider = {
+		allowed = {
+			always = no
+		}
+		available = {
+			always = no
+		}
+		visible = {
+			always = yes
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete TEX_congress_introduce_act_divider target: [From.GetName]"
+			set_country_flag = TEX_LI_Veto
+		}
+		ai_will_do = {
+			base = 0
+		}
+	}
+	### Syndicalist Registration Act ###
+	TEX_Syndicalist_Registration_Act_Start = {
+		allowed = {
+		}
+		available = {
+			has_completed_focus = TEX_Long_Syndicalist_Registration_Act
+			TEX_has_active_bill = no
+		}
+		visible = {
+			has_completed_focus = TEX_Long_Syndicalist_Registration_Act
+			NOT = {
+				has_country_flag = TEX_Syndicalist_Registration_Act_passed
+			}
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete TEX_Syndicalist_Registration_Act_Start target: [From.GetName]"
+			set_country_flag = TEX_Bill_Introduced_House
+			set_country_flag = TEX_Syndicalist_Registration_Act
+			#POLITICS: 0 = NO SUPPORT, 1 = LOW SUPPORT, 2 = MED SUPPORT, 3 = HIGH SUPPORT, 4 = TOTAL SUPPORT#
+			set_temp_variable = {
+				TEX_Orthodox_Support_Var = 4
+			}
+			set_temp_variable = {
+				TEX_Con_Support_Var = 4
+			}
+			set_temp_variable = {
+				TEX_Prog_Support_Var = 2
+			}
+			set_temp_variable = {
+				TEX_Rest_Support_Var = 4
+			}
+			TEX_Set_Congress_Support = yes
+			activate_mission = TEX_Syndicalist_Registration_Act_House
+		}
+		ai_will_do = {
+			base = 1
+			modifier = {
+				has_country_flag = TEX_Voting_On_Bills
+				factor = 0
+			}
+		}
+	}
+	TEX_Syndicalist_Registration_Act_House = {
+		allowed = {
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = TEX_Has_Majority_House
+				check_variable = {
+					var = TEX_House_Total_support
+					value = 22
+					compare = greater_than_or_equals
+				}
+			}
+		}
+		activation = {
+			always = no
+		}
+		is_good = no
+		selectable_mission = yes
+		days_mission_timeout = 60
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete TEX_Syndicalist_Registration_Act_House target: [From.GetName]"
+			custom_effect_tooltip = TEX_House_Vote
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_House_Total_support
+						value = 22
+						compare = greater_than
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Pass
+				set_country_flag = TEX_Bill_Passed_House
+				set_country_flag = TEX_Bill_Introduced_Senate
+				activate_mission = TEX_Syndicalist_Registration_Act_Senate
+			}
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_House_Total_support
+						value = 22
+						compare = less_than_or_equals
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Fail
+				set_country_flag = TEX_Bill_Failed_House
+				hidden_effect = {
+					country_event = {
+						id = tex.157
+					}
+				}
+			}
+		}
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout TEX_Syndicalist_Registration_Act_House target: [From.GetName]"
+			custom_effect_tooltip = TEX_House_Vote
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_House_Total_support
+						value = 22
+						compare = greater_than
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Pass
+				set_country_flag = TEX_Bill_Passed_House
+				set_country_flag = TEX_Bill_Introduced_Senate
+				activate_mission = TEX_Syndicalist_Registration_Act_Senate
+			}
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_House_Total_support
+						value = 22
+						compare = less_than_or_equals
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Fail
+				set_country_flag = TEX_Bill_Failed_House
+				hidden_effect = {
+					country_event = {
+						id = tex.157
+					}
+				}
+			}
+		}
+		ai_will_do = {
+			base = 1
+			modifier = {
+				check_variable = {
+					var = TEX_House_Total_support
+					value = 22
+					compare = less_than_or_equals
+				}
+				factor = 0
+			}
+		}
+	}
+	TEX_Syndicalist_Registration_Act_Senate = {
+		allowed = {
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = TEX_Has_Majority_Senate
+				check_variable = {
+					var = TEX_Senate_Total_support
+					value = 11
+					compare = greater_than
+				}
+			}
+		}
+		activation = {
+			always = no
+		}
+		is_good = no
+		selectable_mission = yes
+		days_mission_timeout = 60
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete TEX_Syndicalist_Registration_Act_Senate target: [From.GetName]"
+			custom_effect_tooltip = TEX_Senate_Vote
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_Senate_Total_support
+						value = 11
+						compare = greater_than
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Pass_Senate
+				set_country_flag = TEX_Bill_Passed_Senate
+				set_country_flag = TEX_Syndicalist_Registration_Act_passed
+				TEX_upgrade_red_scare = yes
+				hidden_effect = {
+					country_event = {
+						id = tex.155
+					}
+				}
+			}
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_Senate_Total_support
+						value = 11
+						compare = less_than_or_equals
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Fail
+				set_country_flag = TEX_Bill_Failed_Senate
+				hidden_effect = {
+					country_event = {
+						id = tex.156
+					}
+				}
+			}
+		}
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout TEX_Syndicalist_Registration_Act_Senate target: [From.GetName]"
+			custom_effect_tooltip = TEX_Senate_Vote
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_Senate_Total_support
+						value = 11
+						compare = greater_than
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Pass_Senate
+				set_country_flag = TEX_Bill_Passed_Senate
+				set_country_flag = TEX_Syndicalist_Registration_Act_passed
+				TEX_upgrade_red_scare = yes
+				hidden_effect = {
+					country_event = {
+						id = tex.155
+					}
+				}
+			}
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_Senate_Total_support
+						value = 11
+						compare = less_than_or_equals
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Fail
+				set_country_flag = TEX_Bill_Failed_Senate
+				hidden_effect = {
+					country_event = {
+						id = tex.156
+					}
+				}
+			}
+		}
+		ai_will_do = {
+			base = 1
+			modifier = {
+				check_variable = {
+					var = TEX_Senate_Total_support
+					value = 22
+					compare = less_than_or_equals
+				}
+				factor = 0
+			}
+		}
+	}
+	### Syndicalist Control Act ###
+	TEX_Syndicalist_Control_Act_Start = {
+		allowed = {
+		}
+		available = {
+			has_completed_focus = TEX_Long_Syndicalist_Control_Act
+			TEX_has_active_bill = no
+		}
+		visible = {
+			has_completed_focus = TEX_Long_Syndicalist_Control_Act
+			NOT = {
+				has_country_flag = TEX_Syndicalist_Control_Act_passed
+			}
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete TEX_Syndicalist_Control_Act_Start target: [From.GetName]"
+			set_country_flag = TEX_Bill_Introduced_House
+			set_country_flag = TEX_Syndicalist_Control_Act
+			#POLITICS: 0 = NO SUPPORT, 1 = LOW SUPPORT, 2 = MED SUPPORT, 3 = HIGH SUPPORT, 4 = TOTAL SUPPORT#
+			set_temp_variable = {
+				TEX_Orthodox_Support_Var = 4
+			}
+			set_temp_variable = {
+				TEX_Con_Support_Var = 4
+			}
+			set_temp_variable = {
+				TEX_Prog_Support_Var = 2
+			}
+			set_temp_variable = {
+				TEX_Rest_Support_Var = 4
+			}
+			TEX_Set_Congress_Support = yes
+			activate_mission = TEX_Syndicalist_Control_Act_House
+		}
+		ai_will_do = {
+			base = 1
+			modifier = {
+				has_country_flag = TEX_Voting_On_Bills
+				factor = 0
+			}
+		}
+	}
+	TEX_Syndicalist_Control_Act_House = {
+		allowed = {
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = TEX_Has_Majority_House
+				check_variable = {
+					var = TEX_House_Total_support
+					value = 22
+					compare = greater_than_or_equals
+				}
+			}
+		}
+		activation = {
+			always = no
+		}
+		is_good = no
+		selectable_mission = yes
+		days_mission_timeout = 60
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete TEX_Syndicalist_Control_Act_House target: [From.GetName]"
+			custom_effect_tooltip = TEX_House_Vote
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_House_Total_support
+						value = 22
+						compare = greater_than
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Pass
+				set_country_flag = TEX_Bill_Passed_House
+				set_country_flag = TEX_Bill_Introduced_Senate
+				activate_mission = TEX_Syndicalist_Control_Act_Senate
+			}
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_House_Total_support
+						value = 22
+						compare = less_than_or_equals
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Fail
+				set_country_flag = TEX_Bill_Failed_House
+				hidden_effect = {
+					country_event = {
+						id = tex.157
+					}
+				}
+			}
+		}
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout TEX_Syndicalist_Control_Act_House target: [From.GetName]"
+			custom_effect_tooltip = TEX_House_Vote
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_House_Total_support
+						value = 22
+						compare = greater_than
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Pass
+				set_country_flag = TEX_Bill_Passed_House
+				set_country_flag = TEX_Bill_Introduced_Senate
+				activate_mission = TEX_Syndicalist_Control_Act_Senate
+			}
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_House_Total_support
+						value = 22
+						compare = less_than_or_equals
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Fail
+				set_country_flag = TEX_Bill_Failed_House
+				hidden_effect = {
+					country_event = {
+						id = tex.157
+					}
+				}
+			}
+		}
+		ai_will_do = {
+			base = 1
+			modifier = {
+				check_variable = {
+					var = TEX_House_Total_support
+					value = 22
+					compare = less_than_or_equals
+				}
+				factor = 0
+			}
+		}
+	}
+	TEX_Syndicalist_Control_Act_Senate = {
+		allowed = {
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = TEX_Has_Majority_Senate
+				check_variable = {
+					var = TEX_Senate_Total_support
+					value = 11
+					compare = greater_than
+				}
+			}
+		}
+		activation = {
+			always = no
+		}
+		is_good = no
+		selectable_mission = yes
+		days_mission_timeout = 60
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete TEX_Syndicalist_Control_Act_Senate target: [From.GetName]"
+			custom_effect_tooltip = TEX_Senate_Vote
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_Senate_Total_support
+						value = 11
+						compare = greater_than
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Pass_Senate
+				set_country_flag = TEX_Bill_Passed_Senate
+				set_country_flag = TEX_Syndicalist_Control_Act_passed
+				TEX_upgrade_red_scare = yes
+				hidden_effect = {
+					country_event = {
+						id = tex.155
+					}
+				}
+			}
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_Senate_Total_support
+						value = 11
+						compare = less_than_or_equals
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Fail
+				set_country_flag = TEX_Bill_Failed_Senate
+				hidden_effect = {
+					country_event = {
+						id = tex.156
+					}
+				}
+			}
+		}
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout TEX_Syndicalist_Control_Act_Senate target: [From.GetName]"
+			custom_effect_tooltip = TEX_Senate_Vote
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_Senate_Total_support
+						value = 11
+						compare = greater_than
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Pass_Senate
+				set_country_flag = TEX_Bill_Passed_Senate
+				set_country_flag = TEX_Syndicalist_Control_Act_passed
+				TEX_upgrade_red_scare = yes
+				hidden_effect = {
+					country_event = {
+						id = tex.155
+					}
+				}
+			}
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_Senate_Total_support
+						value = 11
+						compare = less_than_or_equals
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Fail
+				set_country_flag = TEX_Bill_Failed_Senate
+				hidden_effect = {
+					country_event = {
+						id = tex.156
+					}
+				}
+			}
+		}
+		ai_will_do = {
+			base = 1
+			modifier = {
+				check_variable = {
+					var = TEX_Senate_Total_support
+					value = 22
+					compare = less_than_or_equals
+				}
+				factor = 0
+			}
+		}
+	}
+	### Internal Security Act ###
+	TEX_Internal_Security_Act_Start = {
+		allowed = {
+		}
+		available = {
+			has_country_flag = TEX_Long_Internal_Security_Act_flag
+			TEX_has_active_bill = no
+		}
+		visible = {
+			has_country_flag = TEX_Long_Internal_Security_Act_flag
+			NOT = {
+				has_country_flag = TEX_Internal_Security_Act_passed
+			}
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete TEX_Internal_Security_Act_Start target: [From.GetName]"
+			set_country_flag = TEX_Bill_Introduced_House
+			set_country_flag = TEX_Internal_Security_Act
+			#POLITICS: 0 = NO SUPPORT, 1 = LOW SUPPORT, 2 = MED SUPPORT, 3 = HIGH SUPPORT, 4 = TOTAL SUPPORT#
+			set_temp_variable = {
+				TEX_Orthodox_Support_Var = 4
+			}
+			set_temp_variable = {
+				TEX_Con_Support_Var = 4
+			}
+			set_temp_variable = {
+				TEX_Prog_Support_Var = 2
+			}
+			set_temp_variable = {
+				TEX_Rest_Support_Var = 4
+			}
+			TEX_Set_Congress_Support = yes
+			activate_mission = TEX_Internal_Security_Act_House
+		}
+		ai_will_do = {
+			base = 1
+			modifier = {
+				has_country_flag = TEX_Voting_On_Bills
+				factor = 0
+			}
+		}
+	}
+	TEX_Internal_Security_Act_House = {
+		allowed = {
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = TEX_Has_Majority_House
+				check_variable = {
+					var = TEX_House_Total_support
+					value = 22
+					compare = greater_than_or_equals
+				}
+			}
+		}
+		activation = {
+			always = no
+		}
+		is_good = no
+		selectable_mission = yes
+		days_mission_timeout = 60
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete TEX_Internal_Security_Act_House target: [From.GetName]"
+			custom_effect_tooltip = TEX_House_Vote
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_House_Total_support
+						value = 22
+						compare = greater_than
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Pass
+				set_country_flag = TEX_Bill_Passed_House
+				set_country_flag = TEX_Bill_Introduced_Senate
+				activate_mission = TEX_Internal_Security_Act_Senate
+			}
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_House_Total_support
+						value = 22
+						compare = less_than_or_equals
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Fail
+				set_country_flag = TEX_Bill_Failed_House
+				hidden_effect = {
+					country_event = {
+						id = tex.157
+					}
+				}
+			}
+		}
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout TEX_Internal_Security_Act_House target: [From.GetName]"
+			custom_effect_tooltip = TEX_House_Vote
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_House_Total_support
+						value = 22
+						compare = greater_than
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Pass
+				set_country_flag = TEX_Bill_Passed_House
+				set_country_flag = TEX_Bill_Introduced_Senate
+				activate_mission = TEX_Internal_Security_Act_Senate
+			}
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_House_Total_support
+						value = 22
+						compare = less_than_or_equals
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Fail
+				set_country_flag = TEX_Bill_Failed_House
+				hidden_effect = {
+					country_event = {
+						id = tex.157
+					}
+				}
+			}
+		}
+		ai_will_do = {
+			base = 1
+			modifier = {
+				check_variable = {
+					var = TEX_House_Total_support
+					value = 22
+					compare = less_than_or_equals
+				}
+				factor = 0
+			}
+		}
+	}
+	TEX_Internal_Security_Act_Senate = {
+		allowed = {
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = TEX_Has_Majority_Senate
+				check_variable = {
+					var = TEX_Senate_Total_support
+					value = 11
+					compare = greater_than
+				}
+			}
+		}
+		activation = {
+			always = no
+		}
+		is_good = no
+		selectable_mission = yes
+		days_mission_timeout = 60
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete TEX_Internal_Security_Act_Senate target: [From.GetName]"
+			custom_effect_tooltip = TEX_Senate_Vote
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_Senate_Total_support
+						value = 11
+						compare = greater_than
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Pass_Senate
+				set_country_flag = TEX_Bill_Passed_Senate
+				set_country_flag = TEX_Internal_Security_Act_passed
+				TEX_upgrade_red_scare = yes
+				hidden_effect = {
+					country_event = {
+						id = tex.155
+					}
+				}
+			}
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_Senate_Total_support
+						value = 11
+						compare = less_than_or_equals
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Fail
+				set_country_flag = TEX_Bill_Failed_Senate
+				hidden_effect = {
+					country_event = {
+						id = tex.156
+					}
+				}
+			}
+		}
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout TEX_Internal_Security_Act_Senate target: [From.GetName]"
+			custom_effect_tooltip = TEX_Senate_Vote
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_Senate_Total_support
+						value = 11
+						compare = greater_than
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Pass_Senate
+				set_country_flag = TEX_Bill_Passed_Senate
+				set_country_flag = TEX_Internal_Security_Act_passed
+				TEX_upgrade_red_scare = yes
+				hidden_effect = {
+					country_event = {
+						id = tex.155
+					}
+				}
+			}
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_Senate_Total_support
+						value = 11
+						compare = less_than_or_equals
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Fail
+				set_country_flag = TEX_Bill_Failed_Senate
+				hidden_effect = {
+					country_event = {
+						id = tex.156
+					}
+				}
+			}
+		}
+		ai_will_do = {
+			base = 1
+			modifier = {
+				check_variable = {
+					var = TEX_Senate_Total_support
+					value = 22
+					compare = less_than_or_equals
+				}
+				factor = 0
+			}
+		}
+	}
+	### Emergency Powers Governors Act ###
+	TEX_Emergency_Powers_Governors_Act_Start = {
+		allowed = {
+		}
+		available = {
+			has_completed_focus = TEX_Long_Emergency_Powers_Governors_Act
+			TEX_has_active_bill = no
+		}
+		visible = {
+			has_completed_focus = TEX_Long_Emergency_Powers_Governors_Act
+			NOT = {
+				has_country_flag = TEX_Emergency_Powers_Governors_Act_passed
+			}
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete TEX_Emergency_Powers_Governors_Act_Start target: [From.GetName]"
+			set_country_flag = TEX_Bill_Introduced_House
+			set_country_flag = TEX_Emergency_Powers_Governors_Act
+			#POLITICS: 0 = NO SUPPORT, 1 = LOW SUPPORT, 2 = MED SUPPORT, 3 = HIGH SUPPORT, 4 = TOTAL SUPPORT#
+			set_temp_variable = {
+				TEX_Orthodox_Support_Var = 4
+			}
+			set_temp_variable = {
+				TEX_Con_Support_Var = 4
+			}
+			set_temp_variable = {
+				TEX_Prog_Support_Var = 2
+			}
+			set_temp_variable = {
+				TEX_Rest_Support_Var = 4
+			}
+			TEX_Set_Congress_Support = yes
+			activate_mission = TEX_Emergency_Powers_Governors_Act_House
+		}
+		ai_will_do = {
+			base = 1
+			modifier = {
+				has_country_flag = TEX_Voting_On_Bills
+				factor = 0
+			}
+		}
+	}
+	TEX_Emergency_Powers_Governors_Act_House = {
+		allowed = {
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = TEX_Has_Majority_House
+				check_variable = {
+					var = TEX_House_Total_support
+					value = 22
+					compare = greater_than_or_equals
+				}
+			}
+		}
+		activation = {
+			always = no
+		}
+		is_good = no
+		selectable_mission = yes
+		days_mission_timeout = 60
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete TEX_Emergency_Powers_Governors_Act_House target: [From.GetName]"
+			custom_effect_tooltip = TEX_House_Vote
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_House_Total_support
+						value = 22
+						compare = greater_than
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Pass
+				set_country_flag = TEX_Bill_Passed_House
+				set_country_flag = TEX_Bill_Introduced_Senate
+				activate_mission = TEX_Emergency_Powers_Governors_Act_Senate
+			}
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_House_Total_support
+						value = 22
+						compare = less_than_or_equals
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Fail
+				set_country_flag = TEX_Bill_Failed_House
+				hidden_effect = {
+					country_event = {
+						id = tex.157
+					}
+				}
+			}
+		}
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout TEX_Emergency_Powers_Governors_Act_House target: [From.GetName]"
+			custom_effect_tooltip = TEX_House_Vote
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_House_Total_support
+						value = 22
+						compare = greater_than
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Pass
+				set_country_flag = TEX_Bill_Passed_House
+				set_country_flag = TEX_Bill_Introduced_Senate
+				activate_mission = TEX_Emergency_Powers_Governors_Act_Senate
+			}
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_House_Total_support
+						value = 22
+						compare = less_than_or_equals
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Fail
+				set_country_flag = TEX_Bill_Failed_House
+				hidden_effect = {
+					country_event = {
+						id = tex.157
+					}
+				}
+			}
+		}
+		ai_will_do = {
+			base = 1
+			modifier = {
+				check_variable = {
+					var = TEX_House_Total_support
+					value = 22
+					compare = less_than_or_equals
+				}
+				factor = 0
+			}
+		}
+	}
+	TEX_Emergency_Powers_Governors_Act_Senate = {
+		allowed = {
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = TEX_Has_Majority_Senate
+				check_variable = {
+					var = TEX_Senate_Total_support
+					value = 11
+					compare = greater_than
+				}
+			}
+		}
+		activation = {
+			always = no
+		}
+		is_good = no
+		selectable_mission = yes
+		days_mission_timeout = 60
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete TEX_Emergency_Powers_Governors_Act_Senate target: [From.GetName]"
+			custom_effect_tooltip = TEX_Senate_Vote
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_Senate_Total_support
+						value = 11
+						compare = greater_than
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Pass_Senate
+				set_country_flag = TEX_Bill_Passed_Senate
+				set_country_flag = TEX_Emergency_Powers_Governors_Act_passed
+				TEX_upgrade_red_scare = yes
+				hidden_effect = {
+					country_event = {
+						id = tex.155
+					}
+				}
+			}
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_Senate_Total_support
+						value = 11
+						compare = less_than_or_equals
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Fail
+				set_country_flag = TEX_Bill_Failed_Senate
+				hidden_effect = {
+					country_event = {
+						id = tex.156
+					}
+				}
+			}
+		}
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout TEX_Emergency_Powers_Governors_Act_Senate target: [From.GetName]"
+			custom_effect_tooltip = TEX_Senate_Vote
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_Senate_Total_support
+						value = 11
+						compare = greater_than
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Pass_Senate
+				set_country_flag = TEX_Bill_Passed_Senate
+				set_country_flag = TEX_Emergency_Powers_Governors_Act_passed
+				TEX_upgrade_red_scare = yes
+				hidden_effect = {
+					country_event = {
+						id = tex.155
+					}
+				}
+			}
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_Senate_Total_support
+						value = 11
+						compare = less_than_or_equals
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Fail
+				set_country_flag = TEX_Bill_Failed_Senate
+				hidden_effect = {
+					country_event = {
+						id = tex.156
+					}
+				}
+			}
+		}
+		ai_will_do = {
+			base = 1
+			modifier = {
+				check_variable = {
+					var = TEX_Senate_Total_support
+					value = 22
+					compare = less_than_or_equals
+				}
+				factor = 0
+			}
+		}
+	}
+	### Social Security Act ###
+	TEX_Social_Security_Act_Start = {
+		allowed = {
+		}
+		available = {
+			if = {
+				limit = {
+					has_completed_focus = TEX_President_Long
+				}
+				has_completed_focus = TEX_Long_Social_Security_Act
+			}
+			else_if = {
+				limit = {
+					has_completed_focus = TEX_President_McMath
+				}
+				has_completed_focus = TEX_McMath_Social_Security_Act
+			}
+			else = {
+				always = no
+			}
+			TEX_has_active_bill = no
+		}
+		visible = {
+			if = {
+				limit = {
+					has_completed_focus = TEX_President_Long
+				}
+				has_completed_focus = TEX_Long_Social_Security_Act
+			}
+			else_if = {
+				limit = {
+					has_completed_focus = TEX_President_McMath
+				}
+				has_completed_focus = TEX_McMath_Social_Security_Act
+			}
+			else = {
+				always = no
+			}
+			NOT = {
+				has_country_flag = TEX_Social_Security_Act_passed
+			}
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete TEX_Social_Security_Act_Start target: [From.GetName]"
+			set_country_flag = TEX_Bill_Introduced_House
+			set_country_flag = TEX_Social_Security_Act
+			#POLITICS: 0 = NO SUPPORT, 1 = LOW SUPPORT, 2 = MED SUPPORT, 3 = HIGH SUPPORT, 4 = TOTAL SUPPORT#
+			set_temp_variable = {
+				TEX_Orthodox_Support_Var = 4
+			}
+			set_temp_variable = {
+				TEX_Con_Support_Var = 4
+			}
+			set_temp_variable = {
+				TEX_Prog_Support_Var = 2
+			}
+			set_temp_variable = {
+				TEX_Rest_Support_Var = 4
+			}
+			TEX_Set_Congress_Support = yes
+			activate_mission = TEX_Social_Security_Act_House
+		}
+		ai_will_do = {
+			base = 1
+			modifier = {
+				has_country_flag = TEX_Voting_On_Bills
+				factor = 0
+			}
+		}
+	}
+	TEX_Social_Security_Act_House = {
+		allowed = {
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = TEX_Has_Majority_House
+				check_variable = {
+					var = TEX_House_Total_support
+					value = 22
+					compare = greater_than_or_equals
+				}
+			}
+		}
+		activation = {
+			always = no
+		}
+		is_good = no
+		selectable_mission = yes
+		days_mission_timeout = 60
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete TEX_Social_Security_Act_House target: [From.GetName]"
+			custom_effect_tooltip = TEX_House_Vote
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_House_Total_support
+						value = 22
+						compare = greater_than
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Pass
+				set_country_flag = TEX_Bill_Passed_House
+				set_country_flag = TEX_Bill_Introduced_Senate
+				activate_mission = TEX_Social_Security_Act_Senate
+			}
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_House_Total_support
+						value = 22
+						compare = less_than_or_equals
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Fail
+				set_country_flag = TEX_Bill_Failed_House
+				hidden_effect = {
+					country_event = {
+						id = tex.157
+					}
+				}
+			}
+		}
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout TEX_Social_Security_Act_House target: [From.GetName]"
+			custom_effect_tooltip = TEX_House_Vote
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_House_Total_support
+						value = 22
+						compare = greater_than
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Pass
+				set_country_flag = TEX_Bill_Passed_House
+				set_country_flag = TEX_Bill_Introduced_Senate
+				activate_mission = TEX_Social_Security_Act_Senate
+			}
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_House_Total_support
+						value = 22
+						compare = less_than_or_equals
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Fail
+				set_country_flag = TEX_Bill_Failed_House
+				hidden_effect = {
+					country_event = {
+						id = tex.157
+					}
+				}
+			}
+		}
+		ai_will_do = {
+			base = 1
+			modifier = {
+				check_variable = {
+					var = TEX_House_Total_support
+					value = 22
+					compare = less_than_or_equals
+				}
+				factor = 0
+			}
+		}
+	}
+	TEX_Social_Security_Act_Senate = {
+		allowed = {
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = TEX_Has_Majority_Senate
+				check_variable = {
+					var = TEX_Senate_Total_support
+					value = 11
+					compare = greater_than
+				}
+			}
+		}
+		activation = {
+			always = no
+		}
+		is_good = no
+		selectable_mission = yes
+		days_mission_timeout = 60
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete TEX_Social_Security_Act_Senate target: [From.GetName]"
+			custom_effect_tooltip = TEX_Senate_Vote
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_Senate_Total_support
+						value = 11
+						compare = greater_than
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Pass_Senate
+				set_country_flag = TEX_Bill_Passed_Senate
+				set_country_flag = TEX_Social_Security_Act_passed
+				move_up_service_spending = yes
+				TEX_upgrade_social_security = yes
+				hidden_effect = {
+					country_event = {
+						id = tex.155
+					}
+				}
+			}
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_Senate_Total_support
+						value = 11
+						compare = less_than_or_equals
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Fail
+				set_country_flag = TEX_Bill_Failed_Senate
+				hidden_effect = {
+					country_event = {
+						id = tex.156
+					}
+				}
+			}
+		}
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout TEX_Social_Security_Act_Senate target: [From.GetName]"
+			custom_effect_tooltip = TEX_Senate_Vote
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_Senate_Total_support
+						value = 11
+						compare = greater_than
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Pass_Senate
+				set_country_flag = TEX_Bill_Passed_Senate
+				set_country_flag = TEX_Social_Security_Act_passed
+				if = {
+					limit = {
+						has_idea = econ_small_service_spending
+					}
+					custom_effect_tooltip = generic_service_medium_tt
+					swap_ideas = {
+						remove_idea = econ_small_service_spending
+						add_idea = econ_medium_service_spending
+					}
+				}
+				hidden_effect = {
+					country_event = {
+						id = tex.155
+					}
+				}
+			}
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_Senate_Total_support
+						value = 11
+						compare = less_than_or_equals
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Fail
+				set_country_flag = TEX_Bill_Failed_Senate
+				hidden_effect = {
+					country_event = {
+						id = tex.156
+					}
+				}
+			}
+		}
+		ai_will_do = {
+			base = 1
+			modifier = {
+				check_variable = {
+					var = TEX_Senate_Total_support
+					value = 22
+					compare = less_than_or_equals
+				}
+				factor = 0
+			}
+		}
+	}
+	### Anti-Lynching Act ###
+	TEX_Anti_Lynching_Act_Start = {
+		allowed = {
+		}
+		available = {
+			if = {
+				limit = {
+					has_completed_focus = TEX_President_Long
+				}
+				has_completed_focus = TEX_Long_Anti_Lynching_Act
+			}
+			else_if = {
+				limit = {
+					has_completed_focus = TEX_President_McMath
+				}
+				has_completed_focus = TEX_McMath_Anti_Lynching_Act
+			}
+			else_if = {
+				limit = {
+					has_completed_focus = TEX_President_Holt
+				}
+				has_completed_focus = TEX_Holt_Anti_Lynching_Act
+			}
+			else = {
+				always = no
+			}
+			TEX_has_active_bill = no
+		}
+		visible = {
+			if = {
+				limit = {
+					has_completed_focus = TEX_President_Long
+				}
+				has_completed_focus = TEX_Long_Anti_Lynching_Act
+			}
+			else_if = {
+				limit = {
+					has_completed_focus = TEX_President_McMath
+				}
+				has_completed_focus = TEX_McMath_Anti_Lynching_Act
+			}
+			else_if = {
+				limit = {
+					has_completed_focus = TEX_President_Holt
+				}
+				has_completed_focus = TEX_Holt_Anti_Lynching_Act
+			}
+			else = {
+				always = no
+			}
+			NOT = {
+				has_country_flag = TEX_Anti_Lynching_Act_passed
+			}
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete TEX_Anti_Lynching_Act_Start target: [From.GetName]"
+			set_country_flag = TEX_Bill_Introduced_House
+			set_country_flag = TEX_Anti_Lynching_Act
+			#POLITICS: 0 = NO SUPPORT, 1 = LOW SUPPORT, 2 = MED SUPPORT, 3 = HIGH SUPPORT, 4 = TOTAL SUPPORT#
+			set_temp_variable = {
+				TEX_Orthodox_Support_Var = 2
+			}
+			set_temp_variable = {
+				TEX_Con_Support_Var = 0
+			}
+			set_temp_variable = {
+				TEX_Prog_Support_Var = 4
+			}
+			set_temp_variable = {
+				TEX_Rest_Support_Var = 0
+			}
+			TEX_Set_Congress_Support = yes
+			activate_mission = TEX_Anti_Lynching_Act_House
+		}
+		ai_will_do = {
+			base = 1
+			modifier = {
+				has_country_flag = TEX_Voting_On_Bills
+				factor = 0
+			}
+		}
+	}
+	TEX_Anti_Lynching_Act_House = {
+		allowed = {
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = TEX_Has_Majority_House
+				check_variable = {
+					var = TEX_House_Total_support
+					value = 22
+					compare = greater_than_or_equals
+				}
+			}
+		}
+		activation = {
+			always = no
+		}
+		is_good = no
+		selectable_mission = yes
+		days_mission_timeout = 60
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete TEX_Anti_Lynching_Act_House target: [From.GetName]"
+			custom_effect_tooltip = TEX_House_Vote
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_House_Total_support
+						value = 22
+						compare = greater_than
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Pass
+				set_country_flag = TEX_Bill_Passed_House
+				set_country_flag = TEX_Bill_Introduced_Senate
+				activate_mission = TEX_Anti_Lynching_Act_Senate
+			}
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_House_Total_support
+						value = 22
+						compare = less_than_or_equals
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Fail
+				set_country_flag = TEX_Bill_Failed_House
+				hidden_effect = {
+					country_event = {
+						id = tex.157
+					}
+				}
+			}
+		}
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout TEX_Anti_Lynching_Act_House target: [From.GetName]"
+			custom_effect_tooltip = TEX_House_Vote
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_House_Total_support
+						value = 22
+						compare = greater_than
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Pass
+				set_country_flag = TEX_Bill_Passed_House
+				set_country_flag = TEX_Bill_Introduced_Senate
+				activate_mission = TEX_Anti_Lynching_Act_Senate
+			}
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_House_Total_support
+						value = 22
+						compare = less_than_or_equals
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Fail
+				set_country_flag = TEX_Bill_Failed_House
+				hidden_effect = {
+					country_event = {
+						id = tex.157
+					}
+				}
+			}
+		}
+		ai_will_do = {
+			base = 1
+			modifier = {
+				check_variable = {
+					var = TEX_House_Total_support
+					value = 22
+					compare = less_than_or_equals
+				}
+				factor = 0
+			}
+		}
+	}
+	TEX_Anti_Lynching_Act_Senate = {
+		allowed = {
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = TEX_Has_Majority_Senate
+				check_variable = {
+					var = TEX_Senate_Total_support
+					value = 11
+					compare = greater_than
+				}
+			}
+		}
+		activation = {
+			always = no
+		}
+		is_good = no
+		selectable_mission = yes
+		days_mission_timeout = 60
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete TEX_Anti_Lynching_Act_Senate target: [From.GetName]"
+			custom_effect_tooltip = TEX_Senate_Vote
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_Senate_Total_support
+						value = 11
+						compare = greater_than
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Pass_Senate
+				set_country_flag = TEX_Bill_Passed_Senate
+				set_country_flag = TEX_Anti_Lynching_Act_passed
+				if = {
+					limit = {
+						has_idea = TEX_civil_rights
+					}
+					swap_ideas = {
+						remove_idea = TEX_civil_rights
+						add_idea = TEX_civil_rights_2
+					}
+				}
+				else_if = {
+					limit = {
+						has_idea = TEX_racial_discrimination_2
+					}
+					swap_ideas = {
+						remove_idea = TEX_racial_discrimination_2
+						add_idea = TEX_racial_discrimination
+					}
+				}
+				hidden_effect = {
+					country_event = {
+						id = tex.155
+					}
+				}
+			}
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_Senate_Total_support
+						value = 11
+						compare = less_than_or_equals
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Fail
+				set_country_flag = TEX_Bill_Failed_Senate
+				hidden_effect = {
+					country_event = {
+						id = tex.156
+					}
+				}
+			}
+		}
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout TEX_Anti_Lynching_Act_Senate target: [From.GetName]"
+			custom_effect_tooltip = TEX_Senate_Vote
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_Senate_Total_support
+						value = 11
+						compare = greater_than
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Pass_Senate
+				set_country_flag = TEX_Bill_Passed_Senate
+				set_country_flag = TEX_Anti_Lynching_Act_passed
+				if = {
+					limit = {
+						has_idea = TEX_civil_rights
+					}
+					swap_ideas = {
+						remove_idea = TEX_civil_rights
+						add_idea = TEX_civil_rights_2
+					}
+				}
+				else_if = {
+					limit = {
+						has_idea = TEX_racial_discrimination_2
+					}
+					swap_ideas = {
+						remove_idea = TEX_racial_discrimination_2
+						add_idea = TEX_racial_discrimination
+					}
+				}
+				hidden_effect = {
+					country_event = {
+						id = tex.155
+					}
+				}
+			}
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_Senate_Total_support
+						value = 11
+						compare = less_than_or_equals
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Fail
+				set_country_flag = TEX_Bill_Failed_Senate
+				hidden_effect = {
+					country_event = {
+						id = tex.156
+					}
+				}
+			}
+		}
+		ai_will_do = {
+			base = 1
+			modifier = {
+				check_variable = {
+					var = TEX_Senate_Total_support
+					value = 22
+					compare = less_than_or_equals
+				}
+				factor = 0
+			}
+		}
+	}
+	### Minority Voting Rights Act ###
+	TEX_Minority_Voting_Rights_Act_Start = {
+		allowed = {
+		}
+		available = {
+			if = {
+				limit = {
+					has_completed_focus = TEX_President_Long
+				}
+				has_completed_focus = TEX_Long_Minority_Voting_Rights_Act
+			}
+			else_if = {
+				limit = {
+					has_completed_focus = TEX_President_McMath
+				}
+				has_completed_focus = TEX_McMath_Minority_Voting_Rights_Act
+			}
+			else = {
+				always = no
+			}
+			TEX_has_active_bill = no
+		}
+		visible = {
+			if = {
+				limit = {
+					has_completed_focus = TEX_President_Long
+				}
+				has_completed_focus = TEX_Long_Minority_Voting_Rights_Act
+			}
+			else_if = {
+				limit = {
+					has_completed_focus = TEX_President_McMath
+				}
+				has_completed_focus = TEX_McMath_Minority_Voting_Rights_Act
+			}
+			else = {
+				always = no
+			}
+			NOT = {
+				has_country_flag = TEX_Minority_Voting_Rights_Act_passed
+			}
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete TEX_Minority_Voting_Rights_Act_Start target: [From.GetName]"
+			set_country_flag = TEX_Bill_Introduced_House
+			set_country_flag = TEX_Minority_Voting_Rights_Act
+			#POLITICS: 0 = NO SUPPORT, 1 = LOW SUPPORT, 2 = MED SUPPORT, 3 = HIGH SUPPORT, 4 = TOTAL SUPPORT#
+			set_temp_variable = {
+				TEX_Orthodox_Support_Var = 2
+			}
+			set_temp_variable = {
+				TEX_Con_Support_Var = 0
+			}
+			set_temp_variable = {
+				TEX_Prog_Support_Var = 4
+			}
+			set_temp_variable = {
+				TEX_Rest_Support_Var = 0
+			}
+			TEX_Set_Congress_Support = yes
+			activate_mission = TEX_Minority_Voting_Rights_Act_House
+		}
+		ai_will_do = {
+			base = 1
+			modifier = {
+				has_country_flag = TEX_Voting_On_Bills
+				factor = 0
+			}
+		}
+	}
+	TEX_Minority_Voting_Rights_Act_House = {
+		allowed = {
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = TEX_Has_Majority_House
+				check_variable = {
+					var = TEX_House_Total_support
+					value = 22
+					compare = greater_than_or_equals
+				}
+			}
+		}
+		activation = {
+			always = no
+		}
+		is_good = no
+		selectable_mission = yes
+		days_mission_timeout = 60
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete TEX_Minority_Voting_Rights_Act_House target: [From.GetName]"
+			custom_effect_tooltip = TEX_House_Vote
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_House_Total_support
+						value = 22
+						compare = greater_than
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Pass
+				set_country_flag = TEX_Bill_Passed_House
+				set_country_flag = TEX_Bill_Introduced_Senate
+				activate_mission = TEX_Minority_Voting_Rights_Act_Senate
+			}
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_House_Total_support
+						value = 22
+						compare = less_than_or_equals
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Fail
+				set_country_flag = TEX_Bill_Failed_House
+				hidden_effect = {
+					country_event = {
+						id = tex.157
+					}
+				}
+			}
+		}
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout TEX_Minority_Voting_Rights_Act_House target: [From.GetName]"
+			custom_effect_tooltip = TEX_House_Vote
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_House_Total_support
+						value = 22
+						compare = greater_than
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Pass
+				set_country_flag = TEX_Bill_Passed_House
+				set_country_flag = TEX_Bill_Introduced_Senate
+				activate_mission = TEX_Minority_Voting_Rights_Act_Senate
+			}
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_House_Total_support
+						value = 22
+						compare = less_than_or_equals
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Fail
+				set_country_flag = TEX_Bill_Failed_House
+				hidden_effect = {
+					country_event = {
+						id = tex.157
+					}
+				}
+			}
+		}
+		ai_will_do = {
+			base = 1
+			modifier = {
+				check_variable = {
+					var = TEX_House_Total_support
+					value = 22
+					compare = less_than_or_equals
+				}
+				factor = 0
+			}
+		}
+	}
+	TEX_Minority_Voting_Rights_Act_Senate = {
+		allowed = {
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = TEX_Has_Majority_Senate
+				check_variable = {
+					var = TEX_Senate_Total_support
+					value = 11
+					compare = greater_than
+				}
+			}
+		}
+		activation = {
+			always = no
+		}
+		is_good = no
+		selectable_mission = yes
+		days_mission_timeout = 60
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete TEX_Minority_Voting_Rights_Act_Senate target: [From.GetName]"
+			custom_effect_tooltip = TEX_Senate_Vote
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_Senate_Total_support
+						value = 11
+						compare = greater_than
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Pass_Senate
+				set_country_flag = TEX_Bill_Passed_Senate
+				set_country_flag = TEX_Minority_Voting_Rights_Act_passed
+				if = {
+					limit = {
+						has_idea = TEX_civil_rights_2
+					}
+					swap_ideas = {
+						remove_idea = TEX_civil_rights_2
+						add_idea = TEX_civil_rights_3
+					}
+				}
+				else_if = {
+					limit = {
+						has_idea = TEX_racial_discrimination
+					}
+					swap_ideas = {
+						remove_idea = TEX_racial_discrimination
+						add_idea = TEX_civil_rights
+					}
+				}
+				hidden_effect = {
+					country_event = {
+						id = tex.155
+					}
+				}
+			}
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_Senate_Total_support
+						value = 11
+						compare = less_than_or_equals
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Fail
+				set_country_flag = TEX_Bill_Failed_Senate
+				hidden_effect = {
+					country_event = {
+						id = tex.156
+					}
+				}
+			}
+		}
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout TEX_Minority_Voting_Rights_Act_Senate target: [From.GetName]"
+			custom_effect_tooltip = TEX_Senate_Vote
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_Senate_Total_support
+						value = 11
+						compare = greater_than
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Pass_Senate
+				set_country_flag = TEX_Bill_Passed_Senate
+				set_country_flag = TEX_Minority_Voting_Rights_Act_passed
+				if = {
+					limit = {
+						has_idea = TEX_civil_rights_2
+					}
+					swap_ideas = {
+						remove_idea = TEX_civil_rights_2
+						add_idea = TEX_civil_rights_3
+					}
+				}
+				else_if = {
+					limit = {
+						has_idea = TEX_racial_discrimination
+					}
+					swap_ideas = {
+						remove_idea = TEX_racial_discrimination
+						add_idea = TEX_civil_rights
+					}
+				}
+				hidden_effect = {
+					country_event = {
+						id = tex.155
+					}
+				}
+			}
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_Senate_Total_support
+						value = 11
+						compare = less_than_or_equals
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Fail
+				set_country_flag = TEX_Bill_Failed_Senate
+				hidden_effect = {
+					country_event = {
+						id = tex.156
+					}
+				}
+			}
+		}
+		ai_will_do = {
+			base = 1
+			modifier = {
+				check_variable = {
+					var = TEX_Senate_Total_support
+					value = 22
+					compare = less_than_or_equals
+				}
+				factor = 0
+			}
+		}
+	}
+	### Codifying Jim Crow ###
+	TEX_States_Rights_Act_Start = {
+		allowed = {
+		}
+		available = {
+			if = {
+				limit = {
+					has_completed_focus = TEX_President_Long
+				}
+				has_completed_focus = TEX_Long_States_Rights_Act
+			}
+			else_if = {
+				limit = {
+					has_completed_focus = TEX_President_Holt
+				}
+				has_completed_focus = TEX_Holt_States_Rights_Act
+			}
+			else = {
+				always = no
+			}
+			TEX_has_active_bill = no
+		}
+		visible = {
+			if = {
+				limit = {
+					has_completed_focus = TEX_President_Long
+				}
+				has_completed_focus = TEX_Long_States_Rights_Act
+			}
+			else_if = {
+				limit = {
+					has_completed_focus = TEX_President_Holt
+				}
+				has_completed_focus = TEX_Holt_States_Rights_Act
+			}
+			else = {
+				always = no
+			}
+			NOT = {
+				has_country_flag = TEX_States_Rights_Act_passed
+			}
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete TEX_States_Rights_Act_Start target: [From.GetName]"
+			set_country_flag = TEX_Bill_Introduced_House
+			set_country_flag = TEX_States_Rights_Act
+			#POLITICS: 0 = NO SUPPORT, 1 = LOW SUPPORT, 2 = MED SUPPORT, 3 = HIGH SUPPORT, 4 = TOTAL SUPPORT#
+			set_temp_variable = {
+				TEX_Orthodox_Support_Var = 2
+			}
+			set_temp_variable = {
+				TEX_Con_Support_Var = 3
+			}
+			set_temp_variable = {
+				TEX_Prog_Support_Var = 0
+			}
+			set_temp_variable = {
+				TEX_Rest_Support_Var = 0
+			}
+			TEX_Set_Congress_Support = yes
+			activate_mission = TEX_States_Rights_Act_House
+		}
+		ai_will_do = {
+			base = 1
+			modifier = {
+				has_country_flag = TEX_Voting_On_Bills
+				factor = 0
+			}
+		}
+	}
+	TEX_States_Rights_Act_House = {
+		allowed = {
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = TEX_Has_Majority_House
+				check_variable = {
+					var = TEX_House_Total_support
+					value = 22
+					compare = greater_than_or_equals
+				}
+			}
+		}
+		activation = {
+			always = no
+		}
+		is_good = no
+		selectable_mission = yes
+		days_mission_timeout = 60
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete TEX_States_Rights_Act_House target: [From.GetName]"
+			custom_effect_tooltip = TEX_House_Vote
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_House_Total_support
+						value = 22
+						compare = greater_than
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Pass
+				set_country_flag = TEX_Bill_Passed_House
+				set_country_flag = TEX_Bill_Introduced_Senate
+				activate_mission = TEX_States_Rights_Act_Senate
+			}
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_House_Total_support
+						value = 22
+						compare = less_than_or_equals
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Fail
+				set_country_flag = TEX_Bill_Failed_House
+				hidden_effect = {
+					country_event = {
+						id = tex.157
+					}
+				}
+			}
+		}
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout TEX_States_Rights_Act_House target: [From.GetName]"
+			custom_effect_tooltip = TEX_House_Vote
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_House_Total_support
+						value = 22
+						compare = greater_than
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Pass
+				set_country_flag = TEX_Bill_Passed_House
+				set_country_flag = TEX_Bill_Introduced_Senate
+				activate_mission = TEX_States_Rights_Act_Senate
+			}
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_House_Total_support
+						value = 22
+						compare = less_than_or_equals
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Fail
+				set_country_flag = TEX_Bill_Failed_House
+				hidden_effect = {
+					country_event = {
+						id = tex.157
+					}
+				}
+			}
+		}
+		ai_will_do = {
+			base = 1
+			modifier = {
+				check_variable = {
+					var = TEX_House_Total_support
+					value = 22
+					compare = less_than_or_equals
+				}
+				factor = 0
+			}
+		}
+	}
+	TEX_States_Rights_Act_Senate = {
+		allowed = {
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = TEX_Has_Majority_Senate
+				check_variable = {
+					var = TEX_Senate_Total_support
+					value = 11
+					compare = greater_than
+				}
+			}
+		}
+		activation = {
+			always = no
+		}
+		is_good = no
+		selectable_mission = yes
+		days_mission_timeout = 60
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete TEX_States_Rights_Act_Senate target: [From.GetName]"
+			custom_effect_tooltip = TEX_Senate_Vote
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_Senate_Total_support
+						value = 11
+						compare = greater_than
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Pass_Senate
+				set_country_flag = TEX_Bill_Passed_Senate
+				set_country_flag = TEX_States_Rights_Act_passed
+				if = {
+					limit = {
+						has_idea = TEX_civil_rights_2
+					}
+					swap_ideas = {
+						remove_idea = TEX_civil_rights_2
+						add_idea = TEX_civil_rights
+					}
+				}
+				else_if = {
+					limit = {
+						has_idea = TEX_racial_discrimination
+					}
+					swap_ideas = {
+						remove_idea = TEX_racial_discrimination
+						add_idea = TEX_racial_discrimination_2
+					}
+				}
+				hidden_effect = {
+					country_event = {
+						id = tex.155
+					}
+				}
+			}
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_Senate_Total_support
+						value = 11
+						compare = less_than_or_equals
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Fail
+				set_country_flag = TEX_Bill_Failed_Senate
+				hidden_effect = {
+					country_event = {
+						id = tex.156
+					}
+				}
+			}
+		}
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout TEX_States_Rights_Act_Senate target: [From.GetName]"
+			custom_effect_tooltip = TEX_Senate_Vote
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_Senate_Total_support
+						value = 11
+						compare = greater_than
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Pass_Senate
+				set_country_flag = TEX_Bill_Passed_Senate
+				set_country_flag = TEX_States_Rights_Act_passed
+				if = {
+					limit = {
+						has_idea = TEX_civil_rights_2
+					}
+					swap_ideas = {
+						remove_idea = TEX_civil_rights_2
+						add_idea = TEX_civil_rights
+					}
+				}
+				else_if = {
+					limit = {
+						has_idea = TEX_racial_discrimination
+					}
+					swap_ideas = {
+						remove_idea = TEX_racial_discrimination
+						add_idea = TEX_racial_discrimination_2
+					}
+				}
+				hidden_effect = {
+					country_event = {
+						id = tex.155
+					}
+				}
+			}
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_Senate_Total_support
+						value = 11
+						compare = less_than_or_equals
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Fail
+				set_country_flag = TEX_Bill_Failed_Senate
+				hidden_effect = {
+					country_event = {
+						id = tex.156
+					}
+				}
+			}
+		}
+		ai_will_do = {
+			base = 1
+			modifier = {
+				check_variable = {
+					var = TEX_Senate_Total_support
+					value = 22
+					compare = less_than_or_equals
+				}
+				factor = 0
+			}
+		}
+	}
+	### Lowered Voting Rights Act ###
+	TEX_Lowered_Voting_Rights_Act_Start = {
+		allowed = {
+		}
+		available = {
+			has_completed_focus = TEX_1952_Prog_Lower_Voting_Age
+			TEX_has_active_bill = no
+		}
+		visible = {
+			has_completed_focus = TEX_1952_Prog_Lower_Voting_Age
+			NOT = {
+				has_country_flag = TEX_Lowered_Voting_Rights_Act_passed
+			}
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete TEX_Lowered_Voting_Rights_Act_Start target: [From.GetName]"
+			set_country_flag = TEX_Bill_Introduced_House
+			set_country_flag = TEX_Lowered_Voting_Rights_Act
+			#POLITICS: 0 = NO SUPPORT, 1 = LOW SUPPORT, 2 = MED SUPPORT, 3 = HIGH SUPPORT, 4 = TOTAL SUPPORT#
+			set_temp_variable = {
+				TEX_Orthodox_Support_Var = 4
+			}
+			set_temp_variable = {
+				TEX_Con_Support_Var = 2
+			}
+			set_temp_variable = {
+				TEX_Prog_Support_Var = 4
+			}
+			set_temp_variable = {
+				TEX_Rest_Support_Var = 4
+			}
+			TEX_Set_Congress_Support = yes
+			activate_mission = TEX_Lowered_Voting_Rights_Act_House
+		}
+		ai_will_do = {
+			base = 1
+			modifier = {
+				has_country_flag = TEX_Voting_On_Bills
+				factor = 0
+			}
+		}
+	}
+	TEX_Lowered_Voting_Rights_Act_House = {
+		allowed = {
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = TEX_Has_Majority_House
+				check_variable = {
+					var = TEX_House_Total_support
+					value = 22
+					compare = greater_than_or_equals
+				}
+			}
+		}
+		activation = {
+			always = no
+		}
+		is_good = no
+		selectable_mission = yes
+		days_mission_timeout = 60
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete TEX_Lowered_Voting_Rights_Act_House target: [From.GetName]"
+			custom_effect_tooltip = TEX_House_Vote
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_House_Total_support
+						value = 22
+						compare = greater_than
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Pass
+				set_country_flag = TEX_Bill_Passed_House
+				set_country_flag = TEX_Bill_Introduced_Senate
+				activate_mission = TEX_Lowered_Voting_Rights_Act_Senate
+			}
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_House_Total_support
+						value = 22
+						compare = less_than_or_equals
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Fail
+				set_country_flag = TEX_Bill_Failed_House
+				hidden_effect = {
+					country_event = {
+						id = tex.157
+					}
+				}
+			}
+		}
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout TEX_Lowered_Voting_Rights_Act_House target: [From.GetName]"
+			custom_effect_tooltip = TEX_House_Vote
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_House_Total_support
+						value = 22
+						compare = greater_than
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Pass
+				set_country_flag = TEX_Bill_Passed_House
+				set_country_flag = TEX_Bill_Introduced_Senate
+				activate_mission = TEX_Lowered_Voting_Rights_Act_Senate
+			}
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_House_Total_support
+						value = 22
+						compare = less_than_or_equals
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Fail
+				set_country_flag = TEX_Bill_Failed_House
+				hidden_effect = {
+					country_event = {
+						id = tex.157
+					}
+				}
+			}
+		}
+		ai_will_do = {
+			base = 1
+			modifier = {
+				check_variable = {
+					var = TEX_House_Total_support
+					value = 22
+					compare = less_than_or_equals
+				}
+				factor = 0
+			}
+		}
+	}
+	TEX_Lowered_Voting_Rights_Act_Senate = {
+		allowed = {
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = TEX_Has_Majority_Senate
+				check_variable = {
+					var = TEX_Senate_Total_support
+					value = 11
+					compare = greater_than
+				}
+			}
+		}
+		activation = {
+			always = no
+		}
+		is_good = no
+		selectable_mission = yes
+		days_mission_timeout = 60
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete TEX_Lowered_Voting_Rights_Act_Senate target: [From.GetName]"
+			custom_effect_tooltip = TEX_Senate_Vote
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_Senate_Total_support
+						value = 11
+						compare = greater_than
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Pass_Senate
+				set_country_flag = TEX_Bill_Passed_Senate
+				set_country_flag = TEX_Lowered_Voting_Rights_Act_passed
+				custom_effect_tooltip = TEX_1952_Prog_Lower_Voting_Age_tt
+				hidden_effect = {
+					country_event = {
+						id = tex.155
+					}
+				}
+			}
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_Senate_Total_support
+						value = 11
+						compare = less_than_or_equals
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Fail
+				set_country_flag = TEX_Bill_Failed_Senate
+				hidden_effect = {
+					country_event = {
+						id = tex.156
+					}
+				}
+			}
+		}
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout TEX_Lowered_Voting_Rights_Act_Senate target: [From.GetName]"
+			custom_effect_tooltip = TEX_Senate_Vote
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_Senate_Total_support
+						value = 11
+						compare = greater_than
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Pass_Senate
+				set_country_flag = TEX_Bill_Passed_Senate
+				set_country_flag = TEX_Lowered_Voting_Rights_Act_passed
+				custom_effect_tooltip = TEX_1952_Prog_Lower_Voting_Age_tt
+				hidden_effect = {
+					country_event = {
+						id = tex.155
+					}
+				}
+			}
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_Senate_Total_support
+						value = 11
+						compare = less_than_or_equals
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Fail
+				set_country_flag = TEX_Bill_Failed_Senate
+				hidden_effect = {
+					country_event = {
+						id = tex.156
+					}
+				}
+			}
+		}
+		ai_will_do = {
+			base = 1
+			modifier = {
+				check_variable = {
+					var = TEX_Senate_Total_support
+					value = 22
+					compare = less_than_or_equals
+				}
+				factor = 0
+			}
+		}
+	}
+	### Standardization of Labor Act ###
+	TEX_Standardization_of_Labor_Act_Start = {
+		allowed = {
+		}
+		available = {
+			if = {
+				limit = {
+					has_completed_focus = TEX_President_Long
+				}
+				has_completed_focus = TEX_Long_Standardization_of_Labor_Act
+			}
+			else_if = {
+				limit = {
+					has_completed_focus = TEX_President_McMath
+				}
+				has_completed_focus = TEX_McMath_Standardization_of_Labor_Act
+			}
+			else = {
+				always = no
+			}
+			TEX_has_active_bill = no
+		}
+		visible = {
+			if = {
+				limit = {
+					has_completed_focus = TEX_President_Long
+				}
+				has_completed_focus = TEX_Long_Standardization_of_Labor_Act
+			}
+			else_if = {
+				limit = {
+					has_completed_focus = TEX_President_McMath
+				}
+				has_completed_focus = TEX_McMath_Standardization_of_Labor_Act
+			}
+			else = {
+				always = no
+			}
+			NOT = {
+				has_country_flag = TEX_Standardization_of_Labor_Act_passed
+			}
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete TEX_Standardization_of_Labor_Act_Start target: [From.GetName]"
+			set_country_flag = TEX_Bill_Introduced_House
+			set_country_flag = TEX_Standardization_of_Labor_Act
+			#POLITICS: 0 = NO SUPPORT, 1 = LOW SUPPORT, 2 = MED SUPPORT, 3 = HIGH SUPPORT, 4 = TOTAL SUPPORT#
+			set_temp_variable = {
+				TEX_Orthodox_Support_Var = 4
+			}
+			set_temp_variable = {
+				TEX_Con_Support_Var = 0
+			}
+			set_temp_variable = {
+				TEX_Prog_Support_Var = 4
+			}
+			set_temp_variable = {
+				TEX_Rest_Support_Var = 0
+			}
+			TEX_Set_Congress_Support = yes
+			activate_mission = TEX_Standardization_of_Labor_Act_House
+		}
+		ai_will_do = {
+			base = 1
+			modifier = {
+				has_country_flag = TEX_Voting_On_Bills
+				factor = 0
+			}
+		}
+	}
+	TEX_Standardization_of_Labor_Act_House = {
+		allowed = {
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = TEX_Has_Majority_House
+				check_variable = {
+					var = TEX_House_Total_support
+					value = 22
+					compare = greater_than_or_equals
+				}
+			}
+		}
+		activation = {
+			always = no
+		}
+		is_good = no
+		selectable_mission = yes
+		days_mission_timeout = 60
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete TEX_Standardization_of_Labor_Act_House target: [From.GetName]"
+			custom_effect_tooltip = TEX_House_Vote
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_House_Total_support
+						value = 22
+						compare = greater_than
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Pass
+				set_country_flag = TEX_Bill_Passed_House
+				set_country_flag = TEX_Bill_Introduced_Senate
+				activate_mission = TEX_Standardization_of_Labor_Act_Senate
+			}
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_House_Total_support
+						value = 22
+						compare = less_than_or_equals
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Fail
+				set_country_flag = TEX_Bill_Failed_House
+				hidden_effect = {
+					country_event = {
+						id = tex.157
+					}
+				}
+			}
+		}
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout TEX_Standardization_of_Labor_Act_House target: [From.GetName]"
+			custom_effect_tooltip = TEX_House_Vote
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_House_Total_support
+						value = 22
+						compare = greater_than
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Pass
+				set_country_flag = TEX_Bill_Passed_House
+				set_country_flag = TEX_Bill_Introduced_Senate
+				activate_mission = TEX_Standardization_of_Labor_Act_Senate
+			}
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_House_Total_support
+						value = 22
+						compare = less_than_or_equals
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Fail
+				set_country_flag = TEX_Bill_Failed_House
+				hidden_effect = {
+					country_event = {
+						id = tex.157
+					}
+				}
+			}
+		}
+		ai_will_do = {
+			base = 1
+			modifier = {
+				check_variable = {
+					var = TEX_House_Total_support
+					value = 22
+					compare = less_than_or_equals
+				}
+				factor = 0
+			}
+		}
+	}
+	TEX_Standardization_of_Labor_Act_Senate = {
+		allowed = {
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = TEX_Has_Majority_Senate
+				check_variable = {
+					var = TEX_Senate_Total_support
+					value = 11
+					compare = greater_than
+				}
+			}
+		}
+		activation = {
+			always = no
+		}
+		is_good = no
+		selectable_mission = yes
+		days_mission_timeout = 60
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete TEX_Standardization_of_Labor_Act_Senate target: [From.GetName]"
+			custom_effect_tooltip = TEX_Senate_Vote
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_Senate_Total_support
+						value = 11
+						compare = greater_than
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Pass_Senate
+				set_country_flag = TEX_Bill_Passed_Senate
+				set_country_flag = TEX_Standardization_of_Labor_Act_passed
+				add_ideas = TEX_protection_workers
+				hidden_effect = {
+					country_event = {
+						id = tex.155
+					}
+				}
+			}
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_Senate_Total_support
+						value = 11
+						compare = less_than_or_equals
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Fail
+				set_country_flag = TEX_Bill_Failed_Senate
+				hidden_effect = {
+					country_event = {
+						id = tex.156
+					}
+				}
+			}
+		}
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout TEX_Standardization_of_Labor_Act_Senate target: [From.GetName]"
+			custom_effect_tooltip = TEX_Senate_Vote
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_Senate_Total_support
+						value = 11
+						compare = greater_than
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Pass_Senate
+				set_country_flag = TEX_Bill_Passed_Senate
+				set_country_flag = TEX_Standardization_of_Labor_Act_passed
+				add_ideas = TEX_protection_workers
+				hidden_effect = {
+					country_event = {
+						id = tex.155
+					}
+				}
+			}
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_Senate_Total_support
+						value = 11
+						compare = less_than_or_equals
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Fail
+				set_country_flag = TEX_Bill_Failed_Senate
+				hidden_effect = {
+					country_event = {
+						id = tex.156
+					}
+				}
+			}
+		}
+		ai_will_do = {
+			base = 1
+			modifier = {
+				check_variable = {
+					var = TEX_Senate_Total_support
+					value = 22
+					compare = less_than_or_equals
+				}
+				factor = 0
+			}
+		}
+	}
+	### Industrial Reconstruction Act ###
+	TEX_Industrial_Reconstruction_Act_Start = {
+		allowed = {
+		}
+		available = {
+			if = {
+				limit = {
+					has_completed_focus = TEX_President_Long
+				}
+				has_completed_focus = TEX_Long_Industrial_Reconstruction_Act
+			}
+			else_if = {
+				limit = {
+					has_completed_focus = TEX_President_McMath
+				}
+				has_completed_focus = TEX_McMath_Industrial_Reconstruction_Act
+			}
+			else_if = {
+				limit = {
+					has_completed_focus = TEX_President_Holt
+				}
+				has_completed_focus = TEX_Holt_Industrial_Reconstruction_Act
+			}
+			else = {
+				always = no
+			}
+			TEX_has_active_bill = no
+		}
+		visible = {
+			if = {
+				limit = {
+					has_completed_focus = TEX_President_Long
+				}
+				has_completed_focus = TEX_Long_Industrial_Reconstruction_Act
+			}
+			else_if = {
+				limit = {
+					has_completed_focus = TEX_President_McMath
+				}
+				has_completed_focus = TEX_McMath_Industrial_Reconstruction_Act
+			}
+			else_if = {
+				limit = {
+					has_completed_focus = TEX_President_Holt
+				}
+				has_completed_focus = TEX_Holt_Industrial_Reconstruction_Act
+			}
+			else = {
+				always = no
+			}
+			NOT = {
+				has_country_flag = TEX_Industrial_Reconstruction_Act_passed
+			}
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete TEX_Industrial_Reconstruction_Act_Start target: [From.GetName]"
+			set_country_flag = TEX_Bill_Introduced_House
+			set_country_flag = TEX_Industrial_Reconstruction_Act
+			#POLITICS: 0 = NO SUPPORT, 1 = LOW SUPPORT, 2 = MED SUPPORT, 3 = HIGH SUPPORT, 4 = TOTAL SUPPORT#
+			set_temp_variable = {
+				TEX_Orthodox_Support_Var = 3
+			}
+			set_temp_variable = {
+				TEX_Con_Support_Var = 2
+			}
+			set_temp_variable = {
+				TEX_Prog_Support_Var = 4
+			}
+			set_temp_variable = {
+				TEX_Rest_Support_Var = 0
+			}
+			TEX_Set_Congress_Support = yes
+			activate_mission = TEX_Industrial_Reconstruction_Act_House
+		}
+		ai_will_do = {
+			base = 1
+			modifier = {
+				has_country_flag = TEX_Voting_On_Bills
+				factor = 0
+			}
+		}
+	}
+	TEX_Industrial_Reconstruction_Act_House = {
+		allowed = {
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = TEX_Has_Majority_House
+				check_variable = {
+					var = TEX_House_Total_support
+					value = 22
+					compare = greater_than_or_equals
+				}
+			}
+		}
+		activation = {
+			always = no
+		}
+		is_good = no
+		selectable_mission = yes
+		days_mission_timeout = 60
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete TEX_Industrial_Reconstruction_Act_House target: [From.GetName]"
+			custom_effect_tooltip = TEX_House_Vote
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_House_Total_support
+						value = 22
+						compare = greater_than
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Pass
+				set_country_flag = TEX_Bill_Passed_House
+				set_country_flag = TEX_Bill_Introduced_Senate
+				activate_mission = TEX_Industrial_Reconstruction_Act_Senate
+			}
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_House_Total_support
+						value = 22
+						compare = less_than_or_equals
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Fail
+				set_country_flag = TEX_Bill_Failed_House
+				hidden_effect = {
+					country_event = {
+						id = tex.157
+					}
+				}
+			}
+		}
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout TEX_Industrial_Reconstruction_Act_House target: [From.GetName]"
+			custom_effect_tooltip = TEX_House_Vote
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_House_Total_support
+						value = 22
+						compare = greater_than
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Pass
+				set_country_flag = TEX_Bill_Passed_House
+				set_country_flag = TEX_Bill_Introduced_Senate
+				activate_mission = TEX_Industrial_Reconstruction_Act_Senate
+			}
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_House_Total_support
+						value = 22
+						compare = less_than_or_equals
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Fail
+				set_country_flag = TEX_Bill_Failed_House
+				hidden_effect = {
+					country_event = {
+						id = tex.157
+					}
+				}
+			}
+		}
+		ai_will_do = {
+			base = 1
+			modifier = {
+				check_variable = {
+					var = TEX_House_Total_support
+					value = 22
+					compare = less_than_or_equals
+				}
+				factor = 0
+			}
+		}
+	}
+	TEX_Industrial_Reconstruction_Act_Senate = {
+		allowed = {
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = TEX_Has_Majority_Senate
+				check_variable = {
+					var = TEX_Senate_Total_support
+					value = 11
+					compare = greater_than
+				}
+			}
+		}
+		activation = {
+			always = no
+		}
+		is_good = no
+		selectable_mission = yes
+		days_mission_timeout = 60
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete TEX_Industrial_Reconstruction_Act_Senate target: [From.GetName]"
+			custom_effect_tooltip = TEX_Senate_Vote
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_Senate_Total_support
+						value = 11
+						compare = greater_than
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Pass_Senate
+				set_country_flag = TEX_Bill_Passed_Senate
+				set_country_flag = TEX_Industrial_Reconstruction_Act_passed
+				TEX_upgrade_lost_generation = yes
+				hidden_effect = {
+					country_event = {
+						id = tex.155
+					}
+				}
+			}
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_Senate_Total_support
+						value = 11
+						compare = less_than_or_equals
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Fail
+				set_country_flag = TEX_Bill_Failed_Senate
+				hidden_effect = {
+					country_event = {
+						id = tex.156
+					}
+				}
+			}
+		}
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout TEX_Industrial_Reconstruction_Act_Senate target: [From.GetName]"
+			custom_effect_tooltip = TEX_Senate_Vote
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_Senate_Total_support
+						value = 11
+						compare = greater_than
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Pass_Senate
+				set_country_flag = TEX_Bill_Passed_Senate
+				set_country_flag = TEX_Industrial_Reconstruction_Act_passed
+				TEX_upgrade_lost_generation = yes
+				hidden_effect = {
+					country_event = {
+						id = tex.155
+					}
+				}
+			}
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_Senate_Total_support
+						value = 11
+						compare = less_than_or_equals
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Fail
+				set_country_flag = TEX_Bill_Failed_Senate
+				hidden_effect = {
+					country_event = {
+						id = tex.156
+					}
+				}
+			}
+		}
+		ai_will_do = {
+			base = 1
+			modifier = {
+				check_variable = {
+					var = TEX_Senate_Total_support
+					value = 22
+					compare = less_than_or_equals
+				}
+				factor = 0
+			}
+		}
+	}
+	### Land Development Act ###
+	TEX_Land_Development_Act_Start = {
+		allowed = {
+		}
+		available = {
+			if = {
+				limit = {
+					has_completed_focus = TEX_President_Long
+				}
+				has_completed_focus = TEX_Long_Land_Development_Act
+			}
+			else_if = {
+				limit = {
+					has_completed_focus = TEX_President_McMath
+				}
+				has_completed_focus = TEX_McMath_Land_Development_Act
+			}
+			else_if = {
+				limit = {
+					has_completed_focus = TEX_President_Holt
+				}
+				has_completed_focus = TEX_Holt_Land_Development_Act
+			}
+			else = {
+				always = no
+			}
+			TEX_has_active_bill = no
+		}
+		visible = {
+			if = {
+				limit = {
+					has_completed_focus = TEX_President_Long
+				}
+				has_completed_focus = TEX_Long_Land_Development_Act
+			}
+			else_if = {
+				limit = {
+					has_completed_focus = TEX_President_McMath
+				}
+				has_completed_focus = TEX_McMath_Land_Development_Act
+			}
+			else_if = {
+				limit = {
+					has_completed_focus = TEX_President_Holt
+				}
+				has_completed_focus = TEX_Holt_Land_Development_Act
+			}
+			else = {
+				always = no
+			}
+			NOT = {
+				has_country_flag = TEX_Land_Development_Act_passed
+			}
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete TEX_Land_Development_Act_Start target: [From.GetName]"
+			set_country_flag = TEX_Bill_Introduced_House
+			set_country_flag = TEX_Land_Development_Act
+			#POLITICS: 0 = NO SUPPORT, 1 = LOW SUPPORT, 2 = MED SUPPORT, 3 = HIGH SUPPORT, 4 = TOTAL SUPPORT#
+			set_temp_variable = {
+				TEX_Orthodox_Support_Var = 3
+			}
+			set_temp_variable = {
+				TEX_Con_Support_Var = 2
+			}
+			set_temp_variable = {
+				TEX_Prog_Support_Var = 4
+			}
+			set_temp_variable = {
+				TEX_Rest_Support_Var = 0
+			}
+			TEX_Set_Congress_Support = yes
+			activate_mission = TEX_Land_Development_Act_House
+		}
+		ai_will_do = {
+			base = 1
+			modifier = {
+				has_country_flag = TEX_Voting_On_Bills
+				factor = 0
+			}
+		}
+	}
+	TEX_Land_Development_Act_House = {
+		allowed = {
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = TEX_Has_Majority_House
+				check_variable = {
+					var = TEX_House_Total_support
+					value = 22
+					compare = greater_than_or_equals
+				}
+			}
+		}
+		activation = {
+			always = no
+		}
+		is_good = no
+		selectable_mission = yes
+		days_mission_timeout = 60
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete TEX_Land_Development_Act_House target: [From.GetName]"
+			custom_effect_tooltip = TEX_House_Vote
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_House_Total_support
+						value = 22
+						compare = greater_than
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Pass
+				set_country_flag = TEX_Bill_Passed_House
+				set_country_flag = TEX_Bill_Introduced_Senate
+				activate_mission = TEX_Land_Development_Act_Senate
+			}
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_House_Total_support
+						value = 22
+						compare = less_than_or_equals
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Fail
+				set_country_flag = TEX_Bill_Failed_House
+				hidden_effect = {
+					country_event = {
+						id = tex.157
+					}
+				}
+			}
+		}
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout TEX_Land_Development_Act_House target: [From.GetName]"
+			custom_effect_tooltip = TEX_House_Vote
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_House_Total_support
+						value = 22
+						compare = greater_than
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Pass
+				set_country_flag = TEX_Bill_Passed_House
+				set_country_flag = TEX_Bill_Introduced_Senate
+				activate_mission = TEX_Land_Development_Act_Senate
+			}
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_House_Total_support
+						value = 22
+						compare = less_than_or_equals
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Fail
+				set_country_flag = TEX_Bill_Failed_House
+				hidden_effect = {
+					country_event = {
+						id = tex.157
+					}
+				}
+			}
+		}
+		ai_will_do = {
+			base = 1
+			modifier = {
+				check_variable = {
+					var = TEX_House_Total_support
+					value = 22
+					compare = less_than_or_equals
+				}
+				factor = 0
+			}
+		}
+	}
+	TEX_Land_Development_Act_Senate = {
+		allowed = {
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = TEX_Has_Majority_Senate
+				check_variable = {
+					var = TEX_Senate_Total_support
+					value = 11
+					compare = greater_than
+				}
+			}
+		}
+		activation = {
+			always = no
+		}
+		is_good = no
+		selectable_mission = yes
+		days_mission_timeout = 60
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete TEX_Land_Development_Act_Senate target: [From.GetName]"
+			custom_effect_tooltip = TEX_Senate_Vote
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_Senate_Total_support
+						value = 11
+						compare = greater_than
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Pass_Senate
+				set_country_flag = TEX_Bill_Passed_Senate
+				set_country_flag = TEX_Land_Development_Act_passed
+				TEX_upgrade_lost_generation = yes
+				hidden_effect = {
+					country_event = {
+						id = tex.155
+					}
+				}
+			}
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_Senate_Total_support
+						value = 11
+						compare = less_than_or_equals
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Fail
+				set_country_flag = TEX_Bill_Failed_Senate
+				hidden_effect = {
+					country_event = {
+						id = tex.156
+					}
+				}
+			}
+		}
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout TEX_Land_Development_Act_Senate target: [From.GetName]"
+			custom_effect_tooltip = TEX_Senate_Vote
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_Senate_Total_support
+						value = 11
+						compare = greater_than
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Pass_Senate
+				set_country_flag = TEX_Bill_Passed_Senate
+				set_country_flag = TEX_Land_Development_Act_passed
+				TEX_upgrade_lost_generation = yes
+				hidden_effect = {
+					country_event = {
+						id = tex.155
+					}
+				}
+			}
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_Senate_Total_support
+						value = 11
+						compare = less_than_or_equals
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Fail
+				set_country_flag = TEX_Bill_Failed_Senate
+				hidden_effect = {
+					country_event = {
+						id = tex.156
+					}
+				}
+			}
+		}
+		ai_will_do = {
+			base = 1
+			modifier = {
+				check_variable = {
+					var = TEX_Senate_Total_support
+					value = 22
+					compare = less_than_or_equals
+				}
+				factor = 0
+			}
+		}
+	}
+	### Rural Reconstruction Act ###
+	TEX_Rural_Reconstruction_Act_Start = {
+		allowed = {
+		}
+		available = {
+			if = {
+				limit = {
+					has_completed_focus = TEX_President_Long
+				}
+				has_completed_focus = TEX_Long_Rural_Reconstruction_Act
+			}
+			else_if = {
+				limit = {
+					has_completed_focus = TEX_President_McMath
+				}
+				has_completed_focus = TEX_McMath_Rural_Reconstruction_Act
+			}
+			else_if = {
+				limit = {
+					has_completed_focus = TEX_President_Holt
+				}
+				has_completed_focus = TEX_Holt_Rural_Reconstruction_Act
+			}
+			else = {
+				always = no
+			}
+			TEX_has_active_bill = no
+		}
+		visible = {
+			if = {
+				limit = {
+					has_completed_focus = TEX_President_Long
+				}
+				has_completed_focus = TEX_Long_Rural_Reconstruction_Act
+			}
+			else_if = {
+				limit = {
+					has_completed_focus = TEX_President_McMath
+				}
+				has_completed_focus = TEX_McMath_Rural_Reconstruction_Act
+			}
+			else_if = {
+				limit = {
+					has_completed_focus = TEX_President_Holt
+				}
+				has_completed_focus = TEX_Holt_Rural_Reconstruction_Act
+			}
+			else = {
+				always = no
+			}
+			NOT = {
+				has_country_flag = TEX_Rural_Reconstruction_Act_passed
+			}
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete TEX_Rural_Reconstruction_Act_Start target: [From.GetName]"
+			set_country_flag = TEX_Bill_Introduced_House
+			set_country_flag = TEX_Rural_Reconstruction_Act
+			#POLITICS: 0 = NO SUPPORT, 1 = LOW SUPPORT, 2 = MED SUPPORT, 3 = HIGH SUPPORT, 4 = TOTAL SUPPORT#
+			set_temp_variable = {
+				TEX_Orthodox_Support_Var = 3
+			}
+			set_temp_variable = {
+				TEX_Con_Support_Var = 2
+			}
+			set_temp_variable = {
+				TEX_Prog_Support_Var = 4
+			}
+			set_temp_variable = {
+				TEX_Rest_Support_Var = 0
+			}
+			TEX_Set_Congress_Support = yes
+			activate_mission = TEX_Rural_Reconstruction_Act_House
+		}
+		ai_will_do = {
+			base = 1
+			modifier = {
+				has_country_flag = TEX_Voting_On_Bills
+				factor = 0
+			}
+		}
+	}
+	TEX_Rural_Reconstruction_Act_House = {
+		allowed = {
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = TEX_Has_Majority_House
+				check_variable = {
+					var = TEX_House_Total_support
+					value = 22
+					compare = greater_than_or_equals
+				}
+			}
+		}
+		activation = {
+			always = no
+		}
+		is_good = no
+		selectable_mission = yes
+		days_mission_timeout = 60
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete TEX_Rural_Reconstruction_Act_House target: [From.GetName]"
+			custom_effect_tooltip = TEX_House_Vote
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_House_Total_support
+						value = 22
+						compare = greater_than
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Pass
+				set_country_flag = TEX_Bill_Passed_House
+				set_country_flag = TEX_Bill_Introduced_Senate
+				activate_mission = TEX_Rural_Reconstruction_Act_Senate
+			}
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_House_Total_support
+						value = 22
+						compare = less_than_or_equals
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Fail
+				set_country_flag = TEX_Bill_Failed_House
+				hidden_effect = {
+					country_event = {
+						id = tex.157
+					}
+				}
+			}
+		}
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout TEX_Rural_Reconstruction_Act_House target: [From.GetName]"
+			custom_effect_tooltip = TEX_House_Vote
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_House_Total_support
+						value = 22
+						compare = greater_than
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Pass
+				set_country_flag = TEX_Bill_Passed_House
+				set_country_flag = TEX_Bill_Introduced_Senate
+				activate_mission = TEX_Rural_Reconstruction_Act_Senate
+			}
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_House_Total_support
+						value = 22
+						compare = less_than_or_equals
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Fail
+				set_country_flag = TEX_Bill_Failed_House
+				hidden_effect = {
+					country_event = {
+						id = tex.157
+					}
+				}
+			}
+		}
+		ai_will_do = {
+			base = 1
+			modifier = {
+				check_variable = {
+					var = TEX_House_Total_support
+					value = 22
+					compare = less_than_or_equals
+				}
+				factor = 0
+			}
+		}
+	}
+	TEX_Rural_Reconstruction_Act_Senate = {
+		allowed = {
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = TEX_Has_Majority_Senate
+				check_variable = {
+					var = TEX_Senate_Total_support
+					value = 11
+					compare = greater_than
+				}
+			}
+		}
+		activation = {
+			always = no
+		}
+		is_good = no
+		selectable_mission = yes
+		days_mission_timeout = 60
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete TEX_Rural_Reconstruction_Act_Senate target: [From.GetName]"
+			custom_effect_tooltip = TEX_Senate_Vote
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_Senate_Total_support
+						value = 11
+						compare = greater_than
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Pass_Senate
+				set_country_flag = TEX_Bill_Passed_Senate
+				set_country_flag = TEX_Rural_Reconstruction_Act_passed
+				TEX_upgrade_lost_generation = yes
+				hidden_effect = {
+					country_event = {
+						id = tex.155
+					}
+				}
+			}
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_Senate_Total_support
+						value = 11
+						compare = less_than_or_equals
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Fail
+				set_country_flag = TEX_Bill_Failed_Senate
+				hidden_effect = {
+					country_event = {
+						id = tex.156
+					}
+				}
+			}
+		}
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout TEX_Rural_Reconstruction_Act_Senate target: [From.GetName]"
+			custom_effect_tooltip = TEX_Senate_Vote
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_Senate_Total_support
+						value = 11
+						compare = greater_than
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Pass_Senate
+				set_country_flag = TEX_Bill_Passed_Senate
+				set_country_flag = TEX_Rural_Reconstruction_Act_passed
+				TEX_upgrade_lost_generation = yes
+				hidden_effect = {
+					country_event = {
+						id = tex.155
+					}
+				}
+			}
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_Senate_Total_support
+						value = 11
+						compare = less_than_or_equals
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Fail
+				set_country_flag = TEX_Bill_Failed_Senate
+				hidden_effect = {
+					country_event = {
+						id = tex.156
+					}
+				}
+			}
+		}
+		ai_will_do = {
+			base = 1
+			modifier = {
+				check_variable = {
+					var = TEX_Senate_Total_support
+					value = 22
+					compare = less_than_or_equals
+				}
+				factor = 0
+			}
+		}
+	}
+	### Vocational Schools Act ###
+	TEX_Vocational_Schools_Act_Start = {
+		allowed = {
+		}
+		available = {
+			if = {
+				limit = {
+					has_completed_focus = TEX_President_Long
+				}
+				has_completed_focus = TEX_Long_Vocational_Schools_Act
+			}
+			else_if = {
+				limit = {
+					has_completed_focus = TEX_President_McMath
+				}
+				has_completed_focus = TEX_McMath_Vocational_Schools_Act
+			}
+			else_if = {
+				limit = {
+					has_completed_focus = TEX_President_Holt
+				}
+				has_completed_focus = TEX_Holt_Vocational_Schools_Act
+			}
+			else = {
+				always = no
+			}
+		}
+		visible = {
+			if = {
+				limit = {
+					has_completed_focus = TEX_President_Long
+				}
+				has_completed_focus = TEX_Long_Vocational_Schools_Act
+			}
+			else_if = {
+				limit = {
+					has_completed_focus = TEX_President_McMath
+				}
+				has_completed_focus = TEX_McMath_Vocational_Schools_Act
+			}
+			else_if = {
+				limit = {
+					has_completed_focus = TEX_President_Holt
+				}
+				has_completed_focus = TEX_Holt_Vocational_Schools_Act
+			}
+			else = {
+				always = no
+			}
+			TEX_has_active_bill = no
+			NOT = {
+				has_country_flag = TEX_Vocational_Schools_Act_passed
+			}
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete TEX_Vocational_Schools_Act_Start target: [From.GetName]"
+			set_country_flag = TEX_Bill_Introduced_House
+			set_country_flag = TEX_Vocational_Schools_Act
+			#POLITICS: 0 = NO SUPPORT, 1 = LOW SUPPORT, 2 = MED SUPPORT, 3 = HIGH SUPPORT, 4 = TOTAL SUPPORT#
+			set_temp_variable = {
+				TEX_Orthodox_Support_Var = 3
+			}
+			set_temp_variable = {
+				TEX_Con_Support_Var = 2
+			}
+			set_temp_variable = {
+				TEX_Prog_Support_Var = 4
+			}
+			set_temp_variable = {
+				TEX_Rest_Support_Var = 0
+			}
+			TEX_Set_Congress_Support = yes
+			activate_mission = TEX_Vocational_Schools_Act_House
+		}
+		ai_will_do = {
+			base = 1
+			modifier = {
+				has_country_flag = TEX_Voting_On_Bills
+				factor = 0
+			}
+		}
+	}
+	TEX_Vocational_Schools_Act_House = {
+		allowed = {
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = TEX_Has_Majority_House
+				check_variable = {
+					var = TEX_House_Total_support
+					value = 22
+					compare = greater_than_or_equals
+				}
+			}
+		}
+		activation = {
+			always = no
+		}
+		is_good = no
+		selectable_mission = yes
+		days_mission_timeout = 60
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete TEX_Vocational_Schools_Act_House target: [From.GetName]"
+			custom_effect_tooltip = TEX_House_Vote
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_House_Total_support
+						value = 22
+						compare = greater_than
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Pass
+				set_country_flag = TEX_Bill_Passed_House
+				set_country_flag = TEX_Bill_Introduced_Senate
+				activate_mission = TEX_Vocational_Schools_Act_Senate
+			}
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_House_Total_support
+						value = 22
+						compare = less_than_or_equals
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Fail
+				set_country_flag = TEX_Bill_Failed_House
+				hidden_effect = {
+					country_event = {
+						id = tex.157
+					}
+				}
+			}
+		}
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout TEX_Vocational_Schools_Act_House target: [From.GetName]"
+			custom_effect_tooltip = TEX_House_Vote
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_House_Total_support
+						value = 22
+						compare = greater_than
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Pass
+				set_country_flag = TEX_Bill_Passed_House
+				set_country_flag = TEX_Bill_Introduced_Senate
+				activate_mission = TEX_Vocational_Schools_Act_Senate
+			}
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_House_Total_support
+						value = 22
+						compare = less_than_or_equals
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Fail
+				set_country_flag = TEX_Bill_Failed_House
+				hidden_effect = {
+					country_event = {
+						id = tex.157
+					}
+				}
+			}
+		}
+		ai_will_do = {
+			base = 1
+			modifier = {
+				check_variable = {
+					var = TEX_House_Total_support
+					value = 22
+					compare = less_than_or_equals
+				}
+				factor = 0
+			}
+		}
+	}
+	TEX_Vocational_Schools_Act_Senate = {
+		allowed = {
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = TEX_Has_Majority_Senate
+				check_variable = {
+					var = TEX_Senate_Total_support
+					value = 11
+					compare = greater_than
+				}
+			}
+		}
+		activation = {
+			always = no
+		}
+		is_good = no
+		selectable_mission = yes
+		days_mission_timeout = 60
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete TEX_Vocational_Schools_Act_Senate target: [From.GetName]"
+			custom_effect_tooltip = TEX_Senate_Vote
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_Senate_Total_support
+						value = 11
+						compare = greater_than
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Pass_Senate
+				set_country_flag = TEX_Bill_Passed_Senate
+				set_country_flag = TEX_Vocational_Schools_Act_passed
+				swap_ideas = {
+					remove_idea = econ_small_edu_spending
+					add_idea = econ_medium_edu_spending
+				}
+				hidden_effect = {
+					country_event = {
+						id = tex.155
+					}
+				}
+			}
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_Senate_Total_support
+						value = 11
+						compare = less_than_or_equals
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Fail
+				set_country_flag = TEX_Bill_Failed_Senate
+				hidden_effect = {
+					country_event = {
+						id = tex.156
+					}
+				}
+			}
+		}
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout TEX_Vocational_Schools_Act_Senate target: [From.GetName]"
+			custom_effect_tooltip = TEX_Senate_Vote
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_Senate_Total_support
+						value = 11
+						compare = greater_than
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Pass_Senate
+				set_country_flag = TEX_Bill_Passed_Senate
+				set_country_flag = TEX_Vocational_Schools_Act_passed
+				swap_ideas = {
+					remove_idea = econ_small_edu_spending
+					add_idea = econ_medium_edu_spending
+				}
+				hidden_effect = {
+					country_event = {
+						id = tex.155
+					}
+				}
+			}
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_Senate_Total_support
+						value = 11
+						compare = less_than_or_equals
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Fail
+				set_country_flag = TEX_Bill_Failed_Senate
+				hidden_effect = {
+					country_event = {
+						id = tex.156
+					}
+				}
+			}
+		}
+		ai_will_do = {
+			base = 1
+			modifier = {
+				check_variable = {
+					var = TEX_Senate_Total_support
+					value = 22
+					compare = less_than_or_equals
+				}
+				factor = 0
+			}
+		}
+	}
+	### Agricultural Relief Act ###
+	TEX_Agricultural_Relief_Act_Start = {
+		allowed = {
+		}
+		available = {
+			if = {
+				limit = {
+					has_completed_focus = TEX_President_Long
+				}
+				has_completed_focus = TEX_Long_Agricultural_Relief_Act
+			}
+			else_if = {
+				limit = {
+					has_completed_focus = TEX_President_McMath
+				}
+				has_completed_focus = TEX_McMath_Agricultural_Relief_Act
+			}
+			else_if = {
+				limit = {
+					has_completed_focus = TEX_President_Holt
+				}
+				has_completed_focus = TEX_Holt_Agricultural_Relief_Act
+			}
+			else = {
+				always = no
+			}
+			TEX_has_active_bill = no
+		}
+		visible = {
+			if = {
+				limit = {
+					has_completed_focus = TEX_President_Long
+				}
+				has_completed_focus = TEX_Long_Agricultural_Relief_Act
+			}
+			else_if = {
+				limit = {
+					has_completed_focus = TEX_President_McMath
+				}
+				has_completed_focus = TEX_McMath_Agricultural_Relief_Act
+			}
+			else_if = {
+				limit = {
+					has_completed_focus = TEX_President_Holt
+				}
+				has_completed_focus = TEX_Holt_Agricultural_Relief_Act
+			}
+			else = {
+				always = no
+			}
+			NOT = {
+				has_country_flag = TEX_Agricultural_Relief_Act_passed
+			}
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete TEX_Agricultural_Relief_Act_Start target: [From.GetName]"
+			set_country_flag = TEX_Bill_Introduced_House
+			set_country_flag = TEX_Agricultural_Relief_Act_Act
+			#POLITICS: 0 = NO SUPPORT, 1 = LOW SUPPORT, 2 = MED SUPPORT, 3 = HIGH SUPPORT, 4 = TOTAL SUPPORT#
+			set_temp_variable = {
+				TEX_Orthodox_Support_Var = 4
+			}
+			set_temp_variable = {
+				TEX_Con_Support_Var = 4
+			}
+			set_temp_variable = {
+				TEX_Prog_Support_Var = 2
+			}
+			set_temp_variable = {
+				TEX_Rest_Support_Var = 4
+			}
+			TEX_Set_Congress_Support = yes
+			activate_mission = TEX_Agricultural_Relief_Act_House
+		}
+		ai_will_do = {
+			base = 1
+			modifier = {
+				has_country_flag = TEX_Voting_On_Bills
+				factor = 0
+			}
+		}
+	}
+	TEX_Agricultural_Relief_Act_House = {
+		allowed = {
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = TEX_Has_Majority_House
+				check_variable = {
+					var = TEX_House_Total_support
+					value = 22
+					compare = greater_than_or_equals
+				}
+			}
+		}
+		activation = {
+			always = no
+		}
+		is_good = no
+		selectable_mission = yes
+		days_mission_timeout = 60
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete TEX_Agricultural_Relief_Act_House target: [From.GetName]"
+			custom_effect_tooltip = TEX_House_Vote
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_House_Total_support
+						value = 22
+						compare = greater_than
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Pass
+				set_country_flag = TEX_Bill_Passed_House
+				set_country_flag = TEX_Bill_Introduced_Senate
+				activate_mission = TEX_Agricultural_Relief_Act_Senate
+			}
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_House_Total_support
+						value = 22
+						compare = less_than_or_equals
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Fail
+				set_country_flag = TEX_Bill_Failed_House
+				hidden_effect = {
+					country_event = {
+						id = tex.157
+					}
+				}
+			}
+		}
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout TEX_Agricultural_Relief_Act_House target: [From.GetName]"
+			custom_effect_tooltip = TEX_House_Vote
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_House_Total_support
+						value = 22
+						compare = greater_than
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Pass
+				set_country_flag = TEX_Bill_Passed_House
+				set_country_flag = TEX_Bill_Introduced_Senate
+				activate_mission = TEX_Agricultural_Relief_Act_Senate
+			}
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_House_Total_support
+						value = 22
+						compare = less_than_or_equals
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Fail
+				set_country_flag = TEX_Bill_Failed_House
+				hidden_effect = {
+					country_event = {
+						id = tex.157
+					}
+				}
+			}
+		}
+		ai_will_do = {
+			base = 1
+			modifier = {
+				check_variable = {
+					var = TEX_House_Total_support
+					value = 22
+					compare = less_than_or_equals
+				}
+				factor = 0
+			}
+		}
+	}
+	TEX_Agricultural_Relief_Act_Senate = {
+		allowed = {
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = TEX_Has_Majority_Senate
+				check_variable = {
+					var = TEX_Senate_Total_support
+					value = 11
+					compare = greater_than
+				}
+			}
+		}
+		activation = {
+			always = no
+		}
+		is_good = no
+		selectable_mission = yes
+		days_mission_timeout = 60
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete TEX_Agricultural_Relief_Act_Senate target: [From.GetName]"
+			custom_effect_tooltip = TEX_Senate_Vote
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_Senate_Total_support
+						value = 11
+						compare = greater_than
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Pass_Senate
+				set_country_flag = TEX_Bill_Passed_Senate
+				set_country_flag = TEX_Agricultural_Relief_Act_passed
+				TEX_focus_Agricultural_Relief_Act = yes
+				hidden_effect = {
+					country_event = {
+						id = tex.155
+					}
+				}
+			}
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_Senate_Total_support
+						value = 11
+						compare = less_than_or_equals
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Fail
+				set_country_flag = TEX_Bill_Failed_Senate
+				hidden_effect = {
+					country_event = {
+						id = tex.156
+					}
+				}
+			}
+		}
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout TEX_Agricultural_Relief_Act_Senate target: [From.GetName]"
+			custom_effect_tooltip = TEX_Senate_Vote
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_Senate_Total_support
+						value = 11
+						compare = greater_than
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Pass_Senate
+				set_country_flag = TEX_Bill_Passed_Senate
+				set_country_flag = TEX_Agricultural_Relief_Act_passed
+				TEX_focus_Agricultural_Relief_Act = yes
+				hidden_effect = {
+					country_event = {
+						id = tex.155
+					}
+				}
+			}
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_Senate_Total_support
+						value = 11
+						compare = less_than_or_equals
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Fail
+				set_country_flag = TEX_Bill_Failed_Senate
+				hidden_effect = {
+					country_event = {
+						id = tex.156
+					}
+				}
+			}
+		}
+		ai_will_do = {
+			base = 1
+			modifier = {
+				check_variable = {
+					var = TEX_Senate_Total_support
+					value = 22
+					compare = less_than_or_equals
+				}
+				factor = 0
+			}
+		}
+	}
+	###Expand the Agriculture Act###
+	TEX_Expand_Agricultural_Relief_Act_Start = {
+		allowed = {
+		}
+		available = {
+			has_completed_focus = TEX_1952_Orthodox_Agriculture_Act
+			TEX_has_active_bill = no
+		}
+		visible = {
+			has_completed_focus = TEX_1952_Orthodox_Agriculture_Act
+			NOT = {
+				has_country_flag = TEX_Expand_Agricultural_Relief_Act_passed
+			}
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete TEX_Expand_Agricultural_Relief_Act_Start target: [From.GetName]"
+			set_country_flag = TEX_Bill_Introduced_House
+			set_country_flag = TEX_Expand_Agricultural_Relief_Act
+			#POLITICS: 0 = NO SUPPORT, 1 = LOW SUPPORT, 2 = MED SUPPORT, 3 = HIGH SUPPORT, 4 = TOTAL SUPPORT#
+			set_temp_variable = {
+				TEX_Orthodox_Support_Var = 4
+			}
+			set_temp_variable = {
+				TEX_Con_Support_Var = 4
+			}
+			set_temp_variable = {
+				TEX_Prog_Support_Var = 2
+			}
+			set_temp_variable = {
+				TEX_Rest_Support_Var = 4
+			}
+			TEX_Set_Congress_Support = yes
+			activate_mission = TEX_Expand_Agricultural_Relief_Act_House
+		}
+		ai_will_do = {
+			base = 1
+			modifier = {
+				has_country_flag = TEX_Voting_On_Bills
+				factor = 0
+			}
+		}
+	}
+	TEX_Expand_Agricultural_Relief_Act_House = {
+		allowed = {
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = TEX_Has_Majority_House
+				check_variable = {
+					var = TEX_House_Total_support
+					value = 22
+					compare = greater_than_or_equals
+				}
+			}
+		}
+		activation = {
+			always = no
+		}
+		is_good = no
+		selectable_mission = yes
+		days_mission_timeout = 60
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete TEX_Expand_Agricultural_Relief_Act_House target: [From.GetName]"
+			custom_effect_tooltip = TEX_House_Vote
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_House_Total_support
+						value = 22
+						compare = greater_than
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Pass
+				set_country_flag = TEX_Bill_Passed_House
+				set_country_flag = TEX_Bill_Introduced_Senate
+				activate_mission = TEX_Expand_Agricultural_Relief_Act_Senate
+			}
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_House_Total_support
+						value = 22
+						compare = less_than_or_equals
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Fail
+				set_country_flag = TEX_Bill_Failed_House
+				hidden_effect = {
+					country_event = {
+						id = tex.157
+					}
+				}
+			}
+		}
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout TEX_Expand_Agricultural_Relief_Act_House target: [From.GetName]"
+			custom_effect_tooltip = TEX_House_Vote
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_House_Total_support
+						value = 22
+						compare = greater_than
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Pass
+				set_country_flag = TEX_Bill_Passed_House
+				set_country_flag = TEX_Bill_Introduced_Senate
+				activate_mission = TEX_Expand_Agricultural_Relief_Act_Senate
+			}
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_House_Total_support
+						value = 22
+						compare = less_than_or_equals
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Fail
+				set_country_flag = TEX_Bill_Failed_House
+				hidden_effect = {
+					country_event = {
+						id = tex.157
+					}
+				}
+			}
+		}
+		ai_will_do = {
+			base = 1
+			modifier = {
+				check_variable = {
+					var = TEX_House_Total_support
+					value = 22
+					compare = less_than_or_equals
+				}
+				factor = 0
+			}
+		}
+	}
+	TEX_Expand_Agricultural_Relief_Act_Senate = {
+		allowed = {
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = TEX_Has_Majority_Senate
+				check_variable = {
+					var = TEX_Senate_Total_support
+					value = 11
+					compare = greater_than
+				}
+			}
+		}
+		activation = {
+			always = no
+		}
+		is_good = no
+		selectable_mission = yes
+		days_mission_timeout = 60
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete TEX_Expand_Agricultural_Relief_Act_Senate target: [From.GetName]"
+			custom_effect_tooltip = TEX_Senate_Vote
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_Senate_Total_support
+						value = 11
+						compare = greater_than
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Pass_Senate
+				set_country_flag = TEX_Bill_Passed_Senate
+				set_country_flag = TEX_Expand_Agricultural_Relief_Act_passed
+				TEX_focus_Agricultural_Relief_Act = yes
+				hidden_effect = {
+					country_event = {
+						id = tex.155
+					}
+				}
+			}
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_Senate_Total_support
+						value = 11
+						compare = less_than_or_equals
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Fail
+				set_country_flag = TEX_Bill_Failed_Senate
+				hidden_effect = {
+					country_event = {
+						id = tex.156
+					}
+				}
+			}
+		}
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout TEX_Expand_Agricultural_Relief_Act_Senate target: [From.GetName]"
+			custom_effect_tooltip = TEX_Senate_Vote
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_Senate_Total_support
+						value = 11
+						compare = greater_than
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Pass_Senate
+				set_country_flag = TEX_Bill_Passed_Senate
+				set_country_flag = TEX_Expand_Agricultural_Relief_Act_passed
+				TEX_focus_Agricultural_Relief_Act = yes
+				hidden_effect = {
+					country_event = {
+						id = tex.155
+					}
+				}
+			}
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_Senate_Total_support
+						value = 11
+						compare = less_than_or_equals
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Fail
+				set_country_flag = TEX_Bill_Failed_Senate
+				hidden_effect = {
+					country_event = {
+						id = tex.156
+					}
+				}
+			}
+		}
+		ai_will_do = {
+			base = 1
+			modifier = {
+				check_variable = {
+					var = TEX_Senate_Total_support
+					value = 22
+					compare = less_than_or_equals
+				}
+				factor = 0
+			}
+		}
+	}
+	###Union Election Act###
+	TEX_Union_Election_Act_Start = {
+		allowed = {
+		}
+		available = {
+			has_completed_focus = TEX_1952_Prog_Integrate_Primaries
+			TEX_has_active_bill = no
+			has_country_flag = TEX_Defense_Democracy_Act_passed
+		}
+		visible = {
+			has_completed_focus = TEX_1952_Prog_Integrate_Primaries
+			NOT = {
+				has_country_flag = TEX_Union_Election_Act_passed
+			}
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete TEX_Union_Election_Act_Start target: [From.GetName]"
+			set_country_flag = TEX_Bill_Introduced_House
+			set_country_flag = TEX_Union_Election_Act
+			#POLITICS: 0 = NO SUPPORT, 1 = LOW SUPPORT, 2 = MED SUPPORT, 3 = HIGH SUPPORT, 4 = TOTAL SUPPORT#
+			set_temp_variable = {
+				TEX_Orthodox_Support_Var = 4
+			}
+			set_temp_variable = {
+				TEX_Con_Support_Var = 4
+			}
+			set_temp_variable = {
+				TEX_Prog_Support_Var = 2
+			}
+			set_temp_variable = {
+				TEX_Rest_Support_Var = 4
+			}
+			TEX_Set_Congress_Support = yes
+			activate_mission = TEX_Union_Election_Act_House
+		}
+		ai_will_do = {
+			base = 1
+			modifier = {
+				has_country_flag = TEX_Voting_On_Bills
+				factor = 0
+			}
+		}
+	}
+	TEX_Union_Election_Act_House = {
+		allowed = {
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = TEX_Has_Majority_House
+				check_variable = {
+					var = TEX_House_Total_support
+					value = 22
+					compare = greater_than_or_equals
+				}
+			}
+		}
+		activation = {
+			always = no
+		}
+		is_good = no
+		selectable_mission = yes
+		days_mission_timeout = 60
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete TEX_Union_Election_Act_House target: [From.GetName]"
+			custom_effect_tooltip = TEX_House_Vote
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_House_Total_support
+						value = 22
+						compare = greater_than
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Pass
+				set_country_flag = TEX_Bill_Passed_House
+				set_country_flag = TEX_Bill_Introduced_Senate
+				activate_mission = TEX_Union_Election_Act_Senate
+			}
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_House_Total_support
+						value = 22
+						compare = less_than_or_equals
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Fail
+				set_country_flag = TEX_Bill_Failed_House
+				hidden_effect = {
+					country_event = {
+						id = tex.157
+					}
+				}
+			}
+		}
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout TEX_Union_Election_Act_House target: [From.GetName]"
+			custom_effect_tooltip = TEX_House_Vote
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_House_Total_support
+						value = 22
+						compare = greater_than
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Pass
+				set_country_flag = TEX_Bill_Passed_House
+				set_country_flag = TEX_Bill_Introduced_Senate
+				activate_mission = TEX_Union_Election_Act_Senate
+			}
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_House_Total_support
+						value = 22
+						compare = less_than_or_equals
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Fail
+				set_country_flag = TEX_Bill_Failed_House
+				hidden_effect = {
+					country_event = {
+						id = tex.157
+					}
+				}
+			}
+		}
+		ai_will_do = {
+			base = 1
+			modifier = {
+				check_variable = {
+					var = TEX_House_Total_support
+					value = 22
+					compare = less_than_or_equals
+				}
+				factor = 0
+			}
+		}
+	}
+	TEX_Union_Election_Act_Senate = {
+		allowed = {
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = TEX_Has_Majority_Senate
+				check_variable = {
+					var = TEX_Senate_Total_support
+					value = 11
+					compare = greater_than
+				}
+			}
+		}
+		activation = {
+			always = no
+		}
+		is_good = no
+		selectable_mission = yes
+		days_mission_timeout = 60
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete TEX_Union_Election_Act_Senate target: [From.GetName]"
+			custom_effect_tooltip = TEX_Senate_Vote
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_Senate_Total_support
+						value = 11
+						compare = greater_than
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Pass_Senate
+				set_country_flag = TEX_Bill_Passed_Senate
+				set_country_flag = TEX_Union_Election_Act_passed
+				hidden_effect = {
+					country_event = {
+						id = tex.155
+					}
+				}
+			}
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_Senate_Total_support
+						value = 11
+						compare = less_than_or_equals
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Fail
+				set_country_flag = TEX_Bill_Failed_Senate
+				hidden_effect = {
+					country_event = {
+						id = tex.156
+					}
+				}
+			}
+		}
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout TEX_Union_Election_Act_Senate target: [From.GetName]"
+			custom_effect_tooltip = TEX_Senate_Vote
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_Senate_Total_support
+						value = 11
+						compare = greater_than
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Pass_Senate
+				set_country_flag = TEX_Bill_Passed_Senate
+				set_country_flag = TEX_Union_Election_Act_passed
+				hidden_effect = {
+					country_event = {
+						id = tex.155
+					}
+				}
+			}
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_Senate_Total_support
+						value = 11
+						compare = less_than_or_equals
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Fail
+				set_country_flag = TEX_Bill_Failed_Senate
+				hidden_effect = {
+					country_event = {
+						id = tex.156
+					}
+				}
+			}
+		}
+		ai_will_do = {
+			base = 1
+			modifier = {
+				check_variable = {
+					var = TEX_Senate_Total_support
+					value = 22
+					compare = less_than_or_equals
+				}
+				factor = 0
+			}
+		}
+	}
+	###Defense of Democracy Act###
+	TEX_Defense_Democracy_Act_Start = {
+		allowed = {
+		}
+		available = {
+			has_completed_focus = TEX_1952_Prog_Integrate_Primaries
+			TEX_has_active_bill = no
+		}
+		visible = {
+			has_completed_focus = TEX_1952_Prog_Integrate_Primaries
+			NOT = {
+				has_country_flag = TEX_Defense_Democracy_Act_passed
+			}
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete TEX_Defense_Democracy_Act_Start target: [From.GetName]"
+			set_country_flag = TEX_Bill_Introduced_House
+			set_country_flag = TEX_Defense_Democracy_Act
+			#POLITICS: 0 = NO SUPPORT, 1 = LOW SUPPORT, 2 = MED SUPPORT, 3 = HIGH SUPPORT, 4 = TOTAL SUPPORT#
+			set_temp_variable = {
+				TEX_Orthodox_Support_Var = 1
+			}
+			set_temp_variable = {
+				TEX_Con_Support_Var = 0
+			}
+			set_temp_variable = {
+				TEX_Prog_Support_Var = 4
+			}
+			set_temp_variable = {
+				TEX_Rest_Support_Var = 4
+			}
+			TEX_Set_Congress_Support = yes
+			activate_mission = TEX_Defense_Democracy_Act_House
+		}
+		ai_will_do = {
+			base = 1
+			modifier = {
+				has_country_flag = TEX_Voting_On_Bills
+				factor = 0
+			}
+		}
+	}
+	TEX_Defense_Democracy_Act_House = {
+		allowed = {
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = TEX_Has_Majority_House
+				check_variable = {
+					var = TEX_House_Total_support
+					value = 22
+					compare = greater_than_or_equals
+				}
+			}
+		}
+		activation = {
+			always = no
+		}
+		is_good = no
+		selectable_mission = yes
+		days_mission_timeout = 60
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete TEX_Defense_Democracy_Act_House target: [From.GetName]"
+			custom_effect_tooltip = TEX_House_Vote
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_House_Total_support
+						value = 22
+						compare = greater_than
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Pass
+				set_country_flag = TEX_Bill_Passed_House
+				set_country_flag = TEX_Bill_Introduced_Senate
+				activate_mission = TEX_Defense_Democracy_Act_Senate
+			}
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_House_Total_support
+						value = 22
+						compare = less_than_or_equals
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Fail
+				set_country_flag = TEX_Bill_Failed_House
+				hidden_effect = {
+					country_event = {
+						id = tex.157
+					}
+				}
+			}
+		}
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout TEX_Defense_Democracy_Act_House target: [From.GetName]"
+			custom_effect_tooltip = TEX_House_Vote
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_House_Total_support
+						value = 22
+						compare = greater_than
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Pass
+				set_country_flag = TEX_Bill_Passed_House
+				set_country_flag = TEX_Bill_Introduced_Senate
+				activate_mission = TEX_Defense_Democracy_Act_Senate
+			}
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_House_Total_support
+						value = 22
+						compare = less_than_or_equals
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Fail
+				set_country_flag = TEX_Bill_Failed_House
+				hidden_effect = {
+					country_event = {
+						id = tex.157
+					}
+				}
+			}
+		}
+		ai_will_do = {
+			base = 1
+			modifier = {
+				check_variable = {
+					var = TEX_House_Total_support
+					value = 22
+					compare = less_than_or_equals
+				}
+				factor = 0
+			}
+		}
+	}
+	TEX_Defense_Democracy_Act_Senate = {
+		allowed = {
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = TEX_Has_Majority_Senate
+				check_variable = {
+					var = TEX_Senate_Total_support
+					value = 11
+					compare = greater_than
+				}
+			}
+		}
+		activation = {
+			always = no
+		}
+		is_good = no
+		selectable_mission = yes
+		days_mission_timeout = 60
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete TEX_Defense_Democracy_Act_Senate target: [From.GetName]"
+			custom_effect_tooltip = TEX_Senate_Vote
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_Senate_Total_support
+						value = 11
+						compare = greater_than
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Pass_Senate
+				set_country_flag = TEX_Bill_Passed_Senate
+				set_country_flag = TEX_Defense_Democracy_Act_passed
+				custom_effect_tooltip = TEX_Defense_Democracy_Act_tt
+				hidden_effect = {
+					country_event = {
+						id = tex.155
+					}
+				}
+			}
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_Senate_Total_support
+						value = 11
+						compare = less_than_or_equals
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Fail
+				set_country_flag = TEX_Bill_Failed_Senate
+				hidden_effect = {
+					country_event = {
+						id = tex.156
+					}
+				}
+			}
+		}
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout TEX_Defense_Democracy_Act_Senate target: [From.GetName]"
+			custom_effect_tooltip = TEX_Senate_Vote
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_Senate_Total_support
+						value = 11
+						compare = greater_than
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Pass_Senate
+				set_country_flag = TEX_Bill_Passed_Senate
+				set_country_flag = TEX_Defense_Democracy_Act_passed
+				custom_effect_tooltip = TEX_Defense_Democracy_Act_passed_tt
+				hidden_effect = {
+					country_event = {
+						id = tex.155
+					}
+				}
+			}
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_Senate_Total_support
+						value = 11
+						compare = less_than_or_equals
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Fail
+				set_country_flag = TEX_Bill_Failed_Senate
+				hidden_effect = {
+					country_event = {
+						id = tex.156
+					}
+				}
+			}
+		}
+		ai_will_do = {
+			base = 1
+			modifier = {
+				check_variable = {
+					var = TEX_Senate_Total_support
+					value = 22
+					compare = less_than_or_equals
+				}
+				factor = 0
+			}
+		}
+	}
+	###Limited Inheritance Act###
+	TEX_Limited_Inheritance_Act_Start = {
+		allowed = {
+		}
+		available = {
+			OR = {
+				has_completed_focus = TEX_Long_Limited_Inheritance_Act
+				has_completed_focus = TEX_McMath_Limited_Inheritance_Act
+			}
+			TEX_has_active_bill = no
+		}
+		visible = {
+			OR = {
+				has_completed_focus = TEX_Long_Limited_Inheritance_Act
+				has_completed_focus = TEX_McMath_Limited_Inheritance_Act
+			}
+			NOT = {
+				has_country_flag = TEX_Limited_Inheritance_Act_passed
+			}
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete TEX_Limited_Inheritance_Act_Start target: [From.GetName]"
+			set_country_flag = TEX_Bill_Introduced_House
+			set_country_flag = TEX_Limited_Inheritance_Act
+			#POLITICS: 0 = NO SUPPORT, 1 = LOW SUPPORT, 2 = MED SUPPORT, 3 = HIGH SUPPORT, 4 = TOTAL SUPPORT#
+			set_temp_variable = {
+				TEX_Orthodox_Support_Var = 1
+			}
+			set_temp_variable = {
+				TEX_Con_Support_Var = 0
+			}
+			set_temp_variable = {
+				TEX_Prog_Support_Var = 4
+			}
+			set_temp_variable = {
+				TEX_Rest_Support_Var = 4
+			}
+			TEX_Set_Congress_Support = yes
+			activate_mission = TEX_Limited_Inheritance_Act_House
+		}
+		ai_will_do = {
+			base = 1
+			modifier = {
+				has_country_flag = TEX_Voting_On_Bills
+				factor = 0
+			}
+		}
+	}
+	TEX_Limited_Inheritance_Act_House = {
+		allowed = {
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = TEX_Has_Majority_House
+				check_variable = {
+					var = TEX_House_Total_support
+					value = 22
+					compare = greater_than_or_equals
+				}
+			}
+		}
+		activation = {
+			always = no
+		}
+		is_good = no
+		selectable_mission = yes
+		days_mission_timeout = 60
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete TEX_Limited_Inheritance_Act_House target: [From.GetName]"
+			custom_effect_tooltip = TEX_House_Vote
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_House_Total_support
+						value = 22
+						compare = greater_than
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Pass
+				set_country_flag = TEX_Bill_Passed_House
+				set_country_flag = TEX_Bill_Introduced_Senate
+				activate_mission = TEX_Limited_Inheritance_Act_Senate
+			}
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_House_Total_support
+						value = 22
+						compare = less_than_or_equals
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Fail
+				set_country_flag = TEX_Bill_Failed_House
+				hidden_effect = {
+					country_event = {
+						id = tex.157
+					}
+				}
+			}
+		}
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout TEX_Limited_Inheritance_Act_House target: [From.GetName]"
+			custom_effect_tooltip = TEX_House_Vote
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_House_Total_support
+						value = 22
+						compare = greater_than
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Pass
+				set_country_flag = TEX_Bill_Passed_House
+				set_country_flag = TEX_Bill_Introduced_Senate
+				activate_mission = TEX_Limited_Inheritance_Act_Senate
+			}
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_House_Total_support
+						value = 22
+						compare = less_than_or_equals
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Fail
+				set_country_flag = TEX_Bill_Failed_House
+				hidden_effect = {
+					country_event = {
+						id = tex.157
+					}
+				}
+			}
+		}
+		ai_will_do = {
+			base = 1
+			modifier = {
+				check_variable = {
+					var = TEX_House_Total_support
+					value = 22
+					compare = less_than_or_equals
+				}
+				factor = 0
+			}
+		}
+	}
+	TEX_Limited_Inheritance_Act_Senate = {
+		allowed = {
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = TEX_Has_Majority_Senate
+				check_variable = {
+					var = TEX_Senate_Total_support
+					value = 11
+					compare = greater_than
+				}
+			}
+		}
+		activation = {
+			always = no
+		}
+		is_good = no
+		selectable_mission = yes
+		days_mission_timeout = 60
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete TEX_Limited_Inheritance_Act_Senate target: [From.GetName]"
+			custom_effect_tooltip = TEX_Senate_Vote
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_Senate_Total_support
+						value = 11
+						compare = greater_than
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Pass_Senate
+				set_country_flag = TEX_Bill_Passed_Senate
+				set_country_flag = TEX_Limited_Inheritance_Act_passed
+				add_ideas = TEX_limited_inheritance_idea
+				hidden_effect = {
+					country_event = {
+						id = tex.155
+					}
+				}
+			}
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_Senate_Total_support
+						value = 11
+						compare = less_than_or_equals
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Fail
+				set_country_flag = TEX_Bill_Failed_Senate
+				hidden_effect = {
+					country_event = {
+						id = tex.156
+					}
+				}
+			}
+		}
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout TEX_Limited_Inheritance_Act_Senate target: [From.GetName]"
+			custom_effect_tooltip = TEX_Senate_Vote
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_Senate_Total_support
+						value = 11
+						compare = greater_than
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Pass_Senate
+				set_country_flag = TEX_Bill_Passed_Senate
+				set_country_flag = TEX_Limited_Inheritance_Act_passed
+				add_ideas = TEX_limited_inheritance_idea
+				hidden_effect = {
+					country_event = {
+						id = tex.155
+					}
+				}
+			}
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_Senate_Total_support
+						value = 11
+						compare = less_than_or_equals
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Fail
+				set_country_flag = TEX_Bill_Failed_Senate
+				hidden_effect = {
+					country_event = {
+						id = tex.156
+					}
+				}
+			}
+		}
+		ai_will_do = {
+			base = 1
+			modifier = {
+				check_variable = {
+					var = TEX_Senate_Total_support
+					value = 22
+					compare = less_than_or_equals
+				}
+				factor = 0
+			}
+		}
+	}
+	###Eliminate the Poll Tax Act###
+	TEX_Eliminate_the_Poll_Tax_Start = {
+		allowed = {
+		}
+		available = {
+			has_completed_focus = TEX_McMath_Limited_Inheritance_Act
+			TEX_has_active_bill = no
+		}
+		visible = {
+			has_completed_focus = TEX_McMath_Limited_Inheritance_Act
+			NOT = {
+				has_country_flag = TEX_Eliminate_the_Poll_Tax_passed
+			}
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete TEX_Eliminate_the_Poll_Tax_Start target: [From.GetName]"
+			set_country_flag = TEX_Bill_Introduced_House
+			set_country_flag = TEX_Eliminate_the_Poll_Tax_Act
+			#POLITICS: 0 = NO SUPPORT, 1 = LOW SUPPORT, 2 = MED SUPPORT, 3 = HIGH SUPPORT, 4 = TOTAL SUPPORT#
+			set_temp_variable = {
+				TEX_Orthodox_Support_Var = 1
+			}
+			set_temp_variable = {
+				TEX_Con_Support_Var = 0
+			}
+			set_temp_variable = {
+				TEX_Prog_Support_Var = 4
+			}
+			set_temp_variable = {
+				TEX_Rest_Support_Var = 4
+			}
+			TEX_Set_Congress_Support = yes
+			activate_mission = TEX_Eliminate_the_Poll_Tax_House
+		}
+		ai_will_do = {
+			base = 1
+			modifier = {
+				has_country_flag = TEX_Voting_On_Bills
+				factor = 0
+			}
+		}
+	}
+	TEX_Eliminate_the_Poll_Tax_House = {
+		allowed = {
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = TEX_Has_Majority_House
+				check_variable = {
+					var = TEX_House_Total_support
+					value = 22
+					compare = greater_than_or_equals
+				}
+			}
+		}
+		activation = {
+			always = no
+		}
+		is_good = no
+		selectable_mission = yes
+		days_mission_timeout = 60
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete TEX_Eliminate_the_Poll_Tax_House target: [From.GetName]"
+			custom_effect_tooltip = TEX_House_Vote
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_House_Total_support
+						value = 22
+						compare = greater_than
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Pass
+				set_country_flag = TEX_Bill_Passed_House
+				set_country_flag = TEX_Bill_Introduced_Senate
+				activate_mission = TEX_Eliminate_the_Poll_Tax_Senate
+			}
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_House_Total_support
+						value = 22
+						compare = less_than_or_equals
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Fail
+				set_country_flag = TEX_Bill_Failed_House
+				hidden_effect = {
+					country_event = {
+						id = tex.157
+					}
+				}
+			}
+		}
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout TEX_Eliminate_the_Poll_Tax_House target: [From.GetName]"
+			custom_effect_tooltip = TEX_House_Vote
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_House_Total_support
+						value = 22
+						compare = greater_than
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Pass
+				set_country_flag = TEX_Bill_Passed_House
+				set_country_flag = TEX_Bill_Introduced_Senate
+				activate_mission = TEX_Eliminate_the_Poll_Tax_Senate
+			}
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_House_Total_support
+						value = 22
+						compare = less_than_or_equals
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Fail
+				set_country_flag = TEX_Bill_Failed_House
+				hidden_effect = {
+					country_event = {
+						id = tex.157
+					}
+				}
+			}
+		}
+		ai_will_do = {
+			base = 1
+			modifier = {
+				check_variable = {
+					var = TEX_House_Total_support
+					value = 22
+					compare = less_than_or_equals
+				}
+				factor = 0
+			}
+		}
+	}
+	TEX_Eliminate_the_Poll_Tax_Senate = {
+		allowed = {
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = TEX_Has_Majority_Senate
+				check_variable = {
+					var = TEX_Senate_Total_support
+					value = 11
+					compare = greater_than
+				}
+			}
+		}
+		activation = {
+			always = no
+		}
+		is_good = no
+		selectable_mission = yes
+		days_mission_timeout = 60
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete TEX_Eliminate_the_Poll_Tax_Senate target: [From.GetName]"
+			custom_effect_tooltip = TEX_Senate_Vote
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_Senate_Total_support
+						value = 11
+						compare = greater_than
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Pass_Senate
+				set_country_flag = TEX_Bill_Passed_Senate
+				set_country_flag = TEX_Eliminate_the_Poll_Tax_passed
+				add_ideas = TEX_eliminated_poll_tax
+				every_state = {
+					limit = {
+						is_owned_and_controlled_by = TEX
+					}
+					set_temp_variable = {
+						pop_type_added = 3
+					}
+					set_temp_variable = {
+						pop_value_added = 5
+					}
+					TEX_add_electoral_popularity = yes
+				}
+				hidden_effect = {
+					country_event = {
+						id = tex.155
+					}
+				}
+			}
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_Senate_Total_support
+						value = 11
+						compare = less_than_or_equals
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Fail
+				set_country_flag = TEX_Bill_Failed_Senate
+				hidden_effect = {
+					country_event = {
+						id = tex.156
+					}
+				}
+			}
+		}
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout TEX_Eliminate_the_Poll_Tax_Senate target: [From.GetName]"
+			custom_effect_tooltip = TEX_Senate_Vote
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_Senate_Total_support
+						value = 11
+						compare = greater_than
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Pass_Senate
+				set_country_flag = TEX_Bill_Passed_Senate
+				set_country_flag = TEX_Eliminate_the_Poll_Tax_passed
+				add_ideas = TEX_eliminated_poll_tax
+				every_state = {
+					limit = {
+						is_owned_and_controlled_by = TEX
+					}
+					set_temp_variable = {
+						pop_type_added = 3
+					}
+					set_temp_variable = {
+						pop_value_added = 5
+					}
+					TEX_add_electoral_popularity = yes
+				}
+				hidden_effect = {
+					country_event = {
+						id = tex.155
+					}
+				}
+			}
+			if = {
+				limit = {
+					check_variable = {
+						var = TEX_Senate_Total_support
+						value = 11
+						compare = less_than_or_equals
+					}
+				}
+				custom_effect_tooltip = TEX_Bill_Will_Fail
+				set_country_flag = TEX_Bill_Failed_Senate
+				hidden_effect = {
+					country_event = {
+						id = tex.156
+					}
+				}
+			}
+		}
+		ai_will_do = {
+			base = 1
+			modifier = {
+				check_variable = {
+					var = TEX_Senate_Total_support
+					value = 22
+					compare = less_than_or_equals
+				}
+				factor = 0
+			}
+		}
+	}
+}
+
+# DECISION CATEGORY: TEX_mountaintop_insurgency
+# THE MOUNTAINTOP INSURGENCY
+# LAST UPDATED: 2023-05-16
+TEX_mountaintop_insurgency = {
+	TEX_Insurgency_Strength_Decision = {
+		icon = GFX_decision_generic_ignite_civil_war
+		visible = {
+			NOT = {
+				OR = {
+					has_country_flag = TEX_insurgency_destroyed
+					has_country_flag = TEX_insurgency_success
+				}
+			}
+		}
+		available = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+	}
+	TEX_Force_Strength_Decision = {
+		icon = GFX_decision_soldierly_discipline
+		visible = {
+			NOT = {
+				OR = {
+					has_country_flag = TEX_insurgency_destroyed
+					has_country_flag = TEX_insurgency_success
+				}
+			}
+		}
+		available = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+	}
+	TEX_Local_Support_Decision = {
+		icon = GFX_decision_generic_civil_support
+		visible = {
+			NOT = {
+				OR = {
+					has_country_flag = TEX_insurgency_destroyed
+					has_country_flag = TEX_insurgency_success
+				}
+			}
+		}
+		available = {
+			hidden_trigger = {
+				always = no
+			}
+		}
+	}
+	TEX_Crack_Down_On_The_Insurgency = {
+		icon = GFX_decision_generic_ignite_civil_war
+		visible = {
+			NOT = {
+				OR = {
+					has_country_flag = TEX_insurgency_destroyed
+					has_country_flag = TEX_insurgency_success
+				}
+			}
+		}
+		available = {
+			NOT = {
+				has_country_flag = TEX_doing_other_thing_mountaintop_flag
+			}
+		}
+		custom_cost_trigger = {
+			command_power > 14
+		}
+		custom_cost_text = decision_cost_CP_15
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove TEX_Crack_Down_On_The_Insurgency target: [From.GetName]"
+			TEX_Decrease_Insurgency_Strength = yes
+			TEX_Decrease_Force_Strength = yes
+			TEX_increase_local_support_exhaustion = yes
+		}
+		days_remove = 30
+		days_re_enable = 15
+		ai_will_do = {
+			base = 0
+			modifier = {
+				command_power > 14.99
+				check_variable = {
+					TEX_mountaintop_insurgency_strength > 0
+				}
+				factor = 1
+			}
+		}
+	}
+	TEX_Surge_Troops_In = {
+		icon = GFX_decision_soldierly_discipline
+		visible = {
+			NOT = {
+				OR = {
+					has_country_flag = TEX_insurgency_destroyed
+					has_country_flag = TEX_insurgency_success
+				}
+			}
+		}
+		available = {
+			NOT = {
+				has_country_flag = TEX_doing_other_thing_mountaintop_flag
+			}
+		}
+		custom_cost_trigger = {
+			has_manpower > 1000
+		}
+		custom_cost_text = decision_cost_1000_mp
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove TEX_Surge_Troops_In target: [From.GetName]"
+			TEX_Increase_Force_Strength = yes
+			TEX_increase_local_support_exhaustion = yes
+			hidden_effect = {
+				add_manpower = -1000
+			}
+		}
+		days_remove = 20
+		days_re_enable = 10
+		ai_will_do = {
+			base = 0
+			modifier = {
+				has_manpower > 1000
+				check_variable = {
+					TEX_local_support_level < 5
+				}
+				factor = 1
+			}
+		}
+	}
+	TEX_Give_Concessions_to_the_Civilian_Government = {
+		icon = GFX_decision_generic_civil_support
+		visible = {
+			NOT = {
+				OR = {
+					has_country_flag = TEX_insurgency_destroyed
+					has_country_flag = TEX_insurgency_success
+				}
+			}
+		}
+		available = {
+			NOT = {
+				has_country_flag = TEX_doing_other_thing_mountaintop_flag
+			}
+		}
+		cost = 30
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove TEX_Give_Concessions_to_the_Civilian_Government target: [From.GetName]"
+			TEX_Increase_Local_Support = yes
+		}
+		days_remove = 20
+		days_re_enable = 10
+		ai_will_do = {
+			base = 0
+			modifier = {
+				has_political_power > 29.99
+				check_variable = {
+					TEX_local_support_level < 5
+				}
+				factor = 1
+			}
+		}
+	}
+	TEX_The_Insurgency_Grows_In_Strength = {
+		icon = GFX_decision_generic_civil_support
+		allowed = {
+			always = no
+		}
+		available = {
+			always = no
+		}
+		visible = {
+			NOT = {
+				has_country_flag = TEX_Mountaintop_Insurgency_Dealt_With
+			}
+		}
+		cancel_if_not_visible = yes
+		fixed_random_seed = no
+		is_good = yes
+		selectable_mission = no
+		days_mission_timeout = 30
+		fire_only_once = no
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout TEX_The_Insurgency_Grows_In_Strength target: [From.GetName]"
+			TEX_Increase_Insurgency_Strength = yes
+		}
+	}
+	TEX_Defeat_in_the_Insurgency_Imminent = {
+		icon = GFX_decision_generic_civil_support
+		allowed = {
+			always = no
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = TEX_mountaintop_insurgency_strength_not_critical_tt
+				check_variable = {
+					var = TEX_mountaintop_insurgency_strength
+					value = 5
+					compare = less_than
+				}
+			}
+		}
+		visible = {
+			NOT = {
+				check_variable = {
+					TEX_mountaintop_insurgency_strength < 5
+				}
+			}
+		}
+		cancel_if_not_visible = yes
+		fixed_random_seed = no
+		is_good = yes
+		selectable_mission = no
+		days_mission_timeout = 30
+		fire_only_once = no
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout TEX_Defeat_in_the_Insurgency_Imminent target: [From.GetName]"
+			custom_effect_tooltip = TEX_Insurgency_Failure
+			country_event = {
+				id = tex.3
+				days = 0
+			}
+		}
+	}
+}
+
+TEX_interstate_highway = {
+	TEX_lobby_congress = {
+		days_remove = 90
+		fire_only_once = no
+		cost = 50
+		days_re_enable = 30
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete TEX_lobby_congress target: [From.GetName]"
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove TEX_lobby_congress target: [From.GetName]"
+			custom_effect_tooltip = TEX_add_25_bil
+			custom_effect_tooltip = tooltip_white_line
+			add_to_variable = {
+				TEX_interstate_budget = 25
+			}
+		}
+		ai_will_do = {
+			base = 0
+			modifier = {
+				has_political_power > 49
+				check_variable = {
+					TEX_interstate_budget < 19.99
+				}
+				factor = 1
+			}
+		}
+	}
+	TEX_I_4 = {
+		icon = GFX_decision_road
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = TEX_Union_Highways_Act_completed_tt
+				OR = {
+					has_completed_focus = TEX_Long_Union_Highways_Act
+					has_completed_focus = TEX_Holt_Union_Highways_Act
+					has_completed_focus = TEX_McMath_Union_Highways_Act
+				}
+			}
+		}
+		days_remove = 540
+		fire_only_once = yes
+		custom_cost_trigger = {
+			check_variable = {
+				TEX_interstate_budget > 19.99
+			}
+		}
+		custom_cost_text = TEX_has_20_bil
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete TEX_I_4 target: [From.GetName]"
+			add_to_variable = {
+				TEX_interstate_budget = -20
+			}
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove TEX_I_4 target: [From.GetName]"
+			set_country_flag = TEX_completed_i4
+			add_to_variable = {
+				TEX_highway_infra = 0.03
+				tooltip = TEX_highway_tooltip
+			}
+			366 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		ai_will_do = {
+			base = 0
+			modifier = {
+				check_variable = {
+					TEX_interstate_budget > 19.99
+				}
+				factor = 1
+			}
+		}
+	}
+	TEX_I_10 = {
+		icon = GFX_decision_road
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = TEX_Union_Highways_Act_completed_tt
+				OR = {
+					has_completed_focus = TEX_Long_Union_Highways_Act
+					has_completed_focus = TEX_Holt_Union_Highways_Act
+					has_completed_focus = TEX_McMath_Union_Highways_Act
+				}
+			}
+		}
+		days_remove = 540
+		fire_only_once = yes
+		custom_cost_trigger = {
+			check_variable = {
+				TEX_interstate_budget > 19.99
+			}
+		}
+		custom_cost_text = TEX_has_20_bil
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete TEX_I_10 target: [From.GetName]"
+			add_to_variable = {
+				TEX_interstate_budget = -20
+			}
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove TEX_I_10 target: [From.GetName]"
+			set_country_flag = TEX_completed_i10
+			add_to_variable = {
+				TEX_highway_infra = 0.03
+				tooltip = TEX_highway_tooltip
+			}
+			#NM=>FL
+			376 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			792 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			371 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			370 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			367 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			366 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		ai_will_do = {
+			base = 0
+			modifier = {
+				check_variable = {
+					TEX_interstate_budget > 19.99
+				}
+				factor = 1
+			}
+		}
+	}
+	TEX_I_20 = {
+		icon = GFX_decision_road
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = TEX_Union_Highways_Act_completed_tt
+				OR = {
+					has_completed_focus = TEX_Long_Union_Highways_Act
+					has_completed_focus = TEX_Holt_Union_Highways_Act
+					has_completed_focus = TEX_McMath_Union_Highways_Act
+				}
+			}
+		}
+		days_remove = 540
+		fire_only_once = yes
+		custom_cost_trigger = {
+			check_variable = {
+				TEX_interstate_budget > 19.99
+			}
+		}
+		custom_cost_text = TEX_has_20_bil
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete TEX_I_20 target: [From.GetName]"
+			add_to_variable = {
+				TEX_interstate_budget = -20
+			}
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove TEX_I_20 target: [From.GetName]"
+			set_country_flag = TEX_completed_i20
+			add_to_variable = {
+				TEX_highway_infra = 0.03
+				tooltip = TEX_highway_tooltip
+			}
+			#TX=>SC
+			792 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			375 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			371 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			370 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			367 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			365 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			364 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		ai_will_do = {
+			base = 0
+			modifier = {
+				check_variable = {
+					TEX_interstate_budget > 19.99
+				}
+				factor = 1
+			}
+		}
+	}
+	TEX_I_30 = {
+		icon = GFX_decision_road
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = TEX_Union_Highways_Act_completed_tt
+				OR = {
+					has_completed_focus = TEX_Long_Union_Highways_Act
+					has_completed_focus = TEX_Holt_Union_Highways_Act
+					has_completed_focus = TEX_McMath_Union_Highways_Act
+				}
+			}
+		}
+		days_remove = 540
+		fire_only_once = yes
+		custom_cost_trigger = {
+			check_variable = {
+				TEX_interstate_budget > 19.99
+			}
+		}
+		custom_cost_text = TEX_has_20_bil
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete TEX_I_30 target: [From.GetName]"
+			add_to_variable = {
+				TEX_interstate_budget = -20
+			}
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove TEX_I_30 target: [From.GetName]"
+			set_country_flag = TEX_completed_i30
+			add_to_variable = {
+				TEX_highway_infra = 0.03
+				tooltip = TEX_highway_tooltip
+			}
+			#TX=>AR
+			375 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			372 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		ai_will_do = {
+			base = 0
+			modifier = {
+				check_variable = {
+					TEX_interstate_budget > 19.99
+				}
+				factor = 1
+			}
+		}
+	}
+	TEX_I_26 = {
+		icon = GFX_decision_road
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = TEX_Union_Highways_Act_completed_tt
+				OR = {
+					has_completed_focus = TEX_Long_Union_Highways_Act
+					has_completed_focus = TEX_Holt_Union_Highways_Act
+					has_completed_focus = TEX_McMath_Union_Highways_Act
+				}
+			}
+			has_completed_focus = TEX_1952_generic_expand_highway_system
+			has_country_flag = TEX_completed_i20
+		}
+		days_remove = 540
+		fire_only_once = yes
+		custom_cost_trigger = {
+			check_variable = {
+				TEX_interstate_budget > 19.99
+			}
+		}
+		custom_cost_text = TEX_has_20_bil
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete TEX_I_26 target: [From.GetName]"
+			add_to_variable = {
+				TEX_interstate_budget = -20
+			}
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove TEX_I_26 target: [From.GetName]"
+			set_country_flag = TEX_completed_i26
+			add_to_variable = {
+				TEX_highway_infra = 0.03
+				tooltip = TEX_highway_tooltip
+			}
+			#TN=>SC
+			368 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			363 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			364 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		ai_will_do = {
+			base = 0
+			modifier = {
+				check_variable = {
+					TEX_interstate_budget > 19.99
+				}
+				factor = 1
+			}
+		}
+	}
+	TEX_I_35 = {
+		icon = GFX_decision_road
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = TEX_Union_Highways_Act_completed_tt
+				OR = {
+					has_completed_focus = TEX_Long_Union_Highways_Act
+					has_completed_focus = TEX_Holt_Union_Highways_Act
+					has_completed_focus = TEX_McMath_Union_Highways_Act
+				}
+			}
+			has_completed_focus = TEX_1952_generic_expand_highway_system
+			has_country_flag = TEX_completed_i30
+		}
+		days_remove = 540
+		fire_only_once = yes
+		custom_cost_trigger = {
+			check_variable = {
+				TEX_interstate_budget > 19.99
+			}
+		}
+		custom_cost_text = TEX_has_20_bil
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete TEX_I_35 target: [From.GetName]"
+			add_to_variable = {
+				TEX_interstate_budget = -20
+			}
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove TEX_I_35 target: [From.GetName]"
+			set_country_flag = TEX_completed_i35
+			add_to_variable = {
+				TEX_highway_infra = 0.03
+				tooltip = TEX_highway_tooltip
+			}
+			#TX=>IA
+			792 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			375 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			374 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			383 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			373 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			392 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		ai_will_do = {
+			base = 0
+			modifier = {
+				check_variable = {
+					TEX_interstate_budget > 19.99
+				}
+				factor = 1
+			}
+		}
+	}
+	TEX_I_37 = {
+		icon = GFX_decision_road
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = TEX_Union_Highways_Act_completed_tt
+				OR = {
+					has_completed_focus = TEX_Long_Union_Highways_Act
+					has_completed_focus = TEX_Holt_Union_Highways_Act
+					has_completed_focus = TEX_McMath_Union_Highways_Act
+				}
+			}
+			has_completed_focus = TEX_1952_generic_expand_highway_system
+			has_country_flag = TEX_completed_i30
+		}
+		days_remove = 540
+		fire_only_once = yes
+		custom_cost_trigger = {
+			check_variable = {
+				TEX_interstate_budget > 19.99
+			}
+		}
+		custom_cost_text = TEX_has_20_bil
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete TEX_I_37 target: [From.GetName]"
+			add_to_variable = {
+				TEX_interstate_budget = -20
+			}
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove TEX_I_37 target: [From.GetName]"
+			set_country_flag = TEX_completed_i37
+			add_to_variable = {
+				TEX_highway_infra = 0.03
+				tooltip = TEX_highway_tooltip
+			}
+			#TX
+			792 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		ai_will_do = {
+			base = 0
+			modifier = {
+				check_variable = {
+					TEX_interstate_budget > 19.99
+				}
+				factor = 1
+			}
+		}
+	}
+	TEX_I_94 = {
+		icon = GFX_decision_road
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = TEX_Union_Highways_Act_completed_tt
+				OR = {
+					has_completed_focus = TEX_Long_Union_Highways_Act
+					has_completed_focus = TEX_Holt_Union_Highways_Act
+					has_completed_focus = TEX_McMath_Union_Highways_Act
+				}
+			}
+			has_completed_focus = TEX_1952_generic_expand_highway_system
+		}
+		days_remove = 540
+		fire_only_once = yes
+		custom_cost_trigger = {
+			check_variable = {
+				TEX_interstate_budget > 19.99
+			}
+		}
+		custom_cost_text = TEX_has_20_bil
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete TEX_I_94 target: [From.GetName]"
+			add_to_variable = {
+				TEX_interstate_budget = -20
+			}
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove TEX_I_94 target: [From.GetName]"
+			set_country_flag = TEX_completed_i94
+			add_to_variable = {
+				TEX_highway_infra = 0.03
+				tooltip = TEX_highway_tooltip
+			}
+			388 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			389 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+		ai_will_do = {
+			base = 0
+			modifier = {
+				check_variable = {
+					TEX_interstate_budget > 19.99
+				}
+				factor = 1
+			}
+		}
+	}
+}
+
+# nuclear_decisions = {
+# 	###DIVIDER ###
+# 	TEX_nuclear_decisions_divider = {
+# 		#icon = GFX_decision_generic_speech
+# 		allowed = {
+# 			tag = TEX
+# 		}
+# 		visible = {
+# 			has_completed_focus = TEX_Army_Operation_Kingfish
+# 		}
+# 		available = {
+# 			always = no
+# 		}
+# 		complete_effect = {
+#			log = "[GetDateText]: [Root.GetName]: Decision complete # 	TEX_nuclear_decisions_divider target: [From.GetName]"
+# 		}
+# 	}
+# }
+
+political_actions = {
+	TEX_expose_gray_eyes = {
+		allowed = {
+			tag = TEX
+		}
+		visible = {
+			has_country_flag = TEX_has_not_exposed_plot
+		}
+		cost = 0
+		fire_only_once = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete TEX_expose_gray_eyes target: [From.GetName]"
+			NEE = {
+				country_event = {
+					id = nee_ge.27
+					days = 1
+				}
+			}
+		}
+	}
+}

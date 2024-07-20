@@ -1,0 +1,586 @@
+# How to add stuff to the influence log/targets list
+# Influence Log:
+# 1. Select the next id number for log entries (look for the last used value in GetInfluenceLogText (in scripted loc))
+# 2. Add an entry to GetInfluenceLogText and GetInfluenceLogTooltip for "check_variable = { v = <that_value> }"
+# 3. Put in the name and description (tooltip) for the entry in the loc files
+
+
+# 1. To actually add it in game:
+# 2. Append the id number to global.influence_log
+# 3. Append the amount of influence added (using the appropriate sign) to global.influence_log_val
+# 4. Run "influence_recalc = yes"
+
+
+# Targets Log
+# 1. Do the same thing as with the log but this time with GetInfluenceTargetText/Tooltip , if you need to add a new flag icon, put it in KRG_influence.gfx (use the other flag icons as examples)
+# 2. To add it, just append the id number to global.influence_targets, and remove the id number to remove it
+influence_setup = {
+
+	##ticking modifiers -- please dont add anything before these or you will break them
+	resize_array = {
+		array = global.influence_ticking_prev
+		size = 6
+	}
+	resize_array = {
+		array = global.influence_ticking_prev_abs
+		size = 6
+	}
+
+	add_to_array = { global.influence_log = 0 }
+	add_to_array = { global.influence_log_val = 0 }
+	add_to_array = { global.influence_log = 1 }
+	add_to_array = { global.influence_log_val = 0 }
+	add_to_array = { global.influence_log = 2 }
+	add_to_array = { global.influence_log_val = 0 }
+	add_to_array = { global.influence_log = 3 }
+	add_to_array = { global.influence_log_val = 0 }
+	##add_to_array = { global.influence_log = 4 }
+	##add_to_array = { global.influence_log_val = 0 }
+	add_to_array = { global.influence_log = 4 }
+	add_to_array = { global.influence_log_val = 0 }
+	
+	add_to_array = { global.influence_log = 6 }
+	add_to_array = { global.influence_log_val = -25 }
+
+	add_to_array = { global.influence_targets = 1 }
+
+	influence_recalc = yes
+}
+influence_recalc_clear_flags = {
+	clr_global_flag = KRG_INFLUENCE_CANADA_WINNING
+	clr_global_flag = KRG_INFLUENCE_CANADA_DOMINATING
+	clr_global_flag = KRG_INFLUENCE_CANADA_OVERSHADOWING
+	clr_global_flag = KRG_INFLUENCE_CANADA_SIGNIFIGANT
+	clr_global_flag = KRG_INFLUENCE_CANADA_MORE
+	clr_global_flag = KRG_INFLUENCE_CANADA_SLIGHT
+	clr_global_flag = KRG_INFLUENCE_BALANCED
+	clr_global_flag = KRG_INFLUENCE_GERMANY_SLIGHT
+	clr_global_flag = KRG_INFLUENCE_GERMANY_MORE
+	clr_global_flag = KRG_INFLUENCE_GERMANY_SIGNIFIGANT
+	clr_global_flag = KRG_INFLUENCE_GERMANY_OVERSHADOWING
+	clr_global_flag = KRG_INFLUENCE_GERMANY_DOMINATING
+	clr_global_flag = KRG_INFLUENCE_GERMANY_WINNING
+}
+influence_recalc_set_flags = {
+	if = {
+		limit = {
+			check_variable = { global.influence_var < 20 }
+			check_variable = { global.influence_var > -20 }
+		}
+		set_global_flag = KRG_INFLUENCE_BALANCED
+	}
+	else_if = {
+		limit = {
+			check_variable = { global.influence_var > 19.999 }
+		}
+		##canada branch
+		if = {
+			limit = {
+				check_variable = { global.influence_var < 60 }
+			}
+			set_global_flag = KRG_INFLUENCE_CANADA_SLIGHT
+		} else_if = {
+			limit = {
+				check_variable = { global.influence_var < 120 }
+			}
+			set_global_flag = KRG_INFLUENCE_CANADA_MORE
+		} else_if = {
+			limit = {
+				check_variable = { global.influence_var < 150 }
+			}
+			set_global_flag = KRG_INFLUENCE_CANADA_SIGNIFIGANT
+		} else_if = {
+			limit = {
+				check_variable = { global.influence_var < 180 }
+			}
+			set_global_flag = KRG_INFLUENCE_CANADA_DOMINATING
+		} else_if = {
+			limit = {
+				check_variable = { global.influence_var < 201 }
+			}
+			set_global_flag = KRG_INFLUENCE_CANADA_WINNING
+		}
+	}
+	else_if = {
+		limit = {
+			check_variable = { global.influence_var < -19.999 }
+		}
+		##germany branch
+		if = {
+			limit = {
+				check_variable = { global.influence_var > -60 }
+			}
+			set_global_flag = KRG_INFLUENCE_GERMANY_SLIGHT
+		} else_if = {
+			limit = {
+				check_variable = { global.influence_var > -120 }
+			}
+			set_global_flag = KRG_INFLUENCE_GERMANY_MORE
+		} else_if = {
+			limit = {
+				check_variable = { global.influence_var > -150 }
+			}
+			set_global_flag = KRG_INFLUENCE_GERMANY_SIGNIFIGANT
+		} else_if = {
+			limit = {
+				check_variable = { global.influence_var > -180 }
+			}
+			set_global_flag = KRG_INFLUENCE_GERMANY_DOMINATING
+		} else_if = {
+			limit = {
+				check_variable = { global.influence_var > -201 }
+			}
+			set_global_flag = KRG_INFLUENCE_GERMANY_WINNING
+		}	
+	}
+}
+influence_recalc_calc_influence = {
+	set_variable = { global.influence_var = 0 }
+	clear_array = global.influence_log_val_abs
+	for_each_loop = {
+		array = global.influence_log_val
+		add_to_variable = { global.influence_var = v }
+		add_to_array = { global.influence_log_val_abs = global.influence_log_val^i }
+		if = {
+			limit = {
+				check_variable = { global.influence_log_val_abs^i < 0 }
+			}
+			multiply_variable = { global.influence_log_val_abs^i = -1 }
+		}
+	}
+	set_variable = { global.influence_var_neg = global.influence_var }
+	multiply_variable = { global.influence_var_neg = -1 }
+}
+influence_recalc = {
+	log = "[GetDateText]: Influence Recalc: Start influence: [?global.influence_var]"
+	influence_recalc_clear_flags = yes
+	influence_recalc_calc_influence = yes
+	influence_recalc_clamp_vars = yes
+	influence_recalc_abs_prev_change = yes
+	influence_recalc_set_flags = yes
+
+	set_variable = { global.influence_meter_arrow_frame = global.influence_var }
+	add_to_variable = { global.influence_meter_arrow_frame = 200 }
+	divide_variable = { global.influence_meter_arrow_frame = 400 }
+	multiply_variable = { global.influence_meter_arrow_frame = 94 }
+	add_to_variable = { global.influence_meter_arrow_frame = 3 }
+	log = "[GetDateText]: Influence Recalc: End influence: [?global.influence_var]"
+}
+influence_recalc_clamp_vars = {
+	# i have no idea why clamping global. variables dont work
+	if = {
+		limit = {
+			check_variable = { global.influence_var > 200 }
+		}
+		set_variable = { global.influence_var = 200 }
+	}
+	else_if = {
+		limit = {
+			check_variable = { global.influence_var < -200 }
+		}
+		set_variable = { global.influence_var = -200 }
+	}
+#	clamp_variable = {
+#		var = global.influence_var
+#		min = -200
+#		max = 200
+#	}
+}
+influence_tick = {
+	clear_array = global.influence_ac_mil_align
+	clear_array = global.influence_ac_eco_align
+	clear_array = global.influence_ac_pol_align
+	clear_array = global.influence_rp_mil_align
+	clear_array = global.influence_rp_eco_align
+	clear_array = global.influence_rp_pol_align
+	every_country = {
+		limit = { is_in_or_aligned_with_accord = yes }
+		if = {
+			limit = { check_variable = { accord_alignment_level = 4 } }
+			add_to_array = { global.influence_ac_mil_align = THIS }
+			add_to_array = { global.influence_ac_eco_align = THIS }
+			add_to_array = { global.influence_ac_pol_align = THIS }
+		} else_if = {
+			limit = { check_variable = { accord_alignment_level = 3 } }
+			add_to_array = { global.influence_ac_mil_align = THIS }
+			add_to_array = { global.influence_ac_eco_align = THIS }
+			add_to_array = { global.influence_ac_pol_align = THIS }
+		} else_if = {
+			limit = { check_variable = { accord_alignment_level = 2 } }
+			add_to_array = { global.influence_ac_eco_align = THIS }
+			add_to_array = { global.influence_ac_pol_align = THIS }
+		} else_if = {
+			limit = { check_variable = { accord_alignment_level = 1 } }
+			add_to_array = { global.influence_ac_pol_align = THIS }
+		}
+	}
+	every_country = {
+		limit = { is_in_or_aligned_with_reichspakt = yes }
+		if = {
+			limit = { check_variable = { reichspakt_alignment_level = 4 } }
+			add_to_array = { global.influence_rp_mil_align = THIS }
+			add_to_array = { global.influence_rp_eco_align = THIS }
+			add_to_array = { global.influence_rp_pol_align = THIS }
+		} else_if = {
+			limit = { check_variable = { reichspakt_alignment_level = 3 } }
+			add_to_array = { global.influence_rp_mil_align = THIS }
+			add_to_array = { global.influence_rp_eco_align = THIS }
+			add_to_array = { global.influence_rp_pol_align = THIS }
+		} else_if = {
+			limit = { check_variable = { reichspakt_alignment_level = 2 } }
+			add_to_array = { global.influence_rp_eco_align = THIS }
+			add_to_array = { global.influence_rp_pol_align = THIS }
+		} else_if = {
+			limit = { check_variable = { reichspakt_alignment_level = 1 } }
+			add_to_array = { global.influence_rp_pol_align = THIS }
+		}
+	}
+	influence_calc_nuke_dominance = yes
+	influence_calc_ec_power = yes
+	influence_calc_int_standing = yes
+	influence_calc_mil_spending = yes
+	#influence_calc_fin_integration = yes
+	#influence_calc_con_influence = yes #coming soon^{tm}
+	influence_recalc = yes
+}
+
+influence_calc_nuke_dominance = {
+	set_temp_variable = { entente_nukes = 0 }
+	set_temp_variable = { pakt_nukes = 0 }
+	for_each_scope_loop = {
+		array = global.influence_ac_mil_align
+		add_to_temp_variable = { entente_nukes = THIS.num_of_nukes }
+	}
+	for_each_scope_loop = {
+		array = global.influence_rp_mil_align	
+		add_to_temp_variable = { pakt_nukes = THIS.num_of_nukes }
+	}
+	if = { ##if nuke count for one side is 0, set it so the side with nukes gains 3 every month
+		limit = {
+			OR = {
+				check_variable = { entente_nukes = 0 }
+				check_variable = { pakt_nukes = 0 }
+			}
+		}
+		if = {
+			limit = {
+				check_variable = { entente_nukes > pakt_nukes }
+			}
+			set_temp_variable = { dom_change = 1.5 }
+		} else_if = {
+			limit = {
+				check_variable = { entente_nukes < pakt_nukes }
+			}
+			set_temp_variable = { dom_change = -1.5 }
+		}
+	} else_if = {
+		limit = {
+			check_variable = { entente_nukes > pakt_nukes }
+		}
+		set_temp_variable = { dom_change = entente_nukes }
+		divide_temp_variable = { dom_change = pakt_nukes }
+		subtract_from_temp_variable = { dom_change = 1 }
+	} else_if = {
+		limit = {
+			check_variable = { entente_nukes < pakt_nukes }
+		}
+		set_temp_variable = { dom_change = pakt_nukes }
+		divide_temp_variable = { dom_change = entente_nukes }
+		subtract_from_temp_variable = { dom_change = 1 }
+		multiply_temp_variable = { dom_change = -1 }
+	}
+	multiply_temp_variable = { dom_change = 2 }
+	clamp_temp_variable = { ##max rate of change is 3 to prevent the rate of change from going way crazy early game
+		var = dom_change
+		min = -3
+		max = 3
+	}
+	set_variable = { global.influence_ticking_prev^0 = dom_change }
+	set_temp_variable = { nuke_dominance_prev_change = global.influence_log_val^0 }
+	add_to_variable = { global.influence_log_val^0 = dom_change }
+	clamp_variable = {
+		var = global.influence_log_val^0
+		min = -25
+		max = 25
+	}
+	subtract_from_temp_variable = { nuke_dominance_prev_change = global.influence_log_val^0 }
+	multiply_temp_variable = { nuke_dominance_prev = -1 }
+	add_to_variable = { global.influence_var = nuke_dominance_prev_change }
+}
+
+influence_calc_ec_power = {
+	##entente
+	for_each_scope_loop = {
+		array = global.influence_ac_eco_align
+		set_variable = { math_sqrt_number = THIS.num_of_factories }
+		set_temp_variable = { prod_bonus = THIS.modifier@production_speed_buildings_factor }
+		add_to_temp_variable = { prod_bonus = 1 }
+		multiply_variable = { math_sqrt_number = prod_bonus }
+		math_square_root = yes
+		add_to_temp_variable = { entente_ec_power = math_sqrt_output }
+	}
+	##RP
+	for_each_scope_loop = {
+		array = global.influence_rp_eco_align
+		set_variable = { math_sqrt_number = THIS.num_of_factories }
+		set_temp_variable = { prod_bonus = THIS.modifier@production_speed_buildings_factor }
+		add_to_temp_variable = { prod_bonus = 1 }
+		multiply_variable = { math_sqrt_number = prod_bonus }
+		math_square_root = yes
+		add_to_temp_variable = { pakt_ec_power = math_sqrt_output }
+	}
+	if = {
+		limit = {
+			check_variable = { entente_ec_power > pakt_ec_power }
+		}
+		set_temp_variable = { power_change = entente_ec_power }
+		divide_temp_variable = { power_change = pakt_ec_power }
+		subtract_from_temp_variable = { power_change = 1 }
+	} else_if = {
+		limit = {
+			check_variable = { entente_ec_power < pakt_ec_power }
+		}
+		set_temp_variable = { power_change = pakt_ec_power }
+		divide_temp_variable = { power_change = entente_ec_power }
+		subtract_from_temp_variable = { power_change = 1 }
+		multiply_temp_variable = { power_change = -1 }
+	}
+	multiply_temp_variable = { power_change = 3 }
+	clamp_temp_variable = { ##max rate of change is 5 to prevent the rate of change from going way crazy
+		var = power_change
+		min = -5
+		max = 5
+	}
+	set_variable = { global.influence_ticking_prev^1 = power_change }
+	set_temp_variable = { ec_power_prev_change = global.influence_log_val^1 }
+	add_to_variable = { global.influence_log_val^1 = power_change }
+	clamp_variable = {
+		var = global.influence_log_val^1
+		min = -100
+		max = 100
+	}
+	subtract_from_temp_variable = { ec_power_prev_change = global.influence_log_val^1 }
+	add_to_variable = { global.influence_var = ec_power_prev_change }
+}
+
+influence_calc_int_standing = {
+	for_each_scope_loop = {
+		array = global.influence_ac_mil_align
+		add_to_temp_variable = { entente_standing = THIS.num_of_civilian_factories }
+		add_to_temp_variable = { entente_standing = THIS.num_divisions }
+	}
+	for_each_scope_loop = {
+		array = global.influence_rp_mil_align
+		add_to_temp_variable = { pakt_standing = THIS.num_of_civilian_factories }
+		add_to_temp_variable = { pakt_standing = THIS.num_divisions }
+	}
+	if = {
+		limit = {
+			check_variable = { entente_standing > pakt_standing }
+		}
+		set_temp_variable = { standing_change = entente_standing }
+		divide_temp_variable = { standing_change = pakt_standing }
+		subtract_from_temp_variable = { standing_change = 1 }
+	} else_if = {
+		limit = {
+			check_variable = { entente_standing < pakt_standing }
+		}
+		set_temp_variable = { standing_change = pakt_standing }
+		divide_temp_variable = { standing_change = entente_standing }
+		subtract_from_temp_variable = { standing_change = 1 }
+		multiply_temp_variable = { standing_change = -1 }
+	}
+	multiply_temp_variable = { standing_change = 2 }
+	clamp_temp_variable = { ##max rate of change is 3 to prevent the rate of change from going way crazy
+		var = standing_change
+		min = -3
+		max = 3
+	}
+	set_variable = { global.influence_ticking_prev^2 = standing_change }
+	set_temp_variable = { int_standing_prev_change = global.influence_log_val^2 }
+	add_to_variable = { global.influence_log_val^2 = standing_change }
+	clamp_variable = {
+		var = global.influence_log_val^2
+		min = -50
+		max = 50
+	}
+	subtract_from_temp_variable = { int_standing_prev_change = global.influence_log_val^2 }
+	add_to_variable = { global.influence_var = int_standing_prev_change }
+}
+
+influence_calc_mil_spending = {
+	for_each_scope_loop = {
+		array = global.influence_ac_mil_align
+		add_to_temp_variable = { entente_spending = THIS.military_spending }
+	}
+	for_each_scope_loop = {
+		array = global.influence_rp_mil_align
+		add_to_temp_variable = { pakt_spending = THIS.military_spending }
+	}
+	if = {
+		limit = {
+			check_variable = { entente_spending > pakt_spending }
+		}
+		set_temp_variable = { spending_change = entente_spending }
+		divide_temp_variable = { spending_change = pakt_spending }
+		subtract_from_temp_variable = { spending_change = 1 }
+	} else_if = {
+		limit = {
+			check_variable = { entente_spending < pakt_spending }
+		}
+		set_temp_variable = { spending_change = pakt_spending }
+		divide_temp_variable = { spending_change = entente_spending }
+		subtract_from_temp_variable = { spending_change = 1 }
+		multiply_temp_variable = { spending_change = -1 }
+	}
+	multiply_temp_variable = { spending_change = 2 }
+	clamp_temp_variable = { ##max rate of change is 3 to prevent the rate of change from going way crazy
+		var = spending_change
+		min = -3
+		max = 3
+	}
+	set_variable = { global.influence_ticking_prev^3 = spending_change }
+	set_temp_variable = { mil_spending_prev_change = global.influence_log_val^3 }
+	add_to_variable = { global.influence_log_val^3 = spending_change }
+	clamp_variable = {
+		var = global.influence_log_val^3
+		min = -50
+		max = 50
+	}
+	subtract_from_temp_variable = { mil_spending_prev_change = global.influence_log_val^3 }
+	add_to_variable = { global.influence_var = mil_spending_prev_change }
+}
+
+influence_calc_con_influence = {
+	for_each_scope_loop = {
+		array = global.influence_ac_pol_align
+		if =  {
+			limit = {
+				is_in_array = { global.con_member_array = THIS }
+			}
+			add_to_temp_variable = { entente_influence = 1 }
+			if = {
+				limit = {
+					is_in_array = { global.con_senate_array = THIS }
+				}
+				add_to_temp_variable = { entente_influence = 4 }
+				if = {
+					limit = {
+						is_in_array = { global.con_council_array = THIS }
+					}
+					add_to_temp_variable = { entente_influence = 5 }
+				}
+			}
+		}
+	}
+	for_each_scope_loop = {
+		array = global.influence_rp_pol_align
+		if =  {
+			limit = {
+				is_in_array = { global.con_member_array = THIS }
+			}
+			add_to_temp_variable = { pakt_influence = 1 }
+			if = {
+				limit = {
+					is_in_array = { global.con_senate_array = THIS }
+				}
+				add_to_temp_variable = { pakt_influence = 3 }
+				if = {
+					limit = {
+						is_in_array = { global.con_council_array = THIS }
+					}
+					add_to_temp_variable = { pakt_influence = 4 }
+				}
+			}
+		}
+	}
+	if = {
+		limit = {
+			check_variable = { entente_influence > pakt_influence }
+		}
+		set_temp_variable = { influence_change = entente_influence }
+		divide_temp_variable = { influence_change = pakt_influence }
+		subtract_from_temp_variable = { influence_change = 1 }
+	} else_if = {
+		limit = {
+			check_variable = { entente_influence < pakt_influence }
+		}
+		set_temp_variable = { influence_change = pakt_influence }
+		divide_temp_variable = { influence_change = entente_influence }
+		subtract_from_temp_variable = { influence_change = 1 }
+		multiply_temp_variable = { influence_change = -1 }
+	}
+	multiply_temp_variable = { influence_change = 1.5 }
+	clamp_temp_variable = { ##max rate of change is 3 to prevent the rate of change from going way crazy
+		var = influence_change
+		min = -3
+		max = 3
+	}
+	set_variable = { global.influence_ticking_prev^4 = influence_change }
+	set_temp_variable = { con_influence_prev_change = global.influence_log_val^4 }
+	add_to_variable = { global.influence_log_val^4 = influence_change }
+	clamp_variable = {
+		var = global.influence_log_val^4
+		min = -25
+		max = 25
+	}
+	subtract_from_temp_variable = { con_influence_prev_change = global.influence_log_val^4 }
+	add_to_variable = { global.influence_var = con_influence_prev_change }
+}
+
+##this is NOT running. redundant to econ power.
+influence_calc_fin_integration = {
+	for_each_scope_loop = {
+		array = global.influence_ac_eco_align ##this needs to be the entente equivalent of mitteleuropa
+		add_to_temp_variable = { entente_fin_int = THIS.num_of_civilian_factories }
+	}
+	for_each_scope_loop = {
+		array = global.influence_rp_eco_align ##this needs to be the mitteleuropa array
+		add_to_temp_variable = { pakt_fin_int = THIS.num_of_civilian_factories }
+	}
+	if = {
+		limit = {
+			check_variable = { entente_fin_int > pakt_fin_int }
+		}
+		set_temp_variable = { integration_change = entente_fin_int }
+		divide_temp_variable = { integration_change = pakt_fin_int }
+		subtract_from_temp_variable = { integration_change = 1 }
+	} else_if = {
+		limit = {
+			check_variable = { entente_fin_int < pakt_fin_int }
+		}
+		set_temp_variable = { integration_change = pakt_fin_int }
+		divide_temp_variable = { integration_change = entente_fin_int }
+		subtract_from_temp_variable = { integration_change = 1 }
+		multiply_temp_variable = { integration_change = -1 }
+	}
+	multiply_temp_variable = { integration_change = 1.5 }
+	clamp_temp_variable = { ##max rate of change is 3 to prevent the rate of change from going way crazy
+		var = integration_change
+		min = -3
+		max = 3
+	}
+	set_variable = { global.influence_ticking_prev^4 = integration_change }
+	set_temp_variable = { fin_integration_prev_change = global.influence_log_val^4 }
+	add_to_variable = { global.influence_log_val^4 = integration_change }
+	clamp_variable = {
+		var = global.influence_log_val^4
+		min = -25
+		max = 25
+	}
+	subtract_from_temp_variable = { fin_integration_prev_change = global.influence_log_val^4 }
+	add_to_variable = { global.influence_var = fin_integration_prev_change }
+}
+
+influence_recalc_abs_prev_change = {
+	for_each_loop = {
+		array = global.influence_ticking_prev_abs
+		set_variable = { global.influence_ticking_prev_abs^i = global.influence_ticking_prev^i }
+		if = {
+			limit = {
+				check_variable = { global.influence_ticking_prev_abs^i < 0 }
+			}
+			multiply_variable = { global.influence_ticking_prev_abs^i = -1 }
+		}
+	}
+}

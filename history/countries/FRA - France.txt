@@ -1,0 +1,155 @@
+capital = 735
+
+# OOBs
+set_oob = "FRA"
+
+starting_train_buffer = 1.4
+
+set_country_flag = KRG_mobilization_laws_locked
+
+universal_starting_techs = yes
+reichspakt_starting_techs = yes
+
+GER = {
+	if = {
+		limit = {
+			has_subject_autonomy_feature = yes
+		}
+		set_autonomy = {
+			target = FRA
+			autonomous_state = krg_military_occupation
+		}
+		else = {
+			puppet = FRA
+		}
+	}
+}
+set_variable = { reichspakt_alignment_level = 4 } # reichspakt member
+DNF = { give_guarantee = ROOT }
+
+country_event = { #trigger the french malady
+	id = fra_occupation.13
+	days = 147
+}
+# country_event = {
+# 	id = fra_rev.0
+# 	days = 1
+# }
+country_event = { 
+	id = fra_rev.1 
+	days = 2825 
+	random_days = 15 
+} 
+
+set_country_flag = FRA_council_of_state_show_faction_power_decisions
+
+# Leaders
+recruit_character = FRA_alain_le_leap
+recruit_character = FRA_henri_tanguy
+recruit_character = FRA_louis_l_heveder
+recruit_character = FRA_jacques_arthuys
+recruit_character = FRA_rene_pleven
+recruit_character = FRA_pierre_caziot
+recruit_character = FRA_emmanuel_d_astier_de_la_vigerie
+recruit_character = FRA_pierre_pucheu
+recruit_character = FRA_fedor_von_bock
+recruit_character = FRA_rene_belin
+recruit_character = FRA_raphael_alibert
+recruit_character = FRA_regency_council
+recruit_character = FRA_henri_vi
+recruit_character = FRA_vacant_position
+
+# Army
+recruit_character = FRA_otto_von_stulpnagel
+recruit_character = FRA_philippe_hauteclocque
+recruit_character = FRA_maxime_weygand
+recruit_character = FRA_johannes_blaskowitz
+recruit_character = FRA_christian_de_castries
+recruit_character = FRA_paul_de_langlade
+recruit_character = FRA_georges_groussard
+recruit_character = FRA_alain_de_boissieu
+recruit_character = FRA_claude_boislambert
+recruit_character = FRA_friedrich_paulus
+recruit_character = FRA_hermann_hoth
+recruit_character = FRA_erich_hoepner
+
+
+# Ministers
+recruit_character = FRA_eugene_deloncle
+# Ideas
+add_ideas = {
+	# National Spirits
+	FRA_civil_relief_programs_1
+	FRA_socioeconomic_collapse
+	FRA_german_occupation
+	FRA_lingering_spectre_1
+
+	# Laws
+	KRG_disarmed_nation
+	KRG_limited_exports
+	KRG_military_occupation
+	KRG_civilian_economy
+	KRG_professional_military
+	KRG_immigration_closed
+	econ_moderate_taxation
+	econ_small_edu_spending
+	econ_small_hc_spending
+	econ_small_inf_spending
+	econ_small_service_spending
+}
+
+896 = {
+	add_dynamic_modifier = {
+		modifier = FRA_lilleland
+	}
+}
+
+
+# Effects
+set_country_flag = FRA_third_year_of_occupation_tree
+set_country_flag = FRA_kingdom_declared
+
+FRA_council_of_state_initial = yes
+
+country_event = { id = fra_occupation.1 days = 30 random_days = 10 }
+country_event = { id = fra_occupation.3 days = 100 random_days = 10 }
+country_event = { id = fra_occupation.105 days = 121 } #Mayday
+
+coal_add_mar_lib = yes
+coal_add_soc_con = yes
+coal_add_auth_dem = yes
+coal_add_nat_pop = yes
+
+set_research_slots = 3
+set_convoys = 200
+set_stability = 0.30
+set_war_support = 0.55
+
+country_lock_all_division_template = yes
+
+set_party_name = { 
+	ideology = paternal_autocrat 
+	name = FRA_paternal_autocrat_party_military_occupation 
+	long_name = FRA_paternal_autocrat_party_military_occupation_long 
+}
+
+
+set_politics = {
+	ruling_party = paternal_autocrat
+	last_election = "1947.11.9"
+	election_frequency = 60
+	elections_allowed = no
+}
+
+set_popularities = {
+	authoritarian_socialist = 5
+	radical_socialist = 18
+	social_democrat = 5
+	revolutionary_republican = 3
+	social_liberal = 8
+	market_liberal = 2
+	social_conservative = 10
+	authoritarian_democrat = 5
+	paternal_autocrat = 36
+	national_populist = 8
+}

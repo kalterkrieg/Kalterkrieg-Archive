@@ -1,0 +1,2108 @@
+
+### This is the law system of the PSA but adapted quickly to work here
+GER_Start_Law_Process = {
+	if = {
+		limit = {
+			has_country_flag = GER_der_neue_staat
+		}		
+		meta_effect = {
+			text = {
+				GER_law_[LAW_ID]_effect = yes
+			}
+			LAW_ID = "[?GER_active_law]"
+		}
+	}
+	else = {
+		set_country_flag = GER_law_introduced_Reichstag
+		set_country_flag = GER_voting_on_law
+		set_variable = { GER_active_law = GER_active_law}
+		
+		meta_effect = {
+			text = {
+				GER_law_[LAW_ID]_start = yes
+			}
+			LAW_ID = "[?GER_active_law]"
+		}
+	
+		activate_mission = GER_voting_law_in_reichstag
+	}
+}
+
+GER_pass_Reichstag = {
+	custom_effect_tooltip = GER_law_will_pass_Reichstag
+	clr_country_flag = GER_law_introduced_Reichstag
+	set_country_flag = GER_law_introduced_Bundesrat
+	activate_mission = GER_voting_law_in_Bundesrat
+}
+
+GER_fail_Reichstag = {
+	custom_effect_tooltip = GER_law_will_fail
+	clr_country_flag = GER_law_introduced_Reichstag
+	clr_country_flag = GER_voting_on_law
+
+	meta_effect = {
+		text = {
+			GER_law_[LAW_ID]_fail = yes
+		}
+		LAW_ID = "[?GER_active_law]"
+	}
+	clear_variable = GER_active_law
+}
+
+GER_pass_Bundesrat = {
+	custom_effect_tooltip = GER_law_will_pass_Bundesrat
+	clr_country_flag = GER_law_introduced_Bundesrat
+	clr_country_flag = GER_voting_on_law
+
+	meta_effect = {
+		text = {
+			GER_law_[LAW_ID]_effect = yes
+		}
+		LAW_ID = "[?GER_active_law]"
+	}
+	clear_variable = GER_active_law
+}
+
+GER_fail_Bundesrat = {
+	custom_effect_tooltip = GER_law_will_fail
+	clr_country_flag = GER_law_introduced_Bundesrat
+	clr_country_flag = GER_voting_on_law
+
+	meta_effect = {
+		text = {
+			GER_law_[LAW_ID]_fail = yes
+		}
+		LAW_ID = "[?GER_active_law]"
+	}
+	clear_variable = GER_active_law
+}
+
+GER_succsess_effect_tooltip = {
+	effect_tooltip = {
+		meta_effect = {
+			text = {
+				GER_law_[LAW_ID]_effect = yes
+			}
+			LAW_ID = "[?GER_active_law]"
+		}
+	}
+}
+
+# Following are the Laws in the Reichstag and Bundesrat
+
+### The Actual Laws
+GER_law_0_start = {
+}
+
+GER_law_0_effect = {
+}
+
+GER_law_0_fail = {
+}
+
+GER_law_1_start = {
+}
+
+GER_law_1_effect = {
+	move_up_hc_spending = yes
+	move_up_service_spending = yes
+}
+
+GER_law_1_fail = {
+}
+
+GER_law_2_start = {
+}
+
+GER_law_2_effect = {
+	move_up_hc_spending = yes
+}
+
+GER_law_2_fail = {
+}
+
+GER_law_3_start = {
+}
+
+GER_law_3_effect = {
+	move_up_edu_spending = yes
+}
+
+GER_law_3_fail = {
+}
+
+GER_law_4_start = {
+}
+
+GER_law_4_effect = {
+	move_up_service_spending = yes
+}
+
+GER_law_4_fail = {
+}
+
+GER_law_5_start = {
+}
+
+GER_law_5_effect = {
+	move_up_business_spending = yes
+}
+
+GER_law_5_fail = {
+}
+
+GER_law_6_start = {
+}
+
+GER_law_6_effect = {
+	move_up_inf_spending = yes
+	64 = {
+		add_building_construction = {
+			type = infrastructure
+			level = 1
+			instant_build = yes
+		}
+	}
+	65 = {
+		add_building_construction = {
+			type = infrastructure
+			level = 1
+			instant_build = yes
+		}
+	}
+	59 = {
+		add_building_construction = {
+			type = infrastructure
+			level = 1
+			instant_build = yes
+		}
+	}
+	55 = {
+		add_building_construction = {
+			type = infrastructure
+			level = 1
+			instant_build = yes
+		}
+	}
+}
+
+GER_law_6_fail = {
+}
+
+GER_law_7_start = {
+}
+
+GER_law_7_effect = {
+	50 = { 
+		add_extra_state_shared_building_slots = 2
+		add_building_construction = {
+			type = arms_factory
+			level = 2
+			instant_build = yes
+		}
+	}
+	52 = { 
+		add_extra_state_shared_building_slots = 2
+		add_building_construction = {
+			type = arms_factory
+			level = 2
+			instant_build = yes
+		}
+	}
+	54 = { 
+		add_extra_state_shared_building_slots = 2
+		add_building_construction = {
+			type = arms_factory
+			level = 2
+			instant_build = yes
+		}
+	}
+	add_ideas = GER_expanded_military
+}
+
+GER_law_7_fail = {
+}
+
+GER_law_8_start = {
+}
+
+GER_law_8_effect = {
+	set_country_flag = women_can_vote
+}
+
+GER_law_8_fail = {
+}
+
+GER_law_9_start = {
+}
+
+GER_law_9_effect = {
+	move_down_taxation = yes
+}
+
+GER_law_9_fail = {
+}
+
+
+GER_law_10_start = {
+}
+
+GER_law_10_effect = {
+	set_country_flag = women_can_vote
+}
+
+GER_law_10_fail = {
+}
+
+
+# set-up for bundesrat - add to history (GER_bundesrat_members_initial = yes)
+GER_bundesrat_members_initial = {
+	# make array storing ids 1-27 for each bundesrat member (1 - Alsace-Lorraine, 2 - Anhalt etc.)
+	for_loop_effect = {
+		start = 1
+		end = 28
+
+		add_to_array = { bundesrat_member_array = v }
+	}
+
+	# Alsace-Lorraine
+	1 = {
+		set_variable = { bundesrat_seat = 3 }
+		set_variable = { bundesrat_support = 1 }
+	}
+	# Anhalt
+	2 = {
+		set_variable = { bundesrat_seat = 1 }
+		set_variable = { bundesrat_support = 1 }
+	}
+	# Baden
+	3 = {
+		set_variable = { bundesrat_seat = 3 }
+		set_variable = { bundesrat_support = 1 }
+	}
+	# Bavaria
+	4 = {
+		set_variable = { bundesrat_seat = 6 }
+		set_variable = { bundesrat_support = 1 }
+	}
+	# Bremen
+	5 = {
+		set_variable = { bundesrat_seat = 1 }
+		set_variable = { bundesrat_support = 1 }
+	}
+	# Brunswick
+	6 = {
+		set_variable = { bundesrat_seat = 2 }
+		set_variable = { bundesrat_support = 1 }
+	}
+	# Hamburg
+	7 = {
+		set_variable = { bundesrat_seat = 1 }
+		set_variable = { bundesrat_support = 1 }
+	}
+	# Hesse
+	8 = {
+		set_variable = { bundesrat_seat = 3 }
+		set_variable = { bundesrat_support = 1 }
+	}
+	# Lippe
+	9 = {
+		set_variable = { bundesrat_seat = 1 }
+		set_variable = { bundesrat_support = 1 }
+	}
+	# Lübeck
+	10 = {
+		set_variable = { bundesrat_seat = 1 }
+		set_variable = { bundesrat_support = 1 }
+	}
+	# Luxemburg
+	11 = {
+		set_variable = { bundesrat_seat = 1 }
+		set_variable = { bundesrat_support = 1 }
+	}
+	# Mecklenburg-Schwerin
+	12 = {
+		set_variable = { bundesrat_seat = 2 }
+		set_variable = { bundesrat_support = 1 }
+	}
+	# Mecklenburg-Strelitz
+	13 = {
+		set_variable = { bundesrat_seat = 1 }
+		set_variable = { bundesrat_support = 1 }
+	}
+	# Oldenburg
+	14 = {
+		set_variable = { bundesrat_seat = 1 }
+		set_variable = { bundesrat_support = 1 }
+	}
+	# Prussia
+	15 = {
+		set_variable = { bundesrat_seat = 17 }
+		set_variable = { bundesrat_support = 3 }
+	}
+	# Reuss-Gera
+	16 = {
+		set_variable = { bundesrat_seat = 1 }
+		set_variable = { bundesrat_support = 1 }
+	}
+	# Reuss-Greiz
+	17 = {
+		set_variable = { bundesrat_seat = 1 }
+		set_variable = { bundesrat_support = 1 }
+	}
+	# Saxe-Altenburg
+	18 = {
+		set_variable = { bundesrat_seat = 1 }
+		set_variable = { bundesrat_support = 1 }
+	}
+	# Saxe-Coburg and Gotha
+	19 = {
+		set_variable = { bundesrat_seat = 1 }
+		set_variable = { bundesrat_support = 1 }
+	}
+	# Saxe-Meiningen
+	20 = {
+		set_variable = { bundesrat_seat = 1 }
+		set_variable = { bundesrat_support = 1 }
+	}
+	# Saxe-Weimar-Eisenach
+	21 = {
+		set_variable = { bundesrat_seat = 1 }
+		set_variable = { bundesrat_support = 1 }
+	}
+	# Saxony
+	22 = {
+		set_variable = { bundesrat_seat = 4 }
+		set_variable = { bundesrat_support = 1 }
+	}
+	# Schaumburg-Lippe
+	23 = {
+		set_variable = { bundesrat_seat = 1 }
+		set_variable = { bundesrat_support = 1 }
+	}
+	# Schwarzburg-Rudolstadt
+	24 = {
+		set_variable = { bundesrat_seat = 1 }
+		set_variable = { bundesrat_support = 1 }
+	}
+	# Schwarzburg-Sondershausen
+	25 = {
+		set_variable = { bundesrat_seat = 1 }
+		set_variable = { bundesrat_support = 1 }
+	}
+	# Waldeck-Pyrmont
+	26 = {
+		set_variable = { bundesrat_seat = 1 }
+		set_variable = { bundesrat_support = 3 }
+	}
+	# Württemberg
+	27 = {
+		set_variable = { bundesrat_seat = 4 }
+		set_variable = { bundesrat_support = 1 }
+	}
+
+	set_variable = { bundesrat_total_members = 62 }
+	set_variable = { bundesrat_support_majority = 31 } # SIMPLE majority
+
+	for_each_scope_loop = {
+		array = bundesrat_member_array
+
+		set_variable = { bundesrat_support_cost = bundesrat_seat }
+		multiply_variable = { bundesrat_support_cost = 5 }
+	}
+
+	update_bundesrat_support = yes
+}
+
+update_bundesrat_support = {
+	clear_variable = bundesrat_support_value
+
+	for_each_loop = {
+		array = bundesrat_member_array
+
+		if = {
+			limit = {
+				check_variable = { v:bundesrat_support > 1 }
+			}
+			add_to_variable = { bundesrat_support_value = v:bundesrat_seat }
+		}
+	}
+}
+
+update_reichstag_support = {
+	clear_variable = reichstag_support_value
+
+	for_each_loop = {
+		array = reichstag_member_array
+
+		if = {
+			limit = {
+				check_variable = { v:reichstag_support > 1 }
+			}
+			add_to_variable = { reichstag_support_value = v:reichstag_seat }
+		}
+	}
+}
+
+# main code for adding/subtracting seats from bundesrat member
+modify_bundesrat_seat = {
+	set_temp_variable = { v = member }
+	custom_effect_tooltip = GER_modify_bundesrat_seat_tt
+
+	if = {
+		limit = {
+			check_variable = { member > 0 }
+		}
+		var:member = {
+			add_to_variable = { bundesrat_seat = seat_value }
+		}
+	}
+
+	add_to_variable = { bundesrat_total_members = seat_value }
+
+	set_temp_variable = { temp = bundesrat_total_members }
+	modulo_temp_variable =  { temp = 2 }
+	set_variable = { bundesrat_support_majority = bundesrat_total_members }
+	divide_variable = { bundesrat_support_majority = 2 }
+	add_to_variable = { bundesrat_support_majority = temp }
+
+	update_bundesrat_support = yes
+}
+
+# bundesrat reform effect 1 - used in game
+bundesrat_reform_effect = {
+	custom_effect_tooltip = GER_bundesrat_reform_effect_tt
+	set_temp_variable = { member = 1 }
+	set_temp_variable = { seat_value = 1 }
+	modify_bundesrat_seat = yes
+
+	set_temp_variable = { member = 2 }
+	set_temp_variable = { seat_value = 1 }
+	modify_bundesrat_seat = yes
+
+	set_temp_variable = { member = 3 }
+	set_temp_variable = { seat_value = 2 }
+	modify_bundesrat_seat = yes
+
+	set_temp_variable = { member = 4 }
+	set_temp_variable = { seat_value = 6 }
+	modify_bundesrat_seat = yes
+
+	set_temp_variable = { member = 5 }
+	set_temp_variable = { seat_value = 1 }
+	modify_bundesrat_seat = yes
+
+	set_temp_variable = { member = 6 }
+	set_temp_variable = { seat_value = 1 }
+	modify_bundesrat_seat = yes
+
+	set_temp_variable = { member = 7 }
+	set_temp_variable = { seat_value = 1 }
+	modify_bundesrat_seat = yes
+
+	set_temp_variable = { member = 8 }
+	set_temp_variable = { seat_value = 2 }
+	modify_bundesrat_seat = yes
+
+	set_temp_variable = { member = 9 }
+	set_temp_variable = { seat_value = 1 }
+	modify_bundesrat_seat = yes
+
+	set_temp_variable = { member = 10 }
+	set_temp_variable = { seat_value = 1 }
+	modify_bundesrat_seat = yes
+
+	set_temp_variable = { member = 11 }
+	set_temp_variable = { seat_value = 1 }
+	modify_bundesrat_seat = yes
+
+	set_temp_variable = { member = 12 }
+	set_temp_variable = { seat_value = 1 }
+	modify_bundesrat_seat = yes
+
+	set_temp_variable = { member = 13 }
+	set_temp_variable = { seat_value = 1 }
+	modify_bundesrat_seat = yes
+
+	set_temp_variable = { member = 14 }
+	set_temp_variable = { seat_value = 1 }
+	modify_bundesrat_seat = yes
+
+	set_temp_variable = { member = 15 }
+	set_temp_variable = { seat_value = 23 }
+	modify_bundesrat_seat = yes
+
+	set_temp_variable = { member = 16 }
+	set_temp_variable = { seat_value = 1 }
+	modify_bundesrat_seat = yes
+
+	set_temp_variable = { member = 17 }
+	set_temp_variable = { seat_value = 1 }
+	modify_bundesrat_seat = yes
+
+	set_temp_variable = { member = 18 }
+	set_temp_variable = { seat_value = 1 }
+	modify_bundesrat_seat = yes
+
+	set_temp_variable = { member = 19 }
+	set_temp_variable = { seat_value = 1 }
+	modify_bundesrat_seat = yes
+
+	set_temp_variable = { member = 20 }
+	set_temp_variable = { seat_value = 1 }
+	modify_bundesrat_seat = yes
+
+	set_temp_variable = { member = 21 }
+	set_temp_variable = { seat_value = 1 }
+	modify_bundesrat_seat = yes
+
+	set_temp_variable = { member = 22 }
+	set_temp_variable = { seat_value = 4 }
+	modify_bundesrat_seat = yes
+
+	set_temp_variable = { member = 23 }
+	set_temp_variable = { seat_value = 1 }
+	modify_bundesrat_seat = yes
+
+	set_temp_variable = { member = 24 }
+	set_temp_variable = { seat_value = 1 }
+	modify_bundesrat_seat = yes
+
+	set_temp_variable = { member = 25 }
+	set_temp_variable = { seat_value = 1 }
+	modify_bundesrat_seat = yes
+
+	set_temp_variable = { member = 26 }
+	set_temp_variable = { seat_value = 1 }
+	modify_bundesrat_seat = yes
+
+	set_temp_variable = { member = 27 }
+	set_temp_variable = { seat_value = 4 }
+	modify_bundesrat_seat = yes
+}
+
+# ignore this was semicircle reichstag experiment lol
+GER_reichstag_semicircle = {
+	clear_array = reichstag_member_x_array
+	clear_array = reichstag_member_y_array
+
+	add_to_array = { reichstag_member_x_array = 0 }
+	add_to_array = { reichstag_member_y_array = 216 }
+	add_to_array = { reichstag_member_x_array = 12 }
+	add_to_array = { reichstag_member_y_array = 217 }
+	add_to_array = { reichstag_member_x_array = 23 }
+	add_to_array = { reichstag_member_y_array = 217 }
+	add_to_array = { reichstag_member_x_array = 35 }
+	add_to_array = { reichstag_member_y_array = 217 }
+	add_to_array = { reichstag_member_x_array = 46 }
+	add_to_array = { reichstag_member_y_array = 217 }
+	add_to_array = { reichstag_member_x_array = 58 }
+	add_to_array = { reichstag_member_y_array = 217 }
+	add_to_array = { reichstag_member_x_array = 69 }
+	add_to_array = { reichstag_member_y_array = 217 }
+	add_to_array = { reichstag_member_x_array = 81 }
+	add_to_array = { reichstag_member_y_array = 217 }
+	add_to_array = { reichstag_member_x_array = 93 }
+	add_to_array = { reichstag_member_y_array = 217 }
+	add_to_array = { reichstag_member_x_array = 104 }
+	add_to_array = { reichstag_member_y_array = 217 }
+	add_to_array = { reichstag_member_x_array = 116 }
+	add_to_array = { reichstag_member_y_array = 217 }
+	add_to_array = { reichstag_member_x_array = 1 }
+	add_to_array = { reichstag_member_y_array = 203 }
+	add_to_array = { reichstag_member_x_array = 13 }
+	add_to_array = { reichstag_member_y_array = 203 }
+	add_to_array = { reichstag_member_x_array = 24 }
+	add_to_array = { reichstag_member_y_array = 203 }
+	add_to_array = { reichstag_member_x_array = 36 }
+	add_to_array = { reichstag_member_y_array = 203 }
+	add_to_array = { reichstag_member_x_array = 48 }
+	add_to_array = { reichstag_member_y_array = 203 }
+	add_to_array = { reichstag_member_x_array = 59 }
+	add_to_array = { reichstag_member_y_array = 203 }
+	add_to_array = { reichstag_member_x_array = 71 }
+	add_to_array = { reichstag_member_y_array = 203 }
+	add_to_array = { reichstag_member_x_array = 3 }
+	add_to_array = { reichstag_member_y_array = 190 }
+	add_to_array = { reichstag_member_x_array = 83 }
+	add_to_array = { reichstag_member_y_array = 203 }
+	add_to_array = { reichstag_member_x_array = 15 }
+	add_to_array = { reichstag_member_y_array = 190 }
+	add_to_array = { reichstag_member_x_array = 94 }
+	add_to_array = { reichstag_member_y_array = 203 }
+	add_to_array = { reichstag_member_x_array = 26 }
+	add_to_array = { reichstag_member_y_array = 190 }
+	add_to_array = { reichstag_member_x_array = 38 }
+	add_to_array = { reichstag_member_y_array = 190 }
+	add_to_array = { reichstag_member_x_array = 106 }
+	add_to_array = { reichstag_member_y_array = 203 }
+	add_to_array = { reichstag_member_x_array = 50 }
+	add_to_array = { reichstag_member_y_array = 190 }
+	add_to_array = { reichstag_member_x_array = 118 }
+	add_to_array = { reichstag_member_y_array = 203 }
+	add_to_array = { reichstag_member_x_array = 62 }
+	add_to_array = { reichstag_member_y_array = 190 }
+	add_to_array = { reichstag_member_x_array = 5 }
+	add_to_array = { reichstag_member_y_array = 177 }
+	add_to_array = { reichstag_member_x_array = 17 }
+	add_to_array = { reichstag_member_y_array = 177 }
+	add_to_array = { reichstag_member_x_array = 74 }
+	add_to_array = { reichstag_member_y_array = 190 }
+	add_to_array = { reichstag_member_x_array = 29 }
+	add_to_array = { reichstag_member_y_array = 177 }
+	add_to_array = { reichstag_member_x_array = 86 }
+	add_to_array = { reichstag_member_y_array = 190 }
+	add_to_array = { reichstag_member_x_array = 41 }
+	add_to_array = { reichstag_member_y_array = 177 }
+	add_to_array = { reichstag_member_x_array = 9 }
+	add_to_array = { reichstag_member_y_array = 164 }
+	add_to_array = { reichstag_member_x_array = 53 }
+	add_to_array = { reichstag_member_y_array = 176 }
+	add_to_array = { reichstag_member_x_array = 98 }
+	add_to_array = { reichstag_member_y_array = 189 }
+	add_to_array = { reichstag_member_x_array = 21 }
+	add_to_array = { reichstag_member_y_array = 164 }
+	add_to_array = { reichstag_member_x_array = 65 }
+	add_to_array = { reichstag_member_y_array = 177 }
+	add_to_array = { reichstag_member_x_array = 110 }
+	add_to_array = { reichstag_member_y_array = 190 }
+	add_to_array = { reichstag_member_x_array = 33 }
+	add_to_array = { reichstag_member_y_array = 164 }
+	add_to_array = { reichstag_member_x_array = 77 }
+	add_to_array = { reichstag_member_y_array = 177 }
+	add_to_array = { reichstag_member_x_array = 45 }
+	add_to_array = { reichstag_member_y_array = 164 }
+	add_to_array = { reichstag_member_x_array = 13 }
+	add_to_array = { reichstag_member_y_array = 152 }
+	add_to_array = { reichstag_member_x_array = 122 }
+	add_to_array = { reichstag_member_y_array = 190 }
+	add_to_array = { reichstag_member_x_array = 90 }
+	add_to_array = { reichstag_member_y_array = 177 }
+	add_to_array = { reichstag_member_x_array = 25 }
+	add_to_array = { reichstag_member_y_array = 152 }
+	add_to_array = { reichstag_member_x_array = 58 }
+	add_to_array = { reichstag_member_y_array = 164 }
+	add_to_array = { reichstag_member_x_array = 70 }
+	add_to_array = { reichstag_member_y_array = 165 }
+	add_to_array = { reichstag_member_x_array = 38 }
+	add_to_array = { reichstag_member_y_array = 151 }
+	add_to_array = { reichstag_member_x_array = 102 }
+	add_to_array = { reichstag_member_y_array = 177 }
+	add_to_array = { reichstag_member_x_array = 18 }
+	add_to_array = { reichstag_member_y_array = 139 }
+	add_to_array = { reichstag_member_x_array = 50 }
+	add_to_array = { reichstag_member_y_array = 151 }
+	add_to_array = { reichstag_member_x_array = 82 }
+	add_to_array = { reichstag_member_y_array = 164 }
+	add_to_array = { reichstag_member_x_array = 114 }
+	add_to_array = { reichstag_member_y_array = 178 }
+	add_to_array = { reichstag_member_x_array = 30 }
+	add_to_array = { reichstag_member_y_array = 139 }
+	add_to_array = { reichstag_member_x_array = 63 }
+	add_to_array = { reichstag_member_y_array = 151 }
+	add_to_array = { reichstag_member_x_array = 43 }
+	add_to_array = { reichstag_member_y_array = 139 }
+	add_to_array = { reichstag_member_x_array = 95 }
+	add_to_array = { reichstag_member_y_array = 164 }
+	add_to_array = { reichstag_member_x_array = 23 }
+	add_to_array = { reichstag_member_y_array = 127 }
+	add_to_array = { reichstag_member_x_array = 75 }
+	add_to_array = { reichstag_member_y_array = 152 }
+	add_to_array = { reichstag_member_x_array = 127 }
+	add_to_array = { reichstag_member_y_array = 178 }
+	add_to_array = { reichstag_member_x_array = 56 }
+	add_to_array = { reichstag_member_y_array = 139 }
+	add_to_array = { reichstag_member_x_array = 36 }
+	add_to_array = { reichstag_member_y_array = 127 }
+	add_to_array = { reichstag_member_x_array = 108 }
+	add_to_array = { reichstag_member_y_array = 164 }
+	add_to_array = { reichstag_member_x_array = 88 }
+	add_to_array = { reichstag_member_y_array = 152 }
+	add_to_array = { reichstag_member_x_array = 69 }
+	add_to_array = { reichstag_member_y_array = 139 }
+	add_to_array = { reichstag_member_x_array = 49 }
+	add_to_array = { reichstag_member_y_array = 127 }
+	add_to_array = { reichstag_member_x_array = 29 }
+	add_to_array = { reichstag_member_y_array = 116 }
+	add_to_array = { reichstag_member_x_array = 121 }
+	add_to_array = { reichstag_member_y_array = 166 }
+	add_to_array = { reichstag_member_x_array = 82 }
+	add_to_array = { reichstag_member_y_array = 141 }
+	add_to_array = { reichstag_member_x_array = 102 }
+	add_to_array = { reichstag_member_y_array = 152 }
+	add_to_array = { reichstag_member_x_array = 43 }
+	add_to_array = { reichstag_member_y_array = 116 }
+	add_to_array = { reichstag_member_x_array = 63 }
+	add_to_array = { reichstag_member_y_array = 127 }
+	add_to_array = { reichstag_member_x_array = 36 }
+	add_to_array = { reichstag_member_y_array = 104 }
+	add_to_array = { reichstag_member_x_array = 57 }
+	add_to_array = { reichstag_member_y_array = 116 }
+	add_to_array = { reichstag_member_x_array = 95 }
+	add_to_array = { reichstag_member_y_array = 141 }
+	add_to_array = { reichstag_member_x_array = 77 }
+	add_to_array = { reichstag_member_y_array = 127 }
+	add_to_array = { reichstag_member_x_array = 134 }
+	add_to_array = { reichstag_member_y_array = 166 }
+	add_to_array = { reichstag_member_x_array = 116 }
+	add_to_array = { reichstag_member_y_array = 152 }
+	add_to_array = { reichstag_member_x_array = 50 }
+	add_to_array = { reichstag_member_y_array = 105 }
+	add_to_array = { reichstag_member_x_array = 71 }
+	add_to_array = { reichstag_member_y_array = 116 }
+	add_to_array = { reichstag_member_x_array = 89 }
+	add_to_array = { reichstag_member_y_array = 130 }
+	add_to_array = { reichstag_member_x_array = 44 }
+	add_to_array = { reichstag_member_y_array = 94 }
+	add_to_array = { reichstag_member_x_array = 110 }
+	add_to_array = { reichstag_member_y_array = 141 }
+	add_to_array = { reichstag_member_x_array = 128 }
+	add_to_array = { reichstag_member_y_array = 155 }
+	add_to_array = { reichstag_member_x_array = 64 }
+	add_to_array = { reichstag_member_y_array = 105 }
+	add_to_array = { reichstag_member_x_array = 85 }
+	add_to_array = { reichstag_member_y_array = 117 }
+	add_to_array = { reichstag_member_x_array = 58 }
+	add_to_array = { reichstag_member_y_array = 94 }
+	add_to_array = { reichstag_member_x_array = 104 }
+	add_to_array = { reichstag_member_y_array = 130 }
+	add_to_array = { reichstag_member_x_array = 52 }
+	add_to_array = { reichstag_member_y_array = 83 }
+	add_to_array = { reichstag_member_x_array = 79 }
+	add_to_array = { reichstag_member_y_array = 106 }
+	add_to_array = { reichstag_member_x_array = 98 }
+	add_to_array = { reichstag_member_y_array = 119 }
+	add_to_array = { reichstag_member_x_array = 124 }
+	add_to_array = { reichstag_member_y_array = 142 }
+	add_to_array = { reichstag_member_x_array = 73 }
+	add_to_array = { reichstag_member_y_array = 95 }
+	add_to_array = { reichstag_member_x_array = 143 }
+	add_to_array = { reichstag_member_y_array = 155 }
+	add_to_array = { reichstag_member_x_array = 67 }
+	add_to_array = { reichstag_member_y_array = 84 }
+	add_to_array = { reichstag_member_x_array = 118 }
+	add_to_array = { reichstag_member_y_array = 131 }
+	add_to_array = { reichstag_member_x_array = 94 }
+	add_to_array = { reichstag_member_y_array = 106 }
+	add_to_array = { reichstag_member_x_array = 61 }
+	add_to_array = { reichstag_member_y_array = 73 }
+	add_to_array = { reichstag_member_x_array = 137 }
+	add_to_array = { reichstag_member_y_array = 145 }
+	add_to_array = { reichstag_member_x_array = 113 }
+	add_to_array = { reichstag_member_y_array = 120 }
+	add_to_array = { reichstag_member_x_array = 88 }
+	add_to_array = { reichstag_member_y_array = 96 }
+	add_to_array = { reichstag_member_x_array = 82 }
+	add_to_array = { reichstag_member_y_array = 85 }
+	add_to_array = { reichstag_member_x_array = 107 }
+	add_to_array = { reichstag_member_y_array = 110 }
+	add_to_array = { reichstag_member_x_array = 76 }
+	add_to_array = { reichstag_member_y_array = 75 }
+	add_to_array = { reichstag_member_x_array = 71 }
+	add_to_array = { reichstag_member_y_array = 64 }
+	add_to_array = { reichstag_member_x_array = 134 }
+	add_to_array = { reichstag_member_y_array = 132 }
+	add_to_array = { reichstag_member_x_array = 103 }
+	add_to_array = { reichstag_member_y_array = 97 }
+	add_to_array = { reichstag_member_x_array = 128 }
+	add_to_array = { reichstag_member_y_array = 121 }
+	add_to_array = { reichstag_member_x_array = 98 }
+	add_to_array = { reichstag_member_y_array = 86 }
+	add_to_array = { reichstag_member_x_array = 92 }
+	add_to_array = { reichstag_member_y_array = 76 }
+	add_to_array = { reichstag_member_x_array = 122 }
+	add_to_array = { reichstag_member_y_array = 111 }
+	add_to_array = { reichstag_member_x_array = 153 }
+	add_to_array = { reichstag_member_y_array = 146 }
+	add_to_array = { reichstag_member_x_array = 86 }
+	add_to_array = { reichstag_member_y_array = 66 }
+	add_to_array = { reichstag_member_x_array = 117 }
+	add_to_array = { reichstag_member_y_array = 101 }
+	add_to_array = { reichstag_member_x_array = 81 }
+	add_to_array = { reichstag_member_y_array = 55 }
+	add_to_array = { reichstag_member_x_array = 147 }
+	add_to_array = { reichstag_member_y_array = 136 }
+	add_to_array = { reichstag_member_x_array = 114 }
+	add_to_array = { reichstag_member_y_array = 88 }
+	add_to_array = { reichstag_member_x_array = 108 }
+	add_to_array = { reichstag_member_y_array = 78 }
+	add_to_array = { reichstag_member_x_array = 103 }
+	add_to_array = { reichstag_member_y_array = 68 }
+	add_to_array = { reichstag_member_x_array = 144 }
+	add_to_array = { reichstag_member_y_array = 123 }
+	add_to_array = { reichstag_member_x_array = 97 }
+	add_to_array = { reichstag_member_y_array = 57 }
+	add_to_array = { reichstag_member_x_array = 139 }
+	add_to_array = { reichstag_member_y_array = 113 }
+	add_to_array = { reichstag_member_x_array = 91 }
+	add_to_array = { reichstag_member_y_array = 47 }
+	add_to_array = { reichstag_member_x_array = 133 }
+	add_to_array = { reichstag_member_y_array = 103 }
+	add_to_array = { reichstag_member_x_array = 127 }
+	add_to_array = { reichstag_member_y_array = 92 }
+	add_to_array = { reichstag_member_x_array = 125 }
+	add_to_array = { reichstag_member_y_array = 80 }
+	add_to_array = { reichstag_member_x_array = 119 }
+	add_to_array = { reichstag_member_y_array = 70 }
+	add_to_array = { reichstag_member_x_array = 163 }
+	add_to_array = { reichstag_member_y_array = 138 }
+	add_to_array = { reichstag_member_x_array = 114 }
+	add_to_array = { reichstag_member_y_array = 60 }
+	add_to_array = { reichstag_member_x_array = 158 }
+	add_to_array = { reichstag_member_y_array = 128 }
+	add_to_array = { reichstag_member_x_array = 108 }
+	add_to_array = { reichstag_member_y_array = 50 }
+	add_to_array = { reichstag_member_x_array = 102 }
+	add_to_array = { reichstag_member_y_array = 40 }
+	add_to_array = { reichstag_member_x_array = 156 }
+	add_to_array = { reichstag_member_y_array = 115 }
+	add_to_array = { reichstag_member_x_array = 150 }
+	add_to_array = { reichstag_member_y_array = 105 }
+	add_to_array = { reichstag_member_x_array = 144 }
+	add_to_array = { reichstag_member_y_array = 95 }
+	add_to_array = { reichstag_member_x_array = 138 }
+	add_to_array = { reichstag_member_y_array = 85 }
+	add_to_array = { reichstag_member_x_array = 113 }
+	add_to_array = { reichstag_member_y_array = 33 }
+	add_to_array = { reichstag_member_x_array = 119 }
+	add_to_array = { reichstag_member_y_array = 43 }
+	add_to_array = { reichstag_member_x_array = 125 }
+	add_to_array = { reichstag_member_y_array = 53 }
+	add_to_array = { reichstag_member_x_array = 131 }
+	add_to_array = { reichstag_member_y_array = 63 }
+	add_to_array = { reichstag_member_x_array = 137 }
+	add_to_array = { reichstag_member_y_array = 73 }
+	add_to_array = { reichstag_member_x_array = 169 }
+	add_to_array = { reichstag_member_y_array = 121 }
+	add_to_array = { reichstag_member_x_array = 175 }
+	add_to_array = { reichstag_member_y_array = 131 }
+	add_to_array = { reichstag_member_x_array = 150 }
+	add_to_array = { reichstag_member_y_array = 79 }
+	add_to_array = { reichstag_member_x_array = 125 }
+	add_to_array = { reichstag_member_y_array = 27 }
+	add_to_array = { reichstag_member_x_array = 131 }
+	add_to_array = { reichstag_member_y_array = 37 }
+	add_to_array = { reichstag_member_x_array = 156 }
+	add_to_array = { reichstag_member_y_array = 89 }
+	add_to_array = { reichstag_member_x_array = 137 }
+	add_to_array = { reichstag_member_y_array = 47 }
+	add_to_array = { reichstag_member_x_array = 162 }
+	add_to_array = { reichstag_member_y_array = 99 }
+	add_to_array = { reichstag_member_x_array = 143 }
+	add_to_array = { reichstag_member_y_array = 57 }
+	add_to_array = { reichstag_member_x_array = 149 }
+	add_to_array = { reichstag_member_y_array = 67 }
+	add_to_array = { reichstag_member_x_array = 168 }
+	add_to_array = { reichstag_member_y_array = 109 }
+	add_to_array = { reichstag_member_x_array = 137 }
+	add_to_array = { reichstag_member_y_array = 21 }
+	add_to_array = { reichstag_member_x_array = 143 }
+	add_to_array = { reichstag_member_y_array = 32 }
+	add_to_array = { reichstag_member_x_array = 149 }
+	add_to_array = { reichstag_member_y_array = 42 }
+	add_to_array = { reichstag_member_x_array = 163 }
+	add_to_array = { reichstag_member_y_array = 74 }
+	add_to_array = { reichstag_member_x_array = 155 }
+	add_to_array = { reichstag_member_y_array = 52 }
+	add_to_array = { reichstag_member_x_array = 169 }
+	add_to_array = { reichstag_member_y_array = 84 }
+	add_to_array = { reichstag_member_x_array = 161 }
+	add_to_array = { reichstag_member_y_array = 62 }
+	add_to_array = { reichstag_member_x_array = 182 }
+	add_to_array = { reichstag_member_y_array = 116 }
+	add_to_array = { reichstag_member_x_array = 175 }
+	add_to_array = { reichstag_member_y_array = 94 }
+	add_to_array = { reichstag_member_x_array = 150 }
+	add_to_array = { reichstag_member_y_array = 17 }
+	add_to_array = { reichstag_member_x_array = 188 }
+	add_to_array = { reichstag_member_y_array = 126 }
+	add_to_array = { reichstag_member_x_array = 181 }
+	add_to_array = { reichstag_member_y_array = 104 }
+	add_to_array = { reichstag_member_x_array = 156 }
+	add_to_array = { reichstag_member_y_array = 27 }
+	add_to_array = { reichstag_member_x_array = 162 }
+	add_to_array = { reichstag_member_y_array = 37 }
+	add_to_array = { reichstag_member_x_array = 168 }
+	add_to_array = { reichstag_member_y_array = 47 }
+	add_to_array = { reichstag_member_x_array = 175 }
+	add_to_array = { reichstag_member_y_array = 69 }
+	add_to_array = { reichstag_member_x_array = 174 }
+	add_to_array = { reichstag_member_y_array = 58 }
+	add_to_array = { reichstag_member_x_array = 162 }
+	add_to_array = { reichstag_member_y_array = 13 }
+	add_to_array = { reichstag_member_x_array = 181 }
+	add_to_array = { reichstag_member_y_array = 80 }
+	add_to_array = { reichstag_member_x_array = 169 }
+	add_to_array = { reichstag_member_y_array = 23 }
+	add_to_array = { reichstag_member_x_array = 188 }
+	add_to_array = { reichstag_member_y_array = 90 }
+	add_to_array = { reichstag_member_x_array = 175 }
+	add_to_array = { reichstag_member_y_array = 34 }
+	add_to_array = { reichstag_member_x_array = 195 }
+	add_to_array = { reichstag_member_y_array = 112 }
+	add_to_array = { reichstag_member_x_array = 181 }
+	add_to_array = { reichstag_member_y_array = 44 }
+	add_to_array = { reichstag_member_x_array = 194 }
+	add_to_array = { reichstag_member_y_array = 100 }
+	add_to_array = { reichstag_member_x_array = 175 }
+	add_to_array = { reichstag_member_y_array = 10 }
+	add_to_array = { reichstag_member_x_array = 188 }
+	add_to_array = { reichstag_member_y_array = 66 }
+	add_to_array = { reichstag_member_x_array = 188 }
+	add_to_array = { reichstag_member_y_array = 54 }
+	add_to_array = { reichstag_member_x_array = 201 }
+	add_to_array = { reichstag_member_y_array = 123 }
+	add_to_array = { reichstag_member_x_array = 182 }
+	add_to_array = { reichstag_member_y_array = 20 }
+	add_to_array = { reichstag_member_x_array = 195 }
+	add_to_array = { reichstag_member_y_array = 77 }
+	add_to_array = { reichstag_member_x_array = 188 }
+	add_to_array = { reichstag_member_y_array = 31 }
+	add_to_array = { reichstag_member_x_array = 188 }
+	add_to_array = { reichstag_member_y_array = 7 }
+	add_to_array = { reichstag_member_x_array = 201 }
+	add_to_array = { reichstag_member_y_array = 87 }
+	add_to_array = { reichstag_member_x_array = 194 }
+	add_to_array = { reichstag_member_y_array = 42 }
+	add_to_array = { reichstag_member_x_array = 195 }
+	add_to_array = { reichstag_member_y_array = 18 }
+	add_to_array = { reichstag_member_x_array = 201 }
+	add_to_array = { reichstag_member_y_array = 64 }
+	add_to_array = { reichstag_member_x_array = 201 }
+	add_to_array = { reichstag_member_y_array = 52 }
+	add_to_array = { reichstag_member_x_array = 208 }
+	add_to_array = { reichstag_member_y_array = 110 }
+	add_to_array = { reichstag_member_x_array = 208 }
+	add_to_array = { reichstag_member_y_array = 98 }
+	add_to_array = { reichstag_member_x_array = 201 }
+	add_to_array = { reichstag_member_y_array = 29 }
+	add_to_array = { reichstag_member_x_array = 201 }
+	add_to_array = { reichstag_member_y_array = 6 }
+	add_to_array = { reichstag_member_x_array = 208 }
+	add_to_array = { reichstag_member_y_array = 75 }
+	add_to_array = { reichstag_member_x_array = 208 }
+	add_to_array = { reichstag_member_y_array = 40 }
+	add_to_array = { reichstag_member_x_array = 215 }
+	add_to_array = { reichstag_member_y_array = 121 }
+	add_to_array = { reichstag_member_x_array = 208 }
+	add_to_array = { reichstag_member_y_array = 17 }
+	add_to_array = { reichstag_member_x_array = 215 }
+	add_to_array = { reichstag_member_y_array = 86 }
+	add_to_array = { reichstag_member_x_array = 215 }
+	add_to_array = { reichstag_member_y_array = 63 }
+	add_to_array = { reichstag_member_x_array = 215 }
+	add_to_array = { reichstag_member_y_array = 51 }
+	add_to_array = { reichstag_member_x_array = 215 }
+	add_to_array = { reichstag_member_y_array = 28 }
+	add_to_array = { reichstag_member_x_array = 215 }
+	add_to_array = { reichstag_member_y_array = 5 }
+	add_to_array = { reichstag_member_x_array = 221 }
+	add_to_array = { reichstag_member_y_array = 109 }
+	add_to_array = { reichstag_member_x_array = 221 }
+	add_to_array = { reichstag_member_y_array = 97 }
+	add_to_array = { reichstag_member_x_array = 221 }
+	add_to_array = { reichstag_member_y_array = 74 }
+	add_to_array = { reichstag_member_x_array = 221 }
+	add_to_array = { reichstag_member_y_array = 40 }
+	add_to_array = { reichstag_member_x_array = 221 }
+	add_to_array = { reichstag_member_y_array = 16 }
+	add_to_array = { reichstag_member_x_array = 228 }
+	add_to_array = { reichstag_member_y_array = 5 }
+	add_to_array = { reichstag_member_x_array = 228 }
+	add_to_array = { reichstag_member_y_array = 28 }
+	add_to_array = { reichstag_member_x_array = 228 }
+	add_to_array = { reichstag_member_y_array = 51 }
+	add_to_array = { reichstag_member_x_array = 228 }
+	add_to_array = { reichstag_member_y_array = 63 }
+	add_to_array = { reichstag_member_x_array = 228 }
+	add_to_array = { reichstag_member_y_array = 86 }
+	add_to_array = { reichstag_member_x_array = 235 }
+	add_to_array = { reichstag_member_y_array = 17 }
+	add_to_array = { reichstag_member_x_array = 228 }
+	add_to_array = { reichstag_member_y_array = 121 }
+	add_to_array = { reichstag_member_x_array = 235 }
+	add_to_array = { reichstag_member_y_array = 40 }
+	add_to_array = { reichstag_member_x_array = 235 }
+	add_to_array = { reichstag_member_y_array = 75 }
+	add_to_array = { reichstag_member_x_array = 241 }
+	add_to_array = { reichstag_member_y_array = 6 }
+	add_to_array = { reichstag_member_x_array = 241 }
+	add_to_array = { reichstag_member_y_array = 29 }
+	add_to_array = { reichstag_member_x_array = 235 }
+	add_to_array = { reichstag_member_y_array = 98 }
+	add_to_array = { reichstag_member_x_array = 235 }
+	add_to_array = { reichstag_member_y_array = 110 }
+	add_to_array = { reichstag_member_x_array = 242 }
+	add_to_array = { reichstag_member_y_array = 52 }
+	add_to_array = { reichstag_member_x_array = 241 }
+	add_to_array = { reichstag_member_y_array = 64 }
+	add_to_array = { reichstag_member_x_array = 248 }
+	add_to_array = { reichstag_member_y_array = 18 }
+	add_to_array = { reichstag_member_x_array = 248 }
+	add_to_array = { reichstag_member_y_array = 42 }
+	add_to_array = { reichstag_member_x_array = 242 }
+	add_to_array = { reichstag_member_y_array = 87 }
+	add_to_array = { reichstag_member_x_array = 254 }
+	add_to_array = { reichstag_member_y_array = 7 }
+	add_to_array = { reichstag_member_x_array = 255 }
+	add_to_array = { reichstag_member_y_array = 31 }
+	add_to_array = { reichstag_member_x_array = 248 }
+	add_to_array = { reichstag_member_y_array = 77 }
+	add_to_array = { reichstag_member_x_array = 261 }
+	add_to_array = { reichstag_member_y_array = 20 }
+	add_to_array = { reichstag_member_x_array = 242 }
+	add_to_array = { reichstag_member_y_array = 123 }
+	add_to_array = { reichstag_member_x_array = 255 }
+	add_to_array = { reichstag_member_y_array = 54 }
+	add_to_array = { reichstag_member_x_array = 255 }
+	add_to_array = { reichstag_member_y_array = 66 }
+	add_to_array = { reichstag_member_x_array = 267 }
+	add_to_array = { reichstag_member_y_array = 10 }
+	add_to_array = { reichstag_member_x_array = 249 }
+	add_to_array = { reichstag_member_y_array = 100 }
+	add_to_array = { reichstag_member_x_array = 262 }
+	add_to_array = { reichstag_member_y_array = 44 }
+	add_to_array = { reichstag_member_x_array = 248 }
+	add_to_array = { reichstag_member_y_array = 112 }
+	add_to_array = { reichstag_member_x_array = 268 }
+	add_to_array = { reichstag_member_y_array = 34 }
+	add_to_array = { reichstag_member_x_array = 255 }
+	add_to_array = { reichstag_member_y_array = 90 }
+	add_to_array = { reichstag_member_x_array = 274 }
+	add_to_array = { reichstag_member_y_array = 23 }
+	add_to_array = { reichstag_member_x_array = 261 }
+	add_to_array = { reichstag_member_y_array = 80 }
+	add_to_array = { reichstag_member_x_array = 280 }
+	add_to_array = { reichstag_member_y_array = 13 }
+	add_to_array = { reichstag_member_x_array = 268 }
+	add_to_array = { reichstag_member_y_array = 58 }
+	add_to_array = { reichstag_member_x_array = 267 }
+	add_to_array = { reichstag_member_y_array = 69 }
+	add_to_array = { reichstag_member_x_array = 275 }
+	add_to_array = { reichstag_member_y_array = 47 }
+	add_to_array = { reichstag_member_x_array = 281 }
+	add_to_array = { reichstag_member_y_array = 37 }
+	add_to_array = { reichstag_member_x_array = 287 }
+	add_to_array = { reichstag_member_y_array = 27 }
+	add_to_array = { reichstag_member_x_array = 262 }
+	add_to_array = { reichstag_member_y_array = 104 }
+	add_to_array = { reichstag_member_x_array = 255 }
+	add_to_array = { reichstag_member_y_array = 126 }
+	add_to_array = { reichstag_member_x_array = 293 }
+	add_to_array = { reichstag_member_y_array = 17 }
+	add_to_array = { reichstag_member_x_array = 268 }
+	add_to_array = { reichstag_member_y_array = 94 }
+	add_to_array = { reichstag_member_x_array = 261 }
+	add_to_array = { reichstag_member_y_array = 116 }
+	add_to_array = { reichstag_member_x_array = 281 }
+	add_to_array = { reichstag_member_y_array = 62 }
+	add_to_array = { reichstag_member_x_array = 274 }
+	add_to_array = { reichstag_member_y_array = 84 }
+	add_to_array = { reichstag_member_x_array = 287 }
+	add_to_array = { reichstag_member_y_array = 52 }
+	add_to_array = { reichstag_member_x_array = 280 }
+	add_to_array = { reichstag_member_y_array = 74 }
+	add_to_array = { reichstag_member_x_array = 293 }
+	add_to_array = { reichstag_member_y_array = 42 }
+	add_to_array = { reichstag_member_x_array = 299 }
+	add_to_array = { reichstag_member_y_array = 32 }
+	add_to_array = { reichstag_member_x_array = 305 }
+	add_to_array = { reichstag_member_y_array = 21 }
+	add_to_array = { reichstag_member_x_array = 275 }
+	add_to_array = { reichstag_member_y_array = 109 }
+	add_to_array = { reichstag_member_x_array = 294 }
+	add_to_array = { reichstag_member_y_array = 67 }
+	add_to_array = { reichstag_member_x_array = 300 }
+	add_to_array = { reichstag_member_y_array = 57 }
+	add_to_array = { reichstag_member_x_array = 281 }
+	add_to_array = { reichstag_member_y_array = 99 }
+	add_to_array = { reichstag_member_x_array = 306 }
+	add_to_array = { reichstag_member_y_array = 47 }
+	add_to_array = { reichstag_member_x_array = 287 }
+	add_to_array = { reichstag_member_y_array = 89 }
+	add_to_array = { reichstag_member_x_array = 312 }
+	add_to_array = { reichstag_member_y_array = 37 }
+	add_to_array = { reichstag_member_x_array = 317 }
+	add_to_array = { reichstag_member_y_array = 27 }
+	add_to_array = { reichstag_member_x_array = 292 }
+	add_to_array = { reichstag_member_y_array = 79 }
+	add_to_array = { reichstag_member_x_array = 267 }
+	add_to_array = { reichstag_member_y_array = 131 }
+	add_to_array = { reichstag_member_x_array = 273 }
+	add_to_array = { reichstag_member_y_array = 121 }
+	add_to_array = { reichstag_member_x_array = 306 }
+	add_to_array = { reichstag_member_y_array = 73 }
+	add_to_array = { reichstag_member_x_array = 312 }
+	add_to_array = { reichstag_member_y_array = 63 }
+	add_to_array = { reichstag_member_x_array = 318 }
+	add_to_array = { reichstag_member_y_array = 53 }
+	add_to_array = { reichstag_member_x_array = 323 }
+	add_to_array = { reichstag_member_y_array = 43 }
+	add_to_array = { reichstag_member_x_array = 329 }
+	add_to_array = { reichstag_member_y_array = 33 }
+	add_to_array = { reichstag_member_x_array = 304 }
+	add_to_array = { reichstag_member_y_array = 85 }
+	add_to_array = { reichstag_member_x_array = 298 }
+	add_to_array = { reichstag_member_y_array = 95 }
+	add_to_array = { reichstag_member_x_array = 293 }
+	add_to_array = { reichstag_member_y_array = 105 }
+	add_to_array = { reichstag_member_x_array = 287 }
+	add_to_array = { reichstag_member_y_array = 115 }
+	add_to_array = { reichstag_member_x_array = 341 }
+	add_to_array = { reichstag_member_y_array = 40 }
+	add_to_array = { reichstag_member_x_array = 335 }
+	add_to_array = { reichstag_member_y_array = 50 }
+	add_to_array = { reichstag_member_x_array = 285 }
+	add_to_array = { reichstag_member_y_array = 128 }
+	add_to_array = { reichstag_member_x_array = 329 }
+	add_to_array = { reichstag_member_y_array = 60 }
+	add_to_array = { reichstag_member_x_array = 279 }
+	add_to_array = { reichstag_member_y_array = 138 }
+	add_to_array = { reichstag_member_x_array = 323 }
+	add_to_array = { reichstag_member_y_array = 70 }
+	add_to_array = { reichstag_member_x_array = 318 }
+	add_to_array = { reichstag_member_y_array = 80 }
+	add_to_array = { reichstag_member_x_array = 315 }
+	add_to_array = { reichstag_member_y_array = 92 }
+	add_to_array = { reichstag_member_x_array = 310 }
+	add_to_array = { reichstag_member_y_array = 103 }
+	add_to_array = { reichstag_member_x_array = 352 }
+	add_to_array = { reichstag_member_y_array = 47 }
+	add_to_array = { reichstag_member_x_array = 304 }
+	add_to_array = { reichstag_member_y_array = 113 }
+	add_to_array = { reichstag_member_x_array = 346 }
+	add_to_array = { reichstag_member_y_array = 57 }
+	add_to_array = { reichstag_member_x_array = 298 }
+	add_to_array = { reichstag_member_y_array = 123 }
+	add_to_array = { reichstag_member_x_array = 340 }
+	add_to_array = { reichstag_member_y_array = 68 }
+	add_to_array = { reichstag_member_x_array = 334 }
+	add_to_array = { reichstag_member_y_array = 78 }
+	add_to_array = { reichstag_member_x_array = 329 }
+	add_to_array = { reichstag_member_y_array = 88 }
+	add_to_array = { reichstag_member_x_array = 296 }
+	add_to_array = { reichstag_member_y_array = 136 }
+	add_to_array = { reichstag_member_x_array = 362 }
+	add_to_array = { reichstag_member_y_array = 55 }
+	add_to_array = { reichstag_member_x_array = 326 }
+	add_to_array = { reichstag_member_y_array = 101 }
+	add_to_array = { reichstag_member_x_array = 356 }
+	add_to_array = { reichstag_member_y_array = 66 }
+	add_to_array = { reichstag_member_x_array = 290 }
+	add_to_array = { reichstag_member_y_array = 146 }
+	add_to_array = { reichstag_member_x_array = 320 }
+	add_to_array = { reichstag_member_y_array = 111 }
+	add_to_array = { reichstag_member_x_array = 351 }
+	add_to_array = { reichstag_member_y_array = 76 }
+	add_to_array = { reichstag_member_x_array = 345 }
+	add_to_array = { reichstag_member_y_array = 86 }
+	add_to_array = { reichstag_member_x_array = 315 }
+	add_to_array = { reichstag_member_y_array = 121 }
+	add_to_array = { reichstag_member_x_array = 339 }
+	add_to_array = { reichstag_member_y_array = 97 }
+	add_to_array = { reichstag_member_x_array = 309 }
+	add_to_array = { reichstag_member_y_array = 132 }
+	add_to_array = { reichstag_member_x_array = 372 }
+	add_to_array = { reichstag_member_y_array = 64 }
+	add_to_array = { reichstag_member_x_array = 366 }
+	add_to_array = { reichstag_member_y_array = 75 }
+	add_to_array = { reichstag_member_x_array = 336 }
+	add_to_array = { reichstag_member_y_array = 110 }
+	add_to_array = { reichstag_member_x_array = 360 }
+	add_to_array = { reichstag_member_y_array = 85 }
+	add_to_array = { reichstag_member_x_array = 355 }
+	add_to_array = { reichstag_member_y_array = 96 }
+	add_to_array = { reichstag_member_x_array = 330 }
+	add_to_array = { reichstag_member_y_array = 120 }
+	add_to_array = { reichstag_member_x_array = 306 }
+	add_to_array = { reichstag_member_y_array = 145 }
+	add_to_array = { reichstag_member_x_array = 381 }
+	add_to_array = { reichstag_member_y_array = 73 }
+	add_to_array = { reichstag_member_x_array = 349 }
+	add_to_array = { reichstag_member_y_array = 106 }
+	add_to_array = { reichstag_member_x_array = 324 }
+	add_to_array = { reichstag_member_y_array = 131 }
+	add_to_array = { reichstag_member_x_array = 376 }
+	add_to_array = { reichstag_member_y_array = 84 }
+	add_to_array = { reichstag_member_x_array = 300 }
+	add_to_array = { reichstag_member_y_array = 155 }
+	add_to_array = { reichstag_member_x_array = 370 }
+	add_to_array = { reichstag_member_y_array = 95 }
+	add_to_array = { reichstag_member_x_array = 319 }
+	add_to_array = { reichstag_member_y_array = 142 }
+	add_to_array = { reichstag_member_x_array = 345 }
+	add_to_array = { reichstag_member_y_array = 119 }
+	add_to_array = { reichstag_member_x_array = 364 }
+	add_to_array = { reichstag_member_y_array = 106 }
+	add_to_array = { reichstag_member_x_array = 390 }
+	add_to_array = { reichstag_member_y_array = 83 }
+	add_to_array = { reichstag_member_x_array = 339 }
+	add_to_array = { reichstag_member_y_array = 130 }
+	add_to_array = { reichstag_member_x_array = 384 }
+	add_to_array = { reichstag_member_y_array = 94 }
+	add_to_array = { reichstag_member_x_array = 358 }
+	add_to_array = { reichstag_member_y_array = 117 }
+	add_to_array = { reichstag_member_x_array = 378 }
+	add_to_array = { reichstag_member_y_array = 105 }
+	add_to_array = { reichstag_member_x_array = 314 }
+	add_to_array = { reichstag_member_y_array = 155 }
+	add_to_array = { reichstag_member_x_array = 333 }
+	add_to_array = { reichstag_member_y_array = 141 }
+	add_to_array = { reichstag_member_x_array = 399 }
+	add_to_array = { reichstag_member_y_array = 94 }
+	add_to_array = { reichstag_member_x_array = 353 }
+	add_to_array = { reichstag_member_y_array = 130 }
+	add_to_array = { reichstag_member_x_array = 372 }
+	add_to_array = { reichstag_member_y_array = 116 }
+	add_to_array = { reichstag_member_x_array = 392 }
+	add_to_array = { reichstag_member_y_array = 105 }
+	add_to_array = { reichstag_member_x_array = 327 }
+	add_to_array = { reichstag_member_y_array = 152 }
+	add_to_array = { reichstag_member_x_array = 308 }
+	add_to_array = { reichstag_member_y_array = 166 }
+	add_to_array = { reichstag_member_x_array = 366 }
+	add_to_array = { reichstag_member_y_array = 127 }
+	add_to_array = { reichstag_member_x_array = 347 }
+	add_to_array = { reichstag_member_y_array = 141 }
+	add_to_array = { reichstag_member_x_array = 386 }
+	add_to_array = { reichstag_member_y_array = 116 }
+	add_to_array = { reichstag_member_x_array = 406 }
+	add_to_array = { reichstag_member_y_array = 104 }
+	add_to_array = { reichstag_member_x_array = 380 }
+	add_to_array = { reichstag_member_y_array = 127 }
+	add_to_array = { reichstag_member_x_array = 400 }
+	add_to_array = { reichstag_member_y_array = 116 }
+	add_to_array = { reichstag_member_x_array = 341 }
+	add_to_array = { reichstag_member_y_array = 152 }
+	add_to_array = { reichstag_member_x_array = 361 }
+	add_to_array = { reichstag_member_y_array = 141 }
+	add_to_array = { reichstag_member_x_array = 322 }
+	add_to_array = { reichstag_member_y_array = 166 }
+	add_to_array = { reichstag_member_x_array = 413 }
+	add_to_array = { reichstag_member_y_array = 116 }
+	add_to_array = { reichstag_member_x_array = 393 }
+	add_to_array = { reichstag_member_y_array = 127 }
+	add_to_array = { reichstag_member_x_array = 373 }
+	add_to_array = { reichstag_member_y_array = 139 }
+	add_to_array = { reichstag_member_x_array = 354 }
+	add_to_array = { reichstag_member_y_array = 152 }
+	add_to_array = { reichstag_member_x_array = 334 }
+	add_to_array = { reichstag_member_y_array = 164 }
+	add_to_array = { reichstag_member_x_array = 406 }
+	add_to_array = { reichstag_member_y_array = 127 }
+	add_to_array = { reichstag_member_x_array = 386 }
+	add_to_array = { reichstag_member_y_array = 139 }
+	add_to_array = { reichstag_member_x_array = 315 }
+	add_to_array = { reichstag_member_y_array = 178 }
+	add_to_array = { reichstag_member_x_array = 367 }
+	add_to_array = { reichstag_member_y_array = 152 }
+	add_to_array = { reichstag_member_x_array = 419 }
+	add_to_array = { reichstag_member_y_array = 127 }
+	add_to_array = { reichstag_member_x_array = 347 }
+	add_to_array = { reichstag_member_y_array = 164 }
+	add_to_array = { reichstag_member_x_array = 400 }
+	add_to_array = { reichstag_member_y_array = 139 }
+	add_to_array = { reichstag_member_x_array = 380 }
+	add_to_array = { reichstag_member_y_array = 151 }
+	add_to_array = { reichstag_member_x_array = 412 }
+	add_to_array = { reichstag_member_y_array = 139 }
+	add_to_array = { reichstag_member_x_array = 328 }
+	add_to_array = { reichstag_member_y_array = 178 }
+	add_to_array = { reichstag_member_x_array = 360 }
+	add_to_array = { reichstag_member_y_array = 164 }
+	add_to_array = { reichstag_member_x_array = 392 }
+	add_to_array = { reichstag_member_y_array = 151 }
+	add_to_array = { reichstag_member_x_array = 425 }
+	add_to_array = { reichstag_member_y_array = 139 }
+	add_to_array = { reichstag_member_x_array = 340 }
+	add_to_array = { reichstag_member_y_array = 177 }
+	add_to_array = { reichstag_member_x_array = 405 }
+	add_to_array = { reichstag_member_y_array = 151 }
+	add_to_array = { reichstag_member_x_array = 373 }
+	add_to_array = { reichstag_member_y_array = 165 }
+	add_to_array = { reichstag_member_x_array = 385 }
+	add_to_array = { reichstag_member_y_array = 164 }
+	add_to_array = { reichstag_member_x_array = 418 }
+	add_to_array = { reichstag_member_y_array = 152 }
+	add_to_array = { reichstag_member_x_array = 353 }
+	add_to_array = { reichstag_member_y_array = 177 }
+	add_to_array = { reichstag_member_x_array = 321 }
+	add_to_array = { reichstag_member_y_array = 190 }
+	add_to_array = { reichstag_member_x_array = 430 }
+	add_to_array = { reichstag_member_y_array = 152 }
+	add_to_array = { reichstag_member_x_array = 397 }
+	add_to_array = { reichstag_member_y_array = 164 }
+	add_to_array = { reichstag_member_x_array = 365 }
+	add_to_array = { reichstag_member_y_array = 177 }
+	add_to_array = { reichstag_member_x_array = 410 }
+	add_to_array = { reichstag_member_y_array = 164 }
+	add_to_array = { reichstag_member_x_array = 333 }
+	add_to_array = { reichstag_member_y_array = 190 }
+	add_to_array = { reichstag_member_x_array = 377 }
+	add_to_array = { reichstag_member_y_array = 177 }
+	add_to_array = { reichstag_member_x_array = 422 }
+	add_to_array = { reichstag_member_y_array = 164 }
+	add_to_array = { reichstag_member_x_array = 345 }
+	add_to_array = { reichstag_member_y_array = 189 }
+	add_to_array = { reichstag_member_x_array = 389 }
+	add_to_array = { reichstag_member_y_array = 176 }
+	add_to_array = { reichstag_member_x_array = 434 }
+	add_to_array = { reichstag_member_y_array = 164 }
+	add_to_array = { reichstag_member_x_array = 401 }
+	add_to_array = { reichstag_member_y_array = 177 }
+	add_to_array = { reichstag_member_x_array = 357 }
+	add_to_array = { reichstag_member_y_array = 190 }
+	add_to_array = { reichstag_member_x_array = 413 }
+	add_to_array = { reichstag_member_y_array = 177 }
+	add_to_array = { reichstag_member_x_array = 369 }
+	add_to_array = { reichstag_member_y_array = 190 }
+	add_to_array = { reichstag_member_x_array = 425 }
+	add_to_array = { reichstag_member_y_array = 177 }
+	add_to_array = { reichstag_member_x_array = 437 }
+	add_to_array = { reichstag_member_y_array = 177 }
+	add_to_array = { reichstag_member_x_array = 381 }
+	add_to_array = { reichstag_member_y_array = 190 }
+	add_to_array = { reichstag_member_x_array = 325 }
+	add_to_array = { reichstag_member_y_array = 203 }
+	add_to_array = { reichstag_member_x_array = 393 }
+	add_to_array = { reichstag_member_y_array = 190 }
+	add_to_array = { reichstag_member_x_array = 337 }
+	add_to_array = { reichstag_member_y_array = 203 }
+	add_to_array = { reichstag_member_x_array = 405 }
+	add_to_array = { reichstag_member_y_array = 190 }
+	add_to_array = { reichstag_member_x_array = 416 }
+	add_to_array = { reichstag_member_y_array = 190 }
+	add_to_array = { reichstag_member_x_array = 348 }
+	add_to_array = { reichstag_member_y_array = 203 }
+	add_to_array = { reichstag_member_x_array = 428 }
+	add_to_array = { reichstag_member_y_array = 190 }
+	add_to_array = { reichstag_member_x_array = 360 }
+	add_to_array = { reichstag_member_y_array = 203 }
+	add_to_array = { reichstag_member_x_array = 440 }
+	add_to_array = { reichstag_member_y_array = 190 }
+	add_to_array = { reichstag_member_x_array = 372 }
+	add_to_array = { reichstag_member_y_array = 203 }
+	add_to_array = { reichstag_member_x_array = 383 }
+	add_to_array = { reichstag_member_y_array = 203 }
+	add_to_array = { reichstag_member_x_array = 395 }
+	add_to_array = { reichstag_member_y_array = 203 }
+	add_to_array = { reichstag_member_x_array = 407 }
+	add_to_array = { reichstag_member_y_array = 203 }
+	add_to_array = { reichstag_member_x_array = 418 }
+	add_to_array = { reichstag_member_y_array = 203 }
+	add_to_array = { reichstag_member_x_array = 430 }
+	add_to_array = { reichstag_member_y_array = 203 }
+	add_to_array = { reichstag_member_x_array = 442 }
+	add_to_array = { reichstag_member_y_array = 203 }
+	add_to_array = { reichstag_member_x_array = 327 }
+	add_to_array = { reichstag_member_y_array = 217 }
+	add_to_array = { reichstag_member_x_array = 338 }
+	add_to_array = { reichstag_member_y_array = 217 }
+	add_to_array = { reichstag_member_x_array = 350 }
+	add_to_array = { reichstag_member_y_array = 217 }
+	add_to_array = { reichstag_member_x_array = 362 }
+	add_to_array = { reichstag_member_y_array = 217 }
+	add_to_array = { reichstag_member_x_array = 373 }
+	add_to_array = { reichstag_member_y_array = 217 }
+	add_to_array = { reichstag_member_x_array = 385 }
+	add_to_array = { reichstag_member_y_array = 217 }
+	add_to_array = { reichstag_member_x_array = 396 }
+	add_to_array = { reichstag_member_y_array = 217 }
+	add_to_array = { reichstag_member_x_array = 408 }
+	add_to_array = { reichstag_member_y_array = 217 }
+	add_to_array = { reichstag_member_x_array = 420 }
+	add_to_array = { reichstag_member_y_array = 217 }
+	add_to_array = { reichstag_member_x_array = 431 }
+	add_to_array = { reichstag_member_y_array = 217 }
+	add_to_array = { reichstag_member_x_array = 443 }
+	add_to_array = { reichstag_member_y_array = 216 }
+}
+
+# set-up for reichstag - add to history (GER_reichstag_members_initial = yes)
+GER_reichstag_members_initial = {
+	# SPD
+	1 = {
+		set_variable = { reichstag_seat = 110 }
+		set_variable = { reichstag_support = 0 }
+	}
+	# DNAP
+	2 = {
+		set_variable = { reichstag_seat = 15 }
+		set_variable = { reichstag_support = 1 }
+	}
+	# LVP (Left)
+	3 = {
+		set_variable = { reichstag_seat = 19 }
+		set_variable = { reichstag_support = 0 }
+	}
+	# LVP (Right)
+	4 = {
+		set_variable = { reichstag_seat = 32 }
+		set_variable = { reichstag_support = 1 }
+	}
+	# Zentrum (Leftists)
+	5 = {
+		set_variable = { reichstag_seat = 18 }
+		set_variable = { reichstag_support = 0 }
+	}
+	# Zentrum (Federalists)
+	6 = {
+		set_variable = { reichstag_seat = 36 }
+		set_variable = { reichstag_support = 1 }
+	}
+	# Zentrum (Rightists)
+	7 = {
+		set_variable = { reichstag_seat = 29 }
+		set_variable = { reichstag_support = 1 }
+	}
+	# BVP
+	8 = {
+		set_variable = { reichstag_seat = 16 }
+		set_variable = { reichstag_support = 1 }
+	}
+	# PP
+	9 = {
+		set_variable = { reichstag_seat = 18 }
+		set_variable = { reichstag_support = 1 }
+	}
+	# DkP
+	10 = {
+		set_variable = { reichstag_seat = 73 }
+		set_variable = { reichstag_support = 3 }
+	}
+	# Independent Conservatives
+	11 = {
+		set_variable = { reichstag_seat = 8 }
+		set_variable = { reichstag_support = 1 }
+	}
+	# DVLP
+	12 = {
+		set_variable = { reichstag_seat = 23 }
+		set_variable = { reichstag_support = 3 }
+	}
+	# DVFP
+	13 = {
+		set_variable = { reichstag_seat = 6 }
+		set_variable = { reichstag_support = 3 }
+	}
+	# Agrarians
+	14 = {
+		set_variable = { reichstag_seat = 7 }
+		set_variable = { reichstag_support = 1 }
+	}
+	# Local Parties
+	15 = {
+		set_variable = { reichstag_seat = 5 }
+		set_variable = { reichstag_support = 1 }
+	}
+
+	set_variable = { reichstag_support_majority = 208 } # simple majority
+
+	# make array storing ids 1-15 for each party (1 - SPD, 2 - DNAP etc.)
+	for_loop_effect = {
+		start = 1
+		end = 16
+
+		add_to_array = { reichstag_member_array = v }
+	}
+
+	# effect to build the parliament gui displayed
+	modify_reichstag_array = yes
+}
+
+# ignore probably needs to be modified since it still partly uses old sorting code
+modify_reichstag_array = {
+	clear_array = reichstag_main_array
+
+	for_each_loop = {
+		array = reichstag_member_array
+
+		set_temp_variable = { global.seat_id = v }
+
+		var:v = {
+			if = {
+				limit = {
+					check_variable = { reichstag_seat > 0 }
+				}
+				for_loop_effect = {
+					start = 1
+					end = reichstag_seat
+					compare = less_than_or_equals
+
+					add_to_array = { ROOT.reichstag_main_array = global.seat_id }
+				}
+			}
+		}
+	}
+
+	for_each_scope_loop = {
+		array = reichstag_member_array
+
+		set_variable = { reichstag_support_cost = reichstag_seat }
+		multiply_variable = { reichstag_support_cost = 0.5 }
+		round_variable = reichstag_support_cost
+	}
+
+	update_reichstag_support = yes
+}
+
+test_44 = {
+	set_temp_variable = { member = 2 }
+	set_temp_variable = { seat_value = -20 }
+	modify_reichstag_seat = yes
+}
+
+modify_reichstag_seat = {
+	set_temp_variable = { v = member }
+	custom_effect_tooltip = GER_modify_reichstag_seat_tt
+
+	if = {
+		limit = {
+			check_variable = { member > 0 }
+		}
+
+		for_loop_effect = {
+			start = 1
+			end = reichstag_member_array^num
+			compare = less_than_or_equals
+
+			add_to_temp_array = { temp_array = v }
+		}
+
+		remove_from_temp_array = { array = temp_array value = member }
+
+		if = {
+			limit = {
+				set_temp_variable = { temp_total = member:reichstag_seat }
+				add_to_temp_variable = { temp_total = seat_value }
+				check_variable = { temp_total < 0 }
+			}
+			set_temp_variable = { seat_value = member:reichstag_seat }
+			multiply_temp_variable = { seat_value = -1 }
+		}
+		else_if = {
+			limit = {
+				check_variable = { temp_total > reichstag_main_array^num }
+			}
+			set_temp_variable = { corrected_value = temp_total }
+			subtract_from_temp_variable = { corrected_value = reichstag_main_array^num }
+			subtract_from_temp_variable = { seat_value = corrected_value }
+		}
+
+		add_to_variable = { member:reichstag_seat = seat_value }
+
+		while_loop_effect = {
+			limit = {
+				OR = {
+					check_variable = { seat_value > 0 }
+					check_variable = { seat_value < 0 }
+				}
+			}
+
+			for_each_loop = {
+				array = temp_array
+
+				if = {
+					limit = {
+						check_variable = { seat_value = 0 }
+					}
+					set_temp_variable = { break = 1 }
+				}
+				else_if = {
+					limit = {
+						check_variable = { v:reichstag_seat > 0 }
+						check_variable = { seat_value > 0 }
+					}
+					subtract_from_variable = { v:reichstag_seat = 1 }
+					subtract_from_temp_variable = { seat_value = 1 }
+				}
+				else_if = {
+					limit = {
+						check_variable = { v:reichstag_seat > 0 }
+						check_variable = { seat_value < 0 }
+					}
+					add_to_variable = { v:reichstag_seat = 1 }
+					add_to_temp_variable = { seat_value = 1 }
+				}
+			}
+		}
+	}
+}
+
+# main code for unsorted version of adding seat
+add_reichstag_seat = {
+	for_loop_effect = {
+		start = 0
+		end = reichstag_seat_array^num
+
+		add_to_temp_array = { temp_reichstag_seat_array = v }
+	}
+
+	subtract_from_temp_variable = { member_added = 1 }
+	remove_from_temp_array = { array = temp_reichstag_seat_array value = member_added }
+	add_to_variable = { reichstag_seat_array^member_added = seat_value_added }
+
+	while_loop_effect = {
+		limit = { check_variable = { seat_value_added > 0 } }
+
+		for_loop_effect = {
+			start = 0
+			end = temp_reichstag_seat_array^num
+
+			if = {
+				limit = {
+					check_variable = { reichstag_seat_array^temp_reichstag_seat_array^v > 0 }
+					check_variable = { seat_value_added > 0 }
+				}
+				subtract_from_variable = { reichstag_seat_array^temp_reichstag_seat_array^v = 1 }
+				subtract_from_temp_variable = { seat_value_added = 1 }
+			}
+		}
+	}
+
+	modify_reichstag_array = yes
+}
+
+# main code for unsorted version of subtracting seat
+subtract_reichstag_seat = {
+	for_loop_effect = {
+		start = 0
+		end = reichstag_seat_array^num
+
+		add_to_temp_array = { temp_reichstag_seat_array = v }
+	}
+
+	subtract_from_temp_variable = { member_subtracted = 1 }
+	remove_from_temp_array = { array = temp_reichstag_seat_array value = member_subtracted }
+	subtract_from_variable = { reichstag_seat_array^member_subtracted = seat_value_subtracted }
+
+	while_loop_effect = {
+		limit = { check_variable = { seat_value_subtracted > 0 } }
+
+		for_loop_effect = {
+			start = 0
+			end = temp_reichstag_seat_array^num
+
+			if = {
+				limit = {
+					check_variable = { reichstag_seat_array^temp_reichstag_seat_array^v < 415 }
+					check_variable = { seat_value_subtracted > 0 }
+				}
+				add_to_variable = { reichstag_seat_array^temp_reichstag_seat_array^v = 1 }
+				subtract_from_temp_variable = { seat_value_subtracted = 1 }
+			}
+		}
+	}
+
+	modify_reichstag_array = yes
+}
+
+modify_reichstag_support = {
+	custom_effect_tooltip = GER_modify_reichstag_support_tt
+
+	set_variable = { member:reichstag_support = support }
+
+	update_reichstag_support = yes
+}
+
+modify_bundesrat_support = {
+	custom_effect_tooltip = GER_modify_bundesrat_support_tt
+
+	set_variable = { member:bundesrat_support = support }
+
+	update_bundesrat_support = yes
+}
+
+
+GER_grand_coalition_effect = {
+	# SPD
+	1 = {
+		set_variable = { reichstag_support = 0 }
+	}
+	# DNAP
+	2 = {
+		set_variable = { reichstag_support = 1 }
+	}
+	# LVP (Left)
+	3 = {
+		set_variable = { reichstag_support = 3 }
+	}
+	# LVP (Right)
+	4 = {
+		set_variable = { reichstag_support = 3 }
+	}
+	# Zentrum (Leftists)
+	5 = {
+		set_variable = { reichstag_support = 3 }
+	}
+	# Zentrum (Federalists)
+	6 = {
+		set_variable = { reichstag_support = 3 }
+	}
+	# Zentrum (Rightists)
+	7 = {
+		set_variable = { reichstag_support = 3 }
+	}
+	# BVP
+	8 = {
+		set_variable = { reichstag_support = 1 }
+	}
+	# PP
+	9 = {
+		set_variable = { reichstag_support = 1 }
+	}
+	# DkP
+	10 = {
+		set_variable = { reichstag_support = 3 }
+	}
+	# Independent Conservatives
+	11 = {
+		set_variable = { reichstag_support = 1 }
+	}
+	# DVLP
+	12 = {
+		set_variable = { reichstag_support = 1 }
+	}
+	# DVFP
+	13 = {
+		set_variable = { reichstag_support = 0 }
+	}
+	# Agrarians
+	14 = {
+		set_variable = { reichstag_support = 1 }
+	}
+	# Local Parties
+	15 = {
+		set_variable = { reichstag_support = 1 }
+	}
+	update_reichstag_support = yes
+}
+
+# usage for adding seat (adds 5 to SPD)
+reichstag_test_5 = {
+	set_temp_variable = { member_added = 1 }
+	set_temp_variable = { seat_value_added = 5 }
+
+	add_reichstag_seat = yes
+}
+
+# usage for subtracting seat (subtracts 10 from SPD)
+reichstag_test_10 = {
+	set_temp_variable = { member_subtracted = 1 }
+	set_temp_variable = { seat_value_subtracted = 10 }
+
+	subtract_reichstag_seat = yes
+}
+
+# clear all parliament related stuff (for debugging dont use)
+clear_bundesrat_reichstag_array = {
+	clear_array = bundesrat_member_array
+	clear_array = bundesrat_seat_array
+	clear_array = bundesrat_support_array
+	clear_array = reichstag_main_array
+	clear_array = reichstag_member_array
+	clear_array = reichstag_seat_array
+	clear_array = reichstag_support_array
+}
+
+####################################
+### election outcomes goes below ###
+####################################
+
+# 1951 DkP victory
+dkp_victory_1951 = {
+
+	# SPD
+	1 = {
+		set_variable = { reichstag_seat = 49 }
+		set_variable = { reichstag_support = 0 }
+	}
+	# DNAP
+	2 = {
+		set_variable = { reichstag_seat = 32 }
+		set_variable = { reichstag_support = 1 }
+	}
+	# FVP
+	3 = {
+		set_variable = { reichstag_seat = 14 }
+		set_variable = { reichstag_support = 0 }
+	}
+	# NLP
+	4 = {
+		set_variable = { reichstag_seat = 29 }
+		set_variable = { reichstag_support = 1 }
+	}
+	# Zentrum (Leftists)
+	5 = {
+		set_variable = { reichstag_seat = 15 }
+		set_variable = { reichstag_support = 0 }
+	}
+	# Zentrum (Federalists)
+	6 = {
+		set_variable = { reichstag_seat = 36 }
+		set_variable = { reichstag_support = 0 }
+	}
+	# Zentrum (Rightists)
+	7 = {
+		set_variable = { reichstag_seat = 28 }
+		set_variable = { reichstag_support = 1 }
+	}
+	# BVP
+	8 = {
+		set_variable = { reichstag_seat = 11 }
+		set_variable = { reichstag_support = 0 }
+	}
+	# PP
+	9 = {
+		set_variable = { reichstag_seat = 11 }
+		set_variable = { reichstag_support = 0 }
+	}
+	# DkP
+	10 = {
+		set_variable = { reichstag_seat = 136 }
+		set_variable = { reichstag_support = 3 }
+	}
+	# Independent Conservatives
+	11 = {
+		set_variable = { reichstag_seat = 0 }
+		set_variable = { reichstag_support = 0 }
+	}
+	# DVLP
+	12 = {
+		set_variable = { reichstag_seat = 43 }
+		set_variable = { reichstag_support = 3 }
+	}
+	# DVFP
+	13 = {
+		set_variable = { reichstag_seat = 0 }
+		set_variable = { reichstag_support = 0 }
+	}
+	# Agrarians
+	14 = {
+		set_variable = { reichstag_seat = 6 }
+		set_variable = { reichstag_support = 3 }
+	}
+	# Local Parties
+	15 = {
+		set_variable = { reichstag_seat = 5 }
+		set_variable = { reichstag_support = 1 }
+	}
+
+	modify_reichstag_array = yes
+}
+
+# 1951 Zentrum victory
+zentrum_victory_1951 = {
+
+	# SPD
+	1 = {
+		set_variable = { reichstag_seat = 63 }
+		set_variable = { reichstag_support = 0 }
+	}
+	# DNAP
+	2 = {
+		set_variable = { reichstag_seat = 19 }
+		set_variable = { reichstag_support = 0 }
+	}
+	# FVP
+	3 = {
+		set_variable = { reichstag_seat = 21 }
+		set_variable = { reichstag_support = 3 }
+	}
+	# NLP
+	4 = {
+		set_variable = { reichstag_seat = 58 }
+		set_variable = { reichstag_support = 3 }
+	}
+	# Zentrum (Leftists)
+	5 = {
+		set_variable = { reichstag_seat = 18 }
+		set_variable = { reichstag_support = 3 }
+	}
+	# Zentrum (Federalists)
+	6 = {
+		set_variable = { reichstag_seat = 32 }
+		set_variable = { reichstag_support = 3 }
+	}
+	# Zentrum (Rightists)
+	7 = {
+		set_variable = { reichstag_seat = 23 }
+		set_variable = { reichstag_support = 3 }
+	}
+	# BVP
+	8 = {
+		set_variable = { reichstag_seat = 16 }
+		set_variable = { reichstag_support = 3 }
+	}
+	# PP
+	9 = {
+		set_variable = { reichstag_seat = 12 }
+		set_variable = { reichstag_support = 3 }
+	}
+	# DkP
+	10 = {
+		set_variable = { reichstag_seat = 121 }
+		set_variable = { reichstag_support = 1 }
+	}
+	# Independent Conservatives
+	11 = {
+		set_variable = { reichstag_seat = 0 }
+		set_variable = { reichstag_support = 0 }
+	}
+	# DVLP
+	12 = {
+		set_variable = { reichstag_seat = 27 }
+		set_variable = { reichstag_support = 0 }
+	}
+	# DVFP
+	13 = {
+		set_variable = { reichstag_seat = 0 }
+		set_variable = { reichstag_support = 0 }
+	}
+	# Agrarians
+	14 = {
+		set_variable = { reichstag_seat = 0 }
+		set_variable = { reichstag_support = 0 }
+	}
+	# Local Parties
+	15 = {
+		set_variable = { reichstag_seat = 5 }
+		set_variable = { reichstag_support = 3 }
+	}
+
+	modify_reichstag_array = yes
+}
+
+
+########################
+### State Ideologies ###
+########################
+
+GER_state_ideologies_initial = {
+	GER = {
+		5 = { #OstPreußen
+			set_variable = { electoral_lean = 4 }
+			set_variable = { state_id = 5 }
+		}
+		8 = { #Luxemburg
+			set_variable = { electoral_lean = 3 }
+			set_variable = { state_id = 8 }
+		}
+		28 = { #Elsaß-Lotheringen
+			set_variable = { electoral_lean = 3 }
+			set_variable = { state_id = 28 }
+		}
+		42 = { #Rheinpfalz
+		set_variable = { electoral_lean = 3 }
+		set_variable = { state_id = 42 }
+		}
+		50 = { #Württemberg
+		set_variable = { electoral_lean = 3 }
+		set_variable = { state_id = 50 }
+		}
+		51 = { #Ostrheinland
+		set_variable = { electoral_lean = 3 }
+		set_variable = { state_id = 51 }
+		}
+		52 = { #Oberbayen
+		set_variable = { electoral_lean = 3 }
+		set_variable = { state_id = 52 }
+		}
+		53 = { #Niederbayen
+		set_variable = { electoral_lean = 3 }
+		set_variable = { state_id = 53 }
+		}
+		54 = { #Franken
+		set_variable = { electoral_lean = 3 }
+		set_variable = { state_id = 54 }
+		}
+		55 = { #Hessen
+		set_variable = { electoral_lean = 4 }
+		set_variable = { state_id = 55 }
+		}
+		56 = { #Oldenburg
+		set_variable = { electoral_lean = 4 }
+		set_variable = { state_id = 56 }
+		}
+		57 = { #Westfalen
+		set_variable = { electoral_lean = 3 }
+		set_variable = { state_id = 57 }
+		}
+		58 = { #Schleswig-Holstein
+		set_variable = { electoral_lean = 4 }
+		set_variable = { state_id = 58 }
+		}
+		59 = { #Hannover
+		set_variable = { electoral_lean = 4 }
+		set_variable = { state_id = 59 }
+		}
+		60 = { #Thüringen
+		set_variable = { electoral_lean = 4 }
+		set_variable = { state_id = 60 }
+		}
+		61 = { #Mecklenburg
+		set_variable = { electoral_lean = 4 }
+		set_variable = { state_id = 61 }
+		}
+		62 = { #Preußisch Sachsen
+		set_variable = { electoral_lean = 4 }
+		set_variable = { state_id = 62 }
+		}
+		63 = { #Pommen
+		set_variable = { electoral_lean = 4 }
+		set_variable = { state_id = 63 }
+		}
+		64 = { #Berlin
+		set_variable = { electoral_lean = 1 }
+		set_variable = { state_id = 64 }
+		}
+		65 = { #Sachsen
+		set_variable = { electoral_lean = 1 }
+		set_variable = { state_id = 65 }
+		}
+		66 = { #Breslau
+		set_variable = { electoral_lean = 1 }
+		set_variable = { state_id = 66 }
+		}
+		67 = { #Oppeln
+		set_variable = { electoral_lean = 3 }
+		set_variable = { state_id = 67 }
+		}
+		68 = { #Brandenburg
+		set_variable = { electoral_lean = 4 }
+		set_variable = { state_id = 68 }
+		}
+		85 = { #Westpreußen
+		set_variable = { electoral_lean = 3 }
+		set_variable = { state_id = 85 }
+		}
+		86 = { #Posen
+		set_variable = { electoral_lean = 3 }
+		set_variable = { state_id = 86 }
+		}
+		804 = { #Westrheinland
+		set_variable = { electoral_lean = 3 }
+		set_variable = { state_id = 804 }
+		}
+		805 = { #Nordschelswig
+		set_variable = { electoral_lean = 4 }
+		set_variable = { state_id = 805 }
+		}
+		806 = { #Danzig
+		set_variable = { electoral_lean = 4 }
+		set_variable = { state_id = 806 }
+		}
+		821 = { #Liegnitz
+		set_variable = { electoral_lean = 1 }
+		set_variable = { state_id = 821 }
+		}
+		823 = { #Hamburg
+		set_variable = { electoral_lean = 1 }
+		set_variable = { state_id = 823 }
+		}
+		824 = { #Baden
+		set_variable = { electoral_lean = 2 }
+		set_variable = { state_id = 824 }
+		}
+	}
+}

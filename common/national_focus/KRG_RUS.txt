@@ -1,0 +1,4966 @@
+#######################################################
+# Russia Focus Tree                       		       #
+#######################################################
+# By ZimbabweSaltCo. with help from Goulash and xxxxxx #
+#######################################################
+# rework by Damascius
+## Starting Tree ###
+focus_tree = {
+	id = KRG_RUS_start_tree
+	country = {
+		factor = 0
+		modifier = {
+			add = 10
+			tag = RUS
+		}
+	}
+	default = no
+	#shared_focus = RUS_military_commision
+	continuous_focus_position = {
+		x = 2800
+		y = 800
+	}
+	focus = {
+		id = RUS_vozhdnewyears
+		icon = GFX_RUS_savinkov
+		x = 16
+		y = 0
+		cost = 1
+		available = {
+			NOT = {
+				has_country_flag = RUS_sacred_war_speech_flag
+			}
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_vozhdnewyears"
+			country_event = {
+				id = krg_rus.24
+			}
+		}
+	}
+	focus = {
+		id = RUS_Rebuild_the_nation
+		icon = GFX_RUS_rebuild_nation
+		prerequisite = {
+			focus = RUS_vozhdnewyears
+		}
+		relative_position_id = RUS_vozhdnewyears
+		x = -6
+		y = 1
+		cost = 5
+		available_if_capitulated = yes
+		available = {
+			NOT = {
+				has_country_flag = RUS_sacred_war_speech_flag
+			}
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_Rebuild_the_nation"
+			country_event = {
+				id = krg_rus.25
+			}
+			add_political_power = 50
+		}
+	}
+	focus = {
+		id = RUS_Lessons_from_the_patriotic_war
+		icon = GFX_generic_graveyard
+		prerequisite = {
+			focus = RUS_vozhdnewyears
+		}
+		relative_position_id = RUS_vozhdnewyears
+		x = 0
+		y = 1
+		cost = 5
+		available_if_capitulated = yes
+		available = {
+			NOT = {
+				has_country_flag = RUS_sacred_war_speech_flag
+			}
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_Lessons_from_the_patriotic_war"
+			country_event = {
+				id = krg_rus.27
+			}
+			army_experience = 100
+			navy_experience = 100
+			air_experience = 100
+		}
+	}
+	focus = {
+		id = RUS_Project_Varangian
+		icon = GFX_RUS_project_varangian
+		prerequisite = {
+			focus = RUS_vozhdnewyears
+		}
+		relative_position_id = RUS_vozhdnewyears
+		x = 4
+		y = 1
+		cost = 6
+		available_if_capitulated = yes
+		available = {
+			NOT = {
+				has_country_flag = RUS_sacred_war_speech_flag
+			}
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_Project_Varangian"
+			country_event = {
+				id = krg_rus.26
+			}
+			add_political_power = 50
+		}
+	}
+	focus = {
+		id = RUS_Our_Reclaimed_Land
+		icon = GFX_RUS_Our_Reclaimed_Land
+		prerequisite = {
+			focus = RUS_Rebuild_the_nation
+		}
+		relative_position_id = RUS_Rebuild_the_nation
+		x = -4
+		y = 1
+		cost = 6
+		available_if_capitulated = yes
+		available = {
+			NOT = {
+				has_country_flag = RUS_sacred_war_speech_flag
+			}
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_Our_Reclaimed_Land"
+			country_event = {
+				id = krg_rus.28
+			}
+			add_ideas = RUS_labour_army_1
+		}
+	}
+	focus = {
+		id = RUS_Focus_Belarus
+		icon = GFX_RUS_develop_blr
+		prerequisite = {
+			focus = RUS_Our_Reclaimed_Land
+		}
+		mutually_exclusive = {
+			focus = RUS_Develop_Ukraine
+		}
+		relative_position_id = RUS_Our_Reclaimed_Land
+		x = -4
+		y = 1
+		cost = 6
+		available_if_capitulated = yes
+		available = {
+			NOT = {
+				OR = {
+					has_country_flag = RUS_sacred_war_speech_flag
+					has_country_flag = RUS_Thirty_Six_Borders					#no point lol
+				}
+			}
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_Focus_Belarus"
+			RUS_improve_economic_crisis = yes
+		}
+	}
+	focus = {
+		id = RUS_Develop_Ukraine
+		icon = GFX_RUS_develop_ukr
+		prerequisite = {
+			focus = RUS_Our_Reclaimed_Land
+		}
+		mutually_exclusive = {
+			focus = RUS_Focus_Belarus
+			focus = RUS_Fuck_Ukraine
+		}
+		relative_position_id = RUS_Our_Reclaimed_Land
+		x = 0
+		y = 1
+		cost = 6
+		available_if_capitulated = yes
+		available = {
+			NOT = {
+				OR = {
+					has_country_flag = RUS_sacred_war_speech_flag
+					has_country_flag = RUS_GER_Ukraine_Compromise					#no point lol
+					has_country_flag = RUS_Thirty_Six_Borders					#no point lol
+				}
+			}
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_Develop_Ukraine"
+			RUS_improve_economic_crisis = yes
+		}
+	}
+	focus = {
+		id = RUS_Fuck_Ukraine
+		icon = GFX_generic_money_deal
+		prerequisite = {
+			focus = RUS_Our_Reclaimed_Land
+		}
+		mutually_exclusive = {
+			focus = RUS_Develop_Ukraine
+			focus = RUS_Support_Ukranian_Farmers
+		}
+		relative_position_id = RUS_Our_Reclaimed_Land
+		x = 4
+		y = 1
+		cost = 6
+		available_if_capitulated = yes
+		available = {
+			NOT = {
+				OR = {
+					has_country_flag = RUS_sacred_war_speech_flag
+					has_country_flag = RUS_GER_Ukraine_Compromise					#no point lol
+					has_country_flag = RUS_Thirty_Six_Borders					#no point lol
+				}
+			}
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_Fuck_Ukraine"
+			RUS_improve_economic_crisis = yes
+			259 = {
+				add_manpower = 5000
+			}
+			227 = {
+				add_manpower = 5000
+			}
+			200 = {
+				add_manpower = 5000
+			}
+		}
+	}
+	focus = {
+		id = RUS_Belarus_Corporations
+		icon = GFX_focus_generic_industry_2
+		prerequisite = {
+			focus = RUS_Focus_Belarus
+		}
+		relative_position_id = RUS_Focus_Belarus
+		x = 0
+		y = 1
+		cost = 6
+		available_if_capitulated = yes
+		available = {
+			NOT = {
+				OR = {
+					has_country_flag = RUS_sacred_war_speech_flag
+					has_country_flag = RUS_Thirty_Six_Borders					#no point lol
+				}
+			}
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_Belarus_Corporations"
+			206 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			835 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			836 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+			RUS_improve_economic_crisis = yes
+		}
+	}
+	focus = {
+		id = RUS_Bridgingthegap
+		icon = GFX_generic_railroad
+		prerequisite = {
+			focus = RUS_Focus_Belarus
+			focus = RUS_Develop_Ukraine
+		}
+		relative_position_id = RUS_Focus_Belarus
+		x = 2
+		y = 1
+		cost = 6
+		available_if_capitulated = yes
+		available = {
+			NOT = {
+				OR = {
+					has_country_flag = RUS_sacred_war_speech_flag
+					has_country_flag = RUS_Thirty_Six_Borders					#no point lol
+				}
+			}
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_Bridgingthegap"
+			206 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			835 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			193 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			886 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+	focus = {
+		id = RUS_Rebuild_Ukranian_Industry
+		icon = GFX_BEL_military_industry_in_the_sillon
+		prerequisite = {
+			focus = RUS_Develop_Ukraine
+		}
+		relative_position_id = RUS_Develop_Ukraine
+		x = 0
+		y = 1
+		cost = 6
+		available_if_capitulated = yes
+		available = {
+			NOT = {
+				OR = {
+					has_country_flag = RUS_sacred_war_speech_flag
+					has_country_flag = RUS_GER_Ukraine_Compromise					#no point lol
+					has_country_flag = RUS_Thirty_Six_Borders					#no point lol
+				}
+			}
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_Rebuild_Ukranian_Industry"
+			886 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			259 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			221 = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+			RUS_improve_economic_crisis = yes
+		}
+	}
+	focus = {
+		id = RUS_Expand_The_Labor_Army
+		icon = GFX_generic_forced_res
+		prerequisite = {
+			focus = RUS_Develop_Ukraine
+			focus = RUS_Fuck_Ukraine
+		}
+		mutually_exclusive = {
+			focus = RUS_Yeet_Ukrainians
+		}
+		relative_position_id = RUS_Fuck_Ukraine
+		x = -2
+		y = 1
+		cost = 6
+		available_if_capitulated = yes
+		available = {
+			NOT = {
+				has_country_flag = RUS_sacred_war_speech_flag
+			}
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_Expand_The_Labor_Army"
+			swap_ideas = {
+				remove_idea = RUS_labour_army_1
+				add_idea = RUS_labour_army_2
+			}
+		}
+	}
+	focus = {
+		id = RUS_Yeet_Ukrainians
+		icon = GFX_GEA_guerilla_warfare
+		prerequisite = {
+			focus = RUS_Fuck_Ukraine
+		}
+		mutually_exclusive = {
+			focus = RUS_Expand_The_Labor_Army
+		}
+		relative_position_id = RUS_Fuck_Ukraine
+		x = 0
+		y = 1
+		cost = 6
+		available_if_capitulated = yes
+		available = {
+			NOT = {
+				has_country_flag = RUS_sacred_war_speech_flag
+			}
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_Yeet_Ukrainians"
+			228 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			227 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			221 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+			259 = {
+				add_building_construction = {
+					type = infrastructure
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+	focus = {
+		id = RUS_Reinforcing_the_Dniper
+		icon = GFX_RUS_reinforce_river
+		prerequisite = {
+			focus = RUS_Bridgingthegap
+		}
+		relative_position_id = RUS_Bridgingthegap
+		x = -1
+		y = 1
+		cost = 6
+		available_if_capitulated = yes
+		available = {
+			NOT = {
+				OR = {
+					has_country_flag = RUS_sacred_war_speech_flag
+					has_country_flag = RUS_GER_Ukraine_Compromise					#no point lol
+					has_country_flag = RUS_Thirty_Six_Borders					#no point lol
+				}
+			}
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_Reinforcing_the_Dniper"
+			custom_effect_tooltip = RUS_fortify_dniper
+			hidden_effect = {
+				835 = {
+					add_building_construction = {
+						type = bunker
+						province = 215
+						level = 2
+						instant_build = yes
+					}
+				}
+				193 = {
+					add_building_construction = {
+						type = bunker
+						province = 3568
+						level = 2
+						instant_build = yes
+					}
+				}
+				886 = {
+					add_building_construction = {
+						type = bunker
+						province = 11557
+						level = 2
+						instant_build = yes
+					}
+				}
+				200 = {
+					add_building_construction = {
+						type = bunker
+						province = 11405
+						level = 2
+						instant_build = yes
+					}
+				}
+				196 = {
+					add_building_construction = {
+						type = bunker
+						province = 721
+						level = 2
+						instant_build = yes
+					}
+				}
+			}
+		}
+	}
+	focus = {
+		id = RUS_Promises_of_Autonomy
+		icon = GFX_RUS_promises_of_autonomy
+		prerequisite = {
+			focus = RUS_Belarus_Corporations
+		}
+		prerequisite = {
+			focus = RUS_Reinforcing_the_Dniper
+		}
+		relative_position_id = RUS_Belarus_Corporations
+		x = 0
+		y = 2
+		cost = 6
+		available_if_capitulated = yes
+		available = {
+			NOT = {
+				OR = {
+					has_country_flag = RUS_sacred_war_speech_flag
+					has_country_flag = RUS_Thirty_Six_Borders					#no point lol
+				}
+			}
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_Promises_of_Autonomy"
+			RUS_nice_minorities = yes
+		}
+	}
+	focus = {
+		id = RUS_Encourage_Bilingualism
+		icon = GFX_RUS_bilingualism
+		prerequisite = {
+			focus = RUS_Rebuild_Ukranian_Industry
+		}
+		relative_position_id = RUS_Rebuild_Ukranian_Industry
+		x = -1
+		y = 1
+		cost = 6
+		available_if_capitulated = yes
+		available = {
+			NOT = {
+				OR = {
+					has_country_flag = RUS_sacred_war_speech_flag
+					has_country_flag = RUS_GER_Ukraine_Compromise					#no point lol
+					has_country_flag = RUS_Thirty_Six_Borders					#no point lol
+				}
+			}
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_Encourage_Bilingualism"
+			country_event = {
+				id = krg_rus.29
+				hours = 1
+			}
+			RUS_nice_minorities = yes
+		}
+	}
+	focus = {
+		id = RUS_Reassure_Minorities_UKR
+		icon = GFX_focus_generic_self_management
+		prerequisite = {
+			focus = RUS_Rebuild_Ukranian_Industry
+		}
+		relative_position_id = RUS_Rebuild_Ukranian_Industry
+		x = 1
+		y = 1
+		cost = 6
+		available_if_capitulated = yes
+		available = {
+			NOT = {
+				OR = {
+					has_country_flag = RUS_sacred_war_speech_flag
+					has_country_flag = RUS_GER_Ukraine_Compromise					#no point lol
+					has_country_flag = RUS_Thirty_Six_Borders					#no point lol
+				}
+			}
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_Reassure_Minorities_UKR"
+			country_event = {
+				id = krg_rus.30
+				hours = 1
+			}
+			RUS_nice_minorities = yes
+		}
+	}
+	focus = {
+		id = RUS_Fortify_Crimea
+		icon = GFX_focus_generic_coastal_fort
+		prerequisite = {
+			focus = RUS_Encourage_Bilingualism
+		}
+		prerequisite = {
+			focus = RUS_Reassure_Minorities_UKR
+		}
+		relative_position_id = RUS_Rebuild_Ukranian_Industry
+		x = 0
+		y = 2
+		cost = 6
+		available_if_capitulated = yes
+		available = {
+			NOT = {
+				OR = {
+					has_country_flag = RUS_sacred_war_speech_flag
+					has_country_flag = RUS_Thirty_Six_Borders					#no point lol
+				}
+			}
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_Fortify_Crimea"
+			137 = {
+				add_building_construction = {
+					type = coastal_bunker
+					province = 3686
+					level = 2
+					instant_build = yes
+				}
+				add_building_construction = {
+					type = coastal_bunker
+					province = 6704
+					level = 2
+					instant_build = yes
+				}
+			}
+		}
+	}
+	focus = {
+		id = RUS_Fortify_Ukraine
+		icon = GFX_generic_nested_fortifications
+		prerequisite = {
+			focus = RUS_Expand_The_Labor_Army
+		}
+		relative_position_id = RUS_Expand_The_Labor_Army
+		x = 1
+		y = 1
+		cost = 6
+		available_if_capitulated = yes
+		available = {
+			NOT = {
+				OR = {
+					has_country_flag = RUS_sacred_war_speech_flag
+					has_country_flag = RUS_GER_Ukraine_Compromise					#no point lol
+				}
+			}
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_Fortify_Ukraine"
+			196 = {
+				add_building_construction = {
+					type = bunker
+					province = 721
+					level = 1
+					instant_build = yes
+				}
+			}
+			200 = {
+				add_building_construction = {
+					type = bunker
+					province = 11405
+					level = 1
+					instant_build = yes
+				}
+			}
+			193 = {
+				add_building_construction = {
+					type = bunker
+					province = 3568
+					level = 1
+					instant_build = yes
+				}
+			}
+			886 = {
+				add_building_construction = {
+					type = bunker
+					province = 11557
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+	focus = {
+		id = RUS_Stable_South
+		icon = GFX_COS_Ferrer_Coup
+		prerequisite = {
+			focus = RUS_Fortify_Ukraine
+			focus = RUS_Our_Breadbasket
+		}
+		relative_position_id = RUS_Fortify_Ukraine
+		x = 1
+		y = 1
+		cost = 6
+		available_if_capitulated = yes
+		available = {
+			NOT = {
+				OR = {
+					has_country_flag = RUS_sacred_war_speech_flag
+					has_country_flag = RUS_GER_Ukraine_Compromise					#no point lol
+					has_country_flag = RUS_Thirty_Six_Borders					#no point lol
+				}
+			}
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_Stable_South"
+			custom_effect_tooltip = UKR_fortifying_ukraine_cities
+			hidden_effect = {
+				193 = {
+					add_building_construction = {
+						type = bunker
+						province = 3568
+						level = 1
+						instant_build = yes
+					}
+				}
+				886 = {
+					add_building_construction = {
+						type = bunker
+						province = 11557
+						level = 1
+						instant_build = yes
+					}
+				}
+				225 = {
+					add_building_construction = {
+						type = bunker
+						province = 9566
+						level = 1
+						instant_build = yes
+					}
+				}
+				225 = {
+					add_building_construction = {
+						type = bunker
+						province = 3520
+						level = 1
+						instant_build = yes
+					}
+				}
+				259 = {
+					add_building_construction = {
+						type = bunker
+						province = 11504
+						level = 1
+						instant_build = yes
+					}
+				}
+				221 = {
+					add_building_construction = {
+						type = bunker
+						province = 418
+						level = 1
+						instant_build = yes
+					}
+				}
+				228 = {
+					add_building_construction = {
+						type = bunker
+						province = 9461
+						level = 1
+						instant_build = yes
+					}
+				}
+				227 = {
+					add_building_construction = {
+						type = bunker
+						province = 6474
+						level = 1
+						instant_build = yes
+					}
+				}
+				196 = {
+					add_building_construction = {
+						type = bunker
+						province = 721
+						level = 1
+						instant_build = yes
+					}
+				}
+				200 = {
+					add_building_construction = {
+						type = bunker
+						province = 11405
+						level = 1
+						instant_build = yes
+					}
+				}
+			}
+		}
+	}
+	focus = {
+		id = RUS_Moscow_Forts
+		icon = GFX_generic_nested_fortifications
+		prerequisite = {
+			focus = RUS_Promises_of_Autonomy
+			focus = RUS_Fortify_Crimea
+			focus = RUS_Stable_South
+			focus = RUS_The_Propoganda_War
+		}
+		mutually_exclusive = {
+			focus = RUS_War_Games
+		}
+		relative_position_id = RUS_Fortify_Crimea
+		x = 2
+		y = 1
+		cost = 6
+		available_if_capitulated = yes
+		available = {
+			NOT = {
+				has_country_flag = RUS_sacred_war_speech_flag
+			}
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_Moscow_Forts"
+			219 = {
+				add_building_construction = {
+					type = bunker
+					province = 6380
+					level = 3
+					instant_build = yes
+				}
+			}
+		}
+	}
+	focus = {
+		id = RUS_Tend_to_home
+		icon = GFX_generic_collective_housing
+		prerequisite = {
+			focus = RUS_Rebuild_the_nation
+		}
+		mutually_exclusive = {
+			focus = RUS_Show_No_Weakness
+		}
+		relative_position_id = RUS_Rebuild_the_nation
+		x = 2
+		y = 1
+		cost = 6
+		available_if_capitulated = yes
+		available = {
+			NOT = {
+				has_country_flag = RUS_sacred_war_speech_flag
+			}
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_Tend_to_home"
+			add_stability = 0.05
+		}
+	}
+	focus = {
+		id = RUS_Support_Ukranian_Farmers
+		icon = GFX_generic_agricultural_aid
+		prerequisite = {
+			focus = RUS_Tend_to_home
+		}
+		mutually_exclusive = {
+			focus = RUS_Fuck_Ukraine
+		}
+		relative_position_id = RUS_Tend_to_home
+		x = 0
+		y = 1
+		cost = 6
+		available_if_capitulated = yes
+		available = {
+			NOT = {
+				OR = {
+					has_country_flag = RUS_sacred_war_speech_flag
+					has_country_flag = RUS_GER_Ukraine_Compromise					#no point lol
+					has_country_flag = RUS_Thirty_Six_Borders					#no point lol
+				}
+			}
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_Support_Ukranian_Farmers"
+			RUS_improve_economic_crisis = yes
+			RUS_nice_minorities = yes
+		}
+	}
+	focus = {
+		id = RUS_Ukranian_Loyalists
+		icon = GFX_generic_secret_agents
+		prerequisite = {
+			focus = RUS_Support_Ukranian_Farmers
+		}
+		relative_position_id = RUS_Support_Ukranian_Farmers
+		x = 0
+		y = 1
+		cost = 6
+		available_if_capitulated = yes
+		available = {
+			NOT = {
+				OR = {
+					has_country_flag = RUS_sacred_war_speech_flag
+					has_country_flag = RUS_GER_Ukraine_Compromise					#no point lol
+				}
+			}
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_Ukranian_Loyalists"
+			RUS_nice_minorities = yes
+		}
+	}
+	focus = {
+		id = RUS_Our_Breadbasket
+		icon = GFX_AUS_agriculture
+		prerequisite = {
+			focus = RUS_Ukranian_Loyalists
+			focus = RUS_Yeet_Ukrainians
+		}
+		relative_position_id = RUS_Ukranian_Loyalists
+		x = -1
+		y = 1
+		cost = 6
+		available_if_capitulated = yes
+		available = {
+			NOT = {
+				OR = {
+					has_country_flag = RUS_sacred_war_speech_flag
+					has_country_flag = RUS_GER_Ukraine_Compromise					#no point lol
+					has_country_flag = RUS_Thirty_Six_Borders					#no point lol
+				}
+			}
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_Our_Breadbasket"
+			242 = {
+				add_manpower = 5000
+			}
+			219 = {
+				add_manpower = 5000
+			}
+			217 = {
+				add_manpower = 5000
+			}
+			195 = {
+				add_manpower = 5000
+			}
+			220 = {
+				add_manpower = 5000
+			}
+		}
+	}
+	focus = {
+		id = RUS_Show_No_Weakness
+		icon = GFX_generic_volunteer_alliance
+		prerequisite = {
+			focus = RUS_Lessons_from_the_patriotic_war
+		}
+		mutually_exclusive = {
+			focus = RUS_Tend_to_home
+		}
+		relative_position_id = RUS_Lessons_from_the_patriotic_war
+		x = -2
+		y = 1
+		cost = 6
+		available_if_capitulated = yes
+		available = {
+			NOT = {
+				has_country_flag = RUS_sacred_war_speech_flag
+			}
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_Show_No_Weakness"
+			add_ideas = RUS_rejuvenated_army_1
+		}
+	}
+	focus = {
+		id = RUS_Draft_Adjustments
+		icon = GFX_focus_generic_military_academy
+		prerequisite = {
+			focus = RUS_Show_No_Weakness
+		}
+		relative_position_id = RUS_Show_No_Weakness
+		x = 1
+		y = 1
+		cost = 6
+		available_if_capitulated = yes
+		available = {
+			NOT = {
+				has_country_flag = RUS_sacred_war_speech_flag
+			}
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_Draft_Adjustments"
+			swap_ideas = {
+				remove_idea = RUS_rejuvenated_army_1
+				add_idea = RUS_rejuvenated_army_2
+			}
+		}
+	}
+	focus = {
+		id = RUS_Elite_Volunteers
+		icon = GFX_RUS_Yunarmiya
+		prerequisite = {
+			focus = RUS_Show_No_Weakness
+		}
+		relative_position_id = RUS_Show_No_Weakness
+		x = 0
+		y = 2
+		cost = 6
+		available_if_capitulated = yes
+		available = {
+			NOT = {
+				has_country_flag = RUS_sacred_war_speech_flag
+			}
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_Elite_Volunteers"
+			add_manpower = 50000
+		}
+	}
+	focus = {
+		id = RUS_Eternal_Mobilization
+		icon = GFX_generic_national_mobilization
+		prerequisite = {
+			focus = RUS_Elite_Volunteers
+		}
+		relative_position_id = RUS_Elite_Volunteers
+		x = 0
+		y = 1
+		cost = 6
+		available_if_capitulated = yes
+		available = {
+			NOT = {
+				has_country_flag = RUS_sacred_war_speech_flag
+			}
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_Eternal_Mobilization"
+			increase_conscription = yes
+			swap_ideas = {
+				remove_idea = RUS_rejuvenated_army_2
+				add_idea = RUS_rejuvenated_army_3
+			}
+		}
+	}
+	focus = {
+		id = RUS_The_Propoganda_War
+		icon = GFX_generic_imperial_legacy
+		prerequisite = {
+			focus = RUS_Elite_Volunteers
+		}
+		relative_position_id = RUS_Eternal_Mobilization
+		x = -1
+		y = 1
+		cost = 6
+		available_if_capitulated = yes
+		available = {
+			NOT = {
+				has_country_flag = RUS_sacred_war_speech_flag
+			}
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_The_Propoganda_War"
+			add_war_support = 0.1
+		}
+	}
+	focus = {
+		id = RUS_War_Games
+		icon = GFX_focus_generic_provoke_border_clashes
+		prerequisite = {
+			focus = RUS_Eternal_Mobilization
+		}
+		prerequisite = {
+			focus = RUS_The_Propoganda_War
+		}
+		mutually_exclusive = {
+			focus = RUS_Moscow_Forts
+		}
+		relative_position_id = RUS_Eternal_Mobilization
+		x = 0
+		y = 2
+		cost = 6
+		available_if_capitulated = yes
+		available = {
+			NOT = {
+				has_country_flag = RUS_sacred_war_speech_flag
+			}
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_War_Games"
+			army_experience = 50
+			add_war_support = 0.05
+		}
+	}
+	focus = {
+		id = RUS_Rearm_The_Military
+		icon = GFX_generic_military_mobilisation
+		prerequisite = {
+			focus = RUS_Lessons_from_the_patriotic_war
+		}
+		relative_position_id = RUS_Lessons_from_the_patriotic_war
+		x = 0
+		y = 1
+		cost = 6
+		available_if_capitulated = yes
+		available = {
+			NOT = {
+				has_country_flag = RUS_sacred_war_speech_flag
+			}
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_Rearm_The_Military"
+			add_timed_idea = {
+				idea = RUS_military_rearmament
+				days = 365
+			}
+		}
+	}
+	focus = {
+		id = RUS_Corporate_Grants
+		icon = GFX_generic_bag_of_money
+		prerequisite = {
+			focus = RUS_Rearm_The_Military
+		}
+		relative_position_id = RUS_Rearm_The_Military
+		x = 0
+		y = 2
+		cost = 6
+		available_if_capitulated = yes
+		available = {
+			NOT = {
+				has_country_flag = RUS_sacred_war_speech_flag
+			}
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_Corporate_Grants"
+			add_ideas = RUS_corporate_grants_1
+		}
+	}
+	focus = {
+		id = RUS_Improve_Construction
+		icon = GFX_generic_construction_engineering
+		prerequisite = {
+			focus = RUS_Corporate_Grants
+		}
+		prerequisite = {
+			focus = RUS_Fund_Military
+		}
+		relative_position_id = RUS_Corporate_Grants
+		x = 1
+		y = 1
+		cost = 6
+		available_if_capitulated = yes
+		available = {
+			NOT = {
+				has_country_flag = RUS_sacred_war_speech_flag
+			}
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_Improve_Construction"
+			swap_ideas = {
+				remove_idea = RUS_corporate_grants_1
+				add_idea = RUS_corporate_grants_2
+			}
+		}
+	}
+	focus = {
+		id = RUS_Expand_Science
+		icon = GFX_generic_construction_krg
+		prerequisite = {
+			focus = RUS_Lessons_from_the_patriotic_war
+		}
+		prerequisite = {
+			focus = RUS_Project_Varangian
+		}
+		relative_position_id = RUS_Lessons_from_the_patriotic_war
+		x = 2
+		y = 1
+		cost = 6
+		available_if_capitulated = yes
+		available = {
+			NOT = {
+				has_country_flag = RUS_sacred_war_speech_flag
+			}
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_Expand_Science"
+			if = {
+				limit = {
+					has_idea = RUS_nuclear_obsession_research_speed
+				}
+				swap_ideas = {
+					remove_idea = RUS_nuclear_obsession_research_speed
+					add_idea = RUS_nuclear_obsession_combined
+				}
+			}
+			else = {
+				swap_ideas = {
+					remove_idea = RUS_nuclear_obsession
+					add_idea = RUS_nuclear_obsession_reactor_speed
+				}
+			}
+		}
+	}
+	focus = {
+		id = RUS_Fund_Military
+		icon = GFX_goal_generic_construct_military
+		prerequisite = {
+			focus = RUS_Expand_Science
+		}
+		mutually_exclusive = {
+			focus = RUS_Fund_Nuke
+		}
+		relative_position_id = RUS_Expand_Science
+		x = -1
+		y = 1
+		cost = 6
+		available_if_capitulated = yes
+		available = {
+			NOT = {
+				has_country_flag = RUS_sacred_war_speech_flag
+			}
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_Fund_Military"
+			random_core_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_core_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_core_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+	focus = {
+		id = RUS_Seek_Scientists
+		icon = GFX_generic_brain
+		prerequisite = {
+			focus = RUS_Project_Varangian
+		}
+		relative_position_id = RUS_Project_Varangian
+		x = 0
+		y = 1
+		cost = 6
+		available_if_capitulated = yes
+		available = {
+			NOT = {
+				has_country_flag = RUS_sacred_war_speech_flag
+			}
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_Seek_Scientists"
+			if = {
+				limit = {
+					has_idea = RUS_nuclear_obsession_research_speed
+				}
+				swap_ideas = {
+					remove_idea = RUS_nuclear_obsession_research_speed
+					add_idea = RUS_nuclear_obsession_combined
+				}
+			}
+			else = {
+				swap_ideas = {
+					remove_idea = RUS_nuclear_obsession
+					add_idea = RUS_nuclear_obsession_research_speed
+				}
+			}
+		}
+	}
+	focus = {
+		id = RUS_Fund_Nuke
+		icon = GFX_nuclear_bomb
+		prerequisite = {
+			focus = RUS_Expand_Science
+		}
+		mutually_exclusive = {
+			focus = RUS_Fund_Military
+		}
+		relative_position_id = RUS_Expand_Science
+		x = 1
+		y = 1
+		cost = 6
+		available_if_capitulated = yes
+		available = {
+			NOT = {
+				has_country_flag = RUS_sacred_war_speech_flag
+			}
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_Fund_Nuke"
+			random_core_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex	
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_core_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+			random_core_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+		}
+	}
+	focus = {
+		id = RUS_Closed_City_Experiments
+		icon = GFX_RUS_local_baracks
+		prerequisite = {
+			focus = RUS_Fund_Nuke
+		}
+		prerequisite = {
+			focus = RUS_University_Of_Moscow
+		}
+		relative_position_id = RUS_Expand_Science
+		x = 1
+		y = 3
+		cost = 6
+		available_if_capitulated = yes
+		available = {
+			NOT = {
+				has_country_flag = RUS_sacred_war_speech_flag
+			}
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_Closed_City_Experiments"
+			country_event = {
+				id = krg_rus.31
+			}
+		}
+	}
+	focus = {
+		id = RUS_University_Of_Moscow
+		icon = GFX_PAN_Create_the_Universidad_de_Panama
+		prerequisite = {
+			focus = RUS_Seek_Scientists
+		}
+		relative_position_id = RUS_Seek_Scientists
+		x = 0
+		y = 2
+		cost = 6
+		available_if_capitulated = yes
+		available = {
+			NOT = {
+				has_country_flag = RUS_sacred_war_speech_flag
+			}
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_University_Of_Moscow"
+			add_ideas = RUS_better_unis_1
+		}
+	}
+	focus = {
+		id = RUS_Nuclear_Experiments
+		icon = GFX_generic_nuclear_science
+		prerequisite = {
+			focus = RUS_Improve_Construction
+			focus = RUS_Closed_City_Experiments
+		}
+		relative_position_id = RUS_Corporate_Grants
+		x = 2
+		y = 2
+		cost = 6
+		available_if_capitulated = yes
+		available = {
+			NOT = {
+				has_country_flag = RUS_sacred_war_speech_flag
+			}
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_Improve_Construction"
+			if = {
+				limit = {
+					has_idea = RUS_corporate_grants_2
+				}
+				swap_ideas = {
+					remove_idea = RUS_corporate_grants_2
+					add_idea = RUS_corporate_grants_3
+				}
+			}
+			else = {
+				swap_ideas = {
+					remove_idea = RUS_better_unis_2
+					add_idea = RUS_better_unis_3
+				}
+			}
+		}
+	}
+	focus = {
+		id = RUS_Resume_Reclamation
+		icon = GFX_RUS_resume_the_reclamation_war
+		prerequisite = {
+			focus = RUS_Moscow_Forts
+			focus = RUS_War_Games
+		}
+		prerequisite = {
+			focus = RUS_Nuclear_Experiments
+		}
+		relative_position_id = RUS_Corporate_Grants
+		x = 0
+		y = 4
+		cost = 10
+		available_if_capitulated = yes
+		available = {
+			has_country_flag = RUS_sacred_war_speech_flag
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_Resume_Reclamation"
+			custom_effect_tooltip = RUS_great_sacred_war_restarts
+		}
+	}
+}
+
+### Troika Gang ####
+focus_tree = {
+	id = KRG_RUS_troika_tree
+	country = {
+		factor = 0
+		modifier = {
+			add = 10
+			tag = RUS
+		}
+	}
+	default = no
+	continuous_focus_position = {
+		x = 2800
+		y = 1500
+	}
+	focus = {
+		id = RUS_troika_stands_tall
+		icon = GFX_RUS_leaders
+		x = 8
+		y = 0
+		cost = 3
+		available_if_capitulated = yes
+
+		ai_will_do = {
+			base = 250
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_troika_stands_tall"
+			country_event = {
+				id = krg_rus.42
+			}
+			add_stability = 0.05
+			add_political_power = 60
+		}
+	}
+	focus = {
+		id = RUS_Resume_Reclamation_2
+		icon = GFX_RUS_resume_the_reclamation_war
+		x = 5
+		y = 0
+		cost = 4
+		relative_position_id = RUS_troika_stands_tall
+		available_if_capitulated = yes
+		available = {
+			has_country_leader = {
+				name = "Boris Savinkov"
+			}
+			NOT = {
+				has_country_leader_with_trait = secluded
+			}
+		}
+
+		ai_will_do = {
+			base = 500
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_the_sacred_war"
+			# Savinkov lying game
+			unlock_decision_tooltip = RUS_lying_to_the_old_man
+			set_country_flag = RUS_lying_to_Savinkov
+			add_political_power = 20
+		}
+	}
+	focus = {
+		id = RUS_broadcasting_savinkov
+		icon = GFX_generic_microphone
+		x = 0
+		y = 1
+		cost = 4
+		relative_position_id = RUS_Resume_Reclamation_2
+		available_if_capitulated = yes
+		prerequisite = {
+			focus = RUS_Resume_Reclamation_2
+		}
+		available = {
+			has_country_leader = {
+				name = "Boris Savinkov"
+			}
+			NOT = {
+				has_country_leader_with_trait = secluded
+			}
+		}
+
+		ai_will_do = {
+			base = 250
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_broadcasting_savinkov"
+			# Savinkov lying game
+			unlock_decision_tooltip = RUS_rigging_up_fake_media
+			set_country_flag = RUS_fake_news
+			add_political_power = 25
+		}
+	}
+	focus = {
+		id = RUS_falsifying_the_frontlines
+		icon = GFX_RUS_military_manuevers
+		x = -1
+		y = 1
+		cost = 4
+		relative_position_id = RUS_broadcasting_savinkov
+		available_if_capitulated = yes
+		prerequisite = {
+			focus = RUS_broadcasting_savinkov
+		}
+		prerequisite = {
+			focus = RUS_secure_officers
+		}
+		available = {
+			has_country_leader = {
+				name = "Boris Savinkov"
+			}
+			NOT = {
+				has_country_leader_with_trait = secluded
+			}
+		}
+
+		ai_will_do = {
+			base = 250
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_falsifying_the_frontlines"
+			# Savinkov lying game
+			unlock_decision_tooltip = RUS_provide_false_reports
+			set_country_flag = RUS_reports_general
+		}
+	}
+	focus = {
+		id = RUS_further_setbacks
+		icon = GFX_generic_chain_army
+		x = 1
+		y = 1
+		cost = 4
+		relative_position_id = RUS_falsifying_the_frontlines
+		available_if_capitulated = yes
+		prerequisite = {
+			focus = RUS_falsifying_the_frontlines
+		}
+
+		ai_will_do = {
+			base = 250
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_further_setbacks"
+			# Savinkov lying game
+			unlock_decision_tooltip = RUS_provide_negative_military_reports
+			unlock_decision_tooltip = RUS_replace_his_doctors
+			set_country_flag = RUS_negative_doctors
+			add_political_power = 50
+		}
+		available = {
+			has_country_leader = {
+				name = "Boris Savinkov"
+			}
+			NOT = {
+				has_country_leader_with_trait = secluded
+			}
+		}
+	}
+	focus = {
+		id = RUS_decorate_our_heros
+		icon = GFX_RUS_United_For_Russia
+		x = -1
+		y = 1
+		cost = 4
+		relative_position_id = RUS_further_setbacks
+		available_if_capitulated = yes
+		prerequisite = {
+			focus = RUS_further_setbacks
+		}
+		prerequisite = {
+			focus = RUS_draw_up_new_lists
+		}
+
+		ai_will_do = {
+			base = 250
+		}
+
+		available = {
+			has_country_leader = {
+				name = "Boris Savinkov"
+			}
+			NOT = {
+				has_country_leader_with_trait = secluded
+			}
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_further_setbacks"
+			# Savinkov lying game
+			set_country_flag = RUS_positive_poison
+			unlock_decision_tooltip = RUS_provide_positive_military_reports
+			unlock_decision_tooltip = RUS_poison_his_food_and_drink
+			add_political_power = 50
+		}
+	}
+	focus = {
+		id = RUS_russia_is_bleeding
+		icon = GFX_generic_anti_vozhd_propaganda
+		x = -1
+		y = 2
+		cost = 4
+		relative_position_id = RUS_further_setbacks
+		available_if_capitulated = yes
+		prerequisite = {
+			focus = RUS_decorate_our_heros
+		}
+
+		ai_will_do = {
+			base = 250
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_further_setbacks"
+			# Savinkov lying game
+			set_country_flag = RUS_russia_bleeding
+			unlock_decision_tooltip = RUS_force_his_seclusion_due_to_ill_health
+		}
+		available = {
+			has_country_leader = {
+				name = "Boris Savinkov"
+			}
+			NOT = {
+				has_country_leader_with_trait = secluded
+			}
+		}
+	}
+	focus = {
+		id = RUS_Salvage_The_West
+		icon = GFX_RUS_Our_Reclaimed_Land
+		x = -8
+		y = 1
+		cost = 5
+		relative_position_id = RUS_troika_stands_tall
+		prerequisite = {
+			focus = RUS_troika_stands_tall
+		}
+		available = {
+			NOT = {
+				has_completed_focus = RUS_signing_a_treaty
+			}
+		}
+		bypass = {
+			has_completed_focus = RUS_signing_a_treaty
+		}
+		completion_reward = {
+			RUS_improve_economic_crisis = yes
+		}
+	}
+	focus = {
+		id = RUS_Plunder_Donbass
+		icon = GFX_RUS_develop_ukr
+		x = 1
+		y = 1
+		cost = 5
+		relative_position_id = RUS_Salvage_The_West
+		prerequisite = {
+			focus = RUS_Salvage_The_West
+		}
+		available = {
+			NOT = {
+				has_completed_focus = RUS_signing_a_treaty
+			}
+		}
+		bypass = {
+			has_completed_focus = RUS_signing_a_treaty
+		}
+		completion_reward = {
+			RUS_Plunder_Donbass_fx = yes
+		}
+	}
+	focus = {
+		id = RUS_Plunder_Minsk
+		icon = GFX_RUS_develop_blr
+		x = -1
+		y = 1
+		cost = 5
+		relative_position_id = RUS_Salvage_The_West
+		prerequisite = {
+			focus = RUS_Salvage_The_West
+		}
+		available = {
+			NOT = {
+				has_completed_focus = RUS_signing_a_treaty
+			}
+		}
+		bypass = {
+			has_completed_focus = RUS_signing_a_treaty
+		}
+		completion_reward = {
+			RUS_Plunder_Minsk_fx = yes
+		}
+	}
+	focus = {
+		id = RUS_smash_minority_organisations
+		icon = GFX_generic_step_on_skull
+		x = -3
+		y = 1
+		cost = 5
+		relative_position_id = RUS_Salvage_The_West
+		prerequisite = {
+			focus = RUS_Salvage_The_West
+		}
+		bypass = {
+			has_completed_focus = RUS_signing_a_treaty
+		}
+		completion_reward = {
+			RUS_nice_minorities = yes
+		}
+	}
+	focus = {
+		id = RUS_relocate_loyalists
+		icon = GFX_RUS_issue_passports
+		x = 1
+		y = 1
+		cost = 5
+		relative_position_id = RUS_smash_minority_organisations
+		prerequisite = {
+			focus = RUS_smash_minority_organisations
+		}
+		available = {
+			NOT = {
+				has_completed_focus = RUS_signing_a_treaty
+			}
+		}
+		bypass = {
+			has_completed_focus = RUS_signing_a_treaty
+		}
+		completion_reward = {
+			RUS_Pull_Out_Loyalists = yes
+		}
+	}
+	focus = {
+		id = RUS_ensure_good_behaviour
+		icon = GFX_generic_imprison_people
+		x = 0
+		y = 1
+		cost = 5
+		relative_position_id = RUS_relocate_loyalists
+		prerequisite = {
+			focus = RUS_relocate_loyalists
+		}
+		completion_reward = {
+			add_stability = 0.02
+		}
+	}
+	focus = {
+		id = RUS_send_workers_east
+		icon = GFX_generic_expel_people
+		x = 1
+		y = 1
+		cost = 5
+		relative_position_id = RUS_Plunder_Minsk
+		prerequisite = {
+			focus = RUS_Plunder_Minsk
+		}
+		prerequisite = {
+			focus = RUS_Plunder_Donbass
+		}
+		bypass = {
+			has_completed_focus = RUS_signing_a_treaty
+		}
+		completion_reward = {
+			RUS_Eastern_Deportation = yes
+		}
+	}
+	focus = {
+		id = RUS_expand_prison_system
+		icon = GFX_generic_gulag1
+		x = 0
+		y = 1
+		cost = 5
+		relative_position_id = RUS_send_workers_east
+		prerequisite = {
+			focus = RUS_send_workers_east
+		}
+		completion_reward = {
+			214 = {
+				add_manpower = 5678
+			}
+			262 = {
+				add_manpower = 2153
+			}
+			516 = {
+				add_manpower = 3261
+			}
+		}
+	}
+	focus = {
+		id = RUS_expand_ural_factories
+		icon = GFX_generic_forced_mil
+		x = -3
+		y = 1
+		cost = 5
+		relative_position_id = RUS_expand_prison_system
+		prerequisite = {
+			focus = RUS_expand_prison_system
+		}
+		prerequisite = {
+			focus = RUS_ensure_good_behaviour
+		}
+		available = {
+			has_completed_focus = RUS_signing_a_treaty
+		}
+		completion_reward = {
+			RUS_Expand_Ural_Factories = yes
+		}
+	}
+	focus = {
+		id = RUS_zlatoust_industrial_zone
+		icon = GFX_generic_military_mobilisation
+		x = 0
+		y = 1
+		cost = 5
+		relative_position_id = RUS_expand_ural_factories
+		prerequisite = {
+			focus = RUS_expand_ural_factories
+		}
+		completion_reward = {
+			573 = {
+				add_building_construction = {
+					type = arms_factory
+					level = 6
+					instant_build = yes
+				}
+				add_extra_state_shared_building_slots = 6
+			}
+		}
+	}
+	focus = {
+		id = RUS_prioritise_factory_workers
+		icon = GFX_generic_the_ministry_of_agriculture_trade_and_industry
+		x = 1
+		y = 1
+		cost = 5
+		relative_position_id = RUS_zlatoust_industrial_zone
+		prerequisite = {
+			focus = RUS_zlatoust_industrial_zone
+		}
+		mutually_exclusive = {
+			focus = RUS_expand_labor_pool
+		}
+		completion_reward = {
+			RUS_improve_economic_crisis = yes
+		}
+	}
+	focus = {
+		id = RUS_develop_interior
+		icon = GFX_generic_industrial_towns
+		x = -1
+		y = 1
+		cost = 5
+		relative_position_id = RUS_prioritise_factory_workers
+		prerequisite = {
+			focus = RUS_prioritise_factory_workers
+		}
+		completion_reward = {
+			RUS_Develop_Interior = yes
+		}
+	}
+	focus = {
+		id = RUS_economic_recovery
+		icon = GFX_generic_economic_report
+		x = 0
+		y = 2
+		cost = 5
+		relative_position_id = RUS_prioritise_factory_workers
+		prerequisite = {
+			focus = RUS_develop_interior
+		}
+		prerequisite = {
+			focus = RUS_crush_unions
+		}
+		completion_reward = {
+			RUS_improve_economic_crisis = yes
+			move_up_business_spending = yes
+		}
+	}
+	focus = {
+		id = RUS_extract_in_the_north
+		icon = GFX_generic_forced_res
+		x = 2
+		y = 0
+		cost = 5
+		relative_position_id = RUS_expand_ural_factories
+		prerequisite = {
+			focus = RUS_expand_prison_system
+		}
+		prerequisite = {
+			focus = RUS_ensure_good_behaviour
+		}
+		available = {
+			has_completed_focus = RUS_signing_a_treaty
+		}
+		completion_reward = {
+			RUS_Northern_Cities = yes
+		}
+	}
+	focus = {
+		id = RUS_develop_siberian_rail
+		icon = GFX_generic_forced_inf
+		x = 4
+		y = 0
+		cost = 5
+		relative_position_id = RUS_expand_ural_factories
+		prerequisite = {
+			focus = RUS_expand_prison_system
+		}
+		prerequisite = {
+			focus = RUS_ensure_good_behaviour
+		}
+		available = {
+			has_completed_focus = RUS_signing_a_treaty
+		}
+		completion_reward = {
+			RUS_Siberian_Rail = yes
+		}
+	}
+	focus = {
+		id = RUS_exploit_kolyma
+		icon = GFX_generic_forced_con
+		x = 3
+		y = 1
+		cost = 5
+		relative_position_id = RUS_expand_ural_factories
+		prerequisite = {
+			focus = RUS_extract_in_the_north
+		}
+		prerequisite = {
+			focus = RUS_develop_siberian_rail
+		}
+		completion_reward = {
+			add_resource = {
+				type = chromium
+				amount = 10
+				state = 644
+			}
+			add_resource = {
+				type = tungsten
+				amount = 10
+				state = 644
+			}
+		}
+	}
+	focus = {
+		id = RUS_expand_labor_pool
+		icon = GFX_generic_imprison_opposition1
+		x = 0
+		y = 1
+		cost = 5
+		relative_position_id = RUS_exploit_kolyma
+		prerequisite = {
+			focus = RUS_exploit_kolyma
+		}
+		mutually_exclusive = {
+			focus = RUS_prioritise_factory_workers
+		}
+		completion_reward = {
+			move_up_trade_laws = yes			#people aren't happy to trade with literal slave states
+		}
+	}
+	focus = {
+		id = RUS_crush_unions
+		icon = GFX_generic_crush_unions
+		x = -1
+		y = 1
+		cost = 5
+		relative_position_id = RUS_expand_labor_pool
+		prerequisite = {
+			focus = RUS_expand_labor_pool
+			focus = RUS_prioritise_factory_workers
+		}
+		completion_reward = {
+			add_stability = 0.02
+			add_popularity = {
+				ideology = authoritarian_socialist
+				popularity = -0.01
+			}
+		}
+	}
+	focus = {
+		id = RUS_Expand_Judiciary
+		icon = GFX_generic_enlist_the_police
+		x = 2
+		y = 1
+		cost = 5
+		relative_position_id = RUS_expand_labor_pool
+		prerequisite = {
+			focus = RUS_expand_labor_pool
+		}
+		prerequisite = {
+			focus = RUS_Replacing_Shepilov
+		}
+		completion_reward = {
+			add_stability = 0.02
+		}
+	}
+	focus = {
+		id = RUS_signing_a_treaty
+		icon = GFX_RUS_russkiy_mir
+		x = -3
+		y = 1
+		cost = 4
+		relative_position_id = RUS_troika_stands_tall
+		available_if_capitulated = yes
+		prerequisite = {
+			focus = RUS_troika_stands_tall
+		}
+		ai_will_do = {
+			modifier = {
+				NOT = {
+					has_completed_focus = RUS_Plunder_Donbass
+				}
+				NOT = {
+					has_completed_focus = RUS_Plunder_Minsk
+				}
+				NOT = {
+					has_completed_focus = RUS_relocate_loyalists
+				}
+				factor = -100
+			}
+		}
+		available = {
+			OR = {
+				NOT = {
+					has_country_leader = {
+						name = "Boris Savinkov"
+					}
+				}
+				has_country_leader_with_trait = secluded
+			}
+		}
+		bypass = {
+			has_country_flag = RUS_continuation_war
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_signing_a_treaty"
+			RUS_Surrender_Claimed_Territories = yes
+		}
+	}
+	focus = {
+		id = RUS_The_Treaty_Trial
+		icon = GFX_generic_trials
+		x = 0
+		y = 1
+		cost = 4
+		relative_position_id = RUS_signing_a_treaty
+		available_if_capitulated = yes
+		prerequisite = {
+			focus = RUS_signing_a_treaty
+		}
+		available = {
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_The_Treaty_Trial"
+			country_event = {
+				id = krg_rus_rwk.32
+			}
+		}
+	}
+	focus = {
+		id = RUS_blame_the_economy
+		icon = GFX_RUS_brezhnev
+		x = -2
+		y = 1
+		cost = 4
+		relative_position_id = RUS_The_Treaty_Trial
+		available_if_capitulated = yes
+		prerequisite = {
+			focus = RUS_The_Treaty_Trial
+		}
+		mutually_exclusive = {
+			focus = RUS_blaming_the_archdefeatist
+		}
+		available = {
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_blame_the_economy"
+			RUS_Kill_Brezhnev = yes
+			add_popularity = {
+				ideology = national_populist
+				popularity = 0.02
+			}
+			add_popularity = {
+				ideology = radical_socialist
+				popularity = -0.02
+			}
+			add_popularity = {
+				ideology = authoritarian_socialist
+				popularity = 0.03
+			}
+			add_ideas = RUS_vladimir_von_manstein_eco_npo
+		}
+	}
+	focus = {
+		id = RUS_blaming_the_archdefeatist
+		icon = GFX_RUS_gorgulov
+		prerequisite = {
+			focus = RUS_The_Treaty_Trial
+		}
+		relative_position_id = RUS_The_Treaty_Trial
+		available = {
+			NOT = {
+				has_idea = RUS_Pavel_Gorgulov_hoi_npo
+			}
+		}
+		mutually_exclusive = {
+			focus = RUS_blame_the_economy
+		}
+		x = 0
+		y = 1
+		cost = 6
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_blaming_the_archdefeatist"
+			add_stability = 0.02
+			add_popularity = {
+				ideology = national_populist
+				popularity = 0.04
+			}
+		}
+	}
+	focus = {
+		id = RUS_no_mercy_for_traitors
+		icon = GFX_generic_smash_natpop
+		prerequisite = {
+			focus = RUS_The_Treaty_Trial
+		}
+		prerequisite = {
+			focus = RUS_draw_up_new_lists
+		}
+		relative_position_id = RUS_blaming_the_archdefeatist
+		available = {
+		}
+		x = 2
+		y = 1
+		cost = 6
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_no_mercy_for_traitors"
+			add_political_power = 50
+			add_popularity = {
+				ideology = national_populist
+				popularity = 0.02
+			}
+		}
+	}
+	focus = {
+		id = RUS_purge_the_administrators
+		icon = GFX_generic_purge_opposition
+		prerequisite = {
+			focus = RUS_blame_the_economy
+		}
+		relative_position_id = RUS_blame_the_economy
+		x = 0
+		y = 2
+		cost = 6
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_no_mercy_for_traitors"
+			add_popularity = {
+				ideology = national_populist
+				popularity = 0.03
+			}
+			add_ideas = RUS_understaffed_administration
+			RUS_worsen_economic_crisis = yes
+		}
+	}
+	focus = {
+		id = RUS_increase_party_oversight
+		icon = GFX_generic_seize_money
+		prerequisite = {
+			focus = RUS_blame_the_economy
+			focus = RUS_blaming_the_archdefeatist
+		}
+		relative_position_id = RUS_blaming_the_archdefeatist
+		x = -1
+		y = 1
+		cost = 6
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_no_mercy_for_traitors"
+			add_political_power = 25
+		}
+	}
+	focus = {
+		id = RUS_purge_natsgvardia
+		icon = GFX_RUS_day_of_lead
+		prerequisite = {
+			focus = RUS_blaming_the_archdefeatist
+		}
+		prerequisite = {
+			focus = RUS_no_mercy_for_traitors
+		}
+		relative_position_id = RUS_blaming_the_archdefeatist
+		mutually_exclusive = {
+		}
+		x = 1
+		y = 2
+		cost = 6
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_purge_natsgvardia"
+			country_event = {
+				id = krg_rus_rwk.33
+			}
+			add_popularity = {
+				ideology = national_populist
+				popularity = 0.05
+			}
+			RUS_Purge_Natsgvardia = yes
+			add_ideas = RUS_purged_intelligence_service
+		}
+	}
+	focus = {
+		id = RUS_game_begins
+		icon = GFX_generic_checkmate
+		prerequisite = {
+			focus = RUS_purge_natsgvardia
+			focus = RUS_purge_the_administrators
+		}
+		prerequisite = {
+			focus = RUS_increase_party_oversight
+		}
+		relative_position_id = RUS_purge_natsgvardia
+		x = -1
+		y = 1
+		cost = 6
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_game_begins"
+			custom_effect_tooltip = RUS_Troika_Start_tt
+		}
+	}
+	focus = {
+		id = RUS_shepilov_thought
+		icon = GFX_RUS_shepilov_thought
+		available = {
+			NOT = {
+				has_completed_focus = RUS_The_Support_Of_The_People
+			}
+		}
+		prerequisite = {
+			focus = RUS_game_begins
+		}
+		relative_position_id = RUS_game_begins
+		mutually_exclusive = {
+			focus = RUS_Replacing_Shepilov
+		}
+		x = 1
+		y = 1
+		cost = 6
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_shepilov_thought"
+			country_event = {
+				id = krg_rus.44
+			}
+			custom_effect_tooltip = RUS_Troika_Shepilov_good_tt
+			custom_effect_tooltip = RUS_Troika_Shikmatov_bad_tt
+			custom_effect_tooltip = RUS_Troika_Vernadsky_bad_tt
+		}
+	}
+	focus = {
+		id = RUS_Replacing_Shepilov
+		icon = GFX_RUS_serov
+		prerequisite = {
+			focus = RUS_game_begins
+		}
+		relative_position_id = RUS_game_begins
+		mutually_exclusive = {
+			focus = RUS_shepilov_thought
+		}
+		x = -1
+		y = 1
+		cost = 6
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_Replacing_Shepilov"
+			remove_ideas = RUS_Dmitri_Shepilov_jm_npo
+			add_ideas = RUS_Ivan_Serov_jm_npo
+			custom_effect_tooltip = RUS_Troika_Shepilov_bad_tt
+			custom_effect_tooltip = RUS_Troika_Shikmatov_good_tt
+			custom_effect_tooltip = RUS_Troika_Vernadsky_good_tt
+		}
+	}
+	focus = {
+		id = RUS_renewed_ideological_requirements
+		icon = GFX_generic_army_cooperation
+		prerequisite = {
+			focus = RUS_Replacing_Shepilov
+		}
+		relative_position_id = RUS_Replacing_Shepilov
+		x = 0
+		y = 1
+		cost = 6
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_renewed_ideological_requirements"
+			custom_effect_tooltip = RUS_Troika_Shepilov_bad_tt
+			custom_effect_tooltip = RUS_Troika_Shikmatov_good_tt
+			custom_effect_tooltip = RUS_Troika_Vernadsky_good_tt
+			add_popularity = {
+				ideology = national_populist
+				popularity = -0.02
+			}
+		}
+	}
+	focus = {
+		id = RUS_secure_officers
+		icon = GFX_generic_officer
+		prerequisite = {
+			focus = RUS_troika_stands_tall
+		}
+		relative_position_id = RUS_troika_stands_tall
+		x = 3
+		y = 1
+		cost = 6
+		available_if_capitulated = yes
+
+		ai_will_do = {
+			base = 250
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_secure_officers"
+			add_command_power = 25
+		}
+	}
+	focus = {
+		id = RUS_power_sharing
+		icon = GFX_generic_government_deals
+		prerequisite = {
+			focus = RUS_troika_stands_tall
+		}
+		relative_position_id = RUS_troika_stands_tall
+		x = 1
+		y = 1
+		cost = 6
+		available_if_capitulated = yes
+
+		ai_will_do = {
+			base = 250
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_power_sharing"
+			add_political_power = 50
+		}
+	}
+	focus = {
+		id = RUS_cement_troika_dominance
+		icon = GFX_generic_authority
+		prerequisite = {
+			focus = RUS_power_sharing
+		}
+		prerequisite = {
+			focus = RUS_secure_officers
+		}
+		relative_position_id = RUS_power_sharing
+		x = 1
+		y = 1
+		cost = 6
+		available_if_capitulated = yes
+
+		ai_will_do = {
+			base = 250
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_cement_troika_dominance"
+			add_stability = 0.03
+		}
+	}
+	focus = {
+		id = RUS_draw_up_new_lists
+		icon = GFX_SYR_Stop_Jewish_Settlers
+		prerequisite = {
+			focus = RUS_cement_troika_dominance
+		}
+		relative_position_id = RUS_cement_troika_dominance
+		x = 0
+		y = 1
+		cost = 1
+		available_if_capitulated = yes
+
+		ai_will_do = {
+			base = 250
+		}
+
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_draw_up_new_lists"
+			add_popularity = {
+				ideology = paternal_autocrat
+				popularity = -0.02
+			}
+			country_event = {
+				id = krg_rus_rwk.34
+			}
+		}
+	}
+	focus = {
+		id = RUS_rallying_the_nation
+		icon = GFX_RUS_national_renewal
+		prerequisite = {
+			focus = RUS_draw_up_new_lists
+		}
+		relative_position_id = RUS_draw_up_new_lists
+		available = {
+			has_completed_focus = RUS_game_begins
+		}
+		x = -1
+		y = 1
+		cost = 4
+		available = {
+			OR = {
+				NOT = {
+					has_country_leader = {
+						name = "Boris Savinkov"
+					}
+				}
+				has_country_leader_with_trait = secluded
+			}
+		}
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_rallying_the_nation"
+			country_event = {
+				id = krg_rus.45
+			}
+		}
+	}
+	focus = {
+		id = RUS_The_Support_Of_The_Army
+		icon = GFX_RUS_Yunarmiya
+		prerequisite = {
+			focus = RUS_rallying_the_nation
+		}
+		relative_position_id = RUS_rallying_the_nation
+		mutually_exclusive = {
+			focus = RUS_The_Support_Of_The_People
+		}
+		available = {
+			has_completed_focus = RUS_signing_a_treaty
+		}
+		x = -1
+		y = 1
+		cost = 6
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_The_Support_Of_The_Army"
+			add_popularity = {
+				ideology = paternal_autocrat
+				popularity = 0.03
+			}
+			add_war_support = 0.05
+			remove_ideas = RUS_suspicious_officer_activity
+			custom_effect_tooltip = RUS_Troika_Shepilov_bad_tt
+			custom_effect_tooltip = RUS_Troika_Shikmatov_good_tt
+			custom_effect_tooltip = RUS_Troika_Vernadsky_bad_tt
+		}
+	}
+	focus = {
+		id = RUS_The_Support_Of_The_People
+		icon = GFX_RUS_Russophilia
+		prerequisite = {
+			focus = RUS_rallying_the_nation
+		}
+		relative_position_id = RUS_rallying_the_nation
+		mutually_exclusive = {
+			focus = RUS_The_Support_Of_The_Army
+		}
+		available = {
+			has_completed_focus = RUS_signing_a_treaty
+		}
+		x = 1
+		y = 1
+		cost = 6
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_The_Support_Of_The_People"
+			add_stability = 0.04
+			add_political_power = 50
+			custom_effect_tooltip = RUS_Troika_Shepilov_bad_tt
+			custom_effect_tooltip = RUS_Troika_Shikmatov_bad_tt
+			custom_effect_tooltip = RUS_Troika_Vernadsky_good_tt
+		}
+	}
+	focus = {
+		id = RUS_reforge_the_national_character
+		icon = GFX_RUS_rebuild_nation
+		prerequisite = {
+			focus = RUS_The_Support_Of_The_Army
+		}
+		relative_position_id = RUS_The_Support_Of_The_Army
+		x = 0
+		y = 1
+		cost = 6
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_reforge_the_national_character"
+			add_popularity = {
+				ideology = national_populist
+				popularity = 0.04
+			}
+			add_stability = 0.03
+			custom_effect_tooltip = RUS_Troika_Shepilov_good_tt
+			custom_effect_tooltip = RUS_Troika_Shikmatov_good_tt
+			custom_effect_tooltip = RUS_Troika_Vernadsky_bad_tt
+		}
+	}
+	focus = {
+		id = RUS_Sideline_Revisionists
+		icon = GFX_RUS_white_legacy
+		prerequisite = {
+			focus = RUS_reforge_the_national_character
+		}
+		prerequisite = {
+			focus = RUS_shepilov_thought
+		}
+		relative_position_id = RUS_shepilov_thought
+		x = 1
+		y = 1
+		cost = 6
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_Sideline_Revisionists"
+			add_popularity = {
+				ideology = authoritarian_democrat
+				popularity = -0.03
+			}
+			custom_effect_tooltip = RUS_Troika_Shepilov_good_tt
+			custom_effect_tooltip = RUS_Troika_Shikmatov_good_tt
+			custom_effect_tooltip = RUS_Troika_Vernadsky_bad_tt
+		}
+	}
+	focus = {
+		id = RUS_liberate_the_peasants
+		icon = GFX_RUS_serfdom_is_dead
+		prerequisite = {
+			focus = RUS_The_Support_Of_The_People
+		}
+		relative_position_id = RUS_The_Support_Of_The_People
+		x = 0
+		y = 1
+		cost = 6
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_liberate_the_peasants"
+			add_popularity = {
+				ideology = authoritarian_democrat
+				popularity = 0.03
+			}
+			add_popularity = {
+				ideology = national_populist
+				popularity = 0.02
+			}
+			add_stability = -0.04
+			custom_effect_tooltip = RUS_Troika_Shepilov_good_tt
+			custom_effect_tooltip = RUS_Troika_Shikmatov_bad_tt
+			custom_effect_tooltip = RUS_Troika_Vernadsky_good_tt
+		}
+	}
+	focus = {
+		id = RUS_Our_Loyal_Minorities
+		icon = GFX_RUS_promises_of_autonomy
+		prerequisite = {
+			focus = RUS_liberate_the_peasants
+		}
+		relative_position_id = RUS_liberate_the_peasants
+		x = 1
+		y = 1
+		cost = 6
+		mutually_exclusive = {
+			focus = RUS_Russians_Above_All
+		}
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_Our_Loyal_Minorities"
+			add_stability = 0.03
+			custom_effect_tooltip = RUS_Troika_Shepilov_bad_tt
+			custom_effect_tooltip = RUS_Troika_Shikmatov_bad_tt
+			custom_effect_tooltip = RUS_Troika_Vernadsky_good_tt
+		}
+	}
+	focus = {
+		id = RUS_Intellectual_Renaissance
+		icon = GFX_generic_great_science
+		prerequisite = {
+			focus = RUS_Our_Loyal_Minorities
+		}
+		relative_position_id = RUS_Our_Loyal_Minorities
+		x = 1
+		y = 1
+		cost = 6
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_Intellectual_Renaissance"
+			add_research_slot = 1
+			move_up_edu_spending = yes
+		}
+	}
+	focus = {
+		id = RUS_Korenizatsiya
+		icon = GFX_RUS_disinformation
+		prerequisite = {
+			focus = RUS_Our_Loyal_Minorities
+		}
+		relative_position_id = RUS_Our_Loyal_Minorities
+		x = 0
+		y = 2
+		cost = 6
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_Our_Loyal_Minorities"
+			add_popularity = {
+				ideology = authoritarian_democrat
+				popularity = 0.04
+			}
+			custom_effect_tooltip = RUS_Troika_Shepilov_bad_tt
+			custom_effect_tooltip = RUS_Troika_Shikmatov_bad_tt
+			custom_effect_tooltip = RUS_Troika_Vernadsky_good_tt
+		}
+	}
+	focus = {
+		id = RUS_Russians_Above_All
+		icon = GFX_RUS_verify_the_kremlins_role
+		prerequisite = {
+			focus = RUS_liberate_the_peasants
+			focus = RUS_reforge_the_national_character
+		}
+		relative_position_id = RUS_liberate_the_peasants
+		mutually_exclusive = {
+			focus = RUS_Our_Loyal_Minorities
+		}
+		x = -1
+		y = 1
+		cost = 6
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_Russians_Above_All"
+			add_war_support = 0.05
+			custom_effect_tooltip = RUS_Troika_Shepilov_good_tt
+			custom_effect_tooltip = RUS_Troika_Shikmatov_good_tt
+			custom_effect_tooltip = RUS_Troika_Vernadsky_bad_tt
+		}
+	}
+	focus = {
+		id = RUS_guide_minorities
+		icon = GFX_RUS_guidance
+		prerequisite = {
+			focus = RUS_Russians_Above_All
+		}
+		relative_position_id = RUS_Russians_Above_All
+		x = 0
+		y = 1
+		cost = 6
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_guide_minorities"
+			add_stability = -0.04
+			custom_effect_tooltip = RUS_Troika_Shepilov_good_tt
+			custom_effect_tooltip = RUS_Troika_Shikmatov_good_tt
+			custom_effect_tooltip = RUS_Troika_Vernadsky_bad_tt
+		}
+	}
+	focus = {
+		id = RUS_Pacify_The_Caucasus
+		icon = GFX_generic_expel_people
+		prerequisite = {
+			focus = RUS_guide_minorities
+		}
+		relative_position_id = RUS_Russians_Above_All
+		available = {
+			has_completed_focus = RUS_expand_labor_pool
+		}
+		x = -1
+		y = 2
+		cost = 6
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_Pacify_The_Caucasus"
+			custom_effect_tooltip = RUS_Troika_Shepilov_bad_tt
+			custom_effect_tooltip = RUS_Troika_Shikmatov_good_tt
+			custom_effect_tooltip = RUS_Troika_Vernadsky_bad_tt
+			RUS_Southern_Deportation = yes
+		}
+	}
+	focus = {
+		id = RUS_expand_the_administration
+		icon = GFX_generic_promote_white_collar
+		prerequisite = {
+			focus = RUS_guide_minorities
+		}
+		relative_position_id = RUS_Russians_Above_All
+		available = {
+			has_completed_focus = RUS_expand_labor_pool
+		}
+		x = 0
+		y = 3
+		cost = 6
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_Pacify_The_Caucasus"
+			if = {
+				limit = {
+					has_idea = RUS_understaffed_administration
+				}
+				remove_ideas = RUS_understaffed_administration
+			}
+			move_up_edu_spending = yes
+			custom_effect_tooltip = RUS_Troika_Shepilov_bad_tt
+			custom_effect_tooltip = RUS_Troika_Shikmatov_good_tt
+			custom_effect_tooltip = RUS_Troika_Vernadsky_bad_tt
+		}
+	}
+	focus = {
+		id = RUS_party_congress
+		icon = GFX_generic_national_populism
+		prerequisite = {
+			focus = RUS_Sideline_Revisionists
+			focus = RUS_renewed_ideological_requirements
+		}
+		relative_position_id = RUS_Sideline_Revisionists
+		available = {
+			date > 1952.1.1
+		}
+		x = -1
+		y = 1
+		cost = 6
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_party_congress"
+			custom_effect_tooltip = RUS_Troika_Finale_tt
+			country_event = {
+				id = krg_rus.48
+			}
+		}
+	}
+}
+
+## Natsgvardia
+focus_tree = {
+	id = KRG_RUS_Natsgvardia_tree
+	country = {
+		factor = 0
+		modifier = {
+			add = 10
+			tag = RUS
+		}
+	}
+	default = no
+	continuous_focus_position = {
+		x = 2800
+		y = 1500
+	}
+	shared_focus = RUS_military_commision
+	focus = {
+		id = RUS_vozhd_gorgulov
+		icon = GFX_RUS_gorgulov
+		cost = 1
+		x = 5
+		y = 0
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_vozhd_gorgulov"
+			add_political_power = 50
+			country_event = {
+				id = krg_rus_rwk.35
+				days = 3
+			}
+		}
+	}
+	focus = {
+		id = RUS_fortress_petrograd
+		icon = GFX_generic_nested_fortifications
+		mutually_exclusive = {
+			focus = RUS_Moscow_Forts_2
+		}
+		available = {
+			has_country_flag = RUS_crisis_flag
+		}
+		prerequisite = {
+			focus = RUS_vozhd_gorgulov
+		}
+		relative_position_id = RUS_vozhd_gorgulov
+		x = -3
+		y = 1
+		cost = 2
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_fortress_petrograd"
+			RUS_fortress_petrograd_fx = yes
+		}
+	}
+	focus = {
+		id = RUS_Moscow_Forts_2
+		icon = GFX_focus_SOV_the_defense_of_moscow
+		prerequisite = {
+			focus = RUS_vozhd_gorgulov
+		}
+		relative_position_id = RUS_vozhd_gorgulov
+		available = {
+			has_country_flag = RUS_crisis_flag
+		}
+		mutually_exclusive = {
+			focus = RUS_fortress_petrograd
+		}
+		x = 3
+		y = 1
+		cost = 2
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_Moscow_Forts_2"
+			RUS_fortress_moscow_fx = yes
+		}
+	}
+	focus = {
+		id = RUS_dealing_with_KORA
+		icon = GFX_RUS_vozhd_vatutin
+		prerequisite = {
+			focus = RUS_Moscow_Forts_2
+			focus = RUS_fortress_petrograd
+		}
+		relative_position_id = RUS_vozhd_gorgulov
+		x = 0
+		y = 2
+		cost = 2
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_dealing_with_KORA"
+			add_political_power = 50
+		}
+	}
+	focus = {
+		id = RUS_In_His_Name
+		icon = GFX_RUS_United_For_Russia
+		prerequisite = {
+			focus = RUS_fortress_petrograd
+		}
+		relative_position_id = RUS_fortress_petrograd
+		x = -1
+		y = 1
+		cost = 3
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_In_His_Name"
+			add_political_power = 50
+			add_war_support = 0.1
+		}
+	}
+	focus = {
+		id = RUS_Naval_Infantry
+		icon = GFX_focus_SOV_mobilization_plan
+		prerequisite = {
+			focus = RUS_fortress_petrograd
+		}
+		relative_position_id = RUS_fortress_petrograd
+		x = 1
+		y = 1
+		cost = 3
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_Naval_Infantry"
+			division_template = {
+				name = "Naval Infantry"
+				is_locked = yes
+				priority = 0
+				template_counter = 0
+				regiments = {
+					infantry = {
+						x = 0
+						y = 0
+					}
+					infantry = {
+						x = 0
+						y = 1
+					}
+					infantry = {
+						x = 0
+						y = 2
+					}
+					anti_tank_brigade = {
+						x = 0
+						y = 3
+					}
+				}
+			}
+			195 = {
+				create_unit = {
+					division = "name = \"Naval Infantry\" division_template = \"Naval Infantry\" start_experience_factor = 0.5 start_equipment_factor = 0.5"
+					owner = RUS
+				}
+				create_unit = {
+					division = "name = \"Naval Infantry\" division_template = \"Naval Infantry\" start_experience_factor = 0.5 start_equipment_factor = 0.5"
+					owner = RUS
+				}
+				create_unit = {
+					division = "name = \"Naval Infantry\" division_template = \"Naval Infantry\" start_experience_factor = 0.5 start_equipment_factor = 0.5"
+					owner = RUS
+				}
+				create_unit = {
+					division = "name = \"Naval Infantry\" division_template = \"Naval Infantry\" start_experience_factor = 0.5 start_equipment_factor = 0.5"
+					owner = RUS
+				}
+			}
+		}
+	}
+	focus = {
+		id = RUS_Naval_Guns
+		icon = GFX_RUS_Update_The_Artillery
+		prerequisite = {
+			focus = RUS_Naval_Infantry
+		}
+		relative_position_id = RUS_Naval_Infantry
+		x = -1
+		y = 1
+		cost = 2
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_Naval_Guns"
+			add_equipment_to_stockpile = {
+				type = anti_tank_equipment
+				amount = 481
+			}
+		}
+	}
+	focus = {
+		id = RUS_Move_The_Patriarch
+		icon = GFX_focus_SOV_patriarch_of_all_russia
+		prerequisite = {
+			focus = RUS_In_His_Name
+		}
+		relative_position_id = RUS_In_His_Name
+		x = -1
+		y = 1
+		cost = 3
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_Move_The_Patriarch"
+			add_political_power = 75
+			add_timed_idea = {
+				idea = RUS_orthodox_blessing
+				days = 180
+			}
+		}
+	}
+	focus = {
+		id = RUS_Strike_First
+		icon = GFX_RUS_military_manuevers
+		mutually_exclusive = {
+			focus = RUS_bleed_them_dry
+		}
+		prerequisite = {
+			focus = RUS_dealing_with_KORA
+		}
+		relative_position_id = RUS_dealing_with_KORA
+		available = {
+			has_completed_focus = RUS_fortress_petrograd
+		}
+		x = -1
+		y = 1
+		cost = 2
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_Strike_First"
+			add_timed_idea = {
+				idea = RUS_aggressive_war
+				days = 365
+			}
+		}
+	}
+	focus = {
+		id = RUS_bleed_them_dry
+		icon = GFX_generic_skull_fortification
+		mutually_exclusive = {
+			focus = RUS_Strike_First
+		}
+		available = {
+			has_completed_focus = RUS_Moscow_Forts_2
+		}
+		prerequisite = {
+			focus = RUS_dealing_with_KORA
+		}
+		relative_position_id = RUS_dealing_with_KORA
+		x = 1
+		y = 1
+		cost = 2
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_bleed_them_dry"
+			add_timed_idea = {
+				idea = RUS_defensive_war
+				days = 365
+			}
+		}
+	}
+	focus = {
+		id = RUS_onwards_russia_mother
+		icon = GFX_RUS_resume_the_reclamation_war
+		prerequisite = {
+			focus = RUS_Strike_First
+		}
+		relative_position_id = RUS_Strike_First
+		x = 0
+		y = 1
+		cost = 3
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_onwards_russia_mother"
+			if = {
+				limit = {
+					controls_state = 219
+				}
+				219 = {
+					create_unit = {
+						division = "name = \"Natsgvardia Division\" division_template = \"Natsgvardia Division\" start_experience_factor = 0.5 start_equipment_factor = 0.5"
+						owner = RUS
+					}
+					create_unit = {
+						division = "name = \"Natsgvardia Division\" division_template = \"Natsgvardia Division\" start_experience_factor = 0.5 start_equipment_factor = 0.5"
+						owner = RUS
+					}
+				}
+			}
+			else = {
+				195 = {
+					create_unit = {
+						division = "name = \"Natsgvardia Division\" division_template = \"Natsgvardia Division\" start_experience_factor = 0.5 start_equipment_factor = 0.5"
+						owner = RUS
+					}
+					create_unit = {
+						division = "name = \"Natsgvardia Division\" division_template = \"Natsgvardia Division\" start_experience_factor = 0.5 start_equipment_factor = 0.5"
+						owner = RUS
+					}
+				}
+			}
+		}
+	}
+	focus = {
+		id = RUS_a_decisive_blow
+		icon = GFX_generic_split_helmet
+		prerequisite = {
+			focus = RUS_bleed_them_dry
+		}
+		relative_position_id = RUS_bleed_them_dry
+		x = 0
+		y = 1
+		cost = 3
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_raid_the_arsenals"
+			if = {
+				limit = {
+					controls_state = 219
+				}
+				219 = {
+					create_unit = {
+						division = "name = \"Natsgvardia Infantry Division\" division_template = \"Natsgvardia Infantry Division\" start_experience_factor = 0.5 start_equipment_factor = 0.5"
+						owner = RUS
+					}
+					create_unit = {
+						division = "name = \"Natsgvardia Infantry Division\" division_template = \"Natsgvardia Infantry Division\" start_experience_factor = 0.5 start_equipment_factor = 0.5"
+						owner = RUS
+					}
+					create_unit = {
+						division = "name = \"Natsgvardia Infantry Division\" division_template = \"Natsgvardia Infantry Division\" start_experience_factor = 0.5 start_equipment_factor = 0.5"
+						owner = RUS
+					}
+					create_unit = {
+						division = "name = \"Natsgvardia Infantry Division\" division_template = \"Natsgvardia Infantry Division\" start_experience_factor = 0.5 start_equipment_factor = 0.5"
+						owner = RUS
+					}
+				}
+			}
+			else = {
+				195 = {
+					create_unit = {
+						division = "name = \"Natsgvardia Infantry Division\" division_template = \"Natsgvardia Infantry Division\" start_experience_factor = 0.5 start_equipment_factor = 0.5"
+						owner = RUS
+					}
+					create_unit = {
+						division = "name = \"Natsgvardia Infantry Division\" division_template = \"Natsgvardia Infantry Division\" start_experience_factor = 0.5 start_equipment_factor = 0.5"
+						owner = RUS
+					}
+					create_unit = {
+						division = "name = \"Natsgvardia Infantry Division\" division_template = \"Natsgvardia Infantry Division\" start_experience_factor = 0.5 start_equipment_factor = 0.5"
+						owner = RUS
+					}
+					create_unit = {
+						division = "name = \"Natsgvardia Infantry Division\" division_template = \"Natsgvardia Infantry Division\" start_experience_factor = 0.5 start_equipment_factor = 0.5"
+						owner = RUS
+					}
+				}
+			}
+		}
+	}
+	focus = {
+		id = RUS_call_on_the_air_force
+		icon = GFX_focus_SOV_flying_clubs
+		prerequisite = {
+			focus = RUS_Strike_First
+		}
+		prerequisite = {
+			focus = RUS_In_His_Name
+		}
+		relative_position_id = RUS_In_His_Name
+		x = 0
+		y = 2
+		cost = 2
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_call_on_the_air_force"
+			air_experience = 100
+			add_equipment_to_stockpile = {
+				type = fighter_equipment_1
+				amount = 97
+			}
+			add_equipment_to_stockpile = {
+				type = CAS_equipment_1
+				amount = 54
+			}
+		}
+	}
+	focus = {
+		id = RUS_do_or_die
+		icon = GFX_generic_death_tracks
+		prerequisite = {
+			focus = RUS_penal_battalions
+			focus = RUS_call_on_the_air_force
+		}
+		prerequisite = {
+			focus = RUS_a_decisive_blow
+			focus = RUS_onwards_russia_mother
+		}
+		relative_position_id = RUS_Strike_First
+		x = 1
+		y = 2
+		cost = 3
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_do_or_die"
+			add_timed_idea = {
+				idea = RUS_crunch_time
+				days = 210
+			}
+		}
+	}
+	focus = {
+		id = RUS_the_final_blows
+		icon = GFX_generic_step_on_skull
+		prerequisite = {
+			focus = RUS_do_or_die
+		}
+		available = {
+			217 = {
+				is_controlled_by = RUS
+			}
+		}
+		relative_position_id = RUS_do_or_die
+		x = -1
+		y = 1
+		cost = 2
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_the_final_blows"
+			annex_country = {
+				target = PRS
+				transfer_troops = yes
+			}
+		}
+	}
+	focus = {
+		id = RUS_into_exile
+		icon = GFX_PAL_Russian_Refugees
+		prerequisite = {
+			focus = RUS_do_or_die
+		}
+		available = {
+			OR = {
+				219 = {
+					is_controlled_by = PRS
+				}
+				195 = {
+					is_controlled_by = PRS
+				}
+			}
+		}
+		relative_position_id = RUS_do_or_die
+		x = 1
+		y = 1
+		cost = 2
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_into_exile"
+			RUS_End_Winter = yes
+		}
+	}
+	focus = {
+		id = RUS_who_is_with_us
+		icon = GFX_RUS_serov
+		prerequisite = {
+			focus = RUS_Moscow_Forts_2
+		}
+		relative_position_id = RUS_Moscow_Forts_2
+		x = 1
+		y = 1
+		cost = 6
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_who_is_with_us"
+			add_war_support = 0.1
+		}
+	}
+	focus = {
+		id = RUS_faith_and_nation
+		icon = GFX_generic_orthodox_state
+		prerequisite = {
+			focus = RUS_who_is_with_us
+		}
+		relative_position_id = RUS_who_is_with_us
+		x = 1
+		y = 1
+		cost = 6
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_who_is_with_us"
+			add_timed_idea = {
+				idea = RUS_faith_and_nation_fanatics
+				days = 180
+			}
+		}
+	}
+	focus = {
+		id = RUS_lockdown_the_city
+		icon = GFX_RUS_verify_the_kremlins_role
+		prerequisite = {
+			focus = RUS_Moscow_Forts_2
+		}
+		relative_position_id = RUS_Moscow_Forts_2
+		x = -1
+		y = 1
+		cost = 6
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_who_is_with_us"
+			add_command_power = 50
+		}
+	}
+	focus = {
+		id = RUS_police_battalions
+		icon = GFX_generic_enlist_the_police
+		prerequisite = {
+			focus = RUS_who_is_with_us
+		}
+		prerequisite = {
+			focus = RUS_lockdown_the_city
+		}
+		relative_position_id = RUS_who_is_with_us
+		x = -1
+		y = 1
+		cost = 6
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_who_is_with_us"
+			division_template = {
+				name = "Police Battalion"
+				is_locked = yes
+				priority = 0
+				template_counter = 0
+				regiments = {
+					infantry = {
+						x = 0
+						y = 0
+					}
+					infantry = {
+						x = 0
+						y = 1
+					}
+					infantry = {
+						x = 0
+						y = 2
+					}
+					cavalry = {
+						x = 1
+						y = 0
+					}
+					cavalry = {
+						x = 1
+						y = 1
+					}
+					cavalry = {
+						x = 1
+						y = 2
+					}
+				}
+				support = {
+					military_police = {
+						x = 0
+						y = 0
+					}
+				}
+			}
+			219 = {
+				create_unit = {
+					division = "name = \"Police Battalion\" division_template = \"Police Battalion\" start_experience_factor = 0.5 start_equipment_factor = 0.5"
+					owner = RUS
+				}
+				create_unit = {
+					division = "name = \"Police Battalion\" division_template = \"Police Battalion\" start_experience_factor = 0.5 start_equipment_factor = 0.5"
+					owner = RUS
+				}
+				create_unit = {
+					division = "name = \"Police Battalion\" division_template = \"Police Battalion\" start_experience_factor = 0.5 start_equipment_factor = 0.5"
+					owner = RUS
+				}
+			}
+		}
+	}
+	focus = {
+		id = RUS_penal_battalions
+		icon = GFX_focus_SOV_penal_battalions
+		prerequisite = {
+			focus = RUS_who_is_with_us
+		}
+		prerequisite = {
+			focus = RUS_bleed_them_dry
+		}
+		relative_position_id = RUS_who_is_with_us
+		x = 0
+		y = 2
+		cost = 6
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_who_is_with_us"
+			move_up_mobilization = yes
+			division_template = {
+				name = "Penal Infantry"
+				is_locked = yes
+				priority = 0
+				template_counter = 0
+				regiments = {
+					infantry = {
+						x = 0
+						y = 0
+					}
+					infantry = {
+						x = 0
+						y = 1
+					}
+				}
+			}
+			219 = {
+				create_unit = {
+					division = "name = \"Penal Infantry\" division_template = \"Penal Infantry\" start_experience_factor = 0.5 start_equipment_factor = 0.5"
+					owner = RUS
+				}
+				create_unit = {
+					division = "name = \"Penal Infantry\" division_template = \"Penal Infantry\" start_experience_factor = 0.5 start_equipment_factor = 0.5"
+					owner = RUS
+				}
+				create_unit = {
+					division = "name = \"Penal Infantry\" division_template = \"Penal Infantry\" start_experience_factor = 0.5 start_equipment_factor = 0.5"
+					owner = RUS
+				}
+				create_unit = {
+					division = "name = \"Penal Infantry\" division_template = \"Penal Infantry\" start_experience_factor = 0.5 start_equipment_factor = 0.5"
+					owner = RUS
+				}
+			}
+		}
+	}
+}
+
+### KORA Tree ###
+focus_tree = {
+	id = KRG_RUS_military_pataut_tree
+	country = {
+		factor = 0
+		modifier = {
+			add = 10
+			tag = RUS
+		}
+	}
+	default = no
+	continuous_focus_position = {
+		x = 2800
+		y = 2000
+	}
+	shared_focus = RUS_military_commision
+	focus = {
+		id = RUS_vozhd_vatutin
+		icon = GFX_RUS_vozhd_vatutin
+		x = 7
+		y = 0
+		cost = 1
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_vozhd_vatutin"
+			add_political_power = 50
+			if = {
+				limit = {
+					TCC = { exists = no } 
+				}
+				every_state = {
+					limit = {
+						is_core_of = TCC
+					}
+					transfer_state_to = TCC
+				}
+			}
+			if = {
+				limit = {
+					TRK = { exists = no } 
+				}
+				every_state = {
+					limit = {
+						is_core_of = TRK
+					}
+					transfer_state_to = TRK
+				}
+			}
+			TCC = {
+				get_current_government_type = yes
+			}
+			if = {
+				limit = {
+					has_subject_autonomy_feature = yes
+				}
+				set_autonomy = {
+					target = TCC
+					autonomous_state = krg_military_occupation
+				}
+			}
+			else = {
+				puppet = TCC
+			}
+			save_event_target_as = on_puppet_master_tag
+			TCC = {
+				standard_on_puppet_effect = yes
+				restore_previous_government_type = yes
+			}
+
+			TRK = {
+				get_current_government_type = yes
+			}
+			if = {
+				limit = {
+					has_subject_autonomy_feature = yes
+				}
+				set_autonomy = {
+					target = TRK
+					autonomous_state = krg_military_occupation
+				}
+			}
+			else = {
+				puppet = TRK
+			}
+			save_event_target_as = on_puppet_master_tag
+			TRK = {
+				standard_on_puppet_effect = yes
+				restore_previous_government_type = yes
+			}
+			
+			hidden_effect = {
+				TRK = {
+					set_politics = {
+						ruling_party = paternal_autocrat
+						elections_allowed = no
+					}
+				}
+				TCC = {
+					set_politics = {
+						ruling_party = paternal_autocrat
+						elections_allowed = no
+					}
+				}
+			}
+		}
+	}
+	focus = {
+		id = RUS_moscow_under_military
+		icon = GFX_generic_moscow_under_the_military
+		prerequisite = {
+			focus = RUS_vozhd_vatutin
+		}
+		relative_position_id = RUS_vozhd_vatutin
+		x = -4
+		y = 1
+		cost = 6
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_moscow_under_military"
+			add_popularity = {
+				ideology = paternal_autocrat
+				popularity = 0.05
+			}
+		}
+	}
+	focus = {
+		id = RUS_increase_soldier_pensions
+		icon = GFX_GER_Winterhilfe
+		prerequisite = {
+			focus = RUS_moscow_under_military
+		}
+		relative_position_id = RUS_moscow_under_military
+		x = -1
+		y = 1
+		cost = 6
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_increase_soldier_pensions"
+			move_up_service_spending = yes
+		}
+	}
+	focus = {
+		id = RUS_anti_nrpr
+		icon = GFX_generic_conspiracy
+		prerequisite = {
+			focus = RUS_moscow_under_military
+		}
+		relative_position_id = RUS_moscow_under_military
+		x = 1
+		y = 1
+		cost = 6
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_anti_nrpr"
+			add_popularity = {
+				ideology = national_populist
+				popularity = -0.2
+			}
+		}
+	}
+	focus = {
+		id = RUS_examine_local_units
+		icon = GFX_generic_examine_local_units
+		prerequisite = {
+			focus = RUS_moscow_under_military
+		}
+		relative_position_id = RUS_moscow_under_military
+		x = -3
+		y = 1
+		cost = 6
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_examine_local_units"
+			RUS_reduce_defeatism = yes
+		}
+	}
+
+	focus = {
+		id = RUS_redraw_military_districts
+		icon = GFX_OTT_Land_Reform
+		prerequisite = {
+			focus = RUS_moscow_under_military
+		}
+		mutually_exclusive = {
+			focus = RUS_deal_with_regionalist_officers
+		}
+		relative_position_id = RUS_moscow_under_military
+		x = -2
+		y = 2
+		cost = 6
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_redraw_military_districts"
+			TCC = {
+				232 = {
+					transfer_state_to = RUS
+				}
+				
+				235 = {
+					transfer_state_to = RUS
+				}
+				
+				1021 = {
+					transfer_state_to = RUS
+				}
+				
+				943 = {
+					transfer_state_to = RUS
+				}
+			}
+
+			TRK = {
+				586 = {
+					transfer_state_to = RUS
+				}
+				
+				585 = {
+					transfer_state_to = RUS
+				}
+				
+				587 = {
+					transfer_state_to = RUS
+				}
+			}
+		}
+	}
+	focus = {
+		id = RUS_deal_with_regionalist_officers
+		icon = GFX_generic_chain_army
+		prerequisite = {
+			focus = RUS_examine_local_units
+		}
+		mutually_exclusive = {
+			focus = RUS_redraw_military_districts
+		}
+		relative_position_id = RUS_moscow_under_military
+		x = -4
+		y = 2
+		cost = 6
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_deal_with_regionalist_officers"
+			add_stability = 0.02
+			TCC = {
+				add_ideas = { 
+					TCC_deal_with_Vatutin
+				}
+			}
+			TRK = {
+				add_ideas = { 
+					TRK_deal_with_Vatutin
+				}
+			}
+		}
+	}
+	focus = {
+		id = RUS_military_minorities
+		icon = GFX_generic_army_cooperation
+		prerequisite = {
+			focus = RUS_redraw_military_districts
+			focus = RUS_deal_with_regionalist_officers
+		}
+		relative_position_id = RUS_moscow_under_military
+		x = -3
+		y = 3
+		cost = 6
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_military_minorities"
+			236 = {
+				add_state_modifier = {
+					modifier = { local_manpower = 0.15 }
+				}
+			}
+			566 = {
+				add_state_modifier = {
+					modifier = { local_manpower = 0.15 }
+				}
+			}
+			564 = {
+				add_state_modifier = {
+					modifier = { local_manpower = 0.15 }
+				}
+			}
+			563 = {
+				add_state_modifier = {
+					modifier = { local_manpower = 0.15 }
+				}
+			}
+			565 = {
+				add_state_modifier = {
+					modifier = { local_manpower = 0.15 }
+				}
+			}
+		}
+	}
+	
+	focus = {
+		id = RUS_loyal_minorities
+		icon = GFX_RUS_promises_of_autonomy
+		prerequisite = {
+			focus = RUS_military_minorities
+		}
+		prerequisite = {
+			focus = RUS_hero_worship
+		}
+		available = {
+			TCC = {
+				exists = yes
+				has_war = no
+			}
+			TRK = {
+				exists = yes
+				has_war = no
+			}
+		}
+		relative_position_id = RUS_moscow_under_military
+		x = -2
+		y = 5
+		cost = 6
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_loyal_minorities"
+			if = {
+				limit = {
+					TCC = {
+						exists = yes
+						has_war = no
+					}
+				}
+				annex_country = {
+					target = TCC
+					transfer_troops = yes
+				}
+			}
+			if = {
+				limit = {
+					TRK = {
+						exists = yes
+						has_war = no
+					}
+				}
+				annex_country = {
+					target = TRK
+					transfer_troops = yes
+				}
+			}
+		}
+	}
+	focus = {
+		id = RUS_crush_natsgvardia
+		icon = GFX_RUS_day_of_lead
+		prerequisite = {
+			focus = RUS_anti_nrpr
+		}
+		relative_position_id = RUS_moscow_under_military
+		x = 0
+		y = 2
+		cost = 6
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_crush_natsgvardia"
+			RUS_Purge_Natsgvardia = yes
+		}
+	 }
+	focus = {
+		id = RUS_remove_low_level_officials
+		icon = GFX_DOM_The_Trial
+		prerequisite = {
+			focus = RUS_crush_natsgvardia
+		}
+		relative_position_id = RUS_moscow_under_military
+		x = 1
+		y = 3
+		cost = 6
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_remove_low_level_officials"
+			add_stability = 0.03
+		}
+	}
+	focus = {
+		id = RUS_arrest_politicians
+		icon = GFX_generic_imprison_people
+		prerequisite = {
+			focus = RUS_anti_nrpr
+		}
+		relative_position_id = RUS_moscow_under_military
+		x = 3
+		y = 2
+		cost = 6
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_arrest_politicians"
+			add_political_power = 50
+			add_stability = -0.03
+			retire_character = RUS_Andrey_Zankevich
+			hidden_effect = {
+				retire_character = RUS_Andrey_Zankevich_interior
+			}
+		}
+	}
+	focus = {
+		id = RUS_vilify_savinkov
+		icon = GFX_goal_vilify_savinkov
+		prerequisite = {
+			focus = RUS_crush_natsgvardia
+		}
+		prerequisite = {
+			focus = RUS_arrest_politicians
+		}
+		relative_position_id = RUS_moscow_under_military
+		x = 3
+		y = 3
+		cost = 6
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_vilify_savinkov"
+			country_event = {
+				id = krg_rus_rwk.48
+			}
+			add_stability = -0.05
+			add_popularity = {
+				ideology = national_populist
+				popularity = -0.05
+			}
+		}
+	}
+	focus = {
+		id = RUS_hero_worship
+		icon = GFX_RUS_vozhd_vatutin
+		prerequisite = {
+			focus = RUS_increase_soldier_pensions
+		}
+		prerequisite = {
+			focus = RUS_crush_natsgvardia
+		}
+		relative_position_id = RUS_moscow_under_military
+		x = -1
+		y = 4
+		cost = 6
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_hero_worship"
+			swap_ruler_traits = {
+				remove = throne_of_bayonets
+				add = saviour_of_the_nation
+			}
+		}
+	}
+	focus = {
+		id = RUS_rewrite_constitution
+		icon = GFX_RUS_unlock_moscow
+		prerequisite = {
+			focus = RUS_hero_worship
+		}
+		prerequisite = {
+			focus = RUS_remove_low_level_officials
+		}
+		available = {
+			has_completed_focus = RUS_dissolve_nrpr
+		}
+		relative_position_id = RUS_moscow_under_military
+		x = 0
+		y = 5
+		cost = 6
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_rewrite_constitution"
+			country_event = {
+				id = krg_rus_rwk.49
+			}
+		}
+	}
+	focus = {
+		id = RUS_junta_supremacy
+		icon = GFX_generic_new_ideology_pataut
+		prerequisite = {
+			focus = RUS_vilify_savinkov
+		}
+		prerequisite = {
+			focus = RUS_remove_low_level_officials
+		}
+		relative_position_id = RUS_moscow_under_military
+		x = 2
+		y = 4
+		cost = 6
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_junta_supremacy"
+			remove_ideas = KRG_fanatical_dictatorship
+			add_ideas = KRG_authoritarian_system
+		}
+	}
+	focus = {
+		id = RUS_dissolve_nrpr
+		icon = GFX_generic_smash_natpop
+		prerequisite = {
+			focus = RUS_junta_supremacy
+		}
+		prerequisite = {
+			focus = RUS_eliminate_socialists
+		}
+		relative_position_id = RUS_moscow_under_military
+		x = 4
+		y = 5
+		cost = 6
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_dissolve_nrpr"
+			set_party_name = {
+				ideology = national_populist
+				long_name = RUS_national_populist_party_s5_long
+				name = RUS_national_populist_party_s5
+			}
+			promote_character = RUS_Pyotr_Savitsky
+			set_party_name = {
+				ideology = authoritarian_democrat
+				long_name = RUS_authoritarian_democrat_party_rondo_long
+				name = RUS_authoritarian_democrat_party_rondo
+			}
+			promote_character = RUS_Maksimilian_Filonenko
+		}
+	}
+	focus = {
+		id = RUS_onwards_russia_mother_2
+		icon = GFX_RUS_local_baracks
+		prerequisite = {
+			focus = RUS_dissolve_nrpr
+		}
+		prerequisite = {
+			focus = RUS_loyal_minorities
+		}
+		prerequisite = {
+			focus = RUS_rewrite_constitution
+		}
+		relative_position_id = RUS_moscow_under_military
+		x = 1
+		y = 6
+		cost = 6
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_onwards_russia_mother_2"
+			RUS_clear_defeatism = yes
+		}
+	}
+	focus = {
+		id = RUS_militarization
+		icon = GFX_generic_military_equipment
+		prerequisite = {
+			focus = RUS_vozhd_vatutin
+		}
+		relative_position_id = RUS_vozhd_vatutin
+		x = 2
+		y = 1
+		cost = 3
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_militarization"
+			add_war_support = 0.05
+		}
+	}
+	focus = {
+		id = RUS_restructure_economy
+		icon = GFX_generic_state_economy
+		prerequisite = {
+			focus = RUS_vozhd_vatutin
+		}
+		relative_position_id = RUS_militarization
+		x = 4
+		y = 0
+		cost = 3
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_restructure_economy"
+			add_political_power = 50
+		}
+	}
+	focus = {
+		id = RUS_disband_state_backed_unions
+		icon = GFX_generic_crush_unions
+		prerequisite = {
+			focus = RUS_militarization
+		}
+		prerequisite = {
+			focus = RUS_restructure_economy
+		}
+		relative_position_id = RUS_militarization
+		x = -1
+		y = 1
+		cost = 6
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_disband_state_backed_unions"
+			add_popularity = {
+				ideology = authoritarian_socialist
+				popularity = 0.04
+			}
+			add_popularity = {
+				ideology = radical_socialist
+				popularity = 0.01
+			}
+			
+			add_stability = -0.01
+		}
+	}
+	focus = {
+		id = RUS_long_hours
+		icon = GFX_generic_death_tracks
+		prerequisite = {
+			focus = RUS_disband_state_backed_unions
+		}
+		relative_position_id = RUS_militarization
+		x = 0
+		y = 2
+		cost = 6
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_long_hours"
+			add_timed_idea = {
+				idea = RUS_long_hours_less_pay
+				days = 510
+			}
+		}
+	}
+	focus = {
+		id = RUS_eliminate_socialists
+		icon = GFX_generic_broken_red_star
+		prerequisite = {
+			focus = RUS_disband_state_backed_unions
+		}
+		relative_position_id = RUS_militarization
+		x = -1
+		y = 3
+		cost = 6
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_eliminate_socialists"
+			add_popularity = {
+				ideology = authoritarian_socialist
+				popularity = -0.04
+			}
+			add_manpower = -6871
+		}
+	}
+	focus = {
+		id = RUS_factory_bailouts
+		icon = GFX_generic_takeover_industries
+		prerequisite = {
+			focus = RUS_militarization
+		}
+		prerequisite = {
+			focus = RUS_restructure_economy
+		}
+		mutually_exclusive = {
+			focus = RUS_privatization	
+		}
+		relative_position_id = RUS_militarization
+		x = 1
+		y = 1
+		cost = 6
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_factory_bailouts"
+			add_popularity = {
+				ideology = paternal_autocrat
+				popularity = 0.05
+			}
+		}
+	}
+	focus = {
+		id = RUS_factory_expansion
+		icon = GFX_generic_industry_reallocation
+		prerequisite = {
+			focus = RUS_factory_bailouts
+		}
+		prerequisite = {
+			focus = RUS_highest_bidder
+		}
+		relative_position_id = RUS_militarization
+		x = 1
+		y = 3
+		cost = 6
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_factory_expansion"
+			random_owned_state = {
+				limit = {
+					is_core_of = RUS
+					free_building_slots = {
+						building = industrial_complex
+						size > 0
+						include_locked = no
+					}
+				}
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+				add_extra_state_shared_building_slots = 1
+			}
+			random_owned_state = {
+				limit = {
+					is_core_of = RUS
+					free_building_slots = {
+						building = industrial_complex
+						size > 0
+						include_locked = no
+					}
+				}
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+				add_extra_state_shared_building_slots = 1
+			}
+		}
+	}
+	focus = {
+		id = RUS_resource_expeditions
+		icon = GFX_generic_coal_mining
+		prerequisite = {
+			focus = RUS_long_hours
+		}
+		prerequisite = {
+			focus = RUS_factory_expansion
+		}
+		relative_position_id = RUS_militarization
+		x = 0
+		y = 4
+		cost = 6
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_resource_expeditions"
+			set_country_flag = RUS_Resource_Expeditions_flag
+			custom_effect_tooltip = RUS_Resource_Expeditions_tt
+		}
+	}
+	focus = {
+		id = RUS_privatization
+		icon = GFX_generic_loans
+		prerequisite = {
+			focus = RUS_militarization
+		}
+		prerequisite = {
+			focus = RUS_restructure_economy
+		}
+		mutually_exclusive = {
+			focus = RUS_factory_bailouts	
+		}
+		relative_position_id = RUS_militarization
+		x = 3
+		y = 1
+		cost = 6
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_privatization"
+			move_down_trade_laws = yes
+		}
+	}
+	focus = {
+		id = RUS_encourage_capitalists
+		icon = GFX_generic_capitalist_system
+		prerequisite = {
+			focus = RUS_militarization
+		}
+		prerequisite = {
+			focus = RUS_restructure_economy
+		}
+		relative_position_id = RUS_militarization
+		x = 6
+		y = 1
+		cost = 6
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_encourage_capitalists"
+			move_up_business_spending = yes
+		}
+	}
+	focus = {
+		id = RUS_highest_bidder
+		icon = GFX_generic_seize_money
+		prerequisite = {
+			focus = RUS_privatization
+			focus = RUS_encourage_capitalists
+		}
+		mutually_exclusive = {
+			focus = RUS_government_favouritism
+		}
+		relative_position_id = RUS_militarization
+		x = 3
+		y = 2
+		cost = 6
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_highest_bidder"
+			add_ideas = RUS_capitalism
+		}
+	}
+	focus = {
+		id = RUS_encourage_foreign_investment
+		icon = GFX_generic_foreign_investments
+		prerequisite = {
+			focus = RUS_highest_bidder
+		}
+		relative_position_id = RUS_militarization
+		x = 3
+		y = 4
+		cost = 6
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_encourage_foreign_investment"
+			move_up_immigration = yes
+		}
+	}
+	focus = {
+		id = RUS_government_favouritism
+		icon = GFX_NEE_reimburse
+		prerequisite = {
+			focus = RUS_privatization
+			focus = RUS_encourage_capitalists
+		}
+		mutually_exclusive = {
+			focus = RUS_highest_bidder
+		}
+		relative_position_id = RUS_militarization
+		x = 7
+		y = 2
+		cost = 6
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_government_favouritism"
+			move_up_inf_spending = yes
+		}
+	}
+	focus = {
+		id = RUS_sell_steel_industry
+		icon = GFX_PAL_Private_Investement
+		prerequisite = {
+			focus = RUS_government_favouritism
+			focus = RUS_highest_bidder
+		}
+		available = {
+			217 = {
+				is_controlled_by = RUS
+			}
+		}
+		relative_position_id = RUS_militarization
+		x = 4
+		y = 3
+		cost = 6
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_sell_steel_industry"
+			217 = {
+				add_building_construction = {
+					type = industrial_complex
+					level = 3
+					instant_build = yes
+				}
+				add_extra_state_shared_building_slots = 3
+				add_resource = {
+					type = steel
+					amount = 10
+				}
+				add_state_modifier = {
+					modifier = {
+						state_resources_factor = 0.1
+					 }
+				}
+			}
+		}
+	}
+	focus = {
+		id = RUS_oil_profits
+		icon = GFX_generic_Further_Oil
+		prerequisite = {
+			focus = RUS_government_favouritism
+			focus = RUS_highest_bidder
+		}
+		available = {
+			229 = {
+				is_controlled_by = RUS
+			}
+			943 = {
+				is_controlled_by = RUS
+			}
+		}
+		relative_position_id = RUS_militarization
+		x = 6
+		y = 3
+		cost = 6
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_oil_profits"
+			229 = {
+				add_building_construction = {
+					type = industrial_complex
+					level = 2
+					instant_build = yes
+				}
+				add_extra_state_shared_building_slots = 2
+				add_resource = {
+					type = oil
+					amount = 10
+				}
+			}
+			943 = {
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+				add_extra_state_shared_building_slots = 1
+				add_resource = {
+					type = oil
+					amount = 10
+				}
+			}
+		}
+	}
+	focus = {
+		id = RUS_military_oligarchs
+		icon = GFX_NEE_wall_street
+		prerequisite = {
+			focus = RUS_government_favouritism
+		}
+		relative_position_id = RUS_militarization
+		x = 8
+		y = 3
+		cost = 6
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_military_oligarchs"
+			move_down_taxation = yes
+		}
+	}
+	focus = {
+		id = RUS_increase_military_budget
+		icon = GFX_generic_economic_report
+		prerequisite = {
+			focus = RUS_sell_steel_industry
+		}
+		prerequisite = {
+			focus = RUS_oil_profits
+		}
+		prerequisite = {
+			focus = RUS_military_oligarchs
+		}
+		mutually_exclusive = {
+			focus = RUS_open_for_business
+		}
+		relative_position_id = RUS_militarization
+		x = 7
+		y = 5
+		cost = 6
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_increase_military_budget"
+			move_up_military = yes
+		}
+	}
+	focus = {
+		id = RUS_open_for_business
+		icon = GFX_OTT_Restrict_Foreign_Exchange_Regime
+		prerequisite = {
+			focus = RUS_sell_steel_industry
+		}
+		prerequisite = {
+			focus = RUS_oil_profits
+		}
+		prerequisite = {
+			focus = RUS_encourage_foreign_investment
+		}
+		mutually_exclusive = {
+			focus = RUS_increase_military_budget
+		}
+		relative_position_id = RUS_militarization
+		x = 5
+		y = 5
+		cost = 6
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_open_for_business"
+			move_down_trade_laws = yes
+		}
+	}
+	focus = {
+		id = RUS_military_industrial_complex
+		icon = GFX_generic_military_mobilisation
+		prerequisite = {
+			focus = RUS_increase_military_budget
+		}
+		available = {
+			has_completed_focus = RUS_military_complex
+		}
+		relative_position_id = RUS_militarization
+		x = 7
+		y = 6
+		cost = 6
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_military_industrial_complex"
+			set_country_flag = RUS_Military_Industry_flag
+			random_owned_state = {
+				limit = {
+					is_core_of = RUS
+					free_building_slots = {
+						building = arms_factory
+						size > 0
+						include_locked = no
+					}
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+				add_extra_state_shared_building_slots = 1
+			}
+			random_owned_state = {
+				limit = {
+					is_core_of = RUS
+					free_building_slots = {
+						building = arms_factory
+						size > 0
+						include_locked = no
+					}
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+				add_extra_state_shared_building_slots = 1
+			}
+			random_owned_state = {
+				limit = {
+					is_core_of = RUS
+					free_building_slots = {
+						building = arms_factory
+						size > 0
+						include_locked = no
+					}
+				}
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+				add_extra_state_shared_building_slots = 1
+			}
+		}
+	}
+	focus = {
+		id = RUS_our_people_prosper
+		icon = GFX_generic_gold_up
+		prerequisite = {
+			focus = RUS_open_for_business
+		}
+		prerequisite = {
+			focus = RUS_military_industrial_complex
+		}
+		relative_position_id = RUS_militarization
+		x = 6
+		y = 7
+		cost = 6
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_our_people_prosper"
+			RUS_clear_economic_crisis = yes
+		}
+	}
+}
+
+### RevRep Tree ###
+focus_tree = {
+	id = KRG_RUS_revreps_tree
+	country = {
+		factor = 0
+		modifier = {
+			add = 10
+			tag = RUS
+		}
+	}
+	default = no
+	continuous_focus_position = {
+		x = 2800
+		y = 800
+	}
+	shared_focus = RUS_military_commision
+	focus = {
+		id = RUS_true_liberty
+		icon = GFX_generic_liberty
+		x = 14
+		y = 0
+		cost = 1
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_true_liberty"
+		}
+	}
+	focus = {
+		id = RUS_provisional_government
+		icon = GFX_generic_conspiracy
+		prerequisite = {
+			focus = RUS_true_liberty
+		}
+		relative_position_id = RUS_true_liberty
+		x = -2
+		y = 1
+		cost = 6
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_provisional_government"
+		}
+	}
+	focus = {
+		id = RUS_issue_arrest_warrants
+		icon = GFX_generic_imprison_people
+		prerequisite = {
+			focus = RUS_provisional_government
+		}
+		relative_position_id = RUS_true_liberty
+		x = -5
+		y = 2
+		cost = 6
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_issue_arrest_warrants"
+		}
+	}
+	focus = {
+		id = RUS_trial_of_the_century
+		icon = GFX_DOM_The_Trial
+		prerequisite = {
+			focus = RUS_issue_arrest_warrants
+		}
+		relative_position_id = RUS_true_liberty
+		x = -6
+		y = 3
+		cost = 6
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_trial_of_the_century"
+		}
+	}
+	focus = {
+		id = RUS_de_savinkovization
+		icon = GFX_goal_vilify_savinkov
+		prerequisite = {
+			focus = RUS_issue_arrest_warrants
+		}
+		relative_position_id = RUS_true_liberty
+		x = -4
+		y = 3
+		cost = 6
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_de_savinkovization"
+		}
+	}
+	focus = {
+		id = RUS_solidify_senate
+		icon = GFX_generic_Fight_for_Freedom
+		prerequisite = {
+			focus = RUS_provisional_government
+		}
+		relative_position_id = RUS_true_liberty
+		x = -3
+		y = 2
+		cost = 6
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_solidify_senate"
+		}
+	}
+	focus = {
+		id = RUS_constitutional_convention
+		icon = GFX_generic_agency
+		prerequisite = {
+			focus = RUS_provisional_government
+		}
+		relative_position_id = RUS_true_liberty
+		x = -1
+		y = 2
+		cost = 6
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_constitutional_convention"
+		}
+	}
+	focus = {
+		id = RUS_repeal_unjust_laws
+		icon = GFX_focus_renounce_the_treaty_of_trianon
+		prerequisite = {
+			focus = RUS_solidify_senate
+		}
+		prerequisite = {
+			focus = RUS_constitutional_convention
+		}
+		relative_position_id = RUS_true_liberty
+		x = -2
+		y = 3
+		cost = 6
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_repeal_unjust_laws"
+		}
+	}
+	focus = {
+		id = RUS_demolish_russification
+		icon = GFX_MON_we_dont_need_russia
+		prerequisite = {
+			focus = RUS_provisional_government
+		}
+		relative_position_id = RUS_true_liberty
+		x = 0
+		y = 3
+		cost = 6
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_demolish_russification"
+		}
+	}
+	focus = {
+		id = RUS_legalize_opposition_parties
+		icon = GFX_generic_treaty
+		prerequisite = {
+			focus = RUS_trial_of_the_century
+		}
+		prerequisite = {
+			focus = RUS_de_savinkovization
+		}
+		prerequisite = {
+			focus = RUS_repeal_unjust_laws
+		}
+		relative_position_id = RUS_true_liberty
+		x = -4
+		y = 4
+		cost = 6
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_legalize_opposition_parties"
+		}
+	}
+	focus = {
+		id = RUS_minority_liberalization
+		icon = GFX_RUS_promises_of_autonomy
+		prerequisite = {
+			focus = RUS_constitutional_convention
+		}
+		prerequisite = {
+			focus = RUS_demolish_russification
+		}
+		relative_position_id = RUS_true_liberty
+		x = -1
+		y = 4
+		cost = 6
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_minority_liberalization"
+		}
+	}
+	focus = {
+		id = RUS_draft_a_new_constitution
+		icon = GFX_generic_constitutional_guarantees
+		prerequisite = {
+			focus = RUS_legalize_opposition_parties
+		}
+		prerequisite = {
+			focus = RUS_minority_liberalization
+		}
+		relative_position_id = RUS_true_liberty
+		x = -2
+		y = 5
+		cost = 6
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_draft_a_new_constitution"
+		}
+	}
+	focus = {
+		id = RUS_never_another_tyrant
+		icon = GFX_generic_new_ideology_revrep
+		prerequisite = {
+			focus = RUS_draft_a_new_constitution
+		}
+		mutually_exclusive = {
+			focus = RUS_leftist_victory
+			focus = RUS_rightist_victory
+		}
+		relative_position_id = RUS_true_liberty
+		x = 0
+		y = 6
+		cost = 6
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_never_another_tyrant"
+		}
+	}
+	focus = {
+		id = RUS_leftist_victory
+		icon = GFX_generic_new_ideology_socdem
+		prerequisite = {
+			focus = RUS_draft_a_new_constitution
+		}
+		mutually_exclusive = {
+			focus = RUS_never_another_tyrant
+			focus = RUS_rightist_victory
+		}
+		relative_position_id = RUS_true_liberty
+		x = -4
+		y = 6
+		cost = 6
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_leftist_victory"
+		}
+	}
+	focus = {
+		id = RUS_rightist_victory
+		icon = GFX_generic_new_ideology_marklib
+		prerequisite = {
+			focus = RUS_draft_a_new_constitution
+		}
+		mutually_exclusive = {
+			focus = RUS_never_another_tyrant
+			focus = RUS_leftist_victory
+		}
+		relative_position_id = RUS_true_liberty
+		x = -2
+		y = 6
+		cost = 6
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_rightist_victory"
+		}
+	}
+	focus = {
+		id = RUS_long_night_is_over
+		icon = GFX_goal_government_centralised_icon
+		prerequisite = {
+			focus = RUS_leftist_victory
+			focus = RUS_rightist_victory
+			focus = RUS_never_another_tyrant
+		}
+		relative_position_id = RUS_true_liberty
+		x = -2
+		y = 7
+		cost = 6
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_long_night_is_over"
+		}
+	}
+	focus = {
+		id = RUS_picking_up_the_pieces
+		icon = GFX_generic_bankruptcy
+		prerequisite = {
+			focus = RUS_true_liberty
+		}
+		relative_position_id = RUS_true_liberty
+		x = 3
+		y = 1
+		cost = 6
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_picking_up_the_pieces"
+		}
+	}
+	focus = {
+		id = RUS_deal_with_devil
+		icon = GFX_manstien
+		prerequisite = {
+			focus = RUS_picking_up_the_pieces
+		}
+		relative_position_id = RUS_true_liberty
+		x = 2
+		y = 2
+		cost = 6
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_deal_with_devil"
+		}
+	}
+	focus = {
+		id = RUS_repay_debts
+		icon = GFX_generic_foreign_investments
+		prerequisite = {
+			focus = RUS_review_tax_codes
+		}
+		prerequisite = {
+			focus = RUS_deal_with_devil
+		}
+		relative_position_id = RUS_true_liberty
+		x = 2
+		y = 4
+		cost = 6
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_repay_debts"
+		}
+	}
+	focus = {
+		id = RUS_demob_labour_army
+		icon = GFX_generic_controlled_board
+		prerequisite = {
+			focus = RUS_picking_up_the_pieces
+		}
+		relative_position_id = RUS_true_liberty
+		x = 4
+		y = 2
+		cost = 6
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_demob_labour_army"
+		}
+	}
+	focus = {
+		id = RUS_review_tax_codes
+		icon = GFX_SYR_Stop_Jewish_Settlers
+		prerequisite = {
+			focus = RUS_demob_labour_army
+		}
+		relative_position_id = RUS_true_liberty
+		x = 3
+		y = 3
+		cost = 6
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_review_tax_codes"
+		}
+	}
+	focus = {
+		id = RUS_status_of_unions
+		icon = GFX_generic_social_reforms
+		prerequisite = {
+			focus = RUS_demob_labour_army
+		}
+		relative_position_id = RUS_true_liberty
+		x = 5
+		y = 3
+		cost = 6
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_status_of_unions"
+		}
+	}
+	focus = {
+		id = RUS_desperate_measures
+		icon = GFX_generic_seize_money
+		prerequisite = {
+			focus = RUS_demob_labour_army
+		}
+		relative_position_id = RUS_true_liberty
+		x = 4
+		y = 4
+		cost = 6
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_desperate_measures"
+		}
+	}
+	focus = {
+		id = RUS_defang_military
+		icon = GFX_generic_break_rifle
+		prerequisite = {
+			focus = RUS_picking_up_the_pieces
+		}
+		relative_position_id = RUS_true_liberty
+		x = 6
+		y = 2
+		cost = 6
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_defang_military"
+		}
+	}
+	focus = {
+		id = RUS_factory_conversion
+		icon = GFX_generic_industry_reallocation
+		prerequisite = {
+			focus = RUS_demob_labour_army
+		}
+		relative_position_id = RUS_true_liberty
+		x = 7
+		y = 3
+		cost = 6
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_factory_conversion"
+		}
+	}
+	focus = {
+		id = RUS_balance_the_budget
+		icon = GFX_goal_generic_neutrality_focus
+		prerequisite = {
+			focus = RUS_status_of_unions
+		}
+		prerequisite = {
+			focus = RUS_factory_conversion
+		}
+		relative_position_id = RUS_true_liberty
+		x = 6
+		y = 4
+		cost = 6
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_balance_the_budget"
+		}
+	}
+	focus = {
+		id = RUS_brave_new_world
+		icon = GFX_generic_world
+		prerequisite = {
+			focus = RUS_repay_debts
+		}
+		prerequisite = {
+			focus = RUS_desperate_measures
+		}
+		prerequisite = {
+			focus = RUS_balance_the_budget
+		}
+		relative_position_id = RUS_true_liberty
+		x = 4
+		y = 5
+		cost = 6
+		available_if_capitulated = yes
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus RUS_brave_new_world"
+		}
+	}
+}

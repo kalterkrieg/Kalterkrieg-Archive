@@ -1,0 +1,217 @@
+FNG_zhang_power_up = {
+	add_power_balance_value = {
+		id = FNG_rivalry_bop
+		value = 0.1
+		tooltip_side = FNG_rivalry_bop_zhang
+	}
+}
+
+FNG_yang_power_up = {
+	add_power_balance_value = {
+		id = FNG_rivalry_bop
+		value = -0.1
+		tooltip_side = FNG_rivalry_bop_yang
+	}
+}
+
+
+FNG_sheng_power_up = {
+	if = {
+		limit = {
+			power_balance_value = {
+		    	id = FNG_rivalry_bop
+		    	value > 0.1
+			}
+		}
+        add_power_balance_value = {
+            id = FNG_rivalry_bop
+            value = -0.1
+            tooltip_side = FNG_rivalry_bop_yang
+        }
+		
+	}
+	else_if = {
+		limit = {
+			power_balance_value = {
+		    	id = FNG_rivalry_bop
+		    	value < -0.1
+			}
+		}
+		add_power_balance_value = {
+            id = FNG_rivalry_bop
+            value = 0.1
+            tooltip_side = FNG_rivalry_bop_zhang
+        }
+	}
+	else = {
+		add_political_power = -20
+	}
+	custom_effect_tooltip = FNG_sheng_gain_power_tooltip
+	hidden_effect = {
+		add_popularity = {
+    	    ideology = national_populist
+    	    popularity = 0.02
+    	}
+	}
+}
+
+FNG_downgrade_red_ghost = {
+	if = {
+		limit = {
+			has_idea = FNG_idea_the_red_ghost
+		}
+		swap_ideas = {
+			remove_idea = FNG_idea_the_red_ghost
+			add_idea = FNG_idea_the_red_ghost_1
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = FNG_idea_the_red_ghost_1
+		}
+		swap_ideas = {
+			remove_idea = FNG_idea_the_red_ghost_1
+			add_idea = FNG_idea_the_red_ghost_2
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = FNG_idea_the_red_ghost_2
+		}
+		swap_ideas = {
+			remove_idea = FNG_idea_the_red_ghost_2
+			add_idea = FNG_idea_the_red_ghost_3
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = FNG_idea_the_red_ghost_3
+		}
+		remove_ideas = FNG_idea_the_red_ghost_3
+	}
+	else = {
+		effect_tooltip = {
+			swap_ideas = {
+				remove_idea = FNG_idea_the_red_ghost
+				add_idea = FNG_idea_the_red_ghost_1
+			}
+		}
+	}
+}
+
+FNG_upgrade_legitimacy_Yang = {
+	if = {
+		limit = {
+			has_idea = FNG_idea_high_skies_faraway_emperors
+		}
+		swap_ideas = {
+			remove_idea = FNG_idea_high_skies_faraway_emperors
+			add_idea = FNG_idea_high_skies_faraway_emperors_1_Yang
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = FNG_idea_high_skies_faraway_emperors_1_Yang
+		}
+		swap_ideas = {
+			remove_idea = FNG_idea_high_skies_faraway_emperors_1_Yang
+			add_idea = FNG_idea_high_skies_faraway_emperors_2_Yang
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = FNG_idea_high_skies_faraway_emperors_2_Yang
+		}
+		swap_ideas = {
+			remove_idea = FNG_idea_high_skies_faraway_emperors_2_Yang
+			add_idea = FNG_idea_high_skies_faraway_emperors_3_Yang
+		}
+	}
+}
+
+FNG_upgrade_legitimacy_Zhang = {
+	if = {
+		limit = {
+			has_idea = FNG_idea_high_skies_faraway_emperors
+		}
+		swap_ideas = {
+			remove_idea = FNG_idea_high_skies_faraway_emperors
+			add_idea = FNG_idea_high_skies_faraway_emperors_1_Zhang
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = FNG_idea_high_skies_faraway_emperors_1_Zhang
+		}
+		swap_ideas = {
+			remove_idea = FNG_idea_high_skies_faraway_emperors_1_Zhang
+			add_idea = FNG_idea_high_skies_faraway_emperors_2_Zhang
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = FNG_idea_high_skies_faraway_emperors_2_Zhang
+		}
+		swap_ideas = {
+			remove_idea = FNG_idea_high_skies_faraway_emperors_2_Zhang
+			add_idea = FNG_idea_high_skies_faraway_emperors_3_Zhang
+		}
+	}
+}
+
+FNG_upgrade_bandit_suppression_hq = {
+	if = {
+		limit = {
+			has_idea = FNG_bandit_suppression_hq_idea
+		}
+		swap_ideas = {
+			remove_idea = FNG_bandit_suppression_hq_idea
+			add_idea = FNG_bandit_suppression_hq_idea_1
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = FNG_bandit_suppression_hq_idea_1
+		}
+		swap_ideas = {
+			remove_idea = FNG_bandit_suppression_hq_idea_1
+			add_idea = FNG_bandit_suppression_hq_idea_2
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = FNG_bandit_suppression_hq_idea_2
+		}
+		swap_ideas = {
+			remove_idea = FNG_bandit_suppression_hq_idea_2
+			add_idea = FNG_bandit_suppression_hq_idea_3
+		}
+	}
+
+	else_if = {
+		limit = {
+			has_idea = FNG_bandit_suppression_hq_idea_3
+		}
+		swap_ideas = {
+			remove_idea = FNG_bandit_suppression_hq_idea_3
+			add_idea = FNG_bandit_suppression_hq_idea_4
+		}
+	}
+
+	else = {
+		effect_tooltip = {
+			swap_ideas = {
+				remove_idea = FNG_bandit_suppression_hq_idea
+				add_idea = FNG_bandit_suppression_hq_idea_1
+			}
+		}
+	}
+}
+
+FNG_change_national_legitimacy = {
+	add_to_variable = {
+		var = FNG_CCW_momentum_var
+		value = China_temp_national_legitimacy_change
+		tooltip = CCW_decisive_defeat_tt
+	}
+}

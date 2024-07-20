@@ -1,0 +1,122 @@
+# defined_text = {
+# 	name = GetNeedsAccessOrNotTechSphere
+# 	text = {
+# 		trigger = {
+# 			is_in_array = { researched_techs = unlocked_technology }
+# 		}
+# 		localization_key = not_tech_leader_has_technology
+# 	}
+# 	text = {
+# 		localization_key = needs_tech_leader_to_unlock_technology
+# 	}
+# }
+
+# defined_text = { 
+# 	name = GetSphereNameLoc #This is scoped localization. If you need to access some other country's localization use syntax [GER.GetSphereName]. DO NOT use [GetSphereNameLoc].
+# 	text = {
+# 		trigger = {
+# 			tag = CAN
+# 		}
+# 		localization_key = CAN_sphere_name
+# 	}
+# 	text = {
+# 		trigger = {
+# 			tag = GER
+# 		}
+# 		localization_key = GER_sphere_name
+# 	}
+# 	#Add as many as you need here
+# }
+
+# defined_text = {
+# 	name = GetSphereName
+# 	text = {
+# 		localization_key = "[THIS.GetSphereNameLoc]"
+# 	}
+# }
+
+# defined_text = { #hack used to get around scripted GUI limits
+# 	name = GetSphereIcon
+# 	text = {
+# 		localization_key = "GFX_[?tech_sphere_owner.GetTag]_tech_sphere_icon"
+# 	}
+# }
+
+# defined_text = {
+# 	name = GetTechLeaderGFX
+# 	text = {
+# 		trigger = {
+# 			has_country_flag = tech_leader
+# 		}
+# 		localization_key = "GFX_flag_small_golden_frame"
+
+# 	}
+# 	text = {
+# 		localization_key = "GFX_flag_small_silver_frame"
+# 	}
+# }
+
+# defined_text = {
+# 	name = GetTechLeader
+# 	text = { 
+# 		trigger = {
+# 			has_country_flag = tech_leader
+# 		}
+# 		localization_key = SphereTechLeader
+# 	}
+# 	text = {
+# 		localization_key = SphereTechMember
+# 	}
+# }
+#nuclear stuff
+
+defined_text = {
+	name = GetAtomicOrThermonuclear
+	text = {
+		trigger = {
+			has_country_flag = atomic_weapons_released
+		}
+		localization_key = atomic_weapons
+	}
+	text = {
+		trigger = {
+			has_country_flag = thermonuclear_weapons_released
+		}
+		localization_key = thermonuclear_weapons
+	}
+}
+
+defined_text = {
+	name = GetClosestSiloState
+
+	text = {
+		trigger = {
+			sort_state_silos = yes
+		}
+
+		localization_key = ""
+	}
+}
+
+defined_text = {
+	name = GetCountrysWithSilos
+
+	text = {
+		trigger = {
+			check_variable = { current_index = silo_owners_array^num }
+		}
+
+		localization_key = ""
+	}
+	text = {
+		trigger = {
+			set_temp_variable = { current_tag = silo_owners_array^current_index }
+			add_to_temp_variable = { current_index = 1 }
+		}
+
+		localization_key = silo_list_icon_tt_info
+	}
+	text = {
+		localization_key = ""
+	}
+}

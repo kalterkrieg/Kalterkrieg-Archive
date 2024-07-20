@@ -1,0 +1,1248 @@
+add_namespace = krg_chi
+add_namespace = krg_chi_pol
+add_namespace = krg_chi_dip
+add_namespace = krg_chi_news
+
+country_event = {
+	id = krg_chi.1
+	title = krg_chi.1.t
+	desc = krg_chi.1.d
+	picture = GFX_ce_CHI_calloftherevolution
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_chi_ccw.1"
+	}
+	is_triggered_only = yes
+	option = {
+		name = krg_chi.1.a
+		add_political_power = 10
+		country_event = krg_chi_ccw.2
+	}
+}
+
+country_event = {
+	id = krg_chi_ccw.2
+	title = krg_chi_ccw.2.t
+	desc = krg_chi_ccw.2.d
+	picture = GFX_ce_CHI_guangzhou_government
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_chi_ccw.2"
+	}
+	is_triggered_only = yes
+	option = {
+		name = krg_chi_ccw.2.a
+		hidden_effect = {
+			country_event = { id = krg_chi.11 days = 24 }
+		}
+	}
+}
+
+country_event = {
+	id = krg_chi_ccw.15
+	title = krg_chi_ccw.15.t
+	desc = krg_chi_ccw.15.d
+	picture = GFX_ce_CHI_guangzhou_government
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_chi_ccw.15"
+	}
+	is_triggered_only = yes
+	option = {
+		name = krg_chi_ccw.15.a
+		add_stability = -0.01
+	}
+}
+country_event = {
+	# Urban Takeovers
+	id = krg_chi.11
+	title = krg_chi.11.t
+	desc = krg_chi.11.d
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_chi.11"
+	}
+	is_triggered_only = yes
+	option = {
+		add_manpower = -412
+		name = krg_chi.11.a
+		595 = {
+			damage_building = {
+				type = infrastructure
+				damage = 1
+			}
+		}
+	}
+}
+
+country_event = {
+	id = krg_chi.12
+	title = krg_chi.12.t
+	desc = krg_chi.12.d
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_chi.12"
+		hidden_effect = {
+			if = {
+				limit = {
+					FNG = { NOT = { has_completed_focus = FNG_shimonoseki_again } }
+				}
+				FNG = {
+					complete_national_focus = FNG_shimonoseki_again
+				}
+			}
+		}
+	}
+	is_triggered_only = yes
+	option = {
+		name = krg_chi.12.a
+		add_war_support = 0.05
+		add_manpower = -1
+		add_political_power = -10
+		set_country_flag = CHI_shimonoseki_signed
+		if = {
+			limit = {
+				FNG = { NOT = { has_country_flag = CHI_shimonoseki_signed } }
+			}
+			news_event = {
+				id = krg_chi_news.0
+			}
+		}
+	}
+}
+
+country_event = {
+	# Former Enemy Assets
+	id = krg_chi.13
+	title = krg_chi.13.t
+	desc = krg_chi.13.d
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_chi.13"
+	}
+	is_triggered_only = yes
+	option = {
+		name = krg_chi.13.a
+		ai_chance = {
+			base = 50
+		}
+		custom_effect_tooltip = CHI_federalists_gain_power_tooltip
+		add_popularity = {
+			ideology = social_democrat
+			popularity = 0.01
+		}
+		add_stability = 0.05
+		hidden_effect = {
+			add_to_variable = {
+				CHI_FED_PWR = 1
+			}
+		}
+	}
+	option = {
+		name = krg_chi.13.b
+		ai_chance = {
+			base = 50
+		}
+		custom_effect_tooltip = CHI_nationalists_gain_power_tooltip
+		add_popularity = {
+			ideology = revolutionary_republican
+			popularity = 0.01
+		}
+		add_war_support = 0.05
+		hidden_effect = {
+			add_to_variable = {
+				CHI_KMT_PWR = 1
+			}
+		}
+	}
+}
+
+country_event = {
+	# Japanese Repatriation
+	id = krg_chi.14
+	title = krg_chi.14.t
+	desc = krg_chi.14.d
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_chi.14"
+	}
+	is_triggered_only = yes
+	option = {
+		name = krg_chi.14.a
+		add_tech_bonus = {
+			bonus = 0.5
+			uses = 1
+			category = support_tech
+		}
+		add_tech_bonus = {
+			bonus = 0.5
+			uses = 1
+			category = air_equipment
+		}
+	}
+}
+
+country_event = {
+	# New Diplomatic Relations
+	id = krg_chi.15
+	title = krg_chi.15.t
+	desc = krg_chi.15.d
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_chi.15"
+	}
+	is_triggered_only = yes
+	option = {
+		name = krg_chi.15.a
+		add_opinion_modifier = {
+			target = CAL
+			modifier = china_first_recognition
+		}
+	}
+}
+
+country_event = {
+	# The Teahouse Talks
+	id = krg_chi.16
+	title = krg_chi.16.t
+	desc = krg_chi.16.d
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_chi.16"
+	}
+	picture = GFX_ce_CHI_Huang_Yanpei_Discussion
+	is_triggered_only = yes
+	option = {
+		name = krg_chi.16.a
+		ai_chance = {
+			base = 50
+		}
+		custom_effect_tooltip = CHI_nationalists_gain_power_tooltip
+		add_popularity = {
+			ideology = revolutionary_republican
+			popularity = 0.02
+		}
+		add_popularity = {
+			ideology = radical_socialist
+			popularity = 0.01
+		}
+		add_war_support = 0.02
+		hidden_effect = {
+			add_to_variable = {
+				CHI_KMT_PWR = 1
+			}
+		}
+	}
+	option = {
+		name = krg_chi.16.b
+		ai_chance = {
+			base = 50
+		}
+		custom_effect_tooltip = CHI_federalists_gain_power_tooltip
+		add_popularity = {
+			ideology = social_democrat
+			popularity = 0.02
+		}
+		add_popularity = {
+			ideology = radical_socialist
+			popularity = 0.01
+		}
+		add_stability = 0.02
+		hidden_effect = {
+			add_to_variable = {
+				CHI_FED_PWR = 1
+			}
+		}
+	}
+}
+
+country_event = {
+	# Curtail Military Localism
+	id = krg_chi.17
+	title = krg_chi.17.t
+	desc = krg_chi.17.d
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_chi.17"
+	}
+	is_triggered_only = yes
+	option = {
+		name = krg_chi.17.a
+		ai_chance = {
+			base = 50
+		}
+		custom_effect_tooltip = CHI_nationalists_gain_power_tooltip
+		add_popularity = {
+			ideology = revolutionary_republican
+			popularity = 0.01
+		}
+		add_popularity = {
+			ideology = social_conservative
+			popularity = 0.04
+		}
+		set_division_template_lock = {
+			division_template = "Guangxi Clique Division"
+			is_locked = no
+		}
+		add_political_power = 20
+		hidden_effect = {
+			add_to_variable = {
+				CHI_KMT_PWR = 1
+			}
+		}
+	}
+	option = {
+		name = krg_chi.17.b
+		ai_chance = {
+			base = 50
+		}
+		custom_effect_tooltip = CHI_federalists_gain_power_tooltip
+		add_popularity = {
+			ideology = social_democrat
+			popularity = 0.01
+		}
+		add_popularity = {
+			ideology = social_conservative
+			popularity = 0.04
+		}
+		set_division_template_lock = {
+			division_template = "Guangxi Clique Division"
+			is_locked = no
+		}
+		add_political_power = -20
+		hidden_effect = {
+			add_to_variable = {
+				CHI_FED_PWR = 1
+			}
+		}
+	}
+}
+
+country_event = {
+	# Partisan Question
+	id = krg_chi.18
+	title = krg_chi.18.t
+	desc = krg_chi.18.d
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_chi.18"
+	}
+	is_triggered_only = yes
+	option = {
+		name = krg_chi.18.a
+		598 = {
+			add_resistance = 10
+		}
+		597 = {
+			add_resistance = 10
+		}
+		1103 = {
+			add_resistance = 10
+		}
+	}
+}
+
+country_event = {
+	# Glorify Our Heroes
+	id = krg_chi.19
+	title = krg_chi.19.t
+	desc = krg_chi.19.d
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_chi.19"
+	}
+	is_triggered_only = yes
+	option = {
+		name = krg_chi.19.a
+		ai_chance = {
+			base = 50
+		}
+		custom_effect_tooltip = CHI_nationalists_gain_power_tooltip
+		add_popularity = {
+			ideology = revolutionary_republican
+			popularity = -0.04
+		}
+		add_popularity = {
+			ideology = social_democrat
+			popularity = -0.01
+		}
+		add_political_power = -20
+		hidden_effect = {
+			add_to_variable = {
+				CHI_KMT_PWR = 1
+			}
+		}
+	}
+	option = {
+		name = krg_chi.19.b
+		ai_chance = {
+			base = 50
+		}
+		custom_effect_tooltip = CHI_federalists_gain_power_tooltip
+		add_popularity = {
+			ideology = social_democrat
+			popularity = -0.01
+		}
+		add_popularity = {
+			ideology = revolutionary_republican
+			popularity = -0.04
+		}
+		hidden_effect = {
+			add_to_variable = {
+				CHI_FED_PWR = 1
+			}
+		}
+	}
+}
+
+country_event = {
+	# Grand Demobilization - Event Chain TBD
+	id = krg_chi.20
+	title = krg_chi.20.t
+	desc = krg_chi.20.d
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_chi.20"
+	}
+	is_triggered_only = yes
+	option = {
+		name = krg_chi.20.a
+		swap_ideas = {
+			remove_idea = KRG_limited_conscription
+			add_idea = KRG_volunteer_only
+		}
+	}
+}
+
+country_event = {
+	# Stabilize Prices - Event Chain TBD
+	id = krg_chi.21
+	title = krg_chi.21.t
+	desc = krg_chi.21.d
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_chi.21"
+	}
+	is_triggered_only = yes
+	option = {
+		name = krg_chi.21.a
+	}
+}
+
+country_event = {
+	# Transitional Tax Cut - Effects TBD
+	id = krg_chi.22
+	title = krg_chi.22.t
+	desc = krg_chi.22.d
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_chi.22"
+	}
+	is_triggered_only = yes
+	option = {
+		name = krg_chi.22.a
+		ai_chance = {
+			base = 50
+		}
+		custom_effect_tooltip = CHI_nationalists_gain_power_tooltip
+		add_popularity = {
+			ideology = revolutionary_republican
+			popularity = 0.01
+		}
+		every_owned_state = {
+			if = {
+				limit = {
+					has_resistance = yes
+				}
+				add_resistance = 5
+				else = {
+					effect_tooltip = {
+						add_resistance = 5
+					}
+					hidden_effect = {
+						set_resistance = 5
+					}
+				}
+			}
+		}
+		hidden_effect = {
+			add_to_variable = {
+				CHI_KMT_PWR = 1
+			}
+		}
+	}
+	option = {
+		name = krg_chi.22.b
+		ai_chance = {
+			base = 50
+		}
+		custom_effect_tooltip = CHI_federalists_gain_power_tooltip
+		add_popularity = {
+			ideology = social_democrat
+			popularity = 0.01
+		}
+		hidden_effect = {
+			add_to_variable = {
+				CHI_FED_PWR = 1
+			}
+		}
+	}
+}
+
+country_event = {
+	# Establish China Welfare Institute
+	id = krg_chi.23
+	title = krg_chi.23.t
+	desc = krg_chi.23.d
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_chi.23"
+	}
+	is_triggered_only = yes
+	option = {
+		name = krg_chi.23.a
+	}
+}
+
+country_event = {
+	# Uniting the Long Divided
+	id = krg_chi.24
+	title = krg_chi.24.t
+	desc = krg_chi.24.d
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_chi.24"
+	}
+	is_triggered_only = yes
+	option = {
+		name = krg_chi.24.a
+	}
+}
+
+### Constituent Assembly Event ###
+country_event = {
+	# Constitutional Convention begins
+	id = krg_chi_pol.1
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event krg_chi_pol.1 FROM = [From.GetName]"
+	}
+	title = krg_chi_pol.1.t
+	desc = krg_chi_pol.1.d
+	fire_only_once = yes
+	is_triggered_only = yes
+	option = {
+		name = krg_chi_pol.1.a
+		CHI = {
+			country_event = {
+				id = krg_chi_pol.2
+				hours = 6
+			}
+		}
+	}
+}
+
+country_event = {
+	# Constituent Assembly - Framework
+	id = krg_chi_pol.2
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event krg_chi_pol.2 FROM = [From.GetName]"
+	}
+	title = krg_chi_pol.2.t
+	desc = krg_chi_pol.2.d
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = krg_chi_pol.2.a
+		CHI = {
+			country_event = {
+				id = krg_chi_pol.3
+				hours = 6
+			}
+		}
+	}
+}
+
+country_event = {
+	# Constituent Assembly - Principles
+	id = krg_chi_pol.3
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event krg_chi_pol.3 FROM = [From.GetName]"
+	}
+	title = krg_chi_pol.3.t
+	desc = krg_chi_pol.3.d
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = krg_chi_pol.3.a
+		ai_chance = {
+			base = 50
+			modifier = {
+				has_game_rule = {
+					rule = CHI_PRESIDENTAL_ELECTION
+					option = CHI_FED
+				}
+				factor = 1000
+			}
+		}
+		custom_effect_tooltip = CHI_federalists_gain_power_tooltip
+		add_popularity = {
+			ideology = social_democrat
+			popularity = 0.01
+		}
+		CHI = {
+			country_event = {
+				id = krg_chi_pol.4
+				hours = 6
+			}
+		}
+		hidden_effect = {
+			add_to_variable = {
+				CHI_FED_PWR = 1
+			}
+		}
+	}
+	option = {
+		name = krg_chi_pol.3.b
+		ai_chance = {
+			base = 50
+			modifier = {
+				has_game_rule = {
+					rule = CHI_PRESIDENTAL_ELECTION
+					option = CHI_KMT
+				}
+				factor = 1000
+			}
+		}
+		custom_effect_tooltip = CHI_nationalists_gain_power_tooltip
+		add_popularity = {
+			ideology = revolutionary_republican
+			popularity = 0.01
+		}
+		CHI = {
+			country_event = {
+				id = krg_chi_pol.4
+				hours = 6
+			}
+		}
+		hidden_effect = {
+			add_to_variable = {
+				CHI_KMT_PWR = 1
+			}
+		}
+	}
+}
+
+country_event = {
+	# Constituent Assembly - Executive
+	id = krg_chi_pol.4
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event krg_chi_pol.4 FROM = [From.GetName]"
+	}
+	title = krg_chi_pol.4.t
+	desc = krg_chi_pol.4.d
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = krg_chi_pol.4.a
+		ai_chance = {
+			base = 50
+			modifier = {
+				has_game_rule = {
+					rule = CHI_PRESIDENTAL_ELECTION
+					option = CHI_FED
+				}
+				factor = 1000
+			}
+		}
+		custom_effect_tooltip = CHI_federalists_gain_power_tooltip
+		add_popularity = {
+			ideology = social_democrat
+			popularity = 0.01
+		}
+		CHI = {
+			country_event = {
+				id = krg_chi_pol.5
+				hours = 6
+			}
+		}
+		hidden_effect = {
+			add_to_variable = {
+				CHI_FED_PWR = 1
+			}
+		}
+	}
+	option = {
+		name = krg_chi_pol.4.b
+		ai_chance = {
+			base = 50
+			modifier = {
+				has_game_rule = {
+					rule = CHI_PRESIDENTAL_ELECTION
+					option = CHI_KMT
+				}
+				factor = 1000
+			}
+		}
+		custom_effect_tooltip = CHI_nationalists_gain_power_tooltip
+		add_popularity = {
+			ideology = revolutionary_republican
+			popularity = 0.01
+		}
+		CHI = {
+			country_event = {
+				id = krg_chi_pol.5
+				hours = 6
+			}
+		}
+		hidden_effect = {
+			add_to_variable = {
+				CHI_KMT_PWR = 1
+			}
+		}
+	}
+}
+
+country_event = {
+	# Constituent Assembly - Legislative
+	id = krg_chi_pol.5
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event krg_chi_pol.5 FROM = [From.GetName]"
+	}
+	title = krg_chi_pol.5.t
+	desc = krg_chi_pol.5.d
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = krg_chi_pol.5.a
+		ai_chance = {
+			base = 50
+			modifier = {
+				has_game_rule = {
+					rule = CHI_PRESIDENTAL_ELECTION
+					option = CHI_FED
+				}
+				factor = 1000
+			}
+		}
+		custom_effect_tooltip = CHI_federalists_gain_power_tooltip
+		add_popularity = {
+			ideology = social_democrat
+			popularity = 0.01
+		}
+		CHI = {
+			country_event = {
+				id = krg_chi_pol.6
+				hours = 6
+			}
+		}
+		hidden_effect = {
+			add_to_variable = {
+				CHI_FED_PWR = 1
+			}
+		}
+	}
+	option = {
+		name = krg_chi_pol.5.b
+		ai_chance = {
+			base = 50
+			modifier = {
+				has_game_rule = {
+					rule = CHI_PRESIDENTAL_ELECTION
+					option = CHI_KMT
+				}
+				factor = 1000
+			}
+		}
+		custom_effect_tooltip = CHI_nationalists_gain_power_tooltip
+		add_popularity = {
+			ideology = revolutionary_republican
+			popularity = 0.01
+		}
+		CHI = {
+			country_event = {
+				id = krg_chi_pol.6
+				hours = 6
+			}
+		}
+		hidden_effect = {
+			add_to_variable = {
+				CHI_KMT_PWR = 1
+			}
+		}
+	}
+}
+
+country_event = {
+	# Constituent Assembly - Judiciary
+	id = krg_chi_pol.6
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event krg_chi_pol.6 FROM = [From.GetName]"
+	}
+	title = krg_chi_pol.6.t
+	desc = krg_chi_pol.6.d
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = krg_chi_pol.6.a
+		ai_chance = {
+			base = 50
+			modifier = {
+				has_game_rule = {
+					rule = CHI_PRESIDENTAL_ELECTION
+					option = CHI_FED
+				}
+				factor = 1000
+			}
+		}
+		custom_effect_tooltip = CHI_federalists_gain_power_tooltip
+		add_popularity = {
+			ideology = social_democrat
+			popularity = 0.01
+		}
+		CHI = {
+			country_event = {
+				id = krg_chi_pol.7
+				hours = 6
+			}
+		}
+		hidden_effect = {
+			add_to_variable = {
+				CHI_FED_PWR = 1
+			}
+		}
+	}
+	option = {
+		name = krg_chi_pol.6.b
+		ai_chance = {
+			base = 50
+			modifier = {
+				has_game_rule = {
+					rule = CHI_PRESIDENTAL_ELECTION
+					option = CHI_KMT
+				}
+				factor = 1000
+			}
+		}
+		custom_effect_tooltip = CHI_nationalists_gain_power_tooltip
+		add_popularity = {
+			ideology = revolutionary_republican
+			popularity = 0.01
+		}
+		CHI = {
+			country_event = {
+				id = krg_chi_pol.7
+				hours = 6
+			}
+		}
+		hidden_effect = {
+			add_to_variable = {
+				CHI_KMT_PWR = 1
+			}
+		}
+	}
+}
+
+country_event = {
+	# Constituent Assembly - Control
+	id = krg_chi_pol.7
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event krg_chi_pol.7 FROM = [From.GetName]"
+	}
+	title = krg_chi_pol.7.t
+	desc = krg_chi_pol.7.d
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = krg_chi_pol.7.a
+		ai_chance = {
+			base = 50
+			modifier = {
+				has_game_rule = {
+					rule = CHI_PRESIDENTAL_ELECTION
+					option = CHI_FED
+				}
+				factor = 1000
+			}
+		}
+		custom_effect_tooltip = CHI_federalists_gain_power_tooltip
+		add_popularity = {
+			ideology = social_democrat
+			popularity = 0.01
+		}
+		CHI = {
+			country_event = {
+				id = krg_chi_pol.8
+				hours = 6
+			}
+		}
+		hidden_effect = {
+			add_to_variable = {
+				CHI_FED_PWR = 1
+			}
+		}
+	}
+	option = {
+		name = krg_chi_pol.7.b
+		ai_chance = {
+			base = 50
+			modifier = {
+				has_game_rule = {
+					rule = CHI_PRESIDENTAL_ELECTION
+					option = CHI_KMT
+				}
+				factor = 1000
+			}
+		}
+		custom_effect_tooltip = CHI_nationalists_gain_power_tooltip
+		add_popularity = {
+			ideology = revolutionary_republican
+			popularity = 0.01
+		}
+		CHI = {
+			country_event = {
+				id = krg_chi_pol.8
+				hours = 6
+			}
+		}
+		hidden_effect = {
+			add_to_variable = {
+				CHI_KMT_PWR = 1
+			}
+		}
+	}
+}
+
+country_event = {
+	# Constituent Assembly - Examination
+	id = krg_chi_pol.8
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event krg_chi_pol.8 FROM = [From.GetName]"
+	}
+	title = krg_chi_pol.8.t
+	desc = krg_chi_pol.8.d
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = krg_chi_pol.8.a
+		ai_chance = {
+			base = 50
+			modifier = {
+				has_game_rule = {
+					rule = CHI_PRESIDENTAL_ELECTION
+					option = CHI_FED
+				}
+				factor = 1000
+			}
+		}
+		custom_effect_tooltip = CHI_federalists_gain_power_tooltip
+		add_popularity = {
+			ideology = social_democrat
+			popularity = 0.01
+		}
+		CHI = {
+			country_event = {
+				id = krg_chi_pol.9
+				hours = 6
+			}
+		}
+		hidden_effect = {
+			add_to_variable = {
+				CHI_FED_PWR = 1
+			}
+		}
+	}
+	option = {
+		name = krg_chi_pol.8.b
+		ai_chance = {
+			base = 50
+			modifier = {
+				has_game_rule = {
+					rule = CHI_PRESIDENTAL_ELECTION
+					option = CHI_KMT
+				}
+				factor = 1000
+			}
+		}
+		custom_effect_tooltip = CHI_nationalists_gain_power_tooltip
+		add_popularity = {
+			ideology = revolutionary_republican
+			popularity = 0.01
+		}
+		CHI = {
+			country_event = {
+				id = krg_chi_pol.9
+				hours = 6
+			}
+		}
+		hidden_effect = {
+			add_to_variable = {
+				CHI_KMT_PWR = 1
+			}
+		}
+	}
+}
+
+country_event = {
+	# Constituent Assembly - Structure of Power
+	id = krg_chi_pol.9
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event krg_chi_pol.9 FROM = [From.GetName]"
+	}
+	title = krg_chi_pol.9.t
+	desc = krg_chi_pol.9.d
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = krg_chi_pol.9.a
+		ai_chance = {
+			base = 50
+			modifier = {
+				has_game_rule = {
+					rule = CHI_PRESIDENTAL_ELECTION
+					option = CHI_FED
+				}
+				factor = 1000
+			}
+		}
+		custom_effect_tooltip = CHI_federalists_gain_power_tooltip
+		add_popularity = {
+			ideology = social_democrat
+			popularity = 0.01
+		}
+		CHI = {
+			country_event = {
+				id = krg_chi_pol.10
+				hours = 6
+			}
+		}
+		hidden_effect = {
+			add_to_variable = {
+				CHI_FED_PWR = 1
+			}
+		}
+	}
+	option = {
+		name = krg_chi_pol.9.b
+		ai_chance = {
+			base = 50
+			modifier = {
+				has_game_rule = {
+					rule = CHI_PRESIDENTAL_ELECTION
+					option = CHI_KMT
+				}
+				factor = 1000
+			}
+		}
+		custom_effect_tooltip = CHI_nationalists_gain_power_tooltip
+		add_popularity = {
+			ideology = revolutionary_republican
+			popularity = 0.01
+		}
+		CHI = {
+			country_event = {
+				id = krg_chi_pol.10
+				hours = 6
+			}
+		}
+		hidden_effect = {
+			add_to_variable = {
+				CHI_KMT_PWR = 1
+			}
+		}
+	}
+}
+
+country_event = {
+	# Constituent Assembly - The Capital
+	id = krg_chi_pol.10
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event krg_chi_pol.10 FROM = [From.GetName]"
+	}
+	title = krg_chi_pol.10.t
+	desc = krg_chi_pol.10.d
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = krg_chi_pol.10.a
+		trigger = {
+			owns_state = 743
+		}
+		if = {
+			limit = {
+				check_variable = {
+					CHI_FED_PWR > CHI_KMT_PWR
+				}
+			}
+			CHI = {
+				country_event = {
+					id = krg_chi_pol.11
+					hours = 6
+				}
+			}
+		}
+		else = {
+			CHI = {
+				country_event = {
+					id = krg_chi_pol.11
+					hours = 6
+				}
+			}
+		}
+		set_capital = {
+			state = 743
+		}
+	}
+}
+
+country_event = {
+	# End of the Constituent Assembly, ready for the election - CZGP victory
+	id = krg_chi_pol.11
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event krg_chi_pol.11 FROM = [From.GetName]"
+	}
+	title = krg_chi_pol.11.t
+	desc = krg_chi_pol.11.d
+	fire_only_once = yes
+	is_triggered_only = yes
+	option = {
+		name = krg_chi_pol.11.a
+		add_political_power = 100
+		CHI = {
+			country_event = {
+				id = krg_chi_pol.13
+				hours = 6
+			}
+		}
+	}
+}
+
+country_event = {
+	# End of the Constituent Assembly, ready for the election - KMT victory
+	id = krg_chi_pol.12
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event krg_chi_pol.11 FROM = [From.GetName]"
+	}
+	title = krg_chi_pol.12.t
+	desc = krg_chi_pol.12.d
+	fire_only_once = yes
+	is_triggered_only = yes
+	option = {
+		name = krg_chi_pol.12.a
+		add_political_power = 100
+		CHI = {
+			country_event = {
+				id = krg_chi_pol.13
+				hours = 6
+			}
+		}
+	}
+}
+
+country_event = {
+	# First Election Result
+	id = krg_chi_pol.13
+	title = krg_chi_pol.13.t
+	desc = krg_chi_pol.13.d
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event krg_chi_pol.13 FROM = [From.GetName]"
+	}
+	option = {
+		# Federalist - Chen Qiyou
+		name = krg_chi_pol.13.a
+		trigger = {
+			check_variable = {
+				CHI_FED_PWR > CHI_KMT_PWR
+			}
+		}
+		ai_chance = {
+			base = 100
+		}
+		set_politics = {
+			ruling_party = social_democrat
+			election_frequency = 48
+			elections_allowed = yes
+		}
+		clear_variable = CHI_FED_PWR
+		clear_variable = CHI_KMT_PWR
+	}
+	option = {
+		# Nationalist - Soong Ching-Ling
+		name = krg_chi_pol.13.b
+		trigger = {
+			NOT = {
+				check_variable = {
+					CHI_FED_PWR > CHI_KMT_PWR
+				}
+			}
+		}
+		ai_chance = {
+			base = 100
+		}
+		set_politics = {
+			ruling_party = revolutionary_republican
+			election_frequency = 48
+			elections_allowed = yes
+		}
+		clear_variable = CHI_FED_PWR
+		clear_variable = CHI_KMT_PWR
+	}
+}
+
+#Placeholder Trigger Events#
+country_event = {
+	id = krg_chi_ccw.1000
+	title = krg_chi_ccw.1000.t
+	desc = krg_chi_ccw.1000.d
+	picture = GFX_ce_CHI_guangzhou_government
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_chi_ccw.1000"
+	}
+	is_triggered_only = yes
+	option = {
+		name = krg_chi_ccw.1000.a
+		load_OOB = FNG_southern_warlord_core
+		load_OOB = FNG_southern_warlord_extra
+	}
+	option = {
+		name = krg_chi_ccw.1000.b
+		load_OOB = FNG_southern_warlord_core
+	}
+}
+
+country_event = {
+	id = krg_chi_ccw.1001
+	title = krg_chi_ccw.1001.t
+	desc = krg_chi_ccw.1001.d
+	picture = GFX_ce_CHI_guangzhou_government
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_chi_ccw.1001"
+	}
+	is_triggered_only = yes
+	option = {
+		name = krg_chi_ccw.1001.a
+		load_OOB = CHI_NAJUA_core
+		load_OOB = CHI_NAJUA_extra
+	}
+	option = {
+		name = krg_chi_ccw.1001.b
+		load_OOB = CHI_NAJUA_core
+	}
+}
+
+country_event = {
+	id = krg_chi_dip.0
+	title = krg_chi_dip.0.t
+	desc = krg_chi_dip.0.d
+	picture = GFX_AST_vietnam
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_chi_dip.0"
+	}
+	is_triggered_only = yes
+	option = {
+		name = krg_chi_dip.0.a
+		add_ideas = {
+			CHI_vietnam_expeditonary_army
+		}
+	}
+}
+
+news_event = {
+	id = krg_chi_news.0
+	title = krg_chi_news.0.t
+	desc = krg_chi_news.0.d
+	picture = GFX_ne_JAP_shimonoseki
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_chi_news.0"
+	}
+	is_triggered_only = yes
+
+	major = yes
+	option = {
+		name = krg_chi_news.0.a
+	}
+}

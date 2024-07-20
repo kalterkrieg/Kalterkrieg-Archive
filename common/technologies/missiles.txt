@@ -1,0 +1,706 @@
+@1948 = 1
+@1952 = 6
+@1956 = 11
+@1960 = 16
+
+technologies = {
+
+	guided_missiles_dummy_technology = {
+
+		allow = {
+			always = no
+		}
+
+		start_year = 1948
+
+		path = {
+			leads_to_tech = ballistic_missile_1
+			research_cost_coeff = 1
+		}
+		path = {
+			leads_to_tech = surface_to_air_1	
+			research_cost_coeff = 1
+		}
+		research_cost = 1 
+		folder = {
+			name = missile_folder
+			position = { x = @1948 y = 7.5}
+		}
+	}
+	
+	ballistic_missile_1 = {
+
+		enable_equipments = {
+			guided_missile_equipment_2
+		}
+
+		path = {
+			leads_to_tech = ballistic_missile_1_upgrade
+			research_cost_coeff = 1
+		}
+
+		path = {
+			leads_to_tech = anti_ship_missile_1
+			research_cost_coeff = 1
+		}
+
+		path = {
+			leads_to_tech = cruise_missile_1
+			research_cost_coeff = 1
+		}
+
+		dependencies = {
+			radar_3 = 1
+		}
+
+		research_cost = 2.5
+		start_year = 1952
+		folder = {
+			name = missile_folder
+			position = { x = @1952 y = 6 }
+		}
+			
+		categories = {
+			missile_tech
+			ballistic_missile_tech
+		}
+
+	}
+
+	anti_ship_missile_1 = {
+		
+		enable_equipment_modules = {
+			ship_based_SAM_1
+			anti_ship_missiles_1
+		}
+
+		dependencies = {
+			radar_3 = 1
+		}
+		
+		research_cost = 2
+		start_year = 1954
+		folder = {
+			name = missile_folder
+			position = { x = 8 y = 7 }
+		}
+				
+		categories = {
+			missile_tech
+			ballistic_missile_tech
+		}
+
+	}
+
+	cruise_missile_1 = {
+		
+		category_missile = { ##this is here until I can work out what to do 
+			air_bombing = 0.05
+		}
+		## add ship based cruise missiles 
+
+		dependencies = {
+			radar_3 = 1
+		}
+		
+		research_cost = 2
+		start_year = 1954
+		folder = {
+			name = missile_folder
+			position = { x = 8 y = 5 }
+		}
+				
+		categories = {
+			missile_tech
+			ballistic_missile_tech
+		}
+
+	}
+
+	ballistic_missile_1_upgrade = {
+		
+		category_missile = {
+			air_bombing = 0.1
+			air_range = 0.1
+			air_agility = 0.05
+			maximum_speed = 0.1
+		}
+
+		path = {
+			leads_to_tech = ballistic_missile_2
+			research_cost_coeff = 1
+		}
+
+		dependencies = {
+			radar_4 = 1
+		}
+		
+		research_cost = 2.5
+		start_year = 1956
+		folder = {
+			name = missile_folder
+			position = { x = @1956 y = 6 }
+		}
+				
+		categories = {
+			missile_tech
+			ballistic_missile_tech
+		}
+
+	}
+
+	ballistic_missile_2 = {
+
+		enable_equipments = {
+			guided_missile_equipment_3
+		}
+
+		path = {
+			leads_to_tech = anti_ship_missile_2
+			research_cost_coeff = 1
+		}
+
+		path = {
+			leads_to_tech = cruise_missile_2
+			research_cost_coeff = 1
+		}
+
+		dependencies = {
+			radar_5 = 1
+		}
+	
+		research_cost = 2.5
+		start_year = 1960
+		folder = {
+			name = missile_folder
+			position = { x = 15 y = 6 }
+		}
+				
+		categories = {
+			missile_tech
+			ballistic_missile_tech
+		}
+
+	}
+
+	anti_ship_missile_2 = {
+		
+		enable_equipment_modules = {
+			ship_based_SAM_2
+			anti_ship_missiles_2
+		}
+
+		dependencies = {
+			radar_5 = 1
+		}
+		
+		research_cost = 2
+		start_year = 1962
+		folder = {
+			name = missile_folder
+			position = { x = 17 y = 7 }
+		}
+				
+		categories = {
+			missile_tech
+			ballistic_missile_tech
+		}
+
+	}
+
+	cruise_missile_2 = {
+		
+		category_missile = { ##this is here until I can work out what to do 
+			air_bombing = 0.05
+		}
+		## add ship based cruise missiles 
+
+		dependencies = {
+			radar_5 = 1
+		}
+		
+		research_cost = 2
+		start_year = 1962
+		folder = {
+			name = missile_folder
+			position = { x = 17 y = 5 }
+		}
+				
+		categories = {
+			missile_tech
+			ballistic_missile_tech
+		}
+
+	}
+
+	air_to_air_1 = {
+
+		category_fighter = {
+			air_attack = 0.05
+			build_cost_ic = 0.05
+		}
+
+		category_heavy_fighter = {
+			air_attack = 0.05
+			build_cost_ic = 0.05
+		}
+
+		path = {
+			leads_to_tech = air_to_air_1_upgrade
+			research_cost_coeff = 1
+		}
+
+		dependencies = {
+			radar_3 = 1
+		}
+
+		research_cost = 2.5
+		start_year = 1952
+		folder = {
+			name = missile_folder
+			position = { x = @1952 y = 11 }
+		}
+			
+		categories = {
+			missile_tech
+			air_to_air_tech
+		}
+
+	}
+
+	air_to_air_1_upgrade = {
+		
+		category_fighter = {
+			air_attack = 0.1
+			build_cost_ic = 0.05
+		}
+
+		category_heavy_fighter = {
+			air_attack = 0.1
+			build_cost_ic = 0.05
+		}
+
+		path = {
+			leads_to_tech = air_to_air_2
+			research_cost_coeff = 1
+		}
+
+		path = {
+			leads_to_tech = sraam_1
+			research_cost_coeff = 1
+		}
+
+
+		dependencies = {
+			radar_4 = 1
+		}
+		
+		research_cost = 2.5
+		start_year = 1956
+		folder = {
+			name = missile_folder
+			position = { x = @1956 y = 11 }
+		}
+				
+		categories = {
+			missile_tech
+			air_to_air_tech
+		}
+
+	}
+
+	air_to_air_2 = {
+
+		category_fighter = {
+			air_attack = 0.1
+			build_cost_ic = 0.05
+		}
+		
+		category_heavy_fighter = {
+			air_attack = 0.1
+			build_cost_ic = 0.05
+		}
+
+		path = {
+			leads_to_tech = sraam_2
+			research_cost_coeff = 1
+		}
+
+		dependencies = {
+			radar_5 = 1
+		}
+	
+		research_cost = 2.5
+		start_year = 1960
+		folder = {
+			name = missile_folder
+			position = { x = 15 y = 11 }
+		}
+				
+		categories = {
+			missile_tech
+			air_to_air_tech
+		}
+
+	}
+
+	surface_to_air_1 = {
+
+		enable_equipments = {
+			SAM_equipment_1
+		}
+
+		static_anti_air_damage_factor = 0.15
+		static_anti_air_hit_chance_factor = 0.25
+		production_cost_anti_air_building_factor = 0.2
+		
+		path = {
+			leads_to_tech = surface_to_air_1_upgrade
+			research_cost_coeff = 1
+		}
+		path = {
+			leads_to_tech = anti_ship_missile_1
+			research_cost_coeff = 1
+		}
+
+		dependencies = {
+			radar_3 = 1
+		}
+		
+		research_cost = 2.5
+		start_year = 1952
+		folder = {
+			name = missile_folder
+			position = { x = @1952 y = 9 }
+		}
+		
+		
+		categories = {
+			missile_tech
+			artillery
+			surface_to_air_tech
+		}
+
+	}
+
+	surface_to_air_1_upgrade = {
+
+		SAM = {
+		 	air_attack = 0.1
+		}
+		SAM_brigade = {
+			air_attack = 0.1
+	    }
+		mot_SAM_brigade = {
+			air_attack = 0.1
+	    }
+
+
+		static_anti_air_damage_factor = 0.05
+		static_anti_air_hit_chance_factor = 0.05
+		production_cost_anti_air_building_factor = 0.05
+
+
+		path = {
+			leads_to_tech = surface_to_air_2
+			research_cost_coeff = 1
+		}
+
+		dependencies = {
+			radar_4 = 1
+		}
+
+		
+		research_cost = 2.5
+		start_year = 1956
+		folder = {
+			name = missile_folder
+			position = { x = @1956 y = 9 }
+		}
+		
+		
+		categories = {
+			missile_tech
+			artillery
+			surface_to_air_tech
+		}
+
+	}
+
+	surface_to_air_2 = {
+
+		enable_equipments = {
+			SAM_equipment_2
+		}
+
+		static_anti_air_damage_factor = 0.05
+		static_anti_air_hit_chance_factor = 0.05
+		production_cost_anti_air_building_factor = 0.05
+
+		path = {
+			leads_to_tech = anti_ship_missile_2
+			research_cost_coeff = 1
+		}
+
+		dependencies = {
+			radar_5 = 1
+		}
+		
+		research_cost = 2.5
+		start_year = 1960
+		folder = {
+			name = missile_folder
+			position = { x = 15 y = 9E }
+		}
+		
+		categories = {
+			missile_tech
+			surface_to_air_tech
+			artillery
+		}
+
+	}
+
+	infrared_experiments = {
+
+		land_night_attack = 0.05
+		
+		# path = {
+		# 	leads_to_tech = nightvision
+		# 	research_cost_coeff = 1
+		# }
+
+		path = {
+			leads_to_tech = infrared_2
+			research_cost_coeff = 1
+		}
+
+		path = {
+			leads_to_tech = sraam_1
+			research_cost_coeff = 1
+		}
+
+		dependencies = {
+			radar_3 = 1
+		}
+
+		research_cost = 2.5
+		start_year = 1954
+		folder = {
+			name = missile_folder
+			position = { x = 8 y = 14 }
+		}
+		
+		categories = {
+			missile_tech
+			infrared_tech
+		}
+	}
+
+	sraam_1 = {
+
+		air_night_penalty = -0.05
+
+		category_fighter = {
+			air_attack = 0.025
+			build_cost_ic = 0.025
+		}
+
+		category_heavy_fighter = {
+			air_attack = 0.025
+			build_cost_ic = 0.025
+		}
+
+		dependencies = {
+			radar_4 = 1
+		}
+
+		research_cost = 2
+		start_year = 1957
+		folder = {
+			name = missile_folder
+			position = { x = 12 y = 12 }
+		}
+		
+		categories = {
+			missile_tech
+			infrared_tech
+		}
+	}
+
+	infrared_2 = {
+
+		land_night_attack = 0.05
+
+		path = {
+			leads_to_tech = sraam_2
+			research_cost_coeff = 1
+		}
+
+		dependencies = {
+			radar_5 = 1
+		}
+
+		research_cost = 2.5
+		start_year = 1958
+		folder = {
+			name = missile_folder
+			position = { x = 14 y = 14 }
+		}
+		
+		categories = {
+			missile_tech
+			infrared_tech
+		}
+	}
+
+	sraam_2 = {
+
+		air_night_penalty = -0.05
+
+		category_fighter = {
+			air_attack = 0.05
+			build_cost_ic = 0.025
+		}
+
+		category_heavy_fighter = {
+			air_attack = 0.05
+			build_cost_ic = 0.025
+		}
+
+		dependencies = {
+			radar_5 = 1
+		}
+
+		research_cost = 2
+		start_year = 1961
+		folder = {
+			name = missile_folder
+			position = { x = 16 y = 12 }
+		}
+		
+		categories = {
+			missile_tech
+			infrared_tech
+		}
+	}
+
+	optical_guidance = {
+		
+		path = {
+			leads_to_tech = antitank_missile_1
+			research_cost_coeff = 1
+		}
+
+		dependencies = {
+			radar_4 = 1
+		}
+
+		research_cost = 2.5
+		start_year = 1956
+		folder = {
+			name = missile_folder
+			position = { x = 11 y = 2 }
+		}
+		
+		categories = {
+			missile_tech
+			anti_tank
+		}
+	}
+
+	antitank_missile_1 = {
+		
+		enable_equipments = {
+			anti_tank_equipment_3
+		}
+
+		dependencies = {
+			ballistic_missile_2 = 1
+			optical_guidance = 1
+		}
+
+		on_research_complete = {
+			hidden_effect = {
+				set_technology = {
+					atgm_dummy_technology = 1
+					popup = no
+				}
+			}
+		}
+
+		path = {
+			leads_to_tech = antitank_missile_1_upgrade
+			research_cost_coeff = 1
+		}
+
+		dependencies = {
+			radar_5 = 1
+		}
+
+		research_cost = 2.5
+		start_year = 1960
+		folder = {
+			name = missile_folder
+			position = { x = 15 y = 2 }
+		}
+
+		folder = {
+			name = artillery_folder
+			position = { x = 21 y = 9 }
+		}
+		
+		categories = {
+			missile_tech
+			anti_tank
+		}
+	}
+
+	antitank_missile_1_upgrade = {
+
+		on_research_complete = {
+			hidden_effect = {
+				set_technology = {
+					atgm_dummy_upgrade_technology = 1
+					popup = no
+				}
+			}
+		}
+
+		dependencies = {
+			radar_5 = 1
+		}
+
+		anti_tank = {
+			hard_attack = 0.1
+			ap_attack = 0.2
+		}
+		anti_tank_brigade = {
+				hard_attack = 0.1
+				ap_attack = 0.2
+		}
+		mot_anti_tank_brigade = {
+				hard_attack = 0.1
+				ap_attack = 0.2
+		}
+
+		research_cost = 2.5
+		start_year = 1962
+		folder = {
+			name = missile_folder
+			position = { x = 17 y = 2 }
+		}
+
+		folder = {
+			name = artillery_folder
+			position = { x = 21 y = 11 }
+		}
+		
+		categories = {
+			missile_tech
+			anti_tank
+		}
+	}
+
+}
+	

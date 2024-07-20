@@ -1,0 +1,590 @@
+
+3_acw = {
+	set_global_flag = ACW_start
+	set_global_flag = ACW_ongoing
+	hidden_effect = {
+		ENT_accord_set_leader = yes
+	}
+	NEE = {
+		create_faction = "American Reclamation Alliance"
+		add_to_faction = CAL
+		add_to_faction = GLG
+		declare_war_on = {
+			target = TEX
+			type = annex_everything
+		}
+		mark_focus_tree_layout_dirty = yes
+		complete_national_focus = NEE_ACW_start
+		for_each_scope_loop = {
+			array = NEE_sabotaged_states
+			
+			state_event = {
+				trigger_for = controller
+				id = nee.42
+				days = 7
+				random = 500
+			}
+		}
+		set_country_flag = ACW_lend_lease_receiver
+	}
+	TEX = {
+		if = {
+			limit = {
+				has_completed_focus = TEX_1952_generic_expand_peacetime_reserves
+			}
+			load_oob = TEX_peacetime_reserves
+		}
+		set_country_flag = ACW_lend_lease_receiver
+	}
+	GLG = {
+		add_to_war = { 
+			targeted_alliance = NEE 
+			enemy = TEX 
+			hostility_reason = asked_to_join
+		}
+		set_country_flag = ACW_lend_lease_receiver
+	}
+	CAL = {
+		add_to_war = { 
+			targeted_alliance = NEE 
+			enemy = TEX 
+			hostility_reason = asked_to_join
+		}
+		set_country_flag = ACW_lend_lease_receiver
+	}
+	CAN = {
+		set_country_flag = CAN_ACW_Involvement_Minimal
+	}
+	GER = {
+		set_country_flag = GER_ACW_Involvement_Minimal
+	}
+	set_global_flag = Accord_ACW_Involvement_Minimal
+	set_global_flag = Reichspakt_ACW_Involvement_Minimal
+	set_global_flag = ACW_Escalation_Potential_Minimal
+	hidden_effect = {
+		news_event = {
+			id = worldnews.57
+		}	
+	}
+	hidden_effect = {
+		JAP = {
+			country_event = {
+				id = krg_acw_admin.1
+				days = 180
+			}
+			country_event = {
+				id = krg_acw_admin.2
+				days = 365
+			}
+			country_event = {
+				id = krg_acw_admin.3
+				days = 540
+			}
+		}
+	}
+	set_variable = {
+		global.ACW_involvement_level = 1
+	}
+	hidden_effect = {
+		TEX = {
+			add_state_claim = 788 #PSA states
+			add_state_claim = 929
+			add_state_claim = 931
+			add_state_claim = 793
+			add_state_claim = 387
+			add_state_claim = 380
+			add_state_claim = 377
+			add_state_claim = 386
+			add_state_claim = 385
+			add_state_claim = 379
+			add_state_claim = 950
+			add_state_claim = 378
+			add_state_claim = 825
+			add_state_claim = 949
+			add_state_claim = 394 #GLG states
+			add_state_claim = 893
+			add_state_claim = 393
+			add_state_claim = 359 #NEE states
+			add_state_claim = 358
+			add_state_claim = 822
+			add_state_claim = 798
+			add_state_claim = 892
+			add_state_claim = 797
+			add_state_claim = 799
+			add_state_claim = 800
+			add_state_claim = 357
+		}
+	}
+}
+
+ara_victory = {
+	clr_global_flag = ACW_ongoing
+	NEE = {
+		white_peace = TEX
+		transfer_state = 361
+		transfer_state = 362
+		transfer_state = 360
+		transfer_state = 894
+		transfer_state = 795
+		transfer_state = 363
+		transfer_state = 364
+		transfer_state = 365
+		transfer_state = 366
+		transfer_state = 367
+		transfer_state = 370
+		transfer_state = 368
+		set_state_controller = 361
+		set_state_controller = 362
+		set_state_controller = 360
+		set_state_controller = 894
+		set_state_controller = 795
+		set_state_controller = 363
+		set_state_controller = 364
+		set_state_controller = 365
+		set_state_controller = 366
+		set_state_controller = 367
+		set_state_controller = 370
+		set_state_controller = 368
+		if = {
+			limit = {
+				is_ai = no
+			}
+			country_event = {
+				id = krg_acw.40
+				days = 5
+			}
+		}
+	}
+	GLG = {
+		transfer_state = 261
+		transfer_state = 396
+		transfer_state = 395
+		transfer_state = 392
+		transfer_state = 391
+		transfer_state = 373
+		transfer_state = 369
+		set_state_controller = 261
+		set_state_controller = 396
+		set_state_controller = 395
+		set_state_controller = 392
+		set_state_controller = 391
+		set_state_controller = 373
+		set_state_controller = 369
+		if = {
+			limit = {
+				is_ai = no
+			}
+			country_event = {
+				id = krg_acw.40
+				days = 5
+			}
+		}
+	}
+	CAL = {
+		transfer_state = 381
+		transfer_state = 382
+		transfer_state = 383
+		transfer_state = 384
+		transfer_state = 388
+		transfer_state = 389
+		transfer_state = 390
+		transfer_state = 374
+		transfer_state = 375
+		transfer_state = 376
+		transfer_state = 792
+		transfer_state = 371
+		transfer_state = 372
+		set_state_controller = 381
+		set_state_controller = 382
+		set_state_controller = 383
+		set_state_controller = 384
+		set_state_controller = 388
+		set_state_controller = 389
+		set_state_controller = 390
+		set_state_controller = 374
+		set_state_controller = 375
+		set_state_controller = 376
+		set_state_controller = 792
+		set_state_controller = 371
+		set_state_controller = 372
+		annex_country = {
+			target = TEX
+		}
+
+
+		country_event = {
+			id = krg_acw.40
+			days = 6
+		}
+		news_event = {
+			id = worldnews.81
+			hours = 6
+		}
+		if = {
+			limit = { has_global_flag = accord_acw_send_volunteers_effect_pass }
+			for_each_scope_loop = {
+				array = global.accord_voting_country_array
+		
+				remove_ideas = Accord_volunteers
+			}
+		}
+	}
+
+	log = "KRG_Event_Logging;3rd ACW - CAL, GLG and NEE Victory;[GetDateText];[ROOT.GetName];[FROM.GetName]"
+	
+}
+
+ara_reunify = {
+	every_state = {
+		limit = {
+			OR = {
+				is_core_of = CAL
+				is_core_of = GLG
+				is_core_of = NEE
+			}
+		}
+		add_core_of = USA
+		remove_core_of = CAL
+		remove_core_of = GLG
+		remove_core_of = NEE
+	
+	}
+	every_state = {
+		limit = {
+			is_core_of = TEX
+		}
+		add_claim_by = USA
+	}
+	CAL = {
+		remove_all_ministers = yes				
+		every_character = {
+			set_nationality = USA
+		}
+	}
+	GLG = {
+		remove_all_ministers = yes
+		every_character = {
+			set_nationality = USA
+		}
+	}
+	NEE = {
+		remove_all_ministers = yes
+		every_character = {
+			set_nationality = USA
+		}
+	}
+	if = {
+		limit = { 
+			ROOT = { tag = CAL }
+		}
+		USA = {
+			annex_country = {
+				target = CAL
+				transfer_troops = yes
+			}
+			annex_country = {
+				target = GLG
+				transfer_troops = yes
+			}
+			annex_country = {
+				target = NEE
+				transfer_troops = yes
+			}
+			hidden_effect = {
+				annex_country = {
+					target = TEX
+					transfer_troops = no
+				}
+			}
+			change_tag_from = CAL
+			inherit_technology = CAL
+		}
+	}
+	else_if = {
+		limit = { 
+			ROOT = { tag = GLG }
+		}
+		USA = {
+
+			annex_country = {
+				target = CAL
+				transfer_troops = yes
+			}
+			annex_country = {
+				target = GLG
+				transfer_troops = yes
+			}
+			annex_country = {
+				target = NEE
+				transfer_troops = yes
+			}
+			hidden_effect = {
+				annex_country = {
+					target = TEX
+					transfer_troops = no
+				}
+			}
+			change_tag_from = GLG
+			inherit_technology = GLG
+		}
+	}
+	else_if = {
+		limit = { 
+			ROOT = { tag = NEE }
+		}
+		USA = {
+			annex_country = {
+				target = CAL
+				transfer_troops = yes
+			}
+			annex_country = {
+				target = GLG
+				transfer_troops = yes
+			}
+			annex_country = {
+				target = NEE
+				transfer_troops = yes
+			}
+			hidden_effect = {
+				annex_country = {
+					target = TEX
+					transfer_troops = no
+				}
+			}
+			change_tag_from = NEE
+			inherit_technology = NEE
+		}
+	}
+	else = {
+		#whut
+	}
+}
+
+GER_lend_lease_effect = {
+	if = {
+		limit = {
+			has_global_flag = ACW_ongoing
+			NOT = {
+				has_global_flag = WK3
+			}
+		}
+		if = {
+			limit = { 
+				has_game_rule = {
+					rule = KRG_WK3_ALLOWED
+					option = KRG_WK3_3ACW_ESCALATION
+				}
+			}
+			random_list = {
+				25 = {
+					GER = {
+						country_event = {
+							id = krg_acw_admin.4
+							days = 28
+						}
+					}
+				}
+				75 = {
+					GER = {
+						country_event = {
+							id = krg_acw_lend_lease.14
+							days = 15
+						}
+					}
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				NEE = {
+					naval_strength_ratio = {
+						tag = TEX
+						ratio = 2.5
+					}
+				}
+			}
+			random_list = {
+				10 = {
+					GER = {
+						country_event = {
+							id = krg_acw_admin.4
+							days = 28
+						}
+					}
+				}
+				90 = {
+					GER = {
+						country_event = {
+							id = krg_acw_lend_lease.14
+							days = 15
+						}
+					}
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				NEE = {
+					naval_strength_ratio = {
+						tag = TEX
+						ratio = 2
+					}
+				}
+			}
+			random_list = {
+				25 = {
+					GER = {
+						country_event = {
+							id = krg_acw_admin.4
+							days = 28
+						}
+					}
+				}
+				75 = {
+					GER = {
+						country_event = {
+							id = krg_acw_lend_lease.14
+							days = 15
+						}
+					}
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				NEE = {
+					naval_strength_ratio = {
+						tag = TEX
+						ratio = 1.75
+					}
+				}
+			}
+			random_list = {
+				35 = {
+					GER = {
+						country_event = {
+							id = krg_acw_admin.4
+							days = 28
+						}
+					}
+				}
+				65 = {
+					GER = {
+						country_event = {
+							id = krg_acw_lend_lease.14
+							days = 15
+						}
+					}
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				NEE = {
+					naval_strength_ratio = {
+						tag = TEX
+						ratio = 1.5
+					}
+				}
+			}
+			random_list = {
+				50 = {
+					GER = {
+						country_event = {
+							id = krg_acw_admin.4
+							days = 28
+						}
+					}
+				}
+				50 = {
+					GER = {
+						country_event = {
+							id = krg_acw_lend_lease.14
+							days = 15
+						}
+					}
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				NEE = {
+					naval_strength_ratio = {
+						tag = TEX
+						ratio = 1.25
+					}
+				}
+			}
+			random_list = {
+				60 = {
+					GER = {
+						country_event = {
+							id = krg_acw_admin.4
+							days = 28
+						}
+					}
+				}
+				40 = {
+					GER = {
+						country_event = {
+							id = krg_acw_lend_lease.14
+							days = 15
+						}
+					}
+				}
+			}
+		}
+		else_if = {
+			limit = {
+				NEE = {
+					naval_strength_ratio = {
+						tag = TEX
+						ratio = 1
+					}
+				}
+			}
+			random_list = {
+				75 = {
+					GER = {
+						country_event = {
+							id = krg_acw_admin.4
+							days = 28
+						}
+					}
+				}
+				25 = {
+					GER = {
+						country_event = {
+							id = krg_acw_lend_lease.14
+							days = 15
+						}
+					}
+				}
+			}
+		}
+		else = {
+			GER = {
+				country_event = {
+					id = krg_acw_admin.4
+					days = 28
+				}
+			}
+		}
+	}
+}
+
+3ACW_WK3_escalation = {
+	if = {
+		limit = { NOT = { has_global_flag = ACW_WK3_escalation } }
+		set_global_flag = ACW_WK3_escalation
+		ENT = {
+			add_to_faction = NEE
+			add_to_faction = CAL
+			add_to_faction = GLG
+		}
+		GER = {
+			add_to_faction = TEX
+			third_weltkrieg = yes
+		}
+	}
+}

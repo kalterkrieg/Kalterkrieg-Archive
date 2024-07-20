@@ -1,0 +1,513 @@
+scripted_gui = {
+	KRG_CAN_parliament = {
+		window_name = "KRG_CAN_parliament_container"
+		context_type = decision_category
+
+		dynamic_lists = {
+			CAN_parl_opp_grid = {
+				array = global.CAN_parl_opp_array
+				index = CAN_parl_main_index
+				change_scope = yes
+				entry_container = CAN_parl_main_entry
+			}
+			CAN_parl_gov_grid = {
+				array = global.CAN_parl_gov_array
+				index = CAN_parl_main_index
+				change_scope = yes
+				entry_container = CAN_parl_main_entry
+			}
+			CAN_parl_member_grid = {
+				array = global.CAN_parl_member_array
+				index = CAN_parl_member_index
+				change_scope = yes
+				entry_container = CAN_parl_member_entry
+			}
+		}
+
+		properties = {
+			CAN_parl_member_icon = {
+				frame = v
+			}
+			CAN_parl_party_icon = {
+				frame = v
+			}
+		}
+	}
+	KRG_CAN_elections = {
+		window_name = "KRG_CAN_elections_container"
+		context_type = decision_category
+
+		triggers = {
+            CAN_elections_caribbean_button_click_visible = {
+                has_country_flag = CAN_canadian_caribbean_provinces
+            }
+			CAN_elections_caribbean_button_click_enabled = {
+                has_country_flag = CAN_canadian_caribbean_provinces
+            }
+			CAN_elections_caribbean_button_disabled_visible = {
+				NOT = { has_country_flag = CAN_canadian_caribbean_provinces }
+			}
+			CAN_elections_caribbean_button_disabled_click_enabled = {
+				always = no
+			}
+        }
+
+		properties = {
+			CAN_election_socdem_bar_gui = {
+				frame = selected_state_election_visual_array^0
+			}
+			CAN_election_lib_bar_gui = {
+				frame = selected_state_election_visual_array^1
+			}
+			CAN_election_con_bar_gui = {
+				frame = selected_state_election_visual_array^2
+			}
+			CAN_election_dominionists_bar_gui = {
+				frame = selected_state_election_visual_array^3
+			}
+		}
+
+		effects = {
+			CAN_elections_ontario_button_click = {
+                set_variable = { CAN_elections_gui_selected_state = 276 }
+				CAN_election_update_viewing_array = yes
+            }
+			CAN_elections_quebec_button_click = {
+                set_variable = { CAN_elections_gui_selected_state = 466 }
+				CAN_election_update_viewing_array = yes
+            }
+			CAN_elections_atlantic_button_click = {
+                set_variable = { CAN_elections_gui_selected_state = 464 }
+				CAN_election_update_viewing_array = yes
+            }
+			CAN_elections_prairie_button_click = {
+                set_variable = { CAN_elections_gui_selected_state = 467 }
+				CAN_election_update_viewing_array = yes
+            }
+			CAN_elections_west_button_click = {
+                set_variable = { CAN_elections_gui_selected_state = 473 }
+				CAN_election_update_viewing_array = yes
+            }
+			CAN_elections_caribbean_button_click = {
+                set_variable = { CAN_elections_gui_selected_state = 690 }
+				CAN_election_update_viewing_array = yes
+            }
+		}
+ 
+	}
+	KRG_CAN_laws_gui = {
+		window_name = "KRG_CAN_laws_container"
+		context_type = decision_category
+
+		triggers = {
+			KRG_CAN_laws_clauses_1_button_visible = {
+				NOT = { has_country_flag = CAN_selecting_clause }
+				check_variable = { CAN_current_law_max_clause > 0 }
+			}
+			KRG_CAN_laws_clauses_2_button_visible = {
+				NOT = { has_country_flag = CAN_selecting_clause }
+				check_variable = { CAN_current_law_max_clause > 1 }
+			}
+			KRG_CAN_laws_clauses_3_button_visible = {
+				NOT = { has_country_flag = CAN_selecting_clause }
+				check_variable = { CAN_current_law_max_clause > 2 }
+			}
+			KRG_CAN_laws_clauses_4_button_visible = {
+				NOT = { has_country_flag = CAN_selecting_clause }
+				check_variable = { CAN_current_law_max_clause > 3 }
+			}
+			KRG_CAN_laws_clauses_5_button_visible = {
+				NOT = { has_country_flag = CAN_selecting_clause }
+				check_variable = { CAN_current_law_max_clause > 4 }
+			}
+			KRG_CAN_laws_select_clauses_1_button_visible = {
+				has_country_flag = CAN_selecting_clause
+				check_variable = { CAN_laws_clauses_available^num > 0 }
+			}
+			KRG_CAN_laws_select_clauses_2_button_visible = {
+				has_country_flag = CAN_selecting_clause
+				check_variable = { CAN_laws_clauses_available^num > 1 }
+			}
+			KRG_CAN_laws_select_clauses_3_button_visible = { 
+				has_country_flag = CAN_selecting_clause
+				check_variable = { CAN_laws_clauses_available^num > 2 }
+			}
+			KRG_CAN_laws_select_clauses_4_button_visible = {
+				has_country_flag = CAN_selecting_clause
+				check_variable = { CAN_laws_clauses_available^num > 3 }
+			}
+			KRG_CAN_laws_select_clauses_5_button_visible = {
+				has_country_flag = CAN_selecting_clause
+				check_variable = { CAN_laws_clauses_available^num > 4 }
+			}
+			KRG_CAN_laws_select_clauses_6_button_visible = {
+				has_country_flag = CAN_selecting_clause
+				check_variable = { CAN_laws_clauses_available^num > 5 }
+			}
+			KRG_CAN_laws_select_clauses_7_button_visible = {
+				has_country_flag = CAN_selecting_clause
+				check_variable = { CAN_laws_clauses_available^num > 6 }
+			}
+			KRG_CAN_laws_select_clauses_8_button_visible = {
+				has_country_flag = CAN_selecting_clause
+				check_variable = { CAN_laws_clauses_available^num > 7 }
+			}
+			KRG_CAN_laws_select_clauses_1_button_click_enabled = {
+				meta_trigger = {
+					text = {
+						CAN_clause_[CLAUSE_ID]_trigger = yes
+					}
+					CLAUSE_ID = CAN_laws_clauses_available^0
+				}
+			}
+			KRG_CAN_laws_select_clauses_2_button_click_enabled = {
+				meta_trigger = {
+					text = {
+						CAN_clause_[CLAUSE_ID]_trigger = yes
+					}
+					CLAUSE_ID = CAN_laws_clauses_available^1
+				}
+			}
+			KRG_CAN_laws_select_clauses_3_button_click_enabled = { 
+				meta_trigger = {
+					text = {
+						CAN_clause_[CLAUSE_ID]_trigger = yes
+					}
+					CLAUSE_ID = CAN_laws_clauses_available^2
+				}
+			}
+			KRG_CAN_laws_select_clauses_4_button_click_enabled = {
+				meta_trigger = {
+					text = {
+						CAN_clause_[CLAUSE_ID]_trigger = yes
+					}
+					CLAUSE_ID = CAN_laws_clauses_available^3
+				}
+			}
+			KRG_CAN_laws_select_clauses_5_button_click_enabled = {
+				meta_trigger = {
+					text = {
+						CAN_clause_[CLAUSE_ID]_trigger = yes
+					}
+					CLAUSE_ID = CAN_laws_clauses_available^4
+				}
+			}
+			KRG_CAN_laws_select_clauses_6_button_click_enabled = {
+				meta_trigger = {
+					text = {
+						CAN_clause_[CLAUSE_ID]_trigger = yes
+					}
+					CLAUSE_ID = CAN_laws_clauses_available^5
+				}
+			}
+			KRG_CAN_laws_select_clauses_7_button_click_enabled = {
+				meta_trigger = {
+					text = {
+						CAN_clause_[CLAUSE_ID]_trigger = yes
+					}
+					CLAUSE_ID = CAN_laws_clauses_available^6
+				}
+			}
+			KRG_CAN_laws_select_clauses_8_button_click_enabled = {
+				meta_trigger = {
+					text = {
+						CAN_clause_[CLAUSE_ID]_trigger = yes
+					}
+					CLAUSE_ID = CAN_laws_clauses_available^7
+				}
+			}
+			KRG_CAN_laws_select_clauses_pad_visible = {
+				always = no
+			}
+			KRG_CAN_laws_select_clauses_back_button_visible = {
+				check_variable = { CAN_current_law > 0 }
+				has_country_flag = CAN_selecting_clause
+			}
+		}
+
+		effects = {
+			KRG_CAN_laws_select_clauses_back_button_click = {
+				clr_country_flag = CAN_selecting_clause
+			}
+			KRG_CAN_laws_clauses_1_button_click = {
+				set_country_flag = CAN_selecting_clause
+				set_variable = { CAN_law_clause_selection_slot = 0 }
+			}
+			KRG_CAN_laws_clauses_2_button_click = {
+				set_country_flag = CAN_selecting_clause
+				set_variable = { CAN_law_clause_selection_slot = 1 }
+			}
+			KRG_CAN_laws_clauses_3_button_click = {
+				set_country_flag = CAN_selecting_clause
+				set_variable = { CAN_law_clause_selection_slot = 2 }
+			}
+			KRG_CAN_laws_clauses_4_button_click = {
+				set_country_flag = CAN_selecting_clause
+				set_variable = { CAN_law_clause_selection_slot = 3 }
+			}
+			KRG_CAN_laws_clauses_5_button_click = {
+				set_country_flag = CAN_selecting_clause
+				set_variable = { CAN_law_clause_selection_slot = 4 }
+			}
+			KRG_CAN_laws_select_clauses_1_button_click = {
+				set_variable = { CAN_law_clause_selected_num = 0 }
+				CAN_laws_clause_selection = yes
+			}
+			KRG_CAN_laws_select_clauses_2_button_click = {
+				set_variable = { CAN_law_clause_selected_num = 1 }
+				CAN_laws_clause_selection = yes
+			}
+			KRG_CAN_laws_select_clauses_3_button_click = {
+				set_variable = { CAN_law_clause_selected_num = 2 }
+				CAN_laws_clause_selection = yes
+			}
+			KRG_CAN_laws_select_clauses_4_button_click = {
+				set_variable = { CAN_law_clause_selected_num = 3 }
+				CAN_laws_clause_selection = yes
+			}
+			KRG_CAN_laws_select_clauses_5_button_click = {
+				set_variable = { CAN_law_clause_selected_num = 4 }
+				CAN_laws_clause_selection = yes
+			}
+			KRG_CAN_laws_select_clauses_6_button_click = {
+				set_variable = { CAN_law_clause_selected_num = 5 }
+				CAN_laws_clause_selection = yes
+			}
+			KRG_CAN_laws_select_clauses_7_button_click = {
+				set_variable = { CAN_law_clause_selected_num = 6 }
+				CAN_laws_clause_selection = yes
+			}
+			KRG_CAN_laws_select_clauses_8_button_click = {
+				set_variable = { CAN_law_clause_selected_num = 7 }
+				CAN_laws_clause_selection = yes
+			}
+		}
+	}
+	KRG_CAN_region_window = {
+		context_type = selected_state_context
+		window_name = "KRG_CAN_region_window"
+		parent_window_token = selected_state_view
+
+		visible = { 
+			ROOT = { original_tag = CAN }
+			is_owned_by = CAN
+			has_state_flag = CAN_part_of_region
+		}
+
+		properties = {
+			CAN_region = {
+		        image = [CAN_GetProvGFX]
+			}
+			pie0 = { frame = poll_pie_chart^0 }
+			pie1 = { frame = poll_pie_chart^1 }
+			pie2 = { frame = poll_pie_chart^2 }
+			pie3 = { frame = poll_pie_chart^3 }
+			pie4 = { frame = poll_pie_chart^4 }
+			pie5 = { frame = poll_pie_chart^5 }
+			pie6 = { frame = poll_pie_chart^6 }
+			pie7 = { frame = poll_pie_chart^7 }
+			pie8 = { frame = poll_pie_chart^8 }
+			pie9 = { frame = poll_pie_chart^9 }
+			pie10 = { frame = poll_pie_chart^10 }
+			pie11 = { frame = poll_pie_chart^11 }
+			pie12 = { frame = poll_pie_chart^12 }
+			pie13 = { frame = poll_pie_chart^13 }
+			pie14 = { frame = poll_pie_chart^14 }
+			pie15 = { frame = poll_pie_chart^15 }
+			pie16 = { frame = poll_pie_chart^16 }
+			pie17 = { frame = poll_pie_chart^17 }
+			pie18 = { frame = poll_pie_chart^18 }
+			pie19 = { frame = poll_pie_chart^19 }
+			pie20 = { frame = poll_pie_chart^20 }
+			pie21 = { frame = poll_pie_chart^21 }
+			pie22 = { frame = poll_pie_chart^22 }
+			pie23 = { frame = poll_pie_chart^23 }
+			pie24 = { frame = poll_pie_chart^24 }
+			pie25 = { frame = poll_pie_chart^25 }
+			pie26 = { frame = poll_pie_chart^26 }
+			pie27 = { frame = poll_pie_chart^27 }
+			pie28 = { frame = poll_pie_chart^28 }
+			pie29 = { frame = poll_pie_chart^29 }
+			pie30 = { frame = poll_pie_chart^30 }
+			pie31 = { frame = poll_pie_chart^31 }
+			pie32 = { frame = poll_pie_chart^32 }
+			pie33 = { frame = poll_pie_chart^33 }
+			pie34 = { frame = poll_pie_chart^34 }
+			pie35 = { frame = poll_pie_chart^35 }
+			pie36 = { frame = poll_pie_chart^36 }
+			pie37 = { frame = poll_pie_chart^37 }
+			pie38 = { frame = poll_pie_chart^38 }
+			pie39 = { frame = poll_pie_chart^39 }
+			pie40 = { frame = poll_pie_chart^40 }
+			pie41 = { frame = poll_pie_chart^41 }
+			pie42 = { frame = poll_pie_chart^42 }
+			pie43 = { frame = poll_pie_chart^43 }
+			pie44 = { frame = poll_pie_chart^44 }
+			pie45 = { frame = poll_pie_chart^45 }
+			pie46 = { frame = poll_pie_chart^46 }
+			pie47 = { frame = poll_pie_chart^47 }
+			pie48 = { frame = poll_pie_chart^48 }
+			pie49 = { frame = poll_pie_chart^49 }
+			pie50 = { frame = poll_pie_chart^50 }
+			pie51 = { frame = poll_pie_chart^51 }
+			pie52 = { frame = poll_pie_chart^52 }
+			pie53 = { frame = poll_pie_chart^53 }
+			pie54 = { frame = poll_pie_chart^54 }
+			pie55 = { frame = poll_pie_chart^55 }
+			pie56 = { frame = poll_pie_chart^56 }
+			pie57 = { frame = poll_pie_chart^57 }
+			pie58 = { frame = poll_pie_chart^58 }
+			pie59 = { frame = poll_pie_chart^59 }
+			pie60 = { frame = poll_pie_chart^60 }
+			pie61 = { frame = poll_pie_chart^61 }
+			pie62 = { frame = poll_pie_chart^62 }
+			pie63 = { frame = poll_pie_chart^63 }
+			pie64 = { frame = poll_pie_chart^64 }
+			pie65 = { frame = poll_pie_chart^65 }
+			pie66 = { frame = poll_pie_chart^66 }
+			pie67 = { frame = poll_pie_chart^67 }
+			pie68 = { frame = poll_pie_chart^68 }
+			pie69 = { frame = poll_pie_chart^69 }
+			pie70 = { frame = poll_pie_chart^70 }
+			pie71 = { frame = poll_pie_chart^71 }
+			pie72 = { frame = poll_pie_chart^72 }
+			pie73 = { frame = poll_pie_chart^73 }
+			pie74 = { frame = poll_pie_chart^74 }
+			pie75 = { frame = poll_pie_chart^75 }
+			pie76 = { frame = poll_pie_chart^76 }
+			pie77 = { frame = poll_pie_chart^77 }
+			pie78 = { frame = poll_pie_chart^78 }
+			pie79 = { frame = poll_pie_chart^79 }
+			pie80 = { frame = poll_pie_chart^80 }
+			pie81 = { frame = poll_pie_chart^81 }
+			pie82 = { frame = poll_pie_chart^82 }
+			pie83 = { frame = poll_pie_chart^83 }
+			pie84 = { frame = poll_pie_chart^84 }
+			pie85 = { frame = poll_pie_chart^85 }
+			pie86 = { frame = poll_pie_chart^86 }
+			pie87 = { frame = poll_pie_chart^87 }
+			pie88 = { frame = poll_pie_chart^88 }
+			pie89 = { frame = poll_pie_chart^89 }
+			pie90 = { frame = poll_pie_chart^90 }
+			pie91 = { frame = poll_pie_chart^91 }
+			pie92 = { frame = poll_pie_chart^92 }
+			pie93 = { frame = poll_pie_chart^93 }
+			pie94 = { frame = poll_pie_chart^94 }
+			pie95 = { frame = poll_pie_chart^95 }
+			pie96 = { frame = poll_pie_chart^96 }
+			pie97 = { frame = poll_pie_chart^97 }
+			pie98 = { frame = poll_pie_chart^98 }
+			pie99 = { frame = poll_pie_chart^99 }
+			pastpie0 = { frame = past_pie_chart^0 }
+			pastpie1 = { frame = past_pie_chart^1 }
+			pastpie2 = { frame = past_pie_chart^2 }
+			pastpie3 = { frame = past_pie_chart^3 }
+			pastpie4 = { frame = past_pie_chart^4 }
+			pastpie5 = { frame = past_pie_chart^5 }
+			pastpie6 = { frame = past_pie_chart^6 }
+			pastpie7 = { frame = past_pie_chart^7 }
+			pastpie8 = { frame = past_pie_chart^8 }
+			pastpie9 = { frame = past_pie_chart^9 }
+			pastpie10 = { frame = past_pie_chart^10 }
+			pastpie11 = { frame = past_pie_chart^11 }
+			pastpie12 = { frame = past_pie_chart^12 }
+			pastpie13 = { frame = past_pie_chart^13 }
+			pastpie14 = { frame = past_pie_chart^14 }
+			pastpie15 = { frame = past_pie_chart^15 }
+			pastpie16 = { frame = past_pie_chart^16 }
+			pastpie17 = { frame = past_pie_chart^17 }
+			pastpie18 = { frame = past_pie_chart^18 }
+			pastpie19 = { frame = past_pie_chart^19 }
+			pastpie20 = { frame = past_pie_chart^20 }
+			pastpie21 = { frame = past_pie_chart^21 }
+			pastpie22 = { frame = past_pie_chart^22 }
+			pastpie23 = { frame = past_pie_chart^23 }
+			pastpie24 = { frame = past_pie_chart^24 }
+			pastpie25 = { frame = past_pie_chart^25 }
+			pastpie26 = { frame = past_pie_chart^26 }
+			pastpie27 = { frame = past_pie_chart^27 }
+			pastpie28 = { frame = past_pie_chart^28 }
+			pastpie29 = { frame = past_pie_chart^29 }
+			pastpie30 = { frame = past_pie_chart^30 }
+			pastpie31 = { frame = past_pie_chart^31 }
+			pastpie32 = { frame = past_pie_chart^32 }
+			pastpie33 = { frame = past_pie_chart^33 }
+			pastpie34 = { frame = past_pie_chart^34 }
+			pastpie35 = { frame = past_pie_chart^35 }
+			pastpie36 = { frame = past_pie_chart^36 }
+			pastpie37 = { frame = past_pie_chart^37 }
+			pastpie38 = { frame = past_pie_chart^38 }
+			pastpie39 = { frame = past_pie_chart^39 }
+			pastpie40 = { frame = past_pie_chart^40 }
+			pastpie41 = { frame = past_pie_chart^41 }
+			pastpie42 = { frame = past_pie_chart^42 }
+			pastpie43 = { frame = past_pie_chart^43 }
+			pastpie44 = { frame = past_pie_chart^44 }
+			pastpie45 = { frame = past_pie_chart^45 }
+			pastpie46 = { frame = past_pie_chart^46 }
+			pastpie47 = { frame = past_pie_chart^47 }
+			pastpie48 = { frame = past_pie_chart^48 }
+			pastpie49 = { frame = past_pie_chart^49 }
+			pastpie50 = { frame = past_pie_chart^50 }
+			pastpie51 = { frame = past_pie_chart^51 }
+			pastpie52 = { frame = past_pie_chart^52 }
+			pastpie53 = { frame = past_pie_chart^53 }
+			pastpie54 = { frame = past_pie_chart^54 }
+			pastpie55 = { frame = past_pie_chart^55 }
+			pastpie56 = { frame = past_pie_chart^56 }
+			pastpie57 = { frame = past_pie_chart^57 }
+			pastpie58 = { frame = past_pie_chart^58 }
+			pastpie59 = { frame = past_pie_chart^59 }
+			pastpie60 = { frame = past_pie_chart^60 }
+			pastpie61 = { frame = past_pie_chart^61 }
+			pastpie62 = { frame = past_pie_chart^62 }
+			pastpie63 = { frame = past_pie_chart^63 }
+			pastpie64 = { frame = past_pie_chart^64 }
+			pastpie65 = { frame = past_pie_chart^65 }
+			pastpie66 = { frame = past_pie_chart^66 }
+			pastpie67 = { frame = past_pie_chart^67 }
+			pastpie68 = { frame = past_pie_chart^68 }
+			pastpie69 = { frame = past_pie_chart^69 }
+			pastpie70 = { frame = past_pie_chart^70 }
+			pastpie71 = { frame = past_pie_chart^71 }
+			pastpie72 = { frame = past_pie_chart^72 }
+			pastpie73 = { frame = past_pie_chart^73 }
+			pastpie74 = { frame = past_pie_chart^74 }
+			pastpie75 = { frame = past_pie_chart^75 }
+			pastpie76 = { frame = past_pie_chart^76 }
+			pastpie77 = { frame = past_pie_chart^77 }
+			pastpie78 = { frame = past_pie_chart^78 }
+			pastpie79 = { frame = past_pie_chart^79 }
+			pastpie80 = { frame = past_pie_chart^80 }
+			pastpie81 = { frame = past_pie_chart^81 }
+			pastpie82 = { frame = past_pie_chart^82 }
+			pastpie83 = { frame = past_pie_chart^83 }
+			pastpie84 = { frame = past_pie_chart^84 }
+			pastpie85 = { frame = past_pie_chart^85 }
+			pastpie86 = { frame = past_pie_chart^86 }
+			pastpie87 = { frame = past_pie_chart^87 }
+			pastpie88 = { frame = past_pie_chart^88 }
+			pastpie89 = { frame = past_pie_chart^89 }
+			pastpie90 = { frame = past_pie_chart^90 }
+			pastpie91 = { frame = past_pie_chart^91 }
+			pastpie92 = { frame = past_pie_chart^92 }
+			pastpie93 = { frame = past_pie_chart^93 }
+			pastpie94 = { frame = past_pie_chart^94 }
+			pastpie95 = { frame = past_pie_chart^95 }
+			pastpie96 = { frame = past_pie_chart^96 }
+			pastpie97 = { frame = past_pie_chart^97 }
+			pastpie98 = { frame = past_pie_chart^98 }
+			pastpie99 = { frame = past_pie_chart^99 }
+		}
+	}
+	KRG_CAN_CAL_alaska = {
+		window_name = "KRG_CAN_CAL_alaska_container"
+		context_type = decision_category
+
+		properties = {
+			CAN_CAL_alaska_progbar = {
+				frame = CAN.CAN_CAL_alaska_CAN_score
+			}
+		}
+	}
+}

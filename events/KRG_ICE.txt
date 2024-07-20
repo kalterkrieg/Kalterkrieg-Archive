@@ -1,0 +1,372 @@
+add_namespace = ice
+
+country_event = { #Iceland Introduction?
+	id = ice.0
+	title = ice.0.t
+	desc = ice.0.d
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = ice.0.a
+		DEN = {
+			country_event = {
+				id = ice.100
+				days = 10
+			}
+		}
+        ai_chance = {
+            base = 33
+        }
+	}
+}
+
+country_event = { #A Visit from Iceland
+	id = ice.100
+	title = ice.100.t
+	desc = ice.100.d
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #Yes
+		name = ice.100.a
+		ICE = {
+			set_country_flag = ICE_denmark_accept_101
+			clr_country_flag = ICE_denmark_deny_101
+			clr_country_flag = ICE_denmark_congrat_101
+			country_event = {
+				id = ice.101
+				days = 1
+			}
+		}
+        ai_chance = {
+            base = 60
+			modifier = {
+				has_game_rule = {
+					rule = ICE_INDEPENDENCE
+					option = ICE_INDEPENDENCE_APPROVED
+				}
+				factor = 1000
+			}
+        }
+	}
+
+	option = { #No
+		name = ice.100.b
+		ICE = {
+			set_country_flag = ICE_denmark_deny_101
+			clr_country_flag = ICE_denmark_accept_101
+			clr_country_flag = ICE_denmark_congrat_101
+			country_event = {
+				id = ice.101
+				days = 1
+			}
+		}
+        ai_chance = {
+            base = 40
+			modifier = {
+				has_game_rule = {
+					rule = ICE_INDEPENDENCE
+					option = ICE_INDEPENDENCE_DENIED
+				}
+				factor = 1000
+			}
+        }
+	}
+}
+country_event = { #A Letter from Denmark
+	id = ice.101
+	title = ice.101.t
+	desc = {
+		text = ice.101.d
+		trigger = {
+			has_country_flag = ICE_denmark_accept_101
+		}
+	}
+	desc = {
+		text = ice.101.d2
+		trigger = {
+			has_country_flag = ICE_denmark_deny_101
+		}
+	}
+	desc = {
+		text = ice.101.d3
+		trigger = {
+			has_country_flag = ICE_denmark_congrat_101
+		}
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #Yes
+		name = ice.101.a
+		set_country_flag = ICE_worldevent_independence
+		news_event = { id = worldnews.91 days = 1 } #Iceland Granted Independence
+		swap_ideas = {
+			add_idea = ICE_freedom
+			remove_idea = ICE_danish_sovereignty
+		}
+		trigger = {
+			has_country_flag = ICE_denmark_accept_101
+		}
+        ai_chance = {
+            base = 1
+        }
+	}
+
+	#option = { #Yes
+	#	name = ice.101.a2
+	#	trigger = {
+	#		has_country_flag = ICE_denmark_deny_101
+	#	}
+    #    ai_chance = {
+    #        base = 1
+    #    }
+	#}
+	option = { #Yes
+		name = ice.101.a3
+		set_country_flag = ICE_worldevent_independence
+		news_event = { id = worldnews.91 days = 1 } #Iceland Granted Independence
+		swap_ideas = {
+			add_idea = ICE_freedom
+			remove_idea = ICE_danish_sovereignty
+		}
+		trigger = {
+			has_country_flag = ICE_denmark_congrat_101
+		}
+        ai_chance = {
+            base = 1
+        }
+	}
+
+	option = { #No
+		name = ice.101.b
+		clr_country_flag = ICE_worldevent_independence
+		news_event = { id = worldnews.91 days = 1 } #Iceland Declares Independence
+		swap_ideas = {
+			add_idea = ICE_war_of_independence
+			remove_idea = ICE_danish_sovereignty
+		}
+		custom_effect_tooltip = ICE_warning_war
+		trigger = {
+			has_country_flag = ICE_denmark_deny_101
+		}
+        ai_chance = {
+            base = 1
+        }
+	}
+}
+country_event = { #Iceland Declares Independence
+	id = ice.102
+	title = ice.102.t
+	desc = ice.102.d
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #Yes
+		name = ice.102.a
+		ICE = {
+			set_country_flag = ICE_denmark_congrat_101
+			clr_country_flag = ICE_denmark_accept_101
+			clr_country_flag = ICE_denmark_deny_101
+			country_event = {
+				id = ice.101
+				days = 2
+			}
+		}
+        ai_chance = {
+            base = 1
+        }
+	}
+	option = { #No
+		name = ice.102.b
+		ICE = {
+			country_event = {
+				id = ice.103
+				days = 2
+			}
+		}
+        ai_chance = {
+            base = 1
+        }
+	}
+}
+country_event = { #Denmark Demands Withdrawal
+	id = ice.103
+	title = ice.103.t
+	desc = ice.103.
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #Withdraw our Declaration.
+		name = ice.103.a #TODO Iceland: what the fuck will this do??
+		trigger = {
+			always = no #temp
+		}
+        ai_chance = {
+            base = 1
+        }
+	}
+	option = { #A Simple No!
+		name = ice.103.b
+		DEN = {
+			country_event = {
+				id = ice.104
+				days = 2
+			}
+		}
+        ai_chance = {
+            base = 1
+        }
+	}
+}
+country_event = { #Iceland Rejects our Demands
+	id = ice.104
+	title = ice.104.t
+	desc = ice.104.
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #Yes
+		name = ice.104.a
+		news_event = { id = worldnews.91 days = 1 } #Iceland Declares Independence
+		declare_war_on = {
+			target = ICE
+		}
+        ai_chance = {
+            base = 0
+        }
+	}
+	option = { #No
+		name = ice.104.b
+		ICE = {
+			country_event = {
+				id = ice.105
+				days = 1
+			}
+		}
+        ai_chance = {
+            base = 1
+        }
+	}
+}
+country_event = { #The Danish Proposal
+	id = ice.105
+	title = ice.105.t
+	desc = ice.105.
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #Yes
+		name = ice.105.a
+		DEN = {
+			country_event = { 
+				id = ice.107
+				days = 2 
+			}
+		}
+        ai_chance = {
+            base = 1
+        }
+	}
+	option = { #No
+		name = ice.105.b
+		DEN = {
+			country_event = { 
+				id = ice.106
+				days = 2 
+			}
+		}
+        ai_chance = {
+            base = 0
+        }
+	}
+}
+country_event = { #Iceland Rejects our Proposal
+	id = ice.106
+	title = ice.106.t
+	desc = ice.106.
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #Yes
+		name = ice.106.a
+		declare_war_on = {
+			target = ICE
+		}
+        ai_chance = {
+            base = 0
+        }
+	}
+	option = { #No
+		name = ice.106.b
+		ICE = {
+			set_country_flag = ICE_denmark_accept_101
+			clr_country_flag = ICE_denmark_deny_101
+			clr_country_flag = ICE_denmark_congrat_101
+			country_event = {
+				id = ice.101
+				days = 2
+			}
+		}
+        ai_chance = {
+            base = 1
+        }
+	}
+}
+country_event = { #Iceland Approves the Proposal
+	id = ice.107
+	title = ice.107.t
+	desc = ice.107.
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = { #Yes
+		name = ice.107.a
+		add_opinion_modifier = {
+			target = ICE
+			modifier = huge_increase #TODO Iceland: Add a custom opinion for this.
+		}
+		ICE = {
+			add_ideas = ICE_concessions_to_denmark
+			set_country_flag = ICE_denmark_accept_101
+			clr_country_flag = ICE_denmark_deny_101
+			clr_country_flag = ICE_denmark_congrat_101
+			country_event = {
+				id = ice.101
+				days = 2
+			}
+			add_opinion_modifier = {
+				target = DEN
+				modifier = huge_increase #TODO Iceland: Add a custom opinion for this.
+			}
+			hidden_effect = {
+				diplomatic_relation = {
+					country = DEN
+					relation = military_access
+					active = yes
+				}
+				diplomatic_relation = {
+					country = DEN
+					relation = non_aggression_pact
+					active = yes
+				}
+				if = {
+					limit = {
+						is_in_faction_with = CAN
+					}
+					leave_faction = yes
+				}
+			}
+		}
+		hidden_effect = {
+			diplomatic_relation = {
+				country = ICE
+				relation = non_aggression_pact
+				active = yes
+			}
+		}
+        ai_chance = {
+            base = 1
+        }
+	}
+}

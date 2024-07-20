@@ -1,0 +1,614 @@
+add_namespace = krg_pal
+add_namespace = krg_pal_news
+
+country_event = { # The Nashashibi spawn event
+	id = krg_pal.0
+	title = krg_pal.0.t
+	desc =krg_pal.0.d
+	is_triggered_only = yes
+	immediate = {
+		log = "[ROOT.GetName] fired krg_pal.0"
+	}
+	option = {
+		name = krg_pal.0.a
+		hidden_effect = {
+			country_event = {
+				id = krg_pal.1
+				days = 7
+			}
+		}
+	}
+}
+
+country_event = { # Holy Army attacks 
+	id = krg_pal.1
+	title = krg_pal.1.t
+	desc = krg_pal.1.d
+	is_triggered_only = yes
+	immediate = {
+		log = "[ROOT.GetName] fired krg_pal.1"
+	}
+	option = {
+		name = krg_pal.1.a
+		add_popularity = {
+			ideology = national_populist
+			popularity = 0.04
+		}
+		ISR = {
+			country_event = {
+				id = krg_pal.2
+				days = 1
+			}
+		}
+	}
+}
+
+country_event = { #Help the Nashishibi or Guard the southern border
+	id = krg_pal.2
+	title = krg_pal.2.t
+	desc = krg_pal.2.d
+	is_triggered_only = yes
+	immediate = {
+		log = "[ROOT.GetName] fired krg_pal.2"
+	}
+	option = {
+		name = krg_pal.2.a
+		log = "[ROOT.GetName] fired krg_pal.2.a - help the Nashishibi"
+		PAL = {
+			country_event = {
+				id = krg_pal.3
+				days = 1
+			}
+		}
+		ai_chance = {
+			base = 50
+		}
+	}
+	option = {
+		name = krg_pal.2.b
+		log = "[ROOT.GetName] fired krg_pal.2.b - we must man the southern border"
+		PAL = {
+			country_event = {
+				id = krg_pal.12
+				days = 1
+			}
+		}
+		ai_chance = {
+			base = 50
+		}
+	}
+}
+
+
+country_event = { # IDF help, Palestinian Republic Declared
+	id = krg_pal.3
+	title = krg_pal.3.t
+	desc = krg_pal.3.d
+	is_triggered_only = yes
+	immediate = {
+		log = "[ROOT.GetName] fired krg_pal.3"
+	}
+	option = {
+		name = krg_pal.3.a
+		add_popularity = {
+			ideology = revolutionary_republican
+			popularity = 0.1
+		}
+		news_event = {
+			id = krg_pal_news.0	
+		}
+		ISR = {
+			news_event = {
+				id = krg_pal_news.0	
+			}	
+		}
+		SYR = {
+			news_event = {
+				id = krg_pal_news.0	
+			}	
+		}
+		BSY = {
+			news_event = {
+				id = krg_pal_news.0	
+			}	
+		}
+		hidden_effect = {
+			random_list = {
+				 50 = {
+					ISR = {
+						country_event = {
+							id = krg_pal.4
+							days = 6
+						}
+					}
+				 }
+				 50 = {
+					country_event = {
+						id = krg_pal.8
+						days = 9
+					}
+				 }
+			}
+		}
+	}
+}
+
+country_event = { # ISR pushes south to Sinai?
+	id = krg_pal.4
+	title = krg_pal.4.t
+	desc = krg_pal.4.d
+	is_triggered_only = yes
+	immediate = {
+		log = "[ROOT.GetName] fired krg_pal.4"
+	}
+	option = {
+		name = krg_pal.4.a
+		log = "[ROOT.GetName] fired krg_pal.4.a - sod Egypt"
+		EGY = {
+			country_event = {
+				id = krg_pal.5
+				days = 1
+			}
+		}
+	}
+	option = {
+		name = krg_pal.4.b
+		log = "[ROOT.GetName] fired krg_pal.4.b - let us focus more on the HWA"
+		hidden_effect = {
+			PAL = {
+				country_event = {
+					id = krg_pal.7
+					days = 8
+				}
+			}	
+		}
+	}
+}
+
+country_event = { # EGY - Israel is advancing south!
+	id = krg_pal.5
+	title = krg_pal.5.t
+	desc = krg_pal.5.d
+	is_triggered_only = yes
+	immediate = {
+		log = "[ROOT.GetName] fired krg_pal.5"
+	}
+	option = {
+		name = krg_pal.5.a
+		ISR = {
+			country_event = {
+				id = krg_pal.6
+				days = 1
+			}
+		}		
+	}
+}
+
+country_event = { # ISR - Egyptian Ultimatum
+	id = krg_pal.6
+	title = krg_pal.6.t
+	desc = krg_pal.6.d
+	is_triggered_only = yes
+	immediate = {
+		log = "[ROOT.GetName] fired krg_pal.6"
+	}
+	option = {
+		name = krg_pal.6.a
+		log = "[ROOT.GetName] fired krg_pal.6.a - let us focus more on the HWA"
+		add_opinion_modifier = {
+			target = EGY
+			modifier = KRG_disapproves_of_govt
+		}
+		hidden_effect = {
+			PAL = {
+				country_event = {
+					id = krg_pal.7
+					days = 8
+				}
+			}	
+		}
+		ai_chance = {
+			base = 70
+		}
+	}
+	option = {
+		name = krg_pal.6.b
+		log = "[ROOT.GetName] fired krg_pal.6.b - War then!"
+		declare_war_on = {
+			target = EGY
+			type = topple_government
+		}
+		PAL = { ##we're not adding other tags so PAL under nashas goes in
+			add_to_war = {
+				targeted_alliance = ISR
+				enemy = EGY
+				hostility_reason = asked_to_join
+			}
+		}
+		ai_chance = {
+			base = 30
+		}
+	}
+}
+
+
+country_event = { # Holy Army gets crushed 
+	id = krg_pal.7
+	title = krg_pal.7.t
+	desc = krg_pal.7.d
+	is_triggered_only = yes
+	immediate = {
+		log = "[ROOT.GetName] fired krg_pal.7"
+	}
+	option = {
+		name = krg_pal.7.a
+		add_popularity = {
+			ideology = national_populist
+			popularity = -0.05
+		}
+		PAL_abd_alqadir_alhusayni = {
+			kill_character = yes
+		}
+		PAL_amin_alhusayni = {
+			promote_character = national_populist_fundamentalism
+		}
+	}
+}	
+
+
+country_event = { # HWA are winning despite idf help
+	id = krg_pal.8
+	title = krg_pal.8.t
+	desc = krg_pal.8.d
+	is_triggered_only = yes
+	immediate = {
+		log = "[ROOT.GetName] fired krg_pal.8 "
+	}
+	option = {
+		name = krg_pal.8.a
+			country_event = {
+				id = krg_pal.9
+				days = 1
+			}
+	}
+}
+
+country_event = { # HWA are closing in on jerusalem
+	id = krg_pal.9
+	title = krg_pal.9.t
+	desc = krg_pal.9.d
+	is_triggered_only = yes
+	immediate = {
+		log = "[ROOT.GetName] fired krg_pal.9 "
+	}
+	option = {
+		name = krg_pal.9.a
+		hidden_effect = {
+			random_list = {
+				50 = {
+					
+			country_event = {
+				id = krg_pal.10
+				days = 15
+			}
+				}
+				50 = {
+					
+			country_event = {
+				id = krg_pal.11
+				days = 15
+			}
+				}
+			}
+		}
+	}
+}
+
+country_event = { # HWA get sent packing and collapse
+	id = krg_pal.10
+	title = krg_pal.10.t
+	desc = krg_pal.10.d
+	is_triggered_only = yes
+	immediate = {
+		log = "[ROOT.GetName] fired krg_pal.10 "
+	}
+	option = {
+		name = krg_pal.10.a
+			
+	}
+}
+
+country_event = { # HWA win
+	id = krg_pal.11
+	title = krg_pal.11.t
+	desc = krg_pal.11.d
+	is_triggered_only = yes
+	immediate = {
+		log = "[ROOT.GetName] fired krg_pal.11 "
+	}
+	option = {
+		name = krg_pal.11.a
+		PAL = {
+			set_cosmetic_tag = PAL_ISLAMIC
+			set_politics = {
+				ruling_party = national_populist
+				election_frequency = 48
+				elections_allowed = no
+			}
+			declare_war_on = {
+				target = ISR
+				type = annex_everything
+			}
+		}
+	}
+}
+
+country_event = { # ISR secures the southern border
+	id = krg_pal.12
+	title = krg_pal.12.t
+	desc = krg_pal.12.d
+	is_triggered_only = yes
+	immediate = {
+		log = "[ROOT.GetName] fired krg_pal.12"
+	}
+	option = {
+		name = krg_pal.12.a
+		ISR = {
+			country_event = {
+			id = krg_pal.13
+			days = 1
+			}
+		}
+	}
+}
+
+country_event = { # ISR chooses what to do
+	id = krg_pal.13
+	title = krg_pal.13.t
+	desc = krg_pal.13.d
+	is_triggered_only = yes
+	immediate = {
+		log = "[ROOT.GetName] fired krg_pal.13"
+	}
+	option = {
+		name = krg_pal.13.a
+		log = "[ROOT.GetName] fired krg_pal.13.a - secure borders"
+		hidden_effect = {
+			PAL = {
+				country_event = {
+					id = krg_pal.14
+					days = 2
+				}
+			}
+		}
+		ai_chance = {
+			base = 75
+		}
+	}
+	option = {
+		name = krg_pal.13.b
+		log = "[ROOT.GetName] fired krg_pal.13.b - intervene for the Nashas"
+		hidden_effect = {
+			PAL = {
+				country_event = {
+					id = krg_pal.15
+					days = 2
+				}
+			}
+		}
+		ai_chance = {
+			base = 25
+		}
+	}
+}
+
+
+country_event = { # The Nasha government fall, HWA seizes Jerusalem
+	id = krg_pal.14
+	title = krg_pal.14.t
+	desc = krg_pal.14.d
+	is_triggered_only = yes
+	immediate = {
+		log = "[ROOT.GetName] fired krg_pal.12"
+	}
+	option = {
+		name = krg_pal.14.a
+		PAL = {
+			set_cosmetic_tag = PAL_ISLAMIC
+			set_politics = {
+				ruling_party = national_populist
+				election_frequency = 48
+				elections_allowed = no
+			}
+			add_popularity = {
+				ideology = national_populist
+				popularity = 0.15
+			}
+		}
+		news_event = {
+			id = krg_pal_news.2
+		}
+		ISR = {
+			declare_war_on = {
+				target = PAL
+				type = annex_everything
+			}
+		}
+	}
+}
+
+
+country_event = { # ISR intervenes 
+	id = krg_pal.15
+	title = krg_pal.15.t
+	desc = krg_pal.15.d
+	is_triggered_only = yes
+	immediate = {
+		log = "[ROOT.GetName] fired krg_pal.15"
+	}
+	option = {
+		name = krg_pal.15.a
+		hidden_effect = {
+			random_list = {
+				50 = {
+					PAL = {
+						country_event = {
+							id = krg_pal.16
+							days = 4
+						}
+					}
+				}	
+				50 = {
+					PAL = {
+					country_event = {
+							id = krg_pal.17
+							days = 4
+						}
+					}
+				}	
+			}
+		}
+	}
+}
+
+country_event = { # ISR kill the guy and return the territory
+	id = krg_pal.16
+	title = krg_pal.16.t
+	desc = krg_pal.16.d
+	is_triggered_only = yes
+	immediate = {
+		log = "[ROOT.GetName] fired krg_pal.16"
+	}
+	
+	option = {
+		name = krg_pal.16.a
+		add_popularity = {
+			ideology = national_populist
+			popularity = -0.05
+		}
+		PAL_abd_alqadir_alhusayni = {
+			kill_character = yes
+		}
+		PAL_amin_alhusayni = {
+			promote_character = national_populist_fundamentalism
+		}
+	}
+}
+
+country_event = { # ISR kill the guy and keep the territory
+	id = krg_pal.17
+	title = krg_pal.17.t
+	desc = krg_pal.17.d
+	is_triggered_only = yes
+	immediate = {
+		log = "[ROOT.GetName] fired krg_pal.17"
+	}
+	
+	option = {
+		name = krg_pal.17.a
+		log = "[ROOT.GetName] fired krg_pal.17.a - Israel steals the land"
+		add_popularity = {
+			ideology = national_populist
+			popularity = -0.05
+		}
+		PAL_abd_alqadir_alhusayni = {
+			kill_character = yes
+		}
+		PAL_amin_alhusayni = {
+			promote_character = national_populist_fundamentalism
+		}
+		ISR = {
+			transfer_state = 454
+		}
+	}
+	option = {
+		name = krg_pal.17.b
+		log = "[ROOT.GetName] fired krg_pal.17.b - Palestine attacks"
+		add_popularity = {
+			ideology = national_populist
+			popularity = -0.05
+		}
+		PAL_abd_alqadir_alhusayni = {
+			kill_character = yes
+		}
+		PAL_amin_alhusayni = {
+			promote_character = national_populist_fundamentalism
+		}
+		ISR = {
+			transfer_state = 454
+		}
+		declare_war_on = {
+			target = ISR
+			type = take_claimed_state
+		}
+		hidden_effect = {
+			country_event = {
+				id = krg_pal.18
+				days = 60
+			}
+		}
+	}
+}
+
+country_event = { # If ISR still holds
+	id = krg_pal.18
+	title = krg_pal.18.t
+	desc = krg_pal.16.d
+	is_triggered_only = yes
+	immediate = {
+		log = "[ROOT.GetName] fired krg_pal.18"
+	}
+	trigger = {
+		ISR = {
+			controls_state = 454
+		}
+		country_exists = PAL
+	}
+	
+	option = {
+		name = krg_pal.18.a
+		ISR = {
+			white_peace_with_ROOT = yes
+		}
+	}
+}
+
+news_event = {
+	id = krg_pal_news.0
+	title = krg_pal_news.0.t
+	desc = krg_pal_news.0.d # Unrest in Palestine, Republic declared vs the Nashishibis
+	is_triggered_only = yes
+	picture = GFX_ne_PAL_Republic_Dec
+	immediate = {
+		log = "[ROOT.GetName] fired krg_pal_news.0"
+	}
+	
+	option = {
+		name = krg_pal_news.0.a
+	}
+}
+
+news_event = {
+	id = krg_pal_news.1 # Israel and Egypt go to war!
+	title = krg_pal_news.1.t
+	desc = krg_pal_news.1.d
+	is_triggered_only = yes
+	picture = GFX_ne_SYR_baathists
+	major = yes
+	option = {
+		name = krg_pal_news.1.a
+	}
+}
+
+news_event = {
+	id = krg_pal_news.2 # Israel and Palestine go to war!
+	title = krg_pal_news.2.t
+	desc = krg_pal_news.2.d
+	is_triggered_only = yes
+	picture = GFX_ne_SYR_baathists
+	major = yes
+	option = {
+		name = krg_pal_news.2.a
+	}
+}
+

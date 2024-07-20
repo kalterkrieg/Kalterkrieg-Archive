@@ -1,0 +1,1192 @@
+### TORIES 1950 ###
+#!gfx:interface/Kalterkrieg/KRG_goals.gfx
+shared_focus = {
+	id = ENG_tory_1950_conservative_victory
+	icon = GFX_generic_new_ideology_soccon
+	x = 12
+	y = 0
+	cost = 0
+	
+	available = {
+		has_government = social_conservative
+		hidden_trigger = {
+			always = no
+		}
+	}
+		
+	bypass = {
+		
+	}
+
+
+	ai_will_do = {
+		base = 65
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus ENG_tory_1950_conservative_victory"
+		unlock_decision_tooltip = ENG_tory_1950_crime_prevention_act
+		unlock_decision_tooltip = ENG_tory_1950_criminal_justice_act
+		unlock_decision_tooltip = ENG_tory_1950_british_nationality_act
+		unlock_decision_tooltip = ENG_tory_1950_marriage_act
+		unlock_decision_tooltip = ENG_tory_1950_local_government_act
+	}
+}
+
+shared_focus = {
+	id = ENG_tory_1950_dissolve_the_reconstruction_departments
+	icon = GFX_generic_stable_economy
+	x = -5
+	y = 1
+	cost = 5
+	
+	prerequisite = {
+		focus = ENG_tory_1950_conservative_victory
+	}
+	
+
+	relative_position_id = ENG_tory_1950_conservative_victory
+
+	ai_will_do = {
+		base = 85
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus ENG_tory_1950_dissolve_the_reconstruction_departments"
+		hidden_effect = {
+			remove_ideas = ENG_department_of_national_reconstruction_industry
+			remove_ideas = ENG_department_of_national_reconstruction_infrastructure_railroad
+		}
+		remove_ideas = ENG_department_of_national_reconstruction_infrastructure_highway
+		add_political_power = 50
+	}
+}
+
+shared_focus = {
+	id = ENG_tory_1950_secure_international_loans
+	icon = GFX_generic_loans
+	x = 0
+	y = 1
+	cost = 5
+	
+	prerequisite = {
+		focus = ENG_tory_1950_conservative_victory
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+
+	available = {
+	}
+
+	bypass = {
+	}
+	
+	relative_position_id = ENG_tory_1950_conservative_victory
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus ENG_tory_1950_secure_international_loans"
+		country_event = {
+			id = krg_eng.242
+		}
+	}
+}
+
+shared_focus = {
+	id = ENG_tory_1950_lyttelton_plan
+	icon = GFX_ENG_lyttelton_plan
+	x = 2
+	y = 1
+	cost = 5
+	
+	prerequisite = {
+		focus = ENG_tory_1950_conservative_victory
+	}
+	mutually_exclusive = {
+		focus = ENG_tory_1950_butler_plan
+	}
+	available = {
+	}
+	bypass = {
+	}
+	relative_position_id = ENG_tory_1950_conservative_victory
+
+	ai_will_do = {
+		base = 55
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus ENG_tory_1950_lyttelton_plan"
+		add_ideas = ENG_Oliver_Lyttelton_em_sco
+		custom_effect_tooltip = ENG_lyttelton_plan_tooltip
+		set_country_flag = lyttelton_economic_plan
+		hidden_effect = {
+			add_ideas = ENG_lyttelton_economic_plan
+			add_dynamic_modifier = {
+				modifier = ENG_lyttelton_economic_plan_dynamic
+				scope = ENG
+			}
+			set_variable = { ENG_lyttelton_stability = -0.05 }
+			set_variable = { ENG_lyttelton_political_power = -0.1 }
+			set_variable = { ENG_lyttelton_line_change = 0.05 }
+			set_variable = { ENG_lyttelton_start_efficiency = 0.05 }
+			set_variable = { ENG_lyttelton_construction = 0 }
+			set_variable = { ENG_lyttelton_civ_usage = 0 }
+			set_variable = { ENG_lyttelton_local_resources = 0 }
+			set_variable = { ENG_lyttelton_trade_opinion = 0 }
+			country_event = {
+				id = krg_eng.171
+				days = 10
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = ENG_tory_1950_butler_plan
+	icon = GFX_ENG_utler_plan
+	x = 4
+	y = 1
+	cost = 5
+	
+	prerequisite = {
+		focus = ENG_tory_1950_conservative_victory
+	}
+	mutually_exclusive = {
+		focus = ENG_tory_1950_lyttelton_plan
+	}
+	available = {
+	}
+	bypass = {
+	}
+	relative_position_id = ENG_tory_1950_conservative_victory
+
+	ai_will_do = {
+		base = 55
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus ENG_tory_1950_butler_plan"
+		custom_effect_tooltip = ENG_butler_plan_tooltip
+		set_country_flag = butler_economic_plan
+		hidden_effect = {
+			add_ideas = ENG_butler_economic_plan
+			add_dynamic_modifier = {
+				modifier = ENG_butler_economic_plan_dynamic
+				scope = ENG
+			}
+			set_variable = { ENG_butler_stability = 0.05 }
+			set_variable = { ENG_butler_political_power = 0 }
+			set_variable = { ENG_butler_line_change = -0.05 }
+			set_variable = { ENG_butler_max_efficiency = 0.05 }
+			set_variable = { ENG_butler_construction = 0 }
+			set_variable = { ENG_butler_civ_usage = 0 }
+			set_variable = { ENG_butler_trade_opinion = 0 }
+			country_event = {
+				id = krg_eng.171
+				days = 10
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = ENG_tory_1950_encourage_investment
+	icon = GFX_generic_positive_trade_relations_gold
+	x = 3
+	y = 2
+	cost = 5
+	
+	prerequisite = {
+		focus = ENG_tory_1950_lyttelton_plan
+		focus = ENG_tory_1950_butler_plan
+	}
+	available = {
+	}
+	bypass = {
+	}
+	relative_position_id = ENG_tory_1950_conservative_victory
+
+	ai_will_do = {
+		base = 65
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus ENG_tory_1950_encourage_investment"
+		custom_effect_tooltip = ENG_encourage_investment_tooltip
+		hidden_effect = {
+			if = {
+				limit = {
+					has_idea = ENG_lyttelton_economic_plan
+				}
+				add_to_variable = { 
+					var = ENG_lyttelton_trade_opinion
+					value = 0.20
+				}
+			}
+			else_if = {
+				limit = {
+					has_idea = ENG_butler_economic_plan
+				}
+				add_to_variable = { 
+					var = ENG_butler_trade_opinion
+					value = 0.20
+				}
+			}
+		}
+	}
+}
+
+
+shared_focus = {
+	id = ENG_tory_1950_close_ineffective_industry
+	icon = GFX_generic_end_strikes
+	x = 1
+	y = 2
+	cost = 5
+	
+	prerequisite = {
+		focus = ENG_tory_1950_lyttelton_plan
+	}
+	available = {
+	}
+	bypass = {
+	}
+	relative_position_id = ENG_tory_1950_conservative_victory
+
+	ai_will_do = {
+		base = 65
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus ENG_tory_1950_close_ineffective_industry"
+		custom_effect_tooltip = ENG_close_ineffective_industry_tooltip
+		add_to_variable = { 
+			var = ENG_lyttelton_political_power
+			value = -0.05
+		}
+		add_to_variable = { 
+			var = ENG_lyttelton_stability
+			value = -0.05
+		}
+		add_to_variable = { 
+			var = ENG_lyttelton_civ_usage
+			value = 0.10
+		}
+		add_to_variable = { 
+			var = ENG_lyttelton_line_change
+			value = 0.05
+		}
+	}
+}
+
+shared_focus = {
+	id = ENG_tory_1950_estabilish_new_privateers
+	icon = GFX_generic_price_control
+	x = 2
+	y = 3
+	cost = 5
+	
+	prerequisite = {
+		focus = ENG_tory_1950_close_ineffective_industry
+	}
+	prerequisite = {
+		focus = ENG_tory_1950_encourage_investment
+	}
+	available = {
+	}
+	bypass = {
+	}
+	relative_position_id = ENG_tory_1950_conservative_victory
+
+	ai_will_do = {
+		base = 55
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus ENG_tory_1950_estabilish_new_privateers"
+		add_political_power = -50
+		custom_effect_tooltip = ENG_establish_new_privateers_tooltip
+		add_to_variable = { 
+			var = ENG_lyttelton_political_power
+			value = -0.05
+		}
+		add_to_variable = { 
+			var = ENG_lyttelton_civ_usage
+			value = -0.05
+		}
+		add_to_variable = { 
+			var = ENG_lyttelton_local_resources
+			value = 0.05
+		}
+		add_to_variable = { 
+			var = ENG_lyttelton_construction
+			value = 0.1
+		}
+		add_to_variable = { 
+			var = ENG_lyttelton_start_efficiency
+			value = 0.05
+		}
+	}
+}
+
+shared_focus = {
+	id = ENG_tory_1950_slash_international_tariffs
+	icon = GFX_TEX_tariffs
+	x = 1
+	y = 4
+	cost = 5
+	
+	prerequisite = {
+		focus = ENG_tory_1950_close_ineffective_industry
+	}
+	available = {
+	}
+	bypass = {
+	}
+	relative_position_id = ENG_tory_1950_conservative_victory
+
+	ai_will_do = {
+		base = 55
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus ENG_tory_1950_slash_international_tariffs"
+		custom_effect_tooltip = ENG_slash_international_tarifffs_tooltip
+		add_to_variable = { 
+			var = ENG_lyttelton_local_resources
+			value = 0.05
+		}
+		add_to_variable = { 
+			var = ENG_lyttelton_political_power
+			value = 0.05
+		}
+		add_to_variable = { 
+			var = ENG_lyttelton_trade_opinion
+			value = 0.10
+		}
+	}
+}
+
+shared_focus = {
+	id = ENG_tory_1950_float_the_pound
+	icon = GFX_ENG_coin
+	x = 2
+	y = 5
+	cost = 5
+	
+	prerequisite = {
+		focus = ENG_tory_1950_slash_international_tariffs
+	}
+	prerequisite = {
+		focus = ENG_tory_1950_estabilish_new_privateers
+	}
+	available = {
+	}
+	bypass = {
+	}
+	relative_position_id = ENG_tory_1950_conservative_victory
+
+	ai_will_do = {
+		base = 55
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus ENG_tory_1950_float_the_pound"
+		custom_effect_tooltip = ENG_float_the_pound_tooltip
+		add_to_variable = { 
+			var = ENG_lyttelton_political_power
+			value = 0.05
+		}
+		add_to_variable = { 
+			var = ENG_lyttelton_civ_usage
+			value = -0.05
+		}
+	}
+}
+
+shared_focus = {
+	id = ENG_tory_1950_take_control_of_the_pound
+	icon = GFX_generic_seize_money
+	x = 5
+	y = 2
+	cost = 5
+	
+	prerequisite = {
+		focus = ENG_tory_1950_butler_plan
+	}
+	available = {
+	}
+	bypass = {
+	}
+	relative_position_id = ENG_tory_1950_conservative_victory
+
+	ai_will_do = {
+		base = 55
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus ENG_tory_1950_take_control_of_the_pound"
+		custom_effect_tooltip = ENG_take_control_of_the_pound_tooltip
+		add_to_variable = { 
+			var = ENG_butler_political_power
+			value = 0.05
+		}
+		add_to_variable = { 
+			var = ENG_butler_civ_usage
+			value = 0.1
+		}
+	}
+}
+
+shared_focus = {
+	id = ENG_tory_1950_balance_inflation
+	icon = GFX_generic_gold_up
+	x = 4
+	y = 3
+	cost = 5
+	
+	prerequisite = {
+		focus = ENG_tory_1950_encourage_investment
+	}
+	prerequisite = {
+		focus = ENG_tory_1950_take_control_of_the_pound
+	}
+	available = {
+	}
+	bypass = {
+	}
+	relative_position_id = ENG_tory_1950_conservative_victory
+
+	ai_will_do = {
+		base = 55
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus ENG_tory_1950_balance_inflation"
+		custom_effect_tooltip = ENG_balance_inflation_tooltip
+		add_to_variable = { 
+			var = ENG_butler_line_change
+			value = -0.05
+		}
+		add_to_variable = { 
+			var = ENG_butler_stability
+			value = 0.02
+		}
+		add_to_variable = { 
+			var = ENG_butler_civ_usage
+			value = -0.05
+		}
+	}
+}
+
+shared_focus = {
+	id = ENG_tory_1950_maintain_trade_controls
+	icon = GFX_AST_trade_commonwealth
+	x = 6
+	y = 3
+	cost = 5
+	
+	prerequisite = {
+		focus = ENG_tory_1950_take_control_of_the_pound
+	}
+	available = {
+	}
+	bypass = {
+	}
+	relative_position_id = ENG_tory_1950_conservative_victory
+
+	ai_will_do = {
+		base = 55
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus ENG_tory_1950_maintain_trade_controls"
+		add_political_power = 25
+		custom_effect_tooltip = ENG_maintain_trade_controls_tooltip
+		add_to_variable = { 
+			var = ENG_butler_civ_usage
+			value = -0.05
+		}
+		add_to_variable = { 
+			var = ENG_butler_trade_opinion
+			value = -0.10
+		}
+		add_to_variable = { 
+			var = ENG_butler_max_efficiency
+			value = 0.05
+		}
+	}
+}
+
+shared_focus = {
+	id = ENG_tory_1950_cut_income_tax
+	icon = GFX_generic_tax
+	x = 5
+	y = 4
+	cost = 5
+	
+	prerequisite = {
+		focus = ENG_tory_1950_balance_inflation
+	}
+	prerequisite = {
+		focus = ENG_tory_1950_maintain_trade_controls
+	}
+	available = {
+	}
+	bypass = {
+	}
+	relative_position_id = ENG_tory_1950_conservative_victory
+
+	ai_will_do = {
+		base = 55
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus ENG_tory_1950_cut_income_tax"
+		unlock_decision_tooltip = ENG_tory_1950_national_tax_act
+	}
+}
+
+shared_focus = {
+	id = ENG_tory_1950_form_anti_syndicalist_committee
+	icon = GFX_HOL_red_scare
+
+	x = -7
+	y = 2
+
+	cost = 5
+	
+	prerequisite = {
+		focus = ENG_tory_1950_secure_international_loans
+	}
+	prerequisite = {
+		focus = ENG_tory_1950_dissolve_the_reconstruction_departments
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+
+	available = {
+
+	}
+
+	bypass = {
+
+	}
+
+	relative_position_id = ENG_tory_1950_conservative_victory
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus ENG_tory_1950_form_anti_syndicalist_committee"
+		country_event = {
+			id = krg_eng.196
+		}	
+	}
+}
+
+shared_focus = {
+	id = ENG_tory_1950_flush_out_underground_movements
+	icon = GFX_HOL_ban_paramilitary_left
+	x = -8
+	y = 3
+	cost = 5
+	
+	prerequisite = {
+		focus = ENG_tory_1950_form_anti_syndicalist_committee
+	}
+	mutually_exclusive = {
+		focus = ENG_tory_1950_begin_to_show_mercy
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+
+	available = {
+		has_idea = ENG_hardline_antisyndicalist_committee 
+	}
+	bypass = {
+
+	}
+	relative_position_id = ENG_tory_1950_conservative_victory
+	
+	select_effect = {
+		country_event = {
+			id = krg_eng.201
+		}
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus ENG_tory_1950_flush_out_underground_movements"
+		add_stability = -0.05
+		add_popularity = {
+			ideology = authoritarian_socialist
+			popularity = -0.02
+		}
+		add_popularity = {
+			ideology = radical_socialist
+			popularity = -0.03
+		}
+	}
+}
+
+shared_focus = {
+	id = ENG_tory_1950_begin_to_show_mercy
+	icon = GFX_Socialist_Law
+	x = -6
+	y = 3
+	cost = 5
+	
+	prerequisite = {
+		focus = ENG_tory_1950_form_anti_syndicalist_committee
+	}
+	mutually_exclusive = {
+		focus = ENG_tory_1950_flush_out_underground_movements
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+
+	available = {
+		has_idea = ENG_moderate_antisyndicalist_committee 
+	}
+	
+	relative_position_id = ENG_tory_1950_conservative_victory
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus ENG_tory_1950_begin_to_show_mercy"
+		add_stability = 0.05
+		add_popularity = {
+			ideology = social_democrat
+			popularity = 0.03
+		}
+		add_popularity = {
+			ideology = social_conservative
+			popularity = 0.02
+		}
+	}
+}
+
+shared_focus = {
+	id = ENG_tory_1950_finish_de_syndicalisation
+	icon = GFX_generic_crush_unions
+
+	x = -7
+	y = 4
+
+	cost = 5
+	
+	prerequisite = {
+		focus = ENG_tory_1950_flush_out_underground_movements
+		focus = ENG_tory_1950_begin_to_show_mercy
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+
+	available = {
+		KRG_ENG_desyndicalisation_basically_finished_trigger = yes
+	}
+	bypass = {
+
+	}
+	relative_position_id = ENG_tory_1950_conservative_victory
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus ENG_tory_1950_finish_de_syndicalisation"
+		remove_ideas = ENG_legacy_of_the_maximists_2
+		remove_dynamic_modifier = {
+			modifier = ENG_syndicalist_resistance_modifier
+		}
+		if = {
+			limit = {
+				has_idea = ENG_hardline_antisyndicalist_committee
+			}
+			country_event = {
+				id = krg_eng.214
+			}	
+			else = {
+				country_event = {
+					id = krg_eng.213
+				}	
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = ENG_tory_1950_prune_the_administrarive_machine
+	icon = GFX_SAF_colonialist_crusade2
+	x = -6
+	y = 5
+	cost = 5
+	
+	prerequisite = {
+		focus = ENG_tory_1950_finish_de_syndicalisation
+	}
+	available = {
+	}
+	bypass = {
+	}
+	relative_position_id = ENG_tory_1950_conservative_victory
+
+	ai_will_do = {
+		base = 55
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus ENG_tory_1950_prune_the_administrarive_machine"
+		add_political_power = 100
+	}
+}
+
+shared_focus = {
+	id = ENG_tory_1950_propose_the_charter_of_industry
+	icon = GFX_generic_construction_engineering
+	x = -7
+	y = 6
+	cost = 5
+	
+	prerequisite = {
+		focus = ENG_tory_1950_finish_de_syndicalisation
+	}
+	available = {
+	}
+	bypass = {
+	}
+	relative_position_id = ENG_tory_1950_conservative_victory
+
+	ai_will_do = {
+		base = 55
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus ENG_tory_1950_propose_the_charter_of_industry"
+		if = {
+			limit = {
+				has_country_flag = ENG_trade_union_restrictions
+			}
+			country_event = {
+				id = krg_eng.216
+			}	
+			else = {
+				country_event = {
+					id = krg_eng.217
+				}	
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = ENG_tory_1950_maintain_a_balanced_budget
+	icon = GFX_generic_economic_report
+	x = 0
+	y = 3
+	cost = 5
+	
+	prerequisite = {
+		focus = ENG_tory_1950_secure_international_loans
+	}
+	prerequisite = {
+		focus = ENG_tory_1950_lyttelton_plan
+		focus = ENG_tory_1950_butler_plan
+	}
+	available = {
+	}
+	bypass = {
+	}
+	relative_position_id = ENG_tory_1950_conservative_victory
+
+	ai_will_do = {
+		base = 65
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus ENG_tory_1950_maintain_a_balanced_budget"
+		custom_effect_tooltip = ENG_balanced_budget_tooltip
+		hidden_effect = {
+			if = {
+				limit = {
+					has_idea = ENG_lyttelton_economic_plan
+				}
+				add_to_variable = { 
+					var = ENG_lyttelton_stability
+					value = 0.05
+				}
+			}
+			else_if = {
+				limit = {
+					has_idea = ENG_butler_economic_plan
+				}
+				add_to_variable = { 
+					var = ENG_butler_stability
+					value = 0.05
+				}
+			}
+		}
+	}
+}
+
+
+shared_focus = {
+	id = ENG_tory_1950_curtail_rationing_programs
+	icon = GFX_ENG_rationing
+	x = -4
+	y = 2
+	cost = 5
+	
+	prerequisite = {
+		focus = ENG_tory_1950_secure_international_loans
+	}
+	prerequisite = {
+		focus = ENG_tory_1950_dissolve_the_reconstruction_departments
+	}
+
+	relative_position_id = ENG_tory_1950_conservative_victory
+
+	ai_will_do = {
+		base = 65
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus ENG_tory_1950_curtail_rationing_programs"
+		remove_ideas = ENG_rationing
+		add_stability = -0.05
+	}
+}
+
+shared_focus = {
+	id = ENG_tory_1950_the_self_sufficient_britain
+	icon = GFX_generic_economic_control
+	x = -2
+	y = 2
+	cost = 5
+	
+	prerequisite = {
+		focus = ENG_tory_1950_secure_international_loans
+	}
+
+	prerequisite = {
+		focus = ENG_tory_1950_dissolve_the_reconstruction_departments
+	}
+	
+	relative_position_id = ENG_tory_1950_conservative_victory
+
+	ai_will_do = {
+		base = 65
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus ENG_tory_1950_the_self_sufficient_britain"
+		country_event = {
+			id = krg_eng.237
+		}
+	}
+}
+shared_focus = {
+	id = ENG_tory_1950_mass_agricultural_reform
+	icon = GFX_SZC_improvised_farming_machinery
+	x = -4
+	y = 3
+	cost = 5
+	
+	prerequisite = {
+		focus = ENG_tory_1950_curtail_rationing_programs
+	}
+	prerequisite = {
+		focus = ENG_tory_1950_the_self_sufficient_britain
+	}
+	available = {
+	}
+	bypass = {
+	}
+	relative_position_id = ENG_tory_1950_conservative_victory
+
+	ai_will_do = {
+		base = 55
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus ENG_tory_1950_mass_agricultural_reform"
+		country_event = {
+			id = krg_eng.240
+		}
+		custom_effect_tooltip = ENG_agricultural_commission
+		unlock_decision_tooltip = ENG_tory_1950_livestock_act
+	}
+}
+
+shared_focus = {
+	id = ENG_tory_1950_rearming_britain
+	icon = GFX_generic_army_training
+	x = -2
+	y = 3
+	cost = 5
+	
+	prerequisite = {
+		focus = ENG_tory_1950_curtail_rationing_programs
+	}
+	prerequisite = {
+		focus = ENG_tory_1950_the_self_sufficient_britain
+	}
+	available = {
+		has_country_flag = operation_avalon
+		has_country_flag = has_cgs
+	}
+	bypass = {
+	}
+	relative_position_id = ENG_tory_1950_conservative_victory
+
+	ai_will_do = {
+		base = 55
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus ENG_tory_1950_rearming_britain"
+		unlock_decision_tooltip = ENG_tory_1950_civil_defence_act
+	}
+}
+
+shared_focus = {
+	id = ENG_tory_1950_rebuild_britain_farms
+	icon = GFX_generic_agricultural_aid
+	x = -5
+	y = 4
+	cost = 5
+	
+	prerequisite = {
+		focus = ENG_tory_1950_mass_agricultural_reform
+	}
+	prerequisite = {
+		focus = ENG_tory_1950_maintain_a_balanced_budget
+	}
+	available = {
+		has_country_flag = ENG_agriculture_act
+	}
+	bypass = {
+	}
+	relative_position_id = ENG_tory_1950_conservative_victory
+
+	ai_will_do = {
+		base = 55
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus ENG_tory_1950_rebuild_britain_farms"
+		unlock_decision_tooltip = ENG_tory_1950_agriculture_holdings_act
+		clr_country_flag = ENG_agriculture_act
+	}
+}
+
+shared_focus = {
+	id = ENG_tory_1950_national_housebuilding_initiative
+	icon = GFX_generic_build_housing
+	x = -4
+	y = 5
+	cost = 5
+	
+	prerequisite = {
+		focus = ENG_tory_1950_mass_agricultural_reform
+	}
+	prerequisite = {
+		focus = ENG_tory_1950_maintain_a_balanced_budget
+	}
+	available = {
+	}
+	bypass = {
+	}
+	relative_position_id = ENG_tory_1950_conservative_victory
+
+	ai_will_do = {
+		base = 55
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus ENG_tory_1950_national_housebuilding_initiative"
+		unlock_decision_tooltip = ENG_tory_1950_town_development_act
+		unlock_decision_tooltip = ENG_tory_1950_town_country_planning_act
+		unlock_decision_tooltip = ENG_tory_1950_trunk_road_act
+	}
+}
+
+shared_focus = {
+	id = ENG_tory_1950_review_defence_spending
+	icon = GFX_generic_veterans_benefits
+	x = -3
+	y = 4
+	cost = 5
+	
+	prerequisite = {
+		focus = ENG_tory_1950_rearming_britain
+	}
+	prerequisite = {
+		focus = ENG_tory_1950_maintain_a_balanced_budget
+	}
+	available = {
+	}
+	bypass = {
+	}
+	relative_position_id = ENG_tory_1950_conservative_victory
+
+	ai_will_do = {
+		base = 75
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus ENG_tory_1950_review_defence_spending"
+		move_up_military = yes
+	}
+}
+
+shared_focus = {
+	id = ENG_tory_1950_invest_into_armouries
+	icon = GFX_generic_munitions_factories
+	x = -3
+	y = 6
+	cost = 5
+	
+	prerequisite = {
+		focus = ENG_tory_1950_review_defence_spending
+	}
+	available = {
+	}
+	bypass = {
+	}
+	relative_position_id = ENG_tory_1950_conservative_victory
+
+	ai_will_do = {
+		base = 55
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus ENG_tory_1950_invest_into_armouries"
+		custom_effect_tooltip = ENG_tory_1950_fire_service_act_tt
+		add_to_variable = { 
+			var = ENG_BlitzIndustrialFactory
+			value = 0.05
+		}
+		add_to_variable = { 
+			var = ENG_BlitzIndustrialDockyard
+			value = 0.05
+		}
+		add_to_variable = { 
+			var = ENG_BlitzMaxEfficiency
+			value = 0.05
+		}
+		add_to_variable = { 
+			var = ENG_BlitzEfficiencyGain
+			value = 0.05
+		}
+	}
+}
+
+shared_focus = {
+	id = ENG_tory_1950_education_act
+	icon = GFX_generic_research_grant
+	x = -2
+	y = 5
+	cost = 5
+	
+	prerequisite = {
+		focus = ENG_tory_1950_maintain_a_balanced_budget
+	}
+	available = {
+	}
+	bypass = {
+	}
+	relative_position_id = ENG_tory_1950_conservative_victory
+
+	ai_will_do = {
+		base = 55
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus ENG_tory_1950_education_act"
+		unlock_decision_tooltip = ENG_tory_1950_education_act
+	}
+}
+
+shared_focus = {
+	id = ENG_tory_1950_accept_the_welfare_state
+	icon = GFX_generic_workers_for_business
+	x = -1
+	y = 4
+	cost = 5
+	
+	prerequisite = {
+		focus = ENG_tory_1950_maintain_a_balanced_budget
+	}
+	available = {
+	}
+	bypass = {
+	}
+	relative_position_id = ENG_tory_1950_conservative_victory
+
+	ai_will_do = {
+		base = 55
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus ENG_tory_1950_accept_the_welfare_state"
+		unlock_decision_tooltip = ENG_tory_1950_fire_service_act
+		#unlock_decision_tooltip = ENG_tory_1950_national_assistance_amendment_act
+	}
+}
+
+shared_focus = {
+	id = ENG_tory_1950_national_insurance_act
+	icon = GFX_generic_constitutional_guarantees
+	x = 0
+	y = 5
+	cost = 5
+	
+	prerequisite = {
+		focus = ENG_tory_1950_accept_the_welfare_state
+	}
+	available = {
+	}
+	bypass = {
+	}
+	relative_position_id = ENG_tory_1950_conservative_victory
+
+	ai_will_do = {
+		base = 55
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus ENG_tory_1950_national_insurance_act"
+		unlock_decision_tooltip = ENG_tory_1950_national_insurance_act_decision
+	}
+}
+
+shared_focus = {
+	id = ENG_tory_1950_estabilish_the_nhs
+	icon = GFX_generic_FIN_promote_the_red_cross
+	x = -1
+	y = 6
+	cost = 5
+	
+	prerequisite = {
+		focus = ENG_tory_1950_accept_the_welfare_state
+	}
+	available = {
+	}
+	bypass = {
+	}
+	relative_position_id = ENG_tory_1950_conservative_victory
+
+	ai_will_do = {
+		base = 55
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus ENG_tory_1950_estabilish_the_nhs"
+		unlock_decision_tooltip = ENG_tory_1950_national_health_service_act
+	}
+}

@@ -1,0 +1,153 @@
+CHI_Reform_NRA = {
+	if = {
+		limit = {
+			has_idea = CHI_idea_NRA_0
+		}
+		swap_ideas = {
+			remove_idea = CHI_idea_NRA_0
+			add_idea = CHI_idea_NRA_1
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = CHI_idea_NRA_1
+		}
+		swap_ideas = {
+			remove_idea = CHI_idea_NRA_1
+			add_idea = CHI_idea_NRA_2
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = CHI_idea_NRA_2
+		}
+		swap_ideas = {
+			remove_idea = CHI_idea_NRA_2
+			add_idea = CHI_idea_NRA_3
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = CHI_idea_NRA_3
+		}
+		swap_ideas = {
+			remove_idea = CHI_idea_NRA_3
+			add_idea = CHI_idea_NRA_4
+		}
+	}
+}
+
+CHI_start_CCW = {
+	add_manpower = 20000
+    declare_war_on = {
+        target = FNG
+        type = civil_war
+    }
+	if = {
+		limit = { 
+			SIK = {
+				is_puppet_of = CHI
+			}
+		}
+		SIK = {
+			add_to_war = {
+				targeted_alliance = PREV
+				enemy = FNG
+				hostility_reason = asked_to_join
+			}
+		}
+	}
+
+
+	if = {
+		limit = { 
+			XSM = {
+				is_puppet_of = FNG
+			}
+		}
+		XSM = {
+			add_to_war = {
+				targeted_alliance = PREV
+				enemy = CHI
+				hostility_reason = asked_to_join
+			}
+		}
+	}
+    custom_effect_tooltip = CHI_ccw_start_tt
+	news_event = worldnews.8
+	FNG = {
+		country_event = {
+			id = krg_fng.101
+			days = 10
+		}
+	}
+	CCW_limit_foreign_support = yes
+}
+
+FNG_start_CCW = {
+	set_country_flag = FNG_national_pacification
+    declare_war_on = {
+        target = CHI
+        type = civil_war
+    }
+	if = {
+		limit = { 
+			SIK = {
+				is_puppet_of = CHI
+			}
+		}
+		SIK = {
+			add_to_war = {
+				targeted_alliance = PREV
+				enemy = FNG
+				hostility_reason = asked_to_join
+			}
+		}
+	}
+
+
+	if = {
+		limit = { 
+			XSM = {
+				is_puppet_of = FNG
+			}
+		}
+		XSM = {
+			add_to_war = {
+				targeted_alliance = PREV
+				enemy = CHI
+				hostility_reason = asked_to_join
+			}
+		}
+	}
+    custom_effect_tooltip = FNG_ccw_start_tt
+    news_event = worldnews.8
+	FNG = {
+		country_event = {
+			id = krg_fng.101
+			days = 10
+		}
+	}
+	CCW_limit_foreign_support = yes
+}
+
+CCW_limit_foreign_support = {
+	every_country = {
+		add_relation_modifier = {
+			target = FNG
+			modifier = volunteer_limit_minus_hundred_percent
+		}
+		add_relation_modifier = {
+			target = CHI
+			modifier = volunteer_limit_minus_hundred_percent
+		}
+	}
+}
+
+CHI_change_national_legitimacy = {
+	add_to_variable = {
+		var = CHI_CCW_momentum_var
+		value = China_temp_national_legitimacy_change
+		tooltip = CCW_decisive_defeat_tt
+	}
+}

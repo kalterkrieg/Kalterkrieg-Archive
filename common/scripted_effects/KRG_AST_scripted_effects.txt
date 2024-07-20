@@ -1,0 +1,284 @@
+AST_parliament_initial = {
+	clear_array = AST_parliament_party_array
+
+	for_loop_effect = {
+		start = 1
+		end = 7
+		compare = less_than_or_equals
+
+		add_to_array = { AST_parliament_party_array = v }
+	}
+
+	# AFM
+	1 = {
+		set_variable = { AST_parliament_seat = 5 } # Number of Seats
+		set_variable = { AST_parliament_support = 2 } # Support Type - 1: Government, 2: Neutral, 3: Opposition
+	}
+	# Labor
+	2 = {
+		set_variable = { AST_parliament_seat = 48 }
+		set_variable = { AST_parliament_support = 3 }
+	}
+	# Lang Labor
+	3 = {
+		set_variable = { AST_parliament_seat = 7 }
+		set_variable = { AST_parliament_support = 2 }
+	}
+	# ACP
+	4 = {
+		set_variable = { AST_parliament_seat = 14 }
+		set_variable = { AST_parliament_support = 1 }
+	}
+	# UAP
+	5 = {
+		set_variable = { AST_parliament_seat = 47 }
+		set_variable = { AST_parliament_support = 1 }
+	}
+	# UAP (R)
+	6 = {
+		set_variable = { AST_parliament_seat = 7 }
+		set_variable = { AST_parliament_support = 1 }
+	}
+	# AFM (R)
+	7 = {
+		set_variable = { AST_parliament_seat = 3 }
+		set_variable = { AST_parliament_support = 2 }
+	}
+
+	AST_parliament_reload = yes
+}
+
+AST_parliament_reload = {
+	clear_array = AST_parliament_government_array
+	clear_array = AST_parliament_neutral_array
+	clear_array = AST_parliament_opposition_array
+	clear_array = AST_parliament_government_main_array
+	clear_array = AST_parliament_neutral_main_array
+	clear_array = AST_parliament_opposition_main_array
+
+	for_each_loop = {
+		array = AST_parliament_party_array
+
+		if = {
+			limit = {
+				check_variable = { v:AST_parliament_support = 1 }
+			}
+			add_to_array = { AST_parliament_government_array = v }
+		}
+		else_if = {
+			limit = {
+				check_variable = { v:AST_parliament_support = 2 }
+			}
+			add_to_array = { AST_parliament_neutral_array = v }
+		}
+		else = {
+			add_to_array = { AST_parliament_opposition_array = v }
+		}
+	}
+
+	for_each_loop = {
+		array = AST_parliament_government_array
+
+		set_temp_variable = { global.seat_id = v }
+
+		var:v = {
+			if = {
+				limit = {
+					check_variable = { AST_parliament_seat > 0 }
+				}
+				for_loop_effect = {
+					start = 1
+					end = AST_parliament_seat
+					compare = less_than_or_equals
+
+					add_to_array = { ROOT.AST_parliament_government_main_array = global.seat_id }
+				}
+			}
+		}
+	}
+
+	for_each_loop = {
+		array = AST_parliament_neutral_array
+
+		set_temp_variable = { global.seat_id = v }
+
+		var:v = {
+			if = {
+				limit = {
+					check_variable = { AST_parliament_seat > 0 }
+				}
+				for_loop_effect = {
+					start = 1
+					end = AST_parliament_seat
+					compare = less_than_or_equals
+
+					add_to_array = { ROOT.AST_parliament_neutral_main_array = global.seat_id }
+				}
+			}
+		}
+	}
+
+	for_each_loop = {
+		array = AST_parliament_opposition_array
+
+		set_temp_variable = { global.seat_id = v }
+
+		var:v = {
+			if = {
+				limit = {
+					check_variable = { AST_parliament_seat > 0 }
+				}
+				for_loop_effect = {
+					start = 1
+					end = AST_parliament_seat
+					compare = less_than_or_equals
+
+					add_to_array = { ROOT.AST_parliament_opposition_main_array = global.seat_id }
+				}
+			}
+		}
+	}
+}
+
+
+AST_senate_initial = {
+	clear_array = AST_senate_party_array
+
+	for_loop_effect = {
+		start = 1
+		end = 7
+		compare = less_than_or_equals
+
+		add_to_array = { AST_senate_party_array = v }
+	}
+
+	# AFM
+	1 = {
+		set_variable = { AST_senate_seat = 4 } # Number of Seats
+		set_variable = { AST_senate_support = 2 } # Support Type - 1: Government, 2: Neutral, 3: Opposition
+	}
+	# Labor
+	2 = {
+		set_variable = { AST_senate_seat = 16 }
+		set_variable = { AST_senate_support = 3 }
+	}
+	# Lang Labor
+	3 = {
+		set_variable = { AST_senate_seat = 3 }
+		set_variable = { AST_senate_support = 2 }
+	}
+	# ACP
+	4 = {
+		set_variable = { AST_senate_seat = 7 }
+		set_variable = { AST_senate_support = 1 }
+	}
+	# UAP
+	5 = {
+		set_variable = { AST_senate_seat = 14 }
+		set_variable = { AST_senate_support = 1 }
+	}
+	# UAP (R)
+	6 = {
+		set_variable = { AST_senate_seat = 2 }
+		set_variable = { AST_senate_support = 1 }
+	}
+	# AFM (R)
+	7 = {
+		set_variable = { AST_senate_seat = 0 }
+		set_variable = { AST_senate_support = 2 }
+	}
+
+	AST_senate_reload = yes
+}
+
+AST_senate_reload = {
+	clear_array = AST_senate_government_array
+	clear_array = AST_senate_neutral_array
+	clear_array = AST_senate_opposition_array
+	clear_array = AST_senate_government_main_array
+	clear_array = AST_senate_neutral_main_array
+	clear_array = AST_senate_opposition_main_array
+
+	for_each_loop = {
+		array = AST_senate_party_array
+
+		if = {
+			limit = {
+				check_variable = { v:AST_senate_support = 1 }
+			}
+			add_to_array = { AST_senate_government_array = v }
+		}
+		else_if = {
+			limit = {
+				check_variable = { v:AST_senate_support = 2 }
+			}
+			add_to_array = { AST_senate_neutral_array = v }
+		}
+		else = {
+			add_to_array = { AST_senate_opposition_array = v }
+		}
+	}
+
+	for_each_loop = {
+		array = AST_senate_government_array
+
+		set_temp_variable = { global.seat_id = v }
+
+		var:v = {
+			if = {
+				limit = {
+					check_variable = { AST_senate_seat > 0 }
+				}
+				for_loop_effect = {
+					start = 1
+					end = AST_senate_seat
+					compare = less_than_or_equals
+
+					add_to_array = { ROOT.AST_senate_government_main_array = global.seat_id }
+				}
+			}
+		}
+	}
+
+	for_each_loop = {
+		array = AST_senate_neutral_array
+
+		set_temp_variable = { global.seat_id = v }
+
+		var:v = {
+			if = {
+				limit = {
+					check_variable = { AST_senate_seat > 0 }
+				}
+				for_loop_effect = {
+					start = 1
+					end = AST_senate_seat
+					compare = less_than_or_equals
+
+					add_to_array = { ROOT.AST_senate_neutral_main_array = global.seat_id }
+				}
+			}
+		}
+	}
+
+	for_each_loop = {
+		array = AST_senate_opposition_array
+
+		set_temp_variable = { global.seat_id = v }
+
+		var:v = {
+			if = {
+				limit = {
+					check_variable = { AST_senate_seat > 0 }
+				}
+				for_loop_effect = {
+					start = 1
+					end = AST_senate_seat
+					compare = less_than_or_equals
+
+					add_to_array = { ROOT.AST_senate_opposition_main_array = global.seat_id }
+				}
+			}
+		}
+	}
+}

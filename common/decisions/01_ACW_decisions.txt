@@ -1,0 +1,3982 @@
+ACW_decisions = {
+	ENT_increase_to_level_2 = {
+		icon = GFX_decision_generic_prepare_civil_war
+		visible = {
+			has_global_flag = ACW_ongoing
+			tag = ENT
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = ACW_has_level_1_involvement
+				check_variable = {
+					global.ACW_involvement_level = 1
+				}
+			}
+			OR = {
+				OR = {
+					CAL = {
+						surrender_progress > 0.1
+					}
+					NEE = {
+						surrender_progress > 0.1
+					}
+					GLG = {
+						surrender_progress > 0.1
+					}
+				}
+				AND = {
+					has_global_flag = ACW_6_months
+					TEX = {
+						surrender_progress < 0.5
+					}
+				}
+			}
+		}
+		fire_only_once = yes
+		cost = 50
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete ENT_increase_to_level_2 target: [From.GetName]"
+			custom_effect_tooltip = ACW_level_increase_2_tt
+			set_variable = {
+				global.ACW_involvement_level = 2
+			}
+			custom_effect_tooltip = tooltip_white_line
+		}
+		ai_will_do = {
+			base = 100
+		}
+	}
+	ENT_increase_to_level_3 = {
+		icon = GFX_decision_generic_prepare_civil_war
+		visible = {
+			has_global_flag = ACW_ongoing
+			tag = ENT
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = ACW_has_level_2_involvement
+				check_variable = {
+					global.ACW_involvement_level < 3
+				}
+			}
+			OR = {
+				OR = {
+					CAL = {
+						surrender_progress > 0.25
+					}
+					NEE = {
+						surrender_progress > 0.25
+					}
+					GLG = {
+						surrender_progress > 0.25
+					}
+				}
+				AND = {
+					has_global_flag = ACW_12_months
+					TEX = {
+						surrender_progress < 0.25
+					}
+				}
+			}
+		}
+		fire_only_once = yes
+		cost = 50
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete ENT_increase_to_level_3 target: [From.GetName]"
+			custom_effect_tooltip = ACW_level_increase_3_tt
+			set_variable = {
+				global.ACW_involvement_level = 3
+			}
+			custom_effect_tooltip = tooltip_white_line
+			add_to_variable = {
+				global.ACW_tensions = 2
+				tooltip = ACW_tensions_tt
+			}
+			clamp_variable = {
+				var = global.ACW_tensions
+				max = 100
+			}
+			custom_effect_tooltip = tooltip_white_line
+		}
+		ai_will_do = {
+			base = 100
+		}
+	}
+	ENT_increase_to_level_4 = {
+		icon = GFX_decision_generic_prepare_civil_war
+		visible = {
+			has_global_flag = ACW_ongoing
+			tag = ENT
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = ACW_has_level_3_involvement
+				check_variable = {
+					global.ACW_involvement_level = 3
+				}
+			}
+			set_temp_variable = { ACW_temp_tensions_check = 65}
+			custom_trigger_tooltip = {
+				tooltip = ACW_tensions_check_tt
+				check_variable = {
+					global.ACW_tensions > ACW_temp_tensions_check
+				}
+			}
+			OR = {
+				OR = {
+					CAL = {
+						surrender_progress > 0.5
+					}
+					NEE = {
+						surrender_progress > 0.5
+					}
+					GLG = {
+						surrender_progress > 0.5
+					}
+				}
+				AND = {
+					has_global_flag = ACW_18_months
+					TEX = {
+						surrender_progress < 0.1
+					}
+				}
+			}
+		}
+		days_re_enable = 90
+		cost = 50
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete ENT_increase_to_level_4 target: [From.GetName]"
+			custom_effect_tooltip = ACW_level_increase_4_tt
+			set_variable = {
+				global.ACW_involvement_level = 4
+			}
+			custom_effect_tooltip = tooltip_white_line
+			add_to_variable = {
+				global.ACW_tensions = 5
+				tooltip = ACW_tensions_tt
+			}
+			clamp_variable = {
+				var = global.ACW_tensions
+				max = 100
+			}
+			custom_effect_tooltip = tooltip_white_line
+			every_country = {
+				limit = {
+					OR = {
+						is_in_faction_with = GER
+						original_tag = DNF
+					}
+				}
+				set_country_flag = ACW_can_send_volunteers
+				add_ideas = RP_acw_volunteers_ideas
+			}
+		}
+		ai_will_do = {
+			base = 100
+		}
+	}
+	ENT_increase_to_level_5 = {
+		icon = GFX_decision_generic_prepare_civil_war
+		visible = {
+			has_global_flag = ACW_ongoing
+			tag = ENT
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = ACW_has_level_4_involvement
+				check_variable = {
+					global.ACW_involvement_level = 4
+				}
+			}
+			set_temp_variable = { ACW_temp_tensions_check = 85}
+			custom_trigger_tooltip = {
+				tooltip = ACW_tensions_check_tt
+				check_variable = {
+					global.ACW_tensions > ACW_temp_tensions_check
+				}
+			}
+			OR = {
+				CAL = {
+					surrender_progress > 0.75
+				}
+				NEE = {
+					surrender_progress > 0.75
+				}
+			}
+		}
+		fire_only_once = yes
+		cost = 50
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete ENT_increase_to_level_5 target: [From.GetName]"
+			custom_effect_tooltip = ACW_level_increase_5_tt
+			set_variable = {
+				global.ACW_involvement_level = 5
+			}
+			custom_effect_tooltip = tooltip_white_line
+			set_variable = {
+				global.ACW_tensions = 100
+			}
+			custom_effect_tooltip = ACW_set_tensions_100_tt
+			custom_effect_tooltip = tooltip_white_line
+		}
+		ai_will_do = {
+			base = 100
+		}
+	}
+	GER_increase_to_level_2 = {
+		icon = GFX_decision_generic_prepare_civil_war
+		visible = {
+			has_global_flag = ACW_ongoing
+			tag = GER
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = ACW_has_level_1_involvement
+				check_variable = {
+					global.ACW_involvement_level = 1
+				}
+			}
+			OR = {
+				OR = {
+					TEX = {
+						surrender_progress > 0.1
+					}
+				}
+				AND = {
+					has_global_flag = ACW_6_months
+					
+					CAL = {
+						surrender_progress < 0.3
+					}
+					NEE = {
+						surrender_progress < 0.3
+					}
+					GLG = {
+						surrender_progress < 0.3
+					}
+				}
+			}
+		}
+		fire_only_once = yes
+		cost = 50
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete GER_increase_to_level_2 target: [From.GetName]"
+			custom_effect_tooltip = ACW_level_increase_2_tt
+			set_variable = {
+				global.ACW_involvement_level = 2
+			}
+			custom_effect_tooltip = tooltip_white_line
+			add_to_variable = {
+				global.ACW_tensions = 5
+				tooltip = ACW_tensions_tt
+			}
+			clamp_variable = {
+				var = global.ACW_tensions
+				max = 100
+			}
+			custom_effect_tooltip = tooltip_white_line
+		}
+		ai_will_do = {
+			base = 100
+		}
+	}
+	GER_increase_to_level_3 = {
+		icon = GFX_decision_generic_prepare_civil_war
+		visible = {
+			has_global_flag = ACW_ongoing
+			tag = GER
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = ACW_has_level_2_involvement
+				check_variable = {
+					global.ACW_involvement_level < 3
+				}
+			}
+			OR = {
+				OR = {
+					TEX = {
+						surrender_progress > 0.25
+					}
+				}
+				AND = {
+					has_global_flag = ACW_12_months
+					CAL = {
+						surrender_progress < 0.25
+					}
+					NEE = {
+						surrender_progress < 0.25
+					}
+					GLG = {
+						surrender_progress < 0.25
+					}
+				}
+			}
+		}
+		fire_only_once = yes
+		cost = 50
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete GER_increase_to_level_3 target: [From.GetName]"
+			custom_effect_tooltip = ACW_level_increase_3_tt
+			set_variable = {
+				global.ACW_involvement_level = 3
+			}
+			custom_effect_tooltip = tooltip_white_line
+			add_to_variable = {
+				global.ACW_tensions = 5
+				tooltip = ACW_tensions_tt
+			}
+			clamp_variable = {
+				var = global.ACW_tensions
+				max = 100
+			}
+			custom_effect_tooltip = tooltip_white_line
+		}
+		ai_will_do = {
+			base = 100
+		}
+	}
+	GER_increase_to_level_4 = {
+		icon = GFX_decision_generic_prepare_civil_war
+		visible = {
+			has_global_flag = ACW_ongoing
+			tag = GER
+		}
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = ACW_has_level_3_involvement
+				check_variable = {
+					global.ACW_involvement_level = 3
+				}
+			}
+			set_temp_variable = { ACW_temp_tensions_check = 65}
+			custom_trigger_tooltip = {
+				tooltip = ACW_tensions_check_tt
+				check_variable = {
+					global.ACW_tensions > ACW_temp_tensions_check
+				}
+			}
+			OR = {
+				OR = {
+					TEX = {
+						surrender_progress > 0.5
+					}
+				}
+				AND = {
+					has_global_flag = ACW_18_months
+					CAL = {
+						surrender_progress < 0.1
+					}
+					NEE = {
+						surrender_progress < 0.1
+					}
+					GLG = {
+						surrender_progress < 0.1
+					}
+				}
+			}
+		}
+		days_re_enable = 90
+		cost = 50
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete GER_increase_to_level_4 target: [From.GetName]"
+			custom_effect_tooltip = ACW_level_increase_4_tt
+			set_variable = {
+				global.ACW_involvement_level = 3
+			}
+			custom_effect_tooltip = tooltip_white_line
+			add_to_variable = {
+				global.ACW_tensions = 5
+				tooltip = ACW_tensions_tt
+			}
+			clamp_variable = {
+				var = global.ACW_tensions
+				max = 100
+			}
+			custom_effect_tooltip = tooltip_white_line
+			every_country = {
+				limit = {
+					OR = {
+						is_in_faction_with = GER
+						original_tag = DNF
+					}
+				}
+			}
+			#TODO ACW accord vote volunteers
+		}
+		ai_will_do = {
+			base = 100
+		}
+	}
+	CAL_Seize_Denver = {
+		icon = GFX_decision_fortress
+		visible = {
+			original_tag = CAL
+			#has_completed_focus = CAL_The_Atlantic_Proposal
+		}
+		available = {
+			has_completed_focus = CAL_The_Atlantic_Proposal
+			382 = {
+				is_controlled_by = CAL
+			}
+		}
+		highlight_states = {
+			highlight_state_targets = {
+				state = 382
+			}
+		}
+
+		ai_will_do = {
+			base = 100
+		}
+		
+        complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete CAL_Seize_Denver target: [From.GetName]"
+            add_war_support = 0.025
+			add_stability = 0.05
+        }
+    }
+	CAL_Occupy_the_Rio_Grande = {
+		icon = GFX_decision_cavalry
+		visible = {
+			original_tag = CAL
+			#has_completed_focus = CAL_The_Atlantic_Proposal
+		}
+		available = {
+			has_completed_focus = CAL_The_Atlantic_Proposal
+			792 = {
+				is_fully_controlled_by = CAL
+			}
+		}
+		highlight_states = {
+			highlight_state_targets = {
+				state = 792
+			}
+		}
+
+		ai_will_do = {
+			base = 100
+		}
+
+        complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete CAL_Occupy_the_Rio_Grande target: [From.GetName]"
+            add_war_support = 0.05
+			add_stability = 0.075
+			add_manpower = 5000
+			custom_effect_tooltip = CAL_Mexican_Benefits
+        }
+    }
+	CAL_Secure_The_Texan_Oilfields = {
+		icon = GFX_decision_factories
+		visible = {
+			original_tag = CAL
+			#has_completed_focus = CAL_The_Atlantic_Proposal
+		}
+		available = {
+			has_completed_focus = CAL_The_Atlantic_Proposal
+			375 = {
+				is_controlled_by = CAL
+				compliance > 20
+				resistance < 40
+			}
+		}
+		highlight_states = {
+			highlight_state_targets = {
+				state = 375
+			}
+		}
+
+		ai_will_do = {
+			base = 100
+		}
+
+        complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete CAL_Secure_The_Texan_Oilfields target: [From.GetName]"
+			add_manpower = 10000
+			add_stability = 0.05
+			375 = {
+				add_compliance = 25
+				add_resource = {
+					type = oil
+					amount = 16
+				}
+			}
+			custom_effect_tooltip = CAL_Texan_Militias
+        }
+    }
+	CAL_Open_the_Gateway_to_the_West = {
+		icon = GFX_decision_railroad
+		visible = {
+			original_tag = CAL
+			#has_completed_focus = CAL_The_Atlantic_Proposal
+		}
+		available = {
+			has_completed_focus = CAL_The_Atlantic_Proposal
+			373 = {
+				is_controlled_by = CAL
+			}
+		}
+		highlight_states = {
+			highlight_state_targets = {
+				state = 373
+			}
+		}
+
+		ai_will_do = {
+			base = 100
+		}
+
+        complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete CAL_Open_the_Gateway_to_the_West target: [From.GetName]"
+			add_stability = 0.075
+			add_war_support = 0.05
+        }
+    }
+	CAL_Strike_at_the_Heart_of_Longism = {
+		icon = GFX_decision_generic_flags
+		visible = {
+			original_tag = CAL
+			#has_completed_focus = CAL_The_Atlantic_Proposal
+		}
+		available = {
+			has_completed_focus = CAL_The_Atlantic_Proposal
+			371 = {
+				is_controlled_by = CAL
+			}
+		}
+		highlight_states = {
+			highlight_state_targets = {
+				state = 371
+			}
+		}
+
+		ai_will_do = {
+			base = 100
+		}
+
+        complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete CAL_Strike_at_the_Heart_of_Longism target: [From.GetName]"
+			add_stability = 0.1
+			add_war_support = 0.1
+        }
+    }
+	CAL_Reunify_Colorado = {
+		icon = GFX_decision_us_flag
+		visible = {
+			original_tag = CAL
+			#has_completed_focus = CAL_The_Atlantic_Proposal
+			NOT = {
+				382 = {
+					is_core_of = CAL
+				}
+			}
+		}
+		available = {
+			382 = {
+				is_fully_controlled_by = CAL
+				compliance > 40
+				resistance < 30
+			}
+		}
+		highlight_states = {
+			highlight_state_targets = {
+				state = 382
+			}
+		}
+		fire_only_once = yes
+
+		ai_will_do = {
+			base = 100
+		}
+
+        complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete CAL_Reunify_Colorado target: [From.GetName]"
+            382 = {
+				add_core_of = CAL
+				set_state_flag = CAL_reunified_state
+			}
+			add_manpower = 5000
+			add_political_power = 50
+			custom_effect_tooltip = CAL_Colorado_Reunified
+			hidden_effect = {
+				931 = {
+
+				}
+			}
+        }
+    }
+	CAL_Reunify_Wyoming = {
+		icon = GFX_decision_us_flag
+		visible = {
+			original_tag = CAL
+			#has_completed_focus = CAL_The_Atlantic_Proposal
+			NOT = {
+				381 = {
+					is_core_of = CAL
+				}
+			}
+		}
+		available = {
+			381 = {
+				is_fully_controlled_by = CAL
+				compliance > 40
+				resistance < 30
+			}
+		}
+		highlight_states = {
+			highlight_state_targets = {
+				state = 381
+			}
+		}
+		fire_only_once = yes
+
+		ai_will_do = {
+			base = 100
+		}
+
+        complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete CAL_Reunify_Wyoming target: [From.GetName]"
+            381 = {
+				add_core_of = CAL
+				set_state_flag = CAL_reunified_state
+			}
+			add_manpower = 1000
+			add_political_power = 15
+			custom_effect_tooltip = CAL_Wyoming_Reunified
+        }
+    }
+	CAL_Reunify_Montana = {
+		icon = GFX_decision_us_flag
+		visible = {
+			original_tag = CAL
+			#has_completed_focus = CAL_The_Atlantic_Proposal
+			NOT = {
+				388 = {
+					is_core_of = CAL
+				}
+			}
+		}
+		available = {
+			388 = {
+				is_fully_controlled_by = CAL
+				compliance > 40
+				resistance < 30
+			}
+		}
+		highlight_states = {
+			highlight_state_targets = {
+				state = 388
+			}
+		}
+		fire_only_once = yes
+
+		ai_will_do = {
+			base = 100
+		}
+
+        complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete CAL_Reunify_Montana target: [From.GetName]"
+            388 = {
+				add_core_of = CAL
+				set_state_flag = CAL_reunified_state
+			}
+			add_manpower = 1500
+			add_political_power = 20
+			custom_effect_tooltip = CAL_Montana_Reunified
+        }
+    }
+	CAL_Reunify_New_Mexico = {
+		icon = GFX_decision_us_flag
+		visible = {
+			original_tag = CAL
+			#has_completed_focus = CAL_The_Atlantic_Proposal
+			NOT = {
+				376 = {
+					is_core_of = CAL
+				}
+			}
+		}
+		available = {
+			376 = {
+				is_fully_controlled_by = CAL
+				compliance > 40
+				resistance < 30
+			}
+		}
+		highlight_states = {
+			highlight_state_targets = {
+				state = 376
+			}
+		}
+		fire_only_once = yes
+
+		ai_will_do = {
+			base = 100
+		}
+
+        complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete CAL_Reunify_New_Mexico target: [From.GetName]"
+            376 = {
+				add_core_of = CAL
+				set_state_flag = CAL_reunified_state
+			}
+			add_manpower = 1500
+			add_political_power = 20
+			custom_effect_tooltip = CAL_New_Mexico_Reunified
+        }
+    }
+	NEE_reunify_pennsylvania = {
+		icon = GFX_decision_us_flag
+		visible = {
+			original_tag = NEE
+			NOT = {
+				360 = {
+					is_core_of = NEE
+				}
+			}
+		}
+		available = {
+			360 = {
+				is_fully_controlled_by = NEE
+				compliance > 40
+				resistance < 30
+			}
+		}
+		highlight_states = {
+			highlight_state_targets = {
+				state = 360
+			}
+		}
+		fire_only_once = yes
+
+		ai_will_do = {
+			base = 100
+		}
+
+        complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_reunify_pennsylvania target: [From.GetName]"
+            360 = {
+				add_core_of = NEE
+				set_state_flag = NEE_reunified_state
+			}
+			add_manpower = 1500
+			add_political_power = 20
+			custom_effect_tooltip = NEE_pennsylvania_Reunified_tt
+        }
+    }
+	NEE_reclaim_dc = {
+		icon = GFX_decision_us_flag
+		visible = {
+			original_tag = NEE
+		}
+		available = {
+			361 = {
+				is_fully_controlled_by = NEE
+			}
+		}
+		highlight_states = {
+			highlight_state_targets = {
+				state = 361
+			}
+		}
+		fire_only_once = yes
+
+		ai_will_do = {
+			base = 100
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_reclaim_dc target: [From.GetName]"
+			add_war_support = 0.05
+			add_manpower = 5000
+		}
+	}
+	NEE_seize_Atlanta = {
+		icon = GFX_decision_us_flag
+		visible = {
+			original_tag = NEE
+		}
+		available = {
+			365 = {
+				is_fully_controlled_by = NEE
+			}
+		}
+		highlight_states = {
+			highlight_state_targets = {
+				state = 365
+			}
+		}
+		fire_only_once = yes
+
+		ai_will_do = {
+			base = 100
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_seize_Atlanta target: [From.GetName]"
+			add_war_support = 0.05
+			add_manpower = 5000
+			set_country_flag = NEE_has_seized_Atlanta
+		}
+	}
+	NEE_reenact_shermans_march = {
+		icon = GFX_decision_soldierly_discipline
+		visible = {
+			original_tag = NEE
+		}
+		available = {
+			365 = {
+				is_fully_controlled_by = NEE
+			}
+			has_country_flag = NEE_has_seized_Atlanta
+		}
+		highlight_states = {
+			highlight_state_targets = {
+				state = 365
+			}
+		}
+		fire_only_once = yes
+
+		ai_will_do = {
+			base = 100
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_reenact_shermans_march target: [From.GetName]"
+			add_war_support = 0.10
+			add_stability = 0.05
+			add_manpower = 10000
+		}
+	}
+	NEE_liberate_mountaintop_insurgency = {
+		icon = GFX_decision_us_flag
+		visible = {
+			original_tag = NEE
+		}
+		available = {
+			795 = {
+				is_controlled_by = NEE
+			}
+		}
+		highlight_states = {
+			highlight_state_targets = {
+				state = 795
+			}
+		}
+		fire_only_once = yes
+		days_remove = 14
+
+		ai_will_do = {
+			base = 100
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_liberate_mountaintop_insurgency target: [From.GetName]"
+			add_war_support = 0.05
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove NEE_liberate_mountaintop_insurgency target: [From.GetName]"
+			custom_effect_tooltip = NEE_mountaintop_rewards
+			hidden_effect = {
+				load_oob = "NEE_mountaintop"
+			}
+		}
+	}
+	NEE_appalachain_guerillas = {
+		icon = GFX_decision_generic_military
+		visible = {
+			original_tag = NEE
+		}
+		available = {
+			OR = {
+				NOT = {
+					has_full_control_of_state = 822
+				}
+				NOT = {
+					has_full_control_of_state = 796
+				}
+				TEX = {
+					controls_state = 358
+				}
+			}
+		}
+
+		custom_cost_text = CP_25
+		custom_cost_trigger = {
+			command_power > 24.999
+		}
+
+		fire_only_once = yes
+
+		ai_will_do = {
+			base = 100
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_appalachain_guerillas target: [From.GetName]"
+			hidden_effect = {
+				add_command_power = -25
+			}
+			every_state = {
+				limit = {
+					OR = {
+						state = 800
+						state = 357
+						state = 799
+						state = 358
+					}
+				}
+				add_dynamic_modifier = {
+					modifier = NEE_guerilla_warfare
+				}
+			}
+		}
+	}
+	NEE_hide_lend_lease_decisions = {
+		icon = GFX_decision_generic_agreement
+		visible = {
+			original_tag = NEE
+		}
+		available = {
+			GLG = {
+				has_capitulated = no
+			}
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_hide_lend_lease_decisions target: [From.GetName]"
+			if = {
+				limit = {
+					NOT = {
+						has_country_flag = NEE_hidden_lend_Lease_decisions
+					}
+				}
+				set_country_flag = NEE_hidden_lend_Lease_decisions
+			}
+			else = {
+				clr_country_flag = NEE_hidden_lend_Lease_decisions
+			}
+		}
+	}
+	NEE_GLG_lend_lease_rifles = {
+		icon = GFX_decision_generic_prepare_civil_war
+		visible = {
+			original_tag = NEE
+			NOT = {
+				has_country_flag = NEE_hidden_lend_Lease_decisions
+				has_global_flag = WK3
+			}
+		}
+		available = {
+			GLG = {
+				has_capitulated = no
+			}
+			has_equipment = {
+				infantry_equipment > 999
+			}
+		}
+		targets = {
+			GLG
+		}
+		cancel_trigger = {
+			NOT = {
+				has_global_flag = ACW_ongoing
+			}
+		}
+		cost = 25
+		days_remove = 30
+		days_re_enable = 90
+
+		ai_will_do = {
+			base = 50
+		}
+
+		cancel_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision cancel NEE_GLG_lend_lease_rifles target: [From.GetName]"
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_GLG_lend_lease_rifles target: [From.GetName]"
+			GLG = {
+				add_war_support = 0.01
+			}
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = -1000
+			}
+			NEE = {
+				add_to_variable = {
+					ACW_infantry_equipment_sent = 1000
+				}
+			}
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove NEE_GLG_lend_lease_rifles target: [From.GetName]"
+			GLG = {
+				add_equipment_to_stockpile = {
+					type = infantry_equipment
+					amount = 1000
+				}
+				add_to_variable = {
+					ACW_infantry_equipment_received = 1000
+				}
+			}
+			
+		}
+	}
+	NEE_GLG_lend_lease_artillery = {
+		icon = GFX_decision_artillery
+		visible = {
+			original_tag = NEE
+			NOT = {
+				has_country_flag = NEE_hidden_lend_Lease_decisions
+				has_global_flag = WK3
+			}
+		}
+		available = {
+			GLG = {
+				has_capitulated = no
+			}
+			has_equipment = {
+				artillery_equipment > 99
+			}
+		}
+		cancel_trigger = {
+			NOT = {
+				has_global_flag = ACW_ongoing
+			}
+		}
+		targets = {
+			GLG
+		}
+		cost = 25
+		days_remove = 30
+		days_re_enable = 90
+
+		ai_will_do = {
+			base = 50
+		}
+
+		cancel_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision cancel NEE_GLG_lend_lease_artillery target: [From.GetName]"
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_GLG_lend_lease_artillery target: [From.GetName]"
+			GLG = {
+				add_war_support = 0.01
+			}
+			add_equipment_to_stockpile = {
+				type = artillery_equipment
+				amount = -100
+			}
+			NEE = {
+				add_to_variable = {
+					ACW_artillery_sent = 100
+				}
+			}
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove NEE_GLG_lend_lease_artillery target: [From.GetName]"
+			GLG = {
+				add_equipment_to_stockpile = {
+					type = artillery_equipment
+					amount = 100
+				}
+				add_to_variable = {
+					ACW_artillery_received = 100
+				}
+			}
+		}
+	}
+	NEE_GLG_lend_lease_support_equipment = {
+		icon = GFX_decision_support_equipment
+		visible = {
+			original_tag = NEE
+			NOT = {
+				has_country_flag = NEE_hidden_lend_Lease_decisions
+				has_global_flag = WK3
+			}
+		}
+		available = {
+			GLG = {
+				has_capitulated = no
+			}
+			has_equipment = {
+				support_equipment > 249
+			}
+		}
+		cancel_trigger = {
+			NOT = {
+				has_global_flag = ACW_ongoing
+			}
+		}
+		targets = {
+			GLG
+		}
+		cost = 25
+		days_remove = 30
+		days_re_enable = 90
+
+		ai_will_do = {
+			base = 50
+		}
+
+		cancel_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision cancel NEE_GLG_lend_lease_support_equipment target: [From.GetName]"
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_GLG_lend_lease_support_equipment target: [From.GetName]"
+			GLG = {
+				add_war_support = 0.01
+			}
+			add_equipment_to_stockpile = {
+				type = support_equipment
+				amount = -250
+			}
+			NEE = {
+				add_to_variable = {
+					ACW_support_equipment_sent = 250
+				}
+			}
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove NEE_GLG_lend_lease_support_equipment target: [From.GetName]"
+			GLG = {
+				add_equipment_to_stockpile = {
+					type = support_equipment
+					amount = 250
+				}
+				add_to_variable = {
+					ACW_support_equipment_received = 250
+				}
+			}
+		}
+	}
+	NEE_GLG_lend_lease_motorized = {
+		icon = GFX_decision_generic_motorized
+		visible = {
+			original_tag = NEE
+			NOT = {
+				has_country_flag = NEE_hidden_lend_Lease_decisions
+				has_global_flag = WK3
+			}
+		}
+		available = {
+			GLG = {
+				has_capitulated = no
+			}
+			has_equipment = {
+				motorized_equipment > 99
+			}
+		}
+		cancel_trigger = {
+			NOT = {
+				has_global_flag = ACW_ongoing
+			}
+		}
+		targets = {
+			GLG
+		}
+		cost = 25
+		days_remove = 30
+		days_re_enable = 90
+
+		ai_will_do = {
+			base = 50
+		}
+
+		cancel_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision cancel NEE_GLG_lend_lease_motorized target: [From.GetName]"
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_GLG_lend_lease_motorized target: [From.GetName]"
+			GLG = {
+				add_war_support = 0.01
+			}
+			add_equipment_to_stockpile = {
+				type = motorized_equipment
+				amount = -100
+			}
+			NEE = {
+				add_to_variable = {
+					ACW_motorized_sent = 100
+				}
+			}
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove NEE_GLG_lend_lease_motorized target: [From.GetName]"
+			GLG = {
+				add_equipment_to_stockpile = {
+					type = motorized_equipment
+					amount = 100
+				}
+				add_to_variable = {
+					ACW_motorized_received = 100
+				}
+			}
+		}
+	}
+	NEE_GLG_lend_lease_anti_tank = {
+		icon = GFX_decision_artillery
+		visible = {
+			original_tag = NEE
+			NOT = {
+				has_country_flag = NEE_hidden_lend_Lease_decisions
+				has_global_flag = WK3
+			}
+		}
+		available = {
+			GLG = {
+				has_capitulated = no
+			}
+			has_equipment = {
+				anti_tank_equipment > 49
+			}
+		}
+		cancel_trigger = {
+			NOT = {
+				has_global_flag = ACW_ongoing
+			}
+		}
+		targets = {
+			GLG
+		}
+		cost = 25
+		days_remove = 30
+		days_re_enable = 90
+
+		ai_will_do = {
+			base = 50
+		}
+
+		cancel_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision cancel NEE_GLG_lend_lease_anti_tank target: [From.GetName]"
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_GLG_lend_lease_anti_tank target: [From.GetName]"
+			GLG = {
+				add_war_support = 0.01
+			}
+			add_equipment_to_stockpile = {
+				type = anti_tank_equipment
+				amount = -50
+			}
+			NEE = {
+				add_to_variable = {
+					ACW_anti_tank_equipment_sent = 50
+				}
+			}
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove NEE_GLG_lend_lease_anti_tank target: [From.GetName]"
+			GLG = {
+				add_equipment_to_stockpile = {
+					type = anti_tank_equipment
+					amount = 50
+				}
+				add_to_variable = {
+					ACW_anti_tank_equipment_received = 50
+				}
+			}
+		}
+	}
+	NEE_GLG_lend_lease_anti_air = {
+		icon = GFX_decision_AA_small
+		visible = {
+			original_tag = NEE
+			NOT = {
+				has_country_flag = NEE_hidden_lend_Lease_decisions
+				has_global_flag = WK3
+			}
+		}
+		available = {
+			GLG = {
+				has_capitulated = no
+			}
+			has_equipment = {
+				anti_air_equipment > 49
+			}
+		}
+		cancel_trigger = {
+			NOT = {
+				has_global_flag = ACW_ongoing
+			}
+		}
+		targets = {
+			GLG
+		}
+		cost = 25
+		days_remove = 30
+		days_re_enable = 90
+
+		ai_will_do = {
+			base = 50
+		}
+
+		cancel_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision cancel NEE_GLG_lend_lease_anti_air target: [From.GetName]"
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NEE_GLG_lend_lease_anti_air target: [From.GetName]"
+			GLG = {
+				add_war_support = 0.01
+			}
+			add_equipment_to_stockpile = {
+				type = anti_air_equipment
+				amount = -50
+			}
+			NEE = {
+				add_to_variable = {
+					ACW_anti_air_equipment_sent = 50
+				}
+			}
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove NEE_GLG_lend_lease_anti_air target: [From.GetName]"
+			GLG = {
+				add_equipment_to_stockpile = {
+					type = anti_air_equipment
+					amount = 50
+				}
+				add_to_variable = {
+					ACW_anti_air_equipment_received = 50
+				}
+			}
+		}
+	}
+	ENT_accord_acw_send_volunteers = {
+		icon = GFX_decision_generic_military
+		fire_only_once = yes
+
+		visible = {
+			check_variable = { global.accord_issue = 0 }
+			has_global_flag = ACW_start
+			is_in_faction_with = ENT
+			NOT = { has_global_flag = accord_issue_7_triggered }
+		}
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = ACW_has_level_4_involvement
+				check_variable = {
+					global.ACW_involvement_level > 3
+				}
+			}
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete ENT_accord_acw_send_volunteers target: [From.GetName]"
+			set_variable = { global.accord_issue_check = 7 }
+			accord_issue_acw_send_volunteers_effect = yes
+			for_each_scope_loop = {
+				array = global.accord_voting_country_array
+
+				activate_mission = accord_acw_send_volunteers_issue
+			}
+			custom_effect_tooltip = ENT_accord_acw_send_volunteers_tt
+			set_global_flag = accord_issue_7_triggered
+		}
+		ai_will_do = {
+			base = 100
+		}
+	}
+
+
+	ENT_accord_acw_declare_on_aus = {
+		icon = GFX_decision_generic_ignite_civil_war
+		visible = {
+			check_variable = { global.accord_issue = 0 }
+			has_global_flag = ACW_start
+			is_in_faction_with = ENT
+			NOT = { 
+				has_global_flag = accord_issue_8_triggered
+				has_global_flag = ACW_WK3_escalation
+			}
+		}
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = ACW_has_level_5_involvement
+				check_variable = {
+					global.ACW_involvement_level > 4
+				}
+			}
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete ENT_accord_acw_declare_on_aus target: [From.GetName]"
+			accord_issue_acw_declare_on_aus_effect = yes
+			set_variable = { global.accord_issue_check = 8 }
+			for_each_scope_loop = {
+				array = global.accord_voting_country_array
+
+				activate_mission = accord_acw_declare_on_aus_issue
+			}
+			custom_effect_tooltip = ENT_accord_acw_declare_on_aus_tt
+			set_global_flag = accord_issue_8_triggered
+		}
+		ai_will_do = {
+			base = 100
+		}
+	}
+	ENT_lend_lease_infantry_toggle = {
+		icon = GFX_decision_generic_prepare_civil_war
+		visible = {
+			is_in_or_aligned_with_accord = yes
+		}
+		available = {
+			FROM = {
+				has_capitulated = no
+			}
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete ENT_lend_lease_infantry_toggle target: [From.GetName]"
+			if = {
+				limit = {
+					NOT = {
+						has_country_flag = ENT_hidden_lend_lease_infantry
+					}
+				}
+				set_country_flag = ENT_hidden_lend_lease_infantry
+			}
+			else = {
+				clr_country_flag = ENT_hidden_lend_lease_infantry
+			}
+		}
+	}
+	ENT_lend_lease_mech_toggle = {
+		icon = GFX_decision_tank
+		visible = {
+			is_in_or_aligned_with_accord = yes
+		}
+		available = {
+			FROM = {
+				has_capitulated = no
+			}
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete ENT_lend_lease_mech_toggle target: [From.GetName]"
+			if = {
+				limit = {
+					NOT = {
+						has_country_flag = ENT_hidden_lend_lease_mech
+					}
+				}
+				set_country_flag = ENT_hidden_lend_lease_mech
+			}
+			else = {
+				clr_country_flag = ENT_hidden_lend_lease_mech
+			}
+		}
+	}
+	ENT_lend_lease_air_toggle = {
+		icon = GFX_decision_plane
+		visible = {
+			is_in_or_aligned_with_accord = yes
+		}
+		available = {
+			FROM = {
+				has_capitulated = no
+			}
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete ENT_lend_lease_air_toggle target: [From.GetName]"
+			if = {
+				limit = {
+					NOT = {
+						has_country_flag = ENT_hidden_lend_lease_air
+					}
+				}
+				set_country_flag = ENT_hidden_lend_lease_air
+			}
+			else = {
+				clr_country_flag = ENT_hidden_lend_lease_air
+			}
+		}
+	}
+	ENT_lend_lease_rifles = {
+		icon = GFX_decision_generic_prepare_civil_war
+		visible = {
+			is_in_or_aligned_with_accord = yes
+			NOT = {
+				has_global_flag = WK3
+				has_country_flag = ENT_hidden_lend_lease_infantry
+			}
+		}
+		available = {
+			FROM = {
+				has_capitulated = no
+			}
+			has_equipment = {
+				infantry_equipment > 999
+			}
+			custom_trigger_tooltip = {
+				tooltip = ACW_has_level_1_involvement
+				check_variable = {
+					global.ACW_involvement_level > 0
+				}
+			}
+		}
+		cancel_trigger = {
+			NOT = {
+				has_global_flag = ACW_ongoing
+			}
+		}
+		targets = {
+			NEE CAL GLG
+		}
+
+		ai_will_do = {
+			base = 75
+		}
+
+		cost = 25
+		days_remove = 30
+		days_re_enable = 90
+
+		cancel_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision cancel ENT_lend_lease_rifles target: [From.GetName]"
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete ENT_lend_lease_rifles target: [From.GetName]"
+		
+            FROM = {
+				add_war_support = 0.01
+			}
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = -1000
+			}
+			add_to_variable = {
+				ACW_infantry_equipment_sent = 1000
+			}
+			add_to_variable = {
+				global.ACW_tensions = 0.25
+				tooltip = ACW_tensions_tt
+			}
+			clamp_variable = {
+				var = global.ACW_tensions
+				max = 100
+			}
+		}
+		
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove ENT_lend_lease_rifles target: [From.GetName]"
+			FROM = {
+				add_equipment_to_stockpile = {
+					type = infantry_equipment
+					amount = 1000
+				}
+				add_to_variable = {
+					ACW_infantry_equipment_received = 1000
+				}
+			}
+		}
+	}
+	ENT_lend_lease_artillery = {
+		icon = GFX_decision_artillery
+		visible = {
+			is_in_or_aligned_with_accord = yes
+			NOT = {
+				has_global_flag = WK3
+				has_country_flag = ENT_hidden_lend_lease_infantry
+			}
+		}
+		available = {
+			FROM = {
+				has_capitulated = no
+			}
+			has_equipment = {
+				artillery_equipment > 99
+			}
+			custom_trigger_tooltip = {
+				tooltip = ACW_has_level_1_involvement
+				check_variable = {
+					global.ACW_involvement_level > 0
+				}
+			}
+		}
+		cancel_trigger = {
+			NOT = {
+				has_global_flag = ACW_ongoing
+			}
+		}
+		targets = {
+			NEE CAL GLG
+		}
+
+		ai_will_do = {
+			base = 75
+		}
+
+		cost = 25
+		days_remove = 30
+		days_re_enable = 90
+
+		cancel_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision cancel ENT_lend_lease_artillery target: [From.GetName]"
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete ENT_lend_lease_artillery target: [From.GetName]"
+		
+            FROM = {
+				add_war_support = 0.01
+			}
+			add_equipment_to_stockpile = {
+				type = artillery_equipment
+				amount = -100
+			}
+			add_to_variable = {
+				ACW_artillery_sent = 100
+			}
+			add_to_variable = {
+				global.ACW_tensions = 0.25
+				tooltip = ACW_tensions_tt
+			}
+			clamp_variable = {
+				var = global.ACW_tensions
+				max = 100
+			}
+		}
+		
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove ENT_lend_lease_artillery target: [From.GetName]"
+			FROM = {
+				add_equipment_to_stockpile = {
+					type = artillery_equipment
+					amount = 100
+				}
+				add_to_variable = {
+					ACW_artillery_received = 100
+				}
+			}
+		}
+	}
+	ENT_lend_lease_support_equipment = {
+		icon = GFX_decision_support_equipment
+		visible = {
+			is_in_or_aligned_with_accord = yes
+			NOT = {
+				has_global_flag = WK3
+				has_country_flag = ENT_hidden_lend_lease_infantry
+			}
+		}
+		available = {
+			FROM = {
+				has_capitulated = no
+			}
+			has_equipment = {
+				support_equipment > 249
+			}
+			custom_trigger_tooltip = {
+				tooltip = ACW_has_level_1_involvement
+				check_variable = {
+					global.ACW_involvement_level > 0
+				}
+			}
+		}
+		cancel_trigger = {
+			NOT = {
+				has_global_flag = ACW_ongoing
+			}
+		}
+		targets = {
+			NEE CAL GLG
+		}
+
+		ai_will_do = {
+			base = 75
+		}
+
+		cost = 25
+		days_remove = 30
+		days_re_enable = 90
+
+		cancel_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision cancel ENT_lend_lease_support_equipment target: [From.GetName]"
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete ENT_lend_lease_support_equipment target: [From.GetName]"
+		
+            FROM = {
+				add_war_support = 0.01
+			}
+			add_equipment_to_stockpile = {
+				type = support_equipment
+				amount = -250
+			}
+			add_to_variable = {
+				ACW_support_equipment_sent = 250
+			}
+			add_to_variable = {
+				global.ACW_tensions = 0.25
+				tooltip = ACW_tensions_tt
+			}
+			clamp_variable = {
+				var = global.ACW_tensions
+				max = 100
+			}
+		}
+		
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove ENT_lend_lease_support_equipment target: [From.GetName]"
+			FROM = {
+				add_equipment_to_stockpile = {
+					type = support_equipment
+					amount = 250
+				}
+				add_to_variable = {
+					ACW_support_equipment_received = 250
+				}
+			}
+		}
+	}
+	ENT_lend_lease_motorized = {
+		icon = GFX_decision_generic_motorized
+		visible = {
+			is_in_or_aligned_with_accord = yes
+			NOT = {
+				has_global_flag = WK3
+				has_country_flag = ENT_hidden_lend_lease_infantry
+			}
+		}
+		available = {
+			FROM = {
+				has_capitulated = no
+			}
+			has_equipment = {
+				motorized_equipment > 99
+			}
+			custom_trigger_tooltip = {
+				tooltip = ACW_has_level_1_involvement
+				check_variable = {
+					global.ACW_involvement_level > 0
+				}
+			}
+		}
+		cancel_trigger = {
+			NOT = {
+				has_global_flag = ACW_ongoing
+			}
+		}
+		targets = {
+			NEE CAL GLG
+		}
+
+		ai_will_do = {
+			base = 75
+		}
+		
+		cost = 25
+		days_remove = 30
+		days_re_enable = 90
+
+		cancel_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision cancel ENT_lend_lease_motorized target: [From.GetName]"
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete ENT_lend_lease_motorized target: [From.GetName]"
+		
+            FROM = {
+				add_war_support = 0.01
+			}
+			add_equipment_to_stockpile = {
+				type = motorized_equipment
+				amount = -100
+			}
+			add_to_variable = {
+				ACW_motorized_sent = 100
+			}
+			add_to_variable = {
+				global.ACW_tensions = 0.25
+				tooltip = ACW_tensions_tt
+			}
+			clamp_variable = {
+				var = global.ACW_tensions
+				max = 100
+			}
+		}
+		
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove ENT_lend_lease_motorized target: [From.GetName]"
+			FROM = {
+				add_equipment_to_stockpile = {
+					type = motorized_equipment
+					amount = 100
+				}
+				add_to_variable = {
+					ACW_motorized_received = 100
+				}
+			}
+		}
+	}
+	ENT_lend_lease_anti_tank = {
+		icon = GFX_decision_artillery
+		visible = {
+			is_in_or_aligned_with_accord = yes
+			NOT = {
+				has_global_flag = WK3
+				has_country_flag = ENT_hidden_lend_lease_infantry
+			}
+		}
+		available = {
+			FROM = {
+				has_capitulated = no
+			}
+			has_equipment = {
+				anti_tank_equipment > 49
+			}
+			custom_trigger_tooltip = {
+				tooltip = ACW_has_level_1_involvement
+				check_variable = {
+					global.ACW_involvement_level > 0
+				}
+			}
+		}
+		cancel_trigger = {
+			NOT = {
+				has_global_flag = ACW_ongoing
+			}
+		}
+		targets = {
+			NEE CAL GLG
+		}
+
+		ai_will_do = {
+			base = 75
+		}
+
+		cost = 25
+		days_remove = 30
+		days_re_enable = 90
+		
+		cancel_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision cancel ENT_lend_lease_anti_tank target: [From.GetName]"
+		}
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete ENT_lend_lease_anti_tank target: [From.GetName]"
+		
+            FROM = {
+				add_war_support = 0.01
+			}
+			add_equipment_to_stockpile = {
+				type = anti_tank_equipment
+				amount = -50
+			}
+			add_to_variable = {
+				ACW_anti_tank_equipment_sent = 50
+			}
+			add_to_variable = {
+				global.ACW_tensions = 0.25
+				tooltip = ACW_tensions_tt
+			}
+			clamp_variable = {
+				var = global.ACW_tensions
+				max = 100
+			}
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove ENT_lend_lease_anti_tank target: [From.GetName]"
+			FROM = {
+				add_equipment_to_stockpile = {
+					type = anti_tank_equipment
+					amount = 50
+				}
+				add_to_variable = {
+					ACW_anti_tank_equipment_received = 50
+				}
+			}
+		}
+	}
+	ENT_lend_lease_anti_air = {
+		icon = GFX_decision_AA_small
+		visible = {
+			is_in_or_aligned_with_accord = yes
+			NOT = {
+				has_global_flag = WK3
+				has_country_flag = ENT_hidden_lend_lease_infantry
+			}
+		}
+		available = {
+			FROM = {
+				has_capitulated = no
+			}
+			has_equipment = {
+				anti_air_equipment > 49
+			}
+			custom_trigger_tooltip = {
+				tooltip = ACW_has_level_1_involvement
+				check_variable = {
+					global.ACW_involvement_level > 0
+				}
+			}
+		}
+		cancel_trigger = {
+			NOT = {
+				has_global_flag = ACW_ongoing
+			}
+		}
+		targets = {
+			NEE CAL GLG
+		}
+
+		ai_will_do = {
+			base = 75
+		}
+
+		cost = 25
+		days_remove = 30
+		days_re_enable = 90
+
+
+		cancel_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision cancel ENT_lend_lease_anti_air target: [From.GetName]"
+		}
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete ENT_lend_lease_anti_air target: [From.GetName]"
+		
+            FROM = {
+				add_war_support = 0.01
+			}
+			add_equipment_to_stockpile = {
+				type = anti_air_equipment
+				amount = -50
+			}
+			add_to_variable = {
+				ACW_anti_air_equipment_sent = 50
+			}
+			add_to_variable = {
+				global.ACW_tensions = 0.25
+				tooltip = ACW_tensions_tt
+			}
+			clamp_variable = {
+				var = global.ACW_tensions
+				max = 100
+			}
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove ENT_lend_lease_anti_air target: [From.GetName]"
+			FROM = {
+				add_equipment_to_stockpile = {
+					type = anti_air_equipment
+					amount = 50
+				}
+				add_to_variable = {
+					ACW_anti_air_equipment_received = 50
+				}
+			}
+		}
+	}
+	ENT_lend_lease_mechanized = {
+		icon = GFX_decision_generic_motorized
+		visible = {
+			is_in_or_aligned_with_accord = yes
+			NOT = {
+				has_global_flag = WK3
+				has_country_flag = ENT_hidden_lend_lease_mech
+			}
+		}
+		available = {
+			FROM = {
+				has_capitulated = no
+			}
+			has_equipment = {
+				mechanized_equipment > 49
+			}
+			custom_trigger_tooltip = {
+				tooltip = ACW_has_level_2_involvement
+				check_variable = {
+					global.ACW_involvement_level > 1
+				}
+			}
+		}
+		cancel_trigger = {
+			NOT = {
+				has_global_flag = ACW_ongoing
+			}
+		}
+		targets = {
+			NEE CAL GLG
+		}
+
+		ai_will_do = {
+			base = 75
+		}
+
+		cost = 25
+		days_remove = 30
+		days_re_enable = 90
+
+		cancel_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision cancel ENT_lend_lease_mechanized target: [From.GetName]"
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete ENT_lend_lease_mechanized target: [From.GetName]"
+		
+            FROM = {
+				add_war_support = 0.01
+			}
+			add_equipment_to_stockpile = {
+				type = mechanized_equipment
+				amount = -50
+			}
+			add_to_variable = {
+				ACW_mechanized_sent = 50
+			}
+			add_to_variable = {
+				global.ACW_tensions = 0.25
+				tooltip = ACW_tensions_tt
+			}
+			clamp_variable = {
+				var = global.ACW_tensions
+				max = 100
+			}
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove ENT_lend_lease_mechanized target: [From.GetName]"
+			FROM = {
+				add_equipment_to_stockpile = {
+					type = mechanized_equipment
+					amount = 50
+				}
+				add_to_variable = {
+					ACW_mechanized_received = 50
+				}
+			}
+		}
+	}
+	ENT_lend_lease_mbt = {
+		icon = GFX_decision_tank
+		visible = {
+			is_in_or_aligned_with_accord = yes
+			NOT = {
+				has_global_flag = WK3
+				has_country_flag = ENT_hidden_lend_lease_mech
+			}
+		}
+		available = {
+			FROM = {
+				has_capitulated = no
+			}
+			has_equipment = {
+				modern_tank_equipment > 49
+			}
+			custom_trigger_tooltip = {
+				tooltip = ACW_has_level_2_involvement
+				check_variable = {
+					global.ACW_involvement_level > 1
+				}
+			}
+		}
+		cancel_trigger = {
+			NOT = {
+				has_global_flag = ACW_ongoing
+			}
+		}
+		targets = {
+			NEE CAL GLG
+		}
+
+		ai_will_do = {
+			base = 75
+		}
+
+		cost = 25
+		days_remove = 30
+		days_re_enable = 90
+
+		cancel_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision cancel ENT_lend_lease_mbt target: [From.GetName]"
+		}
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete ENT_lend_lease_mbt target: [From.GetName]"
+		
+            FROM = {
+				add_war_support = 0.01
+			}
+			add_equipment_to_stockpile = {
+				type = modern_tank_equipment
+				amount = -25
+			}
+			add_to_variable = {
+				ACW_MBT_equipment_sent = 25
+			}
+			add_to_variable = {
+				global.ACW_tensions = 0.25
+				tooltip = ACW_tensions_tt
+			}
+			clamp_variable = {
+				var = global.ACW_tensions
+				max = 100
+			}
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove ENT_lend_lease_mbt target: [From.GetName]"
+			FROM = {
+				add_equipment_to_stockpile = {
+					type = modern_tank_equipment
+					amount = 25
+				}
+				add_to_variable = {
+					ACW_MBT_equipment_received = 25
+				}
+			}
+		}
+	}
+	ENT_lend_lease_fighters = {
+		icon = GFX_decision_plane
+		visible = {
+			is_in_or_aligned_with_accord = yes
+			NOT = {
+				has_global_flag = WK3
+				has_country_flag = ENT_hidden_lend_lease_air
+			}
+		}
+		available = {
+			FROM = {
+				has_capitulated = no
+			}
+			has_equipment = {
+				jet_fighter_equipment > 24
+			}
+			custom_trigger_tooltip = {
+				tooltip = ACW_has_level_3_involvement
+				check_variable = {
+					global.ACW_involvement_level > 2
+				}
+			}
+		}
+		cancel_trigger = {
+			NOT = {
+				has_global_flag = ACW_ongoing
+			}
+		}
+		targets = {
+			NEE CAL GLG
+		}
+		cost = 25
+		days_remove = 30
+		days_re_enable = 90
+
+		ai_will_do = {
+			base = 75
+		}
+
+		cancel_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision cancel ENT_lend_lease_fighters target: [From.GetName]"
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete ENT_lend_lease_fighters target: [From.GetName]"
+		
+            FROM = {
+				add_war_support = 0.01
+			}
+			add_equipment_to_stockpile = {
+				type = jet_fighter_equipment
+				amount = -25
+			}
+			add_to_variable = {
+				ACW_jet_fighter_sent = 25
+			}
+			add_to_variable = {
+				global.ACW_tensions = 0.25
+				tooltip = ACW_tensions_tt
+			}
+			clamp_variable = {
+				var = global.ACW_tensions
+				max = 100
+			}
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove ENT_lend_lease_fighters target: [From.GetName]"
+			FROM = {
+				add_equipment_to_stockpile = {
+					type = jet_fighter_equipment
+					amount = 25
+				}
+				add_to_variable = {
+					ACW_jet_fighter_received = 25
+				}
+			}
+		}
+	}
+	ENT_lend_lease_interceptor = {
+		icon = GFX_decision_plane
+		visible = {
+			is_in_or_aligned_with_accord = yes
+			NOT = {
+				has_global_flag = WK3
+				has_country_flag = ENT_hidden_lend_lease_air
+			}
+		}
+		available = {
+			FROM = {
+				has_capitulated = no
+			}
+			has_equipment = {
+				jet_interceptor_equipment > 24
+			}
+			custom_trigger_tooltip = {
+				tooltip = ACW_has_level_3_involvement
+				check_variable = {
+					global.ACW_involvement_level > 2
+				}
+			}
+		}
+		cancel_trigger = {
+			NOT = {
+				has_global_flag = ACW_ongoing
+			}
+		}
+		targets = {
+			NEE CAL GLG
+		}
+		cost = 25
+		days_remove = 30
+		days_re_enable = 90
+
+		ai_will_do = {
+			base = 75
+		}
+
+		cancel_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision cancel ENT_lend_lease_interceptor target: [From.GetName]"
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete ENT_lend_lease_interceptor target: [From.GetName]"
+		
+            FROM = {
+				add_war_support = 0.01
+			}
+			add_equipment_to_stockpile = {
+				type = jet_interceptor_equipment
+				amount = -25
+			}
+			add_to_variable = {
+				ACW_jet_interceptor_sent = 25
+			}
+			add_to_variable = {
+				global.ACW_tensions = 0.25
+				tooltip = ACW_tensions_tt
+			}
+			clamp_variable = {
+				var = global.ACW_tensions
+				max = 100
+			}
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove ENT_lend_lease_interceptor target: [From.GetName]"
+			FROM = {
+				add_equipment_to_stockpile = {
+					type = jet_interceptor_equipment
+					amount = 25
+				}
+				add_to_variable = {
+					ACW_jet_interceptor_received = 25
+				}
+			}
+		}
+	}
+	ENT_lend_lease_strike = {
+		icon = GFX_decision_bomber
+		visible = {
+			is_in_or_aligned_with_accord = yes
+			NOT = {
+				has_global_flag = WK3
+				has_country_flag = ENT_hidden_lend_lease_air
+			}
+		}
+		available = {
+			FROM = {
+				has_capitulated = no
+			}
+			has_equipment = {
+				jet_strike_equipment > 24
+			}
+			custom_trigger_tooltip = {
+				tooltip = ACW_has_level_3_involvement
+				check_variable = {
+					global.ACW_involvement_level > 2
+				}
+			}
+		}
+		cancel_trigger = {
+			NOT = {
+				has_global_flag = ACW_ongoing
+			}
+		}
+		targets = {
+			NEE CAL GLG
+		}
+		cost = 25
+		days_remove = 30
+		days_re_enable = 90
+
+		ai_will_do = {
+			base = 75
+		}
+
+		cancel_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision cancel ENT_lend_lease_strike target: [From.GetName]"
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete ENT_lend_lease_strike target: [From.GetName]"
+		
+            FROM = {
+				add_war_support = 0.01
+			}
+			add_equipment_to_stockpile = {
+				type = jet_strike_equipment
+				amount = -25
+			}
+			add_to_variable = {
+				jet_strike_equipment_sent = 25
+			}
+			add_to_variable = {
+				global.ACW_tensions = 0.5
+				tooltip = ACW_tensions_tt
+			}
+			clamp_variable = {
+				var = global.ACW_tensions
+				max = 100
+			}
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove ENT_lend_lease_strike target: [From.GetName]"
+			FROM = {
+				add_equipment_to_stockpile = {
+					type = jet_strike_equipment
+					amount = 25
+				}
+				add_to_variable = {
+					jet_strike_equipment_received = 25
+				}
+			}
+		}
+	}
+	ENT_lend_lease_strat_bomber = {
+		icon = GFX_decision_bomber
+		visible = {
+			is_in_or_aligned_with_accord = yes
+			NOT = {
+				has_global_flag = WK3
+				has_country_flag = ENT_hidden_lend_lease_air
+			}
+		}
+		available = {
+			FROM = {
+				has_capitulated = no
+			}
+			has_equipment = {
+				jet_strat_bomber_equipment > 14
+			}
+			custom_trigger_tooltip = {
+				tooltip = ACW_has_level_3_involvement
+				check_variable = {
+					global.ACW_involvement_level > 2
+				}
+			}
+		}
+		targets = {
+			NEE CAL GLG
+		}
+		cost = 25
+		days_remove = 30
+		days_re_enable = 90
+
+		ai_will_do = {
+			base = 75
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete ENT_lend_lease_strat_bomber target: [From.GetName]"
+		
+            FROM = {
+				add_war_support = 0.01
+			}
+			add_equipment_to_stockpile = {
+				type = jet_strat_bomber_equipment
+				amount = -15
+			}
+			add_to_variable = {
+				ACW_jet_strat_bomber_sent = 15
+			}
+			add_to_variable = {
+				global.ACW_tensions = 0.5
+				tooltip = ACW_tensions_tt
+			}
+			clamp_variable = {
+				var = global.ACW_tensions
+				max = 100
+			}
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove ENT_lend_lease_strat_bomber target: [From.GetName]"
+			FROM = {
+				add_equipment_to_stockpile = {
+					type = jet_strat_bomber_equipment
+					amount = 15
+				}
+				add_to_variable = {
+					ACW_jet_strat_bomber_received = 15
+				}
+			}
+		}
+	}
+	ENT_lend_lease_transports = {
+		icon = GFX_decision_bomber
+		visible = {
+			is_in_or_aligned_with_accord = yes
+			NOT = {
+				has_global_flag = WK3
+				has_country_flag = ENT_hidden_lend_lease_air
+			}
+		}
+		available = {
+			FROM = {
+				has_capitulated = no
+			}
+			has_equipment = {
+				transport_plane_equipment > 24
+			}
+			custom_trigger_tooltip = {
+				tooltip = ACW_has_level_3_involvement
+				check_variable = {
+					global.ACW_involvement_level > 2
+				}
+			}
+		}
+		cancel_trigger = {
+			NOT = {
+				has_global_flag = ACW_ongoing
+			}
+		}
+		targets = {
+			NEE CAL GLG
+		}
+		cost = 25
+		days_remove = 30
+		days_re_enable = 90
+
+		ai_will_do = {
+			base = 75
+		}
+
+		cancel_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision cancel ENT_lend_lease_transports target: [From.GetName]"
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete ENT_lend_lease_transports target: [From.GetName]"
+		
+            FROM = {
+				add_war_support = 0.01
+			}
+			add_equipment_to_stockpile = {
+				type = transport_plane_equipment
+				amount = -25
+			}
+			add_to_variable = {
+				ACW_transport_sent = 25
+			}
+			add_to_variable = {
+				global.ACW_tensions = 0.25
+				tooltip = ACW_tensions_tt
+			}
+			clamp_variable = {
+				var = global.ACW_tensions
+				max = 100
+			}
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove ENT_lend_lease_transports target: [From.GetName]"
+			FROM = {
+				add_equipment_to_stockpile = {
+					type = transport_plane_equipment
+					amount = 25
+				}
+				add_to_variable = {
+					ACW_transport_received = 25
+				}
+			}
+		}
+	}
+	ACW_suppress_resistance = {
+		icon = generic_police_action
+
+		available = {
+			has_full_control_of_state = FROM
+		}
+
+		visible = {
+			FROM = { has_resistance = yes }
+		}
+
+		state_target = yes
+		target_array = USA_all_mainland_states
+		target_trigger = {
+			FROM = { has_resistance = yes }
+		}
+
+		cost = 15
+		days_remove = 90
+		on_map_mode = map_only
+
+		modifier = {
+			political_power_cost = 0.05
+		}
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				add = FROM.resistance
+			}
+			modifier = {
+				add = FROM.resistance_target
+			}
+			modifier = {
+				factor = 0
+				FROM = {
+					compliance > 40
+					resistance < 10
+				}
+			}
+			modifier = {
+				factor = 0
+				political_power_daily < 0
+			}
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete ACW_suppress_resistance target: [From.GetName]"
+			FROM = {
+				add_compliance = 5
+				add_resistance_target = {
+					amount = -10
+					tooltip = ACW_suppress_resistance_tooltip
+					days = 90
+				}
+				set_garrison_strength = 1
+			}
+		}
+	}
+
+	### GER Decisions
+
+
+	GER_hide_lend_lease_decisions = {
+		visible = {
+			OR = {
+				is_in_faction_with = GER
+				original_tag = DNF
+			}
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete GER_hide_lend_lease_decisions target: [From.GetName]"
+			if = {
+				limit = {
+					has_country_flag = GER_hidden_lend_lease
+				}
+				clr_country_flag = GER_hidden_lend_lease
+			}
+			else = {
+				set_country_flag = GER_hidden_lend_lease
+			}
+		}
+	}
+	GER_lend_lease_rifles = {
+		icon = GFX_decision_generic_prepare_civil_war
+		visible = {
+			OR = {
+				is_in_faction_with = GER
+				original_tag = DNF
+			}
+			NOT = {
+				has_country_flag = GER_hidden_lend_lease
+				has_global_flag = WK3
+			}
+		}
+		available = {
+			FROM = {
+				has_capitulated = no
+			}
+			has_equipment = {
+				infantry_equipment > 999
+			}
+			custom_trigger_tooltip = {
+				tooltip = ACW_has_level_1_involvement
+				check_variable = {
+					global.ACW_involvement_level > 0
+				}
+			}
+		}
+		cancel_trigger = {
+			NOT = {
+				has_global_flag = ACW_ongoing
+			}
+		}
+		targets = {
+			TEX
+		}
+		cost = 25
+		days_remove = 30
+		days_re_enable = 90
+
+		ai_will_do = {
+			base = 150
+		}
+
+		cancel_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision cancel GER_lend_lease_rifles target: [From.GetName]"
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete GER_lend_lease_rifles target: [From.GetName]"
+			GER_lend_lease_effect = yes
+            FROM = {
+				add_war_support = 0.01
+			}
+			add_equipment_to_stockpile = {
+				type = infantry_equipment
+				amount = -1000
+			}
+			add_to_variable = {
+				ACW_infantry_equipment_sent = 1000
+			}
+			add_to_variable = {
+				global.ACW_tensions = 0.25
+				tooltip = ACW_tensions_tt
+			}
+			clamp_variable = {
+				var = global.ACW_tensions
+				max = 100
+			}
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove GER_lend_lease_rifles target: [From.GetName]"
+			if = {
+				limit = {
+					GER = {
+						has_country_flag = GER_execute_lend_lease
+					}
+				}
+				FROM = {
+					add_equipment_to_stockpile = {
+						type = infantry_equipment
+						amount = 1000
+					}
+					add_to_variable = {
+						ACW_infantry_equipment_received = 1000
+					}
+				}
+			}
+		}
+	}
+	GER_send_volunteer = {
+		icon = GFX_decision_generic_military
+		visible = {
+			OR = {
+				is_in_faction_with = GER
+				original_tag = DNF
+			}
+			check_variable = {
+				global.ACW_involvement_level > 3
+			}
+			
+		}
+		available = {
+			FROM = {
+				has_capitulated = no
+			}
+		}
+		targets = {
+			TEX
+		}
+		cost = 25
+		fire_only_once = yes
+
+		ai_will_do = {
+			base = 250
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete GER_send_volunteer target: [From.GetName]"
+			set_country_flag = ACW_can_send_volunteers
+			add_ideas = RP_acw_volunteers_ideas
+		}
+	}
+	GER_lend_lease_artillery = {
+		icon = GFX_decision_artillery
+		visible = {
+			OR = {
+				is_in_faction_with = GER
+				original_tag = DNF
+			}
+			NOT = {
+				has_country_flag = GER_hidden_lend_lease
+				has_global_flag = WK3
+			}
+		}
+		available = {
+			FROM = {
+				has_capitulated = no
+			}
+			has_equipment = {
+				artillery_equipment > 99
+			}
+			custom_trigger_tooltip = {
+				tooltip = ACW_has_level_1_involvement
+				check_variable = {
+					global.ACW_involvement_level > 0
+				}
+			}
+		}
+		cancel_trigger = {
+			NOT = {
+				has_global_flag = ACW_ongoing
+			}
+		}
+		targets = {
+			TEX
+		}
+		cost = 25
+		days_remove = 30
+		days_re_enable = 90
+
+		ai_will_do = {
+			base = 150
+		}
+
+		cancel_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision cancel GER_lend_lease_artillery target: [From.GetName]"
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete GER_lend_lease_artillery target: [From.GetName]"
+			GER_lend_lease_effect = yes
+            FROM = {
+				add_war_support = 0.01
+			}
+			add_equipment_to_stockpile = {
+				type = artillery_equipment
+				amount = -100
+			}
+			add_to_variable = {
+				ACW_artillery_sent = 100
+			}
+			add_to_variable = {
+				global.ACW_tensions = 0.25
+				tooltip = ACW_tensions_tt
+			}
+			clamp_variable = {
+				var = global.ACW_tensions
+				max = 100
+			}
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove GER_lend_lease_artillery target: [From.GetName]"
+			if = {
+				limit = {
+					GER = {
+						has_country_flag = GER_execute_lend_lease
+					}
+				}
+				FROM = {
+					add_equipment_to_stockpile = {
+						type = artillery_equipment
+						amount = 100
+					}
+					add_to_variable = {
+						ACW_artillery_received = 100
+					}
+				}
+                clr_country_flag = GER_execute_lend_lease
+			}
+		}
+	}
+	GER_lend_lease_support_equipment = {
+		icon = GFX_decision_support_equipment
+		visible = {
+			OR = {
+				is_in_faction_with = GER
+				original_tag = DNF
+			}
+			NOT = {
+				has_country_flag = GER_hidden_lend_lease
+				has_global_flag = WK3
+			}
+		}
+		available = {
+			FROM = {
+				has_capitulated = no
+			}
+			has_equipment = {
+				support_equipment > 249
+			}
+			custom_trigger_tooltip = {
+				tooltip = ACW_has_level_1_involvement
+				check_variable = {
+					global.ACW_involvement_level > 0
+				}
+			}
+		}
+		cancel_trigger = {
+			NOT = {
+				has_global_flag = ACW_ongoing
+			}
+		}
+		targets = {
+			TEX
+		}
+		cost = 25
+		days_remove = 30
+		days_re_enable = 90
+
+		ai_will_do = {
+			base = 150
+		}
+
+		cancel_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision cancel GER_lend_lease_support_equipment target: [From.GetName]"
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete GER_lend_lease_support_equipment target: [From.GetName]"
+			GER_lend_lease_effect = yes
+            FROM = {
+				add_war_support = 0.01
+			}
+			add_equipment_to_stockpile = {
+				type = support_equipment
+				amount = -250
+			}
+			add_to_variable = {
+				ACW_support_equipment_sent = 250
+			}
+			add_to_variable = {
+				global.ACW_tensions = 0.25
+				tooltip = ACW_tensions_tt
+			}
+			clamp_variable = {
+				var = global.ACW_tensions
+				max = 100
+			}
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove GER_lend_lease_support_equipment target: [From.GetName]"
+			if = {
+				limit = {
+					GER = {
+						has_country_flag = GER_execute_lend_lease
+					}
+				}
+				FROM = {
+					add_equipment_to_stockpile = {
+						type = support_equipment
+						amount = 250
+					}
+					add_to_variable = {
+						ACW_support_equipment_received = 250
+					}
+				}
+                clr_country_flag = GER_execute_lend_lease
+			}
+		}
+	}
+	GER_lend_lease_motorized = {
+		icon = GFX_decision_generic_motorized
+		visible = {
+			OR = {
+				is_in_faction_with = GER
+				original_tag = DNF
+			}
+			NOT = {
+				has_country_flag = GER_hidden_lend_lease
+				has_global_flag = WK3
+			}
+		}
+		available = {
+			FROM = {
+				has_capitulated = no
+			}
+			has_equipment = {
+				motorized_equipment > 99
+			}
+			custom_trigger_tooltip = {
+				tooltip = ACW_has_level_1_involvement
+				check_variable = {
+					global.ACW_involvement_level > 0
+				}
+			}
+		}
+		targets = {
+			TEX
+		}
+		cost = 25
+		days_remove = 30
+		days_re_enable = 90
+
+		ai_will_do = {
+			base = 150
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete GER_lend_lease_motorized target: [From.GetName]"
+			GER_lend_lease_effect = yes
+            FROM = {
+				add_war_support = 0.01
+			}
+			add_equipment_to_stockpile = {
+				type = motorized_equipment
+				amount = -100
+			}
+			add_to_variable = {
+				ACW_motorized_sent = 100
+			}
+			add_to_variable = {
+				global.ACW_tensions = 0.25
+				tooltip = ACW_tensions_tt
+			}
+			clamp_variable = {
+				var = global.ACW_tensions
+				max = 100
+			}
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove GER_lend_lease_motorized target: [From.GetName]"
+			if = {
+				limit = {
+					GER = {
+						has_country_flag = GER_execute_lend_lease
+					}
+				}
+				FROM = {
+					add_equipment_to_stockpile = {
+						type = motorized_equipment
+						amount = 100
+					}
+					add_to_variable = {
+						ACW_motorized_received = 100
+					}
+				}
+                clr_country_flag = GER_execute_lend_lease
+			}
+		}
+	}
+	GER_lend_lease_anti_tank = {
+		icon = GFX_decision_artillery
+		visible = {
+			OR = {
+				is_in_faction_with = GER
+				original_tag = DNF
+			}
+			NOT = {
+				has_country_flag = GER_hidden_lend_lease
+				has_global_flag = WK3
+			}
+		}
+		available = {
+			FROM = {
+				has_capitulated = no
+			}
+			has_equipment = {
+				anti_tank_equipment > 49
+			}
+			custom_trigger_tooltip = {
+				tooltip = ACW_has_level_1_involvement
+				check_variable = {
+					global.ACW_involvement_level > 0
+				}
+			}
+		}
+		cancel_trigger = {
+			NOT = {
+				has_global_flag = ACW_ongoing
+			}
+		}
+		targets = {
+			TEX
+		}
+		cost = 25
+		days_remove = 30
+		days_re_enable = 90
+
+		ai_will_do = {
+			base = 150
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete GER_lend_lease_anti_tank target: [From.GetName]"
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete GER_lend_lease_anti_tank target: [From.GetName]"
+			GER_lend_lease_effect = yes
+            FROM = {
+				add_war_support = 0.01
+			}
+			add_equipment_to_stockpile = {
+				type = anti_tank_equipment
+				amount = -50
+			}
+			add_to_variable = {
+				ACW_anti_tank_equipment_sent = 50
+			}
+			add_to_variable = {
+				global.ACW_tensions = 0.25
+				tooltip = ACW_tensions_tt
+			}
+			clamp_variable = {
+				var = global.ACW_tensions
+				max = 100
+			}
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove GER_lend_lease_anti_tank target: [From.GetName]"
+			if = {
+				limit = {
+					GER = {
+						has_country_flag = GER_execute_lend_lease
+					}
+				}
+				FROM = {
+					add_equipment_to_stockpile = {
+						type = anti_tank_equipment
+						amount = 50
+					}
+					add_to_variable = {
+						ACW_anti_tank_equipment_received = 50
+					}
+				}
+                clr_country_flag = GER_execute_lend_lease
+			}
+		}
+	}
+	GER_lend_lease_anti_air = {
+		icon = GFX_decision_AA_small
+		visible = {
+			OR = {
+				is_in_faction_with = GER
+				original_tag = DNF
+			}
+			NOT = {
+				has_country_flag = GER_hidden_lend_lease
+				has_global_flag = WK3
+			}
+		}
+		available = {
+			FROM = {
+				has_capitulated = no
+			}
+			has_equipment = {
+				anti_air_equipment > 49
+			}
+			custom_trigger_tooltip = {
+				tooltip = ACW_has_level_1_involvement
+				check_variable = {
+					global.ACW_involvement_level > 0
+				}
+			}
+		}
+		cancel_trigger = {
+			NOT = {
+				has_global_flag = ACW_ongoing
+			}
+		}
+		targets = {
+			TEX
+		}
+		cost = 25
+		days_remove = 30
+		days_re_enable = 90
+
+		ai_will_do = {
+			base = 150
+		}
+
+		cancel_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision cancel GER_lend_lease_anti_air target: [From.GetName]"
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete GER_lend_lease_anti_air target: [From.GetName]"
+			GER_lend_lease_effect = yes
+            FROM = {
+				add_war_support = 0.01
+			}
+			add_equipment_to_stockpile = {
+				type = anti_air_equipment
+				amount = -50
+			}
+			add_to_variable = {
+				ACW_anti_air_equipment_sent = 50
+			}
+			add_to_variable = {
+				global.ACW_tensions = 0.25
+				tooltip = ACW_tensions_tt
+			}
+			clamp_variable = {
+				var = global.ACW_tensions
+				max = 100
+			}
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove GER_lend_lease_anti_air target: [From.GetName]"
+			if = {
+				limit = {
+					GER = {
+						has_country_flag = GER_execute_lend_lease
+					}
+				}
+				FROM = {
+					add_equipment_to_stockpile = {
+						type = anti_air_equipment
+						amount = 50
+					}
+					add_to_variable = {
+						ACW_anti_air_equipment_received = 50
+					}
+				}
+                clr_country_flag = GER_execute_lend_lease
+			}
+		}
+	}
+	GER_lend_lease_mechanized = {
+		icon = GFX_decision_generic_motorized
+		visible = {
+			OR = {
+				is_in_faction_with = GER
+				original_tag = DNF
+			}
+			NOT = {
+				has_country_flag = GER_hidden_lend_lease
+				has_global_flag = WK3
+			}
+		}
+		available = {
+			FROM = {
+				has_capitulated = no
+			}
+			has_equipment = {
+				mechanized_equipment > 49
+			}
+			custom_trigger_tooltip = {
+				tooltip = ACW_has_level_2_involvement
+				check_variable = {
+					global.ACW_involvement_level > 1
+				}
+			}
+		}
+		targets = {
+			TEX
+		}
+		cost = 25
+		days_remove = 30
+		days_re_enable = 90
+
+		ai_will_do = {
+			base = 150
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete GER_lend_lease_mechanized target: [From.GetName]"
+			GER_lend_lease_effect = yes
+            FROM = {
+				add_war_support = 0.01
+			}
+			add_equipment_to_stockpile = {
+				type = mechanized_equipment
+				amount = -50
+			}
+			add_to_variable = {
+				ACW_mechanized_sent = 50
+			}
+			add_to_variable = {
+				global.ACW_tensions = 0.25
+				tooltip = ACW_tensions_tt
+			}
+			clamp_variable = {
+				var = global.ACW_tensions
+				max = 100
+			}
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove GER_lend_lease_mechanized target: [From.GetName]"
+			if = {
+				limit = {
+					GER = {
+						has_country_flag = GER_execute_lend_lease
+					}
+				}
+				FROM = {
+					add_equipment_to_stockpile = {
+						type = mechanized_equipment
+						amount = 50
+					}
+					add_to_variable = {
+						ACW_mechanized_received = 50
+					}
+				}
+                clr_country_flag = GER_execute_lend_lease
+			}
+		}
+	}
+	GER_lend_lease_mbt = {
+		icon = GFX_decision_tank
+		visible = {
+			OR = {
+				is_in_faction_with = GER
+				original_tag = DNF
+			}
+			NOT = {
+				has_country_flag = GER_hidden_lend_lease
+				has_global_flag = WK3
+			}
+		}
+		available = {
+			FROM = {
+				has_capitulated = no
+			}
+			has_equipment = {
+				modern_tank_equipment > 49
+			}
+			custom_trigger_tooltip = {
+				tooltip = ACW_has_level_2_involvement
+				check_variable = {
+					global.ACW_involvement_level > 1
+				}
+			}
+		}
+		cancel_trigger = {
+			NOT = {
+				has_global_flag = ACW_ongoing
+			}
+		}
+		targets = {
+			TEX
+		}
+		cost = 25
+		days_remove = 30
+		days_re_enable = 90
+
+		ai_will_do = {
+			base = 150
+		}
+
+		cancel_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision cancel GER_lend_lease_mbt target: [From.GetName]"
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete GER_lend_lease_mbt target: [From.GetName]"
+			GER_lend_lease_effect = yes
+            FROM = {
+				add_war_support = 0.01
+			}
+			add_equipment_to_stockpile = {
+				type = modern_tank_equipment
+				amount = -25
+			}
+			add_to_variable = {
+				ACW_MBT_equipment_sent = 25
+			}
+			add_to_variable = {
+				global.ACW_tensions = 0.25
+				tooltip = ACW_tensions_tt
+			}
+			clamp_variable = {
+				var = global.ACW_tensions
+				max = 100
+			}
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove GER_lend_lease_mbt target: [From.GetName]"
+			if = {
+				limit = {
+					GER = {
+						has_country_flag = GER_execute_lend_lease
+					}
+				}
+				FROM = {
+					add_equipment_to_stockpile = {
+						type = modern_tank_equipment
+						amount = 25
+					}
+					add_to_variable = {
+						ACW_MBT_equipment_received = 25
+					}
+				}
+                clr_country_flag = GER_execute_lend_lease
+			}
+		}
+	}
+	GER_lend_lease_fighters = {
+		icon = GFX_decision_plane
+		visible = {
+			OR = {
+				is_in_faction_with = GER
+				original_tag = DNF
+			}
+			NOT = {
+				has_country_flag = GER_hidden_lend_lease
+				has_global_flag = WK3
+			}
+		}
+		available = {
+			FROM = {
+				has_capitulated = no
+			}
+			has_equipment = {
+				jet_fighter_equipment > 24
+			}
+			custom_trigger_tooltip = {
+				tooltip = ACW_has_level_3_involvement
+				check_variable = {
+					global.ACW_involvement_level > 2
+				}
+			}
+		}
+		cancel_trigger = {
+			NOT = {
+				has_global_flag = ACW_ongoing
+			}
+		}
+		targets = {
+			TEX
+		}
+		cost = 25
+		days_remove = 30
+		days_re_enable = 90
+
+		ai_will_do = {
+			base = 150
+		}
+
+		cancel_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision cancel GER_lend_lease_fighters target: [From.GetName]"
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete GER_lend_lease_fighters target: [From.GetName]"
+			GER_lend_lease_effect = yes
+            FROM = {
+				add_war_support = 0.01
+			}
+			add_equipment_to_stockpile = {
+				type = jet_fighter_equipment
+				amount = -25
+			}
+			add_to_variable = {
+				ACW_jet_fighter_sent = 25
+			}
+			add_to_variable = {
+				global.ACW_tensions = 0.25
+				tooltip = ACW_tensions_tt
+			}
+			clamp_variable = {
+				var = global.ACW_tensions
+				max = 100
+			}
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove GER_lend_lease_fighters target: [From.GetName]"
+			if = {
+				limit = {
+					GER = {
+						has_country_flag = GER_execute_lend_lease
+					}
+				}
+				FROM = {
+					add_equipment_to_stockpile = {
+						type = jet_fighter_equipment
+						amount = 25
+					}
+					add_to_variable = {
+						ACW_jet_fighter_received = 25
+					}
+				}
+                clr_country_flag = GER_execute_lend_lease
+			}
+		}
+	}
+	GER_lend_lease_interceptor = {
+		icon = GFX_decision_plane
+		visible = {
+			OR = {
+				is_in_faction_with = GER
+				original_tag = DNF
+			}
+			NOT = {
+				has_country_flag = GER_hidden_lend_lease
+				has_global_flag = WK3
+			}
+		}
+		available = {
+			FROM = {
+				has_capitulated = no
+			}
+			has_equipment = {
+				jet_interceptor_equipment > 24
+			}
+			custom_trigger_tooltip = {
+				tooltip = ACW_has_level_3_involvement
+				check_variable = {
+					global.ACW_involvement_level > 2
+				}
+			}
+		}
+		cancel_trigger = {
+			NOT = {
+				has_global_flag = ACW_ongoing
+			}
+		}
+		targets = {
+			TEX
+		}
+		cost = 25
+		days_remove = 30
+		days_re_enable = 90
+
+		ai_will_do = {
+			base = 150
+		}
+
+		cancel_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision cancel GER_lend_lease_interceptor target: [From.GetName]"
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete GER_lend_lease_interceptor target: [From.GetName]"
+			GER_lend_lease_effect = yes
+            FROM = {
+				add_war_support = 0.01
+			}
+			add_equipment_to_stockpile = {
+				type = jet_interceptor_equipment
+				amount = -25
+			}
+			add_to_variable = {
+				ACW_jet_interceptor_sent = 25
+			}
+			add_to_variable = {
+				global.ACW_tensions = 0.25
+				tooltip = ACW_tensions_tt
+			}
+			clamp_variable = {
+				var = global.ACW_tensions
+				max = 100
+			}
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove GER_lend_lease_interceptor target: [From.GetName]"
+			if = {
+				limit = {
+					GER = {
+						has_country_flag = GER_execute_lend_lease
+					}
+				}
+				FROM = {
+					add_equipment_to_stockpile = {
+						type = jet_interceptor_equipment
+						amount = 25
+					}
+					add_to_variable = {
+						ACW_jet_interceptor_received = 25
+					}
+
+				}
+                clr_country_flag = GER_execute_lend_lease
+			}
+		}
+	}
+	GER_lend_lease_strike = {
+		icon = GFX_decision_bomber
+		visible = {
+			OR = {
+				is_in_faction_with = GER
+				original_tag = DNF
+			}
+			NOT = {
+				has_country_flag = GER_hidden_lend_lease
+				has_global_flag = WK3
+			}
+		}
+		available = {
+			FROM = {
+				has_capitulated = no
+			}
+			has_equipment = {
+				jet_strike_equipment > 24
+			}
+			custom_trigger_tooltip = {
+				tooltip = ACW_has_level_3_involvement
+				check_variable = {
+					global.ACW_involvement_level > 2
+				}
+			}
+		}
+		cancel_trigger = {
+			NOT = {
+				has_global_flag = ACW_ongoing
+			}
+		}
+		targets = {
+			TEX
+		}
+		cost = 25
+		days_remove = 30
+		days_re_enable = 90
+
+		ai_will_do = {
+			base = 150
+		}
+		
+		cancel_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision cancel GER_lend_lease_strike target: [From.GetName]"
+		}
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete GER_lend_lease_strike target: [From.GetName]"
+			GER_lend_lease_effect = yes
+            FROM = {
+				add_war_support = 0.01
+			}
+			add_equipment_to_stockpile = {
+				type = jet_strike_equipment
+				amount = -25
+			}
+			add_to_variable = {
+				jet_strike_equipment_sent = 25
+			}
+			add_to_variable = {
+				global.ACW_tensions = 2
+				tooltip = ACW_tensions_tt
+			}
+			clamp_variable = {
+				var = global.ACW_tensions
+				max = 100
+			}
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove GER_lend_lease_strike target: [From.GetName]"
+			if = {
+				limit = {
+					GER = {
+						has_country_flag = GER_execute_lend_lease
+					}
+				}
+				FROM = {
+					add_equipment_to_stockpile = {
+						type = jet_strike_equipment
+						amount = 25
+					}
+					add_to_variable = {
+						jet_strike_equipment_received = 25
+					}
+				}
+                clr_country_flag = GER_execute_lend_lease
+			}
+		}
+	}
+	GER_lend_lease_strat_bomber = {
+		icon = GFX_decision_bomber
+		visible = {
+			OR = {
+				is_in_faction_with = GER
+				original_tag = DNF
+			}
+			NOT = {
+				has_country_flag = GER_hidden_lend_lease
+				has_global_flag = WK3
+			}
+		}
+		available = {
+			FROM = {
+				has_capitulated = no
+			}
+			has_equipment = {
+				jet_strat_bomber_equipment > 14
+			}
+			custom_trigger_tooltip = {
+				tooltip = ACW_has_level_3_involvement
+				check_variable = {
+					global.ACW_involvement_level > 2
+				}
+			}
+		}
+		cancel_trigger = {
+			NOT = {
+				has_global_flag = ACW_ongoing
+			}
+		}
+		targets = {
+			TEX
+		}
+		cost = 25
+		days_remove = 30
+		days_re_enable = 90
+
+		ai_will_do = {
+			base = 150
+		}
+
+		cancel_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision cancel GER_lend_lease_strat_bomber target: [From.GetName]"
+		}
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete GER_lend_lease_strat_bomber target: [From.GetName]"
+			GER_lend_lease_effect = yes
+            FROM = {
+				add_war_support = 0.01
+			}
+			add_equipment_to_stockpile = {
+				type = jet_strat_bomber_equipment
+				amount = -15
+			}
+			add_to_variable = {
+				ACW_jet_strat_bomber_sent = 15
+			}
+			add_to_variable = {
+				global.ACW_tensions = 0.5
+				tooltip = ACW_tensions_tt
+			}
+			clamp_variable = {
+				var = global.ACW_tensions
+				max = 100
+			}
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove GER_lend_lease_strat_bomber target: [From.GetName]"
+			if = {
+				limit = {
+					GER = {
+						has_country_flag = GER_execute_lend_lease
+					}
+				}
+				FROM = {
+					add_equipment_to_stockpile = {
+						type = jet_strat_bomber_equipment
+						amount = 15
+					}
+					add_to_variable = {
+						ACW_jet_strat_bomber_received = 15
+					}
+				}
+                clr_country_flag = GER_execute_lend_lease
+			}
+		}
+	}
+	GER_lend_lease_transports = {
+		icon = GFX_decision_bomber
+		visible = {
+			OR = {
+				is_in_faction_with = GER
+				original_tag = DNF
+			}
+			NOT = {
+				has_country_flag = GER_hidden_lend_lease
+				has_global_flag = WK3
+			}
+		}
+		available = {
+			FROM = {
+				has_capitulated = no
+			}
+			has_equipment = {
+				transport_plane_equipment > 24
+			}
+			custom_trigger_tooltip = {
+				tooltip = ACW_has_level_3_involvement
+				check_variable = {
+					global.ACW_involvement_level > 2
+				}
+			}
+		}
+		cancel_trigger = {
+			NOT = {
+				has_global_flag = ACW_ongoing
+			}
+		}
+		targets = {
+			TEX
+		}
+		cost = 25
+		days_remove = 30
+		days_re_enable = 90
+
+		ai_will_do = {
+			base = 150
+		}
+		
+		cancel_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision cancel GER_lend_lease_transports target: [From.GetName]"
+		}
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete GER_lend_lease_transports target: [From.GetName]"
+			GER_lend_lease_effect = yes
+            FROM = {
+				add_war_support = 0.01
+			}
+			add_equipment_to_stockpile = {
+				type = transport_plane_equipment
+				amount = -25
+			}
+			add_to_variable = {
+				ACW_transport_sent = 25
+			}
+			add_to_variable = {
+				global.ACW_tensions = 0.25
+				tooltip = ACW_tensions_tt
+			}
+			clamp_variable = {
+				var = global.ACW_tensions
+				max = 100
+			}
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove GER_lend_lease_transports target: [From.GetName]"
+			if = {
+				limit = {
+					GER = {
+						has_country_flag = GER_execute_lend_lease
+					}
+				}
+				FROM = {
+					add_equipment_to_stockpile = {
+						type = transport_plane_equipment
+						amount = 25
+					}
+					add_to_variable = {
+						ACW_transport_received = 25
+					}
+				}
+                clr_country_flag = GER_execute_lend_lease
+			}
+		}
+	}
+	
+	### TEX Deciscions 
+	TEX_Reunify_Colorado = {
+		icon = GFX_decision_us_flag
+		visible = {
+			original_tag = TEX
+			#has_completed_focus = CAL_The_Atlantic_Proposal
+		}
+		available = {
+			931 = {
+				is_fully_controlled_by = TEX
+				compliance > 40
+				resistance < 30
+			}
+			NOT = {
+				931 = {
+					is_core_of = TEX
+				}
+			}
+		}
+		highlight_states = {
+			highlight_state_targets = {
+				state = 931
+			}
+		}
+		fire_only_once = yes
+
+		ai_will_do = {
+			base = 100
+		}
+
+        complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete TEX_Reunify_Colorado target: [From.GetName]"
+            931 = {
+				add_core_of = TEX
+				set_state_flag = TEX_reunified_state
+			}
+			add_manpower = 5000
+			add_political_power = 50
+			custom_effect_tooltip = CAL_Colorado_Reunified
+			hidden_effect = {
+				931 = {
+
+				}
+			}
+        }
+    }
+	TEX_Reunify_Wyoming = {
+		icon = GFX_decision_us_flag
+		visible = {
+			original_tag = TEX
+			#has_completed_focus = CAL_The_Atlantic_Proposal
+			NOT = {
+				920 = {
+					is_core_of = TEX
+				}
+			}
+		}
+		available = {
+			929 = {
+				is_fully_controlled_by = TEX
+				compliance > 40
+				resistance < 30
+			}
+		}
+		highlight_states = {
+			highlight_state_targets = {
+				state = 929
+			}
+		}
+		fire_only_once = yes
+
+		ai_will_do = {
+			base = 100
+		}
+
+        complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete TEX_Reunify_Wyoming target: [From.GetName]"
+            929 = {
+				add_core_of = TEX
+				set_state_flag = CAL_reunified_state
+			}
+			add_manpower = 1000
+			add_political_power = 15
+			custom_effect_tooltip = CAL_Wyoming_Reunified
+        }
+    }
+	TEX_Reunify_Montana = {
+		icon = GFX_decision_us_flag
+		visible = {
+			original_tag = TEX
+			#has_completed_focus = CAL_The_Atlantic_Proposal
+			NOT = {
+				788 = {
+					is_core_of = TEX
+				}
+			}
+		}
+		available = {
+			788 = {
+				is_fully_controlled_by = TEX
+				compliance > 40
+				resistance < 30
+			}
+		}
+		highlight_states = {
+			highlight_state_targets = {
+				state = 788
+			}
+		}
+		fire_only_once = yes
+
+		ai_will_do = {
+			base = 100
+		}
+
+        complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete TEX_Reunify_Montana target: [From.GetName]"
+            788 = {
+				add_core_of = TEX
+				set_state_flag = CAL_reunified_state
+			}
+			add_manpower = 1500
+			add_political_power = 20
+			custom_effect_tooltip = CAL_Montana_Reunified
+        }
+    }
+	TEX_Reunify_New_Mexico = {
+		icon = GFX_decision_us_flag
+		visible = {
+			original_tag = TEX
+			#has_completed_focus = CAL_The_Atlantic_Proposal
+			NOT = {
+				739 = {
+					is_core_of = TEX
+				}
+			}
+		}
+		available = {
+			793 = {
+				is_fully_controlled_by = TEX
+				compliance > 40
+				resistance < 30
+			}
+		}
+		highlight_states = {
+			highlight_state_targets = {
+				state = 793
+			}
+		}
+		fire_only_once = yes
+
+		ai_will_do = {
+			base = 100
+		}
+
+        complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete TEX_Reunify_New_Mexico target: [From.GetName]"
+            793 = {
+				add_core_of = TEX
+				set_state_flag = CAL_reunified_state
+			}
+			add_manpower = 1500
+			add_political_power = 20
+			custom_effect_tooltip = CAL_New_Mexico_Reunified
+        }
+    }
+	TEX_reunify_pennsylvania = {
+		icon = GFX_decision_us_flag
+		visible = {
+			original_tag = TEX
+			NOT = {
+				796 = {
+					is_core_of = TEX
+				}
+			}
+		}
+		available = {
+			796 = {
+				is_fully_controlled_by = TEX
+				compliance > 40
+				resistance < 30
+			}
+		}
+		highlight_states = {
+			highlight_state_targets = {
+				state = 796
+			}
+		}
+		fire_only_once = yes
+
+		ai_will_do = {
+			base = 100
+		}
+
+        complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete TEX_reunify_pennsylvania target: [From.GetName]"
+            796 = {
+				add_core_of = TEX
+				set_state_flag = NEE_reunified_state
+			}
+			add_manpower = 1500
+			add_political_power = 20
+			custom_effect_tooltip = NEE_pennsylvania_Reunified_tt
+        }
+    }
+}

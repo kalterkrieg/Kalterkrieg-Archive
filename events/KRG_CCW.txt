@@ -1,0 +1,1351 @@
+add_namespace = krg_ccw
+add_namespace = krg_fng_ccw
+add_namespace = krg_chi_ccw
+add_namespace = krg_fng_ccw_exhaust
+add_namespace = krg_chi_ccw_exhaust
+
+
+### Xi'an Negotiations
+
+country_event = { ##Xi'an trigger check
+	id = krg_fng_ccw.1
+	picture = GFX_ce_CHI_guangzhou_government
+	
+    hidden = yes
+    is_triggered_only = yes
+
+    immediate = {
+        FNG = { country_event = { id = krg_fng_ccw.6 days = 237 } }
+        if = {
+            limit = {
+                NOT = {
+                    FNG = {
+                        has_government = national_populist
+                    }
+                }
+            }
+            FNG = { country_event = { id = krg_fng_ccw.2 } } 
+        }
+        else = {
+            FNG = { country_event = { id = krg_fng_ccw.100 } }
+        }
+    }
+}
+
+country_event = {
+	id = krg_fng_ccw.2 ##continue our negotiations
+    title = krg_fng_ccw.2.t
+    desc = krg_fng_ccw.2.d
+	picture = GFX_ce_CHI_guangzhou_government
+	
+    is_triggered_only = yes
+
+    option = {
+        name = krg_fng_ccw.2.a
+        CHI = { country_event = { id = krg_chi_ccw.3 days = 2 } }
+        FNG = { country_event = { id = krg_fng_ccw.3 days = 2 } }
+        hidden_effect = {
+            CHI = { country_event = { id = krg_chi_ccw.4 days = 22 } }
+            FNG = { country_event = { id = krg_fng_ccw.4 days = 22 } }
+        }
+    }
+    option = {
+        trigger = {
+            is_ai = no
+        }
+        name = krg_fng_ccw.2.b
+        country_event = { id = krg_fng_ccw.100 days = 1 }
+    }
+}
+
+country_event = { ##the meeting in xi'an
+	id = krg_fng_ccw.3
+    title = krg_fng_ccw.3.t
+    desc = krg_fng_ccw.3.d
+	picture = GFX_ce_CHI_guangzhou_government
+	
+    is_triggered_only = yes
+
+    option = {
+        name = krg_fng_ccw.3.a
+        custom_effect_tooltip = KRG_xi_an_tooltip
+    }
+}
+
+country_event = { ##xi'an agreement
+	id = krg_fng_ccw.4
+    title = krg_fng_ccw.4.t
+    desc = krg_fng_ccw.4.d
+	picture = GFX_ce_CHI_guangzhou_government
+	
+    is_triggered_only = yes
+
+    option = {
+        name = krg_fng_ccw.4.a
+        add_political_power = 20
+        set_global_flag = china_xian_agreement_flag
+        add_opinion_modifier = {
+            target = CHI
+            modifier = china_xian_agreement
+        }
+    }
+}
+
+
+### CCW Victory
+
+country_event = {   ### FNG Victory
+    id = krg_fng_ccw.100
+    title = krg_fng_ccw.100.t
+    desc = krg_fng_ccw.100.d
+
+    fire_only_once = yes
+
+    picture = GFX_ce_FNG_CCW_Victory
+
+    is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+			log = "[GetDateText]: [Root.GetName]: event krg_fng_ccw.100 FROM = [From.GetName]"
+			FNG_CCW_victory = yes
+		}
+	}
+
+
+    option = {
+        name = krg_fng_ccw.100.a
+
+		set_country_flag = FNG_republic_proclaimed
+		set_cosmetic_tag = FNG_ROC
+		if = {
+			limit = { has_active_mission = FNG_Yang_making_his_move }
+			add_days_mission_timeout = {
+				mission = FNG_Yang_making_his_move
+				days = -200
+			}
+		}
+
+		add_political_power = 100
+		annex_country = {
+			target = XSM
+			transfer_troops = yes
+		}
+		annex_country = {
+			target = TIB
+			transfer_troops = no
+		}
+		annex_country = {
+			target = SIK
+			transfer_troops = yes
+		}
+		
+		news_event = { id = worldnews.10 days = 5 }
+    }
+}
+
+
+country_event = { ### CHI Victory
+    id = krg_chi_ccw.100
+    title = krg_chi_ccw.100.t
+    desc = krg_chi_ccw.100.d
+
+    fire_only_once = yes
+
+    picture = GFX_ce_CHI_CCW_Victory
+
+    is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+			log = "[GetDateText]: [Root.GetName]: event krg_chi_ccw.100 FROM = [From.GetName]"
+			CHI_CCW_victory = yes
+		}
+	}
+
+    option = {
+        name = krg_chi_ccw.100.a
+        hidden_effect = {
+            drop_cosmetic_tag = yes
+            set_cosmetic_tag = CHI_ROC
+            set_country_flag = CHI_republic_proclaimed
+
+            set_capital = { 
+            state = 743 
+            }
+            CHI = {
+                annex_country = {
+                    target = XSM
+                    transfer_troops = no
+                }
+                annex_country = {
+                    target = TIB
+                    transfer_troops = yes
+                }
+                annex_country = {
+                    target = SIK
+                    transfer_troops = yes
+                }
+                add_political_power = 100
+                if = {
+                    limit = {
+                        MON = { exists = yes 
+                                NOT = { is_puppet = yes }
+                        }
+                    }
+                    if = {
+                        limit = {
+                            MON = {
+                                has_country_leader = {
+                                    character = MON_Nikolai_Berzarin
+                                    ruling_only = yes
+                                }
+                            }
+                        }
+					    country_event = {
+					        id = krg_mon.31
+					        days = 48
+					    }
+                    }
+                    else = {
+				        country_event = {
+					        id = krg_mon.23
+						    days = 48
+                        }
+                    }
+                }
+            }
+            news_event = { id = worldnews.9 days = 5 }
+        }
+    }
+}
+
+### Tianjiner Panzerschlacht
+
+
+
+country_event = { # Distrust towards the north
+	id = krg_chi_ccw.6
+    title = krg_chi_ccw.6.t
+    desc = krg_chi_ccw.6.d
+	picture = GFX_ce_CHI_Tianjin_Takeover
+    fire_only_once = yes
+    is_triggered_only = yes
+    immediate = { log = "[GetDateText]: [Root.GetName]: krg_chi_ccw.6" }
+    option = {
+        name = krg_chi_ccw.6.a
+        add_political_power = -20
+        add_war_support = +0.02
+        add_opinion_modifier = { target = FNG modifier = china_tianjin_loot }
+
+        FNG = {
+        country_event = { 
+        id = krg_fng_ccw.7 
+        days = 5
+        }
+        add_popularity = {
+            ideology = radical_socialist
+            popularity = 0.1
+        }
+        add_popularity = {
+            ideology = revolutionary_republican
+            popularity = 0.1
+        }
+    }
+}
+}
+
+country_event = { ##Old Rules New Citizens
+	id = krg_fng_ccw.7
+    title = krg_fng_ccw.7.t
+    desc = krg_fng_ccw.7.d
+	picture = GFX_ce_CHI_Tianjin_Strike
+    fire_only_once = yes
+    is_triggered_only = yes
+    option = {
+        name = krg_fng_ccw.7.a
+        add_political_power = -20
+        add_command_power = -10
+        add_war_support = -0.02
+        add_stability = -0.02
+        761 = {
+            add_manpower = -114
+            damage_building = {
+                type = infrastructure
+                damage = 0.1
+            }
+        }
+        add_popularity = {
+            ideology = radical_socialist
+            popularity = -0.01
+        }
+        add_popularity = {
+            ideology = revolutionary_republican
+            popularity = -0.01
+        }
+        CHI = { 
+            country_event = { 
+            id = krg_chi_ccw.7
+            days = 1
+            } 
+        }
+    }
+}
+
+country_event = { # The Final Test?
+	id = krg_chi_ccw.7
+    title = krg_chi_ccw.7.t
+    desc = krg_chi_ccw.7.d
+	picture = GFX_ce_CHI_southern_observe
+    immediate = { log = "[GetDateText]: [Root.GetName]: krg_chi_ccw.7" }
+	fire_only_once = yes
+    is_triggered_only = yes
+    option = {
+        name = krg_chi_ccw.7.a
+        add_political_power = -30
+        add_war_support = -0.08
+            FNG = { 
+                country_event = { 
+                id = krg_fng_ccw.8 
+                days = 1 
+                } 
+            }
+    }
+}
+
+country_event = { ##Chen Yi's Impotent Rage
+	id = krg_fng_ccw.8
+    title = krg_fng_ccw.8.t
+    desc = krg_fng_ccw.8.d
+	picture = GFX_ce_CHI_Chen_Yi_Rage
+    is_triggered_only = yes
+    fire_only_once = yes
+    option = {
+        name = krg_fng_ccw.8.a
+        
+        add_war_support = -0.05
+        add_stability = -0.05
+        add_popularity = {
+            ideology = radical_socialist
+            popularity = 0.05
+        }
+        add_popularity = {
+            ideology = revolutionary_republican
+            popularity = 0.05
+        }
+        CHI = { country_event = { id = krg_chi_ccw.8 days = 1 } }
+    }
+}
+
+country_event = { # Blood and Sweat on the Santiaoshi Street
+	id = krg_chi_ccw.8
+    title = krg_chi_ccw.8.t
+    desc = krg_chi_ccw.8.d
+	picture = GFX_ce_CHI_Tianjin_Massacre
+    immediate = { log = "[GetDateText]: [Root.GetName]: krg_chi_ccw.8" }
+    is_triggered_only = yes
+    fire_only_once = yes
+    option = {
+        name = krg_chi_ccw.8.a
+        add_political_power = -5
+        761 = {
+            add_manpower = -3836
+            damage_building = {
+                type = industrial_complex
+                damage = 0.8
+            }
+            damage_building = {
+                type = industrial_complex
+                damage = 0.8
+            }
+        }
+            FNG = { country_event = { id = krg_fng_ccw.9 days = 1 } }
+    }
+}
+
+country_event = { ## Beijing's Response
+	id = krg_fng_ccw.9
+    title = krg_fng_ccw.9.t
+    desc = krg_fng_ccw.9.d
+	picture = GFX_ce_CHI_beijingresponse
+    is_triggered_only = yes
+    fire_only_once = yes
+    option = { #We are the legitimate government!
+        name = krg_fng_ccw.9.a
+        CHI = { country_event = { id = krg_chi_ccw.9 days = 1 } }
+        add_opinion_modifier = {
+            target = CHI
+            modifier = china_southern_rebels
+        }
+    }
+}
+
+country_event = { # Guangzhou's Response
+	id = krg_chi_ccw.9
+	title = krg_chi_ccw.9.t
+	desc = krg_chi_ccw.9.d
+	picture = GFX_ce_CHI_responsetianjin
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_chi_ccw.9" }
+	is_triggered_only = yes
+
+  	fire_only_once = yes
+
+    option = {
+		name = krg_chi_ccw.9.a
+
+		set_temp_variable = { China_temp_national_legitimacy_change = 15 }
+		CHI_change_national_legitimacy = yes
+
+		set_temp_variable = { China_temp_national_legitimacy_change = 10 }
+		FNG_change_national_legitimacy = yes
+		CHI_start_CCW = yes
+    }
+}
+
+
+### Central Plains Breakout
+
+country_event = { ### CCW Intro - FNG
+  id = krg_fng_ccw.10
+  title = krg_fng_ccw.10.t
+  desc = krg_fng_ccw.10.d
+  immediate = { log = "[GetDateText]: [Root.GetName]: krg_fng_ccw.10" }
+  is_triggered_only = yes
+  trigger = {
+    NOT = { has_war_with = CHI }
+  }
+  fire_only_once = yes
+  option = {
+    name = krg_fng_ccw.10.a
+    add_manpower = -200000
+    611 = {
+        damage_building = {
+            type = infrastructure
+            damage = 1
+    }
+    }
+    1101 = {
+        damage_building = {
+            type = infrastructure
+            damage = 1
+    }
+    }
+    1102 = {
+        damage_building = {
+            type = infrastructure
+            damage = 1
+    }
+    }
+    1105 = {
+        damage_building = {
+            type = infrastructure
+            damage = 1
+        }
+    }
+        CHI = { 
+            country_event = { 
+                id = krg_chi_ccw.10
+                days = 1 
+            } 
+        }
+    }
+}
+
+
+
+  country_event = { ### CCW Intro - CHI
+  id = krg_chi_ccw.10
+  title = krg_chi_ccw.10.t
+  desc = krg_chi_ccw.10.d
+  immediate = { log = "[GetDateText]: [Root.GetName]: krg_chi_ccw.10" }
+  fire_only_once = yes
+  is_triggered_only = yes
+  trigger = {
+    NOT = { has_war_with = FNG }
+  }
+  option = {
+    name = krg_chi_ccw.10.b
+    add_manpower = -200000
+    1112 = {
+        damage_building = {
+            type = infrastructure
+            damage = 1
+    }
+    }
+    1113 = {
+        damage_building = {
+            type = infrastructure
+            damage = 1
+    }
+    }
+    600 = {
+        damage_building = {
+            type = infrastructure
+            damage = 1
+    }
+    }
+    915 = {
+        damage_building = {
+            type = infrastructure
+            damage = 1
+        }
+    }
+        hidden_effect = {
+            FNG = {
+                country_event = {
+                id = krg_fng_ccw.11
+                days = 2
+            }
+        }
+        }
+    }
+}
+
+country_event = { ### Governor Tang's Professional Crew
+  id = krg_fng_ccw.11
+  title = krg_fng_ccw.11.t
+  desc = krg_fng_ccw.11.d
+  immediate = { log = "[GetDateText]: [Root.GetName]: krg_fng_ccw.11" }
+  is_triggered_only = yes
+  trigger = {
+    NOT = { has_war_with = CHI }
+  }
+  fire_only_once = yes
+  option = {
+    name = krg_fng_ccw.11.a
+    add_manpower = -4
+    add_equipment_to_stockpile = {
+    type = infantry_equipment
+    amount = -1
+    }
+    CHI = {
+        country_event = {
+        id = krg_chi_ccw.11
+        days = 2
+        }
+    }
+    }
+}
+
+country_event = { ### Day of Departure
+  id = krg_chi_ccw.11
+  title = krg_chi_ccw.11.t
+  desc = krg_chi_ccw.11.d
+  immediate = { log = "[GetDateText]: [Root.GetName]: krg_chi_ccw.11" }
+  is_triggered_only = yes
+  trigger = {
+    NOT = { has_war_with = FNG }
+  }
+  fire_only_once = yes
+  option = {
+	name = krg_chi_ccw.11.a
+    add_command_power = -10
+    FNG = {
+		add_manpower = -50000
+		add_equipment_to_stockpile = {
+			type = infantry_equipment
+			amount = -2000
+		}
+		}
+		1104 = {
+			damage_building = {
+				type = infrastructure
+				damage = 1
+			}
+		}
+		FNG = {
+			country_event = {
+				id = krg_fng_ccw.12
+				days = 2
+			}
+		}
+    }
+}
+
+country_event = { ### Legacy of a Hero
+  id = krg_fng_ccw.12
+  title = krg_fng_ccw.12.t
+  desc = krg_fng_ccw.12.d
+  trigger = {
+    NOT = { has_war_with = CHI }
+  }
+  immediate = { log = "[GetDateText]: [Root.GetName]: krg_fng_ccw.12" }
+  is_triggered_only = yes
+  fire_only_once = yes
+  option = {
+    name = krg_fng_ccw.12.a
+    CHI = {
+        country_event = {
+        id = krg_chi_ccw.12
+        days = 2
+        }
+    }
+    }
+}
+
+
+country_event = { ### Governor Tang's Ultimatum
+  id = krg_chi_ccw.12
+  title = krg_chi_ccw.12.t
+  desc = krg_chi_ccw.12.d
+  trigger = {
+    NOT = { has_war_with = FNG }
+  }
+  immediate = { log = "[GetDateText]: [Root.GetName]: krg_chi_ccw.12" }
+  is_triggered_only = yes
+  fire_only_once = yes
+  option = {
+	name = krg_chi_ccw.13.a
+    start_border_war = {
+    change_state_after_war = no
+    attacker = {
+        state = 1104
+        num_provinces = 4
+        on_win = krg_fng_ccw.13
+        on_lose = krg_fng_ccw.14
+        on_cancel = krg_fng_ccw.13
+    }   
+    defender = {
+        state = 620
+        num_provinces = 4
+        on_win = krg_chi_ccw.13
+        on_lose = krg_chi_ccw.14
+        on_cancel = krg_chi_ccw.13
+    }
+}
+	}
+}
+ 	
+
+country_event = { ### Homecoming - FNG Victory
+	id = krg_fng_ccw.13
+	title = krg_fng_ccw.13.t
+	desc = krg_fng_ccw.13.d
+	trigger = {
+		NOT = { has_war_with = CHI }
+	}
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_fng_ccw.13" }
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = krg_fng_ccw.13.a
+	}
+}
+
+
+country_event = { ### Feet Bound, Dreams Unbound - CHI Victory
+	id = krg_chi_ccw.13
+	title = krg_chi_ccw.13.t
+	desc = krg_chi_ccw.13.d
+	trigger = {
+		NOT = { has_war_with = FNG }
+	}
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_chi_ccw.13" }
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		name = krg_chi_ccw.13.a
+		add_manpower = 45000
+		add_equipment_to_stockpile = {
+			type = infantry_equipment
+			amount = 1500
+		}
+	}
+}
+
+
+country_event = { ### FNG Wardecs after losing in Henan
+	id = krg_fng_ccw.14
+	title = krg_fng_ccw.14.t
+	desc = krg_fng_ccw.14.d
+	trigger = {
+		NOT = { has_war_with = CHI }
+	}
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_fng_ccw.14" }
+	is_triggered_only = yes
+	fire_only_once = yes
+
+  	option = {
+		name = krg_fng_ccw.14.a
+		set_temp_variable = { China_temp_national_legitimacy_change = 20 }
+		CHI_change_national_legitimacy = yes
+
+		set_temp_variable = { China_temp_national_legitimacy_change = 15 }
+		FNG_change_national_legitimacy = yes
+
+    	FNG_start_CCW = yes
+	}
+}
+
+country_event = { ### CHI Wardecs after losing in Henan
+	id = krg_chi_ccw.14
+	title = krg_chi_ccw.14.t
+	desc = krg_chi_ccw.14.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: krg_chi_ccw.14" }
+	is_triggered_only = yes
+	fire_only_once = yes
+	trigger = {
+		NOT = { has_war_with = FNG }
+	}
+	option = {
+		name = krg_chi_ccw.14.a
+
+		set_temp_variable = { China_temp_national_legitimacy_change = 10 }
+		CHI_change_national_legitimacy = yes
+
+		set_temp_variable = { China_temp_national_legitimacy_change = 20 }
+		FNG_change_national_legitimacy = yes
+		CHI_start_CCW = yes
+	}
+}
+
+
+# Aids
+
+country_event = { # Patron Refuses to send Equipment
+    id = krg_ccw.1
+    immediate = { log = "[GetDateText]: [Root.GetName]: event krg_ccw.1 FROM = [From.GetName]" }
+    title = krg_ccw.1.t
+    desc = krg_ccw.1.d
+    is_triggered_only = yes
+    picture = GFX_ce_fng_militaryparade2
+
+    option = {
+        name = krg_ccw.1.a
+        add_political_power = 30
+    }
+}
+
+country_event = { # Small arms request
+    id = krg_ccw.2
+    immediate = { log = "[GetDateText]: [Root.GetName]: event krg_ccw.2 FROM = [From.GetName]" }
+    title = krg_ccw.2.t
+    desc = krg_ccw.2.d
+    picture = GFX_ce_FNG_Conquer_Changsha
+    is_triggered_only = yes
+
+    option = { # Send Guns
+        name = krg_ccw.2.a
+        trigger = {
+            has_equipment = { infantry_equipment > 4999 }
+        }
+        ai_chance = {
+			modifier = {
+				has_equipment = { infantry_equipment > 4999 }
+				add = 100
+			}
+        }
+        effect_tooltip = {
+            send_equipment = {
+                type = infantry_equipment
+                amount = 5000
+                target = FROM
+                old_prioritised = yes
+            }
+        }
+        FROM = { country_event = { id = krg_ccw.3 hours = 8 } }
+    }
+
+    option = { # Refuse to send anything
+        name = krg_ccw.2.b
+        ai_chance = {
+            modifier = {
+				NOT = { has_equipment = { infantry_equipment > 4999 } }
+				add = 100
+			}
+        }
+        FROM = { country_event = { id = krg_ccw.1 hours = 8 } }
+    }
+
+    option = { # Stop events
+        name = krg_ccw.2.c
+        ai_chance = {
+            base = 0
+        }
+        set_country_flag = CCW_stop_lend_lease
+        custom_effect_tooltip = CCW_stop_lend_lease_tt
+    }
+}
+
+
+country_event = { # Patron send infantry equipment
+    id = krg_ccw.3
+    immediate = { log = "[GetDateText]: [Root.GetName]: event krg_ccw.3 FROM = [From.GetName]" }
+    title = krg_ccw.3.t
+    desc = krg_ccw.3.d
+    picture = GFX_ce_fng_militaryparade2
+
+    is_triggered_only = yes
+
+    option = {
+        name = krg_ccw.3.a
+        FROM = {
+            send_equipment = {
+                type = infantry_equipment
+                amount = 3000
+                target = ROOT
+            }
+        }
+    }
+}
+
+country_event = { # support request
+    id = krg_ccw.4
+    immediate = { log = "[GetDateText]: [Root.GetName]: event krg_ccw.4 FROM = [From.GetName]" }
+    title = krg_ccw.4.t
+    desc = krg_ccw.4.d
+    picture = GFX_ce_FNG_Conquer_Changsha
+
+    is_triggered_only = yes
+
+    option = { # Send Guns
+        name = krg_ccw.4.a
+        trigger = {
+            has_equipment = { support_equipment > 299 }
+        }
+		ai_chance = {
+			modifier = {
+				has_equipment = { support_equipment > 299 }
+				add = 100
+			}
+        }
+        effect_tooltip = {
+            send_equipment = {
+                type = support_equipment
+                amount = 300
+                target = FROM
+                old_prioritised = yes
+            }
+        }
+        FROM = { country_event = { id = krg_ccw.5 hours = 8 } }
+    }
+
+    option = { # Refuse to send anything
+        name = krg_ccw.4.b
+		ai_chance = {
+            modifier = {
+				NOT = { has_equipment = { support_equipment > 299 } }
+				add = 100
+			}
+        }
+        FROM = { country_event = { id = krg_ccw.1 hours = 8 } }
+    }
+}
+
+
+country_event = { # Patron send support equipment
+    id = krg_ccw.5
+    immediate = { log = "[GetDateText]: [Root.GetName]: event krg_ccw.5 FROM = [From.GetName]" }
+    title = krg_ccw.5.t
+    desc = krg_ccw.5.d
+    picture = GFX_ce_fng_militaryparade2
+
+    is_triggered_only = yes
+
+    option = {
+        name = krg_ccw.5.a
+        FROM = {
+            send_equipment = {
+                type = support_equipment
+                amount = 300
+                target = ROOT
+            }
+        }
+    }
+}
+country_event = { # artillery request
+    id = krg_ccw.6
+    immediate = { log = "[GetDateText]: [Root.GetName]: event krg_ccw.6 FROM = [From.GetName]" }
+    title = krg_ccw.6.t
+    desc = krg_ccw.6.d
+    picture = GFX_ce_FNG_Conquer_Changsha
+
+    is_triggered_only = yes
+
+    option = { # Send Guns
+        name = krg_ccw.6.a
+        trigger = {
+            has_equipment = { artillery_equipment > 299 }
+        }
+		ai_chance = {
+			modifier = {
+				has_equipment = { artillery_equipment > 299 }
+				add = 100
+			}
+        }
+        effect_tooltip = {
+            send_equipment = {
+                type = artillery_equipment
+                amount = 300
+                target = FROM
+                old_prioritised = yes
+            }
+        }
+        FROM = { country_event = { id = krg_ccw.7 hours = 8 } }
+    }
+
+    option = { # Refuse to send anything
+        name = krg_ccw.6.b
+        ai_chance = {
+            modifier = {
+				NOT = { has_equipment = { artillery_equipment > 299 } }
+				add = 100
+			}
+        }
+        FROM = { country_event = { id = krg_ccw.1 hours = 8 } }
+    }
+}
+
+
+country_event = { # Patron send artillery equipment
+    id = krg_ccw.7
+    immediate = { log = "[GetDateText]: [Root.GetName]: event krg_ccw.7 FROM = [From.GetName]" }
+    title = krg_ccw.7.t
+    desc = krg_ccw.7.d
+    picture = GFX_ce_fng_militaryparade2
+
+    is_triggered_only = yes
+
+    option = {
+        name = krg_ccw.7.a
+        FROM = {
+            send_equipment = {
+                type = artillery_equipment
+                amount = 300
+                target = ROOT
+            }
+        }
+    }
+}
+
+country_event = { # motorized request
+    id = krg_ccw.8
+    immediate = { log = "[GetDateText]: [Root.GetName]: event krg_ccw.6 FROM = [From.GetName]" }
+    title = krg_ccw.8.t
+    desc = krg_ccw.8.d
+    picture = GFX_ce_FNG_Conquer_Changsha
+
+    is_triggered_only = yes
+
+    option = { # Send Guns
+        name = krg_ccw.8.a
+        trigger = {
+            has_equipment = { motorized_equipment > 299 }
+        }
+        ai_chance = {
+			modifier = {
+				has_equipment = { motorized_equipment > 299 }
+				add = 100
+			}
+        }
+        effect_tooltip = {
+            send_equipment = {
+                type = motorized_equipment
+                amount = 300
+                target = FROM
+                old_prioritised = yes
+            }
+        }
+        FROM = { country_event = { id = krg_ccw.9 hours = 8 } }
+    }
+
+    option = { # Refuse to send anything
+        name = krg_ccw.8.b
+        ai_chance = {
+            modifier = {
+				NOT = { has_equipment = { motorized_equipment > 299 } }
+				add = 100
+			}
+        }
+        FROM = { country_event = { id = krg_ccw.1 hours = 8 } }
+    }
+}
+
+
+country_event = { # Patron send motorized equipment
+    id = krg_ccw.9
+    immediate = { log = "[GetDateText]: [Root.GetName]: event krg_ccw.7 FROM = [From.GetName]" }
+    title = krg_ccw.9.t
+    desc = krg_ccw.9.d
+    picture = GFX_ce_fng_militaryparade2
+
+    is_triggered_only = yes
+
+    option = {
+        name = krg_ccw.9.a
+        FROM = {
+            send_equipment = {
+                type = motorized_equipment
+                amount = 300
+                target = ROOT
+            }
+        }
+    }
+}
+
+
+
+
+### City Lost Event
+country_event = {
+    id = krg_chi_ccw_exhaust.1 # Shanghai Lost
+    immediate = { log = "[GetDateText]: [Root.GetName]: event krg_chi_ccw_exhaust.1 FROM = [From.GetName]" }
+    title = krg_chi_ccw_exhaust.1.t
+    desc = krg_chi_ccw_exhaust.1.d
+
+    is_triggered_only = yes
+    option = {
+        name = krg_chi_ccw_exhaust.1.a
+        add_political_power = -10
+		set_temp_variable = { China_temp_national_legitimacy_change = -5 }
+		CHI_change_national_legitimacy = yes
+    }
+}
+
+
+country_event = {
+    id = krg_fng_ccw_exhaust.1 # Shanghai Reclaimed
+    immediate = { log = "[GetDateText]: [Root.GetName]: event krg_fng_ccw_exhaust.1 FROM = [From.GetName]" }
+    title = krg_fng_ccw_exhaust.1.t
+    desc = krg_fng_ccw_exhaust.1.d
+
+    is_triggered_only = yes
+    option = {
+        name = krg_fng_ccw_exhaust.1.a
+        add_political_power = 10
+		set_temp_variable = { China_temp_national_legitimacy_change = 5 }
+		FNG_change_national_legitimacy = yes
+    }
+}
+
+
+country_event = {
+    id = krg_chi_ccw_exhaust.2 # Tianjin Liberated
+    immediate = { log = "[GetDateText]: [Root.GetName]: event krg_chi_ccw_exhaust.2 FROM = [From.GetName]" }
+    title = krg_chi_ccw_exhaust.2.t
+    desc = krg_chi_ccw_exhaust.2.d
+
+    is_triggered_only = yes
+    option = {
+        name = krg_chi_ccw_exhaust.2.a
+        add_political_power = 10
+		set_temp_variable = { China_temp_national_legitimacy_change = 5 }
+		CHI_change_national_legitimacy = yes
+    }
+}
+
+country_event = {
+    id = krg_fng_ccw_exhaust.2 # Tianjin Lost
+    immediate = { log = "[GetDateText]: [Root.GetName]: event krg_fng_ccw_exhaust.2 FROM = [From.GetName]" }
+    title = krg_fng_ccw_exhaust.2.t
+    desc = krg_fng_ccw_exhaust.2.d
+
+    is_triggered_only = yes
+    option = {
+        name = krg_fng_ccw_exhaust.2.a
+        add_political_power = -10
+		set_temp_variable = { China_temp_national_legitimacy_change = -5 }
+		FNG_change_national_legitimacy = yes
+    }
+}
+
+country_event = {
+    id = krg_chi_ccw_exhaust.3 # Wuhan Lost!
+    immediate = { log = "[GetDateText]: [Root.GetName]: event krg_chi_ccw_exhaust.3 FROM = [From.GetName]" }
+    title = krg_chi_ccw_exhaust.3.t
+    desc = krg_chi_ccw_exhaust.3.d
+
+    is_triggered_only = yes
+    option = {
+        name = krg_chi_ccw_exhaust.3.a
+        add_political_power = -10
+		set_temp_variable = { China_temp_national_legitimacy_change = -5 }
+		CHI_change_national_legitimacy = yes
+    }
+}
+
+country_event = {
+    id = krg_fng_ccw_exhaust.3 # Wuhan Reclaimed!
+    immediate = { log = "[GetDateText]: [Root.GetName]: event krg_fng_ccw_exhaust.3 FROM = [From.GetName]" }
+    title = krg_fng_ccw_exhaust.3.t
+    desc = krg_fng_ccw_exhaust.3.d
+
+    is_triggered_only = yes
+    option = {
+        name = krg_fng_ccw_exhaust.3.a
+        add_political_power = 10
+		set_temp_variable = { China_temp_national_legitimacy_change = 5 }
+		FNG_change_national_legitimacy = yes
+    }
+}
+
+country_event = {
+    id = krg_chi_ccw_exhaust.4 # Beijing Liberated
+    immediate = { log = "[GetDateText]: [Root.GetName]: event krg_chi_ccw_exhaust.4 FROM = [From.GetName]" }
+    title = krg_chi_ccw_exhaust.4.t
+    desc = krg_chi_ccw_exhaust.4.d
+
+    is_triggered_only = yes
+    option = {
+        name = krg_chi_ccw_exhaust.4.a
+        add_political_power = 10
+		set_temp_variable = { China_temp_national_legitimacy_change = 5 }
+		CHI_change_national_legitimacy = yes
+    }
+}
+
+country_event = {
+    id = krg_fng_ccw_exhaust.4 # Beijing Lost
+    immediate = { log = "[GetDateText]: [Root.GetName]: event krg_fng_ccw_exhaust.4 FROM = [From.GetName]" }
+    title = krg_fng_ccw_exhaust.4.t
+    desc = krg_fng_ccw_exhaust.4.d
+
+    is_triggered_only = yes
+    option = {
+        name = krg_fng_ccw_exhaust.4.a
+        add_political_power = -10
+		set_temp_variable = { China_temp_national_legitimacy_change = -5 }
+		FNG_change_national_legitimacy = yes
+    }
+}
+
+country_event = {
+    id = krg_chi_ccw_exhaust.5 # Chongqing Lost
+    immediate = { log = "[GetDateText]: [Root.GetName]: event krg_chi_ccw_exhaust.5 FROM = [From.GetName]" }
+    title = krg_chi_ccw_exhaust.5.t
+    desc = krg_chi_ccw_exhaust.5.d
+
+    is_triggered_only = yes
+    option = {
+        name = krg_chi_ccw_exhaust.5.a
+        add_political_power = -10
+		set_temp_variable = { China_temp_national_legitimacy_change = -5 }
+		CHI_change_national_legitimacy = yes
+    }
+}
+
+country_event = {
+    id = krg_fng_ccw_exhaust.5 # Chongqing Reclaimed!
+    immediate = { log = "[GetDateText]: [Root.GetName]: event krg_fng_ccw_exhaust.5 FROM = [From.GetName]" }
+    title = krg_fng_ccw_exhaust.5.t
+    desc = krg_fng_ccw_exhaust.5.d
+
+    is_triggered_only = yes
+    option = {
+        name = krg_fng_ccw_exhaust.5.a
+        add_political_power = 10
+		set_temp_variable = { China_temp_national_legitimacy_change = 5 }
+		FNG_change_national_legitimacy = yes
+    }
+}
+
+country_event = {
+    id = krg_chi_ccw_exhaust.6 # Changsha Lost
+    immediate = { log = "[GetDateText]: [Root.GetName]: event krg_chi_ccw_exhaust.6 FROM = [From.GetName]" }
+    title = krg_chi_ccw_exhaust.6.t
+    desc = krg_chi_ccw_exhaust.6.d
+
+    is_triggered_only = yes
+    option = {
+        name = krg_chi_ccw_exhaust.6.a
+        add_political_power = -10
+		set_temp_variable = { China_temp_national_legitimacy_change = -5 }
+		CHI_change_national_legitimacy = yes
+    }
+}
+
+country_event = {
+    id = krg_fng_ccw_exhaust.6 # Changsha Reclaimed!
+    immediate = { log = "[GetDateText]: [Root.GetName]: event krg_fng_ccw_exhaust.6 FROM = [From.GetName]" }
+    title = krg_fng_ccw_exhaust.6.t
+    desc = krg_fng_ccw_exhaust.6.d
+
+    is_triggered_only = yes
+    option = {
+        name = krg_fng_ccw_exhaust.6.a
+        add_political_power = 10
+		set_temp_variable = { China_temp_national_legitimacy_change = 5 }
+		FNG_change_national_legitimacy = yes
+    }
+}
+
+country_event = {
+    id = krg_chi_ccw_exhaust.7 # Luoyang Liberated
+    immediate = { log = "[GetDateText]: [Root.GetName]: event krg_chi_ccw_exhaust.7 FROM = [From.GetName]" }
+    title = krg_chi_ccw_exhaust.7.t
+    desc = krg_chi_ccw_exhaust.7.d
+
+    is_triggered_only = yes
+    option = {
+        name = krg_chi_ccw_exhaust.7.a
+        add_political_power = 10
+		set_temp_variable = { China_temp_national_legitimacy_change = 5 }
+		CHI_change_national_legitimacy = yes
+    }
+}
+
+country_event = {
+    id = krg_fng_ccw_exhaust.7 # Luoyang Lost
+    immediate = { log = "[GetDateText]: [Root.GetName]: event krg_fng_ccw_exhaust.7 FROM = [From.GetName]" }
+    title = krg_fng_ccw_exhaust.7.t
+    desc = krg_fng_ccw_exhaust.7.d
+
+    is_triggered_only = yes
+    option = {
+        name = krg_fng_ccw_exhaust.7.a
+        add_political_power = -10
+		set_temp_variable = { China_temp_national_legitimacy_change = -5 }
+		FNG_change_national_legitimacy = yes
+    }
+}
+
+country_event = {
+    id = krg_chi_ccw_exhaust.8 # Nanjing Lost
+    immediate = { log = "[GetDateText]: [Root.GetName]: event krg_chi_ccw_exhaust.8 FROM = [From.GetName]" }
+    title = krg_chi_ccw_exhaust.8.t
+    desc = krg_chi_ccw_exhaust.8.d
+
+    is_triggered_only = yes
+    option = {
+        name = krg_chi_ccw_exhaust.8.a
+        add_political_power = -10
+		set_temp_variable = { China_temp_national_legitimacy_change = -5 }
+		CHI_change_national_legitimacy = yes
+    }
+}
+
+country_event = {
+    id = krg_fng_ccw_exhaust.8 # Nanjing Reclaimed!
+    immediate = { log = "[GetDateText]: [Root.GetName]: event krg_fng_ccw_exhaust.8 FROM = [From.GetName]" }
+    title = krg_fng_ccw_exhaust.8.t
+    desc = krg_fng_ccw_exhaust.8.d
+
+    is_triggered_only = yes
+    option = {
+        name = krg_fng_ccw_exhaust.8.a
+        add_political_power = 10
+		set_temp_variable = { China_temp_national_legitimacy_change = 5 }
+		FNG_change_national_legitimacy = yes
+    }
+}
+
+country_event = {
+    id = krg_chi_ccw_exhaust.9 # Xi'an Liberated
+    immediate = { log = "[GetDateText]: [Root.GetName]: event krg_chi_ccw_exhaust.9 FROM = [From.GetName]" }
+    title = krg_chi_ccw_exhaust.9.t
+    desc = krg_chi_ccw_exhaust.9.d
+
+    is_triggered_only = yes
+    option = {
+        name = krg_chi_ccw_exhaust.9.a
+        add_political_power = 10
+		set_temp_variable = { China_temp_national_legitimacy_change = 5 }
+		CHI_change_national_legitimacy = yes
+    }
+}
+
+country_event = {
+    id = krg_fng_ccw_exhaust.9 # Xi'an Lost
+    immediate = { log = "[GetDateText]: [Root.GetName]: event krg_fng_ccw_exhaust.9 FROM = [From.GetName]" }
+    title = krg_fng_ccw_exhaust.9.t
+    desc = krg_fng_ccw_exhaust.9.d
+
+    is_triggered_only = yes
+    option = {
+        name = krg_fng_ccw_exhaust.9.a
+        add_political_power = -10
+		set_temp_variable = { China_temp_national_legitimacy_change = -5 }
+		FNG_change_national_legitimacy = yes
+    }
+}
+
+country_event = {
+    id = krg_chi_ccw_exhaust.10 # Taiyuan Liberated
+    immediate = { log = "[GetDateText]: [Root.GetName]: event krg_chi_ccw_exhaust.10 FROM = [From.GetName]" }
+    title = krg_chi_ccw_exhaust.10.t
+    desc = krg_chi_ccw_exhaust.10.d
+
+    is_triggered_only = yes
+    option = {
+        name = krg_chi_ccw_exhaust.10.a
+        add_political_power = 10
+		set_temp_variable = { China_temp_national_legitimacy_change = 5 }
+		CHI_change_national_legitimacy = yes
+    }
+}
+
+country_event = {
+    id = krg_fng_ccw_exhaust.10 # Taiyuan Lost
+    immediate = { log = "[GetDateText]: [Root.GetName]: event krg_fng_ccw_exhaust.10 FROM = [From.GetName]" }
+    title = krg_fng_ccw_exhaust.10.t
+    desc = krg_fng_ccw_exhaust.10.d
+
+    is_triggered_only = yes
+    option = {
+        name = krg_fng_ccw_exhaust.10.a
+        add_political_power = -10
+		set_temp_variable = { China_temp_national_legitimacy_change = -5 }
+		FNG_change_national_legitimacy = yes
+    }
+}
+
+
+country_event = {
+    id = krg_chi_ccw_exhaust.11 # Guangzhou Lost
+    immediate = { log = "[GetDateText]: [Root.GetName]: event krg_chi_ccw_exhaust.11 FROM = [From.GetName]" }
+    title = krg_chi_ccw_exhaust.11.t
+    desc = krg_chi_ccw_exhaust.11.d
+
+    is_triggered_only = yes
+    option = {
+        name = krg_chi_ccw_exhaust.11.a
+        add_political_power = -10
+		set_temp_variable = { China_temp_national_legitimacy_change = -5 }
+		CHI_change_national_legitimacy = yes
+    }
+}
+
+country_event = {
+    id = krg_fng_ccw_exhaust.11 # Guangzhou Reclaimed!
+    immediate = { log = "[GetDateText]: [Root.GetName]: event krg_fng_ccw_exhaust.11 FROM = [From.GetName]" }
+    title = krg_fng_ccw_exhaust.11.t
+    desc = krg_fng_ccw_exhaust.11.d
+
+    is_triggered_only = yes
+    option = {
+        name = krg_fng_ccw_exhaust.11.a
+        add_political_power = 10
+		set_temp_variable = { China_temp_national_legitimacy_change = 5 }
+		FNG_change_national_legitimacy = yes
+    }
+}
+
+country_event = {
+    id = krg_chi_ccw_exhaust.12 # Shenyang Liberated
+    immediate = { log = "[GetDateText]: [Root.GetName]: event krg_chi_ccw_exhaust.12 FROM = [From.GetName]" }
+    title = krg_chi_ccw_exhaust.12.t
+    desc = krg_chi_ccw_exhaust.12.d
+
+    is_triggered_only = yes
+    option = {
+        name = krg_chi_ccw_exhaust.12.a
+        add_political_power = 10
+		set_temp_variable = { China_temp_national_legitimacy_change = 5 }
+		CHI_change_national_legitimacy = yes
+    }
+}
+
+country_event = {
+    id = krg_fng_ccw_exhaust.12 # Shenyang Lost
+    immediate = { log = "[GetDateText]: [Root.GetName]: event krg_fng_ccw_exhaust.12 FROM = [From.GetName]" }
+    title = krg_fng_ccw_exhaust.12.t
+    desc = krg_fng_ccw_exhaust.12.d
+
+    is_triggered_only = yes
+    option = {
+        name = krg_fng_ccw_exhaust.12.a
+        add_political_power = -10
+		set_temp_variable = { China_temp_national_legitimacy_change = -5 }
+		FNG_change_national_legitimacy = yes
+    }
+}

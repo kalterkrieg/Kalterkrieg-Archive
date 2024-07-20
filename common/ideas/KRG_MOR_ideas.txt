@@ -1,0 +1,99 @@
+ideas = {
+	country = {
+### Starting Ideas ###
+		MOR_the_free_protectorate = {
+			picture = CAN_beacon_of_liberty
+			modifier = {
+				stability_factor = 0.10
+				political_power_factor = 0.15
+				party_popularity_stability_factor = 0.01
+			}
+		}
+		MOR_legacy_of_tercio = {
+			picture = big_entente_idea
+			modifier = {
+				army_attack_factor = 0.10
+				army_core_attack_factor = 0.05
+			}
+		}
+		MOR_shadows_of_the_rif = {
+			picture = CSA_broken_spirit
+			modifier = {
+				conscription_factor = -0.15
+				local_resources_factor = -0.10
+			}
+		}
+		MOR_nationalist_dismay = {
+			picture = GRE_german_sanctions
+			modifier = {
+				stability_factor = -0.05
+				war_support_factor = -0.15
+				consumer_goods_factor = 0.1
+			}
+		}
+### Moroccan Federation Ideas ##
+		AMR_legacy_of_the_rif = {
+			picture = ITA_republicans_last_stand
+			modifier = {
+				army_defence_factor = 0.10
+				army_core_defence_factor = 0.05
+			}
+		}
+		AMR_exile_in_cairo = {
+			picture = JBS_Urban_Nobility_Faction
+			modifier = {
+				party_popularity_stability_factor = 0.01
+				stability_factor = 0.10
+				war_support_factor = 0.15
+			}
+		}
+		AMR_anti_accord_sentiment = {
+			picture = NFA_war_of_liberation
+			modifier = {
+				war_support_weekly = -0.003
+				political_power_factor = -0.10
+			}
+		}
+### Moroccan Crisis Ideas ##
+		MOR_moroccan_crisis = {
+			on_add = {log = "[GetDateText]: [Root.GetName]: add idea SPR_invading_morocco"}
+			picture = CSA_fanatic_zeal
+			modifier = {
+				acclimatization_hot_climate_gain_factor = 0.25
+				army_speed_factor = -0.33
+				army_morale_factor = 0.15
+				army_org_regain = 0.1
+				army_core_defence_factor  = 0.5
+				army_attack_factor = -0.5
+				army_attack_against_major_factor = 0.25
+				heat_attrition_factor = -0.15
+				cannot_call_allies_or_join_wars = 1
+			}
+			cancel = {
+				NOT = {
+					has_war_with = AMR
+				}
+			}
+		}
+		AMR_moroccan_crisis = {
+			on_add = {log = "[GetDateText]: [Root.GetName]: add idea SPR_invading_morocco"}
+			picture = CSA_fanatic_zeal
+			modifier = {
+				acclimatization_hot_climate_gain_factor = 0.25
+				army_speed_factor = -0.33
+				army_morale_factor = 0.15
+				army_org_regain = 0.1
+				army_core_defence_factor  = 0.5
+				army_attack_factor = -0.5
+				army_attack_against_major_factor = 0.25
+				heat_attrition_factor = -0.15
+				cannot_call_allies_or_join_wars = 1
+			}
+			cancel = {
+				NOT = {
+					has_war_with = MOR
+				}
+			}
+		}
+	}
+}

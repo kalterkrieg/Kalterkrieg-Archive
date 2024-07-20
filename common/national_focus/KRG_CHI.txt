@@ -1,0 +1,1342 @@
+############################################
+###        Designed by WeissIriss        ###
+###            Coded by Burhan           ###
+############################################     
+
+focus_tree = {
+    id = CHI_1948_Reconstruction_Tree
+    country = {
+        factor = 0
+        modifier = {
+            add = 100
+            tag = CHI
+        }
+    }
+
+    default = no
+
+focus = {
+	id = CHI_peace
+	icon = GFX_CHI_year_of_the_rat
+	x = 0
+	y = 0
+	offset = {
+		x = 3
+		y = 0
+		trigger = {
+			tag = CHI
+		}
+	}
+	cost = 4
+	ai_will_do = {
+		factor = 10000
+	}	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_peace"
+        add_political_power = 100
+        add_popularity = {
+            ideology = social_democrat
+            popularity = 0.05
+        }
+	}
+}
+
+
+focus = {
+	id = CHI_consultative_conference
+	icon = GFX_CHI_negotiations
+	x = 0
+	y = 1
+	cost = 4
+	relative_position_id = CHI_peace
+	prerequisite = {
+		focus = CHI_peace
+	}
+	ai_will_do = {
+		factor = 100
+	}	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: CHI_consultative_conferences"
+		##### Political Consultative Conference Events TBD
+	}
+}
+
+focus = {
+	id = CHI_bitter_peace
+	icon = GFX_generic_skull_treaty
+	x = -1
+	y = 2
+	cost = 4
+	relative_position_id = CHI_peace
+	prerequisite = {
+		focus = CHI_consultative_conference
+	}
+	ai_will_do = {
+		factor = 1000
+	}	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_bitter_peace"
+		country_event = krg_chi.12
+		swap_ideas = {
+			remove_idea = CHI_idea_victory_over_japan
+			add_idea = CHI_idea_shimonoseki_total_compliance
+		}
+	}
+}
+
+focus = {
+	id = CHI_reclamatory_justice
+	icon = GFX_JAP_root_out_traitors_chi
+	x = -3
+	y = 3
+	cost = 5
+	relative_position_id = CHI_peace
+	prerequisite = {
+		focus = CHI_bitter_peace
+	}
+	ai_will_do = {
+		factor = 200
+	}	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_reclamatory_justice"
+		add_to_variable = {
+			var = CHI_DevConsumerGoods
+			value = -0.1
+			tooltip = chi_dev_consumer_up_tooltip
+		}
+		add_timed_idea = {
+    		idea = CHI_idea_retributive_redistribution
+    		days = 180
+		}
+		country_event = {
+			id = krg_chi.13
+			days = 1
+		}
+	}
+}
+
+focus = {
+	id = CHI_repatriate_japanese
+	icon = GFX_LEC_japanese_arrow
+	x = -3
+	y = 4
+	cost = 4
+	relative_position_id = CHI_peace
+	prerequisite = {
+		focus = CHI_reclamatory_justice
+	}
+	ai_will_do = {
+		factor = 200
+	}	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_repatriate_japanese"
+			595 = {
+				add_manpower = -25000
+			}
+			914 = {
+				add_manpower = -25000
+			}
+			1116 = {
+				add_manpower = -25000
+			}
+			525 = {
+				add_manpower = 25000
+			}
+			531 = {
+				add_manpower = 25000
+			}
+			282 = {
+				add_manpower = 25000
+			}
+			country_event = { ### Fate of Japanese Veterans
+				id = krg_chi.14
+				days = 1
+			}
+	}
+}
+
+focus = {
+	id = CHI_new_diplomatic_relations
+	icon = GFX_generic_restart_diplomatic_initiatives
+	x = 1
+	y = 3
+	cost = 4
+	relative_position_id = CHI_peace
+	prerequisite = {
+		focus = CHI_bitter_peace
+	}
+	ai_will_do = {
+		factor = 1
+	}	
+	completion_reward = {
+		move_up_trade_laws = yes
+			add_to_variable = {
+				var = CHI_DevConsumerGoods
+				value = -0.1
+				tooltip = chi_dev_consumer_up_tooltip
+			}
+			country_event = {
+				id = krg_chi.15
+				days = 1
+			}
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_new_diplomatic_relations"
+	}
+}
+
+focus = {
+	id = CHI_CRS_coup_legacy
+	icon = GFX_HOL_crackdown_totalist
+	x = -1
+	y = 3
+	cost = 5
+	relative_position_id = CHI_peace
+	prerequisite = {
+		focus = CHI_bitter_peace
+	}
+	ai_will_do = {
+		factor = 100
+	}	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_CRS_Coup_Legacy"
+		add_to_variable = {
+    		var = CHI_military_political_power_gain_var
+    		value = 0.2
+		}
+		add_to_variable = {
+    		var = CHI_experience_gain_arm_factor_var
+    		value = 0.1
+		}
+		add_to_variable = {
+    		var = CHI_army_morale_factor_var
+    		value = 0.1
+		}
+		add_to_variable = {
+    		var = CHI_max_planning_factor_var
+    		value = 0.1
+		}
+		add_stability = 0.05
+			country_event = { ### Loc TBD
+				id = krg_chi.16
+				days = 1
+			}
+	}
+}
+
+focus = {
+	id = CHI_partisan_question
+	icon = GFX_socialist_constitution
+	x = -2
+	y = 5
+	cost = 5
+	prerequisite = {
+		focus = CHI_repatriate_japanese
+	}
+	prerequisite = {
+		focus = CHI_CRS_coup_legacy
+	}
+	relative_position_id = CHI_peace
+	ai_will_do = {
+		factor = 500
+	}	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_partisan_question"
+		set_division_template_lock = {
+			division_template = "Partisans"
+			is_locked = no
+		}
+		army_experience = 50
+		add_equipment_to_stockpile = {
+    		type = infantry_equipment_0
+    		amount = 500
+    		producer = GER
+		}
+		add_equipment_to_stockpile = {
+    		type = infantry_equipment_0
+    		amount = 500
+    		producer = JAP
+		}
+		unlock_decision_tooltip = CHI_salvage_weapons_caches
+		set_country_flag = CHI_salvage
+		country_event = {
+			 	id = krg_chi.18
+				days = 1
+		}
+	}
+}
+
+
+focus = {
+	id = CHI_curtail_parochialism
+	icon = GFX_generic_examine_local_units
+	x = -1
+	y = 4
+	cost = 5
+	prerequisite = {
+		focus = CHI_CRS_coup_legacy
+	}
+	relative_position_id = CHI_peace
+	ai_will_do = {
+		factor = 1
+	}	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_curtail_parochialism"
+			country_event = {
+				id = krg_chi.17
+				days = 1
+			}
+		#add_power_balance_value = {
+    	#	id = CHI_admin_bop
+    	#	value = 0.1
+    	#	tooltip_side = CHI_clean_side
+		#}
+	}
+}
+
+focus = {
+	id = CHI_fund_the_country
+	icon = GFX_generic_shipyard
+	x = 2
+	y = 4
+	cost = 4
+	prerequisite = {
+		focus = CHI_new_diplomatic_relations
+	}
+	prerequisite = {
+		focus = CHI_production_campaign
+	}
+	relative_position_id = CHI_peace
+	ai_will_do = {
+		factor = 500
+	}	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_curtail_parochialism"
+		move_down_trade_laws = yes
+	}
+}
+
+focus = {
+	id = CHI_our_proud_tradition
+	icon = GFX_CHI_peoples_army
+	x = -1
+	y = 6
+	cost = 5
+	relative_position_id = CHI_peace
+	prerequisite = {
+		focus = CHI_partisan_question
+	}
+	prerequisite = {
+		focus = CHI_curtail_parochialism
+	}
+	ai_will_do = {
+		factor = 1000
+	}	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_our_proud_tradition"
+
+		add_war_support = 0.05
+		country_event = {
+			id = krg_chi.19
+			days = 1
+		}
+		add_to_variable = {
+    		var = CHI_compliance_growth_var
+    		value = 0.1
+		}
+		add_to_variable = {
+    		var = CHI_resistance_activity_var
+    		value = -0.1
+		}
+		CHI_Reform_NRA = yes
+	}
+}
+
+focus = {
+	id = CHI_production_campaign
+	icon = GFX_SZC_improvised_farming_machinery
+	x = 2
+	y = 2
+	cost = 4
+	relative_position_id = CHI_peace
+	prerequisite = {
+		focus = CHI_consultative_conference
+	}
+	ai_will_do = {
+		factor = 500
+	}	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_production_campaign"
+		add_stability = 0.05
+		move_down_econ_mobilization = yes
+		add_to_variable = {
+			var = CHI_DevConstructionSpeed
+			value = 0.1
+			tooltip = chi_dev_construction_up_tooltip
+		}
+		country_event = {
+				id = krg_chi.20
+				days = 1
+		}
+	}
+}
+
+focus = {
+	id = CHI_tame_capitalists
+	icon = GFX_FRA_CapitalistMeasures
+	x = 3
+	y = 3
+	cost = 5
+	relative_position_id = CHI_peace
+	prerequisite = {
+		focus = CHI_production_campaign
+	}
+	ai_will_do = {
+		factor = 300
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_tame_capitalists"
+		add_political_power = -30
+		add_popularity = {
+    		ideology = market_liberal
+    		popularity = -0.05
+		}
+		move_down_taxation = yes
+		coal_add_mar_lib = yes
+		add_to_variable = {
+			var = CHI_DevIndustrialFactory
+			value = 0.1
+			tooltip = chi_dev_industrial_cap_up_tooltip
+		}
+		country_event = {
+			id = krg_chi.21
+			days = 1
+		}
+	}
+}
+
+focus = {
+	id = CHI_gung_ho
+	icon = GFX_generic_socialist_cooperation
+	x = 4	
+	y = 4
+	cost = 5
+	relative_position_id = CHI_peace
+	prerequisite = {
+		focus = CHI_tame_capitalists
+	}
+	ai_will_do = {
+		factor = 100
+	}	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_gung_ho"
+			add_to_variable = {
+				var = CHI_DevConstructionSpeed
+				value = 0.1
+				tooltip = chi_dev_construction_up_tooltip
+			}
+			country_event = {
+				id = krg_chi.22
+				days = 1
+			}
+			random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = industrial_complex
+					level = 1
+					instant_build = yes
+				}
+			}
+				random_owned_controlled_state = {
+				add_extra_state_shared_building_slots = 1
+				add_building_construction = {
+					type = arms_factory
+					level = 1
+					instant_build = yes
+				}
+			}
+	}
+}
+
+focus = {
+	id = CHI_establish_welfare_institute
+	icon = GFX_DNF_chinese_welfare
+	x = 3
+	y = 5
+	cost = 5
+	relative_position_id = CHI_peace
+	prerequisite = {
+		focus = CHI_gung_ho
+	}
+	prerequisite = {
+		focus = CHI_fund_the_country
+	}
+	ai_will_do = {
+		factor = 100
+	}	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_establish_welfare_institute"
+		add_stability = 0.1
+		country_event = {
+			id = krg_chi.23
+			days = 1
+		}
+	}
+}
+
+focus = {
+	id = CHI_uniting_the_long_divided
+	icon = GFX_CHI_zhili_unite_china
+	x = 1
+	y = 7
+	cost = 5
+	relative_position_id = CHI_peace
+	prerequisite = {
+		focus = CHI_establish_welfare_institute
+	}
+	prerequisite = {
+		focus = CHI_our_proud_tradition
+	}
+	ai_will_do = {
+		factor = 10000
+	}	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_uniting_the_long_divided"
+		if = {
+			limit = {
+				tag = FNG
+			}
+			country_event = {
+				id = krg_fng.24
+				days = 1
+			}
+		}
+		if = {
+			limit = {
+				tag = CHI
+			}
+			country_event = {
+				id = krg_chi.24
+				days = 1
+			}
+		}
+	}
+}
+
+focus = {
+	id = CHI_war_of_liberation
+	icon = GFX_CHI_northen_expedition
+	x = 13
+	y = 0
+	cost = 5
+	ai_will_do = {
+		factor = 10000
+	}
+	available = {
+		has_war_with = FNG
+	}
+	bypass = {
+		has_country_flag = CHI_national_pacification_plan_2
+	}
+	completion_reward = {
+		add_ideas = CHI_idea_why_we_fight
+		swap_ideas = {
+			remove_idea = CHI_idea_shimonoseki_total_compliance
+			add_idea = CHI_idea_shimonoseki_token_compliance
+		}
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_war_of_liberation"
+	}
+}
+
+focus = {
+	id = CHI_true_heir_1912
+	icon = GFX_generic_flag_large_CHI_2
+	x = -2
+	y = 1
+	cost = 5
+
+	relative_position_id = CHI_war_of_liberation
+	prerequisite = {
+		focus = CHI_war_of_liberation
+	}
+
+	ai_will_do = {
+		factor = 1500
+	}
+	completion_reward = {
+		swap_ideas = {
+    		remove_idea = CHI_idea_southwestern_political_council
+    		add_idea = CHI_idea_legitimacy_cantonese_rebel
+		}
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_true_heir_1912"
+	}
+}
+
+focus = {
+	id = CHI_NRA_reforged
+	icon = GFX_generic_army_guy_2
+	x = 3
+	y = 1
+	cost = 5
+
+	relative_position_id = CHI_war_of_liberation
+
+	prerequisite = {
+		focus = CHI_war_of_liberation
+	}
+
+	ai_will_do = {
+		factor = 5000
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_NRA_reforged"
+		move_up_military = yes
+	}
+}
+
+focus = {
+	id = CHI_frontline_support_movement 
+	icon = GFX_generic_revolution_tools
+
+	x = -2
+	y = 2
+	cost = 5
+
+	relative_position_id = CHI_war_of_liberation
+	prerequisite = {
+		focus = CHI_true_heir_1912
+	}
+
+	ai_will_do = {
+		factor = 2000
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_frontline_support_movement"
+		unlock_decision_tooltip = CHI_frontline_support_construction
+		unlock_decision_tooltip = CHI_frontline_support_production
+		unlock_decision_tooltip = CHI_frontline_support_outsourcing
+	}
+}
+
+
+focus = {
+	id = CHI_mudlegs_rising
+	icon = GFX_LEP_kmt_encirclement
+	x = -4
+	y = 2
+	cost = 5
+
+	relative_position_id = CHI_war_of_liberation
+	prerequisite = {
+		focus = CHI_true_heir_1912
+	}
+
+	ai_will_do = {
+		factor = 1500
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_mudlegs_rising"
+		717 = {
+            add_dynamic_modifier = {
+    			modifier = CHI_base_area
+			}
+        }
+        1101 = {
+            add_dynamic_modifier = {
+    			modifier = CHI_base_area
+			}
+        }
+        1102 = {
+            add_dynamic_modifier = {
+    			modifier = CHI_base_area
+			}
+        }
+		activate_targeted_decision = {
+			target = 717
+		    decision = CHI_expand_guerilla
+		}
+		activate_targeted_decision = {
+			target = 1101
+			decision = CHI_expand_guerilla
+		}
+		activate_targeted_decision = {
+			target = 1102
+			decision = CHI_expand_guerilla
+		}
+	}
+}
+
+focus = {
+	id = CHI_army_democratization
+	icon = GFX_CHI_peoples_army
+	x = 1
+	y = 2
+	cost = 5
+
+	relative_position_id = CHI_war_of_liberation
+
+	prerequisite = {
+		focus = CHI_true_heir_1912
+	}
+	prerequisite = {
+		focus = CHI_NRA_reforged
+	}
+
+	ai_will_do = {
+		factor = 10000
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: CHI_army_democratization"
+		CHI_Reform_NRA = yes
+	}
+}
+
+focus = {
+	id = CHI_political_consultative_conference
+	icon = GFX_generic_shady_deal
+	x = -1
+	y = 3
+	cost = 5
+
+	relative_position_id = CHI_war_of_liberation
+	prerequisite = {
+		focus = CHI_frontline_support_movement 
+	}
+	prerequisite = {
+		focus = CHI_army_democratization
+	}
+	available = {
+		OR = {
+			NOT = {
+				has_war_with = FNG
+			}
+			custom_trigger_tooltip = {
+				tooltip = CHI_momentum_tooltip_60
+				check_variable = {
+					CHI_CCW_momentum_var > 60
+				}
+			}
+		}
+	}
+	ai_will_do = {
+		factor = 1500
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_political_consultative_conference"
+		swap_ideas = {
+    		remove_idea = CHI_idea_legitimacy_cantonese_rebel
+    		add_idea = CHI_idea_legitimacy_united_front
+		}
+	}
+}
+
+focus = {
+	id = CHI_outline_land_law
+	icon = GFX_OTT_Land_Reform
+	x = -3
+	y = 3
+	cost = 5
+
+	relative_position_id = CHI_war_of_liberation
+	prerequisite = {
+		focus = CHI_frontline_support_movement 
+	}
+	prerequisite = {
+		focus = CHI_mudlegs_rising
+	}
+	available = {
+		OR = {
+			NOT = {
+				has_war_with = FNG
+			}
+			custom_trigger_tooltip = {
+				tooltip = CHI_momentum_tooltip_60
+				check_variable = {
+					CHI_CCW_momentum_var > 60
+				}
+			}
+		}
+	}
+	ai_will_do = {
+		factor = 100
+	}
+
+	completion_reward = {
+    	add_ideas = CHI_idea_land_law
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_outline_land_law"
+	}
+}
+
+focus = {
+	id = CHI_movement_against_hunger
+	icon = GFX_generic_end_strikes
+	x = -5
+	y = 3
+	cost = 4.5
+
+	relative_position_id = CHI_war_of_liberation
+	prerequisite = {
+		focus = CHI_frontline_support_movement 
+	}
+	prerequisite = {
+		focus = CHI_mudlegs_rising
+	}
+	prerequisite = {
+		focus = CHI_army_democratization
+	}
+
+	ai_will_do = {
+		factor = 120
+	}
+	available = {
+		OR = {
+			NOT = {
+				has_war_with = FNG
+			}
+			custom_trigger_tooltip = {
+				tooltip = CHI_momentum_tooltip_60
+				check_variable = {
+					CHI_CCW_momentum_var > 60
+				}
+			}
+		}
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_movement_against_hunger"
+		add_ideas = CHI_movement_against_hunger_idea
+	}
+}
+
+
+
+focus = {
+	id = CHI_liberated_soldiers
+	icon = GFX_NEE_freemen
+	x = -4
+	y = 4
+	cost = 3
+
+	relative_position_id = CHI_war_of_liberation
+	prerequisite = {
+		focus = CHI_outline_land_law
+	}
+	prerequisite = {
+		focus = CHI_movement_against_hunger
+	}
+	available = {
+		OR = {
+			NOT = {
+				has_war_with = FNG
+			}
+			custom_trigger_tooltip = {
+				tooltip = CHI_momentum_tooltip_75
+				check_variable = {
+					CHI_CCW_momentum_var > 75
+				}
+			}
+		}
+	}
+	ai_will_do = {
+		factor = 1500
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_liberated_soldiers"
+		add_ideas = CHI_idea_liberated_soldiers_1
+	}
+}
+
+focus = {
+	id = CHI_patchwork_to_framework
+	icon = GFX_generic_KRG_social_liberal
+	x = -2
+	y = 4
+	cost = 3
+
+	relative_position_id = CHI_war_of_liberation
+	prerequisite = {
+		focus = CHI_political_consultative_conference
+	}
+	prerequisite = {
+		focus = CHI_outline_land_law
+	}
+	prerequisite = {
+		focus = CHI_movement_against_hunger
+	}
+ 	available = {
+		OR = {
+			NOT = {
+				has_war_with = FNG
+			}
+			custom_trigger_tooltip = {
+				tooltip = CHI_momentum_tooltip_75
+				check_variable = {
+					CHI_CCW_momentum_var > 75
+				}
+			}
+		}
+	}
+	ai_will_do = {
+		factor = 1000
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_patchwork_to_framework"
+		add_political_power = 50
+	}
+}
+
+focus = {
+	id = CHI_constitution
+	icon = GFX_TEX_federal_system
+	x = -2
+	y = 5
+	cost = 4
+
+	relative_position_id = CHI_war_of_liberation
+	prerequisite = {
+		focus = CHI_patchwork_to_framework
+	}
+	available = {
+		OR = {
+			NOT = {
+				has_war_with = FNG
+			}
+			custom_trigger_tooltip = {
+				tooltip = CHI_momentum_tooltip_85
+				check_variable = {
+					CHI_CCW_momentum_var > 85
+				}
+			}
+		}
+	}
+	ai_will_do = {
+		factor = 10000
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_constitution"
+		country_event = krg_chi_pol.1
+		swap_ideas = {
+    		remove_idea = CHI_idea_legitimacy_united_front
+    		add_idea = CHI_idea_legitimacy_marching_new_china
+		}
+	}
+}
+
+focus = { # Bait Pockets/Hedgehog Strongholds
+	id = CHI_bait_pockets
+	icon = GFX_CHI_Bait_Pocket
+	x = 1
+	y = 4
+	cost = 5
+
+	relative_position_id = CHI_war_of_liberation
+	prerequisite = {
+		focus = CHI_Six_Tactical_Principles
+	}
+	available = {
+		OR = {
+			FNG = { has_completed_focus = FNG_encirclement_campaign	}
+			NOT = { country_exists = FNG }
+		}
+	}
+
+	ai_will_do = {
+		factor = 10000
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_bait_pockets"
+		add_timed_idea = {
+    		idea = CHI_idea_rural_surround_urban
+    		days = 180
+		}
+		army_experience = 50
+		add_political_power = 100
+	}
+}
+
+
+focus = {
+	id = CHI_seek_accord_support
+	icon = GFX_generic_ratify_the_accord
+	x = 4
+	y = 2
+	cost = 5
+
+	relative_position_id = CHI_war_of_liberation
+	prerequisite = {
+		focus = CHI_NRA_reforged
+	}
+	ai_will_do = {
+		factor = 1700
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_seek_accord_support"
+		add_political_power = 50
+		country_event = {
+			id = krg_chi_ccw.15
+		}
+	}
+}
+
+focus = {
+	id = CHI_Our_American_Friends
+	icon = GFX_CHI_American_Friend
+	x = 3
+	y = 3
+	cost = 5
+	relative_position_id = CHI_war_of_liberation
+	ai_will_do = {
+		factor = 1700
+	}
+	prerequisite = {
+		focus = CHI_seek_accord_support
+	}
+	available = {
+		OR = {
+			NOT = {
+				has_war_with = FNG
+			}
+			custom_trigger_tooltip = {
+				tooltip = CHI_momentum_tooltip_60
+				check_variable = {
+					CHI_CCW_momentum_var > 60
+				}
+			}
+		}
+	}
+	completion_reward = {
+		add_opinion_modifier = {
+            target = CAL
+            modifier = china_first_recognition
+        }
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_Our_American_Friends"
+	}
+}
+
+focus = {
+	id = CHI_purchase_accord_equipments
+	icon = GFX_generic_gun_trials
+	x = 5
+	y = 3
+	cost = 5
+
+	relative_position_id = CHI_war_of_liberation
+
+	prerequisite = {
+		focus = CHI_seek_accord_support
+	}
+	ai_will_do = {
+		factor = 1800
+	}
+	available = {
+		OR = {
+			NOT = {
+				has_war_with = FNG
+			}
+			custom_trigger_tooltip = {
+				tooltip = CHI_momentum_tooltip_75
+				check_variable = {
+					CHI_CCW_momentum_var > 75
+				}
+			}
+		}
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_purchase_accord_equipments"
+	}
+}
+
+focus = {
+	id = CHI_seas_and_stars
+	icon = GFX_generic_navy_battleship3
+	x = 4
+	y = 4
+	cost = 5
+
+	relative_position_id = CHI_war_of_liberation
+
+	prerequisite = {
+		focus = CHI_purchase_accord_equipments
+	}
+	prerequisite = {
+		focus = CHI_Our_American_Friends
+	}
+	available = {
+		OR = {
+			NOT = {
+				has_war_with = FNG
+			}
+			custom_trigger_tooltip = {
+				tooltip = CHI_momentum_tooltip_85
+				check_variable = {
+					CHI_CCW_momentum_var > 85
+				}
+			}
+		}
+	}
+
+	ai_will_do = {
+		factor = 700
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_seas_and_stars"
+		
+		add_equipment_to_stockpile = {
+			type = convoy
+			amount = 100
+			producer = CAL
+		}
+		if = {
+			limit = { has_dlc_mtg = yes }
+			create_ship = {
+				type = ship_hull_light_2
+				equipment_variant = "Fletcher Class"
+				creator = CAL
+				name = "Shanghai"
+			}
+			create_ship = {
+				type = ship_hull_light_2
+				equipment_variant = "Fletcher Class"
+				creator = CAL
+				name = "Hangzhou"
+			}
+			create_ship = {
+				type = ship_hull_light_2
+				equipment_variant = "Fletcher Class"
+				creator = CAL
+				name = "Ningbo"
+			}
+			create_ship = {
+				type = ship_hull_light_2
+				equipment_variant = "Fletcher Class"
+				creator = CAL
+				name = "Suzhou"
+			}
+			create_ship = {
+				type = ship_hull_light_2
+				equipment_variant = "Fletcher Class"
+				creator = CAL
+				name = "Nanjing"
+			}
+			create_ship = {
+				type = ship_hull_cruiser_2
+				equipment_variant = "Oakland Class"
+				creator = CAL
+				name = "Guangzhou"
+			}
+		}
+		else = {
+			create_ship = {
+				type = destroyer_2
+				equipment_variant = destroyer_2
+				creator = CAL
+				name = "Shanghai"
+			}
+			create_ship = {
+				type = destroyer_2
+				equipment_variant = destroyer_2
+				creator = CAL
+				name = "Hangzhou"
+			}
+			create_ship = {
+				type = destroyer_2
+				equipment_variant = destroyer_2
+				creator = CAL
+				name = "Ningbo"
+			}
+			create_ship = {
+				type = destroyer_2
+				equipment_variant = destroyer_2
+				creator = CAL
+				name = "Suzhou"
+			}
+			create_ship = {
+				type = destroyer_2
+				equipment_variant = destroyer_2
+				creator = CAL
+				name = "Nanjing"
+			}
+			create_ship = {
+				type = cruiser_2
+				equipment_variant = cruiser_2
+				creator = CAL
+				name = "Guangzhou"
+			}
+		}
+	}
+}
+
+focus = {
+	id = CHI_Accord_Advisors
+	icon = GFX_CAN_Canadian_Military_Pride
+	x = 7
+	y = 3
+	cost = 5
+
+	relative_position_id = CHI_war_of_liberation
+
+	prerequisite = {
+		focus = CHI_seek_accord_support
+	}
+
+	ai_will_do = {
+		factor = 1000
+	}
+	available = {
+		OR = {
+			NOT = {
+				has_war_with = FNG
+			}
+			custom_trigger_tooltip = {
+				tooltip = CHI_momentum_tooltip_85
+				check_variable = {
+					CHI_CCW_momentum_var > 85
+				}
+			}
+		}
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_Accord_Advisors"
+		if = {
+			limit = {
+				CAN = { has_cosmetic_tag = CAN_redesign }
+			}
+			add_ideas = CHI_accord_advisors_idea_CAN_flag_2
+		}
+		else = {
+			add_ideas = CHI_accord_advisors_idea_CAN_flag_1
+		}
+	}
+}
+
+focus = {
+	id = CHI_Six_Tactical_Principles
+	icon = GFX_BUL_generic_Macedonian_infiltration
+	x = 1
+	y = 3
+	cost = 4
+
+	relative_position_id = CHI_war_of_liberation
+
+	prerequisite = {
+		focus = CHI_army_democratization	
+	}
+
+	ai_will_do = {
+		factor = 10000
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_Six_Tactical_Principles"
+		CHI_Reform_NRA = yes
+	}
+}
+
+focus = {
+	id = CHI_Whampoa_Reforms
+	icon = GFX_chi_landforce
+	x = 3
+	y = 5
+	cost = 7
+
+	relative_position_id = CHI_war_of_liberation
+
+	prerequisite = {
+		focus = CHI_bait_pockets
+	}
+
+	ai_will_do = {
+		factor = 10000
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_Whampoa_Reforms"
+		CHI_Reform_NRA = yes
+	}
+}
+
+focus = {
+	id = CHI_unleash_flame
+	icon = GFX_generic_napalm
+	x = 6
+	y = 4
+	cost = 5
+
+	relative_position_id = CHI_war_of_liberation
+	available = {
+		has_completed_focus = CHI_Our_American_Friends
+	}
+	prerequisite = {
+		focus = CHI_Accord_Advisors
+	}
+	prerequisite = {
+		focus = CHI_purchase_accord_equipments
+	}
+
+	ai_will_do = {
+		factor = 1200
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_unleash_flame"
+		add_equipment_to_stockpile = {
+			type = CAS_equipment_1
+			amount = 300
+			producer = CAL
+		}
+	}
+}
+
+focus = { # Yi Jiang Sheng Yong Zhui Qiong Kou
+	id = CHI_Pursue_the_tottering_foe
+	icon = GFX_chi_proclaim_victory_altered1
+	x = 5
+	y = 6
+	cost = 5
+
+	relative_position_id = CHI_war_of_liberation
+	prerequisite = {
+		focus = CHI_unleash_flame
+	}
+	prerequisite = {
+		focus = CHI_seas_and_stars
+	}
+	prerequisite = {
+		focus = CHI_Whampoa_Reforms
+	}
+	available = {
+		608 = {
+			is_controlled_by = CHI
+		}
+		716 = {
+			is_controlled_by = CHI
+		}
+		744 = {
+			is_controlled_by = CHI
+		}
+		597 = {
+			is_controlled_by = CHI
+		}
+		1107 = {
+			is_controlled_by = CHI
+		}
+		610 = {
+			is_controlled_by = CHI
+		}
+		609 = {
+			is_controlled_by = CHI
+		}
+		761 = {
+			is_controlled_by = CHI
+		}
+	}
+
+	ai_will_do = {
+		factor = 10000
+	}
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CHI_Pursue_the_tottering_foe"
+		add_timed_idea = {
+			idea = CHI_final_stretch_idea
+			days = 365
+		}
+	}
+}
+
+
+}
+

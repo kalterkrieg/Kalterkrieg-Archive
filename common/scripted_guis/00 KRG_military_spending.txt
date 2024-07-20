@@ -1,0 +1,80 @@
+scripted_gui = {
+	Military_spending_open = {
+		context_type = player_context
+		parent_window_name = military_spending_anchor
+		window_name = "Military_spending_open_container"
+
+		visible = {
+			always = yes
+		}
+
+		effects = {
+			Military_spending_open_button_click = {
+				if = {
+					limit = { has_variable = show_military_spending }
+					clear_variable = show_military_spending
+				}
+				else = {
+					set_variable = { show_military_spending = 1 }
+				}
+			}
+		}
+	}
+
+	Military_spending_container = {
+		context_type = player_context
+		window_name = "Military_spending_container"
+		dirty = show_military_spending
+
+		visible = {
+			check_variable = {
+				show_military_spending > 0
+			}
+		}
+
+		effects = {
+			Military_spending_close_button_click = {
+				clear_variable = show_military_spending
+			}
+		}
+	}
+}
+
+scripted_gui = {
+	fuel_ui_gui = {
+		context_type = player_context 
+		window_name = KRG_fuel_ui_window
+		parent_window_token = logistics_tab
+
+		properties = {
+			KRG_fuel_economy_type_icon ={
+				image = "[GetFuelRelianceIcon]"
+			}
+			KRG_fuel_shortage_size_icon = {
+				image = "[GetFuelShortageIcon]"
+			}
+		}
+
+		effects = {
+			KRG_fuel_economy_type_icon_click = {
+				if = {
+					limit = {
+						has_idea = KRG_coal_economy
+					}
+					show_ideas_tooltip = KRG_coal_economy
+				}
+				else_if = {
+					limit = {
+						has_idea = KRG_mixed_economy
+					}
+					show_ideas_tooltip = KRG_mixed_economy
+				}
+				else = {
+					show_ideas_tooltip = KRG_oil_economy
+				}
+			}
+			
+		}
+	}
+
+}

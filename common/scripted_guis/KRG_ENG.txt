@@ -1,0 +1,44 @@
+scripted_gui = {
+	KRG_ENG_parliament_scripted_gui = {
+		window_name = "KRG_ENG_parliament_container"
+		context_type = decision_category
+
+		visible = {
+			has_country_flag = open_parliament_gui
+		}
+
+		dynamic_lists = {
+			ENG_commons_government = {
+				array = ENG_commons_government_seat_x
+				change_scope = no
+				entry_container = ENG_commons_government_seat
+				index = seat_idx
+			}
+		}
+
+		dynamic_lists = {
+			ENG_commons_opposition = {
+				array = ENG_commons_opposition_seat_x
+				change_scope = no
+				entry_container = ENG_commons_opposition_seat
+				index = opposition_seat_idx
+			}
+		}
+
+		properties = {
+			ENG_commons_government_icon = {
+				x = ENG_commons_government_seat_x^seat_idx
+				y = ENG_commons_government_seat_y^seat_idx
+				frame = ENG_commons_government_seat_frame^seat_idx
+			}
+		}
+
+		properties = {
+			ENG_commons_opposition_icon = {
+				x = ENG_commons_opposition_seat_x^opposition_seat_idx
+				y = ENG_commons_opposition_seat_y^opposition_seat_idx
+				frame = ENG_commons_opposition_seat_frame^opposition_seat_idx
+			}
+		}
+	}
+}

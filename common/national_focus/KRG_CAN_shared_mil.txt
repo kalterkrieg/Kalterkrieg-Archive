@@ -1,0 +1,1533 @@
+shared_focus = {
+	id = CAN_status_of_the_military
+	icon = GFX_CAN_Canadian_Military_Pride
+	cost = 2
+	x = 25
+	y = 7
+	available = {
+		has_completed_focus = CAN_form_the_accord
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+	
+	completion_reward = {
+		army_experience = 25
+		add_to_variable = { CAN_mil_plan_speed = 0.15 }
+		if = {
+			limit = {
+				NOT = {
+					has_dynamic_modifier = { modifier = CAN_military_modifier }
+				}
+			}
+			custom_effect_tooltip = CAN_status_of_the_military_tt
+			hidden_effect = {
+				add_dynamic_modifier = {
+					modifier = CAN_military_modifier
+				}
+			}
+		} else = {
+			custom_effect_tooltip = CAN_status_of_the_military_tt_2
+		}
+	}
+}
+
+shared_focus = {
+	id = CAN_new_tactics_for_a_new_threat
+	icon = GFX_generic_army_superior_firepower
+	cost = 5
+	x = -3
+	y = 1
+	relative_position_id = CAN_status_of_the_military
+
+	ai_will_do = {
+		base = 100
+	}
+	
+	prerequisite = {
+		focus = CAN_status_of_the_military
+	}
+	mutually_exclusive = {
+		focus = CAN_refining_our_combined_arms_tactics
+	}
+	
+	completion_reward = {
+		add_doctrine_cost_reduction = {
+			cost_reduction = 0.5
+			uses = 2
+			category = cat_grand_battle_plan
+		}
+		custom_effect_tooltip = CAN_new_tactics_for_a_new_threat_tt
+		add_to_variable = { CAN_mil_artillery_attack = 0.05 }
+		add_to_variable = { CAN_mil_artillery_defence = 0.05 }
+	}
+}
+
+shared_focus = {
+	id = CAN_refining_our_combined_arms_tactics
+	icon = GFX_generic_army_mobile_warfare
+	cost = 5
+	x = 3
+	y = 1
+	relative_position_id = CAN_status_of_the_military
+
+	ai_will_do = {
+		base = 100
+	}
+
+	prerequisite = {
+		focus = CAN_status_of_the_military
+	}
+	mutually_exclusive = {
+		focus = CAN_new_tactics_for_a_new_threat
+	}
+	
+	completion_reward = {
+		add_doctrine_cost_reduction = {
+			cost_reduction = 0.5
+			uses = 2
+			category = cat_combined_operations
+		}
+		custom_effect_tooltip = CAN_refining_our_combined_arms_tactics_tt
+		add_to_variable = { CAN_mil_armor_attack = 0.05 }
+		add_to_variable = { CAN_mil_armor_speed = 0.05 }
+	}
+}
+
+shared_focus = {
+	id = CAN_advanced_artillery_tactics
+	icon = GFX_RUS_Update_The_Artillery
+	cost = 5
+	x = -4
+	y = 2
+	relative_position_id = CAN_status_of_the_military
+
+	ai_will_do = {
+		base = 100
+	}
+
+	prerequisite = {
+		focus = CAN_new_tactics_for_a_new_threat
+	}
+	
+	completion_reward = {
+		army_experience = 10
+		custom_effect_tooltip = CAN_advanced_artillery_tactics_tt
+		add_to_variable = { CAN_org_factor = 0.05 }
+		add_to_variable = { CAN_mil_artillery_attack = 0.10 }
+	}
+}
+
+shared_focus = {
+	id = CAN_wave_of_firepower
+	icon = GFX_GEO_Artillery_Tactics
+	cost = 5
+	x = -2
+	y = 2
+	relative_position_id = CAN_status_of_the_military
+
+	ai_will_do = {
+		base = 100
+	}
+
+	prerequisite = {
+		focus = CAN_new_tactics_for_a_new_threat
+	}
+	
+	completion_reward = {
+		add_tech_bonus = {
+			uses = 1
+			bonus = 1
+			category = artillery
+		}
+		custom_effect_tooltip = CAN_wave_of_firepower_tt
+		add_to_variable = { CAN_reinforce_rate = 0.03 }
+	}
+}
+
+shared_focus = {
+	id = CAN_protection_through_annihilation
+	icon = GFX_generic_offensive_army
+	cost = 5
+	x = -3
+	y = 3
+	relative_position_id = CAN_status_of_the_military
+
+	ai_will_do = {
+		base = 100
+	}
+
+	prerequisite = {
+		focus = CAN_advanced_artillery_tactics
+	}
+	prerequisite = {
+		focus = CAN_wave_of_firepower
+	}
+	
+	completion_reward = {
+		add_to_variable = { CAN_mil_artillery_defence = 0.10 }
+		add_to_variable = { CAN_mil_morale_factor = 0.05 }
+		custom_effect_tooltip = CAN_protection_through_annihilation_tt
+	}
+}
+
+shared_focus = {
+	id = CAN_command_and_staff_college_expansion
+	icon = GFX_generic_army_high_command
+	cost = 5
+	x = -4
+	y = 4
+	relative_position_id = CAN_status_of_the_military
+
+	ai_will_do = {
+		base = 100
+	}
+
+	prerequisite = {
+		focus = CAN_advanced_artillery_tactics
+	}
+	prerequisite = {
+		focus = CAN_protection_through_annihilation
+	}
+	
+	completion_reward = {
+		custom_effect_tooltip = CAN_command_and_staff_college_expansion_tt
+		add_to_variable = { CAN_mil_command_power_gain = 0.10 }
+		add_to_variable = { CAN_mil_leader_start_level = 1 }
+		add_to_variable = { CAN_mil_leader_cost = -0.25 }
+	}
+}
+
+shared_focus = {
+	id = CAN_anti_panzer_capabilities
+	icon = GFX_generic_tank_destroyer
+	cost = 5
+	x = -2
+	y = 4
+	relative_position_id = CAN_status_of_the_military
+
+	ai_will_do = {
+		base = 100
+	}
+
+	prerequisite = {
+		focus = CAN_protection_through_annihilation
+	}
+	
+	completion_reward = {
+		add_tech_bonus = {
+			uses = 1
+			bonus = 1
+			category = anti_tank
+		}
+		add_tech_bonus = {
+			uses = 1
+			bonus = 1
+			category = mechanized_equipment
+		}
+	}
+}
+
+shared_focus = {
+	id = CAN_rocket_powered_tactics
+	icon = GFX_generic_rocket
+	cost = 5
+	x = -3
+	y = 5
+	relative_position_id = CAN_status_of_the_military
+
+	ai_will_do = {
+		base = 100
+	}
+
+	prerequisite = {
+		focus = CAN_command_and_staff_college_expansion
+	}
+	prerequisite = {
+		focus = CAN_anti_panzer_capabilities
+	}
+	
+	completion_reward = {
+		add_tech_bonus = {
+			uses = 1
+			bonus = 1
+			category = rocketry
+		}
+		add_tech_bonus = {
+			uses = 1
+			bonus = 1
+			category = rocket_artillery
+		}
+		custom_effect_tooltip = CAN_rocket_power_tatics_tt
+		add_to_variable = { CAN_mil_defense = 0.05 }
+		add_to_variable = { CAN_mil_breakthrough = 0.05 }
+	}
+}
+
+shared_focus = {
+	id = CAN_tank_development_programme
+	icon = GFX_CAN_design_tanks
+	cost = 4
+	x = 0
+	y = 2
+	relative_position_id = CAN_status_of_the_military
+
+	ai_will_do = {
+		base = 100
+	}
+
+	prerequisite = {
+		focus = CAN_new_tactics_for_a_new_threat
+		focus = CAN_refining_our_combined_arms_tactics
+	}
+	
+	completion_reward = {
+		add_tech_bonus = {
+			uses = 2
+			bonus = 0.50
+			category = armor
+		}
+	}
+}
+
+shared_focus = {
+	id = CAN_accord_wide_tank_rnd
+	icon = GFX_generic_entente_arms_trade
+	cost = 4
+	x = 0
+	y = 4
+	relative_position_id = CAN_status_of_the_military
+
+	ai_will_do = {
+		base = 100
+	}
+
+	prerequisite = {
+		focus = CAN_tank_durability_and_armour_company
+		focus = CAN_tank_firepower_company
+	}
+	
+	completion_reward = {
+		army_experience = 25
+		custom_effect_tooltip = CAN_every_accord_country
+		add_tech_bonus = {
+			uses = 1
+			bonus = 0.15
+			category = armor
+		}
+		for_each_loop = {
+			array = CAN.allies
+
+			add_tech_bonus = {
+				uses = 1
+				bonus = 0.15
+				category = armor
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = CAN_tank_durability_and_armour_company
+	icon = GFX_generic_heavy_armour_canadian
+	cost = 4
+	x = -1
+	y = 3
+	relative_position_id = CAN_status_of_the_military
+
+	ai_will_do = {
+		base = 100
+	}
+
+	prerequisite = {
+		focus = CAN_tank_development_programme
+	}
+	mutually_exclusive = {
+		focus = CAN_tank_firepower_company
+	}
+	
+	completion_reward = {
+		add_ideas = CAN_massey_harris
+	}
+}
+
+shared_focus = {
+	id = CAN_tank_firepower_company
+	icon = GFX_CAN_tanks_of_future
+	cost = 4
+	x = 1
+	y = 3
+	relative_position_id = CAN_status_of_the_military
+
+	ai_will_do = {
+		base = 100
+	}
+
+	prerequisite = {
+		focus = CAN_tank_development_programme
+	}
+	mutually_exclusive = {
+		focus = CAN_tank_durability_and_armour_company
+	}
+	
+	completion_reward = {
+		add_ideas = CAN_vickers_canada
+	}
+}
+
+shared_focus = {
+	id = CAN_mass_production_facilities
+	icon = GFX_generic_military_mobilisation
+	cost = 5
+	x = 0
+	y = 5
+	relative_position_id = CAN_status_of_the_military
+
+	ai_will_do = {
+		base = 100
+	}
+
+	prerequisite = {
+		focus = CAN_accord_wide_tank_rnd
+	}
+	
+	completion_reward = {
+		add_ideas = CAN_idea_mass_production_facilities
+		1076 = {
+			add_extra_state_shared_building_slots = 2
+			add_building_construction = {
+				type = arms_factory
+				level = 2
+			}
+		}
+	}
+}
+
+shared_focus = {
+	id = CAN_armoured_regiment_refits
+	icon = GFX_generic_military_equipment
+	cost = 5
+	x = 2
+	y = 2
+	relative_position_id = CAN_status_of_the_military
+
+	ai_will_do = {
+		base = 100
+	}
+
+	prerequisite = {
+		focus = CAN_refining_our_combined_arms_tactics
+	}
+	
+	completion_reward = {
+		add_tech_bonus = {
+			uses = 1
+			bonus = 1
+			category = infantry_weapons
+		}
+		add_tech_bonus = {
+			uses = 1
+			bonus = 1
+			category = motorized_equipment
+		}
+	}
+}
+
+shared_focus = {
+	id = CAN_heavy_infantry_mechanization
+	icon = GFX_generic_armored_cars
+	cost = 5
+	x = 4
+	y = 2
+	relative_position_id = CAN_status_of_the_military
+
+	ai_will_do = {
+		base = 100
+	}
+
+	prerequisite = {
+		focus = CAN_refining_our_combined_arms_tactics
+	}
+	
+	completion_reward = {
+		add_tech_bonus = {
+			uses = 1
+			bonus = 1
+			category = mechanized_equipment
+		}
+		custom_effect_tooltip = CAN_heavy_infantry_mechanization_tt
+		add_to_variable = { CAN_mil_mech_attack = 0.05 }
+		add_to_variable = { CAN_mil_mech_defence = 0.05 }
+	}
+}
+
+shared_focus = {
+	id = CAN_armoured_breakthrough
+	icon = GFX_generic_army_tanks3
+	cost = 5
+	x = 3
+	y = 3
+	relative_position_id = CAN_status_of_the_military
+
+	ai_will_do = {
+		base = 100
+	}
+
+	prerequisite = {
+		focus = CAN_armoured_regiment_refits
+	}
+	prerequisite = {
+		focus = CAN_heavy_infantry_mechanization
+	}
+	
+	completion_reward = {
+		custom_effect_tooltip = CAN_armoured_breakthrough_tt
+		add_to_variable = { CAN_mil_armor_attack = 0.05 }
+		add_to_variable = { CAN_mil_armor_speed = 0.05 }
+		add_to_variable = { CAN_mil_breakthrough = 0.05 }
+	}
+}
+
+shared_focus = {
+	id = CAN_hussars_of_tomorrow
+	icon = GFX_generic_light_tanks
+	cost = 5
+	x = 2
+	y = 4
+	relative_position_id = CAN_status_of_the_military
+
+	ai_will_do = {
+		base = 100
+	}
+
+	prerequisite = {
+		focus = CAN_armoured_breakthrough
+	}
+	
+	completion_reward = {
+		add_to_variable = { CAN_reinforce_rate = 0.03 }
+		add_to_variable = { CAN_org_factor = 0.05 }
+		custom_effect_tooltip = CAN_hussars_of_tomorrow_tt
+	}
+}
+
+shared_focus = {
+	id = CAN_reconnaissance_and_exploitation
+	icon = GFX_POL_recon_aircraft
+	cost = 5
+	x = 4
+	y = 4
+	relative_position_id = CAN_status_of_the_military
+
+	ai_will_do = {
+		base = 100
+	}
+
+	prerequisite = {
+		focus = CAN_armoured_breakthrough
+	}
+	
+	completion_reward = {
+		custom_effect_tooltip = CAN_reconnaissance_and_exploitation_tt
+		add_to_variable = { CAN_mil_armor_attack = 0.05 }
+		add_to_variable = { CAN_mil_armor_speed = 0.05 }
+		add_to_variable = { CAN_reinforce_rate = 0.02 }
+	}
+}
+
+shared_focus = {
+	id = CAN_integrated_armoured_bridages
+	icon = GFX_generic_army_cooperation
+	cost = 5
+	x = 3
+	y = 5
+	relative_position_id = CAN_status_of_the_military
+
+	ai_will_do = {
+		base = 100
+	}
+
+	prerequisite = {
+		focus = CAN_hussars_of_tomorrow
+	}
+	prerequisite = {
+		focus = CAN_reconnaissance_and_exploitation
+	}
+	
+	completion_reward = {
+		add_doctrine_cost_reduction = {
+			cost_reduction = 0.5
+			uses = 1
+			category = cat_combined_operations
+		}
+		add_to_variable = { CAN_org_factor = 0.10 }
+		add_to_variable = { CAN_mil_breakthrough = 0.05 }
+		custom_effect_tooltip = CAN_integrated_armoured_bridages_tt
+	}
+}
+
+shared_focus = {
+	id = CAN_modern_warfare
+	icon = GFX_CAN_patrol
+	cost = 4
+	x = 0
+	y = 6
+	relative_position_id = CAN_status_of_the_military
+
+	ai_will_do = {
+		base = 100
+	}
+
+	prerequisite = {
+		focus = CAN_rocket_powered_tactics
+		focus = CAN_integrated_armoured_bridages
+	}
+	prerequisite = {
+		focus = CAN_mass_production_facilities
+	}
+	
+	completion_reward = {
+		army_experience = 50
+		add_doctrine_cost_reduction = {
+			cost_reduction = 1
+			uses = 2
+			category = land_doctrine
+		}
+		custom_effect_tooltip = CAN_modern_warfare_tt
+		add_to_variable = { CAN_mil_attack = 0.10 }
+		add_to_variable = { CAN_mil_defense = 0.10 }
+	}
+}
+
+
+shared_focus = {
+	id = CAN_expand_the_rcaf
+	icon = GFX_CAN_canadian_air_force #GFX_CAN_airforce looks terrible
+	cost = 2
+	x = 36
+	y = 7
+	available = {
+		has_completed_focus = CAN_form_the_accord
+	}
+	
+	ai_will_do = {
+		base = 100
+	}
+
+	completion_reward = {
+		air_experience = 25
+		add_to_variable = { CAN_mil_home_defence = 0.15 }
+		if = {
+			limit = {
+				NOT = {
+					has_dynamic_modifier = { modifier = CAN_military_modifier }
+				}
+			}
+			custom_effect_tooltip = CAN_expand_the_rcaf_tt
+			hidden_effect = {
+				add_dynamic_modifier = {
+					modifier = CAN_military_modifier
+				}
+			}
+		} else = {
+			custom_effect_tooltip = CAN_expand_the_rcaf_tt_2
+		}
+	}
+
+}
+
+
+shared_focus = {
+	id = CAN_protecting_our_skies
+	icon = GFX_Surface_to_air_missle
+	cost = 5
+	x = 2	
+	y = 1
+
+	ai_will_do = {
+		base = 100
+	}
+
+	prerequisite = {
+		focus = CAN_expand_the_rcaf
+	}
+	mutually_exclusive = {
+		focus = CAN_assisting_our_ground_troops
+	}
+	relative_position_id = CAN_expand_the_rcaf
+
+	completion_reward = {
+		add_to_variable = { CAN_mil_air_superiority_efficiency = 0.15 }
+		add_to_variable = { CAN_mil_home_defence = 0.10 }
+		custom_effect_tooltip = CAN_protecting_our_skies_tt
+	}
+}
+
+shared_focus = {
+	id = CAN_assisting_our_ground_troops
+	icon = GFX_generic_air_earmark_escort_forces
+	cost = 5
+	x = 0
+	y = 1
+
+	ai_will_do = {
+		base = 100
+	}
+
+	prerequisite = {
+		focus = CAN_expand_the_rcaf
+	}
+	mutually_exclusive = {
+		focus = CAN_protecting_our_skies
+	}
+	relative_position_id = CAN_expand_the_rcaf
+
+	completion_reward = {
+		add_to_variable = { CAN_mil_cas_attack = 0.15 }
+		add_to_variable = { CAN_mil_cas_eff = 0.15 }
+		custom_effect_tooltip = CAN_assisting_our_ground_troops_tt
+	}
+}
+
+shared_focus = {
+	id = CAN_CAS_research
+	icon = GFX_generic_air_CAS_new
+	cost = 5
+	x = 0
+	y = 2
+
+	ai_will_do = {
+		base = 100
+	}
+
+	prerequisite = {
+		focus = CAN_assisting_our_ground_troops
+	}
+	relative_position_id = CAN_expand_the_rcaf
+
+	completion_reward = {
+		add_tech_bonus = {
+			uses = 1
+			bonus = 1
+			category = cas_tech
+		}
+	}
+}
+
+shared_focus = {
+	id = CAN_integrate_helicopters
+	icon = GFX_generic_begin_rotorcraft_experiments
+	cost = 5
+	x = 0
+	y = 3
+
+	ai_will_do = {
+		base = 100
+	}
+
+	prerequisite = {
+		focus = CAN_CAS_research
+	}
+	relative_position_id = CAN_expand_the_rcaf
+
+	completion_reward = {
+		add_to_variable = { CAN_mil_cas_attack = 0.05 }
+		custom_effect_tooltip = CAN_integrate_helicopters_tt
+		add_tech_bonus = {
+			uses = 1
+			bonus = 1
+			category = helicopter_tech
+			ahead_reduction = 1
+		}
+	}
+}
+
+shared_focus = {
+	id = CAN_bomber_research
+	icon = GFX_generic_air_bomber_new
+	cost = 5
+	x = 2
+	y = 2
+	prerequisite = {
+		focus = CAN_protecting_our_skies
+		focus = CAN_assisting_our_ground_troops
+	}
+	relative_position_id = CAN_expand_the_rcaf
+
+	ai_will_do = {
+		base = 100
+	}
+
+	completion_reward = {
+		add_tech_bonus = {
+			uses = 1
+			bonus = 1
+			category = tactical_bomber_tech
+		}
+	}
+}
+
+shared_focus = {
+	id = CAN_torch_of_liberty
+	icon = GFX_MAF_Napalm
+	cost = 5
+	x = 2
+	y = 3	
+	prerequisite = {
+		focus = CAN_bomber_research
+	}
+	relative_position_id = CAN_expand_the_rcaf
+
+	ai_will_do = {
+		base = 100
+	}
+
+	completion_reward = {
+		add_to_variable = { CAN_mil_cas_ground = 0.10 }
+		add_to_variable = { CAN_mil_air_bombing_targetting = 0.10 }
+		custom_effect_tooltip = CAN_torch_of_liberty_tt
+	}
+}
+
+shared_focus = {
+	id = CAN_fighter_research
+	icon = GFX_generic_fighter_designs
+	cost = 5
+	x = 4
+	y = 2
+	prerequisite = {
+		focus = CAN_protecting_our_skies
+	}
+	relative_position_id = CAN_expand_the_rcaf
+
+	ai_will_do = {
+		base = 100
+	}
+
+	completion_reward = {
+		add_tech_bonus = {
+			uses = 1
+			bonus = 1
+			category = light_air
+		}
+	}
+}
+
+shared_focus = {
+	id = CAN_radar_improvements
+	icon = GFX_generic_radar
+	cost = 5
+	x = 4
+	y = 3
+	prerequisite = {
+		focus = CAN_fighter_research
+	}
+	relative_position_id = CAN_expand_the_rcaf
+
+	ai_will_do = {
+		base = 100
+	}
+
+	completion_reward = {
+		add_tech_bonus = {
+			uses = 2
+			bonus = 0.5
+			category = radar_tech
+		}
+	}
+}
+
+shared_focus = {
+	id = CAN_modern_airborne_warfare
+	icon = GFX_generic_new_airforce
+	cost = 5
+	x = 2
+	y = 4
+	prerequisite = {
+		focus = CAN_integrate_helicopters
+		focus = CAN_radar_improvements
+	}
+	prerequisite = {
+		focus = CAN_torch_of_liberty
+	}
+	relative_position_id = CAN_expand_the_rcaf
+
+	ai_will_do = {
+		base = 100
+	}
+
+	completion_reward = {
+		custom_effect_tooltip = CAN_modern_airborne_warfare_tt
+		add_to_variable = { CAN_mil_air_superiority_efficiency = 0.10 }
+		add_to_variable = { CAN_mil_air_range_factor = 0.10 }
+	}
+}
+
+shared_focus = {
+	id = CAN_further_nuclear_development
+	icon = GFX_generic_nuclear_science
+	cost = 5
+	x = -3
+	y = 1
+	prerequisite = {
+		focus = CAN_expand_the_rcaf
+	}
+	relative_position_id = CAN_expand_the_rcaf
+
+	ai_will_do = {
+		base = 100
+	}
+
+	completion_reward = {
+		add_tech_bonus = {
+			category = nuclear
+			uses = 1
+			bonus = 1
+		}
+	}
+}
+
+shared_focus = {
+	id = CAN_long_range_bombers
+	icon = GFX_generic_air_prioritize_bomber_force
+	cost = 5
+	x = -4
+	y = 2
+	prerequisite = {
+		focus = CAN_further_nuclear_development
+	}
+	relative_position_id = CAN_expand_the_rcaf
+
+	ai_will_do = {
+		base = 100
+	}
+
+	completion_reward = {
+		add_tech_bonus = {
+			category = strategic_bomber_tech
+			uses = 1
+			bonus = 1
+		}
+		add_ideas = CAN_orenda_engines
+	}
+}
+
+shared_focus = {
+	id = CAN_advanced_targeting_systems
+	icon = GFX_generic_computer_focus
+	cost = 5
+	x = -2
+	y = 2
+	prerequisite = {
+		focus = CAN_further_nuclear_development
+	}
+	relative_position_id = CAN_expand_the_rcaf
+
+	ai_will_do = {
+		base = 100
+	}
+
+	completion_reward = {
+		add_to_variable = { CAN_mil_strat_bomber_bombing = 0.10 }
+		subtract_from_variable = { CAN_mil_air_night_penalty = 0.10 }
+		custom_effect_tooltip = CAN_advanced_targeting_systems_tt
+	}
+}
+
+shared_focus = {
+	id = CAN_rocket_delivery_systems
+	icon = GFX_generic_icbm_development
+	cost = 5
+	x = -3
+	y = 3
+	prerequisite = {
+		focus = CAN_long_range_bombers
+	}
+	prerequisite = {
+		focus = CAN_advanced_targeting_systems
+	}
+	relative_position_id = CAN_expand_the_rcaf
+
+	ai_will_do = {
+		base = 100
+	}
+
+	completion_reward = {
+		add_tech_bonus = {
+			category = rocketry
+			uses = 1
+			bonus = 1
+		}
+		add_tech_bonus = {
+			category = missile_tech
+			uses = 1
+			bonus = 0.5
+		}
+	}
+}
+
+
+shared_focus = {
+	id = CAN_the_royal_canadian_navy
+	icon = GFX_CAN_canadian_navy
+	cost = 2
+	x = 46
+	y = 7
+	available = {
+		has_completed_focus = CAN_form_the_accord
+	}
+
+	ai_will_do = {
+		base = 100
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_the_royal_canadian_navy"
+		navy_experience = 25
+		subtract_from_variable = { CAN_mil_invasion_speed = 0.15 }
+		if = {
+			limit = {
+				NOT = {
+					has_dynamic_modifier = { modifier = CAN_military_modifier }
+				}
+			}
+			custom_effect_tooltip = CAN_royal_canadian_navy_tt
+			hidden_effect = {
+				add_dynamic_modifier = {
+					modifier = CAN_military_modifier
+				}
+			}
+		} else = {
+			custom_effect_tooltip = CAN_royal_canadian_navy_tt_2
+		}
+	}
+}
+
+shared_focus = {
+	id = CAN_study_the_second_weltkrieg
+	icon = GFX_study_second_weltkrieg
+	cost = 5
+	x = 4
+	y = 1
+
+	ai_will_do = {
+		base = 100
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_study_the_second_weltkrieg"
+		add_doctrine_cost_reduction = {
+			cost_reduction = 0.5
+			uses = 1
+			category = naval_doctrine
+		}
+		add_to_variable = { CAN_mil_invasion_defense = 0.10 }
+		custom_effect_tooltip = CAN_study_the_second_weltkrieg_tt
+	}
+	relative_position_id = CAN_the_royal_canadian_navy
+	prerequisite = { focus = CAN_the_royal_canadian_navy }
+}
+
+shared_focus = {
+	id = CAN_a_new_focus_on_naval_aviation
+	icon = GFX_generic_naval_carrier2
+	cost = 5
+	x = 3
+	y = 1
+
+	ai_will_do = {
+		base = 100
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_a_new_focus_on_naval_aviation"
+		add_tech_bonus = {
+			uses = 2
+			bonus = 0.5
+			category = cat_naval_supremacy
+		}
+	}
+	relative_position_id = CAN_study_the_second_weltkrieg
+	prerequisite = { focus = CAN_study_the_second_weltkrieg }
+	mutually_exclusive = { focus = CAN_maintain_the_status_quo }
+}
+
+shared_focus = {
+	id = CAN_maintain_the_status_quo
+	icon = GFX_generic_naval_battleship2
+	cost = 5
+	x = -3
+	y = 1
+
+	ai_will_do = {
+		base = 100
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_maintain_the_status_quo"
+		add_tech_bonus = {
+			uses = 2
+			bonus = 0.5
+			category = submarine_doctrine
+		}
+	}
+	relative_position_id = CAN_study_the_second_weltkrieg
+	prerequisite = { focus = CAN_study_the_second_weltkrieg }
+	mutually_exclusive = { focus = CAN_a_new_focus_on_naval_aviation }
+}
+
+shared_focus = {
+	id = CAN_new_escort_models
+	icon = GFX_BEL_research_naval_tech
+	cost = 5
+	x = -4
+	y = 1
+
+	ai_will_do = {
+		base = 100
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_new_escort_models"
+		add_tech_bonus = {
+			uses = 1
+			bonus = 0.5
+			category = cv_tech
+		}
+		add_tech_bonus = {
+			uses = 1
+			bonus = 0.5
+			category = dd_tech
+		}
+	}
+	relative_position_id = CAN_a_new_focus_on_naval_aviation
+	prerequisite = {
+		focus = CAN_a_new_focus_on_naval_aviation
+		focus = CAN_maintain_the_status_quo
+	}
+}
+
+shared_focus = {
+	id = CAN_renovate_the_merchant_marine
+	icon = GFX_generic_bluewater_navy
+	cost = 5
+	x = -2
+	y = 1
+
+	ai_will_do = {
+		base = 100
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_renovate_the_merchant_marine"
+		add_tech_bonus = {
+			uses = 1
+			bonus = 1
+			category = ff_tech
+		}
+	}
+	relative_position_id = CAN_a_new_focus_on_naval_aviation
+	prerequisite = {
+		focus = CAN_a_new_focus_on_naval_aviation
+		focus = CAN_maintain_the_status_quo
+	}
+}
+
+shared_focus = {
+	id = CAN_a_canadian_dreadnought
+	icon = GFX_generic_navy_battleship3alt
+	cost = 5
+	x = 1
+	y = 1
+
+	ai_will_do = {
+		base = 100
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_a_canadian_dreadnought"
+		add_tech_bonus = {
+			uses = 1
+			bonus = 1
+			category = bb_tech
+		}
+	}
+	relative_position_id = CAN_new_escort_models
+	prerequisite = { focus = CAN_new_escort_models }
+	prerequisite = { focus = CAN_renovate_the_merchant_marine }
+}
+
+shared_focus = {
+	id = CAN_strike_from_below
+	icon = GFX_generic_naval_submarine2
+	cost = 5
+	x = 0
+	y = 1
+
+	ai_will_do = {
+		base = 100
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_strike_from_below"
+		add_tech_bonus = {
+			uses = 2
+			bonus = 0.5
+			category = ss_tech
+		}
+	}
+	relative_position_id = CAN_maintain_the_status_quo
+	prerequisite = { focus = CAN_maintain_the_status_quo }
+}
+
+shared_focus = {
+	id = CAN_hit_from_above
+	icon = GFX_generic_air_naval_bomber_new
+	cost = 5
+	x = 0
+	y = 1
+
+	ai_will_do = {
+		base = 100
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_hit_from_above"
+		add_tech_bonus = {
+			uses = 2
+			bonus = 1
+			category = naval_air
+		}
+	}
+	relative_position_id = CAN_a_new_focus_on_naval_aviation
+	prerequisite = { focus = CAN_a_new_focus_on_naval_aviation }
+}
+
+shared_focus = {
+	id = CAN_legacy_of_the_habbakuk
+	icon = GFX_generic_suspend_constitution
+	cost = 5
+	x = 2
+	y = 1
+
+	ai_will_do = {
+		base = 100
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_legacy_of_the_habbakuk"
+		add_ideas = CAN_idea_cheap_carrier_construction
+	}
+	relative_position_id = CAN_a_new_focus_on_naval_aviation
+	prerequisite = { focus = CAN_a_new_focus_on_naval_aviation }
+}
+
+shared_focus = {
+	id = CAN_floating_fortresses
+	icon = GFX_generic_aircraft_carrier
+	cost = 5
+	x = -1
+	y = 1
+
+	ai_will_do = {
+		base = 100
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_floating_fortresses"
+		add_tech_bonus = {
+			uses = 2
+			bonus = 0.5
+			category = cv_tech
+		}
+	}
+	relative_position_id = CAN_hit_from_above
+	prerequisite = { focus = CAN_hit_from_above }
+	prerequisite = { focus = CAN_legacy_of_the_habbakuk }
+}
+
+shared_focus = {
+	id = CAN_mobile_command_centres
+	icon = GFX_generic_army_high_command
+	cost = 5
+	x = -1
+	y = 1
+
+	ai_will_do = {
+		base = 100
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_mobile_command_centres"
+		add_to_variable = { CAN_mil_fleet_coordination = 0.15 }
+		custom_effect_tooltip = CAN_mobile_command_centres_tt
+		add_tech_bonus = {
+			uses = 1
+			bonus = 0.5
+			category = cat_naval_supremacy
+		}
+	}
+	relative_position_id = CAN_legacy_of_the_habbakuk
+	prerequisite = { focus = CAN_legacy_of_the_habbakuk }
+}
+
+shared_focus = {
+	id = CAN_the_long_arm_of_liberty
+	icon = GFX_generic_globe
+	cost = 5
+	x = 0
+	y = 1
+
+	ai_will_do = {
+		base = 100
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_the_long_arm_of_liberty"
+		add_ideas = CAN_idea_long_arm_of_liberty
+	}
+	relative_position_id = CAN_floating_fortresses
+	prerequisite = { focus = CAN_floating_fortresses }
+	prerequisite = { focus = CAN_mobile_command_centres }
+}
+
+shared_focus = {
+	id = CAN_improve_modular_construction_methods
+	icon = GFX_generic_naval_industry
+	cost = 5
+	x = -2
+	y = 1
+
+	ai_will_do = {
+		base = 100
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_improve_modular_construction_methods"
+		add_ideas = CAN_idea_modular_naval_production
+	}
+	relative_position_id = CAN_maintain_the_status_quo
+	prerequisite = { focus = CAN_maintain_the_status_quo }
+}
+
+
+shared_focus = {
+	id = CAN_rely_on_our_speed
+	icon = GFX_generic_ship_destroyer
+	cost = 5
+	x = 1
+	y = 1
+
+	ai_will_do = {
+		base = 100
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_rely_on_our_speed"
+		add_to_variable = { CAN_mil_naval_speed_factor = 0.10 }
+		custom_effect_tooltip = CAN_rely_on_our_speed_tt
+	}
+	relative_position_id = CAN_improve_modular_construction_methods
+	prerequisite = { focus = CAN_improve_modular_construction_methods }
+}
+
+shared_focus = {
+	id = CAN_elite_submarine_corps
+	icon = GFX_generic_nuclear_submarine
+	cost = 5
+	x = 1
+	y = 1
+
+	ai_will_do = {
+		base = 100
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_elite_submarine_corps"
+		add_to_variable = { CAN_mil_convoy_raiding = 0.15 }
+		custom_effect_tooltip = CAN_elite_submarine_corps_tt
+		add_tech_bonus = {
+			uses = 2
+			bonus = 0.5
+			category = submarine_doctrine
+		}
+	}
+	relative_position_id = CAN_strike_from_below
+	prerequisite = { focus = CAN_strike_from_below }
+	prerequisite = { focus = CAN_improve_modular_construction_methods }
+}
+
+shared_focus = {
+	id = CAN_the_eyes_of_liberty
+	icon = GFX_CAN_northern_telecommunications
+	cost = 5
+	x = 2
+	y = 1
+
+	ai_will_do = {
+		base = 100
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_the_eyes_of_liberty"
+		add_to_variable = { CAN_mil_night_spotting = 0.25 }
+		add_to_variable = { CAN_mil_naval_detection = 0.15 }
+		custom_effect_tooltip = CAN_the_eyes_of_liberty_tt
+	}
+	relative_position_id = CAN_rely_on_our_speed
+	prerequisite = { focus = CAN_rely_on_our_speed }
+	prerequisite = { focus = CAN_elite_submarine_corps }
+}
+
+shared_focus = {
+	id = CAN_canada_rules_the_waves
+	icon = GFX_CAN_naval_dominance
+	cost = 5
+	x = 0
+	y = 2
+
+	ai_will_do = {
+		base = 100
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_canada_rules_the_waves"
+		custom_effect_tooltip = CAN_canada_rules_the_waves_tt
+		add_to_variable = { CAN_mil_naval_attack = 0.10 }
+		add_to_variable = { CAN_mil_naval_defense = 0.10 }
+		add_doctrine_cost_reduction = {
+			uses = 1
+			cost_reduction = 1
+			category = naval_doctrine
+		}
+	}
+	relative_position_id = CAN_a_canadian_dreadnought
+	prerequisite = { focus = CAN_a_canadian_dreadnought }
+	prerequisite = { 
+		focus = CAN_the_long_arm_of_liberty 
+		focus = CAN_the_eyes_of_liberty
+	}
+}
+
+shared_focus = {
+	id = CAN_expanding_our_naval_production
+	icon = GFX_generic_advanced_construction_techniques
+	cost = 5
+	x = -3
+	y = 1
+
+	ai_will_do = {
+		base = 100
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_expanding_our_naval_production"
+		add_to_variable = { CAN_mil_dockyard_ic = 0.05 }
+		custom_effect_tooltip = CAN_expanding_our_naval_production_tt
+		add_tech_bonus = {
+			uses = 1
+			bonus = 0.50
+			category = dockyard_tech
+		}
+	}
+	relative_position_id = CAN_the_royal_canadian_navy
+	prerequisite = { focus = CAN_the_royal_canadian_navy }
+}
+
+shared_focus = {
+	id = CAN_halifax_navy_expansion
+	icon = GFX_CAN_industrialization
+	cost = 5
+	x = 1
+	y = 1
+
+	ai_will_do = {
+		base = 100
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_halifax_navy_expansion"
+		464 = {
+			add_building_construction = {
+				type = naval_base
+				level = 4
+				province = 7361
+				instant_build = yes
+			}
+			add_building_construction = {
+				type = dockyard
+				level = 3
+				instant_build = yes
+			}
+			add_extra_state_shared_building_slots = 2
+		}
+	}
+	relative_position_id = CAN_expanding_our_naval_production
+	prerequisite = { focus = CAN_expanding_our_naval_production }
+}
+
+shared_focus = {
+	id = CAN_vancouver_naval_industry
+	icon = GFX_BEL_naval_industry_focus
+	cost = 5
+	x = -1
+	y = 1
+
+	ai_will_do = {
+		base = 100
+	}
+
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_vancouver_naval_industry"
+		473 = {
+			add_building_construction = {
+				type = naval_base
+				level = 4
+				province = 1408
+				instant_build = yes
+			}
+			add_building_construction = {
+				type = dockyard
+				level = 2
+				instant_build = yes
+			}
+			add_extra_state_shared_building_slots = 2
+		}
+	}
+	relative_position_id = CAN_expanding_our_naval_production
+	prerequisite = { focus = CAN_expanding_our_naval_production }
+}
+
+shared_focus = {
+	id = CAN_build_up_iceland
+	icon = GFX_generic_flag_large_ICE
+	cost = 5
+	x = -1
+	y = 1
+
+	ai_will_do = {
+		base = 100
+	}
+	
+	completion_reward = {
+		log = "[GetDateText]: [Root.GetName]: Focus CAN_build_up_iceland"
+		100 = {
+			add_building_construction = {
+				type = naval_base
+				level = 4
+				province = 12674
+				instant_build = yes
+			}
+			add_building_construction = {
+				type = dockyard
+				level = 2
+				instant_build = yes
+			}
+			add_extra_state_shared_building_slots = 2
+		}
+	}
+	relative_position_id = CAN_halifax_navy_expansion
+	prerequisite = { focus = CAN_halifax_navy_expansion }
+	prerequisite = { focus = CAN_vancouver_naval_industry }
+}

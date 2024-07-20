@@ -1,0 +1,212 @@
+###########################
+# Republic of Norway events
+###########################
+# By Leaf
+###########################
+add_namespace = nor
+add_namespace = nor.elections
+
+
+### Elections ###
+country_event = { #Presidential Elections 
+	id = nor.elections.0
+	title = nor.elections.0.t
+	desc = nor.elections.0.d
+	picture = GFX_ce_voting
+
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+			country_event = {
+				id = nor.elections.0
+				days = 1461
+			}
+
+			country_event = {
+				id = nor.elections.1
+				days = 14
+			}
+		}
+        log = "[GetDateText]: [Root.GetName]: event nor.elections.0 FROM = [From.GetName]"
+	}
+
+	option = {
+		name = nor.elections.0.a #RadSoc
+		NOR_trygve_lie = {
+			custom_effect_tooltip = NOR_becomes_president_tt
+		}
+		IF = {
+			#We are a democracy, not a dictatorship.
+			limit = {
+				radical_socialist < 0.3
+			}
+			add_popularity = {
+				ideology = radical_socialist
+				popularity = 0.05
+			}
+		}
+		hidden_effect = {
+			IF = {
+				limit = {
+					NOT = {
+						has_government = radical_socialist
+					}
+				}
+				set_politics = {
+					ruling_party = radical_socialist
+				}
+				coal_add_auth_soc = yes
+				coal_add_soc_dem = yes
+				coal_add_rev_rep = yes
+			}
+		}
+		ai_chance = {
+			base = 1
+
+			modifier = {
+				has_government = radical_socialist
+				factor = 1.5
+			}
+
+		}
+	}
+	option = {
+		name = nor.elections.0.b #SocDem
+		NOR_einar_gerhardsen = {
+			custom_effect_tooltip = NOR_becomes_president_tt
+		}
+		IF = {
+			#We are a democracy, not a dictatorship.
+			limit = {
+				social_democrat < 0.3
+			}
+			add_popularity = {
+				ideology = social_democrat
+				popularity = 0.05
+			}
+		}
+		hidden_effect = {
+			IF = {
+				limit = {
+					NOT = {
+						has_government = social_democrat
+					}
+				}
+				set_politics = {
+					ruling_party = social_democrat
+				}
+				coal_add_auth_soc = yes
+				coal_add_rad_soc = yes
+				coal_add_rev_rep = yes
+			}
+		}
+		ai_chance = {
+			base = 1
+
+			modifier = {
+				has_government = social_democrat
+				factor = 1.5
+			}
+			
+		}
+	}
+}
+country_event = { #Parliamentary Elections
+	id = nor.elections.1
+	title = nor.elections.1.t
+	desc = nor.elections.1.d
+	picture = GFX_ce_voting
+
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+			remove_all_ministers = yes
+		}
+        log = "[GetDateText]: [Root.GetName]: event nor.elections.1 FROM = [From.GetName]"
+	}
+
+	option = {
+		name = nor.elections.1.a #RadSoc
+		effect_tooltip = {
+			remove_all_ministers = yes
+		}
+		if = {
+			limit = { 
+				has_country_leader = {
+					character = NOR_trygve_lie
+				}
+			}
+			add_ideas = NOR_Trygve_Bratteli_hog_rso
+		}
+		else = {
+			add_ideas = NOR_Trygve_Lie_hog_rso
+		}
+		add_ideas = NOR_Halvard_Lange_fm_rso
+		add_ideas = NOR_Oscar_Gundersen_econ_rso
+		add_ideas = NOR_Terje_Wold_jm_rso
+		add_ideas = NOR_Gunnar_Sand_im_rso
+		add_ideas = NOR_Jens_Christian_Hauge_hoi_rso
+		IF = {
+			#We are a democracy, not a dictatorship.
+			limit = {
+				radical_socialist < 0.3
+			}
+			add_popularity = {
+				ideology = radical_socialist
+				popularity = 0.05
+			}
+		}
+		ai_chance = {
+			base = 1
+
+			modifier = {
+				has_government = radical_socialist
+				factor = 1.5
+			}
+			
+		}
+	}
+	option = {
+		name = nor.elections.1.b #SocDem
+		effect_tooltip = {
+			remove_all_ministers = yes
+		}
+		if = {
+			limit = { 
+				has_country_leader = {
+					character = NOR_einar_gerhardsen
+				}
+			}
+			add_ideas = NOR_Olav_Meisdalshagen_hog_sde
+		}
+		else = {
+			add_ideas = NOR_Einar_Gerhardsen_hog_sde
+		}
+		add_ideas = NOR_Arne_Skaug_fm_sde
+		add_ideas = NOR_Erik_Brofoss_econ_sde
+		add_ideas = NOR_Jens_Haugland_jm_sde
+		add_ideas = NOR_Aase_Bjerkholt_im_sde
+		add_ideas = NOR_Nils_Handal_hoi_sde
+		IF = {
+			#We are a democracy, not a dictatorship.
+			limit = {
+				social_democrat < 0.3
+			}
+			add_popularity = {
+				ideology = social_democrat
+				popularity = 0.05
+			}
+		}
+		ai_chance = {
+			base = 1
+
+			modifier = {
+				has_government = social_democrat
+				factor = 1.5
+			}
+			
+		}
+	}
+}

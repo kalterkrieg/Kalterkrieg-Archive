@@ -1,0 +1,816 @@
+# this is a check to see if a major is an actual major due to its number of factories
+# meaning it's the top 7 in the world or has at least 70% of the average of those 7
+# we're also including a number of tags which should act like majors even if they're not in that category
+is_actual_major = {
+	custom_trigger_tooltip = {
+		tooltip = is_actual_major
+		is_major = yes
+		num_of_factories > 35		#MAJOR_MIN_FACTORIES
+		# rank the majors according to their num_of_factories
+		get_sorted_scored_countries_temp = {
+			scorer = major_industry_count_scorer
+			array = actual_majors
+		}
+		# limit that ranking to the top 7
+		resize_temp_array = {
+			actual_majors = 7
+		}
+		OR = {
+			# is one of the seven largest
+			is_in_array = {
+				actual_majors = THIS
+			}
+			#is an exception
+			tag = ENT
+			# has more than 70% of the average of the top 7
+			set_temp_variable = {
+				factory_average = 0
+			}
+			all_of_scopes = {
+				array = actual_majors
+				add_to_temp_variable = {
+					factory_average = THIS.num_of_factories
+				}
+			}
+			divide_temp_variable = {
+				factory_average = 4.9
+			}
+			num_of_factories > factory_average
+		}
+	}
+}
+
+is_actual_major_without_exceptions = {
+	custom_trigger_tooltip = {
+		tooltip = is_actual_major_without_exceptions
+		is_major = yes
+		num_of_factories > 35		#MAJOR_MIN_FACTORIES
+		# rank the majors according to their num_of_factories
+		get_sorted_scored_countries_temp = {
+			scorer = major_industry_count_scorer
+			array = actual_majors
+		}
+		# limit that ranking to the top 7
+		resize_temp_array = {
+			actual_majors = 7
+		}
+		OR = {
+			# is one of the seven largest
+			is_in_array = {
+				actual_majors = THIS
+			}
+			# has more than 70% of the average of the top 7
+			set_temp_variable = {
+				factory_average = 0
+			}
+			all_of_scopes = {
+				array = actual_majors
+				add_to_temp_variable = {
+					factory_average = THIS.num_of_factories
+				}
+			}
+			divide_temp_variable = {
+				factory_average = 4.9
+			}
+			num_of_factories > factory_average
+		}
+	}
+}
+
+# checks whether the country in scope has the same government as ROOT (the country running the event/focus)
+has_same_government_as_ROOT = {
+	has_government = var:ROOT.current_party_ideology_group
+}
+
+# checks for country in scope: totalist, syndicalist, or radical socialist
+has_socialist_government = {
+	custom_trigger_tooltip = {
+		tooltip = KR_is_socialist		#uses custom trigger to allow for a _NOT tooltip - see Political_l_english
+		has_country_flag = KR_is_socialist
+	}
+}
+
+# checks for country in scope: from social democrat to social conservative
+has_elected_government = {
+	custom_trigger_tooltip = {
+		tooltip = KR_is_elected		#uses custom trigger to allow for a _NOT tooltip - see Political_l_english
+		has_country_flag = KR_is_elected
+	}
+}
+
+# checks for country in scope: from social democrat to authoritarian democrat
+has_democratic_government = {
+	custom_trigger_tooltip = {
+		tooltip = KR_is_democratic		#uses custom trigger to allow for a _NOT tooltip - see Political_l_english
+		has_country_flag = KR_is_democratic
+	}
+}
+
+# checks for country in scope: authoritarian democrat, paternal autocrat, or national populist
+has_authoritarian_government = {
+	custom_trigger_tooltip = {
+		tooltip = KR_is_authoritarian		#uses custom trigger to allow for a _NOT tooltip - see Political_l_english
+		has_country_flag = KR_is_authoritarian
+	}
+}
+
+# checks for country in scope: paternal autocrat or national populist
+has_dictatorship_government = {
+	custom_trigger_tooltip = {
+		tooltip = KR_is_dictatorship		#uses custom trigger to allow for a _NOT tooltip - see Political_l_english
+		has_country_flag = KR_is_dictatorship
+	}
+}
+
+# checks for country in scope: market liberal or social conservative
+has_right_democratic_government = {
+	custom_trigger_tooltip = {
+		tooltip = KR_right_wing_democracy		#uses custom trigger to allow for a _NOT tooltip - see Political_l_english
+		has_country_flag = KR_right_wing_democracy
+	}
+}
+
+# checks for country in scope: social democrat or social liberal
+has_left_democratic_government = {
+	custom_trigger_tooltip = {
+		tooltip = KR_left_wing_democracy		#uses custom trigger to allow for a _NOT tooltip - see Political_l_english
+		has_country_flag = KR_left_wing_democracy
+	}
+}
+
+# checks for country in scope: totalist, authoritarian democrat, paternal autocrat or national populist
+has_any_authoritarian_government = {
+	custom_trigger_tooltip = {
+		tooltip = KR_is_any_authoritarian		#uses custom trigger to allow for a _NOT tooltip - see Political_l_english
+		has_country_flag = KR_is_any_authoritarian
+	}
+}
+
+is_monarchy = {
+	custom_trigger_tooltip = {
+		tooltip = is_monarchy
+		has_socialist_government = no #nope, don't even bother
+		var:country_leader = {
+			OR = {
+				has_character_flag = is_monarch
+				has_character_flag = is_regent
+			}
+		}
+	}
+}
+
+# checks whether the country in scope has the same government type as ROOT (the country running the event/focus)
+# note that it's not the exact same government - just the general type, as above
+same_government_type_as_ROOT = {
+	OR = {
+		AND = {
+			has_socialist_government = yes
+			ROOT = {
+				has_socialist_government = yes
+			}
+		}
+		AND = {
+			has_democratic_government = yes
+			ROOT = {
+				has_democratic_government = yes
+			}
+		}
+		AND = {
+			has_dictatorship_government = yes
+			ROOT = {
+				has_dictatorship_government = yes
+			}
+		}
+	}
+}
+
+same_government_type_as_ROOT_authoritarian = {
+	OR = {
+		AND = {
+			has_socialist_government = yes
+			ROOT = {
+				has_socialist_government = yes
+			}
+		}
+		AND = {
+			has_elected_government = yes
+			ROOT = {
+				has_elected_government = yes
+			}
+		}
+		AND = {
+			has_authoritarian_government = yes
+			ROOT = {
+				has_authoritarian_government = yes
+			}
+		}
+	}
+}
+
+# Can be used in any country scope (to ensure the country has no owned state which it doesn't control)
+controls_all_owned_states = {
+	surrender_progress < 0.05
+}
+
+# Checks if the country is in a faction or a puppet
+is_ally_of_ROOT = {
+	custom_trigger_tooltip = {
+		tooltip = KR_is_an_ally
+		exists = yes
+		is_ally_with = ROOT
+		NOT = {
+			tag = ROOT
+		}
+	}
+}
+
+is_ally_of_PREV = {
+	hidden_trigger = {
+		country_exists = PREV
+	}	#needed to avoid error log spam
+	custom_trigger_tooltip = {
+		tooltip = KR_is_an_ally
+		exists = yes
+		is_ally_with = PREV
+		NOT = {
+			tag = PREV
+		}
+	}
+}
+
+# Can be used in state scope, to check if the owner is ROOT or a subject of ROOT
+is_owned_by_ROOT_or_subject = {
+	custom_trigger_tooltip = {
+		tooltip = KR_owned_by_ROOT_or_subject
+		owner = {
+			OR = {
+				tag = ROOT
+				is_subject_of = ROOT
+			}
+		}
+	}
+}
+
+# Can be used in state scope, to check if the owner is ROOT or an ally/subject of ROOT
+is_owned_by_ROOT_or_ally = {
+	owner = {
+		is_ally_with = ROOT
+	}
+}
+
+is_owned_by_ROOT_or_war_ally = {
+	owner = {
+		OR = {
+			is_ally_with = ROOT
+			has_war_together_with = ROOT
+		}
+	}
+}
+
+# Can be used in state scope, to check if the controller (not owner) is ROOT or a subject of ROOT
+is_controlled_by_ROOT_or_subject = {
+	custom_trigger_tooltip = {
+		tooltip = KR_controlled_by_ROOT_or_subject
+		controller = {
+			OR = {
+				tag = ROOT
+				is_subject_of = ROOT
+			}
+		}
+	}
+}
+
+# Can be used in state scope, to check if the controller (not owner) is ROOT or ally/subject of ROOT
+is_controlled_by_ROOT_or_ally = {
+	custom_trigger_tooltip = {
+		tooltip = KR_controlled_by_ROOT_or_ally
+		controller = {
+			is_ally_with = ROOT
+		}
+	}
+}
+
+# Can be used in state scope, to check if the owner and controller is ROOT or a subject of ROOT
+is_owned_and_controlled_by_ROOT_or_subject = {
+	custom_trigger_tooltip = {
+		tooltip = KR_owned_and_controlled_by_ROOT_or_subject
+		owner = {
+			controls_state = PREV
+			OR = {
+				tag = ROOT
+				is_subject_of = ROOT
+			}
+		}
+	}
+}
+
+# Can be used in state scope, to check if the owner and controller is ROOT or a subject of ROOT
+is_owned_and_controlled_by_ROOT_or_ally = {
+	custom_trigger_tooltip = {
+		tooltip = KR_owned_and_controlled_by_ROOT_or_ally
+		owner = {
+			controls_state = PREV
+			is_ally_with = ROOT
+		}
+	}
+}
+
+is_actual_neighbor_of_ROOT_or_ally = {
+	any_neighbor_country = {
+		is_owner_neighbor_of = PREV
+		is_ally_with = ROOT
+	}
+}
+
+# Used to check whether a country is eligible for peace deal events
+is_valid_peace_target = {
+	is_subject = no
+	OR = {
+		is_in_faction = no
+		is_faction_leader = yes
+	}
+}
+
+# in state scope
+is_claim_or_core_of_ROOT = {
+	OR = {
+		is_claimed_by = ROOT
+		is_core_of = ROOT
+	}
+}
+
+is_claim_or_core_of_FROM = {
+	OR = {
+		is_claimed_by = FROM
+		is_core_of = FROM
+	}
+}
+
+is_not_claim_or_core_of_ROOT = {
+	NOT = {
+		is_claimed_by = ROOT
+		is_core_of = ROOT
+	}
+}
+
+is_not_claim_or_core_of_FROM = {
+	NOT = {
+		is_claimed_by = FROM
+		is_core_of = FROM
+	}
+}
+
+is_claim_or_core_of_PREV = {
+	OR = {
+		is_claimed_by = PREV
+		is_core_of = PREV
+	}
+}
+
+is_claim_or_core_of_owner = {
+	OR = {
+		is_claimed_by = owner
+		is_core_of = owner
+	}
+}
+
+is_not_claim_or_core_of_PREV = {
+	NOT = {
+		is_claimed_by = PREV
+		is_core_of = PREV
+	}
+}
+
+has_coalition = {
+	has_variable = coalition_partners^num
+}
+
+# requires a temp variable coalition_target
+has_coalition_with_target = {
+	# doesn't seem to actually work with our coalition system
+	custom_trigger_tooltip = {
+		tooltip = has_coalition_with_target
+		is_in_array = {
+			coalition_partners = coalition_target
+		}
+	}
+}
+
+has_coal = {
+	custom_trigger_tooltip = {
+		tooltip = KRG_has_coalition
+		OR = {
+			has_coal_auth_soc = yes
+			has_coal_rad_soc = yes
+			has_coal_soc_dem = yes
+			has_coal_rev_rep = yes
+			has_coal_soc_lib = yes
+			has_coal_mark_lib = yes
+			has_coal_soc_con = yes
+			has_coal_auth_dem = yes
+			has_coal_pat_aut = yes
+			has_coal_nat_pop = yes
+		}
+	}
+}
+has_coal_auth_soc = {
+	custom_trigger_tooltip = {
+		tooltip = KRG_has_coalition_auth_soc
+		is_in_array = {
+			coal_list = 1
+		}
+	}
+}
+
+has_coal_rad_soc = {
+	custom_trigger_tooltip = {
+		tooltip = KRG_has_coalition_rad_soc
+		is_in_array = {
+			coal_list = 2
+		}
+	}
+}
+
+has_coal_soc_dem = {
+	custom_trigger_tooltip = {
+		tooltip = KRG_has_coalition_soc_dem
+		is_in_array = {
+			coal_list = 3
+		}
+	}
+}
+
+has_coal_rev_rep = {
+	custom_trigger_tooltip = {
+		tooltip = KRG_has_coalition_rev_rep
+		is_in_array = {
+			coal_list = 4
+		}
+	}
+}
+
+has_coal_soc_lib = {
+	custom_trigger_tooltip = {
+		tooltip = KRG_has_coalition_soc_lib
+		is_in_array = {
+			coal_list = 5
+		}
+	}
+}
+
+has_coal_mark_lib = {
+	custom_trigger_tooltip = {
+		tooltip = KRG_has_coalition_mark_lib
+		is_in_array = {
+			coal_list = 6
+		}
+	}
+}
+
+has_coal_soc_con = {
+	custom_trigger_tooltip = {
+		tooltip = KRG_has_coalition_soc_con
+		is_in_array = {
+			coal_list = 7
+		}
+	}
+}
+
+has_coal_auth_dem = {
+	custom_trigger_tooltip = {
+		tooltip = KRG_has_coalition_auth_dem
+		is_in_array = {
+			coal_list = 8
+		}
+	}
+}
+
+has_coal_pat_aut = {
+	custom_trigger_tooltip = {
+		tooltip = KRG_has_coalition_pat_aut
+		is_in_array = {
+			coal_list = 9
+		}
+	}
+}
+
+has_coal_nat_pop = {
+	custom_trigger_tooltip = {
+		tooltip = KRG_has_coalition_nat_pop
+		is_in_array = {
+			coal_list = 10
+		}
+	}
+}
+
+is_metropolis_state = {
+	OR = {
+		has_state_category = eleven
+		has_state_category = twelve
+		has_state_category = ten
+	}
+}
+
+is_valid_state_for_development = {
+	impassable = no
+	NOT = {
+		has_state_category = tiny_island
+	}
+}
+
+prefer_home_area_states_unless_filled = {
+	OR = {
+		is_in_home_area = yes
+		NOT = {
+			owner = {
+				any_owned_state = {
+					free_building_slots = {
+						building = industrial_complex
+						size > 0
+						include_locked = yes
+					}
+					is_in_home_area = yes
+				}
+			}
+		}
+	}
+}
+
+prefer_home_area_states_unless_filled_infrastructure = {
+	OR = {
+		is_in_home_area = yes
+		NOT = {
+			owner = {
+				any_owned_state = {
+					is_in_home_area = yes
+					free_building_slots = {
+						building = infrastructure
+						size > 0
+						include_locked = yes
+					}
+				}
+			}
+		}
+	}
+}
+
+prefer_home_area_states_unless_filled_dockyard = {
+	OR = {
+		is_in_home_area = yes
+		NOT = {
+			owner = {
+				any_owned_state = {
+					free_building_slots = {
+						building = dockyard
+						size > 0
+						include_locked = yes
+					}
+					is_in_home_area = yes
+				}
+			}
+		}
+	}
+}
+
+has_returned_all_expeditionary_forces_of_puppets = {
+	if = {
+		limit = {
+			num_subjects > 0
+		}
+		custom_trigger_tooltip = {
+			tooltip = returned_all_expeditionary_forces_of_puppets
+			all_subject_countries = {
+				ROOT = {
+					received_expeditionary_forces = {
+						sender = PREV
+						value < 1
+					}
+				}
+			}
+		}
+	}
+}
+
+has_specialist_level_trigger = {
+	skill > 5
+	skill < 6
+}
+
+has_expert_level_trigger = {
+	skill > 6
+	skill < 7
+}
+
+has_genius_level_trigger = {
+	skill > 7
+}
+
+has_guarantor = {
+	check_variable = {
+		guarantor_array^num > 0
+	}
+}
+
+ignore_generic_companies = {
+	OR = {
+		tag = CAN
+		tag = DNF
+		tag = FRA
+		tag = GER
+		tag = MAF
+		tag = ITA
+		tag = NEE
+		tag = NFA
+		tag = PAP
+		tag = RUS
+		tag = SIC
+		tag = ITA
+		tag = IRE
+		tag = ENG
+		tag = TEX
+		tag = CAL
+		tag = GLG
+	}
+}
+
+is_commonwealth_tag = {
+	custom_trigger_tooltip = {
+		tooltip = is_commonwealth_tag_tt
+		OR = {
+			tag = CAN
+			original_tag = AST
+			original_tag = NZL
+			original_tag = SAF
+			original_tag = JAM
+			original_tag = GYA
+			original_tag = TRI
+			original_tag = ENG
+			original_tag = SIE
+		}
+	}
+}
+
+has_govt_type = {
+	OR = {
+		has_idea = KRG_union_democracy
+		has_idea = KRG_peoples_democracy
+		has_idea = KRG_parliamentary_democracy
+		has_idea = KRG_presidential_democracy
+		has_idea = KRG_illiberal_democracy
+		has_idea = KRG_authoritarian_system
+		has_idea = KRG_fanatical_dictatorship
+		has_idea = KRG_absolute_rulership
+		has_idea = KRG_bredowist_system
+		has_idea = KRG_prussian_constitutionalism
+		has_idea = KRG_american_democracy
+		has_idea = KRG_military_occupation
+		has_idea = KRG_colonial_bureaucracy
+		has_idea = KRG_danubian_plurinationalism
+	}
+}
+
+is_breakaway_from_MAF = {
+	OR = {
+		tag = BRD
+		tag = CEA
+		tag = CNR
+		tag = COG
+		tag = DAH
+		tag = GAB
+		tag = GHA
+		tag = KAM
+		tag = KEN
+		tag = MLW
+		tag = NAM
+		tag = NGR
+		tag = RWA
+		tag = TNZ
+		tag = TOG
+		tag = UGA
+		tag = ZAM
+		tag = MAG
+	}
+}
+
+is_american_tag = {
+	OR = {
+		tag = NEE
+		tag = USA
+		tag = CAL
+		tag = TEX
+		tag = GLG
+	}
+}
+
+has_unique_mio = {
+	OR = {
+
+	
+		OR = {
+			tag = GER
+			tag = ENG
+			tag = SOV
+			tag = FRA
+			tag = ITA
+			tag = JAP
+			tag = USA
+			tag = BEL
+			tag = CZE
+			tag = HUN
+			tag = YUG
+			tag = ROM
+			tag = MEX
+			tag = TUR
+			tag = EST
+			tag = IRE
+			tag = DNF
+		}
+
+		AND = {
+			tag = POL
+			OR = {
+				has_dlc = "Poland: United and Ready"
+				has_dlc = "No Step Back"
+			}
+		}
+
+		AND = {
+			OR = {
+				tag = AST
+				tag = SAF
+				tag = NZL
+				tag = CAN
+				tag = RAJ
+			}
+			has_dlc = "Together for Victory"
+		}
+
+		AND = {
+			OR = {
+				is_literally_china = yes
+				tag = MAN
+			}
+			has_dlc = "Waking the Tiger"
+		}
+
+		AND = {
+			tag = HOL
+			has_dlc = "Man the Guns"
+		}
+
+		AND = {
+			OR = {
+				tag = SPR
+				tag = POR
+			}
+			has_dlc = "La Resistance"
+		}
+
+		AND = {
+			OR = {
+				tag = BUL
+				tag = GRE
+			}
+			has_dlc = "Battle for the Bosporus"
+		}
+
+		AND = {
+			OR = {
+				tag = EST
+				tag = LAT
+				tag = LIT
+			}
+			has_dlc = "No Step Back"
+		}
+
+		AND = {
+			OR = {
+				tag = ETH
+				tag = SWI
+			}
+			has_dlc = "By Blood Alone"
+		}
+
+		AND = {
+			OR = {
+				tag = FIN
+				tag = NOR
+				tag = DEN
+				tag = SWE
+			}
+			has_dlc = "Arms Against Tyranny"
+		}
+	}
+}
+
+is_possible_ENT_tag = {
+	OR = {
+		tag = USA
+		tag = CAN
+		tag = NEE
+		tag = ITA
+		tag = NFA
+		tag = ENG
+		tag = AST
+	}
+}

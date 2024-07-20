@@ -1,0 +1,226 @@
+###########################
+# Kingdom of Sweden events
+###########################
+# By Leaf
+###########################
+add_namespace = swe
+add_namespace = swe.elections
+add_namespace = swe.flavour
+country_event = {
+	#Death of King Gustaf V
+	id = swe.0
+	title = swe.0.t
+	desc = swe.0.d
+	picture = GFX_ce_swe_death_king
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event swe.0 FROM = [From.GetName]"
+	}
+	option = {
+		name = swe.0.a		#Long Live King Gustaf VI Adolf
+		custom_effect_tooltip = SWE_king_tt
+		hidden_effect = {
+			IF = {
+				limit = {
+					has_character = SWE_gustaf_v
+				}
+				SWE_gustaf_v = {
+					retire = yes
+				}
+			}
+		}
+		news_event = worldnews.107
+	}
+}
+
+### Elections ###
+country_event = {
+	id = swe.elections.0
+	title = swe.elections.0.t
+	desc = {
+		text = swe.elections.0.d_left
+		trigger = {
+			has_government = social_democrat
+		}
+	}
+	desc = {
+		text = swe.elections.0.d_right
+		trigger = {
+			has_government = social_conservative
+		}
+	}
+	picture = GFX_ce_voting
+	is_triggered_only = yes
+	immediate = {
+		hidden_effect = {
+			coal_rev_soc_dem = yes
+			coal_rev_soc_lib = yes
+			coal_rev_mark_lib = yes
+			coal_rev_soc_con = yes
+			remove_all_ministers = yes
+			country_event = {
+				id = swe.elections.0
+				days = 1461
+			}
+		}
+		log = "[GetDateText]: [Root.GetName]: event swe.elections.0 FROM = [From.GetName]"
+	}
+	option = {
+		name = swe.elections.0.a		#SocDems-SocLib
+		if = {
+			limit = {
+				has_idea = SWE_national_unity_government
+			}
+			remove_ideas = SWE_national_unity_government
+		}
+		effect_tooltip = {
+			coal_rev_soc_con = yes
+			coal_rev_mark_lib = yes
+			remove_all_ministers = yes
+		}
+		if = {
+			limit = {
+				date > 1949.1.1
+			}
+			add_ideas = SWE_Tage_Erlander_hog_sde
+			add_ideas = SWE_Torsten_Bengtson_fm_sli
+			add_ideas = SWE_Per_Edvin_Skold_em_sde
+			add_ideas = SWE_Herman_Zetterberg_jm_sde
+			add_ideas = SWE_Gunnar_Hedlund_im_sli
+			add_ideas = SWE_Torsten_Nilsson_hoi_sde
+		}
+		else = {
+			add_ideas = SWE_Osten_Unden_hog_sde
+			add_ideas = SWE_Torsten_Bengtson_fm_sli
+			add_ideas = SWE_Ernst_Wigforss_em_sde
+			add_ideas = SWE_Herman_Zetterberg_jm_sde
+			add_ideas = SWE_Axel_Pehrsson_Bramstorp_im_sli
+			add_ideas = SWE_Allan_Vougt_hoi_sde
+		}
+		hidden_effect = {
+			set_politics = {
+				ruling_party = social_democrat
+				last_election = "1948.9.17"
+				election_frequency = 48
+				elections_allowed = no
+			}
+			coal_add_soc_dem = yes
+			coal_add_soc_lib = yes
+		}
+	}
+	option = {
+		name = swe.elections.0.b		#SocCon-MarLib
+		if = {
+			limit = {
+				has_idea = SWE_national_unity_government
+			}
+			remove_ideas = SWE_national_unity_government
+		}
+		effect_tooltip = {
+			coal_rev_soc_dem = yes
+			coal_rev_soc_lib = yes
+			remove_all_ministers = yes
+		}
+		if = {
+			limit = {
+				date > 1949.1.1
+				NOT = {
+					has_government = social_conservative
+				}
+			}
+			add_ideas = SWE_Jarl_Hjalmarson_hog_sco
+		}
+		else = {
+			add_ideas = SWE_Fritiof_Domo_hog_sco
+		}
+		if = {
+			limit = {
+				date > 1949.1.1
+			}
+			add_ideas = SWE_Tage_Adolfsson_fm_sco
+			add_ideas = SWE_Bertil_Ohlin_em_mli
+			add_ideas = SWE_Thorwald_Bergquist_jm_mli
+			add_ideas = SWE_Erik_Arrhen_im_sco
+			add_ideas = SWE_Ragnar_Bergh_hoi_sco
+		}
+		else = {
+			add_ideas = SWE_Christian_Gunther_fm_sco
+			add_ideas = SWE_Bertil_Ohlin_em_mli
+			add_ideas = SWE_Thorwald_Bergquist_jm_mli
+			add_ideas = SWE_Erik_Arrhen_im_sco
+			add_ideas = SWE_Anders_Ahlen_hoi_sco
+		}
+		hidden_effect = {
+			set_politics = {
+				ruling_party = social_conservative
+				last_election = "1948.9.17"
+				election_frequency = 48
+				elections_allowed = no
+			}
+			coal_add_mar_lib = yes
+			coal_add_soc_con = yes
+		}
+	}
+}
+
+##################
+# FLAVOUR EVENTS #
+##################
+# 1948 Nobel Prize
+country_event = {
+	id = swe.flavour.0
+	title = swe.flavour.0.t
+	desc = swe.flavour.0.d
+	trigger = {
+		OR = {
+			NOT = {
+				has_country_flag = swe_prize
+			}
+			NOT = {
+				has_war = yes
+			}
+		}
+	}
+
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+			# this should be for every country :3
+			country_event = {
+				id = swe.flavour.1
+				days = 365
+			}
+		}
+	}
+
+	#SWE option
+	option = {
+		name = swe.flavour.0.a
+		trigger = {
+			tag = SWE
+		}
+	}
+
+	#OTHER option
+	option = {
+		name = swe.flavour.0.b
+		trigger = {
+			NOT = { 
+				tag = SWE
+			}
+		}
+	}
+	# this option is not available for SWE as they host the event.
+	option = {
+		name = swe.flavour.0.c
+		set_country_flag = swe_prize
+		# TODO: this probably should hurt relations with SWE.
+		trigger = {
+			NOT = { 
+				tag = SWE
+			}
+		}
+	}
+}

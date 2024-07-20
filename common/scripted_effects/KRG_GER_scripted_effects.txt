@@ -1,0 +1,670 @@
+test_ruhr = {
+	add_dynamic_modifier = { modifier = GER_ruckkehr }
+}
+
+GER_starting_infrastructure_damage = {
+	hidden_effect = {
+				if = {
+					limit = {
+						controls_state = 8
+					}
+						804 = {
+						damage_building = {
+							type = industrial_complex
+							damage = 4
+						}
+						damage_building = {
+							type = infrastructure
+							damage = 3
+						}
+					}
+				}
+				if = {
+					limit = {
+						controls_state = 42
+					}
+						42 = {
+						damage_building = {
+							type = industrial_complex
+							damage = 5
+						}
+						damage_building = {
+							type = infrastructure
+							damage = 3
+						}
+					}
+				}
+				if = {
+					limit = {
+						controls_state = 51
+					}
+						51 = {
+						damage_building = {
+							type = industrial_complex
+							damage = 1
+						}
+						damage_building = {
+							type = infrastructure
+							damage = 1
+						}
+					}
+				}
+				if = {
+					limit = {
+						controls_state = 57
+					}
+						57 = {
+						damage_building = {
+							type = industrial_complex
+							damage = 1
+						}
+						damage_building = {
+							type = infrastructure
+							damage = 1
+						}
+					}
+				}
+				if = {
+					limit = {
+						controls_state = 55
+					}
+						55 = {
+						damage_building = {
+							type = industrial_complex
+							damage = 1
+						}
+						damage_building = {
+							type = infrastructure
+							damage = 1
+						}
+					}
+				}
+				if = {
+					limit = {
+						controls_state = 804
+					}
+						804 = {
+						damage_building = {
+							type = industrial_complex
+							damage = 4
+						}
+						damage_building = {
+							type = infrastructure
+							damage = 3
+						}
+					}
+				}
+				if = {
+					limit = {
+						controls_state = 28
+					}
+						28 = {
+						damage_building = {
+							type = industrial_complex
+							damage = 2
+						}
+						damage_building = {
+							type = infrastructure
+							damage = 3
+						}
+					}
+				}
+				if = {
+					limit = {
+						controls_state = 8
+					}
+						8 = {
+						damage_building = {
+							type = industrial_complex
+							damage = 2
+						}
+						damage_building = {
+							type = infrastructure
+							damage = 2
+						}
+					}
+				}
+				if = {
+					limit = {
+						controls_state = 824
+					}
+						824 = {
+						damage_building = {
+							type = industrial_complex
+							damage = 1
+						}
+						damage_building = {
+							type = infrastructure
+							damage = 1
+						}
+					}
+				}
+			}
+}
+
+GER_setup_neuer_staat = {
+	set_variable = { var = GER_new_state_reform_progress value = 20 }
+	set_variable = { var = GER_new_state_reform_support value = 103 }
+	set_variable = { var = GER_new_state_reform_voters value = 415 }
+
+	clamp_variable = { var = GER_new_state_reform_progress min = 0 max = 100 }
+	clamp_variable = { var = GER_new_state_reform_support min = 0 max = GER_new_state_reform_voters }
+}
+
+GER_setup_reichstag = {	
+	set_variable = { var = GER_Reichstag_deputies value = 415 }
+	set_variable = { var = GER_SPD_deputies value = 110 }
+	set_variable = { var = GER_DNAP_deputies value = 15 }
+	set_variable = { var = GER_LVP_deputies value = 51 }
+	set_variable = { var = GER_LVP_L_deputies value = 19 }
+	set_variable = { var = GER_LVP_R_deputies value = 32 }
+	set_variable = { var = GER_DStP_deputies value = 0 }
+	set_variable = { var = GER_Zentrum_deputies value = 83 }
+	set_variable = { var = GER_Zentrum_L_deputies value = 18 }
+	set_variable = { var = GER_Zentrum_F_deputies value = 36 }
+	set_variable = { var = GER_Zentrum_R_deputies value = 29 }
+	set_variable = { var = GER_BVP_deputies value = 16 }
+	set_variable = { var = GER_PP_deputies value = 18 }
+	set_variable = { var = GER_DkP_deputies value = 73 }
+	set_variable = { var = GER_Conservative_deputies value = 8 }
+	set_variable = { var = GER_DVLP_deputies value = 23 }
+	set_variable = { var = GER_DVFP_deputies value = 6 }
+	set_variable = { var = GER_Agrarian_deputies value =  7 }
+	set_variable = { var = GER_Regional_deputies value = 5 }
+}
+
+GER_setup_OKW = {
+	
+	set_variable = { var = GER_old_guard_strength value = 50 }
+	set_variable = { var = GER_hardliner_strength value = 25 }
+	set_variable = { var = GER_reformist_strength value = 15 }
+	set_variable = { var = GER_moderate_strength value = 10 }
+
+	clamp_variable = { var = GER_old_guard_strength min = 0 max = 100 }
+	clamp_variable = { var = GER_hardliner_strength min = 0 max = 100 }
+	clamp_variable = { var = GER_reformist_strength min = 0 max = 100 }
+	clamp_variable = { var = GER_moderate_strength min = 0 max = 100 }
+
+}
+
+GER_reduce_endloser_krieg = {
+	effect_tooltip = {
+		if = {
+			limit = { has_idea = GER_endloser_krieg_5 }
+			remove_ideas = GER_endloser_krieg_5
+		}
+		else = {
+			swap_ideas = {
+				remove_idea = GER_endloser_krieg
+				add_idea = GER_endloser_krieg_2
+			}
+		}
+	}
+	hidden_effect = {
+		if = {
+			limit = { has_idea = GER_endloser_krieg }
+			swap_ideas = {
+				remove_idea = GER_endloser_krieg
+				add_idea = GER_endloser_krieg_2
+			}
+		}
+		else_if = {
+			limit = { has_idea = GER_endloser_krieg_2 }
+			swap_ideas = {
+				remove_idea = GER_endloser_krieg_2
+				add_idea = GER_endloser_krieg_3
+			}
+		}
+		else_if = {
+			limit = { has_idea = GER_endloser_krieg_3 }
+			swap_ideas = {
+				remove_idea = GER_endloser_krieg_3
+				add_idea = GER_endloser_krieg_4
+			}
+		}
+		else_if = {
+			limit = { has_idea = GER_endloser_krieg_4 }
+			swap_ideas = {
+				remove_idea = GER_endloser_krieg_4
+				add_idea = GER_endloser_krieg_5
+			}
+		}
+		else_if = {
+			limit = { has_idea = GER_endloser_krieg_5 }
+			remove_ideas = GER_endloser_krieg_5
+		}
+	}
+}
+
+GER_increase_general_staff_support = {
+	effect_tooltip = {
+		if = {
+			limit = { has_idea = GER_general_staff_highlyprogovernment }
+			custom_effect_tooltip = GER_general_staff_support_maxed
+		}
+		else = {
+			custom_effect_tooltip = GER_general_staff_support_increase
+		}
+	}
+	
+	### Base ###
+	
+	hidden_effect = {
+		if = {
+			limit = { has_idea = GER_general_staff_highlyantigovernment }
+			swap_ideas = {
+				remove_idea = GER_general_staff_highlyantigovernment
+				add_idea = GER_general_staff_mildlyantigovernment
+			}
+		}
+		else_if = {
+			limit = { has_idea = GER_general_staff_mildlyantigovernment }
+			swap_ideas = {
+				remove_idea = GER_general_staff_mildlyantigovernment
+				add_idea = GER_general_staff_neutral
+			}
+		}
+		else_if = {
+			limit = { has_idea = GER_general_staff_neutral }
+			swap_ideas = {
+				remove_idea = GER_general_staff_neutral
+				add_idea = GER_general_staff_mildlyprogovernment
+			}
+		}
+		else_if = {
+			limit = { has_idea = GER_general_staff_mildlyprogovernment }
+			swap_ideas = {
+				remove_idea = GER_general_staff_mildlyprogovernment
+				add_idea = GER_general_staff_highlyprogovernment
+			}
+		}
+		else_if = {
+			limit = { has_idea = GER_general_staff_highlyprogovernment }
+			add_political_power = 25
+		}
+		
+		### Kesselring 1 ###
+		
+		else_if = {
+			limit = { has_idea = GER_general_staff_kesselring_highlyantigovernment }
+			swap_ideas = {
+				remove_idea = GER_general_staff_kesselring_highlyantigovernment
+				add_idea = GER_general_staff_kesselring_mildlyantigovernment
+			}
+		}
+		else_if = {
+			limit = { has_idea = GER_general_staff_kesselring_mildlyantigovernment }
+			swap_ideas = {
+				remove_idea = GER_general_staff_kesselring_mildlyantigovernment
+				add_idea = GER_general_staff_kesselring_neutral
+			}
+		}
+		else_if = {
+			limit = { has_idea = GER_general_staff_kesselring_neutral }
+			swap_ideas = {
+				remove_idea = GER_general_staff_kesselring_neutral
+				add_idea = GER_general_staff_kesselring_mildlyprogovernment
+			}
+		}
+		else_if = {
+			limit = { has_idea = GER_general_staff_kesselring_mildlyprogovernment }
+			swap_ideas = {
+				remove_idea = GER_general_staff_kesselring_mildlyprogovernment
+				add_idea = GER_general_staff_kesselring_highlyprogovernment
+			}
+		}
+		else_if = {
+			limit = { has_idea = GER_general_staff_kesselring_highlyprogovernment }
+			add_political_power = 25
+		}
+		
+		### Kesselring 2 ###
+		
+		else_if = {
+			limit = { has_idea = GER_general_staff_kesselring2_highlyantigovernment }
+			swap_ideas = {
+				remove_idea = GER_general_staff_kesselring2_highlyantigovernment
+				add_idea = GER_general_staff_kesselring2_mildlyantigovernment
+			}
+		}
+		else_if = {
+			limit = { has_idea = GER_general_staff_kesselring2_mildlyantigovernment }
+			swap_ideas = {
+				remove_idea = GER_general_staff_kesselring2_mildlyantigovernment
+				add_idea = GER_general_staff_kesselring2_neutral
+			}
+		}
+		else_if = {
+			limit = { has_idea = GER_general_staff_kesselring2_neutral }
+			swap_ideas = {
+				remove_idea = GER_general_staff_kesselring2_neutral
+				add_idea = GER_general_staff_kesselring2_mildlyprogovernment
+			}
+		}
+		else_if = {
+			limit = { has_idea = GER_general_staff_kesselring2_mildlyprogovernment }
+			swap_ideas = {
+				remove_idea = GER_general_staff_kesselring2_mildlyprogovernment
+				add_idea = GER_general_staff_kesselring2_highlyprogovernment
+			}
+		}
+		else_if = {
+			limit = { has_idea = GER_general_staff_kesselring2_highlyprogovernment }
+			add_political_power = 25
+		}
+		
+		### Guderian 1 ###
+		
+		else_if = {
+			limit = { has_idea = GER_general_staff_guderian_highlyantigovernment }
+			swap_ideas = {
+				remove_idea = GER_general_staff_guderian_highlyantigovernment
+				add_idea = GER_general_staff_guderian_mildlyantigovernment
+			}
+		}
+		else_if = {
+			limit = { has_idea = GER_general_staff_guderian_mildlyantigovernment }
+			swap_ideas = {
+				remove_idea = GER_general_staff_guderian_mildlyantigovernment
+				add_idea = GER_general_staff_guderian_neutral
+			}
+		}
+		else_if = {
+			limit = { has_idea = GER_general_staff_guderian_neutral }
+			swap_ideas = {
+				remove_idea = GER_general_staff_guderian_neutral
+				add_idea = GER_general_staff_guderian_mildlyprogovernment
+			}
+		}
+		else_if = {
+			limit = { has_idea = GER_general_staff_guderian_mildlyprogovernment }
+			swap_ideas = {
+				remove_idea = GER_general_staff_guderian_mildlyprogovernment
+				add_idea = GER_general_staff_guderian_highlyprogovernment
+			}
+		}
+		else_if = {
+			limit = { has_idea = GER_general_staff_guderian_highlyprogovernment }
+			add_political_power = 25
+		}
+		
+		### Guderian 2 ###
+		
+		else_if = {
+			limit = { has_idea = GER_general_staff_guderian2_highlyantigovernment }
+			swap_ideas = {
+				remove_idea = GER_general_staff_guderian2_highlyantigovernment
+				add_idea = GER_general_staff_guderian2_mildlyantigovernment
+			}
+		}
+		else_if = {
+			limit = { has_idea = GER_general_staff_guderian2_mildlyantigovernment }
+			swap_ideas = {
+				remove_idea = GER_general_staff_guderian2_mildlyantigovernment
+				add_idea = GER_general_staff_guderian2_neutral
+			}
+		}
+		else_if = {
+			limit = { has_idea = GER_general_staff_guderian2_neutral }
+			swap_ideas = {
+				remove_idea = GER_general_staff_guderian2_neutral
+				add_idea = GER_general_staff_guderian2_mildlyprogovernment
+			}
+		}
+		else_if = {
+			limit = { has_idea = GER_general_staff_guderian2_mildlyprogovernment }
+			swap_ideas = {
+				remove_idea = GER_general_staff_guderian2_mildlyprogovernment
+				add_idea = GER_general_staff_guderian2_highlyprogovernment
+			}
+		}
+		else_if = {
+			limit = { has_idea = GER_general_staff_guderian2_highlyprogovernment }
+			add_political_power = 25
+		}
+	}
+}
+
+GER_decrease_general_staff_support = {
+	effect_tooltip = {
+		if = {
+			limit = { has_idea = GER_general_staff_highlyantigovernment }
+			custom_effect_tooltip = GER_general_staff_support_minimum
+		}
+		else = {
+			custom_effect_tooltip = GER_general_staff_support_decrease
+		}
+	}
+	
+	### Base ###
+	
+	hidden_effect = {
+		if = {
+			limit = { has_idea = GER_general_staff_highlyprogovernment }
+			swap_ideas = {
+				remove_idea = GER_general_staff_highlyprogovernment
+				add_idea = GER_general_staff_mildlyprogovernment
+			}
+		}
+		else_if = {
+			limit = { has_idea = GER_general_staff_mildlyprogovernment }
+			swap_ideas = {
+				remove_idea = GER_general_staff_mildlyprogovernment
+				add_idea = GER_general_staff_neutral
+			}
+		}
+		else_if = {
+			limit = { has_idea = GER_general_staff_neutral }
+			swap_ideas = {
+				remove_idea = GER_general_staff_neutral
+				add_idea = GER_general_staff_mildlyantigovernment
+			}
+		}
+		else_if = {
+			limit = { has_idea = GER_general_staff_mildlyantigovernment }
+			swap_ideas = {
+				remove_idea = GER_general_staff_mildlyantigovernment
+				add_idea = GER_general_staff_highlyantigovernment
+			}
+		}
+		else_if = {
+			limit = { has_idea = GER_general_staff_highlyantigovernment }
+			add_political_power = -25
+		}
+		
+		### Kesselring 1 ###
+		
+		else_if = {
+			limit = { has_idea = GER_general_staff_kesselring_highlyprogovernment }
+			swap_ideas = {
+				remove_idea = GER_general_staff_kesselring_highlyprogovernment
+				add_idea = GER_general_staff_kesselring_mildlyprogovernment
+			}
+		}
+		else_if = {
+			limit = { has_idea = GER_general_staff_kesselring_mildlyprogovernment }
+			swap_ideas = {
+				remove_idea = GER_general_staff_kesselring_mildlyprogovernment
+				add_idea = GER_general_staff_kesselring_neutral
+			}
+		}
+		else_if = {
+			limit = { has_idea = GER_general_staff_kesselring_neutral }
+			swap_ideas = {
+				remove_idea = GER_general_staff_kesselring_neutral
+				add_idea = GER_general_staff_kesselring_mildlyantigovernment
+			}
+		}
+		else_if = {
+			limit = { has_idea = GER_general_staff_kesselring_mildlyantigovernment }
+			swap_ideas = {
+				remove_idea = GER_general_staff_kesselring_mildlyantigovernment
+				add_idea = GER_general_staff_kesselring_highlyantigovernment
+			}
+		}
+		else_if = {
+			limit = { has_idea = GER_general_staff_kesselring_highlyantigovernment }
+			add_political_power = -25
+		}
+		
+		### Kesselring 2 ###
+		
+		else_if = {
+			limit = { has_idea = GER_general_staff_kesselring2_highlyprogovernment }
+			swap_ideas = {
+				remove_idea = GER_general_staff_kesselring2_highlyprogovernment
+				add_idea = GER_general_staff_kesselring2_mildlyprogovernment
+			}
+		}
+		else_if = {
+			limit = { has_idea = GER_general_staff_kesselring2_mildlyprogovernment }
+			swap_ideas = {
+				remove_idea = GER_general_staff_kesselring2_mildlyprogovernment
+				add_idea = GER_general_staff_kesselring2_neutral
+			}
+		}
+		else_if = {
+			limit = { has_idea = GER_general_staff_kesselring2_neutral }
+			swap_ideas = {
+				remove_idea = GER_general_staff_kesselring2_neutral
+				add_idea = GER_general_staff_kesselring2_mildlyantigovernment
+			}
+		}
+		else_if = {
+			limit = { has_idea = GER_general_staff_kesselring2_mildlyantigovernment }
+			swap_ideas = {
+				remove_idea = GER_general_staff_kesselring2_mildlyantigovernment
+				add_idea = GER_general_staff_kesselring2_highlyantigovernment
+			}
+		}
+		else_if = {
+			limit = { has_idea = GER_general_staff_kesselring2_highlyantigovernment }
+			add_political_power = -25
+		}
+
+	### Guderian 1 ###
+		
+		else_if = {
+			limit = { has_idea = GER_general_staff_guderian_highlyprogovernment }
+			swap_ideas = {
+				remove_idea = GER_general_staff_guderian_highlyprogovernment
+				add_idea = GER_general_staff_guderian_mildlyprogovernment
+			}
+		}
+		else_if = {
+			limit = { has_idea = GER_general_staff_guderian_mildlyprogovernment }
+			swap_ideas = {
+				remove_idea = GER_general_staff_guderian_mildlyprogovernment
+				add_idea = GER_general_staff_guderian_neutral
+			}
+		}
+		else_if = {
+			limit = { has_idea = GER_general_staff_guderian_neutral }
+			swap_ideas = {
+				remove_idea = GER_general_staff_guderian_neutral
+				add_idea = GER_general_staff_guderian_mildlyantigovernment
+			}
+		}
+		else_if = {
+			limit = { has_idea = GER_general_staff_guderian_mildlyantigovernment }
+			swap_ideas = {
+				remove_idea = GER_general_staff_guderian_mildlyantigovernment
+				add_idea = GER_general_staff_guderian_highlyantigovernment
+			}
+		}
+		else_if = {
+			limit = { has_idea = GER_general_staff_guderian_highlyantigovernment }
+			add_political_power = -25
+		}
+		
+	### Guderian 2 ###
+		
+		else_if = {
+			limit = { has_idea = GER_general_staff_guderian2_highlyprogovernment }
+			swap_ideas = {
+				remove_idea = GER_general_staff_guderian2_highlyprogovernment
+				add_idea = GER_general_staff_guderian2_mildlyprogovernment
+			}
+		}
+		else_if = {
+			limit = { has_idea = GER_general_staff_guderian2_mildlyprogovernment }
+			swap_ideas = {
+				remove_idea = GER_general_staff_guderian2_mildlyprogovernment
+				add_idea = GER_general_staff_guderian2_neutral
+			}
+		}
+		else_if = {
+			limit = { has_idea = GER_general_staff_guderian2_neutral }
+			swap_ideas = {
+				remove_idea = GER_general_staff_guderian2_neutral
+				add_idea = GER_general_staff_guderian2_mildlyantigovernment
+			}
+		}
+		else_if = {
+			limit = { has_idea = GER_general_staff_guderian2_mildlyantigovernment }
+			swap_ideas = {
+				remove_idea = GER_general_staff_guderian2_mildlyantigovernment
+				add_idea = GER_general_staff_guderian2_highlyantigovernment
+			}
+		}
+		else_if = {
+			limit = { has_idea = GER_general_staff_guderian2_highlyantigovernment }
+			add_political_power = -25
+		}
+	}
+}
+
+GER_move_up_scars_of_the_kommunenbund = {
+	if = {
+		limit = { 
+			has_idea = GER_scars_of_the_kommunenbund
+		}
+		swap_ideas = {
+			remove_idea = GER_scars_of_the_kommunenbund
+			add_idea = GER_scars_of_the_kommunenbund_2
+		}
+	}
+	else_if = {
+		limit = { 
+			has_idea = GER_scars_of_the_kommunenbund_2
+		}
+		swap_ideas = {
+			remove_idea = GER_scars_of_the_kommunenbund_2
+			add_idea = GER_scars_of_the_kommunenbund_3
+		}
+	}
+
+	else_if = {
+		limit = { 
+			has_idea = GER_scars_of_the_kommunenbund_3
+		}
+		swap_ideas = {
+			remove_idea = GER_scars_of_the_kommunenbund_3
+			add_idea = GER_scars_of_the_kommunenbund_4
+		}
+	}
+
+	else_if = {
+		limit = { 
+			has_idea = GER_scars_of_the_kommunenbund_4
+		}
+		remove_ideas = GER_scars_of_the_kommunenbund_4
+	}
+}
+
+d_RP_collapse = {
+	add_to_array = { global.influence_log = 41 }
+	add_to_array = { global.influence_log_val = 1000 }
+	influence_recalc = yes
+	GER = {
+		faction_leader = { dismantle_faction = yes }
+	}
+	every_country = {
+		limit = {
+			is_in_or_aligned_with_reichspakt = yes
+		}
+		clear_all_alignments = yes
+	}
+
+	set_global_flag = pakt_collapsed
+}

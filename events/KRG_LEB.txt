@@ -1,0 +1,546 @@
+add_namespace = krg_leb_syr_civil_war
+add_namespace = krg_leb
+
+country_event = { # Government Victory
+	id = krg_leb.1
+	title = krg_leb.1.t
+	desc = krg_leb.1.d
+	#picture = 
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = { 
+		log = "[GetDateText]: [Root.GetName]: event krg_leb.1"
+	}
+
+	option = {
+		name = krg_leb.1.a
+		set_politics = {
+			ruling_party = social_liberal
+		}
+		coal_add_mar_lib = yes
+	}
+}
+
+country_event = { # SSNP Victory
+	id = krg_leb.2
+	title = krg_leb.2.t
+	desc = krg_leb.2.d
+	#picture = 
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = { 
+		log = "[GetDateText]: [Root.GetName]: event krg_leb.2"
+	}
+
+	option = {
+		name = krg_leb.2.a
+		set_politics = {
+			ruling_party = national_populist
+		}
+		add_ideas = LEB_SSNP_rule
+	}
+}
+
+country_event = { # Najjadh+NDP+PSP Victory
+	id = krg_leb.3
+	title = krg_leb.3.t
+	desc = krg_leb.3.d
+	#picture = 
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = { 
+		log = "[GetDateText]: [Root.GetName]: event krg_leb.3"
+	}
+
+	option = {
+		name = krg_leb.3.a
+		set_politics = {
+			ruling_party = social_conservative
+		}
+		coal_add_soc_lib = yes
+		coal_add_mar_lib = yes
+		coal_add_soc_dem = yes
+	}
+}
+
+country_event = { # SSNP-PC Victory
+	id = krg_leb.4
+	title = krg_leb.4.t
+	desc = krg_leb.4.d
+	#picture = 
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = { 
+		log = "[GetDateText]: [Root.GetName]: event krg_leb.4"
+	}
+
+	option = {
+		name = krg_leb.4.a
+		set_politics = {
+			ruling_party = national_populist
+		}
+		coal_add_auth_soc = yes
+		coal_add_rad_soc = yes
+		add_ideas = LEB_SSNP_rule
+	}
+}
+
+country_event = { # Kataeb Victory
+	id = krg_leb.5
+	title = krg_leb.5.t
+	desc = krg_leb.5.d
+	#picture = 
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = { 
+		log = "[GetDateText]: [Root.GetName]: event krg_leb.5"
+	}
+
+	option = {
+		name = krg_leb.5.a
+		set_politics = {
+			ruling_party = revolutionary_republican
+		}
+	}
+}
+
+country_event = { #Chain Start, Syrian civil war stuff
+	id = krg_leb_syr_civil_war.1
+	title = krg_leb_syr_civil_war.1.t
+	desc = krg_leb_syr_civil_war.1.d
+	#picture = 
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = { 
+		log = "[GetDateText]: [Root.GetName]: event krg_leb_syr_civil_war.1"
+	}
+
+	option = {
+		name = krg_leb_syr_civil_war.1.a
+		country_event = {
+			id = krg_leb_syr_civil_war.2
+			days = 30
+		}
+		SYR = {
+			country_event = {
+				id = krg_leb_syr_civil_war.3
+				days = 30
+			}
+		}
+	}
+}
+
+country_event = { # Battle of Baalbek
+	id = krg_leb_syr_civil_war.2
+	title = krg_leb_syr_civil_war.2.t
+	desc = krg_leb_syr_civil_war.2.d
+	#picture = 
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = { 
+		log = "[GetDateText]: [Root.GetName]: event krg_leb_syr_civil_war.2"
+	}
+
+	option = {
+		name = krg_leb_syr_civil_war.2.a
+		add_equipment_to_stockpile = {
+			type = infantry_equipment
+			amount = -2000
+		}
+
+		add_equipment_to_stockpile = {
+			type = infantry_antitank_equipment
+			amount = -250
+		}
+
+		add_equipment_to_stockpile = {
+			type = support_equipment
+			amount = -250
+		}
+
+		country_event = {
+			id = krg_leb_syr_civil_war.13
+			days = 15
+		}
+
+		ai_chance = {
+			base = 65
+		}
+	}
+
+	option = {
+		name = krg_leb_syr_civil_war.2.b
+		hidden_effect = {
+			country_event = {
+				id = krg_leb_syr_civil_war.3
+				days = 15
+			}
+		}
+		ai_chance = {
+			base = 35
+		}
+	}
+}
+
+
+
+country_event = { # Fouad Chehab captured, Asking for Kataeb help
+	id = krg_leb_syr_civil_war.3
+	title = krg_leb_syr_civil_war.3.t
+	desc = krg_leb_syr_civil_war.3.d
+	#picture = 
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = { 
+		log = "[GetDateText]: [Root.GetName]: event krg_leb_syr_civil_war.3"
+	}
+
+	option = {
+		name = krg_leb_syr_civil_war.3.a
+		LEB_Fouad_Chehab = {
+			kill_character = yes
+		}
+
+		hidden_effect = {
+			country_event = {
+				id = krg_leb_syr_civil_war.4
+				days = 10
+			}
+		}
+	}
+}
+
+country_event = { # Kataeb accepts and ask for Isreali equipment
+	id = krg_leb_syr_civil_war.4
+	title = krg_leb_syr_civil_war.4.t
+	desc = krg_leb_syr_civil_war.4.d
+	#picture = 
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = { 
+		log = "[GetDateText]: [Root.GetName]: event krg_leb_syr_civil_war.4"
+	}
+
+	option = {
+		name = krg_leb_syr_civil_war.4.a
+		coal_add_rev_rep = yes
+
+		ISR = {
+			country_event = {
+				id = krg_leb_syr_civil_war.5
+				days = 5
+			}
+		}
+	}
+}
+
+country_event = { # Leb asks for support, ISR
+	id = krg_leb_syr_civil_war.5
+	title = krg_leb_syr_civil_war.5.t
+	desc = krg_leb_syr_civil_war.5.d
+	#picture = 
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = { 
+		log = "[GetDateText]: [Root.GetName]: event krg_leb_syr_civil_war.5"
+	}
+
+	option = {
+		name = krg_leb_syr_civil_war.5.a
+		send_equipment = {
+			type = infantry_equipment
+			amount = 2000
+			target = LEB
+		}
+		send_equipment = {
+			type = infantry_antitank_equipment
+			amount = 250
+			target = LEB
+		}
+		send_equipment = {
+			type = support_equipment
+			amount = 250
+			target = LEB
+		}
+		country_event = {
+			id = krg_leb_syr_civil_war.6
+			days = 10
+		}
+	}
+
+	option = {
+		name = krg_leb_syr_civil_war.5.b
+	}
+}
+
+country_event = { # Leb asks for support, ISR
+	id = krg_leb_syr_civil_war.6
+	title = krg_leb_syr_civil_war.6.t
+	desc = krg_leb_syr_civil_war.6.d
+	#picture = 
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = { 
+		log = "[GetDateText]: [Root.GetName]: event krg_leb_syr_civil_war.6"
+	}
+
+	option = {
+		name = krg_leb_syr_civil_war.6.a
+		hidden_effect = {
+			country_event = {
+				id = krg_leb_syr_civil_war.7
+				days = 25
+			}
+		}
+	}
+
+	option = {
+		name = krg_leb_syr_civil_war.6.b
+		country_event = {
+			id = krg_leb_syr_civil_war.12
+			days = 25
+		}
+	}
+}
+
+country_event = { # Najjadah accepts
+	id = krg_leb_syr_civil_war.7
+	title = krg_leb_syr_civil_war.7.t
+	desc = krg_leb_syr_civil_war.7.d
+	#picture = 
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = { 
+		log = "[GetDateText]: [Root.GetName]: event krg_leb_syr_civil_war.7"
+	}
+
+	option = {
+		name = krg_leb_syr_civil_war.7.a
+		hidden_effect = {
+			country_event = {
+				id = krg_leb_syr_civil_war.8
+				days = 10
+			}
+		}
+	}
+
+	option = {
+		name = krg_leb_syr_civil_war.7.b
+		country_event = {
+			id = krg_leb_syr_civil_war.9
+			days = 20
+		}
+	}
+}
+
+country_event = { # Al Achkar Captured
+	id = krg_leb_syr_civil_war.8
+	title = krg_leb_syr_civil_war.8.t
+	desc = krg_leb_syr_civil_war.8.d
+	#picture = 
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = { 
+		log = "[GetDateText]: [Root.GetName]: event krg_leb_syr_civil_war.8"
+	}
+
+	option = {
+		name = krg_leb_syr_civil_war.8.a
+		country_event = {
+			id = krg_leb.1
+			days = 5
+		}
+	}
+}
+
+country_event = { # SSNP kill Chamoun, Kataeb Najjadah alliance collapse, SSNP start working with communists
+	id = krg_leb_syr_civil_war.9
+	title = krg_leb_syr_civil_war.9.t
+	desc = krg_leb_syr_civil_war.9.d
+	#picture = 
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = { 
+		log = "[GetDateText]: [Root.GetName]: event krg_leb_syr_civil_war.9"
+	}
+
+	option = {
+		name = krg_leb_syr_civil_war.9.a
+		LEB_Camille_Chamoun = {
+			kill_character = yes
+		}
+		set_politics = {
+			ruling_party = social_conservative
+		}
+		country_event = {
+			id = krg_leb_syr_civil_war.10
+			days = 25
+		}
+	}
+
+	option = {
+		name = krg_leb_syr_civil_war.9.b
+		LEB_Camille_Chamoun = {
+			kill_character = yes
+		}
+		set_politics = {
+			ruling_party = revolutionary_republican
+		}
+		country_event = {
+			id = krg_leb_syr_civil_war.11
+			days = 25
+		}
+	}
+}
+
+country_event = { # Najjadah forms alliance with other parties, and takes out the SSNP
+	id = krg_leb_syr_civil_war.10
+	title = krg_leb_syr_civil_war.10.t
+	desc = krg_leb_syr_civil_war.10.d
+	#picture = 
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = { 
+		log = "[GetDateText]: [Root.GetName]: event krg_leb_syr_civil_war.10"
+	}
+
+	option = {
+		name = krg_leb_syr_civil_war.10.a
+		coal_add_soc_lib = yes
+		coal_add_mar_lib = yes
+		coal_add_soc_dem = yes
+		country_event = {
+			id = krg_leb.3
+			days = 5
+		}
+	}
+}
+
+country_event = { # Kataeb all out assult on SSNP 
+	id = krg_leb_syr_civil_war.11
+	title = krg_leb_syr_civil_war.11.t
+	desc = krg_leb_syr_civil_war.11.d
+	#picture = 
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = { 
+		log = "[GetDateText]: [Root.GetName]: event krg_leb_syr_civil_war.11"
+	}
+
+	option = {
+		name = krg_leb_syr_civil_war.11.a
+		hidden_effect = {
+			country_event = {
+				id = krg_leb.5
+				days = 10
+			}
+		}
+	}
+
+	option = {
+		name = krg_leb_syr_civil_war.11.b
+		hidden_effect = {
+			country_event = {
+				id = krg_leb.4
+				days = 10
+			}
+		}
+	}
+}
+
+country_event = { # ISR refuses to support
+	id = krg_leb_syr_civil_war.12
+	title = krg_leb_syr_civil_war.12.t
+	desc = krg_leb_syr_civil_war.12.d
+	#picture = 
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = { 
+		log = "[GetDateText]: [Root.GetName]: event krg_leb_syr_civil_war.12"
+	}
+
+	option = {
+		name = krg_leb_syr_civil_war.12.a
+		hidden_effect = {
+			country_event = {
+				id = krg_leb.2
+				days = 10
+			}
+		}
+	}
+}
+
+country_event = { # SSNP wants help from the Communists
+	id = krg_leb_syr_civil_war.13
+	title = krg_leb_syr_civil_war.13.t
+	desc = krg_leb_syr_civil_war.13.d
+	#picture = 
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = { 
+		log = "[GetDateText]: [Root.GetName]: event krg_leb_syr_civil_war.13"
+	}
+
+	option = {
+		name = krg_leb_syr_civil_war.13.a
+		country_event = {
+			id = krg_leb_syr_civil_war.14
+			days = 10
+		}
+	}
+
+	option = {
+		name = krg_leb_syr_civil_war.13.b
+		country_event = {
+			id = krg_leb.1
+			days = 10
+		}
+	}
+}
+
+country_event = { # SSNP-LCP take Tripoli and attacks Beirut
+	id = krg_leb_syr_civil_war.14
+	title = krg_leb_syr_civil_war.14.t
+	desc = krg_leb_syr_civil_war.14.d
+	#picture = 
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	immediate = { 
+		log = "[GetDateText]: [Root.GetName]: event krg_leb_syr_civil_war.13"
+	}
+
+	option = {
+		name = krg_leb_syr_civil_war.14.a
+		country_event = {
+			id = krg_leb.1
+			days = 10
+		}
+	}
+
+	option = {
+		name = krg_leb_syr_civil_war.14.b
+		country_event = {
+			id = krg_leb.4
+			days = 10
+		}
+	}
+}

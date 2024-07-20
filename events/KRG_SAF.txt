@@ -1,0 +1,470 @@
+#!localization:localisation/english/KRG_SAF_l_english.yml
+###########################
+## Union of South Africa ##
+## Made by Leaf and Desu ##
+###########################
+add_namespace = saf
+
+##### TODO LIST
+# Fix descriptions
+# Fix coup event chain
+# Fix ministers
+# Fix UP collapse events
+
+
+country_event = { #Election 1948
+	id = saf.0
+	title = saf.0.t
+	desc = saf.0.d
+	is_triggered_only = yes
+	
+	immediate = {
+		hidden_effect = {
+			#reset coalitions.
+			coal_rev_soc_dem = yes
+			coal_rev_soc_lib = yes
+			coal_rev_mark_lib = yes
+			coal_rev_soc_con = yes
+			coal_rev_pat_aut = yes
+			coal_rev_nat_pop = yes
+
+			#remove ministers
+			remove_all_ministers = yes
+
+			#oh yeah, we need to call this election in 1953.
+			country_event = {
+				id = saf.0
+				days = 1826
+			}
+
+			#party changes
+			set_party_name = { 
+				ideology = paternal_autocrat 
+				name = SAF_national_party 
+				long_name = SAF_national_party_long 
+			}
+			set_party_name = { 
+				ideology = national_populist 
+				name = SAF_national_party 
+				long_name = SAF_national_party_long 
+			}
+		}
+	}
+
+	option = {
+		name = saf.0.up
+		effect_tooltip = {
+			remove_all_ministers = yes
+		}
+		set_politics = {
+			ruling_party = social_conservative
+		}
+		if = {
+			limit = {
+				has_country_flag = SAF_UP_LP_coalition
+			}
+			coal_add_soc_dem = yes
+		}
+		coal_add_mar_lib = yes
+		coal_add_soc_lib = yes
+		coal_add_soc_con = yes
+		coal_add_auth_dem = yes
+		if = {
+			limit = {
+				has_country_flag = SAF_UP_LP_coalition
+			}
+			if = {
+				limit = {
+					NOT = {
+						has_completed_focus = SAF_UP_LP_Cabinet
+					}
+				}
+				complete_national_focus = SAF_UP_LP_Cabinet
+			}
+		}
+		else = {
+			if = {
+				limit = {
+					NOT = {
+						has_completed_focus = SAF_Fourth_Smuts_Cabinet
+					}
+				}
+				complete_national_focus = SAF_Fourth_Smuts_Cabinet
+			}
+		}
+		####Ministers####
+		#remember to fix ministers
+
+		trigger = {
+			NOT = {
+				has_country_flag = SAF_south_africa_party_exists
+			}
+		}
+	}
+	option = {
+		name = saf.0.sap
+		effect_tooltip = {
+			remove_all_ministers = yes
+		}
+		set_politics = {
+			ruling_party = social_conservative
+		}
+		if = {
+			limit = {
+				has_country_flag = SAF_UP_LP_coalition #ignore the name, it's fine!
+			}
+			coal_add_soc_dem = yes
+		}
+		if = {
+			limit = {
+				NOT = {
+					has_country_flag = SAF_unionist_party_exists
+				}
+			}
+			coal_add_mar_lib = yes
+		}
+		if = {
+			limit = {
+				NOT = {
+					has_country_flag = SAF_liberal_party_exists
+				}
+			}
+			coal_add_soc_lib = yes
+		}
+		coal_add_soc_con = yes
+		coal_add_auth_dem = yes
+
+		####Ministers####
+		#remember to fix ministers
+
+		trigger = {
+			has_country_flag = SAF_south_africa_party_exists
+		}
+	}
+	option = {
+		name = saf.0.np
+		effect_tooltip = {
+			remove_all_ministers = yes
+		}
+		set_politics = {
+			ruling_party = paternal_autocrat
+		}
+		if = {
+			limit = {
+				NOT = {
+					has_completed_focus = SAF_First_Malan_Cabinet
+				}
+			}
+			complete_national_focus = SAF_First_Malan_Cabinet
+		}
+		####Ministers####
+		#remember to fix ministers
+
+		coal_add_pat_aut = yes
+		coal_add_nat_pop = yes
+	}
+}
+
+country_event = { #Labour Coalition?
+	id = saf.1
+	title = saf.1.t
+	desc = saf.1.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #Hear them out.
+		name = saf.1.o1 
+		country_event = {
+			id = saf.2
+		}
+	}
+	option = { #Rule alone.
+		name = saf.1.o2 
+	}
+}
+
+country_event = { #Labour Demands
+	id = saf.2
+	title = saf.2.t
+	desc = saf.2.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #Accept their demands
+		name = saf.2.o1 
+		set_country_flag = SAF_UP_LP_coalition
+	}
+	option = { #Reject their demands
+		name = saf.2.o2 
+	}
+}
+
+country_event = { #Death of Jan Smuts
+	id = saf.3
+	title = saf.3.t
+	desc = saf.3.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #Rest In Peace.
+		name = saf.3.o1 
+		retire_character = SAF_jan_smuts
+		set_country_flag = SAF_smuts_dead
+		set_party_name = { 
+			ideology = social_conservative 
+			name = SAF_south_african_party_strauss 
+			long_name = SAF_south_african_party_strauss_long 
+		}
+		add_country_leader_role = {
+			character = SAF_jgn_strauss
+			promote_leader = yes
+			country_leader = {
+				desc="POLITICS_JGN_STRAUSS"
+				ideology=social_conservative_subtype
+				expire="1975.1.1.1"
+				id=-1
+			}
+		}
+		if = {
+			limit = {
+				has_country_leader = {
+					name = "Jan Smuts"
+					ruling_only = yes
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						has_country_flag = SAF_liberal_party_exists
+					}
+				}
+				set_politics = {
+					ruling_party = social_liberal
+				}
+	
+				####Ministers####
+				#Remember to fix the Hofmeyr Cabinet
+				remove_all_ministers = yes
+			}
+			else = {
+				set_politics = {
+					ruling_party = social_conservative
+				}
+	
+				####Ministers####
+				#Remember to fix the Strauss Cabinet
+				remove_all_ministers = yes
+			}
+			
+		}
+	}
+}
+
+country_event = { #Governor-General Gideon Brand van Zyl resigns
+	id = saf.4
+	title = saf.4.t
+	desc = saf.4.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	trigger = {
+		NOT = {
+			has_cosmetic_tag = SAF_republic
+		}
+	}
+
+	option = { #Propose J.G.N. Strauss
+		name = saf.4.o1 
+		clr_country_flag = SAF_GovGen_Gideon_Brand_van_Zyl
+		set_country_flag = SAF_GovGen_De_Villiers_Graaff
+		custom_effect_tooltip = SAF_GovGen_De_Villiers_Graaff_tt
+	}
+	option = { #Propose Ernst G. Jansen 
+		name = saf.4.o2 
+		clr_country_flag = SAF_GovGen_Gideon_Brand_van_Zyl
+		set_country_flag = SAF_GovGen_Ernest_George_Jansen
+		custom_effect_tooltip = SAF_GovGen_Ernest_George_Jansen_tt
+	}
+}
+
+country_event = { #The General's Coup
+	id = saf.5
+	title = saf.5.t
+	desc = saf.5.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #A New Administration Begins
+		name = saf.5.o1 
+		set_politics = {
+			ruling_party = authoritarian_democrat
+		}
+		set_party_name = { 
+			ideology = authoritarian_democrat 
+			name = SAF_Union_Defence_Force_Short 
+			long_name = SAF_Union_Defence_Force_Long 
+		}
+		add_country_leader_role = {
+			character = SAF_Pierre_van_Ryneveld
+			promote_leader = yes
+			country_leader = {
+				desc="POLITICS_PIERRE_VAN_RYNEVELD_DESC"
+				ideology=authoritarian_democrat_subtype
+				expire="1975.1.1.1"
+				id=-1
+			}
+		}
+		complete_national_focus = SAF_Union_Affairs
+		remove_all_ministers = yes
+		####Ministers####
+		#Remember to fix the UDF Cabinet
+	}
+}
+
+country_event = { #The Liberal Split
+	id = saf.6
+	title = saf.6.t
+	desc = saf.6.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #A New Administration Begins
+		name = saf.6.o1 
+		set_country_flag = SAF_liberal_party_exists
+		set_party_name = { 
+			ideology = social_liberal 
+			name = SAF_liberal_party 
+			long_name = SAF_liberal_party_long 
+		}
+	}
+}
+
+country_event = { #The Unionist Split
+	id = saf.7
+	title = saf.7.t
+	desc = saf.7.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #A New Administration Begins
+		name = saf.7.o1 
+		set_country_flag = SAF_unionist_party_exists	
+		set_party_name = { 
+			ideology = market_liberal 
+			name = SAF_unionist_party 
+			long_name = SAF_unionist_party_long 
+		}
+	}
+}
+
+country_event = { #The Dissolution of the United Party
+	id = saf.8
+	title = saf.8.t
+	desc = saf.8.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #A New Administration Begins
+		name = saf.8.o1 
+		if = {
+			limit = {
+				NOT = {
+					has_country_flag = SAF_unionist_party_exists
+				}
+			}
+			set_party_name = { 
+				ideology = market_liberal 
+				name = SAF_south_african_party_whitehead 
+				long_name = SAF_south_african_party_whitehead_long 
+			}
+		}
+		if = {
+			limit = {
+				NOT = {
+					has_country_flag = SAF_smuts_dead
+				}
+			}
+			set_party_name = { 
+				ideology = social_conservative 
+				name = SAF_south_african_party_smuts 
+				long_name = SAF_south_african_party_smuts_long 
+			}
+		}
+		else = {
+			if = {
+				limit = {
+					NOT = {
+						has_country_flag = SAF_govgen_strauss
+					}
+				}
+				set_party_name = { 
+					ideology = social_conservative 
+					name = SAF_south_african_party_strauss 
+					long_name = SAF_south_african_party_strauss_long 
+				}
+			}
+			else = {
+				set_party_name = { 
+					ideology = social_conservative 
+					name = SAF_south_african_party_graaff 
+					long_name = SAF_south_african_party_graaff_long 
+				}
+			}
+		}
+		set_party_name = { 
+			ideology = authoritarian_democrat 
+			name = SAF_south_african_party_steyn 
+			long_name = SAF_south_african_party_steyn_long 
+		}
+		set_country_flag = SAF_south_africa_party_exists
+	}
+}
+
+country_event = { #Which Commission?
+	id = saf.9
+	title = saf.9.t
+	desc = saf.9.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #Fagan
+		name = saf.9.o1 
+		complete_national_focus = SAF_Fagan_Commission
+	}
+
+	option = { #Sauer
+		name = saf.9.o2 
+		complete_national_focus = SAF_Sauer_Commission
+	}
+}
+
+country_event = { #Referendum on the Monarchy
+	id = saf.10
+	title = saf.10.t
+	desc = saf.10.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #Victory for the Republic
+		name = saf.10.o1 
+		custom_effect_tooltip = SAF_when_leave_entente_tt
+		effect_tooltip = {
+			set_cosmetic_tag = SAF_republic
+		}
+		SAF_UDF_trust_decrease_by_10 = yes
+	}
+
+	option = { #The Monarchy Remains
+		name = saf.10.o2 
+	}
+}

@@ -1,0 +1,773 @@
+add_namespace = otto_note
+
+country_event = { # Otto Note arrives in ITA
+	id = otto_note.1
+	title = otto_note.1.t
+	desc = otto_note.1.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+		
+	option = { #Send the note to ITA
+        name = otto_note.1.a
+		ITA ={
+			country_event = { 
+				id = otto_note.2 #krg_ita.otto_note.1
+				days = 2 
+			} 
+		}
+	}
+	option = { #Uniting with a monarchist? Never!
+		name = otto_note.1.b
+	}
+}
+
+country_event = { #Otto note arrives in ITA
+	id = otto_note.2
+	title = otto_note.2.t
+	desc = otto_note.2.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #Send a positive answer back to ITA
+        name = otto_note.2.a
+		hidden_effect ={ 
+			ITA = { 
+				country_event = { #Negotiations start
+					id = otto_note.3 #general.otto_note.2
+					days = 10
+				} 
+			}
+			ITA ={ 
+				country_event ={ #Negotiations start
+					id = otto_note.3
+					days = 10
+				}
+			}
+		}
+		news_event = otto_note.5 #general.otto_note.1
+	}
+	option = { #it's a trap (end chain)
+        name = otto_note.2.b
+	}
+} 
+
+country_event = { #Negotiations start
+	id = otto_note.3
+	title = otto_note.3.t
+	desc = otto_note.3.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #And let the great ball begin!
+        name = otto_note.3.a
+		custom_effect_tooltip = custom_tt_otto_note.3
+		hidden_effect ={ 
+			ITA = { 
+				country_event = { #Negotiations start
+					id = otto_note.6 #ita.otto_note.2
+					days = 2 
+				} 
+			}
+			ITA ={ 
+				country_event ={ #Negotiations start
+					id = otto_note.7 #ita.otto_note.2
+					days = 2
+				}
+			}
+		}
+	}
+}
+
+news_event = { #otto note for the rest of the world
+	id = otto_note.5
+	title = otto_note.5.t
+	desc = otto_note.5.d
+
+	#picture = 
+
+	is_triggered_only = yes
+	major = yes
+
+    option = {
+		name = otto_note.5.a
+    }
+}
+
+country_event ={ #ITA POV negotiations
+	id = otto_note.6
+	title = otto_note.6.t
+	desc = otto_note.6.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+		
+	option = { #Risorgimento best thing to ever happen!
+        name = otto_note.6.a
+		set_global_flag = ITA_accepts_negotiations_otto_note
+	}
+	option = { #Uniting with a monarchist? Never!
+		name = otto_note.6.b
+		news_event ={
+			id = otto_note.8 #general.otto_note.4
+			days = 1
+		}
+	}
+}
+
+country_event ={ #ITA POV negotiations
+	id = otto_note.7
+	title = otto_note.7.t
+	desc = otto_note.7.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+		
+	option = { #I prefer serving a Kingless Italy rather than a Italyless Kingdom!
+        name = otto_note.7.a
+		set_global_flag = ITA_accepts_negotiations_otto_note
+	}
+	option = { #Uniting with a republican? Never!
+		name = otto_note.7.b
+		news_event ={
+			id = otto_note.8 #general.otto_note.4
+			days = 1
+		}
+	}
+}
+
+news_event = { #unsuccesful negotiations
+	id = otto_note.8
+	title = otto_note.8.t
+	desc = otto_note.8.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #the peninsula will remain divided
+		name = otto_note.8.a
+	}
+}
+
+country_event = { #the problem of neutrality
+	id = otto_note.9
+	title = otto_note.9.t
+	desc = otto_note.9.d
+
+	trigger = {
+		tag = ITA
+		has_global_flag = ITA_accepts_negotiations_otto_note
+		has_global_flag = ITA_accepts_negotiations_otto_note
+	}
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	option = { #Let's drink to our friendship with Ottawa
+		name = otto_note.9.a
+		hidden_effect ={
+			set_global_flag = Otto_note_aligned_with_Accord 
+			DNF ={ 
+				country_event ={ 
+					id = otto_note.10
+					days = 1
+				}
+			}
+		}
+	}
+	option ={ #This is a price too high to pay
+		name = otto_note.9.b
+		news_event ={
+			id = otto_note.8 
+			days = 1
+		}
+	}
+}
+
+country_event = { #Italy wont be neutral
+	id = otto_note.10
+	title = otto_note.10.t
+	desc = otto_note.10.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #We will gently ask them to be actually neutral
+		name = otto_note.10.a
+		if ={ 
+			limit ={ 
+				ITA ={ 
+					is_ai = no
+				}
+			}
+			ITA ={ 
+				country_event = { 
+					id = otto_note.11
+					days = 3
+				}
+			}
+		}
+		else ={ 
+			ITA ={ 
+				country_event = { 
+					id = otto_note.11
+					days = 3
+				}
+			}
+		}
+	}
+	option = { #Better take no chances and send our agents to Milan
+	    name = otto_note.10.b
+		#start the coup mechanic
+		hidden_effect ={ 
+			ITA ={ 
+				country_event = { 
+					id = otto_note.12
+					days = 3
+				}
+			}
+			set_country_flag = ITA_coup_allowed_flag
+			start_ITA_coup = yes
+		}
+	}
+}
+
+country_event = { #DNF asks them to be actually neutral
+	id = otto_note.11
+	title = otto_note.11.t
+	desc = otto_note.11.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option ={ #but we're already neutral!
+	    name = otto_note.11.a
+		DNF ={ 
+			country_event = { 
+				id = otto_note.13
+				days = 4
+			}
+		}
+	}
+	option = { #fine, we will be actually neutral
+		name = otto_note.11.b 
+		clr_global_flag = Otto_note_aligned_with_Accord
+		DNF ={ 
+			country_event = { 
+				id = otto_note.14
+				days = 3
+			}
+		}
+		ITA ={ 
+			set_variable = {
+				otto_note_days_until_referendum_var = 87
+			}
+		}
+		ITA ={ 
+			set_variable = {
+				otto_note_days_until_referendum_var = 87
+			}
+		}
+		Otto_note_referendum_in_human_country = yes
+	}
+}
+country_event = { #Danubia doesnt say anything! :partying_face:
+	id = otto_note.12
+	title = otto_note.12.t
+	desc = otto_note.12.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #E chi tace acconsente!
+		name = otto_note.12.a
+	}
+}
+
+country_event = { #THOSE FUCKING ITALIAN STATES WONT STAY NEUTRAL I SWEAR TO GOD
+	id = otto_note.13
+	title = otto_note.13.t
+	desc = otto_note.13.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #EXECUTE ORDER 66
+		name = otto_note.13.a
+		set_country_flag = ITA_coup_allowed_flag
+		start_ITA_coup = yes
+		set_variable = {
+		variable = ITA_coup_progress
+		value = 7
+		}
+	}
+	option = { #Too much effort
+		name = otto_note.13.b
+		ITA ={ 
+			set_variable = {
+				otto_note_days_until_referendum_var = 83
+			}
+		}
+		ITA ={ 
+			set_variable = {
+				otto_note_days_until_referendum_var = 83
+			}
+		}
+		Otto_note_referendum_in_human_country = yes
+	}
+}
+
+country_event = { #Italy will be actually neutral
+	id = otto_note.14
+	title = otto_note.14.t
+	desc = otto_note.14.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option ={ #Common Pen W
+	    name = otto_note.14.a
+		add_political_power = 25
+	}
+}
+
+country_event = { #DNF - Italy has been couped!
+	id = otto_note.15
+	title = otto_note.15.t
+	desc = otto_note.15.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option ={ #This is what you get for not listening
+	    name = otto_note.15.a
+		coup_italy_on_command = yes
+		news_event ={ 
+			id = otto_note.17
+			days = 0
+		}
+		ITA ={ 
+			country_event = { 
+				id = otto_note.16
+				days = 0
+			}
+			country_event = { 
+				id = otto_note.18
+				days = 1
+			}
+			country_event = { 
+				id = otto_note.19 
+				days = 3
+			}
+		}
+		ITA ={ 
+			add_opinion_modifier ={ 
+				target = ITA
+				modifier = protest_action_strong
+			}
+		}
+		hidden_effect = {
+			ITA ={ 
+				country_event = { 
+					id = otto_note.18
+					days = 1
+				}
+				country_event = { 
+					id = otto_note.20
+					days = 3
+				}
+				country_event = { 
+					id = otto_note.21
+					days = 3
+				}
+				country_event ={ 
+					id = otto_note.24
+					days = 4
+				}
+			}
+		}
+	}
+}
+
+country_event = {#ITA - Italy coup
+	id = otto_note.16
+	title = otto_note.16.t
+	desc = otto_note.16.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option ={ #I, for one, welcome our old Danubian overlords
+	    name = otto_note.16.a
+	}
+}
+news_event ={#WORLD - Italy Coup
+	id = otto_note.17
+	title = otto_note.17.t
+	desc = otto_note.17.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option ={ #THEY FUCKING WHAT
+		trigger  ={ 
+			is_in_faction_with = CAN
+			NOT ={ 
+				tag = ITA
+			}
+		}
+	    name = otto_note.17.a
+	}
+	option = { #WE SHOULD INVADE ITALY
+		trigger  ={ 
+		tag = ITA
+	}
+	name = otto_note.17.b
+	}
+	option ={ #at least they could have warned us
+		trigger  ={ 
+			is_in_faction_with = DNF
+		}
+	    name = otto_note.17.c
+	}
+	option ={ #yet another W for Danubia
+		trigger  ={ 
+			OR ={ 
+				tag = DNF
+				tag = ITA
+			}
+		}
+	    name = otto_note.17.e
+	}
+	option = { #troublesome development
+		trigger ={ 
+			NOT ={ 
+				OR ={ 
+					tag = DNF
+					tag = ITA
+					is_in_faction_with = CAN
+					is_in_faction_with = DNF
+					tag = ITA
+				}
+			}
+		}
+		name = otto_note.17.f
+	}
+}
+
+country_event = { #Italian delegation joins the ITA delegation
+	id = otto_note.18
+	title = otto_note.18.t
+	desc = otto_note.18.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option ={ #Welcome to the free world brothers!
+		trigger ={ 
+			tag = ITA
+		}
+		name = otto_note.18.a
+	}
+	option = { #this is outrageous!
+		trigger = {
+			tag = ITA
+		}
+		name = otto_note.18.b
+	}
+}
+
+country_event = { #Large scale protests in ITA
+	id = otto_note.19
+	title = otto_note.19.t
+	desc = otto_note.19.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #fire at them!
+		name = otto_note.19.a
+		hidden_effect = {
+			country_event = { 
+				id = otto_note.25
+				days = 1
+			}
+		}
+	}
+}
+
+country_event = { #Large scale protests in ITA
+	id = otto_note.20
+	title = otto_note.20.t
+	desc = otto_note.20.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #Hopefully they will calm down
+		name = otto_note.20.a
+	}
+}
+
+country_event = { #Continue the negotiations with ITA?
+	id = otto_note.21
+	title = otto_note.21.t
+	desc = otto_note.21.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #We won't talk to tyrants and dictators!
+		name = otto_note.21.a
+	}
+	option = { #Dont recognize the new government and instead continue negotiations with the old italian delegation
+		name = otto_note.21.b 
+		country_event = { 
+			id = otto_note.22
+			days = 3
+		}
+	}
+	option = { #We will continue negotiation with ITA
+		name = otto_note.21.c
+		ITA ={ 
+			country_event = { 
+				id = otto_note.23
+				days = 1
+			}
+		}
+	}
+}
+
+country_event = {#Old delegation is ok with reunification
+	id = otto_note.22
+	title = otto_note.22.t
+	desc = otto_note.22.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {#At least it looks good
+		name = otto_note.22.a
+		hidden_effect = {
+			ITA ={ 
+				country_event ={ 
+					id = otto_note.26
+					days = 3
+				}
+			}
+		}
+	}
+}
+country_event = { #negotiations with dictatorial ITA
+	id = otto_note.23
+	title = otto_note.23.t
+	desc = otto_note.23.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #We will unify regardless
+		name = otto_note.23.a
+		if ={ 
+			limit ={ 
+				ITA ={ 
+					is_ai = no
+				}
+			}
+			ITA ={ 
+				country_event = { 
+					id = otto_note.50
+					days = 15
+				}
+			}
+			set_global_flag = Otto_note_aligned_with_Reichspakt
+		}
+		else ={ 
+			ITA ={
+				country_event ={
+					id = otto_note.50
+					days = 15
+				}
+			}
+			set_global_flag = Otto_note_aligned_with_Reichspakt
+		}
+		
+	}
+	option = { #NO! We wont be the pawns of those that just interferred in unification!
+		name = otto_note.23.b
+	}
+}
+
+country_event ={ #Kick the Ambassador of Danubia?
+	id = otto_note.24
+	title = otto_note.24.t
+	desc = otto_note.24.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #We dont want anything to do with the Danubians!
+		name = otto_note.24.a
+		add_opinion_modifier ={ 
+			target = DNF
+			modifier = protest_action_strong
+		}
+	}
+	option ={ #It would go too far
+		name = otto_note.24.b
+	}
+}
+
+country_event = { #National Strike!
+	id = otto_note.25
+	title = otto_note.25.t
+	desc = otto_note.25.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {#Crack down on them!
+		name = otto_note.25.a
+		add_ideas = ITA_National_Strikes
+	}
+}
+
+country_event = { #the establishement of the CdFD (Concentrazione di Forze Democratiche - Concentration of Democratic Forces)
+	id = otto_note.26
+	title = otto_note.26.t
+	desc = otto_note.26.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #Search and destroy!
+		name = otto_note.26.a
+		add_ideas = ITA_CdFD_partisans
+	}
+}
+
+country_event = { #The Referendum
+	id = otto_note.50
+	title = otto_note.50.t
+	desc = otto_note.50.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #republic
+		name = otto_note.50.a
+		ITA ={ 
+			clear_accord_alignment = yes
+		}
+		ITA ={ 
+			clear_reichspakt_alignment = yes
+		}
+		ITA = {
+			every_core_state = { add_core_of = ITA }
+			every_unit_leader = {
+				set_nationality = ITA
+			}
+		}
+		ITA ={ 
+			change_tag_from = ITA
+		}
+		ITA ={ 
+			annex_country = {
+				target = ITA
+				transfer_troops = yes
+			}
+		}
+		change_italy_alignment = yes
+		ITA ={ 
+			country_event = {
+				id = otto_note.52
+				days = 0
+			}
+		}
+	}
+	option = { #monarchy
+		name = otto_note.50.b
+		ITA ={ 
+			clear_accord_alignment = yes
+		}
+		ITA ={ 
+			clear_reichspakt_alignment = yes
+		}
+		ITA = {
+			every_core_state = { add_core_of = ITA }
+			every_unit_leader = {
+				set_nationality = ITA
+			}
+		}
+		ITA ={ 
+			change_tag_from = ITA
+		}
+		ITA ={ 
+			annex_country = {
+				target = ITA
+				transfer_troops = yes
+			}
+		}
+		change_italy_alignment = yes
+		set_cosmetic_tag = ITA_italy
+		ITA ={ 
+			country_event = {
+				id = otto_note.52
+				days = 0
+			}
+		}
+		news_event = otto_note.53
+	}
+}
+
+country_event = { #Italian Counterintelligence rounds up the Austrian Coup
+	id = otto_note.51
+	title = otto_note.51.t
+	desc = otto_note.51.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #Both sides, however, decided the same: lets never speak of the matter again
+		name = otto_note.51.a
+	}
+}
+
+country_event ={ #elections
+	id = otto_note.52
+	title = otto_note.52.t
+	desc = otto_note.52.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = {
+		name = otto_note.52.a
+		Italy_remove_dictator = yes
+		increase_ruling_party_popularity_by_10 = yes
+		if ={ 
+			limit = { 
+				tag = ITA
+			}
+			ITA_parliament_seat_reload = yes
+		}
+		else ={ 
+			ITA_parliament_election_effect = yes
+		}
+	}
+}
+
+news_event = { #Italy reunited
+	id = otto_note.53
+	title = otto_note.53.t
+	desc = otto_note.53.d
+
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	option = { #What was once divided is united again
+		name = otto_note.53.a
+	}
+}

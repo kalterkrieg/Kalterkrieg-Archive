@@ -1,0 +1,1356 @@
+increase_accord_alignment = {
+	if = {
+		limit = {
+			check_variable = {
+				reichspakt_alignment_level > 0
+			}
+		}
+		clear_reichspakt_alignment = yes
+	}
+	if = {
+		limit = {
+			check_variable = {
+				nam_alignment_level > 0
+			}
+		}
+		clear_non_aligned_movement_alignment = yes
+	}
+	if = {
+		limit = {
+			check_variable = {
+				geacps_alignment_level > 0
+			}
+		}
+		clear_geacps_alignment = yes
+	}
+	alignment_notification = yes
+	if = {
+		limit = {
+			check_variable = {
+				accord_alignment_level < 4
+			}
+		}
+		if = {
+			limit = {
+				check_variable = {
+					accord_alignment_level = 3
+				}
+			}
+			ENT = {
+				diplomatic_relation = {
+					country = PREV
+					relation = guarantee
+					active = no
+				}
+				add_to_faction = PREV
+			}
+			add_to_array = {
+				array = global.accord_voting_country_array
+			}
+		}
+		else_if = {
+			limit = {
+				check_variable = {
+					accord_alignment_level = 2
+				}
+			}
+			ENT = {
+				give_guarantee = PREV
+			}
+		}
+		if = {
+			limit = {
+				NOT = {
+				has_opinion_modifier = kalterkrieg_trade
+				}
+			}
+			every_country = {
+				limit = {
+					is_in_or_aligned_with_reichspakt = yes
+				}
+				add_opinion_modifier = {
+					target = PREV
+					modifier = kalterkrieg_trade
+				}
+				add_opinion_modifier = {
+					target = PREV
+					modifier = kalterkrieg_opinion
+				}
+				reverse_add_opinion_modifier = {
+					target = PREV
+					modifier = kalterkrieg_trade
+				}
+				reverse_add_opinion_modifier = {
+					target = PREV
+					modifier = kalterkrieg_opinion
+				}
+			}
+		}
+		add_to_variable = {
+			accord_alignment_level = 1
+		}
+		for_each_scope_loop = {
+			array = subjects
+			add_to_variable = {
+				accord_alignment_level = 1
+			}
+		}
+	}
+	if = {
+		limit = {
+			check_variable = {
+				accord_alignment_level > 0
+			}
+		}
+		if = {
+			limit = {
+				NOT = {
+					is_in_tech_sharing_group = accord_research
+				}
+			}
+			add_to_tech_sharing_group = accord_research
+		}
+		# if = {
+		# 	limit = {
+		# 		NOT = {
+		# 			check_variable = {
+		# 				tech_sphere_owner = CAN
+		# 			}
+		# 		}
+		# 	}
+		# 	set_temp_variable = {
+		# 		temp_tech_sphere_owner = CAN
+		# 	}
+		# 	join_tech_sphere = yes
+		# }
+	}
+	force_update_map_mode = {
+		mapmode = KRG_alignment_map_mode
+	}
+}
+
+decrease_accord_alignment = {
+	alignment_notification = yes
+	if = {
+		limit = {
+			check_variable = {
+				accord_alignment_level > 0
+			}
+		}
+		if = {
+			limit = {
+				check_variable = {
+					accord_alignment_level = 4
+				}
+			}
+			leave_faction = yes
+			remove_from_array = {
+				array = global.accord_voting_country_array
+				value = PREV
+			}
+			CAN = {
+				give_guarantee = PREV
+			}
+		}
+		else_if = {
+			limit = {
+				check_variable = {
+					accord_alignment_level = 3
+				}
+			}
+			CAN = {
+				diplomatic_relation = {
+					country = PREV
+					relation = guarantee
+					active = no
+				}
+			}
+		}
+		subtract_from_variable = {
+			accord_alignment_level = 1
+		}
+		for_each_scope_loop = {
+			array = subjects
+			subtract_from_variable = {
+				accord_alignment_level = 1
+			}
+		}
+	}
+	if = {
+		limit = {
+			OR = {
+				check_variable = {
+					accord_alignment_level = 0
+				}
+			}
+		}
+		if = {
+			limit = {
+				is_in_tech_sharing_group = accord_research
+			}
+			remove_from_tech_sharing_group = accord_research
+		}
+		# if = {
+		# 	limit = {
+		# 		check_variable = {
+		# 			tech_sphere_owner = CAN
+		# 		}
+		# 	}
+		# 	leave_tech_sphere = yes
+		# }
+	}
+	force_update_map_mode = {
+		mapmode = KRG_alignment_map_mode
+	}
+}
+
+set_accord_alignment = {
+	if = {
+		limit = {
+			check_variable = {
+				reichspakt_alignment_level > 0
+			}
+		}
+		clear_reichspakt_alignment = yes
+	}
+	if = {
+		limit = {
+			check_variable = {
+				nam_alignment_level > 0
+			}
+		}
+		clear_non_aligned_movement_alignment = yes
+	}
+	if = {
+		limit = {
+			check_variable = {
+				geacps_alignment_level > 0
+			}
+		}
+		clear_geacps_alignment = yes
+	}
+	alignment_notification = yes
+	if = {
+		limit = {
+			check_variable = {
+				temp_level > 0
+			}
+		}
+		hidden_effect = {
+			clear_accord_alignment = yes
+		}
+		if = {
+			limit = {
+				check_variable = {
+					temp_level = 4
+				}
+			}
+			ENT = {
+				add_to_faction = PREV
+			}
+			add_to_array = {
+				array = global.accord_voting_country_array
+			}
+		}
+		else_if = {
+			limit = {
+				check_variable = {
+					temp_level = 3
+				}
+			}
+			ENT = {
+				give_guarantee = PREV
+			}
+		}
+		set_variable = {
+			accord_alignment_level = temp_level
+		}
+		for_each_scope_loop = {
+			array = subjects
+			set_variable = {
+				accord_alignment_level = temp_level
+			}
+		}
+	}
+	if = {
+		limit = {
+			OR = {
+				check_variable = {
+					accord_alignment_level > 0
+				}
+				check_variable = {
+					temp_level > 0
+				}
+			}
+		}
+		if = {
+			limit = {
+				NOT = {
+					is_in_tech_sharing_group = accord_research
+				}
+			}
+			add_to_tech_sharing_group = accord_research
+		}
+		# if = {
+		# 	limit = {
+		# 		NOT = {
+		# 			check_variable = {
+		# 				tech_sphere_owner = CAN
+		# 			}
+		# 		}
+		# 	}
+		# 	set_temp_variable = {
+		# 		temp_tech_sphere_owner = CAN
+		# 	}
+		# 	join_tech_sphere = yes
+		# }
+	}
+	if = {
+		limit = {
+			OR = {
+				check_variable = {
+					accord_alignment_level = 0
+				}
+				check_variable = {
+					temp_level = 0
+				}
+			}
+		}
+		if = {
+			limit = {
+				is_in_tech_sharing_group = accord_research
+			}
+			remove_from_tech_sharing_group = accord_research
+		}
+		# if = {
+		# 	limit = {
+		# 		check_variable = {
+		# 			tech_sphere_owner = CAN
+		# 		}
+		# 	}
+		# 	leave_tech_sphere = yes
+		# }
+	}
+	force_update_map_mode = {
+		mapmode = KRG_alignment_map_mode
+	}
+}
+
+clear_accord_alignment = {
+	alignment_notification = yes
+	if = {
+		limit = {
+			is_in_faction_with = ENT
+		}
+		leave_faction = yes
+		remove_from_array = {
+			array = global.accord_voting_country_array
+			value = PREV
+		}
+	}
+	if = {
+		limit = {
+			is_guaranteed_by = ENT
+		}
+		ENT = {
+			diplomatic_relation = {
+				country = PREV
+				relation = guarantee
+				active = no
+			}
+		}
+	}
+	clear_variable = accord_alignment_level
+	for_each_scope_loop = {
+		array = subjects
+		clear_variable = accord_alignment_level
+	}
+	if = {
+		limit = {
+			is_in_tech_sharing_group = accord_research
+		}
+		remove_from_tech_sharing_group = accord_research
+	}
+	# if = {
+	# 	limit = {
+	# 		check_variable = {
+	# 			tech_sphere_owner = ENT
+	# 		}
+	# 	}
+	# 	leave_tech_sphere = yes
+	# }
+	every_country = {
+		limit = {
+			is_in_or_aligned_with_reichspakt = yes
+		}
+		remove_opinion_modifier = {
+			target = PREV
+			modifier = kalterkrieg_trade
+		}
+		remove_opinion_modifier = {
+			target = PREV
+			modifier = kalterkrieg_opinion
+		}
+		THIS = {
+			remove_opinion_modifier = {
+				target = PREV
+				modifier = kalterkrieg_trade
+			}
+			remove_opinion_modifier = {
+				target = PREV
+				modifier = kalterkrieg_opinion
+			}
+		}
+	}
+	force_update_map_mode = {
+		mapmode = KRG_alignment_map_mode
+	}
+}
+
+increase_reichspakt_alignment = {
+	if = {
+		limit = {
+			check_variable = {
+				accord_alignment_level > 0
+			}
+		}
+		clear_accord_alignment = yes
+	}
+	if = {
+		limit = {
+			check_variable = {
+				nam_alignment_level > 0
+			}
+		}
+		clear_non_aligned_movement_alignment = yes
+	}
+	if = {
+		limit = {
+			check_variable = {
+				geacps_alignment_level > 0
+			}
+		}
+		clear_geacps_alignment = yes
+	}
+	alignment_notification = yes
+	if = {
+		limit = {
+			check_variable = {
+				reichspakt_alignment_level < 4
+			}
+		}
+		if = {
+			limit = {
+				check_variable = {
+					reichspakt_alignment_level = 3
+				}
+			}
+			GER = {
+				diplomatic_relation = {
+					country = PREV
+					relation = guarantee
+					active = no
+				}
+				add_to_faction = PREV
+			}
+		}
+		else_if = {
+			limit = {
+				check_variable = {
+					reichspakt_alignment_level = 2
+				}
+			}
+			GER = {
+				give_guarantee = PREV
+			}
+		}
+		if = {
+			limit = {
+				NOT = {
+				has_opinion_modifier = kalterkrieg_trade
+				}
+			}
+			every_country = {
+				limit = {
+					is_in_or_aligned_with_accord = yes
+				}
+				add_opinion_modifier = {
+					target = PREV
+					modifier = kalterkrieg_trade
+				}
+				add_opinion_modifier = {
+					target = PREV
+					modifier = kalterkrieg_opinion
+				}
+				reverse_add_opinion_modifier = {
+					target = PREV
+					modifier = kalterkrieg_trade
+				}
+				reverse_add_opinion_modifier = {
+					target = PREV
+					modifier = kalterkrieg_opinion
+				}
+			}
+		}
+		add_to_variable = {
+			reichspakt_alignment_level = 1
+		}
+		for_each_scope_loop = {
+			array = subjects
+			add_to_variable = {
+				reichspakt_alignment_level = 1
+			}
+		}
+	}
+	if = {
+		limit = {
+			check_variable = {
+				reichspakt_alignment_level > 0
+			}
+		}
+		if = {
+			limit = {
+				NOT = {
+					is_in_tech_sharing_group = reichspakt_research
+				}
+			}
+			add_to_tech_sharing_group = reichspakt_research
+			set_country_flag = reichspakt_research
+		}
+		# if = {
+		# 	limit = {
+		# 		NOT = {
+		# 			check_variable = {
+		# 				tech_sphere_owner = GER
+		# 			}
+		# 		}
+		# 	}
+		# 	set_temp_variable = {
+		# 		temp_tech_sphere_owner = GER
+		# 	}
+		# 	join_tech_sphere = yes
+		# }
+	}
+	force_update_map_mode = {
+		mapmode = KRG_alignment_map_mode
+	}
+}
+
+decrease_reichspakt_alignment = {
+	alignment_notification = yes
+	if = {
+		limit = {
+			check_variable = {
+				reichspakt_alignment_level > 0
+			}
+		}
+		if = {
+			limit = {
+				check_variable = {
+					reichspakt_alignment_level = 4
+				}
+			}
+			leave_faction = yes
+			GER = {
+				give_guarantee = PREV
+			}
+		}
+		else_if = {
+			limit = {
+				check_variable = {
+					reichspakt_alignment_level = 3
+				}
+			}
+			GER = {
+				diplomatic_relation = {
+					country = PREV
+					relation = guarantee
+					active = no
+				}
+			}
+		}
+		subtract_from_variable = {
+			reichspakt_alignment_level = 1
+		}
+		for_each_scope_loop = {
+			array = subjects
+			subtract_from_variable = {
+				reichspakt_alignment_level = 1
+			}
+		}
+	}
+	if = {
+		limit = {
+			check_variable = {
+				reichspakt_alignment_level = 0
+			}
+		}
+		if = {
+			limit = {
+				is_in_tech_sharing_group = reichspakt_research
+			}
+			remove_from_tech_sharing_group = reichspakt_research
+			clr_country_flag = reichspakt_research
+		}
+		# if = {
+		# 	limit = {
+		# 		check_variable = {
+		# 			tech_sphere_owner = GER
+		# 		}
+		# 	}
+		# 	leave_tech_sphere = yes
+		# }
+	}
+	force_update_map_mode = {
+		mapmode = KRG_alignment_map_mode
+	}
+}
+
+set_reichspakt_alignment = {
+	if = {
+		limit = {
+			check_variable = {
+				accord_alignment_level > 0
+			}
+		}
+		clear_accord_alignment = yes
+		
+	}
+	if = {
+		limit = {
+			check_variable = {
+				nam_alignment_level > 0
+			}
+		}
+		clear_non_aligned_movement_alignment = yes
+	}
+	if = {
+		limit = {
+			check_variable = {
+				geacps_alignment_level > 0
+			}
+		}
+		clear_geacps_alignment = yes
+	}
+	alignment_notification = yes
+	if = {
+		limit = {
+			check_variable = {
+				temp_level > 0
+			}
+		}
+		hidden_effect = {
+			clear_reichspakt_alignment = yes
+		}
+		if = {
+			limit = {
+				check_variable = {
+					temp_level = 4
+				}
+			}
+			GER = {
+				add_to_faction = PREV
+			}
+		}
+		else_if = {
+			limit = {
+				check_variable = {
+					temp_level = 3
+				}
+			}
+			GER = {
+				give_guarantee = PREV
+			}
+		}
+		set_variable = {
+			reichspakt_alignment_level = temp_level
+		}
+		for_each_scope_loop = {
+			array = subjects
+			set_variable = {
+				reichspakt_alignment_level = temp_level
+			}
+		}
+	}
+	if = {
+		limit = {
+			OR = {
+				check_variable = {
+					reichspakt_alignment_level > 0
+				}
+				check_variable = {
+					temp_level > 0
+				}
+			}
+		}
+		if = {
+			limit = {
+				NOT = {
+					is_in_tech_sharing_group = reichspakt_research
+				}
+			}
+			add_to_tech_sharing_group = reichspakt_research
+			set_country_flag = reichspakt_research
+		}
+		# if = {
+		# 	limit = {
+		# 		NOT = {
+		# 			check_variable = {
+		# 				tech_sphere_owner = GER
+		# 			}
+		# 		}
+		# 	}
+		# 	set_temp_variable = {
+		# 		temp_tech_sphere_owner = GER
+		# 	}
+		# 	join_tech_sphere = yes
+		# }
+	}
+	if = {
+		limit = {
+			OR = {
+				check_variable = {
+					reichspakt_alignment_level = 0
+				}
+				check_variable = {
+					temp_level = 0
+				}
+			}
+		}
+		if = {
+			limit = {
+				is_in_tech_sharing_group = reichspakt_research
+			}
+			remove_from_tech_sharing_group = reichspakt_research
+			clr_country_flag = reichspakt_research
+		}
+		# if = {
+		# 	limit = {
+		# 		check_variable = {
+		# 			tech_sphere_owner = GER
+		# 		}
+		# 	}
+		# 	leave_tech_sphere = yes
+		# }
+	}
+	force_update_map_mode = {
+		mapmode = KRG_alignment_map_mode
+	}
+}
+
+clear_reichspakt_alignment = {
+	alignment_notification = yes
+	if = {
+		limit = {
+			is_in_faction_with = GER
+		}
+		leave_faction = yes
+	}
+	if = {
+		limit = {
+			is_guaranteed_by = GER
+		}
+		GER = {
+			diplomatic_relation = {
+				country = PREV
+				relation = guarantee
+				active = no
+			}
+		}
+	}
+	clear_variable = reichspakt_alignment_level
+	for_each_scope_loop = {
+		array = subjects
+		clear_variable = reichspakt_alignment_level
+	}
+	if = {
+		limit = {
+			is_in_tech_sharing_group = reichspakt_research
+		}
+		remove_from_tech_sharing_group = reichspakt_research
+		clr_country_flag = reichspakt_research
+	}
+	# if = {
+	# 	limit = {
+	# 		check_variable = {
+	# 			tech_sphere_owner = GER
+	# 		}
+	# 	}
+	# 	leave_tech_sphere = yes
+	# }
+	MIT_remove_from_mitteleuropa = yes
+	every_country = {
+		limit = {
+			is_in_or_aligned_with_accord = yes
+		}
+		remove_opinion_modifier = {
+			target = PREV
+			modifier = kalterkrieg_trade
+		}
+		THIS = {
+			remove_opinion_modifier = {
+				target = PREV
+				modifier = kalterkrieg_trade
+			}
+		}
+	}
+	force_update_map_mode = {
+		mapmode = KRG_alignment_map_mode
+	}
+}
+
+increase_non_aligned_movement_alignment = {
+	if = {
+		limit = {
+			check_variable = {
+				accord_alignment_level > 0
+			}
+		}
+		clear_accord_alignment = yes
+	}
+	if = {
+		limit = {
+			check_variable = {
+				reichspakt_alignment_level > 0
+			}
+		}
+		clear_reichspakt_alignment = yes
+	}
+	alignment_notification = yes
+	if = {
+		limit = {
+			check_variable = {
+				nam_alignment_level < 4
+			}
+		}
+		if = {
+			limit = {
+				check_variable = {
+					nam_alignment_level = 3
+				}
+			}
+			DNF = {
+				diplomatic_relation = {
+					country = PREV
+					relation = guarantee
+					active = no
+				}
+				add_to_faction = PREV
+			}
+		}
+		else_if = {
+			limit = {
+				check_variable = {
+					nam_alignment_level = 2
+				}
+			}
+			DNF = {
+				give_guarantee = PREV
+			}
+		}
+		add_to_variable = {
+			nam_alignment_level = 1
+		}
+		for_each_scope_loop = {
+			array = subjects
+			add_to_variable = {
+				nam_alignment_level = 1
+			}
+		}
+	}
+	force_update_map_mode = {
+		mapmode = KRG_alignment_map_mode
+	}
+}
+
+decrease_non_aligned_movement_alignment = {
+	alignment_notification = yes
+	if = {
+		limit = {
+			check_variable = {
+				nam_alignment_level > 0
+			}
+		}
+		if = {
+			limit = {
+				check_variable = {
+					nam_alignment_level = 4
+				}
+			}
+			leave_faction = yes
+			DNF = {
+				give_guarantee = PREV
+			}
+		}
+		else_if = {
+			limit = {
+				check_variable = {
+					nam_alignment_level = 3
+				}
+			}
+			DNF = {
+				diplomatic_relation = {
+					country = PREV
+					relation = guarantee
+					active = no
+				}
+			}
+		}
+		subtract_from_variable = {
+			nam_alignment_level = 1
+		}
+		for_each_scope_loop = {
+			array = subjects
+			subtract_from_variable = {
+				nam_alignment_level = 1
+			}
+		}
+	}
+	force_update_map_mode = {
+		mapmode = KRG_alignment_map_mode
+	}
+}
+
+set_non_aligned_movement_alignment = {
+	if = {
+		limit = {
+			check_variable = {
+				accord_alignment_level > 0
+			}
+		}
+		clear_accord_alignment = yes
+	}
+	if = {
+		limit = {
+			check_variable = {
+				reichspakt_alignment_level > 0
+			}
+		}
+		clear_reichspakt_alignment = yes
+	}
+	if = {
+		limit = {
+			check_variable = {
+				geacps_alignment_level > 0
+			}
+		}
+		clear_geacps_alignment = yes
+	}
+	alignment_notification = yes
+	if = {
+		limit = {
+			check_variable = {
+				temp_level > 0
+			}
+		}
+		hidden_effect = {
+			clear_non_aligned_movement_alignment = yes
+		}
+		if = {
+			limit = {
+				check_variable = {
+					temp_level = 4
+				}
+			}
+			DNF = {
+				add_to_faction = PREV
+			}
+		}
+		else_if = {
+			limit = {
+				check_variable = {
+					temp_level = 3
+				}
+			}
+			DNF = {
+				give_guarantee = PREV
+			}
+		}
+		set_variable = {
+			nam_alignment_level = temp_level
+		}
+		for_each_scope_loop = {
+			array = subjects
+			set_variable = {
+				nam_alignment_level = temp_level
+			}
+		}
+	}
+	force_update_map_mode = {
+		mapmode = KRG_alignment_map_mode
+	}
+}
+
+clear_non_aligned_movement_alignment = {
+	alignment_notification = yes
+	if = {
+		limit = {
+			check_variable = {
+				nam_alignment_level = 4
+			}
+		}
+		leave_faction = yes
+	}
+	else_if = {
+		limit = {
+			check_variable = {
+				nam_alignment_level = 3
+			}
+		}
+		DNF = {
+			diplomatic_relation = {
+				country = PREV
+				relation = guarantee
+				active = no
+			}
+		}
+	}
+	clear_variable = nam_alignment_level
+	for_each_scope_loop = {
+		array = subjects
+		clear_variable = nam_alignment_level
+	}
+	force_update_map_mode = {
+		mapmode = KRG_alignment_map_mode
+	}
+}
+
+increase_geacps_alignment = {
+	if = {
+		limit = {
+			check_variable = {
+				accord_alignment_level > 0
+			}
+		}
+		clear_accord_alignment = yes
+	}
+	if = {
+		limit = {
+			check_variable = {
+				reichspakt_alignment_level > 0
+			}
+		}
+		clear_reichspakt_alignment = yes
+	}
+	if = {
+		limit = {
+			check_variable = {
+				nam_alignment_level > 0
+			}
+		}
+		clear_non_aligned_movement_alignment = yes
+	}
+	alignment_notification = yes
+	if = {
+		limit = {
+			check_variable = {
+				geacps_alignment_level < 4
+			}
+		}
+		if = {
+			limit = {
+				check_variable = {
+					geacps_alignment_level = 3
+				}
+			}
+			JAP = {
+				diplomatic_relation = {
+					country = PREV
+					relation = guarantee
+					active = no
+				}
+				add_to_faction = PREV
+			}
+		}
+		else_if = {
+			limit = {
+				check_variable = {
+					geacps_alignment_level = 2
+				}
+			}
+			JAP = {
+				give_guarantee = PREV
+			}
+		}
+		add_to_variable = {
+			geacps_alignment_level = 1
+		}
+		for_each_scope_loop = {
+			array = subjects
+			add_to_variable = {
+				geacps_alignment_level = 1
+			}
+		}
+	}
+	if = {
+		limit = {
+			check_variable = {
+				geacps_alignment_level > 0
+			}
+		}
+		if = {
+			limit = {
+				NOT = {
+					is_in_tech_sharing_group = accord_research
+				}
+			}
+			add_to_tech_sharing_group = accord_research
+		}
+		# if = {
+		# 	limit = {
+		# 		NOT = {
+		# 			check_variable = {
+		# 				tech_sphere_owner = CAN
+		# 			}
+		# 		}
+		# 	}
+		# 	set_temp_variable = {
+		# 		temp_tech_sphere_owner = CAN
+		# 	}
+		# 	join_tech_sphere = yes
+		# }
+	}
+	force_update_map_mode = {
+		mapmode = KRG_alignment_map_mode
+	}
+}
+
+decrease_geacps_alignment = {
+	alignment_notification = yes
+	if = {
+		limit = {
+			check_variable = {
+				geacps_alignment_level > 0
+			}
+		}
+		if = {
+			limit = {
+				check_variable = {
+					geacps_alignment_level = 4
+				}
+			}
+			leave_faction = yes
+			JAP = {
+				give_guarantee = PREV
+			}
+		}
+		else_if = {
+			limit = {
+				check_variable = {
+					geacps_alignment_level = 3
+				}
+			}
+			JAP = {
+				diplomatic_relation = {
+					country = PREV
+					relation = guarantee
+					active = no
+				}
+			}
+		}
+		subtract_from_variable = {
+			geacps_alignment_level = 1
+		}
+		for_each_scope_loop = {
+			array = subjects
+			subtract_from_variable = {
+				geacps_alignment_level = 1
+			}
+		}
+	}
+	force_update_map_mode = {
+		mapmode = KRG_alignment_map_mode
+	}
+}
+
+set_geacps_alignment = {
+	if = {
+		limit = {
+			check_variable = {
+				accord_alignment_level > 0
+			}
+		}
+		clear_accord_alignment = yes
+	}
+	if = {
+		limit = {
+			check_variable = {
+				reichspakt_alignment_level > 0
+			}
+		}
+		clear_reichspakt_alignment = yes
+	}
+	if = {
+		limit = {
+			check_variable = {
+				nam_alignment_level > 0
+			}
+		}
+		clear_non_aligned_movement_alignment = yes
+	}
+	alignment_notification = yes
+	if = {
+		limit = {
+			check_variable = {
+				temp_level > 0
+			}
+		}
+		hidden_effect = {
+			clear_geacps_alignment = yes
+		}
+		if = {
+			limit = {
+				check_variable = {
+					temp_level = 4
+				}
+			}
+			JAP = {
+				add_to_faction = PREV
+			}
+		}
+		else_if = {
+			limit = {
+				check_variable = {
+					temp_level = 3
+				}
+			}
+			JAP = {
+				give_guarantee = PREV
+			}
+		}
+		set_variable = {
+			geacps_alignment_level = temp_level
+		}
+		for_each_scope_loop = {
+			array = subjects
+			set_variable = {
+				geacps_alignment_level = temp_level
+			}
+		}
+	}
+	if = {
+		limit = {
+			check_variable = {
+				geacps_alignment_level > 0
+			}
+		}
+		if = {
+			limit = {
+				NOT = {
+					is_in_tech_sharing_group = accord_research
+				}
+			}
+			add_to_tech_sharing_group = accord_research
+		}
+		# if = {
+		# 	limit = {
+		# 		NOT = {
+		# 			check_variable = {
+		# 				tech_sphere_owner = CAN
+		# 			}
+		# 		}
+		# 	}
+		# 	set_temp_variable = {
+		# 		temp_tech_sphere_owner = CAN
+		# 	}
+		# 	join_tech_sphere = yes
+		# }
+	}
+	force_update_map_mode = {
+		mapmode = KRG_alignment_map_mode
+	}
+}
+
+clear_geacps_alignment = {
+	alignment_notification = yes
+	if = {
+		limit = {
+			check_variable = {
+				geacps_alignment_level = 4
+			}
+		}
+		leave_faction = yes
+	}
+	else_if = {
+		limit = {
+			check_variable = {
+				geacps_alignment_level = 3
+			}
+		}
+		JAP = {
+			diplomatic_relation = {
+				country = PREV
+				relation = guarantee
+				active = no
+			}
+		}
+	}
+	clear_variable = geacps_alignment_level
+	for_each_scope_loop = {
+		array = subjects
+		clear_variable = geacps_alignment_level
+	}
+	force_update_map_mode = {
+		mapmode = KRG_alignment_map_mode
+	}
+	if = {
+		limit = {
+			is_in_tech_sharing_group = geacps_research
+		}
+		remove_from_tech_sharing_group = geacps_research
+	}
+	# if = {
+	# 	limit = {
+	# 		check_variable = {
+	# 			tech_sphere_owner = JAP
+	# 		}
+	# 	}
+	# 	leave_tech_sphere = yes
+	# }
+	force_update_map_mode = {
+		mapmode = KRG_alignment_map_mode
+	}
+}
+
+alignment_notification = {
+	set_variable = {
+		global.alignment_notification_var = THIS
+	}
+	log = "[?global.alignment_notification_var.GetName]"
+	every_country = {
+		limit = {
+			is_ai = no
+		}
+		set_country_flag = KRG_alignment_notification
+	}
+	add_to_variable = {
+		global.KRG_alignment_notification_dirty = 1
+	}
+}
+
+clear_all_alignments = {
+	if = {
+		limit = {
+			has_variable = reichspakt_alignment_level
+		}
+		clear_reichspakt_alignment = yes
+	}
+	if = {
+		limit = {
+			has_variable = geacps_alignment_level
+		}
+		clear_geacps_alignment = yes
+	}
+	if = {
+		limit = {
+			has_variable = accord_alignment_level
+		}
+		clear_accord_alignment = yes
+	}
+	if = {
+		limit = {
+			has_variable = nam_alignment_level
+		}
+		clear_non_aligned_movement_alignment = yes
+	}
+}

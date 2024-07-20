@@ -1,0 +1,1162 @@
+add_namespace = krg_ser
+
+country_event = { #Petar Zivkovic Passes Away
+	id = krg_ser.0
+	title = krg_ser.0.t
+	desc = krg_ser.0.d
+
+	is_triggered_only = yes
+	#fire_only_once = no
+	picture = GFX_ce_SER_zivkovic
+
+	option = {
+		name = krg_ser.0.a
+		remove_ideas = {
+			SER_Petar_Zivkovic_hog_pau
+			SER_Bogoljub_Jevtic_fm_pau
+			SER_Milan_Srskic_em_pau
+			SER_Milan_Acimovic_im_pau
+		}
+		add_ideas = {
+			SER_Bogoljub_Jevtic_hog_pau
+			SER_Bozidar_Puric_fm_ade
+			SER_Milorad_Djordjevic_em_pau
+			SER_Milan_Srskic_em_pau
+		}
+		news_event = {
+			id = krg_ser_news.1
+		}
+		hidden_effect = {
+			country_event = {
+				id = krg_ser.1
+				days = 870
+			}
+		}
+	}
+}
+
+country_event = { #The Proposition
+	id = krg_ser.1
+	title = krg_ser.1.t
+	desc = krg_ser.1.d
+
+	is_triggered_only = yes
+	#fire_only_once = no
+	picture = GFX_ce_meeting
+
+	option = {
+		name = krg_ser.1.a
+		ai_chance  = {
+			base = 60
+			modifier = {
+				OR = {
+					has_game_rule = {
+						rule = SERBIA_PATHS
+						option = RULE_OPTION_SERBIA_PETAR_ACCORD
+					}
+					has_game_rule = {
+						rule = SERBIA_PATHS
+						option = RULE_OPTION_SERBIA_PETAR_DANUBIA
+					}
+				}
+				
+				factor = 1000
+			}
+		}
+		add_political_power = -50
+		add_popularity = {
+			ideology = authoritarian_democrat
+			popularity = 0.1
+		}
+		add_popularity = {
+			ideology = paternal_autocrat
+			popularity = -0.1
+		}
+		hidden_effect = {
+			country_event = {
+				id = krg_ser.2
+				days = 20
+			}
+		}
+	}
+	option = {
+		name = krg_ser.1.b
+		ai_chance  = {
+			base = 40
+			modifier = {
+				OR = {
+					has_game_rule = {
+						rule = SERBIA_PATHS
+						option = RULE_OPTION_SERBIA_DJILAS
+					}
+					has_game_rule = {
+						rule = SERBIA_PATHS
+						option = RULE_OPTION_SERBIA_SAD_PETAR
+					}
+				}
+				
+				factor = 1000
+			}
+		}
+		hidden_effect = {
+			country_event = {
+				id = krg_ser.11
+				days = 870
+			}	
+		}
+	}
+}
+
+country_event = { #Contacting the Accord
+	id = krg_ser.2
+	title = krg_ser.2.t
+	desc = krg_ser.2.d
+
+	is_triggered_only = yes
+	#fire_only_once = no
+	picture = GFX_ce_SER_paul
+
+	option = {
+		name = krg_ser.2.a
+		CAN = {
+			country_event = {
+				id = krg_ser.3
+				days = 14
+			}
+		}
+	}
+}
+
+country_event = { #A Telegram from Belgrade
+	id = krg_ser.3
+	title = krg_ser.3.t
+	desc = krg_ser.3.d
+
+	is_triggered_only = yes
+	#fire_only_once = no
+	picture = GFX_ce_SER_paul
+
+	option = {
+		name = krg_ser.3.a
+		ai_chance  = {
+			base = 85
+			modifier = {
+				has_game_rule = {
+					rule = SERBIA_PATHS
+					option = RULE_OPTION_SERBIA_PETAR_ACCORD
+				}
+				factor = 1000
+			}
+		}
+		add_political_power = -50
+		add_command_power = -50
+		add_equipment_to_stockpile = {
+			type = infantry_equipment
+			amount = -2000
+		}
+		hidden_effect = {
+			SER = {
+				country_event = {
+					id = krg_ser.4
+					days = 71
+				}
+			}
+		}
+	}
+	
+	option = {
+		name = krg_ser.3.b
+		ai_chance  = {
+			base = 15
+			modifier = {
+				has_game_rule = {
+					rule = SERBIA_PATHS
+					option = RULE_OPTION_SERBIA_PETAR_DANUBIA
+				}
+				factor = 1000
+			}
+		}
+		hidden_effect = {
+			SER = {
+				country_event = {
+					id = krg_ser.6
+					days = 5
+				}
+			}
+		}
+	}
+}
+
+country_event = { #The Day of the Coup
+	id = krg_ser.4
+	title = krg_ser.4.t
+	desc = krg_ser.4.d
+
+	is_triggered_only = yes
+	#fire_only_once = no
+	picture = GFX_ce_SER_treaty
+
+	option = {
+		name = krg_ser.4.a
+		set_politics = {
+	        ruling_party = authoritarian_democrat
+			election_frequency = 48
+			elections_allowed = no
+        }
+		set_popularities = {
+			authoritarian_socialist = 2
+			radical_socialist = 11
+			social_democrat = 8
+			revolutionary_republican = 6
+			social_liberal = 4
+			market_liberal = 25
+			social_conservative = 6
+			authoritarian_democrat = 25
+			paternal_autocrat = 10
+			national_populist = 3
+		}
+		coal_rev_all = yes
+		news_event = {
+			id = krg_ser_news.2
+		}
+		hidden_effect = {
+			CAN = {
+				country_event = {
+					id = krg_ser.5
+					days = 150
+				}
+			}
+			country_event = {
+				id = krg_ser.30
+				days = 450
+			}
+		}
+		if = { 
+			limit = {
+				has_idea = SER_november_6th_dictatorship
+			}
+			remove_ideas = SER_november_6th_dictatorship
+		}
+	}
+}
+
+country_event = { #Serbia and Albania wish to join the Accord
+	id = krg_ser.5
+	title = krg_ser.5.t
+	desc = krg_ser.5.d
+
+	is_triggered_only = yes
+	#fire_only_once = no
+	picture = GFX_ce_SER_treaty
+
+	option = {
+		ai_chance  = {
+			base = 100
+		}
+		name = krg_ser.5.a
+		SER = {
+			set_temp_variable =  { temp_level = 4 }
+			set_accord_alignment = yes
+		}
+		add_to_array = { global.influence_log = 23 }
+		add_to_array = { global.influence_log_val = 10 }
+		add_to_array = { global.influence_log = 24 }
+		add_to_array = { global.influence_log_val = 5 }
+		influence_recalc = yes
+		news_event = {
+			id = krg_ser_news.3
+		}
+		hidden_effect = {
+			ALB = {
+				set_politics = {
+				ruling_party = authoritarian_democrat
+				election_frequency = 48
+				elections_allowed = no
+				}
+				add_popularity = {
+					ideology = authoritarian_democrat
+					popularity = 0.12
+				}
+				add_popularity = {
+					ideology = paternal_autocrat
+					popularity = -0.12
+				}
+			}
+		}
+	}
+}
+
+country_event = { #A Deal with the Devil?
+	id = krg_ser.6
+	title = krg_ser.6.t
+	desc = krg_ser.6.d
+
+	is_triggered_only = yes
+	#fire_only_once = no
+	picture = GFX_ce_SER_treaty
+
+	option = {
+		name = krg_ser.6.a
+		ai_chance  = {
+			base = 50
+		}
+		add_political_power = -100
+		add_stability = -0.05
+		DNF = {
+			country_event = {
+				id = krg_ser.7
+				days = 14
+			}
+		}
+	}
+	option = { #No, Option only really useful once the Accordist voting thing is added
+		name = krg_ser.6.b
+		ai_chance  = {
+			base = 50
+		}
+	}
+}
+
+country_event = { #A Telegram from Belgrade (Danubia)
+	id = krg_ser.7
+	title = krg_ser.7.t
+	desc = krg_ser.7.d
+
+	is_triggered_only = yes
+	#fire_only_once = no
+	picture = GFX_ce_SER_treaty
+
+	option = {
+		name = krg_ser.7.a
+		ai_chance  = {
+			base = 50
+			modifier = {
+				has_game_rule = {
+					rule = SERBIA_PATHS
+					option = RULE_OPTION_SERBIA_PETAR_DANUBIA
+				}
+				factor = 1000
+			}
+		}
+		add_political_power = -50
+		add_command_power = -50
+		add_equipment_to_stockpile = {
+			type = infantry_equipment
+			amount = -2000
+		}
+		hidden_effect = {
+			SER = {
+				country_event = {
+					id = krg_ser.8
+					days = 51
+				}
+			}
+		}
+	}
+	option = {
+		name = krg_ser.7.b
+		ai_chance  = {
+			base = 50
+		}
+		hidden_effect = {
+			SER = {
+				country_event = {
+					id = krg_ser.10
+					days = 300
+				}
+			}
+		}
+	}
+}
+
+country_event = { #The Day of the Coup 2
+	id = krg_ser.8
+	title = krg_ser.8.t
+	desc = krg_ser.8.d
+
+	is_triggered_only = yes
+	#fire_only_once = no
+
+	option = {
+		name = krg_ser.8.a
+		set_politics = {
+	        ruling_party = authoritarian_democrat
+			election_frequency = 48
+			elections_allowed = no
+        }
+		set_popularities = {
+			authoritarian_socialist = 2
+			radical_socialist = 11
+			social_democrat = 8
+			revolutionary_republican = 6
+			social_liberal = 4
+			market_liberal = 25
+			social_conservative = 6
+			authoritarian_democrat = 25
+			paternal_autocrat = 10
+			national_populist = 3
+		}
+		coal_rev_all = yes
+		news_event = {
+			id = krg_ser_news.4
+		}
+		hidden_effect = {
+			DNF = {
+				set_country_flag = DNF_Serbia_coup_backed
+			}
+			country_event = {
+				id = krg_ser.30
+				days = 450
+			}
+		}
+		if = { 
+			limit = {
+				has_idea = SER_november_6th_dictatorship
+			}
+			remove_ideas = SER_november_6th_dictatorship
+		}
+	}
+}
+
+country_event = { #Sarajevo Conference (until developed in Danubia)
+	id = krg_ser.9
+	title = krg_ser.9.t
+	desc = krg_ser.9.d
+
+	is_triggered_only = yes
+	#fire_only_once = no
+
+	option = {
+		name = krg_ser.9.a
+		ai_chance  = {
+			base = 50
+		}
+		news_event = {
+			id = krg_ser_news.5
+		}
+	}
+	option = {
+		name = krg_ser.9.b
+		ai_chance  = {
+			base = 50
+		}
+		news_event = {
+			id = krg_ser_news.6
+		}
+	}
+}
+
+country_event = { #Albanian Elections
+	id = krg_ser.10
+	title = krg_ser.10.t
+	desc = krg_ser.10.d
+
+	is_triggered_only = yes
+	#fire_only_once = no
+
+	option = {
+		name = krg_ser.10.a
+		ai_chance  = {
+			base = 65
+		}
+		SER = {
+			end_puppet = ALB
+		}
+		set_politics = {
+	        ruling_party = social_conservative
+			election_frequency = 48
+			elections_allowed = yes
+        }
+		set_popularities = {
+			authoritarian_socialist = 15
+			radical_socialist = 2
+			social_democrat = 13
+			revolutionary_republican = 6
+			social_liberal = 5
+			market_liberal = 1
+			social_conservative = 30
+			authoritarian_democrat = 24
+			paternal_autocrat = 2
+			national_populist = 0
+		}
+	}
+	option = {
+		name = krg_ser.10.b
+		ai_chance  = {
+			base = 35
+		}
+		SER = {
+			end_puppet = ALB
+		}
+		set_politics = {
+	        ruling_party = social_democrat
+			election_frequency = 48
+			elections_allowed = yes
+        }
+		set_popularities = {
+			authoritarian_socialist = 15
+			radical_socialist = 2
+			social_democrat = 30
+			revolutionary_republican = 6
+			social_liberal = 5
+			market_liberal = 1
+			social_conservative = 19
+			authoritarian_democrat = 18
+			paternal_autocrat = 2
+			national_populist = 0
+		}
+	}
+}
+
+country_event = { #The Montenegrin Uprising
+	id = krg_ser.11
+	title = krg_ser.11.t
+	desc = krg_ser.11.d
+
+	is_triggered_only = yes
+	#fire_only_once = no
+
+	option = {
+		name = krg_ser.11.a
+		105 = {
+			set_demilitarized_zone = yes
+		}
+		country_event = {
+			id = krg_ser.12
+			days = 100
+		}
+	}
+}
+
+country_event = { #Revolution
+	id = krg_ser.12
+	title = krg_ser.12.t
+	desc = krg_ser.12.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_ser.12" }
+
+	is_triggered_only = yes
+
+	option = { #Revolutionaries Win
+		name = krg_ser.12.a
+		ai_chance  = {
+			base = 40
+			modifier = {
+				has_game_rule = {
+					rule = SERBIA_PATHS
+					option = RULE_OPTION_SERBIA_DJILAS
+				}
+				factor = 1000
+			}
+		}
+		set_politics = {
+	        ruling_party = radical_socialist
+			election_frequency = 48
+			elections_allowed = no
+        }
+		set_popularities = {
+			authoritarian_socialist = 7
+			radical_socialist = 41
+			social_democrat = 13
+			revolutionary_republican = 11
+			social_liberal = 3
+			market_liberal = 16
+			social_conservative = 3
+			authoritarian_democrat = 1
+			paternal_autocrat = 3
+			national_populist = 2
+		}
+		coal_rev_all = yes
+		swap_ideas = {
+			remove_idea = krg_authoritarian_system
+			add_idea = krg_peoples_democracy
+		}
+		coal_add_auth_soc = yes
+		news_event = {
+			id = krg_ser_news.7
+		}
+		end_puppet = ALB
+		set_cosmetic_tag = SER_Revolutionary
+		hidden_effect = {
+			country_event = { #End of the Belgrade Pact
+				id = krg_ser.15
+				days = 7 
+			}
+			country_event = {
+				id = krg_ser.20
+				days = 30
+			}
+			country_event = {
+				id = krg_ser.25
+				days = 27
+			}
+		}
+		if = { 
+			limit = {
+				has_idea = SER_november_6th_dictatorship
+			}
+			remove_ideas = SER_november_6th_dictatorship
+		}
+	}
+	option = {
+		name = krg_ser.12.b
+		ai_chance  = {
+			base = 60
+			modifier = {
+				has_game_rule = {
+					rule = SERBIA_PATHS
+					option = RULE_OPTION_SERBIA_SAD_PETAR
+				}
+				factor = 1000
+			}
+		}
+		hidden_effect = { 
+			country_event = {
+				id = krg_ser.13
+				days = 100
+			}
+		}
+	}
+}
+
+country_event = { #The Volunteer Corps win
+	id = krg_ser.13
+	title = krg_ser.13.t
+	desc = krg_ser.13.d
+
+	is_triggered_only = yes
+	#fire_only_once = no
+
+	option = {
+		name = krg_ser.13.a
+		add_popularity = {
+			ideology = radical_socialist
+			popularity = -0.1
+		}
+		add_popularity = {
+			ideology = national_populist
+			popularity = 0.1
+		}
+		hidden_effect = { 
+			country_event = {
+				id = krg_ser.14
+				days = 20
+			}
+		}
+	}
+}
+
+country_event = { #Ljotovici march
+	id = krg_ser.14
+	title = krg_ser.14.t
+	desc = krg_ser.14.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_ser.14" }
+
+	is_triggered_only = yes
+
+	option = { #Reactionaries Win
+		name = krg_ser.14.a
+		set_politics = {
+	        ruling_party = national_populist
+			election_frequency = 48
+			elections_allowed = no
+        }
+		set_popularities = {
+			authoritarian_socialist = 2
+			radical_socialist = 4
+			social_democrat = 2
+			revolutionary_republican = 1
+			social_liberal = 2
+			market_liberal = 21
+			social_conservative = 4
+			authoritarian_democrat = 2
+			paternal_autocrat = 18
+			national_populist = 44
+		}
+		coal_rev_all = yes
+		swap_ideas = {
+			remove_idea = krg_authoritarian_system
+			add_idea = krg_fanatical_dictatorship
+		}
+		news_event = {
+			id = krg_ser_news.8
+		}
+		hidden_effect = {
+			country_event = { #End of the Belgrade Pact
+				id = krg_ser.15
+				days = 7 
+			}
+			country_event = { #Albania breaks away
+				id = krg_ser.16
+				days = 21 
+			}
+		}
+		if = { 
+			limit = {
+				has_idea = SER_november_6th_dictatorship
+			}
+			remove_ideas = SER_november_6th_dictatorship
+		}
+	}
+}
+
+
+country_event = { #End of the Belgrade Pact
+	id = krg_ser.15
+	title = krg_ser.15.t
+	desc = krg_ser.15.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_ser.15" }
+
+	is_triggered_only = yes
+
+	option = { 
+		name = krg_ser.15.a
+		ROM = {
+			remove_ideas = ROM_idea_belgrade_pact
+			country_event = {
+				id = krg_ser.151 #notify ROM
+			}
+		}
+		GRE = {
+			remove_ideas = GRE_belgrade_pact
+			country_event = {
+				id = krg_ser.152 # notify GRE
+			}
+		}
+		SER = {
+			remove_ideas = SER_idea_belgrade_pact
+		}
+	}
+}
+
+country_event = { #End of the Belgrade Pact ROM
+	id = krg_ser.151
+	title = krg_ser.151.t
+	desc = krg_ser.151.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_ser.151" }
+
+	is_triggered_only = yes
+
+	option = { 
+		name = krg_ser.151.a
+	}
+}
+
+country_event = { #End of the Belgrade Pact GRE
+	id = krg_ser.152
+	title = krg_ser.152.t
+	desc = krg_ser.152.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_ser.152" }
+
+	is_triggered_only = yes
+
+	option = { 
+		name = krg_ser.152.a
+	}
+}
+
+country_event = { #Albania breaks away
+	id = krg_ser.16
+	title = krg_ser.16.t
+	desc = krg_ser.16.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_ser.16" }
+
+	is_triggered_only = yes
+
+	option = { 
+		name = krg_ser.16.a
+		end_puppet = ALB
+		news_event = {
+			id = krg_ser_news.9
+		}
+		ALB = {
+			retire_character = ALB_Gjon_Markagjoni
+			
+		}
+		hidden_effect = {
+			country_event = {
+				id = krg_ser.17
+				days = 14
+			}
+		}
+	}
+}
+
+country_event = { #Serbia goes after Albania
+	id = krg_ser.17
+	title = krg_ser.17.t
+	desc = krg_ser.17.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_ser.17" }
+
+	is_triggered_only = yes
+
+	option = { 
+		name = krg_ser.17.a #A short war
+		declare_war_on = {
+			target = ALB
+			type = puppet_wargoal_focus
+		}
+		news_event = {
+			id = krg_ser_news.10
+		}
+		hidden_effect = {
+			GRE = {
+				country_event = {
+					id = krg_ser.18
+					days = 2
+				}
+			}
+		}
+	}
+	option = {
+		name = krg_ser.17.b #Let them go
+		add_political_power = -50
+		add_popularity = {
+			ideology = national_populist
+			popularity = -0.05
+		}
+	}
+}
+
+country_event = { #Greece Reacts
+	id = krg_ser.18
+	title = krg_ser.18.t
+	desc = krg_ser.18.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_ser.18" }
+
+	is_triggered_only = yes
+
+	option = { 
+		name = krg_ser.18.a #Call in the Accord
+		ai_chance = { base = 75 }
+		CAN = { country_event = {
+				id = krg_ser.19
+				days = 1
+			}
+		}
+	}
+	option = {
+		name = krg_ser.18.b #Let them go
+		ai_chance = { base = 25 }
+		add_political_power = 50
+	}
+}
+
+country_event = { #Time for some Global Power Projection
+	id = krg_ser.19
+	title = krg_ser.19.t
+	desc = krg_ser.19.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_ser.19" }
+
+	is_triggered_only = yes
+
+	option = { 
+		name = krg_ser.19.a #Mobilise FAMED!
+		ai_chance = { base = 80 }
+		add_to_war = {
+			targeted_alliance = THIS
+			enemy = SER
+			hostility_reason = asked_to_join
+		}		
+		# Accord influence up due to intervention
+		
+		news_event = {
+			id = krg_ser_news.11
+		}
+	}
+	option = {
+		name = krg_ser.19.b #We can't piss off Danubia by interfering here
+		ai_chance = { base = 20 }
+		# Accord influence down
+		
+	}
+}
+
+## and now Djilas adventures in Government
+
+country_event = { #Support Hoxha in Albania?
+	id = krg_ser.20
+	title = krg_ser.20.t
+	desc = krg_ser.20.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_ser.20" }
+	trigger = {
+		has_war = no
+	}
+	is_triggered_only = yes
+
+	option = { 
+		name = krg_ser.20.a #Support the Madman
+		ai_chance = { base = 70 }
+		add_equipment_to_stockpile = {
+			type = infantry_equipment
+			amount = -2000
+		}
+		add_political_power = 50
+		army_experience = 50
+		#news_event = {
+		#	id = krg_ser_news.12
+		#}
+		hidden_effect = {
+			GER = {
+				country_event = { 
+					id = krg_ser.21
+					days = 5
+				}
+			}
+		}
+	}
+	option = {
+		name = krg_ser.20.b #Lol good luck Hoxha
+		ai_chance = { base = 30 }
+		add_political_power = 100
+		#news_event = {
+		#	id = krg_ser_news.13
+		#}
+	}
+}
+
+country_event = { #Save the Albanian Govt as Ger?
+	id = krg_ser.21
+	title = krg_ser.21.t
+	desc = krg_ser.21.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_ser.21" }
+
+	is_triggered_only = yes
+
+	option = { 
+		name = krg_ser.21.a #Support the Markagjoni govt!
+		ai_chance = { base = 80 }
+		add_equipment_to_stockpile = {
+			type = infantry_equipment
+			amount = -2000
+		}
+		add_political_power = 50
+		army_experience = 20
+		ALB = {
+			add_ideas = ALB_German_Military_Advisors
+			hidden_effect = {
+				country_event = {
+					id = krg_ser.22
+					days = 180
+				}
+			}
+			ALB = { set_temp_variable =  { temp_level = 1 }
+			set_reichspakt_alignment = yes 	}
+		}
+	}
+	option = {
+		name = krg_ser.21.b #Bit busy right now. Sod Albania
+		add_political_power = 100
+		ai_chance = { base = 20 }
+		ALB = {
+			hidden_effect = {
+				country_event = {
+					id = krg_ser.23
+					days = 180
+				}
+			}
+		}
+	}
+}
+
+
+country_event = { #Failed Revolution
+	id = krg_ser.22
+	title = krg_ser.22.t
+	desc = krg_ser.22.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_ser.22" }
+
+	is_triggered_only = yes
+
+	option = { 
+		name = krg_ser.22.a
+		news_event = {
+			id = krg_ser_news.14
+		}
+		ALB = { increase_reichspakt_alignment = yes }
+		hidden_effect = { 
+			country_event = {
+				id = krg_ser.24
+				days = 180
+			}
+		}
+	}
+}
+
+country_event = { #Revolution in Albania
+	id = krg_ser.23
+	title = krg_ser.23.t
+	desc = krg_ser.23.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_ser.23" }
+
+	is_triggered_only = yes
+
+	option = { #Revolutionaries Win
+		name = krg_ser.23.a
+		set_politics = {
+	        ruling_party = authoritarian_socialist
+			election_frequency = 48
+			elections_allowed = no
+        }
+		set_popularities = {
+			authoritarian_socialist = 41
+			radical_socialist = 7
+			social_democrat = 13
+			revolutionary_republican = 11
+			social_liberal = 3
+			market_liberal = 16
+			social_conservative = 3
+			authoritarian_democrat = 1
+			paternal_autocrat = 3
+			national_populist = 2
+		}
+		coal_rev_all = yes
+		news_event = {
+			id = krg_ser_news.15
+		}
+	}
+}
+
+country_event = { #Albania Joins the RP
+	id = krg_ser.24
+	title = krg_ser.24.t
+	desc = krg_ser.24.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_ser.24" }
+
+	is_triggered_only = yes
+
+	option = { #
+		name = krg_ser.24.a
+		ALB = { set_temp_variable =  { temp_level = 4 }
+		set_reichspakt_alignment = yes 	}
+		news_event = {
+			id = krg_ser_news.16
+		}
+		add_to_array = { global.influence_log = 25 }
+		add_to_array = { global.influence_log_val = -5 }
+		influence_recalc = yes
+	}
+}
+
+country_event = { #Danubian sword of Damocles
+	id = krg_ser.25
+	title = krg_ser.25.t
+	desc = krg_ser.25.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_ser.25" }
+	picture = GFX_DNF_BattlePlans
+
+	trigger = {
+		NOT = { has_government = social_democrat }
+	}
+	is_triggered_only = yes
+
+	option = {
+		name = krg_ser.25.a
+		ai_chance = {
+			base = 80
+		}
+		declare_war_on = {
+			target = SER
+			type = topple_government
+		}
+	}
+	option = {
+		name = krg_ser.25.b
+		ai_chance = {
+			base = 20
+		}
+		add_political_power = 50
+		add_popularity = {
+			ideology = social_conservative
+			popularity = -0.03
+		}
+	}
+}
+
+country_event = { #Election
+	id = krg_ser.30
+	title = krg_ser.30.t
+	desc = krg_ser.30.d
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_ser.30" }
+
+	is_triggered_only = yes
+
+	option = { #NOF
+		name = krg_ser.30.a
+		ai_chance  = {
+			base = 25
+		}
+		set_politics = {
+	        ruling_party = social_democrat
+			election_frequency = 60
+			elections_allowed = yes
+        }
+		set_popularities = {
+			authoritarian_socialist = 1
+			radical_socialist = 4
+			social_democrat = 35
+			revolutionary_republican = 0
+			social_liberal = 12
+			market_liberal = 29
+			social_conservative = 9	 
+			authoritarian_democrat = 5
+			paternal_autocrat = 1
+			national_populist =4 
+		}
+		coal_rev_all = yes
+		coal_add_rad_soc = yes
+		coal_add_soc_lib = yes
+		### NEWS EVENT ###
+	}
+	option = { #NRS Majority
+		name = krg_ser.30.b
+		ai_chance  = {
+			base = 50
+		}
+		set_politics = {
+	        ruling_party = market_liberal
+			election_frequency = 60
+			elections_allowed = yes
+        }
+		set_popularities = {
+			authoritarian_socialist = 1
+			radical_socialist = 4
+			social_democrat = 17
+			revolutionary_republican = 0
+			social_liberal = 7
+			market_liberal = 51
+			social_conservative = 10
+			authoritarian_democrat = 5
+			paternal_autocrat = 1
+			national_populist = 4
+		}
+		coal_rev_all = yes
+		### NEWS EVENT ###
+	}
+	option = {
+		name = krg_ser.30.c
+		ai_chance  = {
+			base = 25
+		}
+		set_politics = {
+	        ruling_party = social_conservative
+			election_frequency = 60
+			elections_allowed = yes
+        }
+		set_popularities = {
+			authoritarian_socialist = 1
+			radical_socialist = 4
+			social_democrat = 23
+			revolutionary_republican = 0
+			social_liberal = 10
+			market_liberal = 35
+			social_conservative = 14
+			authoritarian_democrat = 8
+			paternal_autocrat = 1
+			national_populist = 4
+		}
+		coal_rev_all = yes
+		coal_add_mar_lib = yes
+		coal_add_soc_con = yes
+		### NEWS EVENT ###
+	}
+}

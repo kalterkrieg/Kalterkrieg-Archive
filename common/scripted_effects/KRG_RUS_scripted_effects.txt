@@ -1,0 +1,2256 @@
+RUS_improve_economic_crisis = {
+	if = {
+		limit = {
+			has_idea = RUS_economic_crisis_worst
+		}
+		swap_ideas = {
+			remove_idea = RUS_economic_crisis_worst
+			add_idea = RUS_economic_crisis_bad
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = RUS_economic_crisis_bad
+		}
+		swap_ideas = {
+			remove_idea = RUS_economic_crisis_bad
+			add_idea = RUS_economic_crisis_manageable
+		}
+	}
+}
+
+RUS_worsen_economic_crisis = {
+	if = {
+		limit = {
+			has_idea = RUS_economic_crisis_manageable
+		}
+		swap_ideas = {
+			remove_idea = RUS_economic_crisis_manageable
+			add_idea = RUS_economic_crisis_bad
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = RUS_economic_crisis_bad
+		}
+		swap_ideas = {
+			remove_idea = RUS_economic_crisis_bad
+			add_idea = RUS_economic_crisis_worst
+		}
+	}
+}
+
+RUS_clear_economic_crisis = {
+	if = {
+		limit = {
+			has_idea = RUS_economic_crisis_manageable
+		}
+		remove_ideas = RUS_economic_crisis_manageable
+	}
+	else_if = {
+		limit = {
+			has_idea = RUS_economic_crisis_bad
+		}
+		remove_ideas = RUS_economic_crisis_bad
+	}
+	else_if = {
+		limit = {
+			has_idea = RUS_economic_crisis_worst
+		}
+		remove_ideas = RUS_economic_crisis_worst
+	}
+}
+
+RUS_reduce_defeatism = {
+	if = {
+		limit = {
+			has_idea = RUS_Defeatism_Epidemic_1
+		}
+		swap_ideas = {
+			remove_idea = RUS_Defeatism_Epidemic_1
+			add_idea = RUS_Defeatism_Epidemic_2
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = RUS_Defeatism_Epidemic_2
+		}
+		swap_ideas = {
+			remove_idea = RUS_Defeatism_Epidemic_2
+			add_idea = RUS_Defeatism_Epidemic_3
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = RUS_Defeatism_Epidemic_3
+		}
+		swap_ideas = {
+			remove_idea = RUS_Defeatism_Epidemic_3
+			add_idea = RUS_Defeatism_Epidemic_4
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = RUS_Defeatism_Epidemic_4
+		}
+		remove_ideas = RUS_Defeatism_Epidemic_4
+	}
+}
+
+
+RUS_clear_defeatism = {
+	if = {
+		limit = {
+			has_idea = RUS_Defeatism_Epidemic_1
+		}
+		remove_ideas = RUS_Defeatism_Epidemic_1
+	}
+	else_if = {
+		limit = {
+			has_idea = RUS_Defeatism_Epidemic_2
+		}
+		remove_ideas = RUS_Defeatism_Epidemic_2
+	}
+	else_if = {
+		limit = {
+			has_idea = RUS_Defeatism_Epidemic_3
+		}
+		remove_ideas = RUS_Defeatism_Epidemic_3
+	}
+	else_if = {
+		limit = {
+			has_idea = RUS_Defeatism_Epidemic_4
+		}
+		remove_ideas = RUS_Defeatism_Epidemic_4
+	}
+	else = {
+		add_command_power = 40
+		add_political_power = 50
+	}
+}
+
+RUS_increase_defeatism = {
+	if = {
+		limit = {
+			has_idea = RUS_Defeatism_Epidemic_4
+		}
+		swap_ideas = {
+			remove_idea = RUS_Defeatism_Epidemic_4
+			add_idea = RUS_Defeatism_Epidemic_3
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = RUS_Defeatism_Epidemic_3
+		}
+		swap_ideas = {
+			remove_idea = RUS_Defeatism_Epidemic_3
+			add_idea = RUS_Defeatism_Epidemic_2
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = RUS_Defeatism_Epidemic_2
+		}
+		swap_ideas = {
+			remove_idea = RUS_Defeatism_Epidemic_2
+			add_idea = RUS_Defeatism_Epidemic_1
+		}
+	}
+}
+
+RUS_clear_nuclear_obsession = {
+	if = {
+		limit = {
+			has_idea = RUS_nuclear_obsession
+		}
+		remove_ideas = RUS_nuclear_obsession
+	}
+	else_if = {
+		limit = {
+			has_idea = RUS_nuclear_obsession_combined
+		}
+		remove_ideas = RUS_nuclear_obsession_combined
+	}
+	else_if = {
+		limit = {
+			has_idea = RUS_nuclear_obsession_reactor_speed
+		}
+		remove_ideas = RUS_nuclear_obsession_reactor_speed
+	}
+	else_if = {
+		limit = {
+			has_idea = RUS_nuclear_obsession_research_speed
+		}
+		remove_ideas = RUS_nuclear_obsession_research_speed
+	}
+}
+
+RUS_nice_minorities = {
+	if = {
+		limit = {
+			has_idea = RUS_western_resistance_1
+		}
+		swap_ideas = {
+			remove_idea = RUS_western_resistance_1
+			add_idea = RUS_western_resistance_2
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = RUS_western_resistance_2
+		}
+		swap_ideas = {
+			remove_idea = RUS_western_resistance_2
+			add_idea = RUS_western_resistance_3
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = RUS_western_resistance_3
+		}
+		swap_ideas = {
+			remove_idea = RUS_western_resistance_3
+			add_idea = RUS_western_resistance_4
+		}
+	}
+}
+
+RUS_Surrender_Claimed_Territories = {
+	add_popularity = {
+		ideology = national_populist
+		popularity = -0.1
+	}
+	add_political_power = -100
+	add_war_support = 0.1
+	RUS_reduce_defeatism = yes
+	RUS_clear_western_minorities = yes
+	if = {
+		limit = {
+			OR = {
+				has_country_flag = RUS_GER_Ukraine_Compromise
+				has_country_flag = RUS_Thirty_Six_Borders
+			}
+		}
+		UKR = {
+			transfer_state = 241
+			transfer_state = 886
+			transfer_state = 196
+			transfer_state = 200
+			transfer_state = 227
+			transfer_state = 887
+			transfer_state = 228
+			transfer_state = 221
+			transfer_state = 225
+			transfer_state = 259
+			transfer_state = 193
+			transfer_state = 241
+			transfer_state = 137
+			set_country_flag = UKR_east_recovered
+			set_country_flag = reichspakt_military_major_ai
+			country_event = {
+				id = krg_ukr.9
+				days = 365
+			}
+			swap_ideas = {
+				remove_idea = UKR_Dismembered_State
+				add_idea = UKR_East_Recovered_Idea
+			}
+		}
+		hidden_effect = {
+			RUS = {
+				add_state_claim = 886
+				add_state_claim = 241
+				add_state_claim = 196
+				add_state_claim = 200
+				add_state_claim = 227
+				add_state_claim = 887
+				add_state_claim = 228
+				add_state_claim = 221
+				add_state_claim = 225
+				add_state_claim = 259
+				add_state_claim = 193
+				add_state_claim = 241
+				add_state_claim = 137
+			}
+		}
+	}
+	if = {
+		limit = {
+			has_country_flag = RUS_Thirty_Six_Borders
+		}
+		LIT = {
+			transfer_state = 836
+			transfer_state = 835
+			transfer_state = 207
+			transfer_state = 206
+			set_country_flag = LIT_1936_recovered
+			country_event = {
+				id = krg_lit.0
+				days = 60
+			}
+			
+		RUS = {
+			remove_state_core = 836
+			remove_state_core = 835
+			remove_state_core = 207
+			remove_state_core = 206
+
+			add_state_claim = 836
+			add_state_claim = 835
+			add_state_claim = 207
+			add_state_claim = 206
+			}
+		}
+		FIN = {
+			transfer_state = 722
+			transfer_state = 146
+			set_country_flag = FIN_1936_recovered
+			RUS = {
+				remove_state_core = 722
+				remove_state_core = 146
+				add_state_claim = 722
+				add_state_claim = 146
+			}
+		}
+	}
+	if = {
+		limit = {
+			GER = {
+				has_country_flag = GER_RUS_cont_war_victory
+			}
+		}
+		KRL = {
+			annex_country = {
+				target = LAT
+			}
+			
+			#transfer_state = 884
+			
+		RUS = {
+			remove_state_core = 884
+			add_state_claim = 884
+			}
+		}
+		RUS = {
+			end_puppet = EST
+		}
+		GER = {
+			EST = {
+				get_current_government_type = yes
+			}
+			if = {
+				limit = {
+					has_subject_autonomy_feature = yes
+				}
+				set_autonomy = {
+					target = EST
+					autonomous_state = krg_military_occupation
+				}
+			}
+			else = {
+				puppet = EST
+			}
+			save_event_target_as = on_puppet_master_tag
+			EST = {
+				standard_on_puppet_effect = yes
+				restore_previous_government_type = yes
+			}
+		}
+	}
+	clr_country_flag = RUS_GER_Ukraine_Compromise
+	clr_country_flag = RUS_Thirty_Six_Borders
+}
+
+RUS_clear_western_minorities = {
+	if = {
+		limit = {
+			has_idea = RUS_western_resistance_1
+		}
+		remove_ideas = RUS_western_resistance_1
+	}
+	else_if = {
+		limit = {
+			has_idea = RUS_western_resistance_2
+		}
+		remove_ideas = RUS_western_resistance_2
+	}
+	else_if = {
+		limit = {
+			has_idea = RUS_western_resistance_3
+		}
+		remove_ideas = RUS_western_resistance_3
+	}
+	else = {
+		remove_ideas = RUS_western_resistance_4
+	}
+}
+
+RUS_Plunder_Minsk_fx = {
+	207 = {
+		remove_building = {
+			type = industrial_complex
+			level = 2
+		}
+	}
+	241 = {
+		remove_building = {
+			type = industrial_complex
+			level = 1
+		}
+	}
+	835 = {
+		remove_building = {
+			type = industrial_complex
+			level = 1
+		}
+	}
+	206 = {
+		remove_building = {
+			type = industrial_complex
+			level = 2
+		}
+		remove_building = {
+			type = arms_factory
+			level = 1
+		}
+	}
+	250 = {
+		add_building_construction = {
+			type = industrial_complex
+			level = 2
+			instant_build = yes
+		}
+		add_building_construction = {
+			type = arms_factory
+			level = 1
+			instant_build = yes
+		}
+		add_extra_state_shared_building_slots = 3
+	}
+	398 = {
+		add_building_construction = {
+			type = industrial_complex
+			level = 4
+			instant_build = yes
+		}
+		add_extra_state_shared_building_slots = 4
+	}
+}
+
+RUS_Plunder_Donbass_fx = {
+	200 = {
+		remove_building = {
+			type = industrial_complex
+			level = 2
+		}
+	}
+	137 = {
+		remove_building = {
+			type = industrial_complex
+			level = 1
+		}
+	}
+	221 = {
+		remove_building = {
+			type = industrial_complex
+			level = 2
+		}
+		remove_building = {
+			type = arms_factory
+			level = 3
+		}
+		add_resource = {
+			type = steel
+			amount = -33
+		}
+	}
+	227 = {
+		remove_building = {
+			type = industrial_complex
+			level = 2
+		}
+		remove_building = {
+			type = arms_factory
+			level = 3
+		}
+		add_resource = {
+			type = steel
+			amount = -18
+		}
+	}
+	228 = {
+		remove_building = {
+			type = industrial_complex
+			level = 1
+		}
+		remove_building = {
+			type = arms_factory
+			level = 2
+		}
+		add_resource = {
+			type = steel
+			amount = -12
+		}
+	}
+	572 = {
+		add_building_construction = {
+			type = industrial_complex
+			level = 5
+			instant_build = yes
+		}
+		add_building_construction = {
+			type = arms_factory
+			level = 3
+			instant_build = yes
+		}
+		add_resource = {
+			type = steel
+			amount = 47
+		}
+		add_extra_state_shared_building_slots = 8
+	}
+	582 = {
+		add_building_construction = {
+			type = industrial_complex
+			level = 5
+			instant_build = yes
+		}
+		add_building_construction = {
+			type = arms_factory
+			level = 4
+			instant_build = yes
+		}
+		add_resource = {
+			type = steel
+			amount = 12
+		}
+		add_extra_state_shared_building_slots = 9
+	}
+	573 = {
+		add_building_construction = {
+			type = industrial_complex
+			level = 1
+			instant_build = yes
+		}
+		add_building_construction = {
+			type = arms_factory
+			level = 4
+			instant_build = yes
+		}
+		add_resource = {
+			type = steel
+			amount = 4
+		}
+		add_extra_state_shared_building_slots = 5
+	}
+}
+
+RUS_Kill_Savinkov = {
+	RUS_boris_savinkov = {
+		kill_character = yes
+	}
+	add_stability = -0.05
+	RUS_clear_nuclear_obsession = yes
+	RUS_reduce_defeatism = yes
+	RUS_reduce_defeatism = yes
+	news_event = {
+		id = krg_rus_rwk.44
+	}
+}
+
+RUS_Kill_Troika = {
+	RUS_The_Troika = { kill_character = yes }
+	RUS_Yuri_Shirinsky_Shikhmatov = { kill_character = yes }
+	RUS_Dmitri_Shepilov = { kill_character = yes }
+	hidden_effect = {
+		RUS_Dmitri_Shepilov_justice = { kill_character = yes }
+	}
+	RUS_georgiy_vernadsky = { kill_character = yes }
+	hidden_effect = {
+		RUS_georgiy_vernadsky_foreign_min = { kill_character = yes }
+	}
+}
+
+RUS_Kill_Brezhnev = {
+	RUS_Leonid_Brezhnev = { kill_character = yes }
+	hidden_effect = {
+		retire_character = RUS_Leonid_Brezhnev_econ
+	}
+	add_country_leader_role = {
+		character = RUS_Mikhail_Suslov
+		promote_leader = yes
+		country_leader = {
+			ideology = authoritarian_socialist_leninism
+			desc = POLITICS_MIKHAIL_SUSLOV_DESC
+		}
+	}
+	add_country_leader_role = {
+		character = RUS_Mikhail_Suslov
+		promote_leader = yes
+		country_leader = {
+			ideology = radical_socialist_orthodox_syndicalism
+			desc = POLITICS_MIKHAIL_SUSLOV_DESC
+		}
+	}
+	coal_rev_auth_soc = yes
+	coal_rev_rad_soc = yes
+	set_party_name = {
+		ideology = authoritarian_socialist
+		name = RUS_authoritarian_socialist_kp
+		long_name = RUS_authoritarian_socialist_kp_long
+	}
+	set_party_name = {
+		ideology = radical_socialist
+		name = RUS_radical_socialist_kp
+		long_name = RUS_radical_socialist_kp_long
+	}
+}
+
+RUS_Install_Gorgulov = {
+	add_country_leader_role = {
+		character = RUS_Pavel_Gorgulov
+		promote_leader = yes
+		country_leader = {
+			ideology = national_populist_savinkovism
+			desc = POLITICS_PAVEL_GORGULOV_DESC
+			expire = 2001.1.1.1
+			traits = {
+				dictator
+				secret_police_chief
+			}
+		}
+	}
+	hidden_effect = {
+		add_country_leader_role = {
+			character = RUS_Pavel_Gorgulov
+			promote_leader = yes
+			country_leader = {
+				ideology = authoritarian_democrat_subtype
+				desc = POLITICS_PAVEL_GORGULOV_DESC
+				expire = 2001.1.1.1
+				traits = {
+					dictator
+					secret_police_chief
+				}
+			}
+		}
+	}
+	add_ideas = RUS_Pavel_Gorgulov_hog_npo
+	remove_ideas = RUS_Pavel_Gorgulov_hoi_npo
+	add_ideas = RUS_Ivan_Serov_jm_npo
+	add_ideas = RUS_sergei_kruglov_fm_npo
+	add_ideas = RUS_vladimir_von_manstein_eco_npo
+	add_ideas = RUS_Yakov_Serebryansky_hoi_npo
+	add_stability = -0.05
+	load_focus_tree = KRG_RUS_Natsgvardia_tree
+	complete_national_focus = RUS_vozhd_gorgulov
+}
+
+RUS_Install_Vatutin = {
+	add_popularity = {
+		ideology = paternal_autocrat
+		popularity = 0.4
+	}
+	set_politics = {
+		ruling_party = paternal_autocrat
+		election_frequency = 48
+		elections_allowed = no
+	}
+	hidden_effect = {
+		add_country_leader_role = {
+			character = RUS_Andrey_Zankevich
+			promote_leader = yes
+			country_leader = {
+				ideology = national_populist_subtype
+				desc = POLITICS_ANDREY_ZANKEVICH_DESC
+			}
+		}
+		add_country_leader_role = {
+			character = RUS_Andrey_Zankevich
+			promote_leader = yes
+			country_leader = {
+				ideology = authoritarian_democrat_subtype
+				desc = POLITICS_ANDREY_ZANKEVICH_DESC
+			}
+		}
+	}
+	add_ideas = RUS_Nikolai_Vatutin_hog_paa
+	add_ideas = RUS_Aleksandr_Vasilevsky_jm_paa
+	add_ideas = RUS_andrei_grechko_fm_ade
+	add_ideas = RUS_Dmitri_Ustinov_eco_paa
+	remove_ideas = RUS_Andrey_Zankevich_im_npo
+	add_ideas = RUS_Mikhail_Malinin_im_paa
+	remove_ideas = RUS_Yakov_Serebryansky_hoi_npo
+	add_ideas = RUS_Pavel_Sudoplatov_hoi_paa
+	if = {
+		limit = {
+			has_idea = RUS_suspicious_officer_activity
+		}
+		remove_ideas = RUS_suspicious_officer_activity
+	}
+	add_ideas = RUS_true_russia
+	load_focus_tree = KRG_RUS_military_pataut_tree
+	complete_national_focus = RUS_vozhd_vatutin
+	if = { #return from Petrograd to Moskva
+		limit = {
+			195 = {
+				is_capital = yes
+			}
+		}
+		set_capital = {
+			state = 219
+		}
+	}
+}
+
+RUS_Purge_Gorgulov_Cabinet = {
+	retire_character = RUS_Pavel_Gorgulov
+	hidden_effect = {
+		retire_character = RUS_Pavel_Gorgulov_hoi
+	}
+	RUS_Ivan_Serov  = { kill_character = yes }
+	RUS_sergei_kruglov  = { kill_character = yes }
+	RUS_vladimir_von_manstein  = { kill_character = yes }
+}
+
+RUS_Purge_Natsgvardia = {
+	RUS_Kuzma_Grebennik  = { kill_character = yes }
+	RUS_Timofei_Strokach = { kill_character = yes }
+	RUS_Vasily_Malyshkin = { kill_character = yes }
+	RUS_Mikhail_Meandrov = { kill_character = yes }
+	RUS_Ivan_Bagramyan = { kill_character = yes }
+	RUS_fyodor_truhin = { kill_character = yes }
+	RUS_mikhail_levitov = { kill_character = yes }
+	RUS_viktor_maltsev = { kill_character = yes }
+}
+
+RUS_fortress_petrograd_fx = {
+	set_capital = {
+		state = 195
+		remember_old_capital = yes
+	}
+	195 = {
+		add_building_construction = {
+			type = bunker
+			level = 4
+			instant_build = yes
+			province = 11068
+		}
+		add_building_construction = {
+			type = bunker
+			level = 4
+			instant_build = yes
+			province = 79
+		}
+		add_building_construction = {
+			type = bunker
+			level = 4
+			instant_build = yes
+			province = 6174
+		}
+	}
+	hidden_effect = {
+		RUS = {
+			load_oob = "RUS_petrograd_natsgvardia"
+		}
+		RUS_trigger_winter = yes
+	}
+}
+
+RUS_fortress_moscow_fx = {
+	219 = {
+		add_building_construction = {
+			type = bunker
+			level = 3
+			instant_build = yes
+			province = 9378
+		}
+		add_building_construction = {
+			type = bunker
+			level = 3
+			instant_build = yes
+			province = 301
+		}
+		add_building_construction = {
+			type = bunker
+			level = 3
+			instant_build = yes
+			province = 6414
+		}
+		add_building_construction = {
+			type = bunker
+			level = 3
+			instant_build = yes
+			province = 3391
+		}
+		add_building_construction = {
+			type = bunker
+			level = 3
+			instant_build = yes
+			province = 11282
+		}
+		add_building_construction = {
+			type = bunker
+			level = 3
+			instant_build = yes
+			province = 3259
+		}
+		add_building_construction = {
+			type = bunker
+			level = 3
+			instant_build = yes
+			province = 6283
+		}
+	}
+	hidden_effect = {
+		RUS = {
+			load_oob = "RUS_moscow_natsgvardia"
+		}
+		RUS_trigger_winter = yes
+	}
+}
+
+RUS_Pull_Out_Loyalists = {
+	255 = {
+		add_manpower = 670
+	}
+	219 = {
+		add_manpower = 1562
+	}
+	260 = {
+		add_manpower = 801
+	}
+	886 = {
+		add_manpower = -1018
+	}
+	200 = {
+		add_manpower = -424
+	}
+	225 = {
+		add_manpower = -624
+	}
+	193 = {
+		add_manpower = -376
+	}
+	196 = {
+		add_manpower = -201
+	}
+	887 = {
+		add_manpower = -90
+	}
+	221 = {
+		add_manpower = -195
+	}
+	227 = {
+		add_manpower = -105
+	}
+	every_state = {
+		limit = {
+			OR = {
+				state = 193
+				state = 196
+				state = 200
+				state = 221
+				state = 225
+				state = 227
+				state = 886
+				state = 887
+			}
+		}
+		if = {
+			limit = {
+				has_active_resistance = yes
+			}
+			add_compliance = -40
+			else = {
+				set_compliance = 60
+			}
+		}
+	}
+	add_equipment_to_stockpile = {
+		type = train_equipment_2
+		amount = -1
+	}
+}
+
+RUS_Eastern_Deportation = {
+	227 = {
+		add_manpower = -10000
+	}
+	836 = {
+		add_manpower = -10000
+	}
+	206 = {
+		add_manpower = -10000
+	}
+	207 = {
+		add_manpower = -10000
+	}
+	835 = {
+		add_manpower = -10000
+	}
+	572 = {
+		add_manpower = 24670
+	}
+	651 = {
+		add_manpower = 8859
+	}
+	250 = {
+		add_manpower = 13261
+	}
+	add_equipment_to_stockpile = {
+		type = train_equipment_2
+		amount = -5
+	}
+}
+
+RUS_Southern_Deportation = {
+	232 = {
+		add_manpower = -40000
+	}
+	231 = {
+		add_manpower = -40000
+	}
+	229 = {
+		add_manpower = -40000
+	}
+	585 = {
+		add_manpower = 8891
+	}
+	586 = {
+		add_manpower = 8859
+	}
+	584 = {
+		add_manpower = 8261
+	}
+	590 = {
+		add_manpower = 8791
+	}
+	588 = {
+		add_manpower = 8889
+	}
+	589 = {
+		add_manpower = 8616
+	}
+	404 = {
+		add_manpower = 8444
+	}
+	587 = {
+		add_manpower = 7641
+	}
+	644 = {
+		add_manpower = 33587
+	}
+	add_equipment_to_stockpile = {
+		type = train_equipment_2
+		amount = -15
+	}
+}
+
+RUS_Expand_Ural_Factories = {
+	572 = {
+		add_building_construction = {
+			type = industrial_complex
+			level = 1
+			instant_build = yes
+		}
+		add_building_construction = {
+			type = arms_factory
+			level = 1
+			instant_build = yes
+		}
+		add_extra_state_shared_building_slots = 2
+	}
+	653 = {
+		add_building_construction = {
+			type = industrial_complex
+			level = 1
+			instant_build = yes
+		}
+		add_building_construction = {
+			type = arms_factory
+			level = 1
+			instant_build = yes
+		}
+		add_extra_state_shared_building_slots = 2
+	}
+	398 = {
+		add_building_construction = {
+			type = industrial_complex
+			level = 1
+			instant_build = yes
+		}
+		add_building_construction = {
+			type = arms_factory
+			level = 1
+			instant_build = yes
+		}
+		add_extra_state_shared_building_slots = 2
+	}
+	582 = {
+		add_building_construction = {
+			type = industrial_complex
+			level = 1
+			instant_build = yes
+		}
+		add_building_construction = {
+			type = arms_factory
+			level = 1
+			instant_build = yes
+		}
+		add_extra_state_shared_building_slots = 2
+	}
+}
+
+RUS_Develop_Interior = {
+	573 = {
+		add_building_construction = {
+			type = infrastructure
+			level = 2
+			instant_build = yes
+		}
+	}
+	399 = {
+		add_building_construction = {
+			type = infrastructure
+			level = 2
+			instant_build = yes
+		}
+	}
+	570 = {
+		add_building_construction = {
+			type = infrastructure
+			level = 2
+			instant_build = yes
+		}
+	}
+	255 = {
+		add_building_construction = {
+			type = infrastructure
+			level = 2
+			instant_build = yes
+		}
+	}
+	256 = {
+		add_building_construction = {
+			type = infrastructure
+			level = 2
+			instant_build = yes
+		}
+	}
+}
+
+RUS_Northern_Cities = {
+	516 = {
+		#Norilsk
+		add_building_construction = {
+			type = infrastructure
+			level = 2
+			instant_build = yes
+		}
+		add_resource = {
+			type = chromium
+			amount = 6
+		}
+	}
+	262 = {
+		# Vorkuta
+		add_building_construction = {
+			type = infrastructure
+			level = 2
+			instant_build = yes
+		}
+		add_resource = {
+			type = oil
+			amount = 12
+		}
+	}
+	580 = {
+		# Khanty-Mansiysk
+		add_building_construction = {
+			type = infrastructure
+			level = 2
+			instant_build = yes
+		}
+		add_resource = {
+			type = oil
+			amount = 18
+		}
+	}
+}
+
+RUS_Siberian_Rail = {
+	build_railway = {
+		level = 2
+		build_only_on_allied = yes
+		fallback = yes
+		start_province = 7713
+		target_province = 10641
+	}
+	build_railway = {
+		level = 1
+		build_only_on_allied = yes
+		fallback = yes
+		start_province = 10641
+		target_province = 12549
+	}
+	574 = {
+		add_manpower = -10291
+	}
+	567 = {
+		add_manpower = -2782
+	}
+}
+
+RUS_check_and_cede_borders = {
+	if = {
+		limit = {
+			884 = {
+				is_controlled_by = RUS
+			}
+		}
+		LAT = {
+			transfer_state = 884
+		}
+		884 = {
+			teleport_armies = {
+				limit = {
+					tag = RUS
+				}
+				to_state_array = owned_controlled_states
+			}
+		}
+		hidden_effect = {
+			KRL = {
+				884 = {
+					remove_claim_by = KRL
+					add_core_of = KRL
+				}
+			}
+		}
+	}
+	if = {
+		limit = {
+			836 = {
+				is_controlled_by = RUS
+			}
+		}
+		LIT = {
+			transfer_state = 836
+		}
+		836 = {
+			teleport_armies = {
+				limit = {
+					tag = RUS
+				}
+				to_state_array = owned_controlled_states
+			}
+		}
+	}
+	if = {
+		limit = {
+			835 = {
+				is_controlled_by = RUS
+			}
+		}
+		LIT = {
+			transfer_state = 835
+		}
+		835 = {
+			teleport_armies = {
+				limit = {
+					tag = RUS
+				}
+				to_state_array = owned_controlled_states
+			}
+		}
+	}
+	if = {
+		limit = {
+			206 = {
+				is_controlled_by = RUS
+			}
+		}
+		LIT = {
+			transfer_state = 206
+		}
+		206 = {
+			teleport_armies = {
+				limit = {
+					tag = RUS
+				}
+				to_state_array = owned_controlled_states
+			}
+		}
+	}
+	if = {
+		limit = {
+			207 = {
+				is_controlled_by = RUS
+			}
+		}
+		LIT = {
+			transfer_state = 207
+		}
+		207 = {
+			teleport_armies = {
+				limit = {
+					tag = RUS
+				}
+				to_state_array = owned_controlled_states
+			}
+		}
+	}
+	if = {
+		limit = {
+			722 = {
+				is_controlled_by = RUS
+			}
+		}
+		FIN = {
+			transfer_state = 722
+		}
+		722 = {
+			teleport_armies = {
+				limit = {
+					tag = RUS
+				}
+				to_state_array = owned_controlled_states
+			}
+		}
+	}
+	if = {
+		limit = {
+			146 = {
+				is_controlled_by = RUS
+			}
+		}
+		FIN = {
+			transfer_state = 146
+		}
+		146 = {
+			teleport_armies = {
+				limit = {
+					tag = RUS
+				}
+				to_state_array = owned_controlled_states
+			}
+		}
+	}
+	if = {
+		limit = {
+			329 = {
+				is_controlled_by = RUS
+			}
+		}
+		MON = {
+			transfer_state = 329
+		}
+		329 = {
+			teleport_armies = {
+				limit = {
+					tag = RUS
+				}
+				to_state_array = owned_controlled_states
+			}
+		}
+	}
+	if = {
+		limit = {
+			137 = {
+				is_controlled_by = RUS
+			}
+		}
+		UKR = {
+			transfer_state = 137
+		}
+		137 = {
+			teleport_armies = {
+				limit = {
+					tag = RUS
+				}
+				to_state_array = owned_controlled_states
+			}
+		}
+	}
+	if = {
+		limit = {
+			196 = {
+				is_controlled_by = RUS
+			}
+		}
+		UKR = {
+			transfer_state = 196
+		}
+		196 = {
+			teleport_armies = {
+				limit = {
+					tag = RUS
+				}
+				to_state_array = owned_controlled_states
+			}
+		}
+	}
+	if = {
+		limit = {
+			200 = {
+				is_controlled_by = RUS
+			}
+		}
+		UKR = {
+			transfer_state = 200
+		}
+		200 = {
+			teleport_armies = {
+				limit = {
+					tag = RUS
+				}
+				to_state_array = owned_controlled_states
+			}
+		}
+	}
+if = {
+		limit = {
+			241 = {
+				is_controlled_by = RUS
+			}
+		}
+		UKR = {
+			transfer_state = 241
+		}
+		241 = {
+			teleport_armies = {
+				limit = {
+					tag = RUS
+				}
+				to_state_array = owned_controlled_states
+			}
+		}
+	}
+	if = {
+		limit = {
+			227 = {
+				is_controlled_by = RUS
+			}
+		}
+		UKR = {
+			transfer_state = 227
+		}
+		227 = {
+			teleport_armies = {
+				limit = {
+					tag = RUS
+				}
+				to_state_array = owned_controlled_states
+			}
+		}
+	}
+	if = {
+		limit = {
+			228 = {
+				is_controlled_by = RUS
+			}
+		}
+		UKR = {
+			transfer_state = 228
+		}
+		228 = {
+			teleport_armies = {
+				limit = {
+					tag = RUS
+				}
+				to_state_array = owned_controlled_states
+			}
+		}
+	}
+	if = {
+		limit = {
+			221 = {
+				is_controlled_by = RUS
+			}
+		}
+		UKR = {
+			transfer_state = 221
+		}
+		221 = {
+			teleport_armies = {
+				limit = {
+					tag = RUS
+				}
+				to_state_array = owned_controlled_states
+			}
+		}
+	}
+	if = {
+		limit = {
+			259 = {
+				is_controlled_by = RUS
+			}
+		}
+		UKR = {
+			transfer_state = 259
+		}
+		259 = {
+			teleport_armies = {
+				limit = {
+					tag = RUS
+				}
+				to_state_array = owned_controlled_states
+			}
+		}
+	}
+	if = {
+		limit = {
+			887 = {
+				is_controlled_by = RUS
+			}
+		}
+		UKR = {
+			transfer_state = 887
+		}
+		887 = {
+			teleport_armies = {
+				limit = {
+					tag = RUS
+				}
+				to_state_array = owned_controlled_states
+			}
+		}
+	}
+	if = {
+		limit = {
+			225 = {
+				is_controlled_by = RUS
+			}
+		}
+		UKR = {
+			transfer_state = 225
+		}
+		225 = {
+			teleport_armies = {
+				limit = {
+					tag = RUS
+				}
+				to_state_array = owned_controlled_states
+			}
+		}
+	}
+	if = {
+		limit = {
+			193 = {
+				is_controlled_by = RUS
+			}
+		}
+		UKR = {
+			transfer_state = 193
+		}
+		193 = {
+			teleport_armies = {
+				limit = {
+					tag = RUS
+				}
+				to_state_array = owned_controlled_states
+			}
+		}
+	}
+	if = {
+		limit = {
+			886 = {
+				is_controlled_by = RUS
+			}
+		}
+		UKR = {
+			transfer_state = 886
+		}
+		886 = {
+			teleport_armies = {
+				limit = {
+					tag = RUS
+				}
+				to_state_array = owned_controlled_states
+			}
+		}
+	}
+	RUS = {
+		if = {
+			limit = {
+				is_ai = no
+			}
+			news_event = {
+				id = krg_rus_rwk.40
+			}
+		}
+		add_state_claim = 886
+		add_state_claim = 193
+		add_state_claim = 225
+		add_state_claim = 887
+		add_state_claim = 259
+		add_state_claim = 221
+		add_state_claim = 228
+		add_state_claim = 227
+		add_state_claim = 200
+		add_state_claim = 196
+		add_state_claim = 137
+		add_state_claim = 146
+		add_state_claim = 722
+		add_state_claim = 207
+		add_state_claim = 206
+		add_state_claim = 835
+		add_state_claim = 836
+	}
+	PRS = {
+		if = {
+			limit = {
+				is_ai = no
+			}
+			news_event = {
+				id = krg_rus_rwk.40
+			}
+		}
+		#add_state_core = 884 # TODO: Make a Peace Conference Script for Russia.
+		add_state_claim = 886
+		add_state_claim = 193
+		add_state_claim = 225
+		add_state_claim = 887
+		add_state_claim = 259
+		add_state_claim = 221
+		add_state_claim = 228
+		add_state_claim = 227
+		add_state_claim = 200
+		add_state_claim = 196
+		add_state_claim = 137
+		add_state_claim = 146
+		add_state_claim = 722
+		add_state_claim = 207
+		add_state_claim = 206
+		add_state_claim = 835
+		add_state_claim = 836
+	}
+	LIT = {
+		if = { #trigger formation of Litbel if Russian winter happens and Litbel wasn't already formed and collapsed
+			limit = {
+					NOT = { 
+						has_cosmetic_tag = LIT_litbel
+						has_country_flag = LIT_litbel_collapsed 
+					} 
+			}
+			set_country_flag = LIT_1936_recovered
+			country_event = {
+				id = krg_lit.0
+				days = 60
+			}
+		}
+	}
+}
+
+RUS_breakaway_military_districts = {
+	hidden_effect = {
+		TRK = {
+			set_cosmetic_tag = TRK_RUS
+			inherit_technology = PREV
+			set_politics = {
+				ruling_party = paternal_autocrat
+			}
+		}
+		TCC = {
+			set_cosmetic_tag = TCC_RUS
+			inherit_technology = PREV
+			set_politics = {
+				ruling_party = paternal_autocrat
+			}
+		}
+		log = "RUS military districts released"
+	}
+	if = {
+		limit = {
+			has_subject_autonomy_feature = yes
+		}
+		PRS = {
+			TCC = {
+				get_current_government_type = yes
+			}
+			if = {
+				limit = {
+					has_subject_autonomy_feature = yes
+				}
+				set_autonomy = {
+					target = TCC
+					autonomous_state = krg_military_occupation
+				}
+			}
+			else = {
+				puppet = TCC
+			}
+			save_event_target_as = on_puppet_master_tag
+			TCC = {
+				standard_on_puppet_effect = yes
+				restore_previous_government_type = yes
+			}
+
+			TRK = {
+				get_current_government_type = yes
+			}
+			if = {
+				limit = {
+					has_subject_autonomy_feature = yes
+				}
+				set_autonomy = {
+					target = TRK
+					autonomous_state = krg_military_occupation
+				}
+			}
+			else = {
+				puppet = TRK
+			}
+			save_event_target_as = on_puppet_master_tag
+			TRK = {
+				standard_on_puppet_effect = yes
+				restore_previous_government_type = yes
+			}
+		}
+	}
+	else = {
+		PRS = {
+			puppet = TRK
+			puppet = TCC
+		}
+	}
+	RUS = {
+		if = {
+			limit = {
+				EST = {
+					is_puppet_of = PREV
+				}
+			}
+			end_puppet = EST
+			log = "RUS unpuppet EST"
+		}
+		if = {
+			limit = {
+				LAT = {
+					is_puppet_of = PREV
+				}
+			}
+			end_puppet = LAT
+			log = "RUS unpuppet LAT"
+		}
+		if = {
+			limit = {
+				MON = {
+					is_puppet_of = PREV
+				}
+			}
+			end_puppet = MON
+			log = "RUS unpuppet MON"
+		}
+	}
+}
+
+PRS_Add_Core_Spam = {
+	PRS = {
+	add_state_core = 40
+	add_state_core = 217
+	add_state_core = 218
+	add_state_core = 236
+	add_state_core = 237
+	add_state_core = 238
+	add_state_core = 245
+	add_state_core = 249
+	add_state_core = 251
+	add_state_core = 262
+	add_state_core = 265
+	add_state_core = 397
+	add_state_core = 398
+	add_state_core = 399
+	add_state_core = 401
+	add_state_core = 402
+	add_state_core = 403
+	add_state_core = 404
+	add_state_core = 407
+	add_state_core = 408
+	add_state_core = 409
+	add_state_core = 516
+	add_state_core = 560
+	add_state_core = 561
+	add_state_core = 562
+	add_state_core = 563
+	add_state_core = 564
+	add_state_core = 565
+	add_state_core = 566
+	add_state_core = 567
+	add_state_core = 568
+	add_state_core = 569
+	add_state_core = 570
+	add_state_core = 571
+	add_state_core = 572
+	add_state_core = 573
+	add_state_core = 574
+	add_state_core = 575
+	add_state_core = 576
+	add_state_core = 577
+	add_state_core = 578
+	add_state_core = 579
+	add_state_core = 580
+	add_state_core = 581
+	add_state_core = 582
+	add_state_core = 583
+	add_state_core = 588
+	add_state_core = 637
+	add_state_core = 644
+	add_state_core = 651
+	add_state_core = 652
+	add_state_core = 653
+	add_state_core = 654
+	add_state_core = 657
+	}
+	every_state = {
+		limit = {
+			is_core_of = PRS
+		}
+		PRS = {
+			transfer_state = PREV
+		}
+	}
+	log = "added PRS cores and released"
+	PRS = {
+		add_state_core = 329 #Tannu Tuva is to Mon
+	}
+}
+
+RUS_send_armies_home = {
+	log = "RUS armies going home"
+	every_owned_state = {
+		limit = {
+			is_core_of = PRS
+		}
+		teleport_armies = {
+			limit = {
+				tag = RUS
+			}
+			to_state_array = owned_controlled_states
+		}
+	}
+	log = "RUS armies going home from PRS"
+	every_owned_state = {
+		limit = {
+			is_core_of = TCC
+		}
+		TCC = {
+			transfer_state = PREV
+		}
+		teleport_armies = {
+			limit = {
+				tag = RUS
+			}
+			to_state_array = owned_controlled_states
+		}
+	}
+	log = "RUS armies going home from TCC"
+	every_owned_state = {
+		limit = {
+			is_core_of = TRK
+		}
+		TRK = {
+			transfer_state = PREV
+		}
+		teleport_armies = {
+			limit = {
+				tag = RUS
+			}
+			to_state_array = owned_controlled_states
+		}
+		log = "RUS armies going home from TRK"
+	}
+	MON = {
+		every_owned_state = {
+			teleport_armies = {
+				limit = {
+					tag = RUS
+				}
+				to_state_array = owned_controlled_states
+			}
+		}
+		log = "RUS armies going home from MON"
+	}
+}
+
+RUS_spawn_rebel_armies = {
+	PRS = {
+		load_oob = "PRS"
+		log = "spawn PRS oob"
+	}
+	TCC = {
+		load_oob = "TCC"
+		log = "spawn TCC oob"
+	}
+	TRK = {
+		load_oob = "TRK"
+		log = "spawn TRK oob"
+	}
+}
+
+RUS_lose_junta_generals = {
+	RUS_aleksandr_vasilevsky = {
+		set_nationality = PRS
+	}
+	RUS_ivan_romanovsky = {
+		set_nationality = PRS
+	}
+	RUS_leonid_govorov = {
+		set_nationality = PRS
+	}
+	RUS_andrei_grechko = {
+		set_nationality = PRS
+	}
+	RUS_iosif_gusakovsky = {
+		set_nationality = PRS
+	}
+	RUS_semyon_ivanov = {
+		set_nationality = PRS
+	}
+	RUS_mikhail_katukov = {
+		set_nationality = PRS
+	}
+	RUS_vladimir_aladinsky = {
+		set_nationality = PRS
+	}
+	RUS_ivan_varennikov = {
+		set_nationality = PRS
+	}
+	RUS_pavel_rotmistrov = {
+		set_nationality = PRS
+	}
+	RUS_sergey_biryuzov = {
+		set_nationality = PRS
+	}
+	RUS_alexei_yepishev = {
+		set_nationality = PRS
+	}
+	RUS_vasily_margelov = {
+		set_nationality = PRS
+	}
+	RUS_ivan_fedyuninsky = {
+		set_nationality = PRS
+	}
+	RUS_pytor_shafranov = {
+		set_nationality = PRS
+	}
+	RUS_vasily_abramov = {
+		set_nationality = PRS
+	}
+	RUS_andrei_bondarev = {
+		set_nationality = PRS
+	}
+	RUS_andrei_getman = {
+		set_nationality = PRS
+	}
+	RUS_viktor_zholudev = {
+		set_nationality = PRS
+	}
+	RUS_yakov_kreizer = {
+		set_nationality = PRS
+	}
+	RUS_pavel_belov = {
+		set_nationality = PRS
+	}
+	RUS_georgy_zakharov = {
+		set_nationality = PRS
+	}
+	RUS_minzakir_absalyamov = {
+		set_nationality = PRS
+	}
+	RUS_aleksei_antonov = {
+		set_nationality = PRS
+	}
+	RUS_stanislav_poplavsky = {
+		set_nationality = PRS
+	}
+	RUS_markin_popov = {
+		set_nationality = PRS
+	}
+	RUS_aleksei_zhadov = {
+		set_nationality = PRS
+	}
+	RUS_ivan_galanin = {
+		set_nationality = PRS
+	}
+	RUS_nikolai_vatutin = {
+		set_nationality = PRS
+	}
+}
+
+RUS_add_junta_generals = {
+	RUS_aleksandr_vasilevsky = {
+		set_nationality = RUS
+	}
+	RUS_ivan_romanovsky = {
+		set_nationality = RUS
+	}
+	RUS_leonid_govorov = {
+		set_nationality = RUS
+	}
+	RUS_andrei_grechko = {
+		set_nationality = RUS
+	}
+	RUS_iosif_gusakovsky = {
+		set_nationality = RUS
+	}
+	RUS_semyon_ivanov = {
+		set_nationality = RUS
+	}
+	RUS_mikhail_katukov = {
+		set_nationality = RUS
+	}
+	RUS_vladimir_aladinsky = {
+		set_nationality = RUS
+	}
+	RUS_ivan_varennikov = {
+		set_nationality = RUS
+	}
+	RUS_pavel_rotmistrov = {
+		set_nationality = RUS
+	}
+	RUS_sergey_biryuzov = {
+		set_nationality = RUS
+	}
+	RUS_alexei_yepishev = {
+		set_nationality = RUS
+	}
+	RUS_vasily_margelov = {
+		set_nationality = RUS
+	}
+	RUS_ivan_fedyuninsky = {
+		set_nationality = RUS
+	}
+	RUS_pytor_shafranov = {
+		set_nationality = RUS
+	}
+	RUS_vasily_abramov = {
+		set_nationality = RUS
+	}
+	RUS_andrei_bondarev = {
+		set_nationality = RUS
+	}
+	RUS_andrei_getman = {
+		set_nationality = RUS
+	}
+	RUS_viktor_zholudev = {
+		set_nationality = RUS
+	}
+	RUS_yakov_kreizer = {
+		set_nationality = RUS
+	}
+	RUS_pavel_belov = {
+		set_nationality = RUS
+	}
+	RUS_georgy_zakharov = {
+		set_nationality = RUS
+	}
+	RUS_minzakir_absalyamov = {
+		set_nationality = RUS
+	}
+	RUS_aleksei_antonov = {
+		set_nationality = RUS
+	}
+	RUS_stanislav_poplavsky = {
+		set_nationality = RUS
+	}
+	RUS_markin_popov = {
+		set_nationality = RUS
+	}
+	RUS_aleksei_zhadov = {
+		set_nationality = RUS
+	}
+	RUS_ivan_galanin = {
+		set_nationality = RUS
+	}
+	RUS_nikolai_vatutin = {
+		set_nationality = RUS
+	}
+}
+
+RUS_rob_arsenals = {
+	RUS = {
+		add_equipment_to_stockpile = {
+			type = infantry_equipment
+			amount = -100000
+		}
+		add_equipment_to_stockpile = {
+			type = motorized_equipment
+			amount = -10000
+		}
+		add_equipment_to_stockpile = {
+			type = train_equipment
+			amount = -1000
+		}
+		add_equipment_to_stockpile = {
+			type = artillery_equipment
+			amount = -10000
+		}
+	}
+	PRS = {
+		add_equipment_to_stockpile = {
+			type = infantry_equipment
+			amount = 100000
+		}
+		add_equipment_to_stockpile = {
+			type = motorized_equipment
+			amount = 10000
+		}
+		add_equipment_to_stockpile = {
+			type = train_equipment
+			amount = 1000
+		}
+		add_equipment_to_stockpile = {
+			type = artillery_equipment
+			amount = 10000
+		}
+	}
+}
+
+RUS_trigger_winter = {
+	news_event = { #Winter Falls
+		id =   krg_rus_rwk.45
+	}
+	hidden_effect = {
+		RUS_check_and_cede_borders = yes
+		PRS_Add_Core_Spam = yes #releases PRS
+		RUS = {
+			RUS_send_armies_home = yes #releases TCC and TRK
+			RUS_breakaway_military_districts = yes # manages puppets
+			# RUS_spawn_rebel_armies = yes # spawns rebels (loaded from history file)
+			RUS_lose_junta_generals = yes # moves generals to PRS
+			RUS_rob_arsenals = yes # guns and ammo to PRS
+			PRS = {
+				inherit_technology = PREV
+				set_politics = {
+					ruling_party = paternal_autocrat 
+					elections_allowed = no
+				}
+				#cheeky pie chart
+				set_popularities = {
+					revolutionary_republican = 10
+					authoritarian_socialist = 10
+					radical_socialist = 5
+					authoritarian_democrat = 33
+					national_populist = 17
+					paternal_autocrat = 25
+				}
+				add_ideas = {
+					KRG_limited_exports
+					KRG_authoritarian_system
+					KRG_extensive_conscription
+					KRG_war_economy
+					KRG_semi_professional_military
+					KRG_immigration_closed
+					econ_high_taxation
+					econ_small_business_spending
+					econ_medium_edu_spending
+					econ_small_hc_spending
+					econ_small_inf_spending
+					econ_small_service_spending
+					PRS_Pavel_Sudoplatov_hoi_paa
+					PRS_Aleksandr_Vasilevsky_jm_paa
+					PRS_Dmitri_Ustinov_eco_paa
+					PRS_Mikhail_Malinin_im_paa
+					PRS_Nikolai_Vatutin_hog_paa
+					PRS_andrei_grechko_fm_ade
+				}
+				log = "setup PRS tech/politics/ideas"
+			}
+		}
+	}
+	if = {
+		limit = {
+			has_idea = RUS_suspicious_officer_activity
+		}
+		remove_ideas = RUS_suspicious_officer_activity
+	}
+	if = {
+		limit = {
+			NOT = {
+				PRS = {
+					has_war_with = RUS
+				}
+			}
+		}
+		PRS = {
+			declare_war_on = {
+				target = RUS
+				type = civil_war
+			}
+			complete_national_focus = PRS_against_madness
+			load_oob = "PRS"
+		}
+	}
+	if = {
+		limit = {
+			NOT = {
+				TCC = {
+					has_war_with = RUS
+				}
+			}
+		}
+		TCC = {
+			add_to_war = {
+				targeted_alliance = PRS
+				enemy = RUS
+				hostility_reason = civil_war
+			}
+		}
+	}
+	if = {
+		limit = {
+			NOT = {
+				TRK = {
+					has_war_with = RUS
+				}
+			}
+		}
+		TRK = {
+			add_to_war = {
+				targeted_alliance = PRS
+				enemy = RUS
+				hostility_reason = civil_war
+			}
+		}
+	}
+	#start Mongol RCW event chains
+	MON = {
+		country_event = {
+			id = krg_mon.0
+			days = 3
+		}
+	}	
+}
+
+RUS_End_Winter = {
+	RUS = {
+		custom_effect_tooltip = fake_annex_PRS_tt
+		if = {
+			limit = {
+				PRS = {
+					is_ai = no
+				}
+				RUS = {
+					is_ai = yes
+				}
+			}
+			RUS = {
+				change_tag_from = PRS
+			}
+		}
+		RUS_Purge_Gorgulov_Cabinet = yes
+		hidden_effect = {
+			RUS_add_junta_generals = yes
+		}
+		RUS_Install_Vatutin = yes
+		hidden_effect = {
+			annex_country = {
+				target = PRS
+				transfer_troops = yes
+			}
+			every_owned_state = {
+				limit = {
+					is_core_of = PRS
+				}
+				PRS = {
+					remove_state_core = PREV
+				}
+			}
+		}
+		news_event = {
+			id = krg_rus_rwk.37
+		}
+	}
+}
+
+RUS_setup_western_state_resitance = {
+	##High resistance states
+	146 = {
+		start_resistance = yes
+		set_compliance = 20
+		set_resistance = 65
+	}
+	836 = {
+		start_resistance = yes
+		set_compliance = 20
+		set_resistance = 65
+	}
+	206 = {
+		start_resistance = yes
+		set_compliance = 20
+		set_resistance = 65
+	}
+	207 = {
+		start_resistance = yes
+		set_compliance = 20
+		set_resistance = 65
+	}
+	835 = {
+		start_resistance = yes
+		set_compliance = 20
+		set_resistance = 65
+	}
+	193 = {
+		start_resistance = yes
+		set_compliance = 20
+		set_resistance = 65
+	}
+	886 = {
+		start_resistance = yes
+		set_compliance = 20
+		set_resistance = 65
+	}
+	259 = {
+		start_resistance = yes
+		set_compliance = 20
+		set_resistance = 65
+	}
+	225 = {
+		start_resistance = yes
+		set_compliance = 20
+		set_resistance = 65
+	}
+	221 = {
+		start_resistance = yes
+		set_compliance = 20
+		set_resistance = 65
+	}
+	228 = {
+		start_resistance = yes
+		set_compliance = 20
+		set_resistance = 65
+	}
+	227 = {
+		start_resistance = yes
+		set_compliance = 20
+		set_resistance = 65
+	}
+	887 = {
+		start_resistance = yes
+		set_compliance = 20
+		set_resistance = 65
+	}
+	200 = {
+		start_resistance = yes
+		set_compliance = 20
+		set_resistance = 65
+	}
+	196 = {
+		start_resistance = yes
+		set_compliance = 20
+		set_resistance = 65
+	}
+	137 = {
+		start_resistance = yes
+		set_compliance = 20
+		set_resistance = 65
+	}
+	241 = {
+		start_resistance = yes
+		set_compliance = 20
+		set_resistance = 65
+	}
+}

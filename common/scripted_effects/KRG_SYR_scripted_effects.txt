@@ -1,0 +1,267 @@
+SYR_SSNP_Baathist_War = {
+	add_to_array = {
+		global.influence_targets = 25
+	}
+	hidden_effect = {
+		1157 = {
+			set_demilitarized_zone = no
+		}
+		454 = {
+			set_demilitarized_zone = no
+		}
+		1158 = {
+			set_demilitarized_zone = no
+		}
+		677 = {
+			add_core_of = BSY
+		}
+	}
+	1157 = {
+		transfer_state_to = ISR
+	}
+	every_owned_state = {
+		limit = { is_core_of = LEB }
+		transfer_state_to = LEB
+	}
+	every_owned_state = {
+		limit = { is_core_of = PAL }
+		transfer_state_to = PAL
+	}
+	every_owned_state = {
+		limit = { is_core_of = KUR }
+		transfer_state_to = KUR
+	}
+	every_owned_state = {
+		limit = { is_core_of = BSY }
+		transfer_state_to = BSY
+	}
+	hidden_effect = {
+		554 = {
+			add_core_of = BSY
+		}
+		809 = {
+			add_core_of = BSY
+		}
+		680 = {
+			add_core_of = BSY
+		}
+	}
+	load_focus_tree = { tree = KRG_SYR_Civil_War_Tree }
+	TUR = {
+		country_event = { id = krg_tur.1 }
+	}
+	declare_war_on = {
+		target = BSY
+		type = civil_war
+	}
+	set_politics = {
+		ruling_party = national_populist
+	}
+	hidden_effect = {
+		set_popularities = {
+			authoritarian_socialist = 4
+			radical_socialist = 7
+			social_democrat = 13
+			revolutionary_republican = 11
+			social_liberal = 3
+			market_liberal = 12
+			social_conservative = 3
+			authoritarian_democrat = 1
+			paternal_autocrat = 7
+			national_populist = 39
+		}
+		coal_add_pat_aut = yes
+		SYR_Sami_Al_Hinnawi = {
+			retire = yes
+		}
+	}
+
+	SYR_Akram_Al_Hawrani = {
+		set_nationality = BSY
+	}
+	SYR_sultan_alatrash = {
+		set_nationality = BSY
+	}
+	hidden_effect = {
+		BSY = {
+			inherit_technology = SYR
+			set_politics = {
+				ruling_party = radical_socialist
+			}
+			set_popularities = {
+				authoritarian_socialist = 1
+				radical_socialist = 55
+				social_democrat = 10
+				revolutionary_republican = 0
+				social_liberal = 11
+				market_liberal = 8
+				social_conservative = 6
+				authoritarian_democrat = 3
+				paternal_autocrat = 2
+				national_populist = 4
+			}
+			SYR_Akram_Al_Hawrani = {
+				promote_character = yes
+			}
+			swap_ideas = {
+				remove_idea = econ_tiny_edu_spending
+				add_idea = econ_medium_edu_spending
+			}
+			swap_ideas = {
+				remove_idea = econ_high_taxation
+				add_idea = econ_moderate_taxation
+			}
+			remove_ideas = {
+				KRG_volunteer_only
+			}
+			add_ideas = {
+				SYR_Baath_Idea
+				KRG_service_by_requirement
+			}
+			load_oob = "BSY"
+			country_event = {
+				id = krg_syr.11
+				days = 5
+			}
+			load_focus_tree = { tree = KRG_SYR_Civil_War_Tree }
+		}
+		PAL = {
+			inherit_technology = SYR
+			set_politics = {
+				ruling_party = social_liberal
+			}
+			set_popularities = {
+				authoritarian_socialist = 1
+				radical_socialist = 5
+				social_democrat = 9
+				revolutionary_republican = 17
+				social_liberal = 4
+				market_liberal = 35
+				social_conservative = 18
+				authoritarian_democrat = 1
+				paternal_autocrat = 6
+				national_populist = 4
+			}
+			#PAL_Izzat_Darwaza = {
+			#	promote_character = revolutionary_republican_subtype
+			#}
+			#set_cosmetic_tag = PAL_GOV
+			load_oob = "PAL"
+			country_event = {
+				id = krg_pal.0
+				days = 2
+			}
+		}
+		ISR = {
+			inherit_technology = SYR
+			add_ideas = {
+				ISR_yishuv
+			}
+			coal_add_rev_rep = yes
+			load_oob = "ISR"
+		}
+		KUR = {
+			inherit_technology = SYR
+			set_politics = {
+				ruling_party = revolutionary_republican
+			}
+			set_popularities = {
+				authoritarian_socialist = 1
+				radical_socialist = 0
+				social_democrat = 10
+				revolutionary_republican = 55
+				social_liberal = 11
+				market_liberal = 8
+				social_conservative = 6
+				authoritarian_democrat = 3
+				paternal_autocrat = 2
+				national_populist = 4
+			}
+			load_oob = "KUR"
+		}
+		LEB = {
+			coal_add_mar_lib = yes
+			inherit_technology = SYR
+			load_oob = "LEB"
+			country_event = {
+				id = krg_leb_syr_civil_war.1
+				days = 25
+			}
+		}
+		1157 = {
+			remove_core_of = SYR
+			add_claim_by = SYR
+			add_claim_by = PAL
+			add_claim_by = BSY
+		}
+		553 = {
+			remove_core_of = SYR
+			add_claim_by = SYR
+			add_claim_by = BSY
+		}
+		455 = {
+			remove_core_of = SYR
+			add_claim_by = SYR
+			add_claim_by = BSY
+		}
+		454 = {
+			remove_core_of = SYR
+			add_claim_by = SYR
+			add_claim_by = ISR
+		}
+		1158 = {
+			remove_core_of = SYR
+			add_claim_by = SYR
+			add_claim_by = BSY
+		}
+
+		SYR = {
+			remove_ideas = {
+				SYR_SSNP_idea
+				SYR_SSNP_idea_2
+				SYR_yishuv
+				SYR_discontent
+				KRG_authoritarian_system
+				KRG_volunteer_only
+				KRG_civilian_economy
+			}
+			add_ideas = {
+				KRG_fanatical_dictatorship
+				KRG_service_by_requirement
+				KRG_partial_mob
+			}
+			554 = {
+			create_unit = {
+					division = " name = \"SSNP Militia\" division_template = \"Liwa' Milishia\""
+					owner = SYR
+				}
+			create_unit = {
+					division = " name = \"SSNP Militia\" division_template = \"Liwa' Milishia\""
+					owner = SYR
+				}
+			create_unit = {
+					division = " name = \"SSNP Militia\" division_template = \"Liwa' Milishia\""
+					owner = SYR
+				}
+			create_unit = {
+					division = " name = \"SSNP Militia\" division_template = \"Liwa' Milishia\""
+					owner = SYR
+				}
+			}
+		}
+		EGY = {
+			BSY = { save_event_target_as = volunteer_target }
+			send_volunteers_to_TARGET = yes
+		}
+
+		CYR = {
+			BSY = { save_event_target_as = volunteer_target }
+			send_volunteers_to_TARGET = yes
+		}
+
+		IRQ = {
+			BSY = { save_event_target_as = volunteer_target }
+			send_volunteers_to_TARGET = yes
+		}
+	}
+}
