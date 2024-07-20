@@ -161,7 +161,7 @@ Accord_voting_decisions = {
 			set_global_flag = accord_issue_7_triggered
 		}
 	}
-	accord_acw_declare_on_aus = {
+	accord_acw_declare_on_tex = {
 		visible = {
 			check_variable = { global.accord_issue = 0 }
 			has_global_flag = ACW_start
@@ -178,15 +178,15 @@ Accord_voting_decisions = {
 		}
 
 		complete_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision complete accord_acw_declare_on_aus target: [From.GetName]"
-			accord_issue_acw_declare_on_aus_effect = yes
+			log = "[GetDateText]: [Root.GetName]: Decision complete accord_acw_declare_on_tex target: [From.GetName]"
+			accord_issue_acw_declare_on_tex_effect = yes
 			set_variable = { global.accord_issue_check = 8 }
 			for_each_scope_loop = {
 				array = global.accord_voting_country_array
 
-				activate_mission = accord_acw_declare_on_aus_issue
+				activate_mission = accord_acw_declare_on_tex_issue
 			}
-			custom_effect_tooltip = ENT_accord_acw_declare_on_aus_tt
+			custom_effect_tooltip = ENT_accord_acw_declare_on_tex_tt
 			set_global_flag = accord_issue_8_triggered
 		}
 	}
@@ -485,7 +485,7 @@ Accord_voting_decisions = {
 			}
 		}
 	}
-	accord_acw_declare_on_aus_issue = {
+	accord_acw_declare_on_tex_issue = {
 		allowed = { always = no }
 
 		visible = {
@@ -510,7 +510,7 @@ Accord_voting_decisions = {
 		priority = 200
 
 		timeout_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision timeout accord_acw_declare_on_aus_issue target: [From.GetName]"
+			log = "[GetDateText]: [Root.GetName]: Decision timeout accord_acw_declare_on_tex_issue target: [From.GetName]"
 			if = {
 				limit = {
 					has_variable = global.accord_issue_check

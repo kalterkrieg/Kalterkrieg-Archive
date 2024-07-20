@@ -2235,10 +2235,9 @@ focus_tree = {
 		}
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus TEX_Navy_Expand_Charleston"
-			add_tech_bonus = {
-				name = TEX_sub
+			add_doctrine_cost_reduction = {
+				cost_reduction = 0.5
 				uses = 2
-				bonus = 0.5
 				category = submarine_doctrine
 			}
 		}
@@ -2260,11 +2259,10 @@ focus_tree = {
 		}
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus TEX_Navy_Securing_Trade"
-			add_tech_bonus = {
-				name = TEX_surface
+			add_doctrine_cost_reduction = {
+				cost_reduction = 0.5
 				uses = 2
-				bonus = 0.5
-				category = naval_doctrine				#TODO change this to surface doctrine once implemented
+				category = naval_doctrine
 			}
 		}
 	}
@@ -2299,12 +2297,14 @@ focus_tree = {
 		prerequisite = {
 			focus = TEX_Air
 		}
+		mutually_exclusive = {
+			focus = TEX_Air_Superiority_Doctrine
+		}
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus TEX_Air_Assisting_Patton"
-			add_tech_bonus = {
-				name = TEX_cas_doctrine
+			add_doctrine_cost_reduction = {
+				cost_reduction = 0.75
 				uses = 1
-				bonus = 0.75
 				category = cat_battlefield_support
 			}
 		}
@@ -2389,12 +2389,14 @@ focus_tree = {
 		prerequisite = {
 			focus = TEX_Air
 		}
+		mutually_exclusive = {
+			focus = TEX_Air_Assisting_Patton
+		}
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus TEX_Air_Superiority_Doctrine"
-			add_tech_bonus = {
-				name = TEX_fighter_doctrine
+			add_doctrine_cost_reduction = {
+				cost_reduction = 0.75
 				uses = 1
-				bonus = 0.75
 				category = cat_operational_integrity
 			}
 		}
@@ -2731,8 +2733,8 @@ focus_tree = {
 					10640
 					10711
 					7814
-					12585
 					7760
+					12585
 					4860
 				}
 			}
@@ -3128,10 +3130,9 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus TEX_Army_Study_War"
 			army_experience = 35
-			add_tech_bonus = {
-				name = TEX_study
+			add_doctrine_cost_reduction = {
+				cost_reduction = 0.75
 				uses = 1
-				bonus = 0.75
 				category = land_doctrine
 			}
 		}
@@ -3251,11 +3252,9 @@ focus_tree = {
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus TEX_Army_Man_Not_Starve"
 			360 = {
-				add_building_construction = {
-					type = supply_node
+				build_railway = {
 					level = 1
-					instant_build = yes
-					province = 3697
+					path = { 880 6899 3880 9836 }
 				}
 				add_extra_state_shared_building_slots = 1
 			}

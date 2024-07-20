@@ -1,0 +1,68 @@
+MOR_start_civil_war = {
+	GER = {
+		remove_from_faction = MOR
+	}
+	MOR = {
+		for_each_scope_loop = {
+			array = owned_states
+
+			add_core_of = AMR
+		}
+	}
+	AMR = {
+		transfer_state = 462
+		transfer_state = 290
+		transfer_state = 699
+		set_state_controller = 462
+		set_state_controller = 290
+		set_state_controller = 699
+		set_province_controller = 989
+		set_province_controller = 1111
+		set_province_controller = 7116
+		load_oob = AMR_revolt
+	}
+	MOR = {
+		add_war_support = -0.15
+		add_stability = -0.1
+		declare_war_on = {
+			target = AMR
+			type = annex_everything
+		}
+		add_ideas = MOR_moroccan_crisis
+		AMR = {
+			add_ideas = AMR_moroccan_crisis
+		}
+	}
+	every_country = {
+		limit = {
+			check_variable = {
+				accord_alignment_level > 2
+			}
+			has_army_size = {
+				size > 5
+			}
+		}
+		AMR = { save_event_target_as = volunteer_target }
+		send_volunteers_to_TARGET = yes
+	}
+	every_country = {
+		limit = {
+			check_variable = {
+				reichspakt_alignment_level > 2
+			}
+			has_army_size = {
+				size > 5
+			}
+		}
+		MOR = { save_event_target_as = volunteer_target }
+		send_volunteers_to_TARGET = yes
+	}
+	add_to_array = {
+		global.influence_targets = 27
+	}
+	hidden_effect = {
+		news_event = {
+			id = worldnews.405
+		}
+	}
+}

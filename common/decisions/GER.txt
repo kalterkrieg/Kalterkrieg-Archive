@@ -3212,72 +3212,7 @@ GER_elections = {
 			hidden_effect = {
 				unlock_national_focus = GER_1951_election
 			}
-			if = {
-				limit = {
-					OR = {
-						AND = {
-							check_variable = { GER_dkp_support > 50 }
-							OR = {
-								has_game_rule = {
-									rule = GER_1951_REICHSTAGWAHL
-									option = GER_1951_REICHSTAGWAHL_CVP_BRUNING
-								}
-								has_game_rule = {
-									rule = GER_1951_REICHSTAGWAHL
-									option = GER_1951_REICHSTAGWAHL_CVP_WIRTH
-								}
-							}
-						}
-						AND = {
-							is_ai = yes
-							OR = {
-								has_game_rule = {
-									rule = GER_1951_REICHSTAGWAHL
-									option = GER_1951_REICHSTAGWAHL_DKP_GOERDELER
-								}
-								has_game_rule = {
-									rule = GER_1951_REICHSTAGWAHL
-									option = GER_1951_REICHSTAGWAHL_DKP_LEHR
-								}
-							}
-						}
-					}
-				}
-				custom_effect_tooltip = GER_dkp_victory_likely_tt
-				dkp_victory_1951 = yes
-				complete_national_focus = GER_DKP_victory
-				set_politics = {
-					ruling_party = authoritarian_democrat # Dkp, DVLP, Agarians, Local Parties
-				}
-				coal_add_pat_aut = yes
-				coal_add_nat_pop = yes
-				hidden_effect = {
-					country_event = {
-						id = krg_ger.540
-					}
-				}
-			}
-			else = {
-				custom_effect_tooltip = GER_zentrum_victory_likely_tt
-				zentrum_victory_1951 = yes
-				complete_national_focus = GER_zentrum_victory
-				set_politics = {
-					ruling_party = social_conservative # Zentrum, BVP, FVP, NLP, PP, Local Parties
-				}
-				coal_add_soc_lib = yes
-				coal_add_mar_lib = yes
-				coal_add_auth_dem = yes
-				hidden_effect = {
-					country_event = {
-						id = krg_ger.541
-					}
-					set_party_name = {
-						ideology = authoritarian_democrat
-						name = GER_authoritarian_democrat_zentrum_party
-						long_name = GER_authoritarian_democrat_zentrum_party_long
-					}
-				}
-			}
+			GER_1951_election_calculate_result = yes
 			clr_country_flag = GER_1951_elections
 		}
 	}
@@ -3837,24 +3772,24 @@ foreign_politics = {
 		available = {	
 			OR = { 
 				AND = {
-				206 = { # Minsk
-					controller = { 
-						OR = {
-							is_in_faction_with = GER
-							tag = GER } 
-						} 
-					}
-				886 = { # East Kiev
-					controller = { 
-						OR = {
-							is_in_faction_with = GER
-							tag = GER } 
-						} 
-					}
-				
-				227 = { # Donetsk
-					controller = { 
-						OR = {
+					206 = { # Minsk
+						controller = { 
+							OR = {
+								is_in_faction_with = GER
+								tag = GER } 
+							} 
+						}
+					886 = { # East Kiev
+						controller = { 
+							OR = {
+								is_in_faction_with = GER
+								tag = GER } 
+							} 
+						}
+					
+					227 = { # Donetsk
+						controller = { 
+							OR = {
 							is_in_faction_with = GER
 							tag = GER } 
 						} 
@@ -3862,6 +3797,7 @@ foreign_politics = {
 				}
 				# so you either capture most of the 'reclaimed' land OR			
 				RUS = { casualties_k > 1000 } #you slaughter a fuckload of Russians within 180 days
+				RUS = { surrender_progress > 0.25 }
 			}
 		}
 		visible = {

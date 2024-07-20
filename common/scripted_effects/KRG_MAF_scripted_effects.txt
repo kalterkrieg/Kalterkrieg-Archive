@@ -2909,6 +2909,9 @@ MAF_reformentrop_ending = {
 			POR_crisis_angola_idea
 		}
 	}
+	news_event = {
+		id = MAF_news.9
+	}
 	MAF_fix_countries_post_breakup = yes
 }
 
@@ -3052,6 +3055,9 @@ MAF_aapm_total_ending = {
 		add_ideas = {
 			POR_crisis_angola_idea
 		}
+	}
+	news_event = {
+		id = MAF_news.6
 	}
 }
 
@@ -3673,7 +3679,12 @@ MAF_dynamic_ending = {
 	}
 	GER = {
 		complete_national_focus = GER_post_colonial_order
-		add_ideas = GER_mittelafrika_lost
+		if = {
+			limit = {
+				NOT = { MAF = { has_country_flag = MAF_krupp_evac } }
+			}
+			add_ideas = GER_mittelafrika_lost
+		}
 	}
 	POR = {
 		activate_mission = POR_face_winds_of_change
@@ -3688,6 +3699,9 @@ MAF_dynamic_ending = {
 			target = SOM
 			type = annex_everything
 		}
+	}
+	news_event = {
+		id = MAF_news.7
 	}
 	MAF_fix_countries_post_breakup = yes
 }
@@ -3759,16 +3773,21 @@ MAF_spawn_generic_units_teleport = {
 		division_template = "Schutztruppe"
 		is_locked = no
 	}
-	every_state = {
-		teleport_armies = {
+	hidden_effect = {
+		every_owned_state = {
 			limit = {
-				tag = FROM
+				is_controlled_by = FROM
 			}
-			to_state_array = owned_controlled_states
+			teleport_armies = {
+				limit = {
+					tag = FROM
+				}
+				to_state_array = owned_controlled_states
+			}
 		}
-	}
-	PREV = {
-		clear_variable = MAF_temp_spawn_unit_amount
+		PREV = {
+			clear_variable = MAF_temp_spawn_unit_amount
+		}
 	}
 }
 

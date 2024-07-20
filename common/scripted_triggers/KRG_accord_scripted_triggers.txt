@@ -7,15 +7,6 @@ accord_start_lend_lease_triggers = {
 	}
 }
 
-accord_send_volunteers_triggers = {
-	if = {
-		limit = {
-			has_global_flag = CCW_ongoing
-		}
-		accord_ccw_can_send_volunteers = yes
-	}
-}
-
 accord_ccw_can_send_lend_lease = {
 	if = {
 		limit = {
@@ -26,44 +17,6 @@ accord_ccw_can_send_lend_lease = {
 		}
 		custom_trigger_tooltip = {
 			tooltip = accord_ccw_lend_lease_trigger_tt
-			always = no
-		}
-	}
-	if = {
-		limit = {
-			FROM = { tag = FNG }
-		}
-		custom_trigger_tooltip = {
-			tooltip = accord_ccw_wrong_side_trigger_tt
-			always = no
-		}
-	}
-}
-
-accord_ccw_can_send_volunteers = {
-	if = {
-		limit = {
-			tag = ENT
-			FROM = { tag = CHI }
-			NOT = {
-				has_global_flag = accord_ccw_limited_mission_pass
-			}
-		}
-		custom_trigger_tooltip = {
-			tooltip = accord_ccw_limited_mission_trigger_tt
-			always = no
-		}
-	}
-	if = {
-		limit = {
-			FROM = { tag = CHI }
-			NOT = {
-				has_global_flag = accord_ccw_volunteers_pass
-				tag = ENT
-			}
-		}
-		custom_trigger_tooltip = {
-			tooltip = accord_ccw_send_volunteers_trigger_tt
 			always = no
 		}
 	}

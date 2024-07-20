@@ -26,31 +26,52 @@ recalc_military_spending = {
 	}
 	
 	##AIRFORCE SPENDING###
-	set_temp_variable = { fighters = num_deployed_planes_with_type@fighter_equipment }
+	set_temp_variable = { fighters = num_deployed_planes_with_type@fighter_equipment_0 }
+	add_to_temp_variable = { fighters = num_deployed_planes_with_type@fighter_equipment_1 }
 	divide_temp_variable = { fighters = 1000 } #Fighter Cost
-	set_temp_variable = { heavy_fighters = num_deployed_planes_with_type@heavy_fighter_equipment }
+
+	set_temp_variable = { heavy_fighters = num_deployed_planes_with_type@heavy_fighter_equipment_0 }
 	divide_temp_variable = { heavy_fighters = 750 } #Heavy Fighter Cost
+
 	set_temp_variable = { cas = num_deployed_planes_with_type@CAS_equipment }
 	divide_temp_variable = { cas = 750 } #Cas Cost
+
 	set_temp_variable = { tac_bombers = num_deployed_planes_with_type@tac_bomber_equipment }
 	divide_temp_variable = { tac_bombers = 500 } #Tac Bomber Cost
-	set_temp_variable = { strat_bombers = num_deployed_planes_with_type@strat_bomber_equipment }
+
+	set_temp_variable = { strat_bombers = num_deployed_planes_with_type@strat_bomber_equipment_1 }
+	add_to_temp_variable = { strat_bombers = num_deployed_planes_with_type@strat_bomber_equipment_2 }
 	divide_temp_variable = { strat_bombers = 250 } #Strat Bomber Cost
+
 	set_temp_variable = { transports = num_deployed_planes_with_type@transport_plane_equipment }
 	divide_temp_variable = { transports = 500 } #Transport Cost
+
 	set_temp_variable = { mpa = num_deployed_planes_with_type@maritime_patrol_equipment }
 	divide_temp_variable = { mpa = 500 } #Transport Cost
+
 	set_temp_variable = { scout_plane = num_deployed_planes_with_type@scout_plane_equipment }
 	divide_temp_variable = { scout_plane = 500 } #Scout Cost
 
-	set_temp_variable = { jet_fighter = num_deployed_planes_with_type@jet_fighter_equipment }
+
+
+
+	set_temp_variable = { jet_fighter = num_deployed_planes_with_type@fighter_equipment }
+	subtract_from_temp_variable = { jet_fighter = fighters }
 	divide_temp_variable = { jet_fighter = 250 } #Jet Fighter Cost
-	set_temp_variable = { interceptor = num_deployed_planes_with_type@jet_interceptor_equipment }
+	
+	set_temp_variable = { interceptor = num_deployed_planes_with_type@heavy_fighter_equipment }
+	subtract_from_temp_variable = { interceptor = heavy_fighters }
 	divide_temp_variable = { interceptor = 200 } #interceptor Cost
-	set_temp_variable = { strike = num_deployed_planes_with_type@jet_strike_equipment }
+
+	set_temp_variable = { strike = num_deployed_planes_with_type@tac_bomber_equipment }
 	divide_temp_variable = { strike = 200 } #strike Cost
-	set_temp_variable = { jet_strat_bomber = num_deployed_planes_with_type@jet_strat_bomber_equipment }
+
+	set_temp_variable = { jet_strat_bomber = num_deployed_planes_with_type@strat_bomber_equipment }
+	subtract_from_temp_variable = { jet_strat_bomber = strat_bombers }
 	divide_temp_variable = { jet_strat_bomber = 100 } #Jet strat bomber Cost
+
+
+	
 	set_temp_variable = { heli = num_deployed_planes_with_type@utility_helicopter_equipment }
 	divide_temp_variable = { heli = 400 } #heli Cost
 

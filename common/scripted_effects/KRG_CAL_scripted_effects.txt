@@ -1,5 +1,6 @@
 # stats for initial house and senate composition
 CAL_electoral_initial = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAL_electoral_initial"
 	#AVERAGE 350k population per district
 	clear_array = CAL_electoral_state_array
 	# put all states in an array
@@ -769,6 +770,7 @@ CAL_electoral_initial = {
 # set_temp_variable = { temp_state = <insert_state_id> }
 # CAL_electoral_modify_popularity = yes
 CAL_electoral_modify_popularity = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAL_electoral_modify_popularity"
 	set_temp_variable = {
 		v = temp_party
 	}
@@ -929,6 +931,7 @@ CAL_electoral_modify_popularity = {
 }
 
 CAL_electoral_modify_popularity_all = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAL_electoral_modify_popularity_all"
 	set_temp_variable = {
 		v = temp_all_party
 	}
@@ -954,6 +957,7 @@ CAL_electoral_modify_popularity_all = {
 }
 
 CAL_electoral_sort = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAL_electoral_sort"
 	clear_array = temp_sort_array
 	for_loop_effect = {
 		start = 0
@@ -992,6 +996,7 @@ CAL_electoral_sort = {
 
 # fire every 4 years for presidential elections
 CAL_calculate_president = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAL_calculate_president"
 	hidden_effect = {
 		clear_variable = CAL_radsoc_electoral_vote
 		clear_variable = CAL_socdem_electoral_vote
@@ -1195,6 +1200,7 @@ CAL_calculate_president = {
 # ignore all code below (they work based on code above it so it doesnt need to be modified *usually*)
 # Maho's Parliament Builder v5
 CAL_electoral_reload = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAL_electoral_reload"
 	clear_array = CAL_electoral_main_array
 	# add to main array each party's seats
 	for_each_loop = {
@@ -1223,6 +1229,7 @@ CAL_electoral_reload = {
 
 # pie chart maker - maho edition
 CAL_electoral_pie_create_chart = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAL_electoral_pie_create_chart"
 	clear_array = CAL_electoral_pie_chart
 	# add to pie chart array each party's popularity
 	for_each_loop = {
@@ -1247,6 +1254,7 @@ CAL_electoral_pie_create_chart = {
 
 # fire every 2 years for midterms or presidential elections
 CAL_calculate_electoral_seat = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAL_calculate_electoral_seat"
 	hidden_effect = {
 		for_each_scope_loop = {
 			array = CAL_electoral_state_array
@@ -1610,6 +1618,7 @@ CAL_calculate_electoral_seat = {
 }
 
 CAL_update_all_predictions = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAL_update_all_predictions"
 	for_each_scope_loop = {
 		array = CAL_electoral_state_array
 		CAL_update_predictions = yes
@@ -1617,6 +1626,7 @@ CAL_update_all_predictions = {
 }
 
 CAL_update_predictions = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAL_update_predictions"
 	# Presidential and Gubernatorial Predictions
 	# No coalitions
 	if = {
@@ -1922,6 +1932,7 @@ CAL_update_predictions = {
 }
 
 CAL_congress_reload = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAL_congress_reload"
 	clear_array = CAL_senate_party_array
 	clear_array = CAL_house_party_array
 	clear_variable = CAL_house_seat_total
@@ -1987,6 +1998,7 @@ CAL_congress_reload = {
 }
 
 CAL_house_reload = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAL_house_reload"
 	clear_array = CAL_house_main_array
 	for_each_loop = {
 		array = CAL_house_party_array
@@ -2015,6 +2027,7 @@ CAL_house_reload = {
 }
 
 CAL_house_semicircle = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAL_house_semicircle"
 	clear_array = CAL_house_x_array
 	clear_array = CAL_house_y_array
 	add_to_array = {
@@ -2304,6 +2317,7 @@ CAL_house_semicircle = {
 
 # refresh gui
 CAL_electoral_refresh = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAL_electoral_refresh"
 	for_each_loop = {
 		array = CAL_electoral_state_array
 		add_to_variable = {
@@ -2313,6 +2327,7 @@ CAL_electoral_refresh = {
 }
 
 CAL_congress_refresh = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAL_congress_refresh"
 	if = {
 		limit = {
 			has_variable = show_CAL_congress
@@ -2324,6 +2339,7 @@ CAL_congress_refresh = {
 }
 
 CAL_get_senate_class = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAL_get_senate_class"
 	if = {
 		limit = {
 			OR = {
@@ -2393,6 +2409,7 @@ CAL_get_senate_class = {
 }
 
 CAL_increase_recovery = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAL_increase_recovery"
 	if = {
 		limit = {
 			has_idea = CAL_recovering_from_the_ACW
@@ -2423,12 +2440,14 @@ CAL_increase_recovery = {
 }
 
 CAL_Set_Congress_Support = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAL_Set_Congress_Support"
 	custom_effect_tooltip = CAL_Congress_Support_tt
 	CAL_Set_House_Support = yes
 	CAL_Set_Senate_Support = yes
 }
 
 CAL_Set_House_Support = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAL_Set_House_Support"
 	#SOC#
 	if = {
 		limit = {
@@ -3157,6 +3176,7 @@ CAL_Set_Senate_Support = {
 }
 
 CAL_Calc_Total = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAL_Calc_Total"
 	set_variable = {
 		CAL_House_Total_support = CAL_House_Socialist_support
 	}
@@ -3192,6 +3212,7 @@ CAL_Calc_Total = {
 }
 
 CAL_Add_Soc_Reps = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAL_Add_Soc_Reps"
 	custom_effect_tooltip = CAL_Add_Soc_Reps_tt
 	randomize_temp_variable = {
 		var = CAL_Soc_House_Additional_seats_temp
@@ -3216,6 +3237,7 @@ CAL_Add_Soc_Reps = {
 }
 
 CAL_Add_L_Prog_Reps = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAL_Add_L_Prog_Reps"
 	custom_effect_tooltip = CAL_Add_L_Prog_Reps_tt
 	randomize_temp_variable = {
 		var = CAL_L_Prog_House_Additional_seats_temp
@@ -3240,6 +3262,7 @@ CAL_Add_L_Prog_Reps = {
 }
 
 CAL_Add_Prog_Reps = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAL_Add_Prog_Reps"
 	custom_effect_tooltip = CAL_Add_Prog_Reps_tt
 	randomize_temp_variable = {
 		var = CAL_Prog_House_Additional_seats_temp
@@ -3264,6 +3287,7 @@ CAL_Add_Prog_Reps = {
 }
 
 CAL_Add_Rep_Reps = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAL_Add_Rep_Reps"
 	custom_effect_tooltip = CAL_Add_Rep_Reps_tt
 	randomize_temp_variable = {
 		var = CAL_Rep_House_Additional_seats_temp
@@ -3288,6 +3312,7 @@ CAL_Add_Rep_Reps = {
 }
 
 CAL_Add_Dem_Reps = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAL_Add_Dem_Reps"
 	custom_effect_tooltip = CAL_Add_Dem_Reps_tt
 	randomize_temp_variable = {
 		var = CAL_Dem_House_Additional_seats_temp
@@ -3312,6 +3337,7 @@ CAL_Add_Dem_Reps = {
 }
 
 CAL_Add_Soc_Senators = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAL_Add_Soc_Senators"
 	custom_effect_tooltip = CAL_Add_Soc_Senators_tt
 	randomize_temp_variable = {
 		var = CAL_Soc_Senate_Additional_seats_temp
@@ -3336,6 +3362,7 @@ CAL_Add_Soc_Senators = {
 }
 
 CAL_Add_L_Prog_Senators = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAL_Add_L_Prog_Senators"
 	custom_effect_tooltip = CAL_Add_L_Prog_Senators_tt
 	randomize_temp_variable = {
 		var = CAL_L_Prog_Senate_Additional_seats_temp
@@ -3360,6 +3387,7 @@ CAL_Add_L_Prog_Senators = {
 }
 
 CAL_Add_Prog_Senators = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAL_Add_Prog_Senators"
 	custom_effect_tooltip = CAL_Add_Prog_Senators_tt
 	randomize_temp_variable = {
 		var = CAL_Prog_Senate_Additional_seats_temp
@@ -3384,6 +3412,7 @@ CAL_Add_Prog_Senators = {
 }
 
 CAL_Add_Rep_Senators = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAL_Add_Rep_Senators"
 	custom_effect_tooltip = CAL_Add_Rep_Senators_tt
 	randomize_temp_variable = {
 		var = CAL_Rep_Senate_Additional_seats_temp
@@ -3408,6 +3437,7 @@ CAL_Add_Rep_Senators = {
 }
 
 CAL_Add_Dem_Senators = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAL_Add_Dem_Senators"
 	custom_effect_tooltip = CAL_Add_Dem_Senators_tt
 	randomize_temp_variable = {
 		var = CAL_Dem_Senate_Additional_seats_temp
@@ -3432,6 +3462,7 @@ CAL_Add_Dem_Senators = {
 }
 
 CAL_Remove_Soc_Reps = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAL_Remove_Soc_Reps"
 	custom_effect_tooltip = CAL_Remove_Soc_Reps_tt
 	randomize_temp_variable = {
 		var = CAL_Soc_House_Removed_seats_temp
@@ -3455,6 +3486,7 @@ CAL_Remove_Soc_Reps = {
 }
 
 CAL_Remove_L_Prog_Reps = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAL_Remove_L_Prog_Reps"
 	custom_effect_tooltip = CAL_Remove_L_Prog_Reps_tt
 	randomize_temp_variable = {
 		var = CAL_L_Prog_House_Removed_seats_temp
@@ -3478,6 +3510,7 @@ CAL_Remove_L_Prog_Reps = {
 }
 
 CAL_Remove_Prog_Reps = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAL_Remove_Prog_Reps"
 	custom_effect_tooltip = CAL_Remove_Prog_Reps_tt
 	randomize_temp_variable = {
 		var = CAL_Prog_House_Removed_seats_temp
@@ -3501,6 +3534,7 @@ CAL_Remove_Prog_Reps = {
 }
 
 CAL_Remove_Rep_Reps = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAL_Remove_Rep_Reps"
 	custom_effect_tooltip = CAL_Remove_Rep_Reps_tt
 	randomize_temp_variable = {
 		var = CAL_Rep_House_Removed_seats_temp
@@ -3524,6 +3558,7 @@ CAL_Remove_Rep_Reps = {
 }
 
 CAL_Remove_Dem_Reps = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAL_Remove_Dem_Reps"
 	custom_effect_tooltip = CAL_Remove_Dem_Reps_tt
 	randomize_temp_variable = {
 		var = CAL_Dem_House_Removed_seats_temp
@@ -3547,6 +3582,7 @@ CAL_Remove_Dem_Reps = {
 }
 
 CAL_Remove_Soc_Senators = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAL_Remove_Soc_Senators"
     custom_effect_tooltip = CAL_Remove_Soc_Senators_tt
     randomize_temp_variable = {
         var = CAL_Soc_Senate_Removed_seats_temp
@@ -3570,6 +3606,7 @@ CAL_Remove_Soc_Senators = {
 }
 
 CAL_Remove_L_Prog_Senators = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAL_Remove_L_Prog_Senators"
     custom_effect_tooltip = CAL_Remove_L_Prog_Senators_tt
     randomize_temp_variable = {
         var = CAL_L_Prog_Senate_Removed_seats_temp
@@ -3593,6 +3630,7 @@ CAL_Remove_L_Prog_Senators = {
 }
 
 CAL_Remove_Prog_Senators = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAL_Remove_Prog_Senators"
     custom_effect_tooltip = CAL_Remove_Prog_Senators_tt
     randomize_temp_variable = {
         var = CAL_Prog_Senate_Removed_seats_temp
@@ -3616,6 +3654,7 @@ CAL_Remove_Prog_Senators = {
 }
 
 CAL_Remove_Rep_Senators = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAL_Remove_Rep_Senators"
     custom_effect_tooltip = CAL_Remove_Rep_Senators_tt
     randomize_temp_variable = {
         var = CAL_Rep_Senate_Removed_seats_temp
@@ -3639,6 +3678,7 @@ CAL_Remove_Rep_Senators = {
 }
 
 CAL_Remove_Dem_Senators = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAL_Remove_Dem_Senators"
     custom_effect_tooltip = CAL_Remove_Dem_Senators_tt
     randomize_temp_variable = {
         var = CAL_Dem_Senate_Removed_seats_temp
@@ -3662,6 +3702,7 @@ CAL_Remove_Dem_Senators = {
 }
 
 CAL_add_state_idea = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAL_add_state_idea"
 	#California#
 	825 = {
 		clear_array = state_idea_array
@@ -3811,6 +3852,7 @@ CAL_add_state_idea = {
 }
 
 CAL_update_california = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAL_update_california"
 	825 = {
 		378 = {
 			CAL_update_state = yes
@@ -3851,6 +3893,7 @@ CAL_update_california = {
 
 
 move_up_CAL_Foreign_Businesses = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run move_up_CAL_Foreign_Businesses"
 	if = {
 		limit = { 
 			has_idea = CAL_Foreign_Businesses
@@ -3898,6 +3941,7 @@ move_up_CAL_Foreign_Businesses = {
 }
 
 move_up_CAL_Foreign_Businesses_Accord = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run move_up_CAL_Foreign_Businesses_Accord"
 	if = {
 		limit = { 
 			has_idea = CAL_Foreign_Businesses
@@ -3945,6 +3989,7 @@ move_up_CAL_Foreign_Businesses_Accord = {
 }
 
 CAL_admit_Alaska = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAL_admit_Alaska"
 	463 = {
 		clear_array = CAL_electoral_party_seat_array
 		clear_array = CAL_electoral_party_popularity_array
@@ -4051,6 +4096,7 @@ CAL_admit_Alaska = {
 }
 
 CAL_admit_Hawaii = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAL_admit_Hawaii"
 	629 = {
 		clear_array = CAL_electoral_party_seat_array
 		clear_array = CAL_electoral_party_popularity_array
@@ -4157,6 +4203,7 @@ CAL_admit_Hawaii = {
 }
 
 CAL_admit_South_California = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAL_admit_South_California"
 	949 = {
 		clr_state_flag = state_ideology_split_state
 		clear_array = CAL_electoral_party_seat_array
@@ -4220,6 +4267,7 @@ CAL_admit_South_California = {
 }
 
 CAL_admit_Jefferson = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAL_admit_Jefferson"
 	950 = {
 		clr_state_flag = state_ideology_split_state
 		clear_array = CAL_electoral_party_seat_array
@@ -4289,6 +4337,7 @@ CAL_admit_Jefferson = {
 }
 
 CAL_update_central_California = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAL_update_central_California"
 	825 = {
 		clear_array = CAL_electoral_party_seat_array
 		clear_array = CAL_electoral_party_popularity_array
@@ -4445,6 +4494,7 @@ CAL_update_central_California = {
 }
 
 CAL_split_California = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAL_split_California"
 	CAL_admit_South_California = yes
 	CAL_admit_Jefferson = yes
 	CAL_update_central_California = yes
@@ -4494,6 +4544,7 @@ CAL_split_California = {
 }
 
 CAL_remove_campaigning_effects = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAL_remove_campaigning_effects"
 	clr_country_flag = currently_campaigning
 	if = {
 		limit = { has_country_flag = CAL_Prog_Campaign }
@@ -4554,6 +4605,7 @@ CAL_remove_campaigning_effects = {
 }
 
 CAL_opponent_campaign = {
+	log = "[GetDateText]: [Root.GetName]: Scripted Effect run CAL_opponent_campaign"
 	if = {
 		limit = { has_country_flag = CAL_Prog_Campaign }
 		random_list = {

@@ -1698,7 +1698,7 @@ CAN_montgomery_plan_tab = {
 				}
 				effect_tooltip = {
 					FROM = {
-						random_state = {
+						random_owned_state = {
 							add_extra_state_shared_building_slots = 2
 							add_building_construction = {
 								type = industrial_complex
@@ -1706,7 +1706,7 @@ CAN_montgomery_plan_tab = {
 								instant_build = yes
 							}
 						}
-						random_state = {
+						random_owned_state = {
 							add_extra_state_shared_building_slots = 2
 							add_building_construction = {
 								type = industrial_complex
@@ -1720,7 +1720,7 @@ CAN_montgomery_plan_tab = {
 			else = {
 				effect_tooltip = {
 					FROM = {
-						random_state = {
+						random_owned_state = {
 							add_extra_state_shared_building_slots = 1
 							add_building_construction = {
 								type = industrial_complex
@@ -1728,7 +1728,7 @@ CAN_montgomery_plan_tab = {
 								instant_build = yes
 							}
 						}
-						random_state = {
+						random_owned_state = {
 							add_extra_state_shared_building_slots = 1
 							add_building_construction = {
 								type = industrial_complex
@@ -1906,7 +1906,7 @@ CAN_montgomery_plan_tab = {
 				}
 				effect_tooltip = {
 					FROM = {
-						random_state = {
+						random_owned_state = {
 							add_extra_state_shared_building_slots = 2
 							add_building_construction = {
 								type = industrial_complex
@@ -1919,7 +1919,7 @@ CAN_montgomery_plan_tab = {
 								instant_build = yes
 							}
 						}
-						random_state = {
+						random_owned_state = {
 							add_extra_state_shared_building_slots = 1
 							add_building_construction = {
 								type = arms_factory
@@ -1933,7 +1933,7 @@ CAN_montgomery_plan_tab = {
 			else = {
 				effect_tooltip = {
 					FROM = {
-						random_state = {
+						random_owned_state = {
 							add_extra_state_shared_building_slots = 1
 							add_building_construction = {
 								type = industrial_complex
@@ -1941,7 +1941,7 @@ CAN_montgomery_plan_tab = {
 								instant_build = yes
 							}
 						}
-						random_state = {
+						random_owned_state = {
 							add_extra_state_shared_building_slots = 1
 							add_building_construction = {
 								type = arms_factory
@@ -3658,7 +3658,6 @@ CAN_CAL_alaska_referendum = {
 		icon = generic_propaganda
 		allowed = {
 			original_tag = CAN
-			original_tag = CAL
 		}
 		
 		available = {
@@ -3711,6 +3710,30 @@ CAN_CAL_alaska_referendum = {
 		}
 	}
 
+	CAN_CAL_alaskan_referendum_CAL = {
+		icon = generic_propaganda
+		allowed = {
+			original_tag = CAL
+		}
+		
+		available = {
+			always = no
+		}
+		
+		activation = {
+			always = no #triggered by event
+		}
+		
+		is_good = yes
+		days_mission_timeout = 60
+		fire_only_once = yes
+
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout CAN_CAL_alaskan_referendum_CAL target: [From.GetName]"
+			custom_effect_tooltip = CAN_CAL_fate_of_alaska_tt
+		}
+	}
+
 	CAN_increase_procanadian_support = {
 		icon = eng_propaganda_campaigns
 
@@ -3729,11 +3752,11 @@ CAN_CAL_alaska_referendum = {
 		ai_will_do = {
 			base = 5
 			modifier = {
-				add = 5
+				add = 10
 				check_variable = { CAN.CAN_CAL_alaska_CAN_score < 55 }
 			}
 			modifier = {
-				add = 10
+				add = 20
 				check_variable = { CAN.CAN_CAL_alaska_CAN_score < 50 }
 			}
 			modifier = {
@@ -3773,12 +3796,12 @@ CAN_CAL_alaska_referendum = {
 		ai_will_do = {
 			base = 5
 			modifier = {
-				add = 5
-				check_variable = { CAN.CAN_CAL_alaska_increase_CAL_score < 55 }
+				add = 10
+				check_variable = { CAN.CAN_CAL_alaska_CAL_score < 55 }
 			}
 			modifier = {
-				add = 10
-				check_variable = { CAN.CAN_CAL_alaska_increase_CAL_score < 50 }
+				add = 20
+				check_variable = { CAN.CAN_CAL_alaska_CAL_score < 50 }
 			}
 
 			modifier = {
@@ -3823,26 +3846,6 @@ CAN_CAL_alaska_referendum = {
 
 		days_re_enable = 7
 
-		ai_will_do = {
-			base = 0
-			modifier = {
-				add = 3
-				check_variable = { CAN.CAN_CAL_alaska_CAN_score < 60 }
-			}
-			modifier = {
-				add = 5
-				check_variable = { CAN.CAN_CAL_alaska_CAN_score < 50 }
-			}
-
-			modifier = {
-				has_game_rule = {
-					rule = CAN_ALASKAN_REFERENDUM
-					option = CAN_ALASKAN_REFERENDUM_PSA
-				}
-				factor = 0
-			}
-		}
-
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision complete CAN_invest_in_alaskan_business target: [From.GetName]"
 			add_to_variable = { 
@@ -3875,26 +3878,6 @@ CAN_CAL_alaska_referendum = {
 	    days_remove = 30
 
 		days_re_enable = 7
-
-		ai_will_do = {
-			base = 0
-			modifier = {
-				add = 3
-				check_variable = { CAN.CAN_CAL_alaska_increase_CAL_score < 60 }
-			}
-			modifier = {
-				add = 5
-				check_variable = { CAN.CAN_CAL_alaska_increase_CAL_score < 50 }
-			}
-
-			modifier = {
-				has_game_rule = {
-					rule = CAN_ALASKAN_REFERENDUM
-					option = CAN_ALASKAN_REFERENDUM_CANADA
-				}
-				factor = 0
-			}
-		}
 
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision complete CAL_finance_american_civic_organizations target: [From.GetName]"
@@ -3931,11 +3914,11 @@ CAN_CAL_alaska_referendum = {
 		ai_will_do = {
 			base = 0
 			modifier = {
-				add = 3
+				add = 6
 				check_variable = { CAN.CAN_CAL_alaska_CAN_score < 50 }
 			}
 			modifier = {
-				add = 5
+				add = 12
 				check_variable = { CAN.CAN_CAL_alaska_CAN_score < 40 }
 			}
 
@@ -3987,12 +3970,12 @@ CAN_CAL_alaska_referendum = {
 		ai_will_do = {
 			base = 0
 			modifier = {
-				add = 3
-				check_variable = { CAN.CAN_CAL_alaska_increase_CAL_score < 50 }
+				add = 6
+				check_variable = { CAN.CAN_CAL_alaska_CAL_score < 50 }
 			}
 			modifier = {
-				add = 5
-				check_variable = { CAN.CAN_CAL_alaska_increase_CAL_score < 40 }
+				add = 12
+				check_variable = { CAN.CAN_CAL_alaska_CAL_score < 40 }
 			}
 
 			modifier = {
@@ -4038,11 +4021,11 @@ CAN_CAL_alaska_referendum = {
 		ai_will_do = {
 			base = 1
 			modifier = {
-				add = 3
+				add = 6
 				check_variable = { CAN.CAN_CAL_alaska_CAN_score < 50 }
 			}
 			modifier = {
-				add = 5
+				add = 12
 				check_variable = { CAN.CAN_CAL_alaska_CAN_score < 40 }
 			}
 
@@ -4088,12 +4071,12 @@ CAN_CAL_alaska_referendum = {
 		ai_will_do = {
 			base = 1
 			modifier = {
-				add = 3
-				check_variable = { CAN.CAN_CAL_alaska_increase_CAL_score < 50 }
+				add = 6
+				check_variable = { CAN.CAN_CAL_alaska_CAL_score < 50 }
 			}
 			modifier = {
-				add = 5
-				check_variable = { CAN.CAN_CAL_alaska_increase_CAL_score < 40 }
+				add = 12
+				check_variable = { CAN.CAN_CAL_alaska_CAL_score < 40 }
 			}
 
 			modifier = {

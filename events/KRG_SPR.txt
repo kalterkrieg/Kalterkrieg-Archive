@@ -113,6 +113,67 @@ add_namespace = krg_spr_news
 				id = worldnews.401
 			}
 			set_country_flag = SPR_communes_banned
+			ai_chance = {
+				base = 80
+				modifier = {
+					has_game_rule = {
+						rule = SPR_COMMUNE_WAR_END
+						option = SPR_COMMUNE_WAR_GOV
+					}
+					factor = 1000
+				}
+			}
+		}
+
+		option = {
+			name = krg_spr.3.b
+			coal_rev_auth_soc = yes
+			coal_rev_rad_soc = yes
+			remove_ideas = SPR_divided_government
+			swap_ideas = {
+				remove_idea = SPR_unrulely_communes
+				add_idea = SPR_commune_war
+			}
+			165 = {
+				set_demilitarized_zone = yes
+			}
+			166 = {
+				set_demilitarized_zone = yes
+			}
+			167 = {
+				set_demilitarized_zone = yes
+			}
+			168 = {
+				set_demilitarized_zone = yes
+			}
+			173 = {
+				set_demilitarized_zone = yes
+			}
+			118 = {
+				set_demilitarized_zone = yes
+			}
+			remove_ideas_with_trait = radical_socialist
+			add_ideas = SPR_Rodolfo_Llopis_hog_sde
+			add_ideas = SPR_Jose_Giral_fm_sde
+			add_ideas = SPR_Rafael_Sanchez_Guerra_hoi_sde
+			country_event = {
+				id = krg_spr.13
+				days = 250
+			}
+			news_event = {
+				id = worldnews.401
+			}
+			set_country_flag = SPR_communes_banned
+			ai_chance = {
+				base = 20
+				modifier = {
+					has_game_rule = {
+						rule = SPR_COMMUNE_WAR_END
+						option = SPR_COMMUNE_WAR_SWF
+					}
+					factor = 1000
+				}
+			}
 		}
 	}
 	country_event = { #Commune War over
@@ -640,10 +701,14 @@ add_namespace = krg_spr_news
 				set_demilitarized_zone = no
 			}
 			set_cosmetic_tag = SPR_commune
+			clear_accord_alignment = yes
 			hidden_effect = {
 				country_event = {
 					id = krg_spr.7
 					days = 235
+				}
+				news_event = {
+					id = worldnews.415
 				}
 			}
 		}

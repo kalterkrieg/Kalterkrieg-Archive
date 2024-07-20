@@ -45,41 +45,7 @@ country_event = { #SPR event
 		#It might just work
 		name = krg_mcw.1.a
 		hidden_effect = {
-			GER = {
-				remove_from_faction = MOR
-			}
-			AMR = {
-				transfer_state = 462
-				transfer_state = 290
-				transfer_state = 699
-				set_state_controller = 462
-				set_state_controller = 290
-				set_state_controller = 699
-				set_province_controller = 989
-				set_province_controller = 1111
-				set_province_controller = 7116
-				load_oob = AMR_revolt
-			}
-			MOR = {
-				add_war_support = -0.15
-				add_stability = -0.1
-				declare_war_on = {
-					target = AMR
-					type = annex_everything
-				}
-				add_ideas = MOR_moroccan_crisis
-				AMR = {
-					add_ideas = AMR_moroccan_crisis
-				}
-			}
-			add_to_array = {
-				global.influence_targets = 27
-			}
-			hidden_effect = {
-				news_event = {
-					id = worldnews.405
-				}
-			}
+			MOR_start_civil_war = yes
 		}
 	}
 }
@@ -154,7 +120,14 @@ country_event = {
 		}
 		CAN = {
 			add_to_faction = AMR
-			add_to_faction = SPR
+			if = {
+				limit = {
+					SPR = {
+						NOT = { has_government = radical_socialist }
+					}
+				}
+				add_to_faction = SPR
+			}
 		}
 		AMR = {
 			set_temp_variable = {
@@ -314,9 +287,10 @@ country_event = {
 		name = krg_mcw.6.a
 		add_popularity = {
 			ideology = social_democrat
-			popularity = 0.2
+			popularity = 0.20
 		}
 		coal_add_soc_dem = yes
+		coal_add_soc_lib = yes
 		news_event = {
 			id = worldnews.409
 		}
@@ -339,12 +313,14 @@ country_event = {
 		}
 		add_popularity = {
 			ideology = revolutionary_republican
-			popularity = -0.1
+			popularity = -0.10
 		}
 		add_popularity = {
 			ideology = radical_socialist
 			popularity = 0.05
 		}
+		coal_add_soc_dem = yes
+		coal_add_rev_rep = yes
 		news_event = {
 			id = worldnews.410
 		}
@@ -369,14 +345,28 @@ country_event = {
 			ideology = authoritarian_socialist
 			popularity = 0.25
 		}
+		coal_add_rad_soc = yes
 		CAN = {
 			remove_from_faction = AMR
 		}
 		clear_accord_alignment = yes		# leaves accord
 		hidden_effect = {
-			country_event = {
-				id = krg_mcw.7
-				days = 63
+			if = {
+				limit = {
+					SPR = {
+						has_government = radical_socialist
+					}
+				}
+				country_event = {
+					id = krg_mcw.10
+					days = 63
+				}
+			}
+			else = {
+				country_event = {
+					id = krg_mcw.7
+					days = 63
+				}
 			}
 		}
 		news_event = {
@@ -610,17 +600,63 @@ country_event = {
 	title = krg_mcw.9.t
 	desc = krg_mcw.9.d
 	immediate = {
-		log = "[GetDateText]: [Root.GetName]: krg_mcw.8"
+		log = "[GetDateText]: [Root.GetName]: krg_mcw.9"
 	}
 	is_triggered_only = yes
 	fire_only_once = yes
 	option = {
 		#yes
-		name = krg_hmw.6.a
+		name = krg_hmw.9.a
 		MIT_remove_from_mitteleuropa_partnership = yes
 		MIT_add_to_mitteleuropa = yes
 		news_event = {
 			id = worldnews.419
+		}
+	}
+}
+
+country_event = {
+	#Join Mitteleuropa
+	id = krg_mcw.10
+	title = krg_mcw.10.t
+	desc = krg_mcw.10.d
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: krg_mcw.10"
+	}
+	is_triggered_only = yes
+	fire_only_once = yes
+	option = {
+		#yes
+		name = krg_hmw.10.a
+		transfer_state = 1154
+		SPR = {
+			diplomatic_relation = {
+				country = MOR
+				relation = guarantee
+				active = yes
+			}
+		}
+		NOR = {
+			diplomatic_relation = {
+				country = MOR
+				relation = guarantee
+				active = yes
+			}
+		}
+		add_popularity = {
+			ideology = authoritarian_socialist
+			popularity = 0.10
+		}
+		add_popularity = {
+			ideology = radical_socialist
+			popularity = 0.05
+		}
+		add_popularity = {
+			ideology = social_liberal
+			popularity = -0.05
+		}
+		news_event = {
+			id = worldnews.416
 		}
 	}
 }

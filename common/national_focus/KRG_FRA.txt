@@ -1098,7 +1098,9 @@ shared_focus = {
 	cost = 4
 	x = 1
 	y = 2
-	
+	available = {
+		has_idea = KRG_bredowist_system
+	}
 	mutually_exclusive = {
 		focus = FRA_continue_osarns_mission
 	}
@@ -1148,6 +1150,9 @@ shared_focus = {
 	cost = 4
 	x = -1
 	y = 2
+	available = {
+		has_idea = KRG_authoritarian_system
+	}
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus FRA_continue_osarns_mission"
 		set_temp_variable = {
@@ -1444,6 +1449,7 @@ shared_focus = {
 	prerequisite = {
 		focus = FRA_found_the_bma
 		focus = FRA_intensify_desyndicalisation_efforts
+		focus = FRA_integrate_collaborator_organisations
 	}
 	prerequisite = {
 		focus = FRA_promises_of_regional_development
@@ -2585,6 +2591,18 @@ shared_focus = {
 				province = 11794
 			}
 		}
+		if = {
+			limit = { 
+				owns_state = 905
+			}
+			build_railway = {
+				level = 1
+				path = { 9590 6639 778}
+				start_province = 9590
+				target_province = 84
+			}
+		}
+		
 	}
 	ai_will_do = {
 		base = 5

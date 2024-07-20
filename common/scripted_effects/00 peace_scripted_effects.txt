@@ -1131,6 +1131,80 @@ RUS_RP_Peace = {
 	}
 }
 
+RP_RUS_Peace = {
+	every_country = { 
+		limit = {
+			is_in_faction_with = GER
+		}
+		white_peace = RUS
+	}
+	
+	RUS = {
+		if = {
+			limit = { 
+				has_subject = LAT
+			}
+			LAT = {
+				annex_country = {
+					target = KRL
+				}
+			}
+		}
+		else = {
+			annex_country = {
+				target = KRL
+			}
+		}
+
+		if = {
+			limit = { 
+				BLR = {
+					exists = yes
+				}
+			}
+			annex_country = {
+				target = BLR
+			}
+		}
+
+		if = {
+			limit = { 
+				GER = {
+					has_subject = EST
+				}
+			}
+			annex_country = {
+				target = EST
+			}
+		}
+
+		annex_country = {
+			target = LIT
+		}
+
+		annex_country = {
+			target = UKR
+		}
+
+		annex_country = {
+			target = FIN
+		}
+
+		if = {
+			limit = {
+				ROM = {
+					is_ally_with = GER
+				}
+			}
+			transfer_state = 78
+			transfer_state = 766
+		}
+
+		add_to_array = { global.influence_log = 45 }
+		add_to_array = { global.influence_log_val = 65 }
+		influence_recalc = yes
+	}
+}
 IND_RP_Peace = {
 	every_country = { 
 		limit = {

@@ -2729,12 +2729,12 @@ defined_text = {
 }
 
 defined_text = {
-	name = TEXGetAUSTroopStrength
+	name = TEXGetTroopStrength
 	text = {
 		trigger = {
 			TEX = {
 				check_variable = {
-					TEX_aus_troop_strength = 1
+					TEX_troop_strength = 1
 				}
 			}
 		}
@@ -2744,7 +2744,7 @@ defined_text = {
 		trigger = {
 			TEX = {
 				check_variable = {
-					TEX_aus_troop_strength = 2
+					TEX_troop_strength = 2
 				}
 			}
 		}
@@ -2754,7 +2754,7 @@ defined_text = {
 		trigger = {
 			TEX = {
 				check_variable = {
-					TEX_aus_troop_strength = 3
+					TEX_troop_strength = 3
 				}
 			}
 		}
@@ -2764,7 +2764,7 @@ defined_text = {
 		trigger = {
 			TEX = {
 				check_variable = {
-					TEX_aus_troop_strength = 4
+					TEX_troop_strength = 4
 				}
 			}
 		}
@@ -2774,7 +2774,7 @@ defined_text = {
 		trigger = {
 			TEX = {
 				check_variable = {
-					TEX_aus_troop_strength = 5
+					TEX_troop_strength = 5
 				}
 			}
 		}
@@ -2786,12 +2786,12 @@ defined_text = {
 }
 
 defined_text = {
-	name = TEXGetAUSTroopStrengthDesc
+	name = TEXGetTroopStrengthDesc
 	text = {
 		trigger = {
 			TEX = {
 				check_variable = {
-					TEX_aus_troop_strength = 1
+					TEX_troop_strength = 1
 				}
 			}
 		}
@@ -2801,7 +2801,7 @@ defined_text = {
 		trigger = {
 			TEX = {
 				check_variable = {
-					TEX_aus_troop_strength = 2
+					TEX_troop_strength = 2
 				}
 			}
 		}
@@ -2811,7 +2811,7 @@ defined_text = {
 		trigger = {
 			TEX = {
 				check_variable = {
-					TEX_aus_troop_strength = 3
+					TEX_troop_strength = 3
 				}
 			}
 		}
@@ -2821,7 +2821,7 @@ defined_text = {
 		trigger = {
 			TEX = {
 				check_variable = {
-					TEX_aus_troop_strength = 4
+					TEX_troop_strength = 4
 				}
 			}
 		}
@@ -2831,7 +2831,7 @@ defined_text = {
 		trigger = {
 			TEX = {
 				check_variable = {
-					TEX_aus_troop_strength = 5
+					TEX_troop_strength = 5
 				}
 			}
 		}
@@ -2843,7 +2843,7 @@ defined_text = {
 }
 
 defined_text = {
-	name = TEXGetAUSLocalSupport
+	name = TEXGetLocalSupport
 	text = {
 		trigger = {
 			TEX = {
@@ -2900,7 +2900,7 @@ defined_text = {
 }
 
 defined_text = {
-	name = TEXGetAUSLocalSupportDesc
+	name = TEXGetLocalSupportDesc
 	text = {
 		trigger = {
 			TEX = {
@@ -2957,7 +2957,7 @@ defined_text = {
 }
 
 defined_text = {
-	name = TEXGetAUSPrimaryWinner
+	name = TEXGetPrimaryWinner
 	text = {
 		trigger = {
 			any_owned_state = {
@@ -2971,6 +2971,34 @@ defined_text = {
 			}
 		}
 		localization_key = TEX_leader1_tt
+	}
+	text = {
+		trigger = {
+			any_owned_state = {
+				TEX_get_primary_states = yes
+				check_variable = {
+					pop_authdem = pop_conservative
+				}
+				check_variable = {
+					pop_authdem > pop_socdems
+				}
+			}
+		}
+		localization_key = TEX_leader12_tt
+	}
+	text = {
+		trigger = {
+			any_owned_state = {
+				TEX_get_primary_states = yes
+				check_variable = {
+					pop_authdem > pop_conservative
+				}
+				check_variable = {
+					pop_authdem = pop_socdems
+				}
+			}
+		}
+		localization_key = TEX_leader13_tt
 	}
 	text = {
 		trigger = {
@@ -2991,6 +3019,20 @@ defined_text = {
 			any_owned_state = {
 				TEX_get_primary_states = yes
 				check_variable = {
+					pop_conservative > pop_authdem
+				}
+				check_variable = {
+					pop_conservative = pop_socdems
+				}
+			}
+		}
+		localization_key = TEX_leader23_tt
+	}
+	text = {
+		trigger = {
+			any_owned_state = {
+				TEX_get_primary_states = yes
+				check_variable = {
 					pop_socdems > pop_authdem
 				}
 				check_variable = {
@@ -3001,7 +3043,7 @@ defined_text = {
 		localization_key = TEX_leader3_tt
 	}
 	text = {
-		localization_key = TEX_primary_error
+		localization_key = TEX_primary_everyone
 	}
 }
 
@@ -3218,10 +3260,10 @@ defined_text = {
 				TEX_centre_right_exodus = 1
 			}
 		}
-		localization_key = AUS_state_senate_SocLibs
+		localization_key = TEX_state_senate_SocLibs
 	}
 	text = {
-		localization_key = AUS_state_senate_NoLibs
+		localization_key = TEX_state_senate_NoLibs
 	}
 }
 

@@ -6,8 +6,8 @@ NEE_clear_bill_voting_flags = {
 	clr_country_flag = NEE_libdems_oppose
 	clr_country_flag = NEE_reps_support
 	clr_country_flag = NEE_reps_oppose
-	clr_country_flag = NEE_Soccon_support
-	clr_country_flag = NEE_Soccon_oppose
+	clr_country_flag = NEE_soccons_support
+	clr_country_flag = NEE_soccons_oppose
 	set_variable = {
 		NEE_senators_in_favor = 0
 	}
@@ -112,7 +112,7 @@ NEE_reps_oppose = {
 }
 NEE_soccons_support = {
 	custom_effect_tooltip = NEE_soccons_support_tt
-	set_country_flag = NEE_soccon_support
+	set_country_flag = NEE_soccons_support
 	add_to_variable = {
 		var = NEE_senators_in_favor
 		value = senate_seat_array^3
@@ -124,7 +124,7 @@ NEE_soccons_support = {
 }
 NEE_soccons_oppose = {
 	custom_effect_tooltip = NEE_soccons_oppose_tt
-	set_country_flag = NEE_soccon_oppose
+	set_country_flag = NEE_soccons_oppose
 	add_to_variable = {
 		var = NEE_senators_against
 		value = senate_seat_array^3
@@ -730,7 +730,7 @@ NEE_calculate_president = {
 		if = {
 			limit = {				
 				check_variable = {
-					marlib_electoral_votes > 50
+					marlib_electoral_votes > soccon_electoral_votes
 				}
 			}
 			hidden_effect = {
@@ -749,7 +749,7 @@ NEE_calculate_president = {
 		else_if = {
 			limit = {				
 				check_variable = {
-					soccon_electoral_votes > 50
+					soccon_electoral_votes > marlib_electoral_votes
 				}
 			}
 			hidden_effect = {
@@ -786,7 +786,7 @@ NEE_calculate_president = {
 		if = {
 			limit = {				
 				check_variable = {
-					marlib_electoral_votes > 50
+					marlib_electoral_votes > soccon_electoral_votes
 				}
 			}
 			hidden_effect = {
@@ -801,7 +801,7 @@ NEE_calculate_president = {
 		else_if = {
 			limit = {				
 				check_variable = {
-					soccon_electoral_votes > 50
+					soccon_electoral_votes > marlib_electoral_votes
 				}
 			}
 			hidden_effect = {
@@ -824,7 +824,7 @@ NEE_calculate_president = {
 		if = {
 			limit = {				
 				check_variable = {
-					marlib_electoral_votes > 50
+					marlib_electoral_votes > soclib_electoral_votes
 				}
 			}
 			hidden_effect = {
@@ -839,7 +839,7 @@ NEE_calculate_president = {
 		else_if = {
 			limit = {				
 				check_variable = {
-					soclib_electoral_votes > 50
+					soclib_electoral_votes > marlib_electoral_votes
 				}
 			}
 			hidden_effect = {
@@ -856,6 +856,8 @@ NEE_calculate_president = {
 		}
 	}
 }
+
+
 # ignore all code below (they work based on code above it so it doesnt need to be modified *usually*)
 # Scripted GUI Pie Chart example by Yard1
 # Feel free to use in your mods, but give credits to Yard1 (both in code, with comments; and on your download page)

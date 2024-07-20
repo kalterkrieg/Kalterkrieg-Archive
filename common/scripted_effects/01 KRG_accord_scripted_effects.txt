@@ -20,7 +20,6 @@ ENT_accord_set_leader = {
 			limit = { NOT = { check_variable = { highest_scored_country = 0 } } }
 			var:highest_scored_country = {
 				save_global_event_target_as = KRG_entente_leader
-				set_faction_leader = yes
 			}
 		}
 	}
@@ -50,9 +49,6 @@ accord_issue_1_effect_pass = {
 	}
 	news_event = {
 		id = worldnews.400
-	}
-	add_to_array = {
-		global.accord_voting_country_array = SPR
 	}
 }
 
@@ -112,7 +108,15 @@ accord_issue_ccw_limited_mission_effect_pass = {
 		CHI = { save_event_target_as = volunteer_target }
 		send_volunteers_to_TARGET = yes
 	}
+	CAL = {
+		CHI = { save_event_target_as = volunteer_target }
+		send_volunteers_to_TARGET = yes
+	}
 	GER = {
+		FNG = { save_event_target_as = volunteer_target }
+		send_volunteers_to_TARGET = yes
+	}
+	TEX = {
 		FNG = { save_event_target_as = volunteer_target }
 		send_volunteers_to_TARGET = yes
 	}
@@ -132,14 +136,37 @@ accord_issue_ccw_send_volunteers_effect = {
 }
 
 accord_issue_ccw_send_volunteers_effect_pass = {
+	set_global_flag = accord_ccw_limited_mission_pass #if not already set
 	set_global_flag = accord_ccw_volunteers_pass
-	for_each_scope_loop = {
-		array = CAN.allies
+	every_country = {
+		limit = {
+			check_variable = {
+				accord_alignment_level > 2
+			}
+			has_army_size = {
+				size > 5
+			}
+		}
 		CHI = { save_event_target_as = volunteer_target }
 		send_volunteers_to_TARGET = yes
 	}
-	for_each_scope_loop = {
-		array = GER.allies
+	CAL = {
+		CHI = { save_event_target_as = volunteer_target }
+		send_volunteers_to_TARGET = yes
+	}
+	every_country = {
+		limit = {
+			check_variable = {
+				reichspakt_alignment_level > 2
+			}
+			has_army_size = {
+				size > 5
+			}
+		}
+		FNG = { save_event_target_as = volunteer_target }
+		send_volunteers_to_TARGET = yes
+	}
+	TEX = {
 		FNG = { save_event_target_as = volunteer_target }
 		send_volunteers_to_TARGET = yes
 	}
@@ -199,12 +226,19 @@ accord_issue_acw_send_volunteers_effect = {
 accord_issue_acw_send_volunteers_effect_pass = {
 	for_each_scope_loop = {
 		array = global.accord_voting_country_array
-		set_country_flag = ACW_can_send_volunteers
+		NEE = { save_event_target_as = volunteer_target }
+		send_volunteers_to_TARGET = yes
+
+		CAL = { save_event_target_as = volunteer_target }
+		send_volunteers_to_TARGET = yes
+
+		GLG = { save_event_target_as = volunteer_target }
+		send_volunteers_to_TARGET = yes
 		add_ideas = accord_acw_volunteers_ideas
 	}
 }
 
-accord_issue_acw_declare_on_aus_effect = {
+accord_issue_acw_declare_on_tex_effect = {
 	set_variable = {
 		global.accord_issue = 8
 	}
@@ -217,7 +251,7 @@ accord_issue_acw_declare_on_aus_effect = {
 	accord_screen_refresh = yes
 }
 
-accord_issue_acw_declare_on_aus_effect_pass = {
+accord_issue_acw_declare_on_tex_effect_pass = {
 	if = {
 		limit = {
 			OR = {
@@ -373,7 +407,7 @@ accord_end_voting_effect = {
 					global.accord_issue = 8
 				}
 			}
-			accord_issue_acw_declare_on_aus_effect_pass = yes
+			accord_issue_acw_declare_on_tex_effect_pass = yes
 		}
 		else_if = {
 			limit = {

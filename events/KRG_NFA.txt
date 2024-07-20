@@ -611,6 +611,10 @@ country_event = { ### The Alegerian Citizenship Question
 		}
 		add_political_power = -100
 		add_stability = -0.1
+		country_event = {
+			id = nfa_colonial.35
+			days = 600
+		}
 	}
 
 	option = { #They arent Frenchmen, despite their service
@@ -1088,6 +1092,9 @@ country_event = { ### Algeria declares Independence!
 		NFA = {
 			set_country_flag = NFA_algerian_war
 			hidden_effect = {
+				set_variable = {
+					NFA_mission_length = 90
+				}
 				activate_mission = NFA_algerian_revolt					
 			}
 			declare_war_on = {
@@ -1098,25 +1105,7 @@ country_event = { ### Algeria declares Independence!
 				load_oob = "NFA_oas"
 			}
 			add_ideas = NFA_algerian_war
-			set_variable = { NFA_army_limit = num_divisions }
-			divide_variable = {
-				NFA_army_limit = 3
-			}
-			set_variable = {
-				NFA_army_size = num_armies_in_state@460
-			}
-			add_to_variable = {
-				NFA_army_size = num_armies_in_state@899
-			}
-			add_to_variable = {
-				NFA_army_size = num_armies_in_state@459
-			}
-			add_to_variable = {
-				NFA_army_size = num_armies_in_state@898
-			}
-			add_to_variable = {
-				NFA_army_size = num_armies_in_state@513
-			}
+			set_variable = { NFA_army_limit = 0 }
 			ALG = {
 				add_ideas = {
 					ALG_revolt
@@ -1759,6 +1748,11 @@ country_event = { ###Ahmed Ben Bella captured
 				days = 380
 				random_days = 25
 			}	
+			country_event = {
+				id = nfa_colonial.42
+				days = 380
+				random_days = 25
+			}	
 		}
 	}
 }
@@ -1769,6 +1763,12 @@ country_event = { ###Ahmed Ben Bella escapes
 	desc = nfa_colonial.39.d
 	is_triggered_only = yes
 	fire_only_once = yes
+
+	trigger = {
+		check_variable = {
+			NFA_intelligence_efforts < 4
+		}
+	}
 
 	option = { #Goddamnit!
 		name = nfa_colonial.39.a
@@ -1852,6 +1852,25 @@ news_event = { #Tunisian Revolution
 	major = yes	
 	option = {
 		name = nfa_colonial.41.a
+	}
+}
+
+country_event = { ###Ahmed Ben Bella Escape Thwarted
+	id = nfa_colonial.42
+	title = nfa_colonial.42.t
+	desc = nfa_colonial.42.d
+	is_triggered_only = yes
+	fire_only_once = yes
+
+	trigger = {
+		check_variable = {
+			NFA_intelligence_efforts > 3
+		}
+	}
+
+	option = { #Excellent
+		name = nfa_colonial.42.a
+	
 	}
 }
 

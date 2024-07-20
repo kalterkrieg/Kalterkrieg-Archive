@@ -1719,6 +1719,8 @@ shared_focus = {
 			id = nfa_colonial.3
 			days = 0
 		}
+		set_country_flag = NFA_algerian_matter
+		unlock_decision_tooltip = NFA_intelligence_efforts_ALG
 	}
 	ai_will_do = {
 		factor = 100
@@ -2340,6 +2342,7 @@ shared_focus = {
 			NFA_reform_process_var = 1
 			tooltip = NFA_reform_process_var_tt
 		}
+		NFA_fix_year_for_colonial_development = yes
 	}
 	ai_will_do = {
 		factor = 100
@@ -3965,10 +3968,12 @@ shared_focus = {
 	y = 1
 	completion_reward = {
 		log = "[GetDateText]: [Root.GetName]: Focus NFA_prepare_for_colonial_warfare"
-		swap_ideas = {
-			remove_idea = NFA_special_forces_4
-			add_idea = NFA_special_forces_5
+		hidden_effect = {
+			set_technology = {
+				desert_warfare = 1
+			}
 		}
+		custom_effect_tooltip = desert_warfare_effect
 	}
 	relative_position_id = NFA_develop_centre_insurrection_tactics
 	prerequisite = {

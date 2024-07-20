@@ -756,6 +756,110 @@ country_event = { # RP noped out what to do now
 	}
 }
 
+country_event = { # Russia has lost
+	id = WK3_peace.17
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event WK3_peace.17"
+	}
+	title = WK3_peace.6.t
+	desc = WK3_peace.6.d
+
+	trigger = {
+		original_tag = GER
+		ENT = {
+			has_war_with = GER
+		}
+		has_global_flag = WK3
+		has_war = yes
+		is_valid_peace_target = yes
+		UKR = {
+			has_capitulated = yes
+		}
+		LIT = {
+			has_capitulated = yes
+		}
+		KRL = {
+			OR = {
+				exists = no
+				has_capitulated = yes
+			}
+		}
+		BLR = {
+			OR = {
+				exists = no
+				has_capitulated = yes
+			}
+		}
+		POL = {
+			OR = {
+				surrender_progress > 0.15
+				has_capitulated = yes
+			}
+		}
+		NOT = {
+			controls_state = 5
+			controls_state = 85
+			controls_state = 86
+			controls_state = 67
+		}
+	}
+	
+	mean_time_to_happen = {
+		days = 10
+	}
+
+	fire_only_once = yes
+
+	option = {
+		name = WK3_peace.17.a # offer peace
+		RUS = {
+			country_event = {
+				id = WK3_peace.18
+				days = 3
+			}
+		}
+		ai_chance = {
+			base = 100
+		}
+	}
+
+	option = {
+		name = WK3_peace.17.b
+		add_war_support = -0.15
+		ai_chance = {
+			base = 0
+		}
+	}
+}
+
+country_event = { # Germany has lost
+	id = WK3_peace.18
+	immediate = {
+		log = "[GetDateText]: [Root.GetName]: event WK3_peace.18"
+	}
+	title = WK3_peace.18.t
+	desc = WK3_peace.18.d
+	
+	is_triggered_only = yes
+
+	option = {
+		name = WK3_peace.18.a
+		RP_RUS_Peace = yes
+		ai_chance = {
+			base = 100
+		}
+	}
+
+	option = {
+		name = WK3_peace.18.b
+		add_war_support = -0.1
+		ai_chance = {
+			base = 0
+		}
+	}
+}
+
+
 #news_event = { #RP victory
 #	id = WK3_news.1
 #	immediate = { log = "[GetDateText]: [Root.GetName]: event WK3_news.1" }

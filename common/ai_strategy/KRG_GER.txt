@@ -1,125 +1,859 @@
-GER_guard_NFA_border = {
-	allowed = {
-		tag = GER
-	}
+GER_hates_socialists = {
+	reversed = yes
 
-	enable = {
-		has_country_flag = GER_guard_NFA_border_flag
-	}
-
-	abort_when_not_enabled = yes
-
-	ai_strategy = {
-		type = contain
-		id = "NFA"
-		value = 250
-	}
-	ai_strategy = {
-		type = conquer
-		id = "NFA"
-		value = 250
-	}
-	ai_strategy = {
-		type = antagonize
-		id = "NFA"
-		value = 250
-	}
-	ai_strategy = {
-		type = force_defend_ally_borders
-		id = "FRA"
-		value = 250
-	}
-}
-
-GER_guard_RUS_border = {
-	allowed = {
-		tag = GER
-	}
-
-	enable = {
-		has_country_flag = GER_guard_RUS_border_flag
-	}
-
-	abort_when_not_enabled = yes
-
-	ai_strategy = {
-		type = contain
-		id = "RUS"
-		value = 250
-	}
-	ai_strategy = {
-		type = conquer
-		id = "RUS"
-		value = 250
-	}
-	ai_strategy = {
-		type = antagonize
-		id = "RUS"
-		value = 250
-	}
-}
-
-reichspakt_prioritise_europe = {
-	allowed = {
-		OR = {
-			tag = DNF
-			tag = GER
+	enable_reverse = {
+		GER = {
+			is_subject = no
+			has_socialist_government = no
 		}
 	}
-
 	enable = {
-		has_country_flag = reichspakt_prioritise_europe_flag
+		has_socialist_government = yes
 	}
 
 	abort_when_not_enabled = yes
 
 	ai_strategy = {
-		type = area_priority
-		id = europe
+		type = antagonize
+		id = GER
+		value = 1000
+	}
+}
+
+reichspakt_hates_russia = {
+	allowed = {
+		OR = {
+			original_tag = GER
+			original_tag = POL
+			original_tag = KRL
+			original_tag = EST
+			original_tag = LIT
+			original_tag = UKR
+		}
+	}
+	enable = {
+		is_in_faction_with = GER
+		RUS = { is_subject = no }
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = antagonize
+		id = RUS
+		value = 1000
+	}
+}
+
+GER_dislikes_entente = {
+	reversed = yes
+
+	enable_reverse = {
+		GER = { is_faction_leader = yes }
+	}
+	enable = {
+		is_in_faction_with = ENT
+	}
+	abort_when_not_enabled = yes
+
+	target_array = ENT.faction_members
+
+	ai_strategy = {
+		type = ignore
+		id = GER
+		value = 300
+	}
+	ai_strategy = {
+		type = alliance
+		id = GER
+		value = -300
+	}
+	ai_strategy = {
+		type = befriend
+		id = GER
+		value = -300
+	}
+	ai_strategy = {
+		type = support
+		id = GER
+		value = -1000
+	}
+}
+
+
+################
+### Military ###
+################
+GER_eyes_on_france = {
+	allowed = {
+		original_tag = GER
+	}
+	enable = {
+		NFA = { has_capitulated = no }
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = conquer
+		id = NFA
 		value = 1000
 	}
 	ai_strategy = {
-		type = area_priority
-		id = africa
-		value = -10000
+		type = front_armor_score
+		id = NFA
+		value = 100
 	}
 	ai_strategy = {
-		type = area_priority
-		id = south_america
-		value = -5000
+		type = front_unit_request
+		tag = NFA
+		value = 50
 	}
 	ai_strategy = {
-		type = area_priority
-		id = asia
-		value = -5000
+		type = theatre_distribution_demand_increase
+		id = 24
+		value = 10
 	}
-	ai_strategy = {
-		type = area_priority
-		id = oceania
-		value = -500
+}
+
+GER_less_focus_on_russia = {
+	allowed = {
+		original_tag = GER
 	}
+	enable = {
+		NFA = {
+			has_war_with = GER
+			has_capitulated = no
+		}
+		NOT = {
+			UKR = {
+				is_in_faction_with = ROOT
+				surrender_progress > 0.40
+			}
+			BLR = {
+				is_in_faction_with = ROOT
+				surrender_progress > 0.40
+			}
+			# BAT = {
+			# 	is_in_faction_with = ROOT
+			# 	surrender_progress > 0.40
+			# }
+			LIT = {
+				is_in_faction_with = ROOT
+				surrender_progress > 0.40
+			}
+			KRL = {
+				is_in_faction_with = ROOT
+				surrender_progress > 0.40
+			}
+		}
+	}
+	abort_when_not_enabled = yes
 
 	ai_strategy = {
 		type = front_unit_request
+		tag = RUS
+		value = -100
+	}
+}
 
-		tag = MAF
+GER_ignore_colonial_fronts_until_war_is_over = {
+	allowed = {
+		original_tag = GER
+	}
+	enable = {
+		OR = {
+			alliance_naval_strength_ratio < 10
+			NFA = { exists = yes }
+		}
+	}
+	abort_when_not_enabled = yes
 
-		value = -500
+	ai_strategy = {
+		type = dont_defend_ally_borders
+		id = MAF
+		value = 100
 	}
 
 	ai_strategy = {
 		type = dont_defend_ally_borders
-		id = "MAF"
-		value = 5000
+		id = MOR
+		value = 100
+	}
+}
+
+GER_destroy_invasion_beachheads_oldenburg = {
+	allowed = {
+		original_tag = GER
+	}
+	enable = {
+		NOT = { has_full_control_of_state = 56 } #Oldenburg
+		has_war_with = ENG
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = front_unit_request
+		state = 56 #Oldenburg
+		value = 50
 	}
 	ai_strategy = {
-		type = ignore
-		id = "POR"
-		value = 5000
+		type = front_control
+		state = 56 #Oldenburg
+		priority = 200
+		ordertype = front
+		execution_type = rush_weak
+		execute_order = yes
+	}
+}
+
+GER_destroy_invasion_beachheads_hanover = {
+	allowed = {
+		original_tag = GER
+	}
+	enable = {
+		NOT = { has_full_control_of_state = 59 } #Hanover
+		has_war_with = ENG
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = front_unit_request
+		state = 59 #Hanover
+		value = 50
 	}
 	ai_strategy = {
-		type = ignore
-		id = "SAF"
-		value = 5000
+		type = front_control
+		state = 59 #Hanover
+		priority = 200
+		ordertype = front
+		execution_type = rush_weak
+		execute_order = yes
+	}
+}
+
+GER_destroy_invasion_beachheads_schleswig = {
+	allowed = {
+		original_tag = GER
+	}
+	enable = {
+		NOT = { has_full_control_of_state = 58 } #Schleswig-Holstein
+		has_war_with = ENG
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = front_unit_request
+		state = 58 #Schleswig-Holstein
+		state = 782 #Northern Schleswig
+		value = 50
+	}
+	ai_strategy = {
+		type = front_control
+		state = 58 #Schleswig-Holstein
+		state = 782 #Northern Schleswig
+		priority = 200
+		ordertype = front
+		execution_type = rush_weak
+		execute_order = yes
+	}
+}
+
+GER_destroy_invasion_beachheads_mecklenburg = {
+	allowed = {
+		original_tag = GER
+	}
+	enable = {
+		NOT = { has_full_control_of_state = 61 } #Mecklenburg
+		has_war_with = ENG
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = front_unit_request
+		state = 61 #Mecklenburg
+		value = 50
+	}
+	ai_strategy = {
+		type = front_control
+		state = 61 #Mecklenburg
+		priority = 200
+		ordertype = front
+		execution_type = rush_weak
+		execute_order = yes
+	}
+}
+
+GER_destroy_invasion_beachheads_netherlands = {
+	allowed = {
+		original_tag = GER
+	}
+	enable = {
+		has_war_with = ENG
+		HOL = {
+			is_ally_with = ROOT
+			NOT = { is_neighbor_of = NFA }
+			NOT = { BEL = { is_ally_with = ENT } }
+			any_home_area_neighbor_country = { has_war_with = ENG }
+		}
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = front_unit_request
+		tag = ENG
+		value = 50
+	}
+	ai_strategy = {
+		type = front_control
+		tag = ENG
+		priority = 200
+		ordertype = front
+		execution_type = rush_weak
+		execute_order = yes
+	}
+}
+
+GER_be_careful_around_england = {
+	allowed = {
+		original_tag = GER
+	}
+	enable = {
+		has_navy_size = { size > 0 }
+		OR = {
+			AND = {
+				ENG = {
+					is_subject = no
+					has_war_with = ROOT
+					naval_strength_comparison = { other = ROOT ratio > 0.6 }
+				}
+				NFA = { exists = yes }
+			}
+			AND = {
+				ENG = {
+					is_subject = no
+					has_war_with = ROOT
+					naval_strength_comparison = { other = ROOT ratio > 0.8 }
+				}
+				NFA = { exists = no }
+			}
+		}
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = strike_force_home_base
+		id = 173 #Eastern North Sea
+	}
+	ai_strategy = {
+		type = naval_convoy_raid_region
+		id = 173 #Eastern North Sea
+		value = 100
+	}
+	ai_strategy = {
+		type = naval_avoid_region
+		id = 18 #English Channel
+		value = 100
+	}
+	ai_strategy = {
+		type = naval_avoid_region
+		id = 42 #Bay of Biscay
+		value = 100
+	}
+	ai_strategy = {
+		type = naval_avoid_region
+		id = 43 #Western Approaches
+		value = 100
+	}
+	ai_strategy = {
+		type = naval_convoy_raid_region
+		id = 42 #Don't raid in the English Channel
+		value = -500
+	}
+}
+
+GER_take_the_fight_to_england = {
+	allowed = {
+		original_tag = GER
+	}
+	enable = {
+		has_war_with = ENG
+		has_navy_size = { size > 0 }
+		ENG = { naval_strength_comparison = { other = ROOT ratio < 0.6 } }
+		surrender_progress < 0.05
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = invade
+		id = "ENG"
+		value = 200
+	}
+	ai_strategy = {
+		type = front_unit_request
+		tag = ENG
+		value = 100
+	}
+	ai_strategy = {
+		type = invasion_unit_request
+		tag = ENG
+		value = 10
+	}
+}
+
+
+#############################
+## Reichspakt Coordination ##
+#############################
+
+MIE_ignore_northern_oststaaten = { #Austrian and Balkans RP tags should focus on Ukraine
+	allowed = {
+		OR = {
+			is_danubian_tag = yes
+			is_balkan_tag = yes
+			is_italian_tag = yes
+			original_tag = UKR
+
+			#Banned from Eastern Front in general
+			is_belgian_tag = yes
+			is_scandinavian_tag = yes
+			original_tag = HOL
+			original_tag = SWI
+		}
+	}
+	enable = {
+		is_ally_with = GER
+		RUS = { is_faction_leader = yes }
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = dont_defend_ally_borders
+		id = BLR
+		value = 100
+	}
+	ai_strategy = {
+		type = dont_defend_ally_borders
+		id = KRL
+		value = 100
+	}
+	ai_strategy = {
+		type = dont_defend_ally_borders
+		id = LIT
+		value = 100
+	}
+	ai_strategy = {
+		type = dont_defend_ally_borders
+		id = EST
+		value = 100
+	}
+}
+
+MIE_ignore_southern_oststaaten = { #Rest of Reichspakt should focus on WHR/BAT front
+	allowed = {
+		OR = {
+			original_tag = POL
+			original_tag = BAT
+			original_tag = BLR
+
+			#Banned from Eastern Front in general
+			is_belgian_tag = yes
+			is_scandinavian_tag = yes
+			original_tag = HOL
+			original_tag = SWI
+
+		}
+	}
+	enable = {
+		is_ally_with = GER
+		RUS = { is_faction_leader = yes }
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = dont_defend_ally_borders
+		id = UKR
+		value = 100
+	}
+}
+
+MIE_ignore_western_front = {
+	allowed = {
+		OR = {
+			is_polish_tag = yes
+			original_tag = KRL
+			original_tag = BLR
+			original_tag = UKR
+			original_tag = CZE
+			original_tag = HUN
+			is_balkan_tag = yes
+			is_scandinavian_tag = yes
+		}
+	}
+	enable = {
+		is_ally_with = GER
+		NFA = { is_faction_leader = yes }
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = dont_defend_ally_borders
+		id = GER
+		value = 100
+	}
+	ai_strategy = {
+		type = dont_defend_ally_borders
+		id = BEL
+		value = 100
+	}
+	ai_strategy = {
+		type = dont_defend_ally_borders
+		id = HOL
+		value = 100
+	}
+	ai_strategy = {
+		type = dont_defend_ally_borders
+		id = SWI
+		value = 100
+	}
+}
+
+GER_dont_call_allies_into_minor_wars_before_weltkrieg = {
+	reversed = yes
+
+	enable = {
+		GER = { has_war_with_major = no }
+		is_in_faction_with = GER
+		NOT = { any_home_area_neighbor_country = { has_war_with = GER } }
+	}
+	abort_when_not_enabled = yes
+
+	target_array = GER.faction_members
+
+	ai_strategy = { type = diplo_action_desire id = GER target = call_allies value = -1000 }
+	ai_strategy = { type = diplo_action_acceptance id = GER target = join_allies value = -1000 }
+
+}
+
+################
+### Industry ###
+################
+
+GER_civilian_buildup = {
+	allowed = {
+		original_tag = GER
+	}
+	enable = {
+		date < 1952.1.1
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = building_target
+		id = industrial_complex
+		value = 59
+	}
+}
+
+GER_build_more_fighters = {
+	allowed = {
+		original_tag = GER
+	}
+	enable = {
+		always = yes
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = unit_ratio
+		id = fighter
+		value = 60 #aim for 3:2 ratio of fighters to CAS
+	}
+	ai_strategy = {
+		type = equipment_production_factor
+		id = fighter
+		value = 50
+	}
+}
+
+GER_total_war_against_russia = {
+	allowed = {
+		original_tag = GER
+	}
+	enable = {
+		RUS = { is_faction_leader = yes }
+		NFA = {
+			OR = {
+				NOT = { has_war_with = GER }
+				has_capitulated = yes
+				exists = no
+			}
+		}
+		ITA = {
+			OR = {
+				NOT = { has_war_with = GER }
+				has_capitulated = yes
+				exists = no
+			}
+		}
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = role_ratio
+		id = armor
+		value = 20
+	}
+	ai_strategy = {
+		type = front_armor_score
+		id = RUS
+		value = 250
+	}
+	ai_strategy = {
+		type = equipment_production_factor
+		id = armor
+		value = 10
+	}
+	ai_strategy = {
+		type = unit_ratio
+		id = cas
+		value = 60
+	}
+	ai_strategy = {
+		type = equipment_production_factor
+		id = cas
+		value = 20
+	}
+	ai_strategy = {
+		type = equipment_production_factor
+		id = fighter
+		value = -20
+	}
+	ai_strategy = {
+		type = railway_gun_divisions_ratio
+		value = 1
+	}
+}
+
+GER_build_radars_brabant = {
+	allowed = {
+		original_tag = GER
+		threat > 0.6
+		has_tech = early_radar
+	}
+	enable = {
+		925 = { #Brabant
+			controller = { is_ally_with = FROM }
+			free_building_slots = {
+				building = radar_station
+				size > 0
+			}
+		}
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = build_building
+		id = radar_station
+		target = 925 #Brabant
+		value = 2000
+	}
+}
+
+GER_build_radars_alsace = {
+	allowed = {
+		original_tag = GER
+		threat > 0.6
+		has_tech = early_radar
+	}
+	enable = {
+		28 = { #Alsace-Lorraine
+			controller = { is_ally_with = FROM }
+			free_building_slots = {
+				building = radar_station
+				size > 0
+			}
+		}
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = build_building
+		id = radar_station
+		target = 28 #Alsace-Lorraine
+		value = 2000
+	}
+}
+
+GER_build_radars_holland = {
+	allowed = {
+		original_tag = GER
+		threat > 0.6
+		has_tech = early_radar
+	}
+	enable = {
+		7 = { #Holland
+			controller = { is_ally_with = FROM }
+			free_building_slots = {
+				building = radar_station
+				size > 0
+			}
+		}
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = build_building
+		id = radar_station
+		target = 7 #Holland
+		value = 2000
+	}
+}
+
+GER_build_radars_rhineland = {
+	allowed = {
+		original_tag = GER
+		threat > 0.6
+		has_tech = early_radar
+	}
+	enable = {
+		8 = { #Luxembourg
+			controller = { is_ally_with = FROM }
+			free_building_slots = {
+				building = radar_station
+				size > 0
+			}
+		}
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = build_building
+		id = radar_station
+		target = 8 #Luxembourg
+		value = 2000
+	}
+}
+
+GER_build_radars_hesse = {
+	allowed = {
+		original_tag = GER
+		threat > 0.6
+		has_tech = early_radar
+	}
+	enable = {
+		55 = { #Hesse
+			controller = { is_ally_with = FROM }
+			free_building_slots = {
+				building = radar_station
+				size > 0
+			}
+		}
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = build_building
+		id = radar_station
+		target = 55 #Hesse
+		value = 2000
+	}
+}
+
+GER_build_radars_warsaw = {
+	allowed = {
+		original_tag = GER
+		threat > 0.6
+		has_tech = early_radar
+	}
+	enable = {
+		10 = { #Warsaw
+			controller = { is_ally_with = FROM }
+			free_building_slots = {
+				building = radar_station
+				size > 0
+			}
+		}
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = build_building
+		id = radar_station
+		target = 10 #Warsaw
+		value = 2000
+	}
+}
+
+GER_build_radars_riga = {
+	allowed = {
+		original_tag = GER
+		threat > 0.6
+		has_tech = early_radar
+	}
+	enable = {
+		842 = { #Riga
+			controller = { is_ally_with = FROM }
+			free_building_slots = {
+				building = radar_station
+				size > 0
+			}
+		}
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = build_building
+		id = radar_station
+		target = 842 #Riga
+		value = 2000
+	}
+}
+
+GER_build_radars_minsk = {
+	allowed = {
+		original_tag = GER
+		threat > 0.6
+		has_tech = early_radar
+	}
+	enable = {
+		206 = { #Minsk
+			controller = { is_ally_with = FROM }
+			free_building_slots = {
+				building = radar_station
+				size > 0
+			}
+		}
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = build_building
+		id = radar_station
+		target = 206 #Minsk
+		value = 2000
+	}
+}
+
+GER_build_radars_kiev = {
+	allowed = {
+		original_tag = GER
+		threat > 0.6
+		has_tech = early_radar
+	}
+	enable = {
+		202 = { #Kiev
+			controller = { is_ally_with = FROM }
+			free_building_slots = {
+				building = radar_station
+				size > 0
+			}
+		}
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = build_building
+		id = radar_station
+		target = 202 #Kiev
+		value = 2000
 	}
 }

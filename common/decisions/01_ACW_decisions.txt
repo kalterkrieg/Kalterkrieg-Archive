@@ -167,7 +167,8 @@ ACW_decisions = {
 						original_tag = DNF
 					}
 				}
-				set_country_flag = ACW_can_send_volunteers
+				TEX = { save_event_target_as = volunteer_target }
+				send_volunteers_to_TARGET = yes
 				add_ideas = RP_acw_volunteers_ideas
 			}
 		}
@@ -1386,7 +1387,7 @@ ACW_decisions = {
 	}
 
 
-	ENT_accord_acw_declare_on_aus = {
+	ENT_accord_acw_declare_on_tex = {
 		icon = GFX_decision_generic_ignite_civil_war
 		visible = {
 			check_variable = { global.accord_issue = 0 }
@@ -1408,15 +1409,15 @@ ACW_decisions = {
 		}
 
 		complete_effect = {
-			log = "[GetDateText]: [Root.GetName]: Decision complete ENT_accord_acw_declare_on_aus target: [From.GetName]"
-			accord_issue_acw_declare_on_aus_effect = yes
+			log = "[GetDateText]: [Root.GetName]: Decision complete ENT_accord_acw_declare_on_tex target: [From.GetName]"
+			accord_issue_acw_declare_on_tex_effect = yes
 			set_variable = { global.accord_issue_check = 8 }
 			for_each_scope_loop = {
 				array = global.accord_voting_country_array
 
-				activate_mission = accord_acw_declare_on_aus_issue
+				activate_mission = accord_acw_declare_on_tex_issue
 			}
-			custom_effect_tooltip = ENT_accord_acw_declare_on_aus_tt
+			custom_effect_tooltip = ENT_accord_acw_declare_on_tex_tt
 			set_global_flag = accord_issue_8_triggered
 		}
 		ai_will_do = {
@@ -2151,7 +2152,7 @@ ACW_decisions = {
 				has_capitulated = no
 			}
 			has_equipment = {
-				jet_fighter_equipment > 24
+				fighter_equipment > 24
 			}
 			custom_trigger_tooltip = {
 				tooltip = ACW_has_level_3_involvement
@@ -2187,7 +2188,7 @@ ACW_decisions = {
 				add_war_support = 0.01
 			}
 			add_equipment_to_stockpile = {
-				type = jet_fighter_equipment
+				type = fighter_equipment
 				amount = -25
 			}
 			add_to_variable = {
@@ -2206,7 +2207,7 @@ ACW_decisions = {
 			log = "[GetDateText]: [Root.GetName]: Decision remove ENT_lend_lease_fighters target: [From.GetName]"
 			FROM = {
 				add_equipment_to_stockpile = {
-					type = jet_fighter_equipment
+					type = fighter_equipment
 					amount = 25
 				}
 				add_to_variable = {
@@ -2229,7 +2230,7 @@ ACW_decisions = {
 				has_capitulated = no
 			}
 			has_equipment = {
-				jet_interceptor_equipment > 24
+				heavy_fighter_equipment > 24
 			}
 			custom_trigger_tooltip = {
 				tooltip = ACW_has_level_3_involvement
@@ -2265,7 +2266,7 @@ ACW_decisions = {
 				add_war_support = 0.01
 			}
 			add_equipment_to_stockpile = {
-				type = jet_interceptor_equipment
+				type = heavy_fighter_equipment
 				amount = -25
 			}
 			add_to_variable = {
@@ -2284,7 +2285,7 @@ ACW_decisions = {
 			log = "[GetDateText]: [Root.GetName]: Decision remove ENT_lend_lease_interceptor target: [From.GetName]"
 			FROM = {
 				add_equipment_to_stockpile = {
-					type = jet_interceptor_equipment
+					type = heavy_fighter_equipment
 					amount = 25
 				}
 				add_to_variable = {
@@ -2307,7 +2308,7 @@ ACW_decisions = {
 				has_capitulated = no
 			}
 			has_equipment = {
-				jet_strike_equipment > 24
+				tac_bomber_equipment > 24
 			}
 			custom_trigger_tooltip = {
 				tooltip = ACW_has_level_3_involvement
@@ -2343,7 +2344,7 @@ ACW_decisions = {
 				add_war_support = 0.01
 			}
 			add_equipment_to_stockpile = {
-				type = jet_strike_equipment
+				type = tac_bomber_equipment
 				amount = -25
 			}
 			add_to_variable = {
@@ -2362,7 +2363,7 @@ ACW_decisions = {
 			log = "[GetDateText]: [Root.GetName]: Decision remove ENT_lend_lease_strike target: [From.GetName]"
 			FROM = {
 				add_equipment_to_stockpile = {
-					type = jet_strike_equipment
+					type = tac_bomber_equipment
 					amount = 25
 				}
 				add_to_variable = {
@@ -2385,7 +2386,7 @@ ACW_decisions = {
 				has_capitulated = no
 			}
 			has_equipment = {
-				jet_strat_bomber_equipment > 14
+				strat_bomber_equipment > 14
 			}
 			custom_trigger_tooltip = {
 				tooltip = ACW_has_level_3_involvement
@@ -2412,7 +2413,7 @@ ACW_decisions = {
 				add_war_support = 0.01
 			}
 			add_equipment_to_stockpile = {
-				type = jet_strat_bomber_equipment
+				type = strat_bomber_equipment
 				amount = -15
 			}
 			add_to_variable = {
@@ -2431,7 +2432,7 @@ ACW_decisions = {
 			log = "[GetDateText]: [Root.GetName]: Decision remove ENT_lend_lease_strat_bomber target: [From.GetName]"
 			FROM = {
 				add_equipment_to_stockpile = {
-					type = jet_strat_bomber_equipment
+					type = strat_bomber_equipment
 					amount = 15
 				}
 				add_to_variable = {
@@ -2718,7 +2719,8 @@ ACW_decisions = {
 
 		complete_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision complete GER_send_volunteer target: [From.GetName]"
-			set_country_flag = ACW_can_send_volunteers
+			TEX = { save_event_target_as = volunteer_target }
+			send_volunteers_to_TARGET = yes
 			add_ideas = RP_acw_volunteers_ideas
 		}
 	}
@@ -3344,7 +3346,7 @@ ACW_decisions = {
 				has_capitulated = no
 			}
 			has_equipment = {
-				jet_fighter_equipment > 24
+				fighter_equipment > 24
 			}
 			custom_trigger_tooltip = {
 				tooltip = ACW_has_level_3_involvement
@@ -3380,7 +3382,7 @@ ACW_decisions = {
 				add_war_support = 0.01
 			}
 			add_equipment_to_stockpile = {
-				type = jet_fighter_equipment
+				type = fighter_equipment
 				amount = -25
 			}
 			add_to_variable = {
@@ -3405,7 +3407,7 @@ ACW_decisions = {
 				}
 				FROM = {
 					add_equipment_to_stockpile = {
-						type = jet_fighter_equipment
+						type = fighter_equipment
 						amount = 25
 					}
 					add_to_variable = {
@@ -3433,7 +3435,7 @@ ACW_decisions = {
 				has_capitulated = no
 			}
 			has_equipment = {
-				jet_interceptor_equipment > 24
+				heavy_fighter_equipment > 24
 			}
 			custom_trigger_tooltip = {
 				tooltip = ACW_has_level_3_involvement
@@ -3469,7 +3471,7 @@ ACW_decisions = {
 				add_war_support = 0.01
 			}
 			add_equipment_to_stockpile = {
-				type = jet_interceptor_equipment
+				type = heavy_fighter_equipment
 				amount = -25
 			}
 			add_to_variable = {
@@ -3494,7 +3496,7 @@ ACW_decisions = {
 				}
 				FROM = {
 					add_equipment_to_stockpile = {
-						type = jet_interceptor_equipment
+						type = heavy_fighter_equipment
 						amount = 25
 					}
 					add_to_variable = {
@@ -3523,7 +3525,7 @@ ACW_decisions = {
 				has_capitulated = no
 			}
 			has_equipment = {
-				jet_strike_equipment > 24
+				tac_bomber_equipment > 24
 			}
 			custom_trigger_tooltip = {
 				tooltip = ACW_has_level_3_involvement
@@ -3559,7 +3561,7 @@ ACW_decisions = {
 				add_war_support = 0.01
 			}
 			add_equipment_to_stockpile = {
-				type = jet_strike_equipment
+				type = tac_bomber_equipment
 				amount = -25
 			}
 			add_to_variable = {
@@ -3584,7 +3586,7 @@ ACW_decisions = {
 				}
 				FROM = {
 					add_equipment_to_stockpile = {
-						type = jet_strike_equipment
+						type = tac_bomber_equipment
 						amount = 25
 					}
 					add_to_variable = {
@@ -3612,7 +3614,7 @@ ACW_decisions = {
 				has_capitulated = no
 			}
 			has_equipment = {
-				jet_strat_bomber_equipment > 14
+				strat_bomber_equipment > 14
 			}
 			custom_trigger_tooltip = {
 				tooltip = ACW_has_level_3_involvement
@@ -3648,7 +3650,7 @@ ACW_decisions = {
 				add_war_support = 0.01
 			}
 			add_equipment_to_stockpile = {
-				type = jet_strat_bomber_equipment
+				type = strat_bomber_equipment
 				amount = -15
 			}
 			add_to_variable = {
@@ -3673,7 +3675,7 @@ ACW_decisions = {
 				}
 				FROM = {
 					add_equipment_to_stockpile = {
-						type = jet_strat_bomber_equipment
+						type = strat_bomber_equipment
 						amount = 15
 					}
 					add_to_variable = {

@@ -708,6 +708,16 @@ DIPLOMACY_CALL_ALLY_ENABLE_TRIGGER = {
 		}
 	}
 	else_if = {
+		limit = {
+			tag = ENG
+			has_idea = ENG_second_british_revolution_idea
+		}
+		custom_trigger_tooltip = {
+			tooltip = cannot_call_allies_or_join_wars_warning
+			always = no
+		}
+	}
+	else_if = {
 		limit = { check_variable = { modifier@cannot_call_allies_or_join_wars > 0 } }
 		custom_trigger_tooltip = {
 			tooltip = cannot_call_allies_or_join_wars_warning
@@ -775,6 +785,18 @@ DIPLOMACY_JOIN_ALLY_ENABLE_TRIGGER = {
 		}
 	}
 	else_if = {
+		limit = {
+			FROM = {
+				tag = ENG
+				has_idea = ENG_second_british_revolution_idea
+			}			
+		}
+		custom_trigger_tooltip = {
+			tooltip = cannot_call_allies_or_join_wars_warning_FROM
+			always = no
+		}
+	}
+	else_if = {
 		limit = { check_variable = { modifier@cannot_call_allies_or_join_wars > 0 } }
 		custom_trigger_tooltip = {
 			tooltip = cannot_call_allies_or_join_wars_warning
@@ -791,42 +813,9 @@ DIPLOMACY_JOIN_ALLY_ENABLE_TRIGGER = {
 }
 DIPLOMACY_SEND_VOLUNTEERS_ENABLE_TRIGGER = {
 	if = {
-		limit = {
-			is_in_accord = yes
-		}
-		accord_send_volunteers_triggers = yes
-	}
-	if = {
 		limit = { check_variable = { FROM.modifier@cannot_receive_volunteers > 0 } }
 		custom_trigger_tooltip = {
 			tooltip = cannot_receive_volunteers_warning
-			always = no
-		}
-	}
-	else_if = {
-		limit = {
-			has_global_flag = ACW_start
-			FROM = {
-				OR = {
-					tag = CAL
-					tag = GLG
-					tag = NEE
-					tag = TEX
-				}
-			}
-			AND = {
-				OR = {
-					is_in_faction_with = JAP
-					tag = RUS
-					is_subject_of = RUS
-					is_in_or_aligned_with_accord = yes
-					is_in_or_aligned_with_reichspakt = yes
-				}
-				NOT = { has_country_flag = ACW_can_send_volunteers }
-			}
-		}
-		custom_trigger_tooltip = {
-			tooltip = ACW_cannot_send_volunteers
 			always = no
 		}
 	}
@@ -837,11 +826,6 @@ DIPLOMACY_SEND_VOLUNTEERS_ENABLE_TRIGGER = {
 		always = yes
 	}
 	else = {
-		limit = {
-			FROM = {
-				is_enemy_ideology = yes
-			}
-		}
 		custom_trigger_tooltip = {
 			tooltip = enemy_ideology_tt
 			always = no

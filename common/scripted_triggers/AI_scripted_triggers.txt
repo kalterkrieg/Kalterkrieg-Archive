@@ -54,9 +54,12 @@ has_unattained_important_goals = {
 		# America only demobilizes once the war is done
 		AND = {
 			is_american_tag = yes
-			OR = {
-				NOT = { has_global_flag = USA_civil_war_over_flag }
-				has_global_flag = PSA_rockies_ceasefire
+			count_triggers = {
+				amount = 2
+				country_exists = NEE
+				country_exists = GLG
+				country_exists = CAL
+				country_exists = TEX
 			}
 		}
 		# China won't demobilize so long as Japan holds Korea
@@ -65,9 +68,10 @@ has_unattained_important_goals = {
 			country_exists = JAP
 			JAP = {
 				is_faction_leader = yes
-				OR = {
-					owns_state = 525
-					owns_state = 527
+			}
+			KOR = {
+				any_core_state = {
+					is_owned_by = JAP
 				}
 			}
 			is_subject = no
@@ -77,17 +81,17 @@ has_unattained_important_goals = {
 
 has_reached_maximum_divisions = {
 	set_temp_variable = { military_spending_ratio = military_spending }
-	set_temp_variable = { temp_civs = num_of_civilian_factories }
+	set_temp_variable = { temp_factories = num_of_factories }
 	clamp_temp_variable = {
-		var = temp_civs
+		var = temp_factories
 		min = 1
 	}
-	divide_temp_variable = { military_spending_ratio = temp_civs }
+	divide_temp_variable = { military_spending_ratio = temp_factories }
 	if = {
 		limit = { 
 			has_war = yes
 		}
-		check_variable = { military_spending_ratio < 1 }
+		check_variable = { military_spending_ratio > 1 }
 	}
 	else_if = {
 		limit = { 
@@ -96,10 +100,10 @@ has_reached_maximum_divisions = {
 				has_unattained_important_goals = yes
 			}
 		}
-		check_variable = { military_spending_ratio < 0.65 }
+		check_variable = { military_spending_ratio > 0.75 }
 	}
 	else = {
-		check_variable = { military_spending_ratio < 0.5 }
+		check_variable = { military_spending_ratio > 0.5 }
 	}
 }
 
@@ -433,6 +437,19 @@ is_normal_european_focused_tag = {
 	}
 }
 
+is_normal_eastern_europe_focused_tag = {
+	OR = {
+		#Eastern Europe
+		original_tag = EST
+		original_tag = LAT
+		original_tag = LIT
+		original_tag = KRL
+		original_tag = BLR
+		original_tag = UKR
+	}
+}
+
+
 is_normal_scandinavian_focused_tag = {
 	OR = {
 		original_tag = SWE
@@ -597,3 +614,47 @@ is_normal_pacific_focused_tag = {
 		original_tag = PNG
 	}
 }
+
+#############################
+### CHARACTER AI TRIGGERS ###
+#############################
+
+AI_trigger_dont_hire_high_command_too_early = {
+	has_war = no
+	has_political_power < 200
+}
+
+
+########################
+### AI TECH TRIGGERS ###
+########################
+
+is_eligible_for_armor_production = {
+	num_of_military_factories > 24
+}
+
+is_eligible_for_light_aircraft_production = {
+	num_of_military_factories > 4
+}
+
+is_eligible_for_improved_light_aircraft_production = {
+	num_of_military_factories > 9
+}
+
+is_eligible_for_medium_aircraft_production = {
+	num_of_military_factories > 14
+}
+
+is_eligible_for_heavy_aircraft_production = {
+	num_of_military_factories > 24
+}
+
+is_eligible_for_naval_aircraft_production = {
+	has_navy_size = { size > 50 }
+	num_of_military_factories > 14
+}
+
+is_eligible_for_cv_aircraft_production = {
+	has_navy_size = { unit = carrier size > 1 }
+}
+

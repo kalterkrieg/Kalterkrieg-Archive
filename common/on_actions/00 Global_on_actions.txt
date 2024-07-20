@@ -2,6 +2,7 @@ on_actions = {
 	##Monthly Counter##
 	on_startup = {
 		effect = {
+			log = "This player is on KRG 0.1.1! Do not take this text at face value if any release has occured since, as this text may not have been updated. Logically, this is only useful for telling if a player is on 0.1 or 0.1.1."
 			set_variable = { global.month = 1 }
 			### ENT Setup ###
 			CAN = {
@@ -10,7 +11,6 @@ on_actions = {
 					limit = { NOT = { check_variable = { highest_scored_country = 0 } } }
 					var:highest_scored_country = {
 						save_global_event_target_as = KRG_entente_leader
-						set_faction_leader = yes
 					}
 				}
 			}
@@ -406,6 +406,7 @@ on_actions = {
 	
 	on_puppet = {
 		effect = {
+			log = "[GetDateText]: [Root.GetName]: puppet overlord: [FROM.GetTag] puppet: [ROOT.GetTag]"
 			meta_effect = {
 				text = {
 					KRG_peace_form_puppet_[PUPPET]_of_[OVERLORD] = yes
@@ -444,8 +445,11 @@ on_actions = {
 	on_weekly = {
 		effect = {
 			coal_calc_total = yes
-
-			####US State Effects
+		}
+	}
+	on_weekly_NEE = {
+		effect = {
+			####NEE State Effects
 
 			822 = { #Progressive Bastion Effects
 				if = {
@@ -537,6 +541,11 @@ on_actions = {
 					clear_variable = temp_lib_dem_popularity
 				}
 			}
+		}
+	}
+	on_weekly_CAL = {
+		effect = {
+			####CAL State Effects
 			825 = { #Hollywood Effects
 				if = {
 					limit = {

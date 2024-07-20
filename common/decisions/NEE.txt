@@ -310,11 +310,6 @@ NEE_election_season = {
 	NEE_run_positive_campaign = {
 		icon = GFX_decision_generic_political_rally
 		available = {
-			NOT = {
-				FROM = {
-					has_state_flag = active_campaign
-				}
-			}
 			check_variable = {
 				active_campaigns < 3
 			}
@@ -375,40 +370,115 @@ NEE_election_season = {
 				limit = {
 					has_country_flag = NEE_campaigning_as_republicans
 				}
-				FROM = {
-					set_temp_variable = {
-						pop_type_added = 2
+				if = {
+					limit = {
+						date < 1953.1.1
 					}
-					set_temp_variable = {
-						pop_value_added = 7
+					FROM = {
+						set_temp_variable = {
+							pop_type_added = 2
+						}
+						set_temp_variable = {
+							pop_value_added = 7
+						}
+						NEE_add_electoral_popularity = yes
+						clr_state_flag = active_campaign
 					}
-					NEE_add_electoral_popularity = yes
-					clr_state_flag = active_campaign
+				}
+				else_if = {
+					limit = {
+						date < 1957.1.1
+					}
+					FROM = {
+						set_temp_variable = {
+							pop_type_added = 2
+						}
+						set_temp_variable = {
+							pop_value_added = 5
+						}
+						NEE_add_electoral_popularity = yes
+						clr_state_flag = active_campaign
+					}
+					FROM = {
+						set_temp_variable = {
+							pop_type_added = 3
+						}
+						set_temp_variable = {
+							pop_value_added = 2
+						}
+						NEE_add_electoral_popularity = yes
+						clr_state_flag = active_campaign
+					}
+				}
+				else = {
+					FROM = {
+						set_temp_variable = {
+							pop_type_added = 2
+						}
+						set_temp_variable = {
+							pop_value_added = 4
+						}
+						NEE_add_electoral_popularity = yes
+						clr_state_flag = active_campaign
+					}
+					FROM = {
+						set_temp_variable = {
+							pop_type_added = 3
+						}
+						set_temp_variable = {
+							pop_value_added = 3
+						}
+						NEE_add_electoral_popularity = yes
+						clr_state_flag = active_campaign
+					}
 				}
 			}
 			else_if = {
 				limit = {
 					has_country_flag = NEE_campaigning_as_democrats
 				}
-				FROM = {
-					set_temp_variable = {
-						pop_type_added = 1
+				if = {
+					limit = {
+						date < 1953.1.1
 					}
-					set_temp_variable = {
-						pop_value_added = 4
+					FROM = {
+						set_temp_variable = {
+							pop_type_added = 1
+						}
+						set_temp_variable = {
+							pop_value_added = 4
+						}
+						NEE_add_electoral_popularity = yes
+						clr_state_flag = active_campaign
 					}
-					NEE_add_electoral_popularity = yes
-					clr_state_flag = active_campaign
+					FROM = {
+						set_temp_variable = {
+							pop_type_added = 3
+						}
+						set_temp_variable = {
+							pop_value_added = 3
+						}
+						NEE_add_electoral_popularity = yes
+						clr_state_flag = active_campaign
+					}
 				}
-				FROM = {
-					set_temp_variable = {
-						pop_type_added = 3
+				else = {
+					FROM = {
+						set_temp_variable = {
+							pop_type_added = 0
+						}
+						set_temp_variable = {
+							pop_value_added = 1
+						}
+						set_temp_variable = {
+							pop_type_added = 1
+						}
+						set_temp_variable = {
+							pop_value_added = 6
+						}
+						NEE_add_electoral_popularity = yes
+						clr_state_flag = active_campaign
 					}
-					set_temp_variable = {
-						pop_value_added = 3
-					}
-					NEE_add_electoral_popularity = yes
-					clr_state_flag = active_campaign
 				}
 			}
 			else = {
@@ -877,7 +947,7 @@ NEE_congress = {
 		}
 		available = {
 			custom_trigger_tooltip = {
-				tooltip = NEE_has_majority_house
+				tooltip = NEE_has_majority_senate
 				check_variable = {
 					var = NEE_senators_in_favor
 					value = NEE_senate_tie_var

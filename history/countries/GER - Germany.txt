@@ -26,15 +26,19 @@ diplomatic_relation = {
 universal_starting_techs = yes
 reichspakt_starting_techs = yes
 germany_starting_techs = yes
-set_oob = "GER"
-
 if = {
 	limit = {
 		has_dlc_mtg = yes
 	}
 	set_naval_oob = "GER_naval"
 }
-
+if = {
+	limit = {
+		NOT = { has_dlc_mtg = yes}
+	}
+	set_naval_oob = "GER_naval_legacy"
+}
+set_oob = "GER"
 if = {
 	limit = {
 		has_dlc_lar = yes
@@ -304,6 +308,14 @@ every_country = {
 		}
 	}
 	MIT_add_to_mitteleuropa_partnership = yes
+}
+
+ROM = {
+	give_resource_rights = {
+		receiver = GER
+		state = 46
+		resources = { oil }
+	}
 }
 
 ###Moved from on_actions

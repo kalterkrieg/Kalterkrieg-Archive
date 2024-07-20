@@ -2492,15 +2492,13 @@ add_namespace = krg_gerfla
 			name = krg_ger.85.a
 			add_political_power = 10
 			custom_effect_tooltip = GER_DNAP_funding_tooltip
-			add_to_variable = { 
-				var = GER_SPD_deputies
-				value = -10
-			}
-			add_to_variable = { 
-				var = GER_DNAP_deputies
-				value = 10
-			}
 			hidden_effect = {
+				set_temp_variable = { member = 1 }
+				set_temp_variable = { seat_value = -10 }
+				modify_reichstag_seat = yes
+				set_temp_variable = { member = 2 }
+				set_temp_variable = { seat_value = 10 }
+				modify_reichstag_seat = yes
 				country_event = {
 					id = krg_ger.86
 					days = 60
@@ -2651,18 +2649,6 @@ add_namespace = krg_gerfla
 				var = GER_new_state_reform_support
 				value = 5
 			}
-			add_to_variable = { 
-				var = GER_DStP_deputies
-				value = 5
-			}
-			add_to_variable = { 
-				var = GER_LVP_R_deputies
-				value = -3
-			}
-			add_to_variable = { 
-				var = GER_LVP_L_deputies
-				value = -2
-			}
 			set_party_name = {
 				ideology = market_liberal
 				name = GER_market_liberal_DStP_party
@@ -2671,6 +2657,15 @@ add_namespace = krg_gerfla
 			coal_add_mar_lib = yes
 			set_country_flag = GER_DStP_Formation
 			hidden_effect = {
+				set_temp_variable = { member = 3 } #move to unhidden if DStP shows
+				set_temp_variable = { seat_value = -2 }
+				modify_reichstag_seat = yes
+				set_temp_variable = { member = 4 }
+				set_temp_variable = { seat_value = -3 }
+				modify_reichstag_seat = yes
+				set_temp_variable = { member = 11 }
+				set_temp_variable = { seat_value = 5 }
+				modify_reichstag_seat = yes
 				country_event = {
 					id = krg_ger.92
 					days = 100

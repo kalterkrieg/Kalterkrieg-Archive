@@ -1808,6 +1808,62 @@ clear_bundesrat_reichstag_array = {
 ####################################
 ### election outcomes goes below ###
 ####################################
+GER_1951_election_calculate_result = {
+	if = {
+		limit = {
+			check_variable = { GER_dkp_support > 50 }
+			if = {
+				limit = { 
+					is_ai = yes
+				}
+				OR = {
+					has_game_rule = {
+						rule = GER_1951_REICHSTAGWAHL
+						option = GER_1951_REICHSTAGWAHL_DKP_GOERDELER
+					}
+					has_game_rule = {
+						rule = GER_1951_REICHSTAGWAHL
+						option = GER_1951_REICHSTAGWAHL_DKP_LEHR
+					}
+				}
+			}
+		}
+		custom_effect_tooltip = GER_dkp_victory_likely_tt
+		dkp_victory_1951 = yes
+		complete_national_focus = GER_DKP_victory
+		set_politics = {
+			ruling_party = authoritarian_democrat # Dkp, DVLP, Agarians, Local Parties
+		}
+		coal_add_pat_aut = yes
+		coal_add_nat_pop = yes
+		hidden_effect = {
+			country_event = {
+				id = krg_ger.540
+			}
+		}
+	}
+	else = {
+		custom_effect_tooltip = GER_zentrum_victory_likely_tt
+		zentrum_victory_1951 = yes
+		complete_national_focus = GER_zentrum_victory
+		set_politics = {
+			ruling_party = social_conservative # Zentrum, BVP, FVP, NLP, PP, Local Parties
+		}
+		coal_add_soc_lib = yes
+		coal_add_mar_lib = yes
+		coal_add_auth_dem = yes
+		hidden_effect = {
+			country_event = {
+				id = krg_ger.541
+			}
+			set_party_name = {
+				ideology = authoritarian_democrat
+				name = GER_authoritarian_democrat_zentrum_party
+				long_name = GER_authoritarian_democrat_zentrum_party_long
+			}
+		}
+	}
+}
 
 # 1951 DkP victory
 dkp_victory_1951 = {

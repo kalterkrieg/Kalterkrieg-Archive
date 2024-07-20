@@ -784,8 +784,18 @@ NFA_colonial_reform = {
 				activate_mission = NFA_algerian_revolt
 			}
 			set_variable = { NFA_army_limit = num_divisions }
-			divide_variable = {
-				NFA_army_limit = 3
+			if = {
+				limit = {
+					is_ai = no
+				}
+				divide_variable = {
+					NFA_army_limit = 3
+				}
+			}
+			else = {
+				divide_variable = {
+					NFA_army_limit = 2
+				}
 			}
 			set_variable = {
 				NFA_army_size = num_armies_in_state@460
@@ -897,6 +907,9 @@ NFA_colonial_reform = {
 			}
 			
 		}
+		ai_will_do = {
+			base = 100
+		}
 	}
 
 	NFA_integrating_missions = {
@@ -922,7 +935,7 @@ NFA_colonial_reform = {
 		target_trigger = {
 			FROM = {
 				AND = {
-					is_owned_by = NFA
+					is_owned_and_controlled_by = NFA
 					NOT = {
 						is_core_of = NFA
 					}
@@ -973,6 +986,61 @@ NFA_colonial_reform = {
 				}
 			}
 			
+		}
+		ai_will_do = {
+			base = 100
+		}
+	}
+	NFA_intelligence_efforts_ALG = {
+		icon = GFX_decision_onmap_recruit_operative
+
+		available = {
+			FROM = {
+				is_controlled_by = NFA
+			}
+		}
+		visible = {
+			has_country_flag = NFA_algerian_matter
+			FROM = {
+				is_owned_by = NFA
+			}
+		}
+
+		target_trigger = {
+			FROM = {
+				AND = {
+					is_owned_and_controlled_by = NFA
+					NOT = {
+						is_core_of = NFA
+					}
+				}
+			}
+		}
+		state_target = yes
+		targets = {
+			459 460 898 899 513
+		}
+
+		cost = 50
+		days_remove = 365
+		fire_only_once = yes
+
+		ai_will_do = {
+			base = 100
+		}
+		
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete NFA_intelligence_efforts_ALG target: [From.GetName]"
+			add_to_variable = {
+				NFA_intelligence_efforts = 1
+			}
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove NFA_intelligence_efforts_ALG target: [From.GetName]"
+			FROM = {
+				add_compliance = 10
+				add_resistance_target = -5
+			}
 		}
 	}
 }
