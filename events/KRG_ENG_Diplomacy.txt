@@ -799,7 +799,9 @@ country_event = { #Operation Avalon
 	immediate = {log = "[GetDateText]: [Root.GetName]: event krg_engdip.50"}
 
 	trigger = {
-		ENG_has_oxford_treaty = yes
+		has_dynamic_modifier = {
+			modifier = ENG_oxford_treaty_dynamic
+		}
 	}
 
 	option = {
@@ -1059,7 +1061,7 @@ country_event = { #Britain Withdraws from Oxford
 			modifier = {
 				has_game_rule = {
 					rule = KRG_WK3_ALLOWED
-					option = KRG_WK3_BLOCKED
+					option = KRG_WK3_AVALON
 				}
 				factor = 1000
 			}
@@ -1083,13 +1085,6 @@ country_event = { #Britain Withdraws from Oxford
 		# this can lead to war. avoid :3
 		ai_chance = {
 			base = 7
-			modifier = {
-				has_game_rule = {
-					rule = KRG_WK3_ALLOWED
-					option = KRG_WK3_AVALON
-				}
-				factor = 1000
-			}
 		}
 	}
 }
@@ -1107,7 +1102,6 @@ country_event = { #Germany Dissolves the Treaty
 		name = krg_engdip.62.a
 		add_war_support = 0.05
 		set_country_flag = operation_avalon
-		ENG_remove_oxford = yes
 		custom_effect_tooltip = ENG_oxford_gone_tt
 		news_event = worldnews.99
 		hidden_effect = {
@@ -1185,13 +1179,6 @@ country_event = { #The Kaiserliche Marine Mobilises
 		}
 		ai_chance = {
 			base = 3
-			modifier = {
-				has_game_rule = {
-					rule = KRG_WK3_ALLOWED
-					option = KRG_WK3_BLOCKED
-				}
-				factor = 1000
-			}
 		}
 	}
 	option = { #We must not back down!
@@ -1400,13 +1387,6 @@ country_event = { #Crisis in the Channel
 		}
 		ai_chance = {
 			base = 3
-			modifier = {
-				has_game_rule = {
-					rule = KRG_WK3_ALLOWED
-					option = KRG_WK3_BLOCKED
-				}
-				factor = 1000
-			}
 		}
 	}
 }
@@ -1501,7 +1481,7 @@ country_event = { #The Germans Stand Firm (ENT)
 			modifier = {
 				has_game_rule = {
 					rule = KRG_WK3_ALLOWED
-					option = KRG_WK3_BLOCKED
+					option = KRG_WK3_AVALON
 				}
 				factor = 1000
 			}
@@ -1525,13 +1505,6 @@ country_event = { #The Germans Stand Firm (ENT)
 		# this can lead to war. avoid :3
 		ai_chance = {
 			base = 7
-			modifier = {
-				has_game_rule = {
-					rule = KRG_WK3_ALLOWED
-					option = KRG_WK3_AVALON
-				}
-				factor = 1000
-			}
 		}
 	}
 }
@@ -1613,13 +1586,6 @@ country_event = { #Standoff in the Channel (GER)
 		}
 		ai_chance = {
 			base = 50
-			modifier = {
-				has_game_rule = {
-					rule = KRG_WK3_ALLOWED
-					option = KRG_WK3_BLOCKED
-				}
-				factor = 1000
-			}
 		}
 	}
 	option = { #Stand Firm!
@@ -1675,7 +1641,6 @@ country_event = { #The Germans Back Down (ENG)
 		name = krg_engdip.78.a
 		add_war_support = 0.05
 		set_country_flag = operation_avalon
-		ENG_remove_oxford = yes
 		custom_effect_tooltip = ENG_oxford_gone_tt
 		hidden_effect = {
 			country_event = { #Approval Ratings Skyrocket
@@ -1733,13 +1698,6 @@ country_event = { #Shots fired in the Channel! (ENT)
 		}
 		ai_chance = {
 			base = 50
-			modifier = {
-				has_game_rule = {
-					rule = KRG_WK3_ALLOWED
-					option = KRG_WK3_BLOCKED
-				}
-				factor = 1000
-			}
 		}
 	}
 	option = { #Stand Firm!
@@ -1894,20 +1852,5 @@ country_event = { #Further Pacifist Parliamentary Reprisals
 			ideology = paternal_autocrat
 			popularity = 0.01
 		}
-	}
-}
-
-country_event = { #WK3, Why do we still have the oxford treaty if we are at war with them?
-	id = krg_engdip.200
-	title = krg_engdip.200.t
-	desc = krg_engdip.200.d
-	#picture = 
-
-	is_triggered_only = yes
-	immediate = {log = "[GetDateText]: [Root.GetName]: event krg_engdip.200"}
-
-	option = {
-		name = krg_engdip.200.a
-		ENG_remove_oxford = yes
 	}
 }

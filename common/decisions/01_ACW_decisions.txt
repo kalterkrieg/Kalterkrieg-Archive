@@ -252,6 +252,9 @@ ACW_decisions = {
 					NEE = {
 						surrender_progress < 0.3
 					}
+					GLG = {
+						surrender_progress < 0.3
+					}
 				}
 			}
 		}
@@ -303,6 +306,9 @@ ACW_decisions = {
 						surrender_progress < 0.25
 					}
 					NEE = {
+						surrender_progress < 0.25
+					}
+					GLG = {
 						surrender_progress < 0.25
 					}
 				}
@@ -365,6 +371,9 @@ ACW_decisions = {
 					NEE = {
 						surrender_progress < 0.1
 					}
+					GLG = {
+						surrender_progress < 0.1
+					}
 				}
 			}
 		}
@@ -374,7 +383,7 @@ ACW_decisions = {
 			log = "[GetDateText]: [Root.GetName]: Decision complete GER_increase_to_level_4 target: [From.GetName]"
 			custom_effect_tooltip = ACW_level_increase_4_tt
 			set_variable = {
-				global.ACW_involvement_level = 4
+				global.ACW_involvement_level = 3
 			}
 			custom_effect_tooltip = tooltip_white_line
 			add_to_variable = {
@@ -393,26 +402,8 @@ ACW_decisions = {
 						original_tag = DNF
 					}
 				}
-				TEX = { save_event_target_as = volunteer_target }
-				send_volunteers_to_TARGET = yes
-				add_ideas = RP_acw_volunteers_ideas
 			}
-			hidden_effect = {
-				every_country = {
-					limit = {
-						check_variable = {
-							reichspakt_alignment_level > 0
-						}
-						NOT = {
-							is_in_faction_with = GER
-							original_tag = DNF
-						}
-					}
-					TEX = { save_event_target_as = volunteer_target }
-					send_volunteers_to_TARGET_no_AI = yes
-					add_ideas = RP_acw_volunteers_ideas
-				}
-			}
+			#TODO ACW accord vote volunteers
 		}
 		ai_will_do = {
 			base = 100

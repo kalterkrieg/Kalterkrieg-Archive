@@ -40,32 +40,47 @@ DNF_guard_RUS_border = {
 	}
 
 	enable = {
-		always = yes
+		has_country_flag = DNF_guard_RUS_border_flag
 	}
 
 	abort_when_not_enabled = yes
 
 	ai_strategy = {
-		type = conquer
-		id = RUS
-		value = 1000
+		type = contain
+		id = "RUS"
+		value = 250
 	}
 	ai_strategy = {
-		type = front_armor_score
-		id = RUS
+		type = conquer
+		id = "RUS"
+		value = 250
+	}
+	ai_strategy = {
+		type = antagonize
+		id = "RUS"
+		value = 250
+	}
+
+	ai_strategy = {
+		type = force_defend_ally_borders
+		id = "UKR"
 		value = 100
 	}
 	ai_strategy = {
-		type = front_unit_request
-		tag = RUS
-		value = 50
+		type = dont_defend_ally_borders
+		id = "KRL"
+		value = 100
 	}
 	ai_strategy = {
-		type = theatre_distribution_demand_increase
-		id = 202
-		value = 10
+		type = dont_defend_ally_borders
+		id = "LIT"
+		value = 100
 	}
-	
+	ai_strategy = {
+		type = dont_defend_ally_borders
+		id = "FIN"
+		value = 100
+	}
 }
 
 DNF_guard_ITA_border = {
@@ -74,113 +89,74 @@ DNF_guard_ITA_border = {
 	}
 
 	enable = {
-		always = yes
+		has_country_flag = DNF_guard_ITA_border_flag
 	}
 
 	abort_when_not_enabled = yes
 
 	ai_strategy = {
-		type = conquer
-		id = ITA
-		value = 1000
-	}
-	ai_strategy = {
-		type = front_armor_score
-		id = ITA
+		type = contain
+		id = "SIC"
 		value = 100
 	}
 	ai_strategy = {
-		type = front_unit_request
-		tag = ITA
-		value = 50
+		type = conquer
+		id = "SIC"
+		value = 100
 	}
 	ai_strategy = {
-		type = theatre_distribution_demand_increase
-		id = 160
-		value = 10
+		type = antagonize
+		id = "SIC"
+		value = 100
 	}
-}
-
-DNF_guard_balkan_border = {
-	allowed = {
-		tag = DNF
+	ai_strategy = {
+		type = contain
+		id = "ITA"
+		value = 100
 	}
-
-	enable = {
-		always = yes
-	}
-
-	abort_when_not_enabled = yes
-
 	ai_strategy = {
 		type = conquer
-		id = SER
-		value = 250
+		id = "ITA"
+		value = 100
 	}
 	ai_strategy = {
-		type = front_armor_score
-		id = SER
-		value = 25
+		type = antagonize
+		id = "ITA"
+		value = 100
 	}
 	ai_strategy = {
-		type = front_unit_request
-		tag = SER
-		value = 12
+		type = contain
+		id = "PAP"
+		value = 100
 	}
-	ai_strategy = {
-		type = theatre_distribution_demand_increase
-		id = 104
-		value = 2
-	}
-
 	ai_strategy = {
 		type = conquer
-		id = ROM
-		value = 250
+		id = "PAP"
+		value = 100
 	}
 	ai_strategy = {
-		type = front_armor_score
-		id = ROM
-		value = 25
-	}
-	ai_strategy = {
-		type = front_unit_request
-		tag = ROM
-		value = 12
-	}
-	ai_strategy = {
-		type = theatre_distribution_demand_increase
-		id = 84
-		value = 2
-	}
-}
-
-DNF_dont_guard_allied_border = {
-	allowed = {
-		tag = DNF
+		type = antagonize
+		id = "PAP"
+		value = 100
 	}
 
-	enable = {
-		always = yes
-	}
-
-	abort_when_not_enabled = yes
-
-	
-
 	ai_strategy = {
-		type = front_unit_request
-		id = GER
-		value = -100
-	}
-	ai_strategy = {
-		type = front_unit_request
-		id = POL
-		value = -100
-	}
-	ai_strategy = {
-		type = front_unit_request
-		id = UKR
-		value = -100
+		type = put_unit_buffers
+
+		order_id = 2
+
+		states = {
+			157
+			159
+			162
+			831
+			908
+		}
+
+		ratio = 0.3
+
+		area = eastern_europe
+
+		subtract_fronts_from_need = no
 	}
 }

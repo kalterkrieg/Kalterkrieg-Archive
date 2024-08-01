@@ -624,7 +624,6 @@ NEE_calculate_electoral_seat = {
 }
 NEE_calculate_president = {
 	hidden_effect = {
-		NEE_reset_electoral_votes = yes
 		every_owned_state = {
 			limit = {
 				is_core_of = NEE
@@ -669,52 +668,60 @@ NEE_calculate_president = {
 					electoral_lean = 4
 				}
 			}
-			
 			if = { #Before 1952 progressives vote for the democrats for president
 				limit = { date < 1952.1.1 }
 				add_to_variable = {
-					NEE.soccon_electoral_votes = progressives_electoral_votes
+					var = NEE.soccon_electoral_votes
+					value = progressives_electoral_votes
 				}
 			}
 			else = {
-				add_to_variable = { #after 1952 progressives vote for soc lib dems for president
-					NEE.soclib_electoral_votes = progressives_electoral_votes
+				add_to_variable = { #after 1942 progressives vote for soc lib dems for president
+					var = NEE.soclib_electoral_votes
+					value = progressives_electoral_votes
 				}
 			}
-
-			if = { #Before 1952, soc lib dems vote for soc con dems for president
+			if = {
 				limit = { date < 1952.1.1 } 
 				add_to_variable = {
-					NEE.soccon_electoral_votes = soclib_electoral_votes
-				}
-			}
-			else = { #After 1952, soc lib dems always vote for soc lib dems
-				add_to_variable = {
-					NEE.soclib_electoral_votes = soclib_electoral_votes
-				}
-			}
-
-			add_to_variable = { #Mar libs always vote GOP
-				NEE.marlib_electoral_votes = marlib_electoral_votes
-			}
-
-			if = { #Before 1952 soc cons vote for soc con dems
-				limit = { date < 1952.1.1 }
-				add_to_variable = {
-					NEE.soccon_electoral_votes = soccon_electoral_votes
+					var = NEE.soccon_electoral_votes
+					value = soclib_electoral_votes
 				}
 			}
 			else = {
-				add_to_variable = { #after 1952 soc cons vote for mar lib GOP
-					NEE.marlib_electoral_votes = soccon_electoral_votes
+				add_to_variable = { #After 1952 Social liberals vote for soc lib democrats
+					var = NEE.soclib_electoral_votes
+					value = soclib_electoral_votes
 				}
 			}
-			
-		}
-		log = "progressives_electoral_votes = [?progressives_electoral_votes]"
-		log = "soclib_electoral_votes = [?soclib_electoral_votes]"
-		log = "marlib_electoral_votes = [?marlib_electoral_votes]"
-		log = "soccon_electoral_votes = [?soccon_electoral_votes]"	
+			add_to_variable = { #market liberals always vote for mar lib GOP
+				var = NEE.marlib_electoral_votes
+				value = marlib_electoral_votes
+			}
+			if = { #Before 1952 soc cons vote for soc  con dems
+				limit = { date < 1952.1.1 }
+				add_to_variable = {
+					var = NEE.soccon_electoral_votes
+					value = soccon_electoral_votes
+				}
+			}
+			else_if = { #For 1953 election Soccons vote for Soclibs
+				limit = { 
+						date < 1955.1.1
+						date > 1952.1.1
+				}
+				add_to_variable = {
+					var = NEE.soclib_electoral_votes
+					value = soccon_electoral_votes
+				}
+			}
+			else = {
+				add_to_variable = { #after 1955 soc cons vote for mar lib GOP
+					var = NEE.marlib_electoral_votes
+					value = soccon_electoral_votes
+				}
+			}
+		}	
 	}
 	if = { #1949 election
 		limit = {
@@ -779,7 +786,7 @@ NEE_calculate_president = {
 		if = {
 			limit = {				
 				check_variable = {
-					marlib_electoral_votes > soclib_electoral_votes
+					marlib_electoral_votes > soccon_electoral_votes
 				}
 			}
 			hidden_effect = {
@@ -794,7 +801,7 @@ NEE_calculate_president = {
 		else_if = {
 			limit = {				
 				check_variable = {
-					soclib_electoral_votes > marlib_electoral_votes
+					soccon_electoral_votes > marlib_electoral_votes
 				}
 			}
 			hidden_effect = {

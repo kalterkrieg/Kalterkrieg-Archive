@@ -236,27 +236,6 @@ accord_issue_acw_send_volunteers_effect_pass = {
 		send_volunteers_to_TARGET = yes
 		add_ideas = accord_acw_volunteers_ideas
 	}
-
-	every_country = {
-		limit = {
-			check_variable = { accord_alignment_level > 0 }
-			NOT = {
-				is_in_array = {
-					array = global.accord_voting_country_array
-					value = THIS
-				}
-			}
-		}
-		NEE = { save_event_target_as = volunteer_target }
-		send_volunteers_to_TARGET_no_AI = yes
-
-		CAL = { save_event_target_as = volunteer_target }
-		send_volunteers_to_TARGET_no_AI = yes
-
-		GLG = { save_event_target_as = volunteer_target }
-		send_volunteers_to_TARGET_no_AI = yes
-		add_ideas = accord_acw_volunteers_ideas
-	}
 }
 
 accord_issue_acw_declare_on_tex_effect = {
@@ -282,9 +261,6 @@ accord_issue_acw_declare_on_tex_effect_pass = {
 			}
 		}
 		CAN = {
-			add_to_faction = NEE
-			add_to_faction = GLG
-			add_to_faction = CAL
 			declare_war_on = {
 				target = TEX
 				type = annex_everything

@@ -1,4 +1,4 @@
-#!gfx:interface/Kalterkrieg/KRG_goals.gfx
+#!gfx:interface\krg_goals.gfx
 focus_tree = {
 	id = tex_focus
 	country = {
@@ -14,7 +14,7 @@ focus_tree = {
 	default = no
 	continuous_focus_position = {
 		x = 100
-		y = 2000
+		y = 1600
 	}
 	### State of the Union ###
 	focus = {
@@ -38,240 +38,33 @@ focus_tree = {
 		x = -4
 		y = 1
 		cost = 4
-
-		ai_will_do = {
-			base = 150
+		available = {
 		}
-
 		prerequisite = {
 			focus = TEX_state_of_the_union
 		}
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus TEX_continue_union_dollar_implementation"
 			add_ideas = TEX_union_state_dollar_integration
-			TEX_move_up_reconstruction = yes
 		}
 	}
 	focus = {
 		id = TEX_cut_the_red_tape
-		icon = GFX_TEX_reconstruction
-		relative_position_id = TEX_continue_union_dollar_implementation
-		x = -1
+		icon = GFX_SAF_colonialist_crusade2
+		relative_position_id = TEX_state_of_the_union
+		x = -2
 		y = 1
-		cost = 7
-
-		ai_will_do = {
-			base = 150
+		cost = 4
+		available = {
 		}
-
 		prerequisite = {
-			focus = TEX_continue_union_dollar_implementation
+			focus = TEX_state_of_the_union
 		}
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus TEX_cut_the_red_tape"
-
-			add_political_power = 75
-			TEX_move_up_reconstruction = yes
+			TEX_upgrade_lost_generation = yes
 		}
 	}
-
-	focus = {
-		id = TEX_new_housing_projects
-		icon = GFX_NEE_suburbia
-		relative_position_id = TEX_continue_union_dollar_implementation
-		x = 1
-		y = 1
-		cost = 5
-
-		ai_will_do = {
-			base = 150
-		}
-
-		prerequisite = {
-			focus = TEX_continue_union_dollar_implementation
-		}
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus TEX_cut_the_red_tape"
-			TEX_move_up_reconstruction = yes
-			
-			371 = {
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = industrial_complex
-					level = 1
-					instant_build = yes
-				}
-			}
-
-			375 = {
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = industrial_complex
-					level = 1
-					instant_build = yes
-				}
-			}
-
-			random_owned_state = {
-				limit = {
-					NOT = {
-						state = 371
-						state = 375
-						state = 795
-					}
-				}
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = industrial_complex
-					level = 1
-					instant_build = yes
-				}
-			}
-		}
-	}
-
-	focus = {
-		id = TEX_healthcare_reconstruction_plan
-		icon = GFX_generic_healthcare
-		relative_position_id = TEX_cut_the_red_tape
-		x = 1
-		y = 1
-		cost = 6
-
-		ai_will_do = {
-			base = 150
-		}
-
-		prerequisite = {
-			focus = TEX_cut_the_red_tape
-		}
-		prerequisite = {
-			focus = TEX_new_housing_projects
-		}
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus TEX_cut_the_red_tape"
-			TEX_move_up_lost_generation = yes
-			move_up_hc_spending = yes
-		}
-	}
-
-	focus = {
-		id = TEX_new_american_education
-		icon = GFX_KTG_Educate_natives
-		relative_position_id = TEX_cut_the_red_tape
-		x = 0
-		y = 2
-		cost = 5
-
-		ai_will_do = {
-			base = 150
-		}
-
-		prerequisite = {
-			focus = TEX_cut_the_red_tape
-		}
-		prerequisite = {
-			focus = TEX_healthcare_reconstruction_plan
-		}
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus TEX_cut_the_red_tape"
-			TEX_move_up_lost_generation = yes
-			move_up_edu_spending = yes
-		}
-	}
-
-	focus = {
-		id = TEX_rural_subsidies
-		icon = GFX_generic_the_ministry_of_agriculture_trade_and_industry
-		relative_position_id = TEX_new_housing_projects
-		x = 0
-		y = 2
-		cost = 5
-
-		ai_will_do = {
-			base = 150
-		}
-
-		prerequisite = {
-			focus = TEX_new_housing_projects
-		}
-		
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus TEX_cut_the_red_tape"
-			TEX_move_up_reconstruction = yes
-
-			random_owned_state = {
-				limit = {
-					OR = {
-						has_state_category = one
-						has_state_category = two
-						has_state_category = three
-						has_state_category = four
-					}
-					
-				}
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-					instant_build = yes
-				}
-			}
-
-			random_owned_state = {
-				limit = {
-					OR = {
-						has_state_category = one
-						has_state_category = two
-						has_state_category = three
-						has_state_category = four
-					}
-					
-				}
-				add_extra_state_shared_building_slots = 1
-				add_building_construction = {
-					type = infrastructure
-					level = 1
-					instant_build = yes
-				}
-			}
-		}
-	}
-
-	focus = {
-		id = TEX_ongoing_efforts
-		icon = GFX_TEX_conservative
-		relative_position_id = TEX_new_american_education
-		x = 1
-		y = 1
-		cost = 8
-
-		ai_will_do = {
-			base = 250
-		}
-
-		prerequisite = {
-			focus = TEX_new_american_education
-		}
-		prerequisite = {
-			focus = TEX_rural_subsidies
-		}
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus TEX_cut_the_red_tape"
-			effect_tooltip = {
-				swap_ideas = {
-					remove_idea = TEX_reconstruction_4
-					add_idea = TEX_reconstruction_5
-				}
-			}
-			hidden_effect = {
-				TEX_move_up_reconstruction = yes
-			}
-			TEX_move_up_lost_generation = yes
-			remove_ideas = TEX_union_state_dollar_integration
-		}
-	}
-
 	focus = {
 		id = TEX_review_party_cohesion
 		icon = GFX_TEX_handshake
@@ -280,11 +73,6 @@ focus_tree = {
 		y = 1
 		cost = 4
 		cancelable = no		#we're doing a review >:c
-
-		ai_will_do = {
-			base = 300
-		}
-
 		available = {
 			TEX_has_chosen_candidate = yes
 		}
@@ -305,8 +93,7 @@ focus_tree = {
 		x = -1
 		y = 2
 		cost = 4
-		ai_will_do = {
-			base = 300
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_review_party_cohesion
@@ -329,8 +116,7 @@ focus_tree = {
 		x = 1
 		y = 2
 		cost = 4
-		ai_will_do = {
-			base = 300
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_review_party_cohesion
@@ -350,8 +136,7 @@ focus_tree = {
 		x = -1
 		y = 3
 		cost = 4
-		ai_will_do = {
-			base = 300
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_focus_on_reform
@@ -438,8 +223,7 @@ focus_tree = {
 		x = 1
 		y = 3
 		cost = 4
-		ai_will_do = {
-			base = 300
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_focus_on_reform
@@ -461,8 +245,7 @@ focus_tree = {
 		x = 0
 		y = 4
 		cost = 4
-		ai_will_do = {
-			base = 300
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_meet_with_cronies
@@ -550,8 +333,7 @@ focus_tree = {
 		x = 3
 		y = 2
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_the_american_dilemma
@@ -570,17 +352,11 @@ focus_tree = {
 		x = 2
 		y = 4
 		cost = 4
-
-		ai_will_do = {
-			base = 200
-		}
-
 		available = {
 			NOT = {
 				has_completed_focus = TEX_focus_on_reform
 			}
 		}
-
 		prerequisite = {
 			focus = TEX_the_american_dilemma
 		}
@@ -590,7 +366,58 @@ focus_tree = {
 			custom_effect_tooltip = TEX_the_great_migration_tt
 		}
 	}
-	
+	focus = {
+		id = TEX_the_mountaintop_insurgency
+		icon = GFX_generic_broken_red_star
+		relative_position_id = TEX_state_of_the_union
+		x = -3
+		y = 2
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_continue_union_dollar_implementation
+			focus = TEX_cut_the_red_tape
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_the_mountaintop_insurgency"
+			TEX_upgrade_lost_generation = yes
+		}
+	}
+	focus = {
+		id = TEX_planning_an_offensive
+		icon = GFX_NEE_remove_syndies
+		relative_position_id = TEX_state_of_the_union
+		x = -3
+		y = 3
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_the_mountaintop_insurgency
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_planning_an_offensive"
+			TEX_upgrade_lost_generation = yes
+		}
+	}
+	focus = {
+		id = TEX_battle_of_helen
+		icon = GFX_generic_planning_bonus
+		relative_position_id = TEX_state_of_the_union
+		x = -3
+		y = 4
+		cost = 4
+		available = {
+		}
+		prerequisite = {
+			focus = TEX_planning_an_offensive
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_battle_of_helen"
+			TEX_upgrade_lost_generation = yes
+		}
+	}
 	#### 1948 Tree ####
 	### Long Branch ###
 	focus = {
@@ -620,8 +447,7 @@ focus_tree = {
 		x = -2
 		y = 1
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_President_Long
@@ -633,7 +459,7 @@ focus_tree = {
 			unlock_decision_tooltip = TEX_Syndicalist_Registration_Act_Start
 			custom_effect_tooltip = CAL_Bill_Focus_Tree_tt
 			effect_tooltip = {
-				TEX_move_up_red_scare = yes
+				TEX_upgrade_red_scare = yes
 			}
 		}
 	}
@@ -644,8 +470,7 @@ focus_tree = {
 		x = -2
 		y = 3
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_Long_Syndicalist_Registration_Act
@@ -657,7 +482,7 @@ focus_tree = {
 			unlock_decision_tooltip = TEX_Syndicalist_Control_Act_Start
 			custom_effect_tooltip = CAL_Bill_Focus_Tree_tt
 			effect_tooltip = {
-				TEX_move_up_red_scare = yes
+				TEX_upgrade_red_scare = yes
 			}
 		}
 	}
@@ -669,8 +494,7 @@ focus_tree = {
 		x = 0
 		y = 1
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_President_Long
@@ -679,7 +503,7 @@ focus_tree = {
 		}
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus TEX_Long_Federal_Employees_Loyalty_Program"
-			TEX_move_up_red_scare = yes
+			TEX_upgrade_red_scare = yes
 		}
 	}
 	focus = {
@@ -689,8 +513,7 @@ focus_tree = {
 		x = 0
 		y = 3
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_Long_Federal_Employees_Loyalty_Program
@@ -702,7 +525,7 @@ focus_tree = {
 			unlock_decision_tooltip = TEX_Internal_Security_Act_Start
 			custom_effect_tooltip = CAL_Bill_Focus_Tree_tt
 			effect_tooltip = {
-				TEX_move_up_red_scare = yes
+				TEX_upgrade_red_scare = yes
 			}
 		}
 	}
@@ -713,8 +536,7 @@ focus_tree = {
 		x = -1
 		y = 2
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_Long_Federal_Employees_Loyalty_Program
@@ -723,7 +545,7 @@ focus_tree = {
 		}
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus TEX_Long_Internal_Security_Act"
-			TEX_move_up_red_scare = yes
+			TEX_upgrade_red_scare = yes
 		}
 	}
 	### Emergency Powers for Governors Act ###
@@ -734,8 +556,7 @@ focus_tree = {
 		x = -1
 		y = 4
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_Long_Internal_Security_Act
@@ -753,7 +574,7 @@ focus_tree = {
 			unlock_decision_tooltip = TEX_Emergency_Powers_Governors_Act_Start
 			custom_effect_tooltip = CAL_Bill_Focus_Tree_tt
 			effect_tooltip = {
-				TEX_move_up_red_scare = yes
+				TEX_upgrade_red_scare = yes
 			}
 		}
 	}
@@ -765,8 +586,7 @@ focus_tree = {
 		x = 6
 		y = 1
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_President_Long
@@ -785,8 +605,7 @@ focus_tree = {
 		x = 1
 		y = 2
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_President_Long
@@ -805,8 +624,7 @@ focus_tree = {
 		x = 5
 		y = 2
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_Long_Social_Security_Act
@@ -826,8 +644,7 @@ focus_tree = {
 		x = 7
 		y = 2
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_Long_Social_Security_Act
@@ -848,8 +665,7 @@ focus_tree = {
 		x = 2
 		y = 1
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_President_Long
@@ -869,8 +685,7 @@ focus_tree = {
 		x = 4
 		y = 1
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_President_Long
@@ -890,8 +705,7 @@ focus_tree = {
 		x = 3
 		y = 2
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_Long_Separate_but_Equal
@@ -911,8 +725,7 @@ focus_tree = {
 		x = 4
 		y = 3
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_Long_Anti_Lynching_Act
@@ -935,8 +748,7 @@ focus_tree = {
 		x = 2
 		y = 3
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_Long_Anti_Lynching_Act
@@ -959,8 +771,7 @@ focus_tree = {
 		x = 1
 		y = 4
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_Long_Vocational_Schools_Act
@@ -980,8 +791,7 @@ focus_tree = {
 		x = -4
 		y = 1
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_President_Long
@@ -1000,8 +810,7 @@ focus_tree = {
 		x = -3
 		y = 2
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_Long_Rural_Reconstruction_Act
@@ -1020,8 +829,7 @@ focus_tree = {
 		x = -4
 		y = 3
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_Long_Rural_Reconstruction_Act
@@ -1044,8 +852,7 @@ focus_tree = {
 		x = -3
 		y = 4
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_Long_Land_Development_Act
@@ -1072,8 +879,7 @@ focus_tree = {
 		x = 6
 		y = 3
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_Long_Federal_Healthcare_Act
@@ -1097,11 +903,6 @@ focus_tree = {
 		x = 2
 		y = 5
 		cost = 4
-
-		ai_will_do = {
-			base = 100
-		}
-
 		available = {
 			NOT = {
 				has_government = social_conservative
@@ -1129,8 +930,7 @@ focus_tree = {
 		x = -6
 		y = 1
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_President_Long
@@ -1149,8 +949,7 @@ focus_tree = {
 		x = -7
 		y = 2
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_Long_Union_Highways_Act
@@ -1170,8 +969,7 @@ focus_tree = {
 		x = -5
 		y = 2
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_Long_Union_Highways_Act
@@ -1191,8 +989,7 @@ focus_tree = {
 		x = -6
 		y = 3
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_Long_Rename_and_Construct
@@ -1232,8 +1029,7 @@ focus_tree = {
 		x = -2
 		y = 1
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_President_McMath
@@ -1252,8 +1048,7 @@ focus_tree = {
 		x = -1
 		y = 4
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_McMath_Defense_Democracy_Act
@@ -1280,8 +1075,7 @@ focus_tree = {
 		x = -2
 		y = 3
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_McMath_Fight_Corporatists
@@ -1303,8 +1097,7 @@ focus_tree = {
 		x = 0
 		y = 1
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_President_McMath
@@ -1345,8 +1138,7 @@ focus_tree = {
 		x = -1
 		y = 2
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_McMath_Manage_Louisiana
@@ -1386,8 +1178,7 @@ focus_tree = {
 		x = 0
 		y = 3
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_McMath_Manage_Louisiana
@@ -1426,8 +1217,7 @@ focus_tree = {
 		x = 6
 		y = 1
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_President_McMath
@@ -1446,8 +1236,7 @@ focus_tree = {
 		x = 1
 		y = 2
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_President_McMath
@@ -1466,8 +1255,7 @@ focus_tree = {
 		x = 5
 		y = 2
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_McMath_Social_Security_Act
@@ -1487,8 +1275,7 @@ focus_tree = {
 		x = 7
 		y = 2
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_McMath_Social_Security_Act
@@ -1508,8 +1295,7 @@ focus_tree = {
 		x = 3
 		y = 1
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_President_McMath
@@ -1526,8 +1312,7 @@ focus_tree = {
 		x = 3
 		y = 2
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_McMath_Groundwork_Civil_Rights
@@ -1546,8 +1331,7 @@ focus_tree = {
 		x = 2
 		y = 3
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_McMath_Anti_Lynching_Act
@@ -1567,8 +1351,7 @@ focus_tree = {
 		x = 1
 		y = 4
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_McMath_Vocational_Schools_Act
@@ -1591,8 +1374,7 @@ focus_tree = {
 		x = -4
 		y = 1
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_President_McMath
@@ -1611,8 +1393,7 @@ focus_tree = {
 		x = -3
 		y = 2
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_McMath_Rural_Reconstruction_Act
@@ -1631,8 +1412,7 @@ focus_tree = {
 		x = -4
 		y = 3
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_McMath_Rural_Reconstruction_Act
@@ -1655,8 +1435,7 @@ focus_tree = {
 		x = -3
 		y = 4
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_McMath_Land_Development_Act
@@ -1683,8 +1462,7 @@ focus_tree = {
 		x = 6
 		y = 3
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_McMath_Federal_Healthcare_Act
@@ -1708,8 +1486,7 @@ focus_tree = {
 		x = 4
 		y = 3
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		mutually_exclusive = {
 		}
@@ -1729,8 +1506,7 @@ focus_tree = {
 		x = -6
 		y = 1
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_President_McMath
@@ -1749,8 +1525,7 @@ focus_tree = {
 		x = -7
 		y = 2
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_McMath_Union_Highways_Act
@@ -1770,8 +1545,7 @@ focus_tree = {
 		x = -5
 		y = 2
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_McMath_Union_Highways_Act
@@ -1791,8 +1565,7 @@ focus_tree = {
 		x = -6
 		y = 3
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_McMath_Rename_and_Construct
@@ -1832,8 +1605,7 @@ focus_tree = {
 		x = -1
 		y = 1
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_President_Holt
@@ -1852,8 +1624,7 @@ focus_tree = {
 		x = -1
 		y = 3
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_Holt_Restrict_Protest
@@ -1875,8 +1646,7 @@ focus_tree = {
 		x = 1
 		y = 1
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_President_Holt
@@ -1895,14 +1665,13 @@ focus_tree = {
 		x = 0
 		y = 4
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
-			focus = TEX_Holt_Individualization_of_Utilities
+			focus = TEX_Holt_Indiviualization_of_Utilities
 		}
 		prerequisite = {
-			focus = TEX_Holt_Private_Orphanages
+			focus = TEX_Holt_Private_Orphanges
 		}
 		prerequisite = {
 			focus = TEX_Holt_Labor_Reconciliation
@@ -1918,14 +1687,13 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = TEX_Holt_Private_Orphanages
+		id = TEX_Holt_Private_Orphanges
 		icon = GFX_generic_privatisation
 		relative_position_id = TEX_President_Holt
 		x = 0
 		y = 2
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_Holt_Defund_CCC
@@ -1933,19 +1701,18 @@ focus_tree = {
 		mutually_exclusive = {
 		}
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus TEX_Holt_Private_Orphanages"
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_Holt_Private_Orphanges"
 			TEX_increase_privatization_efforts = yes
 		}
 	}
 	focus = {
-		id = TEX_Holt_Individualization_of_Utilities
+		id = TEX_Holt_Indiviualization_of_Utilities
 		icon = GFX_TEX_autarky
 		relative_position_id = TEX_President_Holt
 		x = 1
 		y = 3
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_Holt_Defund_CCC
@@ -1953,7 +1720,7 @@ focus_tree = {
 		mutually_exclusive = {
 		}
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus TEX_Holt_Private_Orphanages"
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_Holt_Private_Orphanges"
 			TEX_increase_privatization_efforts = yes
 		}
 	}
@@ -1964,8 +1731,7 @@ focus_tree = {
 		x = 2
 		y = 2
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_President_Holt
@@ -1984,8 +1750,7 @@ focus_tree = {
 		x = 4
 		y = 1
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_President_Holt
@@ -2002,8 +1767,7 @@ focus_tree = {
 		x = 4
 		y = 2
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_Holt_Separate_but_Equal
@@ -2022,8 +1786,7 @@ focus_tree = {
 		x = 3
 		y = 3
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_Holt_Anti_Lynching_Act
@@ -2044,8 +1807,7 @@ focus_tree = {
 		x = -3
 		y = 1
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_President_Holt
@@ -2064,8 +1826,7 @@ focus_tree = {
 		x = -2
 		y = 2
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_Holt_Rural_Reconstruction_Act
@@ -2084,8 +1845,7 @@ focus_tree = {
 		x = -3
 		y = 3
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_Holt_Rural_Reconstruction_Act
@@ -2108,8 +1868,7 @@ focus_tree = {
 		x = -2
 		y = 4
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_Holt_Land_Development_Act
@@ -2136,8 +1895,7 @@ focus_tree = {
 		x = -5
 		y = 1
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_President_Holt
@@ -2156,8 +1914,7 @@ focus_tree = {
 		x = -6
 		y = 2
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_Holt_Union_Highways_Act
@@ -2177,8 +1934,7 @@ focus_tree = {
 		x = -4
 		y = 2
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_Holt_Union_Highways_Act
@@ -2198,8 +1954,7 @@ focus_tree = {
 		x = -5
 		y = 3
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_Holt_Rename_and_Construct
@@ -2218,11 +1973,10 @@ focus_tree = {
 		id = TEX_Navy
 		icon = GFX_TEX_navy
 		#relative_position_id = TEX_Navy
-		x = 12		#To make room for the Economic Focuses
+		x = 38		#To make room for the Economic Focuses
 		y = 7
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			#focus = 
@@ -2239,8 +1993,7 @@ focus_tree = {
 		x = -1
 		y = 1
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_Navy
@@ -2264,8 +2017,7 @@ focus_tree = {
 		x = -2
 		y = 2
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_Navy_Surface_Fleet
@@ -2286,8 +2038,7 @@ focus_tree = {
 		x = -3
 		y = 3
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_Navy_Modernize_Destroyers
@@ -2308,8 +2059,7 @@ focus_tree = {
 		x = 1
 		y = 1
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_Navy
@@ -2333,8 +2083,7 @@ focus_tree = {
 		x = 2
 		y = 2
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_Navy_German_Submarine
@@ -2351,8 +2100,7 @@ focus_tree = {
 		x = 3
 		y = 3
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_Navy_German_Licenses
@@ -2372,8 +2120,7 @@ focus_tree = {
 		x = 0
 		y = 2
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_Navy_German_Submarine
@@ -2406,8 +2153,7 @@ focus_tree = {
 		x = -1
 		y = 3
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_Navy_Build
@@ -2443,8 +2189,7 @@ focus_tree = {
 		x = 1
 		y = 3
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_Navy_Build
@@ -2480,8 +2225,7 @@ focus_tree = {
 		x = 2
 		y = 4
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_Navy_Expand_Charleston
@@ -2505,8 +2249,7 @@ focus_tree = {
 		x = -2
 		y = 4
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_Navy_Rebuild_Drydock_1
@@ -2532,8 +2275,7 @@ focus_tree = {
 		x = 7
 		y = 0
 		cost = 6
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			#focus = TEX_Air
@@ -2550,8 +2292,7 @@ focus_tree = {
 		x = -1
 		y = 1
 		cost = 6
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_Air
@@ -2575,8 +2316,7 @@ focus_tree = {
 		x = -2
 		y = 2
 		cost = 6
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_Air_Assisting_Patton
@@ -2593,8 +2333,7 @@ focus_tree = {
 		x = -1
 		y = 3
 		cost = 6
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_Air_Assisting_Patton
@@ -2616,8 +2355,7 @@ focus_tree = {
 		x = -2
 		y = 4
 		cost = 6
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_Air_Surface_Coordination
@@ -2646,8 +2384,7 @@ focus_tree = {
 		x = 1
 		y = 1
 		cost = 6
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_Air
@@ -2671,8 +2408,7 @@ focus_tree = {
 		x = 2
 		y = 2
 		cost = 6
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_Air_Superiority_Doctrine
@@ -2689,8 +2425,7 @@ focus_tree = {
 		x = 0
 		y = 2
 		cost = 6
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_Air_Assisting_Patton
@@ -2708,8 +2443,7 @@ focus_tree = {
 		x = 1
 		y = 3
 		cost = 6
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_Air_Superiority_Doctrine
@@ -2740,8 +2474,7 @@ focus_tree = {
 		x = 2
 		y = 4
 		cost = 6
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_Air_Controlling_Skies
@@ -2770,8 +2503,7 @@ focus_tree = {
 		x = 0
 		y = 4
 		cost = 6
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_Air_Expand_McDonnell_Contracts
@@ -2793,8 +2525,7 @@ focus_tree = {
 		x = 0
 		y = 5
 		cost = 6
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_Air_Striking_Cities
@@ -2821,8 +2552,7 @@ focus_tree = {
 		x = -10
 		y = 0
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus TEX_Army"
@@ -2845,8 +2575,7 @@ focus_tree = {
 		x = -4
 		y = 1
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_Army
@@ -2871,8 +2600,7 @@ focus_tree = {
 		x = -5
 		y = 2
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_Army_Reform_Patton
@@ -2893,8 +2621,7 @@ focus_tree = {
 		x = -6
 		y = 3
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_Army_Expand_Armored
@@ -2921,8 +2648,7 @@ focus_tree = {
 		x = -6
 		y = 4
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_Army_M46_Patton
@@ -2949,8 +2675,7 @@ focus_tree = {
 		x = -5
 		y = 5
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_Army_Expand_M46
@@ -2971,8 +2696,7 @@ focus_tree = {
 		x = -3
 		y = 2
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_Army_Reform_Patton
@@ -3021,8 +2745,7 @@ focus_tree = {
 		x = -4
 		y = 3
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_Army_Modernize_Logistics
@@ -3050,8 +2773,7 @@ focus_tree = {
 		x = -2
 		y = 3
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_Army_Modernize_Logistics
@@ -3079,8 +2801,7 @@ focus_tree = {
 		x = -4
 		y = 4
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_Army_Mechanization
@@ -3101,8 +2822,7 @@ focus_tree = {
 		x = -2
 		y = 5
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_Army_Mechanization
@@ -3138,8 +2858,7 @@ focus_tree = {
 		x = -4
 		y = 6
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_Army_Streamline
@@ -3161,8 +2880,7 @@ focus_tree = {
 		x = 0
 		y = 1
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_Army
@@ -3182,11 +2900,6 @@ focus_tree = {
 		x = -1
 		y = 2
 		cost = 4
-
-		ai_will_do = {
-			base = 100
-		}
-
 		available = {
 			has_country_flag = TEX_militia_review_complete
 		}
@@ -3210,8 +2923,7 @@ focus_tree = {
 		x = 0
 		y = 3
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_Army_Demobilize_Militias
@@ -3243,8 +2955,7 @@ focus_tree = {
 		x = -1
 		y = 4
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_Army_Reorganize_Armament_Committee
@@ -3275,8 +2986,7 @@ focus_tree = {
 		x = 1
 		y = 4
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_Army_Reorganize_Armament_Committee
@@ -3298,8 +3008,7 @@ focus_tree = {
 		x = 0
 		y = 5
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_Army_Artillery_Contracts
@@ -3330,8 +3039,7 @@ focus_tree = {
 		x = -1
 		y = 6
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_Army_Mobile_Infantry
@@ -3361,8 +3069,7 @@ focus_tree = {
 		x = 3
 		y = 1
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_Army
@@ -3388,8 +3095,7 @@ focus_tree = {
 		x = 1
 		y = 2
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_Army_New_Officer_Corps
@@ -3414,8 +3120,7 @@ focus_tree = {
 		x = 3
 		y = 2
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_Army_New_Officer_Corps
@@ -3437,8 +3142,7 @@ focus_tree = {
 		x = 5
 		y = 2
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_Army_New_Officer_Corps
@@ -3459,8 +3163,7 @@ focus_tree = {
 		x = 2
 		y = 3
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_Army_Expand_Citadel
@@ -3486,8 +3189,7 @@ focus_tree = {
 		x = 4
 		y = 3
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_Army_Study_War
@@ -3513,15 +3215,14 @@ focus_tree = {
 		x = 5
 		y = 4
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_Army_New_ROTC_Programs
 		}
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus TEX_Army_Grow_New_Generation"
-			TEX_move_up_lost_generation = yes
+			TEX_upgrade_lost_generation = yes
 		}
 	}
 	focus = {
@@ -3531,8 +3232,7 @@ focus_tree = {
 		x = 3
 		y = 5
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_Army_Grow_New_Generation
@@ -3570,30 +3270,10 @@ focus_tree = {
 	#### 1952 Focus ####
 	###PROGRESSIVES
 	focus = {
-		id = TEX_1952_progressives
-		icon = { 
-			trigger = {
-				has_country_flag = arnall_available
-			}
-			value = GFX_TEX_President_Ellis_Arnall
-		}
-		icon = { 
-			value = GFX_TEX_President_Sid_McMath
-		}
-		dynamic = yes
-		allow_branch = {
-			TEX = {
-				has_country_flag = TEX_1952_progressives
-			}
-		}
-		bypass = {
-			TEX = {
-				has_country_flag = TEX_1952_progressives
-			}
-		}
-
-		#relative_position_id = TEX_1952_progressives
-		x = 31
+		id = TEX_1952_McMath
+		icon = GFX_TEX_President_Sid_McMath
+		#relative_position_id = TEX_1952_McMath
+		x = -3
 		y = 7
 		cost = 4
 		available = {
@@ -3605,22 +3285,42 @@ focus_tree = {
 		mutually_exclusive = {
 		}
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_progressives"
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_McMath"
+			custom_effect_tooltip = unlock_focuses
+		}
+	}
+	focus = {
+		id = TEX_1952_Arnall
+		icon = GFX_TEX_President_Ellis_Arnall
+		#relative_position_id = TEX_1952_McMath
+		x = -1
+		y = 7
+		cost = 4
+		available = {
+			always = no
+		}
+		prerequisite = {
+			#focus = 
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_Arnall"
 			custom_effect_tooltip = unlock_focuses
 		}
 	}
 	focus = {
 		id = TEX_1952_Prog_Eliminate_Poll_Tax
 		icon = GFX_TEX_dollar
-		relative_position_id = TEX_1952_progressives
-		x = 1
+		relative_position_id = TEX_1952_McMath
+		x = 2
 		y = 1
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
-			focus = TEX_1952_progressives
+			focus = TEX_1952_McMath
+			focus = TEX_1952_Arnall
 		}
 		mutually_exclusive = {
 		}
@@ -3658,12 +3358,11 @@ focus_tree = {
 	focus = {
 		id = TEX_1952_Prog_Lower_Voting_Age
 		icon = GFX_TEX_democracy
-		relative_position_id = TEX_1952_progressives
-		x = 2
+		relative_position_id = TEX_1952_McMath
+		x = 3
 		y = 2
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_1952_Prog_Eliminate_Poll_Tax
@@ -3680,15 +3379,15 @@ focus_tree = {
 	focus = {
 		id = TEX_1952_Prog_Smash_Segregation
 		icon = GFX_TEX_crush_dixie
-		relative_position_id = TEX_1952_progressives
-		x = -1
+		relative_position_id = TEX_1952_McMath
+		x = 0
 		y = 1
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
-			focus = TEX_1952_progressives
+			focus = TEX_1952_McMath
+			focus = TEX_1952_Arnall
 		}
 		mutually_exclusive = {
 		}
@@ -3700,12 +3399,11 @@ focus_tree = {
 	focus = {
 		id = TEX_1952_Prog_Integrate_Schools
 		icon = GFX_TEX_integrate_schools
-		relative_position_id = TEX_1952_progressives
-		x = -2
+		relative_position_id = TEX_1952_McMath
+		x = -1
 		y = 2
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_1952_Prog_Smash_Segregation
@@ -3720,12 +3418,11 @@ focus_tree = {
 	focus = {
 		id = TEX_1952_Prog_Save_HBCUs
 		icon = GFX_TEX_race_relations
-		relative_position_id = TEX_1952_progressives
-		x = -1
+		relative_position_id = TEX_1952_McMath
+		x = 0
 		y = 3
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_1952_Prog_Integrate_Schools
@@ -3743,12 +3440,11 @@ focus_tree = {
 	focus = {
 		id = TEX_1952_Prog_Increase_Minimum_Wage
 		icon = GFX_TEX_dollar_treaty
-		relative_position_id = TEX_1952_progressives
-		x = 0
+		relative_position_id = TEX_1952_McMath
+		x = 1
 		y = 2
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_1952_Prog_Smash_Segregation
@@ -3763,12 +3459,11 @@ focus_tree = {
 	focus = {
 		id = TEX_1952_Prog_Integrate_Primaries
 		icon = GFX_generic_microphone
-		relative_position_id = TEX_1952_progressives
-		x = 1
+		relative_position_id = TEX_1952_McMath
+		x = 2
 		y = 3
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_1952_Prog_Lower_Voting_Age
@@ -3786,32 +3481,10 @@ focus_tree = {
 	}
 	###LONGISTS
 	focus = {
-		id = TEX_1952_Orthodox
-
-		icon = {
-			trigger = {
-				has_country_flag = russell_available
-			}
-			value = GFX_TEX_President_Russell_Long
-		}
-		icon = {
-			value = GFX_TEX_President_Earl_Long
-		}
-		dynamic = yes
-
-		allow_branch = {
-			TEX = {
-				has_country_flag = TEX_1952_Orthodox
-			}
-		}
-		bypass = {
-			TEX = {
-				has_country_flag = TEX_1952_Orthodox
-			}
-		}
-
-		#relative_position_id = TEX_1952_Orthodox
-		x = 30
+		id = TEX_1952_Long
+		icon = GFX_TEX_President_Earl_Long
+		#relative_position_id = TEX_1952_Long
+		x = 7
 		y = 7
 		cost = 4
 		available = {
@@ -3823,22 +3496,42 @@ focus_tree = {
 		mutually_exclusive = {
 		}
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_Orthodox"
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_Long"
+			custom_effect_tooltip = unlock_focuses
+		}
+	}
+	focus = {
+		id = TEX_1952_Russell
+		icon = GFX_TEX_President_Russell_Long
+		#relative_position_id = TEX_1952_Long
+		x = 9
+		y = 7
+		cost = 4
+		available = {
+			always = no
+		}
+		prerequisite = {
+			#focus = 
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_Russell"
 			custom_effect_tooltip = unlock_focuses
 		}
 	}
 	focus = {
 		id = TEX_1952_Orthodox_Income_Tax_Credit
 		icon = GFX_generic_foreign_investments
-		relative_position_id = TEX_1952_Orthodox
+		relative_position_id = TEX_1952_Long
 		x = 0
 		y = 1
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
-			focus = TEX_1952_Orthodox
+			focus = TEX_1952_Long
+			focus = TEX_1952_Russell
 		}
 		mutually_exclusive = {
 		}
@@ -3850,12 +3543,11 @@ focus_tree = {
 	focus = {
 		id = TEX_1952_Orthodox_Expand_Social_Security
 		icon = GFX_TEX_dollar_treaty
-		relative_position_id = TEX_1952_Orthodox
+		relative_position_id = TEX_1952_Long
 		x = -1
 		y = 2
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_1952_Orthodox_Income_Tax_Credit
@@ -3870,12 +3562,11 @@ focus_tree = {
 	focus = {
 		id = TEX_1952_Orthodox_Employee_Stock_Ownership
 		icon = GFX_generic_deals
-		relative_position_id = TEX_1952_Orthodox
+		relative_position_id = TEX_1952_Long
 		x = 0
 		y = 3
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_1952_Orthodox_Expand_Social_Security
@@ -3885,18 +3576,17 @@ focus_tree = {
 		}
 		completion_reward = {
 			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_Orthodox_Employee_Stock_Ownership"
-			TEX_move_up_social_security = yes
+			TEX_upgrade_social_security = yes
 		}
 	}
 	focus = {
 		id = TEX_1952_Orthodox_Tax_Cuts_Economy
 		icon = GFX_generic_economic_report
-		relative_position_id = TEX_1952_Orthodox
+		relative_position_id = TEX_1952_Long
 		x = 1
 		y = 2
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_1952_Orthodox_Income_Tax_Credit
@@ -3914,15 +3604,15 @@ focus_tree = {
 	focus = {
 		id = TEX_1952_Orthodox_Agriculture_Act
 		icon = GFX_generic_agriculture_dept
-		relative_position_id = TEX_1952_Orthodox
+		relative_position_id = TEX_1952_Long
 		x = 2
 		y = 1
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
-			focus = TEX_1952_Orthodox
+			focus = TEX_1952_Long
+			focus = TEX_1952_Russell
 		}
 		mutually_exclusive = {
 		}
@@ -3938,12 +3628,11 @@ focus_tree = {
 	focus = {
 		id = TEX_1952_Orthodox_Reform_Tax_Code
 		icon = GFX_generic_bill
-		relative_position_id = TEX_1952_Orthodox
+		relative_position_id = TEX_1952_Long
 		x = 2
 		y = 3
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_1952_Orthodox_Agriculture_Act
@@ -3959,513 +3648,12 @@ focus_tree = {
 			remove_ideas = TEX_taxes_1
 		}
 	}
-	### LONG 1952 TREE
-	focus = {
-		id = TEX_1952_orthodox_reconcile_unions
-		icon = GFX_generic_unions
-		relative_position_id = TEX_1952_Orthodox
-		x = -4
-		y = 1
-		cost = 4
-		ai_will_do = {
-			base = 100
-		}
-		prerequisite = {
-			focus = TEX_1952_Orthodox
-		}
-		mutually_exclusive = {
-			focus = TEX_1952_orthodox_expand_right_to_work
-		}
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_orthodox_reconcile_unions"
-			set_temp_variable = {
-				TEX_factionalism_pop = 15
-			}
-			TEX_factionalism_rem_pop_conservative = yes
-			add_ideas = TEX_reconciled_unions
-		}
-	}
-	focus = {
-		id = TEX_1952_orthodox_expand_right_to_work
-		icon = GFX_generic_workers_for_business
-		relative_position_id = TEX_1952_Orthodox
-		x = -6
-		y = 1
-		cost = 4
-		ai_will_do = {
-			base = 100
-		}
-		prerequisite = {
-			focus = TEX_1952_Orthodox
-		}
-		mutually_exclusive = {
-			focus = TEX_1952_orthodox_reconcile_unions
-		}
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_orthodox_expand_right_to_work"
-			add_ideas = TEX_right_to_work_laws
-		}
-	}
-	focus = {
-		id = TEX_1952_orthodox_expand_ford_industrial_complex
-		icon = GFX_generic_car
-		relative_position_id = TEX_1952_Orthodox
-		x = -5
-		y = 2
-		cost = 4
-		ai_will_do = {
-			base = 100
-		}
-		prerequisite = {
-			focus = TEX_1952_orthodox_expand_right_to_work
-			focus = TEX_1952_orthodox_reconcile_unions
-		}
-		mutually_exclusive = {
-		}
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_orthodox_expand_ford_industrial_complex"
-			every_state = {
-				limit = {
-					is_owned_and_controlled_by = TEX
-					OR = {
-						state = 261
-						state = 369
-						state = 373
-						state = 395
-					}
-				}
-				add_building_construction = {
-					type = industrial_complex
-					level = 1
-					instant_build = yes
-				}
-				add_extra_state_shared_building_slots = 1
-			}
-		}
-	}
-	focus = {
-		id = TEX_1952_orthodox_self_sufficient_economy
-		icon = GFX_generic_economic_control
-		relative_position_id = TEX_1952_Orthodox
-		x = -6
-		y = 3
-		cost = 4
-		ai_will_do = {
-			base = 100
-		}
-		prerequisite = {
-			focus = TEX_1952_orthodox_expand_ford_industrial_complex
-		}
-		mutually_exclusive = {
-		}
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_orthodox_self_sufficient_economy"
-			random_owned_state = {
-				add_building_construction = {
-					type = industrial_complex
-					level = 4
-					instant_build = yes
-				}
-				add_extra_state_shared_building_slots = 1
-			}
-		}
-	}
-	focus = {
-		id = TEX_1952_orthodox_expand_highway_system
-		icon = GFX_TEX_national_transit_commission
-		relative_position_id = TEX_1952_Orthodox
-		x = -3
-		y = 2
-		cost = 4
-		ai_will_do = {
-			base = 100
-		}
-		prerequisite = {
-			focus = TEX_1952_Orthodox
-		}
-		mutually_exclusive = {
-		}
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_orthodox_expand_highway_system"
-			custom_effect_tooltip = TEX_add_25_bil
-			custom_effect_tooltip = tooltip_white_line
-			add_to_variable = {
-				TEX_interstate_budget = 25
-			}
-			unlock_decision_tooltip = TEX_I_26
-			unlock_decision_tooltip = TEX_I_35
-			unlock_decision_tooltip = TEX_I_37
-			unlock_decision_tooltip = TEX_I_94
-		}
-	}
-	focus = {
-		id = TEX_1952_orthodox_expand_defense_infrastructure
-		icon = GFX_TEX_fortress
-		relative_position_id = TEX_1952_Orthodox
-		x = -4
-		y = 3
-		cost = 4
-		ai_will_do = {
-			base = 100
-		}
-		prerequisite = {
-			focus = TEX_1952_orthodox_expand_highway_system
-		}
-		mutually_exclusive = {
-		}
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_orthodox_expand_defense_infrastructure"
-			every_owned_state = {
-				limit = {
-					num_owned_neighbour_states = {
-						owner = CAL
-						count > 0
-					}
-					is_owned_and_controlled_by = TEX
-				}
-				add_building_construction = {
-					type = bunker
-					level = 1
-					instant_build = yes
-				}
-			}
-		}
-	}
-	focus = {
-		id = TEX_1952_orthodox_prepared_force
-		icon = GFX_TEX_militias
-		relative_position_id = TEX_1952_Orthodox
-		x = -2
-		y = 1
-		cost = 4
-		ai_will_do = {
-			base = 100
-		}
-		prerequisite = {
-			focus = TEX_1952_Orthodox
-		}
-		mutually_exclusive = {
-		}
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_orthodox_prepared_force"
-			move_up_econ_mobilization = yes
-		}
-	}
-	focus = {
-		id = TEX_1952_orthodox_expand_peacetime_reserves
-		icon = GFX_TEX_recruitment
-		relative_position_id = TEX_1952_Orthodox
-		x = -2
-		y = 3
-		cost = 4
-		ai_will_do = {
-			base = 100
-		}
-		prerequisite = {
-			focus = TEX_1952_orthodox_prepared_force
-		}
-		mutually_exclusive = {
-		}
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_orthodox_expand_peacetime_reserves"
-			custom_effect_tooltip = TEX_1952_orthodox_expand_peacetime_reserves_tt
-		}
-	}
-	focus = {
-		id = TEX_1952_orthodox_new_capital
-		icon = GFX_TEX_america_map
-		relative_position_id = TEX_1952_Orthodox
-		x = 4
-		y = 1
-		cost = 4
-		ai_will_do = {
-			base = 100
-		}
-		prerequisite = {
-			focus = TEX_1952_Orthodox
-		}
-		mutually_exclusive = {
-		}
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_orthodox_new_capital"
-			country_event = {
-				id = tex.focus.1
-			}
-		}
-	}
-	focus = {
-		id = TEX_1952_orthodox_washington_dc
-		icon = GFX_TEX_washington_dc
-		relative_position_id = TEX_1952_Orthodox
-		x = 3
-		y = 2
-		cost = 4
-
-		ai_will_do = {
-			base = 100
-		}
-
-		available = {
-			has_country_flag = TEX_washington_capital
-		}
-		prerequisite = {
-			focus = TEX_1952_orthodox_new_capital
-		}
-		mutually_exclusive = {
-			focus = TEX_1952_orthodox_st_louis
-		}
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_orthodox_washington_dc"
-			custom_effect_tooltip = TEX_capital_moved_tt
-			set_victory_points = {
-				province = 3957
-				value = 40
-			}
-			set_victory_points = {
-				province = 7552
-				value = 10
-			}
-			hidden_effect = {
-				set_capital = {
-					state = 361
-				}
-				set_province_name = {
-					id = 3957
-					name = "Washington, D.C."
-				}
-			}
-		}
-	}
-	focus = {
-		id = TEX_1952_orthodox_st_louis
-		icon = GFX_TEX_st_louis
-		relative_position_id = TEX_1952_Orthodox
-		x = 5
-		y = 2
-		cost = 4
-
-		ai_will_do = {
-			base = 100
-		}
-		
-		available = {
-			has_country_flag = TEX_st_louis_capital
-		}
-		prerequisite = {
-			focus = TEX_1952_orthodox_new_capital
-		}
-		mutually_exclusive = {
-			focus = TEX_1952_orthodox_washington_dc
-		}
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_orthodox_st_louis"
-			custom_effect_tooltip = TEX_capital_moved2_tt
-			set_victory_points = {
-				province = 4569
-				value = 40
-			}
-			set_victory_points = {
-				province = 7552
-				value = 10
-			}
-			hidden_effect = {
-				set_capital = {
-					state = 373
-				}
-				set_province_name = {
-					id = 3957
-					name = "St. Louis, D.C."
-				}
-			}
-		}
-	}
-	focus = {
-		id = TEX_1952_orthodox_reforge_steel_belt
-		icon = GFX_TEX_steel_industry
-		relative_position_id = TEX_1952_Orthodox
-		x = 6
-		y = 1
-		cost = 4
-		ai_will_do = {
-			base = 100
-		}
-		prerequisite = {
-			focus = TEX_1952_Orthodox
-		}
-		mutually_exclusive = {
-		}
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_orthodox_reforge_steel_belt"
-			custom_effect_tooltip = TEX_1952_orthodox_reforge_steel_belt_tt
-			custom_effect_tooltip = tooltip_white_line
-			every_state = {
-				limit = {
-					is_owned_and_controlled_by = TEX
-					has_resources_amount = {
-						resource = steel
-						amount > 10
-						delivered = yes
-					}
-				}
-				add_resource = {
-					type = steel
-					amount = 10
-				}
-			}
-		}
-	}
-	focus = {
-		id = TEX_1952_orthodox_expand_coastal_ports
-		icon = GFX_generic_shipyard
-		relative_position_id = TEX_1952_Orthodox
-		x = 7
-		y = 2
-		cost = 4
-		ai_will_do = {
-			base = 100
-		}
-		prerequisite = {
-			focus = TEX_1952_orthodox_reforge_steel_belt
-		}
-		mutually_exclusive = {
-		}
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_orthodox_expand_coastal_ports"
-			random_owned_state = {
-				limit = {
-					is_coastal = yes
-				}
-				add_building_construction = {
-					type = coastal_bunker
-					level = 2
-					instant_build = yes
-					province = {
-						all_provinces = yes
-						limit_to_coastal = yes
-					}
-				}
-			}
-		}
-	}
-	focus = {
-		id = TEX_1952_orthodox_expand_urban_industrialization
-		icon = GFX_generic_industrial_towns
-		relative_position_id = TEX_1952_Orthodox
-		x = 4
-		y = 3
-		cost = 4
-		ai_will_do = {
-			base = 100
-		}
-		prerequisite = {
-			focus = TEX_1952_orthodox_expand_coastal_ports
-		}
-		mutually_exclusive = {
-		}
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_orthodox_expand_urban_industrialization"
-			every_owned_state = {
-				limit = {
-					OR = {
-						has_state_category = two
-						has_state_category = three
-					}
-				}
-				set_state_category = four
-			}
-		}
-	}
-	focus = {
-		id = TEX_1952_orthodox_housing_act
-		icon = GFX_GENERIC_worker_housing
-		relative_position_id = TEX_1952_Orthodox
-		x = 6
-		y = 3
-		cost = 4
-		ai_will_do = {
-			base = 100
-		}
-		prerequisite = {
-			focus = TEX_1952_orthodox_expand_coastal_ports
-		}
-		mutually_exclusive = {
-		}
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_orthodox_housing_act"
-			random_owned_state = {
-				add_building_construction = {
-					type = industrial_complex
-					level = 1
-					instant_build = yes
-				}
-				add_extra_state_shared_building_slots = 1
-			}
-		}
-	}
-	focus = {
-		id = TEX_1952_orthodox_food_exports
-		icon = GFX_generic_agriculture4
-		relative_position_id = TEX_1952_Orthodox
-		x = 8
-		y = 3
-		cost = 4
-		ai_will_do = {
-			base = 100
-		}
-		prerequisite = {
-			focus = TEX_1952_orthodox_expand_coastal_ports
-		}
-		mutually_exclusive = {
-		}
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_orthodox_food_exports"
-			every_country = {
-				limit = {
-					is_in_faction_with = GER
-				}
-				TEX = {
-					add_opinion_modifier = {
-						target = PREV
-						modifier = KRG_trade_agreement
-					}
-				}
-			}
-		}
-	}
-
-
-	### 1952 - Holt or Thurmond ###
-	
 	###CONSERVATIVES
 	focus = {
-		id = TEX_1952_conservatives
-		icon = {
-			trigger = {
-				TEX = { 
-					has_country_flag = thurmond_available
-				}
-			}
-			value = GFX_TEX_President_Strom_Thurmond
-		}
-		icon = {
-			value = GFX_TEX_President_Rush_Holt
-		}
-    	dynamic = yes
-		
-		allow_branch = {
-			TEX = {
-				has_country_flag = TEX_1952_conservatives
-			}
-		}
-
-		bypass = {
-			TEX = {
-				has_country_flag = TEX_1952_conservatives
-			}
-		}
-
-		#relative_position_id = TEX_1952_conservatives
-		x = 31
+		id = TEX_1952_Holt
+		icon = GFX_TEX_President_Rush_Holt
+		#relative_position_id = TEX_1952_Holt
+		x = 16
 		y = 7
 		cost = 4
 		available = {
@@ -4477,22 +3665,42 @@ focus_tree = {
 		mutually_exclusive = {
 		}
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_conservatives"
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_Holt"
+			custom_effect_tooltip = unlock_focuses
+		}
+	}
+	focus = {
+		id = TEX_1952_Thurmond
+		icon = GFX_TEX_President_Strom_Thurmond
+		#relative_position_id = TEX_1952_Holt
+		x = 18
+		y = 7
+		cost = 4
+		available = {
+			always = no
+		}
+		prerequisite = {
+			#focus = 
+		}
+		mutually_exclusive = {
+		}
+		completion_reward = {
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_Thurmond"
 			custom_effect_tooltip = unlock_focuses
 		}
 	}
 	focus = {
 		id = TEX_1952_Conservative_Expand_Tariffs
 		icon = GFX_TEX_tariffs
-		relative_position_id = TEX_1952_conservatives
+		relative_position_id = TEX_1952_Holt
 		x = -1
 		y = 1
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
-			focus = TEX_1952_conservatives
+			focus = TEX_1952_Holt
+			focus = TEX_1952_Thurmond
 		}
 		mutually_exclusive = {
 		}
@@ -4505,15 +3713,15 @@ focus_tree = {
 	focus = {
 		id = TEX_1952_Conservative_Trading_Enemies_Act
 		icon = GFX_generic_skull_treaty2
-		relative_position_id = TEX_1952_conservatives
+		relative_position_id = TEX_1952_Holt
 		x = 1
 		y = 1
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
-			focus = TEX_1952_conservatives
+			focus = TEX_1952_Holt
+			focus = TEX_1952_Thurmond
 		}
 		mutually_exclusive = {
 		}
@@ -4536,12 +3744,11 @@ focus_tree = {
 	focus = {
 		id = TEX_1952_Conservative_Yellow_Scare
 		icon = GFX_generic_radio
-		relative_position_id = TEX_1952_conservatives
+		relative_position_id = TEX_1952_Holt
 		x = 0
 		y = 2
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_1952_Conservative_Expand_Tariffs
@@ -4559,15 +3766,15 @@ focus_tree = {
 	focus = {
 		id = TEX_1952_Conservative_Stem_Great_Migration
 		icon = GFX_generic_conspiracy
-		relative_position_id = TEX_1952_conservatives
+		relative_position_id = TEX_1952_Holt
 		x = 3
 		y = 1
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
-			focus = TEX_1952_conservatives
+			focus = TEX_1952_Holt
+			focus = TEX_1952_Thurmond
 		}
 		mutually_exclusive = {
 		}
@@ -4578,12 +3785,11 @@ focus_tree = {
 	focus = {
 		id = TEX_1952_Conservative_Expand_Police_Funding
 		icon = GFX_generic_conscription
-		relative_position_id = TEX_1952_conservatives
+		relative_position_id = TEX_1952_Holt
 		x = 2
 		y = 2
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_1952_Conservative_Stem_Great_Migration
@@ -4598,12 +3804,11 @@ focus_tree = {
 	focus = {
 		id = TEX_1952_Conservative_Permanent_Segregation
 		icon = GFX_SAF_Apartheid
-		relative_position_id = TEX_1952_conservatives
+		relative_position_id = TEX_1952_Holt
 		x = 1
 		y = 3
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
 			focus = TEX_1952_Conservative_Yellow_Scare
@@ -4618,477 +3823,27 @@ focus_tree = {
 			add_ideas = TEX_permanent_segregation
 		}
 	}
-	
+	###GENERIC 1952 TREE
 	focus = {
-		id = TEX_1952_conservative_reforge_steel_belt
-		icon = GFX_TEX_steel_industry
-		relative_position_id = TEX_1952_conservatives
-		x = -5
-		y = 1
-		cost = 4
-		ai_will_do = {
-			base = 100
-		}
-		prerequisite = {
-			focus = TEX_1952_conservatives
-		}
-		mutually_exclusive = {
-		}
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_conservative_reforge_steel_belt"
-			custom_effect_tooltip = TEX_1952_orthodox_reforge_steel_belt_tt
-			custom_effect_tooltip = tooltip_white_line
-			every_state = {
-				limit = {
-					is_owned_and_controlled_by = TEX
-					has_resources_amount = {
-						resource = steel
-						amount > 10
-						delivered = yes
-					}
-				}
-				add_resource = {
-					type = steel
-					amount = 10
-				}
-			}
-		}
-	}
-	
-	focus = {
-		id = TEX_1952_conservative_expand_coastal_ports
-		icon = GFX_generic_shipyard
-		relative_position_id = TEX_1952_conservative_reforge_steel_belt
-		x = 0
-		y = 1
-		cost = 4
-		ai_will_do = {
-			base = 100
-		}
-		prerequisite = {
-			focus = TEX_1952_conservative_reforge_steel_belt
-		}
-		mutually_exclusive = {
-		}
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_conservative_expand_coastal_ports"
-			random_owned_state = {
-				limit = {
-					is_coastal = yes
-				}
-				add_building_construction = {
-					type = coastal_bunker
-					level = 2
-					instant_build = yes
-					province = {
-						all_provinces = yes
-						limit_to_coastal = yes
-					}
-				}
-			}
-		}
-	}
-	focus = {
-		id = TEX_1952_conservative_expand_urban_industrialization
-		icon = GFX_generic_industrial_towns
-		relative_position_id = TEX_1952_conservative_expand_coastal_ports
-		x = -2
-		y = 1
-		cost = 4
-		ai_will_do = {
-			base = 100
-		}
-		prerequisite = {
-			focus = TEX_1952_conservative_expand_coastal_ports
-		}
-		mutually_exclusive = {
-		}
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_conservative_expand_urban_industrialization"
-			every_owned_state = {
-				limit = {
-					OR = {
-						has_state_category = two
-						has_state_category = three
-					}
-				}
-				set_state_category = four
-			}
-		}
-	}
-	focus = {
-		id = TEX_1952_conservative_housing_act
-		icon = GFX_GENERIC_worker_housing
-		relative_position_id = TEX_1952_conservative_expand_coastal_ports
-		x = 0
-		y = 1
-		cost = 4
-		ai_will_do = {
-			base = 100
-		}
-		prerequisite = {
-			focus = TEX_1952_conservative_expand_coastal_ports
-		}
-		mutually_exclusive = {
-		}
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_conservative_housing_act"
-			random_owned_state = {
-				add_building_construction = {
-					type = industrial_complex
-					level = 1
-					instant_build = yes
-				}
-				add_extra_state_shared_building_slots = 1
-			}
-		}
-	}
-	focus = {
-		id = TEX_1952_conservative_food_exports
-		icon = GFX_generic_agriculture4
-		relative_position_id = TEX_1952_conservative_expand_coastal_ports
-		x = 2
-		y = 1
-		cost = 4
-		ai_will_do = {
-			base = 100
-		}
-		prerequisite = {
-			focus = TEX_1952_conservative_expand_coastal_ports
-		}
-		mutually_exclusive = {
-		}
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_conservative_food_exports"
-			every_country = {
-				limit = {
-					is_in_faction_with = GER
-				}
-				TEX = {
-					add_opinion_modifier = {
-						target = PREV
-						modifier = KRG_trade_agreement
-					}
-				}
-			}
-		}
-	}
-
-	
-	focus = {
-		id = TEX_1952_conservative_expand_right_to_work
-		icon = GFX_generic_workers_for_business
-		relative_position_id = TEX_1952_conservatives
-		x = -3
-		y = 1
-		cost = 4
-		ai_will_do = {
-			base = 100
-		}
-		prerequisite = {
-			focus = TEX_1952_conservatives
-		}
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_conservative_expand_right_to_work"
-			add_ideas = TEX_right_to_work_laws
-		}
-	}
-	focus = {
-		id = TEX_1952_conservative_expand_ford_industrial_complex
-		icon = GFX_generic_car
-		relative_position_id = TEX_1952_conservative_expand_right_to_work
-		x = 1
-		y = 1
-		cost = 4
-		ai_will_do = {
-			base = 100
-		}
-		prerequisite = {
-			focus = TEX_1952_conservative_expand_right_to_work
-		}
-		mutually_exclusive = {
-		}
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_conservative_expand_ford_industrial_complex"
-			every_state = {
-				limit = {
-					is_owned_and_controlled_by = TEX
-					OR = {
-						state = 261
-						state = 369
-						state = 373
-						state = 395
-					}
-				}
-				add_building_construction = {
-					type = industrial_complex
-					level = 1
-					instant_build = yes
-				}
-				add_extra_state_shared_building_slots = 1
-			}
-		}
-	}
-	focus = {
-		id = TEX_1952_conservative_self_sufficient_economy
-		icon = GFX_generic_economic_control
-		relative_position_id = TEX_1952_conservative_expand_ford_industrial_complex
-		x = 1
-		y = 1
-		cost = 4
-		ai_will_do = {
-			base = 100
-		}
-		prerequisite = {
-			focus = TEX_1952_conservative_expand_ford_industrial_complex
-		}
-		mutually_exclusive = {
-		}
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_conservative_self_sufficient_economy"
-			random_owned_state = {
-				add_building_construction = {
-					type = industrial_complex
-					level = 4
-					instant_build = yes
-				}
-				add_extra_state_shared_building_slots = 1
-			}
-		}
-	}
-
-	focus = {
-		id = TEX_1952_conservative_new_capital
-		icon = GFX_TEX_america_map
-		relative_position_id = TEX_1952_conservatives
-		x = 5
-		y = 1
-		cost = 4
-		ai_will_do = {
-			base = 100
-		}
-		prerequisite = {
-			focus = TEX_1952_conservatives
-		}
-		mutually_exclusive = {
-		}
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_conservative_new_capital"
-			country_event = {
-				id = tex.focus.1
-			}
-		}
-	}
-	focus = {
-		id = TEX_1952_conservative_washington_dc
-		icon = GFX_TEX_washington_dc
-		relative_position_id = TEX_1952_conservative_new_capital
-		x = -1
-		y = 1
-		cost = 4
-
-		ai_will_do = {
-			base = 100
-		}
-
-		available = {
-			has_country_flag = TEX_washington_capital
-		}
-		prerequisite = {
-			focus = TEX_1952_conservative_new_capital
-		}
-		mutually_exclusive = {
-			focus = TEX_1952_conservative_st_louis
-		}
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_conservative_washington_dc"
-			custom_effect_tooltip = TEX_capital_moved_tt
-			set_victory_points = {
-				province = 3957
-				value = 40
-			}
-			set_victory_points = {
-				province = 7552
-				value = 10
-			}
-			hidden_effect = {
-				set_capital = {
-					state = 361
-				}
-				set_province_name = {
-					id = 3957
-					name = "Washington, D.C."
-				}
-			}
-		}
-	}
-	focus = {
-		id = TEX_1952_conservative_st_louis
-		icon = GFX_TEX_st_louis
-		relative_position_id = TEX_1952_conservative_new_capital
-		x = 1
-		y = 1
-		cost = 4
-
-		ai_will_do = {
-			base = 100
-		}
-
-		available = {
-			has_country_flag = TEX_st_louis_capital
-		}
-		prerequisite = {
-			focus = TEX_1952_conservative_new_capital
-		}
-		mutually_exclusive = {
-			focus = TEX_1952_conservative_washington_dc
-		}
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_conservative_st_louis"
-			custom_effect_tooltip = TEX_capital_moved2_tt
-			set_victory_points = {
-				province = 4569
-				value = 40
-			}
-			set_victory_points = {
-				province = 7552
-				value = 10
-			}
-			hidden_effect = {
-				set_capital = {
-					state = 373
-				}
-				set_province_name = {
-					id = 3957
-					name = "St. Louis, D.C."
-				}
-			}
-		}
-	}
-
-	
-	focus = {
-		id = TEX_1952_conservative_expand_highway_system
-		icon = GFX_TEX_national_transit_commission
-		relative_position_id = TEX_1952_conservatives
-		x = 7
-		y = 1
-		cost = 4
-		ai_will_do = {
-			base = 100
-		}
-		prerequisite = {
-			focus = TEX_1952_conservatives
-		}
-		mutually_exclusive = {
-		}
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_conservative_expand_highway_system"
-			custom_effect_tooltip = TEX_add_25_bil
-			custom_effect_tooltip = tooltip_white_line
-			add_to_variable = {
-				TEX_interstate_budget = 25
-			}
-			unlock_decision_tooltip = TEX_I_26
-			unlock_decision_tooltip = TEX_I_35
-			unlock_decision_tooltip = TEX_I_37
-			unlock_decision_tooltip = TEX_I_94
-		}
-	}
-	focus = {
-		id = TEX_1952_conservative_expand_defense_infrastructure
-		icon = GFX_TEX_fortress
-		relative_position_id = TEX_1952_conservative_expand_highway_system
-		x = 0
-		y = 2
-		cost = 4
-		ai_will_do = {
-			base = 100
-		}
-		prerequisite = {
-			focus = TEX_1952_conservative_expand_highway_system
-		}
-		mutually_exclusive = {
-		}
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_conservative_expand_defense_infrastructure"
-			every_owned_state = {
-				limit = {
-					num_owned_neighbour_states = {
-						owner = CAL
-						count > 0
-					}
-					is_owned_and_controlled_by = TEX
-				}
-				add_building_construction = {
-					type = bunker
-					level = 1
-					instant_build = yes
-				}
-			}
-		}
-	}
-	focus = {
-		id = TEX_1952_conservative_prepared_force
-		icon = GFX_TEX_militias
-		relative_position_id = TEX_1952_conservatives
-		x = -7
-		y = 1
-		cost = 4
-		ai_will_do = {
-			base = 100
-		}
-		prerequisite = {
-			focus = TEX_1952_conservatives
-		}
-		mutually_exclusive = {
-		}
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_conservative_prepared_force"
-			move_up_econ_mobilization = yes
-		}
-	}
-	focus = {
-		id = TEX_1952_conservative_expand_peacetime_reserves
-		icon = GFX_TEX_recruitment
-		relative_position_id = TEX_1952_conservative_prepared_force
-		x = 0
-		y = 1
-		cost = 4
-		ai_will_do = {
-			base = 100
-		}
-		prerequisite = {
-			focus = TEX_1952_conservative_prepared_force
-		}
-		mutually_exclusive = {
-		}
-		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_conservative_expand_peacetime_reserves"
-			custom_effect_tooltip = TEX_1952_orthodox_expand_peacetime_reserves_tt
-		}
-	}
-
-	### Progressives
-	
-	focus = {
-		id = TEX_1952_progressive_reconcile_unions
+		id = TEX_1952_generic_reconcile_unions
 		icon = GFX_generic_unions
-		relative_position_id = TEX_1952_progressives
-		x = -5
+		relative_position_id = TEX_1952_McMath
+		x = 4
 		y = 1
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
-			focus = TEX_1952_progressives
+			focus = TEX_1952_Long
+			focus = TEX_1952_Russell
+			focus = TEX_1952_McMath
+			focus = TEX_1952_Arnall
 		}
 		mutually_exclusive = {
-			focus = TEX_1952_progressive_expand_right_to_work
+			focus = TEX_1952_generic_expand_right_to_work
 		}
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_progressive_reconcile_unions"
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_generic_reconcile_unions"
 			set_temp_variable = {
 				TEX_factionalism_pop = 15
 			}
@@ -5097,44 +3852,45 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = TEX_1952_progressive_expand_right_to_work
+		id = TEX_1952_generic_expand_right_to_work
 		icon = GFX_generic_workers_for_business
-		relative_position_id = TEX_1952_progressives
-		x = -7
+		relative_position_id = TEX_1952_McMath
+		x = 6
 		y = 1
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
-			focus = TEX_1952_progressives
+			focus = TEX_1952_Long
+			focus = TEX_1952_Russell
+			focus = TEX_1952_Holt
+			focus = TEX_1952_Thurmond
 		}
 		mutually_exclusive = {
-			focus = TEX_1952_progressive_reconcile_unions
+			focus = TEX_1952_generic_reconcile_unions
 		}
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_progressive_expand_right_to_work"
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_generic_expand_right_to_work"
 			add_ideas = TEX_right_to_work_laws
 		}
 	}
 	focus = {
-		id = TEX_1952_progressive_expand_ford_industrial_complex
+		id = TEX_1952_generic_expand_ford_industrial_complex
 		icon = GFX_generic_car
-		relative_position_id = TEX_1952_progressives
-		x = -6
+		relative_position_id = TEX_1952_Long
+		x = -5
 		y = 2
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
-			focus = TEX_1952_progressive_expand_right_to_work
-			focus = TEX_1952_progressive_reconcile_unions
+			focus = TEX_1952_generic_expand_right_to_work
+			focus = TEX_1952_generic_reconcile_unions
 		}
 		mutually_exclusive = {
 		}
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_progressive_expand_ford_industrial_complex"
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_generic_expand_ford_industrial_complex"
 			every_state = {
 				limit = {
 					is_owned_and_controlled_by = TEX
@@ -5155,22 +3911,21 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = TEX_1952_progressive_self_sufficient_economy
+		id = TEX_1952_generic_self_sufficient_economy
 		icon = GFX_generic_economic_control
-		relative_position_id = TEX_1952_progressives
-		x = -7
+		relative_position_id = TEX_1952_Long
+		x = -6
 		y = 3
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
-			focus = TEX_1952_progressive_expand_ford_industrial_complex
+			focus = TEX_1952_generic_expand_ford_industrial_complex
 		}
 		mutually_exclusive = {
 		}
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_progressive_self_sufficient_economy"
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_generic_self_sufficient_economy"
 			random_owned_state = {
 				add_building_construction = {
 					type = industrial_complex
@@ -5182,22 +3937,26 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = TEX_1952_progressive_expand_highway_system
+		id = TEX_1952_generic_expand_highway_system
 		icon = GFX_TEX_national_transit_commission
-		relative_position_id = TEX_1952_progressives
-		x = -4
+		relative_position_id = TEX_1952_Long
+		x = -3
 		y = 2
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
-			focus = TEX_1952_progressives
+			focus = TEX_1952_Long
+			focus = TEX_1952_Russell
+			focus = TEX_1952_Holt
+			focus = TEX_1952_Thurmond
+			focus = TEX_1952_McMath
+			focus = TEX_1952_Arnall
 		}
 		mutually_exclusive = {
 		}
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_progressive_expand_highway_system"
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_generic_expand_highway_system"
 			custom_effect_tooltip = TEX_add_25_bil
 			custom_effect_tooltip = tooltip_white_line
 			add_to_variable = {
@@ -5210,22 +3969,21 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = TEX_1952_progressive_expand_defense_infrastructure
+		id = TEX_1952_generic_expand_defense_infrastructure
 		icon = GFX_TEX_fortress
-		relative_position_id = TEX_1952_progressives
-		x = -5
+		relative_position_id = TEX_1952_Long
+		x = -4
 		y = 3
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
-			focus = TEX_1952_progressive_expand_highway_system
+			focus = TEX_1952_generic_expand_highway_system
 		}
 		mutually_exclusive = {
 		}
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_progressive_expand_defense_infrastructure"
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_generic_expand_defense_infrastructure"
 			every_owned_state = {
 				limit = {
 					num_owned_neighbour_states = {
@@ -5243,90 +4001,92 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = TEX_1952_progressive_prepared_force
+		id = TEX_1952_generic_prepared_force
 		icon = GFX_TEX_militias
-		relative_position_id = TEX_1952_progressives
-		x = -3
+		relative_position_id = TEX_1952_Long
+		x = -2
 		y = 1
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
-			focus = TEX_1952_progressives
+			focus = TEX_1952_Long
+			focus = TEX_1952_Russell
+			focus = TEX_1952_Holt
+			focus = TEX_1952_Thurmond
+			focus = TEX_1952_McMath
+			focus = TEX_1952_Arnall
 		}
 		mutually_exclusive = {
 		}
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_progressive_prepared_force"
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_generic_prepared_force"
 			move_up_econ_mobilization = yes
 		}
 	}
 	focus = {
-		id = TEX_1952_progressive_expand_peacetime_reserves
+		id = TEX_1952_generic_expand_peacetime_reserves
 		icon = GFX_TEX_recruitment
-		relative_position_id = TEX_1952_progressives
-		x = -3
+		relative_position_id = TEX_1952_Long
+		x = -2
 		y = 3
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
-			focus = TEX_1952_progressive_prepared_force
+			focus = TEX_1952_generic_prepared_force
 		}
 		mutually_exclusive = {
 		}
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_progressive_expand_peacetime_reserves"
-			custom_effect_tooltip = TEX_1952_progressive_expand_peacetime_reserves_tt
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_generic_expand_peacetime_reserves"
+			custom_effect_tooltip = TEX_1952_generic_expand_peacetime_reserves_tt
 		}
 	}
 	focus = {
-		id = TEX_1952_progressive_new_capital
+		id = TEX_1952_generic_new_capital
 		icon = GFX_TEX_america_map
-		relative_position_id = TEX_1952_progressives
-		x = 7
+		relative_position_id = TEX_1952_Long
+		x = 4
 		y = 1
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
-			focus = TEX_1952_progressives
+			focus = TEX_1952_Long
+			focus = TEX_1952_Russell
+			focus = TEX_1952_Holt
+			focus = TEX_1952_Thurmond
+			focus = TEX_1952_McMath
+			focus = TEX_1952_Arnall
 		}
 		mutually_exclusive = {
 		}
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_progressive_new_capital"
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_generic_new_capital"
 			country_event = {
 				id = tex.focus.1
 			}
 		}
 	}
 	focus = {
-		id = TEX_1952_progressive_washington_dc
+		id = TEX_1952_generic_washington_dc
 		icon = GFX_TEX_washington_dc
-		relative_position_id = TEX_1952_progressives
-		x = 6
+		relative_position_id = TEX_1952_Long
+		x = 3
 		y = 2
 		cost = 4
-
-		ai_will_do = {
-			base = 100
-		}
-
 		available = {
 			has_country_flag = TEX_washington_capital
 		}
 		prerequisite = {
-			focus = TEX_1952_progressive_new_capital
+			focus = TEX_1952_generic_new_capital
 		}
 		mutually_exclusive = {
-			focus = TEX_1952_progressive_st_louis
+			focus = TEX_1952_generic_st_louis
 		}
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_progressive_washington_dc"
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_generic_washington_dc"
 			custom_effect_tooltip = TEX_capital_moved_tt
 			set_victory_points = {
 				province = 3957
@@ -5348,28 +4108,23 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = TEX_1952_progressive_st_louis
+		id = TEX_1952_generic_st_louis
 		icon = GFX_TEX_st_louis
-		relative_position_id = TEX_1952_progressives
-		x = 8
+		relative_position_id = TEX_1952_Long
+		x = 5
 		y = 2
 		cost = 4
-
-		ai_will_do = {
-			base = 100
-		}
-
 		available = {
 			has_country_flag = TEX_st_louis_capital
 		}
 		prerequisite = {
-			focus = TEX_1952_progressive_new_capital
+			focus = TEX_1952_generic_new_capital
 		}
 		mutually_exclusive = {
-			focus = TEX_1952_progressive_washington_dc
+			focus = TEX_1952_generic_washington_dc
 		}
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_progressive_st_louis"
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_generic_st_louis"
 			custom_effect_tooltip = TEX_capital_moved2_tt
 			set_victory_points = {
 				province = 4569
@@ -5391,23 +4146,27 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = TEX_1952_progressive_reforge_steel_belt
+		id = TEX_1952_generic_reforge_steel_belt
 		icon = GFX_TEX_steel_industry
-		relative_position_id = TEX_1952_progressives
-		x = 4
+		relative_position_id = TEX_1952_Long
+		x = 6
 		y = 1
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
-			focus = TEX_1952_progressives
+			focus = TEX_1952_Long
+			focus = TEX_1952_Russell
+			focus = TEX_1952_Holt
+			focus = TEX_1952_Thurmond
+			focus = TEX_1952_McMath
+			focus = TEX_1952_Arnall
 		}
 		mutually_exclusive = {
 		}
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_progressive_reforge_steel_belt"
-			custom_effect_tooltip = TEX_1952_progressive_reforge_steel_belt_tt
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_generic_reforge_steel_belt"
+			custom_effect_tooltip = TEX_1952_generic_reforge_steel_belt_tt
 			custom_effect_tooltip = tooltip_white_line
 			every_state = {
 				limit = {
@@ -5426,22 +4185,21 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = TEX_1952_progressive_expand_coastal_ports
+		id = TEX_1952_generic_expand_coastal_ports
 		icon = GFX_generic_shipyard
-		relative_position_id = TEX_1952_progressives
-		x = 4
+		relative_position_id = TEX_1952_Long
+		x = 7
 		y = 2
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
-			focus = TEX_1952_progressive_reforge_steel_belt
+			focus = TEX_1952_generic_reforge_steel_belt
 		}
 		mutually_exclusive = {
 		}
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_progressive_expand_coastal_ports"
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_generic_expand_coastal_ports"
 			random_owned_state = {
 				limit = {
 					is_coastal = yes
@@ -5459,22 +4217,21 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = TEX_1952_progressive_expand_urban_industrialization
+		id = TEX_1952_generic_expand_urban_industrilization
 		icon = GFX_generic_industrial_towns
-		relative_position_id = TEX_1952_progressives
-		x = 3
+		relative_position_id = TEX_1952_Long
+		x = 4
 		y = 3
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
-			focus = TEX_1952_progressive_expand_coastal_ports
+			focus = TEX_1952_generic_expand_coastal_ports
 		}
 		mutually_exclusive = {
 		}
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_progressive_expand_urban_industrialization"
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_generic_expand_urban_industrilization"
 			every_owned_state = {
 				limit = {
 					OR = {
@@ -5487,22 +4244,21 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = TEX_1952_progressive_housing_act
+		id = TEX_1952_generic_housing_act
 		icon = GFX_GENERIC_worker_housing
-		relative_position_id = TEX_1952_progressives
-		x = 5
+		relative_position_id = TEX_1952_Long
+		x = 6
 		y = 3
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
-			focus = TEX_1952_progressive_expand_coastal_ports
+			focus = TEX_1952_generic_expand_coastal_ports
 		}
 		mutually_exclusive = {
 		}
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_progressive_housing_act"
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_generic_housing_act"
 			random_owned_state = {
 				add_building_construction = {
 					type = industrial_complex
@@ -5514,22 +4270,21 @@ focus_tree = {
 		}
 	}
 	focus = {
-		id = TEX_1952_progressive_food_exports
+		id = TEX_1952_generic_food_exports
 		icon = GFX_generic_agriculture4
-		relative_position_id = TEX_1952_progressives
-		x = 7
+		relative_position_id = TEX_1952_Long
+		x = 8
 		y = 3
 		cost = 4
-		ai_will_do = {
-			base = 100
+		available = {
 		}
 		prerequisite = {
-			focus = TEX_1952_progressive_expand_coastal_ports
+			focus = TEX_1952_generic_expand_coastal_ports
 		}
 		mutually_exclusive = {
 		}
 		completion_reward = {
-			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_progressive_food_exports"
+			log = "[GetDateText]: [Root.GetName]: Focus TEX_1952_generic_food_exports"
 			every_country = {
 				limit = {
 					is_in_faction_with = GER
