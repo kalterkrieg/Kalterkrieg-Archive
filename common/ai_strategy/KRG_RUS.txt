@@ -937,6 +937,124 @@ RUS_invade_straits = {
 	}
 }
 
+RUS_focus_civil_war = {
+	allowed = {
+		original_tag = RUS
+	}
+
+	enable = {
+		PRS = { exists = yes }
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = conquer
+		id = PRS
+		value = 400
+	}
+	ai_strategy = {
+		type = front_unit_request
+		tag = PRS
+		value = 50
+	}
+
+	ai_strategy = {
+		type = front_control
+		state_trigger = {
+			is_controlled_by = PRS
+		}
+		ratio = 0.9
+		ordertype = front
+		execution_type = rush
+		execute_order = yes
+		manual_attack = yes
+	}
+}
+
+RUS_focus_civil_war_minors = {
+	allowed = {
+		original_tag = RUS
+	}
+
+	enable = {
+		OR = {
+			TCC = { exists = yes }
+			TRK = { exists = yes }
+		}
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = conquer
+		id = TCC
+		value = 400
+	}
+	ai_strategy = {
+		type = front_unit_request
+		tag = TCC
+		value = 50
+	}
+
+	ai_strategy = {
+		type = conquer
+		id = TRK
+		value = 400
+	}
+	ai_strategy = {
+		type = front_unit_request
+		tag = TRK
+		value = 50
+	}
+
+	ai_strategy = {
+		type = front_control
+		state_trigger = {
+			OR = {
+				is_controlled_by = TCC
+				is_controlled_by = TRK
+			}
+		}
+		ratio = 0.1
+		ordertype = front
+		execution_type = rush
+		execute_order = yes
+		manual_attack = yes
+	}
+}
+
+PRS_focus_civil_war = {
+	allowed = {
+		original_tag = PRS
+	}
+
+	enable = {
+		RUS = { exists = yes }
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = conquer
+		id = RUS
+		value = 400
+	}
+	ai_strategy = {
+		type = front_unit_request
+		tag = RUS
+		value = 50
+	}
+	ai_strategy = {
+		type = front_control
+		state_trigger = {
+			is_controlled_by = RUS
+		}
+		ratio = 0.9
+		ordertype = front
+		execution_type = rush
+		execute_order = yes
+		manual_attack = yes
+	}
+}
+
 ################
 ### Industry ###
 ################

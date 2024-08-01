@@ -32,6 +32,12 @@ USA_splinter_prepare_for_ACW = {
 		id = modern_armor
 		value = 15
 	}
+
+	ai_strategy = {
+		type = building_target
+		id = arms_factory
+		value = 100
+	}
 }
 
 
@@ -115,5 +121,59 @@ ARA_defend_GLG_against_TEX = { #Modified vanilla "defend_poland_against_germany"
 		type = alliance
 		id = "GLG"
 		value = 200
+	}
+}
+
+ARA_states_all_on_TEX = {
+	allowed = {
+		OR = {
+			original_tag = CAL
+			original_tag = GLG
+			original_tag = NEE
+		}
+	}
+	enable = {
+		TEX = { has_capitulated = no }
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = conquer
+		id = TEX
+		value = 1000
+	}
+	ai_strategy = {
+		type = front_armor_score
+		id = TEX
+		value = 100
+	}
+	ai_strategy = {
+		type = front_unit_request
+		tag = TEX
+		value = 50
+	}
+
+	ai_strategy = {
+		type = dont_defend_ally_borders
+		id = CAN
+		value = 100
+	}
+
+	ai_strategy = {
+		type = dont_defend_ally_borders
+		id = CAL
+		value = 100
+	}
+
+	ai_strategy = {
+		type = dont_defend_ally_borders
+		id = GLG
+		value = 100
+	}
+
+	ai_strategy = {
+		type = dont_defend_ally_borders
+		id = NEE
+		value = 100
 	}
 }

@@ -27,7 +27,7 @@ country_event = { #Austrian Election incoming
 		activate_mission = DNF_austrian_election_1948
 		activate_mission = DNF_austrian_SDAPD_campaigning
 		ai_chance = {
-			factor = 100
+			base = 100
 		}
 	}
 	option = {
@@ -35,7 +35,7 @@ country_event = { #Austrian Election incoming
 		add_political_power = 50
 		custom_effect_tooltip = DNF_austria_1948_nosupport_tt
 		ai_chance = {
-			factor = 0
+			base = 0
 		}
 	}
 }
@@ -266,7 +266,7 @@ country_event = { # Austria '52 Incoming
 		activate_mission = DNF_austrian_election_1952
 		activate_mission = DNF_austrian_1952_opposition_campaigning
 		ai_chance = {
-			factor = 100
+			base = 100
 		}
 	}
 	option = {
@@ -281,7 +281,7 @@ country_event = { # Austria '52 Incoming
 			set_variable = { DNF_austria_conservative_pop = 57 } 
 		}
 		ai_chance = {
-			factor = 0
+			base = 0
 		}
 	}	
 }
@@ -437,7 +437,7 @@ country_event = { #Bohemian Election incoming
 		activate_mission = DNF_bohemian_election_1948
 		activate_mission = DNF_bohemian_SDAPD_campaigning
 		ai_chance = {
-			factor = 100
+			base = 100
 		}
 	}
 	option = {
@@ -452,7 +452,7 @@ country_event = { #Bohemian Election incoming
 			}
 		}
 		ai_chance = {
-			factor = 0
+			base = 0
 		}
 	}
 }
@@ -599,7 +599,7 @@ country_event = { # Bohemia 52 Incoming
 	option = {
 		name = krg_dnf_regional_elections_bohemia.7.a
 		ai_chance = {
-			factor = 100
+			base = 100
 		}
 		if = { limit = { has_country_flag = DNF_bohemian_marlib_grand_alliance} 
 			set_variable = { DNF_bohemia_socialist_pop = 40 }
@@ -634,7 +634,7 @@ country_event = { # Bohemia 52 Incoming
 		name = krg_dnf_regional_elections_bohemia.7.b
 		add_political_power = 50
 		ai_chance = {
-			factor = 0
+			base = 0
 		}
 		if = { limit = { OR = { 	has_country_flag = DNF_Adolf_Scharf
 									has_country_flag = DNF_Josip_Broz
@@ -864,7 +864,7 @@ country_event = {  # Illyria '48 incoming
 			activate_mission = DNF_illyrian_election_1948
 			activate_mission = DNF_illyrian_SDAPD_campaigning
 			ai_chance = { #result is set, spare some pp for dumb ai.
-				factor = 0 
+				base = 0 
 			}
 		}
 		option = {
@@ -878,7 +878,7 @@ country_event = {  # Illyria '48 incoming
 				}
 			}
 			ai_chance = {
-				factor = 100
+				base = 100
 			}
 		}
 }
@@ -964,7 +964,7 @@ country_event = { # Illyria 52 Incoming
 			}
 		}
 		ai_chance = {
-			factor = 100
+			base = 100
 		}
 	}
 
@@ -979,7 +979,7 @@ country_event = { # Illyria 52 Incoming
 			}	
 		}
 		ai_chance = {
-			factor = 0
+			base = 0
 		}
 	}
 }
@@ -1279,6 +1279,25 @@ country_event = { # The Federal Observers Find No Meddling
 	}
 }
 
+country_event = {  # Unholy blunder
+		id = krg_dnf_regional_elections_illyria.18
+		title = krg_dnf_regional_elections_illyria.18.t
+		desc = krg_dnf_regional_elections_illyria.18.d
+	
+		is_triggered_only = yes
+		fire_only_once = yes
+	
+		option = {
+			name = krg_dnf_regional_elections_illyria.18.a
+			custom_effect_tooltip = DNF_illyrian_unholy_alliance_real_tt
+			hidden_effect = { # You happy you gain one percent point in popularity and all it cost you was abandoning your allies and making the socialists look reasonable
+				add_to_variable = { DNF_illyria_socialist_pop = 9}
+				add_to_variable = { DNF_illyria_conservative_pop = 1}
+				add_to_variable = { DNF_illyria_agrarian_pop = -10} #Zero Seats
+			}
+		}
+}
+
 ## GALICIA ##
 
 country_event = {  # Galicia '49 incoming
@@ -1306,7 +1325,7 @@ country_event = {  # Galicia '49 incoming
 			activate_mission = DNF_galician_election_1949
 			activate_mission = DNF_galician_opposition_campaigning
 			ai_chance = {
-				factor = 100
+				base = 100
 			}
 		}
 		option = {
@@ -1329,7 +1348,7 @@ country_event = {  # Galicia '49 incoming
 				}
 			}
 			ai_chance = {
-				factor = 0
+				base = 0
 			}
 		}
 }
@@ -1519,7 +1538,7 @@ country_event = { # Galicia 53 Incoming
 			activate_mission = DNF_galician_election_1953
 			activate_mission = DNF_galician_election_1953_opposition_campaigning		
 			ai_chance = {
-				factor = 100
+				base = 100
 			}
 		}
 		option = {
@@ -1533,7 +1552,7 @@ country_event = { # Galicia 53 Incoming
 				}	
 			}
 			ai_chance = {
-				factor = 0
+				base = 0
 			}
 	}
 }
@@ -1817,7 +1836,7 @@ immediate = {
 					}
 				}
 				ai_chance = {
-					factor = 100
+					base = 100
 				}
 			}
 		option = {
@@ -1832,7 +1851,7 @@ immediate = {
 					set_variable = { DNF_slovakia_soccon_pop = 41 }
 			}
 			ai_chance = {
-				factor = 0
+				base = 0
 			}
 		}
 }
@@ -2065,7 +2084,7 @@ country_event = { # Incoming, Slovakia 53
 		activate_mission = DNF_slovakian_election_1953
 		activate_mission = DNF_slovakian_election_1953_opposition_campaign
 		ai_chance = {
-			factor = 100
+			base = 100
 		}
 	}
 	
@@ -2140,7 +2159,7 @@ country_event = { # Incoming, Slovakia 53
 			}
 		}
 		ai_chance = {
-			factor = 0
+			base = 0
 		}
 	}
 }
@@ -2737,7 +2756,7 @@ country_event = { # Incoming Transylvania 54
 			set_variable = { var = DNF_Transylvania_1954_involved value = 1 }
 		}
 		ai_chance = {
-			factor = 100
+			base = 100
 		}
 		name = krg_dnf_regional_elections_transylvania.10.a 
 		activate_mission = DNF_transylvania_election_1954
@@ -2745,7 +2764,7 @@ country_event = { # Incoming Transylvania 54
 	option = {
 		
 		ai_chance = {
-			factor = 0
+			base = 0
 		}
 		name = krg_dnf_regional_elections_transylvania.10.b
 		add_political_power = 50
@@ -3293,7 +3312,7 @@ country_event = {  # Hungary '50 incoming
 			}
 			
 		ai_chance = {
-			factor = 100
+			base = 100
 		}
 		}
 		option = {
@@ -3309,7 +3328,7 @@ country_event = {  # Hungary '50 incoming
 			}
 			
 		ai_chance = {
-			factor = 0
+			base = 0
 		}
 		}
 }
@@ -3788,7 +3807,7 @@ country_event = { # Hungary 54 Incoming
 		}
 		
 		ai_chance = {
-			factor = 100
+			base = 100
 		}
 	}
 
@@ -3850,7 +3869,7 @@ country_event = { # Hungary 54 Incoming
 		}	
 		
 		ai_chance = {
-			factor = 0
+			base = 0
 		}
 	}
 }

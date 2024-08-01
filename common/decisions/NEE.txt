@@ -321,7 +321,70 @@ NEE_election_season = {
 			has_country_flag = NEE_election_season
 		}
 		ai_will_do = {
-			base = 75
+			base = 10
+			modifier = {
+				FROM = {
+					check_variable = {
+						electoral_vote > 5
+					}
+				}
+				factor = 2
+			}
+
+			modifier = {
+				FROM = {
+					check_variable = {
+						electoral_vote > 10
+					}
+				}
+				factor = 2
+			}
+
+			modifier = {
+				FROM = {
+					check_variable = {
+						electoral_vote > 20
+					}
+				}
+				factor = 2
+			}
+
+			modifier = {
+				FROM = {
+					find_highest_in_array = { 
+						array = electoral_pie_chart_number_array 
+						index = index 
+					}
+					OR = {
+						check_variable = { index = 0 }
+						check_variable = { index = 1 }
+						AND = {
+							check_variable = { index = 3 }
+							date < 1955.1.1
+						}
+					}
+				}
+				has_country_flag = NEE_campaigning_as_democrats
+				factor = 0.1
+			}
+
+			modifier = {
+				FROM = {
+					find_highest_in_array = { 
+						array = electoral_pie_chart_number_array 
+						index = index 
+					}
+					OR = {
+						check_variable = { index = 2 }
+						AND = {
+							check_variable = { index = 3 }
+							date > 1955.1.1
+						}
+					}
+				}
+				has_country_flag = NEE_campaigning_as_republicans
+				factor = 0.1
+			}
 		}
 		cancel_if_not_visible = yes
 		highlight_states = {

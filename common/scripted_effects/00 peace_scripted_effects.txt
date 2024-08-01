@@ -1074,10 +1074,20 @@ RUS_RP_Peace = {
 		234 = { transfer_state_to = UKR }
 		240 = { transfer_state_to = UKR }
 
-		838 = { transfer_state_to = LIT }
+		if = {
+			limit = {
+				country_exists = BLR
+			}
+			838 = { transfer_state_to = BLR }
+		}
+		else = {
+			838 = { transfer_state_to = LIT }
+		}
 
 		215 = { transfer_state_to = FIN }
 		213 = { transfer_state_to = FIN }
+
+		884 = { transfer_state_to = KRL }
 
 
 		every_state = {
@@ -1219,10 +1229,10 @@ IND_RP_Peace = {
 		if = {
 			limit = { 
 				423 = {
-					is_controlled_by_ROOT_or_ally = yes
+					is_owned_by = IND
 				}
 				864 = {
-					is_controlled_by_ROOT_or_ally = yes
+					is_owned_by = IND
 				}
 			}
 			959 = {
@@ -1236,7 +1246,7 @@ IND_RP_Peace = {
 		if = {
 			limit = { 
 				952 = {
-					is_controlled_by_ROOT_or_ally = yes
+					is_owned_by = IND
 				}
 			}
 			960 = {
@@ -1586,3 +1596,4 @@ KRG_peace_VIE_VIN = { #VIE = Winner, VIN = Loser
 	}
 	log = "KRG_Event_Logging;Vietnam War - VIE Victory;[GetDateText];[ROOT.GetName];[FROM.GetName]"
 }
+

@@ -5551,7 +5551,7 @@ country_event = { #GER, MAF is letting the Accord occupy Northern Rhodesia and N
 	}
 }
 
-country_event = { #MAF, Berlin isnt happy about this
+country_event = { #MAF, Berlin isn't happy about this
 	id = MAF.1105
 	title = MAF.1105.t
 	desc = MAF.1105.d
@@ -6911,15 +6911,6 @@ country_event = { # The Reality of the Situation
 	
 	option = { # We must make peace with the AAPM
 		name = MAF_conference.2.a
-		if = {
-			limit = {
-				NOT = { 
-					MAF_joachim_von_ribbentrop = {
-						is_country_leader = yes
-					}
-				}
-			}
-		}
 		set_country_flag = MAF_conference_germany_weak
 		country_event = {
 			id = MAF_conference.3
@@ -6951,8 +6942,9 @@ country_event = { # Peace Summit Proposed
 		if = {
 			limit = {
 				NOT = { 
-					MAF_joachim_von_ribbentrop = {
-						is_country_leader = yes
+					has_country_leader = {
+						character = MAF_joachim_von_ribbentrop
+						ruling_only = yes
 					}
 				}
 				#has_country_flag = MAF_reformentrop
@@ -6991,8 +6983,9 @@ country_event = { # Peace Summit Begins
 					MAF_AAPM_fervor > 6
 				}
 				NOT = { 
-					MAF_theodor_von_hippel = {
-						is_country_leader = yes
+					has_country_leader = {
+						character = MAF_theodor_von_hippel
+						ruling_only = yes
 					}
 				}
 			}
@@ -7009,8 +7002,9 @@ country_event = { # Peace Summit Begins
 					MAF_AAPM_fervor < 6
 				}
 				NOT = { 
-					MAF_Alfried_Krupp = {
-						is_country_leader = yes
+					has_country_leader = {
+						character = MAF_Alfried_Krupp
+						ruling_only = yes
 					}
 				}
 			}
@@ -8476,7 +8470,7 @@ country_event = {
 		log = "[getdatetext]: [root.getname]: event MAF_post_content.9 from = [from.getname]"
 		hidden_effect = {
 			FROM = { save_event_target_as = volunteer_target }
-			send_volunteers_to_TARGET = yes
+			send_volunteers_to_TARGET_no_event = yes
 		}
 	}
 
@@ -8487,14 +8481,18 @@ country_event = {
 			equipment = infantry_equipment
 			target = FROM
 		}
+		FROM = { save_event_target_as = volunteer_target }
+		send_volunteers_to_TARGET_no_event = yes
 	}
 
 	option = {
-		name = MAF_post_content.9.a
+		name = MAF_post_content.9.b
 		add_command_power = -5
 		FROM = {
 			army_experience = 15
 		}
+		FROM = { save_event_target_as = volunteer_target }
+		send_volunteers_to_TARGET_no_event = yes
 	}
 }
 

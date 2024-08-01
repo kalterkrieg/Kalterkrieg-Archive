@@ -13,9 +13,16 @@ on_actions = {
 						save_global_event_target_as = KRG_entente_leader
 					}
 				}
+				if = {
+					limit = { is_ai = no }
+					set_technology = {
+						atomic_pile = 1
+					}
+				}
 			}
 			# alignment stuff
 			GER = {
+				GER_starting_infrastructure_damage = yes
 				every_country = {
 					limit = {
 						OR = {
@@ -31,6 +38,31 @@ on_actions = {
 				add_to_variable = { global.KRG_alignment_map_mode_dirty = 1 }
 				###olympics
 				news_event = { id = olympics.0 days = 25 } #should be major, but just to be safe
+				if = {
+					limit = { is_ai = no }
+					set_technology = {
+						nukes = 1
+					}
+					set_technology = {
+						atomic_pile = 1
+					}
+					65 = {
+						add_building_construction = {
+							type = nuclear_reactor
+							level = 1
+							instant_build = yes
+						}
+					}
+				}
+				
+			}
+			DNF = {
+				if = {
+					limit = { is_ai = no }
+					set_technology = {
+						atomic_pile = 1
+					}
+				}
 			}
 			every_country = {
 				limit = {

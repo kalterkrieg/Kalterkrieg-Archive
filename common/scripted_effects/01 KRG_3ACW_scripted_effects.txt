@@ -30,7 +30,11 @@
 	TEX = {
 		if = {
 			limit = {
-				has_completed_focus = TEX_1952_generic_expand_peacetime_reserves
+				OR = {
+				has_completed_focus = TEX_1952_orthodox_expand_peacetime_reserves
+				has_completed_focus = TEX_1952_conservative_expand_peacetime_reserves
+				has_completed_focus = TEX_1952_progressive_expand_peacetime_reserves
+				}
 			}
 			load_oob = TEX_peacetime_reserves
 		}
@@ -43,6 +47,7 @@
 			hostility_reason = asked_to_join
 		}
 		set_country_flag = ACW_lend_lease_receiver
+		set_faction_leader = yes
 	}
 	CAL = {
 		add_to_war = { 
@@ -51,6 +56,10 @@
 			hostility_reason = asked_to_join
 		}
 		set_country_flag = ACW_lend_lease_receiver
+		set_faction_leader = yes
+	}
+	NEE = {
+		set_faction_leader = yes
 	}
 	CAN = {
 		set_country_flag = CAN_ACW_Involvement_Minimal
@@ -363,6 +372,7 @@ ara_reunify = {
 GER_lend_lease_effect = {
 	if = {
 		limit = {
+			tag = GER
 			has_global_flag = ACW_ongoing
 			NOT = {
 				has_global_flag = WK3

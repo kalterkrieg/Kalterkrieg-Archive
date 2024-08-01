@@ -54,37 +54,78 @@ instant_effect = {
 	# }
 }
 
-### Foot Infantry Division ###
+
+### Mech Infantry Division ###
+
+
 
 division_template = {
-	name = "Grenzetruppen"
-	# division_names_group = GER_GAR_01
+	name = "Krašto apsaugos savanorių rinktinė"
+	division_names_group = LIT_GAR_01
 	regiments = {
 		infantry = { x = 0 y = 0 }
 		infantry = { x = 0 y = 1 }
 		infantry = { x = 0 y = 2 }
-
+		infantry = { x = 1 y = 0 }
+	}
+	support = {
+		divhq_company = { x = 0 y = 0 }
+	}
+	priority = 0
+}
+division_template = {
+	name = "Pėstininkų Divizija"
+	division_names_group = LIT_INF_01
+	regiments = {
+		infantry = { x = 0 y = 0 }
+		infantry = { x = 0 y = 1 }
+		infantry = { x = 0 y = 2 }
 		infantry = { x = 1 y = 0 }
 		infantry = { x = 1 y = 1 }
 		infantry = { x = 1 y = 2 }
-
 		infantry = { x = 2 y = 0 }
-		artillery_brigade = { x = 2 y = 1 }
-		artillery_brigade = { x = 2 y = 2 }
+		infantry = { x = 2 y = 1 }
+		infantry = { x = 2 y = 2 }
 	}
 	support = {
-		engineer = { x = 0 y = 0 }
-		recon = { x = 0 y = 1 }
-		field_hospital = { x = 0 y = 2 }
+		divhq_company = { x = 0 y = 0 }
 	}
-	priority = 1
+}
+division_template = {
+	name = "Artilerija Divizija"
+	division_names_group = LIT_INF_01
+	regiments = {
+		infantry = { x = 0 y = 0 }
+		infantry = { x = 0 y = 1 }
+		infantry = { x = 0 y = 2 }
+		artillery_brigade = { x = 1 y = 0 }
+		artillery_brigade = { x = 1 y = 1 }
+		artillery_brigade = { x = 1 y = 2 }
+	}
+	support = {
+		divhq_company = { x = 0 y = 0 }
+		artillery = { x = 0 y = 1 }
+	}
+}
+division_template = {
+	name = "Kavalerija Divizija"
+	division_names_group = LIT_CAV_01
+	regiments = {
+		cavalry = { x = 0 y = 0 }
+		cavalry = { x = 0 y = 1 }
+		cavalry = { x = 0 y = 2 }
+		cavalry = { x = 1 y = 0 }
+		cavalry = { x = 1 y = 1 }
+		cavalry = { x = 1 y = 2 }
+	}
+	support = {
+		divhq_company = { x = 0 y = 0 }
+	}
 }
 
-### Mech Infantry Division ###
-
 division_template = {
-	name = "Mechanizuoti pėstininkai"
-	# division_names_group = GER_GAR_01
+	name = "Mechanizuoti Divizija"
+	division_names_group = LIT_MEC_01
 	regiments = {
 		mechanized = { x = 0 y = 0 }
 		mechanized = { x = 0 y = 1 }
@@ -95,122 +136,152 @@ division_template = {
 		mechanized = { x = 1 y = 2 }
 
 		modern_armor = { x = 2 y = 0 }
-		modern_armor = { x = 2 y = 1 }
-		modern_armor = { x = 2 y = 2 }
 	}
 	support = {
-		engineer = { x = 0 y = 0 }
-		recon = { x = 0 y = 1 }
+		divhq_company = { x = 0 y = 0 }
+		engineer = { x = 0 y = 1 }
+		recon = { x = 0 y = 2 }
 	}
 	priority = 1
+}
+
+division_template = {
+	name = "Pjahotnaja Dyvizija"			# Rifle Division
+	is_locked = yes
+	division_names_group = BLR_INF_01
+
+	regiments = {
+		infantry = { x = 0 y = 0 }
+		infantry = { x = 0 y = 1 }
+		infantry = { x = 0 y = 2 }
+		infantry = { x = 1 y = 0 }
+		infantry = { x = 1 y = 1 }
+		infantry = { x = 1 y = 2 }
+		infantry = { x = 2 y = 0 }
+		infantry = { x = 2 y = 1 }
+		infantry = { x = 2 y = 2 }
+	}
+	support = {
+		divhq_company = { x = 0 y = 0 }
+		recon = { x = 0 y = 1 }
+	}
 }
 
 units = {
 	### Land Forces ###
 
-	## Vilnius ##
-	division = {
-		division_name = {
-			is_name_ordered = yes
-		}
-		location = 3320
-		division_template = "Mechanizuoti pėstininkai"
-		start_experience_factor = 0.5
-		start_equipment_factor = 1.0
-	}
-
-	division = {
-		division_name = {
-			is_name_ordered = yes
-		}
-		location = 3320
-		division_template = "Mechanizuoti pėstininkai"
-		start_experience_factor = 0.5
-		start_equipment_factor = 1.0
-	}
-
-	## Russian Border ##
-	
-	division = {
-		division_name = {
-			is_name_ordered = yes
-		}
-		location = 233
-		division_template = "Grenzetruppen"
-		start_experience_factor = 0.5
-		start_equipment_factor = 1.0
-	}
-
-	division = {
-		division_name = {
-			is_name_ordered = yes
-		}
-		location = 11342
-		division_template = "Grenzetruppen"
-		start_experience_factor = 0.5
-		start_equipment_factor = 1.0
-	}
-
-	division = {
-		division_name = {
-			is_name_ordered = yes
-		}
-		location = 11391
-		division_template = "Grenzetruppen"
-		start_experience_factor = 0.5
-		start_equipment_factor = 1.0
-	}
-
-	division = {
-		division_name = {
-			is_name_ordered = yes
-		}
-		location = 6340
-		division_template = "Grenzetruppen"
-		start_experience_factor = 0.5
-		start_equipment_factor = 1.0
-	}
-
-	division = {
-		division_name = {
-			is_name_ordered = yes
-		}
-		location = 9359
-		division_template = "Grenzetruppen"
-		start_experience_factor = 0.5
-		start_equipment_factor = 1.0
-	}
-
-	division = {
-		division_name = {
-			is_name_ordered = yes
-		}
-		location = 3309
-		division_template = "Grenzetruppen"
-		start_experience_factor = 0.5
-		start_equipment_factor = 1.0
-	}
-	
-	## Kaunus ##
-	
+	# Infantry Division
 	division = {
 		division_name = {
 			is_name_ordered = yes
 		}
 		location = 6296
-		division_template = "Grenzetruppen"
+		division_template = "Pėstininkų Divizija"
 		start_experience_factor = 0.5
 		start_equipment_factor = 1.0
 	}
-	
-	## Augustow ##
-	
+	division = {
+		division_name = {
+			is_name_ordered = yes
+		}
+		location = 11342
+		division_template = "Pėstininkų Divizija"
+		start_experience_factor = 0.5
+		start_equipment_factor = 1.0
+	}
+	division = {
+		division_name = {
+			is_name_ordered = yes
+		}
+		location = 6340
+		division_template = "Pėstininkų Divizija"
+		start_experience_factor = 0.5
+		start_equipment_factor = 1.0
+	}
+	division = {
+		division_name = {
+			is_name_ordered = yes
+		}
+		location = 9359
+		division_template = "Pėstininkų Divizija"
+		start_experience_factor = 0.5
+		start_equipment_factor = 1.0
+	}
+	division = {
+		division_name = {
+			is_name_ordered = yes
+		}
+		location = 3309
+		division_template = "Pėstininkų Divizija"
+		start_experience_factor = 0.5
+		start_equipment_factor = 1.0
+	}
 	division = {
 		division_name = {
 			is_name_ordered = yes
 		}
 		location = 400
-		division_template = "Grenzetruppen"
+		division_template = "Pėstininkų Divizija"
+		start_experience_factor = 0.5
+		start_equipment_factor = 1.0
+	}
+
+	division = {
+		division_name = {
+			is_name_ordered = yes
+		}
+		location = 233
+		division_template = "Artilerija Divizija"
+		start_experience_factor = 0.5
+		start_equipment_factor = 1.0
+	}
+	division = {
+		division_name = {
+			is_name_ordered = yes
+		}
+		location = 11391
+		division_template = "Artilerija Divizija"
+		start_experience_factor = 0.5
+		start_equipment_factor = 1.0
+	}
+
+	# BLR Infantry Division
+	division = {
+		division_name = {
+			is_name_ordered = yes
+		}
+		location = 9359
+		division_template = "Pjahotnaja Dyvizija"
+		start_experience_factor = 0.55
+		start_equipment_factor = 1.0
+	}
+	division = {
+		division_name = {
+			is_name_ordered = yes
+		}
+		location = 6280
+		division_template = "Pjahotnaja Dyvizija"
+		start_experience_factor = 0.6
+		start_equipment_factor = 0.9
+	}
+
+	# Mechanized Division
+	division = {
+		division_name = {
+			is_name_ordered = yes
+		}
+		location = 3320
+		division_template = "Mechanizuoti Divizija"
+		start_experience_factor = 0.5
+		start_equipment_factor = 1.0
+	}
+
+	division = {
+		division_name = {
+			is_name_ordered = yes
+		}
+		location = 3320
+		division_template = "Mechanizuoti Divizija"
 		start_experience_factor = 0.5
 		start_equipment_factor = 1.0
 	}

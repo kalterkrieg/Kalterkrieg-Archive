@@ -462,13 +462,15 @@ country_event = { #1949 Election Season Begins
 	id = nee.13
 	title = nee.13.t
 	desc = nee.13.d
-    immediate = { log = "[GetDateText]: [ROOT.GetName]: event nee.13 FROM = [FROM.GetName]" }
 	immediate = {
+		log = "[GetDateText]: [ROOT.GetName]: event nee.13 FROM = [FROM.GetName]"
 		if = {
 			limit = {
-				AND = {
-					has_country_flag = NEE_completed_NEE_creatingnextgen.
-					has_country_flag = NEE_completed_NEE_endingmartiallaw
+				NOT = {
+					AND = {
+						has_country_flag = NEE_completed_NEE_creatingnextgen
+						has_country_flag = NEE_completed_NEE_endingmartiallaw
+					}
 				}
 			}
 			hidden_effect = {
@@ -479,6 +481,7 @@ country_event = { #1949 Election Season Begins
 				}
 			}
 		}
+		NEE_reset_electoral_votes = yes	
 	}
 	is_triggered_only = yes
 	fire_only_once = yes
@@ -890,6 +893,7 @@ country_event = { #Midterms election start
 			}
 			activate_mission = NEE_progressive_campaign
 			activate_mission = NEE_republican_campaign
+			set_country_flag = NEE_campaigning_as_democrats
 			every_owned_state = {
 				limit = {
 					is_core_of = NEE
@@ -905,6 +909,7 @@ country_event = { #Midterms election start
 			}
 			activate_mission = NEE_progressive_campaign
 			activate_mission = NEE_democrats_campaign
+			set_country_flag = NEE_campaigning_as_republicans
 			every_owned_state = {
 				limit = {
 					is_core_of = NEE
@@ -931,6 +936,8 @@ country_event = { #Midterms elections
 		name = nee.27.a
 		clr_country_flag = NEE_election_season
 		clr_country_flag = NEE_midterms
+		clr_country_flag = NEE_campaigning_as_democrats
+		clr_country_flag = NEE_campaigning_as_republicans
 		hidden_effect = {
 			NEE_calculate_electoral_seat = yes
 		}
@@ -953,7 +960,10 @@ country_event = { #1953 Election Season Begins
 			}
 		}
 	}
-    immediate = { log = "[GetDateText]: [ROOT.GetName]: event nee.28 FROM = [FROM.GetName]" }
+    immediate = { 
+		log = "[GetDateText]: [ROOT.GetName]: event nee.28 FROM = [FROM.GetName]"
+		NEE_reset_electoral_votes = yes	
+	}
 	picture = GFX_event_NEE_dewey
 	is_triggered_only = yes
 	fire_only_once = yes	
@@ -1135,7 +1145,7 @@ country_event = { #Harriman/Lehman Elected
 	fire_only_once = yes	
 	option = { 
 		log = "[GetLogInfo]: event nee.31 option nee.31.a"
-		name = nee.a
+		name = nee.31.a
 		set_politics = {
 			ruling_party = social_liberal
 			last_election = 1953.11.3
@@ -1346,7 +1356,10 @@ country_event = { #1957 election season begins
 			}
 		}
 	}
-    immediate = { log = "[GetDateText]: [ROOT.GetName]: event nee.37 FROM = [FROM.GetName]" }
+    immediate = { 
+		log = "[GetDateText]: [ROOT.GetName]: event nee.37 FROM = [FROM.GetName]" 
+		NEE_reset_electoral_votes = yes	
+	}
 	picture = GFX_event_NEE_kennedy
 	is_triggered_only = yes
 	fire_only_once = yes	
@@ -4182,22 +4195,20 @@ country_event = {
 	id = nee_pol.13
 	title = {
 		text = nee_pol.13.t_republicans
-		trigger = {
-			has_government = market_liberal
-		}
 	}
 	title = {
 		text = nee_pol.13.t_democrats
-	}
-	desc = {
-		text = nee_pol.13.d_republicans
 		trigger = {
 			has_government = market_liberal
 		}
+	}
+	desc = {
+		text = nee_pol.13.d_republicans
 	}
 	desc = {
 		text = nee_pol.13.d_democrats
 		trigger = {
+			has_government = market_liberal
 		}
 	}
 	immediate = { log = "[GetDateText]: [ROOT.GetName]: nee_pol.13 FROM = [FROM.GetName]" }

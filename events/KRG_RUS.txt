@@ -1456,6 +1456,69 @@ country_event = { #Are we wasting time here?
 		custom_effect_tooltip = RUS_GER_Continuation_War_tt
 		activate_mission = GER_RUS_Continuation_War_mission
 		RUS = { set_country_flag = RUS_armistice_resolution }
+		effect_tooltip = {
+			if = {
+				limit = { has_idea = GER_endloser_krieg }
+				swap_ideas = {
+					remove_idea = GER_endloser_krieg
+					add_idea = GER_endloser_krieg_RUS
+				}
+			}
+			else_if = {
+				limit = { has_idea = GER_endloser_krieg_2 }
+				swap_ideas = {
+					remove_idea = GER_endloser_krieg_2
+					add_idea = GER_endloser_krieg_RUS
+				}
+			}
+			else_if = {
+				limit = { has_idea = GER_endloser_krieg_3 }
+				swap_ideas = {
+					remove_idea = GER_endloser_krieg_3
+					add_idea = GER_endloser_krieg_RUS
+				}
+			}
+			else_if = {
+				limit = { has_idea = GER_endloser_krieg_4 }
+				swap_ideas = {
+					remove_idea = GER_endloser_krieg_4
+					add_idea = GER_endloser_krieg_RUS
+				}
+			}
+			else_if = {
+				limit = { has_idea = GER_endloser_krieg_5 }
+				swap_ideas = {
+					remove_idea = GER_endloser_krieg_5
+					add_idea = GER_endloser_krieg_RUS
+				}
+			}
+		}
+		hidden_effect = {
+			if = {
+				limit = { has_idea = GER_endloser_krieg }
+				remove_ideas = GER_endloser_krieg
+			}
+			else_if = {
+				limit = { has_idea = GER_endloser_krieg_2 }
+				remove_ideas = GER_endloser_krieg_2
+			}
+			else_if = {
+				limit = { has_idea = GER_endloser_krieg_3 }
+				remove_ideas = GER_endloser_krieg_3
+			}
+			else_if = {
+				limit = { has_idea = GER_endloser_krieg_4 }
+				remove_ideas = GER_endloser_krieg_4
+			}
+			else_if = {
+				limit = { has_idea = GER_endloser_krieg_5 }
+				remove_ideas = GER_endloser_krieg_5
+			}
+			add_timed_idea = {
+				idea = GER_endloser_krieg_RUS
+				days = 1095
+			}
+		}
 		news_event = {
 			id = krg_rus_rwk.42
 		}
@@ -2286,6 +2349,52 @@ country_event = { # New Constitution
 		name = krg_rus_rwk.49.c
 		add_political_power = 50
 		add_country_leader_trait = big_brother
+	}
+}
+
+country_event = { #Russians dont send any peace offers
+	id = krg_rus_rwk.50
+	title = krg_rus_rwk.50.t
+	desc = krg_rus_rwk.50.d
+	picture = GFX_ce_RUS_soldiers
+
+	is_triggered_only = yes
+	fire_only_once = yes
+	
+	immediate = { log = "[GetDateText]: [Root.GetName]: event krg_rus_rwk.50 FROM = [From.GetName]" }
+
+	option = { #Fuck yeah, war in March 48! 
+		name = krg_rus_rwk.50.a
+		declare_war_on = {
+			target = RUS
+			type = annex_everything
+		}
+		LIT = { add_to_war = { 
+			targeted_alliance = GER
+			enemy = RUS 
+			hostility_reason = asked_to_join
+		} }
+		UKR = { add_to_war = { 
+			targeted_alliance = GER
+			enemy = RUS 
+			hostility_reason = asked_to_join
+		} }
+		POL = { add_to_war = { 
+			targeted_alliance = GER
+			enemy = RUS 
+			hostility_reason = asked_to_join
+		} } 
+		KRL = { add_to_war = { 
+			targeted_alliance = GER
+			enemy = RUS 
+			hostility_reason = asked_to_join
+		} }
+		custom_effect_tooltip = RUS_GER_Continuation_War_tt
+		activate_mission = GER_RUS_Continuation_War_mission
+		RUS = { set_country_flag = RUS_armistice_resolution }
+		news_event = {
+			id = krg_rus_rwk.42
+		}
 	}
 }
 

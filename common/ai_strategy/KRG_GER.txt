@@ -83,12 +83,104 @@ GER_dislikes_entente = {
 ################
 ### Military ###
 ################
+
+GER_finish_russia_off = {
+	allowed = {
+		OR = {
+			original_tag = GER
+			original_tag = AUS
+			is_ally_with = GER
+		}
+		is_in_europe = yes
+	}
+	enable = {
+		has_war_with = RUS
+		OR = {
+			NOT = { has_war_with = NFA }
+			NOT = { country_exists = NFA }
+			NFA = { has_capitulated = yes }
+		}
+		OR = {
+			NOT = { country_exists = ENG }
+			NOT = { has_war_with = ENG }
+			ENG = { has_capitulated = yes }
+		}
+		OR = {
+			NOT = { has_war_with = ITA }
+			NOT = { country_exists = ITA }
+			ITA = { has_capitulated = yes }
+		}
+		stockpile_ratio = { archetype = infantry_equipment ratio > 1 }
+
+		#activate during the non-winter months
+		set_temp_variable = { frequency = global.num_days }
+		modulo_temp_variable = { frequency = 365 }
+		check_variable = { frequency > 90 } #early April
+		check_variable = { frequency < 300 } #late October
+
+		#activate every 25 days, then pause for another 25
+		set_temp_variable = { frequency = global.num_days }
+		modulo_temp_variable = { frequency = 50 }
+		check_variable = { frequency > 25 }
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = front_control
+		tag = RUS
+		priority = 100
+		ordertype = front
+		execution_type = rush_weak
+		execute_order = yes
+	}
+}
+
+GER_eyes_on_russia = {
+	allowed = {
+		original_tag = GER
+	}
+	enable = {
+		OR = {
+			NOT = { has_war_with = RUS }
+			NOT = {
+				UKR = {
+					owns_state = 886
+				}
+			}
+		}
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = conquer
+		id = RUS
+		value = 1000
+	}
+	ai_strategy = {
+		type = front_armor_score
+		id = RUS
+		value = 100
+	}
+	ai_strategy = {
+		type = front_unit_request
+		tag = RUS
+		value = 50
+	}
+	ai_strategy = {
+		type = theatre_distribution_demand_increase
+		id = 202
+		value = 10
+	}
+}
 GER_eyes_on_france = {
 	allowed = {
 		original_tag = GER
 	}
 	enable = {
 		NFA = { has_capitulated = no }
+		UKR = {
+			owns_state = 886
+		}
 	}
 	abort_when_not_enabled = yes
 
@@ -119,9 +211,8 @@ GER_less_focus_on_russia = {
 		original_tag = GER
 	}
 	enable = {
-		NFA = {
-			has_war_with = GER
-			has_capitulated = no
+		UKR = {
+			owns_state = 886
 		}
 		NOT = {
 			UKR = {
@@ -513,6 +604,30 @@ MIE_ignore_western_front = {
 		type = dont_defend_ally_borders
 		id = SWI
 		value = 100
+	}
+}
+
+MIE_ignore_ally_DNF = {
+	allowed = {
+		OR = {
+			tag = GER
+			is_polish_tag = yes
+			is_baltic_tag = yes
+			tag = BLR
+			tag = UKR
+			is_scandinavian_tag = yes
+		}
+	}
+	enable = {
+		is_ally_with = GER
+		DNF = { check_variable = { reichspakt_alignment_level > 2 } }
+	}
+	abort_when_not_enabled = yes
+
+	ai_strategy = {
+		type = front_unit_request
+		tag = DNF
+		value = -100
 	}
 }
 

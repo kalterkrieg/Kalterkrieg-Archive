@@ -29,6 +29,21 @@ country_has_armor_focus = {
 	}
 }
 
+is_KRG_major = {
+	OR = {
+		original_tag = GER
+		original_tag = DNF
+		original_tag = RUS
+		original_tag = JAP
+		original_tag = ITA
+		original_tag = NFA
+		original_tag = ENG
+		original_tag = NEE
+		original_tag = CAN
+		original_tag = TEX
+		original_tag = CAL
+	}
+}
 has_unattained_important_goals = {
 	OR = {
 		# the French Republic needs to reclaim North France
@@ -88,17 +103,18 @@ has_reached_maximum_divisions = {
 	}
 	divide_temp_variable = { military_spending_ratio = temp_factories }
 	if = {
-		limit = { 
-			has_war = yes
+		limit = {
+			OR = {
+				has_war = yes
+				has_unattained_important_goals = yes
+			}
+			
 		}
 		check_variable = { military_spending_ratio > 1 }
 	}
 	else_if = {
-		limit = { 
-			OR = {
-				is_major = yes
-				has_unattained_important_goals = yes
-			}
+		limit = {
+			is_KRG_major = yes
 		}
 		check_variable = { military_spending_ratio > 0.75 }
 	}

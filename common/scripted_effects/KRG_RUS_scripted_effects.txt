@@ -280,10 +280,22 @@ RUS_Surrender_Claimed_Territories = {
 			has_country_flag = RUS_Thirty_Six_Borders
 		}
 		LIT = {
-			transfer_state = 836
-			transfer_state = 835
-			transfer_state = 207
-			transfer_state = 206
+			if = {
+				limit = {
+					country_exists = BLR
+				}
+				BLR = {
+					transfer_state = 836
+					transfer_state = 835
+					transfer_state = 207
+					transfer_state = 206
+				}
+			} else = {
+				transfer_state = 836
+				transfer_state = 835
+				transfer_state = 207
+				transfer_state = 206
+			}
 			set_country_flag = LIT_1936_recovered
 			country_event = {
 				id = krg_lit.0
@@ -350,6 +362,10 @@ RUS_Surrender_Claimed_Territories = {
 			EST = {
 				standard_on_puppet_effect = yes
 				restore_previous_government_type = yes
+				set_politics = {
+					ruling_party = paternal_autocrat
+					elections_allowed = no
+				}
 			}
 		}
 	}
@@ -1637,7 +1653,6 @@ PRS_Add_Core_Spam = {
 	add_state_core = 403
 	add_state_core = 404
 	add_state_core = 407
-	add_state_core = 408
 	add_state_core = 409
 	add_state_core = 516
 	add_state_core = 560

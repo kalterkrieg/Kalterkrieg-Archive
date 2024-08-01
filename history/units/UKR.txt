@@ -52,10 +52,8 @@ instant_effect = {
 	# }
 }
 
-### Cavalry Division ###
-
 division_template = {
-	name = "Cossack Cavalry"
+	name = "Kavaleriya Dyviziya"
 	division_names_group = UKR_CAV_01
 	regiments = {
 		cavalry = { x = 0 y = 0 }
@@ -64,9 +62,11 @@ division_template = {
 
 		cavalry = { x = 1 y = 0 }
 		cavalry = { x = 1 y = 1 }
+		cavalry = { x = 1 y = 2 }
 	}
 	support = {
-		recon = { x = 0 y = 0 }
+		divhq_company = { x = 0 y = 0 }
+		recon = { x = 0 y = 1 }
 	}
 	priority = 1
 }
@@ -74,7 +74,7 @@ division_template = {
 ### Infantry Division ###
 
 division_template = {
-	name = "Foot Infantry"
+	name = "Pikhotna Dyviziya"
 	division_names_group = UKR_INF_01
 	regiments = {
 		infantry = { x = 0 y = 0 }
@@ -90,15 +90,16 @@ division_template = {
 		artillery_brigade = { x = 2 y = 2 }
 	}
 	support = {
-		engineer = { x = 0 y = 0 }
-		recon = { x = 0 y = 1 }
+		divhq_company = { x = 0 y = 0 }
+		engineer = { x = 0 y = 1 }
+		recon = { x = 0 y = 2 }
 	}
 	priority = 1
 }
 ### Motorised Infantry Division ###
 
 division_template = {
-	name = "Motorised Infantry"
+	name = "Motorizovana Dyviziya"
 	division_names_group = UKR_INF_01
 	regiments = {
 		motorized = { x = 0 y = 0 }
@@ -106,117 +107,138 @@ division_template = {
 		motorized = { x = 0 y = 2 }
 
 		motorized = { x = 1 y = 0 }
-		motorized = { x = 1 y = 1 }
-		motorized = { x = 1 y = 2 }
-
-		motorized = { x = 2 y = 0 }
-		artillery_brigade = { x = 2 y = 1 }
-		artillery_brigade = { x = 2 y = 2 }
+		mechanized = { x = 1 y = 1 }
+		mechanized = { x = 1 y = 2 }
 	}
 	support = {
-		engineer = { x = 0 y = 0 }
-		recon = { x = 0 y = 1 }
+		divhq_company = { x = 0 y = 0 }
+		engineer = { x = 0 y = 1 }
+		mot_recon = { x = 0 y = 2 }
 	}
 	priority = 1
+}
+
+division_template = {
+	name = "Tankova Dyviziya"
+	division_names_group = UKR_ARM_01
+	regiments = {
+		light_armor = { x = 0 y = 0 }
+		light_armor = { x = 0 y = 1 }
+		light_armor = { x = 0 y = 2 }
+		motorized = { x = 1 y = 0 }
+		mechanized = { x = 1 y = 1 }
+		mechanized = { x = 1 y = 2 }
+	}
+	support = {
+		divhq_company = { x = 0 y = 0 }
+		engineer = { x = 0 y = 1 }
+		mot_recon = { x = 0 y = 2 }
+		maintenance_company = { x = 0 y = 3 }
+	}
 }
 
 units = {
 	### Land Forces ###
 
-	## Kiev ##
-	division = {
-		division_name = {
-			is_name_ordered = yes
-		}
-		location = 525
-		division_template = "Motorised Infantry"
-		start_experience_factor = 0.5
-		start_equipment_factor = 1.0
-	}
-
-	division = {
-		division_name = {
-			is_name_ordered = yes
-		}
-		location = 525
-		division_template = "Cossack Cavalry"
-		start_experience_factor = 0.5
-		start_equipment_factor = 1.0
-	}
-
-	division = {
-		division_name = {
-			is_name_ordered = yes
-		}
-		location = 525
-		division_template = "Cossack Cavalry"
-		start_experience_factor = 0.5
-		start_equipment_factor = 1.0
-	}
-
-	## Khmelblabhal ##
-	division = {
-		division_name = {
-			is_name_ordered = yes
-		}
-		location = 3457
-		division_template = "Cossack Cavalry"
-		start_experience_factor = 0.5
-		start_equipment_factor = 1.0
-	}
-
-	## Rowne ##
-	division = {
-		division_name = {
-			is_name_ordered = yes
-		}
-		location = 6557
-		division_template = "Cossack Cavalry"
-		start_experience_factor = 0.5
-		start_equipment_factor = 1.0
-	}
-
-
-	## Odesa ##
-	
+	# Infantry Divisions
 	division = {
 		division_name = {
 			is_name_ordered = yes
 		}
 		location = 11670
-		division_template = "Foot Infantry"
+		division_template = "Pikhotna Dyviziya"
 		start_experience_factor = 0.5
 		start_equipment_factor = 1.0
 	}
-	
 	division = {
 		division_name = {
 			is_name_ordered = yes
 		}
-		location = 11670
-		division_template = "Foot Infantry"
+		location = 11683
+		division_template = "Pikhotna Dyviziya"
 		start_experience_factor = 0.5
 		start_equipment_factor = 1.0
 	}
-		
 	division = {
 		division_name = {
 			is_name_ordered = yes
 		}
-		location = 11670
-		division_template = "Motorised Infantry"
-		start_experience_factor = 0.5
-		start_equipment_factor = 1.0
+		location = 560
+		division_template = "Pikhotna Dyviziya"
+		start_experience_factor = 0.35
+		start_equipment_factor = 0.9
+	}
+	division = {
+		division_name = {
+			is_name_ordered = yes
+		}
+		location = 6232
+		division_template = "Pikhotna Dyviziya"
+		start_experience_factor = 0.4
+		start_equipment_factor = 0.9
+	}
+	division = {
+		division_name = {
+			is_name_ordered = yes
+		}
+		location = 488
+		division_template = "Pikhotna Dyviziya"
+		start_experience_factor = 0.4
+		start_equipment_factor = 0.9
+	}
+	division = {
+		division_name = {
+			is_name_ordered = yes
+		}
+		location = 9568
+		division_template = "Pikhotna Dyviziya"
+		start_experience_factor = 0.3
+		start_equipment_factor = 0.9
+	}
+	division = {
+		division_name = {
+			is_name_ordered = yes
+		}
+		location = 6579
+		division_template = "Pikhotna Dyviziya"
+		start_experience_factor = 0.3
+		start_equipment_factor = 0.9
+	}
+	division = {
+		division_name = {
+			is_name_ordered = yes
+		}
+		location = 9419
+		division_template = "Pikhotna Dyviziya"
+		start_experience_factor = 0.3
+		start_equipment_factor = 0.9
 	}
 
-	## Dnipetrovsk ##
-		
+	# Motorised Divisions
 	division = {
 		division_name = {
 			is_name_ordered = yes
 		}
-		location = 11561
-		division_template = "Motorised Infantry"
+		location = 3543
+		division_template = "Motorizovana Dyviziya"
+		start_experience_factor = 0.5
+		start_equipment_factor = 1.0
+	}
+	division = {
+		division_name = {
+			is_name_ordered = yes
+		}
+		location = 11437
+		division_template = "Motorizovana Dyviziya"
+		start_experience_factor = 0.5
+		start_equipment_factor = 1.0
+	}		
+	division = {
+		division_name = {
+			is_name_ordered = yes
+		}
+		location = 6478
+		division_template = "Motorizovana Dyviziya"
 		start_experience_factor = 0.5
 		start_equipment_factor = 1.0
 	}	
@@ -225,7 +247,7 @@ units = {
 			is_name_ordered = yes
 		}
 		location = 11561
-		division_template = "Motorised Infantry"
+		division_template = "Motorizovana Dyviziya"
 		start_experience_factor = 0.5
 		start_equipment_factor = 1.0
 	}
@@ -233,20 +255,17 @@ units = {
 		division_name = {
 			is_name_ordered = yes
 		}
-		location = 11561
-		division_template = "Motorised Infantry"
+		location = 11422
+		division_template = "Motorizovana Dyviziya"
 		start_experience_factor = 0.5
 		start_equipment_factor = 1.0
 	}
-
-	## Cherkasy State ##
-		
 	division = {
 		division_name = {
 			is_name_ordered = yes
 		}
 		location = 3468
-		division_template = "Motorised Infantry"
+		division_template = "Motorizovana Dyviziya"
 		start_experience_factor = 0.5
 		start_equipment_factor = 1.0
 	}
@@ -256,8 +275,60 @@ units = {
 			is_name_ordered = yes
 		}
 		location = 11454
-		division_template = "Motorised Infantry"
+		division_template = "Motorizovana Dyviziya"
 		start_experience_factor = 0.5
 		start_equipment_factor = 1.0
 	}
+
+	# Tank Division
+	division = {
+		division_name = {
+			is_name_ordered = yes
+		}
+		location = 525
+		division_template = "Tankova Dyviziya"
+		start_experience_factor = 0.9
+		start_equipment_factor = 0.85
+	}
+	
+
+	# Cavalry Division
+	division = {
+		division_name = {
+			is_name_ordered = yes
+		}
+		location = 3755
+		division_template = "Kavaleriya Dyviziya"
+		start_experience_factor = 0.5
+		start_equipment_factor = 1.0
+	}
+
+	division = {
+		division_name = {
+			is_name_ordered = yes
+		}
+		location = 9433
+		division_template = "Kavaleriya Dyviziya"
+		start_experience_factor = 0.5
+		start_equipment_factor = 1.0
+	}
+	division = {
+		division_name = {
+			is_name_ordered = yes
+		}
+		location = 9554
+		division_template = "Kavaleriya Dyviziya"
+		start_experience_factor = 0.5
+		start_equipment_factor = 1.0
+	}
+
+	division = {
+		division_name = {
+			is_name_ordered = yes
+		}
+		location = 11453
+		division_template = "Kavaleriya Dyviziya"
+		start_experience_factor = 0.5
+		start_equipment_factor = 1.0
+	}	
 }

@@ -16,6 +16,14 @@ RUS_armistice_decisions = {
 		timeout_effect = {
 			log = "[GetDateText]: [Root.GetName]: Decision timeout RUS_armistice_timer_mission target: [From.GetName]"
 			custom_effect_tooltip = RUS_armistice_runs_out_tt
+			hidden_effect = {
+				GER = {
+					country_event = { 
+						id = krg_rus_rwk.50				
+					}
+				}
+			}
+			
 		}
 	}
 	RUS_armistice_negotiations = {
@@ -24,7 +32,11 @@ RUS_armistice_decisions = {
 			has_country_flag = RUS_Troika_Formed
 			has_country_flag = RUS_armistice_game
 			NOT = {
-				has_country_flag = RUS_opened_negotiations
+				OR = {
+					has_country_flag = RUS_armistice_resolution
+					has_country_flag = RUS_opened_negotiations
+				}
+				
 			}
 		}
 		cost = 15

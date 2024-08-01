@@ -144,10 +144,10 @@ TEX_state_electoral_initial = {
 		# North Dakota
 		389 = {
 			set_variable = {
-				electoral_lean = 2
+				electoral_lean = 4
 			}
 			set_variable = {
-				governor = 2
+				governor = 4
 			}
 			set_variable = {
 				electoral_vote = 4
@@ -1168,20 +1168,20 @@ TEX_state_seats_initial = {
 		clear_array = electoral_seat_id_array
 		# senate seats
 		set_variable = {
-			senate_seat_party_1 = 2
+			senate_seat_party_1 = 4
 		}
 		# aut dem
 		set_variable = {
-			senate_seat_party_2 = 2
+			senate_seat_party_2 = 4
 		}
 		# rev rep
 		# make sure they add up to the number of electoral seats
 		add_to_array = {
-			electoral_seat_number_array = 1
+			electoral_seat_number_array = 0
 		}
 		# number of auth dems
 		add_to_array = {
-			electoral_seat_number_array = 1
+			electoral_seat_number_array = 0
 		}
 		# number of conservatives
 		add_to_array = {
@@ -1189,7 +1189,7 @@ TEX_state_seats_initial = {
 		}
 		# number of rev reps
 		add_to_array = {
-			electoral_seat_number_array = 0
+			electoral_seat_number_array = 2
 		}
 		# number of soc dems
 		# party popularity values make sure they add up to 100
@@ -1198,7 +1198,7 @@ TEX_state_seats_initial = {
 		}
 		# auth dems popularity
 		add_to_array = {
-			electoral_pie_chart_number_array = 75
+			electoral_pie_chart_number_array = 5
 		}
 		# conservatives popularity
 		add_to_array = {
@@ -1206,7 +1206,7 @@ TEX_state_seats_initial = {
 		}
 		# rev reps popularity
 		add_to_array = {
-			electoral_pie_chart_number_array = 5
+			electoral_pie_chart_number_array = 75
 		}
 		# soc dems popularity
 		# makes an array for the seat ids 1-4
@@ -3135,6 +3135,31 @@ TEX_setup_congress = {
 		add_to_variable = {
 			TEX.seat_total = house_seats
 		}
+	}
+	
+	set_variable = {
+		TEX_total_senators = 0
+	}
+	set_variable = {
+		TEX_total_house = 0
+	}
+	add_to_variable = {
+		TEX_total_senators = senate_seat_array^0
+	}
+	add_to_variable = {
+		TEX_total_senators = senate_seat_array^1
+	}
+	add_to_variable = {
+		TEX_total_senators = senate_seat_array^3
+	}
+	add_to_variable = {
+		TEX_total_house = TEX.house_seat_array^3
+	}
+	add_to_variable = {
+		TEX_total_house = TEX.house_seat_array^3
+	}
+	add_to_variable = {
+		TEX_total_house = TEX.house_seat_array^3
 	}
 	TEX_modify_house_array = yes
 }
@@ -5627,7 +5652,7 @@ update_texas = {
 }
 
 ### Red Scare Upgrade ###
-TEX_upgrade_red_scare = {
+TEX_move_up_red_scare = {
 	if = {
 		limit = {
 			NOT = {
@@ -5692,7 +5717,7 @@ TEX_upgrade_red_scare = {
 	}
 }
 
-TEX_upgrade_lost_generation = {
+TEX_move_up_lost_generation = {
 	custom_effect_tooltip = TEX_lost_generation_tt
 	if = {
 		limit = {
@@ -8329,7 +8354,7 @@ TEX_add_pop_to_ruling_party = {
 	}
 }
 
-TEX_upgrade_social_security = {
+TEX_move_up_social_security = {
 	if = {
 		limit = {
 			NOT = {
@@ -8504,5 +8529,63 @@ TEX_primary_remove_political_power = {
 			TEX_primary_mana = 15
 		}
 		custom_effect_tooltip = TEX_primary_remove
+	}
+}
+
+TEX_move_up_reconstruction = {
+	custom_effect_tooltip = TEX_lost_generation_tt
+	if = {
+		limit = {
+			has_idea = TEX_reconstruction_0
+		}
+		swap_ideas = {
+			remove_idea = TEX_reconstruction_0
+			add_idea = TEX_reconstruction_1
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = TEX_reconstruction_1
+		}
+		swap_ideas = {
+			remove_idea = TEX_reconstruction_1
+			add_idea = TEX_reconstruction_2
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = TEX_reconstruction_2
+		}
+		swap_ideas = {
+			remove_idea = TEX_reconstruction_2
+			add_idea = TEX_reconstruction_3
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = TEX_reconstruction_3
+		}
+		swap_ideas = {
+			remove_idea = TEX_reconstruction_3
+			add_idea = TEX_reconstruction_4
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = TEX_reconstruction_4
+		}
+		effect_tooltip = {
+			swap_ideas = {
+				remove_idea = TEX_reconstruction_4
+				add_idea = TEX_reconstruction_5
+			}
+		}
+		hidden_effect = {
+			remove_ideas = TEX_reconstruction_4
+			add_timed_idea = {
+				idea = TEX_reconstruction_5
+				days = 1000
+			}
+		}
 	}
 }

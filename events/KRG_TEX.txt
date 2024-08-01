@@ -30,6 +30,7 @@ country_event = {
 	title = tex.2.t
 	desc = tex.2.d
 	is_triggered_only = yes
+	fire_only_once = yes
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event tex.2 FROM = [From.GetName]"
 	}
@@ -62,6 +63,7 @@ country_event = {
 	title = tex.3.t
 	desc = tex.3.d
 	is_triggered_only = yes
+	fire_only_once = yes
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event tex.3 FROM = [From.GetName]"
 	}
@@ -1589,8 +1591,9 @@ news_event = {
 	title = {
 		text = tex.101.t
 		trigger = {
-			TEX_earl_kemp_long = {
-				is_country_leader = yes
+			has_country_leader = {
+				character = TEX_earl_kemp_long
+				ruling_only = yes
 			}
 		}
 	}
@@ -1598,8 +1601,9 @@ news_event = {
 		text = tex.101.t2
 		trigger = {
 			NOT = {
-				TEX_earl_kemp_long = {
-					is_character = yes
+				has_country_leader = {
+					character = TEX_earl_kemp_long
+					ruling_only = yes
 				}
 			}
 		}
@@ -1607,8 +1611,9 @@ news_event = {
 	desc = {
 		text = tex.101.d
 		trigger = {
-			TEX_earl_kemp_long = {
-				is_country_leader = yes
+			has_country_leader = {
+				character = TEX_earl_kemp_long
+				ruling_only = yes
 			}
 		}
 	}
@@ -1616,8 +1621,9 @@ news_event = {
 		text = tex.101.d2
 		trigger = {
 			NOT = {
-				TEX_earl_kemp_long = {
-					is_character = yes
+				has_country_leader = {
+					character = TEX_earl_kemp_long
+					ruling_only = yes
 				}
 			}
 		}
@@ -1633,8 +1639,9 @@ news_event = {
 		custom_effect_tooltip = TEX_earl_long_dead_tt
 		set_country_flag = long2_available
 		trigger = {
-			TEX_earl_kemp_long = {
-				is_country_leader = yes
+			has_country_leader = {
+				character = TEX_earl_kemp_long
+				ruling_only = yes
 			}
 		}
 	}
@@ -1643,8 +1650,9 @@ news_event = {
 		name = tex.101.b
 		trigger = {
 			NOT = {
-				TEX_earl_kemp_long = {
-					is_character = yes
+				has_country_leader = {
+					character = TEX_earl_kemp_long
+					ruling_only = yes
 				}
 				has_government = authoritarian_democrat
 			}
@@ -1656,8 +1664,9 @@ news_event = {
 		trigger = {
 			has_government = authoritarian_democrat
 			NOT = {
-				TEX_earl_kemp_long = {
-					is_character = yes
+				has_country_leader = {
+					character = TEX_earl_kemp_long
+					ruling_only = yes
 				}
 			}
 		}
@@ -1779,7 +1788,7 @@ country_event = {
 	id = tex.107
 	title = tex.107.t
 	desc = tex.107.d
-	picture = ce_kinsey
+	picture = GFX_ce_tex_kinsey
 	is_triggered_only = yes
 	immediate = {
 		hidden_effect = {
@@ -1801,7 +1810,7 @@ country_event = {
 	id = tex.108
 	title = tex.108.t
 	desc = tex.108.d
-	picture = ce_kinsey
+	picture = GFX_ce_tex_kinsey
 	is_triggered_only = yes
 	immediate = {
 		log = "[GetDateText]: [Root.GetName]: event tex.108 FROM = [From.GetName]"
@@ -4029,8 +4038,9 @@ country_event = {
 				else = {
 					if = {
 						limit = {
-							TEX_earl_kemp_long = {
-								is_country_leader = yes
+							has_country_leader = {
+								character = TEX_earl_kemp_long
+								ruling_only = yes
 							}
 						}
 						country_event = tex.elections.200
@@ -4038,7 +4048,7 @@ country_event = {
 					else_if = {
 						limit = {
 							has_country_leader = {
-								name = "Rush Holt"
+								character = TEX_rush_holt
 								ruling_only = yes
 							}
 						}
@@ -4047,7 +4057,7 @@ country_event = {
 					else_if = {
 						limit = {
 							has_country_leader = {
-								name = "Sid McMath"
+								character = TEX_sid_mcmath
 								ruling_only = yes
 							}
 						}
@@ -7187,18 +7197,21 @@ country_event = {
 		if = {
 			limit = {
 				OR = {
-					TEX_earl_kemp_long = {
-						is_country_leader = yes
+					has_country_leader = {
+						character = TEX_earl_kemp_long
+						ruling_only = yes
 					}
-					TEX_russell_long = {
-						is_country_leader = yes
+					has_country_leader = {
+						character = TEX_russell_long
+						ruling_only = yes
 					}
 				}
 			}
 			if = {
 				limit = {
-					TEX_earl_kemp_long = {
-						is_country_leader = yes
+					has_country_leader = {
+						character = TEX_earl_kemp_long
+						ruling_only = yes
 					}
 				}
 				set_temp_variable = {
@@ -7208,8 +7221,9 @@ country_event = {
 			}
 			if = {
 				limit = {
-					TEX_russell_long = {
-						is_country_leader = yes
+					has_country_leader = {
+						character = TEX_russell_long
+						ruling_only = yes
 					}
 				}
 				set_temp_variable = {
@@ -7260,18 +7274,21 @@ country_event = {
 		if = {
 			limit = {
 				OR = {
-					TEX_rush_holt = {
-						is_country_leader = yes
+					has_country_leader = {
+						character = TEX_rush_holt
+						ruling_only = yes
 					}
-					TEX_strom_thurmond = {
-						is_country_leader = yes
+					has_country_leader = {
+						character = TEX_strom_thurmond
+						ruling_only = yes
 					}
 				}
 			}
 			if = {
 				limit = {
-					TEX_rush_holt = {
-						is_country_leader = yes
+					has_country_leader = {
+						character = TEX_rush_holt
+						ruling_only = yes
 					}
 				}
 				TEX_rush_holt = {
@@ -7281,8 +7298,9 @@ country_event = {
 			# He's supposed to be dead!
 			if = {
 				limit = {
-					TEX_strom_thurmond = {
-						is_country_leader = yes
+					has_country_leader = {
+						character = TEX_strom_thurmond
+						ruling_only = yes
 					}
 				}
 				set_temp_variable = {
@@ -7333,18 +7351,21 @@ country_event = {
 		if = {
 			limit = {
 				OR = {
-					TEX_sid_mcmath = {
-						is_country_leader = yes
+					has_country_leader = {
+						character = TEX_sid_mcmath
+						ruling_only = yes
 					}
-					TEX_ellis_arnall = {
-						is_country_leader = yes
+					has_country_leader = {
+						character = TEX_ellis_arnall
+						ruling_only = yes
 					}
 				}
 			}
 			if = {
 				limit = {
-					TEX_sid_mcmath = {
-						is_country_leader = yes
+					has_country_leader = {
+						character = TEX_sid_mcmath
+						ruling_only = yes
 					}
 				}
 				set_temp_variable = {
@@ -7354,8 +7375,9 @@ country_event = {
 			}
 			if = {
 				limit = {
-					TEX_ellis_arnall = {
-						is_country_leader = yes
+					has_country_leader = {
+						character = TEX_ellis_arnall
+						ruling_only = yes
 					}
 				}
 				set_temp_variable = {
@@ -7822,9 +7844,9 @@ country_event = {
 			popularity = 0.05
 		}
 		add_political_power = 50
-		set_country_flag = TEX_1952_Holt
+		set_country_flag = TEX_1952_conservatives
 		mark_focus_tree_layout_dirty = yes
-		complete_national_focus = TEX_1952_Holt
+		complete_national_focus = TEX_1952_conservatives
 	}
 }
 
@@ -7905,9 +7927,9 @@ country_event = {
 			popularity = 0.05
 		}
 		add_political_power = 50
-		set_country_flag = TEX_1952_McMath
+		set_country_flag = TEX_1952_progressives
 		mark_focus_tree_layout_dirty = yes
-		complete_national_focus = TEX_1952_McMath
+		complete_national_focus = TEX_1952_progressives
 	}
 }
 
@@ -7987,9 +8009,9 @@ country_event = {
 			ideology = authoritarian_democrat
 			popularity = 0.05
 		}
-		set_country_flag = TEX_1952_Russell
+		set_country_flag = TEX_1952_Orthodox
 		mark_focus_tree_layout_dirty = yes
-		complete_national_focus = TEX_1952_Russell
+		complete_national_focus = TEX_1952_Orthodox
 	}
 }
 
@@ -8069,9 +8091,9 @@ country_event = {
 			ideology = social_conservative
 			popularity = 0.05
 		}
-		set_country_flag = TEX_1952_Thurmond
+		set_country_flag = TEX_1952_conservatives
 		mark_focus_tree_layout_dirty = yes
-		complete_national_focus = TEX_1952_Thurmond
+		complete_national_focus = TEX_1952_conservatives
 	}
 }
 
@@ -8168,9 +8190,9 @@ country_event = {
 			ideology = social_democrat
 			popularity = 0.05
 		}
-		set_country_flag = TEX_1952_Arnall
+		set_country_flag = TEX_1952_progressives
 		mark_focus_tree_layout_dirty = yes
-		complete_national_focus = TEX_1952_Arnall
+		complete_national_focus = TEX_1952_progressives
 	}
 }
 
@@ -9069,7 +9091,7 @@ country_event = {
 		}
 		# Long proclaimed victorious
 		set_variable = {
-			AFP_candidate_election = 3
+			AFP_candidate_election = 1
 		}
 		trigger = {
 			check_variable = {
@@ -9089,6 +9111,9 @@ country_event = {
 					primary_candidate = 1
 				}
 			}
+			set_variable = {
+				AFP_candidate_election = 2
+			}
 			country_event = {
 				id = tex.elections.210
 			}
@@ -9099,6 +9124,9 @@ country_event = {
 				check_variable = {
 					primary_candidate = 2
 				}
+			}
+			set_variable = {
+				AFP_candidate_election = 3
 			}
 			country_event = {
 				id = tex.elections.211

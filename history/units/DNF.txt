@@ -3,15 +3,6 @@ focus = {
 	progress = 17 #spend the PP on the election you fuck
 }
 
-technology = {
-	slots = {
-		random_access_memory = {}
-		radar_2 = {}
-		excavation_2 = {}
-		motorised_infantry_2 = {}
-	}
-}
-
 instant_effect = {
 	### Production ###
 	add_equipment_production = {
@@ -128,12 +119,12 @@ instant_effect = {
 # Templates #
 #############
 
-start_equipment_factor = 1.2
+start_equipment_factor = 1.05
 
 ### Foot Infantry Division ###
 
 division_template = {
-	name = "Infantry Division"
+	name = "Infanteriedivision"
 	division_names_group = DNF_INF_01
 	regiments = {
 		infantry = { x = 0 y = 0 }
@@ -144,16 +135,16 @@ division_template = {
 		infantry = { x = 1 y = 1 }
 		infantry = { x = 1 y = 2 }
 
-		infantry = { x = 2 y = 0 }
-		artillery_brigade = { x = 2 y = 1 }
-		artillery_brigade = { x = 2 y = 2 }
+		artillery_brigade = { x = 2 y = 0 }
 	}
 	support = {
-		field_hospital = { x = 0 y = 0 }
+		divhq_company = { x = 0 y = 0 }
 		engineer = { x = 0 y = 1 }
 		signal_company = { x = 0 y = 2 }
-		maintenance_company = { x = 0 y = 3 }
-		recon = { x = 0 y = 4 }
+		recon = { x = 0 y = 3 }
+
+		anti_air = { x = 1 y = 0 }
+		anti_tank = { x = 1 y = 1 }
 	}
 	priority = 1
 }
@@ -161,7 +152,7 @@ division_template = {
 ### Mot Infantry Division ###
 
 division_template = {
-	name = "Infantry Division (Motorized)"
+	name = "Motorisierte Infanteriedivision"
 	division_names_group = DNF_INF_01
 	regiments = {
 		motorized = { x = 0 y = 0 }
@@ -171,12 +162,8 @@ division_template = {
 		motorized = { x = 1 y = 0 }
 		motorized = { x = 1 y = 1 }
 		motorized = { x = 1 y = 2 }
-
-		motorized = { x = 2 y = 0 }
-		motorized = { x = 2 y = 1 }
 		
-		mot_artillery_brigade   = { x = 3 y = 0 }
-		mot_anti_air_brigade  = { x = 3 y = 1 }
+		mot_artillery_brigade   = { x = 2 y = 0 }
 	}
 	support = {
 		divhq_company = { x = 0 y = 0 }
@@ -184,38 +171,38 @@ division_template = {
 		engineer = { x = 0 y = 2 }
 		signal_company = { x = 0 y = 3 }
 		logistics_company = { x = 0 y = 4 }
-		field_hospital = { x = 1 y = 0 }
+
+		anti_air = { x = 1 y = 0 }
+		anti_tank = { x = 1 y = 1 }
 	}
 	priority = 1
 }
 
-### Mot Cons Infantry Division ###
+### Cons Infantry Division ###
 
 division_template = {
-	name = "Infantry Division (Motorized) (Conscript)"
+	name = "Infanteriedivision (Conscript)"
 	division_names_group = DNF_INF_01
 	regiments = {
-		motorized = { x = 0 y = 0 }
-		motorized = { x = 0 y = 1 }
-		motorized = { x = 0 y = 2 }
+		infantry = { x = 0 y = 0 }
+		infantry = { x = 0 y = 1 }
+		infantry = { x = 0 y = 2 }
 
-		motorized = { x = 1 y = 0 }
-		motorized = { x = 1 y = 1 }
-		motorized = { x = 1 y = 2 }
+		infantry = { x = 1 y = 0 }
+		infantry = { x = 1 y = 1 }
+		infantry = { x = 1 y = 2 }
 
-		motorized = { x = 2 y = 0 }
-		motorized = { x = 2 y = 1 }
-		
-		mot_artillery_brigade   = { x = 3 y = 0 }
-		mot_anti_air_brigade  = { x = 3 y = 1 }
+		artillery_brigade = { x = 2 y = 0 }
 	}
 	support = {
 		divhq_company = { x = 0 y = 0 }
-		mot_recon = { x = 0 y = 1 }
-		engineer = { x = 0 y = 2 }
-		signal_company = { x = 0 y = 3 }
-		logistics_company = { x = 0 y = 4 }
-		field_hospital = { x = 1 y = 0 }
+		engineer = { x = 0 y = 1 }
+		signal_company = { x = 0 y = 2 }
+		maintenance_company = { x = 0 y = 3 }
+		recon = { x = 0 y = 4 }
+
+		anti_air = { x = 1 y = 0 }
+		anti_tank = { x = 1 y = 1 }
 	}
 	priority = 1
 	is_locked = yes
@@ -224,7 +211,7 @@ division_template = {
 ### Mechanised Infantry Division ###
 
 division_template = {
-	name = "Mechanised Division"
+	name = "Kettenfahrjägerdivision"
 	division_names_group = DNF_INF_01
 	regiments = {
 		mechanized = { x = 0 y = 0 }
@@ -234,19 +221,18 @@ division_template = {
 		mechanized = { x = 1 y = 0 }
 		mechanized = { x = 1 y = 1 }
 		mechanized = { x = 1 y = 2 }
-
-		mechanized = { x = 2 y = 0 }
-		mechanized = { x = 2 y = 1 }
 		
-		modern_sp_artillery_brigade  = { x = 3 y = 0 }
-		modern_sp_anti_air_brigade  = { x = 3 y = 1 }
+		mot_artillery_brigade  = { x = 2 y = 0 }
 	}
 	support = {
-		field_hospital = { x = 0 y = 0 }
+		divhq_company = { x = 0 y = 0 }
 		engineer = { x = 0 y = 1 }
 		signal_company = { x = 0 y = 2 }
 		maintenance_company = { x = 0 y = 3 }
 		mot_recon = { x = 0 y = 4 }
+
+		anti_air = { x = 1 y = 0 }
+		anti_tank = { x = 1 y = 1 }
 	}
 	priority = 1
 }
@@ -254,7 +240,7 @@ division_template = {
 ### Armoured Division ###
 
 division_template = {
-	name = "Panzerdivision"
+	name = "Kampfwagendivision"
 	division_names_group = DNF_ARM_01
 	regiments = {
 		modern_armor = { x = 0 y = 0 }
@@ -262,32 +248,25 @@ division_template = {
 		modern_armor = { x = 0 y = 2 }
 		modern_armor = { x = 0 y = 3 }
 
-		modern_armor = { x = 1 y = 0 }
-		modern_armor = { x = 1 y = 1 }
-		modern_armor = { x = 1 y = 2 }
-		modern_armor = { x = 1 y = 3 }
+		mechanized = { x = 1 y = 0 }
+		mechanized = { x = 1 y = 1 }
+		mechanized = { x = 1 y = 2 }
 
 		mechanized = { x = 2 y = 0 }
 		mechanized = { x = 2 y = 1 }
 		mechanized = { x = 2 y = 2 }
-		mechanized = { x = 2 y = 3 }
-		mechanized = { x = 2 y = 4 }
 
 		modern_sp_artillery_brigade  = { x = 3 y = 0 }
-		modern_sp_artillery_brigade  = { x = 3 y = 1 }
-		modern_sp_artillery_brigade  = { x = 3 y = 2 }
-		modern_sp_artillery_brigade  = { x = 3 y = 3 }
 		
-		modern_sp_anti_air_brigade  = { x = 4 y = 0 }
-		modern_sp_anti_air_brigade  = { x = 4 y = 1 }
 	}
 	support = {
-		field_hospital = { x = 0 y = 0 }
+		divhq_company = { x = 0 y = 0 }
 		engineer = { x = 0 y = 1 }
 		signal_company = { x = 0 y = 2 }
 		maintenance_company = { x = 0 y = 3 }
 		mot_recon = { x = 0 y = 4 }
-		divhq_company = { x = 0 y = 5 }
+
+		anti_air = { x = 1 y = 0 }
 	}
 	priority = 1
 }
@@ -306,45 +285,18 @@ division_template = {
 		mountaineers = { x = 1 y = 1 }
 		mountaineers = { x = 1 y = 2 }
 
-		mountaineers = { x = 2 y = 0 }
+		artillery_brigade = { x = 2 y = 0 }
 		artillery_brigade = { x = 2 y = 1 }
-		artillery_brigade = { x = 2 y = 2 }
 	}
 	support = {
-		field_hospital = { x = 0 y = 0 }
+		divhq_company = { x = 0 y = 0 }
 		engineer = { x = 0 y = 1 }
 		signal_company = { x = 0 y = 2 }
 		maintenance_company = { x = 0 y = 3 }
 		recon = { x = 0 y = 4 }
-	}
-	priority = 1
-}
 
-division_template = {
-	name = "Marine-Division"
-	division_names_group = DNF_MAR_01
-	regiments = {
-		amphibious_mechanized = { x = 0 y = 0 }
-		amphibious_mechanized = { x = 0 y = 1 }
-		amphibious_mechanized = { x = 0 y = 2 }
-
-		amphibious_mechanized = { x = 1 y = 0 }
-		amphibious_mechanized = { x = 1 y = 1 }
-		amphibious_mechanized = { x = 1 y = 2 }
-
-		amphibious_mechanized = { x = 2 y = 0 }
-		amphibious_mechanized = { x = 2 y = 1 }
-		amphibious_mechanized = { x = 2 y = 2 }
-		
-		amphibious_armor = { x = 3 y = 0 }
-		amphibious_armor  = { x = 3 y = 1 }
-	}
-	support = {
-		field_hospital = { x = 0 y = 0 }
-		signal_company = { x = 0 y = 1 }
-		engineer = { x = 0 y = 2 }
-		logistics_company = { x = 0 y = 3 }
-		recon = { x = 0 y = 4 }
+		anti_air = { x = 1 y = 0 }
+		anti_tank = { x = 1 y = 1 }
 	}
 	priority = 1
 }
@@ -356,22 +308,15 @@ division_template = {
 		paratrooper = { x = 0 y = 0 }
 		paratrooper = { x = 0 y = 1 }
 		paratrooper = { x = 0 y = 2 }
-		paratrooper = { x = 0 y = 3 }
 
 		paratrooper = { x = 1 y = 0 }
 		paratrooper = { x = 1 y = 1 }
-		paratrooper = { x = 1 y = 2 }
 
-		paratrooper = { x = 2 y = 0 }
-		paratrooper = { x = 2 y = 1 }
-		paratrooper = { x = 2 y = 2 }
 	}
 	support = {
-		engineer = { x = 0 y = 0 }
-		signal_company = { x = 0 y = 1 }
-		maintenance_company = { x = 0 y = 2 }
-		logistics_company = { x = 0 y = 3 }
-		recon = { x = 0 y = 4 }
+		divhq_company = { x = 0 y = 0 }
+		engineer = { x = 0 y = 1 }
+		recon = { x = 0 y = 2 }
 	}
 	priority = 1
 }
@@ -383,28 +328,19 @@ division_template = {
 	name = "Austrian Landsturm Division"
 	division_names_group = DNF_LND_AUS_01
 	regiments = {
-		infantry = { x = 0 y = 0 }
-		infantry = { x = 0 y = 1 }
-		infantry = { x = 0 y = 2 }
+		militia = { x = 0 y = 0 }
+		militia = { x = 0 y = 1 }
+		militia = { x = 0 y = 2 }
 
 		militia = { x = 1 y = 0 }
 		militia = { x = 1 y = 1 }
 		militia = { x = 1 y = 2 }
 
-		militia = { x = 2 y = 0 }
-		militia = { x = 2 y = 1 }
-		militia = { x = 2 y = 2 }
-
 		artillery_brigade = { x = 3 y = 0 }
-		artillery_brigade = { x = 3 y = 1 }
-		anti_air_brigade = { x = 3 y = 2 }
-		anti_tank_brigade = { x = 3 y = 3 }
 	}
 	support = {
-		field_hospital = { x = 0 y = 0 }
+		divhq_company = { x = 0 y = 0 }
 		engineer = { x = 0 y = 1 }
-		signal_company = { x = 0 y = 2 }
-		maintenance_company = { x = 0 y = 3 }
 	}
 	is_locked = yes
 }
@@ -413,28 +349,20 @@ division_template = {
 	name = "Bohemian Landsturm Division"
 	division_names_group = DNF_LND_CZE_01
 	regiments = {
-		infantry = { x = 0 y = 0 }
-		infantry = { x = 0 y = 1 }
-		infantry = { x = 0 y = 2 }
+		militia = { x = 0 y = 0 }
+		militia = { x = 0 y = 1 }
+		militia = { x = 0 y = 2 }
 
 		militia = { x = 1 y = 0 }
 		militia = { x = 1 y = 1 }
 		militia = { x = 1 y = 2 }
 
-		militia = { x = 2 y = 0 }
-		militia = { x = 2 y = 1 }
-		militia = { x = 2 y = 2 }
-
 		artillery_brigade = { x = 3 y = 0 }
-		artillery_brigade = { x = 3 y = 1 }
-		anti_air_brigade = { x = 3 y = 2 }
-		anti_tank_brigade = { x = 3 y = 3 }
 	}
 	support = {
-		field_hospital = { x = 0 y = 0 }
+		divhq_company = { x = 0 y = 0 }
 		engineer = { x = 0 y = 1 }
-		signal_company = { x = 0 y = 2 }
-		maintenance_company = { x = 0 y = 3 }
+		recon = { x = 0 y = 2 }
 	}
 	is_locked = yes
 }
@@ -444,28 +372,20 @@ division_template = {
 	name = "Galician Landsturm Division"
 	division_names_group = DNF_LND_GAL_01
 	regiments = {
-		infantry = { x = 0 y = 0 }
-		infantry = { x = 0 y = 1 }
-		infantry = { x = 0 y = 2 }
+		militia = { x = 0 y = 0 }
+		militia = { x = 0 y = 1 }
+		militia = { x = 0 y = 2 }
 
 		militia = { x = 1 y = 0 }
 		militia = { x = 1 y = 1 }
 		militia = { x = 1 y = 2 }
 
-		militia = { x = 2 y = 0 }
-		militia = { x = 2 y = 1 }
-		militia = { x = 2 y = 2 }
-
 		artillery_brigade = { x = 3 y = 0 }
-		artillery_brigade = { x = 3 y = 1 }
-		anti_air_brigade = { x = 3 y = 2 }
-		anti_tank_brigade = { x = 3 y = 3 }
 	}
 	support = {
-		field_hospital = { x = 0 y = 0 }
+		divhq_company = { x = 0 y = 0 }
 		engineer = { x = 0 y = 1 }
 		signal_company = { x = 0 y = 2 }
-		maintenance_company = { x = 0 y = 3 }
 	}
 	is_locked = yes
 }
@@ -474,28 +394,19 @@ division_template = {
 	name = "Hungarian Landsturm Division"
 	division_names_group = DNF_LND_HUN_01
 	regiments = {
-		infantry = { x = 0 y = 0 }
-		infantry = { x = 0 y = 1 }
-		infantry = { x = 0 y = 2 }
+		militia = { x = 0 y = 0 }
+		militia = { x = 0 y = 1 }
+		militia = { x = 0 y = 2 }
 
 		militia = { x = 1 y = 0 }
 		militia = { x = 1 y = 1 }
 		militia = { x = 1 y = 2 }
 
-		militia = { x = 2 y = 0 }
-		militia = { x = 2 y = 1 }
-		militia = { x = 2 y = 2 }
-
 		artillery_brigade = { x = 3 y = 0 }
-		artillery_brigade = { x = 3 y = 1 }
-		anti_air_brigade = { x = 3 y = 2 }
-		anti_tank_brigade = { x = 3 y = 3 }
 	}
 	support = {
-		field_hospital = { x = 0 y = 0 }
+		divhq_company = { x = 0 y = 0 }
 		engineer = { x = 0 y = 1 }
-		signal_company = { x = 0 y = 2 }
-		maintenance_company = { x = 0 y = 3 }
 	}
 	is_locked = yes
 }
@@ -506,28 +417,19 @@ division_template = {
 	name = "Illyrian Landsturm Division"
 	division_names_group = DNF_LND_ILL_01
 	regiments = {
-		infantry = { x = 0 y = 0 }
-		infantry = { x = 0 y = 1 }
-		infantry = { x = 0 y = 2 }
+		marine = { x = 0 y = 0 }
+		marine = { x = 0 y = 1 }
+		marine = { x = 0 y = 2 }
 
 		militia = { x = 1 y = 0 }
 		militia = { x = 1 y = 1 }
 		militia = { x = 1 y = 2 }
 
-		militia = { x = 2 y = 0 }
-		militia = { x = 2 y = 1 }
-		militia = { x = 2 y = 2 }
-
 		artillery_brigade = { x = 3 y = 0 }
-		artillery_brigade = { x = 3 y = 1 }
-		anti_air_brigade = { x = 3 y = 2 }
-		anti_tank_brigade = { x = 3 y = 3 }
 	}
 	support = {
-		field_hospital = { x = 0 y = 0 }
+		divhq_company = { x = 0 y = 0 }
 		engineer = { x = 0 y = 1 }
-		signal_company = { x = 0 y = 2 }
-		maintenance_company = { x = 0 y = 3 }
 	}
 	is_locked = yes
 }
@@ -536,28 +438,19 @@ division_template = {
 	name = "Slovakian Landsturm Division"
 	division_names_group = DNF_LND_SVK_01
 	regiments = {
-		infantry = { x = 0 y = 0 }
-		infantry = { x = 0 y = 1 }
-		infantry = { x = 0 y = 2 }
+		mountaineers = { x = 0 y = 0 }
+		militia = { x = 0 y = 1 }
+		militia = { x = 0 y = 2 }
 
 		militia = { x = 1 y = 0 }
 		militia = { x = 1 y = 1 }
 		militia = { x = 1 y = 2 }
 
-		militia = { x = 2 y = 0 }
-		militia = { x = 2 y = 1 }
-		militia = { x = 2 y = 2 }
-
 		artillery_brigade = { x = 3 y = 0 }
-		artillery_brigade = { x = 3 y = 1 }
-		anti_air_brigade = { x = 3 y = 2 }
-		anti_tank_brigade = { x = 3 y = 3 }
 	}
 	support = {
-		field_hospital = { x = 0 y = 0 }
+		divhq_company = { x = 0 y = 0 }
 		engineer = { x = 0 y = 1 }
-		signal_company = { x = 0 y = 2 }
-		maintenance_company = { x = 0 y = 3 }
 	}
 	is_locked = yes
 }
@@ -567,28 +460,19 @@ division_template = {
 	name = "Transylvanian Landsturm Division"
 	division_names_group = DNF_LND_TRA_01
 	regiments = {
-		infantry = { x = 0 y = 0 }
-		infantry = { x = 0 y = 1 }
-		infantry = { x = 0 y = 2 }
+		mountaineers = { x = 0 y = 0 }
+		mountaineers = { x = 0 y = 1 }
+		mountaineers = { x = 0 y = 2 }
 
 		militia = { x = 1 y = 0 }
 		militia = { x = 1 y = 1 }
 		militia = { x = 1 y = 2 }
 
-		militia = { x = 2 y = 0 }
-		militia = { x = 2 y = 1 }
-		militia = { x = 2 y = 2 }
-
 		artillery_brigade = { x = 3 y = 0 }
-		artillery_brigade = { x = 3 y = 1 }
-		anti_air_brigade = { x = 3 y = 2 }
-		anti_tank_brigade = { x = 3 y = 3 }
 	}
 	support = {
-		field_hospital = { x = 0 y = 0 }
+		divhq_company = { x = 0 y = 0 }
 		engineer = { x = 0 y = 1 }
-		signal_company = { x = 0 y = 2 }
-		maintenance_company = { x = 0 y = 3 }
 	}
 	is_locked = yes
 }
@@ -603,7 +487,7 @@ units = {
 			is_name_ordered = yes
 		}
 		location = 591
-		division_template = "Mechanised Division"
+		division_template = "Infanteriedivision (Conscript)"
 		start_experience_factor = 1.0
 		start_equipment_factor = 1.0
 	}
@@ -614,7 +498,7 @@ units = {
 			is_name_ordered = yes
 		}
 		location = 688
-		division_template = "Mechanised Division"
+		division_template = "Infanteriedivision (Conscript)"
 		start_experience_factor = 1.0
 		start_equipment_factor = 0.8
 	}
@@ -625,7 +509,7 @@ units = {
 			is_name_ordered = yes
 		}
 		location = 9660
-		division_template = "Mechanised Division"
+		division_template = "Kettenfahrjägerdivision"
 		start_experience_factor = 0.8
 		start_equipment_factor = 1.0
 	}
@@ -636,7 +520,7 @@ units = {
 			is_name_ordered = yes
 		}
 		location = 6700
-		division_template = "Mechanised Division"
+		division_template = "Infanteriedivision (Conscript)"
 		start_experience_factor = 0.9
 		start_equipment_factor = 1.0
 	}
@@ -647,7 +531,7 @@ units = {
 			is_name_ordered = yes
 		}
 		location = 11577
-		division_template = "Mechanised Division"
+		division_template = "Motorisierte Infanteriedivision"
 		start_experience_factor = 0.88
 		start_equipment_factor = 1.0
 	}
@@ -658,7 +542,7 @@ units = {
 			is_name_ordered = yes
 		}
 		location = 13294
-		division_template = "Mechanised Division"
+		division_template = "Infanteriedivision"
 		start_experience_factor = 0.7
 		start_equipment_factor = 1.0
 	}
@@ -668,7 +552,7 @@ units = {
 			is_name_ordered = yes
 		}
 		location = 982
-		division_template = "Mechanised Division"
+		division_template = "Motorisierte Infanteriedivision"
 		start_experience_factor = 1.0
 		start_equipment_factor = 1.0
 	}
@@ -678,7 +562,7 @@ units = {
 			is_name_ordered = yes
 		}
 		location = 11741
-		division_template = "Mechanised Division"
+		division_template = "Kettenfahrjägerdivision"
 		start_experience_factor = 0.9
 		start_equipment_factor = 1.0
 	}
@@ -688,7 +572,7 @@ units = {
 			is_name_ordered = yes
 		}
 		location = 606
-		division_template = "Panzerdivision"
+		division_template = "Kettenfahrjägerdivision"
 		start_experience_factor = 0.79
 		start_equipment_factor = 1.0
 	}
@@ -699,7 +583,7 @@ units = {
 			is_name_ordered = yes
 		}
 		location = 732
-		division_template = "Panzerdivision"
+		division_template = "Kampfwagendivision"
 		start_experience_factor = 0.88
 		start_equipment_factor = 1.0
 	}
@@ -710,7 +594,7 @@ units = {
 			is_name_ordered = yes
 		}
 		location = 9665
-		division_template = "Panzerdivision"
+		division_template = "Kampfwagendivision"
 		start_experience_factor = 0.98
 		start_equipment_factor = 1.0
 	}
@@ -721,7 +605,7 @@ units = {
 			is_name_ordered = yes
 		}
 		location = 9648
-		division_template = "Panzerdivision"
+		division_template = "Kampfwagendivision"
 		start_experience_factor = 0.89
 		start_equipment_factor = 1.0
 	}
@@ -732,7 +616,7 @@ units = {
 			is_name_ordered = yes
 		}
 		location = 11666
-		division_template = "Panzerdivision"
+		division_template = "Kampfwagendivision"
 		start_experience_factor = 0.79
 		start_equipment_factor = 1.0
 	}
@@ -742,7 +626,7 @@ units = {
 			is_name_ordered = yes
 		}
 		location = 11666
-		division_template = "Mechanised Division"
+		division_template = "Motorisierte Infanteriedivision"
 		start_experience_factor = 1.0
 		start_equipment_factor = 1.0
 	}
@@ -753,7 +637,7 @@ units = {
 			is_name_ordered = yes
 		}
 		location = 11595
-		division_template = "Mechanised Division"
+		division_template = "Infanteriedivision"
 		start_experience_factor = 1.0
 		start_equipment_factor = 1.0
 	}
@@ -851,107 +735,13 @@ units = {
 		start_equipment_factor = 1.0
 	}
 
-	##Split##
-	division = {
-		division_name = {
-			is_name_ordered = yes
-		}
-		location = 3924
-		division_template = "Marine-Division"
-		start_experience_factor = 0.9
-		start_equipment_factor = 1.0
-	}
-
-	division = {
-		division_name = {
-			is_name_ordered = yes
-		}
-		location = 3924
-		division_template = "Marine-Division"
-		start_experience_factor = 0.79
-		start_equipment_factor = 1.0
-	}
-
-	##Dubrovnik##
-	division = {
-		division_name = {
-			is_name_ordered = yes
-		}
-		location = 6889
-		division_template = "Marine-Division"
-		start_experience_factor = 0.9
-		start_equipment_factor = 1.0
-	}
-
-	division = {
-		division_name = {
-			is_name_ordered = yes
-		}
-		location = 6889
-		division_template = "Marine-Division"
-		start_experience_factor = 1.0
-		start_equipment_factor = 1.0
-	}
-
-	##Rijeka##
-	division = {
-		division_name = {
-			is_name_ordered = yes
-		}
-		location = 11564
-		division_template = "Marine-Division"
-		start_experience_factor = 0.8
-		start_equipment_factor = 1.0
-	}
-
-	division = {
-		division_name = {
-			is_name_ordered = yes
-		}
-		location = 11564
-		division_template = "Marine-Division"
-		start_experience_factor = 0.89
-		start_equipment_factor = 1.0
-	}
-
-	division = {
-		division_name = {
-			is_name_ordered = yes
-		}
-		location = 11564
-		division_template = "Marine-Division"
-		start_experience_factor = 0.99
-		start_equipment_factor = 1.0
-	}
-
-	##Trst (hahahaha)##
-	division = {
-		division_name = {
-			is_name_ordered = yes
-		}
-		location = 6626
-		division_template = "Marine-Division"
-		start_experience_factor = 0.89
-		start_equipment_factor = 1.0
-	}
-
-	division = {
-		division_name = {
-			is_name_ordered = yes
-		}
-		location = 6626
-		division_template = "Marine-Division"
-		start_experience_factor = 0.9
-		start_equipment_factor = 1.0
-	}
-
 	## Trst ##
 	division = {
 		division_name = {
 			is_name_ordered = yes
 		}
 		location = 219
-		division_template = "Panzerdivision"
+		division_template = "Kampfwagendivision"
 		start_experience_factor = 0.7
 		start_equipment_factor = 1.0
 	}
@@ -962,7 +752,7 @@ units = {
 			is_name_ordered = yes
 		}
 		location = 9627
-		division_template = "Mechanised Division"
+		division_template = "Motorisierte Infanteriedivision"
 		start_experience_factor = 0.9
 		start_equipment_factor = 1.0
 	}
@@ -973,7 +763,7 @@ units = {
 			is_name_ordered = yes
 		}
 		location = 11581
-		division_template = "Mechanised Division"
+		division_template = "Motorisierte Infanteriedivision"
 		start_experience_factor = 0.86
 		start_equipment_factor = 1.0
 	}
@@ -984,7 +774,7 @@ units = {
 			is_name_ordered = yes
 		}
 		location = 9595
-		division_template = "Panzerdivision"
+		division_template = "Kampfwagendivision"
 		start_experience_factor = 0.88
 		start_equipment_factor = 1.0
 	}
@@ -995,7 +785,7 @@ units = {
 			is_name_ordered = yes
 		}
 		location = 11901
-		division_template = "Mechanised Division"
+		division_template = "Infanteriedivision (Conscript)"
 		start_experience_factor = 0.89
 		start_equipment_factor = 1.0
 	}
@@ -1006,7 +796,7 @@ units = {
 			is_name_ordered = yes
 		}
 		location = 11845
-		division_template = "Mechanised Division"
+		division_template = "Infanteriedivision (Conscript)"
 		start_experience_factor = 1.0
 		start_equipment_factor = 1.0
 	}
@@ -1017,7 +807,7 @@ units = {
 			is_name_ordered = yes
 		}
 		location = 3569
-		division_template = "Infantry Division (Motorized)"
+		division_template = "Infanteriedivision"
 		start_experience_factor = 0.75
 		start_equipment_factor = 1.0
 	}
@@ -1028,7 +818,7 @@ units = {
 			is_name_ordered = yes
 		}
 		location = 6562
-		division_template = "Infantry Division (Motorized) (Conscript)"
+		division_template = "Infanteriedivision (Conscript)"
 		start_experience_factor = 0.4
 		start_equipment_factor = 1.0
 	}
@@ -1039,7 +829,7 @@ units = {
 			is_name_ordered = yes
 		}
 		location = 9429
-		division_template = "Infantry Division (Motorized) (Conscript)"
+		division_template = "Infanteriedivision (Conscript)"
 		start_experience_factor = 0.4
 		start_equipment_factor = 1.0
 	}
@@ -1050,7 +840,7 @@ units = {
 			is_name_ordered = yes
 		}
 		location = 11542
-		division_template = "Infantry Division (Motorized)"
+		division_template = "Infanteriedivision"
 		start_experience_factor = 0.79
 		start_equipment_factor = 1.0
 	}
@@ -1060,7 +850,7 @@ units = {
 			is_name_ordered = yes
 		}
 		location = 6418
-		division_template = "Infantry Division (Motorized) (Conscript)"
+		division_template = "Infanteriedivision (Conscript)"
 		start_experience_factor = 0.4
 		start_equipment_factor = 1.0
 	}
@@ -1070,7 +860,7 @@ units = {
 			is_name_ordered = yes
 		}
 		location = 3585
-		division_template = "Infantry Division (Motorized)"
+		division_template = "Infanteriedivision"
 		start_experience_factor = 0.9
 		start_equipment_factor = 1.0
 	}
@@ -1081,7 +871,7 @@ units = {
 			is_name_ordered = yes
 		}
 		location = 9427
-		division_template = "Infantry Division (Motorized) (Conscript)"
+		division_template = "Infanteriedivision (Conscript)"
 		start_experience_factor = 0.4
 		start_equipment_factor = 1.0
 	}
@@ -1091,7 +881,7 @@ units = {
 			is_name_ordered = yes
 		}
 		location = 442
-		division_template = "Infantry Division (Motorized) (Conscript)"
+		division_template = "Infanteriedivision"
 		start_experience_factor = 0.34
 		start_equipment_factor = 1.0
 	}
@@ -1101,7 +891,7 @@ units = {
 			is_name_ordered = yes
 		}
 		location = 6522
-		division_template = "Infantry Division (Motorized)"
+		division_template = "Infanteriedivision"
 		start_experience_factor = 0.78
 		start_equipment_factor = 1.0
 	}
@@ -1112,7 +902,7 @@ units = {
 			is_name_ordered = yes
 		}
 		location = 11479
-		division_template = "Infantry Division (Motorized)"
+		division_template = "Infanteriedivision"
 		start_experience_factor = 0.87
 		start_equipment_factor = 1.0
 	}
@@ -1123,7 +913,7 @@ units = {
 			is_name_ordered = yes
 		}
 		location = 11411
-		division_template = "Infantry Division (Motorized) (Conscript)"
+		division_template = "Infanteriedivision (Conscript)"
 		start_experience_factor = 0.4
 		start_equipment_factor = 1.0
 	}
@@ -1134,7 +924,7 @@ units = {
 			is_name_ordered = yes
 		}
 		location = 3483
-		division_template = "Infantry Division (Motorized) (Conscript)"
+		division_template = "Infanteriedivision (Conscript)"
 		start_experience_factor = 0.39
 		start_equipment_factor = 1.0
 	}
@@ -1144,7 +934,7 @@ units = {
 			is_name_ordered = yes
 		}
 		location = 6761
-		division_template = "Infantry Division (Motorized) (Conscript)"
+		division_template = "Infanteriedivision (Conscript)"
 		start_experience_factor = 0.4
 		start_equipment_factor = 1.0
 	}
@@ -1155,7 +945,7 @@ units = {
 			is_name_ordered = yes
 		}
 		location = 3649
-		division_template = "Infantry Division (Motorized)"
+		division_template = "Infanteriedivision"
 		start_experience_factor = 0.88
 		start_equipment_factor = 1.0
 	}
@@ -1164,7 +954,7 @@ units = {
 			is_name_ordered = yes
 		}
 		location = 614
-		division_template = "Infantry Division (Motorized) (Conscript)"
+		division_template = "Infanteriedivision (Conscript)"
 		start_experience_factor = 0.26
 		start_equipment_factor = 1.0
 	}
@@ -1176,7 +966,7 @@ units = {
 			is_name_ordered = yes
 		}
 		location = 3614
-		division_template = "Infantry Division (Motorized)"
+		division_template = "Infanteriedivision"
 		start_experience_factor = 0.86
 		start_equipment_factor = 1.0
 	}
@@ -1185,7 +975,7 @@ units = {
 			is_name_ordered = yes
 		}
 		location = 11580
-		division_template = "Infantry Division (Motorized)"
+		division_template = "Infanteriedivision"
 		start_experience_factor = 0.89
 		start_equipment_factor = 1.0
 	}
@@ -1197,7 +987,7 @@ units = {
 			is_name_ordered = yes
 		}
 		location = 560
-		division_template = "Infantry Division (Motorized) (Conscript)"
+		division_template = "Infanteriedivision"
 		start_experience_factor = 0.45
 		start_equipment_factor = 1.0
 	}
@@ -1206,7 +996,7 @@ units = {
 			is_name_ordered = yes
 		}
 		location = 6579
-		division_template = "Infantry Division (Motorized)"
+		division_template = "Infanteriedivision"
 		start_experience_factor = 0.89
 		start_equipment_factor = 0.9
 	}
@@ -1215,7 +1005,7 @@ units = {
 			is_name_ordered = yes
 		}
 		location = 9554
-		division_template = "Infantry Division (Motorized)"
+		division_template = "Infanteriedivision"
 		start_experience_factor = 0.9
 		start_equipment_factor = 0.9
 	}
@@ -1224,7 +1014,7 @@ units = {
 			is_name_ordered = yes
 		}
 		location = 9554
-		division_template = "Infantry Division (Motorized)"
+		division_template = "Infanteriedivision"
 		start_experience_factor = 1.0
 		start_equipment_factor = 0.9
 	}
@@ -1233,7 +1023,7 @@ units = {
 			is_name_ordered = yes
 		}
 		location = 535
-		division_template = "Infantry Division (Motorized) (Conscript)"
+		division_template = "Infanteriedivision (Conscript)"
 		start_experience_factor = 0.48
 		start_equipment_factor = 0.9
 	}
@@ -1242,7 +1032,7 @@ units = {
 			is_name_ordered = yes
 		}
 		location = 560
-		division_template = "Infantry Division (Motorized)"
+		division_template = "Infanteriedivision"
 		start_experience_factor = 0.9
 		start_equipment_factor = 0.9
 	}
@@ -1251,7 +1041,7 @@ units = {
 			is_name_ordered = yes
 		}
 		location = 6593
-		division_template = "Infantry Division (Motorized)"
+		division_template = "Infanteriedivision"
 		start_experience_factor =0.95
 		start_equipment_factor = 1.0
 	}
@@ -1261,7 +1051,7 @@ units = {
 			is_name_ordered = yes
 		}
 		location = 11437
-		division_template = "Mechanised Division"
+		division_template = "Motorisierte Infanteriedivision"
 		start_experience_factor = 1.0
 		start_equipment_factor = 1.0
 	}
@@ -1270,7 +1060,7 @@ units = {
 			is_name_ordered = yes
 		}
 		location = 11437
-		division_template = "Mechanised Division"
+		division_template = "Infanteriedivision"
 		start_experience_factor = 0.95
 		start_equipment_factor = 1.0
 	}
@@ -1280,7 +1070,7 @@ units = {
 			is_name_ordered = yes
 		}
 		location = 11437
-		division_template = "Panzerdivision"
+		division_template = "Kettenfahrjägerdivision"
 		start_experience_factor = 1.0
 		start_equipment_factor = 1.0
 	}
@@ -1290,7 +1080,7 @@ units = {
 			is_name_ordered = yes
 		}
 		location = 11437
-		division_template = "Panzerdivision"
+		division_template = "Kettenfahrjägerdivision"
 		start_experience_factor = 0.88
 		start_equipment_factor = 1.0
 	}
@@ -1300,7 +1090,7 @@ units = {
 			is_name_ordered = yes
 		}
 		location = 11437
-		division_template = "Panzerdivision"
+		division_template = "Kampfwagendivision"
 		start_experience_factor = 0.98
 		start_equipment_factor = 1.0
 	}
@@ -1309,7 +1099,7 @@ units = {
 			is_name_ordered = yes
 		}
 		location = 6232
-		division_template = "Mechanised Division"
+		division_template = "Infanteriedivision (Conscript)"
 		start_experience_factor = 1.0
 		start_equipment_factor = 1.0
 	}
@@ -1318,7 +1108,7 @@ units = {
 			is_name_ordered = yes
 		}
 		location = 6232
-		division_template = "Mechanised Division"
+		division_template = "Motorisierte Infanteriedivision"
 		start_experience_factor = 0.99
 		start_equipment_factor = 1.0
 	}
@@ -1327,7 +1117,7 @@ units = {
 			is_name_ordered = yes
 		}
 		location = 11422
-		division_template = "Mechanised Division"
+		division_template = "Motorisierte Infanteriedivision"
 		start_experience_factor = 1.0
 		start_equipment_factor = 1.0
 	}
@@ -1337,7 +1127,7 @@ units = {
 			is_name_ordered = yes
 		}
 		location = 3543
-		division_template = "Mechanised Division"
+		division_template = "Infanteriedivision"
 		start_experience_factor = 0.6
 		start_equipment_factor = 1.0
 	}
@@ -1347,7 +1137,7 @@ units = {
 			is_name_ordered = yes
 		}
 		location = 9419
-		division_template = "Mechanised Division"
+		division_template = "Infanteriedivision (Conscript)"
 		start_experience_factor = 0.8
 		start_equipment_factor = 1.0
 	}
@@ -1357,7 +1147,7 @@ units = {
 			is_name_ordered = yes
 		}
 		location = 9419
-		division_template = "Mechanised Division"
+		division_template = "Kettenfahrjägerdivision"
 		start_experience_factor = 0.97
 		start_equipment_factor = 1.0
 	}
@@ -1368,7 +1158,7 @@ units = {
 			is_name_ordered = yes
 		}
 		location = 9433
-		division_template = "Mechanised Division"
+		division_template = "Infanteriedivision (Conscript)"
 		start_experience_factor = 0.7
 		start_equipment_factor = 1.0
 	}
@@ -1377,7 +1167,7 @@ units = {
 			is_name_ordered = yes
 		}
 		location = 9433
-		division_template = "Mechanised Division"
+		division_template = "Infanteriedivision (Conscript)"
 		start_experience_factor = 0.8
 		start_equipment_factor = 1.0
 	}
@@ -1386,7 +1176,7 @@ units = {
 			is_name_ordered = yes
 		}
 		location = 11422
-		division_template = "Mechanised Division"
+		division_template = "Kettenfahrjägerdivision"
 		start_experience_factor = 0.9
 		start_equipment_factor = 1.0
 	}
@@ -1396,7 +1186,7 @@ units = {
 			is_name_ordered = yes
 		}
 		location = 11422
-		division_template = "Mechanised Division"
+		division_template = "Motorisierte Infanteriedivision"
 		start_experience_factor = 1.0
 		start_equipment_factor = 1.0
 	}
@@ -1405,7 +1195,7 @@ units = {
 			is_name_ordered = yes
 		}
 		location = 9433
-		division_template = "Mechanised Division"
+		division_template = "Infanteriedivision"
 		start_experience_factor = 0.96
 		start_equipment_factor = 1.0
 	}
@@ -1414,7 +1204,7 @@ units = {
 			is_name_ordered = yes
 		}
 		location = 9419
-		division_template = "Panzerdivision"
+		division_template = "Kettenfahrjägerdivision"
 		start_experience_factor = 1.0
 		start_equipment_factor = 1.0
 	}
@@ -1423,7 +1213,7 @@ units = {
 			is_name_ordered = yes
 		}
 		location = 11715
-		division_template = "Panzerdivision"
+		division_template = "Kampfwagendivision"
 		start_experience_factor = 0.79
 		start_equipment_factor = 1.0
 	}
@@ -1432,7 +1222,7 @@ units = {
 			is_name_ordered = yes
 		}
 		location = 11715
-		division_template =  "Mechanised Division"
+		division_template =  "Motorisierte Infanteriedivision"
 		start_experience_factor = 0.99
 		start_equipment_factor = 1.0
 	}
@@ -1442,7 +1232,7 @@ units = {
 			is_name_ordered = yes
 		}
 		location = 11422
-		division_template = "Panzerdivision"
+		division_template = "Kettenfahrjägerdivision"
 		start_experience_factor = 0.87
 		start_equipment_factor = 1.0
 	}
@@ -1452,7 +1242,7 @@ units = {
 			is_name_ordered = yes
 		}
 		location = 11422
-		division_template = "Panzerdivision"
+		division_template = "Kampfwagendivision"
 		start_experience_factor = 0.98
 		start_equipment_factor = 1.0
 	}
@@ -1462,7 +1252,7 @@ units = {
 			is_name_ordered = yes
 		}
 		location = 6423
-		division_template = "Panzerdivision"
+		division_template = "Kampfwagendivision"
 		start_experience_factor = 0.79
 		start_equipment_factor = 1.0
 	}
@@ -1471,7 +1261,7 @@ units = {
 			is_name_ordered = yes
 		}
 		location = 3755
-		division_template = "Mechanised Division"
+		division_template = "Infanteriedivision (Conscript)"
 		start_experience_factor = 0.69
 		start_equipment_factor = 1.0
 	}
@@ -1481,7 +1271,7 @@ units = {
 			is_name_ordered = yes
 		}
 		location = 11683
-		division_template = "Infantry Division (Motorized)"
+		division_template = "Infanteriedivision"
 		start_experience_factor = 0.88
 		start_equipment_factor = 1.0
 	}
@@ -1491,7 +1281,7 @@ units = {
 			is_name_ordered = yes
 		}
 		location = 488
-		division_template = "Infantry Division (Motorized) (Conscript)"
+		division_template = "Infanteriedivision (Conscript)"
 		start_experience_factor = 0.49
 		start_equipment_factor = 1.0
 	}
@@ -1501,7 +1291,7 @@ units = {
 			is_name_ordered = yes
 		}
 		location = 488
-		division_template = "Infantry Division (Motorized)"
+		division_template = "Infanteriedivision"
 		start_experience_factor = 0.94
 		start_equipment_factor = 1.0
 	}
@@ -1510,7 +1300,7 @@ units = {
 			is_name_ordered = yes
 		}
 		location = 476
-		division_template = "Infantry Division (Motorized)"
+		division_template = "Infanteriedivision"
 		start_experience_factor = 0.96
 		start_equipment_factor = 1.0
 	}
@@ -1519,7 +1309,7 @@ units = {
 			is_name_ordered = yes
 		}
 		location = 11561
-		division_template = "Infantry Division (Motorized) (Conscript)"
+		division_template = "Infanteriedivision (Conscript)"
 		start_experience_factor = 0.34
 		start_equipment_factor = 1.0
 	}
@@ -1527,7 +1317,7 @@ units = {
 	division = {
 		name = "Ukrainische Sitschower Schützen 2. (Bandera)"
 		location = 488
-		division_template = "Mechanised Division"
+		division_template = "Kettenfahrjägerdivision"
 		start_experience_factor = 0.49
 		start_equipment_factor = 0.4
 	}
@@ -1535,7 +1325,7 @@ units = {
 	division = {
 		name = "Ukrainische Sitschower Schützen 1. (Melnyk)"
 		location = 488
-		division_template =  "Infantry Division (Motorized) (Conscript)"
+		division_template =  "Infanteriedivision (Conscript)"
 		start_experience_factor = 0.59
 		start_equipment_factor = 0.4
 	}
@@ -1543,7 +1333,7 @@ units = {
 	division = {
 		name = "Ukrainische Sitschower Schützen 3. (Bolbochan)"
 		location = 488
-		division_template =  "Infantry Division (Motorized) (Conscript)"
+		division_template =  "Infanteriedivision (Conscript)"
 		start_experience_factor = 0.52
 		start_equipment_factor = 0.4
 	}
@@ -1553,7 +1343,7 @@ units = {
 			is_name_ordered = yes
 		}
 		location = 3468
-		division_template = "Mechanised Division"
+		division_template = "Motorisierte Infanteriedivision"
 		start_experience_factor = 0.88
 		start_equipment_factor = 1.0
 	}
@@ -1564,7 +1354,7 @@ units = {
 			is_name_ordered = yes
 		}
 		location = 3468
-		division_template = "Mechanised Division"
+		division_template = "Infanteriedivision"
 		start_experience_factor = 0.89
 		start_equipment_factor = 1.0
 	}
@@ -1574,7 +1364,7 @@ units = {
 			is_name_ordered = yes
 		}
 		location = 6478
-		division_template = "Mechanised Division"
+		division_template = "Infanteriedivision (Conscript)"
 		start_experience_factor = 0.79
 		start_equipment_factor = 1.0
 	}
@@ -1584,7 +1374,7 @@ units = {
 			is_name_ordered = yes
 		}
 		location = 11454
-		division_template = "Mechanised Division"
+		division_template = "Kettenfahrjägerdivision"
 		start_experience_factor = 1.0
 		start_equipment_factor = 1.0
 	}
@@ -1593,7 +1383,7 @@ units = {
 			is_name_ordered = yes
 		}
 		location = 	525
-		division_template = "Panzerdivision"
+		division_template = "Kampfwagendivision"
 		start_experience_factor = 0.9
 		start_equipment_factor = 1.0
 	}
@@ -1603,7 +1393,7 @@ units = {
 			is_name_ordered = yes
 		}
 		location = 525
-		division_template = "Panzerdivision"
+		division_template = "Kampfwagendivision"
 		start_experience_factor = 1.0
 		start_equipment_factor = 1.0
 	}
@@ -1613,7 +1403,7 @@ units = {
 			is_name_ordered = yes
 		}
 		location = 525
-		division_template = "Panzerdivision"
+		division_template = "Kampfwagendivision"
 		start_experience_factor = 0.89
 		start_equipment_factor = 1.0
 	}
@@ -1623,7 +1413,7 @@ units = {
 			is_name_ordered = yes
 		}
 		location = 3581
-		division_template = "Mechanised Division"
+		division_template = "Infanteriedivision (Conscript)"
 		start_experience_factor = 0.95
 		start_equipment_factor = 1.0
 	}
@@ -1633,7 +1423,7 @@ units = {
 			is_name_ordered = yes
 		}
 		location = 3581
-		division_template = "Mechanised Division"
+		division_template = "Infanteriedivision (Conscript)"
 		start_experience_factor = 0.88
 		start_equipment_factor = 1.0
 	}
@@ -1643,7 +1433,7 @@ units = {
 			is_name_ordered = yes
 		}
 		location = 3494
-		division_template = "Mechanised Division"
+		division_template = "Motorisierte Infanteriedivision"
 		start_experience_factor = 0.87
 		start_equipment_factor = 1.0
 	}
@@ -1653,7 +1443,7 @@ units = {
 			is_name_ordered = yes
 		}
 		location = 3494
-		division_template = "Mechanised Division"
+		division_template = "Infanteriedivision"
 		start_experience_factor = 0.78
 		start_equipment_factor = 1.0
 	}
@@ -1664,7 +1454,7 @@ units = {
 			is_name_ordered = yes
 		}
 		location = 6593
-		division_template = "Panzerdivision"
+		division_template = "Kampfwagendivision"
 		start_experience_factor = 0.67
 		start_equipment_factor = 1.0
 	}
@@ -1674,7 +1464,7 @@ units = {
 			is_name_ordered = yes
 		}
 		location = 6593
-		division_template = "Panzerdivision"
+		division_template = "Kampfwagendivision"
 		start_experience_factor = 0.69 #nice
 		start_equipment_factor = 1.0
 	}
@@ -1685,7 +1475,7 @@ units = {
 			is_name_ordered = yes
 		}
 		location = 11453
-		division_template = "Panzerdivision"
+		division_template = "Kampfwagendivision"
 		start_experience_factor = 0.74
 		start_equipment_factor = 1.0
 	}
@@ -1695,7 +1485,7 @@ units = {
 			is_name_ordered = yes
 		}
 		location = 11453
-		division_template = "Mechanised Division"
+		division_template = "Infanteriedivision (Conscript)"
 		start_experience_factor = 0.81
 		start_equipment_factor = 1.0
 	}
@@ -1705,7 +1495,7 @@ units = {
 			is_name_ordered = yes
 		}
 		location = 11453
-		division_template = "Mechanised Division"
+		division_template = "Infanteriedivision (Conscript)"
 		start_experience_factor = 0.9
 		start_equipment_factor = 1.0
 	}
@@ -1715,7 +1505,7 @@ units = {
 			is_name_ordered = yes
 		}
 		location = 9568
-		division_template = "Mechanised Division"
+		division_template = "Motorisierte Infanteriedivision"
 		start_experience_factor = 0.88
 		start_equipment_factor = 1.0
 	}
@@ -1725,7 +1515,7 @@ units = {
 			is_name_ordered = yes
 		}
 		location = 9568
-		division_template = "Mechanised Division"
+		division_template = "Motorisierte Infanteriedivision"
 		start_experience_factor = 0.78
 		start_equipment_factor = 1.0
 	}
